@@ -11,9 +11,13 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
-## Version 2.4.2
+## Version 2.4.3 (2018-03-19)
 
-(13 February 2018)
+**Security**
+
+* Dependencies updated to consume upstream CVE patches.
+
+## Version 2.4.2 (13 February 2018)
 
 **Security notice**
 
@@ -29,9 +33,7 @@ potentially disclosed due to the vulnerability.
 Use the `--log-driver=none` option for `docker run` when running a DTR backup, HA
 cluster join or dumpcerts.
 
-## 2.4.1
-
-(20 November 2017)
+## 2.4.1 (20 November 2017)
 
 **Bug fixes**
 
@@ -62,9 +64,7 @@ removed in DTR 2.5. You can use the
 `/api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` endpoint instead.
 
 
-## DTR 2.4.0
-
-(2 November 2017)
+## DTR 2.4.0 (2 November 2017)
 
 **New features**
 

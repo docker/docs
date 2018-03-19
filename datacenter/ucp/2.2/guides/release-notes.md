@@ -10,9 +10,61 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
-## Version 2.2.5
+## Version 2.2.6 (2018-03-19)
 
-(16 January 2018)
+**New features**
+
+* Security
+  * Default TLS connections to TLS 1.2, and allow users to configure the minimum
+  TLS version used by the UCP controller.
+* Support and troubleshoot
+  * The support dump now includes the output of `dmesg`.
+  * Added more information to the telemetry data: kernel version, graph driver, and
+  logging driver.
+  * The `dsinfo` image used for support dumps is now smaller.
+
+**Bug fixes**
+
+* Core
+  * The HRM service is no longer deployed with constraints that might prevent
+  the service from ever getting scheduled.
+  * Fixed a problem causing the HRM service to be restarted multiple times.
+  * The `ucp-agent` service is now deployed without adding extra collection labels.
+  This doesn't change the behavior of the service.
+  * Fixed problem causing a healthy `ucp-auth-store` component to be reported as
+  unhealthy.
+  * Fixed a race condition causing the labels for the UCP controller container
+  to be reset.
+  * Fixed an issue causing the `ucp-agent` service to be deployed with the wrong
+  architecture on Windows nodes.
+* RBAC
+  * Role-based access control can now be enforced for third-party volume plugins,
+  fixing a known issue from UCP 2.2.5.
+  * Admins can now clean up volumes and networks that had inconsistent collection
+  labels across different nodes in the cluster. Previously, they would have had
+  to go onto each node and clean up those resources directly.
+  * When upgrading from UCP 2.1, inactive user accounts are no longer migrated
+  to the new RBAC model.
+  * Fixed an issue preventing users from seeing a collection when they have
+  permissions to deploy services on a child collection.
+  * Grants are now deleted when deleting an organization whose teams have grants.
+* UI
+  * Fixed a problem in the Settings page that would cause Docker to stop when
+  you made changes to UCP settings and a new manager node is promoted to leader.
+  * Fixed bug causing the Grants list page not to render after deleting an
+  organization mentioned used on a grant.
+  * Fixed a problem that would intermittently cause settings not to be persisted.
+  * Fixed an issue that prevented users from being able to change LDAP settings.
+
+**Known issues**
+
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+
+
+## Version 2.2.5 (16 January 2018)
 
 **Bug fixes**
 
@@ -32,9 +84,7 @@ and are planning on upgrading UCP, you can skip 2.2.5 and wait for the upcoming
 2.2.6 release, which will provide an alternative way to turn on RBAC enforcement
 for volumes.
 
-## Version 2.2.4
-
-(2 November 2017)
+## Version 2.2.4 (2 November 2017)
 
 **News**
 
@@ -65,9 +115,7 @@ for volumes.
  * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
  * The Swarm admin UI for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 
-## Version 2.2.3
-
-(13 September 2017)
+## Version 2.2.3 (13 September 2017)
 
 **Bug fixes**
 
@@ -119,9 +167,7 @@ for volumes.
  `<node-name>/<network-name>`.
 
 
-## version 2.2.2
-
-(30 August 2017)
+## version 2.2.2 (30 August 2017)
 
 **Bug fixes**
 
@@ -156,9 +202,7 @@ for volumes.
 include `external: true`, otherwise the deployment fails with the error
 `unable to inspect secret`.
 
-## Version 2.2.0
-
-(16 August 2017)
+## Version 2.2.0 (16 August 2017)
 
 **New features**
 

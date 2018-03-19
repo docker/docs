@@ -115,7 +115,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-6"
+      win_latest_build: "docker-17.06.2-ee-7"
   - scope:
       path: "kitematic"
     values:
@@ -139,15 +139,15 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.4"
-      dtr_latest_image: "docker/dtr:2.4.1"
+      ucp_latest_image: "docker/ucp:2.2.6"
+      dtr_latest_image: "docker/dtr:2.4.3"
       enterprise: true
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.2"
+      dtr_version: "2.4.3"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
@@ -176,7 +176,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.5"
+      ucp_version: "2.2.6"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
