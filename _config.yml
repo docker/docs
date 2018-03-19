@@ -115,7 +115,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-6"
+      win_latest_build: "docker-17.06.2-ee-7"
   - scope:
       path: "kitematic"
     values:
