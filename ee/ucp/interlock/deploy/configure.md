@@ -42,8 +42,6 @@ docker config create $NEW_CONFIG_NAME config.toml
 docker service update \
   --config-rm $CURRENT_CONFIG_NAME \
   --config-add source=$NEW_CONFIG_NAME,target=/config.toml \
-  --stop-signal SIGQUIT \
-  --stop-grace-period 5s \
   ucp-interlock
 ```
 
