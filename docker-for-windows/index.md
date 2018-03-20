@@ -11,8 +11,6 @@ redirect_from:
 - /engine/installation/windows/
 - /docker-for-windows/index/
 title: Get started with Docker for Windows
-toc_max: 4
-toc_min: 1
 ---
 Welcome to Docker for Windows!
 

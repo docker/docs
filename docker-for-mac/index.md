@@ -12,8 +12,6 @@ redirect_from:
 - /docker-for-mac/index/
 - /docker-for-mac/osx/
 title: Get started with Docker for Mac
-toc_max: 4
-toc_min: 1
 ---
 
 Welcome to Docker for Mac! Docker is a full development platform for creating
