@@ -2649,13 +2649,26 @@ manuals:
           title: Get support
 - sectiontitle: Docker Cloud
   section:
+  - sectiontitle: Migration
+    section:
+    - path: /docker-cloud/migration/
+      title: Migration overview
+    - path: /docker-cloud/migration/cloud-to-swarm/
+      title: Migrate to Docker CE
+    - path: /docker-cloud/migration/cloud-to-kube-aks/
+      title: Migration to AKS
+    - path: /docker-cloud/migration/cloud-to-kube-gke/
+      title: Migrate to GKE
+    - path: /docker-cloud/migration/deregister-swarms/
+      title: Deregister swarms
+    - path: /docker-cloud/migration/kube-primer/
+      title: Kubernetes primer
   - path: /docker-cloud/
     title: About Docker Cloud
   - path: /docker-cloud/dockerid/
     title: Docker Cloud settings and Docker ID
   - path: /docker-cloud/orgs/
     title: Organizations and teams
-
   - sectiontitle: Manage builds and images
     section:
     - path: /docker-cloud/builds/
