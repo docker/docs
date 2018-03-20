@@ -15,36 +15,43 @@ The default proxy service used by UCP to provide layer 7 routing is NGINX,
 so when users try to access a route that hasn't been configured, they will
 see the default NGINX 404 page.
 
-![Default NGINX page]()
+![Default NGINX page](../../images/interlock-default-service-1.png){: .with-border}
 
-In this example we will publish a service to be a default host.  This service will respond
-whenever there is a request to a host that is not configured.
+You can customize this by labelling a service with
+`com.docker.lb.defaul_backend=true`. When users try to access a route that's
+not configured, they are redirected to this service.
 
-First we will create an overlay network so that service traffic is isolated and secure:
+As an example, create a `docker-compose.yml` file with:
 
-```bash
-$> docker network create -d overlay demo
-1se1glh749q1i4pw0kf26mfx5
+```yaml
+version: "3.2"
+
+services:
+  demo:
+    image: ehazlett/interlock-default-app
+    deploy:
+      replicas: 1
+      labels:
+        com.docker.lb.default_backend: "true"
+        com.docker.lb.port: 80
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: overlay
 ```
 
-Next we will create the initial service:
+Set up your CLI client with a [UCP client bundle](../../user-access/cli.md),
+and deploy the service:
 
 ```bash
-$> docker service create \
-    --name demo-default \
-    --network demo \
-    --detach=false \
-    --replicas=1 \
-    --label com.docker.lb.defaul_backend=true \
-    --label com.docker.lb.port=8080 \
-    ehazlett/interlock-default-app
+docker stack deploy --compose-file docker-compose.yml demo
 ```
 
-Interlock will detect once the service is available and publish it.  Once the tasks are running
-and the proxy service has been updated the application should be available via any url that is not
-configured:
+Once users try to access a route that's not configured, they are directed
+to this demo service.
 
-
-![Default Backend](interlock_default_backend.png)
+![Custom default page](../../images/interlock-default-service-1.png){: .with-border}
 
 {% endif %}
