@@ -198,47 +198,6 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ### Workarounds for common problems
 
-* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on
-  Docker for Mac. If you try to use it, network timeouts occur when running
-  `docker` commands that need access to external network servers, such as
-  `docker pull` or `docker push`.
-
-   ```
-   $ docker pull busybox
-   Using default tag: latest
-   Pulling repository docker.io/library/busybox
-   Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/busybox/images. You may want to check your internet connection or if you are behind a proxy.
-   ```
-
-    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the
-    beta channel, a workaround is provided that auto-filters out the IPv6
-    addresses in DNS server lists and enables successful network accesss. For
-    example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only
-    workaround action needed for users is to [upgrade to Docker for Mac stable
-    v1.12.1 or newer, or Beta 24 or
-    newer](/docker-for-mac/install.md#download-docker-for-mac).
-
-    On releases with the workaround included to filter out / truncate IPv6
-    addresses from the DNS list, the above command should run properly:
-
-    ```
-    $ docker pull busybox
-    Using default tag: latest
-    latest: Pulling from library/busybox
-    Digest: sha256:a59906e33509d14c036c8678d687bd4eec81ed7c4b8ce907b888c607f6a1e0e6
-    Status: Image is up to date for busy box:latest
-    ```
-
-    To learn more, see these issues on GitHub and Docker for Mac forums:
-
-  * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
-    addresses](https://github.com/docker/for-mac/issues/9)
-
-  * [ERROR: Network timed out while trying to connect to
-    index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
-
-  <p></p>
-
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
@@ -293,13 +252,20 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ## Known issues
 
-* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and
-  haven't upgraded to Beta 24 or v1.12.1 stable or newer, you see a network
-  timeout when you run `docker` commands that need access to external network
-  servers. The aforementioned releases include a workaround for this because
-  Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter
-  DNS addresses" in [Workarounds for common
-  problems](troubleshoot.md#workarounds-for-common-problems).
+* IPv6 is not (yet) supported on Docker for Mac. 
+
+  A workaround is provided that auto-filters out the IPv6 addresses in DNS
+  server lists and enables successful network accesss.  For example,
+  `2001:4860:4860::8888` would become `8.8.8.8`.  To learn more, see these
+  issues on GitHub and Docker for Mac forums:
+
+  * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
+    addresses](https://github.com/docker/for-mac/issues/9)
+
+  * [ERROR: Network timed out while trying to connect to
+    index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
+
+  <p></p>
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac
   (`ValueError: Extra Data`). We've identified this is likely related to data
