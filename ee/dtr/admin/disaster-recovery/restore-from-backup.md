@@ -84,6 +84,10 @@ Where:
 * `<replica-id>` the id of the replica you backed up
 * `<dtr-external-url>`the url that clients use to access DTR
 
+If you're using NFS as a storage backend, also include `--nfs-storage-url` as
+part of your restore command, otherwise DTR is restored but starts using a
+local volume to persist your Docker images.
+
 ### Re-fetch the vulnerability database
 
 If you're scanning images, you now need to download the vulnerability database.
