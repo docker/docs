@@ -74,18 +74,18 @@ networking stack, along with some ideas for workarounds.
 ### There is no docker0 bridge on {{Arch}}
 
 Because of the way networking is implemented in Docker for {{Arch}}, you cannot
-see a `docker0` interface in macOS.  This interface is actually within the
+see a `docker0` interface on the host.  This interface is actually within the
 virtual machine.
 
 ### I cannot ping my containers
 
 Docker for Windows can't route traffic to Linux containers.  However, you can
-ping the Windows Containers.
+ping the Windows containers.
 
 ### Per-container IP addressing is not possible
 
 The docker (Linux) bridge network is not reachable from the Windows host.
-However, it works with Windows Containers.
+However, it works with Windows containers.
 
 ### Use cases and workarounds
 
@@ -94,7 +94,7 @@ There are two scenarios that the above limitations affect:
 #### I want to connect from a container to a service on the host
 
 The host has a changing IP address (or none if you have no network access). From
-18.03 onwards our recommendation is to connect to the special Mac-only DNS name
+18.03 onwards our recommendation is to connect to the special DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
 
@@ -110,7 +110,7 @@ container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting
-Started](/docker-for-mac/index.md#explore-the-application-and-run-examples) is
+Started](/docker-for-windows/index.md#explore-the-application-and-run-examples) is
 an example of this.
 
 ```bash

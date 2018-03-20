@@ -76,7 +76,7 @@ networking stack, along with some ideas for workarounds.
 ### There is no docker0 bridge on macOS
 
 Because of the way networking is implemented in Docker for Mac, you cannot see a
-`docker0` interface in macOS. This interface is actually within the virtual
+`docker0` interface on the host. This interface is actually within the virtual
 machine.
 
 ### I cannot ping my containers
@@ -94,7 +94,7 @@ There are two scenarios that the above limitations affect:
 #### I want to connect from a container to a service on the host
 
 The host has a changing IP address (or none if you have no network access). From
-18.03 onwards our recommendation is to connect to the special Mac-only DNS name
+18.03 onwards our recommendation is to connect to the special DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
 
