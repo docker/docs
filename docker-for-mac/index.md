@@ -94,7 +94,7 @@ Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Prefere
 
 ![Docker context menu](images/menu/d4m-menu-prefs.png){:width="250px"}
 
-### General tab
+### General
 
 ![Preferences](/docker-for-mac/images/menu/d4m-menu-prefs-general.png){:width="400px"}
 
@@ -113,7 +113,7 @@ Gneral settings are:
 
 - **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage data to Docker. This information helps Docker improve the application and get more context for troubleshooting problems. (Enabled by default.)
 
-### File sharing tab
+### File sharing
 
 Choose which local directories to share with your containers. File sharing is
 required for volume mounting if the project lives outside of the `/Users`
@@ -139,7 +139,7 @@ For more information, see:
 - [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-### Advanced tab
+### Advanced
 
 On the Advanced tab, you can limit resources available to Docker.
 
@@ -157,7 +157,7 @@ to decrease it, lower the number.
 
 **Swap**: Configure swap file size as needed. The default is 1 GB.
 
-### Disk tab
+### Disk
 
 Specify the **Disk image location** of the Linux volume, where containers and images are stored.
 
@@ -167,7 +167,7 @@ the existing image or replace it.
 
 ![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
 
-### Proxies tab
+### Proxies
 
 Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
@@ -178,7 +178,7 @@ containers.
 
 <p id="daemon-experimental-mode" />
 
-### Daemon tab
+### Daemon
 
 You can configure options on the Docker daemon that determine how your containers run.
 
@@ -228,7 +228,7 @@ changes, click another preference tab, then choose to discard or not apply chang
 
 ![Docker Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
 
-### Kubernetes tab
+### Kubernetes
 
 **Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge channel.**
 Kubernetes support is not included in Docker for Mac Stable releases. To find
@@ -284,7 +284,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   For more about using the Kubernetes integration with
   Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md){:target="_blank" class="_"}.
 
-### Reset tab
+### Reset
 
 Select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar, then click **Reset** to reset factory
