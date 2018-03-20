@@ -405,8 +405,10 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Proxies
 
-Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
+Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and
+automatically propagates these to Docker and to your containers.  For example,
+if you set your proxy settings to `http://proxy.example.com`, Docker uses this
+proxy when pulling containers.
 
 ![Proxies](/docker-for-windows/images/proxies.png)
 

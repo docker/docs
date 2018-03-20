@@ -170,7 +170,7 @@ the existing image or replace it.
 ### Proxies
 
 Docker for Mac detects HTTP/HTTPS Proxy Settings from macOS and automatically
-propagate these to Docker and to your containers. For example, if you set your
+propagates these to Docker and to your containers. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
 
