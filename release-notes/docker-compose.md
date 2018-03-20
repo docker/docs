@@ -5,7 +5,7 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
-## 1.20.0 (2018-03-07)
+## 1.20.0 (2018-03-20)
 
 ### New features
 
@@ -60,6 +60,9 @@ toc_max: 2
 - Fixed `.dockerignore` handling, notably with regard to absolute paths
   and last-line precedence rules
 
+- Fixed an issue where Compose would make costly DNS lookups when connecting
+  to the Engine when using Docker For Mac
+
 - Fixed a bug introduced in 1.19.0 which caused the default certificate path
   to not be honored by Compose
 
@@ -75,6 +78,9 @@ toc_max: 2
 - A `seccomp:<filepath>` entry in the `security_opt` config now correctly
   sends the contents of the file to the engine
 
+- ANSI output for `up` and `down` operations should no longer affect the wrong
+  lines
+
 - Improved support for non-unicode locales
 
 - Fixed a crash occurring on Windows when the user's home directory name
@@ -82,6 +88,8 @@ toc_max: 2
 
 - Fixed a bug occurring during builds caused by files with a negative `mtime`
   values in the build context
+
+- Fixed an encoding bug when streaming build progress
 
 ## 1.19.0 (2018-02-07)
 
