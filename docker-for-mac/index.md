@@ -165,16 +165,38 @@ You can also move the disk image location. If you attempt to move the disk image
 to a location that already has one, you get a prompt asking if you want to use
 the existing image or replace it.
 
-![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
+![Disk settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
 
 ### Proxies
 
-Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
-these to Docker and to your containers. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker uses this proxy when pulling
-containers.
+Docker for Mac detects HTTP/HTTPS Proxy Settings from macOS and automatically
+propagate these to Docker and to your containers. For example, if you set your
+proxy settings to `http://proxy.example.com`, Docker uses this proxy when
+pulling containers.
 
 ![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
+
+![macOS Proxy Settings](images/proxy-settings.png){:width="400px"}
+
+When you start a container, your proxy settings propagate into
+the containers. For example:
+
+```
+$ docker run -it alpine env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=b7edf988b2b5
+TERM=xterm
+HOME=/root
+HTTP_PROXY=http://proxy.example.com:3128
+http_proxy=http://proxy.example.com:3128
+no_proxy=*.local, 169.254/16
+```
+
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
+`no_proxy` environment variables are set. When your proxy configuration changes,
+Docker restarts automatically to pick up the new settings. If you have
+containers that you wish to keep running across restarts, you should consider
+using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
 
