@@ -12,7 +12,7 @@ toc_max: 2
 #### Compose file version 3.6
 
 - Introduced version 3.6 of the `docker-compose.yml` specification.
-  This version requires to be used with Docker Engine 18.02.0 or above.
+  This version must be used with Docker Engine 18.02.0 or above.
 
 - Added support for the `tmpfs.size` property in volume mappings
 
