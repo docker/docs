@@ -25,7 +25,7 @@ and edge channels, system requirements, and download/install information.
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
-## Check versions of Docker Engine, Compose, and Machine
+## Check versions
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
@@ -40,7 +40,7 @@ PS C:\Users\Docker> docker-machine --version
 docker-machine version 0.10.0, build 76ed2a6
 ```
 
-## Explore the application and run examples
+## Explore the application
 
 The next few steps take you through some examples. These are just suggestions
 for ways to experiment with Docker on your system, check version information,
@@ -237,86 +237,6 @@ and make sure `docker` commands are working properly.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples) are great places to start.
 
-## Set up tab completion in PowerShell
-
-If you would like to have handy tab completion for Docker commands, you can
-install the [`posh-docker`](https://github.com/samneirinck/posh-docker)
-PowerShell Module as follows.
-
-> Prerequisite Notes
->
-> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
->
-> * Make sure you have administrator permissions to run an elevated PowerShell.
-
-1.  Start an "elevated" PowerShell, running as an administrator.
-
-    To do this, search for PowerShell, right-click, and choose **Run as administrator**.
-
-    ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-
-    When asked if you want to allow this app to make changes to your device,
-    click **Yes**.
-
-2.  Set the
-    [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy)
-    to allow downloaded scripts signed by trusted publishers to run on your
-    computer. To do so, type this at the PowerShell prompt.
-
-    ```ps
-    Set-ExecutionPolicy RemoteSigned
-    ```
-
-    To check that the policy is set properly, run `get-executionpolicy`, which
-    should return `RemoteSigned`.
-
-3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
-
-    ```ps
-    Install-Module posh-docker
-    ```
-
-    Or, to install the module for the current user only, type:
-
-    ```ps
-    Install-Module -Scope CurrentUser posh-docker
-    ```
-
-4.  After installation to enable autocompletion for the current PowerShell only, type:
-
-    ```ps
-    Import-Module posh-docker
-    ```
-
-5.  To make tab completion persistent across all PowerShell sessions, add the
-    command to a `$PROFILE` by typing these commands at the PowerShell prompt.
-
-    ```ps
-    if (-Not (Test-Path $PROFILE)) {
-        New-Item $PROFILE –Type File –Force
-    }
-
-    Add-Content $PROFILE "`nImport-Module posh-docker"
-    ```
-
-    This creates a `$PROFILE` if one does not already exist, and adds this line
-    into the file:
-
-    ```ps
-    Import-Module posh-docker
-    ```
-
-    To check that the file was properly created, or simply edit it manually,
-    type this in PowerShell:
-
-    ```ps
-    Notepad $PROFILE
-    ```
-
-Open a new PowerShell session. Now, when you press tab after typing the first
-few letters, Docker commands such as `start`, `stop`, `run`, and their options,
-along with container and image names should now auto-complete.
-
 ## Docker Settings
 
 When Docker is running, the Docker whale is displayed. By default, the Docker
@@ -508,7 +428,7 @@ When your proxy configuration changes, Docker restarts automatically to pick up 
 If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
-### Docker daemon
+### Daemon
 
 You can configure options on the Docker daemon that determine how your
 containers run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
@@ -519,7 +439,7 @@ some of the common settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)
-* [Edit the daemon configuration file](#edit-the-daemon-configuration-file)
+* [Daemon configuration file](#daemon-configuration-file)
 
 ![Docker Daemon](/docker-for-windows/images/docker-daemon_basic.png)
 
@@ -578,7 +498,7 @@ registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.)
 
-#### Edit the daemon configuration file
+#### Daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd.md).
@@ -669,40 +589,6 @@ because they do not apply to Windows containers:
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
 
-### Docker Store
-
-Choose **Docker Store** from the Docker for Windows menu to get to the Docker
-app downloads site. [Docker store](https://store.docker.com/) is a component of
-the next-generation Docker Hub, and the best place to find compliant, trusted
-commercial and free software distributed as Docker Images.
-
-![Docker Store](images/docker-store.png)
-
-### Docker Cloud
-
-You can access your [Docker Cloud](/docker-cloud/index.md) account from
-within Docker for Windows.
-
-![Docker Cloud](images/docker-cloud.png)
-
-From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
-or create one.
-
-![Docker Cloud sign-in](images/docker-cloud-menu.png)
-
-Then use the Docker for Windows menu to create, view, or navigate directly to
-your Cloud resources, including **organizations**, **repositories**, and
-**swarms**.
-
-Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
-
-* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
-* [Builds and Images](/docker-cloud/builds/index.md)
-* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
-
-Need a direct link to Cloud? [Take me to Docker
-Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
-
 ### Kubernetes
 
 **Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
@@ -754,46 +640,6 @@ experience conflicts, remove it.
   For more about using the Kubernetes integration with
   Docker for Windows, see [Deploy to Kubernetes](/docker-for-windows/kubernetes.md).
 
-### Giving feedback and getting help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows).
-
-To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
-
-To give feedback on the documentation or update it yourself, use the Feedback
-options at the bottom of each docs page.
-
-### Diagnose and Feedback
-
-If you encounter problems for which you do not find solutions in this
-documentation, searching [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues) already filed by other users,
-or on the [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
-
-Select **Upload a diagnostic**.
-
-This uploads (sends) the logs to Docker.
-
-![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
-
-To create a new issue directly on GitHub, open
-[Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-in your web browser and follow the instructions in the README. Click
-[New Issue](https://github.com/docker/for-win/issues/new) on that page to get a
-"create new issue" template prepopulated with sections for the ID and summary of
-your diagnostics, system and version details, description of expected and actual
-behavior, and steps to reproduce the issue.
-
-![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
-
 ### Reset
 
 ![Reset](/docker-for-windows/images/settings-reset.png)
@@ -819,6 +665,160 @@ certificates?](/docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)
 and [How do I add client
 certificates?](/docker-for-windows/faqs.md#how-do-i-add-client-certificates) in
 the FAQs.
+
+## Set up tab completion in PowerShell
+
+If you would like to have handy tab completion for Docker commands, you can
+install the [`posh-docker`](https://github.com/samneirinck/posh-docker)
+PowerShell Module as follows.
+
+> Prerequisite Notes
+>
+> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
+>
+> * Make sure you have administrator permissions to run an elevated PowerShell.
+
+1.  Start an "elevated" PowerShell, running as an administrator.
+
+    To do this, search for PowerShell, right-click, and choose **Run as administrator**.
+
+    ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
+
+    When asked if you want to allow this app to make changes to your device,
+    click **Yes**.
+
+2.  Set the
+    [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy)
+    to allow downloaded scripts signed by trusted publishers to run on your
+    computer. To do so, type this at the PowerShell prompt.
+
+    ```ps
+    Set-ExecutionPolicy RemoteSigned
+    ```
+
+    To check that the policy is set properly, run `get-executionpolicy`, which
+    should return `RemoteSigned`.
+
+3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
+
+    ```ps
+    Install-Module posh-docker
+    ```
+
+    Or, to install the module for the current user only, type:
+
+    ```ps
+    Install-Module -Scope CurrentUser posh-docker
+    ```
+
+4.  After installation to enable autocompletion for the current PowerShell only, type:
+
+    ```ps
+    Import-Module posh-docker
+    ```
+
+5.  To make tab completion persistent across all PowerShell sessions, add the
+    command to a `$PROFILE` by typing these commands at the PowerShell prompt.
+
+    ```ps
+    if (-Not (Test-Path $PROFILE)) {
+        New-Item $PROFILE –Type File –Force
+    }
+
+    Add-Content $PROFILE "`nImport-Module posh-docker"
+    ```
+
+    This creates a `$PROFILE` if one does not already exist, and adds this line
+    into the file:
+
+    ```ps
+    Import-Module posh-docker
+    ```
+
+    To check that the file was properly created, or simply edit it manually,
+    type this in PowerShell:
+
+    ```ps
+    Notepad $PROFILE
+    ```
+
+Open a new PowerShell session. Now, when you press tab after typing the first
+few letters, Docker commands such as `start`, `stop`, `run`, and their options,
+along with container and image names should now auto-complete.
+
+## Give feedback and get help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can review
+community reported issues, and file new ones. As a part of reporting issues on
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
+
+## Diagnose and Feedback
+
+If you encounter problems for which you do not find solutions in this
+documentation, searching [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) already filed by other users,
+or on the [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows), we can help you
+troubleshoot the log data.
+
+Select **Upload a diagnostic**.
+
+This uploads (sends) the logs to Docker.
+
+![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
+
+To create a new issue directly on GitHub, open
+[Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues)
+in your web browser and follow the instructions in the README. Click
+[New Issue](https://github.com/docker/for-win/issues/new) on that page to get a
+"create new issue" template prepopulated with sections for the ID and summary of
+your diagnostics, system and version details, description of expected and actual
+behavior, and steps to reproduce the issue.
+
+![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
+
+## Docker Store
+
+Choose **Docker Store** from the Docker for Windows menu to get to the Docker
+app downloads site. [Docker store](https://store.docker.com/) is a component of
+the next-generation Docker Hub, and the best place to find compliant, trusted
+commercial and free software distributed as Docker Images.
+
+![Docker Store](images/docker-store.png)
+
+## Docker Cloud
+
+You can access your [Docker Cloud](/docker-cloud/index.md) account from
+within Docker for Windows.
+
+![Docker Cloud](images/docker-cloud.png)
+
+From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
+or create one.
+
+![Docker Cloud sign-in](images/docker-cloud-menu.png)
+
+Then use the Docker for Windows menu to create, view, or navigate directly to
+your Cloud resources, including **organizations**, **repositories**, and
+**swarms**.
+
+Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
+
+* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
+* [Builds and Images](/docker-cloud/builds/index.md)
+* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
+
+Need a direct link to Cloud? [Take me to Docker
+Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ## Where to go next
 
