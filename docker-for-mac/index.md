@@ -157,7 +157,7 @@ to decrease, lower the number.
 the total available memory on your Mac. To increase RAM, set this to a higher number;
 to decrease it, lower the number.
 
-**Swap**: Configure swappiness as needed. The default is 1.
+**Swap**: Configure swap file size as needed. The default is 1 GB.
 
 ### Disk tab
 
