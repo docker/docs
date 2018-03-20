@@ -20,6 +20,6 @@ Options:
                       not supported in API < 1.25)
 ```
 
-This is equivalent of `docker exec`. With this subcommand you can run arbitrary
+This is the equivalent of `docker exec`. With this subcommand you can run arbitrary
 commands in your services. Commands are by default allocating a TTY, so you can
 use a command such as `docker-compose exec web sh` to get an interactive prompt.
