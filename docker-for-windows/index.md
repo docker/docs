@@ -753,10 +753,9 @@ discussion, log on to our [Docker for Windows
 forum](https://forums.docker.com/c/docker-for-windows).
 
 To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
+GitHub](https://github.com/docker/for-win/issues), where you can
+review community reported issues, and file new ones.  See [Logs and
+Troubleshooting](troubleshoot.md) for more details.
 
 To give feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.

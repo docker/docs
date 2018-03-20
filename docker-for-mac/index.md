@@ -455,13 +455,13 @@ ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_do
 ## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
+discussion, log on to our [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
 
-To report bugs or problems, log on to [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"}, where you can review
-community reported issues, and file new ones. See [Diagnose problems, send
-feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As
-a part of reporting issues on GitHub, we can help you troubleshoot the log data.
+To report bugs or problems, log on to [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
+where you can review community reported issues, and file new ones.  See [Logs
+and Troubleshooting](troubleshoot.md) for more details.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
