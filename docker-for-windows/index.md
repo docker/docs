@@ -760,31 +760,6 @@ Troubleshooting](troubleshoot.md) for more details.
 To give feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
 
-## Diagnose and Feedback
-
-If you encounter problems for which you do not find solutions in this
-documentation, searching [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues) already filed by other users,
-or on the [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
-
-Select **Upload a diagnostic**.
-
-This uploads (sends) the logs to Docker.
-
-![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
-
-To create a new issue directly on GitHub, open
-[Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-in your web browser and follow the instructions in the README. Click
-[New Issue](https://github.com/docker/for-win/issues/new) on that page to get a
-"create new issue" template prepopulated with sections for the ID and summary of
-your diagnostics, system and version details, description of expected and actual
-behavior, and steps to reproduce the issue.
-
-![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
-
 ## Docker Store
 
 Choose **Docker Store** from the Docker for Windows menu to get to the Docker

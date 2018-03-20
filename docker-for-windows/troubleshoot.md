@@ -19,12 +19,31 @@ technical support for various subscription levels.
 ## Submitting diagnostics, feedback, and GitHub issues
 
 If you encounter problems for which you do not find solutions in this
-documentation, on [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
+documentation, searching [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) already filed by other users,
+or on the [Docker for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data. See [Diagnose and
-Feedback](/docker-for-windows/index.md#diagnose-and-feedback) to learn about
-diagnostics and how to create new issues on GitHub.
+troubleshoot the log data.
+
+Choose **Diagnose & Feedback** from the menu bar.
+
+Select **Upload a diagnostic**.
+
+This uploads (sends) the logs to Docker.
+
+![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
+
+To create a new issue directly on GitHub, open [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) in your web browser and follow
+the instructions in the README. Click [New
+Issue](https://github.com/docker/for-win/issues/new) on that page to get a
+"create new issue" template prepopulated with sections for the ID and summary of
+your diagnostics, system and version details, description of expected and actual
+behavior, and steps to reproduce the issue.
+
+![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
+
+
 
 ## Checking the Logs
 
