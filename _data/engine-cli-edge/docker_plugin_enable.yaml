@@ -9,7 +9,7 @@ plink: docker_plugin.yaml
 options:
 - option: timeout
   value_type: int
-  default_value: "0"
+  default_value: "30"
   description: HTTP client timeout (in seconds)
   deprecated: false
   experimental: false

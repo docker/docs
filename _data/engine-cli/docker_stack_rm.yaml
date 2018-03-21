@@ -7,6 +7,24 @@ long: |-
 usage: docker stack rm STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
+inherited_options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+- option: namespace
+  value_type: string
+  default_value: default
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
 examples: |-
   ### Remove a stack
 
@@ -46,4 +64,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: true
+swarm: true
 

@@ -1,7 +1,7 @@
 command: docker plugin disable
 short: Disable a plugin
 long: |-
-  ables a plugin. The plugin must be installed before it can be disabled,
+  Disables a plugin. The plugin must be installed before it can be disabled,
   see [`docker plugin install`](plugin_install.md). Without the `-f` option,
   a plugin that has references (e.g., volumes, networks) cannot be disabled.
 usage: docker plugin disable [OPTIONS] PLUGIN
@@ -15,6 +15,9 @@ options:
   description: Force the disable of an active plugin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following example shows that the `sample-volume-plugin` plugin is installed
   and enabled:
@@ -41,4 +44,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 
