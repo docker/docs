@@ -14,10 +14,16 @@ options:
   description: Seconds to wait for stop before killing it
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ```bash
   $ docker stop my_container
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

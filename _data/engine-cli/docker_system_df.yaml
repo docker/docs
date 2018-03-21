@@ -12,6 +12,9 @@ options:
   description: Pretty-print images using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: verbose
   shorthand: v
   value_type: bool
@@ -19,6 +22,9 @@ options:
   description: Show detailed information on space usage
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   By default the command will just show a summary of the data used:
 
@@ -67,4 +73,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

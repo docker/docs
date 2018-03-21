@@ -7,7 +7,7 @@ long: |-
    * env variables
    * source of mounts
    * path of devices
-   * arg
+   * args
 usage: docker plugin set PLUGIN KEY=VALUE [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
@@ -83,4 +83,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

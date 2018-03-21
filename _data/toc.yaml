@@ -712,6 +712,18 @@ reference:
         title: docker logout
       - path: /engine/reference/commandline/logs/
         title: docker logs
+      - sectiontitle: docker manifest *
+        section:
+        - path: /engine/reference/commandline/manifest/
+          title: docker manifest
+        - path: /engine/reference/commandline/manifest_annotate/
+          title: docker manifest annotate
+        - path: /engine/reference/commandline/manifest_create/
+          title: docker manifest create
+        - path: /engine/reference/commandline/manifest_inspect/
+          title: docker manifest inspect
+        - path: /engine/reference/commandline/manifest_push/
+          title: docker manifest push
       - sectiontitle: docker network *
         section:
         - path: /engine/reference/commandline/network/
@@ -904,8 +916,6 @@ reference:
           title: docker trust signer add
         - path: /engine/reference/commandline/trust_signer_remove/
           title: docker trust signer remove
-        - path: /engine/reference/commandline/trust_view/
-          title: docker trust view
       - path: /engine/reference/commandline/unpause/
         title: docker unpause
       - path: /engine/reference/commandline/update/
@@ -1283,8 +1293,6 @@ reference:
           title: docker trust signer add
         - path: /edge/engine/reference/commandline/trust_signer_remove/
           title: docker trust signer remove
-        - path: /edge/engine/reference/commandline/trust_view/
-          title: docker trust view
       - path: /edge/engine/reference/commandline/unpause/
         title: docker unpause
       - path: /edge/engine/reference/commandline/update/
