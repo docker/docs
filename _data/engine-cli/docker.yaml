@@ -24,6 +24,7 @@ cname:
 - docker login
 - docker logout
 - docker logs
+- docker manifest
 - docker network
 - docker node
 - docker pause
@@ -80,6 +81,7 @@ clink:
 - docker_login.yaml
 - docker_logout.yaml
 - docker_logs.yaml
+- docker_manifest.yaml
 - docker_network.yaml
 - docker_node.yaml
 - docker_pause.yaml
@@ -113,4 +115,7 @@ clink:
 - docker_wait.yaml
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

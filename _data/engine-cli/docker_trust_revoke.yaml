@@ -1,9 +1,6 @@
 command: docker trust revoke
 short: Remove trust for an image
-long: |-
-  `docker trust revoke` removes signatures from tags in signed repositories.
-
-  `docker trust revoke` is currently experimental.
+long: '`docker trust revoke` removes signatures from tags in signed repositories.'
 usage: docker trust revoke [OPTIONS] IMAGE[:TAG]
 pname: docker trust
 plink: docker_trust.yaml
@@ -15,6 +12,9 @@ options:
   description: Do not prompt for confirmation
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### Revoke signatures from a signed tag\n\nHere's an example of a repo
   with two signed tags:\n\n\n```bash\n$ docker trust view example/trust-demo\nSIGNED
   TAG          DIGEST                                                              SIGNERS\nred
@@ -55,4 +55,7 @@ examples: "### Revoke signatures from a signed tag\n\nHere's an example of a rep
   Key:\t3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949\n```"
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

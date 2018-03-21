@@ -13,13 +13,20 @@ options:
   description: Path to a Distributed Application Bundle file
   deprecated: false
   experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: compose-file
   shorthand: c
-  value_type: string
+  value_type: stringSlice
+  default_value: '[]'
   description: Path to a Compose file
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: prune
   value_type: bool
   default_value: "false"
@@ -27,6 +34,9 @@ options:
   deprecated: false
   min_api_version: "1.27"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: resolve-image
   value_type: string
   default_value: always
@@ -35,12 +45,36 @@ options:
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
   description: Send registry authentication details to Swarm agents
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+inherited_options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+- option: namespace
+  value_type: string
+  default_value: default
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
 examples: |-
   ### Compose file
 
@@ -78,14 +112,12 @@ examples: |-
   Creating service vossibility_lookupd
   ```
 
-  Only a single Compose file is accepted. If your configuration is split between
-  multiple Compose files, e.g. a base configuration and environment-specific overrides,
-  you can combine these by passing them to `docker-compose config` with the `-f` option
-  and redirecting the merged output into a new file.
+  If your configuration is split between multiple Compose files, e.g. a base
+  configuration and environment-specific overrides, you can provide multiple
+  `--compose-file` flags.
 
   ```bash
-  $ docker-compose -f docker-compose.yml -f docker-compose.prod.yml config > docker-stack.yml
-  $ docker stack deploy --compose-file docker-stack.yml vossibility
+  $ docker stack deploy --compose-file docker-compose.yml -f docker-compose.prod.yml vossibility
 
   Ignoring unsupported options: links
 
@@ -143,4 +175,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: true
+swarm: true
 

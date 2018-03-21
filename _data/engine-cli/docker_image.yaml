@@ -32,4 +32,7 @@ clink:
 - docker_image_tag.yaml
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 
