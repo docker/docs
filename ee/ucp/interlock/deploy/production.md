@@ -18,14 +18,14 @@ nodes you're managing with UCP.
 
 For a production-grade deployment, you should tune the default deployment to
 have two nodes dedicated for running the two replicas of the
-`ucp-interlock-proxy` service. This makes sure:
+`ucp-interlock-proxy` service. This ensures:
 
 * The proxy services have dedicated resources to handle user requests. You
 can configure these nodes with higher performance network interfaces.
-* No application traffic can be routed to a manager node. This makes the
+* No application traffic can be routed to a manager node. This makes your
 deployment secure.
-* The proxy service is running on two nodes. If one node fails layer 7 routing
-still works.
+* The proxy service is running on two nodes. If one node fails, layer 7 routing
+continues working.
 
 To achieve this you need to:
 
@@ -33,12 +33,12 @@ To achieve this you need to:
 2. Pick two nodes that are going to be dedicated to run the proxy service.
 3. Apply labels to those nodes, so that you can constrain the proxy service to
 only run on nodes with those labels.
-4. Update the proxy service with the constraint.
+4. Update the `ucp-interlock` service to deploy proxies using that constraint.
 5. Configure your load balancer to route traffic to the dedicated nodes only.
 
 ## Apply labels to nodes
 
-In this example, we've chose node-5 and node-6 to be dedicated just for running
+In this example, we chose node-5 and node-6 to be dedicated just for running
 the proxy service. To apply labels to those nodes run:
 
 ```bash
@@ -55,37 +55,32 @@ docker node inspect --format '{{ index .Spec.Labels "nodetype" }}' <node>
 
 The command should print "loadbalancer".
 
-## Configure the proxy service
+## Configure the ucp-interlock service
 
-Now that your nodes are labelled, you can add a constraint to the
-`ucp-interlock-proxy`service, so make sure it only gets scheduled on nodes
-with the right label:
+Now that your nodes are labelled, you need to update the `ucp-interlock`
+service configuration to deploy the proxy service with the correct constraints.
+
+Add another constraint to the `ProxyConstraints` array:
+
+```toml
+[Extensions]
+  [Extensions.default]
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.labels.nodetype==loadbalancer"]
+```
+
+[Learn how to configure ucp-interlock](configure.md).
+
+Once you reconfigure the `ucp-interlock` service, you can check if the proxy
+service is running on the dedicated nodes:
 
 ```bash
-docker service update \
-  --detach \
-  --constraint-add node.labels.nodetype==loadbalancer \
-  --stop-signal SIGTERM \
-  --stop-grace-period 5s \
-  $(docker service ls -f 'label=type=com.docker.interlock.core.proxy' -q)
-```
-
-This updates the proxy service to only be scheduled on node with the the
-"loadbalancer" label. It also stops the task with a `SIGTERM` signal and gives
-them five seconds to terminate, which allows the proxy service to stop accepting
-new requests and finished serving existing requests from users.
-
-Now you can check if the proxy service is running on the dedicated nodes:
-
-```
 docker service ps ucp-interlock-proxy
 ```
 
 ## Configure your load balancer
 
-Once the proxy service is running on a dedicated node, configure your upstream
-load balancer with the domain names or IP addresses of the nodes running
-the proxy service.
+Once the proxy service is running on dedicated nodes, configure your upstream
+load balancer with the domain names or IP addresses of those nodes.
 
 This makes sure all traffic is directed to these nodes.
 
