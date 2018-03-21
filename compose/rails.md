@@ -50,12 +50,10 @@ to link them together and expose the web app's port.
     services:
       db:
         image: postgres
-        restart: always
         volumes:
           - ./tmp/db:/var/lib/postgresql/data
       web:
         build: .
-        restart: always
         command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
         volumes:
           - .:/myapp
