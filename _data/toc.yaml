@@ -1716,6 +1716,9 @@ manuals:
           - title: Set a default service
             path: /ee/ucp/interlock/usage/default-service/
 
+          - title: Service labels reference
+            path: /ee/ucp/interlock/usage/labels-reference/
+
 
         - sectiontitle: Introduction
           section:
