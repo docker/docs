@@ -37,23 +37,45 @@ set-up and configuration. You may want to take a look at the
 methodology to get a feel for the motivations of running containers in such a
 stateless fashion.
 
-### Use a .dockerignore file
+### Build context
 
-The current working directory where you are located when you issue a
-`docker build` command is called the _build context_, and the `Dockerfile` must
-be somewhere within this build context. By default, it is assumed to be in the
-current directory, but you can specify a different location by using the `-f`
-flag. Regardless of where the `Dockerfile` actually lives, all of the recursive
-contents of files and directories in the current directory are sent to the
-Docker daemon as the _build context_. Inadvertently including files that are not
-necessary for building the image results in a larger build context and larger
-image size. These in turn can increase build time, time to pull and push the
-image, and the runtime size of containers. To see how big your build context
-is, look for a message like the following, when you build your `Dockerfile`.
+When you issue a `docker build` command, the current working directory is called
+the _build context_. By default, the Dockerfile is assumed to be located here,
+but you can specify a different location with the file flag (`-f`). Regardless
+of where the `Dockerfile` actually lives, all of the recursive contents of files
+and directories in the current directory are sent to the Docker daemon as the
+build context.
+
+> Build context example
+>
+> Create a directory for the build context and `cd` into it. Write "hello" into a text file named `hello` and create a Dockerfile that runs `cat` on it. Build the image from within the build context (`.`):
+>
+> ```shell
+> mkdir myproject && cd myproject
+> echo "hello" > hello
+> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> docker build -t helloapp:v1 .
+> ```
+>
+> Now move `Dockerfile` and `hello` into separate directories and build a second version of the image (without relying on cache from the last build). Use the `-f` to point to the Dockerfile and specify the directory of the build context:
+>
+> ```shell
+> mkdir -p dockerfiles context
+> mv Dockerfile dockerfiles && mv hello context
+> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```
+
+Inadvertently including files that are not necessary for building an image
+results in a larger build context and larger image size. This can increase build
+time, time to pull and push the image, and the runtime size of containers. To
+see how big your build context is, look for a message like this when building
+your `Dockerfile`:
 
 ```none
 Sending build context to Docker daemon  187.8MB
 ```
+
+### Use a .dockerignore file
 
 To exclude files which are not relevant to the build, without restructuring your
 source repository, use a `.dockerignore` file. This file supports
