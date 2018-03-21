@@ -200,7 +200,7 @@ docker --version
 docker version
 docker info
 
-## Excecute Docker image
+## Execute Docker image
 docker run hello-world
 
 ## List Docker images
