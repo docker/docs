@@ -1715,43 +1715,6 @@ manuals:
             path: /ee/ucp/interlock/usage/
           - title: Set a default service
             path: /ee/ucp/interlock/usage/default-service/
-
-          - title: Service labels reference
-            path: /ee/ucp/interlock/usage/labels-reference/
-
-
-        - sectiontitle: Introduction
-          section:
-          - title: What is Layer 7 routing
-            path: /ee/ucp/interlock/intro/
-          - title: Architecture
-            path: /ee/ucp/interlock/intro/architecture/
-        - sectiontitle: Deployment
-          section:
-          - title: Get started
-            path: /ee/ucp/interlock/install/
-          - title: Manual deployment
-            path: /ee/ucp/interlock/install/manual-deployment/
-          - title: Production
-            path: /ee/ucp/interlock/install/production/
-          - title: Offline install
-            path: /ee/ucp/interlock/install/offline/
-        - sectiontitle: Configuration
-          section:
-          - title: Layer 7 routing
-            path: /ee/ucp/interlock/configuration/
-          - title: Service labels
-            path: /ee/ucp/interlock/configuration/service-labels/
-        - sectiontitle: Extensions
-          section:
-          - title: Nginx
-            path: /ee/ucp/interlock/extensions/nginx/
-          - title: HAProxy
-            path: /ee/ucp/interlock/extensions/haproxy/
-        - sectiontitle: Deploy apps with Layer 7 routing
-          section:
-          - title: Basic deployment
-            path: /ee/ucp/interlock/usage/
           - title: Applications with SSL
             path: /ee/ucp/interlock/usage/ssl/
           - title: Application redirects
@@ -1768,12 +1731,8 @@ manuals:
             path: /ee/ucp/interlock/usage/context/
           - title: Host mode networking
             path: /ee/ucp/interlock/usage/host-mode-networking/
-        - sectiontitle: Operations
-          section:
-          - title: Updates
-            path: /ee/ucp/interlock/ops/
-          - title: Tuning
-            path: /ee/ucp/interlock/ops/tuning/
+          - title: Service labels reference
+            path: /ee/ucp/interlock/usage/labels-reference/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Deploy a workload
