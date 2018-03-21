@@ -1,6 +1,7 @@
 
 | Docker version | Maximum API version       | Change log                                                |
 -----------------|---------------------------|-----------------------------------------------------------|
+| 18.03          | [1.37](/engine/api/v1.37/)| [changes](/engine/api/version-history/#v1-37-api-changes) |
 | 18.02          | [1.36](/engine/api/v1.36/)| [changes](/engine/api/version-history/#v1-36-api-changes) |
 | 17.12          | [1.35](/engine/api/v1.35/)| [changes](/engine/api/version-history/#v1-35-api-changes) |
 | 17.11          | [1.34](/engine/api/v1.34/)| [changes](/engine/api/version-history/#v1-34-api-changes) |
