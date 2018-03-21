@@ -14,7 +14,7 @@ use.
 
 Docker for {{Arch}}'s networking can work when attached to a VPN. To do this,
 Docker for {{Arch}} intercepts traffic from the containers and injects it into
-Windows as if it originated from the Docker application.
+{{Arch}} as if it originated from the Docker application.
 
 ### Port Mapping
 

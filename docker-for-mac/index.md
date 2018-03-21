@@ -176,7 +176,7 @@ pulling containers.
 
 ![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
 
-![macOS Proxy Settings](images/proxy-settings.png){:width="400px"}
+![macOS Proxy Settings](images/proxy-settings.png){:width="600px"}
 
 When you start a container, your proxy settings propagate into
 the containers. For example:
