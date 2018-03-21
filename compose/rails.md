@@ -30,7 +30,7 @@ Dockerfile consists of:
     ENTRYPOINT ["entrypoint.sh"]
     EXPOSE 3000
 
-    # Listen on 0.0.0.0 so that it's accessible outside the container.
+    # Start the main process.
     CMD ["rails", "server", "-b", "0.0.0.0"]
 
 That'll put your application code inside an image that builds a container
