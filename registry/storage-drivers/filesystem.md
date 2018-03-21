@@ -10,7 +10,9 @@ An implementation of the `storagedriver.StorageDriver` interface which uses the 
 
 * `rootdirectory`: (optional) The absolute path to a root directory tree in which
 to store all registry files. The registry stores all its data here so make sure
-there is adequate space available. Defaults to `/var/lib/registry`.
+there is adequate space available. Defaults to `/var/lib/registry`. If the directory
+does not exist, it will be created with the `0777` permission. Make sure to use `umask`
+if this permission is problematic.
 * `maxthreads`: (optional) The maximum number of simultaneous blocking filesystem
 operations permitted within the registry. Each operation spawns a new thread and
 may cause thread exhaustion issues if many are done in parallel. Defaults to
