@@ -22,7 +22,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ch of these commands has the same result.
+  Each of these commands has the same result.
 
   ```bash
   $ docker export red_panda > latest.tar

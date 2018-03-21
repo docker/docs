@@ -587,34 +587,42 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   docker service create --mode global --name redis2 redis:3.0.6\n\na8q9dasaafudfs8q8w32udass\n\n$
   docker service ls\n\nID            NAME    MODE        REPLICAS  IMAGE\ndmu1ept4cxcf
   \ redis   replicated  1/1       redis:3.0.6\na8q9dasaafud  redis2  global      1/1
-  \      redis:3.0.6\n```\n\n### Create a service with 5 replica tasks (--replicas)\n\nUse
-  the `--replicas` flag to set the number of replica tasks for a replicated\nservice.
-  The following command creates a `redis` service with `5` replica tasks:\n\n```bash\n$
-  docker service create --name redis --replicas=5 redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nThe
-  above command sets the *desired* number of tasks for the service. Even\nthough the
-  command returns immediately, actual scaling of the service may take\nsome time.
-  The `REPLICAS` column shows both the *actual* and *desired* number\nof replica tasks
-  for the service.\n\nIn the following example the desired state is  `5` replicas,
-  but the current\nnumber of `RUNNING` tasks is `3`:\n\n```bash\n$ docker service
-  ls\n\nID            NAME   MODE        REPLICAS  IMAGE\n4cdgfyky7ozw  redis  replicated
-  \ 3/5       redis:3.0.7\n```\n\nOnce all the tasks are created and `RUNNING`, the
-  actual number of tasks is\nequal to the desired number:\n\n```bash\n$ docker service
-  ls\n\nID            NAME   MODE        REPLICAS  IMAGE\n4cdgfyky7ozw  redis  replicated
-  \ 5/5       redis:3.0.7\n```\n\n### Create a service with secrets\n\nUse the `--secret`
-  flag to give a container access to a\n[secret](secret_create.md).\n\nCreate a service
-  specifying a secret:\n\n```bash\n$ docker service create --name redis --secret secret.json
-  redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nCreate a service specifying the
-  secret, target, user/group ID, and mode:\n\n```bash\n$ docker service create --name
-  redis \\\n    --secret source=ssh-key,target=ssh \\\n    --secret source=app-key,target=app,uid=1000,gid=1001,mode=0400
-  \\\n    redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nTo grant a service access
-  to multiple secrets, use multiple `--secret` flags.\n\nSecrets are located in `/run/secrets`
-  in the container.  If no target is\nspecified, the name of the secret will be used
-  as the in memory file in the\ncontainer.  If a target is specified, that will be
-  the filename.  In the\nexample above, two files will be created: `/run/secrets/ssh`
-  and\n`/run/secrets/app` for each of the secret targets specified.\n\n### Create
-  a service with a rolling update policy\n\n```bash\n$ docker service create \\\n
-  \ --replicas 10 \\\n  --name redis \\\n  --update-delay 10s \\\n  --update-parallelism
-  2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
+  \      redis:3.0.6\n```\n\n#### Create a service using an image on a private registry\n\nIf
+  your image is available on a private registry which requires login, use the\n`--with-registry-auth`
+  flag with `docker service create`, after logging in. If\nyour image is stored on
+  `registry.example.com`, which is a private registry, use\na command like the following:\n\n```bash\n$
+  docker login registry.example.com\n\n$ docker service  create \\\n  --with-registry-auth
+  \\\n  --name my_service \\\n  registry.example.com/acme/my_image:latest\n```\n\nThis
+  passes the login token from your local client to the swarm nodes where the\nservice
+  is deployed, using the encrypted WAL logs. With this information, the\nnodes are
+  able to log into the registry and pull the image.\n\n### Create a service with 5
+  replica tasks (--replicas)\n\nUse the `--replicas` flag to set the number of replica
+  tasks for a replicated\nservice. The following command creates a `redis` service
+  with `5` replica tasks:\n\n```bash\n$ docker service create --name redis --replicas=5
+  redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nThe above command sets the *desired*
+  number of tasks for the service. Even\nthough the command returns immediately, actual
+  scaling of the service may take\nsome time. The `REPLICAS` column shows both the
+  *actual* and *desired* number\nof replica tasks for the service.\n\nIn the following
+  example the desired state is  `5` replicas, but the current\nnumber of `RUNNING`
+  tasks is `3`:\n\n```bash\n$ docker service ls\n\nID            NAME   MODE        REPLICAS
+  \ IMAGE\n4cdgfyky7ozw  redis  replicated  3/5       redis:3.0.7\n```\n\nOnce all
+  the tasks are created and `RUNNING`, the actual number of tasks is\nequal to the
+  desired number:\n\n```bash\n$ docker service ls\n\nID            NAME   MODE        REPLICAS
+  \ IMAGE\n4cdgfyky7ozw  redis  replicated  5/5       redis:3.0.7\n```\n\n### Create
+  a service with secrets\n\nUse the `--secret` flag to give a container access to
+  a\n[secret](secret_create.md).\n\nCreate a service specifying a secret:\n\n```bash\n$
+  docker service create --name redis --secret secret.json redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nCreate
+  a service specifying the secret, target, user/group ID, and mode:\n\n```bash\n$
+  docker service create --name redis \\\n    --secret source=ssh-key,target=ssh \\\n
+  \   --secret source=app-key,target=app,uid=1000,gid=1001,mode=0400 \\\n    redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nTo
+  grant a service access to multiple secrets, use multiple `--secret` flags.\n\nSecrets
+  are located in `/run/secrets` in the container.  If no target is\nspecified, the
+  name of the secret will be used as the in memory file in the\ncontainer.  If a target
+  is specified, that will be the filename.  In the\nexample above, two files will
+  be created: `/run/secrets/ssh` and\n`/run/secrets/app` for each of the secret targets
+  specified.\n\n### Create a service with a rolling update policy\n\n```bash\n$ docker
+  service create \\\n  --replicas 10 \\\n  --name redis \\\n  --update-delay 10s \\\n
+  \ --update-parallelism 2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
   the scheduler updates a\nmaximum of 2 tasks at a time, with `10s` between updates.
   For more information,\nrefer to the [rolling updates\ntutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/).\n\n###
   Set environment variables (-e, --env)\n\nThis sets an environmental variable for
@@ -855,41 +863,45 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   node the docker network create\ncommand:\n\n```bash\n$ docker network create --driver
   overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter you create an overlay
   network in swarm mode, all manager nodes have\naccess to the network.\n\nWhen you
-  create a service and pass the --network flag to attach the service to\nthe overlay
+  create a service and pass the `--network` flag to attach the service to\nthe overlay
   network:\n\n```bash\n$ docker service create \\\n  --replicas 3 \\\n  --network
   my-network \\\n  --name my-web \\\n  nginx\n\n716thylsndqma81j6kkkb5aus\n```\n\nThe
   swarm extends my-network to each node running the service.\n\nContainers on the
-  same network can access each other using\n[service discovery](https://docs.docker.com/engine/swarm/networking/#use-swarm-mode-service-discovery).\n\n###
-  Publish service ports externally to the swarm (-p, --publish)\n\nYou can publish
-  service ports to make them available externally to the swarm\nusing the `--publish`
-  flag. The `--publish` flag can take two different styles\nof arguments. The short
-  version is positional, and allows you to specify the\npublished port and target
-  port separated by a colon.\n\n```bash\n$ docker service create --name my_web --replicas
-  3 --publish 8080:80 nginx\n```\n\nThere is also a long format, which is easier to
-  read and allows you to specify\nmore options. The long format is preferred. You
-  cannot specify the service's\nmode when using the short format. Here is an example
-  of using the long format\nfor the same service as above:\n\n```bash\n$ docker service
-  create --name my_web --replicas 3 --publish published=8080,target=80 nginx\n```\n\nThe
-  options you can specify are:\n\n<table>\n<thead>\n<tr>\n  <th>Option</th>\n  <th>Short
-  syntax</th>\n  <th>Long syntax</th>\n  <th>Description</th>\n</tr>\n</thead>\n<tr>\n
-  \ <td>published and target port </td>\n  <td><tt></tt></td>\n  <td><tt></tt></td>\n
-  \ <td></td>\n</tr>\n<tr>\n  <td>protocol</td>\n  <td><tt>--publish 8080:80</tt></td>\n
-  \ <td><tt>--publish published=8080,target=80</tt></td>\n  <td><p>\n    The port
-  to publish the service to on the routing mesh or directly on\n    the node, and
-  the target port on the container.\n  </p></td>\n</tr>\n<tr>\n  <td>mode</td>\n  <td>Not
-  possible to set using short syntax.</td>\n  <td><tt>--publish published=8080,target=80,mode=host</tt></td>\n
-  \ <td><p>\n    The mode to use for binding the port, either `ingress` or `host`.
-  Defaults\n    to `ingress` to use the routing mesh.\n  </p></td>\n</tr>\n<tr>\n
+  same network can access each other using\n[service discovery](https://docs.docker.com/engine/swarm/networking/#use-swarm-mode-service-discovery).\n\nLong
+  form syntax of `--network` allows to specify list of aliases and driver options:
+  \ \n`--network name=my-network,alias=web1,driver-opt=field1=value1`\n\n### Publish
+  service ports externally to the swarm (-p, --publish)\n\nYou can publish service
+  ports to make them available externally to the swarm\nusing the `--publish` flag.
+  The `--publish` flag can take two different styles\nof arguments. The short version
+  is positional, and allows you to specify the\npublished port and target port separated
+  by a colon.\n\n```bash\n$ docker service create --name my_web --replicas 3 --publish
+  8080:80 nginx\n```\n\nThere is also a long format, which is easier to read and allows
+  you to specify\nmore options. The long format is preferred. You cannot specify the
+  service's\nmode when using the short format. Here is an example of using the long
+  format\nfor the same service as above:\n\n```bash\n$ docker service create --name
+  my_web --replicas 3 --publish published=8080,target=80 nginx\n```\n\nThe options
+  you can specify are:\n\n<table>\n<thead>\n<tr>\n  <th>Option</th>\n  <th>Short syntax</th>\n
+  \ <th>Long syntax</th>\n  <th>Description</th>\n</tr>\n</thead>\n<tr>\n  <td>published
+  and target port</td>\n  <td><tt>--publish 8080:80</tt></td>\n  <td><tt>--publish
+  published=8080,target=80</tt></td>\n  <td><p>\n    The target port within the container
+  and the port to map it to on the\n    nodes, using the routing mesh (<tt>ingress</tt>)
+  or host-level networking.\n    More options are available, later in this table.
+  The key-value syntax is\n    preferred, because it is somewhat self-documenting.\n
+  \ </p></td>\n</tr>\n<tr>\n  <td>mode</td>\n  <td>Not possible to set using short
+  syntax.</td>\n  <td><tt>--publish published=8080,target=80,mode=host</tt></td>\n
+  \ <td><p>\n    The mode to use for binding the port, either <tt>ingress</tt> or
+  <tt>host</tt>.\n    Defaults to <tt>ingress</tt> to use the routing mesh.\n  </p></td>\n</tr>\n<tr>\n
   \ <td>protocol</td>\n  <td><tt>--publish 8080:80/tcp</tt></td>\n  <td><tt>--publish
   published=8080,target=80,protocol=tcp</tt></td>\n  <td><p>\n    The protocol to
-  use, either `tcp` or `udp`. Defaults to `tcp`. To bind a\n    port for both protocols,
-  specify the `-p` or `--publish` flag twice.\n  </p></td>\n</tr>\n</table>\n\nWhen
-  you publish a service port using `ingres` mode, the swarm routing mesh\nmakes the
-  service accessible at the published port on every node regardless if\nthere is a
-  task for the service running on the node. If you use `host` mode,\nthe port is only
-  bound on nodes where the service is running, and a given port\non a node can only
-  be bound once. You can only set the publication mode using\nthe long syntax. For
-  more information refer to\n[Use swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/).\n\n###
+  use, <tt>tcp</tt> , <tt>udp</tt>, or <tt>sctp</tt>. Defaults to\n    <tt>tcp</tt>.
+  To bind a port for both protocols, specify the <tt>-p</tt> or\n    <tt>--publish</tt>
+  flag twice.\n  </p></td>\n</tr>\n</table>\n\nWhen you publish a service port using
+  `ingress` mode, the swarm routing mesh\nmakes the service accessible at the published
+  port on every node regardless if\nthere is a task for the service running on the
+  node. If you use `host` mode,\nthe port is only bound on nodes where the service
+  is running, and a given port\non a node can only be bound once. You can only set
+  the publication mode using\nthe long syntax. For more information refer to\n[Use
+  swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/).\n\n###
   Provide credential specs for managed service accounts (Windows only)\n\nThis option
   is only used for services using Windows containers. The\n`--credential-spec` must
   be in the format `file://<filename>` or\n`registry://<value-name>`.\n\nWhen using
@@ -921,8 +933,8 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   \ 2e7a8a9c4da2  Running        Running about a minute ago\n\n$ docker inspect --format=\"{{.Config.Hostname}}\"
   2e7a8a9c4da2-wo41w8hg8qanxwjwsg4kxpprj-hosttempl\n\nx3ti0erg11rjpg64m75kej2mz-hosttempl\n```\n\n###
   Specify isolation mode (Windows)\n\nBy default, tasks scheduled on Windows nodes
-  are run using the default isolation mode \nconfigured for this particular node.
-  To force a specific isolation mode, you can use \nthe `--isolation` flag: \n\n```bash\n$
+  are run using the default isolation mode\nconfigured for this particular node. To
+  force a specific isolation mode, you can use\nthe `--isolation` flag:\n\n```bash\n$
   docker service create --name myservice --isolation=process microsoft/nanoserver\n```\n\nSupported
   isolation modes on Windows are:\n- `default`: use default settings specified on
   the node running the task\n- `process`: use process isolation (Windows server only)\n-

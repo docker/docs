@@ -12,13 +12,20 @@ options:
   description: Path to a Distributed Application Bundle file
   deprecated: false
   experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: compose-file
   shorthand: c
-  value_type: string
+  value_type: stringSlice
+  default_value: '[]'
   description: Path to a Compose file
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: prune
   value_type: bool
   default_value: "false"
@@ -26,6 +33,9 @@ options:
   deprecated: false
   min_api_version: "1.27"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: resolve-image
   value_type: string
   default_value: always
@@ -34,12 +44,18 @@ options:
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
   description: Send registry authentication details to Swarm agents
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 examples: |-
   ### Compose file
 
@@ -104,4 +120,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: true
+experimentalcli: false
+kubernetes: false
+swarm: true
 
