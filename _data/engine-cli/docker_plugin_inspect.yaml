@@ -13,9 +13,6 @@ options:
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 examples: |-
   ```none
   $ docker plugin inspect tiborvass/sample-volume-plugin:latest
@@ -139,7 +136,4 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 

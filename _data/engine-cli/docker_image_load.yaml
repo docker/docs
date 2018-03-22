@@ -11,9 +11,6 @@ options:
   description: Read from tar archive file, instead of STDIN
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -21,12 +18,6 @@ options:
   description: Suppress the load output
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 deprecated: false
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 

@@ -14,9 +14,6 @@ options:
   description: Compress the context using gzip
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 examples: |-
   The following example shows how to create a sample `plugin`.
 
@@ -41,7 +38,4 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 
