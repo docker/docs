@@ -14,9 +14,6 @@ options:
   description: Write to a file, instead of STDOUT
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 examples: |-
   ### Create a backup that can then be used with `docker load`.
 
@@ -47,7 +44,4 @@ examples: |-
   ```
 deprecated: false
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 

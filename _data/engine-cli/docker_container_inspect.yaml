@@ -11,9 +11,6 @@ options:
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 - option: size
   shorthand: s
   value_type: bool
@@ -21,12 +18,6 @@ options:
   description: Display total file sizes
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 deprecated: false
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 

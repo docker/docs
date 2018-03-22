@@ -69,27 +69,18 @@ options:
   description: Override the key sequence for detaching a container
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 - option: no-stdin
   value_type: bool
   default_value: "false"
   description: Do not attach STDIN
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 - option: sig-proxy
   value_type: bool
   default_value: "true"
   description: Proxy all received signals to the process
   deprecated: false
   experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 examples: |-
   ### Attach to and detach from a running container
 
@@ -160,7 +151,4 @@ examples: |-
   ```
 deprecated: false
 experimental: false
-experimentalcli: false
-kubernetes: false
-swarm: false
 
