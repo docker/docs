@@ -63,7 +63,6 @@ adopted as quickly for consistency and compatibility reasons.
 
 ### Swarm mode
 
-* Don't delete tasks until they're actually removed by the agent [docker/swarmkit#2461](https://github.com/docker/swarmkit/pull/2461)
 * Add required call to allocate VIPs when endpoints are restored [docker/swarmkit#2468](https://github.com/docker/swarmkit/pull/2468)
 - Synchronize Dispatcher.Stop() with incoming rpcs [docker/swarmkit#2524](https://github.com/docker/swarmkit/pull/2524)
 - Fix IP overlap with empty EndpointSpec [docker/swarmkit#2511](https://github.com/docker/swarmkit/pull/2511)
