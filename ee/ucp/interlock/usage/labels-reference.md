@@ -1,8 +1,8 @@
 ---
 title: Layer 7 routing labels reference
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn about the labels you can use in your swarm services to route
+  layer 7 traffic to them.
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false

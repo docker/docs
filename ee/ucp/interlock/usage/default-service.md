@@ -52,6 +52,6 @@ docker stack deploy --compose-file docker-compose.yml demo
 Once users try to access a route that's not configured, they are directed
 to this demo service.
 
-![Custom default page](../../images/interlock-default-service-1.png){: .with-border}
+![Custom default page](../../images/interlock-default-service-2.png){: .with-border}
 
 {% endif %}

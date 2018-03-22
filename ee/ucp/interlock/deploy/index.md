@@ -1,8 +1,8 @@
 ---
 title: Enable ayer 7 routing
-description: Learn about Layer 7 routing, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, layer 7, routing, load balancing
+description: Learn how to enable the layer 7 routing solution for UCP, that allows
+  you to route traffic to swarm services.
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false

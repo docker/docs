@@ -1,8 +1,8 @@
 ---
 title: Application redirects
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn how to implement redirects using swarm services and the
+  layer 7 routing solution for UCP.
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
