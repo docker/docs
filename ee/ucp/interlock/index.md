@@ -1,18 +1,10 @@
 ---
 title: Layer 7 routing overview
-description: Learn about Layer 7 routing, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, routing, proxy
+description: Learn how to route layer 7 traffic to your swarm services
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
-next_steps:
-- path: ops/
-  title: Updates
-- path: ops/tuning/
-  title: Tuning
-redirect_from:
-  - /datacenter/ucp/3.0/guides/interlock/
 ---
 {% if include.version=="ucp-3.0" %}
 

@@ -1,8 +1,7 @@
 ---
 title: Layer 7 routing configuration reference
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn the configuration options for the UCP layer 7 routing solution
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false

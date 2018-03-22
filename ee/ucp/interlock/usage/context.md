@@ -1,8 +1,8 @@
 ---
 title: Context/path based routing
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn how to do route traffic to your Docker swarm services based
+  on a url path
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false

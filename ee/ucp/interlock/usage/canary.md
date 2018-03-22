@@ -1,8 +1,7 @@
 ---
 title: Canary application instances
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn how to do canary deployments for your Docker swarm services
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false

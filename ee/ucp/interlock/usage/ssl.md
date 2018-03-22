@@ -1,8 +1,8 @@
 ---
 title: Applications with SSL
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
-keywords: ucp, interlock, load balancing
+description: Learn how to configure your swarm services with TLS using the layer
+  7 routing solution for UCP.
+keywords: routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
