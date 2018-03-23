@@ -1,0 +1,32 @@
+command: docker manifest create
+short: Create a local manifest list for annotating and pushing to a registry
+long: Create a local manifest list for annotating and pushing to a registry
+usage: docker manifest create MANFEST_LIST MANIFEST [MANIFEST...]
+pname: docker manifest
+plink: docker_manifest.yaml
+options:
+- option: amend
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Amend an existing manifest list
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: insecure
+  value_type: bool
+  default_value: "false"
+  description: allow communication with an insecure registry
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

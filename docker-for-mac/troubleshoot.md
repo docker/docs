@@ -19,56 +19,31 @@ technical support for various subscription levels.
 ## Diagnose problems, send feedback, and create GitHub issues
 
 If you encounter problems for which you do not find solutions in this
-documentation, [Docker for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
-or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
-can help you troubleshoot the log data.
+documentation, on [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
+the log data.
 
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+Choose ![whale menu](images/whale-x.png){: .inline} -->
 **Diagnose & Feedback** from the menu bar.
 
-![Diagnose problems](images/settings-diagnose.png)
+![Diagnose & Feedback](images/diagnose-feedback.png)
 
-You can choose to run diagnostics only, or diagnose and send the results to the
-Docker Team:
+Select **Diagnose**.  It runs diagnostics, shows results, and uploads the
+results to Docker.  A diagnostic ID is generated, which must be provided when
+communicating with the Docker Team.  Optionally, you can open an issue on GitHub
+using the uploaded results and ID as a basis.
 
-* **Diagnose Only** - Runs diagnostics, and shows results locally. (Results are not sent to Docker, and no ID is generated.)
+![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png)
 
-![Diagnostic results only](images/settings-diagnostic-results-only.png)
-
-* **Diagnose & Upload** - Runs diagnostics, shows results, and auto-uploads the
-diagnostic results to Docker. A diagnostic ID is auto-generated. You can refer
-to this ID when communicating with the Docker Team. Optionally, you can open
-an issue on GitHub using the uploaded results and ID as a basis.
-
-![Diagnostics & Feedback](images/settings-diagnose-id.png)
-
-If you click **Open Issues**, this opens [Docker for Mac issues on
+If you click **Report an issue**, this opens [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
-“create new issue” template prepopulated with the following:
+“create new issue” template, to be completed before submission.
 
-* ID and summary of the diagnostic you just ran
+![issue template](images/issues-template.png)
 
-* System and version details
-
-* Sections where you can fill in a description of expected and actual behavior,
-  and steps to reproduce the issue
-
-![Create issue on GitHub](images/diagnose-issue.png)
-
-You can also create a new issue directly on GitHub at
-[https://github.com/docker/for-mac/issues](https://github.com/docker/for-mac/issues).
-(The README for the repository is [here](https://github.com/docker/for-mac).)
-
-Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or
-right here &#9786;) to get a "create new issue" template prepopulated with
-sections for the ID and summary of your diagnostics, system and version details,
-description of expected and actual behavior, and steps to reproduce the issue.
-
-![issue template](images/diagnose-d4mac-issues-template.png)
 
 <a name="logs"></a>
-
 ## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
@@ -140,7 +115,7 @@ As well as on the registry. For example:
 ```
 
 For more about using client and server side certificates, see [Adding
-TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+TLS certificates](index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
@@ -160,10 +135,10 @@ in the FAQs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service cannot
 start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
-need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
+need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
+`/Users` directory. Go to ![whale menu](images/whale-x.png){:
 .inline} --> **Preferences** --> **File sharing** and share the drive that
 contains the Dockerfile and volume.
 
@@ -201,7 +176,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
-  application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+  application ( ![whale menu](images/whale-x.png){: .inline} -->
   **Quit Docker**). Otherwise, you get an "application in use" error when you
   try to copy the new app from the `.dmg` to `/Applications`.
 
@@ -278,7 +253,7 @@ know before you install](install.md#what-to-know-before-you-install).
   resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in ![whale
-  menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This
+  menu](images/whale-x.png){: .inline} --> **Preferences**. This
   is related to a set of issues with Docker helper, registration, and
   versioning.
 

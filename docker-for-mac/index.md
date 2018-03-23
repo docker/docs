@@ -90,13 +90,13 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 
 ## Preferences menu
 
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
+Choose ![whale menu](images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
 
 ![Docker context menu](images/menu/d4m-menu-prefs.png){:width="250px"}
 
-### General tab
+### General
 
-![Preferences](/docker-for-mac/images/menu/d4m-menu-prefs-general.png){:width="400px"}
+![Preferences](images/menu/d4m-menu-prefs-general.png){:width="400px"}
 
 Gneral settings are:
 
@@ -105,7 +105,7 @@ Gneral settings are:
 - **Automatically check for updates** notifies you when an update is available.
   Click **OK** to accept and install updates (or cancel to keep the current
   version). If you disable this option, you can still find out about updates
-  manually by choosing ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
+  manually by choosing ![whale menu](images/whale-x.png){: .inline} -> **Check for Updates**.
 
 - **Include VM in Time Machine backups** backs up the Docker for Mac virtual machine. (Disabled by default.)
 
@@ -113,7 +113,7 @@ Gneral settings are:
 
 - **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage data to Docker. This information helps Docker improve the application and get more context for troubleshooting problems. (Enabled by default.)
 
-### File sharing tab
+### File sharing
 
 Choose which local directories to share with your containers. File sharing is
 required for volume mounting if the project lives outside of the `/Users`
@@ -139,7 +139,7 @@ For more information, see:
 - [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-### Advanced tab
+### Advanced
 
 On the Advanced tab, you can limit resources available to Docker.
 
@@ -157,7 +157,7 @@ to decrease it, lower the number.
 
 **Swap**: Configure swap file size as needed. The default is 1 GB.
 
-### Disk tab
+### Disk
 
 Specify the **Disk image location** of the Linux volume, where containers and images are stored.
 
@@ -165,27 +165,49 @@ You can also move the disk image location. If you attempt to move the disk image
 to a location that already has one, you get a prompt asking if you want to use
 the existing image or replace it.
 
-![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
+![Disk settings](images/menu/d4m-menu-prefs-disk.png){:width="400px"}
 
-### Proxies tab
+### Proxies
 
-Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
-these to Docker and to your containers. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker uses this proxy when pulling
-containers.
+Docker for Mac detects HTTP/HTTPS Proxy Settings from macOS and automatically
+propagates these to Docker and to your containers. For example, if you set your
+proxy settings to `http://proxy.example.com`, Docker uses this proxy when
+pulling containers.
 
-![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
+![Proxies settings](images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
+
+![macOS Proxy Settings](images/proxy-settings.png){:width="600px"}
+
+When you start a container, your proxy settings propagate into
+the containers. For example:
+
+```
+$ docker run -it alpine env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=b7edf988b2b5
+TERM=xterm
+HOME=/root
+HTTP_PROXY=http://proxy.example.com:3128
+http_proxy=http://proxy.example.com:3128
+no_proxy=*.local, 169.254/16
+```
+
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
+`no_proxy` environment variables are set. When your proxy configuration changes,
+Docker restarts automatically to pick up the new settings. If you have
+containers that you wish to keep running across restarts, you should consider
+using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
 
-### Daemon tab
+### Daemon
 
 You can configure options on the Docker daemon that determine how your containers run.
 
 Select **Basic** to configure the daemon with interactive settings, or select
 **Advanced** to edit the JSON directly.
 
-![Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-basic.png){:width="400px"}
+![Daemon](images/menu/d4m-menu-prefs-daemon-basic.png){:width="400px"}
 
 
 #### Experimental features
@@ -215,8 +237,8 @@ or [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md)).
 Add URLs for your insecure registries and registry mirrors on which to host your images.
 
 See also:
-- [How do I add custom CA certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates){:target="_blank" class="_"}
-- [How do I add client certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates){:target="_blank" class="_"}
+- [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates){:target="_blank" class="_"}
+- [How do I add client certificates](faqs.md#how-do-i-client-certificates){:target="_blank" class="_"}
 
 #### Daemon configuration file
 
@@ -226,14 +248,14 @@ list of options, see the Docker Engine [dockerd commandline reference](/engine/r
 Click **Apply & Restart** to save your settings and reboot Docker. Or, to cancel
 changes, click another preference tab, then choose to discard or not apply changes when asked.
 
-![Docker Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
+![Docker Daemon](images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
 
-### Kubernetes tab
+### Kubernetes
 
 **Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge channel.**
 Kubernetes support is not included in Docker for Mac Stable releases. To find
 out more about Stable and Edge channels and how to switch between them, see
-[General configuration](/docker-for-mac/#general){:target="_blank" class="_"}.
+[General configuration](#general){:target="_blank" class="_"}.
 
 Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
 that runs on your Mac, so that you can test deploying your Docker workloads on
@@ -256,7 +278,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply** button.
 
-  ![Enable Kubernetes](/docker-for-mac/images/menu/d4m-menu-prefs-kubernetes.png){: .with-border width="400px"}
+  ![Enable Kubernetes](images/menu/d4m-menu-prefs-kubernetes.png){: .with-border width="400px"}
 
 
   An Internet connection is required. Images required to run the Kubernetes
@@ -266,11 +288,11 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   When Kubernetes is enabled and running, an additional status bar item displays
   at the bottom right of the Docker for Mac Preferences dialog.
 
-  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png){:width="400px"}
+  ![Installation complete](images/kubernetes/kubernetes-install-complete.png){:width="400px"}
 
   The status of Kubernetes shows in the Docker menu and the context points to `docker-for-desktop`.
 
-  ![Docker Menu with Kubernetes](/docker-for-mac/images/menu/d4m-menu-kube-context.png){: .with-border width="400px"}
+  ![Docker Menu with Kubernetes](images/menu/d4m-menu-kube-context.png){: .with-border width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -282,11 +304,11 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with
-  Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md){:target="_blank" class="_"}.
+  Docker for Mac, see [Deploy to Kubernetes](kubernetes.md){:target="_blank" class="_"}.
 
-### Reset tab
+### Reset
 
-Select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
+Select ![whale menu](images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar, then click **Reset** to reset factory
 defaults, restart the Docker daemon, or uninstall.
 
@@ -371,7 +393,7 @@ for Mac `xhyve` virtual machine).
 > effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
-> Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
+> Daemon](index.md#docker-daemon)). Docker for Mac ignores
 > certificates listed under insecure registries, and does not send client
 > certificates. Commands like `docker run` that attempt to pull from the
 > registry produce error messages on the command line, as well as on the
@@ -455,13 +477,13 @@ ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_do
 ## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
+discussion, log on to our [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
 
-To report bugs or problems, log on to [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"}, where you can review
-community reported issues, and file new ones. See [Diagnose problems, send
-feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As
-a part of reporting issues on GitHub, we can help you troubleshoot the log data.
+To report bugs or problems, log on to [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
+where you can review community reported issues, and file new ones.  See [Logs
+and Troubleshooting](troubleshoot.md) for more details.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.

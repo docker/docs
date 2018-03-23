@@ -14,24 +14,36 @@ options:
   description: Local name for plugin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: disable
   value_type: bool
   default_value: "false"
   description: Do not enable the plugin on install
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: disable-content-trust
   value_type: bool
   default_value: "true"
   description: Skip image verification
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: grant-all-permissions
   value_type: bool
   default_value: "false"
   description: Grant all permissions necessary to run the plugin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following example installs `vieus/sshfs` plugin and [sets](plugin_set.md) its
   `DEBUG` environment variable to `1`. To install, `pull` the plugin from Docker
@@ -60,4 +72,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

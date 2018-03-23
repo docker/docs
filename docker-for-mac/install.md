@@ -26,7 +26,7 @@ Both Stable and Edge installers come with <a
 href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">
 experimental features in Docker Engine</a> enabled by default and configurable
 on [Docker Daemon
-preferences](/docker-for-mac/index.md#daemon-experimental-mode) for experimental
+preferences](index.md#daemon-experimental-mode) for experimental
 mode. We recommend that you disable experimental features for apps in
 production.
 
@@ -35,7 +35,7 @@ href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">fe
 to help us as the apps evolve.
 
 For more about Stable and Edge channels, see the
-[FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
+[FAQs](faqs.md#stable-and-edge-channels).
 
 <table style="width:100%">
   <tr>
@@ -136,27 +136,27 @@ for Docker for Mac, and how the two products can coexist.
 1.  Double-click `Docker.dmg` to open the installer, then drag Moby the whale to
     the Applications folder.
 
-      ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
+      ![Install Docker app](images/docker-app-drag.png)
 
 2.  Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
 
-      ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
+      ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
       You are prompted to authorize `Docker.app` with your system password after you launch it.
       Privileged access is needed to install networking components and links to the Docker apps.
 
       The whale in the top status bar indicates that Docker is running, and accessible from a terminal.
 
-      ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
+      ![Whale in menu bar](images/whale-in-menu-bar.png)
 
     If you just installed the app, you also get a success message with suggested
     next steps and a link to this documentation. Click the whale (![whale
-    menu](/docker-for-mac/images/whale-x.png){: .inline}) in the status bar to
+    menu](images/whale-x.png){: .inline}) in the status bar to
     dismiss this popup.
 
-      ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
+      ![Startup information](images/mac-install-success-docker-cloud.png)
 
-3.  Click the whale (![whale menu](/docker-for-mac/images/whale-x.png){: .inline}) to get Preferences and other options.
+3.  Click the whale (![whale menu](images/whale-x.png){: .inline}) to get Preferences and other options.
 
       ![Docker context menu](images/menu/menu.png)
 

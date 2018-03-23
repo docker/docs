@@ -1,7 +1,7 @@
 command: docker inspect
 short: Return low-level information on Docker objects
 long: |-
-  ker inspect provides detailed information on constructs controlled by Docker.
+  Docker inspect provides detailed information on constructs controlled by Docker.
 
   By default, `docker inspect` will render results in a JSON array.
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
@@ -14,6 +14,9 @@ options:
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: size
   shorthand: s
   value_type: bool
@@ -21,11 +24,17 @@ options:
   description: Display total file sizes if the type is container
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: type
   value_type: string
   description: Return JSON for specified type
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Get an instance's IP address
 
@@ -89,4 +98,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

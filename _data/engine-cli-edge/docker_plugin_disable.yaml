@@ -1,7 +1,7 @@
 command: docker plugin disable
 short: Disable a plugin
 long: |-
-  ables a plugin. The plugin must be installed before it can be disabled,
+  Disables a plugin. The plugin must be installed before it can be disabled,
   see [`docker plugin install`](plugin_install.md). Without the `-f` option,
   a plugin that has references (e.g., volumes, networks) cannot be disabled.
 usage: docker plugin disable [OPTIONS] PLUGIN

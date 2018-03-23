@@ -17,6 +17,9 @@ options:
   description: Force the removal of an active plugin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following example disables and removes the `sample-volume-plugin:latest`
   plugin:
@@ -33,4 +36,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

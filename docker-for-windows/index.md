@@ -25,7 +25,7 @@ and edge channels, system requirements, and download/install information.
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
-## Check versions of Docker Engine, Compose, and Machine
+## Check versions
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
@@ -40,7 +40,7 @@ PS C:\Users\Docker> docker-machine --version
 docker-machine version 0.10.0, build 76ed2a6
 ```
 
-## Explore the application and run examples
+## Explore the application
 
 The next few steps take you through some examples. These are just suggestions
 for ways to experiment with Docker on your system, check version information,
@@ -237,86 +237,6 @@ and make sure `docker` commands are working properly.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples) are great places to start.
 
-## Set up tab completion in PowerShell
-
-If you would like to have handy tab completion for Docker commands, you can
-install the [`posh-docker`](https://github.com/samneirinck/posh-docker)
-PowerShell Module as follows.
-
-> Prerequisite Notes
->
-> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
->
-> * Make sure you have administrator permissions to run an elevated PowerShell.
-
-1.  Start an "elevated" PowerShell, running as an administrator.
-
-    To do this, search for PowerShell, right-click, and choose **Run as administrator**.
-
-    ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-
-    When asked if you want to allow this app to make changes to your device,
-    click **Yes**.
-
-2.  Set the
-    [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy)
-    to allow downloaded scripts signed by trusted publishers to run on your
-    computer. To do so, type this at the PowerShell prompt.
-
-    ```ps
-    Set-ExecutionPolicy RemoteSigned
-    ```
-
-    To check that the policy is set properly, run `get-executionpolicy`, which
-    should return `RemoteSigned`.
-
-3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
-
-    ```ps
-    Install-Module posh-docker
-    ```
-
-    Or, to install the module for the current user only, type:
-
-    ```ps
-    Install-Module -Scope CurrentUser posh-docker
-    ```
-
-4.  After installation to enable autocompletion for the current PowerShell only, type:
-
-    ```ps
-    Import-Module posh-docker
-    ```
-
-5.  To make tab completion persistent across all PowerShell sessions, add the
-    command to a `$PROFILE` by typing these commands at the PowerShell prompt.
-
-    ```ps
-    if (-Not (Test-Path $PROFILE)) {
-        New-Item $PROFILE –Type File –Force
-    }
-
-    Add-Content $PROFILE "`nImport-Module posh-docker"
-    ```
-
-    This creates a `$PROFILE` if one does not already exist, and adds this line
-    into the file:
-
-    ```ps
-    Import-Module posh-docker
-    ```
-
-    To check that the file was properly created, or simply edit it manually,
-    type this in PowerShell:
-
-    ```ps
-    Notepad $PROFILE
-    ```
-
-Open a new PowerShell session. Now, when you press tab after typing the first
-few letters, Docker commands such as `start`, `stop`, `run`, and their options,
-along with container and image names should now auto-complete.
-
 ## Docker Settings
 
 When Docker is running, the Docker whale is displayed. By default, the Docker
@@ -330,13 +250,13 @@ arrow on the taskbar to show it.
   right-click an empty portion of the taskbar, select Settings, and choose
   display options through taskbar settings for notifications.
 >
-> ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+> ![whale pinned to taskbar](images/whale-taskbar.png)
 
-![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
+![Showing hidden apps in the taskbar](images/whale-systray.png)
 
 To get a popup menu with application options, right-click the whale:
 
-![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
+![Docker for Windows popup menu](images/config-popup-menu-win.png)
 
 >**Note:** The above example shows a user signed in for integrated
 Docker Cloud access. To learn more about the feature, see
@@ -349,7 +269,7 @@ perform a factory reset.
 
 ### General
 
-![Settings](/docker-for-windows/images/settings-general.png)
+![Settings](images/settings-general.png)
 
 * **Start Docker when you log in** - Automatically start the Docker for Windows
   application upon Windows system login.
@@ -402,7 +322,7 @@ container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volum
 There are a number of issues with using host-mounted volumes and network paths
 for database files. see the troubleshooting topic on [Volume mounts from
 host paths use a nobrl option to override database
-locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
  * You cannot control (`chmod`) permissions on shared volumes for
 deployed containers. Docker for Windows sets permissions to a default value of
@@ -427,7 +347,7 @@ machine that runs Linux containers.
 
 > **Note**: Docker detects if port 445 is closed and shows
 the following message when you try to add a shared drive: ![Port 445
-blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
+blocked](images/drive_sharing_firewall_blocked.png)
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
@@ -447,15 +367,15 @@ example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified drive.
 
 You can select to **Share it**, in which case it is added your Docker for
-Windows [Shared Drives list](/docker-for-windows/index.md#shared-drives) and
+Windows [Shared Drives list](index.md#shared-drives) and
 available to containers. Alternatively, you can opt not to share it by hitting
 Cancel.
 
-![ ](/docker-for-windows/images/shared-drive-on-demand.png)
+![ ](images/shared-drive-on-demand.png)
 
 ### Advanced
 
-![CPU and Memory settings](/docker-for-windows/images/settings-cpu-ram.png)
+![CPU and Memory settings](images/settings-cpu-ram.png)
 
 * **CPUs** - Change the number of processors assigned to the Linux VM.
 
@@ -471,7 +391,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
-![Network settings](/docker-for-windows/images/settings-network.png)
+![Network settings](images/settings-network.png)
 
 > **Note**: Some users reported problems connecting to Docker Hub on Docker for
 > Windows stable version. This would manifest as an error when trying to run
@@ -485,10 +405,12 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Proxies
 
-Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
+Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and
+automatically propagates these to Docker and to your containers.  For example,
+if you set your proxy settings to `http://proxy.example.com`, Docker uses this
+proxy when pulling containers.
 
-![Proxies](/docker-for-windows/images/proxies.png)
+![Proxies](images/proxies.png)
 
 When you start a container, your proxy settings propagate into the containers. For example:
 
@@ -508,7 +430,7 @@ When your proxy configuration changes, Docker restarts automatically to pick up 
 If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
-### Docker daemon
+### Daemon
 
 You can configure options on the Docker daemon that determine how your
 containers run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
@@ -519,9 +441,9 @@ some of the common settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)
-* [Edit the daemon configuration file](#edit-the-daemon-configuration-file)
+* [Daemon configuration file](#daemon-configuration-file)
 
-![Docker Daemon](/docker-for-windows/images/docker-daemon_basic.png)
+![Docker Daemon](images/docker-daemon_basic.png)
 
 #### Experimental mode
 
@@ -578,12 +500,12 @@ registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.)
 
-#### Edit the daemon configuration file
+#### Daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd.md).
 
-![Docker Daemon](/docker-for-windows/images/docker-daemon_advanced.png)
+![Docker Daemon](images/docker-daemon_advanced.png)
 
 For a full list of options on the Docker daemon, see
 [daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine command
@@ -669,7 +591,178 @@ because they do not apply to Windows containers:
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
 
-### Docker Store
+### Kubernetes
+
+**Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
+support is not included in Docker for Windows 18.02 CE Stable.
+
+To find out more about Stable and Edge channels and how to switch between them,
+see [General configuration](#general).
+
+Docker for Windows 18.02 CE Edge includes a standalone Kubernetes server that runs
+on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
+
+The Kubernetes client command, `kubectl`, is included and configured to connect
+to the local Kubernetes server. If you have `kubectl` already installed and
+pointing to some other environment, such as `minikube` or a GKE cluster, be sure
+to change context so that `kubectl` is pointing to `docker-for-desktop`:
+
+```bash
+kubectl config get-contexts
+kubectl config use-context docker-for-desktop
+```
+
+If you installed `kubectl` by another method, and
+experience conflicts, remove it.
+
+- To enable Kubernetes support and install a standalone instance of Kubernetes
+  running as a Docker container, select **Enable Kubernetes** and click the
+  **Apply and restart** button.
+
+  ![Enable Kubernetes](images/kubernetes/kubernetes-enable.png)
+
+  An internet connection is required. Images required to run the Kubernetes
+  server are downloaded and instantiated as containers, and the
+  `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
+
+  When Kubernetes is enabled and running, an additional status bar item displays
+  at the bottom left of the Docker for Windows Preferences dialog.
+
+  ![Kubernetes status](images/kubernetes/kubernetes-status.png)
+
+- By default, Kubernetes containers are hidden from commands like `docker
+  service ls`, because managing them manually is not supported. To make them
+  visible, select **Show system containers (advanced)** and click **Apply and restart**.
+  Most users do not need this option.
+
+- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
+  The Kubernetes containers are stopped and removed, and the
+  `/usr/local/bin/kubectl` command is removed.
+
+  For more about using the Kubernetes integration with
+  Docker for Windows, see [Deploy to Kubernetes](kubernetes.md).
+
+### Reset
+
+![Reset](images/settings-reset.png)
+
+* **Restart Docker** - Shuts down and restarts the Docker application.
+
+* **Reset to Toolbox default machine content** - Imports containers and images
+  from the existing Docker Toolbox machine named `default`. (This option is
+  enabled only if you have Toolbox installed.) The VirtualBox VM is not
+  removed.
+
+* **Reset to factory defaults** - Resets Docker to factory defaults. This is
+  useful in cases where Docker stops working or becomes unresponsive.
+
+## Adding TLS certificates
+
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
+
+To learn more, see [How do I add custom CA
+certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client
+certificates?](faqs.md#how-do-i-add-client-certificates) in
+the FAQs.
+
+## Set up tab completion in PowerShell
+
+If you would like to have handy tab completion for Docker commands, you can
+install the [`posh-docker`](https://github.com/samneirinck/posh-docker)
+PowerShell Module as follows.
+
+> Prerequisite Notes
+>
+> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
+>
+> * Make sure you have administrator permissions to run an elevated PowerShell.
+
+1.  Start an "elevated" PowerShell, running as an administrator.
+
+    To do this, search for PowerShell, right-click, and choose **Run as administrator**.
+
+    ![Run PowerShell as administrator](images/PowerShell-as-admin.png)
+
+    When asked if you want to allow this app to make changes to your device,
+    click **Yes**.
+
+2.  Set the
+    [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy)
+    to allow downloaded scripts signed by trusted publishers to run on your
+    computer. To do so, type this at the PowerShell prompt.
+
+    ```ps
+    Set-ExecutionPolicy RemoteSigned
+    ```
+
+    To check that the policy is set properly, run `get-executionpolicy`, which
+    should return `RemoteSigned`.
+
+3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
+
+    ```ps
+    Install-Module posh-docker
+    ```
+
+    Or, to install the module for the current user only, type:
+
+    ```ps
+    Install-Module -Scope CurrentUser posh-docker
+    ```
+
+4.  After installation to enable autocompletion for the current PowerShell only, type:
+
+    ```ps
+    Import-Module posh-docker
+    ```
+
+5.  To make tab completion persistent across all PowerShell sessions, add the
+    command to a `$PROFILE` by typing these commands at the PowerShell prompt.
+
+    ```ps
+    if (-Not (Test-Path $PROFILE)) {
+        New-Item $PROFILE –Type File –Force
+    }
+
+    Add-Content $PROFILE "`nImport-Module posh-docker"
+    ```
+
+    This creates a `$PROFILE` if one does not already exist, and adds this line
+    into the file:
+
+    ```ps
+    Import-Module posh-docker
+    ```
+
+    To check that the file was properly created, or simply edit it manually,
+    type this in PowerShell:
+
+    ```ps
+    Notepad $PROFILE
+    ```
+
+Open a new PowerShell session. Now, when you press tab after typing the first
+few letters, Docker commands such as `start`, `stop`, `run`, and their options,
+along with container and image names should now auto-complete.
+
+## Give feedback and get help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can
+review community reported issues, and file new ones.  See [Logs and
+Troubleshooting](troubleshoot.md) for more details.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
+
+## Docker Store
 
 Choose **Docker Store** from the Docker for Windows menu to get to the Docker
 app downloads site. [Docker store](https://store.docker.com/) is a component of
@@ -678,7 +771,7 @@ commercial and free software distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-### Docker Cloud
+## Docker Cloud
 
 You can access your [Docker Cloud](/docker-cloud/index.md) account from
 within Docker for Windows.
@@ -702,123 +795,6 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
 Need a direct link to Cloud? [Take me to Docker
 Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
-
-### Kubernetes
-
-**Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
-support is not included in Docker for Windows 18.02 CE Stable.
-
-To find out more about Stable and Edge channels and how to switch between them,
-see [General configuration](/docker-for-windows/#general).
-
-Docker for Windows 18.02 CE Edge includes a standalone Kubernetes server that runs
-on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
-
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-for-desktop`:
-
-```bash
-kubectl config get-contexts
-kubectl config use-context docker-for-desktop
-```
-
-If you installed `kubectl` by another method, and
-experience conflicts, remove it.
-
-- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply and restart** button.
-
-  ![Enable Kubernetes](/docker-for-windows/images/kubernetes/kubernetes-enable.png)
-
-  An internet connection is required. Images required to run the Kubernetes
-  server are downloaded and instantiated as containers, and the
-  `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
-
-  When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom left of the Docker for Windows Preferences dialog.
-
-  ![Kubernetes status](/docker-for-windows/images/kubernetes/kubernetes-status.png)
-
-- By default, Kubernetes containers are hidden from commands like `docker
-  service ls`, because managing them manually is not supported. To make them
-  visible, select **Show system containers (advanced)** and click **Apply and restart**.
-  Most users do not need this option.
-
-- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
-  The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-
-  For more about using the Kubernetes integration with
-  Docker for Windows, see [Deploy to Kubernetes](/docker-for-windows/kubernetes.md).
-
-### Giving feedback and getting help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows).
-
-To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
-
-To give feedback on the documentation or update it yourself, use the Feedback
-options at the bottom of each docs page.
-
-### Diagnose and Feedback
-
-If you encounter problems for which you do not find solutions in this
-documentation, searching [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues) already filed by other users,
-or on the [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
-
-Select **Upload a diagnostic**.
-
-This uploads (sends) the logs to Docker.
-
-![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
-
-To create a new issue directly on GitHub, open
-[Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-in your web browser and follow the instructions in the README. Click
-[New Issue](https://github.com/docker/for-win/issues/new) on that page to get a
-"create new issue" template prepopulated with sections for the ID and summary of
-your diagnostics, system and version details, description of expected and actual
-behavior, and steps to reproduce the issue.
-
-![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
-
-### Reset
-
-![Reset](/docker-for-windows/images/settings-reset.png)
-
-* **Restart Docker** - Shuts down and restarts the Docker application.
-
-* **Reset to Toolbox default machine content** - Imports containers and images
-  from the existing Docker Toolbox machine named `default`. (This option is
-  enabled only if you have Toolbox installed.) The VirtualBox VM is not
-  removed.
-
-* **Reset to factory defaults** - Resets Docker to factory defaults. This is
-  useful in cases where Docker stops working or becomes unresponsive.
-
-## Adding TLS certificates
-
-You can add trusted Certificate Authorities (CAs) (used to verify registry
-server certificates) and client certificates (used to authenticate to
-registries) to your Docker daemon.
-
-To learn more, see [How do I add custom CA
-certificates?](/docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client
-certificates?](/docker-for-windows/faqs.md#how-do-i-add-client-certificates) in
-the FAQs.
 
 ## Where to go next
 
