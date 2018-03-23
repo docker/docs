@@ -19,10 +19,10 @@ technical support for various subscription levels.
 ## Diagnose problems, send feedback, and create GitHub issues
 
 If you encounter problems for which you do not find solutions in this
-documentation, [Docker for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
-or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
-can help you troubleshoot the log data.
+documentation, on [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
+the log data.
 
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
 **Diagnose & Feedback** from the menu bar.

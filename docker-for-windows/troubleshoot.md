@@ -19,9 +19,8 @@ technical support for various subscription levels.
 ## Submitting diagnostics, feedback, and GitHub issues
 
 If you encounter problems for which you do not find solutions in this
-documentation, searching [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues) already filed by other users,
-or on the [Docker for Windows
+documentation, on [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
 troubleshoot the log data.
 
