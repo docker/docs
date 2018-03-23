@@ -24,7 +24,7 @@ GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
 forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
 the log data.
 
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+Choose ![whale menu](images/whale-x.png){: .inline} -->
 **Diagnose & Feedback** from the menu bar.
 
 ![Diagnose & Feedback](images/diagnose-feedback.png)
@@ -115,7 +115,7 @@ As well as on the registry. For example:
 ```
 
 For more about using client and server side certificates, see [Adding
-TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+TLS certificates](index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
@@ -135,10 +135,10 @@ in the FAQs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service cannot
 start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
-need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
+need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
+`/Users` directory. Go to ![whale menu](images/whale-x.png){:
 .inline} --> **Preferences** --> **File sharing** and share the drive that
 contains the Dockerfile and volume.
 
@@ -258,7 +258,7 @@ know before you install](install.md#what-to-know-before-you-install).
     example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only
     workaround action needed for users is to [upgrade to Docker for Mac stable
     v1.12.1 or newer, or Beta 24 or
-    newer](/docker-for-mac/install.md#download-docker-for-mac).
+    newer](install.md#download-docker-for-mac).
 
     On releases with the workaround included to filter out / truncate IPv6
     addresses from the DNS list, the above command should run properly:
@@ -284,7 +284,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
-  application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+  application ( ![whale menu](images/whale-x.png){: .inline} -->
   **Quit Docker**). Otherwise, you get an "application in use" error when you
   try to copy the new app from the `.dmg` to `/Applications`.
 
@@ -354,7 +354,7 @@ know before you install](install.md#what-to-know-before-you-install).
   resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in ![whale
-  menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This
+  menu](images/whale-x.png){: .inline} --> **Preferences**. This
   is related to a set of issues with Docker helper, registration, and
   versioning.
 

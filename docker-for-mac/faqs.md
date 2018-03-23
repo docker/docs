@@ -130,7 +130,7 @@ in [Docker Swarm](/engine/swarm/index.md). A good place to start is the
 ### What if I have problems or questions?
 
 You can find the list of frequent issues in
-[Logs and Troubleshooting](/docker-for-mac/troubleshoot.md).
+[Logs and Troubleshooting](troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on
 [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues) or
@@ -211,7 +211,7 @@ Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
 For full information on adding server and client side certs, see [Adding
-TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+TLS certificates](index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### How do I add client certificates?
@@ -222,7 +222,7 @@ in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 For full information on adding server and client side certs, see [Adding
-TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+TLS certificates](index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### Can I pass through a USB device to a container?

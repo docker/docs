@@ -11,7 +11,7 @@ for two new flags to the [docker run `-v`,
 option, `cached` and `delegated`, that can significantly improve the performance
 of mounted volume access on Docker for Mac. These options begin to solve some of
 the challenges discussed in [Performance issues, solutions, and
-roadmap](/docker-for-mac/osxfs.md#performance-issues-solutions-and-roadmap).
+roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
 > **Tip:** Release notes for Docker CE Edge 17.04 are
 [here](https://github.com/moby/moby/releases/tag/v17.04.0-ce), and the
