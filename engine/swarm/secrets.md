@@ -161,7 +161,7 @@ real-world example, continue to
     secret from, is set to `-`.
 
     ```bash
-    $ echo "This is a secret" | docker secret create my_secret_data -
+    $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 
 2.  Create a `redis` service and grant it access to the secret. By default,
