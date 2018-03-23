@@ -250,13 +250,13 @@ arrow on the taskbar to show it.
   right-click an empty portion of the taskbar, select Settings, and choose
   display options through taskbar settings for notifications.
 >
-> ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+> ![whale pinned to taskbar](images/whale-taskbar.png)
 
-![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
+![Showing hidden apps in the taskbar](images/whale-systray.png)
 
 To get a popup menu with application options, right-click the whale:
 
-![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
+![Docker for Windows popup menu](images/config-popup-menu-win.png)
 
 >**Note:** The above example shows a user signed in for integrated
 Docker Cloud access. To learn more about the feature, see
@@ -269,7 +269,7 @@ perform a factory reset.
 
 ### General
 
-![Settings](/docker-for-windows/images/settings-general.png)
+![Settings](images/settings-general.png)
 
 * **Start Docker when you log in** - Automatically start the Docker for Windows
   application upon Windows system login.
@@ -322,7 +322,7 @@ container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volum
 There are a number of issues with using host-mounted volumes and network paths
 for database files. see the troubleshooting topic on [Volume mounts from
 host paths use a nobrl option to override database
-locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
  * You cannot control (`chmod`) permissions on shared volumes for
 deployed containers. Docker for Windows sets permissions to a default value of
@@ -347,7 +347,7 @@ machine that runs Linux containers.
 
 > **Note**: Docker detects if port 445 is closed and shows
 the following message when you try to add a shared drive: ![Port 445
-blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
+blocked](images/drive_sharing_firewall_blocked.png)
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
@@ -367,15 +367,15 @@ example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified drive.
 
 You can select to **Share it**, in which case it is added your Docker for
-Windows [Shared Drives list](/docker-for-windows/index.md#shared-drives) and
+Windows [Shared Drives list](index.md#shared-drives) and
 available to containers. Alternatively, you can opt not to share it by hitting
 Cancel.
 
-![ ](/docker-for-windows/images/shared-drive-on-demand.png)
+![ ](images/shared-drive-on-demand.png)
 
 ### Advanced
 
-![CPU and Memory settings](/docker-for-windows/images/settings-cpu-ram.png)
+![CPU and Memory settings](images/settings-cpu-ram.png)
 
 * **CPUs** - Change the number of processors assigned to the Linux VM.
 
@@ -391,7 +391,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
-![Network settings](/docker-for-windows/images/settings-network.png)
+![Network settings](images/settings-network.png)
 
 > **Note**: Some users reported problems connecting to Docker Hub on Docker for
 > Windows stable version. This would manifest as an error when trying to run
@@ -410,7 +410,7 @@ automatically propagates these to Docker and to your containers.  For example,
 if you set your proxy settings to `http://proxy.example.com`, Docker uses this
 proxy when pulling containers.
 
-![Proxies](/docker-for-windows/images/proxies.png)
+![Proxies](images/proxies.png)
 
 When you start a container, your proxy settings propagate into the containers. For example:
 
@@ -443,7 +443,7 @@ some of the common settings to make it easier to configure them.
 * [Custom registries](#custom-registries)
 * [Daemon configuration file](#daemon-configuration-file)
 
-![Docker Daemon](/docker-for-windows/images/docker-daemon_basic.png)
+![Docker Daemon](images/docker-daemon_basic.png)
 
 #### Experimental mode
 
@@ -505,7 +505,7 @@ the FAQs.)
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd.md).
 
-![Docker Daemon](/docker-for-windows/images/docker-daemon_advanced.png)
+![Docker Daemon](images/docker-daemon_advanced.png)
 
 For a full list of options on the Docker daemon, see
 [daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine command
@@ -597,7 +597,7 @@ because they do not apply to Windows containers:
 support is not included in Docker for Windows 18.02 CE Stable.
 
 To find out more about Stable and Edge channels and how to switch between them,
-see [General configuration](/docker-for-windows/#general).
+see [General configuration](#general).
 
 Docker for Windows 18.02 CE Edge includes a standalone Kubernetes server that runs
 on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
@@ -619,7 +619,7 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply and restart** button.
 
-  ![Enable Kubernetes](/docker-for-windows/images/kubernetes/kubernetes-enable.png)
+  ![Enable Kubernetes](images/kubernetes/kubernetes-enable.png)
 
   An internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
@@ -628,7 +628,7 @@ experience conflicts, remove it.
   When Kubernetes is enabled and running, an additional status bar item displays
   at the bottom left of the Docker for Windows Preferences dialog.
 
-  ![Kubernetes status](/docker-for-windows/images/kubernetes/kubernetes-status.png)
+  ![Kubernetes status](images/kubernetes/kubernetes-status.png)
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -640,11 +640,11 @@ experience conflicts, remove it.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with
-  Docker for Windows, see [Deploy to Kubernetes](/docker-for-windows/kubernetes.md).
+  Docker for Windows, see [Deploy to Kubernetes](kubernetes.md).
 
 ### Reset
 
-![Reset](/docker-for-windows/images/settings-reset.png)
+![Reset](images/settings-reset.png)
 
 * **Restart Docker** - Shuts down and restarts the Docker application.
 
@@ -663,9 +663,9 @@ server certificates) and client certificates (used to authenticate to
 registries) to your Docker daemon.
 
 To learn more, see [How do I add custom CA
-certificates?](/docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)
+certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
 and [How do I add client
-certificates?](/docker-for-windows/faqs.md#how-do-i-add-client-certificates) in
+certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.
 
 ## Set up tab completion in PowerShell
@@ -684,7 +684,7 @@ PowerShell Module as follows.
 
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
-    ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
+    ![Run PowerShell as administrator](images/PowerShell-as-admin.png)
 
     When asked if you want to allow this app to make changes to your device,
     click **Yes**.
