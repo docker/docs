@@ -10,6 +10,13 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.7 (2018-03-26)
+
+**Bug fixes**
+
+* Core
+  * Fixed an issue where the current state for min tls verison was not detected.
+
 ## Version 2.2.6 (2018-03-19)
 
 **New features**
