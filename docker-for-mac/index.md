@@ -92,11 +92,11 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 
 Choose ![whale menu](images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
 
-![Docker context menu](images/menu/d4m-menu-prefs.png){:width="250px"}
+![Docker context menu](images/menu/prefs.png){:width="250px"}
 
 ### General
 
-![Preferences](images/menu/d4m-menu-prefs-general.png){:width="400px"}
+![Preferences](images/menu/prefs-general.png){:width="400px"}
 
 Gneral settings are:
 
@@ -121,7 +121,7 @@ directory. In that case, share the drive where the Dockerfile and volume are
 located. Otherwise, you get `file not found` or `cannot start service errors at
 runtime`.
 
-![File Sharing](images/menu/d4m-menu-prefs-fileshare.png){:width="400px"}
+![File Sharing](images/menu/prefs-fileshare.png){:width="400px"}
 
 File share settings are:
 
@@ -143,7 +143,7 @@ For more information, see:
 
 On the Advanced tab, you can limit resources available to Docker.
 
-![Advanced Preference settings-advanced](images/menu/d4m-menu-prefs-advanced.png){:width="400px"}
+![Advanced Preference settings-advanced](images/menu/prefs-advanced.png){:width="400px"}
 
 Advanced settings are:
 
@@ -165,7 +165,7 @@ You can also move the disk image location. If you attempt to move the disk image
 to a location that already has one, you get a prompt asking if you want to use
 the existing image or replace it.
 
-![Disk settings](images/menu/d4m-menu-prefs-disk.png){:width="400px"}
+![Disk settings](images/menu/prefs-disk.png){:width="400px"}
 
 ### Proxies
 
@@ -174,7 +174,7 @@ propagates these to Docker and to your containers. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
 
-![Proxies settings](images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
+![Proxies settings](images/menu/prefs-proxies.png){:width="400px"}
 
 ![macOS Proxy Settings](images/proxy-settings.png){:width="600px"}
 
@@ -207,7 +207,7 @@ You can configure options on the Docker daemon that determine how your container
 Select **Basic** to configure the daemon with interactive settings, or select
 **Advanced** to edit the JSON directly.
 
-![Daemon](images/menu/d4m-menu-prefs-daemon-basic.png){:width="400px"}
+![Daemon](images/menu/prefs-daemon-basic.png){:width="400px"}
 
 
 #### Experimental features
@@ -248,7 +248,7 @@ list of options, see the Docker Engine [dockerd commandline reference](/engine/r
 Click **Apply & Restart** to save your settings and reboot Docker. Or, to cancel
 changes, click another preference tab, then choose to discard or not apply changes when asked.
 
-![Docker Daemon](images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
+![Docker Daemon](images/menu/prefs-daemon-adv.png){:width="400px"}
 
 ### Kubernetes
 
@@ -278,7 +278,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply** button.
 
-  ![Enable Kubernetes](images/menu/d4m-menu-prefs-kubernetes.png){: .with-border width="400px"}
+  ![Enable Kubernetes](images/menu/prefs-kubernetes.png){: .with-border width="400px"}
 
 
   An Internet connection is required. Images required to run the Kubernetes
@@ -292,7 +292,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
   The status of Kubernetes shows in the Docker menu and the context points to `docker-for-desktop`.
 
-  ![Docker Menu with Kubernetes](images/menu/d4m-menu-kube-context.png){: .with-border width="400px"}
+  ![Docker Menu with Kubernetes](images/menu/kube-context.png){: .with-border width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -312,7 +312,7 @@ Select ![whale menu](images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar, then click **Reset** to reset factory
 defaults, restart the Docker daemon, or uninstall.
 
-![Uninstall or reset Docker](images/menu/d4m-menu-prefs-reset.png){:width="400px"}
+![Uninstall or reset Docker](images/menu/prefs-reset.png){:width="400px"}
 
 Reset settings are:
 
@@ -505,7 +505,7 @@ You can access your [Docker Cloud](/docker-cloud/index.md){:target="_blank" clas
 
 From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or create one.
 
-![Docker Cloud sign-in](images/menu/d4m-menu-sign-in.png){: .with-border width="250px"}
+![Docker Cloud sign-in](images/menu/sign-in.png){: .with-border width="250px"}
 
 Then use the Docker for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
