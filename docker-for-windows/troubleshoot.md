@@ -540,91 +540,12 @@ when you apply this setting, which could take some time.
 
 We are currently investigating this issue.
 
-#### Networking issues on pre Beta 10 versions
-Docker for Windows Beta 10 and later fixed a number of issues around the
-networking setup. If you still experience networking issue, this may be related
-to previous Docker for Windows installations. In this case, quit Docker
-for Windows and perform the following steps:
-
-##### 1. Remove multiple `DockerNAT` VMswitches
-You might have multiple Internal VMSwitches called `DockerNAT`. You can view all
-VMSwitches either via the `Hyper-V Manager` sub-menu `Virtual Switch Manager` or
-from an elevated Powershell (run as Administrator) prompt by typing
-`Get-VMSwitch`. Simply delete all VMSwitches with `DockerNAT` in the name,
-either via the `Virtual Switch Manager` or by using `Remove-VMSwitch` powershell
-cmdlet.
-
-##### 2. Remove lingering IP addresses
-
-You might have lingering IP addresses on the system. They are supposed to get
-removed when you remove the associated VMSwitches, but sometimes this fails.
-Using `Remove-NetIPAddress 10.0.75.1` in an elevated Powershell prompt should
-remove them.
-
-##### 3. Remove stale NAT configurations
-
-You might have stale NAT configurations on the system. You should remove them
-with `Remove-NetNat DockerNAT` on an elevated Powershell prompt.
-
-##### 4. Remove stale network adapters
-
-You might have stale Network Adapters on the system. You should remove them with
-the following commands on an elevated Powershell prompt:
-
-```
-PS C:\Users\jdoe> $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
-Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
-```
-
-Then you can remove them manually via the `devmgmt.msc` (aka Device Manager).
-You should see them as disabled Hyper-V Virtual Ethernet Adapter under the
-Network Adapter section. A right-click and selecting **uninstall** should remove
-the adapter.
-
 ### NAT/IP configuration
 
 By default, Docker for Windows uses an internal network prefix of
 `10.0.75.0/24`. Should this clash with your normal network setup, you can change
 the prefix from the **Settings** menu. See the [Network](index.md#network) topic
 under [Settings](index.md#docker-settings).
-
-#### NAT/IP configuration issues on pre Beta 15 versions
-
-As of Beta 15, Docker for Windows is no longer using a switch with a NAT
-configuration. The notes below are left here only for older Beta versions.
-
-As of Beta14, networking for Docker for Windows is configurable through the UI.
-See the [Network](index.md#network) topic under
-[Settings](index.md#docker-settings).
-
-By default, Docker for Windows uses an internal Hyper-V switch with a NAT
-configuration with a `10.0.75.0/24` prefix. You can change the prefix used (as
-well as the DNS server) via the **Settings** menu as described in the
-[Network](index.md#network) topic.
-
-If you have additional Hyper-V VMs and they are attached to their own NAT
-prefixes, the prefixes need to be managed carefully, due to limitation of the
-Windows NAT implementation. Specifically, Windows currently only allows a single
-internal NAT prefix. If you need additional prefixes for your other VMs, you can
-create a larger NAT prefix.
-
-To create a larger NAT prefix, do the following.
-
-1. Stop Docker for Windows and remove all NAT prefixes with `Remove-NetNAT`.
-
-2. Create a new shorter NAT prefix which covers the Docker for Windows NAT
-   prefix but allows room for additional NAT prefixes. For example:
-
-   ```
-   New-NetNat -Name DockerNAT -InternalIPInterfaceAddressPrefix 10.0.0.0/16
-   ```
-
-   The next time Docker for Windows starts, it uses the new, wider prefix.
-
-Alternatively, you can use a different NAT name and NAT prefix and adjust the
-NAT prefix Docker for Windows uses accordingly via the `Settings` panel.
-
->**Note**: You also need to adjust your existing VMs to use IP addresses from within the new NAT prefix.
 
 ## Workarounds
 

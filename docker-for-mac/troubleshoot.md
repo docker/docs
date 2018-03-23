@@ -142,73 +142,6 @@ Volume mounting requires shared drives for projects that live outside of the
 .inline} --> **Preferences** --> **File sharing** and share the drive that
 contains the Dockerfile and volume.
 
-### Recreate or update your containers after Beta 18 upgrade
-
-Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
-RC3. (For more information, see (For more information, see [moby/moby#24343
-(comment)](https://github.com/moby/moby/issues/24343#issuecomment-230623542).)
-
-You may get the following error when you try to start a container created with
-pre-Beta 18 Docker for Mac applications.
-
-```
-Error response from daemon: Unknown runtime specified default
-```
-
-You can fix this by either
-[recreating](troubleshoot.md#recreate-your-containers) or
-[updating](troubleshoot.md#update-your-containers) your containers.
-
-If you get the error message shown above, we recommend recreating them.
-
-#### Recreate your containers
-
-To recreate your containers, use Docker Compose.
-
-```
-docker-compose down && docker-compose up
-```
-
-#### Update your containers
-
-To fix existing containers, follow these steps.
-
-1. Run this command.
-
-```
-$ docker run --rm -v /var/lib/docker:/docker cpuguy83/docker112rc3-runtimefix:rc3
-
-Unable to find image 'cpuguy83/docker112rc3-runtimefix:rc3' locally
-rc3: Pulling from cpuguy83/docker112rc3-runtimefix
-91e7f9981d55: Pull complete
-Digest: sha256:96abed3f7a7a574774400ff20c6808aac37d37d787d1164d332675392675005c
-Status: Downloaded newer image for cpuguy83/docker112rc3-runtimefix:rc3
-proccessed 1648f773f92e8a4aad508a45088ca9137c3103457b48be1afb3fd8b4369e5140
-skipping container '433ba7ead89ba645efe9b5fff578e674aabba95d6dcb3910c9ad7f1a5c6b4538': already fixed
-proccessed 43df7f2ac8fc912046dfc48cf5d599018af8f60fee50eb7b09c1e10147758f06
-proccessed 65204cfa00b1b6679536c6ac72cdde1dbb43049af208973030b6d91356166958
-proccessed 66a72622e306450fd07f2b3a833355379884b7a6165b7527c10390c36536d82d
-proccessed 9d196e78390eeb44d3b354d24e25225d045f33f1666243466b3ed42fe670245c
-proccessed b9a0ecfe2ed9d561463251aa90fd1442299bcd9ea191a17055b01c6a00533b05
-proccessed c129a775c3fa3b6337e13b50aea84e4977c1774994be1f50ff13cbe60de9ac76
-proccessed dea73dc21126434f14c58b83140bf6470aa67e622daa85603a13bc48af7f8b04
-proccessed dfa8f9278642ab0f3e82ee8e4ad029587aafef9571ff50190e83757c03b4216c
-proccessed ee5bf706b6600a46e5d26327b13c3c1c5f7b261313438d47318702ff6ed8b30b
-```
-
-2. Quit Docker.
-
-3. Start Docker.
-
-	> **Note**: Be sure to quit and then restart Docker for Mac before attempting to start containers.
-
-4. Try to start the container again:
-
-```
-$ docker start old-container
-old-container
-```
-
 ### Incompatible CPU detected
 
 Docker for Mac requires a processor (CPU) that supports virtualization and, more
@@ -239,47 +172,6 @@ know before you install](install.md#what-to-know-before-you-install).
 
 
 ### Workarounds for common problems
-
-* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on
-  Docker for Mac. If you try to use it, network timeouts occur when running
-  `docker` commands that need access to external network servers, such as
-  `docker pull` or `docker push`.
-
-   ```
-   $ docker pull busybox
-   Using default tag: latest
-   Pulling repository docker.io/library/busybox
-   Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/busybox/images. You may want to check your internet connection or if you are behind a proxy.
-   ```
-
-    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the
-    beta channel, a workaround is provided that auto-filters out the IPv6
-    addresses in DNS server lists and enables successful network accesss. For
-    example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only
-    workaround action needed for users is to [upgrade to Docker for Mac stable
-    v1.12.1 or newer, or Beta 24 or
-    newer](install.md#download-docker-for-mac).
-
-    On releases with the workaround included to filter out / truncate IPv6
-    addresses from the DNS list, the above command should run properly:
-
-    ```
-    $ docker pull busybox
-    Using default tag: latest
-    latest: Pulling from library/busybox
-    Digest: sha256:a59906e33509d14c036c8678d687bd4eec81ed7c4b8ce907b888c607f6a1e0e6
-    Status: Image is up to date for busy box:latest
-    ```
-
-    To learn more, see these issues on GitHub and Docker for Mac forums:
-
-  * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
-    addresses](https://github.com/docker/for-mac/issues/9)
-
-  * [ERROR: Network timed out while trying to connect to
-    index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
-
-  <p></p>
 
 * If Docker for Mac fails to install or start properly:
 
@@ -335,13 +227,20 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ## Known issues
 
-* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and
-  haven't upgraded to Beta 24 or v1.12.1 stable or newer, you see a network
-  timeout when you run `docker` commands that need access to external network
-  servers. The aforementioned releases include a workaround for this because
-  Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter
-  DNS addresses" in [Workarounds for common
-  problems](troubleshoot.md#workarounds-for-common-problems).
+* IPv6 is not (yet) supported on Docker for Mac. 
+
+  A workaround is provided that auto-filters out the IPv6 addresses in DNS
+  server lists and enables successful network accesss.  For example,
+  `2001:4860:4860::8888` would become `8.8.8.8`.  To learn more, see these
+  issues on GitHub and Docker for Mac forums:
+
+  * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
+    addresses](https://github.com/docker/for-mac/issues/9)
+
+  * [ERROR: Network timed out while trying to connect to
+    index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
+
+  <p></p>
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac
   (`ValueError: Extra Data`). We've identified this is likely related to data
