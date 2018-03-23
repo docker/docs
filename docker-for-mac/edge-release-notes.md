@@ -776,7 +776,7 @@ TCP connection is idle for more than 5 minutes (related to
 
 **New**
 
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [[Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
 
 - Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#daemon-basic-experimental-mode-and-registries).
 
