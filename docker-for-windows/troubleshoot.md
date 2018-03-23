@@ -326,7 +326,7 @@ Docker for Windows cannot start.
 Verify that virtualization is enabled by checking the Performance tab on the
 Task Manager.
 
-![Task Manager](images/win-virtualization-enabled.png)
+![Task Manager](images/virtualization-enabled.png)
 
 Also, see the user-reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74).

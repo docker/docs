@@ -158,7 +158,7 @@ taskbar to show it. To learn more, see [Docker Settings](index.md#docker-setting
 If you just installed the app, you also get a popup success message with
 suggested next steps, and a link to this documentation.
 
-![Startup information](images/win-install-success-popup-cloud.png)
+![Startup information](images/install-success-popup-cloud.png)
 
 When initialization is complete, select **About Docker** from the notification
 area icon to verify that you have the latest version.
