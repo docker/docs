@@ -27,48 +27,23 @@ the log data.
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
 **Diagnose & Feedback** from the menu bar.
 
-![Diagnose problems](images/settings-diagnose.png)
+![Diagnose & Feedback](images/diagnose-feedback.png)
 
-You can choose to run diagnostics only, or diagnose and send the results to the
-Docker Team:
+Select **Diagnose**.  It runs diagnostics, shows results, and uploads the
+results to Docker.  A diagnostic ID is generated, which must be provided when
+communicating with the Docker Team.  Optionally, you can open an issue on GitHub
+using the uploaded results and ID as a basis.
 
-* **Diagnose Only** - Runs diagnostics, and shows results locally. (Results are not sent to Docker, and no ID is generated.)
+![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png)
 
-![Diagnostic results only](images/settings-diagnostic-results-only.png)
-
-* **Diagnose & Upload** - Runs diagnostics, shows results, and auto-uploads the
-diagnostic results to Docker. A diagnostic ID is auto-generated. You can refer
-to this ID when communicating with the Docker Team. Optionally, you can open
-an issue on GitHub using the uploaded results and ID as a basis.
-
-![Diagnostics & Feedback](images/settings-diagnose-id.png)
-
-If you click **Open Issues**, this opens [Docker for Mac issues on
+If you click **Report an issue**, this opens [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
-“create new issue” template prepopulated with the following:
+“create new issue” template, to be completed before submission.
 
-* ID and summary of the diagnostic you just ran
+![issue template](images/issues-template.png)
 
-* System and version details
-
-* Sections where you can fill in a description of expected and actual behavior,
-  and steps to reproduce the issue
-
-![Create issue on GitHub](images/diagnose-issue.png)
-
-You can also create a new issue directly on GitHub at
-[https://github.com/docker/for-mac/issues](https://github.com/docker/for-mac/issues).
-(The README for the repository is [here](https://github.com/docker/for-mac).)
-
-Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or
-right here &#9786;) to get a "create new issue" template prepopulated with
-sections for the ID and summary of your diagnostics, system and version details,
-description of expected and actual behavior, and steps to reproduce the issue.
-
-![issue template](images/diagnose-d4mac-issues-template.png)
 
 <a name="logs"></a>
-
 ## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can

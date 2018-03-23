@@ -26,25 +26,23 @@ troubleshoot the log data.
 
 Choose **Diagnose & Feedback** from the menu bar.
 
-Select **Upload a diagnostic**.
+![Diagnose & Feedback](images/diagnose-feedback.png)
 
-This uploads (sends) the logs to Docker.
+Select **Upload a diagnostic**.  It runs diagnostics, shows results, and uploads
+the results to Docker.  A diagnostic ID is generated, which must be provided
+when communicating with the Docker Team.  Optionally, you can open an issue on
+GitHub using the uploaded results and ID as a basis.
 
-![Diagnose problems and Feedback](/docker-for-windows/images/diagnose-feedback-id-win.png)
+![Diagnose & Feedback with ID](images/diagnose-feedback-id.png)
 
-To create a new issue directly on GitHub, open [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues) in your web browser and follow
-the instructions in the README. Click [New
-Issue](https://github.com/docker/for-win/issues/new) on that page to get a
-"create new issue" template prepopulated with sections for the ID and summary of
-your diagnostics, system and version details, description of expected and actual
-behavior, and steps to reproduce the issue.
+If you click on **docker/for-win** this opens [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
+“create new issue” template.
 
-![issue template](/docker-for-windows/images/diagnose-d4win-issues-template.png)
-
+![issue template](images/issues-template.png)
 
 
-## Checking the Logs
+## Check the Logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
 browse the logs yourself.
