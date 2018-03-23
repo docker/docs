@@ -4,6 +4,7 @@ description: How networking works from the container's point of view
 keywords: networking, container, standalone
 redirect_from:
 - /engine/userguide/networking/configure-dns/
+- /engine/userguide/networking/default_network/configure-dns/
 - /engine/userguide/networking/default_network/binding/
 - /engine/userguide/networking/default_network/container-communication/
 ---
