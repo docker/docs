@@ -52,7 +52,7 @@ using CloudFormation. For more about stable and edge channels, see the
   </tr>
 </table>
 
-> **Note* During stable channel has updates, edge channel will be deploying the same release (unless it's a patch release)
+> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
 
 ### Deployment options
 
