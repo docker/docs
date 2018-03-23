@@ -41,6 +41,9 @@ For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.m
   </tr>
 </table>
 
+> **Note* During stable channel has updates, edge channel will be deploying the same release (unless it's a patch release)
+
+
 ### Prerequisites
 
 - Access to an Azure account with admin privileges

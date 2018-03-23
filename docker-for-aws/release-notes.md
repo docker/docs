@@ -27,17 +27,24 @@ title: Docker for AWS release notes
 
 > **Note** Starting with 18.02.0-CE EFS encryption option has been removed to prevent the [recreation of the EFS volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html){: target="_blank" class="_"}.
 
+
 ## Stable channel
 
-### 17.12.1 CE
+### 18.03 CE
 
 {{aws_blue_latest}}
+
+Release date: 3/21/2018
+
+- Docker Engine upgraded to [Docker 18.03.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce){: target="_blank" class="_"}
+- [Elastic Network Interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html){: target="_blank" class="_"} enabled in the AMI kernel
+
+### 17.12.1 CE
 
 Release date: 3/1/2018
 
 - Docker Engine upgraded to [Docker 17.12.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.1-ce){: target="_blank" class="_"}
 - Added baked-in rules for ECR IAM role
-
 
 ### 17.12 CE
 
