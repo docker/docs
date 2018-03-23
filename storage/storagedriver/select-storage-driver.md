@@ -41,7 +41,7 @@ this decision, there are three high-level factors to consider:
 
   The selection order is defined in Docker's source code. You can see the order
   by looking at
-  [the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L53)
+  [the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
   You can use the branch selector at the top of the file viewer to choose a
   different branch, if you run a different version of Docker.
   {: id="storage-driver-order" }
