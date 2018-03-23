@@ -1,14 +1,12 @@
 ---
 description: Networking
-keywords: mac, networking
-redirect_from:
-- /mackit/networking/
-title: Networking features in Docker for Mac
+keywords: windows, networking
+title: Networking features in Docker for Windows
 ---
-{% assign Arch = 'Mac' %}
+{% assign Arch = 'Windows' %}
 
-Docker for {{Arch}} provides several networking features to make it
-easier to use.
+Docker for {{Arch}} provides several networking features to make it easier to
+use.
 
 ## Features
 
@@ -48,19 +46,21 @@ See [Proxies](index.md:Proxies).
 Following is a summary of current limitations on the Docker for {{Arch}}
 networking stack, along with some ideas for workarounds.
 
-### There is no docker0 bridge on macOS
+### There is no docker0 bridge on {{Arch}}
 
-Because of the way networking is implemented in Docker for Mac, you cannot see a
-`docker0` interface on the host. This interface is actually within the virtual
-machine.
+Because of the way networking is implemented in Docker for {{Arch}}, you cannot
+see a `docker0` interface on the host.  This interface is actually within the
+virtual machine.
 
 ### I cannot ping my containers
 
-Docker for Mac can't route traffic to containers.
+Docker for Windows can't route traffic to Linux containers.  However, you can
+ping the Windows containers.
 
 ### Per-container IP addressing is not possible
 
-The docker (Linux) bridge network is not reachable from the macOS host.
+The docker (Linux) bridge network is not reachable from the Windows host.
+However, it works with Windows containers.
 
 ### Use cases and workarounds
 
@@ -75,7 +75,7 @@ host.
 
 The gateway is also reachable as `gateway.docker.internal`.
 
-#### I want to connect to a container from the Mac
+#### I want to connect to a container from the Windows
 
 Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.

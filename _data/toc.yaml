@@ -2964,6 +2964,8 @@ manuals:
     title: Install Docker for Windows
   - path: /docker-for-windows/kubernetes/
     title: Deploy on Kubernetes
+  - path: /docker-for-windows/networking/
+    title: Networking
   - path: /docker-for-windows/docker-toolbox/
     title: Migrate Docker Toolbox
   - path: /docker-for-windows/troubleshoot/

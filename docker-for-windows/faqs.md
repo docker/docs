@@ -14,7 +14,7 @@ technical support for various subscription levels, and more.
 #### How do I get the Stable or Edge version of Docker for Windows?
 
 Use the download links for the channels given in the topic [Download Docker for
-Windows](/docker-for-windows/install.md#download-docker-for-windows).
+Windows](install.md#download-docker-for-windows).
 
 This topic also has more information about the two channels.
 
@@ -85,13 +85,13 @@ in [Docker Swarm](/engine/swarm/index.md). A good place to start is the
 #### What if I have problems or questions?
 
 You can find the list of frequent issues in
-[Logs and Troubleshooting](/docker-for-windows/troubleshoot.md).
+[Logs and Troubleshooting](troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on [Docker for
 Windows issues on GitHub](https://github.com/docker/for-win/issues) or create a
 new one. You can also create new issues based on diagnostics. To learn more
 about running diagnostics and about Docker for Windows GitHub issues, see
-[Diagnose and Feedback](/docker-for-windows/index.md#diagnose-and-feedback).
+[Diagnose and Feedback](index.md#diagnose-and-feedback).
 
 [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows)
 provides discussion threads as well, and you can create discussion topics there,
@@ -130,7 +130,7 @@ topic
 
 No, at this point, Docker for Windows does not enable you to control (`chmod`)
 the Unix-style permissions on [shared
-volumes](/docker-for-windows/index.md#shared-drives) for deployed containers,
+volumes](index.md#shared-drives) for deployed containers,
 but rather sets permissions to a default value of
 [0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
 `execute` permissions for `user`, `read` and `execute` for `group`) which is not
@@ -145,7 +145,7 @@ volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volum
 Currently, `inotify` does not work on Docker for Windows. This is a known issue.
 For more information and a temporary workaround, see [inotify on shared drives
 does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
-[Troubleshooting](/docker-for-windows/troubleshoot.md).
+[Troubleshooting](troubleshoot.md).
 
 #### Are symlinks supported?
 
@@ -195,7 +195,7 @@ You need to restart Docker for Windows after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
 The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](/docker-for-windows/index.md#docker-daemon)). Docker for Windows ignores
+Daemon](index.md#docker-daemon)). Docker for Windows ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
@@ -222,7 +222,7 @@ Docker for Windows does not support mounts for nodes you created with
 `docker-machine`.
 
 For more about sharing local drives with containers using Docker for Windows,
-see [Shared Drives](/docker-for-windows/index.md#shared-drives) in the Getting
+see [Shared Drives](index.md#shared-drives) in the Getting
 Started topic.
 
 To learn more about using Docker for Windows and Docker Machine, see [What to
@@ -236,7 +236,7 @@ driver](/machine/drivers/hyper-v.md) for Docker Machine.
 #### How do I run Windows containers on Docker on Windows Server 2016?
 
 See [About Windows containers and Windows Server
-2016](/docker-for-windows/index.md#about-windows-containers-and-windows-server-2016).
+2016](index.md#about-windows-containers-and-windows-server-2016).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows
@@ -260,7 +260,7 @@ some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
 for Windows. See details and workarounds in [Docker fails to start when firewall
 or anti-virus software is
 installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
-in [Troubleshooting](/docker-for-windows/troubleshoot.md).
+in [Troubleshooting](troubleshoot.md).
 
 ### How do I uninstall Docker Toolbox?
 
