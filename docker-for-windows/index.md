@@ -12,32 +12,29 @@ redirect_from:
 - /docker-for-windows/index/
 title: Get started with Docker for Windows
 ---
-Welcome to Docker for Windows!
 
-Docker is a full development platform for creating containerized apps, and
-Docker for Windows is the best way to get started with Docker on Windows
-systems.
+Welcome to Docker for Windows! Docker is a full development platform for
+creating containerized apps, and Docker for Windows is the best way to get
+started with Docker _on Windows_ systems.
 
-> **Got Docker for Windows?** If you have not yet installed Docker for Windows, see [Install Docker for Windows](install.md) for an explanation of stable
-and edge channels, system requirements, and download/install information.
-
->**Looking for system requirements?** Check out
-[What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
-{: id="what-to-know-before-you-install" }
+> See [Install Docker for Windows](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
 
 ## Check versions
 
-Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
+Start your favorite shell (`cmd.exe`, PowerShell, or other) and ensure your
+versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and
+compatible with `Docker.app`. Your output may differ if you are running
+different versions.
 
 ```none
-PS C:\Users\Docker> docker --version
-Docker version 17.03.0-ce, build 60ccb22
+PS C:\Users\Gordon> docker --version
+Docker version 17.12.0-ce, build c97c6d6
 
-PS C:\Users\Docker> docker-compose --version
-docker-compose version 1.11.2, build dfed245
+PS C:\Users\Gordon> docker-compose --version
+docker-compose version 1.18.0, build 8dd22a96
 
-PS C:\Users\Docker> docker-machine --version
-docker-machine version 0.10.0, build 76ed2a6
+PS C:\Users\Gordon> docker-machine --version
+docker-machine.exe version 0.13.0, build 9ba6da9
 ```
 
 ## Explore the application
@@ -48,148 +45,78 @@ and make sure `docker` commands are working properly.
 
 > Quote syntax
 >
-> Remember to use double quotes (") instead of single quotes (') when specifying
-> parameters in docker commands while using CMD/Powershell.
+> Use double quotes (") when specifying docker command parameters in PowerShell.
 {: .important}
 
 1.  Open a shell (`cmd.exe`, PowerShell, or other).
 
-2.  Run some Docker commands, such as `docker ps`, `docker version`, and `docker info`.
-
-    Here is the output of `docker ps` run in a powershell. (In this example, no containers are running yet.)
+2.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
 
     ```none
-    PS C:\Users\jdoe> docker ps
+    PS C:\Users\Gordon> docker run hello-world
 
-    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-    ```
+    docker : Unable to find image 'hello-world:latest' locally
+    ...
 
-    Here is an example of command output for `docker version`.
+    latest:
+    Pulling from library/hello-world
+    ca4f61b1923c:
+    Pulling fs layer
+    ca4f61b1923c:
+    Download complete
+    ca4f61b1923c:
+    Pull complete
+    Digest: sha256:97ce6fa4b6cdc0790cda65fe7290b74cfebd9fa0c9b8c38e979330d547d22ce1
+    Status: Downloaded newer image for hello-world:latest
 
-    ```none
-    PS C:\Users\Docker> docker version
-    Client:
-    Version:      17.03.0-ce
-    API version:  1.26
-    Go version:   go1.7.5
-    Git commit:   60ccb22
-    Built:        Thu Feb 23 10:40:59 2017
-    OS/Arch:      windows/amd64
-
-    Server:
-    Version:      17.03.0-ce
-    API version:  1.26 (minimum version 1.12)
-    Go version:   go1.7.5
-    Git commit:   3a232c8
-    Built:        Tue Feb 28 07:52:04 2017
-    OS/Arch:      linux/amd64
-    Experimental: true
-    ```
-
-    Here is an example of command output for `docker info`.
-
-    ```none
-    PS C:\Users\Docker> docker info
-    Containers: 0
-     Running: 0
-     Paused: 0
-     Stopped: 0
-    Images: 0
-    Server Version: 17.03.0-ce
-    Storage Driver: overlay2
-     Backing Filesystem: extfs
-     Supports d_type: true
-     Native Overlay Diff: true
-    Logging Driver: json-file
-    Cgroup Driver: cgroupfs
-    Plugins:
-     Volume: local
-     Network: bridge host ipvlan macvlan null overlay
-    Swarm: inactive
-    Runtimes: runc
-    Default Runtime: runc
-    Init Binary: docker-init
-    containerd version: 977c511eda0925a723debdc94d09459af49d082a
-    runc version: a01dafd48bc1c7cc12bdb01206f9fea7dd6feb70
-    init version: 949e6fa
-    Security Options:
-     seccomp
-      Profile: default
-    Kernel Version: 4.9.12-moby
-    Operating System: Alpine Linux v3.5
-    OSType: linux
-    Architecture: x86_64
-    CPUs: 2
-    Total Memory: 1.934 GiB
-    Name: moby
-    ID: BM4O:645U:LUS6:OGMD:O6WH:JINS:K7VF:OVDZ:7NE4:ZVJT:PSMQ:5UA6
-    Docker Root Dir: /var/lib/docker
-    Debug Mode (client): false
-    Debug Mode (server): true
-     File Descriptors: 13
-     Goroutines: 21
-     System Time: 2017-03-02T16:59:13.417299Z
-     EventsListeners: 0
-    Registry: https://index.docker.io/v1/
-    Experimental: true
-    Insecure Registries:
-     127.0.0.0/8
-    Live Restore Enabled: false
-    ```
-
-    >**Note**: The outputs above are examples. Your output for commands like
-    > `docker version` and `docker info` varies depending on your product
-    > versions.
-
-3.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
-
-    ```none
-    PS C:\Users\jdoe> docker run hello-world
-
-    Hello from Docker.
+    Hello from Docker!
     This message shows that your installation appears to be working correctly.
-
-    To generate this message, Docker took the following steps:
-    1. The Docker client contacted the Docker daemon.
-    2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-    3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.
-    4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
+    ...
     ```
-
-4.  Try something more ambitious, and run an Ubuntu container with this command.
+3.  List the hello-world image:
 
     ```none
-    PS C:\Users\jdoe> docker run -it ubuntu bash
+    docker image ls
     ```
 
-    This downloads the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
+4.  Run an image of the Ubuntu OS:
 
     ```none
-    PS C:\Users\jdoe> docker run -it ubuntu bash
+    PS C:\Users\Gordon> docker run -it ubuntu bash
 
-    Unable to find image 'ubuntu:latest' locally
-    latest: Pulling from library/ubuntu
-    5a132a7e7af1: Pull complete
-    fd2731e4c50c: Pull complete
-    28a2f68d1120: Pull complete
-    a3ed95caeb02: Pull complete
-    Digest: sha256:4e85ebe01d056b43955250bbac22bdb8734271122e3c78d21e55ee235fc6802d
+    docker : Unable to find image 'ubuntu:latest' locally
+    ...
+
+    latest:
+    Pulling from library/ubuntu
+    22dc81ace0ea:
+    Pulling fs layer
+    1a8b3c87dba3:
+    Pulling fs layer
+    91390a1c435a:
+    Pulling fs layer
+    ...
+    Digest: sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
     Status: Downloaded newer image for ubuntu:latest
     ```
 
-    Type `exit` to stop the container and close the powershell.
+5.  Open a second PowerShell tab and list all the containers.
 
-5.  Start a Dockerized webserver with this command:
+    The hello-world container exited after displaying its message. The Ubuntu container is still running:
 
     ```none
-    PS C:\Users\jdoe> docker run -d -p 80:80 --name webserver nginx
+    PS C:\Users\Gordon> docker container ls --all
+    CONTAINER ID      IMAGE            COMMAND       CREATED            STATUS                        PORTS      NAMES
+    64b5205999ed      ubuntu           "bash"        2 minutes ago      Up 2 minutes                             laughing_kowalevski
+    45f77eb48e78      hello-world      "/hello"      3 minutes ago      Exited (0) 3 minutes ago                 relaxed_sammet
     ```
 
-    This downloads the `nginx` container image and start it. Here is the
-    output of running this command in a powershell.
+6.  In the first PowerShell tab, press `Ctrl+c` to stop the Ubuntu conatiner.
+
+7.  Now start a Dockerized  `nginx` webserver:
 
     ```none
-    PS C:\Users\jdoe> docker run -d -p 80:80 --name webserver nginx
+    PS C:\Users\Gordon> docker run -d -p 80:80 --name webserver nginx
 
     Unable to find image 'nginx:latest' locally
     latest: Pulling from library/nginx
@@ -203,98 +130,58 @@ and make sure `docker` commands are working properly.
     dfe13c68b3b86f01951af617df02be4897184cbf7a8b4d5caf1c3c5bd3fc267f
     ```
 
-6.  Point your web browser at `http://localhost` to display the start page.
-
-    (Since you specified the default HTTP port, it isn't necessary to append
-    `:80` at the end of the URL.)
+8.  Point your web browser at `http://localhost` to display the start page. Because you specified the default HTTP port, it isn't necessary to append `:80` at the end of the URL.
 
     ![Run nginx edge>](images/run-nginx.png)
 
-7.  Run `docker ps` while your webserver is running to see details on the
-    container.
+9.  Stop and remove your containers:
 
     ```none
-    PS C:\Users\jdoe> docker ps
-
-    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
-    NAMES
-    dfe13c68b3b8        nginx               "nginx -g 'daemon off"   3 days ago          Up 45 seconds       0.0.0.0:80->80/tcp, 443/tc
-    p   webserver
+    docker container ls
+    docker container stop webserver
+    docker container start webserver
+    docker container stop $(docker container ls -aq)
     ```
-
-8.  Stop or remove containers and images.
-
-    The `nginx` webserver continues to run in the container on that port
-    until you stop and/or remove the container. If you want to stop the
-    webserver, type: `docker container stop webserver` and start it again with `docker
-    start webserver`.
-
-    To stop and remove the running container with a single command, type:
-    `docker container rm -f webserver`. This removes the container, but not the
-    `nginx` image. You can list local images with `docker image ls`. You might
-    want to keep some images around so that you don't need to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker image rm` followed by an image ID or image name. For example, `docker image rm nginx`.
-
-**Want more example applications?** [Get Started](/get-started/) and [Samples](/samples) are great places to start.
 
 ## Docker Settings
 
-When Docker is running, the Docker whale is displayed. By default, the Docker
-whale icon is placed in the Notifications area. If it is hidden, click the up
-arrow on the taskbar to show it.
+When Docker is running, the whale icon displays in the Notifications area (or
+System tray). Right-click to access the **Settings** dialog.
 
-> You can dock the whale on the taskbar so it is always visible
->
-> You can pin the whale outside of the notification box so that it is
-  always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
-  right-click an empty portion of the taskbar, select Settings, and choose
-  display options through taskbar settings for notifications.
->
-> ![whale pinned to taskbar](images/whale-taskbar.png)
+![Showing hidden apps in the taskbar](images/whale-icon-systray.png){:width="300px"}
 
-![Showing hidden apps in the taskbar](images/whale-systray.png)
+The Settings dialog provides options to allow Docker auto-start, automatically
+check for updates, share local drives with Docker containers, enable VPN
+compatibility, manage CPUs and memory Docker uses, restart Docker, or perform a
+factory reset.
 
-To get a popup menu with application options, right-click the whale:
-
-![Docker for Windows popup menu](images/config-popup-menu-win.png)
-
->**Note:** The above example shows a user signed in for integrated
-Docker Cloud access. To learn more about the feature, see
-[Docker Cloud](#docker-cloud).
-
-The **Settings** dialogs provide options to allow Docker auto-start,
-automatically check for updates, share local drives with Docker containers,
-enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or
-perform a factory reset.
+![Docker for Windows popup menu](images/main-menu-settings.png){:width="500px"}
 
 ### General
 
-![Settings](images/settings-general.png)
+![Settings](images/settings-general.png){:width="600px"}
 
 * **Start Docker when you log in** - Automatically start the Docker for Windows
   application upon Windows system login.
 
-* **Check for updates when the application starts** - Docker for Windows is set
-  to automatically check for updates and notify you when an update is available.
-  If an update is found, click **OK** to accept and install it (or cancel to keep
-  the current version). Uncheck this option if you do not want notifications of
-  version upgrades. You can still find out about updates manually by choosing
-  **Check for Updates** from the menu.
+* **Automatically check for updates** - By default, Docker for Windows
+automatically checks for updates and notifies you when an update is available.
+Click **OK** to accept and install updates (or cancel to keep the current
+version). You can manually update by choosing **Check for Updates** from the
+main menu.
 
-* **Send usage statistics** - You can set Docker for Windows to auto-send
-  diagnostics, crash reports, and usage data. This information can help Docker
+* **Send usage statistics** - By default, Docker for Windows auto-sends
+  diagnostics, crash reports, and usage data. This information helps Docker
   improve the application and get more context for troubleshooting problems.
-
-  Uncheck any of the options to opt out and prevent auto-send of
-  data. Docker may prompt for more information in some cases,
-  even with auto-send enabled.
+  Uncheck to opt out. Docker may prompt for more information in some cases, even
+  with auto-send enabled.
 
 ### Shared Drives
 
 Share your local drives (volumes) with Docker for Windows, so that they are
 available to your containers.
 
-![Shared Drives](images/settings-shared-drives.png)
+![Shared Drives](images/settings-shared-drives.png){:width="600px"}
 
 You are prompted for your Windows system username and password (domain
 user) to apply shared drives. You can select an option to have Docker store the
@@ -307,37 +194,25 @@ access the mounted volumes.
 
 > Tips on shared drives, permissions, and volume mounts
 >
- * Shared drives are only required for mounting volumes in
- [Linux containers](#switch-between-windows-and-linux-containers), not for
- Windows containers. For Linux containers, you need to share the drive where the
- Dockerfile and volume are located. If you get errors such as `file not found`
- or `cannot start service` you may need to enable shared drives. See
- [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
+ * Shared drives are only required for mounting volumes in [Linux containers](#switch-between-windows-and-linux-containers),
+ not for Windows containers. For Linux containers, you need to share the drive
+ where the Dockerfile and volume are located. If you get errors such as `file not found`
+ or `cannot start service` you may need to enable shared drives. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
-* If possible, avoid volume mounts from the Windows host, and instead mount on
-the MobyVM, or use a [data
-volume](/engine/tutorials/dockervolumes.md#data-volumes)
-(named volume) or [data
-container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
-There are a number of issues with using host-mounted volumes and network paths
-for database files. see the troubleshooting topic on [Volume mounts from
-host paths use a nobrl option to override database
-locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+ * If possible, avoid volume mounts from the Windows host, and instead mount on
+ the MobyVM, or use a [data volume](/engine/tutorials/dockervolumes.md#data-volumes)
+ (named volume) or [data container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+ There are a number of issues with using host-mounted volumes and network paths
+ for database files. See [Volume mounts from host paths use a nobrl option to override database locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
- * You cannot control (`chmod`) permissions on shared volumes for
-deployed containers. Docker for Windows sets permissions to a default value of
-[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
-`execute` permissions for `user`, `read` and `execute` for `group`). This is not
-configurable. See the troubleshooting topic [Permissions errors on data
-directories for shared
-volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) for workarounds and more detail.
+ * Docker for Windows sets permissions to read/write/execute for users and
+   read/execute for groups and others [0755 or u+rwx,go+rx](http://permissions-calculator.org/decode/0755/).
+   This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
- * Make sure that the domain user has permissions to shared drives,
- as described in the troubleshooting topic ([Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)).
+ * Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes).
 >
  * You can share local drives with your _containers_ but not with Docker Machine
-nodes. See [Can I share local drives and filesystem with my Docker Machine
-VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms) in the FAQs.
+nodes. See the FAQ, [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms).
 >
 
 #### Firewall rules for shared drives
@@ -345,37 +220,32 @@ VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms
 Shared drives require port 445 to be open between the host machine and the virtual
 machine that runs Linux containers.
 
-> **Note**: Docker detects if port 445 is closed and shows
-the following message when you try to add a shared drive: ![Port 445
-blocked](images/drive_sharing_firewall_blocked.png)
+> Docker detects if port 445 is closed and shows the following message when you
+> try to add a shared drive: ![Port 445 blocked](images/drive_sharing_firewall_blocked.png)
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
 do not need to open port 445 on any other network. By default, allow connections
-to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
-If the firewall rules appear to be open, consider [reinstalling the File and
-Print Sharing service on the virtual network
-adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
+to `10.0.75.1` port 445 (the Windows host) from `10.0.75.2` (the virtual machine).
+If the firewall rules appear to be open, consider [reinstalling the File and Print Sharing service on the virtual network adapter](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
 
 #### Shared drives on demand
 
-You can share a drive "on demand" the first time a particular mount is
-requested.
+You can share a drive "on demand" the first time a particular mount is requested.
 
 If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified drive.
 
 You can select to **Share it**, in which case it is added your Docker for
-Windows [Shared Drives list](index.md#shared-drives) and
-available to containers. Alternatively, you can opt not to share it by hitting
-Cancel.
+Windows [Shared Drives list](index.md#shared-drives) and available to
+containers. Alternatively, you can opt not to share it by hitting Cancel.
 
 ![ ](images/shared-drive-on-demand.png)
 
 ### Advanced
 
-![CPU and Memory settings](images/settings-cpu-ram.png)
+![CPU and Memory settings](images/settings-advanced.png){:width="600px"}
 
 * **CPUs** - Change the number of processors assigned to the Linux VM.
 
@@ -391,7 +261,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
-![Network settings](images/settings-network.png)
+![Network settings](images/settings-network.png){:width="600px"}
 
 > **Note**: Some users reported problems connecting to Docker Hub on Docker for
 > Windows stable version. This would manifest as an error when trying to run
@@ -410,12 +280,12 @@ automatically propagates these to Docker and to your containers.  For example,
 if you set your proxy settings to `http://proxy.example.com`, Docker uses this
 proxy when pulling containers.
 
-![Proxies](images/proxies.png)
+![Proxies](images/settings-proxies.png){:width="600px"}
 
 When you start a container, your proxy settings propagate into the containers. For example:
 
 ```ps
-PS C:\Users\jdoe> docker run alpine env
+PS C:\Users\Gordon> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
 TERM=xterm
@@ -425,15 +295,18 @@ http_proxy=http://proxy.example.com:3128
 no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and `no_proxy` environment variables are set.
-When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
+In the output above, the `HTTP_PROXY`, `http_proxy`, and `no_proxy` environment
+variables are set. When your proxy configuration changes, Docker restarts
+automatically to pick up the new settings. If you have containers that you wish
+to keep running across restarts, you should consider using
+[restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
 ### Daemon
 
 You can configure options on the Docker daemon that determine how your
-containers run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
+containers run. You can configure some **Basic** options on the daemon with
+interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
@@ -443,13 +316,12 @@ some of the common settings to make it easier to configure them.
 * [Custom registries](#custom-registries)
 * [Daemon configuration file](#daemon-configuration-file)
 
-![Docker Daemon](images/docker-daemon_basic.png)
+![Docker Daemon](images/settings-daemon-basic.png){:width="600px"}
 
 #### Experimental mode
 
 Both Docker for Windows Stable and Edge releases have the experimental version
-of Docker Engine enabled, described in the [Docker Experimental Features
-README](https://github.com/docker/cli/blob/master/experimental/README.md) on
+of Docker Engine enabled, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on
 GitHub.
 
 Experimental features are not appropriate for production environments or
@@ -468,23 +340,25 @@ If `Experimental` is `true`, then Docker is running in experimental mode, as
 shown here. (If `false`, Experimental mode is off.)
 
 ```bash
-PS C:\Users\Vicky> docker version
+PS C:\Users\Gordon> docker version
+
 Client:
- Version:      1.13.0-rc4
- API version:  1.25
- Go version:   go1.7.3
- Git commit:   88862e7
- Built:        Sat Dec 17 01:34:17 2016
- OS/Arch:      windows/amd64
+ Version:    17.12.0-ce
+ API version:    1.35
+ Go version:    go1.9.2
+ Git commit:    c97c6d6
+ Built:    Wed Dec 27 20:05:22 2017
+ OS/Arch:    windows/amd64
 
 Server:
- Version:      1.13.0-rc4
- API version:  1.25 (minimum version 1.12)
- Go version:   go1.7.3
- Git commit:   88862e7
- Built:        Sat Dec 17 01:34:17 2016
- OS/Arch:      linux/amd64
- Experimental: true
+ Engine:
+  Version:    17.12.0-ce
+  API version:    1.35 (minimum version 1.12)
+  Go version:    go1.9.2
+  Git commit:    c97c6d6
+  Built:    Wed Dec 27 20:12:29 2017
+  OS/Arch:    linux/amd64
+  Experimental:    true
 ```
 
 #### Custom registries
@@ -493,23 +367,21 @@ You can set up your own [registries](/registry/introduction.md) on the **Basic**
 Daemon settings.
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
-public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
-your own insecure [registry](/registry/introduction.md). Add URLs for insecure
-registries and registry mirrors on which to host your images. (See also, [How do
-I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
-the FAQs.)
+public or private images or [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md),
+you can use Docker to set up your own insecure [registry](/registry/introduction.md).
+Add URLs for insecure registries and registry mirrors on which to host your images.
+See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in the FAQs.
 
 #### Daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd.md).
 
-![Docker Daemon](images/docker-daemon_advanced.png)
+![Docker Daemon](images/settings-daemon-advanced.png){:width="600px"}
 
 For a full list of options on the Docker daemon, see
-[daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine command
-line reference.
+[daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine command line reference.
 
 In that topic, see also:
 
@@ -519,8 +391,7 @@ In that topic, see also:
 
 * [Windows configuration file](/engine/reference/commandline/dockerd.md#windows-configuration-file)
 
-Updating these settings requires a reconfiguration and reboot of the
-Linux VM.
+Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Switch between Windows and Linux containers
 
@@ -528,7 +399,7 @@ You can select which daemon (Linux or Windows) the Docker
 CLI talks to. Select **Switch to Windows containers** to toggle to Windows
 containers. Select **Switch to Linux containers** to toggle back to the default, Linux containers.
 
-![Windows-Linux container types switch](images/config-popup-win-linux-switch.png)
+![Windows-Linux container types switch](images/main-menu-switch.png){:width="500px"}
 
 Microsoft Developer Network has preliminary/draft information on Windows
 containers
@@ -593,11 +464,9 @@ because they do not apply to Windows containers:
 
 ### Kubernetes
 
-**Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
-support is not included in Docker for Windows 18.02 CE Stable.
-
-To find out more about Stable and Edge channels and how to switch between them,
-see [General configuration](#general).
+[Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+is available in
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher.
 
 Docker for Windows 18.02 CE Edge includes a standalone Kubernetes server that runs
 on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
@@ -619,16 +488,11 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply and restart** button.
 
-  ![Enable Kubernetes](images/kubernetes/kubernetes-enable.png)
+  ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
 
   An internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
   `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
-
-  When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom left of the Docker for Windows Preferences dialog.
-
-  ![Kubernetes status](images/kubernetes/kubernetes-status.png)
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -639,12 +503,12 @@ experience conflicts, remove it.
   The Kubernetes containers are stopped and removed, and the
   `/usr/local/bin/kubectl` command is removed.
 
-  For more about using the Kubernetes integration with
-  Docker for Windows, see [Deploy to Kubernetes](kubernetes.md).
+  For more about using the Kubernetes integration with Docker for Windows,
+  see [Deploy to Kubernetes](kubernetes.md).
 
 ### Reset
 
-![Reset](images/settings-reset.png)
+![Reset](images/settings-reset.png){:width="600px"}
 
 * **Restart Docker** - Shuts down and restarts the Docker application.
 
@@ -662,10 +526,8 @@ You can add trusted Certificate Authorities (CAs) (used to verify registry
 server certificates) and client certificates (used to authenticate to
 registries) to your Docker daemon.
 
-To learn more, see [How do I add custom CA
-certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client
-certificates?](faqs.md#how-do-i-add-client-certificates) in
+To learn more, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.
 
 ## Set up tab completion in PowerShell
@@ -793,17 +655,14 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
-Need a direct link to Cloud? [Take me to Docker
-Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
+Need a direct link to Cloud? [Take me to Docker Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](/get-started/).
+* Try out the walkthrough at [Get Started](/get-started/){: target="_blank" class="_"}.
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
-* For a summary of Docker command line interface (CLI) commands,
-see the [Docker CLI Reference Guide](/engine/reference/commandline/docker.md).
+* For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/api.md){: target="_blank" class="_"}.
 
-* Check out the blog post
-  [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).
+* Check out the blog post, [What’s New in Docker 17.06 Community Edition (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" class="_"}.
