@@ -175,7 +175,7 @@ from the repository.
 
     > **Note**: The version string is the package name plus the version up to
     > the first hyphen. In the example above, the fully qualified package name
-    > is `docker-ce-17.06.1.ce`.
+    > is `docker-ce-18.03.ce`.
 
     ```bash
     $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
