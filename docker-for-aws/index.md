@@ -52,13 +52,7 @@ using CloudFormation. For more about stable and edge channels, see the
   </tr>
 </table>
 
-
-#### Test Channel
-
-This is the test channel. It is used for testing release candidates for
-upcoming releases. Use this channel if you want to test out the new releases
-before they are available.
-{{aws_blue_test}}
+> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
 
 ### Deployment options
 
