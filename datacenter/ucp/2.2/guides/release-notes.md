@@ -14,8 +14,9 @@ upgrade your installation to the latest release.
 
 **Bug fixes**
 
-* Core
-  * Fixed an issue where the current state for min tls verison was not detected.
+* Fixed an issue where the minimum TLS version setting is not correctly handled,
+  leading to non-default values that cause `ucp-controller` and `ucp-agent` to keep 
+  restarting.
 
 ## Version 2.2.6 (2018-03-19)
 
