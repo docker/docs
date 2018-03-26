@@ -138,7 +138,7 @@ Before following this procedure, you must first meet all the
 
     Containers: 0
     Images: 0
-    Storage Driver: overlay
+    Storage Driver: overlay2
      Backing Filesystem: extfs
     <output truncated>
     ```
