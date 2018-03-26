@@ -20,6 +20,38 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.03.0-ce-win59 2018-03-26
+
+[Download](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
+  - [Docker Machine 0.14.0](https://github.com/docker/machine/releases/tag/v0.14.0)
+  - [Docker compose 1.20.1](https://github.com/docker/compose/releases/tag/1.20.1)
+  - [Notary 0.6.0](https://github.com/docker/notary/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.87
+  - AUFS 20180312
+
+* New
+  - VM disk size can be changed in settings. Fixes [docker/for-win#105](https://github.com/docker/for-win/issues/105)
+  - VM Swap size can be changed in settings.
+  - New menu item to restart Docker.
+  - Support NFS Volume sharing. See [docker/for-win#1700](https://github.com/docker/for-win/issues/1700)
+  - Allow to activate Windows Containers during installation (avoid vm disk creation and vm boot when working only on win containers). See [docker/for-win#217](https://github.com/docker/for-win/issues/217).
+  - Experimental feature: LCOW containers can now be run next to Windows containers (on Windows RS3 build 16299 and later). Use `--platform=linux` in Windows container mode to run Linux Containers On Windows. Note that LCOW is experimental, it requires daemon `experimental` option.
+
+* Bug fixes and minor changes
+  - Fix port Windows Containers port forwarding on Windows 10 build 16299 post KB4074588. Fixes [docker/for-win#1707](https://github.com/docker/for-win/issues/1707), [docker/for-win#1737](https://github.com/docker/for-win/issues/1737)
+  - Fix daemon not starting properly when setting TLS-related options.
+  - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. `host.docker.internal`). Fixes [docker/for-win#1130](https://github.com/docker/for-win/issues/1130)
+  - Fix Linuxkit start on Windows RS4 Insider. Fixes [docker/for-win#1458](https://github.com/docker/for-win/issues/1458), [docker/for-win#1514](https://github.com/docker/for-win/issues/1514), [docker/for-win#1640](https://github.com/docker/for-win/issues/1640)
+  - Fix risk of privilege escalation. (https://www.tenable.com/sc-report-templates/microsoft-windows-unquoted-service-path-vulnerability)
+  - All users present in the docker-users group are now able to use docker. Fixes [docker/for-win#1732](https://github.com/docker/for-win/issues/1732)
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Windows installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/docker-for-windows/docker-toolbox/) ).
+  - Better cleanup for Windows containers and images on reset/uninstall. Fixes [docker/for-win#1580](https://github.com/docker/for-win/issues/1580), [docker/for-win#1544](https://github.com/docker/for-win/issues/1544), [docker/for-win#191](https://github.com/docker/for-win/issues/191)
+  - Desktop icon creation is optional in installer, do not recreate Desktop icon on upgrade (effective on next upgrade). Fixes [docker/for-win#246](https://github.com/docker/for-win/issues/246), [docker/for-win#925](https://github.com/docker/for-win/issues/925), [docker/for-win#1551](https://github.com/docker/for-win/issues/1551)
+
 ### Docker Community Edition 17.12.0-ce-win47 2018-01-12
 
 [Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
