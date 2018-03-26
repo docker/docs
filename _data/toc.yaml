@@ -1733,6 +1733,8 @@ manuals:
             path: /ee/ucp/interlock/usage/host-mode-networking/
           - title: Service labels reference
             path: /ee/ucp/interlock/usage/labels-reference/
+        - title: Layer 7 routing upgrade
+          path: /ee/ucp/interlock/upgrade/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Deploy a workload
