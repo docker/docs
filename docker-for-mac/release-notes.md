@@ -20,6 +20,34 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.03.0-ce-mac59 2018-03-26
+
+[Download](https://download.docker.com/mac/stable/23608/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
+  - [Docker Machine 0.14.0](https://github.com/docker/machine/releases/tag/v0.14.0)
+  - [Docker compose 1.20.1](https://github.com/docker/compose/releases/tag/1.20.1)
+  - [Notary 0.6.0](https://github.com/docker/notary/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.87  
+  - AUFS 20180312
+
+* New
+  - VM Swap size can be changed in settings. See [docker/for-mac#2566](https://github.com/docker/for-mac/issues/2566), [docker/for-mac#2389](https://github.com/docker/for-mac/issues/2389)
+  - New menu item to restart Docker.
+  - Support NFS Volume sharing.
+  - The directory holding the disk images has been renamed (from `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux` to ~/Library/Containers/com.docker.docker/Data/vms/0`).
+
+* Bug fixes and minor changes
+  - Fix daemon not starting properly when setting TLS-related options. Fixes [docker/for-mac#2663](https://github.com/docker/for-mac/issues/2663)
+  - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. `host.docker.internal`).
+  - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
+  - Clearer error message when incompatible hardware is detected.
+  - Fix some cases where selecting "Reset" after an error did not reset properly.
+  - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/docker-for-mac/docker-toolbox/#migrating-from-docker-toolbox-to-docker-for-mac) ).
+
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 
 [Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
