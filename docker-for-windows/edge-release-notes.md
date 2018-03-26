@@ -18,6 +18,17 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.03.0-ce-win58 2018-03-26
+
+[Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
+  - [Docker compose 1.20.1](https://github.com/docker/compose/releases/tag/1.20.1)
+
+* Bug fixes and minor changes
+  - Adding Docker for Windows icon on desktop is optional in the installer. Fixes [docker/for-win#246](https://github.com/docker/for-win/issues/246)
+
 ### Docker Community Edition 18.03.0-ce-rc4-win57 2018-03-15
 
 [Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe)
