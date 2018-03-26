@@ -10,6 +10,14 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.7 (2018-03-26)
+
+**Bug fixes**
+
+* Fixed an issue where the minimum TLS version setting is not correctly handled,
+  leading to non-default values causing `ucp-controller` and `ucp-agent` to keep 
+  restarting.
+
 ## Version 2.2.6 (2018-03-19)
 
 **New features**
