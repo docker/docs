@@ -8,9 +8,10 @@ open source and we deeply appreciate contributions from our community!
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy. You can edit, rate, or
-file an issue at the bottom of every page on
-[https://docs.docker.com/](https://docs.docker.com/).
+We really want your feedback, and we've made it easy.  You can edit a page or 
+request changes in the right column of every page on [https://docs.docker.com/]
+(https://docs.docker.com/).  You can also rate each page by clicking a link at 
+the footer.
 
 **Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
