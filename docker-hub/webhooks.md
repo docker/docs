@@ -13,7 +13,7 @@ Configure webhooks on `https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settin
 
 ![Create Webhook](/docker-hub/images/webhooks.png)
 
-With your webhook, you specify a target URL to POST to. URL that accepts data from the Webhook, stores this POST request in JSON or XML format. Docker Hub POSTs
+With your webhook, you specify a target URL to POST to. Docker Hub POSTs Docker Hub POSTs
 the URL with the following payload:
 
 ```json
