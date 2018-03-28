@@ -1715,8 +1715,8 @@ manuals:
             path: /ee/ucp/interlock/usage/
           - title: Set a default service
             path: /ee/ucp/interlock/usage/default-service/
-          - title: Applications with SSL
-            path: /ee/ucp/interlock/usage/ssl/
+          - title: Applications with TLS
+            path: /ee/ucp/interlock/usage/tls/
           - title: Application redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Persistent (sticky) sessions
