@@ -3069,6 +3069,8 @@ manuals:
     section:
     - path: /docker-store/publish/
       title: Publish content on Docker Store
+    - path: /docker-store/certification/
+      title: Certify your content
     - path: /docker-store/trustchain/
       title: Docker Store trust chain
     - path: /docker-store/byol/
