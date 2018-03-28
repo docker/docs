@@ -6,62 +6,21 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-Here is information about how to diagnose and troubleshoot problems, send logs,
-and communicate with the Docker for Windows team, use our forums and Knowledge
-Hub, browse and log issues on GitHub, and find workarounds for known problems.
+This page explains how to diagnose and troubleshoot problems you may be having with Docker for Windows.
 
-## Docker Knowledge Hub
+## Getting help
 
-**Looking for help with Docker for Windows?** Check out the [Docker Knowledge
-Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
-technical support for various subscription levels.
+There are several ways to get the support you need with Docker for Windows. If you encounter problems not addressed here in the documentation:
 
-## Submitting diagnostics, feedback, and GitHub issues
+- Refer to the knowledge base articles at the [Docker Success Center](https://success.docker.com/q/).
+- Browse the logs (in `User\AppData\Local\Docker`) by clicking **log file** in the Diagnose & Feedback window.
+- Ask questions on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
+- Submit issues at the [Docker for Windows GitHub repo](https://github.com/docker/for-win/issues).
+- Upload diagnostics in the Diagnose & Feedback window. You'll get a unique ID in return.
 
-If you encounter problems for which you do not find solutions in this
-documentation, on [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
+![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
 
-Choose **Diagnose & Feedback** from the menu bar.
-
-![Diagnose & Feedback](images/diagnose-feedback.png)
-
-Select **Upload a diagnostic**.  It runs diagnostics, shows results, and uploads
-the results to Docker.  A diagnostic ID is generated, which must be provided
-when communicating with the Docker Team.  Optionally, you can open an issue on
-GitHub using the uploaded results and ID as a basis.
-
-![Diagnose & Feedback with ID](images/diagnose-feedback-id.png)
-
-If you click on **docker/for-win** this opens [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
-“create new issue” template.
-
-![issue template](images/issues-template.png)
-
-
-## Check the Logs
-
-In addition to using the diagnose and feedback option to submit logs, you can
-browse the logs yourself.
-
-### Use the systray menu to view logs
-
-To view Docker for Windows latest log, click on the `Diagnose & Feedback` menu
-entry in the systray and then on the `Log file` link. You can see the full
-history of logs in your `AppData\Local` folder.
-
-### Use the systray menu to report and issue
-
-If you encounter an issue and the suggested troubleshoot procedures outlined
-below don't fix it you can generate a diagnostics report. Click on the `Diagnose
-& Feedback` menu entry in the systray and then on the `Upload diagnostic...`
-link.  This uploads diagnostics to our server and provide you with a unique ID
-you can use in email or the forum to reference the upload.
-
-## Troubleshooting
+## Troubleshooting topics
 
 ### Make sure certificates are set up correctly
 
@@ -108,17 +67,9 @@ volume defaults at container runtime, you need to either use non-host-mounted
 volumes or find a way to make the applications work with the default file
 permissions.
 
-Docker for Windows currrently implements host-mounted volumes based on the
-[Microsoft SMB
-protocol](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx),
-which does not support fine-grained, `chmod` control over these permissions.
+Docker for Windows currrently implements host-mounted volumes based on the [Microsoft SMB protocol](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx), which does not support fine-grained, `chmod` control over these permissions.
 
-See also, [Can I change permissions on shared volumes for container-specific
-deployment
-requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
-in the FAQs, and for more of an explanation, the GitHub issue, [Controlling
-Unix-style perms on directories passed through from shared Windows
-drives](https://github.com/docker/docker.github.io/issues/3298).
+See also, [Can I change permissions on shared volumes for container-specific deployment requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements) in the FAQs, and for more of an explanation, the GitHub issue, [Controlling Unix-style perms on directories passed through from shared Windows drives](https://github.com/docker/docker.github.io/issues/3298).
 
 #### inotify on shared drives does not work
 
@@ -127,22 +78,13 @@ for example, when an application needs to read/write to a container across a
 mounted drive. Instead of relying on filesystem inotify, we recommend using
 polling features for your framework or programming language.
 
-* **Workaround for nodemon and Node.js** - If you are using
-  [nodemon](https://github.com/remy/nodemon) with `Node.js`, try the fallback
-  polling mode described here: [nodemon isn't restarting node
-  applications](https://github.com/remy/nodemon#application-isnt-restarting)
+* **Workaround for nodemon and Node.js** - If you are using [nodemon](https://github.com/remy/nodemon) with `Node.js`, try the fallback polling mode described here: [nodemon isn't restarting node applications](https://github.com/remy/nodemon#application-isnt-restarting)
 
-* **Docker for Windows issue on GitHub** - See the issue [Inotify on shared
-  drives does not
-  work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
+* **Docker for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
 
 #### Volume mounting requires shared drives for Linux containers
 
-If you are using mounted volumes and get runtime errors indicating an
-application file is not found, access is denied to a volume mount, or a service
-cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
-you might need to enable [shared
-drives](index.md#shared-drives).
+If you are using mounted volumes and get runtime errors indicating an application file is not found, access is denied to a volume mount, or a service cannot start, such as when using [Docker Compose](/compose/gettingstarted.md), you might need to enable [shared drives](index.md#shared-drives).
 
 Volume mounting requires shared drives for Linux containers (not for Windows
 containers). Go to ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
@@ -173,7 +115,8 @@ local user is `samstevens` and the domain user is `merlin`.
 2. Run `net share c` to view user permissions for `<host>\<username>, FULL`.
 
    ```
-   PS C:\Users\jdoe> net share c
+   > net share c
+
    Share name        C
    Path              C:\
    Remark
@@ -196,7 +139,8 @@ local user is `samstevens` and the domain user is `merlin`.
 5. Re-run `net share c`.
 
    ```
-   PS C:\Users\jdoe> net share c
+   > net share c
+
    Share name        C
    Path              C:\
    Remark
@@ -289,18 +233,12 @@ Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
 it for you.
 
-See [these
-instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install)
-to install Hyper-V manually. A reboot is *required*. If you install Hyper-V
-without the reboot, Docker for Windows does not work correctly. On some systems,
-Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor
-specific, but typically the BIOS option is called `Virtualization Technology
-(VTx)` or similar.
+See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows does not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
 
 Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or
 off".
 
-![Hyper-V on Windows features](images/hyper-v-enable-status.png)
+![Hyper-V on Windows features](images/hyperv-enabled.png)
 
 #### Hyper-V driver for Docker Machine
 
@@ -338,53 +276,46 @@ Some users have encountered networking issues during install and startup of
 Docker for Windows. For example, upon install or auto-reboot, network adapters
 and/or WiFi gets disabled. In some scenarios, problems are due to having
 VirtualBox or its network adapters still installed, but in other scenarios this
-is not the case. (See also, Docker for Windows issue on GitHub: [Enabling
-Hyper-V feature turns my wi-fi off
+is not the case. (See also, Docker for Windows issue on GitHub:
+[Enabling Hyper-V feature turns my wi-fi off
 ](https://github.com/docker/for-win/issues/139).)
 
 Here are some steps to take if you encounter similar problems:
 
-1. Make sure virtualization is enabled, as described in the [Virtualization
-   troubleshooting topic](#virtualization-must-be-enabled).
+1.  Ensure virtualization is enabled, as described in the [Virtualization troubleshooting topic](#virtualization-must-be-enabled).
 
-2. Make sure the Hyper-V is installed and enabled, as described in the previous
-   [Hyper-V troubleshooting topic](#hyper-v).
+2.  Ensure the Hyper-V is installed and enabled, as described in the previous [Hyper-V troubleshooting topic](#hyper-v).
 
-3. Check your network switches to see if `DockerNAT` is enabled.
+3.  Check your network switches to see if `DockerNAT` is enabled.
 
-   Open the **Hyper-V Manager**. (On Windows 10, just search for the Hyper-V
-   Manager in the search field in the lower left search field.)
-
-   Select the Virtual Switch Manager on the left-side **Actions** panel.
+    a. Open the **Hyper-V Manager** (search for `hyperv`).
+    b. Select your Hyper-V manager on the left-side of the dialog.
+    c. Select the Virtual Switch Manager on the right-side **Actions** panel.
 
    ![Hyper-V manager](images/hyperv-manager.png)
 
-4. Set up an external network switch. If you plan at any point to use [Docker
-   Machine](/machine/overview.md) to set up multiple local VMs, you need this
-   anyway, as described in the topic on the [Hyper-V driver for [Docker
-   Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT`
-   with this switch.
+4.  Set up an external network switch. If you plan at any point to use
+    [Docker Machine](/machine/overview.md) to set up multiple local VMs, you
+    need this anyway, as described in the topic on the [Hyper-V driver for
+    [Docker Machine](/machine/drivers/hyper-v.md#example). You can replace
+    `DockerNAT` with this switch.
 
-5. If previous steps fail to solve the problems, follow steps on the [Cleanup
-   README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
+5.  If previous steps fail to solve the problems, follow steps on the
+    [Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
 
-    > Read full description of consequences before you run Windows cleanup
-    > script
+    > Read full description before you run Windows cleanup script
     >
-    > The cleanup command has a `-Cleanup` flag and a `-ForceDeleteAllSwitches`
-    > flag. Be sure to read the whole page before running any scripts,
-    > especially the warnings with regard to the `-ForceDeleteAllSwitches`
-    > option.  {: .warning}
+    > The cleanup command has two flags, `-Cleanup` and `-ForceDeleteAllSwitches`.
+    > Read the whole page before running any scripts, especially warnings about `-ForceDeleteAllSwitches`.
+    > {: .warning}
 
 ### Windows containers and Windows Server 2016
 
 If you have questions about how to set up and run Windows containers on Windows
-Server 2016 or Windows 10, see [About Windows containers and Windows Server
-2016](index.md#about-windows-containers-and-windows-server-2016).
+Server 2016 or Windows 10, see [About Windows containers and Windows Server 2016](index.md#about-windows-containers-and-windows-server-2016).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
-[Getting Started with Windows
-Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker for Windows. However, if you install Docker
@@ -423,11 +354,7 @@ Linux containers).
 To reach a Windows container from the local host, you need to specify
 the IP address and port for the container that is running the service.
 
-You can get the container IP address by using [`docker
-inspect`](/engine/reference/commandline/inspect.md) with some `--format` options
-and the ID or name of the container. For the example above, the command would
-look like this, using the name we gave to the container (`webserver`) instead of
-the container ID:
+You can get the container IP address by using [`docker inspect`](/engine/reference/commandline/inspect.md) with some `--format` options and the ID or name of the container. For the example above, the command would look like this, using the name we gave to the container (`webserver`) instead of the container ID:
 
 {% raw %}
 ```bash
@@ -466,12 +393,7 @@ For more information, see:
 
 ### Running Docker for Windows in nested virtualization scenarios
 
-Docker for Windows can run inside a Windows 10 virtual machine (VM) running on
-apps like Parallels or VMware Fusion on a Mac provided that the VM is properly
-configured. However, problems and intermittent failures may still occur due to
-the way these apps virtualize the hardware. For these reasons, _**Docker for
-Windows is not supported for nested virtualization scenarios**_. It might work
-in some cases, and not in others.
+Docker for Windows can run inside a Windows 10 virtual machine (VM) running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker for Windows is not supported for nested virtualization scenarios**_. It might work in some cases, and not in others.
 
 The better solution is to run Docker for Windows natively on a Windows system
 (to work with Windows or Linux containers), or Docker for Mac on Mac to work
@@ -513,19 +435,18 @@ nested virtualization** (the exact menu sequence might vary slightly).
 
 #### Related issues
 
-Discussion thread on GitHub at [Docker for Windows issue
-267](https://github.com/docker/for-win/issues/267)
+Discussion thread on GitHub at [Docker for Windows issue 267](https://github.com/docker/for-win/issues/267)
 
 ### Networking issues
 
-Some users have reported problems connecting to Docker Hub on the Docker for
-Windows stable version. (See GitHub issue
+Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue
 [22567](https://github.com/moby/moby/issues/22567).)
 
 Here is an example command and error message:
 
 ```
-PS C:\Users\jdoe> docker run hello-world
+> docker run hello-world
+
 Unable to find image 'hello-world:latest' locally
 Pulling repository docker.io/library/hello-world
 C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
@@ -552,10 +473,10 @@ under [Settings](index.md#docker-settings).
 ### `inotify` currently does not work on Docker for Windows
 
 If you are using `Node.js` with `nodemon`, a temporary workaround is to try the
-fallback polling mode described here: [nodemon isn't restarting node
-applications](https://github.com/remy/nodemon#application-isnt-restarting). See
-also this issue on GitHub [Inotify on shared drives does not
-work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
+fallback polling mode described here:
+[nodemon isn't restarting node applications](https://github.com/remy/nodemon#application-isnt-restarting). See
+also this issue on GitHub
+[Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
 
 ### Reboot
 
@@ -600,13 +521,13 @@ start failure**. The Comodo Firewall was one example of this problem, but users
 report that software has since been updated to work with these Windows 10
 builds.
 
-See the Comodo forums topics [Comodo Firewall conflict with
-Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
-and [Windows 10 Anniversary build doesn't allow Comodo drivers to be
-installed](https://forums.comodo.com/install-setup-configuration-help-cis/windows-10-aniversary-build-doesnt-allow-comodo-drivers-to-be-installed-t116322.0.html).
+See the Comodo forums topics
+[Comodo Firewall conflict with Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
+and
+[Windows 10 Anniversary build doesn't allow Comodo drivers to be installed](https://forums.comodo.com/install-setup-configuration-help-cis/windows-10-aniversary-build-doesnt-allow-comodo-drivers-to-be-installed-t116322.0.html).
 A Docker for Windows user-created issue describes the problem specifically as it
-relates to Docker: [Docker fails to start on Windows
-10](https://github.com/docker/for-win/issues/27).
+relates to Docker:
+[Docker fails to start on Windows 10](https://github.com/docker/for-win/issues/27).
 
 For a temporary workaround, uninstall the firewall or anti-virus software, or
 explore other workarounds suggested on the forum.
