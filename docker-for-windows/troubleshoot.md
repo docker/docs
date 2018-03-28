@@ -227,7 +227,7 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Virtualization
 
-#### Hyper-V
+#### Hyper-V must be enabled
 
 Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
@@ -235,8 +235,7 @@ it for you.
 
 See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows does not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
 
-Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or
-off".
+Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or off".
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 
@@ -256,19 +255,13 @@ Machine driver example](/machine/drivers/hyper-v.md#example).
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
+In addition to [Hyper-V](#hyper-v), virtualization must be enabled. Check the Performance tab on the
+Task Manager:
+
+![Task Manager](images/virtualization-enabled.png){:width="700px"}
 
 If, at some point, if you manually uninstall Hyper-V or disable virtualization,
-Docker for Windows cannot start.
-
-Verify that virtualization is enabled by checking the Performance tab on the
-Task Manager.
-
-![Task Manager](images/virtualization-enabled.png){:width="600px"}
-
-Also, see the user-reported issue [Unable to run Docker for Windows on Windows
-10 Enterprise](https://github.com/docker/for-win/issues/74).
-
+Docker for Windows cannot start. See: [Unable to run Docker for Windows on Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
 
 ### Networking and WiFi problems upon Docker for Windows install
 
@@ -282,23 +275,19 @@ is not the case. (See also, Docker for Windows issue on GitHub:
 
 Here are some steps to take if you encounter similar problems:
 
-1.  Ensure virtualization is enabled, as described in the [Virtualization troubleshooting topic](#virtualization-must-be-enabled).
+1.  Ensure **virtualization** is enabled, as described above in [Virtualization must be enabled](#virtualization-must-be-enabled).
 
-2.  Ensure the Hyper-V is installed and enabled, as described in the previous [Hyper-V troubleshooting topic](#hyper-v).
+2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V must be enabled](#hyper-v-must-be-enabled).
 
-3.  Check your network switches to see if `DockerNAT` is enabled.
+3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager** on the Actions tab of the **Hyper-V Manager**.
 
-    a. Open the **Hyper-V Manager** (search for `hyperv`).
-    b. Select your Hyper-V manager on the left-side of the dialog.
-    c. Select the Virtual Switch Manager on the right-side **Actions** panel.
-
-   ![Hyper-V manager](images/hyperv-manager.png){:width="600px"}
+    ![Hyper-V manager](images/hyperv-manager.png)
 
 4.  Set up an external network switch. If you plan at any point to use
     [Docker Machine](/machine/overview.md) to set up multiple local VMs, you
-    need this anyway, as described in the topic on the [Hyper-V driver for
-    [Docker Machine](/machine/drivers/hyper-v.md#example). You can replace
-    `DockerNAT` with this switch.
+    need this anyway, as described in the topic on the
+    [Hyper-V driver for Docker Machine](/machine/drivers/hyper-v.md#example).
+    You can replace `DockerNAT` with this switch.
 
 5.  If previous steps fail to solve the problems, follow steps on the
     [Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).

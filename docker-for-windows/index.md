@@ -24,7 +24,7 @@ Docker for Windows is the best way to get started with Docker _on Windows_.
 
 1.  Open a terminal window (Command Prompt or PowerShell, _but not_ PowerShell ISE).
 
-2.  Run `docker --version ` to ensure that you have a supported version of Docker:
+2.  Run `docker --version` to ensure that you have a supported version of Docker:
 
     ```shell
     > docker --version
@@ -32,7 +32,7 @@ Docker for Windows is the best way to get started with Docker _on Windows_.
     Docker version 18.03.0-ce, build 0520e24
     ```
 
-2.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and run a container:
+3.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and run a container:
 
     ```shell
     > docker run hello-world
@@ -56,19 +56,19 @@ Docker for Windows is the best way to get started with Docker _on Windows_.
     ...
     ```
 
-3.  List the `hello-world` _image_ that was downloaded from Docker Hub:
+4.  List the `hello-world` _image_ that was downloaded from Docker Hub:
 
     ```shell
     > docker image ls
     ```
 
-4.  List the `hello-world` _container_ (which exited after displaying "Hello from Docker!"):
+5.  List the `hello-world` _container_ (which exited after displaying "Hello from Docker!"):
 
     ```shell
     > docker container ls --all
     ```
 
-5.  Explore Docker help pages by running these three help commands:
+6.  Explore Docker help pages by running these three help commands:
 
     ```shell
     > docker --help
@@ -115,14 +115,16 @@ running more complex applications, such as an OS and a webserver.
     ```
     Notice that the hostname is assigned as the container ID (and is also used in the prompt).
 
-3.  Exit and stop the container with the `exit` command:
+3.  Exit the shell with the `exit` command (which also stops the container):
 
     ```shell
     root@8aea0acb7423:/# exit
     >
     ```
 
-4.  List _all_ containers (none of which are running) and notice the randomly assigned names:
+4.  List containers with the `--all` option (becasue no containers are running).
+
+    The `hello-world` container (randomly named, `relaxed_sammet`) stopped after displaying its message. The `ubuntu` container (randomly named, `laughing_kowalevski`) stopped when you exited the container.
 
     ```shell
     > docker container ls --all
@@ -131,8 +133,6 @@ running more complex applications, such as an OS and a webserver.
     8aea0acb7423    ubuntu         "bash"      2 minutes ago    Exited (0) 2 minutes ago             laughing_kowalevski
     45f77eb48e78    hello-world    "/hello"    3 minutes ago    Exited (0) 3 minutes ago             relaxed_sammet
     ```
-
-    The hello-world container stopped after displaying its message. The Ubuntu container stopped when you ran `exit`.
 
 5.  Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) web server that we name, `webserver`:
 
