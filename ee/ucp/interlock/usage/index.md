@@ -34,7 +34,7 @@ services:
       labels:
         com.docker.lb.hosts: app.example.org
         com.docker.lb.network: demo-network
-        com.docker.lb.port: 80
+        com.docker.lb.port: 8080
     networks:
       - demo-network
 
