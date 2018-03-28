@@ -4,39 +4,22 @@ keywords: windows, beta, edge, alpha, install, download
 title: Install Docker for Windows
 ---
 
-Docker for Windows is a [Docker Community Edition
-(CE)](https://www.docker.com/community-edition) desktop app. The Docker for Windows 
-install package includes everything you need to run Docker on a Windows system.
-This topic describes pre-install considerations, and how to download and install
-Docker for Windows.<br><br>
+Docker for Windows is a desktop application based on
+[Docker Community Edition (CE)](https://www.docker.com/community-edition).
+The Docker for Windows install package includes everything you need to run
+Docker on a Windows system. 
 
->**Installing Docker on Windows Server?** Please see 
-[installing Docker EE on Windows Server](/install/windows/docker-ee.md).
-
-> **Already have Docker for Windows?**
-> If you already have Docker for
-Windows installed, and are ready to get started, skip to
-[Get started with Docker for Windows](index.md) for a quick tour of
-the command line, settings, and tools.
-
->**Looking for Release Notes?** Get release notes for [Stable](release-notes.md)
->and [Edge](edge-release-notes.md) releases.
-
+> For **Windows Server on Docker Enterprise Edition**, see [Install Docker Enterprise Edition for Windows Server](/install/windows/docker-ee.md).
 
 ## Download Docker for Windows
 
-If you have not already done so, install Docker for Windows. You can
-download installers from the **Stable** or **Edge** channel.
+You can download Docker for Windows installers from the **Stable** or **Edge** channel.
 
 Both Stable and Edge installers come with <a
 href="https://github.com/docker/cli/blob/master/experimental/README.md">
-experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on and off in [preferences](index.md#daemon-experimental-mode).
+experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on/off on the Daemon tab of the  [Settings dialog](index.md#daemon-experimental-mode).
 
-We welcome your
-[feedback](index.md#giving-feedback-and-getting-help) to help us improve Docker for Windows.
-
-For more about Stable and Edge channels, see the
-[FAQs](faqs.md#questions-about-stable-and-edge-channels).
+For more about Stable and Edge channels, see the [FAQs](faqs.md#questions-about-stable-and-edge-channels).
 
 <table style="width:100%">
   <tr>
@@ -68,16 +51,15 @@ For more about Stable and Edge channels, see the
 
 * Legacy (`.msi`) installers are available for [Edge](https://download.docker.com/win/edge/InstallDocker.msi) and [Stable](https://download.docker.com/win/stable/InstallDocker.msi) channels.
 
-* Docker for Windows is designed to configure Docker development environments on Windows 10. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/install/windows/docker-ee.md). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/install/index.md).
+* Docker for Windows is designed to configure Docker development environments on Windows 10. You can develop both _Docker Linux_ containers and _Docker Windows_ containers. To run Docker Windows containers in production, see [Install Docker Enterprise Edition for Windows Server](/install/windows/docker-ee.md). To run Docker Linux containers in production, see [Install Docker](/install/index.md).
 
-* Docker for Windows requires 64bit Windows 10 Pro with Hyper-V available. See [What to know before you install](install.md#what-to-know-before-you-install) for a full list
+* Docker for Windows requires 64-bit Windows 10 Pro with Hyper-V available. See [What to know before you install](install.md#what-to-know-before-you-install) for a full list
 of prerequisites.
 
-* You can switch between Edge and Stable versions, but you can only have one
-   app installed at a time. Also, you need to save images and export
-   containers you want to keep before uninstalling the current version before
-   installing another. For more about this, see the [FAQs about Stable and Edge
-   channels](faqs.md#questions-about-stable-and-edge-channels).
+* You can switch between Edge and Stable versions, but you can only have one app
+installed at a time. Also, you need to save images and export containers you
+want to keep before uninstalling the current version before installing another.
+For more about this, see the [FAQs about Stable and Edge channels](faqs.md#questions-about-stable-and-edge-channels).
 
 ##  What to know before you install
 
@@ -138,19 +120,18 @@ Windows containers.
 
 3. Click **Finish** on the setup complete dialog to launch Docker.
 
-    ![Install complete>](images/installer-finishes.png)
-
 ## Start Docker for Windows
 
-Docker does not start automatically. To start it, search for Docker, select the
-app in the search results, and click it (or hit Return).
+Docker does not start automatically after installation. To start it, search for
+Docker, select **Docker for Windows** in the search results, and click it (or
+hit Enter).
 
-![search for Docker app](images/docker-app-search.png)
+![search for Docker app](images/docker-app-search.png){:width="400px"}
 
 When the whale in the status bar stays steady, Docker is up-and-running, and
 accessible from any terminal window.
 
-![whale on taskbar](images/whale-taskbar-circle.png)
+![whale on taskbar](images/whale-icon-systray.png)
 
 If the whale is hidden in the Notifications area, click the up arrow on the
 taskbar to show it. To learn more, see [Docker Settings](index.md#docker-settings).
@@ -158,7 +139,7 @@ taskbar to show it. To learn more, see [Docker Settings](index.md#docker-setting
 If you just installed the app, you also get a popup success message with
 suggested next steps, and a link to this documentation.
 
-![Startup information](images/install-success-popup-cloud.png)
+![Startup information](images/docker-app-welcome.png){:width="400px"}
 
 When initialization is complete, select **About Docker** from the notification
 area icon to verify that you have the latest version.
@@ -167,20 +148,12 @@ Congratulations! You are up and running with Docker for Windows.
 
 ## Where to go next
 
-* [Getting started](index.md) provides an overview of Docker for Windows, basic
-  Docker command examples, how to get help or give feedback, and links to all
-  topics in the Docker for Windows guide.
+* [Getting started](index.md) introduces Docker for Windows.
 
-* [Get started with Docker](/get-started/) teaches you how to define and deploy
-  applications with Docker.
+* [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
 
-* [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
-  to run and submit diagnostics, and submit issues.
+* [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and how to get support.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases (or [Edge Release
-  Notes](edge-release-notes.md)).
-
-* [Get Started with Docker](/get-started/) provides a general Docker tutorial.
+* [Stable Release Notes](release-notes.md) or [Edge Release Notes](edge-release-notes.md).

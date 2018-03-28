@@ -13,15 +13,18 @@ redirect_from:
 title: Get started with Docker for Windows
 ---
 
-Welcome to Docker for Windows! Docker is a full development platform for
-creating containerized apps, and Docker for Windows is the best way to get
-started with Docker _on Windows_.
+Welcome to Docker for Windows!
+
+Docker is a full development platform for creating containerized apps, and
+Docker for Windows is the best way to get started with Docker _on Windows_.
 
 > See [Install Docker for Windows](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
 
 ## Test your installation
 
-1.  Open "Command Prompt (`cmd`) and run `docker --version ` to ensure that you have a supported version of Docker:
+1.  Open a terminal window (Command Prompt or PowerShell, _but not_ PowerShell ISE).
+
+2.  Run `docker --version ` to ensure that you have a supported version of Docker:
 
     ```shell
     > docker --version
@@ -29,7 +32,7 @@ started with Docker _on Windows_.
     Docker version 18.03.0-ce, build 0520e24
     ```
 
-2.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and spawn a container:
+2.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and run a container:
 
     ```shell
     > docker run hello-world
@@ -53,13 +56,13 @@ started with Docker _on Windows_.
     ...
     ```
 
-3.  List the `hello-world` **image** that was downloaded from Docker Hub:
+3.  List the `hello-world` _image_ that was downloaded from Docker Hub:
 
     ```shell
     > docker image ls
     ```
 
-4.  List the `hello-world` **container** (which exited after displaying "Hello from Docker!"):
+4.  List the `hello-world` _container_ (which exited after displaying "Hello from Docker!"):
 
     ```shell
     > docker container ls --all
@@ -71,14 +74,15 @@ started with Docker _on Windows_.
     > docker --help
     > docker container --help
     > docker container ls --help
+    > docker run --help
     ```
 
 ## Explore the application
 
-In this section, we demonstrate the simplicity and power of Dockerized applications
-by running something more complex, an OS and a webserver.
+In this section, we demonstrate the ease and power of Dockerized applications by
+running more complex applications, such as an OS and a webserver.
 
-1.  In a Command Prompt terminal, pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/), and run an interactive terminal inside the spawned container:
+1.  Pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/) and run an interactive terminal inside the spawned container:
 
     ```shell
     > docker run --interactive --tty ubuntu bash
@@ -99,7 +103,9 @@ by running something more complex, an OS and a webserver.
     Status: Downloaded newer image for ubuntu:latest
     ```
 
-    Run `docker run --help` for explanations of the options used in this step (`--interactive` and `--tty`).
+    > Do not use PowerShell ISE
+    >
+    > Interactive terminals do not work in PowerShell ISE (but they do in PowerShell). See [docker/for-win/issues/223](https://github.com/docker/for-win/issues/223).
 
 2.  You are in the container. At the root `#` prompt, check the `hostname` of the container:
 
@@ -107,23 +113,28 @@ by running something more complex, an OS and a webserver.
     root@8aea0acb7423:/# hostname
     8aea0acb7423
     ```
-    The hostname is assigned the container ID (and matches the ID in the prompt).
+    Notice that the hostname is assigned as the container ID (and is also used in the prompt).
 
-3.  Exit the container with the command, `exit`.
+3.  Exit and stop the container with the `exit` command:
 
-4.  List _all_ containers (none of which are running):
+    ```shell
+    root@8aea0acb7423:/# exit
+    >
+    ```
+
+4.  List _all_ containers (none of which are running) and notice the randomly assigned names:
 
     ```shell
     > docker container ls --all
 
-    CONTAINER ID      IMAGE            COMMAND       CREATED            STATUS                        PORTS      NAMES
-    8aea0acb7423      ubuntu           "bash"        2 minutes ago      Exited (0) 2 minutes ago                 laughing_kowalevski
-    45f77eb48e78      hello-world      "/hello"      3 minutes ago      Exited (0) 3 minutes ago                 relaxed_sammet
+    CONTAINER ID    IMAGE          COMMAND     CREATED          STATUS                      PORTS    NAMES
+    8aea0acb7423    ubuntu         "bash"      2 minutes ago    Exited (0) 2 minutes ago             laughing_kowalevski
+    45f77eb48e78    hello-world    "/hello"    3 minutes ago    Exited (0) 3 minutes ago             relaxed_sammet
     ```
 
-    The hello-world container stopped after displaying its message. The Ubuntu container stopped when you typed `exit`.
+    The hello-world container stopped after displaying its message. The Ubuntu container stopped when you ran `exit`.
 
-5.  Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) webserver:
+5.  Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) web server that we name, `webserver`:
 
     ```shell
     > docker run --detach --publish 80:80 --name webserver nginx
@@ -149,34 +160,35 @@ by running something more complex, an OS and a webserver.
     ```shell
     > docker container ls
 
-    CONTAINER ID      IMAGE      COMMAND                     CREATED            STATUS            PORTS                   NAMES
-    0e788d8e4dfd      nginx      "nginx -g 'daemon of…"      2 minutes ago      Up 2 minutes      0.0.0.0:80->80/tcp      webserver
+    CONTAINER ID    IMAGE    COMMAND                   CREATED          STATUS          PORTS                 NAMES
+    0e788d8e4dfd    nginx    "nginx -g 'daemon of…"    2 minutes ago    Up 2 minutes    0.0.0.0:80->80/tcp    webserver
     ```
 
 8.  Stop the running nginx container by the name we assigned it, `webserver`:
 
     ```shell
-    docker container stpp webserver
+    >  docker container stop webserver
     ```
 
-9.  Remove all three containers by their names (that latter two which will differ for you):
+9.  Remove all three containers by their names -- the latter two names will differ for you:
 
     ```shell
     > docker container rm webserver laughing_kowalevski relaxed_sammet
     ```
 
-## Docker for Windows menu and Settings dialog
+## Docker Settings dialog
 
 The **Docker for Windows menu** is a popup by which you can configure your
-Docker installation, check for updates, change version channels, sign in to
-Docker Hub, and more. This section explains the configuration options accessible
-from the Settings dialog.
+Docker settings -- installation, updates, version channels, Docker Hub login,
+and more.
+
+This section explains the configuration options accessible from the **Settings...** dialog.
 
 1.  Open the Docker for Windows menu by right-clicking the Docker icon in the Notifications area (or System tray):
 
-    ![Showing hidden apps in the taskbar](images/docker-icon-systray.png){:width="250px"}
+    ![Showing hidden apps in the taskbar](images/whale-icon-systray-hidden.png){:width="250px"}
 
-2.  Select Settings to open the Settings dialog:
+2.  Select **Settings...** to open the Settings dialog:
 
     ![Docker for Windows popup menu](images/docker-menu-settings.png){:width="450px"}
 
@@ -240,17 +252,20 @@ nodes. See the FAQ, [Can I share local drives and filesystem with my Docker Mach
 
 #### Firewall rules for shared drives
 
-Shared drives require port 445 to be open between the host machine and the virtual
-machine that runs Linux containers.
+Shared drives require port 445 to be open between the host machine and the
+virtual machine that runs Linux containers. Docker detects if port 445 is closed
+and shows the following message when you try to add a shared drive:
 
-> Docker detects if port 445 is closed and shows the following message when you
-> try to add a shared drive: ![Port 445 blocked](images/shared-drive-firewall-blocked.png)
+![Port 445 blocked](images/shared-drive-firewall-blocked.png)
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
-do not need to open port 445 on any other network. By default, allow connections
-to `10.0.75.1` port 445 (the Windows host) from `10.0.75.2` (the virtual machine).
-If the firewall rules appear to be open, consider [reinstalling the File and Print Sharing service on the virtual network adapter](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
+do not need to open port 445 on any other network.
+
+By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
+`10.0.75.2` (the virtual machine). If your firewall rules seem corret, you may
+need to toggle or
+[reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
 
 #### Shared drives on demand
 
@@ -456,6 +471,10 @@ experience conflicts, remove it.
 
 ### Diagnose & feedback
 
+Use this tab to troubleshoot problems and get help from Docker.
+
+![Reset](images/settings-diagnose.png){:width="600px"}
+
 Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
 
 Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues. See [Logs and Troubleshooting](troubleshoot.md) for more details.
@@ -529,8 +548,6 @@ Select **Docker Store** from the Docker for Windows menu to access the [Docker s
 
 Docker Store is a component of the next-generation [Docker Hub](https://hub.docker.com) and the best place to find compliant, trusted
 commercial and free software distributed as Docker Images.
-
-![Docker Store](images/docker-store.png)
 
 Refer to the [Docker Store documentation](/docker-store/index.md){: target="_blank" class="_" }
 
