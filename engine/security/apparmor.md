@@ -69,7 +69,7 @@ The syntax for file globbing in AppArmor is a bit different than some other
 globbing implementations. It is highly suggested you take a look at some of the
 below resources with regard to AppArmor profile syntax.
 
-- [Quick Profile Language](http://wiki.apparmor.net/index.php/QuickProfileLanguage)
+- [Quick Profile Language](https://gitlab.com/apparmor/apparmor/wikis/QuickProfileLanguage)
 - [Globbing Syntax](http://wiki.apparmor.net/index.php/AppArmor_Core_Policy_Reference#AppArmor_globbing_syntax)
 
 ## Nginx example profile
