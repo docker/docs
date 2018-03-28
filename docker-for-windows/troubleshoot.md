@@ -129,7 +129,7 @@ local user is `samstevens` and the domain user is `merlin`.
 3. Run the following command to remove the share.
 
    ```
-   net share c /delete
+   > net share c /delete
    ```
 
 4. Re-share the drive via the [Shared Drives
@@ -332,8 +332,8 @@ endpoints are only reachable from the host using the container's IP and port.
 So, in a scenario where you use Docker to pull an image and run a webserver with
 a command like this:
 
-```
-docker run -d -p 80:80 --name webserver nginx
+```shell
+> docker run -d -p 80:80 --name webserver nginx
 ```
 
 Using `curl http://localhost`, or pointing your web browser at
@@ -433,7 +433,7 @@ Some users have reported problems connecting to Docker Hub on the Docker for Win
 
 Here is an example command and error message:
 
-```
+```shell
 > docker run hello-world
 
 Unable to find image 'hello-world:latest' locally
