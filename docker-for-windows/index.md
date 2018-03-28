@@ -115,7 +115,7 @@ running more complex applications, such as an OS and a webserver.
     ```
     Notice that the hostname is assigned as the container ID (and is also used in the prompt).
 
-3.  Exit the container with the `exit` command (which also stops the container):
+3.  Exit the shell with the `exit` command (which also stops the container):
 
     ```shell
     root@8aea0acb7423:/# exit

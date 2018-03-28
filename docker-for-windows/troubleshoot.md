@@ -275,11 +275,11 @@ is not the case. (See also, Docker for Windows issue on GitHub:
 
 Here are some steps to take if you encounter similar problems:
 
-1.  Ensure virtualization is enabled, as described above in [Virtualization must be enabled](#virtualization-must-be-enabled).
+1.  Ensure **virtualization** is enabled, as described above in [Virtualization must be enabled](#virtualization-must-be-enabled).
 
-2.  Ensure the Hyper-V is installed and enabled, as described above in [Hyper-V must be enabled](#hyper-v-must-be-enabled).
+2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V must be enabled](#hyper-v-must-be-enabled).
 
-3.  Ensure that `DockerNAT` is enabled by checking the **Virtual Switch Manager** on the Actions tab of the **Hyper-V Manager**.
+3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager** on the Actions tab of the **Hyper-V Manager**.
 
     ![Hyper-V manager](images/hyperv-manager.png)
 
