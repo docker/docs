@@ -18,7 +18,7 @@ There are several ways to get the support you need with Docker for Windows. If y
 - Submit issues at the [Docker for Windows GitHub repo](https://github.com/docker/for-win/issues).
 - Upload diagnostics in the Diagnose & Feedback window. You'll get a unique ID in return.
 
-![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
+![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="500px"}
 
 ## Troubleshooting topics
 
@@ -238,7 +238,7 @@ See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_
 Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or
 off".
 
-![Hyper-V on Windows features](images/hyperv-enabled.png)
+![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 
 #### Hyper-V driver for Docker Machine
 
@@ -264,7 +264,7 @@ Docker for Windows cannot start.
 Verify that virtualization is enabled by checking the Performance tab on the
 Task Manager.
 
-![Task Manager](images/virtualization-enabled.png)
+![Task Manager](images/virtualization-enabled.png){:width="600px"}
 
 Also, see the user-reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74).
@@ -292,7 +292,7 @@ Here are some steps to take if you encounter similar problems:
     b. Select your Hyper-V manager on the left-side of the dialog.
     c. Select the Virtual Switch Manager on the right-side **Actions** panel.
 
-   ![Hyper-V manager](images/hyperv-manager.png)
+   ![Hyper-V manager](images/hyperv-manager.png){:width="600px"}
 
 4.  Set up an external network switch. If you plan at any point to use
     [Docker Machine](/machine/overview.md) to set up multiple local VMs, you
