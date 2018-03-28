@@ -62,13 +62,13 @@ Docker for Windows is the best way to get started with Docker _on Windows_.
     > docker image ls
     ```
 
-5.  List the `hello-world` _container_ (which exited after displaying "Hello from Docker!"):
+5.  List the `hello-world` _container_ (that exited after displaying "Hello from Docker!"):
 
     ```shell
     > docker container ls --all
     ```
 
-6.  Explore Docker help pages by running these three help commands:
+6.  Explore the Docker help pages by running some help commands:
 
     ```shell
     > docker --help
@@ -80,7 +80,7 @@ Docker for Windows is the best way to get started with Docker _on Windows_.
 ## Explore the application
 
 In this section, we demonstrate the ease and power of Dockerized applications by
-running more complex applications, such as an OS and a webserver.
+running something more complex, such as an OS and a webserver.
 
 1.  Pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/) and run an interactive terminal inside the spawned container:
 
@@ -182,7 +182,7 @@ The **Docker for Windows menu** is a popup by which you can configure your
 Docker settings -- installation, updates, version channels, Docker Hub login,
 and more.
 
-This section explains the configuration options accessible from the **Settings...** dialog.
+This section explains the configuration options accessible from the **Settings** dialog.
 
 1.  Open the Docker for Windows menu by right-clicking the Docker icon in the Notifications area (or System tray):
 
