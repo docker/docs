@@ -18,7 +18,7 @@ suitably secure.
 
 ```conf
 #
-# example Dockerfile for https://docs.docker.com/examples/postgresql_service/
+# example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
 #
 
 FROM ubuntu
