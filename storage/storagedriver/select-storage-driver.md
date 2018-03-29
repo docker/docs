@@ -5,6 +5,7 @@ keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, o
 redirect_from:
 - /engine/userguide/storagedriver/
 - /engine/userguide/storagedriver/selectadriver/
+- /storage/storagedriver/selectadriver/
 ---
 
 Ideally, very little data is written to a container's writable layer, and you
