@@ -144,9 +144,12 @@ was aborterd.
 
 ## Let your service handle TLS
 
-If you want to encrypt the traffic from end-users to your swarm service,
-use the following docker-compose.yml file instead:
+You can also  encrypt the traffic from end-users to your swarm service.
 
+![End-to-end encryption](../../images/interlock-tls-3.png)
+
+
+To do that, deploy your swarm service using the following docker-compose.yml file:
 
 ```yml
 version: "3.2"
