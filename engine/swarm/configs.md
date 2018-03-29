@@ -17,6 +17,7 @@ not encrypted at rest and are mounted directly into the container's filesystem
 without the use of RAM disks. Configs can be added or removed from a service at
 any time, and services can share a config. You can even use configs in
 conjunction with environment variables or labels, for maximum flexibility.
+Config values can be generic strings or binary content (up to 500 kb in size).
 
 > **Note**: Docker configs are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
