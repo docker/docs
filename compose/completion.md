@@ -56,7 +56,7 @@ Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh
 
 ```shell
 $ mkdir -p ~/.zsh/completion
-$ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+$ curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker > ~/.zsh/completion/_docker
 ```
 
 Include the directory in your `$fpath` by adding in `~/.zshrc`:
