@@ -40,7 +40,7 @@ All container logs are aggregated within the `xxxxlog` storage account.
 
 ## Where do I report problems or bugs?
 
-Send an email to <docker-for-iaas@docker.com> or post to the [Docker for Azure](https://github.com/docker/for-azure) GitHub repositories.
+Search for existing issues, or create a new one, within the [Docker for Azure](https://github.com/docker/for-azure) GitHub repositories.
 
 In Azure, if your resource group is misbehaving, run the following diagnostic tool from one of the managers - this collects your docker logs and sends them to Docker:
 

@@ -154,7 +154,7 @@ Benchmark of 3 Managers (m4.large) + 200 workers (t2.medium):
 
 ## Where do I report problems or bugs?
 
-Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
+Search for existing issues, or create a new one, within the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
 In AWS, if your stack is misbehaving, run the following diagnostic tool from one of the managers - this collects your docker logs and send them to Docker:
 
