@@ -1608,6 +1608,8 @@ manuals:
           title: UCP configuration file
         - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
+        - path: /ee/ucp/admin/configure/use-nfs-volumes/
+          title: Use NFS persistent storage
         - path: /ee/ucp/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/ucp/admin/configure/manage-and-deploy-private-images/
