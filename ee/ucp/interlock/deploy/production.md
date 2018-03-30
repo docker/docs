@@ -70,6 +70,14 @@ Add another constraint to the `ProxyConstraints` array:
 
 [Learn how to configure ucp-interlock](configure.md).
 
+> Known issue
+>
+> In UCP 3.0.0 the `ucp-interlock` service won't redeploy the proxy replicas
+> when you update the configuration. As a workaround,
+> [deploy a demo service](../usage/index.md). Once you do that, the proxy
+services are redeployed and scheduled on the correct nodes.
+{: .important}
+
 Once you reconfigure the `ucp-interlock` service, you can check if the proxy
 service is running on the dedicated nodes:
 
