@@ -70,6 +70,8 @@ Confirm the version and save scripts to `/etc/bash_completion.d` or
 
 ```bash
 scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do sudo wget https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/${i} -P /etc/bash_completion.d; done
+
+Then you need to run "source /etc/bash_completion.d/docker-machine-prompt.bash" in your bash terminal to tell your setup where it can find the file docker-machine-prompt.bash that you previously downloaded.
 ```
 
 To enable the `docker-machine` shell
