@@ -120,8 +120,7 @@ is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-
 [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
 > - [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} or
-[18.03 Stable (win59)](/docker-for-windows/release-notes/#docker-community-edition-18030-ce-win59-2018-03-26){: target="_blank" class="_"} and higher.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only. 
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
