@@ -1,16 +1,16 @@
 ---
 description: Run certification tests against your images
-keywords: Docker, docker, store, certified content
-title: Certify your content
+keywords: Docker, docker, store, certified content, images
+title: Certify your Docker images
 ---
 
 ## Introduction
 
-Content that qualifies as a Docker Certified image or plugin must conform to best practices and pass certain baseline tests.
+Content that qualifies as **Docker Certified** must conform to best practices and pass certain baseline tests.
 
-In this section, we explain how publishers can successfully test their images and volume, logging, and networking plugins.
+This page explains how publishers can successfully test their **Docker images**. For plugins, see [Certify your Docker logging plugins](certify-plugins-logging).
 
-> Content that requires a non-certified infrastructure environment may not be published as certified.
+> Content that requires a non-certified infrastructure environment cannot be published as certified.
 
 ## Certify your Docker images
 
@@ -139,7 +139,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
 ### Syntax
 
-1.  Download inspectDockerimage command
+1.  Download `inspectDockerimage` command.
 
     | OS/Architecture | Download Link |
     |:-----|:--------|:------|
@@ -150,42 +150,42 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
 2.  Capture the product ID (from the URL in Docker Store) that you want to reference for the certification test.
 
-    ![product ID](https://user-images.githubusercontent.com/2453622/36465530-52f7630e-168a-11e8-93a4-3b94770800c0.png).
+    ![product ID](images/store-product-id.png)
 
-  ```
-  Inspects a Docker image to see if it conforms to best practices.
+    ```none
+    Inspects a Docker image to see if it conforms to best practices.
 
-Syntax: inspectDockerimage [options] dockerimage
+    Syntax: inspectDockerimage [options] dockerimage
 
-Options:
-  -docker-password string
-    	 Docker Password.  This overrides the DOCKER_PASSWORD environment variable.
-  -docker-registry-api-endpoint string
-    	 Docker Registry API Endpoint. This overrides the DOCKER_REGISTRY_API_ENDPOINT environment variable. (default "https://registry-1.docker.io")
-  -docker-registry-auth-endpoint string
-    	 Docker Registry Authentication Endpoint. This overrides the DOCKER_REGISTRY_AUTH_ENDPOINT environment variable. (default "https://auth.docker.io")
-  -docker-user string
-    	 Docker User ID.  This overrides the DOCKER_USER environment variable.
-  -help
-    	 Displays the command help.
-  -html
-    	 Generate HTML output.
-  -json
-    	 Generate JSON output.
-  -log-tail int
-    	Number of lines to show from the end of the container logs. (default 20)
-  -product-id string
-    	 Optional Product identifier from Docker Store for this image. Please include it when you want the output to be sent to docker store.
-  -start-script string
-    	 An optional custom script used to start the Docker container. The script will get passed one argument, the name of the Docker image.
-  -start-wait-time int
-    	 Number of seconds to wait for the Docker container to start. (default 30)
-  -stop-wait-time int
-    	 Number of seconds to wait for the Docker container to respond to the stop before killing it. (default 60)
+    Options:
+      -docker-password string
+        	 Docker Password.  This overrides the DOCKER_PASSWORD environment variable.
+      -docker-registry-api-endpoint string
+        	 Docker Registry API Endpoint. This overrides the DOCKER_REGISTRY_API_ENDPOINT environment variable. (default "https://registry-1.docker.io")
+      -docker-registry-auth-endpoint string
+        	 Docker Registry Authentication Endpoint. This overrides the DOCKER_REGISTRY_AUTH_ENDPOINT environment variable. (default "https://auth.docker.io")
+      -docker-user string
+        	 Docker User ID.  This overrides the DOCKER_USER environment variable.
+      -help
+        	 Displays the command help.
+      -html
+        	 Generate HTML output.
+      -json
+        	 Generate JSON output.
+      -log-tail int
+        	Number of lines to show from the end of the container logs. (default 20)
+      -product-id string
+        	 Optional Product identifier from Docker Store for this image. Please include it when you want the output to be sent to docker store.
+      -start-script string
+        	 An optional custom script used to start the Docker container. The script will get passed one argument, the name of the Docker image.
+      -start-wait-time int
+        	 Number of seconds to wait for the Docker container to start. (default 30)
+      -stop-wait-time int
+        	 Number of seconds to wait for the Docker container to respond to the stop before killing it. (default 60)
 
-  dockerimage
-	The Docker image to inspect. This argument is required.
-  ```
+    dockerimage
+  	The Docker image to inspect. This argument is required.
+    ```
 
 ## Inspection Output
 
