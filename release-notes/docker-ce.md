@@ -943,7 +943,7 @@ use `--detach` to keep the old behaviour.
 * Devicemapper: Rework logging and add `--storage-opt dm.libdm_log_level` [moby/moby#33845](https://github.com/moby/moby/pull/33845)
 * Devicemapper: Prevent "device in use" errors if deferred removal is enabled, but not deferred deletion [moby/moby#33877](https://github.com/moby/moby/pull/33877)
 * Devicemapper: Use KeepAlive to prevent tasks being garbage-collected while still in use [moby/moby#33376](https://github.com/moby/moby/pull/33376)
-* Report inetermediate prune results if prune is cancelled [moby/moby#33979](https://github.com/moby/moby/pull/33979)
+* Report intermediate prune results if prune is cancelled [moby/moby#33979](https://github.com/moby/moby/pull/33979)
 - Fix run `docker rename <container-id> new_name` concurrently resulting in the having multiple names [moby/moby#33940](https://github.com/moby/moby/pull/33940)
 * Fix file-descriptor leak and error handling [moby/moby#33713](https://github.com/moby/moby/pull/33713)
 - Fix SIGSEGV when running containers [docker/cli#303](https://github.com/docker/cli/pull/303)
