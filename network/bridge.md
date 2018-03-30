@@ -254,6 +254,6 @@ user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 ## Next steps
 
 - Go through the [standalone networking tutorial](/network/network-tutorial-standalone.md)
-- Learn about [networking from the container's point of view](/config/container/container-networking.md)
+- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
 - Learn about [overlay networks](/network/overlay.md)
 - Learn about [Macvlan networks](/network/macvlan.md)
