@@ -1705,10 +1705,12 @@ manuals:
           section:
           - title: Simple deployment
             path: /ee/ucp/interlock/deploy/
-          - title: Production deployment
-            path: /ee/ucp/interlock/deploy/production/
           - title: Configure your deployment
             path: /ee/ucp/interlock/deploy/configure/
+          - title: Production deployment
+            path: /ee/ucp/interlock/deploy/production/
+          - title: Host mode networking
+            path: /ee/ucp/interlock/usage/host-mode-networking/
           - title: Configuration reference
             path: /ee/ucp/interlock/deploy/configuration-reference/
         - sectiontitle: Route traffic to services
@@ -1731,8 +1733,6 @@ manuals:
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Context/Path based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Host mode networking
-            path: /ee/ucp/interlock/usage/host-mode-networking/
           - title: Service labels reference
             path: /ee/ucp/interlock/usage/labels-reference/
         - title: Layer 7 routing upgrade
