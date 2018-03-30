@@ -2,16 +2,7 @@
 title: Upgrade to UCP 3.0
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../../release-notes/
-  title: UCP release notes
 ---
-{% if include.version=="ucp-3.0" %}
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version {{ page.ucp_version }}.
@@ -23,13 +14,17 @@ other relevant information for upgrading to a particular version.
 
 ## Plan the upgrade
 
-As part of the upgrade process, you'll be upgrading the Docker Engine
-installed in each node of the cluster to version 17.06 Enterprise Edition.
+As part of the upgrade process, you'll upgrade the Docker EE Engine
+installed on each node of the cluster to version 17.06.2-ee-8.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
 
 Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
+
+Ensure that your cluster nodes meet the minimum requirements for memory and
+disk space. In particular, manager nodes must have at least 4GB of memory.
+Learn about [UCP system requirements](system-requirements.md).  
 
 ## Back up your cluster
 
@@ -110,8 +105,6 @@ for any necessary configuration values.
 Once the upgrade finishes, navigate to the UCP web UI and make sure that
 all the nodes managed by UCP are healthy.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [upgrading UCP](/datacenter/ucp/2.2/guides/admin/install/upgrade.md).
-
-{% endif %}
+- [UCP release notes](../../release-notes.md)
