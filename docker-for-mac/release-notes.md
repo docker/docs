@@ -20,6 +20,13 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.03.0-ce-mac60 2018-03-30
+
+[Download](https://download.docker.com/mac/stable/23751/Docker.dmg)
+
+* Bug fixes and minor changes
+  - Fix Upgrade straight from 17.09 versions where Docker for Mac cannot restart once the upgrade has been perfomed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
+
 ### Docker Community Edition 18.03.0-ce-mac59 2018-03-26
 
 [Download](https://download.docker.com/mac/stable/23608/Docker.dmg)
