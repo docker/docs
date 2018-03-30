@@ -7,22 +7,18 @@ title: Bring Your Own License (BYOL) products on Store
 ## What is Bring Your Own License (BYOL)?
 
 Bring Your Own License (BYOL) allows customers with existing software licenses
-to easily migrate to the containerized version of the software you make
+to easily migrate to the containerized version of the software that you make
 available on Docker Store.
 
-To see and access an ISV's BYOL product listing, customers simply subscribe to
-the product with their Docker ID. We call this **Ungated BYOL**.
+To see and access the BYOL product listing of an Independent Softare Vendor
+(ISV), customers simply subscribe to the product with their Docker ID. We call
+this **Ungated BYOL**.
 
-ISVs can use the Docker Store/Hub as an entitlement and distribution platform.
-Using API’s provided by Docker, ISVs can entitle users and distribute their
-Dockerized content to many different audiences:
+ISVs can use the Docker Store/Hub as an entitlement and distribution platform
+for their various audiences, such as:
 
 - Existing customers that want their licensed software made available as Docker containers.
 - New customers that are only interested in consuming their software as Docker containers.
-- Trial or beta customers, where the ISV can distribute feature or time limited software.
-
-Docker provides a fulfillment service so that ISVs can programmatically entitle
-users, by creating subscriptions to their content in Docker Store.
 
 ## Ungated BYOL
 
