@@ -122,7 +122,7 @@ running something more complex, such as an OS and a webserver.
     >
     ```
 
-4.  List containers with the `--all` option (becasue no containers are running).
+4.  List containers with the `--all` option (because no containers are running).
 
     The `hello-world` container (randomly named, `relaxed_sammet`) stopped after displaying its message. The `ubuntu` container (randomly named, `laughing_kowalevski`) stopped when you exited the container.
 
@@ -427,8 +427,7 @@ For a full list of options on the Docker daemon, see [daemon](/engine/reference/
 
 [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} or
-[18.03 Stable (win59)](/docker-for-windows/release-notes/#docker-community-edition-18030-ce-win59-2018-03-26){: target="_blank" class="_"} and higher.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher.
 
 ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
 
@@ -501,7 +500,7 @@ containers, or select **Switch to Linux containers** to use Linux containers
 
 ![Windows-Linux container types switch](images/docker-menu-switch.png){:width="400px"}
 
-For more information on Windows containers, refer to thiz documentation:
+For more information on Windows containers, refer to this documentation:
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
