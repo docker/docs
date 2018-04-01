@@ -846,7 +846,7 @@ mounts. This principle also applies to services.
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. Regardless of which type of mount you use, configure it using the
 `--mount` flag when you create a service, or the `--mount-add` or `--mount-rm`
-flag when updating an existing service.. The default is a data volume if you
+flag when updating an existing service. The default is a data volume if you
 don't specify a type.
 
 #### Data volumes
