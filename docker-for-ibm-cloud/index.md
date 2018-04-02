@@ -11,6 +11,8 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
 
 [Email IBM to request access to the closed beta](mailto:sealbou@us.ibm.com). In the welcome email you receive, you are given the Docker EE installation URL that you use for the beta.
 
+Looking for the IBM Cloud Container Service? See the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/container_index.html).
+
 ## Prerequisites
 
 To create a swarm cluster in IBM Cloud, you must have certain accounts, credentials, and environments set up.

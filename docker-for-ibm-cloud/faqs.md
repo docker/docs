@@ -149,6 +149,10 @@ SSH into a manager node. Manager nodes are accessed on port 56422.
 alias ssh-docker='function __t() { ssh-keygen -R [$1]:56422 > /dev/null 2>&1; ssh -A -p 56422 -o StrictHostKeyChecking=no docker@$1; unset -f __t; }; __t'
 ```
 
+## Can I run my containers in Kubernetes clusters?
+
+Docker EE for IBM Cloud supports swarm clusters. If you are looking for the IBM Cloud Container Service for Kubernetes clusters, see the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/container_index.html).
+
 ## Are there any known issues?
 
 Yes. News, updates, and known issues are recorded by version on the [Release notes](release-notes.md) page.
