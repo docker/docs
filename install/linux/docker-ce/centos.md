@@ -161,7 +161,7 @@ from the repository.
     ```bash
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.0.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and
@@ -175,7 +175,7 @@ from the repository.
 
     > **Note**: The version string is the package name plus the version up to
     > the first hyphen. In the example above, the fully qualified package name
-    > is `docker-ce-17.06.1.ce`.
+    > is `docker-ce-18.03.0.ce`.
 
     ```bash
     $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
