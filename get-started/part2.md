@@ -328,6 +328,12 @@ python                   2.7-slim            1c7128a655f6        5 days ago     
 Upload your tagged image to the repository:
 
 ```shell
+docker build -t username/repository:tag .
+```
+
+You should build a image with tag before pushing.
+
+```shell
 docker push username/repository:tag
 ```
 
