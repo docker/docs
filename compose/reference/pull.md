@@ -10,7 +10,8 @@ Usage: pull [options] [SERVICE...]
 
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
-    --parallel              Pull multiple images in parallel.
+    --parallel              Deprecated, pull multiple images in parallel (enabled by default).
+    --no-parallel           Disable parallel pulling.
     -q, --quiet             Pull without printing progress information
     --include-deps          Also pull services declared as dependencies
 ```
