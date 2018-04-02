@@ -194,7 +194,8 @@ supported by **Compose 1.9.0+**.
 Introduces the following additional parameters:
 
 - [`link_local_ips`](compose-file-v2.md#linklocalips)
-- [`isolation`](compose-file-v2.md#isolation)
+- [`isolation`](compose-file-v2.md#isolation) in build configurations and
+  service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
   [networks](compose-file-v2.md#network-configuration-reference)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
@@ -203,6 +204,7 @@ Introduces the following additional parameters:
 - [`sysctls`](compose-file-v2.md#sysctls)
 - [`pids_limit`](compose-file-v2.md#pidslimit)
 - [`oom_kill_disable`](compose-file-v2.md#oomkilldisable)
+- [`cpu_period`](compose-file-v2.md)
 
 ### Version 2.2
 
@@ -215,6 +217,7 @@ Introduces the following additional parameters:
 
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
+- [`cpu_rt_runtime` and `cpu_rt_period`](compose-file-v2.md#cpu_rt_runtime-cpu_rt_period)
 
 ### Version 2.3
 
@@ -229,7 +232,17 @@ Introduces the following additional parameters:
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 - [`runtime`](compose-file-v2.md#runtime) for service definitions
-- [`device_cgroup_rules`](compose-file-v2.md#devicecgrouprules)
+- [`device_cgroup_rules`](compose-file-v2.md#device_cgroup_rules)
+
+### Version 2.4
+
+An upgrade of [version 2.3](#version-23) that introduces new parameters only
+available with Docker Engine version **17.12.0+**. Version 2.4 files are
+supported by **Compose 1.21.0+**.
+
+Introduces the following additional parameters:
+
+- [`platform`](compose-file-v2.md#platform) for service definitions
 
 ### Version 3
 
