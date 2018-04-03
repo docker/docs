@@ -7,63 +7,50 @@ redirect_from:
 - /engine/installation/linux/rhel/
 - /engine/installation/linux/docker-ee/rhel/
 title: Get Docker EE for Red Hat Enterprise Linux
-toc_max: 4
 ---
 
 {% assign linux-dist = "rhel" %}
+{% assign linux-dist-cap = "RHEL" %}
 {% assign linux-dist-url-slug = "rhel" %}
 {% assign linux-dist-long = "Red Hat Enterprise Linux" %}
 {% assign package-format = "RPM" %}
 {% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
+
 {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 
 ## Prerequisites
 
-Docker Community Edition (Docker CE) is not supported on {{ linux-dist-long }}.
+This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
 
-### Docker EE repository URL
+- Use {{ linux-dist-cap }} 64-bit on `x86_64`, `s390x`, or `ppc64le` (not ppc64).
+- Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
+- Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
+- Uninstall old versions of Docker.
+- Remove old Docker repos from `/etc/yum.repos.d/`.
+- Disable SELinux on IBM Power systems before install/upgrade.
 
-{% include ee-linux-install-reuse.md section="ee-url-intro" %}
+### Architectures and storage drivers
 
-### OS requirements
+Docker EE supports {{ linux-dist-long }} 64-bit running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power PC, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
 
-To install Docker EE, you need the 64-bit version of {{ linux-dist-long }}
-running on `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures.
+> Little endian format only
+>
+> On IBM Power PC systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
 
-In addition, you must use the `overlay2` or `devicemapper` storage driver.
-Beginning with Docker EE 17.06.2-ee-5 the `overlay2` storage driver is the
-recommended storage driver.
+On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
-The following limitations apply:
+- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }: If `selinux` is enabled, the `overlay2` storage driver is supported on {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693 and higher.
 
-**OverlayFS**:
+- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }: On production systems using `devicemapper`, you must use `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
-- The `overlay2` storage driver is only supported on RHEL 7.2 or higher systems
-  using version 3.10.0-693 or high of the kernel.
-- If `selinux` is enabled, the `overlay2` storage driver is only supported on
-  RHEL 7.4 or higher.
+### Find your Docker EE repo URL
 
-**Devicemapper**:
+{% include ee-linux-install-reuse.md section="find-ee-repo-url" %}
 
-- On production systems using `devicemapper`, you must use `direct-lvm` mode,
-  which requires one or more dedicated block devices. Fast storage such as
-  solid-state media (SSD) is recommended.
+### Uninstall old Docker versions
 
-{% capture selinux-warning %}
-> **Warning**: There is currently no support for `selinux` on IBM Z systems. If
-> you try to install Docker EE on an IBM Z system with `selinux` enabled, you get
-> an error about the `container-selinux` package, which is missing from Red Hat's
-> repository for IBM Z. The only current workaround is to disable `selinux`
-> before installing or upgrading Docker on IBM Z.
-{:.warning}
-{% endcapture %}
-{{ selinux-warning }}
-
-### Uninstall old versions
-
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks.
 
 ```bash
 $ sudo yum remove docker \
@@ -79,44 +66,48 @@ $ sudo yum remove docker \
                   docker-ce
 ```
 
-It's OK if `yum` reports that none of these packages are installed.
 
-The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker EE package is now called `docker-ee`.
 
-## Install Docker EE
+## Repo install and upgrade
 
-{% include ee-linux-install-reuse.md section="ways-to-install" %}
+{% include ee-linux-install-reuse.md section="using-yum-repo" %}
 
-### Install using the repository
+{% capture selinux-warning %}
+> Disable SELinux before installing Docker EE on IBM Z systems
+>
+> There is currently no support for `selinux` on IBM Z systems. If you attempt to install or upgrade Docker EE on an IBM Z system with `selinux` enabled, an error is thrown that the `container-selinux` package is not found. Disable `selinux` before installing or upgrading Docker on IBM Z.
+{:.warning}
+{% endcapture %}
+{{ selinux-warning }}
 
-Before you install Docker EE for the first time on a new host machine, you need
-to set up the Docker repository. Afterward, you can install and update Docker EE
-from the repository.
-
-#### Set up the repository
+### Set up the repository
 
 {% include ee-linux-install-reuse.md section="set-up-yum-repo" %}
 
-#### Install Docker EE
-
-{{ selinux-warning }}
+### Install from the repository
 
 {% include ee-linux-install-reuse.md section="install-using-yum-repo" %}
 
-#### Upgrade Docker EE
+### Upgrade from the repository
 
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-repo" %}
 
-### Install from a package
+
+
+## Package install and upgrade
+
+{% include ee-linux-install-reuse.md section="package-installation" %}
 
 {{ selinux-warning }}
 
+### Install with a package
+
 {% include ee-linux-install-reuse.md section="install-using-yum-package" %}
 
-#### Upgrade Docker EE
+### Upgrade with a package
 
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-package" %}
+
 
 ## Uninstall Docker EE
 

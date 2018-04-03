@@ -10,73 +10,61 @@ Usage: {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 {% endcomment %}
 
 
-
 {% if section == "ee-install-intro" %}
 
-To get started with Docker EE on {{ linux-dist-long }}, make sure you
-[meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ee).
+There are two ways to install and upgrade [Docker Enterprise Edition (Docker EE)](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
+on {{ linux-dist-long }}:
 
-{% elsif section == "ee-url-intro" %}
+- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker EE from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
 
-To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. These instructions
-work for Docker EE for {{ linux-dist-long }} and for Docker EE for Linux, which
-includes access to Docker EE for all Linux distributions. To get this
-information:
+- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker EE on air-gapped systems with no access to the internet.
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
-- Each subscription or trial you have access to is listed. Click the **Setup**
-  button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
-- Copy the URL from the field labeled
-  **Copy and paste this URL to download your Edition**.
+{% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
+Docker Community Edition (Docker CE) is _not_ supported on {{ linux-dist-long }}.
+{% endif %}
+{% if linux-dist == "centos" %}
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for CentOS](/install/linux/docker-ce/centos.md).
+{% endif %}
 
-Use this URL when you see the placeholder text `<DOCKER-EE-URL>`.
+{% elsif section == "find-ee-repo-url" %}
 
-To learn more about Docker EE, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+To install Docker EE, you will need the URL of the Docker EE repository associated with your trial or subscription:
+
+1.  Go to [https://store.docker.com/my-content](https://store.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
+2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
+3.  Copy the URL from **Copy and paste this URL to download your Edition** and save it for later use.
+
+You will use this URL in a later step to create a variable called, `DOCKERURL`.
 
 
+{% elsif section == "using-yum-repo" %}
 
-{% elsif section == "ways-to-install" %}
-
-You can install Docker EE in different ways, depending on your needs:
-
-- Most users
-  [set up Docker's repositories](#install-using-the-repository) and install
-  from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
-
-- Some users download the {{ package-format }} package and install it manually
-  and manage upgrades completely manually. This is useful in situations such as
-  installing Docker on air-gapped systems with no access to the internet.
-
+The advantage of using a repository from which to install Docker EE (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
 
 
 {% elsif section == "set-up-yum-repo" %}
+You only need to set up the repository once, after which you can install Docker EE _from_ the repo and repeatedly upgrade as necessary.
 
-1.  Remove any existing Docker repositories from `/etc/yum.repos.d/`.
-
-2.  Temporarily store the Docker EE repository URL you noted down in the
-    [prerequisites](#prerequisites) in an environment variable.
-    This does not persist when the current session ends.
+1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
 
     ```bash
-    $ export DOCKERURL='<DOCKER-EE-URL>'
+    $ sudo rm /etc/yum.repos.d/docker*.repo
     ```
 
-3.  Store your Docker EE repository URL in a `yum` variable in `/etc/yum/vars/`.
-    This command relies on the variable you stored in the previous step.
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends.
+
+    ```bash
+    $ export DOCKERURL="<DOCKER-EE-URL>"
+    ```
+
+3.  Store the value of the variable, `DOCKERURL` (from the previous step), in a `yum` variable in `/etc/yum/vars/`:
 
     ```bash
     $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
     ```
 
     {% if linux-dist == "rhel" %}
-
-    Store your OS version string in `/etc/yum/vars/dockerosversion`. Most users
-    should use `7`, but you can also use the more specific minor version,
-    starting from `7.2`.
+    Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `7`, but you can also use the more specific minor version, starting from `7.2`.
 
     ```bash
     $ sudo sh -c 'echo "7" > /etc/yum/vars/dockerosversion'
@@ -84,9 +72,7 @@ You can install Docker EE in different ways, depending on your needs:
 
     {% endif %}
 
-4.  Install required packages. `yum-utils` provides the `yum-config-manager`
-    utility, and `device-mapper-persistent-data` and `lvm2` are required by the
-    `devicemapper` storage driver.
+4.  Install required packages: `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver:
 
     ```bash
     $ sudo yum install -y yum-utils \
@@ -95,32 +81,39 @@ You can install Docker EE in different ways, depending on your needs:
     ```
 
 {% if linux-dist == "rhel" %}
-5.  Enable the `extras` RHEL repository. This ensures access to the
-    `container-selinux` package which is required by `docker-ee`.
+5.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+
+    The repository can differ per your architecture and cloud provider, so review the options in this step before running:
+
+    **For all architectures _except_ IBM Power PC:**
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
     ```
 
-    Depending on cloud provider, you may also need to enable another repository.
+    **For IBM Power PC only (little endian):**
 
-    For AWS:
+    ```bash
+    $ sudo subscription-manager repos --enable rhel-7-for-power-le-extras-rpms
+    ```
+
+    Depending on cloud provider, you may also need to enable another repository:
+
+    **For AWS** (where `REGION` is a literal, and does _not_ represent the region your machine is running in):
 
     ```bash
     $ sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
     ```
 
-    > **Note**: `REGION` here is literal, and does *not* represent the region
-    > your machine is running in.
-
-    For Azure:
+    **For Azure:**
 
     ```bash
     $ sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
     ```
+
 {% endif %}
 
-6.  Use the following command to add the **stable** repository:
+6.  Add the Docker EE **stable** repository:
 
     ```bash
     $ sudo -E yum-config-manager \
@@ -131,120 +124,84 @@ You can install Docker EE in different ways, depending on your needs:
 
 {% elsif section == "install-using-yum-repo" %}
 
-1.  Install the latest version of Docker EE, or go to the next step to install a
-    specific version.
+1.  Install the _latest version_ of Docker EE, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum -y install docker-ee
     ```
 
-    If this is the first time you are installing a package from a recently added
-    repository, you are prompted to accept the GPG key, and
-    the key's fingerprint is shown. Verify that the fingerprint matches
-    `{{ gpg-fingerprint }}` and if so, accept the key.
+    If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-2.  On production systems, you should install a specific version of Docker EE
-    instead of always using the latest. List the available versions.
-    This example uses the `sort -r` command to sort the results by version
-    number, highest to lowest, and is truncated.
+2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+
+    a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64         {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}          docker-ee-stable-17.06
+    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-17.06
     ```
 
-    The contents of the list depend upon which repositories you have enabled,
-    and is specific to your version of {{ linux-dist-long }}
-    (indicated by the `.el7` suffix on the version, in this example). Choose a
-    specific version to install. The second column is the version string. You
-    can use the entire version string, but **you need to include at least to the
-    first hyphen**. The third column is the repository name, which indicates
-    which repository the package is from and by extension its stability level.
-    To install a specific version, append the version string to the package name
-    and separate them by a hyphen (`-`):
+    The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    > **Note**: The version string is the package name plus the version up to
-    > the first hyphen. In the example above, the fully qualified package name
-    > is `docker-ee-17.06.1.ee.2`.
+    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-17.06.1.ee.2`
 
     ```bash
     $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
-    Docker is installed but not started. The `docker` group is created, but no
-    users are added to the group.
+    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-{% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-3.  If you need to use `devicemapper`, follow the procedure in the
-    [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
-    **before starting Docker**. For production systems using `devicemapper`,
-    you must use `direct-lvm` mode,
-    which requires you to prepare the block devices.
-{% endif %}
+3.  Start Docker:
 
-4.  Start Docker.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
-    image.
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
+    image. This command downloads a test image, runs it in a container, prints
+    an informational message, and exits:
 
     ```bash
     $ sudo docker run hello-world
     ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
-
-Docker EE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
-
+    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    non-privileged users to run Docker commands.
 
 
 {% elsif section == "upgrade-using-yum-repo" %}
 
-To upgrade Docker EE:
+1.  [Add the new repository](#set-up-the-repository).
 
-1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 17.03.x to Docker 17.06.x),
-    [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
+2.  Follow the [installation instructions](#install-from-the-repository) and install a new version.
 
-2.  Follow the
-    [installation instructions](#install-docker), choosing the new version you
-    want to install.
 
+{% elsif section == "package-installation" %}
+
+To manually install Docker EE, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker EE.
 
 {% elsif section == "install-using-yum-package" %}
 
-If you cannot use the official Docker repository to install Docker EE, you can
-download the `.{{ package-format | downcase }}` file for your release and
-install it manually. You need to download a new file each time you want to
-upgrade Docker EE.
-
 {% if linux-dist == "rhel" %}
-1.  Enable the `extras` RHEL repository. This ensures access to the
-    `container-selinux` package which is required by `docker-ee`.
+1.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package which is required by `docker-ee`:
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
     ```
 
-    Alternately, obtain that package manually from Red Hat.
-    There is no way to publicly browse this repository.
+    Alternately, obtain that package manually from Red Hat. There is no way to publicly browse this repository.
 {% endif %}
 
 {% if linux-dist == "centos" %}
-1.  Go to the Docker EE repository URL associated with your
-    trial or subscription in your browser. Go to
-    `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages` and
-    download the `.{{ package-format | downcase }}` file for the Docker version
-    you want to install.
+1.  Go to the Docker EE repository URL associated with your trial or subscription
+    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages`
+    and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endif %}
+
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
@@ -253,10 +210,8 @@ upgrade Docker EE.
     `.{{ package-format | downcase }}` file from the `Packages` directory.
 
   {% if linux-dist == "rhel" %}
-    > **Note**: If you have trouble with `selinux` using the packages under the
-    > `7` directory, try choosing the version-specific directory instead, such
-    > as `7.3`.
-
+    > If you have trouble with `selinux` using the packages under the `7` directory,
+    > try choosing the version-specific directory instead, such as `7.3`.
   {% endif %}
 {% endif %}
 
@@ -270,41 +225,34 @@ upgrade Docker EE.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-{% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-3.  If you need to use `devicemapper`, follow the procedure in the
-    [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
-    **before starting Docker**. For production systems using `devicemapper`,
-    you must use `direct-lvm` mode,
-    which requires you to prepare the block devices.
-{% endif %}
+3.  Start Docker:
 
-4.  Start Docker.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
-    image.
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
+    image. This command downloads a test image, runs it in a container, prints
+    an informational message, and exits:
 
     ```bash
     $ sudo docker run hello-world
     ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
-
-Docker EE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    non-privileged users to run Docker commands.
 
 
 {% elsif section == "upgrade-using-yum-package" %}
 
-To upgrade Docker EE, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), using `yum -y upgrade`
-instead of `yum -y install`, and pointing to the new file.
+1.  Download the newer package file.
+
+2.  Repeat the [installation procedure](#install-with-a-package), using
+    `yum -y upgrade` instead of `yum -y install`, and point to the new file.
+
 
 {% elsif section == "yum-uninstall" %}
 
@@ -314,9 +262,7 @@ instead of `yum -y install`, and pointing to the new file.
     $ sudo yum -y remove docker-ee
     ```
 
-2.  Images, containers, volumes, or customized configuration files on your host
-    are not automatically removed. To delete all images, containers, and
-    volumes:
+2.  Delete all images, containers, and volumes (because these are not automatically removed from your host):
 
     ```bash
     $ sudo rm -rf /var/lib/docker
@@ -330,8 +276,8 @@ You must delete any edited configuration files manually.
 
 {% elsif section == "linux-install-nextsteps" %}
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
 
 {% endif %}
