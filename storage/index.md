@@ -6,8 +6,8 @@ redirect_from:
 - engine/admin/volumes/
 ---
 
-It is possible to store data within the writable layer of a container, but there
-are some downsides:
+By default all files created inside a container are stored on a writable
+container layer. This means that:
 
 - The data doesn't persist when that container is no longer running, and it can be
   difficult to get the data out of the container if another process needs it.
@@ -19,10 +19,11 @@ are some downsides:
   kernel. This extra abstraction reduces performance as compared to using
   _data volumes_, which write directly to the host filesystem.
 
-Docker offers three different ways to mount data into a container from the
-Docker host: _volumes_, _bind mounts_, or _`tmpfs` volumes_. When in doubt,
-volumes are almost always the right choice. Keep reading for more information
-about each mechanism for mounting data into containers.
+Docker has two options for containers to store files in the host machine, so
+that the files are persisted even after the container stops: _volumes_, and
+_bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
+
+Keep reading for more information about these two ways of persisting data.
 
 ## Choose the right type of mount
 
