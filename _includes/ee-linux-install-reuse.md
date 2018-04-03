@@ -94,7 +94,10 @@ You only need to set up the repository once, after which you can install Docker 
     **For IBM Power PC only (little endian):**
 
     ```bash
-    $ sudo subscription-manager repos --enable rhel-7-for-power-le-extras-rpms
+    $ sudo yum-config-manager --enable extras
+    $ sudo subscription-manager repos --enable=rhel-7-for-power-le-extras-rpms
+    $ sudo yum makecache fast
+    $ sudo yum -y install container-selinux
     ```
 
     Depending on cloud provider, you may also need to enable another repository:
