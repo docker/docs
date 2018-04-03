@@ -14,7 +14,7 @@ This page explains how publishers can successfully test their **Docker images**.
 
 ## Certify your Docker images
 
-You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices.
+You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Refer to the [README](https://github.com/docker/inspect_docker_image/blob/master/README.md).
 
 The `inspectDockerimage` tool does the following:
 
@@ -223,6 +223,10 @@ This section demonstrates how to inspect your Linux and Windows images.
 <a name="linux-startup-script">
 
 ### Inspect a Linux Docker image with a custom startup script
+
+The `inspectDockerImage` command expects a custom script to return the container ID (or container name) from the docker image being tested as the last or only line of output to `stdout`. Without the container ID or container name as the last line of output, the inspection fails.
+
+A simple custom script that executes a `docker container run` command, easily outputs the container ID. But a complex script might need testing to ensure it also returns the container ID or container name as the last line of output -- for example, a script that launches multiple containers, or one that runs `docker-compose`.
 
 Some "testing/helper" scripts are available for testing Linux and Windows Docker images on virtual machines running in Amazon. Refer to [Test and Helper Scripts](aws_scripts/README.md)
 
