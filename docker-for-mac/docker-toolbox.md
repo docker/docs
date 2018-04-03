@@ -46,7 +46,7 @@ Here are some key points to know about Docker for Mac before you get started:
 * When you install Docker for Mac, machines created with Docker Machine are
   not affected.
 
-* Docker for Mac does not use `docker-machine` to provision its V.
+* Docker for Mac does not use `docker-machine` to provision its VM.
   The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
