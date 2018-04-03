@@ -38,7 +38,7 @@ The `inspectDockerimage` tool does the following:
 
 ### Prerequisites
 
-Your Docker EE installation must be running on the server used to verify your submissions. For entitlement to a specific [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial).
+Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial).
 
 - Docker EE (on the server for verifying submissions)
 - git client
@@ -72,33 +72,33 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
     a.  To define environment variables:
 
-        **Linux**
+    **Linux**
 
-        ```bash
-        export DOCKER_USER="my_docker_registry_user_account"
-        export DOCKER_PASSWORD="my_docker_registry_user_account_password"
-        ```
+    ```bash
+    export DOCKER_USER="my_docker_registry_user_account"
+    export DOCKER_PASSWORD="my_docker_registry_user_account_password"
+    ```
 
-        **Windows command prompt**
+    **Windows command prompt**
 
-        ```bash
-        set DOCKER_USER="my_docker_registry_user_account"
-        set DOCKER_PASSWORD="my_docker_registry_user_account_password"
-        ```
+    ```bash
+    set DOCKER_USER="my_docker_registry_user_account"
+    set DOCKER_PASSWORD="my_docker_registry_user_account_password"
+    ```
 
-        **Windows powershell**
+    **Windows powershell**
 
-        ```bash
-        $env:DOCKER_USER="my_docker_registry_user_account"
-        $env:DOCKER_PASSWORD="my_docker_registry_user_account_password"
-        ```
+    ```bash
+    $env:DOCKER_USER="my_docker_registry_user_account"
+    $env:DOCKER_PASSWORD="my_docker_registry_user_account_password"
+    ```
 
     b.  To pass arguments to the **inspectDockerimage** command.
 
-        * **--docker-user**
-        * **--docker-password**
+    * **--docker-user**
+    * **--docker-password**
 
-        Otherwise the **inspectDockerimage** command prompts for them.
+    Otherwise the **inspectDockerimage** command prompts for them.
 
 3.  Configure endpoints.
 
