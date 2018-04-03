@@ -14,12 +14,11 @@ stores images, how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
 
-> **Note**: Storage drivers allow you to persist data in the writable layer of
-> your container. This is the least efficient way to persist data.
-> [Volumes](/storage/volumes/) or [bind mounts](/storage/bind-mounts/) provide
-> much better read and write performance, and volumes provide more security
-> and isolation than either storage drivers or bind mounts. Neither volumes nor
-> bind mounts use most of the concepts described in this topic.
+Storage drivers allow you to create data in the writable layer of your container.
+The files won't be persisted after the container stops, and both read and
+write speeds are low.
+
+[Learn how to use volumes](../index.md) to persist data and improved performance.
 
 ## Images and layers
 
@@ -396,33 +395,6 @@ If Docker had to make an entire copy of the underlying image stack each time it
 started a new container, container start times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
 work, with one or more virtual disks per virtual machine.
-
-## Data volumes and the storage driver
-
-When a container is deleted, any data written to the container that is not
-stored in a *data volume* is deleted along with the container.
-
-A data volume is a directory or file in the Docker host's filesystem that is
-mounted directly into a container. Data volumes are not controlled by the
-storage driver. Reads and writes to data volumes bypass the storage driver and
-operate at native host speeds. You can mount any number of data volumes into a
-container. Multiple containers can also share one or more data volumes.
-
-The diagram below shows a single Docker host running two containers. Each
-container exists inside of its own address space within the Docker host's local
-storage area (`/var/lib/docker/...`). There is also a single shared data volume
-located at `/data` on the Docker host. This is mounted directly into both
-containers.
-
-![Shared volume across containers](images/shared-volume.jpg)
-
-Data volumes reside outside of the local storage area on the Docker host,
-further reinforcing their independence from the storage driver's control. When
-a container is deleted, any data stored in data volumes persists on the Docker
-host.
-
-For detailed information about data volumes, see
-[Managing data in containers](/engine/tutorials/dockervolumes/).
 
 ## Related information
 
