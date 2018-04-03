@@ -362,6 +362,25 @@ $ docker container rm nginxtest
 $ docker volume rm nginx-vol
 ```
 
+## Share data between machines
+
+When building fault-tolerant applications, you might need to configure multiple
+replicas of the same service to have access to the same files.
+
+![shared storage](images/volumes-shared-storage.svg)
+
+There are multiple ways to achieve this. One way is to develop your
+applications to store files on a cloud object storage system like Amazon S3.
+Another option is to develop your applications to use volumes, but create the
+volume using a driver that supports writing files to an external storage system
+like NFS or Amazon S3.
+
+Volume drivers allow you to abstract to underlying storage system from the
+application logic. As an example if your services are using a volume with
+an NFS driver, you can update the service to use a volume with a different
+driver and start storing data in the cloud, without having to make any changes
+the the application logic.
+
 ## Use a volume driver
 
 When you create a volume using `docker volume create`, or when you start a
