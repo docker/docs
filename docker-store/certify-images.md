@@ -195,14 +195,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
 ## Inspection Output
 
-By default, `inspectDockerimage` displays output locally to `stdout`. You can format output as JSON and also produce HTML reports.
-
-A better method is to upload output to Docker Store for admnistrator verification.
-
-> Upload to Docker Store for administrator verification
->
-> You must use option #1 for administrators to verify results in Docker Store. Use options #2, #3 and #4 to verify results locally.
-{: .warning}
+By default, `inspectDockerimage` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for admnistrator verification.
 
 -  **Upload to Docker Store** (by entering `product-id` at the commandline).
 
@@ -212,10 +205,7 @@ A better method is to upload output to Docker Store for admnistrator verificatio
 
 -  **HTML local file**. Use the `--html` option to generate an HTML report. Both `--json` and `--html` can be specified at the same time.
 
-> **Notes**:
->
-> - To inspect custom Docker images, prefix the image name with the user name: `___username___/`.
-> - Volumes created by Docker image containers are destroyed after `inspectDockerimage` terminates.
+> Volumes created by Docker image containers are destroyed after `inspectDockerimage` terminates.
 
 ## Inspection Examples
 

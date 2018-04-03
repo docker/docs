@@ -207,19 +207,15 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
 ## Inspection Output
 
-The `inspectDockerLoggingPlugin` command can generate 3 types of output results:
+By default, `inspectDockerLoggingPlugin` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for admnistrator verification.
 
-1.  Messages sent to stdout (Default)
-2.  JSON sent to stdout
-3.  HTML local file
+-  **Upload to Docker Store** (by entering `product-id` at the commandline).
 
-By default the **inspectDockerLoggingPlugin** command generates messages sent to stdout. You can specify the **--json** option which overrides and replaces the messages sent to stdout.
-You can also specify the **--html** option which generates an HTML report. And both **--json** and **--html** can be specified at the same time.
+-  **Send message to `stdout`**. This is the default.
 
-> **Notes**:
->
-> * To inspect custom Docker logging plugins, prefix the plugin name with the user name: `___username___`
-> * By default the `inspectDockerLoggingPlugin` command displays the results to the terminal to `stdout`.
+-  **JSON sent to `stdout`**. Use the `--json` option to override and replace the messages sent to `stdout`.
+
+-  **HTML local file**. Use the `--html` option to generate an HTML report. Both `--json` and `--html` can be specified at the same time.
 
 ## Inspection Examples
 
