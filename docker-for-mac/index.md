@@ -98,7 +98,7 @@ Choose ![whale menu](images/whale-x.png){: .inline} -> **Preferences** from the 
 
 ![Preferences](images/menu/prefs-general.png){:width="400px"}
 
-Gneral settings are:
+General settings are:
 
 - **Start Docker when you log in**: Uncheck this option if you don't want Docker to start when you open your session.
 
