@@ -148,7 +148,13 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     | Linux/IBMZ | [https://s3.amazonaws.com/blahblahbucket/linux-ibmz](https://s3.amazonaws.com/blahblahbucket/linux-ibmz) |
     | Linux/IBMPOWER | [https://s3.amazonaws.com/blahblahbucket/linux-ibmpower](https://s3.amazonaws.com/blahblahbucket/linux-ibmpower) |
 
-2.  Capture the product ID (from the URL in Docker Store) that you want to reference for the certification test.
+2.  Set permissions on `inspectDockerImage` so that it is executable:
+
+    ```
+    chmod u+x inspectDockerImage
+    ```
+
+3.  Capture the product ID (from the URL in Docker Store) that you want to reference for the certification test.
 
     ![product ID](images/store-product-id.png)
 

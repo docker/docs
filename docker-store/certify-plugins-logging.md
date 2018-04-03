@@ -162,7 +162,13 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     | Linux/IBMZ | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/zLinux/inspectDockerLoggingPlugin |
     | Linux/IBMPOWER | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/power/inspectDockerLoggingPlugin |
 
-2.  Capture the product ID you'd like to reference for the certification test.
+2.  Set permissions on `inspectDockerLoggingPlugin` so that it is executable:
+
+    ```
+    chmod u+x inspectDockerLoggingPlugin
+    ```
+
+3.  Capture the product ID you'd like to reference for the certification test.
 
     ![product ID](images/store-product-id.png)
 
