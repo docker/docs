@@ -1,16 +1,16 @@
 ---
 description: Run certification tests against your images
 keywords: Docker, docker, store, certified content, images
-title: Certify your Docker images
+title: Certify Docker images
 ---
 
 ## Introduction
 
 Content that qualifies as **Docker Certified** must conform to best practices and pass certain baseline tests.
 
-Docker Store lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own _images and logging plugins_ with the `inspect` tools as explained in these docs. Currently, Docker Store certifies your _volume and networking plugins_ for you upon submission.
+Docker Store lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own _images and logging plugins_ with the `inspect` tools as explained in these docs. Currently, Docker Store certifies your volume and networking plugins for you upon submission.
 
-This page explains how publishers can successfully test their **Docker images**. For plugins, see [Certify your Docker logging plugins](certify-plugins-logging).
+This page explains how publishers can successfully test their **Docker images**. Also available: [Certify your Docker logging plugins](certify-plugins-logging).
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
@@ -48,7 +48,7 @@ Your Docker EE installation must be running on the server used to verify your su
 
 ### Set up testing environment
 
-There are three steps: (1) install git, (2) configure credentials, and (3) configure endpoints.
+There are three steps: (1) install git, (2) configure credentials, and (3) configure endpoints (or use default endpoints).
 
 1.  Install git (required for `inspectDockerimage`):
 
@@ -70,9 +70,9 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
     To download and install git for Windows: <https://git-scm.com/download/win>.
 
-2.  Configure your Docker Registry credentials by defining environment variables _or_ specifying them as arguments.
+2.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
 
-    a.  To define environment variables:
+    a.  Define environment variables for registry credentials, `DOCKER_USER` and `DOCKER_PASSWORD`:
 
     **Linux**
 
@@ -95,49 +95,51 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     $env:DOCKER_PASSWORD="my_docker_registry_user_account_password"
     ```
 
-    b.  To pass arguments to the **inspectDockerimage** command.
+    b.  Pass arguments to `inspectDockerimage` (or be prompted for them):
 
-    * **--docker-user**
-    * **--docker-password**
+    ```
+    --docker-user
+    --docker-password
+    ```
 
-    Otherwise the **inspectDockerimage** command prompts for them.
+3.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
 
-3.  Configure endpoints.
+    By default, `inspectDockerimage` uses these two endpoints to communicate with the Docker Hub Registry:
 
-    By default the **inspectDockerimage** command uses the following 2 endpoints for communicating to the Docker Hub Registry:
+    - Registry Authentication Endpoint: **https://auth.docker.io**
+    - Registry API Endpoint: **https://registry-1.docker.io**
 
-    * Registry Authentication Endpoint: **https://auth.docker.io**
-    * Registry API Endpoint: **https://registry-1.docker.io**
+    You may want to use your private registry for initial testing and override the defaults.
 
-    There are two ways to override those endpoints if you would like to use your private registry for initial testing:
+    a.  Define environment variables, `DOCKER_REGISTRY_AUTH_ENDPOINT` and  `DOCKER_REGISTRY_API_ENDPOINT`:
 
-    a.  Set these two environment variables:
+    **Linux or MacOS**
 
-      **Linux or MacOS**
+    ```bash
+    export DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
+    export DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
+    ```
 
-      ```bash
-      export DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
-      export DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
-      ```
+    **Windows command prompt**
 
-      **Windows command prompt**
+    ```bash
+    set DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
+    set DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
+    ```
 
-      ```bash
-      set DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
-      set DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
-      ```
+    **Windows powershell**
 
-      **Windows powershell**
+    ```bash
+    $env:DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
+    $env:DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
+    ```
 
-      ```bash
-      $env:DOCKER_REGISTRY_AUTH_ENDPOINT="https://my_docker_registry_authentication_endpoint"
-      $env:DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
-      ```
+    b.  Pass your endpoints as arguments to `inspectDockerimage`:
 
-    b. Specify them as arguments on the **inspectDockerimage** command. In most cases, you only need the default values.
-
-    * **--docker-registry-auth-endpoint**
-    * **--docker-registry-api-endpoint**
+    ```
+    --docker-registry-auth-endpoint
+    --docker-registry-api-endpoint
+    ```
 
 ### Syntax
 
