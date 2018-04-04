@@ -99,6 +99,28 @@ CMD ["python", "app.py"]
 >
 > Add these lines before the call to `pip` so that the installation succeeds.
 
+
+> Setting the DNS server
+>
+> DNS misconfgiurations can generate problems with `pip`. You need to set your 
+> own DNS server address to make `pip` work properly. You might want 
+> to change the DNS settings of the Docker daemon. You can edit (or create) the 
+> configurarion file at `/etc/docker/daemon.json` with the `dns` key, as following:
+>
+> ```json
+>{
+>   "dns": ["your_dns_address", "8.8.8.8"]
+>}
+> ```
+>
+> In the example above, the first element of the list is the address of your DNS
+> server. The second item is the Google's DNS which can be used when the first one is
+> not available.
+>
+> Before proceeding, save `daemon.json` and restart the docker service.
+>
+> `sudo service docker restart`
+
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.
 
