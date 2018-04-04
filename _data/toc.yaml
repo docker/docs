@@ -3098,6 +3098,10 @@ manuals:
     section:
     - path: /docker-store/publish/
       title: Publish content on Docker Store
+    - path: /docker-store/certify-images/
+      title: Certify Docker images
+    - path: /docker-store/certify-plugins-logging/
+      title: Certify Docker logging plugins
     - path: /docker-store/trustchain/
       title: Docker Store trust chain
     - path: /docker-store/byol/
