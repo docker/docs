@@ -34,7 +34,7 @@ Follow these steps to configure the docker daemon and the Windows environment.
 2.  Run the Windows worker setup script provided with `ucp-agent-win`.
 3.  Join the swarm with the token provided by the UCP web UI.
 4.  Create a file `daemon.json`.
-5.  Paste following content and save it under `$env:ProgramFiles\Docker\config\`
+5.  Paste following content and save it under `$env:ProgramData\Docker\config\`
     ```
     {
     "labels": ["os=windows"]
