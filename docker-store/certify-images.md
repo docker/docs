@@ -8,6 +8,8 @@ title: Certify your Docker images
 
 Content that qualifies as **Docker Certified** must conform to best practices and pass certain baseline tests.
 
+Docker Store lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own _images and logging plugins_ with the `inspect` tools as explained in these docs. Currently, Docker Store certifies your _volume and networking plugins_ for you upon submission.
+
 This page explains how publishers can successfully test their **Docker images**. For plugins, see [Certify your Docker logging plugins](certify-plugins-logging).
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
