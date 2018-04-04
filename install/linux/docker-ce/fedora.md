@@ -122,18 +122,14 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Install the latest version of Docker CE, or go to the next step to install a
-    specific version.
+1.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
 
     ```bash
     $ sudo dnf install docker-ce
     ```
 
-    If this is the first time you are installing a package from a recently added
-    repository, you are prompted to accept the GPG key, and
-    the key's fingerprint is shown. Verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
-    key.
+    If prompted to accept the GPG key, verify that the fingerprint matches
+    `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
 
     > Got multiple Docker repositories?
     >
@@ -143,10 +139,13 @@ from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
-2.  On production systems, you should install a specific version of Docker CE
-    instead of always using the latest. List the available versions. This
-    example uses the `sort -r` command to sort the results by version number,
-    highest to lowest, and is truncated.
+    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+
+2.  To install a _specific version_ of Docker CE, list the available versions
+    in the repo, then select and install:
+
+    a. List and sort the versions available in your repo. This example sorts
+       results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ dnf list docker-ce  --showduplicates | sort -r
@@ -154,25 +153,27 @@ from the repository.
     docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc26                              docker-ce-stable
     ```
 
-    The contents of the list depend upon which repositories are enabled, and
-    are specific to your version of Fedora (indicated by the `.fc26` suffix
-    on the version, in this example). Choose a specific version to install. The
-    second column is the version string. The third column is the repository
-    name, which indicates which repository the package is from and by extension
-    its stability level. To install a specific version, append the version
-    string to the package name and separate them by a hyphen (`-`):
+    The list returned depends on which repositories are enabled, and is specific
+    to your version of Fedora (indicated by the `.fc26` suffix in this example).
+
+    b. Install a specific version by its fully qualified package name, which is
+       the package name (`docker-ce`) plus the version string (2nd column) up to
+       the first hyphen, separated by a hyphen (`-`), for example,
+       `docker-ce-18.03.0.ce`.
 
     ```bash
-    $ sudo dnf -y install docker-ce-<VERSION>
+    $ sudo dnf -y install docker-ce-<VERSION STRING>
     ```
 
-4.  Start Docker.
+    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash

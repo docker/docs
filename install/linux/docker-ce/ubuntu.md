@@ -234,8 +234,7 @@ the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the latest version of Docker CE, or go to the next step to install a
-    specific version. Any existing installation of Docker is replaced.
+2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
 
     ```bash
     $ sudo apt-get install docker-ce
@@ -249,9 +248,9 @@ the repository.
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
-3.  On production systems, you should install a specific version of Docker CE
-    instead of always using the latest. This output is truncated. List the
-    available versions.
+3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
+
+    a. List the versions available in your repo:
 
     ```bash
     $ apt-cache madison docker-ce
@@ -259,12 +258,10 @@ the repository.
     docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
     ```
 
-    The contents of the list depend upon which repositories are enabled. Choose
-    a specific version to install. The second column is the version string. The
-    third column is the repository name, which indicates which repository the
-    package is from and by extension its stability level. To install a specific
-    version, append the version string to the package name and separate them by
-    an equals sign (`=`):
+    b. Install a specific version by its fully qualified package name, which is
+       the package name (`docker-ce`) plus the version string (2nd column) up to
+       the first hyphen, separated by a an equals sign (`=`), for example,
+       `docker-ce=18.03.0.ce`.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION>
