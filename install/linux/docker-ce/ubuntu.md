@@ -246,7 +246,6 @@ the repository.
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning-vanilla}
 
 3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
 

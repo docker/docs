@@ -146,7 +146,6 @@ from the repository.
     > or updating without specifying a version in the `yum install` or
     > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning-vanilla}
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
