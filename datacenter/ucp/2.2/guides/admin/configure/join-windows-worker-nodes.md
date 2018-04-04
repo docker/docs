@@ -59,7 +59,9 @@ You need to open ports 2376 and 12376, and create certificates
 for the Docker daemon to communicate securely. Run this command:
 
 ```powershell
-docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+$script = [ScriptBlock]::Create((docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | Out-String))
+
+Invoke-Command $script
 ```
 
 > Docker daemon restart
