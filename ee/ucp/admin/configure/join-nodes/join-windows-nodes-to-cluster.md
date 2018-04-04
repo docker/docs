@@ -62,7 +62,9 @@ for the Docker daemon to communicate securely. Use this command to run
 the Windows node setup script:
 
 ```powershell
-docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+$script = [ScriptBlock]::Create((docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | Out-String))
+
+Invoke-Command $script
 ```
 
 > Docker daemon restart
@@ -106,8 +108,8 @@ provided by the Docker EE web UI and CLI.
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
-5.  In the **Step 2** section, click the checkbox for 
-    "I'm ready to join my windows node." 
+5.  In the **Step 2** section, click the checkbox for
+    "I'm ready to join my windows node."
 6.  Check the **Use a custom listen address** option to specify the address
     and port where new node listens for inbound cluster management traffic.
 7.  Check the **Use a custom listen address** option to specify the
@@ -182,7 +184,7 @@ The `dockerd` service and the Windows environment are now configured to join a D
 >
 > If the TLS certificates aren't set up correctly, the Docker EE web UI shows the
 > following warning.
-> 
+>
 > ```
 > Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
 > ```
