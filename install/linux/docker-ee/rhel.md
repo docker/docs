@@ -23,7 +23,7 @@ title: Get Docker EE for Red Hat Enterprise Linux
 
 This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
 
-- Use {{ linux-dist-cap }} 64-bit on `x86_64`, `s390x`, or `ppc64le` (not ppc64).
+- Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`, `s390x`, or `ppc64le` (not ppc64).
 - Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
 - Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
@@ -32,7 +32,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power PC, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power PC, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
 
 > Little endian format only
 >

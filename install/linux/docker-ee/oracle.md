@@ -31,7 +31,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit 7.3 or higher, running the Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher. Older versions of {{ linux-dist-long }} are not supported.
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.3 and higher, running the Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher. Older versions of {{ linux-dist-long }} are not supported.
 
 On {{ linux-dist-long }}, Docker EE only supports the `devicemapper` storage driver. In production, you must use it in `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
@@ -54,7 +54,7 @@ $ sudo yum remove docker \
 {% include ee-linux-install-reuse.md section="using-yum-repo" %}
 
 {% capture selinux-warning %}
-> Docker EE cannot install on {{ linux-dist-long }} with SELinux enabled!
+> Docker EE cannot install on {{ linux-dist-long }} with SELinux enabled
 >
 > If you have `selinux` enabled and you attempt to install Docker EE 17.06.1, you get an error that the `container-selinux` package cannot be found..
 {:.warning}
