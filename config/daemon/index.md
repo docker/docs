@@ -108,6 +108,35 @@ documentation. Some places to go next include:
 - [Configure storage drivers](/engine/userguide/storagedriver/index.md)
 - [Container security](/engine/security/index.md)
 
+## Docker daemon directory
+
+The Docker daemon persists all data in a single directory. This tracks everything
+related to Docker, including containers, images, volumes, service definition,
+and secrets.
+
+By default this directory is:
+
+* `/var/lib/docker` on Linux.
+* `C:\ProgramData\docker` on Windows.
+
+You can configure the Docker daemon to use a different directory, using the
+`data-root` configuration option.
+
+Since all the state of a Docker daemon is kept on this directory, make sure
+you use a dedicated directory for each daemon. If two daemons share the same
+directory, as an example using an NFS share, you might get errors that are
+difficult to troubleshoot.
+
+
+## Troubleshoot the daemon
+
+You can enable debugging on the daemon to learn about the runtime activity of
+the daemon and to aid in troubleshooting. If the daemon is completely
+non-responsive, you can also
+[force a full stack trace](#force-a-full-stack-trace-to-be-logged) of all
+threads to be added to the daemon log by sending the `SIGUSR` signal to the
+Docker daemon.
+
 ### Troubleshoot conflicts between the `daemon.json` and startup scripts
 
 If you use a `daemon.json` file and also pass options to the `dockerd`
@@ -162,14 +191,7 @@ successfully, it is now listening on the IP address specified in the `hosts` key
 > or Docker for Mac.
 {:.important}
 
-## Troubleshoot the daemon
 
-You can enable debugging on the daemon to learn about the runtime activity of
-the daemon and to aid in troubleshooting. If the daemon is completely
-non-responsive, you can also
-[force a full stack trace](#force-a-full-stack-trace-to-be-logged) of all
-threads to be added to the daemon log by sending the `SIGUSR` signal to the
-Docker daemon.
 
 ### Out Of Memory Exceptions (OOME)
 
