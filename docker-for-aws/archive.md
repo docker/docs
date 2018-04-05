@@ -9,9 +9,9 @@ the latest version.
 
 ## CE (Stable)
 
-### 17.06.2
+### 18.03.0
 
-http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.06.2/Docker.tmpl
+http://editions-us-east-1.s3.amazonaws.com/aws/stable/18.03.0/Docker.tmpl
 
 ## EE
 
