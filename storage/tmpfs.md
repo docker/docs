@@ -6,23 +6,29 @@ redirect_from:
 - /engine/admin/volumes/tmpfs/
 ---
 
-[Volumes](volumes.md) and [bind mounts](bind-mounts.md) are mounted into the
-container's filesystem by default, and their contents are stored on the host
-machine.
+[Volumes](volumes.md) and [bind mounts](bind-mounts.md) allow you to share files
+between the host machine and container. This allows you to persist data even
+after the container is stopped.
 
-There may be cases where you do not want to store a container's data on the host
-machine, but you also don't want to write the data into the container's writable
-layer, for performance or security reasons, or if the data relates to
-non-persistent application state. An example might be a temporary one-time
-password that the container's application creates and uses as-needed.
-
-To give the container access to the data without writing it anywhere
-permanently, you can use a `tmpfs` mount, which is only stored in the host
-machine's memory (or swap, if memory is low). When the container stops, the
-`tmpfs` mount is removed. If a container is committed, the `tmpfs` mount is not
-saved.
+If you're running Docker on Linux, you have a third option: `tmpfs` mounts.
+When you create a container with a `tmpfs` mount, the container has a way to
+create files outside the container's writable layer, just like it happens with
+volumes and bind mounts.
 
 ![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
+
+As opposed to volumes and bind mounts, a `tmpfs` mount is temporary, and only
+persisted in the host memory. When the container stops, the `tmpfs` mount is
+removed, and files written there won't be persisted.
+
+This is useful to temporarily store sensitive files that you don't want to
+persist in either the host or the container writable layer.
+
+## Limitations of tmpfs mounts
+
+* Unlike volumes and bind mounts, you can't share `tmpfs` mounts between
+containers.
+* This functionality is only available if you're running Docker on Linux.
 
 ## Choosing the --tmpfs or --mount flag
 
@@ -32,17 +38,12 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 `--mount` is more explicit and verbose. The biggest difference is that the
 `--tmpfs` flag does not support any configurable options.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
-> be more familiar with the `--tmpfs` syntax, but are encouraged to
-> use `--mount`, because research has shown it to be easier to use.
-
 - **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone  containers.
 
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
-  than `-v` or `--volume`, but the order of the keys is not significant, and
-  the value of the flag is easier to understand.
+  than `--tmpfs`:
   - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
     `tmpfs`.
@@ -59,11 +60,6 @@ and `--mount` is presented first.
 
 - The `--tmpfs` flag does not allow you to specify any configurable options.
 - The `--tmpfs` flag cannot be used with swarm services. You must use `--mount`.
-
-## Limitations of tmpfs containers
-
-- `tmpfs` mounts cannot be shared among containers.
-- `tmpfs` mounts only work on Linux containers, and not on Windows containers.
 
 ## Use a tmpfs mount in a container
 
