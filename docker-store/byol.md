@@ -33,7 +33,7 @@ To use Docker as your fulfillment service, an ISV must:
 
 In Plans & Pricing section of the Publisher Center, ensure the following:
 - Price/Month should be set to $0
-- There should be no free trial associated with the product
+- There should be no free trial associated with the plan
 - Under the Pull Requirements dropdown, "Subscribed users only" should be selected.
 
 ## What's next?
