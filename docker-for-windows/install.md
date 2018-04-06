@@ -74,7 +74,7 @@ one typically created during Toolbox install) no longer start. These VMs
 cannot be used side-by-side with Docker for Windows. However, you can still use
 `docker-machine` to manage remote VMs.
 <p />
-* Virtualization must be enabled. Typically, virtualization is enabled by default. This is different from having Hyper-V enabled. For more
+* Virtualization must be enabled in BIOS and CPU SLAT-capable. Typically, virtualization is enabled by default. This is different from having Hyper-V enabled. For more
 detail see [Virtualization must be
 enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
