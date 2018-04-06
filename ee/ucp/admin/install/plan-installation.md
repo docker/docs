@@ -2,18 +2,7 @@
 title: Plan a production UCP installation
 description: Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.
 keywords: UCP, install, Docker EE
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: index/
-  title: Install UCP
-- path: system-requirements/
-  title: UCP System requirements
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane helps you manage your container cluster from a
 centralized place. This article explains what you need to consider before
@@ -113,8 +102,8 @@ for all managers, rather than one for each manager node. In this case,
 the certificate files are copied automatically to any new
 manager nodes joining the cluster or being promoted to a manager role.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [planning your UCP installation](/datacenter/ucp/2.2/guides/admin/install/plan-installation.md).
+- [System requirements](system-requirements.md)
+- [Install UCP](index.md)
 
-{% endif %}

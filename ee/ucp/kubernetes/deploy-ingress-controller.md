@@ -2,11 +2,7 @@
 title: Deploy an ingress controller for a Kubernetes app
 description: Learn how to enable routing for a Kubernetes workload in Docker Enterprise Edition.
 keywords: UCP, Docker EE, Kubernetes, ingress, routing
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 When you deploy your Kubernetes app on a Docker EE cluster, you may want to
 expose a service that enables external users to connect to it. Also, you may
@@ -332,5 +328,3 @@ This command returns the following result.
 HTTP/1.1 200 OK
 Server: nginx/1.13.8
 ```
-
-{% endif %}

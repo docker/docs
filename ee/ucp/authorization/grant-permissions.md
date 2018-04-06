@@ -2,18 +2,9 @@
 title: Grant role-access to cluster resources
 description: Learn how to grant users and teams access to cluster resources with role-based access control.
 keywords: rbac, ucp, grant, role, permission, authentication, authorization, namespace, Kubernetes
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: false
-next_steps:
-- path: deploy-stateless-app/
-  title: Deploy a simple stateless app with RBAC
 redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/grant-permissions/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker EE administrators can create _grants_ to control how users and
 organizations access [resource sets](group-resources.md).
@@ -77,8 +68,6 @@ To create a grant in UCP:
 > `docker-datacenter` org as a subject.
 {: .important}
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn to [grant permissions to users based on roles](/datacenter/ucp/2.2/guides/access-control/grant-permissions.md).
-
-{% endif %}
+- [Deploy a simple stateless app with RBAC](deploy-stateless-app.md)

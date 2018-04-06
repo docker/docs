@@ -2,13 +2,7 @@
 title: Route traffic to a simple swarm service
 description: Learn how to do canary deployments for your Docker swarm services
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Once the [layer 7 routing solution is enabled](../deploy/index.md), you can
 start using it in your swarm services.
@@ -99,8 +93,3 @@ able to start using the service from your browser.
 
 ![browser](../../images/route-simple-app-1.png){: .with-border }
 
-{% elsif include.version=="ucp-2.2" %}
-
-* [Use domain names to access services](/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services.md)
-
-{% endif %}

@@ -4,11 +4,7 @@ description: Use Docker Enterprise Edition to deploy a Kubernetes workload from 
 keywords: UCP, Docker EE, Kubernetes, Compose
 redirect_from:
   - /ee/ucp/user/services/deploy-compose-on-kubernetes/
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md/)
 files to Kubernetes clusters. Starting in Compile file version 3.3, you use the
@@ -91,4 +87,3 @@ are running.
 
 7.  Refresh the page to see how the load is balanced across the pods.
 
-{% endif %}

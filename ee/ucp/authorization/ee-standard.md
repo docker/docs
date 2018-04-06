@@ -2,14 +2,7 @@
 title: Access control design with Docker EE Standard
 description: Learn how to architect multitenancy by using Docker Enterprise Edition Advanced.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
-next_steps:
-- path: ee-advanced/
-  title: Access control design with Docker EE Advanced
 ---
-{% if include.version=="ucp-3.0" %}
 
 [Collections and grants](index.md) are strong tools that can be used to control
 access and visibility to resources in UCP.
@@ -135,4 +128,6 @@ minus the database tier that is managed by the `db` team.
 
 ![image](../images/design-access-control-adv-4.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+- [Access control design with Docker EE Advanced](ee-advanced.md)

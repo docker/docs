@@ -2,11 +2,7 @@
 title: Migrate Kubernetes roles to Docker EE authorization
 description: Learn how to transfer Kubernetes Role and RoleBinding objects to UCP roles and grants.
 keywords: authorization, authentication, authorize, authenticate, user, team, UCP, Kubernetes, role, grant
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 With Docker Enterprise Edition, you can create roles and grants
 that implement the permissions that are defined in your Kubernetes apps.
@@ -126,5 +122,3 @@ Kubernetes workloads:
   The `default` service account has no permissions and can't use the Kubernetes
   API. All other service accounts have full admin permissions and can only be
   used by Docker EE administrators.
-
-{% endif %}

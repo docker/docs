@@ -3,12 +3,7 @@ title: Layer 7 routing labels reference
 description: Learn about the labels you can use in your swarm services to route
   layer 7 traffic to them.
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Once the layer 7 routing solution is enabled, you can
 [start using it in your swarm services](index.md).
@@ -34,4 +29,3 @@ The following labels are available for you to use in swarm services:
 | `com.docker.lb.redirects`              | Semi-colon separated list of redirects to add in the format of `<source>,<target>`.  Example: `http://old.example.com,http://new.example.com;` | `none`                 |
 | `com.docker.lb.ssl_passthrough`        | Enable SSL passthrough.                                                                                                                        | `false`                |
 
-{% endif %}

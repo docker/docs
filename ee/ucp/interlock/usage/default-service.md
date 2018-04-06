@@ -3,13 +3,7 @@ title: Set a default service
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 The default proxy service used by UCP to provide layer 7 routing is NGINX,
 so when users try to access a route that hasn't been configured, they will
@@ -54,4 +48,3 @@ to this demo service.
 
 ![Custom default page](../../images/interlock-default-service-2.png){: .with-border}
 
-{% endif %}

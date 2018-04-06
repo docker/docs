@@ -4,11 +4,7 @@ description: Learn how to manage your passwords, certificates, and other secrets
 keywords: UCP, secret, password, certificate, private key
 redirect_from:
   - /ee/ucp/user/secrets/
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
 ---
-{% if include.version=="ucp-3.0" %}
 
 When deploying and orchestrating services, you often need to configure them
 with sensitive information like passwords, TLS certificates, or private keys.
@@ -194,4 +190,4 @@ WordPress application is running and using the new password.
 
 You can find additional documentation on managing secrets through the CLI at [How Docker manages secrets](/engine/swarm/secrets/#read-more-about-docker-secret-commands).
 
-{% endif %}
+

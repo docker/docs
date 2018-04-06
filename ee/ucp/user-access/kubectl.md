@@ -2,17 +2,7 @@
 title: Install the Kubernetes CLI
 description: Learn how to install kubectl, the Kubernetes command-line tool, on Docker Universal Control Plane.
 keywords: ucp, cli, administration, kubectl, Kubernetes
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-next_steps:
-- path: ../kubernetes/
-  title: Deploy a workload to a Kubernetes cluster
-- path: /docker-for-mac/kubernetes/
-  title: Deploy to Kubernetes on Docker for Mac
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Docker EE installs Kubernetes automatically when you install UCP, and the
 web UI enables deploying Kubernetes workloads and monitoring pods. You can
@@ -103,5 +93,8 @@ NAME             TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 svc/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   5d
 ```
 
-{% endif %}
+## Where to go next
+
+- [Deploy a workload to a Kubernetes cluster](../kubernetes.md)
+- [Deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md)
 

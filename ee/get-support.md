@@ -2,16 +2,7 @@
 title: Get support
 description: Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.
 keywords: support, help
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
-cli_tabs:
-- version: docker-cli-linux
-- version: docker-cli-win
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 Your Docker Enterprise Edition subscription gives you access to prioritized
 support. The service levels depend on your subscription.
@@ -36,12 +27,7 @@ support dump:
 
 ![](images/get-support-1.png){: .with-border}
 
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
+## Use the CLI to get a support dump
 
 To get the support dump from the CLI, use SSH to log into a UCP manager node
 and run:
@@ -59,7 +45,7 @@ This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
 from all of the manager nodes.
 
-{% elsif include.version=="docker-cli-win" %}
+## Use PowerShell to get a support dump
 
 On Windows worker nodes, run the following command to generate a local support dump:
 
@@ -70,5 +56,3 @@ docker container run --name windowssupport -v 'C:\ProgramData\docker\daemoncerts
 This command creates a directory named `dsinfo` in your current directory.
 If you want an archive file, you need to create it from the `dsinfo` directory.
 
-{% endif %}
-{% endif %}

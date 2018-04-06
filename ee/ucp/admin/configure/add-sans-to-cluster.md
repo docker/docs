@@ -2,13 +2,7 @@
 title: Add SANs to cluster certificates
 description: Learn how to add new SANs to cluster nodes, allowing you to connect to UCP with a different hostname
 keywords: cluster, node, label, certificate, SAN
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
 ---
-{% if include.version=="ucp-3.0" %}
 
 UCP always runs with HTTPS enabled. When you connect to UCP, you need to make
 sure that the hostname that you use to connect is recognized by UCP's
@@ -60,8 +54,3 @@ docker node update --label-add com.docker.ucp.SANs=<SANs-list> <node-id>
 `<SANs-list>` is the list of SANs with your new SAN appended at the end. As in
 the web UI, you must do this for every manager node.
 
-{% elsif include.version=="ucp-2.2" %}
-
-Learn about [adding SANs to cluster certificates](/datacenter/ucp/2.2/guides/admin/configure/add-sans-to-cluster.md).
-
-{% endif %}

@@ -3,15 +3,9 @@ title: UCP 3.0 Beta release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
 redirect_from:
   - /datacenter/ucp/3.0/guides/release-notes/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for the latest UCP version.
@@ -194,11 +188,9 @@ up on the web UI but not be available for use.
 * Deploying a Compose V2 or older file as a Kubernetes is not supported but
 currently UCP doesn't present a meaningful error message to the user.
 
-{% elsif include.version=="ucp-2.2" %}
+## Release notes for earlier versions
 
 - [UCP 2.2 release notes](/datacenter/ucp/2.2/guides/release-notes.md)
 - [UCP 2.1 release notes](/datacenter/ucp/2.1/guides/release-notes/index.md)
 - [UCP 2.0 release notes](/datacenter/ucp/2.0/guides/release-notes.md)
 - [UCP 1.1 release notes](/datacenter/ucp/1.1/release_notes.md)
-
-{% endif %}

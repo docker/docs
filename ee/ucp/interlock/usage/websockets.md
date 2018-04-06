@@ -3,12 +3,7 @@ title: Websockets
 description: Learn how to use websocket in your swarm services when using the
   layer 7 routing solution for UCP.
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service and configure support for websockets.
 
@@ -39,4 +34,3 @@ Interlock will detect once the service is available and publish it.  Once the ta
 and the proxy service has been updated the application should be available via `http://demo.local`.  Open
 two instances of your browser and you should see text on both instances as you type.
 
-{% endif %}

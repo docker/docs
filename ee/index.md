@@ -1,24 +1,10 @@
 ---
 title: Docker Enterprise Edition Platform
-description: |
-  Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
-ui_tabs:
-- version: dee-2.0
-  orhigher: false
-cli_tabs:
-- version: docker-cli-linux
-- version: kubectl
-next_steps:
-- path: supported-platforms/
-  title: Supported platforms
-- path: docker-ee-architecture/
-  title: Docker EE architecture  
+description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker. 
 keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
 ---
-
-{% if include.version=="dee-2.0" %}
 
 Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
 Containers-as-a-Service (CaaS) platform that enables a secure software supply
@@ -152,12 +138,6 @@ are safe and can't be tampered with.
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
-
 ## Docker EE and the CLI
 
 Docker EE exposes the standard Docker API, so you can continue using the tools
@@ -189,7 +169,7 @@ Managers: 1
 …
 ```
 
-{% elsif include.version=="kubectl" %}
+## Use the Kubernetes CLI
 
 Docker EE exposes the standard Kubernetes API, and it installs the command-line
 tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
@@ -208,5 +188,7 @@ KubeDNS is running at https://54.200.115.43:6443/api/v1/namespaces/kube-system/s
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-{% endif %}
-{% endif %}
+## Where to go next
+
+- [Supported platforms](supported-platforms.md)
+- [Docker EE architecture](docker-ee-architecture.md)

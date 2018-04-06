@@ -2,16 +2,7 @@
 title: Uninstall UCP
 description: Learn how to uninstall a Docker Universal Control Plane swarm.
 keywords: UCP, uninstall, install, Docker EE
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../configure/join-nodes/
-  title: Join nodes to your cluster
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker UCP is designed to scale as your applications grow in size and usage.
 You can [add and remove nodes](../configure/scale-your-cluster.md) from the
@@ -64,8 +55,6 @@ When you install UCP, the Calico network plugin changes the host's IP tables.
 When you uninstall UCP, the IP tables aren't reverted to their previous state.
 After you uninstall UCP, restart the node to restore its IP tables.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [uninstalling UCP](/datacenter/ucp/2.2/guides/admin/install/uninstall.md).
-
-{% endif %}
+- [Join nodes to your cluster](../configure/join-nodes.md)

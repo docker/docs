@@ -2,20 +2,9 @@
 title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production.
 keywords: Universal Control Plane, UCP, install, Docker EE
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../configure/use-your-own-tls-certificates/
-  title: Use your own TLS certificates
-- path: ../configure/join-nodes/
-  title: Join nodes to your cluster
 redirect_from:
   - /datacenter/ucp/3.0/guides/admin/install/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane (UCP) is a containerized application that you
 can install on-premise or on a cloud infrastructure.
@@ -173,8 +162,7 @@ To add more computational resources to your swarm, you can join worker nodes.
 These nodes execute tasks assigned to them by the manager nodes. Follow the
 same steps as before, but don't check the **Add node as a manager** option.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [installing UCP for production](/datacenter/ucp/2.2/guides/admin/install/index.md).
-
-{% endif %}
+- [Join nodes to your cluster](../configure/join-nodes.md)
+- [Use your own TLS certificates](../configure/use-your-own-tls-certificates.md)

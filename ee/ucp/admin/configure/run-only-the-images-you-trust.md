@@ -2,16 +2,7 @@
 title: Run only the images you trust
 description: Configure a Docker UCP cluster to only allow running applications that use images you trust.
 keywords: ucp, dtr, security, trust
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: /ee/dtr/user/manage-images/sign-images/
-  title: Sign and push images to DTR
 ---
-{% if include.version=="ucp-3.0" %}
 
 With Docker Universal Control Plane you can enforce applications to only use
 Docker images signed by UCP users you trust. When a user tries to deploy an
@@ -75,8 +66,6 @@ Click **Save** for UCP to start enforcing the policy. From now on, existing
 services will continue running and can be restarted if needed, but UCP will only
 allow deploying new services that use a trusted image.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [running only the images you trust](/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust.md).
-
-{% endif %}
+- [Sign and push images to DTR](/ee/dtr/user/manage-images/sign-images.md)

@@ -2,15 +2,7 @@
 title: Create a service account for a Kubernetes app
 description: Learn how to use a service account to give a Kubernetes workload access to cluster resources.
 keywords: UCP, Docker EE, Kubernetes, authorization, access control, grant
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
-next_steps:
-- path: deploy-ingress-controller/
-  title: Deploy an ingress controller for a Kubernetes app
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Kubernetes enables access control for workloads by providing service accounts.
 A service account represents an identity for processes that run in a pod.
@@ -89,4 +81,6 @@ To give the service account access to cluster resources, create a grant with
 Now `nginx-service-account` has access to all cluster resources that are
 assigned to the `nginx` namespace.
 
-{% endif %}
+## Where to go next
+
+- [Deploy an ingress controller for a Kubernetes app](deploy-ingress-controller.md)

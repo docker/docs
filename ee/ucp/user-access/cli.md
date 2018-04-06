@@ -2,19 +2,10 @@
 title: CLI-based access
 description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords: ucp, cli, administration
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../swarm/
-  title: Deploy a service
 redirect_from:
   - /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/
   - /ee/ucp/user/access-ucp/cli-based-access/
 ---
-{% if include.version=="ucp-3.0" %}
 
 With Universal Control Plane you can continue using the tools you know and
 love like the Docker CLI client and kubectl. You just need to download and use
@@ -169,8 +160,6 @@ $AUTHTOKEN=((Invoke-WebRequest -Body '{"username":"<username>", "password":"<pas
 [io.file]::WriteAllBytes("ucp-bundle.zip", ((Invoke-WebRequest -Uri https://`<ucp-ip`>/api/clientbundle -Headers @{"Authorization"="Bearer $AUTHTOKEN"}).Content))
  ```
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [CLI-based access](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
-
-{% endif %}
+- [Deploy a service](../swarm.md)

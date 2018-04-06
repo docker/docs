@@ -3,20 +3,7 @@ title: Integrate with an LDAP directory
 description: Learn how to integrate UCP with an LDAP service, so that you can
   manage users from a single place.
 keywords: LDAP, UCP, authentication, user management
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: enable-ldap-config-file/
-  title: Enable LDAP integration by using a configuration file
-- path: ../../../authorization/create-teams-with-ldap/
-  title: Create teams with LDAP
-- path: ../../../authorization/create-users-and-teams-manually/
-  title: Create users and teams manually
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and it will automatically
@@ -231,8 +218,8 @@ UCP enables syncing teams with a search query or group in your organization's
 LDAP directory.
 [Sync team members with your organization's LDAP directory](../../../authorization/create-teams-with-ldap.md).
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [integrating with an LDAP directory](/datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
-
-{% endif %}
+- [Create users and teams manually](../../../authorization/create-users-and-teams-manually.md)
+- [Create teams with LDAP](../../../authorization/create-teams-with-ldap.md)
+- [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)

@@ -2,11 +2,7 @@
 title: Deploy a simple stateless app with RBAC
 description: Learn how to deploy a simple application and customize access to resources.
 keywords: rbac, authorize, authentication, user, team, UCP, Kubernetes
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 This tutorial explains how to deploy a NGINX web server and limit access to one
 team with role-based access control (RBAC).
@@ -177,4 +173,3 @@ service.
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
 
-{% endif %}

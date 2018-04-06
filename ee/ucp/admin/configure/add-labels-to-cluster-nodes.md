@@ -2,16 +2,7 @@
 title: Add labels to swarm nodes
 description: Learn how to add metadata to swarm nodes that can be used to specify constraints when deploying services.
 keywords: cluster, node, label, swarm, metadata
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: store-logs-in-an-external-system/
-  title: Store logs in an external system
 ---
-{% if include.version=="ucp-3.0" %}
 
 With Docker UCP, you can add labels to your nodes. Labels are metadata that
 describe the node, like its role (development, QA, production), its region
@@ -144,9 +135,8 @@ To edit the labels on the service, click **Configure** and select
 
 You can add or remove deployment constraints on this page.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [adding labels to cluster nodes](/datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes.md).
+- [Store logs in an external system](store-logs-in-an-external-system.md)
 
-{% endif %}
 

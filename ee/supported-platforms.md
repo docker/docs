@@ -1,20 +1,10 @@
 ---
 title: About Docker EE
-description: |
-  Information about Docker Enterprise Edition Platform 2.0
-ui_tabs:
-- version: dee-2.0
-  orhigher: false
-next_steps:
-- path: /engine/installation/
-  title: Install Docker
-- path: /get-started/
-  title: Get Started with Docker
+description: Information about Docker Enterprise Edition Platform 2.0
 keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 redirect_from:
   - /enterprise/supported-platforms/
 ---
-{% if include.version=="dee-2.0" %}
 
 Docker Enterprise Edition (*Docker EE*) is designed for enterprise
 development and IT teams who build, ship, and run business-critical
@@ -80,4 +70,7 @@ deployed version, or you can upgrade to the latest Docker EE version. For
 more info, see [Scope of Coverage and Maintenance
 Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
 
-{% endif %}
+## Where to go next
+
+- [Install Docker](/engine/installation/index.md)
+- [Get Started with Docker](/get-started/index.md)

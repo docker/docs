@@ -2,11 +2,7 @@
 title: Create teams with LDAP
 description: Learn how to enable LDAP and sync users and teams in Docker Universal Control Plane.
 keywords: authorize, authentication, users, teams, UCP, LDAP
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
 ---
-{% if include.version=="ucp-3.0" %}
 
 To enable LDAP in UCP and sync to your LDAP directory:
 
@@ -58,5 +54,3 @@ synced to match the users in the search results.
   scope are added as members of the team.
 - **Search subtree**: Defines search through the full LDAP tree, not just one
   level, starting at the Base DN.
-
-{% endif %}

@@ -6,12 +6,7 @@ redirect_from:
   - /ee/ucp/user/services/
   - /ee/ucp/swarm/deploy-from-cli/
   - /ee/ucp/swarm/deploy-from-ui/
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane allows you to use the tools you already know,
 like `docker stack deploy` to deploy multi-service applications. You can
@@ -163,4 +158,3 @@ Swarm. For that reason, the following keywords are not supported:
 Also, UCP doesn't store the stack definition you've used to deploy the stack.
 You can use a version control system for this.
 
-{% endif %}

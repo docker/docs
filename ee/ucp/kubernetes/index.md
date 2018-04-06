@@ -4,15 +4,7 @@ description: Use Docker Enterprise Edition to deploy Kubernetes workloads from y
 keywords: UCP, Docker EE, orchestration, Kubernetes, cluster
 redirect_from:
   - /ee/ucp/user/services/deploy-kubernetes-workload/
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
-cli_tabs:
-- version: kubectl
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 The Docker EE web UI enables deploying your Kubernetes YAML files. In most
 cases, no modifications are necessary to deploy on a cluster that's managed by
@@ -150,12 +142,7 @@ spec:
 4.  Find the **image: nginx:1.7.9** entry and change it to **image: nginx:1.8**.
 5.  Click **Edit** to update the deployment with the new YAML.
 
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="kubectl" %}
+## Use the CLI to deploy Kubernetes objects
 
 With Docker EE, you deploy your Kubernetes objects on the command line by using
 `kubectl`. [Install and set up kubectl](https://v1-8.docs.kubernetes.io/docs/tasks/tools/install-kubectl/).
@@ -263,5 +250,3 @@ You should see the currently running image:
     Image:        nginx:1.8
 ```
 
-{% endif %}
-{% endif %}

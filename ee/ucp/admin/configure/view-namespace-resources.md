@@ -2,11 +2,7 @@
 title: View Kubernetes objects in a namespace
 description: Learn how to set the Kubernetes namespace context in a Docker Enterprise Edition cluster.
 keywords: Docker EE, UCP, Kubernetes, namespace
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 With Docker Enterprise Edition, administrators can filter the view of
 Kubernetes objects by the namespace the objects are assigned to. You can
@@ -114,5 +110,3 @@ objects in one namespace.
 
 To view the `app-service-blue` service, repeat the previous steps, but this
 time, select **Set Context** on the **blue** namespace.
-
-{% endif %}
