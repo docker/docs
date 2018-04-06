@@ -2,12 +2,7 @@
 title: Layer 7 routing configuration reference
 description: Learn the configuration options for the UCP layer 7 routing solution
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 Once you enable the layer 7 routing service, UCP creates the
 `com.docker.ucp.interlock.conf-1` configuration and uses it to configure all
@@ -151,4 +146,3 @@ available for the proxy service:
 | `TraceLogFormat`        | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for trace logger. |
 
 
-{% endif %}

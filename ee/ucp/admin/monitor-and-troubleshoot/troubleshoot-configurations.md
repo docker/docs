@@ -2,16 +2,7 @@
 title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, cluster
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../../get-support/
-  title: Get support
 ---
-{% if include.version=="ucp-3.0" %}
 
 UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
@@ -152,8 +143,6 @@ time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"
 {% endraw %}
 ```
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn how to [troubleshoot cluster configurations](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations.md).
-
-{% endif %}
+- [Get support](../../../get-support.md)

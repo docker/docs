@@ -3,12 +3,7 @@ title: Configure the layer 7 routing service
 description: Learn how to configure the layer 7 routing solution for UCP, that allows
   you to route traffic to swarm services.
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 [When enabling the layer 7 routing solution](index.md) from the UCP web UI,
 you can configure the ports for incoming traffic. If you want to further
@@ -66,4 +61,3 @@ you'll have to update it again to use the Docker configuration object
 you've created.
 
 
-{% endif %}

@@ -2,16 +2,7 @@
 title: Architecture-specific images
 description: Learn how to deploy Docker Universal Control Plane using images that are specific to particular hardware architectures.
 keywords: UCP, Docker EE, image, IBM z, Windows
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../configure/join-nodes/
-  title: Join nodes to your cluster
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane deploys images for a number of different
 hardware architectures, including IBM z systems. Some architectures require
@@ -51,8 +42,6 @@ following table to ensure that you're pulling the right images for each node.
 | ucp-agent               | ucp-agent-win  | ucp-agent-s390x    |
 | ucp-dsinfo              | ucp-dsinfo-win | ucp-dsinfo-s390x   |
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [architecture-specific images](/datacenter/ucp/2.2/guides/admin/install/architecture-specific-images.md).
-
-{% endif %}
+- [Join nodes to your cluster](../configure/join-nodes.md)

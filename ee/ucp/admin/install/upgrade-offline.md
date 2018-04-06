@@ -2,18 +2,7 @@
 title: Upgrade UCP offline
 description: Learn how to upgrade Docker Universal Control Plane on a machine with no internet access.
 keywords: ucp, upgrade, offline
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: upgrade/
-  title: Upgrade UCP
-- path: ../../release-notes/
-  title: Release Notes
 ---
-{% if include.version=="ucp-3.0" %}
 
 Upgrading Universal Control Plane is the same, whether your hosts have access to
 the internet or not.
@@ -66,8 +55,7 @@ For each machine that you want to manage with UCP:
 Now that the offline hosts have all the images needed to upgrade UCP,
 you can [upgrade Docker UCP](upgrade.md).
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [upgrading UCP offline](/datacenter/ucp/2.2/guides/admin/install/upgrade-offline.md).
-
-{% endif %}
+- [UCP release notes](../../release-notes.md)
+- [Upgrade UCP](upgrade.md)

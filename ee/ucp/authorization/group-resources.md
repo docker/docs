@@ -2,22 +2,9 @@
 title: Group and isolate cluster resources
 description: Learn how to group resources into collections or namespaces to control user access.
 keywords: rbac, ucp, grant, role, permission, authentication, resource set, collection, namespace, Kubernetes
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: false
-next_steps:
-- path: create-users-and-teams-manually/
-  title: Create and configure users and teams
-- path: define-roles/
-  title: Define roles with authorized API operations
-- path: grant-permissions/
-  title: Grant role-access to cluster resources
 redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/group-resources/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker EE enables access control to cluster resources by grouping resources
 into *resource sets*. Combine resource sets with [grants](grant-permissions)
@@ -171,8 +158,8 @@ If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
 permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes.md).
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn to [manage access to resources by using collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections.md).
-
-{% endif %}
+- [Create and configure users and teams](create-users-and-teams-manually.md)
+- [Define roles with authorized API operations](define-roles.md)
+- [Grant role-access to cluster resources](grant-permissions.md)

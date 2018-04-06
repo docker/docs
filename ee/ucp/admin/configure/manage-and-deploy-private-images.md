@@ -2,11 +2,7 @@
 title: Manage and deploy private images
 description: Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.
 keywords: Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Enterprise Edition (EE) has its own image registry (DTR) so that
 you can store and manage the images that you deploy to your cluster.
@@ -138,4 +134,3 @@ from outside the cluster.
 
     ![](../../images/manage-and-deploy-private-images-4.png){: .with-border}
 
-{% endif %}

@@ -3,12 +3,7 @@ title: Interlock architecture
 description: Learn more about the architecture of the layer 7 routing solution
   for Docker swarm services.
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 The layer 7 routing solution for swarm workloads is known as Interlock, and has
 three components:
@@ -76,4 +71,3 @@ based on the labels you've added to your services.
 This all happens in milliseconds and with rolling updates. Even though
 services are being reconfigured, users won't notice it.
 
-{% endif %}

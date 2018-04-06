@@ -2,17 +2,7 @@
 title: Docker EE architecture
 description: Learn about the architecture of Docker Enterprise Edition and how it delivers high availability for your workloads.
 keywords: Docker EE, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability
-ui_tabs:
-- version: dee-2.0
-  orhigher: false
-next_steps:
-- path: /ee/ucp/ucp-architecture/
-  title: UCP architecture
-- path: /ee/dtr/architecture/
-  title: DTR architecture
 ---
-
-{% if include.version=="dee-2.0" %}
 
 Docker Enterprise Edition (EE) enables deploying your workloads for high
 availability (HA) onto the orchestrator of your choice. Docker EE system
@@ -108,4 +98,7 @@ All DTR replicas run the same set of services, and changes to their configuratio
 are automatically propagated to other replicas.
 [Learn about DTR architecture](/ee/dtr/architecture.md).
 
-{% endif %}
+## Where to go next
+
+- [UCP architecture](/ee/ucp/ucp-architecture.md)
+- [DTR architecture](/ee/dtr/architecture.md)

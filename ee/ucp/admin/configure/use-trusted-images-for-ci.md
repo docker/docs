@@ -2,13 +2,7 @@
 title: Use trusted images for continuous integration
 description: Set up and configure content trust and signing policy for use with a continuous integration system
 keywords: cup, trust, notary, security, continuous integration
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
 ---
-{% if include.version=="ucp-3.0" %}
 
 The document provides a minimal example on setting up Docker Content Trust (DCT) in
 Universal Control Plane (UCP) for use with a Continuous Integration (CI) system. It
@@ -153,9 +147,3 @@ that do not meet our signing policy cannot be used. The signing policy we set up
 that the "CI" team must have signed any image we attempt to `docker image pull`, `docker container run`,
 or `docker service create`, and the only member of that team is the "jenkins" user. This
 restricts us to only running images that were published by our Jenkins CI system.
-
-{% elsif include.version=="ucp-2.2" %}
-
-Learn about [using trusted images for continuous integration](/datacenter/ucp/2.2/guides/admin/configure/use-trusted-images-for-ci.md).
-
-{% endif %}

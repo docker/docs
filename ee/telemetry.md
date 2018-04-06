@@ -1,20 +1,10 @@
 ---
-name: Manage usage data collection
 title: Manage usage data collection
-description: |
-  Understand and manage usage data collected by Docker EE and sent to Docker.
-ui_tabs:
-- version: dee-2.0
-  orhigher: false
-cli_tabs:
-- version: docker-cli-linux
+description: Understand and manage usage data collected by Docker EE and sent to Docker.
 keywords: enterprise, telemetry, data collection
 redirect_from:
   - /enterprise/telemetry/
 ---
-{% if include.ui %}
-
-{% if include.version=="dee-2.0" %}
 
 Docker EE Engine version 17.06 and later includes a telemetry plugin.
 The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0
@@ -61,18 +51,12 @@ You can find out more about an individual option by clicking the **?** icon.
 > about what API endpoints are used. API payload contents aren't collected.
 {: .important}
 
-
- {% endif %}
- {% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
+## Use the CLI to control telemetry
 
 To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
 
 ```bash
-docker plugin ls
+$ docker plugin ls
 ID                  NAME                                           [..]
 114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
 
@@ -84,27 +68,9 @@ This command must be run on each Docker host.
 To re-enable the telemetry plugin, you can use `docker plugin enable` with either the plugin NAME or ID:
 
 ```bash
-docker plugin ls
+$ docker plugin ls
 ID                  NAME                                           [..]
 114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
 
-docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
+$ docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
 ```
-
-### Use Universal Control Plane
-
-If you use Universal Control Plane with Docker EE, do not use the Docker CLI to
-disable the telemetry plugin. Instead, you can manage the information sent to
-Docker by going to **Admin Settings** and choosing **Usage**.
-
-![UCP admin settings Usage defaults](images/usage-defaults.png){: .with-border}
-
-To disable the telemetry plugin, disable all three options and click **Save**.
-Enabling either or both of the top two options enable the telemetry plugin.
-You can find out more about an individual option by clicking the **?** icon.
-
-> **Note**: If API usage statistics are enabled, Docker only gathers aggregate
-stats about what API endpoints are used. API payload contents are not collected.
-
-{% endif %}
-{% endif %}

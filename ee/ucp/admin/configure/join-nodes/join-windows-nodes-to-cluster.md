@@ -2,15 +2,9 @@
 title: Join Windows worker nodes to your cluster
 description: Join worker nodes that are running on Windows Server 2016 to a Docker EE cluster.
 keywords: Docker EE, UCP, cluster, scale, worker, Windows
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
 redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Enterprise Edition supports worker nodes that run on Windows Server 2016.
 Only worker nodes are supported on Windows, and all manager nodes in the cluster
@@ -212,8 +206,3 @@ Some features are not yet supported on Windows nodes:
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
 
-{% elsif include.version=="ucp-2.2" %}
-
-Learn about [joining Windows worker nodes to a cluster](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes.md).
-
-{% endif %}

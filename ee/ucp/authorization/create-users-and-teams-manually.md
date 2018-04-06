@@ -2,22 +2,9 @@
 title: Create users and teams manually
 description: Learn how to add users and define teams in Docker Universal Control Plane.
 keywords: rbac, authorize, authentication, users, teams, UCP
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
-next_steps:
-- path: create-teams-with-ldap/
-  title: Synchronize teams with LDAP
-- path: define-roles/
-  title: Define roles with authorized API operations
-- path: group-resources/
-  title: Group and isolate cluster resources
-- path: grant-permissions/
-  title: Grant role-access to cluster resources
 redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/create-users-and-teams-manually/
 ---
-{% if include.version=="ucp-3.0" %}
 
 Users, teams, and organizations are referred to as subjects in Docker EE.
 
@@ -98,4 +85,9 @@ To manually create users in UCP:
 ![](../images/ucp_usermgmt_users_create01.png){: .with-border}
 ![](../images/ucp_usermgmt_users_create02.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+- [Synchronize teams with LDAP](create-teams-with-ldap.md)
+- [Define roles with authorized API operations](define-roles.md)
+- [Group and isolate cluster resources](group-resources.md)
+- [Grant role-access to cluster resources](grant-permissions.md)

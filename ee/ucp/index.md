@@ -2,24 +2,11 @@
 title: Universal Control Plane overview
 description: |
   Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.
-ui_tabs:
-- version: ucp-3.0
-  orhigher: true
-cli_tabs:
-- version: docker-cli-linux
-next_steps:
-- path: admin/install/
-  title: Install UCP
-- path: /ee/docker-ee-architecture/
-  title: Docker EE Platform 2.0 architecture
 keywords: ucp, overview, orchestration, cluster
 redirect_from:
   - /ucp/
   - /datacenter/ucp/3.0/guides/
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
 solution from Docker. You install it on-premises or in your virtual private
@@ -63,12 +50,7 @@ are safe and can't be tampered with.
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
+## Use the Docker CLI client
 
 Because UCP exposes the standard Docker API, you can continue using the tools
 you already know, including the Docker CLI client, to deploy and manage your
@@ -99,5 +81,7 @@ Managers: 1
 …
 ```
 
-{% endif %}
-{% endif %}
+## Where to go next
+
+- [Install UCP](admin/install/index.md)
+- [Docker EE Platform 2.0 architecture](/ee/docker-ee-architecture.md)

@@ -2,13 +2,7 @@
 title: Restrict services to worker nodes
 description: Learn how to configure Universal Control Plane to only allow running services in worker nodes.
 keywords: ucp, configuration, worker
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
 ---
-{% if include.version=="ucp-3.0" %}
 
 You can configure UCP to allow users to deploy and run services only in
 worker nodes. This ensures all cluster management functionality stays
@@ -30,9 +24,4 @@ or not.
 Having a grant with the `Scheduler` role against the `/` collection takes
 precedence over any other grants with `Node Schedule` on subcollections.
 
-{% elsif include.version=="ucp-2.2" %}
-
-Learn about [restricting services to worker nodes](/datacenter/ucp/2.2/guides/admin/configure/restrict-services-to-worker-nodes.md).
-
-{% endif %}
 

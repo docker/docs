@@ -2,18 +2,7 @@
 title: Integrate with LDAP by using a configuration file
 description: Set up LDAP authentication by using a configuration file.
 keywords: UCP, LDAP, config
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: ../../../authorization/create-teams-with-ldap/
-  title: Create teams with LDAP
-- path: ../../../authorization/create-users-and-teams-manually/
-  title: Create users and teams manually
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and automatically
@@ -73,8 +62,7 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
     have their accounts created when they log in with their username and LDAP
     password.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [integrating with LDAP by using a configuration file](/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file.md).
-
-{% endif %}
+- [Create users and teams manually](../../../authorization/create-users-and-teams-manually.md)
+- [Create teams with LDAP](../../../authorization/create-teams-with-ldap.md)

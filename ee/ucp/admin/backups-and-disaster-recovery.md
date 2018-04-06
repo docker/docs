@@ -3,18 +3,7 @@ title: Backups and disaster recovery
 description: Learn how to backup your Docker Universal Control Plane swarm, and
   to recover your swarm from an existing backup.
 keywords: ucp, backup, restore, recovery
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: configure/join-nodes/
-  title: Set up high availability
-- path: ../ucp-architecture/
-  title: UCP architecture
 ---
-{% if include.version=="ucp-3.0" %}
 
 When you decide to start using Docker Universal Control Plane on a production
 setting, you should
@@ -208,8 +197,7 @@ manager failures, the system should be configured for
    nodes](configure/scale-your-cluster.md) from the swarm and then re-join
    them using a `docker swarm join` operation with the swarm's new join-token.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [backups and disaster recovery](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md).
-
-{% endif %}
+- [UCP architecture](../ucp-architecture.md)
+- [Set up high availability](configure/join-nodes/index.md)

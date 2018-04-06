@@ -3,16 +3,7 @@ title: Configure UCP logging
 description: Learn how to configure Docker Universal Control Plane to store your logs
   on an external log system.
 keywords: ucp, integrate, logs
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-next_steps:
-- path: restrict-services-to-worker-nodes/
-  title: Restrict services to worker nodes
 ---
-{% if include.version=="ucp-3.0" %}
 
 You can configure UCP for sending logs to a remote logging service:
 
@@ -68,8 +59,6 @@ When deployed in a production environment, you should secure your ELK
 stack. UCP does not do this itself, but there are a number of 3rd party
 options that can accomplish this, like the Shield plug-in for Kibana.
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn how to [configure UCP logging](/datacenter/ucp/2.2/guides/admin/configure/store-logs-in-an-external-system.md).
-
-{% endif %}
+- [Restrict services to worker nodes](restrict-services-to-worker-nodes.md)

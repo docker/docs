@@ -3,12 +3,7 @@ title: Configure layer 7 routing for production
 description: Learn how to configure the layer 7 routing solution for a production
   environment.
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 The layer 7 solution that ships out of the box with UCP is highly available
 and fault tolerant. It is also designed to work independently of how many
@@ -92,4 +87,3 @@ load balancer with the domain names or IP addresses of those nodes.
 
 This makes sure all traffic is directed to these nodes.
 
-{% endif %}

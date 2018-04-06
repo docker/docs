@@ -4,15 +4,7 @@ description: Learn how to deploy services to a cluster managed by Universal Cont
 keywords: ucp, deploy, service
 redirect_from:
   - /ee/ucp/user/services/deploy-a-service/
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
-cli_tabs:
-- version: docker-cli-linux
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 You can deploy and monitor your services from the UCP web UI. In this example
 we'll deploy an [NGINX](https://www.nginx.com/) web server and make it
@@ -53,12 +45,7 @@ page, by going to `http://<node-ip>:8000`.
 
 ![](../images/deploy-a-service-4.png){: .with-border}
 
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
+## Use the CLI to deploy the service
 
 You can also deploy the same service from the CLI. Once you've set up your
 [UCP client bundle](../user-access/cli.md), run:
@@ -70,5 +57,3 @@ docker service create --name nginx \
   nginx
 ```
 
-{% endif %}
-{% endif %}

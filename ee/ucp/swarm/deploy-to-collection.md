@@ -4,18 +4,7 @@ description: Learn how to manage user access to application resources by using c
 keywords: UCP, authentication, user management, stack, collection, role, application, resources
 redirect_from:
   - /ee/ucp/user/services/deploy-stack-to-collection/
-ui_tabs:
-- version: ucp-3.0
-  orlower: true
-next_steps:
-- path: ../kubernetes/deploy-with-compose/
-  title: Deploy a Compose-based app to a Kubernetes cluster
-- path: /engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label/
-  title: Set metadata on a service (-l, –label)
-- path: /engine/userguide/labels-custom-metadata/
-  title: Docker object labels
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane enforces role-based access control when you
 deploy services. By default, you don't need to do anything, because UCP deploys
@@ -105,4 +94,8 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
 
 ![](../images/deploy-stack-to-collection.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+- [Deploy a Compose-based app to a Kubernetes cluster](../kubernetes/deploy-with-compose.md)
+- [Set metadata on a service (-l, –label)](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label.md)
+- [Docker object labels](/engine/userguide/labels-custom-metadata/.md)

@@ -2,11 +2,7 @@
 title: Layer 7 routing overview
 description: Learn how to route layer 7 traffic to your swarm services
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-{% if include.version=="ucp-3.0" %}
 
 Docker Engine running in swarm mode has a routing mesh, which makes it easy
 to expose your services to the outside world. Since all nodes participate
@@ -49,4 +45,3 @@ performance.
 * **Security**: The layer 7 routing components that are exposed to the outside
 world run on worker nodes. Even if they get compromised, your cluster won't.
 
-{% endif %}

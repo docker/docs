@@ -3,12 +3,7 @@ title: Context/path based routing
 description: Learn how to do route traffic to your Docker swarm services based
   on a url path
 keywords: routing, proxy
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
 ---
-
-{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service using context or path based routing.
 
@@ -61,4 +56,3 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/app/
 ...
 ```
 
-{% endif %}

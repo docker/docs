@@ -2,22 +2,7 @@
 title: Access control model
 description: Manage access to resources with role-based access control.
 keywords: ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes
-ui_tabs:
-- version: ucp-3.0
-  orlower: false
-- version: ucp-2.2
-  orlower: false
-next_steps:
-- path: create-users-and-teams-manually/
-  title: Create and configure users and teams
-- path: define-roles/
-  title: Define roles with authorized API operations
-- path: group-resources/
-  title: Group and isolate cluster resources
-- path: grant-permissions/
-  title: Grant role-access to cluster resources
 ---
-{% if include.version=="ucp-3.0" %}
 
 [Docker Universal Control Plane (UCP)](../index.md),
 the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
@@ -111,8 +96,9 @@ resources.
 > and applies grants to users and teams.
 {: .important}
 
-{% elsif include.version=="ucp-2.2" %}
+## Where to go next
 
-Learn about [access control model in UCP](/datacenter/ucp/2.2/guides/access-control/index.md).
-
-{% endif %}
+- [Create and configure users and teams](create-users-and-teams-manually.md)
+- [Define roles with authorized API operations](define-roles.md)
+- [Grant role-access to cluster resources](grant-permissions.md)
+- [Group and isolate cluster resources](group-resources.md)

@@ -2,22 +2,7 @@
 title: Scale your cluster
 description: Learn how to scale Docker Universal Control Plane cluster, by adding and removing nodes.
 keywords: UCP, cluster, scale
-ui_tabs:
-- version: ucp-3.0
-  orhigher: false
-- version: ucp-2.2
-  orlower: true
-cli_tabs:
-- version: docker-cli-linux
-next_steps:
-- path: use-your-own-tls-certificates/
-  title: Use your own TLS certificates
-- path: join-nodes/
-  title: Set up high availability
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
@@ -126,16 +111,7 @@ If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your
 load-balancing pool.
 
-{% elsif include.version=="ucp-2.2" %}
-
-Learn about [scaling your cluster](/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster.md).
-
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
-
-{% if include.version=="docker-cli-linux" %}
+## Use the CLI to scale your cluster
 
 You can also use the command line to do all of the above operations. To get the
 join token, run the following command on a manager node:
@@ -175,5 +151,7 @@ To remove the node, use:
 docker node rm <node-hostname>
 ```
 
-{% endif %}
-{% endif %}
+## Where to go next
+
+- [Use your own TLS certificates](use-your-own-tls-certificates.md)
+- [Set up high availability](join-nodes/index.md)
