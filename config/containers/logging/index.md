@@ -15,7 +15,7 @@ log depends almost entirely on the container's endpoint command.
 By default, `docker logs` or `docker service logs` shows the command's output
 just as it would appear if you ran the command interactively in a terminal. UNIX
 and Linux commands typically open three I/O streams when they run, called
-`STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the commmand's input stream, which
+`STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the command's input stream, which
 may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
