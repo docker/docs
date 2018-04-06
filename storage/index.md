@@ -85,12 +85,14 @@ mounts is to think about where the data lives on the Docker host.
   applications, consider using named volumes instead. You can't use
   Docker CLI commands to directly manage bind mounts.
 
-  > **Warning**: One side effect of using bind mounts, for better or for worse,
+  > Bind mounts allow access to sensitive files
+  >
+  > One side effect of using bind mounts, for better or for worse,
   > is that you can change the **host** filesystem via processes running in a
   > **container**, including creating, modifying, or deleting important system
   > files or directories. This is a powerful ability which can have security
   > implications, including impacting non-Docker processes on the host system.
-  {: .warning }
+  {: .important }
 
 - **[tmpfs mounts](tmpfs.md)**: A `tmpfs` mount is not persisted on disk, either
   on the Docker host or within a container. It can be used by a container during

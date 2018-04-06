@@ -6,20 +6,19 @@ redirect_from:
 - /engine/admin/volumes/tmpfs/
 ---
 
-[Volumes](volumes.md) and [bind mounts](bind-mounts.md) allow you to share files
-between the host machine and container. This allows you to persist data even
-after the container is stopped.
+[Volumes](volumes.md) and [bind mounts](bind-mounts.md) let you share files
+between the host machine and container so that you can persist data even after
+the container is stopped.
 
 If you're running Docker on Linux, you have a third option: `tmpfs` mounts.
-When you create a container with a `tmpfs` mount, the container has a way to
-create files outside the container's writable layer, just like it happens with
-volumes and bind mounts.
-
-![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
+When you create a container with a `tmpfs` mount, the container can create
+files outside the container's writable layer.
 
 As opposed to volumes and bind mounts, a `tmpfs` mount is temporary, and only
 persisted in the host memory. When the container stops, the `tmpfs` mount is
 removed, and files written there won't be persisted.
+
+![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
 
 This is useful to temporarily store sensitive files that you don't want to
 persist in either the host or the container writable layer.
