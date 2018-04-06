@@ -122,11 +122,10 @@ By default this directory is:
 You can configure the Docker daemon to use a different directory, using the
 `data-root` configuration option.
 
-Since all the state of a Docker daemon is kept on this directory, make sure
+Since the state of a Docker daemon is kept on this directory, make sure
 you use a dedicated directory for each daemon. If two daemons share the same
-directory, as an example using an NFS share, you might get errors that are
-difficult to troubleshoot.
-
+directory, for example, an NFS share, you are going to experience errors that
+are difficult to troubleshoot.
 
 ## Troubleshoot the daemon
 
