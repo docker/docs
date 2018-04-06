@@ -14,7 +14,7 @@ kernel is configured with `CONFIG_SECCOMP` enabled. To check if your kernel
 supports `seccomp`:
 
 ```bash
-$ cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=
+$ grep CONFIG_SECCOMP= /boot/config-$(uname -r)
 CONFIG_SECCOMP=y
 ```
 
