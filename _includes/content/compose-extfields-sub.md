@@ -3,7 +3,7 @@ special fields can be of any format as long as they are located at the root of
 your Compose file and their name start with the `x-` character sequence.
 
 ```none
-version: '2.1'
+version: '3.4'
 x-custom:
   items:
     - a
@@ -29,7 +29,7 @@ logging:
 You may write your Compose file as follows:
 
 ```none
-version: '2.1'
+version: '3.4'
 x-logging:
   &default-logging
   options:
@@ -50,7 +50,7 @@ It is also possible to partially override values in extension fields using
 the [YAML merge type](http://yaml.org/type/merge.html). For example:
 
 ```none
-version: '2.1'
+version: '3.4'
 x-volumes:
   &default-volume
   driver: foobar-storage
