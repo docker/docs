@@ -338,7 +338,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 2.  On `host1`, create an attachable overlay network called `test-net`:
 
     ```bash
-    $ docker network create --driver=overlay --attachable test-net
+    (host1) $ docker network create --driver=overlay --attachable test-net
     ```
 
 3.  On `host1`, start an interactive (`-it`) container (`alpine1`) that connects to `test-net`:
