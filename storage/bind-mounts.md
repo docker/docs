@@ -39,7 +39,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 - **`-v` or `--volume`**: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   is not immediately obvious.
-  - In the case of bind mounts, the first field is the path to the file or
+  - In the case of volume mounts, the first field is the path to the file or
     directory on the **host machine**.
   - The second field is the path where the file or directory is mounted in
     the container.
