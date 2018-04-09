@@ -18,6 +18,20 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.04.0-ce-rc2-win61 2018-04-09
+
+[Download](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
+  - [Kubernetes 1.9.6](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v196). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Windows.
+
+* New 
+  - Enable ceph & rbd modules in LinuxKit VM.
+
+* Bug fixes and minor changes
+  - Fix ApyProxy not starting properly when Docker for Windows is started with the `HOME` environment variable already defined (typically started from the command line). Fixes [docker/for-win#1880](https://github.com/docker/for-win/issues/1880)
+
 ### Docker Community Edition 18.03.0-ce-win58 2018-03-26
 
 [Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe)
