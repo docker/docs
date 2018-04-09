@@ -10,7 +10,7 @@ Docker Swarm comes with multiple discovery backends. You use a hosted discovery 
 This page describes the different types of hosted discovery. These are:
 
 
-## Using a distributed key/value store
+## Use a distributed key/value store
 
 The recommended way to do node discovery in Swarm is Docker's libkv project. The libkv project is an abstraction layer over existing distributed key/value stores. As of this writing, the project supports:
 
@@ -20,7 +20,7 @@ The recommended way to do node discovery in Swarm is Docker's libkv project. The
 
 For details about libkv and a detailed technical overview of the supported backends, refer to the [libkv project](https://github.com/docker/libkv).
 
-### Using a hosted discovery key store
+### Use a hosted discovery key store
 
 1. On each node, start the Swarm agent.
 
