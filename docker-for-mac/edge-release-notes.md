@@ -18,6 +18,20 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.04.0-ce-rc2-mac61 2018-04-09
+
+[Download](https://download.docker.com/mac/edge/23890/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
+  - [Kubernetes 1.9.6](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v196). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Mac.
+
+* New 
+  - Enable ceph & rbd modules in LinuxKit VM.
+
+* Bug fixes and minor changes
+  - Fix upgrade straight from pre-17.12 versions where Docker for Mac cannot restart once the upgrade has been performed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
+
 ### Docker Community Edition 18.03.0-ce-mac58 2018-03-26
 
 [Download](https://download.docker.com/mac/edge/23607/Docker.dmg)
