@@ -16,7 +16,7 @@ This page explains how publishers can successfully test their **Docker images**.
 
 ## Certify your Docker images
 
-You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Refer to the [README](https://github.com/docker/inspect_docker_image/blob/master/README.md).
+You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Download the tool [here](#syntax).
 
 The `inspectDockerimage` tool does the following:
 
@@ -147,10 +147,10 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
     | OS/Architecture | Download Link |
     |:-----|:--------|:------|
-    | Windows/X86  | [https://s3.amazonaws.com/blahblahbucket/windows](https://s3.amazonaws.com/blahblahbucket/windows) |
-    | Linux/X86 | [https://s3.amazonaws.com/blahblahbucket/linux-x86](https://s3.amazonaws.com/blahblahbucket/linux-x86) |
-    | Linux/IBMZ | [https://s3.amazonaws.com/blahblahbucket/linux-ibmz](https://s3.amazonaws.com/blahblahbucket/linux-ibmz) |
-    | Linux/IBMPOWER | [https://s3.amazonaws.com/blahblahbucket/linux-ibmpower](https://s3.amazonaws.com/blahblahbucket/linux-ibmpower) |
+    | Windows/X86  | [https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerImage.exe](https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerImage.exe) |
+    | Linux/X86 | [https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerImage](https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerImage) |
+    | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerImage](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerImage) |
+    | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerImage](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerImage) |
 
 2.  Set permissions on `inspectDockerImage` so that it is executable:
 
@@ -199,7 +199,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
 ## Inspection Output
 
-By default, `inspectDockerimage` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for admnistrator verification.
+By default, `inspectDockerimage` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for administrator verification.
 
 -  **Upload to Docker Store** (by entering `product-id` at the commandline).
 
