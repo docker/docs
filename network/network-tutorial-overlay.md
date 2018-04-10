@@ -110,7 +110,7 @@ and will be connected together using an overlay network called `ingress`.
 
     ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
     d68ace5iraw6whp7llvgjpu48 *   ip-172-31-34-146    Ready               Active              Leader
-    nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active              
+    nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
     ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
     ```
 
@@ -125,8 +125,8 @@ and will be connected together using an overlay network called `ingress`.
     $ docker node ls --filter role=worker
 
     ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-    nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active              
-    ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active  
+    nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
+    ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
     ```
 
 5.  List the Docker networks on `manager`, `worker-1`, and `worker-2` and notice
@@ -274,22 +274,22 @@ This tutorial assumes the swarm is already set up and you are on a manager.
 
 ## Use an overlay network for standalone containers
 
-This example does the following:
+This example demonstrates DNS container discovery -- specifically, how to
+communicate between standalone containers on different Docker daemons using an
+overlay network. Steps are:
 
-- initializes a swarm on `host1`
-- joins `host2` to the swarm
-- creates an attachable overlay network
-- creates an `alpine` service with 3 replicas, connected to the overlay network
-- creates a single `alpine` container on `host2`, which is also attached to the
-  overlay network
-- proves that the standalone container can communicate with the service tasks,
-  and vice versa.
+- On `host1`, initialize the node as a swarm (manager).
+- On `host2`, join the node to the swarm (worker).
+- On `host1`, create an attachable overlay network (`test-net`).
+- On `host1`, run an interactive [alpine](https://hub.docker.com/_/alpine/) container (`alpine1`) on `test-net`.
+- On `host2`, run an interactive, and detached, [alpine](https://hub.docker.com/_/alpine/) container (`alpine2`) on `test-net`.
+- On `host1`, from within a session of `alpine1`, ping `alpine2`.
 
 ### Prerequisites
 
-For this test, you need two different Docker hosts, which can communicate with
-each other. Each host needs to be running Docker 17.06 or higher. The following
-ports must be open between the two Docker hosts:
+For this test, you need two different Docker hosts that can communicate with
+each other. Each host must have Docker 17.06 or higher with the following ports
+open between the two Docker hosts:
 
 - TCP port 2377
 - TCP and UDP port 7946
@@ -298,154 +298,129 @@ ports must be open between the two Docker hosts:
 One easy way to set this is up is to have two VMs (either local or on a cloud
 provider like AWS), each with Docker installed and running. If you're using AWS
 or a similar cloud computing platform, the easiest configuration is to use a
-security group which opens all incoming ports between the two hosts and the SSH
+security group that opens all incoming ports between the two hosts and the SSH
 port from your client's IP address.
 
-This example will refer to the hosts as `host1` and `host2`, and the command
-prompts will be labelled accordingly.
-
-The example uses Linux hosts, but the same commands work on Windows.
+This example refers to the two nodes in our swarm as `host1` and `host2`. This
+example also uses Linux hosts, but the same commands work on Windows.
 
 ### Walk-through
 
 1.  Set up the swarm.
 
-    1.  On `host1`, run `docker swarm init`, specifying the IP address for the
-        interface which will communicate with the other host (for instance, the
-        private IP address on AWS).
+    a.  On `host1`, initialize a swarm (and if prompted, use `--advertise-addr`
+        to specify the IP address for the interface that communicates with other
+        hosts in the swarm, for instance, the private IP address on AWS):
 
-        ```bash
-        (host1) $ docker swarm init --advertise-addr 192.0.2.1
 
-        Swarm initialized: current node (l9ozqg3m6gysdnemmhoychk9p) is now a manager.
+    ```bash
+    $ docker swarm init
+    Swarm initialized: current node (vz1mm9am11qcmo979tlrlox42) is now a manager.
 
-        To add a worker to this swarm, run the following command:
+    To add a worker to this swarm, run the following command:
 
-            docker swarm join \
-            --token SWMTKN-1-3mtj3k6tkuts4cpecpgjdvgj1u5jre5zwgiapox0tcjs1trqim-bfwb0ve6kf42go1rznrn0lycx \
-            192.0.2.1:2377
+        docker swarm join --token SWMTKN-1-5g90q48weqrtqryq4kj6ow0e8xm9wmv9o6vgqc5j320ymybd5c-8ex8j0bc40s6hgvy5ui5gl4gy 172.31.47.252:2377
 
-        To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
-        ```
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+    ```
 
-        The swarm is initialized and `host1` runs both manager and worker roles.
+    b.  On `host2`, join the swarm as instructed above:
 
-    2.  Copy the `docker swarm join` command. Open a new terminal, connect to
-        `host2`, and execute the command. Add the `--advertise-addr` flag,
-        specifying the IP address for the interface that will communicate with
-        the other host (for instance, the private IP address on AWS). The
-        last argument is the IP address of `host1`.
+    ```bash
+    $ docker swarm join --token <your_token> <your_ip_address>:2377
+    This node joined a swarm as a worker.
+    ```
 
-        ```bash
-        (host2) $ docker swarm join \
-                  --token SWMTKN-1-3mtj3k6tkuts4cpecpgjdvgj1u5jre5zwgiapox0tcjs1trqim-bfwb0ve6kf42go1rznrn0lycx \
-                  --advertise-addr 192.0.2.2:2377 \
-                  192.0.2.1:2377
-        ```
+    If the node fails to join the swarm, the `docker swarm join` command times
+    out. To resolve, run `docker swarm leave --force` on `host2`, verify your
+    network and firewall settings, and try again.
 
-        If the command succeeds, the following message is shown:
-
-        ```none
-        This node joined a swarm as a worker.
-        ```
-
-        Otherwise, the `docker swarm join` command will time out. In this case,
-        run `docker swarm leave --force` on `node2`, verify your network and
-        firewall settings, and try again.
-
-2.  Create an attachable overlay network called `test-net` on `host1`.
+2.  On `host1`, create an attachable overlay network called `test-net`:
 
     ```bash
     $ docker network create --driver=overlay --attachable test-net
     ```
 
-    You don't need to manually create the overlay on `host2` because it will
-    be created when a container or service tries to connect to it from `host2`.
-
-3.  On `host1`, start a container that connects to `test-net`:
+3.  On `host1`, start an interactive (`-it`) container (`alpine1`) that connects to `test-net`:
 
     ```bash
-    (host1) $ docker run -dit \
-              --name alpine1 \
-              --network test-net \
-              alpine
+    $ docker run -it --name alpine1 --network test-net alpine
+    / #
     ```
 
-4.  On `host2`, start a container that connects to `test-net`:
+4.  On `host2`, list the available networks -- notice that `test-net` does not yet exist:
 
     ```bash
-    (host2) $ docker run -dit \
-              --name alpine2 \
-              --network test-net \
-              alpine
-    ```
-    The `-dit` flags mean to start the container detached
-    (in the background), interactive (with the ability to type into it), and
-    with a TTY (so you can see the input and output).
-    
-    > **Note**: There is nothing to prevent you from using the same container
-    > name on multiple hosts, but automatic service discovery will not work if
-    > you do, and you will need to refer to the containers by IP address.
-
-    Verify that `test-net` was created on `host2`:
-
-    ```bash
-    (host2) $ docker network ls
-
+    $ docker network ls
     NETWORK ID          NAME                DRIVER              SCOPE
-    6e327b25443d        bridge              bridge              local
-    10eda0b42471        docker_gwbridge     bridge              local
-    1b16b7e2a72c        host                host                local
-    lgsov6d3c6hh        ingress             overlay             swarm
-    6af747d9ae1e        none                null                local
-    uw9etrdymism        test-net            overlay             swarm
+    ec299350b504        bridge              bridge              local
+    66e77d0d0e9a        docker_gwbridge     bridge              local
+    9f6ae26ccb82        host                host                local
+    omvdxqrda80z        ingress             overlay             swarm
+    b65c952a4b2b        none                null                local
+
     ```
 
-5.  Remember that you created `alpine1` from `host1` and `alpine2` from `host2`.
-    Now, attach to `alpine2` from `host1`:
+5.  On `host2`, start a detached (`-d`) and interactive (`-it`) container (`alpine2`) that
+    connects to `test-net`:
 
     ```bash
-    (host1) $ docker container attach alpine2
-
-    #
+    $ docker run -dit --name alpine2 --network test-net alpine
+    fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
     ```
 
-    Automatic service discovery worked between two containers across the overlay
-    network!
+    > Automatic DNS container discovery only works with unique container names.
 
-    Within the attached session, try pinging `alpine1` from `alpine2`:
+6. On `host2`, verify that `test-net` was created:
 
     ```bash
-    # ping -c 2 alpine1
+    $ docker network ls
+    NETWORK ID          NAME                DRIVER              SCOPE
+    ...
+    ytqk46ddg30p        test-net            overlay             swarm
+    ```
 
-    PING alpine1 (10.0.0.2): 56 data bytes
-    64 bytes from 10.0.0.2: seq=0 ttl=64 time=0.523 ms
-    64 bytes from 10.0.0.2: seq=1 ttl=64 time=0.547 ms
+7.  On `host1`, ping `alpine2` within the interactive terminal of `alpine1`:
 
-    --- alpine1 ping statistics ---
+    ```bash
+    / # ping -c 2 alpine2
+    PING alpine2 (10.0.0.5): 56 data bytes
+    64 bytes from 10.0.0.5: seq=0 ttl=64 time=0.600 ms
+    64 bytes from 10.0.0.5: seq=1 ttl=64 time=0.555 ms
+
+    --- alpine2 ping statistics ---
     2 packets transmitted, 2 packets received, 0% packet loss
-    round-trip min/avg/max = 0.523/0.535/0.547 ms
+    round-trip min/avg/max = 0.555/0.577/0.600 ms
     ```
 
-    This proves that the two containers can communicate with each other using
-    the overlay network which is connecting `host1` and `host2`.
+    The two containers can communicate using the overlay network connecting
+    `host1` and `host2`. If you run another alpine container on `host2` that is
+    not detached (say, `alpine3`), you can ping `alpine1` from `host2`.
 
-    Detach from `alpine2` using the `CTRL` + `P` `CTRL` + `Q` sequence.
-
-6.  Stop the containers and remove `test-net` from each host. Because the Docker
-    daemons are operating independently and these are standalone containers, you
-    need to run the commands on the individual hosts.
+8.  On `host1`, close the `alpine1` session (which also stops the container):
 
     ```bash
-    (host1) $ docker container stop alpine1
-            $ docker container rm alpine1
-            $ docker network rm test-net
+    / # exit
     ```
 
+9.  Clean up your containers and networks:
+
+    Because the Docker daemons operate independently and these are standalone
+    containers, you must run the commands on the individual hosts.
+
+    a.  On `host1`, remove `alpine1` and `test-net`:
+
     ```bash
-    (host2) $ docker container stop alpine2
-            $ docker container rm alpine2
-            $ docker network rm test-net
+    $ docker container rm alpine1
+    $ docker network rm test-net
+    ```
+
+    b.  On `host2`, stop and remove `alpine2` and  remove `test-net`:
+
+    ```bash
+    $ docker container stop alpine2
+    $ docker container rm alpine2
+    $ docker network rm test-net
     ```
 
 ## Communicate between a container and a swarm service
@@ -662,4 +637,3 @@ you might want to run through these other networking tutorials:
 - [Host networking tutorial](network-tutorial-host.md)
 - [Standalone networking tutorial](network-tutorial-standalone.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
-
