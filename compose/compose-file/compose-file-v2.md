@@ -128,6 +128,18 @@ with the `webapp` and optional `tag` specified in `image`:
 
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
+#### cache_from
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+A list of images that the engine uses for cache resolution.
+
+    build:
+      context: .
+      cache_from:
+        - alpine:latest
+        - corp/web_app:3.14
+
 #### context
 
 > [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
