@@ -280,6 +280,10 @@ routing on the individual Docker daemon hosts.
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the overlay network.                                                                               |
 | `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay networkt. |
 
+### Container discovery
+
+For most situations, you should connect to the service name, which is load-balanced and will be handled by all containers ("tasks") backing the service.
+If you need to get a list of all tasks backing the service you can do a DNS lookup for tasks.<service-name>.
 
 ## Next steps
 
