@@ -441,23 +441,12 @@ All other keys are ignored and produce a warning if present. You can review
 the configuration that will be used to deploy by using the `--compatibility`
 flag with the `config` command.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b3a1eb7... Use updated notes format
 > Do not use this in production!
 >
 > We recommend against using `--compatibility` mode in production. Because the
 > resulting configuration is only an approximate using non-Swarm mode
 > properties, it may produce unexpected results.
-<<<<<<< HEAD
-=======
-> **Note:** We recommend against using `--compatibility` mode in production.
-> Because the resulting configuration is only an approximate using non-Swarm
-> mode properties, it may produce unexpected results.
->>>>>>> 93426bb... Document compatibility mode
-=======
->>>>>>> b3a1eb7... Use updated notes format
+
 
 ## Compose file format references
 
