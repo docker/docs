@@ -76,7 +76,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
 Now, run `docker-compose up -d` from your project directory.
 
 This runs [docker-compose up](/compose/reference/up/) in detached mode, pulls
-the needed docker images, and starts the wordpress and database containers, as shown in
+the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
 ```
