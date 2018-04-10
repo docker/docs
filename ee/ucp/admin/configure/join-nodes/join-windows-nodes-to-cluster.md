@@ -117,8 +117,8 @@ Copy the displayed command. It looks similar to the following:
 docker cluster join --token <token> <ucp-manager-ip>
 ```
 
-You can also use the command line to get the join token. On a manager node,
-run the following command:
+You can also use the command line to get the join token. Using your
+[UCP client bundle](../../../user-access/cli.md), run:
 
 ```bash
 docker swarm join-token worker
@@ -205,4 +205,3 @@ Some features are not yet supported on Windows nodes:
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
-
