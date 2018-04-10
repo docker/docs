@@ -19,6 +19,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: kubeconfig
+  shorthand: k
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
 examples: |-
   ### Default output
 
