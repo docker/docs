@@ -681,7 +681,6 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 ### Logging
 
-* Make LogFile perms configurable. [moby/moby#36523](https://github.com/moby/moby/pull/36523)
 * Silent login: use credentials from cred store to login. [docker/cli#139](https://github.com/docker/cli/pull/139)
 + Add support for compressibility of log file. [moby/moby#29932](https://github.com/moby/moby/pull/29932)
 - Fix empty LogPath with non-blocking logging mode. [moby/moby#36272](https://github.com/moby/moby/pull/36272)
