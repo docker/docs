@@ -339,7 +339,10 @@ example also uses Linux hosts, but the same commands work on Windows.
 
     ```bash
     $ docker network create --driver=overlay --attachable test-net
+    uqsof8phj3ak0rq9k86zta6ht
     ```
+
+    > Notice the returned **NETWORK ID** -- you will see it again when you connect to it from `host2`.
 
 3.  On `host1`, start an interactive (`-it`) container (`alpine1`) that connects to `test-net`:
 
@@ -358,11 +361,9 @@ example also uses Linux hosts, but the same commands work on Windows.
     9f6ae26ccb82        host                host                local
     omvdxqrda80z        ingress             overlay             swarm
     b65c952a4b2b        none                null                local
-
     ```
 
-5.  On `host2`, start a detached (`-d`) and interactive (`-it`) container (`alpine2`) that
-    connects to `test-net`:
+5.  On `host2`, start a detached (`-d`) and interactive (`-it`) container (`alpine2`) that connects to `test-net`:
 
     ```bash
     $ docker run -dit --name alpine2 --network test-net alpine
@@ -371,13 +372,13 @@ example also uses Linux hosts, but the same commands work on Windows.
 
     > Automatic DNS container discovery only works with unique container names.
 
-6. On `host2`, verify that `test-net` was created:
+6. On `host2`, verify that `test-net` was created (and has the same NETWORK ID as `test-net` on `host1`):
 
     ```bash
     $ docker network ls
     NETWORK ID          NAME                DRIVER              SCOPE
     ...
-    ytqk46ddg30p        test-net            overlay             swarm
+    uqsof8phj3ak        test-net            overlay             swarm
     ```
 
 7.  On `host1`, ping `alpine2` within the interactive terminal of `alpine1`:
@@ -393,9 +394,16 @@ example also uses Linux hosts, but the same commands work on Windows.
     round-trip min/avg/max = 0.555/0.577/0.600 ms
     ```
 
-    The two containers can communicate using the overlay network connecting
-    `host1` and `host2`. If you run another alpine container on `host2` that is
-    not detached (say, `alpine3`), you can ping `alpine1` from `host2`.
+    The two containers communicate with the overlay network connecting the two
+    hosts. If you run another alpine container on `host2` that is _not detached_,
+    you can ping `alpine1` from `host2` (and here we add the
+    [remove option](https://docs.docker.com/engine/reference/run/#clean-up---rm) for automatic container cleanup):
+
+    ```sh
+    $ docker run -it --rm --name alpine3 --network test-net alpine
+    / # ping -c 2 alpine1
+    / # exit
+    ```
 
 8.  On `host1`, close the `alpine1` session (which also stops the container):
 
@@ -405,21 +413,23 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 9.  Clean up your containers and networks:
 
-    Because the Docker daemons operate independently and these are standalone
-    containers, you must run the commands on the individual hosts.
+    You must stop and remove the containers on each host independently because
+    Docker daemons operate independently and these are standalone containers.
+    You only have to remove the network on `host1` because when you stop
+    `alpine2` on `host2`, `test-net` disappears.
+
+    a.  On `host2`, stop `alpine2`, check that `test-net` was removed, then remove `alpine2`:
+
+    ```bash
+    $ docker container stop alpine2
+    $ docker network ls
+    $ docker container rm alpine2
+    ```
 
     a.  On `host1`, remove `alpine1` and `test-net`:
 
     ```bash
     $ docker container rm alpine1
-    $ docker network rm test-net
-    ```
-
-    b.  On `host2`, stop and remove `alpine2` and  remove `test-net`:
-
-    ```bash
-    $ docker container stop alpine2
-    $ docker container rm alpine2
     $ docker network rm test-net
     ```
 
