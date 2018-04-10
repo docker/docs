@@ -158,12 +158,12 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
     | OS/Architecture | Download Link |
     |-----------------|------------------|
-    | Windows/X86  | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/windows/inspectDockerLoggingPlugin.exe |
-    | Windows/X86 | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/windows/http_api_endpoint.exe |
-    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/linux/inspectDockerLoggingPlugin |
-    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/linux/http_api_endpoint |
-    | Linux/IBMZ | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/zLinux/inspectDockerLoggingPlugin |
-    | Linux/IBMPOWER | https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/power/inspectDockerLoggingPlugin |
+    | Windows/X86  | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerLoggingPlugin.exe |
+    | Windows/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe |
+    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerLoggingPlugin |
+    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint |
+    | Linux/IBMZ | https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin |
+    | Linux/IBMPOWER | https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin |
 
 2.  Set permissions on `inspectDockerLoggingPlugin` so that it is executable:
 
