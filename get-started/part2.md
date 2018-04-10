@@ -84,21 +84,6 @@ ENV NAME World
 CMD ["python", "app.py"]
 ```
 
-> Are you behind a proxy server?
->
-> Proxy servers can block connections to your web app once it's up and running.
-> If you are behind a proxy server, add the following lines to your
-> Dockerfile, using the `ENV` command to specify the host and port for your
-> proxy servers:
->
-> ```conf
-> # Set proxy server, replace host:port with values for your servers
-> ENV http_proxy host:port
-> ENV https_proxy host:port
-> ```
->
-> Add these lines before the call to `pip` so that the installation succeeds.
-
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.
 
@@ -185,7 +170,45 @@ $ docker image ls
 
 REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
+
 ```
+>  Troubleshooting for Linux users 
+>
+> _DNS settings_
+>
+> Proxy servers can block connections to your web app once it's up and running.
+> If you are behind a proxy server, add the following lines to your
+> Dockerfile, using the `ENV` command to specify the host and port for your
+> proxy servers:
+>
+> ```conf
+> # Set proxy server, replace host:port with values for your servers
+> ENV http_proxy host:port
+> ENV https_proxy host:port
+> ```
+>
+> _Proxy server settings_
+>
+> DNS misconfgiurations can generate problems with `pip`. You need to set your 
+> own DNS server address to make `pip` work properly. You might want 
+> to change the DNS settings of the Docker daemon. You can edit (or create) the 
+> configurarion file at `/etc/docker/daemon.json` with the `dns` key, as following:
+>
+> ```json
+>{
+>   "dns": ["your_dns_address", "8.8.8.8"]
+>}
+> ```
+>
+> In the example above, the first element of the list is the address of your DNS
+> server. The second item is the Google's DNS which can be used when the first one is
+> not available.
+>
+> Before proceeding, save `daemon.json` and restart the docker service.
+>
+> `sudo service docker restart`
+>
+> Once fixed, retry to run the `build` command.
 
 ## Run the app
 
