@@ -87,7 +87,7 @@ Or, to bind port 5000 of the container to a dynamic port but only on the
 
     $ docker run -d -p 127.0.0.1::5000 training/webapp python app.py
 
-You can also bind UDP ports by adding a trailing `/udp`. For example:
+You can also bind UDP and SCTP (typically used by telecom protocols such as SIGTRAN, Diameter, and S1AP/X2AP) ports by adding a trailing `/udp` or `/sctp`. For example:
 
     $ docker run -d -p 127.0.0.1:80:5000/udp training/webapp python app.py
 
