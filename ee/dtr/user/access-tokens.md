@@ -3,14 +3,9 @@ title: Manage access tokens
 description: Learn how to create and manage your personal DTR access tokens to securely
   integrate DTR with other products.
 keywords: dtr, security, access tokens
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 redirect_from:
   - /datacenter/dtr/2.5/guides/user/access-tokens/
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry allows you to issue access tokens so that you can
 integrate with other services without having to give those services your
@@ -50,4 +45,3 @@ To use the DTR API to list the repositories your user has access to:
 curl --silent --insecure --user <username>:<token> dtr.example.org/api/v0/repositories
 ```
 
-{% endif %}

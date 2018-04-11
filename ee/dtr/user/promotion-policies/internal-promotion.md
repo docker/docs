@@ -6,12 +6,7 @@ description: Learn how to create a promotion policies that can automatically
 keywords: registry, promotion, pipeline
 redirect_from:
   - /datacenter/dtr/2.5/guides/user/create-promotion-policies/
-ui_tabs:
-  - version: dtr-2.5
-  - version: dtr-2.4
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry allows you to create image promotion pipelines based on
 policies.
@@ -72,6 +67,3 @@ with the policy, it automatically gets promoted.
 
 * [Mirror images to another registry](push-mirror.md)
 
-{% elsif include.version=="dtr-2.4" %}
-[Learn how to create promotion policies](/datacenter/dtr/2.4/guides/user/create-promotion-policies.md).
-{% endif %}

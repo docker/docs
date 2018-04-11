@@ -4,15 +4,7 @@ description: Learn how to create, configure, and test webhooks in Docker Trusted
 keywords: registry, webhooks
 redirect_from:
   - /datacenter/dtr/2.5/guides/user/create-and-manage-webhooks/
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: create-promotion-policies/
-  title: Create promotion policies
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 DTR has webhooks so that you can run custom logic when an event happens. This
 lets you build complex CI and CD pipelines with your Docker images.
@@ -53,4 +45,6 @@ the event is triggered.
 
 ![](../images/manage-webhooks-2.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+* [Create promotion policies](promotion-policies/index.md)

@@ -3,12 +3,7 @@ title: Configure caches for high availability
 description: Learn how to deploy a DTR cache with fault tolerance and high
   availability.
 keywords: DTR, cache
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 If you're deploying a DTR cache in a zone with few users and with no uptime
 SLAs, a [single cache service is enough for you](simple.md).
@@ -79,5 +74,3 @@ of your choice.
 
 The last step is to deploy a load balancer of your choice to load-balance
 requests across the multiple replicas you deployed.
-
-{% endif %}

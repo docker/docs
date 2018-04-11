@@ -4,15 +4,7 @@ description: Learn how to pull and push images to Docker Trusted Registry.
 keywords: registry, push, pull
 redirect_from:
   - /datacenter/dtr/2.5/guides/user/manage-images/pull-and-push-images/
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: delete-images/
-  title: Delete images
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 {% assign domain="dtr.example.org" %}
 {% assign org="library" %}
@@ -106,4 +98,6 @@ to your `C:\ProgramData\docker\config\daemon.json` configuration file:
 "allow-nondistributable-artifacts": ["<dtr-domain>:<dtr-port>"]
 ```
 
-{% endif %}
+## Where to go next
+
+- [Delete images](delete-images.md)

@@ -2,9 +2,6 @@
 title: Promotion policies templates
 description: Learn how to use templates when setting your promotion policies to rename your images
 keywords: registry, promotion, mirror
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
 
 When defining promotion policies you can use templates to dynamically name the

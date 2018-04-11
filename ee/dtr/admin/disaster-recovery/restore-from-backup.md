@@ -2,11 +2,7 @@
 title: Restore from a backup
 description: Learn how to restore a DTR cluster from an existing backup
 keywords: dtr, disaster recovery
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
 ---
-{% if include.version=="dtr-2.5" %}
 
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
@@ -94,5 +90,3 @@ If you're scanning images, you now need to download the vulnerability database.
 
 After you successfully restore DTR, you can join new replicas the same way you
 would after a fresh installation. [Learn more](../configure/set-up-vulnerability-scans.md).
-
-{% endif %}

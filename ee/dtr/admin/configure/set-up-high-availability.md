@@ -2,15 +2,7 @@
 title: Set up high availability
 description: Lean how to scale Docker Trusted Registry by adding and removing replicas.
 keywords: dtr, install, deploy
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: set-up-vulnerability-scans/
-  title: Set up vulnerability scans
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry is designed to scale horizontally as your usage
 increases. You can add more replicas to make DTR scale to your demand and for
@@ -95,4 +87,6 @@ unhealthy replica
 If you're load-balancing user requests across multiple DTR replicas, don't
 forget to remove this replica from the load balancing pool.
 
-{% endif %}
+## Where to go next
+
+- [Set up vulnerability scans](set-up-vulnerability-scans.md)

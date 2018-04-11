@@ -2,8 +2,6 @@
 title: Mirror images from another registry
 description: Learn how to set up a repository to poll for changes in another registry and automatically pull new images from it.
 keywords: registry, promotion, mirror
-ui_tabs:
-  - version: dtr-2.5
 ---
 
 Docker Trusted Registry allows you to set up a mirror of a repository by

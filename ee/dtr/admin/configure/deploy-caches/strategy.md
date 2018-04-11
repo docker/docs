@@ -3,12 +3,7 @@ title: Cache deployment strategy
 description: Learn how to deploy DTR caches across multiple datacenters to make
   image pulls faster.
 keywords: DTR, cache
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 The main reason to use a DTR cache is so that users can pull images from
 a service that's geographically closer to them.
@@ -61,5 +56,3 @@ you chose.
 
 By default the documentation guides you in deploying caches that are exposed
 on port 443/TCP using the swarm routing mesh.
-
-{% endif %}

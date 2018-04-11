@@ -3,15 +3,7 @@ title: Prevent tags from being overwritten
 description: Learn how to make your tags immutable and don't allow users to
   overwrite a tag if it already exists
 keywords: registry, immutable
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: sign-images/
-  title: Sign images
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 {% assign domain="dtr.example.org" %}
 {% assign org="library" %}
@@ -44,4 +36,6 @@ docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 unknown: tag={{ tag }} cannot be overwritten because {{ domain }}/{{ org }}/{{ repo }} is an immutable repository
 ```
 
-{% endif %}
+## Where to go next
+
+- [Sign images](sign-images/index.md)

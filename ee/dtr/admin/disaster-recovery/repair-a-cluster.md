@@ -2,19 +2,9 @@
 title: Repair a cluster
 description: Learn how to repair DTR when the majority of replicas are unhealthy.
 keywords: dtr, disaster recovery
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: create-a-backup/
-  title: Create a backup
-- path: restore-from-backup/
-  title: Restore from an existing backup
 redirect_from:
   - /datacenter/dtr/2.5/guides/admin/disaster-recovery/repair-a-cluster/
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 For a DTR cluster to be healthy, a majority of its replicas (n/2 + 1) need to
 be healthy and be able to communicate with the other replicas. This is known
@@ -87,4 +77,7 @@ If the emergency repair command fails, try running it again using a different
 replica ID. As a last resort, you can restore your cluster from an existing
 backup.
 
-{% endif %}
+## Where to go next
+
+- [Create a backup](create-a-backup.md)
+- [Restore from an existing backup](restore-from-backup.md)

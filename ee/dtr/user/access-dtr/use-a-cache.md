@@ -2,12 +2,7 @@
 title: Use a cache
 description: Learn how to configure your Docker Trusted Registry account to pull images from a cache for faster download times.
 keywords: registry, cache
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry can be configured to have one or more caches. This
 allows you to choose from which cache to pull images from for faster
@@ -23,4 +18,3 @@ and check the **Content Cache** options.
 
 Once you save, your images are pulled from the cache instead of the central DTR.
 
-{% endif %}

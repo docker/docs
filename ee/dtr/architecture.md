@@ -2,16 +2,7 @@
 title: DTR architecture
 description: Learn about the architecture of Docker Trusted Registry.
 keywords: registry, dtr, architecture
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: admin/install/system-requirements/
-  title: System requirements
-- path: admin/install/
-  title: Install DTR
 ---
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker Universal Control Plane cluster.
@@ -105,4 +96,7 @@ DTR has a web UI where you can manage settings and user permissions.
 You can push and pull images using the standard Docker CLI client or other tools
 that can interact with a Docker registry.
 
-{% endif %}
+## Where to go next
+
+* [System requirements](admin/install/system-requirements.md)
+* [Install DTR](admin/install/index.md)

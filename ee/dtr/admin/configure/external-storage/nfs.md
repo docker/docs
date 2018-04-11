@@ -2,15 +2,7 @@
 title: Use NFS
 description: Learn how to integrate Docker Trusted Registry with NFS
 keywords: registry, dtr, storage, nfs
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: index/
-  title: Configure where images are stored
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 You can configure DTR to store Docker images in an NFS directory.
 
@@ -74,4 +66,6 @@ If the IP address of your NFS server changes, even if the DNS address is kept
 the same, you should reconfigure DTR to stop using NFS storage, and then
 add it back again.
 
-{% endif %}
+## Where to go next
+
+- [Configure where images are stored](index.md)

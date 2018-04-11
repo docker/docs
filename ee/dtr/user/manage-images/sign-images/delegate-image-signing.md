@@ -2,15 +2,7 @@
 title: Delegate image signing
 description: Learn how to grant permission for others to sign images in Docker Trusted Registry.
 keywords: registry, sign, trust
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: manage-trusted-repositories/
-  title: Manage trusted repositories
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Instead of signing all the images yourself, you can delegate that task
 to other users.
@@ -75,4 +67,6 @@ Now members from the QA team just have to [configure their Notary CLI client
 with UCP private keys](../../access-dtr/configure-your-notary-client.md)
 to be able to [push and sign images](index.md) into the `dev/nginx` repository.
 
-{% endif %}
+## Where to go next
+
+- [Manage trusted repositories](manage-trusted-repositories.md)

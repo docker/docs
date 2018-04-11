@@ -2,16 +2,7 @@
 title: Docker Trusted Registry overview
 description: Learn how to install, configure, and use Docker Trusted Registry.
 keywords: registry, repository, images
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: architecture/
-  title: DTR architecture
-- path: admin/install/
-  title: Install DTR
 ---
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
 from Docker. You install it behind your firewall so that you can securely store
@@ -70,4 +61,7 @@ built in so that you can use
 and verify images. For more information about managing Notary data in DTR see
 the [DTR-specific notary documentation](user/manage-images/manage-trusted-repositories.md).
 
-{% endif %}
+## Where to go next
+
+* [DTR architecture](architecture.md)
+* [Install DTR](admin/install/index.md)
