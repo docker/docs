@@ -2,18 +2,10 @@
 title: Deploy Enterprise Edition on Linux servers
 description: Learn how to get a trial license and install Docker Enterprise Edition.
 keywords: ucp, dtr, install, orchestration
-ui_tabs:
-- version: dee-2.0
-  orhigher: false
-next_steps:
-- path: ../ucp/3.0/guides/admin/configure/scale-your-cluster/
-  title: Scale your UCP cluster
-- path: ../ucp/3.0/guides/user/services/
-  title: Deploy an application
 redirect_from:
-- /datacenter/try/
+  - /datacenter/try/
+  - /datacenter/install/linux/
 ---
-{% if include.version=="dee-2.0" %}
 
 The best way to try Docker Enterprise Edition for yourself is to get the [30-day
 trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
@@ -35,7 +27,7 @@ Also, make sure the hosts are running one of these operating systems:
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
 
-[Learn more about Docker EE system requirements](../ucp/3.0/guides/admin/install/system-requirements.md).
+[Learn more about Docker EE system requirements](ucp/admin/install/system-requirements.md).
 
 ## Step 1: Install Docker EE Container Engine
 
@@ -60,10 +52,10 @@ docker container run --rm -it --name ucp \
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
 
-[Learn more about the UCP installation](../ucp/3.0/guides/admin/install/index.md).
+[Learn more about the UCP installation](ucp/admin/install/index.md).
 
 >**What about Windows?** When you have UCP installed, you can
-[join Windows worker nodes to a swarm](../ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster.md).
+[join Windows worker nodes to a swarm](ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster.md).
 
 ## Step 3: License your installation
 
@@ -71,7 +63,7 @@ Now that UCP is installed, you need to license it. In your browser, navigate
 to the UCP web UI, log in with your administrator credentials and upload your
 license.
 
-![UCP login page](../images/try-ddc-1.png){: .with-border}
+![UCP login page](images/try-ddc-1.png){: .with-border}
 
 [Get a free trial license if you don't have one](https://store.docker.com/editions/enterprise/docker-ee-trial).
 
@@ -80,12 +72,11 @@ license.
 Join more nodes so that you can manage them from UCP.
 Go to the UCP web UI and navigate to the **Nodes** page.
 
-![Nodes page](../images/try-ddc-2.png){: .with-border}
+![Nodes page](images/try-ddc-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![Add node page](../images/try-ddc-3.png){: .with-border}
-
+![Add node page](images/try-ddc-3.png){: .with-border}
 
 Check **Add node as a manager** to join the node as a manager
 to provide replication and make UCP highly available. For a highly available
@@ -114,4 +105,7 @@ Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
 DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
 
-{% endif %}
+## Where to go next
+
+* [Scale your cluster](ucp/admin/configure/join-nodes/index.md)
+* [Deploy an application](ucp/swarm/index.md)
