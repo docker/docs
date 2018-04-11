@@ -48,7 +48,7 @@ full list of prerequisites.
     Install-Package Docker -ProviderName DockerProvider -Force
     ```
 
-2.  Server may need to restart if the installation process installed Containers Windows service, to check if a reboot is required execute the following command.
+2.  Check if a reboot is required, and if yes, restart your instance:
 
     ```PowerShell
     (Install-WindowsFeature Containers).RestartNeeded
