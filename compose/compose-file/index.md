@@ -2052,7 +2052,7 @@ Use the host's networking stack, or no networking. Equivalent to
 use [network_mode](#network_mode) instead.
 
 The syntax for using built-in networks like `host` and `none` is a little
-different. Define an external network with the name `host` or `none` (which
+different. Define an external network with the name `host` or `none` (that
 Docker has already created automatically) and an alias that Compose can use
 (`hostnet` or `nonet` in these examples), then grant the service access to that
 network, using the alias.
@@ -2066,8 +2066,8 @@ services:
 
 networks:
   hostnet:
-    external:
-      name: host
+    external: true
+    name: host
 ```
 
 ```yaml
@@ -2079,8 +2079,8 @@ services:
 
 networks:
   nonet:
-    external:
-      name: none
+    external: true
+    name: none
 ```
 
 ### driver_opts
