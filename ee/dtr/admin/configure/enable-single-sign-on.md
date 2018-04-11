@@ -2,15 +2,7 @@
 title: Enable single sign-on
 description: Learn how to set up single sign-on between UCP and DTR, so that your users only have to authenticate once
 keywords: dtr, login, sso
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: use-your-own-tls-certificates/
-  title: Use your own TLS certificates
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 By default, users are shared between UCP and DTR, but you have to authenticate
 separately on the web UI of both applications.
@@ -45,4 +37,6 @@ Then enable **Use single sign-on**.
 Once you save, users are redirected to UCP for logging in, and redirected back to
 DTR once they are authenticated.
 
-{% endif %}
+## Where to go next
+
+- [Use your own TLS certificates](use-your-own-tls-certificates.md)

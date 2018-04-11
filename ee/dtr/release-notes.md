@@ -5,13 +5,7 @@ keywords: docker trusted registry, whats new, release notes
 toc_max: 2
 redirect_from:
   - /datacenter/dtr/2.5/guides/release-notes/
-ui_tabs:
-- version: dtr-2.5
-  orhigher: false
-- version: dtr-2.4
-  orlower: true
 ---
-{% if include.version=="dtr-2.5" %}
 
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
@@ -87,7 +81,7 @@ specify `--log-protocol`.
 * When deleting a repository with signed images, the DTR web UI no longer
 shows instructions on how to delete trust data.
 
-{% elsif include.version=="dtr-2.4" %}
+## Release notes for earlier versions
 
 - [DTR 2.4 release notes](/datacenter/dtr/2.4/guides/release-notes.md)
 - [DTR 2.3 release notes](/datacenter/dtr/2.3/guides/release-notes.md)
@@ -95,4 +89,3 @@ shows instructions on how to delete trust data.
 - [DTR 2.1 release notes](/datacenter/dtr/2.1/guides/release-notes.md)
 - [DTR 2.0 release notes](/datacenter/dtr/2.0/release-notes/index.md)
 
-{% endif %}

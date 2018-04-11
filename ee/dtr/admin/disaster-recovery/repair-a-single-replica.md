@@ -2,15 +2,7 @@
 title: Repair a single replica
 description: Learn how to repair a single DTR replica when it is unhealthy.
 keywords: dtr, disaster recovery
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: ../disaster-recovery/
-  title: Disaster recovery overview
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 When one or more DTR replicas are unhealthy but the overall majority
 (n/2 + 1) is healthy and able to communicate with one another, your DTR
@@ -108,4 +100,6 @@ docker run -it --rm \
 
 [Learn more about high availability](../configure/set-up-high-availability.md).
 
-{% endif %}
+## Where to go next
+
+- [Disaster recovery overview](index.md)

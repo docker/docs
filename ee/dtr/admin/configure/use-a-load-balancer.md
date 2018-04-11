@@ -2,17 +2,7 @@
 title: Use a load balancer
 description: Learn how to configure a load balancer to balance user requests across multiple Docker Trusted Registry replicas.
 keywords: dtr, load balancer
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: ../backups-and-disaster-recovery/
-  title: Backups and disaster recovery
-- path: ../monitor-and-troubleshoot/
-  title: Monitor and troubleshoot
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Once you’ve joined multiple DTR replicas nodes for
 [high-availability](set-up-high-availability.md), you can configure your own
@@ -275,4 +265,7 @@ docker run --detach \
   </div>
 </div>
 
-{% endif %}
+## Where to go next
+
+- [Backups and disaster recovery](../disaster-recovery/index.md)
+- [Monitor and troubleshoot](../monitor-and-troubleshoot/index.md)

@@ -3,17 +3,7 @@ title: Create and manage organizations
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
 keywords: registry, security, permissions, organizations
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: create-and-manage-users/
-  title: Create and manage users
-- path: create-and-manage-teams/
-  title: Create and manage teams
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 When a user creates a repository, only that user has permissions to make changes
 to the repository.
@@ -51,4 +41,7 @@ grant permissions to manage the organization, and click
 
 ![](../../images/create-and-manage-orgs-3.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+- [Create and manage users](create-and-manage-users.md)
+- [Create and manage teams](create-and-manage-teams.md)

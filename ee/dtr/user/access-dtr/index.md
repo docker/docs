@@ -2,15 +2,7 @@
 title: Configure your Docker Engine
 description: Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.
 keywords: registry, TLS, certificates
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: use-a-cache/
-  title: Use a cache
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
@@ -124,4 +116,6 @@ DTR.
 docker login dtr.example.org
 ```
 
-{% endif %}
+## Where to go next
+
+- [Use a cache](use-a-cache.md)

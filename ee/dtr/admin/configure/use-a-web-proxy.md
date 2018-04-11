@@ -3,15 +3,7 @@ title: Use a web proxy
 description: Learn how to configure Docker Content Trust to use a web proxy to
   reach external services.
 keywords: dtr, configure, http, proxy
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: garbage-collection/
-  title: Configure garbage collection
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry makes outgoing connections to check for new versions,
 automatically renew its license, and update its vulnerability database.
@@ -36,4 +28,6 @@ To confirm how DTR is configured, check the **Settings** page on the web UI.
 
 ![DTR settings](../../images/use-a-web-proxy-1.png){: .with-border}
 
-{% endif %}
+## Where to go next
+
+- [Configure garbage collection](garbage-collection.md)

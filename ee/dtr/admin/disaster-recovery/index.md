@@ -3,11 +3,7 @@ title: DTR disaster recovery overview
 description: Learn the multiple disaster recovery strategies you can use with
   Docker Trusted Registry.
 keywords: dtr, disaster recovery
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
 ---
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry is a clustered application. You can join multiple
 replicas for high availability.
@@ -62,5 +58,3 @@ backup. Restoring from a backup should be only used as a last resort, since
 doing an emergency repair might prevent some data loss.
 
 [Learn how to restore from a backup](restore-from-backup.md).
-
-{% endif %}

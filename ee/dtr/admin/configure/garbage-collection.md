@@ -3,12 +3,6 @@ title: Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
 keywords: registry, garbage collection, gc, space, disk space
-ui_tabs:
-  - version: dtr-2.5
-  - version: dtr-2.4
-next_steps:
-  - path: deploy-caches/
-    title: Deploy DTR caches
 ---
 
 You can configure Docker Trusted Registry to automatically delete unused image
@@ -22,10 +16,6 @@ the scheduled time DTR:
 2. Identifies and marks unused image layers.
 3. Deletes the marked image layers.
 
-{% if include.version=="dtr-2.4" %}
-Since this process puts DTR in read-only mode and is CPU-intensive, you should
-run garbage collection jobs outside business peak hours.
-{% elsif include.version=="dtr-2.5" %}
 By default, when the garbage collection job starts DTR is put in read-only mode.
 
 Starting in DTR 2.5, you can configure DTR not to when running garbage collection
@@ -39,8 +29,6 @@ take a while depending on the amount of Docker images that you have stored.
 
 During this upgrade users can still push and pull images from DTR, but
 the garbage collection job will be temporarily disabled.
-
-{% endif %}
 
 ## Schedule garbage collection
 
@@ -101,3 +89,7 @@ changing the underlying files in the filesystem.
 referenced.
 3. If a file is never referenced, that means that no image tag uses it, so it
 can be safely deleted.
+
+## Where to go next
+
+- [Deploy DTR caches](deploy-caches/index.md)

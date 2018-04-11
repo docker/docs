@@ -2,11 +2,7 @@
 title: Create a backup
 description: Learn how to create a backup of Docker Trusted Registry, for disaster recovery.
 keywords: dtr, disaster recovery
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
 ---
-{% if include.version=="dtr-2.5" %}
 
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
@@ -153,5 +149,3 @@ gpg -d {{ metadata_backup_file }} | tar -t
 You can also create a backup of a UCP cluster and restore it into a new
 cluster. Then restore DTR on that new cluster to confirm that everything is
 working as expected.
-
-{% endif %}

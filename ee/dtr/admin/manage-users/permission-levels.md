@@ -2,15 +2,7 @@
 title: Permission levels in DTR
 description: Learn about the permission levels available in Docker Trusted Registry.
 keywords: registry, security, permissions
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: ../manage-users/
-  title: Authentication and authorization
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.
@@ -55,4 +47,6 @@ Here's an overview of the permission levels available in DTR:
 * Organization owner: Can manage repositories and teams for the organization.
 * Admin: Can manage anything across UCP and DTR.
 
-{% endif %}
+## Where to go next
+
+- [Authentication and authorization](index.md)

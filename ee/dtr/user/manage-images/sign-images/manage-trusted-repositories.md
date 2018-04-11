@@ -2,17 +2,7 @@
 title: Manage trusted repositories
 description: Learn how to use the Notary CLI client to manage trusted repositories
 keywords: dtr, trust, notary, security
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
-next_steps:
-- path: /notary/advanced_usage/
-  title: Learn more about Notary
-- path: /notary/service_architecture/
-  title: Notary architecture
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Once you
 [configure the Notary CLI client](../../access-dtr/configure-your-notary-client.md),
@@ -156,4 +146,7 @@ Usually most problems are fixed by ensuring you're communicating with the
 correct Notary server, using the `-s` flag, and that you're using the correct
 directory where your private keys are stored, with the `-d` flag.
 
-{% endif %}
+## Where to go next
+
+- [Learn more about Notary](/notary/advanced_usage.md)
+- [Notary architecture](/notary/service_architecture.md)

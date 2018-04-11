@@ -3,12 +3,7 @@ title: DTR cache overview
 description: Deploy DTR caches in different geographical locations for users to
   pull images faster.
 keywords: DTR, cache
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 The further away you are from the geographical location where DTR is deployed,
 the longer it will take the pull and push images.
@@ -76,5 +71,3 @@ With multiple DTR deployments you can control the permissions developers have
 for each deployment, and you can create policies to automatically push images
 from one deployment to the next.
 [Learn more about deployment policies](../../../user/promotion-policies/index.md).
-
-{% endif %}

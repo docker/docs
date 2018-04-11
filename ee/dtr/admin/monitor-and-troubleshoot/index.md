@@ -2,15 +2,7 @@
 title: Monitor Docker Trusted Registry
 description: Learn how to monitor your DTR installation.
 keywords: registry, monitor, troubleshoot
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
-next_steps:
-- path: troubleshoot-with-logs/
-  title: Troubleshoot with logs
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other
@@ -78,4 +70,6 @@ You can find health status on the `current_issues` and `replica_health` arrays.
 If this endpoint doesn't provide meaningful information when trying to
 troubleshoot, try [troubleshooting using logs](troubleshoot-with-logs.md).
 
-{% endif %}
+## Where to go next
+
+- [Troubleshoot with logs](troubleshoot-with-logs.md)

@@ -3,8 +3,6 @@ title: Promotion policies overview
 description: Learn how to create a promotion policies that can automatically
   promote an image or mirror it to a different registry.
 keywords: registry, promotion, mirror
-ui_tabs:
-  - version: dtr-2.5
 ---
 
 Docker Trusted Registry allows you to automatically promote and mirror images

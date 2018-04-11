@@ -2,8 +2,6 @@
 title: Mirror images to another registry
 description: Learn how to create a promotion policy that promotes images to an external registry, creating a DTR mirror.
 keywords: registry, promotion, mirror
-ui_tabs:
-  - version: dtr-2.5
 ---
 
 Docker Trusted Registry allows you to create mirroring policies for a repository.

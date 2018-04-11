@@ -2,12 +2,7 @@
 title: Sign an image
 description: Learn how to sign the images you push to Docker Trusted Registry.
 keywords: registry, sign, trust
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 By default, when you push an image to DTR, the Docker CLI client doesn't
 sign the image.
@@ -173,5 +168,3 @@ signed. For each repository there are four files.
 | `timestamp.json` | Has data about the digest, size, and version number for the snapshot.json file. This data is signed by the timestamp key. |
 
 [Learn more about trust metadata](/notary/service_architecture.md).
-
-{% endif %}

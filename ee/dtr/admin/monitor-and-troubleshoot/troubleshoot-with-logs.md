@@ -2,12 +2,7 @@
 title: Troubleshoot Docker Trusted Registry
 description: Learn how to troubleshoot your DTR installation.
 keywords: registry, monitor, troubleshoot
-ui_tabs:
-- version: dtr-2.5
-  orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 This guide contains tips and tricks for troubleshooting DTR problems.
 
@@ -138,5 +133,3 @@ docker run -it --rm \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
-
-{% endif %}

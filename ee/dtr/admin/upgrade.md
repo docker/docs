@@ -2,16 +2,7 @@
 title: Upgrade DTR
 description: Learn how to upgrade your Docker Trusted Registry
 keywords: dtr, upgrade, install
-ui_tabs:
-- version: dtr-2.5
-  orhigher: false
-- version: dtr-2.4
-  orlower: true
-next_steps:
-- path: ../release-notes/
-  title: Release notes
 ---
-{% if include.version=="dtr-2.5" %}
 
 {% assign previous_version="2.4" %}
 
@@ -99,8 +90,6 @@ upgrade. The command is the same as for a minor upgrade.
 After upgrading DTR, you need to re-download the vulnerability database.
 [Learn how to update your vulnerability database](configure/set-up-vulnerability-scans.md#update-the-cve-scanning-database).
 
-{% elsif include.version=="dtr-2.4" %}
+## Where to go next
 
-Learn about [upgrading Docker Trusted Registry](/datacenter/dtr/2.4/guides/admin/upgrade.md).
-
-{% endif %}
+- [Release notes](../release-notes.md)

@@ -2,12 +2,7 @@
 title: DTR cache configuration reference
 description: Learn about the different configuration options for DTR caches.
 keywords: DTR, cache
-ui_tabs:
-  - version: dtr-2.5
-    orlower: true
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 DTR caches are based on Docker Registry, and use the same configuration
 file format.
@@ -84,5 +79,3 @@ this field is configured, "storage.delete.enabled" must be configured to true. P
   </td>
 </tr>
 </table>
-
-{% endif %}
