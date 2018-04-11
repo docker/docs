@@ -1535,25 +1535,25 @@ manuals:
   section:
   - path: /ee/
     title: About Docker EE
+  - title: Try Docker EE on the cloud
+    path: https://dockertrial.com
   - path: /ee/supported-platforms/
     title: Supported platforms
-  - path: /engine/installation/
-    title: Install Docker EE Engine
-    nosync: true
-  - title: Try Docker EE (no install)
-    path: https://dockertrial.com
-  - path: /ee/telemetry/
-    title: Manage usage data collection
-  - path: /datacenter/install/linux/
-    title: Deploy Docker EE standard on Linux
+  - path: /ee/end-to-end-install/
+    title: Deploy Docker EE standard
   - path: /ee/backup/
     title: Backup Docker EE
   - path: /ee/upgrade/
     title: Upgrade Docker EE
   - path: /ee/docker-ee-architecture/
     title: Docker EE Architecture
+  - path: /ee/telemetry/
+    title: Manage usage data collection
   - sectiontitle: Docker EE Engine
     section:
+    - path: /engine/installation/
+      title: Install Docker EE Engine
+      nosync: true
     - title: Release notes
       path: /ee/engine/release-notes/
   - sectiontitle: Universal Control Plane
