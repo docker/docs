@@ -40,8 +40,8 @@ On a manager node, run the following command to list the images that are require
 on Windows nodes.
 
 ```bash
-docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows
-{{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
+docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows \
+{{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} \
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
