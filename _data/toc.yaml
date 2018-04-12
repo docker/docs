@@ -2689,8 +2689,6 @@ manuals:
       title: Link to a source code repository
     - path: /docker-cloud/builds/push-images/
       title: Push images to Docker Cloud
-    - path: /docker-cloud/builds/image-scan/
-      title: Docker security scanning
     - path: /docker-cloud/builds/automated-build/
       title: Automated builds
     - path: /docker-cloud/builds/automated-testing/

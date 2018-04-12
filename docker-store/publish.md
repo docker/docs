@@ -208,9 +208,6 @@ share the scan results with you as the publisher, so that you can modify your
 images’ content accordingly. Your scan results are private, and are never
 shared with end customers or other publishers.
 
-To interpret the results, refer to the
-[documentation](/docker-cloud/builds/image-scan.md).
-
 #### Classification of issues
 
 * All Scan results include the CVE numbers and a CVSS (Common Vulnerability
