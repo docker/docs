@@ -60,7 +60,7 @@ services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
     ports:
-      - 5000:80
+      - "5000:80"
     networks:
       - frontend
     depends_on:
@@ -75,7 +75,7 @@ services:
   result:
     image: dockersamples/examplevotingapp_result:before
     ports:
-      - 5001:80
+      - "5001:80"
     networks:
       - backend
     depends_on:
@@ -566,7 +566,7 @@ services:
   wordpress:
     image: wordpress
     ports:
-      - 8080:80
+      - "8080:80"
     networks:
       - overlay
     deploy:
@@ -1781,7 +1781,7 @@ services:
   php:
     image: php:7.1-fpm
     ports:
-      - 9000
+      - "9000"
     volumes:
       - .:/var/www/project:cached
 ```
