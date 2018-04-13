@@ -12,6 +12,10 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.8 (2018-04-17)
+
+* Fixed an issue that allows users to incorrectly interact with local volumes.
+
 ## Version 2.1.7
 
 (13 February 2018)

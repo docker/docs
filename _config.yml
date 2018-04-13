@@ -212,7 +212,7 @@ defaults:
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/ucp:2.1.7"
+      docker_image: "docker/ucp:2.1.8"
   - scope:
       path: "datacenter/ucp/2.0"
     values:
