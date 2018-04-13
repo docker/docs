@@ -1,5 +1,5 @@
 ---
-title: DTR 2.5 Beta release notes
+title: DTR 2.5 release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
 toc_max: 2
@@ -13,7 +13,7 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
-## 2.5.0 Beta 3 (2017-1-18)
+## 2.5.0 (2017-4-17)
 
 ### New features
 
@@ -78,14 +78,28 @@ specify `--log-protocol`.
 
 ### Known issues
 
-* When deleting a repository with signed images, the DTR web UI no longer
-shows instructions on how to delete trust data.
+* Web UI
+  * When deleting a repository with signed images, the DTR web UI no longer
+  shows instructions on how to delete trust data.
+  * There's no UI support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead. (#8389)
+  * The UI for promotion policies is currently broken if you have a large number
+  of repositories. (#8364)
+  * Clicking "Save & Apply" on a promotions policies doesn't work.
+* Web hooks
+  * There is no web hook event for when an image is pulled. (#8145)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
 
-## Release notes for earlier versions
+## Earlier versions
 
 - [DTR 2.4 release notes](/datacenter/dtr/2.4/guides/release-notes.md)
 - [DTR 2.3 release notes](/datacenter/dtr/2.3/guides/release-notes.md)
 - [DTR 2.2 release notes](/datacenter/dtr/2.2/guides/release-notes/index.md)
 - [DTR 2.1 release notes](/datacenter/dtr/2.1/guides/release-notes.md)
 - [DTR 2.0 release notes](/datacenter/dtr/2.0/release-notes/index.md)
-
