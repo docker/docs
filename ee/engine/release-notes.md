@@ -8,13 +8,7 @@ redirect_from:
 - /enterprise/17.06/
 - /enterprise/17.06/release-notes/
 - /enterprise/17.03/release-notes/
-toc_max: 2
-cli_tabs:
-  - version: engine-17.06
-  - version: engine-17.03
 ---
-
-{% if include.version=="engine-17.06" %}
 
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Enterprise Edition (Docker EE).
@@ -24,6 +18,24 @@ it references. However, Docker EE also includes back-ported fixes
 (security-related and priority defects) from the open source. It incorporates
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
+
+## 17.06.2-ee-8 (2018-04-17)
+
+### Networking
+
+- Update libnetwork to fix stale HNS endpoints on Windows. [moby/moby#36603](https://github.com/moby/moby/pull/36603)
+
+### Packaging
+
+* Ensure the graphdriver dir is a shared mount within docker systemd service.
+
+### Known issues
+
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
 
 ## 17.06.2-ee-7 (2018-03-19)
 
@@ -458,17 +470,6 @@ not reachable until one of these 2 conditions happens:
 As a workaround, send at least a packet out from each container like
 (ping, GARP, etc).
 
-{% elsif include.version=="engine-17.03" %}
-
-This document describes the latest changes, additions, known issues, and fixes
-for Docker Enterprise Edition (Docker EE).
-
-Docker EE is functionally equivalent to the corresponding Docker CE that
-it references. However, Docker EE also includes back-ported fixes
-(security-related and priority defects) from the open source. It incorporates
-defect fixes that you can use in environments where new features cannot be
-adopted as quickly for consistency and compatibility reasons.
-
 ## Docker EE 17.03.2-ee-8 (2017-12-13)
 
 * Handle cleanup DNS for attachable container to prevent leak in name resolution [docker/libnetwork#1999](https://github.com/docker/libnetwork/pull/1999)
@@ -538,5 +539,3 @@ Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.1-
 Initial Docker EE release, based on Docker CE 17.03.0
 
 * Optimize size calculation for `docker system df` container size [#31159](https://github.com/docker/docker/pull/31159)
-
-{% endif %}
