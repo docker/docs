@@ -1333,9 +1333,8 @@ reference:
       title: backup
     - path: /reference/dtr/2.5/cli/destroy/
       title: destroy
-    - title: Emergency repair
-      path: /reference/dtr/2.5/cli/emergency-repair/
-      title: Emergency repair
+    - path: /reference/dtr/2.5/cli/emergency-repair/
+      title: emergency-repair
     - path: /reference/dtr/2.5/cli/install/
       title: install
     - path: /reference/dtr/2.5/cli/join/
