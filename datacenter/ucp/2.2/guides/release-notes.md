@@ -10,12 +10,25 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.9 (2018-04-17)
+
+**Bug fixes**
+
+* Security
+  * Fixed an issue that allows users to incorrectly interact with local volumes.
+  * Fixed an issue where setting minimum TLS version that causes `ucp-agent` to
+   keep restarting on worker nodes.
+
+* Core
+  * Fixed an issue that causes container fail to start with `container ID not found`
+   during high concurrent API calls to create and start containers.
+
 ## Version 2.2.7 (2018-03-26)
 
 **Bug fixes**
 
 * Fixed an issue where the minimum TLS version setting is not correctly handled,
-  leading to non-default values causing `ucp-controller` and `ucp-agent` to keep 
+  leading to non-default values causing `ucp-controller` and `ucp-agent` to keep
   restarting.
 
 ## Version 2.2.6 (2018-03-19)

@@ -206,7 +206,7 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.7"
+      ucp_version: "2.2.9"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
