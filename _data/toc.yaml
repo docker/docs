@@ -1710,7 +1710,7 @@ manuals:
           - title: Production deployment
             path: /ee/ucp/interlock/deploy/production/
           - title: Host mode networking
-            path: /ee/ucp/interlock/usage/host-mode-networking/
+            path: /ee/ucp/interlock/deploy/host-mode-networking/
           - title: Configuration reference
             path: /ee/ucp/interlock/deploy/configuration-reference/
         - sectiontitle: Route traffic to services
