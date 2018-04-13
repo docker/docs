@@ -6,10 +6,10 @@
 - product: "ucp"
   version: "3.0"
   tar-files:
-    - description: "3.0.0-beta2 Linux"
-      url: https://packages.docker.com/caas/ucp_images_3.0.0-beta2.tar.gz
-    - description: "3.0.0-beta2 Windows"
-      url: https://packages.docker.com/caas/ucp_images_win_3.0.0-beta2.tar.gz
+    - description: "3.0.0 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.0.0.tar.gz
+    - description: "3.0.0 Windows"
+      url: https://packages.docker.com/caas/ucp_images_win_3.0.0.tar.gz
 - product: "ucp"
   version: "2.2"
   tar-files:
@@ -58,8 +58,8 @@
 - product: "dtr"
   version: "2.5"
   tar-files:
-    - description: "DTR 2.5.0-beta3 Linux x86"
-      url: https://packages.docker.com/caas/dtr_images_2.5.0-beta3.tar.gz
+    - description: "DTR 2.5.0 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.5.0.tar.gz
 - product: "dtr"
   version: "2.4"
   tar-files:
