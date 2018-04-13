@@ -101,9 +101,9 @@ to schedule Kubernetes or Swarm workloads.
 ![](images/docker-ee-overview-3.svg){: .with-border}
 
 - Image signing and scanning of Kubernetes apps for validating and verifying content
-- Image promotion with mirroring between registries (not in Beta1)
+- Image promotion with mirroring between registries
 - Define policies for automating image promotions across the app development
-  lifecycle of Kubernetes apps (not in Beta1)
+  lifecycle of Kubernetes apps
 
 ## Centralized cluster management
 

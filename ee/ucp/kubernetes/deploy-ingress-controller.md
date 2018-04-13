@@ -49,23 +49,6 @@ Learn about [ingress in Kubernetes](https://v1-8.docs.kubernetes.io/docs/concept
 
 ## Create a grant
 
-> Docker EE 2.0 Beta2
->
-> In Beta2, default service accounts have limited or no permissions, and all
-> other service accounts have full admin-scoped privileges. Instead of creating
-> a grant, create a service account named `nginx-service-account` in the
-> `ingress-nginx` namespace.
-> 
-> ```yaml
-> apiVersion: v1
-> kind: ServiceAccount
-> metadata:
->   name: nginx-service-account
->   namespace: ingress-nginx
-> ```
-> 
-> Skip to the [Install the NGINX ingress controller](#install-the-nginx-ingress-controller) procedure.
-
 The default service account that's associated with the `ingress-nginx`
 namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
@@ -100,11 +83,6 @@ main components:
 
 Navigate to the **Create Kubernetes Object** page, and in the **Object YAML** 
 editor, paste the following YAML.
-
-> Docker EE 2.0 Beta2
-> 
-> Uncomment `serviceAccountName: nginx-service-account` to use the
-> service account that you created previously.
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -197,8 +175,6 @@ spec:
         prometheus.io/port: '10254'
         prometheus.io/scrape: 'true' 
     spec:
-      # Beta2 only: Uncomment the following line 
-      # serviceAccountName: nginx-service-account
       initContainers:
       - command:
         - sh
