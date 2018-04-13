@@ -77,7 +77,8 @@ To manually create users in UCP:
 2. Click **Create User**.
 3. Input username, password, and full name.
 4. Click **Create**.
-5. [optional] Check "Is a Docker EE Admin".
+5. Optionally, check "Is a Docker EE Admin" to give the user administrator 
+   privileges.
 
 > A `Docker EE Admin` can grant users permission to change the cluster
 > configuration and manage grants, roles, and resource sets.

@@ -13,8 +13,8 @@ see information about UCP system containers.
 
 To see the logs of the UCP system containers, navigate to the **Containers**
 page of UCP. By default, the UCP system containers are hidden. Click
-**Settings** and check **Show system containers** for the UCP system containers
-to be listed as well.
+the Settings icon and check **Show system resources** for the UCP system
+containers to be listed as well.
 
 ![](../../images/troubleshoot-with-logs-1.png){: .with-border}
 

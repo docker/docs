@@ -36,13 +36,16 @@ account.
 
     ![](../images/create-service-account-1.png){: .with-border}
 
+5.  Click the **Set context for all namespaces** toggle and click **Confirm**.
+
 ## Create a service account
 
 Create a service account named `nginx-service-account` in the `nginx`
 namespace.
 
 1.  Navigate to the **Service Accounts** page and click **Create**.
-2.  In the **Object YAML** editor, paste the following text.
+2.  In the **Namespace** dropdown, select **nginx**.
+3.  In the **Object YAML** editor, paste the following text.
     ```yaml
     apiVersion: v1
     kind: ServiceAccount

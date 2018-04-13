@@ -98,7 +98,7 @@ UCP web UI.
 3.  In the **Type** section, click **Namespaces** and ensure that **default** is selected.
 4.  In the left pane, click **Roles**, and in the **Role** dropdown, select **pod-reader**.
 5.  In the left pane, click **Subjects**, and click **All Users**.
-6.  In the **Users** dropdown, select **jane**.
+6.  In the **User** dropdown, select **jane**.
 7.  Click **Create**. 
 
 ![](../images/migrate-kubernetes-roles-2.png){: .with-border}

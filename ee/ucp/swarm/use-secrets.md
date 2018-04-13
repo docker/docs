@@ -36,9 +36,7 @@ persist data. When the service stops, the data is lost.
 
 ## Create a secret
 
-In the UCP web UI, navigate to **Secrets** page and click **Create Secret**
-to create a new secret. Once you create the secret you won't be able to edit
-it or see the secret data again.
+In the UCP web UI, open the **Swarm** section and click **Secrets**.
 
 ![](../images/manage-secrets-1.png){: .with-border}
 
@@ -49,10 +47,10 @@ you won't be able to edit it or see the secret data again.
 
 Assign a unique name to the secret and set its value. You can optionally define
 a permission label so that other users have permission to use this secret. Also
-note that a service and secret must have the same permission label (or both
-must have no permission label at all) in order to be used together.
+note that a service and secret must have the same permission label, or both
+must have no permission label at all, in order to be used together.
 
-In this example our secret is named `wordpress-password-v1`, to make it easier
+In this example, the secret is named `wordpress-password-v1`, to make it easier
 to track which version of the password our services are using.
 
 
@@ -62,7 +60,7 @@ Before creating the MySQL and WordPress services, we need to create the network
 that they're going to use to communicate with one another.
 
 Navigate to the **Networks** page, and create the `wordpress-network` with the
-default configurations.
+default settings.
 
 ![](../images/manage-secrets-3.png){: .with-border}
 
@@ -78,7 +76,7 @@ Now create the MySQL service:
 4. In the **Secrets** section, click **Use Secret**, and in the **Secret Name**
    dropdown, select **wordpress-password-v1**. Click **Confirm** to associate
    the secret with the service.
-5. In the **Environment Variable**, click **Add Environment Variable** and enter
+5. In the **Environment Variable** section, click **Add Environment Variable** and enter
    the string "MYSQL_ROOT_PASSWORD_FILE=/run/secrets/wordpress-password-v1" to
    create an environment variable that holds the path to the password file in
    the container.
@@ -120,6 +118,8 @@ uses MySQL as a storage backend:
    permission label on this service. If the secret doesn't have a permission
    label, then this service also can't have a permission label.
 8. Click **Create** to deploy the WordPress service.
+
+![](../images/manage-secrets-4a.png){: .with-border}
 
 This creates the WordPress service attached to the same network as the MySQL
 service so that they can communicate, and maps the port 80 of the service to

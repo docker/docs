@@ -77,10 +77,12 @@ To deploy the application:
 
 1. In the UCP web UI, navigate to the **Stacks** page and click **Create Stack**.
 2. Name the app "wordpress".
-3. From the **Mode** dropdown, select **Services**.
-4. Copy and paste the previous compose file into the **Compose.yml** editor.
+3. From the **Mode** dropdown, select **Swarm Services**.
+4. Copy and paste the previous compose file into the **docker-compose.yml** editor.
 5. Click **Create** to deploy the application, and click **Done** when the
    deployment completes.
+
+   ![](../images/deploy-stack-to-collection-1.png){: .with-border}
 
 If the `/Shared/wordpress` collection doesn't exist, or if you don't have
 a grant for accessing it, UCP reports an error.
@@ -92,7 +94,7 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
 3. On the **Services** page, click **wordpress_mysql**. In the details pane,
    make sure that the **Collection** is `/Shared/wordpress`.
 
-![](../images/deploy-stack-to-collection.png){: .with-border}
+![](../images/deploy-stack-to-collection-2.png){: .with-border}
 
 ## Where to go next
 
