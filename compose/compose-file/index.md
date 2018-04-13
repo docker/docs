@@ -1380,6 +1380,8 @@ containers in the bare-metal machine's namespace and vise-versa.
 
 Expose ports.
 
+> **Note:** Port mapping is incompatible with `network_mode: host`
+
 #### Short syntax
 
 Either specify both ports (`HOST:CONTAINER`), or just the container
