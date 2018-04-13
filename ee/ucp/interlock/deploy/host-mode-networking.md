@@ -3,6 +3,8 @@ title: Host mode networking
 description: Learn how to configure the UCP layer 7 routing solution with
   host mode networking.
 keywords: routing, proxy
+redirect_from:
+  - /ee/ucp/interlock/usage/host-mode-networking/
 ---
 
 By default the layer 7 routing components communicate with one another using
@@ -89,7 +91,7 @@ Where:
 
 * `<proxy-address>` is the domain name or IP address of a node where the proxy
 service is running.
-* `<routing-http-port>` is the [port you're using to route HTTP traffic](../deploy/index.md).
+* `<routing-http-port>` is the [port you're using to route HTTP traffic](index.md).
 
 If everything is working correctly, you should get a JSON result like:
 
