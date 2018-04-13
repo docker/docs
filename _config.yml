@@ -125,7 +125,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-7"
+      win_latest_build: "docker-17.06.2-ee-8"
   - scope:
       path: "kitematic"
     values:
@@ -157,7 +157,7 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.0-beta3"
+      dtr_version: "2.5.0"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -193,7 +193,13 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.0-beta3"
+      ucp_version: "3.0.0"
+  - scope: # This is a bit of a hack for the get-support.md topic.
+      path: "ee"
+    values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "3.0.0"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
