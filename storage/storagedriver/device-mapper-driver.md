@@ -404,7 +404,7 @@ assumes that the Docker daemon is in the `stopped` state.
 Do not rely on LVM auto-extension alone. The volume group
 automatically extends, but the volume can still fill up. You can monitor
 free space on the volume using `lvs` or `lvs -a`. Consider using a monitoring
-tool at the OS level, such a Nagios.
+tool at the OS level, such as Nagios.
 
 To view the LVM logs, you can use `journalctl`:
 
@@ -414,7 +414,7 @@ $ journalctl -fu dm-event.service
 
 If you run into repeated problems with thin pool, you can set the storage option
 `dm.min_free_space` to a value (representing a percentage) in
-`/etc/docker.daemon.json`. For instance, setting it to `10` ensures
+`/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
 [storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" class="_"}.
