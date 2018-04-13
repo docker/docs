@@ -96,6 +96,10 @@ Click on the banner, and choose the version you want to upgrade to.
 Once you click **Upgrade UCP**, the upgrade starts. If you want you can upgrade
 UCP from the CLI instead. [Learn more](/datacenter/ucp/2.2/guides/admin/install/upgrade.md).
 
+Please ensure that you verify the TLS version prior to upgrading. Currently TLS defaults to
+tlsv1.2, but tlsv1, tlsv1.0, tlsv1.1 are all valid options that can be set with min_tls_version = "tlsv1.2". 
+SSLv3 is not supported. Please see the following documentation for more information https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file/.
+
 ## Upgrade DTR
 
 Log in into the DTR web UI to check if there's a new version available.
