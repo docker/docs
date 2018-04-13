@@ -18,8 +18,10 @@ the scheduled time DTR:
 
 By default, when the garbage collection job starts DTR is put in read-only mode.
 
-Starting in DTR 2.5, you can configure DTR not to when running garbage collection
-jobs. To enable this, navigate to the **DTR web UI**, go to **Settings** and
+Starting in DTR 2.5, you can configure DTR to run garbage collection jobs
+without putting DTR in read-only. This feature is still experimental.
+
+To enable this, navigate to the **DTR web UI**, go to **Settings** and
 choose **Garbage collection**.
 
 ![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
