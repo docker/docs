@@ -42,10 +42,18 @@ Before following these procedures, you must first meet all the
 
 ### Configure `loop-lvm` mode for testing
 
-This configuration is only appropriate for testing. Loopback devices are slow
-and resource-intensive, and they require you to create file on disk at specific sizes.
-They can also introduce race conditions. They are available for testing because
-the setup is easier.
+This configuration is only appropriate for testing. The `loop-lvm` mode makes
+use of a 'loopback' mechanism that allows files on the local disk to be
+read from and written to as if they were an actual physical disk or block
+device.
+However, the addition of the loopback mechanism, and interaction with the OS
+filesystem layer, means that IO operations can be slow and resource-intensive.
+Use of loopback devices can also introduce race conditions.
+However, setting up `loop-lvm` mode can help identify basic issues (such as
+missing user space packages, kernel drivers etc) ahead of attempting the more
+complex set up required to enable `direct-lvm` mode. `loop-lvm` mode should
+therefore only be used to perform rudimentary testing prior to configuring
+`direct-lvm`.
 
 For production systems, see
 [Configure direct-lvm mode for production](#configure-direct-lvm-mode-for-production).
