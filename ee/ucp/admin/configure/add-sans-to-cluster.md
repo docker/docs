@@ -24,15 +24,16 @@ also add them after installation.
 
 1.  In the UCP web UI, log in with administrator credentials and navigate to
     the **Nodes** page.
-2.  Click on a manager node, and in the details pane, click **Configure**. 
+2.  Click on a manager node, and in the details pane, click **Configure** and 
+    select **Details**. 
 3.  In the **SANs** section, click **Add SAN**, and enter one or more SANs
     for the cluster.
     ![](../../images/add-sans-to-cluster-1.png){: .with-border}
 4.  Once you're done, click **Save**.
 
-You will have to do this on every manager node in the cluster, but once you
-have done so, the SANs are applied automatically to any new manager nodes
-that join the cluster.
+You will have to do this on every existsing manager node in the cluster,
+but once you have done so, the SANs are applied automatically to any new
+manager nodes that join the cluster.
 
 You can also do this from the CLI by first running:
 

@@ -29,7 +29,8 @@ Change a node's orchestrator type on the **Edit node** page:
 1.  Log in to the Docker EE web UI with an administrator account.
 2.  Navigate to the **Nodes** page, and click the node that you want to assign
     to a different orchestrator.
-3.  In the details pane, click **Configure** to open the **Edit node** page.
+3.  In the details pane, click **Configure** and select **Details** to open
+    the **Edit node** page.
 4.  In the **Orchestrator properties** section, click the orchestrator type
     for the node.
 5.  Click **Save** to assign the node to the selected orchestrator.

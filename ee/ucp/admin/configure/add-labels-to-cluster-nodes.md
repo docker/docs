@@ -1,6 +1,6 @@
 ---
-title: Add labels to swarm nodes
-description: Learn how to add metadata to swarm nodes that can be used to specify constraints when deploying services.
+title: Add labels to cluster nodes
+description: Learn how to add metadata to cluster nodes that can be used to specify constraints when deploying services.
 keywords: cluster, node, label, swarm, metadata
 ---
 
@@ -52,12 +52,13 @@ scheduled only on a node that has a label that fulfills all of the constraints
 you specify.
 
 In this example, when users deploy a service, they can add a constraint for the
-service to be scheduled only on nodes that have SSD storage.
+service to be scheduled only on nodes that have SSD storage:
+`node.labels.disk == ssd`.
 
 Navigate to the **Stacks** page. Name the new stack "wordpress", and in the
-**Mode** dropdown, check **Services**.
+**Mode** dropdown, check **Swarm Services**.
 
-In the **Compose.yml** editor, paste the following stack file.
+In the **docker-compose.yml** editor, paste the following stack file.
 
 ```
 version: "3.1"
@@ -120,7 +121,7 @@ WordPress containers scheduled on the node. Dismiss the filter.
 
 ## Add a constraint to a service by using the UCP web UI
 
-You can declare the deployment constraints in your docker-stack.yml file or
+You can declare the deployment constraints in your docker-compose.yml file or
 when you're creating a stack. Also, you can apply them when you're creating
 a service.
 
@@ -128,8 +129,9 @@ To check if a service has deployment constraints, navigate to the
 **Services** page and choose the service that you want to check.
 In the details pane, click **Constraints** to list the constraint labels.
 
-To edit the labels on the service, click **Configure** and select
-**Environment**. 
+To edit the constraints on the service, click **Configure** and select
+**Details** to open the **Update Service** page. Click **Scheduling** to
+view the constraints. 
 
 ![](../../images/add-constraint-to-service.png)
 

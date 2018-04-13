@@ -26,12 +26,12 @@ Fill in the following fields:
 In the left pane, click **Network**. In the **Ports** section,
 click **Publish Port** and fill in the following fields:
 
-| Field         | Value   |
-|:--------------|:--------|
-| Internal port | 80      |
-| Protocol      | tcp     |
-| Publish mode  | Ingress |
-| Public port   | 8000    |
+| Field          | Value   |
+|:---------------|:--------|
+| Target port    | 80      |
+| Protocol       | tcp     |
+| Publish mode   | Ingress |
+| Published port | 8000    |
 
 ![](../images/deploy-a-service-2.png){: .with-border}
 
@@ -40,10 +40,18 @@ Click **Confirm** to map the ports for the NGINX service.
 Once you've specified the service image and ports, click **Create** to
 deploy the service into the UCP cluster.
 
+![](../images/deploy-a-service-3.png){: .with-border}
+
 Once the service is up and running, you'll be able to see the default NGINX
-page, by going to `http://<node-ip>:8000`.
+page, by going to `http://<node-ip>:8000`. In the **Services** list, click the
+**nginx** service, and in the details pane, click the link under
+**Published Endpoints**. 
 
 ![](../images/deploy-a-service-4.png){: .with-border}
+
+Clicking the link opens a new tab that shows the default NGINX home page. 
+
+![](../images/deploy-a-service-5.png){: .with-border}
 
 ## Use the CLI to deploy the service
 
