@@ -44,10 +44,10 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt remove docker docker-engine docker.io
 ```
 
-It's OK if `apt-get` reports that none of these packages are installed.
+It's OK if `apt` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
@@ -86,9 +86,9 @@ Unless you have a strong reason not to, install the
 drivers.
 
 ```bash
-$ sudo apt-get update
+$ sudo apt update
 
-$ sudo apt-get install \
+$ sudo apt install \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual
 ```
@@ -126,13 +126,13 @@ the repository.
 1.  Update the `apt` package index:
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install packages to allow `apt` to use a repository over HTTPS:
 
     ```bash
-    $ sudo apt-get install \
+    $ sudo apt install \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -231,20 +231,20 @@ the repository.
 1.  Update the `apt` package index.
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce
+    $ sudo apt install docker-ce
     ```
 
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
+    > or updating without specifying a version in the `apt install` or
+    > `apt update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
 3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
@@ -263,7 +263,7 @@ the repository.
        `docker-ce=18.03.0.ce`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION>
+    $ sudo apt install docker-ce=<VERSION>
     ```
 
     The Docker daemon starts automatically.
@@ -286,7 +286,7 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker CE, first run `sudo apt-get update`, then follow the
+To upgrade Docker CE, first run `sudo apt update`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
@@ -342,7 +342,7 @@ To upgrade Docker CE, download the newer package file and repeat the
 1.  Uninstall the Docker CE package:
 
     ```bash
-    $ sudo apt-get purge docker-ce
+    $ sudo apt purge docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
