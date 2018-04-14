@@ -311,15 +311,27 @@ assumes that the Docker daemon is in the `stopped` state.
     Logical volume docker/thinpool changed.
     ```
 
-11. Enable monitoring for logical volumes on your host. Without this step,
-    automatic extension does not occur even in the presence of the LVM profile.
+11. Ensure monitoring of the logical volume is enabled.
 
     ```bash
     $ sudo lvs -o+seg_monitor
 
     LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor
-    thinpool docker twi-a-t--- 95.00g             0.00   0.01                             monitored
+    thinpool docker twi-a-t--- 95.00g             0.00   0.01                             not monitored
     ```
+
+    If the output in the `Monitor` column reports, as above, that the volume is
+    `not monitored` then monitoring needs to be explicitly enabled. Without
+    this step, automatic extension of the logical volume will not occur,
+    regardless of any settings in the applied profile.
+
+    ```bash
+    $ sudo lvchange --monitor y docker/thinpool
+    ```
+
+    Double check that monitoring is now enabled by running the
+    `sudo lvs -o+seg_monitor` command a second time. The `Monitor` column
+    should now report the logical volume is being `monitored`.
 
 12. If you have ever run Docker on this host before, or if `/var/lib/docker/`
     exists, move it out of the way so that Docker can use the new LVM pool to
