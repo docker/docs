@@ -71,14 +71,14 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
+# Define environment variable
+ENV NAME World
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
-
-# Define environment variable
-ENV NAME World
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
@@ -179,7 +179,9 @@ friendlyhello         latest              326387cea398
 > Proxy servers can block connections to your web app once it's up and running.
 > If you are behind a proxy server, add the following lines to your
 > Dockerfile, using the `ENV` command to specify the host and port for your
-> proxy servers:
+> proxy servers and make sure that `ENV` section are before that `RUN`, this to
+> set up the variables enviroment before run everything needed.
+> command section :
 >
 > ```conf
 > # Set proxy server, replace host:port with values for your servers
