@@ -198,15 +198,72 @@ response-time expectations, where applicable.
 
 ## Security and audit policies
 
+
+
 ### Docker Security Scanning
 
-We use Docker Security Scanning to automatically and continuously assess your
-products’ integrity. The tool deconstructs images, conducts a binary scan of
-the bits to identify the open-source components present in each image layer, and
-associates those components with known vulnerabilities and exposures. We then
-share the scan results with you as the publisher, so that you can modify your
-images’ content accordingly. Your scan results are private, and are never
-shared with end customers or other publishers.
+Docker Security Scanning automatically and continuously assesses the intergity
+of your products. The Docker Security Scanning tool deconstructs an image,
+conducts a binary scan of the bits to identify the open-source components
+present in each image layer, and associates those components with known
+vulnerabilities and exposures.
+
+Docker then shares the scan results with you as the publisher, so that you can
+modify the content of your images as necessary. Your scan results are private,
+and are never shared with end customers or other publishers.
+
+#### Interpret results
+
+To interpret the results of a scanned image:
+
+1.  Log on to [Docker Store](https://store.docker.com).
+
+2.  Navigate to the repository details page (for example,
+    [Nginx](https://store.docker.com/images/nginx)).
+
+3.  Click **View Available Tags** under the pull command in the upper right of
+    the UI.
+
+    Displalyed is a list of each tag scan with its age. A solid green bar
+    indicates a clean scan without known vulnerabilities. Yellow, orange, and
+    red indicate minor, major, and critical vulnerabilities respectively.
+
+    ![Scanned tags](images/scan-tags.png)
+
+    > Vulnerability scores
+    >
+    > Vulnerability scores are defined by the entity that issues
+    the vulnerability, such as [NVD](https://nvd.nist.gov/), and are based on a
+    [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale)
+    defined as part of the [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document).
+
+4.  Click a scan summary to see a list of results for each layer of the image.
+
+    Each layer may have one or more scannable components represented by colored
+    squares in a grid.
+
+    ![Scanned results](images/scan-view.png)
+
+    > Base layers
+    >
+    > Base layers contain components that are included in the parent image,
+    > but that you did not build and may not be able to edit. If a base layer
+    > has a vulnerability, switch to a version of the parent image that does not
+    > have any vulnerabilities, or to a similar but more secure image.
+
+5.  Hover over a square in the grid, then click to see the vulnerability report for that specific component.
+
+    Only components that add software are scanned. If a layer has
+    no scannable components, it shows a `No components in this layer` message.
+
+    ![Scanned component preview](images/scan-single.png)
+
+6.  Click the arrow icon (twice) to expand the list and show all vulnerable
+    components and their CVE report codes.
+
+    ![Scanned components](images/scan-full-details.png)
+
+7.  Click one of the CVE codes to view the original vulnerability report.
 
 #### Classification of issues
 
