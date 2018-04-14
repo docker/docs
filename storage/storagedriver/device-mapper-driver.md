@@ -338,8 +338,10 @@ assumes that the Docker daemon is in the `stopped` state.
     store the contents of image and containers.
 
     ```bash
-    $ mkdir /var/lib/docker.bk
-    $ mv /var/lib/docker/* /var/lib/docker.bk
+    $ sudo su -
+    # mkdir /var/lib/docker.bk
+    # mv /var/lib/docker/* /var/lib/docker.bk
+    # exit
     ```
 
     If any of the following steps fail and you need to restore, you can remove
