@@ -416,7 +416,7 @@ assumes that the Docker daemon is in the `stopped` state.
     `/var/lib/docker.bk` directory which contains the previous configuration.
 
     ```bash
-    $ rm -rf /var/lib/docker.bk
+    $ sudo rm -rf /var/lib/docker.bk
     ```
 
 ## Manage devicemapper
@@ -431,7 +431,7 @@ tool at the OS level, such as Nagios.
 To view the LVM logs, you can use `journalctl`:
 
 ```bash
-$ journalctl -fu dm-event.service
+$ sudo journalctl -fu dm-event.service
 ```
 
 If you run into repeated problems with thin pool, you can set the storage option
