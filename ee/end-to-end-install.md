@@ -45,7 +45,7 @@ Use ssh to log in to the host where you want to install UCP and run:
 ```bash
 docker container run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_latest_image }} install \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <node-ip-address> \
   --interactive
 ```
@@ -97,7 +97,7 @@ Use ssh to log in to the host where you already installed UCP, and run:
 
 ```bash
 docker container run -it --rm \
-  {{ page.dtr_latest_image }} install \
+  {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
   --ucp-node <node-hostname> \
   --ucp-insecure-tls
 ```
