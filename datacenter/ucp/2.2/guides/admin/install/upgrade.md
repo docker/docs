@@ -22,6 +22,10 @@ impact to your users.
 Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
+Please ensure that you verify the TLS version prior to upgrading. Currently TLS defaults to
+tlsv1.2, but tlsv1, tlsv1.0, tlsv1.1 are all valid options that can be set with min_tls_version = "tlsv1.2". 
+SSLv3 is not supported. Please see the following documentation for more information https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file/.
+
 ## Back up your swarm
 
 Before starting an upgrade, make sure that your swarm is healthy. If a problem
