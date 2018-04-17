@@ -95,6 +95,21 @@ specify `--log-protocol`.
   * Scanning any new push after metadatastore migration will not yet work.
   * Pushes to repos with promotion policies (repo as source) are broken when an
   image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  
+  ```
+  The data directory was initialized by PostgreSQL version 9.6, 
+  which is not compatible with this version 10.3.
+  ```
+  To remedy this remove the scanningstore container and the dtr-postgres volume, and perform a reconfigure
+  ```
+  docker stop dtr-scanningstore-$replica
+  docker rm dtr-scanningstore-$replica
+  docker volume rm dtr-postgres-$replica
+  docker run --rm -it docker/dtr:2.5.0 reconfigure ...
+  ```
+  Then resync the vulnerability database from the web UI.
+  
 
 ## Earlier versions
 
