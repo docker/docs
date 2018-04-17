@@ -110,6 +110,9 @@ will be available in future releases.
   Route-reflector configurations will be included in a future release.
   * In some deployments the `kube-dns` component won't be able to resolve external
   domain names. [Deploy a ConfigMap to work around this](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#configure-stub-domain-and-upstream-dns-servers).
+  * If you upgrade from UCP 2.x to UCP 3.x on Azure, Kubernetes networking doesn't work. 
+  The cluster upgrade completes, and Swarm workloads work, but Kubernetes networking
+  will be down.
 * Management
   * If upgrading UCP through the UI, UCP will not check to ensure the manager node
   has the minimum memory required of 4 GB. Upgrading through the CLI does check for
