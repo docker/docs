@@ -108,7 +108,7 @@ specify `--log-protocol`.
   docker volume rm dtr-postgres-$replica
   docker run --rm -it docker/dtr:2.5.0 reconfigure ...
   ```
-  Then resync the vulnerability database as normal
+  Then resync the vulnerability database from the web UI.
   
 
 ## Earlier versions
