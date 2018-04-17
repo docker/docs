@@ -66,18 +66,12 @@ When an upgrade is available for a UCP installation, a banner appears.
 ![](../../images/upgrade-ucp-1.png){: .with-border}
 
 Clicking this message takes an admin user directly to the upgrade process.
-It can be found under the **Cluster Configuration** tab of the **Admin
- Settings** section.
+It can be found under the **Upgrade** tab of the **Admin Settings** section.
 
 ![](../../images/upgrade-ucp-2.png){: .with-border}
 
-Select a version to upgrade to using the **Available UCP Versions** dropdown,
-then click to upgrade.
-
-Before the upgrade happens, a confirmation dialog along with important
-information regarding cluster and UI availability is displayed.
-
-![](../../images/upgrade-ucp-3.png){: .with-border}
+In the **Available Versions** dropdown, select **3.0.0** and click
+**Upgrade UCP**.
 
 During the upgrade, the UI will be unavailable, and you should wait
 until completion before continuing to interact with it. When the upgrade
