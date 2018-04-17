@@ -128,6 +128,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
       --log-opt max-size=1m \
       --env IPCOUNT=128 \
       --name ipallocator \
+      --constraint "node.platform.os == linux" \
       ddebroy/azip
     ```
 
