@@ -248,19 +248,19 @@ The last step is to link the Kubernetes namespace the `/Prod` collection.
     apiVersion: v1
     kind: ReplicationController
     metadata:
-    name: nginx
+      name: nginx
     spec:
-    replicas: 1
-    selector:
+      replicas: 1
+      selector:
         app: nginx
-    template:
+      template:
         metadata:
-        name: nginx
-        labels:
+          name: nginx
+          labels:
             app: nginx
         spec:
-        containers:
-        - name: nginx
+          containers:
+          - name: nginx
             image: nginx
             ports:
             - containerPort: 80
