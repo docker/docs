@@ -122,7 +122,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
 
     ```bash
     docker service create \
-      -mode=global \
+      --mode=global \
       --secret=azure_ucp_admin.toml \
       --log-driver json-file \
       --log-opt max-size=1m \
