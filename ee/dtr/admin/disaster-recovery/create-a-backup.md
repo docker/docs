@@ -95,7 +95,7 @@ Where:
 
 This prompts you for the UCP password, backups up the DTR metadata and saves the
 result into a tar archive. You can learn more about the supported flags in
-the [reference documentation](../../reference/cli/backup.md).
+the [reference documentation](../../../../reference/dtr/2.5/cli/backup.md).
 
 By default the backup command doesn't stop the DTR replica being backed up.
 This allows performing backups without affecting your users. Since the replica
