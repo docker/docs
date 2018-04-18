@@ -460,6 +460,14 @@ ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d
 ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
+Add the following to your `~/.bash_profile`:
+
+```shell
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+```
+
 ### Zsh
 
 In Zsh, the [completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" class="_"}
