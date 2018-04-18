@@ -66,6 +66,11 @@ on a node depend on whether the node is a manager or a worker.
 > on Windows, the `ucp-agent` component is named `ucp-agent-win`.
 > [Learn about architecture-specific images](admin/install/architecture-specific-images.md).
 
+Internally, UCP uses the following components:
+
+* Calico 3.0.1.
+* Kubernetes 1.8.9.
+
 ### UCP components in manager nodes
 
 Manager nodes run all UCP services, including the web UI and data stores that
