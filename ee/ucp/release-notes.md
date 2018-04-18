@@ -86,6 +86,7 @@ will be available in future releases.
   grant the `Restricted Control` role against Kubernetes namespaces, and use custom roles
   instead. This issue does not affect any other roles in the system, or any of the grants
   using `Restricted Control` against collections.
+* For increased security UCP now requires clients to use TLS version 1.2.
 
 ### Known issues
 
@@ -110,7 +111,7 @@ will be available in future releases.
   Route-reflector configurations will be included in a future release.
   * In some deployments the `kube-dns` component won't be able to resolve external
   domain names. [Deploy a ConfigMap to work around this](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#configure-stub-domain-and-upstream-dns-servers).
-  * If you upgrade from UCP 2.x to UCP 3.x on Azure, Kubernetes networking doesn't work. 
+  * If you upgrade from UCP 2.x to UCP 3.x on Azure, Kubernetes networking doesn't work.
   The cluster upgrade completes, and Swarm workloads work, but Kubernetes networking
   will be down.
 * Management
