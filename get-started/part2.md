@@ -189,7 +189,7 @@ friendlyhello         latest              326387cea398
 >
 > _Proxy server settings_
 >
-> DNS misconfgiurations can generate problems with `pip`. You need to set your 
+> DNS misconfigurations can generate problems with `pip`. You need to set your 
 > own DNS server address to make `pip` work properly. You might want 
 > to change the DNS settings of the Docker daemon. You can edit (or create) the 
 > configurarion file at `/etc/docker/daemon.json` with the `dns` key, as following:
