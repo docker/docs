@@ -153,7 +153,7 @@ services which publish ports, such as a WordPress service which publishes port
       --ingress \
       --subnet=10.11.0.0/16 \
       --gateway=10.11.0.2 \
-      --opt com.docker.network.mtu=1200 \
+      --opt com.docker.network.driver.mtu=1200 \
       my-ingress
     ```
 
@@ -180,7 +180,7 @@ from the swarm.
     ```bash
     $ sudo ip link set docker_gwbridge down
 
-    $ sudo ip link del name docker_gwbridge
+    $ sudo ip link del dev docker_gwbridge
     ```
 
 3.  Start Docker. Do not join or initialize the swarm.
