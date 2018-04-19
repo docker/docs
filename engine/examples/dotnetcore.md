@@ -50,7 +50,7 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out --no-restore
 
 # Build runtime image
 FROM microsoft/aspnetcore:2.0
