@@ -418,7 +418,7 @@ option to the `--publish` flag.
 > `--mode=global` flag on `docker service create`, it is difficult to know
 > which nodes are running the service to route work to them.
 
-##### Example: Run a `nginx` web server service on every swarm node
+##### Example: Run an `nginx` web server service on every swarm node
 
 [nginx](https://hub.docker.com/_/nginx/) is an open source reverse proxy, load
 balancer, HTTP cache, and a web server. If you run nginx as a service using the
