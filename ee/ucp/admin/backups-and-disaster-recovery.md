@@ -116,6 +116,10 @@ To restore an existing UCP installation from a backup, you need to
 uninstall UCP from the swarm by using the `uninstall-ucp` command.
 [Learn to uninstall UCP](install/uninstall.md).
 
+If you restore UCP using a different Docker swarm than the one where UCP was
+previously deployed on, UCP will start using new TLS certificates. Existing
+client bundles won't work anymore, so users need to download new ones. 
+
 When restoring, make sure you use the same version of the `docker/ucp` image
 that you've used to create the backup. The example below shows how to restore
 UCP from an existing backup file, presumed to be located at
