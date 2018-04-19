@@ -466,7 +466,7 @@ experience conflicts, remove it.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with Docker for Windows,
-  see [Deploy to Kubernetes](kubernetes.md).
+  see [Deploy on Kubernetes](kubernetes.md).
 
 ### Diagnose & feedback
 
