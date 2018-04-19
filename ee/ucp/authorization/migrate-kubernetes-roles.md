@@ -89,7 +89,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```  
 
-Crate a corresponding grant by using the **Create Grant** page in the 
+Create a corresponding grant by using the **Create Grant** page in the 
 UCP web UI.
 
 1.  Create a non-admin user named "jane". [Learn to create users and teams](create-users-and-teams-manually.md). 
