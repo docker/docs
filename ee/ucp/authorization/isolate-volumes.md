@@ -18,10 +18,10 @@ nodes.
 
 ## Create two teams
 
-Navigate to the **Organizations & Teams** page to create two teams in your
-organization, named "Dev" and "Prod". Add a user who's not a UCP administrator
-to the Dev team, and add another non-admin user to the Prod team.
-[Learn how to create and manage teams](create-users-and-teams-manually.md).
+Navigate to the **Organizations & Teams** page to create two teams in the
+"engineering" organization, named "Dev" and "Prod". Add a user who's not a UCP administrator to the Dev team, and add another non-admin user to the Prod team. [Learn how to create and manage teams](create-users-and-teams-manually.md).
+
+![](../images/isolate-volumes-0.png){: .with-border}
 
 ## Create resource collections
 
@@ -37,6 +37,8 @@ placed under the `/Shared` collection.
 4.  Click **Create collection** again, name the new collection "prod-volumes",
     and click **Create**.
 
+![](../images/isolate-volumes-0a.png){: .with-border}
+
 ## Create grants for controlling access to the new volumes
 
 In this example, the Dev team gets access to its volumes from a grant that
@@ -51,8 +53,8 @@ with the `/Shared/prod-volumes` collection.
 4.  In the list, find **/Shared/dev-volumes** and click **Select Collection**.
 3.  Click **Roles**, and in the dropdown, select **Restricted Control**.
 4.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
-    In the dropdown, pick your organization, and in the **Team** dropdown,
-    select **Dev**.
+    In the dropdown, pick the **engineering** organization, and in the
+    **Team** dropdown, select **Dev**.
 5.  Click **Create** to grant permissions to the Dev team.
 6.  Click **Create Grant** and repeat the previous steps for the **/Shared/prod-volumes**
     collection and the Prod team.
@@ -67,16 +69,14 @@ in their assigned collections.
 Team members have permission to create volumes in their assigned collection.
 
 1.  Log in as one of the users on the Dev team.
-2.  Navigate to the **Volumes** page to view all of the volumes in the swarm
-    that the user can access.
+2.  Navigate to the **Volumes** page to view all of the volumes in the
+    swarm that the user can access.
 2.  Click **Create volume** and name the new volume "dev-data".
-3.  In the left pane, click **Collections**. The default collection appears.
-    At the top of the page, click **Shared**, find the **dev-volumes**
-    collection in the list, and click **Select Collection**.
+3.  In the left pane, click **Collections**. The default collection
+    appears. At the top of the page, click **Shared**, find the **dev-volumes** collection in the list, and click **Select Collection**.
 4.  Click **Create** to add the "dev-data" volume to the collection.
-5.  Log in as one of the users on the Prod team, and repeat the previous steps
-    to create a "prod-data" volume assigned to the `/Shared/prod-volumes`
-    collection.
+5.  Log in as one of the users on the Prod team, and repeat the
+    previous steps to create a "prod-data" volume assigned to the `/Shared/prod-volumes` collection.
 
 ![](../images/isolate-volumes-2.png){: .with-border}
 
