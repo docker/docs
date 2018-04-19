@@ -227,6 +227,8 @@ By default, `inspectDockerLoggingPlugin` displays output locally to `stdout` (th
 * [Inspect a Docker logging plugin with HTML output](#inspect-logging-plugin-html)
 * [Send data to API endpoint on external server](#http_api_endpoint)
 
+<a name="inspect-logging-plugin-stdout">
+
 ### Inspect a Docker logging plugin with messages sent to stdout
 
 #### To inspect the Docker logging plugin "gforghetti/docker-log-driver-test:latest":
