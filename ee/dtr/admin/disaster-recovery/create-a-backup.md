@@ -23,7 +23,7 @@ Docker Trusted Registry maintains data about:
 | Images content                     | The images you push to DTR. This can be stored on the file system of the node running DTR, or other storage system, depending on the configuration |
 
 This data is persisted on the host running DTR, using named volumes.
-[Learn more about DTR named volumes](../architecture.md).
+[Learn more about DTR named volumes](../../architecture.md).
 
 To perform a backup of a DTR node, run the `docker/dtr backup` command. This
 command backups up the following data:
@@ -58,7 +58,7 @@ the way you backup images depends on the storage backend you're using.
 
 If you've configured DTR to store images on the local file system or NFS mount,
 you can backup the images by using ssh to log into a node where DTR is running,
-and creating a tar archive of the [dtr-registry volume](../architecture.md):
+and creating a tar archive of the [dtr-registry volume](../../architecture.md):
 
 ```none
 sudo tar -cf {{ image_backup_file }} \
