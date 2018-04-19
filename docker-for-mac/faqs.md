@@ -210,8 +210,8 @@ in the Networking topic.
 Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
-For full information on adding server and client side certs, see [Adding
-TLS certificates](index.md#adding-tls-certificates) in
+For full information on adding server and client side certs, see [Add
+TLS certificates](index.md#add-tls-certificates) in
 the Getting Started topic.
 
 ### How do I add client certificates?
@@ -221,8 +221,8 @@ certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-For full information on adding server and client side certs, see [Adding
-TLS certificates](index.md#adding-tls-certificates) in
+For full information on adding server and client side certs, see [Add
+TLS certificates](index.md#add-tls-certificates) in
 the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
