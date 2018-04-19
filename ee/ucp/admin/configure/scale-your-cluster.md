@@ -46,7 +46,7 @@ page.
 
 Click **Add Node** to add a new node.
 
-![](../../../../../images/try-ddc-3.png){: .with-border}
+![](../../../images/try-ddc-3.png){: .with-border}
 
 -  Click **Manager** if you want to add the node as a manager. 
 -  Check the **Use a custom listen address** option to specify the
@@ -60,10 +60,8 @@ join to the cluster, and run the `docker swarm join` command on the host.
 To add a Windows node, click **Windows** and follow the instructions in
 [Join Windows worker nodes to a cluster](join-nodes/join-windows-nodes-to-cluster.md). 
 
-After you run the join command in the node, the node is displayed in the UCP
-web UI.
-
-![](../../images/scale-your-cluster-2.png){: .with-border}
+After you run the join command in the node, you can view the node in the
+UCP web UI.
 
 ## Remove nodes from the cluster
 
