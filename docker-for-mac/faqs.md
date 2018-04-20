@@ -7,8 +7,8 @@ title: Frequently asked questions (FAQ)
 ---
 
 **Looking for popular FAQs on Docker for Mac?** Check out the
-[Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles,
-FAQs, technical support for various subscription levels, and more.
+[Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
+for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ## Questions about Docker.app
 ### Stable and Edge channels
@@ -16,7 +16,7 @@ FAQs, technical support for various subscription levels, and more.
 **Q: How do I get the Stable or Edge version of Docker for Mac?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Mac](install.md#download-docker-for-mac).
+[Download Docker for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
 
 This topic also has more information about the two channels.
 
@@ -60,11 +60,11 @@ below.</font><br>
 Do the following each time:
 
 1.  Use `docker save` to save any images you want to keep. (See
-    [save](/engine/reference/commandline/save.md) in the Docker Engine command
+    [save](/engine/reference/commandline/save) in the Docker Engine command
     line reference.)
 
 2.  Use `docker export` to export containers you want to keep. (See
-    [export](/engine/reference/commandline/export.md) in the Docker Engine
+    [export](/engine/reference/commandline/export) in the Docker Engine
     command line reference.)
 
 3.  Uninstall the current app (whether Stable or Edge).
@@ -82,13 +82,13 @@ required**_.
 
 You need a Mac that supports hardware virtualization and can run at
 least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
-[What to know before you install](install.md#what-to-know-before-you-install) in
+[What to know before you install](install#what-to-know-before-you-install) in
 the install guide.
 
 ### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
 
 Yes, if you [change the name of your macOS user account and home
-folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
+folder](https://support.apple.com/en-us/HT201548){: target="_blank" class="_"} after Docker for Mac is
 already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac fails to start. See also,
 [Docker for Mac does not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-does-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
 
@@ -110,10 +110,8 @@ to talk to Docker for Mac. The same applies to `docker-compose`.
 
 You might decide that you do not need Toolbox now that you have Docker for Mac,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on the Mac, see [How to uninstall
-Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
-Toolbox Mac topics.
-
+Toolbox on the Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+in the Toolbox Mac topics.
 
 ## Questions about feedback and help
 ### What kind of feedback are we looking for?
@@ -133,12 +131,12 @@ You can find the list of frequent issues in
 [Logs and Troubleshooting](troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues) or
+[Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} or
 create a new one. You can also create new issues based on diagnostics. To learn more,
 see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 
-[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac)
+[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" class="_"}
 provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
@@ -169,13 +167,12 @@ On Docker for Mac, clients can connect to the Docker Engine through a Unix
 socket: `unix:///var/run/docker.sock`.
 
 See also [Docker Engine API](/engine/api.md) and Docker for Mac forums topic
-[Using pycharm Docker
-plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
+[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" class="_"}.
 
-If you are working with applications like [Apache
-Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and
-`DOCKER_CERT_PATH` environment variables, specify these to connect to Docker
-instances through Unix sockets. For example:
+If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" class="_"}
+that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
+variables, specify these to connect to Docker instances through Unix sockets.
+For example:
 
 ```bash
 export DOCKER_HOST=unix:///var/run/docker.sock
@@ -210,9 +207,8 @@ in the Networking topic.
 Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
-For full information on adding server and client side certs, see [Add
-TLS certificates](index.md#add-tls-certificates) in
-the Getting Started topic.
+For full information on adding server and client side certs, see
+[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
@@ -221,16 +217,14 @@ certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-For full information on adding server and client side certs, see [Add
-TLS certificates](index.md#add-tls-certificates) in
-the Getting Started topic.
+For full information on adding server and client side certs, see
+[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 
 Unfortunately it is not possible to pass through a USB device (or a
 serial port) to a container. For use cases requiring this, we
 recommend the use of [Docker Toolbox](/toolbox/overview.md).
-
 
 ## Disk Usage
 
@@ -251,12 +245,12 @@ Qcow2 format (`Docker.qcow2`).
 
 ### Docker.raw consumes an insane amount of disk space!
 
-This is an illusion.  Docker uses the raw format on Macs running the
-Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
-long runs of zeroes representing unused space.  The output of `ls` is
-misleading, because it lists the logical size of the file rather than
-its physical size. To see the physical size, add the `-ks` switch; to
-see the logical size in human readable form, add `-lh`:
+This is an illusion.  Docker uses the raw format on Macs running the Apple
+Filesystem (APFS).  APFS supports _sparse files_, which compress long runs of
+zeroes representing unused space.  The output of `ls` is misleading, because it
+lists the logical size of the file rather than its physical size. To see the
+physical size, add the `-ks` switch; to see the logical size in human readable
+form, add `-lh`:
 
 ```bash
 $ cd ~/Library/Containers/com.docker.docker/Data
@@ -309,7 +303,7 @@ takes longer than usual to restart because it must wait for the
 compaction to complete.
 
 For background conversation thread on this, see
-[Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
+[Docker.qcow2 never shrinks...](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
 
