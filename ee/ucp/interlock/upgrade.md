@@ -109,3 +109,18 @@ As part of the upgrade process UCP adds the
 
 You can update your services to remove the old HRM labels, since they won't be
 used anymore.
+
+## Optionally segregate control traffic
+
+Interlock is designed so that all the control traffic is kept separate from
+the application traffic.
+
+If before upgrading you had all your applications attached to the `ucp-hrm`
+network, after upgrading you can update your services to start using a
+dedicated network for routing that's not shared with other services.
+[Learn how to use a dedicated network](usage/index.md).
+
+If before upgrading you had a dedicate network to route traffic to each service,
+Interlock will continue using those dedicated networks. However the
+`ucp-interlock` will be attached to each of those networks. You can update
+the `ucp-interlock` service so that it is only connected to the `ucp-hrm` network.
