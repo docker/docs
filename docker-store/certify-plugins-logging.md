@@ -44,11 +44,6 @@ The custom script must log the contents of the `quotes.txt` file. It should also
 
 Best practices require Docker logging plugins to support the [ReadLogs API](/engine/extend/plugins_logging/#logdriverreadlogs) so that the logs can be retrieved with the `docker container logs` command. If the `ReadLogs` API is not supported, a custom script is needed to retrieve the logs and print them to `stdout`. Refer to the `--get-logs-script` command argument in the command help.
 
-
-### External server
-
-To send data to an external server, use the [http_api_endpoint](#http_api_endpoint) HTTP Server for your docker logging plugin. You can run the [http_api_endpoint](#http_api_endpoint) HTTP Server and have the docker logging plugin send its logging data to the [http_api_endpoint](http_api_endpoint/README.md) HTTP Server. The data can then be retrieved using a `curl` command. Refer to the [http_api_endpoint](#http_api_endpoint) HTTP Server for more details.
-
 ### Prerequisites
 
 Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial).
@@ -161,7 +156,6 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     | Windows/X86  | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerLoggingPlugin.exe |
     | Windows/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe |
     | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerLoggingPlugin |
-    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint |
     | Linux/IBMZ | https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin |
     | Linux/IBMPOWER | https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin |
 
@@ -171,7 +165,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     chmod u+x inspectDockerLoggingPlugin
     ```
 
-3.  Capture the product ID you'd like to reference for the certification test.
+3.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
 
     ![product ID](images/store-product-id.png)
 
@@ -231,10 +225,10 @@ By default, `inspectDockerLoggingPlugin` displays output locally to `stdout` (th
 
 ### Inspect a Docker logging plugin with messages sent to stdout
 
-#### To inspect the Docker logging plugin "gforghetti/docker-log-driver-test:latest":
+#### To inspect the Docker logging plugin "gforghetti/docker-log-driver-test:latest", and upload the result to Docker Store (leave out the `-product-id` parameter if you are just testing):
 
 ```
-gforghetti:~:$ ./inspectDockerLoggingPlugin gforghetti/docker-log-driver-test:latest
+gforghetti:~:$ ./inspectDockerLoggingPlugin -product-id=<store-product-id> gforghetti/docker-log-driver-test:latest
 ```
 #### Output:
 
@@ -318,6 +312,13 @@ Passed:   Docker container and any associated volumes removed.
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was removed.
 
 The inspection of the Docker logging plugin gforghetti/docker-log-driver-test:latest has completed.
+
+If -product-id is specified:
+**************************************************************************************************************************************************************************************************
+* Step #10 Upload the test result to Docker Store.
+**************************************************************************************************************************************************************************************************
+Passed:   The test results are uploaded to Docker Store.
+
 gforghetti:~/$
 ```
 
@@ -411,7 +412,7 @@ gforghetti:~/$
 
 #### Introduction
 
-The **http_api_endpoint** is an HTTP Server that can be used to test docker logging plugins that do not support the read log api and instead send data to an API Endpoint running on an external server.
+The [**http_api_endpoint**](https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/linux/http_api_endpoint) is an HTTP Server that can be used to test docker logging plugins that do not support the read log api and instead send data to an API Endpoint running on an external server.
 The [Sumo Logic Logging Plugin](https://store.docker.com/plugins/sumologic-logging-plugin) is one example.
 
 You can configure those docker logging plugins to send their logging data to the **http_api_endpoint** HTTP Server for testing the plugin and then code a script to retrieve the logs using a curl command.
