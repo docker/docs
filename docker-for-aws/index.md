@@ -10,15 +10,18 @@ redirect_from:
 
 {% include d4a_buttons.md %}
 
-## Docker Enterprise Edition (EE) for AWS
+## Docker Enterprise Edition (EE) on AWS
 
-This deployment is fully baked and tested, and comes with the latest Docker
-Enterprise Edition for AWS.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying 
+Docker Enterprise Edition (EE) on AWS and a range of other infrastructure choices. 
+Each Docker Certified Infrastructure includes a reference architecture, automation templates, 
+and 3rd party ecosystem solution briefs, equipping you to automate and reliably 
+deploy Docker EE as well as simplifying lifecycle management of our platform.
 
 This release is maintained and receives **security and critical bug fixes for
 one year**.
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
+[Docker Certified Infrastructure for AWS](https://success.docker.com/article/certified-infrastructures-aws){: target="_blank" class="button outline-btn blank_"}
 
 
 ## Docker Community Edition (CE) for AWS
