@@ -158,7 +158,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     chmod u+x inspectDockerImage
     ```
 
-3.  Capture the product ID (from the URL in Docker Store) that you want to reference for the certification test.
+3.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
 
     ![product ID](images/store-product-id.png)
 
@@ -244,10 +244,10 @@ docker container run -d \
 $1
   ```
 
-#### To inspect the Docker image, `gforghetti/tomcat-wildbook:latest`, with a custom startup script:
+#### To inspect the Docker image, `gforghetti/tomcat-wildbook:latest`, with a custom startup script and upload the result to Docker Store (leave out the `-product-id` parameter if you are just testing):
 
 ```
-root:[~/] # ./inspectDockerimage --start-script ./run_my_application.sh gforghetti/tomcat-wildbook:latest
+root:[~/] # ./inspectDockerimage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
 ```
 
 #### Output:
@@ -453,6 +453,12 @@ Passed:  Docker image "gforghetti/tomcat-wildbook:latest" was removed.
 Passed:  This test was performed on Docker Enterprise Edition.
 
 The inspection of the Docker image gforghetti/tomcat-wildbook:latest has completed.
+
+If -product-id is specified on command line:
+**************************************************************************************************************************************************************************************************
+* Step #16 Upload the test result to Docker Store.
+**************************************************************************************************************************************************************************************************
+Passed:   The test results are uploaded to Docker Store.
 
 root:[~/] #
 ```
