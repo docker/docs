@@ -24,7 +24,7 @@ In our May 2016 release, we introduced a new user interface for Docker Cloud. Tr
 
 ### Added
 
-**Docker Cloud Security Scanning** is now available as a beta add-on service for private repositories. See [Security scanning in Docker Cloud](builds/image-scan.md) for more information.
+**Docker Cloud Security Scanning** is now available as a beta add-on service for private repositories. 
 
 ### Fixed
 

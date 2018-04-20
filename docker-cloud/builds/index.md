@@ -19,8 +19,7 @@ running services when a build passes its tests.
 * [Push images to Docker Cloud](push-images.md)
 * [Link to a source code repository](link-source.md)
 * [Automated builds](automated-build.md)
-* [Docker Security Scanning](image-scan.md)
 * [Automated repository tests](automated-testing.md)
 * [Advanced options for Autobuild and Autotest](advanced.md)
 
-![Docker Cloud repository General view](images/repo-general.png)
+![Docker Cloud repository General view](images/repo-general.png){:width="650px"}
