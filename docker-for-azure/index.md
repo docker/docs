@@ -9,10 +9,12 @@ redirect_from:
 
 {% include d4a_buttons.md %}
 
-## Docker Enterprise Edition (EE) for Azure
-This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
+## Docker Enterprise Edition (EE) on Azure
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise Edition (EE) on Azure and a range of other infrastructure choices. Each Docker Certified Infrastructure includes a reference architecture, automation templates, and 3rd party ecosystem solution briefs, equipping you to automate and reliably deploy Docker EE as well as simplifying lifecycle management of our platform.
 
-[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
+<br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
+
+[Docker Certified Infrastructure for Azure](https://success.docker.com/article/certified-infrastructures-azure){: target=“_blank” class=“button outline-btn _blank_”}
 
 
 ## Docker Community Edition (CE) for Azure
