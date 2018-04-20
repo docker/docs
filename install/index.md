@@ -46,7 +46,13 @@ Use the following tables to choose the best installation path for you.
 
 {% include docker_desktop_matrix.md %}
 
-### Cloud
+### Docker Certified Infrastructure
+
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying 
+Docker Enterprise Edition (EE) on a range of infrastructure choices. Each Docker 
+Certified Infrastructure includes a reference architecture, automation templates, 
+and 3rd party ecosystem solution briefs, equipping you to automate and reliably 
+deploy Docker EE as well as simplifying lifecycle management of our platform.
 
 {% include docker_cloud_matrix.md %}
 
