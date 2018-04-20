@@ -304,7 +304,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with
-  Docker for Mac, see [Deploy to Kubernetes](kubernetes.md){:target="_blank" class="_"}.
+  Docker for Mac, see [Deploy on Kubernetes](kubernetes.md){:target="_blank" class="_"}.
 
 ### Reset
 
