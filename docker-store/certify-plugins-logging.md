@@ -153,11 +153,10 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
 
     | OS/Architecture | Download Link |
     |-----------------|------------------|
-    | Windows/X86  | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerLoggingPlugin.exe |
-    | Windows/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe |
-    | Linux/X86 | https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerLoggingPlugin |
-    | Linux/IBMZ | https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin |
-    | Linux/IBMPOWER | https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin |
+    | Windows/X86  | [https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerLoggingPlugin.exe](https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/inspectDockerLoggingPlugin.exe) |
+    | Linux/X86 | [https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/inspectDockerLoggingPlugin) |
+    | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin) |
+    | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin) |
 
 2.  Set permissions on `inspectDockerLoggingPlugin` so that it is executable:
 
@@ -313,7 +312,7 @@ Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was rem
 
 The inspection of the Docker logging plugin gforghetti/docker-log-driver-test:latest has completed.
 
-If -product-id is specified:
+If -product-id is specified on command line:
 **************************************************************************************************************************************************************************************************
 * Step #10 Upload the test result to Docker Store.
 **************************************************************************************************************************************************************************************************
@@ -412,10 +411,15 @@ gforghetti:~/$
 
 #### Introduction
 
-The [**http_api_endpoint**](https://s3.amazonaws.com/store-logos-us-east-1/testfiles/logging-plugins/linux/http_api_endpoint) is an HTTP Server that can be used to test docker logging plugins that do not support the read log api and instead send data to an API Endpoint running on an external server.
+The **http_api_endpoint** is an HTTP Server that can be used to test docker logging plugins that do not support the read log api and instead send data to an API Endpoint running on an external server.
 The [Sumo Logic Logging Plugin](https://store.docker.com/plugins/sumologic-logging-plugin) is one example.
 
 You can configure those docker logging plugins to send their logging data to the **http_api_endpoint** HTTP Server for testing the plugin and then code a script to retrieve the logs using a curl command.
+
+#### Download
+
+* [Linux/X86](https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint)
+* [Windows/X86](https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe)
 
 #### Syntax
 
