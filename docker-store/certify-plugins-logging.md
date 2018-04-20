@@ -218,7 +218,7 @@ By default, `inspectDockerLoggingPlugin` displays output locally to `stdout` (th
 * [Inspect a Docker logging plugin with messages sent to stdout](#inspect-logging-plugin-stdout)
 * [Inspect a Docker logging plugin with JSON output](#inspect-logging-plugin-json)
 * [Inspect a Docker logging plugin with HTML output](#inspect-logging-plugin-html)
-* [Send data to API endpoint on external server](#http_api_endpoint)
+* [Send data to API endpoint on external server](#send-data-to-api-endpoint-on-external-server)
 
 <a name="inspect-logging-plugin-stdout">
 
@@ -405,7 +405,7 @@ gforghetti:~/$
 
 ![HTML Output Image](images/gforghetti-log-driver-latest_inspection_report.html.png)
 
-<a href="http_api_endpoint">
+<a name="send-to-http-api-endpoint">
 
 ### Send data to API endpoint on external server
 
