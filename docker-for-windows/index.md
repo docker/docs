@@ -212,12 +212,12 @@ crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Uncheck to opt out. Docker may also  sometimes
 prompt you for more information.
 
-### Shared Drives
+### Shared drives
 
 Share your local drives (volumes) with Docker for Windows, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
 
-![Shared Drives](images/settings-shared-drives.png){:width="600px"}
+![Shared drives](images/settings-shared-drives.png){:width="600px"}
 
 Permission for shared drives are tied to the credentials you provide here. If
 you run `docker` commands under a different username than the one configured
