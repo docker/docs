@@ -26,8 +26,8 @@ storage driver as `overlay` or `overlay2`.
 
 OverlayFS is supported if you meet the following prerequisites:
 
-- The `overlay2` driver is supported for Docker EE and recommended
-  for Docker CE.
+- The `overlay2` driver is supported for Docker EE 17.06.02-ee5 and later and
+  recommended for Docker CE.
 
 - The `overlay` driver is allowed but not recommended for Docker CE.
 
@@ -96,7 +96,7 @@ Before following this procedure, you must first meet all the
     }
     ```
 
-    > **Note**: RHEL and CentOS users on Docker EE 17.06
+    > **Note**: RHEL and CentOS users on Docker EE 17.06.02-ee5 and 17.06.02-ee6
     >
     > You need to add a second option to the `daemon.json` to disable the check
     > for version 4.0 or higher of the Linux kernel. Your `daemon.json` should
@@ -112,6 +112,9 @@ Before following this procedure, you must first meet all the
     >   ]
     > }
     > ```
+    > On kernel versions that support it, Docker EE versions 17.06.02-ee7 and
+    > later enable `overlay2` by default and do not require
+    > `override_kernel_check`.
 
     If you need to use the legacy `overlay` driver, specify it instead.
 
