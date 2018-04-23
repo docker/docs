@@ -48,23 +48,21 @@ Start by finding the ID of the DTR replica that you want to repair from.
 You can find the list of replicas by navigating to the UCP web UI, or by using
 a UCP client bundle to run:
 
-```bash
 {% raw %}
+```bash
 docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
-{% endraw %}
 ```
+{% endraw %}
 
 Then, use your UCP client bundle to run the emergency repair command:
 
 ```bash
-{% raw %}
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} emergency-repair \
   --ucp-insecure-tls \
   --existing-replica-id <replica-id>
-{% endraw %}
 ```
 
 If the emergency repair procedure is successful, your DTR cluster now has a
