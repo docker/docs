@@ -21,7 +21,7 @@ example, the namespace has the name `lab-words`.
 
 ## Create a Kubernetes app from a Compose file
 
-In this example, you create a simple app, named "lab-words" by using Compose
+In this example, you create a simple app, named "lab-words", by using a Compose
 file. The following yaml defines the stack:
 
 ```yaml
@@ -58,7 +58,7 @@ services:
 3.  In the **Name** textbox, type "lab-words".
 4.  In the **Mode** dropdown, select **Kubernetes workloads**.
 5.  In the **Namespace** drowdown, select **lab-words**.
-6.  In the Compose.yml editor, paste the previous YAML.
+6.  In the **docker-compose.yml** editor, paste the previous YAML.
 7.  Click **Create** to deploy the stack.
 
 ## Inspect the deployment
@@ -73,12 +73,15 @@ are running.
     details pane, scroll down to the **Pod IP** to view the pod's internal IP
     address.
 
-    ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
+    ![](../images/deploy-compose-kubernetes-1.png){: .with-border}
 
-3.  In the left pane, click **Load balancers** and find the **web** service.
-4.  Click the **web** service, and in the details pane, scroll down to the
+3.  In the left pane, click **Load balancers** and find the **web-published** service.
+4.  Click the **web-published** service, and in the details pane, scroll down to the
     **Spec** section.
 5.  Under **Ports**, click the URL to open the web UI for the `lab-words` app.
+
+    ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
+
 6.  Look at the IP addresses that are displayed in each tile. The IP address
     of the pod you inspected previously may be listed. If it's not, refresh the
     page until you see it.
