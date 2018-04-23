@@ -57,14 +57,14 @@ replicas you want to remove.
 You can find this in the **Stacks** page of the UCP web UI, or by using the UCP
 client bundle to run:
 
-```bash
 {% raw %}
+```bash
 docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
-{% endraw %}
 ```
+{% endraw %}
 
 Then use the UCP client bundle to remove the unhealthy replicas:
 

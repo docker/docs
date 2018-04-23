@@ -12,14 +12,14 @@ keywords: dtr, disaster recovery
 
 Docker Trusted Registry maintains data about:
 
-| Data                               | Description                                                                                                                                       |
-|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Configurations                     | The DTR cluster configurations                                                                                                                    |
-| Repository metadata                | The metadata about the repositories and images deployed                                                                                           |
-| Access control to repos and images | Permissions for teams and repositories                                                                                                            |
-| Notary data                        | Notary tags and signatures                                                                                                                        |
-| Scan results                       | Security scanning results for images                                                                                                              |
-| Certificates and keys              | The certificates, public keys, and private keys that are used for mutual TLS communication                                                        |
+| Data                               | Description                                                                                                                                        |
+|:-----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Configurations                     | The DTR cluster configurations                                                                                                                     |
+| Repository metadata                | The metadata about the repositories and images deployed                                                                                            |
+| Access control to repos and images | Permissions for teams and repositories                                                                                                             |
+| Notary data                        | Notary tags and signatures                                                                                                                         |
+| Scan results                       | Security scanning results for images                                                                                                               |
+| Certificates and keys              | The certificates, public keys, and private keys that are used for mutual TLS communication                                                         |
 | Images content                     | The images you push to DTR. This can be stored on the file system of the node running DTR, or other storage system, depending on the configuration |
 
 This data is persisted on the host running DTR, using named volumes.
@@ -60,12 +60,12 @@ If you've configured DTR to store images on the local file system or NFS mount,
 you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../../architecture.md):
 
+{% raw %}
 ```none
 sudo tar -cf {{ image_backup_file }} \
-{% raw %}
 $(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
-{% endraw %}
 ```
+{% endraw %}
 
 If you're using a different storage backend, follow the best practices
 recommended for that system.
@@ -95,7 +95,7 @@ Where:
 
 This prompts you for the UCP password, backups up the DTR metadata and saves the
 result into a tar archive. You can learn more about the supported flags in
-the [reference documentation](../../../../reference/dtr/2.5/cli/backup.md).
+the [reference documentation](/reference/dtr/2.5/cli/backup.md).
 
 By default the backup command doesn't stop the DTR replica being backed up.
 This allows performing backups without affecting your users. Since the replica
