@@ -118,7 +118,3 @@ Kubernetes workloads:
   `PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
   `SecurityContext.capabilities`, `SecurityContext.privileged`, and
   `Volume.hostPath`.
-* You can't grant permissions to Kubernetes service accounts.
-  The `default` service account has no permissions and can't use the Kubernetes
-  API. All other service accounts have full admin permissions and can only be
-  used by Docker EE administrators.
