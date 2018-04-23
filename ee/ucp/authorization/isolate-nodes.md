@@ -126,10 +126,13 @@ won't be scheduled on nodes that aren't in the collection.
 ## Deploy a Swarm service as a team member
 
 When a user deploys a Swarm service, UCP assigns its resources to the user's
-default collection. From the target collection of a resource, UCP walks up the
-ancestor collections until it finds nodes that the user has `Scheduler` access
-to. In this example, UCP assigns the user's service to the `/Prod/Webserver`
-collection and schedules tasks on nodes in the `/Prod` collection.
+default collection.
+
+From the target collection of a resource, UCP walks up the ancestor collections
+until it finds the highest ancestor that the user has `Scheduler` access to.
+Tasks are scheduled on any nodes in the tree below this ancestor. In this example,
+UCP assigns the user's service to the `/Prod/Webserver` collection and schedules
+tasks on nodes in the `/Prod` collection.
 
 As a user on the `Ops` team, set your default collection to `/Prod/Webserver`.
 
