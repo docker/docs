@@ -49,4 +49,4 @@ The VMware vSphere driver uses the latest boot2docker image.
 | **`--vmwarevsphere-username`**    | `VSPHERE_USERNAME`        | -                        |
 | `--vmwarevsphere-vcenter-port`    | `VSPHERE_VCENTER_PORT`    | 443                      |
 | `--vmwarevsphere-vcenter`         | `VSPHERE_VCENTER`         | -                        |
-| `--vmwarevsphere-folder`          | `$VSPHERE_FOLDER`         | -                        |
+| `--vmwarevsphere-folder`          | `VSPHERE_FOLDER`          | -                        |
