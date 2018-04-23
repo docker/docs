@@ -39,7 +39,7 @@ including purchasing options, see
 
 ## Supported platforms
 
-Docker CE and EE are available on multiple platforms, on cloud and on-premises.
+Docker CE and EE are available on multiple platforms, both cloud and on-premise.
 Use the following tables to choose the best installation path for you.
 
 ### Desktop
@@ -48,16 +48,7 @@ Use the following tables to choose the best installation path for you.
 
 ### Docker Certified Infrastructure
 
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying 
-Docker Enterprise Edition (EE) on a range of infrastructure choices. Each Docker 
-Certified Infrastructure includes a reference architecture, automation templates, 
-and 3rd party ecosystem solution briefs, equipping you to automate and reliably 
-deploy Docker EE as well as simplifying lifecycle management of our platform.
-
 {% include docker_cloud_matrix.md %}
-
-See also [Docker Cloud](#docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
 
 ### Server
 
@@ -81,22 +72,6 @@ Starting with Docker 17.03, Docker uses a time-based release schedule.
   month after the next Docker CE Stable release**.
 - A given Docker CE Edge release does not receive any patches or updates after
   a subsequent Docker CE Edge or Stable release.
-
-### Prior releases
-
-Instructions for installing prior releases of Docker can be found in the
-[Docker archives](/docsarchive/).
-
-## Docker Cloud
-
-You can use Docker Cloud to automatically provision and manage your cloud instances.
-
-* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm.md)
-* [Microsoft Azure setup guide](/docker-cloud/cloud-swarm/link-azure-swarm.md)
-* [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
-* [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
-* [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
-* [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
 
 ## Get started
 

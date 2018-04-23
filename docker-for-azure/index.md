@@ -10,16 +10,22 @@ redirect_from:
 {% include d4a_buttons.md %}
 
 ## Docker Enterprise Edition (EE) on Azure
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise Edition (EE) on Azure and a range of other infrastructure choices. Each Docker Certified Infrastructure includes a reference architecture, automation templates, and 3rd party ecosystem solution briefs, equipping you to automate and reliably deploy Docker EE as well as simplifying lifecycle management of our platform.
 
-<br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
+Docker Enterprise Edition (EE) on AWS and a range of other infrastructure choices.
 
-[Docker Certified Infrastructure for Azure](https://success.docker.com/article/certified-infrastructures-azure){: target=“_blank” class=“button outline-btn _blank_”}
+Each Docker Certified Infrastructure includes a reference architecture,
+automation templates, and third-party ecosystem solution briefs, enabling you to
+automate and reliably deploy Docker EE as well as making it easier to manage the
+platform lifecycle.
 
+This release is maintained and receives **security and critical bug fixes for
+one year**.
+
+[Docker Certified Infrastructure for AWS]
+(https://success.docker.com/article/certified-infrastructures-azure){: target="_blank" .button .outline-btn .blank_"}
 
 ## Docker Community Edition (CE) for Azure
-
-### Quickstart
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
 then choose from the stable or edge channel to bootstrap Docker for Azure using Azure Resource Manager.
@@ -43,8 +49,10 @@ For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.m
   </tr>
 </table>
 
-> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
-
+> Edge releases
+>
+> During stable channel updates, edge channel will have the same release
+> (unless it's a patch release)
 
 ### Prerequisites
 
