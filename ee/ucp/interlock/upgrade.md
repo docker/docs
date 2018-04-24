@@ -76,7 +76,7 @@ To check if these services are running, use a client bundle with administrator
 permissions and run:
 
 ```bash
-docker ps -a | grep ucp-interlock
+docker ps --filter "name=ucp-interlock"
 ```
 
 * If the `ucp-interlock` service doesn't exist or is not running, something went
@@ -84,6 +84,9 @@ wrong with the reconciliation step.
 * If this still doesn't work, it's possible that UCP is having problems creating
 the `com.docker.ucp.interlock.conf-1`, due to name conflicts. Make sure you
 don't have any configuration with the same name by running:
+   ```
+   docker config ls --filter "name=com.docker.ucp.interlock"
+   ```
 * If either the `ucp-interlock-extension` or `ucp-interlock-proxy` services are
 not running, it's possible that there are port conflicts.
 As a workaround re-enable the layer 7 routing configuration from the
