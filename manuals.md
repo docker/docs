@@ -16,12 +16,9 @@ Use the following tables to choose the best installation path for you.
 
 {% include docker_desktop_matrix.md %}
 
-### Cloud
+### Docker Certified Infrastructure
 
 {% include docker_cloud_matrix.md %}
-
-See also [Docker Cloud](#docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
 
 ### Server
 
