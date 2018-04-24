@@ -24,7 +24,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -81,7 +81,7 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      nodePort: 30080
+      nodePort: 32769
   selector:
     app: nginx
 ```
@@ -137,7 +137,7 @@ spec:
 1.  In the left pane, click **Controllers** and select the **nginx-deployment**
     controller.
 2.  In the details pane, click **Configure**, and in the **Edit Deployment**
-    page, find the **replicas: 2** entry.
+    page, find the **replicas: 3** entry.
 3.  Change the number of replicas to 4, so the line reads **replicas: 4**.
 4.  Find the **image: nginx:1.7.9** entry and change it to **image: nginx:1.8**.
 5.  Click **Edit** to update the deployment with the new YAML.
@@ -185,7 +185,7 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      nodePort: 30080
+      nodePort: 32769
   selector:
     app: nginx
 ```
