@@ -81,13 +81,13 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      nodePort: 30080
+      nodePort: 32768
   selector:
     app: nginx
 ```
 
 The service connects the cluster's internal port 80 to the external port
-30080.
+32768.
 
 1.  Repeat the previous steps and copy-paste the YAML that defines the `nginx`
     service into the **Object YAML** editor on the
@@ -95,9 +95,10 @@ The service connects the cluster's internal port 80 to the external port
     **Load Balancers** page opens.
 2.  Click the **nginx** service, and in the details pane, find the **Ports**
     section.
-3.  Click the link that's labeled **URL** to
 
-![](../images/deploy-kubernetes-workload-3.png){: .with-border}
+    ![](../images/deploy-kubernetes-workload-3.png){: .with-border}
+
+3.  Click the link that's labeled **URL** to view the default NGINX page.
 
 The YAML definition connects the service to the NGINX server by using the
 app label `nginx` and a corresponding label selector.
@@ -134,13 +135,18 @@ spec:
 ...
 ```
 
-1.  In the left pane, click **Controllers** and select the **nginx-deployment**
-    controller.
+1.  In the left pane, click **Controllers** and select **nginx-deployment**.
 2.  In the details pane, click **Configure**, and in the **Edit Deployment**
     page, find the **replicas: 2** entry.
 3.  Change the number of replicas to 4, so the line reads **replicas: 4**.
 4.  Find the **image: nginx:1.7.9** entry and change it to **image: nginx:1.8**.
-5.  Click **Edit** to update the deployment with the new YAML.
+
+    ![](../images/deploy-kubernetes-workload-4.png){: .with-border}
+
+5.  Click **Save** to update the deployment with the new YAML.
+6.  In the left pane, click **Pods** to view the newly created replicas.
+
+    ![](../images/deploy-kubernetes-workload-5.png){: .with-border}
 
 ## Use the CLI to deploy Kubernetes objects
 
@@ -185,7 +191,7 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      nodePort: 30080
+      nodePort: 32768
   selector:
     app: nginx
 ```
