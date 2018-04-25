@@ -98,6 +98,8 @@ will be available in future releases.
   * Both Docker and `kubectl` CLIs report that UCP is running Kubernetes 1.8.2,
   when in fact it is running 1.8.9.
 * Networking
+  * Swarm encrypted overlay networks might not work as expected because default
+  Kubernetes firewall rules are interfering with them. [Learn more](https://success.docker.com/article/KB000717).
   * Calico networking for Kubernetes is not supported for Microsoft Azure. UCP
   leverages Azure networking and IPAM for control-plane and connectivity.
   [Learn how to deploy EE 2.0 on Azure](https://docs.docker.com/ee/ucp/admin/install/install-on-azure/).
