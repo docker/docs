@@ -284,7 +284,7 @@ routing on the individual Docker daemon hosts.
 ### Container discovery
 
 For most situations, you should connect to the service name, which is load-balanced and will be handled by all containers ("tasks") backing the service.
-If you need to get a list of all tasks backing the service you can do a DNS lookup for tasks.<service-name>.
+If you need to get a list of all tasks backing the service you can do a DNS lookup for `tasks.<service-name>.`
 
 ## Next steps
 
