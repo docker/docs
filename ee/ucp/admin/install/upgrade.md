@@ -49,7 +49,7 @@ to install the Docker Enterprise Edition.
 Starting with the manager nodes, and then worker nodes:
 
 1. Log into the node using ssh.
-2. Upgrade the Docker Engine to version 17.06 or higher following [this pase](https://docs.docker.com/ee/upgrade/)
+2. Upgrade the Docker Engine to version 17.06 or higher. See [Upgrade Docker EE](https://docs.docker.com/ee/upgrade/).
 3. Make sure the node is healthy.
 
     In your browser, navigate to the **Nodes** page in the UCP web UI,
