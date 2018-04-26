@@ -18,6 +18,20 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-rc1-mac63 2018-04-26
+
+[Download](https://download.docker.com/mac/edge/24246/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.05.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce-rc1)
+  - [Notary 0.6.1](https://github.com/docker/notary/releases/tag/v0.6.1)
+
+* New 
+  - Re-enable raw as the the default disk format for users running macOS 10.13.4 and higher. Note this change only takes effect after a "reset to factory defaults" or "remove all data" (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
+
+* Bug fixes and minor changes
+  - Fix Docker for Mac not starting due to socket file paths being too long (typically HOME folder path being too long). Fixes [docker/for-mac#2727](https://github.com/docker/for-mac/issues/2727), [docker/for-mac#2731](https://github.com/docker/for-mac/issues/2731).
+
 ### Docker Community Edition 18.04.0-ce-mac62 2018-04-12
 
 [Download](https://download.docker.com/mac/edge/23965/Docker.dmg)
