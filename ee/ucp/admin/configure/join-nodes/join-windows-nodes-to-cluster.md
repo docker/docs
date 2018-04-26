@@ -95,7 +95,7 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 
 ## Join the Windows node to the cluster
 
-Now you can join the cluster by using the `docker cluster join` command that's
+Now you can join the cluster by using the `docker swarm join` command that's
 provided by the Docker EE web UI and CLI.
 
 1.  Log in to the Docker EE web UI with an administrator account.
@@ -114,7 +114,7 @@ provided by the Docker EE web UI and CLI.
 Copy the displayed command. It looks similar to the following:
 
 ```powershell
-docker cluster join --token <token> <ucp-manager-ip>
+docker swarm join --token <token> <ucp-manager-ip>
 ```
 
 You can also use the command line to get the join token. Using your
@@ -124,7 +124,7 @@ You can also use the command line to get the join token. Using your
 docker swarm join-token worker
 ```
 
-Run the `docker cluster join` command on each instance of Windows Server that
+Run the `docker swarm join` command on each instance of Windows Server that
 will be a worker node.
 
 ## Configure a Windows worker node manually
