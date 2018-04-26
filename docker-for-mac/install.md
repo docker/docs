@@ -6,11 +6,7 @@ title: Install Docker for Mac
 
 Docker for Mac is the
 [Community Edition (CE)](https://www.docker.com/community-edition)
-of Docker for MacOS. If you already have Docker for Mac installed, skip to
-[Get started](index.md) for a quick tour of the command line, preferences, and
-tools.
-
-To download Docker for Mac, head to Docker Store.
+of Docker for MacOS. To download Docker for Mac, head to Docker Store.
 
 [Download from Docker Store](https://store.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
 
@@ -100,14 +96,10 @@ Congratulations! You are up and running with Docker for Mac.
 * [Getting started](index.md) provides an overview of Docker for Mac, basic
   Docker command examples, how to get help or give feedback, and links to all
   topics in the Docker for Mac guide.
-
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-
 * [FAQs](faqs.md) provides answers to frequently asked questions.
-
 * [Release Notes](release-notes.md) lists component updates, new features, and
   improvements associated with Stable releases (or [Edge Release
   Notes](edge-release-notes.md)).
-
 * [Get Started with Docker](/get-started/) provides a general Docker tutorial.
