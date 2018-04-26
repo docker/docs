@@ -473,6 +473,8 @@ guides:
     title: Docker standards and compliance
   - sectiontitle: NIST
     section:
+    - path: /compliance/nist/800_37/
+      title: NIST SP 800-37 (RMF)
     - path: /compliance/nist/800_53/
       title: NIST SP 800-53
     - path: /compliance/nist/800_190/
@@ -491,6 +493,8 @@ guides:
       title: Kubernetes Benchmark
   - path: /compliance/fedramp/
     title: FedRAMP
+  - path: /compliance/fisma/
+    title: FISMA
 
 - sectiontitle: Open source at Docker
   section:
