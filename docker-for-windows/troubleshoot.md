@@ -15,8 +15,7 @@ There are several ways to get the support you need with Docker for Windows. If y
 - Refer to the knowledge base articles at the [Docker Success Center](https://success.docker.com/q/).
 - Browse the logs (in `User\AppData\Local\Docker`) by clicking **log file** in the Diagnose & Feedback window.
 - Ask questions on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
-- Submit issues at the [Docker for Windows GitHub repo](https://github.com/docker/for-win/issues).
-- Upload diagnostics in the Diagnose & Feedback window. You'll get a unique ID in return.
+- Upload diagnostics in the Diagnose & Feedback window. You'll get a unique ID in return. You can then use this ID to submit issues at the [Docker for Windows GitHub repo](https://github.com/docker/for-win/issues).
 
 ![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="500px"}
 
