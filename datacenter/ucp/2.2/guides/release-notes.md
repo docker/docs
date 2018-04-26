@@ -5,6 +5,8 @@ description: Release notes for Docker Universal Control Plane. Learn more about 
 keywords: UCP, release notes
 ---
 
+> **UCP 3.0 now available**. [You can check the release notes here](/ucp/dtr/release-notes.md).
+
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
