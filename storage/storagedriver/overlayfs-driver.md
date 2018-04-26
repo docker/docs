@@ -50,10 +50,10 @@ OverlayFS is supported if you meet the following prerequisites:
     > error, which will prevent Docker from starting.
     {:.warning}
 
-- Changing the storage driver makes any containers you have already
-  created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so that you
-  not need to re-create them later.
+- Changing the storage driver makes existing containers and images inaccessible
+  on the local system. Use `docker save` to save any images you have built or
+  push them to Docker Hub or a private registry, so that you do not need to
+  re-create them later.
 
 
 ## Configure Docker with the `overlay` or `overlay2` storage driver
