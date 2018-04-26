@@ -44,7 +44,7 @@ on the system. The OOM priority on containers is not adjusted. This makes it mor
 likely for an individual container to be killed than for the Docker daemon
 or other system processes to be killed. You should not try to circumvent
 these safeguards by manually setting `--oom-score-adj` to an extreme negative
-number on the daemon or a container, or by setting `--oom-disable-kill` on a
+number on the daemon or a container, or by setting `--oom-kill-disable` on a
 container.
 
 For more information about the Linux kernel's OOM management, see
