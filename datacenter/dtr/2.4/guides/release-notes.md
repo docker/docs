@@ -5,9 +5,10 @@ keywords: docker trusted registry, whats new, release notes
 toc_max: 2
 ---
 
-Here you can learn about new features, bug fixes, breaking changes, and
-known issues for each DTR version.
+> **DTR 2.5 now available**. [You can check the release notes here](/ee/dtr/release-notes.md).
 
+Here you can learn about new features, bug fixes, breaking changes, and
+known issues for each patch release of DTR 2.4.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
