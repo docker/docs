@@ -18,6 +18,20 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-rc1-win63 2018-04-26
+
+[Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.05.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce-rc1)
+  - [Notary 0.6.1](https://github.com/docker/notary/releases/tag/v0.6.1)
+
+* Bug fixes and minor changes
+  - Fix startup issue due to incompatibility with other programs (like Razer Synapse 3). Fixes [docker/for-win#1723](https://github.com/docker/for-win/issues/1723)
+  - Fix Kubernetes hostPath translation for Persistent Volume Claim. Previously failing PVCs must be deleted and recreated. Fixes [docker/for-win#1758](https://github.com/docker/for-win/issues/1758)
+  - Fix Kubernetes status when resetting to factory defaults.
+  
+
 ### Docker Community Edition 18.04.0-ce-win62 2018-04-12
 
 [Download](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe)
