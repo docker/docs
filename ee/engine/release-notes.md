@@ -19,6 +19,19 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-9 (2018-04-26)
+
+### Runtime
+
+* Make Swarm manager Raft quorum parameters configurable in daemon config. [moby/moby#36726](https://github.com/moby/moby/pull/36726)
+* Windows: Ignore missing tombstone files when closing an image.
+* Windows: Fix directory deletes when a container sharing a base image is running.
+
+### Swarm mode
+
+- Increase raft ElectionTick to 10xHeartbeatTick. [docker/swarmkit#2564](https://github.com/docker/swarmkit/pull/2564)
+- Adding logic to restore networks in order. [docker/swarmkit#2584](https://github.com/docker/swarmkit/pull/2584)
+
 ## 17.06.2-ee-8 (2018-04-17)
 
 ### Networking
