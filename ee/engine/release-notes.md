@@ -19,6 +19,12 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-10 (2018-04-27)
+
+### Runtime
+
+* Fix version output to not have `-dev`.
+
 ## 17.06.2-ee-9 (2018-04-26)
 
 ### Runtime
