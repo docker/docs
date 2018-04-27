@@ -868,9 +868,9 @@ $ docker service create \
 ```
 
 If a volume with the same `<VOLUME-NAME>` does not exist when a task is
-scheduled to a particular host then one will be created.  The default volume
+scheduled to a particular host, then one is created. The default volume
 driver is `local`.  To use a different volume driver with this create-on-demand
-pattern, specify the driver and its options via the `--mount` flag:
+pattern, specify the driver and its options with the `--mount` flag:
 
 ```bash
 $ docker service create \
