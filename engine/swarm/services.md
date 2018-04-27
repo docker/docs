@@ -851,11 +851,11 @@ don't specify a type.
 
 #### Data volumes
 
-Data volumes are storage that exists independently of a container. The
+Data volumes are storage that exist independently of a container. The
 lifecycle of data volumes under swarm services is similar to that under
 containers. Volumes outlive tasks and services, so their removal must be
-managed separately. Volumes can be created prior to deploying a service, or if
-they don't exist on a particular host when a task is scheduled there, they will
+managed separately. Volumes can be created before deploying a service, or if
+they don't exist on a particular host when a task is scheduled there, they are
 created automatically according to the volume specification on the service.
 
 To use existing data volumes with a service use the `--mount` flag:
