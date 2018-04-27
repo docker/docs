@@ -234,7 +234,7 @@ Remove the service, which stops all its tasks:
 $ docker service rm devtest-service
 ```
 
-Note removing the service does not remove any volumes created by the service.
+Removing the service does not remove any volumes created by the service.
 Volume removal is a separate step.
 
 #### Syntax differences for services
@@ -357,7 +357,7 @@ correctly. Look for the `Mounts` section:
 ],
 ```
 
-Stop and remove the container, and remove the volume.  Note volume removal is a
+Stop and remove the container, and remove the volume. Volume removal is a
 separate step.
 
 ```bash
