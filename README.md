@@ -9,8 +9,7 @@ open source and we deeply appreciate contributions from our community!
 ## Providing feedback
 
 We really want your feedback, and we've made it easy.  You can edit a page or 
-request changes in the right column of every page on [https://docs.docker.com/]
-(https://docs.docker.com/).  You can also rate each page by clicking a link at 
+request changes in the right column of every page on [docs.docker.com](https://docs.docker.com/).  You can also rate each page by clicking a link at 
 the footer.
 
 **Only file issues about the documentation in this repository.** One way
