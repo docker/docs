@@ -81,6 +81,20 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
+> **Important:** If your volume driver accepts a comma-separated list as an option,
+> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
+> surround it with double quotes (`"`) and surround the entire mount parameter
+> with single quotes (`'`).
+>
+> For example, the `local` driver accepts mount options as a comma-separated
+> list in the `o` parameter. This example shows the correct way to escape the list.
+>
+>     $ docker service create \
+>          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>         --name myservice \
+>         <IMAGE>
+
+
 The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
 
