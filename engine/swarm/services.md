@@ -933,9 +933,9 @@ The following examples show bind mount syntax:
 > - The Docker swarm mode scheduler may reschedule your running service
 >   containers at any time if they become unhealthy or unreachable.
 >
-> - Host bind mounts are completely non-portable. When you use bind mounts,
->   there is no guarantee that your application runs the same way in
->   development as it does in production.
+> - Host bind mounts are non-portable. When you use bind mounts, there is no
+>   guarantee that your application runs the same way in development as it does
+>   in production.
 
 ### Create services using templates
 
