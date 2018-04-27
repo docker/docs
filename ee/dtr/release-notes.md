@@ -79,15 +79,18 @@ specify `--log-protocol`.
 ### Known issues
 
 * Web UI
+  * The web UI shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
   * When deleting a repository with signed images, the DTR web UI no longer
   shows instructions on how to delete trust data.
   * There's no UI support to update mirroring policies when rotating the TLS
-  certificates used by DTR. Use the API instead. (#8389)
+  certificates used by DTR. Use the API instead.
   * The UI for promotion policies is currently broken if you have a large number
-  of repositories. (#8364)
+  of repositories.
   * Clicking "Save & Apply" on a promotions policies doesn't work.
 * Web hooks
-  * There is no web hook event for when an image is pulled. (#8145)
+  * There is no web hook event for when an image is pulled.
 * Online garbage collection
   * The events API won't report events when tags and manifests are deleted.
   * The events API won't report blobs deleted by the garbage collection job.
@@ -96,9 +99,9 @@ specify `--log-protocol`.
   * Pushes to repos with promotion policies (repo as source) are broken when an
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
-  
+
   ```
-  The data directory was initialized by PostgreSQL version 9.6, 
+  The data directory was initialized by PostgreSQL version 9.6,
   which is not compatible with this version 10.3.
   ```
   To remedy this remove the scanningstore container and the dtr-postgres volume, and perform a reconfigure
@@ -109,7 +112,7 @@ specify `--log-protocol`.
   docker run --rm -it docker/dtr:2.5.0 reconfigure ...
   ```
   Then resync the vulnerability database from the web UI.
-  
+
 
 ## Earlier versions
 
