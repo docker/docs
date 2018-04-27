@@ -851,9 +851,14 @@ don't specify a type.
 
 #### Data volumes
 
-Data volumes are storage that remain alive after a container for a task has
-been removed. The preferred method to mount volumes is to leverage an existing
-volume:
+Data volumes are storage that exist independently of a container. The
+lifecycle of data volumes under swarm services is similar to that under
+containers. Volumes outlive tasks and services, so their removal must be
+managed separately. Volumes can be created before deploying a service, or if
+they don't exist on a particular host when a task is scheduled there, they are
+created automatically according to the volume specification on the service.
+
+To use existing data volumes with a service use the `--mount` flag:
 
 ```bash
 $ docker service create \
@@ -862,11 +867,10 @@ $ docker service create \
   <IMAGE>
 ```
 
-For more information on how to create a volume, see the `volume create`
-[CLI reference](/engine/reference/commandline/volume_create.md).
-
-The following method creates the volume at deployment time when the scheduler
-dispatches a task, just before starting the container:
+If a volume with the same `<VOLUME-NAME>` does not exist when a task is
+scheduled to a particular host, then one is created. The default volume
+driver is `local`.  To use a different volume driver with this create-on-demand
+pattern, specify the driver and its options with the `--mount` flag:
 
 ```bash
 $ docker service create \

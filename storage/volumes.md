@@ -190,7 +190,8 @@ correctly. Look for the `Mounts` section:
 This shows that the mount is a volume, it shows the correct source and
 destination, and that the mount is read-write.
 
-Stop the container and remove the volume.
+Stop the container and remove the volume. Note volume removal is a separate
+step.
 
 ```bash
 $ docker container stop devtest
@@ -232,6 +233,9 @@ Remove the service, which stops all its tasks:
 ```bash
 $ docker service rm devtest-service
 ```
+
+Removing the service does not remove any volumes created by the service.
+Volume removal is a separate step.
 
 #### Syntax differences for services
 
@@ -281,8 +285,9 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-After running either of these examples, run the following commands to clean up the
-containers and volumes.
+After running either of these examples, run the following commands to clean up
+the containers and volumes.  Note volume removal is a separate step.
+
 
 ```bash
 $ docker container stop nginxtest
@@ -352,7 +357,8 @@ correctly. Look for the `Mounts` section:
 ],
 ```
 
-Stop and remove the container, and remove the volume:
+Stop and remove the container, and remove the volume. Volume removal is a
+separate step.
 
 ```bash
 $ docker container stop nginxtest
