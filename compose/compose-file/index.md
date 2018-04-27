@@ -646,7 +646,7 @@ in the [swarm](/engine/swarm/) topics.)
 
 Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
 
-    version: '3'
+    version: '3.3'
     services:
       db:
         image: postgres
