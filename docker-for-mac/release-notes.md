@@ -49,7 +49,7 @@ for Mac](install.md#download-docker-for-mac).
 [Download](https://download.docker.com/mac/stable/23751/Docker.dmg)
 
 * Bug fixes and minor changes
-  - Fix Upgrade straight from 17.09 versions where Docker for Mac cannot restart once the upgrade has been perfomed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
+  - Fix Upgrade straight from 17.09 versions where Docker for Mac cannot restart once the upgrade has been performed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
 
 ### Docker Community Edition 18.03.0-ce-mac59 2018-03-26
 
@@ -71,12 +71,12 @@ for Mac](install.md#download-docker-for-mac).
 
 * Bug fixes and minor changes
   - Fix daemon not starting properly when setting TLS-related options. Fixes [docker/for-mac#2663](https://github.com/docker/for-mac/issues/2663)
-  - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - DNS name `host.docker.internal` should be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
   - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. `host.docker.internal`).
   - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
   - Clearer error message when incompatible hardware is detected.
   - Fix some cases where selecting "Reset" after an error did not reset properly.
-  - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
+  - Fix incorrect NTP config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/docker-for-mac/docker-toolbox/#migrating-from-docker-toolbox-to-docker-for-mac) ).
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
@@ -131,7 +131,7 @@ for Mac](install.md#download-docker-for-mac).
   - Don't break HTTP traffic between containers by forwarding them via the external proxy. (See [docker/for-mac#981](https://github.com/docker/for-mac/issues/981))
   - Filesharing settings are now stored in settings.json.
   - Daemon restart button has been moved to settings / Reset Tab.
-  - Better VM state handling & error messsages in case of VM crashes.
+  - Better VM state handling & error messages in case of VM crashes.
   - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201))
 
 ## Stable Releases of 2017
