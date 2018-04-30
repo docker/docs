@@ -206,7 +206,7 @@ the default registry configuration):
     connect to external networks using the host machine's network connection.
 
 5.  Docker starts the container and executes `/bin/bash`. Because the container
-    is run interactively and attached to your terminal (due to the `-i` and `-t` 
+    is run interactively and attached to your terminal (due to the `-i` and `-t`
     flags), you can provide input using your keyboard and output is logged to
     your terminal.
 
