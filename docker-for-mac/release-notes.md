@@ -20,6 +20,18 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.03.1-ce-mac65 2018-04-30
+
+[Download](https://download.docker.com/mac/stable/24312/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
+  - [Docker compose 1.21.1](https://github.com/docker/compose/releases/tag/1.21.1)
+  - [Notary 0.6.1](https://github.com/docker/notary/releases/tag/v0.6.1)
+
+* Bug fixes and minor changes
+  - Fix Docker for Mac not starting due to socket file paths being too long (typically HOME folder path being too long). Fixes [docker/for-mac#2727](https://github.com/docker/for-mac/issues/2727), [docker/for-mac#2731](https://github.com/docker/for-mac/issues/2731).
+
 ### Docker Community Edition 18.03.1-ce-mac64 2018-04-26
 
 [Download](https://download.docker.com/mac/stable/24245/Docker.dmg)
