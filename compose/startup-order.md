@@ -76,7 +76,27 @@ script:
     ```none
     command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
     ```
+- You can also use no tool at all and include the check in the command.
 
+    ```
+        services:
+          practice_docker: 
+            image: dockerhubusername/practice_docker
+            ports: 
+              - 80:3000
+            command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python app.py'
+            depends_on:
+              - db
+            environment:
+              - DATABASE_URL=postgres://postgres:password@db:5432/practicedocker
+              - PORT=3000   
+          db:
+            image: postgres
+            environment:
+              - POSTGRES_USER=postgres
+              - POSTGRES_PASSWORD=password
+              - POSTGRES_DB=practicedocker
+      
 
 ## Compose documentation
 
