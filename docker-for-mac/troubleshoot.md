@@ -47,53 +47,46 @@ GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
 ## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
-browse the logs yourself.
+browse the logs yourself.  The following documentation is about macOS 10.12
+onwards; for older versions, see [older
+documentation](v17.12/docker-for-mac/troubleshoot/#logs).
 
-#### Use the command line to view logs
+#### In a terminal
 
-To view Docker for Mac logs at the command line, type this command in a terminal
-window or your favorite shell.
+To watch the live flow of Docker for Mac logs at the command line, run this from
+your favorite shell.
 
-    $ syslog -k Sender Docker
+```bash
+$ pred='process matches ".*(ocker|vpnkit).*"
+  || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
+$ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
+```
 
-Alternatively, you can send the output of this command to a file. The following
-command redirects the log output to a file called `my_docker_logs.txt`.
+Alternatively, to collect the last day of logs (`1d`) in a file, run:
 
-    $ syslog -k Sender Docker > ~/Desktop/my_docker_logs.txt
+```
+$ show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
+```
 
-#### Use the Mac Console for log queries
+#### In the Console app
 
-Macs provide a built-in log viewer. You can use the Mac Console System Log Query
-to check Docker app logs.
+Macs provide a built-in log viewer, named "Console", which you can use to check
+Docker logs.
 
-The Console lives on your Mac hard drive in `Applications` > `Utilities`. You
-can bring it up quickly by just searching for it with Spotlight Search.
+The Console lives in `/Applications/Utilities`; you can search for it with
+Spotlight Search.
 
-To find all Docker app log messages, do the following.
+To read the Docker app log messages, in the top left corner of the window, type
+"docker" and press Enter.  Then select the "Any" button that appeared on its
+left, and select "Process" instead.
 
-1. From the Console menu, choose **File** > **New System Log Query...**
-
-    ![Mac Console search for Docker app](images/console_logs_search.png)
-
-    * Name your search (for example `Docker`)
-    * Set the **Sender** to **Docker**
-
-2. Click **OK** to run the log query.
-
-  ![Mac Console display of Docker app search results](images/console_logs.png)
+![Mac Console search for Docker app](images/console.png)
 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
-For example, you could construct a search for log messages sent by Docker that
-contain the word `hypervisor` then filter the results by time (earlier, later,
-now).
-
-The diagnostics and usage information to the left of the results provide
-auto-generated reports on packages.
 
 <a name="troubleshoot"></a>
-
 ## Troubleshooting
 
 ### Make sure certificates are set up correctly
