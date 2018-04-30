@@ -8,9 +8,10 @@ open source and we deeply appreciate contributions from our community!
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy.  You can edit a page or 
-request changes in the right column of every page on [docs.docker.com](https://docs.docker.com/).  You can also rate each page by clicking a link at 
-the footer.
+We really want your feedback, and we've made it easy.  You can edit a page or
+request changes in the right column of every page on
+[docs.docker.com](https://docs.docker.com/).  You can also rate each page by
+clicking a link at the footer.
 
 **Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -278,11 +279,39 @@ Bootstrap JS are loaded.
 
 > **Note**: In general, this is a bad idea.
 
+### Images
+
+Don't forget to remove images that are no longer used.  Try to keep the images
+sorted in the local `images/` directory, with names that naturally group related
+images together in alphabetical order; for instance prefer
+`settings-file-share.png` and `settings-proxies.png` to
+`file-share-settings.png` and `proxies-settings.png`.
+
+On Mac, when applicable capture windows rather than capture rectangular regions;
+this eliminates unpleasant background appearing in the documentation, and saves
+the editors the need to crop.  Capture windows without shadows.  To this end,
+once you pressed `Command-Shift-4`, press Option while clicking on the window.
+To disable shadows once for all, run
+
+```bash
+$ defaults write com.apple.screencapture disable-shadow -bool TRUE
+$ killall SystemUIServer  # restart it.
+```
+
+(you can restore shadows later with `-bool FALSE`).
+
+In order to keep the Git repository light, _please_ compress the images
+(losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
+instance.  Be sure to compress the images *before* adding them to the
+repository, doing it afterwards actually worsens the impact on the Git repo (but
+still optimizes the bandwith during browsing).
+
 ## Building archives and the live published docs
 
 All the images described below are automatically built using Docker Cloud. To
-build the site manually, from scratch, including all utility and archive
-images, see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
+build the site manually, from scratch, including all utility and archive images,
+see the [README in the publish-tools
+branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
 
 - Some utility images are built from Dockerfiles in the `publish-tools` branch.
   See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
