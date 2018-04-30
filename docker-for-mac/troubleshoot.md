@@ -27,20 +27,20 @@ the log data.
 Choose ![whale menu](images/whale-x.png){: .inline} -->
 **Diagnose & Feedback** from the menu bar.
 
-![Diagnose & Feedback](images/diagnose-feedback.png)
+![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
 
 Select **Diagnose**.  It runs diagnostics, shows results, and uploads the
 results to Docker.  A diagnostic ID is generated, which must be provided when
 communicating with the Docker Team.  Optionally, you can open an issue on GitHub
 using the uploaded results and ID as a basis.
 
-![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png)
+![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
 
 If you click **Report an issue**, this opens [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
 “create new issue” template, to be completed before submission.
 
-![issue template](images/issues-template.png)
+![issue template](images/issues-template.png){:width="600px"}
 
 
 <a name="logs"></a>
