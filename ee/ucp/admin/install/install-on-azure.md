@@ -114,7 +114,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
     docker secret create azure_ucp_admin.toml azure_ucp_admin.toml
     ```
 
-8.  Create a global swarm service using the [ddebroy/azip](https://hub.docker.com/r/ddebroy/azip/)
+8.  Create a global swarm service using the [docker4x/az-nic-ips](https://hub.docker.com/r/docker4x/az-nic-ips/)
     image on Docker Hub. Use the Swarm secret to prepopulate the virtual machines
     with the desired number of IP addresses per VM from the VNET pool. Set the
     number of IPs to allocate to each VM through the IPCOUNT environment variable.
@@ -129,7 +129,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
       --env IPCOUNT=128 \
       --name ipallocator \
       --constraint "node.platform.os == linux" \
-      ddebroy/azip
+      docker4x/az-nic-ips
     ```
 
 [Install UCP on the cluster](#install-ucp-on-the-cluster).
