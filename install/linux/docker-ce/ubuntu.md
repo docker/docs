@@ -6,6 +6,8 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ce/ubuntu/
+- /install/linux/ubuntu/
+- /engine/installation/linux/ubuntu/
 title: Get Docker CE for Ubuntu
 toc_max: 4
 ---

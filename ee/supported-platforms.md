@@ -4,6 +4,8 @@ description: Information about Docker Enterprise Edition Platform 2.0
 keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 redirect_from:
   - /enterprise/supported-platforms/
+green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; margin:auto;"}'
+install-prefix-ee: '/install/linux/docker-ee'
 ---
 
 Docker Enterprise Edition (*Docker EE*) is designed for enterprise
@@ -16,8 +18,9 @@ options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-editi
 <!-- This is populated by logic in js/archive.js -->
 <p id="ee-version-div"></p>
 
-The free Docker products continue to be available as the Docker Community
-Edition (*Docker CE*).
+## Docker EE tiers
+
+{% include docker_ce_ee.md %}
 
 ## Supported platforms
 
@@ -27,20 +30,38 @@ instructions for the corresponding platform. Docker EE is an integrated,
 supported, and certified container platform for the listed cloud providers and
 operating systems.
 
-{% include docker_platform_matrix.md %}
 
-## Docker EE feature tiers
+### On-premise
 
-Docker EE is available in three tiers:
+These are the operating systems where you can install Docker EE.
 
--  **Basic:** The Docker platform for certified infrastructure, with support
-   from Docker Inc. and certified containers and plugins from Docker Store.
--  **Standard:** Adds advanced image and container management, LDAP/AD user
-   integration, and role-based access control. Together, these features
-   comprise Docker Enterprise Edition.
--  **Advanced:** Adds
-   [Docker Security Scanning](https://blog.docker.com/2016/05/docker-security-scanning/)
-   and continuous vulnerability monitoring.
+| Platform                                                             |     x86_64 / amd64     |  IBM Power (ppc64le)   |     IBM Z (s390x)      |
+|:---------------------------------------------------------------------|:----------------------:|:----------------------:|:----------------------:|
+| [CentOS]({{ page.install-prefix-ee }}/centos.md)                     | {{ page.green-check }} |                        |                        |
+| [Oracle Linux]({{ page.install-prefix-ee }}/oracle.md)               | {{ page.green-check }} |                        |                        |
+| [Red Hat Enterprise Linux]({{ page.install-prefix-ee }}/rhel.md)     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
+| [SUSE Linux Enterprise Server]({{ page.install-prefix-ee }}/suse.md) | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
+| [Ubuntu]({{ page.install-prefix-ee }}/ubuntu.md)                     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
+| [Microsoft Windows Server 2016](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
+
+> Limitations on IBM Power architecture
+>
+> Neither UCP managers nor workers are supported on IBM Power.
+
+### Docker Certified Infrastructure
+
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
+Docker Enterprise Edition (EE) on a range of infrastructure choices. Each Docker
+Certified Infrastructure includes a reference architecture, automation templates,
+and third-party ecosystem solution briefs.
+
+| Platform                                                                                | Docker Enterprise Edition |
+|:----------------------------------------------------------------------------------------|:-------------------------:|
+| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}   |
+| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}   |
+| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}   |
+| IBM Cloud                                                                               |        Coming soon        |
+
 
 ## Docker Enterprise Edition release cycles
 
