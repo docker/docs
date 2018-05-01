@@ -102,7 +102,7 @@ for Mac](install.md#download-docker-for-mac).
 
 * Bug fixes and minor changes
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. This change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
-  - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - DNS name `host.docker.internal` should be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
   - Kubernetes Load balanced services are no longer marked as `Pending`.
   - Fix hostPath mounts in Kubernetes.
   - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
@@ -132,7 +132,7 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - Fix Kubernetes-compose integration update that was causing startup failure. Fixes [docker/for-mac#2536](https://github.com/docker/for-mac/issues/2536)
   - Fix some cases where selecting "Reset" after an error did not reset properly.
-  - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
+  - Fix incorrect NTP config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
 
 ### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26
 
@@ -180,7 +180,7 @@ for Mac](install.md#download-docker-for-mac).
 
 * New
   - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See https://docs.docker.com/docker-for-mac/kubernetes/
-  - DNS name `docker.for.mac.host.internal` shoud be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
 
 * Bug fixes and minor changes
   - The docker engine is configured to use VPNKit as an HTTP proxy, fixing 'docker pull' in environments with no DNS. Fixes [docker/for-mac#2320](https://github.com/docker/for-mac/issues/2320)
@@ -224,7 +224,7 @@ for Mac](install.md#download-docker-for-mac).
   - Filesharing settings are now stored in settings.json
   - Daemon restart button has been moved to settings / Reset Tab
   - Display various component versions in About box
-  - Better VM state handling & error messsages in case of VM crashes
+  - Better VM state handling & error messages in case of VM crashes
 
 ### Docker Community Edition 17.11.0-ce-mac40 2017-11-22
 
