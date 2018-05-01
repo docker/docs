@@ -21,6 +21,5 @@ redirect_from:
   - /docker-for-ibm-cloud/why/
 ---
 
-Docker for IBM Cloud has been replaced by Docker Certified Infrastructure.
-
-{% include docker_cloud_matrix.md %}
+Docker for IBM Cloud has been replaced by
+[Docker Certified Infrastructure](/ee/supported-platforms.md).

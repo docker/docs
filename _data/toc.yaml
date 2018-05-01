@@ -18,123 +18,136 @@ horizontalnav:
 guides:
 - sectiontitle: Get Docker
   section:
-  - path: /install/
-    title: Install Docker
-  - sectiontitle: Docker EE
-    section:
-    - path: /install/windows/docker-ee/
-      title: Windows Server
-    - path: /install/linux/docker-ee/ubuntu/
-      title: Ubuntu
-    - path: /install/linux/docker-ee/rhel/
-      title: RHEL
-    - path: /install/linux/docker-ee/centos/
-      title: CentOS
-    - path: /install/linux/docker-ee/oracle/
-      title: Oracle Linux
-    - path: /install/linux/docker-ee/suse/
-      title: SLES
+  - path: /install/overview/
+    title: Overview of Docker editions
   - sectiontitle: Docker CE
     section:
-    - path: /docker-for-mac/install/
-      title: Mac
-    - path: /docker-for-windows/install/
-      title: Windows
-    - path: /install/linux/docker-ce/ubuntu/
-      title: Ubuntu
-    - path: /install/linux/docker-ce/debian/
-      title: Debian
-    - path: /install/linux/docker-ce/centos/
-      title: CentOS
-    - path: /install/linux/docker-ce/fedora/
-      title: Fedora
-    - path: /install/linux/docker-ce/binaries/
-      title: Binaries
-  - sectiontitle: Platforms supporting Docker EE and Docker CE
-    section:
-    - path: /install/linux/centos/
-      title: CentOS
-    - path: /install/linux/ubuntu/
-      title: Ubuntu
-  - path: /install/linux/linux-postinstall/
-    title: Optional Linux post-installation steps
-  - sectiontitle: Docker Edge
-    section:
-    - path: /edge/
-      title: Overview
-    - path: /edge/engine/reference/commandline/docker/
-      title: Docker Edge CLI reference
-      nosync: true
-  - sectiontitle: Docker for AWS
-    section:
-    - path: /docker-for-aws/why/
-      title: Why Docker for AWS?
-    - path: /docker-for-aws/
-      title: Setup & prerequisites
-    - path: /docker-for-aws/iam-permissions/
-      title: IAM permissions
-    - path: /docker-for-aws/scaling/
-      title: Scaling
-    - path: /docker-for-aws/upgrade/
-      title: Upgrading
-    - path: /docker-for-aws/deploy/
-      title: Deploy your app
-    - path: /docker-for-aws/persistent-data-volumes/
-      title: Persistent data volumes
-    - path: /docker-for-aws/load-balancer/
-      title: Load balancer
-    - path: /docker-for-aws/faqs/
-      title: FAQs
-    - path: /docker-for-aws/opensource/
-      title: Open source licensing
-    - path: /docker-for-aws/release-notes/
-      title: Release notes
-    - path: /docker-for-aws/archive/
-      title: Template archive
-  - sectiontitle: Docker for Azure
-    section:
-    - path: /docker-for-azure/why/
-      title: Why Docker for Azure?
-    - path: /docker-for-azure/
-      title: Setup & prerequisites
-    - path: /docker-for-azure/upgrade/
-      title: Upgrading
-    - path: /docker-for-azure/deploy/
-      title: Deploy your app
-    - path: /docker-for-azure/persistent-data-volumes/
-      title: Persistent data volumes
-    - path: /docker-for-azure/faqs/
-      title: FAQs
-    - path: /docker-for-azure/opensource/
-      title: Open source licensing
-    - path: /docker-for-azure/release-notes/
-      title: Release notes
-    - path: /docker-for-azure/archive/
-      title: Template archive
-  - sectiontitle: Docker Toolbox (legacy)
-    section:
-    - path: /toolbox/overview/
-      title: Toolbox overview
-    - path: /toolbox/toolbox_install_mac/
-      title: Install Toolbox on Mac
-    - path: /toolbox/toolbox_install_windows/
-      title: Install Toolbox on Windows
-    - sectiontitle: Kitematic
+    - title: About Docker CE
+      path: /install/
+    - sectiontitle: Cloud
       section:
-      - path: /kitematic/userguide/
-        title: "Kitematic user guide: intro &amp; overview"
-      - path: /kitematic/nginx-web-server/
-        title: Set up an Nginx web server
-      - path: /kitematic/minecraft-server/
-        title: Set up a Minecraft Server
-      - path: /kitematic/rethinkdb-dev-database/
-        title: Creating a local RethinkDB database for development
-      - path: /kitematic/faq/
-        title: Frequently asked questions
-      - path: /kitematic/known-issues/
-        title: Known issues
-    - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
+      - sectiontitle: Docker for AWS
+        section:
+        - path: /docker-for-aws/why/
+          title: Why Docker for AWS?
+        - path: /docker-for-aws/
+          title: Setup & prerequisites
+        - path: /docker-for-aws/iam-permissions/
+          title: IAM permissions
+        - path: /docker-for-aws/scaling/
+          title: Scaling
+        - path: /docker-for-aws/upgrade/
+          title: Upgrading
+        - path: /docker-for-aws/deploy/
+          title: Deploy your app
+        - path: /docker-for-aws/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-aws/load-balancer/
+          title: Load balancer
+        - path: /docker-for-aws/faqs/
+          title: FAQs
+        - path: /docker-for-aws/opensource/
+          title: Open source licensing
+        - path: /docker-for-aws/release-notes/
+          title: Release notes
+        - path: /docker-for-aws/archive/
+          title: Template archive
+      - sectiontitle: Docker for Azure
+        section:
+        - path: /docker-for-azure/why/
+          title: Why Docker for Azure?
+        - path: /docker-for-azure/
+          title: Setup & prerequisites
+        - path: /docker-for-azure/upgrade/
+          title: Upgrading
+        - path: /docker-for-azure/deploy/
+          title: Deploy your app
+        - path: /docker-for-azure/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-azure/faqs/
+          title: FAQs
+        - path: /docker-for-azure/opensource/
+          title: Open source licensing
+        - path: /docker-for-azure/release-notes/
+          title: Release notes
+        - path: /docker-for-azure/archive/
+          title: Template archive
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
+    - title: MacOS
+      path: /docker-for-mac/install/
+      nosync: true
+    - title: Microsoft Windows
+      path: /docker-for-windows/install/
+      nosync: true
+    - sectiontitle: Docker CE Edge releases
+      section:
+      - path: /edge/
+        title: Overview
+      - path: /edge/engine/reference/commandline/docker/
+        title: Docker Edge CLI reference
+        nosync: true
+    - sectiontitle: Docker Toolbox (legacy)
+      section:
+      - path: /toolbox/overview/
+        title: Toolbox overview
+      - path: /toolbox/toolbox_install_mac/
+        title: Install Toolbox on Mac
+      - path: /toolbox/toolbox_install_windows/
+        title: Install Toolbox on Windows
+      - sectiontitle: Kitematic
+        section:
+        - path: /kitematic/userguide/
+          title: "Kitematic user guide: intro &amp; overview"
+        - path: /kitematic/nginx-web-server/
+          title: Set up an Nginx web server
+        - path: /kitematic/minecraft-server/
+          title: Set up a Minecraft Server
+        - path: /kitematic/rethinkdb-dev-database/
+          title: Creating a local RethinkDB database for development
+        - path: /kitematic/faq/
+          title: Frequently asked questions
+        - path: /kitematic/known-issues/
+          title: Known issues
+      - path: /toolbox/faqs/troubleshoot/
+        title: Troubleshooting
+    - title: Release notes
+      path: /release-notes/docker-ce/
+      nosync: true
+  - sectiontitle: Docker EE
+    section:
+    - title: About Docker EE
+      path: /ee/supported-platforms/
+      nosync: true
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ee/centos/
+        title: CentOS
+      - path: /install/linux/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /install/linux/docker-ee/rhel/
+        title: RHEL
+      - path: /install/linux/docker-ee/suse/
+        title: SLES
+      - path: /install/linux/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /install/windows/docker-ee/
+      title: Microsoft Windows Server
+    - title: Release notes
+      path: /ee/engine/release-notes/
+      nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/migration/
@@ -145,14 +158,6 @@ guides:
         title: Deprecated Docker features
       - path: /engine/faq/
         title: FAQ
-  - sectiontitle: Release notes
-    section:
-      - path: /ee/engine/release-notes/
-        title: Docker EE
-        nosync: true
-      - path: /release-notes/docker-ce/
-        title: Docker CE
-        nosync: true
 - sectiontitle: Get started
   section:
   - sectiontitle: Get started with Docker
