@@ -302,7 +302,7 @@ To interpret the results of a scanned image:
 * If you use Docker’s Scanning Service, you can subscribe to a notification
   service for new vulnerabilities.
 
-* Failure to meet above SLAs may cause the listing is put on “hold”.
+* Failure to meet above SLAs may cause the listing to be put on “hold”.
 
 * A warning label shows up on the marketplace listing. An email is sent to the
   users who have downloaded and subscribed for notifications.
