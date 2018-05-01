@@ -3,7 +3,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /manuals/
+  path: /ee/
   node: manuals
 - title: Glossary
   path: /glossary/
