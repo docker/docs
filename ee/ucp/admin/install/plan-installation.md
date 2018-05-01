@@ -40,6 +40,10 @@ Docker UCP requires each node on the cluster to have a static IP address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
+## Avoid IP range conflicts
+
+The default Kubernetes cluster IP pool for the pods is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
+
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
