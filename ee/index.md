@@ -1,9 +1,10 @@
 ---
 title: Docker Enterprise Edition Platform
-description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker. 
+description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
 keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
+  - /manuals/
 ---
 
 Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
