@@ -60,6 +60,8 @@ command.
 | `--controller-port`      | Port for the web UI and API                                                                      |
 | `--swarm-grpc-port`      | Port for communication between nodes                                                             |
 | `--cni-installer-url`    | A URL pointing to a Kubernetes YAML file to be used as an installer for the CNI plugin of the cluster. If specified, the default CNI plugin is not installed. If the URL uses the HTTPS scheme, no certificate verification is performed. |
+| `--pod-cidr`             | Kubernetes cluster IP pool for the pods to allocated IP from (Default: 192.168.0.0/16)           |
+| `--cloud-provider`       | The cloud provider for the cluster                                                               |
 | `--dns`                  | Set custom DNS servers for the UCP containers                                                    |
 | `--dns-opt`              | Set DNS options for the UCP containers                                                           |
 | `--dns-search`           | Set custom DNS search domains for the UCP containers                                             |
