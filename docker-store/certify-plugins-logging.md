@@ -18,7 +18,7 @@ This page explains how publishers can successfully test their **Docker logging p
 
 You must use the tool, `inspectDockerLoggingPlugin`, to certify your content for publication on Docker Store by ensuring that your Docker logging plugins conform to best practices.
 
-The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugin can be installed and works on Docker Enterprise Edition. It also runs a container from an official Docker image of `alpine:latest` and outputs the contents of a file named `quotes.txt` (included in this repo). In sum, the `inspectDockerLoggingPlugin` command:
+The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugin can be installed and works on Docker Enterprise Edition. It also runs a container from an official Docker image of `alpine:latest` and outputs the contents of a file named `quotes.txt` (available for download). In sum, the `inspectDockerLoggingPlugin` command:
 
 - Inspects and displays the Docker logging plugin.
 
@@ -164,7 +164,9 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     chmod u+x inspectDockerLoggingPlugin
     ```
 
-3.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
+3.  Download [`quotes.txt`](https://s3.amazonaws.com/store-logos-us-east-1/certification/quotes.txt) and put it in the same directory.
+
+4.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
 
     ![product ID](images/store-product-id.png)
 
