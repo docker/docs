@@ -2537,7 +2537,7 @@ manuals:
             title: Create promotion policies
         - path: /datacenter/dtr/2.4/reference/api/
           title: API reference
-        - path: /datacenter/dtr/2.4/guides/release-notes/
+        - path: /ee/dtr/release-notes/
           title: Release notes
         - path: /datacenter/dtr/2.4/guides/support/
           title: Get support
