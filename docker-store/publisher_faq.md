@@ -45,6 +45,10 @@ Yes. You can submit your content as a team.
 
 ## Product submission
 
+### What exactly is a customer given access to once they're entitled to a given product plan?
+
+The customer will be given the permissions to docker pull any tag associated with the source repo specified. We recommend that you create a distinct repo per plan and only use tags for different versions of that specific plan. For example, if you have a community, pro, and enterprise plan of a single product, you should create three separate repos, `namespace/community, namespace/pro, and namespace/enterprise`. Once a customer is entitled to your enterprise plan, they will be able to pull `store/namespace/enterprise:anytag`.
+
 ### How long does it typically take to have an image approved?
 
 2 Weeks.
