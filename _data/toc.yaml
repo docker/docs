@@ -1881,7 +1881,7 @@ manuals:
               title: Grant access to secrets
         - path: /datacenter/ucp/2.2/reference/api/
           title: API reference
-        - path: /datacenter/ucp/2.2/guides/release-notes/
+        - path: /ee/ucp/release-notes/
           title: Release notes
         - path: /datacenter/ucp/2.2/guides/get-support/
           title: Get support
