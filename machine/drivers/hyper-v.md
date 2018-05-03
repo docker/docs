@@ -65,7 +65,7 @@ Make sure you have Ethernet connectivity while you are doing this.
 
 Open the **Hyper-V Manager**. (On Windows 10, just search for the Hyper-V Manager in the search field in the lower left search field.)
 
-Select the Virtual Switch Manager on the left-side **Actions** panel.
+Select the Virtual Switch Manager in the right-side **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
