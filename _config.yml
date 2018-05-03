@@ -86,66 +86,13 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      defaultassignee: gbarr01
       toc_min: 2
       toc_max: 3
       tree: true
   - scope:
-      path: "compose"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "cs-engine"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "datacenter"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "datacenter/ucp"
-    values:
-      assignee: "jimgalasyn"
-  - scope:
-      path: "docker-for-mac"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "docker-for-windows"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "docker-hub"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "docker-store"
-    values:
-      assignee: "gbarr01"
-  - scope:
       path: "install"
     values:
       win_latest_build: "docker-17.06.2-ee-8"
-  - scope:
-      path: "kitematic"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "machine"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "notary"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "registry"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "toolbox"
-    values:
-      assignee: "gbarr01"
   - scope:
       path: "datacenter"
     values:
