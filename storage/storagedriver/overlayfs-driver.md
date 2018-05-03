@@ -17,7 +17,7 @@ storage driver as `overlay` or `overlay2`.
 > `overlay` driver, because it is more efficient in terms of inode utilization.
 > To use the new driver, you need version 4.0 or higher of the Linux kernel,
 > unless you are a Docker EE user on RHEL or CentOS, in which case you need
-> version 3.10.0-693 or higher of the kernel and to follow some extra steps.
+> version 3.10.0-514 or higher of the kernel and to follow some extra steps.
 >
 > For more information about differences between `overlay` vs `overlay2`, check
 > [Docker storage drivers](select-storage-driver.md).
@@ -32,7 +32,7 @@ OverlayFS is supported if you meet the following prerequisites:
 - The `overlay` driver is allowed but not recommended for Docker CE.
 
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
-  version 3.10.0-693 of the kernel or higher. Docker EE users using kernels older
+  version 3.10.0-514 of the kernel or higher. Docker EE users using kernels older
   than 4.0 need to follow some extra steps, outlined below.
   If you use an older kernel, you need to use the `overlay` driver, which is not
   recommended.
@@ -102,7 +102,7 @@ Before following this procedure, you must first meet all the
     > for version 4.0 or higher of the Linux kernel. Your `daemon.json` should
     > look like the following. **This is only needed for Docker EE users of RHEL
     > or CentOS.** Do not attempt to use `overlay2` with kernel versions older
-    > than 3.10.0-693.
+    > than 3.10.0-514.
     >
     > ```json
     > {
