@@ -1506,7 +1506,7 @@ manuals:
   - path: /ee/
     title: About Docker EE
   - title: Try Docker EE on the cloud
-    path: https://dockertrial.com
+    path: https://trial.docker.com
   - path: /ee/supported-platforms/
     title: Supported platforms
   - path: /ee/end-to-end-install/
