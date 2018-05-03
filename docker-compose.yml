@@ -1,6 +1,9 @@
 version: "2"
 services:
   docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: docs/docstage
     ports:
      - "4000:4000"
