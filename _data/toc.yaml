@@ -130,7 +130,6 @@ guides:
     section:
     - title: About Docker EE
       path: /ee/supported-platforms/
-      nosync: true
     - sectiontitle: Linux
       section:
       - path: /install/linux/docker-ee/centos/
@@ -1509,6 +1508,7 @@ manuals:
     path: https://trial.docker.com
   - path: /ee/supported-platforms/
     title: Supported platforms
+    nosync: true
   - path: /ee/end-to-end-install/
     title: Deploy Docker EE standard
   - path: /ee/backup/
@@ -1521,7 +1521,7 @@ manuals:
     title: Manage usage data collection
   - sectiontitle: Docker EE Engine
     section:
-    - path: /engine/installation/
+    - path: /ee/supported-platforms/
       title: Install Docker EE Engine
       nosync: true
     - title: Release notes
