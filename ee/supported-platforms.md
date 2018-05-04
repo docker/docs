@@ -31,7 +31,7 @@ supported, and certified container platform for the listed cloud providers and
 operating systems.
 
 
-### On-premise
+### On-premises
 
 These are the operating systems where you can install Docker EE.
 
