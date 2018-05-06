@@ -33,7 +33,7 @@ Also, make sure the hosts are running one of these operating systems:
 ## Step 1: Install Docker EE Container Engine
 
 Install the Docker Enterprise Edition container engine on all hosts you want
-to manage by following [these instructions](/install/index.md).
+to manage by following [these instructions](/ee/supported-platforms.md).
 
 ## Step 2: Install Universal Control Plane
 
