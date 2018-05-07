@@ -281,24 +281,27 @@ Bootstrap JS are loaded.
 
 ### Images
 
-Don't forget to remove images that are no longer used.  Try to keep the images
-sorted in the local `images/` directory, with names that naturally group related
-images together in alphabetical order; for instance prefer
-`settings-file-share.png` and `settings-proxies.png` to
-`file-share-settings.png` and `proxies-settings.png`.
+Don't forget to remove images that are no longer used.  Keep the images sorted
+in the local `images/` directory, with names that naturally group related images
+together in alphabetical order.  For instance prefer `settings-file-share.png`
+and `settings-proxies.png` to `file-share-settings.png` and
+`proxies-settings.png`.  You may also use numbers, especially in the case of a
+sequence, e.g., `run-only-the-images-you-trust-1.svg`
+`run-only-the-images-you-trust-2.png` `run-only-the-images-you-trust-3.png`.
 
-On Mac, when applicable capture windows rather than capture rectangular regions;
-this eliminates unpleasant background appearing in the documentation, and saves
-the editors the need to crop.  Capture windows without shadows.  To this end,
-once you pressed `Command-Shift-4`, press Option while clicking on the window.
-To disable shadows once for all, run
+When applicable, capture windows rather than rectangular regions.  This
+eliminates unpleasant background and saves the editors the need to crop.
+
+On Mac, capture windows without shadows.  To this end, once you pressed
+`Command-Shift-4`, press Option while clicking on the window.  To disable
+shadows once for all, run:
 
 ```bash
 $ defaults write com.apple.screencapture disable-shadow -bool TRUE
 $ killall SystemUIServer  # restart it.
 ```
 
-(you can restore shadows later with `-bool FALSE`).
+You can restore shadows later with `-bool FALSE`.
 
 In order to keep the Git repository light, _please_ compress the images
 (losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
