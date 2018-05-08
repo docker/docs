@@ -99,12 +99,14 @@ In this example we'll delegate trust to `targets/releases` and `targets/admin`:
 ```bash
 # Delegate trust, and add that public key with the role targets/releases
 notary delegation add --publish \
-  dtr.example.org/dev/nginx targets/releases \
+  dtr.example.org/dev/nginx \
+  targets/releases \
   --all-paths <ucp-cert.pem>
 
 # Delegate trust, and add that public key with the role targets/admin
 notary delegation add --publish \
-  dtr.example.org/dev/nginx targets/admin \
+  dtr.example.org/dev/nginx \
+  targets/admin \
   --all-paths <ucp-cert.pem>
 ```
 

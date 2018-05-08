@@ -101,7 +101,7 @@ the following content:
 {
   "trust_dir" : "~/.docker/trust",
   "remote_server": {
-    "url": "<dtr-url>",
+    "url": "https://<dtr-url>:<dtr-port>",
     "root_ca": "<dtr-ca.pem>"
   }
 }
@@ -139,4 +139,3 @@ notary key list
 ```
 
 The key you've imported should be listed with the role `delegation`.
-
