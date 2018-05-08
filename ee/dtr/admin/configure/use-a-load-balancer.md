@@ -37,9 +37,10 @@ pool or not.
 Also, make sure you configure your load balancer to:
 
 * Load balance TCP traffic on ports 80 and 443.
-* Make sure the load balancer is not buffering requests.
-* Make sure the load balancer is forwarding the `Host` HTTP header correctly.
-* Make sure there's no timeout for idle connections, or set it to more than 10 minutes.
+* Not terminate HTTPS connections.
+* Not buffer requests.
+* Forward the `Host` HTTP header correctly.
+* Have no timeout for idle connections, or set it to more than 10 minutes.
 
 The `/_ping` endpoint returns a JSON object for the replica being queried of
 the form:
