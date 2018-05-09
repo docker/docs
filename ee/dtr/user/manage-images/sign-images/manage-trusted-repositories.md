@@ -40,7 +40,7 @@ docker push <dtr_url>/<account>/<repository>
 or
 
 ```
-notary init --publish <dtr_url>/<account>/<repository>
+notary init <dtr_url>/<account>/<repository> --publish
 ```
 
 ## Manage staged changes
@@ -124,14 +124,18 @@ To delegate image signing to other UCP users, get the `cert.pem` file that's
 included in their client bundle and run:
 
 ```bash
-notary delegation add -p <dtr_url>/<account>/<repository> targets/<role> --all-paths user1.pem user2.pem
+notary delegation add \
+  <dtr_url>/<account>/<repository> targets/<role> user1.pem user2.pem \
+  --all-paths --publish
 ```
 
 You can also remove keys from a delegation role:
 
 ```bash
 # Remove the given keys from a delegation role
-notary delegation remove -p <dtr_url>/<account>/<repository> targets/<role> <keyID1> <keyID2>
+notary delegation remove \
+  <dtr_url>/<account>/<repository> targets/<role> <keyID1> <keyID2> \
+  --publish
 
 # Alternatively, you can remove keys from all delegation roles
 notary delegation purge <dtr_url>/<account>/<repository> --key <keyID1> --key <keyID2>

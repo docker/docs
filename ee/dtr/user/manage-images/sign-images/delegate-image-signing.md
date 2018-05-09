@@ -39,7 +39,7 @@ The member of the IT ops team then asks the QA team for their public key
 certificate files that are part of their UCP client bundle.
 
 If they don't have a UCP client bundle,
-[they can download a new one](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
+[they can download a new one](/ee/ucp/user-access/cli.md).
 
 ## Delegate image signing
 
@@ -53,19 +53,18 @@ In this example we'll delegate trust to `targets/releases` and `targets/qa`:
 
 ```bash
 # Delegate trust, and add that public key with the role targets/releases
-notary delegation add --publish \
-  dtr.example.org/dev/nginx targets/releases \
-  --all-paths <user-1-cert.pem> <user-2-cert.pem>
+notary delegation add dtr.example.org/dev/nginx targets/releases \
+  <user-1-cert.pem> <user-2-cert.pem> --all-paths --publish
 
 # Delegate trust, and add that public key with the role targets/admin
-notary delegation add --publish \
-  dtr.example.org/dev/nginx targets/qa \
-  --all-paths <user-1-cert.pem> <user-2-cert.pem>
+notary delegation add dtr.example.org/dev/nginx targets/qa \
+  <user-1-cert.pem> <user-2-cert.pem> --all-paths --publish
 ```
 
 Now members from the QA team just have to [configure their Notary CLI client
 with UCP private keys](../../access-dtr/configure-your-notary-client.md)
 to be able to [push and sign images](index.md) into the `dev/nginx` repository.
+
 
 ## Where to go next
 
