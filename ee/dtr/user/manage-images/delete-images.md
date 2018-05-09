@@ -79,3 +79,8 @@ notary remove dtr.example.org/library/wordpress <tag> \
 
 Once you've removed trust data for all roles, DTR shows the image as unsigned.
 Then you can delete it.
+
+## Where to go next
+
+* [Pull and push images](pull-and-push-images.md)
+* [Sign an image](sign-images/index.md)

@@ -154,3 +154,7 @@ components that provide the same functionality. When you have updated the source
 code, run a build to create a new image, tag the image, and push the updated
 image to your DTR instance. You can then re-scan the image to confirm that you
 have addressed the vulnerabilities.
+
+## Where to go next
+
+* [Override a reported vulnerability](override-a-vulnerability.md)
