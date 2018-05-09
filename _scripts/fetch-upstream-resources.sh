@@ -69,7 +69,7 @@ sedi "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker
 # Engine stable
 ENGINE_SVN_BRANCH="branches/18.03"
 ENGINE_BRANCH="18.03"
-ENGINE_EDGE_BRANCH="18.04"
+ENGINE_EDGE_BRANCH="18.05"
 
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
