@@ -117,7 +117,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](/compose/install/).
+    [follow these installation instructions](/compose/install.md).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
