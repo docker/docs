@@ -47,7 +47,7 @@ containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
 
-[Learn more about Docker CE](/install/index.md#platform-support-matrix){: class="button outline-btn"}
+[Learn more about Docker CE](/install/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
@@ -60,7 +60,7 @@ and supported to provide enterprises with the most secure container platform in
 the industry to modernize all applications. Docker EE Advanced comes with enterprise
 [add-ons](#docker-ee-add-ons) like UCP and DTR.
 
-[Learn more about Docker EE](/install/#platform-support-matrix){: class="button outline-btn"}
+[Learn more about Docker EE](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->
