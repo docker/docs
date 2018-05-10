@@ -119,7 +119,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER        ERRORS
     aws-sandbox      *        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0
     default          -        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.0-rc4
-    aws-sandbox   -           digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1
+    digi-sandbox       -      digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1
     ```
 
     The new `aws-sandbox` instance is running and is the active host as
