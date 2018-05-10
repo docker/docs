@@ -60,7 +60,7 @@ and supported to provide enterprises with the most secure container platform in
 the industry to modernize all applications. Docker EE Advanced comes with enterprise
 [add-ons](#docker-ee-add-ons) like UCP and DTR.
 
-[Learn more about Docker EE](/ee/index.md){: class="button outline-btn"}
+[Learn more about Docker EE](ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->
