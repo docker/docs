@@ -52,8 +52,7 @@ which includes an [example](/machine/drivers/hyper-v.md#example) of how to do th
 
 Docker for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
 lightweight macOS virtualization solution built on top of the
-[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
-10.10 Yosemite and higher.
+[Hypervisor.framework](https://developer.apple.com/reference/hypervisor).
 
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the [Docker Machine
