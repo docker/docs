@@ -74,14 +74,13 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker Engine.
-`Docker.app` uses the macOS Hypervisor.framework (part of macOS 10.10 Yosemite
-and higher) to run containers, meaning that _**no separate VirtualBox is
+`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that _**no separate VirtualBox is
 required**_.
 
 ### What are system requirements for Docker for Mac?
 
 You need a Mac that supports hardware virtualization and can run at
-least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
+least macOS `10.11` (macOS El Capitan). See also
 [What to know before you install](install#what-to-know-before-you-install) in
 the install guide.
 
@@ -310,8 +309,7 @@ on Docker for Mac GitHub issues.
 ## Components of Docker for Mac
 ### What is HyperKit?
 
-HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10
-Yosemite and higher. It runs entirely in userspace and has no other
+HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other
 dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle

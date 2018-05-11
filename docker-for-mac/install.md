@@ -37,14 +37,7 @@ for Docker for Mac, and how the two products can coexist.
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 
-  - macOS El Capitan 10.11 and newer macOS releases are supported. At a minimum,
-    Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat
-    that going forward 10.10.x is a use-at-your-own risk proposition.
-
-  - Starting with Docker for Mac Stable release 1.13, and concurrent
-    Edge releases, we no longer address issues specific to macOS Yosemite
-    10.10. In future releases, Docker for Mac could stop working on macOS Yosemite
-    10.10 due to the deprecated status of this macOS version. We recommend
+  - macOS El Capitan 10.11 and newer macOS releases are supported. We recommend
     upgrading to the latest version of macOS.
 
   - At least 4GB of RAM
