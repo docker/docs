@@ -56,7 +56,7 @@ curl -vs http://<ucp-url>:<hrm-http-port>/ -H "Host: <service-hostname>"
 For services using HTTPS:
 
 ```bash
-curl -vs http://<ucp-url>:<hrm-https-port>
+curl -vs https://<ucp-url>:<hrm-https-port>
 ```
 
 After the upgrade, check that you can still use the same hostnames to access
