@@ -1600,6 +1600,8 @@ manuals:
             title: Use a load balancer
         - path: /ee/ucp/admin/configure/integrate-with-multiple-registries/
           title: Integrate with multiple registries
+        - path: /ee/ucp/admin/configure/deploy-route-reflectors/
+          title: Improve network performance with Route Reflectors
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /ee/ucp/admin/monitor-and-troubleshoot/
