@@ -23,7 +23,7 @@ showmount -e <nfsserver>
 You should also try to mount one of the exported directories:
 
 ```bash
-mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory>
+mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory> /tmp/mydir
 ```
 
 ## Install DTR with NFS
