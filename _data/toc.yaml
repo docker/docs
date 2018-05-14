@@ -1716,7 +1716,7 @@ manuals:
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/deploy-ingress-controller/
+        path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install a CNI plugin
