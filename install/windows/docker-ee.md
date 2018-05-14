@@ -45,7 +45,7 @@ full list of prerequisites.
 
     ```PowerShell
     Install-Module DockerMsftProvider -Force
-    Install-Package Docker -ProviderName DockerMsftProvider -Force
+    Install-Package Docker -ProviderName DockerProvider -Force
     ```
 
 2.  Check if a reboot is required, and if yes, restart your instance:
