@@ -96,6 +96,12 @@ will be available in future releases.
   * Kubernetes is not yet supported for Windows based workloads. Use Swarmkit for
   Windows based workloads instead.
   * EE 2.0 is not yet supported in IBM Z platforms.
+* Upgrade
+  * After upgrading to 3.0, UCP uses the `191.168.0.0/16` CIDR to allocate IPs
+  for Kubernetes Pods. This option is customizable when doing a fresh installation,
+  but not during an upgrade. As a workaround to configure this option, before
+  upgrading, [update the UCP configuration](admin/configure/ucp-configuration-file.md)
+  to include `pod_cidr = "<ip>/<mask>"` under the `[cluster_config]` option.
 * CLI
   * Both Docker and `kubectl` CLIs report that UCP is running Kubernetes 1.8.2,
   when in fact it is running 1.8.9.
@@ -107,7 +113,7 @@ will be available in future releases.
   [Learn how to deploy EE 2.0 on Azure](https://docs.docker.com/ee/ucp/admin/install/install-on-azure/).
   * Azure IPAM will fail if nodes in the cluster are connected to different subnets.
   As a workaround ensure network setup avoids multiple subnets. This will be
-  rectified in an upcoming patch release (#12894).
+  rectified in an upcoming patch release.
   * UCP Calico control-plane supports full-mesh BGP peering only at release-time.
   Calico control-plane may cause high CPU on nodes in clusters above 100 nodes.
   A route reflector based partial-mesh BGP control-plane will reduce CPU
