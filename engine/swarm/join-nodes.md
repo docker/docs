@@ -89,7 +89,7 @@ To add a manager to this swarm, run the following command:
     192.168.99.100:2377
 ```
 
-Run the command from the output on the manager to join the swarm:
+Run the command from the output on the new manager node to join it to the swarm:
 
 ```bash
 $ docker swarm join \
