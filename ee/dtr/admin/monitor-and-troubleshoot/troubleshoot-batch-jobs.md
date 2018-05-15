@@ -39,6 +39,10 @@ DTR has several types of jobs.
 | Job               | Description                                                                                                                                                                                                                                               |
 |:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | gc                | Garbage collection job that deletes layers associated with deleted images                                                                                                                                                                                 |
+| onlinegc                | Garbage collection job that deletes layers associated with deleted images without putting the registry in read only mode  |
+| onlinegc_metadata                | Garbage collection job that deletes metadata associated with deleted images|
+| onlinegc_joblogs                | Garbage collection job that deletes job logs based on a set job history setting |
+| metadatastoremigration   | metadatastoremigration is a necessary migration that enables the online gc feature |
 | sleep             | Sleep is used to test the correctness of the jobrunner. It sleeps for 60 seconds                                                                                                                                                                          |
 | false             | False is used to test the correctness of the jobrunner. It runs the `false` command and immediately fails                                                                                                                                                 |
 | tagmigration      | Tag migration is used to synchronize tag and manifest information between the DTR database and the storage backend.                                                                                                                                       |
@@ -48,6 +52,9 @@ DTR has several types of jobs.
 | scan_check_single | A security scanning job for a particular layer given by the `parameter: SHA256SUM`. This job breaks up the layer into components and checks each component for vulnerabilities                                                                            |
 | scan_check_all    | A security scanning job that updates all of the currently scanned images to display the latest vulnerabilities                                                                                                                                            |
 | update_vuln_db    | A job that is created to update DTR's vulnerability database. It uses an Internet connection to check for database updates through `https://dss-cve-updates.docker.com/` and updates the `dtr-scanningstore` container if there is a new update available |
+| scannedlayermigration  | scannedlayermigration is a 2.4 to 2.5 upgrade process that restructures scanned image data |
+| push_mirror_tag  | A job that pushes a tag to another registry after a push mirror policy has been evaluated |
+| poll_mirror  | A global cron that evaluates poll mirroring policies |
 | webhook           | A job that is used to dispatch a webhook payload to a single endpoint                                                                                                                                                                                     |
 
 ## Job status
@@ -230,4 +237,3 @@ see those jobs using the `GET /api/v0/crons` endpoint:
 ```
 
 The `schedule` uses a Unix crontab syntax.
-
