@@ -1643,6 +1643,8 @@ manuals:
           title: Isolate volumes
         - path: /ee/ucp/authorization/isolate-nodes/
           title: Isolate nodes
+        - path: /ee/ucp/authorization/pull-images/
+          title: Allow users to pull images
         - path: /ee/ucp/authorization/migrate-kubernetes-roles/
           title: Migrate Kubernetes roles to Docker EE authorization
         - path: /ee/ucp/authorization/ee-standard/
