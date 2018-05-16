@@ -13,7 +13,7 @@ to upgrade your installation to the latest release.
 
 ## Version 2.3.7
 
-(15 May 2018)
+(17 May 2018)
 
 **New features**
 
