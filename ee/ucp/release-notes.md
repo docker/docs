@@ -14,6 +14,49 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## 3.0.1 (2018-05-17)
+
+**Bug Fixes**
+* Core
+  * Bumped Kubernetes version to 1.8.11.
+  * Compose for Kubernetes now respects the specified port services are exposed on.
+  This port must be in the `NodePort` range.
+  * Kubernetes API server port is now configurable via `--kube-apiserver-port`
+  flag at install or `cluster_config.kube_apiserver_port` in UCP config.
+  * Fixed an issue where upgrade fails due to missing `ucp-kv` snapshots.
+  * Fixed an issue where upgrade fails due to layer 7 routing issues.
+  * `ucp-interlock-proxy` no longer tries to schedule components on Windows nodes.
+  * Fixed an issue where a Kubernetes networking failure would not stop UCP from
+  installing successfully.
+  * Fixed an issue where encrypted overlay networks could not communicate on
+  firewalled hosts.
+  * Fixed an issue where Pod CIDR and Node IP values could conflict at install
+  Installation no longer fails if an empty `PodCIDR` value is set in the UCP
+  config at install time. Instead, it falls back to default CIDR.
+
+*  UI/UX
+  * Fixed an issue where UCP banners redirected to older UCP 2.2 documentation.
+
+
+**Known issues**
+
+* Encrypted overlay networks may not work after upgrade from 3.0.0.  Apply the following to
+  all the nodes after the upgrade.
+    ```
+    iptables -t nat -D KUBE-MARK-DROP -j MARK --set-xmark 0x8000/0x8000
+    iptables -t filter -D KUBE-FIREWALL -m comment --comment "kubernetes firewall for dropping marked packets" -m mark --mark 0x8000/0x8000 -j DROP
+    ```
+
+ * `ucp-kube-controller-manager` emits a large number of container logs.
+
+ * Excessive delay is seen when sending `docker service ls` via UCP client
+   bundle on a cluster that is running thousands of services.
+
+ *  Inter-node networking may break on Kubernetes pods while the `calico-node`
+  pods are being upgraded on each node. This may cause up to a few minutes of
+  networking disruption for pods on each node during the upgrade process,
+  depending on how quickly `calico-node` gets upgraded on those nodes.
+
 ## Version 3.0.0 (2018-04-17)
 
 The UCP system requirements were updated with 3.0.0. Make sure to
