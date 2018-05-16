@@ -101,6 +101,21 @@ specify `--log-protocol`.
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
 
+## Version 2.4.4
+
+(17 May 2018)
+
+**New features**
+
+* Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).
+
+**Bug fixes**
+
+* Fixed a problem that made pulling images from Google Cloud fail when DTR was configured to redirect requests.
+* Remove a race condition in which repos deleted during tagmigration were causing tagmigration to fail.
+* Reduce noise in the jobrunner logs by changing some of the more detailed messages to debug level.
+* Eliminate a race condition in which webhook for license updates doesn't fire.
+
 ## Version 2.4.3 (2018-03-19)
 
 **Security**
