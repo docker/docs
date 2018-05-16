@@ -14,6 +14,31 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## 2.5.1 (2018-5-17)
+
+### New features
+
+* Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).
+
+### Bug fixes
+
+* Allow for AlibabaCloud as storage backend.
+* Fix a problem that made pulling images from Google Cloud fail when DTR was configured to redirect requests.
+* Avoid sending redundant webhooks and fix inaccurate repository pull/push counts when manifest lists are pushed.
+* Several fixes of common workflows when the experimental online garbage collection is enabled, including:
+  * Support scanning.
+  * Adding event stream items for online garbage collection activity like layers being deleted.
+  * Fix failing repositories promotion policies.
+  * Fix inaccurate pull/push counts.
+* Some internationalization fixes.
+* Fix a bug causing poll mirroring from Docker Hub to fail under certain conditions.
+* Copy existing scan results to new target repository when an image is promoted.
+* Address an issue causing scan results to not be available for images with long names.
+* Remove a race condition in which repositories deleted during tagmigration were causing tagmigration to fail.
+* Enhancements to the mirroring UI including:
+  * Fixed URL for the destination repository.
+  * Option to skip TLS verification when testing mirroring.
+
 ## 2.5.0 (2018-4-17)
 
 ### New features
