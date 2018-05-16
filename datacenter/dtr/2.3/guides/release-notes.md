@@ -11,6 +11,22 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.7
+
+(15 May 2018)
+
+**New features**
+
+* Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).
+
+**Bug fixes**
+
+* Prevent OOM during garbage collection by reading less data into memory at a time.
+* Remove a race condition in which repos deleted during tagmigration were causing tagmigration to fail.
+* Reduce noise in the jobrunner logs by changing some of the more detailed messages to debug level.
+* Postgres updated to 9.6.6-r0.
+* Eliminate a race condition in which webhook for license updates doesn't fire.
+
 ## Version 2.3.6
 
 (13 February 2018)
