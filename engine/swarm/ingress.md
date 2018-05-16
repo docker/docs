@@ -171,9 +171,9 @@ in mind.
 - If you expect to run multiple service tasks on each node (such as when you
   have 5 nodes but run 10 replicas), you cannot specify a static target port.
   Either allow Docker to assign a random high-numbered port (by leaving off the
-  `target`), or ensure that only a single instance of the service runs on a
-  given node, by using a global service rather than a replicated one, or by
-  using placement constraints.
+  `published` and keeping the `target`), or ensure that only a single instance 
+  of the service runs on a given node, by using a global service rather than a 
+  replicated one, or by using placement constraints.
 
 To bypass the routing mesh, you must use the long `--publish` service and
 set `mode` to `host`. If you omit the `mode` key or set it to `ingress`, the
