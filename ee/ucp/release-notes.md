@@ -160,6 +160,45 @@ from the UCP web UI. You can configure Docker Engine for this.
 * The option to configure a rescheduling policy for basic containers is
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
+
+## Version 2.2.10 (2018-05-17)
+
+**Bug fixes**
+
+* Security
+  * Security headers are added for PCI compliance to all API responses.
+
+* UI
+  * Users can now set log driver name and options on both create and update
+   service screens.
+  * Fixed an issue that causes legacy collections on services to break UI. Now
+   legacy collections are properly prepended with "/Shared/Legacy/".
+  * Fixed an issue that causes service counts in status summary to be shown
+   incorrectly.
+
+* Authentication/Authorization
+  * Private collections are now only created for those users which have
+   previously logged in.
+  * The logic which reconciles collection labels is now skipped if the
+   node already has an access label.
+  * Fixed an issue where LDAP syncs would always search against the last server
+   in the list of additional domains if the search base DN matched any of those
+   domains.
+
+* Core
+  * UCP can now be displayed in an iframe for pages hosted on the same domain.
+  * Fixed an issue that prevents non-admin users to do `docker build` on UCP.
+  * Fixed an issue where a node's status may be reported incorrectly in node
+   listings.
+  * UCP can now be installed on a system with more than 127 logical CPU cores.
+  * Improved the performance of UCP's local and global health checks.
+
+**Known Issue**
+
+* Excessive delay is seen when sending `docker service ls` via UCP client
+ bundle on a cluster that is running thousands of services.
+
+
 ## Version 2.2.9 (2018-04-17)
 
 **Bug fixes**
