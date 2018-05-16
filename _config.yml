@@ -116,7 +116,7 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.6"
+      dtr_version: "2.3.7"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
