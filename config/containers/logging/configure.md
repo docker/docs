@@ -150,9 +150,12 @@ see more options.
 | [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.           |
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                   |
 | [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                     |
+| [`local`](local.md)           | Logs are stored in a custom format designed for minimal overhead.                                             |
 
 ## Limitations of logging drivers
 
-The `docker logs` command is not available for drivers other than `json-file`
-and `journald`.
+The `docker logs` command is only available on the following drivers:
+- `json-file`
+- `journald`
+- `local`
 
