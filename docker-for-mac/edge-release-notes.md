@@ -18,6 +18,26 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-mac66 2018-05-17
+
+[Download](https://download.docker.com/mac/edge/24545/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
+  - [Docker compose 1.21.2](https://github.com/docker/compose/releases/tag/1.21.2)
+
+* New 
+  - Allow orchestrator selection from the UI in the "Kubernetes" pane, to allow "docker stack" commands to deploy to swarm clusters, even if Kubernetes is enabled in Docker for Mac.
+  
+* Bug fixes and minor changes
+  - Use Simple NTP to minimise clock drift between the VM and the host. Fixes [docker/for-mac#2076](https://github.com/docker/for-mac/issues/2076)
+  - Fix filesystem event notifications for Swarm services and those using the new-style --mount option. Fixes [docker/for-mac#2216](https://github.com/docker/for-mac/issues/2216), [docker/for-mac#2375](https://github.com/docker/for-mac/issues/2375)
+  - Fix filesystem event delivery to Kubernetes pods when the path to the bind mount is a symlink.
+  - Fix a race between calling stat on a file and calling close of a file descriptor referencing the file that could result in the stat failing with EBADF (often presented as "File not found"). Fixes [docker/for-mac#2870](https://github.com/docker/for-mac/issues/2870)
+  - Do not allow install of Docker for Mac on macOS Yosemite 10.10, this version is not supported since Docker for Mac 17.09.0.
+  - Fix button order in reset dialog windows. Fixes [docker/for-mac#2827](https://github.com/docker/for-mac/issues/2827)
+  - Diagnostics are run when diagnostics window is displayed, user is proposed to upload them when available.
+
 ### Docker Community Edition 18.05.0-ce-rc1-mac63 2018-04-26
 
 [Download](https://download.docker.com/mac/edge/24246/Docker.dmg)
