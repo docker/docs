@@ -213,8 +213,7 @@ $ echo "$dimg"
 ```
 
 In this case the format is `raw` (it could have been `qcow2`), and the location
-is `~Library/Containers/com.docker.docker/Data/vms/0/` (it could have been
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`).
+is `~/Library/Containers/com.docker.docker/Data/vms/0/`.
 
 Then:
 - if your format is qcow2, run
