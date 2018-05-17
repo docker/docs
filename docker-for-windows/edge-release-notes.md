@@ -18,6 +18,22 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-win66 2018-05-17
+
+[Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
+  - [Docker compose 1.21.2](https://github.com/docker/compose/releases/tag/1.21.2)
+
+* New 
+  - Allow orchestrator selection from the UI in the "Kubernetes" pane, to allow "docker stack" commands to deploy to swarm clusters, even if Kubernetes is enabled in Docker for Windows.
+
+* Bug fixes and minor changes
+  - Fix restart issue when using Windows fast startup on latest 1709 Windows updates. Fixes [docker/for-win#1741](https://github.com/docker/for-win/issues/1741), [docker/for-win#1741](https://github.com/docker/for-win/issues/1741)
+  - DNS name `host.docker.internal` can be used for host resolution from Windows Containers.  Fixes [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
+  - Fix broken link in diagnostics window. 
+
 ### Docker Community Edition 18.05.0-ce-rc1-win63 2018-04-26
 
 [Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe)
