@@ -792,7 +792,7 @@ services:
 
 #### Not supported for `docker stack deploy`
 
-The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+The following sub-options (supported for `docker-compose up` and `docker-compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
 
 - [build](#build)
 - [cgroup_parent](#cgroup_parent)
