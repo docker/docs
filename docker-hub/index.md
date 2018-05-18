@@ -40,7 +40,7 @@ To explore Docker Hub, you need to create an account by following the
 directions in [Your Docker ID](/docker-hub/accounts.md).
 
 > **Note**: You can search for and pull Docker images from Hub without logging
-> in, however to push images you must log in.
+> in, however to push images you must log in. `docker login -u <DockerID> https://registry.hub.docker.com` 
 
 Your Docker ID gives you one private Docker Hub repository for free. If you need
 more private repositories, you can upgrade from your free account to a paid
