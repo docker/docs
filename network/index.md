@@ -31,7 +31,7 @@ rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
 packets or handles encryption. See [Docker and iptables](/network/iptables.md)
 and
-[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
+[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking)
 for a much greater depth of technical detail.
 
 In addition, this topic does not provide any tutorials for how to create,
