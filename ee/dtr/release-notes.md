@@ -14,6 +14,12 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## 2.5.2 (2018-5-21)
+
+### Bug fixes
+
+* Fixed a problem where promotion policies based on scanning results would not be executed correctly.
+
 ## 2.5.1 (2018-5-17)
 
 ### New features
