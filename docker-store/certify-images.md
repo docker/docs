@@ -427,9 +427,11 @@ Passed:  This test was performed on Docker Enterprise Edition.
 * Summary of the inspection for Docker image: gforghetti/tomcat-wildbook:latest
 *******************************************************************************************************************************************************************************************************
 
-Date: Fri Oct 27 12:59:31 2017
-Operating System: Ubuntu 16.04.3 LTS
-Docker version 17.06.2-ee-4, build dd2c358
+Date: Mon May 21 13:29:29 2018
+Operating System: Ubuntu 16.04.4 LTS
+Architecture: amd64
+Docker Client Version: 17.06.2-ee-11
+Docker Server Version: 17.06.2-ee-11
 
 There were 3 warnings detected!
 
@@ -479,16 +481,18 @@ Note: The output was piped to the **jq** command to display it "nicely".
 
 ```
 {
-  "Date": "Fri Oct 27 13:01:49 2017",
-  "SystemOperatingSystem": "Operating System: Ubuntu 16.04.3 LTS",
-  "SystemDockerVersion": "Docker version 17.06.2-ee-4, build dd2c358",
-  "Dockerimage": {
+  "Date": "Mon May 21 13:23:37 2018",
+  "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
+  "SystemArchitecture": "amd64",
+  "SystemDockerClientVersion": "17.06.2-ee-11",
+  "SystemDockerServerVersion": "17.06.2-ee-11",
+  "DockerImage": {
     "Name": "gforghetti/apache:latest",
     "Size": "178MB",
     "Layers": "23",
     "Digest": "sha256:65db5d0a8b88ee3d5e5a579a70943433d36d3e6d6a974598a5eebeef9e02a346",
     "BaseLayerDigest": "sha256:85b1f47fba49da65256f07c8790542a3880e9216f9c491965040f35ce2c6ca7a",
-    "OfficialBaseimage": "debian:8@sha256:3a5aa6bf675aa71e60df347b29f0a1b1634306cd8db47e1af0a16ad420d1b127",
+    "OfficialBaseImage": "debian:8@sha256:3a5aa6bf675aa71e60df347b29f0a1b1634306cd8db47e1af0a16ad420d1b127",
     "CreatedOn": "2017-10-19T17:51:53",
     "DockerVersion": "17.09.0-ce",
     "Author": "",
@@ -541,11 +545,11 @@ Note: The output was piped to the **jq** command to display it "nicely".
     },
     {
       "Status": "Passed",
-      "Message": "Docker container with the container id 725175cb80aa886bb84a892a1a44bf0bf87d6e1e4e16e423cf42d677fb333628 was started."
+      "Message": "Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was started."
     },
     {
       "Status": "Passed",
-      "Message": "Docker container with the container id 725175cb80aa886bb84a892a1a44bf0bf87d6e1e4e16e423cf42d677fb333628 is running."
+      "Message": "Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 is running."
     },
     {
       "Status": "Passed",
@@ -565,7 +569,7 @@ Note: The output was piped to the **jq** command to display it "nicely".
     },
     {
       "Status": "Passed",
-      "Message": "Docker container 725175cb80aa886bb84a892a1a44bf0bf87d6e1e4e16e423cf42d677fb333628 was stopped successfully."
+      "Message": "Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was stopped successfully."
     },
     {
       "Status": "Passed",
@@ -641,13 +645,13 @@ PS D:\InspectDockerimage> .\inspectDockerimage microsoft/nanoserver:latest
 *******************************************************************************************************************************************************************************************************
 * Step #1 Loading information on the Docker official base images ...
 *******************************************************************************************************************************************************************************************************
-The Docker official base images data has been loaded from the docker_official_base_images.json file. Last updated on Fri Oct 27 08:35:14 2017
+The Docker official base images data has been loaded from the docker_official_base_images.json file. Last updated on Sun May 20 16:36:20 2018.
 
 *******************************************************************************************************************************************************************************************************
 * Step #2 Inspecting the Docker image "microsoft/nanoserver:latest" ...
 *******************************************************************************************************************************************************************************************************
-Pulling the Docker image microsoft/nanoserver:latest ...
-Pulling the Docker image took 2m10.1332244s
+Pulling the Docker Image microsoft/nanoserver:latest ...
+Pulling the Docker Image took 13.2107625s
 Passed:  Docker image "microsoft/nanoserver:latest" has been inspected.
 
 *******************************************************************************************************************************************************************************************************
@@ -655,12 +659,12 @@ Passed:  Docker image "microsoft/nanoserver:latest" has been inspected.
 *******************************************************************************************************************************************************************************************************
 +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Docker image:             | microsoft/nanoserver:latest                                                                                                                                             |
-| Size:                     | 1.07GB                                                                                                                                                                  |
+| Size:                     | 1.13GB                                                                                                                                                                  |
 | Layers:                   | 2                                                                                                                                                                       |
-| Digest:                   | sha256:bea766f955b4e7e0c5d41654454629b81ef20d57df51709d61531d51d1cadec0                                                                                                 |
+| Digest:                   | sha256:d3cc51de184f3bdf9262c53077886f78e3fc13282bcfc6daf172df7f47f86806                                                                                                 |
 | Base layer digest:        | sha256:bce2fbc256ea437a87dadac2f69aabd25bed4f56255549090056c1131fad0277                                                                                                 |
 | Official base image:      | golang:1.6.4-nanoserver@sha256:38890e2983bd2700145f1b4377ad8d826531a0a15fc68152b2478406f5ead6e2                                                                         |
-| Created on:               | 2017-10-10T10:56:24                                                                                                                                                     |
+| Created on:               | 2018-05-08T10:43:39                                                                                                                                                     |
 | Docker version:           |                                                                                                                                                                         |
 | Author:                   |                                                                                                                                                                         |
 | Maintainer:               |                                                                                                                                                                         |
@@ -683,8 +687,8 @@ Passed:  Docker image "microsoft/nanoserver:latest" has been inspected.
 +----------+-------+------------------------------------------------------------------------------------------------------+------------+----------+---------------------------------------------------+
 | Manifest | Layer | Command                                                                                              | Size       | Blob     | Matches                                           |
 +----------+-------+------------------------------------------------------------------------------------------------------+------------+----------+---------------------------------------------------+
-| bea766f9 | 1     | Apply image 10.0.14393.0                                                                             | 241 Mib    | bce2fbc2 | golang:1.6.4-nanoserver@38890e29                  |
-| bea766f9 | 2     | Install update 10.0.14393.1770                                                                       | 135.2 Mib  | b0b5e40c |                                                   |
+| d3cc51de | 1     | Apply image 10.0.14393.0                                                                             | 241 Mib    | bce2fbc2 | golang:1.6.4-nanoserver@38890e29                  |
+| d3cc51de | 2     | Install update 10.0.14393.2248                                                                       | 157.2 Mib  | 58518d66 |                                                   |
 +----------+-------+------------------------------------------------------------------------------------------------------+------------+----------+---------------------------------------------------+
 
 *******************************************************************************************************************************************************************************************************
@@ -698,7 +702,7 @@ Warning: Docker image does not contain a Healthcheck! Although a Healthcheck is 
 *******************************************************************************************************************************************************************************************************
 * Step #6 Attempting to start a container from the Docker image "microsoft/nanoserver:latest" ...
 *******************************************************************************************************************************************************************************************************
-Passed:  Docker container with the container id 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 was started.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c was started.
 
 *******************************************************************************************************************************************************************************************************
 * Step #7 Waiting 30 seconds to give the container time to initialize...
@@ -708,7 +712,7 @@ Wait time expired, continuing.
 *******************************************************************************************************************************************************************************************************
 * Step #8 Checking to see if the container is still running.
 *******************************************************************************************************************************************************************************************************
-Passed:  Docker container with the container id 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 is running.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c is running.
 
 *******************************************************************************************************************************************************************************************************
 * Step #9 Displaying the running processes in the Docker container
@@ -716,22 +720,22 @@ Passed:  Docker container with the container id 86ac470a17ca212f76d19a5242c0cd69
 Passed:  Docker container has 16 running processes.
 
 Name                PID                 CPU                 Private Working Set
-smss.exe            6056                00:00:00.015        221.2kB
-csrss.exe           3172                00:00:00.015        356.4kB
-wininit.exe         5872                00:00:00.015        659.5kB
-services.exe        3352                00:00:00.109        1.442MB
-lsass.exe           3632                00:00:00.156        2.859MB
-svchost.exe         1484                00:00:00.031        1.335MB
-svchost.exe         1560                00:00:00.015        1.356MB
-svchost.exe         5220                00:00:00.031        2.109MB
-svchost.exe         6096                00:00:00.015        1.425MB
-svchost.exe         4704                00:00:00.062        3.76MB
-svchost.exe         4936                00:00:00.046        2.044MB
-svchost.exe         5740                00:00:00.046        1.716MB
-svchost.exe         4504                00:00:00.468        4.506MB
-CExecSvc.exe        4464                00:00:00.000        782.3kB
-svchost.exe         4328                00:00:00.093        3.113MB
-cmd.exe             5668                00:00:00.031        426kB
+smss.exe            852                 00:00:00.031        217.1kB
+csrss.exe           3436                00:00:00.015        348.2kB
+wininit.exe         4728                00:00:00.046        647.2kB
+services.exe        4292                00:00:00.125        1.491MB
+lsass.exe           3560                00:00:00.203        2.839MB
+svchost.exe         4484                00:00:00.078        1.229MB
+svchost.exe         3460                00:00:00.031        1.47MB
+svchost.exe         5184                00:00:00.078        2.154MB
+svchost.exe         5496                00:00:00.046        1.45MB
+svchost.exe         4088                00:00:00.078        3.715MB
+svchost.exe         6140                00:00:00.046        1.942MB
+svchost.exe         5212                00:00:00.015        1.683MB
+svchost.exe         5680                00:00:00.375        4.612MB
+svchost.exe         3384                00:00:00.234        6.369MB
+CExecSvc.exe        5636                00:00:00.015        766kB
+cmd.exe             3888                00:00:00.000        401.4kB
 
 *******************************************************************************************************************************************************************************************************
 * Step #10 Displaying Docker container resource usage statistics
@@ -739,20 +743,20 @@ cmd.exe             5668                00:00:00.031        426kB
 Passed:  Docker container resource usage statistics were retrieved.
 
 CPU %               PRIV WORKING SET    BLOCK I/O           NET I/O
-0.00%               26.81MiB            5.1MB / 14.2MB      79.4kB / 7.24kB
+0.00%               29.88MiB            5.21MB / 14.7MB     1.04MB / 24.1kB
 
 *******************************************************************************************************************************************************************************************************
 * Step #11 Displaying the logs from the Docker container (last 20 lines)
 *******************************************************************************************************************************************************************************************************
 Passed:  Docker container logs were retrieved.
 
-2017-10-27T13:27:28.268812200Z  (c) 2016 Microsoft Corporation. All rights reserved.
-2017-10-27T13:27:28.269808900Z
+2018-05-21T14:29:02.580933000Z  (c) 2016 Microsoft Corporation. All rights reserved.
+2018-05-21T14:29:02.584933600Z
 
 *******************************************************************************************************************************************************************************************************
 * Step #12 Attempting to stop the Docker container normally with a timeout of 60 seconds before it is killed ...
 *******************************************************************************************************************************************************************************************************
-Passed:  Docker container 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 was stopped successfully.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c was stopped successfully.
 Passed:  Docker container exited with an exit code of 0.
 
 *******************************************************************************************************************************************************************************************************
@@ -770,9 +774,11 @@ Passed:  This test was performed on Docker Enterprise Edition.
 * Summary of the inspection for Docker image: microsoft/nanoserver:latest
 *******************************************************************************************************************************************************************************************************
 
-Date: Fri Oct 27 13:25:00 2017
+Date: Mon May 21 14:28:36 2018
 Operating System: Microsoft Windows Server 2016 Datacenter
-Docker version 17.06.1-ee-2, build 8e43158
+Architecture: amd64
+Docker Client Version: 17.06.1-ee-2
+Docker Server Version: 17.06.1-ee-2
 
 There were 3 warnings detected!
 
@@ -781,18 +787,17 @@ Passed:  Docker image was built from the official Docker base image "golang:1.6.
 Warning: Docker image was not built using Docker Enterprise Edition!
 Warning: Docker image metadata does not contain an Author or Maintainer!
 Warning: Docker image does not contain a Healthcheck! Although a Healthcheck is not required, it is recommended.
-Passed:  Docker container with the container id 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 was started.
-Passed:  Docker container with the container id 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 is running.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c was started.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c is running.
 Passed:  Docker container has 16 running processes.
 Passed:  Docker container resource usage statistics were retrieved.
 Passed:  Docker container logs were retrieved.
-Passed:  Docker container 86ac470a17ca212f76d19a5242c0cd692e46c0305b3cba6d474d0e92a626e461 was stopped successfully.
+Passed:  Docker container 1cfbc4be9f39944d4e294cf895210c276143768b951159305dbeb30cb2207a1c was stopped successfully.
 Passed:  Docker container exited with an exit code of 0.
 Passed:  Docker container and any associated volumes removed.
 Passed:  Docker image "microsoft/nanoserver:latest" was removed.
 Passed:  This test was performed on Docker Enterprise Edition.
 
 The inspection of the Docker image microsoft/nanoserver:latest has completed.
-
 PS D:\InspectDockerimage>
 ```
