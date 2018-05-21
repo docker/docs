@@ -235,88 +235,91 @@ gforghetti:~:$ ./inspectDockerLoggingPlugin -product-id=<store-product-id> gforg
 
 ```
 **************************************************************************************************************************************************************************************************
-* Docker logging plugin: gforghetti/docker-log-driver-test:latest
+* Docker Logging Plugin: gforghetti/docker-log-driver-test:latest
 **************************************************************************************************************************************************************************************************
 
 **************************************************************************************************************************************************************************************************
-* Step #1 Inspecting the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
+* Step #1 Inspecting the Docker Logging Plugin: gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
-Passed:   Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Passed:   Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected.
 
 **************************************************************************************************************************************************************************************************
-* Step #2 Docker logging plugin information
+* Step #2 Docker Logging Plugin information
 **************************************************************************************************************************************************************************************************
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Docker logging plugin:  | gforghetti/docker-log-driver-test:latest                                                                                                                             |
+| Docker Logging Plugin:  | gforghetti/docker-log-driver-test:latest                                                                                                                             |
 | Description:            | jsonfilelog as plugin                                                                                                                                                |
 | Documentation:          | -                                                                                                                                                                    |
-| Digest:                 | sha256:870c81b9b8872956eec83311707e52ccd4af40683ba64aac3c1700d252a07624                                                                                              |
-| Base layer digest:      | sha256:8b0c5cbf1339dacef5f56717567aeee37d9e4f196f0874457d46c01592a30d70                                                                                              |
-| Docker version:         | 17.06.0-ce                                                                                                                                                           |
+| Digest:                 | sha256:1cdd79202a7a9f9a53524e904d9f89ed0a6bf6673717bc955ef55744f0826d4c                                                                                              |
+| Base layer digest:      | sha256:fda008d4a2b0d2c0a9d2e5dc952aefb0188f7a9c96c04e159662fd56b507c174                                                                                              |
+| Docker version:         | 17.12.0-ce                                                                                                                                                           |
 | Interface Socket:       | jsonfile.sock                                                                                                                                                        |
 | Interface Socket Types: | docker.logdriver/1.0                                                                                                                                                 |
 | IpcHost:                | false                                                                                                                                                                |
 | PidHost:                | false                                                                                                                                                                |
 | Entrypoint:             | /usr/bin/docker-log-driver                                                                                                                                           |
-| WorkDir:                | /tmp                                                                                                                                                                 |
+| WorkDir:                |                                                                                                                                                                      |
 | User:                   |                                                                                                                                                                      |
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-**************************************************************************************************************************************************************************************************
-* Step #3 Checking to see if the Docker logging plugin is already installed.
-**************************************************************************************************************************************************************************************************
-The Docker logging plugin gforghetti/docker-log-driver-test:latest needs to be installed.
+Warning:  Docker logging plugin was not built using Docker Enterprise Edition!
 
 **************************************************************************************************************************************************************************************************
-* Step #4 Installing the Docker logging plugin gforghetti/docker-log-driver-test:latest ...
+* Step #3 Installing the Docker logging plugin gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest has been installed successfully.
 
 **************************************************************************************************************************************************************************************************
-* Step #5 Testing the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
+* Step #4 Testing the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
 Starting a Docker container to test the docker logging plugin gforghetti/docker-log-driver-test:latest
 
 **************************************************************************************************************************************************************************************************
-* Step #6 Retrieving the Docker Logs ...
+* Step #5 Retrieving the Docker Logs ...
 **************************************************************************************************************************************************************************************************
-Retrieving the Docker logs using the "docker container logs c0bc7de01b155203d1ab72a1496979c4715c9b9f81c7f5a1a37ada3aa333e1d5" command
+Retrieving the Docker logs using the "docker container logs 4dc3e699dbf3d050a5b582a245c9a4718bb0300d7d55380887c74741d09bd730" command
 
 **************************************************************************************************************************************************************************************************
-* Step #7 Verifying that the contents retrieved matches what was sent to the Docker Logging plugin.
+* Step #6 Verifying that the contents retrieved matches what was sent to the Docker Logging plugin.
 **************************************************************************************************************************************************************************************************
-Passed:   Docker logging plugin Test was successful.
+Passed:   Docker Logging Plugin Test was successful.
 
 **************************************************************************************************************************************************************************************************
-* Step #8 Removing the Docker container and any associated volumes.
+* Step #7 Removing the Docker container and any associated volumes.
 **************************************************************************************************************************************************************************************************
 Passed:   Docker container and any associated volumes removed.
 
 **************************************************************************************************************************************************************************************************
-* Step #9 Removing the Docker logging plugin
+* Step #8 Removing the Docker logging plugin
 **************************************************************************************************************************************************************************************************
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was removed.
+Passed:   This test was performed on Docker Enterprise Edition.
 
 **************************************************************************************************************************************************************************************************
-* Summary of the inspection for the Docker logging plugin: gforghetti/docker-log-driver-test:latest
+* Summary of the inspection for the Docker Logging Plugin: gforghetti/docker-log-driver-test:latest
 **************************************************************************************************************************************************************************************************
 
-Report Date: Tue Sep 19 12:40:11 2017
-Operating System: Operating System: MacOS darwin Version: 10.12.6
-Docker version 17.09.0-ce-rc2, build 363a3e7
+Report Date: Mon May 21 14:40:41 2018
+Operating System: Operating System: Ubuntu 16.04.4 LTS
+Architecture: amd64
+Docker Client Version: 17.06.2-ee-11
+Docker Server Version: 17.06.2-ee-11
 
+There were 1 warnings detected!
 
-Passed:   Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Passed:   Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Warning:  Docker logging plugin was not built using Docker Enterprise Edition!
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest has been installed successfully.
-Passed:   Docker logging plugin Test was successful.
+Passed:   Docker Logging Plugin Test was successful.
 Passed:   Docker container and any associated volumes removed.
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was removed.
+Passed:   This test was performed on Docker Enterprise Edition.
 
 The inspection of the Docker logging plugin gforghetti/docker-log-driver-test:latest has completed.
 
 If -product-id is specified on command line:
 **************************************************************************************************************************************************************************************************
-* Step #10 Upload the test result to Docker Store.
+* Step #9 Upload the test result to Docker Store.
 **************************************************************************************************************************************************************************************************
 Passed:   The test results are uploaded to Docker Store.
 
@@ -338,31 +341,38 @@ Note: The output was piped to the **jq** command to display it "nicely".
 #### Output:
 
 ```
+```
 {
-  "Date": "Tue Sep 19 12:41:49 2017",
-  "SystemOperatingSystem": "Operating System: MacOS darwin Version: 10.12.6",
-  "SystemDockerVersion": "Docker version 17.09.0-ce-rc2, build 363a3e7",
+  "Date": "Mon May 21 14:38:28 2018",
+  "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
+  "SystemArchitecture": "amd64",
+  "SystemDockerClientVersion": "17.06.2-ee-11",
+  "SystemDockerServerVersion": "17.06.2-ee-11",
   "DockerLogginPlugin": "gforghetti/docker-log-driver-test:latest",
   "Description": "jsonfilelog as plugin",
   "Documentation": "-",
-  "DockerLoggingPluginDigest": "sha256:870c81b9b8872956eec83311707e52ccd4af40683ba64aac3c1700d252a07624",
-  "BaseLayerImageDigest": "sha256:8b0c5cbf1339dacef5f56717567aeee37d9e4f196f0874457d46c01592a30d70",
-  "DockerVersion": "17.06.0-ce",
+  "DockerLoggingPluginDigest": "sha256:1cdd79202a7a9f9a53524e904d9f89ed0a6bf6673717bc955ef55744f0826d4c",
+  "BaseLayerImageDigest": "sha256:fda008d4a2b0d2c0a9d2e5dc952aefb0188f7a9c96c04e159662fd56b507c174",
+  "DockerVersion": "17.12.0-ce",
   "Entrypoint": "/usr/bin/docker-log-driver",
   "InterfaceSocket": "jsonfile.sock",
   "InterfaceSocketTypes": "docker.logdriver/1.0",
-  "WorkDir": "/tmp",
+  "WorkDir": "",
   "User": "",
   "IpcHost": false,
   "PidHost": false,
   "Errors": 0,
-  "Warnings": 0,
+  "Warnings": 1,
   "HTMLReportFile": "",
   "VulnerabilitiesScanURL": "",
   "Results": [
     {
       "Status": "Passed",
-      "Message": "Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected."
+      "Message": "Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected."
+    },
+    {
+      "Status": "Warning",
+      "Message": "Docker logging plugin was not built using Docker Enterprise Edition!"
     },
     {
       "Status": "Passed",
@@ -370,7 +380,7 @@ Note: The output was piped to the **jq** command to display it "nicely".
     },
     {
       "Status": "Passed",
-      "Message": "Docker logging plugin Test was successful."
+      "Message": "Docker Logging Plugin Test was successful."
     },
     {
       "Status": "Passed",
@@ -379,10 +389,14 @@ Note: The output was piped to the **jq** command to display it "nicely".
     {
       "Status": "Passed",
       "Message": "Docker logging plugin gforghetti/docker-log-driver-test:latest was removed."
+    },
+    {
+      "Status": "Passed",
+      "Message": "This test was performed on Docker Enterprise Edition."
     }
   ]
 }
-gforghetti:~/$
+🐳  gforghetti:~/$
 ```
 
 <a name="inspect-logging-plugin-html">
