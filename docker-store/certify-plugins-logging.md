@@ -158,15 +158,30 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin) |
     | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin) |
 
-2.  Set permissions on `inspectDockerLoggingPlugin` so that it is executable:
+2.  Set permissions on `inspectDockerLoggingPlugin` for linux, zlinux and power so that it is executable:
 
     ```
     chmod u+x inspectDockerLoggingPlugin
     ```
 
-3.  Download [`quotes.txt`](https://s3.amazonaws.com/store-logos-us-east-1/certification/quotes.txt) and put it in the same directory.
+3. Download `http_api_endpoint` command
 
-4.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
+    | OS/Architecture | Download Link |
+    |-----------------|------------------|
+    | Windows/X86  | [https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe](https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe) |
+    | Linux/X86 | [https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint) |
+    | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/http_api_endpoint) |
+    | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/http_api_endpoint) |
+
+4.  Set permissions on `http_api_endpoint` for linux, zlinux and power so that it is executable:
+
+    ```
+    chmod u+x http_api_endpoint
+    ```
+
+5.  Download [`quotes.txt`](https://s3.amazonaws.com/store-logos-us-east-1/certification/quotes.txt) and put it in the same directory.
+
+6.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
 
     ![product ID](images/store-product-id.png)
 
