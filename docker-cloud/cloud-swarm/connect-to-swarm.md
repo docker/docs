@@ -52,8 +52,8 @@ swarm.
     ```
     $ docker node ls
     ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
-    dhug6p7arwrm3a9j62zh0a0hf     ip-172-31-23-167.us-west-1.compute.internal   Ready               Active              
-    xmbxtffkrzaveqhyuouj0rxso     ip-172-31-4-109.us-west-1.compute.internal    Ready               Active              
+    dhug6p7arwrm3a9j62zh0a0hf     ip-172-31-23-167.us-west-1.compute.internal   Ready               Active
+    xmbxtffkrzaveqhyuouj0rxso     ip-172-31-4-109.us-west-1.compute.internal    Ready               Active
     yha4q9bleg80kvbn9tqgxd69g *   ip-172-31-24-61.us-west-1.compute.internal    Ready               Active              Leader
     ```
 
@@ -62,8 +62,8 @@ swarm.
     ```
     $ docker node ls
     ID                            HOSTNAME              STATUS              AVAILABILITY        MANAGER STATUS
-    6uotpiv8vyxsjzdtux13nkvj4     swarm-worker000001    Ready               Active               
-    qmvk4swo9rdv1viu9t88dw0t3     swarm-worker000000    Ready               Active              
+    6uotpiv8vyxsjzdtux13nkvj4     swarm-worker000001    Ready               Active
+    qmvk4swo9rdv1viu9t88dw0t3     swarm-worker000000    Ready               Active
     w7kgzzdkka0k2svssz1dk1fzw *   swarm-manager000000   Ready               Active              Leader
     ```
 
@@ -100,7 +100,7 @@ For example:
   $ docker-machine env my-local-machine
   export DOCKER_TLS_VERIFY="1"
   export DOCKER_HOST="tcp://192.168.99.100:2376"
-  export DOCKER_CERT_PATH="/Users/victoriabialas/.docker/machine/machines/my-local-machine"
+  export DOCKER_CERT_PATH="/Users/<your_username>/.docker/machine/machines/my-local-machine"
   export DOCKER_MACHINE_NAME="my-local-machine"
   # Run this command to configure your shell:
   # eval $(docker-machine env my-local-machine)
@@ -140,17 +140,17 @@ Here is an example, showing the Docker for Mac UI.
 
     ```shell
     [vote-swarm] ~
-    ```  
+    ```
 
 4.  Now, you can run `docker node ls` to verify that the swarm is running.
 
     ```shell
     [vote-swarm] ~ $ docker node ls
     ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
-    7ex8inrg8xzgonaunwp35zxfl     ip-172-31-6-204.us-west-1.compute.internal    Ready               Active              
+    7ex8inrg8xzgonaunwp35zxfl     ip-172-31-6-204.us-west-1.compute.internal    Ready               Active
     ec3kxibdxqhgw5aele7x853er *   ip-172-31-0-178.us-west-1.compute.internal    Ready               Active              Leader
-    z4ngrierv27wdm6oy0z3t9r1z     ip-172-31-31-240.us-west-1.compute.internal   Ready               Active              
-    ```  
+    z4ngrierv27wdm6oy0z3t9r1z     ip-172-31-31-240.us-west-1.compute.internal   Ready               Active
+    ```
 
 ## Reconnect a swarm
 

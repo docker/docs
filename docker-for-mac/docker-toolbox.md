@@ -76,7 +76,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
         DOCKER_HOST=tcp://192.168.99.100:2376
         DOCKER_MACHINE_NAME=default
         DOCKER_TLS_VERIFY=1
-        DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+        DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
 
     If this command returns no output, you are ready to use Docker for Mac.
 
