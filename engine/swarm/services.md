@@ -415,8 +415,8 @@ option to the `--publish` flag.
 > definition, which causes Docker to assign a random port for each task.
 >
 > In addition, if you use `mode=host` and you do not use the
-> `--mode=global` flag on `docker service create`, it is difficult to know
-> which nodes are running the service to route work to them.
+> `--mode=global` flag on `docker service create`, you can use `docker service ps` 
+> to verify on which page nodes the service is running.
 
 ##### Example: Run an `nginx` web server service on every swarm node
 
