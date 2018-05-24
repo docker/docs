@@ -416,7 +416,7 @@ option to the `--publish` flag.
 >
 > In addition, if you use `mode=host` and you do not use the
 > `--mode=global` flag on `docker service create`, you can use `docker service ps` 
-> to verify on which page nodes the service is running.
+> to verify on which nodes the service is running and route work to them.
 
 ##### Example: Run an `nginx` web server service on every swarm node
 
