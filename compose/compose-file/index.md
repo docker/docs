@@ -1246,7 +1246,7 @@ For a full list of supported logging drivers and their options, see
 
 ### network_mode
 
-Network mode. Use the same values as the docker client `--net` parameter, plus
+Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
 
     network_mode: "bridge"
