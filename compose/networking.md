@@ -131,7 +131,7 @@ Here's an example Compose file defining two custom networks. The `proxy` service
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
 
-Custom Network names can be given to networks as well, since version 3.5 :
+Networks can also be given a [custom name](compose-file/#name-1) (since version 3.5):
 
     version: "3.5"
     networks:
