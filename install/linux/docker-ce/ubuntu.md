@@ -260,8 +260,7 @@ the repository.
     ```
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column),
-       separated by a an equals sign (`=`), for example,
+       package name (`docker-ce`) "=" version string (2nd column), for example,
        `docker-ce=18.03.0~ce-0~ubuntu`.
 
     ```bash
