@@ -115,7 +115,8 @@ the Getting Started topic.
 
 If, after installing Docker for Mac, you [change the name of your macOS user
 account and home folder](https://support.apple.com/en-us/HT201548), Docker for
-Mac fails to start. To solve this problem, uninstall and reinstall Docker for Mac under the new user account.
+Mac fails to start. To solve this problem, uninstall and reinstall Docker for
+Mac under the new user account.
 
 See also, the discussion on the issue
 [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I
@@ -126,14 +127,14 @@ in the FAQs.
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
-application file is not found, access to a volume mount is denied, or a service cannot
-start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
-need to enable [file sharing](index.md#file-sharing).
+application file is not found, access to a volume mount is denied, or a service
+cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
+you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){:
-.inline} --> **Preferences** --> **File sharing** and share the drive that
-contains the Dockerfile and volume.
+`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} -->
+**Preferences** --> **File sharing** and share the drive that contains the
+Dockerfile and volume.
 
 ### Incompatible CPU detected
 
@@ -144,7 +145,8 @@ Docker for Mac is only compatible with Macs that have a CPU that supports the
 Hypervisor framework. Most Macs built in 2010 and later support it, as described
 in the Apple Hypervisor Framework documentation about supported hardware:
 
-*Generally, machines with an Intel VT-x feature set that includes Extended Page Tables (EPT) and Unrestricted Mode are supported.*
+*Generally, machines with an Intel VT-x feature set that includes Extended Page
+Tables (EPT) and Unrestricted Mode are supported.*
 
 To check if your Mac supports the Hypervisor framework, run this command in a
 terminal window.
@@ -169,9 +171,9 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
-  application ( ![whale menu](images/whale-x.png){: .inline} -->
-  **Quit Docker**). Otherwise, you get an "application in use" error when you
-  try to copy the new app from the `.dmg` to `/Applications`.
+  application (![whale menu](images/whale-x.png){: .inline} --> **Quit
+  Docker**). Otherwise, you get an "application in use" error when you try to
+  copy the new app from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from
     the previously installed version.
