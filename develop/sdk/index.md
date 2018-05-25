@@ -183,6 +183,8 @@ import (
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
+    "github.com/docker/docker/pkg/stdcopy"
+
     "golang.org/x/net/context"
 )
 
@@ -224,7 +226,7 @@ func main() {
         panic(err)
     }
 
-    io.Copy(os.Stdout, out)
+    stdcopy.StdCopy(os.Stdout, os.Stderr, out)
 }
 ```
 
