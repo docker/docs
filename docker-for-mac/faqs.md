@@ -75,7 +75,7 @@ Do the following each time:
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker Engine.
 `Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that
-_**no separate VirtualBox is required**_.
+no separate VirtualBox is required.
 
 ### What are system requirements for Docker for Mac?
 
@@ -93,10 +93,10 @@ is about older releases of Docker for Mac.
 If, after installing Docker for Mac, you [change the name of your macOS user
 account and home folder](https://support.apple.com/en-us/HT201548), Docker for
 Mac fails to start.  [Reset to Factory Defaults](index.md#reset) is the simplest
-fix, but you'll lost all your settings, containers, images, etc.
+fix, but you'll lose all your settings, containers, images, etc.
 
 To preserve them, open the `~/Library/Group
-Containers/group.com.docker/settings.json` file, and update the `distPath`
+Containers/group.com.docker/settings.json` file, and update the `diskPath`
 entry.
 
 
