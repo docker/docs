@@ -51,16 +51,15 @@ upgrade your installation to the latest release.
     iptables -t nat -D KUBE-MARK-DROP -j MARK --set-xmark 0x8000/0x8000
     iptables -t filter -D KUBE-FIREWALL -m comment --comment "kubernetes firewall for dropping marked packets" -m mark --mark 0x8000/0x8000 -j DROP
     ```
-
  * `ucp-kube-controller-manager` emits a large number of container logs.
-
  * Excessive delay is seen when sending `docker service ls` via UCP client
    bundle on a cluster that is running thousands of services.
-
  *  Inter-node networking may break on Kubernetes pods while the `calico-node`
   pods are being upgraded on each node. This may cause up to a few minutes of
   networking disruption for pods on each node during the upgrade process,
   depending on how quickly `calico-node` gets upgraded on those nodes.
+  * `ucp-interlock-proxy` may fail to start when two or more services are
+ configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
 
 ## Version 3.0.0 (2018-04-17)
 
