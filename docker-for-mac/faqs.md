@@ -74,8 +74,8 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker Engine.
-`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that _**no separate VirtualBox is
-required**_.
+`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that
+_**no separate VirtualBox is required**_.
 
 ### What are system requirements for Docker for Mac?
 
@@ -86,10 +86,19 @@ the install guide.
 
 ### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
 
-Yes, if you [change the name of your macOS user account and home
-folder](https://support.apple.com/en-us/HT201548){: target="_blank" class="_"} after Docker for Mac is
-already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac fails to start. See also,
-[Docker for Mac does not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-does-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+Starting with Docker for Mac Edge 18.06, this path is relative to the user's
+home directory, so it should never be a problem.  The remainder of this section
+is about older releases of Docker for Mac.
+
+If, after installing Docker for Mac, you [change the name of your macOS user
+account and home folder](https://support.apple.com/en-us/HT201548), Docker for
+Mac fails to start.  [Reset to Factory Defaults](index.md#reset) is the simplest
+fix, but you'll lost all your settings, containers, images, etc.
+
+To preserve them, open the `~/Library/Group
+Containers/group.com.docker/settings.json` file, and update the `distPath`
+entry.
+
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
