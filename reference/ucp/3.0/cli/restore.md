@@ -58,12 +58,13 @@ Notes:
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug, D`|Enable debug mode|
-|`--jsonlog`|Produce json formatted output for easier parsing|
-|`--interactive, i`|Run in interactive mode and prompt for configuration values|
-|`--passphrase`|Decrypt the backup tar file with the provided passphrase|
-|`--san`|Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)|
-|`--host-address`|The network address to advertise to other nodes. Format: IP address or network interface name|
-|`--unlock-key`|The unlock key for this swarm-mode cluster, if one exists.|
+| Option             | Description                                                                                   |
+|:-------------------|:----------------------------------------------------------------------------------------------|
+| `--debug, D`       | Enable debug mode                                                                             |
+| `--jsonlog`        | Produce json formatted output for easier parsing                                              |
+| `--interactive, i` | Run in interactive mode and prompt for configuration values                                   |
+| `--passphrase`     | Decrypt the backup tar file with the provided passphrase                                      |
+| `--san`            | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)  |
+| `--host-address`   | The network address to advertise to other nodes. Format: IP address or network interface name |
+| `--data-path-addr` | Address or interface to use for data path traffic                                             |
+| `--unlock-key`     | The unlock key for this swarm-mode cluster, if one exists.                                    |
