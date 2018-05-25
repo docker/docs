@@ -1,8 +1,9 @@
 ---
-title: UCP 3.0 release notes
+title: UCP release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
+toc_min: 1
 toc_max: 2
 redirect_from:
   - /datacenter/ucp/2.2/guides/release-notes/
@@ -14,6 +15,10 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+* [Version 3.0](#version-30)
+* [Version 2.2](#version-22)
+
+# Version 3.0
 ## 3.0.1 (2018-05-17)
 
 **Bug Fixes**
@@ -203,7 +208,7 @@ from the UCP web UI. You can configure Docker Engine for this.
 * The option to configure a rescheduling policy for basic containers is
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
-
+# Version 2.2
 ## Version 2.2.10 (2018-05-17)
 
 **Bug fixes**
