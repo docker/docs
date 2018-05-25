@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2/) and [higher](compose-file/). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1/).
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
 
 By default Compose sets up a single
 [network](/engine/reference/commandline/network_create/) for your app. Each
@@ -131,7 +131,7 @@ Here's an example Compose file defining two custom networks. The `proxy` service
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4-address-ipv6-address) for each attached network.
 
-Networks can also be given a [custom name](compose-file/#name-1) (since version 3.5):
+Networks can also be given a [custom name](compose-file/index.md#name-1) (since version 3.5):
 
     version: "3.5"
     networks:
