@@ -136,6 +136,7 @@ specify `--log-protocol`.
   * Pushes to repos with promotion policies (repo as source) are broken when an
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
 
 # Version 2.4
 ## Version 2.4.4
