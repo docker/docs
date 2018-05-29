@@ -43,34 +43,13 @@ The `inspectDockerimage` tool does the following:
 Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial).
 
 - Docker EE (on the server for verifying submissions)
-- git client
 - inspectDockerimage tool
 
 ### Set up testing environment
 
-There are three steps: (1) install git, (2) configure credentials, and (3) configure endpoints (or use default endpoints).
+There are two steps: (1) configure credentials, and (2) configure endpoints (or use default endpoints).
 
-1.  Install git (required for `inspectDockerimage`):
-
-    **Ubuntu**
-
-    ```bash
-    sudo apt-get update -qq
-    sudo apt-get install git -y
-    ```
-
-    **RHEL/CentOS**
-
-    ```bash
-    sudo yum makecache fast
-    sudo yum install git -y
-    ```
-
-    **Windows**
-
-    To download and install git for Windows: <https://git-scm.com/download/win>.
-
-2.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
+1.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
 
     a.  Define environment variables for registry credentials, `DOCKER_USER` and `DOCKER_PASSWORD`:
 
@@ -102,7 +81,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     --docker-password
     ```
 
-3.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
+2.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
 
     By default, `inspectDockerimage` uses these two endpoints to communicate with the Docker Hub Registry:
 
