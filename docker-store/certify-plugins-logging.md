@@ -54,29 +54,9 @@ Your Docker EE installation must be running on the server used to verify your su
 
 ### Set up testing environment
 
-There are three steps: (1) install git, (2) configure credentials, and (3) configure endpoints.
+There are two steps: (1) configure credentials, and (2) configure endpoints.
 
-1.  Install git (required for `inspectDockerLoggingPlugin`):
-
-    **Ubuntu**
-
-    ```bash
-    sudo apt-get update -qq
-    sudo apt-get install git -y
-    ```
-
-    **RHEL/CentOS**
-
-    ```bash
-    sudo yum makecache fast
-    sudo yum install git -y
-    ```
-
-    **Windows**
-
-    To download and install git for Windows: <https://git-scm.com/download/win>.
-
-2.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
+1.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
 
     a.  Define environment variables for registry credentials, `DOCKER_USER` and `DOCKER_PASSWORD`:
 
@@ -108,7 +88,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     --docker-password
     ```
 
-3.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
+2.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
 
     By default, `inspectDockerLoggingPlugin` uses these two endpoints to communicate with the Docker Hub Registry:
 
@@ -146,6 +126,28 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     --docker-registry-auth-endpoint
     --docker-registry-api-endpoint
     ```
+    
+* If more details are needed for debugging problems communicating to the Docker Registry, the following environment variable can be exported which will generate detailed debugging output to a file named `./dockerAPI.go.log` in the directory where the command is run from.
+
+    * Linux or MacOS
+
+        ```bash
+        export DOCKER_REGISTRY_API_DEBUG="true"
+        ```
+
+    * Windows  
+
+        * Windows command prompt
+
+          ```bash
+          set DOCKER_REGISTRY_API_DEBUG="true"
+          ```
+
+        * Windows powershell
+
+          ```bash
+          $env:DOCKER_REGISTRY_API_DEBUG="true"
+          ```        
 
 ### Syntax
 
@@ -201,6 +203,8 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
         	 Docker User ID.  This overrides the DOCKER_USER environment variable.
       -get-logs-script string
         	 An optional custom script used to retrieve the logs.
+      -insecure-skip-verify
+           Optional. Specifies to disable SSL verification for an insecure private Docker Trusted Registry.         
       -help
         	 Help on the command.
       -html
