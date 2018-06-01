@@ -1,7 +1,8 @@
 ---
-title: DTR 2.5 release notes
+title: DTR release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
+toc_min: 1
 toc_max: 2
 redirect_from:
   - /datacenter/dtr/2.4/guides/release-notes/
@@ -14,6 +15,10 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+* [Version 2.5](#version-25)
+* [Version 2.4](#version-24)
+
+# Version 2.5
 ## 2.5.2 (2018-5-21)
 
 ### Bug fixes
@@ -131,7 +136,9 @@ specify `--log-protocol`.
   * Pushes to repos with promotion policies (repo as source) are broken when an
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
 
+# Version 2.4
 ## Version 2.4.4
 
 (17 May 2018)

@@ -28,7 +28,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 - Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux on IBM Power systems before install/upgrade.
+- Disable SELinux on `s390x` (IBM Z) systems before install/upgrade.
 
 ### Architectures and storage drivers
 

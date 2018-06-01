@@ -97,7 +97,7 @@ $ docker stack deploy -c app1.yml test-app
 This command deploys a Kubernetes application from a YAML manifest file called `k8s-app1.yml`:
 
 ```
-$ kubectl create -f k8s-app.yml
+$ kubectl create -f k8s-app1.yml
 ```
 
 Some other useful `kubectl` commands include:

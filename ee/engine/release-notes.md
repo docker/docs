@@ -19,6 +19,12 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-12 (2018-05-29)
+
+### Networking
+
+- Fix to allow service update with no connection loss. [docker/libnetwork#2157](https://github.com/docker/libnetwork/pull/2157)
+
 ## 17.06.2-ee-11 (2018-05-17)
 
 ### Client
