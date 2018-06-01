@@ -27,9 +27,9 @@ support dump:
 
 ![](images/get-support-1.png){: .with-border}
 
-## Use the CLI to get a support dump
+## Use the CLI to get a support dump (single node)
 
-To get the support dump from the CLI, use SSH to log into a UCP manager node
+To get the support dump from the CLI for a single node, use SSH to log into a UCP manager node
 and run:
 
 ```bash
@@ -44,6 +44,26 @@ docker container run --rm \
 This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
 from all of the manager nodes.
+
+## Use the CLI to get a support dump (multiple nodes)
+
+To get the support dump from the CLI for multiple nodes, use SSH to log into a UCP manager node
+and run:
+
+To generate support dump details for all hosts in a cluster, from one remote host, please see below.
+
+The below variables need to be set initially and folders created prior to running the command. Please note the variables can be changed to fit your environment:
+
+```$ SUPPORT_DUMP_DIR=<^>/opt<^^>
+$ SUPPORT_DUMP_TEMPDIR=${SUPPORT_DUMP_DIR}/support_dump_temp
+$ DUMP_DATE=$(date +%Y%m%d-%H_%M_%S)
+$ mkdir ${SUPPORT_DUMP_TEMPDIR}
+$ UCP_VERSION=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Env}}{{$varval:= split . "="}}{{if eq "IMAGE_VERSION" (index $varval 0)}}{{index $varval 1}}{{end}}{{end}}')
+```
+The below command creates a zip file that contains support details (dsinfo) for each host in your cluster:
+
+```$ for node in $(docker node ls --format '{{if eq .Status "Ready"}}{{.Hostname}}{{end}}'); do echo timing support dump on $node; time docker container run --rm -e constraint:node==$node -v /boot:/boot -v /proc/:/host/proc:ro -v /var/run/docker.sock:/var/run/docker.sock -v /var/run/docker.pid:/var/run/docker.pid:ro -v /var/run/docker:/var/run/docker -v /var/lib/docker:/var/lib/docker -v /var/log:/var/log -v /etc:/etc:ro --privileged --pid=host --network=host --log-driver=json-file docker/ucp-dsinfo:${UCP_VERSION} > ${SUPPORT_DUMP_TEMPDIR}/support_dump_${node}.tgz; mkdir ${SUPPORT_DUMP_TEMPDIR}/${node}; tar -xf ${SUPPORT_DUMP_TEMPDIR}/support_dump_${node}.tgz -C ${SUPPORT_DUMP_TEMPDIR}/${node}; rm -f ${SUPPORT_DUMP_TEMPDIR}/support_dump_${node}.tgz; cd ${SUPPORT_DUMP_TEMPDIR} ; zip -q -r ${SUPPORT_DUMP_DIR}/docker-support-${DUMP_DATE}.zip . *; cd ..; done
+```
 
 ## Use PowerShell to get a support dump
 
