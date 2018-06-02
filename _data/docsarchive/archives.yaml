@@ -1,5 +1,5 @@
 - archive:
-  name: v17.12
+  name: v18.03
   image: docs/docker.github.io:latest
   current: true
 # When you make a new stable archive version, move the edge one to be second in
@@ -7,6 +7,9 @@
 - archive:
   name: edge
   image: docs/docker.github.io:latest
+- archive:
+  name: v17.12
+  image: docs/docker.github.io:v17.12
 - archive:
   name: v17.09
   image: docs/docker.github.io:v17.09

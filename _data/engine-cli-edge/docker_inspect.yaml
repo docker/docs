@@ -1,7 +1,7 @@
 command: docker inspect
 short: Return low-level information on Docker objects
 long: |-
-  ker inspect provides detailed information on constructs controlled by Docker.
+  Docker inspect provides detailed information on constructs controlled by Docker.
 
   By default, `docker inspect` will render results in a JSON array.
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]

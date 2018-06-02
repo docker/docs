@@ -12,6 +12,9 @@ options:
   description: 'Advertised address (format: <ip|interface>[:port])'
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: autolock
   value_type: bool
   default_value: "false"
@@ -19,47 +22,71 @@ options:
     Enable manager autolocking (requiring an unlock key to start a stopped manager)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: availability
   value_type: string
   default_value: active
   description: Availability of the node ("active"|"pause"|"drain")
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: cert-expiry
   value_type: duration
   default_value: 2160h0m0s
   description: Validity period for node certificates (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: data-path-addr
   value_type: string
   description: |
     Address or interface to use for data path traffic (format: <ip|interface>)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dispatcher-heartbeat
   value_type: duration
   default_value: 5s
   description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: external-ca
   value_type: external-ca
   description: Specifications of one or more certificate signing endpoints
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: force-new-cluster
   value_type: bool
   default_value: "false"
   description: Force create a new cluster from current state
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: listen-addr
   value_type: node-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: max-snapshots
   value_type: uint64
   default_value: "0"
@@ -67,6 +94,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: snapshot-interval
   value_type: uint64
   default_value: "10000"
@@ -74,12 +104,18 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: task-history-limit
   value_type: int64
   default_value: "5"
   description: Task history retention limit
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ```bash
   $ docker swarm init --advertise-addr 192.168.99.121
@@ -196,4 +232,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

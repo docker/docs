@@ -15,12 +15,18 @@ options:
   description: Skip image verification
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: grant-all-permissions
   value_type: bool
   default_value: "false"
   description: Grant all permissions necessary to run the plugin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: skip-remote-check
   value_type: bool
   default_value: "false"
@@ -28,6 +34,9 @@ options:
     Do not check if specified remote plugin matches existing plugin image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following example installs `vieus/sshfs` plugin, uses it to create and use
   a volume, then upgrades the plugin.
@@ -82,4 +91,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.26"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

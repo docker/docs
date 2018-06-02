@@ -14,12 +14,7 @@
 		{% endif %}
 	{% endfor %}
 {% endif %}
-<!-- Logic for feedback CC'ing -->
-{% if page.assignee %}
-	{% assign assignee=page.assignee%}
-{% else %}
-	{% assign assignee=page.defaultassignee%}
-{% endif %}
+
 <!-- Logic for 'edit this button' -->
 {% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
 {% for entry in site.data.not_edited_here.overrides %}
@@ -58,7 +53,6 @@
 			display: block;
 		}
 	</style>
-	{% if page.url contains "datacenter" %}<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>{% endif %}
 	<script type="text/javascript">
 	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
 	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
@@ -133,37 +127,37 @@
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
-							{% if page.ui_tabs or page.cli_tabs %}
-								{{ page.description | markdownify }}
+							{% if page.ui_tabs or page.cli_tabs or page.api_tabs %}{% capture content %}
+
+								{% if page.intro %}{{ page.intro | markdownify }}{% else %}{{ page.description | markdownify }}{% endif %}
 
 								{% if page.ui_tabs %}
-
-								<h2>{{ page.title }} in the UI</h2>
-
-								<blockquote>
-								<p>These instructions require Docker Enterprise</p>
-								<p>The UI instructions shown here are for the dashboard provided with
-								<a href="/enterprise/#docker-ee-feature-tiers">Docker Enterprise Standard</a>
-								or higher.</p>
-								</blockquote>
 
 								<ul class="nav nav-tabs">{% for tab in page.ui_tabs %}
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#ui-{{ tab.version | slugify }}" id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %} (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.ui_tabs %}
-								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
 								</div>
 
 								{% endif %}
 								{% if page.cli_tabs %}
 
-								<h2>{{ page.title }} in the CLI</h2>
-
 								<ul class="nav nav-tabs">{% for tab in page.cli_tabs %}
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#cli-{{ tab.version | slugify }}" id="cli-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.cli_tabs %}
-								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
+								</div>
+
+								{% endif %}
+								{% if page.api_tabs %}
+
+								<ul class="nav nav-tabs">{% for tab in page.api_tabs %}
+									<li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#api-{{ tab.version | slugify }}" id="api-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
+								</ul>
+								<div class="tab-content">{% for tab in page.api_tabs %}
+									<div id="api-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version api="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
 								</div>
 
 								{% endif %}
@@ -177,9 +171,9 @@
 								{% endfor %}
 								</ul>
 								{% endif %}
-							{% else %}
-							{{ content }}
+								{% endcapture %}
 							{% endif %}
+							{{ content }}
 							<!-- tags -->
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
@@ -246,9 +240,9 @@
 									<ul>
 										{% if edit_url != "" %}
 										<li style="visibility: hidden"><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
-										<li><a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC @{{ assignee }}"
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
 										<!-- toggle mode -->
 										<li>
 											<div class="toggle-mode">

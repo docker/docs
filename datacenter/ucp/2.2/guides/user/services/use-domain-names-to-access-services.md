@@ -76,8 +76,7 @@ create this mapping, instead of using a DNS service.
 > This means the hrm service is exposed only through the manager node's ip 
 > (*since Windows Server cannot be a manager node*).
 > DNS entry for the host name('wordpress.example.org' in this example) should 
-> therefore be mapped to manager nodes and not to any of the Windows worker 
-> nodes.
+> therefore be mapped to manager nodes or any non-windows worker nodes.
 
 Once this is done, you can access the wordpress service from your browser.
 

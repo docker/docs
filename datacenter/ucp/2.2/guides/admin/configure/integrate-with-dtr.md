@@ -78,6 +78,19 @@ system:
   # Restart the Docker daemon
   $ sudo /bin/systemctl restart docker.service
   ```
+  
+* For SUSE SLES 12:
+
+  ```bash
+  # Download the DTR CA certificate
+  $ sudo curl -k https://<dtr-url>/ca -o /usr/share/pki/trust/anchors/<dtr-domain-name>.crt
+
+  # Refresh the list of certificates to trust
+  $ sudo update-ca-certificates
+
+  # Restart the Docker daemon
+  $ sudo /bin/systemctl restart docker.service
+  ```
 
 ## 2. Test your local setup
 

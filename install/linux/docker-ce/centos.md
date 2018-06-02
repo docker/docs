@@ -4,6 +4,8 @@ keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgr
 redirect_from:
 - /engine/installation/centos/
 - /engine/installation/linux/docker-ce/centos/
+- /install/linux/centos/
+- /engine/installation/linux/centos/
 title: Get Docker CE for CentOS
 toc_max: 4
 ---
@@ -131,55 +133,49 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Install the latest version of Docker CE, or go to the next step to install a
-    specific version.
+1.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum install docker-ce
     ```
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    If prompted to accept the GPG key, verify that the fingerprint matches
+    `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
+
+    > Got multiple Docker repositories?
+    >
+    > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `yum install` or
     > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
 
-    If this is the first time you are installing a package from a recently added
-    repository, you are prompted to accept the GPG key, and
-    the key's fingerprint is shown. Verify that the fingerprint is
-    correct, and if so, accept the key. The fingerprint should match
-    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
+    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-    Docker is installed but not started. The `docker` group is created, but no
-    users are added to the group.
+2.  To install a _specific version_ of Docker CE, list the available versions
+    in the repo, then select and install:
 
-2.  On production systems, you should install a specific version of Docker CE
-    instead of always using the latest. List the available versions. This
-    example uses the `sort -r` command to sort the results by version number,
-    highest to lowest, and is truncated.
+    a. List and sort the versions available in your repo. This example sorts
+       results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.0.ce-1.el7.centos             docker-ce-stable
     ```
 
-    The contents of the list depend upon which repositories are enabled, and
-    are specific to your version of CentOS (indicated by the `.el7` suffix
-    on the version, in this example). Choose a specific version to install. The
-    second column is the version string. You can use the entire version string,
-    but **you need to include at least to the first hyphen**. The third column
-    is the repository name, which indicates which repository the package is from
-    and by extension its stability level. To install a specific version, append
-    the version string to the package name and separate them by a hyphen (`-`).
+    The list returned depends on which repositories are enabled, and is specific
+    to your version of CentOS (indicated by the `.el7` suffix in this example).
 
-    > **Note**: The version string is the package name plus the version up to
-    > the first hyphen. In the example above, the fully qualified package name
-    > is `docker-ce-17.06.1.ce`.
+    b. Install a specific version by its fully qualified package name, which is
+       the package name (`docker-ce`) plus the version string (2nd column) up to
+       the first hyphen, separated by a hyphen (`-`), for example,
+       `docker-ce-18.03.0.ce`.
 
     ```bash
-    $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
+    $ sudo yum install docker-ce-<VERSION STRING>
     ```
+
+    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
 3.  Start Docker.
 

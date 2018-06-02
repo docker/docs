@@ -45,6 +45,10 @@ Yes. You can submit your content as a team.
 
 ## Product submission
 
+### What exactly is a customer given access to once they're entitled to a given product plan?
+
+The customer will be given the permissions to docker pull any tag associated with the source repo specified. We recommend that you create a distinct repo per plan and only use tags for different versions of that specific plan. For example, if you have a community, pro, and enterprise plan of a single product, you should create three separate repos, `namespace/community, namespace/pro, and namespace/enterprise`. Once a customer is entitled to your enterprise plan, they will be able to pull `store/namespace/enterprise:anytag`.
+
 ### How long does it typically take to have an image approved?
 
 2 Weeks.
@@ -57,6 +61,14 @@ Edit the same product and update with the newly tagged repos.
 
 Organization details need to be filled in only once. Updating organization info
 once updates this for all images published by your organization.
+
+### Can we show customers all tags for a specific repository, the way we show all tags for official images?
+
+We don't support the abiltiy to view available tags for published products because published products usually require entitlement.
+
+Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
+
+We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access. (Expected Q3 2018)
 
 ### On the page for another vendor’s product on Docker store, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
@@ -107,16 +119,11 @@ use to copy the pull command and paste in their command line. Here is a
 [screenshot](https://user-images.githubusercontent.com/2453622/32354702-1bec633a-bfe8-11e7-9f80-a02c26b1b10c.png)
 to provide additional clarity.
 
-### I added a new repository via the publish flow, but Store displays older repositories. What gives?
+### I have two plans, can I use the same repository but different tags for the two plans?
 
-Go to `Plans and Pricing` section and update the repository in the `Plans and Pricing` page to the correct repository and resubmit. Here is a
-[screenshot](https://user-images.githubusercontent.com/2453622/32343986-85386882-bfc2-11e7-8afe-918056608f98.png)
-to add clarity. This is a UX issue on our side, and we plan on addressing it in
-Q4 '17.
-
-### Can I submit more than 2 plans on Store?
-
-Not yet. ETA to present more than 2 plans is Q1 2018.
+We expect publishers to use a different repository for each plan. If a user is entitled to a plan in your product, the user is entitled to all tags in the relevant. 
+For instance, if you have a `Developer` Plan, that is mapped to repositories store/`mynamespace`/`myrepo1`:`mytag1`, another plan (say `Production`) **should** map to a different repository. 
+**_Any user that is entitled to the `Developer` plan will be able to pull all tags in store/`mynamespace`/`myrepo1`_**. 
 
 ## Licensing, terms and conditions, and pricing
 

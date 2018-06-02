@@ -31,7 +31,7 @@ host.
 1.  Create and start the container as a detached process.
 
     ```bash
-    docker run --rm -itd --network host --name my_nginx nginx
+    docker run --rm -dit --network host --name my_nginx nginx
     ```
 
 2.  Access Nginx by browsing to

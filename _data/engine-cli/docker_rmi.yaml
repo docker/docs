@@ -12,12 +12,18 @@ options:
   description: Force removal of the image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-prune
   value_type: bool
   default_value: "false"
   description: Do not delete untagged parents
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   You can remove an image using its short or long ID, its tag, or its digest. If
   an image has one or more tags referencing it, you must remove all of them before
@@ -96,4 +102,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

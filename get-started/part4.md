@@ -475,11 +475,19 @@ docker stack rm getstartedlab
 ### Unsetting docker-machine shell variable settings
 
 You can unset the `docker-machine` environment variables in your current shell
-with the following command:
+with the given command.
 
-```
-eval $(docker-machine env -u)
-```
+  On **Mac or Linux** the command is:
+
+  ```shell
+  eval $(docker-machine env -u)
+  ```
+
+  On **Windows** the command is:
+
+  ```shell
+  & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env -u | Invoke-Expression
+  ```
 
 This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`

@@ -4,6 +4,7 @@ description: How networking works from the container's point of view
 keywords: networking, container, standalone
 redirect_from:
 - /engine/userguide/networking/configure-dns/
+- /engine/userguide/networking/default_network/configure-dns/
 - /engine/userguide/networking/default_network/binding/
 - /engine/userguide/networking/default_network/container-communication/
 ---
@@ -27,6 +28,7 @@ port to a port on the Docker host. Here are some examples.
 | Flag value                      | Description                                                                                                                                     |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-p 8080:80`                    | Map TCP port 80 in the container to port 8080 on the Docker host.                                                                               |
+| `-p 192.168.1.100:8080:80`      | Map TCP port 80 in the container to port 8080 on the Docker host for connections to host IP 192.168.1.100.                    |
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the Docker host.                                                                               |
 | `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the Docker host, and map UDP port 80 in the container to UDP port 8080 on the Docker host. |
 

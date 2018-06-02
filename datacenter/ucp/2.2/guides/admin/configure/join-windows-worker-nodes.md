@@ -33,6 +33,17 @@ Follow these steps to configure the docker daemon and the Windows environment.
 1.  Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 2.  Run the Windows worker setup script provided with `ucp-agent-win`.
 3.  Join the swarm with the token provided by the UCP web UI.
+4.  Create a file `daemon.json`.
+5.  Paste following content and save it under `$env:ProgramData\Docker\config\`
+    ```
+    {
+    "labels": ["os=windows"]
+    }
+    ``` 
+6.  Restart the docker service.
+    ```
+    Restart-Service docker
+    ```
 
 ### Pull the Windows-specific images
 
@@ -40,8 +51,8 @@ On a manager node, run the following command to list the images that are require
 on Windows nodes.
 
 ```bash
-docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows
-{{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
+docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows \
+{{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} \
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
@@ -59,7 +70,9 @@ You need to open ports 2376 and 12376, and create certificates
 for the Docker daemon to communicate securely. Run this command:
 
 ```powershell
-docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+$script = [ScriptBlock]::Create((docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | Out-String))
+
+Invoke-Command $script
 ```
 
 > Docker daemon restart

@@ -5,55 +5,45 @@ redirect_from:
 - /engine/installation/centos/
 - /engine/installation/linux/docker-ee/centos/
 title: Get Docker EE for CentOS
-toc_max: 4
 ---
 
 {% assign linux-dist = "centos" %}
+{% assign linux-dist-cap = "CentOS" %}
 {% assign linux-dist-url-slug = "centos" %}
 {% assign linux-dist-long = "Centos" %}
 {% assign package-format = "RPM" %}
 {% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
+
 {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 
 ## Prerequisites
 
-Docker CE users should go to
-[Get docker CE for CentOS](/install/linux/docker-ce/centos.md)
-**instead of this topic**.
+This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
 
-### Docker EE repository URL
+- Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`.
+- Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
+- Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
+- Uninstall old versions of Docker.
+- Remove old Docker repos from `/etc/yum.repos.d/`.
 
-{% include ee-linux-install-reuse.md section="ee-url-intro" %}
+### Architectures and storage drivers
 
-### OS requirements
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on  `x86_64`.
 
-To install Docker EE, you need the 64-bit version of {{ linux-dist-long }}
-running on `x86_64`.
+On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
-In addition, you must use the `overlay2` or `devicemapper` storage driver.
-Beginning with Docker EE 17.06.2-ee-5 the `overlay2` storage driver is the
-recommended storage driver.
+- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }: If `selinux` is enabled, the `overlay2` storage driver is supported on {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693 and higher.
 
-The following limitations apply:
+- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }: On production systems using `devicemapper`, you must use `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
-**OverlayFS**:
+### Find your Docker EE repo URL
 
-- The `overlay2` storage driver is only supported on CentOS 7 systems
-  using version 3.10.0-693 or high of the kernel.
-- If `selinux` is enabled, the `overlay2` storage driver is only supported on
-  RHEL 7.4 or higher.
+{% include ee-linux-install-reuse.md section="find-ee-repo-url" %}
 
-**Devicemapper**:
+### Uninstall old Docker versions
 
-- On production systems using `devicemapper`, you must use `direct-lvm` mode,
-  which requires one or more dedicated block devices. Fast storage such as
-  solid-state media (SSD) is recommended.
-
-### Uninstall old versions
-
-Older versions of Docker were called `docker` or `docker-engine`. In addition,
-if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
+The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker CE to Docker EE, remove the Docker CE package as well.
 
 ```bash
 $ sudo yum remove docker \
@@ -69,40 +59,36 @@ $ sudo yum remove docker \
                   docker-ce
 ```
 
-It's OK if `yum` reports that none of these packages are installed.
+## Repo install and upgrade
 
-The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker EE package is now called `docker-ee`.
+{% include ee-linux-install-reuse.md section="using-yum-repo" %}
 
-## Install Docker EE
-
-{% include ee-linux-install-reuse.md section="ways-to-install" %}
-
-### Install using the repository
-
-Before you install Docker EE for the first time on a new host machine, you need
-to set up the Docker EE repository. Afterward, you can install and update Docker
-EE from the repository.
-
-#### Set up the repository
+### Set up the repository
 
 {% include ee-linux-install-reuse.md section="set-up-yum-repo" %}
 
-#### Install Docker EE
+### Install from the repository
 
 {% include ee-linux-install-reuse.md section="install-using-yum-repo" %}
 
-#### Upgrade Docker EE
+### Upgrade from the repository
 
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-repo" %}
 
-### Install from a package
+
+
+## Package install and upgrade
+
+{% include ee-linux-install-reuse.md section="package-installation" %}
+
+### Install with a package
 
 {% include ee-linux-install-reuse.md section="install-using-yum-package" %}
 
-#### Upgrade Docker EE
+### Upgrade with a package
 
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-package" %}
+
 
 ## Uninstall Docker EE
 

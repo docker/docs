@@ -33,7 +33,7 @@ This setup is shown in the following diagram.
 
 Docker for Mac is a Mac native application, that you install in `/Applications`.
 At installation time, it creates symlinks in `/usr/local/bin` for `docker` and
-`docker-compose`, to the version of the commands inside the Mac application
+`docker-compose` and others, to the commands in the application
 bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
 
 Here are some key points to know about Docker for Mac before you get started:
@@ -44,13 +44,10 @@ Here are some key points to know about Docker for Mac before you get started:
   Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
 * When you install Docker for Mac, machines created with Docker Machine are
-  not affected. The Docker for Mac detects and offers to copy containers and
-  images from your local `default` machine (if one exists) to the new
-  Docker for Mac HyperKit VM. If you choose to do this, the image is copied,
-  but the original `default` machine is still kept exactly as it was.
+  not affected.
 
-* Docker for Mac application does not use `docker-machine` to provision
-  the Hyperkit-based VM it uses. The Docker Engine API is exposed on a
+* Docker for Mac does not use `docker-machine` to provision its VM.
+  The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
   the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
@@ -79,11 +76,11 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
         DOCKER_HOST=tcp://192.168.99.100:2376
         DOCKER_MACHINE_NAME=default
         DOCKER_TLS_VERIFY=1
-        DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+        DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
 
     If this command returns no output, you are ready to use Docker for Mac.
 
-    If it returns output (as shown in the example), you need to unset
+    If it returns output (as shown in the example), unset
     the `DOCKER` environment variables to make the client talk to the
     Docker for Mac Engine (next step).
 
@@ -183,15 +180,14 @@ machines. One solution is to use a version manager like
 
 ## Migrating from Docker Toolbox to Docker for Mac
 
-Docker for Mac does not propose Toolbox image migration as part of the Docker
-for Mac installer since version 18.01.0.  You can migrate existing Docker
-Toolbox images with the scripts described below. (Note that this migration
-cannot merge images from both Docker and Toolbox: any existing Docker image are
+Docker for Mac does not propose Toolbox image migration as part of its
+installer since version 18.01.0.  You can migrate existing Docker
+Toolbox images with the scripts described below. (This migration
+cannot merge images from both Docker and Toolbox: any existing Docker image is
 *replaced* by the Toolbox images.)
 
-To run these instructions you need to now how to run shell commands in a
-terminal. You also need a working `qemu-img`; it is part of the qemu package in
-both MacPorts and Brew:
+Run the following shell commands in a terminal. You need a working
+`qemu-img`; it is part of the qemu package in both MacPorts and Brew:
 
 ```sh
 $ brew install qemu  # or sudo port install qemu
@@ -217,8 +213,7 @@ $ echo "$dimg"
 ```
 
 In this case the format is `raw` (it could have been `qcow2`), and the location
-is `~Library/Containers/com.docker.docker/Data/vms/0/` (it could have been
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`).
+is `~/Library/Containers/com.docker.docker/Data/vms/0/`.
 
 Then:
 - if your format is qcow2, run

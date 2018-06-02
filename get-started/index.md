@@ -115,79 +115,77 @@ of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 
 > For full Kubernetes Integration
 >
-> - [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+> - [Kubernetes on Docker for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
+[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
+> - [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
-or higher.
-> - [Kubernetes on Docker for Windows](https://docs.docker.com/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.02.0-ce Edge](https://docs.docker.com/docker-for-windows/release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26-edge){: target="_blank" class="_"}
-or higher.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only. 
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
 
 ### Test Docker version
 
-Ensure that you have a supported version of Docker:
+1.  Run `docker --version` and ensure that you have a supported version of Docker:
 
-```shell
-$ docker --version
-Docker version 17.12.0-ce, build c97c6d6
-```
+    ```shell
+    docker --version
 
-Run `docker version`(without `--`) or `docker info` to view even more details
-about your docker installation:
+    Docker version 17.12.0-ce, build c97c6d6
+    ```
 
-```shell
-$ docker info
-Containers: 0
- Running: 0
- Paused: 0
- Stopped: 0
-Images: 0
-Server Version: 17.12.0-ce
-Storage Driver: overlay2
-...
-```
+2.  Run `docker info` or (`docker version` without `--`) to view even more details about your docker installation:
 
-> **Note**: To avoid permission errors (and the use of `sudo`), add your user to
-> the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
+    ```shell
+    docker info
+
+    Containers: 0
+     Running: 0
+     Paused: 0
+     Stopped: 0
+    Images: 0
+    Server Version: 17.12.0-ce
+    Storage Driver: overlay2
+    ...
+    ```
+
+> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
 
 ### Test Docker installation
 
-Test that your installation works by running the simple Docker image,
+1.  Test that your installation works by running the simple Docker image,
 [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
-```shell
-$ docker run hello-world
+    ```shell
+    docker run hello-world
 
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-ca4f61b1923c: Pull complete
-Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-Status: Downloaded newer image for hello-world:latest
+    Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
 
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-...
-```
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
+    ...
+    ```
 
-List the `hello-world` image that was downloaded to your machine:
+2.  List the `hello-world` image that was downloaded to your machine:
 
-```shell
-$ docker image ls
-```
+    ```shell
+    docker image ls
+    ```
 
-List the `hello-world` container (spawned by the image), which exits after
-displaying its message. If it were still running, you would _not_ need the
-`--all` option:
+3.  List the `hello-world` container (spawned by the image) which exits after
+    displaying its message. If it were still running, you would not need the `--all` option:
 
-```shell
-$ docker container ls --all
-CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
-```
+    ```shell
+    docker container ls --all
+
+    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+    ```
 
 ## Recap and cheat sheet
 
@@ -201,7 +199,7 @@ docker --version
 docker version
 docker info
 
-## Excecute Docker image
+## Execute Docker image
 docker run hello-world
 
 ## List Docker images
@@ -210,7 +208,7 @@ docker image ls
 ## List Docker containers (running, all, all in quiet mode)
 docker container ls
 docker container ls --all
-docker container ls -a -q
+docker container ls -aq
 ```
 
 ## Conclusion of part one

@@ -1,9 +1,6 @@
 command: docker trust sign
 short: Sign an image
-long: |-
-  `docker trust sign` adds signatures to tags to create signed repositories.
-
-  `docker trust sign` is currently experimental.
+long: '`docker trust sign` adds signatures to tags to create signed repositories.'
 usage: docker trust sign IMAGE:TAG
 pname: docker trust
 plink: docker_trust.yaml
@@ -14,6 +11,9 @@ options:
   description: Sign a locally tagged image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### Sign a tag as a repo admin\n\nGiven an image:\n\n```bash\n$ docker
   trust view example/trust-demo\nSIGNED TAG          DIGEST                                                             SIGNERS\nv1
   \                 c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41
@@ -54,4 +54,7 @@ examples: "### Sign a tag as a repo admin\n\nGiven an image:\n\n```bash\n$ docke
   Key:\t3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949\n```"
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

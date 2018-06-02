@@ -99,6 +99,5 @@ in bug reports.
 # Try it today
 
 Ready to get started? [Try Docker for {{cloudprovider}} today](/docker-for-{{cloudprovider | downcase}}/).
-We'd be happy to hear your feedback via e-mail at docker-for-iaas@docker.com or
-in the issue repository
-[for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}).
+Search for existing issues, or create a new one, within the
+[for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}) repository.

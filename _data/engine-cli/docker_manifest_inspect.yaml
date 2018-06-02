@@ -1,0 +1,32 @@
+command: docker manifest inspect
+short: Display an image manifest, or manifest list
+long: Display an image manifest, or manifest list
+usage: docker manifest inspect [OPTIONS] [MANIFEST_LIST] MANIFEST
+pname: docker manifest
+plink: docker_manifest.yaml
+options:
+- option: insecure
+  value_type: bool
+  default_value: "false"
+  description: allow communication with an insecure registry
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: verbose
+  shorthand: v
+  value_type: bool
+  default_value: "false"
+  description: Output additional info including layers and platform
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

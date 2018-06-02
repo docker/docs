@@ -139,6 +139,19 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>CloudSigma</td>
+      <td>
+        <a href=
+        "https://github.com/cloudsigma/docker-machine-driver-cloudsigma">https://github.com/cloudsigma/docker-machine-driver-cloudsigma</a>
+      </td>
+      <td>
+        <a href="https://github.com/cloudsigma">CloudSigma</a>
+      </td>
+      <td>
+        <a href="mailto:bogdan.despotov@cloudsigma.com">bogdan.despotov@cloudsigma.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>Docker-In-Docker</td>
       <td>
         <a href=

@@ -17,7 +17,7 @@ storage driver as `overlay` or `overlay2`.
 > `overlay` driver, because it is more efficient in terms of inode utilization.
 > To use the new driver, you need version 4.0 or higher of the Linux kernel,
 > unless you are a Docker EE user on RHEL or CentOS, in which case you need
-> version 3.10.0-693 or higher of the kernel and to follow some extra steps.
+> version 3.10.0-514 or higher of the kernel and to follow some extra steps.
 >
 > For more information about differences between `overlay` vs `overlay2`, check
 > [Docker storage drivers](select-storage-driver.md).
@@ -26,13 +26,13 @@ storage driver as `overlay` or `overlay2`.
 
 OverlayFS is supported if you meet the following prerequisites:
 
-- The `overlay2` driver is supported for Docker EE and recommended
-  for Docker CE.
+- The `overlay2` driver is supported for Docker EE 17.06.02-ee5 and later and
+  recommended for Docker CE.
 
 - The `overlay` driver is allowed but not recommended for Docker CE.
 
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
-  version 3.10.0-693 of the kernel or higher. Docker EE users using kernels older
+  version 3.10.0-514 of the kernel or higher. Docker EE users using kernels older
   than 4.0 need to follow some extra steps, outlined below.
   If you use an older kernel, you need to use the `overlay` driver, which is not
   recommended.
@@ -50,10 +50,10 @@ OverlayFS is supported if you meet the following prerequisites:
     > error, which will prevent Docker from starting.
     {:.warning}
 
-- Changing the storage driver makes any containers you have already
-  created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so that you
-  not need to re-create them later.
+- Changing the storage driver makes existing containers and images inaccessible
+  on the local system. Use `docker save` to save any images you have built or
+  push them to Docker Hub or a private registry, so that you do not need to
+  re-create them later.
 
 
 ## Configure Docker with the `overlay` or `overlay2` storage driver
@@ -96,13 +96,13 @@ Before following this procedure, you must first meet all the
     }
     ```
 
-    > **Note**: RHEL and CentOS users on Docker EE 17.06
+    > **Note**: RHEL and CentOS users on Docker EE 17.06.02-ee5 and 17.06.02-ee6
     >
     > You need to add a second option to the `daemon.json` to disable the check
     > for version 4.0 or higher of the Linux kernel. Your `daemon.json` should
     > look like the following. **This is only needed for Docker EE users of RHEL
     > or CentOS.** Do not attempt to use `overlay2` with kernel versions older
-    > than 3.10.0-693.
+    > than 3.10.0-514.
     >
     > ```json
     > {
@@ -112,6 +112,9 @@ Before following this procedure, you must first meet all the
     >   ]
     > }
     > ```
+    > On kernel versions that support it, Docker EE versions 17.06.02-ee7 and
+    > later enable `overlay2` by default and do not require
+    > `override_kernel_check`.
 
     If you need to use the legacy `overlay` driver, specify it instead.
 
@@ -138,7 +141,7 @@ Before following this procedure, you must first meet all the
 
     Containers: 0
     Images: 0
-    Storage Driver: overlay
+    Storage Driver: overlay2
      Backing Filesystem: extfs
     <output truncated>
     ```

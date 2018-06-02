@@ -11,12 +11,21 @@ options:
   description: Apply Dockerfile instruction to the created image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: message
   shorthand: m
   value_type: string
   description: Set commit message for imported image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

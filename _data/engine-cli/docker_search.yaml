@@ -17,29 +17,44 @@ options:
   description: Only show automated builds
   deprecated: true
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: filter
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print search using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: limit
   value_type: int
   default_value: "25"
   description: Max number of search results
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-trunc
   value_type: bool
   default_value: "false"
   description: Don't truncate output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: stars
   shorthand: s
   value_type: uint
@@ -47,6 +62,9 @@ options:
   description: Only displays with at least x stars
   deprecated: true
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### Search images by name\n\nThis example displays images with a name containing
   'busybox':\n\n```none\n$ docker search busybox\n\nNAME                             DESCRIPTION
   \                                    STARS     OFFICIAL   AUTOMATED\nbusybox                          Busybox
@@ -130,4 +148,7 @@ examples: "### Search images by name\n\nThis example displays images with a name
   \               \n{% endraw %}\n```"
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

@@ -19,44 +19,68 @@ options:
   description: Service command args
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: config-add
   value_type: config
   description: Add or update a config file on a service
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: config-rm
   value_type: list
   description: Remove a configuration file
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: constraint-add
   value_type: list
   description: Add or update a placement constraint
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: constraint-rm
   value_type: list
   description: Remove a constraint
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: container-label-add
   value_type: list
   description: Add or update a container label
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: container-label-rm
   value_type: list
   description: Remove a container label by its key
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: credential-spec
   value_type: credential-spec
   description: Credential spec for managed service account (Windows only)
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: detach
   shorthand: d
   value_type: bool
@@ -66,62 +90,95 @@ options:
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-add
   value_type: list
   description: Add or update a custom DNS server
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-option-add
   value_type: list
   description: Add or update a DNS option
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-option-rm
   value_type: list
   description: Remove a DNS option
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-rm
   value_type: list
   description: Remove a custom DNS server
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-search-add
   value_type: list
   description: Add or update a custom DNS search domain
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: dns-search-rm
   value_type: list
   description: Remove a DNS search domain
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: endpoint-mode
   value_type: string
   description: Endpoint mode (vip or dnsrr)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: entrypoint
   value_type: command
   description: Overwrite the default ENTRYPOINT of the image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: env-add
   value_type: list
   description: Add or update an environment variable
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: env-rm
   value_type: list
   description: Remove an environment variable
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: force
   value_type: bool
   default_value: "false"
@@ -129,22 +186,34 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: generic-resource-add
   value_type: list
   description: Add a Generic resource
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: generic-resource-rm
   value_type: list
   description: Remove a Generic resource
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: group-add
   value_type: list
   description: Add an additional supplementary user group to the container
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: group-rm
   value_type: list
   description: |
@@ -152,18 +221,27 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: health-cmd
   value_type: string
   description: Command to run to check health
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: health-interval
   value_type: duration
   description: Time between running the check (ms|s|m|h)
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: health-retries
   value_type: int
   default_value: "0"
@@ -171,6 +249,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: health-start-period
   value_type: duration
   description: |
@@ -178,94 +259,145 @@ options:
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: health-timeout
   value_type: duration
   description: Maximum time to allow one check to run (ms|s|m|h)
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: host-add
   value_type: list
   description: Add a custom host-to-IP mapping (host:ip)
   deprecated: false
   min_api_version: "1.32"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: host-rm
   value_type: list
   description: Remove a custom host-to-IP mapping (host:ip)
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: hostname
   value_type: string
   description: Container hostname
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: image
   value_type: string
   description: Service image tag
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: isolation
   value_type: string
   description: Service container isolation mode
   deprecated: false
   min_api_version: "1.35"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: label-add
   value_type: list
   description: Add or update a service label
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: label-rm
   value_type: list
   description: Remove a label by its key
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: limit-cpu
   value_type: decimal
   description: Limit CPUs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: limit-memory
   value_type: bytes
   default_value: "0"
   description: Limit Memory
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: log-driver
   value_type: string
   description: Logging driver for service
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: log-opt
   value_type: list
   description: Logging driver options
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: mount-add
   value_type: mount
   description: Add or update a mount on a service
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: mount-rm
   value_type: list
   description: Remove a mount by its target path
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: network-add
   value_type: network
   description: Add a network
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: network-rm
   value_type: list
   description: Remove a network
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-healthcheck
   value_type: bool
   default_value: "false"
@@ -273,6 +405,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-resolve-image
   value_type: bool
   default_value: "false"
@@ -281,28 +416,43 @@ options:
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: placement-pref-add
   value_type: pref
   description: Add a placement preference
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: placement-pref-rm
   value_type: pref
   description: Remove a placement preference
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: publish-add
   value_type: port
   description: Add or update a published port
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: publish-rm
   value_type: port
   description: Remove a published port by its target port
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -310,6 +460,9 @@ options:
   description: Suppress progress output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: read-only
   value_type: bool
   default_value: "false"
@@ -317,42 +470,66 @@ options:
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: replicas
   value_type: uint
   description: Number of tasks
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: reserve-cpu
   value_type: decimal
   description: Reserve CPUs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: reserve-memory
   value_type: bytes
   default_value: "0"
   description: Reserve Memory
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: restart-condition
   value_type: string
   description: Restart when condition is met ("none"|"on-failure"|"any")
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: restart-delay
   value_type: duration
   description: Delay between restart attempts (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: restart-max-attempts
   value_type: uint
   description: Maximum number of restarts before giving up
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: restart-window
   value_type: duration
   description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback
   value_type: bool
   default_value: "false"
@@ -360,6 +537,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-delay
   value_type: duration
   default_value: 0s
@@ -367,12 +547,18 @@ options:
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-failure-action
   value_type: string
   description: Action on rollback failure ("pause"|"continue")
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-max-failure-ratio
   value_type: float
   default_value: "0"
@@ -380,6 +566,9 @@ options:
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-monitor
   value_type: duration
   default_value: 0s
@@ -388,12 +577,18 @@ options:
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-order
   value_type: string
   description: Rollback order ("start-first"|"stop-first")
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: rollback-parallelism
   value_type: uint64
   default_value: "0"
@@ -402,30 +597,45 @@ options:
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: secret-add
   value_type: secret
   description: Add or update a secret on a service
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: secret-rm
   value_type: list
   description: Remove a secret
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: stop-grace-period
   value_type: duration
   description: |
     Time to wait before force killing a container (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: stop-signal
   value_type: string
   description: Signal to stop the container
   deprecated: false
   min_api_version: "1.28"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: tty
   shorthand: t
   value_type: bool
@@ -434,17 +644,26 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-delay
   value_type: duration
   default_value: 0s
   description: Delay between updates (ns|us|ms|s|m|h)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-failure-action
   value_type: string
   description: Action on update failure ("pause"|"continue"|"rollback")
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-max-failure-ratio
   value_type: float
   default_value: "0"
@@ -452,6 +671,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-monitor
   value_type: duration
   default_value: 0s
@@ -460,12 +682,18 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-order
   value_type: string
   description: Update order ("start-first"|"stop-first")
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-parallelism
   value_type: uint64
   default_value: "0"
@@ -473,24 +701,36 @@ options:
     Maximum number of tasks updated simultaneously (0 to update all at once)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: user
   shorthand: u
   value_type: string
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
   description: Send registry authentication details to swarm agents
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: workdir
   shorthand: w
   value_type: string
   description: Working directory inside the container
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Update a service
 
@@ -555,7 +795,7 @@ examples: |-
 
   Use the `--publish-add` or `--publish-rm` flags to add or remove a published
   port for a service. You can use the short or long syntax discussed in the
-  [docker service create](service_create/#attach-a-service-to-an-existing-network-network)
+  [docker service create](service_create/#publish-service-ports-externally-to-the-swarm)
   reference.
 
   The following example adds a published service port to an existing service.
@@ -563,6 +803,22 @@ examples: |-
   ```bash
   $ docker service update \
     --publish-add published=8080,target=80 \
+    myservice
+  ```
+
+  ### Add or remove network
+
+  Use the `--network-add` or `--network-rm` flags to add or remove a network for
+  a service. You can use the short or long syntax discussed in the
+  [docker service create](service_create/#attach-a-service-to-an-existing-network-network)
+  reference.
+
+  The following example adds a new alias name to an existing service already connected to network my-network:
+
+  ```bash
+  $ docker service update \
+    --network-rm my-network \
+    --network-add name=my-network,alias=web1 \
     myservice
   ```
 
@@ -658,4 +914,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

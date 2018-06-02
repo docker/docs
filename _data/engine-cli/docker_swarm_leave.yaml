@@ -20,6 +20,9 @@ options:
   description: Force this node to leave the swarm, ignoring warnings
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   Consider the following swarm, as seen from the manager:
 
@@ -45,4 +48,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

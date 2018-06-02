@@ -52,8 +52,7 @@ which includes an [example](/machine/drivers/hyper-v.md#example) of how to do th
 
 Docker for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
 lightweight macOS virtualization solution built on top of the
-[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
-10.10 Yosemite and higher.
+[Hypervisor.framework](https://developer.apple.com/reference/hypervisor).
 
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the [Docker Machine
@@ -306,7 +305,7 @@ shell to talk to different Docker engines.
     DOCKER_HOST=tcp://192.168.99.100:2376
     DOCKER_MACHINE_NAME=default
     DOCKER_TLS_VERIFY=1
-    DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+    DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
     ```
 
     If it returns output (as shown in the example), you can unset the `DOCKER` environment variables.

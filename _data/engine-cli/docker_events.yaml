@@ -150,7 +150,7 @@ long: |-
   * container (`container=<name or id>`)
   * daemon (`daemon=<name or id>`)
   * event (`event=<event action>`)
-  * image (`image=<tag or id>`)
+  * image (`image=<repository or tag>`)
   * label (`label=<key>` or `label=<key>=<value>`)
   * network (`network=<name or id>`)
   * node (`node=<id>`)
@@ -180,21 +180,33 @@ options:
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: since
   value_type: string
   description: Show all events created since timestamp
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: until
   value_type: string
   description: Stream events until this timestamp
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Basic example
 
@@ -406,4 +418,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

@@ -67,9 +67,9 @@ done < <(cat ${SOURCE}/_config.yml |grep '_version:' |grep '^[a-z].*')
 sedi "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" ${SOURCE}/_data/toc.yaml
 
 # Engine stable
-ENGINE_SVN_BRANCH="branches/17.12"
-ENGINE_BRANCH="17.12"
-ENGINE_EDGE_BRANCH="18.02"
+ENGINE_SVN_BRANCH="branches/18.03"
+ENGINE_BRANCH="18.03"
+ENGINE_EDGE_BRANCH="18.05"
 
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -146,6 +146,7 @@ wget -O ${SOURCE}/engine/api/v1.33/swagger.yaml https://raw.githubusercontent.co
 wget -O ${SOURCE}/engine/api/v1.34/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.11/components/engine/api/swagger.yaml || (echo "Failed 1.34 swagger download or the 1.34 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.35/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.12/components/engine/api/swagger.yaml || (echo "Failed 1.35 swagger download or the 1.35 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.36/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/18.02/components/engine/api/swagger.yaml || (echo "Failed 1.36 swagger download or the 1.36 directory doesn't exist" && exit -1)
+wget -O ${SOURCE}/engine/api/v1.37/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/18.03/components/engine/api/swagger.yaml || (echo "Failed 1.37 swagger download or the 1.37 directory doesn't exist" && exit -1)
 
 # Get dockerd.md for stable and edge, from upstream
 wget -O ${SOURCE}/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch stable dockerd.md" && exit -1)

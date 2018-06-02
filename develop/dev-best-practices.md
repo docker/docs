@@ -114,7 +114,7 @@ updates.
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it. Docker Cloud can also deploy tested apps straight into production.
 
-- Take this even further with [Docker EE](/enterprise/index.md) by requiring
+- Take this even further with [Docker EE](/ee/index.md) by requiring
   your development, testing, and security teams to sign images before they can
   be deployed into production. This way, you can be sure that before an image is
   deployed into production, it has been tested and signed off by, for instance,

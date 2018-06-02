@@ -7,7 +7,7 @@ toc_min: 1
 ---
 
 {% raw %}
-For Docker Enterprise Edition, see [Docker EE](/enterprise/index.md).
+For Docker Enterprise Edition, see [Docker EE](/ee/index.md).
 
 For Docker releases prior to 17.03.0, see
 [Docker Engine release notes](/release-notes/docker-engine.md).
@@ -19,6 +19,159 @@ Release notes for stable versions are listed first. You can
 [learn more about Stable and Edge releases](/engine/installation/).
 
 # Stable releases
+
+## 18.03.1-ce (2018-04-26)
+
+### Client
+
+- Fix error with merge compose file with networks [docker/cli#983](https://github.com/docker/cli/pull/983)
+* Fix docker stack deploy re-deploying services after the service was updated with `--force` [docker/cli#963](https://github.com/docker/cli/pull/963)
+* Fix docker version output alignment [docker/cli#965](https://github.com/docker/cli/pull/965)
+
+### Runtime
+
+- Fix AppArmor profiles not being applied to `docker exec` processes [moby/moby#36466](https://github.com/moby/moby/pull/36466)
+- Don't sort plugin mount slice [moby/moby#36711](https://github.com/moby/moby/pull/36711)
+- Daemon/cluster: handle partial attachment entries during configure [moby/moby#36769](https://github.com/moby/moby/pull/36769)
+* Bump Golang to 1.9.5 [moby/moby#36779](https://github.com/moby/moby/pull/36779) [docker/cli#986](https://github.com/docker/cli/pull/986)
+- Daemon/stats: more resilient cpu sampling [moby/moby#36519](https://github.com/moby/moby/pull/36519)
+* Containerd: update to 1.0.3 release [moby/moby#36749](https://github.com/moby/moby/pull/36749)
+- Fix Windows layer leak when write fails [moby/moby#36728](https://github.com/moby/moby/pull/36728)
+* Don't make container mount unbindable [moby/moby#36768](https://github.com/moby/moby/pull/36768)
+- Fix Daemon panics on container export after a daemon restart [moby/moby/36586](https://github.com/moby/moby/pull/36586)
+- Fix digest cache being removed on autherrors [moby/moby#36509](https://github.com/moby/moby/pull/36509)
+- Make sure plugin container is removed on failure [moby/moby#36715](https://github.com/moby/moby/pull/36715)
+- Copy: avoid using all system memory with authz plugins [moby/moby#36595](https://github.com/moby/moby/pull/36595)
+- Relax some libcontainerd client locking [moby/moby#36848](https://github.com/moby/moby/pull/36848)
+
+### Swarm Mode
+
+* Increase raft Election tick to 10 times Heartbeat tick [moby/moby#36672](https://github.com/moby/moby/pull/36672)
+
+### Networking
+
+* Gracefully remove LB endpoints from services [docker/libnetwork#2112](https://github.com/docker/libnetwork/pull/2112)
+* Retry other external DNS servers on ServFail [docker/libnetwork#2121](https://github.com/docker/libnetwork/pull/2121)
+* Improve scalabiltiy of bridge network isolation rules [docker/libnetwork#2117](https://github.com/docker/libnetwork/pull/2117)
+* Allow for larger preset property values, do not override [docker/libnetwork#2124](https://github.com/docker/libnetwork/pull/2124)
+* Prevent panics on concurrent reads/writes when calling `changeNodeState` [docker/libnetwork#2136](https://github.com/docker/libnetwork/pull/2136)
+
+## 18.03.0-ce (2018-03-21)
+
+### Builder
+
+* Switch to -buildmode=pie [moby/moby#34369](https://github.com/moby/moby/pull/34369)
+* Allow Dockerfile to be outside of build-context [docker/cli#886](https://github.com/docker/cli/pull/886)
+* Builder: fix wrong cache hits building from tars [moby/moby#36329](https://github.com/moby/moby/pull/36329)
+- Fixes files leaking to other images in a multi-stage build [moby/moby#36338](https://github.com/moby/moby/pull/36338)
+
+### Client
+
+* Simplify the marshaling of compose types.Config [docker/cli#895](https://github.com/docker/cli/pull/895)
++ Add support for multiple composefile when deploying [docker/cli#569](https://github.com/docker/cli/pull/569)
+- Fix broken Kubernetes stack flags [docker/cli#831](https://github.com/docker/cli/pull/831)
+- Fix stack marshaling for Kubernetes [docker/cli#890](https://github.com/docker/cli/pull/890)
+- Fix and simplify bash completion for service env, mounts and labels [docker/cli#682](https://github.com/docker/cli/pull/682)
+- Fix `before` and `since` filter for `docker ps` [moby/moby#35938](https://github.com/moby/moby/pull/35938)
+- Fix `--label-file` weird behavior [docker/cli#838](https://github.com/docker/cli/pull/838)
+- Fix compilation of defaultCredentialStore() on unsupported platforms [docker/cli#872](https://github.com/docker/cli/pull/872)
+* Improve and fix bash completion for images [docker/cli#717](https://github.com/docker/cli/pull/717)
++ Added check for empty source in bind mount [docker/cli#824](https://github.com/docker/cli/pull/824)
+- Fix TLS from environment variables in client [moby/moby#36270](https://github.com/moby/moby/pull/36270)
+* docker build now runs faster when registry-specific credential helper(s) are configured [docker/cli#840](https://github.com/docker/cli/pull/840)
+* Update event filter zsh completion with `disable`, `enable`, `install` and `remove` [docker/cli#372](https://github.com/docker/cli/pull/372)
+* Produce errors when empty ids are passed into inspect calls [moby/moby#36144](https://github.com/moby/moby/pull/36144)
+* Marshall version for the k8s controller [docker/cli#891](https://github.com/docker/cli/pull/891)
+* Set a non-zero timeout for HTTP client communication with plugin backend [docker/cli#883](https://github.com/docker/cli/pull/883)
++ Add DOCKER_TLS environment variable for --tls option [docker/cli#863](https://github.com/docker/cli/pull/863)
++ Add --template-driver option for secrets/configs [docker/cli#896](https://github.com/docker/cli/pull/896)
++ Move `docker trust` commands out of experimental [docker/cli#934](https://github.com/docker/cli/pull/934) [docker/cli#935](https://github.com/docker/cli/pull/935) [docker/cli#944](https://github.com/docker/cli/pull/944)
+
+### Logging
+
+* AWS logs - don't add new lines to maximum sized events [moby/moby#36078](https://github.com/moby/moby/pull/36078)
+* Move log validator logic after plugins are loaded [moby/moby#36306](https://github.com/moby/moby/pull/36306)
+* Support a proxy in Splunk log driver [moby/moby#36220](https://github.com/moby/moby/pull/36220)
+- Fix log tail with empty logs [moby/moby#36305](https://github.com/moby/moby/pull/36305)
+
+### Networking
+
+* Libnetwork revendoring [moby/moby#36137](https://github.com/moby/moby/pull/36137)
+- Fix for deadlock on exit with Memberlist revendor [docker/libnetwork#2040](https://github.com/docker/libnetwork/pull/2040)
+* Fix user specified ndots option [docker/libnetwork#2065](https://github.com/docker/libnetwork/pull/2065)
+- Fix to use ContainerID for Windows instead of SandboxID [docker/libnetwork#2010](https://github.com/docker/libnetwork/pull/2010)
+* Verify NetworkingConfig to make sure EndpointSettings is not nil [moby/moby#36077](https://github.com/moby/moby/pull/36077)
+- Fix `DockerNetworkInternalMode` issue [moby/moby#36298](https://github.com/moby/moby/pull/36298)
+- Fix race in attachable network attachment [moby/moby#36191](https://github.com/moby/moby/pull/36191)
+- Fix timeout issue of `InspectNetwork` on AArch64 [moby/moby#36257](https://github.com/moby/moby/pull/36257)
+* Verbose info is missing for partial overlay ID [moby/moby#35989](https://github.com/moby/moby/pull/35989)
+* Update `FindNetwork` to address network name duplications [moby/moby#30897](https://github.com/moby/moby/pull/30897)
+* Disallow attaching ingress network [docker/swarmkit#2523](https://github.com/docker/swarmkit/pull/2523)
+- Prevent implicit removal of the ingress network [moby/moby#36538](https://github.com/moby/moby/pull/36538)
+- Fix stale HNS endpoints on Windows [moby/moby#36603](https://github.com/moby/moby/pull/36603)
+- IPAM fixes for duplicate IP addresses [docker/libnetwork#2104](https://github.com/docker/libnetwork/pull/2104) [docker/libnetwork#2105](https://github.com/docker/libnetwork/pull/2105)
+
+### Runtime
+
+* Enable HotAdd for Windows [moby/moby#35414](https://github.com/moby/moby/pull/35414)
+* LCOW: Graphdriver fix deadlock in hotRemoveVHDs [moby/moby#36114](https://github.com/moby/moby/pull/36114)
+* LCOW: Regular mount if only one layer [moby/moby#36052](https://github.com/moby/moby/pull/36052)
+* Remove interim env var LCOW_API_PLATFORM_IF_OMITTED [moby/moby#36269](https://github.com/moby/moby/pull/36269)
+* Revendor Microsoft/opengcs @ v0.3.6 [moby/moby#36108](https://github.com/moby/moby/pull/36108)
+- Fix issue of ExitCode and PID not show up in Task.Status.ContainerStatus [moby/moby#36150](https://github.com/moby/moby/pull/36150)
+- Fix issue with plugin scanner going too deep [moby/moby#36119](https://github.com/moby/moby/pull/36119)
+* Do not make graphdriver homes private mounts [moby/moby#36047](https://github.com/moby/moby/pull/36047)
+* Do not recursive unmount on cleanup of zfs/btrfs [moby/moby#36237](https://github.com/moby/moby/pull/36237)
+* Don't restore image if layer does not exist [moby/moby#36304](https://github.com/moby/moby/pull/36304)
+* Adjust minimum API version for templated configs/secrets [moby/moby#36366](https://github.com/moby/moby/pull/36366)
+* Bump containerd to 1.0.2 (cfd04396dc68220d1cecbe686a6cc3aa5ce3667c) [moby/moby#36308](https://github.com/moby/moby/pull/36308)
+* Bump Golang to 1.9.4 [moby/moby#36243](https://github.com/moby/moby/pull/36243)
+* Ensure daemon root is unmounted on shutdown [moby/moby#36107](https://github.com/moby/moby/pull/36107)
+* Update runc to 6c55f98695e902427906eed2c799e566e3d3dfb5 [moby/moby#36222](https://github.com/moby/moby/pull/36222)
+- Fix container cleanup on daemon restart [moby/moby#36249](https://github.com/moby/moby/pull/36249)
+* Support SCTP port mapping (bump up API to v1.37) [moby/moby#33922](https://github.com/moby/moby/pull/33922)
+* Support SCTP port mapping [docker/cli#278](https://github.com/docker/cli/pull/278)
+- Fix Volumes property definition in ContainerConfig [moby/moby#35946](https://github.com/moby/moby/pull/35946)
+* Bump moby and dependencies [docker/cli#829](https://github.com/docker/cli/pull/829)
+* C.RWLayer: check for nil before use [moby/moby#36242](https://github.com/moby/moby/pull/36242)
++ Add `REMOVE` and `ORPHANED` to TaskState [moby/moby#36146](https://github.com/moby/moby/pull/36146)
+- Fixed error detection using `IsErrNotFound` and `IsErrNotImplemented` for `ContainerStatPath`, `CopyFromContainer`, and `CopyToContainer` methods [moby/moby#35979](https://github.com/moby/moby/pull/35979)
++ Add an integration/internal/container helper package [moby/moby#36266](https://github.com/moby/moby/pull/36266)
++ Add canonical import path [moby/moby#36194](https://github.com/moby/moby/pull/36194)
++ Add/use container.Exec() to integration [moby/moby#36326](https://github.com/moby/moby/pull/36326)
+- Fix "--node-generic-resource" singular/plural [moby/moby#36125](https://github.com/moby/moby/pull/36125)
+* Daemon.cleanupContainer: nullify container RWLayer upon release [moby/moby#36160](https://github.com/moby/moby/pull/36160)
+* Daemon: passdown the `--oom-kill-disable` option to containerd [moby/moby#36201](https://github.com/moby/moby/pull/36201)
+* Display a warn message when there is binding ports and net mode is host [moby/moby#35510](https://github.com/moby/moby/pull/35510)
+* Refresh containerd remotes on containerd restarted [moby/moby#36173](https://github.com/moby/moby/pull/36173)
+* Set daemon root to use shared propagation [moby/moby#36096](https://github.com/moby/moby/pull/36096)
+* Optimizations for recursive unmount [moby/moby#34379](https://github.com/moby/moby/pull/34379)
+* Perform plugin mounts in the runtime [moby/moby#35829](https://github.com/moby/moby/pull/35829)
+* Graphdriver: Fix RefCounter memory leak [moby/moby#36256](https://github.com/moby/moby/pull/36256)
+* Use continuity fs package for volume copy [moby/moby#36290](https://github.com/moby/moby/pull/36290)
+* Use proc/exe for reexec [moby/moby#36124](https://github.com/moby/moby/pull/36124)
++ Add API support for templated secrets and configs [moby/moby#33702](https://github.com/moby/moby/pull/33702) and [moby/moby#36366](https://github.com/moby/moby/pull/36366)
+* Use rslave propagation for mounts from daemon root [moby/moby#36055](https://github.com/moby/moby/pull/36055)
++ Add /proc/keys to masked paths [moby/moby#36368](https://github.com/moby/moby/pull/36368)
+* Bump Runc to 1.0.0-rc5 [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+- Fixes `runc exec` on big-endian architectures [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+* Use chroot when mount namespaces aren't provided [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+- Fix systemd slice expansion so that it could be consumed by cAdvisor [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+- Fix devices mounted with wrong uid/gid [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+- Fix read-only containers with IPC private mounts `/dev/shm` read-only [moby/moby#36526](https://github.com/moby/moby/pull/36526)
+
+### Swarm Mode
+
+* Replace EC Private Key with PKCS#8 PEMs [docker/swarmkit#2246](https://github.com/docker/swarmkit/pull/2246)
+* Fix IP overlap with empty EndpointSpec [docker/swarmkit #2505](https://github.com/docker/swarmkit/pull/2505)
+* Add support for Support SCTP port mapping [docker/swarmkit#2298](https://github.com/docker/swarmkit/pull/2298)
+* Do not reschedule tasks if only placement constraints change and are satisfied by the assigned node [docker/swarmkit#2496](https://github.com/docker/swarmkit/pull/2496)
+* Ensure task reaper stopChan is closed no more than once [docker/swarmkit #2491](https://github.com/docker/swarmkit/pull/2491)
+* Synchronization fixes [docker/swarmkit#2495](https://github.com/docker/swarmkit/pull/2495)
+* Add log message to indicate message send retry if streaming unimplemented [docker/swarmkit#2483](https://github.com/docker/swarmkit/pull/2483)
+* Debug logs for session, node events on dispatcher, heartbeats [docker/swarmkit#2486](https://github.com/docker/swarmkit/pull/2486)
++ Add swarm types to bash completion event type filter [docker/cli#888](https://github.com/docker/cli/pull/888)
+- Fix issue where network inspect does not show Created time for networks in swarm scope [moby/moby#36095](https://github.com/moby/moby/pull/36095)
 
 ## 17.12.1-ce (2018-02-27)
 
@@ -58,7 +211,7 @@ Release notes for stable versions are listed first. You can
 * Nullify container read write layer upon release [moby/moby#36130](https://github.com/moby/moby/pull/36160) and [moby/moby#36343](https://github.com/moby/moby/pull/36242)
 
 ### Swarm
-* Remove watchMiss from swarm mode [docker/libnetwork#2047](https://github.com/docker/libnetwork/pull/2047) 
+* Remove watchMiss from swarm mode [docker/libnetwork#2047](https://github.com/docker/libnetwork/pull/2047)
 
 ## 17.12.0-ce (2017-12-27)
 
@@ -545,6 +698,157 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 # Edge releases
 
+## 18.05.0-ce (2018-05-09)
+
+### Builder
+
+*  Adding `netbsd` compatibility to the package `pkg/term`. [moby/moby#36887](https://github.com/moby/moby/pull/36887)
+*  Standardizes output path for artifacts of intermediate builds to `/build/`. [moby/moby#36858](https://github.com/moby/moby/pull/36858)
+
+### Client
+
+- Fix `docker stack deploy` reference flag. [docker/cli#981](https://github.com/docker/cli/pull/981)
+- Fix docker stack deploy re-deploying services after the service was updated with `--force`. [docker/cli#963](https://github.com/docker/cli/pull/963)
++ Add bash completion for `secret|config create --template-driver`. [docker/cli#1004](https://github.com/docker/cli/pull/1004)
++ Add fish completions for docker trust subcommand. [docker/cli#984](https://github.com/docker/cli/pull/984)
+- Fix --format example for docker history. [docker/cli#980](https://github.com/docker/cli/pull/980)
+- Fix error with merge composefile with networks. [docker/cli#983](https://github.com/docker/cli/pull/983)
+
+### Logging
+* Standardized the properties of storage-driver log messages. [moby/moby#36492](https://github.com/moby/moby/pull/36492)
+* Improve partial message support in logger. [moby/moby#35831](https://github.com/moby/moby/pull/35831)
+
+### Networking
+
+- Allow for larger preset property values, do not override. [docker/libnetwork#2124](https://github.com/docker/libnetwork/pull/2124)
+- networkdb: User write lock in handleNodeEvent.  [docker/libnetwork#2136](https://github.com/docker/libnetwork/pull/2136)
+* Import libnetwork fix for rolling updates. [moby/moby#36638](https://github.com/moby/moby/pull/36638)
+* Update libnetwork to improve scalabiltiy of bridge network isolation rules. [moby/moby#36774](https://github.com/moby/moby/pull/36774)
+- Fix a misused network object name. [moby/moby#36745](https://github.com/moby/moby/pull/36745)
+
+### Runtime
+
+* LCOW: Implement `docker save`. [moby/moby#36599](https://github.com/moby/moby/pull/36599)
+* Pkg: devmapper: dynamically load dm_task_deferred_remove. [moby/moby#35518](https://github.com/moby/moby/pull/35518)
+* Windows: Add GetLayerPath implementation in graphdriver. [moby/moby#36738](https://github.com/moby/moby/pull/36738)
+- Fix Windows layer leak when write fails. [moby/moby#36728](https://github.com/moby/moby/pull/36728)
+- Fix FIFO, sockets and device files when run in user NS. [moby/moby#36756](https://github.com/moby/moby/pull/36756)
+- Fix docker version output alignment. [docker/cli#965](https://github.com/docker/cli/pull/965)
+* Always make sysfs read-write with privileged. [moby/moby#36808](https://github.com/moby/moby/pull/36808)
+* Bump Golang to 1.10.1. [moby/moby#35739](https://github.com/moby/moby/pull/35739)
+* Bump containerd client. [moby/moby#36684](https://github.com/moby/moby/pull/36684)
+* Bump golang.org/x/net to go1.10 release commit. [moby/moby#36894](https://github.com/moby/moby/pull/36894)
+* Context.WithTimeout: do call the cancel func. [moby/moby#36920](https://github.com/moby/moby/pull/36920)
+* Copy: avoid using all system memory with authz plugins. [moby/moby#36595](https://github.com/moby/moby/pull/36595)
+* Daemon/cluster: handle partial attachment entries during configure. [moby/moby#36769](https://github.com/moby/moby/pull/36769)
+* Don't make container mount unbindable. [moby/moby#36768](https://github.com/moby/moby/pull/36768)
+* Extra check before unmounting on shutdown. [moby/moby#36879](https://github.com/moby/moby/pull/36879)
+* Move mount parsing to separate package. [moby/moby#36896](https://github.com/moby/moby/pull/36896)
+* No global volume driver store. [moby/moby#36637](https://github.com/moby/moby/pull/36637)
+* Pkg/mount improvements. [moby/moby#36091](https://github.com/moby/moby/pull/36091)
+* Relax some libcontainerd client locking. [moby/moby#36848](https://github.com/moby/moby/pull/36848)
+* Remove daemon dependency on api packages. [moby/moby#36912](https://github.com/moby/moby/pull/36912)
+* Remove the retries for service update. [moby/moby#36827](https://github.com/moby/moby/pull/36827)
+* Revert unencryted storage warning prompt. [docker/cli#1008](https://github.com/docker/cli/pull/1008)
+* Support cancellation in `directory.Size()`. [moby/moby#36734](https://github.com/moby/moby/pull/36734)
+* Switch from x/net/context -> context. [moby/moby#36904](https://github.com/moby/moby/pull/36904)
+* Fixed a function to check Content-type is `application/json` or not. [moby/moby#36778](https://github.com/moby/moby/pull/36778)
++ Add default pollSettings config functions. [moby/moby#36706](https://github.com/moby/moby/pull/36706)
++ Add if judgment before receiving operations on daemonWaitCh. [moby/moby#36651](https://github.com/moby/moby/pull/36651)
+- Fix issues with running volume tests as non-root.. [moby/moby#36935](https://github.com/moby/moby/pull/36935)
+
+### Swarm Mode
+
+* RoleManager will remove detected nodes from the cluster membership [docker/swarmkit#2548](https://github.com/docker/swarmkit/pull/2548)
+* Scheduler/TaskReaper: handle unassigned tasks marked for shutdown [docker/swarmkit#2574](https://github.com/docker/swarmkit/pull/2574)
+* Avoid predefined error log. [docker/swarmkit#2561](https://github.com/docker/swarmkit/pull/2561)
+* Task reaper should delete tasks with removed slots that were not yet assigned. [docker/swarmkit#2557](https://github.com/docker/swarmkit/pull/2557)
+* Agent reports FIPS status. [docker/swarmkit#2587](https://github.com/docker/swarmkit/pull/2587)
+- Fix: timeMutex critical operation outside of critical section. [docker/swarmkit#2603](https://github.com/docker/swarmkit/pull/2603)
+* Expose swarmkit's Raft tuning parameters in engine config. [moby/moby#36726](https://github.com/moby/moby/pull/36726)
+* Make internal/test/daemon.Daemon swarm aware. [moby/moby#36826](https://github.com/moby/moby/pull/36826)
+
+## 18.04.0-ce (2018-04-10)
+
+### Builder
+
+- Fix typos in builder and client. [moby/moby#36424](https://github.com/moby/moby/pull/36424)
+
+### Client
+
+* Print Stack API and Kubernetes versions in version command. [docker/cli#898](https://github.com/docker/cli/pull/898)
+- Fix Kubernetes duplication in version command. [docker/cli#953](https://github.com/docker/cli/pull/953)
+* Use HasAvailableFlags instead of HasFlags for Options in help. [docker/cli#959](https://github.com/docker/cli/pull/959)
++ Add support for mandatory variables to stack deploy. [docker/cli#893](https://github.com/docker/cli/pull/893)
+- Fix docker stack services command Port output. [docker/cli#943](https://github.com/docker/cli/pull/943)
+* Deprecate unencrypted storage. [docker/cli#561](https://github.com/docker/cli/pull/561)
+* Don't set a default filename for ConfigFile. [docker/cli#917](https://github.com/docker/cli/pull/917)
+- Fix compose network name. [docker/cli#941](https://github.com/docker/cli/pull/941)
+
+### Logging
+
+* Silent login: use credentials from cred store to login. [docker/cli#139](https://github.com/docker/cli/pull/139)
++ Add support for compressibility of log file. [moby/moby#29932](https://github.com/moby/moby/pull/29932)
+- Fix empty LogPath with non-blocking logging mode. [moby/moby#36272](https://github.com/moby/moby/pull/36272)
+
+### Networking
+
+- Prevent explicit removal of ingress network. [moby/moby#36538](https://github.com/moby/moby/pull/36538)
+
+### Runtime
+
+* Devmapper cleanup improvements. [moby/moby#36307](https://github.com/moby/moby/pull/36307)
+* Devmapper.Mounted: remove. [moby/moby#36437](https://github.com/moby/moby/pull/36437)
+* Devmapper/Remove(): use Rmdir, ignore errors. [moby/moby#36438](https://github.com/moby/moby/pull/36438)
+* LCOW - Change platform parser directive to FROM statement flag. [moby/moby#35089](https://github.com/moby/moby/pull/35089)
+* Split daemon service code to windows file. [moby/moby#36653](https://github.com/moby/moby/pull/36653)
+* Windows: Block pulling uplevel images. [moby/moby#36327](https://github.com/moby/moby/pull/36327)
+* Windows: Hyper-V containers are broken after 36586 was merged. [moby/moby#36610](https://github.com/moby/moby/pull/36610)
+* Windows: Move kernel_windows to use golang registry functions. [moby/moby#36617](https://github.com/moby/moby/pull/36617)
+* Windows: Pass back system errors on container exit. [moby/moby#35967](https://github.com/moby/moby/pull/35967)
+* Windows: Remove servicing mode. [moby/moby#36267](https://github.com/moby/moby/pull/36267)
+* Windows: Report Version and UBR. [moby/moby#36451](https://github.com/moby/moby/pull/36451)
+* Bump Runc to 1.0.0-rc5. [moby/moby#36449](https://github.com/moby/moby/pull/36449)
+* Mount failure indicates the path that failed. [moby/moby#36407](https://github.com/moby/moby/pull/36407)
+* Change return for errdefs.getImplementer(). [moby/moby#36489](https://github.com/moby/moby/pull/36489)
+* Client: fix hijackedconn reading from buffer. [moby/moby#36663](https://github.com/moby/moby/pull/36663)
+* Content encoding negotiation added to archive request. [moby/moby#36164](https://github.com/moby/moby/pull/36164)
+* Daemon/stats: more resilient cpu sampling. [moby/moby#36519](https://github.com/moby/moby/pull/36519)
+* Daemon/stats: remove obnoxious types file. [moby/moby#36494](https://github.com/moby/moby/pull/36494)
+* Daemon: use context error rather than inventing new one. [moby/moby#36670](https://github.com/moby/moby/pull/36670)
+* Enable CRIU on non-amd64 architectures (v2). [moby/moby#36676](https://github.com/moby/moby/pull/36676)
+- Fixes intermittent client hang after closing stdin to attached container [moby/moby#36517](https://github.com/moby/moby/pull/36517)
+- Fix daemon panic on container export after restart [moby/moby#36586](https://github.com/moby/moby/pull/36586)
+- Follow-up fixes on multi-stage moby's Dockerfile. [moby/moby#36425](https://github.com/moby/moby/pull/36425)
+* Freeze busybox and latest glibc in Docker image. [moby/moby#36375](https://github.com/moby/moby/pull/36375)
+* If container will run as non root user, drop permitted, effective caps early. [moby/moby#36587](https://github.com/moby/moby/pull/36587)
+* Layer: remove metadata store interface. [moby/moby#36504](https://github.com/moby/moby/pull/36504)
+* Minor optimizations to dockerd. [moby/moby#36577](https://github.com/moby/moby/pull/36577)
+* Whitelist statx syscall. [moby/moby#36417](https://github.com/moby/moby/pull/36417)
++ Add missing error return for plugin creation. [moby/moby#36646](https://github.com/moby/moby/pull/36646)
+- Fix AppArmor not being applied to Exec processes. [moby/moby#36466](https://github.com/moby/moby/pull/36466)
+* Daemon/logger/ring.go: log error not instance. [moby/moby#36475](https://github.com/moby/moby/pull/36475)
+- Fix stats collector spinning CPU if no stats are collected. [moby/moby#36609](https://github.com/moby/moby/pull/36609)
+- Fix(distribution): digest cache should not be moved if it was an auth. [moby/moby#36509](https://github.com/moby/moby/pull/36509)
+- Make sure plugin container is removed on failure. [moby/moby#36715](https://github.com/moby/moby/pull/36715)
+* Bump to containerd 1.0.3. [moby/moby#36749](https://github.com/moby/moby/pull/36749)
+* Don't sort plugin mount slice. [moby/moby#36711](https://github.com/moby/moby/pull/36711)
+
+### Swarm Mode
+
+* Fixes for synchronizing the dispatcher shutdown with in-progress rpcs. [moby/moby#36371](https://github.com/moby/moby/pull/36371)
+* Increase raft ElectionTick to 10xHeartbeatTick. [moby/moby#36672](https://github.com/moby/moby/pull/36672)
+* Make Swarm manager Raft quorum parameters configurable in daemon config. [moby/moby#36726](https://github.com/moby/moby/pull/36726)
+* Ingress network should not be attachable. [docker/swarmkit#2523](https://github.com/docker/swarmkit/pull/2523)
+* [manager/state] Add fernet as an option for raft encryption. [docker/swarmkit#2535](https://github.com/docker/swarmkit/pull/2535)
+* Log GRPC server errors.  [docker/swarmkit#2541](https://github.com/docker/swarmkit/pull/2541)
+* Log leadership changes at the manager level. [docker/swarmkit#2542](https://github.com/docker/swarmkit/pull/2542)
+* Remove the containerd executor. [docker/swarmkit#2568](https://github.com/docker/swarmkit/pull/2568)
+* Agent: backoff session when no remotes are available. [docker/swarmkit#2570](https://github.com/docker/swarmkit/pull/2570)
+* [ca/manager] Remove root CA key encryption support entirely. [docker/swarmkit#2573](https://github.com/docker/swarmkit/pull/2573)
+- Fix agent logging race. [docker/swarmkit#2578](https://github.com/docker/swarmkit/pull/2578)
+* Adding logic to restore networks in order. [docker/swarmkit#2571](https://github.com/docker/swarmkit/pull/2571)
+
 ## 18.02.0-ce (2018-02-07)
 
 ### Builder
@@ -826,7 +1130,7 @@ use `--detach` to keep the old behaviour.
 * Devicemapper: Rework logging and add `--storage-opt dm.libdm_log_level` [moby/moby#33845](https://github.com/moby/moby/pull/33845)
 * Devicemapper: Prevent "device in use" errors if deferred removal is enabled, but not deferred deletion [moby/moby#33877](https://github.com/moby/moby/pull/33877)
 * Devicemapper: Use KeepAlive to prevent tasks being garbage-collected while still in use [moby/moby#33376](https://github.com/moby/moby/pull/33376)
-* Report inetermediate prune results if prune is cancelled [moby/moby#33979](https://github.com/moby/moby/pull/33979)
+* Report intermediate prune results if prune is cancelled [moby/moby#33979](https://github.com/moby/moby/pull/33979)
 - Fix run `docker rename <container-id> new_name` concurrently resulting in the having multiple names [moby/moby#33940](https://github.com/moby/moby/pull/33940)
 * Fix file-descriptor leak and error handling [moby/moby#33713](https://github.com/moby/moby/pull/33713)
 - Fix SIGSEGV when running containers [docker/cli#303](https://github.com/docker/cli/pull/303)

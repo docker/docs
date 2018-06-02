@@ -48,7 +48,18 @@ full list of prerequisites.
     Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
 
-2.  Test your Docker EE installation by running the `hello-world` container.
+2.  Check if a reboot is required, and if yes, restart your instance:
+
+    ```PowerShell
+    (Install-WindowsFeature Containers).RestartNeeded
+    ```
+    If the output of this command is **Yes**, then restart the server with:
+    
+    ```PowerShell
+    Restart-Computer
+    ```
+
+3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```PowerShell
     docker container run hello-world:nanoserver

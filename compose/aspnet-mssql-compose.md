@@ -106,7 +106,7 @@ configure this app to use our SQL Server database, and then create a
         db:
             image: "microsoft/mssql-server-linux"
             environment:
-                SA_PASSWORD: "your_password"
+                SA_PASSWORD: "Your_password123"
                 ACCEPT_EULA: "Y"
     ```
 
@@ -125,8 +125,8 @@ configure this app to use our SQL Server database, and then create a
     public void ConfigureServices(IServiceCollection services)
     {
         // Database connection string.
-        // Make sure to update the Password value below from "your_password" to your actual password.
-        var connection = @"Server=db;Database=master;User=sa;Password=your_password;";
+        // Make sure to update the Password value below from "Your_password123" to your actual password.
+        var connection = @"Server=db;Database=master;User=sa;Password=Your_password123;";
 
         // This line uses 'UseSqlServer' in the 'options' parameter
         // with the connection string defined above.
@@ -168,7 +168,7 @@ configure this app to use our SQL Server database, and then create a
     $ docker-compose build
     ```
 
-1.  Make sure you allocate at least 4GB of memory to Docker Engine. Here is how
+1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
     [Docker for Mac](/docker-for-mac/#/advanced) and
     [Docker for Windows](/docker-for-windows/#/advanced).

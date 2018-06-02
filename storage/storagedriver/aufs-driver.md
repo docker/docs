@@ -138,7 +138,7 @@ following ways:
 ### Reading files
 
 Consider three scenarios where a container opens a file for read access with
-overlay.
+aufs.
 
 - **The file does not exist in the container layer**: If a container opens a
   file for read access and the file does not already exist in the container

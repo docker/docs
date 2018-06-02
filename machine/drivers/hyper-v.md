@@ -65,7 +65,7 @@ Make sure you have Ethernet connectivity while you are doing this.
 
 Open the **Hyper-V Manager**. (On Windows 10, just search for the Hyper-V Manager in the search field in the lower left search field.)
 
-Select the Virtual Switch Manager on the left-side **Actions** panel.
+Select the Virtual Switch Manager in the right-side **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
@@ -105,7 +105,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
     PS C:\WINDOWS\system32>  docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" manager1
     Running pre-create checks...
     Creating machine...
-    (manager1) Copying C:\Users\Vicky\.docker\machine\cache\boot2docker.iso to C:\Users\Vicky\.docker\machine\machines\manag
+    (manager1) Copying C:\Users\<your_username>\.docker\machine\cache\boot2docker.iso to C:\Users\<your_username>\.docker\machine\machines\manag
     er1\boot2docker.iso...
     (manager1) Creating SSH key...
     (manager1) Creating VM...

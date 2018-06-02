@@ -6,8 +6,8 @@ redirect_from:
 - engine/admin/volumes/
 ---
 
-It is possible to store data within the writable layer of a container, but there
-are some downsides:
+By default all files created inside a container are stored on a writable
+container layer. This means that:
 
 - The data doesn't persist when that container is no longer running, and it can be
   difficult to get the data out of the container if another process needs it.
@@ -19,10 +19,11 @@ are some downsides:
   kernel. This extra abstraction reduces performance as compared to using
   _data volumes_, which write directly to the host filesystem.
 
-Docker offers three different ways to mount data into a container from the
-Docker host: _volumes_, _bind mounts_, or _`tmpfs` volumes_. When in doubt,
-volumes are almost always the right choice. Keep reading for more information
-about each mechanism for mounting data into containers.
+Docker has two options for containers to store files in the host machine, so
+that the files are persisted even after the container stops: _volumes_, and
+_bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
+
+Keep reading for more information about these two ways of persisting data.
 
 ## Choose the right type of mount
 
@@ -84,12 +85,14 @@ mounts is to think about where the data lives on the Docker host.
   applications, consider using named volumes instead. You can't use
   Docker CLI commands to directly manage bind mounts.
 
-  > **Warning**: One side effect of using bind mounts, for better or for worse,
+  > Bind mounts allow access to sensitive files
+  >
+  > One side effect of using bind mounts, for better or for worse,
   > is that you can change the **host** filesystem via processes running in a
   > **container**, including creating, modifying, or deleting important system
   > files or directories. This is a powerful ability which can have security
   > implications, including impacting non-Docker processes on the host system.
-  {: .warning }
+  {: .important }
 
 - **[tmpfs mounts](tmpfs.md)**: A `tmpfs` mount is not persisted on disk, either
   on the Docker host or within a container. It can be used by a container during

@@ -63,7 +63,7 @@ command.
 | `--dns-opt`              | Set DNS options for the UCP containers                                                           |
 | `--dns-search`           | Set custom DNS search domains for the UCP containers                                             |
 | `--unlock-key`           | The unlock key for this swarm-mode cluster, if one exists.                                       |
-| `--existing-config`      | Use an existing UCP config during this installation. The install fails if a config is not found. |
+| `--existing-config`      | Use the latest existing UCP config during this installation. The install fails if a config is not found. |
 | `--pull`                 | Pull UCP images: `always`, when `missing`, or `never`                                            |
 | `--registry-username`    | Username to use when pulling images                                                              |
 | `--registry-password`    | Password to use when pulling images                                                              |

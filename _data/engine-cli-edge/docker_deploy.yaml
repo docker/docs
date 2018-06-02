@@ -17,7 +17,8 @@ options:
   swarm: true
 - option: compose-file
   shorthand: c
-  value_type: string
+  value_type: stringSlice
+  default_value: '[]'
   description: Path to a Compose file
   deprecated: false
   min_api_version: "1.25"

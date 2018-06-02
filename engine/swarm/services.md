@@ -418,7 +418,7 @@ option to the `--publish` flag.
 > `--mode=global` flag on `docker service create`, it is difficult to know
 > which nodes are running the service to route work to them.
 
-##### Example: Run a `nginx` web server service on every swarm node
+##### Example: Run an `nginx` web server service on every swarm node
 
 [nginx](https://hub.docker.com/_/nginx/) is an open source reverse proxy, load
 balancer, HTTP cache, and a web server. If you run nginx as a service using the
@@ -846,14 +846,19 @@ mounts. This principle also applies to services.
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. Regardless of which type of mount you use, configure it using the
 `--mount` flag when you create a service, or the `--mount-add` or `--mount-rm`
-flag when updating an existing service.. The default is a data volume if you
+flag when updating an existing service. The default is a data volume if you
 don't specify a type.
 
 #### Data volumes
 
-Data volumes are storage that remain alive after a container for a task has
-been removed. The preferred method to mount volumes is to leverage an existing
-volume:
+Data volumes are storage that exist independently of a container. The
+lifecycle of data volumes under swarm services is similar to that under
+containers. Volumes outlive tasks and services, so their removal must be
+managed separately. Volumes can be created before deploying a service, or if
+they don't exist on a particular host when a task is scheduled there, they are
+created automatically according to the volume specification on the service.
+
+To use existing data volumes with a service use the `--mount` flag:
 
 ```bash
 $ docker service create \
@@ -862,11 +867,10 @@ $ docker service create \
   <IMAGE>
 ```
 
-For more information on how to create a volume, see the `volume create`
-[CLI reference](/engine/reference/commandline/volume_create.md).
-
-The following method creates the volume at deployment time when the scheduler
-dispatches a task, just before starting the container:
+If a volume with the same `<VOLUME-NAME>` does not exist when a task is
+scheduled to a particular host, then one is created. The default volume
+driver is `local`.  To use a different volume driver with this create-on-demand
+pattern, specify the driver and its options with the `--mount` flag:
 
 ```bash
 $ docker service create \
@@ -875,18 +879,8 @@ $ docker service create \
   <IMAGE>
 ```
 
-> **Important:** If your volume driver accepts a comma-separated list as an option,
-> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
-> surround it with double quotes (`"`) and surround the entire mount parameter
-> with single quotes (`'`).
->
-> For example, the `local` driver accepts mount options as a comma-separated
-> list in the `o` parameter. This example shows the correct way to escape the list.
->
->     $ docker service create \
->          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
->         --name myservice \
->         <IMAGE>
+For more information on how to create data volumes and the use of volume
+drivers, see [Use volumes](/storage/volumes/).
 
 
 #### Bind mounts
@@ -929,9 +923,9 @@ The following examples show bind mount syntax:
 > - The Docker swarm mode scheduler may reschedule your running service
 >   containers at any time if they become unhealthy or unreachable.
 >
-> - Host bind mounts are completely non-portable. When you use bind mounts,
->   there is no guarantee that your application runs the same way in
->   development as it does in production.
+> - Host bind mounts are non-portable. When you use bind mounts, there is no
+>   guarantee that your application runs the same way in development as it does
+>   in production.
 
 ### Create services using templates
 
@@ -953,6 +947,7 @@ Valid placeholders for the Go template are:
 | `.Service.Name`   | Service name   |
 | `.Service.Labels` | Service labels |
 | `.Node.ID`        | Node ID        |
+| `.Node.Hostname`  | Node hostname  |
 | `.Task.Name`      | Task name      |
 | `.Task.Slot`      | Task slot      |
 

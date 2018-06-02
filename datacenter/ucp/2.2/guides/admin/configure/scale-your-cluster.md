@@ -65,34 +65,7 @@ web UI.
 
 ![](../../images/scale-your-cluster-2.png){: .with-border}
 
-## Remove nodes from the cluster
-
-1. If the target node is a manager, you will need to first demote the node into
-   a worker before proceeding with the removal:
-   * From the UCP web UI, navigate to the **Nodes** page. Select the node you
-   wish to remove and switch its role to **Worker**, wait until the operation
-   completes, and confirm that the node is no longer a manager.
-   * From the CLI, perform `docker node ls` and identify the nodeID or hostname
-   of the target node. Then, run `docker node demote <nodeID or hostname>`.
-
-2. If the status of the worker node is `Ready`, you need to manually force
-   the node to leave the swarm. To do this, connect to the target node through
-   SSH and run `docker swarm leave --force` directly against the local docker
-   engine.
-
-   > Loss of quorum
-   >
-   > Do not perform this step if the node is still a manager, as
-   > this may cause loss of quorum.
-
-3. Now that the status of the node is reported as `Down`, you may remove the
-   node:
-	* From the UCP web UI, browse to the **Nodes** page and select the node.
-	In the details pane, click **Actions** and select **Remove**.
-    Click **Confirm** when you're prompted.
-	* From the CLI, perform `docker node rm <nodeID or hostname>`.
-
-## Pause and drain nodes
+## Pause or drain nodes
 
 Once a node is part of the cluster you can change its role making a manager
 node into a worker and vice versa. You can also configure the node availability
@@ -103,52 +76,56 @@ so that it is:
 * Drained: the node can't receive new tasks. Existing tasks are stopped and
   replica tasks are launched in active nodes.
 
-In the UCP web UI, browse to the **Nodes** page and select the node. In the details pane, click the **Configure** to open the **Edit Node** page.
+In the UCP web UI, browse to the **Nodes** page and select the node. In the
+details pane, click the **Configure** to open the **Edit Node** page.
 
 ![](../../images/scale-your-cluster-3.png){: .with-border}
 
-If you're load-balancing user requests to UCP across multiple manager nodes,
-when demoting those nodes into workers, don't forget to remove them from your
-load-balancing pool.
+## Promote or demote a node
 
-## Scale your cluster from the CLI
+You can promote worker nodes to managers to make UCP fault tolerant. You can
+also demote a manager node into a worker.
 
-You can also use the command line to do all of the above operations. To get the
-join token, run the following command on a manager node:
+To promote or demote a manager node:
+
+1.  Navigate to the **Nodes** page, and click the node that you want to demote.
+2.  In the details pane, click **Configure** and select **Details** to open
+    the **Edit Node** page.
+3.  In the **Role** section, click **Manager** or **Worker**.
+4.  Click **Save** and wait until the operation completes.
+5.  Navigate to the **Nodes** page, and confirm that the node role has changed.
+
+If you're load-balancing user requests to Docker EE across multiple manager
+nodes, don't forget to remove these nodes from your load-balancing pool when
+you demote them to workers.
+
+## Remove a node from the cluster
+
+You can remove worker nodes from the cluster at any time:
+
+1.  Navigate to the **Nodes** page and select the node.
+2.  In the details pane, click **Actions** and select **Remove**.
+3.  Click **Confirm** when you're prompted.
+
+Since manager nodes are important to the cluster overall health, you need to
+be careful when removing one from the cluster.
+
+To remove a manager node:
+
+1. Make sure all nodes in the cluster are healthy. Don't remove manager nodes
+if that's not the case.
+2. Demote the manager node into a worker.
+3. Now you can remove that node from the cluster.
+
+## Use the CLI to manage your nodes
+
+You can use the Docker CLI client to manage your nodes from the CLI. To do
+this, configure your Docker CLI client with a [UCP client bundle](../../../user-access/cli.md).
+
+Once you do that, you can start managing your UCP nodes:
 
 ```bash
-$ docker swarm join-token worker
-```
-
-If you want to add a new manager node instead of a worker node, use
-`docker swarm join-token manager` instead. If you want to use a custom listen
-address, add the `--listen-addr` arg:
-
-```bash
-$ docker swarm join \
-    --token SWMTKN-1-2o5ra9t7022neymg4u15f3jjfh0qh3yof817nunoioxa9i7lsp-dkmt01ebwp2m0wce1u31h6lmj \
-    --listen-addr 234.234.234.234 \
-    192.168.99.100:2377
-```
-
-Once your node is added, you can see it by running `docker node ls` on a manager:
-
-```bash
-$ docker node ls
-```
-
-To change the node's availability, use:
-
-```bash
-$ docker node update --availability drain node2
-```
-
-You can set the availability to `active`, `pause`, or `drain`.
-
-To remove the node, use:
-
-```bash
-$ docker node rm <node-hostname>
+docker node ls
 ```
 
 ## Where to go next

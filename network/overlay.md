@@ -10,7 +10,7 @@ redirect_from:
 
 The `overlay` network driver creates a distributed network among multiple
 Docker daemon hosts. This network sits on top of (overlays) the host-specific
-networks allows containers connected to it (including swarm service
+networks, allowing containers connected to it (including swarm service
 containers) to communicate securely. Docker transparently handles routing of
 each packet to and from the correct Docker daemon host and the correct
 destination container.
@@ -153,7 +153,7 @@ services which publish ports, such as a WordPress service which publishes port
       --ingress \
       --subnet=10.11.0.0/16 \
       --gateway=10.11.0.2 \
-      --opt com.docker.network.mtu=1200 \
+      --opt com.docker.network.driver.mtu=1200 \
       my-ingress
     ```
 
@@ -180,7 +180,7 @@ from the swarm.
     ```bash
     $ sudo ip link set docker_gwbridge down
 
-    $ sudo ip link del name docker_gwbridge
+    $ sudo ip link del dev docker_gwbridge
     ```
 
 3.  Start Docker. Do not join or initialize the swarm.
@@ -278,8 +278,12 @@ routing on the individual Docker daemon hosts.
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-p 8080:80`                    | Map TCP port 80 in the container to port 8080 on the overlay network.                                                                               |
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the overlay network.                                                                               |
+| `-p 8080:80/sctp`               | Map SCTP port 80 in the container to port 8080 on the overlay network.                                                                              |
 | `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay networkt. |
 
+### Container discovery
+
+For most situations, you should connect to the service name, which is load-balanced and handled by all containers ("tasks") backing the service. To get a list of all tasks backing the service, do a DNS lookup for `tasks.<service-name>.`
 
 ## Next steps
 

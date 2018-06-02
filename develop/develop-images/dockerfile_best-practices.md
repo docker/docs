@@ -71,7 +71,7 @@ context.
 > Create a directory for the build context and `cd` into it. Write "hello" into
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
->
+> 
 > ```shell
 > mkdir myproject && cd myproject
 > echo "hello" > hello
@@ -643,6 +643,7 @@ container start:
 
     COPY ./docker-entrypoint.sh /
     ENTRYPOINT ["/docker-entrypoint.sh"]
+    CMD ["postgres"]
 
 This script allows the user to interact with Postgres in several ways.
 
