@@ -99,7 +99,7 @@ building your `Dockerfile`:
 Sending build context to Docker daemon  187.8MB
 ```
 
-### Pipe Dockerfle through `stdin`
+### Pipe Dockerfile through `stdin`
 
 Docker 17.05 added the ability to build images by piping `Dockerfile` through
 `stdin` with a _local or remote build-context_. In earlier versions, building an
