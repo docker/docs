@@ -19,8 +19,8 @@ build a given image. A `Dockerfile` adheres to a specific format and set of
 instructions which you can find at [Dockerfile reference](/engine/reference/builder/).
 
 A Docker image consists of read-only layers each of which represents a
-Dockerfile  instruction. The layers are stacked on top of each other and each
-one is a a diff from the previous layer. Consider this `Dockerfile`:
+Dockerfile  instruction. The layers are stacked and each one is a delta of the
+changes from the previous layer. Consider this `Dockerfile`:
 
 ```conf
 FROM ubuntu:15.04
@@ -71,7 +71,7 @@ context.
 > Create a directory for the build context and `cd` into it. Write "hello" into
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
-> 
+>
 > ```shell
 > mkdir myproject && cd myproject
 > echo "hello" > hello
@@ -97,6 +97,40 @@ building your `Dockerfile`:
 
 ```none
 Sending build context to Docker daemon  187.8MB
+```
+
+### Pipe Dockerfle through `stdin`
+
+Docker 17.05 added the ability to build images by piping `Dockerfile` through
+`stdin` with a _local or remote build-context_. In earlier versions, building an
+image with a `Dockerfile` from `stdin` did not send the build-context.
+
+**Docker 17.04 and lower**
+
+```
+docker build -t foo -<<EOF
+FROM busybox
+RUN echo "hello world"
+EOF
+```
+
+**Docker 17.05 and higher (local build-context)**
+
+```
+docker build -t . -f-<<EOF
+FROM busybox
+RUN echo "hello world"
+COPY . /my-copied-files
+EOF
+```
+
+**Docker 17.05 and higher (remote build-context)**
+
+```
+docker build -t foo https://github.com/thajeztah/pgadmin4-docker.git -f-<<EOF
+FROM busybox
+COPY LICENSE config_local.py /usr/local/lib/python2.7/site-packages/pgadmin4/
+EOF
 ```
 
 ### Exclude with .dockerignore
@@ -277,7 +311,8 @@ The following examples show the different acceptable formats. Explanatory commen
 ```conf
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
-LABEL vendor="ACME Incorporated"
+LABEL vendor1="ACME Incorporated"
+LABEL vendor2=ZENITH\ Incorporated
 LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
 ```
