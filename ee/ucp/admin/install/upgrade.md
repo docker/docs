@@ -26,12 +26,9 @@ Ensure that your cluster nodes meet the minimum requirements for memory and
 disk space. In particular, manager nodes must have at least 4GB of memory.
 Learn about [UCP system requirements](system-requirements.md).
 
-> New firewall ports 
->
-> With the introduction of Kubernetes components, additional ports may need
-> to be opened in the firewall. [Ports used](system-requirements.md/#ports-used) are documented
-> in the UCP system requirements. 
-> Ports with Kubernetes scope include **179/tcp, 6443/tcp, 6444/tcp, 10250/tcp** 
+Ensure that your cluster nodes meet the minimum requirements for port openings.
+[Ports used](system-requirements.md/#ports-used) are documented in the UCP system requirements. 
+
 
 ## Back up your cluster
 
