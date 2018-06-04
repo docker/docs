@@ -1892,6 +1892,7 @@ manuals:
           title: API reference
         - path: /ee/ucp/release-notes/
           title: Release notes
+          nosync: true
         - path: /datacenter/ucp/2.2/guides/get-support/
           title: Get support
       - sectiontitle: Universal Control Plane 2.1
@@ -2548,6 +2549,7 @@ manuals:
           title: API reference
         - path: /ee/dtr/release-notes/
           title: Release notes
+          nosync: true
         - path: /datacenter/dtr/2.4/guides/support/
           title: Get support
       - sectiontitle: Docker Trusted Registry 2.3
