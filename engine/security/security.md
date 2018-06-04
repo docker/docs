@@ -21,8 +21,7 @@ There are four major areas to consider when reviewing Docker security:
 
 Docker containers are very similar to LXC containers, and they have
 similar security features. When you start a container with
-`docker run`, behind the scenes Docker creates a set of namespaces and control
-groups for the container.
+`docker run`, behind the scenes Docker creates a set of namespaces for the container.
 
 **Namespaces provide the first and most straightforward form of
 isolation**: processes running within a container cannot see, and even
