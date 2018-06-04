@@ -19,6 +19,12 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-13 (2018-06-04)
+
+### Networking
+
+- Fix attachable containers that may leave DNS state when exiting. [docker/libnetwork#2175](https://github.com/docker/libnetwork/pull/2175)
+
 ## 17.06.2-ee-12 (2018-05-29)
 
 ### Networking
