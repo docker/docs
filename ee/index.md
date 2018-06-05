@@ -172,9 +172,8 @@ Managers: 1
 
 ## Use the Kubernetes CLI
 
-Docker EE exposes the standard Kubernetes API, and it installs the command-line
-tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
-`kubectl cluster-info`:
+Docker EE exposes the standard Kubernetes API, so you can use `kubectl` to
+manage your Kubernetes workloads:
 
 ```bash
 kubectl cluster-info
