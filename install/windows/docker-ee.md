@@ -108,8 +108,11 @@ installs, or install on air-gapped systems.
     register, and start the Docker service.
 
     ```PowerShell
+    #Stop Docker service
+    Stop-Service docker
+    
     # Extract the archive.
-    Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles
+    Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles -Force
 
     # Clean up the zip file.
     Remove-Item -Force {{ filename }}
