@@ -15,7 +15,7 @@ other relevant information for upgrading to a particular version.
 ## Plan the upgrade
 
 As part of the upgrade process, you'll upgrade the Docker EE Engine
-installed on each node of the cluster to version 17.06.2-ee-8.
+installed on each node of the cluster to version 17.06.2-ee-8 or higher.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
 
