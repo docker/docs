@@ -76,6 +76,10 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 ## 17.06.2-ee-8 (2018-04-17)
 
+### Runtime
+
+* Update `hcsshim` to v0.6.10 to address [CVE-2018-8115](https://portal.msrc.microsoft.com/en-us/security-guidance/advisory/CVE-2018-8115)
+
 ### Networking
 
 - Update libnetwork to fix stale HNS endpoints on Windows. [moby/moby#36603](https://github.com/moby/moby/pull/36603)
