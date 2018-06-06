@@ -68,6 +68,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 * Make Swarm manager Raft quorum parameters configurable in daemon config. [moby/moby#36726](https://github.com/moby/moby/pull/36726)
 * Windows: Ignore missing tombstone files when closing an image.
 * Windows: Fix directory deletes when a container sharing a base image is running.
+* Update `hcsshim` to v0.6.10 to address [CVE-2018-8115](https://portal.msrc.microsoft.com/en-us/security-guidance/advisory/CVE-2018-8115)
 
 ### Swarm mode
 
