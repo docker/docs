@@ -118,6 +118,8 @@ Its setting can have complicated effects:
 - If `--memory-swap` is explicitly set to `-1`, the container is allowed to use
   unlimited swap, up to the amount available on the host system.
 
+- Inside the container, tools like `free` report the host's available swap, not what's available inside the container. Don't rely on the output of `free` or similar tools to determine whether swap is present.
+
 #### Prevent a container from using swap
 
 If `--memory` and `--memory-swap` are set to the same value, this prevents
