@@ -254,7 +254,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## 17.06.1-ee (2017-08-16)
+## 17.06.1-ee-1 (2017-08-16)
 
 ### Important notes about this release
 
