@@ -18,6 +18,23 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-mac67 2018-06-07
+
+[Download](https://download.docker.com/mac/edge/25042/Docker.dmg)
+
+* Upgrades
+  - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
+  - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
+  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Mac.
+
+* Bug fixes and minor changes
+  - Fix VPNKit memory leak. Fixes [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)
+  - Fix com.docker.supervisor using 100% CPU. Fixes [docker/for-mac#2967](https://github.com/docker/for-mac/issues/2967), [docker/for-mac#2923](https://github.com/docker/for-mac/issues/2923)
+  - Do not override existing kubectl binary in /usr/local/bin (installed with brew or otherwise). Fixes [docker/for-mac#2368](https://github.com/docker/for-mac/issues/2368), [docker/for-mac#2890](https://github.com/docker/for-mac/issues/2890)
+  - Detect Vmnetd install error. Fixes [docker/for-mac#2934](https://github.com/docker/for-mac/issues/2934), [docker/for-mac#2687](https://github.com/docker/for-mac/issues/2687) 
+  - Virtual Machine default disk path is stored relative to $HOME. Fixes [docker/for-mac#2928](https://github.com/docker/for-mac/issues/2928), [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209)
+  
+
 ### Docker Community Edition 18.05.0-ce-mac66 2018-05-17
 
 [Download](https://download.docker.com/mac/edge/24545/Docker.dmg)
