@@ -207,6 +207,10 @@ The claims in this file make no reference to a particular storage class, so
 they bind to any available volumes that can satisfy the storage request.
 In this example, both claims request `20Gi` of storage.
 
+NOTE: Ensure that the storageClassName key is populated, in the persistent
+claim itself, if you are attempting to use a specific persistent volume and 
+not let Kubernetes choose at random.
+
 ```yaml
 apiVersion: v1
 kind: Service
