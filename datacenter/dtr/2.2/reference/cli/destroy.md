@@ -12,7 +12,12 @@ Destroy a DTR replica's data
 docker run -it --rm docker/dtr \
     destroy [command options]
 ```
-
+Example:
+```bash
+docker run -it --rm \
+  docker/dtr:2.3.2 destroy \
+  --ucp-insecure-tls
+```
 ## Description
 
 
