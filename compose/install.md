@@ -128,6 +128,12 @@ by step instructions are also included below.
     ```bash
     sudo chmod +x /usr/local/bin/docker-compose
     ```
+    
+Note: If after installing compose you still can't use it due to the docker-compose command failing, please do the following:
+
+```bash
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
