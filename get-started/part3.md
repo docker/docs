@@ -158,10 +158,10 @@ is not filtered by service:
 docker container ls -q
 ```
 
-You can run `curl -4 http://localhost` several times in a row, or go to that URL in
+You can run `curl -4 http://localhost:4000` several times in a row, or go to that URL in
 your browser and hit refresh a few times.
 
-![Hello World in browser](images/app80-in-browser.png)
+![Hello World in browser](images/app-in-browser.png)
 
 Either way, the container ID changes, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
