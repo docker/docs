@@ -30,12 +30,12 @@ swarm.
     You are prompted for your Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
     ```
-    $ docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST dockercloud/client orangesnap/vote-swarm
+    $ docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST dockercloud/client gordon/vote-swarm
     Use your Docker ID credentials to authenticate:
-    Username: orangesnap
+    Username: gordon
     Password:
 
-    => You can now start using the swarm orangesnap/vote-swarm by executing:
+    => You can now start using the swarm gordon/vote-swarm by executing:
     	export DOCKER_HOST=tcp://127.0.0.1:32770
 ```
 
