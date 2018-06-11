@@ -34,6 +34,10 @@ When creating a repository in DTR, the full name of the repository becomes
 `<dtr-domain-name>/<user-or-org>/<repository-name>`. In this example, the full
 name of our repository will be `dtr.example.org/dave.lauper/golang`.
 
+DTR only allows image names with 255 characters. This includes the domain,
+organization, and repository name. When you create a repository, make sure
+its full name has less than 255 characters.
+
 ## Where to go next
 
 - [Pull and push images](pull-and-push-images.md)

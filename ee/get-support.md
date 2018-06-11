@@ -29,8 +29,7 @@ support dump:
 
 ## Use the CLI to get a support dump
 
-To get the support dump from the CLI, use SSH to log into a UCP manager node
-and run:
+To get the support dump from the CLI, use SSH to log into a node and run:
 
 ```bash
 docker container run --rm \

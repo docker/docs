@@ -15,7 +15,7 @@ other relevant information for upgrading to a particular version.
 ## Plan the upgrade
 
 As part of the upgrade process, you'll upgrade the Docker EE Engine
-installed on each node of the cluster to version 17.06.2-ee-8.
+installed on each node of the cluster to version 17.06.2-ee-8 or higher.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
 
@@ -24,7 +24,11 @@ This can lead to misconfigurations that are difficult to troubleshoot.
 
 Ensure that your cluster nodes meet the minimum requirements for memory and
 disk space. In particular, manager nodes must have at least 4GB of memory.
-Learn about [UCP system requirements](system-requirements.md).  
+Learn about [UCP system requirements](system-requirements.md).
+
+Ensure that your cluster nodes meet the minimum requirements for port openings.
+[Ports used](system-requirements.md/#ports-used) are documented in the UCP system requirements. 
+
 
 ## Back up your cluster
 

@@ -19,6 +19,12 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-13 (2018-06-04)
+
+### Networking
+
+- Fix attachable containers that may leave DNS state when exiting. [docker/libnetwork#2175](https://github.com/docker/libnetwork/pull/2175)
+
 ## 17.06.2-ee-12 (2018-05-29)
 
 ### Networking
@@ -69,6 +75,10 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 - Adding logic to restore networks in order. [docker/swarmkit#2584](https://github.com/docker/swarmkit/pull/2584)
 
 ## 17.06.2-ee-8 (2018-04-17)
+
+### Runtime
+
+* Update `hcsshim` to v0.6.10 to address [CVE-2018-8115](https://portal.msrc.microsoft.com/en-us/security-guidance/advisory/CVE-2018-8115)
 
 ### Networking
 
@@ -244,7 +254,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## 17.06.1-ee (2017-08-16)
+## 17.06.1-ee-1 (2017-08-16)
 
 ### Important notes about this release
 
