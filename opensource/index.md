@@ -39,7 +39,7 @@ Docker 문서에 기여하는 것은 보람있는 경험이 될 수 있습니다
 
 > 오픈 소스 Moby 프로젝트를 찾고 계십니까?
 >
-> See [Moby를 찾으세요?](#looking-for-moby) 아래에서.
+>  [Moby를 찾으세요?](#looking-for-moby) 아래에서.
 
 ## 문서에 기여하는 방법
 TDocker에 대한 설명서는 [docs.docker.com](https://docs.docker.com/)
