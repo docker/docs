@@ -18,6 +18,19 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.05.0-ce-win67 2018-06-07
+
+[Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
+  - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
+  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Windows.
+
+* Bug fixes and minor changes
+  - Fix VPNKit memory leak. Fixes [docker/for-win#2087](https://github.com/docker/for-win/issues/2087), [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)
+  - Fix potential loss of Kubernetes local cluster certificates on reboot.
+
 ### Docker Community Edition 18.05.0-ce-win66 2018-05-17
 
 [Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe)

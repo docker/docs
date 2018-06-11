@@ -9,6 +9,9 @@ stack is not isolated from the Docker host. For instance, if you run a container
 which binds to port 80 and you use `host` networking, the container's
 application will be available on port 80 on the host's IP address.
 
+The host networking driver only works on Linux hosts, and is not supported on
+Docker for Mac, Docker for Windows, or Docker EE for Windows Server.
+
 In Docker 17.06 and higher, you can also use a `host` network for a swarm
 service, by passing `--network host` to the `docker container create` command.
 In this case, control traffic (traffic related to managing the swarm and the

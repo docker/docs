@@ -85,13 +85,13 @@ You only need to set up the repository once, after which you can install Docker 
 
     The repository can differ per your architecture and cloud provider, so review the options in this step before running:
 
-    **For all architectures _except_ IBM Power PC:**
+    **For all architectures _except_ IBM Power:**
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
     ```
 
-    **For IBM Power PC only (little endian):**
+    **For IBM Power only (little endian):**
 
     ```bash
     $ sudo yum-config-manager --enable extras

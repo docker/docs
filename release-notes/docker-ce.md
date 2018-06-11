@@ -43,6 +43,7 @@ Release notes for stable versions are listed first. You can
 - Make sure plugin container is removed on failure [moby/moby#36715](https://github.com/moby/moby/pull/36715)
 - Copy: avoid using all system memory with authz plugins [moby/moby#36595](https://github.com/moby/moby/pull/36595)
 - Relax some libcontainerd client locking [moby/moby#36848](https://github.com/moby/moby/pull/36848)
+- Update `hcsshim` to v0.6.10 to address [CVE-2018-8115](https://portal.msrc.microsoft.com/en-us/security-guidance/advisory/CVE-2018-8115)
 
 ### Swarm Mode
 
