@@ -149,6 +149,13 @@ from the repository.
     > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
+    > **Warning**:
+    >
+    > Our policy is to only build new packages when we release new versions of Docker. This means that new distribution versions will not have a Docker package built for them until the next release of Docker.
+    >
+    > If no package is available for your distribution yet (`yum` replies `No package docker-ce available`), you can try one of the other methods listed on this page.
+    {:.warning}
+
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
 2.  To install a _specific version_ of Docker CE, list the available versions
