@@ -174,7 +174,7 @@ friendlyhello         latest              326387cea398
 ```
 >  Troubleshooting for Linux users
 >
-> _DNS settings_
+> _Proxy server settings_
 >
 > Proxy servers can block connections to your web app once it's up and running.
 > If you are behind a proxy server, add the following lines to your
@@ -187,7 +187,7 @@ friendlyhello         latest              326387cea398
 > ENV https_proxy host:port
 > ```
 >
-> _Proxy server settings_
+> _DNS settings_
 >
 > DNS misconfigurations can generate problems with `pip`. You need to set your
 > own DNS server address to make `pip` work properly. You might want
