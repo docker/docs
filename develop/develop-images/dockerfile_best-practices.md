@@ -117,7 +117,7 @@ EOF
 **Docker 17.05 and higher (local build-context)**
 
 ```
-docker build -t . -f-<<EOF
+docker build -t foo . -f-<<EOF
 FROM busybox
 RUN echo "hello world"
 COPY . /my-copied-files
