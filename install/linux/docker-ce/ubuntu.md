@@ -32,7 +32,8 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge and higher only)
+- Bionic 18.04 (Docker CE 18.05 Edge and higher only)
+- Artful 17.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
