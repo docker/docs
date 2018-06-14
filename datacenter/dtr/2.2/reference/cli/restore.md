@@ -4,6 +4,7 @@ keywords: docker, dtr, cli, restore
 description: Install and restore DTR from an existing backup
 ---
 
+To restore DTR one has to make sure that DTR is completely removed from the old environment. 
 Install and restore DTR from an existing backup
 
 ## Usage
