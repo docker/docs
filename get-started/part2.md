@@ -301,7 +301,7 @@ Registry](/datacenter/dtr/2.2/guides/).
 ### Log in with your Docker ID
 
 If you don't have a Docker account, sign up for one at
-[cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }.
+[hub.docker.com](https://hub.docker.com){: target="_blank" class="_" }.
 Make note of your username.
 
 Log in to the Docker public registry on your local machine.
