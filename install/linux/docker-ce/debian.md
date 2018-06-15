@@ -231,6 +231,13 @@ from the repository.
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
+    > **Warning**:
+    >
+    > Our policy is to only build new packages when we release new versions of Docker. This means that new distribution versions will not have a Docker package built for them until the next release of Docker.
+    >
+    > If no package is available for your distribution yet (`apt-get` replies `unable to locate package docker-ce`), you can try one of the other methods listed on this page.
+    {:.warning}
+
 3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
 
     a. List the versions available in your repo:
