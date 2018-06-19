@@ -13,6 +13,7 @@ The Docker Cloud runtime is being discontinued. This means that you will no long
 - [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Google Kubernetes Engine](cloud-to-kube-gke){: target="_blank" class="_"}
+- [Migrate Docker Cloud stacks to Amazon ECS](cloud-to-aws-ecs){: target="_blank" class="_"}
 - [Deregister Swarms on Docker Cloud](deregister-swarms){: target="_blank" class="_"}
 - [Kubernetes primer](kube-primer){: target="_blank" class="_"}
 
@@ -31,4 +32,4 @@ Docker Cloud SaaS features stay! We are _not_ removing automated builds and regi
 - Autoredeploy your applications.
 - Integrate users with other parts the Docker platform with their Docker ID.
 
-> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
+> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS, ECS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
