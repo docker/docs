@@ -20,7 +20,6 @@ Options:
     -u, --user=""         Run as specified username or uid
     --no-deps             Don't start linked services.
     --rm                  Remove container after run. Ignored in detached mode.
-                          Overrides the container's restart policy.
     -p, --publish=[]      Publish a container's port(s) to the host
     --service-ports       Run command with the service's ports enabled and mapped
                           to the host.
@@ -57,3 +56,9 @@ This opens an interactive PostgreSQL shell for the linked `db` container.
 If you do not want the `run` command to start linked containers, use the `--no-deps` flag:
 
     docker-compose run --no-deps web python manage.py shell
+
+If you want to remove the container after running while overriding the container's restart policy, use the `--rm` flag:
+
+    docker-compose run --rm web python manage.py db upgrade
+
+This runs a database upgrade script, and removes the container when finished running, even if a restart policy is specified in the service configuration.
