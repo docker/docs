@@ -20,14 +20,14 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 
 ### Minimum requirements
 
-* 8GB of RAM for manager nodes or nodes running DTR
+* 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
 * 3GB of free disk space
 
 ### Recommended production requirements
 
- * 16GB of RAM for manager nodes or nodes running DTR
- * 4 vCPUs for manager nodes or nodes running DTR
+ * 16GB of RAM for manager nodes
+ * 4 vCPUs for manager nodes
  * 25-100GB of free disk space
  
 Note that Windows container images are typically larger than Linux ones and for
