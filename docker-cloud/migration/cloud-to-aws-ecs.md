@@ -10,7 +10,7 @@ This page explains how to prepare your applications for migration from Docker Cl
 
 At a high level, migrating your Docker Cloud applications requires that you:
 
-- **Build** a target environment 
+- **Build** a target environment
 - **Convert** your Docker Cloud YAML stackfiles to Docker compose files or ECS task definitions
 - **Test** the new task definitions in the new environment
 - **Point** your application CNAMES to new service endpoints.
@@ -26,7 +26,7 @@ If you'd rather migrate your Docker Cloud applications to Amazon EKS after it be
 
 ## Voting-app example
 
-The Docker Cloud stack that we're going to use for our example is a voting application as defined in [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml). The rest of this document describes a couple of approaches you could use to convert this file into a set of ECS task definitions. 
+The Docker Cloud stack that we're going to use for our example is a voting application as defined in [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml). The rest of this document describes a couple of approaches you could use to convert this file into a set of ECS task definitions.
 
 In the [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml), the voting app is defined as a stack of six microservices:
 
@@ -116,7 +116,7 @@ You can think of an ECS task as the smallest unit of deployment; all of the cont
 
 An ECS service is an abstraction that provides stable networking for a set of tasks.  Using AWS [Service Discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html), it's now possible to register a service's endpoints in a [Route 53](https://aws.amazon.com/route53/) hosted zone which allows services to discover each other by querying DNS.  ECS services can also be fronted by an application, network, or classic load balancer.
 
-The following diagram shows three tasks deployed as part of a single ECS service that is being fronted by an application load balancer. 
+The following diagram shows three tasks deployed as part of a single ECS service that is being fronted by an application load balancer.
 
 ![image of voting app arch](images/AWS-migration1.png)
 
@@ -375,7 +375,7 @@ vote:
 
 Create a security group for the load balancer. 
 ```
-export SG_ID=$(aws ec2 create-security-group --group-name <group_name> --description 
+export SG_ID=$(aws ec2 create-security-group --group-name <group_name> --description
 "Allow inbound on port 80 from the Internet" --vpc-id <vpc_id> --region <region> --output text)
 ```
 
@@ -632,7 +632,7 @@ aws ecs create-service --region <region> --cli-input-json file://result.json
 
 Add the load balancer security group to the security group for your container instances.
 ```
-aws ec2 authorize-security-group-ingress --group-id <group_id_of_container_instances> --protocol all --source-group $SG_ID  
+aws ec2 authorize-security-group-ingress --group-id <group_id_of_container_instances> --protocol all --source-group $SG_ID 
 ```
 
 ###Test the app on ECS
@@ -670,9 +670,4 @@ After the migration is complete, make sure everything is working as expected. En
 
 ## Summary
 
-In this post, we how to move an application from Docker Cloud to Amazon ECS with no code changes.  While this may initially help accelerate your migration to ECS, you're still left with services like Postgres and Redis that you'll have to manage yourself.   AWS gives you an opportunity to replace those services with managed services, like RDS and Elasticache which alleviate a lot of that “undifferentiated heavy lifting” we associate with managing infrastructure services like these.  We encourage you to look at a migration of this kind as an opportunity to optimize by re-architecting your application to take advantage of AWS's managed services.  For an in-depth look at how to do this, see [“Deploying the voting app to ECS with Fargate”](https://read.acloud.guru/deploy-the-voting-app-to-aws-ecs-with-fargate-cb75f226408f).  The beauty of this approach is that lets you run containerized applciations without managing the underlying compute infrastruture, which leaves you more time to create great applications and less time worrying about your infrastructure.  
-
-###TODO
-1. Create a service from a task definition
-2. Explain how to register your ECS service with the AWS Service Discovery service
-3. Create an SG that allows all traffic inbound from the IPs of the NLB
+In this post, we how to move an application from Docker Cloud to Amazon ECS with no code changes.  While this may initially help accelerate your migration to ECS, you're still left with services like Postgres and Redis that you'll have to manage yourself.   AWS gives you an opportunity to replace those services with managed services, like RDS and Elasticache which alleviate a lot of that “undifferentiated heavy lifting” we associate with managing infrastructure services like these.  We encourage you to look at a migration of this kind as an opportunity to optimize by re-architecting your application to take advantage of AWS's managed services.  For an in-depth look at how to do this, see [“Deploying the voting app to ECS with Fargate”](https://read.acloud.guru/deploy-the-voting-app-to-aws-ecs-with-fargate-cb75f226408f).  The beauty of this approach is that lets you run containerized applciations without managing the underlying compute infrastruture, which leaves you more time to create great applications and less time worrying about your infrastructure. 
