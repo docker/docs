@@ -139,6 +139,18 @@ specify `--log-protocol`.
   FATAL:  database files are incompatible with server
 
 # Version 2.4
+## Version 2.4.5
+
+(21 June 2018)
+
+**New Features**
+
+* Allow users to adjust DTR log levels for alternative logging solutions.
+
+**Bug Fixes**
+
+* Prevent OOM during garbage collection by reading less data into memory at a time.
+
 ## Version 2.4.4
 
 (17 May 2018)
