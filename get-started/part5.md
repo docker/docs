@@ -31,7 +31,7 @@ by `docker-machine start myvm2` to boot the worker.
 
 - Have the swarm you created in [part 4](part4.md) running and ready. Run
 `docker-machine ssh myvm1 "docker node ls"` to verify this. If the swarm is up,
-both nodes report a `ready` status. If not, reinitialze the swarm and join
+both nodes report a `ready` status. If not, reinitialize the swarm and join
 the worker as described in [Set up your
 swarm](/get-started/part4.md#set-up-your-swarm).
 
