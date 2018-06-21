@@ -19,6 +19,36 @@ upgrade your installation to the latest release.
 * [Version 2.2](#version-22)
 
 # Version 3.0
+
+## 3.0.2 (2018-06-21)
+
+**New Features**
+* UCP now supports running Windows Server 1709 workers
+   * Server 1709 provides smaller Windows base image sizes, as detailed [here](https://docs.microsoft.com/en-us/windows-server/get-started/whats-new-in-windows-server-1709)
+   * Server 1709 provides relaxed image compatibility requirements, as detailed [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility)
+   * Server 1709 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
+   * Offline bundle names are changed from `ucp_images_win_3.0.1.tar.gz` to `ucp_images_win_2016_3.0.2.tar.gz` and `ucp_images_win_1709_3.0.2.tar.gz` based on Windows Server versions.  
+* UCP now supports running RHEL 7.5.  Please refer to https://success.docker.com/article/compatibility-matrix
+
+**Bug Fixes**
+* Core
+   * Fixed an issue for anonymous volumes in Compose for Kubernetes.
+   * Fixed an issue where a fresh install would have an initial per-user session
+   limit of unlimited rather than the expected limit of 10 minutes.
+   * Added separate resource types for Kubernetes subresources (e.g. pod/log)
+   so that users can get separate permissions for those resources, as with the
+   built-in Kubernetes RBAC authorizer. If you had a custom role with
+   (for instance) Pod Get permissions, you may need to create a new custom
+   role with permissions for each new subresource.
+   * The `/api/ucp/config` endpoint now includes default node orchestrator.
+   * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
+   MTU sizes in Calico.
+   * When a route is not found, interlock now returns a 503 (the expected
+     behavior) instead of a 404.
+
+* UI/UX
+   * Fixed an issue that causes LDAP configuration UI to not work properly.
+
 ## 3.0.1 (2018-05-17)
 
 **Bug Fixes**
