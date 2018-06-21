@@ -24,12 +24,8 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Compose file structure and examples
 
-<div class="panel panel-default">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
-    Example Compose file version 3
-    <i class="chevron fa fa-fw"></i></div>
-    <div class="collapse block" id="collapseSample1">
-<pre><code>
+Example Compose file version 3
+```yaml
 version: "3"
 services:
 
@@ -122,9 +118,7 @@ networks:
 
 volumes:
   db-data:
-</code></pre>
-    </div>
-</div>
+```
 
 The topics on this reference page are organized alphabetically by top-level key
 to reflect the structure of the Compose file itself. Top-level keys that define
