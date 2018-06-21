@@ -113,7 +113,7 @@ Kubernetes workloads:
 * Docker EE has its own RBAC system, so it's not possible to create
   `ClusterRole` objects, `ClusterRoleBinding` objects, or any other object that is
   created by using the `/apis/rbac.authorization.k8s.io` endpoints.
-* To make sure your cluster is secure, only admin users can deploy pods with
+* To make sure your cluster is secure, only users with the "Full Control" role of the given Kubernetes namespace can deploy pods with
   privileged options. These are options like `PodSpec.hostIPC`, `PodSpec.hostNetwork`,
   `PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
   `SecurityContext.capabilities`, `SecurityContext.privileged`, and
