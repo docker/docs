@@ -19,6 +19,18 @@ to upgrade your installation to the latest release.
 * [Version 2.4](#version-24)
 
 # Version 2.5
+## 2.5.3 (2018-6-21)
+
+### New Features
+
+* Allow users to adjust DTR log levels for alternative logging solutions.
+
+### Bug Fixes
+
+* Fixed URL redirect to release notes.
+* Prevent OOM during garbage collection by reading less data into memory at a time.
+* Fixed issue where worker capacities wouldn't update on minor version upgrades.
+
 ## 2.5.2 (2018-5-21)
 
 ### Bug fixes
