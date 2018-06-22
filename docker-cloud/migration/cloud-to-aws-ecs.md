@@ -272,7 +272,7 @@ Create the service.
 aws ecs create-service --region <region> --cli-input-json file://db.json
 ```
 
-###Redis service
+### Redis service
 
 Docker Cloud stackfile:
 
@@ -353,11 +353,11 @@ Create the `redis` service.
 aws ecs create-service --region <region> --cli-input-json file://redis.json
 ```
 
-###lb service
+### lb service
 
 The Docker Cloud stackfile defines and `lb` service to distribute traffic to the instances of vote task.  On AWS, this is unnecessary because ECS allows you to front your service with an Application, Network, or Classic Load Balancer.  We will show how to use an application load balancer with an ECS service in the `vote` section. 
 
-###Vote service
+### Vote service
 
 The Docker Cloud stackfile for the `vote` service defines an image, a restart policy, and a specific number of Pods (replicas: 5). It also enables the Docker Cloud `autoredeploy` feature. We can tell that it listens on port 80 because the Docker Cloud `lb` service forwards traffic to it on port 80; we can also inspect its image.
 
@@ -463,7 +463,7 @@ aws ecs create-service --region <region> --cli-input-json file://voter.json
 
 This creates an ECS service behind an application load balancer.  It is assigned a public DNS name for the service running behind it.  Its listener accepts requests on port 80 and distributes them across the tasks in the target group you created earlier.  This is why the `lb` service from the Docker Cloud app is not necessary.
 
-###worker service
+### worker service
 
 The worker service defines an image, restart policy and a specific number of replicas (3).  The worker service is a standalone service that transfers voter data from the `redis` service to the `db` service. 
 
@@ -536,7 +536,7 @@ Create the `worker` service.
 aws ecs create-service --region <region> --cli-input-json file://worker.json
 ```
 
-###result service
+### result service
 
 Docker Cloud stackfile:
 ```
@@ -628,14 +628,14 @@ Create the `result` service.
 aws ecs create-service --region <region> --cli-input-json file://result.json
 ```
 
-###Finish Configuring Security Groups
+### Finish Configuring Security Groups
 
 Add the load balancer security group to the security group for your container instances.
 ```
 aws ec2 authorize-security-group-ingress --group-id <group_id_of_container_instances> --protocol all --source-group $SG_ID 
 ```
 
-###Test the app on ECS
+### Test the app on ECS
 
 Before migrating, you should thoroughly test each ECS service on an ECS cluster. Healthy testing includes deploying each component of the application as an ECS service onto your cluster, performing scaling operations, increasing load, running failure scenarios, and doing updates and rollbacks. These tests are specific to each of your applications. You should also manage your ECS task and service definitions in a version control system like CodeCommit. 
 
@@ -657,15 +657,16 @@ aws elbv2 describe-load-balancers --names <name> --region <region> | jq '.Load
 1.	Copy/paste the value for the `vote` service into a browser and cast a vote.
 2.	Copy/paste the value for the `result` service into a browser and ensure your vote registered.
 
-###Migrate apps from Docker Cloud
+### Migrate apps from Docker Cloud
 
-_Remember to point your application _CNAMES_ to new service endpoints._
+_Remember to point your application CNAMES to new service endpoints._
 
 How you migrate your applications is unique to your environment and applications.
 1.	Plan with all developers and operations teams.
 2.	Plan with customers.
 3.	Plan with owners of other applications that interact with your Docker Cloud app.
 4.	Plan a rollback strategy if problems occur.
+
 After the migration is complete, make sure everything is working as expected. Ensure that users are hitting the new application on the AWS infrastructure and you're getting the results you expect.
 
 ## Summary
