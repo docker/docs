@@ -119,6 +119,11 @@ Before we can use the `docker stack deploy` command we first run:
 docker swarm init
 ```
 
+>**Note**: If running via DockerToolbox, you need to run:
+```shell
+docker swarm init --advertise-addr 192.168.99.100:2377
+```
+
 >**Note**: We get into the meaning of that command in [part 4](part4.md).
 > If you don't run `docker swarm init` you get an error that "this node is not a swarm manager."
 
