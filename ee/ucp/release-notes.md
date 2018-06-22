@@ -28,7 +28,9 @@ upgrade your installation to the latest release.
    * Server 1709 provides relaxed image compatibility requirements, as detailed [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility)
    * Server 1709 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
    * Offline bundle names are changed from `ucp_images_win_3.0.1.tar.gz` to `ucp_images_win_2016_3.0.2.tar.gz` and `ucp_images_win_1709_3.0.2.tar.gz` based on Windows Server versions.  
-* UCP now supports running RHEL 7.5.  Please refer to https://success.docker.com/article/compatibility-matrix
+* UCP now supports running RHEL 7.5.  Please refer to the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
+* Added support for dynamic volume provisioning in Kubernetes for AWS EBS,
+Azure Disk, and Azure file, when installing UCP with the `--cloud-provider` option.
 
 **Bug Fixes**
 * Core
