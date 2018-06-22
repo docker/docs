@@ -69,7 +69,7 @@ as:
     active machine
 
 Confirm the version and save scripts to `/etc/bash_completion.d` or
-`/usr/local/etc/bash_completion.d`:
+`/usr/local/etc/bash_completion.d` then run `bash /etc/bash_completion.d` or `bash /usr/local/etc/bash_completion.d`:
 
 ```bash
 base=https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}
