@@ -39,14 +39,20 @@ To create the `docker` group and add your user:
     ```bash
     $ sudo usermod -aG docker $USER
     ```
-
-3.  Log out and log back in so that your group membership is re-evaluated.
+3. Restart the docker service.
+   Since the changes in ownership of the Unix socket are only done when the `docker` daemon starts, we need to restart the service.
+   
+    ```
+    $ systemctl restart docker
+    ```
+    
+4.  Log out and log back in so that your group membership is re-evaluated.
 
     If testing on a virtual machine, it may be necessary to restart the virtual machine for changes to take effect.
 
     On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
 
-4.  Verify that you can run `docker` commands without `sudo`.
+5.  Verify that you can run `docker` commands without `sudo`.
 
     ```bash
     $ docker run hello-world
