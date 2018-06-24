@@ -28,8 +28,8 @@ any of the following:
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | Do not automatically restart the container. (the default)                                       |
 | `on-failure`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.     |
-| `unless-stopped` | Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted. |
-| `always`         | Always restart the container if it stops.                                                       |
+| `always`         | Always restart the container if it stops. If it is manually stopped, it will restart only when Docker daemon restarts or the container itself is manually restarted. (see the second bullet under [restart policy details](#restart-policy-details)) |
+| `unless-stopped` | Similar to `always`, except that when it is manually stopped, it remains stopped even after Docker daemon restarts. |
 
 The following example starts a Redis container and configures it to always
 restart unless it is explicitly stopped or Docker is restarted.
