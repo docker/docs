@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise Edition supports worker nodes that run on Windows Server 2016.
+Docker Enterprise Edition supports worker nodes that run on Windows Server 2016 or 1709.
 Only worker nodes are supported on Windows, and all manager nodes in the cluster
 must run on Linux.
 
@@ -16,10 +16,10 @@ Follow these steps to enable a worker node on Windows.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-## Install Docker EE Engine on Windows Server 2016
+## Install Docker EE Engine on Windows Server 2016 or 1709
 
 [Install Docker EE Engine](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
-on a Windows Server 2016 instance to enable joining a cluster that's managed by
+on a Windows Server 2016 or 1709 instance to enable joining a cluster that's managed by
 Docker Enterprise Edition.
 
 ## Configure the Windows node
