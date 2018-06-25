@@ -1028,7 +1028,7 @@ a compose file.
 The keyword `secrets:` defines two secrets `db_password:` and
 `db_root_password:`.
 
-When deploying, Docker creates these two secrets and populate them with the
+When deploying, Docker creates these two secrets and populates them with the
 content from the file specified in the compose file.
 
 The db service uses both secrets, and the wordpress is using one.
