@@ -199,9 +199,9 @@ ecs-cli compose --file <compose_file> --ecs-params ecs-params.yml --project-n
 ```
 For a list of the available options for the `ecs-cli`, see the [ecs-cli command line reference](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_reference.html). 
 
-***At present, the ecs-cli can only ingest docker compose files that are version 2.0 or below.***
+***In order to ingest docker compose v3 files, you must use an `ecs-cli` version greater than [1.6.0](https://github.com/aws/amazon-ecs-cli/releases/tag/v1.6.0) and [specify memory and CPU parameters seperately](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_tutorial_EC2.html#ECS_CLI_tutorial_compose_create) in the `ecs-params.yml` file.***
 
-If your compose file is newer than version 2.0, you can use the [container-transform](http://container-transform.readthedocs.io/en/latest/) utility to convert the compose file to a task definition.  
+In addition, you can use the [container-transform](http://container-transform.readthedocs.io/en/latest/) utility to convert a compose file to a task definition.  
 
 When you're ready to register the task definition, execute the following command: 
 ```
