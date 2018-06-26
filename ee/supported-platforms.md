@@ -22,6 +22,29 @@ options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-editi
 
 {% include docker_ce_ee.md %}
 
+### Enterprise Edition Basic
+
+With Docker EE Basic, you can deploy Docker Enterprise Engine
+to manage your container workloads in a flexible way. You can manage workloads
+on Windows, Linux, on-premise or on the cloud.
+
+Docker EE Basic has enterprise class support with defined SLAs, extended
+maintenance cycles for patches for up to 24 months.
+
+[Learn more about the supported platforms](#supported-platforms).
+
+### Enterprise Edition Standard and Advanced
+
+Docker EE Standard has everything the Basic edition has, and extends it with
+private image management, integrated image signing policies, and cluster
+management with support for Kubernetes and Swarm orchestrators.
+
+Docker EE Advanced takes this one step further and allows you to implement
+node-based RBAC policies, image promotion policies, image mirroring, and
+scan your images for vulnerabilities.
+
+[Learn more about Docker EE Standard and Advanced](/ee/index.md).
+
 ## Supported platforms
 
 The following table shows all of the platforms that are available for Docker EE.
