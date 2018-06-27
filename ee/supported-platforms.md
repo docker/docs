@@ -15,8 +15,11 @@ and supported to provide enterprises with the most secure container platform
 in the industry. For more info about Docker EE, including purchasing
 options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/).
 
-<!-- This is populated by logic in js/archive.js -->
-<p id="ee-version-div"></p>
+There are currently two versions of Docker EE Engine available:
+
+* 18.03 - Use this version if you're only running Docker EE Engine.
+* 16.06 - Use this version if you're using Docker Enterprise Edition (Docker
+Engine, UCP, and DTR).
 
 ## Docker EE tiers
 
@@ -88,16 +91,10 @@ and third-party ecosystem solution briefs.
 
 ## Docker Enterprise Edition release cycles
 
-Docker EE is released quarterly. Releases use a time-based versioning
-scheme, so for example, Docker EE version 17.03 was released
-in March 2017. For schedule details, see
-[Time-based release schedule](/engine/installation/#time-based-release-schedule).
-
-Each Docker EE release is supported and maintained for one year and
+Each Docker EE release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker platform version. The API
-version doesn't change from Docker 1.13.1 to Docker 17.03. We maintain
+The Docker API version is independent of the Docker platform version. We maintain
 careful API backward compatibility and deprecate APIs and features slowly and
 conservatively. We remove features after deprecating them for a period of
 three stable releases. Docker 1.13 introduced improved interoperability
