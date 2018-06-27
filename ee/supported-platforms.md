@@ -18,7 +18,7 @@ options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-editi
 There are currently two versions of Docker EE Engine available:
 
 * 18.03 - Use this version if you're only running Docker EE Engine.
-* 16.06 - Use this version if you're using Docker Enterprise Edition (Docker
+* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
 Engine, UCP, and DTR).
 
 ## Docker EE tiers

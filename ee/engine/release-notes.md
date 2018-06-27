@@ -21,9 +21,10 @@ adopted as quickly for consistency and compatibility reasons.
 
 ## 18.03.1-ee-1 (2018-06-27)
 
-### Important notes about this release
-
-- If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
 
 ### Client
 
