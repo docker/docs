@@ -201,7 +201,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
 
 {% if linux-dist == "centos" %}
 1.  Go to the Docker EE repository URL associated with your trial or subscription
-    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages`
+    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
     and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endif %}
 
