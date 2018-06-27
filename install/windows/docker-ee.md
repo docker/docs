@@ -25,16 +25,16 @@ versions here](/release-notes/) or subscribe to the
 
 With Docker EE, your Windows nodes can join swarms that are managed
 by Docker Universal Control Plane (UCP). When you have Docker EE installed
-on Windows Server 2016 and you have a
-[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can
-[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
+on Windows Server 2016 or 1709 and you have a
+[UCP manager node provisioned](/ee/ucp/admin/install/), you can
+[join your Windows worker nodes to a swarm](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/).
 
 ## Install Docker EE
 
->Windows Server 1709
+>Windows Server 1803
 >
->Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
->To use UCP, for now, use the current LTSB Windows release and not 1709.
+>Docker Universal Control Plane is not currently supported on Windows Server 1803 due to image incompatibility issues.
+>To use UCP, for now, use the current LTSB Windows release or Windows Server 1709 as UCP Workers.
 
 
 Docker EE for Windows requires Windows Server 2016 or later. See
