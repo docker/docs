@@ -19,6 +19,28 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 18.03.1-ee-1 (2018-06-27)
+
+### Important notes about this release
+
+- If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+
+### Client
+
++ Update to docker-ce 18.03.1 client.
++ Add `docker trust` command for image signing and enabling the secure supply chain from development to deployment.
++ Add docker compose on Kubernentes.
+
+### Runtime
+
++ Update to docker-ce 18.03.1 engine.
++ Add support for FIPS 140-2 on x86_64.
++ Add support for Microsoft Windows Server 1709.
++ Add support for Microsoft Windows Server 1803.
++ Windows opt-out telemetry stream.
++ Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
++ Add support for multiple logging drivers for `docker logs`.
+
 ## 17.06.2-ee-14 (2018-06-21)
 
 ### Client
