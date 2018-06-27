@@ -134,7 +134,7 @@ The `gcloud` tool is the command-line tool for interacting with the Google Cloud
     $ gcloud components install kubectl
     ```
 
-    You can install `kubectl` with or without `glcoud`. If you have `kubectl` already installed, ensure that the current context is correct:
+    You can install `kubectl` with or without `gcloud`. If you have `kubectl` already installed, ensure that the current context is correct:
 
     ```
     $ kubectl config get-context
@@ -190,7 +190,7 @@ Kubernetes applications are built from objects (such as [Pods](https://kubernete
 and object abstractions (such as [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}
 and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment spawns Pods. A Pod is a set of containers and also the smallest unit of work in Kubernetes.
 
-> A [Docker serivce](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/){: target="_blank" class="_"} is one component of an application that is generated from one image.
+> A [Docker service](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/){: target="_blank" class="_"} is one component of an application that is generated from one image.
 > A [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"} is a networking construct that load balances Pods behind a proxy.
 
 A Kubernetes Deployment defines the application "service" -- which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define rolling updates, rollbacks, and other advanced features.
@@ -266,7 +266,7 @@ For the `db` Deployment, we define a container called `db` based on the `postgre
 The `db` Service is a “headless” service (`clusterIP: None`). Headless services are useful when you want a stable DNS name but do not need the cluster-wide VIP. They create a stable DNS record, but instead of creating a VIP, they map the DNS name to multiple
 [A records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-records){: target="_blank" class="_"} -- one for each Pod associated with the Service.
 
-The Service’s label selector (`Service.spec.selector`) has the value, "app=db". This means the Service provides stable networking and load balancing for all Pods on the cluster labeled as “app=db”. Pods defined in the Deployment section are all labelled as "app-db". It is this mapping between the Service label selector and the Pod labels that tells the Service object which Pods for which to provide networking.
+The Service’s label selector (`Service.spec.selector`) has the value, "app=db". This means the Service provides stable networking and load balancing for all Pods on the cluster labeled as “app=db”. Pods defined in the Deployment section are all labeled as "app-db". It is this mapping between the Service label selector and the Pod labels that tells the Service object which Pods for which to provide networking.
 
 ### redis service
 
