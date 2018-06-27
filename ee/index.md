@@ -54,11 +54,8 @@ Kubernetes features on Docker EE include:
 - Kubernetes app deployment by using web UI or CLI
 - Compose stack deployment for Swarm and Kubernetes apps
 - Role-based access control for Kubernetes workloads
-- Pod-based autoscaling, to increase and decrease pod count based on CPU usage
 - Blue-Green deployments, for load balancing to different app versions
 - Ingress Controllers with Kubernetes L7 routing
-- Interoperability between Swarm and Kubernetes workloads for networking and
-  storage
 
 In addition, UCP integrates with Kubernetes by using admission controllers,
 which enable:
