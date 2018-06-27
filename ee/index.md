@@ -56,8 +56,6 @@ Kubernetes features on Docker EE include:
 - Role-based access control for Kubernetes workloads
 - Blue-Green deployments, for load balancing to different app versions
 - Ingress Controllers with Kubernetes L7 routing
-- Interoperability between Swarm and Kubernetes workloads for networking and
-  storage
 
 In addition, UCP integrates with Kubernetes by using admission controllers,
 which enable:
