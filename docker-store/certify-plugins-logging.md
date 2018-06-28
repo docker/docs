@@ -14,6 +14,8 @@ This page explains how publishers can successfully test their **Docker logging p
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
+> You should perform this Self Certification test prior to submitting your product for publishing.
+
 ## Certify your logging plugins
 
 You must use the tool, `inspectDockerLoggingPlugin`, to certify your content for publication on Docker Store by ensuring that your Docker logging plugins conform to best practices.
@@ -27,6 +29,8 @@ The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugi
 - Runs a Docker service container with the Docker logging plugin, reads a file named `quotes.txt`, echos its contents to `stdout`, and logs the file's content.
 
 - Displays the container logs and compares it to `quotes.txt`. If they match, the test is successful.
+
+> The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you try to resolve them.
 
 The syntax for running a specific logging plugin is: `docker container run --log-driver`.
 
