@@ -30,7 +30,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 + Update to docker-ce 18.03.1 client.
 + Add `docker trust` command for image signing and enabling the secure supply chain from development to deployment.
-+ Add docker compose on Kubernentes.
++ Add docker compose on Kubernetes.
 
 ### Runtime
 
