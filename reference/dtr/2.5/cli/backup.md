@@ -11,7 +11,13 @@ Create a backup of DTR
 ```bash
 docker run -i --rm docker/dtr \
     backup [command options] > backup.tar
+    
 ```
+```bash 
+ie.
+
+docker run -i --rm docker/dtr \
+    backup --ucp-insecure-tls > backup.tar
 
 ## Description
 
