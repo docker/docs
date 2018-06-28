@@ -71,10 +71,15 @@ These are the operating systems where you can install Docker EE.
 | [SUSE Linux Enterprise Server]({{ page.install-prefix-ee }}/suse.md) | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
 | [Ubuntu]({{ page.install-prefix-ee }}/ubuntu.md)                     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
 | [Microsoft Windows Server 2016](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
+| [Microsoft Windows Server 1709](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
+| [Microsoft Windows Server 1803](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
 
-> Limitations on IBM Power architecture
+
+> When using Docker EE Standard or Advanced
 >
-> Neither UCP managers nor workers are supported on IBM Power.
+> IBM Power is not supported as managers or workers.
+> Microsoft Windows Server is not supported as a manager. Microsoft Windows
+> Server 1803 is not supported as a worker.
 
 ### Docker Certified Infrastructure
 
