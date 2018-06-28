@@ -8,32 +8,31 @@ This guide contains tips and tricks for troubleshooting DTR problems.
 
 ## Troubleshoot overlay networks
 
-High availability in DTR depends on having overlay networking working in UCP.
-One way to test if overlay networks are working correctly you can deploy
-containers in different nodes, that are attached to the same overlay network
-and see if they can ping one another.
+High availability in DTR depends on swarm overlay networking.  One way to test
+if overlay networks are working correctly is to deploy containers to the same
+overlay network on different nodes and see if they can ping one another.
 
-Use SSH to log into a UCP node, and run:
+Use SSH to log into a node and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test1 \
   --entrypoint sh {{ page.dtr_org }}/{{ page.dtr_repo }}
 ```
 
-Then use SSH to log into another UCP node and run:
+Then use SSH to log into another node and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test2 \
   --entrypoint ping {{ page.dtr_org }}/{{ page.dtr_repo }} -c 3 overlay-test1
 ```
 
-If the second command succeeds, it means that overlay networking is working
-correctly.
+If the second command succeeds, it indicates overlay networking is working
+correctly between those nodes.
 
-You can run this test with any overlay network, and any Docker image that has
-`sh` and `ping`.
+You can run this test with any attachable overlay network and any Docker image
+that has `sh` and `ping`.
 
 
 ## Access RethinkDB directly
