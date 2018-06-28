@@ -14,6 +14,8 @@ This page explains how publishers can successfully test their **Docker images**.
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
+> You should perform this Self Certification test prior to submitting your product for publishing.
+
 ## Certify your Docker images
 
 You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Download the tool [here](#syntax).
@@ -37,6 +39,8 @@ The `inspectDockerimage` tool does the following:
 - Verifies that the container is sending logs to `stdout/stderr`.
 
 - Attempts to stop the container to ensure that it can be stopped gracefully.
+
+> The `inspectDockerimage` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you try to resolve them.
 
 ### Prerequisites
 
