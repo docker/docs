@@ -40,7 +40,7 @@ You can run this test with any overlay network, and any Docker image that has
 
 DTR uses RethinkDB for persisting data and replicating it across replicas.
 It might be helpful to connect directly to the RethinkDB instance running on a
-DTR replica to check the DTR internal state. 
+DTR replica to check the DTR internal state.
 
 > **Warning**: Modifying RethinkDB directly is not supported and may cause
 > problems.
@@ -49,26 +49,23 @@ DTR replica to check the DTR internal state.
 Use SSH to log into a node that is running a DTR replica, and run the following
 commands:
 
-```bash
 {% raw %}
-# REPLICA_ID will be the replica ID for the current node.
-REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
+```bash
 # This command will start a RethinkDB client attached to the database
 # on the current node.
-docker run -it --rm \
-  --net dtr-ol \
-  -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
-  $REPLICA_ID
-{% endraw %}
+docker exec -it $(docker ps -q --filter name=dtr-rethinkdb) rethinkcli
 ```
+{% endraw %}
 
-This container connects to the local DTR replica and launches a RethinkDB client 
-that can be used to inspect the contents of the DB. RethinkDB 
-stores data in different databases that contain multiple tables. The `rethinkcli`
-tool launches an interactive prompt where you can run RethinkDB 
+RethinkDB stores data in different databases that contain multiple tables. The `rethinkcli`
+tool launches an interactive prompt where you can run RethinkDB
 queries such as:
 
 ```none
+# List problems detected within the rethinkdb cluster
+> r.db("rethinkdb").table("current_issues")
+...
+
 # List all the DBs in RethinkDB
 > r.dbList()
 [ 'dtr2',
@@ -87,7 +84,7 @@ queries such as:
   'repositories',
   'repository_team_access',
   'tags' ]
-  
+
 # List the entries in the repositories table
 > r.db('dtr2').table('repositories')
 [ { id: '19f1240a-08d8-4979-a898-6b0b5b2338d8',
@@ -95,10 +92,6 @@ queries such as:
     namespaceAccountID: '924bf131-6213-43fa-a5ed-d73c7ccf392e',
     pk: 'cf5e8bf1197e281c747f27e203e42e22721d5c0870b06dfb1060ad0970e99ada',
     visibility: 'public' },
-...
-
-# List problems detected within the rethinkdb cluster
-> r.db("rethinkdb").table("current_issues")
 ...
 ```
 
