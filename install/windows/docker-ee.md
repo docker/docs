@@ -73,26 +73,38 @@ Select option `6) Download and Install Updates`.
 
 ## Install a specific version
 
-To install a specific Docker version, you can use the
-`MaximumVersion`,`MinimumVersion` or `RequiredVersion` flags. For example:
+There are currently two channels available for Docker EE for Windows Server:
+
+* `17.06` - Use this version if you're using Docker Enterprise Edition (Docker Engine, UCP, DTR). `17.06` is the default.
+* `18.03` - Use this version if you're running Docker EE Engine alone.
+
+To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 17.06.2-ee-5
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.03
 ...
-Name                           Version          Source           Summary
-----                           -------          ------           -------
-Docker                         17.06.2-ee-5       Docker           Contains Docker EE for use with Windows Server 2016...
+Name                      Version               Source           Summary
+----                      -------               ------           -------
+Docker                    18.03.1-ee-1          Docker           Contains Docker EE for use with Windows Server...
 ```
 
 ## Update Docker EE
 
-To update Docker EE on Windows Server 2016:
+To update Docker EE Engine to the most recent release of the current channel use the `-Update` flag:
 
 ```PowerShell
 Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
 ```
 
-If Docker Universal Control Plane (UCP) is installed, run the
+To update Docker EE Engine from the `17.06` channel to the `18.03` channel use both the `-Update` and `-RequiredVersion` flags:
+
+```PowerShell
+Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force -RequiredVersion 18.03
+```
+
+## Preparing a Docker EE Engine for use with UCP
+
+Run the
 [UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
 
 Start the Docker service:
