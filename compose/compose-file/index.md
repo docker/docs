@@ -1986,7 +1986,7 @@ conflicting with those used by other software.
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
 Set a custom name for this volume. The name field can be used to reference
-networks that contain special characters. The name is used as is
+volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
     version: '3.4'
