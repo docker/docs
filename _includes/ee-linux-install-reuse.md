@@ -283,8 +283,15 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
+    
+3.  Delete other docker related resources:
+    ```bash
+    $ sudo rm -rf /run/docker
+    $ sudo rm -rf /var/run/docker
+    $ sudo rm -rf /etc/docker
+    ```
 
-3.  If desired, remove the `devicemapper` thin pool and reformat the block
+4.  If desired, remove the `devicemapper` thin pool and reformat the block
     devices that were part of it.
 
 You must delete any edited configuration files manually.
