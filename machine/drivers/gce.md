@@ -44,7 +44,8 @@ To create a machine instance, specify `--driver google`, the project ID and the 
 -   `--google-network`: Specify network in which to provision VM.
 -   `--google-preemptible`: Instance preemptibility.
 -   `--google-project`: **required** The ID of your project to use when launching the instance.
--   `--google-scopes`: The scopes for OAuth 2.0 to Access Google APIs. See [Google Compute Engine Doc](https://cloud.google.com/storage/docs/authentication).
+-   `--google-service-account`: The service account to assign to the instance. See [Google Compute Engine Doc](https://cloud.google.com/compute/docs/access/service-accounts).
+-   `--google-scopes`: The scopes for OAuth 2.0 to Access Google APIs. See [Google API Doc](https://developers.google.com/identity/protocols/googlescopes).
 -   `--google-subnetwork`: Specify subnetwork in which to provision VM.
 -   `--google-tags`: Instance tags (comma-separated).
 -   `--google-use-existing`: Don't create a new VM, use an existing one. This is useful when you'd like to provision Docker on a VM you created yourself, maybe because it uses create options not supported by this driver.
@@ -85,6 +86,7 @@ For example, to create an instance from the latest Ubuntu 16 LTS image, specify
 | `--google-network`         | `GOOGLE_NETWORK`         | `default`                            |
 | `--google-preemptible`     | `GOOGLE_PREEMPTIBLE`     | -                                    |
 | **`--google-project`**     | `GOOGLE_PROJECT`         | -                                    |
+| `--google-service-account` | `GOOGLE_SERVICE_ACCOUNT` | `default`                            |
 | `--google-scopes`          | `GOOGLE_SCOPES`          | `devstorage.read_only,logging.write` |
 | `--google-subnetwork`      | `GOOGLE_SUBNETWORK`      | -                                    |
 | `--google-tags`            | `GOOGLE_TAGS`            | -                                    |
