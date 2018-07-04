@@ -46,7 +46,7 @@ and `--log-opt` options to the Docker daemon:
 
 ```bash
 dockerd
-  --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+  --log-driver gelf --log-opt gelf-address=udp://1.2.3.4:12201 \
 ```
 
 To make the configuration permanent, you can configure it in `/etc/docker/daemon.json`:
