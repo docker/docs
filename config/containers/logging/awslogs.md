@@ -55,6 +55,18 @@ and no region is set, the driver uses the instance's region.
 
     docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 
+### awslogs-endpoint
+
+By default, Docker uses either the `awslogs-region` log option or the
+detected region to construct the remote CloudWatch Logs API endpoint.
+Use the `awslogs-endpoint` log option to override the default endpoint
+with the provided endpoint.
+
+> **Note**:
+> The `awslogs-region` log option or detected region controls the
+> region used for signing. You may experience signature errors if the
+> endpoint you've specified with `awslogs-endpoint` uses a different region.
+
 ### awslogs-group
 
 You must specify a
