@@ -8,15 +8,17 @@
   tar-files:
     - description: "3.0.2 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.2.tar.gz
-    - description: "3.0.2 Windows"
+    - description: "3.0.2 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.2.tar.gz
+    - description: "3.0.2 Windows Server 1709"
       url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.2.tar.gz
     - description: "3.0.1 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.1.tar.gz
-    - description: "3.0.1 Windows"
+    - description: "3.0.1 Windows Server 2016 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_3.0.1.tar.gz
     - description: "3.0.0 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.0.tar.gz
-    - description: "3.0.0 Windows"
+    - description: "3.0.0 Windows Server 2016 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_3.0.0.tar.gz
 - product: "ucp"
   version: "2.2"
