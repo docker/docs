@@ -222,6 +222,18 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Linode</td>
+      <td>
+        <a href="https://github.com/linode/docker-machine-driver-linode">https://github.com/linode/docker-machine-driver-linode</a>
+      </td>
+      <td>
+        <a href="https://github.com/linode">Linode</a>
+      </td>
+      <td>
+        <a href="mailto:developers@linode.com">developers@linode.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>NTT Communications Enterprise Cloud</td>
       <td>
         <a href="https://github.com/mittz/docker-machine-driver-ecl">
