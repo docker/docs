@@ -54,19 +54,29 @@ to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
 below.</font><br>
 
-Do the following each time:
+#### How to save / restore images
 
-1.  Use `docker save` to save any images you want to keep. (See
-    [save](/engine/reference/commandline/save) in the Docker Engine command
-    line reference.)
+The following procedure can be used to save/restore images and container data,
+for example if you want to switch between Edge and Stable, or reset your VM
+disk:
 
-2.  Use `docker export` to export containers you want to keep. (See
-    [export](/engine/reference/commandline/export) in the Docker Engine command
-    line reference.)
+1.  Use `docker save -o images.tar image1 [image2 ...]` to save any images you
+    want to keep. (See [save](/engine/reference/commandline/save) in the Docker
+    Engine command line reference.)
 
-3.  Uninstall the current app (whether Stable or Edge).
+2.  Use `docker export -o myContainner1.tar container1` to export containers you
+    want to keep. (See [export](/engine/reference/commandline/export) in the
+    Docker Engine command line reference.)
 
-4.  Install a different version of the app (Stable or Edge).
+3.  Uninstall the current app & Install a different version of the app (Stable
+    or Edge), or reset your VM disk.
+
+5.  Use `docker load -i images.tar` to reload previously saved images. (See
+    [load](/engine/reference/commandline/load) in the Docker Engine
+
+§.  Use `docker import -i myContainer1.tar` to create a filesystem image
+    corresponding to previously exported containers. (See
+    [import](/engine/reference/commandline/import) in the Docker Engine
 
 
 ### Feeback
