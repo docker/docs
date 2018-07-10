@@ -14,6 +14,11 @@ Add a new replica to an existing DTR cluster
 This command creates a replica of an existing DTR on a node managed by
 Docker Universal Control Plane (UCP).
 
+docker run -it --rm \
+  docker/dtr:2.5.3 join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
+
 For setting DTR for high-availability, create 3, 5, or 7 replicas of DTR.
 
 
