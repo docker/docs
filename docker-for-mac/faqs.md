@@ -57,7 +57,7 @@ to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
 below.</font><br>
 
-#### How to save / restore images
+#### How to save and restore data
 
 The following procedure can be used to save/restore images and container data,
 for example if you want to switch between Edge and Stable, or reset your VM
@@ -77,9 +77,13 @@ disk:
 5.  Use `docker load -i images.tar` to reload previously saved images. (See
     [load](/engine/reference/commandline/load) in the Docker Engine
 
-§.  Use `docker import -i myContainer1.tar` to create a filesystem image
+6.  Use `docker import -i myContainer1.tar` to create a filesystem image
     corresponding to previously exported containers. (See
     [import](/engine/reference/commandline/import) in the Docker Engine
+
+[This
+procedure](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
+explains how to backup / restore data volumes.
 
 ### What is Docker.app?
 
