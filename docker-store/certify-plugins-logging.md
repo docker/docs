@@ -30,7 +30,9 @@ The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugi
 
 - Displays the container logs and compares it to `quotes.txt`. If they match, the test is successful.
 
-> The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you try to resolve them.
+> The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
+
+> If you are publishing and certifying multiple versions for a docker logging plugin, you will need to run the `inspectDockerLoggingPlugin` tool on each docker logging plugin and send each result to Docker Store.
 
 The syntax for running a specific logging plugin is: `docker container run --log-driver`.
 
