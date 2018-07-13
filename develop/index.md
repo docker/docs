@@ -6,7 +6,7 @@ keywords: developer, developing, apps, api, sdk
 
 This page lists resources for application developers using Docker.
 
-## Develop new apps on Docker
+## Develop new apps on Docker with ease
 
 If you're just getting started developing a brand new app on Docker, check out
 these resources to understand some of the most common patterns for getting the
