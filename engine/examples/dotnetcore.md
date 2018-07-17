@@ -41,7 +41,7 @@ Windows](/docker-for-windows/). Read more on [switching containers](/docker-for-
    the `Dockerfile` to use the DLL file of your project.
 
 ```dockerfile
-FROM microsoft/dotnet:2.1-sdk AS build-env
+FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
