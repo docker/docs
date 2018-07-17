@@ -7,7 +7,7 @@ toc_max: 2
 
 ## 1.22.0 (2018-07-17)
 
-### Features
+### New features
 
 #### Compose format version 3.7
 
