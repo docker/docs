@@ -42,6 +42,12 @@ adopted as quickly for consistency and compatibility reasons.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
 
+## 17.06.2-ee-15 (2018-07-10)
+
+### Runtime
+
+- Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
 ## 17.06.2-ee-14 (2018-06-21)
 
 ### Client
