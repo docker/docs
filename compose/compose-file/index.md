@@ -1378,7 +1378,7 @@ you must use a version 2.x Compose file, such as the one below.
 An example:
 
 ```yaml
-version: '2.1'
+version: '3'
 
 services:
   app:
