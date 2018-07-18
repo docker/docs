@@ -11,7 +11,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install DTR on-premises or on a cloud provider. To install DTR,
 all nodes must:
-* Be a worker node managed by Universal Control Plane 3.0.0 or newer
+* Be a worker node managed by Universal Control Plane 3.0.0 or newer.
 * Have a fixed hostname.
 
 ### Minimum requirements
