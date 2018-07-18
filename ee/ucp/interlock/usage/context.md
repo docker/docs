@@ -29,6 +29,11 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
+> Interlock supports only one path per host per service cluster. Once a
+> particular `com.docker.lb.hosts` label has been applied, it cannot be applied
+> again in the same service cluster.
+{: .important}
+
 Interlock will detect once the service is available and publish it.  Once the tasks are running
 and the proxy service has been updated the application should be available via `http://demo.local`:
 
