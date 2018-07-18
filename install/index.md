@@ -138,8 +138,8 @@ but are not ruling it out in the future.
 
 ### Supported platforms
 
-Docker CE is available on multiple platforms, on cloud and on-premises.
-Use the following tables to choose the best installation path for you.
+Docker CE is available on multiple platforms. Use the following tables
+to choose the best installation path for you.
 
 #### Desktop
 
