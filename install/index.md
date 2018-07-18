@@ -35,7 +35,7 @@ repositories [Docker Engine](https://github.com/docker/engine) and
 
 Releases of Docker Engine and Docker Client for general availability
 are versioned using dotted triples. The components of this triple
-are `YY.mm.<patch>` where the `YY.mm` component is refered to as the
+are `YY.mm.<patch>` where the `YY.mm` component is referred to as the
 year-month release. The version numbering format is chosen to illustrate
 cadence and does not guarantee SemVer, but the desired date for general
 availability. The version number may have additional information, such as
@@ -44,21 +44,21 @@ beta and release candidate qualifications. Such releases are considered
 
 The cadence of the year-month releases is every 6 months starting with
 the `18.09` release. The patch releases for a year-month release take
-place as needed to address bug fixes during it's support cycle.
+place as needed to address bug fixes during its support cycle.
 
-Docker CE binaries for a release are available on download.docker.com
+Docker CE binaries for a release are available on <download.docker.com>
 as packages for the supported operating systems. Docker EE binaries are
-available on the Docker Store for the supported operating systems. The
+available on the [Docker Store](https://store.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.
 
 ### Nightly builds
 
-Nightly builds are created once per day from the master branch. Version
+Nightly builds are created once per day from the master branch. The version
 number for nightly builds take the format `0.YYYYmmdd.HHMMSS`,
 for example `0.20181231.093045`.  These builds allow for testing from the
-latest code on master branch. No qualifications or guarantees are made
+latest code on the master branch. No qualifications or guarantees are made
 for the nightly builds.
 
 The release channel for these builds is called `nightly`.
@@ -67,21 +67,21 @@ The release channel for these builds is called `nightly`.
 
 In preparation for a new year-month release, a branch is created from
 the master branch with format `YY.mm` when the milestones desired by
-Docker for the release has achieved feature-complete. Pre-releases
-such as betas and release candidates are conducted from their release
-branch. Patch releases and the corresponding pre-releases are performed
+Docker for the release have achieved feature-complete. Pre-releases
+such as betas and release candidates are conducted from their respective release
+branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
 
 While pre-releases are done to assist in the stabilization process, no
 guarantees are provided.
 
 Binaries built for pre-releases are available in the test channel for
-the targetted year-month release using the naming format `test-YY.mm`,
+the targeted year-month release using the naming format `test-YY.mm`,
 for example `test-18.09`.
 
 ### General availability
 
-Year-month releases are made from a release branch diverged from master
+Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
 `18.09`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
@@ -96,14 +96,14 @@ test channel.
 
 For a given year-month release, Docker releases both CE and EE
 variants concurrently. EE is a superset of the code delivered in
-CE. Docker maintains publicly visible repositories for the CE code,
+CE. Docker maintains publicly visible repositories for the CE code
 as well as private repositories for the EE code. Automation (a bot)
 is used to keep the branches between CE and EE in sync so as features
 and fixes are merged on the various branches in the CE repositories
 (upstream), the corresponding EE repositories and branches are kept
-in sync (downstream). While Docker and our partners make every effort
+in sync (downstream). While Docker and its partners make every effort
 to minimize merge conflicts between CE and EE, occasionally they will
-happen and we'll work hard to resolve them in a timely fashion.
+happen, and Docker will work hard to resolve them in a timely fashion.
 
 ## Next release
 
@@ -118,9 +118,9 @@ release. Docker EE releases are supported for 24 months after the first
 year-month general availability release.
 
 This means bug reports and backports to release branches are assessed
-until the end of life date.
+until the end-of-life date.
 
-After the year-month branch has reached end of life, the branch may be
+After the year-month branch has reached end-of-life, the branch may be
 deleted from the repository.
 
 ### Reporting security issues
@@ -128,12 +128,12 @@ deleted from the repository.
 The Docker maintainers take security seriously. If you discover a security
 issue, please bring it to their attention right away!
 
-Please DO NOT file a public issue, instead send your report privately
+Please DO NOT file a public issue; instead send your report privately
 to security@docker.com.
 
-Security reports are greatly appreciated and we will publicly thank you
-for it. We also like to send gifts—if you're into schwag, make sure to
-let us know. We currently do not offer a paid security bounty program,
+Security reports are greatly appreciated, and Docker will publicly thank you
+for it. Docker also likes to send gifts — if you're into swag, make sure to
+let us know. Docker currently does not offer a paid security bounty program
 but are not ruling it out in the future.
 
 ### Supported platforms
@@ -176,7 +176,7 @@ or by adding a comment to the PR.
 
 Patch releases are always backward compatible with its year-month version.
 
-## Not Covered
+## Not covered
 
 As a general rule, anything not mentioned in this document may change in any release.
 
@@ -184,10 +184,10 @@ As a general rule, anything not mentioned in this document may change in any rel
 
 Exceptions are made in the interest of __security patches__. If a break
 in release procedure or product functionality is required, it will
-be communicated clearly and the solution will be considered against
+be communicated clearly, and the solution will be considered against
 total impact.
 
 ## Get started
 
-After setting up Docker, you can learn the basics over at
+After setting up Docker, you can learn the basics with
 [Getting started with Docker](/get-started/).
