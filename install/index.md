@@ -150,15 +150,6 @@ Use the following tables to choose the best installation path for you.
 | [Docker for Mac (macOS)](/docker-for-mac/install.md)                        | {{ green-check }} |
 | [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install.md) | {{ green-check }} |
 
-#### Cloud
-
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-
-| Platform                                | Docker Community Edition |
-|:----------------------------------------|:------------------------:|
-| [Amazon Web Services](/docker-for-aws/) |    {{ green-check }}     |
-| [Microsoft Azure](/docker-for-azure/)   |    {{ green-check }}     |
-
 #### Server
 
 {% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
