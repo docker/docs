@@ -18,10 +18,11 @@ redirect_from:
 
 Docker Community Edition (CE) is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
-apps. Docker CE has two update channels, **stable** and **edge**:
+apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
 
-* **Stable** gives you reliable updates every quarter.
-* **Edge** gives you new features every month.
+* **Stable** gives you latest releases for general availability.
+* **Test** gives pre-releases that are ready for testing before general availability.
+* **Nightly** gives you latest builds of work in progress for the next major release.
 
 For more information about Docker CE, see
 [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
