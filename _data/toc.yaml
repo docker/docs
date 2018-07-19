@@ -3577,12 +3577,6 @@ manuals:
     - path: /docker-cloud/release-notes/
       title: Docker Cloud
       nosync: true
-    - path: /docker-for-aws/release-notes/
-      title: Docker for AWS
-      nosync: true
-    - path: /docker-for-azure/release-notes/
-      title: Docker for Azure
-      nosync: true
     - path: /release-notes/docker-machine/
       title: Docker Machine release notes
       nosync: true
