@@ -18,6 +18,25 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.06.0-ce-rc3-win68 2018-07-19
+
+[Download](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.06.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce-rc3)
+  - [Docker Machine 0.15.0](https://github.com/docker/machine/releases/tag/v0.15.0)
+  - [Docker compose 1.22.0](https://github.com/docker/compose/releases/tag/1.22.0)
+
+* New
+  - New Kubernetes menu item allowing to switch Kubernetes context & connect to clusters other than the local one.
+
+* Bug fixes and minor changes
+  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](https://docs.docker.com/engine/reference/commandline/save/#examples) and [backup volumes](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
+  - Fix startup issue with aufs
+  - Fix status bug which could prevent the kubernetes cluster from starting.
+  - Fix bug which would cause VM logs to be written to RAM rather than disk in some cases, and the VM to hang.
+  - Fix security issue with named pipe connection to docker service.
+
 ### Docker Community Edition 18.05.0-ce-win67 2018-06-07
 
 [Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe)
