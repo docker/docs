@@ -292,7 +292,6 @@ They display corresponding entries for the change in leadership.
 
 ## Additional resources
 
-- [Installing Docker Engine on a cloud provider](/docker-for-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)
 - [Discovery](discovery.md)
 - [High-availability cluster using a trio of consul nodes](https://hub.docker.com/r/progrium/consul/)
