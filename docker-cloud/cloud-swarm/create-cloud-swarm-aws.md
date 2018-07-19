@@ -54,44 +54,7 @@ provider.
 
     ![](images/aws-create-swarm-3-region.png)
 
-    ### Recommended VPC and subnet setup
-
-    #### VPC
-
-    * **CIDR:** 172.31.0.0/16
-    * **DNS hostnames:** yes
-    * **DNS resolution:** yes
-    * **DHCP option set:** DHCP Options (Below)
-
-    #### Internet gateway
-    * **VPC:** VPC (above)
-
-    #### DHCP option set
-
-    * **domain-name:** ec2.internal
-    * **domain-name-servers:** AmazonProvidedDNS
-
-    #### Subnet1
-    * **CIDR:** 172.31.16.0/20
-    * **Auto-assign public IP:** yes
-    * **Availability-Zone:** A
-
-    #### Subnet2
-    * **CIDR:** 172.31.32.0/20
-    * **Auto-assign public IP:** yes
-    * **Availability-Zone:** B
-
-    #### Subnet3
-    * **CIDR:** 172.31.0.0/20
-    * **Auto-assign public IP:** yes
-    * **Availability-Zone:** C
-
-    #### Route table
-    * **Destination CIDR block:** 0.0.0.0/0
-    * **Subnets:** Subnet1, Subnet2, Subnet3
-
-    ##### Subnet note:
-    If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you need to pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
+    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
 
 6.  Choose how many swarm managers and swarm worker nodes to deploy.
 
@@ -113,20 +76,21 @@ provider.
 
     * Enable or disable Cloudwatch for container logging.
 
-      When enabled, Docker sends container logs to [Amazon Cloudwatch](https://aws.amazon.com/cloudwatch/).
+      When enabled, Docker sends container logs to [Amazon Cloudwatch](https://aws.amazon.com/cloudwatch/), as described in the Docker for AWS topic on [Logging](/docker-for-aws/index.md#logging).
 
 7. Select the instance sizes for the managers, and for the workers.
 
     ![](images/aws-create-swarm-6-manager-worker.png)
 
-    In general, the larger your swarm, the larger the instance sizes you should use.
+    In general, the larger your swarm, the larger the instance sizes you should use. See the Docker for AWS topics for more on [resource configuration](/docker-for-aws/index.md#configuration).
 
 9. Click **Create**.
 
     Docker for AWS bootstraps all of the recommended infrastructure to
     start using Docker on AWS automatically. You don't need to worry
     about rolling your own instances, security groups, or load balancers
-    when using Docker for AWS. 
+    when using Docker for AWS. (To learn more, see
+    [Why Docker for AWS](/docker-for-aws/why.md).)
 
     This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 

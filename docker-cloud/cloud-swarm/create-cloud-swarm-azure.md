@@ -86,7 +86,8 @@ Subscription you want to use.
     ![](images/azure-create-swarm-6-manager-worker.png)
 
     The larger your swarm, the larger the machine size you should use.
-    To learn more about resource setup.
+    To learn more about resource setup, see [configuration options](/docker-for-azure/index.md#configuration) in the Docker
+    for Azure topics.
 
     You can find Microsoft Azure Linux Virtual Machine pricing and options  [here](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/).
 
@@ -95,7 +96,7 @@ Subscription you want to use.
     Docker for Azure bootstraps all of the recommended infrastructure to start
     using Docker on Azure automatically. You don’t need to worry about rolling
     your own instances, security groups, or load balancers when using Docker for
-    Azure.
+    Azure. (To learn more, see [Why Docker for Azure](/docker-for-azure/why.md).)
 
     This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 

@@ -11,6 +11,7 @@ Find out what's new in Docker products!
 - [Docker Engine (archived)](docker-engine.md)
 - [Docker for Mac](/docker-for-mac/release-notes.md) ([Edge Releases](/docker-for-mac/edge-release-notes.md))
 - [Docker for Windows](/docker-for-windows/release-notes.md) ([Edge Releases](/docker-for-windows/edge-release-notes.md))
+- [Docker for Azure](/docker-for-azure/release-notes.md) or [Docker for AWS](/docker-for-aws/release-notes.md)
 - [Docker Compose](docker-compose.md)
 - [Docker Machine](docker-machine.md)
 - [Docker Swarm (standalone)](docker-swarm.md)
