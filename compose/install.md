@@ -112,10 +112,16 @@ by step instructions are also included below.
 1.  Run this command to download the latest version of Docker Compose:
 
     ```bash
+    # If you have jq installed this will automatically find the latest release binary for your architecture and download it
+    curl --silent "https://api.github.com/repos/docker/compose/releases/latest" | jq --arg PLATFORM_ARCH "$(echo `uname -s`-`uname -m`)" -r '.assets[] | select(.name | endswith($PLATFORM_ARCH)).browser_download_url' | xargs sudo curl -L -o /usr/local/bin/docker-compose --url
+    ```
+    
+    ```bash
+    # If you don't want to install jq or want a specific version of docker-compose specify it in the URL
     sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     ```
 
-    > Use the latest Compose release number in the download command.
+    > Use the desired Compose release number in the download command.
     >
     The above command is an _example_, and it may become out-of-date. To ensure you have the latest version, check the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
     {: .important}
