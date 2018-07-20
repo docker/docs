@@ -121,7 +121,7 @@ $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$
 Alternatively, to collect the last day of logs (`1d`) in a file, run:
 
 ```
-$ show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
+$ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
 #### In the Console app
