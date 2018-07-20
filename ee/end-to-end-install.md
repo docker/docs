@@ -23,7 +23,7 @@ Values of n in the -ee-<n> suffix must be 8 or higher
 Also, make sure the hosts are running one of these operating systems:
 
 * A maintained version of CentOS 7. Archived versions aren't supported or tested.
-* Red Hat Enterprise Linux 7.0, 7.1, 7.2, or 7.3
+* Red Hat Enterprise Linux 7.0, 7.1, 7.2, 7.3, 7.4, or 7.5
 * Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
