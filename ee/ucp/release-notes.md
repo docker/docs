@@ -42,6 +42,8 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
    built-in Kubernetes RBAC authorizer. If you had a custom role with
    (for instance) Pod Get permissions, you may need to create a new custom
    role with permissions for each new subresource.
+   * To deploy Pods with Privileged options, users now require a grant with the 
+   role `Full Control` for all namespaces. 
    * The `/api/ucp/config` endpoint now includes default node orchestrator.
    * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
    MTU sizes in Calico.
