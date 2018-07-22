@@ -20,6 +20,25 @@ upgrade your installation to the latest release.
 
 # Version 3.0
 
+## 3.0.3 (2018-07-19)
+
+**New Features**
+* Added support for Windows Server 1803 (#13964)
+* UCP now supports running Windows Server 1803 workers. Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` are added (#13679)
+* UCP now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES SP3. Interlock is currently not supported for 3.0.x on Z (#13679)
+
+**Bug Fixes**
+* Core
+   * Optimize swarm service read api calls through UCP (13971)
+   * Fixes an issue where some UCP Controller API calls may hang indefinitely (#13963)
+   * Default Calico MTU set to 1480 (#13957)
+   * Calico is upgraded to 3.0.8 (#13935)
+   * Compose for Kubernetes logging improvements (#13928)
+   * Fixes an issue where backups would fail if UCP was not licensed (#13821)
+   * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the UI (#13848)
+   * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks (#13762)
+
+
 ## 3.0.2 (2018-06-21)
 
 **New Features**
