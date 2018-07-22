@@ -261,6 +261,29 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.11 (2018-07-19)
+
+**New Platforms**
+* UCP now supports running RHEL 7.5 and Ubuntu 18.04.
+
+**Bug fixes**
+
+* Security
+  * Fixed an issue that causes some security headers were not added to all API responses. (#13981)
+  
+* Core  
+  * Optimized Swarm service read API calls through UCP. (#13911, docker/escalation#661)
+  * Upgraded `RethinkDB` image to address potential security vulnerabilities. (#13838, docker/escalation#619)
+  * Upgraded `etcd` version to 2.3.8. (#13749, docker/escalation#663)
+  * Fixed an issue that causes classic Swarm to provide outdated data. (#13724, docker/escalation#357)
+  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes. (#13373, docker/escalation#579)
+  
+* UI  
+  * Fixed an issue that causes UI not parsing volume options correctly. (#13403, docker/escalation#599)
+  * Fixed an issue that prevents the user from deploying stacks via UI. (#14033, docker/escalation#704)
+
+
 ## Version 2.2.10 (2018-05-17)
 
 **Bug fixes**
