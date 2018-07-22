@@ -19,6 +19,18 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 18.03.1-ee-2 (2018-07-10)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Runtime
+
++ Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+
 ## 18.03.1-ee-1 (2018-06-27)
 
 > Important notes about this release
