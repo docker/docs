@@ -46,7 +46,7 @@ The cadence of the year-month releases is every 6 months starting with
 the `18.09` release. The patch releases for a year-month release take
 place as needed to address bug fixes during its support cycle.
 
-Docker CE binaries for a release are available on <download.docker.com>
+Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
 as packages for the supported operating systems. Docker EE binaries are
 available on the [Docker Store](https://store.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
