@@ -12,13 +12,11 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% if platform == "mac" %}
   {% assign product = "Docker for Mac" %}
 
-  {% capture min-version %}{{ product }} 17.12 CE{% endcapture %}
-  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
-
+  {% capture min-version %}{{ product }} **17.12 CE Edge**{% endcapture %}
+  
   {% capture version-caveat %}
-    **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
-
-  {% endcapture %}
+  Kubernetes is available in {{ min-version }} and higher, and **18.06 Stable** and higher
+  {% endcapture%}
 
   {% capture local-kubectl-warning %}
 > If you independently installed the Kubernetes CLI, `kubectl`, make sure that
@@ -33,26 +31,21 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% elsif platform == "windows" %}
   {% assign product = "Docker for Windows" %}
 
-  {% capture min-version %}{{ product }} 18.02 CE{% endcapture %}
-  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
+  {% capture min-version %}{{ product }} **18.02 CE Edge**{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
+  Kubernetes is available in {{ min-version }} and higher, and **18.06 Stable** and higher
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
-If you installed `kubectl` by another method, and experience conflicts, remove it.
+  If you installed `kubectl` by another method, and experience conflicts, remove it.
   {% endcapture %}
 
   {% assign kubectl-path = "C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe" %}
 
 {% endif %}
 
-{{ version-caveat }} To find out more about Stable and Edge channels and how to
-switch between them, see
-[General configuration](/docker-for-{{ platform }}/#general).
-
-{{ min-version }} includes a standalone Kubernetes server and client,
+{{ version-caveat }}, this includes a standalone Kubernetes server and client,
 as well as Docker CLI integration. The Kubernetes server runs locally within
 your Docker instance, is not configurable, and is a single-node cluster.
 
