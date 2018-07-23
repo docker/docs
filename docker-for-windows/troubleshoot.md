@@ -7,18 +7,57 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-This page explains how to diagnose and troubleshoot problems you may be having with Docker for Windows.
+Here is information about how to diagnose and troubleshoot problems, send logs
+and communicate with the Docker for Windows team, use our forums and Knowledge Hub,
+browse and log issues on GitHub, and find workarounds for known problems.
 
-## Getting help
+## Docker Knowledge Hub
 
-There are several ways to get the support you need with Docker for Windows. If you encounter problems not addressed here in the documentation:
+**Looking for help with Docker for Windows?** Check out the [Docker Knowledge
+Hub](http://success.docker.com/q) for knowledge base articles, FAQs, and
+technical support for various subscription levels.
 
-- Refer to the knowledge base articles at the [Docker Success Center](https://success.docker.com/q/).
-- Browse the logs (in `User\AppData\Local\Docker`) by clicking **log file** in the Diagnose & Feedback window.
-- Ask questions on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
-- Upload diagnostics in the Diagnose & Feedback window. You'll get a unique ID in return. You can then use this ID to submit issues at the [Docker for Windows GitHub repo](https://github.com/docker/for-win/issues).
+## Diagnose problems, send feedack and create GitHub issues
 
-![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="500px"}
+### In-app diagnostics
+If you encounter problems for which you do not find solutions in this
+documentation, on [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), or the [Docker for Win
+forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot
+the log data.
+
+Choose ![whale menu](images/whale-x.png){: .inline} →
+**Diagnose & Feedback** from the menu bar.
+
+![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+
+Once the **Diagnose & Feedback** window is opened, it will start to collect the dignostics. When the diagnostics are available, you can upload them and obtain a **Diagnostic ID**, which must be provided when communicating with the Docker team. For more information on our policy regarding personal data you can read [how is personal data handled in Docker Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
+
+![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
+
+If you click on **Report an issue**, this opens [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues/) in your web browser in a "create new issue" template, to be completed before submision.
+
+![issue-template](images/issue-template.png){:width="600px"}
+
+### Diagnosing from the terminal
+
+On occasions it is useful to run the diagnostics yourself, for instance if Docker for Windows cannot start.
+
+First locate the `com.docker.diagnose`, that should be in `C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe`.
+
+To create *and upload*  diagnostics in Powershell, run:
+
+```sh
+  > & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+```
+
+After the diagnostics have finished, you should have the following output, containing your diagnostic ID:
+
+```sh
+Diagnostics Bundle: C:\Users\User\AppData\Local\Temp\CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2\20180720152545.zip
+Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploaded)
+```
 
 ## Troubleshooting topics
 
@@ -52,14 +91,8 @@ the Getting Started topic.
 
 Docker for Windows sets permissions on [shared
 volumes](index.md#shared-drives) to a default value of
-[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
-`execute` permissions for `user`, `read` and `execute` for `group`). If you are
-working with applications that require permissions different than this default,
-you may get errors similar to the following.
-
-```none
-Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0755 so that the directory cannot be listed by other users.
-```
+[0777](http://permissions-calculator.org/decode/0777/) (`read`, `write`,
+`execute` permissions for `user` and for `group`).
 
 The default permissions on shared volumes are not configurable. If you are
 working with applications that require permissions different from the shared
@@ -88,7 +121,7 @@ If you are using mounted volumes and get runtime errors indicating an applicatio
 
 Volume mounting requires shared drives for Linux containers (not for Windows
 containers). Go to ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
---> **Settings** --> **Shared Drives** and share the drive that contains the
+→ **Settings** → **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
 
 #### Verify domain user has permissions for shared drives (volumes)
@@ -106,7 +139,7 @@ mounted volumes.  The volumes show as empty.
 The solution to this is to switch to the domain user account and reset
 credentials on shared drives.
 
-Here is an example of how to de-bug this problem, given a scenario where you
+Here is an example of how to debug this problem, given a scenario where you
 shared the `C` drive as a local user instead of as the domain user. Assume the
 local user is `samstevens` and the domain user is `merlin`.
 
@@ -307,10 +340,9 @@ Here are some steps to take if you encounter similar problems:
     > Read the whole page before running any scripts, especially warnings about `-ForceDeleteAllSwitches`.
     > {: .warning}
 
-### Windows containers and Windows Server 2016
+### Windows containers
 
-If you have questions about how to set up and run Windows containers on Windows
-Server 2016 or Windows 10, see [About Windows containers and Windows Server 2016](index.md#about-windows-containers-and-windows-server-2016).
+If you have questions about how to run Windows containers on Windows 10, see [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
@@ -400,7 +432,7 @@ with Linux containers.
 #### If you still want to use nested virtualization
 
 * Make sure nested virtualization support is enabled in VMWare or Parallels.
-Check the settings in **Hardware -> CPU & Memory -> Advanced Options -> Enable
+Check the settings in **Hardware → CPU & Memory → Advanced Options → Enable
 nested virtualization** (the exact menu sequence might vary slightly).
 
 * Configure your VM with at least 2 CPUs and sufficient memory to run your
@@ -453,7 +485,7 @@ See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
 
 As an immediate workaround to this problem, reset the DNS server to use the
 Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings**
--> **Network** dialog, as described in the topic
+→ **Network** dialog, as described in the topic
 [Network](index.md#network). Docker automatically restarts
 when you apply this setting, which could take some time.
 
@@ -503,7 +535,7 @@ or `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
 
 These errors are often caused by some other software on Windows using those
 ports. To discover the identity of this software, either use the `resmon.exe`
-GUI and click "Network" and then "Listening Ports" or in a powershell use
+GUI and click "Network" and then "Listening Ports" or in a Powershell use
 `netstat -aon | find /i "listening "` to discover the PID of the process
 currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
