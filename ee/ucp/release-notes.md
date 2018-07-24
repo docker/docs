@@ -45,8 +45,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
    * To deploy Pods with Privileged options, users now require a grant with the 
    role `Full Control` for all namespaces. 
    * The `/api/ucp/config` endpoint now includes default node orchestrator.
-   * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
-   MTU sizes in Calico.
+   * Added `cni_mtu` setting to UCP config for controlling MTU size in Calico.
    * When a route is not found, interlock now returns a 503 (the expected
      behavior) instead of a 404.
 
