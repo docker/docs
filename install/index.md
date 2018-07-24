@@ -56,10 +56,15 @@ channel also receives patch releases when they become available.
 ### Nightly builds
 
 Nightly builds are created once per day from the master branch. The version
-number for nightly builds take the format `0.YYYYmmdd.HHMMSS`,
-for example `0.20181231.093045`.  These builds allow for testing from the
-latest code on the master branch. No qualifications or guarantees are made
-for the nightly builds.
+number for nightly builds take the format:
+
+    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
+
+where the time is the commit time in UTC and the final suffix is the prefix
+of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
+
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 
 The release channel for these builds is called `nightly`.
 
