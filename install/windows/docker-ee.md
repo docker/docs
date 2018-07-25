@@ -88,7 +88,8 @@ Name                      Version               Source           Summary
 Docker                    {win_latest_build}    Docker           Contains Docker EE for use with Windows Server...
 ```
 
-Note: installing specific versions may require an update to previously installed DockerMsftProvider modules. To update:
+### Updating the DockerMsftProvider
+Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
 
 ```PowerShell
 Update-Module DockerMsftProvider
