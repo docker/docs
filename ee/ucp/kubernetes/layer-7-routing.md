@@ -52,16 +52,15 @@ The default service account that's associated with the `ingress-nginx`
 namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
 
-1.  Navigate to the **Grants** page and click **Create Grant**.
-2.  In the left pane, click **Resource Sets**, and in the **Type** section,
-    click **Namespaces**.
-3.  Enable the **Apply grant to all existing and new namespaces** option.
-4.  In the left pane, click **Roles**. In the **Role** dropdown, select
-    **Restricted Control**.
-5.  In the left pane, click **Subjects**, and select **Service Account**.
-6.  In the **Namespace** dropdown, select **ingress-nginx**, and in the
-    **Service Account** dropdown., select **default**.
-7.  Click **Create**.
+1.  From UCP, navigate to the **Grants** page and click **Create Grant**.
+2.  Within the **Subject** pane, select **Service Account**. For the 
+    **Namespace** select **ingress-nginx**, and select **default** for
+    the **Service Account**. Click **Next**.
+3.  Within the **Role** pane, select **Restricted Control** and then click 
+    **Next**
+4.  Within the **Resource Set** pane, select the **Type** **Namespace** and
+    select the **Apply grant to all existing and new namespaces** toggle.
+5.  Click **Create**.
 
 > Ingress and role-based access control
 >
@@ -91,6 +90,8 @@ metadata:
   labels:
     app: default-http-backend
   namespace: ingress-nginx
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: docker/default
 spec:
   replicas: 1
   template:
@@ -161,6 +162,8 @@ kind: Deployment
 metadata:
   name: nginx-ingress-controller
   namespace: ingress-nginx
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: docker/default
 spec:
   replicas: 1
   selector:
@@ -186,7 +189,7 @@ spec:
           privileged: true
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.17.1
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
