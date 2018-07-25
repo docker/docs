@@ -83,21 +83,24 @@ Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
 editor, paste the following YAML.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: default-http-backend
   labels:
     app: default-http-backend
   namespace: ingress-nginx
-  annotations:
-    seccomp.security.alpha.kubernetes.io/pod: docker/default
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: default-http-backend
   template:
     metadata:
       labels:
         app: default-http-backend
+      annotations:
+        seccomp.security.alpha.kubernetes.io/pod: docker/default    
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -157,13 +160,11 @@ metadata:
   name: udp-services
   namespace: ingress-nginx
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: nginx-ingress-controller
   namespace: ingress-nginx
-  annotations:
-    seccomp.security.alpha.kubernetes.io/pod: docker/default
 spec:
   replicas: 1
   selector:
@@ -176,6 +177,7 @@ spec:
       annotations:
         prometheus.io/port: '10254'
         prometheus.io/scrape: 'true'
+        seccomp.security.alpha.kubernetes.io/pod: docker/default   
     spec:
       initContainers:
       - command:
