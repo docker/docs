@@ -71,6 +71,60 @@ sconfig
 
 Select option `6) Download and Install Updates`.
 
+## Use a script to install Docker EE
+
+Use the following steps when you want to install manually, script automated
+installs, or install on air-gapped systems.
+
+1.  In a PowerShell command prompt, download the installer archive on a machine
+    that has a connection.
+
+    ```PowerShell
+    # On an online machine, download the zip file.
+    invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
+    ```
+
+2.  Copy the zip file to the machine where you want to install Docker. In a
+    PowerShell command prompt, use the following commands to extract the archive,
+    register, and start the Docker service.
+
+    ```PowerShell
+    #Stop Docker service
+    Stop-Service docker
+    
+    # Extract the archive.
+    Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles -Force
+
+    # Clean up the zip file.
+    Remove-Item -Force {{ filename }}
+
+    # Install Docker. This requires rebooting.
+    $null = Install-WindowsFeature containers
+
+    # Add Docker to the path for the current session.
+    $env:path += ";$env:ProgramFiles\docker"
+
+    # Optionally, modify PATH to persist across sessions.
+    $newPath = "$env:ProgramFiles\docker;" +
+    [Environment]::GetEnvironmentVariable("PATH",
+    [EnvironmentVariableTarget]::Machine)
+
+    [Environment]::SetEnvironmentVariable("PATH", $newPath,
+    [EnvironmentVariableTarget]::Machine)
+
+    # Register the Docker daemon as a service.
+    dockerd --register-service
+
+    # Start the Docker service.
+    Start-Service docker
+    ```
+
+3.  Test your Docker EE installation by running the `hello-world` container.
+
+    ```PowerShell
+    docker container run hello-world:nanoserver
+    ```
+
 ## Install a specific version
 
 To install a specific Docker version, you can use the
