@@ -44,7 +44,7 @@ full list of prerequisites.
 3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```PowerShell
-    docker container run hello-world:nanoserver
+    docker run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
@@ -85,8 +85,16 @@ Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVe
 ...
 Name                      Version               Source           Summary
 ----                      -------               ------           -------
-Docker                    18.03.1-ee-1          Docker           Contains Docker EE for use with Windows Server...
+Docker                    {win_latest_build}    Docker           Contains Docker EE for use with Windows Server...
 ```
+
+Note: installing specific versions may require an update to previously installed DockerMsftProvider modules. To update:
+
+```PowerShell
+Update-Module DockerMsftProvider
+```
+
+Then open a new Powershell session for the update to take effect.
 
 ## Update Docker EE
 
