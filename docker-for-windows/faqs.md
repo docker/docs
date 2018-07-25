@@ -24,7 +24,7 @@ Two different download channels are available for Docker for Windows:
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
   for Windows comes with the latest released version of Docker Engine. The
-  release schedule is synched with Docker Engine releases and hotfixes. On the
+  release schedule is synced with Docker Engine releases and hotfixes. On the
   Stable channel, you can select whether to send usage statistics and other data.
 
 * The **Edge channel** provides an installer with new features we are working on,
@@ -69,7 +69,8 @@ Do the following each time:
 4.  Install a different version of the app (Stable or Edge).
 
 
-### Feeback
+### Feedback
+
 #### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
@@ -150,8 +151,8 @@ topic
 No, at this point, Docker for Windows does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](/docker-for-windows#shared-drives) for
 deployed containers, but rather sets permissions to a default value of
-[0755](http://permissions-calculator.org/decode/0755/){: target="_blank" class="_"}
-(`read`, `write`, `execute` permissions for `user`, `read` and `execute` for
+[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
+(`read`, `write`, `execute` permissions for `user` and for 
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
@@ -281,5 +282,4 @@ in [Troubleshooting](troubleshoot).
 You might decide that you do not need Toolbox now that you have Docker for
 Windows, and want to uninstall it. For details on how to perform a clean
 uninstall of Toolbox on Windows, see
-[How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the
-Toolbox Windows topics.
+[How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the Toolbox Windows topics.

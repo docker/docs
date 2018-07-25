@@ -16,7 +16,7 @@ browse and log issues on GitHub, and find workarounds for known problems.
 Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
 technical support for various subscription levels.
 
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose problems, send feedback and create GitHub issues
 
 ### In-app diagnostics
 If you encounter problems for which you do not find solutions in this
@@ -25,7 +25,7 @@ GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
 forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
 the log data.
 
-Choose ![whale menu](images/whale-x.png){: .inline} -->
+Choose ![whale menu](images/whale-x.png){: .inline} →
 **Diagnose & Feedback** from the menu bar.
 
 ![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
@@ -39,7 +39,7 @@ using the uploaded results and ID as a basis.
 
 If you click **Report an issue**, this opens [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
-“create new issue” template, to be completed before submission.
+"create new issue" template, to be completed before submission.
 
 ![issue template](images/issues-template.png){:width="600px"}
 
@@ -181,8 +181,8 @@ cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
 you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} -->
-**Preferences** --> **File sharing** and share the drive that contains the
+`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} →
+**Preferences** → **File sharing** and share the drive that contains the
 Dockerfile and volume.
 
 ### Incompatible CPU detected
@@ -220,7 +220,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
-  application (![whale menu](images/whale-x.png){: .inline} --> **Quit
+  application (![whale menu](images/whale-x.png){: .inline} → **Quit
   Docker**). Otherwise, you get an "application in use" error when you try to
   copy the new app from the `.dmg` to `/Applications`.
 
@@ -297,7 +297,7 @@ know before you install](install.md#what-to-know-before-you-install).
   resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in ![whale
-  menu](images/whale-x.png){: .inline} --> **Preferences**. This
+  menu](images/whale-x.png){: .inline} → **Preferences**. This
   is related to a set of issues with Docker helper, registration, and
   versioning.
 
