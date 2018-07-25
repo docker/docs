@@ -20,6 +20,31 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.06.0-ce-win70 2018-07-25
+
+[Download](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
+  - [Docker Machine 0.15.0](https://github.com/docker/machine/releases/tag/v0.15.0)
+  - [Docker compose 1.22.0](https://github.com/docker/compose/releases/tag/1.22.0)
+  - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
+  - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
+
+* New
+  - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See https://docs.docker.com/docker-for-windows/kubernetes/
+
+* Bug fixes and minor changes
+  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](https://docs.docker.com/engine/reference/commandline/save/#examples) and [backup volumes](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
+  - Fix bug which would cause VM logs to be written to RAM rather than disk in some cases, and the VM to hang.
+  - Fix security issue with named pipe connection to docker service.
+  - Fix VPNKit memory leak. Fixes [docker/for-win#2087](https://github.com/docker/for-win/issues/2087), [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)
+  - Fix restart issue when using Windows fast startup on latest 1709 Windows updates. Fixes [docker/for-win#1741](https://github.com/docker/for-win/issues/1741), [docker/for-win#1741](https://github.com/docker/for-win/issues/1741)
+  - DNS name `host.docker.internal` can be used for host resolution from Windows Containers.  Fixes [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
+  - Fix broken link in diagnostics window.
+  - Added log rotation for docker-ce logs inside the virtual machine.
+  - Changed smb permission to avoid issue when trying to manipulate files with different users in containers. Fixes [docker/for-win#2170](https://github.com/docker/for-win/issues/2170)
+
 ### Docker Community Edition 18.03.1-ce-win65 2018-04-30
 
 [Download](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe)
