@@ -172,12 +172,13 @@ Engine, UCP, and DTR).
 
 #### Set up the repository
 
-1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
+1.  Temporarily add the `$DOCKER_EE_BASE_URL` and `$DOCKER_EE_URL` variables into your environment. This
     only persists until you log out of the session. Replace `<DOCKER-EE-URL>`
-    with the URL you noted down in the [prerequisites](#prerequisites).
+    listed below with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ DOCKER_EE_URL="<DOCKER-EE-URL>/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
+    $ DOCKER_EE_BASE_URL="<DOCKER-EE-URL>"
+    $ DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
     ```
 
     Where:
@@ -188,6 +189,7 @@ Engine, UCP, and DTR).
     As an example your command should look like:
 
     ```bash
+    DOCKER_EE_BASE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555"
     DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-17.06"
     ```
 
@@ -203,7 +205,7 @@ Engine, UCP, and DTR).
     because of the variable you set earlier.
 
     ```bash
-    $ sudo rpm --import "${DOCKER_EE_URL}/sles/gpg"
+    $ sudo rpm --import "${DOCKER_EE_BASE_URL}/sles/gpg"
     ```
 
 #### Install Docker EE
