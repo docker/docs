@@ -30,9 +30,11 @@ The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugi
 
 - Displays the container logs and compares it to `quotes.txt`. If they match, the test is successful.
 
-> The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you try to resolve them.
+The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
 
-The syntax for running a specific logging plugin is: `docker container run --log-driver`.
+If you are publishing and certifying multiple versions of a Docker logging plugin, you will need to run the `inspectDockerLoggingPlugin` tool on each Docker logging plugin and send each result to Docker Store.
+
+The syntax for running a specific logging plugin is `docker container run --log-driver`.
 
 No parameters are passed to the logging plugin. If parameters are required for the Docker logging plugin to work correctly, then a custom test script must be written and used. The default `docker container run` command is:
 
@@ -359,13 +361,13 @@ gforghetti:~/$
 gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
 ```
 
-Note: The output was piped to the **jq** command to display it "nicely".
+> Note: The output was piped to the **jq** command to display it "nicely".
 
 #### Output:
 
+
 ```
-```
-{
+ {
   "Date": "Mon May 21 14:38:28 2018",
   "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
   "SystemArchitecture": "amd64",
@@ -419,7 +421,6 @@ Note: The output was piped to the **jq** command to display it "nicely".
     }
   ]
 }
-🐳  gforghetti:~/$
 ```
 
 <a name="inspect-logging-plugin-html">

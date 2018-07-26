@@ -40,7 +40,13 @@ The `inspectDockerImage` tool does the following:
 
 - Attempts to stop the container to ensure that it can be stopped gracefully.
 
-> The `inspectDockerImage` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you try to resolve them.
+The `inspectDockerImage` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
+
+If you are publishing and certifying multiple versions for a Docker image, you will need to run the `inspectDockerImage` tool on each Docker image and send each result to Docker Store.
+
+If you are publishing and certifying multi-architecture Docker image (e.g. Linux, Power, s390x, windows, etc.) you will need to run the `inspectDockerImage` tool on the Docker EE server running on each architecture and send the results to Docker Store.
+
+Details on how to run the `inspectDockerImage` tool and send the results to Docker Store are in the sections that follow.
 
 ### Prerequisites
 

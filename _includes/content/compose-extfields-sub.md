@@ -2,6 +2,12 @@ It is possible to re-use configuration fragments using extension fields. Those
 special fields can be of any format as long as they are located at the root of
 your Compose file and their name start with the `x-` character sequence.
 
+> **Note**
+>
+> Starting with the 3.7 format (for the 3.x series) and 2.4 format
+> (for the 2.x series), extension fields are also allowed at the root
+> of service, volume, network, config and secret definitions.
+
 ```none
 version: '2.1'
 x-custom:
