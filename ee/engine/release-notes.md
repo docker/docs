@@ -54,6 +54,31 @@ adopted as quickly for consistency and compatibility reasons.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
 
+## 17.06.2-ee-16 (2018-07-26)
+
+### Client
+
+- Fix service rollback options being cross-wired. [docker/cli#1052](https://github.com/docker/cli/pull/1052)
+
+### Networking
+
+* Protect against possible race on ingress programming. [docker/libnetwork#2195](https://github.com/docker/libnetwork/pull/2195)
+* Add a recovery mechanism for a split gossip cluster. [docker/libnetwork#2169](https://github.com/docker/libnetwork/pull/2169)
+
+### Packaging
+
+* Update packaging description and license to Docker EUSA.
+
+### Runtime
+
+* Update overlay2 to use naive diff for changes. [moby/moby#37313](https://github.com/moby/moby/pull/37313)
+
+### Swarm mode
+
+- Fix task reaper batching. [docker/swarmkit#2678](https://github.com/docker/swarmkit/pull/2678)
+* RoleManager will remove deleted nodes from the cluster membership. [docker/swarmkit#2607](https://github.com/docker/swarmkit/pull/2607)
+- Fix unassigned task leak when service is removed. [docker/swarmkit#2708](https://github.com/docker/swarmkit/pull/2708)
+
 ## 17.06.2-ee-15 (2018-07-10)
 
 ### Runtime
