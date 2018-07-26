@@ -273,7 +273,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed an issue that causes some security headers to not be added to all API responses.
 
 * Core
-  * Optimized Swarm service read API calls through UCP.
+  * Optimized swarm service read API calls through UCP.
   * Upgraded `RethinkDB` image to address potential security vulnerabilities.
   * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.
