@@ -25,7 +25,7 @@ Learn about [ingress in Kubernetes](https://v1-8.docs.kubernetes.io/docs/concept
 
 ## Create a dedicated namespace
 
-1.  Navigate to the **Namespaces** page and click **Create**.
+1.  Navigate to the **Namespaces** page, and click **Create**.
 2.  In the **Object YAML** editor, append the following text.
     ```yaml
     metadata:
@@ -52,16 +52,15 @@ The default service account that's associated with the `ingress-nginx`
 namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
 
-1.  Navigate to the **Grants** page and click **Create Grant**.
-2.  In the left pane, click **Resource Sets**, and in the **Type** section,
-    click **Namespaces**.
-3.  Enable the **Apply grant to all existing and new namespaces** option.
-4.  In the left pane, click **Roles**. In the **Role** dropdown, select
-    **Restricted Control**.
-5.  In the left pane, click **Subjects**, and select **Service Account**.
-6.  In the **Namespace** dropdown, select **ingress-nginx**, and in the
-    **Service Account** dropdown., select **default**.
-7.  Click **Create**.
+1.  From UCP, navigate to the **Grants** page, and click **Create Grant**.
+2.  Within the **Subject** pane, select **Service Account**. For the 
+    **Namespace** select **ingress-nginx**, and select **default** for
+    the **Service Account**. Click **Next**.
+3.  Within the **Role** pane, select **Restricted Control**, and then click 
+    **Next**.
+4.  Within the **Resource Set** pane, select the **Type** **Namespace**, and
+    select the **Apply grant to all existing and new namespaces** toggle.
+5.  Click **Create**.
 
 > Ingress and role-based access control
 >
@@ -84,7 +83,7 @@ Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
 editor, paste the following YAML.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: default-http-backend
@@ -93,10 +92,15 @@ metadata:
   namespace: ingress-nginx
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: default-http-backend
   template:
     metadata:
       labels:
         app: default-http-backend
+      annotations:
+        seccomp.security.alpha.kubernetes.io/pod: docker/default    
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -156,7 +160,7 @@ metadata:
   name: udp-services
   namespace: ingress-nginx
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: nginx-ingress-controller
@@ -173,6 +177,7 @@ spec:
       annotations:
         prometheus.io/port: '10254'
         prometheus.io/scrape: 'true'
+        seccomp.security.alpha.kubernetes.io/pod: docker/default   
     spec:
       initContainers:
       - command:
@@ -186,7 +191,7 @@ spec:
           privileged: true
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.17.1
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
