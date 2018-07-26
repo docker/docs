@@ -30,10 +30,7 @@ Choose ![whale menu](images/whale-x.png){: .inline} →
 
 ![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
 
-Select **Diagnose**.  It runs diagnostics, shows results, and uploads the
-results to Docker.  A diagnostic ID is generated, which must be provided when
-communicating with the Docker Team.  Optionally, you can open an issue on GitHub
-using the uploaded results and ID as a basis.
+Once the diagnostics are available, you can upload them and obtain a **Diagnostic ID**, which must be provided when communicating with the Docker team. For more information on our policy regarding personal data you can read [how is personal data handled in Docker Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
 
 ![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
 
@@ -48,46 +45,23 @@ GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
 On occasions it is useful to run the diagnostics yourself, for instance if
 Docker for Mac cannot start.
 
-First locate the `docker-diagnose` tool.  If you installed Docker for Mac in the
+First locate the `com.docker.diagnose` tool.  If you installed Docker for Mac in the
 Applications directory, then it is
-`/Applications/Docker.app/Contents/Resources/bin/docker-diagnose`.  Pass
-`--help` to see the supported options:
-
-```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose --help
-```
+`/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
 
 Then to create *and upload* diagnostics, run:
 
 ```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose \
-  --upload --last 1d
-macOS: version 10.13.4 (build: 17E202)
-Docker.app: version: 18.06.0-ce-rc1-mac67 (1fa4e2acfc1a52f79623add2390604515d32297e)
-Local time: Fri May 25 14:50:51 CEST 2018
-UTC:        Fri May 25 12:50:51 UTC 2018
-Timestamp:  20180525-145051
-Running diagnostic tests:
-[OK]      Files
-[OK]      console-ring does not exist
-[OK]      Kubernetes (disabled)
-[OK]      Docker CLI
-[OK]      environment
-[OK]      vmnetd
-[OK]      osxfs
-[OK]      VPNKit
-[OK]      driver.amd64-linux
-[OK]      Docker
-[OK]      VT-x
-[OK]      kern.hv_support
-[OK]      Hypervisor
-[OK]      Disk
-Docker logs are being collected into /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
-Your unique id is: D1F48686-F045-4708-85E3-0635B729A596
-Please quote this in all correspondence.
+$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
+```
+After the diagnostics have finished, you should have the following output, containing your diagnostics ID:
+
+```sh
+Diagnostics Bundle: /tmp/B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610.zip
+Diagnostics ID:     B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610 (uploaded)
 ```
 
-The diagnostics ID (here D1F48686-F045-4708-85E3-0635B729A596/20180525-145051)
+The diagnostics ID (here B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610)
 is composed of your user ID (D1F48686-F045-4708-85E3-0635B729A596) and a
 timestamp (20180525-145051).  Be sure to provide us with the full diagnostics
 ID, not just the user ID.
@@ -95,9 +69,8 @@ ID, not just the user ID.
 Don't hesitate browsing the content of these diagnostics:
 
 ```sh
-$ open /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
+$ open /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.zip
 ```
-
 
 <a name="logs"></a>
 ## Check the logs

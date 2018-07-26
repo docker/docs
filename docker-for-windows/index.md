@@ -426,7 +426,7 @@ For a full list of options on the Docker daemon, see [daemon](/engine/reference/
 
 [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher and from [18.06 Stable (win70)](/docker-for-windows/edge-release-notes/#docker-community-edition-18060-ce-win70-2018-07-25) and higher.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher, and in [18.06 Stable (win70)](/docker-for-windows/edge-release-notes/#docker-community-edition-18060-ce-win70-2018-07-25) and higher.
 
 ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
 
