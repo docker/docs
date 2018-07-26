@@ -81,19 +81,6 @@ These are the operating systems where you can install Docker EE.
 > Microsoft Windows Server is not supported as a manager. Microsoft Windows
 > Server 1803 is not supported as a worker.
 
-### Docker Certified Infrastructure
-
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
-Docker Enterprise Edition (EE) on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates,
-and third-party ecosystem solution briefs.
-
-| Platform                                                                                | Docker Enterprise Edition |
-|:----------------------------------------------------------------------------------------|:-------------------------:|
-| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}   |
-| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}   |
-| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}   |
-| IBM Cloud                                                                               |        Coming soon        |
 
 
 ## Docker Enterprise Edition release cycles
