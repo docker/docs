@@ -20,6 +20,25 @@ upgrade your installation to the latest release.
 
 # Version 3.0
 
+## 3.0.3 (2018-07-26)
+
+**New platforms**
+* Added support for Windows Server 1803.
+* UCP 3.0.3 supports running on Windows Server 1803 workers. Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` have been added.
+* UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES SP 3. Interlock is currently not supported for 3.0.x on Z.
+
+**Bug Fixes**
+* Core
+   * Optimize swarm service read api calls through UCP (13971)
+   * Fixes an issue where some UCP Controller API calls may hang indefinitely.
+   * Default Calico MTU set to 1480
+   * Calico is upgraded to 3.0.8
+   * Compose for Kubernetes logging improvements
+   * Fixes an issue where backups would fail if UCP was not licensed.
+   * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the UI.
+   * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks.
+
+
 ## 3.0.2 (2018-06-21)
 
 **New Features**
@@ -27,7 +46,7 @@ upgrade your installation to the latest release.
    * Server 1709 provides smaller Windows base image sizes, as detailed [here](https://docs.microsoft.com/en-us/windows-server/get-started/whats-new-in-windows-server-1709)
    * Server 1709 provides relaxed image compatibility requirements, as detailed [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility)
    * Server 1709 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
-   * Offline bundle names are changed from `ucp_images_win_3.0.1.tar.gz` to `ucp_images_win_2016_3.0.2.tar.gz` and `ucp_images_win_1709_3.0.2.tar.gz` based on Windows Server versions.  
+   * Offline bundle names are changed from `ucp_images_win_3.0.1.tar.gz` to `ucp_images_win_2016_3.0.2.tar.gz` and `ucp_images_win_1709_3.0.2.tar.gz` based on Windows Server versions.
 * UCP now supports running RHEL 7.5.  Please refer to the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
 * Added support for dynamic volume provisioning in Kubernetes for AWS EBS and
 Azure Disk when installing UCP with the `--cloud-provider` option.
@@ -42,8 +61,8 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
    built-in Kubernetes RBAC authorizer. If you had a custom role with
    (for instance) Pod Get permissions, you may need to create a new custom
    role with permissions for each new subresource.
-   * To deploy Pods with Privileged options, users now require a grant with the 
-   role `Full Control` for all namespaces. 
+   * To deploy Pods with Privileged options, users now require a grant with the
+   role `Full Control` for all namespaces.
    * The `/api/ucp/config` endpoint now includes default node orchestrator.
    * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
    MTU sizes in Calico.
@@ -242,6 +261,29 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.11 (2018-07-26)
+
+**New platforms**
+* UCP 2.2.11 is supported running on RHEL 7.5 and Ubuntu 18.04.
+
+**Bug fixes**
+
+* Security
+  * Fixed an issue that causes some security headers to not be added to all API responses.
+
+* Core
+  * Optimized Swarm service read API calls through UCP.
+  * Upgraded `RethinkDB` image to address potential security vulnerabilities.
+  * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
+  * Upgraded `etcd` version to 2.3.8.
+  * Fixed an issue that causes classic Swarm to provide outdated data.
+  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes.
+
+* UI
+  * Fixed an issue that causes UI to not parse volume options correctly.
+  * Fixed an issue that prevents the user from deploying stacks via UI.
+
 ## Version 2.2.10 (2018-05-17)
 
 **Bug fixes**
