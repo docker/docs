@@ -25,7 +25,7 @@ Learn about [ingress in Kubernetes](https://v1-8.docs.kubernetes.io/docs/concept
 
 ## Create a dedicated namespace
 
-1.  Navigate to the **Namespaces** page and click **Create**.
+1.  Navigate to the **Namespaces** page, and click **Create**.
 2.  In the **Object YAML** editor, append the following text.
     ```yaml
     metadata:
@@ -52,13 +52,13 @@ The default service account that's associated with the `ingress-nginx`
 namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
 
-1.  From UCP, navigate to the **Grants** page and click **Create Grant**.
+1.  From UCP, navigate to the **Grants** page, and click **Create Grant**.
 2.  Within the **Subject** pane, select **Service Account**. For the 
     **Namespace** select **ingress-nginx**, and select **default** for
     the **Service Account**. Click **Next**.
-3.  Within the **Role** pane, select **Restricted Control** and then click 
-    **Next**
-4.  Within the **Resource Set** pane, select the **Type** **Namespace** and
+3.  Within the **Role** pane, select **Restricted Control**, and then click 
+    **Next**.
+4.  Within the **Resource Set** pane, select the **Type** **Namespace**, and
     select the **Apply grant to all existing and new namespaces** toggle.
 5.  Click **Create**.
 
