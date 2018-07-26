@@ -20,6 +20,16 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 18.06.0-ce-win72 2018-07-26
+
+[Download](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe)
+
+* New
+  - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is whitelisted. Click "More info" to view the app is published by "Docker Inc" and run it.
+
+* Bug fixes and minor changes
+  - Fix bug in automatic feature enabling if "Hyper-V" and "Containers" Windows features are not enabled already when starting Docker Desktop.
+
 ### Docker Community Edition 18.06.0-ce-win70 2018-07-25
 
 [Download](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe)
