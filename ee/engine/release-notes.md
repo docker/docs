@@ -51,7 +51,7 @@ adopted as quickly for consistency and compatibility reasons.
 + Add support for Microsoft Windows Server 1709.
 + Add support for Microsoft Windows Server 1803.
 + Windows opt-out telemetry stream.
-+ Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
++ Support for `--chown` with `COPY` and `ADD` in `Dockerfile` (not yet supported on Windows).
 + Add support for multiple logging drivers for `docker logs`.
 
 ## 17.06.2-ee-16 (2018-07-26)
