@@ -90,7 +90,7 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 
 ## Preferences menu
 
-Choose ![whale menu](images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
+Choose ![whale menu](images/whale-x.png){: .inline}  → **Preferences** from the menu bar and configure the runtime options described below.
 
 ![Docker context menu](images/menu/prefs.png){:width="250px"}
 
@@ -105,7 +105,7 @@ General settings are:
 - **Automatically check for updates** notifies you when an update is available.
   Click **OK** to accept and install updates (or cancel to keep the current
   version). If you disable this option, you can still find out about updates
-  manually by choosing ![whale menu](images/whale-x.png){: .inline} -> **Check for Updates**.
+  manually by choosing ![whale menu](images/whale-x.png){: .inline} → **Check for Updates**.
 
 - **Include VM in Time Machine backups** backs up the Docker for Mac virtual machine. (Disabled by default.)
 
@@ -252,9 +252,7 @@ changes, click another preference tab, then choose to discard or not apply chang
 
 ### Kubernetes
 
-Docker for Mac 17.12 CE (and higher) includes a standalone Kubernetes server
-that runs on your Mac, so that you can test deploying your Docker workloads on
-Kubernetes.
+In Docker for Mac [17.12 Edge (mac45)](/docker-for-mac/edge-relese-notes/#docker-community-edition-17120-ce-mac45-2018-01-05) and higher, and [18.06 Stable (mac70)](/docker-for-mac/release-notes/#docker-community-edition-18060-ce-mac70-2018-07-25) and higher, a standalone Kubernetes server is included that runs on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
@@ -270,8 +268,7 @@ If you installed `kubectl` with Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply** button.
+  running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
 
   ![Enable Kubernetes](images/menu/prefs-kubernetes.png){: .with-border width="400px"}
 
