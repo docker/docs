@@ -151,7 +151,7 @@ Settings for syncing system admininistrator users.
 | `search_filter`        | no       | The LDAP search filter used to select users if `select_group_members` is `false`, for example, `(memberOf=cn=ddc-admins,ou=groups,dc=example,dc=com)`. May be left blank.                                 |
 
 
-### registries array (required)
+### registries array (optional)
 
 An array of tables that specifies the DTR instances that the current UCP instance manages.
 
