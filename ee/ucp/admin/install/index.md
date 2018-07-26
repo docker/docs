@@ -98,7 +98,7 @@ To install UCP:
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. In order to use UCP you will require a Docker EE standard or advanced subscription, or you can test the platform with a free trial license.
+Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker EE standard or advanced subscription, or you can test the platform with a free trial license.
 
 1.  Go to the
     [Docker Store](https://www.docker.com/enterprise-edition)
