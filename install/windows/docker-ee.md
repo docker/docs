@@ -99,16 +99,10 @@ Then open a new Powershell session for the update to take effect.
 
 ## Update Docker EE
 
-To update Docker EE Engine to the most recent release of the current channel use the `-Update` flag:
+To update Docker EE Engine to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
-```
-
-To update Docker EE Engine from the `17.06` channel to the `18.03` channel use both the `-Update` and `-RequiredVersion` flags:
-
-```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force -RequiredVersion 18.03
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Update -Force
 ```
 
 ## Preparing a Docker EE Engine for use with UCP
