@@ -199,11 +199,11 @@ Engine, UCP, and DTR).
     $ sudo zypper addrepo $DOCKER_EE_URL docker-ee-stable
     ```
 
-3.  Import the GPG key from the repository. Use the command as-is. It works
-    because of the variable you set earlier.
+3.  Import the GPG key from the repository. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo rpm --import "${DOCKER_EE_URL}/sles/gpg"
+    $ sudo rpm --import "<DOCKER-EE-URL>/sles/gpg"
     ```
 
 #### Install Docker EE
