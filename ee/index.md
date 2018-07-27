@@ -96,7 +96,7 @@ to schedule Kubernetes or Swarm workloads.
 
 ### Secure supply chain
 
-![](images/docker-ee-overview-3.svg){: .with-border}
+![](images/docker-ee-overview-3.png){: .with-border}
 
 - Image signing and scanning of Kubernetes apps for validating and verifying content
 - Image promotion with mirroring between registries
