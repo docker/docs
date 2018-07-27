@@ -25,11 +25,11 @@ upgrade your installation to the latest release.
 **New platforms**
 * Added support for Windows Server 1803.
 * UCP 3.0.3 supports running on Windows Server 1803 workers. Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` have been added.
-* UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES SP 3. Interlock is currently not supported for 3.0.x on Z.
+* UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES 12 SP 3. Interlock is currently not supported for 3.0.x on Z.
 
 **Bug Fixes**
 * Core
-   * Optimize swarm service read api calls through UCP (13971)
+   * Optimize swarm service read api calls through UCP
    * Fixes an issue where some UCP Controller API calls may hang indefinitely.
    * Default Calico MTU set to 1480
    * Calico is upgraded to 3.0.8
