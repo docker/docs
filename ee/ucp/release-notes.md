@@ -23,8 +23,9 @@ upgrade your installation to the latest release.
 ## 3.0.3 (2018-07-26)
 
 **New platforms**
-* Added support for Windows Server 1803.
-* UCP 3.0.3 supports running on Windows Server 1803 workers. Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` have been added.
+* UCP now supports running Windows Server 1803 workers
+   * Server 1803 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
+   * Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` have been added.
 * UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES 12 SP 3. Interlock is currently not supported for 3.0.x on Z.
 
 **Bug Fixes**
