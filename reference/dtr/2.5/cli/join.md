@@ -12,6 +12,11 @@ Add a new replica to an existing DTR cluster
 docker run -it --rm docker/dtr:2.5.3 \
     join [command options]
 ```
+EXAMPLE
+ docker run -it --rm \
+  docker/dtr:2.5.3 join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
 
 ## Description
 
