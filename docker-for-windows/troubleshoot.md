@@ -36,7 +36,7 @@ Once the **Diagnose & Feedback** window is opened, it will start to collect the 
 ![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
 
 If you click on **Report an issue**, this opens [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues/) in your web browser in a "create new issue" template, to be completed before submision.
+GitHub](https://github.com/docker/for-win/issues/) in your web browser in a "create new issue" template, to be completed before submision. Do not forget to copy/paste your diagnistic ID.
 
 ![issue-template](images/issue-template.png){:width="600px"}
 
@@ -340,7 +340,9 @@ Here are some steps to take if you encounter similar problems:
     > Read the whole page before running any scripts, especially warnings about `-ForceDeleteAllSwitches`.
     > {: .warning}
 
-### Windows containers
+### Windows containers and Windows Server 2016
+
+Docker Desktop is not supported on Windows Server 2016, instead you can use [Docker Enterprise Basic Edition](/ee/index) at no aditional cost.
 
 If you have questions about how to run Windows containers on Windows 10, see [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
 

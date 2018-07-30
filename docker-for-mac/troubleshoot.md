@@ -36,7 +36,7 @@ Once the diagnostics are available, you can upload them and obtain a **Diagnosti
 
 If you click **Report an issue**, this opens [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
-"create new issue" template, to be completed before submission.
+"create new issue" template, to be completed before submission. Do not forget to copy/paste your diagnostic ID.
 
 ![issue template](images/issues-template.png){:width="600px"}
 
