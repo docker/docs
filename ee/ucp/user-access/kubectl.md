@@ -44,13 +44,13 @@ operating system.
   <li><a data-toggle="tab" data-target="#win">Windows</a></li>
 </ul>
 <div class="tab-content">
-<div id="linux" class="tab-pane fade in active" markdown="1">
+<div id="mac" class="tab-pane fade in active" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
 k8sversion=v1.8.11
 
 # Get the kubectl binary.
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/darwin/amd64/kubectl
 
 # Make the kubectl binary executable.
 chmod +x ./kubectl
@@ -60,13 +60,13 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 <hr>
 </div>
-<div id="mac" class="tab-pane fade" markdown="1">
+<div id="linux" class="tab-pane fade" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
 k8sversion=v1.8.11
 
 # Get the kubectl binary.
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/darwin/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/linux/amd64/kubectl
 
 # Make the kubectl binary executable.
 chmod +x ./kubectl
