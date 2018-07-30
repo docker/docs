@@ -18,6 +18,13 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.06.0-ce-win71 2018-07-27
+
+[Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe)
+
+* Bug fixes and minor changes
+  - Fix bug in automatic feature enabling if "Hyper-V" and "Containers" Windows features are not enabled already when starting Docker Desktop.
+
 ### Docker Community Edition 18.06.0-ce-win69 2018-07-25
 
 [Download](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe)
