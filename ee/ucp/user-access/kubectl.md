@@ -19,9 +19,7 @@ command-line tool, which is named kubectl.
 
 ## Install the kubectl binary
 
-To use kubectl, install the binary on a workstation which has access to your UCP endpoint. 
-Below are instructions for a Linux workstation, however Windows and Mac OS instructions can 
-be found [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+To use kubectl, install the binary on a workstation which has access to your UCP endpoint.
 
 > Note that kubectl only guarantees compatibility with clusters that are +/-1 minor versions away.
 > Therefore please do not install the latest kubectl release.
