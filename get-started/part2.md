@@ -241,9 +241,9 @@ $ curl http://localhost:4000
 <h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
 ```
 
-This port remapping of `4000:80` is to demonstrate the difference
-between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we just map port 80 on the host to port 80
+This port remapping of `4000:80` demonstrates the difference
+between `EXPOSE` within the `Dockerfile` and what the `publish` value is set to when running
+`docker run -p`. In later steps, map port 4000 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
