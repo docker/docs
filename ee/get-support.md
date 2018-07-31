@@ -47,18 +47,14 @@ from all of the manager nodes.
 
 ## Use the CLI to get a support dump (multiple nodes)
 
-To get the support dump from the CLI for multiple nodes, use SSH to log into a UCP manager node
-and run:
-
-To generate support dump details for all hosts in a cluster, from one remote host, please see below.
-
 The below variables need to be set initially and folders created prior to running the command. Please note the variables can be changed to fit your environment:
 
-```$ SUPPORT_DUMP_DIR=<^>/opt<^^>
-$ SUPPORT_DUMP_TEMPDIR=${SUPPORT_DUMP_DIR}/support_dump_temp
-$ DUMP_DATE=$(date +%Y%m%d-%H_%M_%S)
-$ mkdir ${SUPPORT_DUMP_TEMPDIR}
-$ UCP_VERSION=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Env}}{{$varval:= split . "="}}{{if eq "IMAGE_VERSION" (index $varval 0)}}{{index $varval 1}}{{end}}{{end}}')
+``` 
+ SUPPORT_DUMP_DIR=<^>/opt<^^>
+ SUPPORT_DUMP_TEMPDIR=${SUPPORT_DUMP_DIR}/support_dump_temp
+ DUMP_DATE=$(date +%Y%m%d-%H_%M_%S)
+ mkdir -p ${SUPPORT_DUMP_TEMPDIR}
+ UCP_VERSION=$(docker service inspect ucp-agent --format '{{index .Spec.TaskTemplate.ContainerSpec.Labels "com.docker.ucp.version"}}')
 ```
 The below command creates a zip file that contains support details (dsinfo) for each host in your cluster:
 
