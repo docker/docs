@@ -202,12 +202,15 @@ kubectl create secret generic mysql-pass --from-literal=password=<mysql-password
 You have two persistent volumes that are available for claims. The MySQL 
 deployment uses one volume, and WordPress uses the other.
 
-Copy the following yaml to a file named wordpress-deployment.yaml. 
+Copy the following yaml to a file named `wordpress-deployment.yaml`. 
 The claims in this file make no reference to a particular storage class, so
 they bind to any available volumes that can satisfy the storage request.
 In this example, both claims request `20Gi` of storage.
 
-> NOTE: If you are attempting to use a specific persistent volume and not let Kubernetes choose at random, ensure that the `storageClassName` key is populated in the persistent claim itself.
+> Use specific persistent volume
+>
+>If you are attempting to use a specific persistent volume and not let Kubernetes choose at random, ensure that the `storageClassName` key is populated in the persistent claim itself.
+{: important}
 
 ```yaml
 apiVersion: v1
