@@ -52,7 +52,7 @@ scan your images for vulnerabilities.
 
 > Compatibility Matrix
 >
-> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix)
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
 {: .important}
 
 ## Supported platforms
