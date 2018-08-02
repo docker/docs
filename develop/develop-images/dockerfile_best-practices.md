@@ -428,12 +428,12 @@ recommendations.
         s3cmd=1.1.* \
      && rm -rf /var/lib/apt/lists/*
 
-The `s3cmd` instructions specifies a version `1.1.*`. If the image previously
+The `s3cmd` argument specifies a version `1.1.*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
-update` and ensure the installation of the new version. Listing packages on
+update` and ensures the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
 
-In addition, when you clean up the apt cache by removing `/var/lib/apt/lists`
+In addition, when you clean up the apt cache by removing `/var/lib/apt/lists` it
 reduces the image size, since the apt cache is not stored in a layer. Since the
 `RUN` statement starts with `apt-get update`, the package cache is always
 refreshed prior to `apt-get install`.

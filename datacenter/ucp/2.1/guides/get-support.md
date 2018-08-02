@@ -35,7 +35,8 @@ docker run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.docker_image }} \
-  support > docker-support.tgz
+  support > \
+  docker-support-${HOSTNAME}-$(date +%Y%m%d-%H_%M_%S).tgz
 ```
 
 This support dump only contains logs for the node where you're running the

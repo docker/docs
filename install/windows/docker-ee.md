@@ -7,9 +7,7 @@ redirect_from:
 - /engine/installation/windows/docker-ee/
 ---
 
-{% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %}
-{% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
-
+{% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
 Docker Enterprise Edition for Windows Server (*Docker EE*) enables native
 Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package
@@ -17,25 +15,11 @@ includes everything you need to run Docker on Windows Server.
 This topic describes pre-install considerations, and how to download and
 install Docker EE.
 
->**Looking for Release Notes?** [Get release notes for all
-versions here](/release-notes/) or subscribe to the
-[releases feed on the Docker Blog](http://blog.docker.com/category/engineering/docker-releases/).
-
-## Docker Universal Control Plane and Windows
-
-With Docker EE, your Windows nodes can join swarms that are managed
-by Docker Universal Control Plane (UCP). When you have Docker EE installed
-on Windows Server 2016 and you have a
-[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can
-[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
+> Release notes
+>
+> You can [get release notes for all versions here](/release-notes/)
 
 ## Install Docker EE
-
->Windows Server 1709
->
->Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
->To use UCP, for now, use the current LTSB Windows release and not 1709.
-
 
 Docker EE for Windows requires Windows Server 2016 or later. See
 [What to know before you install](#what-to-know-before-you-install) for a
@@ -54,7 +38,7 @@ full list of prerequisites.
     (Install-WindowsFeature Containers).RestartNeeded
     ```
     If the output of this command is **Yes**, then restart the server with:
-    
+
     ```PowerShell
     Restart-Computer
     ```
@@ -75,7 +59,6 @@ full list of prerequisites.
 
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
-    <snip>
     ```
 
 ### (optional) Make sure you have all required updates

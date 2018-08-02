@@ -14,6 +14,8 @@ This page explains how publishers can successfully test their **Docker logging p
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
+> You should perform this Self Certification test prior to submitting your product for publishing.
+
 ## Certify your logging plugins
 
 You must use the tool, `inspectDockerLoggingPlugin`, to certify your content for publication on Docker Store by ensuring that your Docker logging plugins conform to best practices.
@@ -28,7 +30,11 @@ The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugi
 
 - Displays the container logs and compares it to `quotes.txt`. If they match, the test is successful.
 
-The syntax for running a specific logging plugin is: `docker container run --log-driver`.
+The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
+
+If you are publishing and certifying multiple versions of a Docker logging plugin, you will need to run the `inspectDockerLoggingPlugin` tool on each Docker logging plugin and send each result to Docker Store.
+
+The syntax for running a specific logging plugin is `docker container run --log-driver`.
 
 No parameters are passed to the logging plugin. If parameters are required for the Docker logging plugin to work correctly, then a custom test script must be written and used. The default `docker container run` command is:
 
@@ -355,13 +361,13 @@ gforghetti:~/$
 gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
 ```
 
-Note: The output was piped to the **jq** command to display it "nicely".
+> Note: The output was piped to the **jq** command to display it "nicely".
 
 #### Output:
 
+
 ```
-```
-{
+ {
   "Date": "Mon May 21 14:38:28 2018",
   "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
   "SystemArchitecture": "amd64",
@@ -415,7 +421,6 @@ Note: The output was piped to the **jq** command to display it "nicely".
     }
   ]
 }
-🐳  gforghetti:~/$
 ```
 
 <a name="inspect-logging-plugin-html">

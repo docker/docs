@@ -10,12 +10,11 @@ Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
 leverages the thin provisioning and snapshotting capabilities of this framework
 for image and container management. This article refers to the Device Mapper
-storage driver as `devicemapper`, and the kernel framework as `Device Mapper`.
+storage driver as `devicemapper`, and the kernel framework as _Device Mapper_.
 
 For the systems where it is supported, `devicemapper` support is included in
 the Linux kernel. However, specific configuration is required to use it with
-Docker. For instance, on a stock installation of RHEL or CentOS, Docker
-defaults to `overlay`, which is not a supported configuration.
+Docker. 
 
 The `devicemapper` driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
@@ -24,10 +23,9 @@ a filesystem at the level of the operating system.
 
 ## Prerequisites
 
-- `devicemapper` storage driver is the only supported storage driver for Docker
-  EE and Commercially Supported Docker Engine (CS-Engine) on RHEL, CentOS, and
-  Oracle Linux. See the
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
+- `devicemapper` storage driver is a supported storage driver for Docker
+  EE on many OS distribution. See the
+  [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
 
 - `devicemapper` is also supported on Docker CE running on CentOS, Fedora,
   Ubuntu, or Debian.
@@ -45,9 +43,9 @@ Before following these procedures, you must first meet all the
 ### Configure `loop-lvm` mode for testing
 
 This configuration is only appropriate for testing. Loopback devices are slow
-and resource-intensive, and require you to create file on disk at specific sizes.
-They can also introduce race conditions. They are supposed for testing because
-the set-up is easier.
+and resource-intensive, and they require you to create file on disk at specific sizes.
+They can also introduce race conditions. They are available for testing because
+the setup is easier.
 
 For production systems, see
 [Configure direct-lvm mode for production](#configure-direct-lvm-mode-for-production).

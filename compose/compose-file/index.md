@@ -759,6 +759,20 @@ services:
         window: 120s
 ```
 
+#### rollback_config
+
+> [Version 3.7 file format](compose-versioning.md#version-37) and up
+
+Configures how the service should be rollbacked in case of a failing
+update.
+
+- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
+- `delay`: The time to wait between each container group's rollback (default 0s).
+- `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `max_failure_ratio`: Failure rate to tolerate during a rollback (default 0).
+- `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
+
 #### update_config
 
 Configures how the service should be updated. Useful for configuring rolling
@@ -1117,6 +1131,27 @@ a partial image ID.
 If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
+
+### init
+
+> [Added in version 3.7 file format](compose-versioning.md#version-37).
+
+Run an init inside the container that forwards signals and reaps processes.
+Either set a boolean value to use the default `init`, or specify a path to
+a custom one.
+
+    version: '2.2'
+    services:
+      web:
+        image: alpine:latest
+        init: true
+
+
+    version: '2.2'
+    services:
+      web:
+        image: alpine:latest
+        init: /usr/libexec/docker-init
 
 ### isolation
 
@@ -1986,7 +2021,7 @@ conflicting with those used by other software.
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
 Set a custom name for this volume. The name field can be used to reference
-networks that contain special characters. The name is used as is
+volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
     version: '3.4'

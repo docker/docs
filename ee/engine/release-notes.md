@@ -19,6 +19,72 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 18.03.1-ee-2 (2018-07-10)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Runtime
+
++ Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+
+## 18.03.1-ee-1 (2018-06-27)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Client
+
++ Update to docker-ce 18.03.1 client.
++ Add `docker trust` command for image signing and enabling the secure supply chain from development to deployment.
++ Add docker compose on Kubernetes.
+
+### Runtime
+
++ Update to docker-ce 18.03.1 engine.
++ Add support for FIPS 140-2 on x86_64.
++ Add support for Microsoft Windows Server 1709.
++ Add support for Microsoft Windows Server 1803.
++ Windows opt-out telemetry stream.
++ Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
++ Add support for multiple logging drivers for `docker logs`.
+
+## 17.06.2-ee-16 (2018-07-26)
+
+### Client
+
+- Fix service rollback options being cross-wired. [docker/cli#1052](https://github.com/docker/cli/pull/1052)
+
+### Networking
+
+* Protect against possible race on ingress programming. [docker/libnetwork#2195](https://github.com/docker/libnetwork/pull/2195)
+* Add a recovery mechanism for a split gossip cluster. [docker/libnetwork#2169](https://github.com/docker/libnetwork/pull/2169)
+
+### Packaging
+
+* Update packaging description and license to Docker EUSA.
+
+### Runtime
+
+* Update overlay2 to use naive diff for changes. [moby/moby#37313](https://github.com/moby/moby/pull/37313)
+
+### Swarm mode
+
+- Fix task reaper batching. [docker/swarmkit#2678](https://github.com/docker/swarmkit/pull/2678)
+* RoleManager will remove deleted nodes from the cluster membership. [docker/swarmkit#2607](https://github.com/docker/swarmkit/pull/2607)
+- Fix unassigned task leak when service is removed. [docker/swarmkit#2708](https://github.com/docker/swarmkit/pull/2708)
+
+## 17.06.2-ee-15 (2018-07-10)
+
+### Runtime
+
+- Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
 ## 17.06.2-ee-14 (2018-06-21)
 
 ### Client

@@ -11,6 +11,13 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.8
+
+(26 July 2018)
+
+### Bug Fixes
+* Fixed bug where repository tag list UI was not loading after a tag migration.
+
 ## Version 2.3.7
 
 (17 May 2018)

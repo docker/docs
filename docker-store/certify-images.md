@@ -14,11 +14,13 @@ This page explains how publishers can successfully test their **Docker images**.
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
+> You should perform this Self Certification test prior to submitting your product for publishing.
+
 ## Certify your Docker images
 
-You must use the tool, `inspectDockerimage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Download the tool [here](#syntax).
+You must use the tool, `inspectDockerImage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. Download the tool [here](#syntax).
 
-The `inspectDockerimage` tool does the following:
+The `inspectDockerImage` tool does the following:
 
 - Verifies that the Docker image was built from an image in the [Docker Official Repository](https://github.com/docker-library/repo-info/tree/master/repos)
 
@@ -38,18 +40,26 @@ The `inspectDockerimage` tool does the following:
 
 - Attempts to stop the container to ensure that it can be stopped gracefully.
 
+The `inspectDockerImage` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
+
+If you are publishing and certifying multiple versions for a Docker image, you will need to run the `inspectDockerImage` tool on each Docker image and send each result to Docker Store.
+
+If you are publishing and certifying multi-architecture Docker image (e.g. Linux, Power, s390x, windows, etc.) you will need to run the `inspectDockerImage` tool on the Docker EE server running on each architecture and send the results to Docker Store.
+
+Details on how to run the `inspectDockerImage` tool and send the results to Docker Store are in the sections that follow.
+
 ### Prerequisites
 
 Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial).
 
 - Docker EE (on the server for verifying submissions)
-- inspectDockerimage tool
+- inspectDockerImage tool
 
 ### Set up testing environment
 
 There are two steps: (1) configure credentials, and (2) configure endpoints (or use default endpoints).
 
-1.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
+1.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerImage`.
 
     a.  Define environment variables for registry credentials, `DOCKER_USER` and `DOCKER_PASSWORD`:
 
@@ -74,16 +84,16 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
     $env:DOCKER_PASSWORD="my_docker_registry_user_account_password"
     ```
 
-    b.  Pass arguments to `inspectDockerimage` (or be prompted for them):
+    b.  Pass arguments to `inspectDockerImage` (or be prompted for them):
 
     ```
     --docker-user
     --docker-password
     ```
 
-2.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerimage`.
+2.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerImage`.
 
-    By default, `inspectDockerimage` uses these two endpoints to communicate with the Docker Hub Registry:
+    By default, `inspectDockerImage` uses these two endpoints to communicate with the Docker Hub Registry:
 
     - Registry Authentication Endpoint: **https://auth.docker.io**
     - Registry API Endpoint: **https://registry-1.docker.io**
@@ -113,7 +123,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
     $env:DOCKER_REGISTRY_API_ENDPOINT="https://my_docker_registry_api_enpoint"
     ```
 
-    b.  Pass your endpoints as arguments to `inspectDockerimage`:
+    b.  Pass your endpoints as arguments to `inspectDockerImage`:
 
     ```
     --docker-registry-auth-endpoint
@@ -122,7 +132,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
 
 ### Syntax
 
-1.  Download `inspectDockerimage` command.
+1.  Download `inspectDockerImage` command.
 
     | OS/Architecture | Download Link |
     |:-----|:--------|:------|
@@ -144,7 +154,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
     ```none
     Inspects a Docker image to see if it conforms to best practices.
 
-    Syntax: inspectDockerimage [options] dockerimage
+    Syntax: inspectDockerImage [options] dockerimage
 
     Options:
       -docker-password string
@@ -178,7 +188,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
 
 ## Inspection Output
 
-By default, `inspectDockerimage` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for administrator verification.
+By default, `inspectDockerImage` displays output locally to `stdout` (the default), JSON, and HTML. You can also upload output to Docker Store, which is recommended for administrator verification.
 
 -  **Upload to Docker Store** (by entering `product-id` at the commandline).
 
@@ -188,7 +198,7 @@ By default, `inspectDockerimage` displays output locally to `stdout` (the defaul
 
 -  **HTML local file**. Use the `--html` option to generate an HTML report. Both `--json` and `--html` can be specified at the same time.
 
-> Volumes created by Docker image containers are destroyed after `inspectDockerimage` terminates.
+> Volumes created by Docker image containers are destroyed after `inspectDockerImage` terminates.
 
 ## Inspection Examples
 
@@ -226,7 +236,7 @@ $1
 #### To inspect the Docker image, `gforghetti/tomcat-wildbook:latest`, with a custom startup script and upload the result to Docker Store (leave out the `-product-id` parameter if you are just testing):
 
 ```
-root:[~/] # ./inspectDockerimage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
+root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
 ```
 
 #### Output:
@@ -451,7 +461,7 @@ root:[~/] #
 #### To inspect the Docker image, `gforghetti/apache:latest`, with JSON output:
 
 ```
-root:[~/] # ./inspectDockerimage --json gforghetti/apache:latest | jq
+root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 ```
 
 Note: The output was piped to the **jq** command to display it "nicely".
@@ -578,7 +588,7 @@ root:[~/] #
 #### To inspect the Docker image, `gforghetti/apache:latest`, with HTML output:
 
 ```
-root:[~/] # ./inspectDockerimage --html gforghetti/apache:latest
+root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
 ```
 
 Note: The majority of the stdout message output has been intentionally omitted below.
@@ -611,7 +621,7 @@ root:[~/] #
 #### To inspect the Docker image, `microsoft/nanoserver:latest`:
 
 ```
-PS D:\InspectDockerimage> .\inspectDockerimage microsoft/nanoserver:latest
+PS D:\InspectDockerimage> .\inspectDockerImage microsoft/nanoserver:latest
 ```
 
 #### Output:
