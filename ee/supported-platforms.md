@@ -50,6 +50,11 @@ scan your images for vulnerabilities.
 
 [Learn more about Docker EE Standard and Advanced](/ee/index.md).
 
+> Compatibility Matrix
+>
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix)
+{: .important}
+
 ## Supported platforms
 
 The following table shows all of the platforms that are available for Docker EE.
