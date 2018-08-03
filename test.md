@@ -599,13 +599,33 @@ Examples are shown in the following sections.
 
 ### Note (Deprecated)
 
+Notes are deprecated and should not longer be used. Use important or warning instead.
+
 A standard note is formatted like this:
 
 ```
-> **Note**: This is a note using the old note style
+> Handling transient errors
+>
+> Note the way the `get_hit_count` function is written. This basic retry
+> loop lets us attempt our request multiple times if the redis service is
+> not available. This is useful at startup while the application comes
+> online, but also makes our application more resilient if the Redis
+> service needs to be restarted anytime during the app's lifetime. In a
+> cluster, this also helps handling momentary connection drops between
+> nodes.
 ```
 
-They will still render with a colored sidebar to the left, but they should not longer be used. Use important or warning instead.
+It renders like this with a colored sidebar and icon:
+
+![note admonition example](/images/note-admonition-example.png)
+
+Notes were previously formatted like this:
+
+```
+> **Note**: This is a note using the old note style.
+```
+
+These will still render as a note with a colored sidebar to the left but no icon will be added.
 
 ### Important
 
@@ -618,7 +638,7 @@ Add the `important` class to your blockquotes if you want to tell users to be ca
 {: .important}
 ```
 
-It will render like this:
+It renders like this  with a colored sidebar and icon:
 
 ![important admonition example](/images/important-admonition-example.png)
 
@@ -633,7 +653,7 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 > You can also add more paragraphs here if your explanation is super complex.
 {: .warning}
 
-It will render like this:
+It will render like this  with a colored sidebar and icon:
 
 ![warning admonition example](/images/warning-admonition-example.png)
 
