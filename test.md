@@ -586,66 +586,56 @@ Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
 support these broad categories of admonitions:
 
-- Notes in the old style (no Liquid tag required)
-- Notes with a prefixed icon (no Liquid tag required)
-- Important and Warning admonitions, which take `{: .important}` and `{: .warning}` tags, respectively
+- Notes (no Liquid tag required) (deprecated)
+- Important, which use the `{: .important}` tag
+- Warning , which use the `{: .warning}` tag
 
 The new styles include prepended icons, color sidebars, and bold color titles
 for multi-paragraph notes, but no auto-prepended text. These are defined in a
 way that does not impact admonitions formatted with the original styles, so
 notes in your published documents are not adversely affected.
 
-Examples of both styles are shown below.
+Examples are shown in the following sections.
 
-### Examples (original styles, prefix words)
+### Note (Deprecated)
 
-Admonitions with prefixed icons use the following class tags, as shown in the examples.
+A standard note is formatted like this:
 
-* **Note:** No class tag is needed for standard notes.
-* **Important:** Use the `important` class.
-* **Warning:** Use the `warning` class.
-
-
+```
 > **Note**: This is a note using the old note style
+```
 
+They will still render with a colored sidebar to the left, but they should not longer be used. Use important or warning instead.
+
+### Important
+
+Add the `important` class to your blockquotes if you want to tell users to be careful about something:
+
+```
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
-
-> It's not safe out there, take this Moby with you
->
-> Add the `important` class to your blockquotes if you want to tell users
- to be careful about something.
 {: .important}
+```
+
+It will render like this:
+
+![important admonition example](/images/important-admonition-example.png)
+
+### Warning
+
+Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
 
 > Ouch, don't do that!
 >
-> Use the `warning` class to let people know this is dangerous or they
- should pay close attention to this part of the road.
+> Sticking your finger in an electrical outlet can result in an electric shock.
 >
-> You can also add more paragraphs here if your explanation is
- super complex.
+> You can also add more paragraphs here if your explanation is super complex.
 {: .warning}
 
->**This is a crazy note**
->
-> This note has tons of content in it:
->
-> - List item 1
-> - List item 2
->
-> |Table column 1  | Table column 2 |
-> |----------------|----------------|
-> | Row 1 column 1 | Row 2 column 2 |
-> | Row 2 column 1 | Row 2 column 2 |
->
-> And another sentence to top it all off.
+It will render like this:
 
-> **Important**: Single paragraph important note with the prefix word "important" manually typed in as bold at the beginning.
-{: .important}
-
-> **Warning**: Single paragraph warning with the prefix word "warning" manually typed in as bold at the beginning.
-{: .warning}
+![warning admonition example](/images/warning-admonition-example.png)
 
 ## Code blocks
 
