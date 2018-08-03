@@ -29,6 +29,8 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
+> Only one path per host
+>
 > Interlock supports only one path per host per service cluster. Once a
 > particular `com.docker.lb.hosts` label has been applied, it cannot be applied
 > again in the same service cluster.
