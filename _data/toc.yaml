@@ -2307,8 +2307,10 @@ manuals:
             path: /ee/dtr/admin/configure/deploy-caches/
           - title: Cache deployment strategy
             path: /ee/dtr/admin/configure/deploy-caches/strategy/
-          - title: Deploy a DTR cache
+          - title: Deploy a DTR cache with Docker Swarm
             path: /ee/dtr/admin/configure/deploy-caches/simple/
+          - title: Deploy a DTR cache with Kubernetes
+            path: /ee/dtr/admin/configure/deploy-caches/simple-kube/
           - title: Configure caches for high availability
             path: /ee/dtr/admin/configure/deploy-caches/high-availability/
           - title: Cache configuration reference
