@@ -34,6 +34,8 @@ or port number.
     * Use the same load balancer with multiple virtual IPs.
 * Configure your load balancer to expose UCP or DTR on a port other than 443.
 
+> Additional requirements
+>
 > In addition to configuring your load balancer to distinguish between UCP and DTR, configuring a load balancer for DTR 
 > has [additional requirements](https://docs.docker.com/ee/dtr/admin/configure/use-a-load-balancer/#load-balance-dtr).
 {: .important}
