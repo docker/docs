@@ -36,8 +36,7 @@ or port number.
 
 > Additional requirements
 >
-> In addition to configuring your load balancer to distinguish between UCP and DTR, configuring a load balancer for DTR 
-> has [additional requirements](https://docs.docker.com/ee/dtr/admin/configure/use-a-load-balancer/#load-balance-dtr).
+> In addition to configuring your load balancer to distinguish between UCP and DTR, configuring a load balancer for DTR has [additional requirements](https://docs.docker.com/ee/dtr/admin/configure/use-a-load-balancer/#load-balance-dtr).
 {: .important}
 
 ## Configuration examples
