@@ -11,7 +11,7 @@ command-line tool, which is named kubectl.
 
 > Kubernetes on Docker for Mac and Docker for Windows
 >
-> Docker for Mac and Docker for Windows provides a standalone Kubernetes server that
+> Docker for Mac and Docker for Windows provide a standalone Kubernetes server that
 > runs on your development machine, with kubectl installed by default. This installation is
 > separate from the Kubernetes deployment on a UCP cluster.
 > Learn how to [deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md).
