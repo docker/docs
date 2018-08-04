@@ -243,7 +243,7 @@ $ curl http://localhost:4000
 
 This port remapping of `4000:80` demonstrates the difference
 between `EXPOSE` within the `Dockerfile` and what the `publish` value is set to when running
-`docker run -p`. In later steps, map port 4000 on the host to port 80
+`docker run -p`. In later steps, map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
