@@ -48,8 +48,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 + Update to docker-ce 18.03.1 engine.
 + Add support for FIPS 140-2 on x86_64.
-+ Add support for Microsoft Windows Server 1709.
-+ Add support for Microsoft Windows Server 1803.
++ Add support for Microsoft Windows Server 1709 and 1803 with support for [swarm ingress routing mesh](https://docs.docker.com/engine/swarm/ingress/), [VIP service discovery](https://docs.docker.com/v17.09/engine/swarm/networking/#configure-service-discovery), and [named pipe mounting](https://blog.docker.com/2017/09/docker-windows-server-1709/).
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
