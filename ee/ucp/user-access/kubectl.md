@@ -1,13 +1,15 @@
 ---
-title: Installing the Kubernetes CLI
+title: Install the Kubernetes CLI
 description: Learn how to install kubectl, the Kubernetes command-line tool, on Docker Universal Control Plane.
 keywords: ucp, cli, administration, kubectl, Kubernetes
 ---
 
-Docker EE deploys Kubernetes as part of a UCP installation, the UCP dashboard
-enables you to deploy, manage and monitor Kubernetes workloads. Users can
+Docker EE 2.0 and higher deploys Kubernetes as part of a UCP installation.
+Deploy, manage, and monitor Kubernetes workloads from the UCP dashboard. Users can
 also interact with the Kubernetes deployment through the Kubernetes 
-command-line tool, which is named kubectl.
+command-line tool named kubectl.
+
+To access the UCP cluster with kubectl, install the [UCP client bundle](cli.md).
 
 > Kubernetes on Docker for Mac and Docker for Windows
 >
@@ -21,19 +23,20 @@ command-line tool, which is named kubectl.
 
 To use kubectl, install the binary on a workstation which has access to your UCP endpoint.
 
-> Note that kubectl only guarantees compatibility with clusters that are +/-1 minor versions away.
-> Therefore please do not install the latest kubectl release.
+> Must install compatible version
+>
+> Kubernetes only guarantees compatibility with kubectl versions that are +/-1 minor versions away from the Kubernetes version.
 {: .important}
 
-First we need to find the which Version of Kubernetes is running in your Cluster. This can be found 
+First, find which version of Kubernetes is running in your cluster. This can be found 
 within the Universal Control Plane dashboard or at the UCP API endpoint [version](/reference/ucp/3.0/api/). 
 
-From the Dashboard click on **About Docker EE** which is within the Admin Menu in the top left corner
- of the dashboard. Then navigate to Kubernetes.
+From the UCP dashboard, click on **About Docker EE** within the **Admin** menu in the top left corner
+ of the dashboard. Then navigate to **Kubernetes**.
 
- ![](../images/kubernetes-version.png){: .with-border}
+ ![Find Kubernetes version](../images/kubernetes-version.png){: .with-border}
 
-Once you have the Kubernetes Version, you will be able to install the kubectl client for the relevant
+Once you have the Kubernetes version, install the kubectl client for the relevant
 operating system.
 
 <ul class="nav nav-tabs">
@@ -77,7 +80,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 <div id="win" class="tab-pane fade" markdown="1">
 You can download the binary from this [link](https://storage.googleapis.com/kubernetes-release/release/v.1.8.11/bin/windows/amd64/kubectl.exe)
 
-If you have curl installed on your system, you use these commands in powershell.
+If you have curl installed on your system, you use these commands in Powershell.
 
 ```cmd
 $env:k8sversion = "v1.8.11"
@@ -88,11 +91,11 @@ curl https://storage.googleapis.com/kubernetes-release/release/$env:k8sversion/b
 </div>
 </div>
 
-## Using kubectl with a Docker EE Cluster
+## Using kubectl with a Docker EE cluster
 
-Docker Enterprise Edition provides Users unique certificates and keys to authenticate against
- the Docker and Kubernetes API. Instructions on how to download these Certificates and how to 
- configure kubectl to use them can be found [here.](cli.md#download-client-certificates)
+Docker Enterprise Edition provides users unique certificates and keys to authenticate against
+ the Docker and Kubernetes APIs. Instructions on how to download these certificates and how to 
+ configure kubectl to use them can be found in [CLI-based access.](cli.md#download-client-certificates)
 
 ## Where to go next
 
