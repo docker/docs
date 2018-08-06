@@ -1140,7 +1140,7 @@ Run an init inside the container that forwards signals and reaps processes.
 Either set a boolean value to use the default `init`, or specify a path to
 a custom one.
 
-    version: '2.2'
+    version: '3.7'
     services:
       web:
         image: alpine:latest
