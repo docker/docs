@@ -1946,9 +1946,12 @@ Specify a list of options as key-value pairs to pass to the driver for this
 volume. Those options are driver-dependent - consult the driver's
 documentation for more information. Optional.
 
-     driver_opts:
-       foo: "bar"
-       baz: 1
+    volumes:
+      example:
+        driver_opts:
+          type: "nfs"
+          o: "addr=10.40.0.199,nolock,soft,rw"
+          device: ":/docker/example"
 
 ### external
 
