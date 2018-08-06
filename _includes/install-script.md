@@ -38,7 +38,7 @@ Always examine scripts downloaded from the internet before
 {:.warning}
 
 ```bash
-$ curl -fsSL get.docker.com -o get-docker.sh
+$ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 
 <output truncated>
