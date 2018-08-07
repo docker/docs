@@ -41,7 +41,7 @@ name of our repository will be `dtr.example.org/dave.lauper/golang`.
 > The 56 character `<user-or-org/repository-name>` limit in DTR is due to an underlying limitation in how the image name information is stored within DTR metadata in RethinkDB.  RethinkDB currently has a Primary Key length limit of 127 characters.
 >
 > When DTR stores the above data it appends a sha256sum comprised of 72 characters to the end of the value to ensure uniqueness within the database.  If the `<user-or-org/repository-name>` exceeds 56 characters it will then exceed the 127 character limit in RethinkDB (72+56=128).
-> {: .important}
+{: .important}
 
 ## Where to go next
 
