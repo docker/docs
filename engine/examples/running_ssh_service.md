@@ -1,12 +1,12 @@
 ---
-description: Installing and running an SSHd service on Docker
+description: Installing and running a sshd service on Docker
 keywords: docker, example, package installation,  networking
-title: Dockerize an SSH service
+title: Dockerize a SSH service
 ---
 
 ## Build an `eg_sshd` image
 
-The following `Dockerfile` sets up an SSHd service in a container that you
+The following `Dockerfile` sets up a sshd service in a container that you
 can use to connect to and inspect other container's volumes, or to get
 quick access to a test container.
 
