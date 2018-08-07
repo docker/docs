@@ -45,7 +45,7 @@ Run popular software using Docker.
 | [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose) | Run a Dockerized ASP.NET Core + SQL Server environment. |
 | [CouchDB](/engine/examples/couchdb_data_volumes) | Run a Dockerized CouchDB instance. |
 | [Django + PostgreSQL](/compose/django/) | Run a Dockerized Django + PostgreSQL environment. |
-| [PostgreSQL](/engine/examples/postgresql_service) | Run a Dockerized PosgreSQL instance. |
+| [PostgreSQL](/engine/examples/postgresql_service) | Run a Dockerized PostgreSQL instance. |
 | [Rails + PostgreSQL](/compose/rails/) | Run a Dockerized Rails + PostgreSQL environment. |
 | [Riak](/engine/examples/running_riak_service) | Run a Dockerized Riak instance. |
 | [SSHd](/engine/examples/running_ssh_service) | Run a Dockerized SSHd instance. |
