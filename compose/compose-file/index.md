@@ -809,10 +809,12 @@ services:
 The following sub-options (supported for `docker-compose up` and `docker-compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
 
 - [build](#build)
+- [cap_add, cap_drop](#cap_add-cap_drop)
 - [cgroup_parent](#cgroup_parent)
 - [container_name](#container_name)
 - [devices](#devices)
-- [tmpfs](#tmpfs)
+- [depends_on](#depends_on)
+- [tmpfs](#tmpfs) (version 3-3.5)
 - [external_links](#external_links)
 - [links](#links)
 - [network_mode](#network_mode)
