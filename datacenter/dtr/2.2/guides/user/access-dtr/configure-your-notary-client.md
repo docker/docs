@@ -34,7 +34,7 @@ curl -L <download-url> -o notary
 chmod +x notary
 
 # Move it to a location in your path
-sudo mv notary /usr/bin/
+sudo mv -Z notary /usr/bin/
 ```
 
 ## Configure the Notary CLI client
