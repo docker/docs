@@ -20,6 +20,16 @@ upgrade your installation to the latest release.
 
 # Version 3.0
 
+## 3.0.4 (2018-08-09)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue where the LDAP bind username and password 
+    were stored in clear text on UCP hosts. Please refer to the following KB article 
+    https://success.docker.com/article/after-upgrading-from-ucp-pre-2.2.12-or-pre-3.0.4 
+    for proper implementation of this fix.
+
 ## 3.0.3 (2018-07-26)
 
 **New platforms**
@@ -262,6 +272,16 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.12 (2018-08-09)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue where the LDAP bind username and password 
+    were stored in clear text on UCP hosts. Please refer to the following KB article 
+    https://success.docker.com/article/after-upgrading-from-ucp-pre-2.2.12-or-pre-3.0.4 
+    for proper implementation of this fix.
 
 ## Version 2.2.11 (2018-07-26)
 
