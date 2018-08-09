@@ -27,7 +27,7 @@ upgrade your installation to the latest release.
 * Security
   * Fixed a critical security issue where the LDAP bind username and password 
     were stored in clear text on UCP hosts. Please refer to the following KB article 
-    https://success.docker.com/article/after-upgrading-from-ucp-pre-2.2.12-or-pre-3.0.4 
+    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
     for proper implementation of this fix.
 
 ## 3.0.3 (2018-07-26)
@@ -280,7 +280,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Security
   * Fixed a critical security issue where the LDAP bind username and password 
     were stored in clear text on UCP hosts. Please refer to the following KB article 
-    https://success.docker.com/article/after-upgrading-from-ucp-pre-2.2.12-or-pre-3.0.4 
+    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
     for proper implementation of this fix.
 
 ## Version 2.2.11 (2018-07-26)
