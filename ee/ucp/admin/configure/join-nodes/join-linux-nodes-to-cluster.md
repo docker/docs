@@ -107,7 +107,8 @@ you demote them to workers.
 
 You can remove worker nodes from the cluster at any time:
 
-1.  Navigate to the **Nodes** page and select the node.
+1.  Ensure that the node has been shutdown or has left the swarm (i.e. `docker swarm leave`). 
+2.  Navigate to the **Nodes** page and select the node.
 2.  In the details pane, click **Actions** and select **Remove**.
 3.  Click **Confirm** when you're prompted.
 
