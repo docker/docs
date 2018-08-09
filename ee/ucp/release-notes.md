@@ -30,9 +30,7 @@ upgrade your installation to the latest release.
 
 **Known Issue**
 
-* You must pull `docker/ucp-agent:3.0.4` on your manager nodes before upgrading. 
-  Alternately, you can also pull `docker/ucp-agent:3.0.4` in the images section 
-  of the UCP web UI before upgrading.
+* You must manually pull `docker/ucp-agent:3.0.4` in the images section of the web UI before upgrading. Alternately, you can just pull `docker/ucp-agent:3.0.4` on every manager node.
 
 ## 3.0.3 (2018-07-26)
 
