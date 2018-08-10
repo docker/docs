@@ -763,8 +763,13 @@ Images built from `ONBUILD` should get a separate tag, for example:
 
 Be careful when putting `ADD` or `COPY` in `ONBUILD`. The “onbuild” image
 fails catastrophically if the new build's context is missing the resource being
-added. Adding a separate tag, as recommended above, helps mitigate this by
-allowing the `Dockerfile` author to make a choice.
+added. Customizing when the `ONBUILD` instruction executes is also not possible
+- it always occurs before the first instruction in the child image build.
+Note also that docker-library `ONBUILD` image variants
+[have been deprecated](https://github.com/docker-library/official-images/issues/2076).
+
+Adding a separate tag, as recommended above, helps mitigate these limitations
+by allowing the `Dockerfile` author to make a choice.
 
 ## Examples for Official Repositories
 
