@@ -122,7 +122,7 @@ defaults:
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.11"
+      docker_image: "docker/dtr:2.2.12"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -154,7 +154,7 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.11"
+      ucp_version: "2.2.12"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
