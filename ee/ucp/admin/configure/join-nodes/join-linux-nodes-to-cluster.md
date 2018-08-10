@@ -109,8 +109,8 @@ You can remove worker nodes from the cluster at any time:
 
 1.  Ensure that the node has been shutdown or has left the swarm (i.e. `docker swarm leave`). 
 2.  Navigate to the **Nodes** page and select the node.
-2.  In the details pane, click **Actions** and select **Remove**.
-3.  Click **Confirm** when you're prompted.
+3.  In the details pane, click **Actions** and select **Remove**.
+4.  Click **Confirm** when you're prompted.
 
 Since manager nodes are important to the cluster overall health, you need to
 be careful when removing one from the cluster.
