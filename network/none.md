@@ -42,7 +42,7 @@ only the loopback device is created. The following example illustrates this.
     the `--rm` flag.
 
     ```bash
-    $ docker container rm no-net-alpine
+    $ docker stop no-net-alpine
     ```
 
 ## Next steps
