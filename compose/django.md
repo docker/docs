@@ -46,7 +46,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 6. Add the required software in the file.
 
-        Django>=1.8,<2.0
+        Django
         psycopg2
 
 7. Save and close the `requirements.txt` file.
