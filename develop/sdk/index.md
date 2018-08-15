@@ -177,6 +177,7 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
+    "context"
     "io"
     "os"
 
@@ -184,8 +185,6 @@ import (
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/pkg/stdcopy"
-
-    "golang.org/x/net/context"
 )
 
 func main() {
