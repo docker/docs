@@ -696,7 +696,7 @@ $ docker service create \
 > proportion to any of the other groups identified by a specific label
 > value. In a sense, a missing label is the same as having the label with
 > a null value attached to it. If the service should **only** run on
-> nodes with the label being used for the the spread preference, the
+> nodes with the label being used for the spread preference, the
 > preference should be combined with a constraint.
 
 You can specify multiple placement preferences, and they are processed in the

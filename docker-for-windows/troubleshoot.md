@@ -244,7 +244,7 @@ it for you.
 See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows does not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
 
 
-From the start menu, type  in "Turn Windows features on or off" and hit enter. In the subequent screen, verify Hyper-V is enabled and has a checkmark:
+From the start menu, type  in "Turn Windows features on or off" and hit enter. In the subsequent screen, verify Hyper-V is enabled and has a checkmark:
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 

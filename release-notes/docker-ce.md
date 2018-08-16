@@ -204,7 +204,7 @@ Release notes for stable versions are listed first. You can
 - Update runc to fix hang during start and exec [moby/moby#36097](https://github.com/moby/moby/pull/36097)
 - Windows: Vendor of Microsoft/hcsshim @v.0.6.8 partial fix for import layer failing [moby/moby#35924](https://github.com/moby/moby/pull/35924)
 * Do not make graphdriver homes private mounts [moby/moby#36047](https://github.com/moby/moby/pull/36047)
-* Use rslave propogation for mounts from daemon root [moby/moby#36055](https://github.com/moby/moby/pull/36055)
+* Use rslave propagation for mounts from daemon root [moby/moby#36055](https://github.com/moby/moby/pull/36055)
 * Set daemon root to use shared mount propagation [moby/moby#36096](https://github.com/moby/moby/pull/36096)
 * Validate that mounted paths exist when container is started, not just during creation  [moby/moby#35833](https://github.com/moby/moby/pull/35833)
 * Add `REMOVE` and `ORPHANED` to TaskState [moby/moby#36146](https://github.com/moby/moby/pull/36146)
@@ -277,7 +277,7 @@ Release notes for stable versions are listed first. You can
 * `/dev` should not be readonly with `--readonly` flag [moby/moby#35344](https://github.com/moby/moby/pull/35344)
 + Add custom build-time Graphdrivers priority list [moby/moby#35522](https://github.com/moby/moby/pull/35522)
 * LCOW: CLI changes to add platform flag - pull, run, create and build [docker/cli#474](https://github.com/docker/cli/pull/474)
-* Fix width/height on Windoes for `docker exec` [moby/moby#35631](https://github.com/moby/moby/pull/35631)
+* Fix width/height on Windows for `docker exec` [moby/moby#35631](https://github.com/moby/moby/pull/35631)
 * Detect overlay2 support on pre-4.0 kernels [moby/moby#35527](https://github.com/moby/moby/pull/35527)
 * Devicemapper: remove container rootfs mountPath after umount [moby/moby#34573](https://github.com/moby/moby/pull/34573)
 * Disallow overlay/overlay2 on top of NFS [moby/moby#35483](https://github.com/moby/moby/pull/35483)
@@ -545,7 +545,7 @@ Release notes for stable versions are listed first. You can
 + Add Support swarm-mode services with node-local networks such as macvlan, ipvlan, bridge, host [#32981](https://github.com/moby/moby/pull/32981)
 + Pass driver-options to network drivers on service creation [#32981](https://github.com/moby/moby/pull/33130)
 + Isolate Swarm Control-plane traffic from Application data traffic using --data-path-addr [#32717](https://github.com/moby/moby/pull/32717)
-* Several improvments to Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
+* Several improvements to Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
 
 ### Packaging
 

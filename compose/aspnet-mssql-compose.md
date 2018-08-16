@@ -186,7 +186,7 @@ configure this app to use our SQL Server database, and then create a
     Go ahead and try out the website! This sample uses the SQL Server
     database image in the back-end for authentication.
 
-Ready! You now have a ASP.NET Core application running against SQL Server in
+Ready! You now have an ASP.NET Core application running against SQL Server in
 Docker Compose! This sample made use of some of the most popular Microsoft
 products for Linux. To learn more about Windows Containers, check out
 [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows)
