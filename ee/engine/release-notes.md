@@ -50,6 +50,7 @@ adopted as quickly for consistency and compatibility reasons.
 + Add support for FIPS 140-2 on x86_64.
 + Add support for Microsoft Windows Server 1709.
 + Add support for Microsoft Windows Server 1803.
++ Add support for Ubuntu 18.04.
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
