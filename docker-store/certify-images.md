@@ -18,7 +18,9 @@ This page explains how publishers can successfully test their **Docker images**.
 
 ## Certify your Docker images
 
-You must use the tool, `inspectDockerImage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. The `inspectDockerImage` tool must be run on Docker Enterprise Edition in order for your docker image to pass the certification test.  Best practicies recommends that your docker image be built on Docker Enterprise Edition, but this is not required to pass the certification test.  You can download the `inspectDockerImage` tool [here](#syntax).
+You must use the tool, `inspectDockerImage`, to certify your content for publication on Docker Store by ensuring that your images conform to best practices. You can download the `inspectDockerImage` tool from the [Syntax](#syntax) section on this page.
+
+The `inspectDockerImage` tool must be run on Docker Enterprise Edition for your Docker image to pass the certification test.  To follow best practices build your Docker image on Docker Enterprise Edition, which is not required to pass the certification test.  
 
 The `inspectDockerImage` tool does the following:
 
