@@ -126,7 +126,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
       --secret=azure_ucp_admin.toml \
       --log-driver json-file \
       --log-opt max-size=1m \
-      --env IPCOUNT=128 \
+      --env IP_COUNT=128 \
       --name ipallocator \
       --constraint "node.platform.os == linux" \
       docker4x/az-nic-ips
