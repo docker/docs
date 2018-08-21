@@ -4,12 +4,8 @@ keywords: windows, beta, edge, alpha, install, download
 title: Install Docker for Windows
 ---
 
-Docker for Windows is the
-[Community Edition (CE)](https://www.docker.com/community-edition)
-of Docker for Microsoft Windows. To download Docker for Windows, head to Docker
-Store.
+[Download Community Edition (CE)](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe)
 
-[Download from Docker Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){: .button .outline-btn}
 
 ##  What to know before you install
 
