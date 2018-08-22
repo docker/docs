@@ -57,7 +57,6 @@ docker run --rm  \
     -v /var/run/docker:/var/run/docker \
     -v /var/lib/docker:/var/lib/docker \
     -v /var/run/docker/netns:/var/run/docker/netns \
-    -v /var/lib/docker:/var/lib/docker \
     -v /var/log:/var/log \
     -v /etc:/etc:ro \
     -v /run:/run \
