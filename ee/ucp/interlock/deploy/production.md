@@ -52,10 +52,19 @@ The command should print "loadbalancer".
 
 ## Configure the ucp-interlock service
 
-Now that your nodes are labelled, you need to update the `ucp-interlock`
+Now that your nodes are labelled, you need to update the `ucp-interlock-proxy`
 service configuration to deploy the proxy service with the correct constraints.
 
-Add another constraint to the `ProxyConstraints` array:
+Add a constraint to the `ucp-interlock-proxy` service to update the running service:
+
+```bash
+docker service update \
+    --constraint-add node.labels.nodetype==loadbalancer \
+    ucp-interlock-proxy
+```
+
+Then add the constraint to the `ProxyConstraints` array in the `interlock-proxy` service
+configuration so it takes effect if Interlock is restored from backup:
 
 ```toml
 [Extensions]
@@ -65,16 +74,7 @@ Add another constraint to the `ProxyConstraints` array:
 
 [Learn how to configure ucp-interlock](configure.md).
 
-> Known issue
->
-> In UCP 3.0.0 the `ucp-interlock` service won't redeploy the proxy replicas
-> when you update the configuration. As a workaround,
-> [deploy a demo service](../usage/index.md). Once you do that, the proxy
-services are redeployed and scheduled on the correct nodes.
-{: .important}
-
-Once you reconfigure the `ucp-interlock` service, you can check if the proxy
-service is running on the dedicated nodes:
+Once reconfigured you can check if the proxy service is running on the dedicated nodes:
 
 ```bash
 docker service ps ucp-interlock-proxy
