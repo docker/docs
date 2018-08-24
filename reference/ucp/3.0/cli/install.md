@@ -24,13 +24,13 @@ Docker Universal Control Plane (UCP).
 When installing UCP you can customize:
 
   * The certificates used by the UCP web server. Create a volume
-    named 'ucp-controller-server-certs' and copy the ca.pem, cert.pem, and key.pem
+    named `ucp-controller-server-certs` and copy the `ca.pem`, `cert.pem`, and `key.pem`
     files to the root directory. Then run the install command with the
     `--external-server-cert` flag.
 
   * The license used by UCP, by bind-mounting the file at
-    '/config/docker_subscription.lic' in the tool.  E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
-    or by specifying with '--license "$(cat license.lic)"
+    `/config/docker_subscription.lic` in the tool.  E.g. `-v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic`
+    or by specifying with `--license "$(cat license.lic)`
 
 If you're joining more nodes to this swarm, open the following ports in your
 firewall:
@@ -77,7 +77,7 @@ command.
 | `--swarm-experimental`   | Enable Docker Swarm experimental features. Used for backwards compatibility                                                                                                                                                               |
 | `--disable-tracking`     | Disable anonymous tracking and analytics                                                                                                                                                                                                  |
 | `--disable-usage`        | Disable anonymous usage reporting                                                                                                                                                                                                         |
-| `--external-server-cert` | Customize the certificates used by the UCP web server                                                                                                                                                                                     |
+| `--external-server-cert` | Use the certificates in the `ucp-controller-server-certs` volume instead of generating self-signed certs during installation                                                                                                                                                  |
 | `--preserve-certs`       | Don't generate certificates if they already exist                                                                                                                                                                                         |
 | `--binpack`              | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility                                                                                                                                                          |
 | `--random`               | Set the Docker Swarm scheduler to random mode. Used for backwards compatibility                                                                                                                                                           |

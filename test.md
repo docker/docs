@@ -646,12 +646,14 @@ It renders like this  with a colored sidebar and icon:
 
 Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
 
+```
 > Ouch, don't do that!
 >
 > Sticking your finger in an electrical outlet can result in an electric shock.
 >
 > You can also add more paragraphs here if your explanation is super complex.
 {: .warning}
+```
 
 It will render like this  with a colored sidebar and icon:
 

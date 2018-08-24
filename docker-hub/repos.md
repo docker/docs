@@ -140,8 +140,10 @@ team.
 To work with a private repository on [Docker Hub](https://hub.docker.com), you
 need to add one using the [Add Repository](https://hub.docker.com/add/repository/) button. You get one private
 repository for free with your Docker Hub user account (not usable for
-organizations you're a member of). If you need more accounts you can upgrade
-your [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+organizations you're a member of). If you need more private repositories for your user account, upgrade
+your Docker Hub plan from your [Billing Information](https://hub.docker.com/account/billing-plans/) page.
+
+User and organization accounts maintain separate billing profiles. For more information on managing billing for your account, you may refer to the [Where can I change my billing details?](https://success.docker.com/article/where-can-i-change-my-billing-details) kbase article.
 
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.

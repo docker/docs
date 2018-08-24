@@ -20,6 +20,18 @@ upgrade your installation to the latest release.
 
 # Version 3.0
 
+## 3.0.4 (2018-08-09)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue where the LDAP bind username and password 
+    were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+
+**Known Issue**
+
+* You must manually pull `docker/ucp-agent:3.0.4` in the images section of the web UI before upgrading. Alternately, you can just pull `docker/ucp-agent:3.0.4` on every manager node.
+
 ## 3.0.3 (2018-07-26)
 
 **New platforms**
@@ -263,6 +275,16 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.12 (2018-08-09)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue where the LDAP bind username and password 
+    were stored in clear text on UCP hosts. Please refer to the following KB article 
+    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
+    for proper implementation of this fix.
+
 ## Version 2.2.11 (2018-07-26)
 
 **New platforms**
@@ -274,7 +296,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed an issue that causes some security headers to not be added to all API responses.
 
 * Core
-  * Optimized Swarm service read API calls through UCP.
+  * Optimized swarm service read API calls through UCP.
   * Upgraded `RethinkDB` image to address potential security vulnerabilities.
   * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.

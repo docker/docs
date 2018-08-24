@@ -14,7 +14,7 @@ infrastructure, both on-premises and in the cloud.
 
 Docker Enterprise Edition is a secure, scalable, and supported container
 platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM z Systems environments.
+Windows Server 2016, and IBM Z environments.
 
 Docker EE enables deploying your workloads for high availability (HA) onto the
 orchestrator of your choice. Docker EE automates many of the tasks that
