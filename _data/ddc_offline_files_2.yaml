@@ -6,6 +6,16 @@
 - product: "ucp"
   version: "3.0"
   tar-files:
+    - description: "3.0.4 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.0.4.tar.gz
+    - description: "3.0.4 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_3.0.4.tar.gz
+    - description: "3.0.4 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.4.tar.gz
+    - description: "3.0.4 Windows Server 1709"
+      url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.4.tar.gz
+    - description: "3.0.4 Windows Server 1803"
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.4.tar.gz
     - description: "3.0.3 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.3.tar.gz
     - description: "3.0.3 IBM Z"
@@ -33,6 +43,12 @@
 - product: "ucp"
   version: "2.2"
   tar-files:
+    - description: "2.2.12 Linux"
+      url: https://packages.docker.com/caas/ucp_images_2.2.12.tar.gz
+    - description: "2.2.12 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_2.2.12.tar.gz
+    - description: "2.2.12 Windows"
+      url: https://packages.docker.com/caas/ucp_images_win_2.2.12.tar.gz  
     - description: "2.2.11 Linux"
       url: https://packages.docker.com/caas/ucp_images_2.2.11.tar.gz
     - description: "2.2.11 IBM Z"
