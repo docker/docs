@@ -20,11 +20,12 @@ If you don't want to preface the `docker` command with `sudo`, create a Unix
 group called `docker` and add users to it. When the Docker daemon starts, it
 creates a Unix socket accessible by members of the `docker` group.
 
-> **Warning**:
+> Warning
+>
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
 > [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
-{:.warning}
+{: .warning}
 
 To create the `docker` group and add your user:
 
