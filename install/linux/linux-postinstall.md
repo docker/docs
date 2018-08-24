@@ -12,19 +12,20 @@ better with Docker.
 
 ## Manage Docker as a non-root user
 
-The `docker` daemon binds to a Unix socket instead of a TCP port. By default
+The Docker daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can only access it
-using `sudo`. The `docker` daemon always runs as the `root` user.
+using `sudo`. The Docker daemon always runs as the `root` user.
 
-If you don't want to use `sudo` when you use the `docker` command, create a Unix
-group called `docker` and add users to it. When the `docker` daemon starts, it
-makes the ownership of the Unix socket read/writable by the `docker` group.
+If you don't want to preface the `docker` command with `sudo`, create a Unix
+group called `docker` and add users to it. When the Docker daemon starts, it
+creates a Unix socket accessible by members of the `docker` group.
 
-> **Warning**:
+> Warning
+>
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
 > [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
-{:.warning}
+{: .warning}
 
 To create the `docker` group and add your user:
 
@@ -141,9 +142,9 @@ By default, the Docker daemon listens for connections on a UNIX socket to accept
 
 Configuring Docker to accept remote connections can be done with the `docker.service` systemd unit file for Linux distributions using systemd, such as recent versions of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is recommended for Linux distributions that do not use systemd.
 
-> systemd vs `daemon.json`
+> systemd vs daemon.json
 > 
-> Configuring docker to listen for connections using both the systemd unit file and the daemon.json 
+> Configuring Docker to listen for connections using both the `systemd` unit file and the `daemon.json` 
 > file causes a conflict that prevents Docker from starting.
 
 ### Configuring remote access with `systemd` unit file
