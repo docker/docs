@@ -15,7 +15,7 @@ install Docker EE.
 
 > Release notes
 >
-> You can [get release notes for all versions here](/release-notes/)
+> [Release notes for all versions](/release-notes/)
 
 ## Install Docker EE
 
