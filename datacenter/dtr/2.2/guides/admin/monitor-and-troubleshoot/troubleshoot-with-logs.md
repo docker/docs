@@ -39,7 +39,7 @@ that has `sh` and `ping`.
 
 DTR uses RethinkDB for persisting data and replicating it across replicas.
 It might be helpful to connect directly to the RethinkDB instance running on a
-DTR replica to check the DTR internal state. 
+DTR replica to check the DTR internal state.
 
 > **Warning**: Modifying RethinkDB directly is not supported and may cause
 > problems.
@@ -50,27 +50,44 @@ commands:
 
 {% raw %}
 ```bash
-# REPLICA_ID will be the replica ID for the current node.
-REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
+# DTR_REPLICA_ID will be the replica ID for the current node.
+DTR_REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
+# List problems in the cluster detected by the current node.
+echo 'r.db("rethinkdb").table("current_issues")' | \
+  docker run -i --rm \
+    --net dtr-ol \
+    -e DTR_REPLICA_ID=${DTR_REPLICA_ID} \
+    -v dtr-ca-$DTR_REPLICA_ID:/ca \
+    dockerhubenterprise/rethinkcli:v2.2.0-ni non-interactive; \
+    echo
+```
+{% endraw %}
+
+On a healthy cluster the output will be `[]`.
+
+RethinkDB stores data in different databases that contain multiple tables. This
+container can also be used to connect to the local DTR replica and
+interactively query the contents of the DB.
+
+{% raw %}
+```bash
+# DTR_REPLICA_ID will be the replica ID for the current node.
+DTR_REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
 # This command will start a RethinkDB client attached to the database
 # on the current node.
 docker run -it --rm \
   --net dtr-ol \
-  -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
-  $REPLICA_ID
+  -e DTR_REPLICA_ID=${DTR_REPLICA_ID} \
+  -v dtr-ca-$DTR_REPLICA_ID:/ca \
+  dockerhubenterprise/rethinkcli:v2.2.0-ni
 ```
 {% endraw %}
 
-This container connects to the local DTR replica and launches a RethinkDB client 
-that can be used to inspect the contents of the DB. RethinkDB 
-stores data in different databases that contain multiple tables. The `rethinkcli`
-tool launches an interactive prompt where you can run RethinkDB 
-queries such as:
 
 ```none
-# List problems detected within the rethinkdb cluster
+# List problems in the cluster detected by the current node.
 > r.db("rethinkdb").table("current_issues")
-...
+[]
 
 # List all the DBs in RethinkDB
 > r.dbList()
@@ -90,7 +107,7 @@ queries such as:
   'repositories',
   'repository_team_access',
   'tags' ]
-  
+
 # List the entries in the repositories table
 > r.db('dtr2').table('repositories')
 [ { id: '19f1240a-08d8-4979-a898-6b0b5b2338d8',
@@ -101,7 +118,7 @@ queries such as:
 ...
 ```
 
-Indvidual DBs and tables are a private implementation detail and may change in DTR
+Individual DBs and tables are a private implementation detail and may change in DTR
 from version to version, but you can always use `dbList()` and `tableList()` to explore
 the contents and data structure.
 
