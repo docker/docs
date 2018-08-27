@@ -284,7 +284,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     $ sudo rm -rf /var/lib/docker
     ```
 
-3.  Delete other docker related resources:
+3.  Delete other Docker related resources:
     ```bash
     $ sudo rm -rf /run/docker
     $ sudo rm -rf /var/run/docker
