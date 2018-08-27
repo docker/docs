@@ -33,7 +33,7 @@ a filesystem at the operating system (OS) level.
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so you do
-  not need to re-create them later.
+  not need to recreate them later.
 
 ## Configure Docker with the `devicemapper` storage driver
 
