@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md/)
-files to Kubernetes clusters. Starting in Compile file version 3.3, you use the
+files to Kubernetes clusters. Starting in Compose file version 3.3, you use the
 same `docker-compose.yml` file that you use for Swarm deployments, but you
 specify **Kubernetes workloads** when you deploy the stack. The result is a
 true Kubernetes app.
