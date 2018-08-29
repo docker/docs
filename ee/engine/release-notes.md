@@ -19,6 +19,126 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 18.03.1-ee-2 (2018-07-10)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Runtime
+
++ Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+
+## 18.03.1-ee-1 (2018-06-27)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Client
+
++ Update to docker-ce 18.03.1 client.
++ Add `docker trust` command for image signing and enabling the secure supply chain from development to deployment.
++ Add docker compose on Kubernetes.
+
+### Runtime
+
++ Update to docker-ce 18.03.1 engine.
++ Add support for FIPS 140-2 on x86_64.
++ Add support for Microsoft Windows Server 1709 and 1803 with support for [swarm ingress routing mesh](https://docs.docker.com/engine/swarm/ingress/), [VIP service discovery](https://docs.docker.com/v17.09/engine/swarm/networking/#configure-service-discovery), and [named pipe mounting](https://blog.docker.com/2017/09/docker-windows-server-1709/).
++ Add support for Ubuntu 18.04.
++ Windows opt-out telemetry stream.
++ Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
++ Add support for multiple logging drivers for `docker logs`.
+
+## 17.06.2-ee-16 (2018-07-26)
+
+### Client
+
+- Fix service rollback options being cross-wired. [docker/cli#1052](https://github.com/docker/cli/pull/1052)
+
+### Networking
+
+* Protect against possible race on ingress programming. [docker/libnetwork#2195](https://github.com/docker/libnetwork/pull/2195)
+* Add a recovery mechanism for a split gossip cluster. [docker/libnetwork#2169](https://github.com/docker/libnetwork/pull/2169)
+
+### Packaging
+
+* Update packaging description and license to Docker EUSA.
+
+### Runtime
+
+* Update overlay2 to use naive diff for changes. [moby/moby#37313](https://github.com/moby/moby/pull/37313)
+
+### Swarm mode
+
+- Fix task reaper batching. [docker/swarmkit#2678](https://github.com/docker/swarmkit/pull/2678)
+* RoleManager will remove deleted nodes from the cluster membership. [docker/swarmkit#2607](https://github.com/docker/swarmkit/pull/2607)
+- Fix unassigned task leak when service is removed. [docker/swarmkit#2708](https://github.com/docker/swarmkit/pull/2708)
+
+## 17.06.2-ee-15 (2018-07-10)
+
+### Runtime
+
+- Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+## 17.06.2-ee-14 (2018-06-21)
+
+### Client
+
+* Set a 30s timeout for HTTP client communication with plugin backend. [docker/cli#883](https://github.com/docker/cli/pull/883)
+- Fix `docker version` output misaligned. [docker/cli#965](https://github.com/docker/cli/pull/965)
+
+### Runtime
+
+- Fix Windows docker daemon crash when docker stats is used. [moby/moby#35968](https://github.com/moby/moby/pull/35968)
+* Add `/proc/keys` to masked paths. [moby/moby#36368](https://github.com/moby/moby/pull/36368)
+* Added support for persisting Windows network driver options. [moby/moby#35563](https://github.com/moby/moby/pull/35563)
+- Fix to ensure graphdriver dir is a shared mount. [moby/moby#36047](https://github.com/moby/moby/pull/36047)
+
+### Swarm mode
+
+- Fix `docker stack deploy --prune` with empty name removes all swarm services. [moby/moby#36776](https://github.com/moby/moby/issues/36776)
+
+## 17.06.2-ee-13 (2018-06-04)
+
+### Networking
+
+- Fix attachable containers that may leave DNS state when exiting. [docker/libnetwork#2175](https://github.com/docker/libnetwork/pull/2175)
+
+## 17.06.2-ee-12 (2018-05-29)
+
+### Networking
+
+- Fix to allow service update with no connection loss. [docker/libnetwork#2157](https://github.com/docker/libnetwork/pull/2157)
+
+## 17.06.2-ee-11 (2018-05-17)
+
+### Client
+
+- Fix presentation of published "random" host ports. [docker/cli#404](https://github.com/docker/cli/pull/404)
+
+### Networking
+
+* Fix concurrent CreateNetwork in bridge driver. [docker/libnetwork#2127](https://github.com/docker/libnetwork/pull/2127)
+
+### Runtime
+
+* Use rslave propagation for mounts from daemon root. [moby/moby#36055](https://github.com/moby/moby/pull/36055)
+* Use rslave instead of rprivate in choortarchive. [moby/moby#35217](https://github.com/moby/moby/pull/35217)
+* Set daemon root to use shared propagation. [moby/moby#36096](https://github.com/moby/moby/pull/36096)
+* Windows: Increase container default shutdown timeout. [moby/moby#35184](https://github.com/moby/moby/pull/35184)
+* Avoid using all system memory with authz plugins. [moby/moby#36595](https://github.com/moby/moby/pull/36595)
+* Daemon/stats: more resilient cpu sampling. [moby/moby#36519](https://github.com/moby/moby/pull/36519)
+
+### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+
 ## 17.06.2-ee-10 (2018-04-27)
 
 ### Runtime
@@ -39,6 +159,10 @@ adopted as quickly for consistency and compatibility reasons.
 - Adding logic to restore networks in order. [docker/swarmkit#2584](https://github.com/docker/swarmkit/pull/2584)
 
 ## 17.06.2-ee-8 (2018-04-17)
+
+### Runtime
+
+* Update `hcsshim` to v0.6.10 to address [CVE-2018-8115](https://portal.msrc.microsoft.com/en-us/security-guidance/advisory/CVE-2018-8115)
 
 ### Networking
 
@@ -214,7 +338,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## 17.06.1-ee (2017-08-16)
+## 17.06.1-ee-1 (2017-08-16)
 
 ### Important notes about this release
 

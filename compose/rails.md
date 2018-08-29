@@ -15,7 +15,7 @@ dependencies, define exactly what needs to be included in the
 container. This is done using a file called `Dockerfile`. To begin with, the
 Dockerfile consists of:
 
-    FROM ruby:2.3.3
+    FROM ruby:2.5
     RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
     RUN mkdir /myapp
     WORKDIR /myapp
@@ -34,7 +34,7 @@ Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
     source 'https://rubygems.org'
-    gem 'rails', '5.0.0.1'
+    gem 'rails', '5.2.0'
 
 Create an empty `Gemfile.lock` to build our `Dockerfile`.
 
@@ -80,24 +80,26 @@ List the files.
 
 ```shell
 $ ls -l
-total 64
--rw-r--r--   1 vmb  staff   222 Jun  7 12:05 Dockerfile
--rw-r--r--   1 vmb  staff  1738 Jun  7 12:09 Gemfile
--rw-r--r--   1 vmb  staff  4297 Jun  7 12:09 Gemfile.lock
--rw-r--r--   1 vmb  staff   374 Jun  7 12:09 README.md
--rw-r--r--   1 vmb  staff   227 Jun  7 12:09 Rakefile
-drwxr-xr-x  10 vmb  staff   340 Jun  7 12:09 app
-drwxr-xr-x   8 vmb  staff   272 Jun  7 12:09 bin
-drwxr-xr-x  14 vmb  staff   476 Jun  7 12:09 config
--rw-r--r--   1 vmb  staff   130 Jun  7 12:09 config.ru
-drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 db
--rw-r--r--   1 vmb  staff   211 Jun  7 12:06 docker-compose.yml
-drwxr-xr-x   4 vmb  staff   136 Jun  7 12:09 lib
-drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 log
-drwxr-xr-x   9 vmb  staff   306 Jun  7 12:09 public
-drwxr-xr-x   9 vmb  staff   306 Jun  7 12:09 test
-drwxr-xr-x   4 vmb  staff   136 Jun  7 12:09 tmp
-drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 vendor
+total 72
+-rw-r--r-- 1 vmb staff 223 5 26 14:20 Dockerfile
+-rw-r--r-- 1 vmb staff 2223 5 26 14:24 Gemfile
+-rw-r--r-- 1 vmb staff 5300 5 26 14:25 Gemfile.lock
+-rw-r--r-- 1 vmb staff 374 5 26 14:24 README.md
+-rw-r--r-- 1 vmb staff 227 5 26 14:24 Rakefile
+drwxr-xr-x 10 vmb staff 320 5 26 14:24 app
+drwxr-xr-x 9 vmb staff 288 5 26 14:25 bin
+drwxr-xr-x 16 vmb staff 512 5 26 14:24 config
+-rw-r--r-- 1 vmb staff 130 5 26 14:24 config.ru
+drwxr-xr-x 3 vmb staff 96 5 26 14:24 db
+-rw-r--r-- 1 vmb staff 266 5 26 14:22 docker-compose.yml
+drwxr-xr-x 4 vmb staff 128 5 26 14:24 lib
+drwxr-xr-x 3 vmb staff 96 5 26 14:24 log
+-rw-r--r-- 1 vmb staff 63 5 26 14:24 package.json
+drwxr-xr-x 9 vmb staff 288 5 26 14:24 public
+drwxr-xr-x 3 vmb staff 96 5 26 14:24 storage
+drwxr-xr-x 11 vmb staff 352 5 26 14:24 test
+drwxr-xr-x 6 vmb staff 192 5 26 14:24 tmp
+drwxr-xr-x 3 vmb staff 96 5 26 14:24 vendor
 
 ```
 
@@ -164,10 +166,10 @@ seconds &#8212; the familiar refrain:
     db_1   | LOG:  database system is ready to accept connections
     db_1   | LOG:  autovacuum launcher started
     web_1  | => Booting Puma
-    web_1  | => Rails 5.0.0.1 application starting in development on http://0.0.0.0:3000
+    web_1  | => Rails 5.2.0 application starting in development
     web_1  | => Run `rails server -h` for more startup options
     web_1  | Puma starting in single mode...
-    web_1  | * Version 3.9.1 (ruby 2.3.3-p222), codename: Private Caller
+    web_1  | * Version 3.11.4 (ruby 2.5.1-p57), codename: Love Song
     web_1  | * Min threads: 5, max threads: 5
     web_1  | * Environment: development
     web_1  | * Listening on tcp://0.0.0.0:3000

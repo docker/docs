@@ -29,8 +29,7 @@ support dump:
 
 ## Use the CLI to get a support dump
 
-To get the support dump from the CLI, use SSH to log into a UCP manager node
-and run:
+To get the support dump from the CLI, use SSH to log into a node and run:
 
 ```bash
 docker container run --rm \
@@ -38,7 +37,8 @@ docker container run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --log-driver none \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
-  support > docker-support.tgz
+  support > \
+  docker-support-${HOSTNAME}-$(date +%Y%m%d-%H_%M_%S).tgz
 ```
 
 This support dump only contains logs for the node where you're running the

@@ -75,7 +75,7 @@ directory names do not directly correspond to the IDs of the layers themselves.
 
 VFS does not support copy-on-write (COW), so each time a new layer is created,
 it is a deep copy of its parent layer. These layers are all located under
-`/var/lib/docker/dir/`.
+`/var/lib/docker/vfs/dir/`.
 
 ### Example: Image and container on-disk constructs
 

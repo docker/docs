@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise Edition supports worker nodes that run on Windows Server 2016.
+Docker Enterprise Edition supports worker nodes that run on Windows Server 2016 or 1709.
 Only worker nodes are supported on Windows, and all manager nodes in the cluster
 must run on Linux.
 
@@ -16,19 +16,40 @@ Follow these steps to enable a worker node on Windows.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-## Install Docker EE Engine on Windows Server 2016
+## Install Docker EE Engine on Windows Server 2016 or 1709
 
 [Install Docker EE Engine](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
-on a Windows Server 2016 instance to enable joining a cluster that's managed by
+on a Windows Server 2016 or 1709 instance to enable joining a cluster that's managed by
 Docker Enterprise Edition.
 
 ## Configure the Windows node
 
 Follow these steps to configure the docker daemon and the Windows environment.
 
-1.  Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
-2.  Run the Windows worker setup script provided with `ucp-agent-win`.
-3.  Join the cluster with the token provided by the Docker EE web UI or CLI.
+1. Add a label to the node.
+2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
+3. Run the Windows worker setup script provided with `ucp-agent-win`.
+4. Join the cluster with the token provided by the Docker EE web UI or CLI.
+
+### Add a label to the node
+
+Configure the Docker Engine running on the node to have a label. This makes
+it easier to deploy applications on nodes with this label.
+
+Create the file `C:\ProgramData\docker\config\daemon.json` with the following
+content:
+
+```
+{
+  "labels": ["os=windows"]
+}
+```
+
+Restart Docker for the changes to take effect:
+
+```
+Restart-Service docker
+```
 
 ### Pull the Windows-specific images
 

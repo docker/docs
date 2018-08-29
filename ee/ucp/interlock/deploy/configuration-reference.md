@@ -22,30 +22,30 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-    Image = "dockereng/ucp-interlock-extension:3.0.0-2e21c4d"
+    Image = "docker/ucp-interlock-extension:3.0.1"
     ServiceName = "ucp-interlock-extension"
-    Args = [""]
-    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true"]
-    ProxyImage = "dockereng/ucp-interlock-proxy:3.0.0-2e21c4d"
+    Args = []
+    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
+    ProxyImage = "docker/ucp-interlock-proxy:3.0.1"
     ProxyServiceName = "ucp-interlock-proxy"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ProxyReplicas = 2
     ProxyStopSignal = "SIGQUIT"
     ProxyStopGracePeriod = "5s"
-    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true"]
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
     PublishMode = "ingress"
     PublishedPort = 80
     TargetPort = 80
     PublishedSSLPort = 8443
     TargetSSLPort = 443
     [Extensions.default.Labels]
-      "com.docker.ucp.InstanceID" = "xybt14ctipeasd7lfggl4hw94"
+      "com.docker.ucp.InstanceID" = "fewho8k85kyc6iqypvvdh3ntm"
     [Extensions.default.ContainerLabels]
-      "com.docker.ucp.InstanceID" = "xybt14ctipeasd7lfggl4hw94"
+      "com.docker.ucp.InstanceID" = "fewho8k85kyc6iqypvvdh3ntm"
     [Extensions.default.ProxyLabels]
-      "com.docker.ucp.InstanceID" = "xybt14ctipeasd7lfggl4hw94"
+      "com.docker.ucp.InstanceID" = "fewho8k85kyc6iqypvvdh3ntm"
     [Extensions.default.ProxyContainerLabels]
-      "com.docker.ucp.InstanceID" = "xybt14ctipeasd7lfggl4hw94"
+      "com.docker.ucp.InstanceID" = "fewho8k85kyc6iqypvvdh3ntm"
     [Extensions.default.Config]
       Version = ""
       User = "nginx"
@@ -144,5 +144,3 @@ available for the proxy service:
 | `ErrorLogPath`          | string | Path to use for error logs (default: `/dev/stdout`).                                                 |
 | `MainLogFormat`         | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for main logger.  |
 | `TraceLogFormat`        | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for trace logger. |
-
-

@@ -37,7 +37,7 @@ Vulnerability Database that is installed on your DTR instance. When
 this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
 
-DTR scans both Linux and Windows images, but but by default Docker doesn't push
+DTR scans both Linux and Windows images, but by default Docker doesn't push
 foreign image layers for Windows images so DTR can't scan them. If
 you want DTR to scan your Windows images, [configure Docker to always push image
 layers](pull-and-push-images.md), and it will scan the non-foreign layers.

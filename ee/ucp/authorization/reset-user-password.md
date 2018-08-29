@@ -23,9 +23,7 @@ or use **ssh** to log in to a manager node managed by Docker EE and run:
 
 ```none
 {% raw %}
-docker exec -it ucp-auth-api enzi \
-  "$(docker inspect --format '{{ index .Args 0 }}' ucp-auth-api)" \
-  passwd -i
+docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}' ucp-auth-api)" passwd -i
 {% endraw %}
 ```
 

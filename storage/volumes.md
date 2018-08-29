@@ -18,12 +18,12 @@ Docker. Volumes have several advantages over bind mounts:
 - You can manage volumes using Docker CLI commands or the Docker API.
 - Volumes work on both Linux and Windows containers.
 - Volumes can be more safely shared among multiple containers.
-- Volume drivers allow you to store volumes on remote hosts or cloud providers,
-  to encrypt the contents of volumes, or to add other functionality.
-- A new volume's contents can be pre-populated by a container.
+- Volume drivers let you store volumes on remote hosts or cloud providers, to
+  encrypt the contents of volumes, or to add other functionality.
+- New volumes can have their content pre-populated by a container.
 
 In addition, volumes are often a better choice than persisting data in a
-container's writable layer, because using a volume does not increase the size of
+container's writable layer, because a volume does not increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
@@ -46,9 +46,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
-> be more familiar with the `-v` or `--volume` syntax, but are encouraged to
-> use `--mount`, because research has shown it to be easier to use.
+> New users should try `--mount` syntax which is simpler than `--volume` syntax.
 
 If you need to specify volume driver options, you must use `--mount`.
 
@@ -242,7 +240,7 @@ Use `docker service ps devtest-service` to verify that the service is running:
 $ docker service ps devtest-service
 
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
-4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago   
+4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago
 ```
 
 Remove the service, which stops all its tasks:
@@ -448,6 +446,88 @@ $ docker run -d \
   --mount src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
   nginx:latest
 ```
+
+## Backup, restore, or migrate data volumes
+
+Volumes are useful for backups, restores, and migrations. Use the
+`--volumes-from` flag to create a new container that mounts that volume.
+
+### Backup a container
+
+For example, in the next command, we:
+
+- Launch a new container and mount the volume from the `dbstore` container
+- Mount a local host directory as `/backup`
+- Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
+
+```
+$ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+```
+
+When the command completes and the container stops, we are left with a backup of
+our `dbdata` volume.
+
+### Restore container from backup
+
+With the backup just created, you can restore it to the same container, or
+another that you made elsewhere.
+
+For example, create a new container named `dbstore2`:
+
+```
+$ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
+```
+
+Then un-tar the backup file in the new container`s data volume:
+
+```
+$ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
+```
+
+You can use the techniques above to automate backup, migration and restore
+testing using your preferred tools.
+
+## Remove volumes
+
+A Docker data volume persists after a container is deleted. There are two types
+of volumes to consider:
+
+- **Named volumes** have a specific source form outside the container, for example `awesome:/bar`.
+- **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
+
+### Remove anonymous volumes
+
+To automatically remove anonymous volumes, use the `--rm` option. For example,
+this command creates an anonymous `/foo` volume. When the container is removed,
+the Docker Engine removes the `/foo` volume but not the `awesome` volume.
+
+```
+$ docker run --rm -v /foo -v awesome:/bar busybox top
+```
+
+### Remove all volumes
+
+To remove all unused volumes and free up space:
+
+```
+$ docker volume prune
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Next steps
 

@@ -119,7 +119,7 @@ the following:
       redis:
         image: "redis:alpine"
 
-This Compose file defines two services, `web` and `redis`. The web service:
+This Compose file defines two services, `web` and `redis`. The `web` service:
 
 * Uses an image that's built from the `Dockerfile` in the current directory.
 * Forwards the exposed port 5000 on the container to port 5000 on the host
