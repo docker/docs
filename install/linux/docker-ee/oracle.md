@@ -27,7 +27,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 - Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux if installing or upgrading Docker EE 17.06.1.
+- Disable SELinux if installing or upgrading Docker EE 17.06.1 or newer.
 
 ### Architectures and storage drivers
 
@@ -56,7 +56,7 @@ $ sudo yum remove docker \
 {% capture selinux-warning %}
 > Docker EE cannot install on {{ linux-dist-long }} with SELinux enabled
 >
-> If you have `selinux` enabled and you attempt to install Docker EE 17.06.1, you get an error that the `container-selinux` package cannot be found..
+> If you have `selinux` enabled and you attempt to install Docker EE 17.06.1 or newer, you get an error that the `container-selinux` package cannot be found..
 {:.warning}
 {% endcapture %}
 {{ selinux-warning }}

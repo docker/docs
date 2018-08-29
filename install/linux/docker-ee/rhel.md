@@ -28,15 +28,15 @@ This section lists what you need to consider before installing Docker EE. Items 
 - Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux on IBM Power systems before install/upgrade.
+- Disable SELinux on `s390x` (IBM Z) systems before install/upgrade.
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power PC, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
 
 > Little endian format only
 >
-> On IBM Power PC systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
+> On IBM Power systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 

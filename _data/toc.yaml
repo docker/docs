@@ -1643,6 +1643,8 @@ manuals:
           title: Isolate volumes
         - path: /ee/ucp/authorization/isolate-nodes/
           title: Isolate nodes
+        - path: /ee/ucp/authorization/pull-images/
+          title: Allow users to pull images
         - path: /ee/ucp/authorization/migrate-kubernetes-roles/
           title: Migrate Kubernetes roles to Docker EE authorization
         - path: /ee/ucp/authorization/ee-standard/
@@ -1716,7 +1718,7 @@ manuals:
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/deploy-ingress-controller/
+        path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install a CNI plugin
@@ -1890,6 +1892,7 @@ manuals:
           title: API reference
         - path: /ee/ucp/release-notes/
           title: Release notes
+          nosync: true
         - path: /datacenter/ucp/2.2/guides/get-support/
           title: Get support
       - sectiontitle: Universal Control Plane 2.1
@@ -2546,6 +2549,7 @@ manuals:
           title: API reference
         - path: /ee/dtr/release-notes/
           title: Release notes
+          nosync: true
         - path: /datacenter/dtr/2.4/guides/support/
           title: Get support
       - sectiontitle: Docker Trusted Registry 2.3
@@ -3040,6 +3044,8 @@ manuals:
       title: Migration to AKS
     - path: /docker-cloud/migration/cloud-to-kube-gke/
       title: Migrate to GKE
+    - path: /docker-cloud/migration/cloud-to-aws-ecs/
+      title: Migrate to Amazon ECS
     - path: /docker-cloud/migration/deregister-swarms/
       title: Deregister swarms
     - path: /docker-cloud/migration/kube-primer/

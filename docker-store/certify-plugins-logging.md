@@ -14,6 +14,8 @@ This page explains how publishers can successfully test their **Docker logging p
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 
+> You should perform this Self Certification test prior to submitting your product for publishing.
+
 ## Certify your logging plugins
 
 You must use the tool, `inspectDockerLoggingPlugin`, to certify your content for publication on Docker Store by ensuring that your Docker logging plugins conform to best practices.
@@ -28,7 +30,11 @@ The `inspectDockerLoggingPlugin` command verifies that your Docker logging plugi
 
 - Displays the container logs and compares it to `quotes.txt`. If they match, the test is successful.
 
-The syntax for running a specific logging plugin is: `docker container run --log-driver`.
+The `inspectDockerLoggingPlugin` tool will detect issues and output them as **warnings** or **errors**. **Errors** must be fixed in order to certify. Resolving **warnings** is not required to certify, but you should try to resolve them.
+
+If you are publishing and certifying multiple versions of a Docker logging plugin, you will need to run the `inspectDockerLoggingPlugin` tool on each Docker logging plugin and send each result to Docker Store.
+
+The syntax for running a specific logging plugin is `docker container run --log-driver`.
 
 No parameters are passed to the logging plugin. If parameters are required for the Docker logging plugin to work correctly, then a custom test script must be written and used. The default `docker container run` command is:
 
@@ -54,29 +60,9 @@ Your Docker EE installation must be running on the server used to verify your su
 
 ### Set up testing environment
 
-There are three steps: (1) install git, (2) configure credentials, and (3) configure endpoints.
+There are two steps: (1) configure credentials, and (2) configure endpoints.
 
-1.  Install git (required for `inspectDockerLoggingPlugin`):
-
-    **Ubuntu**
-
-    ```bash
-    sudo apt-get update -qq
-    sudo apt-get install git -y
-    ```
-
-    **RHEL/CentOS**
-
-    ```bash
-    sudo yum makecache fast
-    sudo yum install git -y
-    ```
-
-    **Windows**
-
-    To download and install git for Windows: <https://git-scm.com/download/win>.
-
-2.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
+1.  Configure your Docker Registry credentials by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
 
     a.  Define environment variables for registry credentials, `DOCKER_USER` and `DOCKER_PASSWORD`:
 
@@ -108,7 +94,7 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     --docker-password
     ```
 
-3.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
+2.  Configure endpoints (and override default values) by either _defining environment variables_ **or** _passing them as arguments_ to `inspectDockerLoggingPlugin`.
 
     By default, `inspectDockerLoggingPlugin` uses these two endpoints to communicate with the Docker Hub Registry:
 
@@ -146,6 +132,28 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     --docker-registry-auth-endpoint
     --docker-registry-api-endpoint
     ```
+    
+* If more details are needed for debugging problems communicating to the Docker Registry, the following environment variable can be exported which will generate detailed debugging output to a file named `./dockerAPI.go.log` in the directory where the command is run from.
+
+    * Linux or MacOS
+
+        ```bash
+        export DOCKER_REGISTRY_API_DEBUG="true"
+        ```
+
+    * Windows  
+
+        * Windows command prompt
+
+          ```bash
+          set DOCKER_REGISTRY_API_DEBUG="true"
+          ```
+
+        * Windows powershell
+
+          ```bash
+          $env:DOCKER_REGISTRY_API_DEBUG="true"
+          ```        
 
 ### Syntax
 
@@ -158,15 +166,30 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
     | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/inspectDockerLoggingPlugin) |
     | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/inspectDockerLoggingPlugin) |
 
-2.  Set permissions on `inspectDockerLoggingPlugin` so that it is executable:
+2.  Set permissions on `inspectDockerLoggingPlugin` for linux, zlinux and power so that it is executable:
 
     ```
     chmod u+x inspectDockerLoggingPlugin
     ```
 
-3.  Download [`quotes.txt`](https://s3.amazonaws.com/store-logos-us-east-1/certification/quotes.txt) and put it in the same directory.
+3. Download `http_api_endpoint` command
 
-4.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
+    | OS/Architecture | Download Link |
+    |-----------------|------------------|
+    | Windows/X86  | [https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe](https://s3.amazonaws.com/store-logos-us-east-1/certification/windows/http_api_endpoint.exe) |
+    | Linux/X86 | [https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/linux/http_api_endpoint) |
+    | Linux/IBMZ | [https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/zlinux/http_api_endpoint) |
+    | Linux/IBMPOWER | [https://s3.amazonaws.com/store-logos-us-east-1/certification/power/http_api_endpoint](https://s3.amazonaws.com/store-logos-us-east-1/certification/power/http_api_endpoint) |
+
+4.  Set permissions on `http_api_endpoint` for linux, zlinux and power so that it is executable:
+
+    ```
+    chmod u+x http_api_endpoint
+    ```
+
+5.  Download [`quotes.txt`](https://s3.amazonaws.com/store-logos-us-east-1/certification/quotes.txt) and put it in the same directory.
+
+6.  Get the product ID from the plan page you'd like to reference for the certification test. Make sure the checkbox is checked and the plan is saved first.
 
     ![product ID](images/store-product-id.png)
 
@@ -186,6 +209,8 @@ There are three steps: (1) install git, (2) configure credentials, and (3) confi
         	 Docker User ID.  This overrides the DOCKER_USER environment variable.
       -get-logs-script string
         	 An optional custom script used to retrieve the logs.
+      -insecure-skip-verify
+           Optional. Specifies to disable SSL verification for an insecure private Docker Trusted Registry.         
       -help
         	 Help on the command.
       -html
@@ -235,88 +260,91 @@ gforghetti:~:$ ./inspectDockerLoggingPlugin -product-id=<store-product-id> gforg
 
 ```
 **************************************************************************************************************************************************************************************************
-* Docker logging plugin: gforghetti/docker-log-driver-test:latest
+* Docker Logging Plugin: gforghetti/docker-log-driver-test:latest
 **************************************************************************************************************************************************************************************************
 
 **************************************************************************************************************************************************************************************************
-* Step #1 Inspecting the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
+* Step #1 Inspecting the Docker Logging Plugin: gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
-Passed:   Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Passed:   Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected.
 
 **************************************************************************************************************************************************************************************************
-* Step #2 Docker logging plugin information
+* Step #2 Docker Logging Plugin information
 **************************************************************************************************************************************************************************************************
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Docker logging plugin:  | gforghetti/docker-log-driver-test:latest                                                                                                                             |
+| Docker Logging Plugin:  | gforghetti/docker-log-driver-test:latest                                                                                                                             |
 | Description:            | jsonfilelog as plugin                                                                                                                                                |
 | Documentation:          | -                                                                                                                                                                    |
-| Digest:                 | sha256:870c81b9b8872956eec83311707e52ccd4af40683ba64aac3c1700d252a07624                                                                                              |
-| Base layer digest:      | sha256:8b0c5cbf1339dacef5f56717567aeee37d9e4f196f0874457d46c01592a30d70                                                                                              |
-| Docker version:         | 17.06.0-ce                                                                                                                                                           |
+| Digest:                 | sha256:1cdd79202a7a9f9a53524e904d9f89ed0a6bf6673717bc955ef55744f0826d4c                                                                                              |
+| Base layer digest:      | sha256:fda008d4a2b0d2c0a9d2e5dc952aefb0188f7a9c96c04e159662fd56b507c174                                                                                              |
+| Docker version:         | 17.12.0-ce                                                                                                                                                           |
 | Interface Socket:       | jsonfile.sock                                                                                                                                                        |
 | Interface Socket Types: | docker.logdriver/1.0                                                                                                                                                 |
 | IpcHost:                | false                                                                                                                                                                |
 | PidHost:                | false                                                                                                                                                                |
 | Entrypoint:             | /usr/bin/docker-log-driver                                                                                                                                           |
-| WorkDir:                | /tmp                                                                                                                                                                 |
+| WorkDir:                |                                                                                                                                                                      |
 | User:                   |                                                                                                                                                                      |
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-**************************************************************************************************************************************************************************************************
-* Step #3 Checking to see if the Docker logging plugin is already installed.
-**************************************************************************************************************************************************************************************************
-The Docker logging plugin gforghetti/docker-log-driver-test:latest needs to be installed.
+Warning:  Docker logging plugin was not built using Docker Enterprise Edition!
 
 **************************************************************************************************************************************************************************************************
-* Step #4 Installing the Docker logging plugin gforghetti/docker-log-driver-test:latest ...
+* Step #3 Installing the Docker logging plugin gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest has been installed successfully.
 
 **************************************************************************************************************************************************************************************************
-* Step #5 Testing the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
+* Step #4 Testing the Docker logging plugin: gforghetti/docker-log-driver-test:latest ...
 **************************************************************************************************************************************************************************************************
 Starting a Docker container to test the docker logging plugin gforghetti/docker-log-driver-test:latest
 
 **************************************************************************************************************************************************************************************************
-* Step #6 Retrieving the Docker Logs ...
+* Step #5 Retrieving the Docker Logs ...
 **************************************************************************************************************************************************************************************************
-Retrieving the Docker logs using the "docker container logs c0bc7de01b155203d1ab72a1496979c4715c9b9f81c7f5a1a37ada3aa333e1d5" command
+Retrieving the Docker logs using the "docker container logs 4dc3e699dbf3d050a5b582a245c9a4718bb0300d7d55380887c74741d09bd730" command
 
 **************************************************************************************************************************************************************************************************
-* Step #7 Verifying that the contents retrieved matches what was sent to the Docker Logging plugin.
+* Step #6 Verifying that the contents retrieved matches what was sent to the Docker Logging plugin.
 **************************************************************************************************************************************************************************************************
-Passed:   Docker logging plugin Test was successful.
+Passed:   Docker Logging Plugin Test was successful.
 
 **************************************************************************************************************************************************************************************************
-* Step #8 Removing the Docker container and any associated volumes.
+* Step #7 Removing the Docker container and any associated volumes.
 **************************************************************************************************************************************************************************************************
 Passed:   Docker container and any associated volumes removed.
 
 **************************************************************************************************************************************************************************************************
-* Step #9 Removing the Docker logging plugin
+* Step #8 Removing the Docker logging plugin
 **************************************************************************************************************************************************************************************************
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was removed.
+Passed:   This test was performed on Docker Enterprise Edition.
 
 **************************************************************************************************************************************************************************************************
-* Summary of the inspection for the Docker logging plugin: gforghetti/docker-log-driver-test:latest
+* Summary of the inspection for the Docker Logging Plugin: gforghetti/docker-log-driver-test:latest
 **************************************************************************************************************************************************************************************************
 
-Report Date: Tue Sep 19 12:40:11 2017
-Operating System: Operating System: MacOS darwin Version: 10.12.6
-Docker version 17.09.0-ce-rc2, build 363a3e7
+Report Date: Mon May 21 14:40:41 2018
+Operating System: Operating System: Ubuntu 16.04.4 LTS
+Architecture: amd64
+Docker Client Version: 17.06.2-ee-11
+Docker Server Version: 17.06.2-ee-11
 
+There were 1 warnings detected!
 
-Passed:   Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Passed:   Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected.
+Warning:  Docker logging plugin was not built using Docker Enterprise Edition!
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest has been installed successfully.
-Passed:   Docker logging plugin Test was successful.
+Passed:   Docker Logging Plugin Test was successful.
 Passed:   Docker container and any associated volumes removed.
 Passed:   Docker logging plugin gforghetti/docker-log-driver-test:latest was removed.
+Passed:   This test was performed on Docker Enterprise Edition.
 
 The inspection of the Docker logging plugin gforghetti/docker-log-driver-test:latest has completed.
 
 If -product-id is specified on command line:
 **************************************************************************************************************************************************************************************************
-* Step #10 Upload the test result to Docker Store.
+* Step #9 Upload the test result to Docker Store.
 **************************************************************************************************************************************************************************************************
 Passed:   The test results are uploaded to Docker Store.
 
@@ -333,36 +361,43 @@ gforghetti:~/$
 gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
 ```
 
-Note: The output was piped to the **jq** command to display it "nicely".
+> Note: The output was piped to the **jq** command to display it "nicely".
 
 #### Output:
 
+
 ```
-{
-  "Date": "Tue Sep 19 12:41:49 2017",
-  "SystemOperatingSystem": "Operating System: MacOS darwin Version: 10.12.6",
-  "SystemDockerVersion": "Docker version 17.09.0-ce-rc2, build 363a3e7",
+ {
+  "Date": "Mon May 21 14:38:28 2018",
+  "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
+  "SystemArchitecture": "amd64",
+  "SystemDockerClientVersion": "17.06.2-ee-11",
+  "SystemDockerServerVersion": "17.06.2-ee-11",
   "DockerLogginPlugin": "gforghetti/docker-log-driver-test:latest",
   "Description": "jsonfilelog as plugin",
   "Documentation": "-",
-  "DockerLoggingPluginDigest": "sha256:870c81b9b8872956eec83311707e52ccd4af40683ba64aac3c1700d252a07624",
-  "BaseLayerImageDigest": "sha256:8b0c5cbf1339dacef5f56717567aeee37d9e4f196f0874457d46c01592a30d70",
-  "DockerVersion": "17.06.0-ce",
+  "DockerLoggingPluginDigest": "sha256:1cdd79202a7a9f9a53524e904d9f89ed0a6bf6673717bc955ef55744f0826d4c",
+  "BaseLayerImageDigest": "sha256:fda008d4a2b0d2c0a9d2e5dc952aefb0188f7a9c96c04e159662fd56b507c174",
+  "DockerVersion": "17.12.0-ce",
   "Entrypoint": "/usr/bin/docker-log-driver",
   "InterfaceSocket": "jsonfile.sock",
   "InterfaceSocketTypes": "docker.logdriver/1.0",
-  "WorkDir": "/tmp",
+  "WorkDir": "",
   "User": "",
   "IpcHost": false,
   "PidHost": false,
   "Errors": 0,
-  "Warnings": 0,
+  "Warnings": 1,
   "HTMLReportFile": "",
   "VulnerabilitiesScanURL": "",
   "Results": [
     {
       "Status": "Passed",
-      "Message": "Docker logging plugin image gforghetti/docker-log-driver-test:latest has been inspected."
+      "Message": "Docker Logging Plugin image gforghetti/docker-log-driver-test:latest has been inspected."
+    },
+    {
+      "Status": "Warning",
+      "Message": "Docker logging plugin was not built using Docker Enterprise Edition!"
     },
     {
       "Status": "Passed",
@@ -370,7 +405,7 @@ Note: The output was piped to the **jq** command to display it "nicely".
     },
     {
       "Status": "Passed",
-      "Message": "Docker logging plugin Test was successful."
+      "Message": "Docker Logging Plugin Test was successful."
     },
     {
       "Status": "Passed",
@@ -379,10 +414,13 @@ Note: The output was piped to the **jq** command to display it "nicely".
     {
       "Status": "Passed",
       "Message": "Docker logging plugin gforghetti/docker-log-driver-test:latest was removed."
+    },
+    {
+      "Status": "Passed",
+      "Message": "This test was performed on Docker Enterprise Edition."
     }
   ]
 }
-gforghetti:~/$
 ```
 
 <a name="inspect-logging-plugin-html">

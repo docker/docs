@@ -168,7 +168,7 @@ configure this app to use our SQL Server database, and then create a
     $ docker-compose build
     ```
 
-1.  Make sure you allocate at least 4GB of memory to Docker Engine. Here is how
+1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
     [Docker for Mac](/docker-for-mac/#/advanced) and
     [Docker for Windows](/docker-for-windows/#/advanced).

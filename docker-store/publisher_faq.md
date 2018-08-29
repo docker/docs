@@ -62,6 +62,14 @@ Edit the same product and update with the newly tagged repos.
 Organization details need to be filled in only once. Updating organization info
 once updates this for all images published by your organization.
 
+### Can we show customers all tags for a specific repository, the way we show all tags for official images?
+
+We don't support the abiltiy to view available tags for published products because published products usually require entitlement.
+
+Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
+
+We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access. (Expected Q3 2018)
+
 ### On the page for another vendor’s product on Docker store, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
 #### Fields I see

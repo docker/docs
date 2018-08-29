@@ -1,39 +1,38 @@
 ---
-title: Deploy an ingress controller for a Kubernetes app
-description: Learn how to enable routing for a Kubernetes workload in Docker Enterprise Edition.
-keywords: UCP, Docker EE, Kubernetes, ingress, routing
+title: Layer 7 routing
+description: Learn how to route traffic to your Kubernetes workloads in
+  Docker Enterprise Edition.
+keywords: UCP, Kubernetes, ingress, routing
+redirect_from:
+  - /ee/ucp/kubernetes/deploy-ingress-controller/
 ---
 
-When you deploy your Kubernetes app on a Docker EE cluster, you may want to
-expose a service that enables external users to connect to it. Also, you may
-want network communication to reference named hosts, instead of IP addresses.
-Kubernetes provides *ingress controllers* to enable these functions. 
+When you deploy a Kubernetes application, you may want to make it accessible
+to users using hostnames instead of IP addresses.
 
-Use an ingress controller when you want to: 
+Kubernetes provides **ingress controllers** for this. This functionality is
+specific to Kubernetes. If you're trying to route traffic to Swarm-based
+applications, check [layer 7 routing with Swarm](../interlock/index.md).
 
-- give your Kubernetes app an externally-reachable URL,
-- load-balance traffic to your app, or
-- offer name-based hosting.
+Use an ingress controller when you want to:
 
-Kubernetes provides an NGINX ingress controller that you can use in a Docker EE
-cluster, without modifications. 
+* Give your Kubernetes app an externally-reachable URL.
+* Load-balance traffic to your app.
+
+Kubernetes provides an NGINX ingress controller that you can use in Docker EE
+without modifications.
 Learn about [ingress in Kubernetes](https://v1-8.docs.kubernetes.io/docs/concepts/services-networking/ingress/).
 
-> Routing for Swarm apps
->
-> To enable similar features for Swarm apps, see [Layer 7 routing](../interlock/index.md).
-{: .important}
+## Create a dedicated namespace
 
-## Create the Kubernetes namespace for the ingress controller
-
-1.  Navigate to the **Namespaces** page and click **Create**.
+1.  Navigate to the **Namespaces** page, and click **Create**.
 2.  In the **Object YAML** editor, append the following text.
     ```yaml
     metadata:
       name: ingress-nginx
     ```
 
-    The finished YAML should look like this. 
+    The finished YAML should look like this.
 
     ```yaml
     apiVersion: v1
@@ -53,26 +52,25 @@ The default service account that's associated with the `ingress-nginx`
 namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
 
-1.  Navigate to the **Grants** page and click **Create Grant**.
-2.  In the left pane, click **Resource Sets**, and in the **Type** section,
-    click **Namespaces**.
-3.  Enable the **Apply grant to all existing and new namespaces** option.
-4.  In the left pane, click **Roles**. In the **Role** dropdown, select
-    **Restricted Control**.
-5.  In the left pane, click **Subjects**, and select **Service Account**.
-6.  In the **Namespace** dropdown, select **ingress-nginx**, and in the
-    **Service Account** dropdown., select **default**.
-7.  Click **Create**.
+1.  From UCP, navigate to the **Grants** page, and click **Create Grant**.
+2.  Within the **Subject** pane, select **Service Account**. For the 
+    **Namespace** select **ingress-nginx**, and select **default** for
+    the **Service Account**. Click **Next**.
+3.  Within the **Role** pane, select **Restricted Control**, and then click 
+    **Next**.
+4.  Within the **Resource Set** pane, select the **Type** **Namespace**, and
+    select the **Apply grant to all existing and new namespaces** toggle.
+5.  Click **Create**.
 
 > Ingress and role-based access control
 >
 > Docker EE has an access control system that differs from Kubernetes RBAC.
-> If your ingress controller has access control requirements, you need to 
+> If your ingress controller has access control requirements, you need to
 > create corresponding UCP grants. Learn to
 > [migrate Kubernetes roles to Docker EE authorization](../authorization/migrate-kubernetes-roles.md).
 {: .important}
 
-## Install the NGINX ingress controller
+## Deploy NGINX ingress controller
 
 The cluster is ready for the ingress controller deployment, which has three
 main components:
@@ -81,11 +79,11 @@ main components:
 - an ingress controller, named `nginx-ingress-controller`, and
 - a service that exposes the app, named `ingress-nginx`.
 
-Navigate to the **Create Kubernetes Object** page, and in the **Object YAML** 
+Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
 editor, paste the following YAML.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: default-http-backend
@@ -94,10 +92,15 @@ metadata:
   namespace: ingress-nginx
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: default-http-backend
   template:
     metadata:
       labels:
         app: default-http-backend
+      annotations:
+        seccomp.security.alpha.kubernetes.io/pod: docker/default    
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -157,11 +160,11 @@ metadata:
   name: udp-services
   namespace: ingress-nginx
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: nginx-ingress-controller
-  namespace: ingress-nginx 
+  namespace: ingress-nginx
 spec:
   replicas: 1
   selector:
@@ -173,7 +176,8 @@ spec:
         app: ingress-nginx
       annotations:
         prometheus.io/port: '10254'
-        prometheus.io/scrape: 'true' 
+        prometheus.io/scrape: 'true'
+        seccomp.security.alpha.kubernetes.io/pod: docker/default   
     spec:
       initContainers:
       - command:
@@ -187,7 +191,7 @@ spec:
           privileged: true
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.17.1
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
@@ -249,14 +253,14 @@ spec:
     app: ingress-nginx
 ```
 
-## Inspect the installation
+## Check your deployment
 
 The `default-http-backend` provides a simple service that serves a 404 page
 at `/` and serves 200 on the `/healthz` endpoint.
 
 1.  Navigate to the **Controllers** page and confirm that the
     **default-http-backend** and **nginx-ingress-controller** objects are
-    scheduled. 
+    scheduled.
 
     > Scheduling latency
     >
@@ -275,7 +279,7 @@ at `/` and serves 200 on the `/healthz` endpoint.
 
     A new page opens, displaying `default backend - 404`.
 
-## Inspect the installation in the CLI
+## Check your deployment from the CLI
 
 From the command line, confirm that the deployment is running by using
 `curl` with the URL that's shown on the details pane of the **ingress-nginx**

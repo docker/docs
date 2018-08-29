@@ -172,9 +172,9 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 
 ```
->  Troubleshooting for Linux users 
+>  Troubleshooting for Linux users
 >
-> _DNS settings_
+> _Proxy server settings_
 >
 > Proxy servers can block connections to your web app once it's up and running.
 > If you are behind a proxy server, add the following lines to your
@@ -187,11 +187,11 @@ friendlyhello         latest              326387cea398
 > ENV https_proxy host:port
 > ```
 >
-> _Proxy server settings_
+> _DNS settings_
 >
-> DNS misconfigurations can generate problems with `pip`. You need to set your 
-> own DNS server address to make `pip` work properly. You might want 
-> to change the DNS settings of the Docker daemon. You can edit (or create) the 
+> DNS misconfigurations can generate problems with `pip`. You need to set your
+> own DNS server address to make `pip` work properly. You might want
+> to change the DNS settings of the Docker daemon. You can edit (or create) the
 > configuration file at `/etc/docker/daemon.json` with the `dns` key, as following:
 >
 > ```json
@@ -241,9 +241,9 @@ $ curl http://localhost:4000
 <h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
 ```
 
-This port remapping of `4000:80` is to demonstrate the difference
-between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we just map port 80 on the host to port 80
+This port remapping of `4000:80` demonstrates the difference
+between `EXPOSE` within the `Dockerfile` and what the `publish` value is set to when running
+`docker run -p`. In later steps, map port 4000 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
@@ -301,7 +301,7 @@ Registry](/datacenter/dtr/2.2/guides/).
 ### Log in with your Docker ID
 
 If you don't have a Docker account, sign up for one at
-[cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }.
+[hub.docker.com](https://hub.docker.com){: target="_blank" class="_" }.
 Make note of your username.
 
 Log in to the Docker public registry on your local machine.
@@ -330,7 +330,7 @@ docker tag image username/repository:tag
 For example:
 
 ```shell
-docker tag friendlyhello john/get-started:part2
+docker tag friendlyhello gordon/get-started:part2
 ```
 
 Run [docker image ls](/engine/reference/commandline/image_ls/) to see your newly
@@ -341,7 +341,7 @@ $ docker image ls
 
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
-john/get-started         part2               d9e555c53008        3 minutes ago       195MB
+gordon/get-started         part2               d9e555c53008        3 minutes ago       195MB
 python                   2.7-slim            1c7128a655f6        5 days ago          183MB
 ...
 ```
@@ -371,9 +371,9 @@ If the image isn't available locally on the machine, Docker pulls it from
 the repository.
 
 ```shell
-$ docker run -p 4000:80 john/get-started:part2
-Unable to find image 'john/get-started:part2' locally
-part2: Pulling from john/get-started
+$ docker run -p 4000:80 gordon/get-started:part2
+Unable to find image 'gordon/get-started:part2' locally
+part2: Pulling from gordon/get-started
 10a267c67f42: Already exists
 f68a39a6a5e4: Already exists
 9beaffc0cf19: Already exists
@@ -382,7 +382,7 @@ f68a39a6a5e4: Already exists
 ee7d8f576a14: Already exists
 fbccdcced46e: Already exists
 Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
-Status: Downloaded newer image for john/get-started:part2
+Status: Downloaded newer image for gordon/get-started:part2
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 

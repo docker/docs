@@ -15,15 +15,21 @@ mesh. Even though the service is running on a single node, users can access
 WordPress using the domain name or IP of any of the nodes that are part of
 the swarm.
 
-UCP extends this one step further with application layer routing (also known
-as layer 7 routing), allowing users to access Docker services using domain names
+UCP extends this one step further with layer 7 layer routing (also known as
+application layer 7), allowing users to access Docker services using domain names
 instead of IP addresses.
+
+This functionality is made available through the Interlock component.
 
 ![layer 7 routing](../images/interlock-overview-2.svg)
 
 In this example, users can access the WordPress service using
-`http://wordpress.example.org`. UCP and Docker Engine take care of routing
-the traffic to the right service.
+`http://wordpress.example.org`. Interlock takes care of routing traffic to
+the right place.
+
+Interlock is specific to the Swarm orchestrator. If you're trying to route
+traffic to your Kubernetes applications, check
+[layer 7 routing with Kubernetes.](../kubernetes/layer-7-routing.md)
 
 ## Features and benefits
 
@@ -44,4 +50,3 @@ routing mesh, but you don't have to. You can use host mode networking for maximu
 performance.
 * **Security**: The layer 7 routing components that are exposed to the outside
 world run on worker nodes. Even if they get compromised, your cluster won't.
-
