@@ -31,7 +31,7 @@ for Windows](install.md#download-docker-for-windows).
   - Fix local DNS failing to resolve inside containers. Fixes [docker/for-win#2301](https://github.com/docker/for-win/issues/2301), [docker/for-win#2304](https://github.com/docker/for-win/issues/2304)
   - Fix Kubernetes status display after reset to factory default
   - Fix bug where `host.docker.internal` is not resolved in some cases. Fixes [docker/for-win#2402](https://github.com/docker/for-win/issues/2402)
-  - Use a 1MB vhdx blocksize instead of the default 32MB. See [docker/for-win#244](https://github.com/docker/for-win/issues/244. Also see [Microsoft Best Practices for running Linux on Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/best-practices-for-running-linux-on-hyper-v)
+  - Use a 1MB vhdx blocksize instead of the default 32MB. See [docker/for-win#244](https://github.com/docker/for-win/issues/244). Also see [Microsoft Best Practices for running Linux on Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/best-practices-for-running-linux-on-hyper-v)
   - Fix diagnostics in specific cases when Windows service is not started.
   - Changed back samba default file permission to avoid issue with too open rights. Fixes [docker/for-win#2170](https://github.com/docker/for-win/issues/2170)
   - On RS5 insider, Fix wrong detection of missing feature "Containers" requiring to install feature + reboot.
