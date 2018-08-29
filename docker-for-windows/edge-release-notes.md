@@ -18,6 +18,24 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.06.1-ce-win74 2018-08-29
+
+[Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
+
+* Bug fixes and minor changes
+  - Fix bug in VM activity detection, preventing Docker Desktop to start. Fixes [docker/for-win#2404](https://github.com/docker/for-win/issues/2404)
+  - Fix bug in detection when Windows service is not running, and propose to restart the service.
+  - Fix local DNS failing to resolve inside containers. Fixes [docker/for-win#2301](https://github.com/docker/for-win/issues/2301), [docker/for-win#2304](https://github.com/docker/for-win/issues/2304)
+  - Fix Kubernetes status display after reset to factory default
+  - Fix bug where `host.docker.internal` is not resolved in some cases. Fixes [docker/for-win#2402](https://github.com/docker/for-win/issues/2402)
+  - Use a 1MB vhdx blocksize instead of the default 32MB. See [docker/for-win#244](https://github.com/docker/for-win/issues/244. Also see [Microsoft Best Practices for running Linux on Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/best-practices-for-running-linux-on-hyper-v)
+  - Fix diagnostics in specific cases when Windows service is not started.
+  - Changed back samba default file permission to avoid issue with too open rights. Fixes [docker/for-win#2170](https://github.com/docker/for-win/issues/2170)
+  - On RS5 insider, Fix wrong detection of missing feature "Containers" requiring to install feature + reboot.
+
 ### Docker Community Edition 18.06.0-ce-win71 2018-07-27
 
 [Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe)
