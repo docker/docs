@@ -16,8 +16,8 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * [Docker EE Engine](/ee/supported-platforms.md) version 17.06.2-ee-8; 
   values of `n` in the `-ee-<n>` suffix must be 8 or higher
 * Linux kernel version 3.10 or higher
-* A static IP address
-
+* **A static IP address**
+ 
 ### Minimum requirements
 
 * 8GB of RAM for manager nodes
