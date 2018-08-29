@@ -27,7 +27,7 @@ support dump:
 
 ![](images/get-support-1.png){: .with-border}
 
-## Use the CLI to get a support dump
+## Use the CLI to get a support dump for EE Standard and Advanced 
 
 To get the support dump from the CLI, use SSH to log into a node and run:
 
@@ -44,6 +44,32 @@ docker container run --rm \
 This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
 from all of the manager nodes.
+
+## Use the CLI to get a support dump for EE Basic
+
+To get the support dump from the EE Basic Engine CLI, use SSH to log into a node and run:
+
+```
+docker run --rm  \
+    -v /boot:/boot \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.pid:/var/run/docker.pid:ro \
+    -v /var/run/docker:/var/run/docker \
+    -v /var/lib/docker:/var/lib/docker \
+    -v /var/run/docker/netns:/var/run/docker/netns \
+    -v /var/log:/var/log \
+    -v /etc:/etc:ro \
+    -v /run:/run \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+    --privileged \
+    --pid=host \
+    --network=host \
+    --log-driver=none \
+    --cap-add=NET_ADMIN \
+    --cap-add=SYS_ADMIN \
+    --security-opt="label=disable" \
+    docker/ucp-dsinfo:{{ page.ucp_version }} > dump.tar.gz
+```
 
 ## Use PowerShell to get a support dump
 
