@@ -17,8 +17,7 @@ Here's the difference:
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
 
-- A [base image](/glossary.md?term=base%20image) either has no `FROM` line
-  in its Dockerfile, or has `FROM scratch`.
+- A [base image](/glossary.md?term=base%20image) has `FROM scratch` in its Dockerfile.
 
 This topic shows you several ways to create a base image. The specific process
 will depend heavily on the Linux distribution you want to package. We have some
