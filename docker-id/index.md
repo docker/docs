@@ -1,53 +1,41 @@
 ---
-description: Sign up for a Docker ID and log in
-keywords: accounts, docker ID, billing, paid plans, support, Cloud, Hub, Store, Forums, knowledge base, beta access
-title: Docker ID accounts
+title: Sign up for a Docker ID
+description: Register for a Docker ID for a Docker account
+keywords: docker-id, account, hub, forums, success-center, support-center
 ---
 
-Your free Docker ID grants you access to Docker services such as the Docker
-Store, Docker Cloud, Docker Hub repositories, and some beta programs. Your
-Docker ID becomes repository namespace used by hosted services such as Docker
-Hub and Docker Cloud. All you need is an email address.
+Your free Docker ID grants you access to Docker Hub repositories and other
+Docker services. Your Docker ID becomes repository namespace. All you need is
+an email address.
 
-This account also allows you to log in to services such as the Docker Support
-Center, the Docker Forums, and the Docker Success portal.
-
+Your Docker account also allows you to log in to services such as the Docker
+Support Center, the Docker Forums, and the Docker Success portal.
 
 ## Register for a Docker ID
 
-Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums.
+{% include register-for-docker-id.md %}
 
-1. Go to the [Docker Cloud sign up page](https://cloud.docker.com).
-
-2. Enter a username that is also your Docker ID.
-
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters.
-
-3. Enter a unique, valid email address.
-
-4. Enter a password between 6 and 128 characters long.
-
-3. Click **Sign up**.
-
-   Docker sends a verification email to the address you provided.
-
-4. Click the link in the email to verify your address.
-
-> **Note**: You cannot log in with your Docker ID until you verify your email address.
-
-
-## Log in
+## Log in to Docker
 
 Once you register and verify your Docker ID email address, you can log in
-to Docker services.
+to Docker services through the web interface or the commandline.
 
-For Docker Cloud, Hub, and Store, log in using the web interface.
+At the commandline, use `docker login`. See the [CLI reference](/engine/reference/commandline/login.md).
 
-![Login using the web interface](/docker-id/images/login-cloud.png)
+```
+$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: <docker-id>
+Password:
+WARNING! Your password will be stored unencrypted in /home/<user>/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
-You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
+Login Succeeded
+```
 
-> **Warning**:
+> Docker login creds not secure
+>
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the

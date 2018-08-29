@@ -14,7 +14,7 @@ infrastructure, both on-premises and in the cloud.
 
 Docker Enterprise Edition is a secure, scalable, and supported container
 platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+Windows Server 2016, and IBM z Systems environments.
 
 Docker EE enables deploying your workloads for high availability (HA) onto the
 orchestrator of your choice. Docker EE automates many of the tasks that
@@ -54,8 +54,11 @@ Kubernetes features on Docker EE include:
 - Kubernetes app deployment by using web UI or CLI
 - Compose stack deployment for Swarm and Kubernetes apps
 - Role-based access control for Kubernetes workloads
+- Pod-based autoscaling, to increase and decrease pod count based on CPU usage
 - Blue-Green deployments, for load balancing to different app versions
 - Ingress Controllers with Kubernetes L7 routing
+- Interoperability between Swarm and Kubernetes workloads for networking and
+  storage
 
 In addition, UCP integrates with Kubernetes by using admission controllers,
 which enable:
@@ -96,7 +99,7 @@ to schedule Kubernetes or Swarm workloads.
 
 ### Secure supply chain
 
-![](images/docker-ee-overview-3.png){: .with-border}
+![](images/docker-ee-overview-3.svg){: .with-border}
 
 - Image signing and scanning of Kubernetes apps for validating and verifying content
 - Image promotion with mirroring between registries
@@ -169,8 +172,9 @@ Managers: 1
 
 ## Use the Kubernetes CLI
 
-Docker EE exposes the standard Kubernetes API, so you can use `kubectl` to
-manage your Kubernetes workloads:
+Docker EE exposes the standard Kubernetes API, and it installs the command-line
+tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
+`kubectl cluster-info`:
 
 ```bash
 kubectl cluster-info

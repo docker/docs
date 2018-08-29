@@ -36,10 +36,15 @@ Use this URL when you see the placeholder text `<DOCKER-EE-URL>`.
 To learn more about Docker EE, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-### System requirements
+### OS requirements
 
-To learn more about software requirements and supported storage drivers,
-check the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
+To install Docker EE, you need the 64-bit version of one of these Ubuntu versions:
+
+- Xenial 16.04 (LTS)
+- Trusty 14.04 (LTS)
+
+Docker EE is supported on `x86_64` (or `amd64`), `s390x` (IBM Z), and `ppc64el`
+(IBM Power) architectures.
 
 ### Uninstall old versions
 
@@ -55,20 +60,29 @@ It's OK if `apt-get` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker EE package is now called `docker-ee`.
 
+### Supported storage drivers
+
+Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+
+- For new installations on version 4 and higher of the Linux kernel, `overlay2`
+  is supported and preferred over `aufs`.
+- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
+  `overlay2` drivers are not supported by that kernel version.
+
+If you need to use `aufs`, you need to do additional preparation as
+outlined below.
+
 #### Extra steps for aufs
 
-If your version supports the `aufs` storage driver, you need some preparation
-before installing Docker.
-
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 or higher</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 and newer</a></li>
   <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
 </ul>
 <div class="tab-content">
 <div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
 
-For Ubuntu 16.04 and higher, the Linux kernel includes support for overlay2,
-and Docker EE uses it as the default storage driver. If you need
+For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
+and Docker CE uses the `overlay2` storage driver by default. If you need
 to use `aufs` instead, you need to configure it manually.
 See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
@@ -135,18 +149,7 @@ from the repository.
       $ DOCKER_EE_URL="<DOCKER-EE-URL>"
       ```
 
-4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
-    There are currently two versions of Docker EE Engine available:
-
-    * `stable-18.03` - Use this version if you're only running Docker EE Engine.
-    * `stable-17.06` - Use this version if you're using Docker Enterprise Edition (Docker
-    Engine, UCP, and DTR).
-
-    ```bash
-    $ DOCKER_EE_VERSION=<YOUR_VERSION>
-    ```
-
-5.  Add Docker's official GPG key using your customer Docker EE repository URL:
+4.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
     ```bash
     $ curl -fsSL "${DOCKER_EE_URL}/ubuntu/gpg" | sudo apt-key add -
@@ -166,7 +169,7 @@ from the repository.
     sub   4096R/6D085F96 2017-02-22
     ```
 
-6.  Use the following command to set up the **stable** repository. Use the
+5.  Use the following command to set up the **stable** repository. Use the
     command as-is. It works because of the variable you set earlier.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
@@ -185,7 +188,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-{{ site.docker_ee_version }}"
     ```
 
     </div>
@@ -195,7 +198,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-{{ site.docker_ee_version }}"
     ```
 
     </div>
@@ -205,7 +208,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-{{ site.docker_ee_version }}"
     ```
 
     </div>
@@ -296,7 +299,7 @@ a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-<VERSION>` and download the `.deb` file for the
+    `ubuntu/x86_64/stable-{{ site.docker_ee_version }}` and download the `.deb` file for the
     Docker EE version and architecture you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
@@ -350,4 +353,5 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+
 - Continue with the [User Guide](/engine/userguide/index.md).

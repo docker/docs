@@ -34,15 +34,6 @@ When creating a repository in DTR, the full name of the repository becomes
 `<dtr-domain-name>/<user-or-org>/<repository-name>`. In this example, the full
 name of our repository will be `dtr.example.org/dave.lauper/golang`.
 
-> Image name size for DTR
->
-> When creating an image name for use with DTR ensure that the organization and repository name has less than 56 characters and that the entire image name which includes domain, organization and repository name does not exceed 255 characters.
->
-> The 56 character `<user-or-org/repository-name>` limit in DTR is due to an underlying limitation in how the image name information is stored within DTR metadata in RethinkDB.  RethinkDB currently has a Primary Key length limit of 127 characters.
->
-> When DTR stores the above data it appends a sha256sum comprised of 72 characters to the end of the value to ensure uniqueness within the database.  If the `<user-or-org/repository-name>` exceeds 56 characters it will then exceed the 127 character limit in RethinkDB (72+56=128).
-{: .important}
-
 ## Where to go next
 
 - [Pull and push images](pull-and-push-images.md)

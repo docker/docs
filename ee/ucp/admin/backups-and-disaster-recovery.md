@@ -37,13 +37,13 @@ Back up your Docker EE components in the following order:
 
 1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
 2. Back up UCP
-3. [Back up DTR](../../dtr/2.5/admin/disaster-recovery/index.md)
+3. [Back up DTR](../../../../dtr/2.5/guides/admin/backups-and-disaster-recovery.md)
 
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
 DTR is backed up independently.
-[Learn about DTR backups and recovery](../../dtr/2.5/admin/disaster-recovery/index.md).
+[Learn about DTR backups and recovery](../../../../dtr/2.5/guides/admin/backups-and-disaster-recovery.md).
 
 To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
@@ -118,7 +118,7 @@ uninstall UCP from the swarm by using the `uninstall-ucp` command.
 
 If you restore UCP using a different Docker swarm than the one where UCP was
 previously deployed on, UCP will start using new TLS certificates. Existing
-client bundles won't work anymore, so users need to download new ones.
+client bundles won't work anymore, so users need to download new ones. 
 
 When restoring, make sure you use the same version of the `docker/ucp` image
 that you've used to create the backup. The example below shows how to restore

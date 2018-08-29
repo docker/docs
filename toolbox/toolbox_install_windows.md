@@ -61,11 +61,6 @@ To verify your machine meets these requirements, do the following:
 2.  Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
     <br>
-    **For Windows 10**
-    
-    Run [Speccy](https://www.piriform.com/speccy){: target="_blank" class="_"}, and look at the CPU information.    
-    
-    <br>
     **For Windows 8 or 8.1**
 
     Choose **Start > Task Manager** and navigate to the **Performance** tab.

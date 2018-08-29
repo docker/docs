@@ -43,7 +43,7 @@ Before starting your upgrade, make sure that:
 * The version of UCP you are using is supported by the version of DTR you
 are trying to upgrade to. [Check the compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 * You have a recent [DTR backup](disaster-recovery/create-a-backup.md).
-* You [disable Docker content trust in UCP](/ee/ucp/admin/configure/run-only-the-images-you-trust/).
+* You [disable Docker content trust in UCP](/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust.md).
 
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 

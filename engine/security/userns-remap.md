@@ -225,7 +225,7 @@ $ dockerd --userns-remap="testuser:testuser"
     ```
 
     Your directory listing may have some differences, especially if you
-    use a different container storage driver than `aufs`.
+    user a different container storage driver than `aufs`.
 
     The directories which are owned by the remapped user are used instead
     of the same directories directly beneath `/var/lib/docker/` and the

@@ -432,7 +432,7 @@ Consider some scenarios where files in a container are modified.
   writes the changes to the new copy of the file in the container layer.
 
   However, OverlayFS works at the file level rather than the block level. This
-  means that all OverlayFS copy_up operations copy the entire file, even if the
+  means that all OverlayFS copy_up operations copy the entire file, even if the\
   file is very large and only a small part of it is being modified. This can
   have a noticeable impact on container write performance. However, two things
   are worth noting:

@@ -55,14 +55,13 @@ for opening networking ports. Ensure that your hardware or software firewalls
 are open appropriately or disabled.
 
 > Ubuntu 14.04 mounts
->
+> 
 > For UCP to install correctly on Ubuntu 14.04, `/mnt` and other mounts
 > must be shared:
 > ```
 > sudo mount --make-shared /mnt
-> sudo mount --make-shared /
-> sudo mount --make-shared /run
-> sudo mount --make-shared /dev
+> sudo mount --make-shared / 
+> sudo mount --make-shared /run 
 > ```
 
 To install UCP:
@@ -91,18 +90,18 @@ To install UCP:
 > Custom CNI plugins
 >
 > If you want to use a third-party Container Networking Interface (CNI) plugin,
-> like Flannel or Weave, modify the previous command line to include the
+> like Flannel or Weave, modify the previous command line to include the 
 > `--cni-installer-url` option. Learn how to
 > [install a CNI plugin](../../kubernetes/install-cni-plugin.md).
 {: important}
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker EE standard or advanced subscription, or you can test the platform with a free trial license.
+Now that UCP is installed, you need to license it.
 
 1.  Go to the
     [Docker Store](https://www.docker.com/enterprise-edition)
-    and buy a Docker EE standard or advanced subscription, or get a free trial license.  
+    and buy a Docker EE subscription, or get a free trial license.  
 
 2.  In your browser, navigate to the UCP web UI, log in with your
     administrator credentials and upload your license. Navigate to the

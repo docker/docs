@@ -10,7 +10,7 @@ Welcome to the Docker documentation test page!
 This is a demo of components, tags, styles, tools, and strategies we use for the
 docs. We explain the code behind the published page and demo the effects. So, if
 you want to see, for example, how admonitions and notes are coded in markdown,
-read the section on [Admonitions (notes)](/test.md#admonitions-notes) on the web
+read the section on [Admonitions (notes)](/test/#admonitions-notes) on the web
 published page and study the pre-processed `test.md` to see how they are
 implemented. The Docker documentation team uses this page as "note to self"
 reminders. Since we invite docs suggestions and contributions from the
@@ -586,78 +586,66 @@ Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
 support these broad categories of admonitions:
 
-- Notes (no Liquid tag required) (deprecated)
-- Important, which use the `{: .important}` tag
-- Warning , which use the `{: .warning}` tag
+- Notes in the old style (no Liquid tag required)
+- Notes with a prefixed icon (no Liquid tag required)
+- Important and Warning admonitions, which take `{: .important}` and `{: .warning}` tags, respectively
 
 The new styles include prepended icons, color sidebars, and bold color titles
 for multi-paragraph notes, but no auto-prepended text. These are defined in a
 way that does not impact admonitions formatted with the original styles, so
 notes in your published documents are not adversely affected.
 
-Examples are shown in the following sections.
+Examples of both styles are shown below.
 
-### Note (Deprecated)
+### Examples (original styles, prefix words)
 
-Notes are deprecated and should not longer be used. Use important or warning instead.
+Admonitions with prefixed icons use the following class tags, as shown in the examples.
 
-A standard note is formatted like this:
+* **Note:** No class tag is needed for standard notes.
+* **Important:** Use the `important` class.
+* **Warning:** Use the `warning` class.
 
-```
-> Handling transient errors
->
-> Note the way the `get_hit_count` function is written. This basic retry
-> loop lets us attempt our request multiple times if the redis service is
-> not available. This is useful at startup while the application comes
-> online, but also makes our application more resilient if the Redis
-> service needs to be restarted anytime during the app's lifetime. In a
-> cluster, this also helps handling momentary connection drops between
-> nodes.
-```
 
-It renders like this with a colored sidebar and icon:
+> **Note**: This is a note using the old note style
 
-![note admonition example](/images/note-admonition-example.png)
-
-Notes were previously formatted like this:
-
-```
-> **Note**: This is a note using the old note style.
-```
-
-These will still render as a note with a colored sidebar to the left but no icon will be added.
-
-### Important
-
-Add the `important` class to your blockquotes if you want to tell users to be careful about something:
-
-```
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
+
+> It's not safe out there, take this Moby with you
+>
+> Add the `important` class to your blockquotes if you want to tell users
+ to be careful about something.
 {: .important}
-```
 
-It renders like this  with a colored sidebar and icon:
-
-![important admonition example](/images/important-admonition-example.png)
-
-### Warning
-
-Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
-
-```
 > Ouch, don't do that!
 >
-> Sticking your finger in an electrical outlet can result in an electric shock.
+> Use the `warning` class to let people know this is dangerous or they
+ should pay close attention to this part of the road.
 >
-> You can also add more paragraphs here if your explanation is super complex.
+> You can also add more paragraphs here if your explanation is
+ super complex.
 {: .warning}
-```
 
-It will render like this  with a colored sidebar and icon:
+>**This is a crazy note**
+>
+> This note has tons of content in it:
+>
+> - List item 1
+> - List item 2
+>
+> |Table column 1  | Table column 2 |
+> |----------------|----------------|
+> | Row 1 column 1 | Row 2 column 2 |
+> | Row 2 column 1 | Row 2 column 2 |
+>
+> And another sentence to top it all off.
 
-![warning admonition example](/images/warning-admonition-example.png)
+> **Important**: Single paragraph important note with the prefix word "important" manually typed in as bold at the beginning.
+{: .important}
+
+> **Warning**: Single paragraph warning with the prefix word "warning" manually typed in as bold at the beginning.
+{: .warning}
 
 ## Code blocks
 
