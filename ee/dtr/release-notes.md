@@ -1,7 +1,8 @@
 ---
-title: DTR 2.5 release notes
+title: DTR release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
+toc_min: 1
 toc_max: 2
 redirect_from:
   - /datacenter/dtr/2.4/guides/release-notes/
@@ -13,6 +14,54 @@ known issues for each DTR version.
 
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
+
+* [Version 2.5](#version-25)
+* [Version 2.4](#version-24)
+
+# Version 2.5
+
+## 2.5.3 (2018-6-21)
+
+### New Features
+
+* Allow users to adjust DTR log levels for alternative logging solutions.
+
+### Bug Fixes
+
+* Fixed URL redirect to release notes.
+* Prevent OOM during garbage collection by reading less data into memory at a time.
+* Fixed issue where worker capacities wouldn't update on minor version upgrades.
+
+## 2.5.2 (2018-5-21)
+
+### Bug fixes
+
+* Fixed a problem where promotion policies based on scanning results would not be executed correctly.
+
+## 2.5.1 (2018-5-17)
+
+### New features
+
+* Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).
+
+### Bug fixes
+
+* Allow for AlibabaCloud as storage backend.
+* Fix a problem that made pulling images from Google Cloud fail when DTR was configured to redirect requests.
+* Avoid sending redundant webhooks and fix inaccurate repository pull/push counts when manifest lists are pushed.
+* Several fixes of common workflows when the experimental online garbage collection is enabled, including:
+  * Support scanning.
+  * Adding event stream items for online garbage collection activity like layers being deleted.
+  * Fix failing repositories promotion policies.
+  * Fix inaccurate pull/push counts.
+* Some internationalization fixes.
+* Fix a bug causing poll mirroring from Docker Hub to fail under certain conditions.
+* Copy existing scan results to new target repository when an image is promoted.
+* Address an issue causing scan results to not be available for images with long names.
+* Remove a race condition in which repositories deleted during tagmigration were causing tagmigration to fail.
+* Enhancements to the mirroring UI including:
+  * Fixed URL for the destination repository.
+  * Option to skip TLS verification when testing mirroring.
 
 ## 2.5.0 (2018-4-17)
 
@@ -100,6 +149,44 @@ specify `--log-protocol`.
   * Pushes to repos with promotion policies (repo as source) are broken when an
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+# Version 2.4
+
+## Version 2.4.6
+
+(26 July 2018)
+
+### Bug Fixes
+* Fixed bug where repository tag list UI was not loading after a tag migration.
+* The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface please run the rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID`.
+
+## Version 2.4.5
+
+(21 June 2018)
+
+**New Features**
+
+* Allow users to adjust DTR log levels for alternative logging solutions.
+
+**Bug Fixes**
+
+* Prevent OOM during garbage collection by reading less data into memory at a time.
+
+## Version 2.4.4
+
+(17 May 2018)
+
+**New features**
+
+* Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).
+
+**Bug fixes**
+
+* Fixed a problem that made pulling images from Google Cloud fail when DTR was configured to redirect requests.
+* Remove a race condition in which repos deleted during tagmigration were causing tagmigration to fail.
+* Reduce noise in the jobrunner logs by changing some of the more detailed messages to debug level.
+* Eliminate a race condition in which webhook for license updates doesn't fire.
 
 ## Version 2.4.3 (2018-03-19)
 

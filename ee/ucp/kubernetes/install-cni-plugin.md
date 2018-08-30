@@ -71,14 +71,13 @@ commands on the Kubernetes master node to disable IPIP overlay tunneling.
 # Exec into the Calico Kubernetes controller container.
 docker exec -it $(docker ps --filter name=k8s_calico-kube-controllers_calico-kube-controllers -q) sh
 
-# Download calicoctl, which must be included in the container image.
-apk update && apk add ca-certificates && update-ca-certificates && apk add openssl
-wget https://github.com/projectcalico/calicoctl/releases/download/v1.6.3/calicoctl
+# Download calicoctl
+wget https://github.com/projectcalico/calicoctl/releases/download/v3.1.1/calicoctl
 
 # Get the IP pool configuration. 
 ./calicoctl get ippool -o yaml > ippool.yaml
 
-# Edit the file: Disable IPIP in ippool.yaml by setting "enabled: false".
+# Edit the file: Disable IPIP in ippool.yaml by setting "ipipMode: Never".
 
 # Apply the edited file to the Calico plugin.
 ./calicoctl apply -f ippool.yaml

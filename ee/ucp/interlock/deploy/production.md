@@ -60,7 +60,7 @@ Add another constraint to the `ProxyConstraints` array:
 ```toml
 [Extensions]
   [Extensions.default]
-    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.labels.nodetype==loadbalancer"]
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.nodetype==loadbalancer"]
 ```
 
 [Learn how to configure ucp-interlock](configure.md).

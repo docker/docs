@@ -46,9 +46,7 @@ when the daemon becomes unavailable. **Only do one of the following**.
 
 ## Live restore during upgrades
 
-The live restore feature supports restoring containers to the daemon for
-upgrades from one minor release to the next, such as when upgrading from Docker
-1.12.1 to 1.12.2.
+Live restore supports keeping containers running across Docker daemon upgrades, though this is limited to patch releases and does not support minor or major daemon upgrades.
 
 If you skip releases during an upgrade, the daemon may not restore its
 connection to the containers. If the daemon can't restore the connection, it

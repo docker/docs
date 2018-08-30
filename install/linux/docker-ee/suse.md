@@ -164,6 +164,12 @@ Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker EE
 from the repository.
 
+There are currently two versions of Docker EE Engine available:
+
+* 18.03 - Use this version if you're only running Docker EE Engine.
+* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
+Engine, UCP, and DTR).
+
 #### Set up the repository
 
 1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
@@ -171,55 +177,33 @@ from the repository.
     with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ DOCKER_EE_URL="<DOCKER-EE-URL>"
+    $ DOCKER_EE_URL="<DOCKER-EE-URL>/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
+    ```
+
+    Where:
+    * `DOCKER-EE-URL` is the URL from your Docker Store subscription.
+    * `ARCHITECTURE` is `x86_64`, `s390x`, or `ppc64le`.
+    * `VERSION` is `18.03` or `17.06`.
+
+    As an example your command should look like:
+
+    ```bash
+    DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-17.06"
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
     command as-is. It works because of the variable you set in the previous
     step.
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/x86_64/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
+    $ sudo zypper addrepo $DOCKER_EE_URL docker-ee-stable
     ```
 
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
+3.  Import the GPG key from the repository. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/s390x/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
-    ```
-
-    </div>
-
-    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/ppc64le/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
-    ```
-
-    </div>
-    </div><!--tab-content-->
-
-
-3.  Import the GPG key from the repository. Use the command as-is. It works
-    because of the variable you set earlier.
-
-    ```bash
-    $ sudo rpm --import "${DOCKER_EE_URL}/sles/gpg"
+    $ sudo rpm --import "<DOCKER-EE-URL>/sles/gpg"
     ```
 
 #### Install Docker EE

@@ -27,8 +27,6 @@ freshness of your content.
 You can download precompiled notary binary for 64 bit Linux or macOS from the
 Notary repository's
 [Releases page on Github](https://github.com/docker/notary/releases).
-Windows is not officially tested, but if you are a developer and Windows user,
-we would appreciate any insight you can provide regarding issues.
 
 ## Understand Notary naming
 

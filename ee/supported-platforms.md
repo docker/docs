@@ -15,12 +15,45 @@ and supported to provide enterprises with the most secure container platform
 in the industry. For more info about Docker EE, including purchasing
 options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/).
 
-<!-- This is populated by logic in js/archive.js -->
-<p id="ee-version-div"></p>
+There are currently two versions of Docker EE Engine available:
+
+* 18.03 - Use this version if you're only running Docker EE Engine.
+* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
+Engine, UCP, and DTR).
+
+[Learn more](https://success.docker.com/article/engine-18-03-faqs)
 
 ## Docker EE tiers
 
 {% include docker_ce_ee.md %}
+
+### Enterprise Edition Basic
+
+With Docker EE Basic, you can deploy Docker Enterprise Engine
+to manage your container workloads in a flexible way. You can manage workloads
+on Windows, Linux, on-premise or on the cloud.
+
+Docker EE Basic has enterprise class support with defined SLAs, extended
+maintenance cycles for patches for up to 24 months.
+
+[Learn more about the supported platforms](#supported-platforms).
+
+### Enterprise Edition Standard and Advanced
+
+Docker EE Standard has everything the Basic edition has, and extends it with
+private image management, integrated image signing policies, and cluster
+management with support for Kubernetes and Swarm orchestrators.
+
+Docker EE Advanced takes this one step further and allows you to implement
+node-based RBAC policies, image promotion policies, image mirroring, and
+scan your images for vulnerabilities.
+
+[Learn more about Docker EE Standard and Advanced](/ee/index.md).
+
+> Compatibility Matrix
+>
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
+{: .important}
 
 ## Supported platforms
 
@@ -43,10 +76,15 @@ These are the operating systems where you can install Docker EE.
 | [SUSE Linux Enterprise Server]({{ page.install-prefix-ee }}/suse.md) | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
 | [Ubuntu]({{ page.install-prefix-ee }}/ubuntu.md)                     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
 | [Microsoft Windows Server 2016](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
+| [Microsoft Windows Server 1709](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
+| [Microsoft Windows Server 1803](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
 
-> Limitations on IBM Power architecture
+
+> When using Docker EE Standard or Advanced
 >
-> Neither UCP managers nor workers are supported on IBM Power.
+> IBM Power is not supported as managers or workers.
+> Microsoft Windows Server is not supported as a manager. Microsoft Windows
+> Server 1803 is not supported as a worker.
 
 ### Docker Certified Infrastructure
 
@@ -65,16 +103,10 @@ and third-party ecosystem solution briefs.
 
 ## Docker Enterprise Edition release cycles
 
-Docker EE is released quarterly. Releases use a time-based versioning
-scheme, so for example, Docker EE version 17.03 was released
-in March 2017. For schedule details, see
-[Time-based release schedule](/engine/installation/#time-based-release-schedule).
-
-Each Docker EE release is supported and maintained for one year and
+Each Docker EE release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker platform version. The API
-version doesn't change from Docker 1.13.1 to Docker 17.03. We maintain
+The Docker API version is independent of the Docker platform version. We maintain
 careful API backward compatibility and deprecate APIs and features slowly and
 conservatively. We remove features after deprecating them for a period of
 three stable releases. Docker 1.13 introduced improved interoperability

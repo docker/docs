@@ -541,14 +541,23 @@ See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certif
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
 
-## Docker Hub
+## Docker Store
 
-Select **Docker Hub** from the Docker for Windows menu to access the [Docker
-Hub](https://hub.docker.com){: target="_blank" class="_" } website where you can
-download apps. Docker Hub is the best place to find compliant, trusted
+Select **Docker Store** from the Docker for Windows menu to access the [Docker store](https://store.docker.com/) website. From there, you can log on to Docker Store and download apps.
+
+Docker Store is a component of the next-generation [Docker Hub](https://hub.docker.com) and the best place to find compliant, trusted
 commercial and free software distributed as Docker Images.
 
-Refer to the [Docker Hub documentation](/docker-hub/){: target="_blank" class="_" }
+Refer to the [Docker Store documentation](/docker-store/index.md){: target="_blank" class="_" }
+
+## Docker Cloud
+
+Select **Sign in /Create Docker ID** from the Docker for  Windows menu to access your [Docker Cloud](https://cloud.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Cloud repositories directly from the Docker for Windows menu.
+
+See these [Docker Cloud topics](/docker-cloud/index.md){: target="_blank" class="_" } to learn more:
+
+* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md){: target="_blank" class="_" }
+* [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
 
 ## Where to go next
 

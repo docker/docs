@@ -74,8 +74,8 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker Engine.
-`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that _**no separate VirtualBox is
-required**_.
+`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that
+no separate VirtualBox is required.
 
 ### What are system requirements for Docker for Mac?
 
@@ -86,10 +86,19 @@ the install guide.
 
 ### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
 
-Yes, if you [change the name of your macOS user account and home
-folder](https://support.apple.com/en-us/HT201548){: target="_blank" class="_"} after Docker for Mac is
-already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac fails to start. See also,
-[Docker for Mac does not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-does-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+Starting with Docker for Mac Edge 18.06, this path is relative to the user's
+home directory, so it should never be a problem.  The remainder of this section
+is about older releases of Docker for Mac.
+
+If, after installing Docker for Mac, you [change the name of your macOS user
+account and home folder](https://support.apple.com/en-us/HT201548), Docker for
+Mac fails to start.  [Reset to Factory Defaults](index.md#reset) is the simplest
+fix, but you'll lose all your settings, containers, images, etc.
+
+To preserve them, open the `~/Library/Group
+Containers/group.com.docker/settings.json` file, and update the `diskPath`
+entry.
+
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
@@ -145,6 +154,22 @@ response.
 If you do not want auto-send of usage data, use the Stable channel. For more
 information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Mac?").
 
+### How is personal data handled in Docker Desktop?
+
+When uploading diagnostics to help Docker with investigating issues, the
+uploaded diagnostics bundle may contain personal data such as usernames and IP
+addresses. The diagnostics bundles are only accessible to Docker Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. By default Docker
+Inc. will delete uploaded diagnostics bundles after 30 days unless they are
+referenced in an open issue on the
+[docker/for-mac](https://github.com/docker/for-mac/issues) or
+[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
+issue is closed, Docker Inc. will remove the referenced diagnostics bundles
+within 30 days. You may also request the removal of a diagnostics bundle by
+either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
+ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the
+diagnostics bundle to investigate specific user issues, but may derive high
+level (non personal) metrics such as the rate of issues from it.
 
 ## How can I...?
 ### Can I use Docker for Mac with swarm mode?
@@ -229,12 +254,9 @@ recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
 ### What is the disk image?
 
-The containers and images are stored in a _disk image_ named
-`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
-By default, the disk image is stored in
-`~/Library/Containers/com.docker.docker/Data`, in the `vms/0`
-subdirectory starting with Docker for Mac 18.01, and
-`com.docker.driver.amd64-linux` before.
+The containers and images are stored in a _disk image_ named `Docker.raw` or
+`Docker.qcow2` depending on your settings (see below).  By default, the disk
+image is stored in `~/Library/Containers/com.docker.docker/Data/vms/0`.
 
 ### Qcow2 or Raw?
 
@@ -252,8 +274,7 @@ physical size, add the `-ks` switch; to see the logical size in human readable
 form, add `-lh`:
 
 ```bash
-$ cd ~/Library/Containers/com.docker.docker/Data
-$ cd vms/0   # or com.docker.driver.amd64-linux
+$ cd ~/Library/Containers/com.docker.docker/Data/vms/0
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
