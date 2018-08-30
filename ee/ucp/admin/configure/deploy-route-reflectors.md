@@ -147,7 +147,7 @@ kind: CalicoAPIConfig
 metadata:
 spec:
   datastoreType: "etcdv3"
-  etcdEndpoints: "127.0.0.1:12379"
+  etcdEndpoints: "127.0.0.1:12378"
   etcdKeyFile: "/var/lib/docker/volumes/ucp-node-certs/_data/key.pem"
   etcdCertFile: "/var/lib/docker/volumes/ucp-node-certs/_data/cert.pem"
   etcdCACertFile: "/var/lib/docker/volumes/ucp-node-certs/_data/ca.pem"

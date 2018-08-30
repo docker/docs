@@ -20,13 +20,7 @@ Values of n in the -ee-<n> suffix must be 8 or higher
 * 4.00 GB of RAM
 * 3.00 GB of available disk space
 
-Also, make sure the hosts are running one of these operating systems:
-
-* A maintained version of CentOS 7. Archived versions aren't supported or tested.
-* Red Hat Enterprise Linux 7.0, 7.1, 7.2, or 7.3
-* Ubuntu 14.04 LTS or 16.04 LTS
-* SUSE Linux Enterprise 12
-* Oracle Linux 7.3
+Also, make sure the hosts are running one of the supported operating systems from the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix).
 
 [Learn more about Docker EE system requirements](ucp/admin/install/system-requirements.md).
 

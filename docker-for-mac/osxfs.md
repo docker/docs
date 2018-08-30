@@ -166,7 +166,7 @@ slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-
 this topic provides an explanation of the issues, recent progress in addressing
 them, how the community can help us, and what you can expect in the
 future. This explanation derives from a [post about understanding
-performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158?u=orangesnap)
+performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158)
 by David Sheets (@dsheets) on the [Docker development
 team](https://forums.docker.com/groups/Docker) to the forum topic just
 mentioned. We want to surface it in the documentation for wider reach.

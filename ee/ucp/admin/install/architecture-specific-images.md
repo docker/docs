@@ -26,7 +26,8 @@ docker container run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --log-driver none \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}${_ARCH} \
-  support > docker-support.tgz
+  support > \
+  docker-support-${HOSTNAME}-$(date +%Y%m%d-%H_%M_%S).tgz
 ```
 
 In this example, the environment variable is named `_ARCH`, but you can use any 

@@ -51,7 +51,7 @@ You only need to set up the repository once, after which you can install Docker 
     $ sudo rm /etc/yum.repos.d/docker*.repo
     ```
 
-2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends.
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
 
     ```bash
     $ export DOCKERURL="<DOCKER-EE-URL>"
@@ -85,13 +85,13 @@ You only need to set up the repository once, after which you can install Docker 
 
     The repository can differ per your architecture and cloud provider, so review the options in this step before running:
 
-    **For all architectures _except_ IBM Power PC:**
+    **For all architectures _except_ IBM Power:**
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
     ```
 
-    **For IBM Power PC only (little endian):**
+    **For IBM Power only (little endian):**
 
     ```bash
     $ sudo yum-config-manager --enable extras
@@ -127,7 +127,20 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-1.  Install the _latest version_ of Docker EE, or go to the next step to install a specific version:
+There are currently two versions of Docker EE Engine available:
+
+* 18.03 - Use this version if you're only running Docker EE Engine.
+* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
+Engine, UCP, and DTR).
+
+1. By default, Docker EE Engine 17.06 is installed. If you want to install the
+18.03 version run:
+
+    ```bash
+    sudo yum-config-manager --enable docker-ee-stable-18.03
+    ```
+
+2.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum -y install docker-ee
@@ -135,7 +148,7 @@ You only need to set up the repository once, after which you can install Docker 
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+3.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
 
     a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
 
@@ -155,7 +168,7 @@ You only need to set up the repository once, after which you can install Docker 
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-3.  Start Docker:
+4.  Start Docker:
 
     > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
@@ -163,7 +176,7 @@ You only need to set up the repository once, after which you can install Docker 
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+5.  Verify that Docker EE is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 
@@ -201,7 +214,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
 
 {% if linux-dist == "centos" %}
 1.  Go to the Docker EE repository URL associated with your trial or subscription
-    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages`
+    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
     and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endif %}
 
@@ -271,7 +284,14 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     $ sudo rm -rf /var/lib/docker
     ```
 
-3.  If desired, remove the `devicemapper` thin pool and reformat the block
+3.  Delete other Docker related resources:
+    ```bash
+    $ sudo rm -rf /run/docker
+    $ sudo rm -rf /var/run/docker
+    $ sudo rm -rf /etc/docker
+    ```
+
+4.  If desired, remove the `devicemapper` thin pool and reformat the block
     devices that were part of it.
 
 You must delete any edited configuration files manually.

@@ -3,6 +3,7 @@ description: Troubleshooting, logs, and known issues
 keywords: windows, troubleshooting, logs, issues
 redirect_from:
 - /windows/troubleshoot/
+- /docker-for-win/troubleshoot/
 title: Logs and troubleshooting
 ---
 
