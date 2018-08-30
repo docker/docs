@@ -597,6 +597,12 @@ Release notes for stable versions are listed first. You can
 
 * Disable legacy registry (v1) by default [#33629](https://github.com/moby/moby/pull/33629)
 
+## 17.03.3-ce (2018-08-30)
+
+### Runtime
+
+* Update go-connections to d217f8e [#28](https://github.com/docker/engine/pull/28)
+
 ## 17.03.2-ce (2017-05-29)
 
 ### Networking
