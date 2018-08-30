@@ -20,6 +20,14 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
+## 2.5.5 (2018-8-30)
+
+### Bug Fixes
+
+* Fixed bug where repository tag list UI was not loading after a tag migration.
+* Fixed bug to enable poll mirroring with Windows images.
+* The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface run rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID`.
+
 ## 2.5.3 (2018-6-21)
 
 ### New Features
