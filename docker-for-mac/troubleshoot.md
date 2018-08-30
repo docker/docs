@@ -18,7 +18,6 @@ technical support for various subscription levels.
 
 ## Diagnose problems, send feedback, and create GitHub issues
 
-### In-app diagnostics
 If you encounter problems for which you do not find solutions in this
 documentation, on [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
@@ -42,61 +41,6 @@ GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
 “create new issue” template, to be completed before submission.
 
 ![issue template](images/issues-template.png){:width="600px"}
-
-### Diagnosing from the terminal
-
-On occasions it is useful to run the diagnostics yourself, for instance if
-Docker for Mac cannot start.
-
-First locate the `docker-diagnose` tool.  If you installed Docker for Mac in the
-Applications directory, then it is
-`/Applications/Docker.app/Contents/Resources/bin/docker-diagnose`.  Pass
-`--help` to see the supported options:
-
-```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose --help
-```
-
-Then to create *and upload* diagnostics, run:
-
-```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose \
-  --upload --last 1d
-macOS: version 10.13.4 (build: 17E202)
-Docker.app: version: 18.06.0-ce-rc1-mac67 (1fa4e2acfc1a52f79623add2390604515d32297e)
-Local time: Fri May 25 14:50:51 CEST 2018
-UTC:        Fri May 25 12:50:51 UTC 2018
-Timestamp:  20180525-145051
-Running diagnostic tests:
-[OK]      Files
-[OK]      console-ring does not exist
-[OK]      Kubernetes (disabled)
-[OK]      Docker CLI
-[OK]      environment
-[OK]      vmnetd
-[OK]      osxfs
-[OK]      VPNKit
-[OK]      driver.amd64-linux
-[OK]      Docker
-[OK]      VT-x
-[OK]      kern.hv_support
-[OK]      Hypervisor
-[OK]      Disk
-Docker logs are being collected into /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
-Your unique id is: D1F48686-F045-4708-85E3-0635B729A596
-Please quote this in all correspondence.
-```
-
-The diagnostics ID (here D1F48686-F045-4708-85E3-0635B729A596/20180525-145051)
-is composed of your user ID (D1F48686-F045-4708-85E3-0635B729A596) and a
-timestamp (20180525-145051).  Be sure to provide us with the full diagnostics
-ID, not just the user ID.
-
-Don't hesitate browsing the content of these diagnostics:
-
-```sh
-$ open /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
-```
 
 
 <a name="logs"></a>
@@ -169,21 +113,27 @@ the Getting Started topic.
 
 ### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
 
-See [Do I need to reinstall Docker for Mac if I change the name of my macOS
+If, after installing Docker for Mac, you [change the name of your macOS user
+account and home folder](https://support.apple.com/en-us/HT201548), Docker for
+Mac fails to start. To solve this problem, uninstall and reinstall Docker for Mac under the new user account.
+
+See also, the discussion on the issue
+[docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I
+need to reinstall Docker for Mac if I change the name of my macOS
 account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
 in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
-application file is not found, access to a volume mount is denied, or a service
-cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
-you might need to enable [file sharing](index.md#file-sharing).
+application file is not found, access to a volume mount is denied, or a service cannot
+start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
+need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} -->
-**Preferences** --> **File sharing** and share the drive that contains the
-Dockerfile and volume.
+`/Users` directory. Go to ![whale menu](images/whale-x.png){:
+.inline} --> **Preferences** --> **File sharing** and share the drive that
+contains the Dockerfile and volume.
 
 ### Incompatible CPU detected
 
@@ -194,8 +144,7 @@ Docker for Mac is only compatible with Macs that have a CPU that supports the
 Hypervisor framework. Most Macs built in 2010 and later support it, as described
 in the Apple Hypervisor Framework documentation about supported hardware:
 
-*Generally, machines with an Intel VT-x feature set that includes Extended Page
-Tables (EPT) and Unrestricted Mode are supported.*
+*Generally, machines with an Intel VT-x feature set that includes Extended Page Tables (EPT) and Unrestricted Mode are supported.*
 
 To check if your Mac supports the Hypervisor framework, run this command in a
 terminal window.
@@ -220,9 +169,9 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version of the
-  application (![whale menu](images/whale-x.png){: .inline} --> **Quit
-  Docker**). Otherwise, you get an "application in use" error when you try to
-  copy the new app from the `.dmg` to `/Applications`.
+  application ( ![whale menu](images/whale-x.png){: .inline} -->
+  **Quit Docker**). Otherwise, you get an "application in use" error when you
+  try to copy the new app from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from
     the previously installed version.

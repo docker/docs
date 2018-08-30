@@ -9,8 +9,6 @@ by organizing nodes into collections and granting `Scheduler` access for
 different users. To control access to nodes, move them to dedicated collections
 where you can grant access to specific users, teams, and organizations.
 
-![](../images/containers-and-nodes-diagram.svg)
-
 In this example, a team gets access to a node collection and a resource
 collection, and UCP access control ensures that the team members can't view
 or use swarm resources that aren't in their collection.
@@ -178,7 +176,7 @@ that has a `Service Create` grant for the user.
 ## Deploy a Kubernetes application
 
 Starting in Docker Enterprise Edition 2.0, you can deploy a Kubernetes workload
-to worker nodes, based on a Kubernetes namespace.
+to worker nodes, based on a Kubernetes namespace. 
 
 1.  Convert a node to use the Kubernetes orchestrator.
 2.  Create a Kubernetes namespace.
@@ -186,12 +184,12 @@ to worker nodes, based on a Kubernetes namespace.
 4.  Link the namespace to a node collection.
 5.  Deploy a Kubernetes workload.
 
-### Convert a node to Kubernetes
+### Convert a node to Kubernetes 
 
 To deploy Kubernetes workloads, an administrator must convert a worker node to
 use the Kubernetes orchestrator.
 [Learn how to set the orchestrator type](../admin/configure/set-orchestrator-type.md)
-for your nodes in the `/Prod` collection.
+for your nodes in the `/Prod` collection. 
 
 ### Create a Kubernetes namespace
 
@@ -230,8 +228,8 @@ The last step is to link the Kubernetes namespace the `/Prod` collection.
 
 1.  Navigate to the **Namespaces** page, and find the **ops-nodes** namespace
     in the list.
-2.  Click the **More options** icon and select **Link nodes in collection**.
-
+2.  Click the **More options** icon and select **Link nodes in collection**. 
+    
     ![](../images/isolate-nodes-7.png){: .with-border}
 
 3.  In the **Choose collection** section, click **View children** on the
@@ -275,7 +273,7 @@ The last step is to link the Kubernetes namespace the `/Prod` collection.
 
 5.  Click **Create** to deploy the workload.
 6.  In the left pane, click **Pods** and confirm that the workload is running
-    on pods in the `ops-nodes` namespace.
+    on pods in the `ops-nodes` namespace. 
 
     ![](../images/isolate-nodes-10.png){: .with-border}
 

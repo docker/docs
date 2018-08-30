@@ -243,8 +243,6 @@ supported by **Compose 1.21.0+**.
 Introduces the following additional parameters:
 
 - [`platform`](compose-file-v2.md#platform) for service definitions
-- Support for extension fields at the root of service, network, and volume
-  definitions
 
 ### Version 3
 
@@ -302,18 +300,6 @@ only available with Docker Engine version **18.02.0** and higher.
 Introduces the following additional parameters:
 
 - [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
-
-### Version 3.7
-
-An upgrade of [version 3](#version-3) that introduces new parameters. It is
-only available with Docker Engine version **18.06.0** and higher.
-
-Introduces the following additional parameters:
-
-- [`init`](index.md#init) in service definitions
-- [`rollback_config`](index.md#rollback_config) in deploy configurations
-- Support for extension fields at the root of service, network, volume, secret
-  and config definitions
 
 ## Upgrading
 

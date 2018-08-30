@@ -252,7 +252,12 @@ changes, click another preference tab, then choose to discard or not apply chang
 
 ### Kubernetes
 
-Docker for Mac 17.12 CE (and higher) includes a standalone Kubernetes server
+**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge channel.**
+Kubernetes support is not included in Docker for Mac Stable releases. To find
+out more about Stable and Edge channels and how to switch between them, see
+[General configuration](#general){:target="_blank" class="_"}.
+
+Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
 that runs on your Mac, so that you can test deploying your Docker workloads on
 Kubernetes.
 

@@ -183,8 +183,6 @@ import (
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
-    "github.com/docker/docker/pkg/stdcopy"
-
     "golang.org/x/net/context"
 )
 
@@ -226,7 +224,7 @@ func main() {
         panic(err)
     }
 
-    stdcopy.StdCopy(os.Stdout, os.Stderr, out)
+    io.Copy(os.Stdout, out)
 }
 ```
 
@@ -282,7 +280,6 @@ file them with the library maintainers.
 | HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)               |
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
-| Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
 | NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |

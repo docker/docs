@@ -2,12 +2,6 @@ It is possible to re-use configuration fragments using extension fields. Those
 special fields can be of any format as long as they are located at the root of
 your Compose file and their name start with the `x-` character sequence.
 
-> **Note**
->
-> Starting with the 3.7 format (for the 3.x series) and 2.4 format
-> (for the 2.x series), extension fields are also allowed at the root
-> of service, volume, network, config and secret definitions.
-
 ```none
 version: '2.1'
 x-custom:
@@ -35,7 +29,7 @@ logging:
 You may write your Compose file as follows:
 
 ```none
-version: '3.4'
+version: '2.1'
 x-logging:
   &default-logging
   options:
@@ -56,7 +50,7 @@ It is also possible to partially override values in extension fields using
 the [YAML merge type](http://yaml.org/type/merge.html). For example:
 
 ```none
-version: '3.4'
+version: '2.1'
 x-volumes:
   &default-volume
   driver: foobar-storage

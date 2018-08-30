@@ -305,7 +305,7 @@ shell to talk to different Docker engines.
     DOCKER_HOST=tcp://192.168.99.100:2376
     DOCKER_MACHINE_NAME=default
     DOCKER_TLS_VERIFY=1
-    DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
+    DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
     ```
 
     If it returns output (as shown in the example), you can unset the `DOCKER` environment variables.

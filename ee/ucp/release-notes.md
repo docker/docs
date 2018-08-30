@@ -1,9 +1,8 @@
 ---
-title: UCP release notes
+title: UCP 3.0 release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
-toc_min: 1
 toc_max: 2
 redirect_from:
   - /datacenter/ucp/2.2/guides/release-notes/
@@ -12,120 +11,8 @@ redirect_from:
 
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for the latest UCP version.
-You can then use [the upgrade instructions](admin/install/upgrade.md) to
+You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
-
-* [Version 3.0](#version-30)
-* [Version 2.2](#version-22)
-
-# Version 3.0
-
-## 3.0.4 (2018-08-09)
-
-**Bug fixes**
-
-* Security
-  * Fixed a critical security issue where the LDAP bind username and password 
-    were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
-
-**Known Issue**
-
-* You must manually pull `docker/ucp-agent:3.0.4` in the images section of the web UI before upgrading. Alternately, you can just pull `docker/ucp-agent:3.0.4` on every manager node.
-
-## 3.0.3 (2018-07-26)
-
-**New platforms**
-* UCP now supports running Windows Server 1803 workers
-   * Server 1803 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
-   * Offline bundles `ucp_images_win_1803_3.0.3.tar.gz` have been added.
-* UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES 12 SP 3. Interlock is currently not supported for 3.0.x on Z.
-
-**Bug Fixes**
-* Core
-   * Optimize swarm service read api calls through UCP
-   * Fixes an issue where some UCP Controller API calls may hang indefinitely.
-   * Default Calico MTU set to 1480
-   * Calico is upgraded to 3.0.8
-   * Compose for Kubernetes logging improvements
-   * Fixes an issue where backups would fail if UCP was not licensed.
-   * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the UI.
-   * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks.
-
-
-## 3.0.2 (2018-06-21)
-
-**New Features**
-* UCP now supports running Windows Server 1709 workers
-   * Server 1709 provides smaller Windows base image sizes, as detailed [here](https://docs.microsoft.com/en-us/windows-server/get-started/whats-new-in-windows-server-1709)
-   * Server 1709 provides relaxed image compatibility requirements, as detailed [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility)
-   * Server 1709 ingress routing, VIP service discovery, and named pipe mounting are not supported in this release.
-   * Offline bundle names are changed from `ucp_images_win_3.0.1.tar.gz` to `ucp_images_win_2016_3.0.2.tar.gz` and `ucp_images_win_1709_3.0.2.tar.gz` based on Windows Server versions.
-* UCP now supports running RHEL 7.5.  Please refer to the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
-* Added support for dynamic volume provisioning in Kubernetes for AWS EBS and
-Azure Disk when installing UCP with the `--cloud-provider` option.
-
-**Bug Fixes**
-* Core
-   * Fixed an issue for anonymous volumes in Compose for Kubernetes.
-   * Fixed an issue where a fresh install would have an initial per-user session
-   limit of unlimited rather than the expected limit of 10 minutes.
-   * Added separate resource types for Kubernetes subresources (e.g. pod/log)
-   so that users can get separate permissions for those resources, as with the
-   built-in Kubernetes RBAC authorizer. If you had a custom role with
-   (for instance) Pod Get permissions, you may need to create a new custom
-   role with permissions for each new subresource.
-   * To deploy Pods with Privileged options, users now require a grant with the
-   role `Full Control` for all namespaces.
-   * The `/api/ucp/config` endpoint now includes default node orchestrator.
-   * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
-   MTU sizes in Calico.
-   * When a route is not found, interlock now returns a 503 (the expected
-     behavior) instead of a 404.
-
-* UI/UX
-   * Fixed an issue that causes LDAP configuration UI to not work properly.
-
-## 3.0.1 (2018-05-17)
-
-**Bug Fixes**
-* Core
-  * Bumped Kubernetes version to 1.8.11.
-  * Compose for Kubernetes now respects the specified port services are exposed on.
-  This port must be in the `NodePort` range.
-  * Kubernetes API server port is now configurable via `--kube-apiserver-port`
-  flag at install or `cluster_config.kube_apiserver_port` in UCP config.
-  * Fixed an issue where upgrade fails due to missing `ucp-kv` snapshots.
-  * Fixed an issue where upgrade fails due to layer 7 routing issues.
-  * `ucp-interlock-proxy` no longer tries to schedule components on Windows nodes.
-  * Fixed an issue where a Kubernetes networking failure would not stop UCP from
-  installing successfully.
-  * Fixed an issue where encrypted overlay networks could not communicate on
-  firewalled hosts.
-  * Fixed an issue where Pod CIDR and Node IP values could conflict at install
-  Installation no longer fails if an empty `PodCIDR` value is set in the UCP
-  config at install time. Instead, it falls back to default CIDR.
-
-*  UI/UX
-  * Fixed an issue where UCP banners redirected to older UCP 2.2 documentation.
-
-
-**Known issues**
-
-* Encrypted overlay networks may not work after upgrade from 3.0.0.  Apply the following to
-  all the nodes after the upgrade.
-    ```
-    iptables -t nat -D KUBE-MARK-DROP -j MARK --set-xmark 0x8000/0x8000
-    iptables -t filter -D KUBE-FIREWALL -m comment --comment "kubernetes firewall for dropping marked packets" -m mark --mark 0x8000/0x8000 -j DROP
-    ```
- * `ucp-kube-controller-manager` emits a large number of container logs.
- * Excessive delay is seen when sending `docker service ls` via UCP client
-   bundle on a cluster that is running thousands of services.
- *  Inter-node networking may break on Kubernetes pods while the `calico-node`
-  pods are being upgraded on each node. This may cause up to a few minutes of
-  networking disruption for pods on each node during the upgrade process,
-  depending on how quickly `calico-node` gets upgraded on those nodes.
-  * `ucp-interlock-proxy` may fail to start when two or more services are
- configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
 
 ## Version 3.0.0 (2018-04-17)
 
@@ -209,12 +96,6 @@ will be available in future releases.
   * Kubernetes is not yet supported for Windows based workloads. Use Swarmkit for
   Windows based workloads instead.
   * EE 2.0 is not yet supported in IBM Z platforms.
-* Upgrade
-  * After upgrading to 3.0, UCP uses the `191.168.0.0/16` CIDR to allocate IPs
-  for Kubernetes Pods. This option is customizable when doing a fresh installation,
-  but not during an upgrade. As a workaround to configure this option, before
-  upgrading, [update the UCP configuration](admin/configure/ucp-configuration-file.md)
-  to include `pod_cidr = "<ip>/<mask>"` under the `[cluster_config]` option.
 * CLI
   * Both Docker and `kubectl` CLIs report that UCP is running Kubernetes 1.8.2,
   when in fact it is running 1.8.9.
@@ -226,7 +107,7 @@ will be available in future releases.
   [Learn how to deploy EE 2.0 on Azure](https://docs.docker.com/ee/ucp/admin/install/install-on-azure/).
   * Azure IPAM will fail if nodes in the cluster are connected to different subnets.
   As a workaround ensure network setup avoids multiple subnets. This will be
-  rectified in an upcoming patch release.
+  rectified in an upcoming patch release (#12894).
   * UCP Calico control-plane supports full-mesh BGP peering only at release-time.
   Calico control-plane may cause high CPU on nodes in clusters above 100 nodes.
   A route reflector based partial-mesh BGP control-plane will reduce CPU
@@ -272,78 +153,6 @@ stack as a Swarm service or Kubernetes workload.
 from the UCP web UI. You can configure Docker Engine for this.
 * The option to configure a rescheduling policy for basic containers is
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
-
-# Version 2.2
-
-## Version 2.2.12 (2018-08-09)
-
-**Bug fixes**
-
-* Security
-  * Fixed a critical security issue where the LDAP bind username and password 
-    were stored in clear text on UCP hosts. Please refer to the following KB article 
-    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
-    for proper implementation of this fix.
-
-## Version 2.2.11 (2018-07-26)
-
-**New platforms**
-* UCP 2.2.11 is supported running on RHEL 7.5 and Ubuntu 18.04.
-
-**Bug fixes**
-
-* Security
-  * Fixed an issue that causes some security headers to not be added to all API responses.
-
-* Core
-  * Optimized swarm service read API calls through UCP.
-  * Upgraded `RethinkDB` image to address potential security vulnerabilities.
-  * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
-  * Upgraded `etcd` version to 2.3.8.
-  * Fixed an issue that causes classic Swarm to provide outdated data.
-  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes.
-
-* UI
-  * Fixed an issue that causes UI to not parse volume options correctly.
-  * Fixed an issue that prevents the user from deploying stacks via UI.
-
-## Version 2.2.10 (2018-05-17)
-
-**Bug fixes**
-
-* Security
-  * Security headers are added for PCI compliance to all API responses.
-
-* UI
-  * Users can now set log driver name and options on both create and update
-   service screens.
-  * Fixed an issue that causes legacy collections on services to break UI. Now
-   legacy collections are properly prepended with "/Shared/Legacy/".
-  * Fixed an issue that causes service counts in status summary to be shown
-   incorrectly.
-
-* Authentication/Authorization
-  * Private collections are now only created for those users which have
-   previously logged in.
-  * The logic which reconciles collection labels is now skipped if the
-   node already has an access label.
-  * Fixed an issue where LDAP syncs would always search against the last server
-   in the list of additional domains if the search base DN matched any of those
-   domains.
-
-* Core
-  * UCP can now be displayed in an iframe for pages hosted on the same domain.
-  * Fixed an issue that prevents non-admin users to do `docker build` on UCP.
-  * Fixed an issue where a node's status may be reported incorrectly in node
-   listings.
-  * UCP can now be installed on a system with more than 127 logical CPU cores.
-  * Improved the performance of UCP's local and global health checks.
-
-**Known Issue**
-
-* Excessive delay is seen when sending `docker service ls` via UCP client
- bundle on a cluster that is running thousands of services.
-
 
 ## Version 2.2.9 (2018-04-17)
 

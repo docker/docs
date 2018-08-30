@@ -61,7 +61,7 @@ specially useful if the UCP web application is not working.
 
 ## Get a support dump
 
-Before making any changes to UCP, download a [support dump](../../../get-support.md).
+Before making any changes to UCP, download a [support dump](../../get-support.md).
 This allows you to troubleshoot problems which were already happening before
 changing UCP configurations.
 

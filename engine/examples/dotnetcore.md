@@ -41,7 +41,7 @@ Windows](/docker-for-windows/). Read more on [switching containers](/docker-for-
    the `Dockerfile` to use the DLL file of your project.
 
 ```dockerfile
-FROM microsoft/dotnet:sdk AS build-env
+FROM microsoft/aspnetcore-build:2.0 AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
@@ -53,7 +53,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
@@ -96,6 +96,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 ## Further reading
 
   - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
-  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
-  - [Building Docker Images for .NET Core Applications](https://docs.microsoft.com/dotnet/core/docker/building-net-docker-images)
-  - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)
+  - [Microsoft ASP.NET Core on Docker
+    Hub](https://hub.docker.com/r/microsoft/aspnetcore/)
+  - [ASP.NET Core with Docker Tools for Visual
+    Studio](https://blogs.msdn.microsoft.com/webdev/2016/11/16/new-docker-tools-for-visual-studio/)

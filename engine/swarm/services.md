@@ -947,7 +947,6 @@ Valid placeholders for the Go template are:
 | `.Service.Name`   | Service name   |
 | `.Service.Labels` | Service labels |
 | `.Node.ID`        | Node ID        |
-| `.Node.Hostname`  | Node hostname  |
 | `.Task.Name`      | Task name      |
 | `.Task.Slot`      | Task slot      |
 

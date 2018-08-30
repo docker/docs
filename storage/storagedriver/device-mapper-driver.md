@@ -10,30 +10,32 @@ Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
 leverages the thin provisioning and snapshotting capabilities of this framework
 for image and container management. This article refers to the Device Mapper
-storage driver as `devicemapper`, and the kernel framework as _Device Mapper_.
+storage driver as `devicemapper`, and the kernel framework as `Device Mapper`.
 
 For the systems where it is supported, `devicemapper` support is included in
 the Linux kernel. However, specific configuration is required to use it with
-Docker. 
+Docker. For instance, on a stock installation of RHEL or CentOS, Docker
+defaults to `overlay`, which is not a supported configuration.
 
 The `devicemapper` driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
 adding physical storage to your Docker host, and they perform better than using
-a filesystem at the operating system (OS) level. 
+a filesystem at the level of the operating system.
 
 ## Prerequisites
 
-- `devicemapper` storage driver is a supported storage driver for Docker
-  EE on many OS distribution. See the
-  [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
+- `devicemapper` storage driver is the only supported storage driver for Docker
+  EE and Commercially Supported Docker Engine (CS-Engine) on RHEL, CentOS, and
+  Oracle Linux. See the
+  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 
 - `devicemapper` is also supported on Docker CE running on CentOS, Fedora,
   Ubuntu, or Debian.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so you do
-  not need to recreate them later.
+  and push existing images to Docker Hub or a private repository, so that you
+  not need to re-create them later.
 
 ## Configure Docker with the `devicemapper` storage driver
 
@@ -43,9 +45,9 @@ Before following these procedures, you must first meet all the
 ### Configure `loop-lvm` mode for testing
 
 This configuration is only appropriate for testing. Loopback devices are slow
-and resource-intensive, and they require you to create file on disk at specific sizes.
-They can also introduce race conditions. They are available for testing because
-the setup is easier.
+and resource-intensive, and require you to create file on disk at specific sizes.
+They can also introduce race conditions. They are supposed for testing because
+the set-up is easier.
 
 For production systems, see
 [Configure direct-lvm mode for production](#configure-direct-lvm-mode-for-production).
@@ -136,14 +138,14 @@ below to configure Docker to use the `devicemapper` storage driver in
 
 > **Warning**: Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so you do not
-  need to recreate them later.
+  and push existing images to Docker Hub or a private repository, so that you
+  don't need to recreate them later.
 
 #### Allow Docker to configure direct-lvm mode
 
-With Docker `17.06` and higher, Docker can manage the block device for you,
-simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh 
-Docker setups only.** You can only use a single block device. If you need to
+In Docker 17.06 and higher, Docker can manage the block device for you,
+simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh
+Docker set-ups only.** You can only use a single block device. If you need to
 use multiple block devices, [configure direct-lvm mode
 manually](#configure-direct-lvm-mode-manually) instead. The following new
 configuration options have been added:
@@ -158,7 +160,7 @@ configuration options have been added:
 | `dm.directlvm_device_force`     | Whether to format the block device even if a filesystem already exists on it. If set to `false` and a filesystem is present, an error is logged and the filesystem is left intact. | No        | false   | `dm.directlvm_device_force=true`   |
 
 Edit the `daemon.json` file and set the appropriate options, then restart Docker
-for the changes to take effect. The following `daemon.json` configuration sets all of the
+for the changes to take effect. The following `daemon.json` sets all of the
 options in the table above.
 
 ```json

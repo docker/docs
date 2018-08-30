@@ -27,7 +27,6 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 
 - 26
 - 27
-- 28
 
 ### Uninstall old versions
 

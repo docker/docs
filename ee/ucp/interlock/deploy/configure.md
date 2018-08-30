@@ -28,7 +28,6 @@ service and save it to a file:
 3. Create a new Docker configuration object from the file you've edited:
 
    ```bash
-   NEW_CONFIG_NAME="com.docker.ucp.interlock.conf-$(( $(cut -d '-' -f 2 <<< "$CURRENT_CONFIG_NAME") + 1 ))"
    docker config create $NEW_CONFIG_NAME config.toml
    ```
 

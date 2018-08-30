@@ -111,7 +111,7 @@ Remove the container:
 ```bash
 $ docker container stop tmptest
 
-$ docker container rm tmptest
+$ Docker container rm tmptest
 ```
 
 ### Specify tmpfs options
