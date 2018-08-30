@@ -46,6 +46,7 @@ swarm to maintain a consistent view of the swarm and all services running on it.
 swarm.
 * creates an overlay network named `ingress` for publishing service ports
 external to the swarm.
+* creates an overlay default IP addresses and subnet mask for your networks
 
 The output for `docker swarm init` provides the connection command to use when
 you join new worker nodes to the swarm:
@@ -62,6 +63,34 @@ To add a worker to this swarm, run the following command:
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
+### Configure the default IP address pools and subnet mask
+
+To create the initial address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. The default address pool uses CIDR notation.
+
+With this configuration, the Docker engine will auto-allocate subnets for newly created network with a defined subnet size (such as `24`).
+
+The subnet range comes from the `--default-addr-pool`, such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range.
+
+The format of the command is:
+```
+$ docker swarm init --default-address-pool <IP range in CIDR> [--default-address-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
+```
+To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
+
+```
+$ docker swarm init --default-addr-pool 10.20.0.0/16
+```
+
+To create a default IP address pool with a /16 (class B) for the 10.20.0.0 and 10.30.0.0 networks, and to create a subnet mask of /24 (class C) for each network looks like this:
+
+```
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool 10.30.0.0/16 --default-addr-pool-mask-length 24
+```
+
+In this example, `docker network create -d overlay net1` will result in `10.20.1.0/24` as the allocated subnet for `net1`, and `docker network create -d overlay net2` will result in `10.20.2.0/24` as the allocated subnet for `net2`. This continues until all the subnets are exhausted.
+
+Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
+for more detail on the advertise address.
 
 ### Configure the advertise address
 
