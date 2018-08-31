@@ -4,7 +4,8 @@ Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP A
 
 ## Procedure
 
-1. Download the UCP Client bundle.
+1. Download the UCP Client bundle [topic] (https://success.docker.com/article/download-client-bundle-from-the-cli).
+
 2.  Retrieve JSON for current audit log configuration.
 ```
 export DOCKER_CERT_PATH=~/ucp-bundle-dir/
@@ -22,7 +23,7 @@ curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cac
 ```
 
 5. Create any workload or RBAC grants in Kube and generate a support dump to check the contents of ucp-controller.log file for audit log entries.
-6.
+
 6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK: https://success.docker.com/article/elasticsearch-logstash-kibana-logging
 
 ### API Endpoints ignored
