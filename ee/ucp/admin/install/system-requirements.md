@@ -66,7 +66,7 @@ host types:
 | managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
 | managers          | TCP 2377 (configurable) | Internal,          | Port for control communication between swarm nodes                            |
 | managers, workers | UDP 4789                | Internal,          | Port for overlay networking                                                   |
-| managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server                                                |
+| managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server endpoint                                               |
 | managers, workers | TCP 6444                | Self               | Port for Kubernetes API reverse proxy                                         |
 | managers, workers | TCP, UDP 7946           | Internal           | Port for gossip-based clustering                                              |
 | managers, workers | TCP 10250               | Internal           | Port for Kubelet                                                              |
