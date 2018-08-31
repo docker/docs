@@ -5,7 +5,6 @@ Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP A
 ## Procedure
 
 1. Download the UCP Client bundle.
-2.
 2.  Retrieve JSON for current audit log configuration.
 ```
 export DOCKER_CERT_PATH=~/ucp-bundle-dir/
