@@ -21,6 +21,11 @@ adopted as quickly for consistency and compatibility reasons.
 
 ## 18.03.1-ee-3 (2018-08-30)
 
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
 ### Builder
 
 - Fix: no error if build args are missing during docker build. [docker/engine#25](https://github.com/docker/engine/pull/25)
