@@ -154,7 +154,7 @@ adopted as quickly for consistency and compatibility reasons.
 ### Runtime
 
 * Use rslave propagation for mounts from daemon root. [moby/moby#36055](https://github.com/moby/moby/pull/36055)
-* Use rslave instead of rprivate in choortarchive. [moby/moby#35217](https://github.com/moby/moby/pull/35217)
+* Use rslave instead of rprivate in chrootarchive. [moby/moby#35217](https://github.com/moby/moby/pull/35217)
 * Set daemon root to use shared propagation. [moby/moby#36096](https://github.com/moby/moby/pull/36096)
 * Windows: Increase container default shutdown timeout. [moby/moby#35184](https://github.com/moby/moby/pull/35184)
 * Avoid using all system memory with authz plugins. [moby/moby#36595](https://github.com/moby/moby/pull/36595)
