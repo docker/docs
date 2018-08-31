@@ -1,4 +1,16 @@
-Audit logs can be considered a type of event that are more focused on external user/agent actions and security than understanding state or events of the system itself. They are a security-relevant chronological set of records documenting the sequence of activities that have affected system by individual users, administrators or other components of the system.
+---
+title: Create UCP audit logs
+description: Learn how to create audit logs of all activity in UCP
+keywords: logs, ucp, swarm, kubernetes
+---
+
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+{: .important}
+
+
+Audit logs are a type of event that are more focused on external user/agent actions and security than understanding state or events of the system itself. They are a security-relevant chronological set of records documenting the sequence of activities that have affected system by individual users, administrators or other components of the system.
 
 Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. zCreating audit logs is mainly CLI driven and is an UCP component that integrates with Swarm, K8s, and UCP APIs.
 
@@ -24,7 +36,7 @@ curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cac
 
 5. Create any workload or RBAC grants in Kube and generate a support dump to check the contents of ucp-controller.log file for audit log entries.
 
-6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK: https://success.docker.com/article/elasticsearch-logstash-kibana-logging
+6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. https://success.docker.com/article/elasticsearch-logstash-kibana-logging
 
 ### API endpoints ignored
 
