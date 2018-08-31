@@ -66,7 +66,7 @@ host types:
 | managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
 | managers          | TCP 2377 (configurable) | Internal,          | Port for control communication between swarm nodes                            |
 | managers, workers | UDP 4789                | Internal,          | Port for overlay networking                                                   |
-| managers          | TCP 6443 (configurable) | External, Internal | Port for UCP Controller Kubernetes API endpiont                                                |
+| managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server                                                |
 | managers, workers | TCP 6444                | Self               | Port for Kubernetes API reverse proxy                                         |
 | managers, workers | TCP, UDP 7946           | Internal           | Port for gossip-based clustering                                              |
 | managers, workers | TCP 10250               | Internal           | Port for Kubelet                                                              |
@@ -81,7 +81,7 @@ host types:
 | managers          | TCP 12385               | Internal           | Port for the authentication service API                                       |
 | managers          | TCP 12386               | Internal           | Port for the authentication worker                                            |
 | managers          | TCP 12387               | Internal           | Port for the metrics service                                                  |
-| managers          | TCP 12388               | Internal           | Port for the Kubernetes API Server                                                  |
+| managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                                  |
 
 ## Enable ESP traffic
 
