@@ -15,7 +15,7 @@ The activation can be performed either online with connection to Docker Hub, or 
 * This feature is only supported on x86 Linux nodes
 * Windows nodes are not currently supported
 * Node level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker
-* Prior version of the Docker Enterprise Engine for Docker to not support this feature
+* Prior version of the Docker Enterprise Engine for Docker do not support this feature
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
