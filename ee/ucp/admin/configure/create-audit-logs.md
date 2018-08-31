@@ -4,7 +4,7 @@ Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP A
 
 ## Procedure
 
-1. Download the UCP Client bundle [topic] (https://success.docker.com/article/download-client-bundle-from-the-cli).
+1. Download the UCP Client bundle [Download client bundle from the command line] (https://success.docker.com/article/download-client-bundle-from-the-cli).
 
 2.  Retrieve JSON for current audit log configuration.
 ```
@@ -26,9 +26,9 @@ curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cac
 
 6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK: https://success.docker.com/article/elasticsearch-logstash-kibana-logging
 
-### API Endpoints ignored
+### API endpoints ignored
 
-The following endpoints are ignored since they are API endpoints that are not considered security events and may cause a large amount of entries to be triggered.
+The following API endpoints are ignored since they are not considered security events and may create a large amount of log entries.
 
 - /_ping
 - /ca
