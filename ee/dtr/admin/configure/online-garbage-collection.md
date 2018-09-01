@@ -2,6 +2,7 @@
 title: Online Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
+redirect_from: /ee/dtr/admin/configure/garbage-collection/
 keywords: registry, online garbage collection, gc, space, disk space
 ---
 
@@ -21,24 +22,14 @@ the scheduled time DTR:
 2. Identifies and marks unused image layers.
 3. Deletes the marked image layers.
 
-As of v2.6.0, online garbage collection is no longer in experimental mode. The registry no longer has to be in read-only mode (or offline) during garbage collection. 
-
-To enable garbage collection, navigate to the **DTR web UI**, go to **Settings** and
-choose **Garbage collection**.
-
-![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
-
-Once enabled this setting can't be changed back. The upgrade process might
-take a while depending on the amount of Docker images that you have stored.
-
-During this upgrade users can still push and pull images from DTR, but
-the garbage collection job will be temporarily disabled.
+As of v2.6.0, online garbage collection is no longer in experimental mode. This means that the registry no longer has to be in read-only mode (or offline) during garbage collection. 
 
 ## Schedule garbage collection
 
-Navigate to the **Settings** page, and choose **Garbage collection**.
+In your browser, navigate to `https://<dtr-url>` and log in to the DTR web UI with your credentials. Select **System** on the left navigation pane then click
+the **Garbage collection** tab to enable garbage collection.
 
-![](../../images/garbage-collection-1.png){: .with-border}
+![](../../images/garbage-collection-0.png){: .with-border}
 
 Select for how long the garbage collection job should run:
 * Until done: Run the job until all unused image layers are deleted.
