@@ -2,7 +2,6 @@
 title: Online Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
-redirect_from: /ee/dtr/admin/configure/garbage-collection/
 keywords: registry, online garbage collection, gc, space, disk space
 ---
 
