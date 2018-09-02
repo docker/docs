@@ -12,6 +12,6 @@ Security Assertion Markup Language (SAML) is an open standard for exchanging aut
 
 A list of the identity providers that we support is found in the [Docker Compatibility matrix] (http://success.docker.com/article/compatibility-matrix).
 
-## Prererquisites
+## Prerequisites
 
-Before you can enable SAMLauthentication, you must first be set up with your identity provider of choice. 
+Before you can enable SAML authentication, you must first be set up with your identity provider of choice. This process varies from provider to provider, so consult your provider's documentation for details. There are specific bits of information you need from the identity provider to enable UCP to authenticate with that identity.
