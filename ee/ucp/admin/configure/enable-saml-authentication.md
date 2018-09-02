@@ -14,12 +14,19 @@ A list of the identity providers that we support is found in the [Docker Compati
 
 ## Prerequisites
 
-Before you can enable SAML authentication, you must first be set up with your identity provider of choice. This process varies from provider to provider, so consult your provider's documentation for details. There are specific bits of information you need from the identity provider to enable UCP to authenticate with that identity.
+Before you can enable SAML authentication, you must first be set up with your identity provider of choice. This process varies from provider to provider, so consult your provider's documentation for details. There are specific bits of information you need from the identity provider to enable UCP to authenticate with that identity. You need:
+
+- content
+- two
+
+## Procedure
+
+placeholder
 
 ## Limitations
 
 You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through an existing client bundle.
 
 - Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
-- If group membership has changed in the identity provider, replicate this change in UCP.
+- If group membership in the identity provider changes, replicate this change in UCP.
 - Continue to use LDAP to sync group membership.
