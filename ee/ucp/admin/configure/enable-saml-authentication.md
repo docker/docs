@@ -25,9 +25,9 @@ There are data your identity provider needs for successful integration with UCP.
 
 Placeholder
 
-## Security consifderations
+## Security considerations
 
-You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through an existing client bundle.
+You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
 
 - Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
 - If group membership in the identity provider changes, replicate this change in UCP.
