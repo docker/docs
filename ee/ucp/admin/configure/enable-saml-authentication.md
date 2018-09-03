@@ -12,18 +12,20 @@ Security Assertion Markup Language (SAML) is an open standard for exchanging aut
 
 A list of the identity providers that we support is found in the [Docker Compatibility matrix] (http://success.docker.com/article/compatibility-matrix).
 
-## Prerequisites
 
-Before you can enable SAML authentication, you must first be set up with your identity provider of choice. This process varies from provider to provider, so consult your provider's documentation for details. There are specific bits of information you need from the identity provider to enable UCP to authenticate with that identity. You need:
 
-- content
-- two
+## Identity provider integration steps
 
-## Procedure
+There are data your identity provider needs for successful integration with UCP. Typivally these are:
 
-placeholder
+- URL for single signon (SSO).
+- Service provider audience URI.
 
-## Limitations
+## UCP integration steps
+
+Placeholder
+
+## Security consifderations
 
 You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through an existing client bundle.
 
