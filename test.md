@@ -3,9 +3,9 @@ description: Smoketest page
 title: Testing page
 hide_from_sitemap: true
 toc_min: 1
----
+--
 
-Welcome to the Docker documentation test page!
+Welcome to the Docker documentation test page! Previewing..
 
 This is a demo of components, tags, styles, tools, and strategies we use for the
 docs. We explain the code behind the published page and demo the effects. So, if
