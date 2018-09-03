@@ -25,7 +25,13 @@ To enable SAML authentication, go to the UCP web UI, then navigate to the **Admi
 
 [UI SCREENSHOT]
 
-In the **SAML Enabled** section, select **Yes** to display the required settings.
+In the **SAML Enabled** section, select **Yes** to display the required settings
+
+[UI SCREENSHOT]
+
+1. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
+2. In **UCP Host** enter the URL that includes the IP address of your UPC console.
+3. Select **Save** to complete the integration.
 
 ## Security considerations
 
