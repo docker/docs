@@ -45,7 +45,7 @@ curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cac
 
 6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. https://success.docker.com/article/elasticsearch-logstash-kibana-logging
 
-### API endpoints ignored
+## API endpoints ignored
 
 The following API endpoints are ignored since they are not considered security events and may create a large amount of log entries.
 
