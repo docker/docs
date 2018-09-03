@@ -12,6 +12,15 @@ Audit logs are focused on external user/agent actions and security than understa
 
 Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. zCreating audit logs is mainly CLI driven and is an UCP component that integrates with Swarm, K8s, and UCP APIs.
 
+## Benefits
+
+You can use audit logs to help with the following use cases:
+
+- **Historical Troubleshooting** - Audit logs are helpful in determining a sequence of past events that explain why an issue occured.
+- **Security Analysis and Auditing** - Security is one of the primary uses for audit logs. A full record of all user interactions with the container infrastructure gives your security team full visibility to questionable or unauthorized accesses.
+- **Chargeback** - You can use audit logs and information about the resources to generate chargeback information.
+- **Alerting** - If there is a watch on an event stream or a notification created by the event, alerting features can be built on top of event tools that generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
+
 ## Procedure
 
 1. Download the UCP Client bundle [Download client bundle from the command line] (https://success.docker.com/article/download-client-bundle-from-the-cli).
