@@ -23,6 +23,10 @@ There are data your identity provider needs for successful integration with UCP.
 
 To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
 
+[UI SCREENSHOT]
+
+In the **SAML Enabled** section, select **Yes** to display the required settings.
+
 ## Security considerations
 
 You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
