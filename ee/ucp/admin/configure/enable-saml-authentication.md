@@ -8,7 +8,7 @@ keywords: SAML, ucp, authentication
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-Security Assertion Markup Language (SAML) is an open standard for exchanging authentication data between an identity provider and a service provider. SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/)
+UCP supports Security Assertion Markup Language (SAML) for authentication. SAML is an open standard for exchanging authentication data between an identity provider and a service provider, such as UCP. SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/)
 
 A list of the identity providers that we support is found in the [Docker Compatibility matrix] (http://success.docker.com/article/compatibility-matrix).
 
@@ -19,9 +19,9 @@ There are data your identity provider needs for successful integration with UCP.
 - URL for single signon (SSO).
 - Service provider audience URI.
 
-## UCP integration steps
+## Configure the SAML integration
 
-Placeholder
+To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
 
 ## Security considerations
 
