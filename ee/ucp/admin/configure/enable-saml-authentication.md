@@ -13,7 +13,7 @@ UCP supports Security Assertion Markup Language (SAML) for authentication as a s
 UCP supports these identity providers:
 
 - (Okta) [https://www.okta.com/]
-- (ADFS) [https://msdn.microsoft.com/en-us/library/bb897402.aspx#Step-by-Step%20Example]
+- (ADFS) [https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
 - (Ping Identity) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
 
 ## Configure identity provider integration
@@ -36,7 +36,7 @@ The integration values required by ADFS are:
 -
 ### Ping integration values
 
-The integration values required by PingIdentity are:
+The integration values required by Ping Identity are:
 
 - (need values)
 
@@ -51,7 +51,7 @@ In the **SAML Enabled** section, select **Yes** to display the required settings
 ![Configuring SAML in UCP](../../images/saml_settings.png)
 
 1. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
-2. In **UCP Host** enter the URL that includes the IP address of your UPC console.
+2. In **UCP Host** enter the URL that includes the IP address of your UCP console.
 3. Select **Save** to complete the integration.
 
 ## Security considerations
