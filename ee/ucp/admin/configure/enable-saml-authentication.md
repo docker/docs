@@ -19,6 +19,8 @@ There are values your identity provider needs for successful integration with UC
 - URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/sami/acs`. For example, `https://111.111.111.111/enzi/v0/sami/acs`.
 - Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/sami/metadata`. For example, `https://111.111.111.111/enzi/v0/sami/metadata`.
 
+Consult your identity provider documentation for instructions on providing these values as part of their integration process.
+
 ## Configure the SAML integration
 
 To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
