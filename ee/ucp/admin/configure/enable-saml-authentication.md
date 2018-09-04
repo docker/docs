@@ -12,12 +12,12 @@ UCP supports Security Assertion Markup Language (SAML) for authentication. SAML 
 
 A list of the identity providers that we support is found in the [Docker Compatibility matrix] (http://success.docker.com/article/compatibility-matrix).
 
-## Identity provider integration steps
+## Configure identity provider integration
 
-There are data your identity provider needs for successful integration with UCP. Typivally these are:
+There are values your identity provider needs for successful integration with UCP. Typically these are:
 
-- URL for single signon (SSO).
-- Service provider audience URI.
+- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/sami/acs`. For example, `https://111.111.111.111/enzi/v0/sami/acs`.
+- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/sami/metadata`. For example, `https://111.111.111.111/enzi/v0/sami/metadata`.
 
 ## Configure the SAML integration
 
