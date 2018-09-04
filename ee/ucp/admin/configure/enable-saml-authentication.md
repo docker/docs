@@ -27,6 +27,15 @@ The integration values required by Okta are:
 
 - URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
 - Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+- NameID format. Select Unspecified.
+- Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username in the email address.
+- Attribute Statements:
+- - Name: `fullname`, Value: `user.displayName`.
+- Group Attribute Statement:
+Name: `member-of`, Filter: (user defined) for associate group membership. The group name is returned with the assertion.
+Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin.
+
+
 
 ### ADFS integration values
 
