@@ -13,8 +13,8 @@ UCP supports Security Assertion Markup Language (SAML) for authentication as a s
 UCP supports these identity providers:
 
 - (Okta) [https://www.okta.com/]
-- (ADFS) [https://get.slack.help/hc/en-us/articles/230902028-ADFS-single-sign-on]
-- (Ping) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
+- (ADFS) [https://msdn.microsoft.com/en-us/library/bb897402.aspx#Step-by-Step%20Example]
+- (Ping Identity) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
 
 ## Configure identity provider integration
 
