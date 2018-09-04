@@ -67,9 +67,9 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 To create the initial address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. The default address pool uses CIDR notation.
 
-With this configuration, the Docker engine will auto-allocate subnets for newly created network with a defined subnet size (such as `24`).
+Docker allocates subnet addresses from the address ranges specified by the --default-addr-pool options. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
 
-The subnet range comes from the `--default-addr-pool`, such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range.
+The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-address-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
 
 The format of the command is:
 ```
