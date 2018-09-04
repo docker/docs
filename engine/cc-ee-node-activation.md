@@ -32,7 +32,7 @@ Client:
  Experimental:      false
 Server:
  Engine:
-  Version:          18.09.0-ce-tp3
+  Version:          18.09.0-ce
   API version:      1.39 (minimum version 1.12)
   Go version:       go1.10.3
   Git commit:       ca36ebe
