@@ -12,11 +12,12 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% if platform == "mac" %}
   {% assign product = "Docker for Mac" %}
 
-  {% capture min-version %}{{ product }} 17.12 CE Edge{% endcapture %}
+  {% capture min-version %}{{ product }} 17.12 CE{% endcapture %}
+  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
 
   {% capture version-caveat %}
-**Kubernetes is only available in {{ min-version }} and higher, on the Edge
-channel.** Kubernetes support is not included in Docker for Mac Stable releases.
+**Kubernetes is available in {{ min-version }} and higher on the Edge
+channel. and in {% min-stable-version %} in the Stable Channel**.
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
