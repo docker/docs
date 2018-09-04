@@ -29,8 +29,7 @@ Consult your identity provider documentation for instructions on providing these
 
 To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
 
-[UI SCREENSHOT]
-![alt text](image.jpg)
+![Enabling SAML in UCP](../../images/saml_enabled.png)
 
 In the **SAML Enabled** section, select **Yes** to display the required settings
 
