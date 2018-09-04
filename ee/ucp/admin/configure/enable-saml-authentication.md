@@ -50,10 +50,10 @@ ADFS integration requires these values:
 - Attribute Store: Active Directory.
     - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
     - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
-- Claim using Customer Rule.For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+- Claim using Customer Rule. For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
  => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);`
 - Outgoing claim type: Name ID
-- Outgoing name ID format: Transient Idnentifier
+- Outgoing name ID format: Transient Identifier
 - Pass through all claim values
 
 ### Ping Identity integration values
