@@ -12,11 +12,11 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% if platform == "mac" %}
   {% assign product = "Docker for Mac" %}
 
-  {% capture min-version %}{{ product }} **17.12 CE Edge**{% endcapture %}
+  {% capture min-version %}{{ product }} 18.06.0-ce-mac70 CE{% endcapture %}
 
   {% capture version-caveat %}
-  Kubernetes is available in {{ min-version }} and higher, and **18.06 Stable** and higher
-  {% endcapture%}
+  **Kubernetes is only available in {{ min-version }} and higher.
+  {% endcapture %}
 
   {% capture local-kubectl-warning %}
 > If you independently installed the Kubernetes CLI, `kubectl`, make sure that
@@ -31,10 +31,10 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% elsif platform == "windows" %}
   {% assign product = "Docker for Windows" %}
 
-  {% capture min-version %}{{ product }} **18.02 CE Edge**{% endcapture %}
+  {% capture min-version %}{{ product }} 18.06.0-ce-win70 CE{% endcapture %}
 
   {% capture version-caveat %}
-  Kubernetes is available in {{ min-version }} and higher, and **18.06 Stable** and higher
+  **Kubernetes is only available in {{ min-version }} and higher.
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -45,7 +45,9 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 
 {% endif %}
 
-{{ version-caveat }}, this includes a standalone Kubernetes server and client,
+{{ version-caveat }}
+
+{{ min-version }} includes a standalone Kubernetes server and client,
 as well as Docker CLI integration. The Kubernetes server runs locally within
 your Docker instance, is not configurable, and is a single-node cluster.
 
