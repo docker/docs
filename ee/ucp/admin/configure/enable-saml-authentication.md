@@ -18,12 +18,27 @@ UCP supports these identity providers:
 
 ## Configure identity provider integration
 
-There are values your identity provider needs for successful integration with UCP. Typically these are:
+There are values your identity provider needs for successful integration with UCP. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
 
-- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/sami/acs`. For example, `https://111.111.111.111/enzi/v0/sami/acs`.
-- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/sami/metadata`. For example, `https://111.111.111.111/enzi/v0/sami/metadata`.
 
-Consult your identity provider documentation for instructions on providing these values as part of their integration process.
+### Okta integration values
+
+The integration values required by Okta are:
+
+- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
+- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+
+### ADFS integration values
+
+The integration values required by ADFS are:
+
+- (need values)
+-
+### Ping integration values
+
+The integration values required by PingIdentity are:
+
+- (need values)
 
 ## Configure the SAML integration
 
