@@ -8,7 +8,7 @@ Print the ID of UCP running on this node
 
 ## Usage
 
-Run the UCP id command using the correct image version tag for UCP (i.e. docker/ucp:3.0.3)
+Run the UCP id command using the correct image version tag for UCP (i.e. docker/ucp:$version)
 
 ```
 docker container run --rm \
