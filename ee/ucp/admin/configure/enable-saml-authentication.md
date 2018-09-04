@@ -16,14 +16,14 @@ UCP supports these identity providers:
 - (ADFS) [https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
 - (Ping Identity) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
 
+
 ## Configure identity provider integration
 
 There are values your identity provider needs for successful integration with UCP. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
 
-
 ### Okta integration values
 
-The integration values required by Okta are:
+Okta integration requires these values:
 
 - URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
 - Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
@@ -36,32 +36,36 @@ Name: `member-of`, Filter: (user defined) for associate group membership. The gr
 Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin.
 
 
-
 ### ADFS integration values
 
-The integration values required by ADFS are:
+ADFS integration requires these values:
 
 - (need values)
 -
-### Ping integration values
 
-The integration values required by Ping Identity are:
+### Ping Identity integration values
+
+Ping Identity integration requires these values:
 
 - (need values)
 
 ## Configure the SAML integration
 
-To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
+To enable SAML authentication:
+
+1 Go to the UCP web UI.
+2. Navigate to the **Admin Settings**.
+3. Select **Authentication & Authorization**.
 
 ![Enabling SAML in UCP](../../images/saml_enabled.png)
 
-In the **SAML Enabled** section, select **Yes** to display the required settings
+4. In the **SAML Enabled** section, select **Yes** to display the required settings.
 
 ![Configuring SAML in UCP](../../images/saml_settings.png)
 
-1. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
-2. In **UCP Host** enter the URL that includes the IP address of your UCP console.
-3. Select **Save** to complete the integration.
+5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
+6. In **UCP Host** enter the URL that includes the IP address of your UCP console.
+7. Select **Save** to complete the integration.
 
 ## Security considerations
 
