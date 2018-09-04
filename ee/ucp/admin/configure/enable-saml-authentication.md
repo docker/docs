@@ -8,9 +8,13 @@ keywords: SAML, ucp, authentication
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-UCP supports Security Assertion Markup Language (SAML) for authentication. SAML is an open standard for exchanging authentication data between an identity provider and a service provider, such as UCP. SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/)
+UCP supports Security Assertion Markup Language (SAML) for authentication as a service provider. SAML is an open standard for exchanging authentication data between an identity provider and a service provider, such as UCP. SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/)
 
-A list of the identity providers that we support is found in the [Docker Compatibility matrix] (http://success.docker.com/article/compatibility-matrix).
+UCP supports these identity providers:
+
+- (Okta) [https://www.okta.com/]
+- (ADFS) [https://get.slack.help/hc/en-us/articles/230902028-ADFS-single-sign-on]
+- (Ping) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
 
 ## Configure identity provider integration
 
@@ -26,6 +30,7 @@ Consult your identity provider documentation for instructions on providing these
 To enable SAML authentication, go to the UCP web UI, then navigate to the **Admin Settings**. Select **Authentication & Authorization** to enable SAML.
 
 [UI SCREENSHOT]
+![alt text](image.jpg)
 
 In the **SAML Enabled** section, select **Yes** to display the required settings
 
