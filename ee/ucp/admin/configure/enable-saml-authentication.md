@@ -10,9 +10,11 @@ keywords: SAML, ucp, authentication
 
 Ping Identity integration requires these values:
 
-SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/).
+SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
+
+For more information about SAML, see the [SAML XML website] (http://saml.xml.org/).
 
 UCP supports these identity providers:
 
@@ -23,7 +25,7 @@ UCP supports these identity providers:
 
 ## Configure identity provider integration
 
-There are values your identity provider needs for successful integration with UCP. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
+There are values your identity provider needs for successful integration with UCP, as follows. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
 
 ### Okta integration values
 
@@ -44,8 +46,15 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ADFS integration requires these values:
 
-- (need values)
--
+- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+- Attribute Store: Active Directory.
+    - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
+    - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
+- Claim using Customer Rule.For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+ => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);`
+- Outgoing claim type: Name ID
+- Outgoing name ID format: Transient Idnentifier
+- Pass through all claim values
 
 ### Ping Identity integration values
 
