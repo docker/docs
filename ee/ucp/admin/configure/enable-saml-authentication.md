@@ -30,8 +30,8 @@ The integration values required by Okta are:
 - NameID format. Select Unspecified.
 - Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username in the email address.
 - Attribute Statements:
-- - Name: `fullname`, Value: `user.displayName`.
-- Group Attribute Statement:
+    - Name: `fullname`, Value: `user.displayName`.
+    - Group Attribute Statement:
 Name: `member-of`, Filter: (user defined) for associate group membership. The group name is returned with the assertion.
 Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin.
 
