@@ -8,7 +8,11 @@ keywords: SAML, ucp, authentication
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-UCP supports Security Assertion Markup Language (SAML) for authentication as a service provider. SAML is an open standard for exchanging authentication data between an identity provider and a service provider, such as UCP. SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/)
+Ping Identity integration requires these values:
+
+SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. For more information about SAML, see the [SAML XML website] (http://saml.xml.org/).
+
+SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
 
 UCP supports these identity providers:
 
