@@ -84,7 +84,7 @@ To enable SAML authentication:
 
 You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from UCP web interface that enables command line as well as API access to UCP. It lets you  authorize a remote Docker engine to a specific user account managed in Docker EE, absorbing all associated RBAC controls in the process. You can now execute docker swarm commands from your remote machine that take effect on the remote cluster. You can download the client bundle in the **Admin Settings** under **My Profile**.
 
-![Downloading UCP Client Profile] (../../images/client-bumdle.png)
+![Downloading UCP Client Profile] (../../images/client-bundle.png)
 
 To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
 
