@@ -31,8 +31,8 @@ There are values your identity provider needs for successful integration with UC
 
 Okta integration requires these values:
 
-- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
-- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/acs`.
+- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
 - NameID format. Select Unspecified.
 - Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username in the email address.
 - Attribute Statements:
@@ -46,7 +46,7 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ADFS integration requires these values:
 
-- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
 - Attribute Store: Active Directory.
     - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
     - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
