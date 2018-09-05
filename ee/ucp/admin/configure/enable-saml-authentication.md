@@ -86,8 +86,10 @@ You can download a client bundle to access UCP. A client bundle is a group of ce
 
 ![Downloading UCP Client Profile](../../images/client-bundle.png)
 
-To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
-
-- Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
-- If group membership in the identity provider changes, replicate this change in UCP.
-- Continue to use LDAP to sync group membership.
+> Caution
+>
+>To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
+>
+> - Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
+> - If group membership in the identity provider changes, replicate this change in UCP.
+> - Continue to use LDAP to sync group membership.

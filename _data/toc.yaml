@@ -1560,6 +1560,8 @@ manuals:
           title: Add labels to cluster nodes
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
+        - path: /ee/ucp/admin/configure/enable-saml-authentication
+          title: Enable SAML authentication
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/external-auth/enable-ldap-config-file/
