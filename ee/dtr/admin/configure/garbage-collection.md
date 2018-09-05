@@ -2,41 +2,36 @@
 title: Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
-keywords: registry, garbage collection, gc, space, disk space
+keywords: registry, online garbage collection, gc, space, disk space
 ---
 
-You can configure Docker Trusted Registry to automatically delete unused image
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+
+You can configure the Docker Trusted Registry (DTR) to automatically delete unused image
 layers, thus saving you disk space. This process is also known as garbage collection.
 
 ## How DTR deletes unused layers
 
 First you configure DTR to run a garbage collection job on a fixed schedule. At
-the scheduled time DTR:
+the scheduled time, DTR:
 
 2. Identifies and marks unused image layers.
 3. Deletes the marked image layers.
 
-By default, when the garbage collection job starts DTR is put in read-only mode.
+Starting in DTR 2.5, we introduced an experimental feature which lets you run garbage collection jobs
+without putting DTR in read-only mode. As of v2.6.0, online garbage collection is no longer in 
+experimental mode. This means that the registry no longer has to be in read-only mode (or offline) 
+during garbage collection. 
 
-Starting in DTR 2.5, you can configure DTR to run garbage collection jobs
-without putting DTR in read-only. This feature is still experimental.
-
-To enable this, navigate to the **DTR web UI**, go to **Settings** and
-choose **Garbage collection**.
-
-![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
-
-Once enabled this setting can't be changed back. The upgrade process might
-take a while depending on the amount of Docker images that you have stored.
-
-During this upgrade users can still push and pull images from DTR, but
-the garbage collection job will be temporarily disabled.
 
 ## Schedule garbage collection
 
-Navigate to the **Settings** page, and choose **Garbage collection**.
+In your browser, navigate to `https://<dtr-url>` and log in with your credentials. Select **System** on the left navigation pane, and then click
+the **Garbage collection** tab to schedule garbage collection.
 
-![](../../images/garbage-collection-1.png){: .with-border}
+![](../../images/garbage-collection-0.png){: .with-border}
 
 Select for how long the garbage collection job should run:
 * Until done: Run the job until all unused image layers are deleted.
@@ -44,22 +39,25 @@ Select for how long the garbage collection job should run:
 at a time.
 * Never: Never delete unused image layers.
 
-Once you select for how long to run the garbage collection job, you can
-configure its schedule (in UTC time) using the cron format.
+If you select *Until done* or *For x minutes*, you can specify a recurring schedule in UTC (Coordinated Universal Time) with the following options:
+* Custom cron schedule - (Hour, Day of Month, Month, Weekday)
+* Daily at midnight UTC
+* Every Saturday at 1am UTC
+* Every Sunday at 1am UTC
+* Do not repeat
 
-![](../../images/garbage-collection-2.png){: .with-border}
+![](../../images/garbage-collection-1.png){: .with-border}
 
-Once everything is configured you can chose to **Save & start** to immediately
-run the garbage collection job, or just **Save** to run the job on the next
+Once everything is configured you can choose to **Save & Start** to
+run the garbage collection job immediately, or just **Save** to run the job on the next
 scheduled interval.
 
-## Stop the garbage collection job
+## Review the garbage collection job log
 
-Once the garbage collection job starts running, a banner is displayed on the
-web UI explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
-collection job.
+In v2.5, you were notified with a banner under main navigation that no one can push images while a garbage collection job is running. Notice how this is no longer the case
+with v2.6.0. If you clicked **Save & Start** previously, verify that the garbage collection routine started by navigating to *Jobs Logs*.
 
-![](../../images/garbage-collection-3.png){: .with-border}
+![](../../images/garbage-collection-2.png){: .with-border}
 
 ## Under the hood
 
