@@ -23,4 +23,4 @@ You create Kubernetes roles either through the CLI using `kubectl` or through th
 
 To create a Kuberenetes role in UCP:
 
-![Roles in UCP](rbac-roles.png)
+![Roles in UCP](../images/rbac-roles.png)
