@@ -82,7 +82,11 @@ To enable SAML authentication:
 
 ## Security considerations
 
-You can download a client bundle to access UCP. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
+You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from UCP web interface that enables command line as well as API access to UCP. It lets you  authorize a remote Docker engine to a specific user account managed in Docker EE, absorbing all associated RBAC controls in the process. You can now execute docker swarm commands from your remote machine that take effect on the remote cluster. You can download the client bundle in the **Admin Settings** under **My Profile**.
+
+![Downloading UCP Client Profile] (../../images/client-bumdle.png)
+
+To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
 
 - Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
 - If group membership in the identity provider changes, replicate this change in UCP.
