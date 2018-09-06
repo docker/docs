@@ -27,7 +27,9 @@ To create a Kuberenetes role in the UCP web interface:
 2. Navigate to the **Access Control**.
 3. In the lefthand menu, select  **Grants**.
 
-![Roles in UCP](../images/kube-rbac-grants.png)
+![Kubernetes Grants in UCP](../images/kube-rbac-grants.png)
 
 4. Select the **Kuberneters** tab at the top of the window.
-5.
+5. Select **Create New Grant** to start the Create Role Binding wizard.
+
+![Kubernetes Create Role Binding in UCP](../images/kube-grant-wizard.png)
