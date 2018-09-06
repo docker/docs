@@ -1,8 +1,8 @@
 ---
-description: Home page for Docker's documentation
-keywords: Docker, documentation, manual, guide, reference, api, samples
+description: Home page for Thurly's documentation
+keywords: Thurly, documentation, manual, guide, reference, api, samples
 landing: true
-title: Docker Documentation
+title: Thurly Documentation
 notoc: true
 notags: true
 ---
