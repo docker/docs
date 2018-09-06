@@ -2,8 +2,6 @@ Docker Build is one of the most used features of the Docker Engine - users range
 
 Docker Build Enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
 
-* Low-level Builder (LLB) - a format end users are not exposed to but allows to BuildKit to coordinate what is needed to build the final image
-* Frontend - components that translate input into low-level builder (LLB) definition. The docker engine comes with a default frontend that can translate Dockerfiles into an LLB definition used to construct the final image. Frontends are distributed as docker images from the docker hub. 
 * Docker images created with buildkit are compatible to be pushed to docker hub and DTR just like docker images created with legacy build
 * Dockerfile format that works on legacy build should also work with buildkit builds
 * The new `--secret` flag allows the user to pass secret information for building new images with a specified Dockerfile 
