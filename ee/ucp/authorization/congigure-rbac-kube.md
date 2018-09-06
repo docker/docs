@@ -31,6 +31,13 @@ To create a Kuberenetes roles in the UCP web interface:
 ![Kubernetes Grants in UCP](../images/kube-rbac-roles.png)
 
 4. Select the **Kubernetes** tab at the top of the window.
+5. Select **Create** to create a Kubernetes role object in the following dialog:
+
+![Kubernetes Role Creation in UCP](../images/kube-role-create.png)
+
+6. Select a namespece from the **Namespace** dropdownlist.
+7. Provide the YAML for the role, either by entering it in the **Object YAML** editor or select **Click to upload a .yml file** to choose and upload a .yml file instead.
+
 
 ## Creating grants
 
