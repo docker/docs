@@ -15,11 +15,6 @@ Starting with UCP 3.1, Kubernetes & Swarm roles have separate views. You can vie
 
 ## Creating roles
 
-Kubernetes provides 2 types of roles:
-
-- `ClusterRoleBinding` which applies to all namespaces
-- `RoleBinding1` which applies to a specific namespace
-
 You create Kubernetes roles either through the CLI using `kubectl` or through the UCP web interface.
 
 To create a Kuberenetes roles in the UCP web interface:
@@ -37,10 +32,15 @@ To create a Kuberenetes roles in the UCP web interface:
 
 6. Select a namespace from the **Namespace** dropdown list.
 7. Provide the YAML for the role, either by entering it in the **Object YAML** editor or select **Click to upload a .yml file** to choose and upload a .yml file instead.
-8. When you hsave finished specifying the YAML, Select **Create** to complete role creation.
+8. When you have finished specifying the YAML, Select **Create** to complete role creation.
 
 
-## Creating grants
+## Creating
+
+Kubernetes provides 2 types of role grants:
+
+- `ClusterRoleBinding` which applies to all namespaces
+- `RoleBinding1` which applies to a specific namespace
 
 To create a grant for a Kuberenetes role in the UCP web interface:
 
