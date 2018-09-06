@@ -109,7 +109,7 @@ And with a Dockerfile that specifies use of a buildkit frontend `tonistiigi/dock
 
 For example:
 ```
-# syntax = tonistiigi/dockerfile:secrets20180808
+# syntax = dockerfile:secrets20180828
 FROM alpine
 RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret # shows secret from default secret location
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar # shows secret from custom secret location
