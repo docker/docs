@@ -39,4 +39,8 @@ To create a Kuberenetes grant in the UCP web interface:
 6. Select the subject type. Your choices are:
 -  **All Users**
 -  **Organizations**
--  ** Service account**
+-  **Service account**
+7. To creat a user role binding, select a username from the **Users** dropdown list then select **Next**.
+8. Select a resource set for the subject. The default selection is the **kube-public-** namespace.
+
+![Kubernetes Create User Role Binding in UCP](../images/kube-grant-rolebinding.png)
