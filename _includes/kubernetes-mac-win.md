@@ -16,8 +16,8 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
 
   {% capture version-caveat %}
-**Kubernetes is available in {{ min-version }} and higher on the Edge
-channel. and in {% min-stable-version %} in the Stable Channel**.
+    **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
+
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -33,11 +33,11 @@ channel. and in {% min-stable-version %} in the Stable Channel**.
 {% elsif platform == "windows" %}
   {% assign product = "Docker for Windows" %}
 
-  {% capture min-version %}{{ product }} 18.02 CE Edge{% endcapture %}
+  {% capture min-version %}{{ product }} 18.02 CE{% endcapture %}
+  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }}.** Kubernetes
-  support is not included in {{ product }} 18.02 CE Stable.
+  **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
