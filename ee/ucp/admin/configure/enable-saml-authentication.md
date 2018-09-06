@@ -20,8 +20,6 @@ UCP supports these identity providers:
 
 - (Okta) [https://www.okta.com/]
 - (ADFS) [https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
-- (Ping Identity) [https://www.pingidentity.com/en/platform/single-sign-on/sso-overview.html]
-
 
 ## Configure identity provider integration
 
@@ -55,12 +53,6 @@ ADFS integration requires these values:
 - Outgoing claim type: Name ID
 - Outgoing name ID format: Transient Identifier
 - Pass through all claim values
-
-### Ping Identity integration values
-
-Ping Identity integration requires these values:
-
-- (need values)
 
 ## Configure the SAML integration
 
