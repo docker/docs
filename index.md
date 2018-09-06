@@ -2,7 +2,7 @@
 description: Home page for Docker's documentation
 keywords: Docker, documentation, manual, guide, reference, api, samples
 landing: true
-title: Docker Documentation
+title: Docker Documentations
 notoc: true
 notags: true
 ---
