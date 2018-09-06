@@ -21,7 +21,9 @@ Kubernetes provides 2 types of roles:
 
 You create Kubernetes roles either through the CLI using `kubectl` or through the UCP web interface.
 
-To create a Kuberenetes role in the UCP web interface:
+## Creating grants
+
+To create a Kuberenetes grant in the UCP web interface:
 
 1. 1 Go to the UCP web UI.
 2. Navigate to the **Access Control**.
@@ -29,7 +31,12 @@ To create a Kuberenetes role in the UCP web interface:
 
 ![Kubernetes Grants in UCP](../images/kube-rbac-grants.png)
 
-4. Select the **Kuberneters** tab at the top of the window.
-5. Select **Create New Grant** to start the Create Role Binding wizard.
+4. Select the **Kubernetes** tab at the top of the window.
+5. Select **Create New Grant** to start the Create Role Binding wizard and create a new grant for a given user, team or service.
 
 ![Kubernetes Create Role Binding in UCP](../images/kube-grant-wizard.png)
+
+6. Select the subject type. Your choices are:
+-  **All Users**
+-  **Organizations**
+-  ** Service account**
