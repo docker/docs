@@ -6,6 +6,8 @@ Docker Build Enhancements for 18.09 release introduces a much-needed overhaul of
 * Dockerfile format that works on legacy build should also work with buildkit builds
 * The new `--secret` flag allows the user to pass secret information for building new images with a specified Dockerfile 
 
+For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
+
 
 ## Requirements
 
