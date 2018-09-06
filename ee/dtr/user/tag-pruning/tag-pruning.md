@@ -14,8 +14,12 @@ You can configure the Docker Trusted Registry (DTR) to automatically clean up re
 images which are abandoned and no longer necessary. You enable tag pruning on each 
 repository that you manage by:
 
-* [specifying a tag pruning policy] (#specify-a-tag-pruning-policy)
-* [setting a tag limit] (#set-a-tag-limit)
+* specifying a tag pruning policy
+* setting a tag limit 
+
+> Tag Pruning
+>
+> Tag pruning operation only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../../admin/configure/garbage-collection.md).
 
 ## Specify a tag pruning policy
 
@@ -55,11 +59,6 @@ All tag pruning policies on your account are evaluated every 15 minutes. Any qua
 
 This does not cover modification or deletion of pruning policies.
 
-> Tag Pruning
->
-> Tag pruning operation only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](garbage-collection/index.md).
-
-
 ## Set a tag limit
 
 In addition to pruning policies, you can also set repository tag limits to restrict the number of tags on a given repository. Repository tag limits are processed in a first in first out (FIFO) manner. For example, if you set a tag limit of 2, adding a third tag would push out the first.
@@ -71,9 +70,6 @@ To set a tag limit, select the repository that you want to update and click the 
 
 ![](../../images/tag-pruning-5.png){: .with-border}
 
-
-
-
 ## Where to go next
 
-- [Garbage collection](garbage-collection/index.md)
+- [Garbage collection](../../admin/configure/garbage-collection.md)
