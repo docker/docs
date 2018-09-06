@@ -15,7 +15,7 @@ images which are abandoned and no longer necessary. You enable tag pruning on ea
 repository that you manage by:
 
 * [specifying a tag pruning policy] (#specify-a-tag-pruning-policy)
-* [enforcing a tag limit] (#enforce-a-tag-limit)
+* [setting a tag limit] (#set-a-tag-limit)
 
 ## Specify a tag pruning policy
 
