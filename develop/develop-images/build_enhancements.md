@@ -98,14 +98,21 @@ To override the default frontend, set the first line of the Dockerfile as a comm
 
 ## New Docker Build secret information
 
-The new --secret flag for docker build allows the user to pass secret information to be used in the Dockerfile for building docker images in a safe way that will not end up stored in the final image.
+The new `--secret` flag for docker build allows the user to pass secret information to be used in the Dockerfile for building docker images in a safe way that will not end up stored in the final image.
+
+`id` is the identifier to pass into the `docker build --secret`. This identifier is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker does not use the filename of where the secret is kept outside of the Dockerfile, since this may be sensitive information.
+
+`dst` renames the secret file to a specific file in the Dockerfile `RUN` command to use.
+
+The `--mount` option has several types, but for this document focuses only the option `--mount=type=secret`.
 
 For example, with a secret piece of information stored in a text file:
+
 ```
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
-And with a Dockerfile that specifies use of a buildkit frontend `tonistiigi/dockerfile:secrets20180808`, the secret can be accessed. 
+And with a Dockerfile that specifies use of a buildkit frontend `dockerfile:secrets20180828`, the secret can be accessed. 
 
 For example:
 ```
