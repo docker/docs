@@ -24,9 +24,9 @@ You create Kubernetes roles either through the CLI using `kubectl` or through th
 
 To create a Kuberenetes roles in the UCP web interface:
 
-1. 1 Go to the UCP web UI.
+1. Go to the UCP web UI.
 2. Navigate to the **Access Control**.
-3. In the lefthand menu, select  **Roles**.
+3. In the lefthand menu, select **Roles**.
 
 ![Kubernetes Grants in UCP](../images/kube-rbac-roles.png)
 
@@ -35,21 +35,22 @@ To create a Kuberenetes roles in the UCP web interface:
 
 ![Kubernetes Role Creation in UCP](../images/kube-role-create.png)
 
-6. Select a namespece from the **Namespace** dropdownlist.
+6. Select a namespace from the **Namespace** dropdown list.
 7. Provide the YAML for the role, either by entering it in the **Object YAML** editor or select **Click to upload a .yml file** to choose and upload a .yml file instead.
+8. When you hsave finished specifying the YAML, Select **Create** to complete role creation.
 
 
 ## Creating grants
 
-To create a Kuberenetes grant in the UCP web interface:
+To create a grant for a Kuberenetes role in the UCP web interface:
 
-1. 1 Go to the UCP web UI.
+1. Go to the UCP web UI.
 2. Navigate to the **Access Control**.
 3. In the lefthand menu, select  **Grants**.
 
 ![Kubernetes Grants in UCP](../images/kube-rbac-grants.png)
 
-4. Select the **Kubernetes** tab at the top of the window.
+4. Select the **Kubernetes** tab at the top of the window. All grants to Kubernetes roles can be viewed in the Kubernetes tab.
 5. Select **Create New Grant** to start the Create Role Binding wizard and create a new grant for a given user, team or service.
 
 ![Kubernetes Create Role Binding in UCP](../images/kube-grant-wizard.png)
