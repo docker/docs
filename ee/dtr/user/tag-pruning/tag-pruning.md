@@ -11,18 +11,18 @@ keywords: registry, tag pruning, tag limit, repo management
 ## Overview
 
 You can configure the Docker Trusted Registry (DTR) to automatically clean up repository 
-images which are abandoned and no longer necessary. You can accomplish tag pruning on each 
+images which are abandoned and no longer necessary. You enable tag pruning on each 
 repository that you manage by:
 
-* specifying a tag pruning policy (#specifying-a-tag-pruning-policy)
-* enforcing a tag limit (#enforcing-a-tag-limit)
+* [specifying a tag pruning policy] (#specify-a-tag-pruning-policy)
+* [enforcing a tag limit] (#enforce-a-tag-limit)
 
 ## Specify a tag pruning policy
 
 You can now add tag pruning policies on each repository that you manage. To get started, navigate to `https://<dtr-url>` and log in with your credentials.
  
 Select **Repositories** on the left navigation pane, and then click on the name of the repository
-that you want to update. Note that you will have to click on the repository name following the
+that you want to update. Note that you will have to click on the repository name following
 the `/` after the specific namespace for your repository.
 
 ![tag pruning](../../images/tag-pruning-0.png){: .with-border}
@@ -47,7 +47,7 @@ Specify one or more image attributes to your pruning criteria, and choose **Prun
 ![](../../images/tag-pruning-2.png){: .with-border}
 
 
-If you have specified multiple pruning policies on the repository, the **Pruning** tab will display a list of your prune triggers and details on when a tag pruning was performed based on the trigger, a toggle for deactivating or reactivating the trigger, and a **View** link for modifying or deleting your selected trigger.
+If you have specified multiple pruning policies on the repository, the **Pruning** tab will display a list of your prune triggers and details on when a tag pruning operation was performed based on the trigger, a toggle for deactivating or reactivating the trigger, and a **View** link for modifying or deleting your selected trigger.
 
 ![](../../images/tag-pruning-3.png){: .with-border}
 
