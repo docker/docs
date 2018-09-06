@@ -49,3 +49,5 @@ To create a Kuberenetes grant in the UCP web interface:
 10. Select the **Cluster Role** from the dropdown list.
 
 ![Kubernetes Select Cluster Role in UCP](../images/kube-grant-roleselect.png)
+
+11. Select **Create** to complete creating the grant.
