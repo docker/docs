@@ -38,7 +38,7 @@ DTR allows you to set your pruning triggers based on the following image attribu
 |:----------------|:---------------------------------------------------|
 | Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values |
 | Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values |
-| Vulnerabilities | Whether the image has vulnerabilities &endash; critical, major, minor, or all &endash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number |
+| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number |
 | License         | Whether the image uses an intellectual property license and is one of or not one of your specified words 
 | Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months |  
 
