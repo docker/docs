@@ -35,7 +35,7 @@ To create a Kuberenetes roles in the UCP web interface:
 8. When you have finished specifying the YAML, Select **Create** to complete role creation.
 
 
-## Creating
+## Creating role grants
 
 Kubernetes provides 2 types of role grants:
 
@@ -59,7 +59,7 @@ To create a grant for a Kuberenetes role in the UCP web interface:
 -  **All Users**
 -  **Organizations**
 -  **Service account**
-7. To creat a user role binding, select a username from the **Users** dropdown list then select **Next**.
+7. To create a user role binding, select a username from the **Users** dropdown list then select **Next**.
 8. Select a resource set for the subject. The **default** namespace is automatically selected. To use a different namespace, select the **Select Namespace** button next to the desired namespace. For `Cluster Role Binding`, slide the **Apply Role Binding to all namespace** selector to the right.
 
 ![Kubernetes Create User Role Binding in UCP](../images/kube-grant-rolebinding.png)
