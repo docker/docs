@@ -1,3 +1,13 @@
+---
+title: Build Enhancements for Docker
+description: Learn the new features of Docker Build 
+keywords: build, security, engine, secret, buildkit
+---
+
+> Beta disclaimer
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+
 Docker Build is one of the most used features of the Docker Engine - users range from Developers, Build Teams, Release Teams, and CI/CD environments all use Docker Build. 
 
 Docker Build Enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
