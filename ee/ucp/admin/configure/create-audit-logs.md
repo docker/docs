@@ -12,6 +12,8 @@ Audit logs are focused on external user/agent actions and security than understa
 
 Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. zCreating audit logs is mainly CLI driven and is an UCP component that integrates with Swarm, K8s, and UCP APIs.
 
+## Logging levels
+
 To allow more control to administrators over the audit Logging, three audit logging levels are provided:
 
 - None: audit logging is disabled
