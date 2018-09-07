@@ -8,7 +8,7 @@ The Docker Enterprise Engine for Docker `18.09` release introduces a new feature
 
 CE-EE node activate will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
 
-The Docker Commmunity Edition Engine for Docker version must be version `18.09` or higher.
+The Docker Community Edition version must be 18.09 or higher.
 
 The activation can be performed either online with connection to Docker Hub, or offline.
 
