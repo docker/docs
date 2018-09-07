@@ -146,7 +146,7 @@ spec:
       serviceAccountName: ucp-secureoverlay-agent
       containers:
       - name: ucp-secureoverlay-agent
-        image: ucp-secureoverlay-agent:3.1.0
+        image: docker/ucp-secureoverlay-agent:3.1.0
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]
@@ -188,7 +188,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: ucp-secureoverlay-mgr
-        image: ucp-secureoverlay-mgr:3.1.0
+        image: docker/ucp-secureoverlay-mgr:3.1.0
 ```
 
 After one downloads the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials: 
