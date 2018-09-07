@@ -70,7 +70,9 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
 (cd $DOCKER_CERT_PATH && kubectl create secret generic prometheus --from-file=ca.pem --from-file=cert.pem --from-file=key.pem)
 ```
 
-3. Apply some YAML to create a Prometheus deployment and ClusterIP service. On AWS with Kube’s cloud provider configured, you could replace `ClusterIP` with `LoadBalancer` in the service YAML and then access the service through the load balancer. If you are running Prometheus external to UCP, change the following domain for inventory container in the Prometheus deployment from ucp-controller.kube-system.svc.cluster.local to a external domain for UCP accessible from the Prometheus node.
+3. Create a Prometheus deployment and ClusterIP service using YAML as follows.
+
+On AWS with Kube’s cloud provider configured, you could replace `ClusterIP` with `LoadBalancer` in the service YAML then access the service through the load balancer. If you are running Prometheus external to UCP, change the following domain for inventory container in the Prometheus deployment from `ucp-controller.kube-system.svc.cluster.local` to a external domain to access UCP from the Prometheus node.
 
 ```
 kubectl apply -f - <<EOF
