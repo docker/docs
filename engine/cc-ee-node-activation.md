@@ -4,11 +4,11 @@ keywords: Engine, CE, EE, node activate
 title: CE-EE Node Activate
 ---
 
-The Docker Enterprise Engine for Docker `18.09` release introduces a new feature called CE-EE Node Activate, and allows a user to perform an in-place seamless activation of the EE feature-set on a given node through the Docker Command Line Interface (CLI) without a re-install.
+The Docker Enterprise Engine for Docker `18.09` release introduces a new feature called CE-EE Node Activate, and allows a user to perform an in-place seamless activation of the EE feature-set on an existing CE node through the Docker Command Line Interface (CLI) without a re-install.
 
-The Docker Enterprise Engine for Docker version must be version `18.09` or higher.
+The Docker Commmunity Edition Engine for Docker version must be version `18.09` or higher.
 
-The activation can be performed either online with connection to Docker Hub, or offline with Linux distribution packages.
+The activation can be performed either online with connection to Docker Hub, or offline.
 
 ## Limitations
 
@@ -40,6 +40,7 @@ Server:
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
+**NOTE**: Your output may vary slightly from what is displayed on this page.
 
 2. Log into the Docker engine from the command line.
 
@@ -57,19 +58,11 @@ Login Succeeded
 3. Activate the EE license. You must use sudo even if your user is part of the docker group.
 
 ```
-root@docker-node:~# sudo docker engine activate --registry-prefix docker.io/dockereng --version 18.09.0-ee
+root@docker-node:~# sudo docker engine activate
 Looking for existing licenses for beluga...
 NUM                 OWNER               PRODUCT ID                     EXPIRES                         PRICING COMPONENTS
 0                   beluga          docker-ee-trial                2018-09-13 21:41:12 +0000 UTC   Nodes:10
 1                   beluga          docker-ee-trial                2018-08-31 03:17:15 +0000 UTC   Nodes:10
-2                   beluga          docker-ee                      2018-10-14 15:30:01 +0000 UTC   Linux (IBM Z) Nodes:20,Linux (x86-64) Nodes:20,Windows (x86-64) Nodes:20
-3                   beluga          docker-ee-linux                2019-03-19 20:53:37 +0000 UTC   Nodes:10
-4                   docker              docker-ee                      2019-05-11 04:33:27 +0000 UTC   Linux (IBM Z) Nodes:100,Windows (x86-64) Nodes:100,Linux (PowerPC) Nodes:100,Linux (x86-64) Nodes:100
-5                   docker              docker-ee                      2021-04-01 18:00:17 +0000 UTC   Linux (x86-64) Nodes:10,Windows (x86-64) Nodes:10
-6                   docker              docker-ee-server-oraclelinux   2017-08-12 21:55:40 +0000 UTC   Nodes:10
-7                   docker              docker-ee-linux                2019-06-23 17:02:48 +0000 UTC   Nodes:1000
-8                   docker              docker-ee-server-rhel          2017-05-27 14:04:12 +0000 UTC   Nodes:10
-9                   docker              docker-ee-linux                2019-03-31 07:00:00 +0000 UTC   Nodes:10
 ```
 
 4. Pick the license of your choice
@@ -80,6 +73,7 @@ waiting for engine to be responsive... engine is online.
 
 5. Check the Docker Enterprise Engine for Docker version. The server engine will now be EE, and the client will stay CE.
 ```
+
 root@docker-node:~# docker version
 Client:
  Version:           18.09.0-ce
@@ -99,3 +93,5 @@ Server:
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
+
+**NOTE**: Your output may vary slightly from what is displayed on this page.
