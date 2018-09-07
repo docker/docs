@@ -21,6 +21,26 @@ The data is stored locally on disk for each Prometheus server, so data is not re
 
 > **Warning**: Upgrading UCP from 3.0.x to 3.1.x causes loss of metrics data.
 
+Events, logs, and metrics are sources of data that provide observability of ypur cluster. Metrics monitors numerical data values that have a time-series component. There are several levels where metrics can be derived from that all provide different kinds of meaning for a business and its applications.
+
+The Docker EE platform provides a base set of metrics that get you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of off the shelf or custom tooling, but recognizes the need for an basic set of metrics built in the product. The following are examples of these metrics:
+
+- **Business metrics**: These are high-level aggregate metrics that typically combine technical, financial, and organizational data to create metrics for business leaders of the IT infrastructure. Some examples of business metrics might be:
+    - Company or division-level application downtime
+    - Aggregate resource utilization
+    - Application resource demand growth
+
+- **Application metrics**: These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
+    - Service state metrics
+    - Container platform metrics
+    - Host infrastructure metrics
+
+- **Service state metrics**: These are metrics about the state of services running on the container platform. These types of metrics have very low cardinality, meaning the values are typically from a small fixed set of possibilities, commonly binary.
+    - Application health
+    - Convergence of K8s deployments and Swarm services
+    - Cluster load by number of services or containers or pods
+
+
 ## Deploy Prometheus on worker nodes
 
 To deploy Prometheus on worker nodes in a cluster:
