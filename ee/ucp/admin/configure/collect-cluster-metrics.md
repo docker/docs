@@ -58,7 +58,7 @@ ucp-metrics-88lzx   3/3       Running       0          12s       192.168.83.1   
 ucp-metrics-hvkr7   3/3       Terminating   0          4h        192.168.80.66   3a724a-0
 ```
 
-## Configure external Prometheus to scrape Prometheus metrics from UCP
+## Configure external Prometheus to scrape metrics from UCP
 
 To configure your external Prometheus server to scrape metrics from Prometheus in UCP:
 
@@ -161,4 +161,18 @@ spec:
     app: prometheus
   sessionAffinity: ClientIP
 EOF
+```
+
+4. Determine the service ClusterIP.
+
+```
+$ kubectl get service prometheus
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
+```
+
+5. Forward port 9090 on the local host to the ClusterIP. The tunnel created does not need to be kept alive and is only intended to expose the Prometheus API.
+
+```
+ssh -L 9090:10.96.254.107:9090 ANY_NODE
 ```
