@@ -61,34 +61,49 @@ with v2.6.0. If you clicked **Save & Start** previously, verify that the garbage
 
 ## Under the hood
 
+## Under the hood
+
 Each image stored in DTR is made up of multiple files:
 
-* A list of image layers that represent the image filesystem.
+* A list of image layers that are unioned which represents the image filesystem
 * A configuration file that contains the architecture of the image and other
-metadata.
+metadata
 * A manifest file containing the list of all layers and configuration file for
-an image.
+an image
 
-All these files are stored in a content-addressable way in which the name of
-the file is the result of hashing the file's content. This means that if two
-image tags have exactly the same content, DTR only stores the image content
-once, even if the tag name is different.
+All these files are tracked in DTR's metadata store in RethinkDB. These files
+are tracked in a content-addressable way such that a file corresponds to
+a cryptographic hashing the file's content. This means that if two image tags hold exactly the same content, 
+DTR only stores the image content once while making hash collisions nearly impossible,
+even if the tag name is different.
 
 As an example, if `wordpress:4.8` and `wordpress:latest` have the same content,
-they will only be stored once. If you delete one of these tags, the other won't
+the content will only be stored once. If you delete one of these tags, the other won't
 be deleted.
 
-This means that when users delete an image tag, DTR can't delete the underlying
-files of that image tag since it's possible that there are other tags that
-also use the same files.
+This means that when you delete an image tag, DTR cannot delete the underlying
+files of that image tag since other tags may also use the same files.
 
-To delete unused image layers, DTR:
-1. Becomes read-only to make sure that no one is able to push an image, thus
-changing the underlying files in the filesystem.
-2. Check all the manifest files and keep a record of the files that are
-referenced.
-3. If a file is never referenced, that means that no image tag uses it, so it
-can be safely deleted.
+To facilitate online garbage collection, DTR makes a couple of changes to how it uses the storage 
+backend that are distinct from the open-source Docker registry:
+1. Layer links &ndash; the references within repository directories to 
+their associated blobs &ndash; are no longer in the storage backend. That is because DTR stores these references in RethinkDB instead to enumerate through 
+them during the marking phase of garbage collection. 
+
+2. Any layers created after an upgrade to 2.6 are no longer content-addressed in 
+the storage backend. Many cloud provider backends do not give the sequential 
+consistency guarantees required to deal with the simultaneous deleting and 
+re-pushing of a layer in a predictable manner. To account for this, DTR assigns 
+each newly pushed layer a unique ID and performs the translation from content hash 
+to ID in RethinkDB.
+
+To delete unused files, DTR does the following:
+1. Establish a cutoff time
+1. Mark each referenced manifest file with a timestamp. When manifest files
+are pushed to DTR, they are also marked with a timestamp
+2. Sweep each manifest file that does not have a timestamp after the cutoff time
+3. If a file is never referenced &ndash; which means no image tag uses it &ndash; delete the file
+4. Repeat the process for blob links and blob descriptors.
 
 ## Where to go next
 
