@@ -63,11 +63,11 @@ To create a grant for a Kuberenetes role in the UCP web interface:
 7. To create a user role binding, select a username from the **Users** dropdown list then select **Next**.
 8. Select a resource set for the subject. The **default** namespace is automatically selected. To use a different namespace, select the **Select Namespace** button next to the desired namespace. For `Cluster Role Binding`, slide the **Apply Role Binding to all namespaces** selector to the right.
 
-![Kubernetes Create User Role Binding in UCP](../../images/kube-grant-rolebinding.png)
+![Kubernetes Create User Role Binding in UCP](/ee/ucp/images/kube-grant-rolebinding.png)
 
 9. Select **Next** to continue.
 10. Select the **Cluster Role** from the dropdown list. If you create a `ClusterRoleBinding` (by selecting **Apply Role Binding to all namespaces**) then you may only select ClusterRoles. If you select a specific namespace, you can choose any role from that namespace or any ClusterRole.
 
-![Kubernetes Select Cluster Role in UCP](../../images/kube-grant-roleselect.png)
+![Kubernetes Select Cluster Role in UCP](/ee/ucp/images/kube-grant-roleselect.png)
 
 11. Select **Create** to complete creating the grant.
