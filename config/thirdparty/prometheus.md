@@ -26,9 +26,7 @@ In UCP 3.0,  Prometheus servers were standard containers. In UCP 3.1, Prometheus
 
 The data is stored locally on disk for each Prometheus server, so data is not replicated on new managers or if you schedule Prometheus to run on a new node. Metrics are not kept longer than 24 hours.
 
-> Note
->
-> Upgrading UCP from 3.0.x to 3.1.x causes loss of metrics data.
+> **Note:** Upgrading UCP from 3.0.x to 3.1.x causes loss of metrics data.
 
 
 ## Configure Docker
@@ -63,7 +61,7 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 
 ## Configure and run Prometheus
 
-In this example, Prometheus runs as a Docker service on a Docker swarm.
+In this example, Prometheus runs as a Kubernetes deployment.
 
 > **Prerequisites**
 >
