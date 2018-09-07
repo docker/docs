@@ -24,12 +24,12 @@ To create a Kuberenetes role in the UCP web interface:
 2. Navigate to the **Access Control**.
 3. In the lefthand menu, select **Roles**.
 
-![Kubernetes Grants in UCP](../images/kube-rbac-roles.png)
+![Kubernetes Grants in UCP](/ee/ucp/images/kube-rbac-roles.png)
 
 4. Select the **Kubernetes** tab at the top of the window.
 5. Select **Create** to create a Kubernetes role object in the following dialog:
 
-![Kubernetes Role Creation in UCP](../images/kube-role-create.png)
+![Kubernetes Role Creation in UCP](/ee/ucp/images/kube-role-create.png)
 
 6. Select a namespace from the **Namespace** dropdown list. Selecting a specific namespace creates a role for use in that namespace, but selecting all namespaces creates a `ClusterRole` where you can create rules for cluster-scoped Kubernetes resources as well as namespaced resources.
 7. Provide the YAML for the role, either by entering it in the **Object YAML** editor or select **Click to upload a .yml file** to choose and upload a .yml file instead.
