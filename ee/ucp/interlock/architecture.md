@@ -22,9 +22,9 @@ routing in UCP:
 
 ![](../images/interlock-architecture-1.svg)
 
-An Interlock service starts running on a manager node, an Interlock-extension
-service starts running on a worker node, and two replicas of the
-Interlock-proxy service run on worker nodes.
+The Interlock service starts a single replica on a manager node. The
+Interlock-extension service runs a single replica on any available node, and
+the Interlock-proxy service starts two replicas on any available node.
 
 If you don't have any worker nodes in your cluster, then all Interlock
 components run on manager nodes.
