@@ -35,10 +35,24 @@ The Docker EE platform provides a base set of metrics that get you running and i
     - Container platform metrics
     - Host infrastructure metrics
 
+
+Docker EE 2.1 does not collect or expose application level metrics. The following are metrics Docker EE 2.1 collects, aggregates, and exposes:
+
 - **Service state metrics**: These are metrics about the state of services running on the container platform. These types of metrics have very low cardinality, meaning the values are typically from a small fixed set of possibilities, commonly binary.
     - Application health
     - Convergence of K8s deployments and Swarm services
     - Cluster load by number of services or containers or pods
+
+- **Host infrastructure metrics**: These are metrics taken from te software & hardware infrastructure.
+    - CPU - Container-level CPU utilization, Node-level load average
+    - Memory - RSS, swap
+    - Network I/O - bandwidth, packets, drops
+    - Storage I/O - disk I/O, IOPs, capacity
+    - Operating System – file descriptors, open network connections, number of processes/threads
+
+- **Container infrastructure system metrics**: These are application-level metrics derived from the container platform itself.
+    - Infrastructure Quorum Leader - Swarm RAFT, etcd, rethink
+    - UCP Component health - Healthy / Unhealthy
 
 
 ## Deploy Prometheus on worker nodes
