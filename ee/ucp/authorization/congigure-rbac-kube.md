@@ -22,7 +22,7 @@ To create a Kuberenetes roles in the UCP web interface:
 
 1. Go to the UCP web UI.
 2. Navigate to the **Access Control**.
-3. In the lefthand menu, select **Roles**.
+3. In the lefthand menu, select **Users**.
 
 ![Kubernetes Grants in UCP](../images/kube-rbac-roles.png)
 
