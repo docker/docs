@@ -176,3 +176,5 @@ prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
 ```
 ssh -L 9090:10.96.254.107:9090 ANY_NODE
 ```
+
+6. Visit http://127.0.0.1:9090 to explore the UCP metrics being collected by Prometheus.
