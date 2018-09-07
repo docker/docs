@@ -4,7 +4,6 @@ keywords: prometheus, metrics
 title: Collect Docker metrics with Prometheus
 redirect_from:
 - /engine/admin/prometheus/
-- /config/thirdparty/prometheus/
 ---
 
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
