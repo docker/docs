@@ -1,7 +1,7 @@
 ---
-description: Collecting cluster metrics with Prometheus
+description: Collecting UCP cluster metrics with Prometheus
 keywords: prometheus, metrics
-title: Collect cluster metrics with Prometheus
+title: Collect UCP cluster metrics with Prometheus
 redirect_from:
 - /engine/admin/prometheus/
 ---
@@ -15,13 +15,7 @@ alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
 container, and monitor your Docker instance using Prometheus.
 
-> **Warning**: The available metrics and the names of those metrics are in
-> active development and may change at any time.
-
-Currently, you can only monitor Docker itself. You cannot currently monitor your
-application using the Docker target.
-
-In UCP 3.0,  Prometheus servers were standard containers. In UCP 3.1, Prometheus runs as a Kubernetes deployment. By default, this will be a daemonset that runs on every manager node. One benefit of this change is you can set the daemonset to not schedule on any nodes, which effectively disables Prometheus if you don’t use the UCP web interface.
+In UCP 3.0, Prometheus servers were standard containers. In UCP 3.1, Prometheus runs as a Kubernetes deployment. By default, this will be a daemonset that runs on every manager node. One benefit of this change is you can set the daemonset to not schedule on any nodes, which effectively disables Prometheus if you don’t use the UCP web interface.
 
 The data is stored locally on disk for each Prometheus server, so data is not replicated on new managers or if you schedule Prometheus to run on a new node. Metrics are not kept longer than 24 hours.
 
