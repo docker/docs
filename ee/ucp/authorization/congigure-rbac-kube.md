@@ -12,7 +12,7 @@ UCP 3.0 used its own role-based asccess control (RBAC) for Kubernetes clusters. 
 
 Kubernetes RBAC is turned on by default when customers upgrade to UCP 3.1. See [RBAC authorization in Kubernetes](https://v1-8.docs.kubernetes.io/docs/admin/authorization/rbac/) for more information about Kubernetes.
 
-Starting with UCP 3.1, Kubernetes & Swarm roles have separate views. You can view all the roles for a particular cluster under **Access Control** then **Users**. Select Kubernetes or Swarm to view the specific roles for each.
+Starting with UCP 3.1, Kubernetes & Swarm roles have separate views. You can view all the roles for a particular cluster under **Access Control** then **Roles**. Select Kubernetes or Swarm to view the specific roles for each.
 
 ## Creating roles
 
@@ -32,6 +32,8 @@ To create a Kuberenetes roles in the UCP web interface:
 ![Kubernetes Role Creation in UCP](../images/kube-role-create.png)
 
 6. Select a namespace from the **Namespace** dropdown list.
+    Selecting a specific **Namespace** will create a `Role` for use within that namespace only. 
+    Selecting **All NameSpaces** will create a `ClusterRole` which can be used to create rules for cluster and namespace scoped Kubernetes resources
 7. Provide the YAML for the role, either by entering it in the **Object YAML** editor or select **Click to upload a .yml file** to choose and upload a .yml file instead.
 8. When you have finished specifying the YAML, Select **Create** to complete role creation.
 
@@ -41,7 +43,7 @@ To create a Kuberenetes roles in the UCP web interface:
 Kubernetes provides 2 types of role grants:
 
 - `ClusterRoleBinding` which applies to all namespaces
-- `RoleBinding1` which applies to a specific namespace
+- `RoleBinding` which applies to a specific namespace
 
 To create a grant for a Kuberenetes role in the UCP web interface:
 
