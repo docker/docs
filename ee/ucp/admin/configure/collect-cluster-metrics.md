@@ -1,6 +1,6 @@
 ---
 description: Collecting UCP cluster metrics with Prometheus
-keywords: prometheus, metrics
+keywords: prometheus, metrics, ucp
 title: Collect UCP cluster metrics with Prometheus
 redirect_from:
 - /engine/admin/prometheus/
@@ -20,3 +20,24 @@ In UCP 3.0, Prometheus servers were standard containers. In UCP 3.1, Prometheus 
 The data is stored locally on disk for each Prometheus server, so data is not replicated on new managers or if you schedule Prometheus to run on a new node. Metrics are not kept longer than 24 hours.
 
 > **Warning**: Upgrading UCP from 3.0.x to 3.1.x causes loss of metrics data.
+
+## Deploy Prometheus on worker nodes
+
+To deploy Prometheus on worker nodes in a cluster:
+
+1. Begin by sourcing an admin bundle.
+
+2. Verify that ucp-metrics pods are running on all managers.
+
+```
+$ kubectl -n kube-system get pods -l k8s-app=ucp-metrics -o wide
+NAME                READY     STATUS    RESTARTS   AGE       IP              NODE
+ucp-metrics-hvkr7   3/3       Running   0          4h        192.168.80.66   3a724a-0
+```
+
+3. Add a Kubernetes node label to one or more workers.  Here we add a label with key "ucp-metrics" and value "".
+
+```
+$ kubectl label node 3a724a-1 ucp-metrics=
+node "noah-3a724a-1" labeled
+```
