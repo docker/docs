@@ -4,7 +4,7 @@ keywords: Engine, CE, EE, node activate
 title: CE-EE Node Activate
 ---
 
-The Docker Enterprise Engine for Docker `18.09` release introduces a new feature called CE-EE Node Activate, which allows a user to perform an in-place seamless activation of the EE feature-set on an existing CE node through the Docker Command Line Interface (CLI) without a re-install.
+The Docker Engine release `18.09` release introduces a new feature called CE-EE Node Activate, which allows a user to perform an in-place seamless activation of the EE feature-set on an existing CE node through the Docker Command Line Interface (CLI) without a re-install.
 
 CE-EE node activate will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
 
@@ -73,7 +73,7 @@ Please pick a license by number: 0
 waiting for engine to be responsive... engine is online.
 ```
 
-5. Check the Docker Enterprise Engine for Docker version. The server engine will now be EE, and the client will stay CE.
+5. Check the Docker Engine version. The server engine will now be EE, and the client will stay CE.
 ```
 
 root@docker-node:~# docker version
