@@ -2,7 +2,8 @@
 title: Enable Kuberenetes RBAC
 description: Learn how configure role-based access control for Kubernetes
 keywords: Kuberenetes, ucp, RBAC
-redirects: /ee/ucp/authorization/migrate-kubernetes-roles/
+redirect_from:
+- /ee/ucp/authorization/migrate-kubernetes-roles/
 ---
 
 UCP 3.0 used its own role-based asccess control (RBAC) for Kubernetes clusters. New in UCP 3.1 is the ability to use Kubernetes RBAC. The benefits of doing this are:
