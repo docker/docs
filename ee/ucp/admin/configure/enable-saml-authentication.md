@@ -1,7 +1,7 @@
 ---
 title: Enable SAML authentication
 description: Learn how configure user authentication with SAML 2.0
-keywords: SAML, ucp, authentication
+keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 ---
 
 > Beta disclaimer
