@@ -19,10 +19,10 @@ To allow more control to administrators over the audit Logging, three audit logg
 - None: audit logging is disabled
 - Metadata: includes the following:
     - Method and API endpoint for the request
-    - UCP user which made the request
-    - Response Status (success/failure)
+    - UCP user who made the request
+    - Response Status (success or failure)
     - Timestamp of the call
-    - Object ID of any created or updated resource (for create/update calls). We are not including names of created/updated resources unless more customers are requesting this feature.
+    - Object ID of any created or updated resource (for create or update API calls). We do not include names of created or updated resources
     - License Key
     - Remote Address
 - Request: includes all fields from the Metadata level as well as the request payload.
