@@ -192,6 +192,22 @@ $ docker network create \
   my-network
 ```
 
+##### Using custom default address pools
+
+Default network address pools for customzied subnet allocation of networks can be [optionally configured](./sarm-mode.md) during `swarm init`. The usage of the default address pools is automatically invoked when users create networks. For example, the following command is used when initializing a Swarm:
+
+```bash
+$ docker swarm init --default-address-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+```
+
+Whenever a user creates a network not using the `--subnet` command, the subnet for this network will be allocated sequentially from the next available subnet in the pool. Usage of the `--subnet` command is still allowed, though the network will not be created if the user has specified a subnet that has already been allocated. 
+
+Additional notes:
+- Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation
+- The default mask length can be configured and is the same for all networks. It is set to `/24` if not configured.
+- Multiple pools can be configured if discontigous address space is required, however allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.
+
+
 ##### Overlay network size limitations
 
 You should create overlay networks with `/24` blocks (the default), which limits

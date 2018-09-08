@@ -42,7 +42,9 @@ this.
 
 ## Avoid IP range conflicts
 
-The default Kubernetes cluster IP pool for the pods is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
+Swarm uses a default address pool for its overlay networks that is `10.0.0.0/16`. If this conflicts with your current networks, please use a custom IP address pool by specifying `--default-address-pool` during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool Swarm must first be installed using this flag and UCP must be installed on top of it.
+
+Kubernetes uses a default cluster IP pool for pods that is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
 
 ## Time synchronization
 
