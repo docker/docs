@@ -1,10 +1,10 @@
 ---
 title: Create UCP audit logs
 description: Learn how to create audit logs of all activity in UCP
-keywords: logs, ucp, swarm, kubernetes
+keywords: logs, ucp, swarm, kubernetes, audits
 ---
 
-> BETA DISCLAIMER
+> Beta disclaimer
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
