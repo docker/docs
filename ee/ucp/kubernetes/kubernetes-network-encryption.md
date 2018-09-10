@@ -21,7 +21,7 @@ Kubernetes Network Encryption is supported for the following platforms:
 
 ## Configuring SecureOverlay
 
-Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to UCP:
+Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to the UCP manager node:
 
 ```
 ######################
