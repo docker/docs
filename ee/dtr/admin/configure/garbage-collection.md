@@ -71,7 +71,7 @@ an image
 
 All these files are tracked in DTR's metadata store in RethinkDB. These files
 are tracked in a content-addressable way such that a file corresponds to
-a cryptographic hashing the file's content. This means that if two image tags hold exactly the same content, 
+a cryptographic hash the file's content. This means that if two image tags hold exactly the same content, 
 DTR only stores the image content once while making hash collisions nearly impossible,
 even if the tag name is different.
 
@@ -83,7 +83,7 @@ This means that when you delete an image tag, DTR cannot delete the underlying
 files of that image tag since other tags may also use the same files.
 
 To facilitate online garbage collection, DTR makes a couple of changes to how it uses the storage 
-backend that are distinct from the open-source Docker registry:
+backend:
 1. Layer links &ndash; the references within repository directories to 
 their associated blobs &ndash; are no longer in the storage backend. That is because DTR stores these references in RethinkDB instead to enumerate through 
 them during the marking phase of garbage collection. 
