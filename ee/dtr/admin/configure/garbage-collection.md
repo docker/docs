@@ -71,7 +71,7 @@ an image
 
 All these files are tracked in DTR's metadata store in RethinkDB. These files
 are tracked in a content-addressable way such that a file corresponds to
-a cryptographic hash the file's content. This means that if two image tags hold exactly the same content, 
+a cryptographic hash of the file's content. This means that if two image tags hold exactly the same content, 
 DTR only stores the image content once while making hash collisions nearly impossible,
 even if the tag name is different.
 
