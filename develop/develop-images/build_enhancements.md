@@ -8,13 +8,13 @@ keywords: build, security, engine, secret, buildkit
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-Docker Build is one of the most used features of the Docker Engine - users range from Developers, Build Teams, Release Teams, and CI/CD environments all use Docker Build. 
+Docker Build is one of the most used features of the Docker Engine - users ranging from developers, build teams, and release teams all use Docker Build. 
 
-Docker Build Enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
+Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
 
-* Docker images created with buildkit are compatible to be pushed to docker hub and DTR just like docker images created with legacy build
-* Dockerfile format that works on legacy build should also work with buildkit builds
-* The new `--secret` flag allows the user to pass secret information for building new images with a specified Dockerfile 
+* Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
+* the Dockerfile format that works on legacy build will also work with buildkit builds
+* The new `--secret` conmmand line option allows the user to pass secret information for building new images with a specified Dockerfile 
 
 For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
 
@@ -31,7 +31,7 @@ For more information on build options, see the reference guide on the [command l
 
 ## To enable buildkit builds
 
-Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking docker build command, such as:
+Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
 
 ```
 $ DOCKER_BUILD=1 docker build .
@@ -115,8 +115,6 @@ The new `--secret` flag for docker build allows the user to pass secret informat
 `id` is the identifier to pass into the `docker build --secret`. This identifier is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker does not use the filename of where the secret is kept outside of the Dockerfile, since this may be sensitive information.
 
 `dst` renames the secret file to a specific file in the Dockerfile `RUN` command to use.
-
-The `--mount` option has several types, but for this document focuses only the option `--mount=type=secret`.
 
 For example, with a secret piece of information stored in a text file:
 
