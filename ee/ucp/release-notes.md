@@ -18,6 +18,16 @@ upgrade your installation to the latest release.
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
+# Version 3.1 (2018-10)
+
+**New Features**
+* UCP has bumped its Kubernetes support to v1.11
+* UCP now supports Kubernetes native role-based access controller
+* UCP now provides service metrics for all API calls, using Prometheus deployed as Kubernetes Daemon Set
+* UCP now supports use of an external Prometheus instance to scrape metrics from UPC endpoints
+* UCP suppoprts SAML authentication
+
+
 # Version 3.0
 
 ## 3.0.4 (2018-08-09)
@@ -25,7 +35,7 @@ upgrade your installation to the latest release.
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password 
+  * Fixed a critical security issue where the LDAP bind username and password
     were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 **Known Issue**
@@ -280,9 +290,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password 
-    were stored in clear text on UCP hosts. Please refer to the following KB article 
-    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
+  * Fixed a critical security issue where the LDAP bind username and password
+    were stored in clear text on UCP hosts. Please refer to the following KB article
+    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
 
 ## Version 2.2.11 (2018-07-26)
