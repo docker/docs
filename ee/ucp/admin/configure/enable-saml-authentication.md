@@ -32,7 +32,7 @@ Okta integration requires these values:
 - URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/acs`.
 - Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
 - NameID format. Select Unspecified.
-- Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username in the email address.
+- Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username portion of the email address.
 - Attribute Statements:
     - Name: `fullname`, Value: `user.displayName`.
     - Group Attribute Statement:
@@ -48,7 +48,7 @@ ADFS integration requires these values:
 - Attribute Store: Active Directory.
     - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
     - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
-- Claim using Customer Rule. For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+- Claim using Custom Rule. For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
  => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);`
 - Outgoing claim type: Name ID
 - Outgoing name ID format: Transient Identifier
@@ -74,14 +74,14 @@ To enable SAML authentication:
 
 ## Security considerations
 
-You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from UCP web interface that enables command line as well as API access to UCP. It lets you  authorize a remote Docker engine to access specific user account managed in Docker EE, absorbing all associated RBAC controls in the process. You can now execute docker swarm commands from your remote machine that take effect on the remote cluster. You can download the client bundle in the **Admin Settings** under **My Profile**.
+You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from UCP web interface that enables command line as well as API access to UCP. It lets you  authorize a remote Docker engine to access specific user accounts managed in Docker EE, absorbing all associated RBAC controls in the process. You can now execute docker swarm commands from your remote machine that take effect on the remote cluster. You can download the client bundle in the **Admin Settings** under **My Profile**.
 
 ![Downloading UCP Client Profile](../../images/client-bundle.png)
 
 > Caution
 >
->To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
+>Users who have been previously authorized using a Client Bundle will continue to be able to access UCP regardless of the newly configured SAML access controls. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
 >
-> - Remove the user account from UCP granting client bundle access if access is removed from the identity provider.
+> - Remove the user account from UCP that grants the client bundle access.
 > - If group membership in the identity provider changes, replicate this change in UCP.
 > - Continue to use LDAP to sync group membership.
