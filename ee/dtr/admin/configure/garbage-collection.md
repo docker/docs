@@ -17,8 +17,8 @@ layers, thus saving you disk space. This process is also known as garbage collec
 First you configure DTR to run a garbage collection job on a fixed schedule. At
 the scheduled time, DTR:
 
-2. Identifies and marks unused image layers.
-3. Deletes the marked image layers.
+1. Identifies and marks unused image layers.
+2. Deletes the marked image layers.
 
 Starting in DTR 2.5, we introduced an experimental feature which lets you run garbage collection jobs
 without putting DTR in read-only mode. As of v2.6.0, online garbage collection is no longer in 
@@ -55,11 +55,9 @@ scheduled interval.
 ## Review the garbage collection job log
 
 In v2.5, you were notified with a banner under main navigation that no one can push images while a garbage collection job is running. Notice how this is no longer the case
-with v2.6.0. If you clicked **Save & Start** previously, verify that the garbage collection routine started by navigating to *Jobs Logs*.
+with v2.6.0. If you clicked **Save & Start** previously, verify that the garbage collection routine started by navigating to **Job Logs**.
 
 ![](../../images/garbage-collection-2.png){: .with-border}
-
-## Under the hood
 
 ## Under the hood
 
@@ -99,11 +97,11 @@ to ID in RethinkDB.
 
 To delete unused files, DTR does the following:
 1. Establish a cutoff time
-1. Mark each referenced manifest file with a timestamp. When manifest files
+2. Mark each referenced manifest file with a timestamp. When manifest files
 are pushed to DTR, they are also marked with a timestamp
-2. Sweep each manifest file that does not have a timestamp after the cutoff time
-3. If a file is never referenced &ndash; which means no image tag uses it &ndash; delete the file
-4. Repeat the process for blob links and blob descriptors.
+3. Sweep each manifest file that does not have a timestamp after the cutoff time
+4. If a file is never referenced &ndash; which means no image tag uses it &ndash; delete the file
+5. Repeat the process for blob links and blob descriptors.
 
 ## Where to go next
 
