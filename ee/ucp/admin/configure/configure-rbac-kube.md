@@ -1,15 +1,15 @@
 ---
-title: Enable Kuberenetes RBAC
-description: Learn how configure role-based access control for Kubernetes
-keywords: Kuberenetes, ucp, RBAC
+title: Enable Kubernetes RBAC
+description: Learn how to configure role-based access control for Kubernetes
+keywords: Kubernetes, ucp, RBAC
 redirect_from:
 - /ee/ucp/authorization/migrate-kubernetes-roles/
 ---
 
-UCP 3.0 used its own role-based asccess control (RBAC) for Kubernetes clusters. New in UCP 3.1 is the ability to use Kubernetes RBAC. The benefits of doing this are:
+UCP 3.0 used its own role-based access control (RBAC) for Kubernetes clusters. New in UCP 3.1 is the ability to use native Kubernetes RBAC. The benefits of doing this are:
 
 - Many ecosystem applications and integrations expect Kubernetes RBAC as a part of their YAML files to provide access to service accounts.
-- Organizations planning to run UCP both on-premesis as well as in hosted cloud services want to run Kubernetes applications on both sets of environments, without manually changing RBAC for their YAML file.
+- Organizations planning to run UCP both on-premises as well as in hosted cloud services want to run Kubernetes applications on both sets of environments, without manually changing RBAC in their YAML file.
 
 Kubernetes RBAC is turned on by default for Kubernetes clusters when customers upgrade to UCP 3.1. See [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the v1.11 documentation for more information about Kubernetes role-based access control.
 
