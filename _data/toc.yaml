@@ -2404,6 +2404,8 @@ manuals:
         title: Create and manage webhooks
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
+      - title: Tag pruning
+        path: /ee/dtr/user/tag-pruning/
     - title: API reference
       path: /reference/dtr/2.5/api/
       nosync: true
