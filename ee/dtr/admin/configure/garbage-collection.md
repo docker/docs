@@ -21,7 +21,7 @@ the scheduled time, DTR:
 2. Deletes the marked image layers.
 
 Starting in DTR 2.5, we introduced an experimental feature which lets you run garbage collection jobs
-without putting DTR in read-only mode. As of v2.6.0, online garbage collection is no longer in 
+without putting DTR in read-only mode. As of v2.6, online garbage collection is no longer in 
 experimental mode. This means that the registry no longer has to be in read-only mode (or offline) 
 during garbage collection. 
 
@@ -54,8 +54,9 @@ scheduled interval.
 
 ## Review the garbage collection job log
 
-In v2.5, you were notified with a banner under main navigation that no one can push images while a garbage collection job is running. Notice how this is no longer the case
-with v2.6.0. If you clicked **Save & Start** previously, verify that the garbage collection routine started by navigating to **Job Logs**.
+In v2.5, you were notified with a banner under main navigation that no one can push images while a garbage collection job is running. With v2.6, this is no longer the case since garbage collection now happens while DTR is online and writable.
+
+If you clicked **Save & Start** previously, verify that the garbage collection routine started by navigating to **Job Logs**.
 
 ![](../../images/garbage-collection-2.png){: .with-border}
 
