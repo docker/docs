@@ -21,7 +21,7 @@ Tag pruning is the process of cleaning up unnecessary or unwanted repository tag
 
 ## Specify a tag pruning policy
 
-You can now add tag pruning policies on each repository that you manage. To get started, navigate to `https://<dtr-url>` and log in with your credentials.
+As a repository administrator, you can now add tag pruning policies on each repository that you manage. To get started, navigate to `https://<dtr-url>` and log in with your credentials.
  
 Select **Repositories** on the left navigation pane, and then click on the name of the repository
 that you want to update. Note that you will have to click on the repository name following
@@ -38,28 +38,28 @@ DTR allows you to set your pruning triggers based on the following image attribu
 
 | Name            | Description                                        | Example           |
 |:----------------|:---------------------------------------------------| :----------------|
-| Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | tag name = `test`|
-| Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | component name starts with `b` |
-| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number | critical vulnerabilities = `3` |
-| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | license = `docker` | 
-| Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months |  custom cron job = `1 1 1 1` or hours = `12` |
+| Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Tag name = `test`|
+| Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Component name starts with `b` |
+| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number | Critical vulnerabilities = `3` |
+| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | License name = `docker` | 
+| Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months. For details on valid time units, see [Go's ParseDuration function](https://golang.org/pkg/time/#ParseDuration). |  Last updated at: Hours = `12` |
 
 Specify one or more image attributes to your pruning criteria, and choose **Prune future tags** or **Prune all tags**. Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
 
 ![](../../images/tag-pruning-2.png){: .with-border}
 
 
-If you have specified multiple pruning policies on the repository, the **Pruning** tab will display a list of your prune triggers and details on when a tag pruning operation was performed based on the trigger, a toggle for deactivating or reactivating the trigger, and a **View** link for modifying or deleting your selected trigger.
+If you have specified multiple pruning policies on the repository, the **Pruning** tab will display a list of your prune triggers and details on when the last tag pruning was performed based on the trigger, a toggle for deactivating or reactivating the trigger, and a **View** link for modifying or deleting your selected trigger.
 
 ![](../../images/tag-pruning-3.png){: .with-border}
 
 All tag pruning policies on your account are evaluated every 15 minutes. Any qualifying tags are then deleted from the metadata store. If a tag pruning policy is modified or created, then the tag pruning policy for the *affected* repository will be evaluated.
 
-This does not cover modification or deletion of pruning policies.
+This does not cover modifying or deleting a tag pruning policy.
 
 ## Set a tag limit
 
-In addition to pruning policies, you can also set repository tag limits to restrict the number of tags on a given repository. Repository tag limits are processed in a first in first out (FIFO) manner. For example, if you set a tag limit of 2, adding a third tag would push out the first.
+In addition to pruning policies, you can also set tag limits on repositories that you manage to restrict the number of tags on a given repository. Repository tag limits are processed in a first in first out (FIFO) manner. For example, if you set a tag limit of 2, adding a third tag would push out the first.
 
 ![](../../images/tag-pruning-4.png){: .with-border}
 
