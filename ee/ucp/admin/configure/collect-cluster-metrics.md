@@ -79,7 +79,7 @@ node "test-3a724a-1" labeled
 4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key “ucp-metrics” and the value “”.
 
 ```
-$ kubectl -n kube-system patch DaemonSet ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
+$ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
 daemonset "ucp-metrics" patched
 ```
 
