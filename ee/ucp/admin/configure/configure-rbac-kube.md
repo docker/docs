@@ -11,7 +11,7 @@ UCP 3.0 used its own role-based asccess control (RBAC) for Kubernetes clusters. 
 - Many ecosystem applications and integrations expect Kubernetes RBAC as a part of their YAML files to provide access to service accounts.
 - Organizations planning to run UCP both on-premesis as well as in hosted cloud services want to run Kubernetes applications on both sets of environments, without manually changing RBAC for their YAML file.
 
-Kubernetes RBAC is turned on by default for Kubernetes clusters when customers upgrade to UCP 3.1. See [RBAC authorization in Kubernetes](https://v1-8.docs.kubernetes.io/docs/admin/authorization/rbac/) for more information about Kubernetes role-based access control.
+Kubernetes RBAC is turned on by default for Kubernetes clusters when customers upgrade to UCP 3.1. See [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the v1.11 documentation for more information about Kubernetes role-based access control.
 
 Starting with UCP 3.1, Kubernetes & Swarm roles have separate views. You can view all the roles for a particular cluster under **Access Control** then **Roles**. Select Kubernetes or Swarm to view the specific roles for each.
 
