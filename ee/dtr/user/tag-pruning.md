@@ -30,11 +30,11 @@ Select **Repositories** on the left navigation pane, and then click on the name 
 that you want to update. Note that you will have to click on the repository name following
 the `/` after the specific namespace for your repository.
 
-![tag pruning](../../images/tag-pruning-0.png){: .with-border}
+![](../images/tag-pruning-0.png){: .with-border}
 
 Select the **Pruning** tab, and click **New pruning policy** to specify your tag pruning criteria:
 
-![](../../images/tag-pruning-1.png){: .with-border}
+![](../images/tag-pruning-1.png){: .with-border}
 
 
 DTR allows you to set your pruning triggers based on the following image attributes:
@@ -49,12 +49,12 @@ DTR allows you to set your pruning triggers based on the following image attribu
 
 Specify one or more image attributes to add to your pruning criteria, then choose **Prune future tags** to apply your selection to future tags or **Prune all tags** to evaluate existing tags on your repository. Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
 
-![](../../images/tag-pruning-2.png){: .with-border}
+![](../images/tag-pruning-2.png){: .with-border}
 
 
 If you have specified multiple pruning policies on the repository, the **Pruning** tab will display a list of your prune triggers and details on when the last tag pruning was performed based on the trigger, a toggle for deactivating or reactivating the trigger, and a **View** link for modifying or deleting your selected trigger.
 
-![](../../images/tag-pruning-3.png){: .with-border}
+![](../images/tag-pruning-3.png){: .with-border}
 
 All tag pruning policies on your account are evaluated every 15 minutes. Any qualifying tags are then deleted from the metadata store. If a tag pruning policy is modified or created, then the tag pruning policy for the *affected* repository will be evaluated.
 
@@ -62,12 +62,12 @@ All tag pruning policies on your account are evaluated every 15 minutes. Any qua
 
 In addition to pruning policies, you can also set tag limits on repositories that you manage to restrict the number of tags on a given repository. Repository tag limits are processed in a first in first out (FIFO) manner. For example, if you set a tag limit of 2, adding a third tag would push out the first.
 
-![](../../images/tag-pruning-4.png){: .with-border}
+![](../images/tag-pruning-4.png){: .with-border}
 
 To set a tag limit, select the repository that you want to update and click the **Settings** tab. Specify a number in the **Pruning** section and click **Save**. The **Pruning** tab will now display your tag limit above the prune triggers list along with a link to modify this setting.
 
 
-![](../../images/tag-pruning-5.png){: .with-border}
+![](../images/tag-pruning-5.png){: .with-border}
 
 ## Where to go next
 
