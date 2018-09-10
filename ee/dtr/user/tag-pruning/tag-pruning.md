@@ -10,16 +10,14 @@ keywords: registry, tag pruning, tag limit, repo management
 
 ## Overview
 
-You can configure the Docker Trusted Registry (DTR) to automatically clean up repository 
-images which are abandoned and no longer necessary. You enable tag pruning on each 
-repository that you manage by:
+Tag pruning is the process of cleaning up unnecessary or unwanted repository tags. As of v2.6, you can configure the Docker Trusted Registry (DTR) to automatically perform tag pruning on repositories that you manage by:
 
-* specifying a tag pruning policy
+* specifying a tag pruning policy or alternatively,
 * setting a tag limit 
 
 > Tag Pruning
 >
-> Tag pruning operation only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../../admin/configure/garbage-collection.md).
+> WHen run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../../admin/configure/garbage-collection.md).
 
 ## Specify a tag pruning policy
 
@@ -38,13 +36,13 @@ Select the **Pruning** tab, and click **New pruning policy** to specify your tag
 
 DTR allows you to set your pruning triggers based on the following image attributes:
 
-| Name            | Description                                        |
-|:----------------|:---------------------------------------------------|
-| Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values |
-| Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values |
-| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number |
-| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words 
-| Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months |  
+| Name            | Description                                        | Example           |
+|:----------------|:---------------------------------------------------| :----------------|
+| Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | tag name = `test`|
+| Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | component name starts with `b` |
+| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number | critical vulnerabilities = `3` |
+| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | license = `docker` | 
+| Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months |  custom cron job = `1 1 1 1` or hours = `12` |
 
 Specify one or more image attributes to your pruning criteria, and choose **Prune future tags** or **Prune all tags**. Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
 
