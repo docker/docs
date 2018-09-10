@@ -15,7 +15,7 @@ alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
 container, and monitor your Docker instance using Prometheus.
 
-In UCP 3.0, Prometheus servers were standard containers. In UCP 3.1, Prometheus runs as a Kubernetes deployment. By default, this will be a daemonset that runs on every manager node. One benefit of this change is you can set the daemonset to not schedule on any nodes, which effectively disables Prometheus if you don’t use the UCP web interface.
+In UCP 3.0, Prometheus servers were standard containers. In UCP 3.1, Prometheus runs as a Kubernetes deployment. By default, this will be a DaemonSet that runs on every manager node. One benefit of this change is you can set the DaemonSet to not schedule on any nodes, which effectively disables Prometheus if you don’t use the UCP web interface.
 
 The data is stored locally on disk for each Prometheus server, so data is not replicated on new managers or if you schedule Prometheus to run on a new node. Metrics are not kept longer than 24 hours.
 
@@ -23,7 +23,7 @@ The data is stored locally on disk for each Prometheus server, so data is not re
 
 Events, logs, and metrics are sources of data that provide observability of your cluster. Metrics monitors numerical data values that have a time-series component. There are several sources from which metrics can be derived, each providing different kinds of meaning for a business and its applications.
 
-The Docker EE platform provides a base set of metrics that get you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
+The Docker EE platform provides a base set of metrics that gets you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
 
 - **Business metrics**: These are high-level aggregate metrics that typically combine technical, financial, and organizational data to create metrics for business leaders of the IT infrastructure. Some examples of business metrics might be:
     - Company or division-level application downtime
@@ -76,10 +76,10 @@ $ kubectl label node 3a724a-1 ucp-metrics=
 node "test-3a724a-1" labeled
 ```
 
-4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. Here we again use the key “ucp-metrics” and the value “”.
+4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key “ucp-metrics” and the value “”.
 
 ```
-$ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
+$ kubectl -n kube-system patch DaemonSet ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
 daemonset "ucp-metrics" patched
 ```
 
@@ -213,4 +213,4 @@ prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
 ssh -L 9090:10.96.254.107:9090 ANY_NODE
 ```
 
-6. Visit http://127.0.0.1:9090 to explore the UCP metrics being collected by Prometheus.
+6. Visit `http://127.0.0.1:9090` to explore the UCP metrics being collected by Prometheus.
