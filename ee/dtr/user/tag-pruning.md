@@ -15,9 +15,12 @@ Tag pruning is the process of cleaning up unnecessary or unwanted repository tag
 * specifying a tag pruning policy or alternatively,
 * setting a tag limit 
 
+
 > Tag Pruning
 >
 > When run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../../admin/configure/garbage-collection.md).
+
+In the following section, we will cover how to specify a tag pruning policy and set a tag limit on repositories that you manage. It will not include modifying or deleting a tag pruning policy.
 
 ## Specify a tag pruning policy
 
@@ -44,7 +47,7 @@ DTR allows you to set your pruning triggers based on the following image attribu
 | License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | License name = `docker` | 
 | Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months. For details on valid time units, see [Go's ParseDuration function](https://golang.org/pkg/time/#ParseDuration). |  Last updated at: Hours = `12` |
 
-Specify one or more image attributes to your pruning criteria, and choose **Prune future tags** or **Prune all tags**. Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
+Specify one or more image attributes to add to your pruning criteria, then choose **Prune future tags** to apply your selection to future tags or **Prune all tags** to evaluate existing tags on your repository. Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
 
 ![](../../images/tag-pruning-2.png){: .with-border}
 
@@ -54,8 +57,6 @@ If you have specified multiple pruning policies on the repository, the **Pruning
 ![](../../images/tag-pruning-3.png){: .with-border}
 
 All tag pruning policies on your account are evaluated every 15 minutes. Any qualifying tags are then deleted from the metadata store. If a tag pruning policy is modified or created, then the tag pruning policy for the *affected* repository will be evaluated.
-
-This does not cover modifying or deleting a tag pruning policy.
 
 ## Set a tag limit
 
