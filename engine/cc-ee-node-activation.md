@@ -1,12 +1,12 @@
 ---
 description: Engine
-keywords: Engine, CE, EE, node activate
-title: CE-EE Node Activate
+keywords: Engine, CE, EE, node, activation, enterprise
+title: Enterprise Node Activation
 ---
 
-The Docker Engine release `18.09` release introduces a new feature called CE-EE Node Activate, which allows a user to perform an in-place seamless activation of the EE feature-set on an existing CE node through the Docker Command Line Interface (CLI) without a re-install.
+The Docker Engine release `18.09` release introduces a new feature called CE-EE Node Activate, which allows a user to perform an in-place seamless activation of the Enterprise engine feature-set on an existing Community Edition (CE) node through the Docker command line.
 
-CE-EE node activate will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
+Enterprise Node Activation will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
 
 The Docker Community Edition version must be 18.09 or higher.
 
@@ -17,7 +17,7 @@ The activation can be performed either online with connection to Docker Hub, or 
 * This feature is only supported on x86 Linux nodes
 * Windows nodes are not currently supported
 * Node level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker
-* Prior version of the Docker Enterprise Engine for Docker to not support this feature
+* Prior versions of Docker CE do not support this feature
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
@@ -100,4 +100,4 @@ Server:
 
 ## Off-line CE-EE node activation
 
-For offline CE-EE node activation, you'll need to get the enterprise engine onto the system. The recommended model is to download the EE deb or rpm packages manually and copy them to the target systems. Afterward, download the license manually, and copy that license to the target systems. Use the `--license` flag to the activate command.
+For offline CE-EE node activation, you'll need to get the enterprise engine onto the system. The recommended model is to download the EE deb or rpm packages manually and copy them to the target systems. Afterward, download the license manually, and copy that license to the target systems. Use the `--license <path/to/license.file>` command line option to the activate command.
