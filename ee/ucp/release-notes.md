@@ -22,7 +22,7 @@ upgrade your installation to the latest release.
 
 **New Features**
 * UCP has bumped its Kubernetes support to v1.11
-* UCP now supports Kubernetes native role-based access controller
+* UCP now supports Kubernetes native role-based access control
 * UCP now provides service metrics for all API calls, using Prometheus deployed as Kubernetes Daemon Set
 * UCP now supports use of an external Prometheus instance to scrape metrics from UPC endpoints
 * UCP suppoprts SAML authentication
