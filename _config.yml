@@ -26,13 +26,15 @@ docker_ee_version: "2.1_beta1"
 compose_version: "1.22.0"
 machine_version: "0.14.0"
 distribution_version: "2.6"
-dtr_version: "2.5"
-ucp_version: "3.0"
+dtr_version: "2.6_beta1"
+ucp_version: "3.1_beta1"
 
 ucp_versions:
-  - version: "3.0"
+  - version: "3.1"
     path: /ee/ucp/
     latest: true
+  - version: "3.0"
+    path: /datacenter/ucp/3.0/guides/
   - version: "2.2"
     path: /datacenter/ucp/2.2/guides/
   - version: "2.1"
@@ -43,9 +45,11 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: "2.5"
+  - version: "2.6"
     path: /ee/dtr/
     latest: true
+  - version: "2.5"
+    path: /datacenter/dtr/2.5/guides/
   - version: "2.4"
     path: /datacenter/dtr/2.4/guides/
   - version: "2.3"
@@ -102,7 +106,14 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.3"
+      dtr_version: "2.6.0_beta1"
+  - scope:
+      path: "datacenter/dtr/2.5"
+    values:
+      hide_from_sitemap: true
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.5.0"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -138,7 +149,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.4"
+      ucp_version: "3.1.0_beta1"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
@@ -149,6 +160,13 @@ defaults:
       dtr_version: "2.5.0"
       dtr_latest_image: "docker/dtr:2.5.3"
   - scope:
+      path: "datacenter/ucp/3.0"
+    values:
+      hide_from_sitemap: true
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "3.0"
+- scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
