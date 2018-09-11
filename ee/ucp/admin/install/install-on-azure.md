@@ -4,6 +4,88 @@ description: Learn how to install Docker Universal Control Plane in a Microsoft 
 keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
 ---
 
+Docker UCP closely integrates into Microsoft Azure for its Kubernetes Networking 
+and Persistent Storage feature set. Because of this there are prerequisites to 
+installing Docker UCP in Azure.
+
+## Azure Prerequisites 
+
+Please find a list of infrastructure pre-requisites that need to be met in order 
+to successfully deploy Docker UCP on Azure. Note Docker provides an automated 
+deployment mechanism which will adhere to these prerequisites
+[here](http://success.docker.com/article/certified-infrastructures-azure).
+
+- All Docker EE Nodes (Managers and Workers) need to be deployed into the same 
+Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
+components could be deployed in a second Azure Resource Group.
+- All Docker EE Nodes (Managers and Workers) need to be attached to the same 
+Azure Subnet.
+- All Docker EE Nodes (Managers and Workers) need to be tagged in Azure with the
+tag `Orchestrator=Kubernetes:1.8.11`.
+- All Docker EE Worker Nodes need to be deployed within the Same Availability 
+Set.
+- The Azure Computer Name needs to match the Node Operating System's Hostname. 
+- An Azure Service Principal with `Contributor` access to the Azure Resource 
+Group hosting the Docker EE Nodes. Note, if using a separate networking Resource 
+Group the same Service Principal will need `Network Contributor` access to this 
+Resource Group.
+
+### Retrieve Azure secrets
+
+To continue with the Docker EE deployment you will need to retrieve the 
+following bits of information. 
+
+- `subscriptionId` - The Azure Subscription ID in which the Docker EE 
+objects are being deployed. 
+- `tenantId` - The Azure Active Directory Tenant ID in which the Docker EE 
+objects are being deployed. 
+- `aadClientId` - The Azure Service Principal ID
+- `aadClientSecret` - The Azure Service Principal Secret Key
+
+### Azure Configuration File
+
+For Docker UCP to integrate in to Microsoft Azure, an Azure configuration file 
+will need to be placed within each Docker EE node in your cluster. This file 
+will need to be placed at `/etc/kubernetes/azure.json`.  
+
+See the template below. Note entries that do not contain `****` should not be 
+changed.
+
+```
+{
+    "cloud":"AzurePublicCloud", 
+    "tenantId": "***",
+    "subscriptionId": "***",
+    "aadClientId": "***",
+    "aadClientSecret": "***",
+    "resourceGroup": "***",
+    "location": "****",
+    "subnetName": "/****",
+    "securityGroupName": "****",
+    "vnetName": "****",
+    "primaryAvailabilitySetName": "****",
+    "cloudProviderBackoff": false,
+    "cloudProviderBackoffRetries": 0,
+    "cloudProviderBackoffExponent": 0,
+    "cloudProviderBackoffDuration": 0,
+    "cloudProviderBackoffJitter": 0,
+    "cloudProviderRatelimit": false,
+    "cloudProviderRateLimitQPS": 0,
+    "cloudProviderRateLimitBucket": 0,
+    "useManagedIdentityExtension": false,
+    "useInstanceMetadata": true
+}
+```
+
+There are some optional values for alternative Azure networking deployments.
+
+```
+    "vnetResourceGroup": "****",
+    "routeTableName": "****",
+```
+
+## Docker UCP Networking
+
 Docker UCP configures the Azure IPAM module for Kubernetes to allocate
 IP addresses to Kubernetes pods. The Azure IPAM module requires each Azure
 VM that's part of the Kubernetes cluster to be configured with a pool of
@@ -14,7 +96,8 @@ You have two options for deploying the VMs for the Kubernetes cluster on Azure:
   an [automated mechanism](#configure-ip-pools-for-azure-stand-alone-vms)
   to configure and maintain IP pools for stand-alone Azure VMs.
 - Install the cluster on an Azure virtual machine scale set. Configure the
-  IP pools by using an ARM template like [this one](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set).
+  IP pools by using an ARM template like 
+  [this one](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set).
 
 The steps for setting up IP address management are different in the two
 environments. If you're using a scale set, you set up `ipConfigurations`
@@ -51,54 +134,33 @@ plus a buffer for initial allocations for primary IP addresses.
 
 ## Configure IP pools for Azure stand-alone VMs
 
-Follow these steps when the cluster is deployed using stand-alone Azure VMs.
-
-### Create an Azure resource group
-
-Create an Azure resource group with VMs representing the nodes of the cluster
-by using the Azure Portal, CLI, or ARM template.
+Follow these steps once the underlying infrastructure has been provisioned.
 
 ### Configure multiple IP addresses per VM NIC
 
 Follow the steps below to configure multiple IP addresses per VM NIC.
 
-1.  Create a Service Principal with “contributor” level access to the above
-    resource group you just created. You can do this by using the Azure Portal
-    or CLI. Also, you can also use a utility container from Docker to create a
-    Service Principal. If you have the Docker Engine installed, run the
-    `docker4x/create-sp-azure`. image. The output of `create-sp-azure` contains
-    the following fields near the end.
-
-    ```
-    AD App ID:       <...>
-    AD App Secret:   <...>
-    AD Tenant ID:    <...>
-    ```
-
-    You'll use these field values in a later step, so make a note of them.
-    Also, make note of your Azure subscription ID.
-
-2.  Initialize a swarm cluster comprising the virtual machines you created
+1.  Initialize a swarm cluster comprising the virtual machines you created
     earlier. On one of the nodes of the cluster, run:
 
     ```bash
     docker swarm init
     ```
 
-3.  Note the tokens for managers and workers.
-4.  Join two other nodes on the cluster as manager (recommended for HA) by running:
+2.  Note the tokens for managers and workers.
+3.  Join two other nodes on the cluster as manager (recommended for HA) by running:
 
     ```bash
     docker swarm join --token <manager-token>
     ```
 
-5.  Join remaining nodes on the cluster as workers: 
+4.  Join remaining nodes on the cluster as workers: 
 
     ```bash
     docker swarm join --token <worker-token>
     ```
 
-6.  Create a file named "azure_ucp_admin.toml" that contains contents from
+5.  Create a file named "azure_ucp_admin.toml" that contains contents from
     creating the Service Principal.
 
     ```
@@ -108,13 +170,13 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
     AZURE_CLIENT_SECRET = "<AD App Secret field from Step 1>"
     ```
 
-7.  Create a Docker Swarm secret based on the "azure_ucp_admin.toml" file. 
+6.  Create a Docker Swarm secret based on the "azure_ucp_admin.toml" file. 
 
     ```bash
     docker secret create azure_ucp_admin.toml azure_ucp_admin.toml
     ```
 
-8.  Create a global swarm service using the [docker4x/az-nic-ips](https://hub.docker.com/r/docker4x/az-nic-ips/)
+7.  Create a global swarm service using the [docker4x/az-nic-ips](https://hub.docker.com/r/docker4x/az-nic-ips/)
     image on Docker Hub. Use the Swarm secret to prepopulate the virtual machines
     with the desired number of IP addresses per VM from the VNET pool. Set the
     number of IPs to allocate to each VM through the IPCOUNT environment variable.
