@@ -8,8 +8,6 @@ keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-Ping Identity integration requires these values:
-
 SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
