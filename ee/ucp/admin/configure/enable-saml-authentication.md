@@ -8,8 +8,6 @@ keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-Ping Identity integration requires these values:
-
 SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
@@ -18,8 +16,8 @@ For more information about SAML, see the [SAML XML website] (http://saml.xml.org
 
 UCP supports these identity providers:
 
-- (Okta) [https://www.okta.com/]
-- (ADFS) [https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
+- (Okta)[https://www.okta.com/]
+- (ADFS)[https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
 
 ## Configure identity provider integration
 
@@ -29,8 +27,8 @@ There are values your identity provider needs for successful integration with UC
 
 Okta integration requires these values:
 
-- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/acs`.
-- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
+- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
+- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
 - NameID format. Select Unspecified.
 - Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username portion of the email address.
 - Attribute Statements:
