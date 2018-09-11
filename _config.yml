@@ -106,7 +106,7 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.0-beta1"
+      dtr_version: "2.6.0_beta1"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -149,7 +149,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.0-beta1"
+      ucp_version: "3.1.0_beta1"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
