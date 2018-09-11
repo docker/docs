@@ -1562,13 +1562,13 @@ manuals:
           title: Add labels to cluster nodes
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
-        - path: ee/ucp/admin/configure/collect-cluster-metrics/
+        - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure Kubernetes Role-Based Access Control
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
-        - path: ee/ucp/admin/configure/create-audit-logs/
+        - path: /ee/ucp/admin/configure/create-audit-logs/
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
