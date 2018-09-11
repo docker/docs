@@ -42,7 +42,7 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ADFS integration requires these values:
 
-- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
+- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
 - Attribute Store: Active Directory.
     - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
     - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
@@ -56,15 +56,15 @@ ADFS integration requires these values:
 
 To enable SAML authentication:
 
-1 Go to the UCP web UI.
+1. Go to the UCP web UI.
 2. Navigate to the **Admin Settings**.
 3. Select **Authentication & Authorization**.
 
-![Enabling SAML in UCP](../../images/saml_enabled.png)
+    ![Enabling SAML in UCP](../../images/saml_enabled.png)
 
 4. In the **SAML Enabled** section, select **Yes** to display the required settings.
 
-![Configuring SAML in UCP](../../images/saml_settings.png)
+    ![Configuring SAML in UCP](../../images/saml_settings.png)
 
 5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
 6. In **UCP Host** enter the URL that includes the IP address of your UCP console.
