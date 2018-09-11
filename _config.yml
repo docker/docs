@@ -22,12 +22,12 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 latest_stable_docker_engine_api_version: "1.37"
 docker_ce_stable_version: "18.03"
 docker_ce_edge_version: "18.08"
-docker_ee_version: "2.1_beta1"
+docker_ee_version: "2.1"
 compose_version: "1.22.0"
 machine_version: "0.14.0"
 distribution_version: "2.6"
-dtr_version: "2.6_beta1"
-ucp_version: "3.1_beta1"
+dtr_version: "2.6"
+ucp_version: "3.1"
 
 ucp_versions:
   - version: "3.1"
@@ -105,7 +105,7 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.0_beta1"
+      dtr_version: "2.6.0"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -148,7 +148,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.0_beta1"
+      ucp_version: "3.1.0"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
