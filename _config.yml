@@ -84,8 +84,7 @@ plugins:
   - jekyll-sitemap
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
