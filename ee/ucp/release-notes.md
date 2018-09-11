@@ -18,15 +18,17 @@ upgrade your installation to the latest release.
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
-# Version 3.1 (2018-10)
+# Version 3.1 (2018-10-29)
 
 **New Features**
-* UCP has bumped its Kubernetes support to v1.11
+* Default address pool for Swarm is now user configurable
+* UCP now supports Kubernetes Network Encryption using IPSec
+* UCP now supports Kubernetes v1.11
 * UCP now supports Kubernetes native role-based access control
 * UCP now provides service metrics for all API calls, using Prometheus deployed as Kubernetes Daemon Set
 * UCP now supports use of an external Prometheus instance to scrape metrics from UPC endpoints
 * UCP suppoprts SAML authentication
-
+* DTR vulnerability scan data is now available through the UCP UI
 
 # Version 3.0
 
@@ -36,7 +38,7 @@ upgrade your installation to the latest release.
 
 * Security
   * Fixed a critical security issue where the LDAP bind username and password
-    were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+    were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 **Known Issue**
 
@@ -291,7 +293,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 * Security
   * Fixed a critical security issue where the LDAP bind username and password
-    were stored in clear text on UCP hosts. Please refer to the following KB article
+    were stored in cleartext on UCP hosts. Please refer to the following KB article
     https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
 
