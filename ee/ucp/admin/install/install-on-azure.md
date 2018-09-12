@@ -11,9 +11,7 @@ installing Docker UCP in Azure.
 ## Azure Prerequisites 
 
 Please find a list of infrastructure pre-requisites that need to be met in order 
-to successfully deploy Docker UCP on Azure. Note Docker provides an automated 
-deployment mechanism which will adhere to these prerequisites
-[here](http://success.docker.com/article/certified-infrastructures-azure).
+to successfully deploy Docker UCP on Azure.
 
 - All Docker EE Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
@@ -22,9 +20,8 @@ components could be deployed in a second Azure Resource Group.
 Azure Subnet.
 - All Docker EE Nodes (Managers and Workers) need to be tagged in Azure with the
 tag `Orchestrator=Kubernetes:1.8.11`.
-- All Docker EE Worker Nodes need to be deployed within the Same Availability 
-Set.
 - The Azure Computer Name needs to match the Node Operating System's Hostname. 
+Note this applies to the FQDN of the host including domain names. 
 - An Azure Service Principal with `Contributor` access to the Azure Resource 
 Group hosting the Docker EE Nodes. Note, if using a separate networking Resource 
 Group the same Service Principal will need `Network Contributor` access to this 
@@ -63,7 +60,6 @@ changed.
     "subnetName": "/****",
     "securityGroupName": "****",
     "vnetName": "****",
-    "primaryAvailabilitySetName": "****",
     "cloudProviderBackoff": false,
     "cloudProviderBackoffRetries": 0,
     "cloudProviderBackoffExponent": 0,
@@ -77,12 +73,16 @@ changed.
 }
 ```
 
-There are some optional values for alternative Azure networking deployments.
+There are some optional values for Azure deployments:
 
-```
-    "vnetResourceGroup": "****",
-    "routeTableName": "****",
-```
+- `"primaryAvailabilitySetName": "****",` - The Worker Nodes availability set.
+- `"vnetResourceGroup": "****",` - If your Azure Network objects live in a 
+seperate resource group.
+- `"routeTableName": "****",` - If you have defined multiple Route tables within
+an Azure subnet.
+
+More details on this configuration file can be found 
+[here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go)
 
 ## Docker UCP Networking
 
