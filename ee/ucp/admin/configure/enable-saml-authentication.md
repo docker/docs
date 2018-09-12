@@ -12,12 +12,12 @@ SAML is commonly supported by enterprise authentication systems. SAML-based sing
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
 
-For more information about SAML, see the [SAML XML website] (http://saml.xml.org/).
+For more information about SAML, see the [SAML XML website](http://saml.xml.org/).
 
 UCP supports these identity providers:
 
-- (Okta)[https://www.okta.com/]
-- (ADFS)[https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
+- [Okta](https://www.okta.com/)
+- [ADFS](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
 
 ## Configure identity provider integration
 
