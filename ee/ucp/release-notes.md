@@ -20,6 +20,22 @@ upgrade your installation to the latest release.
 
 # Version 3.0
 
+## 3.0.5 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from 
+    the system pool when adding client CAs to the server that requires mutual authentication. 
+
+**Known Issue**
+
+* When you are upgrading from UCP 3.0.3 or 3.0.4, you must manually pull 
+ `docker/ucp-agent:3.0.5` in the images section of the web UI before upgrading. 
+ Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
+ This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without 
+ manually pulling the images.
+
 ## 3.0.4 (2018-08-09)
 
 **Bug fixes**
@@ -274,6 +290,14 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.13 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from 
+    the system pool when adding client CAs to the server that requires mutual authentication. 
 
 ## Version 2.2.12 (2018-08-09)
 
