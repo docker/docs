@@ -65,7 +65,7 @@ You can use audit logs to help with the following use cases:
 
 5. Create any workload or RBAC grants in Kubernetes and generate a support dump to check the contents of ucp-controller.log file for audit log entries.
 
-6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. https://success.docker.com/article/elasticsearch-logstash-kibana-logging
+6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. (https://success.docker.com/article/elasticsearch-logstash-kibana-logging)
 
 ## API endpoints ignored
 
