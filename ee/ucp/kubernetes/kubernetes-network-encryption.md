@@ -4,11 +4,23 @@ description: Learn how to configure network encryption in Kubernetes
 keywords: ucp, cli, administration, kubectl, Kubernetes, security, network, ipsec, ipip, esp, calico
 ---
 
-Docker Enterprise provides data-plane level IPSec network encryption to securely encrypt application traffic in a Kubernetes cluster. This secures application traffic within a cluster when running in untrusted infrastructure or environments. It is an optional feature of UCP that is enabled by deploying the Secure Overlay components on Kuberenetes when using the default Calico driver for networking configured for IPIP tunnelling (the default configuration).
+Docker Enterprise provides data-plane level IPSec network encryption to securely encrypt application traffic in 
+a Kubernetes cluster. This secures application traffic within a cluster when running in untrusted infrastructure 
+or environments. It is an optional feature of UCP that is enabled by deploying the Secure Overlay components on 
+Kuberenetes when using the default Calico driver for networking configured for IPIP tunnelling (the default configuration).
 
-Kubernetes network encryption is enabled by two components in UCP: the SecureOverlay Agent and SecureOverlay Master. The agent is deployed as a per-node service that manages the encryption state of the data plane. The agent controls the IPSec encryption on Calico’s IPIP tunnel traffic between different nodes in the Kubernetes cluster. The master is the second component, which acts as the key management process that configures and periodically rotates the encryption keys.
+Kubernetes network encryption is enabled by two components in UCP: the SecureOverlay Agent and SecureOverlay Master. 
+The agent is deployed as a per-node service that manages the encryption state of the data plane. The agent controls 
+the IPSec encryption on Calico’s IPIP tunnel traffic between different nodes in the Kubernetes cluster. The master 
+is the second component, which acts as the key management process that configures and periodically rotates the 
+encryption keys.
 
-Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts traffic between pods residing on different nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. However, note that enabling or disabling traffic can cause temporary inter-pod traffic outages during the first few minutes of encryption reconfiguration. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel interface in the UCP host.
+Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts traffic between pods residing 
+on different nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed 
+on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster 
+lifecycle. However, note that enabling or disabling traffic can cause temporary inter-pod traffic outages during the 
+first few minutes of encryption reconfiguration. When enabled, Kubernetes pod traffic between hosts is encrypted at 
+the IPIP tunnel interface in the UCP host.
 
 ## Requirements
 
