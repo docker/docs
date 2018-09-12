@@ -8,18 +8,16 @@ keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-Ping Identity integration requires these values:
-
 SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
 
-For more information about SAML, see the [SAML XML website] (http://saml.xml.org/).
+For more information about SAML, see the [SAML XML website](http://saml.xml.org/).
 
 UCP supports these identity providers:
 
-- (Okta) [https://www.okta.com/]
-- (ADFS) [https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services]
+- [Okta](https://www.okta.com/)
+- [ADFS](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
 
 ## Configure identity provider integration
 
@@ -29,8 +27,8 @@ There are values your identity provider needs for successful integration with UC
 
 Okta integration requires these values:
 
-- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/acs`.
-- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
+- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
+- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
 - NameID format. Select Unspecified.
 - Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username portion of the email address.
 - Attribute Statements:
@@ -44,7 +42,7 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ADFS integration requires these values:
 
-- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://<^>111.111.111.111<^^>/enzi/v0/saml/metadata`.
+- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
 - Attribute Store: Active Directory.
     - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
     - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
@@ -58,15 +56,15 @@ ADFS integration requires these values:
 
 To enable SAML authentication:
 
-1 Go to the UCP web UI.
+1. Go to the UCP web interface.
 2. Navigate to the **Admin Settings**.
 3. Select **Authentication & Authorization**.
 
-![Enabling SAML in UCP](../../images/saml_enabled.png)
+    ![Enabling SAML in UCP](../../images/saml_enabled.png)
 
 4. In the **SAML Enabled** section, select **Yes** to display the required settings.
 
-![Configuring SAML in UCP](../../images/saml_settings.png)
+    ![Configuring SAML in UCP](../../images/saml_settings.png)
 
 5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
 6. In **UCP Host** enter the URL that includes the IP address of your UCP console.
