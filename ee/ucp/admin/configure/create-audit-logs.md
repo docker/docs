@@ -47,12 +47,14 @@ You can use audit logs to help with the following use cases:
     curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -X GET https://ucp-domain/api/ucp/config/logging > auditlog.json
     ```
 
-3. Modify the auditLevel field to metadata or request.
+3. Open auditlog.json to modify the 'auditlevel' field to `metadata` or `request`.
 
     ```
-    vi auditlog.json
-
-    {"logLevel":"INFO","auditLevel":"metadata","supportDumpIncludeAuditLogs":false}
+    {
+    	"logLevel": "INFO",
+    	"auditLevel": "metadata",
+    	"supportDumpIncludeAuditLogs": false
+    }
     ```
 
 4. Send the JSON request for the auditlog config with the same API path but with the `PUT` method.
