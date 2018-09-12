@@ -10,7 +10,7 @@ installing Docker UCP in Azure.
 
 ## Azure Prerequisites 
 
-Please find a list of infrastructure pre-requisites that need to be met in order 
+Please find a list of infrastructure prerequisites that need to be met in order 
 to successfully deploy Docker UCP on Azure.
 
 - All Docker EE Nodes (Managers and Workers) need to be deployed into the same 
@@ -30,7 +30,7 @@ Resource Group.
 ### Retrieve Azure secrets
 
 To continue with the Docker EE deployment you will need to retrieve the 
-following bits of information. 
+following information. 
 
 - `subscriptionId` - The Azure Subscription ID in which the Docker EE 
 objects are being deployed. 
@@ -82,7 +82,7 @@ seperate resource group.
 an Azure subnet.
 
 More details on this configuration file can be found 
-[here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go)
+[here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go).
 
 ## Docker UCP Networking
 
@@ -193,8 +193,6 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
       --constraint "node.platform.os == linux" \
       docker4x/az-nic-ips
     ```
-
-[Install UCP on the cluster](#install-ucp-on-the-cluster).
 
 ## Set up IP configurations on an Azure virtual machine scale set
 
