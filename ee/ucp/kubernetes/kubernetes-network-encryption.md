@@ -31,6 +31,24 @@ Kubernetes Network Encryption is supported for the following platforms:
 * Only supported when using UCP’s default Calico CNI plugin
 * Supported on all Docker Enterprise supported Linux OSes
 
+## Configuring MTUs
+
+Before deploying the SecureOverlay components one must ensure that Calico is configured so that the IPIP tunnel 
+MTU leaves sufficient headroom for the encryption overhead.   Encryption adds 26 bytes of overhead but every IPSec 
+packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of encapsulation overhead.  So the IPIP 
+tunnel interface MTU must be no more than “EXTMTU - 46 - ((EXTMTU - 46) modulo 4)” where EXTMTU is the minimum MTU 
+of the external interfaces.   An IPIP MTU of 1452 should generally be safe for most deployments. 
+
+Changing UCP’s MTU requires updating the UCP configuration.  This process is described (here)[/ee/ucp/admin/configure/ucp-configuration-file].  
+
+The user must update the following values to the new MTU:
+
+    [cluster_config]
+      ...
+      calico_mtu = "1452"
+      ipip_mtu = "1452"
+      ...
+
 ## Configuring SecureOverlay
 
 Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to UCP:
