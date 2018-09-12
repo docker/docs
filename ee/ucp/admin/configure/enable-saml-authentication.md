@@ -56,7 +56,7 @@ ADFS integration requires these values:
 
 To enable SAML authentication:
 
-1. Go to the UCP web UI.
+1. Go to the UCP web interface.
 2. Navigate to the **Admin Settings**.
 3. Select **Authentication & Authorization**.
 
