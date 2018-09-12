@@ -39,7 +39,7 @@ guarantees. For more information, see
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+* [Switch between Windows and Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
 provides a tutorial on how to set up and run Windows containers on Windows 10 or
 with Windows Server 2016. It shows you how to use a MusicStore application with
