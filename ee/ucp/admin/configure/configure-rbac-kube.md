@@ -1,6 +1,6 @@
 ---
-title: Enable Kubernetes RBAC
-description: Learn how to configure role-based access control for Kubernetes
+title: Enable native Kubernetes RBAC
+description: Learn how to configure native role-based access control for Kubernetes
 keywords: Kubernetes, ucp, RBAC
 redirect_from:
 - /ee/ucp/authorization/migrate-kubernetes-roles/

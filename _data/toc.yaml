@@ -1561,7 +1561,7 @@ manuals:
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
         - path: /ee/ucp/authorization/configure-rbac-kube/
-          title: Configure Kubernetes Role-Based Access Control
+          title: Configure native Kubernetes Role-Based Access Control
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/external-auth/enable-ldap-config-file/
