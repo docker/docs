@@ -194,15 +194,15 @@ $ docker network create \
 
 ##### Using custom default address pools
 
-To customize subnet allocation for your Swarm networks, you can [optionally configure them](./sarm-mode.md) during `swarm init`.
+To customize subnet allocation for your Swarm networks, you can [optionally configure them](./swarm-mode.md) during `swarm init`.
 
-For example, the following command is used when initializing a Swarm:
+For example, the following command is used when initializing Swarm:
 
 ```bash
 $ docker swarm init --default-address-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
 ```
 
-Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet in the pool. if the network the user specifies is already allocated, that network will not be used for Swarm. 
+Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet in the pool. If the specified network is already allocated, that network will not be used for Swarm. 
 
 Multiple pools can be configured if discontigous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.
 
