@@ -4,23 +4,11 @@ description: Learn how to configure network encryption in Kubernetes
 keywords: ucp, cli, administration, kubectl, Kubernetes, security, network, ipsec, ipip, esp, calico
 ---
 
-Docker Enterprise provides data-plane level IPSec network encryption to securely encrypt application traffic in 
-a Kubernetes cluster. This secures application traffic within a cluster when running in untrusted infrastructure 
-or environments. It is an optional feature of UCP that is enabled by deploying the Secure Overlay components on 
-Kuberenetes when using the default Calico driver for networking configured for IPIP tunnelling (the default configuration).
+Docker Enterprise provides data-plane level IPSec network encryption to securely encrypt application traffic in a Kubernetes cluster. This secures application traffic within a cluster when running in untrusted infrastructure or environments. It is an optional feature of UCP that is enabled by deploying the Secure Overlay components on Kuberenetes when using the default Calico driver for networking configured for IPIP tunnelling (the default configuration).
 
-Kubernetes network encryption is enabled by two components in UCP: the SecureOverlay Agent and SecureOverlay Master. 
-The agent is deployed as a per-node service that manages the encryption state of the data plane. The agent controls 
-the IPSec encryption on Calico’s IPIP tunnel traffic between different nodes in the Kubernetes cluster. The master 
-is the second component, which acts as the key management process that configures and periodically rotates the 
-encryption keys.
+Kubernetes network encryption is enabled by two components in UCP: the SecureOverlay Agent and SecureOverlay Master. The agent is deployed as a per-node service that manages the encryption state of the data plane. The agent controls the IPSec encryption on Calico’s IPIP tunnel traffic between different nodes in the Kubernetes cluster. The master is the second component, deployed on a UCP manager node, which acts as the key management process that configures and periodically rotates the encryption keys.
 
-Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts traffic between pods residing 
-on different nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed 
-on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster 
-lifecycle. However, note that enabling or disabling traffic can cause temporary inter-pod traffic outages during the 
-first few minutes of encryption reconfiguration. When enabled, Kubernetes pod traffic between hosts is encrypted at 
-the IPIP tunnel interface in the UCP host.
+Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts Kubernetes traffic traversing between nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. However, it should be noted that it can cause temporary traffic outages between pods during the first few minutes of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel interface in the UCP host.
 
 ## Requirements
 
@@ -31,195 +19,11 @@ Kubernetes Network Encryption is supported for the following platforms:
 * Only supported when using UCP’s default Calico CNI plugin
 * Supported on all Docker Enterprise supported Linux OSes
 
-## Configuring MTUs
-
-Before deploying the SecureOverlay components one must ensure that Calico is configured so that the IPIP tunnel 
-MTU leaves sufficient headroom for the encryption overhead.   Encryption adds 26 bytes of overhead but every IPSec 
-packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of encapsulation overhead.  So the IPIP 
-tunnel interface MTU must be no more than “EXTMTU - 46 - ((EXTMTU - 46) modulo 4)” where EXTMTU is the minimum MTU 
-of the external interfaces.   An IPIP MTU of 1452 should generally be safe for most deployments. 
-
-Changing UCP’s MTU requires updating the UCP configuration.  This process is described (here)[/ee/ucp/admin/configure/ucp-configuration-file].  
-
-The user must update the following values to the new MTU:
-
-    [cluster_config]
-      ...
-      calico_mtu = "1452"
-      ipip_mtu = "1452"
-      ...
-
 ## Configuring SecureOverlay
 
-Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to UCP:
+Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to UCP.
 
-```
-######################
-# Cluster role for key management jobs
-######################
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: ucp-secureoverlay-mgr
-rules:
-  - apiGroups: [""]
-    resources:
-      - secrets
-    verbs:
-      - get
-      - update
----
-######################
-# Cluster role binding for key management jobs
-######################
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: ucp-secureoverlay-mgr
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: ucp-secureoverlay-mgr
-subjects:
-- kind: ServiceAccount
-  name: ucp-secureoverlay-mgr
-  namespace: kube-system
----
-######################
-# Service account for key management jobs
-######################
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: ucp-secureoverlay-mgr
-  namespace: kube-system
----
-######################
-# Cluster role for secure overlay per-node agent
-######################
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: ucp-secureoverlay-agent
-rules:
-  - apiGroups: [""]
-    resources:
-      - nodes
-    verbs:
-      - get
-      - list
-      - watch
----
-######################
-# Cluster role binding for secure overlay per-node agent
-######################
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: ucp-secureoverlay-agent
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: ucp-secureoverlay-agent
-subjects:
-- kind: ServiceAccount
-  name: ucp-secureoverlay-agent
-  namespace: kube-system
----
-######################
-# Service account secure overlay per-node agent
-######################
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: ucp-secureoverlay-agent
-  namespace: kube-system
----
-######################
-# K8s secret of current key configuration
-######################
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ucp-secureoverlay
-  namespace: kube-system
-type: Opaque
-data:
-  keys: ""
----
-######################
-# DaemonSet for secure overlay per-node agent
-######################
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: ucp-secureoverlay-agent
-  namespace: kube-system
-  labels:
-    k8s-app: ucp-secureoverlay-agent
-spec:
-  selector:
-    matchLabels:
-      k8s-app: ucp-secureoverlay-agent
-  updateStrategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        k8s-app: ucp-secureoverlay-agent
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ''
-    spec:
-      hostNetwork: true
-      priorityClassName: system-node-critical
-      terminationGracePeriodSeconds: 10
-      serviceAccountName: ucp-secureoverlay-agent
-      containers:
-      - name: ucp-secureoverlay-agent
-        image: docker/ucp-secureoverlay-agent:3.1.0
-        securityContext:
-          capabilities:
-            add: ["NET_ADMIN"]
-        env:
-        - name: MY_NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.nodeName
-        volumeMounts:
-        - name: ucp-secureoverlay
-          mountPath: /etc/secureoverlay/
-          readOnly: true
-      volumes:
-      - name: ucp-secureoverlay
-        secret:
-          secretName: ucp-secureoverlay
----
-######################
-# Deployment for manager of the whole cluster (to rotate keys)
-######################
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ucp-secureoverlay-mgr
-  namespace: kube-system
-spec:
-  selector:
-    matchLabels:
-      app: ucp-secureoverlay-mgr
-  replicas: 1
-  template:
-    metadata:
-      name: ucp-secureoverlay-mgr
-      namespace: kube-system
-      labels:
-        app: ucp-secureoverlay-mgr
-    spec:
-      serviceAccountName: ucp-secureoverlay-mgr
-      restartPolicy: Always
-      containers:
-      - name: ucp-secureoverlay-mgr
-        image: docker/ucp-secureoverlay-mgr:3.1.0
-```
+Download ucp-secureoverlay.yml here.
 
 After one downloads the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials: 
 
