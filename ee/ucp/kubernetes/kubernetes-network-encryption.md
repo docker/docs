@@ -10,7 +10,7 @@ Kubernetes network encryption is enabled by two components in UCP: the SecureOve
 
 Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts Kubernetes traffic traversing between nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. However, it should be noted that it can cause temporary traffic outages between pods during the first few minutes of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel interface in the UCP host.
 
-/images/kubernetes-network-encryption.png
+![Kubernetes Network Encryption](/images/kubernetes-network-encryption.png)
 
 ## Requirements
 
