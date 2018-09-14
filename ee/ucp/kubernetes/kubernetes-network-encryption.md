@@ -10,22 +10,25 @@ Kubernetes network encryption is enabled by two components in UCP: the SecureOve
 
 Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts Kubernetes traffic traversing between nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. However, it should be noted that it can cause temporary traffic outages between pods during the first few minutes of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel interface in the UCP host.
 
+/images/kubernetes-network-encryption.png
+
 ## Requirements
 
 Kubernetes Network Encryption is supported for the following platforms:
 * Docker Enterprise 2.1+ (UCP 3.1+)
 * Kubernetes 1.11+
-* On-prem, AWS, GCE (*Azure is not supported for network encryption as encryption utilizes Calico’s IPIP tunnel which is not supported in Azure)
+* On-premise, AWS, GCE
+* Azure is not supported for network encryption as encryption utilizes Calico’s IPIP tunnel
 * Only supported when using UCP’s default Calico CNI plugin
 * Supported on all Docker Enterprise supported Linux OSes
 
 ## Configuring SecureOverlay
 
-Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the following YAML file to UCP.
+Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the Secure Overlay YAML file to UCP.
 
-Download ucp-secureoverlay.yml here.
+(Download the Secure Overlay YAML file here.)[ucp-secureoverlay.yml]
 
-After one downloads the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials: 
+After one downloads the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials:
 
 ```
 $ kubectl apply -f ucp-secureoverlay.yml
