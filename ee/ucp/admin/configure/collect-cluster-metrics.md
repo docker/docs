@@ -25,27 +25,33 @@ Events, logs, and metrics are sources of data that provide observability of your
 
 The Docker EE platform provides a base set of metrics that gets you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
 
-- **Business metrics**: These are high-level aggregate metrics that typically combine technical, financial, and organizational data to create metrics for business leaders of the IT infrastructure. Some examples of business metrics might be:
+## Business metrics ##
+
+These are high-level aggregate metrics that typically combine technical, financial, and organizational data to create metrics for business leaders of the IT infrastructure. Some examples of business metrics might be:
     - Company or division-level application downtime
     - Aggregate resource utilization
     - Application resource demand growth
 
+## Application metrics ##
 
-- **Application metrics**: These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
+These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
     - Service state metrics
     - Container platform metrics
     - Host infrastructure metrics
 
-
 Docker EE 2.1 does not collect or expose application level metrics. The following are metrics Docker EE 2.1 collects, aggregates, and exposes:
 
-- **Service state metrics**: These are metrics about the state of services running on the container platform. These types of metrics have very low cardinality, meaning the values are typically from a small fixed set of possibilities, commonly binary.
+## Service state metrics ##
+
+These are metrics about the state of services running on the container platform. These types of metrics have very low cardinality, meaning the values are typically from a small fixed set of possibilities, commonly binary.
     - Application health
     - Convergence of K8s deployments and Swarm services
     - Cluster load by number of services or containers or pods
 
 
-- **Host infrastructure metrics**: These are metrics taken from te software & hardware infrastructure.
+## Host infrastructure metrics ##
+
+These are metrics taken from te software & hardware infrastructure.
     - CPU - Container-level CPU utilization, Node-level load average
     - Memory - RSS, swap
     - Network I/O - bandwidth, packets, drops
@@ -53,7 +59,9 @@ Docker EE 2.1 does not collect or expose application level metrics. The followin
     - Operating System – file descriptors, open network connections, number of processes/threads
 
 
-- **Container infrastructure system metrics**: These are application-level metrics derived from the container platform itself.
+## Container infrastructure system metrics ##
+
+These are application-level metrics derived from the container platform itself.
     - Infrastructure Quorum Leader - Swarm RAFT, etcd, rethink
     - UCP Component health - Healthy / Unhealthy
 
@@ -66,34 +74,34 @@ To deploy Prometheus on worker nodes in a cluster:
 
 2. Verify that ucp-metrics pods are running on all managers.
 
-```
-$ kubectl -n kube-system get pods -l k8s-app=ucp-metrics -o wide
-NAME                READY     STATUS    RESTARTS   AGE       IP              NODE
-ucp-metrics-hvkr7   3/3       Running   0          4h        192.168.80.66   3a724a-0
-```
+    ```
+    $ kubectl -n kube-system get pods -l k8s-app=ucp-metrics -o wide
+    NAME                READY     STATUS    RESTARTS   AGE       IP              NODE
+    ucp-metrics-hvkr7   3/3       Running   0          4h        192.168.80.66   3a724a-0
+    ```
 
 3. Add a Kubernetes node label to one or more workers.  Here we add a label with key "ucp-metrics" and value "".
 
-```
-$ kubectl label node 3a724a-1 ucp-metrics=
-node "test-3a724a-1" labeled
-```
+    ```
+    $ kubectl label node 3a724a-1 ucp-metrics=
+    node "test-3a724a-1" labeled
+    ```
 
 4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key “ucp-metrics” and the value “”.
 
-```
-$ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
-daemonset "ucp-metrics" patched
-```
+    ```
+    $ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
+    daemonset "ucp-metrics" patched
+    ```
 
 5. Observe that ucp-metrics pods are running only on the labeled workers.
 
-```
-$ kubectl -n kube-system get pods -l k8s-app=ucp-metrics -o wide
-NAME                READY     STATUS        RESTARTS   AGE       IP              NODE
-ucp-metrics-88lzx   3/3       Running       0          12s       192.168.83.1    3a724a-1
-ucp-metrics-hvkr7   3/3       Terminating   0          4h        192.168.80.66   3a724a-0
-```
+    ```
+    $ kubectl -n kube-system get pods -l k8s-app=ucp-metrics -o wide
+    NAME                READY     STATUS        RESTARTS   AGE       IP              NODE
+    ucp-metrics-88lzx   3/3       Running       0          12s       192.168.83.1    3a724a-1
+    ucp-metrics-hvkr7   3/3       Terminating   0          4h        192.168.80.66   3a724a-0
+    ```
 
 ## Configure external Prometheus to scrape metrics from UCP
 
@@ -103,117 +111,117 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
 
 2. Create a Kubernetes secret containing your bundle’s TLS material.
 
-```
-(cd $DOCKER_CERT_PATH && kubectl create secret generic prometheus --from-file=ca.pem --from-file=cert.pem --from-file=key.pem)
-```
+    ```
+    (cd $DOCKER_CERT_PATH && kubectl create secret generic prometheus --from-file=ca.pem --from-file=cert.pem --from-file=key.pem)
+    ```
 
 3. Create a Prometheus deployment and ClusterIP service using YAML as follows.
 
    On AWS with Kube’s cloud provider configured, you can replace `ClusterIP` with `LoadBalancer` in the service YAML then access the service through the load balancer. If running Prometheus external to UCP, change the following domain for the inventory container in the Prometheus deployment from `ucp-controller.kube-system.svc.cluster.local` to an external domain to access UCP from the Prometheus node.
 
-```
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: prometheus
-data:
-  prometheus.yaml: |
-    global:
-      scrape_interval: 10s
-    scrape_configs:
-    - job_name: 'ucp'
-      tls_config:
-        ca_file: /bundle/ca.pem
-        cert_file: /bundle/cert.pem
-        key_file: /bundle/key.pem
-        server_name: proxy.local
-      scheme: https
-      file_sd_configs:
-      - files:
-        - /inventory/inventory.json
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: prometheus
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: prometheus
-  template:
+    ```
+    kubectl apply -f - &lt;&lt;EOF
+    apiVersion: v1
+    kind: ConfigMap
     metadata:
-      labels:
-        app: prometheus
+      name: prometheus
+    data:
+      prometheus.yaml: |
+        global:
+          scrape_interval: 10s
+        scrape_configs:
+        - job_name: 'ucp'
+          tls_config:
+            ca_file: /bundle/ca.pem
+            cert_file: /bundle/cert.pem
+            key_file: /bundle/key.pem
+            server_name: proxy.local
+          scheme: https
+          file_sd_configs:
+          - files:
+            - /inventory/inventory.json
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: prometheus
     spec:
-      containers:
-      - name: inventory
-        image: alpine
-        command: ["sh", "-c"]
-        args:
-        - apk add --no-cache curl &&
-          while :; do
-            curl -Ss --cacert /bundle/ca.pem --cert /bundle/cert.pem --key /bundle/key.pem --output /inventory/inventory.json https://ucp-controller.kube-system.svc.cluster.local/metricsdiscovery;
-            sleep 15;
-          done
-        volumeMounts:
-        - name: bundle
-          mountPath: /bundle
-        - name: inventory
-          mountPath: /inventory
-      - name: prometheus
-        image: prom/prometheus
-        command: ["/bin/prometheus"]
-        args:
-        - --config.file=/config/prometheus.yaml
-        - --storage.tsdb.path=/prometheus
-        - --web.console.libraries=/etc/prometheus/console_libraries
-        - --web.console.templates=/etc/prometheus/consoles
-        volumeMounts:
-        - name: bundle
-          mountPath: /bundle
-        - name: config
-          mountPath: /config
-        - name: inventory
-          mountPath: /inventory
-      volumes:
-      - name: bundle
-        secret:
-          secretName: prometheus
-      - name: config
-        configMap:
-          name: prometheus
-      - name: inventory
-        emptyDir:
-          medium: Memory
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-spec:
-  ports:
-  - port: 9090
-    targetPort: 9090
-  selector:
-    app: prometheus
-  sessionAffinity: ClientIP
-EOF
-```
+    replicas: 2
+      selector:
+        matchLabels:
+          app: prometheus
+      template:
+        metadata:
+          labels:
+            app: prometheus
+        spec:
+          containers:
+          - name: inventory
+            image: alpine
+            command: ["sh", "-c"]
+            args:
+            - apk add --no-cache curl &&
+              while :; do
+                curl -Ss --cacert /bundle/ca.pem --cert /bundle/cert.pem --key /bundle/key.pem --output /inventory/inventory.json https://ucp-controller.kube-system.svc.cluster.local/metricsdiscovery;
+                sleep 15;
+              done
+            volumeMounts:
+            - name: bundle
+              mountPath: /bundle
+            - name: inventory
+              mountPath: /inventory
+          - name: prometheus
+            image: prom/prometheus
+            command: ["/bin/prometheus"]
+            args:
+            - --config.file=/config/prometheus.yaml
+            - --storage.tsdb.path=/prometheus
+            - --web.console.libraries=/etc/prometheus/console_libraries
+            - --web.console.templates=/etc/prometheus/consoles
+            volumeMounts:
+            - name: bundle
+              mountPath: /bundle
+            - name: config
+              mountPath: /config
+            - name: inventory
+              mountPath: /inventory
+          volumes:
+          - name: bundle
+            secret:
+              secretName: prometheus
+          - name: config
+            configMap:
+              name: prometheus
+          - name: inventory
+            emptyDir:
+              medium: Memory
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: prometheus
+    spec:
+      ports:
+      - port: 9090
+        targetPort: 9090
+      selector:
+        app: prometheus
+      sessionAffinity: ClientIP
+    EOF
+    ```
 
 4. Determine the service ClusterIP.
 
-```
-$ kubectl get service prometheus
-NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
-```
+    ```
+    $ kubectl get service prometheus
+    NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+    prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
+    ```
 
 5. Forward port 9090 on the local host to the ClusterIP. The tunnel created does not need to be kept alive and is only intended to expose the Prometheus API.
 
-```
-ssh -L 9090:10.96.254.107:9090 ANY_NODE
-```
+    ```
+    ssh -L 9090:10.96.254.107:9090 ANY_NODE
+    ```
 
 6. Visit `http://127.0.0.1:9090` to explore the UCP metrics being collected by Prometheus.
