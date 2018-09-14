@@ -38,27 +38,34 @@ You can use audit logs to help with the following use cases:
 
 ## Procedure
 
-1. Download the UCP Client bundle [Download client bundle from the command line] (https://success.docker.com/article/download-client-bundle-from-the-cli).
+1. Download the UCP Client bundle [Download client bundle from the command line](https://success.docker.com/article/download-client-bundle-from-the-cli).
 
 2.  Retrieve JSON for current audit log configuration.
-```
-export DOCKER_CERT_PATH=~/ucp-bundle-dir/
-curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -X GET https://ucp-domain/api/ucp/config/logging > auditlog.json
-```
-3. Modify the auditLevel field to metadata or request.
-```
-vi auditlog.json
 
-{"logLevel":"INFO","auditLevel":"metadata","supportDumpIncludeAuditLogs":false}
-```
+    ```
+    export DOCKER_CERT_PATH=~/ucp-bundle-dir/
+    curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -X GET https://ucp-domain/api/ucp/config/logging > auditlog.json
+    ```
+
+3. Open auditlog.json to modify the 'auditlevel' field to `metadata` or `request`.
+
+    ```
+    {
+    	"logLevel": "INFO",
+    	"auditLevel": "metadata",
+    	"supportDumpIncludeAuditLogs": false
+    }
+    ```
+
 4. Send the JSON request for the auditlog config with the same API path but with the `PUT` method.
-```
-curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -H "Content-Type: application/json" -X PUT --data $(cat auditlog.json) https://ucp-domain/api/ucp/config/logging
-```
+
+    ```
+    curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -H "Content-Type: application/json" -X PUT --data $(cat auditlog.json) https://ucp-domain/api/ucp/config/logging
+    ```
 
 5. Create any workload or RBAC grants in Kubernetes and generate a support dump to check the contents of ucp-controller.log file for audit log entries.
 
-6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. https://success.docker.com/article/elasticsearch-logstash-kibana-logging
+6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. (https://success.docker.com/article/elasticsearch-logstash-kibana-logging)
 
 ## API endpoints ignored
 
