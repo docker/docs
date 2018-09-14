@@ -189,6 +189,8 @@ guides:
             title: Best practices for writing Dockerfiles
           - path: /develop/develop-images/baseimages/
             title: Create a base image
+          - path: /develop/develop-images/build_enhancements/
+            title: Docker build enhancements for 18.09
           - path: /develop/develop-images/multistage-build/
             title: Use multi-stage builds
           - path: /engine/reference/builder/
@@ -1560,6 +1562,14 @@ manuals:
           title: Add labels to cluster nodes
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
+        - path: /ee/ucp/admin/configure/collect-cluster-metrics/
+          title: Collect UCP cluster metrics with Prometheus
+        - path: /ee/ucp/authorization/configure-rbac-kube/
+          title: Configure native Kubernetes role-based access control
+        - path: /ee/ucp/admin/configure/create-audit-logs/
+          title: Create UCP audit logs
+        - path: /ee/ucp/admin/configure/enable-saml-authentication/
+          title: Enable SAML authentication
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/external-auth/enable-ldap-config-file/
@@ -2404,6 +2414,8 @@ manuals:
         title: Create and manage webhooks
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
+      - title: Tag pruning
+        path: /ee/dtr/user/tag-pruning/
     - title: API reference
       path: /reference/dtr/2.5/api/
       nosync: true
