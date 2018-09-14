@@ -31,7 +31,7 @@ during garbage collection.
 In your browser, navigate to `https://<dtr-url>` and log in with your credentials. Select **System** on the left navigation pane, and then click
 the **Garbage collection** tab to schedule garbage collection.
 
-![](../../images/garbage-collection-0.png){: .with-border}
+![](../../images/garbage-collection-0.png){: .img-fluid .with-border}
 
 Select for how long the garbage collection job should run:
 * Until done: Run the job until all unused image layers are deleted.
@@ -39,7 +39,7 @@ Select for how long the garbage collection job should run:
 at a time.
 * Never: Never delete unused image layers.
 
-If you select *Until done* or *For x minutes*, you can specify a recurring schedule in UTC (Coordinated Universal Time) with the following options:
+If you select ***Until done*** or ***For x minutes***, you can specify a recurring schedule in UTC (Coordinated Universal Time) with the following options:
 * Custom cron schedule - (Hour, Day of Month, Month, Weekday)
 * Daily at midnight UTC
 * Every Saturday at 1am UTC
