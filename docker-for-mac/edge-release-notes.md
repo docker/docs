@@ -18,6 +18,24 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-beta1-mac75 2018-09-14
+
+[Download](https://download.docker.com/mac/edge/27117/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.0-ce-beta1](https://github.com/docker/docker-ce/releases/tag/v18.09.0-ce-beta1)
+  - Linux Kernel 4.9.125
+
+* New
+  - New version scheme
+
+* Deprecation
+  - Removed support of AUFS
+  - Removed support of OSX 10.11
+
+* Bug fixes and minor changes
+  - Fix panic in diagnose
+
 ### Docker Community Edition 18.06.1-ce-mac74 2018-08-29
 
 [Download](https://download.docker.com/mac/edge/26766/Docker.dmg)
