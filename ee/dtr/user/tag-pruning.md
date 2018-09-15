@@ -48,8 +48,9 @@ DTR allows you to set your pruning triggers based on the following image attribu
 | Last updated at | Whether the last image update was before your specified number of hours, days, weeks, or months. For details on valid time units, see [Go's ParseDuration function](https://golang.org/pkg/time/#ParseDuration). |  Last updated at: Hours = `12` |
 
 Specify one or more image attributes to add to your pruning criteria, then choose:
- 	**Prune future tags** to save your policy and apply your selection to future tags. Only matching tags after the policy addition will be pruned during garbage collection.
-	**Prune all tags** to save the policy, and evaluate both existing and future tags on your repository. 
+
+- **Prune future tags** to save the policy and apply your selection to future tags. Only matching tags after the policy addition will be pruned during garbage collection.
+- **Prune all tags** to save the policy, and evaluate both existing and future tags on your repository. 
 
 Upon selection, you will see a confirmation message and will be redirected to your newly updated **Pruning** tab. 
 
