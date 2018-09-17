@@ -23,7 +23,7 @@ However, it should be noted that it can cause temporary traffic outages between 
 of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel 
 interface in the UCP host.
 
-![Kubernetes Network Encryption](/images/kubernetes-network-encryption.png)
+![Kubernetes Network Encryption](/ee/images/kubernetes-network-encryption.png)
 
 ## Requirements
 
