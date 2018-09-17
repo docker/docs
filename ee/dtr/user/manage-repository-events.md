@@ -1,6 +1,6 @@
 ---
 title: Manage Repository Events
-description: View a list of events happening within a repository and enable auto-deletion of events for repository maintenance.
+description: View a list of image events happening within a repository and enable auto-deletion of these events for maintenance.
 keywords: registry, events, log, activity stream
 ---
 
@@ -9,21 +9,21 @@ keywords: registry, events, log, activity stream
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
 ## Overview 
-Actions at their core are events which happen to a particular image in a repository. They happen when an image was pushed, pulled, promoted, scanned, or mirrored. As of v2.6, repositories now include an Activity tab which shows a paginated list of the most recent actions which have happened within a given repository. The range of activity types displayed will vary according to your repository privileges. If you are a DTR admin, you will have the option to compact the activity stream history as part of repository maintenance and cleanup.
+
+Actions at their core are events which happen in a particular repository to a particular image. As of v2.6, individual repositories now include an **Activity** tab which shows a paginated list of the most recent events within a given repository. The list of events displayed will vary according to your repository privileges. Additionally, DTR administrators can enable auto-deletion of repository events as part of maintenance and cleanup.
   
 In the following section, we will show you how to:
 
-* View the list of activities in a repository
-* Compact the activity stream history of a repository
+* View the list of events in a repository, including event types associated with your access level
+* Enable auto-deletion of repository events based on your specified conditions
 
 ## View List of Events
 
-To view the list of events within a repository, navigate to `https://<dtr-url>`and log in with your UCP credentials. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following
-the `/` after the specific namespace for your repository.
+To view the list of events within a repository, navigate to `https://<dtr-url>`and log in with your UCP credentials. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
 
 ![](../images/tag-pruning-0.png){: .with-border}
 
-Select the **Pruning** tab, and click **New pruning policy** to specify your tag pruning criteria:
+Select the **Activity** tab. You should see a list of events based on your repository access level. Pull events are excluded by default and are only visible to repository and trusted registry administrators. Uncheck "Exclude pull" to view pull events.  
 
 ![](../images/tag-pruning-1.png){: .with-border}
 
