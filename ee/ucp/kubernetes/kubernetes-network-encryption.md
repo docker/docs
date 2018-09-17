@@ -16,7 +16,12 @@ agent controls the IPSec encryption on Calico’s IPIP tunnel traffic between di
 cluster. The master is the second component, deployed on a UCP manager node, which acts as the key management 
 process that configures and periodically rotates the encryption keys.
 
-Kubernetes network encryption uses AES-GCM with 128-bit keys (by default) and encrypts Kubernetes traffic traversing between nodes. Encryption is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. However, it should be noted that it can cause temporary traffic outages between pods during the first few minutes of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel interface in the UCP host.
+Kubernetes network encryption uses AES Galois Counter Mode (AES-GCM) with 128-bit keys by default. Encryption 
+is not enabled by default and requires the SecureOverlay Agent and Master to be deployed on UCP to begin 
+encrypting traffic within the cluster. It can be enabled or disabled at any time during the cluster lifecycle. 
+However, it should be noted that it can cause temporary traffic outages between pods during the first few minutes 
+of traffic enabling/disabling. When enabled, Kubernetes pod traffic between hosts is encrypted at the IPIP tunnel 
+interface in the UCP host.
 
 ![Kubernetes Network Encryption](/images/kubernetes-network-encryption.png)
 
@@ -36,7 +41,7 @@ Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay
 
 (Download the Secure Overlay YAML file here.)[ucp-secureoverlay.yml]
 
-After one downloads the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials:
+After downloading the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials:
 
 ```
 $ kubectl apply -f ucp-secureoverlay.yml
