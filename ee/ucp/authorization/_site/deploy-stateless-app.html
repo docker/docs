@@ -1,0 +1,191 @@
+<p>This tutorial explains how to deploy a NGINX web server and limit access to one
+team with role-based access control (RBAC).</p>
+
+<h2 id="scenario">Scenario</h2>
+
+<p>You are the Docker EE system administrator at Acme Company and need to configure
+permissions to company resources. The best way to do this is to:</p>
+
+<ul>
+  <li>Build the organization with teams and users.</li>
+  <li>Define roles with allowable operations per resource types, like 
+permission to run containers.</li>
+  <li>Create collections or namespaces for accessing actual resources.</li>
+  <li>Create grants that join team + role + resource set.</li>
+</ul>
+
+<h2 id="build-the-organization">Build the organization</h2>
+
+<p>Add the organization, <code class="highlighter-rouge">acme-datacenter</code>, and create three teams according to the
+following structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acme-datacenter
+├── dba
+│   └── Alex Alutin
+├── dev
+│   └── Bett Bhatia
+└── ops
+    └── Chad Chavez
+</code></pre></div></div>
+
+<p>Learn to <a href="create-users-and-teams-manually.md">create and configure users and teams</a>.</p>
+
+<h2 id="kubernetes-deployment">Kubernetes deployment</h2>
+
+<p>In this section, we deploy NGINX with Kubernetes. See <a href="#swarm-stack">Swarm stack</a>
+for the same exercise with Swarm.</p>
+
+<h3 id="create-namespace">Create namespace</h3>
+
+<p>Create a namespace to logically store the NGINX application:</p>
+
+<ol>
+  <li>Click <strong>Kubernetes</strong> &gt; <strong>Namespaces</strong>.</li>
+  <li>Paste the following manifest in the terminal window and click <strong>Create</strong>.</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-namespace
+</code></pre></div></div>
+
+<h3 id="define-roles">Define roles</h3>
+
+<p>You can use the built-in roles or define your own. For this exercise, create a
+simple role for the ops team:</p>
+
+<ol>
+  <li>Click <strong>Roles</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Role</strong>.</li>
+  <li>On the <strong>Details</strong> tab, name the role <code class="highlighter-rouge">Kube Deploy</code>.</li>
+  <li>On the <strong>Operations</strong> tab, check all <strong>Kubernetes Deployment Operations</strong>.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>Learn to <a href="create-users-and-teams-manually.md">create and configure users and teams</a>.</p>
+
+<h3 id="grant-access">Grant access</h3>
+
+<p>Grant the ops team (and only the ops team) access to nginx-namespace with the
+custom role, <strong>Kube Deploy</strong>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acme-datacenter/ops + Kube Deploy + nginx-namespace
+</code></pre></div></div>
+
+<h3 id="deploy-nginx">Deploy NGINX</h3>
+
+<p>You’ve configured Docker EE. The <code class="highlighter-rouge">ops</code> team can now deploy <code class="highlighter-rouge">nginx</code>.</p>
+
+<ol>
+  <li>Log on to UCP as “chad” (on the <code class="highlighter-rouge">ops</code>team).</li>
+  <li>Click <strong>Kubernetes</strong> &gt; <strong>Namespaces</strong>.</li>
+  <li>Paste the following manifest in the terminal window and click <strong>Create</strong>.</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1beta2</span>  <span class="c1"># Use apps/v1beta1 for versions &lt; 1.8.0</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-deployment</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="s">2</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Log on to UCP as each user and ensure that:
+    <ul>
+      <li><code class="highlighter-rouge">dba</code> (alex) can’t see <code class="highlighter-rouge">nginx-namespace</code>.</li>
+      <li><code class="highlighter-rouge">dev</code> (bett) can’t see <code class="highlighter-rouge">nginx-namespace</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="swarm-stack">Swarm stack</h2>
+
+<p>In this section, we deploy <code class="highlighter-rouge">nginx</code> as a Swarm service. See <a href="#kubernetes-deployment">Kubernetes Deployment</a>
+for the same exercise with Kubernetes.</p>
+
+<h3 id="create-collection-paths">Create collection paths</h3>
+
+<p>Create a collection for NGINX resources, nested under the <code class="highlighter-rouge">/Shared</code> collection:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/
+├── System
+└── Shared
+    └── nginx-collection
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Tip</strong>: To drill into a collection, click <strong>View Children</strong>.</p>
+</blockquote>
+
+<p>Learn to <a href="group-resources.md">group and isolate cluster resources</a>.</p>
+
+<h3 id="define-roles-1">Define roles</h3>
+
+<p>You can use the built-in roles or define your own. For this exercise, create a
+simple role for the ops team:</p>
+
+<ol>
+  <li>Click <strong>Roles</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Role</strong>.</li>
+  <li>On the <strong>Details</strong> tab, name the role <code class="highlighter-rouge">Swarm Deploy</code>.</li>
+  <li>On the <strong>Operations</strong> tab, check all <strong>Service Operations</strong>.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>Learn to <a href="define-roles.md">create and configure users and teams</a>.</p>
+
+<h3 id="grant-access-1">Grant access</h3>
+
+<p>Grant the ops team (and only the ops team) access to <code class="highlighter-rouge">nginx-collection</code> with
+the built-in role, <strong>Swarm Deploy</strong>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
+</code></pre></div></div>
+
+<p>Learn to <a href="grant-permissions.md">grant role-access to cluster resources</a>.</p>
+
+<h3 id="deploy-nginx-1">Deploy NGINX</h3>
+
+<p>You’ve configured Docker EE. The <code class="highlighter-rouge">ops</code> team can now deploy an <code class="highlighter-rouge">nginx</code> Swarm
+service.</p>
+
+<ol>
+  <li>Log on to UCP as chad (on the <code class="highlighter-rouge">ops</code>team).</li>
+  <li>Click <strong>Swarm</strong> &gt; <strong>Services</strong>.</li>
+  <li>Click <strong>Create Stack</strong>.</li>
+  <li>On the Details tab, enter:
+    <ul>
+      <li>Name: <code class="highlighter-rouge">nginx-service</code></li>
+      <li>Image: nginx:latest</li>
+    </ul>
+  </li>
+  <li>On the Collections tab:
+    <ul>
+      <li>Click <code class="highlighter-rouge">/Shared</code> in the breadcrumbs.</li>
+      <li>Select <code class="highlighter-rouge">nginx-collection</code>.</li>
+    </ul>
+  </li>
+  <li>Click <strong>Create</strong>.</li>
+  <li>Log on to UCP as each user and ensure that:
+    <ul>
+      <li><code class="highlighter-rouge">dba</code> (alex) cannot see <code class="highlighter-rouge">nginx-collection</code>.</li>
+      <li><code class="highlighter-rouge">dev</code> (bett) cannot see <code class="highlighter-rouge">nginx-collection</code>.</li>
+    </ul>
+  </li>
+</ol>
+
