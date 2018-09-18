@@ -69,7 +69,7 @@ FROM python:2.7-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-ADD . /app
+COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
@@ -92,7 +92,7 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` is present because of that `Dockerfile`'s `ADD` command,
+`requirements.txt` is present because of that `Dockerfile`'s `COPY` command,
 and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 
