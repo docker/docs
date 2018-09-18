@@ -51,7 +51,7 @@ You only need to set up the repository once, after which you can install Docker 
     $ sudo rm /etc/yum.repos.d/docker*.repo
     ```
 
-2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends.
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
 
     ```bash
     $ export DOCKERURL="<DOCKER-EE-URL>"
@@ -283,8 +283,8 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
-    
-3.  Delete other docker related resources:
+
+3.  Delete other Docker related resources:
     ```bash
     $ sudo rm -rf /run/docker
     $ sudo rm -rf /var/run/docker
