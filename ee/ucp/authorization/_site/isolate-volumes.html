@@ -1,0 +1,100 @@
+<p>In this example, two teams are granted access to volumes in two different
+resource collections. UCP access control prevents the teams from viewing and
+accessing each other’s volumes, even though they may be located in the same
+nodes.</p>
+
+<ol>
+  <li>Create two teams.</li>
+  <li>Create two collections, one for either team.</li>
+  <li>Create grants to manage access to the collections.</li>
+  <li>Team members create volumes that are specific to their team.</li>
+</ol>
+
+<p><img src="../images/isolate-volumes-diagram.svg" alt="" class="with-border" /></p>
+
+<h2 id="create-two-teams">Create two teams</h2>
+
+<p>Navigate to the <strong>Organizations &amp; Teams</strong> page to create two teams in the
+“engineering” organization, named “Dev” and “Prod”. Add a user who’s not a UCP administrator to the Dev team, and add another non-admin user to the Prod team. <a href="create-users-and-teams-manually.md">Learn how to create and manage teams</a>.</p>
+
+<p><img src="../images/isolate-volumes-0.png" alt="" class="with-border" /></p>
+
+<h2 id="create-resource-collections">Create resource collections</h2>
+
+<p>In this example, the Dev and Prod teams use two different volumes, which they
+access through two corresponding resource collections. The collections are
+placed under the <code class="highlighter-rouge">/Shared</code> collection.</p>
+
+<ol>
+  <li>In the left pane, click <strong>Collections</strong> to show all of the resource
+collections in the swarm.</li>
+  <li>Find the <strong>/Shared</strong> collection and click <strong>View children</strong>.</li>
+  <li>Click <strong>Create collection</strong> and name the new collection “dev-volumes”.</li>
+  <li>Click <strong>Create</strong> to create the collection.</li>
+  <li>Click <strong>Create collection</strong> again, name the new collection “prod-volumes”,
+and click <strong>Create</strong>.</li>
+</ol>
+
+<p><img src="../images/isolate-volumes-0a.png" alt="" class="with-border" /></p>
+
+<h2 id="create-grants-for-controlling-access-to-the-new-volumes">Create grants for controlling access to the new volumes</h2>
+
+<p>In this example, the Dev team gets access to its volumes from a grant that
+associates the team with the <code class="highlighter-rouge">/Shared/dev-volumes</code> collection, and the Prod
+team gets access to its volumes from another grant that associates the team
+with the <code class="highlighter-rouge">/Shared/prod-volumes</code> collection.</p>
+
+<ol>
+  <li>Navigate to the <strong>Grants</strong> page and click <strong>Create Grant</strong>.</li>
+  <li>In the left pane, click <strong>Collections</strong>, and in the <strong>Swarm</strong> collection,
+click <strong>View Children</strong>.</li>
+  <li>In the <strong>Shared</strong> collection, click <strong>View Children</strong>.</li>
+  <li>In the list, find <strong>/Shared/dev-volumes</strong> and click <strong>Select Collection</strong>.</li>
+  <li>Click <strong>Roles</strong>, and in the dropdown, select <strong>Restricted Control</strong>.</li>
+  <li>Click <strong>Subjects</strong>, and under <strong>Select subject type</strong>, click <strong>Organizations</strong>.
+In the dropdown, pick the <strong>engineering</strong> organization, and in the
+<strong>Team</strong> dropdown, select <strong>Dev</strong>.</li>
+  <li>Click <strong>Create</strong> to grant permissions to the Dev team.</li>
+  <li>Click <strong>Create Grant</strong> and repeat the previous steps for the <strong>/Shared/prod-volumes</strong>
+collection and the Prod team.</li>
+</ol>
+
+<p><img src="../images/isolate-volumes-1.png" alt="" class="with-border" /></p>
+
+<p>With the collections and grants in place, users can sign in and create volumes
+in their assigned collections.</p>
+
+<h2 id="create-a-volume-as-a-team-member">Create a volume as a team member</h2>
+
+<p>Team members have permission to create volumes in their assigned collection.</p>
+
+<ol>
+  <li>Log in as one of the users on the Dev team.</li>
+  <li>Navigate to the <strong>Volumes</strong> page to view all of the volumes in the
+swarm that the user can access.</li>
+  <li>Click <strong>Create volume</strong> and name the new volume “dev-data”.</li>
+  <li>In the left pane, click <strong>Collections</strong>. The default collection
+appears. At the top of the page, click <strong>Shared</strong>, find the <strong>dev-volumes</strong> collection in the list, and click <strong>Select Collection</strong>.</li>
+  <li>Click <strong>Create</strong> to add the “dev-data” volume to the collection.</li>
+  <li>Log in as one of the users on the Prod team, and repeat the
+previous steps to create a “prod-data” volume assigned to the <code class="highlighter-rouge">/Shared/prod-volumes</code> collection.</li>
+</ol>
+
+<p><img src="../images/isolate-volumes-2.png" alt="" class="with-border" /></p>
+
+<p>Now you can see role-based access control in action for volumes. The user on
+the Prod team can’t see the Dev team’s volumes, and if you log in again as a
+user on the Dev team, you won’t see the Prod team’s volumes.</p>
+
+<p><img src="../images/isolate-volumes-3.png" alt="" class="with-border" /></p>
+
+<p>Sign in with a UCP administrator account, and you see all of the volumes
+created by the Dev and Prod users.</p>
+
+<p><img src="../images/isolate-volumes-4.png" alt="" class="with-border" /></p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="isolate-nodes.md">Isolate Swarm nodes in Docker Advanced</a></li>
+</ul>
