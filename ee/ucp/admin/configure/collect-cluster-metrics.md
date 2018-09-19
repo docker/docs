@@ -31,7 +31,7 @@ These are high-level aggregate metrics that typically combine technical, financi
     - Company or division-level application downtime
     - Aggregate resource utilization
     - Application resource demand growth
-
+&nbsp;
 ## Application metrics ##
 
 These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
