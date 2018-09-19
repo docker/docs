@@ -22,16 +22,16 @@ Docker UCP requires Docker Enterprise Edition. Before installing Docker EE on
 your cluster nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified
-Domain Names (FQDN), like `engine01.docker.vm`. Whichever you choose,
-ensure that your naming strategy is consistent across the cluster, because
+Domain Names (FQDN), like `node01.company.example.com`. Whichever you choose,
+confirm your naming strategy is consistent across the cluster, because
 Docker Engine and UCP use hostnames.
 
 For example, if your cluster has three hosts, you can name them:
 
 ```none
-node1.company.example.org
-node2.company.example.org
-node3.company.example.org
+node1.company.example.com
+node2.company.example.com
+node3.company.example.com
 ```
 
 ## Static IP addresses
@@ -42,7 +42,11 @@ this.
 
 ## Avoid IP range conflicts
 
-The default Kubernetes cluster IP pool for the pods is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
+Swarm uses a default address pool of `10.0.0.0/16` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). 
+
+**NOTE:** Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.
+
+Kubernetes uses a default cluster IP pool for pods that is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
 
 ## Time synchronization
 
