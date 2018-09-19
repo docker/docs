@@ -1612,6 +1612,8 @@ manuals:
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
+        - path:  /ee/ucp/admin/accessing-vulnerability-data-in-ucp.md
+          title: Monitoring vulnerability data in UCP
       - path: /ee/ucp/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - title: CLI reference
