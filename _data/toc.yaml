@@ -1612,7 +1612,7 @@ manuals:
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
-        - path:  /ee/ucp/admin/accessing-vulnerability-data-in-ucp.md
+        - path:  /ee/ucp/admin/accessing-vulnerability-data-in-ucp/
           title: Monitoring vulnerability data in UCP
       - path: /ee/ucp/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
