@@ -67,7 +67,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scope (overlay) networks. Every 
 network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In 
-some circumstances it may be desireable to use a different default IP address pool for networks. 
+some circumstances it may be desirable to use a different default IP address pool for networks. 
 
 For example, if the default `10.0.0.0/8` range conflicts with already allocated address space in your network, 
 then it is desireable to ensure that networks use a different range without requiring Swarm users to specify 
