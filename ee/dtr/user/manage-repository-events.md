@@ -47,26 +47,26 @@ First, let's break down the pieces of data included in an event. We will use the
 | Date and Time | When the event happened in Pacific Time (PT). | `9/13/2018 9:59 PM` |  
 
 
-It is recommended that you review [Authentication and authorization in DTR](../admin/manage-users/) to understand the permission levels required to view the different repository events. 
+It is recommended that you review [Authentication and authorization in DTR](../admin/manage-users/) to understand the permission levels required to view the different repository events.  
 
 | Repository Event          | Description                                        | Minimum Permission Level        |
 |:----------------|:---------------------------------------------------| :----------------|
 | Push        |  Refers to "Create Manifest" and "Update Tag" events. Learn more about [pushing images](../user/manage-images/pull-and-push-images/#push-the-image). | Authenticated Users |
 | Scan        | Requires [security scanning setup](../admin/configure/set-up-vulnerability-scans/) by a DTR admin. Once enabled, this will display as a `SCAN` event type.  | Authenticated Users |
 | Promotion        |  Refers to a "Create Promotion Policy" event which links to the **Promotions** tab of the repository where you can edit the existing promotions. See [Promotion Policies](../user/promotion-policies/) for different ways to promote an image. | Repository Admin |
-| Delete        |  Refers to "Delete Tag" events. | Authenticated Users |
-| Pull        | Refers to "Get Tag" events which are visible to repository and trusted admins. | Repository Admin |
+| Delete        |  Refers to "Delete Tag" events. Learn more about [deleting images](../user/manage-images/pull-and-push-images/#delete-images). | Authenticated Users |
+| Pull        | Refers to "Get Tag" events. Learn more about [pulling images](../Learn more about [pulling images](../user/manage-images/pull-and-push-images/#pull-the-image). | Repository Admin |
 | Mirror        |Refers to ______  | Repository Admin |
-| Create repo        | Refers to "Create Repository" events.  | Authenticated Users |
+| Create repo        | Refers to "Create Repository" events. See [Create a repository](../user/manage-images/) for more details. | Authenticated Users |
 
 ## Review Repository Permissions
 
 To review the type of events you have access to, do the following:
-	1. Navigate to the **Info** tab. 
-	2. Notice **Your Permission** under **Docker Pull Command**. 
-	3. Hover over the question mark next to [your permission level](../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
+1. Navigate to the **Info** tab. 
+2. Notice **Your Permission** under **Docker Pull Command**. 
+3. Hover over the question mark next to [your permission level](../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
 	   
-![](../images/manage-repo-events-1.png){: .img-fluid .with-border}
+![](../images/manage-repo-events-2.png){: .img-fluid .with-border}
 
 > KNOWN LIMITATIONS
 >
