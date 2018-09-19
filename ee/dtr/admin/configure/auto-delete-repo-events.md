@@ -1,4 +1,3 @@
-
 ---
 title: Enable Auto-Deletion of Repository Events
 description: Enable auto-deletion of image events within a repository for maintenance.
