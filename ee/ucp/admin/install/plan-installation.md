@@ -23,7 +23,7 @@ your cluster nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified
 Domain Names (FQDN), like `node01.company.example.com`. Whichever you choose,
-comfirm your naming strategy is consistent across the cluster, because
+confirm your naming strategy is consistent across the cluster, because
 Docker Engine and UCP use hostnames.
 
 For example, if your cluster has three hosts, you can name them:
