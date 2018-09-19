@@ -202,22 +202,21 @@ For example, the following command is used when initializing Swarm:
 $ docker swarm init --default-address-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
 ```
 
-Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet in the pool. If the specified network is already allocated, that network will not be used for Swarm. 
+Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm. 
 
-Multiple pools can be configured if discontigous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.
+Multiple pools can be configured if discontiguous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.
 
-The default mask length can be configured and is the same for all networks. It is set to `/24` if not configured. To set the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
+The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
 
-**NOTE:** Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation
+**NOTE:** Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
 
 ##### Overlay network size limitations
 
-Docker recommends creating overlay networks with `/24` blocks (the default), which limits the network to 256 IP 
-addresses, when you create networks using the default VIP-based endpoint-mode. 
+Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks, which limits the network to 256 IP addresses. 
 
-This recommendation addresses[limitations with swarm mode](https://github.com/moby/moby/issues/30820). 
+This recommendation addresses [limitations with swarm mode](https://github.com/moby/moby/issues/30820). 
 If you need more than 256 IP addresses, do not increase the IP block size. You can either use `dnsrr` 
-endpoint mode with an external load balancer, or use multiple smalleroverlay networks. See 
+endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
 [Configure service discovery](#configure-service-discovery) or more information about different endpoint modes.
 
 #### Configure encryption of application data
