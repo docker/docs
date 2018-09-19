@@ -39,7 +39,7 @@ If you specify both, events in your repositories will be removed during garbage 
 
 6. Navigate to **System > Job Logs** to confirm that `onlinegc` has happened.
 
-![](../../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
+![](../../images/auto-delete-repo-events-2.png){: .img-fluid .with-border}
 
 ## Where to go next
 
