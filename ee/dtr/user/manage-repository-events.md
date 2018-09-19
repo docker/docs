@@ -14,8 +14,21 @@ Actions are events which happen to a particular image within a particular reposi
   
 In the following section, we will show you how to:
 
+* Review actions or events that you have access to
 * View the list of events in a repository, including <a href="#event-types">event types</a> associated with your permission level
-* Review actions or events type that you have access to
+
+## Review Repository Permissions
+
+To review the type of events you have access to, do the following:
+1. Navigate to the **Info** tab. 
+2. Notice **Your Permission** under **Docker Pull Command**. 
+3. Hover over the question mark next to [your permission level](../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
+	   
+![](../images/manage-repo-events-2.png){: .img-fluid .with-border}
+
+> KNOWN LIMITATIONS
+>
+> Your repository permissions list may include events that are not displayed in the **Activity** tab. It is also not an exhaustive list of event types on your activity stream.
 
 ## View List of Events
 
@@ -27,7 +40,7 @@ To view the list of events within a repository, do the following:
 ![](../images/tag-pruning-0.png){: .img-fluid .with-border}
 	
 3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR administrators. 
-   * If you're a repository or a trusted admin, uncheck "Exclude pull" to view pull events. 
+   * If you're a repository or a DTR admin, uncheck "Exclude pull" to view pull events. This should give you a better understanding of who is consuming your images.
    * To update your event view, select a different time filter from the drop-down list.  
 
 ![](../images/manage-repo-events-0.png){: .img-fluid .with-border}
@@ -46,6 +59,9 @@ First, let's break down the data included in an event. We will use the highlight
 | Initiated by | Links to the profile of the user who initiated the event, where applicable. For image promotion events, this will reflect the promotion ID and link to the **Promotions** page of the repository. | `PROMOTION CA5E7822` |
 | Date and Time | When the event happened in your configured time zone. | `9/13/2018 9:59 PM` |  
 
+### Event Audits
+Given the level of detail on each event, it should be easy for DTR and security admins to determine what events have taken place inside of DTR.  For example, when an image which shouldn’t have been deleted ends up getting deleted, the security admin can determine when and who initiated the deletion.
+
 ### Events and Permissions
 For more details on different permission levels within DTR, see [Authentication and authorization in DTR](../admin/manage-users/) to understand the minimum level required to view the different repository events.  
 
@@ -58,19 +74,6 @@ For more details on different permission levels within DTR, see [Authentication 
 | Pull        | Refers to "Get Tag" events. Learn more about [pulling images](../Learn more about [pulling images](../user/manage-images/pull-and-push-images/#pull-the-image). | Repository Admin |
 | Mirror        |Refers to ______  | Repository Admin |
 | Create repo        | Refers to "Create Repository" events. See [Create a repository](../user/manage-images/) for more details. | Authenticated Users |
-
-## Review Repository Permissions
-
-To review the type of events you have access to, do the following:
-1. Navigate to the **Info** tab. 
-2. Notice **Your Permission** under **Docker Pull Command**. 
-3. Hover over the question mark next to [your permission level](../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
-	   
-![](../images/manage-repo-events-2.png){: .img-fluid .with-border}
-
-> KNOWN LIMITATIONS
->
-> Your repository permissions list may include events that are not displayed in the **Activity** tab. It is also not an exhaustive list of event types on your activity stream.
 
 ## Where to go next
 
