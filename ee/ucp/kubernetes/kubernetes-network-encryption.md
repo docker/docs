@@ -43,7 +43,7 @@ packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of enc
 tunnel interface MTU must be no more than "EXTMTU - 46 - ((EXTMTU - 46) modulo 4)" where EXTMTU is the minimum MTU 
 of the external interfaces.   An IPIP MTU of 1452 should generally be safe for most deployments. 
 
-Changing UCP's MTU requires updating the UCP configuration.  This process is described (here)[/ee/ucp/admin/configure/ucp-configuration-file].  
+Changing UCP's MTU requires updating the UCP configuration.  This process is described [here](/ee/ucp/admin/configure/ucp-configuration-file).  
 
 The user must update the following values to the new MTU:
 
@@ -52,6 +52,7 @@ The user must update the following values to the new MTU:
       calico_mtu = "1452"
       ipip_mtu = "1452"
       ...
+
 ## Configuring SecureOverlay
 
 Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the Secure Overlay YAML file to UCP.
