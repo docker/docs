@@ -1,6 +1,6 @@
 ---
 title: Manage Repository Events
-description: View a list of image events happening within a repository and enable auto-deletion of these events for maintenance.
+description: View a list of image events happening within a repository.
 keywords: registry, events, log, activity stream
 ---
 
@@ -10,50 +10,70 @@ keywords: registry, events, log, activity stream
 
 ## Overview 
 
-Actions at their core are events which happen to a particular image within a particular repository. To provide a quick summary of these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a paginated list of the most recent events. The type of events listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can enable auto-deletion of repository events as part of maintenance and cleanup.
+Actions at their core are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can enable auto-deletion of repository events as part of maintenance and cleanup.
   
 In the following section, we will show you how to:
 
 * View the list of events in a repository, including <a href="#event-types">event types</a> associated with your permission level
-* Enable auto-deletion of repository events based on your specified conditions
+* Review actions or events type that you have access to
 
 ## View List of Events
 
-To view the list of events within a repository, navigate to `https://<dtr-url>`and log in with your UCP credentials. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
+To view the list of events within a repository, do the following:
+	1. Navigate to `https://<dtr-url>`and log in with your UCP credentials. 
 
-![](../images/tag-pruning-0.png){: .with-border}
+	2. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
 
-Select the **Activity** tab. You should see a list of events based on your repository permission level. Pull events are excluded by default and are only visible to repository and DTR administrators. Uncheck "Exclude pull" to view pull events.  
+![](../images/tag-pruning-0.png){: .img-fluid .with-border}
+	
+	3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR administrators. 
+           * If you're a repository or a trusted admin, uncheck "Exclude pull" to view pull events. 
+           * To update your event view, select a different time filter from the drop-down list.  
 
-![](../images/manage-repo-events-0.png){: .with-border}
+![](../images/manage-repo-events-0.png){: .img-fluid .with-border}
+
+### Event Streams
+
+First, let's break down the pieces of data included in an event. We will use the creation of a promotion policy as our example below.
+
+![](../images/manage-repo-events-1.png){: .img-fluid .with-border}
+
+| Event Detail          | Description                                        | Example |
+|:----------------|:-------------------------------------------------|:--------|
+| Label        |  Friendly name of the event. | `Create Promotion Policy`
+| Repository  | This will always be the repository in review following the `<user-or-org>/<repository_name>` convention outlined in [Create a Repository](../user/manage-images/#create-a-repository). | `test-org/test-repo-1` |
+| Tag        | Tag affected by the event, when applicable. | `test-org/test-repo-1:latest` where `latest` is the affected tag| 
+| SHA | SHA digest value for **CREATE** operations such as creating a new image tag or a promotion policy. | `sha256:bbf09ba3` |
+| Type | Event type. Possible values are: `CREATE`, `GET`, `UPDATE`, `DELETE`, `SEND`, `FAIL` and `SCAN` | `CREATE` |
+| Initiated by | Links to the profile of the user who initiated the event, where applicable. For image promotion events, this will reflect the promotion ID and link to the **Promotions** page of the repository. | `PROMOTION CA5E7822` |
+| Date and Time | When the event happened in Pacific Time (PT). | `9/13/2018 9:59 PM` |  
 
 
-### Streamed Events
+It is recommended that you review [Authentication and authorization in DTR](../admin/manage-users/) to understand the permission levels required to view the different repository events. 
 
-Note that the event types may reflect a different friendly name in the web interface and includes the relevant [CRUD operation](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
-
-| Event Type          | Description                                        | Permission Level        |
+| Repository Event          | Description                                        | Minimum Permission Level        |
 |:----------------|:---------------------------------------------------| :----------------|
-| Push        |  | Authenticated Users |
-|        |  | Authenticated Users |
-| Scan        |  | Authenticated Users |
-| Promotion        |  | Repository Admin |
-| Delete        |  | Authenticated Users |
-| Pull        |  | Repository Admin |
-| Mirror        |  | Repository Admin |
-| Create repo        |  | Authenticated Users |
+| Push        |  Refers to "Create Manifest" and "Update Tag" events. Learn more about [pushing images](../user/manage-images/pull-and-push-images/#push-the-image). | Authenticated Users |
+| Scan        | Requires [security scanning setup](../admin/configure/set-up-vulnerability-scans/) by a DTR admin. Once enabled, this will display as a `SCAN` event type.  | Authenticated Users |
+| Promotion        |  Refers to a "Create Promotion Policy" event which links to the **Promotions** tab of the repository where you can edit the existing promotions. See [Promotion Policies](../user/promotion-policies/) for different ways to promote an image. | Repository Admin |
+| Delete        |  Refers to "Delete Tag" events. | Authenticated Users |
+| Pull        | Refers to "Get Tag" events which are visible to repository and trusted admins. | Repository Admin |
+| Mirror        |Refers to ______  | Repository Admin |
+| Create repo        | Refers to "Create Repository" events.  | Authenticated Users |
 
-## Enable auto-deletion of repository events
+## Review Repository Permissions
 
-In addition to pruning policies, you can also set tag limits on repositories that you manage to restrict the number of tags on a given repository. Repository tag limits are processed in a first in first out (FIFO) manner. For example, if you set a tag limit of 2, adding a third tag would push out the first.
+To review the type of events you have access to, do the following:
+	1. Navigate to the **Info** tab. 
+	2. Notice **Your Permission** under **Docker Pull Command**. 
+	3. Hover over the question mark next to [your permission level](../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
+	   
+![](../images/manage-repo-events-1.png){: .img-fluid .with-border}
 
-![](../images/tag-pruning-4.png){: .with-border}
-
-To set a tag limit, select the repository that you want to update and click the **Settings** tab. Specify a number in the **Pruning** section and click **Save**. The **Pruning** tab will now display your tag limit above the prune triggers list along with a link to modify this setting.
-
-
-![](../images/tag-pruning-5.png){: .with-border}
+> KNOWN LIMITATIONS
+>
+> Your repository permissions list may include events that are not displayed in the **Activity** tab. It is also not an exhaustive list of event types on your activity stream.
 
 ## Where to go next
 
-- [Delete images](delete-images.md)
+- [Enable auto-deletion of repository events](../admin/auto-delete-repo-events.md)
