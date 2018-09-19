@@ -10,7 +10,7 @@ keywords: registry, events, log, activity stream
 
 ## Overview 
 
-Actions at their core are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can [enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events/) as part of maintenance and cleanup.
+Actions are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can [enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events/) as part of maintenance and cleanup.
   
 In the following section, we will show you how to:
 
@@ -34,7 +34,7 @@ To view the list of events within a repository, do the following:
 
 ### Activity Stream
  
-First, let's break down the pieces of data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
+First, let's break down the data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
 
 | Event Detail          | Description                                        | Example |
 |:----------------|:-------------------------------------------------|:--------|
@@ -44,15 +44,15 @@ First, let's break down the pieces of data included in an event. We will use the
 | SHA | SHA digest value for **CREATE** operations such as creating a new image tag or a promotion policy. | `sha256:bbf09ba3` |
 | Type | Event type. Possible values are: `CREATE`, `GET`, `UPDATE`, `DELETE`, `SEND`, `FAIL` and `SCAN` | `CREATE` |
 | Initiated by | Links to the profile of the user who initiated the event, where applicable. For image promotion events, this will reflect the promotion ID and link to the **Promotions** page of the repository. | `PROMOTION CA5E7822` |
-| Date and Time | When the event happened in Pacific Time (PT). | `9/13/2018 9:59 PM` |  
+| Date and Time | When the event happened in your configured time zone. | `9/13/2018 9:59 PM` |  
 
-
-It is recommended that you review [Authentication and authorization in DTR](../admin/manage-users/) to understand the permission levels required to view the different repository events.  
+### Events and Permissions
+For more details on different permission levels within DTR, see [Authentication and authorization in DTR](../admin/manage-users/) to understand the minimum level required to view the different repository events.  
 
 | Repository Event          | Description                                        | Minimum Permission Level        |
 |:----------------|:---------------------------------------------------| :----------------|
 | Push        |  Refers to "Create Manifest" and "Update Tag" events. Learn more about [pushing images](../user/manage-images/pull-and-push-images/#push-the-image). | Authenticated Users |
-| Scan        | Requires [security scanning setup](../admin/configure/set-up-vulnerability-scans/) by a DTR admin. Once enabled, this will display as a `SCAN` event type.  | Authenticated Users |
+| Scan        | Requires [security scanning to be set up](../admin/configure/set-up-vulnerability-scans/) by a DTR admin. Once enabled, this will display as a `SCAN` event type.  | Authenticated Users |
 | Promotion        |  Refers to a "Create Promotion Policy" event which links to the **Promotions** tab of the repository where you can edit the existing promotions. See [Promotion Policies](../user/promotion-policies/) for different ways to promote an image. | Repository Admin |
 | Delete        |  Refers to "Delete Tag" events. Learn more about [deleting images](../user/manage-images/pull-and-push-images/#delete-images). | Authenticated Users |
 | Pull        | Refers to "Get Tag" events. Learn more about [pulling images](../Learn more about [pulling images](../user/manage-images/pull-and-push-images/#pull-the-image). | Repository Admin |
