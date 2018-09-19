@@ -97,7 +97,6 @@ all the subnets are exhausted.
 =======
 In this example, `docker network create -d overlay net1` will result in `10.20.0.0/26` as the allocated subnet for `net1`, and `docker network create -d overlay net2` will result in `10.20.0.64/26` as the allocated subnet for `net2`. This continues until all the subnets are exhausted. 
 
-
 Refer to the following pages for more information:
 - [Swarm networking](./networking.md) for more information about the default address pool usage
 - [UCP Installation Planning](../../ee/ucp/admin/install/plan-installation.md) for more information about planning the network design before installation
