@@ -18,13 +18,13 @@ Auto-deletion of repository events is a Docker Trusted Registry (DTR) global set
 
 2. Select **System** on the left navigation pane which will display the **Settings** page by default.
 
-3. Scroll down to ***Repository Events*** and turn on **Auto-Deletion**.
+3. Scroll down to **Repository Events** and turn on ***Auto-Deletion***.
 
-![](../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
+![](../../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
 
 4. Specify the conditions with which an event deletion will be triggered.
 
-![](../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
+![](../../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
 
 DTR allows you to set your deletion triggers based on the following optional event attributes:
 
@@ -39,7 +39,7 @@ If you specify both, events in your repositories will be evaluated against both 
 
 6. Navigate to **System > Job Logs** to confirm that `onlinegc` has happened.
 
-![](../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
+![](../../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
 
 ## Where to go next
 
