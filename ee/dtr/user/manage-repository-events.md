@@ -10,7 +10,7 @@ keywords: registry, events, log, activity stream
 
 ## Overview 
 
-Actions at their core are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can [enable auto-deletion of repository events](../admin/config/auto-delete-repo-events.md) as part of maintenance and cleanup.
+Actions at their core are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can [enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events.md) as part of maintenance and cleanup.
   
 In the following section, we will show you how to:
 
