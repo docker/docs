@@ -20,23 +20,21 @@ In the following section, we will show you how to:
 ## View List of Events
 
 To view the list of events within a repository, do the following:
-	1. Navigate to `https://<dtr-url>`and log in with your UCP credentials. 
+1. Navigate to `https://<dtr-url>`and log in with your UCP credentials. 
 
-	2. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
+2. Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
 
 ![](../images/tag-pruning-0.png){: .img-fluid .with-border}
 	
-	3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR administrators. 
-           * If you're a repository or a trusted admin, uncheck "Exclude pull" to view pull events. 
-           * To update your event view, select a different time filter from the drop-down list.  
+3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR administrators. 
+   * If you're a repository or a trusted admin, uncheck "Exclude pull" to view pull events. 
+   * To update your event view, select a different time filter from the drop-down list.  
 
 ![](../images/manage-repo-events-0.png){: .img-fluid .with-border}
 
-### Event Streams
-
-First, let's break down the pieces of data included in an event. We will use the creation of a promotion policy as our example below.
-
-![](../images/manage-repo-events-1.png){: .img-fluid .with-border}
+### Activity Stream
+ 
+First, let's break down the pieces of data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
 
 | Event Detail          | Description                                        | Example |
 |:----------------|:-------------------------------------------------|:--------|
