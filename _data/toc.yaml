@@ -1733,6 +1733,8 @@ manuals:
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install a CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
+      - title: Kubernetes network encryption
+        path: /ee/ucp/kubernetes/kubernetes-network-encryption/
     - title: API reference
       path: /reference/ucp/3.0/api/
       nosync: true
