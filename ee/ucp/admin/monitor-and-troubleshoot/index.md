@@ -69,7 +69,7 @@ vulnerability counts for containers, Swarm services, pods, and images.
 To enable this feature, the DTR 2.6.0 or higher implementation needs to have 
 UCP single sign-on enabled.
 
-![example of vulnerability information in UCP](./ee/ucp/images/example-of-vuln-data-in-ucp.png)
+![example of vulnerability information in UCP](/ee/ucp/images/example-of-vuln-data-in-ucp.png)
 
 ## Where to go next
 
