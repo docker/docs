@@ -107,7 +107,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have three options:
+You have two options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
