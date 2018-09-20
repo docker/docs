@@ -31,7 +31,7 @@ DTR allows you to set your deletion triggers based on the following optional eve
 | Name            | Description                                        | Example           |
 |:----------------|:---------------------------------------------------| :----------------|
 | Age        | Lets you remove events older than your specified number of  hours, days, weeks or months| `2 months` |
-| Max number of events  | Lets you specify the maximum number of events allowed in the repositories.  | Component name starts with `b` |
+| Max number of events  | Lets you specify the maximum number of events allowed in the repositories.  | `6000` |
 
 If you specify both, events in your repositories will be removed during garbage collection if either condition is met. You should see a "settings saved successfully" confirmation right away.
 
