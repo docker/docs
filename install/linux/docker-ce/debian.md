@@ -137,7 +137,7 @@ from the repository.
 3.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
+    $ wget {{ download-url-base}}/gpg | sudo apt-key add gpg
     ```
 
     Verify that you now have the key with the fingerprint
