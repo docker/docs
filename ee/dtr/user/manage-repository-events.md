@@ -55,7 +55,7 @@ First, let's break down the data included in an event. We will use the highlight
 | Label        |  Friendly name of the event. | `Create Promotion Policy`
 | Repository  | This will always be the repository in review following the `<user-or-org>/<repository_name>` convention outlined in [Create a Repository](../user/manage-images/#create-a-repository). | `test-org/test-repo-1` |
 | Tag        | Tag affected by the event, when applicable. | `test-org/test-repo-1:latest` where `latest` is the affected tag| 
-| SHA | The [digest value](/registry/spec/api/#content-digests) for **CREATE** operations such as creating a new image tag or a promotion policy. | `sha256:bbf09ba3` |
+| SHA | The [digest value](/registry/spec/api/#content-digests) for `CREATE` operations such as creating a new image tag or a promotion policy. | `sha256:bbf09ba3` |
 | Type | Event type. Possible values are: `CREATE`, `GET`, `UPDATE`, `DELETE`, `SEND`, `FAIL` and `SCAN` | `CREATE` |
 | Initiated by | The actor responsible for the event. For user-initiated events, this will reflect the user ID and link to that user's profile. For image events triggered by a policy &ndash; pruning, pull / push mirroring, or promotion &ndash; this will reflect the relevant policy ID except for manual promotions where it reflects `PROMOTION MANUAL_P`, and link to the relevant policy page. Other event actors may not include a link.  | `PROMOTION CA5E7822` |
 | Date and Time | When the event happened in your configured time zone. | `9/13/2018 9:59 PM` |  
