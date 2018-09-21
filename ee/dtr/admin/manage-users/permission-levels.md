@@ -11,11 +11,11 @@ repositories.
 
 Users are shared across UCP and DTR. When you create a new user in Docker
 Universal Control Plane, that user becomes available in DTR and vice versa.
-When you create a trusted admin in DTR, the user has permissions to:
+When you create a trusted admin in DTR, the admin has permissions to manage:
 
-* Manage users across UCP and DTR,
-* Manage DTR repositories and settings,
-* Manage UCP resources and settings.
+* Users across UCP and DTR
+* DTR repositories and settings
+* UCP resources and settings
 
 ## Team permission levels
 
