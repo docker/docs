@@ -38,9 +38,7 @@ To review the type of events you have access to, do the following:
 
 ## View List of Events
 
-To view the list of events within a repository, do the following:
-
-Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
+To view the list of events within a repository, select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
    * If you're a repository or a DTR admin, uncheck "Exclude pull" to view pull events. This should give you a better understanding of who is consuming your images.
    * To update your event view, select a different time filter from the drop-down list.  
 
@@ -48,7 +46,7 @@ Select the **Activity** tab. You should see a paginated list of the latest event
 
 ### Activity Stream
  
-First, let's break down the data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
+Let's break down the data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
 
 | Event Detail          | Description                                        | Example |
 |:----------------|:-------------------------------------------------|:--------|
