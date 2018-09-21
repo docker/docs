@@ -10,7 +10,7 @@ keywords: registry, events, log, activity stream
 
 ## Overview 
 
-Actions are events which happen to a particular image within a particular repository. To provide better visibility into these events, DTR 2.6 now includes an **Activity** tab on each repository displaying a sortable paginated list of the most recent events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR administrators can [enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events/) as part of maintenance and cleanup.
+Starting in DTR 2.6, each repository page includes an **Activity** tab which displays a sortable and paginated list of the most recent events within the repository. This offers better visibility along with the ability to audit events. Event types listed will vary according to your [repository permission level](../admin/manage-users/permission-levels/). Additionally, DTR admins can [enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events/) as part of maintenance and cleanup.
   
 In the following section, we will show you how to:
 
@@ -39,7 +39,7 @@ To view the list of events within a repository, do the following:
 
 ![](../images/tag-pruning-0.png){: .img-fluid .with-border}
 	
-3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR administrators. 
+3. Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
    * If you're a repository or a DTR admin, uncheck "Exclude pull" to view pull events. This should give you a better understanding of who is consuming your images.
    * To update your event view, select a different time filter from the drop-down list.  
 
@@ -56,13 +56,15 @@ First, let's break down the data included in an event. We will use the highlight
 | Tag        | Tag affected by the event, when applicable. | `test-org/test-repo-1:latest` where `latest` is the affected tag| 
 | SHA | SHA digest value for **CREATE** operations such as creating a new image tag or a promotion policy. | `sha256:bbf09ba3` |
 | Type | Event type. Possible values are: `CREATE`, `GET`, `UPDATE`, `DELETE`, `SEND`, `FAIL` and `SCAN` | `CREATE` |
-| Initiated by | Links to the profile of the user who initiated the event, where applicable. For image promotion events, this will reflect the promotion ID and link to the **Promotions** page of the repository. | `PROMOTION CA5E7822` |
+| Initiated by | Links to the actor responsible for the event.  of the user who initiated the event, where applicable. For image promotion events, this will reflect the promotion ID and link to the **Promotions** page of the repository. | `PROMOTION CA5E7822` |
 | Date and Time | When the event happened in your configured time zone. | `9/13/2018 9:59 PM` |  
 
 ### Event Audits
+
 Given the level of detail on each event, it should be easy for DTR and security admins to determine what events have taken place inside of DTR.  For example, when an image which shouldn’t have been deleted ends up getting deleted, the security admin can determine when and who initiated the deletion.
 
-### Events and Permissions
+### Event Permissions
+
 For more details on different permission levels within DTR, see [Authentication and authorization in DTR](../admin/manage-users/) to understand the minimum level required to view the different repository events.  
 
 | Repository Event          | Description                                        | Minimum Permission Level        |
