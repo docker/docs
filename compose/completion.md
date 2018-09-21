@@ -5,7 +5,7 @@ title: Command-line completion
 ---
 
 Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
-for the bash and zsh shell.
+for the bash, zsh and oh-my-zsh shells.
 
 ## Install command completion
 
@@ -75,6 +75,16 @@ Then reload your shell:
 
 ```shell
 exec $SHELL -l
+```
+
+### oh-my-zsh
+
+Add `docker` to your plugins list in `~/.zshrc`:
+
+```shell
+plugins=(
+   <existing-plugins> docker
+)
 ```
 
 ## Available completions
