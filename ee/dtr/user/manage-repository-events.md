@@ -15,7 +15,7 @@ Starting in DTR 2.6, each repository page includes an **Activity** tab which dis
 In the following section, we will show you how to:
 
 * Review actions or events that you have access to
-* View the list of events in a repository, including <a href="#event-types">event types</a> associated with your permission level
+* View the list of events in a repository, including event types associated with your permission level
 
 ## Review Repository Permissions
 
