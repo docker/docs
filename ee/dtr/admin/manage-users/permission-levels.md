@@ -41,10 +41,10 @@ have the highest permission level defined by those teams.
 
 Here's an overview of the permission levels available in DTR:
 
-* Anonymous or unauthenticated users: Can search and pull public repositories.
+* Anonymous or unauthenticated Users: Can search and pull public repositories.
 * Authenticated Users: Can search and pull public repos, and create and manage their own repositories.
-* Team member: Everything a user can do, plus the permissions granted by the team the user is a member of.
-* Organization owner: Can manage repositories and teams for the organization.
+* Team Member: Everything a user can do, plus the permissions granted by the team the user is a member of.
+* Organization Owner: Can manage repositories and teams for the organization.
 * Admin: Can manage anything across UCP and DTR.
 
 ## Where to go next
