@@ -52,6 +52,18 @@ completion.
 
 ### Zsh
 
+#### With oh-my-zsh
+
+Add `docker` to the plugins list in `~/.zshrc`:
+
+```shell
+plugins=(
+  <existing-plugins> docker
+)
+```
+
+#### Without oh-my-zsh
+
 Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
 
 ```shell
