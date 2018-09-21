@@ -72,7 +72,7 @@ For more details on different permission levels within DTR, see [Authentication 
 | Scan        | Requires [security scanning to be set up](../admin/configure/set-up-vulnerability-scans/) by a DTR admin. Once enabled, this will display as a `SCAN` event type.  | Authenticated Users |
 | Promotion        |  Refers to a "Create Promotion Policy" event which links to the **Promotions** tab of the repository where you can edit the existing promotions. See [Promotion Policies](../user/promotion-policies/) for different ways to promote an image. | Repository Admin |
 | Delete        |  Refers to "Delete Tag" events. Learn more about [deleting images](../user/manage-images/pull-and-push-images/#delete-images). | Authenticated Users |
-| Pull        | Refers to "Get Tag" events. Learn more about [pulling images](../Learn more about [pulling images](../user/manage-images/pull-and-push-images/#pull-the-image). | Repository Admin |
+| Pull        | Refers to "Get Tag" events. Learn more about [pulling images](../user/manage-images/pull-and-push-images/#pull-the-image). | Repository Admin |
 | Mirror        |Refers to "Pull mirroring" and "Push mirroring" events. See [Mirror images to another registry](../user/promotion-policies/#mirror-images-to-another-registry) and [Mirror images from another registry](../user/promotion-policies/#mirror-images-from-another-registry) for more details. | Repository Admin |
 | Create repo        | Refers to "Create Repository" events. See [Create a repository](../user/manage-images/) for more details. | Authenticated Users |
 
