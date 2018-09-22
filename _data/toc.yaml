@@ -1564,7 +1564,7 @@ manuals:
           title: Add SANs to cluster certificates
         - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
-        - path: /ee/ucp/authorization/configure-rbac-kube/
+        - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
         - path: /ee/ucp/admin/configure/create-audit-logs/
           title: Create UCP audit logs
@@ -1733,6 +1733,8 @@ manuals:
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install a CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
+      - title: Kubernetes network encryption
+        path: /ee/ucp/kubernetes/kubernetes-network-encryption/
     - title: API reference
       path: /reference/ucp/3.0/api/
       nosync: true

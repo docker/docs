@@ -1,0 +1,122 @@
+<p>With Docker Enterprise Edition, you can create roles and grants
+that implement the permissions that are defined in your Kubernetes apps.
+Learn about <a href="https://v1-8.docs.kubernetes.io/docs/admin/authorization/rbac/">RBAC authorization in Kubernetes</a>.</p>
+
+<p>Docker EE has its own implementation of role-based access control, so you
+can’t use Kubernetes RBAC objects directly. Instead, you create UCP roles
+and grants that correspond with the role objects and bindings in your
+Kubernetes app.</p>
+
+<ul>
+  <li>Kubernetes <code class="highlighter-rouge">Role</code> and <code class="highlighter-rouge">ClusterRole</code> objects become UCP roles.</li>
+  <li>Kubernetes <code class="highlighter-rouge">RoleBinding</code> and <code class="highlighter-rouge">ClusterRoleBinding</code> objects become UCP grants.</li>
+</ul>
+
+<p>Learn about <a href="grant-permissions.md">UCP roles and grants</a>.</p>
+
+<blockquote class="important">
+  <p>Kubernetes yaml in UCP</p>
+
+  <p>Docker EE has its own RBAC system that’s distinct from the Kubernetes
+system, so you can’t create any objects that are returned by the
+<code class="highlighter-rouge">/apis/rbac.authorization.k8s.io</code> endpoints. If the yaml for your Kubernetes
+app contains definitions for <code class="highlighter-rouge">Role</code>, <code class="highlighter-rouge">ClusterRole</code>, <code class="highlighter-rouge">RoleBinding</code> or
+<code class="highlighter-rouge">ClusterRoleBinding</code> objects, UCP returns an error.</p>
+</blockquote>
+
+<h2 id="migrate-a-kubernetes-role-to-a-custom-ucp-role">Migrate a Kubernetes Role to a custom UCP role</h2>
+
+<p>If you have <code class="highlighter-rouge">Role</code> and <code class="highlighter-rouge">ClusterRole</code> objects defined in the yaml for your
+Kubernetes app, you can realize the same authorization model by creating
+custom roles by using the UCP web UI.</p>
+
+<p>The following Kubernetes yaml defines a <code class="highlighter-rouge">pod-reader</code> role, which gives users
+access to the read-only <code class="highlighter-rouge">pods</code> resource APIs, <code class="highlighter-rouge">get</code>, <code class="highlighter-rouge">watch</code>, and <code class="highlighter-rouge">list</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pod-reader</span>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pods"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">watch"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<p>Create a corresponding custom role by using the <strong>Create Role</strong> page in the 
+UCP web UI.</p>
+
+<ol>
+  <li>Log in to the UCP web UI with an administrator account.</li>
+  <li>Click <strong>Roles</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Role</strong>.</li>
+  <li>In the <strong>Role Details</strong> section, name the role “pod-reader”.</li>
+  <li>In the left pane, click <strong>Operations</strong>.</li>
+  <li>Scroll to the <strong>Kubernetes pod operations</strong> section and expand the
+<strong>All Kubernetes Pod operations</strong> dropdown.</li>
+  <li>Select the <strong>Pod Get</strong>, <strong>Pod List</strong>, and <strong>Pod Watch</strong> operations.
+<img src="../images/migrate-kubernetes-roles-1.png" alt="" class="with-border" /></li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>The <code class="highlighter-rouge">pod-reader</code> role is ready to use in grants that control access to 
+cluster resources.</p>
+
+<h2 id="migrate-a-kubernetes-rolebinding-to-a-ucp-grant">Migrate a Kubernetes RoleBinding to a UCP grant</h2>
+
+<p>If your Kubernetes app defines <code class="highlighter-rouge">RoleBinding</code> or <code class="highlighter-rouge">ClusterRoleBinding</code>
+objects for specific users, create corresponding grants by using the UCP web UI.</p>
+
+<p>The following Kubernetes yaml defines a <code class="highlighter-rouge">RoleBinding</code> that grants user “jane”
+read-only access to pods in the <code class="highlighter-rouge">default</code> namespace.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">read-pods</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">User</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">jane</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pod-reader</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+</code></pre></div></div>
+
+<p>Create a corresponding grant by using the <strong>Create Grant</strong> page in the 
+UCP web UI.</p>
+
+<ol>
+  <li>Create a non-admin user named “jane”. <a href="create-users-and-teams-manually.md">Learn to create users and teams</a>.</li>
+  <li>Click <strong>Grants</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Grant</strong>.</li>
+  <li>In the <strong>Type</strong> section, click <strong>Namespaces</strong> and ensure that <strong>default</strong> is selected.</li>
+  <li>In the left pane, click <strong>Roles</strong>, and in the <strong>Role</strong> dropdown, select <strong>pod-reader</strong>.</li>
+  <li>In the left pane, click <strong>Subjects</strong>, and click <strong>All Users</strong>.</li>
+  <li>In the <strong>User</strong> dropdown, select <strong>jane</strong>.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p><img src="../images/migrate-kubernetes-roles-2.png" alt="" class="with-border" /></p>
+
+<p>User “jane” has access to inspect pods in the <code class="highlighter-rouge">default</code> namespace.</p>
+
+<h2 id="kubernetes-limitations">Kubernetes limitations</h2>
+
+<p>There are a few limitations that you should be aware of when creating
+Kubernetes workloads:</p>
+
+<ul>
+  <li>Docker EE has its own RBAC system, so it’s not possible to create
+<code class="highlighter-rouge">ClusterRole</code> objects, <code class="highlighter-rouge">ClusterRoleBinding</code> objects, or any other object that is
+created by using the <code class="highlighter-rouge">/apis/rbac.authorization.k8s.io</code> endpoints.</li>
+  <li>To make sure your cluster is secure, only users and service accounts that have been 
+granted “Full Control” of all Kubernetes namespaces can deploy pods with privileged
+options. This includes: <code class="highlighter-rouge">PodSpec.hostIPC</code>, <code class="highlighter-rouge">PodSpec.hostNetwork</code>,
+<code class="highlighter-rouge">PodSpec.hostPID</code>, <code class="highlighter-rouge">SecurityContext.allowPrivilegeEscalation</code>,
+<code class="highlighter-rouge">SecurityContext.capabilities</code>, <code class="highlighter-rouge">SecurityContext.privileged</code>, and
+<code class="highlighter-rouge">Volume.hostPath</code>.</li>
+</ul>
