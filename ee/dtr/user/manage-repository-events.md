@@ -46,7 +46,7 @@ To view the list of events within a repository, select the **Activity** tab. You
 
 ### Activity Stream
  
-Let's break down the data included in an event. We will use the highlighted "Create Promotion Policy" event as our example.
+The following table breaks down the data included in an event and uses the highlighted "Create Promotion Policy" event as an example.
 
 | Event Detail          | Description                                        | Example |
 |:----------------|:-------------------------------------------------|:--------|
