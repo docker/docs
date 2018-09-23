@@ -22,7 +22,7 @@ Place the completion script in `/etc/bash_completion.d/`
 (or `/usr/local/etc/bash_completion.d/` on a Mac):
 
 ```shell
-sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o `brew --prefix`/etc/bash_completion.d/docker-compose
 ```
 
 On a Mac, add the following to your `~/.bash_profile`:
