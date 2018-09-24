@@ -38,7 +38,7 @@ To review the type of events you have access to, do the following:
 
 ## View List of Events
 
-To view the list of events within a repository, select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
+As of DTR 2.3, admins were able to view a list of DTR events [using the API](https://docs.docker.com/datacenter/dtr/2.3/reference/api/#!/events/GetEvents). DTR 2.6 improves on that feature by showing a permission-based events list for each repository page on the user interface. To view the list of events within a repository, select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
    * If you're a repository or a DTR admin, uncheck "Exclude pull" to view pull events. This should give you a better understanding of who is consuming your images.
    * To update your event view, select a different time filter from the drop-down list.  
 
