@@ -37,6 +37,9 @@ To create a stack in the UCP web interface, follow these steps:
 
 4. Enter a name for the stack in the **Name** field.
 5. Select either **Swarm Services** or **Kubernetes Workloads** for the orchestrator mode. If you select Kubernetes, also select a namespace in the **Namespace** drop-down list.
+
+    ![Specify namespace for a stack in UCP](/ee/ucp/images/ucp-stack-namespace.png)
+
 6. Select either **Compose File** or **App Package** for the **Application File Mode**.
 7. Select **Next**.
 8. If you selected Compose file, enter or upload your `docker-compose.yml` in **2. Add Application File**.
