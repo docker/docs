@@ -19,3 +19,18 @@ The docker-app binary lets a user render an application package to a Compose fil
 The docker-app binary also lets a user deploy an application package directly, essentially executing a `docker-app render` command followed by a `docker stack deploy` command.
 
 Once a stack has been deployed, you must use the `docker stack` or `docker-compose` commands to manipulate and manage the stack.
+
+## Creating a stack in the UCP web interface##
+
+To create a stack in the UCP web interface, follow these steps:
+
+1. Go to the UCP web interface.
+2. In the lefthand menu, first select **Shared Resources**, then **Stacks**.
+
+### Deploying on Swarm ###
+
+[placeholder]
+
+### Deploying on Kubernetes ###
+
+[placeholder]
