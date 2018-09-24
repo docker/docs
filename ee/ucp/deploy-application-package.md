@@ -43,7 +43,7 @@ To create a stack in the UCP web interface, follow these steps:
 
    or you can enter upload the application package in the single-file format.
 
-       ![Provide application package in UCP](/ee/ucp/images/ucp-stack-package.png)
+    ![Provide application package in UCP](/ee/ucp/images/ucp-stack-package.png)
 
 9. Select **Create**.
 
