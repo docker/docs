@@ -5,36 +5,54 @@ keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
 ---
 
 Docker UCP closely integrates into Microsoft Azure for its Kubernetes Networking 
-and Persistent Storage feature set. Because of this there are prerequisites to 
-installing Docker UCP in Azure.
+and Persistent Storage feature set. UCP deploys the Calico CNI provider for data path networking and leverages Azure CNI for IP address management. There are infrastructure prerequisites that are required prior to UCP installation for the Azure IPAM functionality.
+
+
+## Docker UCP Networking
+
+Docker UCP configures the Azure IPAM module for Kubernetes to allocate
+IP addresses to Kubernetes pods.  The Azure IPAM module requires each Azure
+VM that's part of the Kubernetes cluster to be configured with a pool of
+IP addresses.
+
+You have two options for deploying the VMs for the Kubernetes cluster on Azure:
+- Install the cluster on Azure stand-alone virtual machines. Docker UCP provides
+  an [automated mechanism](#configure-ip-pools-for-azure-stand-alone-vms)
+  to configure and maintain IP pools for stand-alone Azure VMs. 
+- Install the cluster on an Azure virtual machine scale set. Configure the
+  IP pools by using an ARM template like 
+  [this one](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set).
+
+The steps for setting up IP address management are different in the two
+environments. If you're using a scale set, you set up `ipConfigurations`
+in an ARM template. If you're using stand-alone VMs, you set up IP pools
+for each VM by using a utility container that's configured to run as a
+global Swarm service, which Docker provides.
 
 ## Azure Prerequisites 
 
-Please find a list of infrastructure prerequisites that need to be met in order 
+The following list of infrastructure prerequisites need to be met in order 
 to successfully deploy Docker UCP on Azure.
 
-- All Docker EE Nodes (Managers and Workers) need to be deployed into the same 
+- All UCP Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
 components could be deployed in a second Azure Resource Group.
-- All Docker EE Nodes (Managers and Workers) need to be attached to the same 
+- All UCP Nodes (Managers and Workers) need to be attached to the same 
 Azure Subnet.
-- All Docker EE Nodes (Managers and Workers) need to be tagged in Azure with the
+- All UCP (Managers and Workers) need to be tagged in Azure with the
 tag `Orchestrator=Kubernetes:1.8.11`.
 - The Azure Computer Name needs to match the Node Operating System's Hostname. 
 Note this applies to the FQDN of the host including domain names. 
 - An Azure Service Principal with `Contributor` access to the Azure Resource 
-Group hosting the Docker EE Nodes. Note, if using a separate networking Resource 
+Group hosting the UCP Nodes. Note, if using a separate networking Resource 
 Group the same Service Principal will need `Network Contributor` access to this 
 Resource Group.
 
-### Retrieve Azure secrets
+The following information will be required for the installation:
 
-To continue with the Docker EE deployment you will need to retrieve the 
-following information. 
-
-- `subscriptionId` - The Azure Subscription ID in which the Docker EE 
+- `subscriptionId` - The Azure Subscription ID in which the UCP 
 objects are being deployed. 
-- `tenantId` - The Azure Active Directory Tenant ID in which the Docker EE 
+- `tenantId` - The Azure Active Directory Tenant ID in which the UCP 
 objects are being deployed. 
 - `aadClientId` - The Azure Service Principal ID
 - `aadClientSecret` - The Azure Service Principal Secret Key
@@ -42,8 +60,8 @@ objects are being deployed.
 ### Azure Configuration File
 
 For Docker UCP to integrate in to Microsoft Azure, an Azure configuration file 
-will need to be placed within each Docker EE node in your cluster. This file 
-will need to be placed at `/etc/kubernetes/azure.json`.  
+will need to be placed within each UCP node in your cluster. This file 
+will need to be placed at `/etc/kubernetes/azure.json`. 
 
 See the template below. Note entries that do not contain `****` should not be 
 changed.
@@ -84,28 +102,9 @@ an Azure subnet.
 More details on this configuration file can be found 
 [here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go).
 
-## Docker UCP Networking
 
-Docker UCP configures the Azure IPAM module for Kubernetes to allocate
-IP addresses to Kubernetes pods. The Azure IPAM module requires each Azure
-VM that's part of the Kubernetes cluster to be configured with a pool of
-IP addresses.
 
-You have two options for deploying the VMs for the Kubernetes cluster on Azure:
-- Install the cluster on Azure stand-alone virtual machines. Docker UCP provides
-  an [automated mechanism](#configure-ip-pools-for-azure-stand-alone-vms)
-  to configure and maintain IP pools for stand-alone Azure VMs.
-- Install the cluster on an Azure virtual machine scale set. Configure the
-  IP pools by using an ARM template like 
-  [this one](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set).
-
-The steps for setting up IP address management are different in the two
-environments. If you're using a scale set, you set up `ipConfigurations`
-in an ARM template. If you're using stand-alone VMs, you set up IP pools
-for each VM by using a utility container that's configured to run as a
-global Swarm service, which Docker provides.
-
-## Considerations for size of IP pools
+## Considerations for IPAM Configuration
 
 The subnet and the virtual network associated with the primary interface of
 the Azure VMs need to be configured with a large enough address prefix/range. 
@@ -131,6 +130,11 @@ plus a buffer for initial allocations for primary IP addresses.
 > or scale set member, so that Azure IPAM can provide them to Kubernetes when
 > requested.
 {: .important}
+
+#### Additional Notes
+
+- The `IP_COUNT` variable defines the subnet size for each node's pod IPs. This subnet size is the same for all hosts.
+-  The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
 
 ## Configure IP pools for Azure stand-alone VMs
 
@@ -255,7 +259,7 @@ for each VM in the VM scale set.
 }
 ```
 
-## Install UCP on the cluster
+## Install UCP 
 
 Use the following command to install UCP on the manager node.
 The `--pod-cidr` option maps to the IP address range that you configured for
