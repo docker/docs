@@ -10,7 +10,9 @@ keywords: ucp, swarm, kubernetes, application
 
 ## Application packages
 
-In Docker 2.1 EE, an application package has one of these formats:
+Docker 2.1 EE introduces application packages as a core concept in Docker. With application packages, [NEED NARRATIVE HERE ABOUT WHY OR WHICH CUSTOMERS CARE ABOUT THIS].
+
+An application package can have one of these formats:
 
 - **Three-file format**: Defined by a metadata.yml, a docker-compose.yml, and a settings.yml files inside a `my-app.dockerapp` folder. This is also called the folder format.
 - **Single-file format**: Defined by a data from the previously three files concatenated in the order givem and separated by `---\n` in a single file named named 'my-app.dockerapp'.
