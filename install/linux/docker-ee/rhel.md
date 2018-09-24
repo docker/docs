@@ -44,11 +44,26 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 - [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }: On production systems using `devicemapper`, you must use `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
-### FIPS 140-2 support
+### FIPS 140-2 cryptographic module support
 
 With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS support cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS will be automatically enabled in the Docker engine.
 
 **NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FISP-140-2. 
+
+To force FIPS-140-2 compliance with the Docker EE engine, do the following:
+
+Create a file called `/etc/systemd/system/docker.service.d/fips-module`. It needs to contain the following:
+
+```
+[Service]
+Environment="DOCKER_FIPS=1"
+```
+
+Restart the Docker service as root.
+
+`$ sudo service dockerd restart`
+
+**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0" in the `/etc/systemd/system/docker.service.d/fips-module`.
 
 ### Find your Docker EE repo URL
 
