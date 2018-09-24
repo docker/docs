@@ -31,7 +31,7 @@ To create a stack in the UCP web interface, follow these steps:
 
 3. Select **Create Stack** to display the stack creation dialog.
 
-    ![Configure stacks in UCP](/ee/ucp/images/ucp-configure-stack.png)
+    ![Configure stacks in UCP](/ee/ucp/images/ucp-config-stack.png)
 
 4. Enter a name for the stack in the **Name** field.
 5. Select either **Swarm Services** or **Kubernetes Workloads** for the orchestrator mode.
