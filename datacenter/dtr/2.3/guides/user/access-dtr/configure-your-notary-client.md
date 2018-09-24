@@ -33,7 +33,7 @@ curl -L <download-url> -o notary
 # Make it executable
 chmod +x notary
 
-# Move it to a location in your path
+# Move it to a location in your path.  Use the -Z option if you're using SELinux.
 sudo mv -Z notary /usr/bin/
 ```
 
