@@ -37,19 +37,15 @@ To create a stack in the UCP web interface, follow these steps:
 5. Select either **Swarm Services** or **Kubernetes Workloads** for the orchestrator mode.
 6. If you selected Swarm in the previous step, select either **Compose File** or **App Package** for the **Application File Mode**.
 7. Select **Next**.
-8. If you select Swarm and Compose file, enter or upload your `docker-compose.yml` in **2. Add Application File**.
+8. If you selected Swarm and Compose file, enter or upload your `docker-compose.yml` in **2. Add Application File**.
 
     ![Provide docker-compose.yml in UCP](/ee/ucp/images/ucp-stack-compose.png)
 
-   or you can enter upload the application package in the single-file format.
+   or if you selected Swarm and App Package, enter upload the application package in the single-file format.
 
     ![Provide application package in UCP](/ee/ucp/images/ucp-stack-package.png)
 
 9. Select **Create**.
-
-To specify an app package:
-
-(DETAIL NEEDED HERE)
 
 
 ### Deploying on Swarm
