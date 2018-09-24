@@ -183,7 +183,7 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
 7.  Create a global swarm service using the [docker4x/az-nic-ips](https://hub.docker.com/r/docker4x/az-nic-ips/)
     image on Docker Hub. Use the Swarm secret to prepopulate the virtual machines
     with the desired number of IP addresses per VM from the VNET pool. Set the
-    number of IPs to allocate to each VM through the IPCOUNT environment variable.
+    number of IPs to allocate to each VM through the IP_COUNT environment variable.
     For example, to configure 128 IP addresses per VM, run the following command: 
 
     ```bash
