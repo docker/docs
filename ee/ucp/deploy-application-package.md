@@ -35,6 +35,7 @@ To create a stack in the UCP web interface, follow these steps:
 
 4. Enter a name for the stack in the **Name** field.
 5. Select either **Swarm Services** or **Kubernetes Workloads** for the orchestrator mode.
+6. If you selected Swarm in the previous step, select either **Compose File** or **App Package** for the **Application File Mode**.
 
 ### Deploying on Swarm
 
