@@ -11,9 +11,9 @@ This example demonstrates how to dockerize an ASP.NET Core application.
 ## Why build ASP.NET Core?
 
 - [Open-source](https://github.com/aspnet/home)
-- Develop and run your ASP.NET Core apps cross-platform on Windows, MacOS and
+- Develop and run your ASP.NET Core apps cross-platform on Windows, MacOS, and
   Linux
-- Great for modern cloud-based apps, such as web apps, IoT apps and mobile
+- Great for modern cloud-based apps, such as web apps, IoT apps, and mobile
   backends
 - ASP.NET Core apps can run on [.NET
   Core](https://www.microsoft.com/net/core/platform) or on the full [.NET
@@ -90,7 +90,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
   directly. You can get the IP address of your container with the following
   steps:
   1.  Run `docker inspect -f "{% raw %}{{ .NetworkSettings.Networks.nat.IPAddress }}{% endraw %}" myapp`
-  2.  Copy the container ip address and paste into your browser.
+  2.  Copy the container IP address and paste into your browser.
   (For example, `172.16.240.197`)
 
 ## Further reading

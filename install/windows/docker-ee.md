@@ -17,7 +17,7 @@ install Docker EE.
 
 > Release notes
 >
-> You can [get release notes for all versions here](/release-notes/)
+> [Release notes for all versions](/release-notes/)
 
 ## Install Docker EE
 
@@ -46,7 +46,7 @@ full list of prerequisites.
 3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```PowerShell
-    docker container run hello-world:nanoserver
+    docker run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
@@ -129,26 +129,41 @@ installs, or install on air-gapped systems.
 
 ## Install a specific version
 
-To install a specific Docker version, you can use the
-`MaximumVersion`,`MinimumVersion` or `RequiredVersion` flags. For example:
+There are currently two channels available for Docker EE for Windows Server:
+
+* `17.06` - Use this version if you're using Docker Enterprise Edition (Docker Engine, UCP, DTR). `17.06` is the default.
+* `18.03` - Use this version if you're running Docker EE Engine alone.
+
+To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 17.06.2-ee-5
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.03
 ...
-Name                           Version          Source           Summary
-----                           -------          ------           -------
-Docker                         17.06.2-ee-5       Docker           Contains Docker EE for use with Windows Server 2016...
+Name                      Version               Source           Summary
+----                      -------               ------           -------
+Docker                    18.03.1-ee-2          Docker           Contains Docker EE for use with Windows Server...
 ```
+
+### Updating the DockerMsftProvider
+Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
+
+```PowerShell
+Update-Module DockerMsftProvider
+```
+
+Then open a new Powershell session for the update to take effect.
 
 ## Update Docker EE
 
-To update Docker EE on Windows Server 2016:
+To update Docker EE Engine to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Update -Force
 ```
 
-If Docker Universal Control Plane (UCP) is installed, run the
+## Preparing a Docker EE Engine for use with UCP
+
+Run the
 [UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
 
 Start the Docker service:

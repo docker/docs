@@ -6,7 +6,6 @@ title: Install Docker for Windows
 
 [Download Community Edition (CE)](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe)
 
-
 ##  What to know before you install
 
 If your system does not meet the requirements to run Docker for Windows, you can install

@@ -18,18 +18,13 @@ Upgrade the UCP cluster
 
 ## Description
 
-This command upgrades the UCP running on this node.
-To upgrade UCP:
-
-  * Upgrade the Docker Engine in all nodes (optional)
-  * Run the upgrade command in all manager nodes
-  * Run the upgrade command in all worker nodes
+This command upgrades the UCP running on this cluster.
 
 Before performing an upgrade, you should perform a backup by using the
 [backup](backup.md) command.
 
-After upgrading UCP in a node, go to the UCP web UI and confirm the node is
-healthy, before upgrading other nodes.
+After upgrading UCP, go to the UCP web UI and confirm each node is
+healthy and that all nodes have been upgraded successfully.
 
 
 ## Options
