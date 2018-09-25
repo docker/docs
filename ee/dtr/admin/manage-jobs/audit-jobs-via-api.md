@@ -1,5 +1,5 @@
 ---
-title: Troubleshoot Jobs via the API
+title: Audit Jobs via the API
 description: Learn how Docker Trusted Registry runs batch jobs for job-related troubleshooting.
 keywords: dtr, troubleshoot
 redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
@@ -7,7 +7,10 @@ redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
 
 ## Overview
 
-This covers troubleshooting batch jobs via the API and was introduced in DTR 2.2. Starting in DTR 2.6, admins have the ability to [manage job logs](view-job-logs-on-interface.md) using the web interface. This requires familiarity with the [DTR Job Queue](job-queue.md). 
+This covers troubleshooting batch jobs via the API and was introduced in DTR 2.2. Starting in DTR 2.6, admins have the ability to [audit jobs](audit-jobs-via-ui.md) using the web interface. 
+
+## Prerequisite
+   * [Job Queue](job-queue.md)
 
 ### Job capacity
 

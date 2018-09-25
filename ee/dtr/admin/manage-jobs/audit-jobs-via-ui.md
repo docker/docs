@@ -1,5 +1,5 @@
 ---
-title: View Job Logs
+title: Audit Jobs via the Web Interface
 description: View a list of jobs happening within DTR and review the detailed logs for each job.
 keywords: registry, jobs, log, system management, job queue
 ---
@@ -8,7 +8,7 @@ keywords: registry, jobs, log, system management, job queue
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-As of DTR 2.2, admins were able to [view and troubleshoot jobs within DTR](./troubleshoot-jobs-via-api) using the API. DTR 2.6 enhances those capabilities by adding a **Job Logs** tab under **System** settings on the user interface. The tab displays a sortable and paginated list of jobs along with links to associated job logs. 
+As of DTR 2.2, admins were able to [view and troubleshoot jobs within DTR](audit-jobs-via-api.md) using the API. DTR 2.6 enhances those capabilities by adding a **Job Logs** tab under **System** settings on the user interface. The tab displays a sortable and paginated list of jobs along with links to associated job logs. 
 
 ## View Jobs List
 
@@ -22,7 +22,7 @@ To view the list of jobs within DTR, do the following:
 	
 3. Specify a filtering option. **Job Logs** lets you filter by:
 
-	* Action: See [Troubleshoot Jobs via the API: Job Types](./troubleshoot-jobs-via-api/#job-types) for an explanation on the different actions or job types.
+	* Action: See [Troubleshoot Jobs via the API: Job Types](./audit-jobs-via-api/#job-types) for an explanation on the different actions or job types.
 
 	* Worker ID: The ID of the worker in a DTR replica that is responsible for running the job.
 
@@ -34,10 +34,10 @@ The following is an explanation of the job-related fields displayed in **Job Log
 
 | Job Detail          | Description                                        | Example |
 |:----------------|:-------------------------------------------------|:--------|
-| Action        |  The type of action or job being performed. See [Job Types](./troubleshoot-jobs-via-api/#job-types) for a full list of job types. | `onlinegc`
+| Action        |  The type of action or job being performed. See [Job Types](./audit-jobs-via-api/#job-types) for a full list of job types. | `onlinegc`
 | ID  | The ID of the job. | `ccc05646-569a-4ac4-b8e1-113111f63fb9` |
 | Worker        | The ID of the worker node responsible for running the job. | `8f553c8b697c`| 
-| Status | Current status of the action or job. See [Troubleshoot Jobs via the API: Job Status](./troubleshoot-jobs-via-api/#job-status) for more details.  | `done` |
+| Status | Current status of the action or job. See [Troubleshoot Jobs via the API: Job Status](./audit-jobs-via-api/#job-status) for more details.  | `done` |
 | Start Time | Time when the job started. | `9/23/2018 7:04 PM` |
 | Last Updated | Time when the job was last updated. | `9/23/2018 7:04 PM` |
 | View Logs | Links to the full logs for the job.  | `[View Logs]` |  

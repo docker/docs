@@ -2343,6 +2343,18 @@ manuals:
           title: Create and manage organizations
         - path: /ee/dtr/admin/manage-users/permission-levels/
           title: Permission levels
+      - sectiontitle: Manage jobs
+        section:
+        - path: /ee/dtr/admin/manage-jobs/
+          title: Job Queue
+        - path: /ee/dtr/admin/manage-jobs/job-queue/
+          title: Audit Jobs with the Web Interface
+        - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
+          title: Audit Jobs with the API
+        - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
+          title: Enable Auto-Deletion of Job Logs
+        - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
+          title: Permission levels
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /ee/dtr/admin/monitor-and-troubleshoot/
@@ -2351,8 +2363,6 @@ manuals:
           title: Check Notary audit logs
         - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
-        - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
-          title: Troubleshoot batch jobs
       - sectiontitle: Disaster recovery
         section:
         - title: Overview
