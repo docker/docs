@@ -69,7 +69,7 @@ Do the following each time:
 4.  Install a different version of the app (Stable or Edge).
 
 
-### Feeback
+### Feedback
 #### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
