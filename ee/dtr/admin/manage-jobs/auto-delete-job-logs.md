@@ -42,6 +42,10 @@ If you check and specify both, job logs will be removed from DTR during garbage 
 
 ![](../../images/auto-delete-repo-events-2.png){: .img-fluid .with-border}
 
+> Job Log Deletion
+>
+> When you enable auto-deletion of job logs, the logs will be permanently deleted during garbage collection. See [Configure logging drivers] for a list of supported logging drivers and plugins.
+
 ## Where to go next
 
 - [View Job Logs](view-job-logs-on-interface.md)
