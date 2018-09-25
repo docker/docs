@@ -10,11 +10,11 @@ keywords: ucp, swarm, kubernetes, application
 
 ## Application packages
 
-Docker 2.1 EE introduces application packages as a core concept in Docker. With application packages, [NEED NARRATIVE HERE ABOUT WHY OR WHICH CUSTOMERS CARE ABOUT THIS].
+Docker 2.1 EE introduces application packages as a core concept in Docker. With application packages, **NEED NARRATIVE HERE ABOUT WHY OR WHICH CUSTOMERS CARE ABOUT THIS**.
 
 An application package can have one of these formats:
 
-- **Three-file format**: Defined by a metadata.yml, a docker-compose.yml, and a settings.yml files inside a `my-app.dockerapp` folder. This is also called the folder format.
+- **Three-file format**: Defined by metadata.yml, a docker-compose.yml, and a settings.yml files inside a `my-app.dockerapp` folder. This is also called the folder format.
 - **Single-file format**: Defined by a data from the previously three files concatenated in the order givem and separated by `---\n` in a single file named named 'my-app.dockerapp'.
 - **Image format**: Defined by a Docker image in the engine store or exported as a tarball.
 
@@ -33,7 +33,7 @@ To create a stack in the UCP web interface, follow these steps:
 
     ![Create stacks in UCP](/ee/ucp/images/ucp-create-stack.png)
 
-3. Select **Create Stack** to display the stack creation dialog.
+3. Select **Create Stack** to display **1. Configure Application** in the stack creation dialog.
 
     ![Configure stacks in UCP](/ee/ucp/images/ucp-config-stack.png)
 
