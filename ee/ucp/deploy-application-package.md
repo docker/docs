@@ -43,7 +43,7 @@ To create a stack in the UCP web interface, follow these steps:
 
     ![Provide docker-compose.yml in UCP](/ee/ucp/images/ucp-stack-compose.png)
 
-   or if you selected App Package, enter or upload the application package in the single-file format.
+   or if you selected **App Package**, enter or upload the application package in the single-file format.
 
     ![Provide application package in UCP](/ee/ucp/images/ucp-stack-package.png)
 
