@@ -33,7 +33,7 @@ RUN make /app
 CMD python /app/app.py
 ```
 
-This Dockerfile contains four commands, each of which creates a layer.  The
+This Dockerfile contains four commands, each of which creates a layer. The
 `FROM` statement starts out by creating a layer from the `ubuntu:15.04` image.
 The `COPY` command adds some files from your Docker client's current directory.
 The `RUN` command builds your application using the `make` command. Finally,
@@ -82,7 +82,7 @@ To view the approximate size of a running container, you can use the `docker ps 
 command. Two different columns relate to size.
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
-  each container
+  each container.
 
 - `virtual size`: the amount of data used for the read-only image data
   used by the container plus the container's writable layer `size`.

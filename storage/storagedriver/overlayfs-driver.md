@@ -269,7 +269,7 @@ for `overlay2`.
 
 OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called _layers_ and the unification
-process is referred to a a _union mount_. OverlayFS refers to the lower directory
+process is referred to a _union mount_. OverlayFS refers to the lower directory
 as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
