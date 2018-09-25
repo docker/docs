@@ -1,7 +1,7 @@
 ---
-title: Deploy an appliction package
-description: Learn how to deploy an appliction package in UCP
-keywords: ucp, swarm, kubernetes, application
+title: Deploy an application package
+description: Learn how to deploy an application package in UCP
+keywords: ucp, swarm, kubernetes, application, app package
 ---
 
 > Beta disclaimer
@@ -14,15 +14,10 @@ Docker 2.1 EE introduces application packages as a core concept in Docker. With 
 
 An application package can have one of these formats:
 
-- **Three-file format**: Defined by metadata.yml, a docker-compose.yml, and a settings.yml files inside a `my-app.dockerapp` folder. This is also called the folder format.
-- **Single-file format**: Defined by a data from the previously three files concatenated in the order givem and separated by `---\n` in a single file named named 'my-app.dockerapp'.
-- **Image format**: Defined by a Docker image in the engine store or exported as a tarball.
+- **Directory format**: Defined by metadata.yml, a docker-compose.yml, and a settings.yml files inside a `my-app.dockerapp` folder. This is also called the folder format.
+- **Single-file format**: Defined by metadata.yml, docker-compose.yml, and settings.yml concatenated in that order and separated by `---\n` in a single file named named `my-app.dockerapp`.
 
-The docker-app binary lets a user render an application package to a Compose file using the settings values in the settings file or those specified by the user. This Compose file can then be deployed to a cluster running in Swarm mode or Kubernetes using `docker stack deploy` or to a single engine or Swarm classic cluster using `docker-compose up`.
-
-The docker-app binary also lets a user deploy an application package directly, essentially executing a `docker-app render` command followed by a `docker stack deploy` command.
-
-Once a stack has been deployed, you must use the `docker stack` or `docker-compose` commands to manipulate and manage the stack.
+Once an application package has been deployed, you manipulate and manage it as you would any stack.
 
 ## Creating a stack in the UCP web interface
 
