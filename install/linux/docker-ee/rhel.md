@@ -63,6 +63,14 @@ Restart the Docker service as root.
 
 `$ sudo service dockerd restart`
 
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+
+```
+Labels:
+
+ com.docker.security.fips=enabled
+```
+
 **NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0` in the `/etc/systemd/system/docker.service.d/fips-module`.
 
 ### Find your Docker EE repo URL

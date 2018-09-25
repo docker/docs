@@ -9,11 +9,7 @@ redirect_from:
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
-Docker Enterprise Edition for Windows Server (*Docker EE*) enables native
-Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package
-includes everything you need to run Docker on Windows Server.
-This topic describes pre-install considerations, and how to download and
-install Docker EE.
+Docker Enterprise Edition for Windows Server (*Docker EE*) enables native Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package includes everything you need to run Docker on Windows Server.  This topic describes pre-install considerations, and how to download and install Docker EE.
 
 > Release notes
 >
@@ -72,6 +68,35 @@ sconfig
 ```
 
 Select option `6) Download and Install Updates`.
+
+
+### FIPS 140-2 cryptographic module support
+
+With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS support in Windows XXX. This includes a FIPS support cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+
+**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FISP-140-2.
+
+To force FIPS-140-2 compliance with the Docker EE engine, do the following in PowerShell:
+
+```
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+```
+
+Restart the Docker service by running the following command.
+
+```
+net stop docker
+net start docker
+```
+
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+
+```
+Labels:                                                                                                                         
+ com.docker.security.fips=enabled 
+```
+
+**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
 
 ## Use a script to install Docker EE
 
