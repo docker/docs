@@ -1714,7 +1714,7 @@ should always begin with `.` or `..`.
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
 
-- `type`: the mount type `volume`, `bind` or `tmpfs`
+- `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
   [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
