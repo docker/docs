@@ -48,3 +48,29 @@ To create a stack in the UCP web interface, follow these steps:
     ![Provide application package in UCP](/ee/ucp/images/ucp-stack-package.png)
 
 9. Select **Create**.
+
+## Single-file format example
+
+Here is an example of a single-file application package:
+
+```
+version: 0.1.0
+name: hello-world
+description: "Hello, World!"
+namespace: myHubUsername
+maintainers:
+  - name: user
+    email: "user@email.com"
+---
+version: "3.6"
+services:
+  hello:
+    image: hashicorp/http-echo
+    command: ["-text", "${text}"]
+    ports:
+      - ${port}:5678
+
+---
+port: 8080
+text: Hello, World!
+```
