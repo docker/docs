@@ -33,7 +33,6 @@ To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
 - Bionic 18.04 (LTS)
-- Artful 17.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
