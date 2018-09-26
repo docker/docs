@@ -285,7 +285,7 @@ To upgrade Docker EE:
 2.  Run `sudo apt-get update`.
 
 3.  Follow the
-    [installation instructions](#install-docker), choosing the new version you want
+    [installation instructions](#install-docker-ee), choosing the new version you want
     to install.
 
 ### Install from a package
