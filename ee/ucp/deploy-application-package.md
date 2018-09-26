@@ -10,7 +10,7 @@ keywords: ucp, swarm, kubernetes, application, app package
 
 ## Application packages
 
-Docker Enterprise Edition 2.1 introduces application packages in Docker. With application packages, **REVIEWERS: NEED NARRATIVE HERE ABOUT WHY OR WHICH CUSTOMERS CARE ABOUT THIS**.
+Docker Enterprise Edition 2.1 introduces application packages in Docker. With application packages, you can add metadata and settings to an existing Compose file to give operators more context about applications they deploy and manage.
 
 An application package can have one of these formats:
 
