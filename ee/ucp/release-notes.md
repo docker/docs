@@ -32,6 +32,15 @@ upgrade your installation to the latest release.
 * UCP suppoprts SAML authentication
 * DTR vulnerability scan data is now available through the UCP UI
 
+**API updates**
+* There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
+  * **PodSecurityPolicy**: A compatibility issue with the allowPrivilegeEscalation field that caused policies to start denying pods they previously allowed was fixed. If you defined PodSecurityPolicy objects using a 1.8.0 client or server and set allowPrivilegeEscalation to false, these objects must be reapplied after you upgrade.
+  * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
+    * Change node.alpha.kubernetes.io/notReady to node.kubernetes.io/not-ready
+    * Change node.alpha.kubernetes.io/unreachable to node.kubernetes.io/unreachable
+* JSON configuration files (i.e. JSON files that you use with `kubectl create -f pod.json`) that contain fields with incorrect casing will no longer be valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 and the API server will once again be enforcing the correct case. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with kubectl will be unaffected by this change.
+* If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see https://github.com/kubernetes/kubernetes/pull/61373. It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
+
 # Version 3.0
 
 ## 3.0.4 (2018-08-09)
@@ -77,17 +86,6 @@ upgrade your installation to the latest release.
 * UCP now supports running RHEL 7.5.  Please refer to the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
 * Added support for dynamic volume provisioning in Kubernetes for AWS EBS and
 Azure Disk when installing UCP with the `--cloud-provider` option.
-
-**API updates**
-* There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
-  * **PodSecurityPolicy**: A compatibility issue with the allowPrivilegeEscalation field that caused policies to start denying pods they previously allowed was fixed. If you defined PodSecurityPolicy objects using a 1.8.0 client or server and set allowPrivilegeEscalation to false, these objects must be reapplied after you upgrade.
-  * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
-    * Change node.alpha.kubernetes.io/notReady to node.kubernetes.io/not-ready
-    * Change node.alpha.kubernetes.io/unreachable to node.kubernetes.io/unreachable
-* JSON configuration files (i.e. JSON files that you use with `kubectl create -f pod.json`) that contain fields with incorrect casing will no longer be valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 and the API server will once again be enforcing the correct case. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with kubectl will be unaffected by this change.
-* If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see https://github.com/kubernetes/kubernetes/pull/61373. It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
-
-
 
 **Bug Fixes**
 * Core
