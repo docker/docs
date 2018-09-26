@@ -295,7 +295,7 @@ open between the two Docker hosts:
 - TCP and UDP port 7946
 - UDP port 4789
 
-One easy way to set this is up is to have two VMs (either local or on a cloud
+One easy way to set this up is to have two VMs (either local or on a cloud
 provider like AWS), each with Docker installed and running. If you're using AWS
 or a similar cloud computing platform, the easiest configuration is to use a
 security group that opens all incoming ports between the two hosts and the SSH
