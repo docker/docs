@@ -185,7 +185,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-17.06"
     ```
 
     </div>
@@ -195,7 +195,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-17.06"
     ```
 
     </div>
@@ -205,7 +205,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-17.06"
     ```
 
     </div>
