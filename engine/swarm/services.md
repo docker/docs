@@ -621,7 +621,7 @@ labels to ensure that your service is deployed to the appropriate swarm nodes.
 
 Use placement constraints to control the nodes a service can be assigned to. In
 the following example, the service only runs on nodes with the
-[label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata) `region` set
+[label](manage-nodes.md#add-or-remove-label-metadata) `region` set
 to `east`. If no appropriately-labelled nodes are available, tasks will wait in
 `Pending` until they become available. The `--constraint` flag uses an equality
 operator (`==` or `!=`). For replicated services, it is possible that all
