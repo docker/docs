@@ -18,7 +18,7 @@ Storage drivers allow you to create data in the writable layer of your container
 The files won't be persisted after the container stops, and both read and
 write speeds are low.
 
-[Learn how to use volumes](../index.md) to persist data and improve performance.
+[Learn how to use volumes](../volumes.md) to persist data and improve performance.
 
 ## Images and layers
 
