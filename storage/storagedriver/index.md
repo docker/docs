@@ -292,7 +292,7 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the `aufs`, `overlay` and `overlay2` drivers, the 
+storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the 
 copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
