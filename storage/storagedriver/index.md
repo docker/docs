@@ -143,8 +143,8 @@ Status: Downloaded newer image for ubuntu:15.04
 
 Each of these layers is stored in its own directory inside the Docker host's
 local storage area. To examine the layers on the filesystem, list the contents
-of `/var/lib/docker/<storage-driver>/layers/`. This example uses `aufs`, which
-is the default storage driver:
+of `/var/lib/docker/<storage-driver>/layers/`. This example uses the `aufs` 
+storage driver:
 
 ```bash
 $ ls /var/lib/docker/aufs/layers
@@ -292,8 +292,8 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the default `aufs` driver and the `overlay` and `overlay2`
-drivers, the copy-on-write operation follows this rough sequence:
+storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the 
+copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.
