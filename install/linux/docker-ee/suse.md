@@ -201,7 +201,7 @@ Engine, UCP, and DTR).
 
 3.  Import the GPG key from the repository. Replace `<DOCKER-EE-URL>`
     with the URL you noted down in the [prerequisites](#prerequisites). 
-    Insert your subscription ID section from your storbits url into the <sub-xxx...>
+    Insert your subscription ID section from your storbits url into the `<sub-xxx...>`
     section below.
 
     ```bash
@@ -229,7 +229,7 @@ Engine, UCP, and DTR).
     $ sudo zypper install docker-ee
     ```
 
-    Emnable the Docker service:
+    Enable the Docker service:
 
     ```bash
     $ sudo systemctl enable docker.service
