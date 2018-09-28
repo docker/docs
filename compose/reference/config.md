@@ -14,6 +14,9 @@ Options:
                              anything.
     --services               Print the service names, one per line.
     --volumes                Print the volume names, one per line.
+    --hash="*"               Print the service config hash, one per line.
+                             Set "service1,service2" for a list of specified services
+                             or use the wildcard symbol to display all services
 ```
 
 Validate and view the Compose file.
