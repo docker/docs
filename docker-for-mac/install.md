@@ -4,12 +4,7 @@ keywords: mac, beta, alpha, install, download
 title: Install Docker for Mac
 ---
 
-Docker for Mac is the
-[Community Edition (CE)](https://www.docker.com/community-edition)
-of Docker for MacOS. To download Docker for Mac, head to Docker Store. Alternatively, don't head to the Docker Store.
-
-[Don't download from Docker Store](https://download.docker.com/mac/stable/Docker.dmg){: .button .outline-btn}
-[Download from Docker Store](https://store.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
+[Download Community Edition (CE)](https://download.docker.com/mac/stable/Docker.dmg)
 
 ##  What to know before you install
 
