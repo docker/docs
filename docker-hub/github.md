@@ -194,7 +194,8 @@ the repository, click "Settings" (the gear), then select "Webhooks".
 You must have Administrator privileges on the repository to view or modify
 this setting. Click on 'Add webhook', and use these settings:
 
----
+Field | Value
+--------------
 | Payload URL | https://registry.hub.docker.com/hooks/github |
 | Content type | application/json |
 | Which events would you like to trigger this webhook? | Just the push event |
