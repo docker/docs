@@ -11,8 +11,8 @@ skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 
 > *Note:*
 > Automated Builds currently require *read* and *write* access since
-> [Docker Hub](https://hub.docker.com) needs to set up a GitHub service
-> hook. We have no choice here, this is how GitHub manages permissions.
+> [Docker Hub](https://hub.docker.com) needs to set up a GitHub webhook.
+> We have no choice here, this is how GitHub manages permissions.
 > We do guarantee nothing else is touched in your account.
 
 To set up an Automated Build of a repository on GitHub, you need to
@@ -54,8 +54,7 @@ You can review and revoke Docker Hub's access by visiting the
 If you selected to link your GitHub account with only a "Limited Access" link,
 then after creating your automated build, you need to either manually
 trigger a Docker Hub build using the "Start a Build" button, or add the GitHub
-webhook manually, as described in [GitHub Service
-Hooks](github.md#github-service-hooks). This only works for repositories
+webhook manually, as described in [GitHub Webhook](github.md#github-webhook). This only works for repositories
 under the user account, and adding an automated build to a public GitHub
 organization using a "Limited Access" link is not possible.
 
@@ -178,9 +177,9 @@ build.
   </tbody>
 </table>
 
-## GitHub service hooks
+## GitHub webhook
 
-A GitHub Service hook allows GitHub to notify the Docker Hub when something has
+A GitHub webhook allows GitHub to notify the Docker Hub when something has
 been committed to a given git repository.
 
 When you create an Automated Build from a GitHub user that has full "Public and
@@ -188,16 +187,24 @@ Private" linking, a Service Hook should get automatically added to your GitHub
 repository.
 
 If your GitHub account link to the Docker Hub is "Limited Access", then you
-need to add the Service Hook manually.
+need to add the webhook manually.
 
-To add, confirm, or modify the service hook, log in to GitHub, then navigate to
-the repository, click "Settings" (the gear), then select "Webhooks & Services".
+To add, confirm, or modify the webhook, log in to GitHub, then navigate to
+the repository, click "Settings" (the gear), then select "Webhooks".
 You must have Administrator privileges on the repository to view or modify
-this setting.
+this setting. Click on 'Add webhook', and use these settings:
 
-The image below shows the "Docker" Service Hook.
+---
+| Payload URL | https://registry.hub.docker.com/hooks/github |
+| Content type | application/json |
+| Which events would you like to trigger this webhook? | Just the push event |
+| Active | selected |
 
-![bitbucket-hooks](images/github-side-hook.png)
+The image below shows the 'Webhooks/Add webhook' form with the above settings reflected:
 
-If you add the "Docker" service manually, make sure the "Active" checkbox is
-selected and click the "Update service" button to save your changes.
+![github-webhook-add](images/github-webhook-add.png)
+
+If configured correctly, you'll see this in the 'Webhooks' view
+![github-webhook](images/github-webhook.png)
+
+
