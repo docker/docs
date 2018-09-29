@@ -48,5 +48,5 @@ If you check and specify both, job logs will be removed from DTR during garbage 
 
 ## Where to go next
 
-- [View Job Logs](view-job-logs-on-interface.md)
+- [Monitor Docker Trusted Registry](monitor-and-troubleshoot.md)
  
