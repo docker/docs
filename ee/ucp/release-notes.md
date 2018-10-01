@@ -29,8 +29,19 @@ upgrade your installation to the latest release.
 * UCP now supports Kubernetes native role-based access control
 * UCP now provides service metrics for all API calls, using Prometheus deployed as Kubernetes Daemon Set
 * UCP now supports use of an external Prometheus instance to scrape metrics from UPC endpoints
-* UCP suppoprts SAML authentication
-* DTR vulnerability scan data is now available through the UCP UI
+* UCP supports SAML authentication
+* DTR vulnerability scan data is now available through the UCP web interface
+
+**API updates**
+* There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
+  * A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
+  * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
+    * Change `node.alpha.kubernetes.io/notReady` to `node.kubernetes.io/not-ready`
+    * Change `node.alpha.kubernetes.io/unreachable` to `node.kubernetes.io/unreachable`
+    For more information about taints and tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+* JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
+* If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
 # Version 3.0
 
