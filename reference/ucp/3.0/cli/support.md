@@ -26,5 +26,4 @@ This command creates a support dump file for this node, and prints it to stdout.
 |:--------------------------|:---------------------------|
 |`--debug, D`|Enable debug mode|
 |`--jsonlog`|Produce json formatted output for easier parsing|
-
-
+|`--verbose`|Collect additional data, including a list of all non-system tasks or services running within the cluster|
