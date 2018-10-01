@@ -2345,16 +2345,14 @@ manuals:
           title: Permission levels
       - sectiontitle: Manage jobs
         section:
-        - path: /ee/dtr/admin/manage-jobs/
-          title: Job Queue
         - path: /ee/dtr/admin/manage-jobs/job-queue/
-          title: Audit Jobs with the Web Interface
+          title: Job Queue          
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
-          title: Audit Jobs with the API
+          title: Audit Jobs with the Web Interface  
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
-          title: Enable Auto-Deletion of Job Logs
+          title: Audit Jobs with the API       
         - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
-          title: Permission levels
+          title: Enable Auto-Deletion of Job Logs
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /ee/dtr/admin/monitor-and-troubleshoot/
