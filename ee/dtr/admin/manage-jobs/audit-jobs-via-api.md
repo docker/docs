@@ -14,8 +14,8 @@ This covers troubleshooting batch jobs via the API and was introduced in DTR 2.2
 
 ### Job capacity
 
-Each job runner has a limited capacity and won't claim jobs that require an
-higher capacity. You can see the capacity of a job runner using the
+Each job runner has a limited capacity and will not claim jobs that require a
+higher capacity. You can see the capacity of a job runner via the
 `GET /api/v0/workers` endpoint:
 
 ```json
@@ -35,8 +35,7 @@ higher capacity. You can see the capacity of a job runner using the
 ```
 
 This means that the worker with replica ID `000000000000` has a capacity of 1
-`scan` and 1 `scanCheck`. If this worker notices that the following jobs
-are available:
+`scan` and 1 `scanCheck`. Next, review the list of available jobs:
 
 ```json
 {
@@ -69,8 +68,9 @@ are available:
 }
 ```
 
-Our worker will be able to pick up job id `0` and `2` since it has the capacity
-for both, while id `1` will have to wait until the previous scan job is complete:
+If worker `000000000000` notices the jobs
+in `waiting` state above, then it will be able to pick up jobs `0` and `2` since it has the capacity
+for both. Job `1` will have to wait until the previous scan job, `0`, is completed. The job queue will then look like: 
 
 ```json
 {
@@ -102,8 +102,8 @@ for both, while id `1` will have to wait until the previous scan job is complete
   ]
 }
 ```
-You can get the list of jobs, using the `GET /api/v0/jobs/` endpoint. Each job
-looks like this:
+You can get a list of jobs via the `GET /api/v0/jobs/` endpoint. Each job
+looks like:
 
 ```json
 {
@@ -126,7 +126,7 @@ looks like this:
 	"stopTimeout": ""
 }
 ```
-The fields of interest here are:
+The JSON fields of interest here are:
 
 * `id`: The ID of the job
 * `workerID`: The ID of the worker in a DTR replica that is running this job
@@ -170,7 +170,7 @@ see those jobs using the `GET /api/v0/crons` endpoint:
 }
 ```
 
-The `schedule` uses a Unix crontab syntax.
+The `schedule` field uses a Unix crontab syntax.
 
 ## Where to go next
 
