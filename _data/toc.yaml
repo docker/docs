@@ -1669,6 +1669,8 @@ manuals:
         title: CLI-based access
       - path: /ee/ucp/user-access/kubectl/
         title: Install the Kubernetes CLI
+    - path: /ee/ucp/deploy-application-package
+      title: Deploy an application package
     - sectiontitle: Deploy apps with Swarm
       section:
       - title: Deploy a single service
