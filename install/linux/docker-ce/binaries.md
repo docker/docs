@@ -28,7 +28,7 @@ meets the prerequisites:
 
 - A 64-bit installation
 - Version 3.10 or higher of the Linux kernel. The latest version of the kernel
-  available for you platform is recommended.
+  available for your platform is recommended.
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
