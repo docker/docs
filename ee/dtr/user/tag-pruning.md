@@ -76,4 +76,4 @@ To set a tag limit, select the repository that you want to update and click the 
 
 ## Where to go next
 
-- [Garbage collection](../../admin/configure/garbage-collection.md)
+- [Garbage collection](../admin/configure/garbage-collection.md)
