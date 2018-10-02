@@ -170,7 +170,7 @@ see those jobs using the `GET /api/v0/crons` endpoint:
 }
 ```
 
-The `schedule` field uses a Unix crontab syntax.
+The `schedule` field uses a cron expression following the `(seconds) (minutes) (hours) (day of month) (month) (day of week)` format. For example, `57 54 3 * * *` with cron ID `48875b1b-5006-48f5-9f3c-af9fbdd82255` will be run at `03:54:57` on any day of the week or the month, which is `2017-02-22T03:54:57Z` in the example JSON response above.
 
 ## Where to go next
 
