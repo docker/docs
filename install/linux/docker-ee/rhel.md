@@ -46,11 +46,13 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 ### FIPS 140-2 cryptographic module support
 
-With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS support cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules. 
 
-**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FISP-140-2. 
+With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS support cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
 
-To force FIPS-140-2 compliance with the Docker EE engine, do the following:
+**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS-140-2. 
+
+To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
 
 Create a file called `/etc/systemd/system/docker.service.d/fips-module`. It needs to contain the following:
 
@@ -70,7 +72,7 @@ $ docker info --format '{{ .SecurityOptions }}'
 [name=selinux name=fips]
 ```
 
-**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0` in the `/etc/systemd/system/docker.service.d/fips-module`.
+**NOTE:** If the system has the FIPS 140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS 140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0` in the `/etc/systemd/system/docker.service.d/fips-module`.
 
 ### Find your Docker EE repo URL
 

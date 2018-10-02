@@ -72,11 +72,13 @@ Select option `6) Download and Install Updates`.
 
 ### FIPS 140-2 cryptographic module support
 
-With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS support in Windows Server 2016. This includes a FIPS support cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules.
 
-**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FISP-140-2.
+With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS 140-2 support in Windows Server 2016. This includes a FIPS support cryptographic module. If the Windows implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
 
-To force FIPS-140-2 compliance with the Docker EE engine, do the following in PowerShell:
+**NOTE:** FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
+
+If the Windows implementation already has FIPS support enabled, do the following in PowerShell:
 
 ```
 [System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
