@@ -2412,6 +2412,12 @@ manuals:
             path: /ee/dtr/user/promotion-policies/pull-mirror/
           - title: Template reference
             path: /ee/dtr/user/promotion-policies/templates/
+      - sectiontitle: Manage repository events
+        section:
+          - title: Audit repository events
+            path: /ee/dtr/user/manage-repository-events/
+          - title: Auto-delete repository events
+            path: /ee/dtr/admin/configure/auto-delete-repo-events/
       - path: /ee/dtr/user/create-and-manage-webhooks/
         title: Create and manage webhooks
       - title: Manage access tokens
