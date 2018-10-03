@@ -73,7 +73,7 @@ such as EC2 security groups), and then to follow the
 At the end of this procedure, all three Docker hosts will be joined to the swarm
 and will be connected together using an overlay network called `ingress`.
 
-1.  On `master`. initialize the swarm. If the host only has one network
+1.  On `manager`. initialize the swarm. If the host only has one network
     interface, the `--advertise-addr` flag is optional.
 
     ```bash
@@ -192,7 +192,7 @@ connect a service to each of them.
 3.  Run `docker service ls` to monitor the progress of service bring-up, which
     may take a few seconds.
 
-4.  Inspect the `nginx-net` network on `master`, `worker-1`, and `worker-2`.
+4.  Inspect the `nginx-net` network on `manager`, `worker-1`, and `worker-2`.
     Remember that you did not need to create it manually on `worker-1` and
     `worker-2` because Docker created it for you. The output will be long, but
     notice the `Containers` and `Peers` sections. `Containers` lists all
