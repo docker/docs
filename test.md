@@ -162,7 +162,7 @@ might be interesting. You can use them with Markdown or HTML images.
 
 You can add a link to a YouTube video like this:
 
-[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+[Docker 101: Introduction to Docker](https://www.youtube.com/watch?v=V9IJj4MzZBc "Docker 101: Introduction to Docker"){:target="_blank" class="_"}
 
 To make the `.png` shown above, first take a screen snap of the YouTube video
 you want to use, then use a graphics app to overlay a play button onto the
@@ -479,7 +479,7 @@ To try something more ambitious, you can run an Ubuntu container with:
  $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
- https://cloud.docker.com/
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
@@ -752,7 +752,7 @@ syntax for comments in JSON!
 ### Markdown
 
 ```md
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=<repo_url>)
+# Hello
 ```
 
 ### ini

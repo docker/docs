@@ -48,7 +48,3 @@ with the following payload:
   }
 }
 ```
-
->**Note**: If you want to test your webhook, we recommend using a tool like
->[requestb.in](http://requestb.in/). Also note, the Docker Hub server can't be
->filtered by IP address.

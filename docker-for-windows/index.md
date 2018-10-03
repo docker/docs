@@ -224,7 +224,7 @@ you run `docker` commands under a different username than the one configured
 here, your containers cannot access the mounted volumes.
 
 To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker Store the
+username and password. You can select an option to have Docker store the
 credentials so that you don't need to enter them every time.
 
 > Tips on shared drives, permissions, and volume mounts
@@ -541,22 +541,13 @@ See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certif
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
 
-## Docker Store
+## Docker Hub
 
-Select **Docker Store** from the Docker for Windows menu to access the [Docker store](https://store.docker.com/) website. From there, you can log on to Docker Store and download apps.
+Select **Sign in /Create Docker ID** from the Docker for  Windows menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker for Windows menu.
 
-Docker Store is a component of the next-generation [Docker Hub](https://hub.docker.com) and the best place to find compliant, trusted
-commercial and free software distributed as Docker Images.
+See these [Docker Hub topics](/docker-hub/index.md){: target="_blank" class="_" } to learn more:
 
-Refer to the [Docker Store documentation](/docker-store/index.md){: target="_blank" class="_" }
-
-## Docker Cloud
-
-Select **Sign in /Create Docker ID** from the Docker for  Windows menu to access your [Docker Cloud](https://cloud.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Cloud repositories directly from the Docker for Windows menu.
-
-See these [Docker Cloud topics](/docker-cloud/index.md){: target="_blank" class="_" } to learn more:
-
-* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
 
 ## Where to go next

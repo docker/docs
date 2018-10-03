@@ -60,8 +60,7 @@ these efforts.
 
 ## How do I know the Official Repositories are secure?
 
-Each of the images in the Official Repositories is scanned using Docker Cloud's
-[Security Scanning service](/docker-cloud/builds/image-scan/). The results of
+Each of the images in the Official Repositories is scanned for vulnerabilities. The results of
 these security scans provide valuable information about which images contain
 security vulnerabilities, and allow you to choose images that align with your
 security standards.

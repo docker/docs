@@ -4,9 +4,9 @@ keywords: Docker, docker, trusted, sign-up, registry, accounts, plans, Dockerfil
 title: Use Docker Hub with Docker ID
 ---
 
-Docker Hub uses your free [Docker ID](../docker-id/) to save your account
+Docker Hub uses [Docker ID](../docker-id/) to save your account
 settings, and as your account namespace. If you don't yet have a Docker ID, you
-can [register for one](../docker-id/#/register-for-a-docker-id).
+can [register for one](https://hub.docker.com/signup).
 
 You can `search` Docker Hub and `pull` images without an account and
 without signing in. However, to `push` images, leave comments, or to *star* a

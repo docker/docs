@@ -12,7 +12,6 @@ redirect_from:
 - /engine/getstarted/step_three/
 - /engine/getstarted/step_four/
 - /engine/getstarted/step_five/
-- /engine/getstarted/step_six/
 - /engine/getstarted/last_page/
 - /engine/getstarted-voting-app/
 - /engine/getstarted-voting-app/node-setup/
@@ -46,9 +45,6 @@ redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/
-- /mac/step_six/
-- /windows/step_six/
-- /linux/step_six/
 - /engine/tutorials/dockerrepos/
 - /userguide/dockerrepos/
 - /engine/userguide/containers/dockerimages/
@@ -64,7 +60,6 @@ teaches you how to:
 3. [Scale your app to run multiple containers](part3.md)
 4. [Distribute your app across a cluster](part4.md)
 5. [Stack services by adding a backend database](part5.md)
-6. [Deploy your app to production](part6.md)
 
 ## Docker concepts
 
@@ -120,7 +115,7 @@ is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-
 [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
 > - [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only. 
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>

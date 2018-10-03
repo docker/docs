@@ -18,7 +18,7 @@ Enterprise Edition for AWS.
 This release is maintained and receives **security and critical bug fixes for
 one year**.
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
+[Deploy Docker Enterprise Edition (EE) for AWS](https://hub.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
 
 ## Docker Community Edition (CE) for AWS

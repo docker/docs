@@ -13,14 +13,14 @@ Repository creation is limited to users in the organization owner's group. This
 allows you to distribute limited access Docker images, and to select which
 Docker Hub users can publish new images.
 
-### Create and view organizations
+### Create an organization
 
 You can see which organizations you belong to and add new organizations by
 clicking **Organizations** in the top nav bar.
 
 ![organizations](images/orgs.png)
 
-### Organization teams
+### Create a team
 
 Users in the "Owners" team of an organization can create and modify the
 membership of all teams.
@@ -29,7 +29,9 @@ Other users can only see teams they belong to.
 
 ![teams](images/groups.png)
 
-### Repository team permissions
+### Add a member to a team
+
+### Manage team permissions
 
 Use teams to manage who can interact with your repositories.
 
@@ -48,5 +50,6 @@ automatically have Read permissions:
 > **Note**: A User who has not yet verified their email address only has
 > `Read` access to the repository, regardless of the rights their team
 > membership has given them.
+
 
 ![Organization repository collaborators](images/org-repo-collaborators.png)

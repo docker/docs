@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 Universal Control Plane can pull and run images from any image registry,
-including Docker Trusted Registry and Docker Store.
+including Docker Trusted Registry and Docker Hub.
 
 If your registry uses globally-trusted TLS certificates, everything works
 out of the box, and you don't need to configure anything. But if your registries

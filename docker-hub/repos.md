@@ -103,7 +103,6 @@ Now you can push this repository to the registry designated by its name or tag.
 The image is then uploaded and available for use by your team-mates and/or
 the community.
 
-
 ## Stars
 
 Your repositories can be starred and you can star repositories in return. Stars
