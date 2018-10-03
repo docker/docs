@@ -26,6 +26,10 @@ the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
 to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token).
 
+**NOTE:** Docker allows a non-FIPS enabled worker or manager nodes to a FIPS-enabled 
+swarm cluster. This can cause issues with upgrading a swarm if nodes are FIPS-enabled and other 
+nodes are not FIPS-enabled.
+
 ## Join as a worker node
 
 To retrieve the join command including the join token for worker nodes, run the
