@@ -42,7 +42,7 @@ use unless you have substantial experience with ZFS on Linux.
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
-  not need to re-create them later.
+  do not need to re-create them later.
 
 ## Configure Docker with the `zfs` storage driver
 

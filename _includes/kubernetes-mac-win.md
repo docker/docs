@@ -12,11 +12,12 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% if platform == "mac" %}
   {% assign product = "Docker for Mac" %}
 
-  {% capture min-version %}{{ product }} 17.12 CE Edge{% endcapture %}
+  {% capture min-version %}{{ product }} 17.12 CE{% endcapture %}
+  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
 
   {% capture version-caveat %}
-**Kubernetes is only available in {{ min-version }} and higher, on the Edge
-channel.** Kubernetes support is not included in Docker for Mac Stable releases.
+    **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
+
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -32,11 +33,11 @@ channel.** Kubernetes support is not included in Docker for Mac Stable releases.
 {% elsif platform == "windows" %}
   {% assign product = "Docker for Windows" %}
 
-  {% capture min-version %}{{ product }} 18.02 CE Edge{% endcapture %}
+  {% capture min-version %}{{ product }} 18.02 CE{% endcapture %}
+  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }}.** Kubernetes
-  support is not included in {{ product }} 18.02 CE Stable.
+  **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}

@@ -621,20 +621,20 @@ labels to ensure that your service is deployed to the appropriate swarm nodes.
 
 Use placement constraints to control the nodes a service can be assigned to. In
 the following example, the service only runs on nodes with the
-[label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata)
-`region` set to `east`. If no appropriately-labelled nodes are available,
-deployment fails. The `--constraint` flag uses an equality operator
-(`==` or `!=`). For replicated services, it is possible that all services
-run on the same node, or each node only runs one replica, or that some nodes
-don't run any replicas. For global services, the service runs on every node
-that meets the placement constraint and any
-[resource requirements](#reserve-cpu-or-memory-for-a-service).
+[label](manage-nodes.md#add-or-remove-label-metadata) `region` set
+to `east`. If no appropriately-labelled nodes are available, tasks will wait in
+`Pending` until they become available. The `--constraint` flag uses an equality
+operator (`==` or `!=`). For replicated services, it is possible that all
+services run on the same node, or each node only runs one replica, or that some
+nodes don't run any replicas. For global services, the service runs on every
+node that meets the placement constraint and any [resource
+requirements](#reserve-cpu-or-memory-for-a-service).
 
 ```bash
 $ docker service create \
   --name my-nginx \
   --replicas 5 \
-  --constraint region==east \
+  --constraint node.labels.region==east \
   nginx
 ```
 
@@ -648,9 +648,9 @@ all nodes where `region` is set to `east` and `type` is not set to `devel`:
 ```bash
 $ docker service create \
   --name my-nginx \
-  --global \
-  --constraint region==east \
-  --constraint type!=devel \
+  --mode global \
+  --constraint node.labels.region==east \
+  --constraint node.labels.type!=devel \
   nginx
 ```
 
