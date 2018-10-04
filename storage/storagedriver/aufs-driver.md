@@ -70,6 +70,7 @@ storage driver is configured, Docker uses it by default.
 AUFS is a *union filesystem*, which means that it layers multiple directories on
 a single Linux host and presents them as a single directory. These directories
 are called _branches_ in AUFS terminology, and _layers_ in Docker terminology.
+
 The unification process is referred to as a _union mount_.
 
 The diagram below shows a Docker container based on the `ubuntu:latest` image.

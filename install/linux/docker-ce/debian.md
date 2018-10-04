@@ -243,7 +243,7 @@ from the repository.
 
     b. Install a specific version by its fully qualified package name, which is
        the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a an equals sign (`=`), for example,
+       the first hyphen, separated by an equals sign (`=`), for example,
        `docker-ce=18.03.0.ce`.
 
     ```bash

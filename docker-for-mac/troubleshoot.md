@@ -274,7 +274,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * IPv6 is not (yet) supported on Docker for Mac. 
 
   A workaround is provided that auto-filters out the IPv6 addresses in DNS
-  server lists and enables successful network accesss.  For example,
+  server lists and enables successful network access.  For example,
   `2001:4860:4860::8888` would become `8.8.8.8`.  To learn more, see these
   issues on GitHub and Docker for Mac forums:
 

@@ -325,7 +325,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.
   * Fixed an issue that causes classic Swarm to provide outdated data.
-  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes.
+  * Fixed an issue that raises `ucp-kv` collection error with unnamed volumes.
 
 * UI
   * Fixed an issue that causes UI to not parse volume options correctly.

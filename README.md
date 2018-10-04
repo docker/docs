@@ -307,7 +307,7 @@ In order to keep the Git repository light, _please_ compress the images
 (losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
 instance.  Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
-still optimizes the bandwith during browsing).
+still optimizes the bandwidth during browsing).
 
 ## Building archives and the live published docs
 
