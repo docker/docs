@@ -21,7 +21,8 @@ The activation can be performed either online with connection to Docker Hub, or 
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
-1. Check the current Docker version.
+1. Check the current Docker version. Both the Docker client and server (`containerd`) need to be installed.  Your output may vary slightly from what is displayed on this page.
+
 ```
 root@docker-node:~# docker version
 Client:
@@ -42,12 +43,27 @@ Server:
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
-**NOTE**: Your output may vary slightly from what is displayed on this page.
 
 2. Log into the Docker engine from the command line.
 
+**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current users's home directory. For CentOS and Red Hat, the `sudo` command overwrites overwrites the $HOME environment variable.
+
+
+For Ubuntu or Debian:
 ```
-root@docker-node:~# docker login
+$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: beluga
+Password:
+WARNING! Your password will be stored unencrypted in /home/docker/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+```
+
+For CentOS or Red Hat Linux, use `sudo`:
+```
+$ sudo docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 Username: beluga
 Password:
@@ -58,6 +74,8 @@ Login Succeeded
 ```
 
 3. Activate the EE license. You must use sudo even if your user is part of the docker group.
+
+For Debian, Ubuntu, CentOS, or Red Hat Linux:
 
 ```
 root@docker-node:~# sudo docker engine activate
