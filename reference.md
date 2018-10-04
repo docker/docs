@@ -19,7 +19,7 @@ various APIs, CLIs, and file formats.
 
 | CLI                                                           | Description                                                                                                     |
 |:--------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| [Engine CLI](/engine/reference/commandline/cli/)              | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands |
+| [Engine CLI](/engine/reference/commandline/docker/)              | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands |
 | [Compose CLI](/compose/reference/overview/)                   | The CLI for Docker Compose, which allows you to build and run multi-container applications                      |
 | [Machine CLI](/machine/reference/)                            | Manages virtual machines that are pre-configured to run Docker                                                  |
 | [DTR CLI](/reference/dtr/{{ site.dtr_version }}/cli/index.md) | Deploy and manage Docker Trusted Registry                                                                       |
