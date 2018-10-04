@@ -36,7 +36,7 @@ DTR runs periodic and long-running jobs. The following is a complete list of job
 | Job               | Description                                                                                                                                                                                                                                               |
 |:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | gc                | A garbage collection job that deletes layers associated with deleted images.                                                                                                                                                                                 |
-| onlinegc                | A garbage collection job that deletes layers associated with deleted images without putting the registry in read only mode.  |
+| onlinegc                | A garbage collection job that deletes layers associated with deleted images without putting the registry in read-only mode.  |
 | onlinegc_metadata                | A garbage collection job that deletes metadata associated with deleted images. |
 | onlinegc_joblogs                | A garbage collection job that deletes job logs based on a configured job history setting. |
 | metadatastoremigration   | A necessary migration that enables the `onlinegc` feature. |
@@ -55,7 +55,7 @@ DTR runs periodic and long-running jobs. The following is a complete list of job
 | webhook           | A job that is used to dispatch a webhook payload to a single endpoint.                                                                                                                                                                                     |
 | nautilus_update_db           | The old name for the `update_vuln_db` job. This may be visible on old log files.                                                                                                                                                                                   |
 | ro_registry           | A user-initiated job for manually switching DTR into read-only mode.     |
-| tag_pruning           | A job for cleaning up unnecessary or unwanted repository tags which can be configured by repository admins. For configuration options, see [Tag Pruning](../user/tag-pruning).                                                                                                                                                                      |
+| tag_pruning           | A job for cleaning up unnecessary or unwanted repository tags which can be configured by repository admins. For configuration options, see [Tag Pruning](../../user/tag-pruning).                                                                                                                                                                      |
 
 ## Job Status
 
@@ -76,5 +76,5 @@ Jobs can have one of the following status values:
 
 ## Where to go next
 
-- [View Job Logs](view-job-logs-on-interface.md)
-- [Troubleshoot Jobs via the API](troubleshoot-jobs-via-api.md)
+- [Audit Jobs via Web Interface](audit-jobs-via-ui)
+- [Audit Jobs via API](audit-jobs-via-api)

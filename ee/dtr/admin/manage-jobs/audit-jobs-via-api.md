@@ -1,9 +1,14 @@
 ---
 title: Audit Jobs via the API
 description: Learn how Docker Trusted Registry runs batch jobs for job-related troubleshooting.
-keywords: dtr, troubleshoot
+keywords: dtr, troubleshoot, audit, job logs, jobs, api
 redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
 ---
+
+
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
 ## Overview
 

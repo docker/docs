@@ -1,7 +1,7 @@
 ---
 title: Enable Auto-Deletion of Job Logs
 description: Enable auto-deletion of old or unnecessary job logs for maintenance.
-keywords: registry, events, log, activity stream
+keywords: dtr, jobs, log, job logs, system
 ---
 
 > BETA DISCLAIMER
@@ -18,33 +18,35 @@ Docker Trusted Registry has a global setting for auto-deletion of job logs which
 
 2. Select **System** on the left navigation pane which will display the **Settings** page by default.
 
-3. Scroll down to **Job Logs** and turn on ***Auto-Deletion***.
+3. Scroll down to **Job Logs** and turn on **Auto-Deletion**.
 
-![](../../images/auto-delete-job-logs-0.png){: .with-border}
+    ![](../../images/auto-delete-job-logs-1.png){: .img-fluid .with-border}
 
 4. Specify the conditions with which a job log auto-deletion will be triggered.
 
-![](../../images/auto-delete-job-logs-1.png){: .img-fluid .with-border}
+    DTR allows you to set your auto-deletion conditions based on the following optional job log attributes:
+
+    | Name            | Description                                        | Example           |
+    |:----------------|:---------------------------------------------------| :----------------|
+    | Age        | Lets you remove job logs which are older than your specified number of  hours, days, weeks or months| `2 months` |
+    | Max number of events  | Lets you specify the maximum number of job logs allowed within DTR.  | `100` |
+
+    ![](../../images/auto-delete-job-logs-2.png){: .img-fluid .with-border}
 
 
-DTR allows you to set your auto-deletion conditions based on the following optional job log attributes:
+    If you check and specify both, job logs will be removed from DTR during garbage collection if either condition is met. You should see a confirmation message right away.
 
-| Name            | Description                                        | Example           |
-|:----------------|:---------------------------------------------------| :----------------|
-| Age        | Lets you remove job logs which are older than your specified number of  hours, days, weeks or months| `2 months` |
-| Max number of events  | Lets you specify the maximum number of job logs allowed within DTR.  | `100` |
+5. Click **Start Deletion** if you're ready. Read more about [garbage collection](../configure/garbage-collection/#under-the-hood) if you're unsure about this operation.
 
-If you check and specify both, job logs will be removed from DTR during garbage collection if either condition is met. You should see a confirmation message right away.
+6.  Navigate to **System > Job Logs** to confirm that [**onlinegc_joblogs**](job-queue/#job-types) has started. For a detailed breakdown of individual job logs, see [View Job-specific Logs](audit-jobs-via-ui/#view-job-specific-logs) in "Audit Jobs via the Web Interface."
 
-5. Click **Start GC** if you're ready. Read more about [garbage collection](../configure/garbage-collection/#under-the-hood) if you're unsure about this operation.
 
-6. Navigate to **System > Job Logs** to confirm that `onlinegc` has happened. For a detailed breakdown of individual job logs, see [View Job Logs](view-job-logs-on-interface.md).
+![](../../images/auto-delete-job-logs-3.png){: .img-fluid .with-border}
 
-![](../../images/auto-delete-repo-events-2.png){: .img-fluid .with-border}
 
 > Job Log Deletion
 >
-> When you enable auto-deletion of job logs, the logs will be permanently deleted during garbage collection. See [Configure logging drivers] for a list of supported logging drivers and plugins.
+> When you enable auto-deletion of job logs, the logs will be permanently deleted during garbage collection. See [Configure logging drivers](../../../../config/containers/logging/configure/) for a list of supported logging drivers and plugins.
 
 ## Where to go next
 
