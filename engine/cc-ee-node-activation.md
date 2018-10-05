@@ -73,23 +73,20 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 ```
 
-3. Activate the EE license. You must use sudo even if your user is part of the docker group.
+3. [Download your Docker Enterprise license](https://success.docker.com/article/where-is-my-docker-enterprise-edition-license) and distribute it to your Docker engines.
 
-For Debian, Ubuntu, CentOS, or Red Hat Linux:
+4. Activate the EE license. You must use sudo even if your user is part of the docker group.
 
 ```
-root@docker-node:~# sudo docker engine activate
+root@docker-node:~# sudo docker engine actviate --license dockersub.lic
 Looking for existing licenses for beluga...
 NUM                 OWNER               PRODUCT ID                     EXPIRES                         PRICING COMPONENTS
 0                   beluga          docker-ee-trial                2018-09-13 21:41:12 +0000 UTC   Nodes:10
 1                   beluga          docker-ee-trial                2018-08-31 03:17:15 +0000 UTC   Nodes:10
 ```
 
-4. Pick the license of your choice
-```
-Please pick a license by number: 0
-waiting for engine to be responsive... engine is online.
-```
+**NOTE:** If the Docker EE engines are in a swarm cluster, you only need to activate the license on the 
+manager node. This action stores the license as a swarm configuration, which is compatible with UCP.
 
 5. Check the Docker Engine version. The server engine will now be EE, and the client will stay CE.
 ```
