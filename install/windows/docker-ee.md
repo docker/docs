@@ -91,11 +91,11 @@ net stop docker
 net start docker
 ```
 
-To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+To confirm Docker is running with FIPS-140-2 enabled, the `docker info` command needs to include the following:
 
 ```
-Labels:                                                                                                                         
- com.docker.security.fips=enabled 
+Security Options:
+ fips
 ```
 
 **NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
