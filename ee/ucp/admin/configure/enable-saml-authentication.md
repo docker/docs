@@ -67,8 +67,8 @@ To enable SAML authentication:
     ![Configuring IdP values for SAML in UCP](../../images/saml_settings.png)
 
 5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
-6. If the metadata URL is publicly certified, you can select **Skip TLS Verification** to skip verifying the identity provider's certificate. We do not recommend doing this unless you are testing on a secure network. If you do not select this option, you must provide the certificates from the identity provider in the **Root Certificates Bundle** field.
-7. In **UCP Host** enter the URL that includes the IP address of your UCP web interface. The current IP address appears by default.
+6. If the metadata URL is publicly certified, you can leave **Skip TLS Verification** unchecked and **Root Certificates Bundle** blank, which is the default. You can select **Skip TLS Verification** to omit verification of the identity provider's certificate. We do not recommend doing this unless you are testing on a secure network. If you do not select this option, you must provide the certificates from the identity provider in the **Root Certificates Bundle** field.
+7. In **UCP Host** enter the URL that includes the IP address or domain of your UCP web interface. The current IP address appears by default.
 
     ![Configuring service provider values for SAML in UCP](../../images/saml_settings_2.png)
 
