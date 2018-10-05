@@ -12,9 +12,9 @@ The Docker Engine release `18.09` release introduces a new feature called CE-EE 
 
 CE-EE Node Activate will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
 
-The Docker Community Edition version must be 18.09 or higher.
-
-The activation can be performed either online with connection to Docker Hub, or offline.
+## Requirements:
+* The Docker Community Edition version must be 18.09 or higher.
+* All of the Docker packages must be installed: docker-cli, docker-server, and containerd 
 
 ## Limitations
 
@@ -24,6 +24,8 @@ The activation can be performed either online with connection to Docker Hub, or 
 * Prior versions of Docker CE do not support this feature
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
+
+The activation can be performed either online with connection to Docker Hub, or offline.
 
 1. Check the current Docker version. Both the Docker client and server (`containerd`) need to be installed.  Your output may vary slightly from what is displayed on this page.
 
