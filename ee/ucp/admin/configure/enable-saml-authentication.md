@@ -73,7 +73,7 @@ To enable SAML authentication:
     ![Configuring service provider values for SAML in UCP](../../images/saml_settings_2.png)
 
 8. To customize the text of the sign-in button, enter your button text in the **Customize Sign In Button Text** field. The default text is 'Sign in with SAML'.
-9. The **Service Provider Metadata URL** and **Assertion Consumer Service (ACS) URL** appear in shaded boxes. Select the copy icon the the right side of each box top copy that URL to the clipboard for pasting in the identity provider workflow.
+9. The **Service Provider Metadata URL** and **Assertion Consumer Service (ACS) URL** appear in shaded boxes. Select the copy icon at the right side of each box to copy that URL to the clipboard for pasting in the identity provider workflow.
 9. Select **Save** to complete the integration.
 
 ## Security considerations
