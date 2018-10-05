@@ -19,6 +19,7 @@ Values of n in the -ee-<n> suffix must be 8 or higher
 * Linux kernel version 3.10 or higher
 * 4.00 GB of RAM
 * 3.00 GB of available disk space
+* Atleast 2 vCPU( in case you're installing it in Cloud Instance)
 
 Also, make sure the hosts are running one of the supported operating systems from the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix).
 
