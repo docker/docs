@@ -78,7 +78,7 @@ With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS 
 
 **NOTE:** FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
 
-If the Windows implementation already has FIPS support enabled, do the following in PowerShell:
+To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following in PowerShell:
 
 ```
 [System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
@@ -91,11 +91,11 @@ net stop docker
 net start docker
 ```
 
-To confirm Docker is running with FIPS-140-2 enabled, the `docker info` command needs to include the following:
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
 
 ```
-Security Options:
- fips
+Labels:    
+ com.docker.security.fips=enabled 
 ```
 
 **NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
