@@ -62,13 +62,19 @@ To enable SAML authentication:
 
     ![Enabling SAML in UCP](../../images/saml_enabled.png)
 
-4. In the **SAML Enabled** section, select **Yes** to display the required settings.
+4. In the **SAML Enabled** section, select **Yes** to display the required settings. The settings are grouped by those needed by the identity provider server and by those needed by UCP as a SAML service provider.
 
-    ![Configuring SAML in UCP](../../images/saml_settings.png)
+    ![Configuring IdP values for SAML in UCP](../../images/saml_settings.png)
 
 5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
-6. In **UCP Host** enter the URL that includes the IP address of your UCP console.
-7. Select **Save** to complete the integration.
+6. If the metadata URL is publicly certified, you can select **Skip TLS Verification** to skip verifying the identity provider's certificate. We do not recommend doing this unless you are testing on a secure network. If you do not select this option, you must provide the certificates from the identity provider in the **Root Certificates Bundle** field.
+7. In **UCP Host** enter the URL that includes the IP address of your UCP web interface. The current IP address appears by default.
+
+    ![Configuring service provider values for SAML in UCP](../../images/saml_settings_2.png)
+
+8. To customize the text of the sign-in button, enter your button text in the **Customize Sign In Button Text** field. The default text is 'Sign in with SAML'.
+9. The **Service Provider Metadata URL** and **Assertion Consumer Service (ACS) URL** appear in shaded boxes. Select the copy icon the the right side of each box top copy that URL to the clipboard for pasting in the identity provider workflow.
+9. Select **Save** to complete the integration.
 
 ## Security considerations
 
