@@ -171,7 +171,8 @@ the previous command (`docker container ls -q`).
 > Running Windows 10?
 >
 > Windows 10 PowerShell should already have `curl` available, but if not you can
-> grab a Linux terminal emulator like
+> install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+> Alternatively, grab a Linux terminal emulator like
 > [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
 > or download
 > [wget for Windows](http://gnuwin32.sourceforge.net/packages/wget.htm)
