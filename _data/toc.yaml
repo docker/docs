@@ -149,7 +149,7 @@ guides:
       nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
-      - path: /engine/cc-ee-node-activation/
+      - path: /engine/ce-ee-node-activate/
         title: CE-EE Node Activate
       - path: /engine/migration/
         title: Migrate to Docker 1.10
