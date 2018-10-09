@@ -1,0 +1,422 @@
+<p>Docker UCP supports Network File System (NFS) persistent volumes for
+Kubernetes. To enable this feature on a UCP cluster, you need to set up
+an NFS storage volume provisioner.</p>
+
+<blockquote>
+  <p>Kubernetes storage drivers</p>
+
+  <p>Currently, NFS is the only Kubernetes storage driver that UCP supports.</p>
+</blockquote>
+
+<h2 id="enable-nfs-volume-provisioning">Enable NFS volume provisioning</h2>
+
+<p>The following steps enable NFS volume provisioning on a UCP cluster:</p>
+
+<ol>
+  <li>Create an NFS server pod.</li>
+  <li>Create a default storage class.</li>
+  <li>Create persistent volumes that use the default storage class.</li>
+  <li>Deploy your persistent volume claims and applications.</li>
+</ol>
+
+<p>The following procedure shows you how to deploy WordPress and a MySQL backend
+that use NFS volume provisioning.</p>
+
+<p><a href="../../user-access/kubectl.md">Install the Kubernetes CLI</a> to complete the
+procedure for enabling NFS provisioning.</p>
+
+<h2 id="create-the-nfs-server">Create the NFS Server</h2>
+
+<p>To enable NFS volume provisioning on a UCP cluster, you need to install
+an NFS server. Google provides an image for this purpose.</p>
+
+<p>On any node in the cluster with a <a href="../../user-access/cli.md">UCP client bundle</a>,
+copy the following yaml to a file named nfs-server.yaml.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nfs-server</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">role</span><span class="pi">:</span> <span class="s">nfs-server</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">tolerations</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">node-role.kubernetes.io/master</span>
+    <span class="na">effect</span><span class="pi">:</span> <span class="s">NoSchedule</span>
+  <span class="na">nodeSelector</span><span class="pi">:</span>
+    <span class="s">node-role.kubernetes.io/master</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nfs-server</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">gcr.io/google_containers/volume-nfs:0.8</span>
+    <span class="na">securityContext</span><span class="pi">:</span>
+      <span class="na">privileged</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nfs-0</span>
+        <span class="na">containerPort</span><span class="pi">:</span> <span class="s">2049</span>
+        <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+  <span class="na">restartPolicy</span><span class="pi">:</span> <span class="s">Always</span>
+</code></pre></div></div>
+
+<p>Run the following command to create the NFS server pod.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> nfs-server.yaml
+</code></pre></div></div>
+
+<p>The default storage class needs the IP address of the NFS server pod.
+Run the following command to get the pod’s IP address.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl describe pod nfs-server | <span class="nb">grep </span>IP:
+</code></pre></div></div>
+
+<p>The result looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IP:           192.168.106.67
+</code></pre></div></div>
+
+<h2 id="create-the-default-storage-class">Create the default storage class</h2>
+
+<p>To enable NFS provisioning, create a storage class that has the
+<code class="highlighter-rouge">storageclass.kubernetes.io/is-default-class</code> annotation set to <code class="highlighter-rouge">true</code>.
+Also, provide the IP address of the NFS server pod as a parameter.</p>
+
+<p>Copy the following yaml to a file named default-storage.yaml. Replace
+<code class="highlighter-rouge">&lt;nfs-server-pod-ip-address&gt;</code> with the IP address from the previous step.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1beta1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">default-storage</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="s">storageclass.kubernetes.io/is-default-class</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="s">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">kubernetes.io/nfs</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
+  <span class="na">server</span><span class="pi">:</span> <span class="s">&lt;nfs-server-pod-ip-address&gt;</span>
+</code></pre></div></div>
+
+<p>Run the following command to create the default storage class.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> default-storage.yaml
+</code></pre></div></div>
+
+<p>Confirm that the storage class was created and that it’s assigned as the 
+default for the cluster.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get storageclass
+</code></pre></div></div>
+
+<p>It should look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                        PROVISIONER         AGE
+default-storage (default)   kubernetes.io/nfs   58s
+</code></pre></div></div>
+
+<h2 id="create-persistent-volumes">Create persistent volumes</h2>
+
+<p>Create two persistent volumes based on the <code class="highlighter-rouge">default-storage</code> storage class.
+One volume is for the MySQL database, and the other is for WordPress.</p>
+
+<p>To create an NFS volume, specify <code class="highlighter-rouge">storageClassName: default-storage</code> in the
+persistent volume spec.</p>
+
+<p>Copy the following yaml to a file named local-volumes.yaml.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">local-pv-1</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">local</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">default-storage</span>
+  <span class="na">capacity</span><span class="pi">:</span>
+    <span class="na">storage</span><span class="pi">:</span> <span class="s">20Gi</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">hostPath</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/data/pv-1</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">local-pv-2</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">local</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">default-storage</span>
+  <span class="na">capacity</span><span class="pi">:</span>
+    <span class="na">storage</span><span class="pi">:</span> <span class="s">20Gi</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">hostPath</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/data/pv-2</span>
+</code></pre></div></div>
+
+<p>Run this command to create the persistent volumes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> local-volumes.yaml
+</code></pre></div></div>
+
+<p>Inspect the volumes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get persistentvolumes
+</code></pre></div></div>
+
+<p>They should look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME         CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM     STORAGECLASS      REASON    AGE
+local-pv-1   20Gi       RWO            Retain           Available             default-storage             1m
+local-pv-2   20Gi       RWO            Retain           Available             default-storage             1m
+</code></pre></div></div>
+
+<h2 id="create-a-secret-for-the-mysql-password">Create a secret for the MySQL password</h2>
+
+<p>Create a secret for the password that you want to use for accessing the MySQL
+database. Use this command to create the secret object:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create secret generic mysql-pass <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">password</span><span class="o">=</span>&lt;mysql-password&gt;
+</code></pre></div></div>
+
+<h2 id="deploy-persistent-volume-claims-and-applications">Deploy persistent volume claims and applications</h2>
+
+<p>You have two persistent volumes that are available for claims. The MySQL 
+deployment uses one volume, and WordPress uses the other.</p>
+
+<p>Copy the following yaml to a file named <code class="highlighter-rouge">wordpress-deployment.yaml</code>. 
+The claims in this file make no reference to a particular storage class, so
+they bind to any available volumes that can satisfy the storage request.
+In this example, both claims request <code class="highlighter-rouge">20Gi</code> of storage.</p>
+
+<blockquote>
+  <p>Use specific persistent volume</p>
+
+  <p>If you are attempting to use a specific persistent volume and not let Kubernetes choose at random, ensure that the <code class="highlighter-rouge">storageClassName</code> key is populated in the persistent claim itself.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress-mysql</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">3306</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+    <span class="na">tier</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">clusterIP</span><span class="pi">:</span> <span class="s">None</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-pv-claim</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">20Gi</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1beta2</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress-mysql</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+      <span class="na">tier</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">strategy</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">Recreate</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+        <span class="na">tier</span><span class="pi">:</span> <span class="s">mysql</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:5.6</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">mysql</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_ROOT_PASSWORD</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-pass</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">password</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">3306</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">mysql</span>
+        <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-persistent-storage</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/var/lib/mysql</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-persistent-storage</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">mysql-pv-claim</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">80</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+    <span class="na">tier</span><span class="pi">:</span> <span class="s">frontend</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">wp-pv-claim</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">20Gi</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1beta2</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+      <span class="na">tier</span><span class="pi">:</span> <span class="s">frontend</span>
+  <span class="na">strategy</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">Recreate</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">wordpress</span>
+        <span class="na">tier</span><span class="pi">:</span> <span class="s">frontend</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">wordpress:4.8-apache</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">WORDPRESS_DB_HOST</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">wordpress-mysql</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">WORDPRESS_DB_PASSWORD</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-pass</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">password</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress</span>
+        <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress-persistent-storage</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/var/www/html</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">wordpress-persistent-storage</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">wp-pv-claim</span>
+</code></pre></div></div>
+
+<p>Run the following command to deploy the MySQL and WordPress images.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> wordpress-deployment.yaml
+</code></pre></div></div>
+
+<p>Confirm that the pods are up and running.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
+</code></pre></div></div>
+
+<p>You should see something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                               READY     STATUS    RESTARTS   AGE
+nfs-server                         1/1       Running   0          2h
+wordpress-f4dcfdf45-4rkgs          1/1       Running   0          1m
+wordpress-mysql-7bdd6d857c-fvgqx   1/1       Running   0          1m
+</code></pre></div></div>
+
+<p>It may take a few minutes for both pods to enter the <code class="highlighter-rouge">Running</code> state.</p>
+
+<h2 id="inspect-the-deployment">Inspect the deployment</h2>
+
+<p>The WordPress deployment is ready to go. You can see it in action by opening 
+a web browser on the URL of the WordPress service. The easiest way to get the
+URL is to open the UCP web UI, navigate to the Kubernetes <strong>Load Balancers</strong>
+page, and click the <strong>wordpress</strong> service. In the details pane, the URL is
+listed in the <strong>Ports</strong> section.</p>
+
+<p><img src="../../images/use-nfs-volume-1.png" alt="" class="with-border" /></p>
+
+<p>Also, you can get the URL by using the command line.</p>
+
+<p>On any node in the cluster, run the following command to get the IP addresses
+that are assigned to the current node.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+docker node inspect <span class="nt">--format</span> <span class="s1">'{{ index .Spec.Labels "com.docker.ucp.SANs" }}'</span> &lt;node-id&gt;
+
+</code></pre></div></div>
+
+<p>You should see a list of IP addresses, like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>172.31.36.167,jg-latest-ubuntu-0,127.0.0.1,172.17.0.1,54.213.225.17
+</code></pre></div></div>
+
+<p>One of these corresponds with the external node IP address. Look for an address
+that’s not in the <code class="highlighter-rouge">192.*</code>, <code class="highlighter-rouge">127.*</code>, and <code class="highlighter-rouge">172.*</code> ranges. In the current example,
+the IP address is <code class="highlighter-rouge">54.213.225.17</code>.</p>
+
+<p>The WordPress web UI is served through a <code class="highlighter-rouge">NodePort</code>, which you get with this
+command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl describe svc wordpress | <span class="nb">grep </span>NodePort 
+</code></pre></div></div>
+
+<p>Which returns something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NodePort:                 &lt;unset&gt;  34746/TCP
+</code></pre></div></div>
+
+<p>Put the two together to get the URL for the WordPress service:
+<code class="highlighter-rouge">http://&lt;node-ip&gt;:&lt;node-port&gt;</code>.</p>
+
+<p>For this example, the URL is <code class="highlighter-rouge">http://54.213.225.17:34746</code>.</p>
+
+<p><img src="../../images/use-nfs-volume-2.png" alt="" class="with-border" /></p>
+
+<h2 id="write-a-blog-post-to-use-the-storage">Write a blog post to use the storage</h2>
+
+<p>Open the URL for the WordPress service and follow the instructions for
+installing WordPress. In this example, the blog is named “NFS Volumes”.</p>
+
+<p><img src="../../images/use-nfs-volume-3.png" alt="" class="with-border" /></p>
+
+<p>Create a new blog post and publish it.</p>
+
+<p><img src="../../images/use-nfs-volume-4.png" alt="" class="with-border" /></p>
+
+<p>Click the <strong>permalink</strong> to view the site.</p>
+
+<p><img src="../../images/use-nfs-volume-5.png" alt="" class="with-border" /></p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="https://github.com/kubernetes/examples/tree/master/staging/volumes/nfs#nfs-server-part">Example of NFS based persistent volume</a></li>
+  <li><a href="https://v1-8.docs.kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/">Example: Deploying WordPress and MySQL with Persistent Volumes</a></li>
+</ul>

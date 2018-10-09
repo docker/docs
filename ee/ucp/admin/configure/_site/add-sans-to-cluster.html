@@ -1,0 +1,51 @@
+<p>UCP always runs with HTTPS enabled. When you connect to UCP, you need to make
+sure that the hostname that you use to connect is recognized by UCP’s
+certificates. If, for instance, you put UCP behind a load balancer that
+forwards its traffic to your UCP instance, your requests will be for the load
+balancer’s hostname or IP address, not UCP’s. UCP will reject these requests
+unless you include the load balancer’s address as a Subject Alternative Name
+(or SAN) in UCP’s certificates.</p>
+
+<p>If you use your own TLS certificates, make sure that they have the correct SAN
+values.
+<a href="use-your-own-tls-certificates.md">Learn about using your own TLS certificates</a>.</p>
+
+<p>If you want to use the self-signed certificate that UCP has out of the box, you
+can set up the SANs when you install UCP with the <code class="highlighter-rouge">--san</code> argument. You can
+also add them after installation.</p>
+
+<h2 id="add-new-sans-to-ucp">Add new SANs to UCP</h2>
+
+<ol>
+  <li>In the UCP web UI, log in with administrator credentials and navigate to
+the <strong>Nodes</strong> page.</li>
+  <li>Click on a manager node, and in the details pane, click <strong>Configure</strong> and 
+select <strong>Details</strong>.</li>
+  <li>In the <strong>SANs</strong> section, click <strong>Add SAN</strong>, and enter one or more SANs
+for the cluster.
+<img src="../../images/add-sans-to-cluster-1.png" alt="" class="with-border" /></li>
+  <li>Once you’re done, click <strong>Save</strong>.</li>
+</ol>
+
+<p>You will have to do this on every existsing manager node in the cluster,
+but once you have done so, the SANs are applied automatically to any new
+manager nodes that join the cluster.</p>
+
+<p>You can also do this from the CLI by first running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+docker node inspect <span class="nt">--format</span> <span class="s1">'{{ index .Spec.Labels "com.docker.ucp.SANs" }}'</span> &lt;node-id&gt;
+default-cs,127.0.0.1,172.17.0.1
+
+</code></pre></div></div>
+
+<p>This will get the current set of SANs for the given manager node. Append your
+desired SAN to this list, for example <code class="highlighter-rouge">default-cs,127.0.0.1,172.17.0.1,example.com</code>,
+and then run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node update <span class="nt">--label-add</span> com.docker.ucp.SANs<span class="o">=</span>&lt;SANs-list&gt; &lt;node-id&gt;
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">&lt;SANs-list&gt;</code> is the list of SANs with your new SAN appended at the end. As in
+the web UI, you must do this for every manager node.</p>
+

@@ -1,0 +1,47 @@
+<p>Docker Universal Control Plane can use your local networking drivers to
+orchestrate your cluster. You can create a <em>config</em> network, with a driver like
+MAC VLAN, and you use it like any other named network in UCP. If it’s set up
+as attachable, you can attach containers.</p>
+
+<blockquote>
+  <p>Security</p>
+
+  <p>Encrypting communication between containers on different nodes works only on
+overlay networks.</p>
+</blockquote>
+
+<h2 id="use-ucp-to-create-node-specific-networks">Use UCP to create node-specific networks</h2>
+
+<p>Always use UCP to create node-specific networks. You can use the UCP web UI 
+or the CLI (with an admin bundle). If you create the networks without UCP,
+the networks won’t have the right access labels and won’t be available in UCP.</p>
+
+<h2 id="create-a-mac-vlan-network">Create a MAC VLAN network</h2>
+
+<ol>
+  <li>Log in as an administrator.</li>
+  <li>Navigate to <strong>Networks</strong> and click <strong>Create Network</strong>.</li>
+  <li>Name the network “macvlan”.</li>
+  <li>In the <strong>Driver</strong> dropdown, select <strong>Macvlan</strong>.</li>
+  <li>
+    <p>In the <strong>Macvlan Configure</strong> section, select the configuration option.
+Create all of the config-only networks before you create the config-from
+network.</p>
+
+    <ul>
+      <li><strong>Config Only</strong>: Prefix the <code class="highlighter-rouge">config-only</code> network name with a node hostname
+prefix, like <code class="highlighter-rouge">node1/my-cfg-network</code>, <code class="highlighter-rouge">node2/my-cfg-network</code>, <em>etc</em>. This is
+necessary to ensure that the access labels are applied consistently to all of
+the back-end config-only networks. UCP routes the config-only network creation
+to the appropriate node based on the node hostname prefix. All config-only
+networks with the same name must belong in the same collection, or UCP returns
+an error. Leaving the access label empty puts the network in the admin’s default
+collection, which is <code class="highlighter-rouge">/</code> in a new UCP installation.</li>
+      <li><strong>Config From</strong>: Create the network from a Docker config. Don’t set up an
+access label for the config-from network. The labels of the network and its
+collection placement are inherited from the related config-only networks.</li>
+    </ul>
+  </li>
+  <li>Click <strong>Create</strong> to create the network.</li>
+</ol>
+

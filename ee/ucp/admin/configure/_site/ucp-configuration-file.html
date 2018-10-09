@@ -1,0 +1,673 @@
+<p>You have two options to configure UCP: through the web UI, or using a Docker
+config object. In most cases, the web UI is a front-end for changing the
+configuration file.</p>
+
+<p>You can customize how UCP is installed by creating a configuration file upfront.
+During the installation UCP detects and starts using the configuration.</p>
+
+<h2 id="ucp-configuration-file">UCP configuration file</h2>
+
+<p>The <code class="highlighter-rouge">ucp-agent</code> service uses a configuration file to set up UCP.
+You can use the configuration file in different ways to set up your UCP
+cluster.</p>
+
+<ul>
+  <li>Install one cluster and use the UCP web UI to configure it as desired,
+extract the configuration file, edit it as needed, and use the edited
+config file to make copies to multiple other cluster.</li>
+  <li>Install a UCP cluster, extract and edit the configuration file, and use the
+CLI to apply the new configuration to the same cluster.</li>
+  <li>Run the <code class="highlighter-rouge">example-config</code> command, edit the example configuration file, and
+apply the file at install time or after installation.</li>
+</ul>
+
+<p>Specify your configuration settings in a TOML file.
+<a href="https://github.com/toml-lang/toml/blob/master/README.md">Learn about Tom’s Obvious, Minimal Language</a>.</p>
+
+<p>The configuration has a versioned naming convention, with a trailing decimal
+number that increases with each version, like <code class="highlighter-rouge">com.docker.ucp.config-1</code>. The
+<code class="highlighter-rouge">ucp-agent</code> service maps the configuration to the file at <code class="highlighter-rouge">/etc/ucp/ucp.toml</code>.</p>
+
+<h2 id="inspect-and-modify-existing-configuration">Inspect and modify existing configuration</h2>
+
+<p>Use the <code class="highlighter-rouge">docker config inspect</code> command to view the current settings and emit
+them to a file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c"># CURRENT_CONFIG_NAME will be the name of the currently active UCP configuration</span>
+<span class="nv">CURRENT_CONFIG_NAME</span><span class="o">=</span><span class="k">$(</span>docker service inspect ucp-agent <span class="nt">--format</span> <span class="s1">'{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}'</span><span class="k">)</span>
+<span class="c"># Collect the current config with `docker config inspect`</span>
+docker config inspect <span class="nt">--format</span> <span class="s1">'{{ printf "%s" .Spec.Data }}'</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="o">&gt;</span> ucp-config.toml
+
+</code></pre></div></div>
+
+<p>Edit the file, then use the <code class="highlighter-rouge">docker config create</code> and <code class="highlighter-rouge">docker service update</code>
+commands to create and apply the configuration from the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># NEXT_CONFIG_NAME will be the name of the new UCP configuration</span>
+<span class="nv">NEXT_CONFIG_NAME</span><span class="o">=</span><span class="k">${</span><span class="nv">CURRENT_CONFIG_NAME</span><span class="p">%%-*</span><span class="k">}</span>-<span class="k">$((${</span><span class="nv">CURRENT_CONFIG_NAME</span><span class="p">##*-</span><span class="k">}</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+<span class="c"># Create the new cluster configuration from the file ucp-config.toml</span>
+docker config create <span class="nv">$NEXT_CONFIG_NAME</span>  ucp-config.toml
+<span class="c"># Use the `docker service update` command to remove the current configuration</span>
+<span class="c"># and apply the new configuration to the `ucp-agent` service.</span>
+docker service update <span class="nt">--config-rm</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="nt">--config-add</span> <span class="nb">source</span><span class="o">=</span><span class="nv">$NEXT_CONFIG_NAME</span>,target<span class="o">=</span>/etc/ucp/ucp.toml ucp-agent
+</code></pre></div></div>
+
+<h2 id="example-configuration-file">Example configuration file</h2>
+
+<p>You can see an example TOML config file that shows how to configure UCP
+settings. From the command line, run UCP with the <code class="highlighter-rouge">example-config</code> option:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> /: example-config
+</code></pre></div></div>
+
+<h2 id="configuration-options">Configuration options</h2>
+
+<h3 id="auth-table">auth table</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">backend</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The name of the authorization backend to use, either <code class="highlighter-rouge">managed</code> or <code class="highlighter-rouge">ldap</code>. The default is <code class="highlighter-rouge">managed</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">default_new_user_role</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The role that new users get for their private resource sets. Values are <code class="highlighter-rouge">admin</code>, <code class="highlighter-rouge">viewonly</code>, <code class="highlighter-rouge">scheduler</code>, <code class="highlighter-rouge">restrictedcontrol</code>, or <code class="highlighter-rouge">fullcontrol</code>. The default is <code class="highlighter-rouge">restrictedcontrol</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authsessions">auth.sessions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">lifetime_minutes</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The initial session lifetime, in minutes. The default is 4320, which is 72 hours.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">renewal_threshold_minutes</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 1440, which is 24 hours.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">per_user_limit</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authldap-optional">auth.ldap (optional)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">server_url</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The URL of the LDAP server.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">no_simple_pagination</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> if the LDAP server doesn’t support the Simple Paged Results control extension (RFC 2696). The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">start_tls</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to use StartTLS to secure the connection to the server, ignored if the server URL scheme is ‘ldaps://’. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">root_certs</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">A root certificate PEM bundle to use when establishing a TLS connection to the server.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">tls_skip_verify</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to skip verifying the server’s certificate when establishing a TLS connection, which isn’t recommended unless testing on a secure network. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">reader_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name the system uses to bind to the LDAP server when performing searches.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">reader_password</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The password that the system uses to bind to the LDAP server when performing searches.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sync_schedule</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The scheduled time for automatic LDAP sync jobs, in CRON format. Needs to have the seconds field set to zero. The default is @hourly if empty or omitted.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">jit_user_provisioning</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Whether to only create user accounts upon first login (recommended). The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authldapadditional_domains-array-optional">auth.ldap.additional_domains array (optional)</h3>
+
+<p>A list of additional LDAP domains and corresponding server configs from which
+to sync users and team members. This is an advanced feature which most
+environments don’t need.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">domain</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The root domain component of this server, for example, <code class="highlighter-rouge">dc=example,dc=com</code>. A longest-suffix match of the base DN for LDAP searches is used to select which LDAP server to use for search requests. If no matching domain is found, the default LDAP server config is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">server_url</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The URL of the LDAP server for the current additional domain.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">no_simple_pagination</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to true if the LDAP server for this additional domain does not support the Simple Paged Results control extension (RFC 2696). The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">server_url</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The URL of the LDAP server.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">start_tls</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Whether to use StartTLS to secure the connection to the server, ignored if the server URL scheme is ‘ldaps://’.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">root_certs</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">A root certificate PEM bundle to use when establishing a TLS connection to the server for the current additional domain.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">tls_skip_verify</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Whether to skip verifying the additional domain server’s certificate when establishing a TLS connection, not recommended unless testing on a secure network. The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">reader_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name the system uses to bind to the LDAP server when performing searches under the additional domain.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">reader_password</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The password that the system uses to bind to the LDAP server when performing searches under the additional domain.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authldapuser_search_configs-array-optional">auth.ldap.user_search_configs array (optional)</h3>
+
+<p>Settings for syncing users.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">base_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name of the element from which the LDAP server will search for users, for example, <code class="highlighter-rouge">ou=people,dc=example,dc=com</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">scope_subtree</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to search for users in the entire subtree of the base DN. Set to <code class="highlighter-rouge">false</code> to search only one level under the base DN. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">username_attr</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The name of the attribute of the LDAP user element which should be selected as the username. The default is <code class="highlighter-rouge">uid</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">full_name_attr</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The name of the attribute of the LDAP user element which should be selected as the full name of the user. The default is <code class="highlighter-rouge">cn</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">filter</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The LDAP search filter used to select user elements, for example, <code class="highlighter-rouge">(&amp;(objectClass=person)(objectClass=user))</code>. May be left blank.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">match_group</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Whether to additionally filter users to those who are direct members of a group. The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">match_group_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name of the LDAP group, for example, <code class="highlighter-rouge">cn=ddc-users,ou=groups,dc=example,dc=com</code>. Required if <code class="highlighter-rouge">matchGroup</code> is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">match_group_member_attr</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if <code class="highlighter-rouge">matchGroup</code> is <code class="highlighter-rouge">true</code>. The default is <code class="highlighter-rouge">member</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">match_group_iterate</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to get all of the user attributes by iterating through the group members and performing a lookup for each one separately. Use this instead of searching users first, then applying the group selection filter. Ignored if <code class="highlighter-rouge">matchGroup</code> is <code class="highlighter-rouge">false</code>. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authldapadmin_sync_opts-optional">auth.ldap.admin_sync_opts (optional)</h3>
+
+<p>Settings for syncing system admininistrator users.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">enable_sync</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to enable syncing admins. If <code class="highlighter-rouge">false</code>, all other fields in this table are ignored. The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">select_group_members</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to sync using a group DN and member attribute selection. Set to <code class="highlighter-rouge">false</code> to use a search filter. The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">group_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name of the LDAP group, for example, <code class="highlighter-rouge">cn=ddc-admins,ou=groups,dc=example,dc=com</code>. Required if <code class="highlighter-rouge">select_group_members</code> is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">group_member_attr</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if <code class="highlighter-rouge">select_group_members</code> is <code class="highlighter-rouge">true</code>. The default is <code class="highlighter-rouge">member</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">search_base_dn</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The distinguished name of the element from which the LDAP server will search for users, for example, <code class="highlighter-rouge">ou=people,dc=example,dc=com</code>. Required if <code class="highlighter-rouge">select_group_members</code> is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">search_scope_subtree</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to search for users in the entire subtree of the base DN. Set to <code class="highlighter-rouge">false</code> to search only one level under the base DN. The default is <code class="highlighter-rouge">false</code>. Required if <code class="highlighter-rouge">select_group_members</code> is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">search_filter</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The LDAP search filter used to select users if <code class="highlighter-rouge">select_group_members</code> is <code class="highlighter-rouge">false</code>, for example, <code class="highlighter-rouge">(memberOf=cn=ddc-admins,ou=groups,dc=example,dc=com)</code>. May be left blank.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="registries-array-optional">registries array (optional)</h3>
+
+<p>An array of tables that specifies the DTR instances that the current UCP instance manages.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">host_address</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">The address for connecting to the DTR instance tied to this UCP cluster.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">service_id</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">The DTR instance’s OpenID Connect Client ID, as registered with the Docker authentication provider.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ca_bundle</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">If you’re using a custom certificate authority (CA), the <code class="highlighter-rouge">ca_bundle</code> setting specifies the root CA bundle for the DTR instance. The value is a string with the contents of a <code class="highlighter-rouge">ca.pem</code> file.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="scheduling_configuration-table-optional">scheduling_configuration table (optional)</h3>
+
+<p>Specifies scheduling options and the default orchestrator for new nodes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">enable_admin_ucp_scheduling</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to allow admins to schedule on containers on manager nodes. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">default_node_orchestrator</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the type of orchestrator to use for new nodes that are joined to the cluster. Can be <code class="highlighter-rouge">swarm</code> or <code class="highlighter-rouge">kubernetes</code>. The default is <code class="highlighter-rouge">swarm</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tracking_configuration-table-optional">tracking_configuration table (optional)</h3>
+
+<p>Specifies the analytics data that UCP collects.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">disable_usageinfo</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to disable analytics of usage information. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">disable_tracking</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to disable analytics of API call information. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">anonymize_tracking</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Anonymize analytic data. Set to <code class="highlighter-rouge">true</code> to hide your license ID. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cluster_label</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set a label to be included with analytics/</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="trust_configuration-table-optional">trust_configuration table (optional)</h3>
+
+<p>Specifies whether DTR images require signing.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">require_content_trust</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to require images be signed by content trust. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">require_signature_from</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">A string array that specifies users or teams which must sign images.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="log_configuration-table-optional">log_configuration table (optional)</h3>
+
+<p>Configures the logging options for UCP components.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">protocol</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The protocol to use for remote logging. Values are <code class="highlighter-rouge">tcp</code> and <code class="highlighter-rouge">udp</code>. The default is <code class="highlighter-rouge">tcp</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">host</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Specifies a remote syslog server to send UCP controller logs to. If omitted, controller logs are sent through the default docker daemon logging driver from the <code class="highlighter-rouge">ucp-controller</code> container.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">level</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">The logging level for UCP components. Values are <a href="https://linux.die.net/man/5/syslog.conf">syslog priority  levels</a>: <code class="highlighter-rouge">debug</code>, <code class="highlighter-rouge">info</code>, <code class="highlighter-rouge">notice</code>, <code class="highlighter-rouge">warning</code>, <code class="highlighter-rouge">err</code>, <code class="highlighter-rouge">crit</code>, <code class="highlighter-rouge">alert</code>, and <code class="highlighter-rouge">emerg</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="license_configuration-table-optional">license_configuration table (optional)</h3>
+
+<p>Specifies whether the your UCP license is automatically renewed.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">auto_refresh</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to enable attempted automatic license renewal when the license nears expiration. If disabled, you must manually upload renewed license after expiration. The default is <code class="highlighter-rouge">true</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="cluster_config-table-required">cluster_config table (required)</h3>
+
+<p>Configures the cluster that the current UCP instance manages.</p>
+
+<p>The <code class="highlighter-rouge">dns</code>, <code class="highlighter-rouge">dns_opt</code>, and <code class="highlighter-rouge">dns_search</code> settings configure the DNS settings for UCP
+components. Assigning these values overrides the settings in a container’s
+<code class="highlighter-rouge">/etc/resolv.conf</code> file. For more info, see
+<a href="/engine/userguide/networking/default_network/configure-dns/">Configure container DNS</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">controller_port</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Configures the port that the <code class="highlighter-rouge">ucp-controller</code> listens to. The default is <code class="highlighter-rouge">443</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">kube_apiserver_port</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Configures the port the Kubernetes API server listens to.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">swarm_port</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Configures the port that the <code class="highlighter-rouge">ucp-swarm-manager</code> listens to. The default is <code class="highlighter-rouge">2376</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">swarm_strategy</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Configures placement strategy for container scheduling. This doesn’t affect swarm-mode services. Values are <code class="highlighter-rouge">spread</code>, <code class="highlighter-rouge">binpack</code>, and <code class="highlighter-rouge">random</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">dns</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Array of IP addresses to add as nameservers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">dns_opt</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Array of options used by DNS resolvers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">dns_search</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Array of domain names to search when a bare unqualified hostname is used inside of a container.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">profiling_enabled</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set to <code class="highlighter-rouge">true</code> to enable specialized debugging endpoints for profiling UCP performance. The default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">kv_timeout</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the key-value store timeout setting, in milliseconds. The default is <code class="highlighter-rouge">5000</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">kv_snapshot_count</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the key-value store snapshot count setting. The default is <code class="highlighter-rouge">20000</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">external_service_lb</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Specifies an optional external load balancer for default links to services with exposed ports in the web UI.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cni_installer_url</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Specifies the URL of a Kubernetes YAML file to be used for installing a CNI plugin. Applies only during initial installation. If empty, the default CNI plugin is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">metrics_retention_time</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Adjusts the metrics retention time.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">metrics_scrape_interval</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the interval for how frequently managers gather metrics from nodes in the cluster.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">metrics_disk_usage_interval</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rethinkdb_cache_size</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Sets the size of the cache used by UCP’s RethinkDB servers. The default is 512MB, but leaving this field empty or specifying <code class="highlighter-rouge">auto</code> instructs RethinkDB to determine a cache size automatically.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cloud_provider</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set the cloud provider for the kubernetes cluster.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">pod_cidr</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Sets the subnet pool from which the IP for the Pod should be allocated from the CNI ipam plugin. Default is <code class="highlighter-rouge">192.168.0.0/16</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">nodeport_range</code></td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">Set the port range that for Kubernetes services of type NodePort can be exposed in. Default is <code class="highlighter-rouge">32768-35535</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">custom_kube_api_server_flags</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set the configuration options for the Kubernetes API server.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">custom_kube_controller_manager_flags</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set the configuration options for the Kubernetes controller manager</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">custom_kubelet_flags</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set the configuration options for Kubelets</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">custom_kube_scheduler_flags</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Set the configuration options for the Kubernetes scheduler</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">local_volume_collection_mapping</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Store data about collections for volumes in UCP’s local KV store instead of on the volume labels. This is used for enforcing access control on volumes.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">manager_kube_reserved_resources</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">worker_kube_reserved_resources</code></td>
+      <td style="text-align: left">no</td>
+      <td style="text-align: left">Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.</td>
+    </tr>
+  </tbody>
+</table>
