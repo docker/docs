@@ -15,6 +15,7 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
+* [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
