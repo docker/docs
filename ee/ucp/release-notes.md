@@ -21,8 +21,6 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
-## Beta 1 (2018-09-11)
-
 **New Features**
 * Default address pool for Swarm is now user configurable
 * UCP now supports Kubernetes Network Encryption using IPSec
