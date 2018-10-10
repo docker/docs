@@ -29,7 +29,7 @@ to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-upda
 **NOTE:** Docker allows a non-FIPS enabled worker or manager nodes to a FIPS-enabled 
 swarm cluster. 
 
-While a mixed-FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed-FIPS environment in production.
+While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed-FIPS environment in production.
 
 ## Join as a worker node
 
