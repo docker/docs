@@ -4,7 +4,7 @@ keywords: guide, swarm mode, node
 title: Join nodes to a swarm
 ---
 
-When you first create a swarm, you place a single Docker Engine (Engine) into
+When you first create a swarm, you place a single Docker Engine into
 swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:
 
 * Adding worker nodes increases capacity. When you deploy a service to a swarm,
