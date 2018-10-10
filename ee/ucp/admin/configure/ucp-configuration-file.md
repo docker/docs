@@ -87,21 +87,6 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 | `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 1440, which is 24 hours.                                            |
 | `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5. |
 
-### auth.ldap (optional)
-
-| Parameter               | Required | Description                                                                                                                                                                      |
-|:------------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `server_url`            | no       | The URL of the LDAP server.                                                                                                                                                      |
-| `no_simple_pagination`  | no       | Set to `true` if the LDAP server doesn't support the Simple Paged Results control extension (RFC 2696). The default is `false`.                                                  |
-| `start_tls`             | no       | Set to `true` to use StartTLS to secure the connection to the server, ignored if the server URL scheme is 'ldaps://'. The default is `false`.                                    |
-| `root_certs`            | no       | A root certificate PEM bundle to use when establishing a TLS connection to the server.                                                                                           |
-| `tls_skip_verify`       | no       | Set to `true` to skip verifying the server's certificate when establishing a TLS connection, which isn't recommended unless testing on a secure network. The default is `false`. |
-| `reader_dn`             | no       | The distinguished name the system uses to bind to the LDAP server when performing searches.                                                                                      |
-| `reader_password`       | no       | The password that the system uses to bind to the LDAP server when performing searches.                                                                                           |
-| `sync_schedule`         | no       | The scheduled time for automatic LDAP sync jobs, in CRON format. Needs to have the seconds field set to zero. The default is @hourly if empty or omitted.                        |
-| `jit_user_provisioning` | no       | Whether to only create user accounts upon first login (recommended). The default is `true`.                                                                                      |
-
-
 ### auth.ldap.additional_domains array (optional)
 
 A list of additional LDAP domains and corresponding server configs from which
@@ -202,7 +187,7 @@ Configures the logging options for UCP components.
 
 ### license_configuration table (optional)
 
-Specifies whether the your UCP license is automatically renewed.   
+Specifies whether the your UCP license is automatically renewed.
 
 | Parameter      | Required | Description                                                                                                                                                                                   |
 |:---------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
