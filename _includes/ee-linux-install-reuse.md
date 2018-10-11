@@ -311,6 +311,6 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 
 {% endif %}
