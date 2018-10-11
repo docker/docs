@@ -447,6 +447,17 @@ $ docker run -d \
   nginx:latest
 ```
 
+### Create a service which creates an NFS volume
+
+This example shows how you can create an NFS volume when creating a service. This example uses 10.0.0.10 as the NFS server and /var/docker-nfs as the exported directory on the NFS server. Note, the volume driver specified is 'local'.
+
+```bash
+$ docker service create -d \
+  --name nfs-service \
+  --mount type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10 \
+  nginx:latest
+```
+
 ## Backup, restore, or migrate data volumes
 
 Volumes are useful for backups, restores, and migrations. Use the
