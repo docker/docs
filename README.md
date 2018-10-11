@@ -197,7 +197,7 @@ Either way, you can now access the docs at port 4000 on your Docker host.
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
 - `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
-- `/css/documentation.css` defines the docs-specific style rules
+- `/css/style.scss` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
 ## Relative linking for GitHub viewing
