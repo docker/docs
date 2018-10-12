@@ -1,0 +1,143 @@
+<p>Docker EE is designed for scaling horizontally as your applications grow in
+size and usage. You can add or remove nodes from the cluster to scale it
+to your needs. You can join Windows Server 2016, IBM z System, and Linux nodes
+to the cluster.</p>
+
+<p>Because Docker EE leverages the clustering functionality provided by Docker
+Engine, you use the <a href="/engine/swarm/swarm-tutorial/add-nodes.md">docker swarm join</a>
+command to add more nodes to your cluster. When you join a new node, Docker EE
+services start running on the node automatically.</p>
+
+<h2 id="node-roles">Node roles</h2>
+
+<p>When you join a node to a cluster, you specify its role: manager or worker.</p>
+
+<ul>
+  <li>
+    <p><strong>Manager</strong>: Manager nodes are responsible for cluster management
+functionality and dispatching tasks to worker nodes. Having multiple
+manager nodes allows your swarm to be highly available and tolerant of
+node failures.</p>
+
+    <p>Manager nodes also run all Docker EE components in a replicated way, so
+by adding additional manager nodes, you’re also making the cluster highly
+available.
+<a href="/enterprise/docker-ee-architecture.md">Learn more about the Docker EE architecture.</a></p>
+  </li>
+  <li>
+    <p><strong>Worker</strong>: Worker nodes receive and execute your services and applications.
+Having multiple worker nodes allows you to scale the computing capacity of
+your cluster.</p>
+
+    <p>When deploying Docker Trusted Registry in your cluster, you deploy it to a
+worker node.</p>
+  </li>
+</ul>
+
+<h2 id="join-a-node-to-the-cluster">Join a node to the cluster</h2>
+
+<p>You can join Windows Server 2016, IBM z System, and Linux nodes to the cluster,
+but only Linux nodes can be managers.</p>
+
+<p>To join nodes to the cluster, go to the Docker EE web UI and navigate to the
+<strong>Nodes</strong> page.</p>
+
+<ol>
+  <li>Click <strong>Add Node</strong> to add a new node.</li>
+  <li>Select the type of node to add, <strong>Windows</strong> or <strong>Linux</strong>.</li>
+  <li>Click <strong>Manager</strong> if you want to add the node as a manager.</li>
+  <li>Check the <strong>Use a custom listen address</strong> option to specify the address
+and port where new node listens for inbound cluster management traffic.</li>
+  <li>Check the <strong>Use a custom listen address</strong> option to specify the
+IP address that’s advertised to all members of the cluster for API access.</li>
+</ol>
+
+<p><img src="../../../images/join-nodes-to-cluster-2.png" alt="" class="with-border" /></p>
+
+<p>Copy the displayed command, use SSH to log in to the host that you want to
+join to the cluster, and run the <code class="highlighter-rouge">docker swarm join</code> command on the host.</p>
+
+<p>To add a Windows node, click <strong>Windows</strong> and follow the instructions in
+<a href="join-windows-nodes-to-cluster.md">Join Windows worker nodes to a cluster</a>.</p>
+
+<p>After you run the join command in the node, the node is displayed on the
+<strong>Nodes</strong> page in the Docker EE web UI. From there, you can change the node’s
+cluster configuration, including its assigned orchestrator type.
+<a href="../set-orchestrator-type.md">Learn how to change the orchestrator for a node</a>.</p>
+
+<h2 id="pause-or-drain-a-node">Pause or drain a node</h2>
+
+<p>Once a node is part of the cluster, you can configure the node’s availability
+so that it is:</p>
+
+<ul>
+  <li><strong>Active</strong>: the node can receive and execute tasks.</li>
+  <li><strong>Paused</strong>: the node continues running existing tasks, but doesn’t receive
+new tasks.</li>
+  <li><strong>Drained</strong>: the node won’t receive new tasks. Existing tasks are stopped and
+replica tasks are launched in active nodes.</li>
+</ul>
+
+<p>Pause or drain a node from the <strong>Edit Node</strong> page:</p>
+
+<ol>
+  <li>In the Docker EE web UI, browse to the <strong>Nodes</strong> page and select the node.</li>
+  <li>In the details pane, click <strong>Configure</strong> and select <strong>Details</strong> to open
+the <strong>Edit Node</strong> page.</li>
+  <li>In the <strong>Availability</strong> section, click <strong>Active</strong>, <strong>Pause</strong>, or <strong>Drain</strong>.</li>
+  <li>Click <strong>Save</strong> to change the availability of the node.</li>
+</ol>
+
+<p><img src="../../../images/join-nodes-to-cluster-3.png" alt="" class="with-border" /></p>
+
+<h2 id="promote-or-demote-a-node">Promote or demote a node</h2>
+
+<p>You can promote worker nodes to managers to make UCP fault tolerant. You can
+also demote a manager node into a worker.</p>
+
+<p>To promote or demote a manager node:</p>
+
+<ol>
+  <li>Navigate to the <strong>Nodes</strong> page, and click the node that you want to demote.</li>
+  <li>In the details pane, click <strong>Configure</strong> and select <strong>Details</strong> to open
+the <strong>Edit Node</strong> page.</li>
+  <li>In the <strong>Role</strong> section, click <strong>Manager</strong> or <strong>Worker</strong>.</li>
+  <li>Click <strong>Save</strong> and wait until the operation completes.</li>
+  <li>Navigate to the <strong>Nodes</strong> page, and confirm that the node role has changed.</li>
+</ol>
+
+<p>If you’re load-balancing user requests to Docker EE across multiple manager
+nodes, don’t forget to remove these nodes from your load-balancing pool when
+you demote them to workers.</p>
+
+<h2 id="remove-a-node-from-the-cluster">Remove a node from the cluster</h2>
+
+<p>You can remove worker nodes from the cluster at any time:</p>
+
+<ol>
+  <li>Navigate to the <strong>Nodes</strong> page and select the node.</li>
+  <li>In the details pane, click <strong>Actions</strong> and select <strong>Remove</strong>.</li>
+  <li>Click <strong>Confirm</strong> when you’re prompted.</li>
+</ol>
+
+<p>Since manager nodes are important to the cluster overall health, you need to
+be careful when removing one from the cluster.</p>
+
+<p>To remove a manager node:</p>
+
+<ol>
+  <li>Make sure all nodes in the cluster are healthy. Don’t remove manager nodes
+if that’s not the case.</li>
+  <li>Demote the manager node into a worker.</li>
+  <li>Now you can remove that node from the cluster.</li>
+</ol>
+
+<h2 id="use-the-cli-to-manage-your-nodes">Use the CLI to manage your nodes</h2>
+
+<p>You can use the Docker CLI client to manage your nodes from the CLI. To do
+this, configure your Docker CLI client with a <a href="../../../user-access/cli.md">UCP client bundle</a>.</p>
+
+<p>Once you do that, you can start managing your UCP nodes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node <span class="nb">ls</span>
+</code></pre></div></div>

@@ -1,0 +1,235 @@
+<p>Docker Enterprise Edition supports worker nodes that run on Windows Server 2016 or 1709.
+Only worker nodes are supported on Windows, and all manager nodes in the cluster
+must run on Linux.</p>
+
+<p>Follow these steps to enable a worker node on Windows.</p>
+
+<ol>
+  <li>Install Docker EE Engine on Windows Server 2016.</li>
+  <li>Configure the Windows node.</li>
+  <li>Join the Windows node to the cluster.</li>
+</ol>
+
+<h2 id="install-docker-ee-engine-on-windows-server-2016-or-1709">Install Docker EE Engine on Windows Server 2016 or 1709</h2>
+
+<p><a href="/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee">Install Docker EE Engine</a>
+on a Windows Server 2016 or 1709 instance to enable joining a cluster that’s managed by
+Docker Enterprise Edition.</p>
+
+<h2 id="configure-the-windows-node">Configure the Windows node</h2>
+
+<p>Follow these steps to configure the docker daemon and the Windows environment.</p>
+
+<ol>
+  <li>Add a label to the node.</li>
+  <li>Pull the Windows-specific image of <code class="highlighter-rouge">ucp-agent</code>, which is named <code class="highlighter-rouge">ucp-agent-win</code>.</li>
+  <li>Run the Windows worker setup script provided with <code class="highlighter-rouge">ucp-agent-win</code>.</li>
+  <li>Join the cluster with the token provided by the Docker EE web UI or CLI.</li>
+</ol>
+
+<h3 id="add-a-label-to-the-node">Add a label to the node</h3>
+
+<p>Configure the Docker Engine running on the node to have a label. This makes
+it easier to deploy applications on nodes with this label.</p>
+
+<p>Create the file <code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> with the following
+content:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "labels": ["os=windows"]
+}
+</code></pre></div></div>
+
+<p>Restart Docker for the changes to take effect:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Restart-Service docker
+</code></pre></div></div>
+
+<h3 id="pull-the-windows-specific-images">Pull the Windows-specific images</h3>
+
+<p>On a manager node, run the following command to list the images that are required
+on Windows nodes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> /: images <span class="nt">--list</span> <span class="nt">--enable-windows</span>
+/ucp-agent-win:
+/ucp-dsinfo-win:
+</code></pre></div></div>
+
+<p>On Windows Server 2016, in a PowerShell terminal running as Administrator,
+log in to Docker Hub with the <code class="highlighter-rouge">docker login</code> command and pull the listed images.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image pull /ucp-agent-win:
+docker image pull /ucp-dsinfo-win:
+</code></pre></div></div>
+
+<h3 id="run-the-windows-node-setup-script">Run the Windows node setup script</h3>
+
+<p>You need to open ports 2376 and 12376, and create certificates
+for the Docker daemon to communicate securely. Use this command to run
+the Windows node setup script:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$script</span> <span class="o">=</span> <span class="o">[</span>ScriptBlock]::Create<span class="o">((</span>docker run --rm /ucp-agent-win: windows-script | <span class="nb">Out-String</span><span class="o">))</span>
+
+Invoke-Command <span class="nv">$script</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Docker daemon restart</p>
+
+  <p>When you run <code class="highlighter-rouge">windows-script</code>, the Docker service is unavailable temporarily.</p>
+</blockquote>
+
+<p>The Windows node is ready to join the cluster. Run the setup script on each
+instance of Windows Server that will be a worker node.</p>
+
+<h3 id="compatibility-with-daemonjson">Compatibility with daemon.json</h3>
+
+<p>The script may be incompatible with installations that use a config file at
+<code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code>. If you use such a file, make sure
+that the daemon runs on port 2376 and that it uses certificates located in
+<code class="highlighter-rouge">C:\ProgramData\docker\daemoncerts</code>. If certificates don’t exist in this
+directory, run <code class="highlighter-rouge">ucp-agent-win generate-certs</code>, as shown in Step 2 of the
+procedure in <a href="#set-up-certs-for-the-dockerd-service">Set up certs for the dockerd service</a>.</p>
+
+<p>In the daemon.json file, set the <code class="highlighter-rouge">tlscacert</code>, <code class="highlighter-rouge">tlscert</code>, and <code class="highlighter-rouge">tlskey</code> options
+to the corresponding files in <code class="highlighter-rouge">C:\ProgramData\docker\daemoncerts</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="err">...</span><span class="w">
+		</span><span class="s2">"debug"</span><span class="p">:</span><span class="w">     </span><span class="kc">true</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"tls"</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"tlscacert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">a.pem"</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"tlscert"</span><span class="p">:</span><span class="w">   </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">ert.pem"</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"tlskey"</span><span class="p">:</span><span class="w">    </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\k</span><span class="s2">ey.pem"</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"tlsverify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+</span><span class="err">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="join-the-windows-node-to-the-cluster">Join the Windows node to the cluster</h2>
+
+<p>Now you can join the cluster by using the <code class="highlighter-rouge">docker swarm join</code> command that’s
+provided by the Docker EE web UI and CLI.</p>
+
+<ol>
+  <li>Log in to the Docker EE web UI with an administrator account.</li>
+  <li>Navigate to the <strong>Nodes</strong> page.</li>
+  <li>Click <strong>Add Node</strong> to add a new node.</li>
+  <li>In the <strong>Node Type</strong> section, click <strong>Windows</strong>.</li>
+  <li>In the <strong>Step 2</strong> section, click the checkbox for
+“I’m ready to join my windows node.”</li>
+  <li>Check the <strong>Use a custom listen address</strong> option to specify the address
+and port where new node listens for inbound cluster management traffic.</li>
+  <li>
+    <p>Check the <strong>Use a custom listen address</strong> option to specify the
+IP address that’s advertised to all members of the cluster for API access.</p>
+
+    <p><img src="../../../images/join-windows-nodes-to-cluster-1.png" alt="" class="with-border" /></p>
+  </li>
+</ol>
+
+<p>Copy the displayed command. It looks similar to the following:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm join --token &lt;token&gt; &lt;ucp-manager-ip&gt;
+</code></pre></div></div>
+
+<p>You can also use the command line to get the join token. Using your
+<a href="../../../user-access/cli.md">UCP client bundle</a>, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm join-token worker
+</code></pre></div></div>
+
+<p>Run the <code class="highlighter-rouge">docker swarm join</code> command on each instance of Windows Server that
+will be a worker node.</p>
+
+<h2 id="configure-a-windows-worker-node-manually">Configure a Windows worker node manually</h2>
+
+<p>The following sections describe how to run the commands in the setup script
+manually to configure the <code class="highlighter-rouge">dockerd</code> service and the Windows environment.
+The script opens ports in the firewall and sets up certificates for <code class="highlighter-rouge">dockerd</code>.</p>
+
+<p>To see the script, you can run the <code class="highlighter-rouge">windows-script</code> command without piping
+to the <code class="highlighter-rouge">Invoke-Expression</code> cmdlet.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run --rm /ucp-agent-win: windows-script
+</code></pre></div></div>
+
+<h3 id="open-ports-in-the-windows-firewall">Open ports in the Windows firewall</h3>
+
+<p>Docker EE requires that ports 2376 and 12376 are open for inbound TCP traffic.</p>
+
+<p>In a PowerShell terminal running as Administrator, run these commands
+to add rules to the Windows firewall.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netsh advfirewall firewall add rule <span class="nv">name</span><span class="o">=</span><span class="s2">"docker_local"</span> <span class="nb">dir</span><span class="o">=</span><span class="k">in </span><span class="nv">action</span><span class="o">=</span>allow <span class="nv">protocol</span><span class="o">=</span>TCP <span class="nv">localport</span><span class="o">=</span>2376
+netsh advfirewall firewall add rule <span class="nv">name</span><span class="o">=</span><span class="s2">"docker_proxy"</span> <span class="nb">dir</span><span class="o">=</span><span class="k">in </span><span class="nv">action</span><span class="o">=</span>allow <span class="nv">protocol</span><span class="o">=</span>TCP <span class="nv">localport</span><span class="o">=</span>12376
+</code></pre></div></div>
+
+<h3 id="set-up-certs-for-the-dockerd-service">Set up certs for the dockerd service</h3>
+
+<ol>
+  <li>Create the directory <code class="highlighter-rouge">C:\ProgramData\docker\daemoncerts</code>.</li>
+  <li>
+    <p>In a PowerShell terminal running as Administrator, run the following command
+to generate certificates.</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs /ucp-agent-win: generate-certs
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>To set up certificates, run the following commands to stop and unregister the
+<code class="highlighter-rouge">dockerd</code> service, register the service with the certificates, and restart the service.</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Stop-Service </span>docker
+dockerd --unregister-service
+dockerd -H npipe:// -H 0.0.0.0:2376 --tlsverify --tlscacert<span class="o">=</span>C:\ProgramData\docker\daemoncerts\ca.pem --tlscert<span class="o">=</span>C:\ProgramData\docker\daemoncerts\cert.pem --tlskey<span class="o">=</span>C:\ProgramData\docker\daemoncerts\key.pem --register-service
+<span class="nb">Start-Service </span>docker
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>The <code class="highlighter-rouge">dockerd</code> service and the Windows environment are now configured to join a Docker EE cluster.</p>
+
+<blockquote>
+  <p>TLS certificate setup</p>
+
+  <p>If the TLS certificates aren’t set up correctly, the Docker EE web UI shows the
+following warning.</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="windows-nodes-limitations">Windows nodes limitations</h2>
+
+<p>Some features are not yet supported on Windows nodes:</p>
+
+<ul>
+  <li>Networking
+    <ul>
+      <li>The cluster mode routing mesh can’t be used on Windows nodes. You can expose
+a port for your service in the host where it is running, and use the HTTP
+routing mesh to make your service accessible using a domain name.</li>
+      <li>Encrypted networks are not supported. If you’ve upgraded from a previous
+version, you’ll also need to recreate the <code class="highlighter-rouge">ucp-hrm</code> network to make it
+unencrypted.</li>
+    </ul>
+  </li>
+  <li>Secrets
+    <ul>
+      <li>When using secrets with Windows services, Windows stores temporary secret
+files on disk. You can use BitLocker on the volume containing the Docker
+root directory to encrypt the secret data at rest.</li>
+      <li>When creating a service which uses Windows containers, the options to
+specify UID, GID, and mode are not supported for secrets. Secrets are
+currently only accessible by administrators and users with system access
+within the container.</li>
+    </ul>
+  </li>
+  <li>Mounts
+    <ul>
+      <li>On Windows, Docker can’t listen on a Unix socket. Use TCP or a named pipe
+instead.</li>
+    </ul>
+  </li>
+</ul>

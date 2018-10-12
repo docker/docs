@@ -1,0 +1,351 @@
+<p>Docker UCP integrates with LDAP directory services, so that you can manage
+users and groups from your organization’s directory and it will automatically
+propagate that information to UCP and DTR.</p>
+
+<p>If you enable LDAP, UCP uses a remote directory server to create users
+automatically, and all logins are forwarded to the directory server.</p>
+
+<p>When you switch from built-in authentication to LDAP authentication,
+all manually created users whose usernames don’t match any LDAP search results
+are still available.</p>
+
+<p>When you enable LDAP authentication, you can choose whether UCP creates user
+accounts only when users log in for the first time. Select the 
+<strong>Just-In-Time User Provisioning</strong> option to ensure that the only LDAP
+accounts that exist in UCP are those that have had a user log in to UCP.</p>
+
+<h2 id="how-ucp-integrates-with-ldap">How UCP integrates with LDAP</h2>
+
+<p>You control how UCP integrates with LDAP by creating searches for users. 
+You can specify multiple search configurations, and you can specify multiple
+LDAP servers to integrate with. Searches start with the <code class="highlighter-rouge">Base DN</code>, which is
+the <em>distinguished name</em> of the node in the LDAP directory tree where the
+search starts looking for users.</p>
+
+<p>Access LDAP settings by navigating to the <strong>Authentication &amp; Authorization</strong>
+page in the UCP web UI. There are two sections for controlling LDAP searches
+and servers.</p>
+
+<ul>
+  <li><strong>LDAP user search configurations:</strong> This is the section of the
+<strong>Authentication &amp; Authorization</strong> page where you specify search
+parameters, like <code class="highlighter-rouge">Base DN</code>, <code class="highlighter-rouge">scope</code>, <code class="highlighter-rouge">filter</code>, the <code class="highlighter-rouge">username</code> attribute,
+and the <code class="highlighter-rouge">full name</code> attribute. These searches are stored in a list, and
+the ordering may be important, depending on your search configuration.</li>
+  <li><strong>LDAP server:</strong> This is the section where you specify the URL of an LDAP
+server, TLS configuration, and credentials for doing the search requests.
+Also, you provide a domain for all servers but the first one. The first
+server is considered the default domain server. Any others are associated
+with the domain that you specify in the page.</li>
+</ul>
+
+<p>Here’s what happens when UCP synchronizes with LDAP:</p>
+
+<ol>
+  <li>UCP creates a set of search results by iterating over each of the user
+search configs, in the order that you specify.</li>
+  <li>UCP choses an LDAP server from the list of domain servers by considering the
+<code class="highlighter-rouge">Base DN</code> from the user search config and selecting the domain server that
+has the longest domain suffix match.</li>
+  <li>If no domain server has a domain suffix that matches the <code class="highlighter-rouge">Base DN</code> from the
+search config, UCP uses the default domain server.</li>
+  <li>UCP combines the search results into a list of users and creates UCP
+accounts for them. If the <strong>Just-In-Time User Provisioning</strong> option is set,
+user accounts are created only when users first log in.</li>
+</ol>
+
+<p>The domain server to use is determined by the <code class="highlighter-rouge">Base DN</code> in each search config.
+UCP doesn’t perform search requests against each of the domain servers, only
+the one which has the longest matching domain suffix, or the default if there’s
+no match.</p>
+
+<p>Here’s an example. Let’s say we have three LDAP domain servers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Domain</th>
+      <th>Server URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>default</em></td>
+      <td>ldaps://ldap.example.com</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dc=subsidiary1,dc=com</code></td>
+      <td>ldaps://ldap.subsidiary1.com</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dc=subsidiary2,dc=subsidiary1,dc=com</code></td>
+      <td>ldaps://ldap.subsidiary2.com</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here are three user search configs with the following <code class="highlighter-rouge">Base DNs</code>:</p>
+
+<ul>
+  <li>
+    <p>baseDN=<code class="highlighter-rouge">ou=people,dc=subsidiary1,dc=com</code></p>
+
+    <p>For this search config, <code class="highlighter-rouge">dc=subsidiary1,dc=com</code> is the only server with a
+domain which is a suffix, so UCP uses the server <code class="highlighter-rouge">ldaps://ldap.subsidiary1.com</code>
+for the search request.</p>
+  </li>
+  <li>
+    <p>baseDN=<code class="highlighter-rouge">ou=product,dc=subsidiary2,dc=subsidiary1,dc=com</code></p>
+
+    <p>For this search config, two of the domain servers have a domain which is a
+suffix of this base DN, but <code class="highlighter-rouge">dc=subsidiary2,dc=subsidiary1,dc=com</code> is the
+longer of the two, so UCP uses the server <code class="highlighter-rouge">ldaps://ldap.subsidiary2.com</code> 
+for the search request.</p>
+  </li>
+  <li>
+    <p>baseDN=<code class="highlighter-rouge">ou=eng,dc=example,dc=com</code></p>
+
+    <p>For this search config, there is no server with a domain specified which is
+a suffix of this base DN, so UCP uses the default server, <code class="highlighter-rouge">ldaps://ldap.example.com</code>,
+for the search request.</p>
+  </li>
+</ul>
+
+<p>If there are <code class="highlighter-rouge">username</code> collisions for the search results between domains, UCP
+uses only the first search result, so the ordering of the user search configs
+may be important. For example, if both the first and third user search configs
+result in a record with the username <code class="highlighter-rouge">jane.doe</code>, the first has higher
+precedence and the second is ignored. For this reason, it’s important to choose
+a <code class="highlighter-rouge">username</code> attribute that’s unique for your users across all domains.</p>
+
+<p>Because names may collide, it’s a good idea to use something unique to the
+subsidiary, like the email address for each person. Users can log in with the
+email address, for example, <code class="highlighter-rouge">jane.doe@subsidiary1.com</code>.</p>
+
+<h2 id="configure-the-ldap-integration">Configure the LDAP integration</h2>
+
+<p>To configure UCP to create and authenticate users by using an LDAP directory,
+go to the UCP web UI, navigate to the <strong>Admin Settings</strong> page and click
+<strong>Authentication &amp; Authorization</strong> to select the method used to create and
+authenticate users.</p>
+
+<p><img src="../../../images/authentication-authorization.png" alt="" /></p>
+
+<p>In the <strong>LDAP Enabled</strong> section, click <strong>Yes</strong> to The LDAP settings appear.
+Now configure your LDAP directory integration.</p>
+
+<h2 id="default-role-for-all-private-collections">Default role for all private collections</h2>
+
+<p>Use this setting to change the default permissions of new users.</p>
+
+<p>Click the dropdown to select the permission level that UCP assigns by default
+to the private collections of new users. For example, if you change the value
+to <code class="highlighter-rouge">View Only</code>, all users who log in for the first time after the setting is
+changed have <code class="highlighter-rouge">View Only</code> access to their private collections, but permissions
+remain unchanged for all existing users.
+<a href="../../../authorization/define-roles.md">Learn more about permission levels</a>.</p>
+
+<h2 id="ldap-enabled">LDAP enabled</h2>
+
+<p>Click <strong>Yes</strong> to enable integrating UCP users and teams with LDAP servers.</p>
+
+<h2 id="ldap-server">LDAP server</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">LDAP server URL</td>
+      <td style="text-align: left">The URL where the LDAP server can be reached.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Reader DN</td>
+      <td style="text-align: left">The distinguished name of the LDAP account used for searching entries in the LDAP server. As a best practice, this should be an LDAP read-only user.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Reader password</td>
+      <td style="text-align: left">The password of the account used for searching entries in the LDAP server.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Use Start TLS</td>
+      <td style="text-align: left">Whether to authenticate/encrypt the connection after connecting to the LDAP server over TCP. If you set the LDAP Server URL field with <code class="highlighter-rouge">ldaps://</code>, this field is ignored.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Skip TLS verification</td>
+      <td style="text-align: left">Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">No simple pagination</td>
+      <td style="text-align: left">If your LDAP server doesn’t support pagination.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Just-In-Time User Provisioning</td>
+      <td style="text-align: left">Whether to create user accounts only when users log in for the first time. The default value of <code class="highlighter-rouge">true</code> is recommended. If you upgraded from UCP 2.0.x, the default is <code class="highlighter-rouge">false</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="../../../images/ldap-integration-1.png" alt="" class="with-border" /></p>
+
+<p>Click <strong>Confirm</strong> to add your LDAP domain.</p>
+
+<p>To integrate with more LDAP servers, click <strong>Add LDAP Domain</strong>.</p>
+
+<h2 id="ldap-user-search-configurations">LDAP user search configurations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: left">Description</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Base DN</td>
+      <td style="text-align: left">The distinguished name of the node in the directory tree where the search should start looking for users.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Username attribute</td>
+      <td style="text-align: left">The LDAP attribute to use as username on UCP. Only user entries with a valid username will be created. A valid username is no longer than 100 characters and does not contain any unprintable characters, whitespace characters, or any of the following characters: <code class="highlighter-rouge">/</code> <code class="highlighter-rouge">\</code> <code class="highlighter-rouge">[</code> <code class="highlighter-rouge">]</code> <code class="highlighter-rouge">:</code> <code class="highlighter-rouge">;</code> <code class="highlighter-rouge">|</code> <code class="highlighter-rouge">=</code> <code class="highlighter-rouge">,</code> <code class="highlighter-rouge">+</code> <code class="highlighter-rouge">*</code> <code class="highlighter-rouge">?</code> <code class="highlighter-rouge">&lt;</code> <code class="highlighter-rouge">&gt;</code> <code class="highlighter-rouge">'</code> <code class="highlighter-rouge">"</code>.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Full name attribute</td>
+      <td style="text-align: left">The LDAP attribute to use as the user’s full name for display purposes. If left empty, UCP will not create new users with a full name value.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Filter</td>
+      <td style="text-align: left">The LDAP search filter used to find users. If you leave this field empty, all directory entries in the search scope with valid username attributes are created as users.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Search subtree instead of just one level</td>
+      <td style="text-align: left">Whether to perform the LDAP search on a single level of the LDAP tree, or search through the full LDAP tree starting at the Base DN.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Match Group Members</td>
+      <td style="text-align: left">Whether to further filter users by selecting those who are also members of a specific group on the directory server. This feature is helpful if the LDAP server does not support <code class="highlighter-rouge">memberOf</code> search filters.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Iterate through group members</td>
+      <td style="text-align: left">If <code class="highlighter-rouge">Select Group Members</code> is selected, this option searches for users by first iterating over the target group’s membership, making a separate LDAP query for each member, as opposed to first querying for all users which match the above search query and intersecting those with the set of group members. This option can be more efficient in situations where the number of members of the target group is significantly smaller than the number of users which would match the above search filter, or if your directory server does not support simple pagination of search results.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Group DN</td>
+      <td style="text-align: left">If <code class="highlighter-rouge">Select Group Members</code> is selected, this specifies the distinguished name of the group from which to select users.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Group Member Attribute</td>
+      <td style="text-align: left">If <code class="highlighter-rouge">Select Group Members</code> is selected, the value of this group attribute corresponds to the distinguished names of the members of the group.</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="../../../images/ldap-integration-2.png" alt="" class="with-border" /></p>
+
+<p>To configure more user search queries, click <strong>Add LDAP User Search Configuration</strong>
+again. This is useful in cases where users may be found in multiple distinct
+subtrees of your organization’s directory. Any user entry which matches at
+least one of the search configurations will be synced as a user.</p>
+
+<h2 id="ldap-test-login">LDAP test login</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Username</td>
+      <td style="text-align: left">An LDAP username for testing authentication to this application. This value corresponds with the <strong>Username Attribute</strong> specified in the <strong>LDAP user search configurations</strong> section.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Password</td>
+      <td style="text-align: left">The user’s password used to authenticate (BIND) to the directory server.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Before you save the configuration changes, you should test that the integration
+is correctly configured. You can do this by providing the credentials of an
+LDAP user, and clicking the <strong>Test</strong> button.</p>
+
+<h2 id="ldap-sync-configuration">LDAP sync configuration</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Sync interval</td>
+      <td style="text-align: left">The interval, in hours, to synchronize users between UCP and the LDAP server. When the synchronization job runs, new users found in the LDAP server are created in UCP with the default permission level. UCP users that don’t exist in the LDAP server become inactive.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Enable sync of admin users</td>
+      <td style="text-align: left">This option specifies that system admins should be synced directly with members of a group in your organization’s LDAP directory. The admins will be synced to match the membership of the group. The configured recovery admin user will also remain a system admin.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Once you’ve configured the LDAP integration, UCP synchronizes users based on
+the interval you’ve defined starting at the top of the hour. When the
+synchronization runs, UCP stores logs that can help you troubleshoot when
+something goes wrong.</p>
+
+<p>You can also manually synchronize users by clicking <strong>Sync Now</strong>.</p>
+
+<h2 id="revoke-user-access">Revoke user access</h2>
+
+<p>When a user is removed from LDAP, the effect on the user’s UCP account depends
+on the <strong>Just-In-Time User Provisioning</strong> setting:</p>
+
+<ul>
+  <li><strong>Just-In-Time User Provisioning</strong> is <code class="highlighter-rouge">false</code>: Users deleted from LDAP become
+inactive in UCP after the next LDAP synchronization runs.</li>
+  <li><strong>Just-In-Time User Provisioning</strong> is <code class="highlighter-rouge">true</code>: Users deleted from LDAP can’t
+authenticate, but their UCP accounts remain active. This means that they can
+use their client bundles to run commands. To prevent this, deactivate their
+UCP user accounts.</li>
+</ul>
+
+<h2 id="data-synced-from-your-organizations-ldap-directory">Data synced from your organization’s LDAP directory</h2>
+
+<p>UCP saves a minimum amount of user data required to operate. This includes
+the value of the username and full name attributes that you have specified in
+the configuration as well as the distinguished name of each synced user.
+UCP does not store any additional data from the directory server.</p>
+
+<h2 id="sync-teams">Sync teams</h2>
+
+<p>UCP enables syncing teams with a search query or group in your organization’s
+LDAP directory.
+<a href="../../../authorization/create-teams-with-ldap.md">Sync team members with your organization’s LDAP directory</a>.</p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="../../../authorization/create-users-and-teams-manually.md">Create users and teams manually</a></li>
+  <li><a href="../../../authorization/create-teams-with-ldap.md">Create teams with LDAP</a></li>
+  <li><a href="enable-ldap-config-file.md">Enable LDAP integration by using a configuration file</a></li>
+</ul>
