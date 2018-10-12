@@ -90,10 +90,10 @@ you, but generates an error.
 ## Start a container with a bind mount
 
 Consider a case where you have a directory `source` and that when you build the
-source code, the artifacts are saved into another directory, `source/target/`.
+source code, the artifacts are saved into another directory, `source/artifacts/`.
 You want the artifacts to be available to the container at `/app/`, and you
 want the container to get access to a new build each time you build the source
-on your development host. Use the following command to bind-mount the `target/`
+on your development host. Use the following command to bind-mount the `artifacts/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
@@ -113,7 +113,7 @@ first one.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount type=bind,source="$(pwd)"/target,target=/app \
+  --mount type=bind,source="$(pwd)"/artifacts,target=/app \
   nginx:latest
 ```
 
@@ -124,7 +124,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v "$(pwd)"/target:/app \
+  -v "$(pwd)"/artifacts:/app \
   nginx:latest
 ```
 
@@ -138,7 +138,7 @@ correctly. Look for the `Mounts` section:
 "Mounts": [
     {
         "Type": "bind",
-        "Source": "/tmp/source/target",
+        "Source": "/tmp/source/artifacts",
         "Destination": "/app",
         "Mode": "",
         "RW": true,
@@ -238,7 +238,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount type=bind,source="$(pwd)"/target,target=/app,readonly \
+  --mount type=bind,source="$(pwd)"/artifacts,target=/app,readonly \
   nginx:latest
 ```
 
@@ -249,7 +249,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v "$(pwd)"/target:/app:ro \
+  -v "$(pwd)"/artifacts:/app:ro \
   nginx:latest
 ```
 
@@ -263,7 +263,7 @@ correctly. Look for the `Mounts` section:
 "Mounts": [
     {
         "Type": "bind",
-        "Source": "/tmp/source/target",
+        "Source": "/tmp/source/artifacts",
         "Destination": "/app",
         "Mode": "ro",
         "RW": false,
@@ -309,7 +309,7 @@ to already support bind propagation.
 For more information about bind propagation, see the
 [Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" class="_"}.
 
-The following example mounts the `target/` directory into the container twice,
+The following example mounts the `artifacts/` directory into the container twice,
 and the second mount sets both the `ro` option and the `rslave` bind propagation
 option.
 
@@ -326,8 +326,8 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount type=bind,source="$(pwd)"/target,target=/app \
-  --mount type=bind,source="$(pwd)"/target,target=/app2,readonly,bind-propagation=rslave \
+  --mount type=bind,source="$(pwd)"/artifacts,target=/app \
+  --mount type=bind,source="$(pwd)"/artifacts,target=/app2,readonly,bind-propagation=rslave \
   nginx:latest
 ```
 
@@ -338,8 +338,8 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v "$(pwd)"/target:/app \
-  -v "$(pwd)"/target:/app2:ro,rslave \
+  -v "$(pwd)"/artifacts:/app \
+  -v "$(pwd)"/artifacts:/app2:ro,rslave \
   nginx:latest
 ```
 
@@ -377,7 +377,7 @@ It is not possible to modify the selinux label using the `--mount` flag.
 $ docker run -d \
   -it \
   --name devtest \
-  -v "$(pwd)"/target:/app:z \
+  -v "$(pwd)"/artifacts:/app:z \
   nginx:latest
 ```
 
@@ -418,7 +418,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount type=bind,source="$(pwd)"/target,destination=/app,consistency=cached \
+  --mount type=bind,source="$(pwd)"/artifacts,destination=/app,consistency=cached \
   nginx:latest
 ```
 
@@ -429,7 +429,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v "$(pwd)"/target:/app:cached \
+  -v "$(pwd)"/artifacts:/app:cached \
   nginx:latest
 ```
 
