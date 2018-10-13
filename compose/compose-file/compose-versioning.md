@@ -252,6 +252,9 @@ Designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md), version 3 removes several options and adds
 several more.
 
+Version 3 files are supported by **Compose 1.10.0+** and require a Docker Engine
+of version **1.13.0+**.
+
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
 the [upgrading](#upgrading) guide for how to migrate away from these.
@@ -259,10 +262,21 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 - Added: [deploy](/compose/compose-file/index.md#deploy)
 
+### Version 3.1
+
+Version 3.1 files are supported by **Compose 1.11.0+** and require a Docker Engine
+of version **1.13.1+**.
+
+### Version 3.2
+
+Version 3.2 files are supported by **Compose 1.12.0+** and require a Docker Engine
+of version **17.04.0+**.
+
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
-available with Docker Engine version **17.06.0+**, and higher.
+available with Docker Engine version **17.06.0+**, and higher. Version 3.3 files are supported 
+by **Compose 1.14.0+**.
 
 Introduces the following additional parameters:
 
@@ -274,7 +288,8 @@ Introduces the following additional parameters:
 ### Version 3.4
 
 An upgrade of [version 3](#version-3) that introduces new parameters. It is
-only available with Docker Engine version **17.09.0** and higher.
+only available with Docker Engine version **17.09.0** and higher. Version 3.4 files are supported 
+by **Compose 1.17.0+**.
 
 Introduces the following additional parameters:
 
@@ -286,7 +301,8 @@ Introduces the following additional parameters:
 ### Version 3.5
 
 An upgrade of [version 3](#version-3) that introduces new parameters. It is
-only available with Docker Engine version **17.12.0** and higher.
+only available with Docker Engine version **17.12.0** and higher. Version 3.5 files are supported 
+by **Compose 1.18.0+**.
 
 Introduces the following additional parameters:
 
@@ -297,7 +313,8 @@ Introduces the following additional parameters:
 ### Version 3.6
 
 An upgrade of [version 3](#version-3) that introduces new parameters. It is
-only available with Docker Engine version **18.02.0** and higher.
+only available with Docker Engine version **18.02.0** and higher. Version 3.6 files are supported 
+by **Compose 1.20.0+**.
 
 Introduces the following additional parameters:
 
@@ -306,7 +323,8 @@ Introduces the following additional parameters:
 ### Version 3.7
 
 An upgrade of [version 3](#version-3) that introduces new parameters. It is
-only available with Docker Engine version **18.06.0** and higher.
+only available with Docker Engine version **18.06.0** and higher. Version 3.7 files are supported 
+by **Compose 1.22.0+**.
 
 Introduces the following additional parameters:
 
