@@ -14,7 +14,7 @@ The output files are composed from two sources:
   the CLI source code in that repository.
 
 - The **Extended Description** and **Examples** sections are pulled into the
-  YAML from the files in [https://github.com/moby/moby/tree/master/docs/reference/commandline](https://github.com/moby/moby/tree/master/docs/reference/commandline)
+  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline)
   Specifically, the Markdown inside the `## Description` and `## Examples`
   headings are parsed. Submit corrections to the text in that repository.
 
