@@ -157,7 +157,7 @@ EOF
 
 For a complete description of the parameters in an ECS task definition, please refer to the [documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html). 
 
-If you've already written a Docker compose file for your service, you can import it as an ECS task definition using the `ecs-cli`, a purpose-built CLI for interacting with the ECS APIs.  It's also possible to create a ECS service directly from a Docker compose file.  The following is an example of a docker compose file for the `db` service.
+If you've already written a Docker compose file for your service, you can import it as an ECS task definition using the `ecs-cli`, a purpose-built CLI for interacting with the ECS APIs.  It's also possible to create an ECS service directly from a Docker compose file.  The following is an example of a docker compose file for the `db` service.
 
 ```
 version: '2'
@@ -207,7 +207,7 @@ When you're ready to register the task definition, execute the following command
 ```
 aws ecs register-task-definition --cli-input-json file://db-taskdef.json  
 ```
-Now that we've created a task definition for the Postgres database, we need to create a ECS service.  When you create a service, the tasks are automatically monitored by the ECS scheduler which will restart tasks when they fail in order to maintain your desired state.  With ECS, you can also associate a name with your service in Route 53 so other services can discover it by querying DNS.  For this service, you're going to create an A record. 
+Now that we've created a task definition for the Postgres database, we need to create an ECS service.  When you create a service, the tasks are automatically monitored by the ECS scheduler which will restart tasks when they fail in order to maintain your desired state.  With ECS, you can also associate a name with your service in Route 53 so other services can discover it by querying DNS.  For this service, you're going to create an A record. 
 
 The first step involves creating a namespace for our `db` service, for example, `corp.local`.  The following command creates a private hosted zone in Route 53 that will be used for our namespace.  
 
@@ -313,7 +313,7 @@ Register the task definition.
 aws ecs register-task-definition --region <region> --cli-input-json file://redis-taskdef.json
 ```
 
-This task definition will create a ECS task that runs a `redis:alpine` container that listens on port 6379. 
+This task definition will create an ECS task that runs a `redis:alpine` container that listens on port 6379. 
 
 Register the `redis:alpine` service with the service discovery service.  This will create a A record in a Route 53 private hosted zone that other services will use for service discovery.
 

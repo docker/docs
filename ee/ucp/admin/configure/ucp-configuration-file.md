@@ -138,7 +138,7 @@ Settings for syncing users.
 
 ### auth.ldap.admin_sync_opts (optional)
 
-Settings for syncing system admininistrator users.
+Settings for syncing system administrator users.
 
 | Parameter              | Required | Description                                                                                                                                                                                               |
 |:-----------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -1006,7 +1006,7 @@ designated container or service.
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vise-versa.
+other containers in the bare-metal machine's namespace and vice versa.
 
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
@@ -1483,7 +1483,7 @@ Set a custom name for this volume.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     volumes:
@@ -1641,7 +1641,7 @@ Set a custom name for this network.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     networks:

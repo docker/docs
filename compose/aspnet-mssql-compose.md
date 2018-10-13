@@ -55,8 +55,8 @@ configure this app to use our SQL Server database, and then create a
 
     This file defines how to build the web app image. It uses the
     [microsoft/aspnetcore-build](https://hub.docker.com/r/microsoft/aspnetcore-build/),
-    map the volume with the generated code, restore the dependencies, build the
-    project and expose port 80. After that, it calls an `entrypoint` script
+    maps the volume with the generated code, restores the dependencies, builds the
+    project and exposes port 80. After that, it calls an `entrypoint` script
     that we create in the next step.
 
 1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
@@ -186,7 +186,7 @@ configure this app to use our SQL Server database, and then create a
     Go ahead and try out the website! This sample uses the SQL Server
     database image in the back-end for authentication.
 
-Ready! You now have a ASP.NET Core application running against SQL Server in
+Ready! You now have an ASP.NET Core application running against SQL Server in
 Docker Compose! This sample made use of some of the most popular Microsoft
 products for Linux. To learn more about Windows Containers, check out
 [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows)

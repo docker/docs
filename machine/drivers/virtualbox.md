@@ -35,7 +35,7 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-hostonly-no-dhcp`: Disable the Host Only DHCP Server
 -   `--virtualbox-import-boot2docker-vm`: The name of a Boot2Docker VM to import.
 -   `--virtualbox-memory`: Size of memory for the host in MB.
--   `--virtualbox-nat-nictype`: Specify the NAT Network Adapter Type. Possible values are are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
+-   `--virtualbox-nat-nictype`: Specify the NAT Network Adapter Type. Possible values are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
