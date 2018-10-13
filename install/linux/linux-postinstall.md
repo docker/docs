@@ -47,6 +47,12 @@ To create the `docker` group and add your user:
 
     On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
 
+    To update an existing shell without logging out, it may be possible to use `newgrp`.
+
+    ```bash
+    $ newgrp docker
+    ```
+
 4.  Verify that you can run `docker` commands without `sudo`.
 
     ```bash
