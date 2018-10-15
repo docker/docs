@@ -6,7 +6,7 @@ keywords: Docker EE, UCP, configuration, config
 
 There are two ways to configure UCP:
 - through the web interface, or
-- importing and exporting the UCP config in a TOML file. For more information about TOML, see [here on GitHub](https://github.com/toml-lang/toml/blob/master/README.md))
+- by importing and exporting the UCP config in a TOML file. For more information about TOML, see [the TOML README on GitHub](https://github.com/toml-lang/toml/blob/master/README.md))
 
 You can customize the UCP installation by creating a configuration file at the
 time of installation. During the installation, UCP detects and starts using the
@@ -45,10 +45,10 @@ UCP and apply your configuration changes:
 curl --cacert ca.pem --cert cert.pem --key key.pem --upload-file ucp-config.toml https://UCP_HOST/api/ucp/config-toml
 ```
 
-## Apply existing configuration file at install time.
-You can configure UCP to import an existing configuration file at install time. To do this using the Configs feature of Docker Swarm, follow these steps.
+## Apply existing configuration file at install time
+You can configure UCP to import an existing configuration file at install time. To do this using the **Configs** feature of Docker Swarm, follow these steps.
 
-1. Create a Docker Swarm Config object with a name of `com.docker.ucp.config` and having a value of your UCP config TOML file contents.
+1. Create a **Docker Swarm Config** object with a name of `com.docker.ucp.config` and having a value of your UCP config TOML file contents.
 2. When installing UCP on that cluster, be sure to specify the `--existing-config` flag to instruct the installer to
 use that object as its initial configuration.
 3. After installation, remove the `com.docker.ucp.config` Config object.
