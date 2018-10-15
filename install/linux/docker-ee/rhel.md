@@ -78,7 +78,7 @@ Reload the Docker configuration to systemd.
 
 Restart the Docker service as root.
 
-`$ sudo service dockerd restart`
+`$ sudo systemctl restart docker`
 
 To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
 
@@ -101,7 +101,7 @@ Reload the Docker configuration to systemd.
 
 Restart the Docker service as root.
 
-`$ sudo service dockerd restart`
+`$ sudo systemctl restart docker`
 
 ### Find your Docker EE repo URL
 
