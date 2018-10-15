@@ -10,8 +10,7 @@ provides the secure networking functionality for the container communication wit
 
 UCP supports third-party Container Networking Interface (CNI) plugins  by using the `--cni-installer-url` 
 option. By default, Docker EE installs the built-in [Calico](https://github.com/projectcalico/cni-plugin) 
-plugin, but you can override the default and install a plugin of your choice, like 
-[Flannel](https://github.com/coreos/flannel) or [Weave](https://www.weave.works/).
+plugin, but you can override the default and install a Docker certified plugin.
 
 # Install UCP with a custom CNI plugin
 
