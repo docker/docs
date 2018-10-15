@@ -4,61 +4,54 @@ description: Set up UCP deployments by using a configuration file.
 keywords: Docker EE, UCP, configuration, config
 ---
 
-You have two options to configure UCP: through the web UI, or using a Docker
-config object. In most cases, the web UI is a front-end for changing the
-configuration file.
+There are two ways to configure UCP:
+- through the web interface, or
+- importing and exporting the UCP config in a TOML file. For more information about TOML, see [here on GitHub](https://github.com/toml-lang/toml/blob/master/README.md))
 
-You can customize how UCP is installed by creating a configuration file upfront.
-During the installation UCP detects and starts using the configuration.
+You can customize the UCP installation by creating a configuration file at the
+time of installation. During the installation, UCP detects and starts using the
+configuration specified in this file.
 
 ## UCP configuration file
 
-The `ucp-agent` service uses a configuration file to set up UCP.
 You can use the configuration file in different ways to set up your UCP
 cluster.
 
-- Install one cluster and use the UCP web UI to configure it as desired,
-  extract the configuration file, edit it as needed, and use the edited
-  config file to make copies to multiple other cluster.
-- Install a UCP cluster, extract and edit the configuration file, and use the
-  CLI to apply the new configuration to the same cluster.
+- Install one cluster and use the UCP web interface to configure it as desired,
+  export the configuration file, edit it as needed, and then import the edited
+  configuration file into multiple other clusters.
+- Install a UCP cluster, export and edit the configuration file, and then use the
+  API to import the new configuration into the same cluster.
 - Run the `example-config` command, edit the example configuration file, and
-  apply the file at install time or after installation.
+  set the configuration at install time or import after installation.
 
 Specify your configuration settings in a TOML file.
-[Learn about Tom's Obvious, Minimal Language](https://github.com/toml-lang/toml/blob/master/README.md).
 
-The configuration has a versioned naming convention, with a trailing decimal
-number that increases with each version, like `com.docker.ucp.config-1`. The
-`ucp-agent` service maps the configuration to the file at `/etc/ucp/ucp.toml`.
+## Export and modify existing configuration
 
-## Inspect and modify existing configuration
-
-Use the `docker config inspect` command to view the current settings and emit
-them to a file.
+Use the `Get Config TOML` API to export the current settings and emit them to a file. From within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md),
+and with the UCP hostname `UCP_HOST`, the following `curl` command will export
+the current UCP configuration to a file named `ucp-config.toml`:
 
 ```bash
-{% raw %}
-# CURRENT_CONFIG_NAME will be the name of the currently active UCP configuration
-CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}')
-# Collect the current config with `docker config inspect`
-docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
-{% endraw %}
+curl --cacert ca.pem --cert cert.pem --key key.pem https://UCP_HOST/api/ucp/config-toml > ucp-config.toml
 ```
 
-Edit the file, then use the `docker config create` and `docker service update`
-commands to create and apply the configuration from the file.
+Edit this file, then use the following `curl` command to import it back into
+UCP and apply your configuration changes:
 
 
 ```bash
-# NEXT_CONFIG_NAME will be the name of the new UCP configuration
-NEXT_CONFIG_NAME=${CURRENT_CONFIG_NAME%%-*}-$((${CURRENT_CONFIG_NAME##*-}+1))
-# Create the new cluster configuration from the file ucp-config.toml
-docker config create $NEXT_CONFIG_NAME  ucp-config.toml
-# Use the `docker service update` command to remove the current configuration
-# and apply the new configuration to the `ucp-agent` service.
-docker service update --config-rm $CURRENT_CONFIG_NAME --config-add source=$NEXT_CONFIG_NAME,target=/etc/ucp/ucp.toml ucp-agent
+curl --cacert ca.pem --cert cert.pem --key key.pem --upload-file ucp-config.toml https://UCP_HOST/api/ucp/config-toml
 ```
+
+## Apply existing configuration file at install time.
+You can configure UCP to import an existing configuration file at install time. To do this using the Configs feature of Docker Swarm, follow these steps.
+
+1. Create a Docker Swarm Config object with a name of `com.docker.ucp.config` and having a value of your UCP config TOML file contents.
+2. When installing UCP on that cluster, be sure to specify the `--existing-config` flag to instruct the installer to
+use that object as its initial configuration.
+3. After installation, remove the `com.docker.ucp.config` Config object.
 
 ## Example configuration file
 
@@ -96,6 +89,14 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 | `host_address` | yes      | The address for connecting to the DTR instance tied to this UCP cluster.                                                                                                                    |
 | `service_id`   | yes      | The DTR instance's OpenID Connect Client ID, as registered with the Docker authentication provider.                                                                                         |
 | `ca_bundle`    | no       | If you're using a custom certificate authority (CA), the `ca_bundle` setting specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
+
+### audit_log_configuration table (optional)
+ Configures audit logging options for UCP components.
+ | Parameter      | Required | Description                                                                                                                                                                                   |
+|:---------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `level`        | no       | Specify the audit logging level. Leave empty for disabling audit logs (default). Other legal values are "metadata" and "request". |
+| `support_dump_include_audit_logs` | no | When set to true, support dumps will include audit logs in the logs of the ucp-controller container of each manager node. The default is `false`. |
+
 
 ### scheduling_configuration table (optional)
 
@@ -165,7 +166,7 @@ components. Assigning these values overrides the settings in a container's
 | `profiling_enabled`                    | no       | Set to `true` to enable specialized debugging endpoints for profiling UCP performance. The default is `false`.                                                                                   |
 | `kv_timeout`                           | no       | Sets the key-value store timeout setting, in milliseconds. The default is `5000`.                                                                                                                |
 | `kv_snapshot_count`                    | no       | Sets the key-value store snapshot count setting. The default is `20000`.                                                                                                                         |
-| `external_service_lb`                  | no       | Specifies an optional external load balancer for default links to services with exposed ports in the web UI.                                                                                     |
+| `external_service_lb`                  | no       | Specifies an optional external load balancer for default links to services with exposed ports in the web interface.                                                                                     |
 | `cni_installer_url`                    | no       | Specifies the URL of a Kubernetes YAML file to be used for installing a CNI plugin. Applies only during initial installation. If empty, the default CNI plugin is used.                          |
 | `metrics_retention_time`               | no       | Adjusts the metrics retention time.                                                                                                                                                              |
 | `metrics_scrape_interval`              | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                                                                          |
