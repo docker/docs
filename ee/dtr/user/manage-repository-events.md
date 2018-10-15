@@ -78,4 +78,4 @@ For more details on different permission levels within DTR, see [Authentication 
 
 ## Where to go next
 
-- [Enable auto-deletion of repository events](../admin/auto-delete-repo-events.md)
+- [Enable auto-deletion of repository events](../admin/configure/auto-delete-repo-events.md)
