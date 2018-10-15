@@ -88,15 +88,15 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 |:---------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host_address` | yes      | The address for connecting to the DTR instance tied to this UCP cluster.                                                                                                                    |
 | `service_id`   | yes      | The DTR instance's OpenID Connect Client ID, as registered with the Docker authentication provider.                                                                                         |
-| `ca_bundle`    | no       | If you're using a custom certificate authority (CA), the `ca_bundle` setting specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
+| `ca_bundle`    | no       | If you're using a custom certificate authority (CA), `ca_bundle` specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
 
 ### audit_log_configuration table (optional)
 Configures audit logging options for UCP components.
 
 | Parameter      | Required | Description                                                                                                                                                                                 |
 |:---------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `level`        | no       | Specify the audit logging level. Leave empty for disabling audit logs (default). Other legal values are "metadata" and "request". |
-| `support_dump_include_audit_logs` | no | When set to true, support dumps will include audit logs in the logs of the ucp-controller container of each manager node. The default is `false`. |
+| `level`        | no       | Specify the audit logging level. Leave empty for disabling audit logs (default). Other legal values are `metadata` and `request`. |
+| `support_dump_include_audit_logs` | no | When set to true, support dumps will include audit logs in the logs of the `ucp-controller` container of each manager node. The default is `false`. |
 
 
 ### scheduling_configuration table (optional)
