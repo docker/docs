@@ -30,7 +30,7 @@ The activation can be performed either online with connection to Docker Hub, or 
 1. Check the current Docker version. Both the Docker client and server (`containerd`) need to be installed.  Your output may vary slightly from what is displayed on this page.
 
 ```
-root@docker-node:~# docker version
+$ docker version
 Client:
  Version:           18.09.0-ce
  API version:       1.39
@@ -84,11 +84,18 @@ Login Succeeded
 4. Activate the EE license. You must use sudo even if your user is part of the docker group.
 
 ```
-root@docker-node:~# sudo docker engine actviate --license dockersub.lic
-Looking for existing licenses for beluga...
-NUM                 OWNER               PRODUCT ID                     EXPIRES                         PRICING COMPONENTS
-0                   beluga          docker-ee-trial                2018-09-13 21:41:12 +0000 UTC   Nodes:10
-1                   beluga          docker-ee-trial                2018-08-31 03:17:15 +0000 UTC   Nodes:10
+$ sudo docker engine activate --license ee-engine-license-1000-nodes.lic
+License: Quantity: 400 Nodes	Expiration date: 2019-05-12	License is currently active
+18.09.0-beta: resolved
+e3cba72cdf2e: done [==================================================>]     434B/434B
+3642e2b52398: done [==================================================>]  1.161kB/1.161kB
+eb6fe2abc4ad: done [==================================================>]  4.544MB/4.544MB
+f2f08b0292f2: done [==================================================>]  25.65MB/25.65MB
+a539281ee17b: done [==================================================>]  1.122MB/1.122MB
+515c4dc2b0fe: done [==================================================>]  333.9kB/333.9kB
+2cf04a6ee63e: done [==================================================>]   4.84kB/4.84kB
+Successfully activated engine.
+Restart docker with 'systemctl restart docker' to complete the activation.
 ```
 
 **NOTE:** If the Docker EE engines are in a swarm cluster, you only need to activate the license on the 
@@ -97,7 +104,7 @@ manager node. This action stores the license as a swarm configuration, which is 
 5. Check the Docker Engine version. The server engine will now be EE, and the client will stay CE.
 ```
 
-root@docker-node:~# docker version
+$ docker version
 Client:
  Version:           18.09.0-ce
  API version:       1.39
