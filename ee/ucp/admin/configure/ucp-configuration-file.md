@@ -12,7 +12,7 @@ You can customize the UCP installation by creating a configuration file at the
 time of installation. During the installation, UCP detects and starts using the
 configuration specified in this file.
 
-## UCP configuration file
+## The UCP configuration file
 
 You can use the configuration file in different ways to set up your UCP
 cluster.
@@ -27,10 +27,10 @@ cluster.
 
 Specify your configuration settings in a TOML file.
 
-## Export and modify existing configuration
+## Export and modify an existing configuration
 
-Use the `Get Config TOML` API to export the current settings and emit them to a file. From within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md),
-and with the UCP hostname `UCP_HOST`, the following `curl` command will export
+Use the `config-toml` API to export the current settings and emit them to a file. From within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md),
+and with the UCP hostname `UCP_HOST`, the following `curl` command exports
 the current UCP configuration to a file named `ucp-config.toml`:
 
 ```bash
@@ -45,13 +45,12 @@ UCP and apply your configuration changes:
 curl --cacert ca.pem --cert cert.pem --key key.pem --upload-file ucp-config.toml https://UCP_HOST/api/ucp/config-toml
 ```
 
-## Apply existing configuration file at install time
+## Apply an existing configuration file at install time
 You can configure UCP to import an existing configuration file at install time. To do this using the **Configs** feature of Docker Swarm, follow these steps.
 
 1. Create a **Docker Swarm Config** object with a name of `com.docker.ucp.config` and having a value of your UCP config TOML file contents.
-2. When installing UCP on that cluster, be sure to specify the `--existing-config` flag to instruct the installer to
-use that object as its initial configuration.
-3. After installation, remove the `com.docker.ucp.config` Config object.
+2. When installing UCP on that cluster, specify the `--existing-config` flag to have the installer use that object for its initial configuration.
+3. After installation, delete the `com.docker.ucp.config` object.
 
 ## Example configuration file
 
