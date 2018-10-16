@@ -1572,8 +1572,6 @@ manuals:
           title: Enable SAML authentication
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
-        - path: /ee/ucp/admin/configure/external-auth/enable-ldap-config-file/
-          title: Integrate with LDAP by using a configuration file
         - path: /ee/ucp/admin/configure/license-your-installation/
           title: License your installation
         - path: /ee/ucp/admin/configure/restrict-services-to-worker-nodes/
