@@ -52,7 +52,7 @@ Server:
 
 2. Log into the Docker engine from the command line.
 
-**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current users's home directory. For CentOS and Red Hat, the `sudo` command overwrites overwrites the $HOME environment variable.
+**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current users's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
 
 
 For Ubuntu or Debian:
@@ -67,7 +67,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 ```
 
-For CentOS or Red Hat Linux, use `sudo`:
+For CentOS, use `sudo`:
 ```
 $ sudo docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
