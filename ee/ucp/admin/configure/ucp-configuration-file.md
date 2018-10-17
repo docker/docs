@@ -29,9 +29,7 @@ Specify your configuration settings in a TOML file.
 
 ## Export and modify an existing configuration
 
-Use the `config-toml` API to export the current settings and emit them to a file. From within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md),
-and with the UCP hostname `UCP_HOST`, the following `curl` command exports
-the current UCP configuration to a file named `ucp-config.toml`:
+Use the `config-toml` API to export the current settings and write them to a file. Within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md), the following command exports the current configuration for the UCP hostname `UCP_HOST` to a file named `ucp-config.toml`:
 
 ```bash
 curl --cacert ca.pem --cert cert.pem --key key.pem https://UCP_HOST/api/ucp/config-toml > ucp-config.toml
