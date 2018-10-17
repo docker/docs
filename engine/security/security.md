@@ -208,7 +208,7 @@ configuration file.  To incorporate this, Docker will use trustpinning.
 Trustpinning means Docker reposoitories with a known configured root key 
 will only be accepted.
 
-For more information on configuring Docker Content Trust Signature Verificiation, go to (sxxx)[xxx].
+For more information on configuring Docker Content Trust Signature Verificiation, go to (xxx)[xxx].
 
 ## Other kernel security features
 
