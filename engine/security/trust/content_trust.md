@@ -25,15 +25,34 @@ the `DOCKER_CONTENT_TRUST` environment variable to `1`. Refer to the
 and [Notary](../../reference/commandline/cli.md#notary) configuration
 for the docker client for more options.
 
-Once content trust is enabled, image publishers can sign their images. Image consumers can
-ensure that the images they use are signed. Publishers and consumers can be
-individuals alone or in organizations. Docker's content trust supports users and
-automated processes such as builds.
+Once content trust is enabled, image publishers can sign their images. Image consumers can ensure that the images they use are signed. Publishers and consumers can be individuals alone or in organizations. Docker's content trust supports users and automated processes such as builds.
 
 When you enable content trust, signing occurs on the client after push and
 verification happens on the client after pull if you use Docker CE. If you use
 Docker EE with UCP, and you have configured UCP to require images to be signed
 before deploying, signing is verified by UCP.
+
+To enforce Docker to run only signed images, configure the `daemon.json` file:
+
+```
+{
+    ...
+    “content-trust”: {
+        “trust-pinning”: {
+            “root-keys”: {
+                “myregistry.com/myorg/*”: [“keyID1”, “keyID2”],
+                “myregistry.com/otherorg/repo”: [“keyID3”]
+            },
+            “official-images”: true,
+        },
+        “skip-check-on-run”: true,
+        “allow-expired-trust-cache”: true,
+    }
+}
+
+```
+
+xxx - add configuration table here or xref- xxx
 
 ### Image tags and content trust
 
@@ -139,13 +158,47 @@ these various trusted operations:
 * Pull the signed image pushed above
 * Pull unsigned image pushed above
 
+### Enabling Content Trust in Docker Engine Configuration
+
+The signature verification feature is configured in the Docker daemon configuration file `daemon.json`.
+
+```
+{
+    ...
+    “content-trust”: {
+        “trust-pinning”: {
+            “root-keys”: {
+                “myregistry.com/myorg/*”: [“keyID1”, “keyID2”],
+                “myregistry.com/otherorg/repo”: [“keyID3”]
+            },
+            “official-images”: true,
+        },
+        “skip-check-on-run”: true,
+        “allow-expired-trust-cache”: true,
+    }
+}
+```
+
+| Stanza                  | Description   | 
+| ----------------------- |:-------------:|
+| trust-pinning:root-keys |A mapping of image globs to root key IDs which should have signed the root metadata of the image trust data.  These key IDs are canonical IDs; root keys in DCT are certificates tying the name of the image to the repo metadata, so each one’s ID is different per repo.  The ID of the private key (the canonical key ID) corresponding to the certificate though is the same no matter what the name of the mage.
+
+If this setting is provided, any image not matching one of these globs will not be trusted at all (with the optional exception of official images - see below)
+
+If an image’s name matches more than one glob, then the most specific (longest) one is chosen.
+
+***Note:*** the Docker Trust CLI or some other tool needs to be able to provide these canonical key IDs, 
+as opposed to just the regular key IDs |
+
 ### Enable and disable content trust per-shell or per-invocation
 
-In a shell, you can enable content trust by setting the `DOCKER_CONTENT_TRUST`
-environment variable. Enabling per-shell is useful because you can have one
-shell configured for trusted operations and another terminal shell for untrusted
-operations. You can also add this declaration to your shell profile to have it
-turned on always by default.
+Instead of enabling Docker Content Trust through the system-wide configuration, Docker
+Content Trust can be enabled or disabled on a per-shell or per-invocation basis.  
+
+To enable on a per-shell basis, enable the `DOCKER_CONTENT_TRUST` environment variable. 
+Enabling per-shell is useful because you can have one shell configured for trusted operations 
+and another terminal shell for untrusted operations. You can also add this declaration to 
+your shell profile to have it turned on always by default.
 
 To enable content trust in a `bash` shell enter the following command:
 
