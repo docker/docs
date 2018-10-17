@@ -2392,6 +2392,8 @@ manuals:
         section:
         - path: /ee/dtr/user/manage-images/
           title: Create a repository
+        - path: /ee/dtr/user/review-repository-info/
+          title: Review repository info
         - path: /ee/dtr/user/manage-images/pull-and-push-images/
           title: Pull and push images
         - path: /ee/dtr/user/manage-images/delete-images/
@@ -2425,7 +2427,7 @@ manuals:
       - sectiontitle: Manage repository events
         section:
           - title: Audit repository events
-            path: /ee/dtr/user/manage-repository-events/
+            path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
       - path: /ee/dtr/user/create-and-manage-webhooks/
