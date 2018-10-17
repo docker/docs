@@ -45,4 +45,3 @@ healthy and that all nodes have been upgraded successfully.
 | `--pod-cidr`          | Kubernetes cluster IP pool for the pods to allocated IP from (Default: 192.168.0.0/16                 |
 | `--nodeport-range`    | Allowed port range for Kubernetes services of type NodePort (Default: 32768-35535)                    |
 | `--cloud-provider`    | The cloud provider for the cluster                                                                    |
-| `--cni-installer-url` | A URL pointing to a kubernetes YAML file to be used as an installer for the CNI plugin of the cluster |

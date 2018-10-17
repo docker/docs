@@ -4,13 +4,18 @@ description: Learn how to install a Container Networking Interface plugin on Doc
 keywords: ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave, ipip, calico
 ---
 
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
 For Docker Universal Control Plane, [Project Calico](https://docs.projectcalico.org/v3.0/introduction/) 
 provides the secure networking functionality for the container communication with Kubernetes.
 
-UCP supports third-party Container Networking Interface (CNI) plugins  by using the `--cni-installer-url` 
-option. By default, Docker EE installs the built-in [Calico](https://github.com/projectcalico/cni-plugin) 
-plugin, but you can override the default and install a Docker certified plugin.
+UCP supports third-party Container Networking Interface (CNI) plugins. By default, Docker EE 
+installs the built-in [Calico](https://github.com/projectcalico/cni-plugin) plugin, but you 
+can override the default and install a Docker certified plugin.
+
+***NOTE:*** The `--cni-installer-url` option is deprecated as of the EE 2.1 release.
 
 # Install UCP with a custom CNI plugin
 
