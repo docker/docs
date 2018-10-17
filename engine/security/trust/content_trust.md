@@ -180,7 +180,7 @@ The signature verification feature is configured in the Docker daemon configurat
 ```
 
 | Stanza                  | Description   | 
-| ----------------------- |:--------------|
+| ----------------------- |---------------|
 | trust-pinning:root-keys |A mapping of image globs to root key IDs which should have signed the root metadata of the image trust data.  These key IDs are canonical IDs; root keys in DCT are certificates tying the name of the image to the repo metadata, so each one’s ID is different per repo.  The ID of the private key (the canonical key ID) corresponding to the certificate though is the same no matter what the name of the mage.
 
 If this setting is provided, any image not matching one of these globs will not be trusted at all (with the optional exception of official images - see below)
