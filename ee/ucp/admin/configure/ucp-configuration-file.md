@@ -95,7 +95,6 @@ Included when you need to set custom API headers. You can repeat this section mu
 
 | Item | Description |
 | ----------- | ----------- |
-| Header | Title |
 | `name`       | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*". |
 | `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*".  |
 
