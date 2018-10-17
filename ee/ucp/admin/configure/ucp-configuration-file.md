@@ -87,6 +87,18 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 | `service_id`   | yes      | The DTR instance's OpenID Connect Client ID, as registered with the Docker authentication provider.                                                                                         |
 | `ca_bundle`    | no       | If you're using a custom certificate authority (CA), `ca_bundle` specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
 
+### custom headers (optional)
+
+Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
+
+[custom_api_server_headers]
+
+| Item      | Description |                                                                                                                                                                                 |
+|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`       | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*". |
+| `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*".  |
+
+
 ### audit_log_configuration table (optional)
 Configures audit logging options for UCP components.
 
