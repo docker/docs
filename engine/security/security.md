@@ -199,12 +199,16 @@ capability removal, or less secure through the addition of capabilities.
 The best practice for users would be to remove all capabilities except
 those explicitly required for their processes.
 
-## Dockert Content Trust Signature Verification
+## Docker Content Trust Signature Verification
 
-The Docker Engine can be configured to only permitted to run signed 
-images. This is configured in the Dockerd configuration file.  To 
-incorporate this, Docker will use trustpinning. Trustpinning means Docker 
-reposoitories with a known configured root key will only be accepted.
+The Docker Content Trust signature verification feature is built directly 
+into the `dockerd` binary.  The Docker Engine can be configured to only 
+permitted to run signed images. This is configured in the Dockerd 
+configuration file.  To incorporate this, Docker will use trustpinning. 
+Trustpinning means Docker reposoitories with a known configured root key 
+will only be accepted.
+
+For more information on configuring Docker Content Trust Signature Verificiation, go to (xxx)[xxx].
 
 ## Other kernel security features
 
