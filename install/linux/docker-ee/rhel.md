@@ -62,8 +62,7 @@ $ sudo yum remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine \
-                  docker-ce
+                  docker-engine
 ```
 
 
