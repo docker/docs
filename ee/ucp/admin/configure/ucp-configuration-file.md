@@ -35,7 +35,7 @@ Use the `config-toml` API to export the current settings and write them to a fil
 curl --cacert ca.pem --cert cert.pem --key key.pem https://UCP_HOST/api/ucp/config-toml > ucp-config.toml
 ```
 
-Edit this file, then use the following `curl` command to import it back into
+Edit `ucp-config.toml`, then use the following `curl` command to import it back into
 UCP and apply your configuration changes:
 
 
@@ -46,7 +46,7 @@ curl --cacert ca.pem --cert cert.pem --key key.pem --upload-file ucp-config.toml
 ## Apply an existing configuration file at install time
 You can configure UCP to import an existing configuration file at install time. To do this using the **Configs** feature of Docker Swarm, follow these steps.
 
-1. Create a **Docker Swarm Config** object with a name of `com.docker.ucp.config` and having a value of your UCP config TOML file contents.
+1. Create a **Docker Swarm Config** object with a name of `com.docker.ucp.config` and the TOML value of your UCP configuration file contents.
 2. When installing UCP on that cluster, specify the `--existing-config` flag to have the installer use that object for its initial configuration.
 3. After installation, delete the `com.docker.ucp.config` object.
 
