@@ -143,6 +143,8 @@ using a version of curl that includes the SNI header with insecure requests.
 If this doesn't happen, curl displays an error saying that the SSL handshake
 was aborterd.
 
+NOTE: Currently there is no way to update expired certificates using this method. The proper way is to 
+create a new secret then update the corresponding service. 
 
 ## Let your service handle TLS
 
