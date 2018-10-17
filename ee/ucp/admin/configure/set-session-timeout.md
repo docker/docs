@@ -7,7 +7,7 @@ keywords: UCP, authorization, authentication, security, session, timeout
 Docker Universal Control Plane enables setting properties of user sessions,
 like session timeout and number of concurrent sessions.
 
-To configure UCP login sessions, go to the UCP web UI, navigate to the
+To configure UCP login sessions, go to the UCP web interface, navigate to the
 **Admin Settings** page and click **Authentication & Authorization**.
 
 ![](../../images/authentication-authorization.png)

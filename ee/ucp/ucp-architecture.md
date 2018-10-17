@@ -180,14 +180,13 @@ driver.
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
 
-## Configurations use by UCP
+## Configurations used by UCP
 
 | Configuration name             | Description                                                                                      |
 |:-------------------------------|:-------------------------------------------------------------------------------------------------|
 | com.docker.interlock.extension | Configuration for the Interlock extension service that monitors and configures the proxy service |
 | com.docker.interlock.proxy     | Configuration for the service responsible for handling user requests and routing them            |
 | com.docker.license             | The Docker EE license                                                                            |
-| com.docker.ucp.config          | The UCP controller configuration. Most of the settings available on the UCP UI are stored here   |
 | com.docker.ucp.interlock.conf  | Configuration for the core Interlock service                                                     |
 
 ## How you interact with UCP
