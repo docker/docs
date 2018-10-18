@@ -10,18 +10,16 @@ keywords: registry, immutable
 {% assign repo="wordpress" %}
 {% assign tag="latest" %}
 
-By default, users with push or [read and write access](../../admin/manage-users/permission-levels/) to a repository can push the same tag
+By default, users with [read and write access](../../admin/manage-users/permission-levels/) to a repository can push the same tag
 multiple times to that repository. For example, when ***user A*** pushes an image to `{{ org }}/{{ repo }}:{{ tag }}`, there is no preventing ***user B***
-from pushing an image with exactly the same name but a completely different functionality.
-This might make it difficult to trace the image back to the build that generated
-it.
+from pushing an image with the same name but a completely different functionality.
 
-To prevent this from happening, you can configure a repository to be immutable.
+To prevent tags from being overwritten, you can configure a repository to be immutable.
 Once configured, DTR will not allow anyone else to push another image tag with the same name.
 
 ## Make tags immutable
 
-There are two ways to enable tag immutability on a repository.  You can enable it when you create your repository, or at any time after.
+You can enable tag immutability on a repository when you create it, or at any time after.
 
 ### New Repository
 
