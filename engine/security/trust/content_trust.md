@@ -141,6 +141,32 @@ can ensure that the images they use are signed. Publishers and consumers can be 
 alone or in organizations. Docker's content trust supports users and automated processes 
 such as builds.
 
+Engine Signature Verification will prevent the following behaviors on an image:
+* Running a container to build an image (the base image must be signed, or must be scratch)
+* Creating a container from an image that isn’t signed
+* Enabling `skip-check-on-run` allows containers created by an already existing services to use whatever image was specified starting a container from an unsigned image 
+* Enabling `skip-check-on-run` also allows  containers previously created to run, independent of specified image 
+
+Content trust does not verify that a running container’s filesystem has not been altered from what 
+was in the image. For example,  it does not prevent a container from writing to the filesystem, nor 
+the container’s filesystem from being altered on disk.
+
+It will also only pull signed images from registries, but will not prevent unsigned images from being 
+imported, loaded, or created.
+
+The image name, digest, or tag must be verified if content trust is enabled. he latest DCT metadata for 
+an image must be downloaded from the trust server associated with the registry:
+* If an image tag does not have a digest, the DCT metadata translates the name to an image digest
+* If an image tag has an image digest, the DCT metadata verifies that the name matches the provided digest
+* If an image digest does not have an image tag, the DCT metadata reverse lookups and provides the image tag as well as the digest.
+
+If translation or verification fails, the request or operation requiring the image is failed.
+This can happen because the content trust server is not reachable, if the `allow-expired-trust-cache`
+is eanbled, or the the DCT metadata is used if the timestamp has not expired.
+
+Provided `skip-check-on-run` is not enabled, an initiated container's image will be re-validated 
+against the cached metadata first. If the cached metadata has expired or is not available, the image 
+will be validated using the image name, digest, or tag. 
 
 The signature verification feature is configured in the Docker daemon configuration file 
 `daemon.json`.
@@ -164,8 +190,11 @@ The signature verification feature is configured in the Docker daemon configurat
 
 | ***Stanza***                  | ***Description***   | 
 | ----------------------- |---------------|
-| `trust-pinning:root-keys` | A mapping of image globs to root key IDs which should have signed the root metadata of the image trust data.  These key IDs are canonical IDs; root keys in DCT are certificates tying the name of the image to the repo metadata, so each one’s ID is different per repo.  The ID of the private key (the canonical key ID) corresponding to the certificate though is the same no matter what the name of the image.<br>  If this setting is provided, any image not matching one of these globs will not be trusted at all (with the optional exception of official images - see below)<br> If an image’s name matches more than one glob, then the most specific (longest) one is chosen.  ***Note:*** the Docker Trust CLI or some other tool needs to be able to provide these canonical key IDs, as opposed to just the regular key IDs|
-|`trust-pinning:library-images` | Docker EE will have the docker official images root key ID hard-coded.  If this option is turned on, users will not have to look up the key ID of the Docker official library images (excluding DTR/UCP) and include it in their `trust-pinning:root-keys` setting - this will pin the official libraries (`docker.io/library/*`) to that hard-coded root key, and the official images will be trusted by default in addition to whatever images are specified by `trust-pinning:root-keys`.  <br> If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.<br>  | 
+| `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate is not dependent on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
+|`trust-pinning:library-images` | This option pins the official libraries (`docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.| 
+| `skip-check-on-run` | Specifies whether DCT image validiation exempts existing containers or services.  This determines whether the check is only on container creation or service creation, as opposed to container start or service maintenance, rescheduling, or rollback.|
+| `allow-expired-trust-cache` | Specifies whether cached locally expired metadata validates images if an external server is unreachable or does not have image trust metadata. This is necessary for machines which may be often offline, as may be the case for edge.  This does not provide mitigations against freeze attacks, which is a necessary to provide availability in low-connectivity environments. |
+
 
 ### Enable and disable content trust per-shell or per-invocation
 
