@@ -18,11 +18,11 @@ docker container run --rm \
 
 ## Description
 
-This command creates a support dump file for the specified node(s), and prints it to stdout.
+This command creates a support dump file for this node, and prints it to stdout.
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--loglines`|Specify number of lines to grab from `journalctl`. The default is 10,000 lines.|
-|`--nodes`|Select specific nodes on which to produce a support dump. Comma-separated node IDs are allowed. The default selects all nodes.|
+|`--debug, D`|Enable debug mode|
+|`--jsonlog`|Produce json formatted output for easier parsing|
