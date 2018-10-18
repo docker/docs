@@ -12,7 +12,8 @@ keywords: registry, immutable
 
 By default, users with [read and write access](../../admin/manage-users/permission-levels/) to a repository can push the same tag
 multiple times to that repository. For example, when ***user A*** pushes an image to `{{ org }}/{{ repo }}:{{ tag }}`, there is no preventing ***user B***
-from pushing an image with the same name but a completely different functionality.
+from pushing an image with the same name but a completely different functionality. This can make it difficult to trace the image back to the build that generated	
+it.
 
 To prevent tags from being overwritten, you can configure a repository to be immutable.
 Once configured, DTR will not allow anyone else to push another image tag with the same name.
