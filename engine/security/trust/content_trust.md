@@ -164,19 +164,14 @@ The signature verification feature is configured in the Docker daemon configurat
 
 | ***Stanza***                  | ***Description***   | 
 | ----------------------- |---------------|
-| `trust-pinning:root-keys` |A mapping of image globs to root key IDs which should have signed the root metadata of the image trust data.  These key IDs are canonical IDs; root keys in DCT are certificates tying the name of the image to the repo metadata, so each one’s ID is different per repo.  The ID of the private key (the canonical key ID) corresponding to the certificate though is the same no matter what the name of the mage.
-
-If this setting is provided, any image not matching one of these globs will not be trusted at all (with the optional exception of official images - see below)
-
+| `trust-pinning:root-keys` |A mapping of image globs to root key IDs which should have signed the root metadata of the image trust data.  These key IDs are canonical IDs; root keys in DCT are certificates tying the name of the image to the repo metadata, so each one’s ID is different per repo.  The ID of the private key (the canonical key ID) corresponding to the certificate though is the same no matter what the name of the mage.<br>  
+If this setting is provided, any image not matching one of these globs will not be trusted at all (with the optional exception of official images - see below)<br>
 If an image’s name matches more than one glob, then the most specific (longest) one is chosen.
 ***Note:*** the Docker Trust CLI or some other tool needs to be able to provide these canonical key IDs, 
 as opposed to just the regular key IDs   |
 |`trust-pinning:library-images` | 
-Docker EE will have the docker official images root key ID hard-coded.  If this option is turned on, users will not have to look up the key ID of the Docker official library images (excluding DTR/UCP) and include it in their `trust-pinning:root-keys` setting - this will pin the official libraries (`docker.io/library/*`) to that hard-coded root key, and the official images will be trusted by default in addition to whatever images are specified by `trust-pinning:root-keys`.
-
-Certified images from Docker Store and DTR/UCP would be considered for a future feature. 
-
-If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.  |
+Docker EE will have the docker official images root key ID hard-coded.  If this option is turned on, users will not have to look up the key ID of the Docker official library images (excluding DTR/UCP) and include it in their `trust-pinning:root-keys` setting - this will pin the official libraries (`docker.io/library/*`) to that hard-coded root key, and the official images will be trusted by default in addition to whatever images are specified by `trust-pinning:root-keys`.  <br>
+If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.<br>  |
 
 
 ### Enable and disable content trust per-shell or per-invocation
