@@ -164,6 +164,15 @@ If translation or verification fails, the request or operation requiring the ima
 This can happen because the content trust server is not reachable, if the `allow-expired-trust-cache`
 is eanbled, or the the DCT metadata is used if the timestamp has not expired.
 
+DCT checks against metadata, and this will prevent an image verification for happening twice when
+using the `docker run` command.  The `docker run` command first creates a container and starts it 
+immediately.  
+
+DCT needs to verify the image because a container could have been created before a change to the 
+Content Trust configuration. As a result, DCT enforces the new configuration by applying it to 
+the old created container. Alternately, a container could have been created significantly earlier, 
+which means the trust data for it is no longer valid. In that case, DCT will re-verify the container.
+
 Provided `skip-check-on-run` is not enabled, an initiated container's image will be re-validated 
 against the cached metadata first. If the cached metadata has expired or is not available, the image 
 will be validated using the image name, digest, or tag. 
