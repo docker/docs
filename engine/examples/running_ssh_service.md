@@ -36,6 +36,8 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 ```
 
+NOTE: use  `without-password` instead of `prohibit-password` for Ubuntu 14.04.
+
 Build the image using:
 
 ```bash
