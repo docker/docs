@@ -21,7 +21,7 @@ By default, when the garbage collection job starts DTR is put in read-only mode.
 Starting in DTR 2.5, you can configure DTR to run garbage collection jobs
 without putting DTR in read-only. This feature is still experimental.
 
-To enable this, navigate to the **DTR web UI**, go to **Settings** and
+To enable this, navigate to the **DTR web interface**, go to **Settings** and
 choose **Garbage collection**.
 
 ![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
@@ -29,8 +29,25 @@ choose **Garbage collection**.
 Once enabled this setting can't be changed back. The upgrade process might
 take a while depending on the amount of Docker images that you have stored.
 
-During this upgrade users can still push and pull images from DTR, but
-the garbage collection job will be temporarily disabled.
+![upgrade garbage collection](../../images/garbage-collection-upgrade.png){: .with-border}
+
+During this upgrade, users can still push and pull images from DTR but
+the garbage collection job will be temporarily disabled. 
+
+### Metadata Store Migration
+
+After a successful upgrade, the system will run a `metadatastoremigration` job which is necessary for online garbage collection. If the migration fails, the system will retry twice. If all three attempts fail, you will have to retrigger the `metadatastoremigration` job manually via the API. To check for the status of the `metadatastoremigration` job:
+
+1.  Select **API** from the bottom left navigation pane of the DTR web interface. 
+
+2.  Scroll down to the **Jobs** resource and use the `GET /api/v0/jobs` endpoint. 
+
+3.  Filter by action `metadatastoremigration` and click "Execute". You should see the resulting `curl` request and the job status in the **Server response**.
+
+```bash
+curl -X GET "https://<dtr-external-url>/api/v0/jobs?action=metadatastoremigration&worker=any&running=any" -H "accept: application/json"
+```
+To retrigger the job manually, see [2.5 to 2.6 upgrade](../upgrade#25-to-26-upgrade). To learn more about troubleshooting jobs using the API, see [Audit Jobs via the API](../manage-jobs/audit-jobs-via-api/).
 
 ## Schedule garbage collection
 
@@ -56,7 +73,7 @@ scheduled interval.
 ## Stop the garbage collection job
 
 Once the garbage collection job starts running, a banner is displayed on the
-web UI explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
+web interface explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
 collection job.
 
 ![](../../images/garbage-collection-3.png){: .with-border}
