@@ -15,7 +15,7 @@ UCP supports third-party Container Networking Interface (CNI) plugins. By defaul
 installs the built-in [Calico](https://github.com/projectcalico/cni-plugin) plugin, but you 
 can override the default and install a Docker certified plugin.
 
-***NOTE:*** The `--cni-installer-url` option is deprecated as of the EE 2.1 release.
+***NOTE:*** The `--cni-installer-url` option is deprecated as of the EE 2.1 release. It is replaced by the `--unmanaged-cni` option.
 
 # Install UCP with a custom CNI plugin
 
@@ -28,7 +28,7 @@ docker container run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <node-ip-address> \
-  --cni-installer-url <cni-yaml-url> \
+   --unmanaged-cni <true|false> \
   --interactive
 ```
 
