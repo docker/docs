@@ -8,20 +8,20 @@ title: CE-EE Node Activate
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 
-The Docker Engine release `18.09` release introduces a new feature called CE-EE Node Activate, which allows a user to perform an in-place seamless activation of the Enterprise engine feature-set on an existing Community Edition (CE) node through the Docker command line.
+The Docker Engine `18.09` release introduces a new feature called **CE-EE Node Activate**, which allows a user to perform an in-place seamless activation of the Enterprise engine feature set on an existing Community Edition (CE) node through the Docker command line.
 
-CE-EE Node Activate will apply a license, and if you aren't already running the Enterprise engine, and switch the Docker engine to the enterprise engine binary.
+CE-EE Node Activate will apply a license, and switch the Docker engine to the Enterprise engine binary.
 
 ## Requirements:
-* The Docker Community Edition version must be 18.09 or higher.
-* All of the Docker packages must be installed: docker-cli, docker-server, and containerd 
+* The Docker Community Edition (CE) version must be 18.09 or higher.
+* All of the Docker packages must be installed: docker-cli, docker-server, and containerd.
 
 ## Limitations
 
-* This feature is only supported on x86 Linux nodes
-* Windows nodes are not currently supported
-* Node level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker
-* Prior versions of Docker CE do not support this feature
+* This feature is only supported on x86 Linux nodes.
+* Windows nodes are not currently supported.
+* Node-level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker.
+* Prior versions of Docker CE do not support this feature.
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
@@ -52,7 +52,7 @@ Server:
 
 2. Log into the Docker engine from the command line.
 
-**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current users's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
+**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current user's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
 
 
 For Ubuntu or Debian:
@@ -81,7 +81,7 @@ Login Succeeded
 
 3. [Download your Docker Enterprise license](https://success.docker.com/article/where-is-my-docker-enterprise-edition-license) and distribute it to your Docker engines.
 
-4. Activate the EE license. You must use sudo even if your user is part of the docker group.
+4. Activate the EE license. You must use `sudo` even if your user is part of the docker group.
 
 ```
 $ sudo docker engine activate --license ee-engine-license-1000-nodes.lic
@@ -126,6 +126,6 @@ Server:
 
 **NOTE**: Your output may vary slightly from what is displayed on this page.
 
-## Off-line CE-EE node activation
+## Offline CE-EE node activation
 
-For offline CE-EE node activation, you'll need to get the enterprise engine onto the system. The recommended model is to download the EE deb or rpm packages manually and copy them to the target systems. Afterward, download the license manually, and copy that license to the target systems. Use the `--license <path/to/license.file>` command line option to the activate command.
+For offline CE-EE node activation, you'll need to get the Docker Enterprise Engine onto the system. The recommended model is to download the EE `.deb` or `.rpm` packages manually and copy them to the target systems. Afterward, download the license manually, and copy that license to the target systems. Use the `--license <path/to/license.file>` command line option to the activate command.
