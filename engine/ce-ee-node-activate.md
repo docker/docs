@@ -52,7 +52,7 @@ Server:
 
 2. Log into the Docker engine from the command line.
 
-**NOTE:** When the running the command `docker login`, the shell stores the credentials in the current user's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
+**NOTE:** When running the command `docker login`, the shell stores the credentials in the current user's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
 
 
 For Ubuntu or Debian:
