@@ -36,7 +36,7 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} ins
   <other options>
 ```
 
-The NFS storage URL should be in the format `nfs://<nfs server>/<directory>`.
+The NFS storage URL should be in the format `nfs://<nfs server>/<directory>`. If you're using **NFS v4**, you can specify additional options. See [docker/dtr install](../../../../../reference/dtr/2.6/cli/install/) for more details.
 
 When you join replicas to the DTR cluster, the replicas will pick up that
 configuration, so you don't need to specify it again.
@@ -44,7 +44,8 @@ configuration, so you don't need to specify it again.
 ### Reconfigure DTR to use NFS
 
 If you're upgrading from a previous version of DTR and are already using
-NFS you can continue using the same configurations.
+NFS you can continue using the same configurations. If you want to use **NFS v4**, see [docker/dtr reconfigure](../../../../../reference/dtr/2.6/cli/reconfigure/) for more NFS options.
+
 
 If you want to start using the new DTR built-in support for NFS you can
 reconfigure DTR:
@@ -54,8 +55,8 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} rec
   --nfs-storage-url <nfs-storage-url>
 ```
 
-If you want to reconfigure DTR to stop using NFS storage, leave the option
-in blank:
+If you want to reconfigure DTR to stop using NFS storage, leave the `--nfs-storage-url` option
+blank:
 
 ```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version}} reconfigure \
