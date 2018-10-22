@@ -40,7 +40,7 @@ healthy and that all nodes have been upgraded successfully.
 | `--pull`              | Pull UCP images: `always`, when `missing`, or `never`                                                 |
 | `--registry-username` | Username to use when pulling images                                                                   |
 | `--registry-password` | Password to use when pulling images                                                                   |
-| `--unmanaged-cni`        | This determines who manages the CNI plugin, using `true` or `false`. The default is false. The `true` value installs UCP without a managed CNI plugin. UCP and the Kubernetes components will be running but pod to pod networking will not function until a CNI plugin is manually installed. This will impact some functionality of UCP until a CNI plugin is running.    
+| `--unmanaged-cni`     | This determines who manages the CNI plugin, using `true` or `false`. The default is false. The `true` value installs UCP without a managed CNI plugin. UCP and the Kubernetes components will be running but pod to pod networking will not function until a CNI plugin is manually installed. This will impact some functionality of UCP until a CNI plugin is running.    
 |
 | `--id`                | The ID of the UCP instance to upgrade                                                                 |
 | `--host-address`      | Override the previously configured host address with this IP or network interface                     |
