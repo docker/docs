@@ -13,7 +13,7 @@ docker container run --rm -it \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
-    --unmanaged-cni <true
+    --unmanaged-cni <true|false>
     install [command options]
 ```
 
