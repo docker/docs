@@ -13,6 +13,7 @@ docker container run --rm -it \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
+    --unmanaged-cni <true
     install [command options]
 ```
 
@@ -54,6 +55,7 @@ command.
 | `--admin-username`       | The UCP administrator username                                                                                                                                                                                                            |
 | `--admin-password`       | The UCP administrator password                                                                                                                                                                                                            |
 | `--san`                  | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)                                                                                                                                              |
+| `--unmanaged-cni`        | This determines who manages the CNI plugin, using `true` or `false`. The default is false. The `true` value installs UCP without a managed CNI plugin. UCP and the Kubernetes components will be running but pod to pod networking will not function until a CNI plugin is manually installed. This will impact some functionality of UCP until a CNI plugin is running.                                                                                                                                           |
 | `--host-address`         | The network address to advertise to other nodes. Format: IP address or network interface name                                                                                                                                             |
 | `--data-path-addr`       | Address or interface to use for data path traffic. Format: IP address or network interface name                                                                                                                                           |
 | `--controller-port`      | Port for the web UI and API                                                                                                                                                                                                               |
