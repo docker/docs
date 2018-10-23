@@ -1,6 +1,6 @@
 ---
 title: About Docker Enterprise
-description: Information about Docker Enterprise Edition Platform 2.0
+description: Information about Docker Enterprise 2.1
 keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 redirect_from:
   - /enterprise/supported-platforms/
