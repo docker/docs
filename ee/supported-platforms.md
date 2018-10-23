@@ -30,7 +30,7 @@ to manage your container workloads in a flexible way. You can manage workloads
 on Windows, Linux, on-premise or on the cloud.
 
 Docker Enterprise has private image management, integrated image signing policies, and cluster
-management with support for Kubernetes and Swarm orchestrators, and allows you to implement
+management with support for Kubernetes and Swarm orchestrators. It allows you to implement
 node-based RBAC policies, image promotion policies, image mirroring, and
 scan your images for vulnerabilities. It also has support with defined SLAs and extended
 maintenance cycles for patches for up to 24 months.

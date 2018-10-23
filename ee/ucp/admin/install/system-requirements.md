@@ -13,7 +13,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker EE Engine](/ee/supported-platforms.md) version 17.06.2-ee-8;
+* [Docker EE Engine](/ee/supported-platforms.md) version 18.09.0-ee-8;
   values of `n` in the `-ee-<n>` suffix must be 8 or higher
 * Linux kernel version 3.10 or higher
 * A static IP address
@@ -30,9 +30,9 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
  * 4 vCPUs for manager nodes
  * 25-100GB of free disk space
 
-Note that Windows container images are typically larger than Linux ones and for
-this reason, you should consider provisioning more local storage for Windows
-nodes and for DTR setups that will store Windows container images.
+Note that Windows container images are typically larger than Linux ontainer images. For
+this reason, you should provision more local storage for Windows
+nodes and for any DTR setups that store Windows container images.
 
 Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
 
