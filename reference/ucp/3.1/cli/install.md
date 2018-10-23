@@ -61,7 +61,9 @@ command.
 | `--kube-apiserver-port`  | Port for the Kubernetes API server (default: 6443)                                                                                                                                                                                        |
 | `--swarm-port`           | Port for the Docker Swarm manager. Used for backwards compatibility                                                                                                                                                                       |
 | `--swarm-grpc-port`      | Port for communication between nodes                                                                                                                                                                                                      |
-| `--cni-installer-url`    | flag to indicate if cni provider is calico and managed by UCP (calico is the default CNI provider). The default value is "true" when using the default Calico CNI.        
+| `--cni-installer-url`    | Deprecated feature. A URL pointing to a Kubernetes YAML file to be used as an installer for the CNI plugin of the cluster. If specified, the default CNI plugin is not installed. If the URL uses the HTTPS scheme, no certificate verification is performed.       
+|
+| `--unmanaged-cni`        | flag to indicate if cni provider is calico and managed by UCP (calico is the default CNI provider). The default value is "true" when using the default Calico CNI.    
 |
 | `--pod-cidr`             | Kubernetes cluster IP pool for the pods to allocated IPs from (Default: 192.168.0.0/16)                                                                                                                                                    |
 | `--cloud-provider`       | The cloud provider for the cluster                                                                                                                                                                                                        |
