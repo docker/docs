@@ -1,7 +1,7 @@
 ---
 title: About Docker Enterprise
 description: Information about Docker Enterprise 2.1
-keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
+keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 redirect_from:
   - /enterprise/supported-platforms/
 green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; margin:auto;"}'
@@ -19,8 +19,6 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 > Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
 {: .important}
 
-[Learn more](https://success.docker.com/article/engine-18-03-faqs)
-
 ## Docker EE tiers
 
 {% include docker_ce_ee.md %}
@@ -34,9 +32,7 @@ on Windows, Linux, on-premise or on the cloud.
 Docker Enterprise has private image management, integrated image signing policies, and cluster
 management with support for Kubernetes and Swarm orchestrators, and allows you to implement
 node-based RBAC policies, image promotion policies, image mirroring, and
-scan your images for vulnerabilities.
-
-Docker Enterprise has enterprise class support with defined SLAs, extended
+scan your images for vulnerabilities. It also has support with defined SLAs and extended
 maintenance cycles for patches for up to 24 months.
 
 [Learn more about Docker Enterprise](/ee/index.md).
