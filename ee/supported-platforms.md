@@ -1,5 +1,5 @@
 ---
-title: About Docker EE
+title: About Docker Enterprise
 description: Information about Docker Enterprise Edition Platform 2.0
 keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 redirect_from:
@@ -25,10 +25,6 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 {% include docker_ce_ee.md %}
 
-### Enterprise Edition
-
-[Learn more about the supported platforms](#supported-platforms).
-
 ### Docker Enterprise
 
 With Docker Enterprise, you can deploy Docker Engine - Enterprise
@@ -40,7 +36,7 @@ management with support for Kubernetes and Swarm orchestrators, and allows you t
 node-based RBAC policies, image promotion policies, image mirroring, and
 scan your images for vulnerabilities.
 
-Docker EEnterprise has enterprise class support with defined SLAs, extended
+Docker Enterprise has enterprise class support with defined SLAs, extended
 maintenance cycles for patches for up to 24 months.
 
 [Learn more about Docker Enterprise](/ee/index.md).
@@ -82,7 +78,7 @@ feature negotiation.
 ## Upgrades and support
 
 If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker EE to continue to get support. We will continue to support customers
+Docker Enterprise to continue to get support. We will continue to support customers
 with valid subscriptions whether the subscription covers Docker EE or
 Commercially Supported Docker. You can choose to stay with your current
 deployed version, or you can upgrade to the latest Docker EE version. For
