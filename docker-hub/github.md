@@ -48,10 +48,10 @@ You can now re-link your account at any time.
 ## GitHub organizations
 
 GitHub organizations and private repositories forked from organizations are
-made available for auto builds using the "Docker Hub Registry" application, which
+made available for autobuilds using the "Docker Hub Registry" application, which
 needs to be added to the organization - and then applied to all users.
 
-To verify access or request access, go to your GitHub **Settings** page, select the
+To verify or request access, go to your GitHub **Settings** page. Select the
 **Applications** section from the left side bar, then click the **View** button for
 "Docker Hub Registry".
 
@@ -95,7 +95,7 @@ You can also select one or more:
 
 You can modify the description for the repository by clicking the "Description" section
 of the repository view.
-The "Full Description" is over-written by the README.md file when the
+The "Full Description" is overwritten by the **README.md** file when the
 next build is triggered.
 
 ## GitHub private submodules
@@ -156,7 +156,7 @@ build.
 ## GitHub webhook
 
 A GitHub webhook allows GitHub to notify Docker Hub when something has
-been committed to a given git repository.
+been committed to a given Git repository.
 
 When you create an Automated Build, a webhook should get automatically added to your GitHub
 repository.
