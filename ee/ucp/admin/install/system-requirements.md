@@ -80,7 +80,7 @@ host types:
 | managers          | TCP 12384               | Internal           | Port for the authentication storage backend for replication across managers   |
 | managers          | TCP 12385               | Internal           | Port for the authentication service API                                       |
 | managers          | TCP 12386               | Internal           | Port for the authentication worker                                            |
-| managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                                  |
+| managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API server Server                                                  |
 
 ## Enable ESP traffic
 

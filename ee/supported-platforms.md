@@ -23,6 +23,11 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 {% include docker_ce_ee.md %}
 
+> Note
+>
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic, Docker Enterprise - Standard,
+> and Docker Enterprise - Advanced are all now called Docker Enterprise.
+
 ### Docker Enterprise
 
 With Docker Enterprise, you can deploy Docker Engine - Enterprise
