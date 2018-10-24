@@ -35,8 +35,12 @@ adopted as quickly for consistency and compatibility reasons.
 
 **Depreciation Notice**
 
-As of EE 2.2, Docker Engine will no longer support Devicemapper as a storage driver.
+As of EE 2.2, Docker will deprecate support Device Mapper as a storage driver. It will continue to be supported at this time, but 
+support will be removed in a future release. Docker will continue to support Device Mapper for for existing EE 2.0 and 2.1 customers.
+Please contact Sales for more information.
 
+Docker reocmmends that existing customers migrate to using Overlay2 for the storage driver. The Overlay2 storage driver is now the default
+for Docker engine implementations.
 
 ## Earlier versions
 
