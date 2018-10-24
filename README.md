@@ -52,7 +52,7 @@ Most commits will be made against the `master` branch. This include:
 - Restructuring / rewriting
 - Doc bug fixing
 - Typos and grammar errors
-
+ Otimo
 One quirk of this project is that the `master` branch is where the live docs are
 published from, so upcoming features can't be documented there. See
 [Specific new features for a project](#specific-new-features-for-a-project)
