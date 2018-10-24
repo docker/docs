@@ -52,7 +52,10 @@ Server:
 
 2. Log into the Docker engine from the command line.
 
-**NOTE:** When running the command `docker login`, the shell stores the credentials in the current user's home directory. For CentOS, the `sudo` command overwrites overwrites the $HOME environment variable.
+**NOTE:** When running the command `docker login`, the shell stores the credentials in the current user's home 
+directory. RHEL and Ubuntu-based Linux distributions have different behavior for sudo. RHEL sets $HOME to point 
+to `/root` while Ubuntu leaves `$HOME` pointing to the user's home directory who ran `sudo` and this can cause 
+permission and access problems when switching between `sudo` and non-sudo'd commands.
 
 
 For Ubuntu or Debian:
