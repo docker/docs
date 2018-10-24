@@ -101,9 +101,6 @@ Successfully activated engine.
 Restart docker with 'systemctl restart docker' to complete the activation.
 ```
 
-**NOTE:** If the Docker EE engines are in a swarm cluster, you only need to activate the license on the 
-manager node. This action stores the license as a swarm configuration, which is compatible with UCP.
-
 5. Check the Docker Engine version. The engine server will become EE, and the engine client will stay CE.
 ```
 
@@ -128,6 +125,8 @@ Server:
 ```
 
 **NOTE**: Your output may vary slightly from what is displayed on this page.
+
+6. If you are running a Swarm cluster with CE, please repeat these steps on each node.
 
 ## Offline CE-EE node activation
 
