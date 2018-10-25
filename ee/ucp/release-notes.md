@@ -49,7 +49,7 @@ upgrade your installation to the latest release.
         * For an organization, the format is `org:{org-id}`
         * For a team, the format is `team:{org-id}:{team-id}`
 
-* In order to deploy Pods with containers using Restricted Parameters, a user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with the `cluster-admin` **ClusterRole**. Restricted Parameters on Containers include:
+* In order to deploy Pods with containers using Restricted Parameters, a user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
     * Extra Capabilities
@@ -57,7 +57,7 @@ upgrade your installation to the latest release.
     * Host IPC
     * Host PID
 
-* If the `cluster-admin` built-in **ClusterRole** or **ClusterRoleBinding** are deleted, you can recreate it automatically by restarting the `ucp-kube-apiserver` container on any manager node.
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them.
 
 # Version 3.0
 
@@ -66,19 +66,19 @@ upgrade your installation to the latest release.
 **Bug fixes**
 
 * Core
-  * Bumped Kubernetes version to 1.8.15.
+  * Updated Kubernetes to version 1.8.15.
   * Resolved an issue where LDAP sync jobs would crash when handling an org admin
     search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
-  * Fixed an issue that caused Azure IPAM not releasing addresses. (docker/escalation#815)
-  * Fixed an issue that caused installation of UCP on Azure unsuccessful. (docker/escalation#863)
-  * Fixed an issue that caused Interlock proxy service keeps on restarting (docker/escalation#814)
-  * Fixed an issue that caused Kubernetes DNS not working (#14064, #11981)
-  * Fixed an issue that causes a missing swarm placement constraints warning banner to show up unnecessarily. (#14539)
+  * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
+  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
+  * Fixed an issue that caused the Interlock proxy service to restart (docker/escalation#814)
+  * Fixed an issue that caused Kubernetes DNS to not work (#14064, #11981)
+  * Fixed an issue that causes a missing warning banner to appear unnecessarily. (#14539)
 * Security
   * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
 * UI
-  * Fixed an issue that caused "Per User Limit" not working on Admin Settings. (docker/escalation#639)
+  * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (docker/escalation#639)
 
 ## 3.0.4 (2018-08-09)
 
@@ -340,11 +340,11 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 **Bug fixes**
 
 * Core
-    * Resolved an issue where LDAP sync jobs would crash when handling an org admin
-    search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+    * Resolved an issue where LDAP sync jobs terminated when handling an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
     * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
 * UI
-  * Fixed an issue that caused "Per User Limit" not working on Admin Settings. (docker/escalation#639)
+  * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
 
 
 ## Version 2.2.12 (2018-08-09)
