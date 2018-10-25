@@ -21,15 +21,13 @@ consistency and compatibility reasons.
 
 ### New features for Docker Engine EE and CE
 
-* Docker CE-EE node activate, which enables a user to apply a license to a CE binary and have it seamlessly upgrade 
-to the EE binary
-* Docker Build architecture overhaul, which integrates buildKit to provide enhancements to `docker build`
+* [Docker Build architecture overhaul](/develop/develop-images/build_enhancements), which integrates buildKit to provide enhancements to `docker build`
 * Integrated containerd runtime to serve as a foundation for Docker Engine
+* [Docker CE-EE node activate](/engine/ce-ee-node-activate), which enables a user to apply a license to a CE binary and have it seamlessly upgrade to the EE binary
 
 ### New features for Docker Engine EE 
-* FIPS Compliance added for Windows Server 2016 and later
-* Docker Content Trust Enforcement for the Enterprise Engine. This allows Docker Engine from running containers
-not signed by a specific organization.
+* [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee)
+* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows Docker Engine from running containers not signed by a specific organization.
 
 ### Bug fixes
 
