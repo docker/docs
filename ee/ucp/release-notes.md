@@ -21,6 +21,8 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.0 (2018-11-8)
+
 **New Features**
 * Default address pool for Swarm is now user configurable
 * UCP now supports Kubernetes Network Encryption using IPSec
@@ -58,6 +60,17 @@ upgrade your installation to the latest release.
     * Host PID
 
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them.
+
+**Deprecated features**
+
+The following features are deprecated in UCP 3.1
+
+* Collections
+    * Nested collections are deprecated and will be removed in future versions of the product. Customers should use non-nested collections going forward.
+* Kubernetes
+    * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to Cloud Controller Manager [https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+    * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
+    * KubeDNS is deprecated in favor of CoreDNS.
 
 # Version 3.0
 
