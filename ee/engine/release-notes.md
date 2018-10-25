@@ -47,12 +47,6 @@ adopted as quickly for consistency and compatibility reasons.
 - Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
 - Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
 
-
-### Builder
-
-- Added an error if build args are missing during `docker build`. [docker/engine#25](https://github.com/docker/engine/pull/25)
-- Fixed an issue where HealthCheck runs while an image is building. [moby/moby#37413](https://github.com/moby/moby/pull/37413)
-
 ## 18.03.1-ee-3 (2018-08-30)
 
 > Important notes about this release
