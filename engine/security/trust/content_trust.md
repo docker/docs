@@ -20,14 +20,14 @@ Docker registries. These signatures allow client-side verification of the
 integrity and publisher of specific image tags.
 
 Once DCT is enabled, image publishers can sign their images. Image consumers 
-can ensure that the images they use are signed. Publishers and consumers can be individuals 
-alone or in organizations. DCT supports users and automated processes 
+can ensure that the images they use are signed. Publishers and consumers can 
+either be individuals or organizations. DCT supports users and automated processes 
 such as builds.
 
-When you enable DCT, signing occurs on the client after push and
-verification happens on the client after pull if you use Docker CE. If you use
-Docker EE with UCP, and you have configured UCP to require images to be signed
-before deploying, signing is verified by UCP.
+When you enable DCT, signing occurs on the client after push and verification 
+happens on the client after pull if you use Docker CE. If you use UCP, and you 
+have configured UCP to require images to be signed before deploying, signing is 
+verified by UCP.
 
 ### Image tags and DCT
 
@@ -135,7 +135,7 @@ these various trusted operations:
 
 ### Enabling DCT in Docker Engine Configuration
 
-Engine Signature Verification will prevent the following behaviors on an image:
+Engine Signature Verification prevents the following behaviors on an image:
 * Running a container to build an image (the base image must be signed, or must be scratch)
 * Creating a container from an image that is not signed
 
@@ -174,7 +174,7 @@ The signature verification feature is configured in the Docker daemon configurat
 
 | ***Stanza***                  | ***Description***   | 
 | ----------------------- |---------------|
-| `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate is not dependent on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
+| `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
 |`trust-pinning:library-images` | This option pins the official libraries (`docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.| 
 | `allow-expired-trust-cache` | Specifies whether cached locally expired metadata validates images if an external server is unreachable or does not have image trust metadata. This is necessary for machines which may be often offline, as may be the case for edge.  This does not provide mitigations against freeze attacks, which is a necessary to provide availability in low-connectivity environments. |
 | `mode` | Specifies whether DCT is enabled and enforced.  Valid modes are: <br>
