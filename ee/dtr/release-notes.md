@@ -20,6 +20,17 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
+## 2.5.6 (2018-10-25)
+
+### Bug Fixes
+* Fixed a bug where Windows images could not be promoted. (docker/dhe-deploy#9215)
+* Removed Python3 from base image. (docker/dhe-deploy#9219)
+* Added CSP (docker/dhe-deploy#9366)
+* Included foreign layers in scanned images. (docker/dhe-deploy#9488)
+* Added dotnet.marsu to nautilus base image. (docker/dhe-deploy#9503)
+* Backported ManifestList fixes. (docker/dhe-deploy#9547)
+* Removed support sidebar link and associated content. (docker/dhe-deploy#9411)
+
 ## 2.5.5 (2018-8-30)
 
 ### Bug Fixes
@@ -160,6 +171,18 @@ specify `--log-protocol`.
   FATAL:  database files are incompatible with server
 
 # Version 2.4
+
+## Version 2.4.7
+
+(25 October 2018)
+
+### Bug Fixes
+* Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
+* Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9574)
+
+### Changelog
+* Patched security vulnerabilities in the load balancer.
+* Patch packages and base OS to eliminate and address some critical vulnerabilities in DTR dependencies.
 
 ## Version 2.4.6
 
