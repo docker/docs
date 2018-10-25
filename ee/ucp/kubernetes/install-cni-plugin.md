@@ -31,9 +31,9 @@ docker container run --rm -it --name ucp \
    --unmanaged-cni <true|false> \
   --interactive
 ```
-***NOTE:*** The `true` value installs UCP without a managed CNI plugin. UCP and the Kubernetes components will be running 
-but pod to pod networking will not function until a CNI plugin is manually installed. This will impact some 
-functionality of UCP until a CNI plugin is running.
+***NOTE:*** Setting `--unmanaged-cni` to `true` value installs UCP without a managed CNI plugin. UCP and the 
+Kubernetes components will be running but pod-to-pod networking will not function until a CNI plugin is manually 
+installed. This will impact some functionality of UCP until a CNI plugin is running.
 
 You must provide a correct YAML installation file for the CNI plugin, but most
 of the default files work on Docker EE with no modification.
