@@ -202,12 +202,10 @@ those explicitly required for their processes.
 ## Docker Content Trust Signature Verification
 
 The Docker Content Trust signature verification feature is built directly 
-into the `dockerd` binary.  The Docker Engine can be configured to only 
-permitted to run signed images. This is configured in the Dockerd 
-configuration file.  To incorporate this, the Docker Engine has 
-trustpinning configured in the `daemon.json` file.  To enable this feature, 
-trustpinning can be configured in daemon.json file, whereby only repositories 
-signed with a user-specified root key will be allowed to be pulled and run.
+into the `dockerd` binary.  The Docker Engine can be configured to only run 
+signed images. This is configured in the Dockerd configuration file. 
+To enable this feature, trustpinning can be configured in `daemon.json`, whereby 
+only repositories signed with a user-specified root key can be pulled and run.
   
 This provides insight to administrators that was not previously available with 
 the CLI being responsible for enforcing and performing image signature verification. 
