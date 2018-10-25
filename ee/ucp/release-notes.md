@@ -67,8 +67,8 @@ upgrade your installation to the latest release.
 
 * Core
   * Updated Kubernetes to version 1.8.15.
-  * Resolved an issue where LDAP sync jobs would crash when handling an org admin
-    search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Resolved an issue where LDAP sync jobs would terminate when processing an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
   * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
   * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
@@ -340,7 +340,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 **Bug fixes**
 
 * Core
-    * Resolved an issue where LDAP sync jobs terminated when handling an org admin
+    * Resolved an issue where LDAP sync jobs terminated when processing an org admin
     Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
     * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
 * UI
