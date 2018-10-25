@@ -45,4 +45,4 @@ healthy and that all nodes have been upgraded successfully.
 | `--pod-cidr`          | Kubernetes cluster IP pool for the pods to allocated IP from (Default: 192.168.0.0/16                 |
 | `--nodeport-range`    | Allowed port range for Kubernetes services of type NodePort (Default: 32768-35535)                    |
 | `--cloud-provider`    | The cloud provider for the cluster                                                                    |
-| `--unmanaged-cni`     | Flag to indicate if cni provider is calico and managed by UCP (calico is the default CNI provider). The default value is "true" when using the default Calico CNI.                                                                                                                                       |
+| `--unmanaged-cni`     | Flag to indicate if CNI provider is Calico and managed by UCP. Calico is the default CNI provider. The default value is `true` when using the default Calico CNI.                                                                                                                                       |
