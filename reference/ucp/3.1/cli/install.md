@@ -29,8 +29,8 @@ When installing UCP you can customize:
 If you're joining more nodes to this swarm, open the following ports in your
 firewall:
 
-  * 443 or the '--controller-port'
-  * 2376 or the '--swarm-port'
+  * 443 or the `--controller-port`
+  * 2376 or the `--swarm-port`
   * 12376, 12379, 12380, 12381, 12382, 12383, 12384, 12385, 12386, 12387
   * 4789 (udp) and 7946 (tcp/udp) for overlay networking
 
