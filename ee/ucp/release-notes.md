@@ -57,9 +57,28 @@ upgrade your installation to the latest release.
     * Host IPC
     * Host PID
 
-* If the `cluster-admin` built-in **ClusterRole** or **ClusterRoleBinding** are deleted, you can recreate it automatically by restarting the `ucp-kube-apiserver` container on any manager node.    
+* If the `cluster-admin` built-in **ClusterRole** or **ClusterRoleBinding** are deleted, you can recreate it automatically by restarting the `ucp-kube-apiserver` container on any manager node.
 
 # Version 3.0
+
+## 3.0.6 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+  * Bumped Kubernetes version to 1.8.15.
+  * Resolved an issue where LDAP sync jobs would crash when handling an org admin
+    search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixed an issue that caused Azure IPAM not releasing addresses. (docker/escalation#815)
+  * Fixed an issue that caused installation of UCP on Azure unsuccessful. (docker/escalation#863)
+  * Fixed an issue that caused Interlock proxy service keeps on restarting (docker/escalation#814)
+  * Fixed an issue that caused Kubernetes DNS not working (#14064, #11981)
+  * Fixed an issue that causes a missing swarm placement constraints warning banner to show up unnecessarily. (#14539)
+* Security
+  * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
+* UI
+  * Fixed an issue that caused "Per User Limit" not working on Admin Settings. (docker/escalation#639)
 
 ## 3.0.4 (2018-08-09)
 
@@ -315,6 +334,18 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.14 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+    * Resolved an issue where LDAP sync jobs would crash when handling an org admin
+    search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+    * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+* UI
+  * Fixed an issue that caused "Per User Limit" not working on Admin Settings. (docker/escalation#639)
+
 
 ## Version 2.2.12 (2018-08-09)
 
