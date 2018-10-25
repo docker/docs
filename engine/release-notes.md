@@ -27,8 +27,9 @@ to the EE binary
 * Integrated containerd runtime to serve as a foundation for Docker Engine
 
 ### New features for Docker Engine EE 
-* Improved FIPS implementation to include Windows support.
-* Docker Content Trust Enforcement for the Enterprise Engine. This prevents Docker Engine from running containers not signed by a specific organization.
+* FIPS Compliance added for Windows Server 2016 and later
+* Docker Content Trust Enforcement for the Enterprise Engine. This allows Docker Engine from running containers
+not signed by a specific organization.
 
 ### Bug fixes
 
