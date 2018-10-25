@@ -1,10 +1,10 @@
 ---
 title: docker/ucp install
-description: Install UCP on this node
+description: Install UCP on a node
 keywords: ucp, cli, install
 ---
 
-Install UCP on this node
+Install UCP on a node
 
 ## Usage
 
@@ -18,7 +18,7 @@ docker container run --rm -it \
 
 ## Description
 
-This command initializes a new swarm, turns this node into a manager, and installs
+This command initializes a new swarm, turns anode into a manager, and installs
 Docker Universal Control Plane (UCP).
 
 When installing UCP you can customize:
