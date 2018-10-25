@@ -23,14 +23,8 @@ Docker Universal Control Plane (UCP).
 
 When installing UCP you can customize:
 
-  * The certificates used by the UCP web server. Create a volume
-    named `ucp-controller-server-certs` and copy the `ca.pem`, `cert.pem`, and `key.pem`
-    files to the root directory. Then run the install command with the
-    `--external-server-cert` flag.
-
-  * The license used by UCP, by bind-mounting the file at
-    `/config/docker_subscription.lic` in the tool.  E.g. `-v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic`
-    or by specifying with `--license "$(cat license.lic)`
+  * The UCP web server certificates. Create a volume named `ucp-controller-server-certs` and copy the `ca.pem`, `cert.pem`, and `key.pem` files to the root directory. Then run the install command with the `--external-server-cert` flag.
+  * The UCP license, by bind-mounting the file at  `/config/docker_subscription.lic` in the tool.  E.g. `-v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic` or by specifying with `--license "$(cat license.lic)`
 
 If you're joining more nodes to this swarm, open the following ports in your
 firewall:
