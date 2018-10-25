@@ -182,6 +182,11 @@ The signature verification feature is configured in the Docker daemon configurat
 `permissive`: Verification will be performed, but only failures will only be logged and remain unenforced.  This configuration is intended for testing of changes related to content-trust. <br>
 `enforced`: DCT will be enforced and an image that cannot be verified successfully will not be pulled or run. |
 
+***Note:*** The DCT configuration defined here is agnostic of any policy defined in 
+[UCP](https://docs.docker.com/v17.09/datacenter/ucp/2.0/guides/content-trust/#configure-ucp). 
+Images that can be deployed by the UCP trust policy but are disallowed by the Docker Engine 
+configuration will not successfully be deployed or run on that engine.
+
 ### Enable and disable DCT per-shell or per-invocation
 
 Instead of enabling DCT through the system-wide configuration, DCT can be enabled or disabled 
