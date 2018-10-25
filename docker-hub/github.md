@@ -10,7 +10,6 @@ skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 ## Linking Docker Hub to a GitHub account
 
 > Automated Build Permissions
-
 > Automated Builds currently require *read* and *write* access since
 > [Docker Hub](https://hub.docker.com) needs to set up a GitHub webhook.
 > We have no choice here &ndash; this is how GitHub manages permissions.
