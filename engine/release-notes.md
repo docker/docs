@@ -61,6 +61,14 @@ Remove 'docker-' prefix for containerd and runc binaries
 * Fix pipe handling in `ConEmu` and `ConsoleZ` 
 * Fix long startup on Windows, with non-HNS governed Hyper-V networks 
 
+### Logging
+
+* Add "local" log driver 
+* Amazon CloudWatch: add awslogs-endpoint logging option 
+* Fix a possible deadlock on closing the watcher on kqueue
+* Check for the runtime OS and use poller based watcher to work around the file caching issue in Windows 
+* Fix json-log file descriptors leaking when using `--follow` 
+
 
 ### Deprecation Notice
 
