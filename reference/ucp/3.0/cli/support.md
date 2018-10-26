@@ -4,7 +4,7 @@ description: Create a support dump for UCP nodes
 keywords: ucp, cli, support, support dump, troubleshooting
 ---
 
-Create a support dump for specified UCP nodes
+Create a support dump for specified UCP nodes. You create a support dump to help [Docker Support](http://success.docker.com/support) understand your environment and more effectively troubleshoot issues in resolving your support case.
 
 ## Usage
 
