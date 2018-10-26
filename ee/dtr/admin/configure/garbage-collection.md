@@ -13,24 +13,40 @@ layers, thus saving you disk space. This process is also known as garbage collec
 First you configure DTR to run a garbage collection job on a fixed schedule. At
 the scheduled time DTR:
 
-2. Identifies and marks unused image layers.
-3. Deletes the marked image layers.
+1. Identifies and marks unused image layers.
+2. Deletes the marked image layers.
 
-By default, when the garbage collection job starts DTR is put in read-only mode.
+When garbage collection starts, DTR is put into read-only mode by default.
+
+## Improved garbage collection (Experimental)
 
 Starting in DTR 2.5, you can configure DTR to run garbage collection jobs
 without putting DTR in read-only. This feature is still experimental.
 
-To enable this, navigate to the **DTR web UI**, go to **Settings** and
-choose **Garbage collection**.
+To enable this, navigate to the **DTR web interface**. Select **Settings > Garbage collection**.
 
 ![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
 
-Once enabled this setting can't be changed back. The upgrade process might
-take a while depending on the amount of Docker images that you have stored.
+Once enabled, this setting can't be changed back. The upgrade process might
+take a while depending on the amount of Docker images that you have stored. Garbage collection is temporarily 
+disabled during the upgrade to the experimental version.
+ 
+![upgrade garbage collection](../../images/garbage-collection-upgrade.png){: .with-border}
 
-During this upgrade users can still push and pull images from DTR, but
-the garbage collection job will be temporarily disabled.
+### Metadata Store Migration
+
+After a successful upgrade, the system will run a `metadatastoremigration` job which is necessary for online garbage collection. If the migration fails, the system will retry twice. If all three attempts fail, you will have to retrigger the `metadatastoremigration` job manually via the API. To check for the status of the `metadatastoremigration` job:
+
+1.  Select **API** from the bottom left navigation pane of the DTR web interface. 
+
+2.  Scroll down to the **Jobs** resource and use the `GET /api/v0/jobs` endpoint. 
+
+3.  Filter by action `metadatastoremigration` and click "Execute". You should see the resulting `curl` request and the job status in the **Server response**.
+
+```bash
+curl -X GET "https://<dtr-external-url>/api/v0/jobs?action=metadatastoremigration&worker=any&running=any" -H "accept: application/json"
+```
+To retrigger the job manually, see [2.5 to 2.6 upgrade](../upgrade#25-to-26-upgrade). To learn more about troubleshooting jobs using the API, see [Audit Jobs via the API](../manage-jobs/audit-jobs-via-api/).
 
 ## Schedule garbage collection
 
@@ -51,12 +67,13 @@ configure its schedule (in UTC time) using the cron format.
 
 Once everything is configured you can chose to **Save & start** to immediately
 run the garbage collection job, or just **Save** to run the job on the next
-scheduled interval.
+scheduled interval. If you've upgraded to [the experimental version](#improved-garbage-collection), you 
+should be able to push and pull images while garbage collection is running.
 
 ## Stop the garbage collection job
 
 Once the garbage collection job starts running, a banner is displayed on the
-web UI explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
+web interface explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
 collection job.
 
 ![](../../images/garbage-collection-3.png){: .with-border}
@@ -95,3 +112,4 @@ can be safely deleted.
 ## Where to go next
 
 - [Deploy DTR caches](deploy-caches/index.md)
+- [Upgrade DTR](../upgrade/)
