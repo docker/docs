@@ -21,6 +21,8 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.0 (2018-11-8)
+
 **New Features**
 * Default address pool for Swarm is now user configurable
 * UCP now supports Kubernetes Network Encryption using IPSec
@@ -42,7 +44,54 @@ upgrade your installation to the latest release.
 * JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
+**Known issues**
+* You must use the ID of the user, organization, or team if you are manually creating a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects.
+    * For the `User` subject Kind, the `Name` field should be the ID of the user.
+    * For the `Group` subject Kind, the format depends on whether you are creating a Binding for a team or an organization:
+        * For an organization, the format is `org:{org-id}`
+        * For a team, the format is `team:{org-id}:{team-id}`
+
+* In order to deploy Pods with containers using Restricted Parameters, a user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them.
+
+**Deprecated features**
+
+The following features are deprecated in UCP 3.1
+
+* Collections
+    * Nested collections are deprecated and will be removed in future versions of the product. Customers should use non-nested collections going forward.
+* Kubernetes
+    * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to Cloud Controller Manager [https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+    * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
+    * KubeDNS is deprecated in favor of CoreDNS.
+
 # Version 3.0
+
+## 3.0.6 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+  * Updated Kubernetes to version 1.8.15.
+  * Resolved an issue where LDAP sync jobs would terminate when processing an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
+  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
+  * Fixed an issue that caused the Interlock proxy service to restart (docker/escalation#814)
+  * Fixed an issue that caused Kubernetes DNS to not work (#14064, #11981)
+  * Fixed an issue that causes a missing warning banner to appear unnecessarily. (#14539)
+* Security
+  * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
+* UI
+  * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (docker/escalation#639)
 
 ## 3.0.4 (2018-08-09)
 
@@ -298,6 +347,18 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.14 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+    * Resolved an issue where LDAP sync jobs terminated when processing an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
+    * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+* UI
+  * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
+
 
 ## Version 2.2.12 (2018-08-09)
 
