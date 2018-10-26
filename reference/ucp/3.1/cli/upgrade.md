@@ -43,6 +43,6 @@ healthy and that all nodes have been upgraded successfully.
 | `--host-address`      | Override the previously configured host address with this IP or network interface                     |
 | `--force-minimums`    | Force the install/upgrade even if the system does not meet the minimum requirements                   |
 | `--pod-cidr`          | Kubernetes cluster IP pool for the pods to allocated IP. The default IP pool is `192.168.0.0/16`.                 |
-| `--nodeport-range`    | Allowed port range for Kubernetes services of type `NodePort` The default port range is 32768-35535.                   |
+| `--nodeport-range`    | Allowed port range for Kubernetes services of type `NodePort`. The default port range is `32768-35535`.                   |
 | `--cloud-provider`    | The cloud provider for the cluster                                                                    |
 | `--unmanaged-cni`     | Flag to indicate if CNI provider is Calico and managed by UCP. Calico is the default CNI provider. The default value is `true` when using the default Calico CNI.                                                                                                                                       |
