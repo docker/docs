@@ -25,6 +25,7 @@ consistency and compatibility reasons.
 * [Docker Build architecture overhaul](/develop/develop-images/build_enhancements), which integrates buildKit to provide enhancements to `docker build`
 * Integrated containerd runtime to serve as a foundation for Docker Engine
 * [Docker CE-EE node activate](/engine/ce-ee-node-activate), which enables a user to apply a license to a CE binary and have it seamlessly upgrade to the EE binary
+* Add support for remote connections using SSH in the daemon using `docker -H ssh://me@server`
 
 ### New features for Docker Engine EE 
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee)
@@ -32,9 +33,36 @@ consistency and compatibility reasons.
 
 ### Bug fixes
 
-### Known issues
+* Updated `bash` and `zsh` completion scripts
+* Expose product license in info output 
+* Sort plugin names and networks in a natural order 
+* Improve version output alignment 
+* Fix environment file parsing for imports of absent variables and those with no name
+* Hide `--data-path-addr` flags when connected to a daemon that doesn't support this option 
+* Fix trust inspect typo: `AdminstrativeKeys`
+* Show warnings provided by daemon 
+* Only show buildkit-specific flags if buildkit is enabled 
 
-### Depreciation Notice
+### Packaging
+Remove 'docker-' prefix for containerd and runc binaries
+
+### Daemon
+* Fix daemon won't start when "runtimes" option is defined both in config file and CLI 
+* Loosen permissions on `/etc/docker` directory 
+* Fix denial of service with large numbers in `cpuset-cpus` and `cpuset-mems`
+
+### API
+* Update API version to 1.39 
+* Do not return "<unknown>" in `/info` response 
+* Add "Warnings" to `/info` endpoint, and move detection to the daemon 
+* Builder: add prune options to the API moby
+
+### Windows
+* Fix pipe handling in `ConEmu` and `ConsoleZ` 
+* Fix long startup on Windows, with non-HNS governed Hyper-V networks 
+
+
+### Deprecation Notice
 
 Docker EE 2.1 Platform release, will serve to deprecate support of Device Mapper in a future release. 
 It will continue to be supported at this time, but  support will be removed in a future release. Docker 
@@ -934,7 +962,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 #### Swarm
 * Remove watchMiss from swarm mode [docker/libnetwork#2047](https://github.com/docker/libnetwork/pull/2047)
 
-### 17.12.0-ce (2017-12-27)
+### 17.12.0-ce 
+2017-12-27
 
 #### Known Issues
 * AWS logs batch size calculation [moby/moby#35726](https://github.com/moby/moby/pull/35726)
@@ -1036,7 +1065,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Pass Version to engine static builds [docker/docker-ce-packaging#70](https://github.com/docker/docker-ce-packaging/pull/70)
 + Added support for aarch64 on Debian (stretch/jessie) and Ubuntu Zesty or newer [docker/docker-ce-packaging#35](https://github.com/docker/docker-ce-packaging/pull/35)
 
-### 17.09.1-ce (2017-12-07)
+### 17.09.1-ce 
+2017-12-07
 
 #### Builder
 
@@ -1079,7 +1109,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 - Provide custom gRPC dialer to override default proxy dialer [docker/swarmkit/#2457](https://github.com/docker/swarmkit/pull/2457)
 - Avoids recursive readlock on swarm info [moby/moby#35388](https://github.com/moby/moby/pull/35388)
 
-### 17.09.0-ce (2017-09-26)
+### 17.09.0-ce 
+2017-09-26
 
 #### Builder
 
@@ -1143,7 +1174,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 + Remove deprecated `--enable-api-cors` daemon flag [moby/moby#34821](https://github.com/moby/moby/pull/34821)
 
-### 17.06.2-ce (2017-09-05)
+### 17.06.2-ce 
+2017-09-05
 
 #### Client
 
@@ -1158,7 +1190,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 - Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-### 17.06.1-ce (2017-08-15)
+### 17.06.1-ce 
+2017-08-15
 
 #### Builder
 
@@ -1213,7 +1246,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Cluster update and memory issue fixes [#114](https://github.com/docker/docker-ce/pull/114)
 * Changing get network request to return predefined network in swarm [#150](https://github.com/docker/docker-ce/pull/150)
 
-### 17.06.0-ce (2017-06-28)
+### 17.06.0-ce 
+2017-06-28
 
 > **Note**: Docker 17.06.0 has an issue in the image builder causing a change in the behavior
 > of the `ADD` instruction of Dockerfile when referencing a remote `.tar.gz` file. The issue will be
@@ -1317,7 +1351,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 * Disable legacy registry (v1) by default [#33629](https://github.com/moby/moby/pull/33629)
 
-### 17.03.2-ce (2017-05-29)
+### 17.03.2-ce 
+2017-05-29
 
 #### Networking
 
@@ -1339,7 +1374,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 - Fix a case where tasks could get killed unexpectedly [#33118](https://github.com/moby/moby/pull/33118)
 - Fix an issue preventing to deploy services if the registry cannot be reached despite the needed images being locally present [#33117](https://github.com/moby/moby/pull/33117)
 
-### 17.03.1-ce (2017-03-27)
+### 17.03.1-ce 
+2017-03-27
 
 #### Remote API (v1.27) & Client
 
@@ -1371,7 +1407,8 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 * Cleanup HCS on restore [#31503](https://github.com/docker/docker/pull/31503)
 
-### 17.03.0-ce (2017-03-01)
+### 17.03.0-ce 
+2017-03-01
 
 **IMPORTANT**: Starting with this release, Docker is on a monthly release cycle and uses a
 new YY.MM versioning scheme to reflect this. Two channels are available: monthly and quarterly.
@@ -1696,7 +1733,8 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 - Fix published ports not being updated if a service has the same number of host-mode published ports with Published Port 0 [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
 * Make the task termination order deterministic [docker/swarmkit#2265](https://github.com/docker/swarmkit/pull/2265)
 
-### 17.11.0-ce (2017-11-20)
+### 17.11.0-ce 
+2017-11-20
 
 > **Important**: Docker CE 17.11 is the first Docker release based on
 [containerd 1.0 beta](https://github.com/containerd/containerd/releases/tag/v1.0.0-beta.2).
