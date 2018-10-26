@@ -11,9 +11,9 @@ keywords: ucp, cli, administration, kubectl, Kubernetes, cni, Container Networki
 For Docker Universal Control Plane, [Project Calico](https://docs.projectcalico.org/v3.0/introduction/) 
 provides the secure networking functionality for the container communication with Kubernetes.
 
-UCP supports certified third-party Container Networking Interface (CNI) plugins. By default, Docker EE 
-installs the built-in [Calico](https://github.com/projectcalico/cni-plugin) plugin, but you 
-can override the default and install a Docker certified plugin.
+UCP supports certified third-party Container Networking Interface (CNI) plugins. Docker EE installs the 
+built-in [Calico](https://github.com/projectcalico/cni-plugin) plugin, but you can override that and 
+install a Docker certified plugin.
 
 ***NOTE:*** The `--cni-installer-url` option is deprecated as of UCP 3.1. It is replaced by the `--unmanaged-cni` option. 
 
