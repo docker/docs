@@ -36,35 +36,35 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} ins
   <other options>
 ```
 
-The NFS storage URL should be in the format `nfs://<nfs server>/<directory>`.
+The NFS storage URL should be in the format `nfs://<nfs server>/<directory>`. With **NFS v4**, you can specify additional options. See [docker/dtr install](../../../../../reference/dtr/2.6/cli/install/) for more details.
 
-When you join replicas to the DTR cluster, the replicas will pick up that
-configuration, so you don't need to specify it again.
+When joining replicas to a DTR cluster, the replicas will pick up your storage
+configuration, so you will not need to specify it again.
 
 ### Reconfigure DTR to use NFS
 
-If you're upgrading from a previous version of DTR and are already using
-NFS you can continue using the same configurations.
+When upgrading from a previous version of DTR that is already using
+NFS, you can continue using the same configurations. If you want to use **NFS v4**, see [docker/dtr reconfigure](../../../../../reference/dtr/2.6/cli/reconfigure/) for more NFS options.
 
-If you want to start using the new DTR built-in support for NFS you can
-reconfigure DTR:
+
+To take advantage of the new DTR built-in support for NFS, you can
+reconfigure DTR to use NFS:
 
 ```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} reconfigure \
   --nfs-storage-url <nfs-storage-url>
 ```
 
-If you want to reconfigure DTR to stop using NFS storage, leave the option
-in blank:
+To reconfigure DTR to stop using NFS storage, leave the `--nfs-storage-url` option
+blank:
 
 ```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version}} reconfigure \
   --nfs-storage-url ""
 ```
 
-If the IP address of your NFS server changes, even if the DNS address is kept
-the same, you should reconfigure DTR to stop using NFS storage, and then
-add it back again.
+If the IP address of your NFS server changes with the DNS address staying the same, you should still 
+reconfigure DTR to stop using NFS storage, and then add it back again.
 
 ## Where to go next
 
