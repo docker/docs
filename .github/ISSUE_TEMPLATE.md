@@ -12,7 +12,7 @@
 
 - I couldn't find the information I wanted. I expected to find it near the following URL: <URL>
 
-- Other: <DETAILS>
+- Other: <DETAILS....>
 
 ### Project version(s) affected
 
