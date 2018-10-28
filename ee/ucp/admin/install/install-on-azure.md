@@ -5,8 +5,11 @@ keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
 ---
 
 Docker UCP closely integrates into Microsoft Azure for its Kubernetes Networking 
-and Persistent Storage feature set. UCP deploys the Calico CNI provider for data path networking and leverages Azure CNI for IP address management. There are infrastructure prerequisites that are required prior to UCP installation for the Azure IPAM functionality.
-
+and Persistent Storage feature set. UCP deploys the Calico CNI provider, in Azure
+the Calico CNI leverages the Azure networking infrastructure for data path 
+networking and the Azure IPAM for IP address management. There are 
+infrastructure prerequisites that are required prior to UCP installation for the 
+Calico / Azure integration.
 
 ## Docker UCP Networking
 
@@ -39,8 +42,12 @@ Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups)
 components could be deployed in a second Azure Resource Group.
 - All UCP Nodes (Managers and Workers) need to be attached to the same 
 Azure Subnet.
-- All UCP (Managers and Workers) need to be tagged in Azure with the
-tag `Orchestrator=Kubernetes:1.8.11`.
+- All UCP (Managers and Workers) need to be tagged in Azure with the 
+`Orchestrator` tag. Note the value for this tag is the Kubernetes version number
+in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in each 
+UCP release. To find the relevant version please see the UCP 
+[Release Notes](../../release-notes). For example for UCP 3.0.6 the tag 
+would be `Orchestrator=Kubernetes:1.8.15`. 
 - The Azure Computer Name needs to match the Node Operating System's Hostname. 
 Note this applies to the FQDN of the host including domain names. 
 - An Azure Service Principal with `Contributor` access to the Azure Resource 
