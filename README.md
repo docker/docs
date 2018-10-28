@@ -1,17 +1,17 @@
 # Docs @ Docker
 
-Welcome to the repo for our documentation. This is the source for
-[https://docs.docker.com/](https://docs.docker.com/).
+_Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/)._
 
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy.  You can edit a page or
-request changes in the right column of every page on
-[docs.docker.com](https://docs.docker.com/).  You can also rate each page by
-clicking a link at the footer.
+_We really want your feedback, and we've made it easy.  You can edit a page or
+request changes in the right column of every page on_
+[docs.docker.com](https://docs.docker.com/).  _You can also rate each page by
+clicking a link at the footer._
 
 **Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
