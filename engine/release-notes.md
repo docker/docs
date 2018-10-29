@@ -51,7 +51,7 @@ consistency and compatibility reasons.
 * Update containerd client to v1.2.0-rc.1 [moby/moby#37664](https://github.com/moby/moby/pull/37664), [docker/engine#75](https://github.com/docker/engine/pull/75) / [moby/moby#37710](https://github.com/moby/moby/pull/37710)
 * Add support for global default address pools [moby/moby#37558](https://github.com/moby/moby/pull/37558) [docker/cli#1233](https://github.com/docker/cli/pull/1233)
 
-### Improvements for Docker Engine EE and CC
+### Improvements for Docker Engine EE and CE
 
 * Do not return "`<unknown>`" in /info response [moby/moby#37472](https://github.com/moby/moby/pull/37472)
 * BuildKit: Change `--console=[auto,false,true]` to `--progress=[auto,plain,tty]` [docker/cli#1276](https://github.com/docker/cli/pull/1276)
