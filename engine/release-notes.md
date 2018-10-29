@@ -28,18 +28,20 @@ consistency and compatibility reasons.
 * Add support for remote connections using SSH in the daemon using `docker -H ssh://me@server`
 
 ### New features for Docker Engine EE 
-* [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee)
+* [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee) 
 * [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows Docker Engine from running containers not signed by a specific organization.
 
 ### Bug fixes
 
+* Fix environment file parsing for imports of absent variables and those with no name
+* Hide `--data-path-addr` flags when connected to a daemon that doesn't support this option 
+* Fix trust inspect typo: `AdminstrativeKeys`
+
+### Minor Improvements
 * Updated `bash` and `zsh` completion scripts
 * Expose product license in info output 
 * Sort plugin names and networks in a natural order 
 * Improve version output alignment 
-* Fix environment file parsing for imports of absent variables and those with no name
-* Hide `--data-path-addr` flags when connected to a daemon that doesn't support this option 
-* Fix trust inspect typo: `AdminstrativeKeys`
 * Show warnings provided by daemon 
 * Only show buildkit-specific flags if buildkit is enabled 
 
@@ -68,6 +70,55 @@ Remove 'docker-' prefix for containerd and runc binaries
 * Fix a possible deadlock on closing the watcher on kqueue
 * Check for the runtime OS and use poller based watcher to work around the file caching issue in Windows 
 * Fix json-log file descriptors leaking when using `--follow` 
+
+### Orchestration
+
+* Block task starting until node attachments are ready 
+* Fix nil pointer dereference in node allocation 
+
+### Security
+
+* Seccomp: Whitelist syscalls linked to CAP_SYS_NICE in default seccomp profile 
+* Seccomp: move the syslog syscall to be gated by CAP_SYS_ADMIN or CAP_SYSLOG 
+* Remove support for TLS < 1.2 
+* SELinux: Fix relabeling of local volumes specified via Mounts API on selinux-enabled systems 
+* Add warning if REST API is accessible through an insecure connection 
+* Mask proxy credentials from URL when displayed in system info 
+
+### Experimental
+
+* LCOW: fix builder using wrong cache layer 
+* LCOW: Add LinuxMetadata support by default on Windows 
+* LCOW: Mount to short container paths to avoid command-line length limit 
+* LCOW: add --platform to docker import 
+
+### Networking
+
+* Fix mapping a range of host ports to a single container port 
+* Add support for global default address pools 
+* Handle systemd-resolved case providing appropriate resolv.conf to networking layer 
+* Use direct server return (DSR) in east-west overlay load balancing 
+
+### Runtime
+
+* Configure containerd log-level to be the same as dockerd 
+* Add configuration option for cri-containerd 
+* Update containerd client to v1.2.0-rc.1 
+
+### Storage drivers
+
+Fix mount propagation for btrfs 
+
+### Builder
+
+* Add support for build-time secrets using a `--secret` flag when using buildkit 
+* Add SSH agent socket forwarder (`docker build --ssh $SSHMOUNTID=$SSH_AUTH_SOCK`)
+* Allow buildkit builds to run without experimental mode enabled. Buildkit can now be configured with a specific option in `daemon.json` 
+* Implement builder prune to prune buildkit build cache 
+* Fix no error is shown if build args are missing during docker build 
+* Add `--chown` flag support for `ADD` and `COPY` commands on Windows 
+* Fix error `unexpected EOF' when adding an 8GB file moby
+* Changed `--console=[auto,false,true]` to `--progress=[auto,plain,tty]i`
 
 
 ### Deprecation Notice
