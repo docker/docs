@@ -5,7 +5,7 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
-## 1.23.0 (2018-10-10)
+## 1.23.0 (2018-10-30)
 
 ### Important note
 
@@ -23,6 +23,9 @@ naming scheme accordingly before upgrading.
 - Added `--hash` option to the `docker-compose config` command, allowing users
   to print a hash string for each service's configuration to facilitate rolling
   updates.
+
+- Added `--parallel` flag to the `docker-compose build` command, allowing
+  Compose to build up to 5 images simultaneously.
 
 - Output for the `pull` command now reports status / progress even when pulling
   multiple images in parallel.
@@ -51,13 +54,26 @@ naming scheme accordingly before upgrading.
   the actual exit code even when the watched container isn't the cause of the
   exit.
 
+- Fixed an issue that would prevent recreating a service in some cases where
+  a volume would be mapped to the same mountpoint as a volume declared inside
+  the image's Dockerfile.
+
 - Fixed a bug that caused hash configuration with multiple networks to be
   inconsistent, causing some services to be unnecessarily restarted.
+
+- Fixed a bug that would cause failures with variable substitution for services
+  with a name containing one or more dot characters
 
 - Fixed a pipe handling issue when using the containerized version of Compose.
 
 - Fixed a bug causing `external: false` entries in the Compose file to be
   printed as `external: true` in the output of `docker-compose config`
+
+- Fixed a bug where issuing a `docker-compose pull` command on services
+  without a defined image key would cause Compose to crash
+
+- Volumes and binds are now mounted in the order they're declared in the
+  service definition
 
 ### Miscellaneous
 
