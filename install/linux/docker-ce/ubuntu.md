@@ -185,7 +185,7 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -u -cs) \
        stable"
     ```
 
@@ -195,7 +195,7 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -u -cs) \
        stable"
     ```
 
@@ -205,7 +205,7 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=ppc64el] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -u -cs) \
        stable"
     ```
 
@@ -215,7 +215,7 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=s390x] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -u -cs) \
        stable"
     ```
 
