@@ -20,117 +20,102 @@ consistency and compatibility reasons.
 ## 18.09 
 2018-11-08
 
-### New features for Docker Engine EE and CE
-
-* [Docker Build architecture overhaul](/develop/develop-images/build_enhancements), which integrates buildKit to provide enhancements to `docker build`
-* Integrated containerd runtime to serve as a foundation for Docker Engine
-* [Docker CE-EE node activate](/engine/ce-ee-node-activate), which enables a user to apply a license to a CE binary and have it seamlessly upgrade to the EE binary
-* Add support for remote connections using SSH in the daemon using `docker -H ssh://me@server`
-
 ### New features for Docker Engine EE 
+
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee) 
 * [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows Docker Engine from running containers not signed by a specific organization.
 
-### Bug fixes
+### New features for Docker Engine EE and CE
 
-* Fix environment file parsing for imports of absent variables and those with no name
-* Hide `--data-path-addr` flags when connected to a daemon that doesn't support this option 
-* Fix trust inspect typo: `AdminstrativeKeys`
+* Update API version to 1.39 [moby/moby#37640](https://github.com/moby/moby/pull/37640)
+* Add support for remote connections using SSH [docker/cli#1014](https://github.com/docker/cli/pull/1014)
+* Builder: add prune options to the API [moby/moby#37651](https://github.com/moby/moby/pull/37651)
+* Add "Warnings" to `/info` endpoint, and move detection to the daemon [moby/moby#37502](https://github.com/moby/moby/pull/37502)
+* Allow BuildKit builds to run without experimental mode enabled. Buildkit can now be configured with an option in daemon.json [moby/moby#37593](https://github.com/moby/moby/pull/37593) [moby/moby#37686](https://github.com/moby/moby/pull/37686) [moby/moby#37692](https://github.com/moby/moby/pull/37692) [docker/cli#1303](https://github.com/docker/cli/pull/1303)  [docker/cli#1275](https://github.com/docker/cli/pull/1275)
+* Add support for build-time secrets using a `--secret` flag when using BuildKit [docker/cli#1288](https://github.com/docker/cli/pull/1288)
+* Add SSH agent socket forwarder (`docker build --ssh $SSHMOUNTID=$SSH_AUTH_SOCK`) when using BuildKit [docker/cli#1438](https://github.com/docker/cli/pull/1438) / [docker/cli#1419](https://github.com/docker/cli/pull/1419)
+* Add `--chown` flag support for `ADD` and `COPY` commands on Windows [moby/moby#35521](https://github.com/moby/moby/pull/35521)
+* Add `builder prune` subcommand to prune BuildKit build cache [docker/cli#1295](https://github.com/docker/cli/pull/1295) [docker/cli#1334](https://github.com/docker/cli/pull/1334)
+* BuildKit: Add configurable garbage collection policy for the BuildKit build cache [docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37846](https://github.com/moby/moby/pull/37846)
+* BuildKit: Add support for `docker build --pull ...` when using BuildKit [moby/moby#37613](https://github.com/moby/moby/pull/37613)
+* BuildKit: Add support or "registry-mirrors" and "insecure-registries" when using BuildKit docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37852](https://github.com/moby/moby/pull/37852)
+* BuildKit: Enable net modes and bridge. [moby/moby#37620](https://github.com/moby/moby/pull/37620)
+* Add `docker engine` subcommand to manage the lifecycle of a Docker Engine running as a privileged container on top of containerd, and to allow upgrades to Docker Engine Enterprise [docker/cli#1260](https://github.com/docker/cli/pull/1260)
+* Expose product license in `docker info` output [docker/cli#1313](https://github.com/docker/cli/pull/1313)
+* Show warnings produced by daemon in `docker info` output [docker/cli#1225](https://github.com/docker/cli/pull/1225)
+* Add "local" log driver [moby/moby#37092](https://github.com/moby/moby/pull/37092)
+* Amazon CloudWatch: add `awslogs-endpoint` logging option [moby/moby#37374](https://github.com/moby/moby/pull/37374)
+* Add support for global default address pools [moby/moby#37558](https://github.com/moby/moby/pull/37558) [docker/cli#1233](https://github.com/docker/cli/pull/1233)
+* Configure containerd log-level to be the same as dockerd [moby/moby#37419](https://github.com/moby/moby/pull/37419)
+* Add configuration option for cri-containerd [moby/moby#37519](https://github.com/moby/moby/pull/37519)
+* Update containerd client to v1.2.0-rc.1 [moby/moby#37664](https://github.com/moby/moby/pull/37664), [docker/engine#75](https://github.com/docker/engine/pull/75) / [moby/moby#37710](https://github.com/moby/moby/pull/37710)
+* Add support for global default address pools [moby/moby#37558](https://github.com/moby/moby/pull/37558) [docker/cli#1233](https://github.com/docker/cli/pull/1233)
 
-### Minor Improvements
-* Updated `bash` and `zsh` completion scripts
-* Expose product license in info output 
-* Sort plugin names and networks in a natural order 
-* Improve version output alignment 
-* Show warnings provided by daemon 
-* Only show buildkit-specific flags if buildkit is enabled 
+### Improvements for Docker Engine EE and CC
 
-### Packaging
-Remove 'docker-' prefix for containerd and runc binaries
+* Do not return "`<unknown>`" in /info response [moby/moby#37472](https://github.com/moby/moby/pull/37472)
+* BuildKit: Change `--console=[auto,false,true]` to `--progress=[auto,plain,tty]` [docker/cli#1276](https://github.com/docker/cli/pull/1276)
+* BuildKit: Set BuildKit's ExportedProduct variable to show useful errors in the future. [moby/moby#37439](https://github.com/moby/moby/pull/37439)
+* Hide `--data-path-addr` flags when connected to a daemon that doesn't support this option [docker/docker/cli#1240](https://github.com/docker/cli/pull/1240)
+* Only show buildkit-specific flags if BuildKit is enabled [docker/cli#1438](https://github.com/docker/cli/pull/1438) / [docker/cli#1427](https://github.com/docker/cli/pull/1427)
+* Improve version output alignment [docker/cli#1204](https://github.com/docker/cli/pull/1204)
+* Sort plugin names and networks in a natural order [docker/cli#1166](https://github.com/docker/cli/pull/1166), [docker/cli#1266](https://github.com/docker/cli/pull/1266)
+* Updated bash and zsh [completion scripts](https://github.com/docker/cli/issues?q=label%3Aarea%2Fcompletion+milestone%3A18.09.0+is%3Aclosed)
+* Pass log-level to containerd. [moby/moby#37419](https://github.com/moby/moby/pull/37419)
+* Use direct server return (DSR) in east-west overlay load balancing [docker/engine#93](https://github.com/docker/engine/pull/93) / [docker/libnetwork#2270](https://github.com/docker/libnetwork/pull/2270)
+* Builder: temporarily disable bridge networking when using buildkit. [moby/moby#37691](https://github.com/moby/moby/pull/37691)
+* Block task starting until node attachments are ready [moby/moby#37604](https://github.com/moby/moby/pull/37604)
+* Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
+* Remove Ubuntu 14.04 "Trusty Tahr" as a supported platform [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254)
+* Remove Debian 8 "Jessie" as a supported platform [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254)
+* Remove 'docker-' prefix for containerd and runc binaries [docker/engine#61](https://github.com/docker/engine/pull/61) / [moby/moby#37907](https://github.com/moby/moby/pull/37907), [docker-ce-packaging#241](https://github.com/docker/docker-ce-packaging/pull/241)
+* Split "engine", "cli", and "containerd" to separate packages, and run containerd as a separate systemd service [docker-ce-packaging#131](https://github.com/docker/docker-ce-packaging/pull/131), [docker-ce-packaging#158](https://github.com/docker/docker-ce-packaging/pull/158)
+* Build binaries with Go 1.10.4 [docker-ce-packaging#181](https://github.com/docker/docker-ce-packaging/pull/181)
+* Remove `-ce` / `-ee` suffix from version string [docker-ce-packaging#206](https://github.com/docker/docker-ce-packaging/pull/206)
 
-### Daemon
-* Fix daemon won't start when "runtimes" option is defined both in config file and CLI 
-* Loosen permissions on `/etc/docker` directory 
-* Fix denial of service with large numbers in `cpuset-cpus` and `cpuset-mems`
+### Fixes for Docker Engine EE and CC
 
-### API
-* Update API version to 1.39 
-* Do not return "<unknown>" in `/info` response 
-* Add "Warnings" to `/info` endpoint, and move detection to the daemon 
-* Builder: add prune options to the API moby
-
-### Windows
-* Fix pipe handling in `ConEmu` and `ConsoleZ` 
-* Fix long startup on Windows, with non-HNS governed Hyper-V networks 
-
-### Logging
-
-* Add "local" log driver 
-* Amazon CloudWatch: add awslogs-endpoint logging option 
-* Fix a possible deadlock on closing the watcher on kqueue
-* Check for the runtime OS and use poller based watcher to work around the file caching issue in Windows 
-* Fix json-log file descriptors leaking when using `--follow` 
-
-### Orchestration
-
-* Block task starting until node attachments are ready 
-* Fix nil pointer dereference in node allocation 
-
-### Security
-
-* Seccomp: Whitelist syscalls linked to CAP_SYS_NICE in default seccomp profile 
-* Seccomp: move the syslog syscall to be gated by CAP_SYS_ADMIN or CAP_SYSLOG 
-* Remove support for TLS < 1.2 
-* SELinux: Fix relabeling of local volumes specified via Mounts API on selinux-enabled systems 
-* Add warning if REST API is accessible through an insecure connection 
-* Mask proxy credentials from URL when displayed in system info 
-
-### Experimental
-
-* LCOW: fix builder using wrong cache layer 
-* LCOW: Add LinuxMetadata support by default on Windows 
-* LCOW: Mount to short container paths to avoid command-line length limit 
-* LCOW: add --platform to docker import 
-
-### Networking
-
-* Fix mapping a range of host ports to a single container port 
-* Add support for global default address pools 
-* Handle systemd-resolved case providing appropriate resolv.conf to networking layer 
-* Use direct server return (DSR) in east-west overlay load balancing 
-
-### Runtime
-
-* Configure containerd log-level to be the same as dockerd 
-* Add configuration option for cri-containerd 
-* Update containerd client to v1.2.0-rc.1 
-
-### Storage drivers
-
-Fix mount propagation for btrfs 
-
-### Builder
-
-* Add support for build-time secrets using a `--secret` flag when using buildkit 
-* Add SSH agent socket forwarder (`docker build --ssh $SSHMOUNTID=$SSH_AUTH_SOCK`)
-* Allow buildkit builds to run without experimental mode enabled. Buildkit can now be configured with a specific option in `daemon.json` 
-* Implement builder prune to prune buildkit build cache 
-* Fix no error is shown if build args are missing during docker build 
-* Add `--chown` flag support for `ADD` and `COPY` commands on Windows 
-* Fix error `unexpected EOF' when adding an 8GB file moby
-* Changed `--console=[auto,false,true]` to `--progress=[auto,plain,tty]i`
-
+* BuildKit: Do not cancel buildkit status request. [moby/moby#37597](https://github.com/moby/moby/pull/37597)
+* Fix no error is shown if build args are missing during docker build [moby/moby#37396](https://github.com/moby/moby/pull/37396)
+* Fix error "unexpected EOF" when adding an 8GB file [moby/moby#37771](https://github.com/moby/moby/pull/37771)
+* LCOW: Ensure platform is populated on `COPY`/`ADD`. [moby/moby#37563](https://github.com/moby/moby/pull/37563)
+* Fix mapping a range of host ports to a single container port [docker/cli#1102](https://github.com/docker/cli/pull/1102)
+* Fix `trust inspect` typo: "`AdminstrativeKeys`" [docker/cli#1300](https://github.com/docker/cli/pull/1300)
+* Fix environment file parsing for imports of absent variables and those with no name. [docker/cli#1019](https://github.com/docker/cli/pull/1019)
+* Fix a potential "out of memory exception" when running `docker image prune` with a large list of dangling images [docker/cli#1432](https://github.com/docker/cli/pull/1432) / [docker/cli#1423](https://github.com/docker/cli/pull/1423)
+* Fix pipe handling in ConEmu and ConsoleZ on Windows [moby/moby#37600](https://github.com/moby/moby/pull/37600)
+* Fix long startup on windows, with non-hns governed Hyper-V networks [docker/engine#67](https://github.com/docker/engine/pull/67) / [moby/moby#37774](https://github.com/moby/moby/pull/37774)
+* Fix daemon won't start when "runtimes" option is defined both in config file and cli [docker/engine#57](https://github.com/docker/engine/pull/57) / [moby/moby#37871](https://github.com/moby/moby/pull/37871)
+* Loosen permissions on `/etc/docker` directory to prevent "permission denied" errors when using `docker manifest inspect` [docker/engine#56](https://github.com/docker/engine/pull/56) / [moby/moby#37847](https://github.com/moby/moby/pull/37847)
+* Fix denial of service with large numbers in `cpuset-cpus` and `cpuset-mems` [docker/engine#70](https://github.com/docker/engine/pull/70) / [moby/moby#37967](https://github.com/moby/moby/pull/37967)
+* LCOW: Add `--platform` to `docker import` [docker/cli#1375](https://github.com/docker/cli/pull/1375) / [docker/cli#1371](https://github.com/docker/cli/pull/1371)
+* LCOW: Add LinuxMetadata support by default on Windows [moby/moby#37514](https://github.com/moby/moby/pull/37514)
+* LCOW: Mount to short container paths to avoid command-line length limit [moby/moby#37659](https://github.com/moby/moby/pull/37659)
+* LCOW: Fix builder using wrong cache layer [moby/moby#37356](https://github.com/moby/moby/pull/37356)
+* Fix json-log file descriptors leaking when using `--follow` [docker/engine#48](https://github.com/docker/engine/pull/48) [moby/moby#37576](https://github.com/moby/moby/pull/37576) [moby/moby#37734](https://github.com/moby/moby/pull/37734)
+* Fix a possible deadlock on closing the watcher on kqueue [moby/moby#37392](https://github.com/moby/moby/pull/37392)
+* Use poller based watcher to work around the file caching issue in Windows [moby/moby#37412](https://github.com/moby/moby/pull/37412)
+* Handle systemd-resolved case by providing appropriate resolv.conf to networking layer [moby/moby#37485](https://github.com/moby/moby/pull/37485)
+* Remove support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660)
+* Seccomp: Whitelist syscalls linked to `CAP_SYS_NICE` in default seccomp profile [moby/moby#37242](https://github.com/moby/moby/pull/37242)
+* Seccomp: move the syslog syscall to be gated by `CAP_SYS_ADMIN` or `CAP_SYSLOG` [docker/engine#64](https://github.com/docker/engine/pull/64) / [moby/moby#37929](https://github.com/moby/moby/pull/37929)
+* SELinux: Fix relabeling of local volumes specified via Mounts API on selinux-enabled systems [moby/moby#37739](https://github.com/moby/moby/pull/37739)
+* Add warning if REST API is accessible through an insecure connection [moby/moby#37684](https://github.com/moby/moby/pull/37684)
+* Mask proxy credentials from URL when displayed in system info [docker/engine#72](https://github.com/docker/engine/pull/72) / [moby/moby#37934](https://github.com/moby/moby/pull/37934)
+* Fix mount propagation for btrfs [docker/engine#86](https://github.com/docker/engine/pull/86) / [moby/moby#38026](https://github.com/moby/moby/pull/38026)
+* Fix nil pointer dereference in node allocation [docker/engine#94](https://github.com/docker/engine/pull/94) / [docker/swarmkit#2764](https://github.com/docker/swarmkit/pull/2764)
 
 ### Deprecation Notice
-
-Docker EE 2.1 Platform release, will serve to deprecate support of Device Mapper in a future release. 
-It will continue to be supported at this time, but  support will be removed in a future release. Docker 
-will continue to support Device Mapper for for existing EE 2.0 and 2.1 customers. Please [contact Sales](https://www.docker.com/company/contact-sales) for more information.
 
 Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
 (https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
 The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
 default for Docker engine implementations.
+
+In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660),
+Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
+
+For more information on the list of deprecated flags and APIs, have a look at the [deprecation information](https://docs.docker.com/engine/deprecated/) where you can find the target removal dates.
 
 ## Older Docker Engine EE Release notes
 
