@@ -25,7 +25,7 @@ You can define custom roles or use the following built-in roles:
 ## Create a custom role for Swarm
 
 When creating custom roles to use with Swarm, the **Roles** page lists all default and custom roles applicable in the
-organization. To create custom roles for Kuberntetes, see [Configure native Kubernetes role-based access control](https://docs.docker.com/ee/ucp/admin/configure/configure-rbac-kube/)
+organization. To create custom roles for Kuberntetes, see [Configure native Kubernetes role-based access control](https://docs.docker.com/ee/ucp/admin/configure/configure-rbac-kube/).
 
 You can give a role a global name, such as "Remove Images", which might enable the
 **Remove** and **Force Remove** operations for images. You can apply a role with
