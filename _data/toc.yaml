@@ -1572,6 +1572,8 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
+        - path: /ee/ucp/admin/configure/enable-helm-tiller/
+          title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/license-your-installation/
@@ -2348,11 +2350,11 @@ manuals:
       - sectiontitle: Manage jobs
         section:
         - path: /ee/dtr/admin/manage-jobs/job-queue/
-          title: Job Queue          
+          title: Job Queue
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
-          title: Audit Jobs with the Web Interface  
+          title: Audit Jobs with the Web Interface
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
-          title: Audit Jobs with the API       
+          title: Audit Jobs with the API
         - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
           title: Enable Auto-Deletion of Job Logs
       - sectiontitle: Monitor and troubleshoot
