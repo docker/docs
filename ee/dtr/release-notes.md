@@ -15,8 +15,65 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+* [Version 2.6](#version-26)
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
+
+# Version 2.6
+
+## 2.6.0 (2018-11-08)
+
+### New Features
+
+* Web Interface
+  * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](../admin/configure/garbage-collection/).
+  * Repository admins can now enable tag pruning for every repository that they manage by adding a pruning policy or setting a tag limit. [Learn about tag pruning](../user/tag-pruning).
+  * Users can now review and audit repository events on the web interface with the addition of the **Activity** tab on each repository.[Learn about repository event audits](../user/manage-repository-events/audit-repository-events/).
+  * DTR admins can now enable auto-deletion of repository events based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
+  * DTR admins can now review and audit jobs on the web interface with the addition of **Job Logs** within System settings. [Learn about job audits on the web interface](../admin/manage-jobs/audit-jobs-via-ui/).
+  * DTR admins can now enable auto-deletion of job logs based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
+  * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](../user/promotion-policies/pull-mirror).
+
+* CLI
+  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](../../reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure) for more details.
+  * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](../../reference/dtr/2.6/cli/restore) for more details.
+
+* API
+  * Security admins can now export vulnerability scans to CSV via the `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}/export` endpoint. Specify `text/csv` as an Accept request HTTP header.
+  * Repository admins can now interact with repository pruning policies using the following endpoints:
+   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies` 
+   * `POST /api/v0/repositories/{namespace}/{reponame}/pruningPolicies`
+   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/test`
+   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/{pruningpolicyid}`
+   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/{pruningpolicyid}`
+   * `PUT /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/{pruningpolicyid}`
+   * `DELETE /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/{pruningpolicyid}`
+
+   See [Docker Trusted Registry API](../../reference/dtr/2.6/api/) for endpoint details and example usage. Alternatively, you can log in to the DTR web interface and select **API** from the bottom left navigation pane.
+
+### Known issues
+
+* Web Interface
+  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](../admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../admin/upgrade/#25-to-26-upgrade).
+
+### Deprecations
+
+* API
+  * `GET /api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` is deprecated in favor of `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}`. 
+  * The following endpoints have been removed since online garbage collection will take care of these operations: 
+    * `DELETE /api/v0/accounts/{namespace}/repositories` 
+    * `DELETE /api/v0/repositories/{namespace}/{reponame}/manifests/{reference}`
+  * The `enableManifestLists` field on the `POST /api/v0/repositories/{namespace}` endpoint will be removed in DTR 2.7. See [Deprecation Notice](deprecation-notice) for more details.
+
 
 # Version 2.5
 
@@ -31,6 +88,11 @@ to upgrade your installation to the latest release.
 * Fixed URL redirect to release notes.
 * Prevent OOM during garbage collection by reading less data into memory at a time.
 * Fixed issue where worker capacities wouldn't update on minor version upgrades.
+
+### Known Issues
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+
 
 ## 2.5.2 (2018-5-21)
 
@@ -59,7 +121,7 @@ to upgrade your installation to the latest release.
 * Copy existing scan results to new target repository when an image is promoted.
 * Address an issue causing scan results to not be available for images with long names.
 * Remove a race condition in which repositories deleted during tagmigration were causing tagmigration to fail.
-* Enhancements to the mirroring UI including:
+* Enhancements to the mirroring interface including:
   * Fixed URL for the destination repository.
   * Option to skip TLS verification when testing mirroring.
 
@@ -88,7 +150,7 @@ restoring from a backup.
 DTR API without providing their credentials.
 [Learn about access tokens](user/access-tokens.md).
 * You can now configure DTR to run garbage collection jobs without putting DTR
-in read-only mode. This is still experimental.
+into read-only mode. This is still experimental.
 [Learn about garbage collection](admin/configure/garbage-collection.md).
 * Administrators can hide vulnerabilities in given image layers if they
 know that the vulnerability has been fixed.
@@ -111,8 +173,8 @@ instead.
 
 ### Bug fixes
 
-* UI
-  * Several improvements to the UI to make it more stable
+* Web Interface
+  * Several improvements to the web interface to make it more stable
 * User accounts
   * When a user changes their password they are automatically logged out.
 * Vulnerability scanner
@@ -128,19 +190,20 @@ specify `--log-protocol`.
 
 ### Known issues
 
-* Web UI
-  * The web UI shows "This repository has no tags" in repositories where tags
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
   repository and tag.
-  * When deleting a repository with signed images, the DTR web UI no longer
+  * When deleting a repository with signed images, the DTR web interface no longer
   shows instructions on how to delete trust data.
-  * There's no UI support to update mirroring policies when rotating the TLS
+  * There's no web interface support to update mirroring policies when rotating the TLS
   certificates used by DTR. Use the API instead.
-  * The UI for promotion policies is currently broken if you have a large number
+  * The web interface for promotion policies is currently broken if you have a large number
   of repositories.
-  * Clicking "Save & Apply" on a promotions policies doesn't work.
-* Web hooks
-  * There is no web hook event for when an image is pulled.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
 * Online garbage collection
   * The events API won't report events when tags and manifests are deleted.
   * The events API won't report blobs deleted by the garbage collection job.
@@ -150,6 +213,9 @@ specify `--log-protocol`.
   image has a layer over 100MB.
   * On upgrade the scanningstore container may restart with this error message:
   FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 # Version 2.4
 
