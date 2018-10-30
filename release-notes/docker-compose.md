@@ -33,9 +33,9 @@ naming scheme accordingly before upgrading.
 - For images with multiple names, Compose will now attempt to match the one
   present in the service configuration in the output of the `images` command.
 
-### Bugfixes
+### Bug Fixes
 
-- Parallel `run` commands for the same service will no longer fail due to name
+- Fixed an issue where parallel `run` commands for the same service would fail due to name
   collisions.
 
 - Fixed an issue where paths longer than 260 characters on Windows clients would
@@ -48,32 +48,31 @@ naming scheme accordingly before upgrading.
   look for the `.env` file.
 
 - `docker-compose build` no longer fails when attempting to pull an image with
-  credentials provided by the gcloud credential helper.
+  credentials provided by the ***gcloud credential helper***.
 
 - Fixed the `--exit-code-from` option in `docker-compose up` to always report
-  the actual exit code even when the watched container isn't the cause of the
+  the actual exit code even when the watched container is not the cause of the
   exit.
 
 - Fixed an issue that would prevent recreating a service in some cases where
-  a volume would be mapped to the same mountpoint as a volume declared inside
-  the image's Dockerfile.
+  a volume would be mapped to the same mountpoint as a volume declared within the Dockerfile for that image.
 
 - Fixed a bug that caused hash configuration with multiple networks to be
   inconsistent, causing some services to be unnecessarily restarted.
 
 - Fixed a bug that would cause failures with variable substitution for services
-  with a name containing one or more dot characters
+  with a name containing one or more dot characters.
 
 - Fixed a pipe handling issue when using the containerized version of Compose.
 
 - Fixed a bug causing `external: false` entries in the Compose file to be
-  printed as `external: true` in the output of `docker-compose config`
+  printed as `external: true` in the output of `docker-compose config`.
 
 - Fixed a bug where issuing a `docker-compose pull` command on services
-  without a defined image key would cause Compose to crash
+  without a defined image key would cause Compose to crash.
 
-- Volumes and binds are now mounted in the order they're declared in the
-  service definition
+- Volumes and binds are now mounted in the order they are declared in the
+  service definition.
 
 ### Miscellaneous
 
@@ -101,7 +100,7 @@ naming scheme accordingly before upgrading.
 - Added support for extension fields in service, network,
   and volume configurations
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug that prevented deployment with some Compose files when
   `DOCKER_DEFAULT_PLATFORM` was set
@@ -135,14 +134,14 @@ naming scheme accordingly before upgrading.
 
 ## 1.21.2 (2018-05-03)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where the ip_range attirbute in IPAM configs was prevented
   from passing validation
 
 ## 1.21.1 (2018-04-27)
 
-### Bugfixes
+### Bug Fixes
 
 - In 1.21.0, we introduced a change to how project names are sanitized for
   internal use in resource names. This caused issues when manipulating an
@@ -207,7 +206,7 @@ naming scheme accordingly before upgrading.
 - `docker-compose build` now supports the use of Dockerfile from outside
   the build context.
 
-### Bugfixes
+### Bug Fixes
 
 - Compose now checks that the volume's configuration matches the remote
   volume, and errors out if a mismatch is detected.
@@ -278,7 +277,7 @@ naming scheme accordingly before upgrading.
 - Added the long-form `--detach` option to the `exec`, `run` and `up`
   commands
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed `.dockerignore` handling, notably with regard to absolute paths
   and last-line precedence rules
@@ -367,7 +366,7 @@ naming scheme accordingly before upgrading.
 - Bash completion should now be able to better differentiate between running,
   stopped and paused services
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug that would cause the `build` command to report a connection
   error when the build context contained unreadable files or FIFO objects.
@@ -450,7 +449,7 @@ naming scheme accordingly before upgrading.
 - Setting `stop_grace_period` in service definitions now also sets the
   container's `stop_timeout`
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed an issue where Compose was still handling service hostname according
   to legacy engine behavior, causing hostnames containing dots to be cut up
@@ -519,7 +518,7 @@ naming scheme accordingly before upgrading.
   resources (networks, volumes, containers) without starting services.
   The `create` command is deprecated in favor of this new option
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where `extra_hosts` values would be overridden by extension
   files instead of merging together
@@ -571,7 +570,7 @@ naming scheme accordingly before upgrading.
 - Added new CLI flag `--no-ansi` to suppress ANSI control characters in
   output
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where nested `extends` instructions weren't resolved
   properly, causing "file not found" errors
@@ -626,7 +625,7 @@ naming scheme accordingly before upgrading.
 
 - Some improvements to CLI output
 
-### Bugfixes
+### Bug Fixes
 
 - Volumes specified through the `--volume` flag of `docker-compose run` now
   complement volumes declared in the service's defintion instead of replacing
@@ -678,7 +677,7 @@ naming scheme accordingly before upgrading.
 - Differences in labels between the Compose file and remote network
   will now print a warning instead of preventing redeployment.
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where service's dependencies were being rescaled to their
   default scale when running a `docker-compose run` command
@@ -729,7 +728,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for `options` in the `ipam` section of network definitions
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where paths provided to compose via the `-f` option were not
   being resolved properly
@@ -823,7 +822,7 @@ naming scheme accordingly before upgrading.
 - Added support for port range to single port in port mappings, such as
   `8000-8010:80`.
 
-### Bugfixes
+### Bug Fixes
 
 - `docker-compose run --rm` now removes anonymous volumes after execution,
   matching the behavior of `docker run --rm`.
@@ -857,7 +856,7 @@ naming scheme accordingly before upgrading.
 
 ## 1.11.2 (2017-02-17)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug that was preventing secrets configuration from being
   loaded properly
@@ -877,7 +876,7 @@ naming scheme accordingly before upgrading.
 
 ## 1.11.1 (2017-02-09)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where the 3.1 file format was not being recognized as valid
   by the Compose parser
@@ -897,7 +896,7 @@ naming scheme accordingly before upgrading.
 - Introduced the `docker-compose top` command that displays processes running
   for the different services managed by Compose.
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where extending a service defining a healthcheck dictionary
   would cause `docker-compose` to error out.
@@ -907,7 +906,7 @@ naming scheme accordingly before upgrading.
 
 ## 1.10.1 (2017-02-01)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed an issue where presence of older versions of the docker-py
   package would cause unexpected crashes while running Compose
@@ -957,7 +956,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for the `stop_grace_period` option in service definitions.
 
-### Bugfixes
+### Bug Fixes
 
 - Colored output now works properly on Windows.
 
@@ -984,7 +983,7 @@ naming scheme accordingly before upgrading.
   environment variable `COMPOSE_CONVERT_WINDOWS_PATHS=1`. Users of
   Docker for Windows are not affected and do not need to set the variable.
 
-New Features
+### New Features
 
 - Interactive mode for `docker-compose run` and `docker-compose exec` is
   now supported on Windows platforms. The `docker` binary
@@ -1011,7 +1010,7 @@ New Features
 - Overriding a `logging` configuration will now properly merge the `options`
   mappings if the `driver` values do not conflict.
 
-Bug Fixes
+### Bug Fixes
 
 - Fixed several bugs related to `npipe` protocol support on Windows.
 
