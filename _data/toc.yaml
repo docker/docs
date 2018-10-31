@@ -1725,6 +1725,8 @@ manuals:
           path: /ee/ucp/interlock/upgrade/
     - sectiontitle: Deploy apps with Kubernetes
       section:
+      - title: Access Kubernetes Resources
+        path: /ee/ucp/kubernetes/kube-resources/
       - title: Deploy a workload
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
@@ -2348,11 +2350,11 @@ manuals:
       - sectiontitle: Manage jobs
         section:
         - path: /ee/dtr/admin/manage-jobs/job-queue/
-          title: Job Queue          
+          title: Job Queue
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
-          title: Audit Jobs with the Web Interface  
+          title: Audit Jobs with the Web Interface
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
-          title: Audit Jobs with the API       
+          title: Audit Jobs with the API
         - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
           title: Enable Auto-Deletion of Job Logs
       - sectiontitle: Monitor and troubleshoot
