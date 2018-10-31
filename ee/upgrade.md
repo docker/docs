@@ -59,15 +59,120 @@ This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
 
-1. Drain the node you want to upgrade so that services get scheduled in another node.
-2. Upgrade the Docker Engine on that node.
-3. Make the node available again.
+1. Determine if the network is in danger of exaustion
+   a. Triage and fix an upgrade that exhausted IP address space, or
+   b. Upgrade a service network live to add IP addresses
+3. Drain the node you want to upgrade so that services get scheduled in another node.
+4. Upgrade the Docker Engine on that node.
+5. Make the node available again.
 
 If you do this sequentially for every node, you can upgrade with no
 application downtime.
 When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same
 time can lead to a loss of quorum, and possible data loss.
+
+### Determine if the network is in danger of exaustion
+
+Starting with a cluser with one or more services configured, determine whether some networks 
+may require update in order to function correctly after an 18.09 upgrade.
+
+1. SSH into a manager node.
+
+2. Fetch and deploy a service that would exhaust IP addresses in one of its overlay networks.
+
+3. Check the `docker service ls` output. It will diplay the service that is  unable to completely fill all its replicas such as: 
+
+```
+ID                  NAME                MODE                REPLICAS   IMAGE               PORTS
+wn3x4lu9cnln        ex_service          replicated          19/24      nginx:latest
+```
+
+4. Use `docker service ps ex_service` to find a failed replica such as:
+
+```
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE              ERROR               PORTS
+    ... 
+i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     Shutdown            Rejected 7 minutes ago     "node is missing network attac…"
+    ... 
+```
+
+5. Examine the error using `docker inspect`. In this example, the  `docker inspect i64lee19ia6s` output shows the error in the `Status.Err` field:
+
+```
+... 
+            "Status": {
+                "Timestamp": "2018-08-24T21:03:37.885405884Z",
+                "State": "rejected",
+                "Message": "preparing",
+                **"Err": "node is missing network attachments, ip addresses may be exhausted",**
+                "ContainerStatus": {
+                    "ContainerID": "",
+                    "PID": 0,
+                    "ExitCode": 0
+                },
+                "PortStatus": {}
+            },
+    ...
+```
+
+####  Triage and fix an upgrade that exhausted IP address space
+
+Starting with a cluser with services that exhaust their overlay address space in 18.09, adjust the deployment to fix this issue.
+
+1. Adjust the `- subnet:` field in `docker-compose.yml` to have a larger subnet such as `- subnet: 10.1.1.0/22`.  
+
+2. Remove the original service and re-deploy with the new compose file. Confirm the adjusted service deployed successfully.
+
+#### Upgrade a service network live to add IP addresses
+
+Identify a subnet with few remaining IP addresses in a live service and upgrade the network live to add IP addresses.
+
+
+1. SSH into a manager node.
+
+2. Fetch and deploy a service that has very few IP addresses available in one of its overlay networks.
+
+3. Run the following to determine if the subnet is near capactity:
+
+```
+$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check 
+```
+
+4. Run the following to create a new subnet for the services on the overloaded subnet XXX. Substitute the overloaded network name for XXX.
+
+```
+$ docker network create -d overlay --subnet=10.252.0.0/8 XXX_bump_addrs 
+```
+
+5. Run the following for each service to add the new network to the service.
+
+```
+$ docker service update --detach=false --network-add XXX_bump_addrs ex_serviceY 
+```
+
+7. Run the following for each service attached to XXX to remove the overloaded network from the service.
+
+```
+$ docker service update --detach=false --network-rm XXX ex_serviceY 
+```
+
+8. Run the following to remove the now unused network.
+
+```
+$ docker network rm XXX 
+```
+
+9. Repeat the process of adding a new network with fresh address space but name it the same as the original overloaded subnet. 
+Then remove the "XXX_bump_addrs" subnet from each service. This leaves all services attached to a network named XXX, but with an 
+increased pool of addresses.
+    
+
+10. Run the following to confirm that subnet allocations are satisfactory. 
+
+```
+$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check 
+```
 
 ### Drain the node
 
