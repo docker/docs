@@ -112,10 +112,6 @@ Docker recommends that existing customers [migrate to using Overlay2 for the sto
 The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
 default for Docker engine implementations.
 
-The `aufs` storage driver is deprecated in favor of `overlay2`, and will be removed in a future release. 
-Docker recommends `aufs` storage driver users migrate to a different storage driver, such as `overlay2`, which
-is now the default storage driver [cli#1485](cli#1485).
-
 For more information on the list of deprecated flags and APIs, have a look at the [deprecation information](https://docs.docker.com/engine/deprecated/) where you can find the target removal dates.
 
 ### End of Life Notification
