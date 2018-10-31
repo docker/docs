@@ -1,4 +1,4 @@
-> **Library reference**
+> **Library reference*********
 >
 > This content is imported from
 > [the official Docker Library docs](https://github.com/docker-library/docs/tree/master/{{ page.repo}}/),
