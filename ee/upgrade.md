@@ -79,7 +79,38 @@ may require update in order to function correctly after an 18.09 upgrade.
 
 1. SSH into a manager node.
 
-2. Fetch and deploy a service that would exhaust IP addresses in one of its overlay networks.
+2. Fetch and deploy a service that would exhaust IP addresses in one of its overlay networks, such as (https://raw.githubusercontent.com/ctelfer/moby-lb-upgrade-test/master/low_addrs/docker-compose.yml)
+
+
+3. Run the following:
+
+```
+$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check
+```
+
+If the network is in danger of exhaustion, the output will show similar warnings or errors:
+
+```
+ Overlay IP Utilization Report
+    ----
+    Network ex_net1/XXXXXXXXXXXX has an IP address capacity of 29 and uses 28 addresses
+            ERROR: network will be over capacity if upgrading Docker engine version 18.06
+                   or later.
+    ----
+    Network ex_net2/YYYYYYYYYYYY has an IP address capacity of 29 and uses 24 addresses
+            WARNING: network could exhaust IP addresses if the cluster scales to 5 or more nodes
+    ----
+    Network ex_net3/ZZZZZZZZZZZZ has an IP address capacity of 61 and uses 52 addresses
+            WARNING: network could exhaust IP addresses if the cluster scales to 9 or more nodes
+```
+
+####  Triage and fix an upgrade that exhausted IP address space
+
+Starting with a cluser with services that exhaust their overlay address space in 18.09, adjust the deployment to fix this issue.
+
+1. SSH into a manager node.
+
+2. Fetch and deploy a service that exhausts IP addresses in one of its overlay networks such as (https://raw.githubusercontent.com/ctelfer/moby-lb-upgrade-test/master/exhaust_addrs_3_nodes/docker-compose.yml).
 
 3. Check the `docker service ls` output. It will diplay the service that is  unable to completely fill all its replicas such as: 
 
@@ -116,13 +147,9 @@ i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     
     ...
 ```
 
-####  Triage and fix an upgrade that exhausted IP address space
+6. Adjust the `- subnet:` field in `docker-compose.yml` to have a larger subnet such as `- subnet: 10.1.1.0/22`.  
 
-Starting with a cluser with services that exhaust their overlay address space in 18.09, adjust the deployment to fix this issue.
-
-1. Adjust the `- subnet:` field in `docker-compose.yml` to have a larger subnet such as `- subnet: 10.1.1.0/22`.  
-
-2. Remove the original service and re-deploy with the new compose file. Confirm the adjusted service deployed successfully.
+7. Remove the original service and re-deploy with the new compose file. Confirm the adjusted service deployed successfully.
 
 #### Upgrade a service network live to add IP addresses
 
@@ -174,6 +201,63 @@ increased pool of addresses.
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check 
 ```
 
+### Perform a hit-less upgrade
+
+To upgrade an entire Docker environment, use the following steps.
+
+
+1. SSH into the manager node.
+
+
+2.Promote two other nodes to manager: 
+
+```
+$ docker node promote manager1 
+$ docker node promote manager2
+```
+    
+3. Start a stack with clients connecting to services. For example:
+
+```
+$ curl "https://raw.githubusercontent.com/ctelfer/moby-lb-upgrade-test/master/upgrade_test_ct/docker-compose.yml" > docker-compose.yml
+docker stack deploy --compose-file docker-compose.yml test
+```
+
+4. Upgrade all subsequent managers:
+
+   a. SSH into each manager.
+
+   b. Drain containers from the node: 
+
+      ```
+      $ docker node update --availability drain $(docker node ls | grep managerY | awk '{print $1}')
+      ```
+
+   c. Verify containers have been moved off: 
+      
+      ```
+      $ docker container ls
+      ```
+ 
+   d. Upgrade docker to 18.09 on the system.
+
+5. After upgrading all the managers, reactivate all the nodes:
+   
+   a. SSH into each manager.
+   
+   b. Run the following to update all the nodes:
+
+    ```
+    $ for m in "manager0 manager1 manager2" ; do \
+        docker node update --availability active $(docker node ls | grep $m | awk '{print $1}') \
+    done
+    ```
+
+6. Repeat the steps above for each worker but with two differences:
+   a. You muset drain and activeate the workers from a manager.
+   b. It is possible to reactivate each worker as soon as the upgrade for that worker is done.
+
+
 ### Drain the node
 
 Start by draining the node so that services get scheduled in another node and
@@ -186,8 +270,8 @@ docker node update --availability drain <node>
 
 ### Perform the upgrade
 
-Upgrade Docker Engine on the node by following the instructions for your
-specific distribution:
+To upgrade a node individually by operating system, please follow the instructions
+listed below:
 
 * [Windows Server](/install/windows/docker-ee.md#update-docker-ee)
 * [Ubuntu](/install/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
