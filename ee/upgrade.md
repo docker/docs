@@ -59,9 +59,9 @@ This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
 
-1. Determine if the network is in danger of exaustion
+1. Determine if the network is in danger of exaustion, then
    a. Triage and fix an upgrade that exhausted IP address space, or
-   b. Upgrade a service network live to add IP addresses
+   b. Upgrade a service network live to add IP addresses, or 
 3. Drain the node you want to upgrade so that services get scheduled in another node.
 4. Upgrade the Docker Engine on that node.
 5. Make the node available again.
@@ -257,6 +257,41 @@ docker stack deploy --compose-file docker-compose.yml test
    a. You muset drain and activeate the workers from a manager.
    b. It is possible to reactivate each worker as soon as the upgrade for that worker is done.
 
+### Troubleshooting the hit-less upgrade.
+
+If you re-activate a manager immediately instead of waiting for upgrades to the other managers, do the following:
+
+1. Run the following and observe rejected tasks:
+
+```
+$ docker service_test_ps
+```
+
+2. Run the following and look for `"Err": "node is missing network attachments, ip addresses may be exhausted",`. 
+XXX is the ID of one of the service tasks. 
+ 
+```
+$ docker inspect XXX
+```
+
+3. Finish the upgrade and service will resume.
+
+If you forgot to drain the managers first, do the following:
+
+1. Run the following, and observe rejected tasks with an error `"cannot create a swarm scoped …"`:
+
+```
+$ docker service_test_ps
+```
+
+2. Run the following and look for `"Err": "cannot create a swarm scoped network when swarm is not active",`
+XXX is the ID of one of the service tasks. 
+ 
+```
+$ docker inspect XXX
+```
+
+3. Finish the upgrade and service will resume.
 
 ### Drain the node
 
