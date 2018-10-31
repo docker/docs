@@ -13,4 +13,4 @@ The Moby project lives [here](https://github.com/moby/moby).
 
 See [Contribute to the Moby
 project](https://github.com/moby/moby/blob/master/CONTRIBUTING.md) to learn how
-to help work on the codebase.
+to help work on the codebase #\.
