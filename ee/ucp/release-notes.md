@@ -54,7 +54,7 @@ Admins can now enable audit logging in the UCP config. This logs all incoming us
 
 ## API updates
 
-There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
+There are several backward-incompatible changes in the Kubernetes API that may affect user workloads. They are:
 
   * A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
   * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
