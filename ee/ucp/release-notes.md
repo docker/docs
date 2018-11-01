@@ -49,8 +49,8 @@ Admins can configure UCP to use a SAML-enabled identity provider for user authen
 
 ### Metrics
 
-* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) has been engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes. For more information, see [Collect UCP cluster metrics with Prometheus](https://docs.docker.com/ee/ucp/admin/configure/collect-cluster-metrics/).
-* A `/metricsdiscovery` endpoint is added to the UCP controller so users can connect their own Prometheus instances to scrape UCP metrics data.
+* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) was engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes. For more information, see [Collect UCP cluster metrics with Prometheus](https://docs.docker.com/ee/ucp/admin/configure/collect-cluster-metrics/).
+* The UCP controller has a `/metricsdiscovery` endpoint so users can connect their own Prometheus instances to scrape UCP metrics data.
 
 ### UCP web interface
 
