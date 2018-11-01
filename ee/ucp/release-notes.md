@@ -23,24 +23,33 @@ upgrade your installation to the latest release.
 
 ## 3.1.0 (2018-11-8)
 
+## Bug Fixes
+
+* Swarm placement constraint warning banner no longer shows up for `ucp-auth` services (#14539)
+* "update out of sequence" error messages no longer appear when changing admin settings (#7093)
+* Kubernetes namespace status appears in the web interface (#14526)
+* UCP Kubernetes compose components always run on managers (#14208)
+* `docker network ls --filter id=<id>` now works with a UCP client bundle (#14840)
+* Collection deletes are correctly blocked if there is a node in the collection (#13704)
+
 ## New Features
 
 ### Kubernetes
 
 * Kubernetes is updated to version 1.11.2.
-* Access control for Kubernetes resources is now handled by the Kubernetes RBAC feature. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes.
+* Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes.
 
 ### Logging
 
-Admins can now enable audit logging in the UCP config. This logs all incoming user-initiated requests in the `ucp-controller` logs. Admins can choose whether to log only metadata for incoming requests or the full request body as well.
+Admins can now enable audit logging in the UCP config. This logs all incoming user-initiated requests in the `ucp-controller` logs. Admins can choose whether to log only metadata for incoming requests or the full request body as well. For more information, see [Create UCP audit logs](https://docs.docker.com/ee/ucp/admin/configure/create-audit-logs/).
 
 ### Authentication
 
-* Admins can configure UCP to use a SAML-enabled identity provider for user authentication. If enabled, users who log into the UCP web interface are redirected to the identity provider's website to log in. Upon log in, users are redirected back to the UCP web interface, authenticated as the user chosen.
+Admins can configure UCP to use a SAML-enabled identity provider for user authentication. If enabled, users who log into the UCP web interface are redirected to the identity provider's website to log in. Upon log in, users are redirected back to the UCP web interface, authenticated as the user chosen. For more information, see [Enable SAML authentication](https://docs.docker.com/ee/ucp/admin/configure/enable-saml-authentication/).
 
 ### Metrics
 
-* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) has been engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes.
+* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) has been engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes. For more information, see [Collect UCP cluster metrics with Prometheus](https://docs.docker.com/ee/ucp/admin/configure/collect-cluster-metrics/).
 * A `/metricsdiscovery` endpoint is added to the UCP controller so users can connect their own Prometheus instances to scrape UCP metrics data.
 
 ### UCP web interface
@@ -50,7 +59,7 @@ Admins can now enable audit logging in the UCP config. This logs all incoming us
 
 ### Configs
 
-* UCP now stores its configs in its internal key-value store instead of in a Swarm config to allow config changes to propagate across the cluster more quickly.
+* UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
 
 ## API updates
 
