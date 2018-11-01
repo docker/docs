@@ -36,7 +36,7 @@ To prevent this from happening, overlay networks should have enough capacity pri
 ## Cluster Upgrade Best Practices
 Docker Engine upgrades in Swarm clusters should follow these guidelines in order to avoid exhaustion application downtime. 
 
-* Workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences
+* New workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
 * Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads in the cluster during the upgrade.
 * Once manager nodes are upgraded worker nodes should be upgraded next and then the Swarm cluster upgrade is complete.
 * If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
@@ -216,14 +216,11 @@ listed below:
 * [Oracle Linux](/install/linux/docker-ee/oracle.md#upgrade-docker-ee)
 * [SLES](/install/linux/docker-ee/suse.md#upgrade-docker-ee)
 
-### Make the node active
+### Post-Upgrade Steps
 
-Once you finish upgrading the node, make it available to run workloads. For
-this, run:
-
-```
-docker node update --availability active <node>
-```
+After all manager and worker nodes have been upgrades, the Swarm cluster can be used again to schedule new 
+workloads. If workloads were previously scheduled off of the managers, they can be rescheduled again. 
+If any worker nodes were drained, they can be undrained again by setting `--availability active`.
 
 ## Upgrade UCP
 
