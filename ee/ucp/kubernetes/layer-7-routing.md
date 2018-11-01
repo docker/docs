@@ -53,22 +53,14 @@ namespace needs access to Kubernetes resources, so create a grant with
 `Restricted Control` permissions.
 
 1.  From UCP, navigate to the **Grants** page, and click **Create Grant**.
-2.  Within the **Subject** pane, select **Service Account**. For the 
+2.  Within the **Subject** pane, select **Service Account**. For the
     **Namespace** select **ingress-nginx**, and select **default** for
     the **Service Account**. Click **Next**.
-3.  Within the **Role** pane, select **Restricted Control**, and then click 
+3.  Within the **Role** pane, select **Restricted Control**, and then click
     **Next**.
 4.  Within the **Resource Set** pane, select the **Type** **Namespace**, and
     select the **Apply grant to all existing and new namespaces** toggle.
 5.  Click **Create**.
-
-> Ingress and role-based access control
->
-> Docker EE has an access control system that differs from Kubernetes RBAC.
-> If your ingress controller has access control requirements, you need to
-> create corresponding UCP grants. Learn to
-> [migrate Kubernetes roles to Docker EE authorization](../authorization/migrate-kubernetes-roles.md).
-{: .important}
 
 ## Deploy NGINX ingress controller
 
@@ -100,7 +92,7 @@ spec:
       labels:
         app: default-http-backend
       annotations:
-        seccomp.security.alpha.kubernetes.io/pod: docker/default    
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -177,7 +169,7 @@ spec:
       annotations:
         prometheus.io/port: '10254'
         prometheus.io/scrape: 'true'
-        seccomp.security.alpha.kubernetes.io/pod: docker/default   
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       initContainers:
       - command:
