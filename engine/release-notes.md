@@ -105,6 +105,10 @@ consistency and compatibility reasons.
 * Fix mount propagation for btrfs [docker/engine#86](https://github.com/docker/engine/pull/86) / [moby/moby#38026](https://github.com/moby/moby/pull/38026)
 * Fix nil pointer dereference in node allocation [docker/engine#94](https://github.com/docker/engine/pull/94) / [docker/swarmkit#2764](https://github.com/docker/swarmkit/pull/2764)
 
+### Known Issues
+
+There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+
 ### Deprecation Notice
 
 Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
