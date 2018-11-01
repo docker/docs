@@ -118,11 +118,11 @@ For example, with a secret piece of information stored in a text file:
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
-And with a Dockerfile that specifies use of a buildkit frontend `dockerfile:secrets20180828`, the secret can be accessed. 
+And with a Dockerfile that specifies use of a buildkit frontend `docker/dockerfile:1.0-experimental`, the secret can be accessed. 
 
 For example:
 ```
-# syntax = dockerfile:secrets20180828
+# syntax = docker/dockerfile:1.0-experimental
 FROM alpine
 RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret # shows secret from default secret location
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar # shows secret from custom secret location
