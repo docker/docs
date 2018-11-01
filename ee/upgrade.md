@@ -34,7 +34,7 @@ To prevent this from happening, overlay networks should have enough capacity pri
 >The above following only applies to containers running on Swarm overlay networks. This does not impact bridge, macvlan, host, or 3rd party docker networks.
 
 ## Cluster Upgrade Best Practices
-Docker Engine upgrades in Swarm clusters should follow these guidelines in order to avoid aexaustionpplication downtime. 
+Docker Engine upgrades in Swarm clusters should follow these guidelines in order to avoid exhaustion application downtime. 
 
 * Workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences
 * Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads in the cluster during the upgrade.
@@ -108,7 +108,7 @@ When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same
 time can lead to a loss of quorum, and possible data loss.
 
-### Determine if the network is in danger of exaustion
+### Determine if the network is in danger of exhaustion
 
 Starting with a cluster with one or more services configured, determine whether some networks 
 may require update in order to function correctly after an 18.09 upgrade.
