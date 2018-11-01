@@ -111,6 +111,10 @@ There are [important changes to the upgrade process](/ee/upgrade) that, if not c
 
 ### Deprecation Notice
 
+As of EE 2.2, Docker will deprecate support Device Mapper as a storage driver. It will continue to be supported at this 
+time, but support will be removed in a future release. Docker will continue to support Device Mapper for for existing 
+EE 2.0 and 2.1 customers. Please contact Sales for more information.
+
 Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
 (https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
 The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
