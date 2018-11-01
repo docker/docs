@@ -75,6 +75,8 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
 ## Known issues
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
     * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
