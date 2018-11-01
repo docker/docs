@@ -23,18 +23,39 @@ upgrade your installation to the latest release.
 
 ## 3.1.0 (2018-11-8)
 
-**New Features**
-* Default address pool for Swarm is now user configurable
-* UCP now supports Kubernetes Network Encryption using IPSec
-* UCP now supports Kubernetes v1.11
-* UCP now supports Kubernetes native role-based access control
-* UCP now provides service metrics for all API calls, using Prometheus deployed as Kubernetes Daemon Set
-* UCP now supports use of an external Prometheus instance to scrape metrics from UPC endpoints
-* UCP supports SAML authentication
-* DTR vulnerability scan data is now available through the UCP web interface
+## New Features
 
-**API updates**
-* There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
+### Kubernetes
+
+* Kubernetes is updated to version 1.11.2.
+* Access control for Kubernetes resources is now handled by the Kubernetes RBAC feature. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes.
+
+### Logging
+
+Admins can now enable audit logging in the UCP config. This logs all incoming user-initiated requests in the `ucp-controller` logs. Admins can choose whether to log only metadata for incoming requests or the full request body as well.
+
+### Authentication
+
+* Admins can configure UCP to use a SAML-enabled identity provider for user authentication. If enabled, users who log into the UCP web interface are redirected to the identity provider's website to log in. Upon log in, users are redirected back to the UCP web interface, authenticated as the user chosen.
+
+### Metrics
+
+* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) has been engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes.
+* A `/metricsdiscovery` endpoint is added to the UCP controller so users can connect their own Prometheus instances to scrape UCP metrics data.
+
+### UCP web interface
+
+* If you enable single sign-on for a DTR instance with UCP, the UCP web interface shows image vulnerability data for images in that DTR instance. Containers, services, etc. that use images from that DTR instance show any vulnerabilities DTR detects.
+* The UCP web interface is redesigned to offer larger views for viewing individual resources, with more information for Kubernetes resources.
+
+### Configs
+
+* UCP now stores its configs in its internal key-value store instead of in a Swarm config to allow config changes to propagate across the cluster more quickly.
+
+## API updates
+
+There are several backwards-incompatible changes in the Kube API that may affect user workloads. They are:
+
   * A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
   * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
     * Change `node.alpha.kubernetes.io/notReady` to `node.kubernetes.io/not-ready`
@@ -44,14 +65,14 @@ upgrade your installation to the latest release.
 * JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
-**Known issues**
-* You must use the ID of the user, organization, or team if you are manually creating a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects.
-    * For the `User` subject Kind, the `Name` field should be the ID of the user.
-    * For the `Group` subject Kind, the format depends on whether you are creating a Binding for a team or an organization:
+## Known issues
+* You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
+    * For the `User` subject Kind, the `Name` field contains the ID of the user.
+    * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
         * For an organization, the format is `org:{org-id}`
         * For a team, the format is `team:{org-id}:{team-id}`
 
-* In order to deploy Pods with containers using Restricted Parameters, a user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
     * Extra Capabilities
@@ -59,9 +80,9 @@ upgrade your installation to the latest release.
     * Host IPC
     * Host PID
 
-* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them.
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 
-**Deprecated features**
+## Deprecated features
 
 The following features are deprecated in UCP 3.1
 
