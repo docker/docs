@@ -6,6 +6,42 @@ redirect_from:
   - /enterprise/upgrade/
 ---
 
+## Engine 18.09 Upgrades
+
+In Docker Engine 18.09, significant architectural improvements were made to the network architecture in Swarm to increase 
+the performance and scale of the built-in load balancing functionality. 
+
+***NOTE:*** These changes introduce new constraints to the upgrade process that, if not correctly followed, can have 
+impact on the availability of applications running on the Swarm. These constraints impact any upgrades coming from any 
+version before 18.09 to version 18.09 or greater.
+
+## IP Address Consumption in 18.09+
+In Swarm overlay networks, each task connected to a network consumes an IP address on that network. Swarm networks have a 
+finite amount of IPs based on the `--subnet` configured when the network is created. If no subnet is specified then Swarm 
+defaults to a `/24` network with 254 available IP addresses. When the IP space of a network is fully consumed, Swarm tasks 
+can no longer be scheduled on that network.
+
+Docker Enterprise Engine 18.09 and later, each Swarm node will consume an IP address from every Swarm network. This IP 
+address is consumed by the Swarm internal load balancer on the network. Swarm networks running on Engine versions 18.09 
+or greater must be configured to account for this increase in IP usage. Networks at or near consumption prior to engine version 18.09 may have a risk of reaching full utilization that will prevent tasks from being scheduled on to the network. 
+Maximum IP consumption per network at any given moment follows the following formula:
+
+```
+Max IP Consumed per Network = Number of Tasks on a Swarm Network + Number of Nodes
+```
+To prevent this from happening, overlay networks should have enough capacity prior to an upgrade to 18.09, such that the network will have enough capacity after the upgrade. The below instructions offer tooling and steps to ensure capacity is measured before performing an upgrade. 
+
+>The above following only applies to containers running on Swarm overlay networks. This does not impact bridge, macvlan, host, or 3rd party docker networks.
+
+## Cluster Upgrade Best Practices
+Docker Engine upgrades in Swarm clusters should follow these guidelines in order to avoid aexaustionpplication downtime. 
+
+* Workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences
+* Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads in the cluster during the upgrade.
+* Once manager nodes are upgraded worker nodes should be upgraded next and then the Swarm cluster upgrade is complete.
+* If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
+
+
 To upgrade Docker Enterprise Edition you need to individually upgrade each of the
 following components:
 
@@ -59,7 +95,7 @@ This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
 
-1. Determine if the network is in danger of exaustion, then
+1. Determine if the network is in danger of exhaustion, then
    a. Triage and fix an upgrade that exhausted IP address space, or
    b. Upgrade a service network live to add IP addresses, or 
 3. Drain the node you want to upgrade so that services get scheduled in another node.
@@ -74,7 +110,7 @@ time can lead to a loss of quorum, and possible data loss.
 
 ### Determine if the network is in danger of exaustion
 
-Starting with a cluser with one or more services configured, determine whether some networks 
+Starting with a cluster with one or more services configured, determine whether some networks 
 may require update in order to function correctly after an 18.09 upgrade.
 
 1. SSH into a manager node.
@@ -85,7 +121,7 @@ may require update in order to function correctly after an 18.09 upgrade.
 3. Run the following:
 
 ```
-$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check
+$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker/ip-util-check
 ```
 
 If the network is in danger of exhaustion, the output will show similar warnings or errors:
@@ -106,7 +142,7 @@ If the network is in danger of exhaustion, the output will show similar warnings
 
 ####  Triage and fix an upgrade that exhausted IP address space
 
-Starting with a cluser with services that exhaust their overlay address space in 18.09, adjust the deployment to fix this issue.
+Starting with a cluster with services that exhaust their overlay address space in 18.09, adjust the deployment to fix this issue.
 
 1. SSH into a manager node.
 
@@ -151,55 +187,12 @@ i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     
 
 7. Remove the original service and re-deploy with the new compose file. Confirm the adjusted service deployed successfully.
 
-#### Upgrade a service network live to add IP addresses
+## Manager Upgrades When Moving to 18.09+
+The following is a constraint introduced by architectural changes to the Swarm overlay networking when upgrading to 18.09. It only applies to this one-time upgrade and to workloads that are using the Swarm overlay driver. Once upgraded to 18.09, this constraint does not impact future upgrades.
 
-Identify a subnet with few remaining IP addresses in a live service and upgrade the network live to add IP addresses.
+When upgrading to 18.09, manager nodes cannot reschedule new workloads on the managers until all managers have been upgraded to the 18.09 (or higher) version. During the upgrade of the managers, there is a possibility that any new workloads that are scheduled on the managers will fail to schedule until all of the managers have been upgraded. 
 
-
-1. SSH into a manager node.
-
-2. Fetch and deploy a service that has very few IP addresses available in one of its overlay networks.
-
-3. Run the following to determine if the subnet is near capactity:
-
-```
-$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check 
-```
-
-4. Run the following to create a new subnet for the services on the overloaded subnet XXX. Substitute the overloaded network name for XXX.
-
-```
-$ docker network create -d overlay --subnet=10.252.0.0/8 XXX_bump_addrs 
-```
-
-5. Run the following for each service to add the new network to the service.
-
-```
-$ docker service update --detach=false --network-add XXX_bump_addrs ex_serviceY 
-```
-
-7. Run the following for each service attached to XXX to remove the overloaded network from the service.
-
-```
-$ docker service update --detach=false --network-rm XXX ex_serviceY 
-```
-
-8. Run the following to remove the now unused network.
-
-```
-$ docker network rm XXX 
-```
-
-9. Repeat the process of adding a new network with fresh address space but name it the same as the original overloaded subnet. 
-Then remove the "XXX_bump_addrs" subnet from each service. This leaves all services attached to a network named XXX, but with an 
-increased pool of addresses.
-    
-
-10. Run the following to confirm that subnet allocations are satisfactory. 
-
-```
-$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock ctelfer/ip-util-check 
-```
+In order to avoid any impactful application downtime, it is advised to reschedule any critical workloads on to Swarm worker nodes during the upgrade of managers. Worker nodes and their network functionality will continue to operate independently during any upgrades or outages on the managers. Note that this restriction only applies to managers and not worker nodes.
 
 ### Perform a hit-less upgrade
 
