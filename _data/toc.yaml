@@ -3288,11 +3288,13 @@ manuals:
   - path: /docker-hub/accounts/
     title: Docker ID
   - path: /docker-hub/repos/
-    title: Repositories
+    title: Public Repositories
   - path: /docker-hub/official_repos/
     title: Official Repositories
   - path: /docker-hub/orgs/
-    title: Teams &amp; Organizations
+    title: Teams & Organizations
+  - path: /docker-hub/webhooks/
+    title: Repository Webhooks
   - sectiontitle: Builds
     section:
       - path: /docker-hub/builds/
