@@ -21,7 +21,7 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
-## 3.1.0 (2018-11-8)
+## 3.1.0 (2018-11-08)
 
 ## Bug Fixes
 
@@ -54,7 +54,7 @@ Admins can configure UCP to use a SAML-enabled identity provider for user authen
 
 ### UCP web interface
 
-* If you enable single sign-on for a DTR instance with UCP, the UCP web interface shows image vulnerability data for images in that DTR instance. Containers, services, etc. that use images from that DTR instance show any vulnerabilities DTR detects.
+* If you enable single sign-on for a DTR instance with UCP, the UCP web interface shows image vulnerability data for images in that DTR instance. Containers and services that use images from that DTR instance show any vulnerabilities DTR detects.
 * The UCP web interface is redesigned to offer larger views for viewing individual resources, with more information for Kubernetes resources.
 
 ### Configs
@@ -77,7 +77,7 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 ## Known issues
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
 
-* In the UCP web interface, LDAP settings disappear after submitting them. However, the sattings are properly saved. (#15503)
+* In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)
 
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
@@ -100,7 +100,8 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 The following features are deprecated in UCP 3.1
 
 * Collections
-    * Nested collections are deprecated and will be removed in future versions of the product. Customers should use non-nested collections going forward.
+    *  User-created nested collections more than 2 layers deep within the root `/Swarm/` collection are deprecated and will be removed in future versions of the product. In the future, we recommend that at most only two levels of collections be created within UCP under the shared Cluster collection designated as `/Swarm/`. For example, if a production collection is created as a collection under the cluster collection `/Swarm/` as `/Swarm/production/` then at most one level of nestedness should be created, as in `/Swarm/production/app/`.
+
 * Kubernetes
     * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to Cloud Controller Manager [https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
