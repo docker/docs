@@ -7,10 +7,6 @@ redirect_from:
 - /engine/installation/windows/docker-ee/
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
 Docker Enterprise Edition for Windows Server (*Docker EE*) enables native Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package includes everything you need to run Docker on Windows Server.  This topic describes pre-install considerations, and how to download and install Docker EE.

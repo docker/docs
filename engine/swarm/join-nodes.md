@@ -4,10 +4,6 @@ keywords: guide, swarm mode, node
 title: Join nodes to a swarm
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 When you first create a swarm, you place a single Docker Engine into
 swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:
 

@@ -9,10 +9,6 @@ redirect_from:
 title: Get Docker EE for Red Hat Enterprise Linux
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 {% assign linux-dist = "rhel" %}
 {% assign linux-dist-cap = "RHEL" %}
 {% assign linux-dist-url-slug = "rhel" %}

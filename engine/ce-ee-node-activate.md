@@ -85,7 +85,7 @@ Login Succeeded
 ```
 $ sudo docker engine activate --license ee-engine-license-1000-nodes.lic
 License: Quantity: 400 Nodes	Expiration date: 2019-05-12	License is currently active
-18.09.0-beta: resolved
+18.09.0: resolved
 e3cba72cdf2e: done [==================================================>]     434B/434B
 3642e2b52398: done [==================================================>]  1.161kB/1.161kB
 eb6fe2abc4ad: done [==================================================>]  4.544MB/4.544MB
