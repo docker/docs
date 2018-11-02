@@ -4,10 +4,6 @@ description: Enable auto-deletion of old or unnecessary job logs for maintenance
 keywords: dtr, jobs, log, job logs, system
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 ## Overview 
 
 Docker Trusted Registry has a global setting for auto-deletion of job logs which allows them to be removed as part of [garbage collection](../configure/garbage-collection.md). DTR admins can enable auto-deletion of repository events in DTR 2.6 based on specified conditions which are covered below.
