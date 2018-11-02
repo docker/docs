@@ -28,8 +28,9 @@ or greater must be configured to account for this increase in IP usage. Networks
 Maximum IP consumption per network at any given moment follows the following formula:
 
 ```
-Max IP Consumed per Network = Number of Tasks on a Swarm Network + Number of Nodes
+Max IP Consumed per Network = Number of Tasks on a Swarm Network + 1 IP for each node where these tasks are scheduled
 ```
+
 To prevent this from happening, overlay networks should have enough capacity prior to an upgrade to 18.09, such that the network will have enough capacity after the upgrade. The below instructions offer tooling and steps to ensure capacity is measured before performing an upgrade. 
 
 >The above following only applies to containers running on Swarm overlay networks. This does not impact bridge, macvlan, host, or 3rd party docker networks.
@@ -99,10 +100,10 @@ To ensure that workloads running as Swarm services have no downtime, you need to
 
 1. Determine if the network is in danger of exhaustion, then
    a. Triage and fix an upgrade that exhausted IP address space, or
-   b. Upgrade a service network live to add IP addresses, or 
-3. Drain the node you want to upgrade so that services get scheduled in another node.
-4. Upgrade the Docker Engine on that node.
-5. Make the node available again.
+   b. Upgrade a service network live to add IP addresses
+2. Drain the node you want to upgrade so that services get scheduled in another node.
+3. Upgrade the Docker Engine on that node.
+4. Make the node available again.
 
 If you do this sequentially for every node, you can upgrade with no application downtime.
 When upgrading manager nodes, make sure the upgrade of a node finishes before
@@ -131,7 +132,7 @@ If the network is in danger of exhaustion, the output will show similar warnings
  Overlay IP Utilization Report
     ----
     Network ex_net1/XXXXXXXXXXXX has an IP address capacity of 29 and uses 28 addresses
-            ERROR: network will be over capacity if upgrading Docker engine version 18.06
+            ERROR: network will be over capacity if upgrading Docker engine version 18.09
                    or later.
     ----
     Network ex_net2/YYYYYYYYYYYY has an IP address capacity of 29 and uses 24 addresses
