@@ -13,8 +13,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker EE Engine](/ee/supported-platforms.md) version 18.09;
-  values of `n` in the `-ee-<n>` suffix must be 8 or higher
+* [Docker EE Engine](/ee/supported-platforms.md) 18.09.0-ee-1
 * Linux kernel version 3.10 or higher
 * A static IP address
 
@@ -23,8 +22,8 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
 * 4GB of free disk space for the root partition for use by Kubernetes' ephemeral storage
-* 2GiB for managers minimum storage requirements
-* 500MiB for workers minimum storage requirements
+* 4GiB of free disk space for the root partition for manager nodes
+* 500MiB of free disk space for the root partition for worker nodes
 
 ### Recommended production requirements
 
@@ -135,8 +134,8 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 
 UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
 
-- Docker EE Engine 18.09-ee-1 or higher
-- DTR 2.5 or higher
+- Docker Enterprise Engine 18.09.0-ee-1 or higher
+- DTR 2.6 or higher
 
 ## Where to go next
 
