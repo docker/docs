@@ -26,11 +26,6 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 2GiB for managers minimum storage requirements
 * 500MiB for workers minimum storage requirements
 
-> UCP installation considerations
->
-> The minimum storage requirements need to be in the `/var/lib/docker` directory, 
-> or else the UCP installation will fail.
-
 ### Recommended production requirements
 
  * 16GB of RAM for manager nodes
@@ -140,7 +135,7 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 
 UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
 
-- Docker EE Engine 17.06.2-ee-8 or higher
+- Docker EE Engine 18.09-ee-1 or higher
 - DTR 2.5 or higher
 
 ## Where to go next
