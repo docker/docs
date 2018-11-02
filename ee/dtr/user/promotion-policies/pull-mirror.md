@@ -26,19 +26,20 @@ To get started:
 4. In the ***New Mirror*** page, specify the following details:
    * Mirror direction: Choose "Pull from remote registry"
    * Registry type: You can choose between **Docker Trusted Registry** and **Docker Hub**. If you choose DTR, enter your DTR URL. Otherwise, **Docker Hub** defaults to `https://index.docker.io`.
-   * Username and Password or access token: Your credentials in the remote repository you wish to poll from
+   * Username and Password or access token: Your credentials in the remote repository you wish to poll from. To use an access token instead of your password, see [authentication token](../access-tokens.md).
    * Repository: Enter the `namespace` and the `repository name after the `/`.
    * Show advanced settings: Enter the TLS details for the remote repository or check `Skip TLS verification`.
+
+
     ![](../../images/pull-mirror-1.png){: .img-fluid .with-border}
+
+
 
 5. Click **Connect**.
 
-> Known Issues
->
-> For issues related to pull mirroring, see [DTR 2.6.0 Release Notes](../../release-notes).
-
 
 ## Pull mirroring on the API
+
 The easiest way to interact with the DTR API is to use the interactive documentation
 available from the web interface. Click **API** from the bottom left navigation pane.
 
@@ -50,15 +51,28 @@ POST /api/v0/repositories/{namespace}/{reponame}/pollMirroringPolicies
 
 Click **Try it out** and enter your HTTP request details. `namespace` and `reponame` refer
 to the repository that will be the mirror. The other fields refer to the remote repository to poll from and the credentials to use. As a best practice, use a service account just for this purpose. Instead of providing the password for that account, you should pass an
-[authentication token](../access-tokens.md)
+[authentication token](../access-tokens.md).
 
 If the Docker Trusted or Hub registry to mirror images from is using self-signed certificates or
 certificates signed by your own certificate authority, you also need to provide
 the public key certificate for that certificate authority.
 You can get it by accessing `https://<dtr-domain>/ca`.
 
-Click **Execute**. On success, the API returns an `HTTP 201` response. This means
-that the repository will be polling the source repository every couple of minutes.
+Click **Execute**. On success, the API returns an `HTTP 201` response. 
+
+> Known Issues
+>
+> For issues related to pull mirroring, see Known Issues section of [DTR 2.6.0 release notes](../../release-notes).
+
+## Review the poll mirror job log
+
+Once configured, the system polls for changes in the remote repository and runs the `poll_mirror` job every 30 minutes. On success, the system will pull in new images and mirror them in your local repository. Starting in DTR 2.6, you can filter for `poll_mirror` jobs to review when it was last ran. To manually trigger the job and force pull mirroring, use the `POST /api/v0/jobs` API endpoint and specify `poll_mirror` as your action.
+
+```
+curl -X POST "https:/<dtr-url>/api/v0/jobs" -H "accept: application/json" -H "content-type: application/json" -d "{ \"action\": \"poll_mirror\"}"
+```
+
+See [Manage Jobs](../../admin/manage-jobs/job-queue/) to learn more about job management within DTR.
 
 ## Where to go next
 
