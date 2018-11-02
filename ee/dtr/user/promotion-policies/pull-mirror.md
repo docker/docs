@@ -74,6 +74,7 @@ curl -X POST "https:/<dtr-url>/api/v0/jobs" -H "accept: application/json" -H "co
 
 See [Manage Jobs](../../admin/manage-jobs/job-queue/) to learn more about job management within DTR.
 
+
 ## Where to go next
 
 * [Mirror images to another registry](push-mirror.md)

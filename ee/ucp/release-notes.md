@@ -92,6 +92,38 @@ The following features are deprecated in UCP 3.1
   * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
 * UI
   * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (docker/escalation#639)
+  * Bumped Kubernetes version to 1.8.15.
+  * Fixed an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixed an issue that prevented Azure IPAM from releasing addresses. (docker/escalation#815)
+  * Fixed an issue that caused installation of UCP on Azure to be unsuccessful. (docker/escalation#863)
+  * Fixed an issue that caused Interlock proxy service to keep restarting. (docker/escalation#814)
+  * Fixed an issue that prevented Kubernetes DNS from working. (docker/orca#14064 and docker/orca#11981)
+  * Fixed an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
+
+* Security
+
+  * Fixed `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
+
+* UI
+
+  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+
+## 3.0.5 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from 
+    the system pool when adding client CAs to the server that requires mutual authentication. 
+
+**Known Issue**
+
+* When you are upgrading from UCP 3.0.3 or 3.0.4, you must manually pull 
+ `docker/ucp-agent:3.0.5` in the images section of the web UI before upgrading. 
+ Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
+ This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without 
+ manually pulling the images.
 
 ## 3.0.4 (2018-08-09)
 
@@ -352,6 +384,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 **Bug fixes**
 
+<<<<<<< HEAD
 * Core
     * Resolved an issue where LDAP sync jobs terminated when processing an org admin
     Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
@@ -359,6 +392,22 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
 
+=======
+* Core 
+  * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+
+* UI
+  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+
+## Version 2.2.13 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from 
+    the system pool when adding client CAs to the server that requires mutual authentication. 
+>>>>>>> ba65aeabbb67b4cc2464497cfbe8bbccec8aacb2
 
 ## Version 2.2.12 (2018-08-09)
 
@@ -386,7 +435,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.
   * Fixed an issue that causes classic Swarm to provide outdated data.
-  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes.
+  * Fixed an issue that raises `ucp-kv` collection error with unnamed volumes.
 
 * UI
   * Fixed an issue that causes UI to not parse volume options correctly.

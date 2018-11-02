@@ -49,7 +49,7 @@ The following properties let you configure the splunk logging driver.
 
 - To configure the `splunk` driver across the Docker environment, edit
   `daemon.json` with the key, `"log-opts": {"NAME": "VALUE", ...}`.
-- To configure the `splunk` driver for an indiviual container, use `docker run`
+- To configure the `splunk` driver for an individual container, use `docker run`
   with the flag, `--log-opt NAME=VALUE ...`.
 
 | Option                      | Required | Description                                                                                                                                                                                                                                                                                                                                 |

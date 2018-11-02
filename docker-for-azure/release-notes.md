@@ -9,7 +9,7 @@ title: Docker for Azure Release Notes
 ## Enterprise Edition
 [Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}<!--_-->
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
+[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target="_blank" class="button outline-btn"}
 
 ### 17.06 EE
 

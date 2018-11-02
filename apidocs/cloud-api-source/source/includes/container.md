@@ -303,7 +303,7 @@ memory | The memory limit of the container in MB (see [Runtime Constraints on CP
 memory_swap | Total memory limit (memory + swap) of the container in MB
 autorestart | Whether to restart the container automatically if it stops (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
 autodestroy | Whether to terminate the container automatically if it stops (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
-roles | List of Docker Cloud roles asigned to this container (see [API roles](/docker-cloud/apps/api-roles/) for more information))
+roles | List of Docker Cloud roles assigned to this container (see [API roles](/docker-cloud/apps/api-roles/) for more information))
 linked_to_container | List of IP addresses of the linked containers (see table `Container Link attributes` below and [Service links](/docker-cloud/apps/service-links/) for more information)
 link_variables | List of environment variables that would be exposed in any container that is linked to this one
 privileged | Whether the container has Docker's `privileged` flag set or not (see [Runtime privilege](/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
