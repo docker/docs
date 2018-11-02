@@ -4,11 +4,6 @@ description: View a list of jobs happening within DTR and review the detailed lo
 keywords: dtr, troubleshoot, audit, job logs, jobs, ui
 ---
 
-
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 As of DTR 2.2, admins were able to [view and audit jobs within DTR](audit-jobs-via-api) using the API. DTR 2.6 enhances those capabilities by adding a **Job Logs** tab under **System** settings on the user interface. The tab displays a sortable and paginated list of jobs along with links to associated job logs. 
 
 ## Prerequisite

@@ -4,10 +4,6 @@ description: View your repository permissions.
 keywords: dtr, repository, permissions
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 The **Repository Info** tab includes the following details:
    *  README (which you can [edit if you have admin rights to the repository](../../admin/manage-users/permission-levels/#team-permission-levels))
    *  Docker Pull Command
