@@ -223,5 +223,5 @@ you can create an overlay network that contains the `com.docker.mesh.http` label
 docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
 ```
 
-If you're creating a a new HRM network you need to disable the HRM service first, or disable
+If you're creating a new HRM network you need to disable the HRM service first, or disable
 and enable the HRM service after you create the network else HRM will not be available on new network.

@@ -53,14 +53,6 @@ $ sudo yum remove docker \
 
 {% include ee-linux-install-reuse.md section="using-yum-repo" %}
 
-{% capture selinux-warning %}
-> Docker EE cannot install on {{ linux-dist-long }} with SELinux enabled
->
-> If you have `selinux` enabled and you attempt to install Docker EE 17.06.1 or newer, you get an error that the `container-selinux` package cannot be found..
-{:.warning}
-{% endcapture %}
-{{ selinux-warning }}
-
 ### Set up the repository
 
 {% include ee-linux-install-reuse.md section="set-up-yum-repo" %}

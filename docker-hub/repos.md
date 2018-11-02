@@ -100,7 +100,7 @@ Now you can push this repository to the registry designated by its name or tag.
 
     $ docker push <hub-user>/<repo-name>:<tag>
 
-The image is then uploaded and available for use by your team-mates and/or
+The image is then uploaded and available for use by your teammates and/or
 the community.
 
 

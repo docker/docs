@@ -23,7 +23,7 @@ latest_stable_docker_engine_api_version: "1.37"
 docker_ce_stable_version: "18.09"
 docker_ce_edge_version: "18.09"
 docker_ee_version: "2.1"
-compose_version: "1.22.0"
+compose_version: "1.23.1"
 machine_version: "0.14.0"
 distribution_version: "2.6"
 dtr_version: "2.6"
@@ -62,7 +62,7 @@ dtr_versions:
     path: /datacenter/dtr/2.0/
 
 tablabels:
-  dee-2.0: Docker Enterprise Edition 2.0 Beta2
+  dee-2.0: Docker Enterprise Edition 2.0
   ucp-3.0: Universal Control Plane 3.0
   ucp-2.2: Universal Control Plane 2.2
   dtr-2.5: Docker Trusted Registry 2.5
@@ -95,7 +95,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-16"
+      win_latest_build: "docker-17.06.2-ee-17"
   - scope:
       path: "datacenter"
     values:
@@ -112,21 +112,21 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.0"
+      dtr_version: "2.5.6"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.6"
+      dtr_version: "2.4.7"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.8"
+      dtr_version: "2.3.9"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
@@ -155,9 +155,9 @@ defaults:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.0.4"
+      ucp_version: "3.0.6"
       dtr_version: "2.5.0"
-      dtr_latest_image: "docker/dtr:2.5.3"
+      dtr_latest_image: "docker/dtr:2.5.6"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
@@ -171,7 +171,7 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.12"
+      ucp_version: "2.2.14"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
