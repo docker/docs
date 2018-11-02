@@ -23,7 +23,7 @@ consistency and compatibility reasons.
 ### New features for Docker Engine EE 
 
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee) 
-* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows Docker Engine from running containers not signed by a specific organization.
+* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Enterpirse Engine to run containers not signed by a specific organization.
 
 ### New features for Docker Engine EE and CE
 
@@ -111,8 +111,8 @@ There are [important changes to the upgrade process](/ee/upgrade) that, if not c
 
 ### Deprecation Notice
 
-As of EE 2.2, Docker will deprecate support Device Mapper as a storage driver. It will continue to be supported at this 
-time, but support will be removed in a future release. Docker will continue to support Device Mapper for for existing 
+As of EE 2.2, Docker will deprecate support for Device Mapper as a storage driver. It will continue to be supported at this 
+time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
 EE 2.0 and 2.1 customers. Please contact Sales for more information.
 
 Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
