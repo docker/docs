@@ -77,7 +77,7 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 ## Known issues
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
 
-* In the UCP web interface, LDAP settings disappear after submitting them. However, the sattings are properly saved. (#15503)
+* In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)
 
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
