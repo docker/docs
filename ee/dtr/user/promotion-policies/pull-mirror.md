@@ -40,8 +40,7 @@ To get started:
 
 ## Pull mirroring on the API
 
-The easiest way to interact with the DTR API is to use the interactive documentation
-available from the web interface. Click **API** from the bottom left navigation pane.
+There are different ways to send your DTR API requests. To explore the different API resources and endpoints from the web interface, click **API** on the bottom left navigation pane.
 
 Search for the endpoint:
 
