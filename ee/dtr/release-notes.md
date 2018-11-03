@@ -21,7 +21,9 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
-## 2.6.0 (2018-11-08)
+## 2.6.0 
+
+(2018-11-08)
 
 ### New Features
 
@@ -77,7 +79,9 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
-## 2.5.3 (2018-6-21)
+## 2.5.3 
+
+(2018-6-21)
 
 ### New Features
 
@@ -94,13 +98,17 @@ to upgrade your installation to the latest release.
   * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
 
 
-## 2.5.2 (2018-5-21)
+## 2.5.2 
+
+(2018-5-21)
 
 ### Bug fixes
 
 * Fixed a problem where promotion policies based on scanning results would not be executed correctly.
 
-## 2.5.1 (2018-5-17)
+## 2.5.1 
+
+(2018-5-17)
 
 ### New features
 
@@ -125,7 +133,9 @@ to upgrade your installation to the latest release.
   * Fixed URL for the destination repository.
   * Option to skip TLS verification when testing mirroring.
 
-## 2.5.0 (2018-4-17)
+## 2.5.0 
+
+(2018-4-17)
 
 ### New features
 
@@ -254,13 +264,17 @@ specify `--log-protocol`.
 * Reduce noise in the jobrunner logs by changing some of the more detailed messages to debug level.
 * Eliminate a race condition in which webhook for license updates doesn't fire.
 
-## Version 2.4.3 (2018-03-19)
+## Version 2.4.3 
+
+(2018-03-19)
 
 **Security**
 
 * Dependencies updated to consume upstream CVE patches.
 
-## Version 2.4.2 (13 February 2018)
+## Version 2.4.2 
+
+(13 February 2018)
 
 **Security notice**
 
@@ -276,7 +290,9 @@ potentially disclosed due to the vulnerability.
 Use the `--log-driver=none` option for `docker run` when running a DTR backup, HA
 cluster join or dumpcerts.
 
-## 2.4.1 (20 November 2017)
+## 2.4.1 
+
+(20 November 2017)
 
 **Bug fixes**
 
@@ -307,7 +323,9 @@ removed in DTR 2.5. You can use the
 `/api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` endpoint instead.
 
 
-## DTR 2.4.0 (2 November 2017)
+## DTR 2.4.0 
+
+(2 November 2017)
 
 **New features**
 
