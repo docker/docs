@@ -858,7 +858,7 @@
 
             }
 
-            // Maintains chainablity
+            // Maintains chainability
             return self;
 
         },
@@ -911,7 +911,7 @@
 
             }
 
-            // Maintains chainablity
+            // Maintains chainability
             return self;
         },
 

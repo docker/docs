@@ -842,7 +842,7 @@ installing docker, make sure to update them accordingly.
 + Add security options to `docker info` output [#21172](https://github.com/docker/docker/pull/21172) [#23520](https://github.com/docker/docker/pull/23520)
 + Add insecure registries to `docker info` output [#20410](https://github.com/docker/docker/pull/20410)
 + Extend Docker authorization with TLS user information [#21556](https://github.com/docker/docker/pull/21556)
-+ devicemapper: expose Mininum Thin Pool Free Space through `docker info` [#21945](https://github.com/docker/docker/pull/21945)
++ devicemapper: expose Minimum Thin Pool Free Space through `docker info` [#21945](https://github.com/docker/docker/pull/21945)
 * API now returns a JSON object when an error occurs making it more consistent [#22880](https://github.com/docker/docker/pull/22880)
 - Prevent `docker run -i --restart` from hanging on exit [#22777](https://github.com/docker/docker/pull/22777)
 - Fix API/CLI discrepancy on hostname validation [#21641](https://github.com/docker/docker/pull/21641)

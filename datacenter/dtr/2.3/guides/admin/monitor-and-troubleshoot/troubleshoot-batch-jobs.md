@@ -69,7 +69,7 @@ Jobs can be in one of the following status:
 
 ## Job capacity
 
-Each job runner has a limited capacity and doesn't claim jobs that require an
+Each job runner has a limited capacity and doesn't claim jobs that require a
 higher capacity. You can see the capacity of a job runner using the
 `GET /api/v0/workers` endpoint:
 

@@ -79,6 +79,29 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
+## 2.5.6 
+
+(2018-10-25)
+
+### Bug Fixes
+* Fixed a bug where Windows images could not be promoted. (docker/dhe-deploy#9215)
+* Removed Python3 from base image. (docker/dhe-deploy#9219)
+* Added CSP (docker/dhe-deploy#9366)
+* Included foreign layers in scanned images. (docker/dhe-deploy#9488)
+* Added dotnet.marsu to nautilus base image. (docker/dhe-deploy#9503)
+* Backported ManifestList fixes. (docker/dhe-deploy#9547)
+* Removed support sidebar link and associated content. (docker/dhe-deploy#9411)
+
+## 2.5.5 
+
+(2018-8-30)
+
+### Bug Fixes
+
+* Fixed bug where repository tag list UI was not loading after a tag migration.
+* Fixed bug to enable poll mirroring with Windows images.
+* The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface run rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID`.
+
 ## 2.5.3 
 
 (2018-6-21)
@@ -228,6 +251,18 @@ specify `--log-protocol`.
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 # Version 2.4
+
+## Version 2.4.7
+
+(25 October 2018)
+
+### Bug Fixes
+* Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
+* Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9574)
+
+### Changelog
+* Patched security vulnerabilities in the load balancer.
+* Patch packages and base OS to eliminate and address some critical vulnerabilities in DTR dependencies.
 
 ## Version 2.4.6
 

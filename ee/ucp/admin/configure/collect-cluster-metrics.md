@@ -120,7 +120,7 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
    On AWS with Kube’s cloud provider configured, you can replace `ClusterIP` with `LoadBalancer` in the service YAML then access the service through the load balancer. If running Prometheus external to UCP, change the following domain for the inventory container in the Prometheus deployment from `ucp-controller.kube-system.svc.cluster.local` to an external domain to access UCP from the Prometheus node.
 
     ```
-    kubectl apply -f - &lt;&lt;EOF
+    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: ConfigMap
     metadata:

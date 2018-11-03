@@ -94,7 +94,7 @@ We aim to have product listings published with the concept of versions, allowing
 *Documentation* maps to *Documentation Link* in the publish process.
 *Feedback* is provided via customer reviews. https://store.docker.com/images/node?tab=reviews is an example.
 *Tier Description* is what you see once users get entitled to a plan. For instance, in https://store.docker.com/images/openmaptiles-openstreetmap-maps/plans/f1fc533a-76f0-493a-80a1-4e0a2b38a563?tab=instructions `A detailed street map of any place on a planet. Evaluation and non-production use. Production use license available separately` is what this publisher entered in the Tier description
-*Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content thats a certification candidate).
+*Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content that's a certification candidate).
 
 ### How can I remove a submission? I don’t want to currently have this image published as it is missing several information.
 

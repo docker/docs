@@ -126,7 +126,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 #### Using a custom target ID
 This topic has a custom target ID above its heading that can be used to link to
-it, in addtion to, or instead of, the default concatenated heading style. The
+it, in addition to, or instead of, the default concatenated heading style. The
 format of this ID is `{: id="custom-target-id"}`.
 
 You can use custom targets to link to headings or even paragraphs. You link to
@@ -667,7 +667,7 @@ we use often.
 
 ### Raw, no highlighting
 
-The raw markup is needed to keep Liquid from interperting the things with double
+The raw markup is needed to keep Liquid from interpreting the things with double
 braces as templating language.
 
 {% raw %}

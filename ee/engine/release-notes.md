@@ -19,6 +19,65 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 18.03.1-ee-4 (2018-10-25)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Client
+
+- Fixed help message flags on `docker stack` commands and child commands. [docker/cli#1251](https://github.com/docker/cli/pull/1251)
+- Fixed typo breaking zsh `docker update` autocomplete. [docker/cli#1232](https://github.com/docker/cli/pull/1232)
+
+### Networking
+
+- Added optimizations to reduce the messages in the NetworkDB queue. [docker/libnetwork#2225](https://github.com/docker/libnetwork/pull/2225)
+- Fixed a very rare condition where managers are not correctly triggering the reconnection logic. [docker/libnetwork#2226](https://github.com/docker/libnetwork/pull/2226)
+- Changed loglevel from ***error*** to ***warning*** for missing `disable_ipv6` file. [docker/libnetwork#2224](https://github.com/docker/libnetwork/pull/2224)
+
+### Runtime
+
+- Fixed denial of service with large numbers in `cpuset-cpus` and `cpuset-mems`. [moby/moby#37967](https://github.com/moby/moby/pull/37967)
+- Added stability improvements for `devicemapper` shutdown. [moby/moby#36307](https://github.com/moby/moby/pull/36307) [moby/moby#36438](https://github.com/moby/moby/pull/36438)
+
+### Swarm Mode
+
+- Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
+- Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
+
+## 18.03.1-ee-3 (2018-08-30)
+
+> Important notes about this release
+>
+> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+{: .important}
+
+### Builder
+
+- Fix: no error if build args are missing during docker build. [docker/engine#25](https://github.com/docker/engine/pull/25)
+* Ensure `RUN` instruction to run without healthcheck. [moby/moby#37413](https://github.com/moby/moby/pull/37413)
+
+### Client
+
+- Fix manifest list to always use correct size. [docker/cli#1156](https://github.com/docker/cli/pull/1156)
++ Various shell completion script updates. [docker/cli#1159](https://github.com/docker/cli/pull/1159) [docker/cli#1227](https://github.com/docker/cli/pull/1227)
+* Improve version output alignment. [docker/cli#1204](https://github.com/docker/cli/pull/1204)
+
+### Runtime
+
+* Disable CRI plugin listening on port 10010 by default. [docker/engine#29](https://github.com/docker/engine/pull/29)
+* Update containerd to v1.1.2. [docker/engine#33](https://github.com/docker/engine/pull/33)
+- Windows: Pass back system errors on container exit. [moby/moby#35967](https://github.com/moby/moby/pull/35967)
+- Windows: Fix named pipe support for hyper-v isolated containers. [docker/engine#2](https://github.com/docker/engine/pull/2) [docker/cli#1165](https://github.com/docker/cli/pull/1165)
+* Register OCI media types. [docker/engine#4](https://github.com/docker/engine/pull/4)
+
+### Swarm Mode
+
+- Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
+- Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
+
 ## 18.03.1-ee-2 (2018-07-10)
 
 > Important notes about this release
@@ -53,6 +112,25 @@ adopted as quickly for consistency and compatibility reasons.
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
+
+## 17.06.2-ee-17 (2018-10-25)
+
+### Networking
+
+- Changed loglevel from ***error*** to ***warning*** for missing `disable_ipv6` file. [docker/libnetwork#2223](https://github.com/docker/libnetwork/pull/2223)
+- Fixed subnet allocation to avoid reallocating recently freed subnets. [docker/libnetwork#2255](https://github.com/docker/libnetwork/pull/2255)
+- Fixed libnetwork issue which caused errors to be returned when `iptables` or `firewalld` issues transient warnings. [docker/libnetwork#2218](https://github.com/docker/libnetwork/pull/2218)
+
+### Plugins
+
+- Fixed too many "Plugin not found" error messages. [moby/moby#36119](https://github.com/moby/moby/pull/36119)
+
+### Swarm mode
+
+- Added failed allocations retry immediately upon a deallocation to overcome IP exhaustion. [docker/swarmkit#2711](https://github.com/docker/swarmkit/pull/2711)
+- Fixed leaking task resources. [docker/swarmkit#2755](https://github.com/docker/swarmkit/pull/2755)
+- Fixed deadlock in dispatcher that could cause node to crash. [docker/swarmkit#2753](https://github.com/docker/swarmkit/pull/2753)
+
 
 ## 17.06.2-ee-16 (2018-07-26)
 
@@ -128,7 +206,7 @@ adopted as quickly for consistency and compatibility reasons.
 ### Runtime
 
 * Use rslave propagation for mounts from daemon root. [moby/moby#36055](https://github.com/moby/moby/pull/36055)
-* Use rslave instead of rprivate in choortarchive. [moby/moby#35217](https://github.com/moby/moby/pull/35217)
+* Use rslave instead of rprivate in chrootarchive. [moby/moby#35217](https://github.com/moby/moby/pull/35217)
 * Set daemon root to use shared propagation. [moby/moby#36096](https://github.com/moby/moby/pull/36096)
 * Windows: Increase container default shutdown timeout. [moby/moby#35184](https://github.com/moby/moby/pull/35184)
 * Avoid using all system memory with authz plugins. [moby/moby#36595](https://github.com/moby/moby/pull/36595)
@@ -612,6 +690,12 @@ not reachable until one of these 2 conditions happens:
 
 As a workaround, send at least a packet out from each container like
 (ping, GARP, etc).
+
+## Docker EE 17.03.2-ee-9 (2018-08-30)
+
+### Runtime
+
+* Update go-connections to d217f8e [docker/engine#28](https://github.com/docker/engine/pull/28)
 
 ## Docker EE 17.03.2-ee-8 (2017-12-13)
 

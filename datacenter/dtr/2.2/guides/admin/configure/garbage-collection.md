@@ -18,7 +18,7 @@ pushes will fail
 
 The GC cron schedule is set to run in **UTC time**. Containers typically run in
 UTC time (unless the system time is mounted), therefore remember that the cron
-schedule will run based off of UTC time when configuring.
+schedule will run based on UTC time when configuring.
 
 GC puts DTR into read-only mode; pulls succeed while pushes fail. Pushing an
 image while GC runs may lead to undefined behavior and data loss, therefore

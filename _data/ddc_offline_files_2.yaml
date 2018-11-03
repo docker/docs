@@ -6,6 +6,26 @@
 - product: "ucp"
   version: "3.0"
   tar-files:
+    - description: "3.0.6 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.0.6.tar.gz
+    - description: "3.0.6 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_3.0.6.tar.gz
+    - description: "3.0.6 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.6.tar.gz
+    - description: "3.0.6 Windows Server 1709"
+      url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.6.tar.gz
+    - description: "3.0.6 Windows Server 1803"
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.6.tar.gz
+    - description: "3.0.5 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.0.5.tar.gz
+    - description: "3.0.5 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_3.0.5.tar.gz
+    - description: "3.0.5 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.5.tar.gz
+    - description: "3.0.5 Windows Server 1709"
+      url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.5.tar.gz
+    - description: "3.0.5 Windows Server 1803"
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.5.tar.gz
     - description: "3.0.4 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.4.tar.gz
     - description: "3.0.4 IBM Z"
@@ -43,6 +63,18 @@
 - product: "ucp"
   version: "2.2"
   tar-files:
+    - description: "2.2.14 Linux"
+      url: https://packages.docker.com/caas/ucp_images_2.2.14.tar.gz
+    - description: "2.2.14 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_2.2.14.tar.gz
+    - description: "2.2.14 Windows"
+      url: https://packages.docker.com/caas/ucp_images_win_2.2.14.tar.gz
+    - description: "2.2.13 Linux"
+      url: https://packages.docker.com/caas/ucp_images_2.2.13.tar.gz
+    - description: "2.2.13 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_2.2.13.tar.gz
+    - description: "2.2.13 Windows"
+      url: https://packages.docker.com/caas/ucp_images_win_2.2.13.tar.gz  
     - description: "2.2.12 Linux"
       url: https://packages.docker.com/caas/ucp_images_2.2.12.tar.gz
     - description: "2.2.12 IBM Z"
@@ -112,33 +144,27 @@
 - product: "dtr"
   version: "2.5"
   tar-files:
-    - description: "DTR 2.5.4 Linux x86"
-      url: https://packages.docker.com/caas/dtr_images_2.5.4.tar.gz
-    - description: "DTR 2.5.4 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.5.4.tar.gz
+    - description: "DTR 2.5.6 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.5.6.tar.gz
+    - description: "DTR 2.5.5 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.5.5.tar.gz
     - description: "DTR 2.5.3 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.5.3.tar.gz
-    - description: "DTR 2.5.3 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.5.3.tar.gz
     - description: "DTR 2.5.2 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.5.2.tar.gz
-    - description: "DTR 2.5.2 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.5.2.tar.gz
     - description: "DTR 2.5.1 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.5.1.tar.gz
-    - description: "DTR 2.5.1 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.5.1.tar.gz
     - description: "DTR 2.5.0 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.5.0.tar.gz
-    - description: "DTR 2.5.0 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.5.0.tar.gz
 - product: "dtr"
   version: "2.4"
   tar-files:
+    - description: "DTR 2.4.7 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.4.7.tar.gz
     - description: "DTR 2.4.6 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.4.6.tar.gz
     - description: "DTR 2.4.6 IBM Z"
-      url: https://packages.docker.com/caas/dtr_images_s390x_2.4.6.tar.gz  
+      url: https://packages.docker.com/caas/dtr_images_s390x_2.4.6.tar.gz
     - description: "DTR 2.4.5 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.4.5.tar.gz
     - description: "DTR 2.4.5 IBM Z"
@@ -166,6 +192,8 @@
 - product: "dtr"
   version: "2.3"
   tar-files:
+    - description: "DTR 2.3.9"
+      url: https://packages.docker.com/caas/dtr_images_2.3.9.tar.gz  
     - description: "DTR 2.3.8"
       url: https://packages.docker.com/caas/dtr_images_2.3.8.tar.gz  
     - description: "DTR 2.3.7"

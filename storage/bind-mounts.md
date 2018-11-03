@@ -90,7 +90,7 @@ you, but generates an error.
 ## Start a container with a bind mount
 
 Consider a case where you have a directory `source` and that when you build the
-source  code, the artifacts are saved into another directory `source/target/`.
+source code, the artifacts are saved into another directory, `source/target/`.
 You want the artifacts to be available to the container at `/app/`, and you
 want the container to get access to a new build each time you build the source
 on your development host. Use the following command to bind-mount the `target/`

@@ -189,8 +189,10 @@ Then open a new Powershell session for the update to take effect.
 To update Docker EE Engine to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03.1-ee-2 -Update -Force
 ```
+The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
+
 
 ## Preparing a Docker EE Engine for use with UCP
 
