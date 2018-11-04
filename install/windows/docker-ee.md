@@ -7,10 +7,6 @@ redirect_from:
 - /engine/installation/windows/docker-ee/
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
 Docker Enterprise Edition for Windows Server (*Docker EE*) enables native Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package includes everything you need to run Docker on Windows Server.  This topic describes pre-install considerations, and how to download and install Docker EE.
@@ -189,8 +185,10 @@ Then open a new Powershell session for the update to take effect.
 To update Docker EE Engine to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03 -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.03.1-ee-2 -Update -Force
 ```
+The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
+
 
 ## Preparing a Docker EE Engine for use with UCP
 

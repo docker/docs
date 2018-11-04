@@ -32,7 +32,6 @@ potential performance advantages over the `aufs` storage driver.
   `ecryptfs`. This means that the filesystem which contains
   `/var/lib/docker/aufs` cannot be one of these filesystem types.
 
-
 ## Configure Docker with the `aufs` storage driver
 
 If the AUFS driver is loaded into the kernel when you start Docker, and no other
@@ -66,13 +65,13 @@ storage driver is configured, Docker uses it by default.
     `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
     if Docker has been started with the `--storage-driver` flag.
 
-
 ## How the `aufs` storage driver works
 
 AUFS is a *union filesystem*, which means that it layers multiple directories on
 a single Linux host and presents them as a single directory. These directories
 are called _branches_ in AUFS terminology, and _layers_ in Docker terminology.
-The unification process is referred to a a _union mount_.
+
+The unification process is referred to as a _union mount_.
 
 The diagram below shows a Docker container based on the `ubuntu:latest` image.
 
@@ -228,7 +227,6 @@ The following generic performance best practices also apply to AUFS.
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
-
+- [Volumes](/storage/volumes.md)
+- [Understand images, containers, and storage drivers](imagesandcontainers.md)
+- [Select a storage driver](selectadriver.md)

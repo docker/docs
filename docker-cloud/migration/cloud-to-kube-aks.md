@@ -694,7 +694,7 @@ Save the Kubernetes manifest file (as `k8s-vote.yml`) and check it into version 
 
 ## Test the app on AKS
 
-Before migrating, you should thoroughly test each new Kubernetes manifest on a AKS cluster. Healthy testing includes _deploying_ the application with the new manifest file, performing _scaling_ operations, increasing _load_, running _failure_ scenarios, and doing _updates_ and _rollbacks_. These tests are specific to each of your applications. You should also manage your manifest files in a version control system.
+Before migrating, you should thoroughly test each new Kubernetes manifest on an AKS cluster. Healthy testing includes _deploying_ the application with the new manifest file, performing _scaling_ operations, increasing _load_, running _failure_ scenarios, and doing _updates_ and _rollbacks_. These tests are specific to each of your applications. You should also manage your manifest files in a version control system.
 
 The following steps explain how to deploy your app from the Kubernetes manifest file and verify that it is running. The steps are based on the sample application used throughout this guide, but the general commands should work for any app.
 

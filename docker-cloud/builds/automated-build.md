@@ -202,7 +202,7 @@ to an Organization, the Cancel and Retry buttons only appear if you have `Read &
 
 Automated builds are enabled per branch or tag, and can be disabled and
 re-enabled easily. You might do this when you want to only build manually for
-awhile, for example when you are doing major refactoring in your code. Disabling
+a while, for example when you are doing major refactoring in your code. Disabling
 autobuilds does not disable [autotests](automated-testing.md).
 
 To disable an automated build:

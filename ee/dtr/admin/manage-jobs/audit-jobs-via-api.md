@@ -6,10 +6,6 @@ redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
 ---
 
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 ## Overview
 
 This covers troubleshooting batch jobs via the API and was introduced in DTR 2.2. Starting in DTR 2.6, admins have the ability to [audit jobs](audit-jobs-via-ui.md) using the web interface. 
