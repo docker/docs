@@ -57,4 +57,4 @@ name of our repository will be `dtr-example.com/test-user-1/wordpress`.
 
 ## Where to go next
 
-- [Pull and push images](pull-and-push-images.md)
+- [Review repository info](review-repository-info.md)

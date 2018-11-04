@@ -230,7 +230,7 @@ web_1 | A server is already
 running. Check /myapp/tmp/pids/server.pid.
 ```
 
-To resolve this, delete the file `tmp/pids/server.pid`, and then re-start the
+To resolve this, delete the file `tmp/pids/server.pid`, and then restart the
 application with `docker-compose up`.
 
 ### Restart the application
