@@ -4,10 +4,6 @@ keywords: Engine, CE, EE, node, activation, enterprise
 title: CE-EE Node Activate
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 The Docker Engine `18.09` release introduces a new feature called **CE-EE Node Activate**, which allows a user to perform an in-place seamless activation of the Enterprise engine feature set on an existing Community Edition (CE) node through the Docker command line.
 
 CE-EE Node Activate will apply a license, and switch the Docker engine to the Enterprise engine binary.
@@ -89,7 +85,7 @@ Login Succeeded
 ```
 $ sudo docker engine activate --license ee-engine-license-1000-nodes.lic
 License: Quantity: 400 Nodes	Expiration date: 2019-05-12	License is currently active
-18.09.0-beta: resolved
+18.09.0: resolved
 e3cba72cdf2e: done [==================================================>]     434B/434B
 3642e2b52398: done [==================================================>]  1.161kB/1.161kB
 eb6fe2abc4ad: done [==================================================>]  4.544MB/4.544MB

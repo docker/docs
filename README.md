@@ -310,7 +310,6 @@ repository, doing it afterwards actually worsens the impact on the Git repo (but
 still optimizes the bandwidth during browsing).
 
 ## Beta content disclaimer
-
 ```bash
 > BETA DISCLAIMER
 >

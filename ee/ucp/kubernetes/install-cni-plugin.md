@@ -4,10 +4,6 @@ description: Learn how to install a Container Networking Interface plugin on Doc
 keywords: ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave, ipip, calico
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 For Docker Universal Control Plane, [Project Calico](https://docs.projectcalico.org/v3.0/introduction/) 
 provides the secure networking functionality for the container communication with Kubernetes.
 

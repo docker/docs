@@ -6,10 +6,6 @@ redirect_from:
 - /engine/admin/prometheus/
 ---
 
-> Beta disclaimer
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
 alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
