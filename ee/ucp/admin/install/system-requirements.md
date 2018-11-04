@@ -22,7 +22,8 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
-* 3GB of free disk space
+* 4GiB of free disk space for the root partition for manager nodes
+* 500MiB of free disk space for the root partition for worker nodes
 
 ### Recommended production requirements
 
@@ -133,8 +134,8 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 
 UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
 
-- Docker EE Engine 17.06.2-ee-8 or higher
-- DTR 2.5 or higher
+- Docker Enterprise Engine 18.09.0-ee-1 or higher
+- DTR 2.6 or higher
 
 ## Where to go next
 
