@@ -26,14 +26,14 @@ There are three steps you can take to recover an unhealthy DTR cluster:
 2. If the majority of replicas are unhealthy, use this command to revert your
    cluster to a single DTR replica.
 3. If you can't repair your cluster to a single replica, you'll have to
-   restore from an existing backup, using the 'restore' command.
+   restore from an existing backup, using the `restore` command.
 
 This command does not restore Docker images. You should implement a separate
 restore procedure for the Docker images stored in your registry, taking in
 consideration whether your DTR installation is configured to store images on
-the local filesystem or using a cloud provider.
+the local filesystem or is using a cloud provider.
 
-After restoring the cluster, you should use the 'join' command to add more
+After restoring the cluster, you should use the `join` command to add more
 DTR replicas for high availability.
 
 
@@ -42,11 +42,13 @@ DTR replicas for high availability.
 | Option                        | Environment Variable      | Description                                                                          |
 |:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
-| `--dtr-ca` | $DTR_CA | Use a PEM-encoded TLS CA certificate for DTR.By default DTR generates a self-signed TLS certificate during deployment. You can use your  own TLS CA certificate with --dtr-ca "$(cat ca.pem)". |
-| `--dtr-cert` | $DTR_CERT | Use a PEM-encoded TLS certificate for DTR.By default DTR generates a self-signed TLS certificate during deployment. You can use your  own TLS certificate with --dtr-cert "$(cat ca.pem)". |
-| `--dtr-external-url` | $DTR_EXTERNAL_URL | URL of the host or load balancer clients use to reach DTR.When you use this flag, users are redirected to UCP for logging in. Once authenticated  they are redirected to the url you specify in this flag. If you don't use this flag, DTR  is deployed without single sign-on with UCP. Users and teams are shared but users login  separately into the two applications. You can enable and disable single sign-on in the DTR  settings. Format https://host[:port], where port is the value you used  with --replica-https-port. |
-| `--dtr-key` | $DTR_KEY | Use a PEM-encoded TLS private key for DTR.By default DTR generates a self-signed TLS certificate during deployment. You can use your  own TLS private key with --dtr-key "$(cat ca.pem)". |
-| `--dtr-storage-volume` | $DTR_STORAGE_VOLUME | Customize the volume to store Docker images.By default DTR creates a volume to store the Docker images in the local  filesystem of the node where DTR is running, without high-availability. Use this flag to  specify a full path or volume name for DTR to store images. For high-availability, make  sure all DTR replicas can read and write data on this volume. If you're using NFS, use  --nfs-storage-url instead. |
+| `--dtr-ca` | $DTR_CA | Use a PEM-encoded TLS CA certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own TLS CA certificate by passing ` --dtr-ca "$(cat ca.pem)"`. |
+| `--dtr-cert` | $DTR_CERT | Use a PEM-encoded TLS certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own TLS certificate by passing `--dtr-cert "$(cat ca.pem)"`. |
+| `--dtr-external-url` | $DTR_EXTERNAL_URL | URL of the host or load balancer client used to reach DTR. When specified, users are redirected to UCP for logging in. Once authenticated,  they are then redirected to the external URL you have specified with this flag. If not specified, DTR is deployed without single sign-on enabled with UCP. Users and teams are shared between UCP and DTR but users log in to the UCP and DTR web interfaces separately. You can enable and disable single sign-on within system settings of DTR. Accepted format is `https://host[:port]`, where port is the value you specified with `--replica-https-port`. |
+| `--dtr-key` | $DTR_KEY | Use a PEM-encoded TLS private key for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own TLS private key by passing `--dtr-key "$(cat ca.pem)"`. |
+| `--dtr-storage-volume` | $DTR_STORAGE_VOLUME | Mandatory flag to allow for DTR to fall back to your configured storage setting at the time of backup. If you have previously configured DTR to use a full path or volume name for storage, specify this flag to use the same setting on restore. See [docker/dtr install](../install.md) and [docker/dtr reconfigure](../reconfigure.md) for usage details. Required if neither `--dtr-use-default-storage` nor `--nfs-storage-url` is set. |
+| `--dtr-use-default-storage` | $DTR_DEFAULT_STORAGE | Mandatory flag to allow for DTR to fall back to either your local filesystem or cloud storage depending on what was configured at the time of backup. If cloud storage was configured, then the default storage on restore is cloud storage. Otherwise, local storage is used. Required if neither `--dtr-storage-volume` nor `--nfs-storage-url` is set. | 
+| `--nfs-storage-url` | $NFS_STORAGE_URL | Mandatory flag to allow for DTR to fall back to your configured storage setting at the time of backup. If NFS was previously configured, you must explicitly specify this flag to recover your NFS settings on restore. See [docker/dtr install](../install.md) and [docker/dtr reconfigure](../reconfigure.md) for NFS configuration options. Required if neither `--dtr-storage-volume` nor `--dtr-use-default-storage` is set.| 
 | `--enable-pprof` | $DTR_PPROF | Enables pprof profiling of the server; use --enable-pprof=false to disable it.Once DTR is deployed with this flag, you can access the pprof endpoint for the api server  at /debug/pprof, and the registry endpoint at /registry_debug_pprof/debug/pprof. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--http-proxy` | $DTR_HTTP_PROXY | The HTTP proxy used for outgoing requests. |
@@ -54,15 +56,13 @@ DTR replicas for high availability.
 | `--log-host` | $LOG_HOST | The syslog system to send logs to.The endpoint to send logs to. Use this flag if you set --log-protocol to tcp or udp. |
 | `--log-level` | $LOG_LEVEL | Log level for all container logs when logging to syslog. Default: INFO.The supported log levels are debug, info, warn, error, or fatal.. |
 | `--log-protocol` | $LOG_PROTOCOL | The protocol for sending logs. Default is internal.By default, DTR internal components log information using the logger   specified in the Docker daemon in the node where the DTR replica is deployed.   Use this option to send DTR logs to an external syslog system. The supported values are tcp, udp, and   internal. Internal is the default option, stopping DTR from sending logs to an external system.   Use this flag with --log-host. |
-| `--nfs-storage-url` | $NFS_STORAGE_URL | NFS to store Docker images. Format nfs://<ip&#124;hostname>/<mountpoint>.By default DTR creates a volume to store the Docker images in the local filesystem  of the node where DTR is running, without high-availability. Use this flag to specify an  NFS mount for DTR to store images, using the format nfs://<ip&#124;hostname>/<mountpoint>. To  use this flag, you need to install an NFS client library like nfs-common in the node  where you're deploying DTR. You can test this by running showmount -e <nfs-server>. When  you join new replicas, they will start using NFS so you don't need to use this flag. To  reconfigure DTR to stop using NFS, leave this option empty. |
 | `--no-proxy` | $DTR_NO_PROXY | List of domains the proxy should not be used for.When using --http-proxy you can use this flag to specify a list  of domains that you don't want to route throught the proxy. Format acme.com[, acme.org]. |
 | `--replica-http-port` | $REPLICA_HTTP_PORT | The public HTTP port for the DTR replica. Default is 80.This allows you to customize the HTTP port where users can reach DTR. Once users access  the HTTP port, they are redirected to use an HTTPS connection, using the port specified  with --replica-https-port. This port can also be used for unencrypted health checks. |
 | `--replica-https-port` | $REPLICA_HTTPS_PORT | The public HTTPS port for the DTR replica. Default is 443.This allows you to customize the HTTPS port where users can reach DTR. Each replica can  use a different port. |
 | `--replica-id` | $DTR_INSTALL_REPLICA_ID | Assign a 12-character hexadecimal ID to the DTR replica. Random by default. |
-| `--replica-rethinkdb-cache-mb` | $RETHINKDB_CACHE_MB | The maximum amount of space for rethinkdb in-memory cache use for the given replica in MB.
-			Default is auto. Auto is (available_memory - 1024) / 2.This config allows changing the rethinkdb cache usage per replica. You need to run it once per replica to change each one.. |
-| `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use --ucp-ca "$(cat ca.pem)". |
-| `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP.The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to man-in-the-middle attacks.  For production deployments, use --ucp-ca "$(cat ca.pem)" instead. |
+| `--replica-rethinkdb-cache-mb` | $RETHINKDB_CACHE_MB | The maximum amount of space for rethinkdb in-memory cache use for the given replica in MB. Default is auto. Auto is `(available_memory - 1024) / 2`. This config allows changing the RethinkDB cache usage per replica. You need to run it once per replica to change each one. |
+| `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use `--ucp-ca "$(cat ca.pem)"`. |
+| `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP.The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to man-in-the-middle attacks.  For production deployments, use `--ucp-ca "$(cat ca.pem)"` instead. |
 | `--ucp-node` | $UCP_NODE | The hostname of the UCP node to deploy DTR. Random by default.You can find the hostnames of the nodes in the cluster in the UCP web UI, or  by running 'docker node ls' on a UCP manager node.. |
 | `--ucp-password` | $UCP_PASSWORD | The UCP administrator password. |
 | `--ucp-url` | $UCP_URL | The UCP URL including domain and port. |
