@@ -6,14 +6,14 @@ redirect_from:
   - /enterprise/upgrade/
 ---
 
-## Docker Enterprise Engine 18.09 Upgrades
+## Docker Engine - Enterprise 18.09 Upgrades
 
-In Docker Enterprise Engine 18.09, significant architectural improvements were made to the network 
+In Docker Engine - Enterprise 18.09, significant architectural improvements were made to the network 
 architecture in Swarm to increase the performance and scale of the built-in load balancing functionality. 
 
-***NOTE:*** These changes introduce new constraints to the Docker Enterprise Engine upgrade process that, 
-if not correctly followed, can have impact on the availability of applications running on the Swarm. These 
-constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+> ***NOTE:*** These changes introduce new constraints to the Docker Engine - Enterprise upgrade process that, 
+> if not correctly followed, can have impact on the availability of applications running on the Swarm. These 
+> constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 
 ## IP Address Consumption in 18.09+
 
@@ -22,7 +22,7 @@ finite amount of IPs based on the `--subnet` configured when the network is crea
 defaults to a `/24` network with 254 available IP addresses. When the IP space of a network is fully consumed, Swarm tasks 
 can no longer be scheduled on that network.
 
-Docker Enterprise Engine 18.09 and later, each Swarm node will consume an IP address from every Swarm network. This IP 
+Docker Engine - Enterprise 18.09 and later, each Swarm node will consume an IP address from every Swarm network. This IP 
 address is consumed by the Swarm internal load balancer on the network. Swarm networks running on Engine versions 18.09 
 or greater must be configured to account for this increase in IP usage. Networks at or near consumption prior to engine version 18.09 may have a risk of reaching full utilization that will prevent tasks from being scheduled on to the network. 
 Maximum IP consumption per network at any given moment follows the following formula:
@@ -36,7 +36,7 @@ To prevent this from happening, overlay networks should have enough capacity pri
 >The above following only applies to containers running on Swarm overlay networks. This does not impact bridge, macvlan, host, or 3rd party docker networks.
 
 ## Cluster Upgrade Best Practices
-Docker Enterprise Engine upgrades in Swarm clusters should follow these guidelines in order to avoid exhaustion 
+Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid exhaustion 
 application downtime. 
 
 * New workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
@@ -45,10 +45,10 @@ application downtime.
 * If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
 
 
-To upgrade Docker Enterprise Edition you need to individually upgrade each of the
+To upgrade Docker Engine - Enterprise you need to individually upgrade each of the
 following components:
 
-1. Docker Enterprise Engine.
+1. Docker Engine - Enterprise.
 2. Universal Control Plane (UCP).
 3. Docker Trusted Registry (DTR).
 
@@ -58,7 +58,7 @@ to make sure there's no impact to your business.
 
 ## Create a backup
 
-Before upgrading Docker Enterprise Engine, you should make sure you [create a backup](backup.md).
+Before upgrading Docker Engine - Enterprise, you should make sure you [create a backup](backup.md).
 This makes it possible to recover if anything goes wrong during the upgrade.
 
 ## Check the compatibility matrix
@@ -86,9 +86,9 @@ Before you upgrade, make sure:
 > the UCP controller.
 {: .important}
 
-## Upgrade Docker Enterprise Engine
+## Upgrade Docker Engine - Enterprise
 
-To avoid application downtime, you should be running Docker Enterprise Engine in 
+To avoid application downtime, you should be running Docker Engine - Enterprise in 
 Swarm mode and deploying your workloads as Docker services. That way you can
 drain the nodes of any workloads before starting the upgrade.
 
@@ -113,7 +113,7 @@ time can lead to a loss of quorum, and possible data loss.
 ### Determine if the network is in danger of exhaustion
 
 Starting with a cluster with one or more services configured, determine whether some networks 
-may require update in order to function correctly after an Docker Enterprise Engine 18.09 upgrade.
+may require update in order to function correctly after an Docker Engine - Enterprise 18.09 upgrade.
 
 1. SSH into a manager node.
 
@@ -144,7 +144,7 @@ If the network is in danger of exhaustion, the output will show similar warnings
 
 ####  Triage and fix an upgrade that exhausted IP address space
 
-Starting with a cluster with services that exhaust their overlay address space in Docker Enterprise Engine 18.09, adjust the deployment to fix this issue.
+Starting with a cluster with services that exhaust their overlay address space in Docker Engine - Enterprise 18.09, adjust the deployment to fix this issue.
 
 1. SSH into a manager node.
 
@@ -189,15 +189,15 @@ i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     
 
 7. Remove the original service and re-deploy with the new compose file. Confirm the adjusted service deployed successfully.
 
-## Manager Upgrades When Moving to Docker Enterprise Engine 18.09 and later
+## Manager Upgrades When Moving to Docker Engine - Enterprise 18.09 and later
 
 The following is a constraint introduced by architectural changes to the Swarm overlay networking when 
-upgrading to Docker Enterprise Engine 18.09 or later. It only applies to this one-time upgrade and to w
-orkloads that are using the Swarm overlay driver. Once upgraded to Docker Enterprise Engine 18.09, this 
+upgrading to Docker Engine - Enterprise 18.09 or later. It only applies to this one-time upgrade and to w
+orkloads that are using the Swarm overlay driver. Once upgraded to Docker Engine - Enterprise 18.09, this 
 constraint does not impact future upgrades.
 
-When upgrading to Docker Enterprise Engine 18.09, manager nodes cannot reschedule new workloads on the 
-managers until all managers have been upgraded to the Docker Enterprise Engine 18.09 (or higher) version. 
+When upgrading to Docker Engine - Enterprise 18.09, manager nodes cannot reschedule new workloads on the 
+managers until all managers have been upgraded to the Docker Engine - Enterprise 18.09 (or higher) version. 
 During the upgrade of the managers, there is a possibility that any new workloads that are scheduled on 
 the managers will fail to schedule until all of the managers have been upgraded. 
 
@@ -236,7 +236,7 @@ If any worker nodes were drained, they can be undrained again by setting `--avai
 
 ## Upgrade UCP
 
-Once you've upgraded the Docker Enterprise Engine running on all the nodes, upgrade UCP.
+Once you've upgraded the Docker Engine - Enterprise running on all the nodes, upgrade UCP.
 You can do this from the UCP web UI.
 
 ![UCP update notification banner](images/upgrade-1.png){: .with-border}
