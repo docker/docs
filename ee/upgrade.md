@@ -205,6 +205,9 @@ restriction only applies to managers and not worker nodes.
 
 ### Drain the node
 
+If you are running live application on the cluster while upgrading, remove applications from nodes being upgrades 
+as to not create unplanned outages.
+
 Start by draining the node so that services get scheduled in another node and
 continue running without downtime.
 
