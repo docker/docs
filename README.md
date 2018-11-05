@@ -107,7 +107,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have three options:
+You have two options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
@@ -307,10 +307,9 @@ In order to keep the Git repository light, _please_ compress the images
 (losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
 instance.  Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
-still optimizes the bandwith during browsing).
+still optimizes the bandwidth during browsing).
 
 ## Beta content disclaimer
-
 ```bash
 > BETA DISCLAIMER
 >

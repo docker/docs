@@ -112,7 +112,7 @@ You need an SSH key to provide to Docker Cloud during the swarm create
 process. If you haven't done so yet, check out how to [Set up SSH
 keys](ssh-key-setup.md).
 
-You can get an overivew of topics on [swarms in Docker Cloud](index.md).
+You can get an overview of topics on [swarms in Docker Cloud](index.md).
 
 **Using Standard Mode to managing Docker nodes on Azure?** If you are
 setting up nodes on Azure in [Standard Mode](/docker-cloud/standard/),

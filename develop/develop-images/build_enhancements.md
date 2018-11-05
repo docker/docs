@@ -4,10 +4,6 @@ description: Learn the new features of Docker Build
 keywords: build, security, engine, secret, buildkit
 ---
 
-> Beta disclaimer
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 Docker Build is one of the most used features of the Docker Engine - users ranging from developers, build teams, and release teams all use Docker Build. 
 
 Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
@@ -105,7 +101,7 @@ $ docker build --progress=plain .
 
 To override the default frontend, set the first line of the Dockerfile as a comment with a specific frontend image: 
 ```
-# syntax = <frontend image>, e.g. # syntax = tonistiigi/dockerfile:secrets20180808
+# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
 ```
 
 ## New Docker Build secret information
@@ -122,11 +118,11 @@ For example, with a secret piece of information stored in a text file:
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
-And with a Dockerfile that specifies use of a buildkit frontend `dockerfile:secrets20180828`, the secret can be accessed. 
+And with a Dockerfile that specifies use of a buildkit frontend `docker/dockerfile:1.0-experimental`, the secret can be accessed. 
 
 For example:
 ```
-# syntax = dockerfile:secrets20180828
+# syntax = docker/dockerfile:1.0-experimental
 FROM alpine
 RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret # shows secret from default secret location
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar # shows secret from custom secret location

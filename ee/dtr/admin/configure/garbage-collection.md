@@ -5,10 +5,6 @@ description: Save disk space by configuring the garbage collection settings in
 keywords: registry, online garbage collection, gc, space, disk space
 ---
 
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 You can configure the Docker Trusted Registry (DTR) to automatically delete unused image
 layers, thus saving you disk space. This process is also known as garbage collection.
 

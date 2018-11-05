@@ -16,7 +16,7 @@ Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
-> Docker Machine still works as described here, but Docker Cloud supercedes Machine for this purpose.
+> Docker Machine still works as described here, but Docker Cloud supersedes Machine for this purpose.
 {: .important}
 
 Docker Machine driver plugins are available for many cloud platforms, so you can
@@ -115,11 +115,11 @@ You can register an already existing docker host by passing the daemon url. With
 
 ## Use Machine to provision Docker Swarm clusters
 
-> Swarm mode supercedes Docker Machine provisioning of swarm clusters
+> Swarm mode supersedes Docker Machine provisioning of swarm clusters
 >
 > In previous releases, Docker Machine was used to provision swarm
 clusters, but this is legacy. [Swarm mode](/engine/swarm/index.md), built
-into Docker Engine, supercedes Machine provisioning of swarm clusters. The
+into Docker Engine, supersedes Machine provisioning of swarm clusters. The
 topics below show you how to get started with the new swarm mode.
 {: .important}
 

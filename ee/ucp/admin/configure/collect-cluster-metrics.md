@@ -6,10 +6,6 @@ redirect_from:
 - /engine/admin/prometheus/
 ---
 
-> Beta disclaimer
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
 alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
@@ -120,7 +116,7 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
    On AWS with Kube’s cloud provider configured, you can replace `ClusterIP` with `LoadBalancer` in the service YAML then access the service through the load balancer. If running Prometheus external to UCP, change the following domain for the inventory container in the Prometheus deployment from `ucp-controller.kube-system.svc.cluster.local` to an external domain to access UCP from the Prometheus node.
 
     ```
-    kubectl apply -f - &lt;&lt;EOF
+    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: ConfigMap
     metadata:

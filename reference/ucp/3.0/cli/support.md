@@ -4,7 +4,7 @@ description: Create a support dump for UCP nodes
 keywords: ucp, cli, support, support dump, troubleshooting
 ---
 
-Create a support dump for specified UCP nodes
+Create a support dump for specified UCP nodes. You create a support dump to help [Docker Support](http://success.docker.com/support) understand your environment and more effectively troubleshoot issues in resolving your support case.
 
 ## Usage
 
@@ -18,12 +18,11 @@ docker container run --rm \
 
 ## Description
 
-This command creates a support dump file for the specified node(s), and prints it to stdout.
+This command creates a support dump file for this node, and prints it to stdout.
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--loglines`|Specify number of lines to grab from `journalctl`. The default is 10,000 lines.|
-|`--servicedriller`|Run the swarm service driller (ssd) tool. For more information on this tool, see [Docker Swarm Service Driller (ssd)](https://github.com/docker/libnetwork/tree/master/cmd/ssd) Not run by default.|
-|`--nodes`|Select specific nodes on which to produce a support dump. Comma-separated node IDs are allowed. The default selects all nodes.|
+|`--debug, D`|Enable debug mode|
+|`--jsonlog`|Produce json formatted output for easier parsing|

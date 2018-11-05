@@ -1409,7 +1409,7 @@ networks:
 Sets the PID mode to the host PID mode.  This turns on sharing between
 container and the host operating system the PID address space.  Containers
 launched with this flag can access and manipulate other
-containers in the bare-metal machine's namespace and vise-versa.
+containers in the bare-metal machine's namespace and vice versa.
 
 ### ports
 
@@ -2029,7 +2029,7 @@ and will **not** be scoped with the stack name.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.4'
     volumes:
@@ -2257,7 +2257,7 @@ and will **not** be scoped with the stack name.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.5'
     networks:

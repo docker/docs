@@ -149,6 +149,8 @@ guides:
       nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
+      - path: /engine/ce-ee-node-activate/
+        title: CE-EE Node Activate
       - path: /engine/migration/
         title: Migrate to Docker 1.10
       - path: /engine/breaking_changes/
@@ -1570,6 +1572,8 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
+        - path: /ee/ucp/admin/configure/enable-helm-tiller/
+          title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
           title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/license-your-installation/
@@ -1723,6 +1727,8 @@ manuals:
           path: /ee/ucp/interlock/upgrade/
     - sectiontitle: Deploy apps with Kubernetes
       section:
+      - title: Access Kubernetes Resources
+        path: /ee/ucp/kubernetes/kube-resources/
       - title: Deploy a workload
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
@@ -2346,11 +2352,11 @@ manuals:
       - sectiontitle: Manage jobs
         section:
         - path: /ee/dtr/admin/manage-jobs/job-queue/
-          title: Job Queue          
+          title: Job Queue
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
-          title: Audit Jobs with the Web Interface  
+          title: Audit Jobs with the Web Interface
         - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
-          title: Audit Jobs with the API       
+          title: Audit Jobs with the API
         - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
           title: Enable Auto-Deletion of Job Logs
       - sectiontitle: Monitor and troubleshoot
@@ -2390,6 +2396,8 @@ manuals:
         section:
         - path: /ee/dtr/user/manage-images/
           title: Create a repository
+        - path: /ee/dtr/user/review-repository-info/
+          title: Review repository info
         - path: /ee/dtr/user/manage-images/pull-and-push-images/
           title: Pull and push images
         - path: /ee/dtr/user/manage-images/delete-images/
@@ -2423,7 +2431,7 @@ manuals:
       - sectiontitle: Manage repository events
         section:
           - title: Audit repository events
-            path: /ee/dtr/user/manage-repository-events/
+            path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
       - path: /ee/dtr/user/create-and-manage-webhooks/

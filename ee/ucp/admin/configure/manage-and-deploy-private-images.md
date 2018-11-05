@@ -39,7 +39,7 @@ To push images to DTR, you need CLI access to a licensed installation of
 Docker EE.
 
 - [License your installation](license-your-installation.md).
-- [Set up your Docker CLI](../../user-acccess/cli.md).
+- [Set up your Docker CLI](../../user-access/cli.md).
 
 When you're set up for CLI-based access to a licensed Docker EE instance,
 you can push images to DTR.

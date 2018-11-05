@@ -4,10 +4,6 @@ description: Learn how to create audit logs of all activity in UCP
 keywords: logs, ucp, swarm, kubernetes, audits
 ---
 
-> Beta disclaimer
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-
 Audit logs are focused on external user/agent actions and security rather than understanding state or events of the system itself. They are a chronological record of security-relevant activities by individual users, administrators or software components that have affected the system.
 
 Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. Creating audit logs is CLI driven and is an UCP component that integrates with Swarm, K8s, and UCP APIs.
