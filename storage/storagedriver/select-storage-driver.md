@@ -90,7 +90,7 @@ configurations work on recent versions of the Linux distribution:
 |:--------------------|:------------------------------------------------------------------------------------------------------|
 | Docker CE on Ubuntu | `aufs`, `devicemapper`, `overlay2` (Ubuntu 14.04.4 or later, 16.04 or later), `overlay`, `zfs`, `vfs` |
 | Docker CE on Debian | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`, `vfs`                                 |
-| Docker CE on CentOS | `devicemapper`, `vfs`                                                                                 |
+| Docker CE on CentOS | `devicemapper`, `overlay2`, `vfs`                                                                     |
 | Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental), `vfs`        |
 
 When possible, `overlay2` is the recommended storage driver. When installing
