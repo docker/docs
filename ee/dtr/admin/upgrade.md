@@ -43,7 +43,7 @@ Before starting your upgrade, make sure that:
 are trying to upgrade to. [Check the compatibility matrix](https://success.docker.com/article/compatibility-matrix).
 * You have a recent [DTR backup](disaster-recovery/create-a-backup).
 * You [disable Docker content trust in UCP](/ee/ucp/admin/configure/run-only-the-images-you-trust/).
-* You [meet the system requirements](install/system-requirements.md).
+* You [meet the system requirements](install/system-requirements).
 
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
@@ -58,8 +58,8 @@ Then pull the latest version of DTR:
 docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 ```
 
-Make sure you have at least [16GB of available RAM](install/system-requirements.md) on the node you are runningthe upgrade on. If the DTR node does not have access to the internet, you can
-follow the [offline installation documentation](install/install-offline.md)
+Make sure you have at least [16GB of available RAM](install/system-requirements) on the node you are running the upgrade on. If the DTR node does not have access to the internet, you can
+follow the [offline installation documentation](install/install-offline)
 to get the images.
 
 Once you have the latest image on your machine (and the images on the target
@@ -111,5 +111,5 @@ After upgrading DTR, you need to redownload the vulnerability database.
 
 ## Where to go next
 
-- [Release notes](../release-notes.md)
-- [Garbage collection in v2.5](../../../v18.03/ee/dtr/admin/configure/garbage-collection.md)
+- [Release notes](../release-notes)
+- [Garbage collection in v2.5](../../../v18.03/ee/dtr/admin/configure/garbage-collection)
