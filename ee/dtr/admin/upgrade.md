@@ -41,13 +41,14 @@ to avoid any business impacts.
 Before starting your upgrade, make sure that:
 * The version of UCP you are using is supported by the version of DTR you
 are trying to upgrade to. [Check the compatibility matrix](https://success.docker.com/article/compatibility-matrix).
-* You have a recent [DTR backup](disaster-recovery/create-a-backup.md).
+* You have a recent [DTR backup](disaster-recovery/create-a-backup).
 * You [disable Docker content trust in UCP](/ee/ucp/admin/configure/run-only-the-images-you-trust/).
+* You [meet the system requirements](install/system-requirements).
 
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
-Make sure you're running DTR {{ previous_version }}. If that's not the case,
-[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade.md).
+Make sure you are running DTR {{ previous_version }}. If that is not the case,
+[upgrade your installation to the {{ previous_version }} version](../{{ previous_version }}/guides/admin/upgrade/). 
 
 ### Step 2. Upgrade DTR
 
@@ -57,8 +58,8 @@ Then pull the latest version of DTR:
 docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 ```
 
-If the node you're upgrading doesn't have access to the internet, you can
-follow the [offline installation documentation](install/install-offline.md)
+Make sure you have at least [16GB of available RAM](install/system-requirements) on the node you are running the upgrade on. If the DTR node does not have access to the internet, you can
+follow the [offline installation documentation](install/install-offline)
 to get the images.
 
 Once you have the latest image on your machine (and the images on the target
@@ -76,12 +77,12 @@ any necessary information. You can also check the
 
 The upgrade command will start replacing every container in your DTR cluster,
 one replica at a time. It will also perform certain data migrations. If anything
-fails or the upgrade is interrupted for any reason, you can re-run the upgrade
+fails or the upgrade is interrupted for any reason, you can rerun the upgrade
 command and it will resume from where it left off.
 
 ## Patch upgrade
 
-A patch upgrade changes only the DTR containers and it's always safer than a minor
+A patch upgrade changes only the DTR containers and is always safer than a minor version
 upgrade. The command is the same as for a minor upgrade.
 
 ## 2.5 to 2.6 upgrade
@@ -105,10 +106,10 @@ Alternatively, select **API** from the bottom left navigation pane of the DTR we
 
 ## Download the vulnerability database
 
-After upgrading DTR, you need to re-download the vulnerability database.
+After upgrading DTR, you need to redownload the vulnerability database.
 [Learn how to update your vulnerability database](configure/set-up-vulnerability-scans.md#update-the-cve-scanning-database).
 
 ## Where to go next
 
-- [Release notes](../release-notes.md)
-- [Garbage collection in v2.5](../../../v18.03/ee/dtr/admin/configure/garbage-collection.md)
+- [Release notes](../release-notes)
+- [Garbage collection in v2.5](../../../v18.03/ee/dtr/admin/configure/garbage-collection)
