@@ -166,7 +166,8 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
 
-### 17.06.2-ee-16 (2018-07-26)
+### 17.06.2-ee-16 
+2018-07-26
 
 #### Client
 
@@ -758,11 +759,11 @@ As a workaround, send at least a packet out from each container like
 ### Docker EE 17.03.2-ee-7 
 2017-10-04
 
-<<<<<<< HEAD:engine/release-notes.md
 * Fix logic in network resource reaping to prevent memory leak [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
 * Increase max GRPC message size to 128MB for larger snapshots so newly added managers can successfully join [docker/swarmkit#2375](https://github.com/docker/swarmkit/pull/2375)
-=======
-## 18.06.1-ce (2018-08-21)
+
+## 18.06.1-ce 
+2018-08-21
 
 ### Builder
 
@@ -788,7 +789,8 @@ As a workaround, send at least a packet out from each container like
 - Fix the condition used for skipping over running tasks. [docker/swarmkit#2677](https://github.com/docker/swarmkit/pull/2677)
 - Fix task sorting. [docker/swarmkit#2712](https://github.com/docker/swarmkit/pull/2712)
 
-## 18.06.0-ce (2018-07-18)
+## 18.06.0-ce 
+2018-07-18
 
 ### Important notes about this release
 
@@ -962,8 +964,8 @@ As a workaround, send at least a packet out from each container like
 - Avoid a leak when a service with unassigned tasks is deleted. [docker/engine#27](https://github.com/docker/engine/pull/27)
 - Fix racy batching on the dispatcher. [docker/engine#27](https://github.com/docker/engine/pull/27)
 
-## 18.03.1-ce (2018-04-26)
->>>>>>> master:release-notes/docker-ce.md
+## 18.03.1-ce 
+2018-04-26
 
 ### Docker EE 17.03.2-ee-6 
 2017-08-24
@@ -1609,18 +1611,18 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 * Disable legacy registry (v1) by default [#33629](https://github.com/moby/moby/pull/33629)
 
-<<<<<<< HEAD:engine/release-notes.md
 ### 17.03.2-ce 
 2017-05-29
-=======
-## 17.03.3-ce (2018-08-30)
+
+## 17.03.3-ce 
+2018-08-30
 
 ### Runtime
 
 * Update go-connections to d217f8e [#28](https://github.com/docker/engine/pull/28)
 
-## 17.03.2-ce (2017-05-29)
->>>>>>> master:release-notes/docker-ce.md
+## 17.03.2-ce 
+2017-05-29
 
 #### Networking
 
@@ -2074,7 +2076,8 @@ running, un-managed, on the system.
 + Build packages for Debian 10 (Buster) [docker/docker-ce-packaging#50](https://github.com/docker/docker-ce-packaging/pull/50)
 + Build packages for Ubuntu 17.10 (Artful) [docker/docker-ce-packaging#55](https://github.com/docker/docker-ce-packaging/pull/55)
 
-### 17.10.0-ce (2017-10-17)
+### 17.10.0-ce 
+2017-10-17
 
 > **Important**: Starting with this release, `docker service create`, `docker service update`,
 `docker service scale` and `docker service rollback` use non-detached mode as default,
@@ -2123,7 +2126,8 @@ use `--detach` to keep the old behaviour.
 - Do not filter nodes if logdriver is set to `none` [docker/swarmkit#2396](https://github.com/docker/swarmkit/pull/2396)
 + Adding ipam options to ipam driver requests [docker/swarmkit#2324](https://github.com/docker/swarmkit/pull/2324)
 
-### 17.07.0-ce (2017-08-29)
+### 17.07.0-ce 
+2017-08-29
 
 #### API & Client
 
@@ -2185,7 +2189,8 @@ use `--detach` to keep the old behaviour.
 * Fix error during service creation if a network with the same name exists both as "local" and "swarm" scoped network [docker/cli#184](https://github.com/docker/cli/pull/184)
 * (experimental) Add support for plugins on swarm [moby/moby#33575](https://github.com/moby/moby/pull/33575)
 
-### 17.05.0-ce (2017-05-04)
+### 17.05.0-ce 
+2017-05-04
 
 #### Builder
 
@@ -2271,7 +2276,8 @@ use `--detach` to keep the old behaviour.
 - Deprecate `--api-enable-cors` daemon flag. This flag was marked deprecated in Docker 1.6.0 but not listed in deprecated features [#32352](https://github.com/docker/docker/pull/32352)
 - Remove Ubuntu 12.04 (Precise Pangolin) as supported platform. Ubuntu 12.04 is EOL, and no longer receives updates [#32520](https://github.com/docker/docker/pull/32520)
 
-### 17.04.0-ce (2017-04-05)
+### 17.04.0-ce 
+2017-04-05
 
 #### Builder
 
