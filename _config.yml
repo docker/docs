@@ -19,7 +19,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
 
-latest_stable_docker_engine_api_version: "1.37"
+latest_stable_docker_engine_api_version: "1.39"
 docker_ce_stable_version: "18.09"
 docker_ce_edge_version: "18.09"
 docker_ee_version: "2.1"
@@ -155,16 +155,16 @@ defaults:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.0.6"
-      dtr_version: "2.5.0"
-      dtr_latest_image: "docker/dtr:2.5.6"
+      ucp_version: "3.1.0"
+      dtr_version: "2.6.0"
+      dtr_latest_image: "docker/dtr:2.6.0"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0"
+      ucp_version: "3.0.6"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
