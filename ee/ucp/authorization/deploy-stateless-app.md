@@ -26,11 +26,12 @@ following structure:
 ```
 acme-datacenter
 ├── dba
-│   └── Alex Alutin
+│ └── Alex*
 ├── dev
-│   └── Bett Bhatia
+│ └── Bett
 └── ops
-    └── Chad Chavez
+├── Alex*
+└── Chad
 ```
 
 Learn to [create and configure users and teams](create-users-and-teams-manually.md).
