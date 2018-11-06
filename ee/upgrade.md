@@ -16,10 +16,11 @@ architecture in Swarm to increase the performance and scale of the built-in load
 > constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 
 ## Cluster Upgrade Best Practices
-Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid exhaustion 
-application downtime. 
+Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid IP address 
+space exhaustion and associated application downtime.
 
-* New workloads should not be actively scheduled in the cluster during upgrades. Large version mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
+* New workloads should not be actively scheduled in the cluster during upgrades. 
+* Large version mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
 * Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads are running in the cluster during the upgrade.
 * Once manager nodes are upgraded worker nodes should be upgraded next and then the Swarm cluster upgrade is complete.
 * If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
@@ -73,9 +74,12 @@ finite amount of IPs based on the `--subnet` configured when the network is crea
 defaults to a `/24` network with 254 available IP addresses. When the IP space of a network is fully consumed, Swarm tasks 
 can no longer be scheduled on that network.
 
-Docker Engine - Enterprise 18.09 and later, each Swarm node will consume an IP address from every Swarm network. This IP 
-address is consumed by the Swarm internal load balancer on the network. Swarm networks running on Engine versions 18.09 
-or greater must be configured to account for this increase in IP usage. Networks at or near consumption prior to engine version 18.09 may have a risk of reaching full utilization that will prevent tasks from being scheduled on to the network. 
+Starting with Docker Engine - Enterprise 18.09 and later, each Swarm node will consume an IP address from every Swarm 
+network. This IP address is consumed by the Swarm internal load balancer on the network. Swarm networks running on Engine
+versions 18.09 or greater must be configured to account for this increase in IP usage. Networks at or near consumption 
+prior to engine version 18.09 may have a risk of reaching full utilization that will prevent tasks from being scheduled 
+on to the network. 
+
 Maximum IP consumption per network at any given moment follows the following formula:
 
 ```
@@ -111,7 +115,8 @@ time can lead to a loss of quorum, and possible data loss.
 ### Determine if the network is in danger of exhaustion
 
 Starting with a cluster with one or more services configured, determine whether some networks 
-may require update in order to function correctly after an Docker Engine - Enterprise 18.09 upgrade.
+may require updating the IP address space in order to function correctly after an Docker 
+Engine - Enterprise 18.09 upgrade.
 
 1. SSH into a manager node on a cluster where your applications are running.
 
