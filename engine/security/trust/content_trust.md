@@ -172,7 +172,14 @@ The signature verification feature is configured in the Docker daemon configurat
 }
 ```
 
-| ***Stanza***                  | ***Description***   | 
+<table>
+	<tr>
+		<td>***Stanza***</td>
+		<td>***Description***</td>
+	</tr>
+<table>
+
+|                  |    | 
 
 | --- | --- |
 
