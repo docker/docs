@@ -79,7 +79,7 @@ Restart the Docker service as root.
 To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
 
 ```
-$ docker info --format '{{ .SecurityOptions }}'
+$ docker info --format '\{\{ .SecurityOptions \}\}'
 [name=selinux name=fips]
 ```
 
