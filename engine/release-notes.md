@@ -107,7 +107,7 @@ consistency and compatibility reasons.
 
 ### Known Issues
 
-There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 
 ### Deprecation Notice
 
