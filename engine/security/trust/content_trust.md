@@ -174,15 +174,18 @@ The signature verification feature is configured in the Docker daemon configurat
 
 <table>
 	<tr>
-		<td>***Stanza***</td>
-		<td>***Description***</td>
+		<td><b>Stanza</b></td>
+		<td><b>Description</b></td>
 	</tr>
 	<tr>
-		<td>| `trust-pinning:root-keys`</td>
+		<td><code>trust-pinning:root-keys</code></td>
 		<td>Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.</td>
 	</tr>
+	<tr>
+		<td><code>trust-pinning:library-images</code></td>
+		<td>This option pins the official libraries (docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.</td>
+	</tr>
 <table>
-| `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
 
 |`trust-pinning:library-images` | This option pins the official libraries (`docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.|
 
