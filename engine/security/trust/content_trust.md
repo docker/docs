@@ -201,7 +201,7 @@ The signature verification feature is configured in the Docker daemon configurat
 				be pulled or run. 
 			</td>
 	</tr>
-<table>
+</table>
 
 ***Note:*** The DCT configuration defined here is agnostic of any policy defined in 
 [UCP](https://docs.docker.com/v17.09/datacenter/ucp/2.0/guides/content-trust/#configure-ucp). 
