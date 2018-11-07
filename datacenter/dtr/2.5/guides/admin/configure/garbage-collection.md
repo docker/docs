@@ -3,6 +3,8 @@ title: Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
 keywords: registry, garbage collection, gc, space, disk space
+redirect_from: 
+- /ee/dtr/admin/configure/garbage-collection/
 ---
 
 You can configure Docker Trusted Registry to automatically delete unused image

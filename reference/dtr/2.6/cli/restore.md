@@ -39,8 +39,7 @@ DTR replicas for high availability.
 
 ## Options
 
-| Option                        | Environment Variable      | Description                                                                          |
-|:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
+| Option                        | Environment Variable      | Description |                           |:------------------------------|:--------------------------|
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
 | `--dtr-ca` | $DTR_CA | Use a PEM-encoded TLS CA certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own TLS CA certificate by passing ` --dtr-ca "$(cat ca.pem)"`. |
 | `--dtr-cert` | $DTR_CERT | Use a PEM-encoded TLS certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own TLS certificate by passing `--dtr-cert "$(cat ca.pem)"`. |
