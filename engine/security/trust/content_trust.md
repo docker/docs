@@ -183,18 +183,25 @@ The signature verification feature is configured in the Docker daemon configurat
 	</tr>
 	<tr>
 		<td><code>trust-pinning:library-images</code></td>
-		<td>This option pins the official libraries (docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.</td>
+		<td>This option pins the official libraries (<code>docker.io/library/*<\code>) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by <code>trust-pinning:root-keys<\code>.  If `trustpinning:root-keys` specifies a key mapping for <code>docker.io/library/*</code>, those keys will be preferred for trust pinning.  Otherwise, if a more general <code>docker.io/*</code> or <code>*</code> are specified, the official images key will be preferred.</td>
+	</tr>
+	<tr>
+		<td><code>allow-expired-trust-cache</code></td>
+		<td>Specifies whether cached locally expired metadata validates images if an external server is unreachable or does not have image trust metadata. This is necessary for machines which may be often offline, as may be the case for edge.  This does not provide mitigations against freeze attacks, which is a necessary to provide availability in low-connectivity environments.</td>
+	</tr>
+			<tr>
+		<td><code>mode</code></td>
+		<td>Specifies whether DCT is enabled and enforced.  Valid modes are: <code>disabled</code>: 
+			Verification is not active and the remainder of the content-trust related metadata will be ignored. 
+			*NOTE* that this is the default configuration if <code>mode</code> is not specfied.<br>
+			<code>permissive</code>: Verification will be performed, but only failures will only be logged and
+			remain unenforced.  This configuration is intended for testing of changes related to content-trust.
+			<br>
+			<code>enforced<\code>: DCT will be enforced and an image that cannot be verified successfully will not
+				be pulled or run. 
+			</td>
 	</tr>
 <table>
-
-|`trust-pinning:library-images` | This option pins the official libraries (`docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.|
-
-| `allow-expired-trust-cache` | Specifies whether cached locally expired metadata validates images if an external server is unreachable or does not have image trust metadata. This is necessary for machines which may be often offline, as may be the case for edge.  This does not provide mitigations against freeze attacks, which is a necessary to provide availability in low-connectivity environments. |
-| `mode` | Specifies whether DCT is enabled and enforced.  Valid modes are: <br>
-`disabled`: Verification is not active and the remainder of the content-trust related metadata will be ignored.  *NOTE* that this is the default configuration if “mode” is not specfied. <br>
-`permissive`: Verification will be performed, but only failures will only be logged and remain unenforced.  This configuration is intended for testing of changes related to content-trust. <br>
-`enforced`: DCT will be enforced and an image that cannot be verified successfully will not be pulled or run. |
-
 
 ***Note:*** The DCT configuration defined here is agnostic of any policy defined in 
 [UCP](https://docs.docker.com/v17.09/datacenter/ucp/2.0/guides/content-trust/#configure-ucp). 
