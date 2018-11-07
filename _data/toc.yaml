@@ -124,7 +124,7 @@ guides:
       - path: /toolbox/faqs/troubleshoot/
         title: Troubleshooting
     - title: Release notes
-      path: /release-notes/docker-ce/
+      path: /engine/release-notes/
       nosync: true
   - sectiontitle: Docker EE
     section:
@@ -145,7 +145,7 @@ guides:
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
     - title: Release notes
-      path: /ee/engine/release-notes/
+      path: /engine/release-notes/
       nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
@@ -1529,7 +1529,7 @@ manuals:
       title: Install Docker EE Engine
       nosync: true
     - title: Release notes
-      path: /ee/engine/release-notes/
+      path: /engine/release-notes/
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
@@ -2561,7 +2561,7 @@ manuals:
         section:
         - path: /ee/dtr/user/manage-images/
           title: Create a repository
-        - path: /ee/dtr/user/review-repository-info/
+        - path: /ee/dtr/user/manage-images/review-repository-info/
           title: Review repository info
         - path: /ee/dtr/user/manage-images/pull-and-push-images/
           title: Pull and push images
@@ -3945,11 +3945,9 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - path: /ee/engine/release-notes/
-      title: Docker EE
+    - path: /engine/release-notes/
+      title: Docker EE and CE
       nosync: true
-    - path: /release-notes/docker-ce/
-      title: Docker CE
     - path: /cs-engine/1.13/release-notes/
       title: CS Docker Engine
       nosync: true
