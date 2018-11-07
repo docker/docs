@@ -122,8 +122,8 @@ Docker configs.
 
 ### Defining and using configs in compose files
 
-Both the `docker compose` and `docker stack` commands support defining configs
-in a compose file. See
+`docker stack` command supports defining configs in a compose file, though
+`docker compose` will ignore the `configs` key as is not supported. See
 [the Compose file reference](/compose/compose-file/#configs) for details.
 
 ### Simple example: Get started with configs
