@@ -72,7 +72,8 @@ command.
    <tr>
     <td><code>--san</code></td>
     <td>Add subject alternative names to certificates (e.g. <code>--san www1.acme.com --san www2.acme.com<code>)</td>
-   </td>
+   </tr>
+   <tr>
     <td><code>--unmanaged-cni</codde></td>
     <td>This determines who manages the CNI plugin, using <code>true</code> or <code>false</code>. The default is <code>false</code> The <code>true</code> value installs UCP without a managed CNI plugin. UCP and the Kubernetes components will be running but pod to pod networking will not function until a CNI plugin is manually installed. This will impact some functionality of UCP until a CNI plugin is running.</td>
    </tr>
