@@ -4,9 +4,9 @@ description: Learn how to create audit logs of all activity in UCP
 keywords: logs, ucp, swarm, kubernetes, audits
 ---
 
-Audit logs are focused on external user/agent actions and security rather than understanding state or events of the system itself. They are a chronological record of security-relevant activities by individual users, administrators or software components that have affected the system.
+Audit logs are a chronological record of security-relevant activities by individual users, administrators or software components that have affected the system. They are focused on external user/agent actions and security rather than understanding state or events of the system itself.
 
-Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. Creating audit logs is CLI driven and is an UCP component that integrates with Swarm, K8s, and UCP APIs.
+Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP API, Swarm API and Kubernetes API endpoints that are invoked (except for the ignored list) and sent to Docker Engine via stdout. Creating audit logs is a UCP component that integrates with Swarm, K8s, and UCP APIs.
 
 ## Logging levels
 
@@ -62,6 +62,41 @@ You can use audit logs to help with the following use cases:
 5. Create any workload or RBAC grants in Kubernetes and generate a support dump to check the contents of ucp-controller.log file for audit log entries.
 
 6. Optionally, configure the Docker Engine driver to logstash and collect and query audit logs within ELK stack after deploying ELK. (https://success.docker.com/article/elasticsearch-logstash-kibana-logging)
+
+## Sample logs
+
+Here is a sample audit log for a Kubernetes cluster.
+
+```
+{"audit"; {
+      "metadata": {...},
+      "level": "Metadata",
+      "timestamp": "2018-08-07T22:10:35Z",
+      "auditID": "7559d301-fa6b-4ad6-901c-b587fab75277",
+      "stage": "RequestReceived",
+      "requestURI": "/api/v1/namespaces/default/pods",
+      "verb": "list",
+      "user": {"username": "alice",...},
+      "sourceIPs": ["127.0.0.1"],
+      ...,
+      "requestReceivedTimestamp": "2018-08-07T22:10:35.428850Z"}}
+```
+Here is a sample audit log for a Swarm cluster.
+
+```
+{"audit"; {
+      "metadata": {...},
+      "level": "Metadata",
+      "timestamp": "2018-08-07T22:10:35Z",
+      "auditID": "7559d301-94e7-4ad6-901c-b587fab31512",
+      "stage": "RequestReceived",
+      "requestURI": "/v1.30/configs/create",
+      "verb": "post",
+      "user": {"username": "alice",...},
+      "sourceIPs": ["127.0.0.1"],
+      ...,
+      "requestReceivedTimestamp": "2018-08-07T22:10:35.428850Z"}}
+```
 
 ## API endpoints ignored
 
