@@ -174,7 +174,7 @@ The signature verification feature is configured in the Docker daemon configurat
 
 | ***Stanza***                  | ***Description***   | 
 
-| ----------------------- |---------------|
+| --- | --- |
 
 | `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
 
