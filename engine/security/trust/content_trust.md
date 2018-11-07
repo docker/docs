@@ -177,12 +177,11 @@ The signature verification feature is configured in the Docker daemon configurat
 		<td>***Stanza***</td>
 		<td>***Description***</td>
 	</tr>
+	<tr>
+		<td>| `trust-pinning:root-keys`</td>
+		<td>Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.</td>
+	</tr>
 <table>
-
-|                  |    | 
-
-| --- | --- |
-
 | `trust-pinning:root-keys` | Root key IDs are canonical IDs that sign the root metadata of the image trust data. In Docker Certified Trust (DCT), the root keys are unique certificates tying the name of the image to the repo metadata.  The private key ID (the canonical key ID) corresponding to the certificate does not depend on the image name. If an image’s name matches more than one glob, then the most specific (longest) one is chosen.|
 
 |`trust-pinning:library-images` | This option pins the official libraries (`docker.io/library/*`) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by `trust-pinning:root-keys`.  If `trustpinning:root-keys` specifies a key mapping for `docker.io/library/*`, those keys will be preferred for trust pinning.  Otherwise, if a more general `docker.io/*` or `*` are specified, the official images key will be preferred.|
