@@ -183,7 +183,7 @@ The signature verification feature is configured in the Docker daemon configurat
 	</tr>
 	<tr>
 		<td><code>trust-pinning:library-images</code></td>
-		<td>This option pins the official libraries (<code>docker.io/library/*<\code>) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by <code>trust-pinning:root-keys<\code>.  If `trustpinning:root-keys` specifies a key mapping for <code>docker.io/library/*</code>, those keys will be preferred for trust pinning.  Otherwise, if a more general <code>docker.io/*</code> or <code>*</code> are specified, the official images key will be preferred.</td>
+		<td>This option pins the official libraries (<code>docker.io/library/*</code>) to the hard-coded Docker official images root key. DCT trusts the official images by default. This is in addition to whatever images are specified by <code>trust-pinning:root-keys<\code>.  If `trustpinning:root-keys` specifies a key mapping for <code>docker.io/library/*</code>, those keys will be preferred for trust pinning.  Otherwise, if a more general <code>docker.io/*</code> or <code>*</code> are specified, the official images key will be preferred.</td>
 	</tr>
 	<tr>
 		<td><code>allow-expired-trust-cache</code></td>
