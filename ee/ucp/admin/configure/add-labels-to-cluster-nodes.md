@@ -13,7 +13,7 @@ are scheduled on a node with a specific label.
 For example, you can apply labels based on their role in the development
 lifecycle, or the hardware resources they have.
 
-![](../../images/add-labels-to-cluster-nodes-1.svg)
+![](../../images/add-labels-to-cluster-nodes-1.svg){: .with-border}
 
 Don't create labels for authorization and permissions to resources.
 Instead, use resource sets, either UCP collections or Kubernetes namespaces,
@@ -57,10 +57,11 @@ In this example, when users deploy a service, they can add a constraint for the
 service to be scheduled only on nodes that have SSD storage:
 `node.labels.disk == ssd`.
 
-Navigate to the **Stacks** page. Name the new stack "wordpress", and in the
-**Mode** dropdown, check **Swarm Services**.
+1. Navigate to the **Stacks** page.
+2. Name the new stack "wordpress".
+3. Under **Orchestrator Mode**, select **Swarm Services**.
 
-In the **docker-compose.yml** editor, paste the following stack file.
+4. In the **docker-compose.yml** editor, paste the following stack file.
 
 ```
 version: "3.1"
@@ -105,12 +106,12 @@ networks:
   wordpress-net:
 ```
 
-Click **Create** to deploy the stack, and when the stack deploys,
+5. Click **Create** to deploy the stack, and when the stack deploys,
 click **Done**.
 
 ![](../../images/use-constraints-in-stack-deployment.png)
 
-Navigate to the **Nodes** page, and click the node that has the
+6. Navigate to the **Nodes** page, and click the node that has the
 `disk` label. In the details pane, click the **Inspect Resource**
 dropdown and select **Containers**.
 
