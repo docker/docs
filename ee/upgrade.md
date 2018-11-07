@@ -19,8 +19,8 @@ architecture in Swarm to increase the performance and scale of the built-in load
 Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid IP address 
 space exhaustion and associated application downtime.
 
-* New workloads should not be actively scheduled in the cluster during upgrades.  Major and minor version 
-mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
+* New workloads should not be actively scheduled in the cluster during upgrades.
+* Differences in the major (X.y.z.) or minor (x.Y.z) version numbers between the managers and workers can cause mismatches between managers and workers can cause unintended consequences when new workloads are scheduled.
 * Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads are running in the cluster during the upgrade.
 * Once manager nodes are upgraded worker nodes should be upgraded next and then the Swarm cluster upgrade is complete.
 * If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
