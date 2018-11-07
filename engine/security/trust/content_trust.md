@@ -197,7 +197,7 @@ The signature verification feature is configured in the Docker daemon configurat
 			<code>permissive</code>: Verification will be performed, but only failures will only be logged and
 			remain unenforced.  This configuration is intended for testing of changes related to content-trust.
 			<br>
-			<code>enforced<\code>: DCT will be enforced and an image that cannot be verified successfully will not
+			<code>enforced</code>: DCT will be enforced and an image that cannot be verified successfully will not
 				be pulled or run. 
 			</td>
 	</tr>
