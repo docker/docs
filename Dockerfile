@@ -80,7 +80,7 @@ COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
-COPY --from=docs/docs-private:v18.03 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
 
 # Get the built docs output from the previous build stage
 # This ordering means all previous layers can come from cache unless an archive
