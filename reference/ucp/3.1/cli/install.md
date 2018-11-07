@@ -78,5 +78,5 @@ command.
 | `--random`               | Set the Docker Swarm scheduler to random mode. Used for backwards compatibility        |
 | `--external-service-lb`  | Set the external service load balancer reported in the UI                              |
 | `--enable-profiling`     | Enable performance profiling                                                           |
-| `--license`              | Add a license: e.g. --license "$(cat license.lic)"                                     |
+| `--license`              | Add a license: e.g.` --license "$(cat license.lic)" `                                  |
 | `--force-insecure-tcp`   | Force install to continue even with unauthenticated Docker Engine ports                |
