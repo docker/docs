@@ -2561,7 +2561,7 @@ manuals:
         section:
         - path: /ee/dtr/user/manage-images/
           title: Create a repository
-        - path: /ee/dtr/user/review-repository-info/
+        - path: /ee/dtr/user/manage-images/review-repository-info/
           title: Review repository info
         - path: /ee/dtr/user/manage-images/pull-and-push-images/
           title: Pull and push images

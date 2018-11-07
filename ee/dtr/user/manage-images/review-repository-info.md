@@ -25,7 +25,7 @@ To learn more about pulling images, see [Pull and Push Images](pull-and-push-ima
 
 > Limitations
 >
-> Your permissions list may include repository events that are not displayed in the **Activity** tab. It is also not an exhaustive list of event types displayed on your activity stream. To learn more about repository events, see [Audit Repository Events](../manage-repository-events/audit-repository-events).
+> Your permissions list may include repository events that are not displayed in the **Activity** tab. It is also not an exhaustive list of event types displayed on your activity stream. To learn more about repository events, see [Audit Repository Events](../audit-repository-events).
 
 ## Where to go next
 
