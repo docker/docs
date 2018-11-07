@@ -158,17 +158,17 @@ installs, or install on air-gapped systems.
 
 There are currently two channels available for Docker EE for Windows Server:
 
-* `17.06` - Use this version if you're using Docker Enterprise Edition (Docker Engine, UCP, DTR). `17.06` is the default.
-* `18.03` - Use this version if you're running Docker EE Engine alone.
+* `18.09` - Use this version if you're using Docker Enterprise 2.1 (Engine, UCP, DTR), or if you're running Docker Engine alone. `18.09` is the default.
+* `17.06` - Use this version if you're using Docker Enterprise 2.0.
 
 To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.03
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 17.06
 ...
 Name                      Version               Source           Summary
 ----                      -------               ------           -------
-Docker                    18.03.1-ee-2          Docker           Contains Docker EE for use with Windows Server...
+Docker                    17.06.2-ee-17          Docker           Contains Docker EE for use with Windows Server...
 ```
 
 ### Updating the DockerMsftProvider
