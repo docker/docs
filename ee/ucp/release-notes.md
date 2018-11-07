@@ -37,7 +37,7 @@ upgrade your installation to the latest release.
 ### Kubernetes
 
 * Kubernetes is updated to version 1.11.2.
-* Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes.
+* Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes. Your old Kubernetes grants and roles will be automatically migrated during the UCP upgrade.
 
 ### Logging
 
@@ -60,6 +60,7 @@ Admins can configure UCP to use a SAML-enabled identity provider for user authen
 ### Configs
 
 * UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
+* You can now use the `custom_api_server_headers` field in the UCP configuration to set arbitrary headers that are included with every UCP response.
 
 ## API updates
 
@@ -97,15 +98,14 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 
 ## Deprecated features
 
-The following features are deprecated in UCP 3.1
+The following features are deprecated in UCP 3.1.
 
 * Collections
     *  User-created nested collections more than 2 layers deep within the root `/Swarm/` collection are deprecated and will be removed in future versions of the product. In the future, we recommend that at most only two levels of collections be created within UCP under the shared Cluster collection designated as `/Swarm/`. For example, if a production collection is created as a collection under the cluster collection `/Swarm/` as `/Swarm/production/` then at most one level of nestedness should be created, as in `/Swarm/production/app/`.
 
 * Kubernetes
-    * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to Cloud Controller Manager [https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+    * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to [Cloud Controller Manager](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
-    * KubeDNS is deprecated in favor of CoreDNS.
 
 # Version 3.0
 
@@ -149,15 +149,15 @@ The following features are deprecated in UCP 3.1
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue to prevent UCP from accepting certificates from 
-    the system pool when adding client CAs to the server that requires mutual authentication. 
+  * Fixed a critical security issue to prevent UCP from accepting certificates from
+    the system pool when adding client CAs to the server that requires mutual authentication.
 
 **Known Issue**
 
-* When you are upgrading from UCP 3.0.3 or 3.0.4, you must manually pull 
- `docker/ucp-agent:3.0.5` in the images section of the web UI before upgrading. 
+* When you are upgrading from UCP 3.0.3 or 3.0.4, you must manually pull
+ `docker/ucp-agent:3.0.5` in the images section of the web UI before upgrading.
  Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
- This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without 
+ This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without
  manually pulling the images.
 
 ## 3.0.4 (2018-08-09)
@@ -428,7 +428,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
 
 =======
-* Core 
+* Core
   * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
 
@@ -440,8 +440,8 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue to prevent UCP from accepting certificates from 
-    the system pool when adding client CAs to the server that requires mutual authentication. 
+  * Fixed a critical security issue to prevent UCP from accepting certificates from
+    the system pool when adding client CAs to the server that requires mutual authentication.
 >>>>>>> ba65aeabbb67b4cc2464497cfbe8bbccec8aacb2
 
 ## Version 2.2.12 (2018-08-09)
