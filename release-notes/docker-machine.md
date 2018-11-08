@@ -5,6 +5,45 @@ keywords: release notes, machine
 toc_max: 2
 ---
 
+## 0.16.0 (2018-11-08)
+
+### General
+
+* The default storage driver has been updated to `overlay2` for several systems
+* Improved error reporting for the `ssh` subcommand when using the `--native-ssh` flag
+
+### Drivers
+
+`amazonec2`
+* Improved handling of VPC errors
+
+`openstack`
+* Machine removal no longer fails upon attempting to delete a non-existing keypair
+
+## 0.15.0 (2018-06-12)
+
+### General
+
+* `docker-machine` can now be installed using `go install`.
+* Now built with go 1.10
+* Added keep-alive to SSH connections (#4450)
+
+### Drivers
+
+`amazonec2`
+* Updated default AMIs to mitigate Meltdown and Spectre
+* Added `--amazonec2-security-group-readonly` flag to prevent mutating security groups
+
+`exoscale`
+* Updated driver to v0.9.23
+
+`hyperv`
+* Fixed Hyper-V pre-create issues (#4426)
+* Added the ability to disable Hyper-V dynamic memory management during VM creation (`--hyperv-disable-dynamic-memory`)
+
+`vmwarefusion`
+* Improved shell checks (#4491)
+
 ## 0.14.0 (2018-03-06)
 
 ### General

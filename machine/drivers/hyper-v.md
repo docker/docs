@@ -38,20 +38,22 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 -   `--hyperv-cpu-count`: Number of CPUs for the host.
 -   `--hyperv-static-macaddress`: Hyper-V network adapter's static MAC address.
 -   `--hyperv-vlan-id`: Hyper-V network adapter's VLAN ID if any.
+-   `--hyperv-disable-dynamic-memory`: Disable dynamic memory management
 
 ## Environment variables and default values
 
-| CLI option                   | Environment variable       | Default                  |
-| ---------------------------- | -------------------------- | ------------------------ |
-| `--hyperv-boot2docker-url`   | `HYPERV_BOOT2DOCKER_URL`   | _Latest boot2docker url_ |
-| `--hyperv-cpu-count`         | `HYPERV_CPU_COUNT`         | `1`                      |
-| `--hyperv-disk-size`         | `HYPERV_DISK_SIZE`         | `20000`                  |
-| `--hyperv-memory`            | `HYPERV_MEMORY`            | `1024`                   |
-| `--hyperv-static-macaddress` | `HYPERV_STATIC_MACADDRESS` | _undefined_              |
-| `--hyperv-virtual-switch`    | `HYPERV_VIRTUAL_SWITCH`    | _first found_            |
-| `--hyperv-vlan-id`           | `HYPERV_VLAN_ID`           | _undefined_              |
+| CLI option                        | Environment variable            | Default                  |
+| --------------------------------- | ------------------------------- | ------------------------ |
+| `--hyperv-boot2docker-url`        | `HYPERV_BOOT2DOCKER_URL`        | _Latest boot2docker url_ |
+| `--hyperv-cpu-count`              | `HYPERV_CPU_COUNT`              | `1`                      |
+| `--hyperv-disk-size`              | `HYPERV_DISK_SIZE`              | `20000`                  |
+| `--hyperv-memory`                 | `HYPERV_MEMORY`                 | `1024`                   |
+| `--hyperv-static-macaddress`      | `HYPERV_STATIC_MACADDRESS`      | _undefined_              |
+| `--hyperv-virtual-switch`         | `HYPERV_VIRTUAL_SWITCH`         | _first found_            |
+| `--hyperv-vlan-id`                | `HYPERV_VLAN_ID`                | _undefined_              |
+| `--hyperv-disable-dynamic-memory` | `HYPERV_DISABLE_DYNAMIC_MEMORY` | `false`                  |
 
-## Example
+## Example:
 
 #### 1. Make sure Hyper-V is enabled
 
