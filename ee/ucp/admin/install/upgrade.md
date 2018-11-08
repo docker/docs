@@ -23,7 +23,7 @@ Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
 Ensure that your cluster nodes meet the minimum requirements for memory and
-disk space. In particular, manager nodes must have at least 4GB of memory.
+disk space. In particular, manager nodes must have at least 8GB of memory.
 Learn about [UCP system requirements](system-requirements.md).
 
 Ensure that your cluster nodes meet the minimum requirements for port openings.
