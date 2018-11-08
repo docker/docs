@@ -183,7 +183,7 @@ spec:
           privileged: true
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.17.1
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
@@ -191,6 +191,7 @@ spec:
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
             - --annotations-prefix=nginx.ingress.kubernetes.io
+            - --enable-ssl-passthrough
           env:
             - name: POD_NAME
               valueFrom:
