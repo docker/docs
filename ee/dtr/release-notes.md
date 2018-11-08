@@ -28,17 +28,17 @@ to upgrade your installation to the latest release.
 ### New Features
 
 * Web Interface
-  * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](../admin/configure/garbage-collection/).
-  * Repository admins can now enable tag pruning for every repository that they manage by adding a pruning policy or setting a tag limit. [Learn about tag pruning](../user/tag-pruning).
-  * Users can now review and audit repository events on the web interface with the addition of the **Activity** tab on each repository.[Learn about repository event audits](../user/manage-repository-events/audit-repository-events/).
-  * DTR admins can now enable auto-deletion of repository events based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
-  * DTR admins can now review and audit jobs on the web interface with the addition of **Job Logs** within System settings. [Learn about job audits on the web interface](../admin/manage-jobs/audit-jobs-via-ui/).
-  * DTR admins can now enable auto-deletion of job logs based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
-  * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](../user/promotion-policies/pull-mirror).
+  * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](../dtr/admin/configure/garbage-collection.md).
+  * Repository admins can now enable tag pruning for every repository that they manage by adding a pruning policy or setting a tag limit. [Learn about tag pruning](../dtr/user/tag-pruning.md).
+  * Users can now review and audit repository events on the web interface with the addition of the **Activity** tab on each repository.[Learn about repository event audits](../dtr/user/audit-repository-events.md).
+  * DTR admins can now enable auto-deletion of repository events based on specified conditions. [Learn about repository event auto-deletion](../dtr/admin/configure/auto-delete-repo-events.md).
+  * DTR admins can now review and audit jobs on the web interface with the addition of **Job Logs** within System settings. [Learn about job audits on the web interface](../dtr/admin/manage-jobs/audit-jobs-via-ui.md).
+  * DTR admins can now enable auto-deletion of job logs based on specified conditions. [Learn about repository event auto-deletion](../dtr/admin/configure/auto-delete-repo-events.md).
+  * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](../dtr/user/promotion-policies/pull-mirror.md).
 
 * CLI
-  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](../../reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure) for more details.
-  * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](../../reference/dtr/2.6/cli/restore) for more details.
+  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](../../reference/dtr/2.6/cli/install.md) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure.md) for more details.
+  * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](../../reference/dtr/2.6/cli/restore.md) for more details.
 
 * API
   * Security admins can now export vulnerability scans to CSV via the `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}/export` endpoint. Specify `text/csv` as an Accept request HTTP header.
