@@ -15,8 +15,8 @@ Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){:
 ##  What to know before you install
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: Docker for
-  Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer
-  enables Hyper-V for you, if needed, and restart your machine. After Hyper-V is
+  Windows requires Microsoft Hyper-V to run. The Docker for Windows installer
+  enables Hyper-V for you, if needed, and restarts your machine. After Hyper-V is
   enabled, VirtualBox no longer works, but any VirtualBox VM images remain.
   VirtualBox VMs created with `docker-machine` (including the `default` one
   typically created during Toolbox install) no longer start. These VMs cannot be
@@ -45,7 +45,7 @@ Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){:
   user accounts on machines where it is installed. This is because all Windows
   accounts use the same VM to build and run containers.
 * Nested virtualization scenarios, such as running Docker for Windows on a
-  VMWare or Parallels instance, might work, but come with no guarantees. For
+  VMWare or Parallels instance might work, but there are no guarantees. For
   more information, see [Running Docker for Windows in nested virtualization
   scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 
@@ -106,7 +106,7 @@ suggested next steps, and a link to this documentation.
 
 ![Startup information](images/docker-app-welcome.png){:width="400px"}
 
-When initialization is complete, select **About Docker** from the notification
+When initialization is complete, select **About Docker** from the Notifications
 area icon to verify that you have the latest version.
 
 Congratulations! You are up and running with Docker for Windows.
