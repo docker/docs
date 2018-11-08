@@ -27,7 +27,7 @@ To get started:
    * Mirror direction: Choose "Pull from remote registry"
    * Registry type: You can choose between **Docker Trusted Registry** and **Docker Hub**. If you choose DTR, enter your DTR URL. Otherwise, **Docker Hub** defaults to `https://index.docker.io`.
    * Username and Password or access token: Your credentials in the remote repository you wish to poll from. To use an access token instead of your password, see [authentication token](../access-tokens.md).
-   * Repository: Enter the `namespace` and the `repository name after the `/`.
+   * Repository: Enter the `namespace` and the `repository_name` after the `/`.
    * Show advanced settings: Enter the TLS details for the remote repository or check `Skip TLS verification`.
 
 
