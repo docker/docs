@@ -23,7 +23,7 @@ consistency and compatibility reasons.
 ### New features for Docker Engine EE 
 
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee) 
-* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Enterpirse Engine to run containers not signed by a specific organization.
+* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Engine - Enterprise to run containers not signed by a specific organization.
 
 ### New features for Docker Engine EE and CE
 
