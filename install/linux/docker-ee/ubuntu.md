@@ -138,7 +138,7 @@ from the repository.
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
 
 
-    The current version of Docker EE Engine is 18.09 for Docker Enterprise Edition 2.1.
+    The current version of Docker EE Engine is 18.09 for using with Docker Enterprise Edition 2.1.
 
     > ***NOTE:*** There are two older versions of Docker EE Engine available:
     > * 18.03 - Use this version if you're only running Docker EE Engine.
