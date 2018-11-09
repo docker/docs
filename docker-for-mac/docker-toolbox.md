@@ -50,7 +50,7 @@ Here are some key points to know about Docker for Mac before you get started:
   The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
-  the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
+  the Docker daemon, so you can use `docker` and `docker-compose` CLI commands
   on your Mac.
 
 
