@@ -25,37 +25,37 @@ toc_max: 2
 ### General
 
 * `docker-machine` can now be installed using `go install`.
-* Now built with go 1.10
-* Added keep-alive to SSH connections (#4450)
+* Docker Machine is now built with Go `1.10`.
+* SSH connections now include a keep alive option. (docker/machine #4450)
 
 ### Drivers
 
 `amazonec2`
-* Updated default AMIs to mitigate Meltdown and Spectre
-* Added `--amazonec2-security-group-readonly` flag to prevent mutating security groups
+* Updated default AMIs to mitigate Meltdown and Spectre.
+* Added `--amazonec2-security-group-readonly` flag to prevent mutating security groups.
 
 `exoscale`
-* Updated driver to v0.9.23
+* Updated driver to `v0.9.23`.
 
 `hyperv`
-* Fixed Hyper-V pre-create issues (#4426)
-* Added the ability to disable Hyper-V dynamic memory management during VM creation (`--hyperv-disable-dynamic-memory`)
+* Fixed Hyper-V precreate issues. (docker/machine #4426)
+* Added the ability to disable Hyper-V dynamic memory management during VM creation with `--hyperv-disable-dynamic-memory`.
 
 `vmwarefusion`
-* Improved shell checks (#4491)
+* Improved shell checks (docker/machine #4491).
 
 ## 0.14.0 (2018-03-06)
 
 ### General
 
 * Added `--client-certs` flag to the `docker-machine regenerate-certs` command.
-* Improved OpenBSD support
+* Improved OpenBSD support.
 * Fixed a bug with `scp` commands issued from a Windows host.
-* Enabled progress output by default for `scp` commands using `rsync`
-* Added `--quiet` flag to `scp` to suppress progress output
-* Machine now uses the `ss` command to detect connectivity when `netstat` is unavailable
-* Added bash completion for `docker-machine mount`
-* Improved provisioning resilience on Debian-based hosts
+* Enabled progress output by default for `scp` commands using `rsync`.
+* Added `--quiet` flag to `scp` to suppress progress output.
+* Machine now uses the `ss` command to detect connectivity when `netstat` is unavailable.
+* Added bash completion for `docker-machine mount`.
+* Improved provisioning resilience on Debian-based hosts.
 
 ### Drivers
 
@@ -75,14 +75,14 @@ toc_max: 2
 * Added support for arbitrary disk size
 
 `google`
-* Enabled disk auto-deletion on newly created machines
+* Enabled disk auto-deletion on newly created machines.
 * Fixed a bug preventing the removal of a machine if it had already been removed remotely.
-* Added support for fully qualified network and subnetwork names
+* Added support for fully qualified network and subnetwork names.
 
 `hyperv`
-* Fixed potential cmdlet collision with VMWare powercli
-* Fixed a bug with virtual switch selection
-* Machine now correctly detects if the user is a Hyper-V administrator when using a localized version of Windows
+* Fixed potential cmdlet collision with VMWare powercli.
+* Fixed a bug with virtual switch selection.
+* Machine now correctly detects if the user is a Hyper-V administrator when using a localized version of Windows.
 
 `openstack`
 * Added `--openstack-config-drive` flag
@@ -93,17 +93,17 @@ toc_max: 2
 * Added OpenBSD support
 
 `vmwarefusion`
-* Improved error detection and reporting when creating a new instance
+* Improved error detection and reporting when creating a new instance.
 
 `vmwarevsphere`
-* Added  `--vmwarevsphere-folder` flag
+* Added  `--vmwarevsphere-folder` flag.
 
 ## 0.13.0 (2017-10-12)
 
 ### General
 
-- Added new `docker-machine mount` command for mounting machine directories over SSHFS
-- Improved some logging messages
+- Added new `docker-machine mount` command for mounting machine directories over SSHFS.
+- Improved some logging messages.
 - Fixed a bug with the `scp` command when using an identity file.
 - Fixed a parsing error that caused the boot2docker ISO cache to malfunction, forcing a new download everytime.
 
@@ -113,32 +113,32 @@ toc_max: 2
   - `docker-machine rm` now also cleans up the associated storage account if it has no remaining storage containers.
   - The creation process will no longer recreate the associated subnet if it already it exists.
 - `exoscale`
-  - Updated driver
-  - Removed default `docker-machine` affinity group if no other affinity group was specified
+  - Updated driver.
+  - Removed default `docker-machine` affinity group if no other affinity group was specified.
 - `virtualbox`
   - Fixed a bug where the machine would sometimes be assigned an invalid IP address at creation time.
 - `vmwaresphere`
-  - Added support for multiple networks
+  - Added support for multiple networks.
 
 ## 0.12.2 (2017-7-12)
 
 ### General
 
 * The `scp` sub-command now allows to provide an optional `user@` to the address.
-* Fixed bash completion on OS X
+* Fixed bash completion on OS X.
 
 ### Drivers
 
 * `amazonec2`
-  * Updated default AMIs to the latest version of Ubuntu 16.04 LTS
-  * Fixed a bug preventing proper machine removal
+  * Updated default AMIs to the latest version of Ubuntu 16.04 LTS.
+  * Fixed a bug preventing proper machine removal.
 * `vmwarevsphere`
-  * Creating VMs on a DRS-enabled cluster should now work properly
-  * Fixed a bug that prevented provisioning
+  * Creating VMs on a DRS-enabled cluster should now work properly.
+  * Fixed a bug that prevented provisioning.
 * `vmwarefusion`
-  * Fixed a bug that prevented provisioning
+  * Fixed a bug that prevented provisioning.
 * `exoscale`
-  * Updated library
+  * Updated library.
 
 ## 0.12.1 (2017-6-30)
 
@@ -150,15 +150,15 @@ toc_max: 2
 
 ### General
 
-- Various bash completion improvements
-- Bump Go to version 1.8.3
+- Various bash completion improvements.
+- Bump Go to version 1.8.3.
 
 ### Drivers
 
 - `openstack`
     - Enable `HTTP_PROXY`
 - `digitalocean`
-    - Add support for tagging
+    - Add support for tagging.
 - `virtualbox`
     - Scope DHCP address range based on CIDR
 - `generic`
