@@ -164,9 +164,9 @@ Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker EE
 from the repository.
 
-The current version of Docker EE Engine is 18.09.
+The current version of Docker EE Engine is 18.09 for Docker Enterprise Edition 2.1.
 
-> ***NOTE:*** There are two previous versions of Docker EE Engine available:
+> ***NOTE:*** There are two older versions of Docker EE Engine available:
 > * 18.03 - Use this version if you're only running Docker EE Engine.
 > * 17.06 - Use this version if you're using Docker Enterprise Edition 2.0
 > (Docker Engine, UCP, and DTR).
