@@ -9,16 +9,16 @@ toc_max: 2
 
 ### General
 
-* The default storage driver has been updated to `overlay2` for several systems
-* Improved error reporting for the `ssh` subcommand when using the `--native-ssh` flag
+* Updated the default storage driver to `overlay2` for several systems.
+* Improved error reporting for the `ssh` subcommand when using the `--native-ssh` flag.
 
 ### Drivers
 
 `amazonec2`
-* Improved handling of VPC errors
+* Improved handling of VPC errors.
 
 `openstack`
-* Machine removal no longer fails upon attempting to delete a non-existing keypair
+* Machine removal no longer fails upon attempting to delete a nonexistent keypair.
 
 ## 0.15.0 (2018-06-12)
 
