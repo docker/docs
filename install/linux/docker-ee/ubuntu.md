@@ -136,11 +136,16 @@ from the repository.
       ```
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
-    There are currently two versions of Docker EE Engine available:
 
-    * `stable-18.03` - Use this version if you're only running Docker EE Engine.
-    * `stable-17.06` - Use this version if you're using Docker Enterprise Edition (Docker
-    Engine, UCP, and DTR).
+
+    The current version of Docker EE Engine is 18.09.
+
+    > ***NOTE:*** There are two previous versions of Docker EE Engine available:
+    > * 18.03 - Use this version if you're only running Docker EE Engine.
+    > * 17.06 - Use this version if you're using Docker Enterprise Edition 2.0
+    > (Docker Engine, UCP, and DTR).
+    >
+    > By default, Docker EE Engine 18.09 is installed.
 
     ```bash
     $ DOCKER_EE_VERSION=<YOUR_VERSION>
@@ -185,7 +190,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-17.06"
+       stable-18.09"
     ```
 
     </div>
@@ -195,7 +200,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-17.06"
+       stable-18.09"
     ```
 
     </div>
@@ -205,7 +210,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-17.06"
+       stable-18.09"
     ```
 
     </div>
@@ -279,7 +284,7 @@ steps.
 To upgrade Docker EE:
 
 1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 17.03.x to Docker 17.06.x),
+    Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo apt-get update`.

@@ -137,20 +137,17 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-There are currently two versions of Docker EE Engine available:
+The current version of Docker EE Engine is 18.09.
 
-* 18.03 - Use this version if you're only running Docker EE Engine.
-* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
-Engine, UCP, and DTR).
+> ***NOTE:*** There are two previous versions of Docker EE Engine available: 
+> * 18.03 - Use this version if you're only running Docker EE Engine.
+> * 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 
+> (Docker Engine, UCP, and DTR).
+>
+> By default, Docker EE Engine 18.09 is installed.
 
-1. By default, Docker EE Engine 17.06 is installed. If you want to install the
-18.03 version run:
 
-    ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.03
-    ```
-
-2.  Install the latest patch release, or go to the next step to install a specific version:
+1.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum -y install docker-ee
@@ -158,27 +155,34 @@ Engine, UCP, and DTR).
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-3.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+
+2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
 
     a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-17.06
+    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
     ```
 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-17.06.1.ee.2`
+    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.ee.2`
 
     ```bash
     $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
+    For example, if you want to install the 18.09 version run the following:
+
+    ```bash
+    sudo yum-config-manager --enable docker-ee-stable-18.09
+    ```
+
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-4.  Start Docker:
+3.  Start Docker:
 
     > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
@@ -186,7 +190,7 @@ Engine, UCP, and DTR).
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 
