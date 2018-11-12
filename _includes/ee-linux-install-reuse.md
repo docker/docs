@@ -137,8 +137,6 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-For Docker Enterprise Edition 2.1, use Docker EE Engine 18.09. Installation instructions start below the note.
-
 > ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
 > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Use this version if you're only running Docker EE Engine.
 > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Use this version if you're using Docker Enterprise 
