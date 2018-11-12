@@ -166,7 +166,7 @@ For Docker Enterprise Edition 2.1, use Docker EE Engine 18.09. Installation inst
 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.ee.2`
+    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.0`
 
     ```bash
     $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
@@ -175,7 +175,7 @@ For Docker Enterprise Edition 2.1, use Docker EE Engine 18.09. Installation inst
     For example, if you want to install the 18.09 version run the following:
 
     ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.09
+    sudo yum-config-manager --enable docker-ee-stable-18.09.0
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
