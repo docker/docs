@@ -1,6 +1,6 @@
 ---
 description: Page for deprecation announcements.
-keywords: registry, manifest, images, signatures, repository, distribution, digest
+keywords: dtr, manifest list, api, repository, digest
 title: Deprecation Notice
 ---
 
