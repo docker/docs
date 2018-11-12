@@ -359,6 +359,16 @@ See `man 7 capabilities` for a full list.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
+### cgroup_parent
+
+Specify an optional parent cgroup for the container.
+
+    cgroup_parent: m-executor-abcd
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### command
 
 Override the default command.
@@ -464,16 +474,6 @@ configs:
 You can grant a service access to multiple configs and you can mix long and
 short syntax. Defining a config does not imply granting a service access to it.
 
-### cgroup_parent
-
-Specify an optional parent cgroup for the container.
-
-    cgroup_parent: m-executor-abcd
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
-
 ### container_name
 
 Specify a custom container name, rather than a generated default name.
@@ -514,6 +514,45 @@ in the registry:
 
     credential_spec:
       registry: my-credential-spec
+
+### depends_on
+
+Express dependency between services, Service dependencies cause the following
+behaviors:
+
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` are started before `web`.
+
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
+  creates and starts `db` and `redis`.
+
+Simple example:
+
+    version: '3'
+    services:
+      web:
+        build: .
+        depends_on:
+          - db
+          - redis
+      redis:
+        image: redis
+      db:
+        image: postgres
+
+> There are several things to be aware of when using `depends_on`:
+>
+> - `depends_on` does not wait for `db` and `redis` to be "ready" before
+>   starting `web` - only until they have been started. If you need to wait
+>   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for more on this problem and strategies for solving it.
+>
+> - Version 3 no longer supports the `condition` form of `depends_on`.
+>
+> - The `depends_on` option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a version 3 Compose file.
 
 ### deploy
 
@@ -841,46 +880,6 @@ client create option.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
-### depends_on
-
-Express dependency between services, Service dependencies cause the following
-behaviors:
-
-- `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` are started before `web`.
-
-- `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  creates and starts `db` and `redis`.
-
-Simple example:
-
-    version: '3'
-    services:
-      web:
-        build: .
-        depends_on:
-          - db
-          - redis
-      redis:
-        image: redis
-      db:
-        image: postgres
-
-> There are several things to be aware of when using `depends_on`:
->
-> - `depends_on` does not wait for `db` and `redis` to be "ready" before
->   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
->   for more on this problem and strategies for solving it.
->
-> - Version 3 no longer supports the `condition` form of `depends_on`.
->
-> - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
->   with a version 3 Compose file.
-
-
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
@@ -898,31 +897,6 @@ Custom DNS search domains. Can be a single value or a list.
     dns_search:
       - dc1.example.com
       - dc2.example.com
-
-### tmpfs
-
-> [Version 2 file format](compose-versioning.md#version-2) and up.
-
-Mount a temporary file system inside the container. Can be a single value or a list.
-
-    tmpfs: /run
-    tmpfs:
-      - /run
-      - /tmp
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3-3.5) Compose file.
-
-> [Version 3.6 file format](compose-versioning.md#version-3) and up.
-
-Mount a temporary file system inside the container. Size parameter specifies the size
-of the tmpfs mount in bytes. Unlimited by default.
-
-     - type: tmpfs
-         target: /app
-         tmpfs:
-           size: 1000
 
 ### entrypoint
 
@@ -1459,6 +1433,22 @@ ports:
 
 > **Note:** The long syntax is new in v3.2
 
+### restart
+
+`no` is the default restart policy, and it does not restart a container under
+any circumstance. When `always` is specified, the container always restarts. The
+`on-failure` policy restarts a container if the exit code indicates an
+on-failure error.
+
+    restart: "no"
+    restart: always
+    restart: on-failure
+    restart: unless-stopped
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
+
 ### secrets
 
 Grant access to secrets on a per-service basis using the per-service `secrets`
@@ -1604,6 +1594,31 @@ dictionary.
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+
+### tmpfs
+
+> [Version 2 file format](compose-versioning.md#version-2) and up.
+
+Mount a temporary file system inside the container. Can be a single value or a list.
+
+    tmpfs: /run
+    tmpfs:
+      - /run
+      - /tmp
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3-3.5) Compose file.
+
+> [Version 3.6 file format](compose-versioning.md#version-3) and up.
+
+Mount a temporary file system inside the container. Size parameter specifies the size
+of the tmpfs mount in bytes. Unlimited by default.
+
+     - type: tmpfs
+         target: /app
+         tmpfs:
+           size: 1000
 
 ### ulimits
 
@@ -1826,22 +1841,6 @@ services:
 Full detail on these flags, the problems they solve, and their
 `docker run` counterparts is in the Docker for Mac topic [Performance tuning for
 volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
-
-### restart
-
-`no` is the default restart policy, and it does not restart a container under
-any circumstance. When `always` is specified, the container always restarts. The
-`on-failure` policy restarts a container if the exit code indicates an
-on-failure error.
-
-    restart: "no"
-    restart: always
-    restart: on-failure
-    restart: unless-stopped
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
