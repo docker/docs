@@ -1,6 +1,6 @@
 ---
 description: Page for deprecation announcements.
-keywords: registry, manifest, images, signatures, repository, distribution, digest
+keywords: dtr, manifest list, api, repository, digest
 title: Deprecation Notice
 ---
 
@@ -14,5 +14,5 @@ Since `v2.5`, it has been possible for repository admins to autogenerate manifes
 
 #### 2.7
 
-The above behavior and the `enableManifestLists` field will be removed in `v2.7`. Starting in `v2.7`, you can use the CLI command, `docker manifest`, to [create and push a manifest list to any repository](./engine/reference/commandline/manifest/). 
+The above behavior and the `enableManifestLists` field will be removed in `v2.7`. Starting in `v2.7`, you can use the CLI command, `docker manifest`, to [create and push a manifest list to any repository](/engine/reference/commandline/manifest/). 
 
