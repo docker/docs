@@ -163,6 +163,8 @@ tag using `-t` so it has a friendly name.
 docker build -t friendlyhello .
 ```
 
+> **Note**: Don't forget the period after the `friendlyhello` above! Without it, your command would be missing an arg.
+
 Where is your built image? It's in your machine's local Docker image registry:
 
 ```shell
