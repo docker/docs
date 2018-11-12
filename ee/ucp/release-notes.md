@@ -96,6 +96,8 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 
+* Pod Security Policies are not supported in this release. (#15105)
+
 ## Deprecated features
 
 The following features are deprecated in UCP 3.1.
