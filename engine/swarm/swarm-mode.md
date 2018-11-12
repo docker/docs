@@ -78,7 +78,9 @@ To configure custom default address pools, you must define pools at Swarm initia
 To create the custom address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. For example, for the `10.0.0.0/27`, use the value `27`.
 
 Docker allocates subnet addresses from the address ranges specified by the `--default-addr-pool` command line option. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
+
 =======
+
 By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scope (overlay) networks. Every network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In some circumstances it may be desireable to use a different default IP address pool for networks. For example, if the default `10.0.0.0/8` range conflicts with already allocated address space in your network then it is desireable to ensure that networks use a different range without requiring Swarm users to specify each subnet with the `--subnet` command. 
 
 To configure custom default address pools, you must define pools at Swarm initialization using the `--default-addr-pool` flag. To create the custom address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. The default address pool uses CIDR notation.
@@ -87,14 +89,18 @@ Docker allocates subnet addresses from the address ranges specified by the --def
 
 To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
 create a subnet mask of `/26` for each network looks like this:
+
 =======
+
 To create a default IP address pool with a /16 (class B) for the 10.20.0.0 and 10.30.0.0 networks, and to create a subnet mask of /26 for each network looks like this:
 
 
 In this example, `docker network create -d overlay net1` produces `10.20.0.0/26` as the allocated subnet for `net1`, 
 and `docker network create -d overlay net2` produces `10.20.0.64/26` as the allocated subnet for `net2`. This continues until 
 all the subnets are exhausted. 
+
 =======
+
 In this example, `docker network create -d overlay net1` will result in `10.20.0.0/26` as the allocated subnet for `net1`, and `docker network create -d overlay net2` will result in `10.20.0.64/26` as the allocated subnet for `net2`. This continues until all the subnets are exhausted. 
 
 Refer to the following pages for more information:
