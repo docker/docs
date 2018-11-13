@@ -21,56 +21,54 @@ After you have read the [storage driver overview](index.md), the
 next step is to choose the best storage driver for your workloads. In making
 this decision, there are three high-level factors to consider:
 
-- If multiple storage drivers are supported in your kernel, Docker has a
-  prioritized list of which storage driver to use if no storage driver is
-  explicitly configured, assuming that the prerequisites for that storage driver
-  are met:
+If multiple storage drivers are supported in your kernel, Docker has prioritized 
+list of which storage driver to use if no storage driver is explicitly configured, 
+assuming that the that storage driver meets the prerequisites.
 
-  - Try to use the storage driver with the best overall performance and stability
-    in the most usual scenarios.
+Use the storage driver with the best overall performance and stability in the most 
+usual scenarios.
+  
+Docker supports the following storage drivers:
 
-    - `overlay2` is the preferred storage driver, for all currently supported
-      Linux distributions, and requires no extra configuration.
-    - `aufs` is the preferred storage driver for Docker 18.06 and older, when
-      running on Ubuntu 14.04 on kernel 3.13 (which has no support for `overlay2`.
-    - `devicemapper` is next, but requires `direct-lvm` for production
-      environments, because `loopback-lvm`, while zero-configuration, has very
-      poor performance. `devicemapper` was the recommended storage driver for
-      CentOS and RHEL, as their kernel version did not support `overlay2`. However,
-      current versions of CentOS and RHEL now have support for `overlay2`, and
-      is now the recommended driver.
-    - The `btrfs` and `zfs` storage drivers are used if they are the backing
-      filesystem (the filesystem of the host on which Docker is installed).
-      These filesystems allow for advanced options, such as creating "snapshots",
-      but require more maintenance and setup. Each of these relies on the backing
-      filesystem being configured correctly.
-    - The `vfs` storage driver is intended for testing purposes, and for situations
-      where no copy-on-write filesystem can be used. Performance of this storage
-      driver is poor, and not generally recommended for production use.
+* `overlay2` is the preferred storage driver, for all currently supported
+   Linux distributions, and requires no extra configuration.
+* `aufs` is the preferred storage driver for Docker 18.06 and older, when
+   running on Ubuntu 14.04 on kernel 3.13 (which has no support for `overlay2`.
+* `devicemapper` is supported, but requires `direct-lvm` for production
+   environments, because `loopback-lvm`, while zero-configuration, has very
+   poor performance. `devicemapper` was the recommended storage driver for
+   CentOS and RHEL, as their kernel version did not support `overlay2`. However,
+   current versions of CentOS and RHEL now have support for `overlay2`, and
+   is now the recommended driver.
+ * The `btrfs` and `zfs` storage drivers are used if they are the backing
+   filesystem (the filesystem of the host on which Docker is installed).
+   These filesystems allow for advanced options, such as creating "snapshots",
+   but require more maintenance and setup. Each of these relies on the backing
+   filesystem being configured correctly.
+ * The `vfs` storage driver is intended for testing purposes, and for situations
+   where no copy-on-write filesystem can be used. Performance of this storage
+   driver is poor, and not generally recommended for production use.
 
-  The selection order is defined in Docker's source code. You can see the order
-  by looking at
-  [the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
-  You can use the branch selector at the top of the file viewer to choose a
-  different branch, if you run a different version of Docker.
-  {: id="storage-driver-order" }
+Docker's source code defines the selection order. You can see the order at
+[the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
 
-- Your choice may be limited by your Docker edition, operating system, and
-  distribution. For instance, `aufs` is only supported on Ubuntu and Debian, and
-  may require extra packages to be installed,
-  while `btrfs` is only supported on SLES, which is only supported with Docker
-  EE. See
-  [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution).
+You can use the branch selector at the top of the file viewer to choose a different branch, if you run a 
+different version of Docker.
+{: id="storage-driver-order" }
 
-- Some storage drivers require you to use a specific format for the backing
-  filesystem. If you have external requirements to use a specific backing
-  filesystem, this may limit your choices. See
-  [Supported backing filesystems](#supported-backing-filesystems).
+Some storage drivers require you to use a specific format for the backing filesystem. If you have external 
+requirements to use a specific backing filesystem, this may limit your choices. See [Supported backing filesystems](#supported-backing-filesystems).
 
-- After you have narrowed down which storage drivers you can choose from, your
-  choice are determined by the characteristics of your workload and the
-  level of stability you need. See [Other considerations](#other-considerations)
-  for help making the final decision.
+After you have narrowed down which storage drivers you can choose from, your choice are determined by the 
+characteristics of your workload and the level of stability you need. See [Other considerations](#other-considerations)
+for help making the final decision.
+
+> ***NOTE***: Your choice may be limited by your Docker edition, operating system, and distribution. 
+> For instance, `aufs` is only supported on Ubuntu and Debian, and may require extra packages 
+> to be installed, while `btrfs` is only supported on SLES, which is only supported with Docker
+> EE. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution) 
+> for more information.
+
 
 ## Supported storage drivers per Linux distribution
 
