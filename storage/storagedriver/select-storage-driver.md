@@ -21,7 +21,7 @@ After you have read the [storage driver overview](index.md), the
 next step is to choose the best storage driver for your workloads. In making
 this decision, there are three high-level factors to consider:
 
-If multiple storage drivers are supported in your kernel, Docker has prioritized 
+If multiple storage drivers are supported in your kernel, Docker has a prioritized 
 list of which storage driver to use if no storage driver is explicitly configured, 
 assuming that the that storage driver meets the prerequisites.
 
@@ -39,7 +39,7 @@ Docker supports the following storage drivers:
    poor performance. `devicemapper` was the recommended storage driver for
    CentOS and RHEL, as their kernel version did not support `overlay2`. However,
    current versions of CentOS and RHEL now have support for `overlay2`, and
-   is now the recommended driver.
+   which is now the recommended driver.
  * The `btrfs` and `zfs` storage drivers are used if they are the backing
    filesystem (the filesystem of the host on which Docker is installed).
    These filesystems allow for advanced options, such as creating "snapshots",
