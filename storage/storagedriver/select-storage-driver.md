@@ -50,7 +50,7 @@ Docker supports the following storage drivers:
    driver is poor, and is not generally recommended for production use.
 
 Docker's source code defines the selection order. You can see the order at
-[the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
+[the source code for Docker Engine - Community {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
 
 If you run a different version of Docker, you can use the branch selector at the top of the file viewer to choose a different branch.
 {: id="storage-driver-order" }
@@ -65,7 +65,7 @@ for help in making the final decision.
 > ***NOTE***: Your choice may be limited by your Docker edition, operating system, and distribution. 
 > For instance, `aufs` is only supported on Ubuntu and Debian, and may require extra packages 
 > to be installed, while `btrfs` is only supported on SLES, which is only supported with Docker
-> EE. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution) 
+> Enterprise. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution) 
 > for more information.
 
 
@@ -78,31 +78,31 @@ In addition, Docker does not recommend any configuration that requires you to
 disable security features of your operating system, such as the need to disable
 `selinux` if you use the `overlay` or `overlay2` driver on CentOS.
 
-### Docker Engine Enterprise and Docker EE
+### Docker Engine - Enterprise and Docker Enterprise
 
-For Docker Engine Enterprise and Docker EE, the definitive resource for which
+For Docker Engine - Enterprise and Docker Enterprise, the definitive resource for which
 storage drivers are supported is the
 [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 To get commercial support from Docker, you must use a supported configuration.
 
-### Docker Engine Community and Docker CE
+### Docker Engine - Community
 
-For Docker Engine Community, only some configurations are tested, and your operating
+For Docker Engine - Community, only some configurations are tested, and your operating
 system's kernel may not support every storage driver. In general, the following
 configurations work on recent versions of the Linux distribution:
 
 | Linux distribution  | Recommended storage drivers                                            | Alternative drivers                               |
 |:--------------------|:-----------------------------------------------------------------------|:--------------------------------------------------|
-| Docker CE on Ubuntu | `overlay2` or `aufs` (for Ubuntu 14.04 running on kernel 3.13)         | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
-| Docker CE on Debian | `overlay2` (Debian Stretch), `aufs` or `devicemapper` (older versions) | `overlay`¹, `vfs`                                 |
-| Docker CE on CentOS | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
-| Docker CE on Fedora | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
+| Docker Engine - Community on Ubuntu | `overlay2` or `aufs` (for Ubuntu 14.04 running on kernel 3.13)         | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
+| Docker Engine - Community on Debian | `overlay2` (Debian Stretch), `aufs` or `devicemapper` (older versions) | `overlay`¹, `vfs`                                 |
+| Docker Engine - Community on CentOS | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
+| Docker Engine - Community on Fedora | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 
 ¹) The `overlay` storage driver is deprecated in Docker Engine - Enterprise 18.09, and will be
 removed in a future release. It is recommended that users of the `overlay` storage driver 
 migrate to `overlay2`.
 
-²) The `devicemapper` storage driver is deprecated in Docker 18.09, and will be
+²) The `devicemapper` storage driver is deprecated in Docker Engine 18.09, and will be
 removed in a future release. It is recommended that users of the `overlay` storage driver 
 migrate to `overlay2`.
 
@@ -126,10 +126,10 @@ storage driver, be sure to read about
 [its performance and storage characteristics and limitations](vfs-driver.md).
 
 > **Expectations for non-recommended storage drivers**: Commercial support is
-> not available for Docker CE, and you can technically use any storage driver
+> not available for Docker Engine - Community, and you can technically use any storage driver
 > that is available for your platform. For instance, you can use `btrfs` with
-> Docker CE, even though it is not recommended on any platform for Docker CE,
-> and you do so at your own risk.
+> Docker Engine - Community, even though it is not recommended on any platform for
+> Docker Engine - Community, and you do so at your own risk.
 >
 > The recommendations in the table above are based on automated regression
 > testing and the configurations that are known to work for a large number of
