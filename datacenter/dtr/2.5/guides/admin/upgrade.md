@@ -4,7 +4,7 @@ description: Learn how to upgrade your Docker Trusted Registry
 keywords: dtr, upgrade, install
 ---
 
-{% assign previous_version="2.3" %}
+{% assign previous_version="2.4" %}
 
 DTR uses [semantic versioning](http://semver.org/) and we aim to achieve specific
 guarantees while upgrading between versions. We never support downgrading. We
