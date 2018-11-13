@@ -15,7 +15,7 @@ all the images. Then you copy that package to the host where you’ll install DT
 
 ## Versions available
 
-{% include components/ddc_url_list_2.html product="dtr" version="2.4" %}
+{% include components/ddc_url_list_2.html product="dtr" version="2.5" %}
 
 ## Download the offline package
 
