@@ -6,11 +6,7 @@ title: Organizations and Teams in Docker Cloud
 
 You can create Organizations in Docker Cloud to share repositories, and infrastructure and applications with coworkers and collaborators.
 
-Members of an organization can see only the teams to which they belong, and
-their membership. Members of the `Owners` team can see and edit
-all of the teams and all of the team membership lists. Docker Cloud users
-outside an organization cannot see the Organizations or teams another user
-belongs to.
+Members of an organization can see only teams and memberships to which they belong. Members of the `Owners` team can see and edit all teams and team membership lists. Docker Cloud users cannot view another user’s organizations or teams if they do not share an organization.
 
 ## Create an Organization
 
