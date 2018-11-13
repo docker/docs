@@ -98,7 +98,7 @@ configurations work on recent versions of the Linux distribution:
 | Docker CE on CentOS | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 | Docker CE on Fedora | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 
-¹) The `overlay` storage driver is deprecated in Docker 18.09, and will be
+¹) The `overlay` storage driver is deprecated in Docker Engine - Enterprise 18.09, and will be
 removed in a future release. It is recommended that users of the `overlay` storage driver 
 migrate to `overlay2`.
 
