@@ -9,11 +9,7 @@ redirect_from:
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
-Docker Enterprise Edition for Windows Server (*Docker EE*) enables native
-Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package
-includes everything you need to run Docker on Windows Server.
-This topic describes pre-install considerations, and how to download and
-install Docker EE.
+Docker Enterprise Edition for Windows Server (*Docker EE*) enables native Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package includes everything you need to run Docker on Windows Server.  This topic describes pre-install considerations, and how to download and install Docker EE.
 
 > Release notes
 >
@@ -73,6 +69,37 @@ sconfig
 
 Select option `6) Download and Install Updates`.
 
+
+### FIPS 140-2 cryptographic module support
+
+[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules.
+
+With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS 140-2 support in Windows Server 2016. This includes a FIPS supported cryptographic module. If the Windows implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+
+**NOTE:** FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
+
+To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following in PowerShell:
+
+```
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+```
+
+Restart the Docker service by running the following command.
+
+```
+net stop docker
+net start docker
+```
+
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+
+```
+Labels:    
+ com.docker.security.fips=enabled 
+```
+
+**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
+
 ## Use a script to install Docker EE
 
 Use the following steps when you want to install manually, script automated
@@ -131,17 +158,17 @@ installs, or install on air-gapped systems.
 
 There are currently two channels available for Docker EE for Windows Server:
 
-* `17.06` - Use this version if you're using Docker Enterprise Edition (Docker Engine, UCP, DTR). `17.06` is the default.
-* `18.03` - Use this version if you're running Docker EE Engine alone.
+* `18.09` - Use this version if you're using Docker Enterprise 2.1 (Engine, UCP, DTR), or if you're running Docker Engine alone. `18.09` is the default.
+* `17.06` - Use this version if you're using Docker Enterprise 2.0.
 
 To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.03
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 17.06
 ...
 Name                      Version               Source           Summary
 ----                      -------               ------           -------
-Docker                    18.03.1-ee-2          Docker           Contains Docker EE for use with Windows Server...
+Docker                    17.06.2-ee-17          Docker           Contains Docker EE for use with Windows Server...
 ```
 
 ### Updating the DockerMsftProvider

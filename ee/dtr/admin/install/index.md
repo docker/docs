@@ -8,24 +8,21 @@ redirect_from:
 ---
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
-swarm managed by Docker Universal Control Plane (UCP). It can be installed
+swarm managed by the Universal Control Plane (UCP). It can be installed
 on-premises or on a cloud infrastructure.
-
-Use these instructions to install DTR.
 
 ## Step 1. Validate the system requirements
 
-The first step in installing DTR, is ensuring your
-infrastructure has all the [requirements DTR needs to run](system-requirements.md).
+Before installing DTR, make sure your
+infrastructure meets the [system requirements](./system-requirements) that DTR needs to run.
 
 ## Step 2. Install UCP
 
 Since DTR requires Docker Universal Control Plane (UCP)
-to run, you need to install UCP on all the nodes where you plan to install DTR.
-[Learn how to install UCP](/datacenter/ucp/2.2/guides/admin/install.md).
+to run, you need to [install UCP](../ucp/admin/install/) on all the nodes where you plan to install DTR.
 
 DTR needs to be installed on a worker node that is being managed by UCP.
-You can't install DTR on a standalone Docker Engine.
+You cannot install DTR on a standalone Docker Engine.
 
 ![](../../images/install-dtr-1.svg)
 
@@ -65,12 +62,12 @@ DTR, so that UCP is automatically reconfigured to trust DTR.
 ## Step 4. Check that DTR is running
 
 In your browser, navigate to the Docker **Universal Control Plane**
-web UI, and navigate to the **Applications** screen. DTR should be listed
+web interface, and navigate to the **Applications** screen. DTR should be listed
 as an application.
 
-![](../../images/install-dtr-3.png){: .with-border}
+![](../../images/create-repository-1.png){: .with-border}
 
-You can also access the **DTR web UI**, to make sure it is working. In your
+You can also access the **DTR web interface**, to make sure it is working. In your
 browser, navigate to the address where you installed DTR.
 
 ![](../../images/install-dtr-4.png){: .with-border}
@@ -131,7 +128,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 3. Check that all replicas are running.
 
     In your browser, navigate to the Docker **Universal Control Plane**
-    web UI, and navigate to the **Applications** screen. All replicas should
+    web interface, and navigate to the **Applications** screen. All replicas should
     be displayed.
 
     ![](../../images/install-dtr-6.png){: .with-border}

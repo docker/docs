@@ -1,0 +1,137 @@
+<p>Go through the <a href="ee-standard.md">Docker Enterprise Standard tutorial</a>,
+before continuing here with Docker Enterprise Advanced.</p>
+
+<p>In the first tutorial, the fictional company, OrcaBank, designed an architecture
+with role-based access control (RBAC) to meet their organization’s security
+needs. They assigned multiple grants to fine-tune access to resources across
+collection boundaries on a single platform.</p>
+
+<p>In this tutorial, OrcaBank implements new and more stringent security
+requirements for production applications:</p>
+
+<p>First, OrcaBank adds staging zone to their deployment model. They will no longer
+move developed appliciatons directly in to production. Instead, they will deploy
+apps from their dev cluster to staging for testing, and then to production.</p>
+
+<p>Second, production applications are no longer permitted to share any physical
+infrastructure with non-production infrastructure. OrcaBank segments the
+scheduling and access of applications with <a href="isolate-nodes.md">Node Access Control</a>.</p>
+
+<blockquote>
+  <p><a href="isolate-nodes.md">Node Access Control</a> is a feature of Docker EE
+Advanced and provides secure multi-tenancy with node-based isolation. Nodes
+can be placed in different collections so that resources can be scheduled and
+isolated on disparate physical or virtual hardware resources.</p>
+</blockquote>
+
+<h2 id="team-access-requirements">Team access requirements</h2>
+
+<p>OrcaBank still has three application teams, <code class="highlighter-rouge">payments</code>, <code class="highlighter-rouge">mobile</code>, and <code class="highlighter-rouge">db</code> with
+varying levels of segmentation between them.</p>
+
+<p>Their RBAC redesign is going to organize their UCP cluster into two top-level
+collections, staging and production, which are completely separate security
+zones on separate physical infrastructure.</p>
+
+<p>OrcaBank’s four teams now have different needs in production and staging:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">security</code> should have view-only access to all applications in production (but
+not staging).</li>
+  <li><code class="highlighter-rouge">db</code> should have full access to all database applications and resources in
+production (but not staging). See <a href="#db-team">DB Team</a>.</li>
+  <li><code class="highlighter-rouge">mobile</code> should have full access to their Mobile applications in both
+production and staging and limited access to shared <code class="highlighter-rouge">db</code> services. See
+<a href="#mobile-team">Mobile Team</a>.</li>
+  <li><code class="highlighter-rouge">payments</code> should have full access to their Payments applications in both
+production and staging and limited access to shared <code class="highlighter-rouge">db</code> services.</li>
+</ul>
+
+<h2 id="role-composition">Role composition</h2>
+
+<p>OrcaBank has decided to replace their custom <code class="highlighter-rouge">Ops</code> role with the built-in
+<code class="highlighter-rouge">Full Control</code> role.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">View Only</code> (default role) allows users to see but not edit all cluster
+resources.</li>
+  <li><code class="highlighter-rouge">Full Control</code> (default role) allows users complete control of all collections
+granted to them. They can also create containers without restriction but
+cannot see the containers of other users.</li>
+  <li><code class="highlighter-rouge">View &amp; Use Networks + Secrets</code> (custom role) enables users to view/connect
+to networks and view/use secrets used by <code class="highlighter-rouge">db</code> containers, but prevents them
+from seeing or impacting the <code class="highlighter-rouge">db</code> applications themselves.</li>
+</ul>
+
+<p><img src="../images/design-access-control-adv-0.png" alt="image" class="with-border" /></p>
+
+<h2 id="collection-architecture">Collection architecture</h2>
+
+<p>In the previous tutorial, OrcaBank created separate collections for each
+application team and nested them all under <code class="highlighter-rouge">/Shared</code>.</p>
+
+<p>To meet their new security requirements for production, OrcaBank is redesigning
+collections in two ways:</p>
+
+<ul>
+  <li>Adding collections for both the production and staging zones, and nesting a
+set of application collections under each.</li>
+  <li>Segmenting nodes. Both the production and staging zones will have dedicated
+nodes; and in production, each application will be on a dedicated node.</li>
+</ul>
+
+<p>The collection architecture now has the following tree representation:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/
+├── System
+├── Shared
+├── prod
+│   ├── mobile
+│   ├── payments
+│   └── db
+│       ├── mobile
+│       └── payments
+|
+└── staging
+    ├── mobile
+    └── payments
+</code></pre></div></div>
+
+<h2 id="grant-composition">Grant composition</h2>
+
+<p>OrcaBank must now diversify their grants further to ensure the proper division
+of access.</p>
+
+<p>The <code class="highlighter-rouge">payments</code> and <code class="highlighter-rouge">mobile</code> application teams will have three grants each–one
+for deploying to production, one for deploying to staging, and the same grant to
+access shared <code class="highlighter-rouge">db</code> networks and secrets.</p>
+
+<p><img src="../images/design-access-control-adv-grant-composition.png" alt="image" class="with-border" /></p>
+
+<h2 id="orcabank-access-architecture">OrcaBank access architecture</h2>
+
+<p>The resulting access architecture, designed with Docker EE Advanced, provides
+physical segmentation between production and staging using node access control.</p>
+
+<p>Applications are scheduled only on UCP worker nodes in the dedicated application
+collection. And applications use shared resources across collection boundaries
+to access the databases in the <code class="highlighter-rouge">/prod/db</code> collection.</p>
+
+<p><img src="../images/design-access-control-adv-architecture.png" alt="image" class="with-border" /></p>
+
+<h3 id="db-team">DB team</h3>
+
+<p>The OrcaBank <code class="highlighter-rouge">db</code> team is responsible for deploying and managing the full
+lifecycle of the databases that are in production. They have the full set of
+operations against all database resources.</p>
+
+<p><img src="../images/design-access-control-adv-db.png" alt="image" class="with-border" /></p>
+
+<h3 id="mobile-team">Mobile team</h3>
+
+<p>The <code class="highlighter-rouge">mobile</code> team is responsible for deploying their full application stack in
+staging. In production they deploy their own applications but use the databases
+that are provided by the <code class="highlighter-rouge">db</code> team.</p>
+
+<p><img src="../images/design-access-control-adv-mobile.png" alt="image" class="with-border" /></p>
+
