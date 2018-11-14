@@ -64,6 +64,8 @@ These are application-level metrics derived from the container platform itself.
 
 ## Deploy Prometheus on worker nodes
 
+Universal Control Plane deploys Prometheus by default on the manager nodes to provide a built-in metrics backend. For cluster sizes over 100 nodes or for use cases where scraping metrics from the Prometheus instances are needed, we recommend that you deploy Prometheus on dedicated worker nodes in the cluster.
+
 To deploy Prometheus on worker nodes in a cluster:
 
 1. Begin by sourcing an admin bundle.
