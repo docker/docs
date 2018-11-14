@@ -80,7 +80,7 @@ cd client-bundle; Import-Module .\env.ps1
 </div>
 </div>
 
-The client bundle utility scripts update the the environment variables
+The client bundle utility scripts update the environment variables
 `DOCKER_HOST` to make your client tools communicate with your UCP deployment,
 and the `DOCKER_CERT_PATH` environment variable to use the client certificates
 that are included in the client bundle you downloaded. The utility scripts also

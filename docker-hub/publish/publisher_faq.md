@@ -1,6 +1,6 @@
 ---
 description: Docker Hub frequently asked questions
-keywords: Docker, docker, store, purchase images
+keywords: Docker, docker, hub, purchase images
 title: Docker Hub Publisher FAQs
 ---
 
@@ -25,7 +25,7 @@ Infrastructure, Images, and Plugins in more detail.
 Start by applying to be a Docker Technology Partner at https://goto.docker.com/partner and click on "Publisher".
 
 * Requires acceptance of partnership agreement for completion
-* Identify content that can be listed on Store and includes a support offering
+* Identify content that can be listed on Hub and includes a support offering
 * Test your image against Docker Certified Infrastructure version 17.03 and
 above (Plugins must run on 17.03 and above).
 * Submit your image for Certification through the publisher portal. Docker
@@ -39,7 +39,7 @@ Publisher’s product page is updated to reflect Certified status.
 
 1-2 weeks.
 
-### Can we have a group of people work on the same product and publish to Store? (This replicates our internal workflow where more than one person is working on Dockerizing our product.)
+### Can we have a group of people work on the same product and publish to Docker Hub? (This replicates our internal workflow where more than one person is working on Dockerizing our product.)
 
 Yes. You can submit your content as a team.
 
@@ -94,7 +94,7 @@ We aim to have product listings published with the concept of versions, allowing
 *Documentation* maps to *Documentation Link* in the publish process.
 *Feedback* is provided via customer reviews. https://hub.docker.com/images/node?tab=reviews is an example.
 *Tier Description* is what you see once users get entitled to a plan. For instance, in https://hub.docker.com/images/openmaptiles-openstreetmap-maps/plans/f1fc533a-76f0-493a-80a1-4e0a2b38a563?tab=instructions `A detailed street map of any place on a planet. Evaluation and non-production use. Production use license available separately` is what this publisher entered in the Tier description
-*Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content thats a certification candidate).
+*Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content that's a certification candidate).
 
 ### How can I remove a submission? I don’t want to currently have this image published as it is missing several information.
 
@@ -112,7 +112,7 @@ in the readme).
 
 ### Regarding source repo tags: it says not to use “latest”. However, if we want users to be able to download the images without specifying a tag, then presumably an image tagged “latest” is required. So how do we go about that?
 
-You can not submit "latest" tags via the certification/store publish workflow.
+You can not submit "latest" tags via the certification/hub publish workflow.
 The reason we do this is so that users are aware of the exact version they
 download. To make the user experience easy we have a copy widget that users can
 use to copy the pull command and paste in their command line. Here is a
@@ -138,24 +138,24 @@ Here is a [screenshot](https://user-images.githubusercontent.com/2453622/3206729
 ### If something is published as a free tier, for subscribed users only, does a user need to explicitly click Accept on the license terms for which we provide the link before they can download the image?
 Yes
 
-### Do you have a license enforcement system for docker images sold on store? How are they protected, once they have been downloaded? What happens if a customer stop paying for the image I am selling after, let's say, 2 months?
+### Do you have a license enforcement system for docker images sold on Docker Hub? How are they protected, once they have been downloaded? What happens if a customer stop paying for the image I am selling after, let's say, 2 months?
 
 We provide the following licensing option to customers:
 * Bring your own License or BYOL.
 
 The expectation is that the publisher would take care of License Keys within the
 container. The License Key itself can be presented to the customer via Docker
-Store. We expect the Publisher to build short circuits into the container, so
+Hub. We expect the Publisher to build short circuits into the container, so
 the container stops running once the License Key expires. Once a customer
 cancels, or if the customer subscription expires - the customer cannot
-download updates from the Store.
+download updates from Docker Hub.
 
 If a user cancels their subscription, they cannot download updates
-from the Store. The container may continue running. If you have a licensing
+from Docker Hub. The container may continue running. If you have a licensing
 scheme built into the container, the licensing scheme can be a forcing function
 and stop the container. (_We do not build anything into the container, it is up to the publisher_).
 
-### How does a customer transition from a Trial to a Paid subscription? Question assumes these are two separate pulls from Store, or can they just drop in a license via Store?
+### How does a customer transition from a Trial to a Paid subscription? Question assumes these are two separate pulls from Docker Hub, or can they just drop in a license via Docker Hub?
 
 Publisher can provide two different tokens or let customers use the same token
 and internally map the customer to a paid plan vs a free trial.

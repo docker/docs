@@ -116,6 +116,16 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% endif %}
 
+{% if linux-dist == "oraclelinux" %}
+
+5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable ol7_addons
+    ```
+
+{% endif %}
+
 6.  Add the Docker EE **stable** repository:
 
     ```bash
@@ -301,6 +311,6 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 
 {% endif %}

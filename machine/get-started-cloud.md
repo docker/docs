@@ -100,11 +100,11 @@ You can register an already existing docker host by passing the daemon url. With
 
 ## Use Machine to provision Docker Swarm clusters
 
-> Swarm mode supercedes Docker Machine provisioning of swarm clusters
+> Swarm mode supersedes Docker Machine provisioning of swarm clusters
 >
 > In previous releases, Docker Machine was used to provision swarm
 clusters, but this is legacy. [Swarm mode](/engine/swarm/index.md), built
-into Docker Engine, supercedes Machine provisioning of swarm clusters. The
+into Docker Engine, supersedes Machine provisioning of swarm clusters. The
 topics below show you how to get started with the new swarm mode.
 {: .important}
 

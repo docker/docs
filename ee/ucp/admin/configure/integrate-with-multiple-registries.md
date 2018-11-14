@@ -54,7 +54,7 @@ dtr_ca_url=${dtr_full_url}/ca
 dtr_host_address=${dtr_full_url#"https://"}
 dtr_host_address=${dtr_host_address%":443"}
 
-# Create the registry configuration and save it it
+# Create the registry configuration and save it
 cat <<EOL > trust-dtr.toml
 
 [[registries]]

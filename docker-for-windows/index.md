@@ -240,8 +240,7 @@ credentials so that you don't need to enter them every time.
  There are a number of issues with using host-mounted volumes and network paths
  for database files. See [Volume mounts from host paths use a nobrl option to override database locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
- * Docker for Windows sets permissions to read/write/execute for users and
-   read/execute for groups and others [0755 or u+rwx,go+rx](http://permissions-calculator.org/decode/0755/).
+ * Docker for Windows sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
  * Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes).
@@ -297,7 +296,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 ![Network settings](images/settings-network.png){:width="600px"}
 
-* **Internal Virtual Switch** - You can specify a network address translation (NAT) prefix and subnet mask to enable internet connectivity.
+* **Internal Virtual Switch** - You can specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
@@ -427,12 +426,11 @@ For a full list of options on the Docker daemon, see [daemon](/engine/reference/
 
 [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher, and in [18.06 Stable (win70)](/docker-for-windows/edge-release-notes/#docker-community-edition-18060-ce-win70-2018-07-25) and higher.
 
 ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
 
-Docker for Windows 18.02 CE Edge and higher include a standalone Kubernetes
-server that runs on your Windows host, so that you can test deploying your
+From Docker for Windows 18.02 CE Edge and 18.06 CE Stable a standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
 Docker workloads on Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
@@ -445,6 +443,10 @@ to change context so that `kubectl` is pointing to `docker-for-desktop`:
 > kubectl config use-context docker-for-desktop
 ```
 
+You can also change it through the Docker for Windows menu: 
+
+![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="600px"}
+
 If you installed `kubectl` by another method, and
 experience conflicts, remove it.
 
@@ -452,7 +454,7 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply and restart** button.
 
-  An internet connection is required. Images required to run the Kubernetes
+  An Internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
   > Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
 
@@ -468,18 +470,6 @@ experience conflicts, remove it.
   For more about using the Kubernetes integration with Docker for Windows,
   see [Deploy on Kubernetes](kubernetes.md).
 
-### Diagnose & feedback
-
-Use this tab to troubleshoot problems and get help from Docker.
-
-![Reset](images/settings-diagnose.png){:width="600px"}
-
-Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues. See [Logs and Troubleshooting](troubleshoot.md) for more details.
-
-To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
-
 ### Reset
 
 On the Reset tab, you can restart Docker or reset its configuration.
@@ -490,6 +480,16 @@ On the Reset tab, you can restart Docker or reset its configuration.
 
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
+
+### Diagnose & feedback
+
+Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
+
+Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
+
+Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues. 
+
+To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
 
 ## Switch between Windows and Linux containers
 

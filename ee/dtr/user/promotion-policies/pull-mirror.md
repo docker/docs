@@ -43,7 +43,7 @@ the public key certificate for that certificate authority.
 You can get it by accessing `https://<dtr-domain>/ca`.
 
 Click **execute** and make sure you got an HTTP 201 response, signaling that the
-the repository is polling the source repository every couple of minutes
+repository is polling the source repository every couple of minutes
 
 ## Where to go next
 

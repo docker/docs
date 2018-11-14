@@ -15,10 +15,10 @@ information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
 
 Storage drivers allow you to create data in the writable layer of your container.
-The files won't be persisted after the container stops, and both read and
+The files won't be persisted after the container is deleted, and both read and
 write speeds are low.
 
-[Learn how to use volumes](../index.md) to persist data and improve performance.
+[Learn how to use volumes](../volumes.md) to persist data and improve performance.
 
 ## Images and layers
 
@@ -33,7 +33,7 @@ RUN make /app
 CMD python /app/app.py
 ```
 
-This Dockerfile contains four commands, each of which creates a layer.  The
+This Dockerfile contains four commands, each of which creates a layer. The
 `FROM` statement starts out by creating a layer from the `ubuntu:15.04` image.
 The `COPY` command adds some files from your Docker client's current directory.
 The `RUN` command builds your application using the `make` command. Finally,
@@ -82,7 +82,7 @@ To view the approximate size of a running container, you can use the `docker ps 
 command. Two different columns relate to size.
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
-  each container
+  each container.
 
 - `virtual size`: the amount of data used for the read-only image data
   used by the container plus the container's writable layer `size`.
@@ -143,8 +143,8 @@ Status: Downloaded newer image for ubuntu:15.04
 
 Each of these layers is stored in its own directory inside the Docker host's
 local storage area. To examine the layers on the filesystem, list the contents
-of `/var/lib/docker/<storage-driver>/layers/`. This example uses `aufs`, which
-is the default storage driver:
+of `/var/lib/docker/<storage-driver>/layers/`. This example uses the `aufs` 
+storage driver:
 
 ```bash
 $ ls /var/lib/docker/aufs/layers
@@ -292,8 +292,8 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the default `aufs` driver and the `overlay` and `overlay2`
-drivers, the copy-on-write operation follows this rough sequence:
+storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the 
+copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.

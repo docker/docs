@@ -125,7 +125,7 @@ but the pinned certificates take highest priority for validation, followed
 by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
 describes this validation flow:
 
-![validation flow](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png")
+![validation flow](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png)
 
 Only one trust pinning option is used to validate a GUN even if multiple
 sections are specified, and any validation failure results in a failed
@@ -176,6 +176,7 @@ passphrase.
 |`NOTARY_TARGETS_PASSPHRASE`    | The targets (an online) key passphrase    |
 |`NOTARY_SNAPSHOT_PASSPHRASE`   | The snapshot (an online) key passphrase   |
 |`NOTARY_DELEGATION_PASSPHRASE` | The delegation (an online) key passphrase |
+|`NOTARY_AUTH`                  | The notary server credentials: `<username>:<password>` encoded in base64 |
 
 
 If provided, the passphrase in `NOTARY_DELEGATION_PASSPHRASE`
