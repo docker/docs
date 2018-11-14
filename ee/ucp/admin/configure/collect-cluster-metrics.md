@@ -78,7 +78,7 @@ To deploy Prometheus on worker nodes in a cluster:
     ucp-metrics-hvkr7   3/3       Running   0          4h        192.168.80.66   3a724a-0
     ```
 
-3. Add a Kubernetes node label to one or more workers.  Here we add a label with key "ucp-metrics" and value "".
+3. Add a Kubernetes node label to one or more workers.  Here we add a label with key "ucp-metrics" and value "" to a node with name "3a724a-1".
 
     ```
     $ kubectl label node 3a724a-1 ucp-metrics=
