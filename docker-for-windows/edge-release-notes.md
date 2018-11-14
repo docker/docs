@@ -18,6 +18,24 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-win77 2018-11-14
+
+[Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
+  - [Docker compose 1.23.1](https://github.com/docker/compose/releases/tag/1.23.1)
+  - [Docker Machine 0.16.0](https://github.com/docker/machine/releases/tag/v0.16.0)
+  - [Kitematic 0.17.5](https://github.com/docker/kitematic/releases/tag/v0.17.5)
+
+* Bug fixes and minor changes
+  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647) 
+  - Windows Containers: Improve host.docker.internal ip resolution
+  - Do not try to update samba share mounts when using Windows Containers
+  - Improved dns update too verbose in logs
+  - VPNKit: Improved scalability of port forwarding.
+  - VPNKit: Limit the size of the UDP NAT table. This ensures port forwarding and regular TCP traffic continue even when running very chatty UDP protocols.
+
 ### Docker Community Edition 2.0.0.0-beta1-win75 2018-09-14
 
 [Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe)
