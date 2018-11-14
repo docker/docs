@@ -47,8 +47,8 @@
 </g>
 <g id="user" transform="translate(130.000000, 0.000000)">
 	<text transform="matrix(1 0 0 1 53 59)" class="st10 st11 st6">&gt; docker push</text>
-	<path id="Shape" class="st9" d="M108,25c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5s-6.5,2.9-6.5,6.5C101.5,22.1,104.4,25,108,25
-		L108,25z M108,28.2c-4.3,0-13,2.2-13,6.5V38h26v-3.2C121,30.4,112.3,28.2,108,28.2L108,28.2z"/>
+	<path id="Shape" class="st9" d="M108,25c3.6,0,6.5-2.9,6.5-6.5S111.6,12,108,12s-6.5,2.9-6.5,6.5S104.4,25,108,25L108,25z
+		 M108,28.2c-4.3,0-13,2.2-13,6.5V38h26v-3.2C121,30.4,112.3,28.2,108,28.2L108,28.2z"/>
 </g>
 <path class="st8" d="M410,132h50.5"/>
 <g id="chrome">
@@ -70,11 +70,9 @@
 	<rect x="460" y="115" class="st9" width="228" height="27"/>
 	<text transform="matrix(1 0 0 1 469 133)" class="st5 st1 st14">dev/nginx</text>
 </g>
-<g>
-	<path class="st15" d="M469.5,194.5h208"/>
-	<rect x="460" y="115" class="st4" width="228" height="27"/>
-	<text transform="matrix(1 0 0 1 469 133)" class="st5 st1 st14">docker trusted registry</text>
-</g>
+<path class="st15" d="M469.5,194.5h208"/>
+<rect x="460" y="115" class="st4" width="228" height="27"/>
+<text transform="matrix(1 0 0 1 469 133)" class="st5 st1 st14">docker trusted registry</text>
 <text transform="matrix(1 0 0 1 74 323)" class="st0 st11 st6">dev/ngnix:1</text>
 <text transform="matrix(1 0 0 1 175.4165 373)" class="st0 st11 st16"> </text>
 <text transform="matrix(1 0 0 1 198.8203 409)" class="st0 st11 st16"> </text>
