@@ -48,7 +48,7 @@ operating system.
 <div id="mac" class="tab-pane fade in active" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
-k8sversion=v1.8.11
+k8sversion=v1.11.2
 
 # Get the kubectl binary.
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/darwin/amd64/kubectl
@@ -64,7 +64,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 <div id="linux" class="tab-pane fade" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
-k8sversion=v1.8.11
+k8sversion=v1.11.2
 
 # Get the kubectl binary.
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/linux/amd64/kubectl
