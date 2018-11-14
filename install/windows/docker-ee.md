@@ -157,11 +157,6 @@ installs, or install on air-gapped systems.
 
 ## Install a specific version
 
-> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
-> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
-> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine,
-> UCP, and DTR).
-
 To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
@@ -201,8 +196,6 @@ Start the Docker service:
 ```PowerShell
 Start-Service Docker
 ```
-
-## What to know before you install
 
 * **What the Docker Engine - Enterprise  install includes**: The installation
 provides [Docker Engine](/engine/userguide/intro.md) and the
