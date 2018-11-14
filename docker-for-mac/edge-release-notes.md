@@ -18,6 +18,21 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-mac77 2018-11-14
+
+[Download](https://download.docker.com/mac/edge/28700/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
+  - [Docker compose 1.23.1](https://github.com/docker/compose/releases/tag/1.23.1)
+  - [Kitematic 0.17.5](https://github.com/docker/kitematic/releases/tag/v0.17.5)
+
+* Bug fixes and minor changes
+  - Fix appearance in dark mode for OSX 10.14 (Mojave)
+  - VPNKit: Improved scalability of port forwarding. Related to [docker/for-mac#2841](https://github.com/docker/for-mac/issues/2841)
+  - VPNKit: Limit the size of the UDP NAT table. This ensures port forwarding and regular TCP traffic continue even when running very chatty UDP protocols.
+  - Ensure Kubernetes can be installed when using a non-default internal IP subnet.
+
 ### Docker Community Edition 2.0.0.0-beta1-mac75 2018-09-14
 
 [Download](https://download.docker.com/mac/edge/27117/Docker.dmg)
