@@ -15,6 +15,18 @@ Docker Engine - Enterprise enables native Docker containers on Windows Server. W
 >
 > [Release notes for all versions](/release-notes/)
 
+## System requirements
+
+Windows OS requirements around specific CPU and RAM requirements also need to be met as specified 
+in the [Windows Server Requirements](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements).
+This provides information for specific CPU and memory specs and capabilities (instruction sets like CMPXCHG16b, 
+LAHF/SAHF, and PrefetchW, security: DEP/NX, etc.).
+
+* OS Versions: Server 2016 (Core and GUI), 1709 and 1803 and soon Server 2019 (Core and GUI)
+* RAM: 4GB
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements); however, 64GB of space for Windows Server core base images (10 GB inclucing 8GB in 
+server 2016 but reduced drastically to < 2 GB + server core image < 1 GB), and buffers for new containers.
+
 ## Install Docker Engine - Enterprise
 
 Docker Engine - Enterprise requires Windows Server 2016 or later. See
