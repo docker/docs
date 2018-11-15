@@ -38,7 +38,7 @@ consistency and compatibility reasons.
 * Add `builder prune` subcommand to prune BuildKit build cache [docker/cli#1295](https://github.com/docker/cli/pull/1295) [docker/cli#1334](https://github.com/docker/cli/pull/1334)
 * BuildKit: Add configurable garbage collection policy for the BuildKit build cache [docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37846](https://github.com/moby/moby/pull/37846)
 * BuildKit: Add support for `docker build --pull ...` when using BuildKit [moby/moby#37613](https://github.com/moby/moby/pull/37613)
-* BuildKit: Add support or "registry-mirrors" and "insecure-registries" when using BuildKit docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37852](https://github.com/moby/moby/pull/37852)
+* BuildKit: Add support or "registry-mirrors" and "insecure-registries" when using BuildKit [docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37852](https://github.com/moby/moby/pull/37852)
 * BuildKit: Enable net modes and bridge. [moby/moby#37620](https://github.com/moby/moby/pull/37620)
 * Add `docker engine` subcommand to manage the lifecycle of a Docker Engine running as a privileged container on top of containerd, and to allow upgrades to Docker Engine Enterprise [docker/cli#1260](https://github.com/docker/cli/pull/1260)
 * Expose product license in `docker info` output [docker/cli#1313](https://github.com/docker/cli/pull/1313)
