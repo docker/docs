@@ -166,6 +166,25 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
 
+### 17.06.2-ee-17 
+2018-10-25
+
+#### Networking
+
+* Changed loglevel from error to warning for missing disable_ipv6 file. [docker/libnetwork#2223](https://github.com/docker/libnetwork/pull/2223)
+* Fixed subnet allocation to avoid reallocating recently freed subnets. [docker/libnetwork#2255](https://github.com/docker/libnetwork/pull/2255)
+* Fixed libnetwork issue which caused errors to be returned when iptables or firewalld issues transient warnings. [docker/libnetwork#2218](https://github.com/docker/libnetwork/pull/2218)
+
+#### Plugins
+
+* Fixed too many "Plugin not found" error messages. [moby/moby#36119](https://github.com/moby/moby/pull/36119) 
+
+#### Swarm mode
+
+* Added failed allocations retry immediately upon a deallocation to overcome IP exhaustion. [docker/swarmkit#2711](https://github.com/docker/swarmkit/pull/2711)
+* Fixed leaking task resources. [docker/swarmkit#2755](https://github.com/docker/swarmkit/pull/2755)
+* Fixed deadlock in dispatcher that could cause node to crash. [docker/swarmkit#2753](https://github.com/docker/swarmkit/pull/2753)
+
 ### 17.06.2-ee-16 
 2018-07-26
 
