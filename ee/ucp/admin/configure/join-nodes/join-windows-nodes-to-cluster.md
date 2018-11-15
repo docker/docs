@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise Edition supports worker nodes that run on Windows Server 2016, 1709, 
+Docker Enterprise 2.1 supports worker nodes that run on Windows Server 2016, 1709, 
 or 1803. Only worker nodes are supported on Windows, and all manager nodes in the cluster
 must run on Linux.
 
@@ -20,7 +20,7 @@ Follow these steps to enable a worker node on Windows.
 
 [Install Docker Engine - Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
 on a Windows Server 2016, 1709 or 1803 instance to enable joining a cluster that's managed by
-Docker Enterprise Edition.
+Docker Enterprise 2.1.
 
 ## Configure the Windows node
 
@@ -29,7 +29,7 @@ Follow these steps to configure the docker daemon and the Windows environment.
 1. Add a label to the node.
 2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker UCP web UI or CLI.
+4. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
@@ -117,9 +117,9 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 ## Join the Windows node to the cluster
 
 Now you can join the cluster by using the `docker swarm join` command that's
-provided by the Docker UCP web UI and CLI.
+provided by the Docker UCP web interface and CLI.
 
-1.  Log in to the Docker UCP web UI with an administrator account.
+1.  Log in to the Docker UCP web interface with an administrator account.
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
@@ -197,7 +197,7 @@ The `dockerd` service and the Windows environment are now configured to join a D
 
 > TLS certificate setup
 >
-> If the TLS certificates aren't set up correctly, the Docker UCP web UI shows the
+> If the TLS certificates aren't set up correctly, the Docker UCP web interface shows the
 > following warning.
 >
 > ```
