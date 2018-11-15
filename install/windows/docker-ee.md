@@ -22,14 +22,15 @@ in the [Windows Server Requirements](https://docs.microsoft.com/en-us/windows-se
 This provides information for specific CPU and memory specs and capabilities (instruction sets like CMPXCHG16b, 
 LAHF/SAHF, and PrefetchW, security: DEP/NX, etc.).
 
-* OS Versions: Server 2016 (Core and GUI), 1709 and 1803 and soon Server 2019 (Core and GUI)
+* OS Versions: Server 2016 (Core and GUI), 1709 and 1803
 * RAM: 4GB
-* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements); however, 64GB of space for Windows Server core base images (10 GB inclucing 8GB in 
-server 2016 but reduced drastically to < 2 GB + server core image < 1 GB), and buffers for new containers.
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system
+  requirements). An additional 32 GB of Space is recommended for base images for ServerCore and NanoServer along with buffer
+  space for workload containers running IIS, SQL Server and .Net apps.
 
 ## Install Docker Engine - Enterprise
 
-Docker Engine - Enterprise requires Windows Server 2016 or later. See
+Docker Engine - Enterprise requires Windows Server 2016, 1703, or 1803. See
 [What to know before you install](#what-to-know-before-you-install) for a
 full list of prerequisites.
 
