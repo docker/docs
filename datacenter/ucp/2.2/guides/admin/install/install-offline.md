@@ -37,6 +37,12 @@ line:
 ```bash
 $ wget <ucp-package-url> -O ucp.tar.gz
 ```
+```
+EXAMPLE 
+```
+$ wget https://packages.docker.com/caas/ucp_images_3.0.6.tar.gz -0 ucp_3.0.6.tar.gz
+
+```
 
 Now that you have the package in your local machine, you can transfer it to
 the machines where you want to install UCP.
