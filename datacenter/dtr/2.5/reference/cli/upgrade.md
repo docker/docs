@@ -1,10 +1,10 @@
 ---
 title: docker/dtr upgrade
-description: Upgrade DTR 2.3.x cluster to this version
+description: Upgrade DTR 2.4.x cluster to this version
 keywords: dtr, cli, upgrade
 ---
 
-Upgrade DTR 2.3.x cluster to this version
+Upgrade DTR 2.4.x cluster to this version
 
 ## Usage
 
@@ -16,7 +16,7 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command upgrades DTR 2.3.x to the current version of this image.
+This command upgrades DTR 2.4.x to the current version of this image.
 
 
 ## Options

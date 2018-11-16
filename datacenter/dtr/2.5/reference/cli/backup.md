@@ -34,6 +34,9 @@ Note:
   * This backup contains sensitive information and should be
     stored securely.
 
+  * Using the '--offline-backup' flag will temporarily shut down the rethinkdb container. 
+    You should take the replica out of your load balancer to avoid downtime.
+
 
 ## Options
 
@@ -42,6 +45,7 @@ Note:
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
 | `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica.To add, remove or modify DTR, you must connect to an existing  healthy replica's database.. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
+| `--offline-backup` | $DTR_OFFLINE_BACKUP | This flag takes rethinkdb down during backup and takes a more reliable backup..If you back up DTR with this flag, rethinkdb will go down during backup. However, it will be   guaranteed to be consistent. With online backups there's no guarantee of consistency.. |
 | `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use --ucp-ca "$(cat ca.pem)". |
 | `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP.The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to man-in-the-middle attacks.  For production deployments, use --ucp-ca "$(cat ca.pem)" instead. |
 | `--ucp-password` | $UCP_PASSWORD | The UCP administrator password. |
