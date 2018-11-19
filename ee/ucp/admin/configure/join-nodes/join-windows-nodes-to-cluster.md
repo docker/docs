@@ -1,26 +1,26 @@
 ---
 title: Join Windows worker nodes to your cluster
-description: Join worker nodes that are running on Windows Server 2016 to a Docker EE cluster.
-keywords: Docker EE, UCP, cluster, scale, worker, Windows
+description: Join worker nodes that are running on Windows Server to a Docker Enterprise cluster.
+keywords: Docker Enterprise, UCP, cluster, scale, worker, Windows
 redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise Edition supports worker nodes that run on Windows Server 2016 or 1709.
-Only worker nodes are supported on Windows, and all manager nodes in the cluster
+Docker Enterprise 2.1 supports worker nodes that run on Windows Server 2016, 1709, 
+or 1803. Only worker nodes are supported on Windows, and all manager nodes in the cluster
 must run on Linux.
 
 Follow these steps to enable a worker node on Windows.
 
-1.  Install Docker EE Engine on Windows Server 2016.
+1.  Install Docker Engine - Enterprise on Windows Server 2016, 1709, or 1803.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-## Install Docker EE Engine on Windows Server 2016 or 1709
+## Install Docker Engine - Enterprise on Windows Server 
 
-[Install Docker EE Engine](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
-on a Windows Server 2016 or 1709 instance to enable joining a cluster that's managed by
-Docker Enterprise Edition.
+[Install Docker Engine - Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
+on a Windows Server 2016, 1709 or 1803 instance to enable joining a cluster that's managed by
+Docker Enterprise 2.1.
 
 ## Configure the Windows node
 
@@ -29,7 +29,7 @@ Follow these steps to configure the docker daemon and the Windows environment.
 1. Add a label to the node.
 2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker EE web UI or CLI.
+4. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
@@ -117,9 +117,9 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 ## Join the Windows node to the cluster
 
 Now you can join the cluster by using the `docker swarm join` command that's
-provided by the Docker EE web UI and CLI.
+provided by the Docker UCP web interface and CLI.
 
-1.  Log in to the Docker EE web UI with an administrator account.
+1.  Log in to the Docker UCP web interface with an administrator account.
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
@@ -163,7 +163,7 @@ docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }
 
 ### Open ports in the Windows firewall
 
-Docker EE requires that ports 2376 and 12376 are open for inbound TCP traffic.
+Docker Enterprise requires that ports 2376 and 12376 are open for inbound TCP traffic.
 
 In a PowerShell terminal running as Administrator, run these commands
 to add rules to the Windows firewall.
@@ -193,11 +193,11 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
     Start-Service docker
     ```
 
-The `dockerd` service and the Windows environment are now configured to join a Docker EE cluster.
+The `dockerd` service and the Windows environment are now configured to join a Docker Enterprise cluster.
 
 > TLS certificate setup
 >
-> If the TLS certificates aren't set up correctly, the Docker EE web UI shows the
+> If the TLS certificates aren't set up correctly, the Docker UCP web interface shows the
 > following warning.
 >
 > ```

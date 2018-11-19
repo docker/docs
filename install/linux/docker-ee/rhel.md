@@ -50,10 +50,10 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS supported cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
 
-To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file `/proc/sys/crypto/fips_enabled.conf` contains `1`.
+To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file `/proc/sys/crypto/fips_enabled` contains `1`.
 
 ```
-$ cat /proc/sys/crypto/fips_enabled.conf
+$ cat /proc/sys/crypto/fips_enabled
 1
 ```
 
