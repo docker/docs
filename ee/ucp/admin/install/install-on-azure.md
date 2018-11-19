@@ -18,19 +18,20 @@ IP addresses to Kubernetes pods.  The Azure IPAM module requires each Azure
 VM that's part of the Kubernetes cluster to be configured with a pool of
 IP addresses.
 
-You have two options for deploying the VMs for the Kubernetes cluster on Azure:
-- Install the cluster on Azure stand-alone virtual machines. Docker UCP provides
-  an [automated mechanism](#configure-ip-pools-for-azure-stand-alone-vms)
-  to configure and maintain IP pools for stand-alone Azure VMs. 
-- Install the cluster on an Azure virtual machine scale set. Configure the
-  IP pools by using an ARM template like 
-  [this one](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set).
-
-The steps for setting up IP address management are different in the two
-environments. If you're using a scale set, you set up `ipConfigurations`
-in an ARM template. If you're using stand-alone VMs, you set up IP pools
-for each VM by using a utility container that's configured to run as a
-global Swarm service, which Docker provides.
+You have two options for provisoning IPs for the Kubernetes cluster on Azure:
+- Docker UCP provides an automated mechanism to configure and maintain IP pools 
+  for stand-alone Azure VMs. This service runs within the calico-node daemonset 
+  and by default will provision 128 IP address for each node. This value can be 
+  configured via the `azure_ip_count`in the UCP 
+  [configuration file](../configure/ucp-configuration-file) before or after the 
+  UCP installation.
+- Manually provision additional IP address for each Azure VM. This could be done
+  as part of an Azure Virtual Machine Scale Set via an ARM template, an example 
+  can be found [here](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set). 
+  Note the `azure_ip_count` value in the UCP 
+  [configuration file](../configure/ucp-configuration-file) will need to be set
+  to 0. If not UCP's IP Allocator service will provision IP Address on top of 
+  those you have already provisioned.
 
 ## Azure Prerequisites 
 
@@ -46,8 +47,8 @@ Azure Subnet.
 `Orchestrator` tag. Note the value for this tag is the Kubernetes version number
 in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in each 
 UCP release. To find the relevant version please see the UCP 
-[Release Notes](../../release-notes). For example for UCP 3.0.6 the tag 
-would be `Orchestrator=Kubernetes:1.8.15`. 
+[Release Notes](../../release-notes). For example for UCP 3.1.0 the tag 
+would be `Orchestrator=Kubernetes:1.11.2`. 
 - The Azure Computer Name needs to match the Node Operating System's Hostname. 
 Note this applies to the FQDN of the host including domain names. 
 - An Azure Service Principal with `Contributor` access to the Azure Resource 
@@ -109,8 +110,6 @@ an Azure subnet.
 More details on this configuration file can be found 
 [here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go).
 
-
-
 ## Considerations for IPAM Configuration
 
 The subnet and the virtual network associated with the primary interface of
@@ -138,74 +137,7 @@ plus a buffer for initial allocations for primary IP addresses.
 > requested.
 {: .important}
 
-#### Additional Notes
-
-- The `IP_COUNT` variable defines the subnet size for each node's pod IPs. This subnet size is the same for all hosts.
--  The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
-
-## Configure IP pools for Azure stand-alone VMs
-
-Follow these steps once the underlying infrastructure has been provisioned.
-
-### Configure multiple IP addresses per VM NIC
-
-Follow the steps below to configure multiple IP addresses per VM NIC.
-
-1.  Initialize a swarm cluster comprising the virtual machines you created
-    earlier. On one of the nodes of the cluster, run:
-
-    ```bash
-    docker swarm init
-    ```
-
-2.  Note the tokens for managers and workers.
-3.  Join two other nodes on the cluster as manager (recommended for HA) by running:
-
-    ```bash
-    docker swarm join --token <manager-token>
-    ```
-
-4.  Join remaining nodes on the cluster as workers: 
-
-    ```bash
-    docker swarm join --token <worker-token>
-    ```
-
-5.  Create a file named "azure_ucp_admin.toml" that contains contents from
-    creating the Service Principal.
-
-    ```
-    AZURE_CLIENT_ID = "<AD App ID field from Step 1>"
-    AZURE_TENANT_ID = "<AD Tenant ID field from Step 1>"
-    AZURE_SUBSCRIPTION_ID = "<Azure subscription ID>"
-    AZURE_CLIENT_SECRET = "<AD App Secret field from Step 1>"
-    ```
-
-6.  Create a Docker Swarm secret based on the "azure_ucp_admin.toml" file. 
-
-    ```bash
-    docker secret create azure_ucp_admin.toml azure_ucp_admin.toml
-    ```
-
-7.  Create a global swarm service using the [docker4x/az-nic-ips](https://hub.docker.com/r/docker4x/az-nic-ips/)
-    image on Docker Hub. Use the Swarm secret to prepopulate the virtual machines
-    with the desired number of IP addresses per VM from the VNET pool. Set the
-    number of IPs to allocate to each VM through the IP_COUNT environment variable.
-    For example, to configure 128 IP addresses per VM, run the following command: 
-
-    ```bash
-    docker service create \
-      --mode=global \
-      --secret=azure_ucp_admin.toml \
-      --log-driver json-file \
-      --log-opt max-size=1m \
-      --env IP_COUNT=128 \
-      --name ipallocator \
-      --constraint "node.platform.os == linux" \
-      docker4x/az-nic-ips
-    ```
-
-## Set up IP configurations on an Azure virtual machine scale set
+## Manually provision IP address as part of an Azure virtual machine scale set
 
 Configure IP Pools for each member of the VM scale set during provisioning by
 associating multiple `ipConfigurations` with the scale set’s
@@ -284,3 +216,7 @@ docker container run --rm -it \
   --pod-cidr <ip-address-range> \
   --cloud-provider Azure
 ```
+
+#### Additional Notes
+
+- The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
