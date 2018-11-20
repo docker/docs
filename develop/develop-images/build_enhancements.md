@@ -151,3 +151,46 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 #9     duration: 1.470401133s
 ...
 ```
+
+## Using SSH to access private data in builds
+
+> **Acknowledgment**:
+> Special thanks to [Tonis Tiigi](https://medium.com/@tonistiigi) for granting
+> permission to use his blog post
+> [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
+> as the basis of the content below.
+
+The `docker build` has a `--ssh` option to allow the Docker Engine to forward SSH agent connections. For more information 
+on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).
+
+Only the commands in the `Dockerfile` that have explicitly requested the SSH access by defining `type=ssh` mount have 
+access to SSH agent connections. The other commands have no knowledge of any SSH agent being available.
+
+To request SSH access for a `RUN` command in the `Dockerfile`, define a mount with type `ssh`. This will set up the 
+`SSH_AUTH_SOCK` environment variable to make programs relying on SSH automatically use that socket.
+
+Here is an example Dockerfile using SSH in the container:
+
+```
+# syntax=docker/dockerfile:experimental
+
+FROM alpine
+
+# install ssh client and git
+
+RUN apk add --no-cache openssh-client git
+
+# download public key for github.com
+
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# clone our private repository
+
+RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
+```
+
+Once the `Dockerfile` is created, use the `--ssh` option for connectivity with the SSH agent.
+
+```
+$ docker build --ssh default .
+```
