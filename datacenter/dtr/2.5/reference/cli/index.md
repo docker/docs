@@ -19,6 +19,8 @@ docker run -it --rm docker/dtr \
     command [command options]
 ```
 
+If not specified, `docker/dtr` uses the `latest` tag by default. To work with a different version, specify it in the command. For example, `docker run -it --rm docker/dtr:2.5.5`.
+
 
 ## Commands
 
