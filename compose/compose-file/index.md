@@ -2350,8 +2350,8 @@ secrets:
   my_first_secret:
     file: ./secret_data
   my_second_secret:
-    external:
-      name: redis_secret
+    external: true
+    name: redis_secret
 ```
 
 You still need to [grant access to the secrets](#secrets) to each service in the
