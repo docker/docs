@@ -55,12 +55,12 @@ the default output for commands such as `docker inspect <CONTAINER>` is JSON.
 
 To find the current default logging driver for the Docker daemon, run
 `docker info` and search for `Logging Driver`. You can use the following
-command on Linux, macOS, or PowerShell on Windows:
+command:
 
 ```bash
-$ docker info | grep 'Logging Driver'
+$ docker info --format '{{.LoggingDriver}}'
 
-Logging Driver: json-file
+json-file
 ```
 
 ## Configure the logging driver for a container
