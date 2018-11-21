@@ -158,7 +158,9 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
     docker swarm init
     ```
 
-2.  Note the tokens for managers and workers.
+2.  Note the tokens for managers and workers. You may retrieve the join tokens 
+    at any time by running `$ docker swarm join-token manager` or `$ docker swarm 
+    join-token worker` on the manager node.
 3.  Join two other nodes on the cluster as manager (recommended for HA) by running:
 
     ```bash
@@ -175,10 +177,12 @@ Follow the steps below to configure multiple IP addresses per VM NIC.
     creating the Service Principal.
 
     ```
+    $ cat > azure_ucp_admin.toml <<EOF
     AZURE_CLIENT_ID = "<AD App ID field from Step 1>"
     AZURE_TENANT_ID = "<AD Tenant ID field from Step 1>"
     AZURE_SUBSCRIPTION_ID = "<Azure subscription ID>"
     AZURE_CLIENT_SECRET = "<AD App Secret field from Step 1>"
+    EOF
     ```
 
 6.  Create a Docker Swarm secret based on the "azure_ucp_admin.toml" file. 

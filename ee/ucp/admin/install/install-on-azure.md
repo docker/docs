@@ -24,7 +24,9 @@ You have two options for provisoning IPs for the Kubernetes cluster on Azure:
   and by default will provision 128 IP address for each node. This value can be 
   configured via the `azure_ip_count`in the UCP 
   [configuration file](../configure/ucp-configuration-file) before or after the 
-  UCP installation.
+  UCP installation. Note if this value is reduced post installation, existing 
+  VMs will not be reconciled, a user would have to manually edit the IP count
+  in Azure. 
 - Manually provision additional IP address for each Azure VM. This could be done
   as part of an Azure Virtual Machine Scale Set via an ARM template, an example 
   can be found [here](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set). 
