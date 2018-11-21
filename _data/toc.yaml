@@ -3647,8 +3647,6 @@ manuals:
         title: Testing in Builds
       - path: /docker-hub/builds/advanced/
         title: Advanced Builds
-      - path: /docker-hub/builds/webhooks/
-        title: Build Webhooks
       - path: /docker-hub/builds/github/
         title: Connecting GitHub
       - path: /docker-hub/builds/bitbucket/
@@ -3657,7 +3655,7 @@ manuals:
     section:
     - path: /docker-hub/customer_faq/
       title: Subscriptions
-    - path: /docker-store/publish/publisher_faq/
+    - path: /docker-hub/publish/publisher_faq/
       title: Publishers
     - path: /docker-hub/publish/
       title: Publish Images & Plugins

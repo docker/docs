@@ -1,13 +1,15 @@
 ---
 title: Docker Hub Publisher Image Trust Chain
 keywords: trust, chain, store, security
+redirect_from:
+- /docker-store/trustchain/
 ---
 
 ## For consumers
 
-Docker ensures that all content is securely received and verified from original
+Docker can ensure that all content is securely received and verified from original
 producers, and additionally audits images before adding them to the Docker
-Store. Docker cryptographically signs the images upon completion of a
+Hub. Docker cryptographically signs the images upon completion of a
 satisfactory image check, so that you can verify and trust certified content
 from the Docker Hub.
 

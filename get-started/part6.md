@@ -32,7 +32,7 @@ Dockerized application.
 
 ## Choose an option
 
-{% capture cloud %}
+{% capture community %}
 
 To set up and deploy:
 
@@ -190,7 +190,7 @@ you choose, or even edit the Compose file itself.
 Bringing your own server to Docker Enterprise and setting up Docker Datacenter
 essentially involves two steps:
 
-1. [Get Docker Enterprise for your server's OS from Docker Store](https://store.docker.com/search?offering=enterprise&type=edition){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Get Docker EE for your OS');"}.
+1. [Get Docker Enterprise for your server's OS from Docker Hub](https://hub.docker.com/search?offering=enterprise&type=edition){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Get Docker EE for your OS');"}.
 2. Follow the [instructions to install Docker Enterprise on your own host](/datacenter/install/linux/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'BYOH setup guide');"}.
 
 > **Note**: Running Windows containers? View our [Windows Server setup guide](/install/windows/docker-ee.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
@@ -203,8 +203,8 @@ essentially involves two steps:
   <li><a data-toggle="tab" href="#community">Docker Engine - Community</a></li>
 </ul>
 <div class="tab-content">
-  <div id="community" class="tab-pane fade in active" markdown="1">{{ community }}</div>
-  <div id="enterprise" class="tab-pane fade" markdown="1">{{ enterprise }}</div>
+  <div id="enterprise" class="tab-pane fade in active" markdown="1">{{ enterprise }}</div>
+  <div id="community" class="tab-pane fade" markdown="1">{{ community }}</div>
 </div>
 
 ## Congratulations!

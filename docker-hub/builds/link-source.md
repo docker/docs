@@ -3,6 +3,7 @@ description: Link to your source code repository
 keywords: sourcecode, github, bitbucket
 redirect_from:
 - /docker-cloud/tutorials/link-source/
+- /docker-cloud/builds/link-source/
 title: Link Docker Hub to a source code provider
 ---
 

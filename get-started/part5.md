@@ -286,6 +286,8 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 
 
+[On to Part 6 >>](part6.md){: class="button outline-btn"}
+
 ## Recap (optional)
 
 Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113840):
@@ -298,24 +300,3 @@ You learned that to add more services to your stack, you insert them in your
 Compose file. Finally, you learned that by using a combination of placement
 constraints and volumes you can create a permanent home for persisting data, so
 that your app's data survives when the container is torn down and redeployed.
-
-## Congratulations!
-
-You've taken a full-stack, dev-to-deploy tour of the entire Docker platform.
-
-There is much more to the Docker platform than what was covered here, but you
-have a good idea of the basics of containers, images, services, swarms, stacks,
-scaling, load-balancing, volumes, and placement constraints.
-
-Want to go deeper? Here are some resources we recommend:
-
-- [Deploy your app](/ee): Deploy your app in a production environment using Docker Enterprise
-- [Samples](/samples/): Our samples include multiple examples of popular software
-  running in containers, and some good labs that teach best practices.
-- [User Guide](/engine/userguide/): The user guide has several examples that
-  explain networking and storage in greater depth than was covered here.
-- [Admin Guide](/engine/admin/): Covers how to manage a Dockerized production
-  environment.
-- [Training](https://training.docker.com/): Official Docker courses that offer
-  in-person instruction and virtual classroom environments.
-- [Blog](https://blog.docker.com): Covers what's going on with Docker lately.

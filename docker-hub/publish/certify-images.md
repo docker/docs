@@ -2,6 +2,8 @@
 description: Run certification tests against your images
 keywords: Docker, docker, store, certified content, images
 title: Certify Docker images
+redirect_from:
+- /docker-store/certify-images/
 ---
 
 ## Introduction

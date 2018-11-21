@@ -443,7 +443,7 @@ to change context so that `kubectl` is pointing to `docker-for-desktop`:
 > kubectl config use-context docker-for-desktop
 ```
 
-You can also change it through the Docker for Windows menu: 
+You can also change it through the Docker for Windows menu:
 
 ![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="600px"}
 
@@ -487,7 +487,7 @@ Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
 
 Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
 
-Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues. 
+Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
 
 To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
 

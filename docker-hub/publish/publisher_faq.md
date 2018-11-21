@@ -2,6 +2,9 @@
 description: Docker Hub frequently asked questions
 keywords: Docker, docker, hub, purchase images
 title: Docker Hub Publisher FAQs
+redirect_from:
+- /docker-store/publisher_faq/
+
 ---
 
 ## Certification program

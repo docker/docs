@@ -2,6 +2,8 @@
 description: Docker Hub frequently asked questions
 keywords: Docker, docker, store, purchase images
 title: Docker Hub Customer FAQs
+redirect_from:
+- /docker-store/customer_faq/
 ---
 
 ## Customer FAQs

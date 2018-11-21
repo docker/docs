@@ -2,6 +2,8 @@
 description: Docker Hub Automated Builds with GitHub
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, GitHub
 title: Configure automated builds from GitHub
+redirect_from:
+- /docker-hub/github/
 ---
 
 If you've previously linked Docker Hub to your GitHub account,
@@ -23,7 +25,7 @@ GitHub account. This allows the registry to see your GitHub repositories.
 To add, remove or view your linked account, log in to your Docker Hub account. Select **Settings > Linked Accounts & Services**.
 
 Linking to Github grants Docker Hub access to all of your repositories. Follow the
-onscreen instructions to authorize and link your GitHub account to Docker Hub. 
+onscreen instructions to authorize and link your GitHub account to Docker Hub.
 Once it is linked, you can choose a source repository from which to create the Automatic Build.
 
 You can review and revoke Docker Hub's access by visiting the
@@ -181,5 +183,3 @@ The image below shows the **Webhooks/Add webhook** form with the above settings 
 
 If configured correctly, you'll see this in the **Webhooks** view
 ![github-webhook](images/github-webhook.png)
-
-

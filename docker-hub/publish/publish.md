@@ -2,6 +2,8 @@
 description: Submit a product for Docker Hub
 keywords: Docker, docker, hub, purchase images
 title: Publish content on Docker Hub
+redirect_from:
+- /docker-store/publish/
 ---
 
 ## Permitted content and support options

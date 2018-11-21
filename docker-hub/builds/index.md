@@ -3,6 +3,10 @@ description: Getting Started with Builds
 keywords: builds, images, Hub
 title: Getting Started with Builds
 notoc: true
+redirect_from:
+- /docker-cloud/builds/
+- /docker-cloud/builds/repos/
+- /docker-cloud/builds/push-images/
 ---
 
 Docker Hub provides a hosted registry service where you can create
@@ -15,8 +19,8 @@ image on each `git push` to the source code. You can also create automated
 tests, and when the tests pass use autoredeploy to automatically update your
 running services when a build passes its tests.
 
-* [Repositories in Docker Hub](repos.md)
-* [Link to a source code repository](link-source.md)
+For more information, see:
+
 * [Automated builds](automated-build.md)
 * [Automated repository tests](automated-testing.md)
 * [Advanced options for Autobuild and Autotest](advanced.md)

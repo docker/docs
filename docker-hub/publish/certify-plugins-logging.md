@@ -2,6 +2,9 @@
 description: Run certification tests against your images
 keywords: Docker, docker, hub, certified content, logging
 title: Certify Docker logging plugins
+redirect_from:
+- /docker-store/certify-plugins-logging/
+
 ---
 
 ## Introduction

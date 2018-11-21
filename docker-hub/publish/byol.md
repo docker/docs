@@ -2,6 +2,8 @@
 description: Submit a product to be listed on Docker Hub
 keywords: Docker, docker, hub, purchase images
 title: Bring Your Own License (BYOL) products on Docker Hub
+redirect_from:
+- /docker-store/byol/
 ---
 
 ## What is Bring Your Own License (BYOL)?

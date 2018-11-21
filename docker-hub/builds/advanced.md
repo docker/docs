@@ -2,6 +2,8 @@
 description: Automated builds
 keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
+redirect_from:
+- /docker-cloud/builds/advanced/
 ---
 
 The following options allow you to customize your automated build and automated test processes.

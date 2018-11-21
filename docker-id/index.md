@@ -2,6 +2,8 @@
 description: Sign up for a Docker ID and log in
 keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access
 title: Docker ID accounts
+redirect_from:
+- /docker-cloud/dockerid/
 ---
 
 Your free Docker ID grants you access to Docker Hub repositories, and some beta programs. All you need is an email address.

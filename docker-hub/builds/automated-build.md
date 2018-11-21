@@ -3,6 +3,7 @@ description: Automated builds
 keywords: automated, build, images
 redirect_from:
 - /docker-cloud/feature-reference/automated-build/
+- /docker-cloud/builds/automated-build/
 title: Automated builds
 ---
 
