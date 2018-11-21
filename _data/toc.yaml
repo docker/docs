@@ -173,6 +173,8 @@ guides:
       path: /get-started/part4/
     - title: "Part 5: Stacks"
       path: /get-started/part5/
+    - title: "Part 6: Deploy your app"
+      path: /get-started/part6/
   - path: /engine/docker-overview/
     title: Docker overview
 - sectiontitle: Develop with Docker
@@ -3631,8 +3633,8 @@ manuals:
     title: Docker ID
   - path: /docker-hub/repos/
     title: Public Repositories
-  - path: /docker-hub/official_repos/
-    title: Official Repositories
+  - path: /docker-hub/official_images/
+    title: Official Images
   - path: /docker-hub/orgs/
     title: Teams & Organizations
   - path: /docker-hub/webhooks/

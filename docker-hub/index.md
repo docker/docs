@@ -16,7 +16,7 @@ Docker Hub provides the following major features:
   repositories allow you to share container images with your team. Public
   repositories allow you to share them with anyone.
 * [Teams & Organizations](/docker-hub/orgs.md): Manage access to private repositories.
-* [Official Repositories](/docker-hub/official_repos.md): Pull & use high-quality container images provided by Docker.
+* [Official Images](/docker-hub/official_images.md): Pull & use high-quality container images provided by Docker.
 * [Publisher Images](/docker-hub/publish/customer_faq.md): Pull & use high-quality container
   images provided by external vendors. Certified images also include support and guarantee
   compatibility with Docker Enterprise.
@@ -32,17 +32,17 @@ Start by creating an [account](/docker-hub/accounts.md) at [https://hub.docker.c
 > **Note**: You can search for and pull Docker images from Hub without logging
 > in, however to push images or share them with your team, you must log in.
 
-## Find & Pull an Official Repositories
+## Find & Pull an Official Image
 
 Docker Hub contains a number of [Official
 Repositories](http://hub.docker.com/explore/). These are curated repositories from vendors and contributors to Docker. They contain Docker images from vendors like Canonical, Oracle, and Elastic that you can use as the basis to build your applications and services.
 
-With Official Repositories you know you're using an optimized and
+With Official Images you know you're using an optimized and
 up-to-date image that was built by experts to power your applications.
 
-> **Note**: If you would like to contribute an Official Repository for your
+> **Note**: If you would like to contribute an Official Image for your
 > organization or product, see the documentation on
-> [Official Repositories on Docker Hub](/docker-hub/official_repos.md) for more
+> [Official Images on Docker Hub](/docker-hub/official_images.md) for more
 > information.
 
 ## Create your first repository and push an image to it

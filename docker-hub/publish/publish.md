@@ -62,7 +62,7 @@ and guidelines listed below to build and deliver great content:
 
 * [Best practices for writing Dockerfiles](/engine/userguide/eng-image/dockerfile_best-practices/)
 
-* [Official repositories on Docker Hub](/docker-hub/official_repos/)
+* [Official Images on Docker Hub](/docker-hub/official_images/)
 
 * [Docker Bench for Security](https://github.com/docker/docker-bench-security){: target="_blank"
 class="_"}

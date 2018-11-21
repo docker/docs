@@ -22,7 +22,7 @@ You must use the tool, `inspectDockerImage`, to certify your content for publica
 
 The `inspectDockerImage` tool does the following:
 
-- Verifies that the Docker image was built from an image in the [Docker Official Repository](https://github.com/docker-library/repo-info/tree/master/repos)
+- Verifies that the Docker image was built from an image in the [Docker Official Image](https://github.com/docker-library/repo-info/tree/master/repos)
 
 - Inspects the Docker image for a Health Check. Although a Health Check is not required, it is recommended.
 

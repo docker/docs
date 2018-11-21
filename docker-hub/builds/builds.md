@@ -207,7 +207,7 @@ To add a link:
 
 2. In the Repository Links section, enter an image repository name.
 
-    A remote repository name should be either an official repository name such as `ubuntu` or a public repository name `namespace/repoName`.
+    A remote repository name should be either an official image name such as `ubuntu` or a public repository name `namespace/repoName`.
 
 3. Press **Add**.
 
