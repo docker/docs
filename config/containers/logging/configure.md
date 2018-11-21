@@ -43,12 +43,17 @@ example sets two configurable options on the `json-file` logging driver:
 {
   "log-driver": "json-file",
   "log-opts": {
+    "max-size": "10m",
+    "max-file": "3",
     "labels": "production_status",
     "env": "os,customer"
   }
 }
 ```
 
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 If you do not specify a logging driver, the default is `json-file`. Thus,
 the default output for commands such as `docker inspect <CONTAINER>` is JSON.

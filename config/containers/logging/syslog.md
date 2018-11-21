@@ -41,7 +41,8 @@ configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `syslog` and sets the
-`syslog-address` option.
+`syslog-address` option. The `syslog-address` options supports both UDP and TCP;
+this example uses UDP.
 
 ```json
 {
@@ -54,7 +55,9 @@ The following example sets the log driver to `syslog` and sets the
 
 Restart Docker for the changes to take effect.
 
-> **Note**: The syslog-address supports both UDP and TCP.
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Numeric and boolean values (such as the value
+> for `syslog-tls-skip-verify`) must therefore be enclosed in quotes (`"`).
 
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker container create` or `docker run`:
