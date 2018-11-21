@@ -18,7 +18,6 @@ unless you configure it to use a different logging driver.
 
 In addition to using the logging drivers included with Docker, you can also
 implement and use [logging driver plugins](/engine/admin/logging/plugins.md).
-Logging driver plugins are available in Docker 17.05 and higher.
 
 
 ## Configure the default logging driver
