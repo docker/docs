@@ -34,12 +34,6 @@ Dockerized application.
 
 {% capture community %}
 
-To set up and deploy:
-
-- Install Docker Engine - Community
-- Create your Swarm
-- Deploy your app
-
 ### Install Docker Engine - Community
 
 Find the [install instructions](/install/#supported-platforms) for Docker Engine - Community on the platform of your choice.
@@ -53,55 +47,51 @@ Run `docker swarm init` to create a swarm on the node.
 Run `docker stack deploy -c docker-compose.yml getstartedlab` to deploy
 the app on the cloud hosted swarm.
 
-    ```shell
-    docker stack deploy -c docker-compose.yml getstartedlab
+```shell
+docker stack deploy -c docker-compose.yml getstartedlab
 
-    Creating network getstartedlab_webnet
-    Creating service getstartedlab_web
-    Creating service getstartedlab_visualizer
-    Creating service getstartedlab_redis
-    ```
+Creating network getstartedlab_webnet
+Creating service getstartedlab_web
+Creating service getstartedlab_visualizer
+Creating service getstartedlab_redis
+```
 
-    Your app is now running on your cloud provider.
+Your app is now running on your cloud provider.
 
 #### Run some swarm commands to verify the deployment
 
 You can use the swarm command line, as you've done already, to browse and manage
 the swarm. Here are some examples that should look familiar by now:
 
-* Use `docker node ls` to list the nodes.
+* Use `docker node ls` to list the nodes in your swarm.
 
-    ```shell
-    [getstartedlab] ~ $ docker node ls
-    ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
-    9442yi1zie2l34lj01frj3lsn     ip-172-31-5-208.us-west-1.compute.internal    Ready               Active              
-    jr02vg153pfx6jr0j66624e8a     ip-172-31-6-237.us-west-1.compute.internal    Ready               Active              
-    thpgwmoz3qefdvfzp7d9wzfvi     ip-172-31-18-121.us-west-1.compute.internal   Ready               Active              
-    n2bsny0r2b8fey6013kwnom3m *   ip-172-31-20-217.us-west-1.compute.internal   Ready               Active              Leader
-    ```
+```shell
+[getstartedlab] ~ $ docker node ls
+ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
+n2bsny0r2b8fey6013kwnom3m *   ip-172-31-20-217.us-west-1.compute.internal   Ready               Active              Leader
+```
 
 * Use `docker service ls` to list services.
 
-  ```shell
-  [getstartedlab] ~/sandbox/getstart $ docker service ls
-  ID                  NAME                       MODE                REPLICAS            IMAGE                             PORTS
-  x3jyx6uukog9        dockercloud-server-proxy   global              1/1                 dockercloud/server-proxy          *:2376->2376/tcp
-  ioipby1vcxzm        getstartedlab_redis        replicated          0/1                 redis:latest                      *:6379->6379/tcp
-  u5cxv7ppv5o0        getstartedlab_visualizer   replicated          0/1                 dockersamples/visualizer:stable   *:8080->8080/tcp
-  vy7n2piyqrtr        getstartedlab_web          replicated          5/5                 sam/getstarted:part6    *:80->80/tcp
-  ```
+```shell
+[getstartedlab] ~/sandbox/getstart $ docker service ls
+ID                  NAME                       MODE                REPLICAS            IMAGE                             PORTS
+ioipby1vcxzm        getstartedlab_redis        replicated          0/1                 redis:latest                      *:6379->6379/tcp
+u5cxv7ppv5o0        getstartedlab_visualizer   replicated          0/1                 dockersamples/visualizer:stable   *:8080->8080/tcp
+vy7n2piyqrtr        getstartedlab_web          replicated          5/5                 sam/getstarted:part6    *:80->80/tcp
+```
 
 * Use `docker service ps <service>` to view tasks for a service.
 
-  ```shell
-  [getstartedlab] ~/sandbox/getstart $ docker service ps vy7n2piyqrtr
-  ID                  NAME                  IMAGE                            NODE                                          DESIRED STATE       CURRENT STATE            ERROR               PORTS
-  qrcd4a9lvjel        getstartedlab_web.1   sam/getstarted:part6   ip-172-31-5-208.us-west-1.compute.internal    Running             Running 20 seconds ago                       
-  sknya8t4m51u        getstartedlab_web.2   sam/getstarted:part6   ip-172-31-6-237.us-west-1.compute.internal    Running             Running 17 seconds ago                       
-  ia730lfnrslg        getstartedlab_web.3   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 21 seconds ago                       
-  1edaa97h9u4k        getstartedlab_web.4   sam/getstarted:part6   ip-172-31-18-121.us-west-1.compute.internal   Running             Running 21 seconds ago                       
-  uh64ez6ahuew        getstartedlab_web.5   sam/getstarted:part6   ip-172-31-18-121.us-west-1.compute.internal   Running             Running 22 seconds ago        
-  ```
+```shell
+[getstartedlab] ~/sandbox/getstart $ docker service ps vy7n2piyqrtr
+ID                  NAME                  IMAGE                            NODE                                          DESIRED STATE       CURRENT STATE            ERROR               PORTS
+qrcd4a9lvjel        getstartedlab_web.1   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 20 seconds ago                       
+sknya8t4m51u        getstartedlab_web.2   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 17 seconds ago                       
+ia730lfnrslg        getstartedlab_web.3   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 21 seconds ago                       
+1edaa97h9u4k        getstartedlab_web.4   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 21 seconds ago                       
+uh64ez6ahuew        getstartedlab_web.5   sam/getstarted:part6   ip-172-31-20-217.us-west-1.compute.internal   Running             Running 22 seconds ago        
+```
 
 #### Open ports to services on cloud provider machines
 
@@ -109,10 +99,9 @@ At this point, your app is deployed as a swarm on your cloud provider servers,
 as evidenced by the `docker` commands you just ran. But, you still need to
 open ports on your cloud servers in order to:
 
-* allow communication between the `redis` service and `web` service on
-the worker nodes
+* if using many nodes, allow communication between the `redis` service and `web` service
 
-* allow inbound traffic to the `web` service on the worker nodes so that
+* allow inbound traffic to the `web` service on any worker nodes so that
 Hello World and Visualizer are accessible from a web browser.
 
 * allow inbound SSH traffic on the server that is running the `manager` (this may be already set on your cloud provider)
