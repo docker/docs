@@ -204,7 +204,7 @@ the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=ppc64el] {{ download-url-base }} \
+       "deb [arch=ppc64le] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
