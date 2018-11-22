@@ -1,20 +1,36 @@
 ---
-description: Docker Hub Automated Builds
+description: Docker Hub Webhooks
 keywords: Docker, webhookds, hub, builds
-title: Webhooks for automated builds
+title: Docker Hub Webhooks
 ---
 
-If you have an automated build repository in Docker Hub, you can use Webhooks to
-cause an action in another application in response to an event in the
-repository. Webhook is a POST request sent to a defined URL which provides the service. Docker Hub webhooks fire when an image is built in, or a new tag
-is added to, your automated build repository.
+You can use Webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.
 
-Configure webhooks on `https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settings/webhooks/`.
+Configure Webhooks via the "Webhooks" tab on your Docker Hub repository:
 
-![Create Webhook](/docker-hub/images/webhooks.png)
+![Webhooks Page](images/webhooks-empty.png)
 
-With your webhook, you specify a target URL to POST to. Docker Hub POSTs the URL
-with the following payload:
+### Creating Webhooks
+
+To create a Webhook, visit the Webhooks tab for your repository. Then:
+1. Provide a name for the Webhooks
+2. Provide a destination Webhook URL. This is where webhook POST requests will be delivered:
+
+![Webhooks Create](images/webhooks-create.png)
+
+### Viewing Webhook Delivery History
+
+You can view Webhook Delivery History by clicking on the submenu of the Webhook and then clicking "View History"
+
+![Webhooks View History](images/webhooks-submenu.png)
+
+You can then view the delivery history, and wether delivering the POST request was successful or failed:
+
+![Webhooks History](images/webhooks-history.png)
+
+### Example Webhook Payload
+
+Docker Hub Webhook payloads have the following payload JSON format:
 
 ```json
 {

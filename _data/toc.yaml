@@ -3628,17 +3628,19 @@ manuals:
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
-    title: Get Started
-  - path: /docker-hub/accounts/
-    title: Docker ID
+    title: Quickstart
   - path: /docker-hub/repos/
-    title: Public Repositories
+    title: Repositories
   - path: /docker-hub/official_images/
     title: Official Images
   - path: /docker-hub/orgs/
     title: Teams & Organizations
+  - path: /docker-hub/upgrade/
+    title: Upgrading your plan
   - path: /docker-hub/webhooks/
-    title: Repository Webhooks
+    title: Webhooks
+  - path: /docker-hub/slack_integration/
+    title: Slack Integration
   - sectiontitle: Builds
     section:
       - path: /docker-hub/builds/

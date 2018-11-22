@@ -1,19 +1,11 @@
 ---
-description: Your Repositories on Docker Hub
+description: Using repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation
-title: Repositories on Docker Hub
+title: Repositories
 ---
 
 Docker Hub repositories let you share images with co-workers, customers, or the
-Docker community at large. If you're building your images internally, either on
-your own Docker daemon, or using your own Continuous integration services, you
-can push them to a Docker Hub repository that you add to your Docker Hub user or
-organization account.
-
-Alternatively, if the source code for your Docker image is on GitHub or
-Bitbucket, you can use an "Automated build" repository, which is built by the
-Docker Hub services. See the [automated builds documentation](/docker-hub/builds.md) to read
-about the extra functionality provided by those services.
+Docker community at large.
 
 ![repositories](/docker-hub/images/repos.png)
 
@@ -159,69 +151,6 @@ repository from that repository's *Settings* page. You can also toggle the
 repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
 [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
-
-## Webhooks
-
-A webhook is an HTTP call-back triggered by a specific event. You can use a Hub
-repository webhook to notify people, services, and other applications after a
-new image is pushed to your repository (this also happens for Automated builds).
-For example, you can trigger an automated test or deployment to happen as soon
-as the image is available.
-
-To get started adding webhooks, go to the desired repository in the Hub, and
-click "Webhooks" under the "Settings" box. A webhook is called only after a
-successful `push` is made. The webhook calls are HTTP POST requests with a JSON
-payload similar to the example shown below.
-
-*Example webhook JSON payload:*
-
-```json
-{
-  "callback_url": "https://registry.hub.docker.com/u/svendowideit/busybox/hook/2141bc0cdec4hebec411i4c1g40242eg110020/",
-  "push_data": {
-    "images": [
-        "27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3",
-        "51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c",
-        "..."
-    ],
-    "pushed_at": 1.417566822e+09,
-    "pusher": "svendowideit"
-  },
-  "repository": {
-    "comment_count": 0,
-    "date_created": 1.417566665e+09,
-    "description": "",
-    "full_description": "webhook triggered from a 'docker push'",
-    "is_official": false,
-    "is_private": false,
-    "is_trusted": false,
-    "name": "busybox",
-    "namespace": "svendowideit",
-    "owner": "svendowideit",
-    "repo_name": "svendowideit/busybox",
-    "repo_url": "https://registry.hub.docker.com/u/svendowideit/busybox/",
-    "star_count": 0,
-    "status": "Active"
-  }
-}
-```
-
-<!-- TODO: does it tell you what tag was updated? -->
-
->**Note**: If you want to test your webhook, we recommend using a tool like
->[requestb.in](http://requestb.in/). Also note, the Docker Hub server can't be
->filtered by IP address.
-
-### Webhook chains
-
-Webhook chains allow you to chain calls to multiple services. For example, you
-can use this to trigger a deployment of your container only after it has been
-successfully tested, then update a separate Changelog once the deployment is
-complete. After clicking the "Add webhook" button, simply add as many URLs as
-necessary in your chain.
-
-The first webhook in a chain is called after a successful push. Subsequent
-URLs are contacted after the callback has been validated.
 
 ### Validating a callback
 

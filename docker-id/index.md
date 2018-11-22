@@ -4,6 +4,7 @@ keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums,
 title: Docker ID accounts
 redirect_from:
 - /docker-cloud/dockerid/
+- /docker-hub/accounts/
 ---
 
 Your free Docker ID grants you access to Docker Hub repositories, and some beta programs. All you need is an email address.
@@ -39,6 +40,8 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 Once you register and verify your Docker ID email address, you can log in
 to [Docker Hub](https://hub.docker.com) and [Docker Support](https://support.docker.com).
+
+![Login](images/login.png)
 
 You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
 
