@@ -88,7 +88,7 @@ $ docker-cloud -v
 docker-cloud 1.0.0
 ```
 
-## Getting Started
+## Get Started
 
 First, you should log in using the `docker` CLI and the `docker login` command.
 Your Docker ID, which you also use to log in to Docker Hub, is also used for
