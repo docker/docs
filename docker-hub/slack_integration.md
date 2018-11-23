@@ -29,9 +29,6 @@ Before you begin, make sure that you are signed into the Slack team that you wan
 
     Once you click **Authorize**, you should see a message in the Slack channel notifying you of the new integration.
 
-    ![](images/slack-oauth-authorize.png)
-
-
 Once configured, choose a notification level:
 
 * **Off** Do not receive any notifications.

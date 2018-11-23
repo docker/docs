@@ -115,7 +115,7 @@ We'll need to download Docker Desktop to build and push a container image to Doc
 1. Download and install [Docker Desktop](https://docker.com/get-started). If on Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community)
 2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`
 
-### Step 4: Build and push an image to Docker Hub from your computer
+### Step 4: Build and push a container image to Docker Hub from your computer
 
 1. Create a Dockerfile to specify your application by running:
 

@@ -64,3 +64,36 @@ Docker Hub Webhook payloads have the following payload JSON format:
   }
 }
 ```
+
+### Validating a Webhook callback
+
+To validate a callback in a webhook chain, you need to
+
+1. Retrieve the `callback_url` value in the request's JSON payload.
+1. Send a POST request to this URL containing a valid JSON body.
+
+> **Note**: A chain request is only considered complete once the last
+> callback has been validated.
+
+
+#### Callback JSON data
+
+The following parameters are recognized in callback data:
+
+* `state` (required): Accepted values are `success`, `failure`, and `error`.
+  If the state isn't `success`, the Webhook chain is interrupted.
+* `description`: A string containing miscellaneous information that is
+  available on Docker Hub. Maximum 255 characters.
+* `context`: A string containing the context of the operation. Can be retrieved
+  from the Docker Hub. Maximum 100 characters.
+* `target_url`: The URL where the results of the operation can be found. Can be
+  retrieved on the Docker Hub.
+
+*Example callback payload:*
+
+    {
+      "state": "success",
+      "description": "387 tests PASSED",
+      "context": "Continuous integration by Acme CI",
+      "target_url": "http://ci.acme.com/results/afd339c1c3d27"
+    }

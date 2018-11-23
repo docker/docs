@@ -4,6 +4,8 @@ keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker
 title: Upgrading your Plan
 ---
 
+User and organization accounts maintain separate Docker Hub billing profiles.
+
 ### Upgrading your personal plan
 
 Docker Hub includes one private Docker Hub repository for free. If you need

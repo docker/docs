@@ -3635,12 +3635,12 @@ manuals:
     title: Official Images
   - path: /docker-hub/orgs/
     title: Teams & Organizations
-  - path: /docker-hub/upgrade/
-    title: Upgrading your plan
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
     title: Slack Integration
+  - path: /docker-hub/upgrade/
+    title: Upgrading your plan
   - sectiontitle: Builds
     section:
       - path: /docker-hub/builds/

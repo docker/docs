@@ -39,7 +39,7 @@ place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new
 Official Image.
 
-## Should I use Official Images?
+## When to use Official Images
 
 New Docker users are encouraged to use the Official Images in their
 projects. These repositories have clear documentation, promote best practices,
@@ -60,7 +60,7 @@ insufficient, it is still recommended to inherit from an Official Image
 base OS image to leverage the ongoing maintenance work, rather than duplicating
 these efforts.
 
-## How do I know the Official Images are secure?
+## Official Image Vulnerability Scanning
 
 Each of the images in the Official Images is scanned for vulnerabilities. The results of
 these security scans provide valuable information about which images contain
@@ -73,14 +73,15 @@ To view the Docker Security Scanning results:
     You can view Official Images even while logged out, however the scan results are only available once you log in.
 2. Navigate to the repository of the Official Image whose security scan you want to view.
 3. Click the `Tags` tab to see a list of tags and their security scan summaries.
-    ![Viewing CVEs from Docker images](images/scan-drilldown.gif)
+
+![Official Image Tags](official_images-tags.png)
 
 You can click into a tag's detail page to see more information about which
 layers in the image and which components within the layer are vulnerable.
 Details including a link to the official CVE report for the vulnerability appear
 when you click an individual vulnerable component.
 
-## How can I get involved?
+## Submitting Feedback for Official Images
 
 All Official Images contain a **User Feedback** section in their
 documentation which covers the details for that specific repository. In most
@@ -88,7 +89,7 @@ cases, the GitHub repository which contains the Dockerfiles for an Official
 Repository also has an active issue tracker. General feedback and support
 questions should be directed to `#docker-library` on Freenode IRC.
 
-## How do I create a new Official Image?
+## Creating an Official Image
 
 From a high level, an Official Image starts out as a proposal in the form
 of a set of GitHub pull requests. Detailed and objective proposal
