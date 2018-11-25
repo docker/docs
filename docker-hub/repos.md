@@ -104,11 +104,15 @@ see the [organizations documentation](/docker-hub/orgs.md).
 Docker Hub's repository "Tags" view shows you the available tags and the size
 of the associated image.
 
+![View Repo Tags](images/repos-tags-view.png)
+
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the Tar file created
 when you `docker save` an image.
 
-![images/busybox-image-tags.png](images/busybox-image-tags.png)
+To edit tags, click on Manage Repository or find your repository under *Repositories*:
+
+![Manage Repo Tags](images/repos-tags-manage.png)
 
 ## Searching for Repositories
 

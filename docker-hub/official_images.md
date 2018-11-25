@@ -74,7 +74,7 @@ To view the Docker Security Scanning results:
 2. Navigate to the repository of the Official Image whose security scan you want to view.
 3. Click the `Tags` tab to see a list of tags and their security scan summaries.
 
-![Official Image Tags](official_images-tags.png)
+![Official Image Tags](images/official_images-tags.png)
 
 You can click into a tag's detail page to see more information about which
 layers in the image and which components within the layer are vulnerable.
