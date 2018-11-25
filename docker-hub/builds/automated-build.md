@@ -1,11 +1,13 @@
 ---
-description: Automated builds
+description: Set up Automated builds
 keywords: automated, build, images
 redirect_from:
 - /docker-cloud/feature-reference/automated-build/
 - /docker-cloud/builds/automated-build/
-title: Automated builds
+title: Set up Automated builds
 ---
+
+## How Automated Builds work
 
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker
@@ -23,8 +25,8 @@ pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
-You can also just use `docker push` to push pre-built images to these
-repositories, even if you have automatic builds set up.
+> **Note**: You can still use `docker push` to push pre-built images to
+repositories with Automated Builds configured.
 
 ![An automated build dashboard](images/build-dashboard.png)
 

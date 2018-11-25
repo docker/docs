@@ -4,26 +4,40 @@ keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker
 title: Repositories
 ---
 
-Docker Hub repositories let you share container images with your team,
+Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-- Repositories hold Docker container images:
-- One Docker Hub repository can hold many Docker images
-- Docker images are pushed to Docker Hub via the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) command.
-- Each image pushed to Docker Hub must have a **tag**
-- Tags are named when images are pushed to Docker Hub (e.g. `latest`, `v1.0.0`, `1.0.0`)
+Docker images are pushed to Docker Hub via the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) command. A single Docker Hub repository can hold many Docker images (stored as **tags**).
 
 ## Creating Repositories
 
+To create a repository, sign into Docker Hub, click on **Repositories** then **Create Repo**:
+
+![Create repo](images/repos-create.png)
+
+When creating a new repository, you can choose to put it in your Docker ID
+namespace, or that of any [Organization](/docker-hub/orgs.md) that you are in the "Owners"
+team. The Repository Name needs to be unique in that namespace, can be two
+to 255 characters, and can only contain lowercase letters, numbers or `-` and
+`_`.
+
+The "Short Description" of 100 characters is used in the search results,
+while the "Full Description" can be used as the Readme for the repository, and
+can use Markdown to add simple formatting.
+
+After you hit the "Create" button, you then need to `docker push` images to that
+Hub based repository.
 
 ## Pushing a Docker container image to Docker Hub
 
-To push a repository to the Docker Hub, you need to
+To push a repository to the Docker Hub, you must to
 name your local image using your Docker Hub username, and the
-repository name that you created in the previous step.
+repository name that you created via Docker Hub on the web.
+
 You can add multiple images to a repository, by adding a specific `:<tag>` to
 it (for example `docs/base:testing`). If it's not specified, the tag defaults to
 `latest`.
+
 You can name your local images either when you build it, using
 `docker build -t <hub-user>/<repo-name>[:<tag>]`,
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
@@ -39,13 +53,18 @@ the community.
 
 ## Private Repositories
 
-Private repositories allow you to have repositories that contain images that you
-want to keep private, either to your own account or within an organization or
+Private repositories allow you keep container images private, either to your own account or within an organization or
 team.
 
-To work with a private repository on [Docker Hub](https://hub.docker.com), you
-need to add one using the [Add Repository](https://hub.docker.com/add/repository/) button. You get one private
-repository for free with your Docker Hub user account (not usable for
+To create a private repo select **Private** when creating a private repo:
+
+![Create Private Repo](images/repo-create-private.png)
+
+You can also make an existing repository private by going to the repo's **Settings** tab:
+
+![Convert Repo to Private](images/repo-make-private.png)
+
+You get one private repository for free with your Docker Hub user account (not usable for
 organizations you're a member of). If you need more private repositories for your user account, upgrade
 your Docker Hub plan from your [Billing Information](https://hub.docker.com/account/billing-plans/) page.
 
@@ -55,19 +74,14 @@ from it using Docker.
 > **Note**: You need to be signed in and have access to work with a
 > private repository.
 
-Private repositories are just like public ones. However, it isn't possible to
-browse them or search their content on the public registry. They do not get
-cached the same way as a public repository either.
+> **Note**: Private repositories are not currently available to search via the
+top-level search or `docker search`
 
 You can designate collaborators and manage their access to a private
 repository from that repository's *Settings* page. You can also toggle the
 repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
 [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
-
-## Public Repositories
-
-## Editing Repository information
 
 ## Collaborators and their role
 
@@ -94,28 +108,7 @@ Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the Tar file created
 when you `docker save` an image.
 
-![images/busybox-image-tags.png](/docker-hub/images/busybox-image-tags.png)
-
-## Creating a new repository on Docker Hub
-
-When you first create a Docker Hub user, you see a "Get started with
-Docker Hub." screen, from which you can click directly into "Create Repository".
-You can also use the "Create &#x25BC;" menu to "Create Repository".
-
-When creating a new repository, you can choose to put it in your Docker ID
-namespace, or that of any [organization](/docker-hub/orgs.md) that you are in the "Owners"
-team. The Repository Name needs to be unique in that namespace, can be two
-to 255 characters, and can only contain lowercase letters, numbers or `-` and
-`_`.
-
-The "Short Description" of 100 characters is used in the search results,
-while the "Full Description" can be used as the Readme for the repository, and
-can use Markdown to add simple formatting.
-
-After you hit the "Create" button, you then need to `docker push` images to that
-Hub based repository.
-
-<!-- TODO: show a created example, and then use it in subsequent sections -->
+![images/busybox-image-tags.png](images/busybox-image-tags.png)
 
 ## Searching for Repositories
 
