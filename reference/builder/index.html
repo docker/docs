@@ -1380,13 +1380,13 @@ successively.</p>
 
 <p>This page discusses the specifics of all the instructions you can use in your
 <code>Dockerfile</code>. To further help you write a clear, readable, maintainable
-<code>Dockerfile</code>, we&rsquo;ve also written a <a href="/reference/reference/articles/dockerfile_best-practices"><code>Dockerfile</code> Best Practices
+<code>Dockerfile</code>, we&rsquo;ve also written a <a href="/articles/dockerfile_best-practices"><code>Dockerfile</code> Best Practices
 guide</a>. Lastly, you can test your
-Dockerfile knowledge with the <a href="/reference/reference/userguide/level1">Dockerfile tutorial</a>.</p>
+Dockerfile knowledge with the <a href="/userguide/level1">Dockerfile tutorial</a>.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>To <a href="/reference/reference/reference/commandline/cli/#build"><em>build</em></a> an image from a source repository,
+<p>To <a href="/docker/reference/commandline/cli/#build"><em>build</em></a> an image from a source repository,
 create a description file called <code>Dockerfile</code> at the root of your repository.
 This file will describe the steps to assemble the image.</p>
 
@@ -1434,7 +1434,7 @@ instructions.</p>
 
 <p>Whenever possible, Docker will re-use the intermediate images,
 accelerating <code>docker build</code> significantly (indicated by <code>Using cache</code> -
-see the <a href="/reference/reference/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
+see the <a href="/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
 guide</a> for more information):</p>
 
 <pre><code>$ docker build -t SvenDowideit/ambassador .
@@ -1466,7 +1466,7 @@ INSTRUCTION arguments
 be UPPERCASE in order to distinguish them from arguments more easily.</p>
 
 <p>Docker runs the instructions in a <code>Dockerfile</code> in order. <strong>The
-first instruction must be `FROM`</strong> in order to specify the <a href="/reference/reference/terms/image/#base-image"><em>Base
+first instruction must be `FROM`</strong> in order to specify the <a href="/docker/reference/glossary/#base-image"><em>Base
 Image</em></a> from which you are building.</p>
 
 <p>Docker will treat lines that <em>begin</em> with <code>#</code> as a
@@ -1655,7 +1655,7 @@ the build context into your new container but do not want to include the
 <pre><code>FROM &lt;image&gt;@&lt;digest&gt;
 </code></pre>
 
-<p>The <code>FROM</code> instruction sets the <a href="/reference/reference/terms/image/#base-image"><em>Base Image</em></a>
+<p>The <code>FROM</code> instruction sets the <a href="/docker/reference/glossary/#base-image"><em>Base Image</em></a>
 for subsequent instructions. As such, a valid <code>Dockerfile</code> must have <code>FROM</code> as
 its first instruction. The image can be any valid image – it is especially easy
 to start by <strong>pulling an image</strong> from the <a href="/userguide/dockerrepos"><em>Public Repositories</em></a>.</p>
@@ -1722,7 +1722,7 @@ the next build. The cache for an instruction like
 cache for <code>RUN</code> instructions can be invalidated by using the <code>--no-cache</code>
 flag, for example <code>docker build --no-cache</code>.</p>
 
-<p>See the <a href="/reference/reference/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
+<p>See the <a href="/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
 guide</a> for more information.</p>
 
 <p>The cache for <code>RUN</code> instructions can be invalidated by <code>ADD</code> instructions. See
@@ -1865,16 +1865,16 @@ with identical keys.</p>
 
 <p>The <code>EXPOSE</code> instructions informs Docker that the container will listen on the
 specified network ports at runtime. Docker uses this information to interconnect
-containers using links (see the <a href="/reference/reference/userguide/dockerlinks">Docker User
+containers using links (see the <a href="/userguide/dockerlinks">Docker User
 Guide</a>) and to determine which ports to expose to the
-host when <a href="/reference/reference/reference/run/#expose-incoming-ports">using the -P flag</a>.</p>
+host when <a href="/docker/reference/run/#expose-incoming-ports">using the -P flag</a>.</p>
 
 <blockquote>
 <p><strong>Note</strong>:
 <code>EXPOSE</code> doesn&rsquo;t define which ports can be exposed to the host or make ports
 accessible from the host by default. To expose ports to the host, at runtime,
-<a href="/reference/reference/userguide/dockerlinks">use the <code>-p</code> flag</a> or
-<a href="/reference/reference/reference/run/#expose-incoming-ports">the -P flag</a>.</p>
+<a href="/userguide/dockerlinks">use the <code>-p</code> flag</a> or
+<a href="/docker/reference/run/#expose-incoming-ports">the -P flag</a>.</p>
 </blockquote>
 
 <h2 id="env">ENV</h2>
@@ -1984,7 +1984,7 @@ authentication.</p>
 The first encountered <code>ADD</code> instruction will invalidate the cache for all
 following instructions from the Dockerfile if the contents of <code>&lt;src&gt;</code> have
 changed. This includes invalidating the cache for <code>RUN</code> instructions.
-See the <a href="/reference/reference/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
+See the <a href="/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
 guide</a> for more information.</p>
 </blockquote>
 
@@ -2349,7 +2349,7 @@ containers. The value can be a JSON array, <code>VOLUME [&quot;/var/log/&quot;]<
 string with multiple arguments, such as <code>VOLUME /var/log</code> or <code>VOLUME /var/log
 /var/db</code>.  For more information/examples and mounting instructions via the
 Docker client, refer to
-<a href="/reference/reference/userguide/dockervolumes/#volume"><em>Share Directories via Volumes</em></a>
+<a href="/userguide/dockervolumes/#volume"><em>Share Directories via Volumes</em></a>
 documentation.</p>
 
 <p>The <code>docker run</code> command initializes the newly created volume with any data

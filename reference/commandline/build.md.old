@@ -32,7 +32,7 @@ weight=1
 Builds Docker images from a Dockerfile and a "context". A build's context is
 the files located in the specified `PATH` or `URL`. The build process can refer
 to any of the files in the context. For example, your build can use an
-[*ADD*](/reference/reference/builder/#add) instruction to reference a file in the
+[*ADD*](/docker/reference/builder/#add) instruction to reference a file in the
 context.
 
 The `URL` parameter can specify the location of a Git repository; the repository
@@ -88,7 +88,7 @@ In most cases, it's best to put each Dockerfile in an empty directory. Then,
 add to that directory only the files needed for building the Dockerfile. To
 increase the build's performance, you can exclude files and directories by
 adding a `.dockerignore` file to that directory as well. For information on
-creating one, see the [.dockerignore file](/reference/reference/builder#dockerignore-file).
+creating one, see the [.dockerignore file](/docker/reference/builder#dockerignore-file).
 
 If the Docker client loses connection to the daemon, the build is canceled.
 This happens if you interrupt the Docker client with `ctrl-c` or if the Docker
@@ -119,7 +119,7 @@ There should be informational output of the reason for failure output to
 
 See also:
 
-[*Dockerfile Reference*](/reference/reference/builder).
+[*Dockerfile Reference*](/docker/reference/builder).
 
 ## Examples
 
@@ -155,7 +155,7 @@ where to find the files for the "context" of the build on the Docker daemon.
 Remember that the daemon could be running on a remote machine and that no
 parsing of the Dockerfile happens at the client side (where you're running
 `docker build`). That means that *all* the files at `PATH` get sent, not just
-the ones listed to [*ADD*](/reference/reference/builder/#add) in the Dockerfile.
+the ones listed to [*ADD*](/docker/reference/builder/#add) in the Dockerfile.
 
 The transfer of context from the local machine to the Docker daemon is what the
 `docker` client means when you see the "Sending build context" message.
@@ -245,5 +245,5 @@ the command line.
 
 When `docker build` is run with the `--cgroup-parent` option the containers
 used in the build will be run with the [corresponding `docker run`
-flag](/reference/reference/run/#specifying-custom-cgroups).
+flag](/docker/reference/run/#specifying-custom-cgroups).
 

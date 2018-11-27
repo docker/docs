@@ -19,11 +19,11 @@ parent = "mn_reference"
 **Docker runs processes in isolated containers**. When an operator
 executes `docker run`, she starts a process with its own file system,
 its own networking, and its own isolated process tree.  The
-[*Image*](/reference/terms/image/#image) which starts the process may define
+[*Image*](/docker/reference/glossary/#image) which starts the process may define
 defaults related to the binary to run, the networking to expose, and
 more, but `docker run` gives final control to the operator who starts
 the container from the image. That's the main reason
-[*run*](/reference/reference/commandline/cli/#run) has more options than any
+[*run*](/docker/reference/commandline/cli/#run) has more options than any
 other `docker` command.
 
 ## General form
@@ -33,7 +33,7 @@ The basic `docker run` command takes this form:
     $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
 To learn how to interpret the types of `[OPTIONS]`,
-see [*Option types*](/reference/reference/commandline/cli/#option-types).
+see [*Option types*](/docker/reference/commandline/cli/#option-types).
 
 The `run` options control the image's runtime behavior in a container. These
 settings affect:
@@ -87,7 +87,7 @@ In detached mode (`-d=true` or just `-d`), all I/O should be done
 through network connections or shared volumes because the container is
 no longer listening to the command line where you executed `docker run`.
 You can reattach to a detached container with `docker`
-[*attach*](/reference/reference/commandline/cli/#attach). If you choose to run a
+[*attach*](/docker/reference/commandline/cli/#attach). If you choose to run a
 container in the detached mode, then you cannot use the `--rm` option.
 
 ### Foreground
@@ -357,8 +357,8 @@ Using the `--restart` flag on Docker run you can specify a restart policy for
 how a container should or should not be restarted on exit.
 
 When a restart policy is active on a container, it will be shown as either `Up`
-or `Restarting` in [`docker ps`](/reference/reference/commandline/cli/#ps). It can also be
-useful to use [`docker events`](/reference/reference/commandline/cli/#events) to see the
+or `Restarting` in [`docker ps`](/docker/reference/commandline/cli/#ps). It can also be
+useful to use [`docker events`](/docker/reference/commandline/cli/#events) to see the
 restart policy in effect.
 
 Docker supports the following restart policies:
@@ -907,7 +907,7 @@ The following logging options are supported for this logging driver: [none]
 
 ## Overriding Dockerfile image defaults
 
-When a developer builds an image from a [*Dockerfile*](/reference/reference/builder)
+When a developer builds an image from a [*Dockerfile*](/docker/reference/builder)
 or when she commits it, the developer can set a number of default parameters
 that take effect when the image starts up as a container.
 

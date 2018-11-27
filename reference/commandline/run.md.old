@@ -427,7 +427,7 @@ This will run the `redis` container with a restart policy of **always**
 so that if the container exits, Docker will restart it.
 
 More detailed information on restart policies can be found in the
-[Restart Policies (--restart)](/reference/reference/run/#restart-policies-restart)
+[Restart Policies (--restart)](/docker/reference/run/#restart-policies-restart)
 section of the Docker run reference page.
 
 ## Adding entries to a container hosts file

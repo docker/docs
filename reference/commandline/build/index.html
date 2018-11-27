@@ -1393,7 +1393,7 @@ Build a new image from the source code at PATH
 <p>Builds Docker images from a Dockerfile and a &ldquo;context&rdquo;. A build&rsquo;s context is
 the files located in the specified <code>PATH</code> or <code>URL</code>. The build process can refer
 to any of the files in the context. For example, your build can use an
-<a href="/reference/reference/reference/builder/#add"><em>ADD</em></a> instruction to reference a file in the
+<a href="/docker/reference/builder/#add"><em>ADD</em></a> instruction to reference a file in the
 context.</p>
 
 <p>The <code>URL</code> parameter can specify the location of a Git repository; the repository
@@ -1505,7 +1505,7 @@ the current directory.</p>
 add to that directory only the files needed for building the Dockerfile. To
 increase the build&rsquo;s performance, you can exclude files and directories by
 adding a <code>.dockerignore</code> file to that directory as well. For information on
-creating one, see the <a href="/reference/reference/reference/builder#dockerignore-file">.dockerignore file</a>.</p>
+creating one, see the <a href="/docker/reference/builder#dockerignore-file">.dockerignore file</a>.</p>
 
 <p>If the Docker client loses connection to the daemon, the build is canceled.
 This happens if you interrupt the Docker client with <code>ctrl-c</code> or if the Docker
@@ -1539,7 +1539,7 @@ $ echo $?
 
 <p>See also:</p>
 
-<p><a href="/reference/reference/reference/builder"><em>Dockerfile Reference</em></a>.</p>
+<p><a href="/docker/reference/builder"><em>Dockerfile Reference</em></a>.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -1576,7 +1576,7 @@ where to find the files for the &ldquo;context&rdquo; of the build on the Docker
 Remember that the daemon could be running on a remote machine and that no
 parsing of the Dockerfile happens at the client side (where you&rsquo;re running
 <code>docker build</code>). That means that <em>all</em> the files at <code>PATH</code> get sent, not just
-the ones listed to <a href="/reference/reference/reference/builder/#add"><em>ADD</em></a> in the Dockerfile.</p>
+the ones listed to <a href="/docker/reference/builder/#add"><em>ADD</em></a> in the Dockerfile.</p>
 
 <p>The transfer of context from the local machine to the Docker daemon is what the
 <code>docker</code> client means when you see the &ldquo;Sending build context&rdquo; message.</p>
@@ -1608,7 +1608,7 @@ Successfully built 99cc1ad10469
 <p>This example shows the use of the <code>.dockerignore</code> file to exclude the <code>.git</code>
 directory from the context. Its effect can be seen in the changed size of the
 uploaded context. The builder reference contains detailed information on
-<a href="/reference/reference/builder/#dockerignore-file">creating a .dockerignore file</a></p>
+<a href="/docker/reference/builder/#dockerignore-file">creating a .dockerignore file</a></p>
 
 <pre><code>$ docker build -t vieux/apache:2.0 .
 </code></pre>
@@ -1675,7 +1675,7 @@ repeatable builds on remote Docker hosts. This is also the reason why
 </blockquote>
 
 <p>When <code>docker build</code> is run with the <code>--cgroup-parent</code> option the containers
-used in the build will be run with the <a href="/reference/reference/reference/run/#specifying-custom-cgroups">corresponding <code>docker run</code>
+used in the build will be run with the <a href="/docker/reference/run/#specifying-custom-cgroups">corresponding <code>docker run</code>
 flag</a>.</p>
 
         </article>

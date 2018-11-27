@@ -1382,11 +1382,11 @@ $(document).ready(function () {
 <p><strong>Docker runs processes in isolated containers</strong>. When an operator
 executes <code>docker run</code>, she starts a process with its own file system,
 its own networking, and its own isolated process tree.  The
-<a href="/reference/reference/terms/image/#image"><em>Image</em></a> which starts the process may define
+<a href="/docker/reference/glossary/#image"><em>Image</em></a> which starts the process may define
 defaults related to the binary to run, the networking to expose, and
 more, but <code>docker run</code> gives final control to the operator who starts
 the container from the image. That&rsquo;s the main reason
-<a href="/reference/reference/reference/commandline/cli/#run"><em>run</em></a> has more options than any
+<a href="/docker/reference/commandline/cli/#run"><em>run</em></a> has more options than any
 other <code>docker</code> command.</p>
 
 <h2 id="general-form">General form</h2>
@@ -1397,7 +1397,7 @@ other <code>docker</code> command.</p>
 </code></pre>
 
 <p>To learn how to interpret the types of <code>[OPTIONS]</code>,
-see <a href="/reference/reference/reference/commandline/cli/#option-types"><em>Option types</em></a>.</p>
+see <a href="/docker/reference/commandline/cli/#option-types"><em>Option types</em></a>.</p>
 
 <p>The <code>run</code> options control the image&rsquo;s runtime behavior in a container. These
 settings affect:</p>
@@ -1462,7 +1462,7 @@ default foreground mode:</p>
 through network connections or shared volumes because the container is
 no longer listening to the command line where you executed <code>docker run</code>.
 You can reattach to a detached container with <code>docker</code>
-<a href="/reference/reference/reference/commandline/cli/#attach"><em>attach</em></a>. If you choose to run a
+<a href="/docker/reference/commandline/cli/#attach"><em>attach</em></a>. If you choose to run a
 container in the detached mode, then you cannot use the <code>--rm</code> option.</p>
 
 <h3 id="foreground">Foreground</h3>
@@ -1518,7 +1518,7 @@ coded to do so.</p>
 assign a name to the container with <code>--name</code> then the daemon will also
 generate a random string name too. The name can become a handy way to
 add meaning to a container since you can use this name when defining
-<a href="/reference/reference/userguide/dockerlinks"><em>links</em></a> (or any
+<a href="/userguide/dockerlinks"><em>links</em></a> (or any
 other place you need to identify a container). This works for both
 background and foreground Docker containers.</p>
 
@@ -1750,8 +1750,8 @@ ff02::2         ip6-allrouters
 how a container should or should not be restarted on exit.</p>
 
 <p>When a restart policy is active on a container, it will be shown as either <code>Up</code>
-or <code>Restarting</code> in <a href="/reference/reference/reference/commandline/cli/#ps"><code>docker ps</code></a>. It can also be
-useful to use <a href="/reference/reference/reference/commandline/cli/#events"><code>docker events</code></a> to see the
+or <code>Restarting</code> in <a href="/docker/reference/commandline/cli/#ps"><code>docker ps</code></a>. It can also be
+useful to use <a href="/docker/reference/commandline/cli/#events"><code>docker events</code></a> to see the
 restart policy in effect.</p>
 
 <p>Docker supports the following restart policies:</p>
@@ -2489,7 +2489,7 @@ remote server at <code>192.168.0.42</code> on port <code>123</code></p>
 
 <h2 id="overriding-dockerfile-image-defaults">Overriding Dockerfile image defaults</h2>
 
-<p>When a developer builds an image from a <a href="/reference/reference/reference/builder"><em>Dockerfile</em></a>
+<p>When a developer builds an image from a <a href="/docker/reference/builder"><em>Dockerfile</em></a>
 or when she commits it, the developer can set a number of default parameters
 that take effect when the image starts up as a container.</p>
 
@@ -2630,7 +2630,7 @@ variables automatically:</p>
 
 <p>The container may also include environment variables defined
 as a result of the container being linked with another container. See
-the <a href="/reference/reference/userguide/dockerlinks/#container-linking"><em>Container Links</em></a>
+the <a href="/userguide/dockerlinks/#container-linking"><em>Container Links</em></a>
 section for more details.</p>
 
 <p>Additionally, the operator can <strong>set any environment variable</strong> in the
@@ -2724,7 +2724,7 @@ IP address of linked containers.</p>
 </code></pre>
 
 <p>The volumes commands are complex enough to have their own documentation
-in section <a href="/reference/reference/userguide/dockervolumes"><em>Managing data in
+in section <a href="/userguide/dockervolumes"><em>Managing data in
 containers</em></a>. A developer can define
 one or more <code>VOLUME</code>&rsquo;s associated with an image, but only the operator
 can give access from one container to another (or from a container to a

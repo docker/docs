@@ -1431,7 +1431,7 @@ provide the <code>-d</code> flag.</p>
 
 <h2 id="daemon-socket-option">Daemon socket option</h2>
 
-<p>The Docker daemon can listen for <a href="/reference/reference/reference/api/docker_remote_api/">Docker Remote API</a>
+<p>The Docker daemon can listen for <a href="/docker/reference/api/docker_remote_api/">Docker Remote API</a>
 requests via three different types of Socket: <code>unix</code>, <code>tcp</code>, and <code>fd</code>.</p>
 
 <p>By default, a <code>unix</code> domain socket (or IPC socket) is created at
@@ -1441,7 +1441,7 @@ membership.</p>
 <p>If you need to access the Docker daemon remotely, you need to enable the <code>tcp</code>
 Socket. Beware that the default setup provides un-encrypted and
 un-authenticated direct access to the Docker daemon - and should be secured
-either using the <a href="/reference/reference/articles/https/">built in HTTPS encrypted socket</a>, or by
+either using the <a href="/articles/https/">built in HTTPS encrypted socket</a>, or by
 putting a secure web proxy in front of it. You can listen on port <code>2375</code> on all
 network interfaces with <code>-H tcp://0.0.0.0:2375</code>, or on a particular network
 interface using its IP address: <code>-H tcp://192.168.59.103:2375</code>. It is

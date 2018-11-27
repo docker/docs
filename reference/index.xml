@@ -954,11 +954,11 @@ twice.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Docker runs processes in isolated containers&lt;/strong&gt;. When an operator
 executes &lt;code&gt;docker run&lt;/code&gt;, she starts a process with its own file system,
 its own networking, and its own isolated process tree.  The
-&lt;a href=&#34;http://localhost/reference/reference/terms/image/#image&#34;&gt;&lt;em&gt;Image&lt;/em&gt;&lt;/a&gt; which starts the process may define
+&lt;a href=&#34;http://localhost/docker/reference/glossary/#image&#34;&gt;&lt;em&gt;Image&lt;/em&gt;&lt;/a&gt; which starts the process may define
 defaults related to the binary to run, the networking to expose, and
 more, but &lt;code&gt;docker run&lt;/code&gt; gives final control to the operator who starts
 the container from the image. That&amp;rsquo;s the main reason
-&lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#run&#34;&gt;&lt;em&gt;run&lt;/em&gt;&lt;/a&gt; has more options than any
+&lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#run&#34;&gt;&lt;em&gt;run&lt;/em&gt;&lt;/a&gt; has more options than any
 other &lt;code&gt;docker&lt;/code&gt; command.&lt;/p&gt;
 
 &lt;h2 id=&#34;general-form&#34;&gt;General form&lt;/h2&gt;
@@ -969,7 +969,7 @@ other &lt;code&gt;docker&lt;/code&gt; command.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To learn how to interpret the types of &lt;code&gt;[OPTIONS]&lt;/code&gt;,
-see &lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#option-types&#34;&gt;&lt;em&gt;Option types&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+see &lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#option-types&#34;&gt;&lt;em&gt;Option types&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;run&lt;/code&gt; options control the image&amp;rsquo;s runtime behavior in a container. These
 settings affect:&lt;/p&gt;
@@ -1034,7 +1034,7 @@ default foreground mode:&lt;/p&gt;
 through network connections or shared volumes because the container is
 no longer listening to the command line where you executed &lt;code&gt;docker run&lt;/code&gt;.
 You can reattach to a detached container with &lt;code&gt;docker&lt;/code&gt;
-&lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#attach&#34;&gt;&lt;em&gt;attach&lt;/em&gt;&lt;/a&gt;. If you choose to run a
+&lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#attach&#34;&gt;&lt;em&gt;attach&lt;/em&gt;&lt;/a&gt;. If you choose to run a
 container in the detached mode, then you cannot use the &lt;code&gt;--rm&lt;/code&gt; option.&lt;/p&gt;
 
 &lt;h3 id=&#34;foreground&#34;&gt;Foreground&lt;/h3&gt;
@@ -1090,7 +1090,7 @@ coded to do so.&lt;/p&gt;
 assign a name to the container with &lt;code&gt;--name&lt;/code&gt; then the daemon will also
 generate a random string name too. The name can become a handy way to
 add meaning to a container since you can use this name when defining
-&lt;a href=&#34;http://localhost/reference/reference/userguide/dockerlinks&#34;&gt;&lt;em&gt;links&lt;/em&gt;&lt;/a&gt; (or any
+&lt;a href=&#34;http://localhost/userguide/dockerlinks&#34;&gt;&lt;em&gt;links&lt;/em&gt;&lt;/a&gt; (or any
 other place you need to identify a container). This works for both
 background and foreground Docker containers.&lt;/p&gt;
 
@@ -1322,8 +1322,8 @@ ff02::2         ip6-allrouters
 how a container should or should not be restarted on exit.&lt;/p&gt;
 
 &lt;p&gt;When a restart policy is active on a container, it will be shown as either &lt;code&gt;Up&lt;/code&gt;
-or &lt;code&gt;Restarting&lt;/code&gt; in &lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#ps&#34;&gt;&lt;code&gt;docker ps&lt;/code&gt;&lt;/a&gt;. It can also be
-useful to use &lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#events&#34;&gt;&lt;code&gt;docker events&lt;/code&gt;&lt;/a&gt; to see the
+or &lt;code&gt;Restarting&lt;/code&gt; in &lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#ps&#34;&gt;&lt;code&gt;docker ps&lt;/code&gt;&lt;/a&gt;. It can also be
+useful to use &lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#events&#34;&gt;&lt;code&gt;docker events&lt;/code&gt;&lt;/a&gt; to see the
 restart policy in effect.&lt;/p&gt;
 
 &lt;p&gt;Docker supports the following restart policies:&lt;/p&gt;
@@ -2061,7 +2061,7 @@ remote server at &lt;code&gt;192.168.0.42&lt;/code&gt; on port &lt;code&gt;123&l
 
 &lt;h2 id=&#34;overriding-dockerfile-image-defaults&#34;&gt;Overriding Dockerfile image defaults&lt;/h2&gt;
 
-&lt;p&gt;When a developer builds an image from a &lt;a href=&#34;http://localhost/reference/reference/reference/builder&#34;&gt;&lt;em&gt;Dockerfile&lt;/em&gt;&lt;/a&gt;
+&lt;p&gt;When a developer builds an image from a &lt;a href=&#34;http://localhost/docker/reference/builder&#34;&gt;&lt;em&gt;Dockerfile&lt;/em&gt;&lt;/a&gt;
 or when she commits it, the developer can set a number of default parameters
 that take effect when the image starts up as a container.&lt;/p&gt;
 
@@ -2202,7 +2202,7 @@ variables automatically:&lt;/p&gt;
 
 &lt;p&gt;The container may also include environment variables defined
 as a result of the container being linked with another container. See
-the &lt;a href=&#34;http://localhost/reference/reference/userguide/dockerlinks/#container-linking&#34;&gt;&lt;em&gt;Container Links&lt;/em&gt;&lt;/a&gt;
+the &lt;a href=&#34;http://localhost/userguide/dockerlinks/#container-linking&#34;&gt;&lt;em&gt;Container Links&lt;/em&gt;&lt;/a&gt;
 section for more details.&lt;/p&gt;
 
 &lt;p&gt;Additionally, the operator can &lt;strong&gt;set any environment variable&lt;/strong&gt; in the
@@ -2296,7 +2296,7 @@ IP address of linked containers.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The volumes commands are complex enough to have their own documentation
-in section &lt;a href=&#34;http://localhost/reference/reference/userguide/dockervolumes&#34;&gt;&lt;em&gt;Managing data in
+in section &lt;a href=&#34;http://localhost/userguide/dockervolumes&#34;&gt;&lt;em&gt;Managing data in
 containers&lt;/em&gt;&lt;/a&gt;. A developer can define
 one or more &lt;code&gt;VOLUME&lt;/code&gt;&amp;rsquo;s associated with an image, but only the operator
 can give access from one container to another (or from a container to a
@@ -2346,13 +2346,13 @@ successively.&lt;/p&gt;
 
 &lt;p&gt;This page discusses the specifics of all the instructions you can use in your
 &lt;code&gt;Dockerfile&lt;/code&gt;. To further help you write a clear, readable, maintainable
-&lt;code&gt;Dockerfile&lt;/code&gt;, we&amp;rsquo;ve also written a &lt;a href=&#34;http://localhost/reference/reference/articles/dockerfile_best-practices&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
+&lt;code&gt;Dockerfile&lt;/code&gt;, we&amp;rsquo;ve also written a &lt;a href=&#34;http://localhost/articles/dockerfile_best-practices&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
 guide&lt;/a&gt;. Lastly, you can test your
-Dockerfile knowledge with the &lt;a href=&#34;http://localhost/reference/reference/userguide/level1&#34;&gt;Dockerfile tutorial&lt;/a&gt;.&lt;/p&gt;
+Dockerfile knowledge with the &lt;a href=&#34;http://localhost/userguide/level1&#34;&gt;Dockerfile tutorial&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
 
-&lt;p&gt;To &lt;a href=&#34;http://localhost/reference/reference/reference/commandline/cli/#build&#34;&gt;&lt;em&gt;build&lt;/em&gt;&lt;/a&gt; an image from a source repository,
+&lt;p&gt;To &lt;a href=&#34;http://localhost/docker/reference/commandline/cli/#build&#34;&gt;&lt;em&gt;build&lt;/em&gt;&lt;/a&gt; an image from a source repository,
 create a description file called &lt;code&gt;Dockerfile&lt;/code&gt; at the root of your repository.
 This file will describe the steps to assemble the image.&lt;/p&gt;
 
@@ -2400,7 +2400,7 @@ instructions.&lt;/p&gt;
 
 &lt;p&gt;Whenever possible, Docker will re-use the intermediate images,
 accelerating &lt;code&gt;docker build&lt;/code&gt; significantly (indicated by &lt;code&gt;Using cache&lt;/code&gt; -
-see the &lt;a href=&#34;http://localhost/reference/reference/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
+see the &lt;a href=&#34;http://localhost/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
 guide&lt;/a&gt; for more information):&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker build -t SvenDowideit/ambassador .
@@ -2432,7 +2432,7 @@ INSTRUCTION arguments
 be UPPERCASE in order to distinguish them from arguments more easily.&lt;/p&gt;
 
 &lt;p&gt;Docker runs the instructions in a &lt;code&gt;Dockerfile&lt;/code&gt; in order. &lt;strong&gt;The
-first instruction must be `FROM`&lt;/strong&gt; in order to specify the &lt;a href=&#34;http://localhost/reference/reference/terms/image/#base-image&#34;&gt;&lt;em&gt;Base
+first instruction must be `FROM`&lt;/strong&gt; in order to specify the &lt;a href=&#34;http://localhost/docker/reference/glossary/#base-image&#34;&gt;&lt;em&gt;Base
 Image&lt;/em&gt;&lt;/a&gt; from which you are building.&lt;/p&gt;
 
 &lt;p&gt;Docker will treat lines that &lt;em&gt;begin&lt;/em&gt; with &lt;code&gt;#&lt;/code&gt; as a
@@ -2621,7 +2621,7 @@ the build context into your new container but do not want to include the
 &lt;pre&gt;&lt;code&gt;FROM &amp;lt;image&amp;gt;@&amp;lt;digest&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The &lt;code&gt;FROM&lt;/code&gt; instruction sets the &lt;a href=&#34;http://localhost/reference/reference/terms/image/#base-image&#34;&gt;&lt;em&gt;Base Image&lt;/em&gt;&lt;/a&gt;
+&lt;p&gt;The &lt;code&gt;FROM&lt;/code&gt; instruction sets the &lt;a href=&#34;http://localhost/docker/reference/glossary/#base-image&#34;&gt;&lt;em&gt;Base Image&lt;/em&gt;&lt;/a&gt;
 for subsequent instructions. As such, a valid &lt;code&gt;Dockerfile&lt;/code&gt; must have &lt;code&gt;FROM&lt;/code&gt; as
 its first instruction. The image can be any valid image – it is especially easy
 to start by &lt;strong&gt;pulling an image&lt;/strong&gt; from the &lt;a href=&#34;http://localhost/userguide/dockerrepos&#34;&gt;&lt;em&gt;Public Repositories&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
@@ -2688,7 +2688,7 @@ the next build. The cache for an instruction like
 cache for &lt;code&gt;RUN&lt;/code&gt; instructions can be invalidated by using the &lt;code&gt;--no-cache&lt;/code&gt;
 flag, for example &lt;code&gt;docker build --no-cache&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;See the &lt;a href=&#34;http://localhost/reference/reference/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
+&lt;p&gt;See the &lt;a href=&#34;http://localhost/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
 guide&lt;/a&gt; for more information.&lt;/p&gt;
 
 &lt;p&gt;The cache for &lt;code&gt;RUN&lt;/code&gt; instructions can be invalidated by &lt;code&gt;ADD&lt;/code&gt; instructions. See
@@ -2831,16 +2831,16 @@ with identical keys.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;EXPOSE&lt;/code&gt; instructions informs Docker that the container will listen on the
 specified network ports at runtime. Docker uses this information to interconnect
-containers using links (see the &lt;a href=&#34;http://localhost/reference/reference/userguide/dockerlinks&#34;&gt;Docker User
+containers using links (see the &lt;a href=&#34;http://localhost/userguide/dockerlinks&#34;&gt;Docker User
 Guide&lt;/a&gt;) and to determine which ports to expose to the
-host when &lt;a href=&#34;http://localhost/reference/reference/reference/run/#expose-incoming-ports&#34;&gt;using the -P flag&lt;/a&gt;.&lt;/p&gt;
+host when &lt;a href=&#34;http://localhost/docker/reference/run/#expose-incoming-ports&#34;&gt;using the -P flag&lt;/a&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
 &lt;code&gt;EXPOSE&lt;/code&gt; doesn&amp;rsquo;t define which ports can be exposed to the host or make ports
 accessible from the host by default. To expose ports to the host, at runtime,
-&lt;a href=&#34;http://localhost/reference/reference/userguide/dockerlinks&#34;&gt;use the &lt;code&gt;-p&lt;/code&gt; flag&lt;/a&gt; or
-&lt;a href=&#34;http://localhost/reference/reference/reference/run/#expose-incoming-ports&#34;&gt;the -P flag&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;http://localhost/userguide/dockerlinks&#34;&gt;use the &lt;code&gt;-p&lt;/code&gt; flag&lt;/a&gt; or
+&lt;a href=&#34;http://localhost/docker/reference/run/#expose-incoming-ports&#34;&gt;the -P flag&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&#34;env&#34;&gt;ENV&lt;/h2&gt;
@@ -2950,7 +2950,7 @@ authentication.&lt;/p&gt;
 The first encountered &lt;code&gt;ADD&lt;/code&gt; instruction will invalidate the cache for all
 following instructions from the Dockerfile if the contents of &lt;code&gt;&amp;lt;src&amp;gt;&lt;/code&gt; have
 changed. This includes invalidating the cache for &lt;code&gt;RUN&lt;/code&gt; instructions.
-See the &lt;a href=&#34;http://localhost/reference/reference/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
+See the &lt;a href=&#34;http://localhost/articles/dockerfile_best-practices/#build-cache&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices
 guide&lt;/a&gt; for more information.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -3315,7 +3315,7 @@ containers. The value can be a JSON array, &lt;code&gt;VOLUME [&amp;quot;/var/lo
 string with multiple arguments, such as &lt;code&gt;VOLUME /var/log&lt;/code&gt; or &lt;code&gt;VOLUME /var/log
 /var/db&lt;/code&gt;.  For more information/examples and mounting instructions via the
 Docker client, refer to
-&lt;a href=&#34;http://localhost/reference/reference/userguide/dockervolumes/#volume&#34;&gt;&lt;em&gt;Share Directories via Volumes&lt;/em&gt;&lt;/a&gt;
+&lt;a href=&#34;http://localhost/userguide/dockervolumes/#volume&#34;&gt;&lt;em&gt;Share Directories via Volumes&lt;/em&gt;&lt;/a&gt;
 documentation.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;docker run&lt;/code&gt; command initializes the newly created volume with any data
@@ -3540,7 +3540,7 @@ they will not break when talking to newer Docker daemons.&lt;/li&gt;
 
 &lt;p&gt;The following diagram depicts the container states accessible through the API.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost/reference/reference/images/event_state.png&#34; alt=&#34;States&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker/reference/api/images/event_state.png&#34; alt=&#34;States&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Some container-related events are not affected by container state, so they are not included in this diagram. These events are:&lt;/p&gt;
@@ -3561,7 +3561,7 @@ they will not break when talking to newer Docker daemons.&lt;/li&gt;
 
 &lt;h3 id=&#34;full-documentation&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.19/&#34;&gt;&lt;em&gt;Docker Remote API v1.19&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.19/&#34;&gt;&lt;em&gt;Docker Remote API v1.19&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3596,7 +3596,7 @@ are now returned as boolean instead of as an int.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-1&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.18/&#34;&gt;&lt;em&gt;Docker Remote API v1.18&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.18/&#34;&gt;&lt;em&gt;Docker Remote API v1.18&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-1&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3643,7 +3643,7 @@ Add &lt;code&gt;Warnings&lt;/code&gt; field to response.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-2&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.17/&#34;&gt;&lt;em&gt;Docker Remote API v1.17&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.17/&#34;&gt;&lt;em&gt;Docker Remote API v1.17&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-2&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3700,7 +3700,7 @@ This endpoint now returns the labels associated with each image (&lt;code&gt;Lab
 
 &lt;h3 id=&#34;full-documentation-3&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.16/&#34;&gt;&lt;em&gt;Docker Remote API v1.16&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.16/&#34;&gt;&lt;em&gt;Docker Remote API v1.16&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-3&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3728,7 +3728,7 @@ You can now copy data which is contained in a volume.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-4&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.15/&#34;&gt;&lt;em&gt;Docker Remote API v1.15&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.15/&#34;&gt;&lt;em&gt;Docker Remote API v1.15&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-4&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3742,7 +3742,7 @@ Previously this was only available when starting a container.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-5&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.14/&#34;&gt;&lt;em&gt;Docker Remote API v1.14&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.14/&#34;&gt;&lt;em&gt;Docker Remote API v1.14&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-5&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3768,7 +3768,7 @@ the &lt;code&gt;tag&lt;/code&gt; parameter at the same time will return an error
 
 &lt;h3 id=&#34;full-documentation-6&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.13/&#34;&gt;&lt;em&gt;Docker Remote API v1.13&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.13/&#34;&gt;&lt;em&gt;Docker Remote API v1.13&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-6&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3796,7 +3796,7 @@ Added a &lt;code&gt;pause&lt;/code&gt; parameter (default &lt;code&gt;true&lt;/c
 
 &lt;h3 id=&#34;full-documentation-7&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.12/&#34;&gt;&lt;em&gt;Docker Remote API v1.12&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.12/&#34;&gt;&lt;em&gt;Docker Remote API v1.12&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-7&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3821,7 +3821,7 @@ The &lt;code&gt;insert&lt;/code&gt; endpoint has been removed.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-8&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.11/&#34;&gt;&lt;em&gt;Docker Remote API v1.11&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.11/&#34;&gt;&lt;em&gt;Docker Remote API v1.11&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-8&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3844,7 +3844,7 @@ after timestamp.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-9&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.10/&#34;&gt;&lt;em&gt;Docker Remote API v1.10&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.10/&#34;&gt;&lt;em&gt;Docker Remote API v1.10&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-9&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3867,7 +3867,7 @@ You can now use the force parameter to force delete a
 
 &lt;h3 id=&#34;full-documentation-10&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/&#34;&gt;&lt;em&gt;Docker Remote API v1.9&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/&#34;&gt;&lt;em&gt;Docker Remote API v1.9&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-10&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3883,7 +3883,7 @@ accepting an AuthConfig object must be updated.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-11&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.8/&#34;&gt;&lt;em&gt;Docker Remote API v1.8&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.8/&#34;&gt;&lt;em&gt;Docker Remote API v1.8&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-11&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -3915,7 +3915,7 @@ without having to parse the string.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-12&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.7/&#34;&gt;&lt;em&gt;Docker Remote API v1.7&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.7/&#34;&gt;&lt;em&gt;Docker Remote API v1.7&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-12&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4016,7 +4016,7 @@ output is now generated in the client, using the
 
 &lt;h3 id=&#34;full-documentation-13&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.6/&#34;&gt;&lt;em&gt;Docker Remote API v1.6&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.6/&#34;&gt;&lt;em&gt;Docker Remote API v1.6&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-13&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4033,7 +4033,7 @@ previous API version didn&amp;rsquo;t change. Stdout and stderr are merged.&lt;/
 
 &lt;h3 id=&#34;full-documentation-14&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.5/&#34;&gt;&lt;em&gt;Docker Remote API v1.5&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.5/&#34;&gt;&lt;em&gt;Docker Remote API v1.5&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-14&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4060,7 +4060,7 @@ port mapping.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-15&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.4/&#34;&gt;&lt;em&gt;Docker Remote API v1.4&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.4/&#34;&gt;&lt;em&gt;Docker Remote API v1.4&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-15&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4087,7 +4087,7 @@ Image&amp;rsquo;s name added in the events&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-16&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.3/&#34;&gt;&lt;em&gt;Docker Remote API v1.3&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.3/&#34;&gt;&lt;em&gt;Docker Remote API v1.3&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-16&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4135,7 +4135,7 @@ the POST body for start calls&lt;/li&gt;
 
 &lt;h3 id=&#34;full-documentation-17&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.2/&#34;&gt;&lt;em&gt;Docker Remote API v1.2&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.2/&#34;&gt;&lt;em&gt;Docker Remote API v1.2&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-17&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4168,7 +4168,7 @@ deleted/untagged.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-18&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.1/&#34;&gt;&lt;em&gt;Docker Remote API v1.1&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.1/&#34;&gt;&lt;em&gt;Docker Remote API v1.1&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-18&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -4196,7 +4196,7 @@ deleted/untagged.&lt;/p&gt;
 
 &lt;h3 id=&#34;full-documentation-19&#34;&gt;Full documentation&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.0/&#34;&gt;&lt;em&gt;Docker Remote API v1.0&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.0/&#34;&gt;&lt;em&gt;Docker Remote API v1.0&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;what-s-new-19&#34;&gt;What&amp;rsquo;s new&lt;/h3&gt;
 
@@ -5066,7 +5066,7 @@ stderr log, if stream=true, attach to stderr. Default false&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s stdin.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -5656,7 +5656,7 @@ following algorithms: identity (no compression), gzip, bzip2, xz.
 The archive must include a file called `Dockerfile`
 at its root. It may include any number of other files,
 which will be accessible in the build context (See the [*ADD build
-command*](/reference/reference/reference/builder/#dockerbuilder)).
+command*](/docker/reference/builder/#dockerbuilder)).
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Query Parameters:&lt;/p&gt;
@@ -6881,7 +6881,7 @@ match &lt;code&gt;/?[a-zA-Z0-9_-]+&lt;/code&gt;.&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s stdin.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -7472,7 +7472,7 @@ following algorithms: identity (no compression), gzip, bzip2, xz.
 The archive must include a file called `Dockerfile`
 at its root. It may include any number of other files,
 which will be accessible in the build context (See the [*ADD build
-command*](/reference/reference/reference/builder/#dockerbuilder)).
+command*](/docker/reference/builder/#dockerbuilder)).
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Query Parameters:&lt;/p&gt;
@@ -8858,7 +8858,7 @@ match &lt;code&gt;/?[a-zA-Z0-9_-]+&lt;/code&gt;.&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s stdin.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -9449,7 +9449,7 @@ following algorithms: identity (no compression), gzip, bzip2, xz.
 The archive must include a file called `Dockerfile`
 at its root. It may include any number of other files,
 which will be accessible in the build context (See the [*ADD build
-command*](/reference/reference/reference/builder/#dockerbuilder)).
+command*](/docker/reference/builder/#dockerbuilder)).
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Query Parameters:&lt;/p&gt;
@@ -11135,7 +11135,7 @@ match &lt;code&gt;/?[a-zA-Z0-9_-]+&lt;/code&gt;.&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s stdin.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -11401,7 +11401,7 @@ used to specify a different build instructions file by having its value be
 the path to the alternate build instructions file to use.&lt;/p&gt;
 
 &lt;p&gt;The archive may include any number of other files,
-which will be accessible in the build context (See the &lt;a href=&#34;http://localhost/reference/reference/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
+which will be accessible in the build context (See the &lt;a href=&#34;http://localhost/docker/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
 command&lt;/em&gt;&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;Query Parameters:&lt;/p&gt;
@@ -13497,7 +13497,7 @@ systems, such as SELinux.&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s stdin.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -13806,7 +13806,7 @@ used to specify a different build instructions file by having its value be
 the path to the alternate build instructions file to use.&lt;/p&gt;
 
 &lt;p&gt;The archive may include any number of other files,
-which will be accessible in the build context (See the &lt;a href=&#34;http://localhost/reference/reference/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
+which will be accessible in the build context (See the &lt;a href=&#34;http://localhost/docker/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
 command&lt;/em&gt;&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;The build will also be canceled if the client drops the connection by quitting
@@ -15961,7 +15961,7 @@ Upgrade: tcp
 &lt;p&gt;&lt;strong&gt;Stream details&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;When using the TTY setting is enabled in
-&lt;a href=&#34;http://localhost/reference/reference/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
+&lt;a href=&#34;http://localhost/docker/reference/api/docker_remote_api_v1.9/#create-a-container&#34; title=&#34;POST /containers/create&#34;&gt;&lt;code&gt;POST /containers/create&lt;/code&gt;
 &lt;/a&gt;,
 the stream is the raw data from the process PTY and client&amp;rsquo;s &lt;code&gt;stdin&lt;/code&gt;.
 When the TTY is disabled, then the stream is multiplexed to separate
@@ -16270,7 +16270,7 @@ used to specify a different build instructions file. To do this, its value must 
 the path to the alternate build instructions file to use.&lt;/p&gt;
 
 &lt;p&gt;The archive may include any number of other files,
-which are accessible in the build context (See the &lt;a href=&#34;http://localhost/reference/reference/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
+which are accessible in the build context (See the &lt;a href=&#34;http://localhost/docker/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;ADD build
 command&lt;/em&gt;&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;The build is canceled if the client drops the connection by quitting
@@ -17455,7 +17455,7 @@ supports:&lt;/p&gt;
 
 &lt;h3 id=&#34;pull&#34;&gt;Pull&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost/reference/reference/static_files/docker_pull_chart.png&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker/static_files/docker_pull_chart.png&#34; alt=&#34;&#34; /&gt;
 &lt;/p&gt;
 
 &lt;ol&gt;
@@ -17581,7 +17581,7 @@ never reuse tokens.&lt;/p&gt;
 
 &lt;h3 id=&#34;push&#34;&gt;Push&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost/reference/reference/static_files/docker_push_chart.png&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker/static_files/docker_push_chart.png&#34; alt=&#34;&#34; /&gt;
 &lt;/p&gt;
 
 &lt;ol&gt;
@@ -17946,7 +17946,7 @@ the Docker Hub and the Docker&amp;rsquo;s configuration among its consumers.&lt;
 &lt;h2 id=&#34;the-api&#34;&gt;The API&lt;/h2&gt;
 
 &lt;p&gt;The first version of the api is available here:
-&lt;a href=&#34;http://localhost/reference/reference/https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull&#34;&gt;https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull.md&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull&#34;&gt;https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull.md&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;images&#34;&gt;Images&lt;/h3&gt;
 

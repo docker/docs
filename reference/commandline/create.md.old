@@ -74,7 +74,7 @@ This is useful when you want to set up a container configuration ahead of time
 so that it is ready to start when you need it. The initial status of the
 new container is `created`.
 
-Please see the [run command](/reference/reference/commandline/run) section and the [Docker run reference](
+Please see the [run command](/docker/reference/commandline/run) section and the [Docker run reference](
 /reference/run/) for more details.
 
 ## Examples
