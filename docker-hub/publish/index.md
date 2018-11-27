@@ -1,7 +1,7 @@
 ---
 description: Docker Hub programs and policies for publishers
 keywords: Docker, docker, store, publishers, publish images
-title: Docker Hub overview
+title: Publisher & Certified Content Overview
 ---
 
 Independent Software Vendors (ISVs) can utilize Docker Hub to distribute and

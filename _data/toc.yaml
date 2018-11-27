@@ -3641,26 +3641,24 @@ manuals:
     title: Slack Integration
   - path: /docker-hub/upgrade/
     title: Upgrading your plan
-  - sectiontitle: Builds
+  - sectiontitle: Automated Builds
     section:
       - path: /docker-hub/builds/
-        title: Get Started with Builds
+        title: Set up Automated builds
       - path: /docker-hub/builds/automated-testing/
-        title: Testing in Builds
+        title: Testing in Automated Builds
       - path: /docker-hub/builds/advanced/
-        title: Advanced Builds
-      - path: /docker-hub/builds/github/
-        title: Connecting GitHub
-      - path: /docker-hub/builds/bitbucket/
-        title: Connecting BitBucket
-  - sectiontitle: Publisher Images & Plugins
+        title: Advanced Automated Builds
+      - path: /docker-hub/builds/link-source/
+        title: Link to GitHub and BitBucket
+  - sectiontitle: Publisher & Certified Content
     section:
-    - path: /docker-hub/customer_faq/
-      title: Subscriptions
-    - path: /docker-hub/publish/publisher_faq/
-      title: Publishers
     - path: /docker-hub/publish/
-      title: Publish Images & Plugins
+      title: Overview
+    - path: /docker-hub/publish/customer_faq/
+      title: User FAQs
+    - path: /docker-hub/publish/publisher_faq/
+      title: Publisher FAQs
     - path: /docker-hub/publish/certify-images/
       title: Certify Images & Plugins
     - path: /docker-hub/publish/certify-plugins-logging/

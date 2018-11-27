@@ -1,31 +1,30 @@
 ---
-description: Link to your source code repository
-keywords: sourcecode, github, bitbucket
+description: Link to GitHub and BitBucket
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, GitHub
+title: Configure Automated Builds from GitHub and BitBucket
 redirect_from:
-- /docker-cloud/tutorials/link-source/
+- /docker-hub/github/
+- /docker-hub/bitbucket/
 - /docker-cloud/builds/link-source/
-title: Link Docker Hub to a source code provider
 ---
 
-To automate building of your images, you link to your hosted source
-code service to your Docker Hub repository so that it can access your source code
+To automate building and testing of your images, you link to your hosted source
+code service to Docker Hub so that it can access your source code
 repositories. You can configure this link for user accounts or
 organizations.
 
-If you only push pre-built images to Docker Hub's registry, you do not
-need to link your source code provider.
 
 > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
 
 ## Link to a GitHub user account
 
-1. Click **Settings** in the top right dropdown menu.
+1. Click **Settings** in the top-right dropdown navigation.
 
-2. Click or scroll down to **Source providers**.
+2. Click or scroll down to **Linked Accounts**.
 
 3. Click the plug icon for the source provider you want to link.
 
-    ![Linking source providers](images/source-providers.png)
+    ![Linking source providers](images/linking-connect-providers.png)
 
 4. Review the settings for the **Docker Hub Builder** OAuth application.
     ![Granting access to GitHub account](images/link-source-github-ind.png)
@@ -38,15 +37,29 @@ need to link your source code provider.
 
 5. Click **Authorize application** to save the link.
 
-You are now ready to create a new image!
+## Link to a Bitbucket user account
+
+1. Log in to Docker Hub using your Docker ID.
+
+2. Click **Settings** in the top-right dropdown navigation.
+
+3. Scroll to the **Linked Accounts** section.
+
+4. Click the plug icon for the source provider you want to link.
+
+    ![Linking Bitbucket](images/source-providers.png)
+
+5. If necessary, log in to Bitbucket.
+
+6. On the page that appears, click **Grant access**.
 
 ### Unlink a GitHub user account
 
 To revoke Docker Hub's access to your GitHub account, you must unlink it both
 from Docker Hub, *and* from your GitHub account.
 
-1. Click **Settings** in the top right dropdown menu, and click or scroll to the
-**Source providers** section.
+1. Click **Settings** in the top-right dropdown navigation, and click or scroll to the
+**Linked Accounts** section.
 
 2. Click the plug icon next to the source provider you want to remove.
 
@@ -57,7 +70,6 @@ from Docker Hub, *and* from your GitHub account.
 4. Go to your GitHub account's **Settings** page.
 
 5. Click **OAuth applications** in the left navigation bar.
-    ![Revoking access to GitHub account](images/link-source-github-ind-revoke.png)
 
 6. Click **Revoke** next to the Docker Hub Builder application.
 
@@ -99,6 +111,7 @@ section at the lower left.
 6. Click **Grant access** next to the organization.
     ![Granting access to GitHub organization manually](images/link-source-github-org.png)
 
+
 ### Revoke access to a GitHub organization
 
 To revoke Docker Hub's access to an organization's GitHub repositories:
@@ -108,31 +121,15 @@ To revoke Docker Hub's access to an organization's GitHub repositories:
 3. From the Organization Profile menu, click **Third-party access**.
     The page displays a list of third party applications and their access status.
 4. Click the pencil icon next to Docker Hub Builder.
-    ![Revoking access to GitHub organization](images/link-source-github-org-revoke.png)
 5. On the next page, click **Deny access**.
 
-## Link to a Bitbucket user account
-
-1. Log in to Docker Hub using your Docker ID.
-
-2. Click the gear icon in the left navigation to go to your **Settings**.
-
-3. Scroll to the **Source providers** section.
-
-4. Click the plug icon for the source provider you want to link.
-
-    ![Linking Bitbucket](images/source-providers.png)
-
-5. If necessary, log in to Bitbucket.
-
-6. On the page that appears, click **Grant access**.
 
 ### Unlink a Bitbucket user account
 
 To permanently revoke Docker Hub's access to your Bitbucket account, you must
 unlink it both from Docker Hub, *and* from your Bitbucket account.
 
-1. From your **Settings** page, click **Source providers**
+1. Find **Settings** in the top-right dropdown navigation, and scroll to **Linked Accounts**
 
 2. Click the plug icon next to the source provider you want to remove.
 
@@ -140,7 +137,7 @@ unlink it both from Docker Hub, *and* from your Bitbucket account.
     however access may not have been revoked. You can use this to _temporarily_
     disable a linked source code provider account.
 
-4. Go to your Bitbucket account and click the user menu icon in the top right corner.
+4. Go to your Bitbucket account and click the user menu icon in the top-right corner.
 
 5. Click **Bitbucket settings**.
 

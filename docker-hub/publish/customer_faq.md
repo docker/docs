@@ -1,7 +1,7 @@
 ---
-description: Docker Hub frequently asked questions
+description: Publisher & Certified Content FAQs
 keywords: Docker, docker, store, purchase images
-title: Docker Hub Customer FAQs
+title: Docker Hub Publisher & Certified Content FAQs
 redirect_from:
 - /docker-store/customer_faq/
 ---

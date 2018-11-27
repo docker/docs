@@ -1,5 +1,5 @@
 ---
-description: Docker Hub frequently asked questions
+description: Docker Hub frequently asked questions for publishers
 keywords: Docker, docker, hub, purchase images
 title: Docker Hub Publisher FAQs
 redirect_from:
