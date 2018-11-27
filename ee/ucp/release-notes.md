@@ -98,6 +98,8 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 
 * Pod Security Policies are not supported in this release. (#15105)
 
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
 ## Deprecated features
 
 The following features are deprecated in UCP 3.1.
