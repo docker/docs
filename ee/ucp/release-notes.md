@@ -420,7 +420,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 **Bug fixes**
 
-<<<<<<< HEAD
 * Core
     * Resolved an issue where LDAP sync jobs terminated when processing an org admin
     Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
@@ -428,7 +427,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
 
-=======
 * Core
   * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
@@ -443,7 +441,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Security
   * Fixed a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
->>>>>>> ba65aeabbb67b4cc2464497cfbe8bbccec8aacb2
 
 ## Version 2.2.12 (2018-08-09)
 
