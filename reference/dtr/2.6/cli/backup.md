@@ -2,6 +2,8 @@
 title: docker/dtr backup
 description: Create a backup of DTR
 keywords: dtr, cli, backup
+redirect_from:                                                                                                               
+  - /reference/dtr/2.5/cli/backup/  
 ---
 
 Create a backup of DTR
