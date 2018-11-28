@@ -191,6 +191,6 @@ RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 
 Once the `Dockerfile` is created, use the `--ssh` option for connectivity with the SSH agent.
 
-```
+```bash
 $ docker build --ssh default .
 ```
