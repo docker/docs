@@ -40,6 +40,17 @@ node-based RBAC policies, image promotion policies, image mirroring, and
 scan your images for vulnerabilities. It also has support with defined SLAs and extended
 maintenance cycles for patches for up to 24 months.
 
+In 18.09, the Docker Enterprise - Engine is aware of the license applied on the system. The 
+license summary is available in the `docker info` output on stand-alone or manager nodes.
+
+For EE platform customers, when you license UCP, this same license is applied to the underlying 
+engines in the cluster. Docker recommends platform customers use UCP to manage their license.
+
+For stand-alone EE engines, they can be licensed using `docker engine activate`.
+
+Offline activation of stand-alone EE engines can be performed by downloading the license and 
+using the command `docker engine activate .--license filename.lic`. 
+
 [Learn more about Docker Enterprise](/ee/index.md).
 
 
