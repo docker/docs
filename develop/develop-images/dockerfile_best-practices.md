@@ -463,7 +463,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
 > Not all shells support the `-o pipefail` option.
 >
-> In such cases (such as the `bash` shell, which is the default shell on
+> In such cases (such as the `dash` shell, which is the default shell on
 > Debian-based images), consider using the _exec_ form of `RUN` to explicitly
 > choose a shell that does support the `pipefail` option. For example:
 >
