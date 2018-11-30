@@ -23,6 +23,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: linux
 - option: checkpoint-dir
   value_type: string
   description: Use a custom checkpoint storage directory
@@ -31,6 +32,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: linux
 - option: detach-keys
   value_type: string
   description: Override the key sequence for detaching a container
