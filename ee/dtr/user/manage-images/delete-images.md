@@ -4,21 +4,18 @@ description: Learn how to delete images from Docker Trusted Registry.
 keywords: registry, delete
 ---
 
-To delete an image, go to the **DTR web UI**, and navigate to the image
-**repository** you want to delete. In the **Tags** tab, select all the image
+To delete an image, navigate to the **Tags** tab of the repository page on the DTR web interface.
+In the **Tags** tab, select all the image
 tags you want to delete, and click the **Delete** button.
 
 ![](../../images/delete-images-1.png){: .with-border}
 
-You can also delete all image versions, by deleting the repository. For that,
-in the image **repository**, navigate to the **Settings** tab, and click the
-**Delete** button.
+You can also delete all image versions by deleting the repository. To delete a repository, navigate to **Settings** and click **Delete** under "Delete Repository".
 
 ## Delete signed images
 
-DTR only allows deleting images if that image hasn't been signed. You first
-need to delete all the trust data associated with the image. Then you'll
-be able to delete it.
+DTR only allows deleting images if the image has not been signed. You first
+need to delete all the trust data associated with the image before you are able to delete the image.
 
 ![](../../images/delete-images-2.png){: .with-border}
 
@@ -33,11 +30,11 @@ There are three steps to delete a signed image:
 To find which roles signed an image, you first need to learn which roles
 are trusted to sign the image.
 
-[Set up your Notary client](../../access-dtr/configure-your-notary-client.md),
+[Set up your Notary client](/ee/dtr/user/manage-images/sign-images/#configure-your-notary-client),
 and run:
 
 ```
-notary delegation list dtr.example.org/library/wordpress
+notary delegation list dtr-example.com/library/wordpress
 ```
 
 In this example, the repository owner delegated trust to the
@@ -55,10 +52,10 @@ you can learn which roles actually signed it:
 
 ```
 # Check if the image was signed by the "targets" role
-notary list dtr.example.org/library/wordpress
+notary list dtr-example.com/library/wordpress
 
 # Check if the image was signed by a specific role
-notary list dtr.example.org/library/wordpress --roles <role-name>
+notary list dtr-example.com/library/wordpress --roles <role-name>
 ```
 
 In this example the image was signed by three roles: `targets`,
@@ -73,7 +70,7 @@ to do this operation.
 For each role that signed the image, run:
 
 ```
-notary remove dtr.example.org/library/wordpress <tag> \
+notary remove dtr-example.com/library/wordpress <tag> \
   --roles <role-name> --publish
 ```
 
