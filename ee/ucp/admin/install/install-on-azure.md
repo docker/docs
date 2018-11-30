@@ -5,7 +5,7 @@ keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
 ---
 
 Docker UCP closely integrates into Microsoft Azure for its Kubernetes Networking 
-and Persistent Storage feature set. UCP deploys the Calico CNI provider, in Azure
+and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure
 the Calico CNI leverages the Azure networking infrastructure for data path 
 networking and the Azure IPAM for IP address management. There are 
 infrastructure prerequisites that are required prior to UCP installation for the 
@@ -20,24 +20,23 @@ IP addresses.
 
 You have two options for provisoning IPs for the Kubernetes cluster on Azure:
 - Docker UCP provides an automated mechanism to configure and maintain IP pools 
-  for stand-alone Azure VMs. This service runs within the calico-node daemonset 
+  for standalone Azure VMs. This service runs within the calico-node daemonset 
   and by default will provision 128 IP address for each node. This value can be 
-  configured via the `azure_ip_count`in the UCP 
+  configured through the `azure_ip_count`in the UCP 
   [configuration file](../configure/ucp-configuration-file) before or after the 
-  UCP installation. Note that if this value is reduced post installation, existing 
-  VMs will not be reconciled, and the user will have to manually edit the IP count
+  UCP installation. Note that if this value is reduced post-installation, existing 
+  VMs will not be reconciled, and you will have to manually edit the IP count
   in Azure. 
 - Manually provision additional IP address for each Azure VM. This could be done
-  as part of an Azure Virtual Machine Scale Set via an ARM template, an example 
-  can be found [here](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set). 
-  Note the `azure_ip_count` value in the UCP 
+  as part of an Azure Virtual Machine Scale Set through an ARM template. You can find an example [here](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set). 
+  Note that the `azure_ip_count` value in the UCP 
   [configuration file](../configure/ucp-configuration-file) will need to be set
-  to 0. If not UCP's IP Allocator service will provision IP Address on top of 
+  to 0, otherwise UCP's IP Allocator service will provision the IP Address on top of 
   those you have already provisioned.
 
 ## Azure Prerequisites 
 
-The following list of infrastructure prerequisites need to be met in order 
+You must meet these infrastructure prerequisites in order 
 to successfully deploy Docker UCP on Azure.
 
 - All UCP Nodes (Managers and Workers) need to be deployed into the same 
@@ -58,7 +57,7 @@ Group hosting the UCP Nodes. Note, if using a separate networking Resource
 Group the same Service Principal will need `Network Contributor` access to this 
 Resource Group.
 
-The following information will be required for the installation:
+UCP requires the following information for the installation:
 
 - `subscriptionId` - The Azure Subscription ID in which the UCP 
 objects are being deployed. 
@@ -69,9 +68,8 @@ objects are being deployed.
 
 ### Azure Configuration File
 
-For Docker UCP to integrate in to Microsoft Azure, an Azure configuration file 
-will need to be placed within each UCP node in your cluster. This file 
-will need to be placed at `/etc/kubernetes/azure.json`. 
+For Docker UCP to integrate into Microsoft Azure, you need to place an Azure configuration file 
+within each UCP node in your cluster, at `/etc/kubernetes/azure.json`. 
 
 See the template below. Note entries that do not contain `****` should not be 
 changed.
