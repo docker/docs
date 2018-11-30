@@ -30,7 +30,7 @@ For more information on build options, see the reference guide on the [command l
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
 
 ```
-$ DOCKER_BUILD=1 docker build .
+$ DOCKER_BUILDKIT=1 docker build .
 ```
 
 To enable docker buildkit by default, set daemon configuration in `/etc/docker/daemon.json` feature to true and restart the daemon:
