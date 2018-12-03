@@ -152,8 +152,8 @@ to choose the best installation path for you.
 
 | Platform                                                                    |      x86_64       |
 |:----------------------------------------------------------------------------|:-----------------:|
-| [Docker for Mac (macOS)](/docker-for-mac/install.md)                        | {{ green-check }} |
-| [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install.md) | {{ green-check }} |
+| [Docker for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
 
 #### Server
 
@@ -162,10 +162,10 @@ to choose the best installation path for you.
 
 | Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
 |:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos.md) | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora.md) | [{{ green-check }}]({{ install-prefix-ce }}/fedora.md) |                                                        |                                                        |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) |
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
 
 ### Backporting
 
