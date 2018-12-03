@@ -172,7 +172,7 @@ You only need to set up the repository once, after which you can install Docker 
     For example, if you want to install the 18.09 version run the following:
 
     ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.09.0
+    sudo yum-config-manager --enable docker-ee-stable-18.09
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.

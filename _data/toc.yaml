@@ -1726,6 +1726,8 @@ manuals:
       section:
       - title: Access Kubernetes Resources
         path: /ee/ucp/kubernetes/kube-resources/
+      - title: Configure AWS EBS Storage for Kubernetes
+        path: /ee/ucp/kubernetes/configure-aws-storage/
       - title: Deploy a workload
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
