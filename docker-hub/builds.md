@@ -102,9 +102,9 @@ repositories using the `docker push` command.
 
     ![Home page](images/home-page.png)
 
-    Within GitHub, a Docker integration appears in your repositories Settings > Webhooks & services page.
+    Within GitHub, a Docker Hub Webhook appears in your repositories Settings > Webhooks page.
 
-    ![GitHub](images/docker-integration.png)
+    ![GitHub](images/github-webhook.png)
 
     A similar page appears in Bitbucket if you use that code repository. Be
     careful to leave the Docker integration in place. Removing it causes your
