@@ -30,7 +30,7 @@ Hub based repository.
 
 ## Pushing a Docker container image to Docker Hub
 
-To push a repository to the Docker Hub, you must to
+To push a repository to the Docker Hub, you must
 name your local image using your Docker Hub username, and the
 repository name that you created via Docker Hub on the web.
 

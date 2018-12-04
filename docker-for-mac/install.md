@@ -6,7 +6,7 @@ title: Install Docker for Mac
 
 To download Docker for Mac, head to Docker Hub.
 
-[Download Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
 
 ##  What to know before you install
 

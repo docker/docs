@@ -176,7 +176,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints (or 
       -log-tail int
         	Number of lines to show from the end of the container logs. (default 20)
       -product-id string
-        	 Optional Product identifier from Docker Hub for this image. Please include it when you want the output to be sent Docker Hub.
+        	 Optional Product identifier from Docker Hub for this image. Please include it when you want the output to be sent to Docker Hub.
       -start-script string
         	 An optional custom script used to start the Docker container. The script will get passed one argument, the name of the Docker image.
       -start-wait-time int

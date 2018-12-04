@@ -12,6 +12,7 @@ redirect_from:
 - /engine/getstarted/step_three/
 - /engine/getstarted/step_four/
 - /engine/getstarted/step_five/
+- /engine/getstarted/step_six/
 - /engine/getstarted/last_page/
 - /engine/getstarted-voting-app/
 - /engine/getstarted-voting-app/node-setup/
@@ -45,6 +46,9 @@ redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/
+- /mac/step_six/
+- /windows/step_six/
+- /linux/step_six/
 - /engine/tutorials/dockerrepos/
 - /userguide/dockerrepos/
 - /engine/userguide/containers/dockerimages/
@@ -60,6 +64,7 @@ teaches you how to:
 3. [Scale your app to run multiple containers](part3.md)
 4. [Distribute your app across a cluster](part4.md)
 5. [Stack services by adding a backend database](part5.md)
+6. [Deploy your app to production](part6.md)
 
 ## Docker concepts
 
