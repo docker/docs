@@ -99,7 +99,8 @@ $ docker build --progress=plain .
 
 ## Overriding default frontends
 
-To override the default frontend, set the first line of the Dockerfile as a comment with a specific frontend image: 
+The new syntax features in `Dockerfile` are available if you override the default frontend. To override 
+the default frontend, set the first line of the `Dockerfile` as a comment with a specific frontend image: 
 ```
 # syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
 ```
@@ -155,8 +156,7 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 ## Using SSH to access private data in builds
 
 > **Acknowledgment**:
-> Special thanks to [Tonis Tiigi](https://medium.com/@tonistiigi) for granting
-> permission to use his blog post
+> [Tonis Tiigi](https://medium.com/@tonistiigi) is granting Docker permission to use his blog post
 > [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > as the basis of the content below.
 
