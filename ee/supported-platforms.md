@@ -51,11 +51,11 @@ engines in the cluster. Docker recommends platform customers use UCP to manage t
 For stand-alone EE engines, they can be licensed using `docker engine activate`.
 
 Offline activation of stand-alone EE engines can be performed by downloading the license and 
-using the command `docker engine activate .--license filename.lic`. 
+using the command `docker engine activate --license filename.lic`. 
 
-Additionally, Docker is now distributing the CLI as an installation package that can be separately 
-from the Docker Engine - Enterprise.  This now gives the Enterprise users the ability to install as 
-many CLI packages as needed without using the Engine node licenses for client-only systems.
+Additionally, Docker is now distributing the CLI as a separate installation package. 
+This gives the Enterprise users the ability to install as many CLI packages as needed 
+without using the Engine node licenses for client-only systems.
 
 [Learn more about Docker Enterprise](/ee/index.md).
 
