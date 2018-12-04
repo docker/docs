@@ -44,10 +44,8 @@ use unless you have substantial experience with ZFS on Linux.
   and push existing images to Docker Hub or a private repository, so that you
   do not need to re-create them later.
 
-> ***NOTE:*** There is no need to use `MountFlags=slave` with Docker Engine 18.09 because `dockerd` 
-> and `containerd` end up in different mount namespaces, and `containerd` cannot see those mounts.
-> This is resulting from Docker Engine no longer starting `containerd` as a service, but relying 
-> on `systemd` to start the `containerd` service.
+> ***NOTE:*** There is no need to use `MountFlags=slave` with Docker Engine 18.09 or 
+> later because `dockerd` and `containerd` are in different mount namespaces. 
 
 ## Configure Docker with the `zfs` storage driver
 
