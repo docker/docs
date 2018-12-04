@@ -21,6 +21,10 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.1 (2018-12-04)
+
+* Addressed CVE-2018-1002105, a critical security issue in the Kubernetes API Server.
+
 ## 3.1.0 (2018-11-08)
 
 ## Bug Fixes
@@ -112,6 +116,10 @@ The following features are deprecated in UCP 3.1.
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
 
 # Version 3.0
+
+## 3.0.7 (2018-12-04)
+
+* Addressed CVE-2018-1002105, a critical security issue in the Kubernetes API Server.
 
 ## 3.0.6 (2018-10-25)
 
