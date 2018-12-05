@@ -23,5 +23,5 @@ from the Hub.
 
 ## Password reset process
 
-If you forget your password, or can't access your account for some reason, you
+If you forget your password, or can't access your account, you
 can reset your password from the [*Password Reset*](https://hub.docker.com/reset-password/) page.

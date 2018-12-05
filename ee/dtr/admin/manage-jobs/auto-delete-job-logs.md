@@ -46,5 +46,5 @@ Docker Trusted Registry has a global setting for auto-deletion of job logs which
 
 ## Where to go next
 
-- [Monitor Docker Trusted Registry](monitor-and-troubleshoot.md)
+- [Monitor Docker Trusted Registry](/ee/dtr/admin/monitor-and-troubleshoot/)
  

@@ -31,7 +31,7 @@ mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory>
 One way to configure DTR to use an NFS directory is at install time:
 
 ```none
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} install \
+docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
   --nfs-storage-url <nfs-storage-url> \
   <other options>
 ```
@@ -50,7 +50,7 @@ If you want to start using the new DTR built-in support for NFS you can
 reconfigure DTR:
 
 ```none
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} reconfigure \
+docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} reconfigure \
   --nfs-storage-url <nfs-storage-url>
 ```
 
@@ -58,7 +58,7 @@ If you want to reconfigure DTR to stop using NFS storage, leave the option
 in blank:
 
 ```none
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version}} reconfigure \
+docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version}} reconfigure \
   --nfs-storage-url ""
 ```
 

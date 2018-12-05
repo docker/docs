@@ -21,6 +21,10 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.1 (2018-12-04)
+
+* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
+
 ## 3.1.0 (2018-11-08)
 
 ## Bug Fixes
@@ -96,6 +100,10 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 
+* Pod Security Policies are not supported in this release. (#15105)
+
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
 ## Deprecated features
 
 The following features are deprecated in UCP 3.1.
@@ -108,6 +116,10 @@ The following features are deprecated in UCP 3.1.
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
 
 # Version 3.0
+
+## 3.0.7 (2018-12-04)
+
+* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using a custom build of Kubernetes 1.8.15 for UCP 3.0.7.
 
 ## 3.0.6 (2018-10-25)
 
@@ -217,8 +229,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
    * To deploy Pods with Privileged options, users now require a grant with the
    role `Full Control` for all namespaces.
    * The `/api/ucp/config` endpoint now includes default node orchestrator.
-   * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
-   MTU sizes in Calico.
+   * Added `cni_mtu` setting to UCP config for controlling MTU size in Calico.
    * When a route is not found, interlock now returns a 503 (the expected
      behavior) instead of a 404.
 
@@ -419,7 +430,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 **Bug fixes**
 
-<<<<<<< HEAD
 * Core
     * Resolved an issue where LDAP sync jobs terminated when processing an org admin
     Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
@@ -427,7 +437,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
 
-=======
 * Core
   * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
@@ -442,7 +451,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Security
   * Fixed a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
->>>>>>> ba65aeabbb67b4cc2464497cfbe8bbccec8aacb2
 
 ## Version 2.2.12 (2018-08-09)
 

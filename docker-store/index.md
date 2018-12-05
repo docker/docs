@@ -11,10 +11,7 @@ Independent Software Vendors (ISVs) can utilize Docker Store to distribute and
 sell their Dockerized content. Publish your software through Docker Store to
 experience the following benefits:
 
-* **Access to Docker’s large and growing customer-base.** Docker has experienced
-  rapid adoption, and is popular in dev-ops environments. Docker users have
-  pulled images over twelve billion times and they are increasingly turning to
-  Docker Store as the canonical source for high-quality, curated content.
+* **Access to Docker’s large and growing customer-base.** Docker is experiencing rapid adoption. Images have been pulled by Docker users over twelve billion times. More Docker users are turning to Docker Store as the canonical source for high-quality, curated content.
 
 * **Customers can try or buy your software**, right from your product listing.
   Your content is accessible for installation, trial, and purchase from the

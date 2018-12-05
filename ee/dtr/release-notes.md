@@ -28,17 +28,17 @@ to upgrade your installation to the latest release.
 ### New Features
 
 * Web Interface
-  * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](../admin/configure/garbage-collection/).
-  * Repository admins can now enable tag pruning for every repository that they manage by adding a pruning policy or setting a tag limit. [Learn about tag pruning](../user/tag-pruning).
-  * Users can now review and audit repository events on the web interface with the addition of the **Activity** tab on each repository.[Learn about repository event audits](../user/manage-repository-events/audit-repository-events/).
-  * DTR admins can now enable auto-deletion of repository events based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
-  * DTR admins can now review and audit jobs on the web interface with the addition of **Job Logs** within System settings. [Learn about job audits on the web interface](../admin/manage-jobs/audit-jobs-via-ui/).
-  * DTR admins can now enable auto-deletion of job logs based on specified conditions. [Learn about repository event auto-deletion](../admin/configure/auto-delete-repo-events/).
-  * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](../user/promotion-policies/pull-mirror).
+  * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](/ee/dtr/admin/configure/garbage-collection/).
+  * Repository admins can now enable tag pruning for every repository that they manage by adding a pruning policy or setting a tag limit. [Learn about tag pruning](/ee/dtr/user/tag-pruning).
+  * Users can now review and audit repository events on the web interface with the addition of the **Activity** tab on each repository. [Learn about repository event audits](/ee/dtr/user/audit-repository-events/).
+  * DTR admins can now enable auto-deletion of repository events based on specified conditions. [Learn about repository event auto-deletion](/ee/dtr/admin/configure/auto-delete-repo-events/).
+  * DTR admins can now review and audit jobs on the web interface with the addition of **Job Logs** within System settings. [Learn about job audits on the web interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+  * DTR admins can now enable auto-deletion of job logs based on specified conditions. [Learn about job log auto-deletion](/ee/dtr/admin/manage-jobs/auto-delete-job-logs/).
+  * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](/ee/dtr/user/promotion-policies/pull-mirror).
 
 * CLI
-  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](../../reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure) for more details.
-  * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](../../reference/dtr/2.6/cli/restore) for more details.
+  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](/reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure) for more details.
+  * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](/reference/dtr/2.6/cli/restore) for more details.
 
 * API
   * Security admins can now export vulnerability scans to CSV via the `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}/export` endpoint. Specify `text/csv` as an Accept request HTTP header.
@@ -56,10 +56,10 @@ to upgrade your installation to the latest release.
 ### Known issues
 
 * Docker Engine Enterprise Edition (Docker EE) Upgrade
-  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](ee/dtr/admin/upgrade/#25-to-26-upgrade).
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 * Web Interface
-  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](../admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
+  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
 
@@ -68,7 +68,7 @@ to upgrade your installation to the latest release.
   * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
 
 * System
-  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../admin/upgrade/#25-to-26-upgrade).
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 ### Deprecations
 

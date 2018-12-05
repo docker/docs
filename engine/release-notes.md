@@ -4,7 +4,6 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
-redirect_from:
 - /ee/engine/release-notes/
 - /release-notes/docker-ce/
 
@@ -23,7 +22,7 @@ consistency and compatibility reasons.
 ### New features for Docker Engine EE 
 
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee) 
-* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Enterpirse Engine to run containers not signed by a specific organization.
+* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Engine - Enterprise to run containers not signed by a specific organization.
 
 ### New features for Docker Engine EE and CE
 
@@ -38,7 +37,7 @@ consistency and compatibility reasons.
 * Add `builder prune` subcommand to prune BuildKit build cache [docker/cli#1295](https://github.com/docker/cli/pull/1295) [docker/cli#1334](https://github.com/docker/cli/pull/1334)
 * BuildKit: Add configurable garbage collection policy for the BuildKit build cache [docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37846](https://github.com/moby/moby/pull/37846)
 * BuildKit: Add support for `docker build --pull ...` when using BuildKit [moby/moby#37613](https://github.com/moby/moby/pull/37613)
-* BuildKit: Add support or "registry-mirrors" and "insecure-registries" when using BuildKit docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37852](https://github.com/moby/moby/pull/37852)
+* BuildKit: Add support or "registry-mirrors" and "insecure-registries" when using BuildKit [docker/engine#59](https://github.com/docker/engine/pull/59) / [moby/moby#37852](https://github.com/moby/moby/pull/37852)
 * BuildKit: Enable net modes and bridge. [moby/moby#37620](https://github.com/moby/moby/pull/37620)
 * Add `docker engine` subcommand to manage the lifecycle of a Docker Engine running as a privileged container on top of containerd, and to allow upgrades to Docker Engine Enterprise [docker/cli#1260](https://github.com/docker/cli/pull/1260)
 * Expose product license in `docker info` output [docker/cli#1313](https://github.com/docker/cli/pull/1313)
@@ -165,6 +164,25 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Add support for multiple logging drivers for `docker logs`.
+
+### 17.06.2-ee-17 
+2018-10-25
+
+#### Networking
+
+* Changed loglevel from error to warning for missing disable_ipv6 file. [docker/libnetwork#2223](https://github.com/docker/libnetwork/pull/2223)
+* Fixed subnet allocation to avoid reallocating recently freed subnets. [docker/libnetwork#2255](https://github.com/docker/libnetwork/pull/2255)
+* Fixed libnetwork issue which caused errors to be returned when iptables or firewalld issues transient warnings. [docker/libnetwork#2218](https://github.com/docker/libnetwork/pull/2218)
+
+#### Plugins
+
+* Fixed too many "Plugin not found" error messages. [moby/moby#36119](https://github.com/moby/moby/pull/36119) 
+
+#### Swarm mode
+
+* Added failed allocations retry immediately upon a deallocation to overcome IP exhaustion. [docker/swarmkit#2711](https://github.com/docker/swarmkit/pull/2711)
+* Fixed leaking task resources. [docker/swarmkit#2755](https://github.com/docker/swarmkit/pull/2755)
+* Fixed deadlock in dispatcher that could cause node to crash. [docker/swarmkit#2753](https://github.com/docker/swarmkit/pull/2753)
 
 ### 17.06.2-ee-16 
 2018-07-26
