@@ -29,7 +29,7 @@ On a Mac, add the following to your `~/.bash_profile`:
 
 ```shell
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
+    . $(brew --prefix)/etc/bash_completion
 fi
 ```
 

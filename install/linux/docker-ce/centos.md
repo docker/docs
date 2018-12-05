@@ -201,7 +201,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package

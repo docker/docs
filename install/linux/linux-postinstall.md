@@ -73,7 +73,7 @@ To create the `docker` group and add your user:
 
     ```bash
     $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-    $ sudo chmod g+rwx "/home/$USER/.docker" -R
+    $ sudo chmod g+rwx "$HOME/.docker" -R
     ```
 
 ## Configure Docker to start on boot

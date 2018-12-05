@@ -1,0 +1,77 @@
+<p>Docker EE administrators can create <em>grants</em> to control how users and
+organizations access <a href="group-resources.md">resource sets</a>.</p>
+
+<p>A grant defines <em>who</em> has <em>how much</em> access to <em>what</em> resources. Each grant is a
+1:1:1 mapping of <em>subject</em>, <em>role</em>, and <em>resource set</em>. For example, you can
+grant the “Prod Team” “Restricted Control” over services in the “/Production”
+collection.</p>
+
+<p>A common workflow for creating grants has four steps:</p>
+
+<ul>
+  <li>Add and configure <strong>subjects</strong> (users, teams, and service accounts).</li>
+  <li>Define custom <strong>roles</strong> (or use defaults) by adding permitted API operations
+per type of resource.</li>
+  <li>Group cluster <strong>resources</strong> into Swarm collections or Kubernetes namespaces.</li>
+  <li>Create <strong>grants</strong> by combining subject + role + resource set.</li>
+</ul>
+
+<h2 id="kubernetes-grants">Kubernetes grants</h2>
+
+<p>With Kubernetes orchestration, a grant is made up of <em>subject</em>, <em>role</em>, and
+<em>namespace</em>.</p>
+
+<blockquote class="important">
+  <p>This section assumes that you have created objects for the grant: subject, role,
+namespace.</p>
+</blockquote>
+
+<p>To create a Kubernetes grant in UCP:</p>
+
+<ol>
+  <li>Click <strong>Grants</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Grant</strong>.</li>
+  <li>Click <strong>Namespaces</strong> under <strong>Kubernetes</strong>.</li>
+  <li>Find the desired namespace and click <strong>Select Namespace</strong>.</li>
+  <li>On the <strong>Roles</strong> tab, select a role.</li>
+  <li>On the <strong>Subjects</strong> tab, select a user, team, organization, or service
+account to authorize.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<h2 id="swarm-grants">Swarm grants</h2>
+
+<p>With Swarm orchestration, a grant is made up of <em>subject</em>, <em>role</em>, and
+<em>collection</em>.</p>
+
+<blockquote>
+  <p>This section assumes that you have created objects to grant: teams/users,
+roles (built-in or custom), and a collection.</p>
+</blockquote>
+
+<p><img src="../images/ucp-grant-model-0.svg" alt="" class="with-border" />
+<img src="../images/ucp-grant-model.svg" alt="" class="with-border" /></p>
+
+<p>To create a grant in UCP:</p>
+
+<ol>
+  <li>Click <strong>Grants</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Grant</strong>.</li>
+  <li>On the Collections tab, click <strong>Collections</strong> (for Swarm).</li>
+  <li>Click <strong>View Children</strong> until you get to the desired collection and <strong>Select</strong>.</li>
+  <li>On the <strong>Roles</strong> tab, select a role.</li>
+  <li>On the <strong>Subjects</strong> tab, select a user, team, or organization to authorize.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<blockquote class="important">
+  <p>By default, all new users are placed in the <code class="highlighter-rouge">docker-datacenter</code> organization.
+To apply permissions to all Docker EE users, create a grant with the
+<code class="highlighter-rouge">docker-datacenter</code> org as a subject.</p>
+</blockquote>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="deploy-stateless-app.md">Deploy a simple stateless app with RBAC</a></li>
+</ul>
