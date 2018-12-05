@@ -1,59 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
-    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
-    <title>pull-mirror-1</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M245.593068,112 C231.520568,112 220.063068,123.09 219.405568,137 L211.843068,137 L223.185568,151.7925 L234.343068,137 L226.905568,137 C227.555568,127.245 235.675568,119.5 245.593068,119.5 C255.933068,119.5 264.343068,127.91 264.343068,138.25 C264.343068,148.59 255.933068,157 245.593068,157 C239.640568,157 234.338068,154.2025 230.903068,149.865 L226.285568,155.9875 C231.083068,161.2075 237.945568,164.5 245.593068,164.5 C260.088068,164.5 271.843068,152.745 271.843068,138.25 C271.843068,123.755 260.088068,112 245.593068,112 Z" id="path-1"></path>
-    </defs>
-    <g id="dtr-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="pull-mirror-1">
-            <g id="all" transform="translate(129.000000, 3.000000)">
-                <g id="right" transform="translate(283.000000, 0.000000)">
-                    <text id="DTR-at-qa.example.or" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
-                        <tspan x="11.025" y="234.009524">DTR at qa.example.org</tspan>
-                    </text>
-                    <rect id="group" stroke="#82949E" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="200" height="245" rx="2"></rect>
-                    <g id="website-dev" transform="translate(31.000000, 47.000000)">
-                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
-                            <tspan x="38" y="40">1</tspan>
-                            <tspan x="38" y="57">2</tspan>
-                            <tspan x="38" y="74">3-stable</tspan>
-                        </text>
-                        <path d="M31.5,31.5 L31.5,73.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
-                        <text id="website/ui" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
-                            <tspan x="31" y="19">website/ui</tspan>
-                        </text>
-                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
-                            <tspan x="0" y="22"></tspan>
-                        </text>
-                    </g>
-                </g>
-                <g id="Shape" fill-rule="nonzero" transform="translate(241.843068, 138.250000) scale(-1, -1) rotate(40.000000) translate(-241.843068, -138.250000) ">
-                    <use fill="#E0E4E7" fill-rule="evenodd" xlink:href="#path-1"></use>
-                    <path stroke="#FFFFFF" stroke-width="2" d="M228.006563,136 L236.3499,136 L223.192113,153.444461 L209.816159,136 L218.468211,136 C219.619218,121.956444 231.360995,111 245.593068,111 C260.640353,111 272.843068,123.202715 272.843068,138.25 C272.843068,153.297285 260.640353,165.5 245.593068,165.5 C237.880263,165.5 230.688331,162.255799 225.549293,156.664182 L224.985423,156.050654 L230.88375,148.229861 L231.687013,149.24417 C235.041218,153.479647 240.114277,156 245.593068,156 C255.380783,156 263.343068,148.037715 263.343068,138.25 C263.343068,128.462285 255.380783,120.5 245.593068,120.5 C236.61632,120.5 229.121771,127.231201 228.006563,136 Z"></path>
-                </g>
-                <g id="middle">
-                    <text id="DTR-at-dev.example.o" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
-                        <tspan x="11.025" y="234.009524">DTR at dev.example.org</tspan>
-                    </text>
-                    <rect id="group" stroke="#82949E" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="200" height="245" rx="2"></rect>
-                    <g id="website-dev" transform="translate(31.000000, 47.000000)">
-                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
-                            <tspan x="38" y="40">1</tspan>
-                            <tspan x="38" y="57">2</tspan>
-                            <tspan x="38" y="74">3-stable</tspan>
-                        </text>
-                        <path d="M31.5,31.5 L31.5,73.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
-                        <text id="website/ui" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
-                            <tspan x="31" y="19">website/ui</tspan>
-                        </text>
-                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
-                            <tspan x="0" y="22"></tspan>
-                        </text>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 740 250" style="enable-background:new 0 0 740 250;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#82949E;}
+	.st2{font-family:'OpenSans';}
+	.st3{font-size:12px;}
+	.st4{fill:none;stroke:#82949E;stroke-width:2;stroke-dasharray:5,5,5,5;}
+	.st5{fill:none;stroke:#E0E4E7;stroke-linecap:square;}
+	.st6{font-size:14px;}
+	.st7{fill:#8F9EA8;}
+	.st8{font-family:'MyriadPro-Regular';}
+	.st9{font-size:26px;}
+	.st10{fill-rule:evenodd;clip-rule:evenodd;fill:#E0E4E7;}
+	.st11{fill:none;stroke:#FFFFFF;stroke-width:2;}
+</style>
+<rect class="st0" width="740" height="250"/>
+<title>pull-mirror-1</title>
+<desc>Created with Sketch.</desc>
+<g id="dtr-diagrams">
+	<g id="pull-mirror-1">
+		<g id="all" transform="translate(129.000000, 3.000000)">
+			<g id="right" transform="translate(283.000000, 0.000000)">
+				<text transform="matrix(1 0 0 1 11.025 234.0095)" class="st1 st2 st3">DTR at qa.example.org</text>
+				<path id="group" class="st4" d="M2,0h196c1.1,0,2,0.9,2,2v241c0,1.1-0.9,2-2,2H2c-1.1,0-2-0.9-2-2V2C0,0.9,0.9,0,2,0z"/>
+				<g id="website-dev" transform="translate(31.000000, 47.000000)">
+					<text transform="matrix(1 0 0 1 38 40)" class="st1 st2 st3">1</text>
+					<text transform="matrix(1 0 0 1 44.8613 40)" class="st1 st2 st3"> </text>
+					<text transform="matrix(1 0 0 1 38 57)" class="st1 st2 st3">2</text>
+					<text transform="matrix(1 0 0 1 44.8613 57)" class="st1 st2 st3"> </text>
+					<text transform="matrix(1 0 0 1 38 74)" class="st1 st2 st3">3-stable</text>
+					<path id="Line" class="st5" d="M31.5,31.5v42"/>
+					<text transform="matrix(1 0 0 1 31 19)" class="st1 st2 st6">website/ui</text>
+					<text transform="matrix(1 0 0 1 0 22)" class="st7 st8 st9"></text>
+				</g>
+			</g>
+			
+				<g id="Shape" transform="translate(241.843068, 138.250000) scale(-1, -1) rotate(40.000000) translate(-241.843068, -138.250000) ">
+				<g>
+					<path id="path-1" class="st10" d="M245.6,112c-14.1,0-25.5,11.1-26.2,25h-7.6l11.3,14.8l11.2-14.8l-7.4,0
+						c0.6-9.8,8.8-17.5,18.7-17.5c10.3,0,18.8,8.4,18.8,18.7c0,10.3-8.4,18.8-18.8,18.8c-6,0-11.3-2.8-14.7-7.1l-4.6,6.1
+						c4.8,5.2,11.7,8.5,19.3,8.5c14.5,0,26.3-11.8,26.2-26.3C271.8,123.8,260.1,112,245.6,112z"/>
+				</g>
+				<path class="st11" d="M228,136l8.3,0l-13.2,17.4L209.8,136h8.7c1.2-14,12.9-25,27.1-25c15,0,27.3,12.2,27.3,27.2
+					c0,15-12.2,27.3-27.2,27.3c-7.7,0-14.9-3.2-20-8.8l-0.6-0.6l5.9-7.8l0.8,1c3.4,4.2,8.4,6.8,13.9,6.8c9.8,0,17.8-8,17.8-17.8
+					c0-9.8-8-17.7-17.8-17.7C236.6,120.5,229.1,127.2,228,136z"/>
+			</g>
+			<g id="middle">
+				<text transform="matrix(1 0 0 1 11.025 234.0095)" class="st1 st2 st3">DTR at dev.example.org</text>
+				<path class="st4" d="M2,0h196c1.1,0,2,0.9,2,2v241c0,1.1-0.9,2-2,2H2c-1.1,0-2-0.9-2-2V2C0,0.9,0.9,0,2,0z"/>
+				<g transform="translate(31.000000, 47.000000)">
+					<text transform="matrix(1 0 0 1 38 40)" class="st1 st2 st3">1</text>
+					<text transform="matrix(1 0 0 1 44.8613 40)" class="st1 st2 st3"> </text>
+					<text transform="matrix(1 0 0 1 38 57)" class="st1 st2 st3">2</text>
+					<text transform="matrix(1 0 0 1 44.8613 57)" class="st1 st2 st3"> </text>
+					<text transform="matrix(1 0 0 1 38 74)" class="st1 st2 st3">3-stable</text>
+					<path class="st5" d="M31.5,31.5v42"/>
+					<text transform="matrix(1 0 0 1 31 19)" class="st1 st2 st6">website/ui</text>
+					<text transform="matrix(1 0 0 1 0 22)" class="st7 st8 st9"></text>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>

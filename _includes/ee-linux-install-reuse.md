@@ -116,6 +116,16 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% endif %}
 
+{% if linux-dist == "oraclelinux" %}
+
+5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable ol7_addons
+    ```
+
+{% endif %}
+
 6.  Add the Docker EE **stable** repository:
 
     ```bash
@@ -127,20 +137,12 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-There are currently two versions of Docker EE Engine available:
+> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> UCP, and DTR).
 
-* 18.03 - Use this version if you're only running Docker EE Engine.
-* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
-Engine, UCP, and DTR).
-
-1. By default, Docker EE Engine 17.06 is installed. If you want to install the
-18.03 version run:
-
-    ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.03
-    ```
-
-2.  Install the latest patch release, or go to the next step to install a specific version:
+1.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum -y install docker-ee
@@ -148,27 +150,34 @@ Engine, UCP, and DTR).
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-3.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+
+2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
 
     a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-17.06
+    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
     ```
 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-17.06.1.ee.2`
+    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.0`
 
     ```bash
     $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
+    For example, if you want to install the 18.09 version run the following:
+
+    ```bash
+    sudo yum-config-manager --enable docker-ee-stable-18.09.0
+    ```
+
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-4.  Start Docker:
+3.  Start Docker:
 
     > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
@@ -176,7 +185,7 @@ Engine, UCP, and DTR).
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 
@@ -301,6 +310,6 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 
 {% endif %}

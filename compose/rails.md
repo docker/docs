@@ -9,10 +9,7 @@ a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 
 ### Define the project
 
-Start by setting up the four files needed to build the app. First, since
-your app is going to run inside a Docker container containing all of its
-dependencies, define exactly what needs to be included in the
-container. This is done using a file called `Dockerfile`. To begin with, the
+Start by setting up the four files needed to build the app. App will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the
 Dockerfile consists of:
 
     FROM ruby:2.5
@@ -230,7 +227,7 @@ web_1 | A server is already
 running. Check /myapp/tmp/pids/server.pid.
 ```
 
-To resolve this, delete the file `tmp/pids/server.pid`, and then re-start the
+To resolve this, delete the file `tmp/pids/server.pid`, and then restart the
 application with `docker-compose up`.
 
 ### Restart the application

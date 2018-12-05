@@ -208,7 +208,7 @@ be physically attached to the network.
     the network.
 
     ```bash
-    $ docker container stop my-second-macvlan-alpin
+    $ docker container stop my-second-macvlan-alpine
 
     $ docker network rm my-8021q-macvlan-net
     ```

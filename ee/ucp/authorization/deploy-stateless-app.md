@@ -13,7 +13,7 @@ You are the Docker EE system administrator at Acme Company and need to configure
 permissions to company resources. The best way to do this is to:
 
 - Build the organization with teams and users.
-- Define roles with allowable operations per resource types, like 
+- Define roles with allowable operations per resource types, like
   permission to run containers.
 - Create collections or namespaces for accessing actual resources.
 - Create grants that join team + role + resource set.
@@ -26,11 +26,12 @@ following structure:
 ```
 acme-datacenter
 ├── dba
-│   └── Alex Alutin
+│ └── Alex*
 ├── dev
-│   └── Bett Bhatia
+│ └── Bett
 └── ops
-    └── Chad Chavez
+├── Alex*
+└── Chad
 ```
 
 Learn to [create and configure users and teams](create-users-and-teams-manually.md).
@@ -54,18 +55,14 @@ metadata:
   name: nginx-namespace
 ```
 
-### Define roles
-
-You can use the built-in roles or define your own. For this exercise, create a
-simple role for the ops team:
-
-1. Click **Roles** under **User Management**.
-2. Click **Create Role**.
-3. On the **Details** tab, name the role `Kube Deploy`.
-4. On the **Operations** tab, check all **Kubernetes Deployment Operations**.
-5. Click **Create**.
+### Create a team
 
 Learn to [create and configure users and teams](create-users-and-teams-manually.md).
+
+### Define roles
+
+For this exercise, create a simple role for the ops team. To learn how to create roles for Kubernetes,
+see [Configure native Kubernetes role-based access control](/ee/ucp/admin/configure/configure-rbac-kube/).
 
 ### Grant access
 
@@ -172,4 +169,3 @@ service.
 7. Log on to UCP as each user and ensure that:
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
-

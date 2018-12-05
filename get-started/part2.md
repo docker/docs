@@ -18,9 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We start at the bottom of
-the hierarchy of such an app, which is a container, which we cover on this page.
-Above this level is a service, which defines how containers behave in
+It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
 stack, defining the interactions of all the services, covered in
 [Part 5](part5.md).
@@ -69,7 +67,7 @@ FROM python:2.7-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-ADD . /app
+COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
@@ -92,7 +90,7 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` is present because of that `Dockerfile`'s `ADD` command,
+`requirements.txt` is present because of that `Dockerfile`'s `COPY` command,
 and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 

@@ -25,10 +25,11 @@ Bitbucket from your Docker Cloud account settings.
 
 ## Email addresses
 
-You can associate multiple email addresses with your Docker ID, and one of these
-becomes the primary address for the account. The primary address is used by
-Docker to send password reset notifications and other important information, so
-be sure to keep it updated.
+You can associate multiple email addresses with your Docker ID. 
+You may select an email address to become the primary email for the account. 
+The primary email is used by Docker to send password reset notifications 
+and important information, so be sure to keep it updated.
+
 
 To add another email address to your Docker ID:
 

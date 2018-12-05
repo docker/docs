@@ -22,10 +22,10 @@ You can define custom roles or use the following built-in roles:
 | `Full Control`       | Users can view and edit all granted resources. They can create containers without any restriction, but can't see the containers of other users.                                                                                                                       |
 
 
-## Create a custom role
+## Create a custom role for Swarm
 
-The **Roles** page lists all default and custom roles applicable in the
-organization.
+When creating custom roles to use with Swarm, the **Roles** page lists all default and custom roles applicable in the
+organization. To create custom roles for Kubernetes, see [Configure native Kubernetes role-based access control](https://docs.docker.com/ee/ucp/admin/configure/configure-rbac-kube/).
 
 You can give a role a global name, such as "Remove Images", which might enable the
 **Remove** and **Force Remove** operations for images. You can apply a role with

@@ -18,6 +18,27 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-beta1-win75 2018-09-14
+
+[Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.0-ce-beta1](https://github.com/docker/docker-ce/releases/tag/v18.09.0-ce-beta1)
+  - Linux Kernel 4.9.125
+
+* New
+  - New version scheme
+
+* Deprecation
+  - Removed support of AUFS
+  
+* Bug fixes and minor changes
+  - LCOW does not anymore need --platform flag on multi-arch images
+  - Better WCOW host.docker.internal resolution on host, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
+  - Disk size can now be ajusted from 32GiB to drive space.
+  - Fix dns update too verbose in logs
+  - Fix panic in diagnose
+
 ### Docker Community Edition 18.06.1-ce-win74 2018-08-29
 
 [Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe)

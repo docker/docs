@@ -17,7 +17,7 @@ those Docker desktop applications. See Docker Cloud (Edge feature) on
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
 > Docker Machine still works as described below, but Docker Cloud
-supercedes Machine for this purpose.
+supersedes Machine for this purpose.
 {: .important}
 
 Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
