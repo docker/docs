@@ -8,6 +8,7 @@ redirect_from:
 title: Set up Automated builds
 ---
 
+
 ## How Automated Builds work
 
 Docker Hub can automatically build images from source code in an external
@@ -18,20 +19,23 @@ When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
 to a source code branch (for example in Github) for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
-image. The built image is then pushed to the Docker Hub registry or to an
-external registry.
+image. The built image is then pushed to the Docker Hub registry.
+
+> **Note**: You can still use `docker push` to push pre-built images to
+repositories with Automated Builds configured.
 
 If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
-> **Note**: You can still use `docker push` to push pre-built images to
-repositories with Automated Builds configured.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
 ## Configure automated build settings
+
+> **Note**: Automated builds created with the old Docker Hub are 
+now Classic Automated Builds. [Learn more](classic-vs-enhanced.md) 
 
 You can configure repositories in Docker Hub so that they automatically
 build an image each time you push new code to your source provider. If you have
@@ -45,7 +49,8 @@ Builds can be added to existing repositories, or added when you create a reposit
 2. Click the **Builds** tab.
 
 3. If you are setting up automated builds for the first time, select
-the code repository service where the image's source code is stored.
+the code repository service (Github or Bitbucket) where the image's source code is stored. 
+You might redirected to the settings page to [link](link-source.md) the code repository service.
 
     Otherwise, if you are editing the build settings for an existing automated
     build, click **Configure automated builds**.
@@ -395,22 +400,6 @@ Additional advanced options are available for customizing your automated builds,
 including utility environment variables, hooks, and build phase overrides. To
 learn more see [Advanced options for Autobuild and Autotest](advanced.md).
 
-### Set up builder nodes
-
-If you are building on your own infrastructure, you can run the build process on
-specific nodes by adding the `builder` label to them. If no builder nodes are
-specified, the build containers are deployed using an "emptiest node" strategy.
-
-You can also limit the number of concurrent builds (including `autotest` builds)
-on a specific node by using a `builder=n` tag, where the `n` is the number of
-builds to allow. For example a node tagged with `builder=5` only allows up to
-five concurrent builds or autotest-builds at the same time.
-
-### Autoredeploy services on successful build
-
-You can configure your services to automatically redeploy once the build
-succeeds. [Learn more about autoredeploy](../apps/auto-redeploy.md)
-
 ### Add automated tests
 
 To test your code before the image is pushed, you can use
@@ -418,4 +407,7 @@ Docker Hub's [Autotest](automated-testing.md) feature which
 integrates seamlessly with autobuild and autoredeploy.
 
 > **Note**: While the Autotest feature builds an image for testing purposes, it
-does not push the resulting image to Docker Hub or the external registry.
+does not push the resulting image to Docker Hub.
+
+
+
