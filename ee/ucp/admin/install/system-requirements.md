@@ -22,8 +22,8 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
-* 4GiB of free disk space for the root partition for manager nodes
-* 500MiB of free disk space for the root partition for worker nodes
+* 4GB of free disk space for the `/var` partition for manager nodes
+* 500MB of free disk space for the `/var` partition for worker nodes
 
 ### Recommended production requirements
 
