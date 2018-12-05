@@ -1,0 +1,30 @@
+<p>By default only admin users can pull images into a cluster managed by UCP.</p>
+
+<p>Images are a shared resource, as such they are always in the <code class="highlighter-rouge">swarm</code> collection.
+To allow users access to pull images, you need to grant them the <code class="highlighter-rouge">image load</code>
+permission for the <code class="highlighter-rouge">swarm</code> collection.</p>
+
+<p>As an admin user, go to the <strong>UCP web UI</strong>, navigate to the <strong>Roles</strong> page,
+and create a <strong>new role</strong> named <code class="highlighter-rouge">Pull images</code>.</p>
+
+<p><img src="../images/rbac-pull-images-1.png" alt="" class="with-border" /></p>
+
+<p>Then go to the <strong>Grants</strong> page, and create a new grant with:</p>
+
+<ul>
+  <li>Subject: the user you want to be able to pull images.</li>
+  <li>Roles: the “Pull images” role you created.</li>
+  <li>Resource set: the <code class="highlighter-rouge">swarm</code> collection.</li>
+</ul>
+
+<p><img src="../images/rbac-pull-images-2.png" alt="" class="with-border" /></p>
+
+<p>Once you click <strong>Create</strong> the user is able to pull images from the UCP web UI
+or the CLI.</p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="ee-standard.md">Docker EE Standard use case</a></li>
+  <li><a href="ee-advanced.md">Docker EE Advanced use case</a></li>
+</ul>

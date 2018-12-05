@@ -1,5 +1,5 @@
 ---
-title: Upgrade to UCP 3.0
+title: Upgrade to UCP 3.1
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
 ---

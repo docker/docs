@@ -17,6 +17,7 @@ container, and monitor your Docker instance using Prometheus.
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
 
+
 ## Configure Docker
 
 To configure the Docker daemon as a Prometheus target, you need to specify the
@@ -49,7 +50,7 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 
 ## Configure and run Prometheus
 
-In this example, Prometheus runs as a Docker service on a Docker swarm.
+Prometheus runs as a Docker service on a Docker swarm.
 
 > **Prerequisites**
 >

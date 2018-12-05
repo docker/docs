@@ -33,7 +33,6 @@ To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
 - Bionic 18.04 (LTS)
-- Artful 17.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
@@ -289,7 +288,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package
