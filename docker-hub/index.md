@@ -96,10 +96,7 @@ Start by [creating an account](https://hub.docker.com/signup).
 
 To create a repo:
 1. Sign in to [Docker Hub](https://hub.docker.com)
-2. Click on Create Repository on the Docker Hub welcome page:
-
-![Welcome](images/index-welcome.png)
-
+2. Click on Create Repository on the Docker Hub welcome page: ![Welcome](images/index-welcome.png)
 3. Name it **<your_username>/my-first-repo** as shown below. Select **Private**:
 
 ![Create Repository](images/index-create-repo.png)
@@ -117,22 +114,18 @@ We'll need to download Docker Desktop to build and push a container image to Doc
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
-1. Create a Dockerfile to specify your application by running:
-
+Start by creating a Dockerfile to specify your application as shown below. (More on Dockerfiles [here](https://docs.docker.com/engine/reference/builder/))
 ```shell
 cat > Dockerfile <<EOF
 FROM busybox
 CMD echo "Hello world! This is my first Docker image."
 EOF
 ```
-
-More on Dockerfiles [here](https://docs.docker.com/engine/reference/builder/)
-
 2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image
 3. Test your docker image locally by running `docker run <your_username>/my-first-repo`
 4. Run `docker push <your_username>/my-first-repo` to push your Docker image to Docker Hub
 
-You should see something similar to:
+You should see output similar to:
 
 ![Terminal](images/index-terminal.png)
 
@@ -143,7 +136,7 @@ And in Docker Hub, your repository should have a new `latest` tag available unde
 Congratulations! You've successfully:
 - Signed up for Docker Hub
 - Created your first repository
-- Built a Docker image on your computer
+- Built a Docker container image on your computer
 - Pushed it to Docker Hub
 
 ### Next Steps
