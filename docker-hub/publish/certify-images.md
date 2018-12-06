@@ -46,7 +46,7 @@ The `inspectDockerImage` tool will detect issues and output them as **warnings**
 
 If you are publishing and certifying multiple versions for a Docker image, you will need to run the `inspectDockerImage` tool on each Docker image and send each result to Docker Hub.
 
-If you are publishing and certifying multi-architecture Docker image (e.g. Linux, Power, s390x, windows, etc.) you will need to run the `inspectDockerImage` tool on the Docker EE server running on each architecture and send the results to Docker Hub.
+If you are publishing and certifying multi-architecture Docker image (for example, Linux, Power, s390x, Windows) you will need to run the `inspectDockerImage` tool on the Docker EE server running on each architecture and send the results to Docker Hub.
 
 Details on how to run the `inspectDockerImage` tool and send the results to Docker Hub are in the sections that follow.
 
