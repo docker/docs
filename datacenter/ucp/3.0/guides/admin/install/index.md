@@ -131,7 +131,7 @@ To join manager nodes to the swarm,
 
 5.  For each manager node that you want to join to the swarm, log in using
     ssh and run the join command that you copied. After the join command
-    completes, the node appears on the **Nodes** page in the UCP web UI.
+    completes, the node appears on the **Nodes** page in the UCP web interface.
 
 ## Step 7: Join worker nodes
 
