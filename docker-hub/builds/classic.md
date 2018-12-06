@@ -41,7 +41,7 @@ Likewise, you can switch back to new Automated Build by clicking on this link at
 ## Frequently Asked Questions
 
 
-**Q: I've previously linked my Github/Bitbucket account in the old Docker Hub. Why do I need to re-link it?**
+**Q: I've previously linked my GitHub/Bitbucket account in the old Docker Hub. Why do I need to re-link it?**
 
 A: The new Docker Hub uses a different permissions model. [Linking is only a few clicks by going to account settings](link-source.md).
 with the new Docker Hub.
