@@ -23,9 +23,11 @@ After installing DTR, you can join additional DTR replicas using `docker/dtr joi
 
 ### Example Usage
 
-$ docker run -it --rm docker/dtr install \
-	--ucp-node <UCP_NODE_HOSTNAME> \
-	--ucp-insecure-tls
+```bash
+docker run -it --rm docker/dtr install \
+--ucp-node <UCP_NODE_HOSTNAME> \
+--ucp-insecure-tls
+```
 
 Note: Use `--ucp-ca "$(cat ca.pem)"` instead of `--ucp-insecure-tls` for a production deployment.
 
