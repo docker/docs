@@ -17,7 +17,7 @@ repositories.
 
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
-to a source code branch (for example in Github) for one of those listed image
+to a source code branch (for example in GitHub) for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
 image. The built image is then pushed to the Docker Hub registry.
 
@@ -49,7 +49,7 @@ Builds can be added to existing repositories, or added when you create a reposit
 2. Click the **Builds** tab.
 
 3. If you are setting up automated builds for the first time, select
-the code repository service (Github or Bitbucket) where the image's source code is stored. 
+the code repository service (GitHub or Bitbucket) where the image's source code is stored. 
 You might redirected to the settings page to [link](link-source.md) the code repository service.
 
     Otherwise, if you are editing the build settings for an existing automated
@@ -91,7 +91,7 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.
 
-    A Webhook is automatically added to your source code repository to notify
+    A webhook is automatically added to your source code repository to notify
     Docker Hub on every push. Only pushes to branches that are listed as the
     source for one or more tags trigger a build.
 
@@ -313,7 +313,7 @@ If you need to update a tag _in another repository_, use [a post_build hook](adv
 ## Build repositories with linked private submodules
 
 Docker Hub sets up a deploy key in your source code repository that allows it
-to clone the repository and build it, however this key only works for a single,
+to clone the repository and build it; however this key only works for a single,
 specific code repository. If your source code repository uses private Git
 submodules (or requires that you clone other private repositories to build),
 Docker Hub cannot access these additional repos, your build cannot complete,
@@ -342,7 +342,7 @@ When you create an automated build repository in your own account namespace, you
 
 These same actions are also available for team repositories from Docker Hub if
 you are a member of the Organization's `Owners` team. If you are a member of a
-team with `write` permissions you can start, cancel and retry builds in your
+team with `write` permissions you can start, cancel, and retry builds in your
 team's repositories, but you cannot edit the team repository settings or delete
 the team repositories. If your user account has `read` permission, or if you're
 a member of a team with `read` permission, you can view the build configuration
@@ -382,7 +382,7 @@ variable to automated builds associated with the account.
 2. Create a "build" team in your organization.
 3. Ensure that the new "build" team has access to each repository and submodule you need to build.
 
-    Go to the repository's **Settings** page. On Github, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
+    Go to the repository's **Settings** page. On GitHub, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
 
 4. Add the service user to the "build" team on the source provider.
 
