@@ -113,24 +113,24 @@ request:
 
     $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 
-To make the key suitable for client authentication, create an extensions
+To make the key suitable for client authentication, create a new extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth >> extfile.cnf
+    $ echo extendedKeyUsage = clientAuth > extfile-client.cnf
 
 Now, generate the signed certificate:
 
     $ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out cert.pem -extfile extfile.cnf
+      -CAcreateserial -out cert.pem -extfile extfile-client.cnf
     Signature ok
     subject=/CN=client
     Getting CA Private Key
     Enter pass phrase for ca-key.pem:
 
 After generating `cert.pem` and `server-cert.pem` you can safely remove the
-two certificate signing requests:
+two certificate signing requests and extensions config files:
 
-    $ rm -v client.csr server.csr
+    $ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
 
 With a default `umask` of 022, your secret keys are *world-readable* and
 writable for you and your group.
