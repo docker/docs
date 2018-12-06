@@ -1,7 +1,7 @@
 ---
 description: Explains the difference between Classic and new Automated Builds
 keywords: automated, build, images
-title: Classic vs new Automated Builds
+title: Classic Automated Builds
 ---
 
 With the launch of the new Docker Hub, we are introducing an improved Automated Build experience.
@@ -40,20 +40,20 @@ Likewise, you can switch back to new Automated Build by clicking on this link at
 
 ## Frequently Asked Questions
 
-1. I've previously linked my Github/Bitbucket account in the old Docker Hub. Why do I need to re-link it?
 
-The new Docker Hub uses a different permissions model. [Linking is only a few clicks by going to account settings](link-source.md).
+**Q: I've previously linked my Github/Bitbucket account in the old Docker Hub. Why do I need to re-link it?**
+
+A: The new Docker Hub uses a different permissions model. [Linking is only a few clicks by going to account settings](link-source.md).
 with the new Docker Hub.
 
-> **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
+  > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
 
+**Q: What happens to automated builds I created in the old Docker Hub?**
 
-2. What happens to automated builds I created in the old Docker Hub?
-
-They are now Classic Automated Builds. There are no functional differences with the old automated builds and everything 
+A: They are now Classic Automated Builds. There are no functional differences with the old automated builds and everything 
 (build triggers, existing build rules etc) should continue to work seamlessly.
 
-3. Is it possible to convert an existing Classic Automated Build?
+**Q: Is it possible to convert an existing Classic Automated Build?**
 
-This is currently unsupported. However, we are working to transition all builds into new experience in
+A: This is currently unsupported. However, we are working to transition all builds into new experience in
 the coming months.
