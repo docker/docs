@@ -32,7 +32,7 @@
     - description: "3.0.7 Windows Server 1709"
       url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.7.tar.gz
     - description: "3.0.7 Windows Server 1803"
-      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.6.tar.gz
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.7.tar.gz
     - description: "3.0.6 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.6.tar.gz
     - description: "3.0.6 IBM Z"
