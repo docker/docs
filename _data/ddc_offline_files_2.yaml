@@ -6,6 +6,14 @@
 - product: "ucp"
   version: "3.1"
   tar-files:
+    - description: "3.1.1 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.1.1.tar.gz
+    - description: "3.1.1 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.1.1.tar.gz
+    - description: "3.1.1 Windows Server 1709"
+      url: https://packages.docker.com/caas/ucp_images_win_1709_3.1.1.tar.gz
+    - description: "3.1.1 Windows Server 1803"
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.1.1.tar.gz
     - description: "3.1.0 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.1.0.tar.gz
     - description: "3.1.0 Windows Server 2016 LTSC"
@@ -17,6 +25,14 @@
 - product: "ucp"
   version: "3.0"
   tar-files:
+    - description: "3.0.7 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.0.7.tar.gz
+    - description: "3.0.7 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.7.tar.gz
+    - description: "3.0.7 Windows Server 1709"
+      url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.7.tar.gz
+    - description: "3.0.7 Windows Server 1803"
+      url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.6.tar.gz
     - description: "3.0.6 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.6.tar.gz
     - description: "3.0.6 IBM Z"
