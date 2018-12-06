@@ -19,11 +19,11 @@ in each node of the swarm to version 17.06 Enterprise Edition. Plan for the
 upgrade to take place outside of business hours, to ensure there's minimal
 impact to your users.
 
-Also, don't make changes to UCP configurations while you're upgrading it.
+Don't make changes to UCP configurations while you're upgrading.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
 > Note: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft 
-> Azure then please ensure all of the Azure [prequisities](install-on-azure.md/#azure-prerequisites) 
+> Azure then please ensure all of the Azure [prerequisities](install-on-azure.md/#azure-prerequisites) 
 > are met.  
 
 ## Back up your swarm
@@ -52,7 +52,7 @@ Starting with the manager nodes, and then worker nodes:
 2. Upgrade the Docker Engine to version 17.06 or higher.
 3. Make sure the node is healthy.
 
-    In your browser, navigate to the **Nodes** page in the UCP web UI,
+    In your browser, navigate to the **Nodes** page in the UCP web interface,
     and check that the node is healthy and is part of the swarm.
 
 > Swarm mode
@@ -62,9 +62,9 @@ Starting with the manager nodes, and then worker nodes:
 
 ## Upgrade UCP
 
-You can upgrade UCP from the web UI or the CLI.
+You can upgrade UCP from the web interface or the CLI.
 
-### Use the UI to perform an upgrade
+### Use the web interface to perform an upgrade
 
 When an upgrade is available for a UCP installation, a banner appears.
 
@@ -80,13 +80,13 @@ Select a version to upgrade to using the **Available UCP Versions** dropdown,
 then click to upgrade.
 
 Before the upgrade happens, a confirmation dialog along with important
-information regarding swarm and UI availability is displayed.
+information regarding swarm and interface availability is displayed.
 
 ![](../../images/upgrade-ucp-3.png){: .with-border}
 
-During the upgrade, the UI is unavailable, so wait until the upgrade is complete
-before trying to use the UI. When the upgrade completes, a notification alerts
-you that a newer version of the UI is available, and you can see the new UI
+During the upgrade, the interface is unavailable, so wait until the upgrade is complete
+before trying to use the interface. When the upgrade completes, a notification alerts
+you that a newer version of the interface is available, and you can see the new interface
 after you refresh your browser.
 
 ### Use the CLI to perform an upgrade
@@ -107,7 +107,7 @@ $ docker container run --rm -it \
 This runs the upgrade command in interactive mode, so that you are prompted
 for any necessary configuration values.
 
-Once the upgrade finishes, navigate to the UCP web UI and make sure that
+Once the upgrade finishes, navigate to the UCP web interface and make sure that
 all the nodes managed by UCP are healthy.
 
 ## Recommended upgrade paths
