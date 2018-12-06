@@ -30,7 +30,7 @@ You've created an organization. You'll see you have a team, the **owners** team 
 The **owners** team is a special team that has full access to all repositories in the Organization.
 
 Members of this team can:
-- Manage Organization settings and billing.
+- Manage Organization settings and billing
 - Create a team and modify the membership of any team
 - Access and modify any repository belonging to the Organization
 
