@@ -18,16 +18,16 @@ IP addresses to Kubernetes pods.  The Azure IPAM module requires each Azure
 VM that's part of the Kubernetes cluster to be configured with a pool of
 IP addresses.
 
-You have two options for provisoning IPs for the Kubernetes cluster on Azure:
+There are two options for provisoning IPs for the Kubernetes cluster on Azure:
 - Docker UCP provides an automated mechanism to configure and maintain IP pools 
-  for standalone Azure VMs. This service runs within the calico-node daemonset 
+  for standalone Azure virtual machines. This service runs within the calico-node daemonset 
   and by default will provision 128 IP address for each node. This value can be 
   configured through the `azure_ip_count`in the UCP 
   [configuration file](../configure/ucp-configuration-file) before or after the 
   UCP installation. Note that if this value is reduced post-installation, existing 
-  VMs will not be reconciled, and you will have to manually edit the IP count
+  virtual machines will not be reconciled, and you will have to manually edit the IP count
   in Azure. 
-- Manually provision additional IP address for each Azure VM. This could be done
+- Manually provision additional IP address for each Azure virtual machine. This could be done
   as part of an Azure Virtual Machine Scale Set through an ARM template. You can find an example [here](#set-up-ip-configurations-on-an-azure-virtual-machine-scale-set). 
   Note that the `azure_ip_count` value in the UCP 
   [configuration file](../configure/ucp-configuration-file) will need to be set
@@ -37,7 +37,7 @@ You have two options for provisoning IPs for the Kubernetes cluster on Azure:
 ## Azure Prerequisites 
 
 You must meet these infrastructure prerequisites in order 
-to successfully deploy Docker UCP on Azure.
+to successfully deploy Docker UCP on Azure
 
 - All UCP Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
@@ -113,7 +113,7 @@ More details on this configuration file can be found
 ## Considerations for IPAM Configuration
 
 The subnet and the virtual network associated with the primary interface of
-the Azure VMs need to be configured with a large enough address prefix/range. 
+the Azure virtual machines need to be configured with a large enough address prefix/range. 
 The number of required IP addresses depends on the number of pods running
 on each node and the number of nodes in the cluster.
 
@@ -139,11 +139,11 @@ plus a buffer for initial allocations for primary IP addresses.
 
 ## Manually provision IP address as part of an Azure virtual machine scale set
 
-Configure IP Pools for each member of the VM scale set during provisioning by
+Configure IP Pools for each member of the virtual machine scale set during provisioning by
 associating multiple `ipConfigurations` with the scale set’s
 `networkInterfaceConfigurations`. Here's an example `networkProfile`
 configuration for an ARM template that configures pools of 32 IP addresses
-for each VM in the VM scale set.
+for each virtual machine in the virtual machine scale set.
 
 ```json
 "networkProfile": {
