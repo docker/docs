@@ -78,7 +78,7 @@ The following hooks are available:
 
 #### Override the "build" phase to set variables
 
-Docker Hub allows you to define build environment variables either in the hook files, or from the automated build UI (which you can then reference in hooks).
+Docker Hub allows you to define build environment variables either in the hook files, or from the automated build interface (which you can then reference in hooks).
 
 In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Hub build settings. `$DOCKERFILE_PATH` is a variable that we provide with the name of the Dockerfile we wish to build, and `$IMAGE_NAME` is the name of the image being built.
 
