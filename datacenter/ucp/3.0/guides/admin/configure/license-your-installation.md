@@ -19,7 +19,7 @@ download your UCP license, or get a free trial license.
 Once you've downloaded the license file, you can apply it to your UCP
 installation.
 
-In the UCP web UI, log in with administrator credentials and
+In the UCP web interface, log in with administrator credentials and
 navigate to the **Admin Settings** page.
 
 In the left pane, click **License** and click **Upload License**. The
