@@ -103,7 +103,7 @@ for worker nodes to execute.
 
 To join manager nodes to the swarm,  
 
-1.  In the UCP web UI, navigate to the **Nodes** page, and click the
+1.  In the UCP web interface, navigate to the **Nodes** page, and click the
     **Add Node** button to add a new node.
 
     ![](../../images/nodes-page-ucp.png){: .with-border}
