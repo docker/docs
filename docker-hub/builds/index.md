@@ -35,7 +35,7 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 ## Configure automated build settings
 
 > **Note**: Automated builds created with the old Docker Hub are 
-now Classic Automated Builds. [Learn more](classic-vs-enhanced.md) 
+now Classic Automated Builds. [Learn more](classic-vs-new.md) 
 
 You can configure repositories in Docker Hub so that they automatically
 build an image each time you push new code to your source provider. If you have
