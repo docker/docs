@@ -29,7 +29,7 @@ organizations.
 4. Review the settings for the **Docker Hub Builder** OAuth application.
     ![Granting access to GitHub account](images/link-source-github-ind.png)
 
-    >**Note**: If you are the owner of any Github organizations, you might see
+    >**Note**: If you are the owner of any GitHub organizations, you might see
     options to grant Docker Hub access to them from this screen. You can also
     individually edit an organization's Third-party access settings to grant or
     revoke Docker Hub's access. See [Grant access to a GitHub
@@ -80,7 +80,7 @@ code provider.
 
 ## Grant access to a GitHub organization
 
-If you are the owner of a Github organization you can grant or revoke Docker
+If you are the owner of a GitHub organization, you can grant or revoke Docker
 Hub's access to the organization's repositories. Depending on the GitHub
 organization's settings, you may need to be an organization owner.
 
