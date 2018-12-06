@@ -3653,6 +3653,8 @@ manuals:
         title: Advanced Automated Builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
+      - path: /docker-hub/builds/classic
+        title: Classic Automated Builds
   - sectiontitle: Publisher & Certified Content
     section:
     - path: /docker-hub/publish/
