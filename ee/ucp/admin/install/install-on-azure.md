@@ -15,10 +15,10 @@ Calico / Azure integration.
 
 Docker UCP configures the Azure IPAM module for Kubernetes to allocate
 IP addresses to Kubernetes pods.  The Azure IPAM module requires each Azure
-VM that's part of the Kubernetes cluster to be configured with a pool of
+virtual machine that's part of the Kubernetes cluster to be configured with a pool of
 IP addresses.
 
-There are two options for provisoning IPs for the Kubernetes cluster on Azure:
+There are two options for provisoning IPs for the Kubernetes cluster on Azure
 - Docker UCP provides an automated mechanism to configure and maintain IP pools 
   for standalone Azure virtual machines. This service runs within the calico-node daemonset 
   and by default will provision 128 IP address for each node. This value can be 
@@ -120,9 +120,9 @@ on each node and the number of nodes in the cluster.
 For example, in a cluster of 256 nodes, to run a maximum of 128 pods
 concurrently on a node, make sure that the address space of the subnet and the
 virtual network can allocate at least 128 * 256 IP addresses, _in addition to_
-initial IP allocations to VM NICs during Azure resource creation.
+initial IP allocations to virtual machine NICs during Azure resource creation.
 
-Accounting for IP addresses that are allocated to NICs during VM bring-up, set
+Accounting for IP addresses that are allocated to NICs during virtual machine bring-up, set
 the address space of the subnet and virtual network to 10.0.0.0/16. This
 ensures that the network can dynamically allocate at least 32768 addresses,
 plus a buffer for initial allocations for primary IP addresses.
