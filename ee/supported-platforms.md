@@ -25,14 +25,14 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Note
 >
-> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic, Docker Enterprise - Standard,
-> and Docker Enterprise - Advanced are all now called Docker Enterprise.
+> Starting with Docker Enterprise 2.1, Docker Enterprise --- Basic, Docker Enterprise --- Standard,
+> and Docker Enterprise --- Advanced are all now called Docker Enterprise.
 
 ### Docker Enterprise
 
-With Docker Enterprise, you can deploy Docker Engine - Enterprise
+With Docker Enterprise, you can deploy Docker Engine --- Enterprise
 to manage your container workloads in a flexible way. You can manage workloads
-on Windows, Linux, on-premise or on the cloud.
+on Windows, Linux, on site, or on the cloud.
 
 Docker Enterprise has private image management, integrated image signing policies, and cluster
 management with support for Kubernetes and Swarm orchestrators. It allows you to implement
@@ -42,19 +42,19 @@ maintenance cycles for patches for up to 24 months.
 
 ### New Licensing for Docker Enterprise 
 
-In 18.09, the Docker Enterprise - Engine is aware of the license applied on the system. The 
-license summary is available in the `docker info` output on stand-alone or manager nodes.
+In version 18.09, the Docker Enterprise --- Engine is aware of the license applied on the system. The 
+license summary is available in the `docker info` output on standalone or manager nodes.
 
 For EE platform customers, when you license UCP, this same license is applied to the underlying 
 engines in the cluster. Docker recommends platform customers use UCP to manage their license.
 
-For stand-alone EE engines, they can be licensed using `docker engine activate`.
+Standalone EE engines can be licensed using `docker engine activate`.
 
-Offline activation of stand-alone EE engines can be performed by downloading the license and 
+Offline activation of standalone EE engines can be performed by downloading the license and 
 using the command `docker engine activate --license filename.lic`. 
 
 Additionally, Docker is now distributing the CLI as a separate installation package. 
-This gives the Enterprise users the ability to install as many CLI packages as needed 
+This gives Enterprise users the ability to install as many CLI packages as needed 
 without using the Engine node licenses for client-only systems.
 
 [Learn more about Docker Enterprise](/ee/index.md).
