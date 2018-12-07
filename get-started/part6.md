@@ -27,16 +27,16 @@ username/repo:tag`, then visit `http://localhost/`.
 
 You've been editing the same Compose file for this entire tutorial. Well, we
 have good news. That Compose file works just as well in production as it does
-on your machine. Here, We go through some options for running your
+on your machine. Here, we go through some options for running your
 Dockerized application.
 
 ## Choose an option
 
 {% capture community %}
 
-### Install Docker Engine - Community
+### Install Docker Engine --- Community
 
-Find the [install instructions](/install/#supported-platforms) for Docker Engine - Community on the platform of your choice.
+Find the [install instructions](/install/#supported-platforms) for Docker Engine --- Community on the platform of your choice.
 
 ### Create your swarm
 
@@ -157,7 +157,7 @@ servers regardless of whether you shut down your local host.
 Customers of Docker Enterprise Edition run a stable, commercially-supported
 version of Docker Engine, and as an add-on they get our first-class management
 software, Docker Datacenter. You can manage every aspect of your application
-via UI using Universal Control Plane, run a private image registry with Docker
+through the interface using Universal Control Plane, run a private image registry with Docker
 Trusted Registry, integrate with your LDAP provider, sign production images with
 Docker Content Trust, and many other features.
 
