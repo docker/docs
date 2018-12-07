@@ -20,9 +20,7 @@ by running your own [private registry](#docker-registry).
 centralizes information about organizations, user accounts, and images. It
 includes a web UI, authentication and authorization using organizations, CLI and
 API access using commands such as `docker login`, `docker pull`, and `docker
-push`, comments, stars, search, and more. Docker Hub is also integrated into
-[Docker Store](/docker-store/), which is a marketplace that allows you to buy
-and sell entitlements to non-free images.
+push`, comments, stars, search, and more.
 
 ## Docker Registry
 

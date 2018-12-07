@@ -39,7 +39,7 @@ To sign images in a way that UCP trusts them, you need to:
 * Initialize trust metadata for the repository
 * Delegate signing to the keys in your UCP client bundle
 
-In this example we're going to pull an NGINX image from Docker Store,
+In this example we're going to pull an NGINX image from Docker Hub,
 re-tag it as `dtr.example.org/dev/nginx:1`, push the image to DTR and sign it
 in a way that is trusted by UCP. If you manage multiple repositories, you
 need to do the same procedure for every one of them.
@@ -56,11 +56,11 @@ the easiest way to do it is by pushing an image to that repository. Navigate to
 the **DTR web UI**, and create a repository for your image.
 In this example we've created the `dev/nginx` repository.
 
-From the Docker CLI client, pull an NGINX image from Docker Store,
+From the Docker CLI client, pull an NGINX image from Docker Hub,
 re-tag it, sign and push it to DTR.
 
 ```bash
-# Pull NGINX from Docker Store
+# Pull NGINX from Docker Hub
 docker pull nginx:latest
 
 # Re-tag NGINX

@@ -9,7 +9,7 @@ collection that contains one service.
 
 1. Create an organization and a team.
 2. Create a collection for the view-only service.
-3. Create a grant to manage user access to the collection. 
+3. Create a grant to manage user access to the collection.
 
 ![](../images/view-only-access-diagram.svg)
 
@@ -22,9 +22,9 @@ who isn't an administrator to the team.
 1.  Log in to UCP as an administrator.
 2.  Navigate to the **Organizations & Teams** page and click
     **Create Organization**. Name the new organization "engineering" and
-    click **Create**. 
+    click **Create**.
 3.  Click **Create Team**, name the new team "Dev", and click **Create**.      
-3.  Add a non-admin user to the Dev team. 
+3.  Add a non-admin user to the Dev team.
 
 ## Create a collection for the service
 
@@ -36,7 +36,7 @@ who isn't an administrator to the team.
 
 ![](../images/deploy-view-only-service-1.png)
 
-The `/Shared/View-only services` collection is ready to use for access 
+The `/Shared/View-only services` collection is ready to use for access
 control.
 
 ## Deploy a service
@@ -48,7 +48,7 @@ collection.
 1.  Navigate to the **Services** page and create a new service, named
     "WordPress".
 2.  In the **Image** textbox, enter "wordpress:latest". This identifies the
-    most recent WordPress image in the Docker Store.
+    most recent WordPress image in Docker Hub.
 3.  In the left pane, click **Collection**. The **Swarm** collection appears.
 4.  Click **View children** to list all of the collections. In **Shared**,
     Click **View children**, find the **View-only services** collection and
@@ -71,7 +71,7 @@ Currently, users who aren't administrators can't access the
     and click **Select Collection**.
 3.  Click **Roles**, and in the dropdown, select **View Only**.
 4.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
-    In the dropdown, select **engineering**. 
+    In the dropdown, select **engineering**.
 5.  Click **Create** to grant permissions to the organization.
 
 ![](../images/deploy-view-only-service-4.png)
@@ -80,17 +80,17 @@ Everything is in place to show role-based access control in action.
 
 ## Verify the user's permissions
 
-Users in the `engineering` organization have view-only access to the 
+Users in the `engineering` organization have view-only access to the
 `/Shared/View-only services` collection. You can confirm this by logging in
 as a non-admin user in the organization and trying to delete the service.
 
-1.  Log in as the user who you assigned to the Dev team. 
+1.  Log in as the user who you assigned to the Dev team.
 2.  Navigate to the **Services** page and click **WordPress**.
 3.  In the details pane, confirm that the service's collection is
     **/Shared/View-only services**.
 
     ![](../images/deploy-view-only-service-2.png)
-    
+
 4.  Click the checkbox next to the **WordPress** service, click **Actions**,
     and select **Remove**. You get an error message, because the user
     doesn't have `Service Delete` access to the collection.
