@@ -95,7 +95,7 @@ We aim to have product listings published with the concept of versions, allowing
 *Description* maps to *Product description* in the publish process.
 *License* maps to *Support Link* in the publish process.
 *Documentation* maps to *Documentation Link* in the publish process.
-*Feedback* is provided via customer reviews. https://hub.docker.com/images/node?tab=reviews is an example.
+*Feedback* is provided through customer reviews. https://hub.docker.com/images/node?tab=reviews is an example.
 *Tier Description* is what you see once users get entitled to a plan. For instance, in https://hub.docker.com/images/openmaptiles-openstreetmap-maps/plans/f1fc533a-76f0-493a-80a1-4e0a2b38a563?tab=instructions `A detailed street map of any place on a planet. Evaluation and non-production use. Production use license available separately` is what this publisher entered in the Tier description
 *Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content that's a certification candidate).
 
@@ -115,7 +115,7 @@ in the readme).
 
 ### Regarding source repo tags: it says not to use “latest”. However, if we want users to be able to download the images without specifying a tag, then presumably an image tagged “latest” is required. So how do we go about that?
 
-You can not submit "latest" tags via the certification/hub publish workflow.
+You can not submit "latest" tags through the certification/hub publish workflow.
 The reason we do this is so that users are aware of the exact version they
 download. To make the user experience easy we have a copy widget that users can
 use to copy the pull command and paste in their command line. Here is a
@@ -147,7 +147,7 @@ We provide the following licensing option to customers:
 * Bring your own License or BYOL.
 
 The expectation is that the publisher would take care of License Keys within the
-container. The License Key itself can be presented to the customer via Docker
+container. The License Key itself can be presented to the customer through Docker
 Hub. We expect the Publisher to build short circuits into the container, so
 the container stops running once the License Key expires. Once a customer
 cancels, or if the customer subscription expires - the customer cannot
@@ -158,7 +158,7 @@ from Docker Hub. The container may continue running. If you have a licensing
 scheme built into the container, the licensing scheme can be a forcing function
 and stop the container. (_We do not build anything into the container, it is up to the publisher_).
 
-### How does a customer transition from a Trial to a Paid subscription? Question assumes these are two separate pulls from Docker Hub, or can they just drop in a license via Docker Hub?
+### How does a customer transition from a Trial to a Paid subscription? Question assumes these are two separate pulls from Docker Hub, or can they just drop in a license through Docker Hub?
 
 Publisher can provide two different tokens or let customers use the same token
 and internally map the customer to a paid plan vs a free trial.
@@ -176,7 +176,7 @@ Agreement should cover specifics.
 
 ### How does Docker handle Export control? Can individual countries be specified if differing from Docker's list of embargoed countries?
 
-We provide export control via blacklisting several countries, IPs and users
+We provide export control through blacklisting several countries, IPs and users
 based on the national export compliance database. Any export control we do is
 across all products, we do not selectively blacklist versions and products for
 specific groups. Send us an email at publisher-support if you have questions
