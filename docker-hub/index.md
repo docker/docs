@@ -78,8 +78,8 @@ redirect_from:
 [Docker Hub](https://hub.docker.com) is a service provided by Docker for finding and sharing container images with your team. It provides the following major features:
 * [Repositories](/docker-hub/repos.md): Push and pull container images.
 * [Teams & Organizations](/docker-hub/orgs.md): Manage access to private repositories of container images.
-* [Official Images](/docker-hub/official_images.md): Pull & use high-quality container images provided by Docker.
-* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull & use high-quality container
+* [Official Images](/docker-hub/official_images.md): Pull and use high-quality container images provided by Docker.
+* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull and use high-quality container
   images provided by external vendors. Certified images also include support and guarantee
   compatibility with Docker Enterprise.
 * [Builds](/docker-hub/builds.md): Automatically build container images from GitHub and Bitbucket and push them to Docker Hub
@@ -142,6 +142,6 @@ Congratulations! You've successfully:
 ### Next Steps
 
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
-- Automatically build container images from code via [Builds](builds/index.md).
+- Automatically build container images from code through [Builds](builds/index.md).
 - [Explore](https://hub.docker.com/explore) Official & Publisher Images
 - [Upgrade your plan](upgrade.md) to push additional private Docker images to Docker Hub
