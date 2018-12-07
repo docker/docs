@@ -20,6 +20,13 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 2.0.0.0-mac81 2018-12-07
+
+[Download](https://download.docker.com/mac/stable/29211/Docker.dmg)
+
+* Upgrades
+  - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
+
 ### Docker Community Edition 2.0.0.0-mac78 2018-11-19
 
 [Download](https://download.docker.com/mac/stable/28905/Docker.dmg)
