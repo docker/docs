@@ -7,7 +7,7 @@ title: Repositories
 Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-Docker images are pushed to Docker Hub via the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) command. A single Docker Hub repository can hold many Docker images (stored as **tags**).
+Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) command. A single Docker Hub repository can hold many Docker images (stored as **tags**).
 
 ## Creating Repositories
 
@@ -32,7 +32,7 @@ Hub based repository.
 
 To push a repository to the Docker Hub, you must
 name your local image using your Docker Hub username, and the
-repository name that you created via Docker Hub on the web.
+repository name that you created through Docker Hub on the web.
 
 You can add multiple images to a repository, by adding a specific `:<tag>` to
 it (for example `docs/base:testing`). If it's not specified, the tag defaults to
@@ -74,7 +74,7 @@ from it using Docker.
 > **Note**: You need to be signed in and have access to work with a
 > private repository.
 
-> **Note**: Private repositories are not currently available to search via the
+> **Note**: Private repositories are not currently available to search through the
 top-level search or `docker search`
 
 You can designate collaborators and manage their access to a private
@@ -107,7 +107,7 @@ of the associated image.
 ![View Repo Tags](images/repos-tags-view.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
-images. This is also the disk space used by the contents of the Tar file created
+images. This is also the disk space used by the contents of the .tar file created
 when you `docker save` an image.
 
 To edit tags, click on Manage Repository or find your repository under *Repositories*:
@@ -116,7 +116,7 @@ To edit tags, click on Manage Repository or find your repository under *Reposito
 
 ## Searching for Repositories
 
-You can search the [Docker Hub](https://hub.docker.com) registry via its search
+You can search the [Docker Hub](https://hub.docker.com) registry through its search
 interface or by using the command line interface. Searching can find images by
 image name, user name, or description:
 
