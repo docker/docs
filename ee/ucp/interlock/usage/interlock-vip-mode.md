@@ -1,8 +1,8 @@
 ## VIP Mode
-VIP mode is an alternative mode of routing in which Interlock uses the Swarm service VIP as the backend IP instead of the container IP. VIP mode can be useful to reduce the amount of churn in the proxu config which can be advantageous in very dynamic environments. It optimizes for less updates to the proxy as a tradeoff for a limited feature set. Most kinds of application updates do not require a proxy config in VIP mode. 
+VIP mode is an alternative mode of routing in which Interlock uses the Swarm service VIP as the backend IP instead of the container IPs. VIP mode can be useful to reduce the amount of churn in the proxy configuration, which can be advantageous in very dynamic environments. It optimizes for fewer updates to the proxy as a tradeoff for a limited feature set. Most kinds of application updates do not require a proxy configuration in VIP mode. 
 
 #### Default Routing Mode
-In the default routing mode Interlock uses the backend container IPs to route traffic from the proxy to the container. This allows for per-container routing functionality like sticky sessions.
+In the default routing mode, Interlock uses the backend container IPs to route traffic from the proxy to the container. This allows for per-container routing functionality like sticky sessions.
 
 
 ![default mode](../../images/interlock-default-mode.svg)
@@ -16,13 +16,13 @@ In VIP routing mode Interlock uses the service VIP (a persistent endpoint that e
 
 While VIP mode guarantees a more stable endpoint despite application churn, it does not support some features which require routing directly to the container IPs to function. The following Interlock functionality is **not** supported in VIP mode:
 
-- Sticky Sessions
-- Web Sockets
-- Canary Deployments
+- Sticky sessions
+- Web sockets
+- Canary deployments
 
 #### Usage
 
-VIP mode can be used on a per-service basis which means that some apps can be deployed in VIP mode while others in default. The following label must be applied to services that use Interlock VIP mode:
+VIP mode can be used on a per-service basis, which means that some applications can be deployed in VIP mode, while others are deployed in default. The following label must be applied to services that use Interlock VIP mode:
 
 ```
 com.docker.lb.backend_mode=vip
@@ -30,7 +30,7 @@ com.docker.lb.backend_mode=vip
 
 If the label is `default` or does not exist then Interlock will use the default routing mode.
 
-In VIP mode the following non-exhaustive list of application changes will not require any proxy reconfig:
+In VIP mode the following non-exhaustive list of application changes will not require any proxy reconfiguration:
 
 - Service replica increase/decrease
 - New image deployment
@@ -39,7 +39,7 @@ In VIP mode the following non-exhaustive list of application changes will not re
 - Add/Remove environment variables
 - ...
 
-The following two updates still require a proxy reconfig (because these actions will create or destroy a service VIP):
+The following two updates still require a proxy reconfiguration (because these actions will create or destroy a service VIP):
 
 - Add/Remove a network to the service
 - Deployment/Deletion of a service
