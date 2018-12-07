@@ -30,7 +30,7 @@ For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for Cen
 
 To install Docker EE, you will need the URL of the Docker EE repository associated with your trial or subscription:
 
-1.  Go to [https://store.docker.com/my-content](https://store.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
+1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
 2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
 3.  Copy the URL from **Copy and paste this URL to download your Edition** and save it for later use.
 

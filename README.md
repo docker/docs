@@ -174,7 +174,7 @@ You have two options:
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+[Docker Hub](https://hub.docker.com/r/docs/docker.github.io/tags/).
 The following examples use the `latest` tag:
 
 - Run a single container:
@@ -318,7 +318,7 @@ still optimizes the bandwidth during browsing).
 
 ## Building archives and the live published docs
 
-All the images described below are automatically built using Docker Cloud. To
+All the images described below are automatically built using Docker Hub. To
 build the site manually, from scratch, including all utility and archive images,
 see the [README in the publish-tools
 branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
