@@ -25,7 +25,7 @@ Dockerfile knowledge with the [Dockerfile tutorial](/reference/userguide/level1)
 
 ## Usage
 
-To [*build*](/reference/reference/commandline/cli/#build) an image from a source repository,
+To [*build*](/docker/reference/commandline/cli/#build) an image from a source repository,
 create a description file called `Dockerfile` at the root of your repository.
 This file will describe the steps to assemble the image.
 
@@ -100,7 +100,7 @@ be UPPERCASE in order to distinguish them from arguments more easily.
 
 Docker runs the instructions in a `Dockerfile` in order. **The
 first instruction must be \`FROM\`** in order to specify the [*Base
-Image*](/reference/terms/image/#base-image) from which you are building.
+Image*](/docker/reference/glossary/#base-image) from which you are building.
 
 Docker will treat lines that *begin* with `#` as a
 comment. A `#` marker anywhere else in the line will
@@ -251,7 +251,7 @@ Or
 
     FROM <image>@<digest>
 
-The `FROM` instruction sets the [*Base Image*](/reference/terms/image/#base-image)
+The `FROM` instruction sets the [*Base Image*](/docker/reference/glossary/#base-image)
 for subsequent instructions. As such, a valid `Dockerfile` must have `FROM` as
 its first instruction. The image can be any valid image – it is especially easy
 to start by **pulling an image** from the [*Public Repositories*](
@@ -443,13 +443,13 @@ The `EXPOSE` instructions informs Docker that the container will listen on the
 specified network ports at runtime. Docker uses this information to interconnect
 containers using links (see the [Docker User
 Guide](/reference/userguide/dockerlinks)) and to determine which ports to expose to the
-host when [using the -P flag](/reference/reference/run/#expose-incoming-ports).
+host when [using the -P flag](/docker/reference/run/#expose-incoming-ports).
 
 > **Note**:
 > `EXPOSE` doesn't define which ports can be exposed to the host or make ports
 > accessible from the host by default. To expose ports to the host, at runtime,
 > [use the `-p` flag](/reference/userguide/dockerlinks) or
-> [the -P flag](/reference/reference/run/#expose-incoming-ports).
+> [the -P flag](/docker/reference/run/#expose-incoming-ports).
 
 ## ENV
 

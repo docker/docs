@@ -1439,7 +1439,7 @@ of all containers.</p>
 <p>The <code>docker run</code> command can be used in combination with <code>docker commit</code> to
 <a href="#commit-an-existing-container"><em>change the command that a container runs</em></a>.</p>
 
-<p>See the <a href="/reference/reference/userguide/dockerlinks/">Docker User Guide</a> for more detailed
+<p>See the <a href="/userguide/dockerlinks/">Docker User Guide</a> for more detailed
 information about the <code>--expose</code>, <code>-p</code>, <code>-P</code> and <code>--link</code> parameters,
 and linking containers.</p>
 
@@ -1531,14 +1531,14 @@ manipulate the host&rsquo;s Docker daemon.</p>
 </code></pre>
 
 <p>This binds port <code>8080</code> of the container to port <code>80</code> on <code>127.0.0.1</code> of
-the host machine. The <a href="/reference/reference/userguide/dockerlinks/">Docker User Guide</a>
+the host machine. The <a href="/userguide/dockerlinks/">Docker User Guide</a>
 explains in detail how to manipulate ports in Docker.</p>
 
 <pre><code>$ docker run --expose 80 ubuntu bash
 </code></pre>
 
 <p>This exposes port <code>80</code> of the container for use within a link without
-publishing the port to the host system&rsquo;s interfaces. The <a href="/reference/reference/userguide/dockerlinks">Docker User
+publishing the port to the host system&rsquo;s interfaces. The <a href="/userguide/dockerlinks">Docker User
 Guide</a> explains in detail how to manipulate
 ports in Docker.</p>
 
@@ -1624,7 +1624,7 @@ com.example.label3
 
 <p>You can load multiple label-files by supplying multiple  <code>--label-file</code> flags.</p>
 
-<p>For additional information on working with labels, see <a href="/reference/reference/userguide/labels-custom-metadata/"><em>Labels - custom
+<p>For additional information on working with labels, see <a href="/userguide/labels-custom-metadata/"><em>Labels - custom
 metadata in Docker</em></a> in the Docker User
 Guide.</p>
 
@@ -1816,7 +1816,7 @@ Docker supports the following restart policies:</p>
 so that if the container exits, Docker will restart it.</p>
 
 <p>More detailed information on restart policies can be found in the
-<a href="/reference/reference/reference/run/#restart-policies-restart">Restart Policies (&ndash;restart)</a>
+<a href="/docker/reference/run/#restart-policies-restart">Restart Policies (&ndash;restart)</a>
 section of the Docker run reference page.</p>
 
 <h2 id="adding-entries-to-a-container-hosts-file">Adding entries to a container hosts file</h2>
