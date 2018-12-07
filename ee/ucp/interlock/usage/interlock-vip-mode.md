@@ -5,14 +5,14 @@ VIP mode is an alternative mode of routing in which Interlock uses the Swarm ser
 In the default routing mode Interlock uses the backend container IPs to route traffic from the proxy to the container. This allows for per-container routing functionality like sticky sessions.
 
 
-![default mode](../../../images/interlock-default-mode.svg)
+![default mode](../../images/interlock-default-mode.svg)
 
 #### VIP Routing Mode
 In VIP routing mode Interlock uses the service VIP (a persistent endpoint that exists from service creation to service deletion) for the proxy backend. 
 
 
 
-![default mode](../../../images/interlock-vip-mode.svg)
+![default mode](../../images/interlock-vip-mode.svg)
 
 While VIP mode guarantees a more stable endpoint despite application churn, it does not support some features which require routing directly to the container IPs to function. The following Interlock functionality is **not** supported in VIP mode:
 
