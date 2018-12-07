@@ -70,7 +70,7 @@ docker login {{ domain }}
 docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 ```
 
-On the web interface, navigate to the **Tags** tab on the repository page to confirm that the tag wassuccessfully pushed.
+On the web interface, navigate to the **Tags** tab on the repository page to confirm that the tag was successfully pushed.
 
 ![](../../images/pull-push-images-3.png){: .with-border}
 
