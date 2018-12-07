@@ -42,7 +42,7 @@ Official Image.
 ## When to use Official Images
 
 New Docker users are encouraged to use the Official Images in their
-projects. These repositories have clear documentation, promote best practices,
+projects. These images have clear documentation, promote best practices,
 and are designed for the most common use cases. Advanced users are encouraged to
 review the Official Images as part of their `Dockerfile` learning process.
 
@@ -101,12 +101,12 @@ requirements are documented in the following GitHub repositories:
 
 The Official Images team, with help from community contributors, formally
 review each proposal and provide feedback to the author. This initial review
-process may require a bit of back and forth before the proposal is accepted.
+process may require a bit of back-and-forth before the proposal is accepted.
 
 There are also subjective considerations during the review process. These
 subjective concerns boil down to the basic question: "is this image generally
 useful?" For example, the [python](https://hub.docker.com/_/python/)
-Official Image is "generally useful" to the large Python developer
+Official Image is "generally useful" to the larger Python developer
 community, whereas an obscure text adventure game written in Python last week is
 not.
 
