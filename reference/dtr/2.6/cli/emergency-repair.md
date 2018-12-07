@@ -45,7 +45,7 @@ DTR replicas for high availability.
 | `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica. To add, remove or modify DTR, you must connect to an existing healthy replica's database. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--overlay-subnet` | $DTR_OVERLAY_SUBNET | The subnet used by the dtr-ol overlay network. Example: `10.0.0.0/24`. For high-availability, DTR creates an overlay network between UCP nodes. This flag allows you to choose the subnet for that network. Make sure the subnet you choose is not used on any machine where DTR replicas are deployed. |
-| `--prune` | $PRUNE | Delete the data volumes of all unhealthy replicas. With this option, the volume of the DTR replica you`re restoring is preserved but the volumes for all other replicas are deleted. This has the same result as completely uninstalling DTR from those replicas. |
+| `--prune` | $PRUNE | Delete the data volumes of all unhealthy replicas. With this option, the volume of the DTR replica you're restoring is preserved but the volumes for all other replicas are deleted. This has the same result as completely uninstalling DTR from those replicas. |
 | `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP. Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use `--ucp-ca "$(cat ca.pem)"`. |
 | `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP. The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to MITM (man-in-the-middle) attacks. For production deployments, use `--ucp-ca "$(cat ca.pem)"` instead. |
 | `--ucp-password` | $UCP_PASSWORD | The UCP administrator password. |
