@@ -51,7 +51,7 @@ with the new Docker Hub.
 **Q: What happens to automated builds I created in the old Docker Hub?**
 
 A: They are now Classic Automated Builds. There are no functional differences with the old automated builds and everything 
-(build triggers, existing build rules etc) should continue to work seamlessly.
+(build triggers, existing build rules) should continue to work seamlessly.
 
 **Q: Is it possible to convert an existing Classic Automated Build?**
 
