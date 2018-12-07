@@ -129,7 +129,7 @@ EOF
 ```
 docker build -t foo https://github.com/thajeztah/pgadmin4-docker.git -f-<<EOF
 FROM busybox
-COPY LICENSE config_local.py /usr/local/lib/python2.7/site-packages/pgadmin4/
+COPY LICENSE config_distro.py /usr/local/lib/python2.7/site-packages/pgadmin4/
 EOF
 ```
 
