@@ -102,7 +102,7 @@ repositories using the `docker push` command.
 
     ![Home page](images/home-page.png)
 
-    Within GitHub, a Docker Hub Webhook appears in your repositories Settings > Webhooks page.
+    Within GitHub, a Docker Hub webhook appears in your repositories Settings > Webhooks page.
 
     ![GitHub](images/github-webhook.png)
 
