@@ -4,27 +4,27 @@ keywords: Docker, webhookds, hub, builds
 title: Docker Hub Webhooks
 ---
 
-You can use Webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.
+You can use webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.
 
-Configure Webhooks via the "Webhooks" tab on your Docker Hub repository:
+Configure webhooks through the "Webhooks" tab on your Docker Hub repository:
 
 ![Webhooks Page](images/webhooks-empty.png)
 
 ### Creating Webhooks
 
-To create a Webhook, visit the Webhooks tab for your repository. Then:
-1. Provide a name for the Webhooks
-2. Provide a destination Webhook URL. This is where webhook POST requests will be delivered:
+To create a webhook, visit the webhooks tab for your repository. Then:
+1. Provide a name for the webhooks
+2. Provide a destination webhook URL. This is where webhook POST requests will be delivered:
 
 ![Webhooks Create](images/webhooks-create.png)
 
 ### Viewing Webhook Delivery History
 
-You can view Webhook Delivery History by clicking on the submenu of the Webhook and then clicking "View History"
+You can view Webhook Delivery History by clicking on the submenu of the webhook and then clicking "View History"
 
 ![Webhooks View History](images/webhooks-submenu.png)
 
-You can then view the delivery history, and wether delivering the POST request was successful or failed:
+You can then view the delivery history, and whether delivering the POST request was successful or failed:
 
 ![Webhooks History](images/webhooks-history.png)
 
@@ -65,7 +65,7 @@ Docker Hub Webhook payloads have the following payload JSON format:
 }
 ```
 
-### Validating a Webhook callback
+### Validating a webhook callback
 
 To validate a callback in a webhook chain, you need to
 
