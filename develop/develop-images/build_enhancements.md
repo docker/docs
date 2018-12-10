@@ -156,9 +156,8 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 ## Using SSH to access private data in builds
 
 > **Acknowledgment**:
-> [Tonis Tiigi](https://medium.com/@tonistiigi) is granting Docker permission to use his blog post
-> [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
-> as the basis of the content below.
+> Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
+> for more information and examples.
 
 The `docker build` has a `--ssh` option to allow the Docker Engine to forward SSH agent connections. For more information 
 on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).
