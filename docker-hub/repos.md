@@ -41,7 +41,7 @@ it (for example `docs/base:testing`). If it's not specified, the tag defaults to
 You can name your local images either when you build it, using
 `docker build -t <hub-user>/<repo-name>[:<tag>]`,
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
-or by using `docker commit <exiting-container> <hub-user>/<repo-name>[:<tag>]` to commit
+or by using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]` to commit
 changes.
 
 Now you can push this repository to the registry designated by its name or tag.

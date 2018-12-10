@@ -18,6 +18,14 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-mac82 2018-12-07
+
+[Download](https://download.docker.com/mac/edge/29268/Docker.dmg)
+
+* Upgrades
+  - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
+  - [Docker Machine 0.16.0](https://github.com/docker/machine/releases/tag/v0.16.0)
+
 ### Docker Community Edition 2.0.0.0-mac77 2018-11-14
 
 [Download](https://download.docker.com/mac/edge/28700/Docker.dmg)

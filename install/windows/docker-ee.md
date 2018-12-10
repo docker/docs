@@ -198,6 +198,37 @@ Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 1
 ```
 The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
 
+## Uninstall Docker EE
+
+ Use the following commands to completely remove the Docker Engine - Enterprise from a Windows Server:
+
+1. Leave any active Docker Swarm
+     ```PowerShell
+    docker swarm leave --force
+    ```
+    
+1. Remove all running and stopped containers
+    
+    ```PowerShell
+    docker rm -f $(docker ps --all --quiet)
+    ```
+    
+1. Prune container data
+     ```PowerShell
+    docker system prune --all --volumes
+    ```
+    
+1. Uninstall Docker PowerShell Package and Module
+     ```PowerShell
+    Uninstall-Package -Name docker -ProviderName DockerMsftProvider
+    Uninstall-Module -Name DockerMsftProvider
+    ```
+    
+1. Clean up Windows Networking and file system
+     ```PowerShell
+    Get-HNSNetwork | Remove-HNSNetwork
+    Remove-Item -Path "C:\ProgramData\Docker" -Recurse -Force
+    ```
 
 ## Preparing a Docker EE Engine for use with UCP
 
