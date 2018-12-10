@@ -36,6 +36,12 @@ There may be at most a few seconds of interruption during the upgrade of a
 DTR cluster. Schedule the upgrade to take place outside of peak hours
 to avoid any business impacts.
 
+## 2.5 to 2.6 upgrade
+
+> Upgrade Best Practices
+>
+> There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. See [Cluster Upgrade Best Practices](/ee/upgrade.md#cluster-upgrade-best-practices) for more details. Additionally, to ensure high availability during the DTR upgrade, you can also drain the DTR replicas and move their workloads to updated workers. To do this, you can join new workers as DTR replicas to your existing cluster and then remove the old replicas. See [docker/dtr join](/reference/dtr/2.6/cli/join) and [docker/dtr remove](/reference/dtr/2.6/cli/remove) for command options and details.
+
 ## Minor upgrade
 
 Before starting your upgrade, make sure that:
@@ -80,16 +86,11 @@ one replica at a time. It will also perform certain data migrations. If anything
 fails or the upgrade is interrupted for any reason, you can rerun the upgrade
 command and it will resume from where it left off.
 
-## Patch upgrade
+#### Upgrade DTR Caches
 
-A patch upgrade changes only the DTR containers and is always safer than a minor version
-upgrade. The command is the same as for a minor upgrade.
+If you have previously [deployed a DTR cache](/ee/dtr/admin/configure/deploy-caches/simple/), make sure to run the upgrade command on the DTR cache nodes to keep them in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
 
-## 2.5 to 2.6 upgrade
-
-> Upgrade Best Practices
->
-> There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. See [Cluster Upgrade Best Practices](/ee/upgrade.md#cluster-upgrade-best-practices) for more details. Additionally, to ensure high availability during the DTR upgrade, you can also drain the DTR replicas and move their workloads to updated workers. To do this, you can join new workers as DTR replicas to your existing cluster and then remove the old replicas. See [docker/dtr join](/reference/dtr/2.6/cli/join) and [docker/dtr remove](/reference/dtr/2.6/cli/remove) for command options and details.
+#### Metadata Store Migration
 
 When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This involves migrating the blob links for your images which is necessary for online garbage collection. With `2.6`, you can log in to the DTR web interface and navigate to **System > Job Logs** to check the status of the `metadatastoremigration` job. See [Audit Jobs via the Web Interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/) for more details.
 
@@ -108,6 +109,11 @@ curl https://<dtr-external-url>/api/v0/jobs -X POST \
 ```
 Alternatively, select **API** from the bottom left navigation pane of the DTR web interface and use the Swagger UI to send your API request.
 
+## Patch upgrade
+
+A patch upgrade changes only the DTR containers and is always safer than a minor version
+upgrade. The command is the same as for a minor upgrade.
+
 ## Download the vulnerability database
 
 After upgrading DTR, you need to redownload the vulnerability database.
@@ -116,4 +122,4 @@ After upgrading DTR, you need to redownload the vulnerability database.
 ## Where to go next
 
 - [Release notes](../release-notes)
-- [Garbage collection in v2.5](../../../v18.03/ee/dtr/admin/configure/garbage-collection)
+- [Garbage collection in v2.5](/datacenter/dtr/2.5/guides/admin/configure/garbage-collection/)
