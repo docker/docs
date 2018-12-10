@@ -372,3 +372,13 @@ input:checked+.slider:before {
     float: left;
     margin: 2px 0 0;
 }
+
+/*
+*
+* CURSOR POINTER FOR COLLAPSED li
+*
+*/
+.collapsed
+{
+    cursor:pointer;   
+}
