@@ -523,7 +523,7 @@ toc_max: 2
   - Update Boot2Docker cache in PreCreateCheck phase
 - OpenStack
  - Filter floating IPs by tenant ID
-- Virtualbox
+- VirtualBox
   - Reject duplicate hostonlyifs Name/IP with clear message
   - Detect when hostonlyif can't be created. Point to known working version of VirtualBox
   - Don't create the VM if no hardware virtualization is available and add a flag to force create
@@ -581,7 +581,7 @@ Non-core driver plugins should still work as intended (in externally distributed
 - Generic
 	- Support password protected ssh keys though ssh-agent
 	- Support DNS names
-- Virtualbox
+- VirtualBox
 	- Show a warning if virtualbox is too old
 	- Recognize yet another Hardware Virtualization issue pattern
 	- Fix Hardware Virtualization on Linux/AMD

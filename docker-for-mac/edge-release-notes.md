@@ -1250,7 +1250,7 @@ events or unexpected unmounts.
 * osxfs: fixed an issue causing `inotify` creation events to fail
 * osxfs: increased the `fs.inotify.max_user_watches` limit in Moby to 524288
 * The UI shows documentation link for sharing volumes
-* Clearer error message when running with outdated Virtualbox version
+* Clearer error message when running with outdated VirtualBox version
 * Added link to sources for qemu-img
 
 **Known issues**
@@ -1670,7 +1670,7 @@ lead to `Docker.app` not starting on reboot
 - Fixed RAM amount error message
 - Fixed wording of CPU error dialog
 - Removed status from Preferences
-- Check for incompatible versions of Virtualbox
+- Check for incompatible versions of VirtualBox
 
 ### Beta 4 Release (2016-03-22 1.10.3-beta4)
 
