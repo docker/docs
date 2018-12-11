@@ -13,7 +13,7 @@ repository to create a continuous integration testing service.
 
 Enabling `Autotest` builds an image for testing purposes, but does **not**
 automatically push the built image to the Docker repository. If you want to push
-built images to your Docker Hub repository, enable [Automated Builds](automated-build.md).
+built images to your Docker Hub repository, enable [Automated Builds](index.md).
 
 ## Set up automated test files
 
@@ -55,7 +55,7 @@ in the `test.yml` files.
 
 To enable testing on a source code repository, you must first create an
 associated build-repository in Docker Hub.  Your `Autotest` settings are
-configured on the same page as [automated builds](automated-build.md), however
+configured on the same page as [automated builds](index.md), however
 you do not need to enable Autobuilds to use `Autotest`. Autobuild is enabled per
 branch or tag, and you do not need to enable it at all.
 
@@ -70,7 +70,7 @@ Docker repository, regardless of the Autotest settings.
 
 4. Click **Configure automated builds**.
 
-5. Configure the automated build settings as explained in [Automated Builds](automated-build.md).
+5. Configure the automated build settings as explained in [Automated Builds](index.md).
 
     At minimum you must configure:
 

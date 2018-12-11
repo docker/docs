@@ -71,8 +71,8 @@ The following hooks are available:
 * `hooks/post_build`
 * `hooks/pre_test`
 * `hooks/post_test`
-* `hooks/pre_push` (only used when executing a build rule or [automated build](automated-build.md) )
-* `hooks/post_push` (only used when executing a build rule or [automated build](automated-build.md) )
+* `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
+* `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
 
 ### Build hook examples
 
