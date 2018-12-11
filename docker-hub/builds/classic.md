@@ -6,11 +6,11 @@ title: Classic Automated Builds
 
 With the launch of the new Docker Hub, we are introducing an improved Automated Build experience.
 
-Automated Builds created using an older version of Docker Hub are now labelled "Classic". 
+Automated Builds created using an older version of Docker Hub are now labelled "Classic".
 If you were using Docker Cloud to manage builds, your builds are already the latest version of Automated Builds.
 
 All automated builds created going forward will get the new experience. If you are creating a new
-Automated Build for the first time, see [docs](index.md#configure-automated-build-settings).
+Automated Build for the first time, see [docs](/docker-hub/builds/#configure-automated-build-settings).
 
 In the coming months, we will gradually convert Classic Automated Builds into new Automated Builds. This should
 be a seamless process for most users.
@@ -26,7 +26,7 @@ Repository with Classic Automated Build:
 
  Build settings can be configured similarly to those on the old Docker Hub.
 
-If you have previously created an automated build in both the old Docker Hub and Docker Cloud, you can switch between 
+If you have previously created an automated build in both the old Docker Hub and Docker Cloud, you can switch between
 Classic and new Automated Builds.
 
 New Automated Build is displayed by default. You can switch to Classic Automated Build by clicking on this link at the top
@@ -46,11 +46,11 @@ Likewise, you can switch back to new Automated Build by clicking on this link at
 A: The new Docker Hub uses a different permissions model. [Linking is only a few clicks by going to account settings](link-source.md).
 with the new Docker Hub.
 
-  > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
+  > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](/docker-hub/builds/#service-users-for-team-autobuilds) for the team before linking the account as described below.
 
 **Q: What happens to automated builds I created in the old Docker Hub?**
 
-A: They are now Classic Automated Builds. There are no functional differences with the old automated builds and everything 
+A: They are now Classic Automated Builds. There are no functional differences with the old automated builds and everything
 (build triggers, existing build rules) should continue to work seamlessly.
 
 **Q: Is it possible to convert an existing Classic Automated Build?**
