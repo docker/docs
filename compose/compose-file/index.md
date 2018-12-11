@@ -1727,6 +1727,7 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
+- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```none
 version: "3.2"

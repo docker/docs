@@ -82,7 +82,7 @@ pushes the image manifest and all the layers on top of the Windows base layers.
 The Windows base layers are not pushed to DTR. This means that:
 
 * DTR won't be able to scan those images for vulnerabilities since DTR doesn't
-have access to the layers (the Windows base layers are scanned by Docker Store,
+have access to the layers (the Windows base layers are scanned by Docker Hub,
 however).
 * When a user pulls a Windows image from DTR, the Windows base layers are
 automatically fetched from Microsoft and the other layers are fetched from DTR.

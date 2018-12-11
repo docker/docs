@@ -4,8 +4,7 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
-redirect_from:
-- /ee/engine/release-notes/ 
+- /ee/engine/release-notes/
 - /release-notes/docker-ce/
 
 ---

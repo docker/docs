@@ -48,7 +48,7 @@ place as needed to address bug fixes during its support cycle.
 
 Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
 as packages for the supported operating systems. Docker EE binaries are
-available on the [Docker Store](https://store.docker.com/) for the supported operating systems. The
+available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.

@@ -22,7 +22,7 @@ repository URL associated with your trial or subscription. These instructions
 work for Docker EE for SLES and for Docker EE for Linux, which includes access
 to Docker EE for all Linux distributions. To get this information:
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
+- Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
   button for **Docker Enterprise Edition for SUSE Linux Enterprise Server**.
 - Copy the URL from the field labeled
@@ -180,7 +180,7 @@ from the repository.
     ```
 
     Where:
-    * `DOCKER-EE-URL` is the URL from your Docker Store subscription.
+    * `DOCKER-EE-URL` is the URL from your Docker Hub subscription.
     * `ARCHITECTURE` is `x86_64`, `s390x`, or `ppc64le`.
     * `VERSION` is `18.09` 
 

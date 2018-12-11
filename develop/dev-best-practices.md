@@ -110,9 +110,9 @@ updates.
 ## Use CI/CD for testing and deployment
 
 - When you check a change into source control or create a pull request, use
-  [Docker Cloud](/docker-cloud/builds/automated-build.md) or
+  [Docker Hub](/docker-hub/builds/automated-build.md) or
   another CI/CD pipeline to automatically build and tag a Docker image and test
-  it. Docker Cloud can also deploy tested apps straight into production.
+  it.
 
 - Take this even further with [Docker EE](/ee/index.md) by requiring
   your development, testing, and security teams to sign images before they can
