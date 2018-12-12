@@ -84,8 +84,12 @@ To deploy Prometheus on worker nodes in a cluster:
     $ kubectl label node 3a724a-1 ucp-metrics=
     node "test-3a724a-1" labeled
     ```
+    
+     > **SELinux Prometheus Deployment**
+     >
+     > If you are using SELinux, you must label your `ucp-node-certs` directories properly on your worker nodes before you move the ucp-metrics workload to them. To run ucp-metrics on a worker node, update the `ucp-node-certs` label by running `sudo chcon -R system_u:object_r:container_file_t:s0 /var/lib/docker/volumes/ucp-node-certs/_data`.
 
-4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key “ucp-metrics” and the value “”.
+4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key "ucp-metrics" and the value "".
 
     ```
     $ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
