@@ -80,14 +80,14 @@ one replica at a time. It will also perform certain data migrations. If anything
 fails or the upgrade is interrupted for any reason, you can re-run the upgrade
 command and it will resume from where it left off.
 
-#### Upgrade DTR Caches
-
-If you have previously [deployed a DTR cache](/datacenter/dtr/2.5/guides/admin/configure/deploy-caches/simple), make sure to run the upgrade command on the DTR cache nodes to keep them in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
-
 ## Patch upgrade
 
 A patch upgrade changes only the DTR containers and it's always safer than a minor
 upgrade. The command is the same as for a minor upgrade.
+
+## DTR cache upgrade
+
+If you have previously [deployed a cache](/datacenter/dtr/2.5/guides/admin/configure/deploy-caches/), make sure to [upgrade the node dedicated for your cache](/v18.03/ee/upgrade/) to keep it in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
 
 ## Download the vulnerability database
 
