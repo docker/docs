@@ -21,6 +21,27 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.2 (2018-12-13)
+
+**Authentication and Authorization**
+* SAML Single Logout is now supported in UCP.
+* Identity Provider initiated SAML Single Signon is now supported in UCP.  The admin can 
+enable this feature in Admin Settings -> SAML Settings.
+**UI**
+* Added instrumentation to all the Kubernetes resource types.
+**Bug Fixes**
+* Core
+  * Significantly reduced database load in environments with a lot of concurrent 
+  and repeated API requests by the same user. (docker/escalation#911)
+  * UCP backend will now complain when a service is created/updated if the
+   `com.docker.lb.network` label is not correctly specified. (#15015) 
+  * LDAP group member attribute is now case insensitive. (docker/escalation#917)
+* Interlock
+  * Interlock headers can now be hidden. (docker/escalation#833)
+  * (FIXME) Pending  https://github.com/docker/orca/pull/15459 docker/escalation/issues/871
+  * (FIXME) Pending docker/interlock#169. docker/interlock#206  that addresses escalation/920
+
+
 ## 3.1.1 (2018-12-04)
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
@@ -116,6 +137,22 @@ The following features are deprecated in UCP 3.1.
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
 
 # Version 3.0
+
+## 3.0.8 (2018-12-13)
+**Bug fixes**
+* Core
+  * Significantly reduced database load in environments with a lot of concurrent 
+  and repeated API requests by the same user. 
+  * Added the ability to set custom HTTP response headers to be returned by the
+   UCP Controller API Server. 
+  * UCP backend will now complain when a service is created/updated if the
+   `com.docker.lb.network` label is not correctly specified. 
+  * LDAP group member attribute is now case insensitive. 
+* Interlock
+  * Interlock headers can now be hidden. 
+  * Respect `com.docker.lb.network` labels and only attach the specified networks to the Interlock proxy. 
+  * Pending  https://github.com/docker/orca/pull/15459 
+  * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. 
 
 ## 3.0.7 (2018-12-04)
 
@@ -425,6 +462,15 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.15 (2018-12-13)
+
+**Bug fixes**
+* Core
+  * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user. 
+  * Added the ability to set custom HTTP response headers to be returned by the UCP Controller API Server. 
+* UI
+  * Fixed stack creation for non admin user when UCP uses a custom controller port. 
 
 ## Version 2.2.14 (2018-10-25)
 

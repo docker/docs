@@ -21,6 +21,15 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.1 
+
+(2018-12-13)
+### Bug Fixes
+
+* Fixed a bug where notary signing data was not being backed up properly
+* Allow a cluster to go from 2 replicas to 1 without forcing removal
+* Fixed a race condition in initialization of the scan vulnerability database
+
 ## 2.6.0 
 
 (2018-11-08)
@@ -81,6 +90,17 @@ to upgrade your installation to the latest release.
 
 
 # Version 2.5
+
+## 2.5.7 
+
+(2018-12-13)
+
+### Bug Fixes
+
+* Fixed a bug where manifest lists were being appended to existing manifests lists when pushed.
+* Updated GoRethink library to avoid potential lock contention.
+* Fixed a bug where notary signing data was not being backed up properly.
+
 
 ## 2.5.6 
 
