@@ -2,6 +2,7 @@
 description: Set up Automated builds
 keywords: automated, build, images
 redirect_from:
+- /docker-hub/builds/automated-build/
 - /docker-cloud/feature-reference/automated-build/
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
@@ -34,8 +35,8 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 
 ## Configure automated build settings
 
-> **Note**: Automated builds created with the old Docker Hub are 
-now Classic Automated Builds. [Learn more](classic.md) 
+> **Note**: Automated builds created with the old Docker Hub are
+now Classic Automated Builds. [Learn more](classic.md)
 
 You can configure repositories in Docker Hub so that they automatically
 build an image each time you push new code to your source provider. If you have
@@ -49,7 +50,7 @@ Builds can be added to existing repositories, or added when you create a reposit
 2. Click the **Builds** tab.
 
 3. If you are setting up automated builds for the first time, select
-the code repository service (GitHub or Bitbucket) where the image's source code is stored. 
+the code repository service (GitHub or Bitbucket) where the image's source code is stored.
 You might redirected to the settings page to [link](link-source.md) the code repository service.
 
     Otherwise, if you are editing the build settings for an existing automated
@@ -118,13 +119,13 @@ For each source:
 
   You can also use a regex to select which source branches or tags to build.
   To learn more, see
-  [regexes](automated-build.md#regexes-and-automated-builds).
+  [regexes](index.md#regexes-and-automated-builds).
 
 * Enter the tag to apply to Docker images built from this source.
 
   If you configured a regex to select the source, you can reference the
   capture groups and use its result as part of the tag. To learn more, see
-  [regexes](automated-build.md#regexes-and-automated-builds).
+  [regexes](index.md#regexes-and-automated-builds).
 
 * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
@@ -236,13 +237,13 @@ You can configure your automated builds so that pushes to specific branches or t
 
     You can enter a name, or use a regex to match which source branch or tag
     names to build. To learn more, see
-    [regexes](automated-build.md#regexes-and-automated-builds).
+    [regexes](index.md#regexes-and-automated-builds).
 
 4. Enter the tag to apply to Docker images built from this source.
 
     If you configured a regex to select the source, you can reference the
     capture groups and use its result as part of the tag. To learn more, see
-    [regexes](automated-build.md#regexes-and-automated-builds).
+    [regexes](index.md#regexes-and-automated-builds).
 
 5. Repeat steps 2 through 4 for each new build rule you set up.
 
@@ -321,14 +322,14 @@ and an error is logged in your build timeline.
 
 To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Hub's build system access to the repositories.
 
-> **Note**: If you are using autobuild for teams, use [the process below](automated-build.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> **Note**: If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
 
 1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access.
 
 2. Copy the private half of the keypair to your clipboard.
-3. In Docker Hub, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](automated-build.md#configure-automated-build-settings) to configure the automated build.)
+3. In Docker Hub, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](index.md#configure-automated-build-settings) to configure the automated build.)
 4. At the bottom of the screen, click the plus sign ( **+** ) next to **Build Environment variables**.
 5. Enter `SSH_PRIVATE` as the name for the new environment variable.
 6. Paste the private half of the keypair into the **Value** field.
@@ -390,7 +391,7 @@ variable to automated builds associated with the account.
 
     > **Note**: You may need to log out of your individual account on the source code provider to create the link to the service account.
 
-6. Optionally, use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](automated-build.md#build-repositories-with-linked-private-submodules).
+6. Optionally, use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](index.md#build-repositories-with-linked-private-submodules).
 
 ## What's Next?
 
@@ -408,6 +409,3 @@ integrates seamlessly with autobuild and autoredeploy.
 
 > **Note**: While the Autotest feature builds an image for testing purposes, it
 does not push the resulting image to Docker Hub.
-
-
-
