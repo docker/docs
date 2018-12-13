@@ -38,6 +38,37 @@ Likewise, you can switch back to new Automated Build by clicking on this link at
 ![Switching to new Automated Build](images/classic-vs-new-switch-to-new.png)
 
 
+
+## Adding Github web hook manually
+
+A GitHub webhook allows GitHub to notify Docker Hub when something has
+been committed to a given Git repository. 
+
+When you create a Classic Automated Build, a webhook should get automatically added to your GitHub
+repository.
+
+To add, confirm, or modify the webhook, log in to GitHub, then navigate to
+the repository. Within the repository,  select **Settings > Webhooks**.
+You must have admin privileges on the repository to view or modify
+this setting. Click **Add webhook**, and use the following settings:
+
+
+| Field | Value |
+| ------|------ |
+| Payload URL | https://registry.hub.docker.com/hooks/github |
+| Content type | application/json |
+| Which events would you like to trigger this webhook? | Just the push event |
+| Active | checked |
+
+The image below shows the **Webhooks/Add webhook** form with the above settings reflected:
+
+![github-webhook-add](images/github-webhook-add.png)
+
+If configured correctly, you'll see this in the **Webhooks** view
+![github-webhook](images/github-webhook.png)
+
+
+
 ## Frequently Asked Questions
 
 
