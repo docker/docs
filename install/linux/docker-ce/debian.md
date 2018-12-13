@@ -159,7 +159,7 @@ from the repository.
     **test** repository, add the word `edge` or `test` (or both) after the
     word `stable` in the commands below.
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+    > **Note**: The `cut -f1 -d'/' /etc/debian_version` sub-command below returns the name of your
     > Debian distribution, such as `jessie`.
 
     To also add the **edge** repository, add `edge` after `stable` on the last
@@ -176,7 +176,7 @@ from the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(cut -f1 -d'/' /etc/debian_version) \
        stable"
     ```
 
@@ -185,7 +185,7 @@ from the repository.
 
     ```bash
     $ echo "deb [arch=armhf] {{ download-url-base }} \
-         $(lsb_release -cs) stable" | \
+         $(cut -f1 -d'/' /etc/debian_version) stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
@@ -194,7 +194,7 @@ from the repository.
 
     ```bash
     $ echo "deb [arch=arm64] {{ download-url-base }} \
-         $(lsb_release -cs) stable" | \
+         $(cut -f1 -d'/' /etc/debian_version) stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
