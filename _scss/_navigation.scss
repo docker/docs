@@ -155,6 +155,12 @@
     padding: 0 20px 20px 0;
 }
 
+/* pointer for collapsed sidebar list items */
+
+.collapsed
+{
+    cursor:pointer;   
+}
 
 /*
 *
@@ -349,12 +355,6 @@ input:checked+.slider:before {
 .rating-msg {
     font: inherit !important;
     color: inherit !important;
-}
-/* pointer for collapsed sidebar list items */
-
-.collapsed
-{
-    cursor:pointer;   
 }
 
 /*
