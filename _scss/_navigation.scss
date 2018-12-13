@@ -350,6 +350,12 @@ input:checked+.slider:before {
     font: inherit !important;
     color: inherit !important;
 }
+/* pointer for collapsed sidebar list items */
+
+.collapsed
+{
+    cursor:pointer;   
+}
 
 /*
 *
@@ -373,12 +379,4 @@ input:checked+.slider:before {
     margin: 2px 0 0;
 }
 
-/*
-*
-* CURSOR POINTER FOR COLLAPSED li
-*
-*/
-.collapsed
-{
-    cursor:pointer;   
-}
+
