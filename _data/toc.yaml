@@ -2657,10 +2657,14 @@ manuals:
               section:
               - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/
                 title: Overview
-              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/tls/
-                title: Deploy caches with TLS
-              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/chaining/
-                title: Chain multiple caches
+              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/strategy/
+                title: Cache deployment strategy
+              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/simple/
+                title: Deploy a DTR cache
+              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/high-availability/
+                title: Configure caches for high availability
+              - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/configuration-reference/
+                title: Cache configuration reference
             - path: /datacenter/dtr/2.5/guides/admin/configure/garbage-collection/
               title: Garbage collection
             - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-web-proxy/
