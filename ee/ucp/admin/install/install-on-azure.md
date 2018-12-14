@@ -211,10 +211,9 @@ docker container run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <ucp-ip> \
-  --interactive \
-  --swarm-port 3376 \
   --pod-cidr <ip-address-range> \
-  --cloud-provider Azure
+  --cloud-provider Azure \
+  --interactive
 ```
 
 #### Additional Notes
