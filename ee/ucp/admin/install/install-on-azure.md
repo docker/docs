@@ -41,9 +41,9 @@ to successfully deploy Docker UCP on Azure
 
 - All UCP Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
-components could be deployed in a second Azure Resource Group.
+components could be deployed in a second Azure Resource Group. For alternative deployments, see [Considerations for Multiple Subscriptions, Subnets, and Resource Groups Configuration](#considerations-for-multiple-subscriptions-subnets-and-resource-groups-configuration).
 - All UCP Nodes (Managers and Workers) need to be attached to the same 
-Azure Subnet.
+Azure Subnet. For alternative deployments, see [Considerations for Multiple Subscriptions, Subnets, and Resource Groups Configuration](#considerations-for-multiple-subscriptions-subnets-and-resource-groups-configuration).
 - All UCP (Managers and Workers) need to be tagged in Azure with the 
 `Orchestrator` tag. Note the value for this tag is the Kubernetes version number
 in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in each 
@@ -109,6 +109,26 @@ an Azure subnet.
 
 More details on this configuration file can be found 
 [here](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go).
+
+## Considerations for Multiple Subscriptions, Subnets, and Resource Groups Configuration
+
+UCP manager nodes and [DTR](/ee/dtr) nodes can be deployed in a separate Azure Subscription on separate Azure Subnet than the worker nodes. To do this, set up [Azure VNet Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview): 
+1. In https://portal.azure.com navigate to the Azure Resource Group containing the UCP managers and DTR nodes, and then click on the Virtual Network in the list.
+2. Under Settings, click **Peerings**
+3. Add a Peering from this VNet to the other Azure Subscription's VNet which contains the worker nodes. Be sure to select "Allow forwarded traffic" option.
+4. Navigate to the other Azure Resource Group which has the workers nodes, and then click on the Virtual Network in the list.
+5. Under Settings, click **Peerings**
+6. Add a Peering from this VNet to the other Azure Subscription's VNet which contains the UCP manager nodes and DTR nodes. Be sure to select "Allow forwarded traffic" option.
+7. Now both VNets should be peered
+8. Test connectivity by attempting to open a connection on the private IP addresses of each machine
+
+### Limitations 
+
+  **NOTE**: These limitations will be removed in a future release.
+
+- Worker nodes must be Windows-only nodes
+- Workloads on the worker nodes must be Swarm-only
+- [Layer 7 Routing](/ee/ucp/interlock/) through Interlock to Windows worker nodes may not be used
 
 ## Considerations for IPAM Configuration
 
