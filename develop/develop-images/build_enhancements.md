@@ -10,7 +10,7 @@ Docker Build enhancements for 18.09 release introduces a much-needed overhaul of
 
 * Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
 * the Dockerfile format that works on legacy build will also work with buildkit builds
-* The new `--secret` conmmand line option allows the user to pass secret information for building new images with a specified Dockerfile 
+* The new `--secret` command line option allows the user to pass secret information for building new images with a specified Dockerfile 
 
 For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
 
