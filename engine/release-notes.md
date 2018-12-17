@@ -6,7 +6,6 @@ toc_min: 1
 toc_max: 2
 - /ee/engine/release-notes/
 - /release-notes/docker-ce/
-
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
@@ -24,8 +23,7 @@ consistency and compatibility reasons.
 * Fixed authz plugin for 0-length content and path validation.
 
 ### New features for Docker Engine EE and CE
-* Update to BuildKit 0.3.3 [docker/engine#122]
-* Added bash completion for experimental CLI commands (manifest) [docker/cli#1542]
+* Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
 
 ### Improvements for Docker Engine EE and CE
 * Updated to BuildKit 0.3.3 [docker/engine#122](https://github.com/docker/engine/pull/122)
