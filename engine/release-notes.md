@@ -4,8 +4,8 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
-- /ee/engine/release-notes/
-- /release-notes/docker-ce/
+ - /ee/engine/release-notes/
+ - /release-notes/docker-ce/
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
