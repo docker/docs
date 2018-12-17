@@ -18,7 +18,10 @@ consistency and compatibility reasons.
 
 
 ## 18.09.1
-2018-12-13
+2018-XX-XX
+
+### Security fixes for Docker Engine EE and CE 
+* Upgraded Go to 1.11.3 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
 
 ### Security fixes for Docker Engine EE
 * Fixed authz plugin for 0-length content and path validation.
