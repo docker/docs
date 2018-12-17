@@ -39,7 +39,7 @@ Likewise, you can switch back to new Automated Build by clicking on this link at
 
 
 
-## Adding Github web hook manually
+## Adding Github webhook manually
 
 A GitHub webhook allows GitHub to notify Docker Hub when something has
 been committed to a given Git repository. 
