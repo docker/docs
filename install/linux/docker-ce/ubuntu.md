@@ -138,7 +138,8 @@ the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        software-properties-common
+        software-properties-common \
+        gpg-agent
     ```
 
 3.  Add Docker's official GPG key:
