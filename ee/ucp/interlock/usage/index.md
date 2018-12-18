@@ -10,7 +10,7 @@ start using it in your swarm services.
 In this example we'll deploy a simple service which:
 
 * Has a JSON endpoint that returns the ID of the task serving the request.
-* Has a web UI that shows how many tasks the service is running.
+* Has a web interface that shows how many tasks the service is running.
 * Can be reached at `http://app.example.org`.
 
 ## Deploy the service
@@ -27,7 +27,7 @@ services:
       replicas: 1
       labels:
         com.docker.lb.hosts: app.example.org
-        com.docker.lb.network: demo-network
+        com.docker.lb.network: demo_demo-network
         com.docker.lb.port: 8080
     networks:
       - demo-network
@@ -46,7 +46,9 @@ the host header, that request is forwarded to the demo service.
 should attach to in order to be able to communicate with the demo service.
 To use layer 7 routing, your services need to be attached to at least one network.
 If your service is only attached to a single network, you don't need to add
-a label to specify which network to use for routing.
+a label to specify which network to use for routing. When using a common stack file for multiple deployments leveraging UCP Interlock / Layer 7 Routing, prefix `com.docker.lb.network` with the stack name to ensure traffic will be directed to the correct overlay network.
+
+
 * The `com.docker.lb.port` label specifies which port the `ucp-interlock-proxy`
 service should use to communicate with this demo service.
 * Your service doesn't need to expose a port in the swarm routing mesh. All
