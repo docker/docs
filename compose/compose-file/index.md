@@ -2356,7 +2356,7 @@ secrets:
   // Deprecated syntax for compose file version 3.5-
   my_second_secret:
     external:
-     name: redis_secret
+      name: redis_secret
 ```
 
 You still need to [grant access to the secrets](#secrets) to each service in the
