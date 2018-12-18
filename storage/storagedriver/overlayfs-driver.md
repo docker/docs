@@ -13,7 +13,7 @@ OverlayFS: the original `overlay`, and the newer and more stable `overlay2`.
 This topic refers to the Linux kernel driver as `OverlayFS` and to the Docker
 storage driver as `overlay2`.
 
-> **Note**: The `overlay` driver is deprecated in Docker for 18.09 and later.
+> **Note**: The `overlay` driver is deprecated in Docker 18.09 and later.
 > Docker recommends `overlay2` for its storage driver.
 > 
 > For more information about differences between `overlay` vs `overlay2`, check
@@ -64,7 +64,10 @@ OverlayFS is supported if you meet the following prerequisites:
 
 ## Configure Docker with the `overlay2` storage driver
 
-For the `overlay2` driver, the kernal version must be 4.0 or newer.
+For the `overlay2` driver support, use the following:
+
+* Kernel 4.x (any distro, except for RHEL/CentOS, which don't have a 4.x kernel)
+* The RHEL/CentOS 3.10.x kernel
 
 Before following this procedure, you must first meet all the
 [prerequisites](#prerequisites).
