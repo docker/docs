@@ -194,7 +194,8 @@ supported by **Compose 1.9.0+**.
 Introduces the following additional parameters:
 
 - [`link_local_ips`](compose-file-v2.md#linklocalips)
-- [`isolation`](compose-file-v2.md#isolation)
+- [`isolation`](compose-file-v2.md#isolation) in build configurations and
+  service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
   [networks](compose-file-v2.md#network-configuration-reference)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
@@ -203,6 +204,7 @@ Introduces the following additional parameters:
 - [`sysctls`](compose-file-v2.md#sysctls)
 - [`pids_limit`](compose-file-v2.md#pidslimit)
 - [`oom_kill_disable`](compose-file-v2.md#oomkilldisable)
+- [`cpu_period`](compose-file-v2.md)
 
 ### Version 2.2
 
@@ -215,6 +217,7 @@ Introduces the following additional parameters:
 
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
+- [`cpu_rt_runtime` and `cpu_rt_period`](compose-file-v2.md#cpu_rt_runtime-cpu_rt_period)
 
 ### Version 2.3
 
@@ -229,6 +232,19 @@ Introduces the following additional parameters:
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 - [`runtime`](compose-file-v2.md#runtime) for service definitions
+- [`device_cgroup_rules`](compose-file-v2.md#device_cgroup_rules)
+
+### Version 2.4
+
+An upgrade of [version 2.3](#version-23) that introduces new parameters only
+available with Docker Engine version **17.12.0+**. Version 2.4 files are
+supported by **Compose 1.21.0+**.
+
+Introduces the following additional parameters:
+
+- [`platform`](compose-file-v2.md#platform) for service definitions
+- Support for extension fields at the root of service, network, and volume
+  definitions
 
 ### Version 3
 
@@ -286,6 +302,18 @@ only available with Docker Engine version **18.02.0** and higher.
 Introduces the following additional parameters:
 
 - [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
+
+### Version 3.7
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **18.06.0** and higher.
+
+Introduces the following additional parameters:
+
+- [`init`](index.md#init) in service definitions
+- [`rollback_config`](index.md#rollback_config) in deploy configurations
+- Support for extension fields at the root of service, network, volume, secret
+  and config definitions
 
 ## Upgrading
 
@@ -410,6 +438,29 @@ It's more complicated if you're using particular configuration features:
         volumes:
           data:
             external: true
+
+## Compatibility mode
+
+`docker-compose` 1.20.0 introduces a new `--compatibility` flag designed to
+help developers transition to version 3 more easily. When enabled,
+`docker-compose` reads the `deploy` section of each service's definition and
+attempts to translate it into the equivalent version 2 parameter. Currently,
+the following deploy keys are translated:
+
+- [resources](index.md#resources) limits and memory reservations
+- [replicas](index.md#replicas)
+- [restart_policy](index.md#restartpolicy) `condition` and `max_attempts`
+
+All other keys are ignored and produce a warning if present. You can review
+the configuration that will be used to deploy by using the `--compatibility`
+flag with the `config` command.
+
+> Do not use this in production!
+>
+> We recommend against using `--compatibility` mode in production. Because the
+> resulting configuration is only an approximate using non-Swarm mode
+> properties, it may produce unexpected results.
+
 
 ## Compose file format references
 

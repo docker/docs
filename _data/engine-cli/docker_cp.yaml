@@ -95,6 +95,9 @@ options:
   description: Archive mode (copy all uid/gid information)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: follow-link
   shorthand: L
   value_type: bool
@@ -102,6 +105,12 @@ options:
   description: Always follow symbol link in SRC_PATH
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

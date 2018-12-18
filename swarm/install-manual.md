@@ -38,7 +38,7 @@ VPC network. The **default** security group's initial set of rules deny all
 inbound traffic, allow all outbound traffic, and allow all traffic between
 instances.
 
-You're  going to add a couple of rules to allow inbound SSH connections and
+You're going to add a couple of rules to allow inbound SSH connections and
 inbound container images. This set of rules somewhat protects the Engine, Swarm,
 and Consul ports. For a production environment, you would apply more restrictive
 security measures. Do not leave Docker Engine ports unprotected.
@@ -85,7 +85,7 @@ group. When complete, the example deployment contains three types of nodes:
 
 | Node Description                     | Name                    |
 |--------------------------------------|-------------------------|
-| Swarm primary and secondary managers | `manager0`,  `manager1` |
+| Swarm primary and secondary managers | `manager0`, `manager1` |
 | Swarm node                           | `node0`, `node1`        |
 | Discovery backend                    | `consul0`               |
 
@@ -213,7 +213,7 @@ After creating the discovery backend, you can create the swarm managers. In this
 
         $ docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise <manager1_ip>:4000 consul://172.30.0.161:8500
 
-6. Enter `docker ps`to verify that a swarm container is running. Then disconnect from the `manager1` instance.
+6. Enter `docker ps` to verify that a swarm container is running. Then disconnect from the `manager1` instance.
 
 7. Connect to `node0` and `node1` in turn and join them to the cluster.
 
@@ -262,11 +262,11 @@ replica.
 
 1. SSH connection to the `manager0` instance.
 
-2. Get the container id or name of the `swarm` container:
+2. Get the container ID or name of the `swarm` container:
 
         $ docker ps
 
-3. Shut down the primary manager, replacing `<id_name>` with the container's id or name (for example, "8862717fe6d3" or "trusting_lamarr").
+3. Shut down the primary manager, replacing `<id_name>` with the container's ID or name (for example, "8862717fe6d3" or "trusting_lamarr").
 
         docker container rm -f <id_name>
 
@@ -274,7 +274,7 @@ replica.
 
         $ docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise 172.30.0.161:4000 consul://172.30.0.161:8500
 
-5. Review the Engine's daemon logs the logs, replacing `<id_name>` with the new container's id or name:
+5. Review the Engine's daemon logs, replacing `<id_name>` with the new container's ID or name:
 
         $ sudo docker logs <id_name>
 
@@ -290,7 +290,7 @@ replica.
 You can connect to the `manager1` node and run the `info` and `logs` commands.
 They display corresponding entries for the change in leadership.
 
-## Additional Resources
+## Additional resources
 
 - [Installing Docker Engine on a cloud provider](/docker-for-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)

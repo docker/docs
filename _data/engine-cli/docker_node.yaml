@@ -23,4 +23,7 @@ clink:
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

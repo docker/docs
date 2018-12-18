@@ -32,7 +32,7 @@ access to full control over the resources.
 | `No Access`              | The user can't view any resource, like volumes, networks, images, or containers.                                                                                                                             |
 | `View Only`              | The user can view volumes, networks, and images, but can't create any containers.                                                                                                                             |
 | `Restricted Control`     | The user can view and edit volumes, networks, and images. They can create containers, but can't see other users' containers, run `docker exec`, or run containers that require privileged access to the host. |
-| `Full Control`           | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users' containers.                                                          |
+| `Full Control`           | The user can view and edit volumes, networks, and images. They can create containers without any restriction, but can't see other users' containers.                                                          |
 
 If a user has Restricted Control or Full Control default permissions, they can create resources without labels, and only the user and Admins can see and access the resources. Default permissions also affect ability for a user to access things that can't have labels, images and nodes.  
 

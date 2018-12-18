@@ -8,39 +8,38 @@ This guide contains tips and tricks for troubleshooting DTR problems.
 
 ## Troubleshoot overlay networks
 
-High availability in DTR depends on having overlay networking working in UCP.
-One way to test if overlay networks are working correctly you can deploy
-containers in different nodes, that are attached to the same overlay network
-and see if they can ping one another.
+High availability in DTR depends on swarm overlay networking.  One way to test
+if overlay networks are working correctly is to deploy containers to the same
+overlay network on different nodes and see if they can ping one another.
 
-Use SSH to log into a UCP node, and run:
+Use SSH to log into a node and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test1 \
   --entrypoint sh docker/dtr
 ```
 
-Then use SSH to log into another UCP node and run:
+Then use SSH to log into another node and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test2 \
   --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-If the second command succeeds, it means that overlay networking is working
-correctly.
+If the second command succeeds, it indicates overlay networking is working
+correctly between those nodes.
 
-You can run this test with any overlay network, and any Docker image that has
-`sh` and `ping`.
+You can run this test with any attachable overlay network and any Docker image
+that has `sh` and `ping`.
 
 
 ## Access RethinkDB directly
 
 DTR uses RethinkDB for persisting data and replicating it across replicas.
 It might be helpful to connect directly to the RethinkDB instance running on a
-DTR replica to check the DTR internal state. 
+DTR replica to check the DTR internal state.
 
 > **Warning**: Modifying RethinkDB directly is not supported and may cause
 > problems.
@@ -49,29 +48,46 @@ DTR replica to check the DTR internal state.
 Use SSH to log into a node that is running a DTR replica, and run the following
 commands:
 
-```bash
 {% raw %}
-# REPLICA_ID will be the replica ID for the current node.
-REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
+```bash
+# DTR_REPLICA_ID will be the replica ID for the current node.
+DTR_REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
+# List problems in the cluster detected by the current node.
+echo 'r.db("rethinkdb").table("current_issues")' | \
+  docker run -i --rm \
+    --net dtr-ol \
+    -e DTR_REPLICA_ID=${DTR_REPLICA_ID} \
+    -v dtr-ca-$DTR_REPLICA_ID:/ca \
+    dockerhubenterprise/rethinkcli:v2.2.0-ni non-interactive; \
+    echo
+```
+{% endraw %}
+
+On a healthy cluster the output will be `[]`.
+
+RethinkDB stores data in different databases that contain multiple tables. This
+container can also be used to connect to the local DTR replica and
+interactively query the contents of the DB.
+
+{% raw %}
+```bash
+# DTR_REPLICA_ID will be the replica ID for the current node.
+DTR_REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
 # This command will start a RethinkDB client attached to the database
 # on the current node.
 docker run -it --rm \
   --net dtr-ol \
-  -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
-  $REPLICA_ID
-{% endraw %}
+  -e DTR_REPLICA_ID=${DTR_REPLICA_ID} \
+  -v dtr-ca-$DTR_REPLICA_ID:/ca \
+  dockerhubenterprise/rethinkcli:v2.2.0-ni
 ```
+{% endraw %}
 
-This container connects to the local DTR replica and launches a RethinkDB client 
-that can be used to inspect the contents of the DB. RethinkDB 
-stores data in different databases that contain multiple tables. The `rethinkcli`
-tool launches an interactive prompt where you can run RethinkDB 
-queries such as:
 
 ```none
-# List problems detected within the rethinkdb cluster
+# List problems in the cluster detected by the current node.
 > r.db("rethinkdb").table("current_issues")
-...
+[]
 
 # List all the DBs in RethinkDB
 > r.dbList()
@@ -91,7 +107,7 @@ queries such as:
   'repositories',
   'repository_team_access',
   'tags' ]
-  
+
 # List the entries in the repositories table
 > r.db('dtr2').table('repositories')
 [ { id: '19f1240a-08d8-4979-a898-6b0b5b2338d8',
@@ -102,7 +118,7 @@ queries such as:
 ...
 ```
 
-Indvidual DBs and tables are a private implementation detail and may change in DTR
+Individual DBs and tables are a private implementation detail and may change in DTR
 from version to version, but you can always use `dbList()` and `tableList()` to explore
 the contents and data structure.
 

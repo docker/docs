@@ -54,7 +54,7 @@ script:
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
 
-        #!/bin/bash
+        #!/bin/sh
         # wait-for-postgres.sh
 
         set -e
@@ -63,7 +63,7 @@ script:
         shift
         cmd="$@"
 
-        until psql -h "$host" -U "postgres" -c '\q'; do
+        until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
           >&2 echo "Postgres is unavailable - sleeping"
           sleep 1
         done

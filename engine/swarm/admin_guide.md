@@ -160,21 +160,21 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash
 {% raw %}
+```bash
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-{% endraw %}
 ```
+{% endraw %}
 
 To query the status of the node as a worker that accept tasks:
 
-```bash
 {% raw %}
+```bash
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-{% endraw %}
 ```
+{% endraw %}
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.
@@ -377,7 +377,7 @@ In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
 `docker service update` command to force the service to redistribute its tasks
 across the available worker nodes. This causes the service tasks to restart.
 Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](/engine/swarm/swarm-tutorial.md#rolling-update).
+uses a [rolling update](/engine/swarm/swarm-tutorial/rolling-update/).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm

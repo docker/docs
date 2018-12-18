@@ -112,7 +112,7 @@ by step instructions are also included below.
 1.  Run this command to download the latest version of Docker Compose:
 
     ```bash
-    sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.

@@ -137,9 +137,11 @@ global
 defaults
         mode    tcp
         option  dontlognull
-        timeout connect 5000
-        timeout client 50000
-        timeout server 50000
+        timeout connect 5s
+        timeout client 50s
+        timeout server 50s
+        timeout tunnel 1h
+        timeout client-fin 50s
 ### frontends
 # Optional HAProxy Stats Page accessible at http://<host-ip>:8181/haproxy?stats
 frontend dtr_stats

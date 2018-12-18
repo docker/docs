@@ -12,7 +12,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for Azure
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
+[Deploy Docker Enterprise Edition (EE) for Azure](https://hub.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
 
 
 ## Docker Community Edition (CE) for Azure
@@ -40,6 +40,9 @@ For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.m
   </td>
   </tr>
 </table>
+
+> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
+
 
 ### Prerequisites
 

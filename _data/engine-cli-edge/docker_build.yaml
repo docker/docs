@@ -477,21 +477,27 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   build an image on.\n\nA good example is `http_proxy` or source versions for pulling
   intermediate\nfiles. The `ARG` instruction lets Dockerfile authors define values
   that users\ncan set at build-time using the  `--build-arg` flag:\n\n```bash\n$ docker
-  build --build-arg HTTP_PROXY=http://10.20.30.2:1234 .\n```\n\nThis flag allows you
-  to pass the build-time variables that are\naccessed like regular environment variables
-  in the `RUN` instruction of the\nDockerfile. Also, these values don't persist in
-  the intermediate or final images\nlike `ENV` values do.\n\nUsing this flag will
-  not alter the output you see when the `ARG` lines from the\nDockerfile are echoed
-  during the build process.\n\nFor detailed information on using `ARG` and `ENV` instructions,
-  see the\n[Dockerfile reference](../builder.md).\n\n### Optional security options
-  (--security-opt)\n\nThis flag is only supported on a daemon running on Windows,
-  and only supports\nthe `credentialspec` option. The `credentialspec` must be in
-  the format\n`file://spec.txt` or `registry://keyname`.\n\n### Specify isolation
-  technology for container (--isolation)\n\nThis option is useful in situations where
-  you are running Docker containers on\nWindows. The `--isolation=<value>` option
-  sets a container's isolation\ntechnology. On Linux, the only supported is the `default`
-  option which uses\nLinux namespaces. On Microsoft Windows, you can specify these
-  values:\n\n\n| Value     | Description                                                                                                                                                   |\n|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|\n|
+  build --build-arg HTTP_PROXY=http://10.20.30.2:1234 --build-arg FTP_PROXY=http://40.50.60.5:4567
+  .\n```\n\nThis flag allows you to pass the build-time variables that are\naccessed
+  like regular environment variables in the `RUN` instruction of the\nDockerfile.
+  Also, these values don't persist in the intermediate or final images\nlike `ENV`
+  values do.   You must add `--build-arg` for each build argument.  \n\nUsing this
+  flag will not alter the output you see when the `ARG` lines from the\nDockerfile
+  are echoed during the build process.\n\nFor detailed information on using `ARG`
+  and `ENV` instructions, see the\n[Dockerfile reference](../builder.md).\n\nYou may
+  also use the `--build-arg` flag without a value, in which case the value\nfrom the
+  local environment will be propagated into the Docker container being\nbuilt:\n\n```bash\n$
+  export HTTP_PROXY=http://10.20.30.2:1234\n$ docker build --build-arg HTTP_PROXY
+  .\n```\n\nThis is similar to how `docker run -e` works. Refer to the [`docker run`
+  documentation](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)\nfor
+  more information.\n\n### Optional security options (--security-opt)\n\nThis flag
+  is only supported on a daemon running on Windows, and only supports\nthe `credentialspec`
+  option. The `credentialspec` must be in the format\n`file://spec.txt` or `registry://keyname`.\n\n###
+  Specify isolation technology for container (--isolation)\n\nThis option is useful
+  in situations where you are running Docker containers on\nWindows. The `--isolation=<value>`
+  option sets a container's isolation\ntechnology. On Linux, the only supported is
+  the `default` option which uses\nLinux namespaces. On Microsoft Windows, you can
+  specify these values:\n\n\n| Value     | Description                                                                                                                                                   |\n|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|\n|
   `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the
   `daemon` does not specify an isolation technology, Microsoft Windows uses `process`
   as its default value.  |\n| `process` | Namespace isolation only.                                                                                                                                     |\n|
@@ -522,16 +528,15 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   multi-stage builds](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)\nsection
   in the userguide for more information.\n\n\n#### Known limitations\n\nThe `--squash`
   option has a number of known limitations:\n\n- When squashing layers, the resulting
-  image cannot take advantage of layer \n  sharing with other images, and may use
-  significantly more space. Sharing the\n  base image is still supported.\n- When
-  using this option you may see significantly more space used due to\n  storing two
-  copies of the image, one for the build cache with all the cache\n  layers in tact,
-  and one for the squashed version.\n- While squashing layers may produce smaller
-  images, it may have a negative\n  impact on performance, as a single layer takes
-  longer to extract, and\n  downloading a single layer cannot be parallelized.\n-
-  When attempting to squash an image that does not make changes to the\n  filesystem
-  (for example, the Dockerfile only contains `ENV` instructions),\n  the squash step
-  will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)\n\n####
+  image cannot take advantage of layer\n  sharing with other images, and may use significantly
+  more space. Sharing the\n  base image is still supported.\n- When using this option
+  you may see significantly more space used due to\n  storing two copies of the image,
+  one for the build cache with all the cache\n  layers in tact, and one for the squashed
+  version.\n- While squashing layers may produce smaller images, it may have a negative\n
+  \ impact on performance, as a single layer takes longer to extract, and\n  downloading
+  a single layer cannot be parallelized.\n- When attempting to squash an image that
+  does not make changes to the\n  filesystem (for example, the Dockerfile only contains
+  `ENV` instructions),\n  the squash step will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)\n\n####
   Prerequisites\n\nThe example on this page is using experimental mode in Docker 1.13.\n\nExperimental
   mode can be enabled by using the `--experimental` flag when starting the Docker
   daemon or setting `experimental: true` in the `daemon.json` configuration file.\n\nBy
@@ -551,7 +556,7 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   >> /hello\nRUN touch remove_me /remove_me\nENV HELLO world\nRUN rm /remove_me\n```\n\nAn
   image named `test` is built with `--squash` argument.\n\n```bash\n$ docker build
   --squash -t test .\n\n[...]\n```\n\nIf everything is right, the history will look
-  like this:\n\n```bash\n$ docker history test \n\nIMAGE               CREATED             CREATED
+  like this:\n\n```bash\n$ docker history test\n\nIMAGE               CREATED             CREATED
   BY                                      SIZE                COMMENT\n4e10cb5b4cac
   \       3 seconds ago                                                       12 B
   \               merge sha256:88a7b0112a41826885df0e7072698006ee8f621c6ab99fca7fe9151d7b599702

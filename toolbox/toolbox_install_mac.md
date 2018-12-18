@@ -283,21 +283,21 @@ To uninstall Toolbox on a Mac, do the following:
     $ rm -fr ~/Library/Application\ Support/Kitematic
     ```
 
-5.  Remove the `docker`, `docker-compose`, and `docker-machine`
-    commands from the `/usr/local/bin` folder. Docker for
-    Mac and Brew may have installed them.
+5.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from
+    the `/usr/local/bin` folder.  Docker for Mac and Brew may also have
+    installed them; in case of doubt leave them, or reinstall them via Brew, or
+    rerun Docker for Mac (no need to reinstall it).
 
     ```
-    $ rm /usr/local/bin/docker
-    $ rm /usr/local/bin/docker-compose
-    $ rm /usr/local/bin/docker-machine
+    $ rm -f /usr/local/bin/docker
+    $ rm -f /usr/local/bin/docker-compose
+    $ rm -f /usr/local/bin/docker-machine
     ```
 
 6.  Optionally, remove the `~/.docker/machine` directory.
 
-    This directory stores some configuration and/or state, such as
-    information about created machines and certificates.
-
+    This directory stores some configuration and/or state, such as information
+    about created machines and certificates.
 
 7.  Uninstall Oracle VirtualBox, which is installed as a part of the
     Toolbox install.

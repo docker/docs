@@ -82,13 +82,13 @@ $ docker service update \
 You can use `docker service inspect` to view the service's published port. For
 instance:
 
-```bash
 {% raw %}
+```bash
 $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 
 [{"Protocol":"tcp","TargetPort":80,"PublishedPort":8080}]
-{% endraw %}
 ```
+{% endraw %}
 
 The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containers and the
 `<PUBLISHED-PORT>` (labeled `PublishedPort`) where nodes listen for requests for the service.
@@ -171,7 +171,7 @@ in mind.
 - If you expect to run multiple service tasks on each node (such as when you
   have 5 nodes but run 10 replicas), you cannot specify a static target port.
   Either allow Docker to assign a random high-numbered port (by leaving off the
-  `target`), or ensure that only a single instance of the service runs on a
+  `published`), or ensure that only a single instance of the service runs on a
   given node, by using a global service rather than a replicated one, or by
   using placement constraints.
 

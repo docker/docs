@@ -43,7 +43,7 @@ network.**
 
   Imagine an application with a web front-end and a database back-end. The
   outside world needs access to the web front-end (perhaps on port 80), but only
-  the front-end itself needs access to the database host and port. Using a
+  the back-end itself needs access to the database host and port. Using a
   user-defined bridge, only the web port needs to be opened, and the database
   application doesn't need any ports open, since the web front-end can reach it
   over the user-defined bridge.
@@ -66,8 +66,8 @@ network.**
   the application stack is running on.
 
   If you run the same application stack on the default bridge network, you need
-  to manually create links between the containers (using the legacy `--link`)
-  flag. These links need to be created in both directions, so you can see this
+  to manually create links between the containers (using the legacy `--link`
+  flag). These links need to be created in both directions, so you can see this
   gets complex with more than two containers which need to communicate.
   Alternatively, you can manipulate the `/etc/hosts` files within the containers,
   but this creates problems that are difficult to debug.
@@ -254,6 +254,6 @@ user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 ## Next steps
 
 - Go through the [standalone networking tutorial](/network/network-tutorial-standalone.md)
-- Learn about [networking from the container's point of view](/config/container/container-networking.md)
+- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
 - Learn about [overlay networks](/network/overlay.md)
 - Learn about [Macvlan networks](/network/macvlan.md)

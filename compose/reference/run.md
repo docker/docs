@@ -11,7 +11,7 @@ Usage:
         SERVICE [COMMAND] [ARGS...]
 
 Options:
-    -d                    Detached mode: Run container in the background, print
+    -d, --detach          Detached mode: Run container in the background, print
                           new container name.
     --name NAME           Assign a name to the container
     --entrypoint CMD      Override the entrypoint of the image.
@@ -23,6 +23,8 @@ Options:
     -p, --publish=[]      Publish a container's port(s) to the host
     --service-ports       Run command with the service's ports enabled and mapped
                           to the host.
+    --use-aliases         Use the service's network aliases in the network(s) the
+                          container connects to.
     -v, --volume=[]       Bind mount a volume (default [])
     -T                    Disable pseudo-tty allocation. By default `docker-compose run`
                           allocates a TTY.
@@ -54,3 +56,9 @@ This opens an interactive PostgreSQL shell for the linked `db` container.
 If you do not want the `run` command to start linked containers, use the `--no-deps` flag:
 
     docker-compose run --no-deps web python manage.py shell
+
+If you want to remove the container after running while overriding the container's restart policy, use the `--rm` flag:
+
+    docker-compose run --rm web python manage.py db upgrade
+
+This runs a database upgrade script, and removes the container when finished running, even if a restart policy is specified in the service configuration.

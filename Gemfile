@@ -39,5 +39,5 @@ source "https://rubygems.org"
 # live site deploy, which uses the Dockerfiles found in the publish-tools
 # branch.
 
-gem "github-pages", "175"
+gem "github-pages", "177"
 gem 'wdm' if Gem.win_platform?

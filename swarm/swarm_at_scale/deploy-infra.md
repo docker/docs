@@ -41,7 +41,7 @@ actual value.
 ## Task 1. Create the keystore server
 
 To enable a Docker container network and Swarm discovery, you must
-deploy (or supply) a key-value store.  As a discovery backend, the key-value store
+deploy (or supply) a key-value store. As a discovery backend, the key-value store
 maintains an up-to-date list of cluster members and shares that list with the
 Swarm manager. The Swarm manager uses this list to assign tasks to the nodes.
 
@@ -138,7 +138,7 @@ support the container network you create later.
    the manager. This is key for the manager when it connects to other machines
    in the cluster.
 
-4. Test your work by using displaying the Docker daemon logs from the host.
+4. Test your work by displaying the Docker daemon logs from the host.
 
    ```bash
    $ docker-machine ssh manager
@@ -242,7 +242,7 @@ in Step 4.
         -D run -c /etc/config.toml
     ```
 
-    This command relies on the `config.toml` file being in the current directory.  After running the command, confirm the image is runing:
+    This command relies on the `config.toml` file being in the current directory.  After running the command, confirm the image is running:
 
     ```bash
     $ docker ps
@@ -250,7 +250,7 @@ in Step 4.
     d846b801a978        ehazlett/interlock:1.0.1   "/bin/interlock -D ru"   2 minutes ago       Up 2 minutes        0.0.0.0:32770->8080/tcp   interlock
     ```
 
-    If you don't see the image runing, use `docker ps -a` to list all images to make sure the system attempted to start the image. Then, get the logs to see why the container failed to start.
+    If you don't see the image running, use `docker ps -a` to list all images to make sure the system attempted to start the image. Then, get the logs to see why the container failed to start.
 
     ```bash
     $ docker logs interlock
@@ -427,7 +427,7 @@ commands below, notice the label you are applying to each node.
     The command is acting on the Swarm port, so it returns information about the
     entire cluster. You have a manager and no nodes.
 
-## Next Step
+## Next step
 
 Your key-value store, load balancer, and Swarm cluster infrastructure are up. You are
 ready to [build and run the voting application](deploy-app.md) on it.

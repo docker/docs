@@ -161,7 +161,7 @@ real-world example, continue to
     secret from, is set to `-`.
 
     ```bash
-    $ echo "This is a secret" | docker secret create my_secret_data -
+    $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 
 2.  Create a `redis` service and grant it access to the secret. By default,
@@ -1028,7 +1028,7 @@ a compose file.
 The keyword `secrets:` defines two secrets `db_password:` and
 `db_root_password:`.
 
-When deploying, Docker creates these two secrets and populate them with the
+When deploying, Docker creates these two secrets and populates them with the
 content from the file specified in the compose file.
 
 The db service uses both secrets, and the wordpress is using one.

@@ -128,6 +128,18 @@ with the `webapp` and optional `tag` specified in `image`:
 
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
+#### cache_from
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+A list of images that the engine uses for cache resolution.
+
+    build:
+      context: .
+      cache_from:
+        - alpine:latest
+        - corp/web_app:3.14
+
 #### context
 
 > [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
@@ -165,32 +177,32 @@ build process.
 First, specify the arguments in your Dockerfile:
 
     ARG buildno
-    ARG password
+    ARG gitcommithash
 
     RUN echo "Build number: $buildno"
-    RUN script-requiring-password.sh "$password"
+    RUN echo "Based on commit: $gitcommithash"
 
-Then specify the arguments under the `build` key. You can pass either a mapping
+Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
 
     build:
       context: .
       args:
         buildno: 1
-        password: secret
+        gitcommithash: cdc3b19
 
     build:
       context: .
       args:
         - buildno=1
-        - password=secret
+        - gitcommithash=cdc3b19
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
 
     args:
       - buildno
-      - password
+      - gitcommithash
 
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
@@ -207,6 +219,19 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
+
+#### isolation
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
+
+Specify a build’s container isolation technology. On Linux, the only supported value
+is `default`. On Windows, acceptable values are `default`, `process` and
+`hyperv`. Refer to the
+[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+for details.
+
+If unspecified, Compose will use the `isolation` value found in the service's definition
+to determine the value to use for builds.
 
 #### labels
 
@@ -316,6 +341,30 @@ Specify a custom container name, rather than a generated default name.
 Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
+
+### cpu_rt_runtime, cpu_rt_period
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+Configure CPU allocation parameters using the Docker daemon realtime scheduler.
+
+    cpu_rt_runtime: '400ms'
+    cpu_rt_period: '1400us'
+
+    # Integer values will use microseconds as units
+    cpu_rt_runtime: 95000
+    cpu_rt_period: 11000
+
+
+### device_cgroup_rules
+
+> [Added in version 2.3 file format](compose-versioning.md#version-23).
+
+Add rules to the cgroup allowed devices list.
+
+    device_cgroup_rules:
+      - 'c 1:3 mr'
+      - 'a 7:* rmw'
 
 ### devices
 
@@ -957,7 +1006,7 @@ designated container or service.
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vise-versa.
+other containers in the bare-metal machine's namespace and vice versa.
 
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
@@ -970,6 +1019,20 @@ Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 
     pids_limit: 10
 
+
+### platform
+
+> [Added in version 2.4 file format](compose-versioning.md#version-24).
+
+Target platform containers for this service will run on, using the
+`os[/arch[/variant]]` syntax, e.g.
+
+    platform: osx
+    platform: windows/amd64
+    platform: linux/arm64/v8
+
+This parameter determines which version of the image will be pulled and/or
+on which platform the service's build will be performed.
 
 ### ports
 
@@ -1144,10 +1207,12 @@ expressed in the short form.
 - `volume`: configure additional volume options
   - `nocopy`: flag to disable copying of data from a container when a volume is
     created
+- `tmpfs`: configure additional tmpfs options
+  - `size`: the size for the tmpfs mount in bytes
 
 
 ```none
-version: "3.2"
+version: "2.3"
 services:
   web:
     image: nginx:alpine
@@ -1228,7 +1293,7 @@ then read-write is used.
 
 {: id="cpu-and-other-resources"}
 
-### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -1236,13 +1301,14 @@ Each of these is a single value, analogous to its
 > **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
 > The following options were added in [version 2.1](compose-versioning.md#version-21):
-> `oom_kill_disable`
+> `oom_kill_disable`, `cpu_period`
 
     cpu_count: 2
     cpu_percent: 50
     cpus: 0.5
     cpu_shares: 73
     cpu_quota: 50000
+    cpu_period: 20ms
     cpuset: 0,1
 
     user: postgresql
@@ -1417,7 +1483,7 @@ Set a custom name for this volume.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     volumes:
@@ -1575,7 +1641,7 @@ Set a custom name for this network.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     networks:

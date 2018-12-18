@@ -62,8 +62,8 @@ bin	dev	home	lib32	libx32	mnt	proc	run	srv	tmp	var
 By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and
 `/tmp` directly. To add or remove directory trees that are exported to Docker,
 use the **File sharing** tab in Docker preferences ![whale
-menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Preferences** ->
-**File sharing**. (See [Preferences](/docker-for-mac/index.md#preferences).)
+menu](images/whale-x.png){: .inline} -> **Preferences** ->
+**File sharing**. (See [Preferences](index.md#preferences).)
 
 All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
@@ -73,7 +73,7 @@ VM, an attempt to bind mount it fails rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
 
-> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> See **[Performance tuning for volume mounts (shared filesystems)](osxfs-caching.md)**
 > to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 ### Ownership
@@ -155,7 +155,7 @@ between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
-> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> See **[Performance tuning for volume mounts (shared filesystems)](osxfs-caching.md)**
 > to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 With regard to reported performance issues ([GitHub issue 77: File access in
@@ -166,7 +166,7 @@ slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-
 this topic provides an explanation of the issues, recent progress in addressing
 them, how the community can help us, and what you can expect in the
 future. This explanation derives from a [post about understanding
-performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158?u=orangesnap)
+performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158)
 by David Sheets (@dsheets) on the [Docker development
 team](https://forums.docker.com/groups/Docker) to the forum topic just
 mentioned. We want to surface it in the documentation for wider reach.

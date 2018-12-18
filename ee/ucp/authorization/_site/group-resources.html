@@ -1,0 +1,136 @@
+<p>Docker EE enables access control to cluster resources by grouping resources
+into <strong>resource sets</strong>. Combine resource sets with <a href="grant-permissions">grants</a>
+to give users permission to access specific cluster resources.</p>
+
+<p>A resource set can be:</p>
+
+<ul>
+  <li>A <strong>Kubernetes namespace</strong> for Kubernetes workloads.</li>
+  <li>A <strong>UCP collection</strong> for Swarm workloads.</li>
+</ul>
+
+<h2 id="kubernetes-namespaces">Kubernetes namespaces</h2>
+
+<p>A namespace allows you to group resources like Pods, Deployments, Services, or
+any other Kubernetes-specific resources. You can then enforce RBAC policies
+and resource quotas for the namespace.</p>
+
+<p>Each Kubernetes resources can only be in one namespace, and namespaces cannot
+be nested inside one another.</p>
+
+<p><a href="https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Learn more about Kubernetes namespaces</a>.</p>
+
+<h2 id="swarm-collections">Swarm collections</h2>
+
+<p>A Swarm collection is a directory of cluster resources like nodes, services,
+volumes, or other Swarm-specific resources.</p>
+
+<p><img src="../images/collections-and-resources.svg" alt="" class="with-border" /></p>
+
+<p>Each Swarm resource can only be in one collection at a time, but collections
+can be nested inside one another, to create hierarchies.</p>
+
+<h3 id="nested-collections">Nested collections</h3>
+
+<p>You can nest collections inside one another. If a user is granted permissions
+for one collection, they’ll have permissions for its child collections,
+pretty much like a directory structure..</p>
+
+<p>For a child collection, or for a user who belongs to more than one team, the
+system concatenates permissions from multiple roles into an “effective role” for
+the user, which specifies the operations that are allowed against the target.</p>
+
+<h3 id="built-in-collections">Built-in collections</h3>
+
+<p>Docker EE provides a number of built-in collections.</p>
+
+<p><img src="../images/collections-diagram.svg" alt="" class="with-border" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Default collection</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">/</code></td>
+      <td style="text-align: left">Path to all resources in the Swarm cluster. Resources not in a collection are put here.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">/System</code></td>
+      <td style="text-align: left">Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">/Shared</code></td>
+      <td style="text-align: left">Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In <a href="https://www.docker.com/enterprise-edition">Docker EE Advanced</a>, worker nodes can be moved and <a href="isolate-nodes.md">isolated</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">/Shared/Private/</code></td>
+      <td style="text-align: left">Path to a user’s private collection.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">/Shared/Legacy</code></td>
+      <td style="text-align: left">Path to the access control labels of legacy versions (UCP 2.1 and lower).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="default-collections">Default collections</h3>
+
+<p>Each user has a default collection which can be changed in UCP preferences.</p>
+
+<p>Users can’t deploy a resource without a collection. When a user deploys a
+resource without an access label, Docker EE automatically places the resource in
+the user’s default collection. <a href="../admin/configure/add-labels-to-cluster-nodes.md">Learn how to add labels to nodes</a>.</p>
+
+<p>With Docker Compose, the system applies default collection labels across all
+resources in the stack unless <code class="highlighter-rouge">com.docker.ucp.access.label</code> has been explicitly
+set.</p>
+
+<blockquote>
+  <p>Default collections and collection labels</p>
+
+  <p>Default collections are good for users who work only on a well-defined slice of
+the system, as well as users who deploy stacks and don’t want to edit the
+contents of their compose files. A user with more versatile roles in the
+system, such as an administrator, might find it better to set custom labels for
+each resource.</p>
+</blockquote>
+
+<h3 id="collections-and-labels">Collections and labels</h3>
+
+<p>Resources are marked as being in a collection by using labels. Some resource
+types don’t have editable labels, so you can’t move them across collections.</p>
+
+<blockquote>
+  <p>Can edit labels: services, nodes, secrets, and configs
+Cannot edit labels: containers, networks, and volumes</p>
+</blockquote>
+
+<p>For editable resources, you can change the <code class="highlighter-rouge">com.docker.ucp.access.label</code> to move
+resources to different collections. For example, you may need deploy resources
+to a collection other than your default collection.</p>
+
+<p>The system uses the additional labels, <code class="highlighter-rouge">com.docker.ucp.collection.*</code>, to enable
+efficient resource lookups. By default, nodes have the
+<code class="highlighter-rouge">com.docker.ucp.collection.root</code>, <code class="highlighter-rouge">com.docker.ucp.collection.shared</code>, and
+<code class="highlighter-rouge">com.docker.ucp.collection.swarm</code> labels set to <code class="highlighter-rouge">true</code>. UCP
+automatically controls these labels, and you don’t need to manage them.</p>
+
+<p>Collections get generic default names, but you can give them meaningful names,
+like “Dev”, “Test”, and “Prod”.</p>
+
+<p>A <em>stack</em> is a group of resources identified by a label. You can place the
+stack’s resources in multiple collections. Resources are placed in the user’s
+default collection unless you specify an explicit <code class="highlighter-rouge">com.docker.ucp.access.label</code>
+within the stack/compose file.</p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="create-users-and-teams-manually.md">Create and configure users and teams</a></li>
+  <li><a href="define-roles.md">Define roles with authorized API operations</a></li>
+  <li><a href="grant-permissions.md">Grant role-access to cluster resources</a></li>
+</ul>

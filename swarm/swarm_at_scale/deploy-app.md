@@ -35,7 +35,7 @@ on the swarm manager instance.
    $ eval $(docker-machine env manager)
    ```
 
-    You can create the network on a cluster node at the network is visible on
+    You can create the network on a cluster node and the network is visible on
     them all.
 
 2. Create the `voteapp` container network.
@@ -298,7 +298,7 @@ the containers at once. This extra credit
 
     In general, Compose starts services in reverse order they appear in the file.
     So, if you want a service to start before all the others, make it the last
-    service in the file.  This application relies on a volume and a network,
+    service in the file. This application relies on a volume and a network,
     declare those at the bottom of the file.
 
 3. Check your work against

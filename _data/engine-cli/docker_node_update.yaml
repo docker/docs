@@ -10,21 +10,33 @@ options:
   description: Availability of the node ("active"|"pause"|"drain")
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: label-add
   value_type: list
   description: Add or update a node label (key=value)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: label-rm
   value_type: list
   description: Remove a node label if exists
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: role
   value_type: string
   description: Role of the node ("worker"|"manager")
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Add label metadata to a node
 
@@ -61,4 +73,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

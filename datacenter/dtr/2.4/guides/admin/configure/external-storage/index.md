@@ -51,16 +51,16 @@ same images.
 To check how much space your images are taking in the local filesystem, you
 can ssh into the node where DTR is deployed and run:
 
-```
 {% raw %}
+```
 # Find the path to the volume
 docker volume inspect dtr-registry-<replica-id>
 
 # Check the disk usage
 sudo du -hs \
 $(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<dtr-replica>))
-{% endraw %}
 ```
+{% endraw %}
 
 ## NFS
 

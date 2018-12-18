@@ -85,7 +85,7 @@ license.
 ![](../../../../../images/try-ddc-1.png){: .with-border}
 
 If you're registered in the beta program and don't have a license yet, you
-can get it from your [Docker Store subscriptions](https://store.docker.com/?overlay=subscriptions).
+can get it from [Docker Hub](https://hub.docker.com/my-content).
 
 <!-- If you don't have a license yet, [learn how to get a free trial license](license.md). -->
 

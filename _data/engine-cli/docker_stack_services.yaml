@@ -13,11 +13,25 @@ options:
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print services using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -25,6 +39,26 @@ options:
   description: Only display IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+- option: orchestrator
+  value_type: string
+  description: Orchestrator to use (swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following command shows all services in the `myapp` stack:
 
@@ -55,8 +89,23 @@ examples: |-
   The currently supported filters are:
 
   * id / ID (`--filter id=7be5ei6sqeye`, or `--filter ID=7be5ei6sqeye`)
-  * name (`--filter name=myapp_web`)
+    * Swarm: supported
+    * Kubernetes: not supported
   * label (`--filter label=key=value`)
+    * Swarm: supported
+    * Kubernetes: supported
+  * mode (`--filter mode=replicated`, or `--filter mode=global`)
+    * Swarm: not supported
+    * Kubernetes: supported
+  * name (`--filter name=myapp_web`)
+    * Swarm: supported
+    * Kubernetes: supported
+  * node (`--filter node=mynode`)
+    * Swarm: not supported
+    * Kubernetes: supported
+  * service (`--filter service=web`)
+    * Swarm: not supported
+    * Kubernetes: supported
 
   ### Formatting
 
@@ -89,4 +138,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

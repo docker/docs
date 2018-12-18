@@ -30,8 +30,8 @@ COPY . ${SOURCE}
 ## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 
 # Engine
-ENV ENGINE_SVN_BRANCH="branches/17.09.x"
-ENV ENGINE_BRANCH="17.09.x"
+ENV ENGINE_SVN_BRANCH="branches/18.09.x"
+ENV ENGINE_BRANCH="18.09.x"
 
 # Distribution
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -79,6 +79,8 @@ COPY --from=docs/docker.github.io:v1.13 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
 
 # Get the built docs output from the previous build stage
 # This ordering means all previous layers can come from cache unless an archive

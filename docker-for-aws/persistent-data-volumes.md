@@ -131,15 +131,15 @@ as well.
 The only option available for EFS is `perfmode`. You can set `perfmode` to
 `maxio` for high IO throughput:
 
-```bash
 {% raw %}
+```bash
 $ docker service create \
   --replicas 5 \
   --name ping3 \
   --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
   alpine ping docker.com
-{% endraw %}
 ```
+{% endraw %}
 
 You can also create `shared` Cloudstor volumes using the
 `docker volume create` CLI:
@@ -164,15 +164,15 @@ EBS volumes typically take a few minutes to be created. Besides
 
 Example usage:
 
-```bash
 {% raw %}
+```bash
 $ docker service create \
   --replicas 5 \
   --name ping3 \
   --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata,volume-opt=backing=relocatable,volume-opt=size=25,volume-opt=ebstype=gp2 \
   alpine ping docker.com
-{% endraw %}
 ```
+{% endraw %}
 
 The above example creates and mounts a distinct Cloudstor volume backed by 25 GB EBS
 volumes of type `gp2` for each task of the `ping3` service. Each task mounts its
@@ -210,15 +210,15 @@ mount a unique EFS-backed volume into each task of a service. This is useful if
 you already have too many EBS volumes or want to reduce the amount of time it
 takes to transfer volume data across availability zones.
 
-```bash
 {% raw %}
+```bash
 $ docker service create \
   --replicas 5 \
   --name ping2 \
   --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
   alpine ping docker.com
-{% endraw %}
 ```
+{% endraw %}
 
 Here, each task has mounted its own volume at `/mydata/` and the files under
 that mountpoint are unique to that task.

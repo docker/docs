@@ -19,10 +19,10 @@ with administrator credentials to change your password.
 If you're the only administrator, use **ssh** to log in to a manager
 node managed by UCP, and run:
 
-```none
 {% raw %}
+```none
 docker exec -it ucp-auth-api enzi \
   "$(docker inspect --format '{{ index .Args 0 }}' ucp-auth-api)" \
   passwd -i
-{% endraw %}  
 ```
+{% endraw %}

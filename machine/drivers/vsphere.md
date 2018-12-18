@@ -20,6 +20,7 @@ installation may also include an optional VCenter server.
 -   `--vmwarevsphere-datacenter`: Datacenter for Docker VM (must be set to `ha-datacenter` when connecting to a single host).
 -   `--vmwarevsphere-datastore`: Datastore for Docker VM.
 -   `--vmwarevsphere-disk-size`: Size of disk for Docker VM (in MB).
+-   `--vmwarevsphere-folder`: vSphere folder for the docker VM. This folder must already exist in the datacenter.
 -   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM is instantiated. This can be omitted if using a cluster with DRS.
 -   `--vmwarevsphere-memory-size`: Size of memory for Docker VM (in MB).
 -   `--vmwarevsphere-network`: Network where the Docker VM is attached.
@@ -48,3 +49,4 @@ The VMware vSphere driver uses the latest boot2docker image.
 | **`--vmwarevsphere-username`**    | `VSPHERE_USERNAME`        | -                        |
 | `--vmwarevsphere-vcenter-port`    | `VSPHERE_VCENTER_PORT`    | 443                      |
 | `--vmwarevsphere-vcenter`         | `VSPHERE_VCENTER`         | -                        |
+| `--vmwarevsphere-folder`          | `VSPHERE_FOLDER`          | -                        |

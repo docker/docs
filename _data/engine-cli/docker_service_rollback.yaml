@@ -16,6 +16,9 @@ options:
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -23,6 +26,9 @@ options:
   description: Suppress progress output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Roll back to the previous version of a service
 
@@ -75,4 +81,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.31"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

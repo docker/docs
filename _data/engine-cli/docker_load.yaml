@@ -1,8 +1,8 @@
 command: docker load
 short: Load an image from a tar archive or STDIN
 long: |-
-  `docker load` loads a tarred repository from a file or the standard input stream.
-  It restores both images and tags.
+  Load an image or repository from a tar archive (even if compressed with gzip,
+  bzip2, or xz) from a file or STDIN. It restores both images and tags.
 usage: docker load [OPTIONS]
 pname: docker
 plink: docker.yaml
@@ -13,6 +13,9 @@ options:
   description: Read from tar archive file, instead of STDIN
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -20,9 +23,12 @@ options:
   description: Suppress the load output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ```bash
-  $ docker images
+  $ docker image ls
 
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
@@ -50,4 +56,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

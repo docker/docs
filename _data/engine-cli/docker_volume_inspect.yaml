@@ -16,6 +16,9 @@ options:
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ```bash
   $ docker volume create
@@ -36,4 +39,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.21"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

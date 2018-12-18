@@ -10,16 +10,15 @@ redirect_from:
 ---
 
 To use storage drivers effectively, it's important to know how Docker builds and
-stores images, how these images are used by containers. You can use this
+stores images, and how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
 
-> **Note**: Storage drivers allow you to persist data in the writable layer of
-> your container. This is the least efficient way to persist data.
-> [Volumes](/storage/volumes/) or [bind mounts](/storage/bind-mounts/) provide
-> much better read and write performance, and volumes provide more security
-> and isolation than either storage drivers or bind mounts. Neither volumes nor
-> bind mounts use most of the concepts described in this topic.
+Storage drivers allow you to create data in the writable layer of your container.
+The files won't be persisted after the container is deleted, and both read and
+write speeds are low.
+
+[Learn how to use volumes](../volumes.md) to persist data and improve performance.
 
 ## Images and layers
 
@@ -34,7 +33,7 @@ RUN make /app
 CMD python /app/app.py
 ```
 
-This Dockerfile contains four commands, each of which creates a layer.  The
+This Dockerfile contains four commands, each of which creates a layer. The
 `FROM` statement starts out by creating a layer from the `ubuntu:15.04` image.
 The `COPY` command adds some files from your Docker client's current directory.
 The `RUN` command builds your application using the `make` command. Finally,
@@ -83,7 +82,7 @@ To view the approximate size of a running container, you can use the `docker ps 
 command. Two different columns relate to size.
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
-  each container
+  each container.
 
 - `virtual size`: the amount of data used for the read-only image data
   used by the container plus the container's writable layer `size`.
@@ -97,7 +96,7 @@ command. Two different columns relate to size.
 The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
 multiple containers started from the same exact image, the total size on disk for
-these containers would be SUM (`size` of containers) plus one container's
+these containers would be SUM (`size` of containers) plus one image size
 (`virtual size`- `size`).
 
 This also does not count the following additional ways a container can take up
@@ -144,8 +143,8 @@ Status: Downloaded newer image for ubuntu:15.04
 
 Each of these layers is stored in its own directory inside the Docker host's
 local storage area. To examine the layers on the filesystem, list the contents
-of `/var/lib/docker/<storage-driver>/layers/`. This example uses `aufs`, which
-is the default storage driver:
+of `/var/lib/docker/<storage-driver>/layers/`. This example uses the `aufs` 
+storage driver:
 
 ```bash
 $ ls /var/lib/docker/aufs/layers
@@ -293,8 +292,8 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the default `aufs` driver and the `overlay` and `overlay2`
-drivers, the copy-on-write operation follows this rough sequence:
+storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the 
+copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.
@@ -397,34 +396,7 @@ started a new container, container start times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
 work, with one or more virtual disks per virtual machine.
 
-## Data volumes and the storage driver
-
-When a container is deleted, any data written to the container that is not
-stored in a *data volume* is deleted along with the container.
-
-A data volume is a directory or file in the Docker host's filesystem that is
-mounted directly into a container. Data volumes are not controlled by the
-storage driver. Reads and writes to data volumes bypass the storage driver and
-operate at native host speeds. You can mount any number of data volumes into a
-container. Multiple containers can also share one or more data volumes.
-
-The diagram below shows a single Docker host running two containers. Each
-container exists inside of its own address space within the Docker host's local
-storage area (`/var/lib/docker/...`). There is also a single shared data volume
-located at `/data` on the Docker host. This is mounted directly into both
-containers.
-
-![Shared volume across containers](images/shared-volume.jpg)
-
-Data volumes reside outside of the local storage area on the Docker host,
-further reinforcing their independence from the storage driver's control. When
-a container is deleted, any data stored in data volumes persists on the Docker
-host.
-
-For detailed information about data volumes, see
-[Managing data in containers](/engine/tutorials/dockervolumes/).
-
 ## Related information
 
 * [Volumes](/storage/volumes.md)
-* [Select a storage driver](selectadriver.md)
+* [Select a storage driver](select-storage-driver.md)

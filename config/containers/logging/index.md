@@ -15,7 +15,7 @@ log depends almost entirely on the container's endpoint command.
 By default, `docker logs` or `docker service logs` shows the command's output
 just as it would appear if you ran the command interactively in a terminal. UNIX
 and Linux commands typically open three I/O streams when they run, called
-`STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the commmand's input stream, which
+`STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the command's input stream, which
 may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
@@ -37,9 +37,9 @@ In the first case, your logs are processed in other ways and you may choose not
 to use `docker logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 
-The official `nginx` image creates a symbolic link from
-`/dev/stdout` to `/var/log/nginx/access.log`, and creates another symbolic link
-from `/dev/stderr` to `/var/log/nginx/error.log`, overwriting the log files and
+The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
+to `/dev/stdout`, and creates another symbolic link
+from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
 causing logs to be sent to the relevant special device instead. See the
 [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
 

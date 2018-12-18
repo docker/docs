@@ -2,24 +2,62 @@ command: docker stack ls
 aliases: list
 short: List stacks
 long: Lists the stacks.
-usage: docker stack ls
+usage: docker stack ls [OPTIONS]
 pname: docker stack
 plink: docker_stack.yaml
 options:
+- option: all-namespaces
+  value_type: bool
+  default_value: "false"
+  description: List stacks from all Kubernetes namespaces
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print stacks using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: stringSlice
+  default_value: '[]'
+  description: Kubernetes namespaces to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+inherited_options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+- option: orchestrator
+  value_type: string
+  description: Orchestrator to use (swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following command shows all stacks and some additional information:
 
   ```bash
   $ docker stack ls
 
-  ID                 SERVICES
-  vossibility-stack  6
-  myapp              2
+  ID                 SERVICES            ORCHESTRATOR
+  myapp              2                   Kubernetes
+  vossibility-stack  6                   Swarm
   ```
 
   ### Formatting
@@ -28,10 +66,12 @@ examples: |-
 
   Valid placeholders for the Go template are listed below:
 
-  | Placeholder | Description        |
-  | ----------- | ------------------ |
-  | `.Name`     | Stack name         |
-  | `.Services` | Number of services |
+  | Placeholder     | Description        |
+  | --------------- | ------------------ |
+  | `.Name`         | Stack name         |
+  | `.Services`     | Number of services |
+  | `.Orchestrator` | Orchestrator name  |
+  | `.Namespace`    | Namespace          |
 
   When using the `--format` option, the `stack ls` command either outputs
   the data exactly as the template declares or, when using the
@@ -48,4 +88,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

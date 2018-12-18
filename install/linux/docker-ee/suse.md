@@ -4,7 +4,7 @@ keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, u
 redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
-- /engine/installatioin/linux/docker-ee/suse/
+- /engine/installation/linux/docker-ee/suse/
 title: Get Docker EE for SLES
 toc_max: 4
 ---
@@ -22,7 +22,7 @@ repository URL associated with your trial or subscription. These instructions
 work for Docker EE for SLES and for Docker EE for Linux, which includes access
 to Docker EE for all Linux distributions. To get this information:
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
+- Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
   button for **Docker Enterprise Edition for SUSE Linux Enterprise Server**.
 - Copy the URL from the field labeled
@@ -164,6 +164,11 @@ Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker EE
 from the repository.
 
+> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> UCP, and DTR).
+
 #### Set up the repository
 
 1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
@@ -171,55 +176,33 @@ from the repository.
     with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ DOCKER_EE_URL="<DOCKER-EE-URL>"
+    $ DOCKER_EE_URL="<DOCKER-EE-URL>/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
+    ```
+
+    Where:
+    * `DOCKER-EE-URL` is the URL from your Docker Hub subscription.
+    * `ARCHITECTURE` is `x86_64`, `s390x`, or `ppc64le`.
+    * `VERSION` is `18.09` 
+
+    As an example your command should look like:
+
+    ```bash
+    DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-18.09"
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
     command as-is. It works because of the variable you set in the previous
     step.
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/x86_64/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
+    $ sudo zypper addrepo $DOCKER_EE_URL docker-ee-stable
     ```
 
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
+3.  Import the GPG key from the repository. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/s390x/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
-    ```
-
-    </div>
-
-    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo zypper addrepo \
-        "${DOCKER_EE_URL}/sles/12.3/ppc64le/stable-{{ site.docker_ee_version }}" \
-        docker-ee-stable
-    ```
-
-    </div>
-    </div><!--tab-content-->
-
-
-3.  Import the GPG key from the repository. Use the command as-is. It works
-    because of the variable you set earlier.
-
-    ```bash
-    $ sudo rpm --import "${DOCKER_EE_URL}/sles/gpg"
+    $ sudo rpm --import "<DOCKER-EE-URL>/sles/gpg"
     ```
 
 #### Install Docker EE
@@ -323,13 +306,13 @@ other optional configuration steps.
 To upgrade Docker EE:
 
 1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 17.03.x to Docker 17.06.x),
+    Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo zypper refresh`.
 
 3.  Follow the
-    [installation instructions](#install-docker), choosing the new version you want
+    [installation instructions](#install-docker-ee), choosing the new version you want
     to install.
 
 ### Install from a package

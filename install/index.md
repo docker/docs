@@ -1,4 +1,5 @@
 ---
+title: About Docker CE
 description: Lists the installation methods
 keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
 redirect_from:
@@ -13,86 +14,185 @@ redirect_from:
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
-title: Install Docker
 ---
-
-Docker is available in two editions: **Community Edition (CE)** and **Enterprise
-Edition (EE)**.
 
 Docker Community Edition (CE) is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
-apps. Docker CE has two update channels, **stable** and **edge**:
+apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
 
-* **Stable** gives you reliable updates every quarter
-* **Edge** gives you new features every month
+* **Stable** gives you latest releases for general availability.
+* **Test** gives pre-releases that are ready for testing before general availability.
+* **Nightly** gives you latest builds of work in progress for the next major release.
 
 For more information about Docker CE, see
 [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
 
-Docker Enterprise Edition (EE) is designed for enterprise
-development and IT teams who build, ship, and run business critical
-applications in production at scale. For more information about Docker EE,
-including purchasing options, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+## Releases
 
-{% include docker_ce_ee.md %}
+For the Docker CE engine, the open
+repositories [Docker Engine](https://github.com/docker/engine) and
+[Docker Client](https://github.com/docker/cli) apply.
 
-## Supported platforms
+Releases of Docker Engine and Docker Client for general availability
+are versioned using dotted triples. The components of this triple
+are `YY.mm.<patch>` where the `YY.mm` component is referred to as the
+year-month release. The version numbering format is chosen to illustrate
+cadence and does not guarantee SemVer, but the desired date for general
+availability. The version number may have additional information, such as
+beta and release candidate qualifications. Such releases are considered
+"pre-releases".
 
-Docker CE and EE are available on multiple platforms, on cloud and on-premises.
-Use the following tables to choose the best installation path for you.
+The cadence of the year-month releases is every 6 months starting with
+the `18.09` release. The patch releases for a year-month release take
+place as needed to address bug fixes during its support cycle.
 
-### Desktop
+Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
+as packages for the supported operating systems. Docker EE binaries are
+available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
+release channels are available for each of the year-month releases and
+allow users to "pin" on a year-month release of choice. The release
+channel also receives patch releases when they become available.
 
-{% include docker_desktop_matrix.md %}
+### Nightly builds
 
-### Cloud
+Nightly builds are created once per day from the master branch. The version
+number for nightly builds take the format:
 
-{% include docker_cloud_matrix.md %}
+    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
 
-See also [Docker Cloud](#docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
+where the time is the commit time in UTC and the final suffix is the prefix
+of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 
-### Server
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 
-{% include docker_platform_matrix.md %}
+The release channel for these builds is called `nightly`.
 
-## Time-based release schedule
+### Pre-releases
 
-Starting with Docker 17.03, Docker uses a time-based release schedule.
+In preparation for a new year-month release, a branch is created from
+the master branch with format `YY.mm` when the milestones desired by
+Docker for the release have achieved feature-complete. Pre-releases
+such as betas and release candidates are conducted from their respective release
+branches. Patch releases and the corresponding pre-releases are performed
+from within the corresponding release branch.
 
-- Docker CE Edge releases generally happen monthly.
-- Docker CE Stable releases generally happen quarterly, with patch releases as
-  needed.
-- Docker EE releases generally happen twice per year, with patch releases as
-  needed.
+While pre-releases are done to assist in the stabilization process, no
+guarantees are provided.
 
-### Updates, and patches
+Binaries built for pre-releases are available in the test channel for
+the targeted year-month release using the naming format `test-YY.mm`,
+for example `test-18.09`.
 
-- A given Docker EE release receives patches and updates for at least **one
-  year** after it is released.
-- A given Docker CE Stable release receives patches and updates for **one
-  month after the next Docker CE Stable release**.
-- A given Docker CE Edge release does not receive any patches or updates after
-  a subsequent Docker CE Edge or Stable release.
+### General availability
 
-### Prior releases
+Year-month releases are made from a release branch diverged from the master
+branch. The branch is created with format `<year>.<month>`, for example
+`18.09`. The year-month name indicates the earliest possible calendar
+month to expect the release to be generally available. All further patch
+releases are performed from that branch. For example, once `v18.09.0` is
+released, all subsequent patch releases are built from the `18.09` branch.
 
-Instructions for installing prior releases of Docker can be found in the
-[Docker archives](/docsarchive/).
+Binaries built from this releases are available in the stable channel
+`stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
+test channel.
 
-## Docker Cloud
+### Relationship between CE and EE code
 
-You can use Docker Cloud to automatically provision and manage your cloud instances.
+For a given year-month release, Docker releases both CE and EE
+variants concurrently. EE is a superset of the code delivered in
+CE. Docker maintains publicly visible repositories for the CE code
+as well as private repositories for the EE code. Automation (a bot)
+is used to keep the branches between CE and EE in sync so as features
+and fixes are merged on the various branches in the CE repositories
+(upstream), the corresponding EE repositories and branches are kept
+in sync (downstream). While Docker and its partners make every effort
+to minimize merge conflicts between CE and EE, occasionally they will
+happen, and Docker will work hard to resolve them in a timely fashion.
 
-* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm.md)
-* [Microsoft Azure setup guide](/docker-cloud/cloud-swarm/link-azure-swarm.md)
-* [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
-* [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
-* [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
-* [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
+## Next release
+
+The activity for upcoming year-month releases is tracked in the milestones
+of the repository.
+
+## Support
+
+Docker CE releases of a year-month branch are supported with patches
+as needed for 7 months after the first year-month general availability
+release. Docker EE releases are supported for 24 months after the first
+year-month general availability release.
+
+This means bug reports and backports to release branches are assessed
+until the end-of-life date.
+
+After the year-month branch has reached end-of-life, the branch may be
+deleted from the repository.
+
+### Reporting security issues
+
+The Docker maintainers take security seriously. If you discover a security
+issue, please bring it to their attention right away!
+
+Please DO NOT file a public issue; instead send your report privately
+to security@docker.com.
+
+Security reports are greatly appreciated, and Docker will publicly thank you
+for it. Docker also likes to send gifts — if you're into swag, make sure to
+let us know. Docker currently does not offer a paid security bounty program
+but are not ruling it out in the future.
+
+### Supported platforms
+
+Docker CE is available on multiple platforms. Use the following tables
+to choose the best installation path for you.
+
+#### Desktop
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+
+| Platform                                                                    |      x86_64       |
+|:----------------------------------------------------------------------------|:-----------------:|
+| [Docker for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
+
+#### Server
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign install-prefix-ce = '/install/linux/docker-ce' %}
+
+| Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
+|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
+
+### Backporting
+
+Backports to the Docker products are prioritized by the Docker company. A
+Docker employee or repository maintainer will endeavour to ensure sensible
+bugfixes make it into _active_ releases.
+
+If there are important fixes that ought to be considered for backport to
+active release branches, be sure to highlight this in the PR description
+or by adding a comment to the PR.
+
+### Upgrade path
+
+Patch releases are always backward compatible with its year-month version.
+
+## Not covered
+
+As a general rule, anything not mentioned in this document may change in any release.
+
+## Exceptions
+
+Exceptions are made in the interest of __security patches__. If a break
+in release procedure or product functionality is required, it will
+be communicated clearly, and the solution will be considered against
+total impact.
 
 ## Get started
 
-After setting up Docker, try learning the basics over at
+After setting up Docker, you can learn the basics with
 [Getting started with Docker](/get-started/).

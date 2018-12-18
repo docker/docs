@@ -6,7 +6,7 @@ keywords: docker, swarm, scale, voting, application, architecture
 title: Learn the application architecture
 ---
 
-On this page, you learn about the Swarm at scale example.  Make sure you have
+On this page, you learn about the Swarm at scale example. Make sure you have
 read through [the introduction](index.md) to get an idea of the skills and time
 required first.
 
@@ -54,7 +54,7 @@ The application's Dockerized microservices are deployed to a container network.
 Container networks are a feature of Docker Engine that allows communication
 between multiple containers across multiple Docker hosts.
 
-## Swarm Cluster Architecture
+## Swarm cluster architecture
 
 To support the application, the design calls for a Swarm cluster with a single
 Swarm manager and four nodes as shown below.

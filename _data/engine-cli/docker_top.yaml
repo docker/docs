@@ -6,4 +6,7 @@ pname: docker
 plink: docker.yaml
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

@@ -90,7 +90,7 @@ avoid these situations.
 
     Each file contains three fields: the username or ID of the user, followed by
     a beginning UID or GID (which is treated as UID or GID 0 within the namespace)
-    and a maxumum number of UIDs or GIDs available to the user. For instance,
+    and a maximum number of UIDs or GIDs available to the user. For instance,
     given the following entry:
 
     ```none
@@ -225,7 +225,7 @@ $ dockerd --userns-remap="testuser:testuser"
     ```
 
     Your directory listing may have some differences, especially if you
-    user a different container storage driver than `aufs`.
+    use a different container storage driver than `aufs`.
 
     The directories which are owned by the remapped user are used instead
     of the same directories directly beneath `/var/lib/docker/` and the
@@ -244,6 +244,10 @@ for some of these limitations.
 
 To disable user namespaces for a specific container, add the `--userns=host`
 flag to the `docker container create`, `docker container run`, or `docker container exec` command.
+
+There is a side effect when using this flag: user remapping will not be enabled for that container but, because the read-only (image) layers are shared between containers, ownership of the the containers filesystem will still be remapped.
+
+What this means is that the whole container filesystem will belong to the user specified in the `--userns-remap` daemon config (`231072` in the example above). This can lead to unexpected behavior of programs inside the container. For instance `sudo` (which checks that its binaries belong to user `0`) or binaries with a `setuid` flag.
 
 ## User namespace known limitations
 

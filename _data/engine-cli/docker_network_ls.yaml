@@ -14,17 +14,26 @@ options:
   description: Provide filter values (e.g. 'driver=bridge')
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print networks using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-trunc
   value_type: bool
   default_value: "false"
   description: Do not truncate the output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -32,6 +41,9 @@ options:
   description: Only display network IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### List all networks\n\n```bash\n$ sudo docker network ls\nNETWORK ID
   \         NAME                DRIVER          SCOPE\n7fca4eb8c647        bridge
   \             bridge          local\n9f904ee27bf5        none                null
@@ -114,4 +126,7 @@ examples: "### List all networks\n\n```bash\n$ sudo docker network ls\nNETWORK I
   {{.Driver}}\"\nafaaab448eb2: bridge\nd1584f8dc718: host\n391df270dc66: null\n```"
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

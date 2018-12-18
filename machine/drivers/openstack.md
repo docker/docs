@@ -20,6 +20,7 @@ Mandatory:
 
 -   `--openstack-active-timeout`: The timeout in seconds until the OpenStack instance must be active.
 -   `--openstack-availability-zone`: The availability zone in which to launch the server.
+-   `--openstack-config-drive`: Whether OpenStack should mount a configuration drive for the machine.
 -   `--openstack-domain-name` or `--openstack-domain-id`: Domain to use for authentication (Keystone v3 only).
 -   `--openstack-endpoint-type`: Endpoint type can be `internalURL`, `adminURL`, or `publicURL`. It is a helper for the driver
     to choose the right URL in the OpenStack service catalog. If not provided the default is `publicURL`.
@@ -34,7 +35,7 @@ Mandatory:
 -   `--openstack-private-key-file`: Used with `--openstack-keypair-name`, associates the private key to the keypair.
 -   `--openstack-region`: The region to work on. Can be omitted if there is only one region on the OpenStack.
 -   `--openstack-sec-groups`: If security groups are available on your OpenStack you can specify a comma separated list
-    to use for the machine, such as secgrp001,secgrp002`.
+    to use for the machine, such as `secgrp001,secgrp002`.
 -   `--openstack-ssh-port`: Customize the SSH port if the SSH server on the machine does not listen on the default port.
 -   `--openstack-ssh-user`: The username to use for SSH into the machine. If not provided defaults to `root`.
 -   `--openstack-tenant-name` or `--openstack-tenant-id`: Identify the tenant in which the machine is created.
@@ -48,6 +49,7 @@ Mandatory:
 | `--openstack-active-timeout`    | `OS_ACTIVE_TIMEOUT`    | `200`       |
 | `--openstack-auth-url`          | `OS_AUTH_URL`          | -           |
 | `--openstack-availability-zone` | `OS_AVAILABILITY_ZONE` | -           |
+| `--openstack-config-drive`      | `OS_CONFIG_DRIVE`      | `false`     |
 | `--openstack-domain-id`         | `OS_DOMAIN_ID`         | -           |
 | `--openstack-domain-name`       | `OS_DOMAIN_NAME`       | -           |
 | `--openstack-endpoint-type`     | `OS_ENDPOINT_TYPE`     | `publicURL` |

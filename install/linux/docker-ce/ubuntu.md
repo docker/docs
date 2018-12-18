@@ -6,6 +6,8 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ce/ubuntu/
+- /install/linux/ubuntu/
+- /engine/installation/linux/ubuntu/
 title: Get Docker CE for Ubuntu
 toc_max: 4
 ---
@@ -30,7 +32,7 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge and higher only)
+- Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
@@ -54,7 +56,7 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 
 ### Supported storage drivers
 
-Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+Docker CE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 
 - For new installations on version 4 and higher of the Linux kernel, `overlay2`
   is supported and preferred over `aufs`.
@@ -234,8 +236,7 @@ the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the latest version of Docker CE, or go to the next step to install a
-    specific version. Any existing installation of Docker is replaced.
+2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
 
     ```bash
     $ sudo apt-get install docker-ce
@@ -247,11 +248,10 @@ the repository.
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning-vanilla}
 
-3.  On production systems, you should install a specific version of Docker CE
-    instead of always using the latest. This output is truncated. List the
-    available versions.
+3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
+
+    a. List the versions available in your repo:
 
     ```bash
     $ apt-cache madison docker-ce
@@ -259,12 +259,9 @@ the repository.
     docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
     ```
 
-    The contents of the list depend upon which repositories are enabled. Choose
-    a specific version to install. The second column is the version string. The
-    third column is the repository name, which indicates which repository the
-    package is from and by extension its stability level. To install a specific
-    version, append the version string to the package name and separate them by
-    an equals sign (`=`):
+    b. Install a specific version by its fully qualified package name, which is
+       package name (`docker-ce`) "=" version string (2nd column), for example,
+       `docker-ce=18.03.0~ce-0~ubuntu`.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION>
@@ -291,7 +288,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package

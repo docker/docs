@@ -17,7 +17,7 @@ prompts users to migrate from Docker Toolbox--you must do so manually.
 > previous Docker Toolbox data.
 
 1.  Install [qemu](https://www.qemu.org/){: target="_blank" class="_"} (a machine emulator): [https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip](https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip).
-2.  Install [Docker for Windows](/docker-for-windows/install/){: target="_blank" class="_"}.
+2.  Install [Docker for Windows](install/){: target="_blank" class="_"}.
 3.  Stop Docker for Windows, if running.
 4.  Move your current Docker VM disk to a safe location:
 

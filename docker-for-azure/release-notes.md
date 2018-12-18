@@ -9,8 +9,6 @@ title: Docker for Azure Release Notes
 ## Enterprise Edition
 [Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}<!--_-->
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
-
 ### 17.06 EE
 
 - Docker engine 17.06 EE
@@ -26,16 +24,28 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
-### 17.12 CE
+### 18.03 CE
 
 {{azure_blue_latest}}
+
+Release date: 3/21/2018
+
+- Docker Engine upgraded to [Docker 18.03.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce){: target="_blank" class="_"}
+
+### 17.12.1 CE
+
+Release date: 3/1/2018
+
+- Docker Engine upgraded to [Docker 17.12.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
+
+### 17.12 CE
 
 Release date: 1/9/2018
 
 - Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
 - Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
 
-> **Note** There is currently an issue in LinuxKit that prevents containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
+> **Note** There was an issue in LinuxKit that prevented containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
 
 ### 17.09 CE
 
