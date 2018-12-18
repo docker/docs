@@ -46,7 +46,7 @@ the host header, that request is forwarded to the demo service.
 should attach to in order to be able to communicate with the demo service.
 To use layer 7 routing, your services need to be attached to at least one network.
 If your service is only attached to a single network, you don't need to add
-a label to specify which network to use for routing. To attach to more than one network, prefix this label with the service name as shown in the above example.
+a label to specify which network to use for routing. To attach to more than one network, prefix this label with the stack name as shown in the above example.
 * The `com.docker.lb.port` label specifies which port the `ucp-interlock-proxy`
 service should use to communicate with this demo service.
 * Your service doesn't need to expose a port in the swarm routing mesh. All
