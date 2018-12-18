@@ -1,6 +1,6 @@
 ---
 description: Learn the technologies that support storage drivers.
-keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs,overlay2
+keywords: container, storage, driver, AUFS, btfs, devicemapper,overlay2,overlay,overlayfs
 title: About storage drivers
 redirect_from:
 - /en/latest/terms/layer/
