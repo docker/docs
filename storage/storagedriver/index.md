@@ -9,7 +9,7 @@ redirect_from:
 - /storage/storagedriver/imagesandcontainers/
 ---
 
-Storage drivers create data in the writable layer of your container.  The files won't 
+Storage drivers create data in the writable layer of your container. The files won't 
 be persisted after the container is deleted, and both read and write speeds are low.
 
 Docker recommends Overlay2 for the storage driver.
