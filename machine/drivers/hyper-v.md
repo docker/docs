@@ -81,7 +81,7 @@ For this example, we created a virtual switch called `Primary Virtual Switch`.
 
   See this issue on virtualbox: [Hangs on Waiting for VM to start #986](https://github.com/docker/machine/issues/986).
 
-  Reboot your desktop system to clear out any routing table problems. Without a reboot first, `docker-machine create ...` might get hung up on `Waiting for VM to start`.
+  Reboot your desktop system to clear out any routing table problems. Without a reboot first, `docker-machine create ...` might get hung up on `Waiting for host to start...`. In case you are still hung on the "Waiting for host to start..." after reboot, make sure you selected a correct network in Virtual Switch Manager.
 
 #### 4. Create the nodes with Docker Machine and the Microsoft Hyper-V driver
 
