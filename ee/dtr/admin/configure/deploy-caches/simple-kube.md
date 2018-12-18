@@ -6,61 +6,88 @@ keywords: DTR, cache, kubernetes
 ---
 
 This example guides you through deploying a DTR cache, assuming that you've got
-a DTR deployment up and running. It also assumes that you've provisioned
-a Kubernetes Cluster of 1.8 or higher.
+a DTR deployment up and running. The below guide has been tested to work on 
+Universal Control Plane 3.1, however it should work on any Kubernetes Cluster 
+1.8 or higher. 
 
-The DTR cache is going to be deployed as a Kubernetes Deployment, so that Kubernetes
-automatically takes care of scheduling and restarting the service if
+The DTR cache is going to be deployed as a Kubernetes Deployment, so that 
+Kubernetes automatically takes care of scheduling and restarting the service if
 something goes wrong.
 
 We'll manage the cache configuration using a Kubernetes Config Map, and the TLS
-certificates using Kubernetes secrets. This allows you to manage the configurations
-securely and independently of the node where the cache is actually running.
+certificates using Kubernetes secrets. This allows you to manage the 
+configurations securely and independently of the node where the cache is 
+actually running.
 
 ## Prepare the cache deployment
 
-At the end of this exercise you should have a file structure that looks like this:
+At the end of this exercise you should have the following file structure on your
+workstation:
 
 ```
-├── dtrcache.yml        # Yaml file to deploy cache with a single command
-├── config.yml          # The cache configuration file
+├── dtrcache.yaml        # Yaml file to deploy cache with a single command
+├── config.yaml          # The cache configuration file
 └── certs
-    ├── cache.cert.pem  # The cache public key certificate
-    ├── cache.key.pem   # The cache private key
-    └── dtr.cert.pem    # DTR CA certificate
+    ├── cache.cert.pem   # The cache public key certificate, including any intermediaries
+    ├── cache.key.pem    # The cache private key
+    └── dtr.cert.pem     # DTR CA certificate
 ```
 
-### Create the DTR Cache certicates
+### Create the DTR Cache certificates
 
-The DTR cache will be deployed with a TLS endpoint. For this you will need to generate
-a SSL ceritificate and key from a certificate authority. Depending on how you would
- like to expose the DTR Cache it will depend on the SANs required for this certificate.
+The DTR cache will be deployed with a TLS endpoint. For this you will need to 
+generate a TLS ceritificate and key from a certificate authority. Depending on 
+how you would like to expose the DTR Cache it will change the SANs required for 
+this certificate.
 
 For example:
 
   - If you are deploying the DTR Cache with an 
     [Ingress Object](https://kubernetes.io/docs/concepts/services-networking/ingress/) 
-    you will need to use the FQDN of your `Ingress Object` as part of your certificate. 
+    you will need to use an external DTR cache address which resolves to your 
+    ingress controller as part of your certificate. 
   - If you exposing the DTR cache through a Kubernetes
     [Cloud Provider](https://kubernetes.io/docs/concepts/services-networking/#loadbalancer)
-    then you will need the external Loadbalancer address as part of your certificate. 
+    then you will need the external Loadbalancer address as part of your 
+    certificate. 
   - If you are exposing the DTR Cache through a 
-    [Node Port](https://kubernetes.io/docs/concepts/services-networking/#nodeport)` or a
-    `Host Port]` you will need to use a Node's FQDN as a SAN in your certificate. You could use
-    a Kubernetes `NodeScheduler` to pin the node the DTR cache is deployed on.
+    [Node Port](https://kubernetes.io/docs/concepts/services-networking/#nodeport)
+     or a Host Port you will need to use a Node's FQDN as a SAN in your 
+     certificate.
 
-On your workstation, create a directory called `certs`. Within here place the newly 
-created certificate `cache.cert.pem` and key `cache.key.pem` for your DTR cache. Also
- place the certificate authority (including any intermedite certificate authorities)
- of the certificate from your DTR deployment. This could be sourced from curl.
-`curl -s https://<dtr-fqdn>/ca -o certs/dtr.cert.pem`.
+On your workstation, create a directory called `certs`. Within here place the 
+newly created certificate `cache.cert.pem` and key `cache.key.pem` for your DTR 
+cache. Also place the certificate authority (including any intermedite 
+certificate authorities) of the certificate from your DTR deployment. This could 
+be sourced from the main DTR deployment using curl. 
+
+```
+$ curl -s https://<dtr-fqdn>/ca -o certs/dtr.cert.pem`.
+```
 
 ### Create the DTR Config
 
-This is the configuration file of the registry component of the DTR Cache. This yaml
-should be updated with the relevant `cache-fqdn` and `dtr-fqdn`.
+The DTR Cache will take its configuration from a file mounted into the container. 
+Below is an example configuration file for the DTR Cache. This yaml should be 
+customised for your environment with the relevant external dtr cache, worker 
+node or external loadbalancer FQDN.
+
+With this configuration, the cache fetches image layers from DTR and keeps a 
+local copy for 24 hours. After that, if a user requests that image layer, the 
+cache will fetch it again from DTR.
+
+The cache, by default, is configured to store image data inside its container.
+Therefore if something goes wrong with the cache service, and Kubernetes deploys
+a new pod, cached data is not persisted. Data will not be lost as it is still 
+stored in the primary DTR. You can 
+[customize the storage parameters](/registry/configuration.md#storage),
+if you want the cached images to be backend by persistent storage.
+
+> Note Kubernetes Peristent Volumes or Persistent Volume Claims would have to be 
+> used to provide persistent backend storage capabilities for the cache.
 
 ```
+cat > config.yaml <<EOF
 version: 0.1
 log:
   level: info
@@ -72,7 +99,7 @@ storage:
 http:
   addr: 0.0.0.0:443
   secret: generate-random-secret
-  host: https://<external-fqdn-dtrcache> # Could be Ingress / LB / Host
+  host: https://<external-fqdn-dtrcache> # Could be DTR Cache / Loadbalancer / Worker Node external FQDN
   tls:
     certificate: /certs/cache.cert.pem
     key: /certs/cache.key.pem
@@ -82,47 +109,23 @@ middleware:
         options:
           blobttl: 24h
           upstreams:
-            - https://<dtr-url>
+            - https://<dtr-url> # URL of the Main DTR Deployment
           cas:
             - /certs/dtr.cert.pem
+EOF
 ```
 
-With this configuration, the cache fetches image layers from DTR and keeps
-a local copy for 24 hours. After that, if a user requests that image layer,
-the cache fetches it again from DTR.
+A full list of configuration options can be found [here](/registry/configuration/#list-of-configuration-options)
 
-The cache is configured to persist data inside its container.
-If something goes wrong with the cache service, Docker automatically redeploys a
-new container, but previously cached data is not persisted.
-You can [customize the storage parameters](/registry/configuration.md#storage),
-if you want to store the image layers using a persistent storage backend.
+### Define Kubernetes Resources
 
-### Create Kubernetes Resources
-
-Create a Kubernetes namespace to logical seperate all of our DTR cache components.
+The Kubernetes Manifest file to deploy the DTR Cache is independent of how you
+choose to expose the DTR cache within your environment. The below example has
+been tested to work on Universal Control Plane 3.1, however it should work on
+any Kubernetes Cluster 1.8 or higher. 
 
 ```
-$ kubectl create ns dtr
-```
-
-Create the Kubernetes Secrets and the Kubernetes ConfigMaps. Note the commands below
-will only work if your workstation directory was configured our examples structure 
-above. 
-
-```
-$ kubectl create secret generic dtr-certs \
-    --from-file=certs/dtr.cert.pem \
-    --from-file=certs/cache.cert.pem \
-    --from-file=certs/cache.key.pem
-
-$ kubectl create configmap dtr-cache-config \
-    --from-file=config.yml
-```
-
-Create the Kubernetes Deployment. 
-
-```
-cat <<EOF | kubectl create -f -
+cat > dtrcache.yaml <<EOF
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -146,7 +149,7 @@ spec:
           command: ["bin/sh"]
           args:
             - start.sh
-            - /config/config.yml
+            - /config/config.yaml
           ports:
           - name: https
             containerPort: 443
@@ -168,20 +171,127 @@ spec:
 EOF
 ```
 
-You can check if the deployment has been successful with `kubectl get pods -n dtr`.
-If you need to troubleshoot your deployment, you can use `kubectl describe -n dtr <pods>`
-and / or `kubectl logs -n dtr <pods>`
+## Create Kubernetes Resources
 
-For external access to the DTR cache you could expose your DTR cache through 
-multiple interfaces: Ingress Object, Node Port, Host Port or Loadbalancer. 
-The following yaml will expose the DTR cache through an ingress obect.
-
-> Note an ingress controller is a pre-requsite for this example. If you have not deploy
-> an ingress controller on your cluster, here are instructions for the Nginx ingress
-> controller for [UCP](ucp/kubernetes/layer-7-routing). 
+At this point you should have a file structure on your workstation which looks 
+like this:
 
 ```
-cat <<EOF | kubectl create -f -
+├── dtrcache.yaml        # Yaml file to deploy cache with a single command
+├── config.yaml          # The cache configuration file
+└── certs
+    ├── cache.cert.pem   # The cache public key certificate
+    ├── cache.key.pem    # The cache private key
+    └── dtr.cert.pem     # DTR CA certificate
+```
+
+You will also need the `kubectl` command line tool configured to talk to your 
+Kubernetes cluster, either through a Kubernetes Config file or a [Universal
+Control Plane client bundle](/ee/ucp/user-access/kubectl/).
+
+First we will create a Kubernetes namespace to logically seperate all of our 
+DTR cache components.
+
+```
+$ kubectl create namespace dtr
+```
+
+Create the Kubernetes Secrets, containing the DTR cache TLS certificates, and a 
+Kubernetes ConfigMap containing the DTR cache configuration file. 
+
+```
+$ kubectl -n dtr create secret generic dtr-certs \
+    --from-file=certs/dtr.cert.pem \
+    --from-file=certs/cache.cert.pem \
+    --from-file=certs/cache.key.pem
+
+$ kubectl -n dtr create configmap dtr-cache-config \
+    --from-file=config.yaml
+```
+
+Finally create the Kubernetes Deployment. 
+
+```
+$ kubectl create -f dtrcache.yaml
+```
+
+You can check if the deployment has been successful by checking the running pods
+in your cluster: `kubectl -n dtr get pods `
+
+If you need to troubleshoot your deployment, you can use 
+`kubectl -n dtr describe pods <pods>` and / or `kubectl -n dtr logs <pods>`. 
+
+### Exposing the DTR Cache
+
+For external access to the DTR cache we need to expose the Cache Pods to the 
+outside world. In Kubernetes there are multiple ways for you to expose a service
+dependent on your infrastructure and your environment. For more information see
+the Kubernetes docs 
+[here](https://kubernetes.io/docs/concepts/services-networking/#publishing-services-service-types)
+It is important though that you are consistent in exposing the Cache through the 
+same interface you created a certificate for [previously](#create-the-dtr-cache-certificates).
+Otherwise the TLS certificate may not be valid through this alternative 
+interface.
+
+> Note you only need to expose your DTR cache through 1 external interface.
+
+#### NodePort
+
+The first example exposes the DTR cache via NodePort. In this example you would 
+have added a worker nodes FQDN to the TLS Certificate in [step 1](#create-the-dtr-cache-certificates).
+Here you will be accessing the DTR cache through an exposed port on a worker 
+nodes.
+
+```
+cat > dtrcacheservice.yaml <<EOF
+apiVersion: v1
+kind: Service
+metadata:
+  name: dtr-cache
+  namespace: dtr
+spec:
+  type: NodePort
+  ports:
+  - name: https
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  selector:
+    app: dtr-cache
+EOF
+
+kubectl create -f dtrcacheservice.yaml
+```
+
+To find out which port the DTR cache has been exposed on, you will need to run:
+
+```
+$ kubectl -n dtr get services 
+```
+
+You can test that your DTR cache is externally reachable by using curl to hit 
+the API endpoint, using both a worker nodes external address, and the NodePort.
+
+```
+curl -X GET https://<workernodefqdn>:<nodeport>/v2/_catalog
+{"repositories":[]}
+```
+
+#### Ingress Controller
+
+This second example will expose the DTR cache through an ingress object. In 
+this example you will need to create a DNS rule in your environment that will 
+resolve a DTR cache external FQDN address to the address of your ingress 
+controller. You should have also specified the same DTR cache external FQDN
+address within the DTR cache certificate in [step 1](#create-the-dtr-cache-certificates).
+
+> Note an ingress controller is a pre-requsite for this example. If you have not 
+> deployed an ingress controller on your cluster, here are instructions for the 
+> NGINX ingress controller for [UCP](ucp/kubernetes/layer-7-routing). This 
+> ingress controller will also need to support SSL pass through.
+
+```
+cat > dtrcacheservice.yaml <<EOF
 kind: Service
 apiVersion: v1
 metadata:
@@ -206,23 +316,27 @@ metadata:
 spec:
   tls:
   - hosts:
-    - <external-dtr-cache-fqdn>
+    - <external-dtr-cache-fqdn> # Replace this value with your external DTR Cache address
   rules:
-  - host: <external-dtr-cache-fqdn>
+  - host: <external-dtr-cache-fqdn> # Replace this value with your external DTR Cache address
     http:
       paths:
       - backend:
           serviceName: dtr-cache
           servicePort: 443
+EOF
+
+kubectl create -f dtrcacheservice.yaml
 ```
 
-You can test that your DTR cache is externally reachable by curling the API endpoint.
+You can test that your DTR cache is externally reachable by using curl to hit 
+the API endpoint. The address should be the one you have defined above in the 
+serivce definition file.
 
 ```
-curl -X GET https://<dtr-cache-endpoint>/v2/_catalog
+curl -X GET https://external-dtr-cache-fqdn/v2/_catalog
 {"repositories":[]}
 ```
-
 
 ## Next Steps 
 
