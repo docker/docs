@@ -62,10 +62,10 @@ this setting. Click **Add webhook**, and use the following settings:
 
 The image below shows the **Webhooks/Add webhook** form with the above settings reflected:
 
-![github-webhook-add](images/github-webhook-add.png)
+![github-webhook-add](/docker-hub/images/github-webhook-add.png)
 
 If configured correctly, you'll see this in the **Webhooks** view
-![github-webhook](images/github-webhook.png)
+![github-webhook](/docker-hub/images/github-webhook.png)
 
 
 
