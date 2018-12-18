@@ -113,7 +113,7 @@ More details on this configuration file can be found
 ## Considerations for Multiple Subscriptions, Subnets, and Resource Groups Configuration
 
 UCP manager nodes and [DTR](/ee/dtr) nodes can be deployed in a separate Azure Subscription on separate Azure Subnet than the worker nodes. To do this, set up [Azure VNet Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview): 
-1. In https://portal.azure.com navigate to the Azure Resource Group containing the UCP managers and DTR nodes, and then click on the Virtual Network in the list.
+1. In [https://portal.azure.com](https://portal.azure.com) navigate to the Azure Resource Group containing the UCP managers and DTR nodes, and then click on the Virtual Network in the list.
 2. Under Settings, click **Peerings**
 3. Add a Peering from this VNet to the other Azure Subscription's VNet which contains the worker nodes. Be sure to select "Allow forwarded traffic" option.
 4. Navigate to the other Azure Resource Group which has the workers nodes, and then click on the Virtual Network in the list.
