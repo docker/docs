@@ -28,20 +28,17 @@ upgrade your installation to the latest release.
 * Identity Provider initiated SAML Single Signon is now supported in UCP.  The admin can 
 enable this feature in Admin Settings -> SAML Settings.
 
-### UI
-* Added instrumentation to all the Kubernetes resource types.
-
 ### Bug Fixes
 * Core
   * Significantly reduced database load in environments with a lot of concurrent 
   and repeated API requests by the same user. (docker/escalation#911)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (#15015) 
+   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
 * Interlock
-  * Interlock headers can now be hidden. (docker/escalation#833)
-  * (FIXME) Pending  https://github.com/docker/orca/pull/15459 docker/escalation/issues/871
-  * (FIXME) Pending docker/interlock#169. docker/interlock#206  that addresses escalation/920
+  * Interlock headers can now be hidden. (escalation#833)
+  * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (escalation/871)
+  * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (docker/interlock#206) (escalation/920)
 
 ## 3.1.1 (2018-12-04)
 
