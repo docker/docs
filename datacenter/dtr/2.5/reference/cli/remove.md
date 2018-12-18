@@ -2,6 +2,8 @@
 title: docker/dtr remove
 description: Remove a DTR replica from a cluster
 keywords: dtr, cli, remove
+redirect_from:
+ - /reference/dtr/2.5/cli/remove/
 ---
 
 Remove a DTR replica from a cluster

@@ -2,6 +2,8 @@
 title: docker/ucp install
 description: Install UCP on this node
 keywords: ucp, cli, install
+redirect_from:
+ - /reference/ucp/3.0/cli/install/
 ---
 
 Install UCP on this node

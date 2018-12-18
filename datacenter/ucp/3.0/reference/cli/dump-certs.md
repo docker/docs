@@ -2,6 +2,8 @@
 title: docker/ucp dump-certs
 description: Print the public certificates used by this UCP web server
 keywords: ucp, cli, dump-certs
+redirect_from:
+ - /reference/ucp/3.0/cli/dump-certs/
 ---
 
 Print the public certificates used by this UCP web server

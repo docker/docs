@@ -2,6 +2,8 @@
 title: docker/dtr destroy
 description: Destroy a DTR replica's data
 keywords: dtr, cli, destroy
+redirect_from:
+ - /reference/dtr/2.5/cli/destroy/
 ---
 
 Destroy a DTR replica's data

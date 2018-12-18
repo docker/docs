@@ -2,6 +2,8 @@
 title: docker/ucp example-config
 description: Display an example configuration file for UCP
 keywords: ucp, cli, config, configuration
+redirect_from:
+ - /reference/ucp/3.0/cli/example-config/
 ---
 
 Display an example configuration file for UCP

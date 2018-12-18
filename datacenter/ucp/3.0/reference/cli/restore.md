@@ -2,6 +2,8 @@
 title: docker/ucp restore
 description: Restore a UCP cluster from a backup
 keywords: ucp, cli, restore
+redirect_from:
+ - /reference/ucp/3.0/cli/restore/
 ---
 
 Restore a UCP cluster from a backup

@@ -2,6 +2,8 @@
 title: docker/dtr reconfigure
 description: Change DTR configurations
 keywords: dtr, cli, reconfigure
+redirect_from:
+ - /reference/dtr/2.5/cli/reconfigure/
 ---
 
 Change DTR configurations
