@@ -2,6 +2,8 @@
 title: docker/ucp images
 description: Verify the UCP images on this node
 keywords: ucp, cli, images
+redirect_from:
+ - /reference/ucp/3.0/cli/images/
 ---
 
 Verify the UCP images on this node

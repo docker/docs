@@ -2,6 +2,8 @@
 title: docker/ucp restart
 description: Start or restart UCP components running on this node
 keywords: ucp, cli, restart
+redirect_from:
+ - /reference/ucp/3.0/cli/restart/
 ---
 
 Start or restart UCP components running on this node

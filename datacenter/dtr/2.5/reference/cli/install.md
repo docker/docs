@@ -2,6 +2,8 @@
 title: docker/dtr install
 description: Install Docker Trusted Registry
 keywords: dtr, cli, install
+redirect_from:
+ - /reference/dtr/2.5/cli/install/
 ---
 
 Install Docker Trusted Registry

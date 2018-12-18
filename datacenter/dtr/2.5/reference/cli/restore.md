@@ -2,6 +2,8 @@
 title: docker/dtr restore
 description: Install and restore DTR from an existing backup
 keywords: dtr, cli, restore
+redirect_from:
+ - /reference/dtr/2.5/cli/restore/
 ---
 
 Install and restore DTR from an existing backup

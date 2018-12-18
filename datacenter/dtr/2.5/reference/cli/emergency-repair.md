@@ -2,6 +2,8 @@
 title: docker/dtr emergency-repair
 description: Recover DTR from loss of quorum
 keywords: dtr, cli, emergency-repair
+redirect_from:
+ - /reference/dtr/2.5/cli/emergency-repair/
 ---
 
 Recover DTR from loss of quorum

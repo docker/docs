@@ -2,6 +2,8 @@
 title: docker/ucp upgrade
 description: Upgrade the UCP components on this node
 keywords: ucp, cli, upgrade
+redirect_from:
+ - /reference/ucp/3.0/cli/upgrade/
 ---
 
 Upgrade the UCP cluster
