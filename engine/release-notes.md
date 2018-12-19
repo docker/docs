@@ -4,9 +4,9 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
-- /ee/engine/release-notes/
-- /release-notes/docker-ce/
-
+redirect_from:
+ - /ee/engine/release-notes/
+ - /release-notes/docker-ce/
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
@@ -15,6 +15,12 @@ for Docker Engine Enterprise Edition (Docker EE) and Community Edition (CE)
 Docker EE is a superset of all the features in Docker CE. It incorporates defect fixes 
 that you can use in environments where new features cannot be adopted as quickly for 
 consistency and compatibility reasons.
+
+> ***NOTE:*** 
+> New in 18.09 is an aligned release model for Docker Engine - Community and Docker 
+> Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing 
+> patch version. The enterprise engine is a superset of the community engine. They 
+> will ship concurrently with the same x patch version based on the same code base. 
 
 ## 18.09 
 2018-11-08
