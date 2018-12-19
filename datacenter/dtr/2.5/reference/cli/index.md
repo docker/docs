@@ -2,6 +2,8 @@
 title: docker/dtr overview
 description: Learn about the commands available in the docker/dtr image.
 keywords: dtr, install, uninstall, configure
+redirect_from:
+ - /reference/dtr/2.5/cli/
 ---
 
 This tool has commands to install, configure, and backup Docker
