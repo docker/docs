@@ -19,7 +19,7 @@ consistency and compatibility reasons.
 > ***NOTE:*** 
 > New in 18.09 is an aligned release model for Docker Engine - Community and Docker 
 > Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing 
-> patch version. The enterprise engine is a super-set of the community engine. They 
+> patch version. The enterprise engine is a superset of the community engine. They 
 > will ship concurrently with the same x patch version based on the same code base. 
 
 ## 18.09 
