@@ -62,11 +62,13 @@ To find the current default logging driver for the Docker daemon, run
 `docker info` and search for `Logging Driver`. You can use the following
 command:
 
+{% raw %}
 ```bash
 $ docker info --format '{{.LoggingDriver}}'
 
 json-file
 ```
+{% endraw %}
 
 ## Configure the logging driver for a container
 
