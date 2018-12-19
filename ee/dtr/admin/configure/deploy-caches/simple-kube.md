@@ -80,7 +80,7 @@ The cache, by default, is configured to store image data inside its container.
 Therefore if something goes wrong with the cache service, and Kubernetes deploys
 a new pod, cached data is not persisted. Data will not be lost as it is still 
 stored in the primary DTR. You can 
-[customize the storage parameters](/registry/configuration.md#storage),
+[customize the storage parameters](/registry/configuration/#storage),
 if you want the cached images to be backend by persistent storage.
 
 > Note Kubernetes Peristent Volumes or Persistent Volume Claims would have to be 
@@ -189,7 +189,7 @@ You will also need the `kubectl` command line tool configured to talk to your
 Kubernetes cluster, either through a Kubernetes Config file or a [Universal
 Control Plane client bundle](/ee/ucp/user-access/kubectl/).
 
-First we will create a Kubernetes namespace to logically seperate all of our 
+First we will create a Kubernetes namespace to logically separate all of our 
 DTR cache components.
 
 ```
@@ -233,14 +233,16 @@ same interface you created a certificate for [previously](#create-the-dtr-cache-
 Otherwise the TLS certificate may not be valid through this alternative 
 interface.
 
-> Note you only need to expose your DTR cache through 1 external interface.
+> #### DTR Cache Exposure 
+>
+> You only need to expose your DTR cache through ***one*** external interface.
 
 #### NodePort
 
-The first example exposes the DTR cache via NodePort. In this example you would 
-have added a worker nodes FQDN to the TLS Certificate in [step 1](#create-the-dtr-cache-certificates).
+The first example exposes the DTR cache via **NodePort**. In this example you would 
+have added a worker node's FQDN to the TLS Certificate in [step 1](#create-the-dtr-cache-certificates).
 Here you will be accessing the DTR cache through an exposed port on a worker 
-nodes.
+node's FQDN.
 
 ```
 cat > dtrcacheservice.yaml <<EOF
@@ -269,8 +271,8 @@ To find out which port the DTR cache has been exposed on, you will need to run:
 $ kubectl -n dtr get services 
 ```
 
-You can test that your DTR cache is externally reachable by using curl to hit 
-the API endpoint, using both a worker nodes external address, and the NodePort.
+You can test that your DTR cache is externally reachable by using `curl` to hit 
+the API endpoint, using both a worker node's external address, and the **NodePort**.
 
 ```
 curl -X GET https://<workernodefqdn>:<nodeport>/v2/_catalog
@@ -279,16 +281,15 @@ curl -X GET https://<workernodefqdn>:<nodeport>/v2/_catalog
 
 #### Ingress Controller
 
-This second example will expose the DTR cache through an ingress object. In 
+This second example will expose the DTR cache through an **ingress** object. In 
 this example you will need to create a DNS rule in your environment that will 
 resolve a DTR cache external FQDN address to the address of your ingress 
 controller. You should have also specified the same DTR cache external FQDN
 address within the DTR cache certificate in [step 1](#create-the-dtr-cache-certificates).
 
-> Note an ingress controller is a pre-requsite for this example. If you have not 
-> deployed an ingress controller on your cluster, here are instructions for the 
-> NGINX ingress controller for [UCP](ucp/kubernetes/layer-7-routing). This 
-> ingress controller will also need to support SSL pass through.
+> Note an ingress controller is a prerequisite for this example. If you have not 
+> deployed an ingress controller on your cluster, see [Layer 7 Routing for UCP](ucp/kubernetes/layer-7-routing). This 
+> ingress controller will also need to support SSL passthrough.
 
 ```
 cat > dtrcacheservice.yaml <<EOF
@@ -340,4 +341,4 @@ curl -X GET https://external-dtr-cache-fqdn/v2/_catalog
 
 ## Next Steps 
 
-[Integrate your cache into DTR and configure users](simple.md#register-the-cache-with-dtr)
+[Integrate your cache into DTR and configure users](simple#register-the-cache-with-dtr)
