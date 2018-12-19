@@ -1,11 +1,11 @@
 ---
 title: Configure UCP logging
 description: Learn how to configure Docker Universal Control Plane to store your logs
-  on an external log system.
+  on an external log system and configure an appropriate log level.
 keywords: ucp, integrate, logs
 ---
 
-You can configure UCP for sending logs to a remote logging service:
+You can configure UCP's log level and destination for sending logs to a remote logging service:
 
 1. Log in to UCP with an administrator account.
 2. Navigate to the **Admin Settings** page.
@@ -19,7 +19,7 @@ You can configure UCP for sending logs to a remote logging service:
 > Administrators should configure Docker EE to store logs using an external
 > system. By default, the Docker daemon doesn't delete logs, which means that
 > in a production system with intense usage, your logs can consume a
-> significant amount of disk space.
+> significant amount of disk space, especially when configured at DEBUG level.
 {: .important}
 
 ## Example: Setting up an ELK stack
