@@ -144,7 +144,7 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
     metadata:
       name: prometheus
     spec:
-    replicas: 2
+      replicas: 2
       selector:
         matchLabels:
           app: prometheus
