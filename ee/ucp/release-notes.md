@@ -25,7 +25,7 @@ upgrade your installation to the latest release.
 
 ### Authentication and Authorization
 * SAML Single Logout is now supported in UCP.
-* Identity Provider initiated SAML Single Signon is now supported in UCP.  The admin can 
+* Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can 
 enable this feature in Admin Settings -> SAML Settings.
 
 ### Bug Fixes
