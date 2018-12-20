@@ -2328,8 +2328,8 @@ stack. The source of the secret is either `file` or `external`.
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_secret` is created (as
-`<stack_name>_my_first_secret)`when the stack is deployed,
+In this example, `my_first_secret` is created as
+`<stack_name>_my_first_secret `when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```none
@@ -2345,6 +2345,7 @@ is different from the name that exists within the service. The following
 example modifies the previous one to use the external secret called
 `redis_secret`.
 
+### Compose File v3.5 and above
 ```none
 secrets:
   my_first_secret:
@@ -2352,8 +2353,10 @@ secrets:
   my_second_secret:
     external: true
     name: redis_secret
-    
-  // Deprecated syntax for compose file version 3.5-
+```
+
+### Compose File v3.4 and under
+```none    
   my_second_secret:
     external:
       name: redis_secret
