@@ -49,7 +49,7 @@ For more on image layers (and how Docker builds and stores images), see
 ### Create ephemeral containers
 
 The image defined by your `Dockerfile` should generate containers that are as
-ephemeral as possible. By “ephemeral,” we mean that the container can be stopped
+ephemeral as possible. By "ephemeral", we mean that the container can be stopped
 and destroyed, then rebuilt and replaced with an absolute minimum set up and
 configuration.
 
@@ -191,8 +191,8 @@ CMD ["--help"]
 ### Don't install unnecessary packages
 
 To reduce complexity, dependencies, file sizes, and build times, avoid
-installing extra or unnecessary packages just because they might be “nice to
-have.” For example, you don’t need to include a text editor in a database image.
+installing extra or unnecessary packages just because they might be "nice to
+have." For example, you don’t need to include a text editor in a database image.
 
 ### Decouple applications
 
@@ -358,7 +358,7 @@ Probably the most common use-case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several gotchas to
 look out for.
 
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the “essential”
+Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
 packages from the parent images cannot upgrade inside an
 [unprivileged container](/engine/reference/run.md#security-configuration). If a package
 contained in the parent image is out-of-date, contact its maintainers. If you
@@ -714,7 +714,7 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 > Consider an explicit UID/GID
 >
 > Users and groups in an image are assigned a non-deterministic UID/GID in that
-> the “next” UID/GID is assigned regardless of image rebuilds. So, if it’s
+> the "next" UID/GID is assigned regardless of image rebuilds. So, if it’s
 > critical, you should assign an explicit UID/GID.
 
 > Due to an [unresolved bug](https://github.com/golang/go/issues/13548) in the
@@ -727,7 +727,7 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 Avoid installing or using `sudo` as it has unpredictable TTY and
 signal-forwarding behavior that can cause problems. If you absolutely need
 functionality similar to `sudo`, such as initializing the daemon as `root` but
-running it as non-`root`), consider using [“gosu”](https://github.com/tianon/gosu).
+running it as non-`root`), consider using ["gosu"](https://github.com/tianon/gosu).
 
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
@@ -761,7 +761,7 @@ builds arbitrary user software written in that language within the
 Images built from `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
-Be careful when putting `ADD` or `COPY` in `ONBUILD`. The “onbuild” image
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The "onbuild" image
 fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
