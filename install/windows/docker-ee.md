@@ -5,6 +5,7 @@ title: Install Docker Engine - Enterprise on Windows Servers
 redirect_from:
 - /docker-ee-for-windows/install/
 - /engine/installation/windows/docker-ee/
+- /install/windows/ee-preview/
 ---
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
