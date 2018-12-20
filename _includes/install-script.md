@@ -55,8 +55,8 @@ Remember to log out and back in for this to take effect!
 
 > **Warning**:
 >
-> Adding a user to the "docker" group grants the ability to run containers
-> which can be used to obtain root privileges on the  docker host. Refer to
+> Adding a user to the "docker" group grants them the ability to run containers
+> which can be used to obtain root privileges on the Docker host. Refer to
 > [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
 > for more information.
 {:.warning}

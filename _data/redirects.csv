@@ -48,8 +48,13 @@ source,destination
 /v1.9/docker-hub/,/docker-hub/
 /v1.10/docker-hub/,/docker-hub/
 /v1.11/docker-hub/,/docker-hub/
-/login,https://cloud.docker.com/app/login
+/login,https://hub.docker.com/
 /bitbucket/use-docker-images-as-build-environments-in-bitbucket-pipelines-792298897.html,https://confluence.atlassian.com/bitbucket/use-docker-images-as-build-environments-in-bitbucket-pipelines-792298897.html
 /blog/docker-data-science/,https://www.dataquest.io/blog/docker-data-science/
 /questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container,http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container
 /engine/examples/mongodb/,/samples/library/mongo/
+/reference/dtr/2.5/api/,/datacenter/dtr/2.5/reference/api/
+/reference/dtr/2.5/cli/,/datacenter/dtr/2.5/reference/cli/
+/reference/ucp/3.0/api/,/datacenter/ucp/3.0/reference/api/
+/reference/ucp/3.0/cli/,/datacenter/ucp/3.0/reference/cli/
+

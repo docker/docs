@@ -47,7 +47,7 @@ on your network, your container appears to be physically attached to the network
       my-macvlan-net
     ```
 
-    You can use `docker network ls` and `docker network inspect pub_net`
+    You can use `docker network ls` and `docker network inspect my-macvlan-net`
     commands to verify that the network exists and is a `macvlan` network.
 
 2.  Start an `alpine` container and attach it to the `my-macvlan-net` network. The
@@ -138,7 +138,7 @@ be physically attached to the network.
       my-8021q-macvlan-net
     ```
 
-    You can use `docker network ls` and `docker network inspect pub_net`
+    You can use `docker network ls` and `docker network inspect my-8021q-macvlan-net`
     commands to verify that the network exists, is a `macvlan` network, and
     has parent `eth0.10`. You can use `ip addr show` on the Docker host to
     verify that the interface `eth0.10` exists and has a separate IP address
@@ -208,7 +208,7 @@ be physically attached to the network.
     the network.
 
     ```bash
-    $ docker container stop my-second-macvlan-alpin
+    $ docker container stop my-second-macvlan-alpine
 
     $ docker network rm my-8021q-macvlan-net
     ```

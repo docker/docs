@@ -1,0 +1,315 @@
+<p>With Docker EE Advanced, you can enable physical isolation of resources
+by organizing nodes into collections and granting <code class="highlighter-rouge">Scheduler</code> access for
+different users. To control access to nodes, move them to dedicated collections
+where you can grant access to specific users, teams, and organizations.</p>
+
+<p><img src="../images/containers-and-nodes-diagram.svg" alt="" /></p>
+
+<p>In this example, a team gets access to a node collection and a resource
+collection, and UCP access control ensures that the team members can’t view
+or use swarm resources that aren’t in their collection.</p>
+
+<p>You need a Docker EE Advanced license and at least two worker nodes to
+complete this example.</p>
+
+<ol>
+  <li>Create an <code class="highlighter-rouge">Ops</code> team and assign a user to it.</li>
+  <li>Create a <code class="highlighter-rouge">/Prod</code> collection for the team’s node.</li>
+  <li>Assign a worker node to the <code class="highlighter-rouge">/Prod</code> collection.</li>
+  <li>Grant the <code class="highlighter-rouge">Ops</code> teams access to its collection.</li>
+</ol>
+
+<p><img src="../images/isolate-nodes-diagram.svg" alt="" class="with-border" /></p>
+
+<h2 id="create-a-team">Create a team</h2>
+
+<p>In the web UI, navigate to the <strong>Organizations &amp; Teams</strong> page to create a team
+named “Ops” in your organization. Add a user who isn’t a UCP administrator to
+the team.
+<a href="create-users-and-teams-manually.md">Learn to create and manage teams</a>.</p>
+
+<h2 id="create-a-node-collection-and-a-resource-collection">Create a node collection and a resource collection</h2>
+
+<p>In this example, the Ops team uses an assigned group of nodes, which it
+accesses through a collection. Also, the team has a separate collection
+for its resources.</p>
+
+<p>Create two collections: one for the team’s worker nodes and another for the
+team’s resources.</p>
+
+<ol>
+  <li>Navigate to the <strong>Collections</strong> page to view all of the resource
+collections in the swarm.</li>
+  <li>Click <strong>Create collection</strong> and name the new collection “Prod”.</li>
+  <li>Click <strong>Create</strong> to create the collection.</li>
+  <li>Find <strong>Prod</strong> in the list, and click <strong>View children</strong>.</li>
+  <li>Click <strong>Create collection</strong>, and name the child collection
+“Webserver”. This creates a sub-collection for access control.</li>
+</ol>
+
+<p>You’ve created two new collections. The <code class="highlighter-rouge">/Prod</code> collection is for the worker
+nodes, and the <code class="highlighter-rouge">/Prod/Webserver</code> sub-collection is for access control to
+an application that you’ll deploy on the corresponding worker nodes.</p>
+
+<h2 id="move-a-worker-node-to-a-collection">Move a worker node to a collection</h2>
+
+<p>By default, worker nodes are located in the <code class="highlighter-rouge">/Shared</code> collection.
+Worker nodes that are running DTR are assigned to the <code class="highlighter-rouge">/System</code> collection.
+To control access to the team’s nodes, move them to a dedicated collection.</p>
+
+<p>Move a worker node by changing the value of its access label key,
+<code class="highlighter-rouge">com.docker.ucp.access.label</code>, to a different collection.</p>
+
+<ol>
+  <li>Navigate to the <strong>Nodes</strong> page to view all of the nodes in the swarm.</li>
+  <li>Click a worker node, and in the details pane, find its <strong>Collection</strong>.
+If it’s in the <code class="highlighter-rouge">/System</code> collection, click another worker node,
+because you can’t move nodes that are in the <code class="highlighter-rouge">/System</code> collection. By
+default, worker nodes are assigned to the <code class="highlighter-rouge">/Shared</code> collection.</li>
+  <li>When you’ve found an available node, in the details pane, click
+<strong>Configure</strong>.</li>
+  <li>In the <strong>Labels</strong> section, find <code class="highlighter-rouge">com.docker.ucp.access.label</code> and change
+its value from <code class="highlighter-rouge">/Shared</code> to <code class="highlighter-rouge">/Prod</code>.</li>
+  <li>Click <strong>Save</strong> to move the node to the <code class="highlighter-rouge">/Prod</code> collection.</li>
+</ol>
+
+<blockquote>
+  <p>Docker EE Advanced required</p>
+
+  <p>If you don’t have a Docker EE Advanced license, you’ll get the following
+error message when you try to change the access label:
+<strong>Nodes must be in either the shared or system collection without an advanced license.</strong>
+<a href="https://www.docker.com/pricing">Get a Docker EE Advanced license</a>.</p>
+</blockquote>
+
+<p><img src="../images/isolate-nodes-1.png" alt="" class="with-border" /></p>
+
+<h2 id="grant-access-for-a-team">Grant access for a team</h2>
+
+<p>You need two grants to control access to nodes and container resources:</p>
+
+<ul>
+  <li>Grant the <code class="highlighter-rouge">Ops</code> team the <code class="highlighter-rouge">Restricted Control</code> role for the <code class="highlighter-rouge">/Prod/Webserver</code>
+resources.</li>
+  <li>Grant the <code class="highlighter-rouge">Ops</code> team the <code class="highlighter-rouge">Scheduler</code> role against the nodes in the <code class="highlighter-rouge">/Prod</code>
+collection.</li>
+</ul>
+
+<p>Create two grants for team access to the two collections:</p>
+
+<ol>
+  <li>Navigate to the <strong>Grants</strong> page and click <strong>Create Grant</strong>.</li>
+  <li>In the left pane, click <strong>Resource Sets</strong>, and in the <strong>Swarm</strong> collection,
+click <strong>View Children</strong>.</li>
+  <li>In the <strong>Prod</strong> collection, click <strong>View Children</strong>.</li>
+  <li>In the <strong>Webserver</strong> collection, click <strong>Select Collection</strong>.</li>
+  <li>In the left pane, click <strong>Roles</strong>, and select <strong>Restricted Control</strong>
+in the dropdown.</li>
+  <li>Click <strong>Subjects</strong>, and under <strong>Select subject type</strong>, click <strong>Organizations</strong>.</li>
+  <li>Select your organization, and in the <strong>Team</strong> dropdown, select <strong>Ops</strong>.</li>
+  <li>Click <strong>Create</strong> to grant the Ops team access to the <code class="highlighter-rouge">/Prod/Webserver</code>
+collection.</li>
+</ol>
+
+<p>The same steps apply for the nodes in the <code class="highlighter-rouge">/Prod</code> collection.</p>
+
+<ol>
+  <li>Navigate to the <strong>Grants</strong> page and click <strong>Create Grant</strong>.</li>
+  <li>In the left pane, click <strong>Collections</strong>, and in the <strong>Swarm</strong> collection,
+click <strong>View Children</strong>.</li>
+  <li>In the <strong>Prod</strong> collection, click <strong>Select Collection</strong>.</li>
+  <li>In the left pane, click <strong>Roles</strong>, and in the dropdown, select <strong>Scheduler</strong>.</li>
+  <li>In the left pane, click <strong>Subjects</strong>, and under <strong>Select subject type</strong>, click
+<strong>Organizations</strong>.</li>
+  <li>Select your organization, and in the <strong>Team</strong> dropdown, select <strong>Ops</strong> .</li>
+  <li>Click <strong>Create</strong> to grant the Ops team <code class="highlighter-rouge">Scheduler</code> access to the nodes in the
+<code class="highlighter-rouge">/Prod</code> collection.</li>
+</ol>
+
+<p><img src="../images/isolate-nodes-2.png" alt="" class="with-border" /></p>
+
+<p>The cluster is set up for node isolation. Users with access to nodes in the
+<code class="highlighter-rouge">/Prod</code> collection can deploy <a href="#deploy-a-swarm-service-as-a-team-member">Swarm services</a>
+and <a href="#deploy-a-kubernetes-application">Kubernetes apps</a>, and their workloads
+won’t be scheduled on nodes that aren’t in the collection.</p>
+
+<h2 id="deploy-a-swarm-service-as-a-team-member">Deploy a Swarm service as a team member</h2>
+
+<p>When a user deploys a Swarm service, UCP assigns its resources to the user’s
+default collection.</p>
+
+<p>From the target collection of a resource, UCP walks up the ancestor collections
+until it finds the highest ancestor that the user has <code class="highlighter-rouge">Scheduler</code> access to.
+Tasks are scheduled on any nodes in the tree below this ancestor. In this example,
+UCP assigns the user’s service to the <code class="highlighter-rouge">/Prod/Webserver</code> collection and schedules
+tasks on nodes in the <code class="highlighter-rouge">/Prod</code> collection.</p>
+
+<p>As a user on the <code class="highlighter-rouge">Ops</code> team, set your default collection to <code class="highlighter-rouge">/Prod/Webserver</code>.</p>
+
+<ol>
+  <li>Log in as a user on the <code class="highlighter-rouge">Ops</code> team.</li>
+  <li>Navigate to the <strong>Collections</strong> page, and in the <strong>Prod</strong> collection,
+click <strong>View Children</strong>.</li>
+  <li>In the <strong>Webserver</strong> collection, click the <strong>More Options</strong> icon and
+select <strong>Set to default</strong>.</li>
+</ol>
+
+<p>Deploy a service automatically to worker nodes in the <code class="highlighter-rouge">/Prod</code> collection.
+All resources are deployed under the user’s default collection,
+<code class="highlighter-rouge">/Prod/Webserver</code>, and the containers are scheduled only on the nodes under
+<code class="highlighter-rouge">/Prod</code>.</p>
+
+<ol>
+  <li>Navigate to the <strong>Services</strong> page, and click <strong>Create Service</strong>.</li>
+  <li>Name the service “NGINX”, use the “nginx:latest” image, and click
+<strong>Create</strong>.</li>
+  <li>When the <strong>nginx</strong> service status is green, click the service. In the
+details view, click <strong>Inspect Resource</strong>, and in the dropdown, select
+<strong>Containers</strong>.</li>
+  <li>
+    <p>Click the <strong>NGINX</strong> container, and in the details pane, confirm that its
+<strong>Collection</strong> is <strong>/Prod/Webserver</strong>.</p>
+
+    <p><img src="../images/isolate-nodes-3.png" alt="" class="with-border" /></p>
+  </li>
+  <li>Click <strong>Inspect Resource</strong>, and in the dropdown, select <strong>Nodes</strong>.</li>
+  <li>
+    <p>Click the node, and in the details pane, confirm that its <strong>Collection</strong>
+is <strong>/Prod</strong>.</p>
+
+    <p><img src="../images/isolate-nodes-4.png" alt="" class="with-border" /></p>
+  </li>
+</ol>
+
+<h3 id="alternative-use-a-grant-instead-of-the-default-collection">Alternative: Use a grant instead of the default collection</h3>
+
+<p>Another approach is to use a grant instead of changing the user’s default
+collection. An administrator can create a grant for a role that has the
+<code class="highlighter-rouge">Service Create</code> permission against the <code class="highlighter-rouge">/Prod/Webserver</code> collection or a child
+collection. In this case, the user sets the value of the service’s access label,
+<code class="highlighter-rouge">com.docker.ucp.access.label</code>, to the new collection or one of its children
+that has a <code class="highlighter-rouge">Service Create</code> grant for the user.</p>
+
+<h2 id="deploy-a-kubernetes-application">Deploy a Kubernetes application</h2>
+
+<p>Starting in Docker Enterprise Edition 2.0, you can deploy a Kubernetes workload
+to worker nodes, based on a Kubernetes namespace.</p>
+
+<ol>
+  <li>Convert a node to use the Kubernetes orchestrator.</li>
+  <li>Create a Kubernetes namespace.</li>
+  <li>Create a grant for the namespace.</li>
+  <li>Link the namespace to a node collection.</li>
+  <li>Deploy a Kubernetes workload.</li>
+</ol>
+
+<h3 id="convert-a-node-to-kubernetes">Convert a node to Kubernetes</h3>
+
+<p>To deploy Kubernetes workloads, an administrator must convert a worker node to
+use the Kubernetes orchestrator.
+<a href="../admin/configure/set-orchestrator-type.md">Learn how to set the orchestrator type</a>
+for your nodes in the <code class="highlighter-rouge">/Prod</code> collection.</p>
+
+<h3 id="create-a-kubernetes-namespace">Create a Kubernetes namespace</h3>
+
+<p>An administrator must create a Kubernetes namespace to enable node isolation
+for Kubernetes workloads.</p>
+
+<ol>
+  <li>In the left pane, click <strong>Kubernetes</strong>.</li>
+  <li>Click <strong>Create</strong> to open the <strong>Create Kubernetes Object</strong> page.</li>
+  <li>
+    <p>In the <strong>Object YAML</strong> editor, paste the following YAML.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">Name</span><span class="pi">:</span> <span class="s">ops-nodes</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Click <strong>Create</strong> to create the <code class="highlighter-rouge">ops-nodes</code> namespace.</li>
+</ol>
+
+<h3 id="grant-access-to-the-kubernetes-namespace">Grant access to the Kubernetes namespace</h3>
+
+<p>Create a grant to the <code class="highlighter-rouge">ops-nodes</code> namespace for the <code class="highlighter-rouge">Ops</code> team by following the
+same steps that you used to grant access to the <code class="highlighter-rouge">/Prod</code> collection, only this
+time, on the <strong>Create Grant</strong> page, pick <strong>Namespaces</strong>, instead of
+<strong>Collections</strong>.</p>
+
+<p><img src="../images/isolate-nodes-5.png" alt="" class="with-border" /></p>
+
+<p>Select the <strong>ops-nodes</strong> namespace, and create a <code class="highlighter-rouge">Full Control</code> grant for the
+<code class="highlighter-rouge">Ops</code> team.</p>
+
+<p><img src="../images/isolate-nodes-6.png" alt="" class="with-border" /></p>
+
+<h3 id="link-the-namespace-to-a-node-collection">Link the namespace to a node collection</h3>
+
+<p>The last step is to link the Kubernetes namespace the <code class="highlighter-rouge">/Prod</code> collection.</p>
+
+<ol>
+  <li>Navigate to the <strong>Namespaces</strong> page, and find the <strong>ops-nodes</strong> namespace
+in the list.</li>
+  <li>
+    <p>Click the <strong>More options</strong> icon and select <strong>Link nodes in collection</strong>.</p>
+
+    <p><img src="../images/isolate-nodes-7.png" alt="" class="with-border" /></p>
+  </li>
+  <li>In the <strong>Choose collection</strong> section, click <strong>View children</strong> on the
+<strong>Swarm</strong> collection to navigate to the <strong>Prod</strong> collection.</li>
+  <li>On the <strong>Prod</strong> collection, click <strong>Select collection</strong>.</li>
+  <li>
+    <p>Click <strong>Confirm</strong> to link the namespace to the collection.</p>
+
+    <p><img src="../images/isolate-nodes-8.png" alt="" class="with-border" /></p>
+  </li>
+</ol>
+
+<h3 id="deploy-a-kubernetes-workload-to-the-node-collection">Deploy a Kubernetes workload to the node collection</h3>
+
+<ol>
+  <li>Log in in as a non-admin who’s on the <code class="highlighter-rouge">Ops</code> team.</li>
+  <li>In the left pane, open the <strong>Kubernetes</strong> section.</li>
+  <li>Confirm that <strong>ops-nodes</strong> is displayed under <strong>Namespaces</strong>.</li>
+  <li>
+    <p>Click <strong>Create</strong>, and in the <strong>Object YAML</strong> editor, paste the following
+YAML definition for an NGINX server.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ReplicationController</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+</code></pre></div>    </div>
+
+    <p><img src="../images/isolate-nodes-9.png" alt="" class="with-border" /></p>
+  </li>
+  <li>Click <strong>Create</strong> to deploy the workload.</li>
+  <li>
+    <p>In the left pane, click <strong>Pods</strong> and confirm that the workload is running
+on pods in the <code class="highlighter-rouge">ops-nodes</code> namespace.</p>
+
+    <p><img src="../images/isolate-nodes-10.png" alt="" class="with-border" /></p>
+  </li>
+</ol>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="isolate-volumes.md">Isolate volumes</a></li>
+</ul>

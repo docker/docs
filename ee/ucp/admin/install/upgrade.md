@@ -1,5 +1,5 @@
 ---
-title: Upgrade to UCP 3.0
+title: Upgrade to UCP 3.1
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
 ---
@@ -29,6 +29,9 @@ Learn about [UCP system requirements](system-requirements.md).
 Ensure that your cluster nodes meet the minimum requirements for port openings.
 [Ports used](system-requirements.md/#ports-used) are documented in the UCP system requirements. 
 
+> Note: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft 
+> Azure then please ensure all of the Azure [prequisities](install-on-azure.md/#azure-prerequisites) 
+> are met.  
 
 ## Back up your cluster
 

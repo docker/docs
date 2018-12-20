@@ -1,6 +1,6 @@
 ﻿---
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords: parent image, images, dockerfile, best practices, hub, official repo
+keywords: parent image, images, dockerfile, best practices, hub, official image
 redirect_from:
 - /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
@@ -129,7 +129,7 @@ EOF
 ```
 docker build -t foo https://github.com/thajeztah/pgadmin4-docker.git -f-<<EOF
 FROM busybox
-COPY LICENSE config_local.py /usr/local/lib/python2.7/site-packages/pgadmin4/
+COPY LICENSE config_distro.py /usr/local/lib/python2.7/site-packages/pgadmin4/
 EOF
 ```
 
@@ -291,7 +291,7 @@ maintainable `Dockerfile`.
 
 [Dockerfile reference for the FROM instruction](/engine/reference/builder.md#from)
 
-Whenever possible, use current official repositories as the basis for your
+Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
 is tightly controlled and small in size (currently under 5 MB), while still
 being a full Linux distribution.
@@ -463,8 +463,8 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
 > Not all shells support the `-o pipefail` option.
 >
-> In such cases (such as the `dash` shell, which is the default shell on
-> Debian-based images), consider using the _exec_ form of `RUN` to explicitly
+> In cases such as the `dash` shell on
+> Debian-based images, consider using the _exec_ form of `RUN` to explicitly
 > choose a shell that does support the `pipefail` option. For example:
 >
 > ```Dockerfile
@@ -766,9 +766,9 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
-## Examples for Official Repositories
+## Examples for Official Images
 
-These Official Repositories have exemplary `Dockerfile`s:
+These Official Images have exemplary `Dockerfile`s:
 
 * [Go](https://hub.docker.com/_/golang/)
 * [Perl](https://hub.docker.com/_/perl/)
@@ -780,4 +780,5 @@ These Official Repositories have exemplary `Dockerfile`s:
 * [Dockerfile Reference](/engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](/docker-hub/builds/)
-* [Guidelines for Creating Official Repositories](/docker-hub/official_repos/)
+* [Guidelines for Creating Official Images](/docker-hub/official_images/)
+
