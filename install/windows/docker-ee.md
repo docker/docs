@@ -125,8 +125,11 @@ installs, or install on air-gapped systems.
 
     ```PowerShell
     # On an online machine, download the zip file.
-    invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
+    Invoke-WebRequest -UseBasicParsing -OutFile {{ filename }} {{ download_url }}
     ```
+
+    If you need to download a specific Docker EE Engine release, all URLs can be
+    found on this [JSON index](https://download.docker.com/components/engine/windows-server/index.json)
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
     PowerShell command prompt, use the following commands to extract the archive,
@@ -174,14 +177,15 @@ installs, or install on air-gapped systems.
 To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.09
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion {{ site.docker_ee_version }}
 ...
 Name                      Version               Source           Summary
 ----                      -------               ------           -------
-Docker                    18.09.0               Docker           Contains Docker Engine - Enterprise for use with Windows Server...
+Docker                    {{ site.docker_ee_version }}                 Docker           Contains Docker Engine - Enterprise for use with Windows Server...
 ```
 
 ### Updating the DockerMsftProvider
+
 Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
 
 ```PowerShell
@@ -195,7 +199,7 @@ Then open a new Powershell session for the update to take effect.
 To update Docker Engine - Enterprise to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.09 -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {{ site.docker_ee_version }} -Update -Force
 ```
 The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
 
