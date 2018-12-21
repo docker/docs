@@ -1,4 +1,4 @@
-﻿---
+---
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
 keywords: parent image, images, dockerfile, best practices, hub, official image
 redirect_from:
