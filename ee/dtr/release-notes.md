@@ -23,7 +23,8 @@ to upgrade your installation to the latest release.
 
 ## 2.6.1 
 
-(2018-12-13)
+(2019-XX-XX)
+
 ### Bug Fixes
 
 * Fixed a bug where notary signing data was not being backed up properly (docker/dhe-deploy #9862)
@@ -93,7 +94,7 @@ to upgrade your installation to the latest release.
 
 ## 2.5.7 
 
-(2018-12-13)
+(2019-XX-XX)
 
 ### Bug Fixes
 
