@@ -169,7 +169,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Add support for Ubuntu 18.04.
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
-+ Add support for multiple logging drivers for `docker logs`.
++ Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
 ### 17.06.2-ee-17 
 2018-10-25
