@@ -2,6 +2,8 @@
 title: docker/ucp overview
 description: Learn about the commands available in the docker/ucp image.
 keywords: ucp, cli, ucp
+redirect_from:
+ - /reference/ucp/3.0/cli/
 ---
 
 This image has commands to install and manage
