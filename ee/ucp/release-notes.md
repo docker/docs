@@ -21,7 +21,7 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
-## 3.1.2 (2018-12-13)
+## 3.1.2 (2019-XX-XX)
 
 ### Authentication and Authorization
 * SAML Single Logout is now supported in UCP.
@@ -136,7 +136,7 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
-## 3.0.8 (2018-12-13)
+## 3.0.8 (2019-XX-XX)
 
 ### Bug fixes
 * Core
@@ -465,7 +465,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
-## Version 2.2.15 (2018-12-13)
+## Version 2.2.15 (2019-XX-XX)
 
 ### Bug fixes
 * Core
