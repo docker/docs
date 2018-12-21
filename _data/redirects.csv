@@ -53,6 +53,4 @@ source,destination
 /blog/docker-data-science/,https://www.dataquest.io/blog/docker-data-science/
 /questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container,http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container
 /engine/examples/mongodb/,/samples/library/mongo/
-/reference/dtr/2.5/api/,/datacenter/dtr/2.5/reference/api/
-/reference/ucp/3.0/api/,/datacenter/ucp/3.0/reference/api/
 
