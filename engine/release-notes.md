@@ -137,9 +137,9 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### 18.03.1-ee-2
 2018-07-10
 
-> Important notes about this release
+> #### Important notes about this release
 >
-> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+> If you're deploying UCP or DTR, use Docker Engine EE `17.06` or `18.09`. See [Docker Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for more information.
 {: .important}
 
 #### Runtime
@@ -150,9 +150,9 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### 18.03.1-ee-1
 2018-06-27
 
-> Important notes about this release
+> #### Important notes about this release
 >
-> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+> If you're deploying UCP or DTR, use Docker Engine EE `17.06` or `18.09`. See [Docker Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for more information.
 {: .important}
 
 #### Client
