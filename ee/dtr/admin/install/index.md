@@ -111,7 +111,7 @@ you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
-1. Load your [UCP user bundle](https://docs.docker.com/ee/ucp/user-access/cli/#use-client-certificates).
+1. Load your [UCP user bundle](/ee/ucp/user-access/cli/#use-client-certificates).
 
 2.  Run the join command.
 
