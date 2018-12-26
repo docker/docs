@@ -91,6 +91,9 @@ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress
 # Hint
 
 To find out what data can be printed, show all content as json:
+
+{% raw %} 
 ```
 docker container ls --format='{{json .}}'
 ```
+{% endraw %} 
