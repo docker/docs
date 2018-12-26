@@ -106,7 +106,7 @@ you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
-1. Load your UCP user bundle.
+1. Load your [UCP user bundle](/ee/ucp/user-access/cli/#use-client-certificates).
 
 2.  Run the join command.
 
@@ -122,7 +122,13 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
-
+    
+    > --ucp-node
+    >
+    > The <ucp-node-name> following the --ucp-node flag is the target node to
+    > install the DTR replica. This is NOT the UCP Manager URL.
+    {: .important}
+    
 3. Check that all replicas are running.
 
     In your browser, navigate to the Docker **Universal Control Plane**
