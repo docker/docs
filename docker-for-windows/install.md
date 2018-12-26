@@ -72,7 +72,7 @@ Looking for information on using Windows containers?
     If you haven't already downloaded the installer (`Docker for Windows
     Installer.exe`), you can get it from
     [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
-    It typically downloads to your `Downloads folder`, or you can run it from
+    It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
 2. Follow the install wizard to accept the license, authorize the installer, and
