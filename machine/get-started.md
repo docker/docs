@@ -292,9 +292,7 @@ For machines other than `default`, and commands other than those listed above, y
 You might want to use the current shell to connect to a different Docker Engine.
 This would be the case if, for example, you are [running Docker for Mac
 concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to
-talk to two different Docker Engines, or running swarms on Docker Cloud and want
-to [switch between managing the swarm and using Docker
-hosts](/docker-cloud/cloud-swarm/connect-to-swarm.md#switch-between-your-swarm-and-docker-hosts-in-the-same-shell).
+talk to two different Docker Engines.
 In both scenarios, you have the option to switch the environment for the current
 shell to talk to different Docker engines.
 
@@ -343,9 +341,6 @@ shell to talk to different Docker engines.
 
     If you are running Docker for Mac, you can run Docker commands to talk
     to the Docker Engine installed with that app.
-
-    If you are running swarms on Docker Cloud, you can re-run the `export`
-    command you used to connect to the swarm.
 
     Since [Docker for Windows is incompatible with
     Toolbox](/docker-for-windows/install.md#what-to-know-before-you-install),

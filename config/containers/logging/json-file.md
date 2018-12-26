@@ -23,16 +23,21 @@ configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `json-file` and sets the `max-size`
-option.
+and `max-file` options.
 
 ```json
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m"
+    "max-size": "10m",
+    "max-file": "3"
   }
 }
 ```
+
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 Restart Docker for the changes to take effect for newly created containers. Existing containers do not use the new logging configuration.
 
