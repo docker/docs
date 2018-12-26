@@ -36,6 +36,11 @@ The daemon.json file is located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `splunk-gzip` or `splunk-gzip-level`) must therefore be enclosed in quotes
+> (`"`).
+
 To use the `splunk` driver for a specific container, use the commandline flags
 `--log-driver` and `log-opt` with `docker run`:
 

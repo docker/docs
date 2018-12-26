@@ -16,7 +16,7 @@ all nodes must:
 
 ### Minimum requirements
 
-* 8GB of RAM for nodes running DTR
+* 16GB of RAM for nodes running DTR
 * 2 vCPUs for nodes running DTR
 * 10GB of free disk space
 
@@ -46,9 +46,9 @@ These ports are configurable when installing DTR.
 
 Docker Enterprise Edition is a software subscription that includes three products:
 
-* Docker Engine EE,
-* Docker Trusted Registry,
-* Docker Universal Control Plane.
+* Docker Enterprise Engine
+* Docker Trusted Registry
+* Docker Universal Control Plane
 
 [Learn more about the maintenance lifecycle for these products](https://success.docker.com/article/Compatibility_Matrix).
 

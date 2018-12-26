@@ -119,4 +119,4 @@ There are lots more resources available to help you write your `Dockerfile`.
 * There's a [complete guide to all the instructions](/engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
-* If your goal is to create a new Official Repository, be sure to read up on Docker's [Official Repositories](/docker-hub/official_repos/).
+* If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](/docker-hub/official_images/).

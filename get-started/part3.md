@@ -41,7 +41,7 @@ must go one level up in the hierarchy of a distributed application: the
 
 ## About services
 
-In a distributed application, different pieces of the app are called "services."
+In a distributed application, different pieces of the app are called "services".
 For example, if you imagine a video sharing site, it probably includes a service
 for storing application data in a database, a service for video transcoding in
 the background after a user uploads something, a service for the front-end, and
