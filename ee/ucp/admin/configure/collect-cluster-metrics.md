@@ -27,7 +27,7 @@ These are high-level aggregate metrics that typically combine technical, financi
     - Company or division-level application downtime
     - Aggregate resource utilization
     - Application resource demand growth
-&nbsp;
+
 ## Application metrics ##
 
 These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
@@ -35,7 +35,9 @@ These are metrics about domain of APM tools like AppDynamics or DynaTrace and pr
     - Container platform metrics
     - Host infrastructure metrics
 
-Docker EE 2.1 does not collect or expose application level metrics. The following are metrics Docker EE 2.1 collects, aggregates, and exposes:
+Docker EE 2.1 does not collect or expose application level metrics. 
+
+The following are metrics Docker EE 2.1 collects, aggregates, and exposes:
 
 ## Service state metrics ##
 
@@ -43,7 +45,6 @@ These are metrics about the state of services running on the container platform.
     - Application health
     - Convergence of K8s deployments and Swarm services
     - Cluster load by number of services or containers or pods
-
 
 ## Host infrastructure metrics ##
 
@@ -53,7 +54,6 @@ These are metrics taken from te software & hardware infrastructure.
     - Network I/O - bandwidth, packets, drops
     - Storage I/O - disk I/O, IOPs, capacity
     - Operating System – file descriptors, open network connections, number of processes/threads
-
 
 ## Container infrastructure system metrics ##
 
@@ -84,8 +84,12 @@ To deploy Prometheus on worker nodes in a cluster:
     $ kubectl label node 3a724a-1 ucp-metrics=
     node "test-3a724a-1" labeled
     ```
+    
+     > **SELinux Prometheus Deployment for UCP 3.1.0, 3.1.1, and 3.1.2**
+     >
+     > If you are using SELinux, you must label your `ucp-node-certs` directories properly on your worker nodes before you move the ucp-metrics workload to them. To run ucp-metrics on a worker node, update the `ucp-node-certs` label by running `sudo chcon -R system_u:object_r:container_file_t:s0 /var/lib/docker/volumes/ucp-node-certs/_data`.
 
-4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key “ucp-metrics” and the value “”.
+4. Patch the ucp-metrics DaemonSet's nodeSelector using the same key and value used for the node label. This example shows the key "ucp-metrics" and the value "".
 
     ```
     $ kubectl -n kube-system patch daemonset ucp-metrics --type json -p '[{"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"ucp-metrics": ""}}]'
