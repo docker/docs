@@ -85,7 +85,7 @@ To deploy Prometheus on worker nodes in a cluster:
     node "test-3a724a-1" labeled
     ```
     
-     > **SELinux Prometheus Deployment for UCP 3.1.0-3.1.2**
+     > **SELinux Prometheus Deployment for UCP 3.1.0, 3.1.1, and 3.1.2**
      >
      > If you are using SELinux, you must label your `ucp-node-certs` directories properly on your worker nodes before you move the ucp-metrics workload to them. To run ucp-metrics on a worker node, update the `ucp-node-certs` label by running `sudo chcon -R system_u:object_r:container_file_t:s0 /var/lib/docker/volumes/ucp-node-certs/_data`.
 
