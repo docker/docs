@@ -76,7 +76,7 @@ This is for development purpose and will not work in a production environment ou
 
 The gateway is also reachable as `gateway.docker.internal`.
 
-#### I want to connect to a container from the Windows
+#### I want to connect to a container from Windows
 
 Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.

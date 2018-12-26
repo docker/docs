@@ -19,8 +19,8 @@ communicate using host mode networking.
 using host mode networking.
 * Use host mode networking for all of the components.
 
-In this example we'll start with a production-grade deployment of the layer
-7 routing solution and update it so that use host mode networking instead of
+In this example we'll start with a production-grade deployment of the layer 7
+routing solution and update it so that it uses host mode networking instead of
 overlay networking.
 
 When using host mode networking you won't be able to use DNS service discovery,
@@ -48,7 +48,7 @@ PublishMode = "host"
 ```
 
 When updating the `ucp-interlock` service to use the new Docker configuration,
-make sure to update it so that it starts publishes its port on the host:
+make sure to update it so that it starts publishing its port on the host:
 
 ```bash
 docker service update \

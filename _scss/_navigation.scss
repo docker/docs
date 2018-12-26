@@ -155,6 +155,12 @@
     padding: 0 20px 20px 0;
 }
 
+/* pointer for collapsed sidebar list items */
+
+.collapsed
+{
+    cursor:pointer;   
+}
 
 /*
 *
@@ -372,3 +378,5 @@ input:checked+.slider:before {
     float: left;
     margin: 2px 0 0;
 }
+
+

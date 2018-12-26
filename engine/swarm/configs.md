@@ -586,7 +586,7 @@ configuration file.
     ```
 
 4.  Verify that the `nginx` service is fully re-deployed, using
-    `docker service ls nginx`. When it is, you can remove the old `site.conf`
+    `docker service ps nginx`. When it is, you can remove the old `site.conf`
     config.
 
     ```bash

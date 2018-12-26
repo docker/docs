@@ -24,7 +24,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 
 - Use {{ linux-dist-cap }} 64-bit 7.3 or higher on RHCK 3.10.0-514 or higher.
 - Use the `devicemapper` storage driver only (`direct-lvm` mode in production).
-- Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
+- Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
 - Disable SELinux if installing or upgrading Docker EE 17.06.1 or newer.
@@ -52,14 +52,6 @@ $ sudo yum remove docker \
 ## Repo install and upgrade
 
 {% include ee-linux-install-reuse.md section="using-yum-repo" %}
-
-{% capture selinux-warning %}
-> Docker EE cannot install on {{ linux-dist-long }} with SELinux enabled
->
-> If you have `selinux` enabled and you attempt to install Docker EE 17.06.1 or newer, you get an error that the `container-selinux` package cannot be found..
-{:.warning}
-{% endcapture %}
-{{ selinux-warning }}
 
 ### Set up the repository
 

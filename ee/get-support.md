@@ -18,8 +18,11 @@ If you're unable to submit a new case using the support page, fill in the
 company email address.
 
 Docker Support engineers may ask you to provide a UCP support dump, which is an
-archive that contains UCP system logs and diagnostic information. To obtain a
-support dump:
+archive that contains UCP system logs and diagnostic information. If a node is not joined to the cluster and healthy, the support dump from the web UI will not contain logs from the unhealthy node. For unhealthy nodes use the CLI to get a support dump.
+
+## Use the Web UI to get a support dump
+
+To get the support dump from the Web UI:
 
 1. Log into the UCP web UI with an administrator account.
 2. In the top-left menu, click your username and choose

@@ -2132,7 +2132,7 @@ SuperagentHttpClient.prototype.execute = function (obj) {
     } else if (res && obj.on && obj.on.response) {
       var possibleObj;
 
-      // Already parsed by by superagent?
+      // Already parsed by superagent?
       if(res.body && Object.keys(res.body).length > 0) {
         possibleObj = res.body;
       } else {
@@ -12457,7 +12457,7 @@ var iframe,
 	elemdisplay = {};
 
 /**
- * Retrieve the actual display of a element
+ * Retrieve the actual display of an element
  * @param {String} name nodeName of the element
  * @param {Object} doc Document object
  */
@@ -13877,7 +13877,7 @@ jQuery.fx.speeds = {
 };
 
 
-// Based off of the plugin by Clint Helfers, with permission.
+// Based on the plugin by Clint Helfers, with permission.
 // http://blindsignals.com/index.php/2009/07/jquery-delay/
 jQuery.fn.delay = function( time, type ) {
 	time = jQuery.fx ? jQuery.fx.speeds[ time ] || time : time;
@@ -26083,7 +26083,7 @@ var baseCreate = require('./baseCreate'),
  * @private
  * @param {*} value The value to wrap.
  * @param {boolean} [chainAll] Enable chaining for all wrapper methods.
- * @param {Array} [actions=[]] Actions to peform to resolve the unwrapped value.
+ * @param {Array} [actions=[]] Actions to perform to resolve the unwrapped value.
  */
 function LodashWrapper(value, chainAll, actions) {
   this.__wrapped__ = value;

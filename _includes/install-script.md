@@ -42,20 +42,24 @@ $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 
 <output truncated>
+```
 
 If you would like to use Docker as a non-root user, you should now consider
 adding your user to the "docker" group with something like:
 
+```bash
   sudo usermod -aG docker your-user
+```
 
 Remember to log out and back in for this to take effect!
 
-WARNING: Adding a user to the "docker" group grants the ability to run
-         containers which can be used to obtain root privileges on the
-         docker host.
-         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
-         for more information.
-```
+> **Warning**:
+>
+> Adding a user to the "docker" group grants them the ability to run containers
+> which can be used to obtain root privileges on the Docker host. Refer to
+> [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
+> for more information.
+{:.warning}
 
 Docker CE is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate

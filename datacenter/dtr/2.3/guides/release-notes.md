@@ -11,6 +11,18 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.9
+
+(25 October 2018)
+
+### Bug Fixes
+* Added CSP (Content Security Policy). (docker/dhe-deploy#9368 and docker/dhe-deploy#9588)
+* Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9575)
+
+### Changelog
+* Patched security vulnerabilities in the load balancer.
+* Patch packages and base OS to eliminate and address some critical vulnerabilities in DTR dependencies.
+
 ## Version 2.3.8
 
 (26 July 2018)

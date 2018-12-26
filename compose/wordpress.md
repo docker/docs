@@ -60,7 +60,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
            WORDPRESS_DB_USER: wordpress
            WORDPRESS_DB_PASSWORD: wordpress
     volumes:
-        db_data:
+        db_data: {}
     ```
 
    > **Notes**:

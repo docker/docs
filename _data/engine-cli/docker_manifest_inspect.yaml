@@ -8,7 +8,7 @@ options:
 - option: insecure
   value_type: bool
   default_value: "false"
-  description: allow communication with an insecure registry
+  description: Allow communication with an insecure registry
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -15,18 +15,170 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
+* [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
+# Version 3.1
+
+## 3.1.1 (2018-12-04)
+
+* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
+
+## 3.1.0 (2018-11-08)
+
+## Bug Fixes
+
+* Swarm placement constraint warning banner no longer shows up for `ucp-auth` services (#14539)
+* "update out of sequence" error messages no longer appear when changing admin settings (#7093)
+* Kubernetes namespace status appears in the web interface (#14526)
+* UCP Kubernetes compose components always run on managers (#14208)
+* `docker network ls --filter id=<id>` now works with a UCP client bundle (#14840)
+* Collection deletes are correctly blocked if there is a node in the collection (#13704)
+
+## New Features
+
+### Kubernetes
+
+* Kubernetes is updated to version 1.11.2.
+* Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes. Your old Kubernetes grants and roles will be automatically migrated during the UCP upgrade.
+
+### Logging
+
+Admins can now enable audit logging in the UCP config. This logs all incoming user-initiated requests in the `ucp-controller` logs. Admins can choose whether to log only metadata for incoming requests or the full request body as well. For more information, see [Create UCP audit logs](https://docs.docker.com/ee/ucp/admin/configure/create-audit-logs/).
+
+### Authentication
+
+Admins can configure UCP to use a SAML-enabled identity provider for user authentication. If enabled, users who log into the UCP web interface are redirected to the identity provider's website to log in. Upon log in, users are redirected back to the UCP web interface, authenticated as the user chosen. For more information, see [Enable SAML authentication](https://docs.docker.com/ee/ucp/admin/configure/enable-saml-authentication/).
+
+### Metrics
+
+* The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) was engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes. For more information, see [Collect UCP cluster metrics with Prometheus](https://docs.docker.com/ee/ucp/admin/configure/collect-cluster-metrics/).
+* The UCP controller has a `/metricsdiscovery` endpoint so users can connect their own Prometheus instances to scrape UCP metrics data.
+
+### UCP web interface
+
+* If you enable single sign-on for a DTR instance with UCP, the UCP web interface shows image vulnerability data for images in that DTR instance. Containers and services that use images from that DTR instance show any vulnerabilities DTR detects.
+* The UCP web interface is redesigned to offer larger views for viewing individual resources, with more information for Kubernetes resources.
+
+### Configs
+
+* UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
+* You can now use the `custom_api_server_headers` field in the UCP configuration to set arbitrary headers that are included with every UCP response.
+
+## API updates
+
+There are several backward-incompatible changes in the Kubernetes API that may affect user workloads. They are:
+
+  * A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
+  * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
+    * Change `node.alpha.kubernetes.io/notReady` to `node.kubernetes.io/not-ready`
+    * Change `node.alpha.kubernetes.io/unreachable` to `node.kubernetes.io/unreachable`
+    For more information about taints and tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+* JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
+* If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
+
+## Known issues
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+
+* In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)
+
+* You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
+    * For the `User` subject Kind, the `Name` field contains the ID of the user.
+    * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
+        * For an organization, the format is `org:{org-id}`
+        * For a team, the format is `team:{org-id}:{team-id}`
+
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+
+* Pod Security Policies are not supported in this release. (#15105)
+
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+## Deprecated features
+
+The following features are deprecated in UCP 3.1.
+
+* Collections
+    *  User-created nested collections more than 2 layers deep within the root `/Swarm/` collection are deprecated and will be removed in future versions of the product. In the future, we recommend that at most only two levels of collections be created within UCP under the shared Cluster collection designated as `/Swarm/`. For example, if a production collection is created as a collection under the cluster collection `/Swarm/` as `/Swarm/production/` then at most one level of nestedness should be created, as in `/Swarm/production/app/`.
+
+* Kubernetes
+    * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to [Cloud Controller Manager](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+    * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
+
 # Version 3.0
+
+## 3.0.7 (2018-12-04)
+
+* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using a custom build of Kubernetes 1.8.15 for UCP 3.0.7.
+
+## 3.0.6 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+  * Updated Kubernetes to version 1.8.15.
+  * Resolved an issue where LDAP sync jobs would terminate when processing an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
+  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
+  * Fixed an issue that caused the Interlock proxy service to restart (docker/escalation#814)
+  * Fixed an issue that caused Kubernetes DNS to not work (#14064, #11981)
+  * Fixed an issue that causes a missing warning banner to appear unnecessarily. (#14539)
+* Security
+  * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
+* UI
+  * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (docker/escalation#639)
+  * Bumped Kubernetes version to 1.8.15.
+  * Fixed an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixed an issue that prevented Azure IPAM from releasing addresses. (docker/escalation#815)
+  * Fixed an issue that caused installation of UCP on Azure to be unsuccessful. (docker/escalation#863)
+  * Fixed an issue that caused Interlock proxy service to keep restarting. (docker/escalation#814)
+  * Fixed an issue that prevented Kubernetes DNS from working. (docker/orca#14064 and docker/orca#11981)
+  * Fixed an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
+
+* Security
+
+  * Fixed `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
+
+* UI
+
+  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+
+## 3.0.5 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from
+    the system pool when adding client CAs to the server that requires mutual authentication.
+
+**Known Issue**
+
+* When you are upgrading from UCP 3.0.3 or 3.0.4, you must manually pull
+ `docker/ucp-agent:3.0.5` in the images section of the web UI before upgrading.
+ Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
+ This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without
+ manually pulling the images.
 
 ## 3.0.4 (2018-08-09)
 
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password 
-    were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+  * Fixed a critical security issue where the LDAP bind username and password
+    were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 **Known Issue**
 
@@ -77,8 +229,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
    * To deploy Pods with Privileged options, users now require a grant with the
    role `Full Control` for all namespaces.
    * The `/api/ucp/config` endpoint now includes default node orchestrator.
-   * Added `cni_mtu` and `cni_ipinip_mtu` settings to UCP config for controlling
-   MTU sizes in Calico.
+   * Added `cni_mtu` setting to UCP config for controlling MTU size in Calico.
    * When a route is not found, interlock now returns a 503 (the expected
      behavior) instead of a 404.
 
@@ -275,14 +426,40 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.14 (2018-10-25)
+
+**Bug fixes**
+
+* Core
+    * Resolved an issue where LDAP sync jobs terminated when processing an org admin
+    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
+    * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+* UI
+  * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
+
+* Core
+  * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
+  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+
+* UI
+  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+
+## Version 2.2.13 (2018-08-30)
+
+**Bug fixes**
+
+* Security
+  * Fixed a critical security issue to prevent UCP from accepting certificates from
+    the system pool when adding client CAs to the server that requires mutual authentication.
+
 ## Version 2.2.12 (2018-08-09)
 
 **Bug fixes**
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password 
-    were stored in clear text on UCP hosts. Please refer to the following KB article 
-    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/ 
+  * Fixed a critical security issue where the LDAP bind username and password
+    were stored in cleartext on UCP hosts. Please refer to the following KB article
+    https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
 
 ## Version 2.2.11 (2018-07-26)
@@ -301,7 +478,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.
   * Fixed an issue that causes classic Swarm to provide outdated data.
-  * Fixed an issue that raises `ucp-kv` collection error with un-named volumes.
+  * Fixed an issue that raises `ucp-kv` collection error with unnamed volumes.
 
 * UI
   * Fixed an issue that causes UI to not parse volume options correctly.
