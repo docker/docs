@@ -27,7 +27,7 @@ username/repo:tag`, then visit `http://localhost/`.
 
 You've been editing the same Compose file for this entire tutorial. Well, we
 have good news. That Compose file works just as well in production as it does
-on your machine. Here, we go through some options for running your
+on your machine. In this section, we will go through some options for running your
 Dockerized application.
 
 ## Choose an option
