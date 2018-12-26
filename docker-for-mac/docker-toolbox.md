@@ -50,7 +50,7 @@ Here are some key points to know about Docker for Mac before you get started:
   The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
-  the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
+  the Docker daemon, so you can use `docker` and `docker-compose` CLI commands
   on your Mac.
 
 
@@ -61,6 +61,9 @@ This setup is shown in the following diagram.
 With Docker for Mac, you only get (and only usually need) one VM, managed by Docker
 for Mac. Docker for Mac automatically upgrades the Docker client and
 daemon when updates are available.
+
+Also note that Docker for Mac can’t route traffic to containers, so you can't
+directly access an exposed port on a running container from the hosting machine.
 
 If you do need multiple VMs, such as when testing multi-node swarms, you can
 continue to use Docker Machine, which operates outside the scope of Docker for

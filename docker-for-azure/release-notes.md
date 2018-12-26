@@ -9,8 +9,6 @@ title: Docker for Azure Release Notes
 ## Enterprise Edition
 [Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}<!--_-->
 
-[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target="_blank" class="button outline-btn"}
-
 ### 17.06 EE
 
 - Docker engine 17.06 EE
@@ -26,9 +24,15 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
-### 18.03 CE
+### 18.06.1 CE
 
 {{azure_blue_latest}}
+
+Release date: 8/24/2018
+
+- Docker Engine upgraded to [Docker 18.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce){: target="_blank" class="_"}
+
+### 18.03 CE
 
 Release date: 3/21/2018
 

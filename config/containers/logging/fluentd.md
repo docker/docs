@@ -53,7 +53,12 @@ The following example sets the log driver to `fluentd` and sets the
  }
  ```
 
- Restart Docker for the changes to take effect.
+Restart Docker for the changes to take effect.
+
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> in quotes (`"`).
 
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
