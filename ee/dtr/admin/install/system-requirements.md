@@ -11,7 +11,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install DTR on-premises or on a cloud provider. To install DTR,
 all nodes must:
-* Be a worker node managed by Universal Control Plane.
+* Be a worker node managed by UCP (Universal Control Plane). See [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for version compatibility.
 * Have a fixed hostname.
 
 ### Minimum requirements
