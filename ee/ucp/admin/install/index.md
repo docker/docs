@@ -86,7 +86,7 @@ To install UCP:
     This runs the install command in interactive mode, so that you're
     prompted for any necessary configuration values.
     To find what other options are available in the install command, check the
-    [reference documentation](/reference/ucp/3.0/cli/install.md).
+    [reference documentation](/reference/ucp/3.1/cli/install.md).
 
 > Custom CNI plugins
 >
@@ -100,9 +100,8 @@ To install UCP:
 
 Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker EE standard or advanced subscription, or you can test the platform with a free trial license.
 
-1.  Go to the
-    [Docker Store](https://www.docker.com/enterprise-edition)
-    and buy a Docker EE standard or advanced subscription, or get a free trial license.  
+1.  Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial)
+    to get a free trial license.  
 
 2.  In your browser, navigate to the UCP web UI, log in with your
     administrator credentials and upload your license. Navigate to the

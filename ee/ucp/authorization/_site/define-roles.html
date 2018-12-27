@@ -1,0 +1,77 @@
+<p>A role defines a set of API operations permitted against a resource set.
+You apply roles to users and teams by creating grants.</p>
+
+<p><img src="../images/permissions-ucp.svg" alt="Diagram showing UCP permission levels" /></p>
+
+<h2 id="default-roles">Default roles</h2>
+
+<p>You can define custom roles or use the following built-in roles:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Built-in role</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">None</code></td>
+      <td style="text-align: left">Users have no access to Swarm or Kubernetes resources. Maps to <code class="highlighter-rouge">No Access</code> role in UCP 2.1.x.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">View Only</code></td>
+      <td style="text-align: left">Users can view resources but can’t create them.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Restricted Control</code></td>
+      <td style="text-align: left">Users can view and edit resources but can’t run a service or container in a way that affects the node where it’s running. Users <em>cannot</em> mount a node directory, <code class="highlighter-rouge">exec</code> into containers, or run containers in privileged mode or with additional kernel capabilities.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Scheduler</code></td>
+      <td style="text-align: left">Users can view nodes (worker and manager) and schedule (not view) workloads on these nodes. By default, all users are granted the <code class="highlighter-rouge">Scheduler</code> role against the <code class="highlighter-rouge">/Shared</code> collection. (To view workloads, users need permissions such as <code class="highlighter-rouge">Container View</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Full Control</code></td>
+      <td style="text-align: left">Users can view and edit all granted resources. They can create containers without any restriction, but can’t see the containers of other users.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="create-a-custom-role">Create a custom role</h2>
+
+<p>The <strong>Roles</strong> page lists all default and custom roles applicable in the
+organization.</p>
+
+<p>You can give a role a global name, such as “Remove Images”, which might enable the
+<strong>Remove</strong> and <strong>Force Remove</strong> operations for images. You can apply a role with
+the same name to different resource sets.</p>
+
+<ol>
+  <li>Click <strong>Roles</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Role</strong>.</li>
+  <li>Input the role name on the <strong>Details</strong> page.</li>
+  <li>Click <strong>Operations</strong>. All available API operations are displayed.</li>
+  <li>Select the permitted operations per resource type.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p><img src="../images/custom-role-30.png" alt="" class="with-border" /></p>
+
+<blockquote>
+  <p><strong>Some important rules regarding roles</strong>:</p>
+  <ul>
+    <li>Roles are always enabled.</li>
+    <li>Roles can’t be edited. To edit a role, you must delete and recreate it.</li>
+    <li>Roles used within a grant can be deleted only after first deleting the grant.</li>
+    <li>Only administrators can create and delete roles.</li>
+  </ul>
+</blockquote>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="create-users-and-teams-manually.md">Create and configure users and teams</a></li>
+  <li><a href="group-resources.md">Group and isolate cluster resources</a></li>
+  <li><a href="grant-permissions.md">Grant role-access to cluster resources</a></li>
+</ul>

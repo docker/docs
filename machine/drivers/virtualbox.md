@@ -39,7 +39,7 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
--   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location. Format: dir:name
+-   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location.
 -   `--virtualbox-ui-type`: Specify the UI Type: (gui|sdl|headless|separate)
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
@@ -67,6 +67,12 @@ Machine specifies the DHCP lower bound to `.100` and the upper bound
 to `.254`. For example, a specified CIDR of `192.168.24.1/24` would have a
 DHCP server between `192.168.24.2-25`, a lower bound of `192.168.24.100` and
 upper bound of `192.168.24.254`.
+
+With the flag `--virtualbox-share-folder`, you can specify which folder the host 
+shares with the created machine. The format is `local-folder:machine-folder`. 
+For example, `\\?\C:\docker-share:\home\users\`. if you specify the flag with the
+docker-toolbox using docker-machine from a Windows cmd, it looks like 
+`C:\docker-share\\:/home/users`. The `:` sign needs to be escaped.
 
 #### Environment variables and default values
 
