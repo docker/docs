@@ -31,7 +31,7 @@ so that other replicas can claim the job.
 
 ## Job Types
 
-DTR runs periodic and long-running jobs. The following is a complete list of jobs you can filter for via [the user interface](view-job-logs.md) or [the API](../troubleshoot-batch-jobs.md).   
+DTR runs periodic and long-running jobs. The following is a complete list of jobs you can filter for via [the user interface](../audit-jobs-via-ui.md) or [the API](../audit-jobs-via-api.md).   
 
 | Job               | Description                                                                                                                                                                                                                                               |
 |:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
