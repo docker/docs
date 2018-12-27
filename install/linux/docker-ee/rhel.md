@@ -32,8 +32,7 @@ This section lists what you need to consider before installing Docker EE. Items 
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher (see [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }), running on one of the following architectures: `x86_64`, or `s390x` (IBM Z).
-
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher running on one of the following architectures: `x86_64`, or `s390x` (IBM Z). See [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }) for specific details.
 > Little endian format only
 >
 > On IBM Power systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
