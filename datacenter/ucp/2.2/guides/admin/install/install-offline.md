@@ -37,11 +37,14 @@ line:
 ```bash
 $ wget <ucp-package-url> -O ucp.tar.gz
 ```
-```
-EXAMPLE 
-```
-$ wget https://packages.docker.com/caas/ucp_images_3.0.6.tar.gz -0 ucp_3.0.6.tar.gz
 
+### Download a specific version
+
+> ***Note***: Offline packages for UCP 2.2.x are available for different OS distributions. 
+> Copy the URL of your specific OS and version to work with the example below.
+
+```
+$ wget https://packages.docker.com/caas/ucp_images_2.2.14.tar.gz -O ucp_2.2.14.tar.gz
 ```
 
 Now that you have the package in your local machine, you can transfer it to
