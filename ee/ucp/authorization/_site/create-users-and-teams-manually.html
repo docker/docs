@@ -1,0 +1,106 @@
+<p>Users, teams, and organizations are referred to as subjects in Docker EE.</p>
+
+<p>Individual users can belong to one or more teams but each team can only be in
+one organization. At the fictional startup, Acme Company, all teams in the
+organization are necessarily unique but the user, Alex, is on two teams:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acme-datacenter
+├── dba
+│   └── Alex*
+├── dev
+│   └── Bett
+└── ops
+    ├── Alex*
+    └── Chad
+</code></pre></div></div>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>All users are authenticated on the backend. Docker EE provides built-in
+authentication and also integrates with LDAP directory services.</p>
+
+<p>To use Docker EE’s built-in authentication, you must <a href="#create-users-manually">create users manually</a>.</p>
+
+<blockquote>
+  <p>To enable LDAP and authenticate and synchronize UCP users and teams with your
+organization’s LDAP directory, see:</p>
+  <ul>
+    <li><a href="create-teams-with-ldap.md">Synchronize users and teams with LDAP in the UI</a></li>
+    <li><a href="../admin/configure/external-auth/index.md">Integrate with an LDAP Directory</a>.</li>
+  </ul>
+</blockquote>
+
+<h2 id="build-an-organization-architecture">Build an organization architecture</h2>
+
+<p>The general flow of designing an organization with teams in UCP is:</p>
+
+<ol>
+  <li>Create an organization.</li>
+  <li>Add users or enable LDAD (for syncing users).</li>
+  <li>Create teams under the organization.</li>
+  <li>Add users to teams manually or sync with LDAP.</li>
+</ol>
+
+<h3 id="create-an-organization-with-teams">Create an organization with teams</h3>
+
+<p>To create an organization in UCP:</p>
+
+<ol>
+  <li>Click <strong>Organization &amp; Teams</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create Organization</strong>.</li>
+  <li>Input the organization name.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>To create teams in the organization:</p>
+
+<ol>
+  <li>Click through the organization name.</li>
+  <li>Click <strong>Create Team</strong>.</li>
+  <li>Input a team name (and description).</li>
+  <li>Click <strong>Create</strong>.</li>
+  <li>Add existing users to the team. To sync LDAP users, see: <a href="../admin/configure/external-auth/index.md">Integrate with an LDAP Directory</a>.
+    <ul>
+      <li>Click the team name and select <strong>Actions</strong> &gt; <strong>Add Users</strong>.</li>
+      <li>Check the users to include and click <strong>Add Users</strong>.</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p><strong>Note</strong>: To sync teams with groups in an LDAP server, see <a href="create-teams-with-ldap.md">Sync Teams with LDAP</a>.</p>
+</blockquote>
+
+<h3 id="create-users-manually">Create users manually</h3>
+
+<p>New users are assigned a default permission level so that they can access the
+cluster. To extend a user’s default permissions, add them to a team and <a href="grant-permissions.md">create grants</a>. You can optionally grant them Docker EE
+administrator permissions.</p>
+
+<p>To manually create users in UCP:</p>
+
+<ol>
+  <li>Click <strong>Users</strong> under <strong>User Management</strong>.</li>
+  <li>Click <strong>Create User</strong>.</li>
+  <li>Input username, password, and full name.</li>
+  <li>Click <strong>Create</strong>.</li>
+  <li>Optionally, check “Is a Docker EE Admin” to give the user administrator 
+privileges.</li>
+</ol>
+
+<blockquote>
+  <p>A <code class="highlighter-rouge">Docker EE Admin</code> can grant users permission to change the cluster
+configuration and manage grants, roles, and resource sets.</p>
+</blockquote>
+
+<p><img src="../images/ucp_usermgmt_users_create01.png" alt="" class="with-border" />
+<img src="../images/ucp_usermgmt_users_create02.png" alt="" class="with-border" /></p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="create-teams-with-ldap.md">Synchronize teams with LDAP</a></li>
+  <li><a href="define-roles.md">Define roles with authorized API operations</a></li>
+  <li><a href="group-resources.md">Group and isolate cluster resources</a></li>
+  <li><a href="grant-permissions.md">Grant role-access to cluster resources</a></li>
+</ul>

@@ -20,6 +20,38 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
+### Docker Community Edition 2.0.0.0-mac81 2018-12-07
+
+[Download](https://download.docker.com/mac/stable/29211/Docker.dmg)
+
+* Upgrades
+  - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
+
+### Docker Community Edition 2.0.0.0-mac78 2018-11-19
+
+[Download](https://download.docker.com/mac/stable/28905/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
+  - [Docker compose 1.23.1](https://github.com/docker/compose/releases/tag/1.23.1)
+  - [Docker Machine 0.16.0](https://github.com/docker/machine/releases/tag/v0.16.0)
+  - [Kitematic 0.17.5](https://github.com/docker/kitematic/releases/tag/v0.17.5)
+  - Linux Kernel 4.9.125
+
+* New
+  - New version scheme
+
+* Deprecation
+  - Removed support of AUFS
+  - Removed support of OSX 10.11
+
+* Bug fixes and minor changes
+  - Fix appearance in dark mode for OSX 10.14 (Mojave)
+  - VPNKit: Improved scalability of port forwarding. Related to [docker/for-mac#2841](https://github.com/docker/for-mac/issues/2841)
+  - VPNKit: Limit the size of the UDP NAT table. This ensures port forwarding and regular TCP traffic continue even when running very chatty UDP protocols.
+  - Ensure Kubernetes can be installed when using a non-default internal IP subnet.
+  - Fix panic in diagnose
+
 ### Docker Community Edition 18.06.1-ce-mac73 2018-08-29
 
 [Download](https://download.docker.com/mac/stable/26764/Docker.dmg)

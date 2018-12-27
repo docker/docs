@@ -44,7 +44,7 @@ Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handl
 If you click on **Report an issue**, this opens [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
 "create new issue" template, to be completed before submision. Do not forget to
-copy/paste your diagnistic ID.
+include your diagnostic ID.
 
 ![issue-template](images/issue-template.png){:width="600px"}
 

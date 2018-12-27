@@ -49,7 +49,7 @@ When you connect an existing container to a different network using
 `docker network connect`, you can use the `--ip` or `--ip6` flags on that
 command to specify the container's IP address on the additional network.
 
-In the same way, a container's hostname defaults to be the container's name in
+In the same way, a container's hostname defaults to be the container's ID in
 Docker. You can override the hostname using `--hostname`. When connecting to an
 existing network using `docker network connect`, you can use the `--alias`
 flag to specify an additional network alias for the container on that network.
@@ -65,7 +65,7 @@ settings on a per-container basis.
 | `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. If the container cannot reach any of the IP addresses you specify, Google's public DNS server `8.8.8.8` is added, so that your container can resolve internet domains. |
 | `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
-| `--hostname`   | The hostname a container uses for itself. Defaults to the container's name if not specified.                                                                                                                                                                        |
+| `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
 
 ## Proxy server
 

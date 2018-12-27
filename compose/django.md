@@ -152,7 +152,7 @@ In this section, you set up the database connection for Django.
         }
 
     These settings are determined by the
-    [postgres](https://store.docker.com/images/postgres) Docker image
+    [postgres](https://hub.docker.com/images/postgres) Docker image
     specified in `docker-compose.yml`.
 
 3.  Save and close the file.

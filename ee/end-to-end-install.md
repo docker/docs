@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 The best way to try Docker Enterprise Edition for yourself is to get the [30-day
-trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
+trial available at the Docker hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial).
 
 Once you get your trial license, you can install Docker EE on your
 Linux servers. Make sure all the hosts you want to manage with Docker
@@ -60,7 +60,7 @@ license.
 
 ![UCP login page](images/try-ddc-1.png){: .with-border}
 
-[Get a free trial license if you don't have one](https://store.docker.com/editions/enterprise/docker-ee-trial).
+[Get a free trial license if you don't have one](https://hub.docker.com/editions/enterprise/docker-ee-trial).
 
 ## Step 4: Join more nodes to UCP
 

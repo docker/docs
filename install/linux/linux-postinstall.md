@@ -479,7 +479,7 @@ and a 10% overall performance degradation, even if Docker is not running.
     ```
 
     If your GRUB configuration file has incorrect syntax, an error occurs.
-    In this case, repeat steps 3 and 4.
+    In this case, repeat steps 2 and 3.
 
     The changes take effect when the system is rebooted.
 

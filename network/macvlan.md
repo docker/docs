@@ -17,7 +17,7 @@ the Macvlan, as well as the subnet and gateway of the Macvlan. You can even
 isolate your Macvlan networks using different physical network interfaces.
 Keep the following things in mind:
 
-- It is very easy to unintentionally damage your network due IP address
+- It is very easy to unintentionally damage your network due to IP address
   exhaustion or to "VLAN spread", which is a situation in which you have an
   inappropriately large number of unique MAC addresses in your network.
 - Your networking equipment needs to be able to handle "promiscuous mode",

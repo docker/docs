@@ -14,7 +14,7 @@ and on the rest of the EE-supported Linux distributions starting with version
 The telemetry plugin sends system information to Docker Inc. Docker uses this
 information to improve Docker EE. For details about the telemetry plugin and
 the types of data it collects, see the
-[`telemetry` plugin documentation](https://store.docker.com/community/images/docker/telemetry).
+[`telemetry` plugin documentation](https://hub.docker.com/community/images/docker/telemetry).
 
 If your Docker instance runs in an environment with no internet connectivity,
 the telemetry plugin does not collect or attempt to send any information to

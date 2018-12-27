@@ -5,8 +5,8 @@ keywords: ucp, architecture
 ---
 
 Universal Control Plane is a containerized application that runs on
-[Docker Enterprise Edition](/ee/index.md) and extends its functionality
-to make it easier to deploy, configure, and monitor your applications at scale.
+[Docker Enterprise Edition](/ee/index.md), extending its functionality
+to simplify the deployment, configuration, and monitoring of your applications at scale.
 
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your Docker cluster.
@@ -69,7 +69,7 @@ on a node depend on whether the node is a manager or a worker.
 Internally, UCP uses the following components:
 
 * Calico 3.0.8
-* Kubernetes 1.8.11
+* Kubernetes 1.8.15
 
 ### UCP components in manager nodes
 
@@ -180,14 +180,13 @@ driver.
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
 
-## Configurations use by UCP
+## Configurations used by UCP
 
 | Configuration name             | Description                                                                                      |
 |:-------------------------------|:-------------------------------------------------------------------------------------------------|
 | com.docker.interlock.extension | Configuration for the Interlock extension service that monitors and configures the proxy service |
 | com.docker.interlock.proxy     | Configuration for the service responsible for handling user requests and routing them            |
 | com.docker.license             | The Docker EE license                                                                            |
-| com.docker.ucp.config          | The UCP controller configuration. Most of the settings available on the UCP UI are stored here   |
 | com.docker.ucp.interlock.conf  | Configuration for the core Interlock service                                                     |
 
 ## How you interact with UCP

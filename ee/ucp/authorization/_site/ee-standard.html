@@ -1,0 +1,137 @@
+<p><a href="index.md">Collections and grants</a> are strong tools that can be used to control
+access and visibility to resources in UCP.</p>
+
+<p>This tutorial describes a fictitious company named OrcaBank that needs to
+configure an  architecture in UCP with role-based access control (RBAC) for
+their application engineering group.</p>
+
+<h2 id="team-access-requirements">Team access requirements</h2>
+
+<p>OrcaBank reorganized their application teams by product with each team providing
+shared services as necessary. Developers at OrcaBank do their own DevOps and
+deploy and manage the lifecycle of their applications.</p>
+
+<p>OrcaBank has four teams with the following resource needs:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">security</code> should have view-only access to all applications in the cluster.</li>
+  <li><code class="highlighter-rouge">db</code> should have full access to all database applications and resources. See
+<a href="#db-team">DB Team</a>.</li>
+  <li><code class="highlighter-rouge">mobile</code> should have full access to their mobile applications and limited
+access to shared <code class="highlighter-rouge">db</code> services. See <a href="#mobile-team">Mobile Team</a>.</li>
+  <li><code class="highlighter-rouge">payments</code> should have full access to their payments applications and limited
+access to shared <code class="highlighter-rouge">db</code> services.</li>
+</ul>
+
+<h2 id="role-composition">Role composition</h2>
+
+<p>To assign the proper access, OrcaBank is employing a combination of default
+and custom roles:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">View Only</code> (default role) allows users to see all resources (but not edit or use).</li>
+  <li><code class="highlighter-rouge">Ops</code> (custom role) allows users to perform all operations against configs,
+containers, images, networks, nodes, secrets, services, and volumes.</li>
+  <li><code class="highlighter-rouge">View &amp; Use Networks + Secrets</code> (custom role) enables users to view/connect to
+networks and view/use secrets used by <code class="highlighter-rouge">db</code> containers, but prevents them from
+seeing or impacting the <code class="highlighter-rouge">db</code> applications themselves.</li>
+</ul>
+
+<p><img src="../images/design-access-control-adv-0.png" alt="image" class="with-border" /></p>
+
+<h2 id="collection-architecture">Collection architecture</h2>
+
+<p>OrcaBank is also creating collections of resources to mirror their team
+structure.</p>
+
+<p>Currently, all OrcaBank applications share the same physical resources, so all
+nodes and applications are being configured in collections that nest under the
+built-in collection, <code class="highlighter-rouge">/Shared</code>.</p>
+
+<p>Other collections are also being created to enable shared <code class="highlighter-rouge">db</code> applications.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> For increased security with node-based isolation, use Docker
+Enterprise Advanced.</p>
+</blockquote>
+
+<ul>
+  <li><code class="highlighter-rouge">/Shared/mobile</code> hosts all Mobile applications and resources.</li>
+  <li><code class="highlighter-rouge">/Shared/payments</code> hosts all Payments applications and resources.</li>
+  <li><code class="highlighter-rouge">/Shared/db</code> is a top-level collection for all <code class="highlighter-rouge">db</code> resources.</li>
+  <li><code class="highlighter-rouge">/Shared/db/payments</code> is a collection of <code class="highlighter-rouge">db</code> resources for Payments applications.</li>
+  <li><code class="highlighter-rouge">/Shared/db/mobile</code> is a collection of <code class="highlighter-rouge">db</code> resources for Mobile applications.</li>
+</ul>
+
+<p>The collection architecture has the following tree representation:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/
+├── System
+└── Shared
+    ├── mobile
+    ├── payments
+    └── db
+        ├── mobile
+        └── payments
+</code></pre></div></div>
+
+<p>OrcaBank’s <a href="#grant-composition">Grant composition</a> ensures that their collection
+architecture gives the <code class="highlighter-rouge">db</code> team access to <em>all</em> <code class="highlighter-rouge">db</code> resources and  restricts
+app teams to <em>shared</em> <code class="highlighter-rouge">db</code> resources.</p>
+
+<h2 id="ldapad-integration">LDAP/AD integration</h2>
+
+<p>OrcaBank has standardized on LDAP for centralized authentication to help their
+identity team scale across all the platforms they manage.</p>
+
+<p>To implement LDAP authentication in UCP, OrcaBank is using UCP’s native LDAP/AD
+integration to map LDAP groups directly to UCP teams. Users can be added to or
+removed from UCP teams via LDAP which can be managed centrally by OrcaBank’s
+identity team.</p>
+
+<p>The following grant composition shows how LDAP groups are mapped to UCP teams.</p>
+
+<h2 id="grant-composition">Grant composition</h2>
+
+<p>OrcaBank is taking advantage of the flexibility in UCP’s grant model by applying
+two grants to each application team. One grant allows each team to fully
+manage the apps in their own collection, and the second grant gives them the
+(limited) access they need to networks and secrets within the <code class="highlighter-rouge">db</code> collection.</p>
+
+<p><img src="../images/design-access-control-adv-1.png" alt="image" class="with-border" /></p>
+
+<h2 id="orcabank-access-architecture">OrcaBank access architecture</h2>
+
+<p>OrcaBank’s resulting access architecture shows applications connecting across
+collection boundaries. By assigning multiple grants per team, the Mobile and
+Payments applications teams can connect to dedicated Database resources through
+a secure and controlled interface, leveraging Database networks and secrets.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> In Docker Enterprise Standard, all resources are deployed across the
+same  group of UCP worker nodes. Node segmentation is provided in Docker
+Enterprise Advanced and discussed in the <a href="ee-advanced.md">next tutorial</a>.</p>
+</blockquote>
+
+<p><img src="../images/design-access-control-adv-2.png" alt="image" class="with-border" /></p>
+
+<h3 id="db-team">DB team</h3>
+
+<p>The <code class="highlighter-rouge">db</code> team is responsible for deploying and managing the full lifecycle
+of the databases used by the application teams. They can execute the full set of
+operations against all database resources.</p>
+
+<p><img src="../images/design-access-control-adv-3.png" alt="image" class="with-border" /></p>
+
+<h3 id="mobile-team">Mobile team</h3>
+
+<p>The <code class="highlighter-rouge">mobile</code> team is responsible for deploying their own application stack,
+minus the database tier that is managed by the <code class="highlighter-rouge">db</code> team.</p>
+
+<p><img src="../images/design-access-control-adv-4.png" alt="image" class="with-border" /></p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="ee-advanced.md">Access control design with Docker EE Advanced</a></li>
+</ul>

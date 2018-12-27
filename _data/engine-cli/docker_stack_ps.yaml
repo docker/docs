@@ -15,7 +15,7 @@ options:
   experimental: false
   experimentalcli: false
   kubernetes: false
-  swarm: true
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print tasks using a Go template
@@ -23,6 +23,14 @@ options:
   experimental: false
   experimentalcli: false
   kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
   swarm: false
 - option: no-resolve
   value_type: bool
@@ -58,17 +66,16 @@ inherited_options:
   description: Kubernetes config file
   deprecated: false
   experimental: false
-  experimentalcli: true
+  experimentalcli: false
   kubernetes: true
   swarm: false
-- option: namespace
+- option: orchestrator
   value_type: string
-  default_value: default
-  description: Kubernetes namespace to use
+  description: Orchestrator to use (swarm|kubernetes|all)
   deprecated: false
   experimental: false
-  experimentalcli: true
-  kubernetes: true
+  experimentalcli: false
+  kubernetes: false
   swarm: false
 examples: |-
   ### List the tasks that are part of a stack
@@ -260,6 +267,6 @@ deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: true
-swarm: true
+kubernetes: false
+swarm: false
 
