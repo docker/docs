@@ -33,9 +33,10 @@ This section lists what you need to consider before installing Docker EE. Items 
 ### Architectures and storage drivers
 
 Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher running on one of the following architectures: `x86_64`, or `s390x` (IBM Z). See [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }) for specific details.
-> Little endian format only
+
+> Little-endian format only
 >
-> On IBM Power systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
+> On IBM Power systems, Docker EE only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
@@ -56,7 +57,7 @@ $ cat /proc/sys/crypto/fips_enabled
 1
 ```
 
-**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS-140-2. 
+> ***NOTE:*** FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2. 
 
 To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
 
