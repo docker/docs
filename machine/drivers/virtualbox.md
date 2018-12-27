@@ -68,11 +68,11 @@ to `.254`. For example, a specified CIDR of `192.168.24.1/24` would have a
 DHCP server between `192.168.24.2-25`, a lower bound of `192.168.24.100` and
 upper bound of `192.168.24.254`.
 
-With the flag `--virtualbox-share-folder`, you can specify, which folder the host 
+With the flag `--virtualbox-share-folder`, you can specify which folder the host 
 shares with the created machine. The format is `local-folder:machine-folder`. 
-For example `\\?\C:\docker-share:\home\users\` if you specify the flag with the
-docker-toolbox. Using docker-machine from a windows cmd, it looks like 
-`C:\docker-share\\:/home/users`. The `:` sign needs be escaped.
+For example, `\\?\C:\docker-share:\home\users\`. if you specify the flag with the
+docker-toolbox using docker-machine from a Windows cmd, it looks like 
+`C:\docker-share\\:/home/users`. The `:` sign needs to be escaped.
 
 #### Environment variables and default values
 
