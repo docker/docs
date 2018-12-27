@@ -132,7 +132,7 @@ Release date: 01/18/2017
 
 ### 18.01 CE
 
-{{aws_blue_edge}}
+{{azure_blue_edge}}
 
 **New**
 
