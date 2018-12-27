@@ -174,7 +174,7 @@ You have two options:
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://docs.docker.com/docker-cloud/cloud-swarm/).
+[Docker Hub](https://docs.docker.com/docker-hub/).
 The following examples use the `latest` tag:
 
 - Run a single container:
