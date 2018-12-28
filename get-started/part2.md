@@ -154,8 +154,7 @@ $ ls
 Dockerfile		app.py			requirements.txt
 ```
 
-Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name.
+Now run the build command with the optional `-t` flag to [tag your image with a friendly name](/engine/reference/commandline/build/#tag-an-image--t), and `.` to [set your build context](/engine/reference/commandline/build/#build-with-path). 
 
 ```shell
 docker build -t friendlyhello .
