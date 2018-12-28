@@ -129,7 +129,10 @@ by step instructions are also included below.
     sudo chmod +x /usr/local/bin/docker-compose
     ```
     
-Note: If after installing compose you still can't use it due to the docker-compose command failing, please do the following:
+> ***Note:*** If the command `docker-compose` fails after installation, check your path.
+> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+
+For example:
 
 ```bash
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
