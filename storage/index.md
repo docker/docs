@@ -9,7 +9,7 @@ redirect_from:
 By default all files created inside a container are stored on a writable
 container layer. This means that:
 
-- The data doesn't persist when that container is no longer running, and it can be
+- The data doesn't persist when that container no longer exists, and it can be
   difficult to get the data out of the container if another process needs it.
 - A container's writable layer is tightly coupled to the host machine
   where the container is running. You can't easily move the data somewhere else.

@@ -20,7 +20,7 @@ machines.
 2.  Run the following command to create a new swarm:
 
     ```bash
-    docker swarm init --advertise-addr <MANAGER-IP>
+    $ docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
     >**Note**: If you are using Docker for Mac or Docker for Windows to test

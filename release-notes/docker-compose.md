@@ -5,6 +5,175 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
+## 1.23.1 (2018-11-01)
+
+### Bug Fixes
+
+- Fixed a bug where working with containers created with a version of Compose earlier than `1.23.0`
+  would cause unexpected crashes.
+
+- Fixed an issue where the behavior of the `--project-directory` flag would
+  vary depending on which subcommand was used.
+
+## 1.23.0 (2018-10-30)
+
+### Important note
+
+The default naming scheme for containers created by Compose in this version
+has changed from `<project>_<service>_<index>` to
+`<project>_<service>_<index>_<slug>`, where `<slug>` is a randomly-generated
+hexadecimal string. Please make sure to update scripts relying on the old
+naming scheme accordingly before upgrading.
+
+### Features
+
+- Logs for containers restarting after a crash will now appear in the output
+  of the `up` and `logs` commands.
+
+- Added `--hash` option to the `docker-compose config` command, allowing users
+  to print a hash string for each service's configuration to facilitate rolling
+  updates.
+
+- Added `--parallel` flag to the `docker-compose build` command, allowing
+  Compose to build up to 5 images simultaneously.
+
+- Output for the `pull` command now reports status / progress even when pulling
+  multiple images in parallel.
+
+- For images with multiple names, Compose will now attempt to match the one
+  present in the service configuration in the output of the `images` command.
+
+### Bug Fixes
+
+- Fixed an issue where parallel `run` commands for the same service would fail due to name
+  collisions.
+
+- Fixed an issue where paths longer than 260 characters on Windows clients would
+  cause `docker-compose build` to fail.
+
+- Fixed a bug where attempting to mount `/var/run/docker.sock` with
+  Docker Desktop for Windows would result in failure.
+
+- The `--project-directory` option is now used by Compose to determine where to
+  look for the `.env` file.
+
+- `docker-compose build` no longer fails when attempting to pull an image with
+  credentials provided by the ***gcloud credential helper***.
+
+- Fixed the `--exit-code-from` option in `docker-compose up` to always report
+  the actual exit code even when the watched container is not the cause of the
+  exit.
+
+- Fixed an issue that would prevent recreating a service in some cases where
+  a volume would be mapped to the same mountpoint as a volume declared within the Dockerfile for that image.
+
+- Fixed a bug that caused hash configuration with multiple networks to be
+  inconsistent, causing some services to be unnecessarily restarted.
+
+- Fixed a bug that would cause failures with variable substitution for services
+  with a name containing one or more dot characters.
+
+- Fixed a pipe handling issue when using the containerized version of Compose.
+
+- Fixed a bug causing `external: false` entries in the Compose file to be
+  printed as `external: true` in the output of `docker-compose config`.
+
+- Fixed a bug where issuing a `docker-compose pull` command on services
+  without a defined image key would cause Compose to crash.
+
+- Volumes and binds are now mounted in the order they are declared in the
+  service definition.
+
+### Miscellaneous
+
+- The `zsh` completion script has been updated with new options, and no
+  longer suggests container names where service names are expected.
+
+## 1.22.0 (2018-07-17)
+
+### New features
+
+#### Compose format version 3.7
+
+- Introduced version 3.7 of the `docker-compose.yml` specification.
+  This version requires Docker Engine 18.06.0 or above.
+
+- Added support for `rollback_config` in the deploy configuration
+
+- Added support for the `init` parameter in service configurations
+
+- Added support for extension fields in service, network, volume, secret,
+  and config configurations
+
+#### Compose format version 2.4
+
+- Added support for extension fields in service, network,
+  and volume configurations
+
+### Bug Fixes
+
+- Fixed a bug that prevented deployment with some Compose files when
+  `DOCKER_DEFAULT_PLATFORM` was set
+
+- Compose will no longer try to create containers or volumes with
+  invalid starting characters
+
+- Fixed several bugs that prevented Compose commands from working properly
+  with containers created with an older version of Compose
+
+- Fixed an issue with the output of `docker-compose config` with the
+  `--compatibility-mode` flag enabled when the source file contains
+  attachable networks
+
+- Fixed a bug that prevented the `gcloud` credential store from working
+  properly when used with the Compose binary on UNIX
+
+- Fixed a bug that caused connection errors when trying to operate
+  over a non-HTTPS TCP connection on Windows
+
+- Fixed a bug that caused builds to fail on Windows if the Dockerfile
+  was located in a subdirectory of the build context
+
+- Fixed an issue that prevented proper parsing of UTF-8 BOM encoded
+  Compose files on Windows
+
+- Fixed an issue with handling of the double-wildcard (`**`) pattern in `.dockerignore` files when using `docker-compose build`
+
+- Fixed a bug that caused auth values in legacy `.dockercfg` files to be ignored
+- `docker-compose build` will no longer attempt to create image names starting with an invalid character
+
+## 1.21.2 (2018-05-03)
+
+### Bug Fixes
+
+- Fixed a bug where the ip_range attribute in IPAM configs was prevented
+  from passing validation
+
+## 1.21.1 (2018-04-27)
+
+### Bug Fixes
+
+- In 1.21.0, we introduced a change to how project names are sanitized for
+  internal use in resource names. This caused issues when manipulating an
+  existing, deployed application whose name had changed as a result.
+  This release properly detects resources using "legacy" naming conventions.
+
+- Fixed an issue where specifying an in-context Dockerfile using an absolute
+  path would fail despite being valid.
+
+- Fixed a bug where IPAM option changes were incorrectly detected, preventing
+  redeployments.
+
+- Validation of v2 files now properly checks the structure of IPAM configs.
+
+- Improved support for credentials stores on Windows to include binaries using
+  extensions other than `.exe`. The list of valid extensions is determined by
+  the contents of the `PATHEXT` environment variable.
+
+- Fixed a bug where Compose would generate invalid binds containing duplicate
+  elements with some v3.2 files, triggering errors at the Engine level during
+  deployment.
+
 ## 1.21.0 (2018-04-11)
 
 ### New features
@@ -47,7 +216,7 @@ toc_max: 2
 - `docker-compose build` now supports the use of Dockerfile from outside
   the build context.
 
-### Bugfixes
+### Bug Fixes
 
 - Compose now checks that the volume's configuration matches the remote
   volume, and errors out if a mismatch is detected.
@@ -118,7 +287,7 @@ toc_max: 2
 - Added the long-form `--detach` option to the `exec`, `run` and `up`
   commands
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed `.dockerignore` handling, notably with regard to absolute paths
   and last-line precedence rules
@@ -190,7 +359,7 @@ toc_max: 2
   preventing Compose from recovering volume data from previous containers for
   anonymous volumes
 
-- Added limit for number of simulatenous parallel operations, which should
+- Added limit for number of simultaneous parallel operations, which should
   prevent accidental resource exhaustion of the server. Default is 64 and
   can be configured using the `COMPOSE_PARALLEL_LIMIT` environment variable
 
@@ -207,7 +376,7 @@ toc_max: 2
 - Bash completion should now be able to better differentiate between running,
   stopped and paused services
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug that would cause the `build` command to report a connection
   error when the build context contained unreadable files or FIFO objects.
@@ -290,7 +459,7 @@ toc_max: 2
 - Setting `stop_grace_period` in service definitions now also sets the
   container's `stop_timeout`
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed an issue where Compose was still handling service hostname according
   to legacy engine behavior, causing hostnames containing dots to be cut up
@@ -359,7 +528,7 @@ toc_max: 2
   resources (networks, volumes, containers) without starting services.
   The `create` command is deprecated in favor of this new option
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where `extra_hosts` values would be overridden by extension
   files instead of merging together
@@ -411,7 +580,7 @@ toc_max: 2
 - Added new CLI flag `--no-ansi` to suppress ANSI control characters in
   output
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where nested `extends` instructions weren't resolved
   properly, causing "file not found" errors
@@ -466,10 +635,10 @@ toc_max: 2
 
 - Some improvements to CLI output
 
-### Bugfixes
+### Bug Fixes
 
 - Volumes specified through the `--volume` flag of `docker-compose run` now
-  complement volumes declared in the service's defintion instead of replacing
+  complement volumes declared in the service's definition instead of replacing
   them
 
 - Fixed a bug where using multiple Compose files would unset the scale value
@@ -518,7 +687,7 @@ toc_max: 2
 - Differences in labels between the Compose file and remote network
   will now print a warning instead of preventing redeployment.
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where service's dependencies were being rescaled to their
   default scale when running a `docker-compose run` command
@@ -569,7 +738,7 @@ toc_max: 2
 
 - Added support for `options` in the `ipam` section of network definitions
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where paths provided to compose via the `-f` option were not
   being resolved properly
@@ -663,7 +832,7 @@ toc_max: 2
 - Added support for port range to single port in port mappings, such as
   `8000-8010:80`.
 
-### Bugfixes
+### Bug Fixes
 
 - `docker-compose run --rm` now removes anonymous volumes after execution,
   matching the behavior of `docker run --rm`.
@@ -697,7 +866,7 @@ toc_max: 2
 
 ## 1.11.2 (2017-02-17)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug that was preventing secrets configuration from being
   loaded properly
@@ -717,7 +886,7 @@ toc_max: 2
 
 ## 1.11.1 (2017-02-09)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where the 3.1 file format was not being recognized as valid
   by the Compose parser
@@ -737,7 +906,7 @@ toc_max: 2
 - Introduced the `docker-compose top` command that displays processes running
   for the different services managed by Compose.
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed a bug where extending a service defining a healthcheck dictionary
   would cause `docker-compose` to error out.
@@ -747,7 +916,7 @@ toc_max: 2
 
 ## 1.10.1 (2017-02-01)
 
-### Bugfixes
+### Bug Fixes
 
 - Fixed an issue where presence of older versions of the docker-py
   package would cause unexpected crashes while running Compose
@@ -797,7 +966,7 @@ toc_max: 2
 
 - Added support for the `stop_grace_period` option in service definitions.
 
-### Bugfixes
+### Bug Fixes
 
 - Colored output now works properly on Windows.
 
@@ -824,7 +993,7 @@ toc_max: 2
   environment variable `COMPOSE_CONVERT_WINDOWS_PATHS=1`. Users of
   Docker for Windows are not affected and do not need to set the variable.
 
-New Features
+### New Features
 
 - Interactive mode for `docker-compose run` and `docker-compose exec` is
   now supported on Windows platforms. The `docker` binary
@@ -851,7 +1020,7 @@ New Features
 - Overriding a `logging` configuration will now properly merge the `options`
   mappings if the `driver` values do not conflict.
 
-Bug Fixes
+### Bug Fixes
 
 - Fixed several bugs related to `npipe` protocol support on Windows.
 

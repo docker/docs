@@ -10,10 +10,12 @@ Usage: config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
-    -q, --quiet              Only validate the configuration, don't print
-                             anything.
+    -q, --quiet              Only validate the configuration – do not print anything.
     --services               Print the service names, one per line.
     --volumes                Print the volume names, one per line.
+    --hash="*"               Print the service config hash, one per line.
+                             Set "service1,service2" for a list of specified services
+                             or use the wildcard symbol to display all services.
 ```
 
 Validate and view the Compose file.

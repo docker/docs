@@ -60,7 +60,7 @@ services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
     ports:
-      - 5000:80
+      - "5000:80"
     networks:
       - frontend
     depends_on:
@@ -75,7 +75,7 @@ services:
   result:
     image: dockersamples/examplevotingapp_result:before
     ports:
-      - 5001:80
+      - "5001:80"
     networks:
       - backend
     depends_on:
@@ -566,7 +566,7 @@ services:
   wordpress:
     image: wordpress
     ports:
-      - 8080:80
+      - "8080:80"
     networks:
       - overlay
     deploy:
@@ -646,7 +646,7 @@ in the [swarm](/engine/swarm/) topics.)
 
 Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
 
-    version: '3'
+    version: '3.3'
     services:
       db:
         image: postgres
@@ -759,6 +759,20 @@ services:
         window: 120s
 ```
 
+#### rollback_config
+
+> [Version 3.7 file format](compose-versioning.md#version-37) and up
+
+Configures how the service should be rollbacked in case of a failing
+update.
+
+- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
+- `delay`: The time to wait between each container group's rollback (default 0s).
+- `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `max_failure_ratio`: Failure rate to tolerate during a rollback (default 0).
+- `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
+
 #### update_config
 
 Configures how the service should be updated. Useful for configuring rolling
@@ -792,7 +806,7 @@ services:
 
 #### Not supported for `docker stack deploy`
 
-The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+The following sub-options (supported for `docker-compose up` and `docker-compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
 
 - [build](#build)
 - [cgroup_parent](#cgroup_parent)
@@ -838,6 +852,9 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
+  
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
 
 Simple example:
 
@@ -1118,6 +1135,27 @@ If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
+### init
+
+> [Added in version 3.7 file format](compose-versioning.md#version-37).
+
+Run an init inside the container that forwards signals and reaps processes.
+Either set a boolean value to use the default `init`, or specify a path to
+a custom one.
+
+    version: '3.7'
+    services:
+      web:
+        image: alpine:latest
+        init: true
+
+
+    version: '2.2'
+    services:
+      web:
+        image: alpine:latest
+        init: /usr/libexec/docker-init
+
 ### isolation
 
 Specify a container’s isolation technology. On Linux, the only supported value
@@ -1246,7 +1284,7 @@ For a full list of supported logging drivers and their options, see
 
 ### network_mode
 
-Network mode. Use the same values as the docker client `--net` parameter, plus
+Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
 
     network_mode: "bridge"
@@ -1374,11 +1412,13 @@ networks:
 Sets the PID mode to the host PID mode.  This turns on sharing between
 container and the host operating system the PID address space.  Containers
 launched with this flag can access and manipulate other
-containers in the bare-metal machine's namespace and vise-versa.
+containers in the bare-metal machine's namespace and vice versa.
 
 ### ports
 
 Expose ports.
+
+> **Note:** Port mapping is incompatible with `network_mode: host`
 
 #### Short syntax
 
@@ -1690,6 +1730,7 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
+- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```none
 version: "3.2"
@@ -1781,7 +1822,7 @@ services:
   php:
     image: php:7.1-fpm
     ports:
-      - 9000
+      - "9000"
     volumes:
       - .:/var/www/project:cached
 ```
@@ -1919,14 +1960,16 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: '3'
 
     services:
       db:
@@ -1984,7 +2027,7 @@ conflicting with those used by other software.
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
 Set a custom name for this volume. The name field can be used to reference
-networks that contain special characters. The name is used as is
+volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
     version: '3.4'
@@ -1992,7 +2035,7 @@ and will **not** be scoped with the stack name.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.4'
     volumes:
@@ -2170,15 +2213,17 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `ipam`, `internal`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other network configuration keys (`driver`, `driver_opts`,
+`ipam`, `internal`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: '3'
 
     services:
       proxy:
@@ -2220,7 +2265,7 @@ and will **not** be scoped with the stack name.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.5'
     networks:

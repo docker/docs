@@ -212,19 +212,19 @@ crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Uncheck to opt out. Docker may also  sometimes
 prompt you for more information.
 
-### Shared Drives
+### Shared drives
 
 Share your local drives (volumes) with Docker for Windows, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
 
-![Shared Drives](images/settings-shared-drives.png){:width="600px"}
+![Shared drives](images/settings-shared-drives.png){:width="600px"}
 
 Permission for shared drives are tied to the credentials you provide here. If
 you run `docker` commands under a different username than the one configured
 here, your containers cannot access the mounted volumes.
 
 To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker Store the
+username and password. You can select an option to have Docker store the
 credentials so that you don't need to enter them every time.
 
 > Tips on shared drives, permissions, and volume mounts
@@ -240,8 +240,7 @@ credentials so that you don't need to enter them every time.
  There are a number of issues with using host-mounted volumes and network paths
  for database files. See [Volume mounts from host paths use a nobrl option to override database locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
- * Docker for Windows sets permissions to read/write/execute for users and
-   read/execute for groups and others [0755 or u+rwx,go+rx](http://permissions-calculator.org/decode/0755/).
+ * Docker for Windows sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
  * Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes).
@@ -297,7 +296,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 ![Network settings](images/settings-network.png){:width="600px"}
 
-* **Internal Virtual Switch** - You can specify a network address translation (NAT) prefix and subnet mask to enable internet connectivity.
+* **Internal Virtual Switch** - You can specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
@@ -427,12 +426,11 @@ For a full list of options on the Docker daemon, see [daemon](/engine/reference/
 
 [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher, and in [18.06 Stable (win70)](/docker-for-windows/edge-release-notes/#docker-community-edition-18060-ce-win70-2018-07-25) and higher.
 
 ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
 
-Docker for Windows 18.02 CE Edge and higher include a standalone Kubernetes
-server that runs on your Windows host, so that you can test deploying your
+From Docker for Windows 18.02 CE Edge and 18.06 CE Stable a standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
 Docker workloads on Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
@@ -445,6 +443,10 @@ to change context so that `kubectl` is pointing to `docker-for-desktop`:
 > kubectl config use-context docker-for-desktop
 ```
 
+You can also change it through the Docker for Windows menu:
+
+![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="600px"}
+
 If you installed `kubectl` by another method, and
 experience conflicts, remove it.
 
@@ -452,7 +454,7 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply and restart** button.
 
-  An internet connection is required. Images required to run the Kubernetes
+  An Internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
   > Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
 
@@ -466,19 +468,7 @@ experience conflicts, remove it.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with Docker for Windows,
-  see [Deploy to Kubernetes](kubernetes.md).
-
-### Diagnose & feedback
-
-Use this tab to troubleshoot problems and get help from Docker.
-
-![Reset](images/settings-diagnose.png){:width="600px"}
-
-Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues. See [Logs and Troubleshooting](troubleshoot.md) for more details.
-
-To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
+  see [Deploy on Kubernetes](kubernetes.md).
 
 ### Reset
 
@@ -490,6 +480,16 @@ On the Reset tab, you can restart Docker or reset its configuration.
 
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
+
+### Diagnose & feedback
+
+Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
+
+Log on to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
+
+Log on to [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
+
+To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
 
 ## Switch between Windows and Linux containers
 
@@ -541,22 +541,13 @@ See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certif
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
 
-## Docker Store
+## Docker Hub
 
-Select **Docker Store** from the Docker for Windows menu to access the [Docker store](https://store.docker.com/) website. From there, you can log on to Docker Store and download apps.
+Select **Sign in /Create Docker ID** from the Docker for  Windows menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker for Windows menu.
 
-Docker Store is a component of the next-generation [Docker Hub](https://hub.docker.com) and the best place to find compliant, trusted
-commercial and free software distributed as Docker Images.
+See these [Docker Hub topics](/docker-hub/index.md){: target="_blank" class="_" } to learn more:
 
-Refer to the [Docker Store documentation](/docker-store/index.md){: target="_blank" class="_" }
-
-## Docker Cloud
-
-Select **Sign in /Create Docker ID** from the Docker for  Windows menu to access your [Docker Cloud](https://cloud.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Cloud repositories directly from the Docker for Windows menu.
-
-See these [Docker Cloud topics](/docker-cloud/index.md){: target="_blank" class="_" } to learn more:
-
-* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
 
 ## Where to go next

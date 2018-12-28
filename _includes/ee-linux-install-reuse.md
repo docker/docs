@@ -30,7 +30,7 @@ For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for Cen
 
 To install Docker EE, you will need the URL of the Docker EE repository associated with your trial or subscription:
 
-1.  Go to [https://store.docker.com/my-content](https://store.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
+1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
 2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
 3.  Copy the URL from **Copy and paste this URL to download your Edition** and save it for later use.
 
@@ -51,7 +51,7 @@ You only need to set up the repository once, after which you can install Docker 
     $ sudo rm /etc/yum.repos.d/docker*.repo
     ```
 
-2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends.
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
 
     ```bash
     $ export DOCKERURL="<DOCKER-EE-URL>"
@@ -85,13 +85,13 @@ You only need to set up the repository once, after which you can install Docker 
 
     The repository can differ per your architecture and cloud provider, so review the options in this step before running:
 
-    **For all architectures _except_ IBM Power PC:**
+    **For all architectures _except_ IBM Power:**
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
     ```
 
-    **For IBM Power PC only (little endian):**
+    **For IBM Power only (little endian):**
 
     ```bash
     $ sudo yum-config-manager --enable extras
@@ -116,6 +116,16 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% endif %}
 
+{% if linux-dist == "oraclelinux" %}
+
+5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable ol7_addons
+    ```
+
+{% endif %}
+
 6.  Add the Docker EE **stable** repository:
 
     ```bash
@@ -127,13 +137,19 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-1.  Install the _latest version_ of Docker EE, or go to the next step to install a specific version:
+> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> UCP, and DTR).
+
+1.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum -y install docker-ee
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
+
 
 2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
 
@@ -142,15 +158,21 @@ You only need to set up the repository once, after which you can install Docker 
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-17.06
+    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
     ```
 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-17.06.1.ee.2`
+    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.0`
 
     ```bash
     $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
+    ```
+
+    For example, if you want to install the 18.09 version run the following:
+
+    ```bash
+    sudo yum-config-manager --enable docker-ee-stable-18.09
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
@@ -201,7 +223,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
 
 {% if linux-dist == "centos" %}
 1.  Go to the Docker EE repository URL associated with your trial or subscription
-    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages`
+    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
     and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endif %}
 
@@ -271,7 +293,14 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     $ sudo rm -rf /var/lib/docker
     ```
 
-3.  If desired, remove the `devicemapper` thin pool and reformat the block
+3.  Delete other Docker related resources:
+    ```bash
+    $ sudo rm -rf /run/docker
+    $ sudo rm -rf /var/run/docker
+    $ sudo rm -rf /etc/docker
+    ```
+
+4.  If desired, remove the `devicemapper` thin pool and reformat the block
     devices that were part of it.
 
 You must delete any edited configuration files manually.
@@ -281,6 +310,6 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 
 {% endif %}

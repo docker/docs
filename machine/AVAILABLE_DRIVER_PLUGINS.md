@@ -139,6 +139,19 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>CloudSigma</td>
+      <td>
+        <a href=
+        "https://github.com/cloudsigma/docker-machine-driver-cloudsigma">https://github.com/cloudsigma/docker-machine-driver-cloudsigma</a>
+      </td>
+      <td>
+        <a href="https://github.com/cloudsigma">CloudSigma</a>
+      </td>
+      <td>
+        <a href="mailto:bogdan.despotov@cloudsigma.com">bogdan.despotov@cloudsigma.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>Docker-In-Docker</td>
       <td>
         <a href=
@@ -177,6 +190,23 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
       <td>
         <a href="mailto:bo.thompson@gmail.com">bo.thompson@gmail.com</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Hetzner Cloud</td>
+      <td>
+        <a href=
+        "https://github.com/JonasProgrammer/docker-machine-driver-hetzner">https://github.com/JonasProgrammer/docker-machine-driver-hetzner</a>
+      </td>
+      <td>
+        <a href="https://github.com/JonasProgrammer">JonasProgrammer</a><br>
+        <a href="https://github.com/monochromata">monochromata</a><br>
+        <a href="https://github.com/mxschmitt">mxschmitt</a>
+      </td>
+      <td>
+        <a href="mailto:jonass@dev.jsje.de">jonass@dev.jsje.de</a><br>
+        <a href="mailto:sl@monochromata.de">sl@monochromata.de</a><br>
+        <a href="mailto:max@schmitt.mx">max@schmitt.mx</a>
       </td>
     </tr>
     <tr>

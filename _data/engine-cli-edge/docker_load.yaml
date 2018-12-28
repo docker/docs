@@ -28,7 +28,7 @@ options:
   swarm: false
 examples: |-
   ```bash
-  $ docker docker image ls
+  $ docker image ls
 
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 

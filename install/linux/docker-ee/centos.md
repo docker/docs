@@ -19,11 +19,12 @@ title: Get Docker EE for CentOS
 
 ## Prerequisites
 
-This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
+This section lists what you need to consider before installing Docker EE. Items
+that require action are explained below.
 
 - Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`.
 - Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
-- Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
+- Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
 
@@ -55,8 +56,7 @@ $ sudo yum remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine \
-                  docker-ce
+                  docker-engine
 ```
 
 ## Repo install and upgrade

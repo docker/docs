@@ -31,7 +31,7 @@ rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
 packets or handles encryption. See [Docker and iptables](/network/iptables.md)
 and
-[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
+[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking)
 for a much greater depth of technical detail.
 
 In addition, this topic does not provide any tutorials for how to create,
@@ -75,7 +75,7 @@ exist by default, and provide core networking functionality:
 
 - [Network plugins](/engine/extend/plugins_services/): You can install and use
   third-party network plugins with Docker. These plugins are available from
-  [Docker Store](https://store.docker.com/search?category=network&q=&type=plugin)
+  [Docker Hub](https://hub.docker.com/search?category=network&q=&type=plugin)
   or from third-party vendors. See the vendor's documentation for installing and
   using a given network plugin.
 
@@ -118,4 +118,3 @@ understanding using the following tutorials:
 - [Host networking tutorial](network-tutorial-host.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
-

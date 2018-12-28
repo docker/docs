@@ -4,6 +4,8 @@ keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgr
 redirect_from:
 - /engine/installation/centos/
 - /engine/installation/linux/docker-ce/centos/
+- /install/linux/centos/
+- /engine/installation/linux/centos/
 title: Get Docker CE for CentOS
 toc_max: 4
 ---
@@ -199,7 +201,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package

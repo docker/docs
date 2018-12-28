@@ -24,7 +24,7 @@ toc_max: 2
 - Fix network endpoints for rescheduling
 - Give up leadership when manager shuts down
 
-### Cluster Management
+### Cluster management
 
 - Remove dependency on IPv4 addresses
 - Support event top, resize, commit and so on to avoid unnecessary refreshing
@@ -37,7 +37,7 @@ toc_max: 2
 - Update go-zookeeper to fix a lock spin problem
 - Migrate documentation to https://github.com/docker/docker.github.io/tree/master/swarm
 - Update Swarm CI to use go 1.7.1
-- support GOARCH to be able to build for other architectures
+- Support GOARCH to be able to build for other architectures
 - Send Swarm logs to stdout
 
 ## 1.2.5 (2016-08-18)
@@ -227,7 +227,7 @@ toc_max: 2
 - Add support for container rescheduling on node failure. (experimental)
 - Use failureCount as a secondary health indicator
 - Add swarm container create retry option
-- Fixed the way soft affinities and handled
+- Fix the way soft affinities and handled
 
 ### API
 
@@ -241,7 +241,7 @@ toc_max: 2
 - Require `--all` on docker ps to display containers on unhealthy nodes
 - Retry on docker events EOF
 
-### Node Management
+### Node management
 
 - Add a random delay to avoid synchronized registration at swarm join
 - Use engine connection error to fail engine fast
@@ -286,7 +286,7 @@ toc_max: 2
 - Fix memoryswappiness default value
 - Enable profiling for HTTP in debug mode
 
-### Node Update
+### Node update
 
 - Provide options on swarm node update frequency
 
@@ -321,7 +321,7 @@ toc_max: 2
 
 - You can now use the docker volume plugin subsystem available with `docker volume`.
 
-### Leader Election
+### Leader election
 
 - You can now specify the `--replication-ttl` flag to control how long it takes for Replicas to be notified of the Primary failure and take over the lead.
 
@@ -346,10 +346,10 @@ toc_max: 2
 - Fix docker exec status code
 - Fix docker pull status code
 
-### Docker Engine Compatibility
+### Docker Engine compatibility
 
 - Improve docker info with docker client 1.7.x
-- Add SystemTime, http_proxy, https_proxy and no_proxy to docker info
+- Add SystemTime, http_proxy, https_proxy, and no_proxy to docker info
 
 ### Mesos integration
 

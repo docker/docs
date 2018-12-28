@@ -54,7 +54,7 @@ with more details on any one of these services:
 * Content trust (notary)
 
 This endpoint is for checking the health of a *single* replica. To get
-the health of every replica in a cluster, querying each replica individiually is
+the health of every replica in a cluster, querying each replica individually is
 the preferred way to do it in real time.
 
 The `/api/v0/meta/cluster_status`
@@ -140,9 +140,11 @@ global
 defaults
         mode    tcp
         option  dontlognull
-        timeout connect 5000
-        timeout client 50000
-        timeout server 50000
+        timeout connect 5s
+        timeout client 50s
+        timeout server 50s
+        timeout tunnel 1h
+        timeout client-fin 50s
 ### frontends
 # Optional HAProxy Stats Page accessible at http://<host-ip>:8181/haproxy?stats
 frontend dtr_stats

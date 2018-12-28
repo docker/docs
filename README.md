@@ -8,10 +8,10 @@ open source and we deeply appreciate contributions from our community!
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy.  You can edit a page or 
-request changes in the right column of every page on [https://docs.docker.com/]
-(https://docs.docker.com/).  You can also rate each page by clicking a link at 
-the footer.
+We really want your feedback, and we've made it easy.  You can edit a page or
+request changes in the right column of every page on
+[docs.docker.com](https://docs.docker.com/).  You can also rate each page by
+clicking a link at the footer.
 
 **Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -34,7 +34,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](/opensource/project/who-written-for/).
+[Contribution guidelines](CONTRIBUTING.md).
 
 ### Files not edited here
 
@@ -107,7 +107,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have three options:
+You have two options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
@@ -118,7 +118,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](/compose/install/).
+    [follow these installation instructions](https://docs.docker.com/compose/install/).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
@@ -174,7 +174,8 @@ You have three options:
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+[Docker Hub](https://docs.docker.com/docker-hub/).
+
 The following examples use the `latest` tag:
 
 - Run a single container:
@@ -279,11 +280,49 @@ Bootstrap JS are loaded.
 
 > **Note**: In general, this is a bad idea.
 
+### Images
+
+Don't forget to remove images that are no longer used.  Keep the images sorted
+in the local `images/` directory, with names that naturally group related images
+together in alphabetical order.  For instance prefer `settings-file-share.png`
+and `settings-proxies.png` to `file-share-settings.png` and
+`proxies-settings.png`.  You may also use numbers, especially in the case of a
+sequence, e.g., `run-only-the-images-you-trust-1.svg`
+`run-only-the-images-you-trust-2.png` `run-only-the-images-you-trust-3.png`.
+
+When applicable, capture windows rather than rectangular regions.  This
+eliminates unpleasant background and saves the editors the need to crop.
+
+On Mac, capture windows without shadows.  To this end, once you pressed
+`Command-Shift-4`, press Option while clicking on the window.  To disable
+shadows once for all, run:
+
+```bash
+$ defaults write com.apple.screencapture disable-shadow -bool TRUE
+$ killall SystemUIServer  # restart it.
+```
+
+You can restore shadows later with `-bool FALSE`.
+
+In order to keep the Git repository light, _please_ compress the images
+(losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
+instance.  Be sure to compress the images *before* adding them to the
+repository, doing it afterwards actually worsens the impact on the Git repo (but
+still optimizes the bandwidth during browsing).
+
+## Beta content disclaimer
+```bash
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+```
+
 ## Building archives and the live published docs
 
-All the images described below are automatically built using Docker Cloud. To
-build the site manually, from scratch, including all utility and archive
-images, see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
+All the images described below are automatically built using Docker Hub. To
+build the site manually, from scratch, including all utility and archive images,
+see the [README in the publish-tools
+branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
 
 - Some utility images are built from Dockerfiles in the `publish-tools` branch.
   See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)

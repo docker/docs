@@ -157,7 +157,7 @@ Example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(include <code>parseTime=true</code> as part of the the DSN)</td>
+			(include <code>parseTime=true</code> as part of the DSN)</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>default_alias</code></td>

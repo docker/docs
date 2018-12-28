@@ -1,7 +1,7 @@
 command: docker stack
 short: Manage Docker stacks
 long: Manage stacks.
-usage: docker stack
+usage: docker stack [OPTIONS]
 pname: docker
 plink: docker.yaml
 cname:
@@ -22,22 +22,21 @@ options:
   description: Kubernetes config file
   deprecated: false
   experimental: false
-  experimentalcli: true
+  experimentalcli: false
   kubernetes: true
   swarm: false
-- option: namespace
+- option: orchestrator
   value_type: string
-  default_value: default
-  description: Kubernetes namespace to use
+  description: Orchestrator to use (swarm|kubernetes|all)
   deprecated: false
   experimental: false
-  experimentalcli: true
-  kubernetes: true
+  experimentalcli: false
+  kubernetes: false
   swarm: false
 deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: true
-swarm: true
+kubernetes: false
+swarm: false
 

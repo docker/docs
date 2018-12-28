@@ -11,15 +11,15 @@ This example demonstrates how to dockerize an ASP.NET Core application.
 ## Why build ASP.NET Core?
 
 - [Open-source](https://github.com/aspnet/home)
-- Develop and run your ASP.NET Core apps cross-platform on Windows, MacOS and
+- Develop and run your ASP.NET Core apps cross-platform on Windows, MacOS, and
   Linux
-- Great for modern cloud-based apps, such as web apps, IoT apps and mobile
+- Great for modern cloud-based apps, such as web apps, IoT apps, and mobile
   backends
 - ASP.NET Core apps can run on [.NET
   Core](https://www.microsoft.com/net/core/platform) or on the full [.NET
   Framework](https://www.microsoft.com/net/framework)
 - Designed to provide an optimized development framework for apps that are
-  deployed to the cloud or run on-premise
+  deployed to the cloud or run on-premises
 - Modular components with minimal overhead retain flexibility while
 constructing your solutions
 
@@ -41,7 +41,7 @@ Windows](/docker-for-windows/). Read more on [switching containers](/docker-for-
    the `Dockerfile` to use the DLL file of your project.
 
 ```dockerfile
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
@@ -53,7 +53,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM microsoft/aspnetcore:2.0
+FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
@@ -90,13 +90,12 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
   directly. You can get the IP address of your container with the following
   steps:
   1.  Run `docker inspect -f "{% raw %}{{ .NetworkSettings.Networks.nat.IPAddress }}{% endraw %}" myapp`
-  2.  Copy the container ip address and paste into your browser.
+  2.  Copy the container IP address and paste into your browser.
   (For example, `172.16.240.197`)
 
 ## Further reading
 
   - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
-  - [Microsoft ASP.NET Core on Docker
-    Hub](https://hub.docker.com/r/microsoft/aspnetcore/)
-  - [ASP.NET Core with Docker Tools for Visual
-    Studio](https://blogs.msdn.microsoft.com/webdev/2016/11/16/new-docker-tools-for-visual-studio/)
+  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
+  - [Building Docker Images for .NET Core Applications](https://docs.microsoft.com/dotnet/core/docker/building-net-docker-images)
+  - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)

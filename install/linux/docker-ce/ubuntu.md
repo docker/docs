@@ -6,6 +6,8 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ce/ubuntu/
+- /install/linux/ubuntu/
+- /engine/installation/linux/ubuntu/
 title: Get Docker CE for Ubuntu
 toc_max: 4
 ---
@@ -30,7 +32,7 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge and higher only)
+- Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
@@ -258,9 +260,8 @@ the repository.
     ```
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a an equals sign (`=`), for example,
-       `docker-ce=18.03.0.ce`.
+       package name (`docker-ce`) "=" version string (2nd column), for example,
+       `docker-ce=18.03.0~ce-0~ubuntu`.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION>
@@ -287,7 +288,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package

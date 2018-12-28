@@ -124,21 +124,14 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker registries
 
-A Docker _registry_ stores Docker images. Docker Hub and Docker Cloud are public
-registries that anyone can use, and Docker is configured to look for images on
+A Docker _registry_ stores Docker images. Docker Hub is a public
+registry that anyone can use, and Docker is configured to look for images on
 Docker Hub by default. You can even run your own private registry. If you use
 Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
 
 When you use the `docker pull` or `docker run` commands, the required images are
 pulled from your configured registry. When you use the `docker push` command,
 your image is pushed to your configured registry.
-
-[Docker store](http://store.docker.com) allows you to buy and sell Docker images
-or distribute them for free. For instance, you can buy a Docker image containing
-an application or service from a software vendor and use the image to deploy
-the application into your testing, staging, and production environments. You can
-upgrade the application by pulling the new version of the image and redeploying
-the containers.
 
 ### Docker objects
 
@@ -206,8 +199,8 @@ the default registry configuration):
     connect to external networks using the host machine's network connection.
 
 5.  Docker starts the container and executes `/bin/bash`. Because the container
-    is run interactively and attached to your terminal (due to the `-i` and `-t`)
-    flags, you can provide input using your keyboard and output is logged to
+    is running interactively and attached to your terminal (due to the `-i` and `-t`
+    flags), you can provide input using your keyboard while the output is logged to
     your terminal.
 
 6.  When you type `exit` to terminate the `/bin/bash` command, the container

@@ -46,7 +46,7 @@ Where:
 
 * `ip1`, `ip2`, `ip3` are each the IP address and port numbers of a discovery backend node.
 * `path` (optional) is a path to a key-value store on the discovery backend. When you use a single backend to service multiple clusters, you use paths to maintain separate key-value stores for each cluster.
-* `path/to/file` is the path to a file that contains a static list of the Swarm managers and nodes that are members the cluster. <!--tbd - can the file contain ipranges?-->
+* `path/to/file` is the path to a file that contains a static list of the Swarm managers and nodes that are members of the cluster. <!--tbd - can the file contain ipranges?-->
 * `iprange` is an IP address or a range of IP addresses followed by a port number.
 
 For example:
