@@ -37,7 +37,7 @@ to upgrade your installation to the latest release.
   * Users can now mirror images from another Docker Trusted or Docker Hub registry using the web interface. [Learn about pull mirroring](/ee/dtr/user/promotion-policies/pull-mirror).
 
 * CLI
-  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](/reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](../../reference/dtr/2.6/cli/reconfigure) for more details.
+  * To support NFS v4, users can now pass additional options such as `--async-nfs` and `--nfs-options` when installing or reconfiguring NFS for external storage. See [docker/dtr install](/reference/dtr/2.6/cli/install) and [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure) for more details.
   * When installing and restoring DTR from an existing backup, users are now required to specify a storage flag: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`. This ensures recovery of the configured storage setting when the backup was created. See [docker/dtr restore](/reference/dtr/2.6/cli/restore) for more details.
 
 * API
@@ -103,7 +103,7 @@ to upgrade your installation to the latest release.
 
 * Fixed bug where repository tag list UI was not loading after a tag migration.
 * Fixed bug to enable poll mirroring with Windows images.
-* The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface run rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.3.0 $REPLICA_ID`.
+* The RethinkDB image has been patched to remove unused components with known vulnerabilities including the RethinkCLI. To get an equivalent interface, run RethinkCLI from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.3.0 $REPLICA_ID`.
 
 ## 2.5.3 
 
