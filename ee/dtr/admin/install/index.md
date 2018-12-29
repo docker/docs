@@ -16,7 +16,7 @@ infrastructure meets the [system requirements](./system-requirements) that DTR n
 ## Step 2. Install UCP
 
 Since DTR requires Docker Universal Control Plane (UCP)
-to run, you need to [install UCP](../ucp/admin/install/) on all the nodes where you plan to install DTR.
+to run, you need to [install UCP](/ee/ucp/admin/install/) on all the nodes where you plan to install DTR.
 
 DTR needs to be installed on a worker node that is being managed by UCP.
 You cannot install DTR on a standalone Docker Engine.
