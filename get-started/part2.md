@@ -321,7 +321,7 @@ username, repository, and tag names so that the image uploads to your
 desired destination. The syntax of the command is:
 
 ```shell
-docker tag image username/repository:tag
+docker tag <image id> <username>/<repository id>:<tag name>
 ```
 
 For example:
@@ -348,7 +348,7 @@ python                   2.7-slim            1c7128a655f6        5 days ago     
 Upload your tagged image to the repository:
 
 ```shell
-docker push username/repository:tag
+docker push <username>/<repository id>:<tag name>
 ```
 
 Once complete, the results of this upload are publicly available. If you log in
@@ -361,7 +361,7 @@ From now on, you can use `docker run` and run your app on any machine with this
 command:
 
 ```shell
-docker run -p 4000:80 username/repository:tag
+docker run -p 4000:80 <username>/<repository id>:<tag name>
 ```
 
 If the image isn't available locally on the machine, Docker pulls it from
