@@ -145,7 +145,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1719ceb
+    docker-compose version {{site.compose_version}}, build 1110ad01
     ```
 <hr>
 </div>
