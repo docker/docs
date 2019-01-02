@@ -176,6 +176,7 @@ the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
       <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
       <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
     </ul>
@@ -195,6 +196,16 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="arm64" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
