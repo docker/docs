@@ -150,7 +150,6 @@ The following features are deprecated in UCP 3.1.
 * Interlock
   * Interlock headers can now be hidden. 
   * Respect `com.docker.lb.network` labels and only attach the specified networks to the Interlock proxy. 
-  * Pending  https://github.com/docker/orca/pull/15459 
   * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. 
 
 ## 3.0.7 (2018-12-04)
