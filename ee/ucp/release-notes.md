@@ -143,9 +143,9 @@ The following features are deprecated in UCP 3.1.
   * Significantly reduced database load in environments with a lot of concurrent 
   and repeated API requests by the same user. (docker/escalation#911)
   * Added the ability to set custom HTTP response headers to be returned by the
-   UCP Controller API Server. (#10733)
+   UCP Controller API Server. (docker/orca#10733)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (#15015) 
+   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
 * Interlock
   * Interlock headers can now be hidden. (docker/escalation#833)
