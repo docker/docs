@@ -19,12 +19,9 @@ on GitHub.
 
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
 
-2.  
+2.  Download the Docker Machine binary and extract it to your PATH.
 
-
-the Docker Machine binary and extract it to your PATH.
-
-    If you are running on **macOS**:
+    If you are running **macOS**:
 
     ```console
     $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
@@ -32,7 +29,7 @@ the Docker Machine binary and extract it to your PATH.
       chmod +x /usr/local/bin/docker-machine
     ```
 
-    If you are running on **Linux**:
+    If you are running **Linux**:
 
     ```console
     $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
@@ -40,7 +37,7 @@ the Docker Machine binary and extract it to your PATH.
       sudo install /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
-    If you are running with **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
+    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
 
     ```console
     $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
