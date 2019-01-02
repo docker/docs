@@ -9,7 +9,7 @@ a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 
 ### Define the project
 
-Start by setting up the four files needed to build the app. App will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the
+Start by setting up the files needed to build the app. App will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the
 Dockerfile consists of:
 
     FROM ruby:2.5
@@ -31,7 +31,7 @@ Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
     source 'https://rubygems.org'
-    gem 'rails', '5.2.0'
+    gem 'rails', '~>5'
 
 Create an empty `Gemfile.lock` to build our `Dockerfile`.
 
@@ -64,10 +64,10 @@ to link them together and expose the web app's port.
 
 ### Build the project
 
-With those four files in place, you can now generate the Rails skeleton app
+With those files in place, you can now generate the Rails skeleton app
 using [docker-compose run](/compose/reference/run/):
 
-    docker-compose run web rails new . --force --database=postgresql
+    docker-compose run web rails new . --force --no-deps --database=postgresql
 
 First, Compose builds the image for the `web` service using the
 `Dockerfile`. Then it runs `rails new` inside a new container, using that
@@ -75,7 +75,7 @@ image. Once it's done, you should have generated a fresh app.
 
 List the files.
 
-```shell
+```bash
 $ ls -l
 total 72
 -rw-r--r-- 1 vmb staff 223 5 26 14:20 Dockerfile
@@ -104,7 +104,7 @@ If you are running Docker on Linux, the files `rails new` created are owned by
 root. This happens because the container runs as the root user. If this is the
 case, change the ownership of the new files.
 
-```shell
+```bash
 sudo chown -R $USER:$USER .
 ```
 
