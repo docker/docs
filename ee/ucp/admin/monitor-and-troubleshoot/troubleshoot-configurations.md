@@ -143,6 +143,11 @@ time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"
 {% endraw %}
 ```
 
+> #### Loss of Quorum in RethinkDB Tables
+>
+> When there is loss of quorum in any of the RethinkDB tables, run the `reconfigure-db` command 
+> with the `--emergency-repair` flag.
+
 ## Where to go next
 
 - [Get support](../../../get-support.md)
