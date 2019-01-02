@@ -138,7 +138,7 @@ the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gpg-agent \
+        gnupg-agent \
         software-properties-common
     ```
 
