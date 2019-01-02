@@ -141,16 +141,19 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 * Core
   * Significantly reduced database load in environments with a lot of concurrent 
-  and repeated API requests by the same user. 
+  and repeated API requests by the same user. (docker/escalation#911)
   * Added the ability to set custom HTTP response headers to be returned by the
-   UCP Controller API Server. 
+   UCP Controller API Server. (#10733)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. 
-  * LDAP group member attribute is now case insensitive. 
+   `com.docker.lb.network` label is not correctly specified. (#15015) 
+  * LDAP group member attribute is now case insensitive. (docker/escalation#917)
 * Interlock
-  * Interlock headers can now be hidden. 
-  * Respect `com.docker.lb.network` labels and only attach the specified networks to the Interlock proxy. 
-  * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. 
+  * Interlock headers can now be hidden. (docker/escalation#833)
+  * Respect `com.docker.lb.network` labels and only attach the specified networks
+    to the Interlock proxy. (docker/interlock#169)
+  * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the 
+     backend service's Virtual IP instead of load-balancing directly to each task IP. 
+     (docker/interlock#206, escalation/920)
 
 ## 3.0.7 (2018-12-04)
 
