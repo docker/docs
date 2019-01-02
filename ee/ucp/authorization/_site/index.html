@@ -1,0 +1,110 @@
+<p><a href="../index.md">Docker Universal Control Plane (UCP)</a>,
+the UI for <a href="https://www.docker.com/enterprise-edition">Docker EE</a>, lets you
+authorize users to view, edit, and use cluster resources by granting role-based
+permissions against resource sets.</p>
+
+<p>To authorize access to cluster resources across your organization, UCP
+administrators might take the following high-level steps:</p>
+
+<ul>
+  <li>Add and configure <strong>subjects</strong> (users, teams, and service accounts).</li>
+  <li>Define custom <strong>roles</strong> (or use defaults) by adding permitted operations per
+type of resource.</li>
+  <li>Group cluster <strong>resources</strong> into resource sets of Swarm collections or
+Kubernetes namespaces.</li>
+  <li>Create <strong>grants</strong> by combining subject + role + resource set.</li>
+</ul>
+
+<p>For an example, see <a href="deploy-stateless-app.md">Deploy stateless app with RBAC</a>.</p>
+
+<h2 id="subjects">Subjects</h2>
+
+<p>A subject represents a user, team, organization, or service account. A subject
+can be granted a role that defines permitted operations against one or more
+resource sets.</p>
+
+<ul>
+  <li><strong>User</strong>: A person authenticated by the authentication backend. Users can
+belong to one or more teams and one or more organizations.</li>
+  <li><strong>Team</strong>: A group of users that share permissions defined at the team level. A
+team can be in one organization only.</li>
+  <li><strong>Organization</strong>: A group of teams that share a specific set of permissions,
+defined by the roles of the organization.</li>
+  <li><strong>Service account</strong>: A Kubernetes object that enables a workload to access
+cluster resources that are assigned to a namespace.</li>
+</ul>
+
+<p>Learn to <a href="create-users-and-teams-manually.md">create and configure users and teams</a>.</p>
+
+<h2 id="roles">Roles</h2>
+
+<p>Roles define what operations can be done by whom. A role is a set of permitted
+operations against a type of resource, like a container or volume, that’s
+assigned to a user or team with a grant.</p>
+
+<p>For example, the built-in role, <strong>Restricted Control</strong>, includes permission to
+view and schedule nodes but not to update nodes. A custom <strong>DBA</strong> role might
+include permissions to <code class="highlighter-rouge">r-w-x</code> volumes and secrets.</p>
+
+<p>Most organizations use multiple roles to fine-tune the appropriate access. A
+given team or user may have different roles provided to them depending on what
+resource they are accessing.</p>
+
+<p>Learn to <a href="define-roles.md">define roles with authorized API operations</a>.</p>
+
+<h2 id="resource-sets">Resource sets</h2>
+
+<p>To control user access, cluster resources are grouped into Docker Swarm
+<em>collections</em> or Kubernetes <em>namespaces</em>.</p>
+
+<ul>
+  <li>
+    <p><strong>Swarm collections</strong>: A collection has a directory-like structure that holds
+Swarm resources. You can create collections in UCP by defining a directory path
+and moving resources into it. Also, you can create the path in UCP and use
+<em>labels</em> in your YAML file to assign application resources to the path.
+Resource types that users can access in a Swarm collection include containers,
+networks, nodes, services, secrets, and volumes.</p>
+  </li>
+  <li>
+    <p><strong>Kubernetes namespaces</strong>: A
+<a href="https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>
+is a logical area for a Kubernetes cluster. Kubernetes comes with a <code class="highlighter-rouge">default</code>
+namespace for your cluster objects, plus two more namespaces for system and
+public resources. You can create custom namespaces, but unlike Swarm
+collections, namespaces <em>can’t be nested</em>. Resource types that users can
+access in a Kubernetes namespace include pods, deployments, network policies,
+nodes, services, secrets, and many more.</p>
+  </li>
+</ul>
+
+<p>Together, collections and namespaces are named <em>resource sets</em>. Learn to
+<a href="group-resources.md">group and isolate cluster resources</a>.</p>
+
+<h2 id="grants">Grants</h2>
+
+<p>A grant is made up of <em>subject</em>, <em>role</em>, and <em>resource set</em>.</p>
+
+<p>Grants define which users can access what resources in what way. Grants are
+effectively Access Control Lists (ACLs), and when grouped together, they
+provide comprehensive access policies for an entire organization.</p>
+
+<p>Only an administrator can manage grants, subjects, roles, and access to
+resources.</p>
+
+<blockquote class="important">
+  <p>About administrators</p>
+
+  <p>An administrator is a user who creates subjects, groups resources by moving them
+into collections or namespaces, defines roles by selecting allowable operations,
+and applies grants to users and teams.</p>
+</blockquote>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="create-users-and-teams-manually.md">Create and configure users and teams</a></li>
+  <li><a href="define-roles.md">Define roles with authorized API operations</a></li>
+  <li><a href="grant-permissions.md">Grant role-access to cluster resources</a></li>
+  <li><a href="group-resources.md">Group and isolate cluster resources</a></li>
+</ul>

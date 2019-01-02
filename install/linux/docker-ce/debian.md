@@ -32,7 +32,7 @@ Raspbian versions:
 - Jessie 8 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
-Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` architectures for Jessie and
+Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures for Jessie and
 Stretch.
 
 ### Uninstall old versions
@@ -41,7 +41,7 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -168,6 +168,7 @@ from the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -184,6 +185,15 @@ from the repository.
 
     ```bash
     $ echo "deb [arch=armhf] {{ download-url-base }} \
+         $(lsb_release -cs) stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
+    ```
+
+    </div>
+    <div id="arm64_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ echo "deb [arch=arm64] {{ download-url-base }} \
          $(lsb_release -cs) stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
@@ -243,7 +253,7 @@ from the repository.
 
     b. Install a specific version by its fully qualified package name, which is
        the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a an equals sign (`=`), for example,
+       the first hyphen, separated by an equals sign (`=`), for example,
        `docker-ce=18.03.0.ce`.
 
     ```bash
@@ -290,8 +300,8 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 a new file each time you want to upgrade Docker.
 
 1.  Go to `{{ download-url-base }}/dists/`,
-    choose your Debian version, browse to `pool/stable/`, choose either
-    `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
+    choose your Debian version, browse to `pool/stable/`, choose
+    `amd64`, `armhf`, or `arm64` and download the `.deb` file for the Docker CE version you
     want to install.
 
     > **Note**: To install an **edge**  package, change the word

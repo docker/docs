@@ -104,7 +104,7 @@ configure this app to use our SQL Server database, and then create a
             depends_on:
                 - db
         db:
-            image: "microsoft/mssql-server-linux"
+            image: "mcr.microsoft.com/mssql/server"
             environment:
                 SA_PASSWORD: "Your_password123"
                 ACCEPT_EULA: "Y"
@@ -186,7 +186,7 @@ configure this app to use our SQL Server database, and then create a
     Go ahead and try out the website! This sample uses the SQL Server
     database image in the back-end for authentication.
 
-Ready! You now have a ASP.NET Core application running against SQL Server in
+Ready! You now have an ASP.NET Core application running against SQL Server in
 Docker Compose! This sample made use of some of the most popular Microsoft
 products for Linux. To learn more about Windows Containers, check out
 [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows)
@@ -195,6 +195,6 @@ to try out .NET Framework and more SQL Server tutorials.
 ## Next steps
 
 - [Build your app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/?utm_medium=Referral&utm_source=docs.docker.com)
-- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server-linux/)
+- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server/)
 - [ASP.NET Core](https://www.asp.net/core)
 - [ASP.NET Core Docker image](https://hub.docker.com/r/microsoft/aspnetcore/) on DockerHub

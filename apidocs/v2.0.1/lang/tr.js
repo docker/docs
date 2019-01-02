@@ -2,7 +2,7 @@
 
 'use strict';
 
-/* jshint quotmark: double */
+/* jshint quotemark: double */
 window.SwaggerTranslator.learn({
     "Warning: Deprecated":"Uyarı: Deprecated",
     "Implementation Notes":"Gerçekleştirim Notları",

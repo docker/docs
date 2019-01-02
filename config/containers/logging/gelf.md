@@ -60,6 +60,10 @@ To make the configuration permanent, you can configure it in `/etc/docker/daemon
 }
 ```
 
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `gelf-tcp-max-reconnect`) must therefore be enclosed in quotes (`"`).
+
 You can set the logging driver for a specific container by setting the
 `--log-driver` flag when using `docker container create` or `docker run`:
 

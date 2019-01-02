@@ -6,7 +6,7 @@ keywords: DTR, cache
 ---
 
 The further away you are from the geographical location where DTR is deployed,
-the longer it will take the pull and push images.
+the longer it will take to pull and push images.
 This happens because the files being transferred from DTR to your machine
 need to travel a longer distance, across multiple networks.
 
@@ -15,9 +15,8 @@ need to travel a longer distance, across multiple networks.
 To decrease the time to pull an image, you can deploy DTR caches geographically
 closer to users.
 
-Caches are transparent to users, since users still login and pull images using
-the DTR url address.
-DTR checks if users are authorized to pull the image, and redirects the
+Caches are transparent to users, since users still log in and pull images using
+the DTR URL address. DTR checks if users are authorized to pull the image, and redirects the
 request to the cache.
 
 ![Pull with cache](../../../images/deploy-caches-2.svg)
@@ -25,7 +24,7 @@ request to the cache.
 In this example, DTR is deployed on a datacenter in the United States, and
 a cache is deployed in the Asia office.
 
-Users in the Asia office updated their user profile in DTR to fetch from
+Users in the Asia office update their user profile within DTR to fetch from
 the cache in their office. They pull an image using:
 
 ```
@@ -37,11 +36,11 @@ docker image pull dtr.example.org/website/ui:3-stable
 ```
 
 DTR authenticates the request and checks if the user has permission to pull the
-image they're requesting. If they have permissions, they'll get an image
+image they are requesting. If they have permissions, they get an image
 manifest containing the list of image layers to pull and redirecting them
-to pull them from the Asia cache.
+to pull the images from the Asia cache.
 
-When users request those images layers from the Asia cache, the cache pulls
+When users request those image layers from the Asia cache, the cache pulls
 them from DTR and keeps a copy that can be used to serve to other users without
 having to pull the image layers from DTR again.
 
@@ -53,7 +52,7 @@ Use caches if you:
 * Want to manage user permissions from a central place.
 
 If you need users to be able to push images faster, or you want to implement
-RBAC policies based on different regions, don't use caches.
+RBAC policies based on different regions, do not use caches.
 Instead, deploy multiple DTR clusters and implement mirroring policies between
 them.
 

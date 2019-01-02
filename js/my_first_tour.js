@@ -63,7 +63,7 @@ var tour = {
     },
     {
       title: "Product Manuals",
-      content: "Learn about Docker products and tools, such as Docker Cloud, UCP, Docker for Mac, or Docker for Windows.",
+      content: "Learn about Docker products and tools, such as Docker Hub, UCP, Docker for Mac, or Docker for Windows.",
       target: "top-nav",
       placement: "bottom",
       width: "570px",

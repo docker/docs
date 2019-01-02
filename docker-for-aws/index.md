@@ -18,7 +18,7 @@ Enterprise Edition for AWS.
 This release is maintained and receives **security and critical bug fixes for
 one year**.
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
+[Deploy Docker Enterprise Edition (EE) for AWS](https://hub.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
 
 ## Docker Community Edition (CE) for AWS
@@ -246,3 +246,8 @@ Console](https://aws.amazon.com/){: target="_blank" class="_"}, navigate to
 the Docker stack you want to remove.
 
 ![uninstall](img/aws-delete-stack.png)
+
+Stack removal does not remove EBS and EFS volumes created by the cloudstor
+volume plugin or the S3 bucket associated with DTR. Those resources must be
+removed manually. See the [cloudstor](/docker-for-aws/persistent-data-volumes/#list-or-remove-volumes-created-by-cloudstor)
+docs for instructions on removing volumes.

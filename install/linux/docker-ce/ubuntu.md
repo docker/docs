@@ -46,7 +46,7 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -273,7 +273,7 @@ the repository.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -319,7 +319,7 @@ a new file each time you want to upgrade Docker CE.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the

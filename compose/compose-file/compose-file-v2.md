@@ -1006,7 +1006,7 @@ designated container or service.
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vise-versa.
+other containers in the bare-metal machine's namespace and vice versa.
 
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
@@ -1420,8 +1420,10 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 2.0 of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
@@ -1483,7 +1485,7 @@ Set a custom name for this volume.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     volumes:
@@ -1593,8 +1595,10 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
+For version 2.0 of the format, `external` cannot be used in conjunction with
+other network configuration keys (`driver`, `driver_opts`, `ipam`, `internal`).
+This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
@@ -1641,7 +1645,7 @@ Set a custom name for this network.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     networks:

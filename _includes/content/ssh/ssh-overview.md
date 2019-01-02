@@ -2,7 +2,7 @@
 provides authentication and encrypts data communication over insecure networks.
 
 These topics describe how to find existing SSH keys or generate new ones, and
-add the public key to your Docker Cloud account. GitHub has a good set of
+add the public key to your Docker Hub account. GitHub has a good set of
 topics on [Connecting to GitHub with
 SSH](https://help.github.com/articles/connecting-to-github-with-ssh/), which you
 can tailor to SSH scenarios beyond GitHub, including Docker. The quick-look

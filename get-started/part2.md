@@ -18,9 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We start at the bottom of
-the hierarchy of such an app, which is a container, which we cover on this page.
-Above this level is a service, which defines how containers behave in
+It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
 stack, defining the interactions of all the services, covered in
 [Part 5](part5.md).

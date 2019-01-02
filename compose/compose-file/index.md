@@ -852,6 +852,9 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
+  
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
 
 Simple example:
 
@@ -1409,7 +1412,7 @@ networks:
 Sets the PID mode to the host PID mode.  This turns on sharing between
 container and the host operating system the PID address space.  Containers
 launched with this flag can access and manipulate other
-containers in the bare-metal machine's namespace and vise-versa.
+containers in the bare-metal machine's namespace and vice versa.
 
 ### ports
 
@@ -1727,6 +1730,7 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
+- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```none
 version: "3.2"
@@ -1956,14 +1960,16 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: '3'
 
     services:
       db:
@@ -2029,7 +2035,7 @@ and will **not** be scoped with the stack name.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.4'
     volumes:
@@ -2207,15 +2213,17 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `ipam`, `internal`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other network configuration keys (`driver`, `driver_opts`,
+`ipam`, `internal`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: '3'
 
     services:
       proxy:
@@ -2257,7 +2265,7 @@ and will **not** be scoped with the stack name.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '3.5'
     networks:
@@ -2328,8 +2336,8 @@ stack. The source of the secret is either `file` or `external`.
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_secret` is created (as
-`<stack_name>_my_first_secret)`when the stack is deployed,
+In this example, `my_first_secret` is created as
+`<stack_name>_my_first_secret `when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```none
@@ -2345,10 +2353,18 @@ is different from the name that exists within the service. The following
 example modifies the previous one to use the external secret called
 `redis_secret`.
 
+### Compose File v3.5 and above
 ```none
 secrets:
   my_first_secret:
     file: ./secret_data
+  my_second_secret:
+    external: true
+    name: redis_secret
+```
+
+### Compose File v3.4 and under
+```none    
   my_second_secret:
     external:
       name: redis_secret

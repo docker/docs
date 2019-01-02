@@ -20,14 +20,14 @@ The ZFS on Linux (ZoL) port is healthy and maturing. However, at this point in
 time it is not recommended to use the `zfs` Docker storage driver for production
 use unless you have substantial experience with ZFS on Linux.
 
-> **Note**: There is also a FUSE implementation of ZFS on the Linux platform.
+> ***Note***: There is also a FUSE implementation of ZFS on the Linux platform.
 > This is not recommended. The native ZFS driver (ZoL) is more tested, more
 > performant, and is more widely used. The remainder  of this document refers
 > to the native ZoL port.
 
 ## Prerequisites
 
-- ZFS requires one or more dedicated block devices, preferrably solid-state
+- ZFS requires one or more dedicated block devices, preferably solid-state
   drives (SSDs).
 - ZFS is only supported on Docker CE with Ubuntu 14.04 or higher, with the `zfs`
   package (16.04 and higher) or `zfs-native` and `ubuntu-zfs` packages (14.04)
@@ -43,6 +43,9 @@ use unless you have substantial experience with ZFS on Linux.
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   do not need to re-create them later.
+
+> ***NOTE:*** There is no need to use `MountFlags=slave` with Docker Engine 18.09 or 
+> later because `dockerd` and `containerd` are in different mount namespaces. 
 
 ## Configure Docker with the `zfs` storage driver
 
