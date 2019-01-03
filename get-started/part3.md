@@ -26,8 +26,8 @@ Toolbox](/toolbox/overview.md).
 shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
-slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
-username/repo:tag`, then visit `http://localhost/`.
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 4000:80
+username/repo:tag`, then visit `http://localhost:4000/`.
 
 ## Introduction
 
@@ -41,7 +41,7 @@ must go one level up in the hierarchy of a distributed application: the
 
 ## About services
 
-In a distributed application, different pieces of the app are called "services."
+In a distributed application, different pieces of the app are called "services".
 For example, if you imagine a video sharing site, it probably includes a service
 for storing application data in a database, a service for video transcoding in
 the background after a user uploads something, a service for the front-end, and
@@ -84,7 +84,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "80:80"
+      - "4000:80"
     networks:
       - webnet
 networks:
@@ -101,7 +101,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 - Immediately restart containers if one fails.
 
-- Map port 80 on the host to `web`'s port 80.
+- Map port 4000 on the host to `web`'s port 80.
 
 - Instruct `web`'s containers to share port 80 via a load-balanced network
   called `webnet`. (Internally, the containers themselves publish to
@@ -158,7 +158,7 @@ is not filtered by service:
 docker container ls -q
 ```
 
-You can run `curl -4 http://localhost` several times in a row, or go to that URL in
+You can run `curl -4 http://localhost:4000` several times in a row, or go to that URL in
 your browser and hit refresh a few times.
 
 ![Hello World in browser](images/app80-in-browser.png)

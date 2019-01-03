@@ -152,8 +152,8 @@ Here is example output from this command.
 ```shell
 $ docker-machine ls
 NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce   
-myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
+myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
+myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
 ```
 
 #### Initialize the swarm and add nodes
@@ -282,8 +282,8 @@ indicated by the asterisk next to it.
 ```shell
 $ docker-machine ls
 NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce   
-myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
+myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
+myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
 ```
 
 {% endcapture %}
@@ -362,7 +362,7 @@ And that's it, the app is deployed on a swarm cluster!
 >
 > docker stack deploy --with-registry-auth -c docker-compose.yml getstartedlab
 > ```
-> 
+>
 > This passes the login token from your local client to the swarm nodes where the
 > service is deployed, using the encrypted WAL logs. With this information, the
 > nodes are able to log into the registry and pull the image.
@@ -377,11 +377,11 @@ both `myvm1` and `myvm2`.
 $ docker stack ps getstartedlab
 
 ID            NAME                  IMAGE                   NODE   DESIRED STATE
-jq2g3qp8nzwx  getstartedlab_web.1   john/get-started:part2  myvm1  Running
-88wgshobzoxl  getstartedlab_web.2   john/get-started:part2  myvm2  Running
-vbb1qbkb0o2z  getstartedlab_web.3   john/get-started:part2  myvm2  Running
-ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
-0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
+jq2g3qp8nzwx  getstartedlab_web.1   gordon/get-started:part2  myvm1  Running
+88wgshobzoxl  getstartedlab_web.2   gordon/get-started:part2  myvm2  Running
+vbb1qbkb0o2z  getstartedlab_web.3   gordon/get-started:part2  myvm2  Running
+ghii74p9budx  getstartedlab_web.4   gordon/get-started:part2  myvm1  Running
+0prmarhavs87  getstartedlab_web.5   gordon/get-started:part2  myvm2  Running
 ```
 
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
@@ -475,11 +475,19 @@ docker stack rm getstartedlab
 ### Unsetting docker-machine shell variable settings
 
 You can unset the `docker-machine` environment variables in your current shell
-with the following command:
+with the given command.
 
-```
-eval $(docker-machine env -u)
-```
+  On **Mac or Linux** the command is:
+
+  ```shell
+  eval $(docker-machine env -u)
+  ```
+
+  On **Windows** the command is:
+
+  ```shell
+  & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env -u | Invoke-Expression
+  ```
 
 This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`

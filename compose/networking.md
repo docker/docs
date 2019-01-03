@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> **Note**: This document only applies if you're using [version 2 or higher of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
 
 By default Compose sets up a single
 [network](/engine/reference/commandline/network_create/) for your app. Each
@@ -83,7 +83,7 @@ Links allow you to define extra aliases by which a service is reachable from ano
       db:
         image: postgres
 
-See the [links reference](compose-file.md#links) for more information.
+See the [links reference](compose-file/compose-file-v2.md#links) for more information.
 
 ## Multi-host networking
 
@@ -129,12 +129,20 @@ Here's an example Compose file defining two custom networks. The `proxy` service
           foo: "1"
           bar: "2"
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4-address-ipv6-address) for each attached network.
+
+Networks can also be given a [custom name](compose-file/index.md#name-1) (since version 3.5):
+
+    version: "3.5"
+    networks:
+      frontend:
+        name: custom_frontend
+        driver: custom-driver-1
 
 For full details of the network configuration options available, see the following references:
 
-- [Top-level `networks` key](compose-file.md#network-configuration-reference)
-- [Service-level `networks` key](compose-file.md#networks)
+- [Top-level `networks` key](compose-file/compose-file-v2.md#network-configuration-reference)
+- [Service-level `networks` key](compose-file/compose-file-v2.md#networks)
 
 ## Configure the default network
 
@@ -157,7 +165,7 @@ Instead of (or as well as) specifying your own networks, you can also change the
 
 ## Use a pre-existing network
 
-If you want your containers to join a pre-existing network, use the [`external` option](compose-file.md#network-configuration-reference):
+If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
 
     networks:
       default:

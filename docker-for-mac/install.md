@@ -4,82 +4,9 @@ keywords: mac, beta, alpha, install, download
 title: Install Docker for Mac
 ---
 
-Docker for Mac is a [Docker Community Edition (CE)](https://www.docker.com/community-edition) app. The Docker for Mac
-install package includes everything you need to run Docker on a Mac. This topic
-describes pre-install considerations, and how to download and install Docker for
-Mac.<br><br>
+To download Docker for Mac, head to Docker Hub.
 
-> **Already have Docker for Mac?** If you already have
-Docker for Mac installed, and are ready to get started, skip to
-[Get started with Docker for Mac](index.md) for a quick tour of
-the command line, preferences, and tools.
-
->**Looking for Release Notes?** Get release notes for [Stable](release-notes.md)
->and [Edge](edge-release-notes.md) releases.
-
-## Download Docker for Mac
-
-If you have not already done so, install Docker for Mac. You can download
-installers from the Stable or beta channel.
-
-Both Stable and Edge installers come with <a
-href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">
-experimental features in Docker Engine</a> enabled by default and configurable
-on [Docker Daemon
-preferences](index.md#daemon-experimental-mode) for experimental
-mode. We recommend that you disable experimental features for apps in
-production.
-
-On both channels, we welcome your <a
-href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>
-to help us as the apps evolve.
-
-For more about Stable and Edge channels, see the
-[FAQs](faqs.md#stable-and-edge-channels).
-
-<table style="width:100%">
-  <tr>
-    <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Edge channel</th>
-  </tr>
-  <tr valign="top">
-    <td width="50%">This installer is fully baked and tested. This is the
-    best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
-   On this channel, you can select whether to send usage
-   statistics and other data. <br><br>Stable builds are released once per quarter.
-   </td>
-    <td width="50%">This installer provides the latest Edge release of
-    Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
-    </td>
-  </tr>
-  <tr valign="top">
-  <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a>
-  </td>
-  <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/edge/Docker.dmg">Get Docker for Mac (Edge)</a>
-  </td>
-  </tr>
-  <tr valign="top">
-  <td width="50%">
-  <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Docker.dmg SHA256</font></a>
-  </td>
-  <td width="50%">
-  <a href="https://download.docker.com/mac/edge/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Docker.dmg SHA256</font></a>
-  </td>
-  </tr>
-</table>
-
-* Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or newer Mac, with Intel's  hardware support for MMU virtualization.
-The app runs on 10.10.3 Yosemite, but with limited support. See [What
-to know before you install](#what-to-know-before-you-install) for a full
-explanation and list of prerequisites.
-
-* You can switch between Edge and Stable versions, but you must have only one
-   app installed at a time. Also, you need to save images and export
-   containers you want to keep before uninstalling the current version before
-   installing another. For more about this, see the
-   [FAQs about Stable and Edge channels](faqs.md#stable-and-edge-channels).
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
 
 ##  What to know before you install
 
@@ -108,14 +35,7 @@ for Docker for Mac, and how the two products can coexist.
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 
-  - macOS El Capitan 10.11 and newer macOS releases are supported. At a minimum,
-    Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat
-    that going forward 10.10.x is a use-at-your-own risk proposition.
-
-  - Starting with Docker for Mac Stable release 1.13, and concurrent
-    Edge releases, we no longer address issues specific to macOS Yosemite
-    10.10. In future releases, Docker for Mac could stop working on macOS Yosemite
-    10.10 due to the deprecated status of this macOS version. We recommend
+  - macOS El Capitan 10.11 and newer macOS releases are supported. We recommend
     upgrading to the latest version of macOS.
 
   - At least 4GB of RAM
@@ -156,10 +76,8 @@ for Docker for Mac, and how the two products can coexist.
 
       ![Startup information](images/mac-install-success-docker-cloud.png)
 
-3.  Click the whale (![whale menu](images/whale-x.png){: .inline}) to get Preferences and other options.
-
-      ![Docker context menu](images/menu/menu.png)
-
+3.  Click the whale (![whale menu](images/whale-x.png){: .inline}) to get
+Preferences and other options.
 4.  Select **About Docker** to verify that you have the latest version.
 
 Congratulations! You are up and running with Docker for Mac.
@@ -169,14 +87,10 @@ Congratulations! You are up and running with Docker for Mac.
 * [Getting started](index.md) provides an overview of Docker for Mac, basic
   Docker command examples, how to get help or give feedback, and links to all
   topics in the Docker for Mac guide.
-
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-
 * [FAQs](faqs.md) provides answers to frequently asked questions.
-
 * [Release Notes](release-notes.md) lists component updates, new features, and
   improvements associated with Stable releases (or [Edge Release
   Notes](edge-release-notes.md)).
-
 * [Get Started with Docker](/get-started/) provides a general Docker tutorial.

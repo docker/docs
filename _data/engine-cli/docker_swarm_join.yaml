@@ -30,6 +30,7 @@ options:
   description: |
     Address or interface to use for data path traffic (format: <ip|interface>)
   deprecated: false
+  min_api_version: "1.31"
   experimental: false
   experimentalcli: false
   kubernetes: false

@@ -128,6 +128,18 @@ with the `webapp` and optional `tag` specified in `image`:
 
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
+#### cache_from
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+A list of images that the engine uses for cache resolution.
+
+    build:
+      context: .
+      cache_from:
+        - alpine:latest
+        - corp/web_app:3.14
+
 #### context
 
 > [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
@@ -207,6 +219,19 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
+
+#### isolation
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
+
+Specify a build’s container isolation technology. On Linux, the only supported value
+is `default`. On Windows, acceptable values are `default`, `process` and
+`hyperv`. Refer to the
+[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+for details.
+
+If unspecified, Compose will use the `isolation` value found in the service's definition
+to determine the value to use for builds.
 
 #### labels
 
@@ -316,6 +341,20 @@ Specify a custom container name, rather than a generated default name.
 Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
+
+### cpu_rt_runtime, cpu_rt_period
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+Configure CPU allocation parameters using the Docker daemon realtime scheduler.
+
+    cpu_rt_runtime: '400ms'
+    cpu_rt_period: '1400us'
+
+    # Integer values will use microseconds as units
+    cpu_rt_runtime: 95000
+    cpu_rt_period: 11000
+
 
 ### device_cgroup_rules
 
@@ -967,7 +1006,7 @@ designated container or service.
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vise-versa.
+other containers in the bare-metal machine's namespace and vice versa.
 
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
@@ -980,6 +1019,20 @@ Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 
     pids_limit: 10
 
+
+### platform
+
+> [Added in version 2.4 file format](compose-versioning.md#version-24).
+
+Target platform containers for this service will run on, using the
+`os[/arch[/variant]]` syntax, e.g.
+
+    platform: osx
+    platform: windows/amd64
+    platform: linux/arm64/v8
+
+This parameter determines which version of the image will be pulled and/or
+on which platform the service's build will be performed.
 
 ### ports
 
@@ -1240,7 +1293,7 @@ then read-write is used.
 
 {: id="cpu-and-other-resources"}
 
-### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -1248,13 +1301,14 @@ Each of these is a single value, analogous to its
 > **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
 > The following options were added in [version 2.1](compose-versioning.md#version-21):
-> `oom_kill_disable`
+> `oom_kill_disable`, `cpu_period`
 
     cpu_count: 2
     cpu_percent: 50
     cpus: 0.5
     cpu_shares: 73
     cpu_quota: 50000
+    cpu_period: 20ms
     cpuset: 0,1
 
     user: postgresql
@@ -1366,8 +1420,10 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 2.0 of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
@@ -1429,7 +1485,7 @@ Set a custom name for this volume.
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     volumes:
@@ -1539,8 +1595,10 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
+For version 2.0 of the format, `external` cannot be used in conjunction with
+other network configuration keys (`driver`, `driver_opts`, `ipam`, `internal`).
+This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
@@ -1587,7 +1645,7 @@ Set a custom name for this network.
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
     version: '2.1'
     networks:

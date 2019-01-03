@@ -28,10 +28,10 @@ host.
 
 ## Procedure
 
-1.  Create and start the container as a detached process.
+1.  Create and start the container as a detached process. The `--rm` option means to remove the container once it exits/stops. The `-d` flag means to start the container detached (in the background). 
 
     ```bash
-    docker run --rm -itd --network host --name my_nginx nginx
+    docker run --rm -d --network host --name my_nginx nginx
     ```
 
 2.  Access Nginx by browsing to
@@ -53,11 +53,10 @@ host.
       sudo netstat -tulpn | grep :80
       ```
 
-4.  Stop the container.
+4.  Stop the container. It will be removed automatically as it was started using the `--rm` option.
 
     ```basn
     docker container stop my_nginx
-    docker container rm my_nginx
     ```
 
 ## Other networking tutorials

@@ -242,7 +242,7 @@ in Step 4.
         -D run -c /etc/config.toml
     ```
 
-    This command relies on the `config.toml` file being in the current directory.  After running the command, confirm the image is runing:
+    This command relies on the `config.toml` file being in the current directory.  After running the command, confirm the image is running:
 
     ```bash
     $ docker ps
@@ -250,7 +250,7 @@ in Step 4.
     d846b801a978        ehazlett/interlock:1.0.1   "/bin/interlock -D ru"   2 minutes ago       Up 2 minutes        0.0.0.0:32770->8080/tcp   interlock
     ```
 
-    If you don't see the image runing, use `docker ps -a` to list all images to make sure the system attempted to start the image. Then, get the logs to see why the container failed to start.
+    If you don't see the image running, use `docker ps -a` to list all images to make sure the system attempted to start the image. Then, get the logs to see why the container failed to start.
 
     ```bash
     $ docker logs interlock

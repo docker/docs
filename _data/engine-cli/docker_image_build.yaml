@@ -191,6 +191,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: progress
+  value_type: string
+  default_value: auto
+  description: |
+    Set type of progress output (auto, plain, tty). Use plain to show container output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: pull
   value_type: bool
   default_value: "false"
@@ -215,6 +225,17 @@ options:
   default_value: "true"
   description: Remove intermediate containers after a successful build
   deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: secret
+  value_type: stringArray
+  default_value: '[]'
+  description: |
+    Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret
+  deprecated: false
+  min_api_version: "1.39"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -244,6 +265,17 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: ssh
+  value_type: stringArray
+  default_value: '[]'
+  description: |
+    SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])
+  deprecated: false
+  min_api_version: "1.39"
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false

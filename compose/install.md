@@ -112,7 +112,7 @@ by step instructions are also included below.
 1.  Run this command to download the latest version of Docker Compose:
 
     ```bash
-    sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
@@ -128,6 +128,15 @@ by step instructions are also included below.
     ```bash
     sudo chmod +x /usr/local/bin/docker-compose
     ```
+    
+> ***Note:*** If the command `docker-compose` fails after installation, check your path.
+> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+
+For example:
+
+```bash
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
@@ -136,7 +145,7 @@ by step instructions are also included below.
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1719ceb
+    docker-compose version {{site.compose_version}}, build 1110ad01
     ```
 <hr>
 </div>

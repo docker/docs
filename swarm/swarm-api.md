@@ -16,7 +16,7 @@ Engine API.
 
 ## Missing endpoints
 
-Some endpoints have not yet been implemented and returns a 404 error.
+Some endpoints have not yet been implemented and return a 404 error.
 
 ```
 POST "/images/create" : "docker import" flow not implement
@@ -95,19 +95,19 @@ POST "/images/create" : "docker import" flow not implement
     </tr>
 </table>
 
-## Registry Authentication
+## Registry authentication
 
 During container create calls, the Swarm API optionally accepts an `X-Registry-Auth` header.
 If provided, this header is passed down to the engine if the image must be pulled
 to complete the create operation.
 
-The following two examples demonstrate how to utilize this using the existing Docker CLI
+The following two examples demonstrate how to utilize this using the existing Docker CLI.
 
 ### Authenticate using registry tokens
 
 > **Note**: This example requires Docker Engine 1.10 with auth token support.
 > For older Engine versions, refer to [authenticate using username and
-> password](swarm-api.md#authenticate-using-username-and-password)
+> password](swarm-api.md#authenticate-using-username-and-password).
 
 This example uses the [`jq` command-line utility](https://stedolan.github.io/jq/).
 To run this example, install `jq` using your package manager (`apt-get install jq` or `yum install jq`).

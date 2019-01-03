@@ -18,6 +18,7 @@ Options:
                       instances of a service [default: 1]
     -e, --env KEY=VAL Set environment variables (can be used multiple times,
                       not supported in API < 1.25)
+    -w, --workdir DIR Path to workdir directory for this command.
 ```
 
 This is the equivalent of `docker exec`. With this subcommand you can run arbitrary

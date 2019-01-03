@@ -6,6 +6,8 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ce/ubuntu/
+- /install/linux/ubuntu/
+- /engine/installation/linux/ubuntu/
 title: Get Docker CE for Ubuntu
 toc_max: 4
 ---
@@ -30,7 +32,7 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge and higher only)
+- Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
@@ -44,7 +46,7 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -174,6 +176,7 @@ the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
       <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
       <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
     </ul>
@@ -193,6 +196,16 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="arm64" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -258,9 +271,8 @@ the repository.
     ```
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a an equals sign (`=`), for example,
-       `docker-ce=18.03.0.ce`.
+       package name (`docker-ce`) "=" version string (2nd column), for example,
+       `docker-ce=18.03.0~ce-0~ubuntu`.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION>
@@ -272,7 +284,7 @@ the repository.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -287,7 +299,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package
@@ -318,7 +330,7 @@ a new file each time you want to upgrade Docker CE.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the

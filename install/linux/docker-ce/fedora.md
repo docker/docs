@@ -11,7 +11,7 @@ toc_max: 4
 
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 
@@ -27,6 +27,7 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 
 - 26
 - 27
+- 28
 
 ### Uninstall old versions
 
@@ -191,7 +192,7 @@ steps.
 #### Upgrade Docker CE
 
 To upgrade Docker CE, follow the
-[installation instructions](#install-docker), choosing the new version you want
+[installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package

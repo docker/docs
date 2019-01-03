@@ -28,15 +28,15 @@ support dump:
 
 ## From the CLI
 
-To get the support dump from the CLI, use SSH to log into a UCP manager node
-and run:
+To get the support dump from the CLI, use SSH to log into a node and run:
 
 ```none
 docker run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.docker_image }} \
-  support > docker-support.tgz
+  support > \
+  docker-support-${HOSTNAME}-$(date +%Y%m%d-%H_%M_%S).tgz
 ```
 
 This support dump only contains logs for the node where you're running the

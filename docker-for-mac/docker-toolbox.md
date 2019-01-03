@@ -50,7 +50,7 @@ Here are some key points to know about Docker for Mac before you get started:
   The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
-  the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
+  the Docker daemon, so you can use `docker` and `docker-compose` CLI commands
   on your Mac.
 
 
@@ -61,6 +61,9 @@ This setup is shown in the following diagram.
 With Docker for Mac, you only get (and only usually need) one VM, managed by Docker
 for Mac. Docker for Mac automatically upgrades the Docker client and
 daemon when updates are available.
+
+Also note that Docker for Mac can’t route traffic to containers, so you can't
+directly access an exposed port on a running container from the hosting machine.
 
 If you do need multiple VMs, such as when testing multi-node swarms, you can
 continue to use Docker Machine, which operates outside the scope of Docker for
@@ -76,7 +79,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
         DOCKER_HOST=tcp://192.168.99.100:2376
         DOCKER_MACHINE_NAME=default
         DOCKER_TLS_VERIFY=1
-        DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+        DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
 
     If this command returns no output, you are ready to use Docker for Mac.
 
@@ -213,8 +216,7 @@ $ echo "$dimg"
 ```
 
 In this case the format is `raw` (it could have been `qcow2`), and the location
-is `~Library/Containers/com.docker.docker/Data/vms/0/` (it could have been
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`).
+is `~/Library/Containers/com.docker.docker/Data/vms/0/`.
 
 Then:
 - if your format is qcow2, run

@@ -7,8 +7,8 @@ title: Frequently asked questions (FAQ)
 ---
 
 **Looking for popular FAQs on Docker for Mac?** Check out the
-[Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles,
-FAQs, technical support for various subscription levels, and more.
+[Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
+for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ## Questions about Docker.app
 ### Stable and Edge channels
@@ -16,7 +16,7 @@ FAQs, technical support for various subscription levels, and more.
 **Q: How do I get the Stable or Edge version of Docker for Mac?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Mac](install.md#download-docker-for-mac).
+[Download Docker for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
 
 This topic also has more information about the two channels.
 
@@ -60,11 +60,11 @@ below.</font><br>
 Do the following each time:
 
 1.  Use `docker save` to save any images you want to keep. (See
-    [save](/engine/reference/commandline/save.md) in the Docker Engine command
+    [save](/engine/reference/commandline/save) in the Docker Engine command
     line reference.)
 
 2.  Use `docker export` to export containers you want to keep. (See
-    [export](/engine/reference/commandline/export.md) in the Docker Engine
+    [export](/engine/reference/commandline/export) in the Docker Engine
     command line reference.)
 
 3.  Uninstall the current app (whether Stable or Edge).
@@ -74,23 +74,31 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker Engine.
-`Docker.app` uses the macOS Hypervisor.framework (part of macOS 10.10 Yosemite
-and higher) to run containers, meaning that _**no separate VirtualBox is
-required**_.
+`Docker.app` uses the macOS Hypervisor.framework to run containers, meaning that
+no separate VirtualBox is required.
 
 ### What are system requirements for Docker for Mac?
 
 You need a Mac that supports hardware virtualization and can run at
-least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
-[What to know before you install](install.md#what-to-know-before-you-install) in
+least macOS `10.11` (macOS El Capitan). See also
+[What to know before you install](install#what-to-know-before-you-install) in
 the install guide.
 
 ### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
 
-Yes, if you [change the name of your macOS user account and home
-folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
-already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac fails to start. See also,
-[Docker for Mac does not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-does-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+Starting with Docker for Mac Edge 18.06, this path is relative to the user's
+home directory, so it should never be a problem.  The remainder of this section
+is about older releases of Docker for Mac.
+
+If, after installing Docker for Mac, you [change the name of your macOS user
+account and home folder](https://support.apple.com/en-us/HT201548), Docker for
+Mac fails to start.  [Reset to Factory Defaults](index.md#reset) is the simplest
+fix, but you'll lose all your settings, containers, images, etc.
+
+To preserve them, open the `~/Library/Group
+Containers/group.com.docker/settings.json` file, and update the `diskPath`
+entry.
+
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
@@ -110,10 +118,8 @@ to talk to Docker for Mac. The same applies to `docker-compose`.
 
 You might decide that you do not need Toolbox now that you have Docker for Mac,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on the Mac, see [How to uninstall
-Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
-Toolbox Mac topics.
-
+Toolbox on the Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+in the Toolbox Mac topics.
 
 ## Questions about feedback and help
 ### What kind of feedback are we looking for?
@@ -133,12 +139,12 @@ You can find the list of frequent issues in
 [Logs and Troubleshooting](troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues) or
+[Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} or
 create a new one. You can also create new issues based on diagnostics. To learn more,
 see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 
-[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac)
+[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" class="_"}
 provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
@@ -148,6 +154,22 @@ response.
 If you do not want auto-send of usage data, use the Stable channel. For more
 information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Mac?").
 
+### How is personal data handled in Docker Desktop?
+
+When uploading diagnostics to help Docker with investigating issues, the
+uploaded diagnostics bundle may contain personal data such as usernames and IP
+addresses. The diagnostics bundles are only accessible to Docker Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. By default Docker
+Inc. will delete uploaded diagnostics bundles after 30 days unless they are
+referenced in an open issue on the
+[docker/for-mac](https://github.com/docker/for-mac/issues) or
+[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
+issue is closed, Docker Inc. will remove the referenced diagnostics bundles
+within 30 days. You may also request the removal of a diagnostics bundle by
+either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
+ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the
+diagnostics bundle to investigate specific user issues, but may derive high
+level (non personal) metrics such as the rate of issues from it.
 
 ## How can I...?
 ### Can I use Docker for Mac with swarm mode?
@@ -169,13 +191,12 @@ On Docker for Mac, clients can connect to the Docker Engine through a Unix
 socket: `unix:///var/run/docker.sock`.
 
 See also [Docker Engine API](/engine/api.md) and Docker for Mac forums topic
-[Using pycharm Docker
-plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
+[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" class="_"}.
 
-If you are working with applications like [Apache
-Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and
-`DOCKER_CERT_PATH` environment variables, specify these to connect to Docker
-instances through Unix sockets. For example:
+If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" class="_"}
+that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
+variables, specify these to connect to Docker instances through Unix sockets.
+For example:
 
 ```bash
 export DOCKER_HOST=unix:///var/run/docker.sock
@@ -210,9 +231,8 @@ in the Networking topic.
 Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
-For full information on adding server and client side certs, see [Adding
-TLS certificates](index.md#adding-tls-certificates) in
-the Getting Started topic.
+For full information on adding server and client side certs, see
+[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
@@ -221,9 +241,8 @@ certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-For full information on adding server and client side certs, see [Adding
-TLS certificates](index.md#adding-tls-certificates) in
-the Getting Started topic.
+For full information on adding server and client side certs, see
+[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 
@@ -231,17 +250,13 @@ Unfortunately it is not possible to pass through a USB device (or a
 serial port) to a container. For use cases requiring this, we
 recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
-
 ## Disk Usage
 
 ### What is the disk image?
 
-The containers and images are stored in a _disk image_ named
-`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
-By default, the disk image is stored in
-`~/Library/Containers/com.docker.docker/Data`, in the `vms/0`
-subdirectory starting with Docker for Mac 18.01, and
-`com.docker.driver.amd64-linux` before.
+The containers and images are stored in a _disk image_ named `Docker.raw` or
+`Docker.qcow2` depending on your settings (see below).  By default, the disk
+image is stored in `~/Library/Containers/com.docker.docker/Data/vms/0`.
 
 ### Qcow2 or Raw?
 
@@ -251,16 +266,15 @@ Qcow2 format (`Docker.qcow2`).
 
 ### Docker.raw consumes an insane amount of disk space!
 
-This is an illusion.  Docker uses the raw format on Macs running the
-Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
-long runs of zeroes representing unused space.  The output of `ls` is
-misleading, because it lists the logical size of the file rather than
-its physical size. To see the physical size, add the `-ks` switch; to
-see the logical size in human readable form, add `-lh`:
+This is an illusion.  Docker uses the raw format on Macs running the Apple
+Filesystem (APFS).  APFS supports _sparse files_, which compress long runs of
+zeroes representing unused space.  The output of `ls` is misleading, because it
+lists the logical size of the file rather than its physical size. To see the
+physical size, add the `-ks` switch; to see the logical size in human readable
+form, add `-lh`:
 
 ```bash
-$ cd ~/Library/Containers/com.docker.docker/Data
-$ cd vms/0   # or com.docker.driver.amd64-linux
+$ cd ~/Library/Containers/com.docker.docker/Data/vms/0
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
@@ -309,19 +323,18 @@ takes longer than usual to restart because it must wait for the
 compaction to complete.
 
 For background conversation thread on this, see
-[Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
+[Docker.qcow2 never shrinks...](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
 
 ## Components of Docker for Mac
 ### What is HyperKit?
 
-HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10
-Yosemite and higher. It runs entirely in userspace and has no other
+HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other
 dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle
-Virtualbox or VMWare Fusion.
+VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 

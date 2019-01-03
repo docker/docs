@@ -29,6 +29,9 @@ installed and coexist together.
 ```bash
 go get github.com/docker/docker/client
 ```
+The client requires a recent version of Go. Run `go version` and ensure that you 
+are running at least version 1.9.4 of Go
+
 
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 
@@ -177,26 +180,28 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-    "io"
+    "context"
     "os"
 
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
-    "golang.org/x/net/context"
+    "github.com/docker/docker/pkg/stdcopy"
 )
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewEnvClient()
+    cli, err := client.NewClientWithOpts(client.FromEnv)
     if err != nil {
         panic(err)
     }
+    cli.NegotiateAPIVersion(ctx)
 
-    _, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {
         panic(err)
     }
+    io.Copy(os.Stdout, reader)
 
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",
@@ -224,7 +229,7 @@ func main() {
         panic(err)
     }
 
-    io.Copy(os.Stdout, out)
+    stdcopy.StdCopy(os.Stdout, os.Stderr, out)
 }
 ```
 
@@ -280,6 +285,7 @@ file them with the library maintainers.
 | HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)               |
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
+| Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
 | NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |

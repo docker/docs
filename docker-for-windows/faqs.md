@@ -4,17 +4,16 @@ keywords: windows faqs
 title: Frequently asked questions (FAQ)
 ---
 
->**Looking for popular FAQs on Docker for Windows?**
->Check out the [Docker
-Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,
-technical support for various subscription levels, and more.
+**Looking for popular FAQs on Docker for Windows?** Check out the
+[Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
+for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ### Questions about Stable and Edge channels
 
 #### How do I get the Stable or Edge version of Docker for Windows?
 
-Use the download links for the channels given in the topic [Download Docker for
-Windows](install.md#download-docker-for-windows).
+Use the download links for the channels given in the topic
+[Download Docker for Windows](install#download-docker-for-windows).
 
 This topic also has more information about the two channels.
 
@@ -25,7 +24,7 @@ Two different download channels are available for Docker for Windows:
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
   for Windows comes with the latest released version of Docker Engine. The
-  release schedule is synched with Docker Engine releases and hotfixes. On the
+  release schedule is synced with Docker Engine releases and hotfixes. On the
   Stable channel, you can select whether to send usage statistics and other data.
 
 * The **Edge channel** provides an installer with new features we are working on,
@@ -58,11 +57,11 @@ below.</font><br>
 Do the following each time:
 
 1.  Use `docker save` to save any images you want to keep. (See
-    [save](/engine/reference/commandline/save.md) in the Docker Engine command
+    [save](/engine/reference/commandline/save) in the Docker Engine command
     line reference.)
 
 2.  Use `docker export` to export containers you want to keep. (See
-    [export](/engine/reference/commandline/export.md) in the Docker Engine command
+    [export](/engine/reference/commandline/export) in the Docker Engine command
     line reference.)
 
 3.  Uninstall the current app (whether Stable or Edge).
@@ -70,7 +69,8 @@ Do the following each time:
 4.  Install a different version of the app (Stable or Edge).
 
 
-### Feeback
+### Feedback
+
 #### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
@@ -79,21 +79,21 @@ command line integration, and so on. Tell us about problems, what you like, or
 functionality you'd like to see added.
 
 We are especially interested in getting feedback on the new swarm mode described
-in [Docker Swarm](/engine/swarm/index.md). A good place to start is the
-[tutorial](/engine/swarm/swarm-tutorial/index.md).
+in [Docker Swarm](/engine/swarm/). A good place to start is the
+[tutorial](/engine/swarm/swarm-tutorial/).
 
 #### What if I have problems or questions?
 
 You can find the list of frequent issues in
-[Logs and Troubleshooting](troubleshoot.md).
+[Logs and Troubleshooting](troubleshoot).
 
-If you do not find a solution in Troubleshooting, browse issues on [Docker for
-Windows issues on GitHub](https://github.com/docker/for-win/issues) or create a
-new one. You can also create new issues based on diagnostics. To learn more
-about running diagnostics and about Docker for Windows GitHub issues, see
-[Diagnose and Feedback](index.md#diagnose-and-feedback).
+If you do not find a solution in Troubleshooting, browse issues on
+[Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
+or create a new one. You can also create new issues based on diagnostics. To
+learn more about running diagnostics and about Docker for Windows GitHub issues,
+see [Diagnose and Feedback](/docker-for-windows#diagnose--feedback).
 
-[Docker for Windows forum](https://forums.docker.com/c/docker-for-windows)
+[Docker for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
 provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
@@ -103,49 +103,67 @@ response.
 If you do not want auto-send of usage data, use the Stable channel. For more
 information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Windows?").
 
+### How is personal data handled in Docker Desktop?
+
+When uploading diagnostics to help Docker with investigating issues, the
+uploaded diagnostics bundle may contain personal data such as usernames and IP
+addresses. The diagnostics bundles are only accessible to Docker Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. By default Docker
+Inc. will delete uploaded diagnostics bundles after 30 days unless they are
+referenced in an open issue on the
+[docker/for-mac](https://github.com/docker/for-mac/issues) or
+[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
+issue is closed, Docker Inc. will remove the referenced diagnostics bundles
+within 30 days. You may also request the removal of a diagnostics bundle by
+either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
+ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the
+diagnostics bundle to investigate specific user issues, but may derive high
+level (non personal) metrics such as the rate of issues from it.
+
 ### Can I use Docker for Windows with new swarm mode?
 
-Yes! You can use Docker for Windows to test single-node features of [swarm
-mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
+Yes! You can use Docker for Windows to test single-node features of
+[swarm mode](/engine/swarm/) introduced with Docker Engine 1.12, including
 initializing a swarm with a single node, creating services, and scaling
 services. Docker “Moby” on Hyper-V serves as the single swarm node. You can also
 use Docker Machine, which comes with Docker for Windows, to create and
-experiment with a multi-node swarm. Check out the tutorial at [Get started with
-swarm mode](/engine/swarm/swarm-tutorial/index.md).
+experiment with a multi-node swarm. Check out the tutorial at
+[Get started with swarm mode](/engine/swarm/swarm-tutorial/).
 
 ### How do I connect to the remote Docker Engine API?
 
 You might need to provide the location of the Engine API for Docker clients and development tools.
 
-On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `tcp://localhost:2375`.
+On Docker for Windows, clients can connect to the Docker Engine through a
+**named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
+`tcp://localhost:2375`.
 
-This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the given values (for the named pipe or TCP socket, whichever you use).
+This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
+given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Engine API](/engine/api.md) and the Docker for Windows forums
+See also [Docker Engine API](/engine/api) and the Docker for Windows forums
 topic
-[How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
+[How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
 
 ### Volumes
 #### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 No, at this point, Docker for Windows does not enable you to control (`chmod`)
-the Unix-style permissions on [shared
-volumes](index.md#shared-drives) for deployed containers,
-but rather sets permissions to a default value of
-[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
-`execute` permissions for `user`, `read` and `execute` for `group`) which is not
-configurable.
+the Unix-style permissions on [shared volumes](/docker-for-windows#shared-drives) for
+deployed containers, but rather sets permissions to a default value of
+[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
+(`read`, `write`, `execute` permissions for `user` and for 
+`group`) which is not configurable.
 
-For workarounds and to learn more, see [Permissions errors on data directories
-for shared
-volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+For workarounds and to learn more, see
+[Permissions errors on data directories for shared volumes](troubleshoot#permissions-errors-on-data-directories-for-shared-volumes).
 
 #### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
 Currently, `inotify` does not work on Docker for Windows. This is a known issue.
-For more information and a temporary workaround, see [inotify on shared drives
-does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
-[Troubleshooting](troubleshoot.md).
+For more information and a temporary workaround, see
+[inotify on shared drives does not work](troubleshoot#inotify-on-shared-drives-does-not-work){: target="_blank" class="_"}
+in [Troubleshooting](troubleshoot).
 
 #### Are symlinks supported?
 
@@ -156,10 +174,10 @@ Symlinks created outside of Docker do not work.
 To learn more about the reasons for this limitation, see the following discussions:
 
 * GitHub issue:
-  [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391)
+  [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391){: target="_blank" class="_"}
 
 * Docker for Windows forums topic:
-  [Symlinks on shared volumes not supported](https://forums.docker.com/t/symlinks-on-shared-volumes-not-supported/9288)
+  [Symlinks on shared volumes not supported](https://forums.docker.com/t/symlinks-on-shared-volumes-not-supported/9288){: target="_blank" class="_"}
 
 
 ### Certificates
@@ -177,7 +195,7 @@ if an enterprise SSL certificate is trusted by the user on the host, it is
 trusted by Docker for Windows.
 
 To learn more about how to install a CA root certificate for the registry, see
-[Verify repository client with certificates](/engine/security/certificates.md)
+[Verify repository client with certificates](/engine/security/certificates)
 in the Docker Engine topics.
 
 #### How do I add client certificates?
@@ -194,14 +212,14 @@ directory on Moby (the Docker for Windows virtual machine running on Hyper-V).
 You need to restart Docker for Windows after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
-The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](index.md#docker-daemon)). Docker for Windows ignores
+The registry cannot be listed as an _insecure registry_ (see
+[Docker Daemon](/docker-for-windows#daemon)). Docker for Windows ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
 
 To learn more about how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](/engine/security/certificates.md)
+[Verify repository client with certificates](/engine/security/certificates)
 in the Docker Engine topics.
 
 ### Why does Docker for Windows sometimes lose network connectivity, causing `push` or `pull` commands to fail?
@@ -222,25 +240,23 @@ Docker for Windows does not support mounts for nodes you created with
 `docker-machine`.
 
 For more about sharing local drives with containers using Docker for Windows,
-see [Shared Drives](index.md#shared-drives) in the Getting
+see [Shared drives](/docker-for-windows#shared-drives) in the Getting
 Started topic.
 
-To learn more about using Docker for Windows and Docker Machine, see [What to
-know before you install](install.md#what-to-know-before-you-install) in the
-Getting Started topic. For more about Docker Machine itself, see [What is Docker
-Machine?](/machine/overview.md#what-is-docker-machine), and the [Hyper-V
-driver](/machine/drivers/hyper-v.md) for Docker Machine.
+To learn more about using Docker for Windows and Docker Machine, see
+[What to know before you install](install#what-to-know-before-you-install) in the
+Getting Started topic. For more about Docker Machine itself, see
+[What is Docker Machine?](/machine/overview#what-is-docker-machine), and the
+[Hyper-V driver](/machine/drivers/hyper-v) for Docker Machine.
 
 ### Windows Requirements
 
 #### How do I run Windows containers on Docker on Windows Server 2016?
 
-See [About Windows containers and Windows Server
-2016](index.md#about-windows-containers-and-windows-server-2016).
+See [About Windows containers and Windows Server 2016](/install/windows/docker-ee/#about-docker-ee-containers-and-windows-server).
 
-A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
-[Getting Started with Windows
-Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
+A full tutorial is available in [docker/labs](https://github.com/docker/labs){: target="_blank" class="_"} at
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
 
 #### Why is Windows 10 Home not supported?
 
@@ -257,15 +273,13 @@ Windows to work.
 
 Some firewalls and anti-virus software might be incompatible with Hyper-V and
 some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
-for Windows. See details and workarounds in [Docker fails to start when firewall
-or anti-virus software is
-installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
-in [Troubleshooting](troubleshoot.md).
+for Windows. See details and workarounds in
+[Docker fails to start when firewall or anti-virus software is installed](troubleshoot#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
+in [Troubleshooting](troubleshoot).
 
 ### How do I uninstall Docker Toolbox?
 
 You might decide that you do not need Toolbox now that you have Docker for
 Windows, and want to uninstall it. For details on how to perform a clean
-uninstall of Toolbox on Windows, see [How to uninstall
-Toolbox](/toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox) in the
-Toolbox Windows topics.
+uninstall of Toolbox on Windows, see
+[How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the Toolbox Windows topics.

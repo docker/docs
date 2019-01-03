@@ -50,9 +50,5 @@ if (window.navigator.onLine) {
       });
     } else {
       isArchive = false;
-      /* This is only relevant to /enterprise/index.md */
-      if (document.getElementById('ee-version-div')) {
-        document.getElementById('ee-version-div').textContent += "The latest version of Docker EE is {{ site.docker_ee_version }}.";
-      }
     }  });
 }

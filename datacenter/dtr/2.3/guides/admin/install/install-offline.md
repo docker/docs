@@ -25,6 +25,13 @@ Use a computer with internet access to download a package with all DTR images:
 $ wget <package-url> -O dtr.tar.gz
 ```
 
+### Download a specific version
+
+```
+$ wget https://packages.docker.com/caas/dtr_images_2.3.9.tar.gz -O dtr_2.3.9.tar.gz
+
+```
+
 Now that you have the package in your local machine, you can transfer it to
 the machines where you want to install DTR.
 

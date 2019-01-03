@@ -41,7 +41,7 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
-See [Proxies](index.md#Proxies).
+See [Proxies](index#proxies).
 
 ## Known limitations, use cases, and workarounds
 
@@ -72,6 +72,7 @@ The host has a changing IP address (or none if you have no network access). From
 18.03 onwards our recommendation is to connect to the special DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
+This is for development purpose and will not work in a production environment outside of Docker for Mac.
 
 The gateway is also reachable as `gateway.docker.internal`.
 
@@ -84,9 +85,8 @@ Our current recommendation is to publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
-The command to run the `nginx` webserver shown in [Getting
-Started](index.md#explore-the-application-and-run-examples) is
-an example of this.
+The command to run the `nginx` webserver shown in [Getting Started](index#explore-the-application-and-run-examples)
+is an example of this.
 
 ```bash
 $ docker run -d -p 80:80 --name webserver nginx

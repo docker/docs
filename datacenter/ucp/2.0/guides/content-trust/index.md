@@ -145,7 +145,7 @@ user certificates:
 $ notary delegation add -p <dtr_url>/<account>/<repository> targets/releases --all-paths user1.pem user2.pem
 ```
 
-The above command adds the  the `targets/releases` delegation role to a trusted
+The above command adds the `targets/releases` delegation role to a trusted
 repository.
 This role is treated as an actual release branch for Docker Content Trust,
 since `docker pull` commands with trust enabled will pull directly from this

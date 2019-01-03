@@ -39,7 +39,7 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
-See [Proxies](index.md#Proxies).
+See [Proxies](index#Proxies).
 
 ## Known limitations, use cases, and workarounds
 
@@ -72,10 +72,11 @@ The host has a changing IP address (or none if you have no network access). From
 18.03 onwards our recommendation is to connect to the special DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
+This is for development purpose and will not work in a production environment outside of Docker for Windows.
 
 The gateway is also reachable as `gateway.docker.internal`.
 
-#### I want to connect to a container from the Windows
+#### I want to connect to a container from Windows
 
 Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.
@@ -84,16 +85,14 @@ Our current recommendation is to publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
-The command to run the `nginx` webserver shown in [Getting
-Started](index.md#explore-the-application-and-run-examples) is
-an example of this.
+The command to run the `nginx` webserver shown in [Getting Started](index#explore-the-application-and-run-examples)
+is an example of this.
 
 ```bash
 $ docker run -d -p 80:80 --name webserver nginx
 ```
 
-To clarify the syntax, the following two commands both expose port `80` on the
-container to port `8000` on the host:
+To clarify the syntax, the following two commands both publish container's port `80` to host's port `8000`:
 
 ```bash
 $ docker run --publish 8000:80 --name webserver nginx
@@ -101,8 +100,8 @@ $ docker run --publish 8000:80 --name webserver nginx
 $ docker run -p 8000:80 --name webserver nginx
 ```
 
-To expose all ports, use the `-P` flag. For example, the following command
-starts a container (in detached mode) and the `-P` exposes all ports on the
+To publish all ports, use the `-P` flag. For example, the following command
+starts a container (in detached mode) and the `-P` flag publishes all exposed ports of the
 container to random ports on the host.
 
 ```bash
