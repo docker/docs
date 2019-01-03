@@ -224,9 +224,9 @@ If you need to troubleshoot your deployment, you can use
 
 For external access to the DTR cache we need to expose the Cache Pods to the 
 outside world. In Kubernetes there are multiple ways for you to expose a service,
-dependent on your infrastructure and your environment. For more information see
-the Kubernetes docs 
-[here](https://kubernetes.io/docs/concepts/services-networking/#publishing-services-service-types)
+dependent on your infrastructure and your environment. For more information,
+see [Publishing services - service types
+](https://kubernetes.io/docs/concepts/services-networking/#publishing-services-service-types) on the Kubernetes docs.
 It is important though that you are consistent in exposing the cache through the 
 same interface you created a certificate for [previously](#create-the-dtr-cache-certificates).
 Otherwise the TLS certificate may not be valid through this alternative 
@@ -287,7 +287,7 @@ controller. You should have also specified the same DTR cache external FQDN
 address within the DTR cache certificate in [step 1](#create-the-dtr-cache-certificates).
 
 > Note an ingress controller is a prerequisite for this example. If you have not 
-> deployed an ingress controller on your cluster, see [Layer 7 Routing for UCP](ucp/kubernetes/layer-7-routing). This 
+> deployed an ingress controller on your cluster, see [Layer 7 Routing for UCP](/ee/ucp/kubernetes/layer-7-routing). This 
 > ingress controller will also need to support SSL passthrough.
 
 ```
