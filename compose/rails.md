@@ -9,10 +9,8 @@ a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 
 ### Define the project
 
-Start by setting up the five files needed to build the app. First, since
-your app is going to run inside a Docker container containing all of its
-dependencies, define exactly what needs to be included in the
-container. This is done using a file called `Dockerfile`. To begin with, the
+
+Start by setting up the files needed to build the app. App will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the 
 Dockerfile consists of:
 
     FROM ruby:2.5
@@ -43,7 +41,7 @@ Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
     source 'https://rubygems.org'
-    gem 'rails', '5.1.5.0'
+    gem 'rails', '~>5'
 
 Create an empty `Gemfile.lock` to build our `Dockerfile`.
 
@@ -91,10 +89,10 @@ to link them together and expose the web app's port.
 
 ### Build the project
 
-With those four files in place, you can now generate the Rails skeleton app
+With those files in place, you can now generate the Rails skeleton app
 using [docker-compose run](/compose/reference/run/):
 
-    docker-compose run web rails new . --force --database=postgresql
+    docker-compose run web rails new . --force --no-deps --database=postgresql
 
 First, Compose builds the image for the `web` service using the
 `Dockerfile`. Then it runs `rails new` inside a new container, using that
