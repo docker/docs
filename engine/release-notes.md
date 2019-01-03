@@ -36,6 +36,7 @@ consistency and compatibility reasons.
 * Provide additional warnings for use of deprecated legacy overlay and devicemapper storage drivers [docker/engine#85](https://github.com/docker/engine/pull/85)
 * prune: perform image pruning before build cache pruning [docker/cli#1532](https://github.com/docker/cli/pull/1532)
 * Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
+* Windows: allow process isolation on Windows 10 [docker/engine#81](https://github.com/docker/engine/pull/81)
 
 ### Fixes for Docker Engine EE and CE
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692) [docker/engine#121](https://github.com/docker/engine/pull/121)
@@ -45,7 +46,6 @@ consistency and compatibility reasons.
 * Fixed iptables compatibility on Debian [docker/engine#107](https://github.com/docker/engine/pull/107)
 * Fixed setting default schema to tcp for docker host [docker/cli#1454](https://github.com/docker/cli/pull/1454)
 * Fixed bash completion for `service update --force`  [docker/cli#1526](https://github.com/docker/cli/pull/1526)
-* Windows: allow process isolation on Windows 10 [docker/engine#81](https://github.com/docker/engine/pull/81)
 * Windows: DetachVhd attempt in cleanup [docker/engine#113](https://github.com/docker/engine/pull/113)
 * API: properly handle invalid JSON to return a 400 status [docker/engine#110](https://github.com/docker/engine/pull/110)
 * API: ignore default address-pools on API < 1.39 [docker/engine#118](https://github.com/docker/engine/pull/118)
