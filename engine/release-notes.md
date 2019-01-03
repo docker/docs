@@ -23,22 +23,19 @@ consistency and compatibility reasons.
 > will ship concurrently with the same x patch version based on the same code base. 
 
 ## 18.09.1
-2019-XX-XX
+2019-01-09
 
 ### Security fixes for Docker Engine EE and CE 
-* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
-
-### Security fixes for Docker Engine EE
+* Upgraded Go language to 1.10.6 to resolve [CVE-2018-16873](https://nvd.nist.gov/vuln/detail/CVE-2018-16873), [CVE-2018-16874](https://nvd.nist.gov/vuln/detail/CVE-2018-16874), and [CVE-2018-16875](https://nvd.nist.gov/vuln/detail/CVE-2018-16875).
 * Fixed authz plugin for 0-length content and path validation.
-
-### New features for Docker Engine EE and CE
-* Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
+* Added `/proc/asound` to masked paths [docker/engine#126](https://github.com/docker/engine/pull/126)
 
 ### Improvements for Docker Engine EE and CE
 * Updated to BuildKit 0.3.3 [docker/engine#122](https://github.com/docker/engine/pull/122)
 * Updated to containerd 1.2.1-rc.0 [docker/engine#121](https://github.com/docker/engine/pull/121)
 * Provide additional warnings for use of deprecated legacy overlay and devicemapper storage drivers [docker/engine#85](https://github.com/docker/engine/pull/85)
 * prune: perform image pruning before build cache pruning [docker/cli#1532](https://github.com/docker/cli/pull/1532)
+* Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
 
 ### Fixes for Docker Engine EE and CE
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692) [docker/engine#121](https://github.com/docker/engine/pull/121)
@@ -46,10 +43,8 @@ consistency and compatibility reasons.
 * Fixed docker system prune doesn't accept until filter [docker/engine#122](https://github.com/docker/engine/pull/122)
 * Avoid unset credentials in `containerd` [docker/engine#122](https://github.com/docker/engine/pull/122)
 * Fixed iptables compatibility on Debian [docker/engine#107](https://github.com/docker/engine/pull/107)
-* Fixed `yamldocs` outputing `[flags]` in usage output [docker/cli#1540](https://github.com/docker/cli/pull/1540)
 * Fixed setting default schema to tcp for docker host [docker/cli#1454](https://github.com/docker/cli/pull/1454)
 * Fixed bash completion for `service update --force`  [docker/cli#1526](https://github.com/docker/cli/pull/1526)
-* Added `/proc/asound` to masked paths [docker/engine#126](https://github.com/docker/engine/pull/126)
 * Windows: allow process isolation [docker/engine#81](https://github.com/docker/engine/pull/81)
 * Windows: DetachVhd attempt in cleanup [docker/engine#113](https://github.com/docker/engine/pull/113)
 * API: properly handle invalid JSON to return a 400 status [docker/engine#110](https://github.com/docker/engine/pull/110)
@@ -64,7 +59,6 @@ consistency and compatibility reasons.
 * Add docker.socket requirement for docker.service. [docker/docker-ce-packaging#276](https://github.com/docker/docker-ce-packaging/pull/276)
 * Add socket activation for RHEL-based distributions. [docker/docker-ce-packaging#274](https://github.com/docker/docker-ce-packaging/pull/274)
 * Add libseccomp requirement for RPM packages. [docker/docker-ce-packaging#266](https://github.com/docker/docker-ce-packaging/pull/266)
-=======
 
 ## 18.09 
 2018-11-08
