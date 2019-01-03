@@ -23,7 +23,7 @@ to upgrade your installation to the latest release.
 
 ## 2.6.1 
 
-(2019-XX-XX)
+(2019-01-09)
 
 ### Bug Fixes
 
@@ -94,7 +94,7 @@ to upgrade your installation to the latest release.
 
 ## 2.5.7 
 
-(2019-XX-XX)
+(2019-01-09)
 
 ### Bug Fixes
 
