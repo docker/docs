@@ -233,10 +233,10 @@ Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
 it for you.
 
-Docker for Windows needs two CPU hardware features to use Hyper-V, that are Virtualization and SLAT (Second Level Adress Translation), called also RVI (Rapid Virtualization Indexing).
-On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar. The command 'systeminfo' is useful to check all Hyper-V needed features, see [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/fr-fr/virtualization/hyper-v-on-windows/reference/hyper-v-requirements).
+Docker for Windows needs two CPU hardware features to use Hyper-V: Virtualization and SLAT (Second Level Adress Translation), which is also called RVI (Rapid Virtualization Indexing).
+On some systems, Virtualization needs to be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
-See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows does not work correctly. 
+To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker for Windows does not work correctly. 
 
 Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or off".
 
