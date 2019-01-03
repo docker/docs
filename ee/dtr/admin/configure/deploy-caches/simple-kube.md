@@ -1,7 +1,6 @@
 ---
 title: Deploy a DTR cache with Kubernetes
-description: Deploy a DTR cache to allow users in remote geographical locations
-to pull images faster.
+description: Deploy a DTR cache to allow users in remote geographical locations to pull images faster.
 keywords: DTR, cache, kubernetes
 ---
 
