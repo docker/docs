@@ -1,12 +1,12 @@
 ---
 title: Deploy a DTR cache with Kubernetes
-description: Deploy a DTR cache to make users in remove geographical locations
-  pull images faster.
+description: Deploy a DTR cache to allow users in remote geographical locations
+to pull images faster.
 keywords: DTR, cache, kubernetes
 ---
 
 This example guides you through deploying a DTR cache, assuming that you've got
-a DTR deployment up and running. The below guide has been tested to work on 
+a DTR deployment up and running. The below guide has been tested on 
 Universal Control Plane 3.1, however it should work on any Kubernetes Cluster 
 1.8 or higher. 
 
@@ -36,8 +36,8 @@ workstation:
 ### Create the DTR Cache certificates
 
 The DTR cache will be deployed with a TLS endpoint. For this you will need to 
-generate a TLS ceritificate and key from a certificate authority. Depending on 
-how you would like to expose the DTR Cache it will change the SANs required for 
+generate a TLS ceritificate and key from a certificate authority. The way you 
+expose the DTR Cache will change the SANs required for 
 this certificate.
 
 For example:
@@ -46,16 +46,16 @@ For example:
     [Ingress Object](https://kubernetes.io/docs/concepts/services-networking/ingress/) 
     you will need to use an external DTR cache address which resolves to your 
     ingress controller as part of your certificate. 
-  - If you exposing the DTR cache through a Kubernetes
+  - If you are exposing the DTR cache through a Kubernetes
     [Cloud Provider](https://kubernetes.io/docs/concepts/services-networking/#loadbalancer)
     then you will need the external Loadbalancer address as part of your 
     certificate. 
   - If you are exposing the DTR Cache through a 
     [Node Port](https://kubernetes.io/docs/concepts/services-networking/#nodeport)
-     or a Host Port you will need to use a Node's FQDN as a SAN in your 
+     or a Host Port you will need to use a node's FQDN as a SAN in your 
      certificate.
 
-On your workstation, create a directory called `certs`. Within here place the 
+On your workstation, create a directory called `certs`. Within it place the 
 newly created certificate `cache.cert.pem` and key `cache.key.pem` for your DTR 
 cache. Also place the certificate authority (including any intermedite 
 certificate authorities) of the certificate from your DTR deployment. This could 
@@ -81,9 +81,9 @@ Therefore if something goes wrong with the cache service, and Kubernetes deploys
 a new pod, cached data is not persisted. Data will not be lost as it is still 
 stored in the primary DTR. You can 
 [customize the storage parameters](/registry/configuration/#storage),
-if you want the cached images to be backend by persistent storage.
+if you want the cached images to be backended by persistent storage.
 
-> Note Kubernetes Peristent Volumes or Persistent Volume Claims would have to be 
+> Note: Kubernetes Peristent Volumes or Persistent Volume Claims would have to be 
 > used to provide persistent backend storage capabilities for the cache.
 
 ```
@@ -224,11 +224,11 @@ If you need to troubleshoot your deployment, you can use
 ### Exposing the DTR Cache
 
 For external access to the DTR cache we need to expose the Cache Pods to the 
-outside world. In Kubernetes there are multiple ways for you to expose a service
+outside world. In Kubernetes there are multiple ways for you to expose a service,
 dependent on your infrastructure and your environment. For more information see
 the Kubernetes docs 
 [here](https://kubernetes.io/docs/concepts/services-networking/#publishing-services-service-types)
-It is important though that you are consistent in exposing the Cache through the 
+It is important though that you are consistent in exposing the cache through the 
 same interface you created a certificate for [previously](#create-the-dtr-cache-certificates).
 Otherwise the TLS certificate may not be valid through this alternative 
 interface.
@@ -239,7 +239,7 @@ interface.
 
 #### NodePort
 
-The first example exposes the DTR cache via **NodePort**. In this example you would 
+The first example exposes the DTR cache through **NodePort**. In this example you would 
 have added a worker node's FQDN to the TLS Certificate in [step 1](#create-the-dtr-cache-certificates).
 Here you will be accessing the DTR cache through an exposed port on a worker 
 node's FQDN.
