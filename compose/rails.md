@@ -235,18 +235,6 @@ Removing network rails_default
 
 ```
 
-You can also stop the application with `Ctrl-C` in the same shell in which you
-executed the `docker-compose up`.  If you stop the app this way, and attempt to
-restart it, you might get the following error:
-
-```none
-web_1 | A server is already
-running. Check /myapp/tmp/pids/server.pid.
-```
-
-To resolve this, delete the file `tmp/pids/server.pid`, and then restart the
-application with `docker-compose up`.
-
 ### Restart the application
 
 To restart the application run `docker-compose up` in the project directory.
