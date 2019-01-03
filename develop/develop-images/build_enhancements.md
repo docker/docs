@@ -10,7 +10,7 @@ Docker Build enhancements for 18.09 release introduces a much-needed overhaul of
 
 * Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
 * the Dockerfile format that works on legacy build will also work with buildkit builds
-* The new `--secret` conmmand line option allows the user to pass secret information for building new images with a specified Dockerfile 
+* The new `--secret` command line option allows the user to pass secret information for building new images with a specified Dockerfile 
 
 For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
 
@@ -99,7 +99,8 @@ $ docker build --progress=plain .
 
 ## Overriding default frontends
 
-To override the default frontend, set the first line of the Dockerfile as a comment with a specific frontend image: 
+The new syntax features in `Dockerfile` are available if you override the default frontend. To override 
+the default frontend, set the first line of the `Dockerfile` as a comment with a specific frontend image: 
 ```
 # syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
 ```
@@ -150,4 +151,41 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 #9    completed: 2018-08-31 21:03:33.523282118 +0000 UTC
 #9     duration: 1.470401133s
 ...
+```
+
+## Using SSH to access private data in builds
+
+> **Acknowledgment**:
+> Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
+> for more information and examples.
+
+The `docker build` has a `--ssh` option to allow the Docker Engine to forward SSH agent connections. For more information 
+on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).
+
+Only the commands in the `Dockerfile` that have explicitly requested the SSH access by defining `type=ssh` mount have 
+access to SSH agent connections. The other commands have no knowledge of any SSH agent being available.
+
+To request SSH access for a `RUN` command in the `Dockerfile`, define a mount with type `ssh`. This will set up the 
+`SSH_AUTH_SOCK` environment variable to make programs relying on SSH automatically use that socket.
+
+Here is an example Dockerfile using SSH in the container:
+
+```Dockerfile
+# syntax=docker/dockerfile:experimental
+FROM alpine
+
+# Install ssh client and git
+RUN apk add --no-cache openssh-client git
+
+# Download public key for github.com
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# Clone private repository
+RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
+```
+
+Once the `Dockerfile` is created, use the `--ssh` option for connectivity with the SSH agent.
+
+```bash
+$ docker build --ssh default .
 ```

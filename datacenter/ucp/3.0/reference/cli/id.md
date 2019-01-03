@@ -2,6 +2,8 @@
 title: docker/ucp id
 description: Print the ID of UCP running on this node
 keywords: ucp, cli, id
+redirect_from:
+ - /reference/ucp/3.0/cli/id/
 ---
 
 Print the ID of UCP running on this node

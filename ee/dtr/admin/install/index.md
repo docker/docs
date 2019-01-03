@@ -2,9 +2,6 @@
 title: Install Docker Trusted Registry
 description: Learn how to install Docker Trusted Registry for production.
 keywords: dtr, registry, install
-redirect_from:
- - /datacenter/dtr/2.3/guides/admin/install/
- - /datacenter/dtr/2.5/guides/admin/install/
 ---
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
@@ -19,7 +16,7 @@ infrastructure meets the [system requirements](./system-requirements) that DTR n
 ## Step 2. Install UCP
 
 Since DTR requires Docker Universal Control Plane (UCP)
-to run, you need to [install UCP](../ucp/admin/install/) on all the nodes where you plan to install DTR.
+to run, you need to [install UCP](/ee/ucp/admin/install/) on all the nodes where you plan to install DTR.
 
 DTR needs to be installed on a worker node that is being managed by UCP.
 You cannot install DTR on a standalone Docker Engine.
@@ -52,7 +49,7 @@ You can run that snippet on any node where Docker is installed. As an example
 you can SSH into a UCP node and run the DTR installer from there. By default
 the installer runs in interactive mode and prompts you for any additional
 information that is necessary.
-[Learn more about the installer](/reference/dtr/2.5/cli/install.md).
+[Learn more about the installer](/reference/dtr/2.6/cli/install/).
 
 By default DTR is deployed with self-signed certificates, so your UCP deployment
 might not be able to pull images from DTR.
@@ -62,15 +59,16 @@ DTR, so that UCP is automatically reconfigured to trust DTR.
 ## Step 4. Check that DTR is running
 
 In your browser, navigate to the Docker **Universal Control Plane**
-web interface, and navigate to the **Applications** screen. DTR should be listed
+web interface, and navigate to **Shared Resources > Stacks**. DTR should be listed
 as an application.
 
-![](../../images/create-repository-1.png){: .with-border}
+
+![](../../images/install-dtr-3.png){: .with-border}
 
 You can also access the **DTR web interface**, to make sure it is working. In your
 browser, navigate to the address where you installed DTR.
 
-![](../../images/install-dtr-4.png){: .with-border}
+![](../../images/create-repository-1.png){: .with-border}
 
 
 ## Step 5. Configure DTR
@@ -82,7 +80,7 @@ After installing DTR, you should configure:
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
-  ![](../../images/install-dtr-5.png){: .with-border}
+  ![](../../images/auto-delete-job-logs-1.png){: .with-border}
 
 
 ## Step 6. Test pushing and pulling
@@ -108,13 +106,13 @@ you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
-1. Load your UCP user bundle.
+1. Load your [UCP user bundle](/ee/ucp/user-access/cli/#use-client-certificates).
 
 2.  Run the join command.
 
     When you join a replica to a DTR cluster, you need to specify the
     ID of a replica that is already part of the cluster. You can find an
-    existing replica ID by going to the **Applications** page on UCP.
+    existing replica ID by going to the **Shared Resources > Stacks** page on UCP.
 
     Then run:
 
@@ -124,11 +122,17 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
-
+    
+    > --ucp-node
+    >
+    > The <ucp-node-name> following the --ucp-node flag is the target node to
+    > install the DTR replica. This is NOT the UCP Manager URL.
+    {: .important}
+    
 3. Check that all replicas are running.
 
     In your browser, navigate to the Docker **Universal Control Plane**
-    web interface, and navigate to the **Applications** screen. All replicas should
+    web interface, and navigate to **Shared Resources > Stacks**. All replicas should
     be displayed.
 
     ![](../../images/install-dtr-6.png){: .with-border}

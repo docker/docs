@@ -2,9 +2,20 @@
 title: docker/dtr join
 description: Add a new replica to an existing DTR cluster
 keywords: dtr, cli, join
+redirect_from:
+ - /reference/dtr/2.5/cli/join/
 ---
 
-Add a new replica to an existing DTR cluster
+Add a new replica to an existing DTR cluster. Use SSH to log into any node that is already part of UCP.
+
+## Usage
+
+```bash
+docker run -it --rm \
+  docker/dtr:2.5.6 join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
+```
 
 
 

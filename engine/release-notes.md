@@ -16,6 +16,11 @@ Docker EE is a superset of all the features in Docker CE. It incorporates defect
 that you can use in environments where new features cannot be adopted as quickly for 
 consistency and compatibility reasons.
 
+> ***NOTE:*** 
+> New in 18.09 is an aligned release model for Docker Engine - Community and Docker 
+> Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing 
+> patch version. The enterprise engine is a superset of the community engine. They 
+> will ship concurrently with the same x patch version based on the same code base. 
 
 ## 18.09.1
 2019-XX-XX
@@ -58,6 +63,7 @@ consistency and compatibility reasons.
 * Add docker.socket requirement for docker.service. [docker/docker-ce-packaging#276](https://github.com/docker/docker-ce-packaging/pull/276)
 * Add socket activation for RHEL-based distributions. [docker/docker-ce-packaging#274](https://github.com/docker/docker-ce-packaging/pull/274)
 * Add libseccomp requirement for RPM packages. [docker/docker-ce-packaging#266](https://github.com/docker/docker-ce-packaging/pull/266)
+=======
 
 ## 18.09 
 2018-11-08
@@ -187,9 +193,9 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### 18.03.1-ee-2
 2018-07-10
 
-> Important notes about this release
+> #### Important notes about this release
 >
-> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+> If you're deploying UCP or DTR, use Docker Engine EE `17.06` or `18.09`. See [Docker Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for more information.
 {: .important}
 
 #### Runtime
@@ -200,9 +206,9 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### 18.03.1-ee-1
 2018-06-27
 
-> Important notes about this release
+> #### Important notes about this release
 >
-> If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+> If you're deploying UCP or DTR, use Docker Engine EE `17.06` or `18.09`. See [Docker Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for more information.
 {: .important}
 
 #### Client
@@ -219,7 +225,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Add support for Ubuntu 18.04.
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
-+ Add support for multiple logging drivers for `docker logs`.
++ Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
 ### 17.06.2-ee-17 
 2018-10-25

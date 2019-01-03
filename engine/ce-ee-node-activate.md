@@ -28,20 +28,21 @@ The activation can be performed either online with connection to Docker Hub, or 
 ```
 $ docker version
 Client:
- Version:           18.09.0-ce
+ Version:           18.09.0
  API version:       1.39
- Go version:        go1.10.3
- Git commit:        ca36ebe
- Built:             Thu Aug 23 18:21:56 2018
+ Go version:        go1.10.4
+ Git commit:        4d60db4
+ Built:             Wed Nov  7 00:48:22 2018
  OS/Arch:           linux/amd64
  Experimental:      false
-Server:
+
+Server: Docker Engine - Community
  Engine:
-  Version:          18.09.0-ce
+  Version:          18.09.0
   API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       ca36ebe
-  Built:
+  Go version:       go1.10.4
+  Git commit:       4d60db4
+  Built:            Wed Nov  7 00:19:08 2018
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
@@ -98,24 +99,25 @@ Restart docker with 'systemctl restart docker' to complete the activation.
 ```
 
 5. Check the Docker Engine version. The engine server will become EE, and the engine client will stay CE.
-```
 
+```
 $ docker version
 Client:
- Version:           18.09.0-ce
+ Version:           18.09.0
  API version:       1.39
- Go version:        go1.10.3
- Git commit:        ca36ebe
- Built:             Thu Aug 23 18:21:56 2018
+ Go version:        go1.10.4
+ Git commit:        4d60db4
+ Built:             Wed Nov  7 00:48:22 2018
  OS/Arch:           linux/amd64
  Experimental:      false
-Server:
+
+Server: Docker Engine - Enterprise
  Engine:
-  Version:          18.09.0-ee-1
+  Version:          18.09.0
   API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       b9e7996
-  Built:
+  Go version:       go1.10.4
+  Git commit:       33a45cd
+  Built:            Wed Nov  7 00:19:46 2018
   OS/Arch:          linux/amd64
   Experimental:     false
 ```

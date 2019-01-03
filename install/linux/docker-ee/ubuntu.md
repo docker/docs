@@ -25,7 +25,7 @@ repository URL associated with your trial or subscription. These instructions
 work for Docker EE for Ubuntu and for Docker EE for Linux, which includes access
 to Docker EE for all Linux distributions. To get this information:
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
+- Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
   button for **Docker Enterprise Edition for Ubuntu**.
 - Copy the URL from the field labeled
@@ -185,7 +185,8 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-18.09"
+       $DOCKER_EE_VERSION"
+       
     ```
 
     </div>
@@ -195,7 +196,8 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-18.09"
+       $DOCKER_EE_VERSION"
+
     ```
 
     </div>
@@ -205,7 +207,8 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       stable-18.09"
+       $DOCKER_EE_VERSION"
+
     ```
 
     </div>

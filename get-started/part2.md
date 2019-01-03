@@ -147,7 +147,8 @@ you have.
 
 ## Build the app
 
-We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
+We are ready to build the app. Make sure you are still at the top level of your
+new directory. Here's what `ls` should show:
 
 ```shell
 $ ls
@@ -155,10 +156,10 @@ Dockerfile		app.py			requirements.txt
 ```
 
 Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name.
+name using the `--tag` option. Use `-t` if you want to use the a shorter option.
 
 ```shell
-docker build -t friendlyhello .
+docker build --tag=friendlyhello .
 ```
 
 Where is your built image? It's in your machine's local Docker image registry:
@@ -170,6 +171,11 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 
 ```
+
+Note how the tag defaulted to `latest`. The full syntax for the tag option would
+be something like `--tag=friendlyhello:v0.0.1`.
+
+
 >  Troubleshooting for Linux users
 >
 > _Proxy server settings_

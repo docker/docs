@@ -57,7 +57,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 1. Make sure Hyper-V is enabled.
 
- Hyper-V is automatically enabled on a Docker for Windows installation. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
+Hyper-V is automatically enabled on a Docker for Windows installation. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
 
 #### 2. Set up a new external network switch (Optional)
 
@@ -79,9 +79,9 @@ For this example, we created a virtual switch called `Primary Virtual Switch`.
 
 #### 3. Reboot
 
-  See this issue on virtualbox: [Hangs on Waiting for VM to start #986](https://github.com/docker/machine/issues/986).
+See this issue on virtualbox: [Hangs on Waiting for VM to start #986](https://github.com/docker/machine/issues/986).
 
-  Reboot your desktop system to clear out any routing table problems. Without a reboot first, `docker-machine create ...` might get hung up on `Waiting for VM to start`.
+Reboot your desktop system to clear out any routing table problems. Without a reboot first, `docker-machine create ...` might get hung up on `Waiting for host to start...`. If you are still hung on "Waiting for host to start..." after you reboot, make sure you selected the correct network in the Virtual Switch Manager.
 
 #### 4. Create the nodes with Docker Machine and the Microsoft Hyper-V driver
 

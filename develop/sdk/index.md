@@ -29,6 +29,9 @@ installed and coexist together.
 ```bash
 go get github.com/docker/docker/client
 ```
+The client requires a recent version of Go. Run `go version` and ensure that you 
+are running at least version 1.9.4 of Go
+
 
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 
@@ -177,23 +180,22 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-    "io"
+    "context"
     "os"
 
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/pkg/stdcopy"
-
-    "golang.org/x/net/context"
 )
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewEnvClient()
+    cli, err := client.NewClientWithOpts(client.FromEnv)
     if err != nil {
         panic(err)
     }
+    cli.NegotiateAPIVersion(ctx)
 
     _, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {

@@ -5,6 +5,7 @@ title: Install Docker Engine - Enterprise on Windows Servers
 redirect_from:
 - /docker-ee-for-windows/install/
 - /engine/installation/windows/docker-ee/
+- /install/windows/ee-preview/
 ---
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
@@ -124,8 +125,11 @@ installs, or install on air-gapped systems.
 
     ```PowerShell
     # On an online machine, download the zip file.
-    invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
+    Invoke-WebRequest -UseBasicParsing -OutFile {{ filename }} {{ download_url }}
     ```
+
+    If you need to download a specific Docker EE Engine release, all URLs can be
+    found on this [JSON index](https://download.docker.com/components/engine/windows-server/index.json)
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
     PowerShell command prompt, use the following commands to extract the archive,
@@ -173,14 +177,15 @@ installs, or install on air-gapped systems.
 To install a specific version, use the `RequiredVersion` flag:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 18.09
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion {{ site.docker_ee_version }}
 ...
 Name                      Version               Source           Summary
 ----                      -------               ------           -------
-Docker                    18.09.0               Docker           Contains Docker Engine - Enterprise for use with Windows Server...
+Docker                    {{ site.docker_ee_version }}                 Docker           Contains Docker Engine - Enterprise for use with Windows Server...
 ```
 
 ### Updating the DockerMsftProvider
+
 Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
 
 ```PowerShell
@@ -194,10 +199,41 @@ Then open a new Powershell session for the update to take effect.
 To update Docker Engine - Enterprise to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion 18.09 -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {{ site.docker_ee_version }} -Update -Force
 ```
 The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
 
+## Uninstall Docker EE
+
+ Use the following commands to completely remove the Docker Engine - Enterprise from a Windows Server:
+
+1. Leave any active Docker Swarm
+     ```PowerShell
+    docker swarm leave --force
+    ```
+    
+1. Remove all running and stopped containers
+    
+    ```PowerShell
+    docker rm -f $(docker ps --all --quiet)
+    ```
+    
+1. Prune container data
+     ```PowerShell
+    docker system prune --all --volumes
+    ```
+    
+1. Uninstall Docker PowerShell Package and Module
+     ```PowerShell
+    Uninstall-Package -Name docker -ProviderName DockerMsftProvider
+    Uninstall-Module -Name DockerMsftProvider
+    ```
+    
+1. Clean up Windows Networking and file system
+     ```PowerShell
+    Get-HNSNetwork | Remove-HNSNetwork
+    Remove-Item -Path "C:\ProgramData\Docker" -Recurse -Force
+    ```
 
 ## Preparing a Docker EE Engine for use with UCP
 

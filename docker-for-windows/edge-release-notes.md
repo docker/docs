@@ -18,6 +18,16 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.0.0-win82 2018-12-07
+
+[Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
+
+* Bug fixes and minor changes
+  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918) 
+
 ### Docker Community Edition 2.0.0.0-win77 2018-11-14
 
 [Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe)

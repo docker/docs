@@ -156,7 +156,7 @@ $ docker-machine create -d virtualbox \
     foobarmachine
 ```
 
-This creates a virtual machine running locally in Virtualbox which uses the
+This creates a virtual machine running locally in VirtualBox which uses the
 `overlay` storage backend, has the key-value pairs `foo=bar` and `spam=eggs` as
 labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the

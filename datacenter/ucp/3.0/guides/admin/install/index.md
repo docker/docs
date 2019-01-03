@@ -79,7 +79,7 @@ To install UCP:
 Now that UCP is installed, you need to license it.
 
 1.  Go to the
-    [Docker Store](https://www.docker.com/enterprise-edition)
+    [Docker Hub](https://www.docker.com/enterprise-edition)
     and buy a Docker EE subscription, or get a free trial license.  
 
 2.  In your browser, navigate to the UCP web UI, log in with your
@@ -103,7 +103,7 @@ for worker nodes to execute.
 
 To join manager nodes to the swarm,  
 
-1.  In the UCP web UI, navigate to the **Nodes** page, and click the
+1.  In the UCP web interface, navigate to the **Nodes** page, and click the
     **Add Node** button to add a new node.
 
     ![](../../images/nodes-page-ucp.png){: .with-border}
@@ -131,7 +131,7 @@ To join manager nodes to the swarm,
 
 5.  For each manager node that you want to join to the swarm, log in using
     ssh and run the join command that you copied. After the join command
-    completes, the node appears on the **Nodes** page in the UCP web UI.
+    completes, the node appears on the **Nodes** page in the UCP web interface.
 
 ## Step 7: Join worker nodes
 

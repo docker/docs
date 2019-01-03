@@ -23,12 +23,15 @@ Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
 Ensure that your cluster nodes meet the minimum requirements for memory and
-disk space. In particular, manager nodes must have at least 4GB of memory.
+disk space. In particular, manager nodes must have at least 8GB of memory.
 Learn about [UCP system requirements](system-requirements.md).
 
 Ensure that your cluster nodes meet the minimum requirements for port openings.
 [Ports used](system-requirements.md/#ports-used) are documented in the UCP system requirements. 
 
+> Note: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft 
+> Azure then please ensure all of the Azure [prequisities](install-on-azure.md/#azure-prerequisites) 
+> are met.  
 
 ## Back up your cluster
 

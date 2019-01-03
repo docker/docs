@@ -55,7 +55,7 @@ passphrases in your keychain.
 2.  Add your SSH private key to the ssh-agent.
 
     ```none
-    $ ssh-add -K ~/.ssh/id_rsa
+    $ ssh-add ~/.ssh/id_rsa
     ```
 
     If you created your key with a different name or have an existing key
@@ -81,7 +81,7 @@ passphrases in your keychain.
 2.  Add your SSH private key to the ssh-agent.
 
     ```none
-    $ ssh-add -K ~/.ssh/id_rsa
+    $ ssh-add ~/.ssh/id_rsa
     ```
 
     If you created your key with a different name or have an existing key

@@ -4,12 +4,18 @@ description: Add a new replica to an existing DTR cluster
 keywords: dtr, cli, join
 ---
 
-Add a new replica to an existing DTR cluster
+Add a new replica to an existing DTR cluster. Use SSH to log into any node that is already part of UCP.
 
+## Usage
 
+```bash
+docker run -it --rm \
+  docker/dtr:2.6.0 join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
+```
 
 ## Description
-
 
 This command creates a replica of an existing DTR on a node managed by
 Docker Universal Control Plane (UCP).

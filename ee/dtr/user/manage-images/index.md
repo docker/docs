@@ -44,7 +44,7 @@ name of our repository will be `dtr-example.com/test-user-1/wordpress`.
 
 > Immutable Tags and Tag Limit
 >
-> Starting in DTR 2.6, repository admins can enable tag pruning by [setting a tag limit](tag-pruning/#set-a-tag-limit). This can only be set if you turn off **Immutability** and allow your repository tags to be overwritten. 
+> Starting in DTR 2.6, repository admins can enable tag pruning by [setting a tag limit](../tag-pruning/#set-a-tag-limit). This can only be set if you turn off **Immutability** and allow your repository tags to be overwritten. 
 
 > Image name size for DTR
 >

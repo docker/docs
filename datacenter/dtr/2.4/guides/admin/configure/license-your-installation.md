@@ -17,7 +17,7 @@ DTR installation:
 
 ## Download your license
 
-Go to [Docker Store](https://store.docker.com/editions/enterprise/docker-ee-trial)
+Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial)
 and download your license.
 
 ![](../../images/license-1.png){: .with-border}

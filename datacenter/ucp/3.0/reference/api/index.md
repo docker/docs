@@ -2,6 +2,8 @@
 description: Learn how to use the Universal Control Plane REST API
 keywords: ucp, api, reference
 title: Universal Control Plane 3.0 API
+redirect_from: 
+- /reference/ucp/3.0/api/
 ---
 
 <div class="swagger-section">
