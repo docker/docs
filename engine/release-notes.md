@@ -185,7 +185,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### 17.06.2-ee-18
 2019-XX-XX
 
-### Security fixes for Docker Engine EE and CE 
+### Security fixes
 * Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
 
 
