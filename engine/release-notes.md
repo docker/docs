@@ -41,6 +41,7 @@ consistency and compatibility reasons.
 * prune: perform image pruning before build cache pruning [docker/cli#1532](https://github.com/docker/cli/pull/1532)
 
 ### Fixes for Docker Engine EE and CE
+* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692) [docker/engine#121](https://github.com/docker/engine/pull/121)
 * Fixed inefficient networking configuration [docker/engine#123](https://github.com/docker/engine/pull/123)
 * Fixed docker system prune doesn't accept until filter [docker/engine#122](https://github.com/docker/engine/pull/122)
 * Avoid unset credentials in `containerd` [docker/engine#122](https://github.com/docker/engine/pull/122)
