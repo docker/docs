@@ -187,6 +187,14 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ### Security fixes
 * Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
+* Added `/proc/asound` to masked paths
+* Fixed authz plugin for 0-length content and path validation.
+
+### Fixes for Docker Engine EE
+* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
+* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
+* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
 
 
 ## Older Docker Engine EE Release notes
