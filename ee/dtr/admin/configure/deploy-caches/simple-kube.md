@@ -115,7 +115,7 @@ middleware:
 EOF
 ```
 
-A full list of configuration options can be found [here](/registry/configuration/#list-of-configuration-options)
+See [Configuration Options](/registry/configuration/#list-of-configuration-options) for a full list of registry configuration options.
 
 ### Define Kubernetes Resources
 
