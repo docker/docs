@@ -21,15 +21,15 @@ CE-EE Node Activate will apply a license, and switch the Docker engine to the En
 
 ## Notes on patching after running CE to EE Node Activation
 
-Docker recommends replacing the apt or yum repository from CE with the EE one that shows 
-up on your hub/store account after starting the trial or paid license. This allows apt/yum 
+Docker recommends replacing the apt or yum repository from CE with the EE repository that appears 
+on your hub/store account after starting the trial or paid license. This allows apt/yum 
 upgrade operations to work as expected and keep them current as long as your license is still
 valid and has not expired.
 
 > ***NOTE:*** You can use the `docker engine update` command. However, if you continue to use 
 > the CE packages, the OS package will no longer replace the active daemon binary during apt/yum 
 > updates, so you are responsible for performing the `docker engine update` operation periodically 
-> keep your engine up to date.
+> to keep your engine up to date.
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
