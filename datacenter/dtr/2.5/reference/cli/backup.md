@@ -15,6 +15,12 @@ docker run -i --rm docker/dtr \
     backup [command options] > backup.tar
 ```
 
+### Example Usage
+```bash 
+docker run -i --rm docker/dtr \
+    backup --ucp-ca "$(cat ca.pem)" --existing-replica-id 5eb9459a7832 > backup.tar
+```
+
 ## Description
 
 
