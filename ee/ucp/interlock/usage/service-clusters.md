@@ -42,19 +42,19 @@ map[nodetype:loadbalancer region:us-west]
 Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters:
 
 ```bash
-$> cat << EOF | docker config create service.interlock.conf -
+$> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -
 ListenAddr = ":8080"
 DockerURL = "unix:///var/run/docker.sock"
 PollInterval = "3s"
 
 [Extensions]
   [Extensions.us-east]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
-    Args = ["-D"]
-    ServiceName = "interlock-ext-us-east"
-    ProxyImage = "nginx:alpine"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
+    Args = []
+    ServiceName = "ucp-interlock-extension-us-east"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
-    ProxyServiceName = "interlock-proxy-us-east"
+    ProxyServiceName = "ucp-interlock-proxy-us-east"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ServiceCluster = "us-east"
     PublishMode = "host"
@@ -74,12 +74,12 @@ PollInterval = "3s"
       proxy_region = "us-east"
 
   [Extensions.us-west]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
-    Args = ["-D"]
-    ServiceName = "interlock-ext-us-west"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
+    Args = []
+    ServiceName = "ucp-interlock-extension-us-west"
     ProxyImage = "nginx:alpine"
     ProxyArgs = []
-    ProxyServiceName = "interlock-proxy-us-west"
+    ProxyServiceName = "ucp-interlock-proxy-us-west"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ServiceCluster = "us-west"
     PublishMode = "host"
@@ -114,12 +114,12 @@ Now we can create the Interlock service:
 
 ```bash
 $> docker service create \
-    --name interlock \
+    --name ucp-interlock \
     --mount src=/var/run/docker.sock,dst=/var/run/docker.sock,type=bind \
     --network interlock \
     --constraint node.role==manager \
-    --config src=service.interlock.conf,target=/config.toml \
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
+    --config src=com.docker.ucp.interlock.conf-1,target=/config.toml \
+    {{ page.ucp_org }}/interlock:{{ page.ucp_version }} run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
 
@@ -131,11 +131,11 @@ workers for each region.  Again, from a manager run the following to pin the pro
 $> docker service update \
     --constraint-add node.labels.nodetype==loadbalancer \
     --constraint-add node.labels.region==us-east \
-    interlock-proxy-us-east
+    ucp-interlock-proxy-us-east
 $> docker service update \
     --constraint-add node.labels.nodetype==loadbalancer \
     --constraint-add node.labels.region==us-west \
-    interlock-proxy-us-west
+    ucp-interlock-proxy-us-west
 ```
 
 We are now ready to deploy applications.  First we will create individual networks for each application:
