@@ -134,6 +134,12 @@ You only need to set up the repository once, after which you can install Docker 
         "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
     ```
 
+7.  Enable the **latest** stable repository:
+    
+    ```bash
+    $ sudo yum-config-manager --disable docker-*
+    $ sudo yum-config-manager --enable docker-ee-stable
+    ```
 
 {% elsif section == "install-using-yum-repo" %}
 
