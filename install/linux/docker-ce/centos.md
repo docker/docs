@@ -49,8 +49,6 @@ $ sudo yum remove docker \
                   docker-latest \
                   docker-latest-logrotate \
                   docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
                   docker-engine
 ```
 
