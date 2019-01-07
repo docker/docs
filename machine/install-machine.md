@@ -24,7 +24,7 @@ on GitHub.
     If you are running **macOS**:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
       chmod +x /usr/local/bin/docker-machine
     ```
@@ -32,7 +32,7 @@ on GitHub.
     If you are running **Linux**:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
       sudo install /tmp/docker-machine /usr/local/bin/docker-machine
     ```
@@ -40,7 +40,7 @@ on GitHub.
     If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/tag/v{{site.machine_version}} &&
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
       mkdir -p "$HOME/bin" &&
       curl -L $base/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" &&
       chmod +x "$HOME/bin/docker-machine.exe"
