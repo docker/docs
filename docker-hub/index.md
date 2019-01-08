@@ -73,6 +73,8 @@ redirect_from:
 - /docker-cloud/docker-errors-faq/
 - /docker-cloud/release-notes/
 - /docker-store/
+- /apidocs/
+- /apidocs/overview/
 ---
 
 [Docker Hub](https://hub.docker.com) is a service provided by Docker for finding and sharing container images with your team. It provides the following major features:
