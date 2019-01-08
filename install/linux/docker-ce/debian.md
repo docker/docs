@@ -117,7 +117,8 @@ from the repository.
          ca-certificates \
          curl \
          gnupg2 \
-         software-properties-common
+         software-properties-common \
+         python-software-properties
     ```
 
     </div>
