@@ -1,4 +1,4 @@
-<username>---
+---
 description: Copy files among machines
 keywords: machine, scp, subcommand
 title: docker-machine scp
