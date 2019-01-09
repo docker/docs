@@ -25,14 +25,11 @@ repository]({{ labsbase }}).
 
 ## Library references
 
-These docs are imported from
-[the official Docker Library docs](https://github.com/docker-library/docs/),
-and help you use some of the most popular software that has been
-"Dockerized" into Docker images.
+The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
 
 | Image name | Description |
 | ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}]({{ page.url }}) | {{ page.description | strip }} |
+{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}) | {{ page.description | strip }} |
 {% endfor %}
 
 ## Sample applications
