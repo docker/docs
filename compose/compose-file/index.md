@@ -736,7 +736,7 @@ Configures if and how to restart containers when they exit. Replaces
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
-  [duration](#specifying-durations) (default: 0).
+  [duration](#specifying-durations) (default: 5s).
 - `max_attempts`: How many times to attempt to restart a container before giving
   up (default: never give up). If the restart does not succeed within the configured
   `window`, this attempt doesn't count toward the configured `max_attempts` value.
@@ -766,25 +766,24 @@ services:
 Configures how the service should be rollbacked in case of a failing
 update.
 
-- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
-- `delay`: The time to wait between each container group's rollback (default 0s).
-- `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
-- `max_failure_ratio`: Failure rate to tolerate during a rollback (default 0).
-- `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
+- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously (default: 1).
+- `delay`: The time to wait between each container group's rollback (default: 0s).
+- `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default: `pause`).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default: 5s).
+- `max_failure_ratio`: Failure rate to tolerate during a rollback (default: 0).
+- `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default: `stop-first`).
 
 #### update_config
 
 Configures how the service should be updated. Useful for configuring rolling
 updates.
 
-- `parallelism`: The number of containers to update at a time.
-- `delay`: The time to wait between updating a group of containers.
-- `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause`
-  (default: `pause`).
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
-- `max_failure_ratio`: Failure rate to tolerate during an update.
-- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
+- `parallelism`: The number of containers to update at a time (default: 1).
+- `delay`: The time to wait between updating a group of containers (default: 0s).
+- `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause` (default: `pause`).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default: 5s).
+- `max_failure_ratio`: Failure rate to tolerate during an update (default: 0).
+- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default: `stop-first`). **Note**: Only supported for v3.4 and higher.
 
 > **Note**: `order` is only supported for v3.4 and higher of the compose
 file format.
@@ -852,7 +851,7 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
-  
+
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
 
@@ -2367,7 +2366,7 @@ secrets:
 ```
 
 ### Compose File v3.4 and under
-```none    
+```none
   my_second_secret:
     external:
       name: redis_secret
