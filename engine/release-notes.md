@@ -171,7 +171,7 @@ In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660]
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
 ### 18.03.ee-5
-2019-XX-XX
+2019-01-09
 
 ### Security fixes
 * Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
@@ -184,7 +184,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
 
 ### 17.06.2-ee-18
-2019-XX-XX
+2019-01-09
 
 ### Security fixes
 * Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
