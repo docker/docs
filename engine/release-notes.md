@@ -32,7 +32,7 @@ consistency and compatibility reasons.
 
 ### Improvements for Docker Engine EE and CE
 * Updated to BuildKit 0.3.3 [docker/engine#122](https://github.com/docker/engine/pull/122)
-* Updated to containerd 1.2.1-rc.0 [docker/engine#121](https://github.com/docker/engine/pull/121)
+* Updated to containerd 1.2.2 [docker/engine#144](https://github.com/docker/engine/pull/144)
 * Provide additional warnings for use of deprecated legacy overlay and devicemapper storage drivers [docker/engine#85](https://github.com/docker/engine/pull/85)
 * prune: perform image pruning before build cache pruning [docker/cli#1532](https://github.com/docker/cli/pull/1532)
 * Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
