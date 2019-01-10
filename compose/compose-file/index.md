@@ -222,7 +222,7 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose builds and tags it with a generated name, and use that image
+Compose builds and tags it with a generated name, and uses that image
 thereafter.
 
     build:
@@ -296,7 +296,7 @@ A list of images that the engine uses for cache resolution.
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
-It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
+We recommend that you use reverse-DNS notation to prevent your labels from conflicting with
 those used by other software.
 
     build:
@@ -490,14 +490,14 @@ an error.
 
 ### credential_spec
 
-> **Note:** this option was added in v3.3
+> **Note:** this option was added in v3.3.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
 format `file://<filename>` or `registry://<value-name>`.
 
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
-subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\`
+subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
 `C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`:
 
@@ -585,7 +585,7 @@ Specify a service discovery method for external clients connecting to a swarm.
 > **[Version 3.3](compose-versioning.md#version-3) only.**
 
 * `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP)
-that acts as the “front end” for clients to reach the service on a
+that acts as the front end for clients to reach the service on a
 network. Docker routes requests between the client and available worker
 nodes for the service, without client knowledge of how many nodes
 are participating in the service or their IP addresses or ports.
