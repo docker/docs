@@ -225,6 +225,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Kamatera</td>
+      <td>
+        <a href=
+        "https://github.com/OriHoch/docker-machine-driver-kamatera">https://github.com/OriHoch/docker-machine-driver-kamatera</a>
+      </td>
+      <td>
+        <a href="https://github.com/OriHoch">OriHoch</a>
+      </td>
+      <td>
+        <a href=
+        "mailto:support@kamatera.com">support@kamatera.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>KVM</td>
       <td>
         <a href=
