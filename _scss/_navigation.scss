@@ -94,6 +94,11 @@
 *
 */
 
+// Some links don't have 'href' attr, hence no mouse pointer
+.nav-sidebar li a {
+    cursor: pointer;
+}
+
 .nav-sidebar>li>a {
     padding-right: 20px;
     padding-left: 20px;
@@ -155,6 +160,12 @@
     padding: 0 20px 20px 0;
 }
 
+/* pointer for collapsed sidebar list items */
+
+.collapsed
+{
+    cursor:pointer;   
+}
 
 /*
 *
@@ -372,3 +383,5 @@ input:checked+.slider:before {
     float: left;
     margin: 2px 0 0;
 }
+
+

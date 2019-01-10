@@ -2,6 +2,8 @@
 title: docker/ucp uninstall-ucp
 description: Uninstall UCP from this swarm
 keywords: ucp, cli, uninstall-ucp
+redirect_from:
+ - /reference/ucp/3.0/cli/uninstall-ucp/
 ---
 
 Uninstall UCP from this swarm
@@ -24,7 +26,7 @@ your applications can continue running.
 After UCP is uninstalled you can use the `docker swarm leave` and
 `docker node rm` commands to remove nodes from the swarm.
 
-Once UCP is uninstalled, you can't join nodes to the swarm unless
+Once UCP is uninstalled, you won't be able to join nodes to the swarm unless
 UCP is installed again.
 
 

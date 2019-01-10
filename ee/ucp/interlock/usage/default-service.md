@@ -12,7 +12,7 @@ see the default NGINX 404 page.
 ![Default NGINX page](../../images/interlock-default-service-1.png){: .with-border}
 
 You can customize this by labelling a service with
-`com.docker.lb.defaul_backend=true`. When users try to access a route that's
+`com.docker.lb.default_backend=true`. When users try to access a route that's
 not configured, they are redirected to this service.
 
 As an example, create a `docker-compose.yml` file with:

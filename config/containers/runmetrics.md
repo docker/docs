@@ -131,7 +131,7 @@ to the processes within the cgroup, excluding sub-cgroups. The second half
 (with the `total_` prefix) includes sub-cgroups as well.
 
 Some metrics are "gauges", or values that can increase or decrease. For instance,
-`swap` isthe amount of swap space used by the members of the cgroup.
+`swap` is the amount of swap space used by the members of the cgroup.
 Some others are "counters", or values that can only go up, because
 they represent occurrences of a specific event. For instance, `pgfault`
 indicates the number of page faults since the creation of the cgroup.

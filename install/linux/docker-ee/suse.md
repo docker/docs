@@ -22,7 +22,7 @@ repository URL associated with your trial or subscription. These instructions
 work for Docker EE for SLES and for Docker EE for Linux, which includes access
 to Docker EE for all Linux distributions. To get this information:
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
+- Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
   button for **Docker Enterprise Edition for SUSE Linux Enterprise Server**.
 - Copy the URL from the field labeled
@@ -164,11 +164,10 @@ Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker EE
 from the repository.
 
-There are currently two versions of Docker EE Engine available:
-
-* 18.03 - Use this version if you're only running Docker EE Engine.
-* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
-Engine, UCP, and DTR).
+> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> UCP, and DTR).
 
 #### Set up the repository
 
@@ -181,14 +180,14 @@ Engine, UCP, and DTR).
     ```
 
     Where:
-    * `DOCKER-EE-URL` is the URL from your Docker Store subscription.
+    * `DOCKER-EE-URL` is the URL from your Docker Hub subscription.
     * `ARCHITECTURE` is `x86_64`, `s390x`, or `ppc64le`.
-    * `VERSION` is `18.03` or `17.06`.
+    * `VERSION` is `18.09` 
 
     As an example your command should look like:
 
     ```bash
-    DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-17.06"
+    DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-18.09"
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
@@ -307,7 +306,7 @@ other optional configuration steps.
 To upgrade Docker EE:
 
 1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 17.03.x to Docker 17.06.x),
+    Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo zypper refresh`.

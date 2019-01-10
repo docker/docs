@@ -6,10 +6,10 @@ title: Install Docker for Windows
 
 Docker for Windows is the [Community Edition
 (CE)](https://www.docker.com/community-edition) of Docker for Microsoft Windows.
-To download Docker for Windows, head to Docker Store.
+To download Docker for Windows, head to Docker Hub.
 
 [Download from Docker
-Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){:
+Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
 .button .outline-btn}
 
 ##  What to know before you install
@@ -72,7 +72,7 @@ Looking for information on using Windows containers?
     If you haven't already downloaded the installer (`Docker for Windows
     Installer.exe`), you can get it from
     [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
-    It typically downloads to your `Downloads folder`, or you can run it from
+    It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
 2. Follow the install wizard to accept the license, authorize the installer, and

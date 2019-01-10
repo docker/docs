@@ -152,6 +152,13 @@ These keys are supported:
 | include_forwarded_for | no                                                       | true                                     | If present, include the X-Forwarded-For header in requests                                               |
 
 
+> #### Known issue
+>
+> For SNI (HTTPS) routes, HRM forwards to service tasks before any task
+> health checks have passed.  This may result in traffic loss if a task is not
+> ready to serve traffic immediately after it is scheduled.
+{: .important}
+
 ### Sticky sessions
 
 You can use the `sticky_sessions` value to always route a user to the same

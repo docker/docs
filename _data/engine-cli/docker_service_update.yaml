@@ -306,6 +306,17 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: init
+  value_type: bool
+  default_value: "false"
+  description: |
+    Use an init inside each service container to forward signals and reap processes
+  deprecated: false
+  min_api_version: "1.37"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: isolation
   value_type: string
   description: Service container isolation mode

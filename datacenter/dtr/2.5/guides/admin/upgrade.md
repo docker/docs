@@ -4,7 +4,7 @@ description: Learn how to upgrade your Docker Trusted Registry
 keywords: dtr, upgrade, install
 ---
 
-{% assign previous_version="2.3" %}
+{% assign previous_version="2.4" %}
 
 DTR uses [semantic versioning](http://semver.org/) and we aim to achieve specific
 guarantees while upgrading between versions. We never support downgrading. We
@@ -43,12 +43,12 @@ Before starting your upgrade, make sure that:
 * The version of UCP you are using is supported by the version of DTR you
 are trying to upgrade to. [Check the compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 * You have a recent [DTR backup](backups-and-disaster-recovery.md).
-* You [disable Docker content trust in UCP](/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust.md).
+* You [disable Docker content trust in UCP](/datacenter/ucp/3.0/guides/admin/configure/run-only-the-images-you-trust).
 
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
 Make sure you're running DTR {{ previous_version }}. If that's not the case,
-[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade.md).
+[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade/#step-2-upgrade-dtr).
 
 ### Step 2. Upgrade DTR
 
@@ -84,6 +84,15 @@ command and it will resume from where it left off.
 
 A patch upgrade changes only the DTR containers and it's always safer than a minor
 upgrade. The command is the same as for a minor upgrade.
+
+## DTR cache upgrade
+
+If you have previously [deployed a cache](/datacenter/dtr/2.5/guides/admin/configure/deploy-caches/), make sure to [upgrade the node dedicated for your cache](/v18.03/ee/upgrade/) to keep it in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
+
+## Download the vulnerability database
+
+After upgrading DTR, you need to re-download the vulnerability database.
+[Learn how to update your vulnerability database](configure/set-up-vulnerability-scans.md#update-the-cve-scanning-database).
 
 ## Where to go next
 

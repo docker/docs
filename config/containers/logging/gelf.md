@@ -46,7 +46,7 @@ and `--log-opt` options to the Docker daemon:
 
 ```bash
 dockerd
-  --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+  --log-driver gelf --log-opt gelf-address=udp://1.2.3.4:12201 \
 ```
 
 To make the configuration permanent, you can configure it in `/etc/docker/daemon.json`:
@@ -59,6 +59,10 @@ To make the configuration permanent, you can configure it in `/etc/docker/daemon
   }
 }
 ```
+
+> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> file must be provided as strings. Boolean and numeric values (such as the value
+> for `gelf-tcp-max-reconnect`) must therefore be enclosed in quotes (`"`).
 
 You can set the logging driver for a specific container by setting the
 `--log-driver` flag when using `docker container create` or `docker run`:

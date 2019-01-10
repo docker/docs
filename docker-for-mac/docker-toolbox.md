@@ -62,6 +62,9 @@ With Docker for Mac, you only get (and only usually need) one VM, managed by Doc
 for Mac. Docker for Mac automatically upgrades the Docker client and
 daemon when updates are available.
 
+Also note that Docker for Mac can’t route traffic to containers, so you can't
+directly access an exposed port on a running container from the hosting machine.
+
 If you do need multiple VMs, such as when testing multi-node swarms, you can
 continue to use Docker Machine, which operates outside the scope of Docker for
 Mac. See [Docker Toolbox and Docker for Mac

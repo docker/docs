@@ -2,6 +2,8 @@
 title: docker/ucp stop
 description: Stop UCP components running on this node
 keywords: ucp, cli, stop
+redirect_from:
+ - /reference/ucp/3.0/cli/stop/
 ---
 
 Stop UCP components running on this node

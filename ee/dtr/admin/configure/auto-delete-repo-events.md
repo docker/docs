@@ -39,5 +39,5 @@ If you check and specify both, events in your repositories will be removed durin
 
 ## Where to go next
 
-- [Manage job logs](../admin/configure/manage-job-logs.md)
+- [Manage job logs](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/)
  

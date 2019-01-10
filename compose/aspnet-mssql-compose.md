@@ -104,7 +104,7 @@ configure this app to use our SQL Server database, and then create a
             depends_on:
                 - db
         db:
-            image: "microsoft/mssql-server-linux"
+            image: "mcr.microsoft.com/mssql/server"
             environment:
                 SA_PASSWORD: "Your_password123"
                 ACCEPT_EULA: "Y"
@@ -195,6 +195,6 @@ to try out .NET Framework and more SQL Server tutorials.
 ## Next steps
 
 - [Build your app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/?utm_medium=Referral&utm_source=docs.docker.com)
-- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server-linux/)
+- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server/)
 - [ASP.NET Core](https://www.asp.net/core)
 - [ASP.NET Core Docker image](https://hub.docker.com/r/microsoft/aspnetcore/) on DockerHub

@@ -2,16 +2,21 @@
 title: docker/ucp id
 description: Print the ID of UCP running on this node
 keywords: ucp, cli, id
+redirect_from:
+ - /reference/ucp/3.0/cli/id/
 ---
 
 Print the ID of UCP running on this node
 
 ## Usage
+
+Run the UCP id command using the correct image version tag for UCP (i.e. docker/ucp:$version)
+
 ```
 docker container run --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp \
+    docker/ucp:$version \
     id
 ```
 

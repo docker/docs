@@ -334,7 +334,7 @@ HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It r
 dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle
-Virtualbox or VMWare Fusion.
+VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 

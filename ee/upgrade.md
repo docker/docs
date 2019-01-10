@@ -194,8 +194,8 @@ i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     
 ## Manager Upgrades When Moving to Docker Engine - Enterprise 18.09 and later
 
 The following is a constraint introduced by architectural changes to the Swarm overlay networking when 
-upgrading to Docker Engine - Enterprise 18.09 or later. It only applies to this one-time upgrade and to w
-orkloads that are using the Swarm overlay driver. Once upgraded to Docker Engine - Enterprise 18.09, this 
+upgrading to Docker Engine - Enterprise 18.09 or later. It only applies to this one-time upgrade and to workloads 
+that are using the Swarm overlay driver. Once upgraded to Docker Engine - Enterprise 18.09, this 
 constraint does not impact future upgrades.
 
 When upgrading to Docker Engine - Enterprise 18.09, manager nodes cannot reschedule new workloads on the 

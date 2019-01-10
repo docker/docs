@@ -59,11 +59,11 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     ...
     ```
 
-2.  Start a Dockerized web server. Like the hello-world image above, if the
+2.  Start a Dockerized web server. Like the `hello-world` image above, if the
     image is not found locally, Docker pulls it from Docker Hub.
 
     ```bash
-    $ docker run -d -p 80:80 --name webserver nginx
+    $ docker run --detach --publish=80:80 --name=webserver nginx
     ```
 
 3.  In a web browser, go to `http://localhost/` to view the nginx homepage.
@@ -503,6 +503,21 @@ ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d
 ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
+Add the following to your `~/.bash_profile`:
+
+
+```shell
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+```
+
+OR
+
+```shell
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+```
+
 ### Zsh
 
 In Zsh, the [completion
@@ -532,42 +547,27 @@ and Troubleshooting](troubleshoot.md) for more details.
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
 
-## Docker Store
+## Docker Hub
 
-Choose **Docker Store** from the Docker for Mac menu to get to the Docker app
-downloads site. [Docker store](https://store.docker.com/){:target="_blank"
-class="_"} is a component of the next-generation Docker Hub, and the best place
-to find compliant, trusted commercial and free software distributed as Docker
-Images.
-
-![Docker Store](images/docker-store.png){:width="550px"}
-
-## Docker Cloud
-
-You can access your [Docker Cloud](/docker-cloud/index.md){:target="_blank"
+You can access your [Docker ID](/docker-id/index.md){:target="_blank"
 class="_"}  account from within Docker for Mac.
 
-![Docker Cloud](images/docker-cloud.png){:width="550px"}
+![Docker ID](images/docker-cloud.png){:width="550px"}
 
-From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or
+From the Docker for Mac menu, sign in to Docker Hub with your Docker ID, or
 create one.
 
-![Docker Cloud sign-in](images/menu/sign-in.png){: .with-border width="250px"}
+![Docker ID sign-in](images/menu/sign-in.png){: .with-border width="250px"}
 
 Then use the Docker for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
 
-Check out these [Docker Cloud topics](/docker-cloud/index.md){:target="_blank"
+Check out these [Docker Hub topics](/docker-hub/index.md){:target="_blank"
 class="_"}  to learn more:
 
 * [Organizations and Teams in Docker
-  Cloud](/docker-cloud/orgs/index.md){:target="_blank" class="_"}
-* [Builds and Images](/docker-cloud/builds/index.md){:target="_blank" class="_"}
-* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md){:target="_blank"
-  class="_"}
-
-Need a direct link to Cloud? [Take me to Docker
-Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
+  Hub](/docker-cloud/orgs/index.md){:target="_blank" class="_"}
+* [Builds](/docker-hub/builds/index.md){:target="_blank" class="_"}
 
 ## Where to go next
 

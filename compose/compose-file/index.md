@@ -880,6 +880,48 @@ client create option.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
+### depends_on
+
+Express dependency between services, Service dependencies cause the following
+behaviors:
+
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` are started before `web`.
+
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
+  creates and starts `db` and `redis`.
+  
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
+
+Simple example:
+
+    version: '3'
+    services:
+      web:
+        build: .
+        depends_on:
+          - db
+          - redis
+      redis:
+        image: redis
+      db:
+        image: postgres
+
+> There are several things to be aware of when using `depends_on`:
+>
+> - `depends_on` does not wait for `db` and `redis` to be "ready" before
+>   starting `web` - only until they have been started. If you need to wait
+>   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for more on this problem and strategies for solving it.
+>
+> - Version 3 no longer supports the `condition` form of `depends_on`.
+>
+> - The `depends_on` option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a version 3 Compose file.
+
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
@@ -1742,6 +1784,7 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
+- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```none
 version: "3.2"
@@ -1945,9 +1988,12 @@ Specify a list of options as key-value pairs to pass to the driver for this
 volume. Those options are driver-dependent - consult the driver's
 documentation for more information. Optional.
 
-     driver_opts:
-       foo: "bar"
-       baz: 1
+    volumes:
+      example:
+        driver_opts:
+          type: "nfs"
+          o: "addr=10.40.0.199,nolock,soft,rw"
+          device: ":/docker/example"
 
 ### external
 
@@ -1955,14 +2001,16 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: '3'
 
     services:
       db:
@@ -2206,15 +2254,17 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `ipam`, `internal`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other network configuration keys (`driver`, `driver_opts`,
+`ipam`, `internal`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: '3'
 
     services:
       proxy:
@@ -2327,8 +2377,8 @@ stack. The source of the secret is either `file` or `external`.
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_secret` is created (as
-`<stack_name>_my_first_secret)`when the stack is deployed,
+In this example, `my_first_secret` is created as
+`<stack_name>_my_first_secret `when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```none
@@ -2344,10 +2394,18 @@ is different from the name that exists within the service. The following
 example modifies the previous one to use the external secret called
 `redis_secret`.
 
+### Compose File v3.5 and above
 ```none
 secrets:
   my_first_secret:
     file: ./secret_data
+  my_second_secret:
+    external: true
+    name: redis_secret
+```
+
+### Compose File v3.4 and under
+```none    
   my_second_secret:
     external:
       name: redis_secret

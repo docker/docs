@@ -44,7 +44,7 @@ Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handl
 If you click on **Report an issue**, this opens [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
 "create new issue" template, to be completed before submision. Do not forget to
-copy/paste your diagnistic ID.
+include your diagnostic ID.
 
 ![issue-template](images/issue-template.png){:width="600px"}
 
@@ -301,14 +301,10 @@ Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
 it for you.
 
-See [these
-instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install)
-to install Hyper-V manually. A reboot is *required*. If you install Hyper-V
-without the reboot, Docker for Windows does not work correctly. On some systems,
-Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor
-specific, but typically the BIOS option is called `Virtualization Technology
-(VTx)` or similar.
+Docker for Windows also needs two CPU hardware features to use Hyper-V: Virtualization and SLAT (Second Level Adress Translation), which is also called RVI (Rapid Virtualization Indexing).
+On some systems, Virtualization needs to be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
+To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker for Windows does not work correctly. 
 
 From the start menu, type  in "Turn Windows features on or off" and hit enter.
 In the subequent screen, verify Hyper-V is enabled and has a checkmark:

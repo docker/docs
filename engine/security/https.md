@@ -7,10 +7,10 @@ redirect_from:
 title: Protect the Docker daemon socket
 ---
 
-By default, Docker runs via a non-networked Unix socket. It can also
+By default, Docker runs through a non-networked UNIX socket. It can also
 optionally communicate using an HTTP socket.
 
-If you need Docker to be reachable via the network in a safe manner, you can
+If you need Docker to be reachable through the network in a safe manner, you can
 enable TLS by specifying the `tlsverify` flag and pointing Docker's
 `tlscacert` flag to a trusted CA certificate.
 
@@ -73,7 +73,7 @@ to connect to Docker:
 
 Next, we're going to sign the public key with our CA:
 
-Since TLS connections can be made via IP address as well as DNS name, the IP addresses
+Since TLS connections can be made through IP address as well as DNS name, the IP addresses
 need to be specified when creating the certificate. For example, to allow connections
 using `10.10.10.20` and `127.0.0.1`:
 
@@ -113,24 +113,24 @@ request:
 
     $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 
-To make the key suitable for client authentication, create an extensions
+To make the key suitable for client authentication, create a new extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth >> extfile.cnf
+    $ echo extendedKeyUsage = clientAuth > extfile-client.cnf
 
 Now, generate the signed certificate:
 
     $ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out cert.pem -extfile extfile.cnf
+      -CAcreateserial -out cert.pem -extfile extfile-client.cnf
     Signature ok
     subject=/CN=client
     Getting CA Private Key
     Enter pass phrase for ca-key.pem:
 
 After generating `cert.pem` and `server-cert.pem` you can safely remove the
-two certificate signing requests:
+two certificate signing requests and extensions config files:
 
-    $ rm -v client.csr server.csr
+    $ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
 
 With a default `umask` of 022, your secret keys are *world-readable* and
 writable for you and your group.
@@ -180,7 +180,7 @@ certificates and trusted CA:
 ## Secure by default
 
 If you want to secure your Docker client connections by default, you can move
-the files to the `.docker` directory in your home directory -- and set the
+the files to the `.docker` directory in your home directory --- and set the
 `DOCKER_HOST` and `DOCKER_TLS_VERIFY` variables as well (instead of passing
 `-H=tcp://$HOST:2376` and `--tlsverify` on every call).
 

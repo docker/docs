@@ -1,10 +1,12 @@
 ---
 title: docker/ucp support
-description: Create a support dump for this UCP node
-keywords: ucp, cli, support
+description: Create a support dump for UCP nodes
+keywords: ucp, cli, support, support dump, troubleshooting
+redirect_from:
+ - /reference/ucp/3.0/cli/support/
 ---
 
-Create a support dump for this UCP node
+Create a support dump for specified UCP nodes. You create a support dump to help [Docker Support](http://success.docker.com/support) understand your environment and more effectively troubleshoot issues in resolving your support case.
 
 ## Usage
 
@@ -26,5 +28,3 @@ This command creates a support dump file for this node, and prints it to stdout.
 |:--------------------------|:---------------------------|
 |`--debug, D`|Enable debug mode|
 |`--jsonlog`|Produce json formatted output for easier parsing|
-
-
