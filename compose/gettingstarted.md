@@ -160,7 +160,7 @@ Hub registry.
 
 2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
 
-    If you're using Docker natively on Linux, Docker for Mac, or Docker for
+    If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
     Windows, then the web app should now be listening on port 5000 on your
     Docker daemon host. Point your web browser to `http://localhost:5000` to
     find the `Hello World` message. If this doesn't resolve, you can also try
@@ -253,15 +253,15 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker for Windows that uses [Linux
+Docker Desktop for Windows that uses [Linux
 containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature). For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
-on Docker for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
+on Docker Desktop for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
 for Mac, and the general examples on how to [Manage data in
 containers](../engine/tutorials/dockervolumes.md).
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+requirements for [Docker Desktop for Windows](/docker-for-windows/install.md) and do not
 need VirtualBox.
 {: .important}
 
