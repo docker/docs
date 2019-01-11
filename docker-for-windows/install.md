@@ -20,7 +20,7 @@ Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
   enabled, VirtualBox no longer works, but any VirtualBox VM images remain.
   VirtualBox VMs created with `docker-machine` (including the `default` one
   typically created during Toolbox install) no longer start. These VMs cannot be
-  used side-by-side with Docker for Windows. However, you can still use
+  used side-by-side with Docker Desktop for Windows. However, you can still use
   `docker-machine` to manage remote VMs.
 
 * **System Requirements**:
@@ -69,7 +69,7 @@ Looking for information on using Windows containers?
 
 1. Double-click **Docker Desktop for Windows Installer.exe** to run the installer.
 
-    If you haven't already downloaded the installer (`Docker for Windows
+    If you haven't already downloaded the installer (`Docker Desktop
     Installer.exe`), you can get it from
     [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
     It typically downloads to your `Downloads` folder, or you can run it from
