@@ -12,7 +12,7 @@ description: Learn how to create clusters of Dockerized machines.
 - Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
 
 - Get [Docker Machine](/machine/overview.md), which is pre-installed with
-[Docker for Mac](/docker-for-mac/index.md) and [Docker for
+[Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md), but on Linux systems you need to
 [install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, as well as Windows 10 Home, use
 [Docker Toolbox](/toolbox/overview.md).
@@ -491,7 +491,7 @@ with the given command.
 
 This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`
-commands (for example, on Docker for Mac or Docker for Windows). To learn more,
+commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
 see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
 ### Restarting Docker machines
