@@ -140,9 +140,9 @@ storage driver, be sure to read about
 > have a lower priority than issues encountered when using a recommended
 > configuration.
 
-### Docker for Mac and Docker for Windows
+### Docker Desktop for Mac and Docker Desktop for Windows
 
-Docker for Mac and Docker for Windows are intended for development, rather
+Docker Desktop for Mac and Docker Desktop for Windows are intended for development, rather
 than production. Modifying the storage driver on these platforms is not
 possible.
 
