@@ -32,13 +32,12 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Cosmic 18.10
 - Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
-- Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `arm64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
-
-> **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
+Docker CE is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, `s390x`
+(IBM Z), and `ppc64le` (IBM Power) architectures.
 
 ### Uninstall old versions
 
@@ -58,45 +57,10 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 
 Docker CE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 
-- For new installations on version 4 and higher of the Linux kernel, `overlay2`
-  is supported and preferred over `aufs`.
-- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
-  `overlay2` drivers are not supported by that kernel version.
-
-If you need to use `aufs`, you need to do additional preparation as
-outlined below.
-
-#### Extra steps for aufs
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 and newer</a></li>
-  <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
-</ul>
-<div class="tab-content">
-<div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
-
-For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
-and Docker CE uses the `overlay2` storage driver by default. If you need
-to use `aufs` instead, you need to configure it manually.
-See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
-
-</div>
-<div id="aufs_prep_trusty" class="tab-pane fade" markdown="1">
-
-Unless you have a strong reason not to, install the
-`linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
-drivers.
-
-```bash
-$ sudo apt-get update
-
-$ sudo apt-get install \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
-```
-
-</div>
-</div> <!-- tab-content -->
+For new installations on version 4 and higher of the Linux kernel, `overlay2`
+is supported and preferred over `aufs`. Docker CE uses the `overlay2`
+storage driver by default. If you need to use `aufs` instead, you need to
+configure it manually. See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
 ## Install Docker CE
 
@@ -170,7 +134,7 @@ the repository.
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
     > like Linux Mint, you might need to change `$(lsb_release -cs)`
     > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Rafaela`, you could use `trusty`.
+    >  `Linux Mint Tessa`, you could use `bionic`.
 
 
     <ul class="nav nav-tabs">
