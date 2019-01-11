@@ -92,10 +92,6 @@ guides:
     - title: Microsoft Windows
       path: /docker-for-windows/install/
       nosync: true
-    - sectiontitle: Docker CE Edge releases
-      section:
-      - path: /edge/
-        title: Overview
     - sectiontitle: Docker Toolbox (legacy)
       section:
       - path: /toolbox/overview/
