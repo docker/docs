@@ -64,7 +64,7 @@ while read i; do
 done < <(cat ${SOURCE}/_config.yml |grep '_version:' |grep '^[a-z].*')
 
 # Replace variable in toc.yml with value from above
-sedi "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" ${SOURCE}/_data/toc.yaml
+sedi "s/{{ site.latest_engine_api_version }}/$latest_engine_api_version/g" ${SOURCE}/_data/toc.yaml
 
 # Engine stable
 ENGINE_SVN_BRANCH="branches/18.09"

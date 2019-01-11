@@ -29,7 +29,7 @@ running different versions.
 
 ```shell
 $ docker --version
-Docker version {{ site.docker_ce_stable_version }}, build c97c6d6
+Docker version {{ site.docker_ce_version }}, build c97c6d6
 
 $ docker-compose --version
 docker-compose version {{ site.compose_version }}, build 8dd22a9

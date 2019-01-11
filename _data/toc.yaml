@@ -970,7 +970,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v{{ site.latest_stable_docker_engine_api_version }} reference (latest stable)
+      title: v{{ site.latest_engine_api_version }} reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/

@@ -149,7 +149,7 @@ from the repository.
     ```bash
     $ dnf list docker-ce  --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc26                              docker-ce-stable
+    docker-ce.x86_64  {{ site.docker_ce_version }}.0.fc26                              docker-ce-stable
     ```
 
     The list returned depends on which repositories are enabled, and is specific
