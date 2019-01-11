@@ -25,8 +25,8 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a new directory for your application.
 
     This directory is the context of your docker-compose project. For
-    [Docker for Windows](/docker-for-windows/#/shared-drives) and
-    [Docker for Mac](/docker-for-mac/#/file-sharing), you
+    [Docker Desktop for Windows](/docker-for-windows/#/shared-drives) and
+    [Docker Desktop for Mac](/docker-for-mac/#/file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `aspnetcore-build` Docker image to generate a
@@ -37,7 +37,7 @@ configure this app to use our SQL Server database, and then create a
     $ docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new mvc --auth Individual
     ```
 
-    > **Note**: If running in Docker for Windows, make sure to use Powershell
+    > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
     or specify the absolute path of your app directory.
 
 1.  Create a `Dockerfile` within your app directory and add the following content:
@@ -170,8 +170,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker for Mac](/docker-for-mac/#/advanced) and
-    [Docker for Windows](/docker-for-windows/#/advanced).
+    [Docker Desktop for Mac](/docker-for-mac/#/advanced) and
+    [Docker Desktop for Windows](/docker-for-windows/#/advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able
