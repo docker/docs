@@ -137,13 +137,13 @@ from the repository.
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
 
-   > ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+   > ***NOTE:*** If you need to run something other than Docker EE 2.0, please see the following instructions:
    > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
    > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
    > UCP, and DTR).
 
     ```bash
-    $ DOCKER_EE_VERSION=<YOUR_VERSION>
+    $ DOCKER_EE_VERSION=18.09
     ```
 
 5.  Add Docker's official GPG key using your customer Docker EE repository URL:
@@ -173,46 +173,12 @@ from the repository.
     > Ubuntu distribution, such as `xenial`.
     >
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64el_repo">IBM Power (ppc64el)</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
+       "deb [arch=$(dpkg --print-architecture)] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION stable"
-       
+       stable-$DOCKER_EE_VERSION"
     ```
-
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
-       $(lsb_release -cs) \
-       $DOCKER_EE_VERSION stable"
-
-    ```
-
-    </div>
-    <div id="ppc64el_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
-       $(lsb_release -cs) \
-       $DOCKER_EE_VERSION stable"
-
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker EE
 
