@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_pause
 title: docker pause
+redirect_from:
+  - /edge/engine/reference/commandline/pause/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

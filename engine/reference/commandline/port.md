@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_port
 title: docker port
+redirect_from:
+  - /edge/engine/reference/commandline/port/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

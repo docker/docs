@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_manifest
 title: docker manifest
+redirect_from:
+  - /edge/engine/reference/commandline/manifest/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

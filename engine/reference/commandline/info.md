@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_info
 title: docker info
+redirect_from:
+  - /edge/engine/reference/commandline/info/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

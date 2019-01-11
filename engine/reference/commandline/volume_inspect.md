@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_volume_inspect
 title: docker volume inspect
+redirect_from:
+  - /edge/engine/reference/commandline/volume_inspect/
 ---
 
 <!--

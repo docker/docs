@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_plugin_rm
 title: docker plugin rm
+redirect_from:
+  - /edge/engine/reference/commandline/plugin_rm/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

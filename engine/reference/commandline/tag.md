@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_tag
 title: docker tag
+redirect_from:
+  - /edge/engine/reference/commandline/tag/
 ---
 
 <!--

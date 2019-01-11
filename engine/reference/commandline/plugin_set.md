@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_plugin_set
 title: docker plugin set
+redirect_from:
+  - /edge/engine/reference/commandline/plugin_set/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

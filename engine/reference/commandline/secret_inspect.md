@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_secret_inspect
 title: docker secret inspect
+redirect_from:
+  - /edge/engine/reference/commandline/secret_inspect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

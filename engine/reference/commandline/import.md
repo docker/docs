@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_import
 title: docker import
+redirect_from:
+  - /edge/engine/reference/commandline/import/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

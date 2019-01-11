@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_checkpoint_create
 title: docker checkpoint create
+redirect_from:
+  - /edge/engine/reference/commandline/checkpoint_create/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

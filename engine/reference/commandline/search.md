@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_search
 title: docker search
+redirect_from:
+  - /edge/engine/reference/commandline/search/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

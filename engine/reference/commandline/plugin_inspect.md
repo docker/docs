@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_plugin_inspect
 title: docker plugin inspect
+redirect_from:
+  - /edge/engine/reference/commandline/plugin_inspect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

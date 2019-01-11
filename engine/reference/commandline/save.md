@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_save
 title: docker save
+redirect_from:
+  - /edge/engine/reference/commandline/save/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

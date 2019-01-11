@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_node_update
 title: docker node update
+redirect_from:
+  - /edge/engine/reference/commandline/node_update/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

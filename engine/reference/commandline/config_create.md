@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_config_create
 title: docker config create
+redirect_from:
+  - /edge/engine/reference/commandline/config_create/
 ---
 
 <!--

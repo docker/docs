@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_images
 title: docker images
+redirect_from:
+  - /edge/engine/reference/commandline/images/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

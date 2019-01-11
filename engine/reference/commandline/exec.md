@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_exec
 title: docker exec
+redirect_from:
+  - /edge/engine/reference/commandline/exec/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

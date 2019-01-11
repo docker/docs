@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_manifest_inspect
 title: docker manifest inspect
+redirect_from:
+  - /edge/engine/reference/commandline/manifest_inspect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

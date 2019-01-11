@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_export
 title: docker export
+redirect_from:
+  - /edge/engine/reference/commandline/export/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

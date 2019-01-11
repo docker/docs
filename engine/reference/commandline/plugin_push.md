@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_plugin_push
 title: docker plugin push
+redirect_from:
+  - /edge/engine/reference/commandline/plugin_push/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

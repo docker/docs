@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_update
 title: docker update
+redirect_from:
+  - /edge/engine/reference/commandline/update/
 ---
 
 <!--

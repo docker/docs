@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_ps
 title: docker ps
+redirect_from:
+  - /edge/engine/reference/commandline/ps/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

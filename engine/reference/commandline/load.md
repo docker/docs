@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_load
 title: docker load
+redirect_from:
+  - /edge/engine/reference/commandline/load/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

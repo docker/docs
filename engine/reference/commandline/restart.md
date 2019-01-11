@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_restart
 title: docker restart
+redirect_from:
+  - /edge/engine/reference/commandline/restart/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

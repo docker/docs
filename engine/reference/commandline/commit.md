@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_commit
 title: docker commit
+redirect_from:
+  - /edge/engine/reference/commandline/commit/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

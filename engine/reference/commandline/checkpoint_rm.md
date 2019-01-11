@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_checkpoint_rm
 title: docker checkpoint rm
+redirect_from:
+  - /edge/engine/reference/commandline/checkpoint_rm/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

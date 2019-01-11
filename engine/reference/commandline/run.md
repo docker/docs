@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_run
 title: docker run
+redirect_from:
+  - /edge/engine/reference/commandline/run/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_config
 title: docker config
+redirect_from:
+  - /edge/engine/reference/commandline/config/
 ---
 
 <!--

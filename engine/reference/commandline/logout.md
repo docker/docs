@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_logout
 title: docker logout
+redirect_from:
+  - /edge/engine/reference/commandline/logout/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

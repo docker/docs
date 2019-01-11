@@ -3,7 +3,8 @@ datafolder: engine-cli
 datafile: docker
 title: docker
 redirect_from:
-- /engine/reference/commandline/
+  - /engine/reference/commandline/
+  - /edge/engine/reference/commandline/
 ---
 
 <!--

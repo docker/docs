@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_kill
 title: docker kill
+redirect_from:
+  - /edge/engine/reference/commandline/kill/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

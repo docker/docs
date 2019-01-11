@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_secret
 title: docker secret
+redirect_from:
+  - /edge/engine/reference/commandline/secret/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

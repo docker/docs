@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_network_inspect
 title: docker network inspect
+redirect_from:
+  - /edge/engine/reference/commandline/network_inspect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

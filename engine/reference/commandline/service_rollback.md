@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_service_rollback
 title: docker service rollback
+redirect_from:
+  - /edge/engine/reference/commandline/service_rollback/
 ---
 
 <!--

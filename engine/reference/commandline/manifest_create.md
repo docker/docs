@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_manifest_create
 title: docker manifest create
+redirect_from:
+  - /edge/engine/reference/commandline/manifest_create/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_service_inspect
 title: docker service inspect
+redirect_from:
+  - /edge/engine/reference/commandline/service_inspect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

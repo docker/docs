@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_rm
 title: docker rm
+redirect_from:
+  - /edge/engine/reference/commandline/rm/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

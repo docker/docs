@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_service_scale
 title: docker service scale
+redirect_from:
+  - /edge/engine/reference/commandline/service_scale/
 ---
 
 <!--

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_cp
 title: docker cp
+redirect_from:
+  - /edge/engine/reference/commandline/cp/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

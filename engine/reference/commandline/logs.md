@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_logs
 title: docker logs
+redirect_from:
+  - /edge/engine/reference/commandline/logs/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

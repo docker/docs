@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_stop
 title: docker stop
+redirect_from:
+  - /edge/engine/reference/commandline/stop/
 ---
 
 <!--

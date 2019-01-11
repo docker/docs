@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_history
 title: docker history
+redirect_from:
+  - /edge/engine/reference/commandline/history/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

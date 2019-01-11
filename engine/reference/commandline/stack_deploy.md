@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_stack_deploy
 title: docker stack deploy
+redirect_from:
+  - /edge/engine/reference/commandline/stack_deploy/
 ---
 
 <!--

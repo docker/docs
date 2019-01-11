@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_manifest_annotate
 title: docker manifest annotate
+redirect_from:
+  - /edge/engine/reference/commandline/manifest_annotate/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

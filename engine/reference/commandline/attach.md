@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_attach
 title: docker attach
+redirect_from:
+  - /edge/engine/reference/commandline/attach/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

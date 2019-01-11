@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_network_connect
 title: docker network connect
+redirect_from:
+  - /edge/engine/reference/commandline/network_connect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

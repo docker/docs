@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_network_create
 title: docker network create
+redirect_from:
+  - /edge/engine/reference/commandline/network_create/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

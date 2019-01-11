@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_network_disconnect
 title: docker network disconnect
+redirect_from:
+  - /edge/engine/reference/commandline/network_disconnect/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

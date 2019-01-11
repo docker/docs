@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_secret_rm
 title: docker secret rm
+redirect_from:
+  - /edge/engine/reference/commandline/secret_rm/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

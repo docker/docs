@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_rename
 title: docker rename
+redirect_from:
+  - /edge/engine/reference/commandline/rename/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

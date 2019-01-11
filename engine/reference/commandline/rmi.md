@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_rmi
 title: docker rmi
+redirect_from:
+  - /edge/engine/reference/commandline/rmi/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_system
 title: docker system
+redirect_from:
+  - /edge/engine/reference/commandline/system/
 ---
 
 <!--

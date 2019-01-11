@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_node_promote
 title: docker node promote
+redirect_from:
+  - /edge/engine/reference/commandline/node_promote/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

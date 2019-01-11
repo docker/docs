@@ -21,7 +21,7 @@ The output files are composed from two sources:
 # Updating the YAML files
 
 The process for generating the YAML files is still in flux. Check with
-@thajestah or @frenchben. Be sure to generate the YAML files with the correct
+@thaJeztah. Be sure to generate the YAML files with the correct
 branch of `docker/docker` checked out (probably not `master`).
 
 After generating the YAML files, replace the YAML files in

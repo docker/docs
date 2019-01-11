@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_service
 title: docker service
+redirect_from:
+  - /edge/engine/reference/commandline/service/
 ---
 
 <!--

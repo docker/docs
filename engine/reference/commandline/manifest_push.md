@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_manifest_push
 title: docker manifest push
+redirect_from:
+  - /edge/engine/reference/commandline/manifest_push/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

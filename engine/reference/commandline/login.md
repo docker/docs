@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_login
 title: docker login
+redirect_from:
+  - /edge/engine/reference/commandline/login/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
