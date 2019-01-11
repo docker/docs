@@ -11,14 +11,14 @@ redirect_from:
 - /engine/installation/mac/
 - /docker-for-mac/index/
 - /docker-for-mac/osx/
-title: Get started with Docker for Mac
+title: Get started with Docker Desktop for Mac
 ---
 
-Welcome to Docker for Mac! Docker is a full development platform for creating
-containerized apps, and Docker for Mac is the best way to get started with
+Welcome to Docker Desktop for Mac! Docker is a full development platform for creating
+containerized apps, and Docker Desktop for Mac is the best way to get started with
 Docker _on a Mac_.
 
-> See [Install Docker for Mac](install.md){: target="_blank" class="_"} for
+> See [Install Docker Desktop for Mac](install.md){: target="_blank" class="_"} for
 > information on system requirements and stable & edge channels.
 
 ## Check versions
@@ -119,7 +119,7 @@ General settings are:
   manually by choosing ![whale menu](images/whale-x.png){: .inline} → **Check
   for Updates**.
 
-- **Include VM in Time Machine backups** backs up the Docker for Mac virtual
+- **Include VM in Time Machine backups** backs up the Docker Desktop for Mac virtual
   machine. (Disabled by default.)
 
 - **Securely store Docker logins in MacOS keychain** stores your Docker login
@@ -167,11 +167,11 @@ settings-advanced](images/menu/prefs-advanced.png){:width="400px"}
 
 Advanced settings are:
 
-**CPUs**: By default, Docker for Mac is set to use half the number of processors
+**CPUs**: By default, Docker Desktop for Mac is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 
-**Memory**: By default, Docker for Mac is set to use `2` GB runtime memory,
+**Memory**: By default, Docker Desktop for Mac is set to use `2` GB runtime memory,
 allocated from the total available memory on your Mac. To increase RAM, set this
 to a higher number; to decrease it, lower the number.
 
@@ -190,7 +190,7 @@ the existing image or replace it.
 
 ### Proxies
 
-Docker for Mac detects HTTP/HTTPS Proxy Settings from macOS and automatically
+Docker Desktop for Mac detects HTTP/HTTPS Proxy Settings from macOS and automatically
 propagates these to Docker and to your containers. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
@@ -234,10 +234,10 @@ Select **Basic** to configure the daemon with interactive settings, or select
 
 #### Experimental features
 
-Both Docker for Mac Stable and Edge releases have experimental features enabled
+Both Docker Desktop for Mac Stable and Edge releases have experimental features enabled
 on Docker Engine, as described [Docker Experimental Features
 README](https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md){:
-target="_blank" class="_"}. If you uncheck **experimental mode**, Docker for Mac
+target="_blank" class="_"}. If you uncheck **experimental mode**, Docker Desktop for Mac
 uses the current generally available release of Docker Engine.
 
 > Don't enable experimental features in production
@@ -288,7 +288,7 @@ changes when asked.
 
 ### Kubernetes
 
-In Docker for Mac [17.12 Edge
+In Docker Desktop for Mac [17.12 Edge
 (mac45)](/docker-for-mac/edge-relese-notes/#docker-community-edition-17120-ce-mac45-2018-01-05)
 and higher, and [18.06 Stable
 (mac70)](/docker-for-mac/release-notes/#docker-community-edition-18060-ce-mac70-2018-07-25)
@@ -323,7 +323,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   `/usr/local/bin/kubectl` command is installed on your Mac.
 
   When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom right of the Docker for Mac Preferences dialog.
+  at the bottom right of the Docker Desktop for Mac Preferences dialog.
 
   ![Installation
   complete](images/kubernetes/kubernetes-install-complete.png){:width="400px"}
@@ -343,7 +343,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   Kubernetes containers are stopped and removed, and the
   `/usr/local/bin/kubectl` command is removed.
 
-  For more about using the Kubernetes integration with Docker for Mac, see
+  For more about using the Kubernetes integration with Docker Desktop for Mac, see
   [Deploy on Kubernetes](kubernetes.md){:target="_blank" class="_"}.
 
 ### Reset
@@ -362,12 +362,12 @@ Reset settings are:
   reset to factory defaults (which would cause you to lose settings).
 
 * **Reset to factory defaults** - Choose this option to reset all options on
-  Docker for Mac to its initial state, the same as when it was first installed.
+  Docker Desktop for Mac to its initial state, the same as when it was first installed.
 
-  * **Uninstall** - Choose this option to remove Docker for Mac from your
+  * **Uninstall** - Choose this option to remove Docker Desktop for Mac from your
     system.
 
-> Uninstall Docker for Mac from the commandline
+> Uninstall Docker Desktop for Mac from the commandline
 >
 >To uninstall Docker from Mac from a terminal, run: `<DockerforMacPath>
 >--uninstall`. If your instance is installed in the default location, this
@@ -389,13 +389,13 @@ registries) to your Docker daemon.
 
 ### Add custom CA certificates (server side)
 
-All trusted CAs (root or intermediate) are supported. Docker for Mac creates a
+All trusted CAs (root or intermediate) are supported. Docker Desktop for Mac creates a
 certificate bundle of all user-trusted CAs based on the Mac Keychain, and
 appends it to Moby trusted certificates. So if an enterprise SSL certificate is
-trusted by the user on the host, it is trusted by Docker for Mac.
+trusted by the user on the host, it is trusted by Docker Desktop for Mac.
 
 To manually add a custom, self-signed certificate, start by adding the
-certificate to the macOS keychain, which is picked up by Docker for Mac. Here is
+certificate to the macOS keychain, which is picked up by Docker Desktop for Mac. Here is
 an example.
 
 ```bash
@@ -412,12 +412,12 @@ $ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychai
 See also, [Directory structures for
 certificates](#directory-structures-for-certificates).
 
-> **Note:** You need to restart Docker for Mac after making any changes to the
+> **Note:** You need to restart Docker Desktop for Mac after making any changes to the
 keychain or to the `~/.docker/certs.d` directory in order for the changes to
 take effect.
 
 For a complete explanation of how to do this, see the blog post [Adding
-Self-signed Registry Certs to Docker & Docker for
+Self-signed Registry Certs to Docker & Docker Desktop for
 Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/){:target="_blank"
 class="_"}.
 
@@ -427,16 +427,16 @@ You can put your client certificates in
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
+When the Docker Desktop for Mac application starts up, it copies the `~/.docker/certs.d`
 folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
 for Mac `xhyve` virtual machine).
 
-> * You need to restart Docker for Mac after making any changes to the keychain
+> * You need to restart Docker Desktop for Mac after making any changes to the keychain
 >   or to the `~/.docker/certs.d` directory in order for the changes to take
 >   effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
->   Daemon](index.md#docker-daemon)). Docker for Mac ignores certificates listed
+>   Daemon](index.md#docker-daemon)). Docker Desktop for Mac ignores certificates listed
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.
@@ -483,7 +483,7 @@ topics.
 
 ## Install shell completion
 
-Docker for Mac comes with scripts to enable completion for the `docker`,
+Docker Desktop for Mac comes with scripts to enable completion for the `docker`,
 `docker-machine`, and `docker-compose` commands. The completion scripts may be
 found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
 installed both in Bash and Zsh.
@@ -521,10 +521,10 @@ ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_do
 ## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Mac
+discussion, log on to our [Docker Desktop for Mac
 forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
 
-To report bugs or problems, log on to [Docker for Mac issues on
+To report bugs or problems, log on to [Docker Desktop for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
 where you can review community reported issues, and file new ones.  See [Logs
 and Troubleshooting](troubleshoot.md) for more details.
@@ -535,16 +535,16 @@ options at the bottom of each docs page.
 ## Docker Hub
 
 You can access your [Docker ID](/docker-id/index.md){:target="_blank"
-class="_"}  account from within Docker for Mac.
+class="_"}  account from within Docker Desktop for Mac.
 
 ![Docker ID](images/docker-cloud.png){:width="550px"}
 
-From the Docker for Mac menu, sign in to Docker Hub with your Docker ID, or
+From the Docker Desktop for Mac menu, sign in to Docker Hub with your Docker ID, or
 create one.
 
 ![Docker ID sign-in](images/menu/sign-in.png){: .with-border width="250px"}
 
-Then use the Docker for Mac menu to create, view, or navigate directly to your
+Then use the Docker Desktop for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
 
 Check out these [Docker Hub topics](/docker-hub/index.md){:target="_blank"
