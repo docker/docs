@@ -1794,13 +1794,13 @@ services:
         constraints: [node.role == manager]
 ```
 
-#### Caching options for volume mounts (Docker for Mac)
+#### Caching options for volume mounts (Docker Desktop for Mac)
 
 On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
 configure container-and-host consistency requirements for bind-mounted
 directories in Compose files to allow for better performance on read/write of
 volume mounts. These options address issues specific to `osxfs` file sharing,
-and therefore are only applicable on Docker for Mac.
+and therefore are only applicable on Docker Desktop for Mac.
 
 The flags are:
 
@@ -1828,7 +1828,7 @@ services:
 ```
 
 Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker for Mac topic [Performance tuning for
+`docker run` counterparts is in the Docker Desktop for Mac topic [Performance tuning for
 volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 
 ### restart
