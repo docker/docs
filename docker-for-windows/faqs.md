@@ -101,7 +101,7 @@ response.
 #### How can I opt out of sending my usage data?
 
 If you do not want auto-send of usage data, use the Stable channel. For more
-information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Windows?").
+information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker Desktop for Windows?").
 
 ### How is personal data handled in Docker Desktop?
 
@@ -160,7 +160,7 @@ For workarounds and to learn more, see
 
 #### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
-Currently, `inotify` does not work on Docker for Windows. This is a known issue.
+Currently, `inotify` does not work on Docker Desktop for Windows. This is a known issue.
 For more information and a temporary workaround, see
 [inotify on shared drives does not work](troubleshoot#inotify-on-shared-drives-does-not-work){: target="_blank" class="_"}
 in [Troubleshooting](troubleshoot).
@@ -266,7 +266,7 @@ available on Home-edition.
 #### Why is Windows 10 required?
 
 Docker Desktop for Windows uses Windows Hyper-V. While older Windows versions have
-Hyper-V, their Hyper-V implementations lack features critical for Docker for
+Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop for
 Windows to work.
 
 #### Why does Docker Desktop for Windows fail to start when firewalls or anti-virus software is installed?
