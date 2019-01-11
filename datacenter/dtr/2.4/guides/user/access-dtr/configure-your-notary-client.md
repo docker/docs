@@ -28,7 +28,7 @@ you're using:
 
 ## Download the Notary CLI client
 
-If you're using Docker for Mac or Docker for Windows, you already have the
+If you're using Docker Desktop for Mac or Docker Desktop for Windows, you already have the
 `notary` command installed.
 
 If you're running Docker on a Linux distribution, you can [download Notary
