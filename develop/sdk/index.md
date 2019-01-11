@@ -131,7 +131,7 @@ You can specify the API version to use, in one of the following ways:
 ### Docker EE and CE API mismatch
 
 If you use Docker EE in production, we recommend using Docker EE in development
-too. If you can't, such as when your developers use Docker for Mac or Docker for
+too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for
 Windows and manually build and push images, then your developers need to configure
 their Docker clients to use the same version of the API reported by their Docker
 daemon. This prevents the developer from using a feature that is not yet supported
