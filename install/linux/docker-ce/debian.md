@@ -27,13 +27,10 @@ and distributions for different Docker editions, see
 To install Docker CE, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Buster 10 (Docker CE 17.11 Edge only)
+- Buster 10
 - Stretch 9 (stable) / Raspbian Stretch
-- Jessie 8 (LTS) / Raspbian Jessie
-- Wheezy 7.7 (LTS)
 
-Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures for Jessie and
-Stretch.
+Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
 ### Uninstall old versions
 
@@ -48,20 +45,6 @@ It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
-
-### Extra steps for Wheezy 7.7
-
-- You need at least version 3.10 of the Linux kernel. Debian Wheezy ships with
-  version 3.2, so you may need to
-  [update the kernel](https://wiki.debian.org/HowToUpgradeKernel){: target="_blank" class="_" }.
-  To check your kernel version:
-
-  ```bash
-  $ uname -r
-  ```
-
-- Enable the `backports` repository. See the
-  [Debian documentation](https://backports.debian.org/Instructions/){: target="_blank" class"_"}.
 
 ## Install Docker CE
 
@@ -104,13 +87,6 @@ from the repository.
 
 2.  Install packages to allow `apt` to use a repository over HTTPS:
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#jessie">Jessie or newer</a></li>
-      <li><a data-toggle="tab" data-target="#wheezy">Wheezy or older</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="jessie" class="tab-pane fade in active" markdown="1">
-
     ```bash
     $ sudo apt-get install \
          apt-transport-https \
@@ -119,20 +95,6 @@ from the repository.
          gnupg2 \
          software-properties-common
     ```
-
-    </div>
-    <div id="wheezy" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo apt-get install \
-         apt-transport-https \
-         ca-certificates \
-         curl \
-         python-software-properties
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 3.  Add Docker's official GPG key:
 
@@ -160,7 +122,7 @@ from the repository.
     word `stable` in the commands below.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `jessie`.
+    > Debian distribution, such as `stretch`.
 
     To also add the **edge** repository, add `edge` after `stable` on the last
     line of the command.
@@ -201,17 +163,6 @@ from the repository.
     </div>
     </div> <!-- tab-content -->
 
-5.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
-    repository that does not exist. You need to comment out this repository or
-    running `apt-get update` fails. Edit `/etc/apt/sources.list`. Find the
-    line like the following, and comment it out or remove it:
-
-    ```none
-    deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable
-    ```
-
-    Save and exit the file.
-
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
 
@@ -248,7 +199,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
+    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian stretch/stable amd64 Packages
     ```
 
     b. Install a specific version by its fully qualified package name, which is
