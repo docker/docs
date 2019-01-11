@@ -23,7 +23,7 @@ technical support for various subscription levels.
 
 If you encounter problems for which you do not find solutions in this
 documentation, on [Docker Desktop for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), or the [Docker for Win
+GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
 troubleshoot the log data.
 
@@ -474,12 +474,12 @@ For more information, see:
 Docker Desktop for Windows can run inside a Windows 10 virtual machine (VM) running on
 apps like Parallels or VMware Fusion on a Mac provided that the VM is properly
 configured. However, problems and intermittent failures may still occur due to
-the way these apps virtualize the hardware. For these reasons, _**Docker for
+the way these apps virtualize the hardware. For these reasons, _**Docker Desktop for
 Windows is not supported for nested virtualization scenarios**_. It might work
 in some cases, and not in others.
 
 The better solution is to run Docker Desktop for Windows natively on a Windows system
-(to work with Windows or Linux containers), or Docker for Mac on Mac to work
+(to work with Windows or Linux containers), or Docker Desktop for Mac on Mac to work
 with Linux containers.
 
 #### If you still want to use nested virtualization
@@ -523,7 +523,7 @@ Discussion thread on GitHub at [Docker for Windows issue
 
 ### Networking issues
 
-Some users have reported problems connecting to Docker Hub on the Docker for
+Some users have reported problems connecting to Docker Hub on the Docker Desktop for
 Windows stable version. (See GitHub issue
 [22567](https://github.com/moby/moby/issues/22567).)
 
