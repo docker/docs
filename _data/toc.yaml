@@ -528,9 +528,6 @@ reference:
   - title: Compose file reference
     path: /compose/compose-file/
     nosync: true
-  - title: Cloud stack file reference
-    path: /docker-cloud/apps/stack-yaml-reference/
-    nosync: true
 
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
