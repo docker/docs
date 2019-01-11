@@ -1,7 +1,7 @@
 ---
 description: Change log / release notes per edge release
-keywords: Docker for Windows, edge, release notes
-title: Docker for Windows Edge Release notes
+keywords: Docker Desktop for Windows, edge, release notes
+title: Docker Desktop for Windows Edge Release notes
 ---
 
 Here are the main improvements and issues per edge release, starting with the
