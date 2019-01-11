@@ -274,7 +274,7 @@ If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified drive.
 
-You can select to **Share it**, in which case it is added your Docker for
+You can select to **Share it**, in which case it is added your Docker Desktop for
 Windows [Shared Drives list](index.md#shared-drives) and available to
 containers. Alternatively, you can opt not to share it by hitting Cancel.
 
@@ -288,7 +288,7 @@ The Linux VM restarts after changing the settings on the Advanced tab. This take
 
 * **CPUs** - Change the number of processors assigned to the Linux VM.
 
-* **Memory** - Change the amount of memory the Docker for Windows Linux VM uses.
+* **Memory** - Change the amount of memory the Docker Desktop for Windows Linux VM uses.
 
 ### Network
 
