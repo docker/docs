@@ -6,23 +6,23 @@ redirect_from:
 title: Frequently asked questions (FAQ)
 ---
 
-**Looking for popular FAQs on Docker for Mac?** Check out the
+**Looking for popular FAQs on Docker Desktop for Mac?** Check out the
 [Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
 for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ## Questions about Docker.app
 ### Stable and Edge channels
 
-**Q: How do I get the Stable or Edge version of Docker for Mac?**
+**Q: How do I get the Stable or Edge version of Docker Desktop for Mac?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
+[Download Docker Desktop for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
 
 This topic also has more information about the two channels.
 
-**Q: What is the difference between the Stable and Edge versions of Docker for Mac?**
+**Q: What is the difference between the Stable and Edge versions of Docker Desktop for Mac?**
 
-A: Two different download channels are available for Docker for Mac:
+A: Two different download channels are available for Docker Desktop for Mac:
 
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
