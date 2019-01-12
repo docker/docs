@@ -81,9 +81,9 @@ You can install Docker CE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker CE for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install and update Docker from
-the repository.
+Before you install Docker CE for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker
+from the repository.
 
 #### Set up the repository
 
@@ -102,6 +102,7 @@ the repository.
         apt-transport-https \
         ca-certificates \
         curl \
+        gnupg2 \
         software-properties-common
     ```
 
@@ -213,7 +214,6 @@ the repository.
 
     [Learn about **stable** and **edge** channels](/install/index.md).
 
-
 #### Install Docker CE
 
 1.  Update the `apt` package index.
@@ -250,7 +250,7 @@ the repository.
        `docker-ce=18.03.0~ce-0~ubuntu`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION>
+    $ sudo apt-get install docker-ce=<VERSION_STRING>
     ```
 
     The Docker daemon starts automatically.
@@ -259,7 +259,7 @@ the repository.
     image.
 
     ```bash
-    $ sudo docker container run hello-world
+    $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -305,7 +305,7 @@ a new file each time you want to upgrade Docker CE.
     image.
 
     ```bash
-    $ sudo docker container run hello-world
+    $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -313,9 +313,9 @@ a new file each time you want to upgrade Docker CE.
 
 Docker CE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+to allow non-privileged users to run Docker commands and for other optional
+configuration steps.
 
 #### Upgrade Docker CE
 
@@ -345,5 +345,4 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
 - Continue with the [User Guide](/engine/userguide/index.md).

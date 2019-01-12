@@ -77,7 +77,7 @@ from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = 'https://download.docker.com/linux/debian' %}
+{% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
 1.  Update the `apt` package index:
 
@@ -89,17 +89,17 @@ from the repository.
 
     ```bash
     $ sudo apt-get install \
-         apt-transport-https \
-         ca-certificates \
-         curl \
-         gnupg2 \
-         software-properties-common
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg2 \
+        software-properties-common
     ```
 
 3.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
     ```
 
     Verify that you now have the key with the fingerprint
@@ -146,18 +146,20 @@ from the repository.
     <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ echo "deb [arch=armhf] {{ download-url-base }} \
-         $(lsb_release -cs) stable" | \
-        sudo tee /etc/apt/sources.list.d/docker.list
+    $ sudo add-apt-repository \
+       "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
     ```
 
     </div>
     <div id="arm64_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ echo "deb [arch=arm64] {{ download-url-base }} \
-         $(lsb_release -cs) stable" | \
-        sudo tee /etc/apt/sources.list.d/docker.list
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
     ```
 
     </div>
@@ -199,7 +201,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian stretch/stable amd64 Packages
+    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | {{ download-url-base }}  stretch/stable amd64 Packages
     ```
 
     b. Install a specific version by its fully qualified package name, which is
@@ -232,8 +234,8 @@ from the repository.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. The `docker` group is created but no users
-are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
+are added to it. You need to use `sudo` to run Docker commands.
+Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps. For Raspbian, you can optionally
 [install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
@@ -279,15 +281,15 @@ a new file each time you want to upgrade Docker.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. The `docker` group is created but no users
-are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+are added to it. You need to use `sudo` to run Docker commands.
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps. For Raspbian, you can optionally
 [install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
 
 #### Upgrade Docker CE
 
-To upgrade Docker, download the newer package file and repeat the
+To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
@@ -331,5 +333,4 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
 - Continue with the [User Guide](/engine/userguide/index.md).
