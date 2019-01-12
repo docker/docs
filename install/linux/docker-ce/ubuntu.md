@@ -245,8 +245,6 @@ from the repository.
     $ sudo apt-get install docker-ce=<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
-
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
