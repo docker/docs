@@ -229,8 +229,7 @@ Docker CE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
-steps. For Raspbian, you can optionally
-[install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
+steps.
 
 #### Upgrade Docker CE
 
@@ -276,8 +275,7 @@ Docker CE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
-configuration steps. For Raspbian, you can optionally
-[install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
+configuration steps.
 
 #### Upgrade Docker CE
 
@@ -285,24 +283,6 @@ To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
-
-## Install Docker Compose for Raspbian
-
-You can install Docker Compose using `pip`:
-
-```bash
-$ sudo pip install docker-compose
-```
-
-[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static
-binary of `docker-compose` for Raspbian. It may not always be up to date, but if
-space is at a premium, you may find it useful. To use it, first follow Hypriot's
-[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
-then run the following command:
-
-```bash
-sudo apt-get install docker-compose
-```
 
 ## Uninstall Docker CE
 
