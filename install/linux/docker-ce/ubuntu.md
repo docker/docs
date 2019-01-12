@@ -143,8 +143,8 @@ from the repository.
       <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
       <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
       <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64le_repo">ppc64le (IBM Power)</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">s390x (IBM Z)</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
