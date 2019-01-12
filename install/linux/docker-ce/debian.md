@@ -220,16 +220,8 @@ from the repository.
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
-    **x86_64**:
-
     ```bash
     $ sudo docker run hello-world
-    ```
-
-    **armhf**:
-
-    ```bash
-    $ sudo docker run armhf/hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
