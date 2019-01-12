@@ -41,8 +41,8 @@ Docker CE is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, `s390x`
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them:
+Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+If these are installed, uninstall them:
 
 ```bash
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
