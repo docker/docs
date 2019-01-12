@@ -140,9 +140,8 @@ from the repository.
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
+      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
       <li><a data-toggle="tab" data-target="#ppc64le_repo">ppc64le (IBM Power)</a></li>
       <li><a data-toggle="tab" data-target="#s390x_repo">s390x (IBM Z)</a></li>
     </ul>
@@ -157,17 +156,7 @@ from the repository.
     ```
 
     </div>
-    <div id="arm64" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=arm64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
-
-    </div>
-    <div id="armhf" class="tab-pane fade" markdown="1">
+    <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
@@ -177,7 +166,7 @@ from the repository.
     ```
 
     </div>
-    <div id="arm64" class="tab-pane fade" markdown="1">
+    <div id="arm64_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
