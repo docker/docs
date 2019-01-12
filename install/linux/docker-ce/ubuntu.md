@@ -231,12 +231,15 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
+      docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+      ...
     ```
 
-    b. Install a specific version by its fully qualified package name, which is
-       package name (`docker-ce`) "=" version string (2nd column), for example,
-       `docker-ce=18.03.0~ce-0~ubuntu`.
+    b. Install a specific version using the version string from the second column,
+       for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION_STRING>
@@ -270,12 +273,12 @@ to install.
 
 If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker CE.
+a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
-    choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
-    `arm64`, `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the
-    Docker version you want to install.
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+    choose your Ubuntu version, browse to `pool/stable/`, choose `amd64`,
+    `armhf`, `arm64`, `ppc64el`, or `s390x`, and download the `.deb` file for the
+    Docker CE version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.

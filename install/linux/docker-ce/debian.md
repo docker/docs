@@ -201,13 +201,15 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | {{ download-url-base }}  stretch/stable amd64 Packages
+      docker-ce | 5:18.09.1~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
+      docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
+      docker-ce | 18.06.1~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
+      docker-ce | 18.06.0~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
+      ...
     ```
 
-    b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by an equals sign (`=`), for example,
-       `docker-ce=18.03.0.ce`.
+    b. Install a specific version using the version string from the second column,
+       for example, `5:18.09.1~3-0~debian-stretch `.
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION_STRING>
@@ -252,10 +254,10 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to `{{ download-url-base }}/dists/`,
-    choose your Debian version, browse to `pool/stable/`, choose
-    `amd64`, `armhf`, or `arm64` and download the `.deb` file for the Docker CE version you
-    want to install.
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+    choose your Debian version, browse to `pool/stable/`, choose `amd64`,
+    `armhf`, or `arm64` and download the `.deb` file for the Docker CE version
+    you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
