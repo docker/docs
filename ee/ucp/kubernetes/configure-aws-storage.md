@@ -37,7 +37,7 @@ Instances must have the following [AWS Identity and Access Management](https://d
 
 ### Cluster Configuration
 
-- In addition to your existing [install flags](https://docs.docker.com/reference/ucp/3.0/cli/install/) the cloud provider flag `--cloud-provider=aws` is required at install time.
+- In addition to your existing [install flags](https://docs.docker.com/reference/ucp/3.1/cli/install/) the cloud provider flag `--cloud-provider=aws` is required at install time.
 - The cloud provider can also be enabled post-install through the UCP config. The `ucp-agent` needs to be updated to propogate the new config, as described in [UCP configuration file](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#inspect-and-modify-existing-configuration).
 
 ```

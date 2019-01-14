@@ -35,7 +35,7 @@ for Docker Desktop for Mac, and how the two products can coexist.
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 
-  - macOS El Capitan 10.11 and newer macOS releases are supported. We recommend
+  - macOS Sierra 10.12 and newer macOS releases are supported. We recommend
     upgrading to the latest version of macOS.
 
   - At least 4GB of RAM

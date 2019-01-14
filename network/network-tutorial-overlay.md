@@ -88,7 +88,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-1> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
@@ -97,7 +97,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-2> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```

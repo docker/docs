@@ -1,6 +1,6 @@
 ---
 description: Engine
-keywords: Engine, CE, EE, node, activation, enterprise
+keywords: Engine, CE, EE, node, activation, enterprise, patching
 title: CE-EE Node Activate
 ---
 
@@ -18,6 +18,18 @@ CE-EE Node Activate will apply a license, and switch the Docker engine to the En
 * Windows nodes are not currently supported.
 * Node-level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker.
 * Prior versions of Docker CE do not support this feature.
+
+## Notes on patching after running CE to EE Node Activation
+
+Docker recommends replacing the apt or yum repository from CE with the EE repository that appears 
+on your hub/store account after starting the trial or paid license. This allows apt/yum 
+upgrade operations to work as expected and keep them current as long as your license is still
+valid and has not expired.
+
+> ***NOTE:*** You can use the `docker engine update` command. However, if you continue to use 
+> the CE packages, the OS package will no longer replace the active daemon binary during apt/yum 
+> updates, so you are responsible for performing the `docker engine update` operation periodically 
+> to keep your engine up to date.
 
 ## Docker Engine 18.09 CE to EE Node Activation Process
 

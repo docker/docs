@@ -59,11 +59,11 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     ...
     ```
 
-2.  Start a Dockerized web server. Like the hello-world image above, if the
+2.  Start a Dockerized web server. Like the `hello-world` image above, if the
     image is not found locally, Docker pulls it from Docker Hub.
 
     ```bash
-    $ docker run -d -p 80:80 --name webserver nginx
+    $ docker run --detach --publish=80:80 --name=webserver nginx
     ```
 
 3.  In a web browser, go to `http://localhost/` to view the nginx homepage.
@@ -501,6 +501,21 @@ etc=/Applications/Docker.app/Contents/Resources/etc
 ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
 ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
 ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+```
+
+Add the following to your `~/.bash_profile`:
+
+
+```shell
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+```
+
+OR
+
+```shell
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
 ```
 
 ### Zsh

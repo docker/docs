@@ -23,7 +23,7 @@ title: Get Docker EE for Red Hat Enterprise Linux
 
 This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
 
-- Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`, `s390x`, or `ppc64le` (not ppc64).
+- Use {{ linux-dist-cap }} 64-bit 7.4 and higher on `x86_64`, or `s390x`.
 - Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
 - Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
@@ -32,11 +32,11 @@ This section lists what you need to consider before installing Docker EE. Items 
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4, 7.5), running on one of the following architectures: `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power, little endian format). To ensure you have `ppc64le` (and not `ppc64`), run the command, `uname -m`.
+Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher running on one of the following architectures: `x86_64`, or `s390x` (IBM Z). See [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }) for specific details.
 
-> Little endian format only
+> Little-endian format only
 >
-> On IBM Power systems, Docker EE only supports little endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little endian versions.
+> On IBM Power systems, Docker EE only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
@@ -57,7 +57,7 @@ $ cat /proc/sys/crypto/fips_enabled
 1
 ```
 
-**NOTE:** FIPS is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS-140-2. 
+> ***NOTE:*** FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2. 
 
 To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
 
@@ -119,8 +119,7 @@ $ sudo yum remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine \
-                  docker-ce
+                  docker-engine
 ```
 
 

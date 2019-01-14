@@ -18,6 +18,27 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 2.0.1.0 2019-01-11
+
+[Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
+  - [Kubernetes 1.13.0](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.13.md#v1130)
+  - [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
+  - Golang 1.10.6, fixes CVEs: [CVE-2018-16875](https://www.cvedetails.com/cve/CVE-2018-16875), [CVE-2018-16873](https://www.cvedetails.com/cve/CVE-2018-16873) and [CVE-2018-16874](https://www.cvedetails.com/cve/CVE-2018-16874)
+  
+  WARNING: If you have an existing Kubernetes cluster created with Docker Desktop, this upgrade will reset the cluster. If you need to back up your Kubernetes cluster or persistent volumes you can use [Ark](https://github.com/heptio/ark).
+
+* Bug fixes and minor changes
+  - Fix service log collection in diagnostics
+  - Gather /etc/hosts to help diagnostics
+  - Add 18.09 missing daemon options
+  - Rename Docker for Windows to Docker Desktop
+  - Partially open services ports if possibles
+  - Quit will not check if service is running anymore
+  - Fix UI lock when changing kubernetes state
+
 ### Docker Community Edition 2.0.0.0-win82 2018-12-07
 
 [Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe)

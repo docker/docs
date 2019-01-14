@@ -180,28 +180,28 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-    "io"
+    "context"
     "os"
 
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/pkg/stdcopy"
-
-    "golang.org/x/net/context"
 )
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewEnvClient()
+    cli, err := client.NewClientWithOpts(client.FromEnv)
     if err != nil {
         panic(err)
     }
+    cli.NegotiateAPIVersion(ctx)
 
-    _, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {
         panic(err)
     }
+    io.Copy(os.Stdout, reader)
 
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",

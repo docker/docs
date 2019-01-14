@@ -50,8 +50,9 @@ in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in each
 UCP release. To find the relevant version please see the UCP 
 [Release Notes](../../release-notes). For example for UCP 3.1.0 the tag 
 would be `Orchestrator=Kubernetes:1.11.2`. 
-- The Azure Computer Name needs to match the Node Operating System's Hostname. 
-Note this applies to the FQDN of the host including domain names. 
+- The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine 
+Computer Name and the Node Operating System's Hostname. Note this applies to the 
+FQDN of the host including domain names. 
 - An Azure Service Principal with `Contributor` access to the Azure Resource 
 Group hosting the UCP Nodes. Note, if using a separate networking Resource 
 Group the same Service Principal will need `Network Contributor` access to this 
@@ -68,8 +69,9 @@ objects are being deployed.
 
 ### Azure Configuration File
 
-For Docker UCP to integrate into Microsoft Azure, you need to place an Azure configuration file 
-within each UCP node in your cluster, at `/etc/kubernetes/azure.json`. 
+For Docker UCP to integrate into Microsoft Azure, you need to place an Azure 
+configuration file within each UCP node in your cluster, at 
+`/etc/kubernetes/azure.json`. The `azure.json` file needs 0644 permissions.
 
 See the template below. Note entries that do not contain `****` should not be 
 changed.

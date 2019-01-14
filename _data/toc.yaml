@@ -487,6 +487,8 @@ guides:
       title: NIST SP 800-53
     - path: /compliance/nist/800_190/
       title: NIST SP 800-190
+    - path: /compliance/nist/fips140_2/
+      title: FIPS 140-2
     - path: /compliance/nist/nistir_8176/
       title: NISTIR 8176
     - path: /compliance/nist/itl_october2017/
@@ -525,9 +527,6 @@ reference:
     path: /engine/reference/builder/
   - title: Compose file reference
     path: /compose/compose-file/
-    nosync: true
-  - title: Cloud stack file reference
-    path: /docker-cloud/apps/stack-yaml-reference/
     nosync: true
 
 - sectiontitle: Command-Line Interfaces (CLIs)
@@ -2489,8 +2488,10 @@ manuals:
             path: /ee/dtr/admin/configure/deploy-caches/
           - title: Cache deployment strategy
             path: /ee/dtr/admin/configure/deploy-caches/strategy/
-          - title: Deploy a DTR cache
+          - title: Deploy a DTR cache with Docker Swarm
             path: /ee/dtr/admin/configure/deploy-caches/simple/
+          - title: Deploy a DTR cache with Kubernetes
+            path: /ee/dtr/admin/configure/deploy-caches/simple-kube/
           - title: Configure caches for high availability
             path: /ee/dtr/admin/configure/deploy-caches/high-availability/
           - title: Cache configuration reference

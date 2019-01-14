@@ -36,7 +36,7 @@ versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
+Docker CE is supported on Ubuntu on `x86_64`, `arm64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
 
 > **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
 
@@ -46,7 +46,7 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -175,7 +175,9 @@ the repository.
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
       <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64">arm64</a></li>
       <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
       <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
     </ul>
@@ -190,11 +192,31 @@ the repository.
     ```
 
     </div>
+    <div id="arm64" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
     <div id="armhf" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="arm64" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -273,7 +295,7 @@ the repository.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -299,8 +321,8 @@ a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
     choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
-    `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the Docker
-    version you want to install.
+    `arm64`, `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the
+    Docker version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
@@ -319,7 +341,7 @@ a new file each time you want to upgrade Docker CE.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
