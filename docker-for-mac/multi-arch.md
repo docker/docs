@@ -7,7 +7,7 @@ title: Leverage multi-CPU architecture support
 notoc: true
 ---
 
-Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
+Docker Desktop for Mac provides `binfmt_misc` multi architecture support, so you can run
 containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`,
 and even `s390x`.
 

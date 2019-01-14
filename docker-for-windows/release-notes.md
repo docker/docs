@@ -1,9 +1,9 @@
 ---
 description: Change log / release notes per stable release
-keywords: Docker for Windows, stable, release notes
+keywords: Docker Desktop for Windows, stable, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker for Windows Stable Release notes
+title: Docker Desktop for Windows Stable Release notes
 ---
 
 Here are the main improvements and issues per stable release, starting with the

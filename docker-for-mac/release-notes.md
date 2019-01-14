@@ -1,6 +1,6 @@
 ---
 description: Change log / release notes per Stable release
-keywords: Docker for Mac, stable, release notes
+keywords: Docker Desktop for Mac, stable, release notes
 redirect_from:
 - /mackit/release-notes/
 title: Docker for Mac Stable release notes
@@ -16,7 +16,7 @@ Release notes for _stable_ releases are listed below, [_edge_ release
 notes](edge-release-notes) are also available. (Following the CE release model,
 'beta' releases are called 'edge' releases.) You can learn about both kinds of
 releases, and download stable and edge product installers at [Download Docker
-for Mac](install.md#download-docker-for-mac).
+Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
