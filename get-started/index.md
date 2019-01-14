@@ -82,7 +82,7 @@ Containerization is increasingly popular because containers are:
 - Scalable: You can increase and automatically distribute container replicas.
 - Stackable: You can stack services vertically and on-the-fly.
 
-![Containers are portable](images/laurel-docker-containers.png){:width="300px"}
+![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
 
 ### Images and containers
 
