@@ -95,7 +95,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.0"
+      win_latest_build: "docker-18.09.1"
   - scope:
       path: "datacenter"
     values:
@@ -105,34 +105,34 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.0"
+      dtr_version: "2.6.1"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.6"
+      dtr_version: "2.5.7"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.7"
+      dtr_version: "2.4.8"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.9"
+      dtr_version: "2.3.10"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.12"
+      docker_image: "docker/dtr:2.2.11"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -148,30 +148,29 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.1"
+      ucp_version: "3.1.2"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.1"
-      dtr_version: "2.6.0"
-      dtr_latest_image: "docker/dtr:2.6.0"
+      ucp_version: "3.1.2"
+      dtr_version: "2.6.1"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.7"
+      ucp_version: "3.0.8"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.14"
+      ucp_version: "2.2.15"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
