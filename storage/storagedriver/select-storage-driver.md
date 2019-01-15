@@ -103,7 +103,7 @@ removed in a future release. It is recommended that users of the `overlay` stora
 migrate to `overlay2`.
 
 ²) The `devicemapper` storage driver is deprecated in Docker Engine 18.09, and will be
-removed in a future release. It is recommended that users of the `overlay` storage driver 
+removed in a future release. It is recommended that users of the `devicemapper` storage driver 
 migrate to `overlay2`.
 
 
