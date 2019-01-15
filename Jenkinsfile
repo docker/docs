@@ -71,8 +71,15 @@ pipeline {
                 sh 'unzip -o $UCP' 
               }
               withCredentials([usernamePassword(credentialsId: 'ally-docker', passwordVariable: 'PWD', usernameVariable: 'USR')]) {
-                echo 'would ssh into machine here'
-                echo 'would update docs-prod service here'
+                sh """
+                  cd ucp-bundle-success_bot
+                  export DOCKER_TLS_VERIFY=1
+                  export COMPOSE_TLS_VERSION=TLSv1_2
+                  export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
+                  export DOCKER_HOST=tcp://ucp.corp-us-east-1.aws.dckr.io:443
+                  docker login -u ${USR} -p ${PWD}
+                  docker service update --detach=false --force --image docs/docker.github.io:${VERSION} docs-docker-com_docs --with-registry-auth
+                """
               }
             }
           }
