@@ -5,7 +5,9 @@ pipeline {
   agent none
   stages {
     stage( 'docker.github.io' ) {
-      agent { label 'ubuntu-1604-aufs-stable' }
+      agent {
+        label 'ubuntu-1604-aufs-stable'
+      }
       environment {
         VERSION = "test-jenkins"
       }
@@ -55,7 +57,7 @@ pipeline {
                   export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
                   export DOCKER_HOST=tcp://ucp.corp-us-east-1.aws.dckr.io:443
                   docker login -u ${USR} -p ${PWD}
-                  docker service update -d --force --image docs/docker.github.io:${VERSION} docs-stage-docker-com_docs --with-registry-auth
+                  docker service update --detach=false --force --image docs/docker.github.io:${VERSION} docs-stage-docker-com_docs --with-registry-auth
                 """
               }
             }
