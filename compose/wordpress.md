@@ -120,7 +120,7 @@ If you are using [Docker Machine](/machine/index.md), you can run the command
 `docker-machine ip MACHINE_VM` to get the machine address, and then open
 `http://MACHINE_VM_IP:8000` in a web browser.
 
-If you are using Docker for Mac or Docker for Windows, you can use
+If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
 `http://localhost` as the IP address, and open `http://localhost:8000` in a web
 browser.
 

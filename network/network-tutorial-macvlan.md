@@ -22,7 +22,7 @@ container to it.
   to your networking equipment.
 
 - The `macvlan` networking driver only works on Linux hosts, and is not supported
-  on Docker for Mac, Docker for Windows, or Docker EE for Windows Server.
+  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 
 - You need at least version 3.9 of the Linux kernel, and version 4.0 or higher
   is recommended.

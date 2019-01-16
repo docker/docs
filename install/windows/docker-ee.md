@@ -268,8 +268,8 @@ posts](https://www.docker.com/microsoft/) on the Docker website.
 ## Where to go next
 
 * [Getting started](/docker-for-windows/index.md) provides an overview of
-Docker for Windows, basic Docker command examples, how to get help or give
-feedback, and links to all topics in the Docker for Windows guide.
+Docker Desktop for Windows, basic Docker command examples, how to get help or give
+feedback, and links to all topics in the Docker Desktop for Windows guide.
 
 * [FAQs](/docker-for-windows/faqs.md) provides answers to frequently asked
 questions.

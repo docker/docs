@@ -103,7 +103,7 @@ removed in a future release. It is recommended that users of the `overlay` stora
 migrate to `overlay2`.
 
 ²) The `devicemapper` storage driver is deprecated in Docker Engine 18.09, and will be
-removed in a future release. It is recommended that users of the `overlay` storage driver 
+removed in a future release. It is recommended that users of the `devicemapper` storage driver 
 migrate to `overlay2`.
 
 
@@ -140,9 +140,9 @@ storage driver, be sure to read about
 > have a lower priority than issues encountered when using a recommended
 > configuration.
 
-### Docker for Mac and Docker for Windows
+### Docker Desktop for Mac and Docker Desktop for Windows
 
-Docker for Mac and Docker for Windows are intended for development, rather
+Docker Desktop for Mac and Docker Desktop for Windows are intended for development, rather
 than production. Modifying the storage driver on these platforms is not
 possible.
 
