@@ -271,6 +271,8 @@ by sending a `SIGUSR1` signal to the daemon.
 - **Windows Server**:
 
   Download [docker-signal](https://github.com/jhowardmsft/docker-signal).
+  
+  Get the process ID of dockerd `Get-Process dockerd`.
 
   Run the executable with the flag `--pid=<PID of daemon>`.
 
