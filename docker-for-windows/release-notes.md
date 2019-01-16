@@ -18,7 +18,7 @@ notes](edge-release-notes) are also available. (Following the CE release model,
 releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).
 
-## Stable Releases of 2018
+## Stable Releases of 2019
 
 ### Docker Community Edition 2.0.0.2 2019-01-16
 
@@ -35,6 +35,8 @@ for Windows](install.md#download-docker-for-windows).
 * Bug fixes and minor changes
   - Rename Docker for Windows to Docker Desktop
   - Add 18.09 missing daemon options
+
+## Stable Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-win81 2018-12-07
 
