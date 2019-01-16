@@ -91,16 +91,16 @@ Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
 
-### labels, env, and env-regex
+### labels, labels-regex, env, and env-regex
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
 precedence. Both options add additional fields to the extra attributes of a
 logging message.
 
-The `env-regex` option is similar to and compatible with `env`. Its value is a
-regular expression to match logging-related environment variables. It is used
-for advanced [log tag options](log_tags.md).
+The `env-regex` and `labels-regex` options are similar to and compatible with respectively `env` and `labels`.
+Their values are regular expressions to match logging-related environment variables and labels.
+It is used for advanced [log tag options](log_tags.md).
 
 ### fluentd-async-connect
 
