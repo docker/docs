@@ -60,7 +60,7 @@ below.</font><br>
 #### How to save and restore data
 
 The following procedure can be used to save/restore images and container data,
-for example if you want to switch between Edge and Stable, or reset your VM
+for example, if you want to switch between Edge and Stable, or reset your VM
 disk:
 
 1.  Use `docker save -o images.tar image1 [image2 ...]` to save any images you
@@ -83,7 +83,7 @@ disk:
 
 [This
 procedure](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
-explains how to backup / restore data volumes.
+explains how to backup and restore data volumes.
 
 ### What is Docker.app?
 
