@@ -80,7 +80,7 @@ done
 ```
 
 Then you need to run `source
-/etc/bash_completion.d/docker-machine-prompt.bash` in your bash
+/etc/bash_completion.d docker-machine-prompt.bash` in your bash
 terminal to tell your setup where it can find the file
 `docker-machine-prompt.bash` that you previously downloaded.
 
