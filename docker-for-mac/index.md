@@ -268,7 +268,7 @@ If you installed `kubectl` with Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
+  running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator), and click the **Apply** button.
 
   ![Enable Kubernetes](images/menu/prefs-kubernetes.png){: .with-border width="400px"}
 
