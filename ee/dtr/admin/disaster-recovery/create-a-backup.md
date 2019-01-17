@@ -26,7 +26,7 @@ This data is persisted on the host running DTR, using named volumes.
 [Learn more about DTR named volumes](../../architecture.md).
 
 To perform a backup of a DTR node, run the [docker/dtr backup](/reference/dtr/2.6/cli/backup/) command. This
-command backups up the following data:
+command backs up the following data:
 
 | Data                               | Backed up | Description                                                    |
 |:-----------------------------------|:----------|:---------------------------------------------------------------|
