@@ -1,23 +1,22 @@
 ---
-description: How to install Docker for Windows
+description: How to install Docker Desktop for Windows
 keywords: windows, beta, edge, alpha, install, download
-title: Install Docker for Windows
+title: Install Docker Desktop for Windows
 ---
 
-Docker for Windows is the
+Docker Desktop for Windows is the
 [Community Edition (CE)](https://www.docker.com/community-edition)
-of Docker for Microsoft Windows. To download Docker for Windows, head to Docker
+of Docker Desktop for Microsoft Windows. To download Docker Desktop for Windows, head to Docker
 Store.
 
 [Download from Docker Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){: .button .outline-btn}
 
 ##  What to know before you install
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer enables Hyper-V for you, if needed, and restart your machine. After Hyper-V is
-enabled, VirtualBox no longer works, but any VirtualBox VM images
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker Desktop for Windows requires Microsoft Hyper-V to run.  The Docker Desktop for Windows installer enables Hyper-V for you, if needed, and restart your machine. After Hyper-V is enabled, VirtualBox no longer works, but any VirtualBox VM images
 remain. VirtualBox VMs created with `docker-machine` (including the `default`
 one typically created during Toolbox install) no longer start. These VMs
-cannot be used side-by-side with Docker for Windows. However, you can still use
+cannot be used side-by-side with Docker Desktop for Windows. However, you can still use
 `docker-machine` to manage remote VMs.
 
 * **System Requirements**:
@@ -30,33 +29,33 @@ cannot be used side-by-side with Docker for Windows. However, you can still use
 
   - At least 4GB of RAM.
 
->  **Note**: If your system does not meet the requirements to run Docker for Windows, you 
+>  **Note**: If your system does not meet the requirements to run Docker Desktop for Windows, you 
 can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
 
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and [Kitematic](/kitematic/userguide.md).
+* **What the Docker Desktop for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and [Kitematic](/kitematic/userguide.md).
 
-* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
+* Containers and images created with Docker Desktop for Windows are shared between all user accounts on machines where it is installed. This is because all
 Windows accounts use the same VM to build and run containers.
 
-* Nested virtualization scenarios, such as running Docker for Windows
+* Nested virtualization scenarios, such as running Docker Desktop for Windows
 on a VMWare or Parallels instance, might work, but come with no
 guarantees. For more information, see
-[Running Docker for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
+[Running Docker Desktop for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 
 ### About Windows containers
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker Desktop for Windows and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
 provides a tutorial on how to set up and run Windows containers on Windows 10 or
 with Windows Server 2016. It shows you how to use a MusicStore application with
 Windows containers.
 * Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft/) on the Docker website
 
-## Install Docker for Windows desktop app
+## Install Docker Desktop for Windows desktop app
 
-1. Double-click **Docker for Windows Installer.exe** to run the installer.
+1. Double-click **Docker Desktop for Windows Installer.exe** to run the installer.
 
     If you haven't already downloaded the installer (`Docker for Windows Installer.exe`), you can get it from
     [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
@@ -69,10 +68,10 @@ Windows containers.
 
 3. Click **Finish** on the setup complete dialog to launch Docker.
 
-## Start Docker for Windows
+## Start Docker Desktop for Windows
 
 Docker does not start automatically after installation. To start it, search for
-Docker, select **Docker for Windows** in the search results, and click it (or
+Docker, select **Docker Desktop for Windows** in the search results, and click it (or
 hit Enter).
 
 ![search for Docker app](images/docker-app-search.png){:width="400px"}
@@ -93,11 +92,11 @@ suggested next steps, and a link to this documentation.
 When initialization is complete, select **About Docker** from the notification
 area icon to verify that you have the latest version.
 
-Congratulations! You are up and running with Docker for Windows.
+Congratulations! You are up and running with Docker Desktop for Windows.
 
 ## Where to go next
 
-* [Getting started](index.md) introduces Docker for Windows.
+* [Getting started](index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
