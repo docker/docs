@@ -18,7 +18,7 @@ notes](edge-release-notes) are also available. (Following the CE release model,
 releases, and download stable and edge product installers at [Download Docker
 Desktop for Mac](install.md#download-docker-for-mac).
 
-## Stable Releases of 2018
+## Stable Releases of 2019
 
 ### Docker Community Edition 2.0.0.2 2019-01-16
 
@@ -33,6 +33,8 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 * Bug fixes and minor changes
   - Add 18.09 missing daemon options
+  
+## Stable Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-mac81 2018-12-07
 
