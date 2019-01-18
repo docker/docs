@@ -15,8 +15,8 @@ Collaborators can keep their own delegation keys private.
 The `targets/releases` delegation is currently an optional feature - in order
 to set up delegations, you must use the Notary CLI:
 
-1. [Download the client](https://github.com/docker/notary/releases) and ensure that it is
-available on your path
+1. [Download the client](https://github.com/theupdateframework/notary/releases) 
+and ensure that it is available on your path
 
 2. Create a configuration file at `~/.notary/config.json` with the following content:
 
