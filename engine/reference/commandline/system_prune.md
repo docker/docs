@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_system_prune
 title: docker system prune
+redirect_from:
+  - /edge/engine/reference/commandline/system_prune/
 ---
 
 <!--
@@ -12,7 +14,4 @@ here, you'll need to find the string by searching this repo:
 https://github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}
