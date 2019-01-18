@@ -15,20 +15,19 @@ channel.
 ## About trust in Docker
 
 Docker Content Trust (DCT) allows operations with a remote Docker registry to 
-enforce client-side and signing and verification of image tags. DCT provides the
-ability to use digital signatures for data sent to and received from remote
-Docker registries. These signatures allow client-side or runtime verification of the
-integrity and publisher of specific image tags. 
+enforce client-side signing and runtime verification of image tags. DCT provides 
+the ability to use digital signatures for data sent to and received from remote
+Docker registries. These signatures allow client-side or runtime verification of 
+the integrity and publisher of specific image tags. 
 
 Through DCT image publishers can sign their images. Image consumers can ensure 
 that the images they use are signed. Publishers and consumers can either be 
-individuals or organizations. DCT supports users and automated processes 
-such as builds.
+individuals or organizations. DCT supports individual users / teams as well as 
+automated processes such as [builds and pipelines](trust_automation.d).
 
-When you use DCT, signing occurs on the client when you use `$ docker push` or
-`$ docker trust sign` and could happen on the client through `$ docker pull`, 
-through the engine on `$ docker run`, or through Docker Enterprise's Universal
-Control Plane.
+When you use DCT, signing occurs on the client through the `$ docker push` or
+`$ docker trust sign` commands and verification can happen through the client, 
+the engine, or through Docker Enterprise's Universal Control Plane.
 
 ### Image tags and DCT
 
@@ -110,39 +109,54 @@ read how to [manage keys for DCT](trust_key_mng.md).
 
 Within the Docker CLI we can sign and push a container image with the 
 `$ docker trust` command syntax. This is built on top of the Notary feature
-set, more information on notary can be found [here](/notary/getting_started/). 
+set, more information on Notary can be found [here](/notary/getting_started/). 
 
 A pre-requisite for signing an image is a Docker Registry with a Notary server
-attached (Such as the Docker Hub or the Docker Trusted Registry). Instructions
-for standing up a self hosted environment can be found [here](/engine/security/trust/deploying_notary/).
+attached (Such as the Docker Hub or Docker Trusted Registry). Instructions for
+standing up a self hosted environment can be found [here](/engine/security/trust/deploying_notary/).
 
-Secondly to sign a Docker Image you wil need a Deletegation private key, and a 
-x509 certificate public key. Instructions on creating this can be 
-found [here](/engine/security/trust/trust_delegation/#generating-delegation-keys). 
+Secondly to sign a Docker Image you will need a Deletegation's key pair. These
+can either be generated locally using `$ docker trust key generate`, generated 
+by a certificate authity as discussed 
+[here](/engine/security/trust/trust_delegation/#generating-delegation-keys). 
 Alternatively if you are using Docker Enterprise's Universal Control Plane, a 
 user's [Client Bundle](ee/ucp/user-access/cli/#download-client-certificates) 
 provides adequate keys for a delegation. The `cert.pem` being the public 
 delegation key, the `key.pem` as the private delegation key. 
 
-Firstly we will need to add the delegation's public key to the notary server, 
-these are specific to a particular image repository (In Notary known as a GUN). 
+First we will add the delegation's private key to the local docker trust 
+repository. (By default this is stored in `~/.docker/trust/`). If you are 
+generating with the key with `$ docker trust key generate` is it automatically
+added to the store. If you are importing a seperate key, such as one from
+the Universal Control Plane you will need to use the `$ docker trust key load`
+command.
 
 ```
-$ docker trust signer add --key delegation.crt jeff dtr.example.com/admin/demo
+$ docker trust key generate jeff
+Generating key for jeff...
+Successfully generated and loaded private key. Corresponding public key available: /home/ubuntu/Documents/mytrustdir/jeff.pub
+```
+
+Or if you have an existing key: 
+
+```
+$ docker trust key load key.pem --name jeff
+Loading key from "delegation.key"...
+Enter passphrase for new jeff key with ID 8ae710e: 
+Repeat passphrase for new jeff key with ID 8ae710e: 
+Successfully imported key from delegation.key
+```
+
+Next we will need to add the delegation's public key to the Notary server, 
+this specific to a particular image repository (In Notary known as a Global 
+Unique Name (GUN)). 
+
+```
+$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
 Adding signer "jeff" to dtr.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94: 
 ```
 
-Next we will need to add the delegation's private key to the local docker trust 
-repository. (By default this is stored in `~/.docker/trust/`)
-
-```
-$ docker trust key load delegation.key
-Loading key from "delegation.key"...
-Enter passphrase for new signer key with ID 8ae710e: 
-Repeat passphrase for new signer key with ID 8ae710e: 
-Successfully imported key from delegation.key
-```
 
 Finally we will use the delegation private key to sign a particular tag and 
 push it up to the registry.
@@ -194,6 +208,15 @@ Administrative keys for dtr.example.com/admin/demo:1
   Root Key:	84ca6e4416416d78c4597e754f38517bea95ab427e5f95871f90d460573071fc
 ```
 
+Remote Trust data for a tag can be removed by the `$ docker trust revoke` command:
+
+```
+$ docker trust revoke dtr.example.com/admin/demo:1
+Enter passphrase for signer key with ID 8ae710e: 
+Successfully deleted signature for dtr.example.com/admin/demo:1
+```
+
+
 ## Runtime Enforcement with Docker Content Trust
 
 > Note this only applies to Docker Enterprise Engine 18.09 or newer. This 
@@ -201,12 +224,13 @@ Administrative keys for dtr.example.com/admin/demo:1
 > [Universal Control Plane](/ee/ucp/admin/configure/run-only-the-images-you-trust/)
 
 Docker Content Trust within the Docker Enterprise Engine prevents a user from
-starting a container from an image of an unknown source, it will also prevent a 
-user from building a container image, from an unknown base layer. Docker can 
-provide this enforcement on its Official Docker Images, found on the [Docker
-Hub](https://hub.docker.com/search?image_filter=official&type=image), or on 
-User Signed images, assuming they are stored in a private registry with signing
-data stored within an attached [Notary Server](/engine/security/trust/deploying_notary/)
+using container image from an unknown source, it will also prevent a 
+user from building a container image, from a base layer from an unknown source. 
+Docker provides signatures on its Official Docker Images, found on the [Docker
+Hub](https://hub.docker.com/search?image_filter=official&type=image), or a User
+can sign an image with the commands [above](#signing-images-with-docker-content-trust)
+, assuming they are stored in a private registry with signing data stored 
+within an attached [Notary Server](/engine/security/trust/deploying_notary/)
 (Such as the Docker Trusted Registry).
 
 Engine Signature Verification prevents the following:
@@ -222,12 +246,12 @@ unsigned images from being imported, loaded, or created.
 ### Enabling DCT within the Docker Enterprise Engine 
 
 DCT is controlled by the Docker Engine's configuration file. By default this is
-found at `/etc/docker/daemon.json`. For more details on this file head to the 
-[reference](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+found at `/etc/docker/daemon.json`. For more details on this file can be found 
+[here](/engine/reference/commandline/dockerd/#daemon-configuration-file)
 
 The `content-trust` flag is expecting 2 variables, a `mode` variable instructing
-the engine to enforce signed images or not, and a set of image signatures 
-contolled via the `trust-pinning` variable.
+the engine whether to enforce signed images, and a `trust-pinning` variable 
+instructing the engine which sources to trust. 
 
 `Mode` can take 3 variables: 
 
@@ -249,8 +273,8 @@ in the container not starting.
 ### Official Docker Images
 
 All official Docker library images found on the Docker Hub are signed by the 
-same notary root key. This root key has been embedded inside of the Docker
-Enterprise Engine. Therefore to enforce that only official images are used. 
+same Notary root key. This root key's ID has been embedded inside of the Docker
+Enterprise Engine. Therefore to enforce that only official Docker images are used. 
 Specify: 
 
 ```
@@ -297,13 +321,13 @@ $ grep -r "root" ~/.docker/trust/private
 }
 ```
 
-* Notary Root key ID (DCT certitifcate ID) is an ID that describes the same, but 
+* Notary Root key ID (DCT Certitifcate ID) is an ID that describes the same, but 
 the ID is unique per repository. i.e `mydtr/user1/image1` and `mydtr/usr1/image2` 
 will have unique certitificate IDs. A certificate ID can be retrieved via a 
-`$ docker trust inspect` command and confusingly is labelled as a root-key. 
-This is designed for when different users are signing their own repositories, 
-i.e. there is no central signing server. As a cert-id is more granular, it would 
-take priority if a conflict occurs over a root ID. 
+`$ docker trust inspect` command is labelled as a root-key (referring back 
+to Notary). This is designed for when different users are signing their own 
+repositories, i.e. there is no central signing server. As a cert-id is more 
+granular, it would take priority if a conflict occurs over a root ID. 
  
 ```
  # Retrieving Cert ID
@@ -357,11 +381,17 @@ trust cached signature data. This is done through the
 }
 ```
 
-### Client Enforcement with Docker Content Trust
+## Client Enforcement with Docker Content Trust
 
-When DCT is enabled, `docker` CLI commands that operate on tagged images must
-either have content signatures or explicit content hashes. The commands that
-operate with DCT are:
+> Note this is supported on Docker CE and Enterprise Engine newer than 17.03
+
+Currently, content trust is disabled by default in the Docker Client. To enable 
+it, set the `DOCKER_CONTENT_TRUST` environment variable to `1`. This prevents 
+Users from working with tagged images unless they contain a signature.
+
+When DCT is enabled in the Docker client, `docker` CLI commands that operate on 
+tagged images must either have content signatures or explicit content hashes. 
+The commands that operate with DCT are:
 
 * `push`
 * `build`
@@ -373,10 +403,17 @@ For example, with DCT enabled a `docker pull someimage:latest` only
 succeeds if `someimage:latest` is signed. However, an operation with an explicit
 content hash always succeeds as long as the hash exists:
 
-```bash
-$ docker pull someimage@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
 ```
+$ docker pull dtr.example.com/user/image:1
+Error: remote trust data does not exist for dtr.example.com/user/image: dtr.example.com does not have trust data for dtr.example.com/user/image
 
+$ docker pull dtr.example.com/user/image@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
+sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1: Pulling from user/image
+ff3a5c916c92: Pull complete 
+a59a168caba3: Pull complete 
+Digest: sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
+Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
+```
 
 ## Related information
 
