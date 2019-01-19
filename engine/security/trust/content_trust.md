@@ -64,7 +64,7 @@ the unsigned version of an image before officially signing it.
 
 Image consumers can enable DCT to ensure that images they use were signed. If a 
 consumer enables DCT, they can only pull, run, or build with trusted images. 
-Enabling DCT is like wearing a pair of rose-colored glasses. Consumers "see" 
+Enabling DCT is a bit like applying a "filter" to your registry. Consumers "see" 
 only signed image tags and the less desirable, unsigned image tags are 
 "invisible" to them.
 
@@ -115,9 +115,9 @@ A pre-requisite for signing an image is a Docker Registry with a Notary server
 attached (Such as the Docker Hub or Docker Trusted Registry). Instructions for
 standing up a self hosted environment can be found [here](/engine/security/trust/deploying_notary/).
 
-Secondly to sign a Docker Image you will need a Deletegation's key pair. These
+Secondly to sign a Docker Image you will need a delegation's key pair. These
 can either be generated locally using `$ docker trust key generate`, generated 
-by a certificate authity as discussed 
+by a certificate authority as discussed 
 [here](/engine/security/trust/trust_delegation/#generating-delegation-keys). 
 Alternatively if you are using Docker Enterprise's Universal Control Plane, a 
 user's [Client Bundle](ee/ucp/user-access/cli/#download-client-certificates) 
@@ -158,7 +158,7 @@ Enter passphrase for new repository key with ID 10b5e94:
 ```
 
 
-Finally we will use the delegation private key to sign a particular tag and 
+Finally we will use the delegation's private key to sign a particular tag and 
 push it up to the registry.
 
 ```
@@ -186,7 +186,7 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed dtr.example.com/admin/demo:1
 ```
 
-Remote Trust data for a tag can be viewed by the `$ docker trust inspect` 
+Remote trust data for a tag can be viewed by the `$ docker trust inspect` 
 command:
 
 ```
@@ -224,9 +224,9 @@ Successfully deleted signature for dtr.example.com/admin/demo:1
 > [Universal Control Plane](/ee/ucp/admin/configure/run-only-the-images-you-trust/)
 
 Docker Content Trust within the Docker Enterprise Engine prevents a user from
-using container image from an unknown source, it will also prevent a 
-user from building a container image, from a base layer from an unknown source. 
-Docker provides signatures on its Official Docker Images, found on the [Docker
+using container image from an unknown source, it will also prevent a user from 
+building a container image, from a base layer from an unknown source. Docker 
+provides signatures on its Official Docker Images, found on the [Docker
 Hub](https://hub.docker.com/search?image_filter=official&type=image), or a User
 can sign an image with the commands [above](#signing-images-with-docker-content-trust)
 , assuming they are stored in a private registry with signing data stored 
@@ -249,18 +249,21 @@ DCT is controlled by the Docker Engine's configuration file. By default this is
 found at `/etc/docker/daemon.json`. For more details on this file can be found 
 [here](/engine/reference/commandline/dockerd/#daemon-configuration-file)
 
-The `content-trust` flag is expecting 2 variables, a `mode` variable instructing
+The `content-trust` flag is based around, a `mode` variable instructing
 the engine whether to enforce signed images, and a `trust-pinning` variable 
 instructing the engine which sources to trust. 
 
 `Mode` can take 3 variables: 
 
-* `Disabled` - No Signature verification
-* `Permissive` - The engine will check the image signature, however the 
-container will still run. The results of the signature verification is displayed
-in the Docker Engine daemon logs. 
-* `Enabled` - The engine will check the image signature, with a failure resulting
-in the container not starting.
+* `Disabled` - Verification is not active and the remainder of the content-trust 
+related metadata will be ignored. This is the default value if `mode` is not
+specified.
+* `Permissive` - Verification will be performed, but only failures will only be 
+logged and remain unenforced. This configuration is intended for testing of 
+changes related to content-trust. The results of the signature verification 
+is displayed in the Docker Engine daemon logs. 
+* `Enabled` - Content trust will be enforced and an image that cannot be 
+verified successfully will not be pulled or run.
 
 ```
 {
@@ -272,10 +275,10 @@ in the container not starting.
 
 ### Official Docker Images
 
-All official Docker library images found on the Docker Hub are signed by the 
-same Notary root key. This root key's ID has been embedded inside of the Docker
-Enterprise Engine. Therefore to enforce that only official Docker images are used. 
-Specify: 
+All official Docker library images found on the Docker Hub (docker.io/library/*)
+are signed by the same Notary root key. This root key's ID has been embedded 
+inside of the Docker Enterprise Engine. Therefore to enforce that only official 
+Docker images are used. Specify: 
 
 ```
 {
@@ -288,9 +291,9 @@ Specify:
 }
 ```
 
-### User Signed Images
+### User-Signed Images
 
-There are 2 options for trust pinning User Signed Images: 
+There are 2 options for trust pinning user-signed images: 
 
 * Notary Canonical Root Key ID (DCT Root Key) is an ID that describes *just* the 
 root key used to sign a repository (or rather its respective keys). This is the 
@@ -325,9 +328,9 @@ $ grep -r "root" ~/.docker/trust/private
 the ID is unique per repository. i.e `mydtr/user1/image1` and `mydtr/usr1/image2` 
 will have unique certitificate IDs. A certificate ID can be retrieved via a 
 `$ docker trust inspect` command is labelled as a root-key (referring back 
-to Notary). This is designed for when different users are signing their own 
-repositories, i.e. there is no central signing server. As a cert-id is more 
-granular, it would take priority if a conflict occurs over a root ID. 
+to the Notary key name). This is designed for when different users are signing 
+their own repositories, i.e. there is no central signing server. As a cert-id 
+is more granular, it would take priority if a conflict occurs over a root ID. 
  
 ```
  # Retrieving Cert ID

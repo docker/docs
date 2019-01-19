@@ -15,7 +15,7 @@ When working directly with the Notary client, it uses its [own set of environmen
 
 ## Adding a Delegation's Private Key
 
-To automate importing a Delegation's Private to the local Docker trust store, we 
+To automate importing a delegation's private key to the local Docker trust store, we 
 need to pass a passphrase for the new key. This passphase will be required 
 everytime that delegator signs a tag. 
 
