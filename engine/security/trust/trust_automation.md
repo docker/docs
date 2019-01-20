@@ -5,39 +5,41 @@ title: Automation with content trust
 ---
 
 It is very common for Docker Content Trust to be built into existing automation
-systems. To allow tools to wrap docker and push trusted content, there are 
+systems. To allow tools to wrap Docker and push trusted content, there are 
 environment variables that can be passed through to the client. 
 
-This guide follows the steps as [here](content_trust/#signing-images-with-docker-content-trust)
-so please read that and understand the pre-requisites. 
+This guide follows the steps as described 
+[here](content_trust/#signing-images-with-docker-content-trust) so please read 
+that and understand its prerequisites. 
 
 When working directly with the Notary client, it uses its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
 
-## Adding a Delegation's Private Key
+## Adding a Delegation Private Key
 
-To automate importing a delegation's private key to the local Docker trust store, we 
-need to pass a passphrase for the new key. This passphase will be required 
-everytime that delegator signs a tag. 
+To automate importing a delegation private key to the local Docker trust store, we 
+need to pass a passphrase for the new key. This passphrase will be required 
+everytime that delegation signs a tag. 
 
 ```
-$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphase123"
+$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust key load delegation.key --name jeff
 Loading key from "delegation.key"...
 Successfully imported key from delegation.key
 ```
 
-## Adding a Delegation's Public Key
+## Adding a Delegation Public Key
 
-To automate the addition of a new delegator to the Repository, we need to pass
-the passphrases for the workstations Root Key (Notary Canonical Root Key ID) and 
-the image repositories passphase (Notary Root key ID). 
+If you initialising a repository at the same time as adding a Delegation
+public key, then you will need to use the local Notary Canonical Root Key's 
+passphrase to create the repositories trust data. If the repository has already 
+been initiated then you only need the repositories passphrase. 
 
 ```
-# Export the Local Root Key Passphrase
+# Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 
-# Export the Repository Passphase
+# Export the Repository Passphrase
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="repopassphrase123"
 
 # Initialise Repo and Push Delegation
@@ -52,10 +54,10 @@ Successfully added signer: dtr.example.com/admin/demo
 
 Finally when signing an image, we will need to export the passphrase of the 
 signing key. This was created when the key was loaded into the local Docker 
-Store with `$ docker trust key load`.
+trust store with `$ docker trust key load`.
 
 ```
-$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphase123"
+$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust sign dtr.example.com/admin/demo:1
 Signing and pushing trust data for local image dtr.example.com/admin/demo:1, may overwrite remote trust data
@@ -101,7 +103,7 @@ unable to process Dockerfile: No trust data for notrust
 
 ## Related information
 
+* [Delegations for content trust](trust_delegation.md)
 * [Content trust in Docker](content_trust.md)
 * [Manage keys for content trust](trust_key_mng.md)
-* [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
