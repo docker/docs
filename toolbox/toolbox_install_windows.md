@@ -7,7 +7,7 @@ title: Install Docker Toolbox on Windows
 
 Docker Toolbox provides a way to use Docker on
 Windows systems that do not
-meet minimal system requirements for the [Docker for
+meet minimal system requirements for the [Docker Desktop for
 Windows](/docker-for-windows/index.md) app.
 
 If you have not done so already, download the installer here:
@@ -33,7 +33,7 @@ small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
 >**Tip**: One of the advantages of the newer
-[Docker for
+[Docker Desktop for
 Windows](/docker-for-windows/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.
@@ -50,11 +50,11 @@ To verify your machine meets these requirements, do the following:
 
     If you have a newer system, specifically 64bit Windows 10 Pro, with
     Enterprise and Education (1607 Anniversary update, Build 14393 or later),
-    consider using [Docker for Windows](/docker-for-windows) instead. It runs
+    consider using [Docker Desktop for Windows](/docker-for-windows) instead. It runs
     natively on the Windows, so there is no need for a pre-configured Docker
     QuickStart shell. It also uses Hyper-V for virtualization, so the
     instructions below for checking virtualization will be out of date for newer
-    Windows systems. Full install prerequisites are provided in the Docker for
+    Windows systems. Full install prerequisites are provided in the Docker Desktop for
     Windows topic in [What to know before you
     install](/docker-for-windows/#what-to-know-before-you-install).
 
@@ -230,7 +230,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker Desktop for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on Windows, do the following:
 
@@ -253,7 +253,7 @@ To uninstall Toolbox on Windows, do the following:
 
     This step is optional because if you plan
     to re-install Docker Machine as a part
-    of [Docker for
+    of [Docker Desktop for
     Windows](/docker-for-windows/index.md), you can import and
     continue to manage those machines
     through Docker.

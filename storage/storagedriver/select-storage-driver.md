@@ -50,7 +50,7 @@ Docker supports the following storage drivers:
    driver is poor, and is not generally recommended for production use.
 
 Docker's source code defines the selection order. You can see the order at
-[the source code for Docker Engine - Community {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
+[the source code for Docker Engine - Community {{ site.docker_ce_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
 
 If you run a different version of Docker, you can use the branch selector at the top of the file viewer to choose a different branch.
 {: id="storage-driver-order" }
@@ -103,7 +103,7 @@ removed in a future release. It is recommended that users of the `overlay` stora
 migrate to `overlay2`.
 
 ²) The `devicemapper` storage driver is deprecated in Docker Engine 18.09, and will be
-removed in a future release. It is recommended that users of the `overlay` storage driver 
+removed in a future release. It is recommended that users of the `devicemapper` storage driver 
 migrate to `overlay2`.
 
 
@@ -140,9 +140,9 @@ storage driver, be sure to read about
 > have a lower priority than issues encountered when using a recommended
 > configuration.
 
-### Docker for Mac and Docker for Windows
+### Docker Desktop for Mac and Docker Desktop for Windows
 
-Docker for Mac and Docker for Windows are intended for development, rather
+Docker Desktop for Mac and Docker Desktop for Windows are intended for development, rather
 than production. Modifying the storage driver on these platforms is not
 possible.
 

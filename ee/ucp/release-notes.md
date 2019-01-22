@@ -21,7 +21,9 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
-## 3.1.2 (2019-01-09)
+## 3.1.2 
+
+(2019-01-09)
 
 ### Authentication and Authorization
 * SAML Single Logout is now supported in UCP.
@@ -40,11 +42,15 @@ enable this feature in Admin Settings -> SAML Settings.
   * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (escalation/871)
   * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (docker/interlock#206) (escalation/920)
 
-## 3.1.1 (2018-12-04)
+## 3.1.1 
+
+(2018-12-04)
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
 
-## 3.1.0 (2018-11-08)
+## 3.1.0 
+
+(2018-11-08)
 
 ## Bug Fixes
 
@@ -136,7 +142,9 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
-## 3.0.8 (2019-01-09)
+## 3.0.8 
+
+(2019-01-09)
 
 ### Bug fixes
 * Core
@@ -155,11 +163,15 @@ The following features are deprecated in UCP 3.1.
      backend service's Virtual IP instead of load-balancing directly to each task IP. 
      (docker/interlock#206, escalation/920)
 
-## 3.0.7 (2018-12-04)
+## 3.0.7 
+
+(2018-12-04)
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using a custom build of Kubernetes 1.8.15 for UCP 3.0.7.
 
-## 3.0.6 (2018-10-25)
+## 3.0.6 
+
+(2018-10-25)
 
 ### Bug fixes
 
@@ -194,7 +206,9 @@ The following features are deprecated in UCP 3.1.
 
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
 
-## 3.0.5 (2018-08-30)
+## 3.0.5 
+
+(2018-08-30)
 
 ### Bug fixes
 
@@ -210,7 +224,9 @@ The following features are deprecated in UCP 3.1.
  This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without
  manually pulling the images.
 
-## 3.0.4 (2018-08-09)
+## 3.0.4 
+
+(2018-08-09)
 
 ### Bug fixes
 
@@ -222,7 +238,9 @@ The following features are deprecated in UCP 3.1.
 
 * You must manually pull `docker/ucp-agent:3.0.4` in the images section of the web UI before upgrading. Alternately, you can just pull `docker/ucp-agent:3.0.4` on every manager node.
 
-## 3.0.3 (2018-07-26)
+## 3.0.3 
+
+(2018-07-26)
 
 ### New platforms
 
@@ -244,7 +262,9 @@ The following features are deprecated in UCP 3.1.
    * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks.
 
 
-## 3.0.2 (2018-06-21)
+## 3.0.2 
+
+(2018-06-21)
 
 ### New Features
 
@@ -319,7 +339,9 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
   * `ucp-interlock-proxy` may fail to start when two or more services are
  configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
 
-## Version 3.0.0 (2018-04-17)
+## Version 3.0.0 
+
+(2018-04-17)
 
 The UCP system requirements were updated with 3.0.0. Make sure to
 [check the system](https://docs.docker.com/ee/ucp/admin/install/system-requirements/)
@@ -467,7 +489,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
-## Version 2.2.15 (2019-01-09)
+## Version 2.2.15 
+
+(2019-01-09)
 
 ### Bug fixes
 * Core
@@ -476,7 +500,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed stack creation for non admin user when UCP uses a custom controller port. 
 
-## Version 2.2.14 (2018-10-25)
+## Version 2.2.14 
+
+(2018-10-25)
 
 ### Bug fixes
 
@@ -494,7 +520,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
 
-## Version 2.2.13 (2018-08-30)
+## Version 2.2.13 
+
+(2018-08-30)
 
 ### Bug fixes
 
@@ -502,7 +530,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
 
-## Version 2.2.12 (2018-08-09)
+## Version 2.2.12 
+
+(2018-08-09)
 
 ### Bug fixes
 
@@ -512,7 +542,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
     https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
 
-## Version 2.2.11 (2018-07-26)
+## Version 2.2.11 
+
+(2018-07-26)
 
 ### New platforms
 * UCP 2.2.11 is supported running on RHEL 7.5 and Ubuntu 18.04.
@@ -534,7 +566,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed an issue that causes UI to not parse volume options correctly.
   * Fixed an issue that prevents the user from deploying stacks via UI.
 
-## Version 2.2.10 (2018-05-17)
+## Version 2.2.10 
+
+(2018-05-17)
 
 ### Bug fixes
 
@@ -572,7 +606,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
  bundle on a cluster that is running thousands of services.
 
 
-## Version 2.2.9 (2018-04-17)
+## Version 2.2.9 
+
+(2018-04-17)
 
 ### Bug fixes
 
@@ -585,7 +621,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Fixed an issue that causes container fail to start with `container ID not found`
    during high concurrent API calls to create and start containers.
 
-## Version 2.2.7 (2018-03-26)
+## Version 2.2.7 
+
+(2018-03-26)
 
 ### Bug fixes
 
@@ -593,7 +631,9 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   leading to non-default values causing `ucp-controller` and `ucp-agent` to keep
   restarting.
 
-## Version 2.2.6 (2018-03-19)
+## Version 2.2.6 
+
+(2018-03-19)
 
 ### New features
 
@@ -647,7 +687,9 @@ default server configuration is not chosen, then the last server configuration
 is always used, regardless of which one is actually the best match.
 
 
-## Version 2.2.5 (16 January 2018)
+## Version 2.2.5 
+
+(16 January 2018)
 
 ### Bug fixes
 
@@ -667,7 +709,9 @@ and are planning on upgrading UCP, you can skip 2.2.5 and wait for the upcoming
 2.2.6 release, which will provide an alternative way to turn on RBAC enforcement
 for volumes.
 
-## Version 2.2.4 (2 November 2017)
+## Version 2.2.4 
+
+(2 November 2017)
 
 ### News
 
@@ -698,7 +742,9 @@ for volumes.
  * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
  * The Swarm admin UI for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 
-## Version 2.2.3 (13 September 2017)
+## Version 2.2.3 
+
+(13 September 2017)
 
 ### Bug fixes
 
@@ -750,7 +796,9 @@ for volumes.
  `<node-name>/<network-name>`.
 
 
-## version 2.2.2 (30 August 2017)
+## version 2.2.2 
+
+(30 August 2017)
 
 ### Bug fixes
 
@@ -785,7 +833,9 @@ for volumes.
 include `external: true`, otherwise the deployment fails with the error
 `unable to inspect secret`.
 
-## Version 2.2.0 (16 August 2017)
+## Version 2.2.0 
+
+(16 August 2017)
 
 ### New features
 

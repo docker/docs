@@ -3,7 +3,9 @@ datafolder: engine-cli
 datafile: docker_stack_ps
 title: docker stack ps
 redirect_from:
-- /engine/reference/commandline/stack_tasks/
+  - /engine/reference/commandline/stack_tasks/
+  - /edge/engine/reference/commandline/stack_ps/
+  - /edge/engine/reference/commandline/stack_tasks/
 ---
 
 <!--
@@ -14,7 +16,4 @@ here, you'll need to find the string by searching this repo:
 https://github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

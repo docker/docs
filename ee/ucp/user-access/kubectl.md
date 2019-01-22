@@ -11,12 +11,12 @@ command-line tool named kubectl.
 
 To access the UCP cluster with kubectl, install the [UCP client bundle](cli.md).
 
-> Kubernetes on Docker for Mac and Docker for Windows
+> Kubernetes on Docker Desktop for Mac and Docker Desktop for Windows
 >
-> Docker for Mac and Docker for Windows provide a standalone Kubernetes server that
+> Docker Desktop for Mac and Docker Desktop for Windows provide a standalone Kubernetes server that
 > runs on your development machine, with kubectl installed by default. This installation is
 > separate from the Kubernetes deployment on a UCP cluster.
-> Learn how to [deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md).
+> Learn how to [deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md).
 {: .important}
 
 ## Install the kubectl binary
@@ -100,5 +100,5 @@ Docker Enterprise Edition provides users unique certificates and keys to authent
 ## Where to go next
 
 - [Deploy a workload to a Kubernetes cluster](../kubernetes.md)
-- [Deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md)
+- [Deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md)
 

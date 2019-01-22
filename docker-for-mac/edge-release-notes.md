@@ -1,7 +1,7 @@
 ---
 description: Change log / release notes per Edge release
-keywords: Docker for Mac, edge, release notes
-title: Docker for Mac Edge release notes
+keywords: Docker Desktop for Mac, edge, release notes
+title: Docker Desktop for Mac Edge release notes
 ---
 
 Here are the main improvements and issues per edge release, starting with the
@@ -127,7 +127,7 @@ for Mac](install.md#download-docker-for-mac).
 * Upgrades
   - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
   - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
-  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Mac.
+  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker Desktop for Mac.
 
 * Bug fixes and minor changes
   - Fix VPNKit memory leak. Fixes [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)
