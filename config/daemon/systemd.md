@@ -109,6 +109,12 @@ you need to add this configuration in the Docker systemd service file.
     [Service]    
     Environment="HTTPS_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"
     ```
+    
+    The NO_PROXY variable accepts wildcards. You just need to have a value starting with a dot:
+    ```conf
+    [Service]    
+    Environment="HTTPS_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,.somecorporation.com"
+    ```
 
 4.  Flush changes:
 
