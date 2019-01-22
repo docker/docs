@@ -321,7 +321,7 @@ assumes that the Docker daemon is in the `stopped` state.
     ```
 
     If the output in the `Monitor` column reports, as above, that the volume is
-    `not monitored` then monitoring needs to be explicitly enabled. Without
+    `not monitored`, then monitoring needs to be explicitly enabled. Without
     this step, automatic extension of the logical volume will not occur,
     regardless of any settings in the applied profile.
 
