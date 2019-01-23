@@ -50,7 +50,7 @@ However, the addition of the loopback mechanism, and interaction with the OS
 filesystem layer, means that IO operations can be slow and resource-intensive.
 Use of loopback devices can also introduce race conditions.
 However, setting up `loop-lvm` mode can help identify basic issues (such as
-missing user space packages, kernel drivers etc) ahead of attempting the more
+missing user space packages, kernel drivers, etc.) ahead of attempting the more
 complex set up required to enable `direct-lvm` mode. `loop-lvm` mode should
 therefore only be used to perform rudimentary testing prior to configuring
 `direct-lvm`.
@@ -108,7 +108,7 @@ For production systems, see
       Data Space Used: 11.8 MB
       Data Space Total: 107.4 GB
       Data Space Available: 7.44 GB
-      Metadata Space Used: 581.6 kB
+      Metadata Space Used: 581.6 KB
       Metadata Space Total: 2.147 GB
       Metadata Space Available: 2.147 GB
       Thin Pool Minimum Free Space: 10.74 GB
@@ -135,7 +135,7 @@ For production systems, see
 Production hosts using the `devicemapper` storage driver must use `direct-lvm`
 mode. This mode uses block devices to create the thin pool. This is faster than
 using loopback devices, uses system resources more efficiently, and block
-devices can grow as needed. However, more set-up is required than `loop-lvm`
+devices can grow as needed. However, more setup is required than in `loop-lvm`
 mode.
 
 After you have satisfied the [prerequisites](#prerequisites), follow the steps
