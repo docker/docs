@@ -458,8 +458,8 @@ secrets.
 You may want to leverage more advanced basic auth implementations by using a
 proxy in front of the registry. See the [recipes list](recipes/index.md).
 
-The registry also supports delegated authentiation, which redirects users to a
-specific, trusted token server. This approach is more complicated to set up, and
+The registry also supports delegated authentication which redirects users to a
+specific trusted token server. This approach is more complicated to set up, and
 only makes sense if you need to fully configure ACLs and need more control over
 the registry's integration into your global authorization and authentication
 systems. Refer to the following [background information](spec/auth/token.md) and
@@ -562,6 +562,6 @@ More specific and advanced information is available in the following sections:
  - [Configuration reference](configuration.md)
  - [Working with notifications](notifications.md)
  - [Advanced "recipes"](recipes/index.md)
- - [Registry API](spec/api.md)
+ - [Registry API](/registry/spec/api.md)
  - [Storage driver model](storage-drivers/index.md)
  - [Token authentication](spec/auth/token.md)

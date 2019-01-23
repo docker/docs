@@ -60,6 +60,16 @@ URL of a manager node, and not a load balancer. In addition, please be aware tha
 pinging the endpoint with HEAD will result in a 404 error code. It is better to
 use GET instead.
 
+## Monitoring vulnerability counts
+
+For those implementations with an EE Advanced subscription, UCP displays image 
+vulnerability count data from the DTR image scanning feature. UCP  displays 
+vulnerability counts for containers, Swarm services, pods, and images.
+
+To enable this feature, DTR 2.6 is required and single sign-on with UCP must be enabled.
+
+![example of vulnerability information in UCP](../../images/example-of-vuln-data-in-ucp.png)
+
 ## Where to go next
 
 - [Troubleshoot with logs](troubleshoot-with-logs.md)

@@ -66,7 +66,7 @@ signed by the old root CA anymore.
 
 Run `docker swarm ca --rotate` to generate a new CA certificate and key. If you
 prefer, you can pass the `--ca-cert` and `--external-ca` flags to specify the
-root certificate and and to use a root CA external to the swarm. Alternately,
+root certificate and to use a root CA external to the swarm. Alternately,
 you can pass the `--ca-cert` and `--ca-key` flags to specify the exact
 certificate and key you would like the swarm to use.
 

@@ -6,23 +6,23 @@ redirect_from:
 title: Frequently asked questions (FAQ)
 ---
 
-**Looking for popular FAQs on Docker for Mac?** Check out the
+**Looking for popular FAQs on Docker Desktop for Mac?** Check out the
 [Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
 for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ## Questions about Docker.app
 ### Stable and Edge channels
 
-**Q: How do I get the Stable or Edge version of Docker for Mac?**
+**Q: How do I get the Stable or Edge version of Docker Desktop for Mac?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
+[Download Docker Desktop for Mac](install.md#download-docker-for-mac){: target="_blank" class="_"}.
 
 This topic also has more information about the two channels.
 
-**Q: What is the difference between the Stable and Edge versions of Docker for Mac?**
+**Q: What is the difference between the Stable and Edge versions of Docker Desktop for Mac?**
 
-A: Two different download channels are available for Docker for Mac:
+A: Two different download channels are available for Docker Desktop for Mac:
 
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
@@ -57,19 +57,33 @@ to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
 below.</font><br>
 
-Do the following each time:
+#### How to save and restore data
 
-1.  Use `docker save` to save any images you want to keep. (See
-    [save](/engine/reference/commandline/save) in the Docker Engine command
-    line reference.)
+The following procedure can be used to save/restore images and container data,
+for example, if you want to switch between Edge and Stable, or reset your VM
+disk:
 
-2.  Use `docker export` to export containers you want to keep. (See
-    [export](/engine/reference/commandline/export) in the Docker Engine
-    command line reference.)
+1.  Use `docker save -o images.tar image1 [image2 ...]` to save any images you
+    want to keep. (See [save](/engine/reference/commandline/save) in the Docker
+    Engine command line reference.)
 
-3.  Uninstall the current app (whether Stable or Edge).
+2.  Use `docker export -o myContainner1.tar container1` to export containers you
+    want to keep. (See [export](/engine/reference/commandline/export) in the
+    Docker Engine command line reference.)
 
-4.  Install a different version of the app (Stable or Edge).
+3.  Uninstall the current app & Install a different version of the app (Stable
+    or Edge), or reset your VM disk.
+
+5.  Use `docker load -i images.tar` to reload previously saved images. (See
+    [load](/engine/reference/commandline/load) in the Docker Engine
+
+6.  Use `docker import -i myContainer1.tar` to create a filesystem image
+    corresponding to previously exported containers. (See
+    [import](/engine/reference/commandline/import) in the Docker Engine
+
+[This
+procedure](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
+explains how to backup and restore data volumes.
 
 ### What is Docker.app?
 
@@ -334,7 +348,7 @@ HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It r
 dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle
-Virtualbox or VMWare Fusion.
+VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 

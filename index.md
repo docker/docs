@@ -73,18 +73,18 @@ the industry to modernize all applications. Docker EE Advanced comes with enterp
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker for Mac"> </a>
+                    <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
                 </div>
-                <h3 id="docker-for-mac"><a href="docker-for-mac/">Docker for Mac</a></h3>
+                <h3 id="docker-for-mac"><a href="docker-for-mac/">Docker Desktop for Mac</a></h3>
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker for Windows"> </a>
+                    <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
                 </div>
-                <h3 id="docker-for-windows"><a href="docker-for-windows/">Docker for Windows</a></h3>
+                <h3 id="docker-for-windows"><a href="docker-for-windows/">Docker Desktop for Windows</a></h3>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>

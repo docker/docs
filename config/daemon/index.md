@@ -60,7 +60,7 @@ daemon won't start and prints an error message.
 
 To configure the Docker daemon using a JSON file, create a file at
 `/etc/docker/daemon.json` on Linux systems, or `C:\ProgramData\docker\config\daemon.json`
-on Windows.
+on Windows. On MacOS go to the whale in the taskbar > Preferences > Daemon > Advanced.
 
 Here's what the configuration file looks like:
 
@@ -186,8 +186,8 @@ Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker 
 successfully, it is now listening on the IP address specified in the `hosts` key of the
 `daemon.json` instead of a socket.
 
-> **Important**: Setting `hosts` in the `daemon.json` is not supported on Docker for Windows
-> or Docker for Mac.
+> **Important**: Setting `hosts` in the `daemon.json` is not supported on Docker Desktop for Windows
+> or Docker Desktop for Mac.
 {:.important}
 
 
@@ -271,6 +271,8 @@ by sending a `SIGUSR1` signal to the daemon.
 - **Windows Server**:
 
   Download [docker-signal](https://github.com/jhowardmsft/docker-signal).
+  
+  Get the process ID of dockerd `Get-Process dockerd`.
 
   Run the executable with the flag `--pid=<PID of daemon>`.
 
@@ -291,8 +293,8 @@ The Docker daemon log can be viewed by using one of the following methods:
   Linux systems
 - By running `Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-5) | Sort-Object Time | Export-CSV ~/last5minutes.CSV` on Docker EE for Windows Server
 
-> **Note**: It is not possible to manually generate a stack trace on Docker for
-> Mac or Docker for Windows. However, you can click the Docker taskbar icon and
+> **Note**: It is not possible to manually generate a stack trace on Docker Desktop for
+> Mac or Docker Desktop for Windows. However, you can click the Docker taskbar icon and
 > choose **Diagnose and feedback** to send information to Docker if you run into
 > issues.
 

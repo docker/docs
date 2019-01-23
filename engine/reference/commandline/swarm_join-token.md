@@ -3,7 +3,9 @@ datafolder: engine-cli
 datafile: docker_swarm_join-token
 title: docker swarm join-token
 redirect_from:
-- /engine/reference/commandline/swarm_join_token/
+  - /engine/reference/commandline/swarm_join_token/
+  - /edge/engine/reference/commandline/swarm_join_token/
+  - /edge/engine/reference/commandline/swarm_join-token/
 ---
 
 <!--
@@ -14,7 +16,4 @@ here, you'll need to find the string by searching this repo:
 https://github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

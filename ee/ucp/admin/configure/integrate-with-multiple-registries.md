@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 Universal Control Plane can pull and run images from any image registry,
-including Docker Trusted Registry and Docker Store.
+including Docker Trusted Registry and Docker Hub.
 
 If your registry uses globally-trusted TLS certificates, everything works
 out of the box, and you don't need to configure anything. But if your registries
@@ -54,7 +54,7 @@ dtr_ca_url=${dtr_full_url}/ca
 dtr_host_address=${dtr_full_url#"https://"}
 dtr_host_address=${dtr_host_address%":443"}
 
-# Create the registry configuration and save it it
+# Create the registry configuration and save it
 cat <<EOL > trust-dtr.toml
 
 [[registries]]

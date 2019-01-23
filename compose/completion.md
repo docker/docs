@@ -29,7 +29,7 @@ On a Mac, add the following to your `~/.bash_profile`:
 
 ```shell
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
+    . $(brew --prefix)/etc/bash_completion
 fi
 ```
 
@@ -51,6 +51,18 @@ You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
 ### Zsh
+
+#### With oh-my-zsh
+
+Add `docker` to the plugins list in `~/.zshrc`:
+
+```shell
+plugins=(
+  <existing-plugins> docker
+)
+```
+
+#### Without oh-my-zsh
 
 Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
 

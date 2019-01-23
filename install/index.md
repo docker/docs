@@ -48,7 +48,7 @@ place as needed to address bug fixes during its support cycle.
 
 Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
 as packages for the supported operating systems. Docker EE binaries are
-available on the [Docker Store](https://store.docker.com/) for the supported operating systems. The
+available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.
@@ -56,10 +56,15 @@ channel also receives patch releases when they become available.
 ### Nightly builds
 
 Nightly builds are created once per day from the master branch. The version
-number for nightly builds take the format `0.YYYYmmdd.HHMMSS`,
-for example `0.20181231.093045`.  These builds allow for testing from the
-latest code on the master branch. No qualifications or guarantees are made
-for the nightly builds.
+number for nightly builds take the format:
+
+    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
+
+where the time is the commit time in UTC and the final suffix is the prefix
+of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
+
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 
 The release channel for these builds is called `nightly`.
 
@@ -147,8 +152,8 @@ to choose the best installation path for you.
 
 | Platform                                                                    |      x86_64       |
 |:----------------------------------------------------------------------------|:-----------------:|
-| [Docker for Mac (macOS)](/docker-for-mac/install.md)                        | {{ green-check }} |
-| [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install.md) | {{ green-check }} |
+| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
 
 #### Server
 
@@ -157,10 +162,10 @@ to choose the best installation path for you.
 
 | Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
 |:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos.md) | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora.md) | [{{ green-check }}]({{ install-prefix-ce }}/fedora.md) |                                                        |                                                        |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) |
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
 
 ### Backporting
 

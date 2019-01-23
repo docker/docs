@@ -1,19 +1,19 @@
 ---
 description: Networking
 keywords: windows, networking
-title: Networking features in Docker for Windows
+title: Networking features in Docker Desktop for Windows
 ---
 {% assign Arch = 'Windows' %}
 
-Docker for {{Arch}} provides several networking features to make it easier to
+Docker Desktop for {{Arch}} provides several networking features to make it easier to
 use.
 
 ## Features
 
 ### VPN Passthrough
 
-Docker for {{Arch}}'s networking can work when attached to a VPN. To do this,
-Docker for {{Arch}} intercepts traffic from the containers and injects it into
+Docker Desktop for {{Arch}}'s networking can work when attached to a VPN. To do this,
+Docker Desktop for {{Arch}} intercepts traffic from the containers and injects it into
 {{Arch}} as if it originated from the Docker application.
 
 ### Port Mapping
@@ -24,7 +24,7 @@ When you run a container with the `-p` argument, for example:
 $ docker run -p 80:80 -d nginx
 ```
 
-Docker for {{Arch}} makes whatever is running on port 80 in the container (in
+Docker Desktop for {{Arch}} makes whatever is running on port 80 in the container (in
 this case, `nginx`) available on port 80 of `localhost`. In this example, the
 host and container ports are the same. What if you need to specify a different
 host port? If, for example, you already have something running on port 80 of
@@ -43,18 +43,18 @@ See [Proxies](index#Proxies).
 
 ## Known limitations, use cases, and workarounds
 
-Following is a summary of current limitations on the Docker for {{Arch}}
+Following is a summary of current limitations on the Docker Desktop for {{Arch}}
 networking stack, along with some ideas for workarounds.
 
 ### There is no docker0 bridge on {{Arch}}
 
-Because of the way networking is implemented in Docker for {{Arch}}, you cannot
+Because of the way networking is implemented in Docker Desktop for {{Arch}}, you cannot
 see a `docker0` interface on the host.  This interface is actually within the
 virtual machine.
 
 ### I cannot ping my containers
 
-Docker for Windows can't route traffic to Linux containers.  However, you can
+Docker Desktop for Windows can't route traffic to Linux containers.  However, you can
 ping the Windows containers.
 
 ### Per-container IP addressing is not possible
@@ -72,11 +72,11 @@ The host has a changing IP address (or none if you have no network access). From
 18.03 onwards our recommendation is to connect to the special DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
-This is for development purpose and will not work in a production environment outside of Docker for Windows.
+This is for development purpose and will not work in a production environment outside of Docker Desktop for Windows.
 
 The gateway is also reachable as `gateway.docker.internal`.
 
-#### I want to connect to a container from the Windows
+#### I want to connect to a container from Windows
 
 Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.
@@ -92,8 +92,7 @@ is an example of this.
 $ docker run -d -p 80:80 --name webserver nginx
 ```
 
-To clarify the syntax, the following two commands both expose port `80` on the
-container to port `8000` on the host:
+To clarify the syntax, the following two commands both publish container's port `80` to host's port `8000`:
 
 ```bash
 $ docker run --publish 8000:80 --name webserver nginx
@@ -101,8 +100,8 @@ $ docker run --publish 8000:80 --name webserver nginx
 $ docker run -p 8000:80 --name webserver nginx
 ```
 
-To expose all ports, use the `-P` flag. For example, the following command
-starts a container (in detached mode) and the `-P` exposes all ports on the
+To publish all ports, use the `-P` flag. For example, the following command
+starts a container (in detached mode) and the `-P` flag publishes all exposed ports of the
 container to random ports on the host.
 
 ```bash

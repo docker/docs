@@ -241,9 +241,9 @@ When you connect to a published port on any swarm node (whether it is running a
 given service or not), you are redirected to a worker which is running that
 service, transparently. Effectively, Docker acts as a load balancer for your
 swarm services. Services using the routing mesh are running in _virtual IP (VIP)
-mode_. Even a service running on each node (by means of the `--global` flag)
-uses the routing mesh. When using the routing mesh, there is no guarantee about
-which Docker node services client requests.
+mode_. Even a service running on each node (by means of the `--mode global`
+flag) uses the routing mesh. When using the routing mesh, there is no guarantee
+about which Docker node services client requests.
 
 To bypass the routing mesh, you can start a service using _DNS Round Robin
 (DNSRR) mode_, by setting the `--endpoint-mode` flag to `dnsrr`. You must run
@@ -265,7 +265,7 @@ this for each node joining the swarm.
 
 ### Attach a standalone container to an overlay network
 
-The `ingress` network is create without the `--attachable` flag, which means
+The `ingress` network is created without the `--attachable` flag, which means
 that only swarm services can use it, and not standalone containers. You can
 connect standalone containers to user-defined overlay networks which are created
 with the `--attachable` flag. This gives standalone containers running on

@@ -28,7 +28,7 @@ meets the prerequisites:
 
 - A 64-bit installation
 - Version 3.10 or higher of the Linux kernel. The latest version of the kernel
-  available for you platform is recommended.
+  available for your platform is recommended.
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
@@ -70,8 +70,8 @@ instructions for enabling and configuring AppArmor or SELinux.
 ### Install static binaries
 
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/x86_64/)
-    (or change `stable` to `edge` or `test`),
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
+    (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
     version of Docker CE you want to install.
 
@@ -123,7 +123,7 @@ The macOS binary includes the Docker client only. It does not include the
 
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `edge` or `test`),
+    (or change `stable` to `nightly` or `test`),
     and download the `.tgz` file relating to the version of Docker CE you want
     to install.
 

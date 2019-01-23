@@ -18,9 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We start at the bottom of
-the hierarchy of such an app, which is a container, which we cover on this page.
-Above this level is a service, which defines how containers behave in
+It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
 stack, defining the interactions of all the services, covered in
 [Part 5](part5.md).
@@ -69,7 +67,7 @@ FROM python:2.7-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-ADD . /app
+COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
@@ -92,7 +90,7 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` is present because of that `Dockerfile`'s `ADD` command,
+`requirements.txt` is present because of that `Dockerfile`'s `COPY` command,
 and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 
@@ -149,7 +147,8 @@ you have.
 
 ## Build the app
 
-We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
+We are ready to build the app. Make sure you are still at the top level of your
+new directory. Here's what `ls` should show:
 
 ```shell
 $ ls
@@ -157,10 +156,10 @@ Dockerfile		app.py			requirements.txt
 ```
 
 Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name.
+name using the `--tag` option. Use `-t` if you want to use the shorter option.
 
 ```shell
-docker build -t friendlyhello .
+docker build --tag=friendlyhello .
 ```
 
 Where is your built image? It's in your machine's local Docker image registry:
@@ -172,6 +171,11 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 
 ```
+
+Note how the tag defaulted to `latest`. The full syntax for the tag option would
+be something like `--tag=friendlyhello:v0.0.1`.
+
+
 >  Troubleshooting for Linux users
 >
 > _Proxy server settings_
@@ -241,9 +245,9 @@ $ curl http://localhost:4000
 <h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
 ```
 
-This port remapping of `4000:80` is to demonstrate the difference
-between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we just map port 80 on the host to port 80
+This port remapping of `4000:80` demonstrates the difference
+between `EXPOSE` within the `Dockerfile` and what the `publish` value is set to when running
+`docker run -p`. In later steps, map port 4000 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.

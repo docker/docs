@@ -107,7 +107,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have three options:
+You have two options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
@@ -174,7 +174,8 @@ You have three options:
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+[Docker Hub](https://docs.docker.com/docker-hub/).
+
 The following examples use the `latest` tag:
 
 - Run a single container:
@@ -197,7 +198,7 @@ Either way, you can now access the docs at port 4000 on your Docker host.
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
 - `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
-- `/css/documentation.css` defines the docs-specific style rules
+- `/css/style.scss` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
 ## Relative linking for GitHub viewing
@@ -307,11 +308,18 @@ In order to keep the Git repository light, _please_ compress the images
 (losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
 instance.  Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
-still optimizes the bandwith during browsing).
+still optimizes the bandwidth during browsing).
+
+## Beta content disclaimer
+```bash
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+```
 
 ## Building archives and the live published docs
 
-All the images described below are automatically built using Docker Cloud. To
+All the images described below are automatically built using Docker Hub. To
 build the site manually, from scratch, including all utility and archive images,
 see the [README in the publish-tools
 branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).

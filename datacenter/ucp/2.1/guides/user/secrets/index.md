@@ -11,7 +11,7 @@ services with sensitive information like passwords, TLS certificates, or
 private keys.
 
 Universal Control Plane allows you to store this sensitive information, also
-know as secrets, in a secure way. It also gives you role-based access control
+known as secrets, in a secure way. It also gives you role-based access control
 so that you can control which users can use a secret in their services
 and which ones can manage the secret.
 

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_service_rollback
 title: docker service rollback
+redirect_from:
+  - /edge/engine/reference/commandline/service_rollback/
 ---
 
 <!--
@@ -12,7 +14,4 @@ here, you'll need to find the string by searching this repo:
 https://www.github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

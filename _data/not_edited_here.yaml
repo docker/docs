@@ -12,7 +12,7 @@
 
 overrides:
 - path: /apidocs/
-  description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
+  description: "Auto-generated API docs for DTR and UCP. File an issue."
 
 - path: /engine/api/
   description: "ReDoc/Swagger API specs"

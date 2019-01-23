@@ -9,7 +9,7 @@ your Compose file and their name start with the `x-` character sequence.
 > of service, volume, network, config and secret definitions.
 
 ```none
-version: '2.1'
+version: '3.4'
 x-custom:
   items:
     - a

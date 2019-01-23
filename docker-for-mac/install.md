@@ -1,35 +1,33 @@
 ---
-description: How to install Docker for Mac
+description: How to install Docker Desktop for Mac
 keywords: mac, beta, alpha, install, download
-title: Install Docker for Mac
+title: Install Docker Desktop for Mac
 ---
 
-Docker for Mac is the
-[Community Edition (CE)](https://www.docker.com/community-edition)
-of Docker for MacOS. To download Docker for Mac, head to Docker Store.
+To download Docker Desktop for Mac, head to Docker Hub.
 
-[Download from Docker Store](https://store.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac){: .button .outline-btn}
 
 ##  What to know before you install
 
 > README FIRST for Docker Toolbox and Docker Machine users
 >
 >If you are already running Docker on your machine, first read
-[Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
+[Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
 impact of this installation on your existing setup, how to set your environment
-for Docker for Mac, and how the two products can coexist.
+for Docker Desktop for Mac, and how the two products can coexist.
 
-* **Relationship to Docker Machine**: Installing Docker for Mac does not affect
+* **Relationship to Docker Machine**: Installing Docker Desktop for Mac does not affect
   machines you created with Docker Machine. You have the option to copy
   containers and images from your local `default` machine (if one exists) to the
-  new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/) VM. When
-  you are running Docker for Mac, you do not need Docker Machine nodes running
-  at all locally (or anywhere else). With Docker for Mac, you have a new, native
+  new Docker Desktop for Mac [HyperKit](https://github.com/docker/HyperKit/) VM. When
+  you are running Docker Desktop for Mac, you do not need Docker Machine nodes running
+  at all locally (or anywhere else). With Docker Desktop for Mac, you have a new, native
   virtualization system running (HyperKit) which takes the place of the
   VirtualBox system. To learn more, see
-  [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
+  [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
 
-* **System Requirements**: Docker for Mac launches only if all of these
+* **System Requirements**: Docker Desktop for Mac launches only if all of these
   requirements are met.
 
   - Mac hardware must be a 2010 or newer model, with Intel's hardware support for memory
@@ -37,13 +35,13 @@ for Docker for Mac, and how the two products can coexist.
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 
-  - macOS El Capitan 10.11 and newer macOS releases are supported. We recommend
+  - macOS Sierra 10.12 and newer macOS releases are supported. We recommend
     upgrading to the latest version of macOS.
 
   - At least 4GB of RAM
 
   - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible
-    with Docker for Mac). If you have a newer version of VirtualBox installed, it's fine.
+    with Docker Desktop for Mac). If you have a newer version of VirtualBox installed, it's fine.
 
   > **Note**: If your system does not satisfy these requirements, you can
   > install [Docker Toolbox](/toolbox/overview.md), which uses Oracle VirtualBox
@@ -53,7 +51,7 @@ for Docker for Mac, and how the two products can coexist.
   [Docker Engine](/engine/userguide/), Docker CLI client,
   [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 
-## Install and run Docker for Mac
+## Install and run Docker Desktop for Mac
 
 1.  Double-click `Docker.dmg` to open the installer, then drag Moby the whale to
     the Applications folder.
@@ -82,13 +80,13 @@ for Docker for Mac, and how the two products can coexist.
 Preferences and other options.
 4.  Select **About Docker** to verify that you have the latest version.
 
-Congratulations! You are up and running with Docker for Mac.
+Congratulations! You are up and running with Docker Desktop for Mac.
 
 ## Where to go next
 
-* [Getting started](index.md) provides an overview of Docker for Mac, basic
+* [Getting started](index.md) provides an overview of Docker Desktop for Mac, basic
   Docker command examples, how to get help or give feedback, and links to all
-  topics in the Docker for Mac guide.
+  topics in the Docker Desktop for Mac guide.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 * [FAQs](faqs.md) provides answers to frequently asked questions.

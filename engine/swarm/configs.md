@@ -63,7 +63,7 @@ You can set the ownership (`uid` and `gid`) or the config, using either the
 numerical ID or the name of the user or group. You can also specify the file
 permissions (`mode`). These settings are ignored for Windows containers.
 
-- If not set, the config is owned by the user and that running the container
+- If not set, the config is owned by the user running the container
   command (often `root`) and that user's default group (also often `root`).
 - If not set, the config has world-readable permissions (mode `0444`), unless a
   `umask` is set within the container, in which case the mode is impacted by
@@ -586,7 +586,7 @@ configuration file.
     ```
 
 4.  Verify that the `nginx` service is fully re-deployed, using
-    `docker service ls nginx`. When it is, you can remove the old `site.conf`
+    `docker service ps nginx`. When it is, you can remove the old `site.conf`
     config.
 
     ```bash

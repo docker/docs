@@ -25,33 +25,35 @@ Docker Trusted Registry maintains data about:
 This data is persisted on the host running DTR, using named volumes.
 [Learn more about DTR named volumes](../../architecture.md).
 
-To perform a backup of a DTR node, run the `docker/dtr backup` command. This
-command backups up the following data:
+To perform a backup of a DTR node, run the [docker/dtr backup](/reference/dtr/2.6/cli/backup/) command. This
+command backs up the following data:
 
 | Data                               | Backed up | Description                                                    |
 |:-----------------------------------|:----------|:---------------------------------------------------------------|
 | Configurations                     | yes       | DTR settings                                                   |
-| Repository metadata                | yes       | Metadata like image architecture and size                      |
+| Repository metadata                | yes       | Metadata such as image architecture and size                      |
 | Access control to repos and images | yes       | Data about who has access to which images                      |
 | Notary data                        | yes       | Signatures and digests for images that are signed              |
 | Scan results                       | yes       | Information about vulnerabilities in your images               |
 | Certificates and keys              | yes       | TLS certificates and keys used by DTR                          |
 | Image content                      | no        | Needs to be backed up separately, depends on DTR configuration |
-| Users, orgs, teams                 | no        | Create a UCP backup to backup this data                        |
-| Vulnerability database             | no        | Can be re-downloaded after a restore                           |
+| Users, orgs, teams                 | no        | Create a UCP backup to back up this data                        |
+| Vulnerability database             | no        | Can be redownloaded after a restore                           |
 
 
-## Backup DTR data
+## Back up DTR data
 
 To create a backup of DTR you need to:
 
-1. Backup image content
-2. Backup DTR metadata
+1. Back up image content
+2. Back up DTR metadata
 
 You should always create backups from the same DTR replica, to ensure a smoother
-restore.
+restore. If you have not previously performed a backup, the web interface displays a warning for you to do so:
 
-### Backup image content
+![](/ee/dtr/images/backup-warning.png)
+
+### Back up image content
 
 Since you can configure the storage backend that DTR uses to store images,
 the way you backup images depends on the storage backend you're using.
@@ -63,7 +65,7 @@ and creating a tar archive of the [dtr-registry volume](../../architecture.md):
 {% raw %}
 ```none
 sudo tar -cf {{ image_backup_file }} \
-$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
+-C /var/lib/docker/volumes/ dtr-registry-<replica-id>
 ```
 {% endraw %}
 
@@ -71,7 +73,7 @@ If you're using a different storage backend, follow the best practices
 recommended for that system.
 
 
-### Backup DTR metadata
+### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
 command, replacing the placeholders for the real values:
