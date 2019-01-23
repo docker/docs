@@ -9,8 +9,8 @@ description: Learn how to define load-balanced and scalable service that runs co
 
 - [Install Docker version 1.13 or higher](/engine/installation/index.md).
 
-- Get [Docker Compose](/compose/overview.md). On [Docker for
-Mac](/docker-for-mac/index.md) and [Docker for
+- Get [Docker Compose](/compose/overview.md). On [Docker Desktop for
+Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md) it's pre-installed, so you're good-to-go.
 On Linux systems you need to [install it
 directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
@@ -41,7 +41,7 @@ must go one level up in the hierarchy of a distributed application: the
 
 ## About services
 
-In a distributed application, different pieces of the app are called "services."
+In a distributed application, different pieces of the app are called "services".
 For example, if you imagine a video sharing site, it probably includes a service
 for storing application data in a database, a service for video transcoding in
 the background after a user uploads something, a service for the front-end, and
@@ -84,7 +84,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "80:80"
+      - "4000:80"
     networks:
       - webnet
 networks:

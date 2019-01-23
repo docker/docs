@@ -12,7 +12,7 @@ You can run Compose on macOS, Windows, and 64-bit Linux.
 Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
 
-- On desktop systems like Docker for Mac and Windows, Docker Compose is
+- On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is
 included as part of those desktop installs.
 
 - On Linux systems, first install the
@@ -39,22 +39,22 @@ Python package manager or installing Compose as a container.
 <div id="macOS" class="tab-pane fade in active" markdown="1">
 ### Install Compose on macOS
 
-**Docker for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
-  * [Get Docker for Mac](/docker-for-mac/install.md)
+  * [Get Docker Desktop for Mac](/docker-for-mac/install.md)
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 <hr>
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 ### Install Compose on Windows systems
 
-**Docker for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
 along with other Docker apps, so most Windows users do not need to
 install Compose separately. Docker install instructions for these are here:
 
-* [Get Docker for Windows](/docker-for-windows/install.md)
+* [Get Docker Desktop for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 **If you are running the Docker daemon and client directly on Microsoft
@@ -128,6 +128,15 @@ by step instructions are also included below.
     ```bash
     sudo chmod +x /usr/local/bin/docker-compose
     ```
+    
+> ***Note:*** If the command `docker-compose` fails after installation, check your path.
+> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+
+For example:
+
+```bash
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
@@ -136,7 +145,7 @@ by step instructions are also included below.
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1719ceb
+    docker-compose version {{site.compose_version}}, build 1110ad01
     ```
 <hr>
 </div>

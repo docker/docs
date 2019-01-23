@@ -66,7 +66,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
     `private`, `rshared`, `shared`, `rslave`, `slave`.
   - The [`consistency`](#configure-mount-consistency-for-macos) option, if
     present, may be one of `consistent`, `delegated`, or `cached`. This setting
-    only applies to Docker for Mac, and is ignored on all other platforms.
+    only applies to Docker Desktop for Mac, and is ignored on all other platforms.
   - The `--mount` flag does not support `z` or `Z` options for modifying
     selinux labels.
 
@@ -383,9 +383,9 @@ $ docker run -d \
 
 ## Configure mount consistency for macOS
 
-Docker for Mac uses `osxfs` to propagate directories and files shared from macOS
+Docker Desktop for Mac uses `osxfs` to propagate directories and files shared from macOS
 to the Linux VM. This propagation makes these directories and files available to
-Docker containers running on Docker for Mac.
+Docker containers running on Docker Desktop for Mac.
 
 By default, these shares are fully-consistent, meaning that every time a write
 happens on the macOS host or through a mount in a container, the changes are

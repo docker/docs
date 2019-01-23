@@ -222,7 +222,7 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose builds and tags it with a generated name, and use that image
+Compose builds and tags it with a generated name, and uses that image
 thereafter.
 
     build:
@@ -296,7 +296,7 @@ A list of images that the engine uses for cache resolution.
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
-It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
+We recommend that you use reverse-DNS notation to prevent your labels from conflicting with
 those used by other software.
 
     build:
@@ -356,6 +356,16 @@ See `man 7 capabilities` for a full list.
       - SYS_ADMIN
 
 > **Note**: These options are ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
+### cgroup_parent
+
+Specify an optional parent cgroup for the container.
+
+    cgroup_parent: m-executor-abcd
+
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -464,16 +474,6 @@ configs:
 You can grant a service access to multiple configs and you can mix long and
 short syntax. Defining a config does not imply granting a service access to it.
 
-### cgroup_parent
-
-Specify an optional parent cgroup for the container.
-
-    cgroup_parent: m-executor-abcd
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
-
 ### container_name
 
 Specify a custom container name, rather than a generated default name.
@@ -490,14 +490,14 @@ an error.
 
 ### credential_spec
 
-> **Note:** this option was added in v3.3
+> **Note:** this option was added in v3.3.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
 format `file://<filename>` or `registry://<value-name>`.
 
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
-subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\`
+subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
 `C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`:
 
@@ -514,6 +514,45 @@ in the registry:
 
     credential_spec:
       registry: my-credential-spec
+
+### depends_on
+
+Express dependency between services, Service dependencies cause the following
+behaviors:
+
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` are started before `web`.
+
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
+  creates and starts `db` and `redis`.
+
+Simple example:
+
+    version: '3'
+    services:
+      web:
+        build: .
+        depends_on:
+          - db
+          - redis
+      redis:
+        image: redis
+      db:
+        image: postgres
+
+> There are several things to be aware of when using `depends_on`:
+>
+> - `depends_on` does not wait for `db` and `redis` to be "ready" before
+>   starting `web` - only until they have been started. If you need to wait
+>   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for more on this problem and strategies for solving it.
+>
+> - Version 3 no longer supports the `condition` form of `depends_on`.
+>
+> - The `depends_on` option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a version 3 Compose file.
 
 ### deploy
 
@@ -546,7 +585,7 @@ Specify a service discovery method for external clients connecting to a swarm.
 > **[Version 3.3](compose-versioning.md#version-3) only.**
 
 * `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP)
-that acts as the “front end” for clients to reach the service on a
+that acts as the front end for clients to reach the service on a
 network. Docker routes requests between the client and available worker
 nodes for the service, without client knowledge of how many nodes
 are participating in the service or their IP addresses or ports.
@@ -852,6 +891,9 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
+  
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
 
 Simple example:
 
@@ -880,7 +922,6 @@ Simple example:
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
 
-
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
@@ -898,31 +939,6 @@ Custom DNS search domains. Can be a single value or a list.
     dns_search:
       - dc1.example.com
       - dc2.example.com
-
-### tmpfs
-
-> [Version 2 file format](compose-versioning.md#version-2) and up.
-
-Mount a temporary file system inside the container. Can be a single value or a list.
-
-    tmpfs: /run
-    tmpfs:
-      - /run
-      - /tmp
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3-3.5) Compose file.
-
-> [Version 3.6 file format](compose-versioning.md#version-3) and up.
-
-Mount a temporary file system inside the container. Size parameter specifies the size
-of the tmpfs mount in bytes. Unlimited by default.
-
-     - type: tmpfs
-         target: /app
-         tmpfs:
-           size: 1000
 
 ### entrypoint
 
@@ -1459,6 +1475,22 @@ ports:
 
 > **Note:** The long syntax is new in v3.2
 
+### restart
+
+`no` is the default restart policy, and it does not restart a container under
+any circumstance. When `always` is specified, the container always restarts. The
+`on-failure` policy restarts a container if the exit code indicates an
+on-failure error.
+
+    restart: "no"
+    restart: always
+    restart: on-failure
+    restart: unless-stopped
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
+
 ### secrets
 
 Grant access to secrets on a per-service basis using the per-service `secrets`
@@ -1604,6 +1636,31 @@ dictionary.
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+
+### tmpfs
+
+> [Version 2 file format](compose-versioning.md#version-2) and up.
+
+Mount a temporary file system inside the container. Can be a single value or a list.
+
+    tmpfs: /run
+    tmpfs:
+      - /run
+      - /tmp
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3-3.5) Compose file.
+
+> [Version 3.6 file format](compose-versioning.md#version-3) and up.
+
+Mount a temporary file system inside the container. Size parameter specifies the size
+of the tmpfs mount in bytes. Unlimited by default.
+
+     - type: tmpfs
+         target: /app
+         tmpfs:
+           size: 1000
 
 ### ulimits
 
@@ -1791,13 +1848,13 @@ services:
         constraints: [node.role == manager]
 ```
 
-#### Caching options for volume mounts (Docker for Mac)
+#### Caching options for volume mounts (Docker Desktop for Mac)
 
 On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
 configure container-and-host consistency requirements for bind-mounted
 directories in Compose files to allow for better performance on read/write of
 volume mounts. These options address issues specific to `osxfs` file sharing,
-and therefore are only applicable on Docker for Mac.
+and therefore are only applicable on Docker Desktop for Mac.
 
 The flags are:
 
@@ -1825,24 +1882,8 @@ services:
 ```
 
 Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker for Mac topic [Performance tuning for
+`docker run` counterparts is in the Docker Desktop for Mac topic [Performance tuning for
 volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
-
-### restart
-
-`no` is the default restart policy, and it does not restart a container under
-any circumstance. When `always` is specified, the container always restarts. The
-`on-failure` policy restarts a container if the exit code indicates an
-on-failure error.
-
-    restart: "no"
-    restart: always
-    restart: on-failure
-    restart: unless-stopped
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
@@ -1947,9 +1988,12 @@ Specify a list of options as key-value pairs to pass to the driver for this
 volume. Those options are driver-dependent - consult the driver's
 documentation for more information. Optional.
 
-     driver_opts:
-       foo: "bar"
-       baz: 1
+    volumes:
+      example:
+        driver_opts:
+          type: "nfs"
+          o: "addr=10.40.0.199,nolock,soft,rw"
+          device: ":/docker/example"
 
 ### external
 
@@ -1957,14 +2001,16 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: '3'
 
     services:
       db:
@@ -2208,15 +2254,17 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `ipam`, `internal`).
+For version 3.3 and below of the format, `external` cannot be used in
+conjunction with other network configuration keys (`driver`, `driver_opts`,
+`ipam`, `internal`). This limitation no longer exists for
+[version 3.4](compose-versioning.md#version-34) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: '3'
 
     services:
       proxy:
@@ -2329,8 +2377,8 @@ stack. The source of the secret is either `file` or `external`.
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_secret` is created (as
-`<stack_name>_my_first_secret)`when the stack is deployed,
+In this example, `my_first_secret` is created as
+`<stack_name>_my_first_secret `when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```none
@@ -2346,10 +2394,18 @@ is different from the name that exists within the service. The following
 example modifies the previous one to use the external secret called
 `redis_secret`.
 
+### Compose File v3.5 and above
 ```none
 secrets:
   my_first_secret:
     file: ./secret_data
+  my_second_secret:
+    external: true
+    name: redis_secret
+```
+
+### Compose File v3.4 and under
+```none    
   my_second_secret:
     external:
       name: redis_secret

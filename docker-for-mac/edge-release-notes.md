@@ -1,7 +1,7 @@
 ---
 description: Change log / release notes per Edge release
-keywords: Docker for Mac, edge, release notes
-title: Docker for Mac Edge release notes
+keywords: Docker Desktop for Mac, edge, release notes
+title: Docker Desktop for Mac Edge release notes
 ---
 
 Here are the main improvements and issues per edge release, starting with the
@@ -17,6 +17,26 @@ releases, and download stable and edge product installers at [Download Docker
 for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
+
+### Docker Community Edition 2.0.1.0 2019-01-11
+
+[Download](https://download.docker.com/mac/edge/30090/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
+  - [Kubernetes 1.13.0](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.13.md#v1130)
+  - [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
+  - Golang 1.10.6, fixes CVEs: [CVE-2018-16875](https://www.cvedetails.com/cve/CVE-2018-16875), [CVE-2018-16873](https://www.cvedetails.com/cve/CVE-2018-16873) and [CVE-2018-16874](https://www.cvedetails.com/cve/CVE-2018-16874)
+  
+  WARNING: If you have an existing Kubernetes cluster created with Docker Desktop, this upgrade will reset the cluster. If you need to back up your Kubernetes cluster or persistent volumes you can use [Ark](https://github.com/heptio/ark).
+
+* Bug fixes and minor changes
+  - Fix service log collection in diagnostics
+  - Gather /etc/hosts to help diagnostics
+  - Ensure localhost resolves to 127.0.0.1. Related to [docker/for-mac#2990](https://github.com/docker/for-mac/issues/2990#issuecomment-443097942), [docker/for-mac#3383](https://github.com/docker/for-mac/issues/3383)
+  - Add 18.09 missing daemon options
+  - Rename Docker for Mac to Docker Desktop
+  - Partially open services ports if possible. [docker/for-mac#3438](https://github.com/docker/for-mac/issues/3438)
 
 ### Docker Community Edition 2.0.0.0-mac82 2018-12-07
 
@@ -107,7 +127,7 @@ for Mac](install.md#download-docker-for-mac).
 * Upgrades
   - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
   - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
-  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Mac.
+  - [Kubernetes 1.10.3](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v1103). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker Desktop for Mac.
 
 * Bug fixes and minor changes
   - Fix VPNKit memory leak. Fixes [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)

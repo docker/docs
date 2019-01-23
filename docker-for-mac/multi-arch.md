@@ -7,17 +7,16 @@ title: Leverage multi-CPU architecture support
 notoc: true
 ---
 
-Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
+Docker Desktop for Mac provides `binfmt_misc` multi architecture support, so you can run
 containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`,
 and even `s390x`.
 
-This should just work without any configuration, but the containers you run need
-to have the appropriate `qemu` binary inside before you can do
-this. (See <a href="http://wiki.qemu.org/" target="_blank">QEMU</a> for more
-information.)
+This does not require any special configuration in the container itself as it uses
+<a href="http://wiki.qemu.org/" target="_blank">qemu-static</a> from the Docker for
+Mac VM.
 
-So, you can run a container that already has this set up, like the <a
-href="https://resin.io/how-it-works/" target="_blank">resin</a> arm builds:
+You can run an ARM container, like the <a href="https://resin.io/how-it-works/" target="_blank">
+resin</a> arm builds:
 
 ```
 $ docker run resin/armv7hf-debian uname -a
@@ -30,10 +29,6 @@ Linux edd13885f316 4.1.12 #1 SMP Tue Jan 12 10:51:00 UTC 2016 ppc64le GNU/Linux
 
 ```
 
-Running containers pre-configured with `qemu` has the advantage that you can use
-these to do builds `FROM`, so you can build new Multi-CPU architecture packages.
-
-Alternatively, you can bind mount in the `qemu` static binaries to any
-cross-architecture package, such as the semi-official ones using a script like
-this one [https://github.com/justincormack/cross-docker](https://github.com/justincormack/cross-docker). (See the README at the
-given link for details on how to use the script.)
+Multi architecture support makes it easy to build <a href="https://blog.docker.com/2017/11/multi-arch-all-the-things/" target="_blank">
+multi architecture Docker images</a> or experiment with ARM images and binaries
+from your Mac.

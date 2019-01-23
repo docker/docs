@@ -1,6 +1,6 @@
 ---
 description: Engine
-keywords: Engine, CE, EE, node, activation, enterprise
+keywords: Engine, CE, EE, node, activation, enterprise, patching
 title: CE-EE Node Activate
 ---
 
@@ -19,6 +19,18 @@ CE-EE Node Activate will apply a license, and switch the Docker engine to the En
 * Node-level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker.
 * Prior versions of Docker CE do not support this feature.
 
+## Notes on patching after running CE to EE Node Activation
+
+Docker recommends replacing the apt or yum repository from CE with the EE repository that appears 
+on your hub/store account after starting the trial or paid license. This allows apt/yum 
+upgrade operations to work as expected and keep them current as long as your license is still
+valid and has not expired.
+
+> ***NOTE:*** You can use the `docker engine update` command. However, if you continue to use 
+> the CE packages, the OS package will no longer replace the active daemon binary during apt/yum 
+> updates, so you are responsible for performing the `docker engine update` operation periodically 
+> to keep your engine up to date.
+
 ## Docker Engine 18.09 CE to EE Node Activation Process
 
 The activation can be performed either online with connection to Docker Hub, or offline.
@@ -28,20 +40,21 @@ The activation can be performed either online with connection to Docker Hub, or 
 ```
 $ docker version
 Client:
- Version:           18.09.0-ce
+ Version:           18.09.0
  API version:       1.39
- Go version:        go1.10.3
- Git commit:        ca36ebe
- Built:             Thu Aug 23 18:21:56 2018
+ Go version:        go1.10.4
+ Git commit:        4d60db4
+ Built:             Wed Nov  7 00:48:22 2018
  OS/Arch:           linux/amd64
  Experimental:      false
-Server:
+
+Server: Docker Engine - Community
  Engine:
-  Version:          18.09.0-ce
+  Version:          18.09.0
   API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       ca36ebe
-  Built:
+  Go version:       go1.10.4
+  Git commit:       4d60db4
+  Built:            Wed Nov  7 00:19:08 2018
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
@@ -98,24 +111,25 @@ Restart docker with 'systemctl restart docker' to complete the activation.
 ```
 
 5. Check the Docker Engine version. The engine server will become EE, and the engine client will stay CE.
-```
 
+```
 $ docker version
 Client:
- Version:           18.09.0-ce
+ Version:           18.09.0
  API version:       1.39
- Go version:        go1.10.3
- Git commit:        ca36ebe
- Built:             Thu Aug 23 18:21:56 2018
+ Go version:        go1.10.4
+ Git commit:        4d60db4
+ Built:             Wed Nov  7 00:48:22 2018
  OS/Arch:           linux/amd64
  Experimental:      false
-Server:
+
+Server: Docker Engine - Enterprise
  Engine:
-  Version:          18.09.0-ee-1
+  Version:          18.09.0
   API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       b9e7996
-  Built:
+  Go version:       go1.10.4
+  Git commit:       33a45cd
+  Built:            Wed Nov  7 00:19:46 2018
   OS/Arch:          linux/amd64
   Experimental:     false
 ```

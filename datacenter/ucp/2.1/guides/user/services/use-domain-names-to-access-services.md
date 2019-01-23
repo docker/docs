@@ -130,6 +130,13 @@ These keys are supported:
 | sticky_sessions | no                                                       | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
 | redirect        | no                                                       | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
 
+> #### Known issue
+>
+> For SNI (HTTPS) routes, HRM forwards to service tasks before any task
+> health checks have passed.  This may result in traffic loss if a task is not
+> ready to serve traffic immediately after it is scheduled.
+{: .important}
+
 
 ### Sticky sessions
 

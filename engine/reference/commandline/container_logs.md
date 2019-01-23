@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_container_logs
 title: docker container logs
+redirect_from:
+  - /edge/engine/reference/commandline/container_logs/
 ---
 
 <!--
@@ -12,7 +14,4 @@ here, you'll need to find the string by searching this repo:
 https://github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

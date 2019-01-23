@@ -24,9 +24,15 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
-### 18.03 CE
+### 18.06.1 CE
 
 {{azure_blue_latest}}
+
+Release date: 8/24/2018
+
+- Docker Engine upgraded to [Docker 18.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce){: target="_blank" class="_"}
+
+### 18.03 CE
 
 Release date: 3/21/2018
 
@@ -126,7 +132,7 @@ Release date: 01/18/2017
 
 ### 18.01 CE
 
-{{aws_blue_edge}}
+{{azure_blue_edge}}
 
 **New**
 

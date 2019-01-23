@@ -2,6 +2,8 @@
 title: docker/ucp uninstall-ucp
 description: Uninstall UCP from this swarm
 keywords: ucp, cli, uninstall-ucp
+redirect_from:
+ - /reference/ucp/3.0/cli/uninstall-ucp/
 ---
 
 Uninstall UCP from this swarm

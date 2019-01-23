@@ -26,9 +26,9 @@ GUI.
 
 First, if you haven't yet done so, download and install Kitematic in one of the following ways:
 
-* Choose **Kitematic** from the Docker for Mac or Docker for Windows menu to get started with the Kitematic install.
+* Choose **Kitematic** from the Docker Desktop for Mac or Docker Desktop for Windows menu to get started with the Kitematic install.
 
-* Install [Docker Toolbox](/toolbox/overview.md#ready-to-get-started) (on older systems that do not meet the requirements of [Docker for Mac](/docker-for-mac/install.md#what-to-know-before-you-install) or [Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+* Install [Docker Toolbox](/toolbox/overview.md#ready-to-get-started) (on older systems that do not meet the requirements of [Docker Desktop for Mac](/docker-for-mac/install.md#what-to-know-before-you-install) or [Docker Desktop for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
 
 * Download Kitematic directly from the [Kitematic releases page](https://github.com/docker/kitematic/releases/).
 

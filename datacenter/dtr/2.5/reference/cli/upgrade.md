@@ -2,6 +2,8 @@
 title: docker/dtr upgrade
 description: Upgrade DTR 2.4.x cluster to this version
 keywords: dtr, cli, upgrade
+redirect_from:
+ - /reference/dtr/2.5/cli/upgrade/
 ---
 
 Upgrade DTR 2.4.x cluster to this version
