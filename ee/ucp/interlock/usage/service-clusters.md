@@ -42,10 +42,14 @@ map[nodetype:loadbalancer region:us-west]
 {% endraw %}
 ```
 
-Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters:
+Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters.
+
+Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
+
+If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
 
 ```bash
-$> cat << EOF | docker config create com.docker.ucp.interlock.service-clusters.conf-1 -
+$> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -
 ListenAddr = ":8080"
 DockerURL = "unix:///var/run/docker.sock"
 PollInterval = "3s"
@@ -117,9 +121,9 @@ $> docker network create -d overlay ucp-interlock
 
 Now we can create the Interlock service. 
 
-Important: The `--name` value specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later. 
+Important: The `--name` value and configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later. 
 
-If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `--name ucp-interlock-service-clusters`.
+If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `--name ucp-interlock-service-clusters` and `src=com.docker.ucp.interlock.service-clusters.conf-1` .
 
 ```bash
 $> docker service create \
@@ -127,7 +131,7 @@ $> docker service create \
     --mount src=/var/run/docker.sock,dst=/var/run/docker.sock,type=bind \
     --network ucp-interlock \
     --constraint node.role==manager \
-    --config src=com.docker.ucp.interlock.service-clusters.conf-1,target=/config.toml \
+    --config src=com.docker.ucp.interlock.conf-1,target=/config.toml \
     {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
