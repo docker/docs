@@ -193,7 +193,7 @@ $ docker build --ssh default .
 ## Troubleshooting : issues with private registries
 
 #### x509: certificate signed by unknown authority
-If you are fetching images from insecure registry (with self-signed certificates) and/or using such aa registry as a mirror, you are facing a known issue in Docker 18.09 :
+If you are fetching images from insecure registry (with self-signed certificates) and/or using such a registry as a mirror, you are facing a known issue in Docker 18.09 :
 ```
 [+] Building 0.4s (3/3) FINISHED
  => [internal] load build definition from Dockerfile
@@ -211,7 +211,7 @@ Solution : secure your registry properly. You can get SSL certificates from Let'
 
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
 
-If you are running a privatee registry using Sonatype Nexus version < 3.15, and receive an error similar to the following :
+If you are running a private registry using Sonatype Nexus version < 3.15, and receive an error similar to the following :
 ```
 ------
  > [internal] load metadata for docker.io/library/maven:3.5.3-alpine:
