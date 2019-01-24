@@ -1190,8 +1190,6 @@ manuals:
           title: Run only the images you trust
         - path: /ee/ucp/admin/configure/set-session-timeout/
           title: Set the user's session timeout
-        - path: /ee/ucp/admin/configure/store-logs-in-an-external-system/
-          title: Store logs in an external system
         - path: /ee/ucp/admin/configure/ucp-configuration-file/
           title: UCP configuration file
         - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
