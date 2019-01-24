@@ -91,7 +91,7 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 
 Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
 
-[custom_api_server_headers]
+[[custom_api_server_headers]]
 
 | Item | Description |
 | ----------- | ----------- |
