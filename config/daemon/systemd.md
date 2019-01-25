@@ -121,7 +121,7 @@ you need to add this configuration in the Docker systemd service file.
            "foo.com" matches "foo.com" and "bar.foo.com"
            ".foo.com" mataches only "bar.foo.com"
            ```
-    * A single asterisk (*) indicates that no proxying should be done
+    * A single asterisk (`*`) indicates that no proxying should be done
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`) and domain names (`foo.example.com:80`)
     
     Config examples:
