@@ -111,7 +111,7 @@ you need to add this configuration in the Docker systemd service file.
     * A single asterisk (`*`) indicates that no proxying should be done
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
       and domain names (`foo.example.com:80`)
-    These are the options you have to specify the excluded hosts: 
+    These are the options you can specify to exclude hosts:
     * IP address prefix (`1.2.3.4`) or in CIDR notation (`1.2.3.4/8`)    
     * Domain name, or a special DNS label (`*`)
       * A domain name matches that name and all subdomains. A domain name with
