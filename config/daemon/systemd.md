@@ -98,7 +98,19 @@ you need to add this configuration in the Docker systemd service file.
 3.  If you have internal Docker registries that you need to contact without
     proxying you can specify them via the `NO_PROXY` environment variable.
 
-    The `NO_PROXY` variable specifies a string that contains comma-separated values for hosts that should be excluded from proxying. 
+    The `NO_PROXY` variable specifies a string that contains comma-separated
+    values for hosts that should be excluded from proxying. These are the
+    options you can specify to exclude hosts: 
+    * IP address prefix (`1.2.3.4`) or in CIDR notation (`1.2.3.4/8`)    
+    * Domain name, or a special DNS label (`*`)
+    * A domain name matches that name and all subdomains. A domain name with
+      a leading "." matches subdomains only. For example, given the domains
+      `foo.example.com` and `example.com`;
+      * `example.com` matches `example.com` and `foo.example.com`, and
+      * `.example.com` matches only `foo.example.com`
+    * A single asterisk (`*`) indicates that no proxying should be done
+    * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
+      and domain names (`foo.example.com:80`)
     These are the options you have to specify the excluded hosts: 
     * IP address prefix (`1.2.3.4`) or in CIDR notation (`1.2.3.4/8`)    
     * Domain name, or a special DNS label (`*`)
