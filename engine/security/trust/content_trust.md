@@ -12,14 +12,14 @@ public or private registry. Content trust gives you the ability to verify both
 the integrity and the publisher of all the data received from a registry over 
 any channel.
 
-## About trust in Docker
+## About Docker Content Trust (DCT)
 
 Docker Content Trust (DCT) provides the ability to use digital signatures for 
 data sent to and received from remote Docker registries. These signatures allow 
 client-side or runtime verification of the integrity and publisher of specific 
 image tags. 
 
-Through DCT image publishers can sign their images and image consumers can 
+Through DCT, image publishers can sign their images and image consumers can 
 ensure that the images they use are signed. Publishers could be be individuals 
 or organizations manually signing their content or automated software supply 
 chains signing content as part of their release process.
@@ -69,7 +69,7 @@ To the consumer who has not enabled DCT, nothing about how they work with Docker
 images changes. Every image is visible regardless of whether it is signed or 
 not.
 
-### Docker Content Trust keys
+### Docker Content Trust Keys
 
 Trust for an image tag is managed through the use of signing keys. A key set is
 created when an operation using DCT is first invoked. A key set consists
@@ -92,7 +92,7 @@ The following image depicts the various signing keys and their relationships:
 >tag from this repository prior to the loss.
 {:.warning}
 
-You should backup the root key somewhere safe. Given that it is only required
+You should back up the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
 For details on securing, and backing up your keys, make sure you
 read how to [manage keys for DCT](trust_key_mng.md).
@@ -108,20 +108,20 @@ set, more information on Notary can be found [here](/notary/getting_started/).
 
 A prerequisite for signing an image is a Docker Registry with a Notary server
 attached (Such as the Docker Hub or Docker Trusted Registry). Instructions for
-standing up a self hosted environment can be found [here](/engine/security/trust/deploying_notary/).
+standing up a self-hosted environment can be found [here](/engine/security/trust/deploying_notary/).
 
-Secondly to sign a Docker Image you will need a delegation key pair. These keys
-can either be generated locally using `$ docker trust key generate`, generated 
-by a certificate authority, or alternatively if you are using Docker Enterprise's 
-Universal Control Plane, a user's Client Bundle provides adequate keys for a 
+To sign a Docker Image you will need a delegation key pair. These keys
+can be generated locally using `$ docker trust key generate`, generated 
+by a certificate authority, or if you are using Docker Enterprise's 
+Universal Control Plane (UCP), a user's Client Bundle provides adequate keys for a 
 delegation. Find more information on Delegation Keys 
 [here](trust_delegation/#creating-delegation-keys).
 
-First we will add the delegation private key to the local docker trust 
+First we will add the delegation private key to the local Docker trust 
 repository. (By default this is stored in `~/.docker/trust/`). If you are 
-generating delegation key's with `$ docker trust key generate`, the private key 
-is automatically added to the local trust store. If you are importing a seperate 
-key, such as one from the Universal Control Plane you will need to use the 
+generating delegation keys with `$ docker trust key generate`, the private key 
+is automatically added to the local trust store. If you are importing a separate 
+key, such as one from the UCP you will need to use the 
 `$ docker trust key load` command.
 
 ```
@@ -142,12 +142,12 @@ Repeat passphrase for new jeff key with ID 8ae710e:
 Successfully imported key from key.pem
 ```
 
-Next we will need to add the delegation public key to the Notary server, 
-this is specific to a particular image repository, in Notary known as a Global 
+Next we will need to add the delegation public key to the Notary server; 
+this is specific to a particular image repository in Notary known as a Global 
 Unique Name (GUN). If this is the first time you are adding a delegation to that
 repository, this command will also initiate the repository, using a local Notary 
 canonical root key. To understand more about initiating a repository, and the
-role of delegations head to 
+role of delegations, head to 
 [delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server)
 
 ```
@@ -157,7 +157,7 @@ Enter passphrase for new repository key with ID 10b5e94:
 ```
 
 
-Finally we will use the delegation private key to sign a particular tag and 
+Finally, we will use the delegation private key to sign a particular tag and 
 push it up to the registry.
 
 ```
@@ -171,7 +171,7 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed dtr.example.com/admin/demo:1
 ```
 
-Alternatively, once the key's have been imported an image can be pushed with the 
+Alternatively, once the keys have been imported an image can be pushed with the 
 `$ docker push` command, by exporting the DCT environmental variable.
 
 ```
@@ -274,7 +274,7 @@ verified successfully will not be pulled or run.
 
 All official Docker library images found on the Docker Hub (docker.io/library/*)
 are signed by the same Notary root key. This root key's ID has been embedded 
-inside of the Docker Enterprise Engine. Therefore to enforce that only official 
+inside of the Docker Enterprise Engine. Therefore, to enforce that, only official 
 Docker images can be used. Specify: 
 
 ```
@@ -322,11 +322,11 @@ $ grep -r "root" ~/.docker/trust/private
 ```
 
 * Notary Root key ID (DCT Certificate ID) is an ID that describes the same, but 
-the ID is unique per repository. i.e `mydtr/user1/image1` and `mydtr/usr1/image2` 
-will have unique certificate IDs. A certificate ID can be retrieved via a 
+the ID is unique per repository. For example, `mydtr/user1/image1` and `mydtr/usr1/image2` 
+will have unique certificate IDs. A certificate ID can be retrieved throughz a 
 `$ docker trust inspect` command and is labelled as a root-key (referring back 
 to the Notary key name). This is designed for when different users are signing 
-their own repositories, i.e. there is no central signing server. As a cert-id 
+their own repositories, for example, when there is no central signing server. As a cert-id 
 is more granular, it would take priority if a conflict occurs over a root ID. 
  
 ```
