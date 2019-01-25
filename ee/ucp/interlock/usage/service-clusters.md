@@ -42,7 +42,11 @@ map[nodetype:loadbalancer region:us-west]
 {% endraw %}
 ```
 
-Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters:
+Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters.
+
+Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
+
+If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
 
 ```bash
 $> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -
@@ -115,7 +119,11 @@ Next we will create a dedicated network for Interlock and the extensions:
 $> docker network create -d overlay ucp-interlock
 ```
 
-Now we can create the Interlock service:
+Now we can create the Interlock service. 
+
+Important: The `--name` value and configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later. 
+
+If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `--name ucp-interlock-service-clusters` and `src=com.docker.ucp.interlock.service-clusters.conf-1` .
 
 ```bash
 $> docker service create \
