@@ -323,7 +323,7 @@ $ grep -r "root" ~/.docker/trust/private
 
 * Notary Root key ID (DCT Certificate ID) is an ID that describes the same, but 
 the ID is unique per repository. For example, `mydtr/user1/image1` and `mydtr/usr1/image2` 
-will have unique certificate IDs. A certificate ID can be retrieved throughz a 
+will have unique certificate IDs. A certificate ID can be retrieved through a 
 `$ docker trust inspect` command and is labelled as a root-key (referring back 
 to the Notary key name). This is designed for when different users are signing 
 their own repositories, for example, when there is no central signing server. As a cert-id 
