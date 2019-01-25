@@ -63,7 +63,7 @@ consistency and compatibility reasons.
 ### Known Issues
 * When upgrading from 18.09.0 to 18.09.1, `containerd` is not upgraded to the correct version on Ubuntu.  [Learn more](https://success.docker.com/article/error-upgrading-to-engine-18091-with-containerd).
 
-## 18.09 
+## 18.09.0
 2018-11-08
 
 ### New features for Docker Engine EE 
