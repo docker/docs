@@ -21,6 +21,21 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.3 (2019-01-29)
+
+### New platforms
+ * Added support for Windows Server 2019 and Windows Server 1809. (#15810)
+ * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (#15535)
+ * Added support for Oracle Enterprise Linux 7.6 with Overlay2 storage driver. (#15791)
+
+### Networking
+ * Upgraded Calico to version 3.5. (#15884)
+
+### Bug Fixes
+ * Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
+ * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
+ * Added support for the limit arg in `docker ps`. (#15812)
+
 ## 3.1.2 (2019-01-09)
 
 ### Authentication and Authorization
@@ -135,6 +150,14 @@ The following features are deprecated in UCP 3.1.
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
 
 # Version 3.0
+
+## 3.0.9 (2018-01-29)
+
+### Bug fixes
+  * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
+  * Fixed system hang issue following UCP backup and docker daemon shutdown. (docker/escalation#841)
+  * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
+  * Added support for the limit arg in `docker ps`. (#15812)
 
 ## 3.0.8 (2019-01-09)
 
@@ -466,6 +489,11 @@ from the UCP web UI. You can configure Docker Engine for this.
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
+
+## Version 2.2.16 (2019-01-29)
+
+### Bug fixes
+ * Added support for the `limit` argument in `docker ps`. (#15812)
 
 ## Version 2.2.15 (2019-01-09)
 
