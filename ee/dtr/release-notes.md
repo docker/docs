@@ -21,6 +21,14 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.2 
+
+(2019-1-25)
+
+### Bug Fixes
+
+  * Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
+
 ## 2.6.1 
 
 (2019-01-09)
