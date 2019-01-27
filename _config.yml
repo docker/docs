@@ -95,7 +95,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.1"
+      win_latest_build: "docker-18.09.2"
   - scope:
       path: "datacenter"
     values:
@@ -112,14 +112,14 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.7"
+      dtr_version: "2.5.8"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.8"
+      dtr_version: "2.4.9"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
