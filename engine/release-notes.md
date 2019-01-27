@@ -153,22 +153,22 @@ consistency and compatibility reasons.
 * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 * With https://github.com/boot2docker/boot2docker/releases/download/v18.09.0/boot2docker.iso, connection is being refused from a node on the virtual machine. Any publishing of swarm ports in virtualbox-created docker-machine VM's will not respond. This is occurring on macOS and Windows 10, using docker-machine version 0.15 and 0.16.
 
-The following `docker run` command works, allowing access from host browser:
+   The following `docker run` command works, allowing access from host browser:
 
-`docker run -d -p 4000:80 nginx`
+   `docker run -d -p 4000:80 nginx`
 
-However, the following `docker service` command fails, resulting in curl/chrome unable to connect (connection refused):
+   However, the following `docker service` command fails, resulting in curl/chrome unable to connect (connection refused):
 
-`docker service create -p 5000:80 nginx`
+   `docker service create -p 5000:80 nginx`
 
-This issue is not apparent when provisioning 18.09.0 cloud VM's using docker-machine. 
+   This issue is not apparent when provisioning 18.09.0 cloud VM's using docker-machine. 
 
-Workarounds:
-* Use cloud VM's that don't rely on boot2docker.
-* `docker run` is unaffected.
-* For Swarm, set VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso. 
+   Workarounds:
+   * Use cloud VM's that don't rely on boot2docker.
+   * `docker run` is unaffected.
+   * For Swarm, set VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso. 
 
-This issue is resolved in 18.09.1.
+   This issue is resolved in 18.09.1.
 
 ### Deprecation Notice
 
