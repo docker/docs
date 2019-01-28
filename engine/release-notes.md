@@ -25,6 +25,18 @@ consistency and compatibility reasons.
 ## 18.09.1
 2019-01-09
 
+#### Important notes about this release
+
+In Docker versions prior to 18.09, containerd was managed by the Docker engine daemon. In Docker Engine 18.09, containerd is managed by systemd. Since containerd is managed by systemd, any custom configuration to the `docker.service` systemd configuration which changes mount settings (for example, `MountFlags=slave`) breaks interactions between the Docker Engine daemon and containerd, and you will not be able to start containers.
+
+Run the following command to get the current value of the `MountFlags` property for the `docker.service`:
+
+```bash
+sudo systemctl show --property=MountFlags docker.service
+MountFlags=
+```
+Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
+
 ### Security fixes for Docker Engine EE and CE 
 * Upgraded Go language to 1.10.6 to resolve [CVE-2018-16873](https://nvd.nist.gov/vuln/detail/CVE-2018-16873), [CVE-2018-16874](https://nvd.nist.gov/vuln/detail/CVE-2018-16874), and [CVE-2018-16875](https://nvd.nist.gov/vuln/detail/CVE-2018-16875).
 * Fixed authz plugin for 0-length content and path validation.
@@ -60,8 +72,23 @@ consistency and compatibility reasons.
 * Add socket activation for RHEL-based distributions. [docker/docker-ce-packaging#274](https://github.com/docker/docker-ce-packaging/pull/274)
 * Add libseccomp requirement for RPM packages. [docker/docker-ce-packaging#266](https://github.com/docker/docker-ce-packaging/pull/266)
 
-## 18.09 
+## 18.09.0 
 2018-11-08
+
+#### Important notes about this release
+
+In Docker versions prior to 18.09, containerd was managed by the Docker engine daemon. In Docker Engine 18.09, containerd is managed by systemd. Since containerd is managed by systemd, any custom configuration to the `docker.service` systemd
+configuration which changes mount settings (for example, `MountFlags=slave`) breaks interactions between the Docker Engine daemon and containerd, and you will not be able to start containers.
+
+Run the following command to get the current value of the `MountFlags` property for the `docker.service`:
+
+```bash
+sudo systemctl show --property=MountFlags docker.service
+MountFlags=
+```
+
+Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
+
 
 ### New features for Docker Engine EE 
 
