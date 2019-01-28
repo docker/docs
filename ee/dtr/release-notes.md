@@ -100,6 +100,14 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
+## 2.5.8
+ 
+(2019-1-29)
+
+### Bug Fixes
+
+* Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (docker/dhe-deploy #9958)
+
 ## 2.5.7 
 
 (2019-01-09)
