@@ -22,6 +22,13 @@ consistency and compatibility reasons.
 > patch version. The enterprise engine is a superset of the community engine. They 
 > will ship concurrently with the same x patch version based on the same code base. 
 
+> ***NOTE:***
+> The `containerd.io` container runtime package is now in a separate package from
+> Docker Engine 18.09. Users will need to update the `containerd.io` package in
+> conjunction with the Docker Engine package. For example, on Ubuntu:
+> `sudo apt install docker-ce containerd.io`. See the install instructions for
+> corresponding linux distro for details.
+
 ## 18.09.1
 2019-01-09
 
