@@ -173,7 +173,7 @@ For more information on the list of deprecated flags and APIs, have a look at th
 In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660),
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
-### 18.03.ee-5
+### 18.03.1-ee-5
 2019-01-09
 
 ### Security fixes
@@ -202,6 +202,33 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 
 ## Older Docker Engine EE Release notes
+
+### 18.03.1-ee-3 
+2018-08-30
+
+#### Builder
+
+* Fix: no error if build args are missing during docker build. [docker/engine#25](https://github.com/docker/engine/pull/25)
+* Ensure RUN instruction to run without healthcheck. [moby/moby#37413](https://github.com/moby/moby/pull/37413)
+
+#### Client
+
+* Fix manifest list to always use correct size. [docker/cli#1156](https://github.com/docker/cli/pull/1156)
+* Various shell completion script updates. [docker/cli#1159](https://github.com/docker/cli/pull/1159) [docker/cli#1227](https://github.com/docker/cli/pull/1227)
+* Improve version output alignment. [docker/cli#1204](https://github.com/docker/cli/pull/1204)
+
+#### Runtime
+
+* Disable CRI plugin listening on port 10010 by default. [docker/engine#29](https://github.com/docker/engine/pull/29)
+* Update containerd to v1.1.2. [docker/engine#33](https://github.com/docker/engine/pull/33)
+* Windows: Pass back system errors on container exit. [moby/moby#35967](https://github.com/moby/moby/pull/35967)
+* Windows: Fix named pipe support for hyper-v isolated containers. [docker/engine#2](https://github.com/docker/engine/pull/2) [docker/cli#1165](https://github.com/docker/cli/pull/1165)
+* Register OCI media types. [docker/engine#4](https://github.com/docker/engine/pull/4)
+
+#### Swarm Mode
+
+* Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
+* Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
 
 ### 18.03.1-ee-2
 2018-07-10
