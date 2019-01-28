@@ -10,7 +10,7 @@ The following `Dockerfile` sets up an SSHd service in a container that you
 can use to connect to and inspect other container's volumes, or to get
 quick access to a test container.
 
-> *** NOTE: *** For Ubunt 14.04, use  `without-password` instead of `prohibit-password`.
+> *** NOTE: *** For Ubuntu 14.04, use  `without-password` instead of `prohibit-password`.
 
 ```Dockerfile
 FROM ubuntu:16.04
