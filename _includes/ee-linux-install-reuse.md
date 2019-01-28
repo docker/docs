@@ -145,7 +145,7 @@ You only need to set up the repository once, after which you can install Docker 
 1.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo yum -y install docker-ee
+    $ sudo yum -y install docker-ee containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
@@ -166,7 +166,7 @@ You only need to set up the repository once, after which you can install Docker 
     b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-18.09.0`
 
     ```bash
-    $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
+    $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME> containerd.io
     ```
 
     For example, if you want to install the 18.09 version run the following:
