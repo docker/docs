@@ -35,6 +35,9 @@ upgrade your installation to the latest release.
  * Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
  * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (docker/orca#15936)
  * Added support for the limit arg in `docker ps`. (docker/orca#15812)
+ 
+### Known issue
+ * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
 
 ## 3.1.2 (2019-01-09)
 
@@ -158,6 +161,9 @@ The following features are deprecated in UCP 3.1.
   * Fixed system hang issue following UCP backup and docker daemon shutdown. (docker/escalation#841)
   * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
   * Added support for the limit arg in `docker ps`. (#15812)
+  
+### Known issue
+  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
 
 ## 3.0.8 (2019-01-09)
 
