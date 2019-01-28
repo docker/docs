@@ -203,6 +203,32 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
+### 18.03.1-ee-4 
+2018-10-25
+
+> *** NOTE: **** If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+
+#### Client
+
+* Fixed help message flags on docker stack commands and child commands. [docker/cli#1251](https://github.com/docker/cli/pull/1251)
+* Fixed typo breaking zsh docker update autocomplete. [docker/cli#1232](https://github.com/docker/cli/pull/1232)
+
+### Networking
+
+* Added optimizations to reduce the messages in the NetworkDB queue. [docker/libnetwork#2225](https://github.com/docker/libnetwork/pull/2225)
+* Fixed a very rare condition where managers are not correctly triggering the reconnection logic. [docker/libnetwork#2226](https://github.com/docker/libnetwork/pull/2226)
+* Changed loglevel from error to warning for missing disable_ipv6 file. [docker/libnetwork#2224](https://github.com/docker/libnetwork/pull/2224)
+
+#### Runtime
+
+* Fixed denial of service with large numbers in cpuset-cpus and cpuset-mems. [moby/moby#37967](https://github.com/moby/moby/pull/37967)
+* Added stability improvements for devicemapper shutdown. [moby/moby#36307](https://github.com/moby/moby/pull/36307) [moby/moby#36438](https://github.com/moby/moby/pull/36438)
+
+#### Swarm Mode
+
+* Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
+* Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
+
 ### 18.03.1-ee-3 
 2018-08-30
 
