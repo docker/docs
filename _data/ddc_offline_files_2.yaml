@@ -41,6 +41,8 @@
   tar-files:
     - description: "3.0.9 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.0.9.tar.gz
+    - description: "3.0.9 IBM Z"
+      url: https://packages.docker.com/caas/ucp_images_s390x_3.0.9.tar.gz
     - description: "3.0.9 Windows Server 2016 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.9.tar.gz
     - description: "3.0.9 Windows Server 1709"
