@@ -215,13 +215,12 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
 
 
-
 ## Older Docker Engine EE Release notes
 
 ### 18.03.1-ee-4 
  2018-10-25
 
-  > *** NOTE: **** If you're deploying UCP or DTR, use Docker EE Engine 17.06.
+  > *** NOTE: *** If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
 
  #### Client
 
@@ -270,7 +269,6 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
   * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
  * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
-
 
 ### 18.03.1-ee-2
 2018-07-10
