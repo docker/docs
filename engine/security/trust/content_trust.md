@@ -259,13 +259,13 @@ specified.
 logged and remain unenforced. This configuration is intended for testing of 
 changes related to content-trust. The results of the signature verification 
 is displayed in the Docker Engine's daemon logs. 
-* `Enabled` - Content trust will be enforced and an image that cannot be 
+* `Enforced` - Content trust will be enforced and an image that cannot be 
 verified successfully will not be pulled or run.
 
 ```
 {
     "content-trust": {
-        "mode": "enabled"
+        "mode": "enforced"
     }
 }
 ```
@@ -283,7 +283,7 @@ Docker images can be used. Specify:
     "trust-pinning": {
       "official-library-images": true
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -316,7 +316,7 @@ $ grep -r "root" ~/.docker/trust/private
          ]
       }
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -348,7 +348,7 @@ $ docker trust inspect mydtr/user1/repo1 | jq -r '.[].AdministrativeKeys[] | sel
          ]
       }
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -375,7 +375,7 @@ trust cached signature data. This is done through the
          ],
       }
     },
-    "mode": "enabled",
+    "mode": "enforced",
     "allow-expired-cached-trust-data": true 
   }
 }
