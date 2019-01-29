@@ -191,8 +191,7 @@ The following features are deprecated in UCP 3.1.
   * UCP backend will now complain when a service is created/updated if the
    `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
-  * Fixed an issue that caused a system hang after the attempted shutdown of the Docker daemon to perform a swarm backup.  /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672)
-  * Fixed system hang issue following UCP backup and docker daemon shutdown. (docker/escalation#841)
+  * Fixed an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672, docker/escalation#841)
   
 * Interlock
   * Interlock headers can now be hidden. (docker/escalation#833)
