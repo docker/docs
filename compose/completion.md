@@ -54,11 +54,11 @@ completion.
 
 #### With oh-my-zsh
 
-Add `docker` to the plugins list in `~/.zshrc`:
+Add `docker` and/or `docker-compose` to the plugins list in `~/.zshrc`:
 
 ```shell
 plugins=(
-  <existing-plugins> docker
+  <existing-plugins> docker docker-compose
 )
 ```
 
