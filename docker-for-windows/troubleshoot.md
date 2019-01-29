@@ -488,10 +488,6 @@ with Linux containers.
   Check the settings in **Hardware → CPU & Memory → Advanced Options → Enable
   nested virtualization** (the exact menu sequence might vary slightly).
 
-* Ensure "PMU Virtualization" is turned off in Parallels on Macs. Check the 
-  settings in **Hardware → CPU & Memory → Advanced Settings → PMU 
-  Virtualization**
-
 * Configure your VM with at least 2 CPUs and sufficient memory to run your
   workloads.
 
@@ -519,6 +515,10 @@ with Linux containers.
   counter (TSC). This process is quite timing sensitive and may fail when
   executed inside a VM which itself runs inside a VM. CPU utilization is also
   likely to be higher.
+
+* Ensure "PMU Virtualization" is turned off in Parallels on Macs. Check the 
+  settings in **Hardware → CPU & Memory → Advanced Settings → PMU 
+  Virtualization**
 
 #### Related issues
 
