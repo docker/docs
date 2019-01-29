@@ -23,7 +23,7 @@ to upgrade your installation to the latest release.
 
 ## 2.6.2 
 
-(2019-1-25)
+(2019-1-29)
 
 ### Bug Fixes
 
