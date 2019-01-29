@@ -55,7 +55,9 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 
 ### Supported storage drivers
 
-Docker CE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+Docker CE on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
+> *** Note: *** In Docker Engine - Enterprise, `btrfs` is only supported on SLES. See the documentation on 
+> [btrfs](/engine/userguide/storagedriver/btrfs-driver.md) for more details.
 
 For new installations on version 4 and higher of the Linux kernel, `overlay2`
 is supported and preferred over `aufs`. Docker CE uses the `overlay2`
@@ -102,7 +104,7 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg2 \
+        gnupg-agent \
         software-properties-common
     ```
 
@@ -125,11 +127,9 @@ from the repository.
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-4.  Use the following command to set up the **stable** repository. You always
-    need the **stable** repository, even if you want to install builds from the
-    **edge** or **test** repositories as well. To add the **edge** or
-    **test** repository, add the word `edge` or `test` (or both) after the
-    word `stable` in the commands below.
+4.  Use the following command to set up the **stable** repository. To add the
+    **nightly** or **test** repository, add the word `nightly` or `test` (or both)
+    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](/install/index.md).
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
@@ -197,11 +197,6 @@ from the repository.
 
     </div>
     </div> <!-- tab-content -->
-
-    > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **test** repositories.
-
-    [Learn about **stable** and **edge** channels](/install/index.md).
 
 #### Install Docker CE
 
@@ -278,9 +273,9 @@ a new file each time you want to upgrade Docker.
     `armhf`, `arm64`, `ppc64el`, or `s390x`, and download the `.deb` file for the
     Docker CE version you want to install.
 
-    > **Note**: To install an **edge**  package, change the word
-    > `stable` in the  URL to `edge`.
-    > [Learn about **stable** and **edge** channels](/install/index.md).
+    > **Note**: To install a **nightly**  package, change the word
+    > `stable` in the  URL to `nightly`.
+    > [Learn about **nightly** and **test** channels](/install/index.md).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.

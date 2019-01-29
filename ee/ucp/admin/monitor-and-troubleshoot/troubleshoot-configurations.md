@@ -10,7 +10,7 @@ components and trying to bring them to a healthy state.
 In most cases, if a single UCP component is in a failed state persistently,
 you should be able to restore the cluster to a healthy state by
 removing the unhealthy node from the cluster and joining it again.
-[Lean how to remove and join modes](../configure/scale-your-cluster.md).
+[Lean how to remove and join nodes](../configure/scale-your-cluster.md).
 
 ## Troubleshoot the etcd key-value store
 
@@ -137,8 +137,8 @@ docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION
 time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..."
 time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]"
 time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1"
-time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
-time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Reconfiguring Table Replication..."
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Reconfigured Replication of Table \"grant_objects\""
 ...
 {% endraw %}
 ```

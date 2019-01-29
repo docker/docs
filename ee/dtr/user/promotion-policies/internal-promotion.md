@@ -31,6 +31,11 @@ Once you've [created the repository](../manage-images/index.md), navigate to
 the repository page on the DTR web interface, and select the
 **Promotions** tab.
 
+> Only administrators can globally create and edit promotion policies. By default 
+> users can only create and edit promotion policies on repositories within their 
+> user namespace. For more information on user permissions head to 
+> [Authorization and Authorization](../../admin/manage-users/).
+
 ![repository policies](../../images/internal-promotion-2.png){: .with-border}
 
 Click **New promotion policy**, and define the image promotion criteria.

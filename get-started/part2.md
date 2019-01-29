@@ -156,7 +156,7 @@ Dockerfile		app.py			requirements.txt
 ```
 
 Now run the build command. This creates a Docker image, which we're going to
-name using the `--tag` option. Use `-t` if you want to use the a shorter option.
+name using the `--tag` option. Use `-t` if you want to use the shorter option.
 
 ```shell
 docker build --tag=friendlyhello .

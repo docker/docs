@@ -220,7 +220,7 @@ To configure your external Prometheus server to scrape metrics from Prometheus i
     prometheus   ClusterIP   10.96.254.107   <none>        9090/TCP   1h
     ```
 
-5. Forward port 9090 on the local host to the ClusterIP. The tunnel created does not need to be kept alive and is only intended to expose the Prometheus API.
+5. Forward port 9090 on the local host to the ClusterIP. The tunnel created does not need to be kept alive and is only intended to expose the Prometheus UI.
 
     ```
     ssh -L 9090:10.96.254.107:9090 ANY_NODE
