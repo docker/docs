@@ -166,6 +166,9 @@ The following features are deprecated in UCP 3.1.
 
 2018-01-29
 
+### New platforms
+ * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (docker/orca#15996)
+
 ### Bug fixes
   * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
   * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
