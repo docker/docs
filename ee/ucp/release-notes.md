@@ -168,7 +168,6 @@ The following features are deprecated in UCP 3.1.
 
 ### Bug fixes
   * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
-  * Fixed system hang issue following UCP backup and docker daemon shutdown. (docker/escalation#841)
   * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
   * Added support for the limit arg in `docker ps`. (#15812)
   
@@ -189,6 +188,8 @@ The following features are deprecated in UCP 3.1.
    `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
   * Fixed an issue that caused a system hang after the attempted shutdown of the Docker daemon to perform a swarm backup.  /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672)
+  * Fixed system hang issue following UCP backup and docker daemon shutdown. (docker/escalation#841)
+  
 * Interlock
   * Interlock headers can now be hidden. (docker/escalation#833)
   * Respect `com.docker.lb.network` labels and only attach the specified networks
