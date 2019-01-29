@@ -12,7 +12,7 @@ title: Legacy container links
 be removed. Unless you absolutely need to continue using it, we recommend that you use
 user-defined networks to facilitate communication between two containers instead of using
 `--link`. One feature that user-defined networks do not support that you can do
-with `--link` is sharing environmental variables between containers. However,
+with `--link` is sharing environment variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
 >
