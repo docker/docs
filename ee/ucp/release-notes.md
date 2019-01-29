@@ -216,6 +216,15 @@ The following features are deprecated in UCP 3.1.
 ### Known issue
   * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
 
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.9 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 ## 3.0.8
 
 2019-01-09
