@@ -51,6 +51,10 @@ upgrade your installation to the latest release.
 * Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can 
 enable this feature in Admin Settings -> SAML Settings.
 
+### Audit Logging
+* UCP Audit logging is now controlled via the UCP Configuration file, it is also
+now configurable within the UCP UI. (#15466)
+
 ### Bug Fixes
 * Core
   * Significantly reduced database load in environments with a lot of concurrent 
