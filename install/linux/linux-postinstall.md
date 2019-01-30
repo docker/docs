@@ -485,4 +485,4 @@ and a 10% overall performance degradation, even if Docker is not running.
 
 ## Next steps
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/get-started/index.md).
