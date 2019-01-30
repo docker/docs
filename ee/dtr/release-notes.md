@@ -27,7 +27,7 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-  * Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
+  * Fixed a bug where scanning Windows images were stuck in Pending state. (#9969)
 
 ## 2.6.1 
 
@@ -35,9 +35,9 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-* Fixed a bug where notary signing data was not being backed up properly (docker/dhe-deploy #9862)
-* Allow a cluster to go from 2 replicas to 1 without forcing removal (docker/dhe-deploy #9840)
-* Fixed a race condition in initialization of the scan vulnerability database (docker/dhe-deploy #9907)
+* Fixed a bug where notary signing data was not being backed up properly (#9862)
+* Allow a cluster to go from 2 replicas to 1 without forcing removal (#9840)
+* Fixed a race condition in initialization of the scan vulnerability database (#9907)
 
 ## 2.6.0 
 
@@ -77,13 +77,13 @@ to upgrade your installation to the latest release.
   * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 * Web Interface
-  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
-  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
-  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (#9677)
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (#9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (#9474)
 
 * Webhooks
-  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
-  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (#9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (#9492)
 
 * System
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
@@ -106,7 +106,7 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-* Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (docker/dhe-deploy #9958)
+* Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (#9958)
 
 ## 2.5.7 
 
@@ -114,22 +114,22 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-* Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (docker/dhe-deploy #9811)
-* Updated GoRethink library to avoid potential lock contention. (docker/dhe-deploy #9812)
-* Fixed a bug where notary signing data was not being backed up properly. (docker/dhe-deploy #9851)
+* Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (#9811)
+* Updated GoRethink library to avoid potential lock contention. (#9812)
+* Fixed a bug where notary signing data was not being backed up properly. (#9851)
 
 ## 2.5.6 
 
 (2018-10-25)
 
 ### Bug Fixes
-* Fixed a bug where Windows images could not be promoted. (docker/dhe-deploy#9215)
-* Removed Python3 from base image. (docker/dhe-deploy#9219)
-* Added CSP (docker/dhe-deploy#9366)
-* Included foreign layers in scanned images. (docker/dhe-deploy#9488)
-* Added dotnet.marsu to nautilus base image. (docker/dhe-deploy#9503)
-* Backported ManifestList fixes. (docker/dhe-deploy#9547)
-* Removed support sidebar link and associated content. (docker/dhe-deploy#9411)
+* Fixed a bug where Windows images could not be promoted. (#9215)
+* Removed Python3 from base image. (#9219)
+* Added CSP (#9366)
+* Included foreign layers in scanned images. (#9488)
+* Added dotnet.marsu to nautilus base image. (#9503)
+* Backported ManifestList fixes. (#9547)
+* Removed support sidebar link and associated content. (#9411)
 
 ## 2.5.5 
 
@@ -157,7 +157,7 @@ to upgrade your installation to the latest release.
 
 ### Known Issues
 * Webhooks
-  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (#9685)
 
 
 ## 2.5.2 
@@ -275,7 +275,7 @@ specify `--log-protocol`.
   * Clicking "Save & Apply" on a promotion policy doesn't work.
 * Webhooks
   * There is no webhook event for when an image is pulled.
-  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (#9492)
 * Online garbage collection
   * The events API won't report events when tags and manifests are deleted.
   * The events API won't report blobs deleted by the garbage collection job.
@@ -296,8 +296,8 @@ specify `--log-protocol`.
 (25 October 2018)
 
 ### Bug Fixes
-* Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
-* Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9574)
+* Added CSP (Content Security Policy). (#9367 and #9584)
+* Fixed critical vulnerability in RethinkDB. (#9574)
 
 ### Changelog
 * Patched security vulnerabilities in the load balancer.

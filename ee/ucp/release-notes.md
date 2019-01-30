@@ -26,18 +26,18 @@ upgrade your installation to the latest release.
 2019-01-29
 
 ### New platforms
- * Added support for Windows Server 2019 and Windows Server 1809. (docker/orca#15810)
- * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (docker/orca#15535)
- * Added support for Oracle Enterprise Linux 7.6 with Overlay2 storage driver. (docker/orca#15791)
+ * Added support for Windows Server 2019 and Windows Server 1809. (#15810)
+ * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (#15535)
+ * Added support for Oracle Enterprise Linux 7.6 with Overlay2 storage driver. (#15791)
 
 ### Networking
  * Upgraded Calico to version 3.5. (#15884)
 
 ### Bug Fixes
- * Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
- * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (docker/orca#15936)
- * Added support for the limit arg in `docker ps`. (docker/orca#15812)
- * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
+ * Fixed system hang following UCP backup and docker daemon shutdown. (#15672)
+ * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
+ * Added support for the limit arg in `docker ps`. (#15812)
+ * Fixed an issue with ucp-proxy health check. (#15814, #15813, #16021 and #15811)
  
 ### Known issue
  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
@@ -54,14 +54,14 @@ enable this feature in Admin Settings -> SAML Settings.
 ### Bug Fixes
 * Core
   * Significantly reduced database load in environments with a lot of concurrent 
-  and repeated API requests by the same user. (docker/escalation#911)
+  and repeated API requests by the same user. (#15333)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
-  * LDAP group member attribute is now case insensitive. (docker/escalation#917)
+   `com.docker.lb.network` label is not correctly specified. (#15015) 
+  * LDAP group member attribute is now case insensitive. (#15456)
 * Interlock
-  * Interlock headers can now be hidden. (escalation#833)
-  * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (escalation/871)
-  * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (docker/interlock#206) (escalation/920)
+  * Interlock headers can now be hidden. (interlock#185)
+  * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (#15040)
+  * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (interlock#206)
 
 ## 3.1.1 
 
@@ -168,10 +168,10 @@ The following features are deprecated in UCP 3.1.
 2018-01-29
 
 ### New platforms
- * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (docker/orca#15996)
+ * Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (#15996)
 
 ### Bug fixes
-  * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
+  * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (#15040)
   * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
   * Added support for the limit arg in `docker ps`. (#15812)
   
@@ -185,21 +185,21 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 * Core
   * Significantly reduced database load in environments with a lot of concurrent 
-  and repeated API requests by the same user. (docker/escalation#911)
+  and repeated API requests by the same user. (#15333)
   * Added the ability to set custom HTTP response headers to be returned by the
-   UCP Controller API Server. (docker/orca#10733)
+   UCP Controller API Server. (#10733)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
-  * LDAP group member attribute is now case insensitive. (docker/escalation#917)
-  * Fixed an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672, docker/escalation#841)
+   `com.docker.lb.network` label is not correctly specified. (#15015) 
+  * LDAP group member attribute is now case insensitive. (#15537)
+  * Fixed an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (#15672)
   
 * Interlock
-  * Interlock headers can now be hidden. (docker/escalation#833)
+  * Interlock headers can now be hidden. (interlock#185)
   * Respect `com.docker.lb.network` labels and only attach the specified networks
-    to the Interlock proxy. (docker/interlock#169)
+    to the Interlock proxy. (interlock#169)
   * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the 
      backend service's Virtual IP instead of load-balancing directly to each task IP. 
-     (docker/interlock#206, escalation/920)
+     (interlock#206)
 
 ## 3.0.7 
 
@@ -216,33 +216,19 @@ The following features are deprecated in UCP 3.1.
 * Core
   * Updated Kubernetes to version 1.8.15.
   * Resolved an issue where LDAP sync jobs would terminate when processing an org admin
-    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
-  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
-  * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
-  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
-  * Fixed an issue that caused the Interlock proxy service to restart (docker/escalation#814)
+    Search result that does not resolve to an existing user. (#14309)
+  * Fixed an issue that caused RethinkDB client lock contention. (#15264)
+  * Fixed an issue that prevented Azure IPAM to not release addresses. (#14515)
+  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (#15132)
+  * Fixed an issue that caused the Interlock proxy service to restart (interlock#814 and interlock#180)
   * Fixed an issue that caused Kubernetes DNS to not work (#14064, #11981)
   * Fixed an issue that causes a missing warning banner to appear unnecessarily. (#14539)
 * Security
   * Fixed `libcurl` vulnerability in RethinkDB image. (#15169)
 * UI
-  * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (docker/escalation#639)
+  * Fixed an issue that caused "Per User Limit" to not work in Admin Settings. (#13545)
   * Bumped Kubernetes version to 1.8.15.
-  * Fixed an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
-  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
-  * Fixed an issue that prevented Azure IPAM from releasing addresses. (docker/escalation#815)
-  * Fixed an issue that caused installation of UCP on Azure to be unsuccessful. (docker/escalation#863)
-  * Fixed an issue that caused Interlock proxy service to keep restarting. (docker/escalation#814)
-  * Fixed an issue that prevented Kubernetes DNS from working. (docker/orca#14064 and docker/orca#11981)
-  * Fixed an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
-
-* Security
-
-  * Fixed `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
-
-* UI
-
-  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+  * Fixed an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (#14309)
 
 ## 3.0.5 
 
@@ -555,17 +541,10 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 * Core
     * Resolved an issue where LDAP sync jobs terminated when processing an org admin
-    Search result that does not resolve to an existing user. (docker/escalation#784 #docker/escalation#888)
-    * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+    Search result that does not resolve to an existing user. (#14309)
+    * Fixed an issue that caused RethinkDB client lock contention. (#15264)
 * UI
-  * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (docker/escalation#639)
-
-* Core
-  * Resolved an issue where LDAP sync jobs would crash when handling an org admin search result which does not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
-  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
-
-* UI
-  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+  * Fixed an issue that caused "Per User Limit" to not work on Admin Settings. (#13545)
 
 ## Version 2.2.13 
 
