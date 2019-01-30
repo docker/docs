@@ -206,10 +206,10 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
@@ -237,7 +237,7 @@ from the repository.
        for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING>
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 4.  Verify that Docker CE is installed correctly by running the `hello-world`

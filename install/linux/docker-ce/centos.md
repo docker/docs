@@ -130,10 +130,10 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo yum install docker-ce
+    $ sudo yum install docker-ce docker-ce-cli containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -172,7 +172,7 @@ from the repository.
        a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
     ```bash
-    $ sudo yum install docker-ce-<VERSION STRING>
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
