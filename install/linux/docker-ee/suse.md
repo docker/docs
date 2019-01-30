@@ -226,7 +226,7 @@ from the repository.
     specific version.
 
     ```bash
-    $ sudo zypper install docker-ee containerd.io
+    $ sudo zypper install docker-ee docker-ee-cli containerd.io
     ```
 
     Start Docker:
@@ -259,7 +259,7 @@ from the repository.
     and separate them by a hyphen (`-`):
 
     ```bash
-    $ sudo zypper install docker-ee-<VERSION_STRING> containerd.io
+    $ sudo zypper install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
