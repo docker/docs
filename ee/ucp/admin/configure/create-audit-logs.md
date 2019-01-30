@@ -62,8 +62,8 @@ generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
 
 ## Enablig UCP Audit Logging
 
-UCP audit logging can be enabled via the UCP web user interface or via the
-UCP configuration file.
+UCP audit logging can be enabled via the UCP web user interface, the UCP API or 
+via the UCP configuration file.
 
 ### Enabling UCP Audit Logging via UI
 
@@ -79,6 +79,33 @@ level.
 ![Enabling Audit Logging in UCP](../../images/auditlogging.png){: .with-border}
 
 5) Click **Save**
+
+### Enabling UCP Audit Logging via API
+
+1. Download the UCP Client bundle [Download client bundle from the command line](https://success.docker.com/article/download-client-bundle-from-the-cli).
+
+2. Retrieve JSON for current audit log configuration.
+
+    ```
+    export DOCKER_CERT_PATH=~/ucp-bundle-dir/
+    curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -X GET https://ucp-domain/api/ucp/config/logging > auditlog.json
+    ```
+
+3. Open auditlog.json to modify the 'auditlevel' field to `metadata` or `request`.
+
+    ```
+    {
+    	"logLevel": "INFO",
+    	"auditLevel": "metadata",
+    	"supportDumpIncludeAuditLogs": false
+    }
+    ```
+
+4. Send the JSON request for the auditlog config with the same API path but with the `PUT` method.
+
+    ```
+    curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -H "Content-Type: application/json" -X PUT --data $(cat auditlog.json) https://ucp-domain/api/ucp/config/logging
+    ```
 
 ### Enabling UCP Audit Logging via Config File
 
