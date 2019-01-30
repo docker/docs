@@ -53,7 +53,7 @@ POST /api/v0/repositories/{namespace}/{reponame}/pollMirroringPolicies
 ```
 
 Click **Try it out** and enter your HTTP request details. `namespace` and `reponame` refer
-to the repository that will be poll mirrored. The boolean field, `initialEvaluation`, corresponds to **Save** when set to `false` and will only mirror images created after your API request. Setting it to `true` will evaluate and mirror all tags in the remote repository. The other body parameters correspond to the relevant remote repository details that you can [see on the DTR web interface](#pull-mirroring-on-the-web-interface). As a best practice, use a service account just for this purpose. Instead of providing the password for that account, you should pass an
+to the repository that will be poll mirrored. The boolean field, `initialEvaluation`, corresponds to **Save** when set to `false` and will only mirror images created after your API request. Setting it to `true` corresponds to **Save & Apply** which means all tags in the remote repository will be evaluated and mirrored. The other body parameters correspond to the relevant remote repository details that you can [see on the DTR web interface](#pull-mirroring-on-the-web-interface). As a best practice, use a service account just for this purpose. Instead of providing the password for that account, you should pass an
 [authentication token](../access-tokens.md).
 
 If the DTR remote repository is using self-signed certificates or
