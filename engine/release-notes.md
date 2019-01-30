@@ -354,7 +354,6 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
 * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
->>>>>>> 6292ef3ac708f00e7ba13a706bcb7225c34ddb19
 
 ### 18.03.1-ee-2
 2018-07-10
