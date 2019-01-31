@@ -1,0 +1,13 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: iscsi-targetd-vg-targetd
+provisioner: iscsi-targetd
+parameters:
+  targetPortal: 172.31.8.88
+  iqn: iqn.2019-01.org.iscsi.docker:targetd
+  iscsiInterface: default
+  volumeGroup: vg-targetd
+  initiators: iqn.2019-01.com.example:node1
+  chapAuthDiscovery: "false"
+  chapAuthSession: "false"
