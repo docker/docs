@@ -191,10 +191,10 @@ from the repository.
 2.  Install the latest version of Docker EE, or go to the next step to install a
     specific version. Any existing installation of Docker EE is replaced.
 
-    Use this command to install the latest version of Docker EE:
+    Use this command to install the latest version of Docker EE and containerd:
 
     ```bash
-    $ sudo apt-get install docker-ee
+    $ sudo apt-get install docker-ee docker-ee-cli containerd.io
     ```
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
@@ -222,7 +222,7 @@ from the repository.
     version string to the package name and separate them by an equals sign (`=`):
 
     ```bash
-    $ sudo apt-get install docker-ee=<VERSION>
+    $ sudo apt-get install docker-ee=<VERSION_STRING> docker-ee-cli=<VERSION_STRING> containerd.io
     ```
 
     The Docker daemon starts automatically.
