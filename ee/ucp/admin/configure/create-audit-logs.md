@@ -133,8 +133,8 @@ container logging solution, such as [ELK](https://success.docker.com/article/ela
 
 1) Source a UCP Client Bundle
 
-2) Use the Docker Logs command to obtain audit logs, note in the below example 
-we have tailed the command to show the last log entry.
+2) Run `docker logs` to obtain audit logs. In the following example,
+we are tailing the command to show the last log entry.
 
 ```
 $ docker logs ucp-controller --tail 1
