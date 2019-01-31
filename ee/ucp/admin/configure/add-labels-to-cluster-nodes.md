@@ -142,4 +142,5 @@ You can add or remove deployment constraints on this page.
 
 ## Where to go next
 
-- [Store logs in an external system](store-logs-in-an-external-system.md)
+- [Collect UCP Cluster Metrics with Prometheus](collect-cluster-metrics.md)
+- [Configure UCP Audit Logging](create-audit-logs.md)

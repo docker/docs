@@ -189,3 +189,39 @@ Once the `Dockerfile` is created, use the `--ssh` option for connectivity with t
 ```bash
 $ docker build --ssh default .
 ```
+
+## Troubleshooting : issues with private registries
+
+#### x509: certificate signed by unknown authority
+If you are fetching images from insecure registry (with self-signed certificates) and/or using such a registry as a mirror, you are facing a known issue in Docker 18.09 :
+```
+[+] Building 0.4s (3/3) FINISHED
+ => [internal] load build definition from Dockerfile
+ => => transferring dockerfile: 169B
+ => [internal] load .dockerignore
+ => => transferring context: 2B
+ => ERROR resolve image config for docker.io/docker/dockerfile:experimental
+------
+ > resolve image config for docker.io/docker/dockerfile:experimental:
+------
+failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
+```
+Solution : secure your registry properly. You can get SSL certificates from Let's Encrypt for free. See https://docs.docker.com/registry/deploying/
+
+
+#### image not found when the private registry is running on Sonatype Nexus version < 3.15
+
+If you are running a private registry using Sonatype Nexus version < 3.15, and receive an error similar to the following :
+```
+------
+ > [internal] load metadata for docker.io/library/maven:3.5.3-alpine:
+------
+------
+ > [1/4] FROM docker.io/library/maven:3.5.3-alpine:
+------
+rpc error: code = Unknown desc = docker.io/library/maven:3.5.3-alpine not found
+```
+you may be facing the bug below : https://issues.sonatype.org/browse/NEXUS-12684
+
+Solution is to upgrade your Nexus to version 3.15 or above.
+

@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_container_stop
 title: docker container stop
+redirect_from:
+  - /edge/engine/reference/commandline/container_stop/
 ---
 
 <!--
@@ -12,7 +14,4 @@ here, you'll need to find the string by searching this repo:
 https://github.com/docker/cli
 -->
 
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

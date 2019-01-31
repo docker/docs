@@ -106,7 +106,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
+	var dockerVersion = 'v{{ site.docker_ce_version }}';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -303,7 +303,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
+	var dockerVersion = 'v{{ site.docker_ce_version }}';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = '{{ jekyll.environment }}';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty

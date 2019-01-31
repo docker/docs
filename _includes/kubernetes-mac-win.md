@@ -10,7 +10,7 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% endcomment %}
 
 {% if platform == "mac" %}
-  {% assign product = "Docker for Mac" %}
+  {% assign product = "Docker Desktop for Mac" %}
 
   {% capture min-version %}{{ product }} **17.12 CE Edge**{% endcapture %}
 
@@ -29,7 +29,7 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% assign kubectl-path = "/usr/local/bin/kubectl" %}
 
 {% elsif platform == "windows" %}
-  {% assign product = "Docker for Windows" %}
+  {% assign product = "Docker Desktop for Windows" %}
 
   {% capture min-version %}{{ product }} **18.02 CE Edge**{% endcapture %}
 

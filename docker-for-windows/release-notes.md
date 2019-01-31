@@ -1,9 +1,9 @@
 ---
 description: Change log / release notes per stable release
-keywords: Docker for Windows, stable, release notes
+keywords: Docker Desktop for Windows, stable, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker for Windows Stable Release notes
+title: Docker Desktop for Windows Stable Release notes
 ---
 
 Here are the main improvements and issues per stable release, starting with the
@@ -17,6 +17,24 @@ notes](edge-release-notes) are also available. (Following the CE release model,
 'beta' releases are called 'edge' releases.)  You can learn about both kinds of
 releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).
+
+## Stable Releases of 2019
+
+### Docker Community Edition 2.0.0.2 2019-01-16
+
+[Download](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
+  - [Docker Machine 0.16.1](https://github.com/docker/machine/releases/tag/v0.16.1)
+  - [Kubernetes 1.10.11](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#v11011), fixes [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411)
+  - [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
+  - Golang 1.10.6, fixes CVEs: [CVE-2018-16875](https://www.cvedetails.com/cve/CVE-2018-16875), [CVE-2018-16873](https://www.cvedetails.com/cve/CVE-2018-16873) and [CVE-2018-16874](https://www.cvedetails.com/cve/CVE-2018-16874)
+  - Windows 14393 is marked as deprecated ; it will not be supported anymore in the next major stable release (2.1.0.0 and further)
+
+* Bug fixes and minor changes
+  - Rename Docker for Windows to Docker Desktop
+  - Add 18.09 missing daemon options
 
 ## Stable Releases of 2018
 

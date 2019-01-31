@@ -30,7 +30,7 @@ that require action are explained below.
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on  `x86_64`.
+Docker EE supports {{ linux-dist-long }} 64-bit, latest version, running on  `x86_64`.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 

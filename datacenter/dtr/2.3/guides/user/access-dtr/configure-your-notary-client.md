@@ -20,7 +20,7 @@ client bundle, that UCP can trace back to your user account.
 
 ## Download the Notary CLI client
 
-If you're using Docker for Mac or Docker for Windows, you already have the
+If you're using Docker Desktop for Mac or Docker Desktop for Windows, you already have the
 `notary` command installed.
 
 If you're running Docker on a Linux distribution, you can [download the

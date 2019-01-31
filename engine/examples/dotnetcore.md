@@ -35,7 +35,7 @@ tutorial](https://www.asp.net/get-started) to initialize a project or clone our 
 2.  Add the text below to your `Dockerfile` for either Linux or [Windows
    Containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
-    Linux containers depending on what mode is set in [Docker for
+    Linux containers depending on what mode is set in [Docker Desktop for
 Windows](/docker-for-windows/). Read more on [switching containers](/docker-for-windows/#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change
    the `Dockerfile` to use the DLL file of your project.

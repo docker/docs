@@ -186,8 +186,6 @@ respectively.
 
 ## Install plugins on swarm nodes
 
-{% include edge_only.md section="option" %}
-
 If your swarm service relies on one or more
 [plugins](/engine/extend/plugin_api/), these plugins need to be available on
 every node where the service could potentially be deployed. You can manually

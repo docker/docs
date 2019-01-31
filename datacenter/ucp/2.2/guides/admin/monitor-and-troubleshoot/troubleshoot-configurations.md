@@ -137,8 +137,8 @@ docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION
 time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..."
 time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]"
 time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1"
-time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
-time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Reconfiguring Table Replication..."
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Reconfigured Replication of Table \"grant_objects\""
 ...
 ```
 {% endraw %}
