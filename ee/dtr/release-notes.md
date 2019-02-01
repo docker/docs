@@ -19,6 +19,7 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
+
 # Version 2.6
 
 ## 2.6.2 
@@ -38,6 +39,9 @@ to upgrade your installation to the latest release.
 * Fixed a bug where notary signing data was not being backed up properly (docker/dhe-deploy #9862)
 * Allow a cluster to go from 2 replicas to 1 without forcing removal (docker/dhe-deploy #9840)
 * Fixed a race condition in initialization of the scan vulnerability database (docker/dhe-deploy #9907)
+
+### Changelog
+* GoLang version bump to 1.11.4.
 
 ## 2.6.0 
 
@@ -117,6 +121,9 @@ to upgrade your installation to the latest release.
 * Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (docker/dhe-deploy #9811)
 * Updated GoRethink library to avoid potential lock contention. (docker/dhe-deploy #9812)
 * Fixed a bug where notary signing data was not being backed up properly. (docker/dhe-deploy #9851)
+
+### Changelog
+* GoLang version bump to 1.10.7.
 
 ## 2.5.6 
 
@@ -290,6 +297,13 @@ specify `--log-protocol`.
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 # Version 2.4
+
+## Version 2.4.8
+
+(2019-01-29)
+
+### Changelog
+* GoLang version bump to 1.10.6.
 
 ## Version 2.4.7
 
