@@ -120,7 +120,11 @@ from the repository.
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](/install/index.md).
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `stretch`.
+    > Debian distribution, such as `helium`. Sometimes, in a distribution
+    > like BunsenLabs Linux, you might need to change `$(lsb_release -cs)`
+    > to your parent Debian distribution. For example, if you are using
+    >  `BunsenLabs Linux Helium`, you could use `stretch`. Docker does not offer any guarantees on untested
+    > and unsupported Debian distributions.
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>

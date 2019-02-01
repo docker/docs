@@ -40,7 +40,17 @@ upgrade your installation to the latest release.
  * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
  
 ### Known issue
- * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
+ * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.3 |
+| Kubernetes   | 1.11.5 |
+| Calico      | 3.5.0 |
+| Interlock (nginx)   | 1.14.0 |
+
 
 ## 3.1.2
 
@@ -67,11 +77,29 @@ now configurable within the UCP web interface. (#15466)
   * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (escalation/871)
   * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (docker/interlock#206) (escalation/920)
 
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.2 |
+| Kubernetes   | 1.11.5 |
+| Calico      | 3.2.3 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.1 
 
 (2018-12-04)
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.1 |
+| Kubernetes   | 1.11.5 |
+| Calico      | 3.2.3 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.1.0 
 
@@ -116,6 +144,8 @@ Admins can configure UCP to use a SAML-enabled identity provider for user authen
 * UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
 * You can now use the `custom_api_server_headers` field in the UCP configuration to set arbitrary headers that are included with every UCP response.
 
+
+
 ## API updates
 
 There are several backward-incompatible changes in the Kubernetes API that may affect user workloads. They are:
@@ -128,6 +158,8 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 
 * JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
+
+
 
 ## Known issues
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
@@ -165,6 +197,15 @@ The following features are deprecated in UCP 3.1.
     * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to [Cloud Controller Manager](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
     * `--cni-install-url` is deprecated in favor of `--unmanaged-cni`
 
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.0 |
+| Kubernetes   | 1.11.2 |
+| Calico      | 3.2.3 |
+| Interlock (nginx)   | 1.13.12 |
+
 # Version 3.0
 
 ## 3.0.9
@@ -181,6 +222,15 @@ The following features are deprecated in UCP 3.1.
   
 ### Known issue
   * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.9 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.8
 
@@ -205,11 +255,29 @@ The following features are deprecated in UCP 3.1.
      backend service's Virtual IP instead of load-balancing directly to each task IP. 
      (docker/interlock#206, escalation/920)
 
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.8 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 ## 3.0.7 
 
 2018-12-04
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using a custom build of Kubernetes 1.8.15 for UCP 3.0.7.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.7 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.6 
 
@@ -232,7 +300,16 @@ The following features are deprecated in UCP 3.1.
   
 * UI
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
- 
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.6 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 ## 3.0.5 
 
 2018-08-30
@@ -250,6 +327,16 @@ The following features are deprecated in UCP 3.1.
  Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
  This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without
  manually pulling the images.
+ 
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.5 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.4 
 
@@ -264,6 +351,15 @@ The following features are deprecated in UCP 3.1.
 ### Known Issue
 
 * You must manually pull `docker/ucp-agent:3.0.4` in the images section of the web interface before upgrading. Alternately, you can just pull `docker/ucp-agent:3.0.4` on every manager node.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.4 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.3 
 
@@ -288,6 +384,14 @@ The following features are deprecated in UCP 3.1.
    * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the web interface.
    * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks.
 
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.3 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.2 
 
@@ -323,6 +427,15 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 
 * UI/UX
    * Fixed an issue that causes LDAP configuration UI to not work properly.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.2 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.1 |
+| Interlock (nginx)   | 1.13.8 |
 
 ## 3.0.1
 
@@ -367,6 +480,15 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
   depending on how quickly `calico-node` gets upgraded on those nodes.
   * `ucp-interlock-proxy` may fail to start when two or more services are
  configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
+ 
+ ### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.1 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.1 |
+| Interlock (nginx)   | 1.13.8 |
 
 ## Version 3.0.0 
 
@@ -515,6 +637,16 @@ stack as a Swarm service or Kubernetes workload.
 from the UCP web interface. You can configure Docker Engine for this.
 * The option to configure a rescheduling policy for basic containers is
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
+
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.1 |
+| Kubernetes   | 1.8.11 |
+| Calico      | 3.0.1 |
+| Interlock (nginx)   | 1.13.8 |
 
 # Version 2.2
 
