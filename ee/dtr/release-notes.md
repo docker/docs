@@ -307,7 +307,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.7
 
-(25 October 2018)
+(2018-10-25)
 
 ### Bug Fixes
 * Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
@@ -319,7 +319,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.6
 
-(26 July 2018)
+(2018-07-26)
 
 ### Bug Fixes
 * Fixed bug where repository tag list UI was not loading after a tag migration.
@@ -327,7 +327,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.5
 
-(21 June 2018)
+(2018-06-21)
 
 **New Features**
 
@@ -339,7 +339,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.4
 
-(17 May 2018)
+(2018-05-17)
 
 **New features**
 
@@ -362,7 +362,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.2 
 
-(13 February 2018)
+(2018-02-13)
 
 **Security notice**
 
@@ -380,7 +380,7 @@ cluster join or dumpcerts.
 
 ## 2.4.1 
 
-(20 November 2017)
+(2017-11-20)
 
 **Bug fixes**
 
@@ -413,7 +413,7 @@ removed in DTR 2.5. You can use the
 
 ## DTR 2.4.0 
 
-(2 November 2017)
+(2017-11-2)
 
 **New features**
 
