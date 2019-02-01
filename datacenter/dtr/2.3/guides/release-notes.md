@@ -11,6 +11,13 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.10
+
+(29 January 2019)
+
+### Changelog
+* GoLang version bump to 1.10.7. 
+
 ## Version 2.3.9
 
 (25 October 2018)

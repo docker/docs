@@ -19,6 +19,7 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
+
 # Version 2.6
 
 ## 2.6.2 
@@ -38,6 +39,9 @@ to upgrade your installation to the latest release.
 * Fixed a bug where notary signing data was not being backed up properly (docker/dhe-deploy #9862)
 * Allow a cluster to go from 2 replicas to 1 without forcing removal (docker/dhe-deploy #9840)
 * Fixed a race condition in initialization of the scan vulnerability database (docker/dhe-deploy #9907)
+
+### Changelog
+* GoLang version bump to 1.11.4.
 
 ## 2.6.0 
 
@@ -117,6 +121,9 @@ to upgrade your installation to the latest release.
 * Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (docker/dhe-deploy #9811)
 * Updated GoRethink library to avoid potential lock contention. (docker/dhe-deploy #9812)
 * Fixed a bug where notary signing data was not being backed up properly. (docker/dhe-deploy #9851)
+
+### Changelog
+* GoLang version bump to 1.10.7.
 
 ## 2.5.6 
 
@@ -291,9 +298,16 @@ specify `--log-protocol`.
 
 # Version 2.4
 
+## Version 2.4.8
+
+(2019-01-29)
+
+### Changelog
+* GoLang version bump to 1.10.6.
+
 ## Version 2.4.7
 
-(25 October 2018)
+(2018-10-25)
 
 ### Bug Fixes
 * Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
@@ -305,7 +319,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.6
 
-(26 July 2018)
+(2018-07-26)
 
 ### Bug Fixes
 * Fixed bug where repository tag list UI was not loading after a tag migration.
@@ -313,7 +327,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.5
 
-(21 June 2018)
+(2018-06-21)
 
 **New Features**
 
@@ -325,7 +339,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.4
 
-(17 May 2018)
+(2018-05-17)
 
 **New features**
 
@@ -348,7 +362,7 @@ specify `--log-protocol`.
 
 ## Version 2.4.2 
 
-(13 February 2018)
+(2018-02-13)
 
 **Security notice**
 
@@ -366,7 +380,7 @@ cluster join or dumpcerts.
 
 ## 2.4.1 
 
-(20 November 2017)
+(2017-11-20)
 
 **Bug fixes**
 
@@ -399,7 +413,7 @@ removed in DTR 2.5. You can use the
 
 ## DTR 2.4.0 
 
-(2 November 2017)
+(2017-11-2)
 
 **New features**
 
