@@ -37,8 +37,6 @@ versions:
 
 Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
 
-> **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
