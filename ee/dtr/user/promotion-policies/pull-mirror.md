@@ -28,7 +28,7 @@ To get started:
    * Registry type: You can choose between **Docker Trusted Registry** and **Docker Hub**. If you choose DTR, enter your DTR URL. Otherwise, **Docker Hub** defaults to `https://index.docker.io`.
    * Username and Password or access token: Your credentials in the remote repository you wish to poll from. To use an access token instead of your password, see [authentication token](../access-tokens.md).
    * Repository: Enter the `namespace` and the `repository_name` after the `/`.
-   * Show advanced settings: Enter the TLS details for the remote repository or check `Skip TLS verification`.
+   * Show advanced settings: Enter the TLS details for the remote repository or check `Skip TLS verification`. If the DTR remote repository is using self-signed certificates or certificates signed by your own certificate authority, you also need to provide the public key certificate for that CA. You can retrieve the certificate by accessing `https://<dtr-domain>/ca`. "Remote certificate authority" is optional for a remote repository in Docker Hub.
 
 
     ![](../../images/pull-mirror-1.png){: .img-fluid .with-border}
@@ -37,6 +37,10 @@ To get started:
 
 5. Click **Connect**.
 
+6. Once you have successfully connected to the remote repository, click **Save** to mirror future tags. To mirror all tags, click **Save & Apply** instead.
+
+
+    ![](../../images/pull-mirror-2.png){: .img-fluid .with-border}
 
 ## Pull mirroring on the API
 
@@ -49,13 +53,13 @@ POST /api/v0/repositories/{namespace}/{reponame}/pollMirroringPolicies
 ```
 
 Click **Try it out** and enter your HTTP request details. `namespace` and `reponame` refer
-to the repository that will be the mirror. The other fields refer to the remote repository to poll from and the credentials to use. As a best practice, use a service account just for this purpose. Instead of providing the password for that account, you should pass an
+to the repository that will be poll mirrored. The boolean field, `initialEvaluation`, corresponds to **Save** when set to `false` and will only mirror images created after your API request. Setting it to `true` corresponds to **Save & Apply** which means all tags in the remote repository will be evaluated and mirrored. The other body parameters correspond to the relevant remote repository details that you can [see on the DTR web interface](#pull-mirroring-on-the-web-interface). As a best practice, use a service account just for this purpose. Instead of providing the password for that account, you should pass an
 [authentication token](../access-tokens.md).
 
-If the Docker Trusted or Hub registry to mirror images from is using self-signed certificates or
+If the DTR remote repository is using self-signed certificates or
 certificates signed by your own certificate authority, you also need to provide
-the public key certificate for that certificate authority.
-You can get it by accessing `https://<dtr-domain>/ca`.
+the public key certificate for that CA.
+You can get it by accessing `https://<dtr-domain>/ca`. The `remoteCA` field is optional for mirroring a Docker Hub repository.
 
 Click **Execute**. On success, the API returns an `HTTP 201` response. 
 

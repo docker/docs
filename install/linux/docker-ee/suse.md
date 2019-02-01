@@ -222,11 +222,11 @@ from the repository.
     `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
     key.
 
-2.  Install the latest version of Docker EE, or go to the next step to install a
+2.  Install the latest version of Docker EE and containerd, or go to the next step to install a
     specific version.
 
     ```bash
-    $ sudo zypper install docker-ee
+    $ sudo zypper install docker-ee docker-ee-cli containerd.io
     ```
 
     Start Docker:
@@ -259,7 +259,7 @@ from the repository.
     and separate them by a hyphen (`-`):
 
     ```bash
-    $ sudo zypper install docker-ee-<VERSION_STRING>
+    $ sudo zypper install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
