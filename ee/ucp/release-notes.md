@@ -40,7 +40,7 @@ upgrade your installation to the latest release.
  * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
  
 ### Known issue
- * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
+ * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
 
 ## 3.1.2
 
