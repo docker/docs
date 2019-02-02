@@ -14,5 +14,5 @@ Since `v2.5`, it has been possible for repository admins to autogenerate manifes
 
 #### 2.7
 
-The above behavior and the `enableManifestLists` field will be removed in `v2.7`. Starting in `v2.7`, you can use the CLI to create and push a manifest list to any repository. 
+The above behavior and the `enableManifestLists` field will be removed in `v2.7`. Starting in `v2.7`, you can use the DTR CLI to create and push a manifest list to any repository. 
 
