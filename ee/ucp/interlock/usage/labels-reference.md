@@ -28,4 +28,4 @@ The following labels are available for you to use in swarm services:
 | `com.docker.lb.sticky_session_cookie`  | Cookie to use for sticky sessions.                                                                                                             | `none`                 |
 | `com.docker.lb.redirects`              | Semi-colon separated list of redirects to add in the format of `<source>,<target>`.  Example: `http://old.example.com,http://new.example.com;` | `none`                 |
 | `com.docker.lb.ssl_passthrough`        | Enable SSL passthrough.                                                                                                                        | `false`                |
-
+| `com.docker.lb.backend_mode`           | Select the backend mode that the proxy should use to access the upstreams. Defaults to `task`.                                                 | `vip`                  |
