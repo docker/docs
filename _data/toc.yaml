@@ -1335,6 +1335,8 @@ manuals:
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Context/Path based routing
             path: /ee/ucp/interlock/usage/context/
+          - title: VIP backend mode
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Service labels reference
             path: /ee/ucp/interlock/usage/labels-reference/
         - title: Layer 7 routing upgrade
