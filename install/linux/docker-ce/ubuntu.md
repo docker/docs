@@ -45,10 +45,10 @@ Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ sudo apt remove docker docker-engine docker.io containerd runc
 ```
 
-It's OK if `apt-get` reports that none of these packages are installed.
+It's OK if `apt` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
@@ -94,13 +94,13 @@ from the repository.
 1.  Update the `apt` package index:
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install packages to allow `apt` to use a repository over HTTPS:
 
     ```bash
-    $ sudo apt-get install \
+    $ sudo apt install \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -204,20 +204,20 @@ from the repository.
 1.  Update the `apt` package index.
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
+    > or updating without specifying a version in the `apt install` or
+    > `apt update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
 3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
@@ -225,20 +225,25 @@ from the repository.
     a. List the versions available in your repo:
 
     ```bash
-    $ apt-cache madison docker-ce
+    $ apt policy docker-ce
 
-      docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce:
+        Installed: 5:18.09.1~3-0~ubuntu-bionic
+        Candidate: 5:18.09.1~3-0~ubuntu-bionic
+        Version table:
+      *** 5:18.09.1~3-0~ubuntu-bionic 500
+              500 https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+              100 /var/lib/dpkg/status
+           5:18.09.0~3-0~ubuntu-bionic 500
+              500 https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
       ...
     ```
 
     b. Install a specific version using the version string from the second column,
-       for example, `5:18.09.1~3-0~ubuntu-xenial`.
+       for example, `5:18.09.1~3-0~ubuntu-bionic`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
@@ -259,7 +264,7 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker CE, first run `sudo apt-get update`, then follow the
+To upgrade Docker CE, first run `sudo apt update`, then follow the
 [installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
@@ -315,7 +320,7 @@ To upgrade Docker CE, download the newer package file and repeat the
 1.  Uninstall the Docker CE package:
 
     ```bash
-    $ sudo apt-get purge docker-ce
+    $ sudo apt purge docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
