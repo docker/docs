@@ -205,7 +205,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > ```
 >
 > In the example above, the first element of the list is the address of your DNS
-> server. The second item is the Google's DNS which can be used when the first one is
+> server. The second item is Google's DNS which can be used when the first one is
 > not available.
 >
 > Before proceeding, save `daemon.json` and restart the docker service.
