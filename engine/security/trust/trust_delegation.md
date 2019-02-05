@@ -23,7 +23,7 @@ gets added with `docker trust signer add` we will add their key to the
 By default the `$ docker trust` commands are expecting the Notary server URL
 to be the same as the Docker Registry URL specified in the image tag. When 
 using the Docker Hub or Docker Trusted Registry this is the case as a internal 
-proxy redirects the request, however for self hosted environments or 3rd party 
+proxy redirects the request; however for self hosted environments or 3rd party 
 registries you will need to specify an alternative URL for the notary server. 
 This is done with:
 
@@ -31,7 +31,7 @@ This is done with:
 export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 
-If you do not export this variable in self hosted environments you may see 
+If you do not export this variable in self-hosted environments you may see 
 errors such as: 
 
 ```
@@ -69,7 +69,7 @@ This configuration file will tell Notary where the local Docker Trust data is
 stored, as well as which Notary server to use by default.
 
 For more detailed information about how to use Notary outside of the 
-Docker Content Trust use cases, refer to the Notary Cli documentation 
+Docker Content Trust use cases, refer to the Notary CLI documentation 
 [here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md)
 
 ## Creating Delegation Keys
