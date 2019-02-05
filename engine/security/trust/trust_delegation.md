@@ -191,7 +191,7 @@ When initiating a repository, you will need the key and the passphrase of a loca
 Notary Canonical Root Key. If you have not initiated a repository before, and 
 therefore don't have a Notary root key, `$ docker trust` will create one for you.
 
-> Be sure to protect and backup your [Notary Canonical Root Key](./trust_key_mng.md)
+> Be sure to protect and back up your [Notary Canonical Root Key](./trust_key_mng.md)
 
 ### Initiating the Repository
 
