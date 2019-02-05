@@ -1,9 +1,9 @@
-This page describes the ISCSI testing setup for UCP Amberjack release.
+This page describes the ISCSI testing setup for the UCP Amberjack release.
 Note: When using this setup, update the scripts to have IP addresses reflecting your cluster.
 
 
 1. Deploy UCP with ISCSI storage using DCI script, dci.sh
-Main thing to note here is that, UCP should be invoked with the newly added
+The main thing to note here is that UCP should be invoked with the newly added
 "--storage=iscsi" option. There are 2 other options that can be used to
 specify the path of the host iscsiadm binary and path of the host iscsi
 database, which are "--iscsiadm-path" and "--iscsidb-path" respectively.
@@ -16,7 +16,7 @@ installed. This is done in the DCI post-provisioning phase.
 
 2. ISCSI Initiator setup.
 In UCP, all worker nodes are configured as ISCSI initiators.
-Login to worker and configure it as initiator.
+Log in to the worker and configure it as initiator.
 sudo sh -c 'echo "InitiatorName=iqn.2019-01.com.example:node1" > /etc/iscsi/initiatorname.iscsi'
 sudo systemctl restart iscsid
 
