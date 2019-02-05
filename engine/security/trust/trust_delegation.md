@@ -18,10 +18,37 @@ initialise a repository, manage the repository keys, and when a collaborator
 gets added with `docker trust signer add` we will add their key to the 
 `targets/releases` delegation automatically. 
 
-## Configuring the Notary CLI
+## Configuring the Docker Client
 
-Some of the more advanced features of DCT require the Notary 
-CLI. To install and configure the Notary CLI:
+By default the `$ docker trust` commands are expecting the Notary server URL
+to be the same as the Docker Registry URL specified in the image tag. When 
+using the Docker Hub or Docker Trusted Registry this is the case as a internal 
+proxy redirects the request, however for self hosted environments or 3rd party 
+registries you will need to specify an alternative URL for the notary server. 
+This is done with:
+
+```
+export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
+```
+
+If you do not export this variable in self hosted environments you may see 
+errors such as: 
+
+```
+$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
+Adding signer "jeff" to dtr.example.com/admin/demo...
+[...]
+Error: trust data missing for remote repository dtr.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
+
+$ docker trust inspect dtr.example.com/admin/demo --pretty
+WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
+[...]
+```
+
+## Configuring the Notary Client
+
+Some of the more advanced features of DCT require the Notary CLI. To install and 
+configure the Notary CLI:
 
 1) Download the [client](https://github.com/theupdateframework/notary/releases) 
 and ensure that it is available on your path
@@ -154,16 +181,17 @@ jeff                                    9deed251daa1aa6f9d5f9b752847647cf8d705da
 
 ## Managing Delegations in a Notary Server
 
-DCT handles initiating a repository with trust data for you,
-including rotating low level keys like the target and the snapshot key to the 
-remote Notary server. This is all done the first time you add a delegation 
-public key to the Notary server.
+When the first Delegation is added to the Notary Server using `$ docker trust`,
+we automatically initiate trust data for the repository. This includes creating 
+the notary target and snapshots keys, and rotating the snapshot key to be 
+managed by the notary server. More information on these keys can be found 
+[here](./trust_key_mng.md)
 
 When initiating a repository, you will need the key and the passphrase of a local
 Notary Canonical Root Key. If you have not initiated a repository before, and 
 therefore don't have a Notary root key, `$ docker trust` will create one for you.
 
-> Be sure to protect your [Notary Canonical Root Key](./trust_key_mng.md)
+> Be sure to protect and backup your [Notary Canonical Root Key](./trust_key_mng.md)
 
 ### Initiating the Repository
 
