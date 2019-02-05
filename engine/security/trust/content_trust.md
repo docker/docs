@@ -121,7 +121,7 @@ First we will add the delegation private key to the local Docker trust
 repository. (By default this is stored in `~/.docker/trust/`). If you are 
 generating delegation keys with `$ docker trust key generate`, the private key 
 is automatically added to the local trust store. If you are importing a separate 
-key, such as one from the UCP you will need to use the 
+key, such as one from a UCP Client Bundle you will need to use the 
 `$ docker trust key load` command.
 
 ```
@@ -155,7 +155,6 @@ $ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
 Adding signer "jeff" to dtr.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94: 
 ```
-
 
 Finally, we will use the delegation private key to sign a particular tag and 
 push it up to the registry.
@@ -215,7 +214,6 @@ $ docker trust revoke dtr.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e: 
 Successfully deleted signature for dtr.example.com/admin/demo:1
 ```
-
 
 ## Runtime Enforcement with Docker Content Trust
 
