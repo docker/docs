@@ -244,7 +244,7 @@ The required version must match any of the versions available in this json file:
 ## Preparing a Docker EE Engine for use with UCP
 
 Run the
-[UCP installation script for Windows](/datacenter/ucp/3.0/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
+[UCP installation script for Windows](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/#run-the-windows-node-setup-script).
 
 Start the Docker service:
 
