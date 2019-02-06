@@ -19,32 +19,12 @@ Use an ingress controller when you want to:
 * Give your Kubernetes app an externally-reachable URL.
 * Load-balance traffic to your app.
 
-Kubernetes provides an NGINX ingress controller that you can use in Docker EE
-without modifications.
-Learn about [ingress in Kubernetes](https://v1-8.docs.kubernetes.io/docs/concepts/services-networking/ingress/).
+Kubernetes provides an NGINX ingress controller that can be used in Docker EE, but is not officially supported. Modifications are typically required based on your environment.
+Learn about [ingress in Kubernetes](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/ingress/). 
 
 ## Create a dedicated namespace
 
-1.  Navigate to the **Namespaces** page, and click **Create**.
-2.  In the **Object YAML** editor, append the following text.
-    ```yaml
-    metadata:
-      name: ingress-nginx
-    ```
-
-    The finished YAML should look like this.
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: ingress-nginx
-    ```
-3.  Click **Create**.
-4.  In the **ingress-nginx** namespace, click the **More options** icon,
-    and in the context menu, select **Set Context**.
-
-    ![](../images/deploy-ingress-controller-1.png){: .with-border}
+Because Kubernetes role based access control (RBAC) is supported, download the [Kubenetes YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) to create a dedicated namespace and default service account. 
 
 ## Create a grant
 
@@ -72,179 +52,9 @@ main components:
 - a service that exposes the app, named `ingress-nginx`.
 
 Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
-editor, paste the following YAML.
+editor, paste your NGINX ingress controller YAML.
 
-```yaml
-apiVersion: apps/v1beta2
-kind: Deployment
-metadata:
-  name: default-http-backend
-  labels:
-    app: default-http-backend
-  namespace: ingress-nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: default-http-backend
-  template:
-    metadata:
-      labels:
-        app: default-http-backend
-      annotations:
-        seccomp.security.alpha.kubernetes.io/pod: docker/default
-    spec:
-      terminationGracePeriodSeconds: 60
-      containers:
-      - name: default-http-backend
-        # Any image is permissible as long as:
-        # 1. It serves a 404 page at /
-        # 2. It serves 200 on a /healthz endpoint
-        image: gcr.io/google_containers/defaultbackend:1.4
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-            scheme: HTTP
-          initialDelaySeconds: 30
-          timeoutSeconds: 5
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: 10m
-            memory: 20Mi
-          requests:
-            cpu: 10m
-            memory: 20Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: default-http-backend
-  namespace: ingress-nginx
-  labels:
-    app: default-http-backend
-spec:
-  ports:
-  - port: 80
-    targetPort: 8080
-  selector:
-    app: default-http-backend
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: nginx-configuration
-  namespace: ingress-nginx
-  labels:
-    app: ingress-nginx
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: tcp-services
-  namespace: ingress-nginx
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: udp-services
-  namespace: ingress-nginx
----
-apiVersion: apps/v1beta2
-kind: Deployment
-metadata:
-  name: nginx-ingress-controller
-  namespace: ingress-nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ingress-nginx
-  template:
-    metadata:
-      labels:
-        app: ingress-nginx
-      annotations:
-        prometheus.io/port: '10254'
-        prometheus.io/scrape: 'true'
-        seccomp.security.alpha.kubernetes.io/pod: docker/default
-    spec:
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - sysctl -w net.core.somaxconn=32768; sysctl -w net.ipv4.ip_local_port_range="1024 65535"
-        image: alpine:3.6
-        imagePullPolicy: IfNotPresent
-        name: sysctl
-        securityContext:
-          privileged: true
-      containers:
-        - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
-          args:
-            - /nginx-ingress-controller
-            - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
-            - --configmap=$(POD_NAMESPACE)/nginx-configuration
-            - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
-            - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-            - --annotations-prefix=nginx.ingress.kubernetes.io
-            - --enable-ssl-passthrough
-          env:
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          ports:
-          - name: http
-            containerPort: 80
-          - name: https
-            containerPort: 443
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-              scheme: HTTP
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ingress-nginx
-  namespace: ingress-nginx
-spec:
-  type: NodePort
-  ports:
-  - name: http
-    port: 80
-    targetPort: 80
-    protocol: TCP
-  - name: https
-    port: 443
-    targetPort: 443
-    protocol: TCP
-  selector:
-    app: ingress-nginx
-```
+For an example of a YAML NGINX kube ingress deployment, refer to https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller.
 
 ## Check your deployment
 
