@@ -112,7 +112,7 @@ Docker logs.
 The Console lives in `/Applications/Utilities`; you can search for it with
 Spotlight Search.
 
-To read the Docker app log messages, in the top left corner of the window, type
+To read the Docker app log messages, in the top right corner of the window, type
 "docker" and press Enter.  Then select the "Any" button that appeared on its
 left, and select "Process" instead.
 
