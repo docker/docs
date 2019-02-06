@@ -15,8 +15,6 @@ In UCP 3.0, Prometheus servers were standard containers. In UCP 3.1, Prometheus 
 
 The data is stored locally on disk for each Prometheus server, so data is not replicated on new managers or if you schedule Prometheus to run on a new node. Metrics are not kept longer than 24 hours.
 
-> **Warning**: Upgrading UCP from 3.0.x to 3.1.x causes loss of metrics data.
-
 Events, logs, and metrics are sources of data that provide observability of your cluster. Metrics monitors numerical data values that have a time-series component. There are several sources from which metrics can be derived, each providing different kinds of meaning for a business and its applications.
 
 The Docker EE platform provides a base set of metrics that gets you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
@@ -45,22 +43,6 @@ These are metrics about the state of services running on the container platform.
     - Application health
     - Convergence of K8s deployments and Swarm services
     - Cluster load by number of services or containers or pods
-
-## Host infrastructure metrics ##
-
-These are metrics taken from te software & hardware infrastructure.
-    - CPU - Container-level CPU utilization, Node-level load average
-    - Memory - RSS, swap
-    - Network I/O - bandwidth, packets, drops
-    - Storage I/O - disk I/O, IOPs, capacity
-    - Operating System – file descriptors, open network connections, number of processes/threads
-
-## Container infrastructure system metrics ##
-
-These are application-level metrics derived from the container platform itself.
-    - Infrastructure Quorum Leader - Swarm RAFT, etcd, rethink
-    - UCP Component health - Healthy / Unhealthy
-
 
 ## Deploy Prometheus on worker nodes
 
