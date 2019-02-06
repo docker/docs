@@ -27,13 +27,13 @@ If the file is too big, you can
 - delete unnecessary containers and images, or
 - reduce the maximum allowable size of the file.
 
-### To move the file to a bigger drive
+### Move the file to a bigger drive
 
 To move the file, open the **Preferences...** menu, select **Disk**  and then select
 on **Move disk image**. Do not move the file directly in the finder or Docker for Mac will
 lose track of it.
 
-### To delete unnecessary containers and images
+### Delete unnecessary containers and images
 
 To check whether you have too many unnecessary containers and images:
 
@@ -84,11 +84,11 @@ $ ls -klsh Docker.raw
 In this example, the actual size of the disk is `2333548` KB, whereas the maximum size
 of the disk is `64` GB.
 
-### To reduce the maximum size of the file
+### Reduce the maximum size of the file
 
-To reduce the maximum size of the file, first click on the whale menu and then click on
-"Preferences...". When the preferences window appears, click on the "Disk" icon.
-The preferences window contains a slider which allows the maximum disk size to be set.
+To reduce the maximum size of the file, select the whale menu icon and then select
+**Preferences...**. When the **Preferences...** window is displayed, select **Disk**.
+The **Disk** window contains a slider that allows the maximum disk size to be set.
 **Warning**: If the maximum size is reduced, the current file will be deleted and, therefore, all
 containers and images will be lost.
 
