@@ -21,7 +21,7 @@ balena</a> arm builds:
 ```
 $ docker run balenalib/armv7hf-debian uname -a
 
-Linux 81d5b390524c 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 armv7l GNU/Linux
+Linux 3d3ffca44f6e 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 armv7l GNU/Linux
 
 $ docker run justincormack/ppc64le-debian uname -a
 
