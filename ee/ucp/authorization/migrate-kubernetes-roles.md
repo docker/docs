@@ -6,7 +6,7 @@ keywords: authorization, authentication, authorize, authenticate, user, team, UC
 
 With Docker Enterprise Edition, you can create roles and grants
 that implement the permissions that are defined in your Kubernetes apps.
-Learn about [RBAC authorization in Kubernetes](https://v1-8.docs.kubernetes.io/docs/admin/authorization/rbac/).
+Learn about [RBAC authorization in Kubernetes](https://v1-11.docs.kubernetes.io/docs/admin/authorization/rbac/).
 
 Docker EE has its own implementation of role-based access control, so you
 can't use Kubernetes RBAC objects directly. Instead, you create UCP roles
