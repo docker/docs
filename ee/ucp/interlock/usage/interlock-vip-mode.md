@@ -51,13 +51,14 @@ com.docker.lb.backend_mode=vip
 The default backend mode is `task`.
 If the label is set to `task` or the label does not exist then Interlock will use `task` routing mode.
 
-In VIP mode the following non-exhaustive list of application changes will not require proxy reconfiguration:
+In VIP mode the following non-exhaustive list of application events will not require proxy reconfiguration:
 
 - Service replica increase/decrease
 - New image deployment
 - Config or secret updates
 - Add/Remove labels
 - Add/Remove environment variables
+- Rescheduling a failed application task
 - ...
 
 The following two updates still require a proxy reconfiguration (because these actions will create or destroy a service VIP):
