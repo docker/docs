@@ -22,26 +22,6 @@ Use an ingress controller when you want to:
 Kubernetes provides an NGINX ingress controller that can be used in Docker EE, but is not officially supported. Modifications are typically required based on your environment.
 Learn about [ingress in Kubernetes](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/ingress/). 
 
-## Create a dedicated namespace
-
-Because Kubernetes role based access control (RBAC) is supported, download the [Kubenetes YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) to create a dedicated namespace and default service account. 
-
-## Create a grant
-
-The default service account that's associated with the `ingress-nginx`
-namespace needs access to Kubernetes resources, so create a grant with
-`Restricted Control` permissions.
-
-1.  From UCP, navigate to the **Grants** page, and click **Create Grant**.
-2.  Within the **Subject** pane, select **Service Account**. For the
-    **Namespace** select **ingress-nginx**, and select **default** for
-    the **Service Account**. Click **Next**.
-3.  Within the **Role** pane, select **Restricted Control**, and then click
-    **Next**.
-4.  Within the **Resource Set** pane, select the **Type** **Namespace**, and
-    select the **Apply grant to all existing and new namespaces** toggle.
-5.  Click **Create**.
-
 ## Deploy NGINX ingress controller
 
 The cluster is ready for the ingress controller deployment, which has three
@@ -54,7 +34,9 @@ main components:
 Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
 editor, paste your NGINX ingress controller YAML.
 
-For an example of a YAML NGINX kube ingress deployment, refer to https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller.
+Because Kubernetes role based access control (RBAC) is supported, you can download the [Kubenetes YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) to create a dedicated namespace and default service account.
+
+For an additional example of a YAML NGINX kube ingress deployment, refer to https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller.
 
 ## Check your deployment
 
