@@ -37,26 +37,26 @@ full list of prerequisites.
 
 1.  Open a PowerShell command prompt, and type the following commands.
 
-    ```PowerShell
+    ```powershell
     Install-Module DockerMsftProvider -Force
     Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
 
 2.  Check if a reboot is required, and if yes, restart your instance:
 
-    ```PowerShell
+    ```powershell
     (Install-WindowsFeature Containers).RestartNeeded
     ```
     If the output of this command is **Yes**, then restart the server with:
 
-    ```PowerShell
+    ```powershell
     Restart-Computer
     ```
 
 3.  Test your Docker Engine - Enterprise installation by running the 
     `hello-world` container.
 
-    ```PowerShell
+    ```powershell
     docker run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
@@ -78,7 +78,7 @@ Some advanced Docker features, such as swarm mode, require the fixes included in
 [KB4015217](https://support.microsoft.com/en-us/help/4015217/windows-10-update-kb4015217)
 (or a later cumulative patch).
 
-```PowerShell
+```powershell
 sconfig
 ```
 
@@ -101,20 +101,20 @@ To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, exec
 
 FIPS 140-2 mode may also be enabled via the Windows Registry. To update the pertinent registry key, execute the following PowerShell command as an Administrator:
 
-```PowerShell
+```powershell
 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa\FipsAlgorithmPolicy\" -Name "Enabled" -Value "1"
 ```
 
 Restart the Docker service by running the following command.
 
-```PowerShell
+```powershell
 net stop docker
 net start docker
 ```
 
 To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
 
-```YAML
+```yaml
 Labels:    
  com.docker.security.fips=enabled 
 ```
@@ -129,7 +129,7 @@ installs, or install on air-gapped systems.
 1.  In a PowerShell command prompt, download the installer archive on a machine
     that has a connection.
 
-    ```PowerShell
+    ```powershell
     # On an online machine, download the zip file.
     Invoke-WebRequest -UseBasicParsing -OutFile {{ filename }} {{ download_url }}
     ```
@@ -141,8 +141,8 @@ installs, or install on air-gapped systems.
     PowerShell command prompt, use the following commands to extract the archive,
     register, and start the Docker service.
 
-    ```PowerShell
-    #Stop Docker service
+    ```powershell
+    # Stop Docker service
     Stop-Service docker
     
     # Extract the archive.
@@ -174,7 +174,7 @@ installs, or install on air-gapped systems.
 
 3.  Test your Docker EE installation by running the `hello-world` container.
 
-    ```PowerShell
+    ```powershell
     docker container run hello-world:nanoserver
     ```
 
@@ -182,7 +182,7 @@ installs, or install on air-gapped systems.
 
 To install a specific version, use the `RequiredVersion` flag:
 
-```PowerShell
+```powershell
 Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion {{ site.docker_ee_version }}
 ...
 Name                      Version               Source           Summary
@@ -194,17 +194,17 @@ Docker                    {{ site.docker_ee_version }}                 Docker   
 
 Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
 
-```PowerShell
+```powershell
 Update-Module DockerMsftProvider
 ```
 
-Then open a new Powershell session for the update to take effect.
+Then open a new PowerShell session for the update to take effect.
 
 ## Update Docker Engine - Enterprise
 
 To update Docker Engine - Enterprise to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
 
-```PowerShell
+```powershell
 Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {{ site.docker_ee_version }} -Update -Force
 ```
 The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
@@ -214,29 +214,33 @@ The required version must match any of the versions available in this json file:
  Use the following commands to completely remove the Docker Engine - Enterprise from a Windows Server:
 
 1. Leave any active Docker Swarm
-     ```PowerShell
+
+    ```powershell
     docker swarm leave --force
     ```
-    
+
 1. Remove all running and stopped containers
-    
-    ```PowerShell
+
+    ```powershell
     docker rm -f $(docker ps --all --quiet)
     ```
-    
+
 1. Prune container data
-     ```PowerShell
+
+    ```powershell
     docker system prune --all --volumes
     ```
-    
+
 1. Uninstall Docker PowerShell Package and Module
-     ```PowerShell
+
+    ```powershell
     Uninstall-Package -Name docker -ProviderName DockerMsftProvider
     Uninstall-Module -Name DockerMsftProvider
     ```
     
 1. Clean up Windows Networking and file system
-     ```PowerShell
+
+    ```powershell
     Get-HNSNetwork | Remove-HNSNetwork
     Remove-Item -Path "C:\ProgramData\Docker" -Recurse -Force
     ```
@@ -244,11 +248,11 @@ The required version must match any of the versions available in this json file:
 ## Preparing a Docker EE Engine for use with UCP
 
 Run the
-[UCP installation script for Windows](/datacenter/ucp/3.0/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
+[UCP installation script for Windows](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/#run-the-windows-node-setup-script).
 
 Start the Docker service:
 
-```PowerShell
+```powershell
 Start-Service Docker
 ```
 

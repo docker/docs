@@ -31,7 +31,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
  * 4 vCPUs for manager nodes
  * 25-100GB of free disk space
 
-Note that Windows container images are typically larger than Linux ontainer images. For
+Note that Windows container images are typically larger than Linux container images. For
 this reason, you should provision more local storage for Windows
 nodes and for any DTR setups that store Windows container images.
 
