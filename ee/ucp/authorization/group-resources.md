@@ -57,8 +57,8 @@ Docker EE provides a number of built-in collections.
 | `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here.                                                                                                                                                    |
 | `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable.                                                                                                               |
 | `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](isolate-nodes.md). |
-| `/Shared/Private/` | Path to a user's private collection.                                                                                                                                                                                                       |
-| `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower).                                                                                                                                                                  |
+| `/Shared/Private/` | Path to a user's private collection. Note that private collections are not created until the user logs in for the first time. |
+| `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
 
 ### Default collections
