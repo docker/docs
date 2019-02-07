@@ -15,7 +15,7 @@ This does not require any special configuration in the container itself as it us
 <a href="http://wiki.qemu.org/" target="_blank">qemu-static</a> from the Docker for
 Mac VM.
 
-You can run an ARM container, like the <a href="https://www.balena.io/blog/how-resin-io-works/" target="_blank">
+You can run an ARM container, like the <a href="https://www.balena.io/what-is-balena/" target="_blank">
 balena</a> arm builds:
 
 ```
