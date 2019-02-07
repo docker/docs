@@ -4,7 +4,6 @@ datafile: docker_builder
 title: docker builder
 redirect_from:
   - /edge/engine/reference/commandline/builder/
-  - /engine/reference/commandline/builder/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
