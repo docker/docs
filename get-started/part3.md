@@ -132,7 +132,13 @@ docker stack deploy -c docker-compose.yml getstartedlab
 Our single service stack is running 5 container instances of our deployed image
 on one host. Let's investigate.
 
-Get the service ID for the one service in our application:
+To get the services for a service stack, get the service ID for the one service in our application:
+```shell
+docker stack services getstartedlab
+```
+
+
+If you are using **Kubernetes**, get the service ID for the one service in our application:
 
 ```shell
 docker service ls
