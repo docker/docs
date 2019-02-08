@@ -18,7 +18,6 @@ The following labels are available for you to use in swarm services:
 | `com.docker.lb.network`                | Name of network the proxy service should attach to for upstream connectivity.                                                                  | `app-network-a`        |
 | `com.docker.lb.context_root`           | Context or path to use for the application.                                                                                                    | `/app`                 |
 | `com.docker.lb.context_root_rewrite`   | Boolean to enable rewrite for the context root.                                                                                                | `true`                 |
-| `com.docker.lb.ssl_only`               | Boolean to force SSL for application.                                                                                                          | `true`                 |
 | `com.docker.lb.ssl_cert`               | Docker secret to use for the SSL certificate.                                                                                                  | `example.com.cert`     |
 | `com.docker.lb.ssl_key`                | Docker secret to use for the SSL key.                                                                                                          | `example.com.key`      |
 | `com.docker.lb.websocket_endpoints`    | Comma separated list of endpoints to configure to be upgraded for websockets.                                                                  | `/ws,/foo`             |
