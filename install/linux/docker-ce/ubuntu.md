@@ -56,7 +56,7 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 ### Supported storage drivers
 
 Docker CE on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
-> ***Note:*** In Docker Engine - Enterprise, `btrfs` is only supported on SLES. See the documentation on
+> **Note**: In Docker Engine - Enterprise, `btrfs` is only supported on SLES. See the documentation on
 > [btrfs](/engine/userguide/storagedriver/btrfs-driver.md) for more details.
 
 For new installations on version 4 and higher of the Linux kernel, `overlay2`

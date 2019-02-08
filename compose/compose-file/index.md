@@ -279,7 +279,7 @@ at build time is the value in the environment where Compose is running.
 
 #### cache_from
 
-> **Note:** This option is new in v3.2
+> **Note**: This option is new in v3.2
 
 A list of images that the engine uses for cache resolution.
 
@@ -291,7 +291,7 @@ A list of images that the engine uses for cache resolution.
 
 #### labels
 
-> **Note:** This option is new in v3.3
+> **Note**: This option is new in v3.3
 
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
@@ -490,7 +490,7 @@ an error.
 
 ### credential_spec
 
-> **Note:** this option was added in v3.3.
+> **Note**: this option was added in v3.3.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
@@ -1431,7 +1431,7 @@ containers in the bare-metal machine's namespace and vice versa.
 
 Expose ports.
 
-> **Note:** Port mapping is incompatible with `network_mode: host`
+> **Note**: Port mapping is incompatible with `network_mode: host`
 
 #### Short syntax
 
@@ -1473,7 +1473,7 @@ ports:
 
 ```
 
-> **Note:** The long syntax is new in v3.2
+> **Note**: The long syntax is new in v3.2
 
 ### restart
 
@@ -1810,7 +1810,7 @@ volumes:
   mydata:
 ```
 
-> **Note:** The long syntax is new in v3.2
+> **Note**: The long syntax is new in v3.2
 
 
 #### Volumes for services, swarms, and stack files

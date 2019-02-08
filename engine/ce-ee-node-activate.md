@@ -26,7 +26,7 @@ on your hub/store account after starting the trial or paid license. This allows 
 upgrade operations to work as expected and keep them current as long as your license is still
 valid and has not expired.
 
-> ***NOTE:*** You can use the `docker engine update` command. However, if you continue to use 
+> **Note**: You can use the `docker engine update` command. However, if you continue to use
 > the CE packages, the OS package will no longer replace the active daemon binary during apt/yum 
 > updates, so you are responsible for performing the `docker engine update` operation periodically 
 > to keep your engine up to date.
@@ -61,10 +61,10 @@ Server: Docker Engine - Community
 
 2. Log into the Docker engine from the command line.
 
-**NOTE:** When running the command `docker login`, the shell stores the credentials in the current user's home 
-directory. RHEL and Ubuntu-based Linux distributions have different behavior for sudo. RHEL sets $HOME to point 
-to `/root` while Ubuntu leaves `$HOME` pointing to the user's home directory who ran `sudo` and this can cause 
-permission and access problems when switching between `sudo` and non-sudo'd commands.
+> **Note**: When running the command `docker login`, the shell stores the credentials in the current user's home
+> directory. RHEL and Ubuntu-based Linux distributions have different behavior for sudo. RHEL sets $HOME to point
+> to `/root` while Ubuntu leaves `$HOME` pointing to the user's home directory who ran `sudo` and this can cause
+> permission and access problems when switching between `sudo` and non-sudo'd commands.
 
 
 For Ubuntu or Debian:
