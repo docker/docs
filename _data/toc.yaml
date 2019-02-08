@@ -2199,6 +2199,8 @@ manuals:
             title: Delegate image signing
           - path: /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
             title: Manage trusted repositories
+          - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
+            title: Trust with a Remote UCP
       - sectiontitle: Promotion policies and mirroring
         section:
           - title: Overview
