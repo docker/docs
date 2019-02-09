@@ -17,7 +17,7 @@ Make sure bash completion is installed.
 
 1. On a current Linux OS (in a non-minimal installation), bash completion should be
 available.
-2. Place the completion script in `/etc/bash_completion.d/`
+2. Place the completion script in `/etc/bash_completion.d/`.
 
 ```shell
 sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
@@ -44,7 +44,7 @@ fi
 4. You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
-##### Install via Homebrew
+##### Install via MacPorts
 
 1. Run `sudo port install bash-completion` to install bash completion.
 2. Add the following lines to `~/.bash_profile`:
