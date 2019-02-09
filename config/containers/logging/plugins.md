@@ -24,7 +24,7 @@ a specific plugin using `docker inspect`.
 ## Configure the plugin as the default logging driver
 
 After the plugin is installed, you can configure the Docker daemon to use it as
-the default by setting the plugin's name as the value of the `logging-driver`
+the default by setting the plugin's name as the value of the `log-driver`
 key in the `daemon.json`, as detailed in the
 [logging overview](configure.md#configure-the-default-logging-driver). If the
 logging driver supports additional options, you can set those as the values of
