@@ -148,14 +148,14 @@ head to the Docker Content Trust documentation
 
 
 ```
-$ docker trust signer add --key cert.pem cluster2admin dtr.example.com/admin/trustdemo:1
-Adding signer "cluster2admin" to dtr.example.com/admin/trustdemo:1...
-Initializing signed repository for dtr.example.com/admin/trustdemo:1...
+$ docker trust signer add --key cert.pem cluster2admin dtr.example.com/admin/trustdemo
+Adding signer "cluster2admin" to dtr.example.com/admin/trustdemo...
+Initializing signed repository for dtr.example.com/admin/trustdemo...
 Enter passphrase for root key with ID 4a72d81:
 Enter passphrase for new repository key with ID dd4460f:
 Repeat passphrase for new repository key with ID dd4460f:
-Successfully initialized "dtr.example.com/admin/trustdemo:1"
-Successfully added signer: cluster2admin to dtr.example.com/admin/trustdemo:1
+Successfully initialized "dtr.example.com/admin/trustdemo"
+Successfully added signer: cluster2admin to dtr.example.com/admin/trustdemo
 ```
 
 Finally we will sign an image tag. This pushes the image up to DTR, as well as
