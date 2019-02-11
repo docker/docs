@@ -34,9 +34,9 @@ main components:
 Navigate to the **Create Kubernetes Object** page, and in the **Object YAML**
 editor, paste your NGINX ingress controller YAML.
 
-Because Kubernetes role based access control (RBAC) is supported, you can download the [Kubenetes YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) to create a dedicated namespace and default service account.
+Because Kubernetes role based access control (RBAC) is supported, you can download an example [YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) from the Kubernetes community, which will create the necessary Kubernetes objects.
 
-For an additional example of a YAML NGINX kube ingress deployment, refer to https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller.
+For an additional example of a YAML NGINX kube ingress deployment, refer to <https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller>.
 
 ## Check your deployment
 
