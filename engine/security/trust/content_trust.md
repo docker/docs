@@ -121,7 +121,7 @@ First we will add the delegation private key to the local Docker trust
 repository. (By default this is stored in `~/.docker/trust/`). If you are 
 generating delegation keys with `$ docker trust key generate`, the private key 
 is automatically added to the local trust store. If you are importing a separate 
-key, such as one from the UCP you will need to use the 
+key, such as one from a UCP Client Bundle you will need to use the 
 `$ docker trust key load` command.
 
 ```
@@ -155,7 +155,6 @@ $ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
 Adding signer "jeff" to dtr.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94: 
 ```
-
 
 Finally, we will use the delegation private key to sign a particular tag and 
 push it up to the registry.
@@ -216,7 +215,6 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for dtr.example.com/admin/demo:1
 ```
 
-
 ## Runtime Enforcement with Docker Content Trust
 
 > Note this only applies to Docker Enterprise Engine 18.09 or newer. This 
@@ -259,13 +257,13 @@ specified.
 logged and remain unenforced. This configuration is intended for testing of 
 changes related to content-trust. The results of the signature verification 
 is displayed in the Docker Engine's daemon logs. 
-* `Enabled` - Content trust will be enforced and an image that cannot be 
+* `Enforced` - Content trust will be enforced and an image that cannot be 
 verified successfully will not be pulled or run.
 
 ```
 {
     "content-trust": {
-        "mode": "enabled"
+        "mode": "enforced"
     }
 }
 ```
@@ -283,7 +281,7 @@ Docker images can be used. Specify:
     "trust-pinning": {
       "official-library-images": true
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -316,7 +314,7 @@ $ grep -r "root" ~/.docker/trust/private
          ]
       }
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -348,7 +346,7 @@ $ docker trust inspect mydtr/user1/repo1 | jq -r '.[].AdministrativeKeys[] | sel
          ]
       }
     },
-    "mode": "enabled"
+    "mode": "enforced"
   }
 }
 ```
@@ -375,7 +373,7 @@ trust cached signature data. This is done through the
          ],
       }
     },
-    "mode": "enabled",
+    "mode": "enforced",
     "allow-expired-cached-trust-data": true 
   }
 }

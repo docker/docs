@@ -37,7 +37,7 @@ Back up your Docker EE components in the following order:
 
 1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
 2. Back up UCP
-3. [Back up DTR](../../dtr/2.5/admin/disaster-recovery/index.md)
+3. [Back up DTR](/ee/dtr/admin/disaster-recovery/)
 
 ## Backup policy
 

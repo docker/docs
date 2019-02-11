@@ -120,11 +120,11 @@ from the repository.
 
     ```bash
     $ sudo apt-key fingerprint 0EBFCD88
-
-    pub   4096R/0EBFCD88 2017-02-22
-          Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid                  Docker Release (CE deb) <docker@docker.com>
-    sub   4096R/F273FCD8 2017-02-22
+    
+    pub   rsa4096 2017-02-22 [SCEA]
+          9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+    uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+    sub   rsa4096 2017-02-22 [S]
     ```
 
 4.  Use the following command to set up the **stable** repository. To add the
@@ -135,7 +135,8 @@ from the repository.
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
     > like Linux Mint, you might need to change `$(lsb_release -cs)`
     > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Tessa`, you could use `bionic`.
+    >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
+    > and unsupported Ubuntu distributions.
 
 
     <ul class="nav nav-tabs">
@@ -206,10 +207,10 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
@@ -237,7 +238,7 @@ from the repository.
        for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING>
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
@@ -330,4 +331,5 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-- Continue with the [User Guide](/engine/userguide/index.md).
+
+- Continue with the [User Guide](/get-started/index.md).

@@ -512,6 +512,10 @@ with Linux containers.
   executed inside a VM which itself runs inside a VM. CPU utilization is also
   likely to be higher.
 
+* Ensure "PMU Virtualization" is turned off in Parallels on Macs. Check the 
+  settings in **Hardware → CPU & Memory → Advanced Settings → PMU 
+  Virtualization**
+
 #### Related issues
 
 Discussion thread on GitHub at [Docker for Windows issue

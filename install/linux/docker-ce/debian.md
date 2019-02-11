@@ -120,7 +120,11 @@ from the repository.
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](/install/index.md).
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `stretch`.
+    > Debian distribution, such as `helium`. Sometimes, in a distribution
+    > like BunsenLabs Linux, you might need to change `$(lsb_release -cs)`
+    > to your parent Debian distribution. For example, if you are using
+    >  `BunsenLabs Linux Helium`, you could use `stretch`. Docker does not offer any guarantees on untested
+    > and unsupported Debian distributions.
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
@@ -171,10 +175,10 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
@@ -202,7 +206,7 @@ from the repository.
        for example, `5:18.09.1~3-0~debian-stretch `.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING>
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
@@ -295,4 +299,6 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-- Continue with the [User Guide](/engine/userguide/index.md).
+
+- Continue with the [User Guide](/get-started/index.md).
+

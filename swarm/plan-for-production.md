@@ -138,7 +138,7 @@ For example, if your cluster is running in the Ireland Region of Amazon Web
 Services (eu-west-1) and you configure three swarm managers (1 x primary, 2 x
 secondary), you should place one in each availability zone as shown below.
 
-![Swarm managers spread across availability zones](http://farm2.staticflickr.com/1657/24581727611_0a076b79de_b.jpg)
+![Swarm managers spread across availability zones](/engine/swarm/images/swarm-high-availability.png)
 
 In this configuration, the swarm cluster can survive the loss of any two
 availability zones. For your applications to survive such failures, they must be
@@ -186,7 +186,7 @@ domains (availability zones). It also has swarm nodes balanced across all three
  failure domains. The loss of two availability zones in the configuration shown
  below does not cause the swarm cluster to go down.
 
-![Swarm cluster configured for HA](http://farm2.staticflickr.com/1675/24380252320_999687d2bb_b.jpg)
+![Swarm cluster configured for HA](/engine/swarm/images/swarm-discovery-service.png)
 
 It is possible to share the same Consul, etcd, or Zookeeper containers between
 the swarm discovery and Engine container networks. However, for best
@@ -199,7 +199,7 @@ You can architect and build swarm clusters that stretch across multiple cloud
 providers, and even across public cloud and on premises infrastructures. The
 diagram below shows an example swarm cluster stretched across AWS and Azure.
 
-![Swarm cluster stretched across AWS and Azure](http://farm2.staticflickr.com/1493/24676269945_d19daf856c_b.jpg)
+![Swarm cluster stretched across AWS and Azure](/engine/swarm/images/swarm-multiple-clouds.png)
 
 While such architectures may appear to provide the ultimate in availability,
 there are several factors to consider. Network latency can be problematic, as

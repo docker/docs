@@ -54,7 +54,7 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. Change directories (`cd`) into the new directory,
+Create an empty directory on your local machine. Change directories (`cd`) into the new directory,
 create a file called `Dockerfile`, copy-and-paste the following content into
 that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
@@ -205,7 +205,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > ```
 >
 > In the example above, the first element of the list is the address of your DNS
-> server. The second item is the Google's DNS which can be used when the first one is
+> server. The second item is Google's DNS which can be used when the first one is
 > not available.
 >
 > Before proceeding, save `daemon.json` and restart the docker service.

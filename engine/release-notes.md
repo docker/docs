@@ -37,7 +37,8 @@ consistency and compatibility reasons.
 * Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 * Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
 
-# 18.09.1
+## 18.09.1
+
 
 2019-01-09
 
