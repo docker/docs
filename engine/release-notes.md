@@ -29,7 +29,16 @@ consistency and compatibility reasons.
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 18.09.2
+
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise and Docker Engine - Community
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
 ## 18.09.1
+
 
 2019-01-09
 
@@ -227,6 +236,13 @@ For more information on the list of deprecated flags and APIs, have a look at th
 In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660),
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
+### 18.03.1-ee-6
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
 ### 18.03.1-ee-5
 2019-01-09
 
@@ -235,10 +251,18 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Added `/proc/asound` to masked paths
 * Fixed authz plugin for 0-length content and path validation.
 
-### Fixes for Docker Engine EE
+### Fixes for Docker Engine - Enterprise
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
 * Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
+### 17.06.2-ee-19
+
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
 
 ### 17.06.2-ee-18
 2019-01-09
