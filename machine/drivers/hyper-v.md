@@ -8,7 +8,7 @@ toc_max: 4
 Creates a Boot2Docker virtual machine locally on your Windows machine
 using Hyper-V.
 
-Hyper-V must be enabled on your desktop system. Docker for Windows automatically
+Hyper-V must be enabled on your desktop system. Docker Desktop for Windows automatically
 enables it upon install. See this article on the Microsoft developer network for instructions on
 [how to manually enable
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install).
@@ -57,7 +57,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 1. Make sure Hyper-V is enabled.
 
-Hyper-V is automatically enabled on a Docker for Windows installation. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
+Hyper-V is automatically enabled on a Docker Desktop for Windows installation. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
 
 #### 2. Set up a new external network switch (Optional)
 
@@ -71,7 +71,7 @@ Select the **Virtual Switch Manager** on the right-hand **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
-Set up a new **external network switch** to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. If you already have another network switch set up, use that one instead but make sure it is an **external** switch.)
+Set up a new **external network switch** to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker Desktop for Windows. If you already have another network switch set up, use that one instead but make sure it is an **external** switch.)
 
 For this example, we created a virtual switch called `Primary Virtual Switch`.
 

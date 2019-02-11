@@ -207,7 +207,7 @@ Created database 'myapp_test'
 
 That's it. Your app should now be running on port 3000 on your Docker daemon.
 
-On Docker for Mac and Docker for Windows, go to `http://localhost:3000` on a web
+On Docker Desktop for Mac and Docker Desktop for Windows, go to `http://localhost:3000` on a web
 browser to see the Rails Welcome.
 
 If you are using [Docker Machine](/machine/overview.md), then `docker-machine ip

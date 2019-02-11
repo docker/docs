@@ -171,12 +171,13 @@ from the repository.
 
 #### Set up the repository
 
-1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
+1.  Temporarily add the `$DOCKER_EE_BASE_URL` and `$DOCKER_EE_URL` variables into your environment. This
     only persists until you log out of the session. Replace `<DOCKER-EE-URL>`
-    with the URL you noted down in the [prerequisites](#prerequisites).
+    listed below with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ DOCKER_EE_URL="<DOCKER-EE-URL>/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
+    $ DOCKER_EE_BASE_URL="<DOCKER-EE-URL>"
+    $ DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
     ```
 
     Where:
@@ -187,7 +188,9 @@ from the repository.
     As an example your command should look like:
 
     ```bash
-    DOCKER_EE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555/sles/12.3/x86_64/stable-18.09"
+
+    DOCKER_EE_BASE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555"
+    
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
@@ -202,7 +205,7 @@ from the repository.
     with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo rpm --import "<DOCKER-EE-URL>/sles/gpg"
+    $ sudo rpm --import "${DOCKER_EE_BASE_URL}/sles/gpg"
     ```
 
 #### Install Docker EE
@@ -219,11 +222,11 @@ from the repository.
     `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
     key.
 
-2.  Install the latest version of Docker EE, or go to the next step to install a
+2.  Install the latest version of Docker EE and containerd, or go to the next step to install a
     specific version.
 
     ```bash
-    $ sudo zypper install docker-ee
+    $ sudo zypper install docker-ee docker-ee-cli containerd.io
     ```
 
     Start Docker:
@@ -256,7 +259,7 @@ from the repository.
     and separate them by a hyphen (`-`):
 
     ```bash
-    $ sudo zypper install docker-ee-<VERSION_STRING>
+    $ sudo zypper install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
     ```
 
     Docker is installed but not started. The `docker` group is created, but no

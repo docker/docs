@@ -91,7 +91,7 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 
 Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
 
-[custom_api_server_headers]
+[[custom_api_server_headers]]
 
 | Item | Description |
 | ----------- | ----------- |
@@ -188,10 +188,13 @@ components. Assigning these values overrides the settings in a container's
 | `ipip_mtu`                             | no       | Set the IPIP MTU size for the calico IPIP tunnel interface.                                                                                                                                      |
 | `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                               |
 | `nodeport_range`                       | yes      | Set the port range that for Kubernetes services of type NodePort can be exposed in. Default is `32768-35535`.                                                                                    |
-| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server.                                                                                                                                     |
-| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager.                                                                                                                            |
-| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets.                                                                                                                                                      |
-| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler.                                                                                                                                       |
+| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                                   |
+| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                            |
+| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets. (dev)                                                                                                                                                      |
+| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler. (dev)                                                                                                                                      |
 | `local_volume_collection_mapping`      | no       | Store data about collections for volumes in UCP's local KV store instead of on the volume labels. This is used for enforcing access control on volumes.                                          |
 | `manager_kube_reserved_resources`      | no       | Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.                                                                                                   |
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
+
+
+*dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.

@@ -70,8 +70,8 @@ instructions for enabling and configuring AppArmor or SELinux.
 ### Install static binaries
 
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/x86_64/)
-    (or change `stable` to `edge` or `test`),
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
+    (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
     version of Docker CE you want to install.
 
@@ -123,7 +123,7 @@ The macOS binary includes the Docker client only. It does not include the
 
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `edge` or `test`),
+    (or change `stable` to `nightly` or `test`),
     and download the `.tgz` file relating to the version of Docker CE you want
     to install.
 
@@ -162,4 +162,4 @@ version.
 
 ## Next steps
 
-Continue with the [User Guide](/engine/userguide/index.md).
+Continue with the [User Guide](/get-started/index.md).

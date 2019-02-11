@@ -2,6 +2,8 @@
 datafolder: engine-cli
 datafile: docker_node_demote
 title: docker node demote
+redirect_from:
+  - /edge/engine/reference/commandline/node_demote/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
@@ -10,7 +12,4 @@ here, you'll need to find the string by searching this repo:
 
 https://github.com/docker/cli
 -->
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

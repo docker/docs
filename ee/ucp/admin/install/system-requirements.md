@@ -13,8 +13,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker EE Engine](/ee/supported-platforms.md) version 18.09.0-ee-8;
-  values of `n` in the `-ee-<n>` suffix must be 8 or higher
+* [Docker EE Engine](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
 * A static IP address
 
@@ -22,6 +21,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
+* 2 vCPUs for manager nodes
 * 4GB of free disk space for the `/var` partition for manager nodes
 * 500MB of free disk space for the `/var` partition for worker nodes
 
@@ -31,7 +31,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
  * 4 vCPUs for manager nodes
  * 25-100GB of free disk space
 
-Note that Windows container images are typically larger than Linux ontainer images. For
+Note that Windows container images are typically larger than Linux container images. For
 this reason, you should provision more local storage for Windows
 nodes and for any DTR setups that store Windows container images.
 
@@ -70,6 +70,7 @@ host types:
 | managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server endpoint                                       |
 | managers, workers | TCP 6444                | Self               | Port for Kubernetes API reverse proxy                                         |
 | managers, workers | TCP, UDP 7946           | Internal           | Port for gossip-based clustering                                              |
+| managers, workers | TCP 9099                | Self               | Port for calico health check
 | managers, workers | TCP 10250               | Internal           | Port for Kubelet                                                              |
 | managers, workers | TCP 12376               | Internal           | Port for a TLS authentication proxy that provides access to the Docker Engine |
 | managers, workers | TCP 12378               | Self               | Port for Etcd reverse proxy                                                   |

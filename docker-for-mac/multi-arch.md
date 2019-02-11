@@ -7,7 +7,7 @@ title: Leverage multi-CPU architecture support
 notoc: true
 ---
 
-Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
+Docker Desktop for Mac provides `binfmt_misc` multi architecture support, so you can run
 containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`,
 and even `s390x`.
 
@@ -15,13 +15,13 @@ This does not require any special configuration in the container itself as it us
 <a href="http://wiki.qemu.org/" target="_blank">qemu-static</a> from the Docker for
 Mac VM.
 
-You can run an ARM container, like the <a href="https://resin.io/how-it-works/" target="_blank">
-resin</a> arm builds:
+You can run an ARM container, like the <a href="https://www.balena.io/blog/how-resin-io-works/" target="_blank">
+balena</a> arm builds:
 
 ```
-$ docker run resin/armv7hf-debian uname -a
+$ docker run balenalib/armv7hf-debian uname -a
 
-Linux 7ed2fca7a3f0 4.1.12 #1 SMP Tue Jan 12 10:51:00 UTC 2016 armv7l GNU/Linux
+Linux 3d3ffca44f6e 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 armv7l GNU/Linux
 
 $ docker run justincormack/ppc64le-debian uname -a
 

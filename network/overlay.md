@@ -265,7 +265,7 @@ this for each node joining the swarm.
 
 ### Attach a standalone container to an overlay network
 
-The `ingress` network is create without the `--attachable` flag, which means
+The `ingress` network is created without the `--attachable` flag, which means
 that only swarm services can use it, and not standalone containers. You can
 connect standalone containers to user-defined overlay networks which are created
 with the `--attachable` flag. This gives standalone containers running on

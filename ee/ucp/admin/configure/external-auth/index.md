@@ -224,4 +224,3 @@ LDAP directory.
 
 - [Create users and teams manually](../../../authorization/create-users-and-teams-manually.md)
 - [Create teams with LDAP](../../../authorization/create-teams-with-ldap.md)
-- [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)

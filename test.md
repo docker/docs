@@ -268,14 +268,14 @@ example, [swarm](glossary.md?term=swarm)).
 ## Site-wide variables
 
 Look in the top-level `_config.yml` for site-wide variables, such as
-`site.docker_ce_stable_version`. To use them, use Liquid like:
+`site.docker_ce_version`. To use them, use Liquid like:
 
 ```liquid
-{% raw %}{{ site.docker_ce_stable_version }}{% endraw %}
+{% raw %}{{ site.docker_ce_version }}{% endraw %}
 ```
 
-The current value of `site.docker_ce_stable_version` is
-{{ site.docker_ce_stable_version }}.
+The current value of `site.docker_ce_version` is
+{{ site.docker_ce_version }}.
 
 ## Mixing Markdown and HTML
 
@@ -707,6 +707,15 @@ incoming := map[string]interface{}{
         "tyui",
     },
 }
+```
+
+### PowerShell
+
+```powershell
+Install-Module DockerMsftProvider -Force
+Install-Package Docker -ProviderName DockerMsftProvider -Force
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
 ```
 
 ### Python

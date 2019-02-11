@@ -12,7 +12,7 @@ You can run Compose on macOS, Windows, and 64-bit Linux.
 Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
 
-- On desktop systems like Docker for Mac and Windows, Docker Compose is
+- On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is
 included as part of those desktop installs.
 
 - On Linux systems, first install the
@@ -39,22 +39,22 @@ Python package manager or installing Compose as a container.
 <div id="macOS" class="tab-pane fade in active" markdown="1">
 ### Install Compose on macOS
 
-**Docker for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
-  * [Get Docker for Mac](/docker-for-mac/install.md)
+  * [Get Docker Desktop for Mac](/docker-for-mac/install.md)
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 <hr>
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 ### Install Compose on Windows systems
 
-**Docker for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
 along with other Docker apps, so most Windows users do not need to
 install Compose separately. Docker install instructions for these are here:
 
-* [Get Docker for Windows](/docker-for-windows/install.md)
+* [Get Docker Desktop for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 **If you are running the Docker daemon and client directly on Microsoft
@@ -77,14 +77,14 @@ Docker Compose. To do so, follow these steps:
     version of Compose you want to use:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\Docker\resources\bin\docker-compose.exe
     ```
 
     For example, to download Compose version {{site.compose_version}},
     the command is:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\Docker\resources\bin\docker-compose.exe
     ```
     > Use the latest Compose release number in the download command.
     >

@@ -69,7 +69,7 @@ which are pinned to the same instance.  If you make a few requests you will noti
 
 # IP Hashing
 In this example we show how to configure sticky sessions using client IP hashing.  This is not as flexible or consistent
-as cookies but enables workarounds for some applications that cannot use the other method.
+as cookies but enables workarounds for some applications that cannot use the other method.  When using IP hashing you should reconfigure Interlock proxy to use [host mode networking](../deploy/host-mode-networking.md) because the default `ingress` networking mode uses SNAT which obscures client IP addresses.
 
 First we will create an overlay network so that service traffic is isolated and secure:
 
