@@ -53,7 +53,7 @@ built-in collection, `/Shared`.
 
 Other collections are also being created to enable shared `db` applications.
 
-> **Note:** For increased security with node-based isolation, use Docker
+> **Note**: For increased security with node-based isolation, use Docker
 > Enterprise Advanced.
 
 - `/Shared/mobile` hosts all Mobile applications and resources.
@@ -107,7 +107,7 @@ collection boundaries. By assigning multiple grants per team, the Mobile and
 Payments applications teams can connect to dedicated Database resources through
 a secure and controlled interface, leveraging Database networks and secrets.
 
-> **Note:** In Docker Enterprise Standard, all resources are deployed across the
+> **Note**: In Docker Enterprise Standard, all resources are deployed across the
 > same  group of UCP worker nodes. Node segmentation is provided in Docker
 > Enterprise Advanced and discussed in the [next tutorial](ee-advanced.md).
 

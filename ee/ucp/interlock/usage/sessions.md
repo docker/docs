@@ -125,7 +125,7 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 You can use `docker service scale demo=10` to add some more replicas.  Once scaled, you will notice that requests are pinned
 to a specific backend.
 
-Note: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
-expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
-determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
+> **Note**: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
+> expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
+> determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
 

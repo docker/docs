@@ -102,7 +102,7 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 
-> **Note:** for simplicity of the next couple of steps, you may perform this
+> **Note**: for simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
 
     $ openssl genrsa -out key.pem 4096
