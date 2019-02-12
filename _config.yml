@@ -94,7 +94,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.1"
+      win_latest_build: "docker-18.09.2"
   - scope:
       path: "datacenter"
     values:
