@@ -41,7 +41,7 @@ As part of your backup policy you should regularly create backups of UCP.
 DTR is backed up independently.
 [Learn about DTR backups and recovery](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
 
-> Warning: On UCP versions 3.1.0 - 3.1.2, before performing a UCP backup, you must clean up multiple /dev/shm mounts in the ucp-kublet entrypoint script by running the following script on all nodes via cron job:
+> Warning: On UCP versions 3.0.0 - 3.0.7, before performing a UCP backup, you must clean up multiple /dev/shm mounts in the ucp-kublet entrypoint script by running the following script on all nodes via cron job:
 
 ```
 SHM_MOUNT=$(grep -m1 '^tmpfs./dev/shm' /proc/mounts)
