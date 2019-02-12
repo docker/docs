@@ -50,7 +50,7 @@ while [ $(grep -cm2 '^tmpfs./dev/shm' /proc/mounts) -gt 1 ]; do
 done 
 grep -q '^tmpfs./dev/shm' /proc/mounts || sudo mount "${SHM_MOUNT}"
 ``` 
-For additional details, refer to [Docker issue 934](https://success.docker.com/article/more-than-one-dev-shm-mount-in-the-host-namespace){: target="_blank"}
+For additional details, refer to [Docker KB000934](https://success.docker.com/article/more-than-one-dev-shm-mount-in-the-host-namespace){: target="_blank"}
 
 To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
