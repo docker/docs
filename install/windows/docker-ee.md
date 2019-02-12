@@ -277,9 +277,6 @@ provides a tutorial on how to set up and run Windows containers on Windows 10
 or Windows Server 2016. It shows you how to use a MusicStore application with
 Windows containers.
 
-* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md)
-describes environment setup in detail.
-
 * Docker Container Platform for Windows Server [articles and blog
 posts](https://www.docker.com/microsoft/) on the Docker website.
 
