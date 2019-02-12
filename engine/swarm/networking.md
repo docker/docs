@@ -208,7 +208,7 @@ Multiple pools can be configured if discontiguous address space is required. How
 
 The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
 
-**NOTE:** Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
+> **Note**: Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
 
 ##### Overlay network size limitations
 

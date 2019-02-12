@@ -29,11 +29,10 @@ etc.).
   - Long Term Service Channel (LTSC) - 2016 and 2019 (Core and GUI)
   - Semi-annual Channel (SAC) - 1709, 1803 and 1809
 * RAM: 4GB
-* Disk space: [32 GB minimum recommendation for
-  Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system
-  requirements). An additional 32 GB of Space is recommended for base images for
-  ServerCore and NanoServer along with buffer space for workload containers
-  running IIS, SQL Server and .Net apps.
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements). 
+Docker recommends an additional 32 GB of space for base images for ServerCore 
+and NanoServer along with buffer space for workload containers running IIS, SQL Server and .Net apps.
+
 
 ## Install Docker Engine - Enterprise
 
@@ -101,8 +100,8 @@ With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS
 module. If the Windows implementation already has FIPS support enabled, FIPS is
 automatically enabled in the Docker engine.
 
-**NOTE:** FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR
-currently do not have support for FIPS 140-2.
+
+> **Note**: FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
 
 To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode,
 execute the following command in PowerShell:
@@ -133,7 +132,7 @@ Labels:
  com.docker.security.fips=enabled 
 ```
 
-**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
+> **Note**: If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
 
 ## Use a script to install Docker EE
 
@@ -266,7 +265,7 @@ index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.
 ## Preparing a Windows Host for use with UCP
 
 To add a Windows Server host to an existing Universal Control Plane cluster
-please follow the list of [pre-requisites and joining
+please follow the list of [prerequisites and joining
 instructions](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/#run-the-windows-node-setup-script).
 
 ## About Docker Engine - Enterprise containers and Windows Server

@@ -27,8 +27,8 @@ $> docker service create \
     ehazlett/websocket-chat
 ```
 
-Note: for this to work you must have an entry for `demo.local` in your local hosts (i.e. `/etc/hosts`) file.
-This uses the browser for websocket communication so you will need to have an entry or use a routable domain.
+> **Note**: for this to work you must have an entry for `demo.local` in your local hosts (i.e. `/etc/hosts`) file.
+> This uses the browser for websocket communication so you will need to have an entry or use a routable domain.
 
 Interlock will detect once the service is available and publish it.  Once the tasks are running
 and the proxy service has been updated the application should be available via `http://demo.local`.  Open

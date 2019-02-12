@@ -364,12 +364,11 @@ gforghetti:~/$
 gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
 ```
 
-> Note: The output was piped to the **jq** command to display it "nicely".
+> **Note**: The output was piped to the `jq` command to display it "nicely".
 
 #### Output:
 
-
-```
+```json
  {
   "Date": "Mon May 21 14:38:28 2018",
   "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",

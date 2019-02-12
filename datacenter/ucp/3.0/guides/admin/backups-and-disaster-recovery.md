@@ -41,6 +41,17 @@ As part of your backup policy you should regularly create backups of UCP.
 DTR is backed up independently.
 [Learn about DTR backups and recovery](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
 
+> Warning: On UCP versions 3.0.0 - 3.0.7, before performing a UCP backup, you must clean up multiple /dev/shm mounts in the ucp-kublet entrypoint script by running the following script on all nodes via cron job:
+
+```
+SHM_MOUNT=$(grep -m1 '^tmpfs./dev/shm' /proc/mounts)
+while [ $(grep -cm2 '^tmpfs./dev/shm' /proc/mounts) -gt 1 ]; do 
+  sudo umount /dev/shm 
+done 
+grep -q '^tmpfs./dev/shm' /proc/mounts || sudo mount "${SHM_MOUNT}"
+``` 
+For additional details, refer to [Docker KB000934](https://success.docker.com/article/more-than-one-dev-shm-mount-in-the-host-namespace){: target="_blank"}
+
 To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
 contents of all the [volumes used by UCP](../architecture.md) to persist data
