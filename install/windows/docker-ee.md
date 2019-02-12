@@ -25,8 +25,7 @@ LAHF/SAHF, and PrefetchW, security: DEP/NX, etc.).
 
 * OS Versions: Server 2016 (Core and GUI), 1709 and 1803
 * RAM: 4GB
-* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system
-  requirements). An additional 32 GB of Space is recommended for base images for ServerCore and NanoServer along with buffer
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements). An additional 32 GB of Space is recommended for base images for ServerCore and NanoServer along with buffer
   space for workload containers running IIS, SQL Server and .Net apps.
 
 ## Install Docker Engine - Enterprise
