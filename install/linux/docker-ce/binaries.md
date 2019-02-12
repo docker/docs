@@ -116,43 +116,6 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 - Continue with the [User Guide](/engine/userguide/index.md).
 
-## Install client binaries on macOS
-
-The macOS binary includes the Docker client only. It does not include the
-`dockerd` daemon.
-
-1.  Download the static binary archive. Go to
-    [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `nightly` or `test`),
-    and download the `.tgz` file relating to the version of Docker CE you want
-    to install.
-
-2.  Extract the archive using the `tar` utility. The `docker` binary is
-    extracted.
-
-    ```bash
-    $ tar xzvf /path/to/<FILE>.tar.gz
-    ```
-
-3.  **Optional**: Move the binary to a directory on your executable path, such
-    as `/usr/local/bin/`. If you skip this step, you must provide the path to the
-    executable when you invoke `docker` or `dockerd` commands.
-
-    ```bash
-    $ sudo cp docker/docker /usr/local/bin/
-    ```
-
-4.  Verify that Docker is installed correctly by running the `hello-world`
-    image. The value of `<hostname>` is a hostname or IP address running the
-    Docker daemon and accessible to the client.
-
-    ```bash
-    $ sudo docker -H <hostname> run hello-world
-    ```
-
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
-
 ## Upgrade static binaries
 
 To upgrade your manual installation of Docker CE, first stop any
