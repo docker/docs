@@ -15,8 +15,12 @@ Docker Content Trust with a Remote UCP gets around this problem, as User's from
 a remote UCP are able to sign images in the central DTR, and still apply runtime
 enforcement.
 
-In the following example we will connect DTR to 1 remote UCP cluster, however
-this process can be repeated over and over with more remote UCPs. 
+In the following example we will connect DTR to 1 remote UCP cluster, sign the
+image with a User from that remote UCP cluster, and provide runtime enforcement
+within the remote UCP cluster. This process could be repeated over and over,
+integrating DTR with multiple remote UCP clusters, signing the image with Users
+from each environment, and then providing runtime enforcement in each remote UCP
+cluster seperately.
 
 ![](../../../images/remoteucp-graphic.png)
 
@@ -56,7 +60,11 @@ a local UCP.
 > however this will not provide Single Sign On, Users on Cluster 2 will not be
 > synced with Cluster 1's Universal Control Plane or Docker Trusted Registry.
 > Therefore when pulling images, if the repository is private, registry
-> authentication will still need to be passed as part of the service definition.
+> authentication will still need to be passed as part of the service definition
+> (For example in
+> [Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token)
+> or [Docker
+> Swarm](https://docs.docker.com/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry).
 
 To add a new registry, the first thing we need to retrieve is the Certificate
 Authority used to sign the DTR TLS Certificate. This can be done through DTR's
@@ -175,7 +183,7 @@ Enter passphrase for cluster2admin key with ID a453196:
 Successfully signed dtr.example.com/admin/trustdemo:1
 ```
 
-Within the DTR UI, you should now be able to see a new tag has been pushed, as well as the **Signed** icon next to the size. 
+Within the DTR UI, you should now be able to see a new tag has been pushed, as well as the **Signed** text next to the size. 
 
 ![](../../../images/remoteucp-signedimage.png){: .with-border}
 
@@ -222,8 +230,11 @@ nqsph0n6lv9u        laughing_lamarr         replicated          1/1             
 
 1) If the image is stored in a Private Repository within DTR, as there is no
    Single Sign On between Cluster 2 and DTR, you need to pass credentials to the
-   Orchestrator. This is either via `--with-registry-auth` for swarm, or as a
-   Kubernetes Secret.
+   Orchestrator. Please see the relevant
+   [Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token)
+   or [Docker
+   Swarm](https://docs.docker.com/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry)
+   documentation.
 
 2) If you see:
 
