@@ -325,8 +325,12 @@ If you are using a version of the documentation that is no longer supported, whi
 
 - By entering your version number in the branch selection list for this repo 
 - By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9` 
-- By checking out the specific [version tag](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline){: target="_blank"} 
-in Docker Hub
+- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline){: target="_blank"} 
+in Docker Hub. For example, run the following to access `v1.9`:
+
+ ```bash
+  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```
 
 ## Building archives and the live published docs
 
