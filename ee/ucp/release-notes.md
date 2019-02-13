@@ -192,7 +192,9 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 The following features are deprecated in UCP 3.1.
 
 * Collections
-    *  User-created nested collections more than 2 layers deep within the root `/Swarm/` collection are deprecated and will be removed in future versions of the product. In the future, we recommend that at most only two levels of collections be created within UCP under the shared Cluster collection designated as `/Swarm/`. For example, if a production collection is created as a collection under the cluster collection `/Swarm/` as `/Swarm/production/` then at most one level of nestedness should be created, as in `/Swarm/production/app/`.
+    * The ability to create a nested collection of more than 2 layers deep within the root `/Swarm/` collection is now deprecated and will not be included in future versions of the product. However, current nested collections with more than 2 layers are still retained.
+
+    * Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster collection designated as `/Swarm/`. For example, if a production collection called `/Swarm/production` is created under the shared cluster collection, `/Swarm/`, then only one level of nesting should be created: `/Swarm/production/app/`. See [Nested Collections](/ee/ucp/authorization/group-resources/#nested-collections) for more details.
 
 * Kubernetes
     * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to [Cloud Controller Manager](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
