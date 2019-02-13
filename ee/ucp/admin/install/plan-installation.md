@@ -42,7 +42,7 @@ this.
 
 ## Avoid IP range conflicts
 
-The `service-cluster-ip-range` API Server flag is currently set to 10.96.0.0/16 and cannot be changed.
+The `service-cluster-ip-range` API Server flag is currently set to `10.96.0.0/16` and cannot be changed.
 
 Swarm uses a default address pool of `10.0.0.0/16` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). 
 
