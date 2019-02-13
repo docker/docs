@@ -42,7 +42,7 @@ this.
 
 ## Avoid IP range conflicts
  
-The `service-cluster-ip-range` API Server flag is currently set to 10.96.0.0/16 and cannot be changed.
+The `service-cluster-ip-range` API Server flag is currently set to `10.96.0.0/16` and cannot be changed.
 
 ## Time synchronization
 
