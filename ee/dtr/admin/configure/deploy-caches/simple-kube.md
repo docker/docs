@@ -82,7 +82,7 @@ stored in the primary DTR. You can
 [customize the storage parameters](/registry/configuration/#storage),
 if you want the cached images to be backended by persistent storage.
 
-> Note: Kubernetes Peristent Volumes or Persistent Volume Claims would have to be 
+> **Note**: Kubernetes Peristent Volumes or Persistent Volume Claims would have to be
 > used to provide persistent backend storage capabilities for the cache.
 
 ```

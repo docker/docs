@@ -14,28 +14,32 @@ Docker Engine - Enterprise enables native Docker containers on Windows Server. W
 
 > Release notes
 >
-> [Release notes for all versions](/release-notes/)
+> [Release notes for all versions](/engine/release-notes/)
 
 ## System requirements
 
-Windows OS requirements around specific CPU and RAM requirements also need to be met as specified 
-in the [Windows Server Requirements](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements).
-This provides information for specific CPU and memory specs and capabilities (instruction sets like CMPXCHG16b, 
-LAHF/SAHF, and PrefetchW, security: DEP/NX, etc.).
+Windows OS requirements around specific CPU and RAM requirements also need to be
+met as specified in the [Windows Server
+Requirements](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements).
+This provides information for specific CPU and memory specs and capabilities
+(instruction sets like CMPXCHG16b, LAHF/SAHF, and PrefetchW, security: DEP/NX,
+etc.).
 
-* OS Versions: Server 2016 (Core and GUI), 1709 and 1803
+* OS Versions: 
+  - Long Term Service Channel (LTSC) - 2016 and 2019 (Core and GUI)
+  - Semi-annual Channel (SAC) - 1709, 1803 and 1809
 * RAM: 4GB
-* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system
-  requirements). An additional 32 GB of Space is recommended for base images for ServerCore and NanoServer along with buffer
-  space for workload containers running IIS, SQL Server and .Net apps.
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements). 
+Docker recommends an additional 32 GB of space for base images for ServerCore 
+and NanoServer along with buffer space for workload containers running IIS, SQL Server and .Net apps.
+
 
 ## Install Docker Engine - Enterprise
 
-Docker Engine - Enterprise requires Windows Server 2016, 1703, or 1803. See
-[What to know before you install](#what-to-know-before-you-install) for a
-full list of prerequisites.
+To install the Docker Engine - Enterprise on your hosts, Docker provides a
+[OneGet](https://github.com/oneget/oneget) PowerShell Module. 
 
-1.  Open a PowerShell command prompt, and type the following commands.
+1.  Open an elevated PowerShell command prompt, and type the following commands.
 
     ```powershell
     Install-Module DockerMsftProvider -Force
@@ -87,19 +91,28 @@ Select option `6) Download and Install Updates`.
 
 ### FIPS 140-2 cryptographic module support
 
-[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules.
+[Federal Information Processing Standards (FIPS) Publication
+140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf)
+is a United States Federal security requirement for cryptographic modules.
 
-With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS 140-2 support in Windows Server 2016. This includes a FIPS supported cryptographic module. If the Windows implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS
+140-2 support in Windows Server. This includes a FIPS supported cryptographic
+module. If the Windows implementation already has FIPS support enabled, FIPS is
+automatically enabled in the Docker engine.
 
-**NOTE:** FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
 
-To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, execute the following command in PowerShell:
+> **Note**: FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
+
+To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode,
+execute the following command in PowerShell:
 
 ```powershell
 [System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
 ```
 
-FIPS 140-2 mode may also be enabled via the Windows Registry. To update the pertinent registry key, execute the following PowerShell command as an Administrator:
+FIPS 140-2 mode may also be enabled via the Windows Registry. To update the
+pertinent registry key, execute the following PowerShell command as an
+Administrator:
 
 ```powershell
 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa\FipsAlgorithmPolicy\" -Name "Enabled" -Value "1"
@@ -119,12 +132,12 @@ Labels:
  com.docker.security.fips=enabled 
 ```
 
-**NOTE:** If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
+> **Note**: If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
 
 ## Use a script to install Docker EE
 
-Use the following steps when you want to install manually, script automated
-installs, or install on air-gapped systems.
+Use the following guide if you wanted to install the Docker Engine - Enterprise
+manually, via a script, or on air-gapped systems.
 
 1.  In a PowerShell command prompt, download the installer archive on a machine
     that has a connection.
@@ -192,7 +205,8 @@ Docker                    {{ site.docker_ee_version }}                 Docker   
 
 ### Updating the DockerMsftProvider
 
-Installing specific Docker EE versions may require an update to previously installed DockerMsftProvider modules. To update:
+Installing specific Docker EE versions may require an update to previously
+installed DockerMsftProvider modules. To update:
 
 ```powershell
 Update-Module DockerMsftProvider
@@ -202,16 +216,19 @@ Then open a new PowerShell session for the update to take effect.
 
 ## Update Docker Engine - Enterprise
 
-To update Docker Engine - Enterprise to the most recent release, specify the `-RequiredVersion` and `-Update` flags:
+To update Docker Engine - Enterprise to the most recent release, specify the
+`-RequiredVersion` and `-Update` flags:
 
 ```powershell
 Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {{ site.docker_ee_version }} -Update -Force
 ```
-The required version must match any of the versions available in this json file: https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json
+The required version number must match a versions available on the [JSON
+index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
 
 ## Uninstall Docker EE
 
- Use the following commands to completely remove the Docker Engine - Enterprise from a Windows Server:
+ Use the following commands to completely remove the Docker Engine - Enterprise
+ from a Windows Server:
 
 1. Leave any active Docker Swarm
 
@@ -245,20 +262,11 @@ The required version must match any of the versions available in this json file:
     Remove-Item -Path "C:\ProgramData\Docker" -Recurse -Force
     ```
 
-## Preparing a Docker EE Engine for use with UCP
+## Preparing a Windows Host for use with UCP
 
-Run the
-[UCP installation script for Windows](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/#run-the-windows-node-setup-script).
-
-Start the Docker service:
-
-```powershell
-Start-Service Docker
-```
-
-* **What the Docker Engine - Enterprise  install includes**: The installation
-provides [Docker Engine](/engine/userguide/intro.md) and the
-[Docker CLI client](/engine/reference/commandline/cli.md).
+To add a Windows Server host to an existing Universal Control Plane cluster
+please follow the list of [prerequisites and joining
+instructions](/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/#run-the-windows-node-setup-script).
 
 ## About Docker Engine - Enterprise containers and Windows Server
 
@@ -268,9 +276,6 @@ Looking for information on using Docker Engine - Enterprise containers?
 provides a tutorial on how to set up and run Windows containers on Windows 10
 or Windows Server 2016. It shows you how to use a MusicStore application with
 Windows containers.
-
-* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md)
-describes environment setup in detail.
 
 * Docker Container Platform for Windows Server [articles and blog
 posts](https://www.docker.com/microsoft/) on the Docker website.

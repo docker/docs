@@ -16,13 +16,13 @@ Docker EE is a superset of all the features in Docker CE. It incorporates defect
 that you can use in environments where new features cannot be adopted as quickly for 
 consistency and compatibility reasons.
 
-> ***NOTE:*** 
+> **Note**:
 > New in 18.09 is an aligned release model for Docker Engine - Community and Docker 
 > Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing 
 > patch version. The enterprise engine is a superset of the community engine. They 
 > will ship concurrently with the same x patch version based on the same code base. 
 
-> ***NOTE:***
+> **Note**:
 > The client and container runtime are now in separate packages from the daemon in
 > Docker Engine 18.09. Users should install and update all three packages at the same time
 > to get the latest patch releases. For example, on Ubuntu:
@@ -224,8 +224,7 @@ As of EE 2.2, Docker will deprecate support for Device Mapper as a storage drive
 time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
 EE 2.0 and 2.1 customers. Please contact Sales for more information.
 
-Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
-(https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
+Docker recommends that existing customers [migrate to using Overlay2 for the storage driver](https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
 The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
 default for Docker engine implementations.
 
@@ -284,7 +283,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
  2018-10-25
 
-  > *** NOTE: *** If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
+  > **Note**: If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
 
  #### Client
 
@@ -336,7 +335,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 2018-10-25
 
-> ***NOTE:*** If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
+> **Note**: If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
 
 #### Client
 

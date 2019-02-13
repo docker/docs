@@ -164,7 +164,7 @@ Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker EE
 from the repository.
 
-> ***NOTE:*** If you need to run Docker EE 2.0, please see the following instructions:
+> **Note**: If you need to run Docker EE 2.0, please see the following instructions:
 > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
 > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
 > UCP, and DTR).

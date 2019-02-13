@@ -13,7 +13,7 @@ Docker Hub Organizations let you create teams so you can give your team access t
 - **Organizations** are a collection of teams and repositories that can be managed together.
 - **Teams** are groups of Docker Hub users that belong to your organization.
 
-**Note:** in Docker Hub, users cannot be associated directly to an organization. They belong only to teams within an organization.
+> **Note**: in Docker Hub, users cannot be associated directly to an organization. They belong only to teams within an organization.
 
 ### Creating an organization
 
@@ -48,7 +48,7 @@ To create a team:
 2. Click on **Add User**
 3. Provide the user's Docker ID username _or_ email to add them to the team ![Add User to Team](images/orgs-team-add-user.png)
 
-**Note:** you are not automatically added to teams created by your organization.
+> **Note**: you are not automatically added to teams created by your organization.
 
 ### Removing team members
 
