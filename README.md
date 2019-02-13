@@ -317,6 +317,17 @@ still optimizes the bandwidth during browsing).
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 ```
 
+## Accessing unsupported archived documentation
+
+Supported documentation includes the current version plus the previous five versions. 
+
+If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
+
+- By entering your version number in the branch selection list for this repo 
+- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9` 
+- By checking out the specific [version tag](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline){: target="_blank"} 
+in Docker Hub
+
 ## Building archives and the live published docs
 
 All the images described below are automatically built using Docker Hub. To
