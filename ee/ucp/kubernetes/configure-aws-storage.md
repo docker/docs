@@ -32,8 +32,8 @@ Instances must have the following [AWS Identity and Access Management](https://d
 ### Infrastructure Configuration
 
 - Apply the roles and policies to Kubernetes masters and workers as indicated in the above chart.
-- EC2 instances must be set to the private DNS hostname of the instance (will typically end in `.internal`)
-- EC2 instances must also be labeled with the key `KubernetesCluster` with a matching value across all nodes.
+- Set the hostname of the EC2 instances to the private DNS hostname of the instance. See [DNS Hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-hostnames) and [To change the system hostname without a public DNS name](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-hostname.html#set-hostname-system) for more details.
+- Label the EC2 instances with the key `KubernetesCluster` and assign the same value across all nodes.
 
 ### Cluster Configuration
 
