@@ -40,7 +40,9 @@ can be nested inside one another, to create hierarchies.
 
 You can nest collections inside one another. If a user is granted permissions
 for one collection, they'll have permissions for its child collections,
-pretty much like a directory structure..
+pretty much like a directory structure.
+
+![](../images/nested-collection.png){: .with-border}
 
 For a child collection, or for a user who belongs to more than one team, the
 system concatenates permissions from multiple roles into an "effective role" for
