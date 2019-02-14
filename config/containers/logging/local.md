@@ -1,5 +1,5 @@
 ---
-description: Describes how to use the json-file logging driver.
+description: Describes how to use the local binary (Protobuf) logging driver.
 keywords: local, protobuf, docker, logging, driver
 redirect_from:
 - /engine/reference/logging/local/
