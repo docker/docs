@@ -40,7 +40,14 @@ can be nested inside one another, to create hierarchies.
 
 You can nest collections inside one another. If a user is granted permissions
 for one collection, they'll have permissions for its child collections,
-pretty much like a directory structure..
+pretty much like a directory structure. As of UCP `3.1`, the ability to create a nested 
+collection of more than 2 layers deep within the root `/Swarm/` collection has been deprecated. 
+
+The following image provides two examples of nested collections with the recommended maximum 
+of two nesting layers. The first example illustrates an environment-oriented collection, and the second 
+example illustrates an application-oriented collection.
+
+![](../images/nested-collection.png){: .with-border}
 
 For a child collection, or for a user who belongs to more than one team, the
 system concatenates permissions from multiple roles into an "effective role" for
