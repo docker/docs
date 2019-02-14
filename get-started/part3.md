@@ -132,13 +132,7 @@ docker stack deploy -c docker-compose.yml getstartedlab
 Our single service stack is running 5 container instances of our deployed image
 on one host. Let's investigate.
 
-To get the services for a service stack, get the service ID for the one service in our application:
-```shell
-docker stack services getstartedlab
-```
-
-
-If you are using **Kubernetes**, get the service ID for the one service in our application:
+Get the service ID for the one service in our application:
 
 ```shell
 docker service ls
@@ -149,7 +143,7 @@ named it the same as shown in this example, the name is
 `getstartedlab_web`. The service ID is listed as well, along with the number of
 replicas, image name, and exposed ports.
 
-You can also run `docker stack services`, followed by the name of
+Alternatively, you can run `docker stack services`, followed by the name of
 your stack. The following example command lets you view all the services associated with the
 `getstartedlab` stack:
 
@@ -184,7 +178,7 @@ load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs match your output from
 the previous command (`docker container ls -q`).
 
-Additionally, you can run `docker stack ps` to view all tasks of a stack.
+To view all tasks of a stack, you can run `docker stack ps` followed by your app name:
 
 ```bash
 docker stack ps getstartedlab
