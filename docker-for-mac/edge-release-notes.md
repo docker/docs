@@ -16,7 +16,7 @@ notes](release-notes) are also available. (Following the CE release model,
 releases, and download stable and edge product installers at [Download Docker
 for Mac](install.md#download-docker-for-mac).
 
-## Edge Releases of 2018
+## Edge Releases of 2019
 
 ### Docker Community Edition 2.0.2.0 2019-02-06
 
@@ -54,6 +54,8 @@ for Mac](install.md#download-docker-for-mac).
   - Add 18.09 missing daemon options
   - Rename Docker for Mac to Docker Desktop
   - Partially open services ports if possible. [docker/for-mac#3438](https://github.com/docker/for-mac/issues/3438)
+
+## Edge Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-mac82 2018-12-07
 
