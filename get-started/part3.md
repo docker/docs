@@ -144,7 +144,7 @@ named it the same as shown in this example, the name is
 replicas, image name, and exposed ports.
 
 Alternatively, you can run `docker stack services`, followed by the name of
-your stack. The following example command lets you view all the services associated with the
+your stack. The following example command lets you view all services associated with the
 `getstartedlab` stack:
 
 ```bash
@@ -178,7 +178,7 @@ load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs match your output from
 the previous command (`docker container ls -q`).
 
-To view all tasks of a stack, you can run `docker stack ps` followed by your app name:
+To view all tasks of a stack, you can run `docker stack ps` followed by your app name, as shown in the following example:
 
 ```bash
 docker stack ps getstartedlab
