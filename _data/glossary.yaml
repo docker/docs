@@ -32,7 +32,7 @@ collection: |
   nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 Compose: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
-  running complex applications with Docker. With compose, you define a
+  running complex applications with Docker. With Compose, you define a
   multi-container application in a single file, then spin your
   application up in a single command which does everything that needs to
   be done to get it running.
