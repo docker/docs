@@ -16,7 +16,7 @@ notes](release-notes) are also available. (Following the CE release model,
 releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).
 
-## Edge Releases of 2018
+## Edge Releases of 2019
 
 ### Docker Community Edition 2.0.2.0 2019-02-06
 
@@ -53,6 +53,8 @@ for Windows](install.md#download-docker-for-windows).
   - Partially open services ports if possibles
   - Quit will not check if service is running anymore
   - Fix UI lock when changing kubernetes state
+
+## Edge Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-win82 2018-12-07
 
