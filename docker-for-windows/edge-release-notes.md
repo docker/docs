@@ -18,6 +18,13 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.2.1 2019-02-15
+
+[Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+
 ### Docker Community Edition 2.0.2.0 2019-02-06
 
 [Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe)
