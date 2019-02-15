@@ -68,12 +68,12 @@ Note: UCP uses all `AttributeStatements` and `Attributes` in the `Assertion` wit
     ```
 #### Okta Configuration
 Configuring with Okta is straightforward, as shown in the following examples:
-![Configure in Okta](./saml_okta_2.png)
-![Configure in UCP](./saml_okta_1.png)
+![Configure in Okta](../../images/saml_okta_2.png)
+![Configure in UCP](../../images/saml_okta_1.png)
 
 When two or more group names are expected to return with the Assertion, use the `regex` filter. For example, use the value `apple|orange` 
 to return groups `apple` and `orange`.
-![Regex_filter_for_group_Okta](./saml_okta_3.png)
+![Regex_filter_for_group_Okta](../../images/saml_okta_3.png)
 
 ### Service Provider Configuration
 Enter the Identity Provider's metadata URL to obtain its metadata. To access the URL, you might need to
@@ -82,4 +82,4 @@ provide the CA certificate that can verify the remote server.
 ### Link Group memeberships with users
 Use the 'edit' or 'create' team dialog to associate SAML group assertion with
 the UCP team so that user team membership is synchronized when the user logs in.
-![Link UCP team with IdP group](./saml_okta_4.png)
+![Link UCP team with IdP group](../../images/saml_okta_4.png)
