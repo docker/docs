@@ -1,8 +1,15 @@
+---
+description: Using UCP cluster metrics with Prometheus
+keywords: prometheus, metrics, ucp
+title: Using UCP cluster metrics with Prometheus
+redirect_from:
+- /engine/admin/prometheus/
+---
+
 # UCP metrics
 
-Here are the metrics that UCP exposes in Prometheus, along with some info
-about each of them. Note that although we expose a lot of metrics in Prometheus,
-the only ones that we document are those that begin with `ucp_`.
+The following table lists the metrics that UCP exposes in Prometheus, along with descriptions. Note that only the metrics 
+labeled with `ucp_` are documented. Other metrics are exposed in Prometheus but are not documented.
 
 | Name                                                    | Units                | Description                                                                                                                                                                                                                                                                     | Labels                                         | Metric source |
 |---------------------------------------------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|---------------|
@@ -37,7 +44,8 @@ the only ones that we document are those that begin with `ucp_`.
 
 ## Metrics labels
 
-Our Prometheus metrics have standardized labels, depending on the resource that they're measuring. Here are some of the labels that we use, along with their values:
+Metrics exposed by UCP in Prometheus have standardized labels, depending on the resource that they are measuring. 
+The following table lists some of the labels that are used, along with their values:
 
 ### Container labels
 
@@ -56,8 +64,8 @@ Our Prometheus metrics have standardized labels, depending on the resource that 
 
 ### Container networking labels
 
-These metrics measure network activity for a given network attached to a given
-container. They have all the same labels as Container labels, plus one extra:
+The following metrics measure network activity for a given network attached to a given
+container. They have the same labels as Container labels, with one addition:
 
 | Label name | Value                 |
 |------------|-----------------------|
@@ -72,7 +80,7 @@ container. They have all the same labels as Container labels, plus one extra:
 ## Metric source
 
 UCP exports metrics on every node and also exports additional metrics from
-every controller. The metrics that are exported from the controllers are
-cluster-scoped (e.g. total number of Swarm services), while the metrics that
-are exported from the nodes are specific to those nodes (e.g. the total memory
-on that node).
+every controller. The metrics that are exported from controllers are
+cluster-scoped, for example, the total number of Swarm services. Metrics that
+are exported from nodes are specific to those nodes, for example, the total memory
+on that node.
