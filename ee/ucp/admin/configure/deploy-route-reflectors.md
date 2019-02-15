@@ -27,7 +27,7 @@ workloads.
 If Route Reflectors are running on a same node as other workloads, swarm ingress
 and NodePorts might not work in these workloads.
 
-## Choose dedicated notes
+## Choose dedicated nodes
 
 Start by tainting the nodes, so that no other workload runs there. Configure
 your CLI with a UCP client bundle, and for each dedicated node, run:
