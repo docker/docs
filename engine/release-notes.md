@@ -235,6 +235,8 @@ For more information on the list of deprecated flags and APIs, have a look at th
 In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660),
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
+## Older Docker Engine EE Release notes
+
 ## 18.03.1-ee-6
 2019-02-11
 
@@ -254,30 +256,6 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
 * Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
-
-## 17.06.2-ee-19
-
-2019-02-11
-
-### Security fixes for Docker Engine - Enterprise
-* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
-* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
-
-## 17.06.2-ee-18
-2019-01-09
-
-### Security fixes
-* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
-* Added `/proc/asound` to masked paths
-* Fixed authz plugin for 0-length content and path validation.
-
-### Fixes for Docker Engine EE
-* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
-* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
-* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
-
-
-## Older Docker Engine EE Release notes
 
 ## 18.03.1-ee-4 
 
@@ -305,58 +283,6 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
   * Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
  * Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
-
-  ## 18.03.1-ee-3 
- 2018-08-30
-
-  #### Builder
-
-  * Fix: no error if build args are missing during docker build. [docker/engine#25](https://github.com/docker/engine/pull/25)
- * Ensure RUN instruction to run without healthcheck. [moby/moby#37413](https://github.com/moby/moby/pull/37413)
-
-  #### Client
-
-  * Fix manifest list to always use correct size. [docker/cli#1156](https://github.com/docker/cli/pull/1156)
- * Various shell completion script updates. [docker/cli#1159](https://github.com/docker/cli/pull/1159) [docker/cli#1227](https://github.com/docker/cli/pull/1227)
- * Improve version output alignment. [docker/cli#1204](https://github.com/docker/cli/pull/1204)
-
-  #### Runtime
-
-  * Disable CRI plugin listening on port 10010 by default. [docker/engine#29](https://github.com/docker/engine/pull/29)
- * Update containerd to v1.1.2. [docker/engine#33](https://github.com/docker/engine/pull/33)
- * Windows: Pass back system errors on container exit. [moby/moby#35967](https://github.com/moby/moby/pull/35967)
- * Windows: Fix named pipe support for hyper-v isolated containers. [docker/engine#2](https://github.com/docker/engine/pull/2) [docker/cli#1165](https://github.com/docker/cli/pull/1165)
- * Register OCI media types. [docker/engine#4](https://github.com/docker/engine/pull/4)
-
-  #### Swarm Mode
-
-  * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
-  * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
-
-2018-10-25
-
-> **Note**: If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
-
-#### Client
-
-* Fixed help message flags on docker stack commands and child commands. [docker/cli#1251](https://github.com/docker/cli/pull/1251)
-* Fixed typo breaking zsh docker update autocomplete. [docker/cli#1232](https://github.com/docker/cli/pull/1232)
-
-### Networking
-
-* Added optimizations to reduce the messages in the NetworkDB queue. [docker/libnetwork#2225](https://github.com/docker/libnetwork/pull/2225)
-* Fixed a very rare condition where managers are not correctly triggering the reconnection logic. [docker/libnetwork#2226](https://github.com/docker/libnetwork/pull/2226)
-* Changed loglevel from error to warning for missing disable_ipv6 file. [docker/libnetwork#2224](https://github.com/docker/libnetwork/pull/2224)
-
-#### Runtime
-
-* Fixed denial of service with large numbers in cpuset-cpus and cpuset-mems. [moby/moby#37967](https://github.com/moby/moby/pull/37967)
-* Added stability improvements for devicemapper shutdown. [moby/moby#36307](https://github.com/moby/moby/pull/36307) [moby/moby#36438](https://github.com/moby/moby/pull/36438)
-
-#### Swarm Mode
-
-* Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
-* Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
 
 ## 18.03.1-ee-3 
 2018-08-30
@@ -421,6 +347,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+
+## 17.06.2-ee-19
+
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+## 17.06.2-ee-18
+2019-01-09
+
+### Security fixes
+* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
+* Added `/proc/asound` to masked paths
+* Fixed authz plugin for 0-length content and path validation.
+
+### Fixes for Docker Engine EE
+* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
+* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
+* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
 
 ## 17.06.2-ee-17 
 2018-10-25
