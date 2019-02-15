@@ -27,5 +27,4 @@ docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format 
 {% endraw %}
 ```
 
-
-
+**Note**: If you are running in debug mode, the index 0 returns `--debug` instead of `--db-addr`. Make sure to exit debug mode before changing administrator passwords.
