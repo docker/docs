@@ -50,6 +50,14 @@ Swarm uses a default address pool of `10.0.0.0/16` for its overlay networks. If 
 
 Kubernetes uses a default cluster IP pool for pods that is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
 
+## Avoid firewall conflicts
+
+For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is turned on by default in the openSUSE firewall. This speeds up packet processing on the loopback interface, and breaks certain firewall setups that need to redirect outgoing packets via custom rules on the local machine.
+
+To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
+
+For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
+
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
