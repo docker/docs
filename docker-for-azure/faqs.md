@@ -118,4 +118,8 @@ westeurope
 westindia
 westus
 westus2
+australiaeast
+australiasoutheast
+francecentral
+francesouth
 ```
