@@ -1182,6 +1182,8 @@ manuals:
           title: Add SANs to cluster certificates
         - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
+        - path: /ee/ucp/admin/configure/metrics-descriptions/
+          title: Using UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
         - path: /ee/ucp/admin/configure/create-audit-logs/
@@ -1204,8 +1206,6 @@ manuals:
           title: UCP configuration file
         - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
-        - path: /ee/ucp/admin/configure/use-nfs-volumes/
-          title: Use NFS persistent storage
         - path: /ee/ucp/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/ucp/admin/configure/manage-and-deploy-private-images/
@@ -1345,6 +1345,8 @@ manuals:
       section:
       - title: Access Kubernetes Resources
         path: /ee/ucp/kubernetes/kube-resources/
+      - title: Use NFS persistent storage
+        path: /ee/ucp/admin/configure/use-nfs-volumes/
       - title: Configure AWS EBS Storage for Kubernetes
         path: /ee/ucp/kubernetes/configure-aws-storage/
       - title: Deploy a workload

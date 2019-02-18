@@ -40,6 +40,10 @@ Docker UCP requires each node on the cluster to have a static IP address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
+## Avoid IP range conflicts
+ 
+The `service-cluster-ip-range` Kubernetes API Server flag is currently set to `10.96.0.0/16` and cannot be changed.
+
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical

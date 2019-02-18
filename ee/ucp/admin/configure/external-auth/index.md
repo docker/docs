@@ -141,7 +141,7 @@ Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
 | Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. If you upgraded from UCP 2.0.x, the default is `false`. |
 
-> **Note:** LDAP connections using certificates created with TLS v1.2 do not currently advertise support for sha512WithRSAEncryption in the TLS handshake which leads to issues establishing connections with some clients. Support for advertising sha512WithRSAEncryption will be added in UCP 3.1.0.  
+> **Note**: LDAP connections using certificates created with TLS v1.2 do not currently advertise support for sha512WithRSAEncryption in the TLS handshake which leads to issues establishing connections with some clients. Support for advertising sha512WithRSAEncryption will be added in UCP 3.1.0.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 

@@ -8,9 +8,9 @@ Docker UCP supports Network File System (NFS) persistent volumes for
 Kubernetes. To enable this feature on a UCP cluster, you need to set up
 an NFS storage volume provisioner.
 
-> Kubernetes storage drivers
+> ### Kubernetes storage drivers
 >
-> Currently, NFS is the only Kubernetes storage driver that UCP supports.
+>NFS is one of the Kubernetes storage drivers that UCP supports. See [Kubernetes Volume Drivers](https://success.docker.com/article/compatibility-matrix#kubernetesvolumedrivers) in the Compatibility Matrix for the full list.
 {: important}
 
 ## Enable NFS volume provisioning
