@@ -1182,6 +1182,8 @@ manuals:
           title: Add SANs to cluster certificates
         - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
+        - path: /ee/ucp/admin/configure/metrics-descriptions/
+          title: Using UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
         - path: /ee/ucp/admin/configure/create-audit-logs/
