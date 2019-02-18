@@ -35,6 +35,11 @@ You could subnet the /64 into /80's, but that could cause problems with applicat
 Your provider could detect this also as NDP Exhaustion Attack if you spawn many containers very quickly (e. g. after reboot/restart).
 Another possibility is to use the first methode (the same as if you only got a native IPv4), but it could cause your IPv6 default route to change, if your provider has bad IPv6 peering.
 
+### Macvlan
+
+Depending on the network infrastructure of your cloud provider, it could be possible to get another address out of the /64 assigned to your container if you use macvlan instead of a bridge.
+If that does not fit your design, or it does not work, you'll have to use NDP Proxy or tunneling a prefix using a tunnel provider instead.
+
 ### NDP Proxy
 
 1. Ask your provider if they could assign you a bigger prefix.
