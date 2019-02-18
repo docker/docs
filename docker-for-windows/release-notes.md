@@ -22,7 +22,7 @@ for Windows](install.md#download-docker-for-windows).
 
 ### Docker Community Edition 2.0.0.3 2019-02-15
 
-[Download](https://download.docker.com/win/stable/31259/Docker%20Desktop%20Installer.exe)
+[Download](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
