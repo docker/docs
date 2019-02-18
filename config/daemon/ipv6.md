@@ -8,7 +8,9 @@ redirect_from:
 
 Before you can use IPv6 in Docker containers or swarm services, you need to
 enable IPv6 support in the Docker daemon. Afterward, you can choose to use
-either IPv4 or IPv6 (or both) with any container, service, or network.
+either IPv4, IPv6 or both with any container, service, or network. 
+The default bridge must have a IPv6 prefix assigned or docker fails to start,
+assigning a link local address prefix is enough.
 
 > **Note**: IPv6 networking is only supported on Docker daemons running on Linux
 > hosts.

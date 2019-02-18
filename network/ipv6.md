@@ -1,8 +1,13 @@
 ---
-title: IPv6 networking
+title: IPv6 with docker overview
 description: IPv6 networking with docker, limitations, common bugs and usage examples.
 keywords: network, ipv6
 ---
+
+Before you can use IPv6 in Docker containers or swarm services, you need to
+[enable IPv6 support in the Docker daemon](../config/daemon/ipv6.md). Afterward, you can choose to use
+either IPv4, IPv6 or both with any container, service or network.
+The default bridge must have a IPv6 prefix assigned or docker fails to start.
 
 ## With only a native IPv4 connection
 
@@ -83,6 +88,11 @@ Assuming your provider assigned you `2001:0db80::/48`, your setup is:
 ## Firewalling
 
 Your containers will allways be reachable by there IPv6 address, even though you did not explicitely export ports.
-Therefore secure your containers as if the would allways be run with `net=host`.
+Therefore secure your containers as if they would allways be run with `--net=host`.
+Your Firewall rules need to follow [RFC4890](https://tools.ietf.org/html/rfc4890).
 
 Instructions for using ip6tables can be found [here](https://www.tldp.org/HOWTO/Linux+IPv6-HOWTO/ch18s03.html).
+
+## IPv6 Bootcamp
+
+<div><iframe width="768" height="432" src="https://media.ccc.de/v/froscon2018-2242-ipv6_im_jahre_2018/oembed" frameborder="0" allowfullscreen></iframe><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/MovingImage" property="dct:title" rel="dct:type">IPv6 im Jahre 2018</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://media.ccc.de/v/froscon2018-2242-ipv6_im_jahre_2018" property="cc:attributionName" rel="cc:attributionURL">Falk Stern and Maximilian Wilhelm</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></div>
