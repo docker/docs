@@ -110,7 +110,7 @@ for advanced [log tag options](log_tags.md).
 ### fluentd-async-connect
 
 Docker connects to Fluentd in the background. Messages are buffered until the
-connection is established.
+connection is established. Defaults to `false`.
 
 ### fluentd-buffer-limit
 
@@ -123,11 +123,11 @@ How long to wait between retries. Defaults to 1 second.
 
 ### fluentd-max-retries
 
-The maximum number of retries. Defaults to 10.
+The maximum number of retries. Defaults to `10`.
 
 ### fluentd-sub-second-precision
 
-Generates event logs in nanosecond resolution. Defaults to false.
+Generates event logs in nanosecond resolution. Defaults to `false`.
 
 ## Fluentd daemon management with Docker
 
