@@ -1256,11 +1256,6 @@ Initial Docker EE release, based on Docker CE 17.03.0
 ## 18.03.1-ce 
 2018-04-26
 
-## Older Docker Engine CE Release notes
-
-## 18.03.1-ce 
-2018-04-26
-
 #### Client
 
 - Fix error with merge compose file with networks [docker/cli#983](https://github.com/docker/cli/pull/983)
