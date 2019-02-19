@@ -226,20 +226,42 @@ Select the **ops-nodes** namespace, and create a `Full Control` grant for the
 
 ### Link the namespace to a node collection
 
-The last step is to link the Kubernetes namespace the `/Prod` collection.
+The last step is to link the Kubernetes namespace to the `/Prod` collection. Namespaces are associated with a node collection using the namespace definition information provided in a configuration and an annotation file:
+    
+#### Configuration file
+The configuration file specifies backend behavior in json or yaml using the following format:
+    ```
+    podNodeSelectorPluginConfig:
+     clusterDefaultNodeSelector: name-of-node-selector
+     namespace1: ops-nodes
+    ```
+The `PodNodeSelector` configuration file is specified in the file provided to the API server with the command line flag '--admission-control-config-file` using the following format:
+    ```
+    kind: AdmissionConfiguration
+    apiVersion: apiserver.k8s.io/v1alpha1
+    plugins:
+    - name: PodNodeSelector
+      path: podnodeselector.yaml
+    ```
 
-1.  Navigate to the **Namespaces** page, and find the **ops-nodes** namespace
-    in the list.
-2.  Click the **More options** icon and select **Link nodes in collection**.
+#### Annotation file
+The `scheduler.alpha.kubernetes.io/node-selector` annotation key assigns node selectors to namespaces:
+    ```
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/node-selector: name-of-node-selector
+      name: ops-nodes
+    ```
 
-    ![](../images/isolate-nodes-7.png){: .with-border}
+`PodNodeSelector` actions
+    - If the namespace contains an annotation with `scheduler.alpha.kubernetes.io/node-selector` key, use that value as the node selector.
+    - If the namespace lacks a `scheduler.alpha.kubernetes.io/node-selector` key annotation, use the `clusterDefaultNodeSelector` defined in the PodNodeSelector plugin configuration file as the node selector.
+    - The pod’s node selector is evaluated against the namespace node selector. Conflicts result in rejection.
+    - The pod’s node selector is evaluated against the namespace-specific whitelist defined in the plugin configuration file. Conflicts result in rejection.
 
-3.  In the **Choose collection** section, click **View children** on the
-    **Swarm** collection to navigate to the **Prod** collection.
-4.  On the **Prod** collection, click **Select collection**.
-5.  Click **Confirm** to link the namespace to the collection.
-
-    ![](../images/isolate-nodes-8.png){: .with-border}
+> Note: `PodNodeSelector` allows pods to be forced to run on specifically labeled nodes. Refer the PodTolerationRestriction admission plugin, which allows preventing pods from running on specifically tainted nodes.
 
 ### Deploy a Kubernetes workload to the node collection
 
