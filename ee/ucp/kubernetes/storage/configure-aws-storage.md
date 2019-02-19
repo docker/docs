@@ -2,6 +2,8 @@
 title: Configure AWS EBS Storage for Kubernetes
 description: Learn how configure AWS EBS storage for Kubernetes clusters.
 keywords: UCP, Docker Enterprise, Kubernetes, storage, AWS, ELB
+redirect_from:
+- /ee/ucp/kubernetes/configure-aws-storage/
 ---
 
 [AWS Elastic Block Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html) (EBS) can be deployed with Kubernetes in Docker Enterprise 2.1 to use AWS volumes as peristent storage for applications. Before using EBS volumes, configure UCP and the AWS infrastructure for storage orchestration to function.
@@ -131,3 +133,8 @@ pvc-751c006e-a00b-11e8-8007-0242ac110012   1Gi        RWO            Retain     
 The AWS console shows a volume has been provisioned having a matching name with type `gp2` and a `1GiB` size.
 
 ![](../images/aws-ebs.png)
+
+## Where to go next
+
+- [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
+- [Discover Network Encryption on Kubernetes](/ee/ucp/kubernetes/kubernetes-network-encryption/)

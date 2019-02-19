@@ -1345,10 +1345,6 @@ manuals:
       section:
       - title: Access Kubernetes Resources
         path: /ee/ucp/kubernetes/kube-resources/
-      - title: Use NFS persistent storage
-        path: /ee/ucp/admin/configure/use-nfs-volumes/
-      - title: Configure AWS EBS Storage for Kubernetes
-        path: /ee/ucp/kubernetes/configure-aws-storage/
       - title: Deploy a workload
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
@@ -1361,6 +1357,12 @@ manuals:
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
+      - sectiontitle: Persistent Storage
+        section:
+        - title: Use NFS storage
+          path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
+        - title: Use AWS EBS Storage
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
     - title: API reference
       path: /reference/ucp/3.1/api/
       nosync: true
