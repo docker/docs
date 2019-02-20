@@ -28,11 +28,14 @@ sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_ver
 ##### Install via Homebrew
 
 1. Install with `brew install bash-completion`.
-2. Place the completion script in `/usr/local/etc/bash_completion.d/`.
+2. After the installation, Brew displays the installation path. Make sure to place the completion script in the path.
+
+    For example, when running this command on Mac 10.13.2, place the completion script in `/usr/local/etc/bash_completion.d/`.
 
 ```shell
-sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /usr/local/etc/bash_completion.d/docker-compose
 ```
+
 3. Add the following to your `~/.bash_profile`:
 
 ```shell
@@ -60,16 +63,18 @@ completion.
 
 ### Zsh
 
-#### With oh-my-zsh
+Make sure you have [installed `oh-my-zsh`](https://ohmyz.sh/) on your computer. 
 
-Add `docker` and/or `docker-compose` to the plugins list in `~/.zshrc`. In the following example, `...` represent other Zsh plugins you may have installed.
+#### With oh-my-zsh shell
+
+Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run autocompletion within the oh-my-zsh shell. In the following example, `...` represent other Zsh plugins you may have installed.
 
 ```shell
 plugins=(... docker docker-compose
 )
 ```
 
-#### Without oh-my-zsh
+#### Without oh-my-zsh shell
 
 1. Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
 
