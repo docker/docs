@@ -238,7 +238,7 @@ dtr.example.com/admin/trustdemo:1: image did not meet required signing policy
 ```
 
 This means that the image was signed correctly, however the user who signed the
-image does not mean the signing policy in cluster 2. This could be because you
+image does not meet the signing policy in cluster 2. This could be because you
 signed the image with the wrong user keys.
 
 ## Where to go next
