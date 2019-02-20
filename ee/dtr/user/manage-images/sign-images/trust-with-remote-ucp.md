@@ -2,6 +2,8 @@
 title: Using Docker Content Trust with a Remote UCP Cluster
 description: Learn how to use a single DTR's trust data with remote UCPs.
 keywords: registry, sign, trust, notary
+redirect_from:
+- /ee/ucp/admin/configure/integrate-with-multiple-registries/
 ---
 
 For more advanced deployments, you may want to share one Docker Trusted Registry
