@@ -2150,7 +2150,7 @@ manuals:
           title: Monitor the cluster status
         - path: /ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/
           title: Check Notary audit logs
-        - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+        - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-dtr/
           title: Troubleshoot with logs
       - sectiontitle: Disaster recovery
         section:
@@ -2308,7 +2308,7 @@ manuals:
               title: Monitor the cluster status
             - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
               title: Check Notary audit logs
-            - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+            - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
               title: Troubleshoot with logs
             - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
               title: Troubleshoot batch jobs
