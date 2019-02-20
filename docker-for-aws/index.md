@@ -30,12 +30,8 @@ permissions](/docker-for-aws/iam-permissions.md), you can
 use the blue button to bootstrap Docker for AWS
 using CloudFormation.
 
-  <tr valign="top">
-  <td width="33%">
-  {{aws_blue_latest}}
-  {{aws_blue_vpc_latest}}
-  </td>
-  </tr>
+{{aws_blue_latest}}
+{{aws_blue_vpc_latest}}
 
 ### Deployment options
 
