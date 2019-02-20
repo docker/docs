@@ -21,13 +21,8 @@ This deployment is fully baked and tested, and comes with the latest Enterprise 
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
 then bootstrap Docker for Azure using Azure Resource Manager.
-<table style="width:100%">
-  <tr valign="top">
-  <td width="50%">
-  {{azure_blue_latest}}
-  </td>
-  </tr>
-</table>
+
+{{azure_blue_latest}}
 
 ### Prerequisites
 
