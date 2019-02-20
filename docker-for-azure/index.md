@@ -25,6 +25,7 @@ then bootstrap Docker for Azure using Azure Resource Manager.
   <td width="50%">
   {{azure_blue_latest}}
   </td>
+  </tr>
 
 ### Prerequisites
 
