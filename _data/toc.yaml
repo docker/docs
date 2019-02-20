@@ -2151,7 +2151,7 @@ manuals:
         - path: /ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/
           title: Check Notary audit logs
         - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-dtr/
-          title: Troubleshoot with logs
+          title: Troubleshoot Docker Trusted Registry
       - sectiontitle: Disaster recovery
         section:
         - title: Overview
@@ -2309,7 +2309,7 @@ manuals:
             - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
               title: Check Notary audit logs
             - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
-              title: Troubleshoot with logs
+              title: Troubleshoot Docker Trusted Registry
             - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
               title: Troubleshoot batch jobs
           - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
