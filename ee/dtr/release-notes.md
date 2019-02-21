@@ -22,13 +22,21 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.3
+
+(2019-2-20)
+
+### Bug Fixes
+
+* Bump the Golang version that is used to build DTR to version 1.11.5. (docker/dhe-deploy#10060)
+
 ## 2.6.2 
 
 (2019-1-29)
 
 ### Bug Fixes
 
-  * Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
+* Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
 
 ## 2.6.1 
 
@@ -104,6 +112,14 @@ to upgrade your installation to the latest release.
 
 
 # Version 2.5
+
+## 2.5.9
+
+(2019-2-20)
+
+### Bug Fixes
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10071)
 
 ## 2.5.8
  
@@ -298,6 +314,14 @@ specify `--log-protocol`.
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 # Version 2.4
+
+## 2.4.10
+
+(2019-2-20)
+
+### Bug Fixes
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10068)
 
 ## Version 2.4.8
 
