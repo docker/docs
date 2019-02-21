@@ -26,7 +26,7 @@ time, configure your DTR for high availability.
 
 | Option                        | Environment Variable      | Description                                                                          |
 |:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
-| `--debug` | $DEBUG | Enable debug mode for additional logs. |
+| `--debug` | $DEBUG | Enable debug mode for additional logs of this bootstrap container (the log level of downstream DTR containers can be set with `--log-level`). |
 | `--dtr-ca` | $DTR_CA | Use a PEM-encoded TLS CA certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own root CA public certificate with `--dtr-ca "$(cat ca.pem)"`. |
 | `--dtr-cert` | $DTR_CERT | Use a PEM-encoded TLS certificate for DTR. By default DTR generates a self-signed TLS certificate during deployment. You can use your own public key certificate with `--dtr-cert "$(cat cert.pem)"`. If the certificate has been signed by an intermediate certificate authority, append its public key certificate at the end of the file to establish a chain of trust. |
 | `--dtr-external-url` | $DTR_EXTERNAL_URL | URL of the host or load balancer clients use to reach DTR. When you use this flag, users are redirected to UCP for logging in. Once authenticated  they are redirected to the url you specify in this flag. If you don't use this flag, DTR  is deployed without single sign-on with UCP. Users and teams are shared but users login  separately into the two applications. You can enable and disable single sign-on in the DTR  settings. Format `https://host[:port]`, where port is the value you used  with `--replica-https-port`. |

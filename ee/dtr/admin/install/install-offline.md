@@ -44,7 +44,7 @@ For each machine where you want to install DTR:
     `docker load` command to load the Docker images from the tar archive:
 
     ```bash
-    $ docker load < dtr.tar.gz
+    $ docker load -i dtr.tar.gz
     ```
 
 ## Install DTR
