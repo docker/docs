@@ -59,11 +59,6 @@ way of knowing which UCP manager node is not healthy, since any manager node
 might be serving your request. Make sure you're connecting directly to the
 URL of a manager node, and not a load balancer.
 
-
-## Monitoring disk usage
-
-Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`.  To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a monitoring solution, such as  Prometheus Node Exporter.
-
 ## Where to go next
 
 * [Troubleshoot with logs](troubleshoot-with-logs.md)
