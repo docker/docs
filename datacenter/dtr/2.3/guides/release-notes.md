@@ -11,6 +11,14 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.4.10
+
+(20 February 2019)
+
+### Bug Fixes
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10064)
+
 ## Version 2.3.10
 
 (29 January 2019)
