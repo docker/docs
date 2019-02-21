@@ -21,6 +21,21 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.4 
+
+2019-02-20
+
+**New platforms**
+* Added support for SLES 15.
+* Added support for Oracle 7.6.
+
+ **Kubernetes**
+* Kubernetes has been updated to version 1.11.7.
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8.
+* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+
 ## 3.1.3
 
 2019-01-29
@@ -211,6 +226,16 @@ The following features are deprecated in UCP 3.1.
 | Interlock (nginx)   | 1.13.12 |
 
 # Version 3.0
+
+## 3.0.10
+
+2019-02-20
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8.
+* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (#16009)
+* Validate Calico certs expiration date and update accordingly. (escalation#981)
 
 ## 3.0.9
 
@@ -654,9 +679,17 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.17
+
+2019-02-20
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8.
+* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+
 ## Version 2.2.16
 
- 2019-01-29
+2019-01-29
 
 ### Bug fixes
  * Added support for the `limit` argument in `docker ps`. (#15812)
