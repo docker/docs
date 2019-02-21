@@ -63,12 +63,6 @@ might be serving your request. Make sure you're connecting directly to the
 URL of a manager node, and not a load balancer. In addition, pinging the
 endpoint with a `HEAD` results in a 404 error code. Use a `GET` request instead.
 
-
-## Monitoring disk usage
-
-Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`.  To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a monitoring solution, such as  Prometheus Node Exporter.
-
-
 ## Where to go next
 
 * [Troubleshoot with logs](troubleshoot-with-logs.md)
