@@ -21,6 +21,28 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.4 
+
+2019-02-28
+
+**New platforms**
+* Added support for SLES 15.
+* Added support for Oracle 7.6.
+
+ **Kubernetes**
+* Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
+* Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
+* Fixed an issue that caused Windows node ucp-agent(s) to constantly reboot when audit logging is enabled. (docker/orca#16122)
+* Fixed an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)
+* Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
+
+**Enhancements**
+* Changed packaging and builds for UCP to build bootstrapper last. This avoids the "upgrade available" banner on all UCPs until the entirety of UCP is available.
+
 ## 3.1.3
 
 2019-01-29
@@ -211,6 +233,16 @@ The following features are deprecated in UCP 3.1.
 | Interlock (nginx)   | 1.13.12 |
 
 # Version 3.0
+
+## 3.0.10
+
+2019-02-28
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8.
+* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (#16009)
+* Validate Calico certs expiration date and update accordingly. (escalation#981)
 
 ## 3.0.9
 
@@ -654,12 +686,66 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.17
+
+2019-02-28
+
+ **Bug Fixes**
+* Bump the Golang version that is used to build UCP to version 1.10.8.
+* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
+
 ## Version 2.2.16
 
- 2019-01-29
+2019-01-29
 
 ### Bug fixes
  * Added support for the `limit` argument in `docker ps`. (#15812)
+ 
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.15
 
@@ -670,7 +756,30 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user. 
   * Added the ability to set custom HTTP response headers to be returned by the UCP Controller API Server. 
 * Web interface
-  * Fixed stack creation for non admin user when UCP uses a custom controller port. 
+  * Fixed stack creation for non admin user when UCP uses a custom controller port.
+  
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.14 
 
@@ -684,6 +793,29 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 * Web Interface
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+  
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.13 
 
@@ -694,6 +826,29 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Security
   * Fixed a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
+    
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.12 
 
@@ -706,6 +861,29 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
     were stored in cleartext on UCP hosts. Please refer to the following KB article
     https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
+    
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.11 
 
@@ -730,6 +908,29 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * UI
   * Fixed an issue that causes the web interface to not parse volume options correctly.
   * Fixed an issue that prevents the user from deploying stacks through the web interface.
+  
+### Known issues
+
+* Excessive delay is seen when sending `docker service ls` through a UCP client
+ bundle on a cluster that is running thousands of services.
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.10 
 
@@ -765,11 +966,28 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
   * UCP can now be installed on a system with more than 127 logical CPU cores.
   * Improved the performance of UCP's local and global health checks.
 
-### Known Issue
+### Known issues
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+ * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+ * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.9 
 
@@ -785,6 +1003,27 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Core
   * Fixed an issue that causes container fail to start with `container ID not found`
    during high concurrent API calls to create and start containers.
+   
+### Known issues
+
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.7 
 
@@ -795,6 +1034,27 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * Fixed an issue where the minimum TLS version setting is not correctly handled,
   leading to non-default values causing `ucp-controller` and `ucp-agent` to keep
   restarting.
+  
+### Known issues
+
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.6 
 
@@ -850,6 +1110,20 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 * When integrating with LDAP and using multiple domain servers, if the
 default server configuration is not chosen, then the last server configuration
 is always used, regardless of which one is actually the best match.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 
 ## Version 2.2.5 
@@ -873,6 +1147,20 @@ plugins. If you’re using certain third-party volume plugins (such as Netapp)
 and are planning on upgrading UCP, you can skip 2.2.5 and wait for the upcoming
 2.2.6 release, which will provide an alternative way to turn on RBAC enforcement
 for volumes.
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.4 
 
@@ -905,7 +1193,19 @@ for volumes.
 ### Known issues
 
  * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
- * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.3 
 
@@ -960,7 +1260,6 @@ for volumes.
  * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-
 ## version 2.2.2 
 
 2017-08-30
@@ -994,9 +1293,34 @@ for volumes.
 
 ### Known issues
 
-* When deploying compose files that use secrets, the secret definition must
-include `external: true`, otherwise the deployment fails with the error
+* UI issues:
+  * Cannot currently remove nodes using UCP web interface. Workaround is to remove from CLI
+  instead.
+  * Search does not function correctly for images.
+  * Cannot view label constraints from a collection's details pages. Workaround
+  is to view by editing the collection.
+  * Certain config changes to UCP make take several minutes to update after making
+  changes in the web interface. In particular this affects LDAP/AD configuration changes.
+  * Turning `LDAP Enabled` from "Yes" to "No" disables the save button. Workaround
+  is to do a page refresh which completes the configuration change.
+  * Removing stacks from the UI may cause certain resources to not be deleted,
+  including networks or volumes. Workaround is to delete the resources directly.
+  * When you create a network and check 'Enable hostname based routing', the web
+  interface doesn't apply the HRM labels to the network. As a workaround,
+  [create the network using the CLI](https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/#service-labels).
+  * The web interface does not currently persist changes to session timeout settings.
+  As a workaround you can update the settings from the CLI, by [adapting these instructions for the
+  session timeout](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/).
+* docker/ucp
+  * The `support` command does not currently produce a valid support dump. As a
+  workaround you can download a support dumps from the web interface.
+* Compose
+  * When deploying compose files that use secrets, the secret definition must include `external: true`, otherwise the deployment fails with the error.
 `unable to inspect secret`.
+* Windows issues
+  * Disk related metrics do not display for Windows worker nodes.
+  * If upgrading from an existing deployment, ensure that HRM is using a non-encrypted
+  network prior to attaching Windows services.
 
 ## Version 2.2.0 
 
