@@ -44,7 +44,7 @@ These are metrics about the state of services running on the container platform.
     - Convergence of K8s deployments and Swarm services
     - Cluster load by number of services or containers or pods
 
-**NOTE**: Universal Control Plane web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`.  To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a monitoring solution, such as Prometheus Node Exporter.
+Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`. To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a third party monitoring solution to monitor the operating system.
 
 ## Deploy Prometheus on worker nodes
 
