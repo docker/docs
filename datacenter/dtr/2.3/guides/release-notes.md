@@ -13,7 +13,7 @@ to upgrade your installation to the latest release.
 
 ## Version 2.4.10
 
-(20 February 2019)
+(28 February 2019)
 
 ### Bug Fixes
 
