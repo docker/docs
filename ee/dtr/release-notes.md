@@ -24,7 +24,7 @@ to upgrade your installation to the latest release.
 
 ## 2.6.3
 
-(2019-2-20)
+(2019-2-28)
 
 ### Bug Fixes
 
@@ -168,7 +168,7 @@ to upgrade your installation to the latest release.
 
 ## 2.5.9
 
-(2019-2-20)
+(2019-2-28)
 
 ### Bug Fixes
 
@@ -598,7 +598,7 @@ specify `--log-protocol`.
 
 ## 2.4.10
 
-(2019-2-20)
+(2019-2-28)
 
 ### Bug Fixes
 
