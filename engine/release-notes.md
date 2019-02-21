@@ -29,6 +29,13 @@ consistency and compatibility reasons.
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 18.09.3
+
+2019-02-28
+
+* Fixed an issue to address Windows `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
+* Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
+
 ## 18.09.2
 
 2019-02-11
@@ -239,6 +246,12 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
+## 18.03.1-ee-7
+2019-02-28
+
+### Bug fixes
+* Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
+
 ## 18.03.1-ee-6
 2019-02-11
 
@@ -350,6 +363,12 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
+
+## 17.06.2-ee-20
+2019-02-28
+
+### Bug fixes
+* Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
 
 ## 17.06.2-ee-19
 
