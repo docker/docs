@@ -14,6 +14,7 @@ redirect_from:
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
+- /en/latest/installation/
 ---
 
 Docker Community Edition (CE) is ideal for developers and small

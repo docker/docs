@@ -24,11 +24,13 @@ command.
 
 Example usage:
 
+```bash
 $ docker run -it --rm dtr-internal.caas.docker.io/caas/dtr:2.4.0-alpha-008434_ge02413a install \
 	--ucp-node <UCP_NODE_HOSTNAME> \
 	--ucp-insecure-tls
+```
 
-Note: Use --ucp-ca "$(cat ca.pem)" instead of --ucp-insecure-tls for a production deployment.
+> **Note**: Use `--ucp-ca "$(cat ca.pem)"` instead of `--ucp-insecure-tls` for a production deployment.
 
 ## Options
 

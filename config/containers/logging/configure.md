@@ -147,6 +147,7 @@ see more options.
 |:------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `none`                        | No logs are available for the container and `docker logs` does not return any output.                         |
 | [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
+| [`local`](local.md)           | Writes logs messages to local filesystem in binary files using Protobuf.                                        |
 | [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
 | [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
 | [`gelf`](gelf.md)             | Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.             |

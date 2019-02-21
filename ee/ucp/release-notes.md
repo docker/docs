@@ -38,6 +38,8 @@ upgrade your installation to the latest release.
  * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (docker/orca#15936)
  * Added support for the limit arg in `docker ps`. (docker/orca#15812)
  * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
+ * Fixed an issue with manual creation of a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects requiring the ID of the user, organization, or team. (docker/orca#14935)
+ * Fixed an issue in which Kube Rolebindings only worked on UCP User ID and not UCP username. (docker/orca#14935)
  
 ### Known issue
  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
@@ -191,7 +193,9 @@ There are several backward-incompatible changes in the Kubernetes API that may a
 The following features are deprecated in UCP 3.1.
 
 * Collections
-    *  User-created nested collections more than 2 layers deep within the root `/Swarm/` collection are deprecated and will be removed in future versions of the product. In the future, we recommend that at most only two levels of collections be created within UCP under the shared Cluster collection designated as `/Swarm/`. For example, if a production collection is created as a collection under the cluster collection `/Swarm/` as `/Swarm/production/` then at most one level of nestedness should be created, as in `/Swarm/production/app/`.
+    * The ability to create a nested collection of more than 2 layers deep within the root `/Swarm/` collection is now deprecated and will not be included in future versions of the product. However, current nested collections with more than 2 layers are still retained.
+
+    * Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster collection designated as `/Swarm/`. For example, if a production collection called `/Swarm/production` is created under the shared cluster collection, `/Swarm/`, then only one level of nesting should be created: `/Swarm/production/app/`. See [Nested Collections](/ee/ucp/authorization/group-resources/#nested-collections) for more details.
 
 * Kubernetes
     * **PersistentVolumeLabel** admission controller is deprecated in Kubernetes 1.11. This functionality will be migrated to [Cloud Controller Manager](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)

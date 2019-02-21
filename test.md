@@ -709,6 +709,15 @@ incoming := map[string]interface{}{
 }
 ```
 
+### PowerShell
+
+```powershell
+Install-Module DockerMsftProvider -Force
+Install-Package Docker -ProviderName DockerMsftProvider -Force
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
+```
+
 ### Python
 
 ```python

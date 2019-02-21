@@ -11,7 +11,7 @@ redirect_from:
 In Docker Engine - Enterprise 18.09, significant architectural improvements were made to the network 
 architecture in Swarm to increase the performance and scale of the built-in load balancing functionality. 
 
-> ***NOTE:*** These changes introduce new constraints to the Docker Engine - Enterprise upgrade process that, 
+> **Note**: These changes introduce new constraints to the Docker Engine - Enterprise upgrade process that,
 > if not correctly followed, can have impact on the availability of applications running on the Swarm. These 
 > constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 

@@ -22,16 +22,16 @@ The Docker EE platform provides a base set of metrics that gets you running and 
 ## Business metrics ##
 
 These are high-level aggregate metrics that typically combine technical, financial, and organizational data to create metrics for business leaders of the IT infrastructure. Some examples of business metrics might be:
-    - Company or division-level application downtime
-    - Aggregate resource utilization
-    - Application resource demand growth
+  - Company or division-level application downtime    
+  - Aggregate resource utilization    
+  - Application resource demand growth
 
 ## Application metrics ##
 
 These are metrics about domain of APM tools like AppDynamics or DynaTrace and provide metrics about the state or performance of the application itself.
-    - Service state metrics
-    - Container platform metrics
-    - Host infrastructure metrics
+  - Service state metrics
+  - Container platform metrics
+  - Host infrastructure metrics
 
 Docker EE 2.1 does not collect or expose application level metrics. 
 
@@ -40,9 +40,11 @@ The following are metrics Docker EE 2.1 collects, aggregates, and exposes:
 ## Service state metrics ##
 
 These are metrics about the state of services running on the container platform. These types of metrics have very low cardinality, meaning the values are typically from a small fixed set of possibilities, commonly binary.
-    - Application health
-    - Convergence of K8s deployments and Swarm services
-    - Cluster load by number of services or containers or pods
+  - Application health
+  - Convergence of K8s deployments and Swarm services
+  - Cluster load by number of services or containers or pods
+
+Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`. To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a third party monitoring solution to monitor the operating system.
 
 ## Deploy Prometheus on worker nodes
 

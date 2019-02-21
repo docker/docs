@@ -84,6 +84,7 @@ to upgrade your installation to the latest release.
   * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
 
 * Webhooks
   * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)

@@ -143,18 +143,28 @@ named it the same as shown in this example, the name is
 `getstartedlab_web`. The service ID is listed as well, along with the number of
 replicas, image name, and exposed ports.
 
+Alternatively, you can run `docker stack services`, followed by the name of
+your stack. The following example command lets you view all services associated with the
+`getstartedlab` stack:
+
+```bash
+docker stack services getstartedlab
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+bqpve1djnk0x        getstartedlab_web   replicated          5/5                 username/repo:tag   *:4000->80/tcp
+```
+
 A single container running in a service is called a **task**. Tasks are given unique
 IDs that numerically increment, up to the number of `replicas` you defined in
 `docker-compose.yml`. List the tasks for your service:
 
-```shell
+```bash
 docker service ps getstartedlab_web
 ```
 
 Tasks also show up if you just list all the containers on your system, though that
 is not filtered by service:
 
-```shell
+```bash
 docker container ls -q
 ```
 
@@ -167,6 +177,18 @@ Either way, the container ID changes, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs match your output from
 the previous command (`docker container ls -q`).
+
+To view all tasks of a stack, you can run `docker stack ps` followed by your app name, as shown in the following example:
+
+```bash
+docker stack ps getstartedlab
+ID                  NAME                  IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+uwiaw67sc0eh        getstartedlab_web.1   username/repo:tag   docker-desktop      Running             Running 9 minutes ago                       
+sk50xbhmcae7        getstartedlab_web.2   username/repo:tag   docker-desktop      Running             Running 9 minutes ago                       
+c4uuw5i6h02j        getstartedlab_web.3   username/repo:tag   docker-desktop      Running             Running 9 minutes ago                       
+0dyb70ixu25s        getstartedlab_web.4   username/repo:tag   docker-desktop      Running             Running 9 minutes ago                       
+aocrb88ap8b0        getstartedlab_web.5   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
+```
 
 > Running Windows 10?
 >

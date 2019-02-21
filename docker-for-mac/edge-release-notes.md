@@ -16,7 +16,31 @@ notes](release-notes) are also available. (Following the CE release model,
 releases, and download stable and edge product installers at [Download Docker
 for Mac](install.md#download-docker-for-mac).
 
-## Edge Releases of 2018
+## Edge Releases of 2019
+
+### Docker Community Edition 2.0.2.1 2019-02-15
+
+[Download](https://download.docker.com/mac/edge/31274/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+
+### Docker Community Edition 2.0.2.0 2019-02-06
+
+[Download](https://download.docker.com/mac/edge/30972/Docker.dmg)
+
+* Upgrades
+  - [Docker Compose 1.24.0-rc1](https://github.com/docker/compose/releases/tag/1.24.0-rc1)
+  - [Docker Machine 0.16.1](https://github.com/docker/machine/releases/tag/v0.16.1)
+  - [Compose on Kubernetes 0.4.18](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.18)
+
+* New
+  - Rebranded UI
+  
+* Bug fixes and minor changes
+  - Kubernetes: use default maximum number of pods for kubelet. [docker/for-mac#3453](https://github.com/docker/for-mac/issues/3453)
+  - Fix DockerHelper crash. [docker/for-mac#3470](https://github.com/docker/for-mac/issues/3470)
+  - Fix binding of privileged ports with specified IP. [docker/for-mac#3464](https://github.com/docker/for-mac/issues/3464)
 
 ### Docker Community Edition 2.0.1.0 2019-01-11
 
@@ -37,6 +61,8 @@ for Mac](install.md#download-docker-for-mac).
   - Add 18.09 missing daemon options
   - Rename Docker for Mac to Docker Desktop
   - Partially open services ports if possible. [docker/for-mac#3438](https://github.com/docker/for-mac/issues/3438)
+
+## Edge Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-mac82 2018-12-07
 

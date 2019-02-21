@@ -16,20 +16,31 @@ Docker EE is a superset of all the features in Docker CE. It incorporates defect
 that you can use in environments where new features cannot be adopted as quickly for 
 consistency and compatibility reasons.
 
-> ***NOTE:*** 
+> **Note**:
 > New in 18.09 is an aligned release model for Docker Engine - Community and Docker 
 > Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing 
 > patch version. The enterprise engine is a superset of the community engine. They 
 > will ship concurrently with the same x patch version based on the same code base. 
 
-> ***NOTE:***
+> **Note**:
 > The client and container runtime are now in separate packages from the daemon in
 > Docker Engine 18.09. Users should install and update all three packages at the same time
 > to get the latest patch releases. For example, on Ubuntu:
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 18.09.2
+
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise and Docker Engine - Community
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+For additional information, [refer to the Docker blog post](https://blog.docker.com/2019/02/docker-security-update-cve-2018-5736-and-container-security-best-practices/).
+
 ## 18.09.1
+
 
 2019-01-09
 
@@ -215,8 +226,7 @@ As of EE 2.2, Docker will deprecate support for Device Mapper as a storage drive
 time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
 EE 2.0 and 2.1 customers. Please contact Sales for more information.
 
-Docker recommends that existing customers [migrate to using Overlay2 for the storage driver]
-(https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
+Docker recommends that existing customers [migrate to using Overlay2 for the storage driver](https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
 The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
 default for Docker engine implementations.
 
@@ -227,40 +237,33 @@ For more information on the list of deprecated flags and APIs, have a look at th
 In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660](https://github.com/moby/moby/pull/37660),
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
-### 18.03.1-ee-5
-2019-01-09
-
-### Security fixes
-* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
-* Added `/proc/asound` to masked paths
-* Fixed authz plugin for 0-length content and path validation.
-
-### Fixes for Docker Engine EE
-* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
-* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
-* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
-
-### 17.06.2-ee-18
-2019-01-09
-
-### Security fixes
-* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
-* Added `/proc/asound` to masked paths
-* Fixed authz plugin for 0-length content and path validation.
-
-### Fixes for Docker Engine EE
-* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
-* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
-* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
-
-
 ## Older Docker Engine EE Release notes
 
-### 18.03.1-ee-4 
+## 18.03.1-ee-6
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+## 18.03.1-ee-5
+2019-01-09
+
+### Security fixes
+* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
+* Added `/proc/asound` to masked paths
+* Fixed authz plugin for 0-length content and path validation.
+
+### Fixes for Docker Engine - Enterprise
+* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
+* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
+* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
+## 18.03.1-ee-4 
 
  2018-10-25
 
-  > *** NOTE: *** If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
+  > **Note**: If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
 
  #### Client
 
@@ -283,59 +286,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
   * Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
  * Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
 
-  ### 18.03.1-ee-3 
- 2018-08-30
-
-  #### Builder
-
-  * Fix: no error if build args are missing during docker build. [docker/engine#25](https://github.com/docker/engine/pull/25)
- * Ensure RUN instruction to run without healthcheck. [moby/moby#37413](https://github.com/moby/moby/pull/37413)
-
-  #### Client
-
-  * Fix manifest list to always use correct size. [docker/cli#1156](https://github.com/docker/cli/pull/1156)
- * Various shell completion script updates. [docker/cli#1159](https://github.com/docker/cli/pull/1159) [docker/cli#1227](https://github.com/docker/cli/pull/1227)
- * Improve version output alignment. [docker/cli#1204](https://github.com/docker/cli/pull/1204)
-
-  #### Runtime
-
-  * Disable CRI plugin listening on port 10010 by default. [docker/engine#29](https://github.com/docker/engine/pull/29)
- * Update containerd to v1.1.2. [docker/engine#33](https://github.com/docker/engine/pull/33)
- * Windows: Pass back system errors on container exit. [moby/moby#35967](https://github.com/moby/moby/pull/35967)
- * Windows: Fix named pipe support for hyper-v isolated containers. [docker/engine#2](https://github.com/docker/engine/pull/2) [docker/cli#1165](https://github.com/docker/cli/pull/1165)
- * Register OCI media types. [docker/engine#4](https://github.com/docker/engine/pull/4)
-
-  #### Swarm Mode
-
-  * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
-  * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
-
-2018-10-25
-
-> ***NOTE:*** If you're deploying UCP or DTR, use Docker EE Engine 18.09 or higher. 18.03 is an engine only release.
-
-#### Client
-
-* Fixed help message flags on docker stack commands and child commands. [docker/cli#1251](https://github.com/docker/cli/pull/1251)
-* Fixed typo breaking zsh docker update autocomplete. [docker/cli#1232](https://github.com/docker/cli/pull/1232)
-
-### Networking
-
-* Added optimizations to reduce the messages in the NetworkDB queue. [docker/libnetwork#2225](https://github.com/docker/libnetwork/pull/2225)
-* Fixed a very rare condition where managers are not correctly triggering the reconnection logic. [docker/libnetwork#2226](https://github.com/docker/libnetwork/pull/2226)
-* Changed loglevel from error to warning for missing disable_ipv6 file. [docker/libnetwork#2224](https://github.com/docker/libnetwork/pull/2224)
-
-#### Runtime
-
-* Fixed denial of service with large numbers in cpuset-cpus and cpuset-mems. [moby/moby#37967](https://github.com/moby/moby/pull/37967)
-* Added stability improvements for devicemapper shutdown. [moby/moby#36307](https://github.com/moby/moby/pull/36307) [moby/moby#36438](https://github.com/moby/moby/pull/36438)
-
-#### Swarm Mode
-
-* Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
-* Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
-
-### 18.03.1-ee-3 
+## 18.03.1-ee-3 
 2018-08-30
 
 #### Builder
@@ -362,7 +313,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
 * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
 
-### 18.03.1-ee-2
+## 18.03.1-ee-2
 2018-07-10
 
 > #### Important notes about this release
@@ -375,7 +326,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
 
 
-### 18.03.1-ee-1
+## 18.03.1-ee-1
 2018-06-27
 
 > #### Important notes about this release
@@ -399,7 +350,29 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
-### 17.06.2-ee-17 
+
+## 17.06.2-ee-19
+
+2019-02-11
+
+### Security fixes for Docker Engine - Enterprise
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+## 17.06.2-ee-18
+2019-01-09
+
+### Security fixes
+* Upgraded Go language to 1.10.6 to resolve CVE-2018-16873, CVE-2018-16874, and CVE-2018-16875.
+* Added `/proc/asound` to masked paths
+* Fixed authz plugin for 0-length content and path validation.
+
+### Fixes for Docker Engine EE
+* Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
+* Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
+* Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
+## 17.06.2-ee-17 
 2018-10-25
 
 #### Networking
@@ -418,7 +391,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Fixed leaking task resources. [docker/swarmkit#2755](https://github.com/docker/swarmkit/pull/2755)
 * Fixed deadlock in dispatcher that could cause node to crash. [docker/swarmkit#2753](https://github.com/docker/swarmkit/pull/2753)
 
-### 17.06.2-ee-16 
+## 17.06.2-ee-16 
 2018-07-26
 
 #### Client
@@ -444,7 +417,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * RoleManager will remove deleted nodes from the cluster membership. [docker/swarmkit#2607](https://github.com/docker/swarmkit/pull/2607)
 - Fix unassigned task leak when service is removed. [docker/swarmkit#2708](https://github.com/docker/swarmkit/pull/2708)
 
-### 17.06.2-ee-15 
+## 17.06.2-ee-15 
 2018-07-10
 
 #### Runtime
@@ -470,21 +443,21 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 - Fix `docker stack deploy --prune` with empty name removes all swarm services. [moby/moby#36776](https://github.com/moby/moby/issues/36776)
 
-### 17.06.2-ee-13 
+## 17.06.2-ee-13 
 2018-06-04
 
 #### Networking
 
 - Fix attachable containers that may leave DNS state when exiting. [docker/libnetwork#2175](https://github.com/docker/libnetwork/pull/2175)
 
-### 17.06.2-ee-12 
+## 17.06.2-ee-12 
 2018-05-29
 
 #### Networking
 
 - Fix to allow service update with no connection loss. [docker/libnetwork#2157](https://github.com/docker/libnetwork/pull/2157)
 
-### 17.06.2-ee-11 
+## 17.06.2-ee-11 
 2018-05-17
 
 #### Client
@@ -509,14 +482,14 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * When all Swarm managers are stopped at the same time, the swarm might end up in a
 split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
-### 17.06.2-ee-10 
+## 17.06.2-ee-10 
 2018-04-27
 
 #### Runtime
 
 * Fix version output to not have `-dev`.
 
-### 17.06.2-ee-9 
+## 17.06.2-ee-9 
 2018-04-26
 
 #### Runtime
@@ -530,7 +503,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 - Increase raft ElectionTick to 10xHeartbeatTick. [docker/swarmkit#2564](https://github.com/docker/swarmkit/pull/2564)
 - Adding logic to restore networks in order. [docker/swarmkit#2584](https://github.com/docker/swarmkit/pull/2584)
 
-### 17.06.2-ee-8 
+## 17.06.2-ee-8 
 2018-04-17
 
 #### Runtime
@@ -553,7 +526,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
   workaround, wait for leader election to complete before issuing commands
   to the cluster.
 
-### 17.06.2-ee-7 
+## 17.06.2-ee-7 
 2018-03-19
 
 #### Important notes about this release
@@ -604,7 +577,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 - Synchronize Dispatcher.Stop() with incoming rpcs [docker/swarmkit#2524](https://github.com/docker/swarmkit/pull/2524)
 - Fix IP overlap with empty EndpointSpec [docker/swarmkit#2511](https://github.com/docker/swarmkit/pull/2511)
 
-### 17.06.2-ee-6 
+## 17.06.2-ee-6 
 2017-11-27
 
 #### Runtime
@@ -621,7 +594,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 * Only shut down old tasks on success [docker/swarmkit#2308](https://github.com/docker/swarmkit/pull/2308)
 * Error on cluster spec name change [docker/swarmkit#2436](https://github.com/docker/swarmkit/pull/2436)
 
-### 17.06.2-ee-5 
+## 17.06.2-ee-5 
 2017-11-02
 
 #### Important notes about this release
@@ -671,7 +644,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
  * Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
 * SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
 
-### 17.06.2-ee-4 
+## 17.06.2-ee-4 
 2017-10-12
 
 #### Client
@@ -690,14 +663,14 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 * Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/libnetwork/pull/1788)
 
 
-### 17.06.2-ee-3 
+## 17.06.2-ee-3 
 2017-09-22
 
 #### Swarm mode
 
 - Increase max message size to allow larger snapshots [docker/swarmkit#131](https://github.com/docker/swarmkit/pull/131)
 
-### 17.06.1-ee-2 
+## 17.06.1-ee-2 
 2017-08-24
 
 #### Client
@@ -717,7 +690,7 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-### 17.06.1-ee-1 
+## 17.06.1-ee-1 
 2017-08-16
 
 #### Important notes about this release
@@ -993,7 +966,7 @@ not reachable until one of these 2 conditions happens:
 As a workaround, send at least a packet out from each container like
 (ping, GARP, etc).
 
-### Docker EE 17.03.2-ee-8 
+## Docker EE 17.03.2-ee-8 
 2017-12-13
 
 * Handle cleanup DNS for attachable container to prevent leak in name resolution [docker/libnetwork#1999](https://github.com/docker/libnetwork/pull/1999)
@@ -1008,11 +981,77 @@ As a workaround, send at least a packet out from each container like
 * Don't abort when setting `may_detach_mounts` [moby/moby#35172](https://github.com/moby/moby/pull/35172)
 * Protect health monitor channel to prevent engine panic [moby/moby#35482](https://github.com/moby/moby/pull/35482)
 
-### Docker EE 17.03.2-ee-7 
+## Docker EE 17.03.2-ee-7 
 2017-10-04
 
 * Fix logic in network resource reaping to prevent memory leak [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
 * Increase max GRPC message size to 128MB for larger snapshots so newly added managers can successfully join [docker/swarmkit#2375](https://github.com/docker/swarmkit/pull/2375)
+
+### Docker EE 17.03.2-ee-6 
+2017-08-24
+
+* Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
+* Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
+* Improve network db stability under stressful situations [docker/libnetwork#1860](https://github.com/docker/libnetwork/pull/1860)
+* Enable TCP Keep-Alive in Docker client [docker/cli#415](https://github.com/docker/cli/pull/415)
+* Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
+* Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
+
+### Docker EE 17.03.2-ee-5 
+20 Jul 2017
+
+* Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
+* Prevent data race on `docker network connect/disconnect` [#33456](https://github.com/moby/moby/pull/33456)
+* Improve service discovery reliability [#1796](https://github.com/docker/libnetwork/pull/1796) [#18078](https://github.com/docker/libnetwork/pull/1808)
+* Fix resource leak in swarm mode [#2215](https://github.com/docker/swarmkit/pull/2215)
+* Optimize `docker system df` for volumes on NFS [#33620](https://github.com/moby/moby/pull/33620)
+* Fix validation bug with host-mode ports in swarm mode [#2177](https://github.com/docker/swarmkit/pull/2177)
+* Fix potential crash in swarm mode [#2268](https://github.com/docker/swarmkit/pull/2268)
+* Improve network control-plane reliability [#1704](https://github.com/docker/libnetwork/pull/1704)
+* Do not error out when selinux relabeling is not supported on volume filesystem [#33831](https://github.com/moby/moby/pull/33831)
+* Remove debugging code for aufs ebusy errors [#31665](https://github.com/moby/moby/pull/31665)
+* Prevent resource leak on healthchecks [#33781](https://github.com/moby/moby/pull/33781)
+* Fix issue where containerd supervisor may exit prematurely [#32590](https://github.com/moby/moby/pull/32590)
+* Fix potential containerd crash [#2](https://github.com/docker/containerd/pull/2)
+* Ensure server details are set in client even when an error is returned [#33827](https://github.com/moby/moby/pull/33827)
+* Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
+* Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
+
+### Docker EE 17.03.2-ee-4 
+2017-06-01
+
+Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.2-ce) of all changes since the release of Docker EE 17.03.1-ee-3
+
+**Note**: This release includes a fix for potential data loss under certain
+circumstances with the local (built-in) volume driver.
+
+### Docker EE 17.03.1-ee-3 
+2017-03-30
+
+* Fix an issue with the SELinux policy for Oracle Linux [#31501](https://github.com/docker/docker/pull/31501)
+
+### Docker EE 17.03.1-ee-2 
+2017-03-28
+
+* Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
+
+Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.1-ce) of all changes since the release of Docker EE 17.03.0-ee-1
+
+### Docker EE 17.03.0-ee-1 (2 Mar 2017)
+
+Initial Docker EE release, based on Docker CE 17.03.0
+
+* Optimize size calculation for `docker system df` container size [#31159](https://github.com/docker/docker/pull/31159)
+
+## Older Docker Engine CE Release notes
+
+## 18.06.2
+
+2019-02-11
+
+### Security fixes for Docker Engine - Community
+* Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+* Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
 
 ## 18.06.1-ce 
 2018-08-21
@@ -1219,67 +1258,6 @@ As a workaround, send at least a packet out from each container like
 ## 18.03.1-ce 
 2018-04-26
 
-### Docker EE 17.03.2-ee-6 
-2017-08-24
-
-* Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
-* Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
-* Improve network db stability under stressful situations [docker/libnetwork#1860](https://github.com/docker/libnetwork/pull/1860)
-* Enable TCP Keep-Alive in Docker client [docker/cli#415](https://github.com/docker/cli/pull/415)
-* Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
-* Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
-
-### Docker EE 17.03.2-ee-5 
-20 Jul 2017
-
-* Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
-* Prevent data race on `docker network connect/disconnect` [#33456](https://github.com/moby/moby/pull/33456)
-* Improve service discovery reliability [#1796](https://github.com/docker/libnetwork/pull/1796) [#18078](https://github.com/docker/libnetwork/pull/1808)
-* Fix resource leak in swarm mode [#2215](https://github.com/docker/swarmkit/pull/2215)
-* Optimize `docker system df` for volumes on NFS [#33620](https://github.com/moby/moby/pull/33620)
-* Fix validation bug with host-mode ports in swarm mode [#2177](https://github.com/docker/swarmkit/pull/2177)
-* Fix potential crash in swarm mode [#2268](https://github.com/docker/swarmkit/pull/2268)
-* Improve network control-plane reliability [#1704](https://github.com/docker/libnetwork/pull/1704)
-* Do not error out when selinux relabeling is not supported on volume filesystem [#33831](https://github.com/moby/moby/pull/33831)
-* Remove debugging code for aufs ebusy errors [#31665](https://github.com/moby/moby/pull/31665)
-* Prevent resource leak on healthchecks [#33781](https://github.com/moby/moby/pull/33781)
-* Fix issue where containerd supervisor may exit prematurely [#32590](https://github.com/moby/moby/pull/32590)
-* Fix potential containerd crash [#2](https://github.com/docker/containerd/pull/2)
-* Ensure server details are set in client even when an error is returned [#33827](https://github.com/moby/moby/pull/33827)
-* Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
-* Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
-
-### Docker EE 17.03.2-ee-4 
-2017-06-01
-
-Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.2-ce) of all changes since the release of Docker EE 17.03.1-ee-3
-
-**Note**: This release includes a fix for potential data loss under certain
-circumstances with the local (built-in) volume driver.
-
-### Docker EE 17.03.1-ee-3 
-2017-03-30
-
-* Fix an issue with the SELinux policy for Oracle Linux [#31501](https://github.com/docker/docker/pull/31501)
-
-### Docker EE 17.03.1-ee-2 
-2017-03-28
-
-* Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
-
-Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.1-ce) of all changes since the release of Docker EE 17.03.0-ee-1
-
-### Docker EE 17.03.0-ee-1 (2 Mar 2017)
-
-Initial Docker EE release, based on Docker CE 17.03.0
-
-* Optimize size calculation for `docker system df` container size [#31159](https://github.com/docker/docker/pull/31159)
-
-## Older Docker Engine CE Release notes
-
-### 18.03.1-ce 
-2018-04-26
-
 #### Client
 
 - Fix error with merge compose file with networks [docker/cli#983](https://github.com/docker/cli/pull/983)
@@ -1315,7 +1293,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Allow for larger preset property values, do not override [docker/libnetwork#2124](https://github.com/docker/libnetwork/pull/2124)
 * Prevent panics on concurrent reads/writes when calling `changeNodeState` [docker/libnetwork#2136](https://github.com/docker/libnetwork/pull/2136)
 
-### 18.03.0-ce 
+## 18.03.0-ce 
 2018-03-21
 
 #### Builder
@@ -1433,7 +1411,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 + Add swarm types to bash completion event type filter [docker/cli#888](https://github.com/docker/cli/pull/888)
 - Fix issue where network inspect does not show Created time for networks in swarm scope [moby/moby#36095](https://github.com/moby/moby/pull/36095)
 
-### 17.12.1-ce 
+## 17.12.1-ce 
 2018-02-27
 
 #### Client
@@ -1474,7 +1452,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 #### Swarm
 * Remove watchMiss from swarm mode [docker/libnetwork#2047](https://github.com/docker/libnetwork/pull/2047)
 
-### 17.12.0-ce 
+## 17.12.0-ce 
 2017-12-27
 
 #### Known Issues
@@ -1577,7 +1555,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Pass Version to engine static builds [docker/docker-ce-packaging#70](https://github.com/docker/docker-ce-packaging/pull/70)
 + Added support for aarch64 on Debian (stretch/jessie) and Ubuntu Zesty or newer [docker/docker-ce-packaging#35](https://github.com/docker/docker-ce-packaging/pull/35)
 
-### 17.09.1-ce 
+## 17.09.1-ce 
 2017-12-07
 
 #### Builder
@@ -1621,7 +1599,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 - Provide custom gRPC dialer to override default proxy dialer [docker/swarmkit/#2457](https://github.com/docker/swarmkit/pull/2457)
 - Avoids recursive readlock on swarm info [moby/moby#35388](https://github.com/moby/moby/pull/35388)
 
-### 17.09.0-ce 
+## 17.09.0-ce 
 2017-09-26
 
 #### Builder
@@ -1686,7 +1664,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 + Remove deprecated `--enable-api-cors` daemon flag [moby/moby#34821](https://github.com/moby/moby/pull/34821)
 
-### 17.06.2-ce 
+## 17.06.2-ce 
 2017-09-05
 
 #### Client
@@ -1702,7 +1680,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 - Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-### 17.06.1-ce 
+## 17.06.1-ce 
 2017-08-15
 
 #### Builder
@@ -1758,7 +1736,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Cluster update and memory issue fixes [#114](https://github.com/docker/docker-ce/pull/114)
 * Changing get network request to return predefined network in swarm [#150](https://github.com/docker/docker-ce/pull/150)
 
-### 17.06.0-ce 
+## 17.06.0-ce 
 2017-06-28
 
 > **Note**: Docker 17.06.0 has an issue in the image builder causing a change in the behavior
@@ -1863,7 +1841,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 * Disable legacy registry (v1) by default [#33629](https://github.com/moby/moby/pull/33629)
 
-### 17.03.2-ce 
+## 17.03.2-ce 
 2017-05-29
 
 ## 17.03.3-ce 
@@ -1896,7 +1874,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 - Fix a case where tasks could get killed unexpectedly [#33118](https://github.com/moby/moby/pull/33118)
 - Fix an issue preventing to deploy services if the registry cannot be reached despite the needed images being locally present [#33117](https://github.com/moby/moby/pull/33117)
 
-### 17.03.1-ce 
+## 17.03.1-ce 
 2017-03-27
 
 #### Remote API (v1.27) & Client
@@ -1929,7 +1907,7 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 * Cleanup HCS on restore [#31503](https://github.com/docker/docker/pull/31503)
 
-### 17.03.0-ce 
+## 17.03.0-ce 
 2017-03-01
 
 **IMPORTANT**: Starting with this release, Docker is on a monthly release cycle and uses a
@@ -1978,7 +1956,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 ## Edge releases
 
-### 18.05.0-ce 
+## 18.05.0-ce 
 2018-05-09
 
 #### Builder
@@ -2049,7 +2027,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 * Expose swarmkit's Raft tuning parameters in engine config. [moby/moby#36726](https://github.com/moby/moby/pull/36726)
 * Make internal/test/daemon.Daemon swarm aware. [moby/moby#36826](https://github.com/moby/moby/pull/36826)
 
-### 18.04.0-ce 
+## 18.04.0-ce 
 2018-04-10
 
 #### Builder
@@ -2131,7 +2109,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 - Fix agent logging race. [docker/swarmkit#2578](https://github.com/docker/swarmkit/pull/2578)
 * Adding logic to restore networks in order. [docker/swarmkit#2571](https://github.com/docker/swarmkit/pull/2571)
 
-### 18.02.0-ce 
+## 18.02.0-ce 
 2018-02-07
 
 #### Builder
@@ -2197,7 +2175,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 * Update runc to fix hang during start and exec [moby/moby#36097](https://github.com/moby/moby/pull/36097)
 - Fix "--node-generic-resource" singular/plural [moby/moby#36125](https://github.com/moby/moby/pull/36125)
 
-### 18.01.0-ce 
+## 18.01.0-ce 
 2018-01-10
 
 #### Builder
@@ -2255,7 +2233,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 - Fix published ports not being updated if a service has the same number of host-mode published ports with Published Port 0 [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
 * Make the task termination order deterministic [docker/swarmkit#2265](https://github.com/docker/swarmkit/pull/2265)
 
-### 17.11.0-ce 
+## 17.11.0-ce 
 2017-11-20
 
 > **Important**: Docker CE 17.11 is the first Docker release based on
@@ -2328,7 +2306,7 @@ running, un-managed, on the system.
 + Build packages for Debian 10 (Buster) [docker/docker-ce-packaging#50](https://github.com/docker/docker-ce-packaging/pull/50)
 + Build packages for Ubuntu 17.10 (Artful) [docker/docker-ce-packaging#55](https://github.com/docker/docker-ce-packaging/pull/55)
 
-### 17.10.0-ce 
+## 17.10.0-ce 
 2017-10-17
 
 > **Important**: Starting with this release, `docker service create`, `docker service update`,
@@ -2378,7 +2356,7 @@ use `--detach` to keep the old behaviour.
 - Do not filter nodes if logdriver is set to `none` [docker/swarmkit#2396](https://github.com/docker/swarmkit/pull/2396)
 + Adding ipam options to ipam driver requests [docker/swarmkit#2324](https://github.com/docker/swarmkit/pull/2324)
 
-### 17.07.0-ce 
+## 17.07.0-ce 
 2017-08-29
 
 #### API & Client
@@ -2441,7 +2419,7 @@ use `--detach` to keep the old behaviour.
 * Fix error during service creation if a network with the same name exists both as "local" and "swarm" scoped network [docker/cli#184](https://github.com/docker/cli/pull/184)
 * (experimental) Add support for plugins on swarm [moby/moby#33575](https://github.com/moby/moby/pull/33575)
 
-### 17.05.0-ce 
+## 17.05.0-ce 
 2017-05-04
 
 #### Builder
@@ -2528,7 +2506,7 @@ use `--detach` to keep the old behaviour.
 - Deprecate `--api-enable-cors` daemon flag. This flag was marked deprecated in Docker 1.6.0 but not listed in deprecated features [#32352](https://github.com/docker/docker/pull/32352)
 - Remove Ubuntu 12.04 (Precise Pangolin) as supported platform. Ubuntu 12.04 is EOL, and no longer receives updates [#32520](https://github.com/docker/docker/pull/32520)
 
-### 17.04.0-ce 
+## 17.04.0-ce 
 2017-04-05
 
 #### Builder

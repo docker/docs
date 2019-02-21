@@ -225,6 +225,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Kamatera</td>
+      <td>
+        <a href=
+        "https://github.com/OriHoch/docker-machine-driver-kamatera">https://github.com/OriHoch/docker-machine-driver-kamatera</a>
+      </td>
+      <td>
+        <a href="https://github.com/OriHoch">OriHoch</a>
+      </td>
+      <td>
+        <a href=
+        "mailto:support@kamatera.com">support@kamatera.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>KVM</td>
       <td>
         <a href=
@@ -236,6 +250,18 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:daniel.hiltgen@docker.com">daniel.hiltgen@docker.com</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Linode</td>
+      <td>
+        <a href="https://github.com/linode/docker-machine-driver-linode">https://github.com/linode/docker-machine-driver-linode</a>
+      </td>
+      <td>
+        <a href="https://github.com/linode">Linode</a>
+      </td>
+      <td>
+        <a href="mailto:developers@linode.com">developers@linode.com</a>
       </td>
     </tr>
     <tr>

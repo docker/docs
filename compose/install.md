@@ -77,14 +77,14 @@ Docker Compose. To do so, follow these steps:
     version of Compose you want to use:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\Docker\resources\bin\docker-compose.exe
     ```
 
     For example, to download Compose version {{site.compose_version}},
     the command is:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\Docker\resources\bin\docker-compose.exe
     ```
     > Use the latest Compose release number in the download command.
     >
@@ -129,7 +129,7 @@ by step instructions are also included below.
     sudo chmod +x /usr/local/bin/docker-compose
     ```
     
-> ***Note:*** If the command `docker-compose` fails after installation, check your path.
+> **Note**: If the command `docker-compose` fails after installation, check your path.
 > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
 
 For example:

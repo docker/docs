@@ -20,9 +20,9 @@ docker run -it --rm docker/dtr \
 
 This command forcefully removes all containers and volumes associated with
 a DTR replica without notifying the rest of the cluster. Use this command
-on all replicas uninstall DTR.
+on all replicas to uninstall DTR.
 
-Use the 'remove' command to gracefully scale down your DTR cluster.
+Use `docker/dtr remove` to gracefully scale down your DTR cluster.
 
 
 ## Options

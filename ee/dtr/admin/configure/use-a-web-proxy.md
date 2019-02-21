@@ -38,7 +38,8 @@ docker run -it --rm \
   --https-proxy username:password@<doman>:<port> \
   --ucp-insecure-tls
 ```
-NOTE: DTR will hide the password portion of the URL, when it is displayed in the DTR UI.
+
+> **Note**: DTR will hide the password portion of the URL, when it is displayed in the DTR UI.
 
 ## Where to go next
 

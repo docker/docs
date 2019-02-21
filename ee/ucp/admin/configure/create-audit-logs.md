@@ -198,6 +198,17 @@ events and may create a large amount of log entries.
 - /kubernetesdocs
 - /manage
 
+## API endpoint information redacted
+
+Information for the following API endpoints is redacted from the audit logs for security purposes:
+
+- `/secrets/create` (POST)
+- `/secrets/{id}/update` (POST)
+- `/swarm/join` (POST)
+- `/swarm/update` (POST)
+-`/auth/login` (POST)
+- Kube secrete create/update endpoints
+
 ## Where to go next
 
 - [Collect UCP Cluster Metrics with Prometheus](collect-cluster-metrics.md)
