@@ -30,11 +30,18 @@ upgrade your installation to the latest release.
 * Added support for Oracle 7.6.
 
  **Kubernetes**
-* Kubernetes has been updated to version 1.11.7.
+* Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
 
  **Bug Fixes**
-* Bump the Golang version that is used to build UCP to version 1.10.8.
-* Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
+* Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
+* Fixed an issue that caused Windows node ucp-agent(s) to constantly reboot when audit logging is enabled. (docker/orca#16122)
+* Fixed an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)
+* Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
+
+**Enhancements**
+* Changed packaging and builds for UCP to build bootstrapper last. This avoids the "upgrade available" banner on all UCPs until the entirety of UCP is available.
 
 ## 3.1.3
 
