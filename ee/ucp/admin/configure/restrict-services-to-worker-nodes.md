@@ -15,7 +15,7 @@ any cluster management functionality.
 ## Swarm Workloads
 
 To restrict users from deploying to manager nodes, log in with administrator
-credentials to the UCP web UI, navigate to the **Admin Settings**
+credentials to the UCP web interface, navigate to the **Admin Settings**
 page, and choose **Scheduler**.
 
 ![](../../images/restrict-services-to-worker-nodes-1.png){: .with-border}
@@ -51,7 +51,7 @@ $ kubectl get nodes <ucpmanager> -o json | jq -r '.spec.taints | .[]'
 
 To allow Administrators to deploy workloads accross all nodes types, an
 Administrator can tick the "Allow administrators to deploy containers on UCP
-managers or nodes running DTR" box in the UCP UI. 
+managers or nodes running DTR" box in the UCP web interface. 
 
 ![](../../images/restrict-services-to-worker-nodes-2.png){: .with-border}
 
@@ -60,7 +60,7 @@ ticked, UCP will apply a toleration to your workloads to allow the pods to be
 scheduled on all node types.
 
 For existing workloads, the Administrator will need to edit the Pod
-specification, through `kubectl edit <object> <workload>` or the UCP UI and add
+specification, through `kubectl edit <object> <workload>` or the UCP web interface and add
 the following toleration:
 
 ```bash
@@ -84,7 +84,7 @@ $ kubectl get <object> <workload> -o json | jq -r '.spec.template.spec.toleratio
 To allow Kubernetes Users and Service Accounts to deploy workloads accross all
 node types in your cluster, an Administrator will need to tick "Allow all
 authenticated users, including service accounts, to schedule on all nodes,
-including UCP managers and DTR nodes." in the UCP UI. 
+including UCP managers and DTR nodes." in the UCP web interface. 
 
 ![](../../images/restrict-services-to-worker-nodes-3.png){: .with-border}
 
