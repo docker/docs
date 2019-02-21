@@ -65,10 +65,6 @@ If you're accessing this endpoint through a load balancer, you have no way to
 know which UCP manager node is not healthy. So make sure you make a request
 directly to each manager node.
 
-## Monitoring disk usage
-
-Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`.  To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a third party monitoring solution to monitor the operating system.
-
 ## Where to go next
 
 * [Troubleshoot your cluster](troubleshoot.md)
