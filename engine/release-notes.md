@@ -36,6 +36,29 @@ consistency and compatibility reasons.
 * Fixed an issue to address Windows `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
 * Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
 
+### Known Issues
+* There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
+
 ## 18.09.2
 
 2019-02-11
@@ -46,8 +69,30 @@ consistency and compatibility reasons.
 
 For additional information, [refer to the Docker blog post](https://blog.docker.com/2019/02/docker-security-update-cve-2018-5736-and-container-security-best-practices/).
 
-## 18.09.1
+### Known Issues
+* There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
 
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
+
+## 18.09.1
 
 2019-01-09
 
@@ -100,6 +145,26 @@ Update your configuration if this command prints a non-empty value for `MountFla
 
 ### Known Issues
 * When upgrading from 18.09.0 to 18.09.1, `containerd` is not upgraded to the correct version on Ubuntu.  [Learn more](https://success.docker.com/article/error-upgrading-to-engine-18091-with-containerd).
+* There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 18.09.0
  
@@ -226,6 +291,25 @@ Update your configuration if this command prints a non-empty value for `MountFla
    * For Swarm, set VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso. 
 
    This issue is resolved in 18.09.1.
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ### Deprecation Notice
 
@@ -249,6 +333,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ## 18.03.1-ee-7
 2019-02-28
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 ### Bug fixes
 * Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
 
@@ -258,6 +364,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### Security fixes for Docker Engine - Enterprise
 * Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 * Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 18.03.1-ee-5
 2019-01-09
@@ -271,6 +399,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
 * Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 18.03.1-ee-4 
 
@@ -298,6 +448,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
   * Fixed the logic used for skipping over running tasks. [docker/swarmkit#2724](https://github.com/docker/swarmkit/pull/2724)
  * Addressed unassigned task leak when a service is removed. [docker/swarmkit#2709](https://github.com/docker/swarmkit/pull/2709)
+ 
+ #### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 18.03.1-ee-3 
 2018-08-30
@@ -326,6 +498,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Clean up tasks in dirty list for which the service has been deleted. [docker/swarmkit#2694](https://github.com/docker/swarmkit/pull/2694)
 * Propagate the provided external CA certificate to the external CA object in swarm. [docker/cli#1178](https://github.com/docker/cli/pull/1178)
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 ## 18.03.1-ee-2
 2018-07-10
 
@@ -337,6 +531,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 #### Runtime
 
 + Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 
 ## 18.03.1-ee-1
@@ -363,12 +579,56 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 
 ## 17.06.2-ee-20
 2019-02-28
 
 ### Bug fixes
 * Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-19
 
@@ -377,6 +637,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ### Security fixes for Docker Engine - Enterprise
 * Update `runc` to address a critical vulnerability that allows specially-crafted containers to gain administrative privileges on the host. [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 * Ubuntu 14.04 customers using a 3.13 kernel will need to upgrade to a supported Ubuntu 4.x kernel
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-18
 2019-01-09
@@ -390,6 +672,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692)
 * Fix resource leak on `docker logs --follow` [moby/moby#37576](https://github.com/moby/moby/pull/37576)
 * Mask proxy credentials from URL when displayed in system info (docker/escalation#879)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-17 
 2018-10-25
@@ -409,6 +713,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Added failed allocations retry immediately upon a deallocation to overcome IP exhaustion. [docker/swarmkit#2711](https://github.com/docker/swarmkit/pull/2711)
 * Fixed leaking task resources. [docker/swarmkit#2755](https://github.com/docker/swarmkit/pull/2755)
 * Fixed deadlock in dispatcher that could cause node to crash. [docker/swarmkit#2753](https://github.com/docker/swarmkit/pull/2753)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-16 
 2018-07-26
@@ -436,12 +762,56 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * RoleManager will remove deleted nodes from the cluster membership. [docker/swarmkit#2607](https://github.com/docker/swarmkit/pull/2607)
 - Fix unassigned task leak when service is removed. [docker/swarmkit#2708](https://github.com/docker/swarmkit/pull/2708)
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 ## 17.06.2-ee-15 
 2018-07-10
 
 #### Runtime
 
 - Add /proc/acpi to masked paths [(CVE-2018-10892)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-10892). [moby/moby#37404](https://github.com/moby/moby/pull/37404)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ### 17.06.2-ee-14 
 2018-06-21
@@ -462,6 +832,28 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 - Fix `docker stack deploy --prune` with empty name removes all swarm services. [moby/moby#36776](https://github.com/moby/moby/issues/36776)
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 ## 17.06.2-ee-13 
 2018-06-04
 
@@ -469,12 +861,56 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 - Fix attachable containers that may leave DNS state when exiting. [docker/libnetwork#2175](https://github.com/docker/libnetwork/pull/2175)
 
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 ## 17.06.2-ee-12 
 2018-05-29
 
 #### Networking
 
 - Fix to allow service update with no connection loss. [docker/libnetwork#2157](https://github.com/docker/libnetwork/pull/2157)
+
+#### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-11 
 2018-05-17
@@ -500,6 +936,23 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 * When all Swarm managers are stopped at the same time, the swarm might end up in a
 split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-10 
 2018-04-27
@@ -507,6 +960,26 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 #### Runtime
 
 * Fix version output to not have `-dev`.
+
+#### Known issues
+
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-9 
 2018-04-26
@@ -521,6 +994,26 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 - Increase raft ElectionTick to 10xHeartbeatTick. [docker/swarmkit#2564](https://github.com/docker/swarmkit/pull/2564)
 - Adding logic to restore networks in order. [docker/swarmkit#2584](https://github.com/docker/swarmkit/pull/2584)
+
+#### Known issues
+
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-8 
 2018-04-17
@@ -544,9 +1037,37 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
   this time, creation of globally-scoped networks may be unstable. As a
   workaround, wait for leader election to complete before issuing commands
   to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+  
 
 ## 17.06.2-ee-7 
 2018-03-19
+
+#### Known issues
+
+ * It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+ * Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 #### Important notes about this release
 
@@ -598,6 +1119,21 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 
 ## 17.06.2-ee-6 
 2017-11-27
+
+#### Known issues
+
+ * It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+ * Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 #### Runtime
 
@@ -662,9 +1198,30 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
  * It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
  * Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
 * SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-4 
 2017-10-12
+
+#### Known issues
+
+If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 #### Client
 
@@ -685,12 +1242,36 @@ split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
 ## 17.06.2-ee-3 
 2017-09-22
 
+#### Known issues
+
+If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
+
 #### Swarm mode
 
 - Increase max message size to allow larger snapshots [docker/swarmkit#131](https://github.com/docker/swarmkit/pull/131)
 
 ## 17.06.1-ee-2 
 2017-08-24
+
+#### Known issues
+
+If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 #### Client
 
@@ -1432,6 +2013,11 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 ## 17.12.1-ce 
 2018-02-27
+
+#### Known Issues
+* Health check no longer uses the container's working directory [moby/moby#35843](https://github.com/moby/moby/issues/35843)
+* Errors not returned from client in stack deploy configs [moby/moby#757](https://github.com/docker/cli/pull/757)
+* Docker cannot use memory limit when using systemd options [moby/moby#35123](https://github.com/moby/moby/issues/35123)
 
 #### Client
 - Fix `node-generic-resource` typo [moby/moby#35970](https://github.com/moby/moby/pull/35970) and [moby/moby#36125](https://github.com/moby/moby/pull/36125)
