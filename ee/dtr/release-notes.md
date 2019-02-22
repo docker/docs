@@ -29,6 +29,7 @@ to upgrade your installation to the latest release.
 ### Bug Fixes
 
 * Bump the Golang version that is used to build DTR to version 1.11.5. (docker/dhe-deploy#10060)
+* Users with read-only permissions can no longer see the README edit button for a repository. (docker/dhe-deploy#10056)
 
 ### Known issues
 
