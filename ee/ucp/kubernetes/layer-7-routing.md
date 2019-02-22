@@ -438,7 +438,7 @@ dockerdemo-ingress   dockerdemo.app.docker.example.com             80        7d
 
 Assuming you have already registered a DNS record for your application pointing to the external load-balancer fronting the `infra` nodes, you should be able to access your application using the URL.You can also scale the docker demo deployment to test how ingress correctly routes traffic to all the backend pods!
 
-![dockerdemo.png](../images/dockerdemo.png)
+![dockerdemo.png](../images/ingress-deploy.png)
 
 ## Check your deployment
 
