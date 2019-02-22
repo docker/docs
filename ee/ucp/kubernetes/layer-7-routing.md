@@ -25,7 +25,7 @@ Ingress is an API object that manages external access to the services in a clust
 
 ## Prerequisites
 
-- UCP 3.1.X deployed and properly configured
+- UCP deployed and properly configured
 - Two or three dedicated infrae nodes deployed as UCP worker nodes
 - An external load-balancer fronting these nodes with an associated VIP that resolves the application DNS (for example, `*.app.docker.mycompany.com`)
 
@@ -42,7 +42,7 @@ dockeree-worker-linux-3    Ready     <none>    5d        v1.8.11-docker-8d637ae
 
 ```
 
-The label `infra.role=ingress` is used to label the nodes:
+For this example, the label `infra.role=ingress` is used to label the nodes:
 
 ```
 🐳  → kubectl label node dockeree-worker-linux-1 infra.role=ingress
@@ -56,7 +56,7 @@ node "dockeree-worker-linux-3" labeled
 
 ### Step 2: Create a Dedicated Namespace
 
-A dedicated namespace, for example, `nginx-controller`, is needed for all infrastructure deployment activities. You also need a service account to enable the ingress controller to work with the Kubernetes API. After creating a namespace and a service account, you must create an RBAC policy to only allow infrastructure deployments on the dedicated nodes that were labelled in the previous example.
+A dedicated namespace, for example, `infra`, is needed for all infrastructure deployment activities. You also need a service account to enable the ingress controller to work with the Kubernetes API. After creating a namespace and a service account, you must create an RBAC policy to only allow infrastructure deployments on the dedicated nodes that were labelled in the previous example.
 
 To create a namespace and a service account, simply use the following [YAML file](config/ns-and-sa.yaml) and apply it via the CLI or the UI:
 
@@ -85,7 +85,7 @@ serviceaccount "nginx-ingress-service-account" created
 
 ### Step 3: Create an RBAC Policy
 
-Apply an RBAC role-binding for NGINX controller access to the API Server, as shown in the following [RBAC yaml config](config/ingress-rbac.yaml) example:
+Apply an RBAC role-binding for NGINX controller access to the API Server, as shown in the following example:
 
 
 ```
@@ -158,7 +158,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: nginx-ingress-service-account
-  namespace: ingress
+  namespace: infra
 roleRef:
   kind: ClusterRole
   name: nginx-ingress-cluster-role
@@ -173,7 +173,7 @@ Then apply it with `kubectl`:
 
 ### Step 4: Deploy NGINX Controller
 
-Note that following example uses hostPorts for controller ports. This exposes the host port ( selected in a high range using `hostPort: 38080`) directly into the nodes. 
+Note that following example uses hostPorts for controller ports. This exposes the host port ( selected in a high range using `hostPort: 38080`) directly into the nodes. Port 38080 is used for HTTP and port 38443 is used for HTTPS. Make sure that your loadbalancer forwards to the applicable ports on the nodes. You can change them as needed.
 
 
 ```
@@ -280,7 +280,7 @@ spec:
       serviceAccountName: nginx-ingress-service-account 
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.21.0
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
@@ -300,11 +300,11 @@ spec:
           ports:
           - name: http
             containerPort: 80
-            hostPort: 38080
+            hostPort: 38443
             protocol: TCP
           - name: https
             containerPort: 443
-            hostPort: 38
+            hostPort: 38443
             protocol: TCP
           livenessProbe:
             failureThreshold: 3
