@@ -174,7 +174,7 @@ to upgrade your installation to the latest release.
 
 (2019-2-28)
 
-### Bug Fixes
+### Changelog
 
 * Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10071)
 
@@ -604,7 +604,7 @@ specify `--log-protocol`.
 
 (2019-2-28)
 
-### Bug Fixes
+### Changelog
 
 * Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10068)
 
