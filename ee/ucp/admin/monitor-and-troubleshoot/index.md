@@ -70,6 +70,10 @@ To enable this feature, DTR 2.6 is required and single sign-on with UCP must be 
 
 ![example of vulnerability information in UCP](../../images/example-of-vuln-data-in-ucp.png)
 
+## Monitoring disk usage
+
+Web UI disk usage metrics, including free space, only reflect the Docker managed portion of the filesystem: `/var/lib/docker`. To monitor the total space available on each filesystem of a UCP worker or manager, you must deploy a third party monitoring solution to monitor the operating system.
+
 ## Where to go next
 
 - [Troubleshoot with logs](troubleshoot-with-logs.md)
