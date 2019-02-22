@@ -15,7 +15,7 @@ to upgrade your installation to the latest release.
 
 (28 February 2019)
 
-### Bug Fixes
+### Changelog
 
 * Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10064)
 
