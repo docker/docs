@@ -6,25 +6,6 @@ title: Docker for AWS release notes
 
 {% include d4a_buttons.md %}
 
-## Enterprise Edition
-[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank" class="_"}
-
-[Deploy Docker Enterprise Edition (EE) for AWS](https://hub.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
-
-### 17.06 EE
-
-- Docker engine 17.06 EE
-- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank" class="_"}
-- UCP 2.2.3
-- DTR 2.3.3
-
-### 17.03 EE
-
-- Docker engine 17.03 EE
-- UCP 2.1.5
-- DTR 2.2.7
-
-
 > **Note** Starting with 18.02.0-CE EFS encryption option has been removed to prevent the [recreation of the EFS volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html){: target="_blank" class="_"}.
 
 
@@ -144,3 +125,21 @@ Release date: 10/18/2017
 ## Template archive
 
 If you are looking for templates from older releases, check out the [template archive](/docker-for-aws/archive.md).
+
+## Enterprise Edition
+[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank" class="_"}
+
+[Deploy Docker Enterprise Edition (EE) for AWS](https://hub.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
+
+### 17.06 EE
+
+- Docker engine 17.06 EE
+- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank" class="_"}
+- UCP 2.2.3
+- DTR 2.3.3
+
+### 17.03 EE
+
+- Docker engine 17.03 EE
+- UCP 2.1.5
+- DTR 2.2.7
