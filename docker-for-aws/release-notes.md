@@ -29,9 +29,14 @@ title: Docker for AWS release notes
 
 
 ## Stable channel
-### 18.06.1 CE
-
 {{aws_blue_latest}}
+
+### 18.09.2
+Release date: 8/24/2018
+
+- Docker Engine upgraded to [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2){: target="_blank" class="_"}
+
+### 18.06.1 CE
 
 Release date: 8/24/2018
 
