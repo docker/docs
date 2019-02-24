@@ -32,7 +32,7 @@ title: Docker for AWS release notes
 {{aws_blue_latest}}
 
 ### 18.09.2
-Release date: 8/24/2018
+Release date: 2/24/2019
 
 - Docker Engine upgraded to [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2){: target="_blank" class="_"}
 
