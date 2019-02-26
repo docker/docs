@@ -216,7 +216,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 
 ## Run the app
 
-Run the app, mapping your machine's port 4000 to the container's published port
+Restart the Docker client. Then run the app, mapping your machine's port 4000 to the container's published port
 80 using `-p`:
 
 ```shell
