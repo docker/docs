@@ -1436,7 +1436,7 @@ manuals:
             section:
             - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/
               title: Monitor the cluster status
-            - path: /datacenter/ucp/3.0/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+            - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
               title: Troubleshoot node messages
             - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
               title: Troubleshoot with logs
@@ -1558,8 +1558,6 @@ manuals:
                   path: /datacenter/ucp/3.0/guides/user/interlock/usage/service-clusters/
                 - title: Context/Path based routing
                   path: /datacenter/ucp/3.0/guides/user/interlock/usage/context/
-                - title: VIP backend mode
-                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/interlock-vip-mode/
                 - title: Service labels reference
                   path: /datacenter/ucp/3.0/guides/user/interlock/usage/labels-reference/
               - title: Layer 7 routing upgrade
@@ -1578,7 +1576,7 @@ manuals:
               path: /datacenter/ucp/3.0/guides/user/kubernetes/install-cni-plugin/
         - path: /datacenter/ucp/3.0/reference/api/
           title: API reference
-        - path: /ee/ucp/release-notes/
+        - path: /ee/ucp/release-notes/#version-30
           title: Release notes
           nosync: true
         - path: /datacenter/ucp/3.0/guides/get-support/
@@ -1743,7 +1741,7 @@ manuals:
               title: Grant access to secrets
         - path: /datacenter/ucp/2.2/reference/api/
           title: API reference
-        - path: /ee/ucp/release-notes/
+        - path: /ee/ucp/release-notes/#version-22
           title: Release notes
           nosync: true
         - path: /datacenter/ucp/2.2/guides/get-support/
