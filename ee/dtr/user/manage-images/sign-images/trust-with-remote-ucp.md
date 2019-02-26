@@ -90,7 +90,7 @@ $ cat dtr-bundle.json
 ```
 
 Now upload the configuration file to cluster 2's UCP
-via the UCP API endpoint, `/api/config/trustedregistry_`. To authenticate
+through the UCP API endpoint, `/api/config/trustedregistry_`. To authenticate
 against the API of cluster 2's UCP, we have downloaded a [UCP client
 bundle](/ee/ucp/user-access/cli/#download-client-certificates/), extracted it in
 the current directory, and will reference the keys for authentication. 
