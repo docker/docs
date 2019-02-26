@@ -15,6 +15,51 @@ manipulate this table manually. If you need to add rules which load before
 Docker's rules, add them to the `DOCKER-USER` chain. These rules are loaded
 before any rules Docker creates automatically.
 
+### Add a DOCKER-USER filter chain to allow persistent rules 
+This can be useful if you need to pre-populate `iptables` rules that need to be in place before Docker runs. The following example creates a new chain named `FILTERS` in which network traffic from `INPUT` AND `DOCKER-USER` is put.
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:FILTERS - [0:0]
+:DOCKER-USER - [0:0]
+
+-F INPUT
+-F DOCKER-USER
+-F FILTERS
+
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p icmp --icmp-type any -j ACCEPT
+-A INPUT -j FILTERS
+
+-A DOCKER-USER -i ens33 -j FILTERS
+
+-A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A FILTERS -m state --state NEW -s 1.2.3.4/32 -j ACCEPT
+-A FILTERS -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A FILTERS -m state --state NEW -m tcp -p tcp --dport 23 -j ACCEPT
+-A FILTERS -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A FILTERS -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+-A FILTERS -j REJECT --reject-with icmp-host-prohibited
+
+COMMIT
+Load this into the kernel with:
+```
+iptables-restore -n /etc/iptables.conf
+```
+
+Use the previous FILTERS chain setup with the following configuration to allow `icmp` to the docker host and allow host port 22 access and container port 5222 access:
+
+```
+-A FILTERS -p icmp --icmp-type any -s client_a/32 -j ACCEPT
+-A FILTERS -p icmp --icmp-type any -j DROP
+-A FILTERS -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+-A FILTERS -m conntrack --ctstate NEW -m tcp -p tcp -s client_a/32 --dport 22 -j ACCEPT
+-A FILTERS -m conntrack --ctstate NEW -m tcp -p tcp -s client_a/32 --ctorigdstport 5222 -j ACCEPT
+-A FILTERS -j DROP
+```
+
 ### Restrict connections to the Docker daemon
 
 By default, all external source IPs are allowed to connect to the Docker daemon.
