@@ -1224,8 +1224,6 @@ manuals:
             title: Join Windows worker nodes to your cluster
           - path: /ee/ucp/admin/configure/join-nodes/use-a-load-balancer/
             title: Use a load balancer
-        - path: /ee/ucp/admin/configure/integrate-with-multiple-registries/
-          title: Integrate with multiple registries
         - path: /ee/ucp/admin/configure/deploy-route-reflectors/
           title: Improve network performance with Route Reflectors
       - sectiontitle: Monitor and troubleshoot
@@ -2199,10 +2197,8 @@ manuals:
           section:
           - path: /ee/dtr/user/manage-images/sign-images/
             title: Sign an image
-          - path: /ee/dtr/user/manage-images/sign-images/delegate-image-signing/
-            title: Delegate image signing
-          - path: /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
-            title: Manage trusted repositories
+          - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
+            title: Trust with a Remote UCP
       - sectiontitle: Promotion policies and mirroring
         section:
           - title: Overview
