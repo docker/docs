@@ -1888,7 +1888,7 @@ volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](/engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
 
     user: postgresql
     working_dir: /code
