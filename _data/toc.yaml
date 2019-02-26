@@ -1508,24 +1508,74 @@ manuals:
               title: Web-based access
             - path: /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/
               title: CLI-based access
-          - sectiontitle: Deploy an application
+            - path: /datacenter/ucp/3.0/guides/user/access-ucp/kubectl/
+              title: Install the Kubernetes CLI
+          - sectiontitle: Deploy apps with Swarm
             section:
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-a-service/
-              title: Deploy a service
-            - path: /datacenter/ucp/3.0/guides/user/services/use-domain-names-to-access-services/
-              title: Use domain names to access services
-            - path: /datacenter/ucp/3.0/guides/user/services/
-              title: Deploy an app from the UI
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-app-cli/
-              title: Deploy an app from the CLI
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-stack-to-collection/
+            - path: /datacenter/ucp/3.0/guides/user/swarm/
+              title: Deploy a single service
+            - path: /datacenter/ucp/3.0/guides/user/swarm/deploy-multi-service-app/
+              title: Deploy a multi-service app
+            - path: /datacenter/ucp/3.0/guides/user/swarm/deploy-to-collection/
               title: Deploy application resources to a collection
-          - sectiontitle: Secrets
+            - path: /datacenter/ucp/3.0/guides/user/swarm/use-secrets/
+              title: Use secrets in your services
+            - sectiontitle: Layer 7 routing
+              section:
+              - path: /datacenter/ucp/3.0/guides/user/interlock/
+                title: Overview
+              - path: /datacenter/ucp/3.0/guides/user/interlock/architecture/
+                title: Architecture
+              - sectiontitle: Deploy
+                section:
+                - title: Simple deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/
+                - title: Configure your deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/configure/
+                - title: Production deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/production/
+                - title: Host mode networking
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/host-mode-networking/
+                - title: Configuration reference
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/configuration-reference/
+              - sectiontitle: Route traffic to services
+                section:
+                - title: Simple swarm service
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/
+                - title: Set a default service
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/default-service/
+                - title: Applications with TLS
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/tls/
+                - title: Application redirects
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/redirects/
+                - title: Persistent (sticky) sessions
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/sessions/
+                - title: Websockets
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/websockets/
+                - title: Canary application instances
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/canary/
+                - title: Service clusters
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/service-clusters/
+                - title: Context/Path based routing
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/context/
+                - title: VIP backend mode
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/interlock-vip-mode/
+                - title: Service labels reference
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/labels-reference/
+              - title: Layer 7 routing upgrade
+                path: /datacenter/ucp/3.0/guides/user/interlock/upgrade/
+          - sectiontitle: Deploy apps with Kubernetes
             section:
-            - path: /datacenter/ucp/3.0/guides/user/secrets/
-              title: Manage secrets
-            - path: /datacenter/ucp/3.0/guides/user/secrets/grant-revoke-access/
-              title: Grant access to secrets
+            - title: Deploy a workload
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/
+            - title: Deploy a Compose-based app
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/deploy-with-compose/
+            - title: Deploy an ingress controller
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/layer-7-routing/
+            - title: Create a service account for a Kubernetes app
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/create-service-account/
+            - title: Install a CNI plugin
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/install-cni-plugin/
         - path: /datacenter/ucp/3.0/reference/api/
           title: API reference
         - path: /ee/ucp/release-notes/
