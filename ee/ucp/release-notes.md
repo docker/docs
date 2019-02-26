@@ -241,7 +241,7 @@ The following features are deprecated in UCP 3.1.
  **Bug Fixes**
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
-* Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (#16009)
+* Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (docker/orca/#16009)
 * Validate Calico certs expiration date and update accordingly. (escalation#981)
 
 ## 3.0.9
@@ -698,10 +698,6 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -728,10 +724,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -762,10 +754,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -798,10 +786,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -831,10 +815,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -866,10 +846,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -913,10 +889,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
 * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -970,10 +942,6 @@ instead of the correct image for the worker architecture.
 
 * Excessive delay is seen when sending `docker service ls` through a UCP client
  bundle on a cluster that is running thousands of services.
-* RethinkDB can only run with up to 127 CPU cores.
-* When integrating with LDAP and using multiple domain servers, if the
-default server configuration is not chosen, then the last server configuration
-is always used, regardless of which one is actually the best match.
  * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
  * The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
