@@ -5,7 +5,6 @@ description: |
 keywords: ucp, overview, orchestration, cluster
 redirect_from:
   - /ucp/
-  - /datacenter/ucp/3.0/guides/
 ---
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
