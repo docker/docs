@@ -1408,6 +1408,13 @@ Initial Docker EE release, based on Docker CE 17.03.0
 
 ## Older Docker Engine CE Release notes
 
+## 18.06.3-ce
+
+2019-02-19
+
+### Security fixes for Docker Engine - Community
+* Change how the `runc` critical vulnerability patch is applied to include the fix in RPM packages. [docker/engine#156](https://github.com/docker/engine/pull/156)
+
 ## 18.06.2
 
 2019-02-11
