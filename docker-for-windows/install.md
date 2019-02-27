@@ -49,12 +49,14 @@ Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
   more information, see [Running Docker Desktop for Windows in nested virtualization
   scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 
+**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server.
+
 ### About Windows containers
 
 Looking for information on using Windows containers?
 
 * [Switch between Windows and Linux
-  containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)
+  containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers)
   describes the Linux / Windows containers toggle in Docker Desktop for Windows and
   points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers
@@ -99,7 +101,7 @@ accessible from any terminal window.
 
 If the whale is hidden in the Notifications area, click the up arrow on the
 taskbar to show it. To learn more, see [Docker
-Settings](index.md#docker-settings-dialog).
+Settings](/docker-for-windows/index.md#docker-settings-dialog).
 
 If you just installed the app, you also get a popup success message with
 suggested next steps, and a link to this documentation.

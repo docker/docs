@@ -16,8 +16,8 @@ storage driver as `overlay` or `overlay2`.
 > **Note**: If you use OverlayFS, use the `overlay2` driver rather than the
 > `overlay` driver, because it is more efficient in terms of inode utilization.
 > To use the new driver, you need version 4.0 or higher of the Linux kernel,
-> unless you are a Docker EE user on RHEL or CentOS, in which case you need
-> version 3.10.0-514 or higher of the kernel and to follow some extra steps.
+> or RHEL or CentOS using version 3.10.0-514 and above. When using Docker EE 
+> on RHEL or CentOS, you will need to follow some extra steps.
 >
 > For more information about differences between `overlay` vs `overlay2`, check
 > [Docker storage drivers](select-storage-driver.md).

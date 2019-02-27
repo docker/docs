@@ -954,7 +954,7 @@ naming scheme accordingly before upgrading.
 - Containers dependencies can now be set up to wait on positive healthchecks
   when declared using `depends_on`. See the documentation for the updated
   syntax.
-  **Note:** This feature will not be ported to version 3 Compose files.
+  **Note**: This feature will not be ported to version 3 Compose files.
 
 - Added support for the `sysctls` parameter in service definitions
 

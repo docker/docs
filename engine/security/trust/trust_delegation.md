@@ -2,6 +2,8 @@
 description: Delegations for content trust
 keywords: trust, security, delegations, keys, repository
 title: Delegations for content trust
+redirect_from:
+- /ee/dtr/user/access-dtr/configure-your-notary-client/
 ---
 
 Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign

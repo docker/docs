@@ -532,7 +532,7 @@ the value assigned to a variable that shows up more than once_. The files in the
 list are processed from the top down. For the same variable specified in file
 `a.env` and assigned a different value in file `b.env`, if `b.env` is
 listed below (after), then the value from `b.env` stands. For example, given the
-following declaration in `docker_compose.yml`:
+following declaration in `docker-compose.yml`:
 
 ```yaml
 services:
@@ -990,7 +990,7 @@ as it has the highest priority. It then connects to `app_net_3`, then
       app_net_2:
       app_net_3:
 
-> **Note:** If multiple networks have the same priority, the connection order
+> **Note**: If multiple networks have the same priority, the connection order
 > is undefined.
 
 ### pid
@@ -1235,7 +1235,7 @@ volumes:
   mydata:
 ```
 
-> **Note:** When creating bind mounts, using the long syntax requires the
+> **Note**: When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
@@ -1248,7 +1248,7 @@ service.
 
     volume_driver: mydriver
 
-> **Note:** In [version 2 files](compose-versioning.md#version-2), this
+> **Note**: In [version 2 files](compose-versioning.md#version-2), this
 > option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
@@ -1298,7 +1298,7 @@ then read-write is used.
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
-> **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
+> **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
 > The following options were added in [version 2.1](compose-versioning.md#version-21):
 > `oom_kill_disable`, `cpu_period`

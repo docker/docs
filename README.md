@@ -107,7 +107,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have two options:
+You have three options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
@@ -169,7 +169,17 @@ You have two options:
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
+    
+3. Build and run a Docker image for your working branch.
+    
+   ```bash
+   $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
+   $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
+    ```
 
+   After the `docker run` command, copy the URL provided in the container build output in a browser, 
+   http://0.0.0.0:4000, and verify your changes.
+   
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
@@ -316,6 +326,21 @@ still optimizes the bandwidth during browsing).
 >
 > This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
 ```
+
+## Accessing unsupported archived documentation
+
+Supported documentation includes the current version plus the previous five versions. 
+
+If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
+
+- By entering your version number and selecting it from the branch selection list for this repo 
+- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9` 
+- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline) 
+in Docker Hub. For example, run the following to access `v1.9`:
+
+ ```bash
+  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```
 
 ## Building archives and the live published docs
 

@@ -26,7 +26,7 @@ the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
 to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token).
 
-**NOTE:** Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster. 
+> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
 
 While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
 

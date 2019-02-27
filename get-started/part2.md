@@ -54,7 +54,7 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. Change directories (`cd`) into the new directory,
+Create an empty directory on your local machine. Change directories (`cd`) into the new directory,
 create a file called `Dockerfile`, copy-and-paste the following content into
 that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
@@ -402,6 +402,7 @@ application by running this container in a **service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
+Or, learn how to [launch your container on your own machine using Digital Ocean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 
 ## Recap and cheat sheet (optional)
 

@@ -101,7 +101,7 @@ you need to add this configuration in the Docker systemd service file.
     The `NO_PROXY` variable specifies a string that contains comma-separated
     values for hosts that should be excluded from proxying. These are the
     options you can specify to exclude hosts: 
-    * IP address prefix (`1.2.3.4`) or in CIDR notation (`1.2.3.4/8`)    
+    * IP address prefix (`1.2.3.4`)   
     * Domain name, or a special DNS label (`*`)
     * A domain name matches that name and all subdomains. A domain name with
       a leading "." matches subdomains only. For example, given the domains

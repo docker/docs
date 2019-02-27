@@ -112,6 +112,8 @@ Configures audit logging options for UCP components.
 
 Specifies scheduling options and the default orchestrator for new nodes.
 
+> **Note**: If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
+
 | Parameter                     | Required | Description                                                                                                                                |
 |:------------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------|
 | `enable_admin_ucp_scheduling` | no       | Set to `true` to allow admins to schedule on containers on manager nodes. The default is `false`.                                          |
@@ -181,7 +183,7 @@ components. Assigning these values overrides the settings in a container's
 | `metrics_retention_time`               | no       | Adjusts the metrics retention time.                                                                                                                                                              |
 | `metrics_scrape_interval`              | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                                                                          |
 | `metrics_disk_usage_interval`          | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.                                                               |
-| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 512MB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically. |
+| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 1GB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically. |
 | `cloud_provider`                       | no       | Set the cloud provider for the kubernetes cluster.                                                                                                                                               |
 | `pod_cidr`                             | yes      | Sets the subnet pool from which the IP for the Pod should be allocated from the CNI ipam plugin. Default is `192.168.0.0/16`.                                                                    |
 | `calico_mtu`                           | no       | Set the MTU (maximum transmission unit) size for the Calico plugin.                                                                                                                              |

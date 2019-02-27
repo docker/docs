@@ -20,6 +20,16 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
 
+### Docker Community Edition 2.0.0.3 2019-02-15
+
+[Download](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+
+* Bug fix
+  - Fix crash in system tray menu when the Hub login fails or Air gap mode
+
 ### Docker Community Edition 2.0.0.2 2019-01-16
 
 [Download](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe)

@@ -11,7 +11,7 @@ UCP supports certified third-party Container Networking Interface (CNI) plugins.
 built-in [Calico](https://github.com/projectcalico/cni-plugin) plugin, but you can override that and 
 install a Docker certified plugin.
 
-***NOTE:*** The `--cni-installer-url` option is deprecated as of UCP 3.1. It is replaced by the `--unmanaged-cni` option. 
+> **Note**: The `--cni-installer-url` option is deprecated as of UCP 3.1. It is replaced by the `--unmanaged-cni` option.
 
 # Install UCP with a custom CNI plugin
 
@@ -27,9 +27,10 @@ docker container run --rm -it --name ucp \
    --unmanaged-cni <true|false> \
   --interactive
 ```
-***NOTE:*** Setting `--unmanaged-cni` to `true` value installs UCP without a managed CNI plugin. UCP and the 
-Kubernetes components will be running but pod-to-pod networking will not function until a CNI plugin is manually 
-installed. This will impact some functionality of UCP until a CNI plugin is running.
+
+> **Note**: Setting `--unmanaged-cni` to `true` value installs UCP without a managed CNI plugin. UCP and the
+> Kubernetes components will be running but pod-to-pod networking will not function until a CNI plugin is manually
+> installed. This will impact some functionality of UCP until a CNI plugin is running.
 
 You must provide a correct YAML installation file for the CNI plugin, but most
 of the default files work on Docker EE with no modification.

@@ -59,7 +59,7 @@ containers, configs are all mounted into `C:\ProgramData\Docker\configs` and
 symbolic links are created to the desired location, which defaults to
 `C:\<config-name>`.
 
-You can set the ownership (`uid` and `gid`) or the config, using either the
+You can set the ownership (`uid` and `gid`) for the config, using either the
 numerical ID or the name of the user or group. You can also specify the file
 permissions (`mode`). These settings are ignored for Windows containers.
 

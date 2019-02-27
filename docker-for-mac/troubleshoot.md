@@ -112,9 +112,7 @@ Docker logs.
 The Console lives in `/Applications/Utilities`; you can search for it with
 Spotlight Search.
 
-To read the Docker app log messages, in the top left corner of the window, type
-"docker" and press Enter.  Then select the "Any" button that appeared on its
-left, and select "Process" instead.
+To read the Docker app log messages, type `docker` in the Console window search bar and press Enter. Then select `ANY` to expand the drop-down list next to your `docker` search entry, and select `Process`. 
 
 ![Mac Console search for Docker app](images/console.png)
 
