@@ -26,7 +26,7 @@ Ingress is an API object that manages external access to the services in a clust
 ## Prerequisites
 
 - UCP deployed and properly configured
-- Two or three dedicated infrae nodes deployed as UCP worker nodes
+- Two or three dedicated infra nodes deployed as UCP worker nodes
 - An external load-balancer fronting these nodes with an associated VIP that resolves the application DNS (for example, `*.app.docker.mycompany.com`)
 
 ### Step 1: Labeling infrastructure nodes
@@ -51,14 +51,17 @@ node "dockeree-worker-linux-1" labeled
 node "dockeree-worker-linux-2" labeled
 🐳  → kubectl label node dockeree-worker-linux-3 infra.role=ingress
 node "dockeree-worker-linux-3" labeled
-
 ```
 
 ### Step 2: Create a Dedicated Namespace
 
 A dedicated namespace, for example, `infra`, is needed for all infrastructure deployment activities. You also need a service account to enable the ingress controller to work with the Kubernetes API. After creating a namespace and a service account, you must create an RBAC policy to only allow infrastructure deployments on the dedicated nodes that were labelled in the previous example.
 
-To create a namespace and a service account, simply use the following [YAML file](config/ns-and-sa.yaml) and apply it via the CLI or the UI:
+Because Kubernetes role based access control (RBAC) is supported, you can download an example
+[YAML file](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml) from the Kubernetes community 
+to create the necessary Kubernetes objects.
+
+Or, simply use the following [YAML file](config/ns-and-sa.yaml) to create a namespace and a service account, and apply it via the CLI or the UI:
 
 ```
 🐳  → cat ns-and-sa.yaml
@@ -85,8 +88,7 @@ serviceaccount "nginx-ingress-service-account" created
 
 ### Step 3: Create an RBAC Policy
 
-Apply an RBAC role-binding for NGINX controller access to the API Server, as shown in the following example:
-
+Apply an RBAC role-binding for NGINX controller access to the API Server, such as the one shown in the following example: 
 
 ```
 🐳  → cat ingress-rbac.yaml
@@ -173,163 +175,16 @@ Then apply it with `kubectl`:
 
 ### Step 4: Deploy NGINX Controller
 
-Note that following example uses hostPorts for controller ports. This exposes the host port ( selected in a high range using `hostPort: 38080`) directly into the nodes. Port 38080 is used for HTTP and port 38443 is used for HTTPS. Make sure that your loadbalancer forwards to the applicable ports on the nodes. You can change them as needed.
+Kubernetes provides an NGINX ingress controller that is based on the Kubernetes community [NGINX controller](https://github.com/kubernetes/ingress-nginx), and  can be used in Docker Enterprise Edition, 
+but it is not directly supported by Docker, Inc.
 
+For another example of a YAML NGINX kube ingress deployment, refer to <https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller>.
+Note that this example uses hostPorts for controller ports. This exposes the host port ( selected in a high range using `hostPort: 38080`) directly into the nodes. 
+Port 38080 is used for HTTP and port 38443 is used for HTTPS. Make sure that your loadbalancer forwards to the applicable ports on the nodes. You can change them as needed.
 
-```
-🐳  → cat nginx-ingress-deployment.yaml
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: default-http-backend
-  labels:
-    app: default-http-backend
-  namespace: infra
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: default-http-backend
-    spec:
-      terminationGracePeriodSeconds: 60
-      containers:
-      - name: default-http-backend
-        image: gcr.io/google_containers/defaultbackend:1.4
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-            scheme: HTTP
-          initialDelaySeconds: 30
-          timeoutSeconds: 5
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: 10m
-            memory: 20Mi
-          requests:
-            cpu: 10m
-            memory: 20Mi
-      nodeSelector:
-       infra.role: ingress
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: default-http-backend
-  namespace: infra
-  labels:
-    app: default-http-backend
-spec:
-  ports:
-  - port: 80
-    targetPort: 8080
-  selector:
-    app: default-http-backend
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: nginx-configuration
-  namespace: infra
-  labels:
-    app: ingress-nginx
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: tcp-services
-  namespace: infra
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: udp-services
-  namespace: infra
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: nginx-ingress-controller
-  namespace: infra
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: ingress-nginx
-  template:
-    metadata:
-      labels:
-        app: ingress-nginx
-      annotations:
-        prometheus.io/port: '10254'
-        prometheus.io/scrape: 'true'
-    spec:
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - sysctl -w net.core.somaxconn=32768; sysctl -w net.ipv4.ip_local_port_range="1024 65535"
-        image: alpine:3.6
-        imagePullPolicy: IfNotPresent
-        name: sysctl
-        securityContext:
-          privileged: true
-      serviceAccountName: nginx-ingress-service-account 
-      containers:
-        - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.21.0
-          args:
-            - /nginx-ingress-controller
-            - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
-            - --configmap=$(POD_NAMESPACE)/nginx-configuration
-            - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
-            - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-            - --annotations-prefix=nginx.ingress.kubernetes.io
-          env:
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          ports:
-          - name: http
-            containerPort: 80
-            hostPort: 38443
-            protocol: TCP
-          - name: https
-            containerPort: 443
-            hostPort: 38443
-            protocol: TCP
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-              scheme: HTTP
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
-      nodeSelector:
-        infra.role: ingress
-```
+Learn more about [ingress in Kubernetes](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/ingress/).
 
-Deploy the controller using `kubectl` and verify pods are deployed successfully:
+Deploy your controller using `kubectl` and verify pods are deployed successfully:
 
 ```
 🐳  → kubectl apply -f nginx-ingress-deployment.yaml
