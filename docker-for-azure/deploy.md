@@ -154,7 +154,7 @@ To deploy complex multi-container apps, you can use the `docker stack deploy` co
 For example:
 
 ```bash
-docker stack deploy -f docker-compose.yml myapp
+docker stack deploy -c docker-compose.yml myapp
 ```
 
 A good sample app to test deployment of stacks is the [Docker voting app](https://github.com/docker/example-voting-app).
