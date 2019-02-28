@@ -73,14 +73,14 @@ Verify everything was mounted correctly by getting a shell prompt
 within the container and searching for your mount. 
 
 ```bash
-$ kubectl exec -it pod-using-nfs sh
+$ kubectl exec -it nfs-in-a-pod sh
 / #
 / # mount | grep nfs.example.com
 nfs.example.com://share1 on /var/nfs type nfs4 (rw,relatime,vers=4.0,rsize=262144,wsize=262144,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.42.23,local_lock=none,addr=nfs.example.com)
 / #
 ```
 
-Because you defined the NFS share as part of the Pod Spec, neither UCP nor Kubernetes
+Because you defined the NFS share as part of the Pod spec, neither UCP nor Kubernetes
 knows anything about this NFS share. This means that when the pod gets
 deleted, the NFS share is unattached from the Cluster. However, the data remains in the NFS share.
 
@@ -144,15 +144,15 @@ my-nfs-share   5Gi        RWO            Recycle          Available             
 
 The access mode for a NFS Persistent Volume can be any of the following modes:
 
-- ReadWriteOnce – the volume can be mounted as read-write by a single node.
-- ReadOnlyMany – the volume can be mounted read-only by many nodes.
-- ReadWriteMany – the volume can be mounted as read-write by many nodes. 
+- ***ReadWriteOnce*** – the volume can be mounted as read-write by a single node.
+- ***ReadOnlyMany*** – the volume can be mounted read-only by many nodes.
+- ***ReadWriteMany*** – the volume can be mounted as read-write by many nodes. 
 
 The access mode in the Persistent Volume definition is used to match a
 Persistent Volume to a Claim. When a Persistent Volume is defined and created
-inside of Kubernetes, a Volume is not mounted. For more information on [access
-modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
-see the Kubernetes documentation. 
+inside of Kubernetes, a Volume is not mounted. See [access
+modes in the Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes),
+for more details.
 
 #### Reclaim
 
@@ -160,7 +160,7 @@ The [reclaim
 policy](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming)
 is used to define what the cluster should do after a Persistent Volume has been
 released from a Claim. A Persistent Volume Reclaim policy could be: Reclaim,
-Recycle and Delete. Please see the [Kubernetes
+Recycle and Delete. See [Reclaiming in the Kubernetes
 documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming)
 for a deeper understanding.
 
