@@ -33,8 +33,20 @@ consistency and compatibility reasons.
 
 2019-02-28
 
-* Fixed an issue to address Windows `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
-* Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
+### Networking
+
+* Windows: now avoids regeneration of network IDs to prevent broken references to networks. [docker/engine#149](https://github.com/docker/engine/pull/149)
+* Windows: Fixed an issue to address `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
+* Fixed an issue to address the IPAM state from networkdb if the manager is not attached to the overlay network. (docker/escalation#1049)
+
+### Runtime
+
+* Updated to Go version 1.10.8.
+* Modified names in the container name generator. [docker/engine#159](https://github.com/docker/engine/pull/159)
+* When copying an existing folder, xattr set errors when the target filesystem doesn't support xattr are now ignored. [docker/engine#135](https://github.com/docker/engine/pull/135)
+* Graphdriver: fixed "device" mode not being detected if "character-device" bit is set. [docker/engine#160](https://github.com/docker/engine/pull/160)
+* Fixed nil pointer derefence on failure to connect to containerd. [docker/engine#162](https://github.com/docker/engine/pull/162)
+* Deleted stale containerd object on start failure. [docker/engine#154](https://github.com/docker/engine/pull/154)
 
 ### Known Issues
 * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
@@ -253,6 +265,18 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 ## Older Docker Engine EE Release notes
 
 ## 18.03.1-ee-7
+
+2019-02-28
+
+### Runtime
+
+* Updated to Go version 1.10.8.
+* Updated to containerd version 1.1.6.
+- When copying existing folder, xattr set errors when the target filesystem doesn't support xattr are now ignored. [moby/moby#38316](https://github.com/moby/moby/pull/38316)
+- Fixed FIFO, sockets, and device files in userns, and fixed device mode not being detected. [moby/moby#38758](https://github.com/moby/moby/pull/38758)
+- Deleted stale containerd object on start failure. [moby/moby#38364](https://github.com/moby/moby/pull/38364)
+
+## 18.03.1-ee-7
 2019-02-28
 
 ### Bug fixes
@@ -373,6 +397,15 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ### Bug fixes
 * Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
+
+### Runtime
+
+* Updated to Go version 1.10.8.
++ Added cgroup namespace support. [docker/runc#7](https://github.com/docker/runc/pull/7)
+
+### Windows
+
+* Fixed `failed to register layer` bug on `docker pull` of windows images.
 
 #### Known issues
 
@@ -1407,6 +1440,23 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Optimize size calculation for `docker system df` container size [#31159](https://github.com/docker/docker/pull/31159)
 
 ## Older Docker Engine CE Release notes
+
+## 18.09.3 
+
+2019-02-28
+
+### Networking
+
+* Windows: now avoids regeneration of network IDs to prevent broken references to networks. [docker/engine#149](https://github.com/docker/engine/pull/149)
+
+### Runtime
+
+* Updated to Go version 1.10.8.
+* Modified names in the container name generator. [docker/engine#159](https://github.com/docker/engine/pull/159)
+* When copying an existing folder, xattr set errors when the target filesystem doesn't support xattr are now ignored. [docker/engine#135](https://github.com/docker/engine/pull/135)
+* Graphdriver: fixed "device" mode not being detected if "character-device" bit is set. [docker/engine#160](https://github.com/docker/engine/pull/160)
+* Fixed nil pointer derefence on failure to connect to containerd. [docker/engine#162](https://github.com/docker/engine/pull/162)
+* Deleted stale containerd object on start failure. [docker/engine#154](https://github.com/docker/engine/pull/154)
 
 ## 18.06.3-ce
 
