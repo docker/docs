@@ -22,13 +22,60 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.3
+
+(2019-2-28)
+
+### Changelog
+
+* Bump the Golang version that is used to build DTR to version 1.11.5. (docker/dhe-deploy#10060)
+
+### Bug Fixes
+
+* Users with read-only permissions can no longer see the README edit button for a repository. (docker/dhe-deploy#10056)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
 ## 2.6.2 
 
 (2019-1-29)
 
 ### Bug Fixes
 
-  * Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
+* Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
+* Web Interface
+  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 ## 2.6.1 
 
@@ -42,6 +89,24 @@ to upgrade your installation to the latest release.
 
 ### Changelog
 * GoLang version bump to 1.11.4.
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
+* Web Interface
+  * Users with read-only permissions to a repository can edit the repository README but their changes will not be saved. Only repository admins should have the ability to [edit the description](/ee/dtr/admin/manage-users/permission-levels/#team-permission-levels) of a repository. (docker/dhe-deploy #9677)
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 ## 2.6.0 
 
@@ -105,6 +170,43 @@ to upgrade your installation to the latest release.
 
 # Version 2.5
 
+## 2.5.9
+
+(2019-2-28)
+
+### Changelog
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10071)
+
+### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
+
 ## 2.5.8
  
 (2019-1-29)
@@ -112,6 +214,35 @@ to upgrade your installation to the latest release.
 ### Bug Fixes
 
 * Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (docker/dhe-deploy #9958)
+
+### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 ## 2.5.7 
 
@@ -126,6 +257,35 @@ to upgrade your installation to the latest release.
 ### Changelog
 * GoLang version bump to 1.10.7.
 
+### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
+
 ## 2.5.6 
 
 (2018-10-25)
@@ -139,6 +299,35 @@ to upgrade your installation to the latest release.
 * Backported ManifestList fixes. (docker/dhe-deploy#9547)
 * Removed support sidebar link and associated content. (docker/dhe-deploy#9411)
 
+### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
+
 ## 2.5.5 
 
 (2018-8-30)
@@ -148,6 +337,35 @@ to upgrade your installation to the latest release.
 * Fixed bug where repository tag list UI was not loading after a tag migration.
 * Fixed bug to enable poll mirroring with Windows images.
 * The RethinkDB image has been patched to remove unused components with known vulnerabilities including the RethinkCLI. To get an equivalent interface, run RethinkCLI from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.3.0 $REPLICA_ID`.
+
+### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 ## 2.5.3 
 
@@ -164,8 +382,33 @@ to upgrade your installation to the latest release.
 * Fixed issue where worker capacities wouldn't update on minor version upgrades.
 
 ### Known Issues
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
 * Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
   * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 
 ## 2.5.2 
@@ -175,6 +418,35 @@ to upgrade your installation to the latest release.
 ### Bug fixes
 
 * Fixed a problem where promotion policies based on scanning results would not be executed correctly.
+
+### Known issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 ## 2.5.1 
 
@@ -202,6 +474,35 @@ to upgrade your installation to the latest release.
 * Enhancements to the mirroring interface including:
   * Fixed URL for the destination repository.
   * Option to skip TLS verification when testing mirroring.
+  
+  ### Known issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+* System
+  * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 ## 2.5.0 
 
@@ -299,12 +600,34 @@ specify `--log-protocol`.
 
 # Version 2.4
 
+## 2.4.10
+
+(2019-2-28)
+
+### Changelog
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10068)
+
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
+
+
 ## Version 2.4.8
 
 (2019-01-29)
 
 ### Changelog
 * GoLang version bump to 1.10.6.
+
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
+
 
 ## Version 2.4.7
 
@@ -318,6 +641,12 @@ specify `--log-protocol`.
 * Patched security vulnerabilities in the load balancer.
 * Patch packages and base OS to eliminate and address some critical vulnerabilities in DTR dependencies.
 
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
+
 ## Version 2.4.6
 
 (2018-07-26)
@@ -325,6 +654,12 @@ specify `--log-protocol`.
 ### Bug Fixes
 * Fixed bug where repository tag list UI was not loading after a tag migration.
 * The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface please run the rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID`.
+
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
 
 ## Version 2.4.5
 
@@ -337,6 +672,12 @@ specify `--log-protocol`.
 **Bug Fixes**
 
 * Prevent OOM during garbage collection by reading less data into memory at a time.
+
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
 
 ## Version 2.4.4
 
@@ -353,11 +694,17 @@ specify `--log-protocol`.
 * Reduce noise in the jobrunner logs by changing some of the more detailed messages to debug level.
 * Eliminate a race condition in which webhook for license updates doesn't fire.
 
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
+
 ## Version 2.4.3 
 
 (2018-03-19)
 
-**Security**
+**Security notice**
 
 * Dependencies updated to consume upstream CVE patches.
 
@@ -410,6 +757,12 @@ vulnerability database.
 * The `api/v0/imagescan/layer/{layerid}` endpoint is deprecated, and will be
 removed in DTR 2.5. You can use the
 `/api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` endpoint instead.
+
+**Known issues**
+
+* Backup uses too much memory and can cause out of memory issues for large databases.
+* The `--nfs-storage-url` option uses the system's default NFS version instead
+of testing the server to find which version works.
 
 
 ## DTR 2.4.0 
