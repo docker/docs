@@ -49,8 +49,6 @@ Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
   more information, see [Running Docker Desktop for Windows in nested virtualization
   scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 
-**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server.
-
 ### About Windows containers
 
 Looking for information on using Windows containers?
