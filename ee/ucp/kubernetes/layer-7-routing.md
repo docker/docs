@@ -19,10 +19,9 @@ Use an ingress controller when you want to:
 * Give your Kubernetes app an externally-reachable URL.
 * Load-balance traffic to your app.
 
-## Deploy NGINX ingress controller
-
 A popular ingress controller within the Kubernetes Community is the [NGINX controller](https://github.com/kubernetes/ingress-nginx), and can be used in Docker Enterprise Edition, but it is not directly supported by Docker, Inc.
 
 Learn about [ingress in Kubernetes](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/ingress/). 
 
 For an example of a YAML NGINX kube ingress deployment, refer to <https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller>.
+

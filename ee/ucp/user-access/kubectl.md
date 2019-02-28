@@ -83,7 +83,7 @@ You can download the binary from this [link](https://storage.googleapis.com/kube
 If you have curl installed on your system, you use these commands in Powershell.
 
 ```cmd
-$env:k8sversion = "v1.11.5"
+$env:k8sversion = "v1.8.11"
 
 curl https://storage.googleapis.com/kubernetes-release/release/$env:k8sversion/bin/windows/amd64/kubectl.exe
 ```

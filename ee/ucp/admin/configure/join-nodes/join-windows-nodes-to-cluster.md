@@ -16,8 +16,6 @@ Follow these steps to enable a worker node on Windows.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
-
 ## Install Docker Engine - Enterprise on Windows Server 
 
 [Install Docker Engine - Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)

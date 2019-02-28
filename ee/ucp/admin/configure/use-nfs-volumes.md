@@ -440,4 +440,4 @@ Click the **permalink** to view the site.
 ## Where to go next
 
 - [Example of NFS based persistent volume](https://github.com/kubernetes/examples/tree/master/staging/volumes/nfs#nfs-server-part)
-- [Example: Deploying WordPress and MySQL with Persistent Volumes](https://v1-11.docs.kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
+- [Example: Deploying WordPress and MySQL with Persistent Volumes](https://v1-8.docs.kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
