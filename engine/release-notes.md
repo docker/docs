@@ -33,13 +33,12 @@ consistency and compatibility reasons.
 
 2019-02-28
 
-### Networking
-
+### Networking fixes for Docker Engine EE and CE
 * Windows: now avoids regeneration of network IDs to prevent broken references to networks. [docker/engine#149](https://github.com/docker/engine/pull/149)
 * Windows: Fixed an issue to address `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
 * Fixed an issue to address the IPAM state from networkdb if the manager is not attached to the overlay network. (docker/escalation#1049)
 
-### Runtime
+### Runtime fixes and updates for Docker Engine EE and CE
 
 * Updated to Go version 1.10.8.
 * Modified names in the container name generator. [docker/engine#159](https://github.com/docker/engine/pull/159)
@@ -1440,23 +1439,6 @@ Initial Docker EE release, based on Docker CE 17.03.0
 * Optimize size calculation for `docker system df` container size [#31159](https://github.com/docker/docker/pull/31159)
 
 ## Older Docker Engine CE Release notes
-
-## 18.09.3 
-
-2019-02-28
-
-### Networking
-
-* Windows: now avoids regeneration of network IDs to prevent broken references to networks. [docker/engine#149](https://github.com/docker/engine/pull/149)
-
-### Runtime
-
-* Updated to Go version 1.10.8.
-* Modified names in the container name generator. [docker/engine#159](https://github.com/docker/engine/pull/159)
-* When copying an existing folder, xattr set errors when the target filesystem doesn't support xattr are now ignored. [docker/engine#135](https://github.com/docker/engine/pull/135)
-* Graphdriver: fixed "device" mode not being detected if "character-device" bit is set. [docker/engine#160](https://github.com/docker/engine/pull/160)
-* Fixed nil pointer derefence on failure to connect to containerd. [docker/engine#162](https://github.com/docker/engine/pull/162)
-* Deleted stale containerd object on start failure. [docker/engine#154](https://github.com/docker/engine/pull/154)
 
 ## 18.06.3-ce
 
