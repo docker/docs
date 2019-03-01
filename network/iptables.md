@@ -60,6 +60,14 @@ Use the previous FILTERS chain setup with the following configuration to allow `
 -A FILTERS -j DROP
 ```
 
+**Note**: `--ctorigdstport` matches the destination port on the packet that initiated the connection, not the destination port on the packet being filtered. Therefore, responses to requests from Docker to other servers have `SPT=80` and match `--ctorigdstport 80`.
+
+For tighter control, all rules allowing the connection should have `--ctdir` added to specifically express their meaning, as shown in the following example:
+
+```
+-A DOCKER-USER -s 1.2.3.4/32 -i eth0 -p tcp -m conntrack --ctorigdstport 80 --ctdir ORIGINAL -j ACCEPT
+```
+
 ### Restrict connections to the Docker daemon
 
 By default, all external source IPs are allowed to connect to the Docker daemon.
