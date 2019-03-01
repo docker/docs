@@ -149,15 +149,15 @@ This tool internally makes use of docker global-mode service that runs a task on
 
 ### Docker Stack deployment
 
-To deploy complex multi-container apps, you can use the `docker stack deploy` command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the `docker-compose.yml` file (for example using `scp`) to a manager node, SSH into the manager and then run `docker stack deploy` (if you have multiple managers,  ensure that your session is on one that has the stack file).
+To deploy complex multi-container apps, you can use the docker stack deploy command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the docker-compose.yml file to a manager node via scp for example. You can then SSH into the manager node and run docker stack deploy with the --compose-file or -c option. See docker stack deploy options for the list of different options. If you have multiple manager nodes, make sure you are logged in to the one with the stack file copy.
 
 For example:
 
 ```bash
-docker stack deploy -f docker-compose.yml myapp
+docker stack deploy --compose-file docker-compose.yml myapp
 ```
 
-A good sample app to test deployment of stacks is the [Docker voting app](https://github.com/docker/example-voting-app).
+See [Docker voting app](https://github.com/docker/example-voting-app) for a good sample app to test stack deployments.
 
 By default, apps deployed with stacks do not have ports publicly exposed. Update port mappings for services, and Docker automatically wires up the underlying platform load balancers:
 
