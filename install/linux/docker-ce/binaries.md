@@ -17,7 +17,13 @@ system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
-`dockerd`). Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+`dockerd`). 
+Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+
+This topic discusses binary installation for both Linux and macOS:
+
+- [Install daemon and client binaries on Linux]( )
+- [Install client binaries on macOS](  )
 
 ## Install daemon and client binaries on Linux
 
@@ -110,12 +116,6 @@ instructions for enabling and configuring AppArmor or SELinux.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-### Next steps
-
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
-- Continue with the [User Guide](/engine/userguide/index.md).
-
 ## Install client binaries on macOS
 
 The macOS binary includes the Docker client only. It does not include the
@@ -162,4 +162,8 @@ version.
 
 ## Next steps
 
-Continue with the [User Guide](/get-started/index.md).
+- On Linux:
+    - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+    - Continue with the [User Guide](/engine/userguide/index.md).
+- On macOS:
+    - Continue with the [User Guide](/get-started/index.md).
