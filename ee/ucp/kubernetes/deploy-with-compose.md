@@ -30,28 +30,19 @@ version: '3.3'
 services:
   web:
     build: web
-    image: dockerdemos/lab-web
-    volumes:
-     - "./web/static:/static"
+    image: dockersamples/k8s-wordsmith-web
     ports:
-     - "80:80"
+     - "8080:80"
 
-  words:
+ words:
     build: words
-    image: dockerdemos/lab-words
+    image: dockersamples/k8s-wordsmith-api
     deploy:
       replicas: 5
-      endpoint_mode: dnsrr
-      resources:
-        limits:
-          memory: 16M
-        reservations:
-          memory: 16M
 
   db:
     build: db
-    image: dockerdemos/lab-db
-```
+    image: dockersamples/k8s-wordsmith-db
 
 1.  Open the UCP web UI, and in the left pane, click **Shared resources**.
 2.  Click **Stacks**, and in the **Stacks** page, click **Create stack**.
