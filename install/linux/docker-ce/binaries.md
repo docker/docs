@@ -22,8 +22,8 @@ Static binaries for the Docker client are available for Linux and macOS (as `doc
 
 This topic discusses binary installation for both Linux and macOS:
 
-- [Install daemon and client binaries on Linux]( )
-- [Install client binaries on macOS](  )
+- [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux )
+- [Install client binaries on macOS](#install-client-binaries-on-macos )
 
 ## Install daemon and client binaries on Linux
 
