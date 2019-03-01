@@ -2,7 +2,7 @@
 title: Enable audit logging on UCP
 description: Learn how to enable audit logging of all activity in UCP
 keywords: logs, ucp, swarm, kubernetes, audits
-redirect_from: /ee/ucp/admin/configure/create-audit-logs
+redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 ---
 
 Audit logs are a chronological record of security-relevant activities by 
