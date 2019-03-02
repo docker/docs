@@ -2,6 +2,7 @@
 title: Enable audit logging on UCP
 description: Learn how to enable audit logging of all activity in UCP
 keywords: logs, ucp, swarm, kubernetes, audits
+redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 ---
 
 Audit logs are a chronological record of security-relevant activities by 
@@ -60,7 +61,7 @@ generate chargeback information.
 created by the event, alerting features can be built on top of event tools that 
 generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
 
-## Enablig UCP Audit Logging
+## Enabling UCP Audit Logging
 
 UCP audit logging can be enabled via the UCP web user interface, the UCP API or 
 via the UCP configuration file.

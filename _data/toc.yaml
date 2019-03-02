@@ -1186,7 +1186,7 @@ manuals:
           title: Using UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
-        - path: /ee/ucp/admin/configure/create-audit-logs/
+        - path: /ee/ucp/admin/configure/enable-audit-logging/
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
