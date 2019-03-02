@@ -76,6 +76,7 @@ PollInterval = "3s"
       LargeClientHeaderBuffers = "4 8k"
       ClientBodyTimeout = "60s"
       UnderscoresInHeaders = false
+      HideInfoHeaders = false
 ```
 
 ## Core configurations
@@ -140,6 +141,7 @@ available for the proxy service:
 | `RLimitNoFile`          | int    | Number of maxiumum open files for the proxy service.                                                 |
 | `SSLCiphers`            | string | SSL ciphers to use for the proxy service.                                                            |
 | `SSLProtocols`          | string | Enable the specified TLS protocols.                                                                  |
+| `HideInfoHeaders`       | bool   | Hide proxy related response headers.                                                                |
 | `AccessLogPath`         | string | Path to use for access logs (default: `/dev/stdout`).                                                |
 | `ErrorLogPath`          | string | Path to use for error logs (default: `/dev/stdout`).                                                 |
 | `MainLogFormat`         | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for main logger.  |
