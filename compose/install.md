@@ -109,16 +109,16 @@ target="_blank" class="_"}. Follow the instructions from the link, which involve
 running the `curl` command in your terminal to download the binaries. These step
 by step instructions are also included below.
 
-1.  Run this command to download the latest version of Docker Compose:
+1. a. Run this command to download the latest Stable version of Docker Compose **(Recommended for production)**:
 
     ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo curl -L `curl -s 'https://api.github.com/repos/docker/compose/releases' | grep -e 'browser_download_url' | grep "docker-compose-$(uname -s)-$(uname -m)\"\$" | head -n1 |cut -d'"' -f4` -o /usr/local/bin/docker-compose
     ```
+   b. Run this command to download the latest release of Docker Compose:
 
-    > Use the latest Compose release number in the download command.
-    >
-    The above command is an _example_, and it may become out-of-date. To ensure you have the latest version, check the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
-    {: .important}
+    ```bash
+    sudo curl -L `curl --insecure -s 'https://api.github.com/repos/docker/compose/releases' | grep -e 'browser_download_url' | grep "docker-compose-$(uname -s)-$(uname -m)\"\$" | grep -v '\-rc' | head -n1 |cut -d'"' -f4` -o /usr/local/bin/docker-compose
+    ```
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
@@ -154,7 +154,6 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 - [Install using pip](#install-using-pip)
 - [Install as a container](#install-as-a-container)
-
 #### Install using pip
 
 Compose can be installed from
