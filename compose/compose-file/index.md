@@ -857,7 +857,6 @@ The following sub-options (supported for `docker-compose up` and `docker-compose
 - [network_mode](#network_mode)
 - [restart](#restart)
 - [security_opt](#security_opt)
-- [stop_signal](#stop_signal)
 - [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
@@ -1615,10 +1614,6 @@ SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
 
     stop_signal: SIGUSR1
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
 
 ### sysctls
 
