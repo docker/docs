@@ -17,7 +17,7 @@ pipeline {
         expression { env.GIT_URL == 'https://github.com/docker/docs-private.git' }
       }
       steps {
-        sh 'print "Succes!"'
+        sh 'echo "Success!"'
       }
       // stages {
       //   stage( 'build and push image' ) {
