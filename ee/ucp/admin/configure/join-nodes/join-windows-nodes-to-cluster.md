@@ -226,3 +226,7 @@ Some features are not yet supported on Windows nodes:
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
+
+## Known Issues
+
+* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
