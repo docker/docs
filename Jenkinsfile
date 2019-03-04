@@ -13,8 +13,11 @@ pipeline {
       agent {
         label 'ubuntu-1604-aufs-stable'
       }
+      when {
+        expression { env.GIT_URL == 'https://github.com/docker/docs-private.git' }
+      }
       steps {
-          sh 'printenv'
+        sh 'print "Succes!"'
       }
       // stages {
       //   stage( 'build and push image' ) {
