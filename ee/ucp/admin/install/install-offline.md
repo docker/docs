@@ -57,7 +57,7 @@ For each machine that you want to manage with UCP:
     `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
-    $ docker load < ucp.tar.gz
+    $ docker load -i ucp.tar.gz
     ```
 
 Follow the same steps for the DTR binaries.

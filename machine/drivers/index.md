@@ -9,7 +9,7 @@ title: Machine drivers
 -   [Digital Ocean](digital-ocean.md)
 -   [Exoscale](exoscale.md)
 -   [Google Compute Engine](gce.md)
--   [Generic](generic.md)
+-   [Linode](linode.md) (unofficial plugin, not supported by Docker)
 -   [Microsoft Hyper-V](hyper-v.md)
 -   [OpenStack](openstack.md)
 -   [Rackspace](rackspace.md)

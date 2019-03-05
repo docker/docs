@@ -466,11 +466,12 @@ root:[~/] #
 root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 ```
 
-Note: The output was piped to the **jq** command to display it "nicely".
+
+> **Note**: The output was piped to the `jq` command to display it "nicely".
 
 #### Output:
 
-```
+```json
 {
   "Date": "Mon May 21 13:23:37 2018",
   "SystemOperatingSystem": "Operating System: Ubuntu 16.04.4 LTS",
@@ -580,7 +581,6 @@ Note: The output was piped to the **jq** command to display it "nicely".
     }
   ]
 }
-root:[~/] #
 ```
 
 <a name="linux-with-html">

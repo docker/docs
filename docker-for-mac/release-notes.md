@@ -20,6 +20,13 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
+### Docker Community Edition 2.0.0.3 2019-02-15
+
+[Download](https://download.docker.com/mac/stable/31259/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
+
 ### Docker Community Edition 2.0.0.2 2019-01-16
 
 [Download](https://download.docker.com/mac/stable/30215/Docker.dmg)

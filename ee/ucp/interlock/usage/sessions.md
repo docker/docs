@@ -69,7 +69,7 @@ which are pinned to the same instance.  If you make a few requests you will noti
 
 # IP Hashing
 In this example we show how to configure sticky sessions using client IP hashing.  This is not as flexible or consistent
-as cookies but enables workarounds for some applications that cannot use the other method.
+as cookies but enables workarounds for some applications that cannot use the other method.  When using IP hashing you should reconfigure Interlock proxy to use [host mode networking](../deploy/host-mode-networking.md) because the default `ingress` networking mode uses SNAT which obscures client IP addresses.
 
 First we will create an overlay network so that service traffic is isolated and secure:
 
@@ -125,7 +125,7 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 You can use `docker service scale demo=10` to add some more replicas.  Once scaled, you will notice that requests are pinned
 to a specific backend.
 
-Note: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
-expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
-determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
+> **Note**: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
+> expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
+> determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
 

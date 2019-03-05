@@ -1,6 +1,6 @@
 ---
-title: Create UCP audit logs
-description: Learn how to create audit logs of all activity in UCP
+title: Enable audit logging on UCP
+description: Learn how to enable audit logging of all activity in UCP
 keywords: logs, ucp, swarm, kubernetes, audits
 ---
 
@@ -121,7 +121,10 @@ The section of the UCP configuration file that controls UCP auditing logging is:
   support_dump_include_audit_logs = false
 ```
 
-The supported variables are `""`, `"metadata"` or `"request"`.
+The supported variables for `level` are `""`, `"metadata"` or `"request"`.
+
+> Important: The `support_dump_include_audit_logs` flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that `support_dump_include_audit_logs` is set to `false`.  When disabled, the support dump collection tool filters out any lines from the `ucp-controller` container logs that contain the substring `auditID`.
+
 
 ## Accessing Audit Logs
 
@@ -194,6 +197,17 @@ events and may create a large amount of log entries.
 - /apidocs
 - /kubernetesdocs
 - /manage
+
+## API endpoint information redacted
+
+Information for the following API endpoints is redacted from the audit logs for security purposes:
+
+- `/secrets/create` (POST)
+- `/secrets/{id}/update` (POST)
+- `/swarm/join` (POST)
+- `/swarm/update` (POST)
+-`/auth/login` (POST)
+- Kube secrete create/update endpoints
 
 ## Where to go next
 

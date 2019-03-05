@@ -57,7 +57,7 @@ $ cat /proc/sys/crypto/fips_enabled
 1
 ```
 
-> ***NOTE:*** FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2. 
+> **Note**: FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2.
 
 To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
 

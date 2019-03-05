@@ -664,7 +664,7 @@ For more information on constraints, refer to the `docker service create`
 #### Placement preferences
 
 While [placement constraints](#placement-constraints) limit the nodes a service
-can run on, _placement preferences_ try to place services on appropriate nodes
+can run on, _placement preferences_ try to place tasks on appropriate nodes
 in an algorithmic way (currently, only spread evenly). For instance, if you
 assign each node a `rack` label, you can set a placement preference to spread
 the service evenly across nodes with the `rack` label, by value. This way, if
