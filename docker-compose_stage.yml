@@ -1,0 +1,11 @@
+version: "2"
+services:
+  docs-beta-stage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docs/
+    ports:
+     - "4000:4000"
+    volumes:
+     - "./:/usr/src/app"
