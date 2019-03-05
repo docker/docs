@@ -26,9 +26,9 @@ for Windows](install.md#download-docker-for-windows).
   - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
 
 * Bug fixes and minor changes
-  - Fix docker not added to PATH after install in some cases
-  - Fix port 8080 that was used on localhost when starting Kubernetes.
-  - Fix "create issue" link in diagnostics windows.
+  - Fixed docker not added to PATH after install in some cases
+  - Fixed port 8080 that was used on localhost when starting Kubernetes.
+  - Fixed "create issue" link in diagnostics windows.
 
 ### Docker Community Edition 2.0.2.1 2019-02-15
 
