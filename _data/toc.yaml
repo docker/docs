@@ -1426,7 +1426,7 @@ manuals:
       - title: Use secrets in your services
         path: /ee/ucp/swarm/use-secrets/
       - sectiontitle: Layer 7 routing
-        section:
+          section:
         - title: Overview
           path: /ee/ucp/interlock/
         - title: Architecture
