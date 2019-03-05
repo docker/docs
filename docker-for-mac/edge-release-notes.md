@@ -18,6 +18,17 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.3.0 2019-03-05
+
+[Download](https://download.docker.com/mac/edge/31778/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
+
+* Bug fixes and minor changes
+  - Fix port 8080 that was used on localhost when starting Kubernetes. Fixes [docker/for-mac#3522](https://github.com/docker/for-mac/issues/3522)
+  - Error message improvements, do not propose to run diagnostics / reset to factory default when not appropriate.
+
 ### Docker Community Edition 2.0.2.1 2019-02-15
 
 [Download](https://download.docker.com/mac/edge/31274/Docker.dmg)
