@@ -1298,7 +1298,7 @@ manuals:
       - title: Use secrets in your services
         path: /ee/ucp/swarm/use-secrets/
       - sectiontitle: Layer 7 routing
-        section:
+          section:
         - title: Overview
           path: /ee/ucp/interlock/
         - title: Architecture
@@ -1307,40 +1307,56 @@ manuals:
           section:
           - title: Simple deployment
             path: /ee/ucp/interlock/deploy/
-          - title: Configure your deployment
-            path: /ee/ucp/interlock/deploy/configure/
           - title: Production deployment
             path: /ee/ucp/interlock/deploy/production/
-          - title: Host mode networking
-            path: /ee/ucp/interlock/deploy/host-mode-networking/
-          - title: Configuration reference
-            path: /ee/ucp/interlock/deploy/configuration-reference/
-        - sectiontitle: Route traffic to services
+          - title: Offline installation
+            path: /ee/ucp/interlock/deploy/offline-install/
+          - title: Layer 7 routing upgrade
+            path: /ee/ucp/interlock/upgrade/   
+        - sectiontitle: Configuration
           section:
-          - title: Simple swarm service
+          - title: Configure your deployment
+            path: /ee/ucp/interlock/config/
+          - title: Using a custom extension template
+            path: /ee/ucp/interlock/config/custom-template/
+          - title: Configuring an HAProxy extension
+            path: /ee/ucp/interlock/config/haproxy-config/
+          - title: Configuring host mode networking
+            path: /ee/ucp/interlock/config/host-mode-networking/
+          - title: Configuring an nginx extension
+            path: /ee/ucp/interlock/config/nginx-config/
+          - title: Using application service labels
+            path: /ee/ucp/interlock/config/service-labels/
+          - title: Tuning the proxy service
+            path: /ee/ucp/interlock/config/tuning/
+          - title: Updating Interlock services
+            path: /ee/ucp/interlock/config/updates/
+        - sectiontitle: Routing traffic to services
+          section:
+          - title: Deploying services
             path: /ee/ucp/interlock/usage/
-          - title: Set a default service
-            path: /ee/ucp/interlock/usage/default-service/
-          - title: Applications with TLS
-            path: /ee/ucp/interlock/usage/tls/
-          - title: Application redirects
-            path: /ee/ucp/interlock/usage/redirects/
-          - title: Persistent (sticky) sessions
-            path: /ee/ucp/interlock/usage/sessions/
-          - title: Websockets
-            path: /ee/ucp/interlock/usage/websockets/
-          - title: Canary application instances
+          - title: Publishing a service as a canary instance
             path: /ee/ucp/interlock/usage/canary/
-          - title: Service clusters
-            path: /ee/ucp/interlock/usage/service-clusters/
-          - title: Context/Path based routing
+          - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: VIP backend mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/
-          - title: Service labels reference
-            path: /ee/ucp/interlock/usage/labels-reference/
-        - title: Layer 7 routing upgrade
-          path: /ee/ucp/interlock/upgrade/
+          - title: Publishing a default host service
+            path: /ee/ucp/interlock/usage/default-backend/
+          - title: Specifying a routing mode
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+          - title: Using routing labels
+            path: /ee/ucp/interlock/usage/labels-reference.md/ 
+          - title: Implementing redirects
+            path: /ee/ucp/interlock/usage/redirects/
+          - title: Implementing a service cluster
+            path: /ee/ucp/interlock/usage/service-clusters/
+          - title: Implementing persistent (sticky) sessions
+            path: /ee/ucp/interlock/usage/sessions/
+          - title: Implementing SSL
+            path: /ee/ucp/interlock/usage/ssl/
+          - title: Securing services with TLS
+            path: /ee/ucp/interlock/usage/tls/
+          - title: Configuring websockets
+            path: /ee/ucp/interlock/usage/websockets/   
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources

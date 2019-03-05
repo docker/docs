@@ -1,24 +1,26 @@
 ---
 title: Service clusters
-description: Learn about Interlock, an application routing and load balancing system
-  for Docker Swarm.
+description: Learn how to route traffic to different proxies using a service cluster.
 keywords: ucp, interlock, load balancing
 ---
 
-In this example we will configure an eight (8) node Swarm cluster that uses service clusters
-to route traffic to different proxies.  There are three (3) managers
-and five (5) workers.  Four of the workers are configured with node labels to be dedicated
-ingress cluster load balancer nodes.  These will receive all application traffic.
+# Implementing a service cluster
+The following example configures an eight (8) node Swarm cluster that uses service clusters
+to route traffic to different proxies. This example includes:
 
-This example will not cover the actual deployment of infrastructure.
+- three (3) managers and five (5) workers 
+- Four workers that are configured with node labels to be dedicated
+ingress cluster load balancer nodes. These nodes receive all application traffic.
+
+This example does not cover infrastructure deployment.
 It assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
 See the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
 getting a Swarm cluster deployed.
 
-![Interlock Service Clusters](interlock_service_clusters.png)
+![Interlock Service Clusters](../../images/interlock_service_clusters.png)
 
-We will configure four load balancer worker nodes (`lb-00` through `lb-03`) with node labels in order to pin the Interlock Proxy
-service for each Interlock service cluster.  Once you are logged into one of the Swarm managers run the following to add node labels to the dedicated ingress workers:
+Configure four load balancer worker nodes (`lb-00` through `lb-03`) with node labels in order to pin the Interlock Proxy
+service for each Interlock service cluster.  After you log in to one of the Swarm managers, run the following commands to add node labels to the dedicated ingress workers:
 
 ```bash
 $> docker node update --label-add nodetype=loadbalancer --label-add region=us-east lb-00
@@ -31,7 +33,7 @@ $> docker node update --label-add nodetype=loadbalancer --label-add region=us-we
 lb-03
 ```
 
-You can inspect each node to ensure the labels were successfully added:
+Inspect each node to ensure the labels were successfully added:
 
 ```bash
 {% raw %}
@@ -42,9 +44,9 @@ map[nodetype:loadbalancer region:us-west]
 {% endraw %}
 ```
 
-Next, we will create a configuration object for Interlock that contains multiple extensions with varying service clusters.
+Next, create an Interlock configuration object that contains multiple extensions with varying service clusters.
 
-Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
+< Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
 
 If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
 
@@ -109,19 +111,21 @@ PollInterval = "3s"
 EOF
 oqkvv1asncf6p2axhx41vylgt
 ```
-Note that we are using "host" mode networking in order to use the same ports (`8080` and `8443`) in the cluster.  We cannot use ingress
-networking as it reserves the port across all nodes.  If you want to use ingress networking you will have to use different ports
+Note that "host" mode networking is used in order to use the same ports (`8080` and `8443`) in the cluster. You cannot use ingress
+networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
 for each service cluster.
 
-Next we will create a dedicated network for Interlock and the extensions:
+Next, create a dedicated network for Interlock and the extensions:
 
 ```bash
 $> docker network create -d overlay ucp-interlock
 ```
 
-Now we can create the Interlock service. 
+Now [enable the Interlock service](../deploy/index.md#enable-layer-7-routing).
 
-Important: The `--name` value and configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later. 
+-------REMOVE THE FOLLOWING PER ---------          https://github.com/docker/docker.github.io/issues/8415-----
+
+< Important: The `--name` value and configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later. 
 
 If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `--name ucp-interlock-service-clusters` and `src=com.docker.ucp.interlock.service-clusters.conf-1` .
 
@@ -135,10 +139,11 @@ $> docker service create \
     {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
+-----------------------------------------------------------END OF DELETE------------------------------
 
 ## Configure Proxy Services
-Once we have the node labels we can re-configure the Interlock Proxy services to be constrained to the
-workers for each region.  Again, from a manager run the following to pin the proxy services to the ingress workers:
+With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
+workers for each region. From a manager, run the following commands to pin the proxy services to the ingress workers:
 
 ```bash
 $> docker service update \
@@ -151,14 +156,14 @@ $> docker service update \
     ucp-interlock-proxy-us-west
 ```
 
-We are now ready to deploy applications.  First we will create individual networks for each application:
+You are now ready to deploy applications. First, create individual networks for each application:
 
 ```bash
 $> docker network create -d overlay demo-east
 $> docker network create -d overlay demo-west
 ```
 
-Next we will deploy the application in the `us-east` service cluster:
+Next, deploy the application in the `us-east` service cluster:
 
 ```bash
 $> docker service create \
@@ -172,7 +177,7 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Now we deploy the application in the `us-west` service cluster:
+Now deploy the application in the `us-west` service cluster:
 
 ```bash
 $> docker service create \
@@ -186,11 +191,11 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Only the service cluster that is designated will be configured for the applications.  For example, the `us-east` service cluster
-will not be configured to serve traffic for the `us-west` service cluster and vice versa.  We can see this in action when we
+Only the designated service cluster is configured for the applications. For example, the `us-east` service cluster
+is not configured to serve traffic for the `us-west` service cluster and vice versa. You can observe this when you
 send requests to each service cluster.
 
-When we send a request to the `us-east` service cluster it only knows about the `us-east` application.  This example uses IP address lookup from the swarm API, so ssh to a manager node or configure your shell with a UCP client bundle before testing:
+When you send a request to the `us-east` service cluster, it only knows about the `us-east` application. This example uses IP address lookup from the swarm API, so you must `ssh` to a manager node or configure your shell with a UCP client bundle before testing:
 
 ```bash
 {% raw %}
@@ -207,7 +212,4 @@ $> curl -H "Host: demo-west.local" http://$(docker node inspect -f '{{ .Status.A
 {% endraw %}
 ```
 
-Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy will only be updated if it has corresponding updates
-to its designated service cluster.  So in this example, updates to the `us-east` cluster will not affect the `us-west` cluster.  If there is a problem
-the others will not be affected.
-
+Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy is updated only if it has corresponding updates to its designated service cluster. In this example, updates to the `us-east` cluster do not affect the `us-west` cluster.  If there is a problem, the others are not affected.
