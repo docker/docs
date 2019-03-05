@@ -26,7 +26,7 @@ for Mac](install.md#download-docker-for-mac).
   - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
 
 * Bug fixes and minor changes
-  - Fix port 8080 that was used on localhost when starting Kubernetes. Fixes [docker/for-mac#3522](https://github.com/docker/for-mac/issues/3522)
+  - Fixed port 8080 that was used on localhost when starting Kubernetes. Fixes [docker/for-mac#3522](https://github.com/docker/for-mac/issues/3522)
   - Error message improvements, do not propose to run diagnostics / reset to factory default when not appropriate.
 
 ### Docker Community Edition 2.0.2.1 2019-02-15
