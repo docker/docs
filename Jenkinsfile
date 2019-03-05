@@ -19,7 +19,7 @@ pipeline {
       stages {
         stage( 'build and push new beta-stage image' ) {
           when {
-            branch 'jenkins-test'
+            branch 'amberjack'
           }
           steps {
             sh 'echo "Build and push new beta-stage image here"'
@@ -47,7 +47,7 @@ pipeline {
         }
         stage( 'update beta-stage service' ) {
           when {
-            branch 'jenkins-test'
+            branch 'amberjack'
           }
           steps {
             sh 'echo "Update beta-stage service here"'
