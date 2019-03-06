@@ -79,8 +79,10 @@ Where:
 * `<hostname>` is the hostname of the node where you've restored the images
 * `<replica-id>` the id of the replica you backed up
 * `<dtr-external-url>`the url that clients use to access DTR
-Starting in DTR 2.6, switching storage backends will erase your existing tags. Make sure to perform a backup 
-before you do so. To restore your metadata, you need to manually create a volume and pass the `--dtr-storage-volume` flag instead. See [kbase article](fixmelink) for more details.
+
+If you're using NFS as a storage backend, also include `--nfs-storage-url` as
+part of your restore command, otherwise DTR is restored but starts using a
+local volume to persist your Docker images.
 
 ### Re-fetch the vulnerability database
 
