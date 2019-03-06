@@ -11,27 +11,32 @@
 #
 # When the image is run, it starts Nginx and serves the docs at port 4000
 
+# Engine
+ARG ENGINE_BRANCH="18.09.x"
+
+# Distribution
+ARG DISTRIBUTION_BRANCH="release/2.6"
+
 # Get basic configs and Jekyll env
 FROM docs/docker.github.io:docs-builder AS builder
 ENV TARGET=/usr/share/nginx/html
 WORKDIR /usr/src/app/md_source/
 
+# Set vars used by fetch-upstream-resources.sh script
+# Branch to pull from, per ref doc. To get master from svn the svn branch needs
+# to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
+ARG ENGINE_BRANCH
+ENV ENGINE_BRANCH=${ENGINE_BRANCH}
+ENV ENGINE_SVN_BRANCH=branches/${ENGINE_BRANCH}
+
+ARG DISTRIBUTION_BRANCH
+ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
+ENV DISTRIBUTION_SVN_BRANCH=branches/${DISTRIBUTION_BRANCH}
+
 # Get the current docs from the checked out branch
 COPY . .
 
 ####### START UPSTREAM RESOURCES ########
-# Set vars used by fetch-upstream-resources.sh script
-## Branch to pull from, per ref doc
-## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
-
-# Engine
-ENV ENGINE_SVN_BRANCH="branches/18.09.x"
-ENV ENGINE_BRANCH="18.09.x"
-
-# Distribution
-ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
-ENV DISTRIBUTION_BRANCH="release/2.6"
-
 # Fetch upstream resources
 RUN bash ./_scripts/fetch-upstream-resources.sh .
 ####### END UPSTREAM RESOURCES ########
