@@ -91,3 +91,7 @@ FROM archives AS deploy
 
 # Add the current version of the docs
 COPY --from=current ${TARGET} ${TARGET}
+
+# Docs without archives (for development)
+FROM deploybase AS dev
+COPY --from=current ${TARGET} ${TARGET}
