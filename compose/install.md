@@ -33,7 +33,7 @@ Python package manager or installing Compose as a container.
 > 
 > The instructions below outline installation of the current stable release
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
-> compose, replace the given release number with the one that you want. Compose
+> Compose, replace the given release number with the one that you want. Compose
 > releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
@@ -71,7 +71,7 @@ install Compose separately. Docker install instructions for these are here:
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 If you are running the Docker daemon and client directly on Microsoft
-Windows Server, follow the instructions in the "Windows Server" tab.
+Windows Server, follow the instructions in the Windows Server tab.
 
 </div>
 <div id="windows-server" class="tab-pane fade in active" markdown="1">
@@ -88,7 +88,7 @@ and want to install Docker Compose.
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
     
-2.  In PowerShell, since Github now requires TLS1.2, run the following:
+2.  In PowerShell, since GitHub now requires TLS1.2, run the following:
     
     ```powershell  
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -120,8 +120,7 @@ and want to install Docker Compose.
 On Linux, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
-running the `curl` command in your terminal to download the binaries. These step
-by step instructions are also included below.
+running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
 
 1.  Run this command to download the current stable release of Docker Compose:
 
@@ -227,7 +226,7 @@ version 1.3, Compose uses Docker labels to keep track of containers, and your
 containers need to be recreated to add the labels.
 
 If Compose detects containers that were created without labels, it refuses
-to run so that you don't end up with two sets of them. If you want to keep using
+to run, so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
 command:
