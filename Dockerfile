@@ -13,16 +13,12 @@
 
 # Get basic configs and Jekyll env
 FROM docs/docker.github.io:docs-builder AS builder
-
-# Set the target again
 ENV TARGET=/usr/share/nginx/html
-
-# Set the source directory to md_source
-ENV SOURCE=md_source
+ENV SOURCE=.
+WORKDIR /usr/src/app/md_source/
 
 # Get the current docs from the checked out branch
-# ${SOURCE} will contain a directory for each archive
-COPY . ${SOURCE}
+COPY . .
 
 ####### START UPSTREAM RESOURCES ########
 # Set vars used by fetch-upstream-resources.sh script
@@ -38,13 +34,13 @@ ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 ENV DISTRIBUTION_BRANCH="release/2.6"
 
 # Fetch upstream resources
-RUN bash ./${SOURCE}/_scripts/fetch-upstream-resources.sh ${SOURCE}
+RUN bash ./_scripts/fetch-upstream-resources.sh .
 ####### END UPSTREAM RESOURCES ########
 
 
 # Build the static HTML, now that everything is in place
 
-RUN jekyll build -s ${SOURCE} -d ${TARGET} --config ${SOURCE}/_config.yml
+RUN jekyll build -d ${TARGET}
 
 # Fix up some links, don't touch the archives
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done

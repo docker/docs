@@ -29,24 +29,10 @@ while getopts ":hl" opt; do
 done
 
 # Do some sanity-checking to make sure we are running this from the right place
-if [ $LOCAL -eq 1 ]; then
-  SOURCE="."
-  if ! [ -f _config.yml ]; then
-    echo "Could not find _config.yml. We may not be in the right place. Bailing."
-    exit 1
-  fi
-else
-  SOURCE="md_source"
-  if ! [ -d md_source ]; then
-    echo "Could not find md_source directory. We may not be running in the right place. Bailing."
-    exit 1
-  fi
-fi
-
-# Reasonable default to find the Markdown files
-if [ -z "$SOURCE" ]; then
-  echo "No source passed in, assuming md_source/..."
-  SOURCE="md_source"
+SOURCE="."
+if ! [ -f _config.yml ]; then
+  echo "Could not find _config.yml. We may not be in the right place. Bailing."
+  exit 1
 fi
 
 echo "Operating on contents of $SOURCE"
