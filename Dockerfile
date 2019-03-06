@@ -14,7 +14,6 @@
 # Get basic configs and Jekyll env
 FROM docs/docker.github.io:docs-builder AS builder
 ENV TARGET=/usr/share/nginx/html
-ENV SOURCE=.
 WORKDIR /usr/src/app/md_source/
 
 # Get the current docs from the checked out branch
