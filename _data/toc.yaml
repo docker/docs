@@ -536,6 +536,12 @@ reference:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
+    - sectiontitle: docker builder *
+      section:
+        - path: /engine/reference/commandline/builder/
+          title: docker builder
+        - path: /engine/reference/commandline/builder_prune/
+          title: docker builder prune
     - sectiontitle: docker checkpoint *
       section:
       - path: /engine/reference/commandline/checkpoint/
