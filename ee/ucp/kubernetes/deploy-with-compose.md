@@ -34,7 +34,7 @@ services:
     ports:
      - "8080:80"
 
- words:
+  words:
     build: words
     image: dockersamples/k8s-wordsmith-api
     deploy:
