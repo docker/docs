@@ -17,6 +17,7 @@ Options:
     -m, --memory MEM        Sets memory limit for the build container.
     --build-arg key=val     Set build-time variables for services.
     --parallel              Build images in parallel.
+    -q, --quiet             Don't print anything to STDOUT.
 ```
 
 Services are built once and then tagged, by default as `project_service`. For
