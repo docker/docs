@@ -134,8 +134,6 @@ wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.gith
 # Get a few one-off files that we use directly from upstream
 wget --quiet --directory-prefix=./engine/reference/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/reference/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md     || (echo "Failed engine/reference/run.md download" && exit 1)
-# Adjust this one when Edge != Stable
-wget --quiet --directory-prefix=./edge/engine/reference/        https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md             || (echo "Failed engine/reference/run.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/cli.md || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                || (echo "Failed engine/deprecated.md download" && exit 1)
 wget --quiet --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                   || (echo "Failed registry/configuration.md download" && exit 1)
