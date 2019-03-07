@@ -70,6 +70,7 @@ FROM builderbase AS upstream-resources
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
 COPY ./_config.yml .
 COPY ./_data/toc.yaml ./_data/
+COPY ./_samples/boilerplate.txt ./_samples/
 RUN bash ./_scripts/fetch-upstream-resources.sh .
 
 
