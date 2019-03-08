@@ -230,6 +230,7 @@ trusted sources, with repositories and tags signed with the commands [above](#si
 
 Engine Signature Verification prevents the following:
 * `$ docker container run` of an unsigned image.
+* `$ docker pull` of an unsigned image.
 * `$ docker build` where the `FROM` image is not signed or is not scratch.
 
 DCT does not verify that a running container’s filesystem has not been altered 
