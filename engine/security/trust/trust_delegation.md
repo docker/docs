@@ -45,6 +45,35 @@ WARN[0000] Error while downloading remote metadata, using cached timestamp - thi
 [...]
 ```
 
+If you have enabled Authentication for your Notary Server, or are using Docker
+Trusted Registry, you will need to login before you can push data to the Notary
+Server. 
+
+```
+$ docker login dtr.example.com/user/repo
+Username: admin
+Password:
+
+Login Succeeded
+
+$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
+Adding signer "jeff" to dtr.example.com/user/repo...
+Initializing signed repository for dtr.example.com/user/repo...
+Successfully initialized "dtr.example.com/user/repo"
+Successfully added signer: jeff to dtr.example.com/user/repo
+```
+
+If you do not login, you will see:
+
+```bash
+$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
+Adding signer "jeff" to dtr.example.com/user/repo...
+Initializing signed repository for dtr.example.com/user/repo...
+you are not authorized to perform this operation: server returned 401.
+
+Failed to add signer to: dtr.example.com/user/repo
+```
+
 ## Configuring the Notary Client
 
 Some of the more advanced features of DCT require the Notary CLI. To install and 
