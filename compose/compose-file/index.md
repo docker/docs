@@ -2135,6 +2135,9 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
+If you want to use a particular network on a common build then use [network] as 
+mentioned in the second yaml file example.  
+
 The syntax for using built-in networks like `host` and `none` is a little
 different. Define an external network with the name `host` or `none` (that
 Docker has already created automatically) and an alias that Compose can use
@@ -2152,6 +2155,17 @@ networks:
   hostnet:
     external: true
     name: host
+```
+
+```yaml
+services:
+  web:
+    ...
+    build:
+      ...
+      network: host
+      context: .
+      ...
 ```
 
 ```yaml
