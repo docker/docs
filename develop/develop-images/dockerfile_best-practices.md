@@ -541,11 +541,10 @@ FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
-CMD sh
 ```
 
 ```bash
-$ docker run --rm -it test sh echo $ADMIN_USER
+$ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
 ```
@@ -567,7 +566,7 @@ CMD sh
 ```
 
 ```bash
-$ docker run --rm -it test sh echo $ADMIN_USER
+$ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
 
