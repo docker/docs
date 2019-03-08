@@ -435,6 +435,10 @@ look:
 >
 > - Port 7946 TCP/UDP for container network discovery.
 > - Port 4789 UDP for the container ingress network.
+>
+> Double check what you have in the ports section under your web
+> service and make sure the ip addresses you enter in your browser
+> or curl reflects that
 
 ## Iterating and scaling your app
 
