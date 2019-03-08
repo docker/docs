@@ -143,4 +143,5 @@ provider console, Machine loses track of the server status. Use the
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
+-   [Create containers for your Docker Machine](../../get-started/part2.md)
 -   [Provision a Docker Swarm cluster with Docker Machine](/swarm/provision-with-machine.md)
