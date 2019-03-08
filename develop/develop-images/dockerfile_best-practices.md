@@ -101,37 +101,146 @@ Sending build context to Docker daemon  187.8MB
 
 ### Pipe Dockerfile through `stdin`
 
-Docker 17.05 added the ability to build images by piping `Dockerfile` through
-`stdin` with a _local or remote build-context_. In earlier versions, building an
-image with a `Dockerfile` from `stdin` did not send the build-context.
+Docker has the ability to build images by piping `Dockerfile` through `stdin`
+with a _local or remote build context_. Piping a `Dockerfile` through `stdin`
+can be useful to perform one-off builds without writing a Dockerfile to disk,
+or in situations where the `Dockerfile` is generated, and should not persist
+afterwards.
 
-**Docker 17.04 and lower**
+> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> for convenience, but any method to provide the `Dockerfile` on `stdin` can be
+> used.
+> 
+> For example, the following commands are equivalent: 
+> 
+> ```bash
+> echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
+> ```
+> 
+> ```bash
+> docker build -<<EOF
+> FROM busybox
+> RUN echo "hello world"
+> EOF
+> ```
+> 
+> You can substitute the examples with your preferred approach, or the approach
+> that best fits your use-case.
 
+
+#### Build an image using a Dockerfile from stdin, without sending build context
+
+Use this syntax to build an image using a `Dockerfile` from `stdin`, without
+sending additional files as build context. The hyphen (`-`) takes the position
+of the `PATH`, and instructs Docker to read the build context (which only
+contains a `Dockerfile`) from `stdin` instead of a directory:
+
+```bash
+docker build [OPTIONS] -
 ```
-docker build -t foo -<<EOF
+
+The following example builds an image using a `Dockerfile` that is passed through
+`stdin`. No files are sent as build context to the daemon.
+
+```bash
+docker build -t myimage:latest -<<EOF
 FROM busybox
 RUN echo "hello world"
 EOF
 ```
 
-**Docker 17.05 and higher (local build-context)**
+Omitting the build context can be useful in situations where your `Dockerfile`
+does not require files to be copied into the image, and improves the build-speed,
+as no files are sent to the daemon.
 
+If you want to improve the build-speed by excluding _some_ files from the build-
+context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
+
+> **Note**: Attempting to build a Dockerfile that uses `COPY` or `ADD` will fail
+> if this syntax is used. The following example illustrates this:
+> 
+> ```bash
+> # create a directory to work in
+> mkdir example
+> cd example
+> 
+> # create an example file
+> touch somefile.txt
+> 
+> docker build -t myimage:latest -<<EOF
+> FROM busybox
+> COPY somefile.txt .
+> RUN cat /somefile.txt
+> EOF
+> 
+> # observe that the build fails
+> ...
+> Step 2/3 : COPY somefile.txt .
+> COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
+> ```
+
+#### Build from a local build context, using a Dockerfile from stdin
+
+Use this syntax to build an image using files on your local filesystem, but using
+a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
+specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
+Docker to read the `Dockerfile` from `stdin`:
+
+```bash
+docker build [OPTIONS] -f- PATH
 ```
-docker build -t foo . -f-<<EOF
+
+The example below uses the current directory (`.`) as the build context, and builds
+an image using a `Dockerfile` that is passed through `stdin` using a [here
+document](http://tldp.org/LDP/abs/html/here-docs.html).
+
+```bash
+# create a directory to work in
+mkdir example
+cd example
+
+# create an example file
+touch somefile.txt
+
+# build and image using the current directory as context, and a Dockerfile passed through stdin
+docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-RUN echo "hello world"
-COPY . /my-copied-files
+COPY somefile.txt .
+RUN cat /somefile.txt
 EOF
 ```
 
-**Docker 17.05 and higher (remote build-context)**
+#### Build from a remote build context, using a Dockerfile from stdin
 
+Use this syntax to build an image using files from a remote `git` repository, 
+using a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
+specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
+Docker to read the `Dockerfile` from `stdin`:
+
+```bash
+docker build [OPTIONS] -f- PATH
 ```
-docker build -t foo https://github.com/thajeztah/pgadmin4-docker.git -f-<<EOF
+
+This syntax can be useful in situations where you want to build an image from a
+repository does not contain a `Dockerfile`, or if you want to build with a custom
+`Dockerfile`, without maintaining your own fork of the repository.
+
+The example below builds an image using a `Dockerfile` from `stdin`, and adds
+the `README.md` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
+
+```bash
+docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY LICENSE config_distro.py /usr/local/lib/python2.7/site-packages/pgadmin4/
+COPY README.md .
 EOF
 ```
+
+> **Under the hood**
+>
+> When building an image using a remote Git repository as build context, Docker 
+> performs a `git clone` of the repository on the local machine, and sends
+> those files as build context to the daemon. This feature requires `git` to be
+> installed on the host where you run the `docker build` command.
 
 ### Exclude with .dockerignore
 
@@ -142,9 +251,9 @@ similar to `.gitignore` files. For information on creating one, see the
 
 ### Use multi-stage builds
 
-[Multi-stage builds](multistage-build.md) (in [Docker 17.05](/release-notes/docker-ce/#17050-ce-2017-05-04) or higher)
-allow you to drastically reduce the size of your final image, without struggling
-to reduce the number of intermediate layers and files.
+[Multi-stage builds](multistage-build.md) allow you to drastically reduce the
+size of your final image, without struggling to reduce the number of intermediate
+layers and files.
 
 Because an image is built during the final stage of the build process, you can
 minimize image layers by [leveraging build cache](#leverage-build-cache).
@@ -220,14 +329,13 @@ In older versions of Docker, it was important that you minimized the number of
 layers in your images to ensure they were performant. The following features
 were added to reduce this limitation:
 
-- In Docker 1.10 and higher, only the instructions `RUN`, `COPY`, `ADD` create
-  layers. Other instructions create temporary intermediate images, and do not
-  directly increase the size of the build.
+- Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
+  create temporary intermediate images, and do not increase the size of the build.
 
-- In Docker 17.05 and higher, you can do [multi-stage builds](multistage-build.md)
-  and only copy the artifacts you need into the final image. This allows you to
-  include tools and debug information in your intermediate build stages without
-  increasing the size of the final image.
+- Where possible, use [multi-stage builds](multistage-build.md), and only copy
+  the artifacts you need into the final image. This allows you to include tools
+  and debug information in your intermediate build stages without increasing the
+  size of the final image.
 
 ### Sort multi-line arguments
 
