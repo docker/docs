@@ -246,7 +246,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 
 ### Deprecation Notice
 
-As of EE 2.2, Docker will deprecate support for Device Mapper as a storage driver. It will continue to be supported at this 
+As of EE 2.1, Docker has deprecated support for Device Mapper as a storage driver. It will continue to be supported at this 
 time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
 EE 2.0 and 2.1 customers. Please contact Sales for more information.
 

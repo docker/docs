@@ -406,9 +406,9 @@ limitations with regard to networking due to the current implementation of
 Windows NAT (WinNAT). These limitations may potentially resolve as the Windows
 containers project evolves.
 
-One thing you may encounter rather immediately is that published ports on
-Windows containers do not do loopback to the local host. Instead, container
-endpoints are only reachable from the host using the container's IP and port.
+Windows containers work with published ports on localhost beginning with Windows 10 1809 using Docker Desktop for Windows as well as Windows Server 2019 / 1809 using Docker EE.
+
+If you are working with a version prior to `Windows 10 18.09`, published ports on Windows containers have an issue with loopback to the localhost. You can only reach container endpoints from the host using the container's IP and port. With `Windows 10 18.09`, containers work with published ports on localhost.
 
 So, in a scenario where you use Docker to pull an image and run a webserver with
 a command like this:

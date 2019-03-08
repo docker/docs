@@ -726,8 +726,8 @@ Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
-50M of memory and `0.50` (50%) of available processing time (CPU), and has
-`20M` of memory and `0.25` CPU time reserved (as always available to it).
+50M of memory and `0.50` (50% of a single core) of available processing time (CPU), 
+and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```none
 version: '3'
@@ -1888,7 +1888,7 @@ volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](/engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
 
     user: postgresql
     working_dir: /code

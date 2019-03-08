@@ -2,8 +2,6 @@
 title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production.
 keywords: Universal Control Plane, UCP, install, Docker EE
-redirect_from:
-  - /datacenter/ucp/3.0/guides/admin/install/
 ---
 
 Docker Universal Control Plane (UCP) is a containerized application that you

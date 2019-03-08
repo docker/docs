@@ -1,7 +1,6 @@
 ---
 title: Layer 7 routing
-description: Learn how to route traffic to your Kubernetes workloads in
-  Docker Enterprise Edition.
+description: Learn how to route traffic to your Kubernetes workloads in Docker Enterprise Edition.
 keywords: UCP, Kubernetes, ingress, routing
 redirect_from:
   - /ee/ucp/kubernetes/deploy-ingress-controller/
@@ -24,4 +23,3 @@ A popular ingress controller within the Kubernetes Community is the [NGINX contr
 Learn about [ingress in Kubernetes](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/ingress/). 
 
 For an example of a YAML NGINX kube ingress deployment, refer to <https://success.docker.com/article/how-to-configure-a-default-tls-certificate-for-the-kubernetes-nginx-ingress-controller>.
-
