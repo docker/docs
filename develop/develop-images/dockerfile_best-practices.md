@@ -22,8 +22,8 @@ A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
-```conf
-FROM ubuntu:15.04
+```Dockerfile
+FROM ubuntu:18.04
 COPY . /app
 RUN make /app
 CMD python /app/app.py
@@ -31,7 +31,7 @@ CMD python /app/app.py
 
 Each instruction creates one layer:
 
-- `FROM` creates a layer from the `ubuntu:15.04` Docker image.
+- `FROM` creates a layer from the `ubuntu:18.04` Docker image.
 - `COPY` adds files from your Docker client's current directory.
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
@@ -270,8 +270,8 @@ frequently changed:
 
 A Dockerfile for a Go application could look like:
 
-```
-FROM golang:1.9.2-alpine3.6 AS build
+```Dockerfile
+FROM golang:1.11-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -346,12 +346,14 @@ review. Adding a space before a backslash (`\`) helps as well.
 
 Here’s an example from the [`buildpack-deps` image](https://github.com/docker-library/buildpack-deps):
 
-    RUN apt-get update && apt-get install -y \
-      bzr \
-      cvs \
-      git \
-      mercurial \
-      subversion
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion
+```
 
 ### Leverage build cache
 
@@ -416,7 +418,7 @@ The following examples show the different acceptable formats. Explanatory commen
 > Strings with spaces must be quoted **or** the spaces must be escaped. Inner
 > quote characters (`"`), must also be escaped.
 
-```conf
+```Dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -430,14 +432,14 @@ to combine all labels into a single `LABEL` instruction, to prevent extra layers
 from being created. This is no longer necessary, but combining labels is still
 supported.
 
-```conf
+```Dockerfile
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 
 The above can also be written as:
 
-```conf
+```Dockerfile
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -476,26 +478,31 @@ know there is a particular package, `foo`, that needs to be updated, use
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
-        RUN apt-get update && apt-get install -y \
-            package-bar \
-            package-baz \
-            package-foo
-
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo
+```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
 subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
-        FROM ubuntu:14.04
-        RUN apt-get update
-        RUN apt-get install -y curl
+```Dockerfile
+FROM ubuntu:18.04
+RUN apt-get update
+RUN apt-get install -y curl
+```
 
 After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
-        FROM ubuntu:14.04
-        RUN apt-get update
-        RUN apt-get install -y curl nginx
+```Dockerfile
+FROM ubuntu:18.04
+RUN apt-get update
+RUN apt-get install -y curl nginx
+```
 
 Docker sees the initial and modified instructions as identical and reuses the
 cache from previous steps. As a result the `apt-get update` is _not_ executed
@@ -509,10 +516,12 @@ intervention. This technique is known as "cache busting". You can also achieve
 cache-busting by specifying a package version. This is known as version pinning,
 for example:
 
-        RUN apt-get update && apt-get install -y \
-            package-bar \
-            package-baz \
-            package-foo=1.3.*
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo=1.3.*
+```
 
 Version pinning forces the build to retrieve a particular version regardless of
 what’s in the cache. This technique can also reduce failures due to unanticipated changes
@@ -521,20 +530,22 @@ in required packages.
 Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
 recommendations.
 
-    RUN apt-get update && apt-get install -y \
-        aufs-tools \
-        automake \
-        build-essential \
-        curl \
-        dpkg-sig \
-        libcap-dev \
-        libsqlite3-dev \
-        mercurial \
-        reprepro \
-        ruby1.9.1 \
-        ruby1.9.1-dev \
-        s3cmd=1.1.* \
-     && rm -rf /var/lib/apt/lists/*
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    aufs-tools \
+    automake \
+    build-essential \
+    curl \
+    dpkg-sig \
+    libcap-dev \
+    libsqlite3-dev \
+    mercurial \
+    reprepro \
+    ruby1.9.1 \
+    ruby1.9.1-dev \
+    s3cmd=1.1.* \
+ && rm -rf /var/lib/apt/lists/*
+```
 
 The `s3cmd` argument specifies a version `1.1.*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
@@ -630,10 +641,12 @@ variables specific to services you wish to containerize, such as Postgres’s
 Lastly, `ENV` can also be used to set commonly used version numbers so that
 version bumps are easier to maintain, as seen in the following example:
 
-    ENV PG_MAJOR 9.3
-    ENV PG_VERSION 9.3.4
-    RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
-    ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+```Dockerfile
+ENV PG_MAJOR 9.3
+ENV PG_VERSION 9.3.4
+RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+```
 
 Similar to having constant variables in a program (as opposed to hard-coding
 values), this approach lets you change a single `ENV` instruction to
@@ -699,9 +712,11 @@ the specifically required files change.
 
 For example:
 
-    COPY requirements.txt /tmp/
-    RUN pip install --requirement /tmp/requirements.txt
-    COPY . /tmp/
+```Dockerfile
+COPY requirements.txt /tmp/
+RUN pip install --requirement /tmp/requirements.txt
+COPY . /tmp/
+```
 
 Results in fewer cache invalidations for the `RUN` step, than if you put the
 `COPY . /tmp/` before it.
@@ -712,16 +727,20 @@ delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 
-    ADD http://example.com/big.tar.xz /usr/src/things/
-    RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
-    RUN make -C /usr/src/things all
+```Dockerfile
+ADD http://example.com/big.tar.xz /usr/src/things/
+RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
+RUN make -C /usr/src/things all
+```
 
 And instead, do something like:
 
-    RUN mkdir -p /usr/src/things \
-        && curl -SL http://example.com/big.tar.xz \
-        | tar -xJC /usr/src/things \
-        && make -C /usr/src/things all
+```Dockerfile
+RUN mkdir -p /usr/src/things \
+    && curl -SL http://example.com/big.tar.xz \
+    | tar -xJC /usr/src/things \
+    && make -C /usr/src/things all
+```
 
 For other items (files, directories) that do not require `ADD`’s tar
 auto-extraction capability, you should always use `COPY`.
@@ -736,16 +755,22 @@ default flags).
 
 Let's start with an example of an image for the command line tool `s3cmd`:
 
-    ENTRYPOINT ["s3cmd"]
-    CMD ["--help"]
+```Dockerfile
+ENTRYPOINT ["s3cmd"]
+CMD ["--help"]
+```
 
 Now the image can be run like this to show the command's help:
 
-    $ docker run s3cmd
+```bash
+$ docker run s3cmd
+```
 
 Or using the right parameters to execute a command:
 
-    $ docker run s3cmd ls s3://mybucket
+```bash
+$ docker run s3cmd ls s3://mybucket
+```
 
 This is useful because the image name can double as a reference to the binary as
 shown in the command above.
@@ -784,23 +809,31 @@ exec "$@"
 The helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
 
-    COPY ./docker-entrypoint.sh /
-    ENTRYPOINT ["/docker-entrypoint.sh"]
-    CMD ["postgres"]
+```Dockerfile
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["postgres"]
+```
 
 This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-    $ docker run postgres
+```bash
+$ docker run postgres
+```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-    $ docker run postgres postgres --help
+```bash
+$ docker run postgres postgres --help
+```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-    $ docker run --rm -it postgres bash
+```bash
+$ docker run --rm -it postgres bash
+```
 
 ### VOLUME
 
