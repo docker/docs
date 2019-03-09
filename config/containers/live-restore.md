@@ -34,7 +34,7 @@ when the daemon becomes unavailable. **Only do one of the following**.
     ```
 
   - Restart the Docker daemon. On Linux, you can avoid a restart (and avoid any
-    downtime for your containers) by reload the Docker daemon. If you use
+    downtime for your containers) by reloading the Docker daemon. If you use
     `systemd`, then use the command `systemctl reload docker`. Otherwise, send a
     `SIGHUP` signal to the `dockerd` process.
 

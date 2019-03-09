@@ -18,6 +18,18 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.3.0 2019-03-05
+
+[Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
+
+* Bug fixes and minor changes
+  - Fixed docker not added to PATH after install in some cases
+  - Fixed port 8080 that was used on localhost when starting Kubernetes.
+  - Fixed "create issue" link in diagnostics windows.
+
 ### Docker Community Edition 2.0.2.1 2019-02-15
 
 [Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)

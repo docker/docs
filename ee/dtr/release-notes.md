@@ -43,6 +43,10 @@ to upgrade your installation to the latest release.
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
   * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+  * Changing your S3 settings through the web interface will lead to erased metadata (ENGDTR-793). See [Restore to Cloud Storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretocloudstorage) for Docker's recommended recovery strategy.
+
+* CLI
+  * When reconfiguring and restoring DTR, specifying `--nfs-storage-url` will assume you are switching to a fresh storage backend and will wipe your existing tags (ENGDTR-794). See [Reconfigure Using a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) and [Restore to a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume) for Docker's recommended recovery strategies.
 
 * Webhooks
   * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
@@ -69,6 +73,10 @@ to upgrade your installation to the latest release.
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
   * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+  * Changing your S3 settings through the web interface will lead to erased metadata (ENGDTR-793). See [Restore to Cloud Storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretocloudstorage) for Docker's recommended recovery strategy.
+
+* CLI
+  * When reconfiguring and restoring DTR, specifying `--nfs-storage-url` will assume you are switching to a fresh storage backend and will wipe your existing tags (ENGDTR-794). See [Reconfigure Using a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) and [Restore to a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume) for Docker's recommended recovery strategies.
 
 * Webhooks
   * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
@@ -100,6 +108,10 @@ to upgrade your installation to the latest release.
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
   * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+  * Changing your S3 settings through the web interface will lead to erased metadata (ENGDTR-793). See [Restore to Cloud Storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretocloudstorage) for Docker's recommended recovery strategy.
+
+* CLI
+  * When reconfiguring and restoring DTR, specifying `--nfs-storage-url` will assume you are switching to a fresh storage backend and will wipe your existing tags (ENGDTR-794). See [Reconfigure Using a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) and [Restore to a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume) for  Docker's recommended recovery strategies.
 
 * Webhooks
   * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
@@ -150,6 +162,10 @@ to upgrade your installation to the latest release.
   * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
   * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
   * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+  * Changing your S3 settings through the web interface will lead to erased metadata (ENGDTR-793). See [Restore to Cloud Storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretocloudstorage) for Docker's recommended recovery strategy.
+
+* CLI
+  * When reconfiguring and restoring DTR, specifying `--nfs-storage-url` will assume you are switching to a fresh storage backend and will wipe your existing tags (ENGDTR-794). See [Reconfigure Using a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) and [Restore to a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume) for Docker's recommended recovery strategies.
 
 * Webhooks
   * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
