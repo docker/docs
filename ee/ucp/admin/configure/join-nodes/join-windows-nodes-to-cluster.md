@@ -231,4 +231,4 @@ Some features are not yet supported on Windows nodes:
 
 ## Known Issues
 
-* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
+Refer to the [Docker EE UCP release notes](/ee/ucp/release-notes) for Known Issues information.
