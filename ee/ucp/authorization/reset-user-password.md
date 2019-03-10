@@ -30,10 +30,7 @@ or SSH into a Docker Enterprise [manager node](/engine/swarm/how-swarm-mode-work
 
 ```none
 {% raw %}
-docker exec -it ucp-auth-api enzi \
-  "$(docker inspect --format '{{ index .Args 0 }}' ucp-auth-api)" \
-  passwd -i
+docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 1 }}' ucp-auth-api)" passwd -i
+Admin Username:
 {% endraw %}
 ```
-
-**NOTE**:  If you have `DEBUG` set as your global log level within UCP, running `$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}` returns `--debug` instead of `--db-addr`. Change `.Args 0` to `.Args 1` or exit debug mode before changing administrator passwords.
