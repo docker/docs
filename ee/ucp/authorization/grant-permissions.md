@@ -58,7 +58,7 @@ To create a grant in UCP:
 1. Click **Grants** under **Access Control**.
 2. Click **Swarm**
 3. Click **Create Grant**.
-4. Select **Subject Type** (Users or Organizations)
+4. In the **Select Subject Type** section, select **Users** or **Organizations**.
 5. Click **View Children** until you get to the desired collection and **Select**.
 6. On the **Roles** tab, select a role.
 7. On the **Subjects** tab, select a user, team, or organization to authorize.
