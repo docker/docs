@@ -25,14 +25,14 @@ upgrade your installation to the latest release.
 
 2019-02-28
 
-**New platforms**
+### New platforms
 * Added support for SLES 15.
 * Added support for Oracle 7.6.
 
- **Kubernetes**
+### Kubernetes
 * Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
 * Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
 * Fixed an issue that caused Windows node ucp-agent(s) to constantly reboot when audit logging is enabled. (docker/orca#16122)
@@ -40,8 +40,30 @@ upgrade your installation to the latest release.
 * Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 * Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
 
-**Enhancements**
+### Enhancements
 * Changed packaging and builds for UCP to build bootstrapper last. This avoids the "upgrade available" banner on all UCPs until the entirety of UCP is available.
+
+### Known Issues
+
+* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
+ * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
+* You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (docker/orca#14935)
+    * For the `User` subject Kind, the `Name` field contains the ID of the user.
+    * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
+        * For an organization, the format is `org:{org-id}`
+        * For a team, the format is `team:{org-id}:{team-id}`
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (docker/orca#14483)
+* Pod Security Policies are not supported in this release. (docker/orca#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
 
 ## 3.1.3
 
