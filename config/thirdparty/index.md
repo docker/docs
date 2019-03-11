@@ -14,4 +14,4 @@ You can configure Docker to use third-party monitoring tools. This topic lists v
 
 * [Datadog Monitoring Solution Brief for Docker Enterprise Edition](https://success.docker.com/article/datadog-monitoring)
 
->**Note**: Docker no longer maintains the previously listed documentation about using `sysdig` and `datadog` from within Docker.
+   >**Note**: Docker no longer maintains the previously listed documentation about using Sysdig and Datadog from within Docker.
