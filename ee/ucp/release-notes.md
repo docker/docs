@@ -569,7 +569,7 @@ potential resource contention issues.
 a UCP client bundle and `kubectl`.
 [Learn more](https://docs.docker.com/ee/ucp/kubernetes/).
 * Users can now use Compose to deploy Kubernetes workloads from the web UI.
-[Lean more](https://docs.docker.com/ee/ucp/kubernetes/deploy-with-compose/).
+[Learn more](https://docs.docker.com/ee/ucp/kubernetes/deploy-with-compose/).
 
 ### Networking
 
@@ -601,7 +601,7 @@ will be available in future releases.
 ### Security
 
 * Role-based access control now supports Kubernetes resources.
-[Lean more](https://docs.docker.com/ee/ucp/authorization/migrate-kubernetes-roles/).
+[Learn more](https://docs.docker.com/ee/ucp/authorization/migrate-kubernetes-roles/).
   * In addition to users, teams, organizations, and grants you can now use
   Kubernetes Service Accounts as a subject type.
   [Learn more](https://docs.docker.com/ee/ucp/kubernetes/create-service-account/).
