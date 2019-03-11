@@ -295,6 +295,10 @@ guides:
     - path: /config/containers/logging/configure/
       title: Configuring default drivers
       nosync: true
+  - sectiontitle: Work with external tools
+    section:
+    - path: /config/thirdparty/
+      title: Third-party monitoring tools
     - path: /config/thirdparty/prometheus/
       title: Collect Docker metrics with Prometheus
   - sectiontitle: Configure containers
