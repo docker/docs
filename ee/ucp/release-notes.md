@@ -45,7 +45,7 @@ upgrade your installation to the latest release.
 
 ### Known Issues
 
-* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
+* Newly added Windows node reports "Awaiting healthy status in classic node inventory". [Learn more](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory).
  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
 * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
