@@ -7,7 +7,7 @@ keywords: routing, proxy
 ## Specifying a routing mode
 You can publish services using "vip" and "task" backend routing modes.
 
-#### Task Routing Mode
+### Task Routing Mode
 
 Task routing is the default Interlock behavior and the default backend mode if one is not specified.
 In task routing mode, Interlock uses backend task IPs to route traffic from the proxy to each container.
@@ -17,7 +17,7 @@ Task routing mode applies L7 routing and then sends packets directly to a contai
 
 ![task mode](../../images/interlock-task-mode.png)
 
-#### VIP Routing Mode
+### VIP Routing Mode
 
 VIP mode is an alternative mode of routing in which Interlock uses the Swarm service VIP as the backend IP instead of container IPs.
 Traffic to the frontend route is L7 load balanced to the Swarm service VIP, which L4 load balances to backend tasks.
@@ -40,7 +40,7 @@ Because VIP mode routes by service IP rather than by task IP it also affects the
 In task mode a canary service with one task next to an existing service with four tasks represents one out of five total tasks, so the canary will receive 20% of incoming requests.
 By contrast the same canary service in VIP mode will receive 50% of incoming requests, because it represents one out of two total services.
 
-#### Usage
+### Usage
 You can set the backend mode on a per-service basis, which means that some applications can be deployed in task mode, while others are deployed in VIP mode.
 
 The default backend mode is `task`. If a label is set to `task` or a label does not exist, then Interlock uses the `task` routing mode.
@@ -65,7 +65,39 @@ The following two updates still require a proxy reconfiguration (because these a
 - Add/Remove a network on a service
 - Deployment/Deletion of a service
 
-The following example publishes a service using "vip" backend mode.
+#### Publishing a default host service
+
+The following example publishes a service to be a default host. The service responds
+whenever there is a request to a host that is not configured.
+
+First, create an overlay network so that service traffic is isolated and secure:
+
+```bash
+$> docker network create -d overlay demo
+1se1glh749q1i4pw0kf26mfx5
+```
+
+Next, create the initial service:
+
+```bash
+$> docker service create \
+    --name demo-default \
+    --network demo \
+    --detach=false \
+    --replicas=1 \
+    --label com.docker.lb.default_backend=true \
+    --label com.docker.lb.port=8080 \
+    ehazlett/interlock-default-app
+```
+
+Interlock detects when the service is available and publishes it. After tasks are running
+and the proxy service is updated, the application is available via any url that is not
+configured:
+
+
+![Default Backend](../../images/interlock_default_backend.png)
+
+#### Publish a service using "vip" backend mode.
 
 1. Create an overlay network so that service traffic is isolated and secure:
 
