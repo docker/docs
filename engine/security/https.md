@@ -21,12 +21,12 @@ it only connects to servers with a certificate signed by that CA.
 > Advanced topic
 >
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
-> with OpenSSL, x509 and TLS before using it in production.
+> with OpenSSL, x509, and TLS before using it in production.
 {:.important}
 
 ## Create a CA, server and client keys with OpenSSL
 
-> **Note**: replace all instances of `$HOST` in the following example with the
+> **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
 First, on the **Docker daemon's host machine**, generate CA private and public keys:
@@ -60,7 +60,7 @@ Now that you have a CA, you can create a server key and certificate
 signing request (CSR). Make sure that "Common Name" matches the hostname you use
 to connect to Docker:
 
-> **Note**: replace all instances of `$HOST` in the following example with the
+> **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
     $ openssl genrsa -out server-key.pem 4096
@@ -102,7 +102,7 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 
-> **Note**: for simplicity of the next couple of steps, you may perform this
+> **Note**: For simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
 
     $ openssl genrsa -out key.pem 4096
@@ -160,7 +160,7 @@ certificates and trusted CA:
 > need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
 
-> **Note**: replace all instances of `$HOST` in the following example with the
+> **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
     $ docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem \
