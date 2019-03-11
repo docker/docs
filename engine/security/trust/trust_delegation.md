@@ -22,8 +22,8 @@ initialize a repository, manage the repository keys, and add a collaborator's ke
 ## Configuring the Docker Client
 
 By default, the `$ docker trust` commands expect the notary server URL to be the
-same as the registry URL specified in the image tag (following similar logic to
-`$ docker push`). When using Docker Hub or DTR, this is the case, the notary
+same as the registry URL specified in the image tag (following a similar logic to
+`$ docker push`). When using Docker Hub or DTR, the notary
 server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
 URL for the notary server. This is done with:
