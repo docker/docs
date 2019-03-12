@@ -17,7 +17,7 @@ before any rules Docker creates automatically.
 
 ### Add a DOCKER-USER filter chain to allow persistent rules 
 This can be useful if you need to pre-populate `iptables` rules that need to be in place before Docker runs. The following example creates a new chain named `FILTERS` in which network traffic from `INPUT` AND `DOCKER-USER` is put.
-
+```
 *filter
 :INPUT ACCEPT [0:0]
 :FORWARD DROP [0:0]
@@ -44,6 +44,8 @@ This can be useful if you need to pre-populate `iptables` rules that need to be 
 -A FILTERS -j REJECT --reject-with icmp-host-prohibited
 
 COMMIT
+```
+
 Load this into the kernel with:
 ```
 iptables-restore -n /etc/iptables.conf
