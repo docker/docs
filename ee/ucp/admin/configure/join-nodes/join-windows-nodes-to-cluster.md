@@ -28,30 +28,13 @@ Docker Enterprise 2.1.
 
 Follow these steps to configure the docker daemon and the Windows environment.
 
-1. Add a label to the node.
-2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
-3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker UCP web interface or CLI.
+1. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
+2. Run the Windows worker setup script provided with `ucp-agent-win`.
+3. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
-Configure the Docker Engine running on the node to have a label. This makes
-it easier to deploy applications on nodes with this label.
-
-Create the file `C:\ProgramData\docker\config\daemon.json` with the following
-content:
-
-```
-{
-  "labels": ["os=windows"]
-}
-```
-
-Restart Docker for the changes to take effect:
-
-```
-Restart-Service docker
-```
+As of Docker Enterprise 2.1, which includes UCP 3.1, this step is no longer necessary. Windows nodes are automatically assigned the `ostype` label `ostype=windows`. 
 
 ### Pull the Windows-specific images
 
@@ -231,4 +214,4 @@ Some features are not yet supported on Windows nodes:
 
 ## Known Issues
 
-* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
+Refer to the [Docker EE UCP release notes](/ee/ucp/release-notes) for Known Issues information.
