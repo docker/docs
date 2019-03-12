@@ -22,7 +22,7 @@ at `https://<SP Host>/enzi/v0/saml/acs`.
 After UCP sends an `AuthnRequest` to the IdP, the following `Assertion`
 is expected:
 
-1. `Subject` includes a `NameID` that is identified as the UCP username.
+- `Subject` includes a `NameID` that is identified as the UCP username.
 In `AuthnRequest`, `NameIDFormat` is set to `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
 This allows maximum compatibility for various Identity Providers.
 
@@ -34,11 +34,11 @@ This allows maximum compatibility for various Identity Providers.
     </saml2:SubjectConfirmation>
 </saml2:Subject>
 ```
-
-2. Optional `Attribute` named `fullname` is mapped to the **Full Name** field
+    
+- Optional `Attribute` named `fullname` is mapped to the **Full Name** field
 in the UCP account.  
 
-   > **Note**: UCP uses the value of the first occurrence of an `Attribute` with `Name="fullname"` as the **Full Name**.
+> **Note**: UCP uses the value of the first occurrence of an `Attribute` with `Name="fullname"` as the **Full Name**.
    
 ```xml
 <saml2:Attribute Name="fullname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified">
@@ -49,10 +49,10 @@ in the UCP account.
 </saml2:Attribute>
 ```
 
-3. Optional `Attribute` named `member-of` is linked to the UCP team.
+- Optional `Attribute` named `member-of` is linked to the UCP team.
 Values are set in the UCP interface. 
 
-   > **Note**: UCP uses all `AttributeStatements` and `Attributes` in the `Assertion` with `Name="member-of"`.
+> **Note**: UCP uses all `AttributeStatements` and `Attributes` in the `Assertion` with `Name="member-of"`.
 
 ```xml
 <saml2:Attribute Name="member-of" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified">
@@ -63,7 +63,7 @@ Values are set in the UCP interface.
 </saml2:Attribute>
 ```
 
-4. Optional `Attribute` named `is-admin` determines if the user is an administrator. The content in the `AttributeValue` is ignored.
+- Optional `Attribute` named `is-admin` determines if the user is an administrator. The content in the `AttributeValue` is ignored.
 
 ```xml
 <saml2:Attribute Name="is-admin" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified">
