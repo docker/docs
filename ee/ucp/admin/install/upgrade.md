@@ -106,6 +106,17 @@ for required configuration values.
 Once the upgrade finishes, navigate to the UCP web interface and make sure that
 all the nodes managed by UCP are healthy.
 
+## Recommended upgrade paths
+
+From UCP 3.0: UCP 3.0 -> UCP 3.1
+From UCP 2.2: UCP 2.2 -> UCP 3.0
+From UCP 2.1: UCP 2.1 -> UCP 2.2
+
+If you’re running a UCP version earlier than 2.1, first upgrade to the latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade path to UCP 2.2:
+
+From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
+From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
+
 ## Where to go next
 
 - [UCP release notes](../../release-notes.md)
