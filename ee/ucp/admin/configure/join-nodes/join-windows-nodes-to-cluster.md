@@ -30,7 +30,9 @@ Follow these steps to configure the docker daemon and the Windows environment.
 2. Run the Windows worker setup script provided with `ucp-agent-win`.
 3. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
-**Note**: Windows nodes are automatically assigned the `ostype` label `ostype=windows`.
+### Add a label to the node
+
+As of Docker Enterprise 2.1, which includes UCP 3.1, this step is no longer necessary. Windows nodes are automatically assigned the `ostype` label `ostype=windows`. 
 
 ### Pull the Windows-specific images
 
