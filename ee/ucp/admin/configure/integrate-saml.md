@@ -35,10 +35,11 @@ This allows maximum compatibility for various Identity Providers.
 </saml2:Subject>
 ```
 
-2. Optional `Attribute` named `fullname` is mapped to the 'Full name' field
+2. Optional `Attribute` named `fullname` is mapped to the **Full Name** field
 in the UCP account.  
 
-   > **Note**: UCP uses the value of the first occurrence of an `Attribute` with `Name="fullname"` as the 'Full name'.
+   > **Note**: UCP uses the value of the first occurrence of an `Attribute` with `Name="fullname"` as the **Full Name**.
+   
 ```xml
 <saml2:Attribute Name="fullname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified">
     <saml2:AttributeValue
@@ -49,7 +50,7 @@ in the UCP account.
 ```
 
 3. Optional `Attribute` named `member-of` is linked to the UCP team.
-Values are set in the UCP team UI. 
+Values are set in the UCP interface. 
 
    > **Note**: UCP uses all `AttributeStatements` and `Attributes` in the `Assertion` with `Name="member-of"`.
 
@@ -61,6 +62,7 @@ Values are set in the UCP team UI.
     </saml2:AttributeValue>
 </saml2:Attribute>
 ```
+
 4. Optional `Attribute` named `is-admin` determines if the user is an administrator. The content in the `AttributeValue` is ignored.
 
 ```xml
