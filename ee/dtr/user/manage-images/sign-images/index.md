@@ -71,11 +71,7 @@ your image. In this example we've created the `prod/nginx` repository.
 
 As part of initiating the repository, we will add the public key of the UCP User
 as a signer. You will be asked for a number of passphrases to protect the keys.
-<<<<<<< HEAD
 Make a note of these passphrases, and see [Managing Delegations in a Notary Server](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
-=======
-Make a note of these passphrases, and see [Managing Delegations in a Notary Server] (/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
->>>>>>> f5e93c6e2a... Fix link texts
 to learn more about managing keys.
 
 
