@@ -9,7 +9,7 @@ redirect_from:
 For more advanced deployments, you may want to share one Docker Trusted Registry
 across multiple Universal Control Planes. However, customers wanting to adopt
 this model alongside the [Only Run Signed
-Images](../.../../ucp/admin/configure/run-only-the-images-you-trust.md) UCP feature, run into problems as each UCP operates an independent set of users.
+Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md) UCP feature, run into problems as each UCP operates an independent set of users.
 
 Docker Content Trust (DCT) gets around this problem, since users from
 a remote UCP are able to sign images in the central DTR and still apply runtime
@@ -27,7 +27,7 @@ cluster separately.
 > Before attempting this guide, familiarize yourself with [Docker Content
 > Trust](engine/security/trust/content_trust/#signing-images-with-docker-content-trust)
 > and [Only Run Signed
-> Images](../.../../ucp/admin/configure/run-only-the-images-you-trust.md) on a
+> Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md) on a
 > single UCP. Many of the concepts within this guide may be new without that
 > background. 
 
@@ -42,7 +42,7 @@ cluster separately.
 - The DTR TLS Certificate needs be properly configured, ensuring that the
   **Loadbalancer/Public Address** field has been configured, with this address
   included [within the
-  certificate](../../../admin/configure/use-your-own-tls-certificates/).
+  certificate](/ee/dtr/admin/configure/use-your-own-tls-certificates/).
 - A machine with the [Docker Client](/ee/ucp/user-access/cli/) (CE 17.12 /
   EE 1803 or newer) installed, as this contains the relevant `$ docker trust`
   commands. 
@@ -62,7 +62,7 @@ a local UCP, or cluster 1.
 > if the repository is private. See
 > [Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token)
 > or [Docker
-> Swarm](https://docs.docker.com/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry) examples.
+> Swarm](/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry) examples.
 
 To add a new registry, retrieve the Certificate
 Authority (CA) used to sign the DTR TLS Certificate through the DTR URL's
@@ -220,9 +220,7 @@ nqsph0n6lv9u        laughing_lamarr         replicated          1/1             
 
 If the image is stored in a private repository within DTR, you need to pass credentials to the
 Orchestrator as there is no SSO between cluster 2 and DTR. See the relevant
-[Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token) or [Docker
-   Swarm](https://docs.docker.com/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry)
-   documentation for more details.
+[Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token) or [Docker Swarm](/engine/swarm/services/#create-a-service-using-an-image-on-a-private-registry) documentation for more details.
 
 ### Example Errors
 

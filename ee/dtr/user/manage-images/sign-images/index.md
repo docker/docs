@@ -71,9 +71,12 @@ your image. In this example we've created the `prod/nginx` repository.
 
 As part of initiating the repository, we will add the public key of the UCP User
 as a signer. You will be asked for a number of passphrases to protect the keys.
-Please keep note of these passphrases, and to learn more about managing keys
-head to the Docker Content Trust documentation
-[here](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server).
+<<<<<<< HEAD
+Make a note of these passphrases, and see [Managing Delegations in a Notary Server](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
+=======
+Make a note of these passphrases, and see [Managing Delegations in a Notary Server] (/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
+>>>>>>> f5e93c6e2a... Fix link texts
+to learn more about managing keys.
 
 
 ```bash
@@ -215,7 +218,7 @@ Administrative keys for dtr.example.com/prod/nginx:1
   Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
 ```
 
-For more advanced use cases like this, more information can be found [here](/engine/security/trust/trust_delegation/) 
+For more advanced use cases like this, see [Delegations for content trust](/engine/security/trust/trust_delegation/).
 
 ## Delete trust data
 
