@@ -18,6 +18,8 @@ quick access to a test container.
 
 __Note: Replace "THEPASSWORDYOUCREATED" with the password that you created in the previous step.__
 
+> *** NOTE: *** For Ubuntu 14.04, use  `without-password` instead of `prohibit-password`.
+
 ```Dockerfile
 FROM ubuntu:16.04
 
@@ -35,6 +37,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 ```
+
 
 Build the image using:
 
