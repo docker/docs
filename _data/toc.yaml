@@ -3493,28 +3493,6 @@ manuals:
       nosync: true
 - sectiontitle: Superseded products and tools
   section:
-  - sectiontitle: Commercially supported Docker Engine
-    section:
-    - sectiontitle: 1.13
-      section:
-      - path: /cs-engine/1.13/
-        title: Install
-      - path: /cs-engine/1.13/upgrade/
-        title: Upgrade
-      - path: /cs-engine/1.13/release-notes/
-        title: Release notes
-    - sectiontitle: 1.12
-      section:
-      - path: /cs-engine/1.12/
-        title: Install
-      - path: /cs-engine/1.12/upgrade/
-        title: Upgrade
-      - sectiontitle: Release notes
-        section:
-        - path: /cs-engine/1.12/release-notes/release-notes/
-          title: CS Engine release notes
-        - path: /cs-engine/1.12/release-notes/prior-release-notes/
-          title: Prior CS Engine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
