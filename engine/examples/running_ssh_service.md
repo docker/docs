@@ -18,7 +18,7 @@ quick access to a test container.
 
 __Note: Replace "THEPASSWORDYOUCREATED" with the password that you created in the previous step.__
 
-> *** NOTE: *** For Ubuntu 14.04, use  `without-password` instead of `prohibit-password`.
+> ** Note**: Use `without-password` instead of `prohibit-password` for Ubuntu 14.04.
 
 ```Dockerfile
 FROM ubuntu:16.04
