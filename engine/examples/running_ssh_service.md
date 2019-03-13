@@ -39,9 +39,12 @@ CMD ["/usr/sbin/sshd", "-D"]
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 NOTE: use  `without-password` instead of `prohibit-password` for Ubuntu 14.04.
 >>>>>>> 9de3c4e47c... Update running_ssh_service.md
+=======
+>>>>>>> 2ebcae3230... Update running_ssh_service.md
 
 Build the image using:
 
