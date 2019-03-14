@@ -9,7 +9,7 @@ The layer 7 solution that ships out of the box with UCP is highly available
 and fault tolerant. It is also designed to work independently of how many
 nodes you're managing with UCP.
 
-![production deployment](../../images/interlock-deploy-production-1.svg)
+![production deployment](../../../images/interlock-deploy-production-1.svg)
 
 For a production-grade deployment, you should tune the default deployment to
 have two nodes dedicated for running the two replicas of the

@@ -9,7 +9,7 @@ The default proxy service used by UCP to provide layer 7 routing is NGINX,
 so when users try to access a route that hasn't been configured, they will
 see the default NGINX 404 page.
 
-![Default NGINX page](../../images/interlock-default-service-1.png){: .with-border}
+![Default NGINX page](../../../images/interlock-default-service-1.png){: .with-border}
 
 You can customize this by labelling a service with
 `com.docker.lb.defaul_backend=true`. When users try to access a route that's
@@ -46,5 +46,5 @@ docker stack deploy --compose-file docker-compose.yml demo
 Once users try to access a route that's not configured, they are directed
 to this demo service.
 
-![Custom default page](../../images/interlock-default-service-2.png){: .with-border}
+![Custom default page](../../../images/interlock-default-service-2.png){: .with-border}
 

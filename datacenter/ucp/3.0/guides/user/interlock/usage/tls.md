@@ -35,7 +35,7 @@ the TLS connection. All traffic between the proxy and the swarm service is
 not secured, so you should only use this option if you trust that no one can
 monitor traffic inside services running on your datacenter.
 
-![TLS Termination](../../images/interlock-tls-1.png)
+![TLS Termination](../../../images/interlock-tls-1.png)
 
 Start by getting a private key and certificate for the TLS connection. Make
 sure the Common Name in the certificate matches the name where your service
@@ -119,7 +119,7 @@ Where:
 * `hostname` is the name you used with the `com.docker.lb.hosts` label.
 * `https-port` is the port you've configured in the [UCP settings](../deploy/index.md).
 
-![Browser screenshot](../../images/interlock-tls-2.png){: .with-border}
+![Browser screenshot](../../../images/interlock-tls-2.png){: .with-border}
 
 Since we're using self-sign certificates in this example, client tools like
 browsers display a warning that the connection is insecure.
@@ -148,7 +148,7 @@ was aborterd.
 
 You can also  encrypt the traffic from end-users to your swarm service.
 
-![End-to-end encryption](../../images/interlock-tls-3.png)
+![End-to-end encryption](../../../images/interlock-tls-3.png)
 
 
 To do that, deploy your swarm service using the following docker-compose.yml file:
