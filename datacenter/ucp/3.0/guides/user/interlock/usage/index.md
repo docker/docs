@@ -91,5 +91,5 @@ Make sure the `/etc/hosts` file in your system has an entry mapping
 `app.example.org` to the IP address of a UCP node. Once you do that, you'll be
 able to start using the service from your browser.
 
-![browser](../../images/route-simple-app-1.png){: .with-border }
+![browser](../../../images/route-simple-app-1.png){: .with-border }
 
