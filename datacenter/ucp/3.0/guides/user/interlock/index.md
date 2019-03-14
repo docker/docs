@@ -8,7 +8,7 @@ Docker Engine running in swarm mode has a routing mesh, which makes it easy
 to expose your services to the outside world. Since all nodes participate
 in the routing mesh, users can access your service by contacting any node.
 
-![swarm routing mess](../images/interlock-overview-1.svg)
+![swarm routing mess](../../images/interlock-overview-1.svg)
 
 In this example the WordPress service is listening on port 8000 of the routing
 mesh. Even though the service is running on a single node, users can access
@@ -21,7 +21,7 @@ instead of IP addresses.
 
 This functionality is made available through the Interlock component.
 
-![layer 7 routing](../images/interlock-overview-2.svg)
+![layer 7 routing](../../images/interlock-overview-2.svg)
 
 In this example, users can access the WordPress service using
 `http://wordpress.example.org`. Interlock takes care of routing traffic to
