@@ -505,3 +505,4 @@ No signatures or cannot access dtr.example.com/admin/demo
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
+* [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp.md)
