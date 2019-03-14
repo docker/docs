@@ -103,6 +103,8 @@ installer.
 
 1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
 
+> **Note**: To continue with the latest version of Docker Toolbox, see https://github.com/docker/toolbox/releases for information about downloading the latest version and related components. If you choose to download from this location, an unsigned warning (verified publisher dialog) is displayed. 
+
 2. Click the installer link to download.
 
 3. Install Docker Toolbox by double-clicking the installer.
