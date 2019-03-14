@@ -20,7 +20,7 @@ proxy services.
 This is what the default configuration looks like, once you enable layer 7
 routing in UCP:
 
-![](../images/interlock-architecture-1.svg)
+![](../../images/interlock-architecture-1.svg)
 
 An Interlock service starts running on a manager node, an Interlock-extension
 service starts running on a worker node, and two replicas of the
