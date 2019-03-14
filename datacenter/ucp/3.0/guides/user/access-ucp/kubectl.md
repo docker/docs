@@ -34,7 +34,7 @@ within the Universal Control Plane dashboard or at the UCP API endpoint [version
 From the UCP dashboard, click on **About Docker EE** within the **Admin** menu in the top left corner
  of the dashboard. Then navigate to **Kubernetes**.
 
- ![Find Kubernetes version](../images/kubernetes-version.png){: .with-border}
+ ![Find Kubernetes version](../../images/kubernetes-version.png){: .with-border}
 
 Once you have the Kubernetes version, install the kubectl client for the relevant
 operating system.
