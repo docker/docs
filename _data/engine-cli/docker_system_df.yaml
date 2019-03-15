@@ -66,7 +66,11 @@ examples: |-
   
   Build cache usage: 0B
 
+ 
   CACHE ID            CACHE TYPE          SIZE                CREATED             LAST USED           USAGE               SHARED
+  0d8ab63ff30d        regular             4.34MB              7 days ago                              0                   true
+  189876ac9226        regular             11.5MB              7 days ago                              0                   true
+
   ```
 
   * `SHARED SIZE` is the amount of space that an image shares with another one (i.e. their common data)
