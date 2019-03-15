@@ -377,7 +377,7 @@ Here are some steps to take if you encounter similar problems:
 ### Windows containers and Windows Server 2016
 
 Docker Desktop is not supported on Windows Server 2016, instead you can use
-[Docker Enterprise Basic Edition](/ee/index) at no aditional cost.
+[Docker Enterprise Basic Edition](/ee/index.md) at no aditional cost.
 
 If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux
