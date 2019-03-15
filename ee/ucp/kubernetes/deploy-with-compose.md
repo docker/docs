@@ -16,13 +16,13 @@ true Kubernetes app.
 
 To deploy a stack to Kubernetes, you need a namespace for the app's resources.
 Contact your Docker EE administrator to get access to a namespace. In this
-example, the namespace has the name `lab-words`.
-[Learn to grant access to a Kubernetes namespace](../authorization/grant-permissions/#kubernetes-grants).
+example, the namespace is called `labs`.
+[Learn how to grant access to a Kubernetes namespace](../authorization/grant-permissions/#kubernetes-grants).
 
 ## Create a Kubernetes app from a Compose file
 
 In this example, you create a simple app, named "lab-words", by using a Compose
-file. The following yaml defines the stack:
+file. The following YAML defines the stack:
 
 ```yaml
 version: '3.3'
@@ -45,13 +45,16 @@ services:
     image: dockersamples/k8s-wordsmith-db
 ```
 
-1.  Open the UCP web UI, and in the left pane, click **Shared resources**.
-2.  Click **Stacks**, and in the **Stacks** page, click **Create stack**.
-3.  In the **Name** textbox, type "lab-words".
-4.  In the **Mode** dropdown, select **Kubernetes workloads**.
-5.  In the **Namespace** drowdown, select **lab-words**.
-6.  In the **docker-compose.yml** editor, paste the previous YAML.
-7.  Click **Create** to deploy the stack.
+1.  Log in to `https://<ucp-url>`, and navigate to **Shared Resources > Stacks**.
+2.  Click **Create Stack** to open up the "Create Application" page.
+3.  Under "Configure Application", type "lab-words" for the application name.
+4.  Select **Kubernetes Workloads** for **Orchestrator Mode**.
+5.  In the **Namespace** drowdown, select "labs".
+6.  Under "Application File Mode", leave **Compose File** selected and click **Next**.
+7.  Paste the previous YAML, then click **Create** to deploy the stack.
+    ![](../images/deploy-compose-kubernetes-0.png){: .with-border}
+
+
 
 ## Inspect the deployment
 
