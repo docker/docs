@@ -197,9 +197,9 @@ or a list:
         - buildno=1
         - gitcommithash=cdc3b19
         
-> **Note**: if you specify `ARG` in your Dockerfile befor the `FROM` instruction 
-> then the `ARG` will not be available in the build instructions under `FROM`
-> if you need a argument in both places simply place it again under the `FROM` instruction
+> **Note**: if you specify `ARG` in your Dockerfile befor the `FROM` instruction, 
+> then the `ARG` will not be available in the build instructions under `FROM`.
+> if you need a argument in both places, simply place it again under the `FROM` instruction.
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
