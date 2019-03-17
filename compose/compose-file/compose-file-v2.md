@@ -199,7 +199,7 @@ or a list:
         
 > **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
 > `ARG` is not available in the build instructions under `FROM`.
-> If you need an argument in both places, alsoo specify it under the `FROM` instruction.
+> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
