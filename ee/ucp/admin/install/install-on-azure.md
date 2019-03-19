@@ -207,6 +207,9 @@ The `--pod-cidr` option maps to the IP address range that you configured for
 the subnets in the previous sections, and the `--host-address` maps to the
 IP address of the master node.
 
+> Note: The `pod-cidr` range must be within an Azure subnet attached to the
+> host.
+
 ```bash
 docker container run --rm -it \
   --name ucp \
@@ -217,7 +220,3 @@ docker container run --rm -it \
   --cloud-provider Azure \
   --interactive
 ```
-
-#### Additional Notes
-
-- The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
