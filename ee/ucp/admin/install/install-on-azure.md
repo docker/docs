@@ -44,6 +44,7 @@ Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups)
 components could be deployed in a second Azure Resource Group.
 - All UCP Nodes (Managers and Workers) need to be attached to the same 
 Azure Subnet.
+- The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
 - All UCP (Managers and Workers) need to be tagged in Azure with the 
 `Orchestrator` tag. Note the value for this tag is the Kubernetes version number
 in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in each 
@@ -217,7 +218,3 @@ docker container run --rm -it \
   --cloud-provider Azure \
   --interactive
 ```
-
-#### Additional Notes
-
-- The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 
