@@ -226,12 +226,15 @@ Orchestrator as there is no SSO between cluster 2 and DTR. See the relevant
 
 ### Example Errors
 
+#### Image or trust data does not exist
 ```
 image or trust data does not exist for dtr.example.com/admin/trustdemo:1
 ```
 
 This means something went wrong when initiating the repository or signing the
 image, as the tag contains no signing data. 
+
+#### Image did not meet required signing policy
 
 ```
 Error response from daemon: image did not meet required signing policy
@@ -242,6 +245,14 @@ dtr.example.com/admin/trustdemo:1: image did not meet required signing policy
 This means that the image was signed correctly, however the user who signed the
 image does not meet the signing policy in cluster 2. This could be because you
 signed the image with the wrong user keys.
+
+#### DTR URL must be a registered trusted registry
+
+```
+Error response from daemon: dtr.example.com must be a registered trusted registry. See 'docker run --help'.
+```
+
+This means you have not registered DTR to work with a remote UCP instance yet, as outlined in [Registering DTR with a Remote Universal Control Plane](#registering-dtr-with-a-remote-universal-control-plane).
 
 ## Where to go next
 
