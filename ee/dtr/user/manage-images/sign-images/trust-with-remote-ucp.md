@@ -249,7 +249,7 @@ signed the image with the wrong user keys.
 #### DTR URL must be a registered trusted registry
 
 ```
-Error response from daemon: dtr.example.com must be a registered trusted registry. See 'docker run --help'.
+Error response from daemon: dtr.example.com must be a registered trusted registry.
 ```
 
 This means you have not registered DTR to work with a remote UCP instance yet, as outlined in [Registering DTR with a Remote Universal Control Plane](#registering-dtr-with-a-remote-universal-control-plane).
