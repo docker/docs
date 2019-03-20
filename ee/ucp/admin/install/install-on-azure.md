@@ -42,6 +42,10 @@ to successfully deploy Docker UCP on Azure
 - All UCP Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
 components could be deployed in a second Azure Resource Group.
+- The Azure Vnet and Subnet needs to be appropriately sized for your
+  environment, addresses from this pool will be consumed by Kubernetes Pods, see
+  [Considerations for IPAM
+  Configuration](#considerations-for-ipam-configuration) for more information.
 - All UCP Nodes (Managers and Workers) need to be attached to the same 
 Azure Subnet.
 - All UCP (Managers and Workers) need to be tagged in Azure with the 
