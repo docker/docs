@@ -148,7 +148,7 @@ Unique Name (GUN). If this is the first time you are adding a delegation to that
 repository, this command will also initiate the repository, using a local Notary 
 canonical root key. To understand more about initiating a repository, and the
 role of delegations, head to 
-[delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server)
+[delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server).
 
 ```
 $ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
@@ -243,13 +243,13 @@ unsigned images from being imported, loaded, or created.
 
 DCT is controlled by the Docker Engine's configuration file. By default this is
 found at `/etc/docker/daemon.json`. More details on this file can be found 
-[here](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+[here](/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
 The `content-trust` flag is based around a `mode` variable instructing
 the engine whether to enforce signed images, and a `trust-pinning` variable 
 instructing the engine which sources to trust. 
 
-`Mode` can take 3 variables: 
+`Mode` can take three variables: 
 
 * `Disabled` - Verification is not active and the remainder of the content-trust 
 related metadata will be ignored. This is the default value if `mode` is not
@@ -269,7 +269,7 @@ verified successfully will not be pulled or run.
 }
 ```
 
-### Official Docker Images
+### Official Docker images
 
 All official Docker library images found on the Docker Hub (docker.io/library/*)
 are signed by the same Notary root key. This root key's ID has been embedded 
@@ -287,9 +287,9 @@ Docker images can be used. Specify:
 }
 ```
 
-### User-Signed Images
+### User-Signed images
 
-There are 2 options for trust pinning user-signed images: 
+There are two options for trust pinning user-signed images: 
 
 * Notary Canonical Root Key ID (DCT Root Key) is an ID that describes *just* the 
 root key used to sign a repository (or rather its respective keys). This is the 
