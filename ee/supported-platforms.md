@@ -1,9 +1,14 @@
 ---
 title: About Docker Enterprise
 description: Information about Docker Enterprise 2.1
-keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
+keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
   - /enterprise/supported-platforms/
+  - /cs-engine/
+  - /cs-engine/1.12/
+  - /cs-engine/1.12/upgrade/
+  - /cs-engine/1.13/
+  - /cs-engine/1.13/upgrade/
 green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; margin:auto;"}'
 install-prefix-ee: '/install/linux/docker-ee'
 ---
