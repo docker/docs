@@ -63,87 +63,37 @@ svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engin
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 svn co https://github.com/docker/compliance/trunk/docs/compliance ./compliance || (echo "Failed docker/compliance download" && exit 1)
 
-# Get the Library docs
-svn co https://github.com/docker-library/docs/trunk ./_samples/library || (echo "Failed library download" && exit 1)
-# Remove symlinks to maintainer.md because they break jekyll and we don't use em
-find ./_samples/library -maxdepth 9  -type l -delete
-# Loop through the README.md files, turn them into rich index.md files
-FILES=$(find ./_samples/library -type f -name 'README.md')
-for f in $FILES
-do
-  curdir=$(dirname "${f}")
-  justcurdir="${curdir##*/}"
-  if [ -e ${curdir}/README-short.txt ]
-  then
-    # shortrm=$(<${curdir}/README-short.txt)
-    shortrm=$(cat ${curdir}/README-short.txt)
-  fi
-  echo "Adding front-matter to ${f} ..."
-  echo --- >> ${curdir}/front-matter.txt
-  echo title: "${justcurdir}" >> ${curdir}/front-matter.txt
-  echo keywords: library, sample, ${justcurdir} >> ${curdir}/front-matter.txt
-  echo repo: "${justcurdir}" >> ${curdir}/front-matter.txt
-  echo layout: docs >> ${curdir}/front-matter.txt
-  echo permalink: /samples/library/${justcurdir}/ >> ${curdir}/front-matter.txt
-  echo redirect_from: >> ${curdir}/front-matter.txt
-  echo - /samples/${justcurdir}/ >> ${curdir}/front-matter.txt
-  echo description: \| >> ${curdir}/front-matter.txt
-  echo \ \ ${shortrm} >> ${curdir}/front-matter.txt
-  echo --- >> ${curdir}/front-matter.txt
-  echo >> ${curdir}/front-matter.txt
-  echo ${shortrm} >> ${curdir}/front-matter.txt
-  echo >> ${curdir}/front-matter.txt
-  if [ -e ${curdir}/github-repo ]
-  then
-    # gitrepo=$(<${curdir}/github-repo)
-    gitrepo=$(cat ${curdir}/github-repo)
-    echo >> ${curdir}/front-matter.txt
-    echo GitHub repo: \["${gitrepo}"\]\("${gitrepo}"\)\{: target="_blank"\} >> ${curdir}/front-matter.txt
-    echo >> ${curdir}/front-matter.txt
-  fi
-  cat ${curdir}/front-matter.txt ./_samples/boilerplate.txt > ${curdir}/header.txt
-  echo {% raw %} >> ${curdir}/header.txt
-  cat ${curdir}/header.txt ${curdir}/README.md > ${curdir}/index.md
-  echo {% endraw %} >> ${curdir}/index.md
-  rm -rf ${curdir}/front-matter.txt
-  rm -rf ${curdir}/header.txt
-done
-
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
 # When you change this you need to make sure to copy the previous
 # directory into a new one in the docs git and change the index.html
-wget --directory-prefix=./engine/api/v1.25/ https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml                    || (echo "Failed 1.25 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.26/ https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml                || (echo "Failed 1.26 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.27/ https://raw.githubusercontent.com/docker/docker/v17.03.1-ce/api/swagger.yaml                || (echo "Failed 1.27 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.28/ https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml                || (echo "Failed 1.28 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.29/ https://raw.githubusercontent.com/docker/docker/17.05.x/api/swagger.yaml                    || (echo "Failed 1.29 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.25/ https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml                    || (echo "Failed 1.25 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.26/ https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml                || (echo "Failed 1.26 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.27/ https://raw.githubusercontent.com/docker/docker/v17.03.1-ce/api/swagger.yaml                || (echo "Failed 1.27 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.28/ https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml                || (echo "Failed 1.28 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.29/ https://raw.githubusercontent.com/docker/docker/17.05.x/api/swagger.yaml                    || (echo "Failed 1.29 swagger download" && exit 1)
 # New location for swagger.yaml for 17.06+
-wget --directory-prefix=./engine/api/v1.30/ https://raw.githubusercontent.com/docker/docker-ce/17.06/components/engine/api/swagger.yaml || (echo "Failed 1.30 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.31/ https://raw.githubusercontent.com/docker/docker-ce/17.07/components/engine/api/swagger.yaml || (echo "Failed 1.31 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.32/ https://raw.githubusercontent.com/docker/docker-ce/17.09/components/engine/api/swagger.yaml || (echo "Failed 1.32 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.33/ https://raw.githubusercontent.com/docker/docker-ce/17.10/components/engine/api/swagger.yaml || (echo "Failed 1.33 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.34/ https://raw.githubusercontent.com/docker/docker-ce/17.11/components/engine/api/swagger.yaml || (echo "Failed 1.34 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.35/ https://raw.githubusercontent.com/docker/docker-ce/17.12/components/engine/api/swagger.yaml || (echo "Failed 1.35 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.36/ https://raw.githubusercontent.com/docker/docker-ce/18.02/components/engine/api/swagger.yaml || (echo "Failed 1.36 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.37/ https://raw.githubusercontent.com/docker/docker-ce/18.03/components/engine/api/swagger.yaml || (echo "Failed 1.37 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.38/ https://raw.githubusercontent.com/docker/docker-ce/18.06/components/engine/api/swagger.yaml || (echo "Failed 1.38 swagger download" && exit 1)
-wget --directory-prefix=./engine/api/v1.39/ https://raw.githubusercontent.com/docker/docker-ce/18.09/components/engine/api/swagger.yaml || (echo "Failed 1.39 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.30/ https://raw.githubusercontent.com/docker/docker-ce/17.06/components/engine/api/swagger.yaml || (echo "Failed 1.30 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.31/ https://raw.githubusercontent.com/docker/docker-ce/17.07/components/engine/api/swagger.yaml || (echo "Failed 1.31 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.32/ https://raw.githubusercontent.com/docker/docker-ce/17.09/components/engine/api/swagger.yaml || (echo "Failed 1.32 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.33/ https://raw.githubusercontent.com/docker/docker-ce/17.10/components/engine/api/swagger.yaml || (echo "Failed 1.33 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.34/ https://raw.githubusercontent.com/docker/docker-ce/17.11/components/engine/api/swagger.yaml || (echo "Failed 1.34 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.35/ https://raw.githubusercontent.com/docker/docker-ce/17.12/components/engine/api/swagger.yaml || (echo "Failed 1.35 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.36/ https://raw.githubusercontent.com/docker/docker-ce/18.02/components/engine/api/swagger.yaml || (echo "Failed 1.36 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.37/ https://raw.githubusercontent.com/docker/docker-ce/18.03/components/engine/api/swagger.yaml || (echo "Failed 1.37 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.38/ https://raw.githubusercontent.com/docker/docker-ce/18.06/components/engine/api/swagger.yaml || (echo "Failed 1.38 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.39/ https://raw.githubusercontent.com/docker/docker-ce/18.09/components/engine/api/swagger.yaml || (echo "Failed 1.39 swagger download" && exit 1)
 
-# Get dockerd.md from upstream
-wget --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch stable dockerd.md" && exit 1)
 
 # Get a few one-off files that we use directly from upstream
-wget --directory-prefix=./engine/reference/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit 1)
-wget --directory-prefix=./engine/reference/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md     || (echo "Failed engine/reference/run.md download" && exit 1)
-# Adjust this one when Edge != Stable
-wget --directory-prefix=./edge/engine/reference/        https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md             || (echo "Failed engine/reference/run.md download" && exit 1)
-wget --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/cli.md || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
-wget --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                || (echo "Failed engine/deprecated.md download" && exit 1)
-wget --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                   || (echo "Failed registry/configuration.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                    || (echo "Failed engine/deprecated.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md             || (echo "Failed engine/reference/builder.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md                 || (echo "Failed engine/reference/run.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/cli.md     || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
+wget --quiet --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                       || (echo "Failed registry/configuration.md download" && exit 1)
 
 # Remove things we don't want in the build
 rm ./registry/spec/api.md.tmpl
 rm -rf ./apidocs/cloud-api-source
 rm -rf ./tests
-rm ./_samples/library/index.md

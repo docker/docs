@@ -34,7 +34,7 @@ locally client-side. [Use the Notary CLI to manage your snapshot key locally
 again](/notary/advanced_usage.md#rotate-keys) for
 repositories created with newer versions of Docker.
 
-## Choosing a passphrase
+## Choose a passphrase
 
 The passphrases you chose for both the root key and your repository key should
 be randomly generated and stored in a password manager. Having the repository key

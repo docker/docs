@@ -4,7 +4,7 @@ description: Change DTR configurations
 keywords: dtr, cli, reconfigure
 ---
 
-Change DTR configurations
+Change DTR configurations. 
 
 ## Usage
 
@@ -16,7 +16,7 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command changes DTR configuration settings.
+This command changes DTR configuration settings. If you are using NFS as a storage volume, see [Use NFS](/ee/dtr/admin/configure/external-storage/nfs/) for details on changes to the reconfiguration process. 
 
 DTR is restarted for the new configurations to take effect. To have no down
 time, configure your DTR for high availability.
@@ -40,7 +40,7 @@ time, configure your DTR for high availability.
 | `--log-host` | $LOG_HOST | The syslog system to send logs to. The endpoint to send logs to. Use this flag if you set `--log-protocol` to `tcp` or `udp`. |
 | `--log-level` | $LOG_LEVEL | Log level for all container logs when logging to syslog. Default: INFO. The supported log levels are `debug`, `info`, `warn`, `error`, or `fatal`. |
 | `--log-protocol` | $LOG_PROTOCOL | The protocol for sending logs. Default is internal. By default, DTR internal components log information using the logger specified in the Docker daemon in the node where the DTR replica is deployed.   Use this option to send DTR logs to an external syslog system. The supported values are `tcp`, `udp`, and `internal`. Internal is the default option, stopping DTR from sending logs to an external system. Use this flag with `--log-host`. |
-| `--nfs-storage-url` | $NFS_STORAGE_URL | Use NFS to store Docker images following this format: `nfs://<ip|hostname>/<mountpoint>`. By default, DTR creates a volume to store the Docker images in the local filesystem  of the node where DTR is running, without high availability. To  use this flag, you need to install an NFS client library like `nfs-common` in the node  where you're deploying DTR. You can test this by running `showmount -e <nfs-server>`. When  you join new replicas, they will start using NFS so there is no need to specify this flag. To  reconfigure DTR to stop using NFS, leave this option empty: `--nfs-storage-url ""`. See [USE NFS](/ee/dtr/admin/configure/external-storage/nfs/) for more details. |
+| `--nfs-storage-url` | $NFS_STORAGE_URL | When running DTR 2.5 (with experimental online garbage collection) and 2.6.0-2.6.3, there is an issue with [reconfiguring and restoring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) before you proceed. To work around the issue, manually create a storage volume on each DTR node and reconfigure DTR with `--dtr-storage-volume` and your newly-created volume instead. See [Reconfigure Using a Local NFS Volume](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) for more details. To reconfigure DTR to stop using NFS, leave this option empty: `--nfs-storage-url ""`. See [USE NFS](/ee/dtr/admin/configure/external-storage/nfs/) for more details. |
 | `--async-nfs` | $ASYNC_NFS | Use async NFS volume options on the replica specified in the `--existing-replica-id` option. The NFS configuration must be set with `--nfs-storage-url` explicitly to use this option. Using `--async-nfs` will bring down any containers on the replica that use the NFS volume, delete the NFS volume, bring it back up with the appropriate configuration, and restart any containers that were brought down.  |
 | `--nfs-options` | $NFS_OPTIONS | Pass in NFS volume options verbatim for the replica specified in the `--existing-replica-id` option. The NFS configuration must be set with `--nfs-storage-url` explicitly to use this option. Specifying `--nfs-options` will pass in character-for-character the options specified in the argument when creating or recreating the NFS volume. For instance, to use NFS v4 with async, pass in "rw,nfsvers=4,async" as the argument.  |
 | `--no-proxy` | $DTR_NO_PROXY | List of domains the proxy should not be used for. When using `--http-proxy` you can use this flag to specify a list  of domains that you don't want to route through the proxy. Format `acme.com[, acme.org]`. |

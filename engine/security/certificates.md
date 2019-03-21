@@ -17,7 +17,7 @@ properly authenticated using *certificate-based client-server authentication*.
 We show you how to install a Certificate Authority (CA) root certificate
 for the registry and how to set the client TLS certificate for verification.
 
-## Understanding the configuration
+## Understand the configuration
 
 A custom certificate is configured by creating a directory under
 `/etc/docker/certs.d` using the same name as the registry's hostname, such as
@@ -55,7 +55,7 @@ purposes only. You should consult your operating system documentation for
 creating an os-provided bundled certificate chain.
 
 
-## Creating the client certificates
+## Create the client certificates
 
 Use OpenSSL's `genrsa` and `req` commands to first generate an RSA
 key and then use the key to create the certificate.   
@@ -89,7 +89,7 @@ If the Docker registry is accessed without a port number, do not add the port to
        └── ca.crt
 ```
 
-## Related Information
+## Related information
 
 * [Use trusted images](index.md)
 * [Protect the Docker daemon socket](https.md)

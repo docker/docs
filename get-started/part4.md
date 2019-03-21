@@ -126,6 +126,8 @@ so they can connect to each other.
 Now, create a couple of VMs using our node management tool,
 `docker-machine`:
 
+> **Note**: you need to run the following as administrator or else you don't have the permission to create hyperv VMs!
+
 ```shell
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
@@ -142,6 +144,8 @@ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 You now have two VMs created, named `myvm1` and `myvm2`.
 
 Use this command to list the machines and get their IP addresses.
+
+> **Note**: you need to run the following as administrator or else you don't get any resonable output (only "UNKNOWN").
 
 ```shell
 docker-machine ls
@@ -435,6 +439,10 @@ look:
 >
 > - Port 7946 TCP/UDP for container network discovery.
 > - Port 4789 UDP for the container ingress network.
+>
+> Double check what you have in the ports section under your web
+> service and make sure the ip addresses you enter in your browser
+> or curl reflects that
 
 ## Iterating and scaling your app
 
