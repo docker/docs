@@ -1,7 +1,7 @@
 ---
 description: Docker Hub Quickstart
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams
-title: Docker Hub Quickstart
+title: Docker Hub quickstart
 redirect_from:
 - /docker-hub/overview/
 - /apidocs/docker-cloud/
@@ -141,7 +141,7 @@ Congratulations! You've successfully:
 - Built a Docker container image on your computer
 - Pushed it to Docker Hub
 
-### Next Steps
+### Next steps
 
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [Builds](builds/index.md).
