@@ -42,7 +42,7 @@ command.
 
 | Option                   | Description                                                                                                                                                                                                                               |
 |:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--admin-password`       | The UCP administrator password |
+| `--admin-password`       | The UCP administrator password (minimum 8 characters) |
 | `--admin-username`       | The UCP administrator username                             |
 | `--binpack`              | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility       |
 | `--cloud-provider`       | The cloud provider for the cluster 
