@@ -240,7 +240,7 @@ kubectl -n kube-system delete pod <pod-name>
 ## Validate peers
 
 Now you can check that `calico-node` pods running on other nodes are peering
-with the Route Reflector.  Use a Swarm affinity filter to run `calicoctl node
+with the Route Reflector.  From a CLI with a UCP client bundle, use a Swarm affinity filter to run `calicoctl node
 status` on any node running `calico-node`:
 
 ```
