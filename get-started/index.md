@@ -135,7 +135,7 @@ is available in
     Docker version 17.12.0-ce, build c97c6d6
     ```
 
-2.  Run `docker info` or (`docker version` without `--`) to view even more details about your docker installation:
+2.  Run `docker info` (or `docker version` without `--`) to view even more details about your docker installation:
 
     ```shell
     docker info
