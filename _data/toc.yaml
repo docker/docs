@@ -1194,16 +1194,10 @@ manuals:
           title: Collect UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/metrics-descriptions/
           title: Using UCP cluster metrics with Prometheus
-        - path: /ee/ucp/admin/configure/configure-rbac-kube/
-          title: Configure native Kubernetes role-based access control
         - path: /ee/ucp/admin/configure/enable-audit-logging/
           title: Create UCP audit logs
-        - path: /ee/ucp/admin/configure/enable-saml-authentication/
-          title: Enable SAML authentication
         - path: /ee/ucp/admin/configure/enable-helm-tiller/
           title: Enable Helm and Tiller with UCP
-        - path: /ee/ucp/admin/configure/external-auth/
-          title: Integrate with LDAP
         - path: /ee/ucp/admin/configure/license-your-installation/
           title: License your installation
         - path: /ee/ucp/admin/configure/restrict-services-to-worker-nodes/
@@ -1255,36 +1249,53 @@ manuals:
       section:
       - path: /ee/ucp/authorization/
         title: Access control model overview
-      - sectiontitle: The basics
+      - path: /ee/ucp/authorization/create-users-and-teams-manually/
+        title: Create local users and teams
+      - path: /ee/ucp/authorization/reset-user-password/
+        title: Reset user passwords    
+      - sectiontitle: External Authentication
         section:
-        - path: /ee/ucp/authorization/create-users-and-teams-manually/
-          title: Create users and teams manually
-        - path: /ee/ucp/authorization/create-teams-with-ldap/
+        - path: /ee/ucp/authorization/external-auth/integrate-with-ldap/
+          title: Integrate with LDAP      
+        - path: /ee/ucp/authorization/external-auth/create-teams-with-ldap/
           title: Create teams with LDAP
-        - path: /ee/ucp/authorization/define-roles/
-          title: Define roles with authorized API operations
-        - path: /ee/ucp/authorization/group-resources/
-          title: Group and isolate cluster resources
-        - path: /ee/ucp/authorization/grant-permissions/
-          title: Grant role-access to cluster resources
-        - path: /ee/ucp/authorization/reset-user-password/
-          title: Reset user passwords
-      - sectiontitle: Tutorials and use cases
+        - path: /ee/ucp/authorization/external-auth/enable-saml-authentication/
+          title: Enable SAML authentication
+
+      - sectiontitle: Kubernetes
         section:
-        - path: /ee/ucp/authorization/deploy-stateless-app/
-          title: Deploy stateless app with RBAC
-        - path: /ee/ucp/authorization/isolate-volumes/
-          title: Isolate volumes
-        - path: /ee/ucp/authorization/isolate-nodes/
-          title: Isolate nodes
-        - path: /ee/ucp/authorization/pull-images/
-          title: Allow users to pull images
-        - path: /ee/ucp/authorization/migrate-kubernetes-roles/
-          title: Migrate Kubernetes roles to Docker EE authorization
-        - path: /ee/ucp/authorization/ee-standard/
-          title: Docker EE Standard use case
-        - path: /ee/ucp/authorization/ee-advanced/
-          title: Docker EE Advanced use case
+        - sectiontitle: Concepts
+          section:
+          - path: /ee/ucp/authorization/kubernetes/concepts/configure-rbac-kube/
+            title: Configure native Kubernetes role-based access control  
+        - sectiontitle: Tutorials and Use Cases
+          section: 
+          - path: /ee/ucp/authorization/kubernetes/tutorials/migrate-kubernetes-roles/
+            title: Migrate Kubernetes roles to Docker EE authorization   
+          - path: /ee/ucp/authorization/kubernetes/tutorials/deploy-stateless-app/
+            title: Deploy stateless app with RBAC 
+      - sectiontitle: Swarm
+        section:
+        - sectiontitle: Concepts
+          section: 
+          - path: /ee/ucp/authorization/swarm/concepts/define-roles/
+            title: Define roles with authorized API operations
+          - path: /ee/ucp/authorization/swarm/concepts/pull-images/
+            title: Allow users to pull images
+        - sectiontitle: Tutorials and Use Cases
+          section: 
+          - path: /ee/ucp/authorization/swarm/tutorials/group-resources/
+            title: Group and isolate Swarm resources
+          - path: /ee/ucp/authorization/swarm/tutorials/grant-permissions/
+            title: Grant role-access to Swarm resources
+          - path: /ee/ucp/authorization/swarm/tutorials/isolate-volumes/
+            title: Isolate Swarm volumes
+          - path: /ee/ucp/authorization/swarm/tutorials/isolate-nodes/
+            title: Isolate Swarm nodes
+          - path: /ee/ucp/authorization/swarm/tutorials/ee-standard/
+            title: Docker EE Standard use case
+          - path: /ee/ucp/authorization/swarm/tutorials/ee-advanced/
+            title: Docker EE Advanced use case  
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
