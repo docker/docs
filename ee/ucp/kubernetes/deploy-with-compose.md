@@ -71,6 +71,6 @@ are running.
 
     ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
 
-6.  In the browser, enter your [cloud instance public IP Address](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses) and append `:NodePort` from the previous step. The app is displayed. 
+6.  In the browser, enter your cloud instance public IP Address and append `:NodePort` from the previous step. For example, to find the public IP address of an EC2 instance, refer to [Amazon EC2 Instance IP Addressing]((https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses). The app is displayed. 
 
     ![](../images/deploy-compose-kubernetes-3.png){: .with-border}
