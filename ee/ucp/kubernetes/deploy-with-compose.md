@@ -22,7 +22,7 @@ example, the namespace is called `labs`.
 ## Create a Kubernetes app from a Compose file
 
 In this example, you create a simple app, named "lab-words", by using a Compose
-file. The following YAML defines the stack:
+file. This assumes you are deploying onto a cloud infrastructure. The following YAML defines the stack:
 
 ```yaml
 version: '3.3'
@@ -61,27 +61,16 @@ services:
 After a few minutes have passed, all of the pods in the `lab-words` deployment
 are running.
 
-1.  In the left pane, click **Pods**. Confirm that there are seven pods and
+1.  Navigate to **Kubernetes > Pods**. Confirm that there are seven pods and
     that their status is **Running**. If any have a status of **Pending**,
     wait until they're all running.
-2.  Click one of the pods that has a name starting with **words**, and in the
-    details pane, scroll down to the **Pod IP** to view the pod's internal IP
-    address.
-
-    ![](../images/deploy-compose-kubernetes-1.png){: .with-border}
-
-3.  In the left pane, click **Load balancers** and find the **web-published** service.
-4.  Click the **web-published** service, and in the details pane, scroll down to the
-    **Spec** section.
-5.  Under **Ports**, click the URL to open the web UI for the `lab-words` app.
+2.  Next, select **Kubernetes > Load balancers** and find the **web-published** service.
+4.  Click the **web-published** service, and scroll down to the
+    **Ports** section.
+5.  Under **Ports**, grab the Node Port information.
 
     ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
 
-6.  Look at the IP addresses that are displayed in each tile. The IP address
-    of the pod you inspected previously may be listed. If it's not, refresh the
-    page until you see it.
+6.  In the browser, enter your [cloud instance public IP Address](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses) and append `:NodePort` from the previous step. The app is displayed. 
 
     ![](../images/deploy-compose-kubernetes-3.png){: .with-border}
-
-7.  Refresh the page to see how the load is balanced across the pods.
-
