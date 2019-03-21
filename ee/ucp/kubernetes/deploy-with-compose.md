@@ -45,7 +45,7 @@ services:
     image: dockersamples/k8s-wordsmith-db
 ```
 
-1.  Log in to `https://<ucp-url>`, and navigate to **Shared Resources > Stacks**.
+1.  In your browser, log in to `https://<ucp-url>`. Navigate to **Shared Resources > Stacks**.
 2.  Click **Create Stack** to open up the "Create Application" page.
 3.  Under "Configure Application", type "lab-words" for the application name.
 4.  Select **Kubernetes Workloads** for **Orchestrator Mode**.
@@ -62,8 +62,8 @@ After a few minutes have passed, all of the pods in the `lab-words` deployment
 are running.
 
 1.  Navigate to **Kubernetes > Pods**. Confirm that there are seven pods and
-    that their status is **Running**. If any have a status of **Pending**,
-    wait until they're all running.
+    that their status is **Running**. If any pod has a status of **Pending**,
+    wait until every pod is running.
 2.  Next, select **Kubernetes > Load balancers** and find the **web-published** service.
 4.  Click the **web-published** service, and scroll down to the
     **Ports** section.
@@ -71,6 +71,6 @@ are running.
 
     ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
 
-6.  In the browser, enter your cloud instance public IP Address and append `:NodePort` from the previous step. For example, to find the public IP address of an EC2 instance, refer to [Amazon EC2 Instance IP Addressing]((https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses). The app is displayed. 
+6.  In a new tab or window, enter your cloud instance public IP Address and append `:<NodePort>` from the previous step. For example, to find the public IP address of an EC2 instance, refer to [Amazon EC2 Instance IP Addressing](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses). The app is displayed. 
 
     ![](../images/deploy-compose-kubernetes-3.png){: .with-border}
