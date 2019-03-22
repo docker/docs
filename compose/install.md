@@ -42,6 +42,7 @@ Python package manager or installing Compose as a container.
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#macOS">Mac</a></li>
 <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+<li><a data-toggle="tab" data-target="#windows-server">Windows Server</a></li>
 <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
 <li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
 </ul>
@@ -60,7 +61,7 @@ Docker install instructions for these are here:
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 
-### Install Compose on Windows systems
+### Install Compose on Windows desktop systems
 
 **Docker Desktop for Windows** and **Docker Toolbox** already include Compose
 along with other Docker apps, so most Windows users do not need to
@@ -69,16 +70,25 @@ install Compose separately. Docker install instructions for these are here:
 * [Get Docker Desktop for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
-**If you are running the Docker daemon and client directly on Microsoft
-Windows Server 2016** (with [Docker EE for Windows Server 2016](/install/windows/docker-ee.md), you _do_ need to install
-Docker Compose. To do so, follow these steps:
+If you are running the Docker daemon and client directly on Microsoft
+Windows Server, follow the instructions in the Windows Server tab.
+
+</div>
+<div id="windows-server" class="tab-pane fade in active" markdown="1">
+
+### Install Compose on Windows Server
+
+Follow these instructions if you are running the Docker daemon and client directly
+on Microsoft Windows Server with [Docker Engine - Enterprise](/install/windows/docker-ee.md),
+and want to install Docker Compose.
+
 
 1.  Start an "elevated" PowerShell (run it as administrator).
     Search for PowerShell, right-click, and choose
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
     
-    In PowerShell, since Github now requires TLS1.2, run the following:
+2.  In PowerShell, since GitHub now requires TLS1.2, run the following:
     
     ```powershell  
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -94,7 +104,7 @@ Docker Compose. To do so, follow these steps:
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
-2.  Test the installation.
+3.  Test the installation.
 
     ```powershell
     docker-compose --version
@@ -110,8 +120,7 @@ Docker Compose. To do so, follow these steps:
 On Linux, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
-running the `curl` command in your terminal to download the binaries. These step
-by step instructions are also included below.
+running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
 
 1.  Run this command to download the current stable release of Docker Compose:
 
@@ -217,7 +226,7 @@ version 1.3, Compose uses Docker labels to keep track of containers, and your
 containers need to be recreated to add the labels.
 
 If Compose detects containers that were created without labels, it refuses
-to run so that you don't end up with two sets of them. If you want to keep using
+to run, so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
 command:
