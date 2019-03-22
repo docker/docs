@@ -88,7 +88,7 @@ Docker Compose. To do so, follow these steps:
     Compose (v{{site.compose_version}}):
 
     ```powershell
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\Docker\resources\bin\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
