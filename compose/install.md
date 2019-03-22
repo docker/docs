@@ -91,6 +91,8 @@ Docker Compose. To do so, follow these steps:
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
+**Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
+
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
