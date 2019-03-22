@@ -26,6 +26,7 @@ Define the application dependencies.
 
 2.  Create a file called `app.py` in your project directory and paste this in:
 
+        #!/usr/bin/env python
         import time
 
         import redis
