@@ -6,16 +6,26 @@ title: Dockerize an SSH service
 
 ## Build an `eg_sshd` image
 
+### Generate a secure root password for your image
+
+Using a static password for root access is dangerous. Create a random password before proceeding.
+
+### Build the image
+
 The following `Dockerfile` sets up an SSHd service in a container that you
 can use to connect to and inspect other container's volumes, or to get
-quick access to a test container.
+quick access to a test container. 
+
+__Note: Replace "THEPASSWORDYOUCREATED" with the password that you created in the previous step.__
+
+> ** Note**: Use `without-password` instead of `prohibit-password` for Ubuntu 14.04.
 
 ```Dockerfile
 FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:screencast' | chpasswd
+RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
@@ -27,6 +37,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 ```
+
 
 Build the image using:
 

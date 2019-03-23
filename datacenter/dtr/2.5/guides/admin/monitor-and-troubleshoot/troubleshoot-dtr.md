@@ -67,9 +67,11 @@ On a healthy cluster the output will be `[]`.
 
 Starting in DTR 2.5.5, you can run RethinkCLI from a separate image. First, set an environment variable for your DTR replica ID:
 
+{% raw %}
 ```bash
 REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 ```
+{% endraw %}
 
 RethinkDB stores data in different databases that contain multiple tables. Run the following command to get into interactive mode
 and query the contents of the DB:

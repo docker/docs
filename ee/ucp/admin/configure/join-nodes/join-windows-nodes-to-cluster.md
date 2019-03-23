@@ -16,6 +16,8 @@ Follow these steps to enable a worker node on Windows.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
+**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
+
 ## Install Docker Engine - Enterprise on Windows Server 
 
 [Install Docker Engine - Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
@@ -26,30 +28,13 @@ Docker Enterprise 2.1.
 
 Follow these steps to configure the docker daemon and the Windows environment.
 
-1. Add a label to the node.
-2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
-3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker UCP web interface or CLI.
+1. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
+2. Run the Windows worker setup script provided with `ucp-agent-win`.
+3. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
-Configure the Docker Engine running on the node to have a label. This makes
-it easier to deploy applications on nodes with this label.
-
-Create the file `C:\ProgramData\docker\config\daemon.json` with the following
-content:
-
-```
-{
-  "labels": ["os=windows"]
-}
-```
-
-Restart Docker for the changes to take effect:
-
-```
-Restart-Service docker
-```
+As of Docker Enterprise 2.1, which includes UCP 3.1, this step is no longer necessary. Windows nodes are automatically assigned the `ostype` label `ostype=windows`. 
 
 ### Pull the Windows-specific images
 
@@ -226,3 +211,7 @@ Some features are not yet supported on Windows nodes:
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
+
+## Known Issues
+
+Refer to the [Docker EE UCP release notes](/ee/ucp/release-notes) for Known Issues information.
