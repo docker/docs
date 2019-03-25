@@ -36,29 +36,27 @@ There are two options for provisoning IPs for the Kubernetes cluster on Azure
 
 ## Azure Prerequisites 
 
-You must meet these infrastructure prerequisites in order 
-to successfully deploy Docker UCP on Azure
+You must meet the following infrastructure prerequisites in order 
+to successfully deploy Docker UCP on Azure:
 
-- All UCP Nodes (Managers and Workers) need to be deployed into the same Azure
+- All UCP worker and manager nodes need to be deployed into the same Azure
   Resource Group. The Azure Networking (Vnets, Subnets, Security Groups)
   components could be deployed in a second Azure Resource Group.
 - The Azure Vnet and Subnet must be appropriately sized for your environment, as
   addresses from this pool will be consumed by Kubernetes Pods. For more
   information, see [Considerations for IPAM
   Configuration](#considerations-for-ipam-configuration).
-- All UCP Nodes (Managers and Workers) need to be attached to the same Azure
+- All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
-- All UCP (Managers and Workers) need to be tagged in Azure with the
-  `Orchestrator` tag. Note the value for this tag is the Kubernetes version
-  number in the format `Orchestrator=Kubernetes:x.y.z`. This value may change in
+- All UCP workers and managers need to have the `Orchestrator` tag in Azure with the Kubernetes version as the value, following this format: `Orchestrator=Kubernetes:x.y.z`. This value may change in
   each UCP release. To find the relevant version please see the UCP [Release
-  Notes](../../release-notes). For example for UCP 3.1.0 the tag would be
+  Notes](../../release-notes). For example for UCP `3.1.0` the tag would be
   `Orchestrator=Kubernetes:1.11.2`. 
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
   Computer Name and the Node Operating System's Hostname. Note this applies to
-  the FQDN of the host including domain names. 
-- An Azure Service Principal with `Contributor` access to the Azure Resource
-  Group hosting the UCP Nodes. Note, if using a separate networking Resource
+  the FQDN (Fully Qualified Domain Name) of the host including domain names. 
+- An Azure Service Principal is required with `Contributor` access to the Azure Resource
+  Group hosting the UCP Nodes. If using a separate networking Resource
   Group the same Service Principal will need `Network Contributor` access to
   this Resource Group.
 
