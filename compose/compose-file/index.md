@@ -2309,7 +2309,6 @@ network using the alias.
 version: '3.7'
 services:
   web:
-    # ...
     networks:
       hostnet: {}
 
@@ -2322,7 +2321,6 @@ networks:
 ```yaml
 services:
   web:
-
     ...
     build:
       ...
@@ -2335,9 +2333,6 @@ services:
 services:
   web:
     ...
-
-    # ...
-
     networks:
       nonet: {}
 
