@@ -11,7 +11,7 @@ page, and click the **Layer 7 Routing** option. Check the **Enable Layer 7 Routi
 
 ![http routing mesh](../../images/interlock-install-3.png){: .with-border}
 
-By default, the routing mesh service listens on port 80 for HTTP and port
+By default, the routing mesh service listens on port 8080 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
 them.
 
