@@ -5,10 +5,10 @@ description: Learn about the labels you can use in your swarm services to route
 keywords: routing, proxy
 ---
 
+## Using routing labels
+
 Once the layer 7 routing solution is enabled, you can
 [start using it in your swarm services](index.md).
-
-The following labels are available for you to use in swarm services:
 
 
 | Label                                  | Description                                                                                                                                    | Example                |
@@ -22,7 +22,7 @@ The following labels are available for you to use in swarm services:
 | `com.docker.lb.ssl_key`                | Docker secret to use for the SSL key.                                                                                                          | `example.com.key`      |
 | `com.docker.lb.websocket_endpoints`    | Comma separated list of endpoints to configure to be upgraded for websockets.                                                                  | `/ws,/foo`             |
 | `com.docker.lb.service_cluster`        | Name of the service cluster to use for the application.                                                                                        | `us-east`              |
-| `com.docker.lb.sticky_session_cookie`  | Cookie to use for sticky sessions.                                                                                                             | `none`                 |
-| `com.docker.lb.redirects`              | Semi-colon separated list of redirects to add in the format of `<source>,<target>`.  Example: `http://old.example.com,http://new.example.com;` | `none`                 |
+| `com.docker.lb.sticky_session_cookie`  | Cookie to use for sticky sessions.                                                                                                             | `app_session`          |
+| `com.docker.lb.redirects`              | Semi-colon separated list of redirects to add in the format of `<source>,<target>`.                                                            | `http://old.example.com,http://new.example.com;` |
 | `com.docker.lb.ssl_passthrough`        | Enable SSL passthrough.                                                                                                                        | `false`                |
 | `com.docker.lb.backend_mode`           | Select the backend mode that the proxy should use to access the upstreams. Defaults to `task`.                                                 | `vip`                  |
