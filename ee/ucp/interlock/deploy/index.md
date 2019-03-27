@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 # Deploying basic layer 7 routing and Interlock
-This topic covers deploying a layer 7 routing solution for UCP into a Docker Swarm. Layer 7 routing is also referred to as HTTP routing mesh.
+This topic covers deploying a layer 7 routing solution, also known as HTTP routing mesh, for UCP into a Docker Swarm. Layer 7 routing is also referred to as HTTP routing mesh.
 
 1. Prerequisites
 2. Enable layer 7 routing
@@ -31,7 +31,7 @@ enable this service from the UCP web UI.
 
 ![http routing mesh](../../images/interlock-install-3.png){: .with-border}
 
-By default, the routing mesh service listens on port 80 for HTTP and port
+By default, the routing mesh service listens on port 8080 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
 them.
 
