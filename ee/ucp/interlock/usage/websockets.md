@@ -1,11 +1,8 @@
 ---
-title: Websockets
-description: Learn how to use websockets in your swarm services when using the
-  layer 7 routing solution for UCP.
-keywords: routing, proxy
+title: Use websockets
+description: Learn how to use websockets in your swarm services.
+keywords: routing, proxy, websockets
 ---
-
-# Using websockets
 
 First, create an overlay network to isolate and secure service traffic:
 

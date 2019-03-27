@@ -1,74 +1,9 @@
 ---
-title: Application redirects
+title: Implement application redirects
 description: Learn how to implement redirects using swarm services and the
   layer 7 routing solution for UCP.
-keywords: routing, proxy, redirects
+keywords: routing, proxy, redirects, interlock
 ---
-
-# Implementing redirects
-The following example deploys a simple
-service that can be reached at `app.example.org`. Requests to `old.example.org` are redirected to that service.
-
-Create a docker-compose.yml file as shown in the following example:
-
-```yaml
-version: "3.2"
-
-services:
-  demo:
-    image: ehazlett/docker-demo
-    deploy:
-      replicas: 1
-      labels:
-        com.docker.lb.hosts: app.example.org,old.example.org
-        com.docker.lb.network: demo-network
-        com.docker.lb.port: 8080
-        com.docker.lb.redirects: http://old.example.org,http://app.example.org
-    networks:
-      - demo-network
-
-networks:
-  demo-network:
-    driver: overlay
-```
-
-Note that the demo service has labels to signal that traffic for both
-`app.example.org` and `old.example.org` should be routed to this service.
-There is also a label indicating that all traffic directed to `old.example.org`
-should be redirected to `app.example.org`.
-
-Set up your CLI client with a [UCP client bundle](../../user-access/cli.md),
-and deploy the service:
-
-```bash
-docker stack deploy --compose-file docker-compose.yml demo
-```
-
-You can also use the CLI to test if the redirect is working, by running the following command:
-
-```bash
-curl --head --header "Host: old.example.org" http://<ucp-ip>:<http-port>
-```
-
-You should see something like the following output:
-
-```none
-HTTP/1.1 302 Moved Temporarily
-Server: nginx/1.13.8
-Date: Thu, 29 Mar 2018 23:16:46 GMT
-Content-Type: text/html
-Content-Length: 161
-Connection: keep-alive
-Location: http://app.example.org/
-```
-
-You can also test that the redirect works from your browser. For that, make sure you add entries for both `app.example.org` and
-`old.example.org` to your `/etc/hosts` file and map them to the IP address
-of a UCP node.
-
-
-
-------------------------SHOULD THE FOLLOWING BE INCLUDED AS WELL? ------------------------------------------
 
 The following example publishes a service and configures a redirect from `old.local` to `new.local`.
 

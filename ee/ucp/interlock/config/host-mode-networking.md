@@ -1,14 +1,13 @@
 ---
-title: Host mode networking
+title: Configure host mode networking
 description: Learn how to configure the UCP layer 7 routing solution with
   host mode networking.
-keywords: routing, proxy
+keywords: routing, proxy, interlock, load balancing
 redirect_from:
   - /ee/ucp/interlock/usage/host-mode-networking/
   - /ee/ucp/interlock/deploy/host-mode-networking/
 ---
 
-# Configuring host mode networking
 By default, layer 7 routing components communicate with one another using
 overlay networks, but Interlock supports
 host mode networking in a variety of ways, including proxy only, Interlock only, application only, and hybrid. 
@@ -27,14 +26,14 @@ To use host mode networking instead of overlay networking:
 ## Configuration for a production-grade deployment
 
 If you have not done so, configure the
-[layer 7 routing solution for production](production.md).
+[layer 7 routing solution for production](../deploy/production.md).
 
 The `ucp-interlock-proxy` service replicas should then be
 running on their own dedicated nodes.
 
 ## Update the ucp-interlock config
 
-[Update the ucp-interlock service configuration](configure.md) so that it uses
+[Update the ucp-interlock service configuration](./index.md) so that it uses
 host mode networking.
 
 Update the `PublishMode` key to:
@@ -92,30 +91,27 @@ service is running.
 
 If everything is working correctly, you should get a JSON result like:
 
+{% raw %}
 ```json
 {"instance":"63b855978452", "version":"0.1", "request_id":"d641430be9496937f2669ce6963b67d6"}
 ```
+{% endraw %}
 
-
----------------------------REPLACE WITH THE FOLLOWING INFO??-------------------------------------------------
-
-
-
-In this example we will configure an eight (8) node Swarm cluster that uses host mode
+The following example describes how to configure an eight (8) node Swarm cluster that uses host mode
 networking to route traffic without using overlay networks. There are three (3) managers
 and five (5) workers.  Two of the workers are configured with node labels to be dedicated
 ingress cluster load balancer nodes.  These will receive all application traffic.
 
-This example will not cover the actual deployment of infrastructure.
+This example does not cover the actual deployment of infrastructure.
 It assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
 See the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
 getting a Swarm cluster deployed.
 
-Note: when using host mode networking you will not be able to use the DNS service discovery as that
+Note: When using host mode networking, you cannot use the DNS service discovery because that
 requires overlay networking.  You can use other tooling such as [Registrator](https://github.com/gliderlabs/registrator)
 that will give you that functionality if needed.
 
-We will configure the load balancer worker nodes (`lb-00` and `lb-01`) with node labels in order to pin the Interlock Proxy
+Configure the load balancer worker nodes (`lb-00` and `lb-01`) with node labels in order to pin the Interlock Proxy
 service.  Once you are logged into one of the Swarm managers run the following to add node labels
 to the dedicated load balancer worker nodes:
 
@@ -128,12 +124,14 @@ lb-01
 
 Inspect each node to ensure the labels were successfully added:
 
+{% raw %}
 ```bash
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-00
 map[nodetype:loadbalancer]
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-01
 map[nodetype:loadbalancer]
 ```
+{% endraw %}
 
 Next, create a configuration object for Interlock that specifies host mode networking:
 
@@ -170,7 +168,7 @@ oqkvv1asncf6p2axhx41vylgt
 
 Note the `PublishMode = "host"` setting. This instructs Interlock to configure the proxy service for host mode networking.
 
-Now we can create the Interlock service also using host mode networking:
+Now create the Interlock service also using host mode networking:
 
 ```bash
 $> docker service create \
@@ -183,7 +181,7 @@ $> docker service create \
 sjpgq7h621exno6svdnsvpv9z
 ```
 
-## Configure Proxy Services
+## Configure proxy services
 With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
 workers. From a manager run the following to pin the proxy services to the load balancer worker nodes:
 

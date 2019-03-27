@@ -1,23 +1,22 @@
 ---
-title: Updating Interlock services
+title: Update Interlock services
 description: Learn how to update the UCP layer 7 routing solution services
-keywords: routing, proxy
+keywords: routing, proxy, interlock
 ---
 
-# Updating Interlock services
 There are two parts to the update process:
 
-1. Updating the Interlock configuration to specify the new extension and/or proxy image versions.
-2. Updating the Interlock service to use the new configuration and image.
+1. Update the Interlock configuration to specify the new extension and/or proxy image versions.
+2. Update the Interlock service to use the new configuration and image.
 
-## Updating the Interlock configuration
+## Update the Interlock configuration
 Create the new configuration:
 
 ```bash
 $> docker config create service.interlock.conf.v2 <path-to-new-config>
 ```
 
-## Updating the Interlock service
+## Update the Interlock service
 Remove the old configuration and specify the new configuration:
 
 ```bash

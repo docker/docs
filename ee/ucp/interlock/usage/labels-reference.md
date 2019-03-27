@@ -1,13 +1,11 @@
 ---
-title: Layer 7 routing labels reference
+title: Use layer 7 routing labels
 description: Learn about the labels you can use in your swarm services to route
-  layer 7 traffic to them.
+  layer 7 traffic.
 keywords: routing, proxy
 ---
 
-## Using routing labels
-
-Once the layer 7 routing solution is enabled, you can
+After you enable the layer 7 routing solution, you can
 [start using it in your swarm services](index.md).
 
 

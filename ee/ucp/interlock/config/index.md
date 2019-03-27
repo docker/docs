@@ -1,20 +1,14 @@
 ---
-title: Configuring layer 7 routing service
-description: Learn how to configure the layer 7 routing solution for UCP, that allows
-  you to route traffic to swarm services.
-keywords: routing, proxy
+title: Configure layer 7 routing service
+description: Learn how to configure the layer 7 routing solution for UCP.
+keywords: routing, proxy, interlock, load balancing
 redirect_from:
   - /ee/ucp/interlock/deploy/configure/
   - /ee/ucp/interlock/usage/default-service/
 ---
 
-# Configuring layer 7 routing services
-You can configure ports for incoming traffic from the UCP web UI. 
-
 To further customize the layer 7 routing solution, you must update the
 `ucp-interlock` service with a new Docker configuration.
-
-Here's how it works:
 
 1. Find out what configuration is currently being used for the `ucp-interlock`
 service and save it to a file:
@@ -91,53 +85,33 @@ The core configuraton handles the Interlock service itself. These are the config
 
 Interlock must contain at least one extension to service traffic. The following options are available to configure the extensions:
 
-| Option             | Type              | Description                                                                   |
-|:-------------------|:------------------|:------------------------------------------------------------------------------|
-| `Image`            | string            | Name of the Docker image to use for the extension service.                    |
-| `Args`             | []string          | Arguments to be passed to the Docker extension service upon creation.         |
-| `Labels`           | map[string]string | Labels to add to the extension service.                                       |
-| `ServiceName`      | string            | Name of the extension service.                                                |
-| `ProxyImage`       | string            | Name of the Docker image to use for the proxy service.                        |
-| `ProxyArgs`        | []string          | Arguments to be passed to the proxy service upon creation.                    |
-| `ProxyLabels`      | map[string]string | Labels to add to the proxy service.                                           |
-| `ProxyServiceName` | string            | Name of the proxy service.                                                    |
-| `ProxyConfigPath`  | string            | Path in the service for the generated proxy configuration.                    |
-| `ServiceCluster`   | string            | Name of the cluster this extension services.                                  |
-| `PublishMode`      | string            | Publish mode for the proxy service. Supported values are `ingress` or `host`. |
-| `PublishedPort`    | int               | Port where the proxy service serves non-TLS traffic.                          |
-| `PublishedSSLPort` | int               | Port where the proxy service serves TLS traffic.                              |
-| `Template`         | string            | Docker configuration object that is used as the extension template.           |
-| `Config`           | Config            | Proxy configuration used by the extensions as listed below.                   |
-
---------------------------WHICH INFO IS CORRECT???-------------------------------------------
-
-| Option | Type | Description |
-| --- | --- | --- |
-| `Image` | string | name of the Docker Image to use for the extension service |
-| `Args` | []string | arguments to be passed to the Docker extension service upon creation |
-| `Labels` | map[string]string | labels to be added to the extension service |
+| Option             | Type        | Description                                      |
+|:-------------------|:------------|:-----------------------------------------------------------|
+| `Image` | string | Name of the Docker Image to use for the extension service |
+| `Args` | []string | Arguments to be passed to the Docker extension service upon creation |
+| `Labels` | map[string]string | Labels to add to the extension service |
 | `ContainerLabels` | map[string]string | labels to be added to the extension service tasks |
 | `Constraints` | []string | one or more [constraints](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint) to use when scheduling the extension service |
 | `PlacementPreferences` | []string | one or more [placement prefs](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref) to use when scheduling the extension service |
-| `ServiceName` | string | name of the extension service |
-| `ProxyImage` | string | name of the Docker Image to use for the proxy service |
-| `ProxyArgs` | []string | arguments to be passed to the Docker proxy service upon creation |
-| `ProxyLabels` | map[string]string | labels to be added to the proxy service |
+| `ServiceName` | string | Name of the extension service |
+| `ProxyImage` | string | Name of the Docker Image to use for the proxy service |
+| `ProxyArgs` | []string | Arguments to be passed to the Docker proxy service upon creation |
+| `ProxyLabels` | map[string]string | Labels to add to the proxy service |
 | `ProxyContainerLabels` | map[string]string | labels to be added to the proxy service tasks |
-| `ProxyServiceName` | string | name of the proxy service |
-| `ProxyConfigPath` | string | path in the service for the generated proxy config |
+| `ProxyServiceName` | string | Name of the proxy service |
+| `ProxyConfigPath` | string | Path in the service for the generated proxy config |
 | `ProxyReplicas` | uint | number of proxy service replicas |
 | `ProxyStopSignal` | string | stop signal for the proxy service (i.e. `SIGQUIT`) |
 | `ProxyStopGracePeriod` | string | stop grace period for the proxy service (i.e. `5s`) |
 | `ProxyConstraints` | []string | one or more [constraints](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint) to use when scheduling the proxy service |
 | `ProxyPlacementPreferences` | []string | one or more [placement prefs](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref) to use when scheduling the proxy service |
 | `ProxyUpdateDelay` | string | delay between rolling proxy container updates  |
-| `ServiceCluster` | string | name of the cluster this extension services |
-| `PublishMode` | string (`ingress` or `host`) | publish mode that the proxy service uses |
-| `PublishedPort` | int | port that the proxy service serves non-SSL traffic |
-| `PublishedSSLPort` | int | port that the proxy service serves SSL traffic |
-| `Template` | string | Docker config object that is used as the extension template |
-| `Config` | Config | proxy configuration used by the extensions as listed below |
+| `ServiceCluster` | string | Name of the cluster this extension services |
+| `PublishMode` | string (`ingress` or `host`) | Publish mode that the proxy service uses |
+| `PublishedPort` | int | Port on which the proxy service serves non-SSL traffic |
+| `PublishedSSLPort` | int | Port on which the proxy service serves SSL traffic |
+| `Template` | string | Docker configuration object that is used as the extension template |
+| `Config` | Config | Proxy configuration used by the extensions as described in the following table |
 
 ### Proxy
 Options are made available to the extensions, and the extensions utilize the options needed for proxy service configuration. This provides overrides to the extension configuration.
@@ -148,7 +122,7 @@ different configuration options available.  Refer to the documentation for each 
 - [Nginx](nginx-config.md)
 - [HAproxy](haproxy-config.md)
 
-#### Customizing the default proxy service
+#### Customize the default proxy service
 The default proxy service used by UCP to provide layer 7 routing is NGINX. If users try to access a route that hasn't been configured, they will see the default NGINX 404 page:
 
 ![Default NGINX page](../../images/interlock-default-service-1.png){: .with-border}
@@ -223,10 +197,10 @@ PollInterval = "3s"
 
 ## Next steps
 
-- [Using a custom extension template](custom-template.md)
-- [Configuring an HAProxy extension](haproxy-config.md)
-- [Configuring host mode networking](host-mode-networking.md)
-- [Configuring an nginx extension](nginx-config.md)
-- [Using application service labels](service-lables.md)
-- [Tuning the proxy service](tuning.md)
-- [Updating Interlock services](updates.md)
+- [Use a custom extension template](custom-template.md)
+- [Configure an HAProxy extension](haproxy-config.md)
+- [Configure host mode networking](host-mode-networking.md)
+- [Configure an nginx extension](nginx-config.md)
+- [Use application service labels](service-lables.md)
+- [Tune the proxy service](tuning.md)
+- [Update Interlock services](updates.md)

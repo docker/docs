@@ -1,15 +1,13 @@
 ---
-title: Proxy service tuning
-description: Learn how to ?????
-keywords: routing, proxy
+title: Tune the proxy service
+description: Learn how to tune the proxy service for environment optimization
+keywords: routing, proxy, interlock
 ---
 
-# Tuning the proxy service
-
-## Constraining the proxy service to multiple dedicated worker nodes
+## Constrain the proxy service to multiple dedicated worker nodes
 Refer to [Proxy service constraints](../deploy/production.md) for information on how to constrain the proxy service to multiple dedicated worker nodes.
 
-## Stopping
+## Stop
 To adjust the stop signal and period, use the `stop-signal` and `stop-grace-period` settings.  For example,
 to set the stop signal to `SIGTERM` and grace period to ten (10) seconds, use the following command:
 

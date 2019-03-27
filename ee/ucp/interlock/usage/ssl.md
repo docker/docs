@@ -1,19 +1,18 @@
 ---
-title: Applications with SSL
+title: Implement applications with SSL
 description: Learn how to configure your swarm services with SSL.
-keywords: routing, proxy, tls
+keywords: routing, proxy, tls, ssl
 redirect_from:
   - /ee/ucp/interlock/usage/ssl/
 ---
 
-# Implementing SSL
-This topic covers implementing Swarm services with SLL:
+This topic covers Swarm services implementation with:
 
 - SSL termination
 - SSL passthrough
 
 ## SSL termination
-In the following example, Docker [Secrets](https://docs.docker.com/engine/swarm/secrets/)
+In the following example, Docker [Secrets](/engine/swarm/secrets/)
 are used to centrally and securely store SSL certificates in order to terminate SSL at the proxy service.
 Application traffic is encrypted in transport to the proxy service, which terminates SSL and then
 uses unencrypted traffic inside the secure datacenter.

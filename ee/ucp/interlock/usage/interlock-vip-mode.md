@@ -1,13 +1,12 @@
 ---
-title: Routing modes
+title: Specify a routing mode
 description: Learn about task and VIP backend routing modes for Layer 7 routing
-keywords: routing, proxy
+keywords: routing, proxy, interlock
 ---
 
-## Specifying a routing mode
 You can publish services using "vip" and "task" backend routing modes.
 
-### Task Routing Mode
+## Task routing mode
 
 Task routing is the default Interlock behavior and the default backend mode if one is not specified.
 In task routing mode, Interlock uses backend task IPs to route traffic from the proxy to each container.
@@ -17,7 +16,7 @@ Task routing mode applies L7 routing and then sends packets directly to a contai
 
 ![task mode](../../images/interlock-task-mode.png)
 
-### VIP Routing Mode
+## VIP routing mode
 
 VIP mode is an alternative mode of routing in which Interlock uses the Swarm service VIP as the backend IP instead of container IPs.
 Traffic to the frontend route is L7 load balanced to the Swarm service VIP, which L4 load balances to backend tasks.
@@ -29,7 +28,6 @@ Most application updates do not require configuring backends in VIP mode.
 In VIP routing mode Interlock uses the service VIP (a persistent endpoint that exists from service creation to service deletion) as the proxy backend.
 VIP routing mode was introduced in Universal Control Plane (UCP) 3.0 version 3.0.3 and 3.1 version 3.1.2.
 VIP routing mode applies L7 routing and then sends packets to the Swarm L4 load balancer which routes traffic service containers.
-
 
 ![vip mode](../../images/interlock-vip-mode.png)
 
@@ -65,7 +63,7 @@ The following two updates still require a proxy reconfiguration (because these a
 - Add/Remove a network on a service
 - Deployment/Deletion of a service
 
-#### Publishing a default host service
+#### Publish a default host service
 
 The following example publishes a service to be a default host. The service responds
 whenever there is a request to a host that is not configured.

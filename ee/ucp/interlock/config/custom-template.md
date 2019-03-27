@@ -1,12 +1,10 @@
 ---
 title: Custom templates
 description: Learn how to use a custom extension template
-keywords: routing, proxy
+keywords: routing, proxy, interlock, load balancing
 ---
 
-# Using a custom extension template
-A custom extension template can be
-used if a needed option is not available in the extension configuration.
+Use a custom extension if a needed option is not available in the extension configuration.
 
 > Warning:
     This should be used with extreme caution as this completely bypasses the built-in
@@ -19,11 +17,12 @@ To use a custom template:
 2. Create a Swarm configuration object
 3. Update the extension
 
-## Creating a Swarm configuration using a new template
+## Create a Swarm configuration using a new template
 First, create a Swarm config using the new template, as shown in the following example. This example uses a custom Nginx configuration template, but you can use any extension configuration (for example, HAProxy).
 
 The contents of the example `custom-template.conf` include:
 
+{% raw %}
 ```
 # CUSTOM INTERLOCK CONFIG
 user {{ .ExtensionConfig.User  }};
@@ -279,15 +278,16 @@ stream {
     }
 }
 ```
+{% endraw %}
 
-## Creating a Swarm configuration object
+## Create a Swarm configuration object
 To create a Swarm config object:
 
 ```
 $> docker config create interlock-custom-template custom.conf
 ```
 
-## Updating the extension
+## Update the extension
 Now update the extension to use this new template:
 
 ```
@@ -296,7 +296,7 @@ $> docker service update --config-add source=interlock-custom-template,target=/e
 
 This should trigger an update and a new proxy configuration will be generated.
 
-## Removing the custom template
+## Remove the custom template
 To remove the custom template and revert to using the built-in template:
 
 ```

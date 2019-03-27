@@ -1,15 +1,14 @@
 ---
-title: Persistent (sticky) sessions
+title: Implement persistent (sticky) sessions
 description: Learn how to configure your swarm services with persistent sessions
   using UCP.
-keywords: routing, proxy
+keywords: routing, proxy, cookies, IP hash
 ---
 
-# Implementing persistent (sticky) sessions
 You can publish a service and configure the proxy for persistent (sticky) sessions using:
 
 - Cookies
-- IP Hashing
+- IP hashing
 
 ## Cookies
 To configure sticky sessions using cookies:

@@ -1,11 +1,10 @@
 ---
-title: HAProxy configuration
+title: Configure HAProxy
 description: Learn how to configure an HAProxy extension
-keywords: routing, proxy
+keywords: routing, proxy, interlock, load balancing
 ---
 
-# Configuring an HAProxy extension
-The following configuration options are available:
+The following HAProxy configuration options are available:
 
 | Option | Type | Description |
 | --- | --- | --- |
@@ -24,6 +23,6 @@ The following configuration options are available:
 | `GlobalOptions` | []string | list of options that are included in the global configuration |
 | `DefaultOptions` | []string | list of options that are included in the default configuration |
 
-# Notes
+## Notes
 
 When using SSL termination, the certificate and key must be combined into a single certificate (i.e. `cat cert.pem key.pem > combined.pem`).  The HAProxy extension only uses the certificate label to configure SSL.

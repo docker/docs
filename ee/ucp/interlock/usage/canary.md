@@ -1,10 +1,9 @@
 ---
-title: Canary application instances
+title: Publish Canary application instances
 description: Learn how to do canary deployments for your Docker swarm services
 keywords: routing, proxy
 ---
 
-# Publishing a service as a canary instance
 The following example publishes a service as a canary instance.
 
 First, create an overlay network to isolate and secure service traffic:
@@ -28,7 +27,7 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Interlock detects when the service is available and publishes it.After tasks are running
+Interlock detects when the service is available and publishes it. After tasks are running
 and the proxy service is updated, the application is available via `http://demo.local`:
 
 ```bash
@@ -59,7 +58,7 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 
 Notice `metadata` is specified with `demo-version-1`.
 
-# Deploying an updated service as a canary instance
+## Deploy an updated service as a canary instance
 The following example deploys an updated service as a canary instance:
 
 ```bash

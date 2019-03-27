@@ -5,7 +5,6 @@ keywords: routing, proxy, hrm
 redirect_from:
   - /ee/ucp/interlock/upgrade/
 ---
-# UCP upgrade process
 
 The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services.md)
 functionality was redesigned in UCP 3.0 for greater security and flexibility.
