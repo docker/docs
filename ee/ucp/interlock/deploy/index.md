@@ -8,11 +8,11 @@ redirect_from:
 
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
-1. Prerequisites
-2. Enable layer 7 routing
-3. Working with the core service configuration file
-4. Creating a dedicated network for Interlock and extensions
-5. Creating the Interlock service
+1. [Prerequisites](#prerequisites)
+2. [Enable layer 7 routing](#enable-layer-7-routing)
+3. [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
+4. [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-Interlock-and-extensions)
+5. [Create the Interlock service](#create-the-interlock-service)
 
 ## Prerequisites
 
@@ -123,7 +123,7 @@ PollInterval = "3s"
       HideInfoHeaders = false
 ```
 
-### Working with the core service configuration file
+### Work with the core service configuration file
 Interlock uses the TOML file for the core service configuration. The following example utilizes Swarm deployment and recovery features by creating a Docker Config object:
 
 ```bash
@@ -157,7 +157,7 @@ EOF
 oqkvv1asncf6p2axhx41vylgt
 ```
 
-### Creating a dedicated network for Interlock and extensions
+### Create a dedicated network for Interlock and extensions
 
 Next, create a dedicated network for Interlock and the extensions:
 
@@ -165,7 +165,7 @@ Next, create a dedicated network for Interlock and the extensions:
 $> docker network create -d overlay interlock
 ```
 
-### Creating the Interlock service
+### Create the Interlock service
 Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
 are recommended to run on workers.  See the [Production](./production.md) section for more information
