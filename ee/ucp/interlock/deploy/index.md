@@ -1,13 +1,12 @@
 ---
-title: Deploying a layer 7 routing solution for UCP to route traffic to swarm services
+title: Deploy a layer 7 routing solution 
 description: Learn the deployment steps for the UCP layer 7 routing solution
-keywords: routing, proxy
+keywords: routing, proxy, interlock
 redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
 ---
 
-# Deploying basic layer 7 routing and Interlock
-This topic covers deploying a layer 7 routing solution, also known as HTTP routing mesh, for UCP into a Docker Swarm. Layer 7 routing is also referred to as HTTP routing mesh.
+This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
 1. Prerequisites
 2. Enable layer 7 routing
@@ -18,8 +17,8 @@ This topic covers deploying a layer 7 routing solution, also known as HTTP routi
 ## Prerequisites
 
 - [Docker](https://www.docker.com) version 17.06 or later
-- Docker must be running in [Swarm mode](https://docs.docker.com/engine/swarm/)
-- Internet access (see [Offline Installation](offline.md) for installing without internet access)
+- Docker must be running in [Swarm mode](/engine/swarm/)
+- Internet access (see [Offline installation](./offline-install.md) for installing without internet access)
 
 ## Enable layer 7 routing
 By default, layer 7 routing is disabled, so you must first
@@ -169,7 +168,7 @@ $> docker network create -d overlay interlock
 ### Creating the Interlock service
 Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
-are recommended to run on workers.  See the [Production](production.md) section for more information
+are recommended to run on workers.  See the [Production](./production.md) section for more information
 on setting up for an production environment.
 
 ```bash
@@ -201,4 +200,4 @@ The Interlock traffic layer is now deployed.
 - [Configuring Interlock](../config/index.md) 
 - [Deploying applications](../usage/index.md)
 - [Production deployment information](./production.md)
-- [Offline installation information](./offline.md)
+- [Offline installation](./offline-install.md)
