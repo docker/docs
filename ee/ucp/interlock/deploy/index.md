@@ -121,6 +121,7 @@ PollInterval = "3s"
       LargeClientHeaderBuffers = "4 8k"
       ClientBodyTimeout = "60s"
       UnderscoresInHeaders = false
+      HideInfoHeaders = false
 ```
 
 ### Working with the core service configuration file
