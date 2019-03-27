@@ -1,10 +1,9 @@
 ---
 title: Offline installation considerations
-description: Learn how to To install Interlock on a Docker cluster without internet access.
-keywords: routing, proxy
+description: Learn how to to install Interlock on a Docker cluster without internet access.
+keywords: routing, proxy, interlock
 ---
 
-# Offline installation
 To install Interlock on a Docker cluster without internet access, the Docker images must be loaded.  This topic describes how to export the images from a local Docker
 engine and then loading them to the Docker Swarm cluster.
 
@@ -34,5 +33,5 @@ $> docker load < nginx:alpine.tar
 ```
 
 ## Next steps
-After running on each node, you can continue to the [Deployment](index.md) section to
+After running on each node, refer to the [Deploy](./index.md) section to
 continue the installation.
