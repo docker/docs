@@ -197,7 +197,7 @@ The Interlock traffic layer is now deployed.
 
 ## Next steps
 
-- [Configuring Interlock](../config/index.md) 
-- [Deploying applications](../usage/index.md)
+- [Configure Interlock](../config/index.md) 
+- [Deploy applications](../usage/index.md)
 - [Production deployment information](./production.md)
 - [Offline installation](./offline-install.md)
