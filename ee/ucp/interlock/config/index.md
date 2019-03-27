@@ -131,6 +131,7 @@ Interlock must contain at least one extension to service traffic. The following 
 | `ProxyStopGracePeriod` | string | stop grace period for the proxy service (i.e. `5s`) |
 | `ProxyConstraints` | []string | one or more [constraints](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint) to use when scheduling the proxy service |
 | `ProxyPlacementPreferences` | []string | one or more [placement prefs](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref) to use when scheduling the proxy service |
+| `ProxyUpdateDelay` | string | delay between rolling proxy container updates  |
 | `ServiceCluster` | string | name of the cluster this extension services |
 | `PublishMode` | string (`ingress` or `host`) | publish mode that the proxy service uses |
 | `PublishedPort` | int | port that the proxy service serves non-SSL traffic |
