@@ -9,7 +9,10 @@ notoc: true
 Usage: ps [options] [SERVICE...]
 
 Options:
--q    Only display IDs
+    -q, --quiet          Only display IDs
+    --services           Display services
+    --filter KEY=VAL     Filter services by a property
+    -a, --all            Show all stopped containers (including those created by the run command)
 ```
 
 Lists containers.
