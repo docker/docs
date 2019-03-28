@@ -557,6 +557,7 @@ in the registry:
 credential_spec:
   registry: my-credential-spec
 ```
+
 ### depends_on
 
 Express dependency between services, Service dependencies cause the following
