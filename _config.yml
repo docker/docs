@@ -94,7 +94,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.3"
+      win_latest_build: "docker-18.09.4"
   - scope:
       path: "datacenter"
     values:
@@ -104,14 +104,14 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.3"
+      dtr_version: "2.6.4"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.9"
+      dtr_version: "2.5.10"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -147,15 +147,15 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.4"
+      ucp_version: "3.1.5"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.4"
-      dtr_version: "2.6.3"
+      ucp_version: "3.1.5"
+      dtr_version: "2.6.4"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
