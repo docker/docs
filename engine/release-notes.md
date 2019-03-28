@@ -31,7 +31,7 @@ consistency and compatibility reasons.
 
 ## 18.09.4
 
- 2019-03-27
+ 2019-03-28
 
 ### Builder
 
@@ -286,7 +286,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## 18.03.1-ee-8
 
- 2019-03-27
+ 2019-03-28
 
 ### Builder
 
