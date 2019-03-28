@@ -22,27 +22,26 @@ upgrade your installation to the latest release.
 # Version 3.1
 
 ## 3.1.5 
+2019-03-28
 
- 2019-03-27
-
- ### Kubernetes
+### Kubernetes
 * Updated Kubernetes to version 1.11.8. (ENGORC-2024)
 
- ### Networking
+### Networking
 * Updated Calico to version 3.5.2. (ENGORC-2045)
 
- ### Authentication and Authorization
+### Authentication and Authorization
 * Added LDAP Settings API to the list of publicly documented API endpoints. (ENGORC-98)
 * Added a new `exclude_server_identity_headers` field to the UCP config. If set to true, the headers are not included in UCP API responses. (docker/orca#16039)
 * Hid most of the UCP banners for non-admin users. (docker/orca#14631)
 * When LDAP or SAML is enabled, provided admin users an option to disable managed password authentication, which includes login and creation of new users. (ENGORC-1999)
 
- ### Bug Fixes
+### Bug Fixes
 * Changed Interlock proxy service default `update-action-failure` to rollback. (ENGCORE-117)
 * Added validation for service configuration label values. (ENGCORE-114)
 * Fixed an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
 
- ### Known Issues
+### Known Issues
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
@@ -59,15 +58,6 @@ upgrade your installation to the latest release.
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 * Pod Security Policies are not supported in this release. (#15105)
 * The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
-
-### Components
-
-| Component      | Version |
-| ----------- | ----------- |
-| UCP      | 3.1.5 |
-| Kubernetes   | 1.11.8 |
-| Calico      | 3.5.2 |
-| Interlock (nginx)   | 1.14.0 |
 
 ### Components
 
