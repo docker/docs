@@ -23,7 +23,7 @@ to upgrade your installation to the latest release.
 # Version 2.6
 
 ## 2.6.4 
-(2019-3-27)
+(2019-3-28)
 
 ### Enhancements
 
@@ -221,7 +221,7 @@ to upgrade your installation to the latest release.
 
 ## 2.5.10
 
-(2019-3-27)
+(2019-3-28)
 
 ### Bug Fixes
 
