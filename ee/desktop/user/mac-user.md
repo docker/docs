@@ -1,12 +1,20 @@
 ---
+<<<<<<< HEAD
 title: Use Docker Desktop Enterprise on Mac
+=======
+title: Using Docker Desktop Enterprise on Mac
+>>>>>>> 1013: Move desktop ent content to docs-private
 description: Exploring the Mac user interface
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 ---
 
+<<<<<<< HEAD
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Mac.
 
 ## Test your installation
+=======
+# Test your installation
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 1. Open a command-line terminal and test that your installation works by
     running the simple Docker image, [hello-world](https://hub.docker.com/_/hello-world/).
@@ -38,6 +46,13 @@ This page contains information about testing the installation and configuring Do
 
     ![nginx home page](../images/hello-world-nginx.png)
 
+<<<<<<< HEAD
+=======
+    > Early beta releases used `docker` as the hostname to build the URL. Now,
+    > ports are exposed on the private IP addresses of the VM and forwarded to
+    > `localhost` with no other host name set.
+
+>>>>>>> 1013: Move desktop ent content to docs-private
 4. View the details on the container while your web server is running (with
     `docker container ls` or `docker ps`):
 
@@ -59,6 +74,7 @@ $ docker image ls
 $ docker image rm nginx
 ```
 
+<<<<<<< HEAD
 ## Docker Desktop user interface
 
 The Docker Desktop Enterprise user interface provides options to configure Docker Desktop preferences such as installation, version packs, Docker Hub login, and more. Right-click the Docker icon from the menu bar to open the Docker Desktop user interface.
@@ -78,11 +94,23 @@ Click on the Docker icon from the menu bar and then **Preferences** to configure
 ![Docker context menu](../images/prefs.png)
 
 #### General
+=======
+# Docker Desktop Enterprise Preferences
+
+Choose ![whale menu](../images/whale-x.png) → **Preferences** from the menu bar and configure the runtime options described below.
+
+![Docker context menu](../images/prefs.png)
+
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+## General
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 ![Preferences](../images/./prefs-general.png)
 
 General settings include:
 
+<<<<<<< HEAD
 - **Start Docker Desktop when you log in:** Starts Docker Desktop when you open your session. (Enabled by default)
 
 - **Include VM in Time Machine backups:** Backs up the Docker Desktop Enterprise virtual machine. (Disabled by default)
@@ -105,6 +133,33 @@ runtime.
 ![File Sharing](../images/prefs-fileshare.png)
 
 File sharing settings include the following options:
+=======
+- **Start Docker Desktop when you log in**: Clear this check box if you don't want to start Docker Desktop when you open your session.
+
+- **Include VM in Time Machine backups** backs up the Docker Desktop Enterprise virtual
+  machine. (Disabled by default.)
+
+- **Securely store Docker logins in MacOS keychain** stores your Docker login
+  credentials. (Enabled by default.)
+
+- **Send usage statistics**: Send diagnostics, crash reports, and usage
+  data to Docker. This information helps Docker improve the application and get
+  more context for troubleshooting problems. (Enabled by default.)
+
+## File Sharing
+
+  Choose which local directories to share with your containers. File sharing is
+required for volume mounting if the project lives outside of the `/Users`
+directory. In that case, share the drive where the Dockerfile and volume are
+located. Otherwise, you get `file not found` or `cannot start service errors at
+runtime`.
+
+![File Sharing](../images/prefs-fileshare.png)
+
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+File share settings are:
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
@@ -113,7 +168,11 @@ File sharing settings include the following options:
 
   There are some limitations on the directories that can be shared:
 
+<<<<<<< HEAD
   - They cannot be a subdirectory of a directory that has been shared already.
+=======
+  - They cannot be a subdirectory of an already shared directory.
+>>>>>>> 1013: Move desktop ent content to docs-private
   - They cannot already exist inside of Docker.
 
 For more information, see:
@@ -122,7 +181,11 @@ For more information, see:
 
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 
+<<<<<<< HEAD
 #### Disk
+=======
+## Disk
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 Specify the **Disk image location** of the Linux volume, where containers and
 images are stored.
@@ -133,12 +196,17 @@ the existing image or replace it.
 
 ![Disk settings](../images/prefs-disk.png)
 
+<<<<<<< HEAD
 #### Advanced
+=======
+## Advanced
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 On the Advanced tab, you can limit resources available to Docker.
 
 ![Advanced Preference settings](../images/prefs-advanced.png)
 
+<<<<<<< HEAD
 Advanced settings include the following options:
 
 - **CPUs**: By default, Docker Desktop Enterprise is set to use half the number of processors
@@ -152,6 +220,23 @@ to a higher number; to decrease it, lower the number.
 - **Swap**: Configure swap file size as needed. The default is 1 GB.
 
 #### Proxies
+=======
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+Advanced settings are:
+
+**CPUs**: By default, Docker Desktop Enterprise is set to use half the number of processors
+available on the host machine. To increase processing power, set this to a
+higher number; to decrease, lower the number.
+
+**Memory**: By default, Docker Desktop Enterprise is set to use `2` GB runtime memory,
+allocated from the total available memory on your Mac. To increase RAM, set this
+to a higher number; to decrease it, lower the number.
+
+**Swap**: Configure swap file size as needed. The default is 1 GB.
+
+## Proxies
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 Docker Desktop Enterprise detects HTTP/HTTPS Proxy Settings from macOS and automatically
 propagates these to Docker and to your containers. For example, if you set your
@@ -182,7 +267,11 @@ Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
 using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
+<<<<<<< HEAD
 #### Daemon
+=======
+## Daemon
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 You can configure options on the Docker daemon that determine how your
 containers run.
@@ -192,12 +281,24 @@ Select **Basic** to configure the daemon with interactive settings, or select
 
 ![Daemon](../images/prefs-daemon-basic.png)
 
+<<<<<<< HEAD
 ##### Experimental features
 
 Docker Desktop Enterprise has experimental features enabled
 on Docker Engine, as described in [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) Readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
 
 > **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or workloads. They are meant to be sandbox experiments for new ideas.
+=======
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+### Experimental features
+
+Docker Desktop Enterprise has experimental features enabled
+on Docker Engine, as described in [Docker Experimental Features](https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md) Readme. If you don't select **Experimental Features**, Docker Desktop Enterprise
+uses the current generally available release of Docker Engine.
+
+> **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or workloads. They are meant to be sandbox experiments for new ideas. Some experimental features may become incorporated into upcoming stable releases, but others may be modified or pulled from subsequent Edge releases, and never released on Stable.
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
@@ -208,12 +309,17 @@ here. (If `false`, Experimental mode is off.)
 true
 ```
 
+<<<<<<< HEAD
 ##### Insecure registries
+=======
+### Insecure registries
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 You can set up a custom and insecure [registry](https://docs.docker.com/registry/introduction) to store your public or private images (instead of
 using [Docker Hub](https://hub.docker.com/) or [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Add URLs for
 your insecure registries and registry mirrors on which to host your images.
 
+<<<<<<< HEAD
 For more information, see:
 
 - [How do I add custom CA certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-custom-ca-certificates)
@@ -221,6 +327,13 @@ For more information, see:
 - [How do I add client certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-client-certificates)
 
 ##### Daemon configuration file
+=======
+See also:
+- [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates)
+- [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates)
+
+### Daemon configuration file
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 Click the **Advanced** tab to configure the daemon from the JSON file. For a
 full list of options, see the Docker Engine [dockerd command line reference](https://docs.docker.com/engine/reference/commandline/dockerd).
@@ -231,11 +344,20 @@ changes when asked.
 
 ![Docker Daemon](../images/prefs-daemon-adv.png)
 
+<<<<<<< HEAD
 #### Kubernetes
+=======
+## Kubernetes
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 Docker Desktop Enterprise includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes.
 
+<<<<<<< HEAD
+=======
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+>>>>>>> 1013: Move desktop ent content to docs-private
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
@@ -249,16 +371,25 @@ $ kubectl config use-context docker-for-desktop
 If you installed `kubectl` with Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
 
+<<<<<<< HEAD
 To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
 
 ![Enable Kubernetes](../images/prefs-kubernetes.png)
 
 Images required to run the Kubernetes server are downloaded and instantiated as containers, and the `/usr/local/bin/kubectl` command is installed on your Mac.
+=======
+- To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
+
+![Enable Kubernetes](../images/prefs-kubernetes.png)
+
+An Internet connection is required. Images required to run the Kubernetes server are downloaded and instantiated as containers, and the `/usr/local/bin/kubectl` command is installed on your Mac.
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 When Kubernetes is enabled and running, an additional status bar item displays at the bottom right of the Docker Desktop Enterprise **Preferences** dialog.
 
 ![Installation complete](../images/kubernetes-install-complete.png)
 
+<<<<<<< HEAD
 The status of Kubernetes shows in the Docker menu and the context points to `docker-desktop`.
 
 ![Docker Menu with Kubernetes](../images/kube-context.png)
@@ -297,12 +428,56 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 - [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
 
 ### Add TLS certificates
+=======
+The status of Kubernetes shows in the Docker menu and the context points to `docker-for-desktop`.
+
+![Docker Menu with Kubernetes](../images/kube-context.png)
+
+- By default, Kubernetes containers are hidden from commands like `docker
+  service ls`, because managing them manually is not supported. To make them
+  visible, select **Show system containers (advanced)** and click **Apply and
+  restart**. Most users do not need this option.
+
+- To disable Kubernetes support at any time, deselect **Enable Kubernetes**. The
+  Kubernetes containers are stopped and removed, and the
+  `/usr/local/bin/kubectl` command is removed.
+
+For more about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](https://docs.docker.com/docker-for-mac/kubernetes)</a>.
+
+## Reset
+
+Select ![whale menu](../images/whale-x.png) -> **Preferences** from the
+menu bar, then click **Reset** to reset factory defaults, restart the Docker
+daemon, or uninstall.
+
+![Uninstall or reset Docker](../images/prefs-reset.png)
+
+> Uninstall Docker Desktop Enterprise from the commandline
+>
+>To uninstall Docker Desktop Enterprise from a terminal, run: `<DockerforMacPath>
+>--uninstall`. If your instance is installed in the default location, this
+>command provides a clean uninstall:
+>
+>```shell
+>$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+>Docker is running, exiting...
+>Docker uninstalled successfully. You can move the Docker application to the trash.
+>```
+>You might want to use the command-line uninstall if, for example, you find that
+>the app is non-functional, and you cannot uninstall it from the menu.
+
+## Add TLS certificates
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 You can add trusted Certificate Authorities (CAs) (used to verify registry
 server certificates) and client certificates (used to authenticate to
 registries) to your Docker daemon.
 
+<<<<<<< HEAD
 #### Add custom CA certificates (server side)
+=======
+### Add custom CA certificates (server side)
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 All trusted CAs (root or intermediate) are supported. Docker Desktop Enterprise creates a
 certificate bundle of all user-trusted CAs based on the Mac Keychain, and
@@ -334,7 +509,11 @@ take effect.
 For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker Desktop Enterprise](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
+<<<<<<< HEAD
 #### Add client certificates
+=======
+### Add client certificates
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 You can put your client certificates in
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
@@ -348,15 +527,26 @@ Desktop Enterprise `xhyve` virtual machine).
 >   or to the `~/.docker/certs.d` directory in order for the changes to take
 >   effect.
 >
+<<<<<<< HEAD
 > * The registry cannot be listed as an _insecure registry_ (see [Docker Daemon](#daemon)). Docker Desktop Enterprise ignores certificates listed
+=======
+> * The registry cannot be listed as an _insecure registry_ (see [Docker Daemon](#daemon). Docker Desktop Enterprise ignores certificates listed
+>>>>>>> 1013: Move desktop ent content to docs-private
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.
 
+<<<<<<< HEAD
 #### Directory structures for certificates
 
 If you have this directory structure, you do not need to manually add the CA
 certificate to your macOS system login:
+=======
+### Directory structures for certificates
+
+If you have this directory structure, you do not need to manually add the CA
+certificate to your Mac OS system login:
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 ```
 /Users/<user>/.docker/certs.d/
@@ -389,6 +579,7 @@ also in your keychain.
 ```
 
 To learn more about how to install a CA root certificate for the registry and
+<<<<<<< HEAD
 how to set the client TLS certificate for verification, see [Verify repository client with certificates](https://docs.docker.com/engine/security/certificates) in the Docker Engine
 topics.
 
@@ -399,6 +590,19 @@ found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
 installed both in Bash and Zsh.
 
 #### Bash
+=======
+how to set the client TLS certificate for verification, see [Verify repository client with certificates](https://docs.docker.com/engine/security/certificates)</a> in the Docker Engine
+topics.
+
+## Install shell completion
+
+Docker Desktop Enterprise comes with scripts to enable completion for the `docker`,
+`docker-machine`, and `docker-compose` commands. The completion scripts may be
+found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
+installed both in Bash and Zsh.
+
+### Bash
+>>>>>>> 1013: Move desktop ent content to docs-private
 
 Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1). To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you have
@@ -407,6 +611,7 @@ installed bash through [Homebrew](http://brew.sh/).
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
 ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+<<<<<<< HEAD
 ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
@@ -414,11 +619,25 @@ ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d
 
 In Zsh, the [completion
 system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html) takes care of things. To activate completion for Docker commands,
+=======
+ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+```
+
+### Zsh
+
+In Zsh, the [completion
+system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)</a> takes care of things. To activate completion for Docker commands,
+>>>>>>> 1013: Move desktop ent content to docs-private
 these files need to be copied or symlinked to your Zsh `site-functions/`
 directory. For example, if you installed Zsh through [Homebrew](http://brew.sh/):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
 ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
+<<<<<<< HEAD
+=======
+ln -s $etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
+>>>>>>> 1013: Move desktop ent content to docs-private
 ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
