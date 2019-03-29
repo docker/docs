@@ -29,8 +29,8 @@ and NodePorts might not work in these workloads.
 
 ## Choose dedicated nodes
 
-Start by tainting the nodes, so that no other workload runs there. Configure
-your CLI with a UCP client bundle, and for each dedicated node, run:
+Start by tainting the nodes, so that no other workload runs there. [Configure
+your CLI with a UCP client bundle](/ee/ucp/user-access/cli/), and for each dedicated node, run:
 
 ```
 kubectl taint node <node-name> \
@@ -240,7 +240,7 @@ kubectl -n kube-system delete pod <pod-name>
 ## Validate peers
 
 Now you can check that `calico-node` pods running on other nodes are peering
-with the Route Reflector.  Use a Swarm affinity filter to run `calicoctl node
+with the Route Reflector.  From a CLI with a UCP client bundle, use a Swarm affinity filter to run `calicoctl node
 status` on any node running `calico-node`:
 
 ```

@@ -46,6 +46,7 @@ consistency and compatibility reasons.
 
 ### Swarm Mode
 * Fixed nil pointer exception when joining node to swarm. [moby/moby#38618](https://github.com/moby/moby/issues/38618)
+* Fixed issue for swarm nodes not being able to join as masters if http proxy is set. [moby/moby#36951]
 
 ### Known Issues
 * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
