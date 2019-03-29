@@ -1,19 +1,19 @@
 ---
-title: Canary application instances
+title: Publish Canary application instances
 description: Learn how to do canary deployments for your Docker swarm services
 keywords: routing, proxy
 ---
 
-In this example we will publish a service and deploy an updated service as canary instances.
+The following example publishes a service as a canary instance.
 
-First we will create an overlay network so that service traffic is isolated and secure:
+First, create an overlay network to isolate and secure service traffic:
 
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
 
-Next we will create the initial service:
+Next, create the initial service:
 
 ```bash
 $> docker service create \
@@ -27,8 +27,8 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Interlock will detect once the service is available and publish it.  Once the tasks are running
-and the proxy service has been updated the application should be available via `http://demo.local`:
+Interlock detects when the service is available and publishes it. After tasks are running
+and the proxy service is updated, the application is available via `http://demo.local`:
 
 ```bash
 $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
@@ -56,9 +56,10 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 {"instance":"df20f55fc943","version":"0.1","metadata":"demo-version-1","request_id":"f884cf37e8331612b8e7630ad0ee4e0d"}
 ```
 
-Notice the `metadata` with `demo-version-1`.
+Notice `metadata` is specified with `demo-version-1`.
 
-Now we will deploy a "new" version:
+## Deploy an updated service as a canary instance
+The following example deploys an updated service as a canary instance:
 
 ```bash
 $> docker service create \
@@ -72,8 +73,8 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Since this has a replica of one (1) and the initial version has four (4) replicas 20% of application traffic
-will be sent to `demo-version-2`:
+Since this has a replica of one (1), and the initial version has four (4) replicas, 20% of application traffic
+is sent to `demo-version-2`:
 
 ```bash
 $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
@@ -88,7 +89,7 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 {"instance":"c2a686ae5694","version":"0.1","metadata":"demo-version-1","request_id":"724c21d0fb9d7e265821b3c95ed08b61"}
 ```
 
-To increase traffic to the new version add more replicas with `docker scale`:
+To increase traffic to the new version, add more replicas with `docker scale`:
 
 ```bash
 $> docker service scale demo-v2=4
@@ -102,6 +103,5 @@ $> docker service scale demo-v1=0
 demo-v1
 ```
 
-This will route all application traffic to the new version.  If you need to rollback, simply scale the v1 service
+This routes all application traffic to the new version.  If you need to rollback, simply scale the v1 service
 back up and v2 down.
-
