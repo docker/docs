@@ -1256,7 +1256,7 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
-  - sectiontitle: Universal Control Plane
+      - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
       title: Universal Control Plane overview
