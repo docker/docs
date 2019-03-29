@@ -1,5 +1,5 @@
 ---
-description: docker-compose build
+description: Build or rebuild services.
 keywords: fig, composition, compose, docker, orchestration, cli, build
 title: docker-compose build
 notoc: true
