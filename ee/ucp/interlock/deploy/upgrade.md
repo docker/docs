@@ -1,7 +1,9 @@
 ---
 title: Layer 7 routing upgrade
-description: Learn how to route layer 7 traffic to your swarm services
+description: Learn how to upgrade your existing layer 7 routing solution
 keywords: routing, proxy, hrm
+redirect_from:
+  - /ee/ucp/interlock/upgrade/
 ---
 
 The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services.md)
@@ -9,7 +11,7 @@ functionality was redesigned in UCP 3.0 for greater security and flexibility.
 The functionality was also renamed to "layer 7 routing", to make it easier for
 new users to get started.
 
-[Learn about the new layer 7 routing functionality](index.md).
+[Learn about the new layer 7 routing functionality](../index.md).
 
 To route traffic to your service you apply specific labels to your swarm
 services, describing the hostname for the service and other configurations.
@@ -22,8 +24,6 @@ You don't have to manually update your services. During the upgrade process to
 This article describes the upgrade process for the routing component, so that
 you can troubleshoot UCP and your services, in case something goes wrong with
 the upgrade.
-
-# UCP upgrade process
 
 If you are using the HTTP routing mesh, and start an upgrade to UCP 3.0:
 
@@ -40,7 +40,7 @@ before the upgrade. If something goes wrong during the upgrade process, you
 need to troubleshoot the interlock services and your services, since the HRM
 service won't be running after the upgrade.
 
-[Learn more about the interlock services and architecture](architecture.md).
+[Learn more about the interlock services and architecture](../architecture.md).
 
 ## Check that routing works
 
@@ -96,7 +96,7 @@ being used by other services.
 ## Workarounds and clean-up
 
 If you have any of the problems above, disable and enable the layer 7 routing
-setting on the [UCP settings page](deploy/index.md). This redeploys the
+setting on the [UCP settings page](index.md). This redeploys the
 services with their default configuration.
 
 When doing that make sure you specify the same ports you were using for HRM,
@@ -108,7 +108,7 @@ stop it since it can conflict with the `ucp-interlock-proxy` service.
 ## Optionally remove labels
 
 As part of the upgrade process UCP adds the
-[labels specific to the new layer 7 routing solution](usage/labels-reference.md).
+[labels specific to the new layer 7 routing solution](../usage/labels-reference.md).
 
 You can update your services to remove the old HRM labels, since they won't be
 used anymore.
@@ -121,7 +121,7 @@ the application traffic.
 If before upgrading you had all your applications attached to the `ucp-hrm`
 network, after upgrading you can update your services to start using a
 dedicated network for routing that's not shared with other services.
-[Learn how to use a dedicated network](usage/index.md).
+[Learn how to use a dedicated network](../usage/index.md).
 
 If before upgrading you had a dedicate network to route traffic to each service,
 Interlock will continue using those dedicated networks. However the
