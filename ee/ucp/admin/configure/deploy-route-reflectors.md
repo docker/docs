@@ -29,8 +29,8 @@ and NodePorts might not work in these workloads.
 
 ## Choose dedicated nodes
 
-Start by tainting the nodes, so that no other workload runs there. Configure
-your CLI with a UCP client bundle, and for each dedicated node, run:
+Start by tainting the nodes, so that no other workload runs there. [Configure
+your CLI with a UCP client bundle](/ee/ucp/user-access/cli/), and for each dedicated node, run:
 
 ```
 kubectl taint node <node-name> \
