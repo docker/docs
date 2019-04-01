@@ -1,8 +1,10 @@
 ---
-title: Using Docker Desktop Enterprise on Mac
+title: Use Docker Desktop Enterprise on Mac
 description: Exploring the Mac user interface
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 ---
+
+This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Mac.
 
 # Test your installation
 
@@ -61,9 +63,9 @@ $ docker image ls
 $ docker image rm nginx
 ```
 
-# Docker Desktop Enterprise Preferences
+# Docker Desktop Enterprise preferences
 
-Choose ![whale menu](../images/whale-x.png) → **Preferences** from the menu bar and configure the runtime options described below.
+Click on the Docker icon from the menu bar and then **Preferences** to configure the runtime options described below.
 
 ![Docker context menu](../images/prefs.png)
 
@@ -80,7 +82,7 @@ General settings include:
 - **Include VM in Time Machine backups** backs up the Docker Desktop Enterprise virtual
   machine. (Disabled by default.)
 
-- **Securely store Docker logins in MacOS keychain** stores your Docker login
+    **Securely store Docker logins in macOS keychain** stores your Docker login
   credentials. (Enabled by default.)
 
 - **Send usage statistics**: Send diagnostics, crash reports, and usage
@@ -276,23 +278,9 @@ For more about using the Kubernetes integration with Docker Desktop Enterprise, 
 
 ## Reset
 
-Select ![whale menu](../images/whale-x.png) -> **Preferences** from the menu bar, then click **Reset** to reset factory defaults, restart the Docker daemon, or uninstall.
+Click on the Docker icon from the menu bar and then **Preferences**. Click **Reset** to reset factory defaults, restart the Docker daemon, reset Kubernetes cluster, or to reset disk image.
 
-![Uninstall or reset Docker](../images/prefs-reset.png)
-
-> Uninstall Docker Desktop Enterprise from the commandline
->
->To uninstall Docker Desktop Enterprise from a terminal, run: `<DockerforMacPath>
->--uninstall`. If your instance is installed in the default location, this
->command provides a clean uninstall:
->
->```shell
->$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
->Docker is running, exiting...
->Docker uninstalled successfully. You can move the Docker application to the trash.
->```
->You might want to use the command-line uninstall if, for example, you find that
->the app is non-functional, and you cannot uninstall it from the menu.
+![Uninstall or reset Docker](../images/prefs-reset-mac.png)
 
 ## Add TLS certificates
 

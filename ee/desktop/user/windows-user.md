@@ -1,8 +1,10 @@
 ---
-title: Using Docker Desktop Enterprise on Windows
+title: Use Docker Desktop Enterprise on Windows
 description: Exploring the Windows user interface
 keywords: Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user
 ---
+
+This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Windows.
 
 # Test your installation
 
@@ -161,17 +163,16 @@ running something more complex, such as an OS and a webserver.
     > docker container rm webserver laughing_kowalevski relaxed_sammet
     ```
 
-# Docker Desktop Enterprise Settings
+# Docker Desktop Enterprise settings
 
 The Docker Desktop Enterprise **Settings** menu provides options for configuring
-Docker settings -- installation, version packs, Docker Hub login,
-and more.
+Docker settings such as installation, version packs, Docker Hub login, and more.
 
-This section explains the configuration options accessible from the **Settings** dialog.
+The following section explains the configuration options accessible from the **Settings** dialog.
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-1. Open  Docker Desktop Enterprise by right-clicking the Docker icon in the Notifications area (or System tray):
+1. Open  Docker Desktop by right-clicking the Docker icon in the Notifications area (or System tray):
 
     ![Showing hidden apps in the taskbar](../images/whale-icon-systray-hidden.png)
 
@@ -181,36 +182,29 @@ This section explains the configuration options accessible from the **Settings**
 
 ## General
 
-On the **General** tab of the Settings dialog, you can configure when to start Docker Desktop Enterprise.
+On the **General** tab of the Settings dialog, you can configure when to start Docker Desktop.
 
 ![Settings](../images/settings-general.png)
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-- **Start Docker when you log in** - Automatically start the Docker Desktop Enterprise
-application upon Windows system login.
+- **Start Docker when you log in** - Automatically start the Docker Desktop application upon Windows system login.
 
-- **Send usage statistics** - By default, Docker Desktop Enterprise sends diagnostics,
-crash reports, and usage data. This information helps Docker improve and
-troubleshoot the application. Clear the check box to opt out. Docker might
-prompt you for more information.
+- **Send usage statistics** - By default, Docker Desktop sends diagnostics,
+crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out. Docker might prompt you for more information.
 
 ## Shared drives
 
-Share your local drives (volumes) with Docker Desktop Enterprise, so that they are
+Share your local drives (volumes) with Docker Desktop, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
 
 ![Shared drives](../images/settings-shared-drives.png)
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-Permission for shared drives are tied to the credentials you provide here. If
-you run `docker` commands under a different username than the one configured
-here, your containers cannot access the mounted volumes.
+Permission for shared drives are tied to the credentials you provide here. If you run `docker` commands under a different username than the one configured here, your containers cannot access the mounted volumes.
 
-To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker store the
-credentials so that you don't need to enter them every time.
+To apply shared drives, you are prompted for your Windows system (domain) username and password. You can select an option to have Docker store the credentials so that you don't need to enter them every time.
 
 Tips on shared drives, permissions, and volume mounts:
 
@@ -220,7 +214,7 @@ Tips on shared drives, permissions, and volume mounts:
 the Linux VM, or use a [data volume](https://docs.docker.com/storage/volumes/) (named volume) or [data container](https://docs.docker.com/storage/volumes/). There are a number of issues with using host-mounted volumes and network paths
 for database files. See [Volume mounts from host paths use a nobrl option to override database locking](https://docs.docker.com/docker-for-windows/troubleshoot/#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 
-- Docker Desktop Enterprise sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
+- Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
 This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes)</a>.
 
 - Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).

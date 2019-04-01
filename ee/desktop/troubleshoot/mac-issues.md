@@ -1,10 +1,10 @@
 ---
 title: Troubleshoot Docker Desktop Enterprise issues on Mac
 description: Troubleshoot Mac issues
-keywords: Troubleshoot, diagnose, mac, issues, Docker Enterprise, Windows, Mac, Docker Desktop, Enterprise
+keywords: Troubleshoot, diagnose, mac, issues, Docker Enterprise, Docker Desktop, Enterprise
 ---
 
-This topic contains information on how to diagnose Docker Desktop issues on Mac, send feedback, and submit the issues to Docker Support.
+This page contains information on how to diagnose Docker Desktop Enterprise (DDE) issues on Mac, send feedback, and submit the issues to Docker Support.
 
 # Creating a diagnostics file in Docker Desktop Enterprise
 
