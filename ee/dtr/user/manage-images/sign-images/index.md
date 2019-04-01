@@ -242,4 +242,4 @@ but will not delete data from the Notary server.
 
 * [Automating Docker Content
   Trust](/engine/security/trust/trust_automation/)
-* [Using Docker Content Trust with a Remote UCP](./trust-with-remote-ucp.md)
+* [Using Docker Content Trust with a Remote UCP](./trust-with-remote-ucp/)
