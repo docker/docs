@@ -26,7 +26,7 @@ Windows](/docker-for-windows/index.md), but on Linux systems you need to
 shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
-slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 4000:80
 username/repo:tag`, then visit `http://localhost/`.
 
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
