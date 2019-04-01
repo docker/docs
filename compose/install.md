@@ -125,7 +125,7 @@ target="_blank" class="_"}. Follow the instructions from the link, which involve
 running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
 
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `make`
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
 {: .important}
 
 1.  Run this command to download the current stable release of Docker Compose:
@@ -175,7 +175,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 #### Install using pip
 
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `make`
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
 {: .important}
 
 Compose can be installed from
