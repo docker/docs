@@ -18,7 +18,7 @@ quick access to a test container.
 
 __Note: Replace "THEPASSWORDYOUCREATED" with the password that you created in the previous step.__
 
-> ** Note**: Use `without-password` instead of `prohibit-password` for Ubuntu 14.04.
+> **Note**: Use `without-password` instead of `prohibit-password` for Ubuntu 14.04.
 
 ```Dockerfile
 FROM ubuntu:16.04
@@ -38,6 +38,16 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOTE: use  `without-password` instead of `prohibit-password` for Ubuntu 14.04.
+>>>>>>> 9de3c4e47c... Update running_ssh_service.md
+=======
+>>>>>>> 2ebcae3230... Update running_ssh_service.md
+=======
+>>>>>>> b2ec3a6611dbb418d70c5b4082b9e118bfac3c7b
 
 Build the image using:
 
