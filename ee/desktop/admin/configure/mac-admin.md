@@ -4,7 +4,9 @@ description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 ---
 
-# Environment configuration on Mac (administrators only)
+This page contains information on how system administrators can configure Docker Desktop Enterprise (DDE) settings, specify and lock configuration parameters to create a standardized development environment on Mac operating systems.
+
+# Environment configuration (administrators only)
 
 The administrator configuration file allows you to customize and standardize your Docker Desktop environment across the organization.
 
