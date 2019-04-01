@@ -37,14 +37,16 @@ to successfully deploy Docker UCP on Azure:
 - All UCP Nodes (Managers and Workers) need to be deployed into the same Azure
   Resource Group. The Azure Networking components (Virtual Network, Subnets,
   Security Groups)  could be deployed in a second Azure Resource Group.
-- The Azure Virtual Network and Subnet must be appropriately sized for your environment, as
-  addresses from this pool will be consumed by Kubernetes Pods. For more
-  information, see [Considerations for IPAM
+- The Azure Virtual Network and Subnet must be appropriately sized for your
+  environment, as addresses from this pool will be consumed by Kubernetes Pods.
+  For more information, see [Considerations for IPAM
   Configuration](#considerations-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
-- All UCP workers and managers need to have the `Orchestrator` tag in Azure with the Kubernetes version as the value, following this format: `Orchestrator=Kubernetes:x.y.z`. This value may change in
-  each UCP release. To find the relevant version please see the UCP [Release
+- All UCP workers and managers need to have the `Orchestrator` tag in Azure with
+  the Kubernetes version as the value, following this format:
+  `Orchestrator=Kubernetes:x.y.z`. This value may change in each UCP release. To
+  find the relevant version please see the UCP [Release
   Notes](../../release-notes). For example for UCP `3.1.0` the tag would be
   `Orchestrator=Kubernetes:1.11.2`. 
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
@@ -52,9 +54,11 @@ to successfully deploy Docker UCP on Azure:
   the host, including domain names). Note this value is case sensitive, and all
   values should be in lowercase.
 - An Azure Service Principal with `Contributor` access to the Azure Resource
-  Group hosting the UCP Nodes. If you are using a separate Resource Group for
-  the networking components, the same Service Principal will need `Network
-  Contributor` access to this Resource Group.
+  Group hosting the UCP Nodes. This Service principal will be used by Kubernetes
+  to communicate with the Azure API, The Service Principal ID and Secret Key are
+  needed as part of the UCP prerequisites. If you are using a separate Resource
+  Group for the networking components, the same Service Principal will need
+  `Network Contributor` access to this Resource Group.
 
 UCP requires the following information for the installation:
 
@@ -112,10 +116,10 @@ More details on this configuration file can be found
 
 ## Considerations for IPAM Configuration
 
-The subnet and the virtual network associated with the primary interface of
-the Azure virtual machines need to be configured with a large enough address prefix/range. 
-The number of required IP addresses depends on the number of pods running
-on each node and the number of nodes in the cluster.
+The subnet and the virtual network associated with the primary interface of the
+Azure virtual machines need to be configured with a large enough address
+prefix/range. The number of required IP addresses depends on the workload and
+the number of nodes in the cluster.
 
 For example, in a cluster of 256 nodes, to run a maximum of 128 pods
 concurrently on a node, make sure that the address space of the subnet and the
@@ -202,12 +206,32 @@ for each virtual machine in the virtual machine scale set.
 
 ### Adjusting the IP Count Value
 
-If you have manually attached additional IP addresses to the Virtual Machines (via an ARM Template, Azure CLI or Azure Portal) or you want to reduce the number of IP Addresses automatically provisioned by UCP from the default of 128 addresses, then you should alter the IP Count Value in the UCP Configuration file before installation. If you are happy with 128 addresses per Virtual Machine, proceed to [Installing UCP](#installing-ucp).
+If you have manually attached additional IP addresses to the Virtual Machines
+(via an ARM Template, Azure CLI or Azure Portal) or you want to reduce the
+number of IP Addresses automatically provisioned by UCP from the default of 128
+addresses, then you can alter the `azure_ip_count` variable in the UCP
+Configuration file before installation. If you are happy with 128 addresses per
+Virtual Machine, proceed to [Installing UCP](#installing-ucp).
+
+Once UCP has been installed, the UCP [configuration
+file](../configure/ucp-configuration-file/) is managed by UCP and populated with
+all of the cluster configuration data (such as AD/LDAP information or networking
+configuration). As there is no Universal Control Plane deployed yet, we are able
+to stage a [configuration file](../configure/ucp-configuration-file/) just
+containing the Azure IP Count value, UCP will populate the rest of the cluster
+variables during and after the installation.
+
+Below are some example configuration files with just the `azure_ip_count`
+variable defined. These 3 line files, can be preloaded into a Docker Swarm prior
+to a UCP installation, overriding the default `azure_ip_count` value of 128 IP
+addresses per node. To find out more information about the configuration file,
+and other variables that can be staged pre-install see this [reference
+document](../configure/ucp-configuration-file/)
 
 If you have manually attached additional IP addresses then your UCP configuration file would be: 
 
 ```
-$ cat example-config-1
+$ vi example-config-1
 [cluster_config]
   azure_ip_count = "0"
 ```
@@ -218,27 +242,42 @@ Configuration](#considerations-for-ipam-configuration) to calculate an
 appropriate value) then your UCP configuration file would be: 
 
 ```
-$ cat example-config-2
+$ vi example-config-2
 [cluster_config]
   azure_ip_count = "20" # Note this value may be different for your environment
 ```
 
-To pre-load this configuration file prior to a UCP installation, connect to the Virtual Machine where you would you like to install UCP and initiate a Swarm. 
+To pre-load this configuration file prior to a UCP installation. 
 
+  1) Copy the configuration file to a Virtual Machine that you wish to become a UCP Manager Node 
+  
+  2) Initiate a Swarm on that Virtual Machine.
+
+  ```
+  $ docker swarm init
+  ```
+
+  3) Upload the configuration file to the Swarm, by using a [Docker Swarm
+     Config](/engine/swarm/configs/). This Swarm Config will need to be named
+     `com.docker.ucp.config`.
+
+  ```
+  $ docker config create com.docker.ucp.config <local-configuration-file>
+  ```
+
+  4) You can check the configuration has been loaded succesfully with.
+
+  ```
+  $ docker config list
+ID                          NAME                                                      CREATED             UPDATED
+igca3q30jz9u3e6ecq1ckyofz   com.docker.ucp.config                                     1 days ago          1 days ago
 ```
-$ docker swarm init
-```
 
-Then preload the UCP configuration file as a Swarm Config.
+  5) You are now ready to proceed to [Installing UCP](#installing-ucp). 
 
-```
-$ docker config create com.docker.ucp.config example-config-<n>
-```
-
-Now you are ready to proceed with the install. 
-
-If you need to adjust this value post installation then this can be changed via
-the UCP [configuration file](../configure/ucp-configuration-file/). However if
+If you need to adjust this value post installation then there are instructions
+on how to download the UCP Configuration file from UCP, change it, and post it
+back up to the API server [here](../configure/ucp-configuration-file/). Note, if
 this value is reduced post-installation, existing virtual machines will not be
 reconciled, and you will have to manually edit the IP count in Azure.  
 
