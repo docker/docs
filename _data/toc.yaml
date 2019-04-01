@@ -1179,9 +1179,9 @@ manuals:
     - sectiontitle: User
       section:
       - path: /ee/desktop/user/mac-user/
-        title: Using DDE on Mac
+        title: Use DDE on Mac
       - path: /ee/desktop/user/windows-user/
-        title: Using DDE on Windows
+        title: Use DDE on Windows
     - path: /ee/desktop/app-designer/
       title: Application designer
     - sectiontitle: Troubleshoot

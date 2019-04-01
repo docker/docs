@@ -1,8 +1,10 @@
 ---
 title: Troubleshoot Docker Desktop Enterprise issues on Windows
 description: Learn about Docker Desktop Enterprise
-keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise, troubleshoot
+keywords: Docker EE, Windows, Docker Desktop, Enterprise, troubleshoot
 ---
+
+This page contains information on how to diagnose Docker Desktop Enterprise (DDE) issues on Windows, send feedback, and submit the issues to Docker Support.
 
 # Creating a diagnostics file in Docker Desktop Enterprise
 

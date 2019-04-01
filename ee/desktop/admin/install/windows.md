@@ -32,11 +32,11 @@ Download Docker Desktop Enterprise for [**Windows**](https://download.docker.com
 
 The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.
 
-Double-click the `.msi` file to begin the installation and follow the on-screen instructions.
+Double-click the `.msi` file to begin the installation and follow the on-screen instructions. When the installation is complete, select **Docker Desktop** from the Start menu to start Docker Desktop.
 
 # License file
 
-You must install the Docker Desktop Enterprise license file at the following location:
+Install the Docker Desktop Enterprise license file at the following location:
 
 `C:\Users\Docker\AppData\Roaming\Docker\docker_subscription.lic`
 
@@ -71,7 +71,7 @@ Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/en
 
 For information on using the CLI tool for version pack installation, see [Command line installation](#command-line-installation).
 
-Available version packs are listed within the **Version Selection** option in the Docker Desktop Enterprise menu. If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop Enterprise restarts and the selected Docker Engine and Kubernetes versions are used.
+Available version packs are listed within the **Version Selection** option in the Docker Desktop menu. If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop restarts and the selected Docker Engine and Kubernetes versions are used.
 
 # Command line installation
 
@@ -89,7 +89,7 @@ Run the following command to install or upgrade a version pack to the version co
 
 `dockerdesktop-admin.exe -InstallVersionPack=[path-to-archive]`
 
->**Note:** You must stop Docker Desktop Enterprise before installing a version pack.
+>**Note:** You must stop Docker Desktop before installing a version pack.
 
 ## Version-pack uninstall
 
@@ -97,7 +97,7 @@ Run the following command to uninstall the specified version pack:
 
  `dockerdesktop-admin.exe -UninstallVersionPack=[version-pack-name]`
 
->**Note:** You must stop Docker Desktop Enterprise before uninstalling a version pack.
+>**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
 ## Application uninstall
 

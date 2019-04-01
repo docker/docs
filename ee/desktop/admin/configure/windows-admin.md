@@ -4,7 +4,9 @@ description: Learn about Docker Desktop Enterprise configuration
 keywords: Docker Admin, Windows, Docker Desktop, Enterprise
 ---
 
-# Environment configuration on Windows (administrators only)
+This page contains information on how system administrators can configure Docker Desktop Enterprise (DDE) settings, specify and lock configuration parameters to create a standardized development environment on Windows operating systems.
+
+# Environment configuration (administrators only)
 
 The administrator configuration file allows you to customize and standardize your Docker Desktop environment across the organization. When you install Docker Desktop Enterprise, a configuration file with default values is installed the following location:
 

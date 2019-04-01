@@ -22,9 +22,9 @@ This page contains information about the system requirements and specific instru
 
 Download Docker Desktop Enterprise for [**Mac**](https://download.docker.com/mac/enterprise/Docker.pkg). The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.
 
-Double-click the `.pkg` file to begin the installation and follow the on-screen instructions.
+Double-click the `.pkg` file to begin the installation and follow the on-screen instructions. When the installation is complete, click the Launchpad icon in the Dock and then **Docker** to start Docker Desktop.
 
-Mac administrators can use the command line option `\$ sudo installer -pkg Docker.pkg -target /` for fine tuning and mass installation. After running this command, you can start Docker Desktop Enterprise from the Application folder on each individual machine.
+Mac administrators can use the command line option `\$ sudo installer -pkg Docker.pkg -target /` for fine tuning and mass installation. After running this command, you can start Docker Desktop from the Applications folder on each machine.
 
 Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/configure/mac-admin).
 
@@ -67,9 +67,9 @@ For information on using the CLI tool for version pack installation, see [Comman
 
 > **Note:** It is not possible to install the version packs using the Docker Desktop user interface or by double-clicking the `.ddvp` file.
 
-Available version packs are listed within the **Version Selection** option in the Docker Desktop Enterprise menu. If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop Enterprise restarts and the selected Docker Engine and Kubernetes versions are used.
+Available version packs are listed within the **Version Selection** option in the Docker Desktop menu. If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop restarts and the selected Docker Engine and Kubernetes versions are used.
 
-If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop Enterprise restarts and the selected Docker Engine and Kubernetes versions are used.
+If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop restarts and the selected Docker Engine and Kubernetes versions are used.
 
 # Command line installation
 
@@ -87,7 +87,7 @@ Run the following command to install or upgrade a version pack to the version co
 
  `dockerdesktop-admin version-pack install [path-to-archive]`
 
- >**Note:** You must stop Docker Desktop Enterprise before installing a version pack.
+ >**Note:** You must stop Docker Desktop before installing a version pack.
 
 ## Version-pack uninstall
 
@@ -95,7 +95,7 @@ Run the following command to install or upgrade a version pack to the version co
 
  `dockerdesktop-admin version-pack uninstall [version-pack-name]`
 
->**Note:** You must stop Docker Desktop Enterprise before uninstalling a version pack.
+>**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
 ## Application uninstall
 
