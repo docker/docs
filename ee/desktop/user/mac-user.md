@@ -446,9 +446,7 @@ For more about using the Kubernetes integration with Docker Desktop Enterprise, 
 
 ## Reset
 
-Select ![whale menu](../images/whale-x.png) -> **Preferences** from the
-menu bar, then click **Reset** to reset factory defaults, restart the Docker
-daemon, or uninstall.
+Select ![whale menu](../images/whale-x.png) -> **Preferences** from the menu bar, then click **Reset** to reset factory defaults, restart the Docker daemon, or uninstall.
 
 ![Uninstall or reset Docker](../images/prefs-reset.png)
 
