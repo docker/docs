@@ -150,7 +150,7 @@ With an exhausted network, you can triage it using the following steps.
 
 1. SSH into a manager node on a cluster where your applications are running.
 
-2. Check the `docker service ls` output. It will diplay the service that is  unable to completely fill all its replicas such as: 
+2. Check the `docker service ls` output. It will display the service that is  unable to completely fill all its replicas such as: 
 
 ```
 ID                  NAME                MODE                REPLICAS   IMAGE               PORTS

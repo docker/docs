@@ -42,6 +42,10 @@ to successfully deploy Docker UCP on Azure
 - All UCP Nodes (Managers and Workers) need to be deployed into the same 
 Azure Resource Group. The Azure Networking (Vnets, Subnets, Security Groups) 
 components could be deployed in a second Azure Resource Group.
+- The Azure Vnet and Subnet must be appropriately sized for your
+  environment, and addresses from this pool are consumed by Kubernetes Pods. For more information, see
+  [Considerations for IPAM
+  Configuration](#considerations-for-ipam-configuration).
 - All UCP Nodes (Managers and Workers) need to be attached to the same 
 Azure Subnet.
 - All UCP (Managers and Workers) need to be tagged in Azure with the 
@@ -207,6 +211,9 @@ The `--pod-cidr` option maps to the IP address range that you configured for
 the subnets in the previous sections, and the `--host-address` maps to the
 IP address of the master node.
 
+> Note: The `pod-cidr` range must be within an Azure subnet attached to the
+> host.
+
 ```bash
 docker container run --rm -it \
   --name ucp \
@@ -217,7 +224,3 @@ docker container run --rm -it \
   --cloud-provider Azure \
   --interactive
 ```
-
-#### Additional Notes
-
-- The Kubernetes `pod-cidr` must match the Azure Vnet of the hosts. 

@@ -75,7 +75,8 @@ Failed to add signer to: dtr.example.com/user/repo
 ```
 
 If you are using DTR and would like to work with a remote UCP's signing policy, 
-you must register your DTR instance with that remote UCP. See [Registering DTR with a remote Universal Control Plane](ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane) for details. 
+you must [register your DTR instance with that remote UCP](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane). 
+See [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/) for more details. 
 
 ## Configuring the Notary Client
 
@@ -505,4 +506,4 @@ No signatures or cannot access dtr.example.com/admin/demo
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
-* [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/)
+* [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp.md)

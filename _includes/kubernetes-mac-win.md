@@ -15,7 +15,7 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% capture min-version %}{{ product }} 18.06.0-ce-mac70 CE{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }} and higher.
+  **Kubernetes is only available in {{ min-version }} and higher.**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -34,7 +34,7 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% capture min-version %}{{ product }} 18.06.0-ce-win70 CE{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }} and higher.
+  **Kubernetes is only available in {{ min-version }} and higher.**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
