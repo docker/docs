@@ -29,7 +29,7 @@ Administrators who need to update their passwords can ask another administrator 
 or SSH into a Docker Enterprise [manager node](/engine/swarm/how-swarm-mode-works/nodes/#manager-nodes) and run:
 
 {% raw %}
-```none
+```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}' ucp-auth-api)" passwd -i
 {% endraw %}
 ```
