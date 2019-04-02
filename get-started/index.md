@@ -174,14 +174,14 @@ is available in
 2.  List the `hello-world` image that was downloaded to your machine:
 
     ```shell
-    docker image ls
+    docker images ls
     ```
 
 3.  List the `hello-world` container (spawned by the image) which exits after
     displaying its message. If it were still running, you would not need the `--all` option:
 
     ```shell
-    docker container ls --all
+    docker ps --all
 
     CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
     54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
@@ -203,12 +203,12 @@ docker info
 docker run hello-world
 
 ## List Docker images
-docker image ls
+docker images ls
 
 ## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
+docker ps
+docker ps --all
+docker ps -aq
 ```
 
 ## Conclusion of part one
