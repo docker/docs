@@ -228,7 +228,15 @@ addresses per node. To find out more information about the configuration file,
 and other variables that can be staged pre-install see this [reference
 document](../configure/ucp-configuration-file/)
 
-If you have manually attached additional IP addresses then your UCP configuration file would be: 
+> Note: Do not set the `azure_ip_count` to a value less than 6 if you have not
+> manually provisioned additional IP addresses to each Virtual Machine. The UCP
+> installation will need at least 6 IP addresses, in addition to the Virtual
+> Machines private IP address, to allocate to the core UCP components that run
+> as Kubernetes pods.
+
+If you have manually provisioned additional IP addresses to each Virtual
+Machine, and want to completely disable UCP dynamically provisioning IP
+addresses for you, then your UCP configuration file would be: 
 
 ```
 $ vi example-config-1
@@ -296,7 +304,7 @@ node.
 ```bash
 docker container run --rm -it \
   --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <ucp-ip> \
   --pod-cidr <ip-address-range> \
