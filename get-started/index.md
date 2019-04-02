@@ -206,9 +206,9 @@ docker run hello-world
 docker image ls
 
 ## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
+docker container ps
+docker container ps --all
+docker container ps -aq
 ```
 
 ## Conclusion of part one
