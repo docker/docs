@@ -17,12 +17,11 @@ pipeline {
         expression { env.GIT_URL == 'https://github.com/docker/docs-private.git' }
       }
       stages {
-        stage( 'build and push new beta-stage image' ) {
+        stage( 'build and push new beta stage image' ) {
           when {
             branch 'amberjack'
           }
           steps {
-            sh 'echo "Build and push new beta-stage image here"'
             withDockerRegistry(reg) {
               sh """
                 docker image build --tag docs/docs-private:beta-stage-${env.BUILD_NUMBER} . && \
@@ -36,7 +35,6 @@ pipeline {
             branch 'published'
           }
           steps {
-            sh 'echo "Build and push new beta image here"'
             withDockerRegistry(reg) {
               sh """
                 docker image build --tag docs/docs-private:beta-${env.BUILD_NUMBER} . && \
@@ -45,12 +43,11 @@ pipeline {
             }
           }
         }
-        stage( 'update beta-stage service' ) {
+        stage( 'update beta stage service' ) {
           when {
             branch 'amberjack'
           }
           steps {
-            sh 'echo "Update beta-stage service here"'
             withVpn(dtrVpnAddress) {
               withCredentials(ucpBundle) {
                 sh 'unzip -o $UCP' 
@@ -72,7 +69,6 @@ pipeline {
             branch 'published'
           }
           steps {
-            sh 'echo "Update beta service here"'
             withVpn(dtrVpnAddress) {
               withCredentials(ucpBundle) {
                 sh 'unzip -o $UCP' 
