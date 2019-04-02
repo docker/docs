@@ -69,7 +69,7 @@ upgrade your installation to the latest release.
 
 ### New platforms
 * Added support for SLES 15.
-* Added support for Oracle 7.6.
+* Added support for CentOS 7.6.
 
 ### Kubernetes
 * Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
