@@ -14,7 +14,7 @@ pipeline {
         label 'ubuntu-1604-aufs-stable'
       }
       when {
-        expression { env.GIT_URL == 'https://github.com/docker/docker.github.io.git' }
+        expression { env.GIT_URL == 'https://github.com/Docker/docker.github.io.git' }
       }
       stages {
         stage( 'build and push stage image' ) {
