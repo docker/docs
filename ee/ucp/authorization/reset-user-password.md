@@ -28,8 +28,8 @@ User passwords managed with an LDAP service must be changed on the LDAP server.
 Administrators who need to update their passwords can ask another administrator for help
 or SSH into a Docker Enterprise [manager node](/engine/swarm/how-swarm-mode-works/nodes/#manager-nodes) and run:
 
-```none
 {% raw %}
+```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}' ucp-auth-api)" passwd -i
 {% endraw %}
 ```
