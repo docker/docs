@@ -1,5 +1,6 @@
 def dtrVpnAddress = "vpn.corp-us-east-1.aws.dckr.io"
 def ucpBundle = [file(credentialsId: "ucp-bundle", variable: 'UCP')]
+def slackString = [string(credentialsId: 'slack-docs-webhook', variable: 'slack')]
 def reg = [credentialsId: 'csebuildbot', url: 'https://index.docker.io/v1/']
 
 pipeline {
@@ -8,40 +9,43 @@ pipeline {
     timeout(time: 1, unit: 'HOURS') 
   }
   stages {
-    stage( 'docker.github.io' ) {
+    stage( 'docs-private' ) {
       agent {
         label 'ubuntu-1604-aufs-stable'
       }
+      when {
+        expression { env.GIT_URL == 'https://github.com/docker/docs-private.git' }
+      }
       stages {
-        stage( 'build and push stage image' ) {
+        stage( 'build and push new beta stage image' ) {
           when {
-            branch 'master'
+            branch 'amberjack'
           }
           steps {
             withDockerRegistry(reg) {
               sh """
-                docker image build --tag docs/docker.github.io:stage-${env.BUILD_NUMBER} . && \
-                docker image push docs/docker.github.io:stage-${env.BUILD_NUMBER}
+                docker image build --tag docs/docs-private:beta-stage-${env.BUILD_NUMBER} . && \
+                docker image push docs/docs-private:beta-stage-${env.BUILD_NUMBER}
               """
             }
           }
         }
-        stage( 'build and push prod image' ) {
+        stage( 'build and push new beta image' ) {
           when {
             branch 'published'
           }
           steps {
             withDockerRegistry(reg) {
               sh """
-                docker image build --tag docs/docker.github.io:prod-${env.BUILD_NUMBER} . && \
-                docker image push docs/docker.github.io:prod-${env.BUILD_NUMBER}
+                docker image build --tag docs/docs-private:beta-${env.BUILD_NUMBER} . && \
+                docker image push docs/docs-private:beta-${env.BUILD_NUMBER}
               """
             }
           }
         }
-        stage( 'update docs-stage' ) {
+        stage( 'update beta stage service' ) {
           when {
-            branch 'master'
+            branch 'amberjack'
           }
           steps {
             withVpn(dtrVpnAddress) {
@@ -50,18 +54,17 @@ pipeline {
               }
               withDockerRegistry(reg) {
                 sh """
-                  cd ucp-bundle-success_bot
                   export DOCKER_TLS_VERIFY=1
                   export COMPOSE_TLS_VERSION=TLSv1_2
                   export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
                   export DOCKER_HOST=tcp://ucp.corp-us-east-1.aws.dckr.io:443
-                  docker service update --detach=false --force --image docs/docker.github.io:stage-${env.BUILD_NUMBER} docs-stage-docker-com_docs --with-registry-auth
+                  docker service update --detach=false --force --image docs/docs-private:beta-stage-${env.BUILD_NUMBER} docs-beta-stage-docker-com_docs --with-registry-auth
                 """
               }
             }
           }
         }
-        stage( 'update docs-prod' ) {
+        stage( 'update beta service' ) {
           when {
             branch 'published'
           }
@@ -72,12 +75,11 @@ pipeline {
               }
               withDockerRegistry(reg) {
                 sh """
-                  cd ucp-bundle-success_bot
                   export DOCKER_TLS_VERIFY=1
                   export COMPOSE_TLS_VERSION=TLSv1_2
                   export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
                   export DOCKER_HOST=tcp://ucp.corp-us-east-1.aws.dckr.io:443
-                  docker service update --detach=false --force --image docs/docker.github.io:prod-${env.BUILD_NUMBER} docs-docker-com_docs --with-registry-auth
+                  docker service update --detach=false --force --image docs/docs-private:beta-${env.BUILD_NUMBER} docs-beta-docker-com_docs --with-registry-auth
                 """
               }
             }
