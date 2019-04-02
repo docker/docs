@@ -1158,7 +1158,7 @@ manuals:
       path: /engine/release-notes/
   - sectiontitle: Docker Desktop Enterprise
     section:
-    - path: /ee/desktop/index/
+    - path: /ee/desktop/
       title: Overview
     - path: /ee/desktop/release-notes/
       title: Release notes
