@@ -41,6 +41,13 @@ upgrade your installation to the latest release.
 * Added validation for service configuration label values. (ENGCORE-114)
 * Fixed an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
 
+### Deprecated
+The following features are deprecated in UCP 3.1:
+
+* Collections
+    - The ability to create a nested collection of more than 2 layers deep within the root `/Swarm/` collection is now deprecated and will not be included in future versions of the product. However, current nested collections with more than 2 layers are still retained.
+    - Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster collection designated as `/Swarm/`. For example, if a production collection called `/Swarm/production` is created under the shared cluster collection `/Swarm/`,  only one level of nesting should be created, for example, `/Swarm/production/app/`. See [Nested collections](/ee/ucp/authorization/group-resources/#nested-collections) for more details.
+
 ### Known Issues
 
 * Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191)https://docker.atlassian.net/browse/ENGORC-2191. This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
