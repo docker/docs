@@ -59,8 +59,13 @@ the configuration created during a backup.
 Load your UCP client bundle, and run the following command, replacing the
 placeholders for the real values:
 
-```none
-read -sp 'ucp password: ' UCP_PASSWORD; \
+```bash
+read -sp 'ucp password: ' UCP_PASSWORD;
+```
+
+This prompts you for the UCP password. Next, run the following to restore DTR from your backup. You can learn more about the supported flags in [docker/dtr restore](/reference/dtr/2.6/cli/restore).
+
+```bash
 docker run -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} restore \

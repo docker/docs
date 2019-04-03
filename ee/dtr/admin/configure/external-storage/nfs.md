@@ -53,12 +53,18 @@ To support **NFS v4**, more NFS options have been added to the CLI. See [New Fea
 > See [Reconfigure Using a Local NFS Volume]( https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) for Docker's recommended recovery strategy.  
 {: .warning}
 
+#### DTR 2.6.4 
+
+In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/2.6/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. [Upgrade to 2.6.4](/reference/dtr/2.6/cli/upgrade/) and follow [Best practice for data migration in 2.6.4](/ee/dtr/admin/configure/external-storage/storage-backend-migration/#best-practice-for-data-migration) when switching storage backends.
+
 ```bash
 docker run --rm -it \
   docker/dtr:{{ page.dtr_version}} reconfigure \
   --ucp-url <ucp_url> \
   --ucp-username <ucp_username> \
-  --dtr-storage-volume <dtr-registry-nf>
+  --nfs-storage-url <dtr-registry-nf>
+  --async-nfs
+  --storage-migrated
 ```
 
 To reconfigure DTR to stop using NFS storage, leave the `--nfs-storage-url` option
@@ -71,6 +77,7 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version}}
 
 ## Where to go next
 
+- [Switch storage backends](storage-backend-migration.md)
 - [Create a backup](/ee/dtr/admin/disaster-recovery/create-a-backup/)
 - [Restore from a backup](/ee/dtr/admin/disaster-recovery/restore-from-backup/)
 - [Configure where images are stored](index.md)
