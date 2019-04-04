@@ -54,7 +54,10 @@ information that is necessary.
 By default DTR is deployed with self-signed certificates, so your UCP deployment
 might not be able to pull images from DTR.
 Use the `--dtr-external-url <dtr-domain>:<port>` optional flag while deploying
-DTR, so that UCP is automatically reconfigured to trust DTR.
+DTR, so that UCP is automatically reconfigured to trust DTR. Since [HSTS (HTTP Strict-Transport-Security)
+header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) is included in all API responses, 
+make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR, or your browser may refuse 
+to load the web interface.
 
 ## Step 4. Check that DTR is running
 
