@@ -17,8 +17,36 @@ docker run -i --rm docker/dtr \
 
 ### Example Usage
 ```bash 
-docker run -i --rm docker/dtr \
+docker run -i --rm --log-driver none docker/dtr:latest \
     backup --ucp-ca "$(cat ca.pem)" --existing-replica-id 5eb9459a7832 > backup.tar
+```
+
+### Example pre-populating all required information
+```bash 
+docker run -i --rm --log-driver none docker/dtr:2.6.2 backup \
+  --ucp-url www.example.com 
+  --ucp-username admin 
+  --ucp-password password
+  --ucp-insecure-tls 
+  --existing-replica-id 5eb9459a7832 > dtr_2.6.2_backup.tar
+```
+### Example with best practices and scripted population of required fields
+```bash
+DTR_VERSION=$(docker container inspect $(docker container ps -f \
+  name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
+REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb \
+  --format "{{ .Names }}" | head -1 | sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
+read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
+read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
+read -sp 'ucp password: ' UCP_PASSWORD; \
+docker run --log-driver none -i --rm \
+  --env UCP_PASSWORD=$UCP_PASSWORD \
+  docker/dtr:$DTR_VERSION backup \
+  --ucp-username $UCP_ADMIN \
+  --ucp-url $UCP_URL \
+  --ucp-ca "$(curl https://${UCP_URL}/ca)" \
+  --existing-replica-id $REPLICA_ID > \
+  dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
 
 ## Description
