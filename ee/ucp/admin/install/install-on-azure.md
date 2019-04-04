@@ -4,7 +4,7 @@ description: Learn how to install Docker Universal Control Plane in a Microsoft 
 keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
 ---
 
-Docker Universal Control Plane (UCP) closely integrates into Microsoft Azure for its Kubernetes Networking 
+Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking 
 and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure,
 the Calico CNI leverages the Azure networking infrastructure for data path 
 networking and the Azure IPAM for IP address management. There are 
