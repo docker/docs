@@ -55,7 +55,7 @@ To support **NFS v4**, more NFS options have been added to the CLI. See [New Fea
 
 #### DTR 2.6.4 
 
-In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/2.6/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. [Upgrade to 2.6.4](/reference/dtr/2.6/cli/upgrade/) and follow [Best practice for data migration in 2.6.4](/ee/dtr/admin/configure/external-storage/storage-backend-migration/#best-practice-for-data-migration) when switching storage backends.
+In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/2.6/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. [Upgrade to 2.6.4](/reference/dtr/2.6/cli/upgrade/) and follow [Best practice for data migration in 2.6.4](/ee/dtr/admin/configure/external-storage/storage-backend-migration/#best-practice-for-data-migration) when switching storage backends. The following shows you how to reconfigure DTR using an NFSv4 volume as a storage backend:
 
 ```bash
 docker run --rm -it \
