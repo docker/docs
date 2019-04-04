@@ -2,6 +2,8 @@
 title: Specify a routing mode
 description: Learn about task and VIP backend routing modes for Layer 7 routing
 keywords: routing, proxy, interlock
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/usage/default_backend/
 ---
 
 You can publish services using "vip" and "task" backend routing modes.
