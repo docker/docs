@@ -2,6 +2,8 @@
 title: Configure Nginx 
 description: Learn how to configure an nginx extension
 keywords: routing, proxy, interlock, load balancing
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/config/extensions/nginx/
 ---
 
 By default, nginx is used as a proxy, so the following configuration options are
