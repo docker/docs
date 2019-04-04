@@ -3,6 +3,8 @@ title: Implement persistent (sticky) sessions
 description: Learn how to configure your swarm services with persistent sessions
   using UCP.
 keywords: routing, proxy, cookies, IP hash
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/usage/sessions/
 ---
 
 You can publish a service and configure the proxy for persistent (sticky) sessions using:

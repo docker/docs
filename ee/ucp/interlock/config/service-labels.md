@@ -2,6 +2,8 @@
 title: Use application service labels
 description: Learn how applications use service labels for publishing
 keywords: routing, proxy, interlock, load balancing
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/config/service_labels/
 ---
 
 Service labels define hostnames that are routed to the
