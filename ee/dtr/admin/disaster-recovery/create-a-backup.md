@@ -62,10 +62,23 @@ If you've configured DTR to store images on the local file system or NFS mount,
 you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../../architecture.md):
 
+Local images:
+
 {% raw %}
 ```none
-sudo tar -cf {{ image_backup_file }} \
--C /var/lib/docker/volumes/ dtr-registry-<replica-id>
+sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
+  /var/lib/docker/volumes/dtr-registry-$(docker ps --filter name=dtr-rethinkdb \
+  --format "{{ .Names }}" | sed 's/dtr-rethinkdb-//')
+```
+{% endraw %}
+
+NFS mount images:
+
+{% raw %}
+```none
+sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
+  /var/lib/docker/volumes/dtr-registry-nfs-$(docker ps --filter name=dtr-rethinkdb \
+  --format "{{ .Names }}" | sed 's/dtr-rethinkdb-//')
 ```
 {% endraw %}
 
@@ -76,36 +89,48 @@ recommended for that system.
 ### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
-command, replacing the placeholders for the real values:
+command. For your convenience, this command automatically populates your DTR version and replica ID:
 
 ```none
+DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
+  grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
+REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb --format "{{ .Names }}" | head -1 | \
+  sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
+read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
+read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
 read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run --log-driver none -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \
-  --ucp-url <ucp-url> \
-  --ucp-insecure-tls \
-  --ucp-username <ucp-username> \
-  --existing-replica-id <replica-id> > {{ metadata_backup_file }}
+  docker/dtr:$DTR_VERSION backup \
+  --ucp-username $UCP_ADMIN \
+  --ucp-url $UCP_URL \
+  --ucp-ca "$(curl https://${UCP_URL}/ca)" \
+  --existing-replica-id $REPLICA_ID > dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
 
-Where:
+This command automatically completes the following tasks:
 
-* `<ucp-url>` is the url you use to access UCP.
-* `<ucp-username>` is the username of a UCP administrator.
-* `<replica-id>` is the id of the DTR replica to backup.
+1. The correct DTR version is automatically set for the backup command using 
+the running DTR version.
+2. The Replica ID is set automatically for the backup. If you'd prefer to back-up 
+a specific replica, the ID can be set manually by modifying the value of the 
+`--existing-replica-id` flag. 
+3. The UCP password is collected without being saved to disk or printed to the screen.
+4. The UCP CA certificate is automatically retrieved and verified (best practice). If
+verification is not desired, replace the `--ucp-ca` flag with 
+`--ucp-insecure-tls` (not recommended).
+5. The backup filename includes the backed-up DTR version and timestamp of the backup.
 
-This prompts you for the UCP password, backups up the DTR metadata and saves the
-result into a tar archive. You can learn more about the supported flags in
+You can learn more about the supported flags in
 the [reference documentation](/reference/dtr/2.5/cli/backup.md).
 
-By default the backup command doesn't stop the DTR replica being backed up.
-This allows performing backups without affecting your users. Since the replica
-is not stopped, it's possible that happen while the backup is taking place, won't
-be persisted.
+By default the backup command doesn't pause the DTR replica being backed up to 
+prevent interruptions of user access to DTR. Since the replica
+is not stopped changes that happen while the backup is taking place may not be saved.
 
 You can use the `--offline-backup` option to stop the DTR replica while taking
-the backup. If you do this, remove the replica from the load balancing pool.
+the backup. If you do this, remove the replica from the load balancing pool to avoid
+user interruption.
 
 Also, the backup contains sensitive information
 like private keys, so you can encrypt the backup by running:
