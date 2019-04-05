@@ -2,6 +2,8 @@
 title: Offline installation considerations
 description: Learn how to to install Interlock on a Docker cluster without internet access.
 keywords: routing, proxy, interlock
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/install/offline/
 ---
 
 To install Interlock on a Docker cluster without internet access, the Docker images must be loaded.  This topic describes how to export the images from a local Docker
