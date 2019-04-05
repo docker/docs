@@ -25,4 +25,3 @@ At this point, it's assumed that:
  * [using Nginx as an authenticating proxy](nginx.md)
  * [running a Registry on macOS](osx-setup-guide.md)
  * [mirror the Docker Hub](mirror.md)
- * [an example](example.md)
