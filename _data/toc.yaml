@@ -1350,7 +1350,7 @@ manuals:
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/ 
+            path: /ee/ucp/interlock/usage/labels-reference/ 
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -2170,6 +2170,8 @@ manuals:
           section:
           - path: /ee/dtr/admin/configure/external-storage/
             title: Overview
+          - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
+            title: Switch storage backends
           - path: /ee/dtr/admin/configure/external-storage/s3/
             title: S3
           - path: /ee/dtr/admin/configure/external-storage/nfs/

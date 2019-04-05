@@ -42,12 +42,10 @@ upgrade your installation to the latest release.
 * Fixed an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
 
 ### Known Issues
+
+* Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191)https://docker.atlassian.net/browse/ENGORC-2191. This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
-* You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
-    * For the `User` subject Kind, the `Name` field contains the ID of the user.
-    * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
-        * For an organization, the format is `org:{org-id}`
-        * For a team, the format is `team:{org-id}:{team-id}`
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
@@ -96,11 +94,6 @@ upgrade your installation to the latest release.
 * Newly added Windows node reports "Awaiting healthy status in classic node inventory". [Learn more](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory).
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
 * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
-* You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (docker/orca#14935)
-    * For the `User` subject Kind, the `Name` field contains the ID of the user.
-    * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
-        * For an organization, the format is `org:{org-id}`
-        * For a team, the format is `team:{org-id}:{team-id}`
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode

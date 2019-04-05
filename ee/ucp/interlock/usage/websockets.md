@@ -2,6 +2,8 @@
 title: Use websockets
 description: Learn how to use websockets in your swarm services.
 keywords: routing, proxy, websockets
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/usage/websockets/
 ---
 
 First, create an overlay network to isolate and secure service traffic:

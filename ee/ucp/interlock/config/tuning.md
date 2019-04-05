@@ -2,6 +2,8 @@
 title: Tune the proxy service
 description: Learn how to tune the proxy service for environment optimization
 keywords: routing, proxy, interlock
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/ops/tuning/
 ---
 
 ## Constrain the proxy service to multiple dedicated worker nodes

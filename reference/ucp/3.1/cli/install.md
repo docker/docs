@@ -38,6 +38,8 @@ If you have SELinux policies enabled for your Docker install, you will need to
 use `docker container run --rm -it --security-opt label=disable ...` when running this
 command.
 
+If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install/install-on-azure/).
+
 ## Options
 
 | Option                   | Description                                                                                                                                                                                                                               |
