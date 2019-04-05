@@ -4,6 +4,7 @@ description: Learn the deployment steps for the UCP layer 7 routing solution
 keywords: routing, proxy, interlock
 redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
+  - https://interlock-dev-docs.netlify.com/install/
 ---
 
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.

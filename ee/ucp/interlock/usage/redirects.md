@@ -3,6 +3,8 @@ title: Implement application redirects
 description: Learn how to implement redirects using swarm services and the
   layer 7 routing solution for UCP.
 keywords: routing, proxy, redirects, interlock
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/usage/redirects/
 ---
 
 The following example publishes a service and configures a redirect from `old.local` to `new.local`.

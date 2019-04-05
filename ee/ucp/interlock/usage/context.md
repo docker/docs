@@ -3,6 +3,8 @@ title: Use context and path-based routing
 description: Learn how to route traffic to your Docker swarm services based
   on a url path.
 keywords: routing, proxy
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/usage/context_root/
 ---
 
 The following example publishes a service using context or path based routing.

@@ -2,6 +2,8 @@
 title: Custom templates
 description: Learn how to use a custom extension template
 keywords: routing, proxy, interlock, load balancing
+redirect_from:
+  - https://interlock-dev-docs.netlify.com/ops/custom_template/
 ---
 
 Use a custom extension if a needed option is not available in the extension configuration.
