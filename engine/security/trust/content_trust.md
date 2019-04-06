@@ -20,7 +20,7 @@ client-side or runtime verification of the integrity and publisher of specific
 image tags. 
 
 Through DCT, image publishers can sign their images and image consumers can 
-ensure that the images they use are signed. Publishers could be be individuals 
+ensure that the images they use are signed. Publishers could be individuals 
 or organizations manually signing their content or automated software supply 
 chains signing content as part of their release process.
 
