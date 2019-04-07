@@ -31,7 +31,6 @@ Define the application dependencies.
         import redis
         from flask import Flask
 
-
         app = Flask(__name__)
         cache = redis.Redis(host='redis', port=6379)
 
@@ -52,9 +51,6 @@ Define the application dependencies.
         def hello():
             count = get_hit_count()
             return 'Hello World! I have been seen {} times.\n'.format(count)
-
-        if __name__ == "__main__":
-            app.run(host="0.0.0.0", debug=True)
 
 
       In this example, `redis` is the hostname of the redis container on the
