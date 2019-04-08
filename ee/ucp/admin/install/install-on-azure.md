@@ -70,9 +70,10 @@ objects are being deployed.
 
 ### Azure Configuration File
 
-For Docker UCP to integrate with Microsoft Azure,each UCP node in your cluster needs an Azure 
-configuration file, `azure.json`. Place the file within `/etc/kubernetes`, and give it 0644 
-permissions.
+For Docker UCP to integrate with Microsoft Azure,each UCP node in your cluster
+needs an Azure configuration file, `azure.json`. Place the file within
+`/etc/kubernetes`, and as the `azure.json` file is mounted into the Kubelet
+container it needs at least 0644 permissions.
 
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
 parameters as is.
@@ -276,7 +277,9 @@ This Swarm Config will need to be named `com.docker.ucp.config`.
     igca3q30jz9u3e6ecq1ckyofz   com.docker.ucp.config                                     1 days ago          1 days ago
     ```
 
-5. You are now ready to [install UCP](#install-ucp). 
+5. You are now ready to [install UCP](#install-ucp). As you have already staged
+   a UCP configuration file, you will need to add `--existing-config` to the
+   install command below.  
 
 If you need to adjust this value post-installation, see [instructions](../configure/ucp-configuration-file/)
 on how to download the UCP configuration file, change the value, and update the configuration via the API. 
@@ -288,7 +291,9 @@ reconciled, and you will have to manually edit the IP count in Azure.
 Run the following command to install UCP on a manager node. The `--pod-cidr`
 option maps to the IP address range that you have configured for the Azure
 subnet, and the `--host-address` maps to the private IP address of the master
-node.
+node. Finally if you have set the [Ip Count
+Value](#adjusting-the-ip-count-value) you will need to add `--existing-config`
+to the install command below.
 
 > Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet
 > attached the hosts. For example, if the Azure Virtual Network had the range
