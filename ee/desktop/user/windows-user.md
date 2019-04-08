@@ -163,37 +163,42 @@ running something more complex, such as an OS and a webserver.
     > docker container rm webserver laughing_kowalevski relaxed_sammet
     ```
 
-# Docker Desktop Enterprise settings
+# Docker Desktop user interface
 
-The Docker Desktop Enterprise **Settings** menu provides options for configuring
-Docker settings such as installation, version packs, Docker Hub login, and more.
+The Docker Desktop Enterprise user interface provides options to configure Docker Desktop settings such as installation, version packs, Docker Hub login, and more. Right-click the Docker icon in the Notifications area (or System tray) to open the Docker Desktop user interface:
 
-The following section explains the configuration options accessible from the **Settings** dialog.
+ ![Showing hidden apps in the taskbar](../images/whale-icon-systray-hidden.png)
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-1. Open  Docker Desktop by right-clicking the Docker icon in the Notifications area (or System tray):
+## About Docker Desktop
 
-    ![Showing hidden apps in the taskbar](../images/whale-icon-systray-hidden.png)
+This option displays information about your Docker Desktop installation. It lists version information of all the components installed.
 
-2. Select **Settings** to open the Settings dialog:
+## Settings
 
-    ![Docker Desktop Enterprise popup menu](../images/docker-menu-settings.png)
+The **Settings** dialog allows you to configure your Docker Desktop Enterprise settings. The following section explains various configuration options available from the **Settings** dialog.
 
-## General
+> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
+
+ Select **Settings** to open the Settings dialog:
+
+ ![Docker Desktop Enterprise popup menu](../images/docker-menu-settings.png)
+
+### General
 
 On the **General** tab of the Settings dialog, you can configure when to start Docker Desktop.
 
 ![Settings](../images/settings-general.png)
 
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
-- **Start Docker when you log in** - Automatically start the Docker Desktop application upon Windows system login.
+- **Start Docker Desktop when you log in** - Automatically start the Docker Desktop application upon Windows system login.
 
 - **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out. Docker might prompt you for more information.
 
-## Shared drives
+- **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+
+### Shared drives
 
 Share your local drives (volumes) with Docker Desktop, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
@@ -220,10 +225,9 @@ This is not configurable. See [Permissions errors on data directories for shared
 - Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
 
 - You can share local drives with your _containers_ but not with Docker Machine
-nodes. See the FAQ, <a href=
-"https://docs.docker.com/docker-for-windows/faqs/#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms" target="_blank">Can I share local drives and filesystem with my Docker Machine VMs?</a>
+nodes. See the FAQ, [Can I share local drives and filesystem with my Docker Machine VMs?](https://docs.docker.com/docker-for-windows/faqs/#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 
-### Firewall rules for shared drives
+#### Firewall rules for shared drives
 
 Shared drives require port 445 to be open between the host machine and the
 virtual machine that runs Linux containers. Docker detects if port 445 is closed
@@ -239,7 +243,7 @@ By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
 `10.0.75.2` (the virtual machine). If your firewall rules seem correct, you may
 need to toggle or [reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
 
-### Shared drives on demand
+#### Shared drives on demand
 
 You can share a drive "on demand" the first time a particular mount is requested.
 
@@ -252,7 +256,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](../images/shared-drive-on-demand.png)
 
-## Advanced
+### Advanced
 
 The Linux VM restarts after changing the settings on the **Advanced** tab. This takes a few seconds.
 
@@ -264,7 +268,7 @@ The Linux VM restarts after changing the settings on the **Advanced** tab. This 
 
 - **Memory** - Change the amount of memory the Docker Desktop Enterprise Linux VM uses.
 
-## Network
+### Network
 
 You can configure Docker Desktop Enterprise networking to work on a virtual private network (VPN).
 
@@ -284,7 +288,7 @@ You can configure Docker Desktop Enterprise networking to work on a virtual priv
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
-## Proxies
+### Proxies
 
 Docker Desktop Enterprise lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
@@ -315,7 +319,7 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
-## Daemon
+### Daemon
 
 You can configure the Docker daemon to hone how your containers run.
 **Advanced mode** lets you edit the JSON directly. **Basic mode** lets you
@@ -325,7 +329,7 @@ configure the more common daemon options with interactive settings (and also JSO
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-### Experimental mode
+#### Experimental mode
 
 Docker Desktop Enterprise has the experimental version
 of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme on
@@ -369,7 +373,7 @@ Server:
   Experimental: true
   ```
 
-### Custom registries
+#### Custom registries
 
 You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
 
@@ -397,7 +401,7 @@ For a full list of options on the Docker daemon, see [daemon](https://docs.docke
 
 - [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#windows-configuration-file)
 
-## Kubernetes
+### Kubernetes
 
 Kubernetes is available on Docker Desktop Enterprise. A standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
 Docker workloads on Kubernetes.
@@ -443,7 +447,7 @@ experience conflicts, remove it.
   For more about using the Kubernetes integration with Docker Desktop Enterprise,
   see [Deploy on Kubernetes](https://docs.docker.com/docker-for-windows/kubernetes).
 
-## Reset
+### Reset
 
 On the Reset tab, you can restart Docker or reset its configuration.
 
@@ -454,26 +458,31 @@ On the Reset tab, you can restart Docker or reset its configuration.
 - **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
 
-## Diagnose and feedback
+## Version Selection
 
-See [Troubleshoot Windows issues](/troubleshoot/windows-issues).
+The **Version Selection** option lists the version packs installed on your Docker Desktop environment and allows you to switch between Docker Engine and Kubernetes versions using a single click. When you select a different version pack, Docker Desktop restarts and the selected versions of Docker Engine and Kubernetes will be used.
 
-Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
+To switch to a different version pack, simply click on the version pack you would like to use.
 
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to review community reported issues.
+![Version Selection](../images/win-ver-select.png)
 
-To give feedback on the documentation or update it yourself, use the **Feedback** options at the bottom of each docs page.
+## Diagnose and Feedback
+
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/troubleshoot/windows-issues).
+
+Alternatively, log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
+
+Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to review community-reported issues.
+
+To give feedback on the documentation or to update it yourself, use the **Edit this page** or **Request docs changes** options on the right-hand pane on each docs page.
 
 ## Switch between Windows and Linux containers
 
-From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows)
-the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
-containers, or select **Switch to Linux containers** to use Linux containers
-(the default).
+From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to use Windows containers, or select **Switch to Linux containers** to use Linux containers (the default).
 
 ![Windows-Linux container types switch](../images/docker-menu-switch.png)
 
-For more information on Windows containers, refer to this documentation:
+For more information on Windows containers, refer to the following documentation:
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
@@ -485,10 +494,8 @@ For more information on Windows containers, refer to this documentation:
 
 - To understand how to connect to Windows containers from the local host, see [Limitations of Windows containers for `localhost` and published ports](https://docs.docker.com/docker-for-windows/troubleshoot/#limitations-of-windows-containers-for-localhost-and-published-ports).
 
-> **Settings** dialog changes with Windows containers
->
-> When you switch to Windows containers, the **Settings** dialog only shows those tabs that are active and apply to your Windows containers:
->
+The **Settings** dialog changes with Windows containers. When you switch to Windows containers, the **Settings** dialog only shows those tabs that are active and apply to your Windows containers:
+
 - [General](#general)
 
 - [Proxies](#proxies)
@@ -498,21 +505,8 @@ For more information on Windows containers, refer to this documentation:
 - [Diagnose and Feedback](#diagnose-and-feedback)
 
 - [Reset](#reset)
->
-If you set proxies or daemon configuration in Windows containers mode, these
-apply only on Windows containers. If you switch back to Linux containers,
-proxies and daemon configurations return to what you had set for Linux
-containers. Your Windows container settings are retained and become available
-again when you switch back.
->
 
-## Adding TLS certificates
-
-To your Docker daemon, you can add trusted **Certificate Authorities (CAs)**, to verify registry server
-certificates, and **client certificates**, to authenticate to registries.
-
-See [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and
-and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
+If you set proxies or daemon configuration in Windows containers mode, these apply only on Windows containers. If you switch back to Linux containers, proxies and daemon configurations return to what you had set for Linux containers. Your Windows container settings are retained and become available again when you switch back.
 
 ## Docker Hub
 
@@ -523,3 +517,34 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 - [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
 
 - [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
+
+## Design new application
+
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/app-designer).
+
+## Documentation
+
+Select this option to access the latest Docker Desktop Enterprise documentation. Note that documentation may be updated anytime. We recommend that you regularly visit the [Docker Desktop Enterprise Documentation](/) page to learn about the updates.
+
+## Repositories
+
+TBD
+
+## Kubernetes Context
+
+TBD
+
+## Restart
+
+Click **Restart** to restart Docker Desktop. Note that restarting Docker Desktop stops all running containers.
+
+## Quit Docker Desktop
+
+Click **Quit Docker Desktop** to exit Docker Desktop Enterprise.
+
+# Adding TLS certificates
+
+You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
+
+For more information, see [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and
+and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
