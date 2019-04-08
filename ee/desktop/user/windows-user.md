@@ -1,34 +1,17 @@
 ---
-<<<<<<< HEAD
 title: Use Docker Desktop Enterprise on Windows
-=======
-title: Using Docker Desktop Enterprise on Windows
->>>>>>> 1013: Move desktop ent content to docs-private
 description: Exploring the Windows user interface
 keywords: Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user
 ---
 
-<<<<<<< HEAD
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Windows.
 
 ## Test your installation
-=======
-# Test your installation
->>>>>>> 1013: Move desktop ent content to docs-private
 
 1. Open a terminal window (Command Prompt or PowerShell, _but not_ PowerShell ISE).
 
 2. Run `docker --version` to ensure that you have a supported version of Docker:
 
-<<<<<<< HEAD
-=======
-    ```shell
-    > docker --version
-
-    Docker version 18.03.0-ce, build 0520e24
-    ```
-
->>>>>>> 1013: Move desktop ent content to docs-private
 3. Pull the [hello-world image](https://hub.docker.com/r/library/hello-world) from Docker Hub and run a container:
 
     ```shell
@@ -74,11 +57,7 @@ This page contains information about testing the installation and configuring Do
     > docker run --help
     ```
 
-<<<<<<< HEAD
 ## Explore the application
-=======
-# Explore the application
->>>>>>> 1013: Move desktop ent content to docs-private
 
 In this section, we demonstrate the ease and power of Dockerized applications by
 running something more complex, such as an OS and a webserver.
@@ -178,7 +157,6 @@ running something more complex, such as an OS and a webserver.
     > docker container rm webserver laughing_kowalevski relaxed_sammet
     ```
 
-<<<<<<< HEAD
 ## Docker Desktop user interface
 
 The Docker Desktop Enterprise user interface provides options to configure Docker Desktop settings such as installation, version packs, Docker Hub login, and more. Right-click the Docker icon in the Notifications area (or System tray) to open the Docker Desktop user interface:
@@ -213,64 +191,13 @@ crash reports, and usage data. This information helps Docker improve and trouble
 #### Shared drives
 
 Share your local drives (volumes) with Docker Desktop, so that they are
-=======
-# Docker Desktop Enterprise Settings
-
-The Docker Desktop Enterprise **Settings** menu provides options for configuring
-Docker settings -- installation, version packs, Docker Hub login,
-and more.
-
-This section explains the configuration options accessible from the **Settings** dialog.
-
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
-1. Open  Docker Desktop Enterprise by right-clicking the Docker icon in the Notifications area (or System tray):
-
-    ![Showing hidden apps in the taskbar](../images/whale-icon-systray-hidden.png)
-
-2. Select **Settings** to open the Settings dialog:
-
-    ![Docker Desktop Enterprise popup menu](../images/docker-menu-settings.png)
-
-## General
-
-On the **General** tab of the Settings dialog, you can configure when to start Docker Desktop Enterprise.
-
-![Settings](../images/settings-general.png)
-
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
-- **Start Docker when you log in** - Automatically start the Docker Desktop Enterprise
-application upon Windows system login.
-
-- **Send usage statistics** - By default, Docker Desktop Enterprise sends diagnostics,
-crash reports, and usage data. This information helps Docker improve and
-troubleshoot the application. Clear the check box to opt out. Docker might
-prompt you for more information.
-
-## Shared drives
-
-Share your local drives (volumes) with Docker Desktop Enterprise, so that they are
->>>>>>> 1013: Move desktop ent content to docs-private
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
 
 ![Shared drives](../images/settings-shared-drives.png)
 
-<<<<<<< HEAD
 Permission for shared drives are tied to the credentials you provide here. If you run `docker` commands under a different username than the one configured here, your containers cannot access the mounted volumes.
 
 To apply shared drives, you are prompted for your Windows system (domain) username and password. You can select an option to have Docker store the credentials so that you don't need to enter them every time.
-=======
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
-Permission for shared drives are tied to the credentials you provide here. If
-you run `docker` commands under a different username than the one configured
-here, your containers cannot access the mounted volumes.
-
-To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker store the
-credentials so that you don't need to enter them every time.
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Tips on shared drives, permissions, and volume mounts:
 
@@ -280,25 +207,12 @@ Tips on shared drives, permissions, and volume mounts:
 the Linux VM, or use a [data volume](https://docs.docker.com/storage/volumes/) (named volume) or [data container](https://docs.docker.com/storage/volumes/). There are a number of issues with using host-mounted volumes and network paths
 for database files. See [Volume mounts from host paths use a nobrl option to override database locking](https://docs.docker.com/docker-for-windows/troubleshoot/#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 
-<<<<<<< HEAD
 - Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
 This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes).
 
 - Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
 
 ##### Firewall rules for shared drives
-=======
-- Docker Desktop Enterprise sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
-This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes)</a>.
-
-- Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
-
-- You can share local drives with your _containers_ but not with Docker Machine
-nodes. See the FAQ, <a href=
-"https://docs.docker.com/docker-for-windows/faqs/#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms" target="_blank">Can I share local drives and filesystem with my Docker Machine VMs?</a>
-
-### Firewall rules for shared drives
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Shared drives require port 445 to be open between the host machine and the
 virtual machine that runs Linux containers. Docker detects if port 445 is closed
@@ -314,11 +228,7 @@ By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
 `10.0.75.2` (the virtual machine). If your firewall rules seem correct, you may
 need to toggle or [reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
 
-<<<<<<< HEAD
 ##### Shared drives on demand
-=======
-### Shared drives on demand
->>>>>>> 1013: Move desktop ent content to docs-private
 
 You can share a drive "on demand" the first time a particular mount is requested.
 
@@ -331,30 +241,17 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](../images/shared-drive-on-demand.png)
 
-<<<<<<< HEAD
 #### Advanced
-=======
-## Advanced
->>>>>>> 1013: Move desktop ent content to docs-private
 
 The Linux VM restarts after changing the settings on the **Advanced** tab. This takes a few seconds.
 
 ![CPU and Memory settings](../images/settings-advanced.png)
 
-<<<<<<< HEAD
-=======
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
->>>>>>> 1013: Move desktop ent content to docs-private
 - **CPUs** - Change the number of processors assigned to the Linux VM.
 
 - **Memory** - Change the amount of memory the Docker Desktop Enterprise Linux VM uses.
 
-<<<<<<< HEAD
 #### Network
-=======
-## Network
->>>>>>> 1013: Move desktop ent content to docs-private
 
 You can configure Docker Desktop Enterprise networking to work on a virtual private network (VPN).
 
@@ -374,11 +271,7 @@ You can configure Docker Desktop Enterprise networking to work on a virtual priv
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
-<<<<<<< HEAD
 #### Proxies
-=======
-## Proxies
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Docker Desktop Enterprise lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
@@ -387,11 +280,6 @@ proxy when pulling containers.
 
 ![Proxies](../images/settings-proxies.png)
 
-<<<<<<< HEAD
-=======
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
->>>>>>> 1013: Move desktop ent content to docs-private
 When you start a container, your proxy settings propagate into the containers. For example:
 
 ```ps
@@ -412,24 +300,15 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
-<<<<<<< HEAD
 #### Daemon
 
 Docker Desktop Enterprise enables you to configure the Docker daemon based on your preferences.
 The **Basic** mode lets you configure the more common daemon options with interactive settings and the **Advanced** mode lets you edit the JSON file directly.
-=======
-## Daemon
-
-You can configure the Docker daemon to hone how your containers run.
-**Advanced mode** lets you edit the JSON directly. **Basic mode** lets you
-configure the more common daemon options with interactive settings (and also JSON).
->>>>>>> 1013: Move desktop ent content to docs-private
 
 ![Docker Daemon](../images/settings-daemon-basic.png)
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-<<<<<<< HEAD
 ##### Experimental mode
 
 Docker Desktop Enterprise has the experimental version
@@ -437,23 +316,6 @@ of Docker Engine enabled, described in the [Docker Experimental Features](https:
 
 > **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas.
-=======
-### Experimental mode
-
-Docker Desktop Enterprise has the experimental version
-of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme on
-GitHub.
-
-Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas. Some
-experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Edge releases, and never
-released on Stable.
-
-In Docker Desktop Enterprise, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker Desktop Enterprise uses the current generally
-available release of Docker Engine.
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Run `docker version` to see if you are in Experimental mode. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
@@ -483,11 +345,7 @@ Server:
   Experimental: true
   ```
 
-<<<<<<< HEAD
 ##### Insecure registries
-=======
-### Custom registries
->>>>>>> 1013: Move desktop ent content to docs-private
 
 You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
 
@@ -496,7 +354,6 @@ and [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Here, you
 can use Docker to set up your own [insecure registry](https://docs.docker.com/registry/insecure/).
 Simply add URLs for insecure registries and registry mirrors on which to host your images.
 
-<<<<<<< HEAD
 For more information, see:
 
 - [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates)
@@ -504,11 +361,6 @@ For more information, see:
 - [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates)
 
 #### Daemon configuration file
-=======
-See [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
-
-### Daemon configuration file
->>>>>>> 1013: Move desktop ent content to docs-private
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](https://docs.docker.com/engine/reference/commandline/dockerd).
@@ -525,22 +377,13 @@ For a full list of options on the Docker daemon, see [daemon](https://docs.docke
 
 - [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#windows-configuration-file)
 
-<<<<<<< HEAD
 #### Kubernetes
-=======
-## Kubernetes
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Kubernetes is available on Docker Desktop Enterprise. A standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
 Docker workloads on Kubernetes.
 
 ![Enable Kubernetes](../images/settings-kubernetes.png)
 
-<<<<<<< HEAD
-=======
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
->>>>>>> 1013: Move desktop ent content to docs-private
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
@@ -562,54 +405,31 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Install** button.
 
-<<<<<<< HEAD
  Images required to run the Kubernetes server are instantiated as containers, and the `kubectl.exe` command is installed in the path.
-=======
-  An Internet connection is required. Images required to run the Kubernetes
-  server are downloaded and instantiated as containers, and the
-  > `Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
->>>>>>> 1013: Move desktop ent content to docs-private
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
   visible, select **Show system containers (advanced)** and click **Apply and restart**.
-<<<<<<< HEAD
   Most users do not have to use this option.
 
 - To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
   The Kubernetes containers are stopped and removed, and the
   `kubectl` command is removed.
-=======
-  Most users do not need this option.
-
-- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
-  The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
->>>>>>> 1013: Move desktop ent content to docs-private
 
   For more about using the Kubernetes integration with Docker Desktop Enterprise,
   see [Deploy on Kubernetes](https://docs.docker.com/docker-for-windows/kubernetes).
 
-<<<<<<< HEAD
 #### Reset
-=======
-## Reset
->>>>>>> 1013: Move desktop ent content to docs-private
 
 On the Reset tab, you can restart Docker or reset its configuration.
 
 ![Reset](../images/settings-reset.png)
 
-<<<<<<< HEAD
 - **Restart Docker Desktop** - Shuts down and restarts the Docker Desktop application.
-=======
-- **Restart Docker** - Shuts down and restarts the Docker application.
->>>>>>> 1013: Move desktop ent content to docs-private
 
 - **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
 
-<<<<<<< HEAD
 ### Version Selection
 
 The **Version Selection** option lists the version packs installed on your Docker Desktop environment and allows you to switch between Docker Engine and Kubernetes versions using a single click. When you select a different version pack, Docker Desktop restarts and the selected versions of Docker Engine and Kubernetes will be used.
@@ -629,66 +449,28 @@ From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or W
 ![Windows-Linux container types switch](../images/docker-menu-switch.png)
 
 For more information on Windows containers, refer to the following documentation:
-=======
-## Diagnose and feedback
-
-See [Troubleshoot Windows issues](/troubleshoot/windows-issues).
-
-Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to review community reported issues.
-
-To give feedback on the documentation or update it yourself, use the **Feedback** options at the bottom of each docs page.
-
-## Switch between Windows and Linux containers
-
-From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows)
-the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
-containers, or select **Switch to Linux containers** to use Linux containers
-(the default).
-
-![Windows-Linux container types switch](../images/docker-menu-switch.png)
-
-For more information on Windows containers, refer to this documentation:
->>>>>>> 1013: Move desktop ent content to docs-private
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
 - [Build and Run Your First Windows Server Container](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) (blog post) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-<<<<<<< HEAD
   shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
-=======
-  shows you how to use the [MusicStore]("https://github.com/aspnet/MusicStore/blob/master/README.md)
->>>>>>> 1013: Move desktop ent content to docs-private
   application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see [Limitations of Windows containers for `localhost` and published ports](https://docs.docker.com/docker-for-windows/troubleshoot/#limitations-of-windows-containers-for-localhost-and-published-ports).
 
-<<<<<<< HEAD
 The **Settings** dialog changes with Windows containers. When you switch to Windows containers, the **Settings** dialog only shows those tabs that are active and apply to your Windows containers:
 
-=======
-> **Settings** dialog changes with Windows containers
->
-> When you switch to Windows containers, the **Settings** dialog only shows those tabs that are active and apply to your Windows containers:
->
->>>>>>> 1013: Move desktop ent content to docs-private
 - [General](#general)
 
 - [Proxies](#proxies)
 
-<<<<<<< HEAD
 - [Daemon](#daemon)
-=======
-- [Docker daemon](#daemon)
->>>>>>> 1013: Move desktop ent content to docs-private
 
 - [Diagnose and Feedback](#diagnose-and-feedback)
 
 - [Reset](#reset)
-<<<<<<< HEAD
 
 If you set proxies or daemon configuration in Windows containers mode, these apply only on Windows containers. If you switch back to Linux containers, proxies and daemon configurations return to what you had set for Linux containers. Your Windows container settings are retained and become available again when you switch back.
 
@@ -712,30 +494,3 @@ You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to v
 
 For more information, see [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and
 and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
-=======
->
-If you set proxies or daemon configuration in Windows containers mode, these
-apply only on Windows containers. If you switch back to Linux containers,
-proxies and daemon configurations return to what you had set for Linux
-containers. Your Windows container settings are retained and become available
-again when you switch back.
->
-
-## Adding TLS certificates
-
-To your Docker daemon, you can add trusted **Certificate Authorities (CAs)**, to verify registry server
-certificates, and **client certificates**, to authenticate to registries.
-
-See [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and
-and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
-
-## Docker Hub
-
-Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop Enterprise menu.
-
-See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
-
-- [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
-
-- [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
->>>>>>> 1013: Move desktop ent content to docs-private
