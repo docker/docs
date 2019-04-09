@@ -24,7 +24,7 @@ Hyper-V on Windows 10:
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings:
 
-![Virtualization Technology (VTx) must be enabled in BIOS settings](.../images/windows-prereq.png "BIOS setting information for hardware virtualization support")
+![Virtualization Technology (VTx) must be enabled in BIOS settings](../../images/windows-prereq.png "BIOS setting information for hardware virtualization support")
 
 # Installation
 
