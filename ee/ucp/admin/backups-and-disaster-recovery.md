@@ -27,10 +27,9 @@ UCP maintains data about:
 This data is persisted on the host running UCP, using named volumes.
 [Learn more about UCP named volumes](../ucp-architecture.md).
 
-> Warning: UCP won't backup your routing mesh settings. After restoring you need to
-[re-enable the routing mesh](../interlock/deploy/index.md). If you've customized
-your layer 7 routing deployment, you'll need to re-apply those customizations too.
-
+> Warning: UCP will not back up your routing mesh settings. After restoring,
+[reenable the routing mesh](../interlock/deploy/index.md). Additionally, if you've customized
+your Layer 7 routing deployment, reapply your custom settings.
 ## Backup steps
 
 Back up your Docker EE components in the following order:
