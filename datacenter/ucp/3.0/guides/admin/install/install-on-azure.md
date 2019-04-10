@@ -272,12 +272,9 @@ for each VM in the VM scale set.
 
 ## Install UCP 
 
-Run the following command to install UCP on a manager node. The `--pod-cidr` The
-`--pod-cidr` option maps to the IP address range that you configured for  option
-maps to the IP address range that you have configured for the Azure the subnets
-in the previous sections, and the `--host-address` maps to the  subnet, and the
-`--host-address` maps to the private IP address of the master IP address of the
-master node.
+Run the following command to install UCP on a manager node. The `--pod-cidr`
+option maps to the IP address range that you have configured for the Azure
+subnet, and the `--host-address` maps to the private IP address of the master node
 
 > Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet host.
 > attached the hosts. For example, if the Azure Virtual Network had the range
