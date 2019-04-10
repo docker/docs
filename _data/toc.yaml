@@ -1410,6 +1410,8 @@ manuals:
               title: Install
             - path: /datacenter/ucp/3.0/guides/admin/install/install-offline/
               title: Install offline
+            - path: /datacenter/ucp/3.0/guides/admin/install/install-on-azure/
+              title: Install on Azure
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade/
               title: Upgrade
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade-offline/
