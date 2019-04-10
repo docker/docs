@@ -18,6 +18,7 @@ unless you configure it to use a different logging driver.
 
 In addition to using the logging drivers included with Docker, you can also
 implement and use [logging driver plugins](/engine/admin/logging/plugins.md).
+Logging driver plugins are available in Docker 17.05 and higher.
 
 
 ## Configure the default logging driver
@@ -43,32 +44,25 @@ example sets two configurable options on the `json-file` logging driver:
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m",
-    "max-file": "3",
     "labels": "production_status",
     "env": "os,customer"
   }
 }
 ```
 
-> **Note**: `log-opt` configuration options in the `daemon.json` configuration
-> file must be provided as strings. Boolean and numeric values (such as the value
-> for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 If you do not specify a logging driver, the default is `json-file`. Thus,
 the default output for commands such as `docker inspect <CONTAINER>` is JSON.
 
 To find the current default logging driver for the Docker daemon, run
 `docker info` and search for `Logging Driver`. You can use the following
-command:
+command on Linux, macOS, or PowerShell on Windows:
 
-{% raw %}
 ```bash
-$ docker info --format '{{.LoggingDriver}}'
+$ docker info | grep 'Logging Driver'
 
-json-file
+Logging Driver: json-file
 ```
-{% endraw %}
 
 ## Configure the logging driver for a container
 
@@ -147,7 +141,6 @@ see more options.
 |:------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `none`                        | No logs are available for the container and `docker logs` does not return any output.                         |
 | [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
-| [`local`](local.md)           | Writes logs messages to local filesystem in binary files using Protobuf.                                        |
 | [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
 | [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
 | [`gelf`](gelf.md)             | Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.             |
@@ -157,9 +150,12 @@ see more options.
 | [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.           |
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                   |
 | [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                     |
+| [`local`](local.md)           | Logs are stored in a custom format designed for minimal overhead.                                             |
 
 ## Limitations of logging drivers
 
-The `docker logs` command is not available for drivers other than `json-file`
-and `journald`.
+The `docker logs` command is only available on the following drivers:
+- `json-file`
+- `journald`
+- `local`
 
