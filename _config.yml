@@ -104,7 +104,7 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.4"
+      dtr_version: "2.6.5"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -155,7 +155,7 @@ defaults:
       ucp_repo: "ucp"
       dtr_repo: "dtr"
       ucp_version: "3.1.6"
-      dtr_version: "2.6.4"
+      dtr_version: "2.6.5"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
