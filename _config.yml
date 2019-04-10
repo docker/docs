@@ -94,7 +94,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.4"
+      win_latest_build: "docker-18.09.5"
   - scope:
       path: "datacenter"
     values:
@@ -147,14 +147,14 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.5"
+      ucp_version: "3.1.6"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.5"
+      ucp_version: "3.1.6"
       dtr_version: "2.6.4"
   - scope:
       path: "datacenter/ucp/3.0"
