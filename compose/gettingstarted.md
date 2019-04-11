@@ -95,7 +95,7 @@ This tells Docker to:
 
 * Build an image starting with the Python 3.7 image.
 * Set the working directory to `/code`.
-* Set environment varialbes used by the `flask` command.
+* Set environment variables used by the `flask` command.
 * Copy `requirements.txt` and install the Python dependencies.
 * Copy the current directory `.` in the project to the workdir `.` in the image.
 * Set the default command for the container to `flask run`.
@@ -164,7 +164,7 @@ Hub registry.
     Windows, then the web app should now be listening on port 5000 on your
     Docker daemon host. Point your web browser to http://localhost:5000 to
     find the `Hello World` message. If this doesn't resolve, you can also try
-    http://127.0.0.1:5000 or http://0.0.0.0:5000.
+    http://127.0.0.1:5000.
 
     If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
     MACHINE_VM` to get the IP address of your Docker host. Then, open
