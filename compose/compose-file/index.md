@@ -986,6 +986,9 @@ Custom DNS servers. Can be a single value or a list.
 
 ```yaml
 dns: 8.8.8.8
+```
+
+```yaml
 dns:
   - 8.8.8.8
   - 9.9.9.9
@@ -1474,16 +1477,16 @@ the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
 the `legacy` network.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{ site.compose_file_v3 }}"
 
 services:
   web:
-    build: ./web
+    image: "nginx:alpine"
     networks:
       - new
 
   worker:
-    build: ./worker
+    image: "my-worker-image:latest"
     networks:
       - legacy
 
@@ -1508,21 +1511,20 @@ Specify a static IP address for containers for this service when joining the net
 
 The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
-`ipam` block with subnet configurations covering each static address. If IPv6
-addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
-you must use a version 2.x Compose file, such as the one below.
+`ipam` block with subnet configurations covering each static address.
 
-> **Note**: These options do not currently work in swarm mode.
+> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md##enable_ipv6)
+> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+> _IPv6 options do not currently work in swarm mode_.
 
 An example:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{ site.compose_file_v3 }}"
 
 services:
   app:
-    image: busybox
-    command: ifconfig
+    image: nginx:alpine
     networks:
       app_net:
         ipv4_address: 172.16.238.10
@@ -1530,15 +1532,11 @@ services:
 
 networks:
   app_net:
-    driver: bridge
-    enable_ipv6: true
     ipam:
       driver: default
       config:
-      -
-        subnet: 172.16.238.0/24
-      -
-        subnet: 2001:3984:3989::/64
+        - subnet: "172.16.238.0/24"
+        - subnet: "2001:3984:3989::/64"
 ```
 
 ### pid
