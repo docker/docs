@@ -31,7 +31,7 @@ upgrade your installation to the latest release.
 * Updated Calico to version 3.5.3.
 
 ### Authentication and Authorization
-* Accessing the `ListAccount` API endpoint now requires admin user. Accessing the `GetAccount` API endpoint now requires admin user, the actual user, or a member of the organization being inspected. [ENGORC-100](https://docker.atlassian.net/browse/ENGORC-100)
+* Accessing the `ListAccount` API endpoint now requires an admin user. Accessing the `GetAccount` API endpoint now requires an admin user, the actual user, or a member of the organization being inspected. [ENGORC-100](https://docker.atlassian.net/browse/ENGORC-100)
 
 ### Known Issues
 * Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191)https://docker.atlassian.net/browse/ENGORC-2191. This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
