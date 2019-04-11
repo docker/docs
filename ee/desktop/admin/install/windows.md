@@ -6,7 +6,7 @@ keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 
 This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Windows.
 
-> **Warning:** If you are using the community version of Docker Desktop, you must uninstall Docker Desktop community in order to install Docker Desktop Enterprise.
+> **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
 
 # System requirements
 
@@ -24,7 +24,7 @@ Hyper-V on Windows 10:
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings:
 
-![Virtualization Technology (VTx) must be enabled in BIOS settings](/images/windows-prereq.png "BIOS setting information for hardware virtualization support")
+![Virtualization Technology (VTx) must be enabled in BIOS settings](../../images/windows-prereq.png "BIOS setting information for hardware virtualization support")
 
 # Installation
 
@@ -40,9 +40,9 @@ For information about installing DDE using the command line, see [Command line i
 
 Install the Docker Desktop Enterprise license file at the following location:
 
-    C:\Users\Docker\AppData\Roaming\Docker\docker_subscription.lic
+    %ProgramData%\DockerDesktop\docker_subscription.lic
 
-If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise.
+You must create the path if it doesn't already exist. If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise. Contact your system administrator to obtain the license file.
 
 # Firewall exceptions
 
@@ -63,7 +63,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 # Version packs
 
 Docker Desktop Enterprise is bundled with default version pack [Enterprise 2.1 (Docker
-Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install versions packs using a CLI tool to use a different version of the Docker Engine and Kubernetes for development work:
+Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install version packs using a CLI tool to use a different version of the Docker Engine and Kubernetes for development work:
 
 - [Docker Community (18.09/Kubernetes
     1.13.0)](https://download.docker.com/win/enterprise/community.ddvp)
@@ -93,9 +93,9 @@ For example:
 
     msiexec /i DockerDesktop.msi /quiet AUTOSTART=no STARTMENUSHORTCUT=no INSTALLDIR=”D:\Docker Desktop”
 
-Docker Desktop Enterprise includes a command line executable to install and uninstall DDE and version packs. When you install DDE, the command line tool is installed at the following location:
+Docker Desktop Enterprise includes a command line executable to install and uninstall version packs. When you install DDE, the command line tool is installed at the following location:
 
-`[ApplicationPath]\dockerdesktop-admin.exe`
+    [ApplicationPath]\dockerdesktop-admin.exe
 
 ## Version-pack install
 
@@ -109,10 +109,16 @@ Run the following command to install or upgrade a version pack to the version co
 
 Run the following command to uninstall the specified version pack:
 
-    dockerdesktop-admin.exe -UninstallVersionPack=[version-pack-name]
+    dockerdesktop-admin.exe -UninstallVersionPack=[version-pack-name|path-to-archive]
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
 ## Application uninstall
 
-To uninstall the application, use system settings or the `.msi` file.
+To uninstall the application:
+
+1. Open the **Add or remove programs** dialog
+
+1. Select **Docker Desktop** from the **Apps & features** list.
+
+1. Click **Uninstall**.

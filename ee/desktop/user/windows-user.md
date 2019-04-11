@@ -12,12 +12,6 @@ This page contains information about testing the installation and configuring Do
 
 2. Run `docker --version` to ensure that you have a supported version of Docker:
 
-    ```shell
-    > docker --version
-
-    Docker version 18.03.0-ce, build 0520e24
-    ```
-
 3. Pull the [hello-world image](https://hub.docker.com/r/library/hello-world) from Docker Hub and run a container:
 
     ```shell
@@ -171,10 +165,6 @@ The Docker Desktop Enterprise user interface provides options to configure Docke
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-## About Docker Desktop
-
-This option displays information about your Docker Desktop installation. It lists version information of all the components installed.
-
 ## Settings
 
 The **Settings** dialog allows you to configure your Docker Desktop Enterprise settings. The following section explains various configuration options available from the **Settings** dialog.
@@ -205,8 +195,6 @@ available to your [Linux containers](#switch-between-windows-and-linux-container
 
 ![Shared drives](../images/settings-shared-drives.png)
 
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
 Permission for shared drives are tied to the credentials you provide here. If you run `docker` commands under a different username than the one configured here, your containers cannot access the mounted volumes.
 
 To apply shared drives, you are prompted for your Windows system (domain) username and password. You can select an option to have Docker store the credentials so that you don't need to enter them every time.
@@ -220,12 +208,9 @@ the Linux VM, or use a [data volume](https://docs.docker.com/storage/volumes/) (
 for database files. See [Volume mounts from host paths use a nobrl option to override database locking](https://docs.docker.com/docker-for-windows/troubleshoot/#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 
 - Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
-This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes)</a>.
+This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes).
 
 - Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
-
-- You can share local drives with your _containers_ but not with Docker Machine
-nodes. See the FAQ, [Can I share local drives and filesystem with my Docker Machine VMs?](https://docs.docker.com/docker-for-windows/faqs/#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 
 #### Firewall rules for shared drives
 
@@ -262,8 +247,6 @@ The Linux VM restarts after changing the settings on the **Advanced** tab. This 
 
 ![CPU and Memory settings](../images/settings-advanced.png)
 
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
 - **CPUs** - Change the number of processors assigned to the Linux VM.
 
 - **Memory** - Change the amount of memory the Docker Desktop Enterprise Linux VM uses.
@@ -297,8 +280,6 @@ proxy when pulling containers.
 
 ![Proxies](../images/settings-proxies.png)
 
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
 When you start a container, your proxy settings propagate into the containers. For example:
 
 ```ps
@@ -321,9 +302,8 @@ to keep running across restarts, you should consider using
 
 ### Daemon
 
-You can configure the Docker daemon to hone how your containers run.
-**Advanced mode** lets you edit the JSON directly. **Basic mode** lets you
-configure the more common daemon options with interactive settings (and also JSON).
+Docker Desktop Enterprise enables you to configure the Docker daemon based on your preferences.
+The **Basic** mode lets you configure the more common daemon options with interactive settings and the **Advanced** mode lets you edit the JSON file directly.
 
 ![Docker Daemon](../images/settings-daemon-basic.png)
 
@@ -332,18 +312,10 @@ configure the more common daemon options with interactive settings (and also JSO
 #### Experimental mode
 
 Docker Desktop Enterprise has the experimental version
-of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme on
-GitHub.
+of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
 
-Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas. Some
-experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Edge releases, and never
-released on Stable.
-
-In Docker Desktop Enterprise, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker Desktop Enterprise uses the current generally
-available release of Docker Engine.
+> **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or
+workloads. They are meant to be sandbox experiments for new ideas.
 
 Run `docker version` to see if you are in Experimental mode. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
@@ -373,7 +345,7 @@ Server:
   Experimental: true
   ```
 
-#### Custom registries
+#### Insecure registries
 
 You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
 
@@ -382,7 +354,11 @@ and [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Here, you
 can use Docker to set up your own [insecure registry](https://docs.docker.com/registry/insecure/).
 Simply add URLs for insecure registries and registry mirrors on which to host your images.
 
-See [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
+For more information, see:
+
+- [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates)
+
+- [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates)
 
 ### Daemon configuration file
 
@@ -408,8 +384,6 @@ Docker workloads on Kubernetes.
 
 ![Enable Kubernetes](../images/settings-kubernetes.png)
 
-> **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
-
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
@@ -431,18 +405,16 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Install** button.
 
-  An Internet connection is required. Images required to run the Kubernetes
-  server are downloaded and instantiated as containers, and the
-  > `Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
+ Images required to run the Kubernetes server are instantiated as containers, and the `kubectl.exe` command is installed in the path.
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
   visible, select **Show system containers (advanced)** and click **Apply and restart**.
-  Most users do not need this option.
+  Most users do not have to use this option.
 
 - To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
   The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
+  `kubectl` command is removed.
 
   For more about using the Kubernetes integration with Docker Desktop Enterprise,
   see [Deploy on Kubernetes](https://docs.docker.com/docker-for-windows/kubernetes).
@@ -453,7 +425,7 @@ On the Reset tab, you can restart Docker or reset its configuration.
 
 ![Reset](../images/settings-reset.png)
 
-- **Restart Docker** - Shuts down and restarts the Docker application.
+- **Restart Docker Desktop** - Shuts down and restarts the Docker Desktop application.
 
 - **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
@@ -470,15 +442,9 @@ To switch to a different version pack, simply click on the version pack you woul
 
 The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/troubleshoot/windows-issues).
 
-Alternatively, log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to review community-reported issues.
-
-To give feedback on the documentation or to update it yourself, use the **Edit this page** or **Request docs changes** options on the right-hand pane on each docs page.
-
 ## Switch between Windows and Linux containers
 
-From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to use Windows containers, or select **Switch to Linux containers** to use Linux containers (the default).
+From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to use Windows containers, or select **Switch to Linux containers** to use Linux containers.
 
 ![Windows-Linux container types switch](../images/docker-menu-switch.png)
 
@@ -500,7 +466,7 @@ The **Settings** dialog changes with Windows containers. When you switch to Wind
 
 - [Proxies](#proxies)
 
-- [Docker daemon](#daemon)
+- [Daemon](#daemon)
 
 - [Diagnose and Feedback](#diagnose-and-feedback)
 
@@ -510,7 +476,7 @@ If you set proxies or daemon configuration in Windows containers mode, these app
 
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop Enterprise menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, select **Repositories**  on the Docker Desktop Enterprise menu to access your Docker Hub repositories directly.
 
 See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
 
@@ -521,26 +487,6 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 ## Design new application
 
 Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/app-designer).
-
-## Documentation
-
-Select this option to access the latest Docker Desktop Enterprise documentation. Note that documentation may be updated anytime. We recommend that you regularly visit the [Docker Desktop Enterprise Documentation](/) page to learn about the updates.
-
-## Repositories
-
-TBD
-
-## Kubernetes Context
-
-TBD
-
-## Restart
-
-Click **Restart** to restart Docker Desktop. Note that restarting Docker Desktop stops all running containers.
-
-## Quit Docker Desktop
-
-Click **Quit Docker Desktop** to exit Docker Desktop Enterprise.
 
 # Adding TLS certificates
 
