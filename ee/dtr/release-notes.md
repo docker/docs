@@ -22,12 +22,33 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.5
+(2019-4-11)
+
+### Bug Fixes
+* Fixed a bug where the UI was not rendering for non admin users.
+* Removed `Users` tab from side navigation [#10222](https://github.com/docker/dhe-deploy/pull/10222)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
 ## 2.6.4 
 (2019-3-28)
 
 ### Enhancements
 
-* Added `--storage-migrated` option to reconfigure and restore with migrated content when moving content to a new NFS URL. (ENGDTR-794)
+* Added `--storage-migrated` option to reconfigure with migrated content when moving content to a new NFS URL. (ENGDTR-794)
 * Added a job log status filter which allows users to exclude jobs that are not currently ***running***. (docker/dhe-deploy #10077)
 
 ### Bug Fixes
