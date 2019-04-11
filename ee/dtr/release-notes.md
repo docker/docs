@@ -710,6 +710,14 @@ specify `--log-protocol`.
 > Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into > garbage collection.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
+## 2.4.11
+
+(2019-4-11)
+
+### Changelog
+
+* Bump the Golang version that is used to build DTR to version 1.11.5. [docker/dhe-deploy#10155](https://github.com/docker/dhe-deploy/pull/10155)
+
 ## 2.4.10
 
 (2019-2-28)
