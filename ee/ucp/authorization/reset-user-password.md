@@ -31,15 +31,15 @@ or SSH into a Docker Enterprise [manager node](/engine/swarm/how-swarm-mode-work
 {% raw %}
 ```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}' ucp-auth-api)" passwd -i
-{% endraw %}
 ```
+{% endraw %}
 
 ### With DEBUG Global Log Level
 
 If you have DEBUG set as your global log level within UCP, running `$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}` returns `--debug` instead of `--db-addr`. Pass `Args 1` to `$docker inspect` instead to reset your admin password.
 
-```none
 {% raw %}
+```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 1 }}' ucp-auth-api)" passwd -i
-{% endraw %}
 ```
+{% endraw %}
