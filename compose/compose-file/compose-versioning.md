@@ -121,9 +121,24 @@ discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
 [Networking in Compose](compose-file-v2.md#networking.md).
 
+> **Note**: when specifying the compose file version to use, make sure to
+> specify both the "major" and "minor" version. If no minor version is given,
+> it defaults to `0`, not the "latest" minor version, and features added in
+> later versions will not be supported. For example:
+>
+> ```yaml
+> version: "2"
+> ```
+> 
+> is equivalent to:
+> 
+> ```yaml
+> version: "2.0"
+> ```
+
 Simple example:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -136,7 +151,7 @@ Simple example:
 
 A more extended example, defining volumes and networks:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -169,7 +184,7 @@ Several other options were added to support networking, such as:
 * The [`depends_on`](compose-file-v2.md#depends_on) option can be used in place of links to indicate dependencies
 between services and startup order.
 
-      version: '2'
+      version: "{{ site.compose_file_v2 }}"
       services:
         web:
           build: .
@@ -259,6 +274,21 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 - Added: [deploy](/compose/compose-file/index.md#deploy)
 
+> **Note**: when specifying the compose file version to use, make sure to
+> specify both the "major" and "minor" version. If no minor version is given,
+> it defaults to `0`, not the "latest" minor version, and features added in
+> later versions will not be supported. For example:
+>
+> ```yaml
+> version: "3"
+> ```
+> 
+> is equivalent to:
+> 
+> ```yaml
+> version: "3.0"
+> ```
+
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
@@ -327,7 +357,7 @@ several options have been removed:
     [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
     and specify the driver there.
 
-        version: "3"
+        version: "{{ site.compose_file_v3 }}"
         services:
           db:
             image: postgres
@@ -422,7 +452,7 @@ It's more complicated if you're using particular configuration features:
     named volume called `data`, you must declare a `data` volume in your
     top-level `volumes` section. The whole file might look like this:
 
-        version: '2'
+        version: "{{ site.compose_file_v2 }}"
         services:
           db:
             image: postgres
