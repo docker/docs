@@ -6,7 +6,7 @@ keywords: Docker EE, Mac, Docker Desktop, Enterprise
 
 This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Mac.
 
-> **Warning:** If you are using the community version of Docker Desktop, you must uninstall Docker Desktop community in order to install Docker Desktop Enterprise.
+> **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
 
 # System requirements
 
@@ -30,11 +30,11 @@ Administrators can configure additional settings by modifying the administrator 
 
 # License file
 
-You must install the Docker Desktop Enterprise license file at the following location:
+Install the Docker Desktop Enterprise license file at the following location:
 
 `/Library/Group Containers/group.com.docker/docker_subscription.lic`
 
-If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise.
+You must create the path if it doesn't already exist. If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise. Contact your system administrator to obtain the license file.
 
 # Firewall exceptions
 
@@ -55,7 +55,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 # Version packs
 
 Docker Desktop Enterprise is bundled with default version pack [Enterprise 2.1 (Docker
-Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install versions packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
+Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
 
 - [Docker Community (18.09/Kubernetes
     1.13.0)](https://download.docker.com/win/enterprise/community.ddvp)
@@ -77,7 +77,7 @@ System administrators can use a command line executable to install and uninstall
 
 When you install Docker Desktop Enterprise, the command line tool is installed at the following location:
 
-`[ApplicationPath]/Contents/Resources/bin/dockerdesktop-admin`
+[ApplicationPath]/Contents/Resources/bin/dockerdesktop-admin
 
 >**Note:** Command line installation is supported for administrators only. You must have `sudo` access privilege to run the CLI commands.
 
@@ -85,7 +85,7 @@ When you install Docker Desktop Enterprise, the command line tool is installed a
 
 Run the following command to install or upgrade a version pack to the version contained in the specified `.ddvp` archive:
 
- `dockerdesktop-admin version-pack install [path-to-archive]`
+    dockerdesktop-admin version-pack install [path-to-archive]
 
  >**Note:** You must stop Docker Desktop before installing a version pack.
 
@@ -93,18 +93,14 @@ Run the following command to install or upgrade a version pack to the version co
 
  Run the following command to uninstall the specified version pack:
 
- `dockerdesktop-admin version-pack uninstall [version-pack-name]`
+    dockerdesktop-admin version-pack uninstall [version-pack-name]
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
 ## Application uninstall
 
-Run one of the following commands to uninstall the application:
+Run the following command to uninstall the application:
 
-`dockerdesktop-admin uninstall`
-
- OR
-
-`sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin app uninstall`
+    sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin app uninstall
 
 The `sudo` command uninstalls files such as version packs that are installed by an administrator, but are not accessible by users.
