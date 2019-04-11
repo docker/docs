@@ -738,8 +738,7 @@ options and tags it with the specified tag.
 > [Added in version 2.2 file format](compose-versioning.md#version-22).
 
 Run an init inside the container that forwards signals and reaps processes.
-Either set a boolean value to use the default `init`, or specify a path to
-a custom one.
+Set this option to `true` to enable this feature for the service.
 
     version: '2.2'
     services:
@@ -747,12 +746,10 @@ a custom one.
         image: alpine:latest
         init: true
 
-
-    version: '2.2'
-    services:
-      web:
-        image: alpine:latest
-        init: /usr/libexec/docker-init
+> The default init binary that is used is [Tini](https://github.com/krallin/tini),
+> and is installed in `/usr/libexec/docker-init` on the daemon host. You can
+> configure the daemon to use a custom init binary through the
+> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file)
 
 ### isolation
 
