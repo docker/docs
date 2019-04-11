@@ -21,6 +21,42 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.6
+(2019-04-11)
+
+### Kubernetes
+* Updated Kubernetes to version 1.11.9.
+
+### Networking
+* Updated Calico to version 3.5.3.
+
+### Authentication and Authorization
+* Accessing the `ListAccount` API endpoint now requires admin user. Accessing the `GetAccount` API endpoint now requires admin user, the actual user, or a member of the organization being inspected. [ENGORC-100](https://docker.atlassian.net/browse/ENGORC-100)
+
+### Known Issues
+* Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191)https://docker.atlassian.net/browse/ENGORC-2191. This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.6 |
+| Kubernetes   | 1.11.9 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.5 
 2019-03-28
 
