@@ -26,8 +26,8 @@ to upgrade your installation to the latest release.
 (2019-4-11)
 
 ### Bug Fixes
-* Fixed a bug where the UI was not rendering for non admin users.
-* Removed `Users` tab from side navigation [#10222](https://github.com/docker/dhe-deploy/pull/10222)
+* Fixed a bug where the web interface was not rendering for non-admin users.
+* Removed `Users` tab from the side navigation [#10222](https://github.com/docker/dhe-deploy/pull/10222)
 
 ### Known issues
 
