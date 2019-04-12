@@ -1268,7 +1268,7 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
 ### isolation
 
