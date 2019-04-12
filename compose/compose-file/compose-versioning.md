@@ -52,6 +52,12 @@ omitting a `version` key at the root of the YAML.
 be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
+> ### v2 and v3 Declaration
+>
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version.
+
 
 The [Compatibility Matrix](#compatibility-matrix) shows Compose file versions mapped to Docker Engine releases.
 
@@ -274,9 +280,9 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 - Added: [deploy](/compose/compose-file/index.md#deploy)
 
-> **Note**: when specifying the compose file version to use, make sure to
-> specify both the "major" and "minor" version. If no minor version is given,
-> it defaults to `0`, not the "latest" minor version, and features added in
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version. As a result, features added in
 > later versions will not be supported. For example:
 >
 > ```yaml
