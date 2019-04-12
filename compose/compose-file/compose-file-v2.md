@@ -50,7 +50,7 @@ definition in version 2.
 
 A set of configuration options to set block IO limits for this service.
 
-    version: '2.2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       foo:
         image: busybox
@@ -393,7 +393,7 @@ Express dependency between services, which has two effects:
 
 Simple example:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -418,7 +418,7 @@ the healthcheck) before starting.
 
 Example:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -667,7 +667,7 @@ details.
 A full example:
 
 ```
-version: '2'
+version: "{{ site.compose_file_v2 }}"
 services:
   myservice:
     image: alpine
@@ -741,14 +741,14 @@ Run an init inside the container that forwards signals and reaps processes.
 Either set a boolean value to use the default `init`, or specify a path to
 a custom one.
 
-    version: '2.2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         image: alpine:latest
         init: true
 
 
-    version: '2.2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         image: alpine:latest
@@ -885,7 +885,7 @@ The general format is shown here.
 
 In the example below, three services are provided (`web`, `worker`, and `db`), along with two networks (`new` and `legacy`). The `db` service is reachable at the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on the `legacy` network.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       web:
@@ -920,7 +920,7 @@ The corresponding network configuration in the [top-level networks section](#net
 
 An example:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       app:
@@ -954,7 +954,7 @@ managed by docker (IPAM driver).
 
 Example usage:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     services:
       app:
         image: busybox
@@ -977,7 +977,7 @@ In the following example, the `app` service connects to `app_net_1` first
 as it has the highest priority. It then connects to `app_net_3`, then
 `app_net_2`, which uses the default priority value of `0`.
 
-    version: '2.3'
+    version: "{{ site.compose_file_v2 }}"
     services:
       app:
         image: busybox
@@ -1216,7 +1216,7 @@ expressed in the short form.
 
 
 ```none
-version: "2.3"
+version: "{{ site.compose_file_v2 }}"
 services:
   web:
     image: nginx:alpine
@@ -1380,7 +1380,7 @@ Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
 up:
 
-    version: "2.2"
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       db:
@@ -1433,7 +1433,7 @@ In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       db:
@@ -1484,14 +1484,14 @@ conflicting with those used by other software.
 
 Set a custom name for this volume.
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     volumes:
       data:
         name: my-app-data
 
 It can also be used in conjunction with the `external` property:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     volumes:
       data:
         external: true
@@ -1609,7 +1609,7 @@ attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       proxy:
@@ -1644,14 +1644,14 @@ Not supported for version 2 `docker-compose` files. Use
 
 Set a custom name for this network.
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     networks:
       network1:
         name: my-app-net
 
 It can also be used in conjunction with the `external` property:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     networks:
       network1:
         external: true
