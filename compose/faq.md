@@ -44,6 +44,8 @@ add an explicit signal handler for `SIGTERM`.
         build: .
         stop_signal: SIGINT
 
+* Pass `--init` to [`docker run`](https://docs.docker.com/engine/reference/commandline/run/) (for Docker api v1.25 or later). It will use [tini](https://github.com/krallin/tini) to wrap you application. 
+
 * If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](http://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
