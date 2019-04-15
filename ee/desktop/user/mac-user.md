@@ -59,7 +59,17 @@ $ docker image ls
 $ docker image rm nginx
 ```
 
-# Docker Desktop Enterprise preferences
+# Docker Desktop user interface
+
+The Docker Desktop Enterprise user interface provides options to configure Docker Desktop preferences such as installation, version packs, Docker Hub login, and more. Right-click the Docker icon from the menu bar to open the Docker Desktop user interface.
+
+## Version Selection
+
+The **Version Selection** option lists the version packs installed on your Docker Desktop environment and allows you to switch between Docker Engine and Kubernetes versions using a single click. When you select a different version pack, Docker Desktop restarts and the selected versions of Docker Engine and Kubernetes will be used.
+
+To switch to a different version pack, simply click on the version pack you would like to use.
+
+## Preferences
 
 Click on the Docker icon from the menu bar and then **Preferences** to configure the runtime options described below.
 
@@ -67,7 +77,7 @@ Click on the Docker icon from the menu bar and then **Preferences** to configure
 
 ![Docker context menu](../images/prefs.png)
 
-## General
+### General
 
 ![Preferences](../images/./prefs-general.png)
 
@@ -84,7 +94,7 @@ General settings include:
   data to Docker. This information helps Docker improve the application and get
   more context for troubleshooting problems. (Enabled by default)
 
-## File Sharing
+### File Sharing
 
 Choose which local directories to share with your containers. File sharing is
 required for volume mounting if the project lives outside of the `/Users`
@@ -112,7 +122,7 @@ For more information, see:
 
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 
-## Disk
+### Disk
 
 Specify the **Disk image location** of the Linux volume, where containers and
 images are stored.
@@ -123,7 +133,7 @@ the existing image or replace it.
 
 ![Disk settings](../images/prefs-disk.png)
 
-## Advanced
+### Advanced
 
 On the Advanced tab, you can limit resources available to Docker.
 
@@ -141,7 +151,7 @@ to a higher number; to decrease it, lower the number.
 
 - **Swap**: Configure swap file size as needed. The default is 1 GB.
 
-## Proxies
+### Proxies
 
 Docker Desktop Enterprise detects HTTP/HTTPS Proxy Settings from macOS and automatically
 propagates these to Docker and to your containers. For example, if you set your
@@ -172,7 +182,7 @@ Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
 using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
-## Daemon
+### Daemon
 
 You can configure options on the Docker daemon that determine how your
 containers run.
@@ -182,7 +192,7 @@ Select **Basic** to configure the daemon with interactive settings, or select
 
 ![Daemon](../images/prefs-daemon-basic.png)
 
-### Experimental features
+#### Experimental features
 
 Docker Desktop Enterprise has experimental features enabled
 on Docker Engine, as described in [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) Readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
@@ -198,7 +208,7 @@ here. (If `false`, Experimental mode is off.)
 true
 ```
 
-### Insecure registries
+#### Insecure registries
 
 You can set up a custom and insecure [registry](https://docs.docker.com/registry/introduction) to store your public or private images (instead of
 using [Docker Hub](https://hub.docker.com/) or [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Add URLs for
@@ -210,7 +220,7 @@ For more information, see:
 
 - [How do I add client certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-client-certificates)
 
-### Daemon configuration file
+#### Daemon configuration file
 
 Click the **Advanced** tab to configure the daemon from the JSON file. For a
 full list of options, see the Docker Engine [dockerd command line reference](https://docs.docker.com/engine/reference/commandline/dockerd).
@@ -221,7 +231,7 @@ changes when asked.
 
 ![Docker Daemon](../images/prefs-daemon-adv.png)
 
-## Kubernetes
+### Kubernetes
 
 Docker Desktop Enterprise includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes.
@@ -262,11 +272,29 @@ Kubernetes containers are stopped and removed, and the
 
 For more information about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](https://docs.docker.com/docker-for-mac/kubernetes).
 
-## Reset
+### Reset
 
 Click on the Docker icon from the menu bar and then **Preferences**. Click **Reset** to reset to factory defaults, restart the Docker daemon, reset Kubernetes cluster, or to reset the disk image.
 
 ![Uninstall or reset Docker](../images/prefs-reset-mac.png)
+
+## Diagnose and Feedback
+
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on mac](/troubleshoot/mac-issues).
+
+## Design new application
+
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/app-designer).
+
+## Docker Hub
+
+Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, select **Repositories**  on the Docker Desktop Enterprise menu to access your Docker Hub repositories directly.
+
+See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
+
+- [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
+
+- [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
 
 ## Add TLS certificates
 

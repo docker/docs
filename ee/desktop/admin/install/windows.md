@@ -50,15 +50,14 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 
 - The process `com.docker.vpnkit` proxies all outgoing container TCP and
     UDP traffic. This includes Docker image downloading but not DNS
-    resolution, which is performed over a Unix domain socket connected
-    to the `mDNSResponder` system service.
+    resolution, which is performed over a loopback TCP and UDP connection
+    to the main application.
 
 - The process `com.docker.vpnkit` binds external ports on behalf of
     containers. For example, `docker run -p 80:80 nginx` binds port 80 on all
     interfaces.
 
-- If using Kubernetes, the API server is exposed with TLS on
-    `127.0.0.1:6443` by `com.docker.vpnkit`.
+- If using Kubernetes, the API server is exposed with TLS on `127.0.0.1:6445` by `com.docker.vpnkit`.
 
 # Version packs
 
