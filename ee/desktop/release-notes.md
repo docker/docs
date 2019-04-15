@@ -9,7 +9,6 @@ current release. The documentation is updated for each release.
 
 For information on system requirements, installation, and download, see:
 
-<<<<<<< HEAD
 - [Install Docker Desktop Enterprise on Mac](/ee/desktop/admin/install/mac)
 - [Install Docker Desktop Enterprise on Windows](/ee/desktop/admin/install/windows)
 
@@ -77,34 +76,16 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
   - The Docker Template CLI plugin included in this version is an outdated version of the plugin and will fail when scaffolding templates. Note that the Application Designer is not affected by this outdated version of the CLI plugin.
 
 ### Docker Desktop Enterprise 2.0.0.1
-=======
-- [Install Docker Desktop Enterprise on Mac](/ee/desktop/install/mac)
-- [Install Docker Desktop Enterprise on Windows](/ee/desktop/install/windows)
-
-For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
-
-# Docker Desktop Enterprise Releases of 2019
-
-## Docker Desktop Enterprise 2.0.0.1
->>>>>>> 1013: Move desktop ent content to docs-private
 
 2019-03-01
 
 **WARNING:** You must upgrade the previously installed Version Packs to the latest revision.
 
-<<<<<<< HEAD
 #### Windows
-=======
-### Windows
->>>>>>> 1013: Move desktop ent content to docs-private
 
 Upgrades:
 
 - Docker 18.09.3 for Version Pack Enterprise 2.1, fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
-<<<<<<< HEAD
-=======
-
->>>>>>> 1013: Move desktop ent content to docs-private
 - Docker 17.06.2-ee-20 for Version Pack Enterprise 2.0, fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
 Bug fixes and minor changes:
@@ -113,11 +94,7 @@ Bug fixes and minor changes:
 - Fixed Hub login through the desktop UI not sync with login through `docker login` command line.
 - Fixed crash in system tray menu when the Hub login fails or Air gap mode.
 
-<<<<<<< HEAD
 #### Mac
-=======
-### Mac
->>>>>>> 1013: Move desktop ent content to docs-private
 
 New features:
 
@@ -127,10 +104,6 @@ New features:
  Upgrades:
 
 - Docker 18.09.3 for Version Pack Enterprise 2.1, fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
-<<<<<<< HEAD
-=======
-
->>>>>>> 1013: Move desktop ent content to docs-private
 - Docker 17.06.2-ee-20 for Version Pack Enterprise 2.0, fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
 Bug fixes and minor changes:
@@ -138,11 +111,7 @@ Bug fixes and minor changes:
 - Fixed port 8080 that was used on localhost when starting Kubernetes.
 - Improved error messaging to suggest running diagnostics / resetting to factory default only when it is appropriate.
 
-<<<<<<< HEAD
 ### Docker Desktop Enterprise 2.0.0.0
-=======
-## Docker Desktop Enterprise 2.0.0.0
->>>>>>> 1013: Move desktop ent content to docs-private
 
 2019-01-31
 
