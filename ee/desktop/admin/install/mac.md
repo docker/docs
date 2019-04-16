@@ -18,6 +18,8 @@ This page contains information about the system requirements and specific instru
 
 - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac). If you have a newer version of VirtualBox installed, it’s fine.
 
+> **Note:** Docker supports Docker Desktop Enterprise on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
+
 # Installation
 
 Download Docker Desktop Enterprise for [**Mac**](https://download.docker.com/mac/enterprise/Docker.pkg). The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.

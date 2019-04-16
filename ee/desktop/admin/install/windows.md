@@ -26,6 +26,8 @@ Hyper-V on Windows 10:
 
 ![Virtualization Technology (VTx) must be enabled in BIOS settings](../../images/windows-prereq.png "BIOS setting information for hardware virtualization support")
 
+> **Note:** Docker supports Docker Desktop Enterprise on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
 # Installation
 
 Download Docker Desktop Enterprise for [**Windows**](https://download.docker.com/win/enterprise/DockerDesktop.msi).
