@@ -436,7 +436,7 @@ The **Version Selection** option lists the version packs installed on your Docke
 
 To switch to a different version pack, simply click on the version pack you would like to use.
 
-![Version Selection](../images/win-ver-select.png)
+![Version Selection](../images/win-ver-select.PNG)
 
 ## Diagnose and Feedback
 

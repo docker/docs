@@ -26,6 +26,8 @@ Hyper-V on Windows 10:
 
 ![Virtualization Technology (VTx) must be enabled in BIOS settings](../../images/windows-prereq.png "BIOS setting information for hardware virtualization support")
 
+> **Note:** Docker supports Docker Desktop Enterprise on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
 # Installation
 
 Download Docker Desktop Enterprise for [**Windows**](https://download.docker.com/win/enterprise/DockerDesktop.msi).
@@ -50,15 +52,14 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 
 - The process `com.docker.vpnkit` proxies all outgoing container TCP and
     UDP traffic. This includes Docker image downloading but not DNS
-    resolution, which is performed over a Unix domain socket connected
-    to the `mDNSResponder` system service.
+    resolution, which is performed over a loopback TCP and UDP connection
+    to the main application.
 
 - The process `com.docker.vpnkit` binds external ports on behalf of
     containers. For example, `docker run -p 80:80 nginx` binds port 80 on all
     interfaces.
 
-- If using Kubernetes, the API server is exposed with TLS on
-    `127.0.0.1:6443` by `com.docker.vpnkit`.
+- If using Kubernetes, the API server is exposed with TLS on `127.0.0.1:6445` by `com.docker.vpnkit`.
 
 # Version packs
 

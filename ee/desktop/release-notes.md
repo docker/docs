@@ -9,8 +9,8 @@ current release. The documentation is updated for each release.
 
 For information on system requirements, installation, and download, see:
 
-- [Install Docker Desktop Enterprise on Mac](/ee/desktop/install/mac)
-- [Install Docker Desktop Enterprise on Windows](/ee/desktop/install/windows)
+- [Install Docker Desktop Enterprise on Mac](/ee/desktop/admin/install/mac)
+- [Install Docker Desktop Enterprise on Windows](/ee/desktop/admin/install/windows)
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 

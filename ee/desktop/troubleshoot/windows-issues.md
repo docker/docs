@@ -4,7 +4,7 @@ description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Docker Desktop, Enterprise, troubleshoot
 ---
 
-This page contains information on how to diagnose Docker Desktop Enterprise (DDE) issues on Windows, send feedback, and submit the issues to Docker Support.
+This page contains information on how to diagnose Docker Desktop Enterprise (DDE) issues on Windows.
 
 # Creating a diagnostics file in Docker Desktop Enterprise
 
@@ -34,7 +34,7 @@ Diagnostics Bundle: C:\Users\djs\AppData\Local\Temp\6CE654F6-7B17-4FC7-AAE0-CC53
 Diagnostics ID: 6CE654F6-7B17-4FC7-AAE0-CC53B73B76A2/20190115163621
 ```
 
-The name of the diagnostics file is displayed next to “Diagnostics Bundle” (C:\Users\djs\AppData\Local\Temp\6CE654F6-7B17-4FC7-AAE0-CC53B73B76A2\20190115163621.zip in this example). This is the file that you attach to the support ticket.
+The name of the diagnostics file is displayed next to “Diagnostics Bundle”  (`\Temp\6CE654F6-7B17-4FC7-AAE0-CC53B73B76A2\20190115163621.zip` in this example). This is the file that you attach to the support ticket.
 
 ## Additional Docker Desktop Enterprise troubleshooting topics
 
