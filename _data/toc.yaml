@@ -3050,6 +3050,20 @@ manuals:
           title: Get support
   - title: Get support
     path: /ee/get-support/
+- sectiontitle: Docker Assemble
+  section:
+  - path: /assemble/install/
+    title: Install
+  - path: /assemble/spring-boot/
+    title: Build a Spring Boot project
+  - path: /assemble/dot-net/
+    title: Build a C# ASP.NET Core project
+  - path: /assemble/configure/
+    title: Configure
+  - path: /assemble/images/
+    title: Images
+  - path: /assemble/adv-backend-manage/
+    title: Advanced Backend Management
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
