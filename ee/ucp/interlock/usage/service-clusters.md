@@ -2,8 +2,6 @@
 title: Implement service clusters
 description: Learn how to route traffic to different proxies using a service cluster.
 keywords: ucp, interlock, load balancing, routing
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/usage/service_clusters/
 ---
 
 ## Configure Proxy Services

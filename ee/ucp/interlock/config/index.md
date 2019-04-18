@@ -5,7 +5,6 @@ keywords: routing, proxy, interlock, load balancing
 redirect_from:
   - /ee/ucp/interlock/deploy/configure/
   - /ee/ucp/interlock/usage/default-service/
-  - https://interlock-dev-docs.netlify.com/config/interlock/
 ---
 
 To further customize the layer 7 routing solution, you must update the

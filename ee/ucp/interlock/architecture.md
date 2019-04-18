@@ -3,8 +3,6 @@ title: Interlock architecture
 description: Learn more about the architecture of the layer 7 routing solution
   for Docker swarm services.
 keywords: routing, UCP, interlock, load balancing
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/intro/architecture/
 ---
 
 This document covers the following considerations:
