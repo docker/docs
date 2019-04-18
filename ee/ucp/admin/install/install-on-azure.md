@@ -43,12 +43,6 @@ to successfully deploy Docker UCP on Azure:
   Configuration](#considerations-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
-- All UCP workers and managers need to have the `Orchestrator` tag in Azure with
-  the Kubernetes version as the value, following this format:
-  `Orchestrator=Kubernetes:x.y.z`. This value may change in each UCP release. To
-  find the relevant version, see the UCP [Release
-  Notes](/ee/ucp/release-notes). For example, the tag for UCP `3.1.0` would be
-  `Orchestrator=Kubernetes:1.11.2`. 
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
   Computer Name and the Node Operating System's Hostname which is the FQDN of
   the host, including domain names. Note that this requires all characters to be in lowercase.
