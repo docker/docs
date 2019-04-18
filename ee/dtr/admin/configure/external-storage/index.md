@@ -82,16 +82,11 @@ all replicas can share the same storage backend.
 DTR supports Amazon S3 or other storage systems that are S3-compatible like Minio.
 [Learn how to configure DTR with Amazon S3](s3.md). 
 
-## Switching storage backends
 
-Starting in DTR 2.6, switching storage backends initializes a new metadata store and erases your existing tags. This helps facilitate online garbage collection, which has been introduced in 2.5 as an experimental feature. Make sure to [perform a backup](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-data) before you change your storage backend when running DTR 2.5 (with online garbage collection) and 2.6.0-2.6.3. If you encounter an issue with lost tags, refer to the following resources:
-  * For changes to reconfigure and restore options in DTR 2.6, see [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/) and [docker/dtr restore](/reference/dtr/2.6/cli/restore). 
-  * For Docker's recommended recovery strategies, see [DTR 2.6 lost tags after reconfiguring storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage).
-  * For NFS-specific changes, see [Use NFS](nfs.md). 
-  * For S3-specific changes, see [Learn how to configure DTR with Amazon S3](s3.md).
 
 ## Where to go next
 
+- [Switch storage backends](storage-backend-migration.md)
 - [Use NFS](nfs.md)
 - [Use S3](s3.md)
 - CLI reference pages

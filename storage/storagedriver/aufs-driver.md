@@ -168,7 +168,7 @@ Consider some scenarios where files in a container are modified.
   However, AUFS works at the file level rather than the block level. This
   means that all copy_up operations copy the entire file, even if the file is
   very large and only a small part of it is being modified. This can have a
-  noticeable impact on container write performance. AUFS, which can suffer
+  noticeable impact on container write performance. AUFS can suffer
   noticeable latencies when searching for files in images with many layers.
   However, it is worth noting that the copy_up operation only occurs the first
   time a given file is written to. Subsequent writes to the same file operate

@@ -33,8 +33,8 @@ the repository page on the DTR web interface, and select the
 
 > Only administrators can globally create and edit promotion policies. By default 
 > users can only create and edit promotion policies on repositories within their 
-> user namespace. For more information on user permissions head to 
-> [Authorization and Authorization](../../admin/manage-users/).
+> user namespace. For more information on user permissions, see 
+> [Authentication and Authorization](/ee/dtr/admin/manage-users/).
 
 ![repository policies](../../images/internal-promotion-2.png){: .with-border}
 

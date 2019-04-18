@@ -44,7 +44,7 @@ If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install
 
 | Option                   | Description                                                                                                                                                                                                                               |
 |:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--admin-password`       | The UCP administrator password |
+| `--admin-password`       | The UCP administrator password. Must be at least 8 characters. |
 | `--admin-username`       | The UCP administrator username                             |
 | `--binpack`              | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility       |
 | `--cloud-provider`       | The cloud provider for the cluster 

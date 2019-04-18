@@ -1410,6 +1410,8 @@ manuals:
               title: Install
             - path: /datacenter/ucp/3.0/guides/admin/install/install-offline/
               title: Install offline
+            - path: /datacenter/ucp/3.0/guides/admin/install/install-on-azure/
+              title: Install on Azure
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade/
               title: Upgrade
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade-offline/
@@ -2170,6 +2172,8 @@ manuals:
           section:
           - path: /ee/dtr/admin/configure/external-storage/
             title: Overview
+          - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
+            title: Switch storage backends
           - path: /ee/dtr/admin/configure/external-storage/s3/
             title: S3
           - path: /ee/dtr/admin/configure/external-storage/nfs/
