@@ -4,7 +4,6 @@ description: Learn how to configure your swarm services with SSL.
 keywords: routing, proxy, tls, ssl
 redirect_from:
   - /ee/ucp/interlock/usage/ssl/
-  - https://interlock-dev-docs.netlify.com/usage/ssl/
 ---
 
 This topic covers Swarm services implementation with:

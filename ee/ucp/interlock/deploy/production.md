@@ -3,8 +3,6 @@ title: Configure layer 7 routing for production
 description: Learn how to configure the layer 7 routing solution for a production
   environment.
 keywords: routing, proxy, interlock
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/install/production/
 ---
 
 This section includes documentation on configuring Interlock

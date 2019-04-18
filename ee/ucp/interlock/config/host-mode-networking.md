@@ -6,7 +6,6 @@ keywords: routing, proxy, interlock, load balancing
 redirect_from:
   - /ee/ucp/interlock/usage/host-mode-networking/
   - /ee/ucp/interlock/deploy/host-mode-networking/
-  - https://interlock-dev-docs.netlify.com/usage/host_mode/
 ---
 
 By default, layer 7 routing components communicate with one another using
