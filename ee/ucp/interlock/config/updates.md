@@ -2,8 +2,6 @@
 title: Update Interlock services
 description: Learn how to update the UCP layer 7 routing solution services
 keywords: routing, proxy, interlock
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/ops/updates/
 ---
 
 There are two parts to the update process:
