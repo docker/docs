@@ -59,10 +59,12 @@ Since you can configure the storage backend that DTR uses to store images,
 the way you backup images depends on the storage backend you're using.
 
 If you've configured DTR to store images on the local file system or NFS mount,
-you can backup the images by using ssh to log into a node where DTR is running,
-and creating a tar archive of the [dtr-registry volume](../../architecture.md):
+you can back up the images by using SSH to log into a DTR node,
+and creating a `tar` archive of the [dtr-registry volume](../../architecture.md):
 
-Local images:
+#### Example backup commands
+
+##### Local images
 
 {% raw %}
 ```none
@@ -72,7 +74,7 @@ sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
 ```
 {% endraw %}
 
-NFS mount images:
+##### NFS-mounted images
 
 {% raw %}
 ```none
@@ -82,6 +84,11 @@ sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
 ```
 {% endraw %}
 
+###### Expected output
+```bash
+tar: Removing leading `/' from member names
+```
+
 If you're using a different storage backend, follow the best practices
 recommended for that system.
 
@@ -89,7 +96,7 @@ recommended for that system.
 ### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
-command. For your convenience, this command automatically populates your DTR version and replica ID:
+concatenated commands:
 
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
@@ -108,18 +115,15 @@ docker run --log-driver none -i --rm \
   --existing-replica-id $REPLICA_ID > dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
 
-This command automatically completes the following tasks:
-
-1. The correct DTR version is automatically set for the backup command using 
-the running DTR version.
-2. The Replica ID is set automatically for the backup. If you'd prefer to back-up 
-a specific replica, the ID can be set manually by modifying the value of the 
-`--existing-replica-id` flag. 
-3. The UCP password is collected without being saved to disk or printed to the screen.
-4. The UCP CA certificate is automatically retrieved and verified (best practice). If
-verification is not desired, replace the `--ucp-ca` flag with 
-`--ucp-insecure-tls` (not recommended).
-5. The backup filename includes the backed-up DTR version and timestamp of the backup.
+The above concatenated commands run through the following tasks:
+1. Sets your DTR version and replica ID. To back up 
+a specific replica, set the replica ID manually by modifying the 
+`--existing-replica-id` flag in the backup command. 
+2. Prompts you for your UCP URL (domain and port), username, and password.
+3. Prompts you for your UCP password without saving it to your disk or printing it on the terminal.
+4. Retrieves the CA certificate for your specified UCP URL. To skip TLS verification, replace the `--ucp-ca` 
+flag with `--ucp-insecure-tls`. Docker does not recommend the latter.
+5. Includes DTR version and timestamp to your `tar` backup file.
 
 You can learn more about the supported flags in
 the [reference documentation](/reference/dtr/2.5/cli/backup.md).
