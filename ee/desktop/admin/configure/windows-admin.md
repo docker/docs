@@ -58,11 +58,6 @@ The following `admin-settings.json` code and table provide the required syntax a
       "value": "swarm"
     }
   },
-  "versionPacks": {
-    "allowUserInstall": {
-      "value": false
-    }
-  },
   "proxy": {
     "locked": false,
     "value": {
