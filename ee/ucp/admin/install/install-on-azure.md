@@ -66,8 +66,8 @@ objects are being deployed.
 
 For Docker UCP to integrate with Microsoft Azure,each UCP node in your cluster
 needs an Azure configuration file, `azure.json`. Place the file within
-`/etc/kubernetes`, and as the `azure.json` file is mounted into the Kubelet
-container it needs at least 0644 permissions.
+`/etc/kubernetes`. Since the config file is owned by `root`, set its permissions 
+to `0644` to ensure the container user has read access.
 
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
 parameters as is.
