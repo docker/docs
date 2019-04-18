@@ -122,7 +122,7 @@ a specific replica, set the replica ID manually by modifying the
 2. Prompts you for your UCP URL (domain and port), username, and password.
 3. Prompts you for your UCP password without saving it to your disk or printing it on the terminal.
 4. Retrieves the CA certificate for your specified UCP URL. To skip TLS verification, replace the `--ucp-ca` 
-flag with `--ucp-insecure-tls`. Docker does not recommend the latter.
+flag with `--ucp-insecure-tls`. Docker does not recommend this flag for production environments.
 5. Includes DTR version and timestamp to your `tar` backup file.
 
 You can learn more about the supported flags in
