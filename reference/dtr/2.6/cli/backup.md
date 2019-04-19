@@ -15,22 +15,15 @@ docker run -i --rm docker/dtr \
     backup [command options] > backup.tar
 ```
 
-### Example Usage
+### Example Commands
+
+#### Basic
 ```bash 
-docker run -i --rm --log-driver none docker/dtr:latest \
+docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
     backup --ucp-ca "$(cat ca.pem)" --existing-replica-id 5eb9459a7832 > backup.tar
 ```
 
-### Example pre-populating all required information
-```bash 
-docker run -i --rm --log-driver none docker/dtr:2.6.2 backup \
-  --ucp-url www.example.com 
-  --ucp-username admin 
-  --ucp-password password
-  --ucp-insecure-tls 
-  --existing-replica-id 5eb9459a7832 > dtr_2.6.2_backup.tar
-```
-### Example with best practices and scripted population of required fields
+### Advanced (with chained commands)
 ```bash
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
   name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
@@ -48,6 +41,10 @@ docker run --log-driver none -i --rm \
   --existing-replica-id $REPLICA_ID > \
   dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
+
+For a detailed explanation on the advanced example, see 
+[Back up your DTR metadata](ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata).
+To learn more about the `--log-driver` option for `docker run`, see [docker run reference](/engine/reference/run/#logging-drivers---log-driver). 
 
 ## Description
 
