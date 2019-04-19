@@ -27,7 +27,8 @@ docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
 {% raw %}
 ```bash
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
-  name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
+  name=dtr-registry -q) | grep -m1 DTR_VERSION | \
+  sed 's/.*DTR_VERSION=\([0-9].[0-9].[0-9]\)",/\1/'); \
 REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb \
   --format "{{ .Names }}" | head -1 | sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
