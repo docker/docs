@@ -132,6 +132,7 @@ recommended for that system.
 To create a DTR backup, load your UCP client bundle, and run the following
 concatenated commands:
 
+{% raw %}
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
   grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
@@ -148,6 +149,7 @@ docker run --log-driver none -i --rm \
   --ucp-ca "$(curl https://${UCP_URL}/ca)" \
   --existing-replica-id $REPLICA_ID > dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
+{% endraw %}
 
 #### UCP field prompts
 
