@@ -2,8 +2,6 @@
 title: Configure HAProxy
 description: Learn how to configure an HAProxy extension
 keywords: routing, proxy, interlock, load balancing
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/config/extensions/haproxy/
 ---
 
 The following HAProxy configuration options are available:

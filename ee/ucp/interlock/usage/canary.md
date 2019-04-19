@@ -2,8 +2,6 @@
 title: Publish Canary application instances
 description: Learn how to do canary deployments for your Docker swarm services
 keywords: routing, proxy
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/usage/canary/
 ---
 
 The following example publishes a service as a canary instance.
