@@ -134,8 +134,9 @@ chained commands:
 
 {% raw %}
 ```none
-DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
-  grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
+DTR_VERSION=$(docker container inspect $(docker container ps -f \
+  name=dtr-registry -q) | grep -m1 DTR_VERSION | \
+  sed 's/.*DTR_VERSION=\([0-9].[0-9].[0-9]\)",/\1/'); \
 REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb --format "{{ .Names }}" | head -1 | \
   sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
@@ -161,7 +162,7 @@ The above chained commands run through the following tasks:
 1. Sets your DTR version and replica ID. To back up 
 a specific replica, set the replica ID manually by modifying the 
 `--existing-replica-id` flag in the backup command. 
-2. Prompts you for your UCP URL (domain and port) and admin username.
+2. Prompts you for your UCP URL (domain and port), username, and password.
 3. Prompts you for your UCP password without saving it to your disk or printing it on the terminal.
 4. Retrieves the CA certificate for your specified UCP URL. To skip TLS verification, replace the `--ucp-ca` 
 flag with `--ucp-insecure-tls`. Docker does not recommend this flag for production environments.
