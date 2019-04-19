@@ -73,7 +73,7 @@ docker/ucp-kube-compose:{{ page.ucp_version }}
 docker/ucp-kube-dns-dnsmasq-nanny:{{ page.ucp_version }}
 docker/ucp-kube-dns-sidecar:{{ page.ucp_version }}
 docker/ucp-kube-dns:{{ page.ucp_version }}
-docker/ucp-metrics:3{{ page.ucp_version }}
+docker/ucp-metrics:{{ page.ucp_version }}
 docker/ucp-pause:{{ page.ucp_version }}
 docker/ucp-swarm:{{ page.ucp_version }}
 docker/ucp:{{ page.ucp_version }}
