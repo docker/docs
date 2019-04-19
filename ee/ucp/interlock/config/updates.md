@@ -20,8 +20,8 @@ $> docker config create service.interlock.conf.v2 <path-to-new-config>
 Remove the old configuration and specify the new configuration:
 
 ```bash
-$> docker service update --config-rm service.interlock.conf interlock
-$> docker service update --config-add source=service.interlock.conf.v2,target=/config.toml interlock
+$> docker service update --config-rm service.interlock.conf ucp-interlock
+$> docker service update --config-add source=service.interlock.conf.v2,target=/config.toml ucp-interlock
 ```
 
 Next, update the Interlock service to use the new image. The following example updates the Interlock core service to use the `sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51`
@@ -30,6 +30,6 @@ performs a rolling deploy to update all extensions.
 
 ```bash
 $> docker service update \
-    --image interlockpreview/interlock@sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51 \
-    interlock
+    --image docker/ucp-interlock@sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51 \
+    ucp-interlock
 ```
