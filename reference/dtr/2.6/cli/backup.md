@@ -23,7 +23,7 @@ docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
     backup --ucp-ca "$(cat ca.pem)" --existing-replica-id 5eb9459a7832 > backup.tar
 ```
 
-### Advanced (with chained commands)
+#### Advanced (with chained commands)
 {% raw %}
 ```bash
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
