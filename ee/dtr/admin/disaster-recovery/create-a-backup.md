@@ -130,7 +130,7 @@ recommended for that system.
 ### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
-concatenated commands:
+chained commands:
 
 {% raw %}
 ```none
@@ -157,7 +157,7 @@ docker run --log-driver none -i --rm \
 * `<ucp-username>` is the username of a UCP administrator.
 * `<replica-id>` is the DTR replica ID to back up.
 
-The above concatenated commands run through the following tasks:
+The above chained commands run through the following tasks:
 1. Sets your DTR version and replica ID. To back up 
 a specific replica, set the replica ID manually by modifying the 
 `--existing-replica-id` flag in the backup command. 
