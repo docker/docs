@@ -24,6 +24,7 @@ docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
 ```
 
 ### Advanced (with chained commands)
+{% raw %}
 ```bash
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
   name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
@@ -41,6 +42,7 @@ docker run --log-driver none -i --rm \
   --existing-replica-id $REPLICA_ID > \
   dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
+{% endraw %}
 
 For a detailed explanation on the advanced example, see 
 [Back up your DTR metadata](ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata).
