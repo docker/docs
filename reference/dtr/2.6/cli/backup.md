@@ -25,8 +25,7 @@ docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
 
 #### Advanced (with chained commands)
 {% raw %}
-
-```bash
+```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
   name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
 REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb \
