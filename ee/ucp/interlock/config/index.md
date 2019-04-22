@@ -173,10 +173,10 @@ DockerURL = "unix:///var/run/docker.sock"
 PollInterval = "3s"
 
 [Extensions.default]
-  Image = "docker/interlock-extension-nginx:latest"
+  Image = "{{ page.ucp_org }}/interlock-extension-nginx:{{ page.ucp_version }}"
   Args = ["-D"]
   ServiceName = "interlock-ext"
-  ProxyImage = "nginx:alpine"
+  ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
   ProxyArgs = []
   ProxyServiceName = "interlock-proxy"
   ProxyConfigPath = "/etc/nginx/nginx.conf"
