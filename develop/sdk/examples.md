@@ -40,21 +40,22 @@ command prompt:
 package main
 
 import (
-	"io"
 	"os"
 
+	"github.com/docker/docker/client"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stdcopy"
 	"golang.org/x/net/context"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
@@ -65,7 +66,6 @@ func main() {
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
 		Cmd:   []string{"echo", "hello world"},
-		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
 		panic(err)
@@ -89,7 +89,7 @@ func main() {
 		panic(err)
 	}
 
-	io.Copy(os.Stdout, out)
+	stdcopy.StdCopy(os.Stdout, os.Stderr, out)
 }
 ```
 
@@ -156,10 +156,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	imageName := "bfirsh/reticulate-splines"
 
@@ -238,10 +239,12 @@ import (
 )
 
 func main() {
-	cli, err := client.NewEnvClient()
+	ctx := context.Background()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
 	if err != nil {
@@ -314,10 +317,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
 	if err != nil {
@@ -395,10 +399,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	options := types.ContainerLogsOptions{ShowStdout: true}
 	// Replace this ID with a container that really exists
@@ -463,10 +468,12 @@ import (
 )
 
 func main() {
-	cli, err := client.NewEnvClient()
+	ctx := context.Background()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	images, err := cli.ImageList(context.Background(), types.ImageListOptions{})
 	if err != nil {
@@ -534,10 +541,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
 	if err != nil {
@@ -610,10 +618,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	authConfig := types.AuthConfig{
 		Username: "username",
@@ -707,10 +716,11 @@ import (
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
+	cli.NegotiateAPIVersion(ctx)
 
 	createResp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
