@@ -103,8 +103,7 @@ and creating a `tar` archive of the [dtr-registry volume](../../architecture.md)
 {% raw %}
 ```none
 sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
-  /var/lib/docker/volumes/dtr-registry-$(docker ps --filter name=dtr-rethinkdb \
-  --format "{{ .Names }}" | sed 's/dtr-rethinkdb-//')
+/var/lib/docker/volumes/dtr-registry-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 ```
 {% endraw %}
 
@@ -113,8 +112,7 @@ sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
 {% raw %}
 ```none
 sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
-  /var/lib/docker/volumes/dtr-registry-nfs-$(docker ps --filter name=dtr-rethinkdb \
-  --format "{{ .Names }}" | sed 's/dtr-rethinkdb-//')
+  /var/lib/docker/volumes/dtr-registry-nfs-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 ```
 {% endraw %}
 
