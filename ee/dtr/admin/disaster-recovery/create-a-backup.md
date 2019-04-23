@@ -130,14 +130,15 @@ recommended for that system.
 ### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
-chained commands:
+command.
+
+#### Chained commands (Linux only)
 
 {% raw %}
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
   grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
-REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb --format "{{ .Names }}" | head -1 | \
-  sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
+REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
 read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
 read -sp 'ucp password: ' UCP_PASSWORD; \
@@ -168,7 +169,7 @@ flag with `--ucp-insecure-tls`. Docker does not recommend this flag for producti
 5. Includes DTR version and timestamp to your `tar` backup file.
 
 You can learn more about the supported flags in
-the [reference documentation](/reference/dtr/2.6/cli/backup.md).
+the [DTR backup reference documentation](/reference/dtr/2.6/cli/backup.md).
 
 By default, the backup command does not pause the DTR replica being backed up to 
 prevent interruptions of user access to DTR. Since the replica
