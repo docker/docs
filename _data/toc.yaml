@@ -1355,8 +1355,6 @@ manuals:
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Implementing persistent (sticky) sessions
             path: /ee/ucp/interlock/usage/sessions/
-          - title: Implementing SSL
-            path: /ee/ucp/interlock/usage/ssl/
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
