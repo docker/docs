@@ -84,6 +84,6 @@ performs a rolling deploy to update all extensions.
 
 ```bash
 $> docker service update \
-    --image { page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} \
+    --image {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} \
     ucp-interlock
 ```
