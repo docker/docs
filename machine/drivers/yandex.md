@@ -70,13 +70,14 @@ Optional:
 -   `--yandex-zone`: The zone to launch the instance.
 
 Yandex.Cloud supports [image families](https://cloud.yandex.com/docs/compute/concepts/images#family).
-The driver uses the `ubuntu-1604-lts` instance image family unless otherwise specified.
+The driver uses the `ubuntu-1604-lts` image family to create instance unless otherwise specified.
 An image family is like an image alias that always points to the latest image in the family. To create an
 instance from an image family, set `--yandex-image-family` to the family's name.
 
-The following command shows public available images and which family they belong to (if any):
+To get list of public available images and which family they belong to (if any) install [CLI](https://cloud.yandex.com/docs/cli/quickstart)
+and run:
 
-    yc compute images list --folder-id=standard-images
+    $ yc compute images list --folder-id=standard-images
 
 Also possible to specify exact ID of the image to create the instance from by setting `--yandex-image-id`. 
 
