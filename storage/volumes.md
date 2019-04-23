@@ -512,7 +512,7 @@ testing using your preferred tools.
 A Docker data volume persists after a container is deleted. There are two types
 of volumes to consider:
 
-- **Named volumes** have a specific source form outside the container, for example `awesome:/bar`.
+- **Named volumes** have a specific source from outside the container, for example `awesome:/bar`.
 - **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
 
 ### Remove anonymous volumes
