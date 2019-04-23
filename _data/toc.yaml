@@ -1318,7 +1318,7 @@ manuals:
           - title: Offline installation
             path: /ee/ucp/interlock/deploy/offline-install/
           - title: Layer 7 routing upgrade
-            path: /ee/ucp/interlock/upgrade/   
+            path: /ee/ucp/interlock/deploy/upgrade/   
         - sectiontitle: Configuration
           section:
           - title: Configure your deployment
