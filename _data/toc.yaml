@@ -3051,6 +3051,8 @@ manuals:
       title: VMware vCloud Air
     - path: /machine/drivers/vsphere/
       title: VMware vSphere
+    - path: /machine/drivers/yandex/
+      title: Yandex.Cloud
   - path: /machine/migrate-to-machine/
     title: Migrate from Boot2Docker to Machine
   - path: /release-notes/docker-machine/
