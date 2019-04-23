@@ -143,10 +143,10 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = []
     ServiceName = "interlock-ext"
-    ProxyImage = "nginx:alpine"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyServiceName = "interlock-proxy"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -177,7 +177,7 @@ $> docker service create \
     --constraint node.role==manager \
     --publish mode=host,target=8080 \
     --config src=service.interlock.conf,target=/config.toml \
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
+    { page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
 

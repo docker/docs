@@ -49,10 +49,10 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.us-east]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = ["-D"]
     ServiceName = "interlock-ext-us-east"
-    ProxyImage = "nginx:alpine"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyServiceName = "interlock-proxy-us-east"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -74,10 +74,10 @@ PollInterval = "3s"
       proxy_region = "us-east"
 
   [Extensions.us-west]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = ["-D"]
     ServiceName = "interlock-ext-us-west"
-    ProxyImage = "nginx:alpine"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyServiceName = "interlock-proxy-us-west"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -119,7 +119,7 @@ $> docker service create \
     --network interlock \
     --constraint node.role==manager \
     --config src=service.interlock.conf,target=/config.toml \
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
+    { page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
 

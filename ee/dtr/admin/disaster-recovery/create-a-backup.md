@@ -132,6 +132,7 @@ recommended for that system.
 To create a DTR backup, load your UCP client bundle, and run the following
 chained commands:
 
+{% raw %}
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
   grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \

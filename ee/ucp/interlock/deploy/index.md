@@ -134,9 +134,9 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = ["-D"]
-    ProxyImage = "nginx:alpine"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ProxyReplicas = 1
@@ -178,7 +178,7 @@ $> docker service create \
     --network interlock \
     --constraint node.role==manager \
     --config src=service.interlock.conf,target=/config.toml \
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
+    {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
 
@@ -189,8 +189,8 @@ one for the extension service, and one for the proxy service:
 $> docker service ls
 ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
 lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                *:80->80/tcp *:443->443/tcp
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 interlockpreview/interlock-extension-nginx:2.0.0-preview
-sjpgq7h621ex        interlock           replicated          1/1                 interlockpreview/interlock:2.0.0-preview
+oxjvqc6gxf91        keen_clarke         replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
+sjpgq7h621ex        interlock           replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
 ```
 
 The Interlock traffic layer is now deployed. 
