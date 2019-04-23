@@ -22,11 +22,11 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-    Image = "docker/ucp-interlock-extension:3.0.1"
+    Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     ServiceName = "ucp-interlock-extension"
     Args = []
     Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
-    ProxyImage = "docker/ucp-interlock-proxy:3.0.1"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyServiceName = "ucp-interlock-proxy"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ProxyReplicas = 2
