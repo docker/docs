@@ -3064,6 +3064,10 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
+- sectiontitle: Docker App
+  section:
+  - path: /app/working-with-app/
+    title: Working with Docker App
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
