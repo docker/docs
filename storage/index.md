@@ -100,7 +100,7 @@ mounts is to think about where the data lives on the Docker host.
   information. For instance, internally, swarm services use `tmpfs` mounts to
   mount [secrets](/engine/swarm/secrets.md) into a service's containers.
 
-Bind mounts and volumes can both mounted into containers using the `-v` or
+Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
 mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
 we recommend using the `--mount` flag for both containers and services, for
