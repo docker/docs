@@ -2,8 +2,6 @@
 title: Offline installation considerations
 description: Learn how to to install Interlock on a Docker cluster without internet access.
 keywords: routing, proxy, interlock
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/install/offline/
 ---
 
 To install Interlock on a Docker cluster without internet access, the Docker images must be loaded.  This topic describes how to export the images from a local Docker
@@ -12,13 +10,14 @@ engine and then loading them to the Docker Swarm cluster.
 First, using an existing Docker engine, save the images:
 
 ```bash
-$> docker save docker/interlock:latest > interlock.tar
-$> docker save docker/interlock-extension-nginx:latest > interlock-extension-nginx.tar
-$> docker save nginx:alpine > nginx.tar
+$> docker save {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} > interlock.tar
+$> docker save {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }} > interlock-extension-nginx.tar
+$> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > nginx.tar
 ```
 
-Note: replace `docker/interlock-extension-nginx:latest` and `nginx:alpine` with the corresponding
-extension and proxy image if you are not using Nginx.
+Note: replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version
+}}` and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
+corresponding extension and proxy image if you are not using Nginx.
 
 You should have the following two files:
 

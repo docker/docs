@@ -5,7 +5,6 @@ keywords: routing, proxy
 redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
   - /ee/ucp/interlock/deploy/configure/
-  - https://interlock-dev-docs.netlify.com/usage/hello/
 ---
 
 After Interlock is deployed, you can launch and publish services and applications.

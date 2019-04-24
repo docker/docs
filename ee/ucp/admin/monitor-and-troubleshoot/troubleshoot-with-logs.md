@@ -20,6 +20,7 @@ containers to be listed as well.
 
 Click on a container to see more details, like its configurations and logs.
 
+![](../../images/troubleshoot-with-logs-2.png){: .with-border}
 
 ## Check the logs from the CLI
 
@@ -73,7 +74,7 @@ applications won't be affected by this.
 To increase the UCP log level, navigate to the UCP web UI, go to the
 **Admin Settings** tab, and choose **Logs**.
 
-![](../../images/troubleshoot-with-logs-2.png){: .with-border}
+![](../../images/troubleshoot-with-logs-3.png){: .with-border}
 
 Once you change the log level to **Debug** the UCP containers restart.
 Now that the UCP components are creating more descriptive logs, you can

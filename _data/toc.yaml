@@ -1318,7 +1318,7 @@ manuals:
           - title: Offline installation
             path: /ee/ucp/interlock/deploy/offline-install/
           - title: Layer 7 routing upgrade
-            path: /ee/ucp/interlock/upgrade/   
+            path: /ee/ucp/interlock/deploy/upgrade/   
         - sectiontitle: Configuration
           section:
           - title: Configure your deployment
@@ -1345,8 +1345,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Publishing a default host service
-            path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
@@ -1410,6 +1408,8 @@ manuals:
               title: Install
             - path: /datacenter/ucp/3.0/guides/admin/install/install-offline/
               title: Install offline
+            - path: /datacenter/ucp/3.0/guides/admin/install/install-on-azure/
+              title: Install on Azure
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade/
               title: Upgrade
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade-offline/

@@ -2,8 +2,6 @@
 title: Implement service clusters
 description: Learn how to route traffic to different proxies using a service cluster.
 keywords: ucp, interlock, load balancing, routing
-redirect_from:
-  - https://interlock-dev-docs.netlify.com/usage/service_clusters/
 ---
 
 ## Configure Proxy Services
@@ -163,7 +161,7 @@ PollInterval = "3s"
     Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = []
     ServiceName = "ucp-interlock-extension-us-west"
-    ProxyImage = "docker/ucp-interlock-proxy:3.1.2"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyServiceName = "ucp-interlock-proxy-us-west"
     ProxyConfigPath = "/etc/nginx/nginx.conf"

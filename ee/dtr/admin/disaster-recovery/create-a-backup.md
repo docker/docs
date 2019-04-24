@@ -2,7 +2,7 @@
 title: Create a backup
 description: Learn how to create a backup of Docker Trusted Registry, for disaster recovery.
 keywords: dtr, disaster recovery
-toc_max_header: 5
+toc_max_header: 3
 ---
 
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
@@ -93,15 +93,33 @@ Since you can configure the storage backend that DTR uses to store images,
 the way you back up images depends on the storage backend you're using.
 
 If you've configured DTR to store images on the local file system or NFS mount,
-you can backup the images by using SSH to log in to a DTR node,
-and creating a tar archive of the [dtr-registry volume](../../architecture.md):
+you can back up the images by using SSH to log into a DTR node,
+and creating a `tar` archive of the [dtr-registry volume](../../architecture.md):
+
+#### Example backup commands
+
+##### Local images
 
 {% raw %}
 ```none
-sudo tar -cf {{ image_backup_file }} \
--C /var/lib/docker/volumes/ dtr-registry-<replica-id>
+sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
+/var/lib/docker/volumes/dtr-registry-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 ```
 {% endraw %}
+
+##### NFS-mounted images
+
+{% raw %}
+```none
+sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
+  /var/lib/docker/volumes/dtr-registry-nfs-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+```
+{% endraw %}
+
+###### Expected output
+```bash
+tar: Removing leading `/' from member names
+```
 
 If you're using a different storage backend, follow the best practices
 recommended for that system.
@@ -110,37 +128,52 @@ recommended for that system.
 ### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
-command, replacing the placeholders with real values:
+command.
 
-```bash
-read -sp 'ucp password: ' UCP_PASSWORD;
-```
+#### Chained commands (Linux only)
 
-This prompts you for the UCP password. Next, run the following to back up your DTR metadata and save the result into a tar archive. You can learn more about the supported flags in
-the [reference documentation](/reference/dtr/2.6/cli/backup.md).
-
-```bash
+{% raw %}
+```none
+DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
+  grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
+REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')); \
+read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
+read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
+read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run --log-driver none -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \
-  --ucp-url <ucp-url> \
-  --ucp-insecure-tls \
-  --ucp-username <ucp-username> \
-  --existing-replica-id <replica-id> > {{ metadata_backup_file }}
+  docker/dtr:$DTR_VERSION backup \
+  --ucp-username $UCP_ADMIN \
+  --ucp-url $UCP_URL \
+  --ucp-ca "$(curl https://${UCP_URL}/ca)" \
+  --existing-replica-id $REPLICA_ID > dtr-metadata-${DTR_VERSION}-backup-$(date +%Y%m%d-%H_%M_%S).tar
 ```
+{% endraw %}
 
-Where:
+#### UCP field prompts
 
-* `<ucp-url>` is the url you use to access UCP.
+* `<ucp-url>` is the URL you use to access UCP.
 * `<ucp-username>` is the username of a UCP administrator.
-* `<replica-id>` is the id of the DTR replica to backup.
+* `<replica-id>` is the DTR replica ID to back up.
 
+The above chained commands run through the following tasks:
+1. Sets your DTR version and replica ID. To back up 
+a specific replica, set the replica ID manually by modifying the 
+`--existing-replica-id` flag in the backup command. 
+2. Prompts you for your UCP URL (domain and port) and admin username.
+3. Prompts you for your UCP password without saving it to your disk or printing it on the terminal.
+4. Retrieves the CA certificate for your specified UCP URL. To skip TLS verification, replace the `--ucp-ca` 
+flag with `--ucp-insecure-tls`. Docker does not recommend this flag for production environments.
+5. Includes DTR version and timestamp to your `tar` backup file.
 
-By default the backup command doesn't stop the DTR replica being backed up.
-This means you can take frequent backups without affecting your users.
+You can learn more about the supported flags in
+the [DTR backup reference documentation](/reference/dtr/2.6/cli/backup.md).
 
-You can use the `--offline-backup` option to stop the DTR replica while taking
-the backup. If you do this, remove the replica from the load balancing pool.
+By default, the backup command does not pause the DTR replica being backed up to 
+prevent interruptions of user access to DTR. Since the replica
+is not stopped, changes that happen during the backup may not be saved.
+Use the `--offline-backup` flag to stop the DTR replica during the backup procedure. If you set this flag,
+remove the replica from the load balancing pool to avoid user interruption.
 
 Also, the backup contains sensitive information
 like private keys, so you can encrypt the backup by running:
