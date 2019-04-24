@@ -3358,6 +3358,10 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
+- sectiontitle: Docker Context
+  section:
+  - path: /engine/context/working-with-contexts/
+    title: Working with Docker Contexts
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
