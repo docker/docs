@@ -1,5 +1,5 @@
 ---
-description: Docker Hub Quickstart
+description: Docker Hub quickstart
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams
 title: Docker Hub Quickstart
 redirect_from:
