@@ -135,3 +135,8 @@ Once you do that, you can start managing your UCP nodes:
 ```bash
 docker node ls
 ```
+
+## Use the API to manage your nodes
+You can also modify the UCP config through the [/api/ucp/config-toml API](/reference/ucp/3.1/api/).
+
+This lets you change the default node orchestrator, although you shouldn't need to change this very often. You can also supply a config file at install time.
