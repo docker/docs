@@ -461,7 +461,7 @@ instead.
 A community-contributed script called `device_tool.go` is available in the
 [moby/moby](https://github.com/moby/moby/tree/master/contrib/docker-device-tool)
 Github repository. You can use this tool to resize a `loop-lvm` thin pool,
-avoiding the long process above. This tool is not guaranteed to work, but you
+avoiding the long process using operating system utilities. This tool is not guaranteed to work, but you
 should only be using `loop-lvm` on non-production systems.
 
 If you do not want to use `device_tool`, you can [resize the thin pool manually](#use-operating-system-utilities) instead.
@@ -587,7 +587,7 @@ block device and other parameters to suit your situation.
     use by your thin pool, and the volume group's name.
 
     ```bash
-    $ sudo pvdisplay |grep 'VG Name'
+    $ sudo pvdisplay |grep -e 'PV Name' -e 'VG Name'
 
     PV Name               /dev/xvdf
     VG Name               docker
@@ -678,7 +678,7 @@ $ mount |grep devicemapper
 
 When you use `devicemapper`, Docker stores image and layer contents in the
 thinpool, and exposes them to containers by mounting them under
-subdirectories of `/var/lib/docker/devicemapper/`.
+subdirectories of `/var/lib/docker/devicemapper/mnt`.
 
 ### Image and container layers on-disk
 
@@ -687,7 +687,7 @@ the Devicemapper configuration itself and about each image and container layer
 that exist. The `devicemapper` storage driver uses snapshots, and this metadata
 include information about those snapshots. These files are in JSON format.
 
-The `/var/lib/devicemapper/mnt/` directory contains a mount point for each image
+The `/var/lib/docker/devicemapper/mnt/` directory contains a mount point for each image
 and container layer that exists. Image layer mount points are empty, but a
 container's mount point shows the container's filesystem as it appears from
 within the container.
