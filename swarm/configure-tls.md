@@ -543,7 +543,7 @@ do this for the `ubuntu` user on your Docker Engine client.
 
 Congratulations! You have configured a Docker swarm cluster to use TLS.
 
-## Related Information
+## Related information
 
 * [Secure Docker Swarm with TLS](secure-swarm-tls.md)
 * [Docker security](/engine/security/security/)
