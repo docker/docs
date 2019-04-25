@@ -86,15 +86,15 @@ It is also possible to specify exact instance image ID by setting `--yandex-imag
 | CLI option                 | Environment variable  | Default           |
 |:---------------------------|:----------------------|:------------------|
 | `--yandex-cloud-id`        | `YC_CLOUD_ID`         | -                 |
-| `--yandex-cores`           | `YC_CORES`            | 1                 |
-| `--yandex-disk-size`       | `YC_DISK_SIZE`        | 20                |
+| `--yandex-cores`           | `YC_CORES`            | `1`               |
+| `--yandex-disk-size`       | `YC_DISK_SIZE`        | `20`              |
 | `--yandex-disk-type`       | `YC_DISK_TYPE`        | `network-hdd`     |
 | `--yandex-folder-id`       | `YC_FOLDER_ID`        | -                 |
 | `--yandex-image-family`    | `YC_IMAGE_FAMILY`     | `ubuntu-1604-lts` |
 | `--yandex-image-folder-id` | `YC_IMAGE_FOLDER_ID`  | `standard-images` |
 | `--yandex-image-id`        | `YC_IMAGE_ID`         | -                 |
 | `--yandex-labels`          | `YC_LABELS`           | -                 |
-| `--yandex-memory`          | `YC_MEMORY`           | 1                 |
+| `--yandex-memory`          | `YC_MEMORY`           | `1`               |
 | `--yandex-platform-id`     | `YC_PLATFORM_ID`      | `standard-v1`     |
 | `--yandex-preemptible`     | `YC_PREEMPTIBLE`      | `false`           |
 | `--yandex-sa-key-file`     | `YC_SA_KEY_FILE`      | -                 |
