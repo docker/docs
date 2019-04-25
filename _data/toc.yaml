@@ -1323,10 +1323,6 @@ manuals:
           section:
           - title: Configure your deployment
             path: /ee/ucp/interlock/config/
-          - title: Using a custom extension template
-            path: /ee/ucp/interlock/config/custom-template/
-          - title: Configuring an HAProxy extension
-            path: /ee/ucp/interlock/config/haproxy-config/
           - title: Configuring host mode networking
             path: /ee/ucp/interlock/config/host-mode-networking/
           - title: Configuring an nginx extension
