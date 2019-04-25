@@ -80,6 +80,34 @@ For production systems, see
 
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
+    Perform the steps following the below error 
+    otherwise Docker fails to start with below error.
+    
+    ```bash
+    unable to configure the Docker daemon with file /etc/docker/daemon.json: 
+    the following directives are specified both as a flag and in the configuration
+    file: storage-driver: (from flag: overlay2, from file: devicemapper)
+    ```
+    
+    In CentOS or Fedora, comment below line in `/usr/lib/systemd/system/docker.service`.
+    
+    ```bash
+    EnvironmentFile=-/etc/sysconfig/docker-storage
+    ```
+    
+    In Ubuntu or Debian, remove below flag in line starting with `ExecStart=`
+    in file `/etc/systemd/system/docker.service.d/10-machine.conf`.
+    
+    ```bash
+    --storage-driver overlay2
+    ```
+    
+    In CentOS or Fedora or Ubuntu or Debian, run the following command
+    
+    ```bash
+    $ sudo systemctl daemon-reload
+    ```
+    
 3.  Start Docker.
 
     ```bash
@@ -187,6 +215,34 @@ See all storage options for each storage driver:
 
 - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
 - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+
+Perform the steps following the below error 
+otherwise Docker fails to start with below error.
+
+```bash
+unable to configure the Docker daemon with file /etc/docker/daemon.json: 
+the following directives are specified both as a flag and in the configuration
+file: storage-driver: (from flag: overlay2, from file: devicemapper)
+```
+
+In CentOS or Fedora, comment below line in `/usr/lib/systemd/system/docker.service`.
+
+```bash
+EnvironmentFile=-/etc/sysconfig/docker-storage
+```
+
+In Ubuntu or Debian, remove below flag in line starting with `ExecStart=`
+in file `/etc/systemd/system/docker.service.d/10-machine.conf`.
+
+```bash
+--storage-driver overlay2
+```
+
+In CentOS or Fedora or Ubuntu or Debian, run the following command
+
+```bash
+$ sudo systemctl daemon-reload
+```
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
@@ -360,6 +416,34 @@ assumes that the Docker daemon is in the `stopped` state.
         "dm.use_deferred_deletion=true"
         ]
     }
+    ```
+    
+    Perform the steps following the below error 
+    otherwise Docker fails to start with below error.
+    
+    ```bash
+    unable to configure the Docker daemon with file /etc/docker/daemon.json: 
+    the following directives are specified both as a flag and in the configuration
+    file: storage-driver: (from flag: overlay2, from file: devicemapper)
+    ```
+    
+    In CentOS or Fedora, comment below line in `/usr/lib/systemd/system/docker.service`.
+    
+    ```bash
+    EnvironmentFile=-/etc/sysconfig/docker-storage
+    ```
+    
+    In Ubuntu or Debian, remove below flag in line starting with `ExecStart=`
+    in file `/etc/systemd/system/docker.service.d/10-machine.conf`.
+    
+    ```bash
+    --storage-driver overlay2
+    ```
+    
+    In CentOS or Fedora or Ubuntu or Debian, run the following command
+    
+    ```bash
+    $ sudo systemctl daemon-reload
     ```
 
 14. Start Docker.
@@ -687,10 +771,9 @@ the Devicemapper configuration itself and about each image and container layer
 that exist. The `devicemapper` storage driver uses snapshots, and this metadata
 include information about those snapshots. These files are in JSON format.
 
-The `/var/lib/docker/devicemapper/mnt/` directory contains a mount point for each image
-and container layer that exists. Image layer mount points are empty, but a
-container's mount point shows the container's filesystem as it appears from
-within the container.
+The `/var/lib/docker/devicemapper/mnt/` directory contains a mount point for each
+container layer that exists. A container's mount point shows the container's 
+filesystem as it appears from within the container.
 
 
 ### Image layering and sharing
@@ -739,8 +822,7 @@ devices, either loopback devices (testing only) or physical disks.
   from their parent layers.
 
 - Each container's writable layer is mounted on a mountpoint in
-  `/var/lib/docker/devicemapper/mnt/`. An empty directory exists for each
-  read-only image layer and each stopped container.
+  `/var/lib/docker/devicemapper/mnt/`.
 
 Each image layer is a snapshot of the layer below it. The lowest layer of each
 image is a snapshot of the base device that exists in the pool. When you run a
