@@ -58,7 +58,7 @@ consistency and compatibility reasons.
 
 ### Known Issues
 
-* There are [important changes](https://github.com/docker/docker.github.io/blob/patch-04-2019/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
+* There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
 
 ## 18.09.4
 

@@ -20,7 +20,7 @@ docker run -i --rm docker/dtr \
 #### Basic
 
 ```bash 
-docker run -i --rm --log-driver none docker/dtr:{{ page.dtr_version }} \
+docker run -i --rm --log-driver none docker/dtr:2.6.5 \
     backup --ucp-ca "$(cat ca.pem)" --existing-replica-id 5eb9459a7832 > backup.tar
 ```
 
