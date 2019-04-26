@@ -440,7 +440,7 @@ To switch to a different version pack, simply click on the version pack you woul
 
 ## Diagnose and Feedback
 
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/troubleshoot/windows-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/ee/desktop/troubleshoot/windows-issues).
 
 ## Switch between Windows and Linux containers
 
@@ -455,7 +455,7 @@ For more information on Windows containers, refer to the following documentation
 - [Build and Run Your First Windows Server Container](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) (blog post) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  shows you how to use the [MusicStore]("https://github.com/aspnet/MusicStore/blob/master/README.md)
+  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
   application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see [Limitations of Windows containers for `localhost` and published ports](https://docs.docker.com/docker-for-windows/troubleshoot/#limitations-of-windows-containers-for-localhost-and-published-ports).
@@ -486,7 +486,7 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 
 ## Design new application
 
-Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/app-designer).
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/ee/desktop/app-designer).
 
 # Adding TLS certificates
 
