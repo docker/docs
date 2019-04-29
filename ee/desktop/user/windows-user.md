@@ -6,7 +6,7 @@ keywords: Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, Us
 
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Windows.
 
-# Test your installation
+## Test your installation
 
 1. Open a terminal window (Command Prompt or PowerShell, _but not_ PowerShell ISE).
 
@@ -57,7 +57,7 @@ This page contains information about testing the installation and configuring Do
     > docker run --help
     ```
 
-# Explore the application
+## Explore the application
 
 In this section, we demonstrate the ease and power of Dockerized applications by
 running something more complex, such as an OS and a webserver.
@@ -157,7 +157,7 @@ running something more complex, such as an OS and a webserver.
     > docker container rm webserver laughing_kowalevski relaxed_sammet
     ```
 
-# Docker Desktop user interface
+## Docker Desktop user interface
 
 The Docker Desktop Enterprise user interface provides options to configure Docker Desktop settings such as installation, version packs, Docker Hub login, and more. Right-click the Docker icon in the Notifications area (or System tray) to open the Docker Desktop user interface:
 
@@ -165,7 +165,7 @@ The Docker Desktop Enterprise user interface provides options to configure Docke
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-## Settings
+### Settings
 
 The **Settings** dialog allows you to configure your Docker Desktop Enterprise settings. The following section explains various configuration options available from the **Settings** dialog.
 
@@ -175,7 +175,7 @@ The **Settings** dialog allows you to configure your Docker Desktop Enterprise s
 
  ![Docker Desktop Enterprise popup menu](../images/docker-menu-settings.png)
 
-### General
+#### General
 
 On the **General** tab of the Settings dialog, you can configure when to start Docker Desktop.
 
@@ -188,7 +188,7 @@ crash reports, and usage data. This information helps Docker improve and trouble
 
 - **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
-### Shared drives
+#### Shared drives
 
 Share your local drives (volumes) with Docker Desktop, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
@@ -212,7 +212,7 @@ This is not configurable. See [Permissions errors on data directories for shared
 
 - Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
 
-#### Firewall rules for shared drives
+##### Firewall rules for shared drives
 
 Shared drives require port 445 to be open between the host machine and the
 virtual machine that runs Linux containers. Docker detects if port 445 is closed
@@ -228,7 +228,7 @@ By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
 `10.0.75.2` (the virtual machine). If your firewall rules seem correct, you may
 need to toggle or [reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
 
-#### Shared drives on demand
+##### Shared drives on demand
 
 You can share a drive "on demand" the first time a particular mount is requested.
 
@@ -241,7 +241,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](../images/shared-drive-on-demand.png)
 
-### Advanced
+#### Advanced
 
 The Linux VM restarts after changing the settings on the **Advanced** tab. This takes a few seconds.
 
@@ -251,7 +251,7 @@ The Linux VM restarts after changing the settings on the **Advanced** tab. This 
 
 - **Memory** - Change the amount of memory the Docker Desktop Enterprise Linux VM uses.
 
-### Network
+#### Network
 
 You can configure Docker Desktop Enterprise networking to work on a virtual private network (VPN).
 
@@ -271,7 +271,7 @@ You can configure Docker Desktop Enterprise networking to work on a virtual priv
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
-### Proxies
+#### Proxies
 
 Docker Desktop Enterprise lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
@@ -300,7 +300,7 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
-### Daemon
+#### Daemon
 
 Docker Desktop Enterprise enables you to configure the Docker daemon based on your preferences.
 The **Basic** mode lets you configure the more common daemon options with interactive settings and the **Advanced** mode lets you edit the JSON file directly.
@@ -309,7 +309,7 @@ The **Basic** mode lets you configure the more common daemon options with intera
 
 > **Note:** Administrators have the ability to lock some configuration options. Locked options cannot be selected, and are displayed with a lock icon.
 
-#### Experimental mode
+##### Experimental mode
 
 Docker Desktop Enterprise has the experimental version
 of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
@@ -345,7 +345,7 @@ Server:
   Experimental: true
   ```
 
-#### Insecure registries
+##### Insecure registries
 
 You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
 
@@ -360,7 +360,7 @@ For more information, see:
 
 - [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates)
 
-### Daemon configuration file
+#### Daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the [daemon](https://docs.docker.com/engine/reference/commandline/dockerd).
@@ -377,7 +377,7 @@ For a full list of options on the Docker daemon, see [daemon](https://docs.docke
 
 - [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#windows-configuration-file)
 
-### Kubernetes
+#### Kubernetes
 
 Kubernetes is available on Docker Desktop Enterprise. A standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
 Docker workloads on Kubernetes.
@@ -419,7 +419,7 @@ experience conflicts, remove it.
   For more about using the Kubernetes integration with Docker Desktop Enterprise,
   see [Deploy on Kubernetes](https://docs.docker.com/docker-for-windows/kubernetes).
 
-### Reset
+#### Reset
 
 On the Reset tab, you can restart Docker or reset its configuration.
 
@@ -430,7 +430,7 @@ On the Reset tab, you can restart Docker or reset its configuration.
 - **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
 
-## Version Selection
+### Version Selection
 
 The **Version Selection** option lists the version packs installed on your Docker Desktop environment and allows you to switch between Docker Engine and Kubernetes versions using a single click. When you select a different version pack, Docker Desktop restarts and the selected versions of Docker Engine and Kubernetes will be used.
 
@@ -438,11 +438,11 @@ To switch to a different version pack, simply click on the version pack you woul
 
 ![Version Selection](../images/win-ver-select.PNG)
 
-## Diagnose and Feedback
+### Diagnose and Feedback
 
 The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/ee/desktop/troubleshoot/windows-issues).
 
-## Switch between Windows and Linux containers
+### Switch between Windows and Linux containers
 
 From the Docker Desktop Enterprise menu, you can toggle which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to use Windows containers, or select **Switch to Linux containers** to use Linux containers.
 
@@ -474,7 +474,7 @@ The **Settings** dialog changes with Windows containers. When you switch to Wind
 
 If you set proxies or daemon configuration in Windows containers mode, these apply only on Windows containers. If you switch back to Linux containers, proxies and daemon configurations return to what you had set for Linux containers. Your Windows container settings are retained and become available again when you switch back.
 
-## Docker Hub
+### Docker Hub
 
 Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, select **Repositories**  on the Docker Desktop Enterprise menu to access your Docker Hub repositories directly.
 
@@ -484,11 +484,11 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 
 - [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
 
-## Design new application
+### Design new application
 
 Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/ee/desktop/app-designer).
 
-# Adding TLS certificates
+## Adding TLS certificates
 
 You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
 

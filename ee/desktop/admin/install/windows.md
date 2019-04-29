@@ -1,14 +1,14 @@
 ---
 title: Install Docker Desktop Enterprise on Windows
 description: Learn about Docker Desktop Enterprise
-keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
+keywords: Docker EE, Windows, Docker Desktop, Enterprise
 ---
 
 This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Windows.
 
 > **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
 
-# System requirements
+## System requirements
 
 - Windows 10 Pro or Enterprise version 15063 or later.
 
@@ -28,7 +28,7 @@ Hyper-V on Windows 10:
 
 > **Note:** Docker supports Docker Desktop Enterprise on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
-# Installation
+## Installation
 
 Download Docker Desktop Enterprise for [**Windows**](https://download.docker.com/win/enterprise/DockerDesktop.msi).
 
@@ -38,7 +38,7 @@ Double-click the `.msi` file to begin the installation and follow the on-screen 
 
 For information about installing DDE using the command line, see [Command line installation](#command-line-installation).
 
-# License file
+## License file
 
 Install the Docker Desktop Enterprise license file at the following location:
 
@@ -46,7 +46,7 @@ Install the Docker Desktop Enterprise license file at the following location:
 
 You must create the path if it doesn't already exist. If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise. Contact your system administrator to obtain the license file.
 
-# Firewall exceptions
+## Firewall exceptions
 
 Docker Desktop Enterprise requires the following firewall exceptions. If you do not have firewall access, or are unsure about how to set firewall exceptions, contact your system administrator.
 
@@ -61,7 +61,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 
 - If using Kubernetes, the API server is exposed with TLS on `127.0.0.1:6445` by `com.docker.vpnkit`.
 
-# Version packs
+## Version packs
 
 Docker Desktop Enterprise is bundled with default version pack [Enterprise 2.1 (Docker
 Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install version packs using a CLI tool to use a different version of the Docker Engine and Kubernetes for development work:
@@ -76,7 +76,7 @@ For information on using the CLI tool for version pack installation, see [Comman
 
 Available version packs are listed within the **Version Selection** option in the Docker Desktop menu. If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop restarts and the selected Docker Engine and Kubernetes versions are used.
 
-# Command line installation
+## Command line installation
 
 >**Note:** Command line installation is supported for administrators only. You must have `administrator` access to run the CLI commands.
 
@@ -98,23 +98,23 @@ Docker Desktop Enterprise includes a command line executable to install and unin
 
     [ApplicationPath]\dockerdesktop-admin.exe
 
-## Version-pack install
+### Version-pack install
 
 Run the following command to install or upgrade a version pack to the version contained in the specified `.ddvp` archive:
 
-    dockerdesktop-admin.exe -InstallVersionPack=[path-to-archive]
+    dockerdesktop-admin.exe -InstallVersionPack=['path-to-archive']
 
 >**Note:** You must stop Docker Desktop before installing a version pack.
 
-## Version-pack uninstall
+### Version-pack uninstall
 
 Run the following command to uninstall the specified version pack:
 
-    dockerdesktop-admin.exe -UninstallVersionPack=[version-pack-name|path-to-archive]
+    dockerdesktop-admin.exe -UninstallVersionPack=[version-pack-name|'path-to-archive']
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
-## Application uninstall
+### Application uninstall
 
 To uninstall the application:
 
