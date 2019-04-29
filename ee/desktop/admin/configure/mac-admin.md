@@ -6,7 +6,7 @@ keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 
 This page contains information on how system administrators can configure Docker Desktop Enterprise (DDE) settings, specify and lock configuration parameters to create a standardized development environment on Mac operating systems.
 
-# Environment configuration (administrators only)
+## Environment configuration (administrators only)
 
 The administrator configuration file allows you to customize and standardize your Docker Desktop environment across the organization.
 
@@ -16,7 +16,7 @@ When you install Docker Desktop Enterprise, a configuration file with default va
 
 To edit `admin-settings.json`, you must have sudo access privileges.
 
-## Syntax for `admin-settings.json`
+### Syntax for `admin-settings.json`
 
 1. `configurationFileVersion`: This must be the first parameter listed in `admin-settings.json`. It specifies the version of the configuration file format and must not be changed.
 
@@ -27,7 +27,7 @@ To edit `admin-settings.json`, you must have sudo access privileges.
 
   - `value`: Specifies the value of the parameter. Docker Desktop Enterprise uses the value when first started and after a reset to factory defaults. If this setting is omitted, a default value that is built into the application is used.
 
-## Parameters and settings
+### Parameters and settings
 
 The following `admin-settings.json` code and table provide the required syntax and descriptions for parameters and values:
 

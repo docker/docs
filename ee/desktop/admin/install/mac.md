@@ -8,11 +8,11 @@ This page contains information about the system requirements and specific instru
 
 > **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
 
-# System requirements
+## System requirements
 
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 
-- MacOS 10.12 and newer MacOS releases are supported. We recommend upgrading to the latest version of macOS.
+- macOS 10.12 and newer macOS releases are supported. We recommend upgrading to the latest version of macOS.
 
 - At least 4GB of RAM
 
@@ -20,7 +20,7 @@ This page contains information about the system requirements and specific instru
 
 > **Note:** Docker supports Docker Desktop Enterprise on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
 
-# Installation
+## Installation
 
 Download Docker Desktop Enterprise for [**Mac**](https://download.docker.com/mac/enterprise/Docker.pkg). The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.
 
@@ -30,7 +30,7 @@ Mac administrators can use the command line option `\$ sudo installer -pkg Docke
 
 Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/ee/desktop/admin/configure/mac-admin).
 
-# License file
+## License file
 
 Install the Docker Desktop Enterprise license file at the following location:
 
@@ -38,7 +38,7 @@ Install the Docker Desktop Enterprise license file at the following location:
 
 You must create the path if it doesn't already exist. If the license file is missing, you will be asked to provide it when you try to run Docker Desktop Enterprise. Contact your system administrator to obtain the license file.
 
-# Firewall exceptions
+## Firewall exceptions
 
 Docker Desktop Enterprise requires the following firewall exceptions. If you do not have firewall access, or are unsure about how to set firewall exceptions, contact your system administrator.
 
@@ -54,7 +54,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 - If using Kubernetes, the API server is exposed with TLS on
     `127.0.0.1:6443` by `com.docker.vpnkit`.
 
-# Version packs
+## Version packs
 
 Docker Desktop Enterprise is bundled with default version pack [Enterprise 2.1 (Docker
 Engine 18.09 / Kubernetes 1.11.5)](https://download.docker.com/win/enterprise/enterprise-2.1.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
@@ -73,7 +73,7 @@ Available version packs are listed within the **Version Selection** option in th
 
 If more than one version pack is installed, you can select the corresponding entry to work with a different version pack. After you select a different version pack, Docker Desktop restarts and the selected Docker Engine and Kubernetes versions are used.
 
-# Command line installation
+## Command line installation
 
 System administrators can use a command line executable to install and uninstall Docker Desktop Enterprise and version packs.
 
@@ -83,7 +83,7 @@ When you install Docker Desktop Enterprise, the command line tool is installed a
 
 >**Note:** Command line installation is supported for administrators only. You must have `sudo` access privilege to run the CLI commands.
 
-## Version-pack install
+### Version-pack install
 
 Run the following command to install or upgrade a version pack to the version contained in the specified `.ddvp` archive:
 
@@ -91,7 +91,7 @@ Run the following command to install or upgrade a version pack to the version co
 
  >**Note:** You must stop Docker Desktop before installing a version pack.
 
-## Version-pack uninstall
+### Version-pack uninstall
 
  Run the following command to uninstall the specified version pack:
 
@@ -99,7 +99,7 @@ Run the following command to install or upgrade a version pack to the version co
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
-## Application uninstall
+### Application uninstall
 
 Run the following command to uninstall the application:
 

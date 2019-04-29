@@ -4,7 +4,7 @@ description: Docker Desktop Enterprise Application Designer
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer
 ---
 
-# Overview
+## Overview
 
 The Application Designer helps Docker developers quickly create new
 Docker apps using a library of templates. To start the Application
