@@ -21,6 +21,36 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.7 
+(2019-05-02)
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Known Issues
+* Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.7 |
+| Kubernetes   | 1.11.9 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.6
 (2019-04-11)
 
@@ -189,8 +219,7 @@ upgrade your installation to the latest release.
 
 ### Authentication and Authorization
 * SAML Single Logout is now supported in UCP.
-* Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can 
-enable this feature in Admin Settings -> SAML Settings.
+* Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can enable this feature in Admin Settings -> SAML Settings.
 
 ### Audit Logging
 * UCP Audit logging is now controlled through the UCP Configuration file; it is also
@@ -198,10 +227,9 @@ now configurable within the UCP web interface. (#15466)
 
 ### Bug Fixes
 * Core
-  * Significantly reduced database load in environments with a lot of concurrent 
-  and repeated API requests by the same user. (docker/escalation#911)
+  * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user. (docker/escalation#911)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
+   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015)
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
 * Interlock
   * Interlock headers can now be hidden. (escalation#833)
@@ -334,15 +362,40 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.11 
+
+2019-05-02
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.11 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 ## 3.0.10
 
 2019-02-28
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 * Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (docker/orca/#16009)
 * Validate Calico certs expiration date and update accordingly. (escalation#981)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.10 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.9
 
@@ -481,8 +534,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password
-    were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+  * Fixed a critical security issue where the LDAP bind username and password were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 ### Known Issue
 
@@ -784,11 +836,35 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.18 
+
+2019-05-02
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Known issues
+
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
+
 ## Version 2.2.17
 
 2019-02-28
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 
