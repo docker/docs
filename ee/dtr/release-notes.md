@@ -19,24 +19,23 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
-
 # Version 2.6
 
 ## 2.6.6 
 (2019-5-2)
 
 ### Bug Fixes
-* DTR supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the --storage-migrated option in dtr reconfigure --nfs-url ...
-    - To use this option, first write your current storage settings to a JSON file curl ... /api/v0/admin/settings/registry > storage.json
-    - Next add keep_metadata: true to the top-level of the JSON you just created and modify it to contain your new storage settings
-    - Finally write your new JSON back to DTR with curl -X PUT .../api/v0/admin/settings/registry -d @storage.json docker/dhe-deploy#10246
-* Fixed an issue where replica version was inferred from DTR volume labels. docker/dhe-deploy#10266
+* DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the --storage-migrated option in dtr reconfigure --nfs-url ... (docker/dhe-deploy#10246)
+    - To use this option, first write your current storage settings to a JSON file curl ... /api/v0/admin/settings/registry > storage.json.
+    - Next, add `keep_metadata: true` to the top-level of the JSON you just created and modify it to contain your new storage settings.
+    - Finally, write your new JSON back to DTR with `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`. 
+* Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
 
 ### Security
-* Bumped the Golang version for DTR to 1.12.4. docker/dhe-deploy#10290
-* Bumped the Alpine version of the base image to 3.9. docker/dhe-deploy#10290
+* Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy#10290)
+* Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy#10290)
 
-## Known issues
+### Known issues
 
 * Docker Engine Enterprise Edition (Docker EE) Upgrade
   * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
@@ -275,8 +274,8 @@ to upgrade your installation to the latest release.
 ### Security
 
 * Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy #10301)
-* Bumped the Alpine version of the base image to 3.9.(docker/dhe-deploy #10301)
-* Bumped Python dependencies to address vulnerabilities.(docker/dhe-deploy #10308 and #10311)
+* Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)
+* Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)
 
 ### Bug Fixes
 
