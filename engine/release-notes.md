@@ -39,7 +39,7 @@ consistency and compatibility reasons.
 ### Networking
 * Cleaned up the cluster provider when the agent is closed. [docker/libnetwork#2354](https://github.com/docker/libnetwork/pull/2354)
 * Windows: Now selects a random host port if the user does not specify a host port. [docker/libnetwork#2369](https://github.com/docker/libnetwork/pull/2369)
-* `--service-cluster-ip-range` is now configurable for UCP install [docker/orca#10263](https://github.com/docker/orca/issues/10263(https://github.com/docker/orca/issues/10263)
+* `--service-cluster-ip-range` is now configurable for UCP install [docker/orca#10263](https://github.com/docker/orca/issues/10263)
  
 ### Known Issues
 * There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
