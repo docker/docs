@@ -145,12 +145,12 @@ version: '3.3'
 
 services:
   web:
-    image: dockerdemos/lab-web
+    image: dockersamples/k8s-wordsmith-web
     ports:
      - "80:80"
 
   words:
-    image: dockerdemos/lab-words
+    image: dockersamples/k8s-wordsmith-api
     deploy:
       replicas: 5
       endpoint_mode: dnsrr
@@ -161,7 +161,7 @@ services:
           memory: 50M
 
   db:
-    image: dockerdemos/lab-db
+    image: dockersamples/k8s-wordsmith-db
 ```
 
 If you already have a Kubernetes YAML file, you can deploy it using the
