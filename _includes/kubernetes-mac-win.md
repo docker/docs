@@ -145,27 +145,22 @@ version: '3.3'
 
 services:
   web:
-    build: web
     image: dockerdemos/lab-web
-    volumes:
-     - "./web/static:/static"
     ports:
      - "80:80"
 
   words:
-    build: words
     image: dockerdemos/lab-words
     deploy:
       replicas: 5
       endpoint_mode: dnsrr
       resources:
         limits:
-          memory: 16M
+          memory: 50M
         reservations:
-          memory: 16M
+          memory: 50M
 
   db:
-    build: db
     image: dockerdemos/lab-db
 ```
 
