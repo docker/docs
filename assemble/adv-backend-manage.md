@@ -1,6 +1,6 @@
 ---
-title: Advanced Backend Management
-description: Advanced Backend Management for Docker Assemble
+title: Advanced backend management
+description: Advanced backend management for Docker Assemble
 keywords: Backend, Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#
 ---
 

@@ -34,4 +34,4 @@ When the backend is running, it can be used for multiple builds and does not nee
 
 > **Note:** For instructions on running a remote backend, accessing logs, saving the build cache in a named volume, accessing a host port, and for information about the buildkit instance, see `--help` .
 
-For advanced backend user information, see [Advanced Backend Management](/adv-backend-manage).
+For advanced backend user information, see [Advanced Backend Management](/assemble/adv-backend-manage/).

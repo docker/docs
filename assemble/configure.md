@@ -12,7 +12,7 @@ The `docker-assemble.yaml` file is in YAML syntax and has the following informal
 
 - `image`: (_map_) contains options related to the output image.
 
-    - `platforms`: (_list of strings_) lists the possible platforms which can be built (for example, `linux/amd64`, `windows/amd64`). The default is determined automatically from the project type and content. Note that by default Docker Assemble will build only for `linux/amd64` unless `--push` is used. See [Building Multiplatform images](images#multi-platform-images).
+    - `platforms`: (_list of strings_) lists the possible platforms which can be built (for example, `linux/amd64`, `windows/amd64`). The default is determined automatically from the project type and content. Note that by default Docker Assemble will build only for `linux/amd64` unless `--push` is used. See [Building Multiplatform images](/assemble/images/#multi-platform-images).
 
     - `ports`: (_list of strings_) contains ports to expose from a container running the image. e.g `80/tcp` or `8080`. Default is to automatically determine the set of ports to expose where possible. To disable this and export no ports specify a list containing precisely one element of `none`.
 
@@ -26,7 +26,7 @@ The `docker-assemble.yaml` file is in YAML syntax and has the following informal
 
     - `healthcheck`: (_map_) describes how to check a container running the image is healthy.
 
-        - `kind`: (_string_) sets the type of Healthcheck to perform. Valid values are `none`, `simple-tcpport-open` and `springboot`. See [Health checks](/images#healthchecks).
+        - `kind`: (_string_) sets the type of Healthcheck to perform. Valid values are `none`, `simple-tcpport-open` and `springboot`. See [Health checks](/assemble/images/#health-checks).
 
         - `interval`: (_duration_) the time to wait between checks.
 
@@ -44,7 +44,7 @@ The `docker-assemble.yaml` file is in YAML syntax and has the following informal
 
     - `build-image`: (_string_) sets a custom base build image
 
-    - `runtime-images` (_map_) sets a custom base runtime image by platform. For valid keys, refer to the **Spring Boot** section in [Custom base images](/images#custom-base-images).
+    - `runtime-images` (_map_) sets a custom base runtime image by platform. For valid keys, refer to the **Spring Boot** section in [Custom base images](/assemble/images/#custom-base-images).
 
 - `aspnetcore`: (_map_) if this is an ASP.NET Core project then contains related configuration options.
 
@@ -54,7 +54,7 @@ The `docker-assemble.yaml` file is in YAML syntax and has the following informal
 
     - `build-image`: (_string_) sets a custom base build image
 
-    - `runtime-images` (_map_) sets a custom base runtime image by platform. For valid keys, refer to the **ASP.NET Core** section in [Custom base images](/images#custom-base-images).
+    - `runtime-images` (_map_) sets a custom base runtime image by platform. For valid keys, refer to the **ASP.NET Core** section in [Custom base images](/assemble/images/#custom-base-images).
 
 > **Notes:**
 >

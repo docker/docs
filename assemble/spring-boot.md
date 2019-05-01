@@ -4,9 +4,7 @@ description: Building a Spring Boot project using Docker Assemble
 keywords: Assemble, Docker Enterprise, Spring Boot, container image
 ---
 
-## To build a Spring Boot project
-
-Ensure you are running the `backend` before you build any projects using Docker Assemble. For instructions on running the backend, see [Install Docker Assemble](/install).
+Ensure you are running the `backend` before you build any projects using Docker Assemble. For instructions on running the backend, see [Install Docker Assemble](/assemble/install).
 
 Clone the git repository you would like to use. The following example uses the `docker-springfamework` repository.
 
