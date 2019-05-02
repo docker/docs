@@ -3064,6 +3064,8 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
+  - path: /assemble/cli-reference/
+    title: CLI reference
 - sectiontitle: Docker App
   section:
   - path: /app/working-with-app/

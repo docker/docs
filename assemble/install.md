@@ -27,11 +27,11 @@ To start the backend, run:
 ```
 ~$ docker assemble backend start`
 Pulling image «…»: Success
-Started backend container "docker-assemble-backend-auser" (3e627bb365a4)
+Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```
 
 When the backend is running, it can be used for multiple builds and does not need to be restarted.
 
 > **Note:** For instructions on running a remote backend, accessing logs, saving the build cache in a named volume, accessing a host port, and for information about the buildkit instance, see `--help` .
 
-For advanced backend user information, see [Advanced Backend Management](/adv-backend-manage).
+For advanced backend user information, see [Advanced Backend Management](/assemble/adv-backend-manage/).
