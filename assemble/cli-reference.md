@@ -48,7 +48,7 @@ Manage build backend service
 
 Options:
       --addr string   backend address (default
-                      "docker-container://docker-assemble-backend-Usha--Puttaswamy")
+                      "docker-container://docker-assemble-backend-username")
 
 Management Commands:
   cache       Manage build cache
@@ -67,7 +67,7 @@ For example:
 ```
 docker assemble backend start
 Pulling image «…»: Success
-Started backend container "docker-assemble-backend-auser" (3e627bb365a4)
+Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```
 
 For more information about `backend`, see  [Advanced backend management](/assemble/adv-backend-manage).
@@ -83,7 +83,7 @@ Build a project into a container
 
 Options:
       --addr string           backend address (default
-                              "docker-container://docker-assemble-backend-Usha--Puttaswamy")
+                              "docker-container://docker-assemble-backend-username")
       --label KEY=VALUE       label to write into the image as KEY=VALUE
       --name NAME             build image with repository NAME (default
                               taken from project metadata)
@@ -120,7 +120,7 @@ Print the version number of docker assemble
 
 Options:
       --addr string   backend address (default
-                      "docker-container://docker-assemble-backend-Usha-Mandya")
+                      "docker-container://docker-assemble-backend-username")
 ```
 
 For example:

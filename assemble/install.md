@@ -27,7 +27,7 @@ To start the backend, run:
 ```
 ~$ docker assemble backend start`
 Pulling image «…»: Success
-Started backend container "docker-assemble-backend-auser" (3e627bb365a4)
+Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```
 
 When the backend is running, it can be used for multiple builds and does not need to be restarted.

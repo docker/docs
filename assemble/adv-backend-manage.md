@@ -39,7 +39,7 @@ ID: 2f03e7d288e6bea770a2acba4c8c918732aefcd1946c94c918e8a54792e4540f (running)
 Image: docker/assemble-backend@sha256:«…»
 
 Sidecar containers:
- - 0f339c0cc8d7 docker-assemble-backend-auser-proxy-port-5000 (running)
+ - 0f339c0cc8d7 docker-assemble-backend-username-proxy-port-5000 (running)
 
 Found 1 worker(s):
 
@@ -79,10 +79,10 @@ Alternatively you can specify a named docker volume to use for the cache. For ex
 
 ```
 ~$ docker volume create $USER-assemble-cache
-auser-assemble-cache
-~$ docker assemble backend start --cache-volume=auser-assemble-cache
+username-assemble-cache
+~$ docker assemble backend start --cache-volume=username-assemble-cache
 Pulling image «…»: Success
-Started container "docker-assemble-backend-auser" (74476d3fdea7)
+Started container "docker-assemble-backend-username" (74476d3fdea7)
 ```
 
 For information regarding the current cache contents, run the command `docker assemble backend cache`.
