@@ -40,13 +40,15 @@ You can set the logging driver for a specific container by using the
 
     docker run --log-driver=awslogs ...
 
-If you are using Docker-Compose, you can assign the log driver like so:
+If you are using Docker Compose, set `awslogs` using the following declaration example:
 
-    myservice:
-      logging:
-        driver: awslogs
-        options:
-          awslogs-region: us-east-1
+```yaml
+myservice:
+  logging:
+    driver: awslogs
+      options:
+        awslogs-region: us-east-1
+```
           
 ## Amazon CloudWatch Logs options
 
