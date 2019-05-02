@@ -49,7 +49,6 @@ Manage build backend service
 Options:
       --addr string   backend address (default
                       "docker-container://docker-assemble-backend-username")
-                      "docker-container://docker-assemble-backend-Usha--Puttaswamy")
 
 Management Commands:
   cache       Manage build cache
