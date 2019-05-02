@@ -29,22 +29,27 @@ for Windows](install.md#download-docker-for-windows).
   - [Kubernetes 1.14.1](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#changelog-since-v1141)
 
 * New
-  - App: Docker CLI Plugin to configure, share and install applications
+
+  - App: Docker CLI plugin to configure, share, and install applications
+  
     - Extend Compose files with metadata and parameters
-    - Re-use same application across multiple environments (Development/QA/Staging/Production)
-    - Multi orchestrator installation (Swarm or Kubernetes)
-    - Push/Pull/Promotion/Signing supported for application, with same workflow as images
+    - Reuse the same application across multiple environments (Development/QA/Staging/Production)
+    - Multi-orchestrator installation (Swarm or Kubernetes)
+    - Push/Pull/Promotion/Signing supported for application, with the same workflow as images
     - Fully CNAB compliant
-    - Full support of Docker Contexts
+    - Full support for Docker Contexts
+    
   - Buildx (Tech Preview): Docker CLI plugin for extended build capabilities with BuildKit
+  
     - Familiar UI from docker build
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
-    - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 & linux/arm64)
+    - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
     - Parallel building of compose files
     - High-level build constructs with `bake`
 
 * Bug fixes and minor changes
+
   - Fix `Delete` of persistent volume claims
   - Truncate UDP DNS responses which are over 512 bytes in size
 
