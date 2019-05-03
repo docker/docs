@@ -1323,10 +1323,6 @@ manuals:
           section:
           - title: Configure your deployment
             path: /ee/ucp/interlock/config/
-          - title: Using a custom extension template
-            path: /ee/ucp/interlock/config/custom-template/
-          - title: Configuring an HAProxy extension
-            path: /ee/ucp/interlock/config/haproxy-config/
           - title: Configuring host mode networking
             path: /ee/ucp/interlock/config/host-mode-networking/
           - title: Configuring an nginx extension
@@ -1355,8 +1351,6 @@ manuals:
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Implementing persistent (sticky) sessions
             path: /ee/ucp/interlock/usage/sessions/
-          - title: Implementing SSL
-            path: /ee/ucp/interlock/usage/ssl/
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets

@@ -2,6 +2,8 @@
 title: Secure services with TLS
 description: Learn how to configure your swarm services with TLS.
 keywords: routing, proxy, tls
+redirect_from:
+  - /ee/ucp/interlock/usage/ssl/
 ---
 
 After [deploying a layer 7 routing solution](../deploy/index.md), you have two options for securing your
