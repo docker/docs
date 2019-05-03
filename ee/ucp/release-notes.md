@@ -24,6 +24,9 @@ upgrade your installation to the latest release.
 ## 3.1.7 
 (2019-05-02)
 
+### Security
+* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any current status/issues/recommendations.
+
 ### Bug Fixes
 * Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
 
