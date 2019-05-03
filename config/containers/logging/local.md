@@ -46,7 +46,7 @@ $ docker run \
 
 ### Options
 
-The `json-file` logging driver supports the following logging options:
+The `local` logging driver supports the following logging options:
 
 | Option      | Description                                                                                                                                                                                                   | Example  value                           |
 |:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|

@@ -3,8 +3,6 @@ title: Applications with SSL
 description: Learn how to configure your swarm services with TLS using the layer
   7 routing solution for UCP.
 keywords: routing, proxy, tls
-redirect_from:
-  - /ee/ucp/interlock/usage/ssl/
 ---
 
 Once the [layer 7 routing solution is enabled](../deploy/index.md), you can

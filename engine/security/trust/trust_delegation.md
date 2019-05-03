@@ -75,7 +75,8 @@ Failed to add signer to: dtr.example.com/user/repo
 ```
 
 If you are using DTR and would like to work with a remote UCP's signing policy, 
-you must [register your DTR instance with that remote UCP](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane). See [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/) for more details. 
+you must [register your DTR instance with that remote UCP](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane). 
+See [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/) for more details. 
 
 ## Configuring the Notary Client
 
@@ -369,7 +370,7 @@ Successfully removed ben from dtr.example.com/admin/demo
 
 #### Troubleshooting
 
-1) If you see an error that there are no useable keys in `targets/releases`, you 
+1) If you see an error that there are no usable keys in `targets/releases`, you 
 will need to add additional delegations using `docker trust signer add` before 
 resigning images.
 

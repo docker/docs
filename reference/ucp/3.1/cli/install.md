@@ -38,11 +38,13 @@ If you have SELinux policies enabled for your Docker install, you will need to
 use `docker container run --rm -it --security-opt label=disable ...` when running this
 command.
 
+If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install/install-on-azure/).
+
 ## Options
 
 | Option                   | Description                                                                                                                                                                                                                               |
 |:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--admin-password`       | The UCP administrator password |
+| `--admin-password`       | The UCP administrator password. Must be at least 8 characters. |
 | `--admin-username`       | The UCP administrator username                             |
 | `--binpack`              | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility       |
 | `--cloud-provider`       | The cloud provider for the cluster 

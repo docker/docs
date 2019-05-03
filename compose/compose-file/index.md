@@ -30,7 +30,7 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 services:
 
   redis:
@@ -182,7 +182,7 @@ Configuration options that are applied at build time.
 context:
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     build: ./dir
@@ -192,7 +192,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     build:
@@ -447,7 +447,7 @@ the stack deployment fails with a `config not found` error.
 >  of the compose file format.
 
 ```yaml
-version: "3.3"
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -489,7 +489,7 @@ to `103`. The `redis` service does not have access to the `my_other_config`
 config.
 
 ```yaml
-version: "3.3"
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -576,7 +576,7 @@ behaviors:
 Simple example:
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -612,7 +612,7 @@ only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
 ignored by `docker-compose up` and `docker-compose run`.
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -648,7 +648,7 @@ in cases where you want to use your own load balancer, or for Hybrid
 Windows and Linux applications.
 
 ```yaml
-version: "3.3"
+version: "{{ site.compose_file_v3 }}"
 
 services:
   wordpress:
@@ -697,7 +697,7 @@ Specify labels for the service. These labels are *only* set on the service,
 and *not* on any containers for the service.
 
 ```yaml
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -709,7 +709,7 @@ services:
 To set labels on containers instead, use the `labels` key outside of `deploy`:
 
 ```yaml
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -727,7 +727,7 @@ in the [swarm](/engine/swarm/) topics.)
 
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -740,7 +740,7 @@ services:
 Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
 
 ```yaml
-version: '3.3'
+version: "{{ site.compose_file_v3 }}"
 services:
   db:
     image: postgres
@@ -759,7 +759,7 @@ If the service is `replicated` (which is the default), specify the number of
 containers that should be running at any given time.
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -788,7 +788,7 @@ In this general example, the `redis` service is constrained to use no more than
 and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -844,7 +844,7 @@ Configures if and how to restart containers when they exit. Replaces
   decide immediately).
 
 ```yaml
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -887,7 +887,7 @@ updates.
 file format.
 
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -939,12 +939,59 @@ devices:
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
+### depends_on
+
+Express dependency between services, Service dependencies cause the following
+behaviors:
+
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` are started before `web`.
+
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
+  creates and starts `db` and `redis`.
+  
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
+
+Simple example:
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+```
+
+> There are several things to be aware of when using `depends_on`:
+>
+> - `depends_on` does not wait for `db` and `redis` to be "ready" before
+>   starting `web` - only until they have been started. If you need to wait
+>   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for more on this problem and strategies for solving it.
+>
+> - Version 3 no longer supports the `condition` form of `depends_on`.
+>
+> - The `depends_on` option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a version 3 Compose file.
+
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
 
 ```yaml
 dns: 8.8.8.8
+```
+
+```yaml
 dns:
   - 8.8.8.8
   - 9.9.9.9
@@ -1211,24 +1258,20 @@ options and tags it with the specified tag.
 > [Added in version 3.7 file format](compose-versioning.md#version-37).
 
 Run an init inside the container that forwards signals and reaps processes.
-Either set a boolean value to use the default `init`, or specify a path to
-a custom one.
+Set this option to `true` to enable this feature for the service.
 
 ```yaml
-version: '3.7'
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: alpine:latest
     init: true
 ```
 
-```yaml
-version: '2.2'
-services:
-  web:
-    image: alpine:latest
-    init: /usr/libexec/docker-init
-```
+> The default init binary that is used is [Tini](https://github.com/krallin/tini),
+> and is installed in `/usr/libexec/docker-init` on the daemon host. You can
+> configure the daemon to use a custom init binary through the
+> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
 ### isolation
 
@@ -1352,7 +1395,7 @@ files are removed to allow storage of new logs.
 Here is an example `docker-compose.yml` file that limits logging storage:
 
 ```yaml
-version: '3.7'
+version: "{{ site.compose_file_v3 }}"
 services:
   some-service:
     image: some-service
@@ -1433,16 +1476,16 @@ the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
 the `legacy` network.
 
 ```yaml
-version: '2'
+version: "{{ site.compose_file_v3 }}"
 
 services:
   web:
-    build: ./web
+    image: "nginx:alpine"
     networks:
       - new
 
   worker:
-    build: ./worker
+    image: "my-worker-image:latest"
     networks:
       - legacy
 
@@ -1467,21 +1510,20 @@ Specify a static IP address for containers for this service when joining the net
 
 The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
-`ipam` block with subnet configurations covering each static address. If IPv6
-addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
-you must use a version 2.x Compose file, such as the one below.
+`ipam` block with subnet configurations covering each static address.
 
-> **Note**: These options do not currently work in swarm mode.
+> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md##enable_ipv6)
+> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+> _IPv6 options do not currently work in swarm mode_.
 
 An example:
 
 ```yaml
-version: '2.1'
+version: "{{ site.compose_file_v3 }}"
 
 services:
   app:
-    image: busybox
-    command: ifconfig
+    image: nginx:alpine
     networks:
       app_net:
         ipv4_address: 172.16.238.10
@@ -1489,15 +1531,11 @@ services:
 
 networks:
   app_net:
-    driver: bridge
-    enable_ipv6: true
     ipam:
       driver: default
       config:
-      -
-        subnet: 172.16.238.0/24
-      -
-        subnet: 2001:3984:3989::/64
+        - subnet: "172.16.238.0/24"
+        - subnet: "2001:3984:3989::/64"
 ```
 
 ### pid
@@ -1601,7 +1639,7 @@ command or by another stack deployment. If the external secret does not exist,
 the stack deployment fails with a `secret not found` error.
 
 ```yaml
-version: "3.1"
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -1644,7 +1682,7 @@ to `103`. The `redis` service does not have access to the `my_other_secret`
 secret.
 
 ```yaml
-version: "3.1"
+version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -1809,7 +1847,7 @@ for mounting a named volume. Named volumes must be listed under the top-level
 `volumes` key, as shown.
 
 ```yaml
-version: "3.2"
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: nginx:alpine
@@ -1886,7 +1924,7 @@ expressed in the short form.
 - `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```yaml
-version: "3.2"
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: nginx:alpine
@@ -1934,7 +1972,7 @@ configured as a named volume to persist the data on the swarm,
 _and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```yaml
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 services:
   db:
     image: postgres:9.4
@@ -1970,7 +2008,7 @@ are visible on the host.
 Here is an example of configuring a volume as `cached`:
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 services:
   php:
     image: php:7.1-fpm
@@ -2055,7 +2093,7 @@ shared with another service as a volume so that it can be periodically backed
 up:
 
 ```yaml
-version: "3"
+version: "{{ site.compose_file_v3 }}"
 
 services:
   db:
@@ -2117,7 +2155,7 @@ In the example below, instead of attempting to create a volume called
 called `data` and mount it into the `db` service's containers.
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 
 services:
   db:
@@ -2186,7 +2224,7 @@ volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 volumes:
   data:
     name: my-app-data
@@ -2195,7 +2233,7 @@ volumes:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 volumes:
   data:
     external: true
@@ -2255,17 +2293,19 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
-The syntax for using built-in networks like `host` and `none` is a little
+If you want to use a particular network on a common build, use [network] as 
+mentioned in the second yaml file example.  
+
+The syntax for using built-in networks such as `host` and `none` is a little
 different. Define an external network with the name `host` or `none` (that
 Docker has already created automatically) and an alias that Compose can use
-(`hostnet` or `nonet` in these examples), then grant the service access to that
-network, using the alias.
+(`hostnet` or `nonet` in the following examples), then grant the service access to that
+network using the alias.
 
 ```yaml
-version: '3.7'
+version: "{{ site.compose_file_v3 }}"
 services:
   web:
-    # ...
     networks:
       hostnet: {}
 
@@ -2278,7 +2318,18 @@ networks:
 ```yaml
 services:
   web:
-    # ...
+    ...
+    build:
+      ...
+      network: host
+      context: .
+      ...
+```
+
+```yaml
+services:
+  web:
+    ...
     networks:
       nonet: {}
 
@@ -2394,7 +2445,7 @@ looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
 ```yaml
-version: '3'
+version: "{{ site.compose_file_v3 }}"
 
 services:
   proxy:
@@ -2419,7 +2470,7 @@ You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
 ```yaml
-version: '3.5'
+version: "{{ site.compose_file_v3 }}"
 networks:
   outside:
     external:
@@ -2435,7 +2486,7 @@ networks which contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: '3.5'
+version: "{{ site.compose_file_v3 }}"
 networks:
   network1:
     name: my-app-net
@@ -2444,7 +2495,7 @@ networks:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: '3.5'
+version: "{{ site.compose_file_v3 }}"
 networks:
   network1:
     external: true

@@ -28,18 +28,18 @@ User passwords managed with an LDAP service must be changed on the LDAP server.
 Administrators who need to update their passwords can ask another administrator for help
 or SSH into a Docker Enterprise [manager node](/engine/swarm/how-swarm-mode-works/nodes/#manager-nodes) and run:
 
-```none
 {% raw %}
+```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}' ucp-auth-api)" passwd -i
-{% endraw %}
 ```
+{% endraw %}
 
 ### With DEBUG Global Log Level
 
 If you have DEBUG set as your global log level within UCP, running `$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}` returns `--debug` instead of `--db-addr`. Pass `Args 1` to `$docker inspect` instead to reset your admin password.
 
-```none
 {% raw %}
+```bash
 docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format '{{ .Spec.TaskTemplate.ContainerSpec.Image }}' ucp-auth-api)" "$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 1 }}' ucp-auth-api)" passwd -i
-{% endraw %}
 ```
+{% endraw %}
