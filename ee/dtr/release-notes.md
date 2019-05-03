@@ -276,6 +276,7 @@ to upgrade your installation to the latest release.
 * Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy #10301)
 * Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)
 * Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)
+* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any current status/issues/recommendations.
 
 ### Bug Fixes
 
@@ -314,7 +315,7 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)
+* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` used to fail on images that were pushed to the repository after you upgraded to 2.5 and opted into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)
 
 ### Known Issues
 * Web Interface
