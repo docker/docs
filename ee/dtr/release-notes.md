@@ -24,6 +24,9 @@ to upgrade your installation to the latest release.
 ## 2.6.6 
 (2019-5-2)
 
+### Security
+* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any current status/issues/recommendations.
+
 ### Bug Fixes
 * DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the --storage-migrated option in dtr reconfigure --nfs-url ... (docker/dhe-deploy#10246)
     - To use this option, first write your current storage settings to a JSON file curl ... /api/v0/admin/settings/registry > storage.json.
@@ -276,7 +279,6 @@ to upgrade your installation to the latest release.
 * Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy #10301)
 * Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)
 * Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)
-* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any current status/issues/recommendations.
 
 ### Bug Fixes
 
