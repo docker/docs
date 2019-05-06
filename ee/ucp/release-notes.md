@@ -22,7 +22,7 @@ upgrade your installation to the latest release.
 # Version 3.1
 
 ## 3.1.7 
-(2019-05-02)
+(2019-05-06)
 
 ### Security
 * Refer to [Docker Hub Maintenance](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
@@ -367,7 +367,7 @@ The following features are deprecated in UCP 3.1.
 
 ## 3.0.11 
 
-2019-05-02
+2019-05-06
 
 ### Bug Fixes
 * Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
@@ -841,7 +841,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 ## Version 2.2.18 
 
-2019-05-02
+2019-05-06
 
 ### Bug Fixes
 * Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.

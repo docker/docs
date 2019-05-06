@@ -31,7 +31,7 @@ consistency and compatibility reasons.
 
 ## 18.09.6 
 
-2019-05-02
+2019-05-06
 
 ### Builder
 * Fixed `COPY` and `ADD` with multiple `<src>` to not invalidate cache if `DOCKER_BUILDKIT=1`.[moby/moby#38964](https://github.com/moby/moby/issues/38964)
