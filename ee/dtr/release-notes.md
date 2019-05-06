@@ -22,7 +22,7 @@ to upgrade your installation to the latest release.
 # Version 2.6
 
 ## 2.6.6 
-(2019-5-2)
+(2019-5-6)
 
 ### Security
 
@@ -277,7 +277,7 @@ to upgrade your installation to the latest release.
 
 ## 2.5.11
 
-(2019-05-02)
+(2019-05-06)
 
 ### Security
 
@@ -789,7 +789,7 @@ specify `--log-protocol`.
 
 ## 2.4.12
 
-(2019-05-02)
+(2019-05-06)
 
 ### Security
 
