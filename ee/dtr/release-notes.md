@@ -25,13 +25,18 @@ to upgrade your installation to the latest release.
 (2019-5-2)
 
 ### Security
-* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any current status/issues/recommendations.
 
+* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
+
+### Enhancements
+
+* DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the `--storage-migrated` option when performing an NFS reconfiguration via `docker run docker/dtr reconfigure --nfs-url ...`. (docker/dhe-deploy#10246)
+    - To use this option, first write your current storage settings to a JSON file via `curl ... /api/v0/admin/settings/registry > storage.json`.
+    - Next, add `keep_metadata: true` as a top-level key in the JSON you just created and modify it to contain your new storage settings.
+    - Finally, update your Registry settings with your modified JSON file via `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`.
+    
 ### Bug Fixes
-* DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the --storage-migrated option in dtr reconfigure --nfs-url ... (docker/dhe-deploy#10246)
-    - To use this option, first write your current storage settings to a JSON file curl ... /api/v0/admin/settings/registry > storage.json.
-    - Next, add `keep_metadata: true` to the top-level of the JSON you just created and modify it to contain your new storage settings.
-    - Finally, write your new JSON back to DTR with `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`. 
+
 * Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
 
 ### Security
