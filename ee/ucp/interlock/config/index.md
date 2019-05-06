@@ -197,10 +197,8 @@ PollInterval = "3s"
 
 ## Next steps
 
-- [Use a custom extension template](custom-template.md)
-- [Configure an HAProxy extension](haproxy-config.md)
 - [Configure host mode networking](host-mode-networking.md)
 - [Configure an nginx extension](nginx-config.md)
-- [Use application service labels](service-lables.md)
+- [Use application service labels](service-labels.md)
 - [Tune the proxy service](tuning.md)
 - [Update Interlock services](updates.md)
