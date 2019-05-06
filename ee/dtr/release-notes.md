@@ -291,6 +291,7 @@ to upgrade your installation to the latest release.
 * Fixed an issue where non-admin users could not access their repositories from the Repositories page on the web interface. (docker/dhe-deploy #10294)
 
 ### Known Issues
+
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
