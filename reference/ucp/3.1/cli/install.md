@@ -71,6 +71,7 @@ If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install
 | `--kv-timeout`           | Timeout in milliseconds for the key-value store                                        |
 | `--license`              | Add a license: e.g.` --license "$(cat license.lic)" `                                  |
 | `--pod-cidr`             | Kubernetes cluster IP pool for the pods to allocated IPs from (Default: `192.168.0.0/16`) |
+|`--service-cluster-ip-range`| Sets the subnet pool from which the IP for Services should be allocated (Default is `10.96.0.0/16`). |
 | `--preserve-certs`       | Don't generate certificates if they already exist                                      |
 | `--pull`                 | Pull UCP images: `always`, when `missing`, or `never`                                  |
 | `--random`               | Set the Docker Swarm scheduler to random mode. Used for backwards compatibility        |
