@@ -18,8 +18,6 @@ unless you configure it to use a different logging driver.
 
 In addition to using the logging drivers included with Docker, you can also
 implement and use [logging driver plugins](/engine/admin/logging/plugins.md).
-Logging driver plugins are available in Docker 17.05 and higher.
-
 
 ## Configure the default logging driver
 
@@ -44,6 +42,8 @@ example sets two configurable options on the `json-file` logging driver:
 {
   "log-driver": "json-file",
   "log-opts": {
+    "max-size": "10m",		
+    "max-file": "3",
     "labels": "production_status",
     "env": "os,customer"
   }
@@ -59,7 +59,7 @@ To find the current default logging driver for the Docker daemon, run
 command on Linux, macOS, or PowerShell on Windows:
 
 ```bash
-$ docker info | grep 'Logging Driver'
+$ docker info --format '{{.LoggingDriver}}'
 
 Logging Driver: json-file
 ```
@@ -154,8 +154,18 @@ see more options.
 
 ## Limitations of logging drivers
 
-The `docker logs` command is only available on the following drivers:
+Depending on the version of Docker Engine that you are using, the `docker logs` command is only available on the following drivers:
 - `json-file`
 - `journald`
 - `local`
+
+Refer to [link needed to new topic]() for information about using `docker logs` to read container logs locally for many third party logging solutions, including: 
+- syslog	
+- gelf	
+- fluentd	
+- awslogs	
+- splunk	
+- etwlogs	
+- gcplogs	
+- Logentries
 
