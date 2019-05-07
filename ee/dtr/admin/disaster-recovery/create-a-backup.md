@@ -96,7 +96,7 @@ If you've configured DTR to store images on the local file system or NFS mount,
 you can back up the images by using SSH to log into a DTR node,
 and creating a `tar` archive of the [dtr-registry volume](../../architecture.md):
 
-#### Example backup commands
+#### Example backup command
 
 ##### Local images
 
