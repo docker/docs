@@ -162,7 +162,7 @@ see more options.
     - `journald`
     - `local`
 
-Refer to [link needed to new topic]() for information about using `docker logs` to read container logs locally for many third party logging solutions, including: 
+Refer to [Reading logs when using remote logging drivers](/dual-logging) for information about using `docker logs` to read container logs locally for many third party logging solutions, including: 
 
     - syslog	
     - gelf	
