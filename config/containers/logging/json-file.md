@@ -33,6 +33,9 @@ option.
   }
 }
 ```
+**Note**: `log-opt` configuration options in the `daemon.json` configuration		
+file must be provided as strings. Boolean and numeric values (such as the value		
+for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 Restart Docker for the changes to take effect for newly created containers. Existing containers do not use the new logging configuration.
 
