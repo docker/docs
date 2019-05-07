@@ -157,18 +157,21 @@ see more options.
 
 ## Limitations of logging drivers
 
-Depending on the version of Docker Engine that you are using, the `docker logs` command is only available on the following drivers:
-- `json-file`
-- `journald`
-- `local`
+- Depending on the version of Docker Engine that you are using, the `docker logs` command is only available on the following drivers:
+    - `json-file`
+    - `journald`
+    - `local`
 
 Refer to [link needed to new topic]() for information about using `docker logs` to read container logs locally for many third party logging solutions, including: 
-- syslog	
-- gelf	
-- fluentd	
-- awslogs	
-- splunk	
-- etwlogs	
-- gcplogs	
-- Logentries
 
+    - syslog	
+    - gelf	
+    - fluentd	
+    - awslogs	
+    - splunk	
+    - etwlogs	
+    - gcplogs	
+    - Logentries
+
+- Reading log information requires decompressing rotated log files, which causes a temporary increase in disk usage (until the log entries from the rotated files are read) and an increased CPU usage while decompressing. 
+- The capacity of the host storage where docker’s data directory resides determines the maximum size of the log file information.
