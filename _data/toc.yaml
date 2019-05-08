@@ -3347,7 +3347,7 @@ manuals:
   - path: /docker-hub/slack_integration/
     title: Slack Integration
   - path: /docker-hub/upgrade/
-    title: Upgrading your plan
+    title: Upgrade your plan
   - sectiontitle: Automated Builds
     section:
       - path: /docker-hub/builds/
