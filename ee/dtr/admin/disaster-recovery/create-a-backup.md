@@ -78,11 +78,11 @@ docker ps --format "{{.Names}}" | grep dtr
 
 ##### SSH access
 
-Another way to determine the replica ID is to SSH into a DTR node and run the following:
+Another way to determine the replica ID is to log into a DTR node using SSH and run the following:
 
 {% raw %}
 ```bash
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+REPLICA_ID=$(docker ps --format '{{.Names}}' -f name=dtr-rethink | cut -f 3 -d '-')
 && echo $REPLICA_ID
 ```
 {% endraw %}
@@ -96,23 +96,14 @@ If you've configured DTR to store images on the local file system or NFS mount,
 you can back up the images by using SSH to log into a DTR node,
 and creating a `tar` archive of the [dtr-registry volume](../../architecture.md):
 
-#### Example backup commands
+#### Example backup command
 
 ##### Local images
 
 {% raw %}
 ```none
 sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
-/var/lib/docker/volumes/dtr-registry-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
-```
-{% endraw %}
-
-##### NFS-mounted images
-
-{% raw %}
-```none
-sudo tar -cf dtr-image-backup-$(date +%Y%m%d-%H_%M_%S).tar \
-  /var/lib/docker/volumes/dtr-registry-nfs-$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+/var/lib/docker/volumes/dtr-registry-$(docker ps --format '{{.Names}}' -f name=dtr-rethink | cut -f 3 -d '-')
 ```
 {% endraw %}
 
@@ -136,7 +127,7 @@ command.
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
   grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')); \
+REPLICA_ID=$(docker ps --format '{{.Names}}' -f name=dtr-rethink | cut -f 3 -d '-'); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
 read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
 read -sp 'ucp password: ' UCP_PASSWORD; \

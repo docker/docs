@@ -1,12 +1,12 @@
 ---
 description: Upgrading your Docker Hub Plan
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation
-title: Upgrading your Plan
+title: Upgrade your Plan
 ---
 
 User and organization accounts maintain separate Docker Hub billing profiles.
 
-### Upgrading your personal plan
+### Upgrade your personal plan
 
 Docker Hub includes one private Docker Hub repository for free. If you need
 more private repositories, you can upgrade from your free account to a paid
@@ -17,7 +17,7 @@ To upgrade:
 2. Click Change Plan
 3. Select your plan and provide your payment information to upgrade ![Upgrade Plan](images/index-upgrade-plan.png)
 
-### Upgrading your organization's plan
+### Upgrade your organization's plan
 
 To upgrade an Organization's plan:
 

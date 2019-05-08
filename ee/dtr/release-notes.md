@@ -19,8 +19,43 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
-
 # Version 2.6
+
+## 2.6.6 
+(2019-5-6)
+
+### Security
+
+* Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
+
+### Enhancements
+
+* DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the `--storage-migrated` option when performing an NFS reconfiguration via `docker run docker/dtr reconfigure --nfs-url ...`. (docker/dhe-deploy#10246)
+    - To use this option, first write your current storage settings to a JSON file via `curl ... /api/v0/admin/settings/registry > storage.json`.
+    - Next, add `keep_metadata: true` as a top-level key in the JSON you just created and modify it to contain your new storage settings.
+    - Finally, update your Registry settings with your modified JSON file via `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`.
+    
+### Bug Fixes
+
+* Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
+
+### Security
+* Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy#10290)
+* Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy#10290)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 ## 2.6.5
 (2019-4-11)
@@ -240,13 +275,55 @@ to upgrade your installation to the latest release.
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
+## 2.5.11
+
+(2019-05-06)
+
+### Security
+
+* Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy #10301)
+* Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)
+* Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)
+
+### Bug Fixes
+
+* Fixed an issue where read / write permissions were used when copying files into containers. (docker/dhe-deploy #10207)
+* Fixed an issue where non-admin users could not access their repositories from the Repositories page on the web interface. (docker/dhe-deploy #10294)
+
+### Known Issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
 ## 2.5.10
 
 (2019-3-28)
 
 ### Bug Fixes
 
-* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)
+* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` used to fail on images that were pushed to the repository after you upgraded to 2.5 and opted into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)
 
 ### Known Issues
 * Web Interface
@@ -710,13 +787,22 @@ specify `--log-protocol`.
 > Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into > garbage collection.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
+## 2.4.12
+
+(2019-05-06)
+
+### Security
+
+* Bumped the Golang version for DTR to 1.12.4. [docker/dhe-deploy #10303](https://github.com/docker/dhe-deploy/pull/10303)
+* Bumped Python dependencies to address vulnerabilities. [docker/dhe-deploy#10309](https://github.com/docker/dhe-deploy/pull/10309)
+
 ## 2.4.11
 
 (2019-4-11)
 
 ### Changelog
 
-* Bump the Golang version that is used to build DTR to version 1.11.5. [docker/dhe-deploy#10155](https://github.com/docker/dhe-deploy/pull/10155)
+* Bumped the Golang version that is used to build DTR to version 1.11.5. [docker/dhe-deploy#10155](https://github.com/docker/dhe-deploy/pull/10155)
 
 ## 2.4.10
 

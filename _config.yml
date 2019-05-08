@@ -96,7 +96,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.5"
+      win_latest_build: "docker-18.09.6"
   - scope:
       path: "datacenter"
     values:
@@ -106,21 +106,21 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.5"
+      dtr_version: "2.6.6"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.10"
+      dtr_version: "2.5.11"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.11"
+      dtr_version: "2.4.12"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
@@ -149,29 +149,29 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.6"
+      ucp_version: "3.1.7"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.6"
-      dtr_version: "2.6.5"
+      ucp_version: "3.1.7"
+      dtr_version: "2.6.6"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.10"
+      ucp_version: "3.0.11"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.17"
+      ucp_version: "2.2.18"
   - scope:
       path: "datacenter/ucp/2.1"
     values:

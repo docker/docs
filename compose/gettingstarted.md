@@ -119,15 +119,18 @@ the following:
       redis:
         image: "redis:alpine"
 
-This Compose file defines two services, `web` and `redis`. The `web` service:
+This Compose file defines two services: `web` and `redis`. 
 
-* Uses an image that's built from the `Dockerfile` in the current directory.
-* Forwards the exposed port 5000 on the container to port 5000 on the host
-  machine. We use the default port for the Flask web server, `5000`.
+### Web service
 
-The `redis` service uses a public
-[Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
-Hub registry.
+The `web` service uses an image that's built from the `Dockerfile` in the current directory.
+It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
+the Flask web server, `5000`.
+
+### Redis service
+
+The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
+image pulled from the Docker Hub registry.
 
 ## Step 4: Build and run your app with Compose
 
