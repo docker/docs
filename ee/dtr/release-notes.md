@@ -26,7 +26,7 @@ to upgrade your installation to the latest release.
 
 ### Security
 
-* Refer to [Docker Hub Maintenance](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
+* Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
 
 ### Enhancements
 
