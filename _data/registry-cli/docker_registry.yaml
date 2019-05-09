@@ -1,7 +1,7 @@
 command: docker registry
 short: Manage Docker registries
 long: Manage Docker registries
-usage: docker registry COMMAND
+usage: docker registry
 pname: docker
 plink: docker.yaml
 cname:
