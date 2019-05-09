@@ -1,10 +1,18 @@
 ---
+<<<<<<< HEAD
 title: Use context and path-based routing
+=======
+title: Context and path-based routing
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 description: Learn how to route traffic to your Docker swarm services based
   on a url path.
 keywords: routing, proxy
 ---
 
+<<<<<<< HEAD
+=======
+# Using context or path-based routing
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 The following example publishes a service using context or path based routing.
 
 First, create an overlay network so that service traffic is isolated and secure:

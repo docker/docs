@@ -1,9 +1,20 @@
 ---
+<<<<<<< HEAD
 title: Use websockets
 description: Learn how to use websockets in your swarm services.
 keywords: routing, proxy, websockets
 ---
 
+=======
+title: Websockets
+description: Learn how to use websockets in your swarm services when using the
+  layer 7 routing solution for UCP.
+keywords: routing, proxy
+---
+
+# Using websockets
+
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 First, create an overlay network to isolate and secure service traffic:
 
 ```bash
@@ -26,6 +37,13 @@ $> docker service create \
 
 > **Note**: for this to work, you must have an entry for `demo.local` in your local hosts (i.e. `/etc/hosts`) file.
 > This uses the browser for websocket communication, so you must have an entry or use a routable domain.
+<<<<<<< HEAD
+=======
+
+Interlock detects when the service is available and publishes it. Once tasks are running
+and the proxy service is updated, the application should be available via `http://demo.local`. Open
+two instances of your browser and text should be displayed on both instances as you type.
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 Interlock detects when the service is available and publishes it. Once tasks are running
 and the proxy service is updated, the application should be available via `http://demo.local`. Open

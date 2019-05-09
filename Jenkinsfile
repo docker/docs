@@ -20,6 +20,7 @@ pipeline {
         expression { env.GIT_URL == 'https://github.com/Docker/docker.github.io.git' }
       }
       stages {
+<<<<<<< HEAD
         stage( 'build and push stage image' ) {
           when {
             branch 'master'
@@ -101,6 +102,8 @@ pipeline {
         expression { env.GIT_URL == "https://github.com/docker/docs-private.git" }
       } 
       stages {
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
         stage( 'build and push new beta stage image' ) {
           when {
             branch 'amberjack'
@@ -132,8 +135,15 @@ pipeline {
             branch 'amberjack'
           }
           steps {
+<<<<<<< HEAD
             withVpn("$DTR_VPN_ADDRESS") {
               sh "unzip -o $UCP_BUNDLE"
+=======
+            withVpn(dtrVpnAddress) {
+              withCredentials(ucpBundle) {
+                sh 'unzip -o $UCP' 
+              }
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
               withDockerRegistry(reg) {
                 sh """
                   export DOCKER_TLS_VERIFY=1
@@ -151,8 +161,15 @@ pipeline {
             branch 'published'
           }
           steps {
+<<<<<<< HEAD
             withVpn("$DTR_VPN_ADDRESS") {
               sh "unzip -o $UCP_BUNDLE"
+=======
+            withVpn(dtrVpnAddress) {
+              withCredentials(ucpBundle) {
+                sh 'unzip -o $UCP' 
+              }
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
               withDockerRegistry(reg) {
                 sh """
                   export DOCKER_TLS_VERIFY=1

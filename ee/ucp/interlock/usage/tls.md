@@ -1,11 +1,19 @@
 ---
+<<<<<<< HEAD
 title: Secure services with TLS
 description: Learn how to configure your swarm services with TLS.
+=======
+title: Securing services with TLS
+description: Learn how to configure your swarm services with TLS using the layer
+  7 routing solution for UCP.
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 keywords: routing, proxy, tls
-redirect_from:
-  - /ee/ucp/interlock/usage/ssl/
 ---
 
+<<<<<<< HEAD
+=======
+# Securing services with TLS
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 After [deploying a layer 7 routing solution](../deploy/index.md), you have two options for securing your
 services with TLS:
 
@@ -188,3 +196,4 @@ service such that TLS traffic for `app.example.org` is passed to the service.
 Since the connection is fully encrypted from end-to-end, the proxy service
 cannot add metadata such as version information or request ID to the
 response headers.
+

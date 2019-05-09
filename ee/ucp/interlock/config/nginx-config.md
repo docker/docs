@@ -1,5 +1,6 @@
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 title: Configure Nginx 
 description: Learn how to configure an nginx extension
 keywords: routing, proxy, interlock, load balancing
@@ -26,6 +27,8 @@ available for the nginx extension:
 | `SSLProtocols` | string | Enable the specified TLS protocols | `TLSv1.2` |
 | `HideInfoHeaders`          | bool | Hide proxy-related response headers.                                                                  |
 =======
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 title: Nginx configuration
 description: Learn how to configure an nginx extension
 keywords: routing, proxy
@@ -76,7 +79,10 @@ This is from Interlock docs - which is correct???????
 | `RLimitNoFile` | int | number of maxiumum open files for the proxy service | `65535` |
 | `SSLCiphers` | string | SSL ciphers to use for the proxy service | `HIGH:!aNULL:!MD5` |
 | `SSLProtocols` | string | enable the specified TLS protocols | `TLSv1.2` |
+<<<<<<< HEAD
 >>>>>>> Raw content addition
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 | `KeepaliveTimeout` | string | connection keepalive timeout | `75s` |
 | `ClientMaxBodySize` | string | maximum allowed size of the client request body | `1m` |
 | `ClientBodyBufferSize` | string | sets buffer size for reading client request body | `8k` |
@@ -95,6 +101,10 @@ This is from Interlock docs - which is correct???????
 | `TraceLogFormat` | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for trace logger | see default format |
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Raw content addition
+=======
+
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

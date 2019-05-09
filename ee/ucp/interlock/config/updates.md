@@ -1,5 +1,6 @@
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 title: Update Interlock services
 description: Learn how to update the UCP layer 7 routing solution services
 keywords: routing, proxy, interlock
@@ -12,6 +13,8 @@ There are two parts to the update process:
 
 ## Update the Interlock configuration
 =======
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 title: Updating Interlock services
 description: Learn how to update the UCP layer 7 routing solution services
 keywords: routing, proxy
@@ -24,13 +27,17 @@ There are two parts to the update process:
 2. Updating the Interlock service to use the new configuration and image.
 
 ## Updating the Interlock configuration
+<<<<<<< HEAD
 >>>>>>> Raw content addition
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 Create the new configuration:
 
 ```bash
 $> docker config create service.interlock.conf.v2 <path-to-new-config>
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ## Update the Interlock service
 Remove the old configuration and specify the new configuration:
@@ -97,6 +104,8 @@ docker/ucp:{{ page.ucp_version }}
 
 Interlock starts and checks the config object, which has the new extension version, and 
 =======
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 ## Updating the Interlock service
 Remove the old configuration and specify the new configuration:
 
@@ -107,11 +116,15 @@ $> docker service update --config-add source=service.interlock.conf.v2,target=/c
 
 Next, update the Interlock service to use the new image. The following example updates the Interlock core service to use the `sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51`
 version of Interlock. Interlock starts and checks the config object, which has the new extension version, and 
+<<<<<<< HEAD
 >>>>>>> Raw content addition
+=======
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 performs a rolling deploy to update all extensions.
 
 ```bash
 $> docker service update \
+<<<<<<< HEAD
 <<<<<<< HEAD
     --image {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} \
     ucp-interlock
@@ -119,4 +132,8 @@ $> docker service update \
     --image interlockpreview/interlock@sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51 \
     interlock
 >>>>>>> Raw content addition
+=======
+    --image interlockpreview/interlock@sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51 \
+    interlock
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 ```

@@ -5,7 +5,13 @@ description: Learn about the labels you can use in your swarm services to route
 keywords: routing, proxy
 ---
 
+<<<<<<< HEAD
 After you enable the layer 7 routing solution, you can
+=======
+## Using routing labels
+
+Once the layer 7 routing solution is enabled, you can
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 [start using it in your swarm services](index.md).
 
 

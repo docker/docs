@@ -7,6 +7,7 @@ redirect_from:
   - /ee/ucp/interlock/deploy/configure/
 ---
 
+<<<<<<< HEAD
 After Interlock is deployed, you can launch and publish services and applications.
 Use [Service Labels](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label)
 to configure services to publish themselves to the load balancer.
@@ -16,6 +17,18 @@ for each of the applications.
 
 ## Publish a service with four replicas
 Create a Docker Service using two labels:
+=======
+## Deploying services and applications
+After Interlock is deployed, you can launch and publish services and applications.
+Use [Service Labels](https://docs.docker.com/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label)
+to configure services to publish themselves to the load balancer.
+
+**Note**: The following examples assume a DNS entry (or local hosts entry if you are testing locally) exists
+for each of the applications.
+
+## Publishing a service with four replicas
+To publish, create a Docker Service using two labels:
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 - `com.docker.lb.hosts`
 - `com.docker.lb.port`
@@ -24,7 +37,11 @@ The `com.docker.lb.hosts` label instructs Interlock where the service should be 
 The `com.docker.lb.port` label instructs what port the proxy service should use to access
 the upstreams.
 
+<<<<<<< HEAD
 Publish a demo service to the host `demo.local`:
+=======
+This example publishes a demo service to the host `demo.local`.
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 First, create an overlay network so that service traffic is isolated and secure:
 
@@ -63,8 +80,15 @@ demo scaled to 4
 In this example, four service replicas are configured as upstreams.  The load balancer balances traffic
 across all service replicas.
 
+<<<<<<< HEAD
 ## Publish a service with a web interface
 This example deploys a simple service that:
+=======
+-------------------------------ARE BOTH EXAMPLES NEEDED?-----------------------------------------------
+
+## Publishing a service with a web interface
+The next example deploys a simple service that:
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 * Has a JSON endpoint that returns the ID of the task serving the request.
 * Has a web interface that shows how many tasks the service is running.
@@ -148,6 +172,7 @@ able to start using the service from your browser.
 
 ![browser](../../images/route-simple-app-1.png){: .with-border }
 
+<<<<<<< HEAD
 ## Next steps
 
 - [Publish a service as a canary instance](./canary.md)
@@ -161,3 +186,19 @@ able to start using the service from your browser.
 - [Implement SSL](./ssl.md)
 - [Secure services with TLS](./tls.md)
 - [Configure websockets](./websockets.md)
+=======
+
+## Next steps
+
+- [Publishing a service as a canary instance](canary.md)
+- [Using context or path-based routing](context.md)
+- [Publishing a default host service](default-backend.md)
+- [Specifying a routing mode](interlock-vip-mode)
+- [Using routing labels](labels-reference.md)
+- [Implementing redirects](redirects.md)
+- [Implementing a service cluster](service-clusters.md)
+- [Implementing persistent (sticky) sessions](sessions.md)
+- [Implementing SSL](ssl.md)
+- [Securing services with TLS](tls.md)
+- [Configuring websockets](websockets.md)
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
