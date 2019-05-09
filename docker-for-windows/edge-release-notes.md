@@ -18,6 +18,13 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.4.1 2019-05-07
+
+[Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
+
+* Bug fixes and minor changes
+  - Upgrade qemu from 2.8.0 to 3.1.0 to fix Arm emulation. [docker/for-mac#3646](https://github.com/docker/for-mac/issues/3646)
+
 ### Docker Community Edition 2.0.4.0 2019-04-30
 
 [Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe)
