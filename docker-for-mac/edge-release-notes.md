@@ -18,6 +18,13 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.4.1 2019-05-07
+
+[Download](https://download.docker.com/mac/edge/34207/Docker.dmg)
+
+* Bug fixes and minor changes
+  - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices. [docker/for-mac#3646](https://github.com/docker/for-mac/issues/3646)
+
 ### Docker Community Edition 2.0.4.0 2019-04-30
 
 [Download](https://download.docker.com/mac/edge/33772/Docker.dmg)
