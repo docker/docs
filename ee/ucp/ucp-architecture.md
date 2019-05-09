@@ -68,8 +68,8 @@ on a node depend on whether the node is a manager or a worker.
 
 Internally, UCP uses the following components:
 
-* Calico v3.5
-* Kubernetes v1.11.5
+* Calico v3.5.3
+* Kubernetes v1.11.9
 
 ### UCP components in manager nodes
 
