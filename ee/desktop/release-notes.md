@@ -9,20 +9,20 @@ current release. The documentation is updated for each release.
 
 For information on system requirements, installation, and download, see:
 
-- [Install Docker Desktop Enterprise on Mac](/ee/desktop/install/mac)
-- [Install Docker Desktop Enterprise on Windows](/ee/desktop/install/windows)
+- [Install Docker Desktop Enterprise on Mac](/ee/desktop/admin/install/mac)
+- [Install Docker Desktop Enterprise on Windows](/ee/desktop/admin/install/windows)
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
-# Docker Desktop Enterprise Releases of 2019
+## Docker Desktop Enterprise Releases of 2019
 
-## Docker Desktop Enterprise 2.0.0.1
+### Docker Desktop Enterprise 2.0.0.1
 
 2019-03-01
 
 **WARNING:** You must upgrade the previously installed Version Packs to the latest revision.
 
-### Windows
+#### Windows
 
 Upgrades:
 
@@ -36,7 +36,7 @@ Bug fixes and minor changes:
 - Fixed Hub login through the desktop UI not sync with login through `docker login` command line.
 - Fixed crash in system tray menu when the Hub login fails or Air gap mode.
 
-### Mac
+#### Mac
 
 New features:
 
@@ -54,7 +54,7 @@ Bug fixes and minor changes:
 - Fixed port 8080 that was used on localhost when starting Kubernetes.
 - Improved error messaging to suggest running diagnostics / resetting to factory default only when it is appropriate.
 
-## Docker Desktop Enterprise 2.0.0.0
+### Docker Desktop Enterprise 2.0.0.0
 
 2019-01-31
 

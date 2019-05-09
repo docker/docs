@@ -776,6 +776,24 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
+    - sectiontitle: docker registry *
+      section:
+        - path: /engine/reference/commandline/registry/
+          title: docker registry
+        - path: /engine/reference/commandline/registry_events/
+          title: docker registry events
+        - path: /engine/reference/commandline/registry_history/
+          title: docker registry history
+        - path: /engine/reference/commandline/registry_info/
+          title: docker registry info
+        - path: /engine/reference/commandline/registry_inspect/
+          title: docker registry inspect
+        - path: /engine/reference/commandline/registry_joblogs/
+          title: docker registry joblogs
+        - path: /engine/reference/commandline/registry_ls/
+          title: docker registry ls
+        - path: /engine/reference/commandline/registry_rmi/
+          title: docker registry rmi
     - path: /engine/reference/commandline/rename/
       title: docker rename
     - path: /engine/reference/commandline/restart/
@@ -3133,6 +3151,26 @@ manuals:
           title: Get support
   - title: Get support
     path: /ee/get-support/
+- sectiontitle: Docker Assemble
+  section:
+  - path: /assemble/install/
+    title: Install
+  - path: /assemble/spring-boot/
+    title: Build a Spring Boot project
+  - path: /assemble/dot-net/
+    title: Build a C# ASP.NET Core project
+  - path: /assemble/configure/
+    title: Configure
+  - path: /assemble/images/
+    title: Images
+  - path: /assemble/adv-backend-manage/
+    title: Advanced Backend Management
+  - path: /assemble/cli-reference/
+    title: CLI reference
+- sectiontitle: Docker App
+  section:
+  - path: /app/working-with-app/
+    title: Working with Docker App
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
