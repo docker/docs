@@ -114,8 +114,4 @@ The following features are supported in VIP mode:
 ## Next steps
 
 - [Deploy Interlock](deploy/index.md)
-<<<<<<< HEAD
 - [Configure Interlock](config/index.md)
-=======
-- [Configure Interlock[(config/index.md)
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

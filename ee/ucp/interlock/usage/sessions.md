@@ -5,18 +5,10 @@ description: Learn how to configure your swarm services with persistent sessions
 keywords: routing, proxy, cookies, IP hash
 ---
 
-<<<<<<< HEAD
 You can publish a service and configure the proxy for persistent (sticky) sessions using:
 
 - Cookies
 - IP hashing
-=======
-# Implementing persistent (sticky) sessions
-You can publish a service and configure the proxy for persistent (sticky) sessions using:
-
-- Cookies
-- IP Hashing
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 ## Cookies
 To configure sticky sessions using cookies:
@@ -139,7 +131,3 @@ to a specific backend.
 > **Note**: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
 > expected, because internally the proxy uses the new set of replicas to determine a backend on which to pin. When the upstreams are
 > determined, a new "sticky" backend is chosen as the dedicated upstream.
-<<<<<<< HEAD
-=======
-
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

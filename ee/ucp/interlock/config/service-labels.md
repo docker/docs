@@ -1,25 +1,9 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
 title: Use application service labels
 description: Learn how applications use service labels for publishing
 keywords: routing, proxy, interlock, load balancing
 ---
 
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-title: Application service labels
-description: Learn how applications use service labels for publishing
-keywords: routing, proxy
----
-
-# Using application service labels
-
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 Service labels define hostnames that are routed to the
 service, the applicable ports, and other routing configurations. Applications that publish using Interlock use service labels to configure how they are published.
 

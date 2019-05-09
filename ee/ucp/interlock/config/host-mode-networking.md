@@ -1,34 +1,13 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
 title: Configure host mode networking
 description: Learn how to configure the UCP layer 7 routing solution with
   host mode networking.
 keywords: routing, proxy, interlock, load balancing
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-title: Host mode networking
-description: Learn how to configure the UCP layer 7 routing solution with
-  host mode networking.
-keywords: routing, proxy
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 redirect_from:
   - /ee/ucp/interlock/usage/host-mode-networking/
   - /ee/ucp/interlock/deploy/host-mode-networking/
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-# Configuring host mode networking
->>>>>>> Raw content addition
-=======
-# Configuring host mode networking
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 By default, layer 7 routing components communicate with one another using
 overlay networks, but Interlock supports
 host mode networking in a variety of ways, including proxy only, Interlock only, application only, and hybrid. 
@@ -47,30 +26,14 @@ To use host mode networking instead of overlay networking:
 ## Configuration for a production-grade deployment
 
 If you have not done so, configure the
-<<<<<<< HEAD
-<<<<<<< HEAD
 [layer 7 routing solution for production](../deploy/production.md).
-=======
-[layer 7 routing solution for production](production.md).
->>>>>>> Raw content addition
-=======
-[layer 7 routing solution for production](production.md).
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 The `ucp-interlock-proxy` service replicas should then be
 running on their own dedicated nodes.
 
 ## Update the ucp-interlock config
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 [Update the ucp-interlock service configuration](./index.md) so that it uses
-=======
-[Update the ucp-interlock service configuration](configure.md) so that it uses
->>>>>>> Raw content addition
-=======
-[Update the ucp-interlock service configuration](configure.md) so that it uses
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 host mode networking.
 
 Update the `PublishMode` key to:
@@ -128,8 +91,6 @@ service is running.
 
 If everything is working correctly, you should get a JSON result like:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 {% raw %}
 ```json
 {"instance":"63b855978452", "version":"0.1", "request_id":"d641430be9496937f2669ce6963b67d6"}
@@ -137,59 +98,20 @@ If everything is working correctly, you should get a JSON result like:
 {% endraw %}
 
 The following example describes how to configure an eight (8) node Swarm cluster that uses host mode
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-```json
-{"instance":"63b855978452", "version":"0.1", "request_id":"d641430be9496937f2669ce6963b67d6"}
-```
-
-
----------------------------REPLACE WITH THE FOLLOWING INFO??-------------------------------------------------
-
-
-
-In this example we will configure an eight (8) node Swarm cluster that uses host mode
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 networking to route traffic without using overlay networks. There are three (3) managers
 and five (5) workers.  Two of the workers are configured with node labels to be dedicated
 ingress cluster load balancer nodes.  These will receive all application traffic.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 This example does not cover the actual deployment of infrastructure.
-=======
-This example will not cover the actual deployment of infrastructure.
->>>>>>> Raw content addition
-=======
-This example will not cover the actual deployment of infrastructure.
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 It assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
 See the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
 getting a Swarm cluster deployed.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Note: When using host mode networking, you cannot use the DNS service discovery because that
 requires overlay networking.  You can use other tooling such as [Registrator](https://github.com/gliderlabs/registrator)
 that will give you that functionality if needed.
 
 Configure the load balancer worker nodes (`lb-00` and `lb-01`) with node labels in order to pin the Interlock Proxy
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-Note: when using host mode networking you will not be able to use the DNS service discovery as that
-requires overlay networking.  You can use other tooling such as [Registrator](https://github.com/gliderlabs/registrator)
-that will give you that functionality if needed.
-
-We will configure the load balancer worker nodes (`lb-00` and `lb-01`) with node labels in order to pin the Interlock Proxy
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 service.  Once you are logged into one of the Swarm managers run the following to add node labels
 to the dedicated load balancer worker nodes:
 
@@ -202,26 +124,14 @@ lb-01
 
 Inspect each node to ensure the labels were successfully added:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 {% raw %}
-=======
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 ```bash
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-00
 map[nodetype:loadbalancer]
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-01
 map[nodetype:loadbalancer]
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
 {% endraw %}
-=======
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 Next, create a configuration object for Interlock that specifies host mode networking:
 
@@ -233,23 +143,10 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-<<<<<<< HEAD
-<<<<<<< HEAD
     Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = []
     ServiceName = "interlock-ext"
     ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
-    Args = []
-    ServiceName = "interlock-ext"
-    ProxyImage = "nginx:alpine"
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
     ProxyArgs = []
     ProxyServiceName = "interlock-proxy"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -271,15 +168,7 @@ oqkvv1asncf6p2axhx41vylgt
 
 Note the `PublishMode = "host"` setting. This instructs Interlock to configure the proxy service for host mode networking.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Now create the Interlock service also using host mode networking:
-=======
-Now we can create the Interlock service also using host mode networking:
->>>>>>> Raw content addition
-=======
-Now we can create the Interlock service also using host mode networking:
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 ```bash
 $> docker service create \
@@ -288,25 +177,11 @@ $> docker service create \
     --constraint node.role==manager \
     --publish mode=host,target=8080 \
     --config src=service.interlock.conf,target=/config.toml \
-<<<<<<< HEAD
-<<<<<<< HEAD
     { page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
 sjpgq7h621exno6svdnsvpv9z
 ```
 
 ## Configure proxy services
-=======
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
-sjpgq7h621exno6svdnsvpv9z
-```
-
-## Configure Proxy Services
-<<<<<<< HEAD
->>>>>>> Raw content addition
-=======
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
 workers. From a manager run the following to pin the proxy services to the load balancer worker nodes:
 

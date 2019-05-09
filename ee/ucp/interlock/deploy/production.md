@@ -5,18 +5,10 @@ description: Learn how to configure the layer 7 routing solution for a productio
 keywords: routing, proxy, interlock
 ---
 
-<<<<<<< HEAD
 This section includes documentation on configuring Interlock
 for a production environment.  If you have not yet deployed Interlock, refer to [Deploying Interlock](./index.md) because this information builds upon the basic deployment. This topic does not cover infrastructure deployment -
 it assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
 Refer to the [Swarm](/engine/swarm/) documentation if you need help
-=======
-# Deploying to production
-This section includes documentation on configuring Interlock
-for a production environment.  If you have not yet deployed Interlock, refer to [Deploying Interlock](index.md) because this information builds upon the basic deployment. This topic does not cover infrastructure deployment -
-it assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
-Refer to the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 getting a Swarm cluster deployed.
 
 The layer 7 solution that ships with UCP is highly available
@@ -58,12 +50,14 @@ lb-01
 
 You can inspect each node to ensure the labels were successfully added:
 
+{% raw %}
 ```bash
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-00
 map[nodetype:loadbalancer]
 $> docker node inspect -f '{{ .Spec.Labels  }}' lb-01
 map[nodetype:loadbalancer]
 ```
+{% endraw %}
 
 The command should print "loadbalancer".
 
@@ -133,10 +127,5 @@ to provide more bandwidth for the user services.
 ![Interlock 2.0 Production Deployment](../../images/interlock_production_deploy.png)
 
 ## Next steps
-<<<<<<< HEAD
 - [Configure Interlock](../config/index.md)
 - [Deploy applications](../usage.index.md)
-=======
-- [Configuring Interlock](../config/index.md)
-- [Deploying applications](../usage.index.md)
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

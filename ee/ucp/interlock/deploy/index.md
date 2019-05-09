@@ -1,18 +1,11 @@
 ---
-<<<<<<< HEAD
 title: Deploy a layer 7 routing solution 
 description: Learn the deployment steps for the UCP layer 7 routing solution
 keywords: routing, proxy, interlock
-=======
-title: Deploying a layer 7 routing solution for UCP to route traffic to swarm services
-description: Learn the deployment steps for the UCP layer 7 routing solution
-keywords: routing, proxy
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
 ---
 
-<<<<<<< HEAD
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
 1. [Prerequisites](#prerequisites)
@@ -20,27 +13,12 @@ This topic covers deploying a layer 7 routing solution into a Docker Swarm to ro
 3. [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
 4. [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-Interlock-and-extensions)
 5. [Create the Interlock service](#create-the-interlock-service)
-=======
-# Deploying basic layer 7 routing and Interlock
-This topic covers deploying a layer 7 routing solution for UCP into a Docker Swarm. Layer 7 routing is also referred to as HTTP routing mesh.
-
-1. Prerequisites
-2. Enable layer 7 routing
-3. Working with the core service configuration file
-4. Creating a dedicated network for Interlock and extensions
-5. Creating the Interlock service
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 ## Prerequisites
 
 - [Docker](https://www.docker.com) version 17.06 or later
-<<<<<<< HEAD
 - Docker must be running in [Swarm mode](/engine/swarm/)
 - Internet access (see [Offline installation](./offline-install.md) for installing without internet access)
-=======
-- Docker must be running in [Swarm mode](https://docs.docker.com/engine/swarm/)
-- Internet access (see [Offline Installation](offline.md) for installing without internet access)
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 ## Enable layer 7 routing
 By default, layer 7 routing is disabled, so you must first
@@ -142,16 +120,10 @@ PollInterval = "3s"
       LargeClientHeaderBuffers = "4 8k"
       ClientBodyTimeout = "60s"
       UnderscoresInHeaders = false
-<<<<<<< HEAD
       HideInfoHeaders = false
 ```
 
 ### Work with the core service configuration file
-=======
-```
-
-### Working with the core service configuration file
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 Interlock uses the TOML file for the core service configuration. The following example utilizes Swarm deployment and recovery features by creating a Docker Config object:
 
 ```bash
@@ -162,15 +134,9 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-<<<<<<< HEAD
     Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = ["-D"]
     ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
-=======
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
-    Args = ["-D"]
-    ProxyImage = "nginx:alpine"
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
     ProxyArgs = []
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ProxyReplicas = 1
@@ -191,11 +157,7 @@ EOF
 oqkvv1asncf6p2axhx41vylgt
 ```
 
-<<<<<<< HEAD
 ### Create a dedicated network for Interlock and extensions
-=======
-### Creating a dedicated network for Interlock and extensions
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 
 Next, create a dedicated network for Interlock and the extensions:
 
@@ -203,17 +165,10 @@ Next, create a dedicated network for Interlock and the extensions:
 $> docker network create -d overlay interlock
 ```
 
-<<<<<<< HEAD
 ### Create the Interlock service
 Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
 are recommended to run on workers.  See the [Production](./production.md) section for more information
-=======
-### Creating the Interlock service
-Now you can create the Interlock service. Note the requirement to constrain to a manager. The
-Interlock core service must have access to a Swarm manager, however the extension and proxy services
-are recommended to run on workers.  See the [Production](production.md) section for more information
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 on setting up for an production environment.
 
 ```bash
@@ -223,11 +178,7 @@ $> docker service create \
     --network interlock \
     --constraint node.role==manager \
     --config src=service.interlock.conf,target=/config.toml \
-<<<<<<< HEAD
     {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
-=======
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 sjpgq7h621exno6svdnsvpv9z
 ```
 
@@ -238,27 +189,15 @@ one for the extension service, and one for the proxy service:
 $> docker service ls
 ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
 lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                *:80->80/tcp *:443->443/tcp
-<<<<<<< HEAD
 oxjvqc6gxf91        keen_clarke         replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
 sjpgq7h621ex        interlock           replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
-=======
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 interlockpreview/interlock-extension-nginx:2.0.0-preview
-sjpgq7h621ex        interlock           replicated          1/1                 interlockpreview/interlock:2.0.0-preview
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 ```
 
 The Interlock traffic layer is now deployed. 
 
 ## Next steps
 
-<<<<<<< HEAD
 - [Configure Interlock](../config/index.md) 
 - [Deploy applications](../usage/index.md)
 - [Production deployment information](./production.md)
 - [Offline installation](./offline-install.md)
-=======
-- [Configuring Interlock](../config/index.md) 
-- [Deploying applications](../usage/index.md)
-- [Production deployment information](./production.md)
-- [Offline installation information](./offline.md)
->>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
