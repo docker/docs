@@ -1,4 +1,90 @@
 ---
+<<<<<<< HEAD
+title: Implement service clusters
+description: Learn how to route traffic to different proxies using a service cluster.
+keywords: ucp, interlock, load balancing, routing
+---
+
+## Configure Proxy Services
+With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
+workers for each region. FOr example, from a manager, run the following commands to pin the proxy services to the ingress workers:
+
+```bash
+$> docker service update \
+    --constraint-add node.labels.nodetype==loadbalancer \
+    --constraint-add node.labels.region==us-east \
+    ucp-interlock-proxy-us-east
+$> docker service update \
+    --constraint-add node.labels.nodetype==loadbalancer \
+    --constraint-add node.labels.region==us-west \
+    ucp-interlock-proxy-us-west
+```
+
+You are now ready to deploy applications. First, create individual networks for each application:
+
+```bash
+$> docker network create -d overlay demo-east
+$> docker network create -d overlay demo-west
+```
+
+Next, deploy the application in the `us-east` service cluster:
+
+```bash
+$> docker service create \
+    --name demo-east \
+    --network demo-east \
+    --detach=true \
+    --label com.docker.lb.hosts=demo-east.local \
+    --label com.docker.lb.port=8080 \
+    --label com.docker.lb.service_cluster=us-east \
+    --env METADATA="us-east" \
+    ehazlett/docker-demo
+```
+
+Now deploy the application in the `us-west` service cluster:
+
+```bash
+$> docker service create \
+    --name demo-west \
+    --network demo-west \
+    --detach=true \
+    --label com.docker.lb.hosts=demo-west.local \
+    --label com.docker.lb.port=8080 \
+    --label com.docker.lb.service_cluster=us-west \
+    --env METADATA="us-west" \
+    ehazlett/docker-demo
+```
+
+Only the designated service cluster is configured for the applications. For example, the `us-east` service cluster
+is not configured to serve traffic for the `us-west` service cluster and vice versa. You can observe this when you
+send requests to each service cluster.
+
+When you send a request to the `us-east` service cluster, it only knows about the `us-east` application. This example uses IP address lookup from the swarm API, so you must `ssh` to a manager node or configure your shell with a UCP client bundle before testing:
+
+```bash
+{% raw %}
+$> curl -H "Host: demo-east.local" http://$(docker node inspect -f '{{ .Status.Addr  }}' lb-00):8080/ping
+{"instance":"1b2d71619592","version":"0.1","metadata":"us-east","request_id":"3d57404cf90112eee861f9d7955d044b"}
+$> curl -H "Host: demo-west.local" http://$(docker node inspect -f '{{ .Status.Addr  }}' lb-00):8080/ping
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.13.6</center>
+</body>
+</html>
+{% endraw %}
+```
+
+Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy is updated only if it has corresponding updates to its designated service cluster. In this example, updates to the `us-east` cluster do not affect the `us-west` cluster.  If there is a problem, the others are not affected.
+
+## Usage
+
+The following example configures an eight (8) node Swarm cluster that uses service clusters
+to route traffic to different proxies. This example includes:
+
+- Three (3) managers and five (5) workers 
+=======
 title: Service clusters
 description: Learn how to route traffic to different proxies using a service cluster.
 keywords: ucp, interlock, load balancing
@@ -9,6 +95,7 @@ The following example configures an eight (8) node Swarm cluster that uses servi
 to route traffic to different proxies. This example includes:
 
 - three (3) managers and five (5) workers 
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 - Four workers that are configured with node labels to be dedicated
 ingress cluster load balancer nodes. These nodes receive all application traffic.
 
@@ -87,7 +174,7 @@ PollInterval = "3s"
     Image = "{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}"
     Args = []
     ServiceName = "ucp-interlock-extension-us-west"
-    ProxyImage = "docker/ucp-interlock-proxy:3.1.2"
+    ProxyImage = "{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}"
     ProxyArgs = []
     ProxyServiceName = "ucp-interlock-proxy-us-west"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -122,6 +209,8 @@ $> docker network create -d overlay ucp-interlock
 ```
 
 Now [enable the Interlock service](../deploy/index.md#enable-layer-7-routing).
+<<<<<<< HEAD
+=======
 
 -------REMOVE THE FOLLOWING PER ---------          https://github.com/docker/docker.github.io/issues/8415-----
 
@@ -213,3 +302,4 @@ $> curl -H "Host: demo-west.local" http://$(docker node inspect -f '{{ .Status.A
 ```
 
 Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy is updated only if it has corresponding updates to its designated service cluster. In this example, updates to the `us-east` cluster do not affect the `us-west` cluster.  If there is a problem, the others are not affected.
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

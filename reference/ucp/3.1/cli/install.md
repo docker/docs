@@ -38,11 +38,13 @@ If you have SELinux policies enabled for your Docker install, you will need to
 use `docker container run --rm -it --security-opt label=disable ...` when running this
 command.
 
+If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install/install-on-azure/).
+
 ## Options
 
 | Option                   | Description                                                                                                                                                                                                                               |
 |:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--admin-password`       | The UCP administrator password |
+| `--admin-password`       | The UCP administrator password. Must be at least 8 characters. |
 | `--admin-username`       | The UCP administrator username                             |
 | `--binpack`              | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility       |
 | `--cloud-provider`       | The cloud provider for the cluster 
@@ -69,6 +71,7 @@ command.
 | `--kv-timeout`           | Timeout in milliseconds for the key-value store                                        |
 | `--license`              | Add a license: e.g.` --license "$(cat license.lic)" `                                  |
 | `--pod-cidr`             | Kubernetes cluster IP pool for the pods to allocated IPs from (Default: `192.168.0.0/16`) |
+|`--service-cluster-ip-range`| Sets the subnet pool from which the IP for Services should be allocated (Default is `10.96.0.0/16`). |
 | `--preserve-certs`       | Don't generate certificates if they already exist                                      |
 | `--pull`                 | Pull UCP images: `always`, when `missing`, or `never`                                  |
 | `--random`               | Set the Docker Swarm scheduler to random mode. Used for backwards compatibility        |

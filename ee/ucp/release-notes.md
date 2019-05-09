@@ -21,27 +21,167 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.7 
+(2019-05-06)
+
+### Security
+* Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Known Issues
+* Upgrading from UCP `3.1.4` to `3.1.5` causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.7 |
+| Kubernetes   | 1.11.9 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
+## 3.1.6
+(2019-04-11)
+
+### Kubernetes
+* Updated Kubernetes to version 1.11.9.
+
+### Networking
+* Updated Calico to version 3.5.3.
+
+### Authentication and Authorization
+* Accessing the `ListAccount` API endpoint now requires an admin user. Accessing the `GetAccount` API endpoint now requires an admin user, the actual user, or a member of the organization being inspected. [ENGORC-100](https://docker.atlassian.net/browse/ENGORC-100)
+
+### Known Issues
+* Upgrading from UCP `3.1.4` to `3.1.5` causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.6 |
+| Kubernetes   | 1.11.9 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
+## 3.1.5 
+2019-03-28
+
+### Kubernetes
+* Updated Kubernetes to version 1.11.8. (ENGORC-2024)
+
+### Networking
+* Updated Calico to version 3.5.2. (ENGORC-2045)
+
+### Authentication and Authorization
+* Added LDAP Settings API to the list of publicly documented API endpoints. (ENGORC-98)
+* Added a new `exclude_server_identity_headers` field to the UCP config. If set to true, the headers are not included in UCP API responses. (docker/orca#16039)
+* Hid most of the UCP banners for non-admin users. (docker/orca#14631)
+* When LDAP or SAML is enabled, provided admin users an option to disable managed password authentication, which includes login and creation of new users. (ENGORC-1999)
+
+### Bug Fixes
+* Changed Interlock proxy service default `update-action-failure` to rollback. (ENGCORE-117)
+* Added validation for service configuration label values. (ENGCORE-114)
+* Fixed an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
+
+### Known Issues
+
+* Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.5 |
+| Kubernetes   | 1.11.8 |
+| Calico      | 3.5.2 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.4 
 
 2019-02-28
 
-**New platforms**
+### New platforms
 * Added support for SLES 15.
 * Added support for Oracle 7.6.
 
- **Kubernetes**
+### Kubernetes
 * Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
 * Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
 * Fixed an issue that caused Windows node ucp-agent(s) to constantly reboot when audit logging is enabled. (docker/orca#16122)
 * Fixed an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)
 * Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 * Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
+* Kubelet no longer deletes images, starting with the oldest unused images, after exceeding 85% disk space utilization. This was an issue in air-gapped environments. (docker/orca#16082)
 
-**Enhancements**
+### Enhancements
 * Changed packaging and builds for UCP to build bootstrapper last. This avoids the "upgrade available" banner on all UCPs until the entirety of UCP is available.
+
+### Known Issues
+
+* Newly added Windows node reports "Awaiting healthy status in classic node inventory". [Learn more](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory).
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (docker/orca#14483)
+* Pod Security Policies are not supported in this release. (docker/orca#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.4 |
+| Kubernetes   | 1.11.7 |
+| Calico      | 3.5.0 |
+| Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.3
 
@@ -82,8 +222,7 @@ upgrade your installation to the latest release.
 
 ### Authentication and Authorization
 * SAML Single Logout is now supported in UCP.
-* Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can 
-enable this feature in Admin Settings -> SAML Settings.
+* Identity Provider initiated SAML Single Sign-on is now supported in UCP.  The admin can enable this feature in Admin Settings -> SAML Settings.
 
 ### Audit Logging
 * UCP Audit logging is now controlled through the UCP Configuration file; it is also
@@ -91,15 +230,18 @@ now configurable within the UCP web interface. (#15466)
 
 ### Bug Fixes
 * Core
-  * Significantly reduced database load in environments with a lot of concurrent 
-  and repeated API requests by the same user. (docker/escalation#911)
+  * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user. (docker/escalation#911)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
+   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015)
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
 * Interlock
   * Interlock headers can now be hidden. (escalation#833)
   * Now upgrading Interlock will also upgrade interlock proxy and interlock extension as well (escalation/871)
   * Added support for 'VIP' backend mode, in which the Interlock proxy connects to the backend service's Virtual IP instead of load-balancing directly to each task IP. (docker/interlock#206) (escalation/920)
+
+### Known Issues
+ * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
+  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
 
 ### Components
 
@@ -129,7 +271,7 @@ now configurable within the UCP web interface. (#15466)
 
 2018-11-08
 
-## Bug Fixes
+### Bug Fixes
 
 * Swarm placement constraint warning banner no longer shows up for `ucp-auth` services (#14539)
 * "update out of sequence" error messages no longer appear when changing admin settings (#7093)
@@ -138,7 +280,7 @@ now configurable within the UCP web interface. (#15466)
 * `docker network ls --filter id=<id>` now works with a UCP client bundle (#14840)
 * Collection deletes are correctly blocked if there is a node in the collection (#13704)
 
-## New Features
+### New Features
 
 ### Kubernetes
 
@@ -168,34 +310,26 @@ Admins can configure UCP to use a SAML-enabled identity provider for user authen
 * UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
 * You can now use the `custom_api_server_headers` field in the UCP configuration to set arbitrary headers that are included with every UCP response.
 
-
-
-## API updates
+### API updates
 
 There are several backward-incompatible changes in the Kubernetes API that may affect user workloads. They are:
 
-  * A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
-  * These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
+* A compatibility issue with the `allowPrivilegeEscalation` field that caused policies to start denying pods they previously allowed was fixed. If you defined `PodSecurityPolicy` objects using a 1.8.0 client or server and set `allowPrivilegeEscalation` to false, these objects must be reapplied after you upgrade.
+* These changes are automatically updated for taints. Tolerations for these taints must be updated manually. Specifically, you must:
     * Change `node.alpha.kubernetes.io/notReady` to `node.kubernetes.io/not-ready`
     * Change `node.alpha.kubernetes.io/unreachable` to `node.kubernetes.io/unreachable`
     For more information about taints and tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-
 * JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
-
-
-## Known issues
+### Known issues
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
-
 * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)
-
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
     * For the `Group` subject Kind, the format depends on whether you are create a Binding for a team or an organization:
         * For an organization, the format is `org:{org-id}`
         * For a team, the format is `team:{org-id}:{team-id}`
-
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
@@ -203,14 +337,11 @@ There are several backward-incompatible changes in the Kubernetes API that may a
     * Host Networking
     * Host IPC
     * Host PID
-
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
-
 * Pod Security Policies are not supported in this release. (#15105)
-
 * The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
 
-## Deprecated features
+### Deprecated features
 
 The following features are deprecated in UCP 3.1.
 
@@ -234,15 +365,40 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.11 
+
+2019-05-06
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.11 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 ## 3.0.10
 
 2019-02-28
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 * Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (docker/orca/#16009)
 * Validate Calico certs expiration date and update accordingly. (escalation#981)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.10 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.9
 
@@ -381,8 +537,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password
-    were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+  * Fixed a critical security issue where the LDAP bind username and password were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 ### Known Issue
 
@@ -547,7 +702,7 @@ potential resource contention issues.
 a UCP client bundle and `kubectl`.
 [Learn more](https://docs.docker.com/ee/ucp/kubernetes/).
 * Users can now use Compose to deploy Kubernetes workloads from the web UI.
-[Lean more](https://docs.docker.com/ee/ucp/kubernetes/deploy-with-compose/).
+[Learn more](https://docs.docker.com/ee/ucp/kubernetes/deploy-with-compose/).
 
 ### Networking
 
@@ -579,7 +734,7 @@ will be available in future releases.
 ### Security
 
 * Role-based access control now supports Kubernetes resources.
-[Lean more](https://docs.docker.com/ee/ucp/authorization/migrate-kubernetes-roles/).
+[Learn more](https://docs.docker.com/ee/ucp/authorization/migrate-kubernetes-roles/).
   * In addition to users, teams, organizations, and grants you can now use
   Kubernetes Service Accounts as a subject type.
   [Learn more](https://docs.docker.com/ee/ucp/kubernetes/create-service-account/).
@@ -684,11 +839,35 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.18 
+
+2019-05-06
+
+### Bug Fixes
+* Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.
+
+### Known issues
+
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
+
 ## Version 2.2.17
 
 2019-02-28
 
- **Bug Fixes**
+### Bug Fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
 

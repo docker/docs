@@ -31,16 +31,22 @@ Specify your configuration settings in a TOML file.
 
 Use the `config-toml` API to export the current settings and write them to a file. Within the directory of a UCP admin user's [client certificate bundle](../../user-access/cli.md), the following command exports the current configuration for the UCP hostname `UCP_HOST` to a file named `ucp-config.toml`:
 
-```bash
-curl --cacert ca.pem --cert cert.pem --key key.pem https://UCP_HOST/api/ucp/config-toml > ucp-config.toml
+### Get an authtoken
+
+```
+AUTHTOKEN=$(curl --silent --insecure --data '{"username":"<username>","password":"<password>"}' https://UCP_HOST/auth/login | jq --raw-output .auth_token)
 ```
 
-Edit `ucp-config.toml`, then use the following `curl` command to import it back into
-UCP and apply your configuration changes:
+### Download config file
 
+```
+curl -X GET "https://UCP_HOST/api/ucp/config-toml" -H  "accept: application/toml" -H  "Authorization: Bearer $AUTHTOKEN" > ucp-config.toml
+```
 
-```bash
-curl --cacert ca.pem --cert cert.pem --key key.pem --upload-file ucp-config.toml https://UCP_HOST/api/ucp/config-toml
+### Upload config file
+
+```
+curl -X PUT -H  "accept: application/toml" -H "Authorization: Bearer $AUTHTOKEN" --upload-file 'path/to/ucp-config.toml' https://UCP_HOST/api/ucp/config-toml
 ```
 
 ## Apply an existing configuration file at install time
@@ -141,6 +147,8 @@ Specifies whether DTR images require signing.
 
 ### log_configuration table (optional)
 
+> Note: This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
+
 Configures the logging options for UCP components.
 
 | Parameter  | Required | Description                                                                                                                                                                                     |
@@ -189,6 +197,7 @@ components. Assigning these values overrides the settings in a container's
 | `calico_mtu`                           | no       | Set the MTU (maximum transmission unit) size for the Calico plugin.                                                                                                                              |
 | `ipip_mtu`                             | no       | Set the IPIP MTU size for the calico IPIP tunnel interface.                                                                                                                                      |
 | `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                               |
+| `service-cluster-ip-range`             | yes      | Sets the subnet pool from which the IP for Services should be allocated. Default is `10.96.0.0/16`. 
 | `nodeport_range`                       | yes      | Set the port range that for Kubernetes services of type NodePort can be exposed in. Default is `32768-35535`.                                                                                    |
 | `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                                   |
 | `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                            |

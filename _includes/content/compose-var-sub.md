@@ -3,8 +3,10 @@ variable values from the shell environment in which `docker-compose` is run. For
 example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply this
 configuration:
 
-    db:
-      image: "postgres:${POSTGRES_VERSION}"
+```yaml
+db:
+  image: "postgres:${POSTGRES_VERSION}"
+```
 
 When you run `docker-compose up` with this configuration, Compose looks for the
 `POSTGRES_VERSION` environment variable in the shell and substitutes its value
@@ -47,9 +49,11 @@ dollar sign. This also prevents Compose from interpolating a value, so a `$$`
 allows you to refer to environment variables that you don't want processed by
 Compose.
 
-    web:
-      build: .
-      command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+```yaml
+web:
+  build: .
+  command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+```
 
 If you forget and use a single dollar sign (`$`), Compose interprets the value
 as an environment variable and warns you:

@@ -17,7 +17,7 @@ You will be prompted for the UCP URL, UCP credentials, and which replica to
 destroy.
 
 To see what options are available in the destroy command, check the
-[destroy command reference documentation](/reference/dtr/2.5/cli/destroy.md).
+[destroy command reference documentation](/reference/dtr/2.6/cli/destroy.md).
 
 ## Where to go next
 

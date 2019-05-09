@@ -2,7 +2,7 @@
 title: Interlock architecture
 description: Learn more about the architecture of the layer 7 routing solution
   for Docker swarm services.
-keywords: routing, proxy
+keywords: routing, UCP, interlock, load balancing
 ---
 
 This document covers the following considerations:
@@ -114,4 +114,8 @@ The following features are supported in VIP mode:
 ## Next steps
 
 - [Deploy Interlock](deploy/index.md)
+<<<<<<< HEAD
+- [Configure Interlock](config/index.md)
+=======
 - [Configure Interlock[(config/index.md)
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5

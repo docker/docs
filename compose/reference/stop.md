@@ -9,7 +9,8 @@ notoc: true
 Usage: stop [options] [SERVICE...]
 
 Options:
--t, --timeout TIMEOUT      Specify a shutdown timeout in seconds (default: 10).
+  -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
+                             (default: 10)
 ```
 
 Stops running containers without removing them. They can be started again with

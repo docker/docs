@@ -295,6 +295,10 @@ guides:
     - path: /config/containers/logging/configure/
       title: Configuring default drivers
       nosync: true
+  - sectiontitle: Work with external tools
+    section:
+    - path: /config/thirdparty/
+      title: Third-party monitoring tools
     - path: /config/thirdparty/prometheus/
       title: Collect Docker metrics with Prometheus
   - sectiontitle: Configure containers
@@ -536,6 +540,12 @@ reference:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
+    - sectiontitle: docker builder *
+      section:
+        - path: /engine/reference/commandline/builder/
+          title: docker builder
+        - path: /engine/reference/commandline/builder_prune/
+          title: docker builder prune
     - sectiontitle: docker checkpoint *
       section:
       - path: /engine/reference/commandline/checkpoint/
@@ -1238,7 +1248,7 @@ manuals:
           title: Using UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
-        - path: /ee/ucp/admin/configure/create-audit-logs/
+        - path: /ee/ucp/admin/configure/enable-audit-logging/
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
@@ -1276,8 +1286,6 @@ manuals:
             title: Join Windows worker nodes to your cluster
           - path: /ee/ucp/admin/configure/join-nodes/use-a-load-balancer/
             title: Use a load balancer
-        - path: /ee/ucp/admin/configure/integrate-with-multiple-registries/
-          title: Integrate with multiple registries
         - path: /ee/ucp/admin/configure/deploy-route-reflectors/
           title: Improve network performance with Route Reflectors
       - sectiontitle: Monitor and troubleshoot
@@ -1323,8 +1331,6 @@ manuals:
           title: Isolate nodes
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
-        - path: /ee/ucp/authorization/migrate-kubernetes-roles/
-          title: Migrate Kubernetes roles to Docker EE authorization
         - path: /ee/ucp/authorization/ee-standard/
           title: Docker EE Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
@@ -1364,15 +1370,22 @@ manuals:
           - title: Offline installation
             path: /ee/ucp/interlock/deploy/offline-install/
           - title: Layer 7 routing upgrade
+<<<<<<< HEAD
+            path: /ee/ucp/interlock/deploy/upgrade/   
+=======
             path: /ee/ucp/interlock/upgrade/   
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
         - sectiontitle: Configuration
           section:
           - title: Configure your deployment
             path: /ee/ucp/interlock/config/
+<<<<<<< HEAD
+=======
           - title: Using a custom extension template
             path: /ee/ucp/interlock/config/custom-template/
           - title: Configuring an HAProxy extension
             path: /ee/ucp/interlock/config/haproxy-config/
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
           - title: Configuring host mode networking
             path: /ee/ucp/interlock/config/host-mode-networking/
           - title: Configuring an nginx extension
@@ -1391,32 +1404,42 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
+<<<<<<< HEAD
+          - title: Specifying a routing mode
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+          - title: Using routing labels
+            path: /ee/ucp/interlock/usage/labels-reference/ 
+=======
           - title: Publishing a default host service
             path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
             path: /ee/ucp/interlock/usage/labels-reference.md/ 
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Implementing persistent (sticky) sessions
             path: /ee/ucp/interlock/usage/sessions/
+<<<<<<< HEAD
+          - title: Securing services with TLS
+            path: /ee/ucp/interlock/usage/tls/
+          - title: Configuring websockets
+            path: /ee/ucp/interlock/usage/websockets/
+=======
           - title: Implementing SSL
             path: /ee/ucp/interlock/usage/ssl/
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
             path: /ee/ucp/interlock/usage/websockets/   
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources
         path: /ee/ucp/kubernetes/kube-resources/
-      - title: Use NFS persistent storage
-        path: /ee/ucp/admin/configure/use-nfs-volumes/
-      - title: Configure AWS EBS Storage for Kubernetes
-        path: /ee/ucp/kubernetes/configure-aws-storage/
       - title: Deploy a workload
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
@@ -1429,6 +1452,12 @@ manuals:
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
+      - sectiontitle: Persistent Storage
+        section:
+        - title: Use NFS storage
+          path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
+        - title: Use AWS EBS Storage
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
     - title: API reference
       path: /reference/ucp/3.1/api/
       nosync: true
@@ -1454,6 +1483,8 @@ manuals:
               title: Install
             - path: /datacenter/ucp/3.0/guides/admin/install/install-offline/
               title: Install offline
+            - path: /datacenter/ucp/3.0/guides/admin/install/install-on-azure/
+              title: Install on Azure
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade/
               title: Upgrade
             - path: /datacenter/ucp/3.0/guides/admin/install/upgrade-offline/
@@ -1504,7 +1535,7 @@ manuals:
             section:
             - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/
               title: Monitor the cluster status
-            - path: /datacenter/ucp/3.0/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+            - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
               title: Troubleshoot node messages
             - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
               title: Troubleshoot with logs
@@ -1576,27 +1607,75 @@ manuals:
               title: Web-based access
             - path: /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/
               title: CLI-based access
-          - sectiontitle: Deploy an application
+            - path: /datacenter/ucp/3.0/guides/user/access-ucp/kubectl/
+              title: Install the Kubernetes CLI
+          - sectiontitle: Deploy apps with Swarm
             section:
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-a-service/
-              title: Deploy a service
-            - path: /datacenter/ucp/3.0/guides/user/services/use-domain-names-to-access-services/
-              title: Use domain names to access services
-            - path: /datacenter/ucp/3.0/guides/user/services/
-              title: Deploy an app from the UI
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-app-cli/
-              title: Deploy an app from the CLI
-            - path: /datacenter/ucp/3.0/guides/user/services/deploy-stack-to-collection/
+            - path: /datacenter/ucp/3.0/guides/user/swarm/
+              title: Deploy a single service
+            - path: /datacenter/ucp/3.0/guides/user/swarm/deploy-multi-service-app/
+              title: Deploy a multi-service app
+            - path: /datacenter/ucp/3.0/guides/user/swarm/deploy-to-collection/
               title: Deploy application resources to a collection
-          - sectiontitle: Secrets
+            - path: /datacenter/ucp/3.0/guides/user/swarm/use-secrets/
+              title: Use secrets in your services
+            - sectiontitle: Layer 7 routing
+              section:
+              - path: /datacenter/ucp/3.0/guides/user/interlock/
+                title: Overview
+              - path: /datacenter/ucp/3.0/guides/user/interlock/architecture/
+                title: Architecture
+              - sectiontitle: Deploy
+                section:
+                - title: Simple deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/
+                - title: Configure your deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/configure/
+                - title: Production deployment
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/production/
+                - title: Host mode networking
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/host-mode-networking/
+                - title: Configuration reference
+                  path: /datacenter/ucp/3.0/guides/user/interlock/deploy/configuration-reference/
+              - sectiontitle: Route traffic to services
+                section:
+                - title: Simple swarm service
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/
+                - title: Set a default service
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/default-service/
+                - title: Applications with TLS
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/tls/
+                - title: Application redirects
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/redirects/
+                - title: Persistent (sticky) sessions
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/sessions/
+                - title: Websockets
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/websockets/
+                - title: Canary application instances
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/canary/
+                - title: Service clusters
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/service-clusters/
+                - title: Context/Path based routing
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/context/
+                - title: Service labels reference
+                  path: /datacenter/ucp/3.0/guides/user/interlock/usage/labels-reference/
+              - title: Layer 7 routing upgrade
+                path: /datacenter/ucp/3.0/guides/user/interlock/upgrade/
+          - sectiontitle: Deploy apps with Kubernetes
             section:
-            - path: /datacenter/ucp/3.0/guides/user/secrets/
-              title: Manage secrets
-            - path: /datacenter/ucp/3.0/guides/user/secrets/grant-revoke-access/
-              title: Grant access to secrets
+            - title: Deploy a workload
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/
+            - title: Deploy a Compose-based app
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/deploy-with-compose/
+            - title: Deploy an ingress controller
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/layer-7-routing/
+            - title: Create a service account for a Kubernetes app
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/create-service-account/
+            - title: Install a CNI plugin
+              path: /datacenter/ucp/3.0/guides/user/kubernetes/install-cni-plugin/
         - path: /datacenter/ucp/3.0/reference/api/
           title: API reference
-        - path: /ee/ucp/release-notes/
+        - path: /ee/ucp/release-notes/#version-30
           title: Release notes
           nosync: true
         - path: /datacenter/ucp/3.0/guides/get-support/
@@ -1647,6 +1726,8 @@ manuals:
               title: Restrict services to worker nodes
             - path: /datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/
               title: Run only the images you trust
+            - path: /datacenter/ucp/2.2/guides/admin/configure/use-trusted-images-for-ci/
+              title: Use trusted images for continuous integration  
             - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
               title: Scale your cluster
             - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/
@@ -1761,7 +1842,7 @@ manuals:
               title: Grant access to secrets
         - path: /datacenter/ucp/2.2/reference/api/
           title: API reference
-        - path: /ee/ucp/release-notes/
+        - path: /ee/ucp/release-notes/#version-22
           title: Release notes
           nosync: true
         - path: /datacenter/ucp/2.2/guides/get-support/
@@ -1812,6 +1893,8 @@ manuals:
               title: Use domain names to access services
             - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
               title: Run only the images you trust
+            - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
+              title: Use trusted images for continuous integration
             - path: /datacenter/ucp/2.1/guides/admin/configure/integrate-with-dtr/
               title: Integrate with Docker Trusted Registry
             - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
@@ -2162,6 +2245,8 @@ manuals:
           section:
           - path: /ee/dtr/admin/configure/external-storage/
             title: Overview
+          - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
+            title: Switch storage backends
           - path: /ee/dtr/admin/configure/external-storage/s3/
             title: S3
           - path: /ee/dtr/admin/configure/external-storage/nfs/
@@ -2267,10 +2352,8 @@ manuals:
           section:
           - path: /ee/dtr/user/manage-images/sign-images/
             title: Sign an image
-          - path: /ee/dtr/user/manage-images/sign-images/delegate-image-signing/
-            title: Delegate image signing
-          - path: /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
-            title: Manage trusted repositories
+          - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
+            title: Trust with a Remote UCP
       - sectiontitle: Promotion policies and mirroring
         section:
           - title: Overview
@@ -3359,7 +3442,7 @@ manuals:
   - path: /docker-hub/slack_integration/
     title: Slack Integration
   - path: /docker-hub/upgrade/
-    title: Upgrading your plan
+    title: Upgrade your plan
   - sectiontitle: Automated Builds
     section:
       - path: /docker-hub/builds/
@@ -3521,28 +3604,6 @@ manuals:
       nosync: true
 - sectiontitle: Superseded products and tools
   section:
-  - sectiontitle: Commercially supported Docker Engine
-    section:
-    - sectiontitle: 1.13
-      section:
-      - path: /cs-engine/1.13/
-        title: Install
-      - path: /cs-engine/1.13/upgrade/
-        title: Upgrade
-      - path: /cs-engine/1.13/release-notes/
-        title: Release notes
-    - sectiontitle: 1.12
-      section:
-      - path: /cs-engine/1.12/
-        title: Install
-      - path: /cs-engine/1.12/upgrade/
-        title: Upgrade
-      - sectiontitle: Release notes
-        section:
-        - path: /cs-engine/1.12/release-notes/release-notes/
-          title: CS Engine release notes
-        - path: /cs-engine/1.12/release-notes/prior-release-notes/
-          title: Prior CS Engine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/

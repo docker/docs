@@ -1,8 +1,10 @@
 ---
 title: Configure DTR image storage
 description: Storage configuration for Docker Trusted Registry
-keywords: storage drivers, NFS, Azure, S3
+keywords: dtr, storage drivers, NFS, Azure, S3
 ---
+
+## Configure your storage backend
 
 By default DTR uses the local filesystem of the node where it is running to
 store your Docker images. You can configure DTR to use an external storage
@@ -10,46 +12,50 @@ backend, for improved performance or high availability.
 
 ![architecture diagram](../../../images/configure-external-storage-1.svg)
 
-If your DTR deployment only has a single replica, you can continue using the
-local filesystem to store your Docker images. If your DTR deployment has
-multiple replicas, for high availability, you need to ensure all replicas are
-using the same storage backend. When a user pulls an image, the node serving
-the request needs to have access to that image.
+If your DTR deployment has a single replica, you can continue using the
+local filesystem for storing your Docker images. If your DTR deployment has
+multiple replicas, make sure all replicas are
+using the same storage backend for high availability. Whenever a user pulls an image, the DTR
+node serving the request needs to have access to that image.
 
-DTR supports these storage systems:
+DTR supports the following storage systems:
 
 * Local filesystem
-* NFS
-* Amazon S3 or compatible
-* Google Cloud Storage
-* Microsoft Azure Blob storage
-* OpenStack Swift
+   * [NFS](nfs.md)
+   * [Bind Mount](/storage/bind-mounts/)
+   * [Volume](/storage/volumes/)
+* Cloud Storage Providers
+   * [Amazon S3](s3.md)
+   * [Microsoft Azure](/registry/storage-drivers/azure/)
+   * [OpenStack Swift](/registry/storage-drivers/swift/)
+   * [Google Cloud Storage](/registry/storage-drivers/gcs/)
 
-To configure the storage backend, you can log into the **DTR web UI**
-as an administrator user, navigate to the **Settings** page, and choose
-**Storage**.
+> **Note**: Some of the previous links are meant to be informative and are not representative of DTR's implementation of these storage systems. 
+
+To configure the storage backend, log in to the DTR web interface
+as an admin, and navigate to **System > Storage**.
 
 ![dtr settings](../../../images/configure-external-storage-2.png){: .with-border}
 
-The storage configuration page in the DTR web UI has options for the most
-common configuration options, but you can also upload a yaml configuration file.
+The storage configuration page gives you the most
+common configuration options, but you have the option to upload a configuration file in `.yml`, `.yaml`, or `.txt` format.
 
-The format of this configuration file is similar to the one used by
-[Docker Registry](/registry/configuration.md).
+See [Docker Registry Configuration](/registry/configuration.md) for configuration options.
 
 ## Local filesystem
 
 By default, DTR creates a volume named `dtr-registry-<replica-id>` to store
 your images using the local filesystem. You can customize the name and path of
-the volume used by DTR, using the `docker/dtr reconfigure --dtr-storage-volume`
-option.
+the volume by using `docker/dtr install --dtr-storage-volume` or `docker/dtr reconfigure --dtr-storage-volume`. 
+
+>  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with [reconfiguring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) before you proceed. To work around the `--nfs-storage-url` flag issue, manually create a storage volume on each DTR node. If DTR is already installed in your cluster, [reconfigure DTR](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) with the `--dtr-storage-volume` flag using your newly-created volume.  
+{: .warning}
 
 If you're deploying DTR with high-availability, you need to use NFS or any other
 centralized storage backend so that all your DTR replicas have access to the
 same images.
 
-To check how much space your images are taking in the local filesystem, you
-can ssh into the node where DTR is deployed and run:
+To check how much space your images are utilizing in the local filesystem, SSH into the DTR node and run:
 
 ```bash
 {% raw %}
@@ -62,15 +68,28 @@ $(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<dtr-r
 {% endraw %}
 ```
 
-## NFS
+### NFS
 
 You can configure your DTR replicas to store images on an NFS partition, so that
 all replicas can share the same storage backend.
 
 [Learn how to configure DTR with NFS](nfs.md).
 
+## Cloud Storage
 
-## Amazon S3
+### Amazon S3
 
-DTR supports AWS3 or other storage systems that are S3-compatible like Minio.
-[Learn how to configure DTR with Amazon S3](s3.md).
+DTR supports Amazon S3 or other storage systems that are S3-compatible like Minio.
+[Learn how to configure DTR with Amazon S3](s3.md). 
+
+
+
+## Where to go next
+
+- [Switch storage backends](storage-backend-migration.md)
+- [Use NFS](nfs.md)
+- [Use S3](s3.md)
+- CLI reference pages
+  - [docker/dtr install](/reference/dtr/2.6/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/)
+  - [docker/dtr restore](/reference/dtr/2.6/cli/restore/)

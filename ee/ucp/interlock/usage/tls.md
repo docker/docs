@@ -1,18 +1,26 @@
 ---
+<<<<<<< HEAD
+title: Secure services with TLS
+description: Learn how to configure your swarm services with TLS.
+=======
 title: Securing services with TLS
 description: Learn how to configure your swarm services with TLS using the layer
   7 routing solution for UCP.
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 keywords: routing, proxy, tls
 ---
 
+<<<<<<< HEAD
+=======
 # Securing services with TLS
+>>>>>>> df4abbfc665cd5b9e518a8f6d91bd686f1bf8ce5
 After [deploying a layer 7 routing solution](../deploy/index.md), you have two options for securing your
 services with TLS:
 
-* Let the proxy terminate the TLS connection. All traffic between end-users and
+* [Let the proxy terminate the TLS connection.](#let-the-proxy-handle-tls) All traffic between end-users and
 the proxy is encrypted, but the traffic going between the proxy and your swarm
 service is not secured.
-* Let your swarm service terminate the TLS connection. The end-to-end traffic
+* [Let your swarm service terminate the TLS connection.](#let-your-service-handle-tls) The end-to-end traffic
 is encrypted and the proxy service allows TLS traffic to passthrough unchanged.
 
 Regardless of the option selected to secure swarm services, there are two steps required to
@@ -21,7 +29,6 @@ route traffic with TLS:
 1. Create [Docker secrets](/engine/swarm/secrets.md) to manage from a central
 place the private key and certificate used for TLS.
 2. Add labels to your swarm service for UCP to reconfigure the proxy service.
-
 
 ## Let the proxy handle TLS
 The following example deploys a swarm service and lets the proxy service handle

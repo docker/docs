@@ -10,10 +10,6 @@ Windows systems that do not
 meet minimal system requirements for the [Docker Desktop for
 Windows](/docker-for-windows/index.md) app.
 
-If you have not done so already, download the installer here:
-
-[Get Docker Toolbox for Windows](https://download.docker.com/win/stable/DockerToolbox.exe){: class="button outline-btn" }
-
 ## What you get and how it works
 
 Docker Toolbox includes the following Docker tools:
@@ -102,6 +98,8 @@ If you have Virtual Box running, you must shut it down before running the
 installer.
 
 1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
+
+> **Note**: To continue with the latest version of Docker Toolbox, see https://github.com/docker/toolbox/releases for information about downloading the latest version and related components. If you choose to download from this location, an unsigned warning (verified publisher dialog) is displayed. 
 
 2. Click the installer link to download.
 

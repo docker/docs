@@ -15,15 +15,17 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * [Docker EE Engine](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
-* A static IP address
-
+* [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
+ 
 ### Minimum requirements
 
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
 * 2 vCPUs for manager nodes
-* 4GB of free disk space for the `/var` partition for manager nodes
+* 5GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
+
+**Note**: Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
 
 ### Recommended production requirements
 

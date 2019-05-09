@@ -10,7 +10,7 @@ redirect_from:
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine Enterprise Edition (Docker EE) and Community Edition (CE)
+for Docker Engine Enterprise Edition (Docker EE) and Community Edition (CE).
 
 Docker EE is a superset of all the features in Docker CE. It incorporates defect fixes 
 that you can use in environments where new features cannot be adopted as quickly for 
@@ -28,6 +28,74 @@ consistency and compatibility reasons.
 > to get the latest patch releases. For example, on Ubuntu:
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
+
+## 18.09.6 
+
+2019-05-06
+
+### Builder
+* Fixed `COPY` and `ADD` with multiple `<src>` to not invalidate cache if `DOCKER_BUILDKIT=1`.[moby/moby#38964](https://github.com/moby/moby/issues/38964)
+
+### Networking
+* Cleaned up the cluster provider when the agent is closed. [docker/libnetwork#2354](https://github.com/docker/libnetwork/pull/2354)
+* Windows: Now selects a random host port if the user does not specify a host port. [docker/libnetwork#2369](https://github.com/docker/libnetwork/pull/2369)
+* `--service-cluster-ip-range` is now configurable for UCP install. [docker/orca#10263](https://github.com/docker/orca/issues/10263)
+ 
+### Known Issues
+* There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
+
+## 18.09.5
+
+2019-04-11
+
+### Builder
+
+* Fixed `DOCKER_BUILDKIT=1 docker build --squash ..` [docker/engine#176](https://github.com/docker/engine/pull/176)
+
+### Client
+
+* Fixed tty initial size error. [docker/cli#1775](https://github.com/docker/cli/pull/1775)
+* Fixed dial-stdio goroutine leakage. [docker/cli#1795](https://github.com/docker/cli/pull/1795)
+* Fixed the stack informer's selector used to track deployment. [docker/cli#1794](https://github.com/docker/cli/pull/1794)
+
+### Networking
+
+* Fixed `network=host` using wrong `resolv.conf` with `systemd-resolved`. [docker/engine#180](https://github.com/docker/engine/pull/180)
+* Fixed Windows ARP entries getting corrupted randomly under load. [docker/engine#192](https://github.com/docker/engine/pull/192)
+
+### Runtime
+* Now showing stopped containers with restart policy as `Restarting`. [docker/engine#181](https://github.com/docker/engine/pull/181)
+* Now using original process spec for execs. [docker/engine#178](https://github.com/docker/engine/pull/178)
+
+### Swarm Mode
+
+* Fixed leaking task resources when nodes are deleted. [docker/engine#185](https://github.com/docker/engine/pull/185)
+
+### Known Issues
+
+* There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
+
+## 18.09.4
+
+ 2019-03-28
+
+### Builder
+
+* Added validation for `git ref` to avoid misinterpretation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
+
+### Runtime
+
+* Fixed `docker cp` error for filenames greater than 100 characters. [moby/moby#38634](https://github.com/moby/moby/pull/38634)
+* Fixed `layer/layer_store` to ensure `NewInputTarStream` resources are released. [moby/moby#38413](https://github.com/moby/moby/pull/38413)
+* Increased GRPC limit for `GetConfigs`. [moby/moby#38800](https://github.com/moby/moby/pull/38800)
+* Updated `containerd` 1.2.5. [docker/engine#173](https://github.com/docker/engine/pull/173)
+
+### Swarm Mode
+* Fixed nil pointer exception when joining node to swarm. [moby/moby#38618](https://github.com/moby/moby/issues/38618)
+* Fixed issue for swarm nodes not being able to join as masters if http proxy is set. [moby/moby#36951]
+
+### Known Issues
+* There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
 
 ## 18.09.3
 
@@ -246,7 +314,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 
 ### Deprecation Notice
 
-As of EE 2.2, Docker will deprecate support for Device Mapper as a storage driver. It will continue to be supported at this 
+As of EE 2.1, Docker has deprecated support for Device Mapper as a storage driver. It will continue to be supported at this 
 time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
 EE 2.0 and 2.1 customers. Please contact Sales for more information.
 
@@ -262,6 +330,23 @@ In this release, Docker has also removed support for TLS < 1.2 [moby/moby#37660]
 Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254), and Debian 8 "Jessie" [docker-ce-packaging#255](https://github.com/docker/docker-ce-packaging/pull/255) / [docker-ce-packaging#254](https://github.com/docker/docker-ce-packaging/pull/254).
 
 ## Older Docker Engine EE Release notes
+
+## 18.03.1-ee-8
+
+ 2019-03-28
+
+### Builder
+
+* Added validation for `git ref` to avoid misinterpreation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
+
+### Runtime
+
+* Fixed `docker cp` error for filenames greater than 100 characters. [moby/moby#38634]
+* Fixed `layer/layer_store` to ensure `NewInputTarStream` resources are released. [moby/moby#38413]
+
+### Swarm Mode
+
+* Fixed issue for swarm nodes not being able to join as masters if http proxy is set. [moby/moby#36951]
 
 ## 18.03.1-ee-7
 
@@ -390,6 +475,19 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-21 
+2019-04-11
+
+### Builder
+
+* Added validation for git ref so it can't be misinterpreted as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
+
+### Runtime
+
+* Fixed `docker cp` error with filenames greater than 100 characters. [moby/moby#38634](https://github.com/moby/moby/pull/38634)
+* Removed temporary hot-fix and applied latest upstream patches for CVE-2019-5736. [docker/runc#9](https://github.com/docker/runc/pull/9)
+* Fixed rootfs: umount all procfs and sysfs with `--no-pivot`. [docker/runc#10](https://github.com/docker/runc/pull/10)
 
 ## 17.06.2-ee-20
 2019-02-28
