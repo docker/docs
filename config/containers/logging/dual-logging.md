@@ -7,7 +7,7 @@ title: Reading container logs locally with remote logging drivers
 ## Overview 
 
 In previous versions of Docker Enterprise, the jsonfile and journald log drivers supported reading 
-container logs locally using `docker logs`. However, many third party logging drivers had no 
+container logs using `docker logs`. However, many third party logging drivers had no 
 support for locally reading logs using `docker logs`, including: 
 
 - syslog	
@@ -21,25 +21,23 @@ support for locally reading logs using `docker logs`, including:
 
 This created multiple problems, especially with UCP, when attempting to gather log data in an 
 automated and standard way. Log information could only be accessed and viewed through the 
-third-party solution in the format specified by that third-party tool, which often required authentication. 
+third-party solution in the format specified by that third-party tool. 
 
 Starting with Docker Engine Enterprise 18.03.1-ee-1, you can use `docker logs` to read container 
-logs regardless of the configured logging solution or plugin. This capability, sometimes referred to 
+logs regardless of the configured logging driver or plugin. This capability, sometimes referred to 
 as dual logging, allows you to use `docker logs` to read container logs locally in a consistent format, 
 regardless of the remote log driver used, because the engine is configured to log information to the “local” 
 logging driver. Refer to [Configure the default logging driver](/configure) for additional information. 
 
 **Note**: 
-
-- Dual logging is only available if you are using a third-party logging solution that does not 
-support reading logs via 'docker logs'. 
+ 
 - Dual logging is only supported for Docker Enterprise, and is enabled by default starting with 
 Engine Enterprise 18.03.1-ee-1.
 
 ## Usage
 Dual logging is enabled by default. You must configure either the docker daemon or the container with remote logging driver. 
 
-The following example shows the results of running a `docker logs` command with and wihtout dual logging availability:
+The following example shows the results of running a `docker logs` command with and without dual logging availability:
 
 ### Without dual logging capability:
 When a container or `dockerd` was configured with a remote logging driver such as splunk, an error was 
@@ -66,8 +64,8 @@ displayed when attempting to read container logs locally:
 - Step 3: Read the container logs
     ```
     $ docker logs 7d6ac83a89a0
+    The docker logs command was not available for drivers other than json-file and journald.
     ```
-    The docker logs command was not available for drivers other than json-file and journald and an error was displayed.
 
 ### With dual logging capability:
 To configure a container or docker with a remote logging driver such as splunk:
