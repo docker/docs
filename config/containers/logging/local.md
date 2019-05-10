@@ -57,7 +57,7 @@ The `local` logging driver supports the following logging options:
 
 | Option      | Description                                                                                                                                                                                                   | Example  value                           |
 |:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
-| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to 20MB.                                          | `--log-opt max-size=10m`                 |
+| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to 20m.                                          | `--log-opt max-size=10m`                 |
 | `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. Defaults to 5. | `--log-opt max-file=3`                   |
 | `compress`  | Toggle compression of rotated log files. Enabled by default. | `--log-opt compress=false` |
 
