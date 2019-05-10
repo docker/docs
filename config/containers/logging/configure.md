@@ -155,7 +155,7 @@ see more options.
 
 ## Limitations of logging drivers
 
-- The `docker logs` command, which provides support for the local logging driver, was added in Docker CE version XX.YY?????. The `docker logs` command is only available on the following drivers:
+- The `docker logs` command, which provides support for the local logging driver, was added in Docker CE version 17.05. The `docker logs` command is only available on the following drivers:
     - `json-file`
     - `journald`
     - `local`
