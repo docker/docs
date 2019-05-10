@@ -294,6 +294,8 @@ guides:
       nosync: true
     - path: /config/containers/logging/configure/
       title: Configuring default drivers
+    - path: /config/containers/logging/dual-logging/
+      title: Use docker logs with a logging driver
       nosync: true
   - sectiontitle: Work with external tools
     section:
