@@ -42,7 +42,7 @@ example sets two configurable options on the `json-file` logging driver:
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m",		
+    "max-size": "10m",
     "max-file": "3",
     "labels": "production_status",
     "env": "os,customer"
@@ -50,9 +50,7 @@ example sets two configurable options on the `json-file` logging driver:
 }
 ```
 
-**Note**: `log-opt` configuration options in the `daemon.json` configuration		
-file must be provided as strings. Boolean and numeric values (such as the value		
-for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
+**Note**: `log-opt` configuration options in the `daemon.json` configuration file must be provided as strings. Boolean and numeric values (such as the value for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 If you do not specify a logging driver, the default is `json-file`. Thus,
 the default output for commands such as `docker inspect <CONTAINER>` is JSON.
@@ -157,7 +155,7 @@ see more options.
 
 ## Limitations of logging drivers
 
-- Depending on the version of Docker Engine that you are using, the `docker logs` command is only available on the following drivers:
+- The `docker logs` command, which provides support for the local logging driver, was added in Docker CE version XX.YY?????. The `docker logs` command is only available on the following drivers:
     - `json-file`
     - `journald`
     - `local`
