@@ -1,12 +1,12 @@
 ---
 description: Learn how to read container logs locally when using a third party logging solution.
 keywords: docker, logging, driver
-title: Reading container logs locally with remote logging drivers
+title: Using docker logs to read container logs for remote logging drivers
 ---
 
 ## Overview 
 
-In previous versions of Docker Enterprise, the jsonfile and journald log drivers supported reading 
+In previous versions of Docker Engine Enterprise, the jsonfile and journald log drivers supported reading 
 container logs using `docker logs`. However, many third party logging drivers had no 
 support for locally reading logs using `docker logs`, including: 
 
@@ -29,9 +29,9 @@ as dual logging, allows you to use `docker logs` to read container logs locally 
 regardless of the remote log driver used, because the engine is configured to log information to the “local” 
 logging driver. Refer to [Configure the default logging driver](/configure) for additional information. 
 
-**Note**: 
+## Prerequisites 
  
-- Dual logging is only supported for Docker Enterprise, and is enabled by default starting with 
+- Docker Enterprise - Dual logging is only supported for Docker Enterprise, and is enabled by default starting with 
 Engine Enterprise 18.03.1-ee-1.
 
 ## Usage
