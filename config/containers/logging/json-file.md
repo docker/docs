@@ -22,14 +22,14 @@ located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-The following example sets the log driver to `json-file` and sets the `max-size`
-option.
+The following example sets the log driver to `json-file` and sets the `max-size` and 'max-file' options.
 
 ```json
 {
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "10m"
+    "max-file": "3" 
   }
 }
 ```
