@@ -1,9 +1,9 @@
-command: docker image build
+command: docker builder build
 short: Build an image from a Dockerfile
 long: Build an image from a Dockerfile
-usage: docker image build [OPTIONS] PATH | URL | -
-pname: docker image
-plink: docker_image.yaml
+usage: docker builder build [OPTIONS] PATH | URL | -
+pname: docker builder
+plink: docker_builder.yaml
 options:
 - option: add-host
   value_type: list
@@ -327,6 +327,7 @@ options:
   kubernetes: false
   swarm: false
 deprecated: false
+min_api_version: "1.31"
 experimental: false
 experimentalcli: false
 kubernetes: false

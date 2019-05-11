@@ -7,6 +7,7 @@ cname:
 - docker commit
 - docker config
 - docker container
+- docker context
 - docker cp
 - docker create
 - docker deploy
@@ -66,6 +67,7 @@ clink:
 - docker_commit.yaml
 - docker_config.yaml
 - docker_container.yaml
+- docker_context.yaml
 - docker_cp.yaml
 - docker_create.yaml
 - docker_deploy.yaml

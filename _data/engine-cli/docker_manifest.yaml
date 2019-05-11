@@ -83,7 +83,7 @@ examples: "### Inspect an image's manifest object\n \n```bash\n$ docker manifest
   IP and port.\nThis is similar to tagging an image and pushing it to a foreign registry.\n\nAfter
   you have created your local copy of the manifest list, you may optionally\n`annotate`
   it. Annotations allowed are the architecture and operating system (overriding the
-  image's current values),\nos features, and an archictecure variant. \n\nFinally,
+  image's current values),\nos features, and an architecture variant. \n\nFinally,
   you need to `push` your manifest list to the desired registry. Below are descriptions
   of these three commands,\nand an example putting them all together.\n\n```bash\n$
   docker manifest create 45.55.81.106:5000/coolapp:v1 \\\n    45.55.81.106:5000/coolapp-ppc64le-linux:v1
@@ -122,7 +122,7 @@ examples: "### Inspect an image's manifest object\n \n```bash\n$ docker manifest
   docker manifest push --insecure myprivateregistry.mycompany.com/repo/image:tag\n```\n\nNote
   that the `--insecure` flag is not required to annotate a manifest list, since annotations
   are to a locally-stored copy of a manifest list. You may also skip the `--insecure`
-  flag if you are performaing a `docker manifest inspect` on a locally-stored manifest
+  flag if you are performing a `docker manifest inspect` on a locally-stored manifest
   list. Be sure to keep in mind that locally-stored manifest lists are never used
   by the engine on a `docker pull`."
 deprecated: false

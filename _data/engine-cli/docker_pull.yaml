@@ -57,6 +57,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress verbose output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Pull an image from Docker Hub
 
