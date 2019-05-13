@@ -1327,6 +1327,8 @@ manuals:
         title: Environment variables
     - path: /ee/end-to-end-install/
       title: Install components individually
+  - path: /ee/enable-client-certificate-authentication/
+    title: Enable client certificate authentication with your PKI
   - sectiontitle: Back up Docker Enterprise
     section:
     - path: /ee/admin/backup/

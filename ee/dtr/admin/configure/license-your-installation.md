@@ -4,35 +4,53 @@ description: Learn how to license your Docker Trusted Registry installation.
 keywords: dtr, install, license
 ---
 
-By default, you don't need to license your Docker Trusted Registry. When
-installing DTR, it automatically starts using the same license file used on
-your Docker Universal Control Plane cluster.
+By default, Docker Trusted Registry (DTR) automatically uses the same license file applied to
+your Universal Control Plane (UCP). In the following scenarios, you need to
+manually apply a license to your DTR:
 
-However, there are some situations when you have to manually license your
-DTR installation:
-
-* When upgrading to a new major version,
-* When your current license expires.
+* Major version upgrade
+* License expiration
 
 
 ## Download your license
 
-Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial)
-to download a trial license.
+Visit Docker Hub's [Enterprise Trial page](https://hub.docker.com/editions/enterprise/docker-ee-trial) to start your one-month trial. After signing up, you should receive a confirmation email with a link to your subscription page. You can find your **License Key** in the **Resources** section of the Docker Enterprise Setup Instructions page.  
 
-![](../../images/license-1.png){: .with-border}
+![](/ee/dtr/images/license-1.png){: .with-border}
 
+Click "License Key" to download your license.
 
 ## License your installation
 
-Once you've downloaded the license file, you can apply it to your DTR
-installation. Navigate to the **DTR web UI**, and then go to the **Settings
-page**.
+After downloading your license key, navigate to `https://<dtr-url>` and log in with your credentials.
+Select **System** from the left navigation pane, and click *Apply new license* to upload your license
+key.
 
-![](../../images/license-2.png){: .with-border}
+![](/ee/dtr/images/license-2.png){: .with-border}
 
-Click the **Apply new license** button, and upload your new license file.
+## View licensing information
+
+You can send a `GET` request to `api/v0/admin/settings/license` to view more details on the license applied to your DTR. Use your DTR Fully Qualified Domain Name (FQDN) as the base URL for your API request.
+
+### Example API request
+```bash
+curl -u docker:$TOKEN -X GET "https://34.219.67.189/api/v0/admin/settings/license -H "accept: application/json"
+```
+
+### Example API response
+```json
+{
+  "is_valid": true,
+  "auto_refresh": false,
+  "scanning_enabled": true,
+  "expiration": "2019-07-09T22:26:01Z",
+  "key_id": "2SDaULA3xBvQ8Hrp-05-7_JPrWdthGINT0ZI3ArdhAK6",
+  "tier": "Advanced",
+  "type": "Offline"
+}
+```
 
 ## Where to go next
 
-- [Enable single sign-on](enable-single-sign-on.md)
+- [Use your own TLS certificates](use-your-own-tls-certificates)
+- [Enable single sign-on](enable-single-sign-on)
