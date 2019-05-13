@@ -145,6 +145,7 @@ see more options.
 | Driver                        | Description                                                                                                   |
 |:------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `none`                        | No logs are available for the container and `docker logs` does not return any output.                         |
+| [`local`](local.md)           | Logs are stored in a custom format designed for minimal overhead.                                             |
 | [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
 | [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
 | [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
@@ -155,18 +156,13 @@ see more options.
 | [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.           |
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                   |
 | [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                     |
-| [`local`](local.md)           | Logs are stored in a custom format designed for minimal overhead.                                             |
 
 ## Limitations of logging drivers
 
-- When using Docker Community Engine, the `docker logs` command is only available on the following drivers:
-    - `json-file`
-    - `journald`
-    - `local`
-
-Users of Docker Enterprise can make use of "dual logging", which enables you to use the `docker logs`
-command for any logging driver. Refer to [Reading logs when using remote logging drivers](/config/containers/logging/dual-logging.md)
-for information about using `docker logs` to read container logs locally for many third party logging solutions, including: 
+- Users of Docker Enterprise can make use of "dual logging", which enables you to use the `docker logs`
+command for any logging driver. Refer to 
+[Reading logs when using remote logging drivers](/config/containers/logging/dual-logging/) for information about 
+using `docker logs` to read container logs locally for many third party logging solutions, including: 
 
     - syslog	
     - gelf	
@@ -176,6 +172,12 @@ for information about using `docker logs` to read container logs locally for man
     - etwlogs	
     - gcplogs	
     - Logentries
+    
+- When using Docker Community Engine, the `docker logs` command is only available on the following drivers:
+
+    - `local`
+    - `json-file`
+    - `journald`
 
 - Reading log information requires decompressing rotated log files, which causes a temporary increase in disk usage (until the log entries from the rotated files are read) and an increased CPU usage while decompressing. 
 - The capacity of the host storage where docker’s data directory resides determines the maximum size of the log file information.
