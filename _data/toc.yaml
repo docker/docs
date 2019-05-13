@@ -1383,8 +1383,8 @@ manuals:
           path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
         - title: Use Azure Disk Storage
           path: /ee/ucp/kubernetes/storage/use-azure-disk/
-        - title: Use Azure File Storage
-          path: /ee/ucp/kubernetes/storage/use-azure-file/
+        - title: Use Azure Files Storage
+          path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
     - title: API reference
