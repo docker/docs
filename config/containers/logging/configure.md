@@ -65,7 +65,7 @@ command on Linux, macOS, or PowerShell on Windows:
 ```bash
 $ docker info --format '{{.LoggingDriver}}'
 
-Logging Driver: json-file
+json-file
 ```
 {% endraw %}
 
