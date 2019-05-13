@@ -6,7 +6,7 @@ title: Using docker logs to read container logs for remote logging drivers
 
 ## Overview 
 
-In previous versions of Docker Engine Enterprise, the jsonfile and journald log drivers supported reading 
+Prior to Docker Engine Enterprise 18.03, the `jsonfile` and `journald` log drivers supported reading 
 container logs using `docker logs`. However, many third party logging drivers had no 
 support for locally reading logs using `docker logs`, including: 
 
