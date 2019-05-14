@@ -14,7 +14,7 @@ A _service template_ is a container image that generates code and contains the m
 
 - The metadata file that describes the service template is called the service definition.  It contains the name of the service, description, and available parameters such as ports, volumes, etc. For a complete list of parameters that are allowed, see [Docker Template API reference](/ee/app-template/api-reference).
 
-An _application template_ is a collection of one or more service templates.
+An _application template_ is a collection of one or more service templates. An application template generates a Dockerfile per service and only one Compose file for the entire application, aggregating all services.
 
 ## Create a custom service template
 
