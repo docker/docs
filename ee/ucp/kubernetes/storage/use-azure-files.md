@@ -6,40 +6,40 @@ redirect_from:
 ---
 
 Platform operators can provide persistent storage for workloads running on
-Docker Enterprise when running on Microsoft Azure by using Azure Files. Platform
-operators can either pre-provision Azure Files Shares to be consumed by
+Docker Enterprise and Microsoft Azure by using Azure Files. You can either 
+pre-provision Azure Files Shares to be consumed by
 Kubernetes Pods or can you use the Azure Kubernetes integration to dynamically
 provision Azure Files Shares on demand.
 
 ## Prerequisites
 
-This guide assumes you have already provisioned a UCP environment on to
-Microsoft Azure. The Cluster must be provisioned after meeting all of the
-prerequisites within [Install UCP on
+This guide assumes you have already provisioned a UCP environment on 
+Microsoft Azure. The cluster must be provisioned after meeting all 
+prerequisites listed in [Install UCP on
 Azure](/ee/ucp/admin/install/install-on-azure.md).
 
-Additionally, the following guide is using the Kubernetes Command Line tool `$
-kubectl` to provision Kubernetes objects within a UCP cluster. Therefore this
-tool needs to be downloaded, along with a UCP client bundle. For more
-information on configuring CLI access to UCP see [CLI Based
+Additionally, this guide uses the Kubernetes Command Line tool `$
+kubectl` to provision Kubernetes objects within a UCP cluster. Therefore, you must download
+this tool along with a UCP client bundle. For more
+information on configuring CLI access to UCP, see [CLI Based
 Access](/ee/ucp/user-access/cli/).
 
 ## Manually Provisioning Azure Files
 
-An operator can use existing Azure Files Shares or manually provision new ones to
+You can use existing Azure Files Shares or manually provision new ones to
 provide persistent storage for Kubernetes Pods. Azure Files Shares can be
-manually provisioned in the Azure Portal, using ARM Templates or using the Azure
-CLI. In the below example we have used the Azure CLI to manually provision an
+manually provisioned in the Azure Portal using ARM Templates or using the Azure
+CLI. The following example uses the Azure CLI to manually provision 
 Azure Files Shares. 
 
 ### Creating an Azure Storage Account
 
-The first step when manually creating an Azure Files Share, is to create an Azure
-Storage Account for the file shares to live in. If you have already provisioned
-a Storage Account, you can move on to [Creating an Azure Files
+When manually creating an Azure Files Share, first create an Azure
+Storage Account for the file shares. If you have already provisioned
+a Storage Account, you can skip to [Creating an Azure Files
 Share](#creating-an-azure-file-share).
 
-> Note the Azure Kubernetes Driver does not support Azure Storage Accounts
+> **Note**: the Azure Kubernetes Driver does not support Azure Storage Accounts
 > created using Azure Premium Storage. 
 
 ```bash
@@ -56,10 +56,10 @@ $ az storage account create \
 
 ### Creating an Azure Files Share
 
-Next we will provision an Azure Files Share, the size of this share can be
+Next, provision an Azure Files Share. The size of this share can be
 adjusted to fit the end user's requirements. If you have already created an
-Azure Files Share, you can move on to [Configuring a Kubernetes
-Secret](#configuring-a-kubernetes-secret)
+Azure Files Share, you can skip to [Configuring a Kubernetes
+Secret](#configuring-a-kubernetes-secret).
 
 ```bash
 $ SA=mystorageaccount
@@ -78,10 +78,10 @@ $ az storage share create \
 
 ### Configuring a Kubernetes Secret
 
-After a File Share has been created, an Operator needs to load the Azure Storage
-Account Access key as a Kubernetes Secret into UCP, this will provide access to
+After a File Share has been created, you must load the Azure Storage
+Account Access key as a Kubernetes Secret into UCP. This provides access to
 the file share when Kubernetes attempts to mount the share into a pod. This key
-can be found in the Azure Portal, or retrieved as shown below by the Azure CLI. 
+can be found in the Azure Portal or retrieved as shown in the following example by the Azure CLI: 
 
 ```bash
 $ SA=mystorageaccount
@@ -98,10 +98,10 @@ $ kubectl create secret generic azure-secret \
 
 ### Mount the Azure Files Share into a Kubernetes Pod
 
-The final step is to mount the Azure Files Share using the Kubernetes Secret into
-a Kubernetes Pod. Below we have created a standalone Kubernetes pod, however you
-could use alternative Kubernetes Objects such as Deployments, DaemonSets or
-StatefulSets with the existing Azure Files Share.
+The final step is to mount the Azure Files Share, using the Kubernetes Secret, into
+a Kubernetes Pod. The following code creates a standalone Kubernetes pod, but you
+can also use alternative Kubernetes Objects such as Deployments, DaemonSets, or
+StatefulSets, with the existing Azure Files Share.
 
 ```bash
 $ FS=myfileshare
@@ -132,14 +132,14 @@ EOF
 ### Defining the Azure Disk Storage Class
 
 Kubernetes can dynamically provision Azure Files Shares using the Azure
-Kubernetes integration which was configured for you when UCP was installed. For
-Kubernetes to know which APIs to use when provisioning storage, Platform
-operators need to create Kubernetes Storage Classes specific to each storage
+Kubernetes integration, which was configured when UCP was installed. For
+Kubernetes to know which APIs to use when provisioning storage, you must
+create Kubernetes Storage Classes specific to each storage
 backend. For more information on Kubernetes Storage Classes, see [Storage
 Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
-> Today only the Standard Storage Class is supported when using the Azure
-> Kubernetes Plugin, File shares using the Premium Storage Class will fail to
+> Today, only the Standard Storage Class is supported when using the Azure
+> Kubernetes Plugin. File shares using the Premium Storage Class will fail to
 > mount. 
 
 ```bash
@@ -159,7 +159,7 @@ parameters:
 EOF
 ```
 
-To see which Storage Classes have been provisioned.
+To see which Storage Classes have been provisioned:
 
 ```bash
 $ kubectl get storageclasses
@@ -169,16 +169,16 @@ azurefile  kubernetes.io/azure-file   1m
 
 ### Creating an Azure Files Share using a Persistent Volume Claim
 
-After an Operator has created a Storage Class, they can then use Kubernetes
+After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Files Shares. This is done using
 Kubernetes Persistent Volumes Claims
 [PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
-Kubernetes will try and use an existing Azure Storage Account if one exists in
-side of the Azure Resource Group, if an Azure Storage Account does not exist
-Kubernetes will create one. 
+Kubernetes uses an existing Azure Storage Account if one exists inside of the 
+Azure Resource Group. If an Azure Storage Account does not exist,
+Kubernetes creates one. 
 
-The below example will use the standard storage class, and create a 5 GiB Azure
-File Share. These values can be altered to fit your use case. 
+The following example uses the standard storage class and creates a 5 GB Azure
+File Share. Alter these values to fit your use case. 
 
 ```bash
 $ cat <<EOF | kubectl create -f -
@@ -196,8 +196,7 @@ spec:
 EOF
 ```
 
-At this point you should see a new Persistent Volume Claim and Persistent Volume
-have been created. 
+At this point, you should see a newly created Persistent Volume Claim and Persistent Volume: 
 
 ```bash
 $ kubectl get pvc
@@ -211,10 +210,10 @@ pvc-f7ccebf0-70e0-11e9-8d0a-0242ac110007   5Gi        RWX            Delete     
 
 ### Attach the new Azure Files Share to a Kubernetes Pod
 
-Now that a Kubernetes Persistent Volume has been created, we can mount this into
+Now that a Kubernetes Persistent Volume has been created, mount this into
 a Kubernetes Pod. The file share can be consumed by any Kubernetes object type
-such as a Deployment, DaemonSet or StatefulSet. However in the following
-example we are just mounting the persistent volume into a standalone pod.
+such as a Deployment, DaemonSet, or StatefulSet. However, the following
+example just mounts the persistent volume into a standalone pod.
 
 ```bash
 $ cat <<EOF | kubectl create -f -
