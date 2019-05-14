@@ -16,6 +16,48 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ## Docker Desktop Enterprise Releases of 2019
 
+### Docker Desktop Enterprise 2.0.0.3
+
+2019-04-26
+
+- Upgrades
+
+  - [Docker Engine 19.03.0-beta2](https://docs.docker.com/engine/release-notes/) for Version Pack Enterprise 3.0.
+
+### Docker Desktop Enterprise 2.0.0.2
+
+2019-04-19
+
+**WARNING:** You must upgrade the previously installed Version Packs to the latest revision.
+
+- New
+
+  - Version Pack Enterprise 3.0 with [Docker Engine 19.03.0-beta1](https://docs.docker.com/engine/release-notes/) and [Kubernetes 1.14.1](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#changelog-since-v1141)
+
+  - Application Designer now includes new templates for AngularJS and VueJS.
+
+- Upgrades
+
+  - [Docker Compose 1.24.0](https://github.com/docker/compose/releases/tag/1.24.0)
+
+  - [Docker Engine 18.09.5](https://docs.docker.com/engine/release-notes/), [Kubernetes 1.11.7](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1117) and [Compose on Kubernetes 0.4.22](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.22) for Version Pack Enterprise 2.1
+
+  - [Docker Engine 17.06.2-ee-21](https://docs.docker.com/engine/release-notes/) for Version Pack Enterprise 2.0
+
+- Bug fixes and minor changes
+
+  - For security, only administrators can install or upgrade Version Packs using the `dockerdesktop-admin` tool.
+
+  - Truncate UDP DNS responses which are over 512 bytes in size
+
+  - Fixed airgap install of kubernetes in version pack enterprise-2.0
+
+  - Reset to factory default now resets to admin defaults
+
+- Known issues
+
+  - The Docker Template CLI plugin included in this version is an outdated version of the plugin and will fail when scaffolding templates. Note that the Application Designer is not affected by this outdated version of the CLI plugin.
+
 ### Docker Desktop Enterprise 2.0.0.1
 
 2019-03-01
