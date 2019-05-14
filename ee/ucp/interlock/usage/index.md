@@ -151,13 +151,12 @@ able to start using the service from your browser.
 ## Next steps
 
 - [Publish a service as a canary instance](./canary.md)
-- [Usie context or path-based routing](./context.md)
+- [Use context or path-based routing](./context.md)
 - [Publish a default host service](./interlock-vip-mode.md)
 - [Specify a routing mode](./interlock-vip-mode.md)
 - [Use routing labels](./labels-reference.md)
 - [Implement redirects](./redirects.md)
 - [Implement a service cluster](./service-clusters.md)
 - [Implement persistent (sticky) sessions](./sessions.md)
-- [Implement SSL](./ssl.md)
 - [Secure services with TLS](./tls.md)
 - [Configure websockets](./websockets.md)
