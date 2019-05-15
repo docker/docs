@@ -544,6 +544,8 @@ reference:
       section:
         - path: /engine/reference/commandline/builder/
           title: docker builder
+        - path: /engine/reference/commandline/builder_build/
+          title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
     - sectiontitle: docker checkpoint *
@@ -624,6 +626,26 @@ reference:
         title: docker container update
       - path: /engine/reference/commandline/container_wait/
         title: docker container wait
+    - sectiontitle: docker context *
+      section:
+        - path: /engine/reference/commandline/context/
+          title: docker context
+        - path: /engine/reference/commandline/context_create/
+          title: docker context create
+        - path: /engine/reference/commandline/context_export/
+          title: docker context export
+        - path: /engine/reference/commandline/context_import/
+          title: docker context import
+        - path: /engine/reference/commandline/context_inspect/
+          title: docker context inspect
+        - path: /engine/reference/commandline/context_ls/
+          title: docker context ls
+        - path: /engine/reference/commandline/context_rm/
+          title: docker context rm
+        - path: /engine/reference/commandline/context_update/
+          title: docker context update
+        - path: /engine/reference/commandline/context_use/
+          title: docker context use
     - path: /engine/reference/commandline/cp/
       title: docker cp
     - path: /engine/reference/commandline/create/

@@ -336,6 +336,7 @@ examples: |-
     my-ingress-network
   ```
 deprecated: false
+min_api_version: "1.21"
 experimental: false
 experimentalcli: false
 kubernetes: false
