@@ -77,7 +77,7 @@ The parameters section allows to specify the input parameters that are going to 
 | :----------------------|:----------------------|:----------------------------------------|
 |name            |yes| The identifier for this parameter. Must be unique within the service parameters. |
 |description| no|A short description of the parameter. Will be used as label in the Application Designer|
-|type| yes|The type of the parameter. Possible options are: <br> `string` - The default type, with no validation or specific features.<br> `enum` - Allow the user to choose a value included in a specific list of options. Must specify the values parameter.<br> `hostPort` - Specify that this parameter is a port that is going to be exposed. Use port format regexp validation, and avoid duplicate ports within an application.|
+|type| yes|The type of the parameter. Possible options are: `string` - The default type, with no validation or specific features. `enum` - Allow the user to choose a value included in a specific list of options. Must specify the values parameter. `hostPort` - Specify that this parameter is a port that is going to be exposed. Use port format regexp validation, and avoid duplicate ports within an application.|
 |defaultValue| yes|The default value for this parameter. For enum type, must be a valid value from the values list.|
 |values| no|For enum type, specify a list of value with a value/description tuple.|
 
