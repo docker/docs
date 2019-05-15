@@ -490,6 +490,10 @@ guides:
       title: NISTIR 8176
     - path: /compliance/nist/itl_october2017/
       title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal
+      title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
