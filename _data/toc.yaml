@@ -1292,6 +1292,8 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
+        - path: /ee/ucp/admin/configure/integrate-scim/
+          title: SCIM integration
         - path: /ee/ucp/admin/configure/enable-helm-tiller/
           title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
