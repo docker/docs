@@ -916,6 +916,24 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
+    - sectiontitle: docker template *
+      section:
+        - path: /engine/reference/commandline/template/
+          title: docker template
+        - path: /engine/reference/commandline/template_config/
+          title: docker template config
+        - path: /engine/reference/commandline/template_config_set/
+          title: docker template config set
+        - path: /engine/reference/commandline/template_config_view/
+          title: docker template config view
+        - path: /engine/reference/commandline/template_inspect/
+          title: docker template inspect
+        - path: /engine/reference/commandline/template_list/
+          title: docker template list
+        - path: /engine/reference/commandline/template_scaffold/
+          title: docker template scaffold
+        - path: /engine/reference/commandline/template_version/
+          title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
     - sectiontitle: docker trust *
