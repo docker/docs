@@ -490,6 +490,10 @@ guides:
       title: NISTIR 8176
     - path: /compliance/nist/itl_october2017/
       title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal
+      title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
@@ -544,6 +548,8 @@ reference:
       section:
         - path: /engine/reference/commandline/builder/
           title: docker builder
+        - path: /engine/reference/commandline/builder_build/
+          title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
     - sectiontitle: docker checkpoint *
@@ -624,6 +630,26 @@ reference:
         title: docker container update
       - path: /engine/reference/commandline/container_wait/
         title: docker container wait
+    - sectiontitle: docker context *
+      section:
+        - path: /engine/reference/commandline/context/
+          title: docker context
+        - path: /engine/reference/commandline/context_create/
+          title: docker context create
+        - path: /engine/reference/commandline/context_export/
+          title: docker context export
+        - path: /engine/reference/commandline/context_import/
+          title: docker context import
+        - path: /engine/reference/commandline/context_inspect/
+          title: docker context inspect
+        - path: /engine/reference/commandline/context_ls/
+          title: docker context ls
+        - path: /engine/reference/commandline/context_rm/
+          title: docker context rm
+        - path: /engine/reference/commandline/context_update/
+          title: docker context update
+        - path: /engine/reference/commandline/context_use/
+          title: docker context use
     - path: /engine/reference/commandline/cp/
       title: docker cp
     - path: /engine/reference/commandline/create/
@@ -894,6 +920,24 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
+    - sectiontitle: docker template *
+      section:
+        - path: /engine/reference/commandline/template/
+          title: docker template
+        - path: /engine/reference/commandline/template_config/
+          title: docker template config
+        - path: /engine/reference/commandline/template_config_set/
+          title: docker template config set
+        - path: /engine/reference/commandline/template_config_view/
+          title: docker template config view
+        - path: /engine/reference/commandline/template_inspect/
+          title: docker template inspect
+        - path: /engine/reference/commandline/template_list/
+          title: docker template list
+        - path: /engine/reference/commandline/template_scaffold/
+          title: docker template scaffold
+        - path: /engine/reference/commandline/template_version/
+          title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
     - sectiontitle: docker trust *
@@ -1252,6 +1296,8 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
+        - path: /ee/ucp/admin/configure/integrate-scim/
+          title: SCIM integration
         - path: /ee/ucp/admin/configure/enable-helm-tiller/
           title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
@@ -3152,6 +3198,12 @@ manuals:
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
+- sectiontitle: Docker Template
+  section:
+  - path: /app-template/working-with-template/
+    title: Working with Docker Template
+  - path: /app-template/cli-reference/
+    title: CLI reference
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/

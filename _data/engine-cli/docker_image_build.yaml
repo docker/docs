@@ -182,6 +182,17 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: output
+  shorthand: o
+  value_type: stringArray
+  default_value: '[]'
+  description: 'Output destination (format: type=local,dest=path)'
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: platform
   value_type: string
   description: Set platform if server is multi-platform capable
