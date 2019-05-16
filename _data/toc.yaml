@@ -1478,7 +1478,9 @@ manuals:
         - title: Use NFS storage
           path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
         - title: Use AWS EBS Storage
-          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
+        - title: Configure iSCSI
+          path: /ee/ucp/kubernetes/storage/use-iscsi/
     - title: API reference
       path: /reference/ucp/3.1/api/
       nosync: true
