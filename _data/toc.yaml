@@ -1483,6 +1483,8 @@ manuals:
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
+      - title: Deploy a CSI plugin
+        path: /ee/ucp/kubernetes/use-csi/
       - sectiontitle: Persistent Storage
         section:
         - title: Use NFS Storage

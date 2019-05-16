@@ -19,6 +19,149 @@ upgrade your installation to the latest release.
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
+# Version 3.2.0-beta
+(2019-5-16)
+
+## New features
+
+### Group Managed Service Accounts (gMSA)
+On Windows, you can create or update a service using --credential-spec with the config://<config-name> format. 
+This passes the gMSA credentials file directly to nodes before a container starts. 
+
+### Open Security Controls Assessment Language (OSCAL)
+OSCAL API endpoints have been added in Engine and UCP. These endpoints are enabled by default.
+
+### Container storage interface (CSI)
+Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins. 
+Note: As of May 2019, none of the 
+(available CSI drivers)[https://kubernetes-csi.github.io/docs/drivers.html] are production quality and are considered pre-GA.
+
+### Internet Small Computer System Interface (iSCSI)
+Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end 
+users can request storage resources without needing underlying infrastructure knowledge.
+
+### System for Cross-domain Identity Management (SCIM)
+SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing 
+user status and group membership.
+
+## Enhancements
+
+### Backup/restore
+
+- Backups no longer halt UCP containers.
+- Backup contents can now be redirected to a file instead of stdout/err.
+- You can now view information for all backups performed, including the date, status, and contents filenames. 
+Error log information can be accessed for troubleshooting.
+
+### Upgrade
+
+- Improved progress information for install and upgrade.
+- You can now manually control worker node upgrades.
+- User workloads no longer experience downtime during an upgrade.
+ 
+## Deprecations
+The following features are deprecated in UCP 3.1:
+
+- Collections
+    - The ability to create a nested collection of more than 2 layers deep within the root /Swarm/collection is 
+    now deprecated and will not be included in future versions of the product. However, current nested collections 
+    with more than 2 layers are still retained.
+    - Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster 
+    collection designated as /Swarm/. For example, if a production collection called /Swarm/production is created 
+    under the shared cluster collection /Swarm/, only one level of nesting should be created, for 
+    example, /Swarm/production/app/. See Nested collections for more details.    
+- UCP `stop` and `restart`
+    - Additional upgrade functionality has been included which eliminates the need for these commands. 
+ 
+## Browser support 
+In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
+
+## Kubernetes
+Updated Kubernetes to version 1.14.
+
+- Enhancements:
+    - PodShareProcessNamespace
+       
+        - The PodShareProcessNamespace feature, available by default, configures PID namespace sharing within a pod. 
+        See [Share Process Namespace between Containers in a Pod](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) for more information.
+         - https://github.com/kubernetes/kubernetes/pull/66507
+    - Volume Dynamic Provisioning
+    
+        - Combined `VolumeScheduling` and `DynamicProvisioningScheduling`.
+        - Added allowedTopologies description in kubectl. 
+        - ACTION REQUIRED: The DynamicProvisioningScheduling alpha feature gate has been removed. 
+        The VolumeScheduling beta feature gate is still required for this feature)
+https://github.com/kubernetes/kubernetes/pull/67432
+    - TokenRequest and TokenRequestProjection
+    
+        - Enable these features by starting the API server with the following flags:
+            * --service-account-issuer
+            * --service-account-signing-key-file
+            * --service-account-api-audiences
+        - https://github.com/kubernetes/kubernetes/pull/67349
+    - Removed `--cadvisor-port flag` from kubelet 
+    
+        - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed 
+        in 1.12. If cAdvisor is needed, run it via a DaemonSet.
+        - https://github.com/kubernetes/kubernetes/pull/65707
+    - Support for Windows Server Containers
+    
+        - Supports Windows Server Containers and Windows Server 2016 as the operating system of 
+        choice for the windows-based kubelet. You can run Windows-based and .NET-based applications inside 
+        containers on Kubernetes. 
+        - https://github.com/kubernetes/enhancements/issues/116
+    - Support for Out-of-tree CSI Volume Plugins (stable) with API
+    
+        - Allows volume plugins to be developed out-of-tree.
+        - Not require building volume plugins (or their dependencies) into Kubernetes binaries.
+        - Not requiring direct machine access to deploy new volume plugins (drivers).
+        - https://github.com/kubernetes/enhancements/issues/178
+    - Server-side Apply leveraged by the UCP GUI for the yaml create page
+    
+        - Moved "apply" and declarative object management from kubectl to the apiserver. Added "field ownership".
+        - https://github.com/kubernetes/enhancements/issues/555
+    - The PodPriority admission plugin
+    
+        - For `kube-apiserver`, the `Priority` admission plugin is now enabled by default when using `--enable-admission-plugins`. If using `--admission-control` to fully specify the set of admission plugins, the `Priority` admission plugin should be added if using the `PodPriority` feature, which is enabled by default in 1.11.
+        - The priority admission plugin:
+            - Allows pod creation to include an explicit priority field if it matches the computed 
+            priority (allows export/import cases to continue to work on the same cluster, between 
+            clusters that match priorityClass values, and between clusters where priority is unused 
+            and all pods get priority:0)
+            - Preserves existing priority if a pod update does not include a priority value and the old 
+            pod did (allows POST, PUT, PUT, PUT workflows to continue to work, with the admission-set value 
+            on create being preserved by the admission plugin on update)
+            - https://github.com/kubernetes/kubernetes/pull/65739
+    - Volume Topology
+    
+        - Made the scheduler aware of a Pod's volume's topology constraints, such as zone or node.
+        - https://github.com/kubernetes/enhancements/issues/490, Docs pr here: kubernetes/website#10736
+    - Admin RBAC role and edit RBAC roles
+        - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a 
+        separate edit and view.
+        - https://github.com/kubernetes/kubernetes/pull/66684
+    - API 
+        - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods 
+        metrics, as well as allow AverageValue targets on Objects, similar to External metrics.
+        - https://github.com/kubernetes/kubernetes/pull/64097
+- Version updates
+    - Client-go libraries bump
+        - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric 
+    characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or 
+    other characters disallowed in HTTP headers.
+        - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. 
+    New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped.
+        - https://github.com/kubernetes/kubernetes/pull/65799
+    - audit.k8s.io API group bump
+        - The audit.k8s.io API group has been bumped to v1.
+        - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
+        - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` 
+    to `audit.k8s.io/v1`.
+        - https://github.com/kubernetes/kubernetes/pull/65891
+- Known issues
+    - Backwards-incompatible changes in the Kube API that might affect user workloads will require warnings/documentation in the UCP release notes for Amberjack (list of deprecated features and APIs TBD).
+    - Does anything need to be noted for Kube 1.12 (deprecations, etc. that is not covered for 1.13?)
+
 # Version 3.1
 
 ## 3.1.7 
