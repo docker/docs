@@ -24,8 +24,7 @@ Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
   `docker-machine` to manage remote VMs.
 
 * **System Requirements**:
-  - Windows 10 64bit: Pro, Enterprise or Education (1607 Anniversary Update,
-    Build 14393 or later).
+  - Windows 10 64bit: Pro, Enterprise or Education (Build 15063 or later).
   - Virtualization is enabled in BIOS. Typically, virtualization is enabled by
     default. This is different from having Hyper-V enabled. For more detail see
     [Virtualization must be

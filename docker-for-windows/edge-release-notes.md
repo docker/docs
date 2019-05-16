@@ -23,7 +23,7 @@ for Windows](install.md#download-docker-for-windows).
 [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
 
 * Bug fixes and minor changes
-  - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices. [docker/for-mac#3646](https://github.com/docker/for-mac/issues/3646)
+  - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices.
 
 ### Docker Community Edition 2.0.4.0 2019-04-30
 
