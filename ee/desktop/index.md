@@ -4,7 +4,13 @@ description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 ---
 
-Docker Desktop Enterprise (DDE) provides local development, testing, and building of Docker applications on Mac and Windows. With work performed locally, developers can leverage a rapid feedback loop before pushing code or Docker images to shared servers / continuous integration infrastructure.
+Welcome to Docker Desktop Enterprise. This page contains information about the Docker Desktop Enterprise (DDE) release. For information about Docker Desktop Community, see:
+
+- [Docker Desktop for Mac (Community)](/docker-for-mac/){: target="_blank" class="_"}
+
+- [Docker Desktop for Windows (Community)](/docker-for-windows/){: target="_blank" class="_"}
+
+Docker Desktop Enterprise provides local development, testing, and building of Docker applications on Mac and Windows. With work performed locally, developers can leverage a rapid feedback loop before pushing code or Docker images to shared servers / continuous integration infrastructure.
 
 Docker Desktop Enterprise takes Docker Desktop Community, formerly known as Docker for Windows and Docker for Mac, a step further with simplified enterprise application development and maintenance. With DDE, IT organizations can ensure developers are working with the same version of Docker Desktop and can easily distribute Docker Desktop to large teams using third-party endpoint management applications. With the Docker Desktop graphical user interface (GUI), developers do not have to work with lower-level Docker commands and can auto-generate Docker artifacts.
 
