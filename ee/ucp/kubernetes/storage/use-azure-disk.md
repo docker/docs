@@ -25,7 +25,7 @@ tool must be downloaded, along with a UCP client bundle. For more
 information on configuring CLI access for UCP, see [CLI Based
 Access](/ee/ucp/user-access/cli/).
 
-## Manually Provisioning Azure Disks
+## Manually provision Azure Disks
 
 An operator can use existing Azure Disks or manually provision new ones to
 provide persistent storage for Kubernetes Pods. Azure Disks can be manually
@@ -79,9 +79,9 @@ spec:
 EOF
 ```
 
-## Dynamically Provisioning Azure Disks
+## Dynamically provision Azure Disks
 
-### Defining the Azure Disk Storage Class
+### Define the Azure Disk Storage Class
 
 Kubernetes can dynamically provision Azure Disks using the Azure Kubernetes
 integration, which was configured when UCP was installed. For Kubernetes
@@ -136,7 +136,7 @@ premium    kubernetes.io/azure-disk   1m
 standard   kubernetes.io/azure-disk   1m
 ```
 
-### Creating an Azure Disk with a Persistent Volume Claim
+### Create an Azure Disk with a Persistent Volume Claim
 
 After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Disks. This is done using Kubernetes
@@ -176,7 +176,7 @@ NAME                                       CAPACITY   ACCESS MODES   RECLAIM POL
 pvc-587deeb6-6ad6-11e9-9509-0242ac11000b   5Gi        RWO            Delete           Bound     default/azure-disk-pvc    standard                 3m
 ```
 
-### Attach the new Azure Disk to a Kubernetes Pod
+### Attach the new Azure Disk to a Kubernetes pod
 
 Now that a Kubernetes Persistent Volume has been created, you can mount this into
 a Kubernetes Pod. The disk can be consumed by any Kubernetes object type, including
@@ -206,7 +206,7 @@ spec:
 EOF
 ```
 
-### Azure Virtual Machine Data Disk Capacity
+### Azure Virtual Machine data disk capacity
 
 In Azure, there are limits to the number of data disks that can be attached to
 each Virtual Machine. This data is shown in  [Azure Virtual Machine
