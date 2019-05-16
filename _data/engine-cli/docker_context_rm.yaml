@@ -1,0 +1,24 @@
+command: docker context rm
+aliases: remove
+short: Remove one or more contexts
+long: Remove one or more contexts
+usage: docker context rm CONTEXT [CONTEXT...]
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Force the removal of a context in use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

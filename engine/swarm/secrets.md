@@ -73,7 +73,6 @@ examples below. Keep the following notable differences in mind:
   accessible by administrators and users with `system` access within the
   container.
 
-
 ## How Docker manages secrets
 
 When you add a secret to the swarm, Docker sends the secret to the swarm manager

@@ -17,6 +17,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: driver-opt
+  value_type: stringSlice
+  default_value: '[]'
+  description: driver options for the network
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ip
   value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
@@ -119,6 +128,7 @@ examples: |-
 
   You can connect a container to one or more networks. The networks need not be the same type. For example, you can connect a single container bridge and overlay networks.
 deprecated: false
+min_api_version: "1.21"
 experimental: false
 experimentalcli: false
 kubernetes: false

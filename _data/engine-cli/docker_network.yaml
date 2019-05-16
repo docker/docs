@@ -23,6 +23,7 @@ clink:
 - docker_network_prune.yaml
 - docker_network_rm.yaml
 deprecated: false
+min_api_version: "1.21"
 experimental: false
 experimentalcli: false
 kubernetes: false

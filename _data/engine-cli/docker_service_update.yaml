@@ -492,6 +492,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: replicas-max-per-node
+  value_type: uint64
+  default_value: "0"
+  description: Maximum number of tasks per node (default 0 = unlimited)
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: reserve-cpu
   value_type: decimal
   description: Reserve CPUs
@@ -643,6 +653,24 @@ options:
   description: Signal to stop the container
   deprecated: false
   min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: sysctl-add
+  value_type: list
+  description: Add or update a Sysctl option
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: sysctl-rm
+  value_type: list
+  description: Remove a Sysctl option
+  deprecated: false
+  min_api_version: "1.40"
   experimental: false
   experimentalcli: false
   kubernetes: false
