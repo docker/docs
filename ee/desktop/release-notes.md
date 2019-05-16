@@ -16,6 +16,28 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ## Docker Desktop Enterprise Releases of 2019
 
+### Docker Desktop Enterprise 2.0.0.4
+
+2019-05-15
+
+- Upgrades
+
+  - [Docker 19.03.0-beta4](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0
+  - [Docker 18.09.6](https://docs.docker.com/engine/release-notes/), [Kubernetes 1.11.10](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v11110) in Version Pack Enterprise 2.1
+  - [LinuxKit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+
+- Bug fixes and minor changes
+
+  - Fix a stability issue with the DNS resolver.
+  - Fix a race condition where kubernetes would sometimes fail to start after the application is restarted.
+  - Fix bug on docker-compose failing when user logout after login. See [docker/compose#6517](https://github.com/docker/compose/issues/6517)
+  - Improve reliability of `com.docker.osxfs trace` performance profiling command.
+  - Support large lists of resource DNS records on Mac. See [docker/for-mac#2160](https://github.com/docker/for-mac/issues/2160#issuecomment-431571031)
+  - Remove the ability to log in using an email address as a username (not supported by the Docker command line)
+  - Allow running a Docker registry in a container again. Fixes [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611).
+  - For LCOW one physical computer system running Windows 10 Professional or Windows 10 Enterprise version 1809 or later is required.
+  - Add a dialog box during start up when a shared drive fails to mount allowing the user to retry mounting the drive or remove it from the shared drive list.
+
 ### Docker Desktop Enterprise 2.0.0.3
 
 2019-04-26
