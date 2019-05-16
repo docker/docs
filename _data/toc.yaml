@@ -325,12 +325,16 @@ guides:
         title: View a container's logs
       - path: /config/containers/logging/configure/
         title: Configure logging drivers
+      - path: /config/containers/logging/dual-logging/
+        title: Use docker logs with a logging driver
       - path: /config/containers/logging/plugins/
         title: Use a logging driver plugin
       - path: /config/containers/logging/log_tags/
         title: Customize log driver output
       - sectiontitle: Logging driver details
         section:
+        - path: /config/containers/logging/local/
+          title: Local file logging driver
         - path: /config/containers/logging/logentries/
           title: Logentries logging driver
         - path: /config/containers/logging/json-file/
@@ -1484,7 +1488,9 @@ manuals:
         - title: Use NFS storage
           path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
         - title: Use AWS EBS Storage
-          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
+        - title: Configure iSCSI
+          path: /ee/ucp/kubernetes/storage/use-iscsi/
     - title: API reference
       path: /reference/ucp/3.1/api/
       nosync: true

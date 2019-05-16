@@ -209,3 +209,12 @@ components. Assigning these values overrides the settings in a container's
 
 
 *dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
+
+### iSCSI (optional)
+Configures iSCSI options for UCP.
+
+| Parameter               | Required | Description                                                                                                                                                                          |
+|:------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--storage-iscsi=true`               | no       | Enables iSCSI based Persistent Volumes in Kubernetes. Default value is `false`.             |
+| `--iscsiadm-path=<path>` | no       | Specifies the path of the iscsiadm binary on the host. Default value is `/usr/sbin/iscsiadm`.  |
+| `--iscsidb-path=<path>` | no       | specifies the path of the iscsi database on the host. Default value is `/etc/iscsi`.  |
