@@ -494,6 +494,10 @@ guides:
       title: NISTIR 8176
     - path: /compliance/nist/itl_october2017/
       title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal
+      title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
@@ -548,6 +552,8 @@ reference:
       section:
         - path: /engine/reference/commandline/builder/
           title: docker builder
+        - path: /engine/reference/commandline/builder_build/
+          title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
     - sectiontitle: docker checkpoint *
@@ -628,6 +634,26 @@ reference:
         title: docker container update
       - path: /engine/reference/commandline/container_wait/
         title: docker container wait
+    - sectiontitle: docker context *
+      section:
+        - path: /engine/reference/commandline/context/
+          title: docker context
+        - path: /engine/reference/commandline/context_create/
+          title: docker context create
+        - path: /engine/reference/commandline/context_export/
+          title: docker context export
+        - path: /engine/reference/commandline/context_import/
+          title: docker context import
+        - path: /engine/reference/commandline/context_inspect/
+          title: docker context inspect
+        - path: /engine/reference/commandline/context_ls/
+          title: docker context ls
+        - path: /engine/reference/commandline/context_rm/
+          title: docker context rm
+        - path: /engine/reference/commandline/context_update/
+          title: docker context update
+        - path: /engine/reference/commandline/context_use/
+          title: docker context use
     - path: /engine/reference/commandline/cp/
       title: docker cp
     - path: /engine/reference/commandline/create/
@@ -780,6 +806,24 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
+    - sectiontitle: docker registry *
+      section:
+        - path: /engine/reference/commandline/registry/
+          title: docker registry
+        - path: /engine/reference/commandline/registry_events/
+          title: docker registry events
+        - path: /engine/reference/commandline/registry_history/
+          title: docker registry history
+        - path: /engine/reference/commandline/registry_info/
+          title: docker registry info
+        - path: /engine/reference/commandline/registry_inspect/
+          title: docker registry inspect
+        - path: /engine/reference/commandline/registry_joblogs/
+          title: docker registry joblogs
+        - path: /engine/reference/commandline/registry_ls/
+          title: docker registry ls
+        - path: /engine/reference/commandline/registry_rmi/
+          title: docker registry rmi
     - path: /engine/reference/commandline/rename/
       title: docker rename
     - path: /engine/reference/commandline/restart/
@@ -880,6 +924,24 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
+    - sectiontitle: docker template *
+      section:
+        - path: /engine/reference/commandline/template/
+          title: docker template
+        - path: /engine/reference/commandline/template_config/
+          title: docker template config
+        - path: /engine/reference/commandline/template_config_set/
+          title: docker template config set
+        - path: /engine/reference/commandline/template_config_view/
+          title: docker template config view
+        - path: /engine/reference/commandline/template_inspect/
+          title: docker template inspect
+        - path: /engine/reference/commandline/template_list/
+          title: docker template list
+        - path: /engine/reference/commandline/template_scaffold/
+          title: docker template scaffold
+        - path: /engine/reference/commandline/template_version/
+          title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
     - sectiontitle: docker trust *
@@ -1160,6 +1222,40 @@ manuals:
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
+  - sectiontitle: Docker Desktop Enterprise
+    section:
+    - path: /ee/desktop/
+      title: Overview
+    - path: /ee/desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Admin
+      section:
+      - sectiontitle: Install
+        section:
+        - path: /ee/desktop/admin/install/mac/
+          title: Install DDE on Mac
+        - path: /ee/desktop/admin/install/windows/
+          title: Install DDE on Windows
+      - sectiontitle: Configure
+        section:
+        - path: /ee/desktop/admin/configure/mac-admin/
+          title: Configure DDE on Mac
+        - path: /ee/desktop/admin/configure/windows-admin/
+          title: Configure DDE on Windows
+    - sectiontitle: User
+      section:
+      - path: /ee/desktop/user/mac-user/
+        title: Use DDE on Mac
+      - path: /ee/desktop/user/windows-user/
+        title: Use DDE on Windows
+    - path: /ee/desktop/app-designer/
+      title: Application designer
+    - sectiontitle: Troubleshoot
+      section:
+      - path: /ee/desktop/troubleshoot/mac-issues/
+        title: Troubleshoot DDE issues on Mac
+      - path: /ee/desktop/troubleshoot/windows-issues/
+        title: Troubleshoot DDE issues on Windows
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
@@ -1204,6 +1300,8 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
+        - path: /ee/ucp/admin/configure/integrate-scim/
+          title: SCIM integration
         - path: /ee/ucp/admin/configure/enable-helm-tiller/
           title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
@@ -1349,12 +1447,22 @@ manuals:
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
             path: /ee/ucp/interlock/usage/labels-reference/ 
+          - title: Publishing a default host service
+            path: /ee/ucp/interlock/usage/default-backend/
+          - title: Specifying a routing mode
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+          - title: Using routing labels
+            path: /ee/ucp/interlock/usage/labels-reference.md/ 
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
             path: /ee/ucp/interlock/usage/service-clusters/
           - title: Implementing persistent (sticky) sessions
             path: /ee/ucp/interlock/usage/sessions/
+          - title: Securing services with TLS
+            path: /ee/ucp/interlock/usage/tls/
+          - title: Configuring websockets
+            path: /ee/ucp/interlock/usage/websockets/  
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
@@ -1384,7 +1492,9 @@ manuals:
         - title: Use Azure Files Storage
           path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
-          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
+        - title: Configure iSCSI
+          path: /ee/ucp/kubernetes/storage/use-iscsi/
     - title: API reference
       path: /reference/ucp/3.1/api/
       nosync: true
@@ -3084,6 +3194,32 @@ manuals:
           title: Get support
   - title: Get support
     path: /ee/get-support/
+- sectiontitle: Docker Assemble
+  section:
+  - path: /assemble/install/
+    title: Install
+  - path: /assemble/spring-boot/
+    title: Build a Spring Boot project
+  - path: /assemble/dot-net/
+    title: Build a C# ASP.NET Core project
+  - path: /assemble/configure/
+    title: Configure
+  - path: /assemble/images/
+    title: Images
+  - path: /assemble/adv-backend-manage/
+    title: Advanced Backend Management
+  - path: /assemble/cli-reference/
+    title: CLI reference
+- sectiontitle: Docker App
+  section:
+  - path: /app/working-with-app/
+    title: Working with Docker App
+- sectiontitle: Docker Template
+  section:
+  - path: /app-template/working-with-template/
+    title: Working with Docker Template
+  - path: /app-template/cli-reference/
+    title: CLI reference
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/

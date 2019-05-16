@@ -1,0 +1,60 @@
+command: docker context inspect
+short: Display detailed information on one or more contexts
+long: Inspects one or more contexts.
+usage: docker context inspect [OPTIONS] [CONTEXT] [CONTEXT...]
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: format
+  shorthand: f
+  value_type: string
+  description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ### Inspect a context by name
+
+  ```bash
+  $ docker context inspect "local+aks"
+
+  [
+      {
+          "Name": "local+aks",
+          "Metadata": {
+              "Description": "Local Docker Engine + Azure AKS endpoint",
+              "StackOrchestrator": "kubernetes"
+          },
+          "Endpoints": {
+              "docker": {
+                  "Host": "npipe:////./pipe/docker_engine",
+                  "SkipTLSVerify": false
+              },
+              "kubernetes": {
+                  "Host": "https://simon-aks-***.hcp.uksouth.azmk8s.io:443",
+                  "SkipTLSVerify": false,
+                  "DefaultNamespace": "default"
+              }
+          },
+          "TLSMaterial": {
+              "kubernetes": [
+                  "ca.pem",
+                  "cert.pem",
+                  "key.pem"
+              ]
+          },
+          "Storage": {
+              "MetadataPath": "C:\\Users\\simon\\.docker\\contexts\\meta\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee",
+              "TLSPath": "C:\\Users\\simon\\.docker\\contexts\\tls\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee"
+          }
+      }
+  ]
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

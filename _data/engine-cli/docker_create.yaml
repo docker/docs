@@ -270,6 +270,14 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: domainname
+  value_type: string
+  description: Container NIS domain name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: entrypoint
   value_type: string
   description: Overwrite the default ENTRYPOINT of the image
@@ -299,6 +307,15 @@ options:
   value_type: list
   description: Expose a port or a range of ports
   deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: gpus
+  value_type: gpu-request
+  description: GPU devices to add to the container ('all' to pass all GPUs)
+  deprecated: false
+  min_api_version: "1.40"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -571,8 +588,7 @@ options:
   kubernetes: false
   swarm: false
 - option: net
-  value_type: string
-  default_value: default
+  value_type: network
   description: Connect a container to a network
   deprecated: false
   experimental: false
@@ -588,8 +604,7 @@ options:
   kubernetes: false
   swarm: false
 - option: network
-  value_type: string
-  default_value: default
+  value_type: network
   description: Connect a container to a network
   deprecated: false
   experimental: false
