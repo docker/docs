@@ -104,12 +104,6 @@ https://github.com/kubernetes/kubernetes/pull/67432
         - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed 
         in 1.12. If cAdvisor is needed, run it via a DaemonSet.
         - https://github.com/kubernetes/kubernetes/pull/65707
-    - Support for Windows Server Containers
-    
-        - Supports Windows Server Containers and Windows Server 2016 as the operating system of 
-        choice for the windows-based kubelet. You can run Windows-based and .NET-based applications inside 
-        containers on Kubernetes. 
-        - https://github.com/kubernetes/enhancements/issues/116
     - Support for Out-of-tree CSI Volume Plugins (stable) with API
     
         - Allows volume plugins to be developed out-of-tree.
