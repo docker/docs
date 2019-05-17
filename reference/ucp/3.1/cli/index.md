@@ -31,15 +31,16 @@ docker container run -it --rm \
 
 | Option           | Description                                               |
 |:-----------------|:----------------------------------------------------------|
+| `backup`         | Create a backup of a UCP manager node                     |
+| `dump-certs`     | Print the public certificates used by this UCP web server |
+| `example-config` | Display an example configuration file for UCP             |
+| `help`           | Shows a list of commands or help for one command          |
+| `id`             | Print the ID of UCP running on this node                  |
+| `images`         | Verify the UCP images on this node                        |
 | `install`        | Install UCP on this node                                  |
 | `restart`        | Start or restart UCP components running on this node      |
-| `stop`           | Stop UCP components running on this node                  |
-| `upgrade`        | Upgrade the UCP cluster                                   |
-| `images`         | Verify the UCP images on this node                        |
-| `uninstall-ucp`  | Uninstall UCP from this swarm                             |
-| `dump-certs`     | Print the public certificates used by this UCP web server |
-| `support`        | Create a support dump for this UCP node                   |
-| `id`             | Print the ID of UCP running on this node                  |
-| `backup`         | Create a backup of a UCP manager node                     |
 | `restore`        | Restore a UCP cluster from a backup                       |
-| `example-config` | Display an example configuration file for UCP             |
+| `stop`           | Stop UCP components running on this node                  |
+| `support`        | Create a support dump for this UCP node                   |
+| `uninstall-ucp`  | Uninstall UCP from this swarm                             |
+| `upgrade`        | Upgrade the UCP cluster                                   |
