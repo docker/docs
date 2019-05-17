@@ -96,6 +96,38 @@ resources.
 > and applies grants to users and teams.
 {: .important}
 
+## Secure Kubernetes defaults
+
+To make sure your cluster is secure, only users and service accounts that have
+been granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
+ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user being able to bypass the Universal Control Plane Security Model.
+
+These Privileged Options includes: 
+
+  - `PodSpec.hostIPC` - Prevents a User deploying a Pod in the host's IPC
+    Namespace.
+  - `PodSpec.hostNetwork` - Prevents a User deploying a Pod in the host's
+    Network Namespace.
+  - `PodSpec.hostPID` - Prevents a User deploying a Pod in the host's PID
+    Namespace.
+  - `SecurityContext.allowPrivilegeEscalation` - Prevents a child process
+    of a container gaining more privileges than its parent.
+  - `SecurityContext.capabilities` - Prevents Additional  [Linux
+    Capabilities](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
+    being added to a Pod.
+  - `SecurityContext.privileged` - Prevents a User from deploying a [Privileged
+    Container](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
+  - `Volume.hostPath` - Prevents a User from mounting a path from the host into
+    the container. This could be a file, directory, or even the Docker Socket.
+
+If a user without a Cluster Admin tries to deploy a pod with any of these
+privileged options. They will see:
+
+```bash
+Error from server (Forbidden): error when creating "pod.yaml": pods "mypod" is forbidden: user "<user-id>" is not an admin and does not have permissions to use privileged mode for resource
+```
+
 ## Where to go next
 
 - [Create and configure users and teams](create-users-and-teams-manually.md)
