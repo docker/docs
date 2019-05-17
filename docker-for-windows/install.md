@@ -79,10 +79,6 @@ Looking for information on using Windows containers?
 2. Follow the install wizard to accept the license, authorize the installer, and
    proceed with the install.
 
-    You are asked to authorize `Docker.app` with your system password during the
-    install process. Privileged access is needed to install networking
-    components, links to the Docker apps, and manage the Hyper-V VMs.
-
 3. Click **Finish** on the setup complete dialog to launch Docker.
 
 ## Start Docker Desktop for Windows
