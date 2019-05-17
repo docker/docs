@@ -12,12 +12,14 @@ installing and upgrading the project as part of UCP. Additionally, the Project
 Calico deployment installed is fully supported, with Docker Support providing
 guidance on the [CNI components](https://github.com/projectcalico/cni-plugin).
 
-At install time, the Universal Control Plane can be configured to not install
-the Calico CNI Plugin, allowing Platform Operators to install alternative CNI
-plugins post installation to support alternative use cases. In this model all
-Universal Control Plane components are still fully supported by Docker Support,
-however for guidance and support on the 3rd party CNI components, the platform
-operator will need to contact that 3rd party.
+At install time, the Universal Control Plane can be configured to install
+alternative CNI plugin by Platform Operators to support alternative use cases.
+The alternative CNI plugin is certified by Docker and its partners, and
+published on Docker Hub. Universal Control Plane components are still fully
+supported by Docker Support and respective partner support. Docker will provide
+pointers to basic configuration, however for additional guidance on managing 3rd
+party CNI components, the platform operator will need to partner documentation
+or contact that 3rd party.
 
 ## Installing a Unmanaged CNI Plugin on Docker UCP
 
@@ -41,7 +43,7 @@ docker container run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <node-ip-address> \
-  --unmanaged-cni true \
+  --unmanaged-cni \
   --interactive
 ```
 
