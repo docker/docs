@@ -1202,20 +1202,42 @@ manuals:
     title: About Docker EE
   - title: Try Docker EE on the cloud
     path: https://trial.docker.com
+  - path: /ee/docker-ee-architecture/
+    title: Docker EE Architecture
   - path: /ee/supported-platforms/
     title: Supported platforms
     nosync: true
   - path: /ee/end-to-end-install/
-    title: Deploy Docker EE standard
-  - path: /ee/backup/
-    title: Backup Docker EE
+    title: Deploy Docker EE standard 
+  - sectiontitle: Back up Docker Enterprise
+    section:
+    - path: /ee/admin/backup/
+      title: Overview
+    - path: /ee/admin/backup/back-up-swarm/
+      title: Back up Docker Swarm
+    - path: /ee/admin/backup/back-up-ucp/
+      title: Back up UCP
+    - path: /ee/admin/backup/back-up-dtr/
+      title: Back up DTR
+  - sectiontitle: Restore Docker Enterprise
+    section:
+    - path: /ee/admin/restore/
+      title: Overview
+    - path: /ee/admin/restore/restore-swarm/
+      title: Restore Docker Swarm
+    - path: /ee/admin/restore/restore-ucp/
+      title: Restore UCP
+    - path: /ee/admin/restore/restore-dtr/
+      title: Restore DTR 
+  - sectiontitle: Disaster Recovery
+    section:
+    - path: /ee/admin/disaster-recovery/
+      title: Overview
   - path: /ee/upgrade/
-    title: Upgrade Docker EE
-  - path: /ee/docker-ee-architecture/
-    title: Docker EE Architecture
+    title: Upgrade Docker Enterprise
   - path: /ee/telemetry/
     title: Manage usage data collection
-  - sectiontitle: Docker EE Engine
+  - sectiontitle: Engine
     section:
     - path: /ee/supported-platforms/
       title: Install Docker EE Engine
@@ -1348,8 +1370,6 @@ manuals:
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
-      - path: /ee/ucp/admin/backups-and-disaster-recovery/
-        title: Backups and disaster recovery
       - title: CLI reference
         path: /reference/ucp/3.1/cli/
         nosync: true
