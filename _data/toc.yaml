@@ -1278,7 +1278,7 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
-      - sectiontitle: Universal Control Plane
+  - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
       title: Universal Control Plane overview
@@ -1467,6 +1467,12 @@ manuals:
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
             path: /ee/ucp/interlock/usage/labels-reference/ 
+          - title: Publishing a default host service
+            path: /ee/ucp/interlock/usage/default-backend/
+          - title: Specifying a routing mode
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+          - title: Using routing labels
+            path: /ee/ucp/interlock/usage/labels-reference.md/ 
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
