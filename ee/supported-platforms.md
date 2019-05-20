@@ -80,9 +80,9 @@ and third-party ecosystem solution briefs.
 
 | Platform                                                                                | Docker Enterprise Edition |
 |:----------------------------------------------------------------------------------------|:-------------------------:|
-| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}   |
-| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}   |
-| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}   |
+| [VMware](https://goto.docker.com/Q118-Docker-Certified-Infrastructure-Download_LP.html)   |  {{ page.green-check }}   |
+| [Amazon Web Services](https://goto.docker.com/Q118-Docker-Certified-Infrastructure-Download_LP.html) |  {{ page.green-check }}   |
+| [Microsoft Azure](https://goto.docker.com/Q118-Docker-Certified-Infrastructure-Download_LP.html)   |  {{ page.green-check }}   |
 | IBM Cloud                                                                               |        Coming soon        |
 
 
