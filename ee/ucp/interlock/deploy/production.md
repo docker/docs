@@ -128,4 +128,4 @@ to provide more bandwidth for the user services.
 
 ## Next steps
 - [Configure Interlock](../config/index.md)
-- [Deploy applications](../usage.index.md)
+- [Deploy applications](./index.md)

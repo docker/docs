@@ -78,6 +78,8 @@ to upgrade your installation to the latest release.
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 
+=======
+>>>>>>> Sync forked amberjack branch with docs-private (#1068)
 # Version 2.6
 
 ## 2.6.6 
