@@ -37,7 +37,7 @@ restore. If you have not previously performed a backup, the web interface displa
 To create a DTR backup, perform the following steps:
 
 1. Run [docker/dtr backup](/reference/dtr/{{site.dtr_version}}/cli/backup/)
-2. [Back up DTR image content]((#back-up-image-content)
+2. [Back up DTR image content](#back-up-image-content)
 3. [Back up DTR metadata](#back-up-dtr-metadata)
 4. [Verify your backup](#verify-your-backup)
 
