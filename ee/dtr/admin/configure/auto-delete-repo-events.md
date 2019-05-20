@@ -16,7 +16,7 @@ Docker Trusted Registry has a global setting for repository event auto-deletion.
 
 3. Scroll down to **Repository Events** and turn on ***Auto-Deletion***.
 
-![](../../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
+     ![](../../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
 
 4. Specify the conditions with which an event auto-deletion will be triggered.
 
