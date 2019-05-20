@@ -574,7 +574,6 @@ configs:
     file: ./my-credential-spec.json|
 ```
 
-
 ### depends_on
 
 Express dependency between services, Service dependencies cause the following
