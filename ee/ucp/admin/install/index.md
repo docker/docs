@@ -52,17 +52,6 @@ Make sure you follow the [UCP System requirements](system-requirements.md)
 for opening networking ports. Ensure that your hardware or software firewalls
 are open appropriately or disabled.
 
-> Ubuntu 14.04 mounts
->
-> For UCP to install correctly on Ubuntu 14.04, `/mnt` and other mounts
-> must be shared:
-> ```
-> sudo mount --make-shared /mnt
-> sudo mount --make-shared /
-> sudo mount --make-shared /run
-> sudo mount --make-shared /dev
-> ```
-
 To install UCP:
 
 1. Use ssh to log in to the host where you want to install UCP.
