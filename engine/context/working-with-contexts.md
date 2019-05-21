@@ -13,7 +13,7 @@ A single Docker CLI can have multiple contexts. Each context contains all of the
 
 As an example, a single Docker client on your company laptop might be configured with two contexts; **dev-k8s** and **prod-swarm**. **dev-k8s** contains the endpoint data and security credentials to configure and manage a Kubernetes cluster in a development environment. **prod-swarm** contains everything required to manage a Swarm cluster in a production environment. Once these contexts are configured, you can use the top-level `docker context use <context-name>` to easily switch between them.
 
-## Pre-requisites
+## Prerequisites
 
 To follow the examples in this guide, you'll need:
 
@@ -44,7 +44,7 @@ NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT
 default *     Current...      unix:///var/run/docker.sock                             swarm
 ```
 
-This shows a single context called "default". It's configured to talk to a Swarm cluster via the local `/var/run/docker.sock` Unix socket. It has no Kubernetes endpoint configured.
+This shows a single context called "default". It's configured to talk to a Swarm cluster through the local `/var/run/docker.sock` Unix socket. It has no Kubernetes endpoint configured.
 
 The asterisk in the `NAME` column indicates that this is the active context. This means all `docker` commands will be executed against the "default" context unless overridden with environment variables such as `DOCKER_HOST` and `DOCKER_CONTEXT`, or on the command-line with the `--context` and `--host` flags.
 
@@ -73,11 +73,11 @@ $ docker context inspect default
 ]
 ```
 
-This context is using "swarm" as the orchestrator (`metadata.stackOrchestrator`), is configured to talk to an endpoint exposed on a local Unix socket at `/var/run/docker.sock` (`Endpoints.docker.Host`), and requires TLS verification (`Endpoints.docker.SkipTLSVerify`).
+This context is using "swarm" as the orchestrator (`metadata.stackOrchestrator`). It is configured to talk to an endpoint exposed on a local Unix socket at `/var/run/docker.sock` (`Endpoints.docker.Host`), and requires TLS verification (`Endpoints.docker.SkipTLSVerify`).
 
 ### Create a new context
 
-You create new contexts with the `docker context create` command.
+You can create new contexts with the `docker context create` command.
 
 The following example creates a new context called "docker-test" and specifies the following:
 
@@ -94,7 +94,7 @@ Successfully created context "docker-test"
 
 The new context is stored in a `meta.json` file below `~/.docker/contexts/`. Each new context you create gets its own `meta.json` stored in a dedicated sub-directory of `~/.docker/contexts/`.
 
-> **Note:** The default context behaves differently than manually created contexts. It does not have a meta.json configuration file, and it dynamically updates based on the current configuration. For example, if you switch your current Kubernetes config using `kubectl config use-context`, the default Docker context will dynamically update itself to the new Kubernetes endpoint.
+> **Note:** The default context behaves differently than manually created contexts. It does not have a `meta.json` configuration file, and it dynamically updates based on the current configuration. For example, if you switch your current Kubernetes config using `kubectl config use-context`, the default Docker context will dynamically update itself to the new Kubernetes endpoint.
 
 You can view the new context with `docker context ls` and `docker context inspect <context-name>`.
 
@@ -146,7 +146,7 @@ k8s-test *                                                unix:///var/run/docker
 
 `docker` commands will now target endpoints defined in the "k8s-test" context.
 
-It is also possible to set the current context using the `DOCKER_CONTEXT` environment variable. This will override the context set with `docker context use`.
+You can also set the current context using the `DOCKER_CONTEXT` environment variable. This overrides the context set with `docker context use`.
 
 Use the appropriate command below to set the context to `docker-test` using an environment variable.
 
@@ -176,7 +176,7 @@ The `docker context` command makes it easy to export and import contexts on diff
 
 You can use the `docker context export` command to export an existing context to a file. This file can later be imported on another machine that has the `docker` client installed.
 
-By default, contexts will be exported as a _native Docker contexts_. These can be exported and imported using the `docker context` command. If the context you are exporting includes a Kubernetes endpoint, the Kubernetes part of the context will be included in the `export` and `import` operations.
+By default, contexts will be exported as a _native Docker contexts_. You can export and import these using the `docker context` command. If the context you are exporting includes a Kubernetes endpoint, the Kubernetes part of the context will be included in the `export` and `import` operations.
 
 There is also an option to export just the Kubernetes part of a context. This will produce a native kubeconfig file that can be manually merged with an existing `~/.kube/config` file on another host that has `kubectl` installed. You cannot export just the Kubernetes portion of a context and then import it with `docker context import`. The only way to import the exported Kubernetes config is to manually merge it into an existing kubeconfig file.
 
@@ -198,7 +198,7 @@ $ cat docker-test.dockercontext
 meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
 ```
 
-This file can be imported on another host using `docker context import`. The target host will need to have the Docker client installed.
+This file can be imported on another host using `docker context import`. The target host must have the Docker client installed.
 
 ```
 $ docker context import docker-test docker-test.dockercontext
@@ -206,15 +206,15 @@ docker-test
 Successfully imported context "docker-test"
 ```
 
-You can verify the context was imported with `docker context ls`.
+You can verify that the context was imported with `docker context ls`.
 
 The format of the import command is `docker context import <context-name> <context-file>`.
 
-Now let's look at exporting just the Kubernetes parts of a context.
+Now, let's look at exporting just the Kubernetes parts of a context.
 
 ### Exporting a Kubernetes context
 
-This operation will only work if the context you are exporting has a Kubernetes endpoint configured. You will also not be able to import it using `docker context import`.
+You can export a Kubernetes context only if the context you are exporting has a Kubernetes endpoint configured. You cannot import a Kubernetes context using `docker context import`.
 
 These steps will use the `--kubeconfig` flag to export **only** the Kubernetes elements of the existing `k8s-test` context to a file called "k8s-test.kubeconfig". The `cat` command will then show that it's exported as a valid kubeconfig file.
 
@@ -255,7 +255,7 @@ users:
       name: gcp
 ```
 
-This can be merged with an existing `~/.kube/config` file on another machine.
+You can merge this with an existing `~/.kube/config` file on another machine.
 
 ## Updating a context
 
