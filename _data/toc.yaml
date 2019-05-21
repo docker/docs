@@ -3228,6 +3228,8 @@ manuals:
     title: Working with Docker Template
   - path: /app-template/cli-reference/
     title: CLI reference
+  - path: /app-template/api-reference/
+    title: API reference
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
