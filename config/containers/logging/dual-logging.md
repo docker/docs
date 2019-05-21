@@ -29,6 +29,7 @@ as dual logging, allows you to use `docker logs` to read container logs locally 
 regardless of the remote log driver used, because the engine is configured to log information to the “local” 
 logging driver. Refer to [Configure the default logging driver](/config/containers/logging/configure) for additional information. 
 
+
 ## Prerequisites 
  
 - Docker Enterprise - Dual logging is only supported for Docker Enterprise, and is enabled by default starting with 
