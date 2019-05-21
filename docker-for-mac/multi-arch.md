@@ -75,7 +75,7 @@ Docker Desktop 2.0.4.0 Edge release introduces a new CLI command called `buildx`
 
 ### Build and run multi-architecture images
 
-1. Run the command `docker buildx ls` to list the existing builders. This displays the default builder, which is our old builder.
+Run the command `docker buildx ls` to list the existing builders. This displays the default builder, which is our old builder.
 
 ```
 ~ ❯❯❯ docker buildx ls
@@ -85,14 +85,14 @@ default * docker
 
 ```
 
-2.  Create a new builder which gives access to the new multi-architecture features.
+Create a new builder which gives access to the new multi-architecture features.
 
 ```
 ~ ❯❯❯ docker buildx create --name mybuilder
 mybuilder
 ```
 
-3. Switch to the new builder and inspect it.
+Switch to the new builder and inspect it.
 
 ```
 ~ ❯❯❯ docker buildx use mybuilder`
@@ -112,7 +112,7 @@ Status:    running
 Platforms: linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 ```
 
-4. Test the workflow to ensure you can build, push, and run multi-architecture images. Create a simple example Dockerfile, build a couple of image variants, and push them to Docker Hub.
+Test the workflow to ensure you can build, push, and run multi-architecture images. Create a simple example Dockerfile, build a couple of image variants, and push them to Docker Hub.
 
 ```
 ~ ❯❯❯ mkdir test && cd test && cat <<EOF > Dockerfile
@@ -136,7 +136,7 @@ EOF
 >  - The `--platform` flag informs buildx to generate Linux images for Intel 64-bit, Arm 32-bit, and Arm 64-bit architectures.
 >  - The `--push` flag generates a multi-arch manifest and pushes all the images to Docker Hub.
 
-6. Inspect the image using `imagetools`.
+Inspect the image using `imagetools`.
 
 ```
 ~/test ❯❯❯ docker buildx imagetools inspect username/demo:latest
@@ -178,7 +178,7 @@ In the above example, `uname -m` returns `aarch64` and `armv7l` as expected, eve
 
 The following section describes a slightly more complex example, a python flask web application that displays the host architecture.
 
-1. Specify a single platform to build the image on. For example, build an image for 64-bit Arm platform.
+Specify a single platform to build the image on. For example, build an image for 64-bit Arm platform.
 
 ```
 ~❯❯❯ docker buildx build -t username/helloworld:latest --platform linux/arm64 --push github.com/username/helloworld
@@ -191,7 +191,7 @@ The following section describes a slightly more complex example, a python flask 
  => => pushing manifest for docker.io/username/helloworld:latest                 0.3s
  ```
 
-2. Run the image and publish some ports:
+Run the image and publish some ports:
 
 ```
 ~❯❯❯ docker run -p5000:5000 username/helloworld:latest
@@ -202,7 +202,7 @@ The following section describes a slightly more complex example, a python flask 
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
  ```
 
- 3. When you load the browser and point to `localhost:5000`, it displays:
+ When you load the browser and point to `localhost:5000`, it displays:
 
  ![localhost](./images/localhost-arm.png)
 
