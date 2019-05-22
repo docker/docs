@@ -50,22 +50,22 @@ ADFS integration requires the following steps:
             - Add two rows with the following information:
                 - LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
                 - LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
-    2 Send a claim using a custom rule as shown in the following example:
+    2. Send a claim using a custom rule as shown in the following example:
         ```
         c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
         => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, 
         ValueType = c.ValueType);
         ```
-    3 Transform an incoming claim:
+    3. Transform an incoming claim:
         * Incoming claim type: email address
         * Outgoing claim type: name ID
         * Outgoing name ID format: transient identifier
         * Pass through all claim values
-    4 Send group membership as a claim:
+    4. Send group membership as a claim:
         * Add the group name
         * Outgoing claim type: group
         * Outgoing claim value: Enter the group name provided for the UCP team link.
-    5 Open the previous rule and view the rule language, copy the text, and change the issue type to `member-of`, 
+    5. Open the previous rule and view the rule language, copy the text, and change the issue type to `member-of`, 
     as shown in the following example: 
         ```
         c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid", 
