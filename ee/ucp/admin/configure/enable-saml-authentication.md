@@ -36,17 +36,45 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ### ADFS integration values
 
-ADFS integration requires these values:
+ADFS integration requires the following steps:
 
-- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
-- Attribute Store: Active Directory.
-    - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
-    - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
-- Claim using Custom Rule. For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
- => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);`
-- Outgoing claim type: Name ID
-- Outgoing name ID format: Transient Identifier
-- Pass through all claim values
+1. Add a relying party trust (can we point them somewhere? e.g. https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)
+
+2. Obtain the service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+
+3. Add claim rules:
+
+    1. Send LDAP attributes as Claims:
+
+        - Attribute Store: Active Directory
+            - Add two rows with the following information:
+                - LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
+                - LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
+    2 Send a claim using a custom rule as shown in the following example:
+        ```
+        c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+        => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, 
+        ValueType = c.ValueType);
+        ```
+    3 Transform an incoming claim:
+        * Incoming claim type: email address
+        * Outgoing claim type: name ID
+        * Outgoing name ID format: transient identifier
+        * Pass through all claim values
+    4 Send group membership as a claim:
+        * Add the group name
+        * Outgoing claim type: group
+        * Outgoing claim value: Enter the group name provided for the UCP team link.
+    5 Open the previous rule and view the rule language, copy the text, and change the issue type to `member-of`, 
+    as shown in the following example: 
+        ```
+        c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid", 
+        Value == "S-1-5-21-3406933866-3827937554-591380878-1105", Issuer == "AD AUTHORITY"]
+        => issue(Type = "member-of", Value = "Finance", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, 
+        ValueType = c.ValueType);
+        ```
+        - Create a new 'Send Claim using Customer Rule' and use the previous rule text. 
+        - Delete 3.4. Can you clarify?????
 
 ## Configure the SAML integration
 
