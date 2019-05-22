@@ -13,7 +13,7 @@ a driver registrar, external attacher, external provisioner, and external snapsh
 
 Docker Enterprise 3.0 supports version 1.0+ of the CSI specification. Therefore, UCP 3.2 (as part of Docker Enterprise 3.0) can manage storage backends that ship with an associated CSI driver, as illustrated in the following diagram.
 
-![Kubernetes and CSI components](ee/ucp/images/csi-plugins.png){: .with-border}
+![Kubernetes and CSI components](/ee/ucp/images/csi-plugins.png){: .with-border}
 
 **Note**: Docker Enterprise does not provide CSI drivers. CSI drivers are provided by enterprise storage vendors. 
 Kubernetes does not enforce a specific procedure for how Storage Providers (SP) should bundle and distribute CSI drivers.
@@ -28,6 +28,7 @@ or as documented by your storage vendor.
 
 > Disclaimer: As of Docker Enterprise 3.0, none of the [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) 
 are production quality and are considered pre-GA. 
+
 2. Install Docker Enterprise 3.0, which includes UCP 3.2. 
 3. Optionally, set the `--csi-expt-enabled` flag in the UCP install configuration if you want to enable CSI 
 features that are experimental in Kubernetes 1.14. “VolumeSnapshotDataSource” is an experimental feature in 
@@ -73,12 +74,12 @@ Refer to [CSI HostPath Driver](https://github.com/kubernetes-csi/csi-driver-host
 ### Manage CSI deployment
 The UCP user interface (UI) provides information about your CSI deployments, as shown in the following screen capture. In this example, a CSI Host Path Plugin was deployed as a `Pod`:
 
-![UCP UI with CSI host plugin](ee/ucp/images/csi-host-path-plugin.png)
+![UCP UI with CSI host plugin](/ee/ucp/images/csi-host-path-plugin.png)
 
 In the UCP UI, you can navigate to **Kubernetes** -> **Storage** for information about persistent storage objects such as `StorageClass`, `PersistentVolumeClaim`, and `PersistentVolume`. The following example provides information for objects specifically created using a CSI HostPath plugin:
 
-![UCP UI with persistent storage object information](ee/ucp/images/persistent-storage-object.png)
+![UCP UI with persistent storage object information](/ee/ucp/images/persistent-storage-object.png)
 
 The **Volumes** section on the Pod details page shows that the Pod using this CSI HostPath plugin has a volume mounted into the Pod:
 
-![UCP UI with CSI volume mount information](ee/ucp/images/csi-volume-mounted.png)
+![UCP UI with CSI volume mount information](/ee/ucp/images/csi-volume-mounted.png)
