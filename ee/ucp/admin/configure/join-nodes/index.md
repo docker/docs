@@ -28,10 +28,10 @@ your cluster.
 
 For production-grade deployments, follow these rules of thumb:
 
-* The recommended number of manager nodes is 3 managers to provide high availability with limited 
-  network overhead. The maximum advisable is five manager nodes. Adding many manager nodes to the 
-  cluster might lead to performance degradation, as changes to configurations need to be replicated 
-  across all manager nodes.  
+* For high availability with minimal 
+  network overhead, the recommended number of manager nodes is 3. The recommended maximum number of manager 
+  nodes is 5. Adding too many manager nodes to the cluster can lead to performance degradation, 
+  because changes to configurations must be replicated across all manager nodes.  
 * When a manager node fails, the number of failures tolerated by your cluster
   decreases. Don't leave that node offline for too long.
 * You should distribute your manager nodes across different availability
