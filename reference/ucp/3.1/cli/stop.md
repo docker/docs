@@ -18,7 +18,7 @@ docker container run --rm -it \
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug, D`|Enable debug mode|
-|`--jsonlog`|Produce json formatted output for easier parsing|
+| Option       | Description                                      |
+|:-------------|:-------------------------------------------------|
+| `--debug, D` | Enable debug mode                                |
+| `--jsonlog`  | Produce json formatted output for easier parsing |

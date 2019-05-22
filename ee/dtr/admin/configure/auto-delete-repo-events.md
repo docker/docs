@@ -16,18 +16,18 @@ Docker Trusted Registry has a global setting for repository event auto-deletion.
 
 3. Scroll down to **Repository Events** and turn on ***Auto-Deletion***.
 
-![](../../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
+     ![](../../images/auto-delete-repo-events-0.png){: .img-fluid .with-border}
 
 4. Specify the conditions with which an event auto-deletion will be triggered.
 
-![](../../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
+     ![](../../images/auto-delete-repo-events-1.png){: .img-fluid .with-border}
 
-DTR allows you to set your auto-deletion conditions based on the following optional repository event attributes:
+     DTR allows you to set your auto-deletion conditions based on the following optional repository event attributes:
 
-| Name            | Description                                        | Example           |
-|:----------------|:---------------------------------------------------| :----------------|
-| Age        | Lets you remove events older than your specified number of  hours, days, weeks or months| `2 months` |
-| Max number of events  | Lets you specify the maximum number of events allowed in the repositories.  | `6000` |
+     | Name            | Description                                        | Example           |
+     |:----------------|:---------------------------------------------------| :----------------|
+     | Age        | Lets you remove events older than your specified number of  hours, days, weeks or months| `2 months` |
+     | Max number of events  | Lets you specify the maximum number of events allowed in the repositories.  | `6000` |
 
 If you check and specify both, events in your repositories will be removed during garbage collection if either condition is met. You should see a confirmation message right away.
 
@@ -35,7 +35,7 @@ If you check and specify both, events in your repositories will be removed durin
 
 6. Navigate to **System > Job Logs** to confirm that `onlinegc` has happened.
 
-![](../../images/auto-delete-repo-events-2.png){: .img-fluid .with-border}
+   ![](../../images/auto-delete-repo-events-2.png){: .img-fluid .with-border}
 
 ## Where to go next
 

@@ -120,7 +120,6 @@ Because Interlock passes the extension configuration directly to the extension, 
 different configuration options available.  Refer to the documentation for each extension for supported options:
 
 - [Nginx](nginx-config.md)
-- [HAproxy](haproxy-config.md)
 
 #### Customize the default proxy service
 The default proxy service used by UCP to provide layer 7 routing is NGINX. If users try to access a route that hasn't been configured, they will see the default NGINX 404 page:

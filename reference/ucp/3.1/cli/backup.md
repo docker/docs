@@ -37,10 +37,11 @@ Note:
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug, D`|Enable debug mode|
-|`--jsonlog`|Produce json formatted output for easier parsing|
-|`--interactive, i`|Run in interactive mode and prompt for configuration values|
-|`--id`|The ID of the UCP instance to back up|
-|`--passphrase`|Encrypt the tar file with a passphrase|
+| Option                 | Description                                                         |
+|:-----------------------|:--------------------------------------------------------------------|
+| `--debug, -D`          | Enable debug mode                                                   |
+| `--jsonlog`            | Produce json formatted output for easier parsing                    |
+| `--interactive, -i`    | Run in interactive mode and prompt for configuration values         |
+| `--id` *value*         | The ID of the UCP instance to back up                               |
+| `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended) |
+| `--passphrase` *value* | Encrypt the tar file with a passphrase                              |
