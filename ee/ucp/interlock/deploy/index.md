@@ -127,7 +127,7 @@ PollInterval = "3s"
 
 ## Enable layer 7 routing manually
 
-Interlock can also be enabled from the command line by following the below setions.
+Interlock can also be enabled from the command line by following the below sections.
 
 ### Work with the core service configuration file
 
