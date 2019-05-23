@@ -8,14 +8,6 @@ redirect_from:
 
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
-- [Prerequisites](#prerequisites)
-- [Enable layer 7 routing via UCP](#enable-layer-7-routing-via-ucp)
-- [Enable layer 7 routing manually](#enable-layer-7-routing-manually)
-  - [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
-  - [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-interlock-and-extensions)
-  - [Create the Interlock service](#create-the-interlock-service)
-- [Next steps](#next-steps)
-
 ## Prerequisites
 
 - [Docker](https://www.docker.com) version 17.06 or later
