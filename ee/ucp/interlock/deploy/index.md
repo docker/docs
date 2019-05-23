@@ -8,11 +8,13 @@ redirect_from:
 
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
-1. [Prerequisites](#prerequisites)
-2. [Enable layer 7 routing](#enable-layer-7-routing)
-3. [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
-4. [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-Interlock-and-extensions)
-5. [Create the Interlock service](#create-the-interlock-service)
+- [Prerequisites](#prerequisites)
+- [Enable layer 7 routing via UCP](#enable-layer-7-routing-via-ucp)
+- [Enable layer 7 routing manually](#enable-layer-7-routing-manually)
+  - [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
+  - [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-interlock-and-extensions)
+  - [Create the Interlock service](#create-the-interlock-service)
+- [Next steps](#next-steps)
 
 ## Prerequisites
 
@@ -20,7 +22,8 @@ This topic covers deploying a layer 7 routing solution into a Docker Swarm to ro
 - Docker must be running in [Swarm mode](/engine/swarm/)
 - Internet access (see [Offline installation](./offline-install.md) for installing without internet access)
 
-## Enable layer 7 routing
+## Enable layer 7 routing via UCP
+
 By default, layer 7 routing is disabled, so you must first
 enable this service from the UCP web UI.
 
@@ -28,7 +31,7 @@ enable this service from the UCP web UI.
 2. Navigate to **Admin Settings**
 3. Select **Layer 7 Routing** and then select **Enable Layer 7 Routing**
 
-![http routing mesh](../../images/interlock-install-3.png){: .with-border}
+![http routing mesh](../../images/interlock-install-4.png){: .with-border}
 
 By default, the routing mesh service listens on port 8080 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
@@ -55,8 +58,7 @@ start the `ucp-interlock-proxy` service.
 At this point everything is ready for you to start using the layer 7 routing
 service with your swarm workloads.
 
-
-The following code sample provides a default UCP configuration:
+The following code sample provides a default UCP configuration (this will be created automatically when enabling Interlock as per section [Enable layer 7 routing](#enable-layer-7-routing)):
 
 ```toml
 ListenAddr = ":8080"
@@ -78,7 +80,7 @@ PollInterval = "3s"
     ProxyStopGracePeriod = "5s"
     ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
     PublishMode = "ingress"
-    PublishedPort = 80
+    PublishedPort = 8080
     TargetPort = 80
     PublishedSSLPort = 8443
     TargetSSLPort = 443
@@ -123,7 +125,12 @@ PollInterval = "3s"
       HideInfoHeaders = false
 ```
 
+## Enable layer 7 routing manually
+
+Interlock can also be enabled from the command line by following the below sections.
+
 ### Work with the core service configuration file
+
 Interlock uses the TOML file for the core service configuration. The following example utilizes Swarm deployment and recovery features by creating a Docker Config object:
 
 ```bash
@@ -143,9 +150,9 @@ PollInterval = "3s"
     ProxyStopGracePeriod = "3s"
     ServiceCluster = ""
     PublishMode = "ingress"
-    PublishedPort = 80
+    PublishedPort = 8080
     TargetPort = 80
-    PublishedSSLPort = 443
+    PublishedSSLPort = 8443
     TargetSSLPort = 443
     [Extensions.default.Config]
       User = "nginx"
@@ -166,6 +173,7 @@ $> docker network create -d overlay interlock
 ```
 
 ### Create the Interlock service
+
 Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
 are recommended to run on workers.  See the [Production](./production.md) section for more information
