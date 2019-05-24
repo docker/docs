@@ -41,8 +41,7 @@ and attaches it to the `ucp-interlock` network. This allows both services
 to communicate.
 4. The `ucp-interlock-extension` generates a configuration to be used by
 the proxy service. By default the proxy service is NGINX, so this service
-generates a standard NGINX configuration.
-( Is this valid here????) UCP creates the `com.docker.ucp.interlock.conf-1` configuration file and uses it to configure all
+generates a standard NGINX configuration. UCP creates the `com.docker.ucp.interlock.conf-1` configuration file and uses it to configure all
 the internal components of this service. 
 5. The `ucp-interlock` service takes the proxy configuration and uses it to
 start the `ucp-interlock-proxy` service.
