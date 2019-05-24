@@ -10,9 +10,9 @@ Docker Trusted Registry has a global setting for repository event auto-deletion.
 
 ## Steps
 
-1. In your browser, navigate to `https://<dtr-url>` and log in with your UCP credentials. 
+1. In your browser, navigate to `https://<dtr-url>` and log in with your admin credentials. 
 
-2. Select **System** on the left navigation pane which will display the **Settings** page by default.
+2. Select **System** from the left navigation pane which displays the **Settings** page by default.
 
 3. Scroll down to **Repository Events** and turn on ***Auto-Deletion***.
 
