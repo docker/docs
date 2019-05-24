@@ -3282,7 +3282,7 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
-  - path: /assemble/cli-reference/
+  - path: /engine/reference/commandline/assemble/
     title: CLI reference
 - sectiontitle: Docker App
   section:
@@ -3294,7 +3294,7 @@ manuals:
     title: Working with Docker Template
   - path: /app-template/cli-reference/
     title: CLI reference
-  - path: /app-template/api-reference/
+  - path: /engine/reference/commandline/template/
     title: API reference
 - sectiontitle: Docker Compose
   section:
