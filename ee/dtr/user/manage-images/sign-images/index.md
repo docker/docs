@@ -7,7 +7,7 @@ redirect_from:
 - /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
 ---
 
-2 Key components of the Docker Trusted Registry is the Notary Server and Notary
+2 Key components of the Docker Trusted Registry are the Notary Server and Notary
 Signer. These 2 containers give us the required components to use Docker Content
 Trust right out of the box. [Docker Content
 Trust](/engine/security/trust/content_trust/) allows us to sign image tags,
