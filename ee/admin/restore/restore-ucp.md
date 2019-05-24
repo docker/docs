@@ -8,7 +8,7 @@ To restore UCP, select one of the following options:
 
 * Run the restore on the machines from which the backup originated or on new machines. You can use the same swarm from which the backup originated or a new swarm.  
 * On a manager node of an existing swarm that does not have UCP installed.
-  In this case, UCP restore will use the existing swarm. and runs instead of any install.
+  In this case, UCP restore uses the existing swarm and runs instead of any install.
 * Run the restore on a docker engine that isn't participating in a swarm, in which case it performs `docker swarm init` in the same way as the install operation would. A new swarm is created and UCP is restored on top.  
 
 ## Limitations
@@ -40,7 +40,7 @@ The following example shows how to restore UCP from an existing backup file, pre
 ```
 $ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp:<UCP_VERSION> restore < /tmp/backup.tar
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore < /tmp/backup.tar
 ```
 
 If the backup file is encrypted with a passphrase, provide the passphrase to the restore operation(replace `<UCP_VERSION>` with the version of your backup):
@@ -48,17 +48,8 @@ If the backup file is encrypted with a passphrase, provide the passphrase to the
 ```
 $ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp:<UCP_VERSION> restore --passphrase "secret" < /tmp/backup.tar  
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore --passphrase "secret" < /tmp/backup.tar  
 ```
-
-The restore command may also be invoked in interactive mode, in which case the backup file should be mounted to the container rather than streamed through stdin (replace `<UCP_VERSION>` with the version of your backup):
-
-```
-$ docker container run --rm -i --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /tmp/backup.tar:/config/backup.tar \
-  docker/ucp:<UCP_VERSION> restore -i
-```  
 
 The restore command can also be invoked in interactive mode, in which case the
 backup file should be mounted to the container rather than streamed through
@@ -72,12 +63,12 @@ docker container run --rm -i --name ucp \
 ```
 
 ## Regenerate Certs
-The current certs volume contain cluster specific information (such as SANs) is invalid on new clusters with different IPs. For volumes that are not backed up (`ucp-node-certs`, for example), the restore regenerates certs. For certs that are backed up, (ucp-controller-server-certs), the restore does not perform a regeneration and you m ust correct those certs when the restore completes.
+The current certs volume containing cluster specific information (such as SANs) is invalid on new clusters with different IPs. For volumes that are not backed up (`ucp-node-certs`, for example), the restore regenerates certs. For certs that are backed up, (ucp-controller-server-certs), the restore does not perform a regeneration and you must correct those certs when the restore completes.
 
 After you successfully restore UCP, you can add new managers and workers the same way you would after a fresh installation. 
 
 ## Restore operation status
-For restore operations, view the standard streams of the UCP bootstrap container.
+For restore operations, view the output of the restore command.
 
 ## Verify the UCP restore
 A successful UCP restore involves verifying the following items:
@@ -87,11 +78,13 @@ A successful UCP restore involves verifying the following items:
 ```
 "curl -s -k https://localhost/_ping". 
 ```
-**Note**: Monitor all swarm managers for at least 15 minutes to ensure no degradation.
-- No containers on swarm managers are marked as "unhealthy".
-- All swarm managers and nodes are running containers with the new version.
-- No swarm managers or nodes are running containers with the old version, except for Kubernetes Pods that use the "ucp-pause" image.
 
+Alternatively, check the UCP UI **Nodes** page for node status, and monitor the UI for warning banners about unhealthy managers.
+
+**Note**: 
+- Monitor all swarm managers for at least 15 minutes to ensure no degradation.
+- Ensure no containers on swarm managers are marked as "unhealthy".
+- No swarm managers or nodes are running containers with the old version, except for Kubernetes Pods that use the "ucp-pause" image.
 
 ### Where to go next
 
