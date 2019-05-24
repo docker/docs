@@ -13,9 +13,9 @@ In the following section, we will show you how to view and audit the list of eve
 ## View List of Events
 
 As of DTR 2.3, admins were able to view a list of DTR events [using the API](/datacenter/dtr/2.3/reference/api/#!/events/GetEvents). DTR 2.6 enhances that feature by showing a permission-based events list for each repository page on the web interface. To view the list of events within a repository, do the following:
-1.  Navigate to `https://<dtr-url>` and log in with your UCP credentials. 
+1.  Navigate to `https://<dtr-url>` and log in with your DTR credentials. 
 
-2.  Select **Repositories** on the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
+2.  Select **Repositories** from the left navigation pane, and then click on the name of the repository that you want to view. Note that you will have to click on the repository name following the `/` after the specific namespace for your repository.
 
 3.  Select the **Activity** tab. You should see a paginated list of the latest events based on your repository permission level. By default, **Activity** shows the latest `10` events and excludes pull events, which are only visible to repository and DTR admins. 
    * If you're a repository or a DTR admin, uncheck "Exclude pull" to view pull events. This should give you a better understanding of who is consuming your images.

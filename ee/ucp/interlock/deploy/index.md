@@ -8,14 +8,6 @@ redirect_from:
 
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
 
-- [Prerequisites](#prerequisites)
-- [Enable layer 7 routing via UCP](#enable-layer-7-routing-via-ucp)
-- [Enable layer 7 routing manually](#enable-layer-7-routing-manually)
-  - [Work with the core service configuration file](#work-with-the-core-service-configuration-file)
-  - [Create a dedicated network for Interlock and extensions](#create-a-dedicated-network-for-interlock-and-extensions)
-  - [Create the Interlock service](#create-the-interlock-service)
-- [Next steps](#next-steps)
-
 ## Prerequisites
 
 - [Docker](https://www.docker.com) version 17.06 or later
@@ -49,8 +41,7 @@ and attaches it to the `ucp-interlock` network. This allows both services
 to communicate.
 4. The `ucp-interlock-extension` generates a configuration to be used by
 the proxy service. By default the proxy service is NGINX, so this service
-generates a standard NGINX configuration.
-( Is this valid here????) UCP creates the `com.docker.ucp.interlock.conf-1` configuration file and uses it to configure all
+generates a standard NGINX configuration. UCP creates the `com.docker.ucp.interlock.conf-1` configuration file and uses it to configure all
 the internal components of this service. 
 5. The `ucp-interlock` service takes the proxy configuration and uses it to
 start the `ucp-interlock-proxy` service.
