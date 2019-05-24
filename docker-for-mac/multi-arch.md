@@ -54,7 +54,7 @@ Notice that this time, the `uname -a` output shows `armv7l` and
 
 Multi-architecture support makes it easy to build <a href="https://blog.docker.com/2017/11/multi-arch-all-the-things/" target="_blank">multi-architecture Docker images</a> or experiment with ARM images and binaries from your Mac.
 
-## Buildx Tech Preview
+## Buildx (Experimental)
 
 With the Docker Desktop 2.0.4.0 Edge release, Docker is making it easier than ever to develop containers on, and for Arm servers and devices. Using the standard Docker tooling and processes, you can start to build, push, pull, and run images seamlessly on different compute architectures. Note that you don't have to make any changes to Dockerfiles or source code to start building for Arm.
 
@@ -77,26 +77,29 @@ Docker Desktop 2.0.4.0 Edge release introduces a new CLI command called `buildx`
 
 Run the command `docker buildx ls` to list the existing builders. This displays the default builder, which is our old builder.
 
-```
-~ ❯❯❯ docker buildx ls
+```bash
+$ docker buildx ls
+
 NAME/NODE DRIVER/ENDPOINT STATUS  PLATFORMS
 default * docker
   default default         running linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
-
 ```
 
 Create a new builder which gives access to the new multi-architecture features.
 
-```
-~ ❯❯❯ docker buildx create --name mybuilder
+```bash
+$ docker buildx create --name mybuilder
+
 mybuilder
 ```
 
 Switch to the new builder and inspect it.
 
-```
-~ ❯❯❯ docker buildx use mybuilder`
-~ ❯❯❯ docker buildx inspect --bootstrap
+```bash
+$ docker buildx use mybuilder
+
+$ docker buildx inspect --bootstrap
+
 [+] Building 2.5s (1/1) FINISHED
  => [internal] booting buildkit                                                   2.5s
  => => pulling image moby/buildkit:master                                         1.3s
@@ -114,8 +117,9 @@ Platforms: linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 
 Test the workflow to ensure you can build, push, and run multi-architecture images. Create a simple example Dockerfile, build a couple of image variants, and push them to Docker Hub.
 
-```
-~ ❯❯❯ mkdir test && cd test && cat <<EOF > Dockerfile
+```bash
+$ mkdir test && cd test && cat <<EOF > Dockerfile
+
 FROM ubuntu
 RUN apt-get update && apt-get install -y curl
 WORKDIR /src
@@ -123,13 +127,16 @@ COPY . .
 EOF
 ```
 
-```
-~/test ❯❯❯ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t username/demo:latest --push .
+```bash
+$ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t username/demo:latest --push .
+
 [+] Building 6.9s (19/19) FINISHED
 ...
  => => pushing layers                                                             2.7s
  => => pushing manifest for docker.io/username/demo:latest                       2.2
  ```
+
+Where, `username` is a valid Docker username.
 
 >   **Notes:**
 >
@@ -138,8 +145,9 @@ EOF
 
 Inspect the image using `imagetools`.
 
-```
-~/test ❯❯❯ docker buildx imagetools inspect username/demo:latest
+```bash
+$ docker buildx imagetools inspect username/demo:latest
+
 Name:      docker.io/username/demo:latest
 MediaType: application/vnd.docker.distribution.manifest.list.v2+json
 Digest:    sha256:2a2769e4a50db6ac4fa39cf7fb300fa26680aba6ae30f241bb3b6225858eab76
@@ -162,51 +170,15 @@ Manifests:
 
   You can run the images using the SHA tag, and verify the architecture. For example, when you run the following on a macOS:
 
- ```
-  ~/test ❯❯❯ docker run --rm docker.io/username/demo:latest@sha256:2b77acdfea5dc5baa489ffab2a0b4a387666d1d526490e31845eb64e3e73ed20 uname -m
-aarch64
+ ```bash
+ $ docker run --rm docker.io/username/demo:latest@sha256:2b77acdfea5dc5baa489ffab2a0b4a387666d1d526490e31845eb64e3e73ed20 uname -m aarch64
 ```
 
-```
-~/test ❯❯❯ docker run --rm docker.io/username/demo:latest@sha256:723c22f366ae44e419d12706453a544ae92711ae52f510e226f6467d8228d191 uname -m
-armv7l
+```bash
+$ docker run --rm docker.io/username/demo:latest@sha256:723c22f366ae44e419d12706453a544ae92711ae52f510e226f6467d8228d191 uname -m armv7l
 ```
 
 In the above example, `uname -m` returns `aarch64` and `armv7l` as expected, even when running the commands on a native macOS developer machine.
-
-### Building a Python Flask web application
-
-The following section describes a slightly more complex example, a python flask web application that displays the host architecture.
-
-Specify a single platform to build the image on. For example, build an image for 64-bit Arm platform.
-
-```
-~❯❯❯ docker buildx build -t username/helloworld:latest --platform linux/arm64 --push github.com/username/helloworld
-[+] Building 69.1s (11/11) FINISHED
- => CACHED [internal] load git source github.com/username/helloworld             0.0s
- => [internal] load metadata for docker.io/library/python:3.7-alpine              0.5s
- => [base 1/1] FROM docker.io/library/python:3.7-alpine@sha256:b3957604aaf12d969  3.6s
-...
- => => pushing layers                                                             7.3s
- => => pushing manifest for docker.io/username/helloworld:latest                 0.3s
- ```
-
-Run the image and publish some ports:
-
-```
-~❯❯❯ docker run -p5000:5000 username/helloworld:latest
-...
- * Serving Flask app "hello" (lazy loading)
- * Environment: production
- * Debug mode: off
- * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
- ```
-
- When you load the browser and point to `localhost:5000`, it displays:
-
- ![localhost](./images/localhost-arm.png)
-
- This shows how simple it is to use Docker commands to build and run multi-architecture images.
 
 ### Buildx demo
 
