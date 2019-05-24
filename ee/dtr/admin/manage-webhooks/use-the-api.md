@@ -309,4 +309,3 @@ delete subscriptions for repositories which you manage.
 ## Where to go next
 
 - [Create promotion policies](promotion-policies/index.md)
-
