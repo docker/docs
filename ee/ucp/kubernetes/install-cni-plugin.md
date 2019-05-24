@@ -4,13 +4,12 @@ description: Learn how to install a Container Networking Interface plugin on Doc
 keywords: ucp, Kubernetes, cni, Container Networking Interface, flannel, weave, calico
 ---
 
-For Docker Universal Control Plane, [Project
+For Docker Universal Control Plane (UCP), [Project
 Calico](https://docs.projectcalico.org/v3.7/introduction/) provides the secure
-networking functionality for the container to container communication within
-Kubernetes. The Universal Control Plane handles the lifecycle of Project Calico,
-installing and upgrading the project as part of UCP. Additionally, the Project
-Calico deployment installed is fully supported, with Docker Support providing
-guidance on the [CNI components](https://github.com/projectcalico/cni-plugin).
+networking functionality for container-to-container communication within
+Kubernetes. UCP handles the lifecycle of Project Calico, installing and upgrading the project as part of UCP. 
+Additionally, the ProjectCalico deployment installed is fully supported, 
+with Docker Support providing guidance on the [CNI components](https://github.com/projectcalico/cni-plugin).
 
 At install time, the Universal Control Plane can be configured to install
 alternative CNI plugin by Platform Operators to support alternative use cases.
@@ -18,7 +17,7 @@ The alternative CNI plugin is certified by Docker and its partners, and
 published on Docker Hub. Universal Control Plane components are still fully
 supported by Docker Support and respective partner support. Docker will provide
 pointers to basic configuration, however for additional guidance on managing 3rd
-party CNI components, the platform operator will need to partner documentation
+party CNI components, the platform operator will need to refer to the partner documentation 
 or contact that 3rd party.
 
 ## Installing a Unmanaged CNI Plugin on Docker UCP
