@@ -36,17 +36,41 @@ Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin
 
 ### ADFS integration values
 
-ADFS integration requires these values:
+ADFS integration requires the following steps:
 
-- Service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
-- Attribute Store: Active Directory.
-    - Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address
-    - Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name
-- Claim using Custom Rule. For example, `c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
- => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);`
-- Outgoing claim type: Name ID
-- Outgoing name ID format: Transient Identifier
-- Pass through all claim values
+1. Add a relying party trust. For example: https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)
+
+2. Obtain the service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+
+3. Add claim rules:      
+               
+    * Convert values from AD to SAML
+        - Display-name : Common Name
+        - E-Mail-Addresses : E-Mail Address
+        - SAM-Account-Name : Name ID   
+    * Create full name for UCP (custom rule):
+        ```
+        c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+        => issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, 
+        ValueType = c.ValueType);
+        ```
+    * Transform account name to Name ID:
+        - Incoming type: Name ID
+        - Incoming format: Unspecified
+        - Outgoing claim type: Name ID
+        - Outgoing format: Transient ID
+    * Pass admin value to allow admin access based on AD group (send group membership as claim):
+         - Users group : Your admin group
+         - Outgoing claim type: is-admin
+         - Outgoing claim value: 1     
+    * Configure group membership (for more complex organizations with multiple groups to manage access)
+        - Send LDAP attributes as claims
+        - Attribute store: Active Directory
+            - Add two rows with the following information:
+                - LDAP attribute = email address; outgoing claim type: email address
+                - LDAP attribute = Display-Name; outgoing claim type: common name
+        - Mapping:
+            - Token-Groups - Unqualified Names : member-of
 
 ## Configure the SAML integration
 
