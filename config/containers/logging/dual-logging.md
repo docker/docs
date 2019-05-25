@@ -1,7 +1,7 @@
 ---
 description: Learn how to read container logs locally when using a third party logging solution.
 keywords: docker, logging, driver
-title: Using docker logs to read container logs for remote logging drivers
+title: Use docker logs to read container logs for remote logging drivers
 ---
 
 ## Overview 
