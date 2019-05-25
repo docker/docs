@@ -308,4 +308,4 @@ delete subscriptions for repositories which you manage.
 
 ## Where to go next
 
-- [Create promotion policies](promotion-policies/index.md)
+- [Manage jobs](/ee/dtr/admin/manage-jobs/job-queue/)
