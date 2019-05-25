@@ -2216,6 +2216,14 @@ manuals:
           title: Create and manage organizations
         - path: /ee/dtr/admin/manage-users/permission-levels/
           title: Permission levels
+      - sectiontitle: Manage webhooks
+        section:
+          - title: Create and manage webhooks
+            path: /ee/dtr/admin/manage-webhooks/
+          - title: Use the web interface
+            path: /ee/dtr/admin/manage-webhooks/use-the-web-ui/
+          - title: Use the API
+            path: /ee/dtr/admin/manage-webhooks/use-the-api/
       - sectiontitle: Manage jobs
         section:
         - path: /ee/dtr/admin/manage-jobs/job-queue/
@@ -2299,14 +2307,6 @@ manuals:
             path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
-      - sectiontitle: Manage webhooks
-        section:
-          - title: Create and manage webhooks
-            path: /ee/dtr/admin/manage-webhooks/
-          - title: Use the web interface
-            path: /ee/dtr/admin/manage-webhooks/use-the-web-ui
-          - title: Use the API
-            path: /ee/dtr/admin/manage-webhooks/use-the-api
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
       - title: Tag pruning
