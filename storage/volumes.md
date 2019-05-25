@@ -464,7 +464,7 @@ $ docker service create -d \
 docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/,"volume-opt=o=10.0.0.10,rw,nfsvers=4,async"' \
-    nginx:latest`
+    nginx:latest
 ```
 
 ## Backup, restore, or migrate data volumes
