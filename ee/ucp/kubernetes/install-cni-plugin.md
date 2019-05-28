@@ -8,8 +8,8 @@ For Docker Universal Control Plane (UCP), [Calico](https://docs.projectcalico.or
 provides the secure networking functionality for container-to-container communication within
 Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
 installation and upgrade. Additionally, the Calico deployment included with
-UCP is fully supported with Docker providing guidance on the [CNI components]
-(https://github.com/projectcalico/cni-plugin).
+UCP is fully supported with Docker providing guidance on the 
+[CNI components](https://github.com/projectcalico/cni-plugin).
 
 At install time, UCP can be configured to install an alternative CNI plugin 
 to support alternative use cases. The alternative CNI plugin is certified by 
