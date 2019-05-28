@@ -23,8 +23,8 @@ clink:
 - docker_registry_ls.yaml
 - docker_registry_rmi.yaml
 deprecated: false
-experimental: false
-experimentalcli: false
+experimental: true
+experimentalcli: true
 kubernetes: false
 swarm: false
 
