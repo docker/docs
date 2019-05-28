@@ -1,41 +1,41 @@
 ---
-title: Install an Unmanaged CNI plugin
-description: Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane.
-keywords: ucp, Kubernetes, cni, Container Networking Interface, flannel, weave, calico
+title: Install an unmanaged CNI plugin
+description: Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane.
+keywords: ucp, kubernetes, cni, container networking interface, flannel, weave, calico
 ---
 
-For Docker Universal Control Plane (UCP), [Project
-Calico](https://docs.projectcalico.org/v3.7/introduction/) provides the secure
-networking functionality for container-to-container communication within
-Kubernetes. UCP handles the lifecycle of Project Calico, installing and upgrading the project as part of UCP. 
-Additionally, the ProjectCalico deployment installed is fully supported, 
-with Docker Support providing guidance on the [CNI components](https://github.com/projectcalico/cni-plugin).
+For Docker Universal Control Plane (UCP), [Calico](https://docs.projectcalico.org/v3.7/introduction/) 
+provides the secure networking functionality for container-to-container communication within
+Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
+installation and upgrade. Additionally, the Calico deployment included with
+UCP is fully supported with Docker providing guidance on the [CNI components]
+(https://github.com/projectcalico/cni-plugin).
 
-At install time, the Universal Control Plane can be configured to install
-alternative CNI plugin by Platform Operators to support alternative use cases.
-The alternative CNI plugin is certified by Docker and its partners, and
-published on Docker Hub. Universal Control Plane components are still fully
-supported by Docker Support and respective partner support. Docker will provide
-pointers to basic configuration, however for additional guidance on managing 3rd
-party CNI components, the platform operator will need to refer to the partner documentation 
-or contact that 3rd party.
+At install time, UCP can be configured to install an alternative CNI plugin 
+to support alternative use cases. The alternative CNI plugin is certified by 
+Docker and its partners, and published on Docker Hub. UCP components are still 
+fully supported by Docker and respective partners. Docker will provide
+pointers to basic configuration, however for additional guidance on managing third party 
+CNI components, the platform operator will need to refer to the partner documentation 
+or contact that third party.
 
-## Installing a Unmanaged CNI Plugin on Docker UCP
+## Install an unmanaged CNI Plugin on Docker UCP
 
-Once a platform operator has followed the [System
-Requirements](/ee/ucp/admin/install/system-requirements/) documentation, and
-taken into consideration any requirements for the custom CNI plugin. The Docker
-UCP installation command can be ran with a `--unmanaged-cni` flag to bring up
-the platform.
+Once a platform operator has complied with [UCP system
+requirements](/ee/ucp/admin/install/system-requirements/) and
+taken into consideration any requirements for the custom CNI plugin, you can 
+[run the UCP install command with the `--unmanaged-cni` flag](/ee/ucp/kubernetes/install-cni-plugin/)  
+to bring up the platform.
 
-This command will install the Universal Control Plane, and bring up components
-like the UCP UI and the RBAC engine. Universal Control Planes components that
+This command will install UCP, and bring up components
+like the user interface and the RBAC engine. UCP components that
 require Kubernetes Networking, such as Metrics, will not start and will stay in
 a `Container Creating` state in Kubernetes, until a CNI is installed. 
 
 ### Install UCP without a CNI Plugin
 
-Once connected to a manager node, with the Docker Enterprise Engine installed, you are ready to bring up UCP with the `--unmanaged-cni` flag.
+Once connected to a manager node with the Docker Enterprise Engine installed, 
+you are ready to install UCP with the `--unmanaged-cni` flag.
 
 ```bash
 docker container run --rm -it --name ucp \
@@ -46,18 +46,18 @@ docker container run --rm -it --name ucp \
   --interactive
 ```
 
-Once the installation is complete, you will be able to access UCP in web
-browser. Note the Manager node will be unhealthy as the Kubelet will be
-reporting `NetworkPluginNotReady`. Additionally the metrics in the UCP dashboard
-will also be unavailable, as this runs in a Kubernetes pods.
+Once the installation is complete, you will be able to access UCP in the browser. 
+Note that the manager node will be unhealthy as the kubelet will 
+report `NetworkPluginNotReady`. Additionally, the metrics in the UCP dashboard
+will also be unavailable, as this runs in a Kubernetes pod.
 
 ### Configure CLI Access to UCP
 
-Next a platform operator should log into UCP, download a UCP Client Bundle, and
-configure the Kubernetes CLI tool `kubectl`. For more information see [CLI Based
-Access](ee/ucp/user-access/cli/#download-client-certificates)
+Next, a platform operator should log into UCP, download a UCP client bundle, and
+configure the Kubernetes CLI tool, `kubectl`. See [CLI Based
+Access](ee/ucp/user-access/cli/#download-client-certificates) for more details.
    
-Using `kubectl` you should be able to see that the UCP components that run on
+With `kubectl`, you can see that the UCP components running on
 Kubernetes are still pending, waiting for a CNI driver before becoming
 available. 
 
@@ -76,28 +76,29 @@ ucp-metrics-nwt2z              0/3       ContainerCreating   0          10m     
 
 ### Install an Unmanaged CNI Plugin
 
-Using the `kubectl` tool you are now able to install a custom CNI plugin on to
-the Universal Control Plane. Alternative CNI plugins could be Weave, Flannel,
-Canal, Romana and many more. As Docker Support will not support the CNI plugin,
-a platform operator has complete flexibility on what they install.
+You can use`kubectl` to install a custom CNI plugin on UCP. 
+Alternative CNI plugins are Weave, Flannel, Canal, Romana and many more. 
+Platform operators have complete flexibility on what to install, but Docker 
+will not support the CNI plugin.
 
-Common steps when installing a CNI plugin would be to download the relevant
-upstream CNI binaries from
-https://github.com/containernetworking/cni/releases/tag/, placing them in
-`/opt/cni/bin`, additionally downloading the relevant CNI Plugins Kubernetes
-Manifest yaml and running `$ kubectl apply -f <your-custom-cni-plugin>.yaml`.
+The steps for installing a CNI plugin typically include: 
+- Downloading the relevant upstream CNI binaries from
+https://github.com/containernetworking/cni/releases/tag/
+- Placing them in `/opt/cni/bin`
+- Downloading the relevant CNI plugin's Kubernetes Manifest YAML, and 
+- Running `$ kubectl apply -f <your-custom-cni-plugin>.yaml`
    
-Please follow the relevant CNI Plugins documentation to understand the specific
-installation instructions.
+Follow the CNI plugin documentation for specific installation 
+instructions.
 
-> While troubleshooting a Custom CNI Plugin, you may wish to access logs
-> within the Kubelet. This can be done while connected to the UCP manager with
+> While troubleshooting a custom CNI plugin, you may wish to access logs
+> within the kubelet. Connect to a UCP manager node and run
 > `$ docker logs ucp-kubelet`.
 
 ### Verify the UCP installation
 
-Once the CNI plugin has been completely installed, you should now see the
-Universal Control Plane components that run as pods start to become available.
+Upon successful installation of the CNI plugin, the related UCP components should have
+a `Running` status as pods start to become available.
 
 ```
 $ kubectl get pods -n kube-system -o wide
@@ -109,8 +110,8 @@ ucp-metrics-nwt2z              3/3       Running   0          22m       10.32.0.
 weave-net-wgvcd                2/2       Running   0          8m        172.31.6.95   manager-01   <none>
 ```
 
-> Note: In this example you can see we have deployed Weave, you may have
-> alternative CNI pods in this namespace. 
+> **Note**: The above example deployment uses Weave. If you are using an alternative 
+> CNI plugin, look for the relevant name and review its status.
 
 ## Where to go next
 
