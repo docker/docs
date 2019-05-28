@@ -24,7 +24,7 @@ or contact that third party.
 Once a platform operator has complied with [UCP system
 requirements](/ee/ucp/admin/install/system-requirements/) and
 taken into consideration any requirements for the custom CNI plugin, you can 
-[run the UCP install command with the `--unmanaged-cni` flag](/ee/ucp/kubernetes/install-cni-plugin/)  
+[run the UCP install command]((/reference/ucp/3.1/cli/install/) with the `--unmanaged-cni` flag
 to bring up the platform.
 
 This command will install UCP, and bring up components
