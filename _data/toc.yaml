@@ -1371,7 +1371,7 @@ manuals:
         path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
-      - title: Install a CNI plugin
+      - title: Install an unmanaged CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
