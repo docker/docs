@@ -569,7 +569,7 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
-  
+
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
 
@@ -938,50 +938,6 @@ devices:
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
-
-### depends_on
-
-Express dependency between services, Service dependencies cause the following
-behaviors:
-
-- `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` are started before `web`.
-
-- `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  creates and starts `db` and `redis`.
-  
-- `docker-compose stop` stops services in dependency order. In the following
-  example, `web` is stopped before `db` and `redis`.
-
-Simple example:
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  web:
-    build: .
-    depends_on:
-      - db
-      - redis
-  redis:
-    image: redis
-  db:
-    image: postgres
-```
-
-> There are several things to be aware of when using `depends_on`:
->
-> - `depends_on` does not wait for `db` and `redis` to be "ready" before
->   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
->   for more on this problem and strategies for solving it.
->
-> - Version 3 no longer supports the `condition` form of `depends_on`.
->
-> - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
->   with a version 3 Compose file.
 
 ### dns
 
@@ -2294,7 +2250,7 @@ Use the host's networking stack, or no networking. Equivalent to
 use [network_mode](#network_mode) instead.
 
 If you want to use a particular network on a common build, use [network] as 
-mentioned in the second yaml file example.  
+mentioned in the second yaml file example.
 
 The syntax for using built-in networks such as `host` and `none` is a little
 different. Define an external network with the name `host` or `none` (that
