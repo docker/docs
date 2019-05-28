@@ -51,7 +51,7 @@ Note that the manager node will be unhealthy as the kubelet will
 report `NetworkPluginNotReady`. Additionally, the metrics in the UCP dashboard
 will also be unavailable, as this runs in a Kubernetes pod.
 
-### Configure CLI Access to UCP
+### Configure CLI access to UCP
 
 Next, a platform operator should log into UCP, download a UCP client bundle, and
 configure the Kubernetes CLI tool, `kubectl`. See [CLI Based
@@ -74,7 +74,7 @@ kube-dns-6d96c4d9c6-8jzv7      0/3       Pending             0          10m     
 ucp-metrics-nwt2z              0/3       ContainerCreating   0          10m       <none>    manager-01   <none>
 ```
 
-### Install an Unmanaged CNI Plugin
+### Install an unmanaged CNI Plugin
 
 You can use`kubectl` to install a custom CNI plugin on UCP. 
 Alternative CNI plugins are Weave, Flannel, Canal, Romana and many more. 
