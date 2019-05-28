@@ -19,7 +19,7 @@ pointers to basic configuration, however for additional guidance on managing thi
 CNI components, the platform operator will need to refer to the partner documentation 
 or contact that third party.
 
-## Install an unmanaged CNI Plugin on Docker UCP
+## Install an unmanaged CNI plugin on Docker UCP
 
 Once a platform operator has complied with [UCP system
 requirements](/ee/ucp/admin/install/system-requirements/) and
@@ -32,7 +32,7 @@ like the user interface and the RBAC engine. UCP components that
 require Kubernetes Networking, such as Metrics, will not start and will stay in
 a `Container Creating` state in Kubernetes, until a CNI is installed. 
 
-### Install UCP without a CNI Plugin
+### Install UCP without a CNI plugin
 
 Once connected to a manager node with the Docker Enterprise Engine installed, 
 you are ready to install UCP with the `--unmanaged-cni` flag.
@@ -74,7 +74,7 @@ kube-dns-6d96c4d9c6-8jzv7      0/3       Pending             0          10m     
 ucp-metrics-nwt2z              0/3       ContainerCreating   0          10m       <none>    manager-01   <none>
 ```
 
-### Install an unmanaged CNI Plugin
+### Install an unmanaged CNI plugin
 
 You can use`kubectl` to install a custom CNI plugin on UCP. 
 Alternative CNI plugins are Weave, Flannel, Canal, Romana and many more. 
