@@ -5,8 +5,8 @@ usage: docker registry rmi REPOSITORY:TAG [OPTIONS]
 pname: docker registry
 plink: docker_registry.yaml
 deprecated: false
-experimental: false
-experimentalcli: false
+experimental: true
+experimentalcli: true
 kubernetes: false
 swarm: false
 
