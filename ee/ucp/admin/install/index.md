@@ -88,11 +88,10 @@ To install UCP:
 
 > Custom Container Networking Interface (CNI) plugins
 >
->Docker Universal Control Plane will install [Project
->Calico](https://docs.projectcalico.org/v3.7/introduction/) for Container to
->Container communication for Kubernetes. A platform operator may choose to
->install an alternative CNI plugin, such as Weave or Flannel. Please see
->[Install an Unmanaged CNI Plugin](/ee/ucp/kubernetes/install-cni-plugin/).
+> UCP will install [Project Calico](https://docs.projectcalico.org/v3.7/introduction/) 
+> for container-to-container communication for Kubernetes. A platform operator may 
+> choose to install an alternative CNI plugin, such as Weave or Flannel. Please see
+>[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/).
 {: important}
 
 ## Step 5: License your installation
