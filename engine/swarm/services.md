@@ -122,9 +122,8 @@ Make sure that the nodes to which you are deploying are correctly configured for
  You can specify any name for the name of the `config`. 
 
 ```
-docker config create credspec credspec.json
+docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
 ```
-
 Now you can create a service using this credential spec. Specify the `--credential-spec` flag with the config name:
 ```
 docker service create --credential-spec="config://credspec" <your image>
