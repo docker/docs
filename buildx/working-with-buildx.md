@@ -1,7 +1,7 @@
 ---
 title: Working with Docker Buildx (experimental)
-description: Working with Docker buildx
-keywords: Docker, application template, Application Designer,
+description: Working with Docker Buildx
+keywords: Docker, buildx, multi-arch
 ---
 
 > **Note:** Docker Buildx is an experimental feature.
