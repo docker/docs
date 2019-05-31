@@ -106,7 +106,7 @@ is about older releases of Docker for Mac.
 
 If, after installing Docker for Mac, you [change the name of your macOS user
 account and home folder](https://support.apple.com/en-us/HT201548), Docker for
-Mac fails to start.  [Reset to Factory Defaults](index.md#reset) is the simplest
+Mac fails to start.  [Reset to Factory Defaults](/docker-for-mac/index/#reset) is the simplest
 fix, but you'll lose all your settings, containers, images, etc.
 
 To preserve them, open the `~/Library/Group
@@ -246,7 +246,7 @@ Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
 For full information on adding server and client side certs, see
-[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](/docker-for-mac/index/#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
@@ -256,7 +256,7 @@ in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 For full information on adding server and client side certs, see
-[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](/docker-for-mac/index/#add-tls-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 

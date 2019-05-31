@@ -47,7 +47,7 @@ Older versions of Docker were called `docker` or `docker-engine`. In addition,
 if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker-ce docker.io
+$ sudo apt-get remove docker docker-engine docker-ce docker-ce-cli docker.io
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.

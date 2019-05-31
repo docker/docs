@@ -1,7 +1,7 @@
 ---
 title: Working with Docker Template
 description: Working with Docker Application Template
-keywords: Docker, application template, Application Designer,
+keywords: Docker, application template, Application Designer
 ---
 
 ## Overview

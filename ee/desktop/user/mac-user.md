@@ -1,6 +1,5 @@
 ---
 title: Use Docker Desktop Enterprise on Mac
-description: Exploring the Mac user interface
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
 ---
 
