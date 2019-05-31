@@ -22,7 +22,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
 * 2 vCPUs for manager nodes
-* 5GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
+* 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
 
 **Note**: Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
@@ -85,6 +85,16 @@ host types:
 | managers          | TCP 12385               | Internal           | Port for the authentication service API                                       |
 | managers          | TCP 12386               | Internal           | Port for the authentication worker                                            |
 | managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                   |
+
+## Disable `CLOUD_NETCONFIG_MANAGE` for SLES 15
+For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE` 
+prior to installing UCP.
+
+    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set 
+    ```
+    CLOUD_NETCONFIG_MANAGE="no"
+    ```
+    2. Run `service network restart`.
 
 ## Avoid firewall conflicts
 
