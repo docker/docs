@@ -1371,14 +1371,18 @@ manuals:
         path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
-      - title: Install a CNI plugin
+      - title: Install an unmanaged CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
       - sectiontitle: Persistent Storage
         section:
-        - title: Use NFS storage
+        - title: Use NFS Storage
           path: /ee/ucp/kubernetes/storage/use-nfs-volumes/
+        - title: Use Azure Disk Storage
+          path: /ee/ucp/kubernetes/storage/use-azure-disk/
+        - title: Use Azure Files Storage
+          path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
     - title: API reference
@@ -2212,6 +2216,14 @@ manuals:
           title: Create and manage organizations
         - path: /ee/dtr/admin/manage-users/permission-levels/
           title: Permission levels
+      - sectiontitle: Manage webhooks
+        section:
+          - title: Create and manage webhooks
+            path: /ee/dtr/admin/manage-webhooks/
+          - title: Use the web interface
+            path: /ee/dtr/admin/manage-webhooks/use-the-web-ui/
+          - title: Use the API
+            path: /ee/dtr/admin/manage-webhooks/use-the-api/
       - sectiontitle: Manage jobs
         section:
         - path: /ee/dtr/admin/manage-jobs/job-queue/
@@ -2295,8 +2307,6 @@ manuals:
             path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
-      - path: /ee/dtr/user/create-and-manage-webhooks/
-        title: Create and manage webhooks
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
       - title: Tag pruning

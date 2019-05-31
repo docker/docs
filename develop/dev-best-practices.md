@@ -102,7 +102,7 @@ keep image size small:
 
 There are limitations around sharing data amongst nodes of a swarm service.
 If you use [Docker for AWS](/docker-for-aws/persistent-data-volumes.md) or
-[Docker for Azure](docker-for-azure/persistent-data-volumes.md), you can use the
+[Docker for Azure](/docker-for-azure/persistent-data-volumes.md), you can use the
 Cloudstor plugin to share data amongst your swarm service nodes. You can also
 write your application data into a separate database which supports simultaneous
 updates.
