@@ -31,10 +31,10 @@ are production quality and are considered pre-GA.
 
 2. Install Docker Enterprise 3.0, which includes UCP 3.2. 
 3. Optionally, set the `--storage-expt-enabled` flag in the UCP install configuration if you want to enable
-experimental storage features in Kubernetes 1.14. Features that are enabled include VolumeSnapshotDataSource,
-ExpandCSIVolumes, CSIMigration, CSIMigrationAWS, CSIMigrationGCE, CSIMigrationOpenStack and VolumeSubpathEnvExpansion.
-For details on the functionality of these features, refer to
-https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates
+experimental storage features in Kubernetes 1.14. Features that are enabled include `VolumeSnapshotDataSource`,
+`ExpandCSIVolumes`, `CSIMigration`, `CSIMigrationAWS`, `CSIMigrationGCE`, `CSIMigrationOpenStack`, 
+and `VolumeSubpathEnvExpansion`. For details on these features, refer to
+https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates.
 4. Install the CSI plugin from your storage provider. For notes regarding installation, refer to your 
 storage provider’s user manual.
 5. Apply RBAC for sidecars and the CSI driver. For details on how to apply RBAC for your specific storage provider, 
