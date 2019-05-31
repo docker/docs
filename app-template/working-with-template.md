@@ -1,7 +1,7 @@
 ---
 title: Working with Docker Template
 description: Working with Docker Application Template
-keywords: Docker, application template, Application Designer,
+keywords: Docker, application template, Application Designer
 ---
 
 ## Overview
@@ -442,4 +442,4 @@ The following table lists the `interpolator` binary options:
  | `-source`             | none                       |  Source file or folder to interpolate from|
  | `-destination`            | none                    |  Destination file or folder to copy the interpolated files to|
  | `-config`             | `/run/configuration`        |  The path to the json configuration file                        |
- | `-skip-template`      | false                       | If set to `true`, it copies assets without any transformation    |
+ | `-skip-template`             | false                | If set to `true`, it copies assets without any transformation    |

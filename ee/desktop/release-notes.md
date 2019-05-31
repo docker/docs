@@ -16,6 +16,25 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ## Docker Desktop Enterprise Releases of 2019
 
+### Docker Desktop Enterprise 2.0.0.5
+
+2019-05-30
+
+- Upgrades
+
+  - [Docker 19.03.0-rc1](https://docs.docker.com/engine/release-notes/) in Enterprise 3.0 version pack
+  - Application Designer 0.1.2
+  - [Qemu 4.0.0](https://github.com/docker/binfmt) to cross-compile ARM devices
+
+- Bug fixes and minor changes
+
+  - Application Designer now allows users to copy and paste application logs.
+  - Users can browse the scaffold logs when scaffolding a new application using the Application Designer.
+  - Application Designer allows users to set preferences, including the default organization and registry.
+  - Docker Desktop admins can enforce Application Designer preferences using the `admin-settings.json` file.
+  - Security improvements: Docker Desktop now checks TLS certificates for the target endpoints when using `kubectl`.
+  - Fixed an issue where Visual Studio Code IDE path was not detected properly.
+
 ### Docker Desktop Enterprise 2.0.0.4
 
 2019-05-16
@@ -32,20 +51,12 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
   - Fixed a race condition where Kubernetes sometimes failed to start after restarting the application.
   - Fixed a bug that causes Docker Compose to fail when a user logs out after logging in. See [docker/compose#6517](https://github.com/docker/compose/issues/6517)
   - Improved the reliability of `com.docker.osxfs trace` performance profiling command.
-<<<<<<< HEAD
   - Docker Desktop now supports large lists of resource DNS records on Mac. See [docker/for-mac#2160](https://github.com/docker/for-mac/issues/2160#issuecomment-431571031).
   - Users can now run a Docker registry in a container. See [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611).
   - For Linux containers on Windows (LCOW), one physical computer system running Windows 10 Professional or Windows 10 Enterprise version 1809 or later is required.
   - Added a dialog box during startup when a shared drive fails to mount. This allows users to retry mounting the drive or remove it from the shared drive list.
   - Removed the ability to log in using an email address as a username as this is not supported by the Docker command line.
-=======
-  - Docker Desktop now supports large lists of resource DNS records on Mac. See [docker/for-mac#2160](https://github.com/docker/for-mac/issues/2160#issuecomment-431571031)
-  - Users can now run a Docker registry in a container. See [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611).
-  - For Linux containers on Windows (LCOW), one physical computer system running Windows 10 Professional or Windows 10 Enterprise version 1809 or later is required.
-  - Added a dialog box during start up when a shared drive fails to mount allowing the user to retry mounting the drive or remove it from the shared drive list.
-  - Removed the ability to log in using an email address as a username as it is not supported by the Docker command line.
->>>>>>> 911e6599e3... minor updates to the public beta release notes
-  
+
 ### Docker Desktop Enterprise 2.0.0.3
 
 2019-04-26
