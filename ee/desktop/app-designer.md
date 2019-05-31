@@ -4,11 +4,7 @@ description: Docker Desktop Enterprise Application Designer
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer
 ---
 
-<<<<<<< HEAD
 ## Overview
-=======
-# Overview
->>>>>>> 1013: Move desktop ent content to docs-private
 
 The Application Designer helps Docker developers quickly create new
 Docker apps using a library of templates. To start the Application
