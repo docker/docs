@@ -1,18 +1,10 @@
 ---
 title: Layer 7 routing overview
 description: Learn how to route layer 7 traffic to your Swarm services
-<<<<<<< HEAD
 keywords: routing, UCP, interlock, load balancing
 ---
 
 Application-layer (Layer 7) routing is the application routing and load balancing (ingress routing) system included with Docker Enterprise for Swarm orchestration. Interlock architecture takes advantage of the underlying Swarm components to provide scalable Layer 7 routing and Layer 4 VIP mode functionality.
-=======
-keywords: routing, proxy
----
-
-## Introduction
-Interlock is the application routing and load balancing (ingress routing) system included with Docker Enterprise for Swarm orchestration. Interlock takes advantage of the underlying Swarm components to provide scalable Layer 7 routing and Layer 4 VIP mode functionality.
->>>>>>> Raw content addition
 
 Interlock is specific to the Swarm orchestrator. If you're trying to route
 traffic to your Kubernetes applications, check
