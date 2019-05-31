@@ -60,7 +60,7 @@ Error log information can be accessed for troubleshooting.
 - User workloads no longer experience downtime during an upgrade.
  
 ## Deprecations
-The following features are deprecated in UCP 3.1:
+The following features are deprecated in UCP 3.2:
 
 - Collections
     - The ability to create a nested collection of more than 2 layers deep within the root /Swarm/collection is 
@@ -72,6 +72,11 @@ The following features are deprecated in UCP 3.1:
     example, /Swarm/production/app/. See Nested collections for more details.    
 - UCP `stop` and `restart`
     - Additional upgrade functionality has been included which eliminates the need for these commands. 
+- `ucp-agent-pause`
+    - `ucp-agent-pause` is no longer supported. To pause UCP reconciliation on a specific node, for example, when repairing unhealthy `etcd` or `rethinkdb` replicas, you can use swarm node labels as shown in the following example:
+    ```
+    docker node update --label-add com.docker.ucpagent-pause=true <NODE>
+    ```
  
 ## Browser support 
 In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
