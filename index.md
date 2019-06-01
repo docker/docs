@@ -27,9 +27,9 @@ production servers in the cloud. Total reading time is less than an hour.
 Run your solution in production with Docker Enterprise to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
-Docker EE without installing anything.
+Docker Enterprise without installing anything.
 
-[Try Docker Enterprise Edition](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
+[Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
 </div>
 </div>
