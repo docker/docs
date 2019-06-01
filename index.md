@@ -58,7 +58,9 @@ Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
 the industry to modernize all applications. Docker Enterprise Advanced comes with enterprise
-[add-ons](#docker-ee-add-ons) like Universal Control Plane for managing and orchestrating the container runtime, and Docker Trusted Registry for storing and securing images in an enterprise grade registry.
+[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and 
+orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and 
+securing images in an enterprise grade registry.
 
 [Learn more about Docker Enterprise](/ee/supported-platforms/){: class="button outline-btn"}
 
