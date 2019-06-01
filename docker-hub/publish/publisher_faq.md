@@ -71,7 +71,7 @@ We don't support the abiltiy to view available tags for published products becau
 
 Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
 
-We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access. (Expected Q3 2018)
+We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access.
 
 ### On the page for another vendor’s product on Docker Hub, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
@@ -212,4 +212,4 @@ Yes
 
 ### Can I have a publish by date for my content?
 
-Not yet. Potential ETA Q2 2018.
+Not yet. This is a planned enhancement, but we have no specific availability date at this time.
