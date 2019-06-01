@@ -169,11 +169,6 @@ As a publisher you can charge a subscription fee every month in USD. The amount
 is determined by you. We are working on other pricing options. If you have
 feedback about pricing, send us an email at publisher-support@docker.com
 
-### As a publisher, I have not setup any payment account. How does money get to me if my commercial content gets purchased by customers?
-
-We (Docker) cut you a check post a revenue share. Your Docker Hub Vendor
-Agreement should cover specifics.
-
 ### How does Docker handle Export control? Can individual countries be specified if differing from Docker's list of embargoed countries?
 
 We provide export control through blacklisting several countries, IPs and users
