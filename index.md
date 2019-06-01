@@ -22,12 +22,12 @@ production servers in the cloud. Total reading time is less than an hour.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Try Docker Enterprise Edition
+## Try Docker Enterprise
 
-Run your solution in production with Docker Enterprise Edition to get a
+Run your solution in production with Docker Enterprise to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
-Docker EE without installing anything.
+Docker Enterprise without installing anything.
 
 [Try Docker Enterprise Edition](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
@@ -52,12 +52,12 @@ channel for more predictability.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Enterprise Edition
+### Docker Enterprise Platform
 
 Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker EE Advanced comes with enterprise
+the industry to modernize all applications. Docker Enterprise Advanced comes with enterprise
 [add-ons](#docker-ee-add-ons) like UCP and DTR.
 
 [Learn more about Docker EE](/ee/supported-platforms/){: class="button outline-btn"}
