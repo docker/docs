@@ -211,6 +211,9 @@ docker container ls --all
 docker container ls -aq
 ```
 
+> **Note**: Single options that are prefixed with a single hyphen (-) can be concatenated. The order 
+of the concatenated options is not important. For example, `-it` is equivalent to `-i -t` and is also equivalent to `-ti`.
+
 ## Conclusion of part one
 
 Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
