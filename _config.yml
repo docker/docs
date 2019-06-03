@@ -122,6 +122,13 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
+      dtr_version: "2.7.0"
+  - scope:
+      path: "datacenter/dtr/2.6"
+    values:
+      hide_from_sitemap: true
+      dtr_org: "docker"
+      dtr_repo: "dtr"
       dtr_version: "2.6.6"
   - scope:
       path: "datacenter/dtr/2.5"
@@ -165,15 +172,22 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.7"
+      ucp_version: "3.2.0"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
+      ucp_version: "3.2.0"
+      dtr_version: "2.7.0"
+  - scope:
+      path: "datacenter/ucp/3.1"
+    values:
+      hide_from_sitemap: true
+      ucp_org: "docker"
+      ucp_repo: "ucp"
       ucp_version: "3.1.7"
-      dtr_version: "2.6.6"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
