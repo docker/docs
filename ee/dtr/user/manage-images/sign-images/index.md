@@ -7,21 +7,22 @@ redirect_from:
 - /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
 ---
 
-2 Key components of the Docker Trusted Registry are the Notary Server and Notary
-Signer. These 2 containers give us the required components to use Docker Content
-Trust right out of the box. [Docker Content
-Trust](/engine/security/trust/content_trust/) allows us to sign image tags,
+Two key components of the Docker Trusted Registry are the Notary Server and the Notary
+Signer. These two containers offer the required components for using Docker Content
+Trust (DCT) out of the box. [Docker Content
+Trust](/engine/security/trust/content_trust/) allows you to sign image tags,
 therefore whoever pulls the image can validate that they are getting the image
-you create, or a forged one. 
+you created. 
 
-As part of Docker Trusted Registry both the Notary server and the Registry
-server are accessed through a front end Proxy, with both components sharing the
-UCP's RBAC Engine. Therefore no additional configuration of the Docker Client
-is required to use trust.
+As part of DTR, both the Notary and the Registry
+servers are accessed through a front-end proxy, with both components sharing the
+UCP's RBAC (Role-based Access Control) Engine. Therefore, you do not need additional Docker client
+configuration in order to use DCT.
 
-Docker Content Trust is integrated into the Docker CLI, allowing you to
-configure repositories, add signers and sign images all through the `$ docker
-trust` command.
+DCT is integrated with the Docker CLI, and allows you to:
+- Configure repositories
+- Add signers, and 
+- Sign images using the `docker trust` command
 
 ![image without signature](../../../images/sign-an-image-1.svg)
 
@@ -29,31 +30,29 @@ trust` command.
 
 UCP has a feature which will prevent [untrusted
 images](/ee/ucp/admin/configure/run-only-the-images-you-trust/) from being
-deployed on the cluster. To use this feature, we first need to upload and sign
-images into DTR. To tie the signed images back to UCP, we will actually sign the
-images with private keys of UCP users. Inside of a UCP Client bundle the
-`key.pem` can be used a User's private key, with the `cert.pem` being a public
-key within a x509 certificate. 
+deployed on the cluster. To use the feature, you need to sign and push images to your DTR. 
+To tie the signed images back to UCP, you need to sign the
+images with the private keys of the UCP users. From a UCP client bundle, you can use
+`key.pem` as your private key, and `cert.pem` as your public key
+key on an `x509` certificate. 
 
-To sign images in a way that UCP trusts them, you need to:
+To sign images in a way that UCP can trust, you need to:
 
-1. Download a Client Bundle for a User you want to use to sign the images. 
-2. Load the private key of the User into your workstations trust store.
+1. Download a client bundle for the user account you want to use for signing the images. 
+2. Add the user's private key to your machine's trust store.
 3. Initialize trust metadata for the repository. 
-4. Delegate signing for that repository to the UCP User.
-5. Sign the Image. 
+4. Delegate signing for that repository to the UCP user.
+5. Sign the image. 
 
-In this example we're going to pull a nginx image from the Docker Hub, re-tag it
-as `dtr.example.com/dev/nginx:1`, push the image to DTR and sign it in a way
-that is trusted by UCP. If you manage multiple repositories, you'll have to do
-the same procedure for each repository.
+The following example shows the `nginx` image getting pulled from Docker Hub, tagged
+as `dtr.example.com/dev/nginx:1`, pushed to DTR, and signed in a way
+that is trusted by UCP.
 
-### Import a UCP User's Private Key
+### Import a UCP user's private key
 
-Once you have download and extracted a UCP User's client bundle into your local
-directory, you need to load the Private key into the local Docker trust store
-`(~/.docker/trust)`. The name used here is purely metadata to help keep track of
-which keys you have imported.
+After downloading and extracting a UCP client bundle into your local
+directory, you need to load the private key into the local Docker trust store
+`(~/.docker/trust)`. To illustrate the process, we will use `jeff` as an example user.
 
 ```bash
 $ docker trust key load --name jeff key.pem
@@ -63,13 +62,13 @@ Repeat passphrase for new jeff key with ID a453196:
 Successfully imported key from key.pem
 ```
 
-### Initialize the trust metadata and add the Public Key
+### Initialize the trust metadata and add the user's public certificate
 
-Next, we need to initiate trust metadata for a DTR repository. If you have not
+Next,initiate trust metadata for a DTR repository. If you have not
 done so already, navigate to the **DTR web UI**, and create a repository for
-your image. In this example we've created the `prod/nginx` repository.
+your image. This example uses the `nginx` repository in the `prod` namespace.
 
-As part of initiating the repository, we will add the public key of the UCP User
+As part of initiating the repository, add the public key of the UCP user
 as a signer. You will be asked for a number of passphrases to protect the keys.
 Make a note of these passphrases, and see [Managing Delegations in a Notary Server](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
 to learn more about managing keys.
@@ -86,7 +85,7 @@ Successfully initialized "dtr.example.com/prod/nginx"
 Successfully added signer: jeff to dtr.example.com/prod/nginx
 ```
 
-We can inspect the trust metadata of the repository to make sure the User has
+Inspect the trust metadata of the repository to make sure the user has
 been added correctly.
 
 ```bash
@@ -105,11 +104,10 @@ Administrative keys for dtr.example.com/prod/nginx
   Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
 ```
 
-### Sign the Image
+### Sign the image
 
-Finally, we will sign an image tag. These steps download the Image from the
-Docker Hub, retag the Image to the DTR repository, push the image up to DTR, as
-well as signing the tag with the UCP User's keys. 
+Finally, user `jeff` can sign an image tag. The following steps include downloading the image from Hub, tagging the image for Jeff's DTR repository, pushing the image to Jeff's DTR, as
+well as signing the tag with Jeff's keys. 
 
 ```bash
 $ docker pull nginx:latest
@@ -128,7 +126,7 @@ Enter passphrase for jeff key with ID 927f303:
 Successfully signed dtr.example.com/prod/nginx:1
 ```
 
-We can inspect the trust metadata again to make sure the image tag has been
+Inspect the trust metadata again to make sure the image tag has been
 signed successfully. 
 
 ```bash
@@ -150,19 +148,19 @@ Administrative keys for dtr.example.com/prod/nginx:1
   Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
 ```
 
-Or we can have a look at the signed image from within the **DTR UI**. 
+Alternatively, you can review the signed image from the DTR web UI.
 
 ![DTR](../../../images/sign-an-image-3.png){: .with-border}
 
-### Adding Additional Delegations
+### Add delegations
 
-If you wanted to sign this image with multiple UCP Users, maybe if you had a use
-case where an image needed to be signed by a member of the `Security` team and a
-member of the `Developers` team. Then you can add multiple signers to a
-repository. 
+You have the option to sign an image using multiple UCP users' keys. For example, an image
+needs to be signed by a member of the `Security` team and a
+member of the `Developers` team. Let's assume `jeff` is a member of the Developers team.
+In this case, we only need to add a member of the Security team.
 
-To do so, first load a private key from a UCP User of the Security Team's in to
-the local Docker Trust Store. 
+To do so, first add the private key of the Security team member to
+the local Docker trust store. 
 
 ```bash
 $ docker trust key load --name security key.pem
@@ -172,8 +170,8 @@ Repeat passphrase for new security key with ID 5ac7d9a:
 Successfully imported key from key.pem
 ```
 
-Upload the Public Key to the Notary Server and Sign the Image. You will be asked
-for both the Developers passphrase, as well as the Security Users passphrase to
+Upload the user's public key to the Notary Server and sign the image. You will be asked
+for `jeff`, the developer's passphrase, as well as the `security` user's passphrase to
 sign the tag. 
 
 ```bash
@@ -191,8 +189,7 @@ Enter passphrase for security key with ID 5ac7d9a:
 Successfully signed dtr.example.com/prod/nginx:1
 ```
 
-Finally, we can check the tag again to make sure it is now signed by 2
-signatures. 
+Finally, check the tag again to make sure it includes two signers.
 
 ```bash
 $ docker trust inspect --pretty dtr.example.com/prod/nginx:1
@@ -218,13 +215,12 @@ For more advanced use cases like this, see [Delegations for content trust](/engi
 
 ## Delete trust data
 
-If an Administrator wants to delete a DTR repository that contains Trust
-metadata, they will be prompted to delete the trust metadata first before the
-repository can be removed. 
+If an administrator wants to delete a DTR repository that contains trust
+metadata, they will be prompted to delete the trust metadata first before removing the repository.
 
-To delete trust metadata we need to use the Notary CLI. For information on how
-to download and configure the Notary CLI head
-[here](/engine/security/trust/trust_delegation/#configuring-the-notary-client)
+To delete trust metadata, you need to use the Notary CLI. For information on how
+to download and configure the Notary CLI see
+[Configuring the Notary client](/engine/security/trust/trust_delegation/#configuring-the-notary-client)
 
 
 ```bash
