@@ -16,6 +16,21 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ## Docker Desktop Enterprise Releases of 2019
 
+### Docker Desktop Enterprise 2.0.0.6
+
+2019-06-06
+
+- Upgrades
+  - [Docker 19.03.0-rc2](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0
+  - Application Designer 0.1.3
+  
+- Bug fixes and minor changes:
+  - Application Designer / template plugin: renamed "DefaultServer" preference to "DefaultRegistry"
+  - Windows: Allow administrator to specify authorised named pipes that can be mounted in Windows containers
+  - Windows: Check stored credentials at start up before attempting to mount any shared drives, prompting the user to re-enter the credentials if they are invalid
+  - Mac: Stop sending DNS queries for `docker-desktop.<domain>` every 10s. Rely on the host's DNS domain search order rather than trying to replicate it inside the VM.
+  - Mac: when moving VM disk, perform the file move in a separate thread. Fixes [docker/for-mac#3592](https://github.com/docker/for-mac/issues/3592)
+
 ### Docker Desktop Enterprise 2.0.0.5
 
 2019-05-30
