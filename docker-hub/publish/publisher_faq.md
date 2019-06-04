@@ -71,7 +71,7 @@ We don't support the abiltiy to view available tags for published products becau
 
 Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
 
-We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access. (Expected Q3 2018)
+We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access.
 
 ### On the page for another vendor’s product on Docker Hub, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
@@ -169,11 +169,6 @@ As a publisher you can charge a subscription fee every month in USD. The amount
 is determined by you. We are working on other pricing options. If you have
 feedback about pricing, send us an email at publisher-support@docker.com
 
-### As a publisher, I have not setup any payment account. How does money get to me if my commercial content gets purchased by customers?
-
-We (Docker) cut you a check post a revenue share. Your Docker Hub Vendor
-Agreement should cover specifics.
-
 ### How does Docker handle Export control? Can individual countries be specified if differing from Docker's list of embargoed countries?
 
 We provide export control through blacklisting several countries, IPs and users
@@ -212,4 +207,4 @@ Yes
 
 ### Can I have a publish by date for my content?
 
-Not yet. Potential ETA Q2 2018.
+Not yet. This is a planned enhancement, but we have no specific availability date at this time.
