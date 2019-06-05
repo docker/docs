@@ -4,7 +4,7 @@ description: Install UCP on a node
 keywords: ucp, cli, install
 ---
 
-Install UCP on a node
+Install UCP on a node.
 
 ## Usage
 
@@ -18,7 +18,7 @@ docker container run --rm -it \
 
 ## Description
 
-This command initializes a new swarm, turns anode into a manager, and installs
+This command initializes a new swarm, turns a node into a manager, and installs
 Docker Universal Control Plane (UCP).
 
 When installing UCP you can customize:
@@ -63,8 +63,11 @@ If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install
 | `--external-service-lb`  | Set the external service load balancer reported in the UI                              |
 | `--force-insecure-tcp`   | Force install to continue even with unauthenticated Docker Engine ports                |
 | `--force-minimums`       | Force the install/upgrade even if the system doesn't meet the minimum requirements.    |
+| `--fresh-install`        | Destroy any existing state and start fresh.                                            |
 | `--host-address`         | The network address to advertise to other nodes. Format: IP address or network interface name |
 | `--interactive, i`       | Run in interactive mode and prompt for configuration values |
+| `--iscsiadm-path`        | Path to the host iscsiadm binary. This option is only applicable if `--storage-iscsi` is specified.                                                                                                         |
+| `--iscsidb-path`         | Path to the host iscsi database. This option is only applicable if `--storage-iscsi` is specified.                                                                                                         |
 | `--jsonlog`              | Produce json formatted output for easier parsing |
 | `--kube-apiserver-port`  | Port for the Kubernetes API server (default: 6443)                                     |
 | `--kv-snapshot-count`    | Number of changes between key-value store snapshots                                    |
@@ -79,6 +82,8 @@ If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install
 | `--registry-password`    | Password to use when pulling images                                                    |
 | `--san`                  | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com) |
 | `--skip-cloud-provider`  | Disables checks that rely on detecting the cloud provider (if any) on which the cluster is currently running. | 
+| `--storage-expt-enabled` | Enable experimental features in Kubernetes storage. |
+| `--storage-iscsi`        | Enable iSCSI-based Persistent Volumes in Kubernetes. |
 | `--swarm-experimental`   | Enable Docker Swarm experimental features. Used for backwards compatibility            |
 | `--swarm-port`           | Port for the Docker Swarm manager. Used for backwards compatibility                    | 
 | `--swarm-grpc-port`      | Port for communication between nodes                                                   | 

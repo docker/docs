@@ -4,7 +4,7 @@ description: Display an example configuration file for UCP
 keywords: ucp, cli, config, configuration
 ---
 
-Display an example configuration file for UCP
+Display an example configuration file for UCP.
 
 ## Usage
 

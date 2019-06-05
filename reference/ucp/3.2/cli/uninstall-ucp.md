@@ -4,7 +4,7 @@ description: Uninstall UCP from this swarm
 keywords: ucp, cli, uninstall-ucp
 ---
 
-Uninstall UCP from this swarm
+Uninstall UCP from this swarm.
 
 ## Usage
 
@@ -33,10 +33,10 @@ UCP is installed again.
 | Option                | Description                                                 |
 | :-------------------- | :---------------------------------------------------------- |
 | `--debug, D`          | Enable debug mode                                           |
-| `--jsonlog`           | Produce json formatted output for easier parsing            |
+| `--id`                | The ID of the UCP instance to uninstall                     |
 | `--interactive, i`    | Run in interactive mode and prompt for configuration values |
+| `--jsonlog`           | Produce json formatted output for easier parsing            |
 | `--pull`              | Pull UCP images: `always`, when `missing`, or `never`       |
+| `--purge-config`      | Remove UCP configs during uninstallation                    |
 | `--registry-username` | Username to use when pulling images                         |
 | `--registry-password` | Password to use when pulling images                         |
-| `--id`                | The ID of the UCP instance to uninstall                     |
-| `--purge-config`      | Remove UCP configs during uninstallation                    |

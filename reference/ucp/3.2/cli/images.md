@@ -4,7 +4,7 @@ description: Verify the UCP images on this node
 keywords: ucp, cli, images
 ---
 
-Verify the UCP images on this node
+Verify the UCP images on this node.
 
 ## Usage
 
@@ -28,7 +28,7 @@ the ones that are missing.
 |:--------------------------|:---------------------------|
 |`--debug, D`|Enable debug mode|
 |`--jsonlog`|Produce json formatted output for easier parsing|
+|`--list`|List all images used by UCP but don't pull them|
 |`--pull`|Pull UCP images: `always`, when `missing`, or `never`|
 |`--registry-username`|Username to use when pulling images|
 |`--registry-password`|Password to use when pulling images|
-|`--list`|List all images used by UCP but don't pull them|

@@ -4,7 +4,7 @@ description: Restore a UCP cluster from a backup
 keywords: ucp, cli, restore
 ---
 
-Restore a UCP cluster from a backup
+Restore a UCP cluster from a backup.
 
 ## Usage
 
@@ -39,8 +39,8 @@ to download new client bundles after the operation is completed.
 Any existing Client Bundles for non-admin users will still be fully
 operational.
 
-By default the backup tar file is read from stdin. You can also bind-mount the
-backup file under /config/backup.tar, and run the restore command with the
+By default, the backup tar file is read from stdin. You can also bind-mount the
+backup file under `/config/backup.tar`, and run the restore command with the
 `--interactive` flag.
 
 Notes:
@@ -60,11 +60,11 @@ Notes:
 
 | Option             | Description                                                                                   |
 |:-------------------|:----------------------------------------------------------------------------------------------|
+| `--data-path-addr` | Address or interface to use for data path traffic                                             |
 | `--debug, D`       | Enable debug mode                                                                             |
-| `--jsonlog`        | Produce json formatted output for easier parsing                                              |
+| `--host-address`   | The network address to advertise to other nodes. Format: IP address or network interface name |
 | `--interactive, i` | Run in interactive mode and prompt for configuration values                                   |
+| `--jsonlog`        | Produce json formatted output for easier parsing                                              |
 | `--passphrase`     | Decrypt the backup tar file with the provided passphrase                                      |
 | `--san`            | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)  |
-| `--host-address`   | The network address to advertise to other nodes. Format: IP address or network interface name |
-| `--data-path-addr` | Address or interface to use for data path traffic                                             |
 | `--unlock-key`     | The unlock key for this swarm-mode cluster, if one exists.                                    |

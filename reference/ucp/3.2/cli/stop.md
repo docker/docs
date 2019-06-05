@@ -4,7 +4,7 @@ description: Stop UCP components running on this node
 keywords: ucp, cli, stop
 ---
 
-Stop UCP components running on this node
+Stop UCP components running on this node.
 
 ## Usage
 

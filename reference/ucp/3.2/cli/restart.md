@@ -4,7 +4,7 @@ description: Start or restart UCP components running on this node
 keywords: ucp, cli, restart
 ---
 
-Start or restart UCP components running on this node
+Start or restart UCP components running on this node.
 
 ## Usage
 

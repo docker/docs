@@ -4,7 +4,7 @@ description: Print the ID of UCP running on this node
 keywords: ucp, cli, id
 ---
 
-Print the ID of UCP running on this node
+Print the ID of UCP running on this node.
 
 ## Usage
 ```
