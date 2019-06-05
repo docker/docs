@@ -119,7 +119,7 @@ guides:
     - title: Release notes
       path: /engine/release-notes/
       nosync: true
-  - sectiontitle: Docker Enterprise
+  - sectiontitle: Docker Enterprise Platform
     section:
     - title: About Docker Enterprise
       path: /ee/supported-platforms/
@@ -1297,7 +1297,7 @@ manuals:
     title: Upgrade Docker Enterprise
   - path: /ee/telemetry/
     title: Manage usage data collection
-  - sectiontitle: Engine
+  - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
       title: Install Docker Enterprise Engine
