@@ -1331,8 +1331,6 @@ manuals:
             path: /ee/ucp/interlock/config/host-mode-networking/
           - title: Configuring an nginx extension
             path: /ee/ucp/interlock/config/nginx-config/
-          - title: Using application service labels
-            path: /ee/ucp/interlock/config/service-labels/
           - title: Tuning the proxy service
             path: /ee/ucp/interlock/config/tuning/
           - title: Updating Interlock services
