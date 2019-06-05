@@ -20,9 +20,9 @@ guides:
   section:
   - path: /install/overview/
     title: Overview of Docker editions
-  - sectiontitle: Docker CE
+  - sectiontitle: Docker Engine - Community
     section:
-    - title: About Docker CE
+    - title: About Docker Engine - Community
       path: /install/
     - sectiontitle: Cloud
       section:
@@ -119,9 +119,9 @@ guides:
     - title: Release notes
       path: /engine/release-notes/
       nosync: true
-  - sectiontitle: Docker EE
+  - sectiontitle: Docker Enterprise
     section:
-    - title: About Docker EE
+    - title: About Docker Enterprise
       path: /ee/supported-platforms/
     - sectiontitle: Linux
       section:
@@ -143,7 +143,7 @@ guides:
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/ce-ee-node-activate/
-        title: CE-EE Node Activate
+        title: Docker Engine Community to Enterprise Node Activate
       - path: /engine/migration/
         title: Migrate to Docker 1.10
       - path: /engine/breaking_changes/
@@ -501,9 +501,9 @@ guides:
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
-      title: Docker EE Benchmark
+      title: Docker Enterprise Benchmark
     - path: /compliance/cis/docker_ce/
-      title: Docker CE Benchmark
+      title: Docker Engine - Community Benchmark
     - path: /compliance/cis/k8s/
       title: Kubernetes Benchmark
   - path: /compliance/fedramp/
@@ -1080,31 +1080,31 @@ reference:
       title: upgrade
   - sectiontitle: UCP CLI
     section:
-    - path: /reference/ucp/3.1/cli/
+    - path: /reference/ucp/3.2/cli/
       title: docker/ucp overview
-    - path: /reference/ucp/3.1/cli/backup/
+    - path: /reference/ucp/3.2/cli/backup/
       title: backup
-    - path: /reference/ucp/3.1/cli/dump-certs/
+    - path: /reference/ucp/3.2/cli/dump-certs/
       title: dump-certs
-    - path: /reference/ucp/3.1/cli/example-config/
+    - path: /reference/ucp/3.2/cli/example-config/
       title: example-config
-    - path: /reference/ucp/3.1/cli/id/
+    - path: /reference/ucp/3.2/cli/id/
       title: id
-    - path: /reference/ucp/3.1/cli/images/
+    - path: /reference/ucp/3.2/cli/images/
       title: images
-    - path: /reference/ucp/3.1/cli/install/
+    - path: /reference/ucp/3.2/cli/install/
       title: install
-    - path: /reference/ucp/3.1/cli/restart/
+    - path: /reference/ucp/3.2/cli/restart/
       title: restart
-    - path: /reference/ucp/3.1/cli/restore/
+    - path: /reference/ucp/3.2/cli/restore/
       title: restore
-    - path: /reference/ucp/3.1/cli/stop/
+    - path: /reference/ucp/3.2/cli/stop/
       title: stop
-    - path: /reference/ucp/3.1/cli/support/
+    - path: /reference/ucp/3.2/cli/support/
       title: support
-    - path: /reference/ucp/3.1/cli/uninstall-ucp/
+    - path: /reference/ucp/3.2/cli/uninstall-ucp/
       title: uninstall-ucp
-    - path: /reference/ucp/3.1/cli/upgrade/
+    - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
 
 - sectiontitle: Application Programming Interfaces (APIs)
@@ -1166,7 +1166,7 @@ reference:
   - title: DTR API
     path: /reference/dtr/2.7/api/
   - title: UCP API
-    path: /reference/ucp/3.1/api/
+    path: /reference/ucp/3.2/api/
   - title: Registry API
     path: /registry/spec/api/
     nosync: true
@@ -1261,16 +1261,14 @@ manuals:
 - sectiontitle: Docker Enterprise Edition
   section:
   - path: /ee/
-    title: About Docker EE
-  - title: Try Docker EE on the cloud
-    path: https://trial.docker.com
+    title: About Docker Enterprise
   - path: /ee/docker-ee-architecture/
-    title: Docker EE Architecture
+    title: Docker Enterprise Architecture
   - path: /ee/supported-platforms/
     title: Supported platforms
     nosync: true
   - path: /ee/end-to-end-install/
-    title: Deploy Docker EE standard 
+    title: Deploy Docker Enterprise  
   - sectiontitle: Back up Docker Enterprise
     section:
     - path: /ee/admin/backup/
@@ -1302,45 +1300,11 @@ manuals:
   - sectiontitle: Engine
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker EE Engine
+      title: Install Docker Enterprise Engine
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
-  - sectiontitle: Docker Desktop Enterprise
-    section:
-    - path: /ee/desktop/
-      title: Overview
-    - path: /ee/desktop/release-notes/
-      title: Release notes
-    - sectiontitle: Admin
-      section:
-      - sectiontitle: Install
-        section:
-        - path: /ee/desktop/admin/install/mac/
-          title: Install DDE on Mac
-        - path: /ee/desktop/admin/install/windows/
-          title: Install DDE on Windows
-      - sectiontitle: Configure
-        section:
-        - path: /ee/desktop/admin/configure/mac-admin/
-          title: Configure DDE on Mac
-        - path: /ee/desktop/admin/configure/windows-admin/
-          title: Configure DDE on Windows
-    - sectiontitle: User
-      section:
-      - path: /ee/desktop/user/mac-user/
-        title: Use DDE on Mac
-      - path: /ee/desktop/user/windows-user/
-        title: Use DDE on Windows
-    - path: /ee/desktop/app-designer/
-      title: Application designer
-    - sectiontitle: Troubleshoot
-      section:
-      - path: /ee/desktop/troubleshoot/mac-issues/
-        title: Troubleshoot DDE issues on Mac
-      - path: /ee/desktop/troubleshoot/windows-issues/
-        title: Troubleshoot DDE issues on Windows
-      - sectiontitle: Universal Control Plane
+  - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
       title: Universal Control Plane overview
@@ -1464,9 +1428,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Docker EE Standard use case
+          title: Docker Enterprise Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Docker EE Advanced use case
+          title: Docker Enterprise Advanced use case
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
@@ -1576,7 +1540,7 @@ manuals:
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
     - title: API reference
-      path: /reference/ucp/3.1/api/
+      path: /reference/ucp/3.2/api/
       nosync: true
     - path: /ee/ucp/release-notes/
       title: Release notes
@@ -1711,9 +1675,9 @@ manuals:
           - path: /datacenter/ucp/3.0/guides/access-control/permission-levels/
             title: Permission levels
           - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-standard/
-            title: Access control design with Docker EE Standard
+            title: Access control design with Docker Enterprise Standard
           - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-advanced/
-            title: Access control design with Docker EE Advanced
+            title: Access control design with Docker Enterprise Advanced
           - path: /datacenter/ucp/3.0/guides/access-control/recover-a-user-password/
             title: Recover a user password
         - sectiontitle: User guides
@@ -1926,9 +1890,9 @@ manuals:
           - path: /datacenter/ucp/2.2/guides/access-control/permission-levels/
             title: Permission levels
           - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-standard/
-            title: Access control design with Docker EE Standard
+            title: Access control design with Docker Enterprise Standard
           - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-advanced/
-            title: Access control design with Docker EE Advanced
+            title: Access control design with Docker Enterprise Advanced
           - path: /datacenter/ucp/2.2/guides/access-control/recover-a-user-password/
             title: Recover a user password
         - sectiontitle: User guides
@@ -2502,7 +2466,7 @@ manuals:
       - title: Tag pruning
         path: /ee/dtr/user/tag-pruning/
     - title: API reference
-      path: /reference/dtr/2.6/api/
+      path: /reference/dtr/2.7/api/
       nosync: true
     - path: /ee/dtr/release-notes/
       title: Release notes
@@ -3272,6 +3236,40 @@ manuals:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
+  - sectiontitle: Docker Desktop Enterprise
+    section:
+    - path: /ee/desktop/
+      title: Overview
+    - path: /ee/desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Admin
+      section:
+      - sectiontitle: Install
+        section:
+        - path: /ee/desktop/admin/install/mac/
+          title: Install DDE on Mac
+        - path: /ee/desktop/admin/install/windows/
+          title: Install DDE on Windows
+      - sectiontitle: Configure
+        section:
+        - path: /ee/desktop/admin/configure/mac-admin/
+          title: Configure DDE on Mac
+        - path: /ee/desktop/admin/configure/windows-admin/
+          title: Configure DDE on Windows
+    - sectiontitle: User
+      section:
+      - path: /ee/desktop/user/mac-user/
+        title: Use DDE on Mac
+      - path: /ee/desktop/user/windows-user/
+        title: Use DDE on Windows
+    - path: /ee/desktop/app-designer/
+      title: Application designer
+    - sectiontitle: Troubleshoot
+      section:
+      - path: /ee/desktop/troubleshoot/mac-issues/
+        title: Troubleshoot DDE issues on Mac
+      - path: /ee/desktop/troubleshoot/windows-issues/
+        title: Troubleshoot DDE issues on Windows
   - title: Get support
     path: /ee/get-support/
 - sectiontitle: Docker Assemble
@@ -3713,7 +3711,7 @@ manuals:
     - path: /release-notes/
       title: Overview
     - path: /engine/release-notes/
-      title: Docker EE and CE
+      title: Docker Enterprise and Engine - Community
       nosync: true
     - path: /cs-engine/1.13/release-notes/
       title: CS Docker Engine
