@@ -1058,25 +1058,25 @@ reference:
     nosync: true
   - sectiontitle: DTR CLI
     section:
-    - path: /reference/dtr/2.6/cli/
+    - path: /reference/dtr/2.7/cli/
       title: Overview
-    - path: /reference/dtr/2.6/cli/backup/
+    - path: /reference/dtr/2.7/cli/backup/
       title: backup
-    - path: /reference/dtr/2.6/cli/destroy/
+    - path: /reference/dtr/2.7/cli/destroy/
       title: destroy
-    - path: /reference/dtr/2.6/cli/emergency-repair/
-      title: emergency-repair
-    - path: /reference/dtr/2.6/cli/install/
+    - path: /reference/dtr/2.7/cli/emergency-repair/
+      title: emergency-repair7
+    - path: /reference/dtr/2.7/cli/install/
       title: install
-    - path: /reference/dtr/2.6/cli/join/
+    - path: /reference/dtr/2.7/cli/join/
       title: join
-    - path: /reference/dtr/2.6/cli/reconfigure/
+    - path: /reference/dtr/2.7/cli/reconfigure/
       title: reconfigure
-    - path: /reference/dtr/2.6/cli/remove/
+    - path: /reference/dtr/2.7/cli/remove/
       title: remove
-    - path: /reference/dtr/2.6/cli/restore/
+    - path: /reference/dtr/2.7/cli/restore/
       title: restore
-    - path: /reference/dtr/2.6/cli/upgrade/
+    - path: /reference/dtr/2.7/cli/upgrade/
       title: upgrade
   - sectiontitle: UCP CLI
     section:
@@ -1164,7 +1164,7 @@ reference:
       - path: /engine/api/v1.18/
         title: v1.18 reference
   - title: DTR API
-    path: /reference/dtr/2.6/api/
+    path: /reference/dtr/2.7/api/
   - title: UCP API
     path: /reference/ucp/3.1/api/
   - title: Registry API
@@ -2445,7 +2445,7 @@ manuals:
         - title: Restore from a backup
           path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
       - title: CLI reference
-        path: /reference/dtr/2.6/cli/
+        path: /reference/dtr/2.7/cli/
         nosync: true
     - sectiontitle: User guides
       section:
