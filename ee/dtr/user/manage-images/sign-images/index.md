@@ -31,9 +31,9 @@ UCP has a feature which will prevent [untrusted
 images](/ee/ucp/admin/configure/run-only-the-images-you-trust/) from being
 deployed on the cluster. To use the feature, you need to sign and push images to your DTR. 
 To tie the signed images back to UCP, you need to sign the
-images with the private keys of the UCP users. From a UCP client bundle, you can use
+images with the private keys of the UCP users. From a UCP client bundle, use
 `key.pem` as your private key, and `cert.pem` as your public key
-key on an `x509` certificate. 
+on an `x509` certificate. 
 
 To sign images in a way that UCP can trust, you need to:
 
@@ -162,29 +162,29 @@ To do so, first add the private key of the Security team member to
 the local Docker trust store. 
 
 ```bash
-$ docker trust key load --name security key.pem
+$ docker trust key load --name ian key.pem
 Loading key from "key.pem"...
-Enter passphrase for new security key with ID 5ac7d9a:
-Repeat passphrase for new security key with ID 5ac7d9a:
+Enter passphrase for new ian key with ID 5ac7d9a:
+Repeat passphrase for new ian key with ID 5ac7d9a:
 Successfully imported key from key.pem
 ```
 
 Upload the user's public key to the Notary Server and sign the image. You will be asked
-for `jeff`, the developer's passphrase, as well as the `security` user's passphrase to
+for `jeff`, the developer's passphrase, as well as the `ian` user's passphrase to
 sign the tag. 
 
 ```bash
-$ docker trust signer add --key cert.pem security dtr.example.com/prod/nginx
-Adding signer "security" to dtr.example.com/prod/nginx...
+$ docker trust signer add --key cert.pem ian dtr.example.com/prod/nginx
+Adding signer "ian" to dtr.example.com/prod/nginx...
 Enter passphrase for repository key with ID e0d15a2:
-Successfully added signer: security to dtr.example.com/prod/nginx
+Successfully added signer: ian to dtr.example.com/prod/nginx
 
 $ docker trust sign dtr.example.com/prod/nginx:1
 Signing and pushing trust metadata for dtr.example.com/prod/nginx:1
 Existing signatures for tag 1 digest 5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033 from:
 jeff
 Enter passphrase for jeff key with ID 927f303:
-Enter passphrase for security key with ID 5ac7d9a:
+Enter passphrase for ian key with ID 5ac7d9a:
 Successfully signed dtr.example.com/prod/nginx:1
 ```
 
@@ -196,13 +196,13 @@ $ docker trust inspect --pretty dtr.example.com/prod/nginx:1
 Signatures for dtr.example.com/prod/nginx:1
 
 SIGNED TAG          DIGEST                                                             SIGNERS
-1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff, security
+1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff, ian
 
 List of signers and their keys for dtr.example.com/prod/nginx:1
 
 SIGNER              KEYS
 jeff                927f30366699
-security            5ac7d9af7222
+ian                 5ac7d9af7222
 
 Administrative keys for dtr.example.com/prod/nginx:1
 
