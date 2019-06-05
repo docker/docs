@@ -8,11 +8,10 @@ redirect_from:
 ---
 
 Two key components of the Docker Trusted Registry are the Notary Server and the Notary
-Signer. These two containers offer the required components for using Docker Content
+Signer. These two containers provide the required components for using Docker Content
 Trust (DCT) out of the box. [Docker Content
 Trust](/engine/security/trust/content_trust/) allows you to sign image tags,
-therefore whoever pulls the image can validate that they are getting the image
-you created. 
+therefore giving consumers a way to verify the integrity of your image.
 
 As part of DTR, both the Notary and the Registry
 servers are accessed through a front-end proxy, with both components sharing the
@@ -65,13 +64,13 @@ Successfully imported key from key.pem
 ### Initialize the trust metadata and add the user's public certificate
 
 Next,initiate trust metadata for a DTR repository. If you have not
-done so already, navigate to the **DTR web UI**, and create a repository for
+already done so, navigate to the **DTR web UI**, and create a repository for
 your image. This example uses the `nginx` repository in the `prod` namespace.
 
-As part of initiating the repository, add the public key of the UCP user
-as a signer. You will be asked for a number of passphrases to protect the keys.
-Make a note of these passphrases, and see [Managing Delegations in a Notary Server](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) 
-to learn more about managing keys.
+As part of initiating the repository, the public key of the UCP user needs to be added 
+to the Notary server as a signer for the repository. You will be asked for a number of 
+passphrases to protect the keys.Make a note of these passphrases, and 
+see [Managing Delegations in a Notary Server](/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server) to learn more about managing keys.
 
 
 ```bash
