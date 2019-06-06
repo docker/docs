@@ -1286,6 +1286,39 @@ samples:
     title: SSHd
 
 manuals:
+- sectiontitle: Release notes
+  section:
+    - path: /release-notes/
+      title: Overview
+    - path: /engine/release-notes/
+      title: Docker EE and CE
+      nosync: true
+    - path: /cs-engine/1.13/release-notes/
+      title: CS Docker Engine
+      nosync: true
+    - path: /release-notes/docker-engine/
+      title: Docker (1.13 and earlier)
+    - path: /docker-for-mac/release-notes/
+      title: Docker Desktop for Mac
+      nosync: true
+    - path: /docker-for-windows/release-notes/
+      title: Docker Desktop for Windows
+      nosync: true
+    - path: /release-notes/docker-compose/
+      title: Docker Compose
+      nosync: true
+    - path: /docker-for-aws/release-notes/
+      title: Docker for AWS
+      nosync: true
+    - path: /docker-for-azure/release-notes/
+      title: Docker for Azure
+      nosync: true
+    - path: /release-notes/docker-machine/
+      title: Docker Machine release notes
+      nosync: true
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes
+      nosync: true
 - sectiontitle: Docker Enterprise Edition
   section:
   - path: /ee/
@@ -3737,7 +3770,7 @@ manuals:
     - path: /release-notes/
       title: Overview
     - path: /engine/release-notes/
-      title: Docker Enterprise and Engine - Community
+      title: Docker Engine - Enterprise and Engine - Community
       nosync: true
     - path: /cs-engine/1.13/release-notes/
       title: CS Docker Engine
