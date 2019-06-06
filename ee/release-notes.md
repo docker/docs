@@ -26,12 +26,12 @@ keywords: engine enterprise, ucp, dtr, desktop enterprise, whats new, release no
 | [Docker UCP](/ee/ucp/release-notes/) | 3.2 | [Install UCP](/ee/ucp/admin/install/) | [Upgrade UCP](/ee/ucp/admin/install/upgrade/) |
 | [DTR](/ee/dtr/release-notes/) | 2.7 | [Install DTR](/ee/dtr/admin/install/) | [Upgrade DTR](/ee/dtr/admin/upgrade/) |
 
-Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) and the [Maintenance Lifecycle](https://success.docker.com/article/maintenance-lifecycle)
+Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) and the [Maintenance Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for compatibility and software maintenance details.
   
 
 ## Known Issues
 
-This not an exhaustive list. For complete known issues information, refer to the individual component release notes page.
+This is not an exhaustive list. For complete known issues information, refer to the individual component release notes page.
 <table>
    <colgroup>
       <col width="20%" />
