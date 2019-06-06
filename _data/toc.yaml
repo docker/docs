@@ -618,6 +618,34 @@ reference:
           title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
+    - sectiontitle: docker buildx *
+      section:
+        - path: /engine/reference/commandline/buildx/
+          title: docker buildx
+        - path: /engine/reference/commandline/buildx_bake/
+          title: docker buildx bake
+        - path: /engine/reference/commandline/buildx_build/
+          title: docker buildx build
+        - path: /engine/reference/commandline/buildx_create/
+          title: docker buildx create
+        - path: /engine/reference/commandline/buildx_imagetools/
+          title: docker buildx imagetools
+        - path: /engine/reference/commandline/buildx_imagetools_create/
+          title: docker buildx imagetools create
+        - path: /engine/reference/commandline/buildx_imagetools_inspect/
+          title: docker buildx imagetools inspect
+        - path: /engine/reference/commandline/buildx_inspect/
+          title: docker buildx inspect
+        - path: /engine/reference/commandline/buildx_ls/
+          title: docker buildx ls
+        - path: /engine/reference/commandline/buildx_rm/
+          title: docker buildx rm
+        - path: /engine/reference/commandline/buildx_stop/
+          title: docker buildx stop
+        - path: /engine/reference/commandline/buildx_use/
+          title: docker buildx use
+        - path: /engine/reference/commandline/buildx_version/
+          title: docker buildx version
     - sectiontitle: docker checkpoint *
       section:
       - path: /engine/reference/commandline/checkpoint/
