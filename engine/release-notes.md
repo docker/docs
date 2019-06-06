@@ -312,15 +312,17 @@ Update your configuration if this command prints a non-empty value for `MountFla
 
    This issue is resolved in 18.09.1.
 
-### Deprecation Notice
+### Deprecation Notices
 
-As of EE 2.1, Docker has deprecated support for Device Mapper as a storage driver. It will continue to be supported at this 
-time, but support will be removed in a future release. Docker will continue to support Device Mapper for existing 
-EE 2.0 and 2.1 customers. Please contact Sales for more information.
+- As of EE 2.1, Docker has deprecated support for Device Mapper as a storage driver. It will continue to be 
+supported at this time, but support will be removed in a future release. Docker will continue to support 
+Device Mapper for existing EE 2.0 and 2.1 customers. Please contact Sales for more information.
 
-Docker recommends that existing customers [migrate to using Overlay2 for the storage driver](https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). 
-The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the 
-default for Docker engine implementations.
+    Docker recommends that existing customers 
+    [migrate to using Overlay2 for the storage driver](https://success.docker.com/article/how-do-i-migrate-an-existing-ucp-cluster-to-the-overlay2-graph-driver). The [Overlay2 storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) is now the default for Docker engine implementations.
+- As of EE 2.1, Docker has deprecated support for IBM Z (s390x). Refer to the 
+[Docker Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for detailed 
+compatibility information.
 
 For more information on the list of deprecated flags and APIs, have a look at the [deprecation information](https://docs.docker.com/engine/deprecated/) where you can find the target removal dates.
 
