@@ -52,9 +52,9 @@ Docker Cluster has commands for managing the whole lifecycle of your cluster:
  * View the status of clusters
  * Backup and Restore clusters
 
-## Cluster documentation
+## Cluster reference pages
 
 - [Get started with Docker Cluster on AWS](aws.md)
-- [Command line reference](./reference/index.md)
+- [Command line reference](/engine/reference/commandline/cluster/)
 - [Cluster file reference](./cluster-file/index.md)
 
