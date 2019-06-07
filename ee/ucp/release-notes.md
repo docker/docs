@@ -30,7 +30,10 @@ upgrade your installation to the latest release.
     ```
     This is due to an updated selinux context.
     Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
-
+    Until `container-selinux-2.99` is available for CentOS7, current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
+    ```
+    $ sudo yum downgrade container-selinux-2.74-1.el7
+    ```
 
 # Version 3.2.0-beta
 (2019-5-16)
