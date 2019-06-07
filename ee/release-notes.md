@@ -60,9 +60,16 @@ This is not an exhaustive list. For complete known issues information, refer to 
 	 <td>Yes</td>
 	 <td>2.7.0</td>
 	</tr>
+	   <tr>
+	 <td>Error when installing UCP with <code>"selinux-enabled": true</code></td>
+	 <td>???</td>
+	 <td>UCP</td>
+	 <td>UCP with Enterprise Engine 18.09 or 19.03</td>
+	 <td>No</td>
+	 <td>N/A</td>
+	</tr>
    </tbody>
 </table>
-
-
+ 
  
 
