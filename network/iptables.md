@@ -119,7 +119,7 @@ The following example provides a set of filters and uses those filters for conta
 ```
 *filter
 
-# WAN = ens0 ; LAN = eth0
+# WAN = eth0 ; LAN = eth1
 
 # Reset counters
 :DOCKER-USER - [0:0]
@@ -129,18 +129,18 @@ The following example provides a set of filters and uses those filters for conta
 
 # Filters :
 ## Activate established connexions
--A DOCKER-USER -i ens0 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+-A DOCKER-USER -i eth0 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
 
 ## Allow all on https/http
--A DOCKER-USER -i ens0 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
--A DOCKER-USER -i ens0 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
 
 ## Allow 8080 from ip
--A DOCKER-USER -i ens0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
--A DOCKER-USER -i ens0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
 
 # Block all external
--A DOCKER-USER -i ens0 -j DROP
+-A DOCKER-USER -i eth0 -j DROP
 -A DOCKER-USER -j RETURN
 
 COMMIT
@@ -153,7 +153,7 @@ COMMIT
 ```
 *filter
 
-# WAN = ens0 ; LAN = eth0
+# WAN = eth0 ; LAN = eth1
 
 # Reset counters
 :INPUT ACCEPT [0:0]
@@ -169,8 +169,8 @@ COMMIT
 
 # Select
 -A INPUT -i lo -j ACCEPT
--A INPUT -i eth0 -j FILTERS-LAN
--A INPUT -i ens0 -j FILTERS
+-A INPUT -i eth1 -j FILTERS-LAN
+-A INPUT -i eth0 -j FILTERS
 
 # Filters
 ## Activate established connexions
