@@ -111,37 +111,15 @@ the source and destination. For instance, if the Docker daemon listens on both
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
-### Name of example???
-The following example provides a set of filters, and uses those filters for container and host traffic: 
-
-```
-# Filters
-## Activate established connexions
--A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-## Monitoring
--A FILTERS -s 10.1.1.1/32 -p udp -m udp --dport 161 -j ACCEPT
--A FILTERS -s 10.1.1.1/32 -p tcp -m tcp --dport 5666 -j ACCEPT
--A FILTERS -s 10.1.1.1/32 -p icmp --icmp-type any -j ACCEPT
-
-## Admin ssh
--A FILTERS -s 10.0.0.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
--A FILTERS -s 10.0.1.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
-
-## Admin ping
--A FILTERS -s 10.0.0.1/32 -p icmp --icmp-type any -j ACCEPT
--A FILTERS -s 10.0.1.1/32 -p icmp --icmp-type any -j ACCEPT
-
-## Drop public in
--A FILTERS -j DROP
-```
+### Filtering container and host traffic
+The following example provides a set of filters and uses those filters for container and host traffic: 
 
 #### To filter container traffic:
 
 ```
 *filter
 
-# WAN = ens192 ; LAN = ens160
+# WAN = yourwan ; LAN = yourlan
 
 # Reset counters
 :DOCKER-USER - [0:0]
@@ -151,18 +129,18 @@ The following example provides a set of filters, and uses those filters for cont
 
 # Filters :
 ## Activate established connexions
--A DOCKER-USER -i ens192 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+-A DOCKER-USER -i yourwan -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
 
 ## Allow all on https/http
--A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
--A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
+-A DOCKER-USER -i yourwan -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
+-A DOCKER-USER -i yourwan -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
 
 ## Allow 8080 from ip
--A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
--A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
+-A DOCKER-USER -i yourwan -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
+-A DOCKER-USER -i yourwan -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
 
 # Block all external
--A DOCKER-USER -i ens192 -j DROP
+-A DOCKER-USER -i yourwan -j DROP
 -A DOCKER-USER -j RETURN
 
 COMMIT
@@ -173,7 +151,7 @@ COMMIT
 ```
 *filter
 
-# WAN = ens192 ; LAN = ens160
+# WAN = yourwan ; LAN = yourlan
 
 # Reset counters
 :INPUT ACCEPT [0:0]
@@ -189,8 +167,8 @@ COMMIT
 
 # Select
 -A INPUT -i lo -j ACCEPT
--A INPUT -i ens160 -j FILTERS-LAN
--A INPUT -i ens192 -j FILTERS
+-A INPUT -i yourlan -j FILTERS-LAN
+-A INPUT -i yourwan -j FILTERS
 
 # Filters
 ## Activate established connexions
