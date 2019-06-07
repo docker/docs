@@ -170,7 +170,7 @@ to become a swarm manager with `docker swarm init` and look for output like
 this:
 
 ```shell
-$ docker-machine ssh myvm1 "docker swarm init --advertise-addr <myvm1 ip>"
+$ docker-machine ssh myvm1 "docker swarm init --advertise-addr <myvm1 ip>:2377"
 Swarm initialized: current node <node ID> is now a manager.
 
 To add a worker to this swarm, run the following command:
@@ -182,7 +182,7 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-> Ports 2377 and 2376
+> About Ports 2377 and 2376
 >
 > Always run `docker swarm init` and `docker swarm join` with port 2377
 > (the swarm management port), or no port at all and let it take the default.
