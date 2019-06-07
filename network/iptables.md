@@ -16,42 +16,46 @@ Docker's rules, add them to the `DOCKER-USER` chain. These rules are loaded
 before any rules Docker creates automatically.
 
 ### Add a DOCKER-USER filter chain to allow persistent rules 
-This can be useful if you need to pre-populate `iptables` rules that need to be in place before Docker runs. The following example creates a new chain named `FILTERS` in which network traffic from `INPUT` AND `DOCKER-USER` is put.
+This can be useful if you need to pre-populate `iptables` rules that need to be in place before 
+Docker runs. The following example creates a new chain named `FILTERS` in which network traffic 
+from `INPUT` AND `DOCKER-USER` is put.
+
 ```
 *filter
-:INPUT ACCEPT [0:0]
-:FORWARD DROP [0:0]
-:OUTPUT ACCEPT [0:0]
-:FILTERS - [0:0]
+
+# Reset counters
 :DOCKER-USER - [0:0]
 
--F INPUT
+# Flush
 -F DOCKER-USER
--F FILTERS
 
--A INPUT -i lo -j ACCEPT
--A INPUT -p icmp --icmp-type any -j ACCEPT
--A INPUT -j FILTERS
+# Filters :
+## Activate established connexions
+-A DOCKER-USER -i eth0 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
 
--A DOCKER-USER -i ens33 -j FILTERS
+## Allow all on https/http
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
 
--A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
--A FILTERS -m state --state NEW -s 1.2.3.4/32 -j ACCEPT
--A FILTERS -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A FILTERS -m state --state NEW -m tcp -p tcp --dport 23 -j ACCEPT
--A FILTERS -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A FILTERS -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
--A FILTERS -j REJECT --reject-with icmp-host-prohibited
+## Allow 8080 from ip
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
+-A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
+
+# Block all external
+-A DOCKER-USER -i eth0 -j DROP
+-A DOCKER-USER -j RETURN
 
 COMMIT
 ```
 
 Load this into the kernel with:
-```
-iptables-restore -n /etc/iptables.conf
+
+```bash
+$ iptables-restore -n /etc/iptables.conf
 ```
 
-Use the previous FILTERS chain setup with the following configuration to allow `icmp` to the docker host and allow host port 22 access and container port 5222 access:
+Use the previous `FILTERS` chain setup with the following configuration to allow `icmp` to the docker 
+host and allow host port `22` access and container port `5222` access:
 
 ```
 -A FILTERS -p icmp --icmp-type any -s client_a/32 -j ACCEPT
@@ -62,9 +66,12 @@ Use the previous FILTERS chain setup with the following configuration to allow `
 -A FILTERS -j DROP
 ```
 
-**Note**: `--ctorigdstport` matches the destination port on the packet that initiated the connection, not the destination port on the packet being filtered. Therefore, responses to requests from Docker to other servers have `SPT=80` and match `--ctorigdstport 80`.
+> **Note**: `--ctorigdstport` matches the destination port on the packet that initiated the connection, 
+not the destination port on the packet being filtered. Therefore, responses to requests from Docker 
+to other servers have `SPT=80`, and match `--ctorigdstport 80`.
 
-For tighter control, all rules allowing the connection should have `--ctdir` added to specifically express their meaning, as shown in the following example:
+For tighter control, all rules allowing the connection should have `--ctdir` added to specifically 
+express their meaning, as shown in the following example:
 
 ```
 -A DOCKER-USER -s 1.2.3.4/32 -i eth0 -p tcp -m conntrack --ctorigdstport 80 --ctdir ORIGINAL -j ACCEPT
@@ -104,6 +111,124 @@ the source and destination. For instance, if the Docker daemon listens on both
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
+### Name of example???
+The following example provides a set of filters, and uses those filters for container and host traffic: 
+
+```
+# Filters
+## Activate established connexions
+-A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+## Monitoring
+-A FILTERS -s 10.1.1.1/32 -p udp -m udp --dport 161 -j ACCEPT
+-A FILTERS -s 10.1.1.1/32 -p tcp -m tcp --dport 5666 -j ACCEPT
+-A FILTERS -s 10.1.1.1/32 -p icmp --icmp-type any -j ACCEPT
+
+## Admin ssh
+-A FILTERS -s 10.0.0.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
+-A FILTERS -s 10.0.1.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
+
+## Admin ping
+-A FILTERS -s 10.0.0.1/32 -p icmp --icmp-type any -j ACCEPT
+-A FILTERS -s 10.0.1.1/32 -p icmp --icmp-type any -j ACCEPT
+
+## Drop public in
+-A FILTERS -j DROP
+```
+
+#### To filter container traffic:
+
+```
+*filter
+
+# WAN = ens192 ; LAN = ens160
+
+# Reset counters
+:DOCKER-USER - [0:0]
+
+# Flush
+-F DOCKER-USER
+
+# Filters :
+## Activate established connexions
+-A DOCKER-USER -i ens192 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+
+## Allow all on https/http
+-A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
+-A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
+
+## Allow 8080 from ip
+-A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
+-A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
+
+# Block all external
+-A DOCKER-USER -i ens192 -j DROP
+-A DOCKER-USER -j RETURN
+
+COMMIT
+```
+
+#### To filter host traffic:
+
+```
+*filter
+
+# WAN = ens192 ; LAN = ens160
+
+# Reset counters
+:INPUT ACCEPT [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:FILTERS - [0:0]
+:FILTERS-LAN - [0:0]
+
+# Flush
+-F INPUT
+-F FILTERS
+-F FILTERS-LAN
+
+# Select
+-A INPUT -i lo -j ACCEPT
+-A INPUT -i ens160 -j FILTERS-LAN
+-A INPUT -i ens192 -j FILTERS
+
+# Filters
+## Activate established connexions
+-A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+## Monitoring
+-A FILTERS -s 10.1.1.1/32 -p udp -m udp --dport 161 -j ACCEPT
+-A FILTERS -s 10.1.1.1/32 -p tcp -m tcp --dport 5666 -j ACCEPT
+-A FILTERS -s 10.1.1.1/32 -p icmp --icmp-type any -j ACCEPT
+
+## Admin ssh
+-A FILTERS -s 10.0.0.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
+-A FILTERS -s 10.0.1.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
+
+## Admin ping
+-A FILTERS -s 10.0.0.1/32 -p icmp --icmp-type any -j ACCEPT
+-A FILTERS -s 10.0.1.1/32 -p icmp --icmp-type any -j ACCEPT
+
+## Drop public in
+-A FILTERS -j DROP
+
+# Filters-LAN
+## Activate established connexions
+-A FILTERS-LAN -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+## Admin allow all
+-A FILTERS-LAN -s 10.0.1.1/32 -j ACCEPT
+
+## Ping
+-A FILTERS-LAN -s 10.0.1.1/24 -p icmp --icmp-type any -j ACCEPT
+
+## Log and Drop lan in
+-A FILTERS-LAN -j LOG --log-prefix "[LAN BLOCK] "
+-A FILTERS-LAN -j DROP
+
+## Commit
+COMMIT
+```
 
 ## Prevent Docker from manipulating iptables
 
@@ -113,4 +238,5 @@ for most users, because the `iptables` policies then need to be managed by hand.
 
 ## Next steps
 
-- Read [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
+- Read [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks]
+(https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
