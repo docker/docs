@@ -15,9 +15,22 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
+* [Version 3.2](#version-32)
 * [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
+
+# Version 3.2
+
+### Known issues
+
+- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
+    ```
+    time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
+    ```
+    This is due to an updated selinux context.
+    Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
+
 
 # Version 3.2.0-beta
 (2019-5-16)
