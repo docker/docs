@@ -18,7 +18,9 @@ upgrade your installation to the latest release.
 * [Version 3.2](#version-32)
 * [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
-* [Version 2.2](#version-22)
+* [Version 2.2](#version-22) 
+
+**Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/). 
 
 # Version 3.2
 
