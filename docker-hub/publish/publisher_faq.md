@@ -60,6 +60,8 @@ The customer will be given the permissions to docker pull any tag associated wit
 
 Edit the same product and update with the newly tagged repos.
 
+Additionally, for product updates, you may include a set of *Release Notes*. These notes will not be published with the product listing itself. Instead, they will be emailed directly to the current subscriber of the product. This ensures that consumers will have timely, valuable alerts about the availability of new images and significant changes. 
+
 ### On the Information page, organization details are required. Do we need to fill those in again for every product we publish, or are they carried over? And if we change them for a later image publish, are they updated for all images published by our organization?
 
 Organization details need to be filled in only once. Updating organization info
