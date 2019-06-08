@@ -167,6 +167,7 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 * Removed v1.10 migrator. [moby/moby#38265](https://github.com/moby/moby/pull/38265)
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
 * Deprecated AuFS storage driver, and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
+* Removed support for 17.09. 
 
 ### Known issues
 
