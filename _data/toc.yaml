@@ -3370,6 +3370,8 @@ manuals:
     section:
     - path: /docker-hub/publish/
       title: Overview
+    - path: /docker-hub/publish/publish/
+      title: Submit a product for Docker Hub
     - path: /docker-hub/publish/customer_faq/
       title: User FAQs
     - path: /docker-hub/publish/publisher_faq/
