@@ -164,6 +164,16 @@ $AUTHTOKEN=((Invoke-WebRequest -Body '{"username":"<username>", "password":"<pas
 [io.file]::WriteAllBytes("ucp-bundle.zip", ((Invoke-WebRequest -Uri https://`<ucp-ip`>/api/clientbundle -Headers @{"Authorization"="Bearer $AUTHTOKEN"}).Content))
  ```
 
+## Docker Build and UCP
+When using a UCP client bundle and buildkit, follow the instructions provided 
+in [Restrict services to worker nodes](/ee/ucp/admin/configure/restrict-services-to-worker-nodes/) 
+to make sure that builds are not accidentally scheduled on manager nodes. 
+
+For additional information on 'docker build' and buildkit, refer 
+to [build command documentation](/engine/reference/commandline/build/) and 
+[buildkit documentation](/develop/develop-images/build_enhancements/).
+
+
 ## Where to go next
 
 - [Deploy a service](../swarm.md)
