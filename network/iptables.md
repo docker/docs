@@ -20,63 +20,6 @@ This can be useful if you need to pre-populate `iptables` rules that need to be 
 Docker runs. The following example creates a new chain named `FILTERS` in which network traffic 
 from `INPUT` AND `DOCKER-USER` is put.
 
-```
-*filter
-
-# Reset counters
-:DOCKER-USER - [0:0]
-
-# Flush
--F DOCKER-USER
-
-# Filters :
-## Activate established connexions
--A DOCKER-USER -i eth0 -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
-
-## Allow all on https/http
--A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j RETURN
--A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 443 -j RETURN
-
-## Allow 8080 from ip
--A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.11.11.0/24 -j RETURN
--A DOCKER-USER -i eth0 -p tcp -m tcp -m conntrack --ctorigdstport 8080 -s 10.22.22.0/24 -j RETURN
-
-# Block all external
--A DOCKER-USER -i eth0 -j DROP
--A DOCKER-USER -j RETURN
-
-COMMIT
-```
-
-Load this into the kernel with:
-
-```bash
-$ iptables-restore -n /etc/iptables.conf
-```
-
-Use the previous `FILTERS` chain setup with the following configuration to allow `icmp` to the docker 
-host and allow host port `22` access and container port `5222` access:
-
-```
--A FILTERS -p icmp --icmp-type any -s client_a/32 -j ACCEPT
--A FILTERS -p icmp --icmp-type any -j DROP
--A FILTERS -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
--A FILTERS -m conntrack --ctstate NEW -m tcp -p tcp -s client_a/32 --dport 22 -j ACCEPT
--A FILTERS -m conntrack --ctstate NEW -m tcp -p tcp -s client_a/32 --ctorigdstport 5222 -j ACCEPT
--A FILTERS -j DROP
-```
-
-> **Note**: `--ctorigdstport` matches the destination port on the packet that initiated the connection, 
-not the destination port on the packet being filtered. Therefore, responses to requests from Docker 
-to other servers have `SPT=80`, and match `--ctorigdstport 80`.
-
-For tighter control, all rules allowing the connection should have `--ctdir` added to specifically 
-express their meaning, as shown in the following example:
-
-```
--A DOCKER-USER -s 1.2.3.4/32 -i eth0 -p tcp -m conntrack --ctorigdstport 80 --ctdir ORIGINAL -j ACCEPT
-```
-
 ### Restrict connections to the Docker daemon
 
 By default, all external source IPs are allowed to connect to the Docker daemon.
