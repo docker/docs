@@ -179,4 +179,4 @@ Parameter values and descriptions for environment configuration on Windows:
 | `serviceCIDR`                     | This is currently unimplemented. `locked` must be set to true.     |
 | (End of `kubernetes` section.)    |                                   |
 | `sharedDrives`                    | If `sharedDrives` is set to `true`, this locks the drives users are allowed to share ( `["C", "D"]` ), but does not actually share drives by default (sharing a drive prompts the user for a password). `value` is a whitelist of drives that can be shared. **Warning:** Note that when updating this value, if you remove drives that have been shared, you must also `net share /delete` those drives. |
-| `sharedFolders`                   | If specified, restrict the folders or named pipes the user is allowed to share with Windows containers.     |
+| `sharedFolders`                   | If specified, restricts the folders or named pipes the user is allowed to share with Windows containers.     |
