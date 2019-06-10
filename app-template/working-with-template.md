@@ -102,10 +102,10 @@ COPY assets /assets
 ```
 version: "3.6"
 services:
-  {{ .Name }}:
-    build: {{ .Name }}
+{% raw %}  {{ .Name }}:{% endraw %}
+{% raw %}    build: {{ .Name }}{% endraw %}
     ports:
-      - {{ .Parameters.externalPort }}:3000
+{% raw %}      - {{ .Parameters.externalPort }}:3000{% endraw %}
 ```
 {% endraw %}
 
