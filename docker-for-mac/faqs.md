@@ -11,6 +11,7 @@ title: Frequently asked questions (FAQ)
 for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
 ## Questions about Docker.app
+
 ### Stable and Edge channels
 
 **Q: How do I get the Stable or Edge version of Docker Desktop for Mac?**
@@ -113,7 +114,6 @@ To preserve them, open the `~/Library/Group
 Containers/group.com.docker/settings.json` file, and update the `diskPath`
 entry.
 
-
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
 No, you can use these side by side. Docker Toolbox leverages a Docker daemon
@@ -135,7 +135,12 @@ and want to uninstall it. For details on how to perform a clean uninstall of
 Toolbox on the Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
 in the Toolbox Mac topics.
 
+## Experimental features
+
+{% include experimental-feature.md %}
+
 ## Questions about feedback and help
+
 ### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
