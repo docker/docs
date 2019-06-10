@@ -119,7 +119,7 @@ guides:
     - title: Release notes
       path: /engine/release-notes/
       nosync: true
-  - sectiontitle: Docker Enterprise Platform
+  - sectiontitle: Docker Enterprise
     section:
     - title: About Docker Enterprise
       path: /ee/supported-platforms/
@@ -1286,10 +1286,26 @@ samples:
     title: SSHd
 
 manuals:
-- sectiontitle: Docker Enterprise Edition
+- sectiontitle: Docker Enterprise
   section:
   - path: /ee/
     title: About Docker Enterprise
+  - sectiontitle: Release Notes
+    section:  
+    - path: /ee/release-notes/
+      title: Platform
+    - path: /engine/release-notes/
+      title: Docker Engine - Enterprise and Engine - Community
+      nosync: true
+    - path: /ee/ucp/release-notes/
+      title: Docker Universal Control Plane
+      nosync: true
+    - path: /ee/dtr/release-notes/
+      title: Docker Trusted Registry
+      nosync: true
+    - path: /ee/desktop/release-notes/
+      title: Docker Desktop Enterprise
+      nosync: true
   - path: /ee/docker-ee-architecture/
     title: Docker Enterprise Architecture
   - path: /ee/supported-platforms/
@@ -3736,14 +3752,22 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - path: /engine/release-notes/
-      title: Docker Enterprise and Engine - Community
-      nosync: true
-    - path: /cs-engine/1.13/release-notes/
-      title: CS Docker Engine
-      nosync: true
-    - path: /release-notes/docker-engine/
-      title: Docker (1.13 and earlier)
+    - sectiontitle: Docker Enterprise Platform
+      section:  
+      - path: /ee/release-notes/
+        title: Platform
+      - path: /engine/release-notes/
+        title: Docker Engine - Enterprise and Engine - Community
+        nosync: true
+      - path: /ee/ucp/release-notes/
+        title: Docker Universal Control Plane
+        nosync: true
+      - path: /ee/dtr/release-notes/
+        title: Docker Trusted Registry
+        nosync: true
+      - path: /ee/desktop/release-notes/
+        title: Docker Desktop Enterprise
+        nosync: true
     - path: /docker-for-mac/release-notes/
       title: Docker Desktop for Mac
       nosync: true
@@ -3759,14 +3783,17 @@ manuals:
     - path: /docker-for-azure/release-notes/
       title: Docker for Azure
       nosync: true
-    - path: /release-notes/docker-machine/
-      title: Docker Machine release notes
-      nosync: true
     - path: /release-notes/docker-swarm/
       title: Docker Swarm release notes
       nosync: true
 - sectiontitle: Superseded products and tools
   section:
+  - path: /cs-engine/1.13/release-notes/
+    title: CS Docker Engine
+  - path: /release-notes/docker-engine/
+    title: Docker (1.13 and earlier)
+  - path: /release-notes/docker-machine/
+    title: Docker Machine
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
