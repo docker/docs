@@ -71,7 +71,7 @@ There are several options for creating a UCP backup:
 The backup process runs on one manager node.
 
 ### Create a UCP backup using the CLI
-The following example shows how to create a UCP manager node backup, encrypt it by using a passphrase, decrypt it, verify its contents, and store it on `/securelocation/backup.tar`: 
+The following example shows how to create a UCP manager node backup, encrypt it by using a passphrase, decrypt it, verify its contents, and store it on `/directory1/directory2/backup.tar`: 
 
 1. Run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command on a single UCP manager and include the `--file` and `--include-logs`options. This creates a tar archive with the contents of all [volumes used by UCP](/ee/ucp-architecture/)
 and streams it to `stdout`. Replace `version` with the version you are currently running.
@@ -84,7 +84,7 @@ docker container run \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /tmp:/backup \
     $ORG/ucp:$TAG backup \
-    --file /securelocation/backup.tar \
+    --file directory1/directory2/mybackup.tar \
     --passphrase "secret12chars" \
     --include-logs false
 ```
@@ -99,7 +99,7 @@ docker container run \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp:$version backup \
-    --passphrase "secret12chars" > /securelocation/backup.tar
+    --passphrase "secret12chars" > /directory1/directory2/backup.tar
  ```   
 
 > To determine whether SELinux is enabled in the engine, view the host’s `/etc/docker/daemon.json` file, and search for the string `"selinux-enabled":"true"`.
@@ -111,13 +111,13 @@ To view backup progress and error reporting, view the contents of the stderr str
 In a valid backup file, more than 100 files are displayed in the list and the `./ucp-node-certs/key.pem` file is present. Ensure the backup is a valid tar file by listing its contents, as shown in the following exampele: 
 
 ```
-$ gpg --decrypt /securelocation/backup.tar | tar --list
+$ gpg --decrypt /directory1/directory2/backup.tar | tar --list
 ```
 
 If decryption is not needed, you can list the contents by removing the `--decrypt flag`, as shown in the following example:
 
 ```
-$ tar --list -f /securelocation/backup.tar
+$ tar --list -f /directory1/directory2/backup.tar
 ```
 
 ### Create a UCP backup using the UI
