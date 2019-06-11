@@ -18,7 +18,7 @@ plink: docker_app.yaml
 examples: $ . <(docker app completion bash)
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 
