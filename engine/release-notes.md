@@ -23,6 +23,12 @@ New stuff since 18.09 codeline
 List is 97% complete, the features and bug fixes are 100% complete)
 For questions - ask #engine-team
 EE will be a superset with < 10 items added.
+
+https://docker.atlassian.net/browse/ENGCORE-834 - should this be in known issues?
+https://docker.atlassian.net/browse/ENGORC-1243 - should this be in known issues?
+https://docker.atlassian.net/browse/ENGCORE-686 - should this be in known issues?
+https://docker.atlassian.net/browse/ENGCORE-810 - added to UCP known issues
+https://docker.atlassian.net/browse/ENGPGM-115 - Swarm info added to known issues
 END OF DELETE BEFORE MERGING--------
 
 ## 19.03.0
@@ -170,6 +176,25 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 * Removed support for 17.09. 
 
 ### Known issues
+* In some circumstances, in large clusters, docker information might, as part of the Swarm section, 
+include the error `code = ResourceExhausted desc = grpc: received message larger than 
+max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user, 
+and requires no response.
+* Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is binded to cluster admin role.
+* Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager 
+requests in a short amount of time, some services are not able to receive traffic and are causing a `404` 
+error after being deployed. 
+Workaround: restart all tasks via `docker service update --force`.
+
+* Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
+The missing rules are :
+```
+sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+/sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+```
+Workaround: Add these rules back using a script and cron definitions. The script must contain '-C' commands to check for the presence of a rule and '-A' commands to add rules back. Run the script on a cron in regular intervals, for example, every <x> minutes. (Is there a recommendation for 'x'?)
+(If Arko's workaround becomes available, the docs will be updated to direct customers to use that until we get it out in a patch.)
+Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
 
 ## 18.09.6 
 2019-05-06
