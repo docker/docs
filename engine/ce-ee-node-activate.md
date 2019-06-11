@@ -9,17 +9,17 @@ The Docker Engine `18.09` release introduces a new feature called **CE-EE Node A
 CE-EE Node Activate will apply a license, and switch the Docker engine to the Enterprise engine binary.
 
 ## Requirements:
-* The Docker Community Edition (CE) version must be 18.09 or higher.
+* The Docker Engine - Community version must be 18.09 or higher.
 * All of the Docker packages must be installed: docker-cli, docker-server, and containerd.
 
 ## Limitations
 
 * This feature is only supported on x86 Linux nodes.
 * Windows nodes are not currently supported.
-* Node-level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker.
-* Prior versions of Docker CE do not support this feature.
+* Node-level Engine activation between Docker Engine - Community and EE is only supported in the same version of Docker Enterprise Engine for Docker.
+* Prior versions of Docker Engine - Community do not support this feature.
 
-## Notes on patching after running CE to EE Node Activation
+## Notes on patching after running Docker Engine - Community to EE Node Activation
 
 Docker recommends replacing the apt or yum repository from CE with the EE repository that appears 
 on your hub/store account after starting the trial or paid license. This allows apt/yum 
