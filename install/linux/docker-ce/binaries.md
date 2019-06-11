@@ -155,7 +155,7 @@ The macOS binary includes the Docker client only. It does not include the
 
 ## Upgrade static binaries
 
-To upgrade your manual installation of Docker CE, first stop any
+To upgrade your manual installation of Docker Engine - Community, first stop any
 `dockerd` or `dockerd.exe`  processes running locally, then follow the
 regular installation steps to install the new version on top of the existing
 version.

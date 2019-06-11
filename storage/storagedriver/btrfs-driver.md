@@ -25,7 +25,7 @@ Btrfs Filesystem as Btrfs.
 
 `btrfs` is supported if you meet the following prerequisites:
 
-- **Docker CE**: For Docker CE, `btrfs` is only recommended on Ubuntu or Debian.
+- **Docker Engine - Community**: For Docker Engine - Community, `btrfs` is only recommended on Ubuntu or Debian.
 
 - **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
   See the

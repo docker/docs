@@ -51,7 +51,7 @@ It's OK if `dnf` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 
-## Install Docker CE
+## Install Docker Engine - Community
 
 You can install Docker Engine - Community in different ways, depending on your needs:
 
@@ -120,7 +120,7 @@ from the repository.
 >
 > [Learn about **nightly** and **test** channels](/install/index.md).
 
-#### Install Docker CE
+#### Install Docker Engine - Community
 
 1.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
@@ -140,7 +140,7 @@ from the repository.
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-2.  To install a _specific version_ of Docker CE, list the available versions
+2.  To install a _specific version_ of Docker Engine - Community, list the available versions
     in the repo, then select and install:
 
     a. List and sort the versions available in your repo. This example sorts
@@ -190,16 +190,16 @@ commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) t
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
+To upgrade Docker Engine - Community, follow the [installation instructions](#install-docker-ce),
 choosing the new version you want to install.
 
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker CE.
+a new file each time you want to upgrade Docker Engine - Community.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
     version of Fedora. Go to `x86_64/stable/Packages/`
@@ -209,7 +209,7 @@ a new file each time you want to upgrade Docker CE.
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](/install/index.md).
 
-2.  Install Docker CE, changing the path below to the path where you downloaded
+2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -237,15 +237,15 @@ Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, download the newer package file and repeat the
+To upgrade Docker Engine - Community, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 
 {% include install-script.md %}
 
-## Uninstall Docker CE
+## Uninstall Docker Engine - Community
 
 1.  Uninstall the Docker package:
 
