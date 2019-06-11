@@ -180,11 +180,29 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 include the error `code = ResourceExhausted desc = grpc: received message larger than 
 max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user, 
 and requires no response.
-* Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is binded to cluster admin role.
+* Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
+   - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
+   to a `cluster-admin` `ClusterRole`, as shown in the following example:
+       ```
+       apiVersion: rbac.authorization.k8s.io/v1
+       kind: ClusterRoleBinding
+       metadata:
+         labels:
+           subjectName: kube-system-persistent-volume-binder
+         name: kube-system-persistent-volume-binder:cluster-admin
+       roleRef:
+         apiGroup: rbac.authorization.k8s.io
+         kind: ClusterRole
+         name: cluster-admin
+       subjects:
+       - kind: ServiceAccount
+         name: persistent-volume-binder
+         namespace: kube-system
+       ```
 * Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager 
 requests in a short amount of time, some services are not able to receive traffic and are causing a `404` 
 error after being deployed. 
-Workaround: restart all tasks via `docker service update --force`.
+   - Workaround: restart all tasks via `docker service update --force`.
 
 * Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
 The missing rules are :
@@ -192,9 +210,10 @@ The missing rules are :
 sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ```
-Workaround: Add these rules back using a script and cron definitions. The script must contain '-C' commands to check for the presence of a rule and '-A' commands to add rules back. Run the script on a cron in regular intervals, for example, every <x> minutes. (Is there a recommendation for 'x'?)
-(If Arko's workaround becomes available, the docs will be updated to direct customers to use that until we get it out in a patch.)
-Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
+    - Workaround: Add these rules back using a script and cron definitions. The script must contain '-C' commands 
+to check for the presence of a rule and '-A' commands to add rules back. Run the script on a cron in regular 
+intervals, for example, every <x> minutes.
+    - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
 
 ## 18.09.6 
 2019-05-06
