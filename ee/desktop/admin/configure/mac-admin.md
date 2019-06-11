@@ -143,6 +143,6 @@ Parameter values and descriptions for environment configuration on Mac:
 | `serviceCIDR`                     | This is currently unimplemented. `locked` must be set to true.     |
 | (End of `kubernetes` section.)    |                                   |
 |`template`|Parameters and settings related to Docker Template and Application Designer - grouped together in this example for convenience. For more information, see [`Docker template config`](/engine/reference/commandline/template_config/).|
-|`defaultOrg`| Specifies the default organisation to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
+|`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|

@@ -192,7 +192,7 @@ Parameter values and descriptions for environment configuration on Windows:
 | `serviceCIDR`                     | This is currently unimplemented. `locked` must be set to true.     |
 | (End of `kubernetes` section.)    |                                   |
 |`template`|Parameters and settings related to Docker Template and Application Designer - grouped together in this example for convenience. For more information, see [`Docker template config`](/engine/reference/commandline/template_config/).|
-|`defaultOrg`| Specifies the default organisation to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
+|`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
 | `sharedDrives`                    | If `sharedDrives` is set to `true`, this locks the drives users are allowed to share ( `["C", "D"]` ), but does not actually share drives by default (sharing a drive prompts the user for a password). `value` is a whitelist of drives that can be shared. **Warning:** Note that when updating this value, if you remove drives that have been shared, you must also `net share /delete` those drives. |
