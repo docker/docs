@@ -17,7 +17,7 @@ options:
 examples: $ docker app merge myapp.dockerapp --output myapp-single.dockerapp
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

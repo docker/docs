@@ -109,7 +109,7 @@ examples: |-
   $ docker app install bundle.json --name myinstallation --credential-set=mycredentials.yml
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

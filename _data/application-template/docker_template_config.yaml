@@ -11,7 +11,7 @@ clink:
 - docker_template_config_view.yaml
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 
