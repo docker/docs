@@ -13,7 +13,7 @@ Before upgrading to a new version of UCP, check the
 There you'll find information about new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
-As part of the upgrade process, you'll upgrade the Docker EE Engine
+As part of the upgrade process, you'll upgrade the Docker Engine - Enterprise
 installed on each node of the cluster to version 19.03 or higher.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
