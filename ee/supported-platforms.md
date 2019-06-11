@@ -26,7 +26,7 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 ## Docker EE tiers
 
-{% include docker_ce_ee.md %}
+{% include docker_ee.md %}
 
 > Note
 >
