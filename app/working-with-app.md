@@ -17,6 +17,8 @@ Docker App is a CLI plug-in that introduces a top-level `docker app` command tha
 
 With Docker App, entire applications can now be managed as easily as images and containers. For example, Docker App lets you  _build_, _validate_ and _deploy_ applications with the `docker app` command. You can even leverage secure supply-chain features such as signed `push` and `pull` operations.
 
+> **NOTE**: `docker app` works with `Engine - Community 19.03` or higher and `Engine - Enterprise 19.03` or higher. 
+
 This guide will walk you through two scenarios:
 
 1. Initialize and deploy a new Docker App project from scratch
@@ -159,7 +161,6 @@ Validated "hello-world.dockerapp"
 
 `docker app validate` operations will fail if the `Parameters` section doesn't specify a default value for every parameter expressed in the app section.
 
-
 As the `validate` operation has returned no problems, the app is ready to be deployed.
 
 ### Deploy the app
@@ -187,15 +188,18 @@ Creating service my-app_hello
 Application "my-app" installed on context "default"
 ```
 
-The app will be deployed using the stack orchestrator. This means you can inspect it with regular `docker stack` commands.
+By default `docker app` uses the [current context](../engine/context/working-with-contexts) to run the installation container and as a target context to deploy the application. This second context can be overridden using the flag `--target-context` or the environment variable `DOCKER_TARGET_CONTEXT`. This flag is also available for the commands `status`, `upgrade` and `uninstall`.
 
 ```
-$ docker stack ls
-NAME                SERVICES            ORCHESTRATOR
-my-app              1                   Swarm
+$ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
+Creating network my-app_default
+Creating service my-app_hello
+Application "my-app" installed on context "my-big-production-cluster"
 ```
 
-You can also check the status of the app with the `docker app status <app-name>` command.
+> **NOTE**: Two applications deployed on the same target context cannot share the same name, but this is valid if they are deployed on different target contexts.
+
+You can check the status of the app with the `docker app status <app-name>` command.
 
 ```
 $ docker app status my-app
@@ -226,7 +230,22 @@ ID              NAME            MODE          REPLICAS    IMAGE             PORT
 miqdk1v7j3zk    my-app_hello    replicated    1/1         hashicorp/http-echo:latest   *:8080->5678/tcp
 ```
 
+The app is deployed using the stack orchestrator. This means you can also inspect it with regular `docker stack` commands.
+
+```
+$ docker stack ls
+NAME                SERVICES            ORCHESTRATOR
+my-app              1                   Swarm
+```
+
 Now that the app is running, you can point a web browser at the DNS name or public IP of the Docker node on port 8080 and see the app in all its glory. You will need to ensure traffic to port 8080 is allowed on the connection form your browser to your Docker host.
+
+Let's now change the port of the application, using `docker app upgrade <app-name>` command.
+```
+$ docker app upgrade my-app --hello.port=8181
+Upgrading service my-app_hello
+Application "my-app" upgraded on context "default"
+```
 
 You can uninstall the app with `docker app uninstall my-app`.
 
@@ -265,7 +284,9 @@ services:
       protocol: tcp
 ```
 
-Notice that the file contains hard-coded values that were expanded based on the contents of the Parameters section of the project's YAML file. For example, `${hello.text}` has been expanded to "Hello world!". Almost all the `docker app` commands propose the `--set key=value` flag to override a default parameter.
+Notice that the file contains hard-coded values that were expanded based on the contents of the Parameters section of the project's YAML file. For example, ${hello.text} has been expanded to "Hello world!".
+
+> **NOTE**: Almost all the `docker app` commands propose the `--set key=value` flag to override a default parameter.
 
 Try to render the application with a different text:
 
