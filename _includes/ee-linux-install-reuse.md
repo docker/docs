@@ -20,10 +20,10 @@ on {{ linux-dist-long }}:
 - [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker EE on air-gapped systems with no access to the internet.
 
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-Docker Community Edition (Docker CE) is _not_ supported on {{ linux-dist-long }}.
+Docker Engine - Community is _not_ supported on {{ linux-dist-long }}.
 {% endif %}
 {% if linux-dist == "centos" %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for CentOS](/install/linux/docker-ce/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
 {% endif %}
 
 {% elsif section == "find-ee-repo-url" %}
