@@ -128,7 +128,7 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
-### Docker EE and CE API mismatch
+### Docker EE and Docker Engine - Community API mismatch
 
 If you use Docker EE in production, we recommend using Docker EE in development
 too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for

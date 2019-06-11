@@ -13,7 +13,7 @@ For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ releases are listed below, [_edge_ release
-notes](edge-release-notes) are also available. (Following the CE release model,
+notes](edge-release-notes) are also available. (Following the Docker Engine - Community release model,
 'beta' releases are called 'edge' releases.) You can learn about both kinds of
 releases, and download stable and edge product installers at [Download Docker
 Desktop for Mac](install.md#download-docker-for-mac).

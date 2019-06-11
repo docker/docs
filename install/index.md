@@ -98,17 +98,17 @@ Binaries built from this releases are available in the stable channel
 `stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
 test channel.
 
-### Relationship between CE and EE code
+### Relationship between Docker Engine - Community and EE code
 
-For a given year-month release, Docker releases both CE and EE
+For a given year-month release, Docker releases both Docker Engine - Community and EE
 variants concurrently. EE is a superset of the code delivered in
-CE. Docker maintains publicly visible repositories for the CE code
+CE. Docker maintains publicly visible repositories for the Docker Engine - Community code
 as well as private repositories for the EE code. Automation (a bot)
-is used to keep the branches between CE and EE in sync so as features
-and fixes are merged on the various branches in the CE repositories
+is used to keep the branches between Docker Engine - Community and EE in sync so as features
+and fixes are merged on the various branches in the Docker Engine - Community repositories
 (upstream), the corresponding EE repositories and branches are kept
 in sync (downstream). While Docker and its partners make every effort
-to minimize merge conflicts between CE and EE, occasionally they will
+to minimize merge conflicts between Docker Engine - Community and EE, occasionally they will
 happen, and Docker will work hard to resolve them in a timely fashion.
 
 ## Next release

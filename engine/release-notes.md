@@ -1,6 +1,6 @@
 ---
 title: Docker Engine release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Engine CE and EE
+description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
@@ -10,9 +10,9 @@ redirect_from:
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine Enterprise Edition (Docker EE) and Community Edition (CE).
+for Docker Engine - Enterprise and Docker Engine - Community.
 
-Docker EE is a superset of all the features in Docker CE. It incorporates defect fixes 
+Docker EE is a superset of all the features in Docker Docker Engine - Community. It incorporates defect fixes 
 that you can use in environments where new features cannot be adopted as quickly for 
 consistency and compatibility reasons.
 
