@@ -1,13 +1,13 @@
 ---
-title: Deploy Enterprise Edition on Linux servers
-description: Learn how to get a trial license and install Docker Enterprise Edition.
+title: Install individual Docker Enterprise components on Linux servers
+description: Learn how to get a trial license and install Docker Enterprise.
 keywords: ucp, dtr, install, orchestration
 redirect_from:
   - /datacenter/try/
   - /datacenter/install/linux/
 ---
 
-The best way to try Docker Enterprise Edition for yourself is to get the [30-day
+Get the [30-day
 trial available at the Docker hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial).
 
 Once you get your trial license, you can install Docker Enterprise's Universal
@@ -22,7 +22,7 @@ running one of the supported operating systems from Docker Enterprise's
 ## Step 1: Install Docker Enterprise Container Engine
 
 [Select a platform](/ee/supported-platforms) and click through to install the
-Docker Enterprise Edition container engine on all hosts you want to manage.
+Docker Enterprise container engine on all hosts you want to manage.
 
 ## Step 2: Install Universal Control Plane
 

@@ -1310,9 +1310,23 @@ manuals:
     title: Docker Enterprise Architecture
   - path: /ee/supported-platforms/
     title: Supported platforms
-    nosync: true
-  - path: /ee/end-to-end-install/
-    title: Deploy Docker Enterprise  
+    nosync: true  
+  - sectiontitle: Deploy Docker Enterprise
+    section:
+    - sectiontitle: Docker Cluster
+      section:
+      - path: /cluster/overview/
+        title: Overview
+      - path: /cluster/aws/
+        title: Docker Cluster on AWS
+      - path: /cluster/cluster-file/
+        title: Cluster file structure
+      - path: /cluster/reference/
+        title: Subcommands
+      - path: /cluster/reference/envvars/
+        title: Environment variables
+    - path: /ee/end-to-end-install/
+      title: Install components individually
   - sectiontitle: Back up Docker Enterprise
     section:
     - path: /ee/admin/backup/
@@ -1323,6 +1337,8 @@ manuals:
       title: Back up UCP
     - path: /ee/admin/backup/back-up-dtr/
       title: Back up DTR
+    - path: /cluster/reference/backup/
+      title: Back up clusters with Docker Cluster
   - sectiontitle: Restore Docker Enterprise
     section:
     - path: /ee/admin/restore/
@@ -1333,12 +1349,36 @@ manuals:
       title: Restore UCP
     - path: /ee/admin/restore/restore-dtr/
       title: Restore DTR 
+    - path: /cluster/reference/restore/
+      title: Restore clusters with Docker Cluster
   - sectiontitle: Disaster Recovery
     section:
     - path: /ee/admin/disaster-recovery/
       title: Overview
   - path: /ee/upgrade/
     title: Upgrade Docker Enterprise
+  - sectiontitle: Docker Cluster
+    section:
+    - path: /cluster/overview/
+      title: Overview
+    - path: /cluster/aws/
+      title: Docker Cluster on AWS
+    - path: /cluster/cluster-file/
+      title: Cluster file structure
+    - path: /cluster/reference/
+      title: Subcommands
+    - path: /cluster/reference/envvars/
+      title: Environment variables
+    - path: /cluster/reference/ls/
+      title: List clusters
+    - path: /cluster/reference/inspect/
+      title: Inspect clusters
+    - path: /cluster/reference/update/
+      title: Update clusters
+    - path: /cluster/reference/remove/
+      title: Remove clusters
+    - path: /cluster/reference/version/
+      title: Version information  
   - path: /ee/telemetry/
     title: Manage usage data collection
   - sectiontitle: Docker Engine - Enterprise
