@@ -17,7 +17,7 @@ node and launches replica tasks on a node with `ACTIVE` availability.
 > **Important**: Setting a node to `DRAIN` does not remove standalone containers from that node,
 > such as those created with `docker run`, `docker-compose up`, or the Docker Engine
 > API. A node's status, including `DRAIN`, only affects the node's ability to schedule
-> swarm service workloads.
+> swarm service workloads.In addition this feature may disable DTR or other node capabilities when used on Manager nodes. Using Drain on managers is highly discouraged. 
 {:.important}
 
 1.  If you haven't already, open a terminal and ssh into the machine where you
