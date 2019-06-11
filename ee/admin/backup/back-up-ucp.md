@@ -25,7 +25,7 @@ Backup contents are stored in a `.tar` file. Backups contain UCP configuration m
 
 | Data                  | Description                                                                        | Backed up |
 | :---------------------|:-----------------------------------------------------------------------------------|:----------|
-| Configurations        | UCP configurations, including Docker EE license. Swarm, and client CAs          | yes
+| Configurations        | UCP configurations, including Docker Engine - Enterprise license. Swarm, and client CAs          | yes
 | Access control        | Permissions for teams to swarm resources, including collections, grants, and roles | yes
 | Certificates and keys | Certificates and public and private keys used for authentication and mutual TLS communication         | yes
 | Metrics data          | Monitoring data gathered by UCP                                                    | yes

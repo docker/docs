@@ -27,7 +27,7 @@ cgroups: |
 
   *Also known as : control groups*
 collection: |
-  A collection is a group of swarm resources that Docker EE uses for role-based
+  A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
   nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 Compose: |
@@ -152,7 +152,7 @@ filesystem: |
   - macOS : HFS+
 grant: |
   A grant enables role-based access control for managing how users and
-  organizations access Docker EE swarm resources. A grant is made up of a
+  organizations access Docker Engine - Enterprise swarm resources. A grant is made up of a
   subject, a role, and a collection. For more about grants and role-based access
   control, see [Grant permissions to users based on roles](/datacenter/ucp/2.2/guides/access-control/grant-permissions/).
 image: |
@@ -233,12 +233,12 @@ repository: |
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
 role: |
-  A role is a set of permitted API operations on a collection of Docker EE swarm
+  A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm
   resources. As part of a grant, a role is assigned to a subject (a user, team, or
   organization) and a collection. For more about roles, see [Roles and
   permission levels](/datacenter/ucp/2.2/guides/access-control/permission-levels/).
 role-based access control: |
-  Role-based access control enables managing how Docker EE users can access
+  Role-based access control enables managing how Docker Engine - Enterprise users can access
   swarm resources. UCP administrators create grants to control how users access
   resource collections. A grant is made up of a subject, a role, and a collection.
   A grant defines who (subject) has how much access (role) to a set of resources
