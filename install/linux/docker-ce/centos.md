@@ -1,16 +1,16 @@
 ---
-description: Instructions for installing Docker CE on CentOS
+description: Instructions for installing Docker Engine - Community on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/centos/
 - /engine/installation/linux/docker-ce/centos/
 - /install/linux/centos/
 - /engine/installation/linux/centos/
-title: Get Docker CE for CentOS
+title: Get Docker Engine - Community for CentOS
 toc_max: 4
 ---
 
-To get started with Docker CE on CentOS, make sure you
+To get started with Docker Engine - Community on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 
@@ -55,11 +55,11 @@ $ sudo yum remove docker \
 It's OK if `yum` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker CE package is now called `docker-ce`.
+networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 
 ## Install Docker CE
 
-You can install Docker CE in different ways, depending on your needs:
+You can install Docker Engine - Community in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -76,7 +76,7 @@ You can install Docker CE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker CE for the first time on a new host machine, you need
+Before you install Docker Engine - Community for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
@@ -130,7 +130,7 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
     ```bash
     $ sudo yum install docker-ce docker-ce-cli containerd.io
@@ -183,7 +183,7 @@ from the repository.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -193,7 +193,7 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker
+Docker Engine - Community is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -233,7 +233,7 @@ a new file each time you want to upgrade Docker CE.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -243,7 +243,7 @@ a new file each time you want to upgrade Docker CE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker commands.
+Docker Engine - Community is installed and running. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
