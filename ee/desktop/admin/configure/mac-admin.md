@@ -65,13 +65,13 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": 1024
     },
+    "dataFolder" : {
+      "locked" : false,
+      "value" : "/Users/..."
+    },
     "diskSizeMiB": {
       "locked": false,
       "value": 65536
-    },
-    "dataFolder" : {
-      "value" : "/Users/...",
-      "locked" : false
     },
     "filesharingDirectories": {
       "locked":false,
