@@ -2545,6 +2545,8 @@ manuals:
             path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
+      - title: Manage applications
+        path: /ee/dtr/user/manage-applications/
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
       - title: Tag pruning
