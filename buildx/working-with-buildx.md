@@ -6,43 +6,20 @@ keywords: Docker, buildx, multi-arch
 
 > **Note:** Docker Buildx is an experimental feature.
 >
-> {% include experimental-feature.md %}
+> {% include experimental.md %}
 
 ## Overview
 
-Docker Buildx is a CLI plugin that extends the docker build command with the full support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit) builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.
+Docker Buildx is a CLI plugin that extends the docker command with the full support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit) builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.
 
 ## Install
 
-You must use Docker 19.03.0 beta or a higher version to use `buildx` as a Docker CLI plugin.
+Docker Buildx is included in Docker 19.03 and is also bundled with the following Docker Desktop releases. Note that you must enable the 'Experimental features' option to use Docker Buildx.
 
-You can download the latest binary release from the [Docker buildx releases](https://github.com/docker/buildx/releases/latest) repository. Name the file as `docker-buildx` and then copy  to `~/.docker/cli-plugins` directory.
+- Docker Desktop Enterprise version 2.1.0
+- Docker Desktop Edge version 2.0.4.0 or higher
 
-```
-$ export DOCKER_BUILDKIT=1
-$ docker build --platform=local -o . git://github.com/docker/buildx
-$ mv buildx ~/.docker/cli-plugins/docker-buildx
-```
-
-### Docker Desktop (Edge)
-
-`buildx` is bundled with Docker Desktop Edge version 2.0.4.0 or higher. For more information, see https://docs.docker.com/docker-for-mac/edge-release-notes/
-
-### Docker CE nightly builds
-
-`buildx` is also included with the Docker CE nightly builds.
-
-- Mac: [CE nightly](https://download.docker.com/mac/static/nightly/)
-- Linux:
-
-```bash
-$ # uncomment next line to uninstall previous Docker CE installation if present
-$ # apt purge docker-ce docker-ce-cli
-$ curl -fsSL https://get.docker.com/ -o docker-install.sh
-$ CHANNEL=nightly sh docker-install.sh
-```
-
-After installation, you can access Buildx using the `docker buildx` command.
+You can also download the latest `buildx` binary from the [Docker buildx](https://github.com/docker/buildx/) repository.
 
 ## Build with `buildx`
 
@@ -56,7 +33,7 @@ $ docker buildx build .
 
 Buildx builds using the BuildKit engine and does not require `DOCKER_BUILDKIT=1` environment variable to start the builds.
 
-The `buildx build` command supports features available for `docker build`, including the new features in Docker 19.03 such as outputs configuration, inline build caching, and specifying target platform. In addition, Buildx also supports new features that are not yet available for regular `docker build` like building manifest lists, distributed caching, and exporting build results to OCI image tarballs.
+The `docker buildx build` command supports features available for `docker build`, including the new features in Docker 19.03 such as outputs configuration, inline build caching, and specifying target platform. In addition, Buildx also supports new features that are not yet available for regular `docker build` like building manifest lists, distributed caching, and exporting build results to OCI image tarballs.
 
 You can run Buildx in different configurations that are exposed through a driver concept. Currently, Docker supports a "docker" driver that uses the BuildKit library bundled into the docker daemon binary, and a "docker-container" driver that automatically launches BuildKit inside a Docker container.
 
