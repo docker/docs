@@ -12,7 +12,7 @@ Usage: {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 
 {% if section == "ee-install-intro" %}
 
-There are two ways to install and upgrade [Docker Enterprise Edition (Docker EE)](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
+There are two ways to install and upgrade [Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
 on {{ linux-dist-long }}:
 
 - [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker Engine - Enterprise from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
@@ -28,7 +28,7 @@ For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - C
 
 {% elsif section == "find-ee-repo-url" %}
 
-To install Docker EE, you will need the URL of the Docker Engine - Enterprise repository associated with your trial or subscription:
+To install Docker Enterprise, you will need the URL of the Docker Enterprise repository associated with your trial or subscription:
 
 1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
 2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
@@ -207,7 +207,7 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "package-installation" %}
 
-To manually install Docker EE, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker EE.
+To manually install Docker Enterprise, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker Enterprise.
 
 {% elsif section == "install-using-yum-package" %}
 
@@ -240,7 +240,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
   {% endif %}
 {% endif %}
 
-2.  Install Docker EE, changing the path below to the path where you downloaded
+2.  Install Docker Enterprise, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
