@@ -19,27 +19,31 @@ Using Docker Cluster is a three-step process:
 
 A `cluster.yml` file resembles the following example:
 
-      variable:
-        region: us-east-2
-        ucp_password:
-          type: prompt
+{% raw %}
+```yaml
+variable:
+  region: us-east-2
+  ucp_password:
+    type: prompt
 
-      provider:
-        aws:
-          region: ${region}
+provider:
+  aws:
+    region: ${region}
 
-      cluster:
-        engine:
-          version: "ee-stable-18.09.5"
-        ucp:
-          version: "docker/ucp:3.1.6"
-          username: "admin"
-          password: ${ucp_password}
+cluster:
+  engine:
+    version: "ee-stable-18.09.5"
+  ucp:
+    version: "docker/ucp:3.1.6"
+    username: "admin"
+    password: ${ucp_password}
 
-      resource:
-        aws_instance:
-          managers:
-            quantity: 1
+resource:
+  aws_instance:
+    managers:
+       quantity: 1
+```
+{% endraw %}
 
 For more information about Cluster files, refer to the
 [Cluster file reference](cluster-file/index.md).
