@@ -3382,14 +3382,10 @@ manuals:
     title: Working with Docker App
   - path: /engine/reference/commandline/app/
     title: CLI reference
-- sectiontitle: Docker Template
+- sectiontitle: Docker Buildx
   section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
-  - path: /app-template/api-reference/
-    title: API reference
-  - path: /engine/reference/commandline/template/
-    title: CLI reference
+  - path: /buildx/working-with-buildx/
+    title: Working with Docker Buildx
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -3493,6 +3489,14 @@ manuals:
   - path: /engine/context/working-with-contexts/
     title: Working with Docker Contexts
   - path: /engine/reference/commandline/context/
+    title: CLI reference
+- sectiontitle: Docker Template
+  section:
+  - path: /app-template/working-with-template/
+    title: Working with Docker Template
+  - path: /app-template/api-reference/
+    title: API reference
+  - path: /engine/reference/commandline/template/
     title: CLI reference
 - sectiontitle: Docker Desktop for Mac
   section:
