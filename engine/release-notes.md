@@ -26,7 +26,7 @@ EE will be a superset with < 10 items added.
 
 https://docker.atlassian.net/browse/ENGCORE-834 - should this be in known issues?
 https://docker.atlassian.net/browse/ENGORC-1243 - should this be in known issues?
-https://docker.atlassian.net/browse/ENGCORE-686 - should this be in known issues?
+https://docker.atlassian.net/browse/ENGCORE-686 - should this be in known issues - MIGHT BE INTERNAL ONLY
 https://docker.atlassian.net/browse/ENGCORE-810 - added to UCP known issues
 https://docker.atlassian.net/browse/ENGPGM-115 - Swarm info added to known issues
 END OF DELETE BEFORE MERGING--------
