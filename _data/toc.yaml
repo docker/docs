@@ -551,7 +551,7 @@ reference:
           title: docker app upgrade
         - path: /engine/reference/commandline/app_validate/
           title: docker app validate
-        - path: /engine/reference/commandine/app_version/
+        - path: /engine/reference/commandline/app_version/
           title: docker app version
     - sectiontitle: docker assemble *
       section:
