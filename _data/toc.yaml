@@ -540,6 +540,68 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
+    - sectiontitle: docker app *
+      section:
+        - path: /engine/reference/commandline/app/
+          title: docker app
+        - path: /engine/reference/commandline/app_bundle/
+          title: docker app bundle
+        - path: /engine/reference/commandline/app_completion/
+          title: docker app completion
+        - path: /engine/reference/commandline/app_init/
+          title: docker app init
+        - path: /engine/reference/commandline/app_inspect/
+          title: docker app inspect
+        - path: /engine/reference/commandline/app_install/
+          title: docker app install
+        - path: /engine/reference/commandline/app_list/
+          title: docker app list
+        - path: /engine/reference/commandline/app_merge/
+          title: docker app merge
+        - path: /engine/reference/commandline/app_pull/
+          title: docker app pull
+        - path: /engine/reference/commandline/app_push/
+          title: docker app push
+        - path: /engine/reference/commandline/app_render/
+          title: docker app render
+        - path: /engine/reference/commandline/app_split/
+          title: docker app split
+        - path: /engine/reference/commandline/app_status/
+          title: docker app status
+        - path: /engine/reference/commandline/app_uninstall/
+          title: docker app uninstall
+        - path: /engine/reference/commandline/app_upgrade/
+          title: docker app upgrade
+        - path: /engine/reference/commandline/app_validate/
+          title: docker app validate
+        - path: /engine/reference/commandline/app_version/
+          title: docker app version
+    - sectiontitle: docker assemble *
+      section:
+        - path: /engine/reference/commandline/assemble/
+          title: docker assemble
+        - path: /engine/reference/commandline/assemble_backend/
+          title: docker assemble backend
+        - path: /engine/reference/commandline/assemble_backend_cache/
+          title: docker assemble backend cache
+        - path: /engine/reference/commandline/assemble_backend_cache_purge/
+          title: docker assemble backend cache purge
+        - path: /engine/reference/commandline/assemble_backend_cache_usage/
+          title: docker assemble backend cache usage
+        - path: /engine/reference/commandline/assemble_backend_image/
+          title: docker assemble backend image
+        - path: /engine/reference/commandline/assemble_backend_info/
+          title: docker assemble backend info
+        - path: /engine/reference/commandline/assemble_backend_logs/
+          title: docker assemble backend logs
+        - path: /engine/reference/commandline/assemble_backend_start/
+          title: docker assemble backend start
+        - path: /engine/reference/commandline/assemble_backend_stop/
+          title: docker assemble backend stop
+        - path: /engine/reference/commandline/assemble_build/
+          title: docker assemble build
+        - path: /engine/reference/commandline/assemble_version/
+          title: docker assemble version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -1365,6 +1427,8 @@ manuals:
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
+      - title: Using Pod Security Policies
+        path: /ee/ucp/kubernetes/pod-security-policies/        
       - title: Deploy an ingress controller
         path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
@@ -2305,6 +2369,8 @@ manuals:
             path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
+      - title: Manage applications
+        path: /ee/dtr/user/manage-applications/
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
       - title: Tag pruning
