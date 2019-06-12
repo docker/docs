@@ -6,7 +6,7 @@ pname: docker template
 plink: docker_template.yaml
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

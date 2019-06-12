@@ -46,7 +46,7 @@ options:
 examples: $ docker app inspect myapp.dockerapp
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 
