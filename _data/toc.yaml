@@ -119,9 +119,9 @@ guides:
     - title: Release notes
       path: /engine/release-notes/
       nosync: true
-  - sectiontitle: Docker EE
+  - sectiontitle: Docker Enterprise
     section:
-    - title: About Docker EE
+    - title: About Docker Enterpise
       path: /ee/supported-platforms/
     - sectiontitle: Linux
       section:
@@ -497,7 +497,7 @@ guides:
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
-      title: Docker EE Benchmark
+      title: Docker Enterprise Benchmark
     - path: /compliance/cis/docker_ce/
       title: Docker CE Benchmark
     - path: /compliance/cis/k8s/
@@ -1196,29 +1196,29 @@ samples:
     title: SSHd
 
 manuals:
-- sectiontitle: Docker Enterprise Edition
+- sectiontitle: Docker Enterprise
   section:
   - path: /ee/
-    title: About Docker EE
-  - title: Try Docker EE on the cloud
+    title: About Docker Enterprise
+  - title: Try Docker Enterprise on the cloud
     path: https://trial.docker.com
   - path: /ee/supported-platforms/
     title: Supported platforms
     nosync: true
   - path: /ee/end-to-end-install/
-    title: Deploy Docker EE standard
+    title: Deploy Docker Enterprise standard
   - path: /ee/backup/
-    title: Backup Docker EE
+    title: Backup Docker Enterprise
   - path: /ee/upgrade/
-    title: Upgrade Docker EE
+    title: Upgrade Docker Enterprise
   - path: /ee/docker-ee-architecture/
-    title: Docker EE Architecture
+    title: Docker Enterpris Architecture
   - path: /ee/telemetry/
     title: Manage usage data collection
-  - sectiontitle: Docker EE Engine
+  - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker EE Engine
+      title: Install Docker Engine - Enterprise
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
@@ -1346,9 +1346,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Docker EE Standard use case
+          title: Docker Enterprise Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Docker EE Advanced use case
+          title: Docker Enterprise Advanced use case
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
@@ -1583,9 +1583,9 @@ manuals:
           - path: /datacenter/ucp/3.0/guides/access-control/permission-levels/
             title: Permission levels
           - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-standard/
-            title: Access control design with Docker EE Standard
+            title: Access control design with Docker Enterprise Standard
           - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-advanced/
-            title: Access control design with Docker EE Advanced
+            title: Access control design with Docker Enterprise Advanced
           - path: /datacenter/ucp/3.0/guides/access-control/recover-a-user-password/
             title: Recover a user password
         - sectiontitle: User guides
@@ -1798,9 +1798,9 @@ manuals:
           - path: /datacenter/ucp/2.2/guides/access-control/permission-levels/
             title: Permission levels
           - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-standard/
-            title: Access control design with Docker EE Standard
+            title: Access control design with Docker Enterprise Standard
           - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-advanced/
-            title: Access control design with Docker EE Advanced
+            title: Access control design with Docker Enterprise Advanced
           - path: /datacenter/ucp/2.2/guides/access-control/recover-a-user-password/
             title: Recover a user password
         - sectiontitle: User guides
@@ -3551,7 +3551,7 @@ manuals:
     - path: /release-notes/
       title: Overview
     - path: /engine/release-notes/
-      title: Docker EE and CE
+      title: Docker Enterprise and Docker Engine - Community
       nosync: true
     - path: /cs-engine/1.13/release-notes/
       title: CS Docker Engine

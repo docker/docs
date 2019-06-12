@@ -76,8 +76,8 @@ Docker: |
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
-Docker Enterprise Edition: |
-  Docker Enterprise Edition (Docker EE) is a platform to build, ship, and run
+Docker Enterprise: |
+  Docker Enterprise is a platform to build, ship, and run
   containerized applications, that you can deploy in the cloud or on-premise. It
   includes a tested and certified version of Docker, web UIs for managing
   your app resources, and support.
@@ -271,7 +271,7 @@ service discovery: |
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
 subject: |
-  A subject represents a user, team, or organization in Docker EE. A subject is
+  A subject represents a user, team, or organization in Docker Enterprise. A subject is
   granted a role for access to a collection of swarm resources.
   For more about role-based access, see [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 swarm: |
