@@ -1601,6 +1601,8 @@ manuals:
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
+      - title: Using Pod Security Policies
+        path: /ee/ucp/kubernetes/pod-security-policies/        
       - title: Deploy an ingress controller
         path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app

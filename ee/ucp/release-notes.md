@@ -62,6 +62,12 @@ users can request storage resources without needing underlying infrastructure kn
 SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing 
 user status and group membership.
 
+### Support for Pod Security Policies (PSPs) within Kubernetes
+Pod Security Policies are enabled by default in UCP 3.2 allowing platform
+operators to enforce security controls on what can run on top of Kubernetes. For
+more information see
+[Using Pod Security](/ee/ucp/kubernetes/pod-security-policies/)
+
 ## Enhancements
 
 ### Backup/restore
