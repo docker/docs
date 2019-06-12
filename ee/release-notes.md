@@ -17,7 +17,11 @@ keywords: engine enterprise, ucp, dtr, desktop enterprise, whats new, release no
 | [App Distribution](#) | DTR | 2.7.0 |
 | [Client certificate-based Authentication](#) | DTR | 2.7.0 |
 | [Application Designer](/ee/desktop/app-designer/) | Docker Desktop Enterprise | 0.1.4 |
-| [Docker Template CLI](/app-template/working-with-template/) | Docker Desktop Enterprise | 0.1.4 |
+| [Docker App (Experimental)](/app/working-with-app/) |CLI | 0.8.0 |
+| [Docker Assemble (Experimental)](/assemble/install/) | CLI | 0.36.0 |
+| [Docker Buildx (Experimental)](/buildx/working-with-buildx/)| CLI | 0.2.2 |
+| [Docker Cluster](/cluster/overview/) | CLI | 1.0.0 |
+| [Docker Template CLI (Experimental)](/app-template/working-with-template/) | CLI | 0.1.4 |
 
 
 ## Product install and upgrade
