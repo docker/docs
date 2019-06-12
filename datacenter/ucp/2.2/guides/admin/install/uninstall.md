@@ -1,7 +1,7 @@
 ---
 title: Uninstall UCP
 description: Learn how to uninstall a Docker Universal Control Plane swarm.
-keywords: UCP, uninstall, install, Docker EE
+keywords: UCP, uninstall, install, Docker Enterprise
 ---
 
 Docker UCP is designed to scale as your applications grow in size and usage.

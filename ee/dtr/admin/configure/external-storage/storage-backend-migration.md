@@ -26,27 +26,26 @@ Docker recommends the following steps for your storage backend and metadata migr
 
 5. With DTR restored from your backup and your storage data migrated to your new backend, garbage collect any dangling blobs using the following API request:
 
-        ```bash
-        curl -u <username>:$TOKEN -X POST "https://<dtr-url>/api/v0/jobs" -H "accept: application/json" -H "content-type: application/json" -d "{ \"action": \"onlinegc_blobs\" }"
-        ``` 
-        On success, you should get a `202 Accepted` response with a job `id` and other related details.
-   
-This ensures any blobs which are not referenced in your previously created backup get destroyed.
+     ```bash
+     curl -u <username>:$TOKEN -X POST "https://<dtr-url>/api/v0/jobs" -H "accept: application/json" -H "content-type: application/json" -d "{ \"action": \"onlinegc_blobs\" }"
+     ``` 
+        
+     On success, you should get a `202 Accepted` response with a job `id` and other related details. This ensures any blobs which are not referenced in your previously created backup get destroyed.
     
 ### Alternative option for data migration
 
-- If you have a long maintenance window, you can skip some steps from above and do the following:
+If you have a long maintenance window, you can skip some steps from above and do the following:
 
-    1. Put DTR in "read-only" mode using the following API request:
+1. Put DTR in "read-only" mode using the following API request:
    
-        ```bash
-        curl -u <username>:$TOKEN -X POST "https://<dtr-url>/api/v0/meta/settings" -H "accept: application/json" -H "content-type: application/json" -d "{ \"readOnlyRegistry\": true }"
-        ``` 
-        On success, you should get a `202 Accepted` response.
+     ```bash
+     curl -u <username>:$TOKEN -X POST "https://<dtr-url>/api/v0/meta/settings" -H "accept: application/json" -H "content-type: application/json" -d "{ \"readOnlyRegistry\": true }"
+     ``` 
+     On success, you should get a `202 Accepted` response.
 
-    2. Migrate the contents of your current storage backend to the new one you are switching to. For example, upload your current storage data to your new NFS server.
+2. Migrate the contents of your current storage backend to the new one you are switching to. For example, upload your current storage data to your new NFS server.
 
-    3. [Reconfigure DTR](/reference/dtr/2.6/cli/reconfigure) while specifying the `--storage-migrated` flag to preserve your existing tags. 
+3. [Reconfigure DTR](/reference/dtr/2.6/cli/reconfigure) while specifying the `--storage-migrated` flag to preserve your existing tags. 
 
 
 ## DTR 2.6.0-2.6.4 and DTR 2.5 (with experimental garbage collection)

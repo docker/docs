@@ -77,7 +77,7 @@ to schedule Kubernetes or Swarm workloads.
 > IBM z Systems
 >
 > Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
+> cluster with z Systems, Docker Engine - Enterprise won't schedule Kubernetes workloads
 > on z Systems nodes.
 {: .important}
 

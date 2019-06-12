@@ -1,7 +1,7 @@
 ---
 title: Architecture-specific images
 description: Learn how to use images that are specific to particular hardware architectures in Docker Universal Control Plane.
-keywords: UCP, Docker EE, image, IBM z, Windows
+keywords: UCP, Docker Enterprise, image, IBM z, Windows
 ---
 
 Docker Universal Control Plane deploys images for a number of different

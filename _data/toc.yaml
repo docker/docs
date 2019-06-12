@@ -20,9 +20,9 @@ guides:
   section:
   - path: /install/overview/
     title: Overview of Docker editions
-  - sectiontitle: Docker Engine - Community
+  - sectiontitle: Docker CE
     section:
-    - title: About Docker Engine - Community
+    - title: About Docker CE
       path: /install/
     - sectiontitle: Cloud
       section:
@@ -121,7 +121,7 @@ guides:
       nosync: true
   - sectiontitle: Docker Enterprise
     section:
-    - title: About Docker Enterprise
+    - title: About Docker Enterpise
       path: /ee/supported-platforms/
     - sectiontitle: Linux
       section:
@@ -143,7 +143,7 @@ guides:
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/ce-ee-node-activate/
-        title: Docker Engine Community to Enterprise Node Activate
+        title: CE-EE Node Activate
       - path: /engine/migration/
         title: Migrate to Docker 1.10
       - path: /engine/breaking_changes/
@@ -494,16 +494,12 @@ guides:
       title: NISTIR 8176
     - path: /compliance/nist/itl_october2017/
       title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
-    section:
-    - path: /compliance/oscal
-      title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
     - path: /compliance/cis/docker_ee/
       title: Docker Enterprise Benchmark
     - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
+      title: Docker CE Benchmark
     - path: /compliance/cis/k8s/
       title: Kubernetes Benchmark
   - path: /compliance/fedramp/
@@ -614,38 +610,8 @@ reference:
       section:
         - path: /engine/reference/commandline/builder/
           title: docker builder
-        - path: /engine/reference/commandline/builder_build/
-          title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
-    - sectiontitle: docker buildx *
-      section:
-        - path: /engine/reference/commandline/buildx/
-          title: docker buildx
-        - path: /engine/reference/commandline/buildx_bake/
-          title: docker buildx bake
-        - path: /engine/reference/commandline/buildx_build/
-          title: docker buildx build
-        - path: /engine/reference/commandline/buildx_create/
-          title: docker buildx create
-        - path: /engine/reference/commandline/buildx_imagetools/
-          title: docker buildx imagetools
-        - path: /engine/reference/commandline/buildx_imagetools_create/
-          title: docker buildx imagetools create
-        - path: /engine/reference/commandline/buildx_imagetools_inspect/
-          title: docker buildx imagetools inspect
-        - path: /engine/reference/commandline/buildx_inspect/
-          title: docker buildx inspect
-        - path: /engine/reference/commandline/buildx_ls/
-          title: docker buildx ls
-        - path: /engine/reference/commandline/buildx_rm/
-          title: docker buildx rm
-        - path: /engine/reference/commandline/buildx_stop/
-          title: docker buildx stop
-        - path: /engine/reference/commandline/buildx_use/
-          title: docker buildx use
-        - path: /engine/reference/commandline/buildx_version/
-          title: docker buildx version
     - sectiontitle: docker checkpoint *
       section:
       - path: /engine/reference/commandline/checkpoint/
@@ -724,26 +690,6 @@ reference:
         title: docker container update
       - path: /engine/reference/commandline/container_wait/
         title: docker container wait
-    - sectiontitle: docker context *
-      section:
-        - path: /engine/reference/commandline/context/
-          title: docker context
-        - path: /engine/reference/commandline/context_create/
-          title: docker context create
-        - path: /engine/reference/commandline/context_export/
-          title: docker context export
-        - path: /engine/reference/commandline/context_import/
-          title: docker context import
-        - path: /engine/reference/commandline/context_inspect/
-          title: docker context inspect
-        - path: /engine/reference/commandline/context_ls/
-          title: docker context ls
-        - path: /engine/reference/commandline/context_rm/
-          title: docker context rm
-        - path: /engine/reference/commandline/context_update/
-          title: docker context update
-        - path: /engine/reference/commandline/context_use/
-          title: docker context use
     - path: /engine/reference/commandline/cp/
       title: docker cp
     - path: /engine/reference/commandline/create/
@@ -896,24 +842,6 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
-    - sectiontitle: docker registry *
-      section:
-        - path: /engine/reference/commandline/registry/
-          title: docker registry
-        - path: /engine/reference/commandline/registry_events/
-          title: docker registry events
-        - path: /engine/reference/commandline/registry_history/
-          title: docker registry history
-        - path: /engine/reference/commandline/registry_info/
-          title: docker registry info
-        - path: /engine/reference/commandline/registry_inspect/
-          title: docker registry inspect
-        - path: /engine/reference/commandline/registry_joblogs/
-          title: docker registry joblogs
-        - path: /engine/reference/commandline/registry_ls/
-          title: docker registry ls
-        - path: /engine/reference/commandline/registry_rmi/
-          title: docker registry rmi
     - path: /engine/reference/commandline/rename/
       title: docker rename
     - path: /engine/reference/commandline/restart/
@@ -1014,24 +942,6 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
-    - sectiontitle: docker template *
-      section:
-        - path: /engine/reference/commandline/template/
-          title: docker template
-        - path: /engine/reference/commandline/template_config/
-          title: docker template config
-        - path: /engine/reference/commandline/template_config_set/
-          title: docker template config set
-        - path: /engine/reference/commandline/template_config_view/
-          title: docker template config view
-        - path: /engine/reference/commandline/template_inspect/
-          title: docker template inspect
-        - path: /engine/reference/commandline/template_list/
-          title: docker template list
-        - path: /engine/reference/commandline/template_scaffold/
-          title: docker template scaffold
-        - path: /engine/reference/commandline/template_version/
-          title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
     - sectiontitle: docker trust *
@@ -1086,53 +996,53 @@ reference:
     nosync: true
   - sectiontitle: DTR CLI
     section:
-    - path: /reference/dtr/2.7/cli/
+    - path: /reference/dtr/2.6/cli/
       title: Overview
-    - path: /reference/dtr/2.7/cli/backup/
+    - path: /reference/dtr/2.6/cli/backup/
       title: backup
-    - path: /reference/dtr/2.7/cli/destroy/
+    - path: /reference/dtr/2.6/cli/destroy/
       title: destroy
-    - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair7
-    - path: /reference/dtr/2.7/cli/install/
+    - path: /reference/dtr/2.6/cli/emergency-repair/
+      title: emergency-repair
+    - path: /reference/dtr/2.6/cli/install/
       title: install
-    - path: /reference/dtr/2.7/cli/join/
+    - path: /reference/dtr/2.6/cli/join/
       title: join
-    - path: /reference/dtr/2.7/cli/reconfigure/
+    - path: /reference/dtr/2.6/cli/reconfigure/
       title: reconfigure
-    - path: /reference/dtr/2.7/cli/remove/
+    - path: /reference/dtr/2.6/cli/remove/
       title: remove
-    - path: /reference/dtr/2.7/cli/restore/
+    - path: /reference/dtr/2.6/cli/restore/
       title: restore
-    - path: /reference/dtr/2.7/cli/upgrade/
+    - path: /reference/dtr/2.6/cli/upgrade/
       title: upgrade
   - sectiontitle: UCP CLI
     section:
-    - path: /reference/ucp/3.2/cli/
+    - path: /reference/ucp/3.1/cli/
       title: docker/ucp overview
-    - path: /reference/ucp/3.2/cli/backup/
+    - path: /reference/ucp/3.1/cli/backup/
       title: backup
-    - path: /reference/ucp/3.2/cli/dump-certs/
+    - path: /reference/ucp/3.1/cli/dump-certs/
       title: dump-certs
-    - path: /reference/ucp/3.2/cli/example-config/
+    - path: /reference/ucp/3.1/cli/example-config/
       title: example-config
-    - path: /reference/ucp/3.2/cli/id/
+    - path: /reference/ucp/3.1/cli/id/
       title: id
-    - path: /reference/ucp/3.2/cli/images/
+    - path: /reference/ucp/3.1/cli/images/
       title: images
-    - path: /reference/ucp/3.2/cli/install/
+    - path: /reference/ucp/3.1/cli/install/
       title: install
-    - path: /reference/ucp/3.2/cli/restart/
+    - path: /reference/ucp/3.1/cli/restart/
       title: restart
-    - path: /reference/ucp/3.2/cli/restore/
+    - path: /reference/ucp/3.1/cli/restore/
       title: restore
-    - path: /reference/ucp/3.2/cli/stop/
+    - path: /reference/ucp/3.1/cli/stop/
       title: stop
-    - path: /reference/ucp/3.2/cli/support/
+    - path: /reference/ucp/3.1/cli/support/
       title: support
-    - path: /reference/ucp/3.2/cli/uninstall-ucp/
+    - path: /reference/ucp/3.1/cli/uninstall-ucp/
       title: uninstall-ucp
-    - path: /reference/ucp/3.2/cli/upgrade/
+    - path: /reference/ucp/3.1/cli/upgrade/
       title: upgrade
 
 - sectiontitle: Application Programming Interfaces (APIs)
@@ -1192,9 +1102,9 @@ reference:
       - path: /engine/api/v1.18/
         title: v1.18 reference
   - title: DTR API
-    path: /reference/dtr/2.7/api/
+    path: /reference/dtr/2.6/api/
   - title: UCP API
-    path: /reference/ucp/3.2/api/
+    path: /reference/ucp/3.1/api/
   - title: Registry API
     path: /registry/spec/api/
     nosync: true
@@ -1290,101 +1200,25 @@ manuals:
   section:
   - path: /ee/
     title: About Docker Enterprise
-  - sectiontitle: Release Notes
-    section:  
-    - path: /ee/release-notes/
-      title: Platform
-    - path: /engine/release-notes/
-      title: Docker Engine - Enterprise and Engine - Community
-      nosync: true
-    - path: /ee/ucp/release-notes/
-      title: Docker Universal Control Plane
-      nosync: true
-    - path: /ee/dtr/release-notes/
-      title: Docker Trusted Registry
-      nosync: true
-    - path: /ee/desktop/release-notes/
-      title: Docker Desktop Enterprise
-      nosync: true
-  - path: /ee/docker-ee-architecture/
-    title: Docker Enterprise Architecture
+  - title: Try Docker Enterprise on the cloud
+    path: https://trial.docker.com
   - path: /ee/supported-platforms/
     title: Supported platforms
-    nosync: true  
-  - sectiontitle: Deploy Docker Enterprise
-    section:
-    - sectiontitle: Docker Cluster
-      section:
-      - path: /cluster/overview/
-        title: Overview
-      - path: /cluster/aws/
-        title: Docker Cluster on AWS
-      - path: /cluster/cluster-file/
-        title: Cluster file structure
-      - path: /cluster/reference/
-        title: Subcommands
-      - path: /cluster/reference/envvars/
-        title: Environment variables
-    - path: /ee/end-to-end-install/
-      title: Install components individually
-  - sectiontitle: Back up Docker Enterprise
-    section:
-    - path: /ee/admin/backup/
-      title: Overview
-    - path: /ee/admin/backup/back-up-swarm/
-      title: Back up Docker Swarm
-    - path: /ee/admin/backup/back-up-ucp/
-      title: Back up UCP
-    - path: /ee/admin/backup/back-up-dtr/
-      title: Back up DTR
-    - path: /cluster/reference/backup/
-      title: Back up clusters with Docker Cluster
-  - sectiontitle: Restore Docker Enterprise
-    section:
-    - path: /ee/admin/restore/
-      title: Overview
-    - path: /ee/admin/restore/restore-swarm/
-      title: Restore Docker Swarm
-    - path: /ee/admin/restore/restore-ucp/
-      title: Restore UCP
-    - path: /ee/admin/restore/restore-dtr/
-      title: Restore DTR 
-    - path: /cluster/reference/restore/
-      title: Restore clusters with Docker Cluster
-  - sectiontitle: Disaster Recovery
-    section:
-    - path: /ee/admin/disaster-recovery/
-      title: Overview
+    nosync: true
+  - path: /ee/end-to-end-install/
+    title: Deploy Docker Enterprise standard
+  - path: /ee/backup/
+    title: Backup Docker Enterprise
   - path: /ee/upgrade/
     title: Upgrade Docker Enterprise
-  - sectiontitle: Docker Cluster
-    section:
-    - path: /cluster/overview/
-      title: Overview
-    - path: /cluster/aws/
-      title: Docker Cluster on AWS
-    - path: /cluster/cluster-file/
-      title: Cluster file structure
-    - path: /cluster/reference/
-      title: Subcommands
-    - path: /cluster/reference/envvars/
-      title: Environment variables
-    - path: /cluster/reference/ls/
-      title: List clusters
-    - path: /cluster/reference/inspect/
-      title: Inspect clusters
-    - path: /cluster/reference/update/
-      title: Update clusters
-    - path: /cluster/reference/remove/
-      title: Remove clusters
-    - path: /cluster/reference/version/
-      title: Version information  
+  - path: /ee/docker-ee-architecture/
+    title: Docker Enterpris Architecture
   - path: /ee/telemetry/
     title: Manage usage data collection
   - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker Enterprise Engine
+      title: Install Docker Engine - Enterprise
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
@@ -1408,8 +1242,6 @@ manuals:
           title: Install offline
         - path: /ee/ucp/admin/install/install-on-azure/
           title: Install on Azure
-        - path: /ee/ucp/admin/install/install-on-aws/
-          title: Install on AWS
         - path: /ee/ucp/admin/install/upgrade/
           title: Upgrade
         - path: /ee/ucp/admin/install/upgrade-offline/
@@ -1434,8 +1266,6 @@ manuals:
           title: Create UCP audit logs
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
-        - path: /ee/ucp/admin/configure/integrate-scim/
-          title: SCIM integration
         - path: /ee/ucp/admin/configure/enable-helm-tiller/
           title: Enable Helm and Tiller with UCP
         - path: /ee/ucp/admin/configure/external-auth/
@@ -1482,6 +1312,8 @@ manuals:
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
+      - path: /ee/ucp/admin/backups-and-disaster-recovery/
+        title: Backups and disaster recovery
       - title: CLI reference
         path: /reference/ucp/3.1/cli/
         nosync: true
@@ -1577,12 +1409,6 @@ manuals:
             path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
           - title: Using routing labels
             path: /ee/ucp/interlock/usage/labels-reference/ 
-          - title: Publishing a default host service
-            path: /ee/ucp/interlock/usage/default-backend/
-          - title: Specifying a routing mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
-          - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/ 
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -1592,7 +1418,7 @@ manuals:
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
-            path: /ee/ucp/interlock/usage/websockets/  
+            path: /ee/ucp/interlock/usage/websockets/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources
@@ -1611,8 +1437,6 @@ manuals:
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
-      - title: Deploy a CSI plugin
-        path: /ee/ucp/kubernetes/use-csi/
       - sectiontitle: Persistent Storage
         section:
         - title: Use NFS Storage
@@ -1622,11 +1446,9 @@ manuals:
         - title: Use Azure Files Storage
           path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
-          path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
-        - title: Configure iSCSI
-          path: /ee/ucp/kubernetes/storage/use-iscsi/
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/  
     - title: API reference
-      path: /reference/ucp/3.2/api/
+      path: /reference/ucp/3.1/api/
       nosync: true
     - path: /ee/ucp/release-notes/
       title: Release notes
@@ -2495,7 +2317,7 @@ manuals:
         - title: Restore from a backup
           path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
       - title: CLI reference
-        path: /reference/dtr/2.7/cli/
+        path: /reference/dtr/2.6/cli/
         nosync: true
     - sectiontitle: User guides
       section:
@@ -2554,7 +2376,7 @@ manuals:
       - title: Tag pruning
         path: /ee/dtr/user/tag-pruning/
     - title: API reference
-      path: /reference/dtr/2.7/api/
+      path: /reference/dtr/2.6/api/
       nosync: true
     - path: /ee/dtr/release-notes/
       title: Release notes
@@ -3324,68 +3146,8 @@ manuals:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
-  - sectiontitle: Docker Desktop Enterprise
-    section:
-    - path: /ee/desktop/
-      title: Overview
-    - path: /ee/desktop/release-notes/
-      title: Release notes
-    - sectiontitle: Admin
-      section:
-      - sectiontitle: Install
-        section:
-        - path: /ee/desktop/admin/install/mac/
-          title: Install DDE on Mac
-        - path: /ee/desktop/admin/install/windows/
-          title: Install DDE on Windows
-      - sectiontitle: Configure
-        section:
-        - path: /ee/desktop/admin/configure/mac-admin/
-          title: Configure DDE on Mac
-        - path: /ee/desktop/admin/configure/windows-admin/
-          title: Configure DDE on Windows
-    - sectiontitle: User
-      section:
-      - path: /ee/desktop/user/mac-user/
-        title: Use DDE on Mac
-      - path: /ee/desktop/user/windows-user/
-        title: Use DDE on Windows
-    - path: /ee/desktop/app-designer/
-      title: Application designer
-    - sectiontitle: Troubleshoot
-      section:
-      - path: /ee/desktop/troubleshoot/mac-issues/
-        title: Troubleshoot DDE issues on Mac
-      - path: /ee/desktop/troubleshoot/windows-issues/
-        title: Troubleshoot DDE issues on Windows
   - title: Get support
     path: /ee/get-support/
-- sectiontitle: Docker Assemble
-  section:
-  - path: /assemble/install/
-    title: Install
-  - path: /assemble/spring-boot/
-    title: Build a Spring Boot project
-  - path: /assemble/dot-net/
-    title: Build a C# ASP.NET Core project
-  - path: /assemble/configure/
-    title: Configure
-  - path: /assemble/images/
-    title: Images
-  - path: /assemble/adv-backend-manage/
-    title: Advanced Backend Management
-  - path: /engine/reference/commandline/assemble/
-    title: CLI reference
-- sectiontitle: Docker App
-  section:
-  - path: /app/working-with-app/
-    title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
-- sectiontitle: Docker Buildx
-  section:
-  - path: /buildx/working-with-buildx/
-    title: Working with Docker Buildx
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -3484,20 +3246,6 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Context
-  section:
-  - path: /engine/context/working-with-contexts/
-    title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
-- sectiontitle: Docker Template
-  section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
-  - path: /app-template/api-reference/
-    title: API reference
-  - path: /engine/reference/commandline/template/
-    title: CLI reference
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
@@ -3802,22 +3550,14 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - sectiontitle: Docker Enterprise Platform
-      section:  
-      - path: /ee/release-notes/
-        title: Platform
-      - path: /engine/release-notes/
-        title: Docker Engine - Enterprise and Engine - Community
-        nosync: true
-      - path: /ee/ucp/release-notes/
-        title: Docker Universal Control Plane
-        nosync: true
-      - path: /ee/dtr/release-notes/
-        title: Docker Trusted Registry
-        nosync: true
-      - path: /ee/desktop/release-notes/
-        title: Docker Desktop Enterprise
-        nosync: true
+    - path: /engine/release-notes/
+      title: Docker Enterprise and Docker Engine - Community
+      nosync: true
+    - path: /cs-engine/1.13/release-notes/
+      title: CS Docker Engine
+      nosync: true
+    - path: /release-notes/docker-engine/
+      title: Docker (1.13 and earlier)
     - path: /docker-for-mac/release-notes/
       title: Docker Desktop for Mac
       nosync: true
@@ -3833,17 +3573,14 @@ manuals:
     - path: /docker-for-azure/release-notes/
       title: Docker for Azure
       nosync: true
+    - path: /release-notes/docker-machine/
+      title: Docker Machine release notes
+      nosync: true
     - path: /release-notes/docker-swarm/
       title: Docker Swarm release notes
       nosync: true
 - sectiontitle: Superseded products and tools
   section:
-  - path: /cs-engine/1.13/release-notes/
-    title: CS Docker Engine
-  - path: /release-notes/docker-engine/
-    title: Docker (1.13 and earlier)
-  - path: /release-notes/docker-machine/
-    title: Docker Machine
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/

@@ -1,15 +1,15 @@
 ---
 title: Manage usage data collection
-description: Understand and manage usage data collected by Docker EE and sent to Docker.
+description: Understand and manage usage data collected by Docker Engine - Enterprise and sent to Docker.
 keywords: enterprise, telemetry, data collection
 redirect_from:
   - /enterprise/telemetry/
 ---
 
-Docker EE Engine version 17.06 and later includes a telemetry plugin.
-The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0
+Docker Engine - Enterprise version 17.06 and later includes a telemetry plugin.
+The plugin is enabled by default on Ubuntu starting with Docker Engine - Enterprise 17.06.0
 and on the rest of the EE-supported Linux distributions starting with version
-17.06.2-ee-5. The telemetry plugin is not part of Docker EE for Windows Server.
+17.06.2-ee-5. The telemetry plugin is not part of Docker Engine - Enterprise for Windows Server.
 
 The telemetry plugin sends system information to Docker Inc. Docker uses this
 information to improve Docker EE. For details about the telemetry plugin and

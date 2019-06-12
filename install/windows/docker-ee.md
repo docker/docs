@@ -148,7 +148,7 @@ manually, via a script, or on air-gapped systems.
     ```
 
     If you need to download a specific Docker EE Engine release, all URLs can be
-    found on this [JSON index](https://download.docker.com/components/engine/windows-server/index.json)
+    found on this [JSON index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
     PowerShell command prompt, use the following commands to extract the archive,
@@ -222,7 +222,7 @@ To update Docker Engine - Enterprise to the most recent release, specify the
 ```powershell
 Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {{ site.docker_ee_version }} -Update -Force
 ```
-The required version number must match a versions available on the [JSON
+The required version number must match a version available on the [JSON
 index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
 
 ## Uninstall Docker EE
