@@ -98,14 +98,16 @@ COPY assets /assets
 
 `my-service/assets/docker-compose.yaml`
 
+{% raw %}
 ```
 version: "3.6"
 services:
-{% raw %}  {{ .Name }}:{% endraw %}
-{% raw %}    build: {{ .Name }}{% endraw %}
+  {{ .Name }}:
+    build: {{ .Name }}
     ports:
-{% raw %}      - {{ .Parameters.externalPort }}:3000{% endraw %}
+      - {{ .Parameters.externalPort }}:3000
 ```
+{% endraw %}
 
 `my-service/assets/Dockerfile`
 
