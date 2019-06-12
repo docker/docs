@@ -18,6 +18,38 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.5.0 2019-06-12
+
+[Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
+
+This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+
+This release contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after install.
+
+* Upgrades
+  - [Docker 19.03.0-rc2](https://github.com/docker/docker-ce/releases/tag/v19.03.0-rc2)
+  - [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3)
+  - [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23)
+  - [linuxkit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+  - [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
+
+* New
+  - Added `buildx` plugin (currently experimental).
+  - Checking the experimental checkbox in Daemon Settings will turn on experimental features for docker daemon AND docker CLI.
+  - Check stored credentials at start up before attempting to mount any shared drives, prompting the user to re-enter the credentials if the credentials are invalid.
+
+* Bug fixes and minor changes
+  - Fix race where kubernetes would sometimes fail to start after the app is restarted.
+  - System tray icon now opens the menu with left or right mouse button.
+  - When displaying crash report Window, do not send bugsnag crash report unless the user asks for uploading diagnostics.
+  - Removed the ability to log in using your email address as a username. The docker command line does not support this.
+  - For LCOW one physical computer system running Windows 10 Professional or Windows 10 Enterprise version 1809 or later is required.
+  - Disables the usages statistics checkbox in the Windows Docker Desktop on public preview channels as usage statistics cannot be disabled on these channels.
+  - Add a dialog box during start up when a shared drive fails to mount allowing the user to retry mounting the drive or remove it from the shared drive list.
+
+* Known issues
+  - Windows containers networking does not work properly on Windows 1903.
+
 ### Docker Community Edition 2.0.4.1 2019-05-07
 
 [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
