@@ -46,7 +46,7 @@ resource:
 {% endraw %}
 
 For more information about Cluster files, refer to the
-[Cluster file reference](cluster-file/index.md).
+[Cluster file reference](cluster-file.md).
 
 Docker Cluster has commands for managing the whole lifecycle of your cluster:
 
@@ -60,5 +60,5 @@ Docker Cluster has commands for managing the whole lifecycle of your cluster:
 
 - [Get started with Docker Cluster on AWS](aws.md)
 - [Command line reference](/engine/reference/commandline/cluster/)
-- [Cluster file reference](./cluster-file/index.md)
+- [Cluster file reference](./cluster-file.md)
 

@@ -1308,7 +1308,7 @@ manuals:
       nosync: true
   - sectiontitle: Docker Cluster
     section:
-    - path: /cluster/overview/
+    - path: /cluster/
       title: Overview
     - path: /cluster/aws/
       title: Docker Cluster on AWS
