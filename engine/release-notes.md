@@ -180,25 +180,6 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 include the error `code = ResourceExhausted desc = grpc: received message larger than 
 max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user, 
 and requires no response.
-* Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-   - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
-   to a `cluster-admin` `ClusterRole`, as shown in the following example:
-       ```
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: ClusterRoleBinding
-       metadata:
-         labels:
-           subjectName: kube-system-persistent-volume-binder
-         name: kube-system-persistent-volume-binder:cluster-admin
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: ClusterRole
-         name: cluster-admin
-       subjects:
-       - kind: ServiceAccount
-         name: persistent-volume-binder
-         namespace: kube-system
-       ```
 * Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager 
 requests in a short amount of time, some services are not able to receive traffic and are causing a `404` 
 error after being deployed. 
