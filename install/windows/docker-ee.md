@@ -159,7 +159,7 @@ manually, via a script, or on air-gapped systems.
     Stop-Service docker
     
     # Extract the archive.
-    Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles -Force
+    Microsoft.PowerShell.Archive\Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles -Force
 
     # Clean up the zip file.
     Remove-Item -Force {{ filename }}
