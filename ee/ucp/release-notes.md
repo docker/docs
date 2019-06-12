@@ -55,6 +55,7 @@ upgrade your installation to the latest release.
          name: persistent-volume-binder
          namespace: kube-system
        ```
+    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
 
 # Version 3.2.0-beta
 (2019-5-16)
