@@ -9,78 +9,78 @@ toc_min: 1
 This topic describes version 1 of the Cluster file format.
 
 ## Cluster file structure and examples
-```
+
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Cluster file version 1
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
-    variable:
-      domain: "YOUR DOMAIN, e.g. docker.com"
-      subdomain: "A SUBDOMAIN, e.g. cluster"
-      region: "THE AWS REGION TO DEPLOY, e.g. us-east-1"
-      email: "YOUR.EMAIL@COMPANY.COM"
-      ucp_password:
-        type: prompt
-    provider:
-      acme:
-        email: ${email}
-        server_url: https://acme-staging-v02.api.letsencrypt.org/directory
-      aws:
-        region: ${region}
-    cluster:
-      dtr:
-        version: docker/dtr:2.6.5
-      engine:
-        version: ee-stable-18.09.5
-      ucp:
-        username: admin
-        password: ${ucp_password}
-        version: docker/ucp:3.1.6
-    resource:
-      aws_instance:
-        managers:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-        registry:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-        workers:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-      aws_lb:
-        apps:
-          domain: ${subdomain}.${domain}
-          instances:
-          - workers
-          ports:
-          - 80:8080
-          - 443:8443
-        dtr:
-          domain: ${subdomain}.${domain}
-          instances:
-          - registry
-          ports:
-          - 443:443
-        ucp:
-          domain: ${subdomain}.${domain}
-          instances:
-          - managers
-          ports:
-          - 443:443
-          - 6443:6443
-      aws_route53_zone:
-        dns:
-          domain: ${domain}
-          subdomain: ${subdomain}
+variable:
+  domain: "YOUR DOMAIN, e.g. docker.com"
+  subdomain: "A SUBDOMAIN, e.g. cluster"
+  region: "THE AWS REGION TO DEPLOY, e.g. us-east-1"
+  email: "YOUR.EMAIL@COMPANY.COM"
+  ucp_password:
+    type: prompt
+provider:
+  acme:
+    email: ${email}
+    server_url: https://acme-staging-v02.api.letsencrypt.org/directory
+  aws:
+    region: ${region}
+cluster:
+  dtr:
+    version: docker/dtr:2.6.5
+  engine:
+    version: ee-stable-18.09.5
+  ucp:
+    username: admin
+    password: ${ucp_password}
+    version: docker/ucp:3.1.6
+resource:
+  aws_instance:
+    managers:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+    registry:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+    workers:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+  aws_lb:
+    apps:
+      domain: ${subdomain}.${domain}
+      instances:
+      - workers
+      ports:
+      - 80:8080
+      - 443:8443
+    dtr:
+      domain: ${subdomain}.${domain}
+      instances:
+      - registry
+      ports:
+      - 443:443
+    ucp:
+      domain: ${subdomain}.${domain}
+      instances:
+      - managers
+      ports:
+      - 443:443
+      - 6443:6443
+  aws_route53_zone:
+    dns:
+      domain: ${domain}
+      subdomain: ${subdomain}
 </code></pre>
     </div>
 </div>
-```
+
 The topics on this reference page are organized alphabetically by top-level keys
 to reflect the structure of the Cluster file. Top-level keys that define
 a section in the configuration file, such as `cluster`, `provider`, and `resource`,
@@ -302,6 +302,7 @@ that are running on worker nodes.
 ### provider
 Defines where the cluster's resources are provisioned, as well as provider-specific configuration such as tags.
 
+{% raw %}
 ```yaml
 provider:
   acme:
@@ -310,6 +311,7 @@ provider:
   aws:
     region: ${region}
 ```
+{% endraw %}
 
 #### acme
 The Automated Certificate Management Environment (ACME) is an evolving standard for the automation of a domain-validated certificate authority. Docker Cluster uses the ACME provider to create SSL certificates that are signed by [Let's Encrypt](https://letsencrypt.org/).
