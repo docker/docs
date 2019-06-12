@@ -11,6 +11,7 @@ redirect_from:
 
 ----DELETE BEFORE MERGING
 Per https://github.com/docker/docker-ce/blob/v19.03.0-rc2/CHANGELOG.md as of 6/12: 
+https://docker.atlassian.net/browse/ENGCORE-839
 https://docker.atlassian.net/browse/ENGCORE-834 - should this be in known issues?
 https://docker.atlassian.net/browse/ENGORC-1243 - should this be in known issues?
 https://docker.atlassian.net/browse/ENGCORE-686 - should this be in known issues - MIGHT BE INTERNAL ONLY
@@ -219,6 +220,7 @@ to check for the presence of a rule and '-A' commands to add rules back. Run the
 intervals, for example, every <x> minutes.
     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
+* `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
  
 ## 18.09.6 
 2019-05-06
