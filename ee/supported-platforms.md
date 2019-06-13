@@ -48,11 +48,11 @@ maintenance cycles for patches for up to 24 months.
 
 Starting in version 18.09, Docker Enterprise is aware of the license applied on the system. The license summary is available in the `docker info` output on standalone or manager nodes.
 
-For Docker Enterprise platform customers, when you license UCP, this same license is applied to the underlying engines in the cluster. Docker recommends platform customers use UCP to manage their license.
+For Docker Enterprise customers, when you license UCP, this same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 
-Offline activation of standalone Docker Engine - Enterprise can be performed by downloading the license and using the command `docker engine activate --license filename.lic`. 
+Offline activation of the standalone Docker Engine - Enterprise can be performed by downloading the license and using the command `docker engine activate --license filename.lic`. 
 
 Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
 
@@ -81,7 +81,7 @@ Certified Infrastructure includes a reference architecture, automation templates
 Each Docker Enterprise release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker platform version. We maintain careful API backward compatibility and deprecate APIs and features slowly and conservatively. We remove features after deprecating them for a period of
+The Docker API version is independent of the Docker version. We maintain careful API backward compatibility and deprecate APIs and features slowly and conservatively. We remove features after deprecating them for a period of
 three stable releases. Docker 1.13 introduced improved interoperability
 between clients and servers using different API versions, including dynamic
 feature negotiation.
