@@ -120,6 +120,10 @@ For information about the different storage engines, see
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
 
+## Configure default logging driver
+
+Docker provides the [capability](https://docs.docker.com/config/containers/logging/) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [setup log rotation](https://docs.docker.com/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver.
+
 ## Configure where the Docker daemon listens for connections
 
 By default, the Docker daemon listens for connections on a UNIX socket to accept requests from local clients. It is possible to allow Docker to accept requests from remote hosts by configuring it to listen on an IP address and port as well as the UNIX socket. For more detailed information on this configuration option take a look at "Bind Docker to another host/port or a unix socket" section of the [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/dockerd/) article. 
