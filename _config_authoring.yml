@@ -19,7 +19,7 @@ url: https://docs.docker.com
 # TO USE ME:
 # jekyll serve --incremental --config _config_authoring.yml
 
-latest_engine_api_version: "1.39"
+latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
 compose_version: "1.24.0"
