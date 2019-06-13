@@ -13,7 +13,7 @@
 
 
 # Engine
-ARG ENGINE_BRANCH="18.09.x"
+ARG ENGINE_BRANCH="19.03.x"
 
 # Distribution
 ARG DISTRIBUTION_BRANCH="release/2.6"
