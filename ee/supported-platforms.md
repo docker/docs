@@ -48,11 +48,11 @@ maintenance cycles for patches for up to 24 months.
 
 Starting in version 18.09, Docker Enterprise is aware of the license applied on the system. The license summary is available in the `docker info` output on standalone or manager nodes.
 
-For Docker Enterprise customers, when you license UCP, this same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
+For Docker Enterprise customers, when you license Universal Control Plane (UCP), this same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 
-Offline activation of the standalone Docker Engine - Enterprise can be performed by downloading the license and using the command `docker engine activate --license filename.lic`. 
+Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`. 
 
 Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
 
