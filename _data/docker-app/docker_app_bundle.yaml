@@ -1,0 +1,24 @@
+command: docker app bundle
+short: Create a CNAB invocation image and `bundle.json` for the application
+long: Create a CNAB invocation image and `bundle.json` for the application
+usage: docker app bundle [APP_NAME] [--output OUTPUT_FILE]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: output
+  shorthand: o
+  value_type: string
+  default_value: bundle.json
+  description: Output file (- for stdout)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app bundle myapp.dockerapp
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

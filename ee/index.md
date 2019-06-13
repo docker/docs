@@ -1,7 +1,7 @@
 ---
 title: Docker Enterprise
-description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
-keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
+description: Learn about Docker Enterprise, the enterprise-grade cluster management solution from Docker.
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
   - /manuals/
@@ -12,8 +12,7 @@ chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
 Docker Enterprise is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+platform for building and orchestrating applications across multi-tenant Linux, and Windows Server 2016.
 
 Docker Enterprise enables deploying your workloads for high availability (HA) onto the
 orchestrator of your choice. Docker Enterprise automates many of the tasks that
@@ -73,13 +72,6 @@ which enable:
 The default Docker Enterprise installation includes both Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
-
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
 
 ### Orchestration platform features
 

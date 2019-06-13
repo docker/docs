@@ -12,7 +12,7 @@
       url: https://packages.docker.com/caas/ucp_images_win_2016_3.1.7.tar.gz
     - description: "3.1.7 Windows Server 1709"
       url: https://packages.docker.com/caas/ucp_images_win_1709_3.1.7.tar.gz
-    - description: "3.1.7 Windows Server 1803"
+    - description: "3.1.7 Windows Server 1803"      
       url: https://packages.docker.com/caas/ucp_images_win_1803_3.1.7.tar.gz
     - description: "3.1.7 Windows Server 2019 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_2019_3.1.7.tar.gz
@@ -288,6 +288,11 @@
       url: https://packages.docker.com/caas/ucp_images_s390x_2.2.0.tar.gz
     - description: "2.2.0 Windows"
       url: https://packages.docker.com/caas/ucp_images_win_2.2.0.tar.gz
+- product: "dtr"
+  version: "2.7"
+  tar-files:
+    - description: "DTR 2.7.0 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.7.0.tar.gz  
 - product: "dtr"
   version: "2.6"
   tar-files:

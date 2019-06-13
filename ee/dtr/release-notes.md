@@ -15,9 +15,65 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+* [Version 2.7](#version-27)
 * [Version 2.6](#version-26)
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
+
+# Version 2.7
+
+## 2.7.0-beta4
+(2019-5-16)
+
+### New Features
+
+* **Web Interface**
+
+   * Users can now filter events by object type. (docker/dhe-deploy #10231)
+   * Docker artifacts such as apps, plugins, images, and multi-arch images are shown as distinct types with granular views into app details including metadata and scan results for an application's constituent images. [Learn more](https://beta.docs.docker.com/app/working-with-app/).
+   * Users can now import a client certificate and key to the browser in order to access the web interface without using their credentials.
+   * The **Logout** menu item is hidden from the left navigation pane if client certificates are used for DTR authentication instead of user credentials. (docker/dhe-deploy#10147)
+
+* **App Distribution**
+
+  * It is now possible to distribute [docker apps](https://github.com/docker/app) via DTR. This includes application pushes, pulls, and general management features like promotions, mirroring, and pruning.
+
+
+* **Registry CLI**
+
+  * The Docker CLI now includes a `docker registry` management command which lets you interact with Docker Hub and trusted registries.
+     * Features supported on both DTR and Hub include listing remote tags and inspecting image manifests.
+     * Features supported on DTR alone include removing tags, listing repository events (such as image pushes and pulls), listing asynchronous jobs (such as mirroring pushes and pulls), and reviewing job logs. [Learn more](https://beta.docs.docker.com/engine/reference/commandline/registry/).
+
+* **Client Cert-based Authentication**
+
+  * Users can now use UCP client bundles for DTR authentication.
+  * Users can now add their client certificate and key to their local Engine for performing pushes and pulls without logging in.
+  * Users can now use client certificates to make API requests to DTR instead of providing their credentials.
+
+### Enhancements
+
+* Users can now edit mirroring policies. (docker/dhe-deploy #10157)
+* `docker run -it --rm docker/dtr:2.7.0-beta4` now includes a global option, `--version`, which prints the DTR version and associated commit hash. (docker/dhe-deploy #10144)
+* Users can now set up push and pull mirroring policies via the API using an authentication token instead of their credentials. (docker/dhe-deploy#10002)
+* DTR is now on Golang `1.12.4`. (docker/dhe-deploy#10274)
+* For new mirroring policies, the **Mirror direction** now defaults to the Pull tab instead of Push. (docker/dhe-deploy#10004)
+
+
+### Bug Fixes
+
+* Fixed an issue where a webhook notification was triggered twice on non-scanning image promotion events on a repository with scan on push enabled. (docker/dhe-deploy#9909)
+
+
+### Known issues
+
+
+### Deprecations
+
+* **Upgrade**
+
+  * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
+
 
 # Version 2.6
 

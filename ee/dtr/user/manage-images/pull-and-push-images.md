@@ -87,7 +87,7 @@ however).
 * When a user pulls a Windows image from DTR, the Windows base layers are
 automatically fetched from Microsoft and the other layers are fetched from DTR.
 
-This default behavior is recommended for standard Docker EE installations, but
+This default behavior is recommended for Docker Engine - Enterprise installations, but
 for air-gapped or similarly limited setups Docker can optionally optionally also
 push the Windows base layers to DTR.
 

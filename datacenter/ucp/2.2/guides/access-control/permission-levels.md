@@ -76,4 +76,4 @@ the grants that use the role.
 
 * [Create and manage users](create-and-manage-users.md)
 * [Create and manage teams](create-and-manage-teams.md)
-* [Docker Reference Architecture: Securing Docker EE and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)
+* [Docker Reference Architecture: Securing Docker Enterprise and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)
