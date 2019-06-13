@@ -4,6 +4,10 @@ description: Working with Docker Buildx
 keywords: Docker, buildx, multi-arch
 ---
 
+>This is an experimental feature.
+>
+>{% include experimental.md %}
+
 ## Overview
 
 Docker Buildx is a CLI plugin that extends the docker command with the full support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit) builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.
