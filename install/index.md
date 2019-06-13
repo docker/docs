@@ -25,9 +25,6 @@ apps. Docker Engine - Community has three types of update channels, **stable**, 
 * **Test** gives pre-releases that are ready for testing before general availability.
 * **Nightly** gives you latest builds of work in progress for the next major release.
 
-For more information about Docker Engine - Community see
-[Docker Engine - Community](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
-
 ## Releases
 
 For the Docker Engine - Community engine, the open
