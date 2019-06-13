@@ -86,14 +86,6 @@ three stable releases. Docker 1.13 introduced improved interoperability
 between clients and servers using different API versions, including dynamic
 feature negotiation.
 
-## Upgrades and support
-
-If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker Enterprise to continue to get support. We will continue to support customers with valid subscriptions whether the subscription covers Docker Enterprise or Commercially Supported Docker. You can choose to stay with your current
-deployed version, or you can upgrade to the latest Docker Enterprise version. For
-more info, see [Scope of Coverage and Maintenance
-Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
-
 ## Where to go next
 
 - [Install Docker](/engine/installation/index.md)
