@@ -1,19 +1,10 @@
 ---
-title: Upgrade Docker EE
-description: Learn how to upgrade your Docker Enterprise Edition, to start using the latest features and security patches.
+title: Upgrade Docker Enterprise
+description: Learn how to upgrade your Docker Enterprise to start using the latest features and security patches.
 keywords: enterprise, upgrade
 redirect_from:
   - /enterprise/upgrade/
 ---
-
-## Docker Engine - Enterprise 18.09 Upgrades
-
-In Docker Engine - Enterprise 18.09, significant architectural improvements were made to the network 
-architecture in Swarm to increase the performance and scale of the built-in load balancing functionality. 
-
-> **Note**: These changes introduce new constraints to the Docker Engine - Enterprise upgrade process that,
-> if not correctly followed, can have impact on the availability of applications running on the Swarm. These 
-> constraints impact any upgrades coming from any version before 18.09 to version 18.09 or greater.
 
 ## Cluster Upgrade Best Practices
 Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid IP address 
