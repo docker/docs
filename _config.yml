@@ -84,7 +84,6 @@ tablabels:
   engine-17.12: Docker EE Engine 17.12
   engine-17.09: Docker EE Engine 17.09
   engine-17.06: Docker EE Engine 17.06
-  engine-17.06: Docker EE Engine 17.06
   engine-17.03: Docker EE Engine 17.03
   docker-cli-linux: Docker CLI on Mac/Linux
   docker-cli-win: Docker CLI on Windows
@@ -112,7 +111,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.6"
+      win_latest_build: "docker-19.03.0"
   - scope:
       path: "datacenter"
     values:

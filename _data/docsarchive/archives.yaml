@@ -1,6 +1,6 @@
 - archive:
   name: v19.03
-  image: docs/docs-private:latest
+  image: docs/docker.github.io:latest
   current: true
 # When you make a new stable archive version, move the edge one to be second in
 # the list. The image for edge should be the same as latest.
