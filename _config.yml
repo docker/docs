@@ -26,7 +26,7 @@ compose_version: "1.25.0"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
 machine_version: "0.16.1"
-distribution_version: "2.7.1"
+distribution_version: "2.7"
 dtr_version: "2.7"
 ucp_version: "3.2"
 
