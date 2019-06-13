@@ -4,7 +4,7 @@ description: Working with Docker Buildx
 keywords: Docker, buildx, multi-arch
 ---
 
->**Note:** This is an experimental feature.
+>This is an experimental feature.
 >
 >{% include experimental.md %}
 
