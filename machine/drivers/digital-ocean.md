@@ -1,6 +1,6 @@
 ---
 description: Digital Ocean driver for machine
-keywords: machine, Digital Ocean, driver
+keywords: machine, digitalocean, driver
 title: Digital Ocean
 ---
 
