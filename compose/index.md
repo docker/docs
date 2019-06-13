@@ -2,6 +2,8 @@
 description: Introduction and Overview of Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
+redirect_from:
+ - /compose/overview/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](/compose/compose-file/index.md).
