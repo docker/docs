@@ -3357,6 +3357,12 @@ manuals:
     title: API reference
   - path: /engine/reference/commandline/template/
     title: CLI reference
+- sectiontitle: Docker Buildx
+  section:
+  - path: /buildx/working-with-buildx/
+    title: Working with Docker Buildx
+  - path: /engine/reference/commandline/buildx/
+    title: CLI reference
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
