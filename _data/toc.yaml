@@ -3529,7 +3529,7 @@ manuals:
     title: Edge release notes
 - title: Docker ID accounts
   path: /docker-id/
--- sectiontitle: Docker Hub
+- sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
     title: Quickstart
@@ -3717,112 +3717,110 @@ manuals:
     title: CS Docker Engine
   - path: /release-notes/docker-engine/
     title: Docker (1.13 and earlier)
-  - path: /release-notes/docker-machine/
-    title: Docker Machine
-     sectiontitle: Docker Machine
-  section:
-  - path: /machine/overview/
-    title: Machine overview
-  - path: /machine/install-machine/
-    title: Install Machine
-  - path: /machine/get-started/
-    title: Get started with a local VM
-  - path: /machine/get-started-cloud/
-    title: Provision hosts in the cloud
-  - sectiontitle: Learn by example
+  - sectiontitle: Docker Machine
     section:
-    - path: /machine/examples/ocean/
-      title: Provision Digital Ocean Droplets
-    - path: /machine/examples/aws/
-      title: Provision AWS EC2 instances
-  - path: /machine/concepts/
-    title: Machine concepts and help
-  - sectiontitle: Machine (docker-machine) CLI
-    section:
-    - path: /machine/reference/
-      title: Machine CLI overview
-    - path: /machine/completion/
-      title: Machine command-line completion
-    - path: /machine/reference/active/
-      title: active
-    - path: /machine/reference/config/
-      title: config
-    - path: /machine/reference/create/
-      title: create
-    - path: /machine/reference/env/
-      title: env
-    - path: /machine/reference/help/
-      title: help
-    - path: /machine/reference/inspect/
-      title: inspect
-    - path: /machine/reference/ip/
-      title: ip
-    - path: /machine/reference/kill/
-      title: kill
-    - path: /machine/reference/ls/
-      title: ls
-    - path: /machine/reference/mount/
-      title: mount
-    - path: /machine/reference/provision/
-      title: provision
-    - path: /machine/reference/regenerate-certs/
-      title: regenerate-certs
-    - path: /machine/reference/restart/
-      title: restart
-    - path: /machine/reference/rm/
-      title: rm
-    - path: /machine/reference/scp/
-      title: scp
-    - path: /machine/reference/ssh/
-      title: ssh
-    - path: /machine/reference/start/
-      title: start
-    - path: /machine/reference/status/
-      title: status
-    - path: /machine/reference/stop/
-      title: stop
-    - path: /machine/reference/upgrade/
-      title: upgrade
-    - path: /machine/reference/url/
-      title: url
-  - sectiontitle: Machine drivers
-    section:
-    - path: /machine/drivers/
-      title: Drivers overview
-    - path: /machine/drivers/os-base/
-      title: Driver options and operating system defaults
-    - path: /machine/drivers/aws/
-      title: Amazon Web Services
-    - path: /machine/drivers/digital-ocean/
-      title: Digital Ocean
-    - path: /machine/drivers/exoscale/
-      title: Exoscale
-    - path: /machine/drivers/generic/
-      title: Generic
-    - path: /machine/drivers/gce/
-      title: Google Compute Engine
-    - path: /machine/drivers/soft-layer/
-      title: IBM Softlayer
-    - path: /machine/drivers/azure/
-      title: Microsoft Azure
-    - path: /machine/drivers/hyper-v/
-      title: Microsoft Hyper-V
-    - path: /machine/drivers/openstack/
-      title: OpenStack
-    - path: /machine/drivers/virtualbox/
-      title: Oracle VirtualBox
-    - path: /machine/drivers/rackspace/
-      title: Rackspace
-    - path: /machine/drivers/vm-fusion/
-      title: VMware Fusion
-    - path: /machine/drivers/vm-cloud/
-      title: VMware vCloud Air
-    - path: /machine/drivers/vsphere/
-      title: VMware vSphere
-  - path: /machine/migrate-to-machine/
-    title: Migrate from Boot2Docker to Machine
-  - path: /release-notes/docker-machine/
-    title: Docker Machine release notes
+    - path: /machine/overview/
+      title: Machine overview
+    - path: /machine/install-machine/
+      title: Install Machine
+    - path: /machine/get-started/
+      title: Get started with a local VM
+    - path: /machine/get-started-cloud/
+      title: Provision hosts in the cloud
+    - sectiontitle: Learn by example
+      section:
+      - path: /machine/examples/ocean/
+        title: Provision Digital Ocean Droplets
+      - path: /machine/examples/aws/
+        title: Provision AWS EC2 instances
+      - path: /machine/concepts/
+        title: Machine concepts and help
+      - sectiontitle: Machine (docker-machine) CLI
+        section:
+        - path: /machine/reference/
+          title: Machine CLI overview
+        - path: /machine/completion/
+          title: Machine command-line completion
+        - path: /machine/reference/active/
+          title: active
+        - path: /machine/reference/config/
+          title: config
+        - path: /machine/reference/create/
+          title: create
+        - path: /machine/reference/env/
+          title: env
+        - path: /machine/reference/help/
+          title: help
+        - path: /machine/reference/inspect/
+          title: inspect
+        - path: /machine/reference/ip/
+          title: ip
+        - path: /machine/reference/kill/
+          title: kill
+        - path: /machine/reference/ls/
+          title: ls
+        - path: /machine/reference/mount/
+          title: mount
+        - path: /machine/reference/provision/
+          title: provision
+        - path: /machine/reference/regenerate-certs/
+          title: regenerate-certs
+        - path: /machine/reference/restart/
+          title: restart
+        - path: /machine/reference/rm/
+          title: rm
+        - path: /machine/reference/scp/
+          title: scp
+        - path: /machine/reference/ssh/
+          title: ssh
+        - path: /machine/reference/start/
+          title: start
+        - path: /machine/reference/status/
+          title: status
+        - path: /machine/reference/stop/
+          title: stop
+        - path: /machine/reference/upgrade/
+          title: upgrade
+        - path: /machine/reference/url/
+          title: url
+      - sectiontitle: Machine drivers
+        section:
+        - path: /machine/drivers/
+          title: Drivers overview
+        - path: /machine/drivers/os-base/
+          title: Driver options and operating system defaults
+        - path: /machine/drivers/aws/
+          title: Amazon Web Services
+        - path: /machine/drivers/digital-ocean/
+          title: Digital Ocean
+        - path: /machine/drivers/exoscale/
+          title: Exoscale
+        - path: /machine/drivers/generic/
+          title: Generic
+        - path: /machine/drivers/gce/
+          title: Google Compute Engine
+        - path: /machine/drivers/soft-layer/
+          title: IBM Softlayer
+        - path: /machine/drivers/azure/
+          title: Microsoft Azure
+        - path: /machine/drivers/hyper-v/
+          title: Microsoft Hyper-V
+        - path: /machine/drivers/openstack/
+          title: OpenStack
+        - path: /machine/drivers/virtualbox/
+          title: Oracle VirtualBox
+        - path: /machine/drivers/rackspace/
+          title: Rackspace
+        - path: /machine/drivers/vm-fusion/
+          title: VMware Fusion
+        - path: /machine/drivers/vm-cloud/
+          title: VMware vCloud Air
+        - path: /machine/drivers/vsphere/
+          title: VMware vSphere
+      - path: /machine/migrate-to-machine/
+        title: Migrate from Boot2Docker to Machine
+      - path: /release-notes/docker-machine/
+        title: Docker Machine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
@@ -3884,31 +3882,29 @@ manuals:
     - path: /swarm/swarm-api/
       title: Docker Swarm API
     - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
-  sectiontitle: Docker Toolbox (legacy)
-      section:
-      - path: /toolbox/overview/
-        title: Toolbox overview
-      - path: /toolbox/toolbox_install_mac/
-        title: Install Toolbox on Mac
-      - path: /toolbox/toolbox_install_windows/
-        title: Install Toolbox on Windows
-      - sectiontitle: Kitematic
-        section:
-        - path: /kitematic/userguide/
-          title: "Kitematic user guide: intro &amp; overview"
-        - path: /kitematic/nginx-web-server/
-          title: Set up an Nginx web server
-        - path: /kitematic/minecraft-server/
-          title: Set up a Minecraft Server
-        - path: /kitematic/rethinkdb-dev-database/
-          title: Creating a local RethinkDB database for development
-        - path: /kitematic/faq/
-          title: Frequently asked questions
-        - path: /kitematic/known-issues/
-          title: Known issues
-      - path: /toolbox/faqs/troubleshoot/
-        title: Troubleshooting
-    - title: Release notes
-      path: /engine/release-notes/
+      title: Docker Swarm release notes      
+  - sectiontitle: Docker Toolbox (legacy)
+    section:
+    - path: /toolbox/overview/
+      title: Toolbox overview
+    - path: /toolbox/toolbox_install_mac/
+      title: Install Toolbox on Mac
+    - path: /toolbox/toolbox_install_windows/
+      title: Install Toolbox on Windows
+  - sectiontitle: Kitematic
+    section:
+    - path: /kitematic/userguide/
+      title: "Kitematic user guide: intro &amp; overview"
+    - path: /kitematic/nginx-web-server/
+      title: Set up an Nginx web server
+    - path: /kitematic/minecraft-server/
+      title: Set up a Minecraft Server
+    - path: /kitematic/rethinkdb-dev-database/
+      title: Creating a local RethinkDB database for development
+    - path: /kitematic/faq/
+      title: Frequently asked questions
+    - path: /kitematic/known-issues/
+      title: Known issues
+    - path: /toolbox/faqs/troubleshoot/
+      title: Troubleshooting
       nosync: true
