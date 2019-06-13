@@ -13,18 +13,51 @@ To only authenticate once, you can configure DTR to have single sign-on (SSO) wi
 
 ## At install time
 
-When [installing DTR](/reference/dtr/2.7/install/), pass the `--dtr-external-url <url>`
-option to enable SSO. This makes it so that when you access DTR's web interface, you are redirected to the UCP login page for authentication. Upon successfully logging in, you are then redirected to your specified DTR external URL during installation.
+When [installing DTR](/reference/dtr/2.7/install/), pass `--dtr-external-url <url>` to enable SSO. [Specify the Fully Qualified Domain Name (FQDN)](/use-your-own-tls-certificates/) of your DTR, or a load balancer, to load-balance requests across multiple DTR replicas.
 
-[Specify the Fully Qualified Domain Name (FQDN)](/use-your-own-tls-certificates/) of your DTR, or a load balancer, to load-balance requests across multiple DTR replicas.
+
+```bash
+docker run --rm -it \
+{{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
+--dtr-external-url dtr.example.com \
+--dtr-cert "$(cat cert.pem)" \
+--dtr-ca "$(cat dtr_ca.pem)" \
+--dtr-key "$(cat key.pem)" \
+--ucp-url ucp.example.com \
+--ucp-username admin \
+--ucp-ca "$(cat ucp_ca.pem)"
+```
+
+This makes it so that when you access DTR's web user interface, you are redirected to the UCP login page for authentication. Upon successfully logging in, you are then redirected to your specified DTR external URL during installation.
 
 ## Post-installation
+
+### Web user interface
 
 1. Navigate to `https://<dtr-url>` and log in with your credentials. 
 2. Select **System** from the left navigation pane, and scroll down to **Domain & Proxies**. 
 3. Update the **Load balancer / Public Address** field with the external URL where users
 should be redirected once they are logged in. Click **Save** to apply your changes.
 4. Toggle **Single Sign-on** to automatically redirect users to UCP for logging in.
+     ![](/ee/dtr/single-sign-on-1.png){: .with-border}
+
+
+
+### Command line interface
+
+You can also enable single sign-on from the command line by reconfiguring your DTR. To do so, run the following:
+
+```bash
+docker run --rm -it \
+{{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} reconfigure \
+--dtr-external-url dtr.example.com \
+--dtr-cert "$(cat cert.pem)" \
+--dtr-ca "$(cat dtr_ca.pem)" \
+--dtr-key "$(cat key.pem)" \
+--ucp-url ucp.example.com \
+--ucp-username admin \
+--ucp-ca "$(cat ucp_ca.pem)"
+```
 
 ## Where to go next
 

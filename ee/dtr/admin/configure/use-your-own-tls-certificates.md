@@ -33,7 +33,7 @@ Click **Save** to apply your changes.
 
 If you've added certificates issued by a globally trusted CA,
 any web browser or client tool should now trust DTR. If you're using an internal
-CA, you will need to configure your system to trust that
+CA, you will need to configure the client systems to trust that
 CA.
 
 ### Command line interface

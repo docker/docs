@@ -45,6 +45,10 @@ certificates, in this order.
 * A `key.pem` file with TLS private key. Make sure it is not encrypted with a password.
 Encrypted keys should have `ENCRYPTED` in the first line.
 
+After replacing the TLS certificates, your users will not be able to authenticate
+with their old client certificate bundles. Ask your users to access the UCP
+web UI and [download new client certificate bundles](../../user-access/cli.md).
+
 As of UCP v3.2, the **Certificates** page includes a new text field,
 ***Client CA***, that allows you to paste or upload one or more custom root CA certificates which the UCP Controller will use to
 verify the authenticity of client certificates issued by your corporate or
@@ -52,9 +56,6 @@ trusted third-party CAs. Note that your custom root certificates will be appende
 
 Finally, click **Save** for the changes to take effect.
 
-After replacing the TLS certificates, your users will not be able to authenticate
-with their old client certificate bundles. Ask your users to access the UCP
-web UI and [get new client certificate bundles](../../user-access/cli.md).
 
 If you deployed Docker Trusted Registry, you'll also need to reconfigure it
 to trust the new UCP TLS certificates.

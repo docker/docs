@@ -28,27 +28,7 @@ key.
 
 ![](/ee/dtr/images/license-2.png){: .with-border}
 
-## View licensing information
-
-You can send a `GET` request to `api/v0/admin/settings/license` to view more details on the license applied to your DTR. Use your DTR Fully Qualified Domain Name (FQDN) as the base URL for your API request.
-
-### Example API request
-```bash
-curl -u docker:$TOKEN -X GET "https://34.219.67.189/api/v0/admin/settings/license -H "accept: application/json"
-```
-
-### Example API response
-```json
-{
-  "is_valid": true,
-  "auto_refresh": false,
-  "scanning_enabled": true,
-  "expiration": "2019-07-09T22:26:01Z",
-  "key_id": "2SDaULA3xBvQ8Hrp-05-7_JPrWdthGINT0ZI3ArdhAK6",
-  "tier": "Advanced",
-  "type": "Offline"
-}
-```
+Within **System > General** under the **License** section, you should see the tier, date of expiration, and ID for your license. 
 
 ## Where to go next
 

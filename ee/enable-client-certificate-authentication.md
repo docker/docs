@@ -6,11 +6,11 @@ keywords: PKI, Client Certificates, Passwordless Authentication, Docker Enterpri
 
 ## Overview
 
-In many organizations, authenticating to systems with a username and password combination is either restricted or outright prohibited. With Docker Enterprise 3.0, you can manage user authentication with your own public key infrastructure (PKI) using a pool of X.509 client certificates in lieu of usernames and passwords.
+In many organizations, authenticating to systems with a username and password combination is either restricted or outright prohibited. With Docker Enterprise 3.0, UCP's [CLI client certificate-based authentication](/ee/ucp/user-access/cli/) has been extended to the web user interface (web UI). DTR has also been enhanced to work with UCP's internally generated client bundles for client certificate-based authentication. If you have an external public key infrastructure (PKI) system, you can manage user authentication using a pool of X.509 client certificates in lieu of usernames and passwords.
 
 ## Benefits
 
-The following table outlines existing and added capabilities when using client certificates issued by an external certificate authority (CA) for authentication.
+The following table outlines existing and added capabilities when using client certificates — both internal to UCP and issued by an external certificate authority (CA) — for authentication.
 
 | Operation                       | Benefit                                                                                                                                                                                                                                                          |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -114,7 +114,7 @@ Note: The above configuration means that Docker Engine will use the same client 
 
 ## Image signing
 
-DTR includes [two containers](/ee/dtr/architecture/#dtr-internal-components), `<dtr-notary-server-<replica_id>` and `<dtr-notary-signer-<replica_id>`, which provide the required components for using Docker Content Trust (DCT) out of the box. In some cases, you need to additionally set an environment variable, `DOCKER_CONTENT_TRUST`, to `1`.
+DTR provides the Notary service for using Docker Content Trust (DCT) out of the box.
 
 <table style="width:100%;">
 <colgroup>
@@ -168,17 +168,23 @@ API by passing a public certificate and private key pair instead of
 your DTR username and password/authentication token.
 
 ```bash
- curl --cert cert.pem --key key.pem  -X GET
-"https://<dtr-external-url>/api/v0/repositories?pageSize=10&count=false" -H "accept:
-application/json"
+curl --cert cert.pem --key key.pem  -X GET \
+"https://<dtr-external-url>/api/v0/repositories?pageSize=10&count=false" \
+-H "accept:application/json"
 ```
 
 In the above example, `cert.pem` contains the public certificate and `key.pem`
 contains the private key. For non-admin users, you can generate a client bundle from UCP or contact your administrator for your public and private key pair.
 
+For Mac-specific quirks, see [curl on certain macOS versions](#curl-on-certain-macos-versions).
+
 ## Notary CLI operations with DTR
 
-To use your PKI's TLS certificates to establish mutual trust between the Notary client and your trusted registry (DTR) using the Notary CLI, place your DTR's server CA and TLS client certificates in `<home_directory>/.docker/tls/<dtr-external-url>/` as `ca.crt`, `client.cert`, and `client.key`. Pass the FQDN or publicly accessible IP address of your registry along with the TLS client certificate options to the Notary client. To get started, see [Use the Notary client for advanced users](/notary/advanced_usage/).
+For establishing mutual trust between the Notary client and your trusted registry (DTR) using the Notary CLI, place your TLS client certificates in `<home_directory>/.docker/tls/<dtr-external-url>/` as `client.cert` and `client.key`. Note that the filenames must match. Pass the FQDN or publicly accessible IP address of your registry along with the TLS client certificate options to the Notary client. To get started, see [Use the Notary client for advanced users](/notary/advanced_usage/).
+
+> ### Self-signed DTR server certificate
+>
+> Also place `ca.crt` in `<home_directory>/.docker/tls/<dtr-external-url>/` when you're using a self-signed server certificate for DTR.
 
 ## Troubleshooting tips
 
@@ -215,7 +221,7 @@ If successfully configured, you should see `TLSClientCertificate` listed as the 
 
 Avoid adding DTR to Docker Engine's list of insecure registries as a workaround. This has the side effect of disabling the use of TLS certificates.
 
-### x509 certificate errors
+### DTR server certificate errors
 
 #### Example Error
 
@@ -223,10 +229,20 @@ Avoid adding DTR to Docker Engine's list of insecure registries as a workaround.
 Error response from daemon: Get https://35.165.223.150/v2/: x509: certificate is valid for 172.17.0.1, not 35.165.223.150
 ```
 
-- On the web user interface, make sure to add the IP or the FQDN associated with your custom TLS certificate under **System > General > Domains & Proxies**.
+- On the web UI, make sure to add the IP address or the FQDN associated with your custom TLS certificate under **System > General > Domains & Proxies**.
 
 - From the command line interface, [reconfigure DTR](/reference/dtr/2.7/cli/reconfigure/) with the `--dtr-external-url` option and the associated PEM files for your certificate.
 
 ### Intermediate certificates
 
-For chain of trust which includes intermediate certificates, you may optionally add those certificates when installing or reconfiguring DTR with `--enable-client-cert-auth` and `--client-cert-auth-ca`.
+For chain of trust which includes intermediate certificates, you may optionally add those certificates when installing or reconfiguring DTR with `--enable-client-cert-auth` and `--client-cert-auth-ca`. You can do so by combining all of the certificates into a single PEM file.
+
+### curl on certain macOS versions
+
+Some versions of macOS include `curl` which only accepts `.p12` files and specifically requires a `./` prefix in front of the file name if running `curl` from the same directory as the `.p12` file:
+
+```
+curl --cert ./client.p12  -X GET \
+"https://<dtr-external-url>/api/v0/repositories?pageSize=10&count=false" \
+-H "accept:application/json"
+```
