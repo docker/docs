@@ -86,6 +86,9 @@ three stable releases. Docker 1.13 introduced improved interoperability
 between clients and servers using different API versions, including dynamic
 feature negotiation.
 
+## Upgrades and support
+Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the latest minor release of Docker Enterprise are not required, however we recommend staying on the latest maintenance release of the supported minor release you are on. Please see [Maintenance Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more details on EOL of minor and major versions of Docker Enterprise.
+
 ## Where to go next
 
 - [Install Docker](/engine/installation/index.md)
