@@ -1290,22 +1290,8 @@ manuals:
   - path: /ee/supported-platforms/
     title: Supported platforms
     nosync: true  
-  - sectiontitle: Deploy Docker Enterprise
-    section:
-    - sectiontitle: Docker Cluster
-      section:
-      - path: /cluster/overview/
-        title: Overview
-      - path: /cluster/aws/
-        title: Docker Cluster on AWS
-      - path: /cluster/cluster-file/
-        title: Cluster file structure
-      - path: /cluster/reference/
-        title: Subcommands
-      - path: /cluster/reference/envvars/
-        title: Environment variables
-    - path: /ee/end-to-end-install/
-      title: Install components individually
+  - path: /ee/end-to-end-install/
+    title: Deploy Docker Enterprise
   - path: /ee/enable-client-certificate-authentication/
     title: Enable client certificate authentication with your PKI
   - sectiontitle: Back up Docker Enterprise
