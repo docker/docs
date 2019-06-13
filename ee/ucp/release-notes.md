@@ -197,7 +197,9 @@ upgrade your installation to the latest release.
 
 ### Bug Fixes
  * Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
- * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (docker/orca#15936)
+ * Non-admin users can no longer create `PersistentVolumes` using the `Local`
+   Storage Class, as this allowed non-admins to by pass security controls and
+   mount host directories. (docker/orca#15936)
  * Added support for the limit arg in `docker ps`. (docker/orca#15812)
  * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
  * Fixed an issue with manual creation of a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects requiring the ID of the user, organization, or team. (docker/orca#14935)
@@ -409,7 +411,9 @@ The following features are deprecated in UCP 3.1.
 
 ### Bug fixes
   * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
-  * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
+  * Non-admin users can no longer create `PersistentVolumes` using the `Local`
+    Storage Class, as this allowed non-admins to by pass security controls and
+    mount host directories. (docker/orca#15936)
   * Added support for the limit arg in `docker ps`. (#15812)
   
 ### Known issue
