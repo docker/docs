@@ -11,8 +11,8 @@ Docker Enterprise is a Containers-as-a-Service (CaaS) platform that enables a se
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
-Docker Enterprise is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux, and Windows Server 2016.
+Docker Enterprise is a secure, scalable, and supported container platform for building and 
+orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 
 Docker Enterprise enables deploying your workloads for high availability (HA) onto the
 orchestrator of your choice. Docker Enterprise automates many of the tasks that
