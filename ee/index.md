@@ -7,7 +7,7 @@ redirect_from:
   - /manuals/
 ---
 
-Docker Enterprise 2.1 is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
+Docker Enterprise is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
@@ -34,7 +34,7 @@ cluster and applications through a single interface.
 
 ## Docker Enterprise features
 
-Docker Enterprise 2.1 provides multi-architecture orchestration for Kubernetes and
+Docker Enterprise provides multi-architecture orchestration for Kubernetes and
 Swarm workloads. Docker Enterprise enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
