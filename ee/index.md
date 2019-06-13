@@ -75,7 +75,7 @@ to schedule Kubernetes or Swarm workloads.
 
 ### Orchestration platform features
 
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 
 - Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
   to enable high availability
