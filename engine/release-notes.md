@@ -222,11 +222,12 @@ intervals, for example, every <x> minutes.
     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
-* Install Docker Engine - Enterprise fails to install on RHEL 7.5 on Azure.
+* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
 
 - Workaround options:
-    - Use an older image and don't get updates.
+    - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
     - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
+    - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
  
 ## 18.09.6 
 2019-05-06
