@@ -1,6 +1,6 @@
 ---
 title: Manage secrets
-description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE
+description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker Enterprise
 keywords: UCP, secret, password, certificate, private key
 ---
 

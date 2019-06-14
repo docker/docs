@@ -1,8 +1,12 @@
 ---
-title: Working with Docker App
+title: Working with Docker App (experimental)
 description: Learn about Docker App
 keywords: Docker App, applications, compose, orchestration
 ---
+
+>This is an experimental feature.
+>
+>{% include experimental.md %}
 
 ## Overview
 
@@ -34,12 +38,12 @@ The first scenario describes basic components of a Docker App with tools and wor
 This section describes the steps for creating a new Docker App project to familiarize you with the workflow and most important commands.
 
 1. Prerequisites
-2. Initialize an empty new project
-3. Populate the project
-4. Validate the app
-5. Deploy the app
-6. Push the app to Docker Hub
-7. Install the app directly from Docker Hub
+1. Initialize an empty new project
+1. Populate the project
+1. Validate the app
+1. Deploy the app
+1. Push the app to Docker Hub or Docker Trusted Registry
+1. Install the app directly from Docker Hub
 
 ### Prerequisites
 
@@ -391,7 +395,22 @@ hashicorp/http-echo
 
 The app is now stored in the container registry.
 
-### Install the app directly from Docker Hub
+### Push the app to DTR
+
+Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as [pushing an app to Docker Hub](#push-the-app-to-docker-hub) except that you need your DTR user credentials and [your DTR repository information](/ee/dtr/user/manage-images/review-repository-info/). To use client certificates for DTR authentication, see [Enable Client Certificate Authentication](/ee/enable-client-certificate-authentication/).
+
+```bash
+$ docker app push my-app --tag <dtr-fqdn>/nigelpoulton/app-test:0.1.0
+<dtr-fqdn>/nigelpoulton/app-test:0.1.0-invoc
+hashicorp/http-echo
+ application/vnd.docker.distribution.manifest.v2+json [2/2] (sha256:bd1a813b...)
+Successfully pushed bundle to <dtr-fqdn>/nigelpoulton/app-test:0.1.0. 
+Digest is sha256:bd1a813b6301939fa46e617f96711e0cca1e4065d2d724eb86abde6ef7b18e23.
+```
+
+The app is now stored in your DTR.
+
+### Install the app directly from Docker Hub or DTR
 
 Now that the app is pushed to the registry, try an `inspect` and `install` command against it. 
 The location of your app is different from the one provided in the examples.
@@ -410,7 +429,7 @@ hello.port     8080
 hello.text     Hello world!
 ```
 
-This action was performed directly against the app in the registry.
+This action was performed directly against the app in the registry. Note that for DTR, the application will be prefixed with the Fully Qualified Domain Name (FQDN) of your trusted registry.
 
 Now install it as a native Docker App by referencing the app in the registry, with a different port.
 
@@ -442,6 +461,3 @@ Application "hello-world" uninstalled on context "default"
 
 You can see the name of your Docker App with the `docker stack ls` command.
 
-## Convert an existing Compose app into a Docker App project
-
-Content TBA

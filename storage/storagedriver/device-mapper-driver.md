@@ -27,7 +27,7 @@ a filesystem at the operating system (OS) level.
   EE on many OS distribution. See the
   [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
 
-- `devicemapper` is also supported on Docker CE running on CentOS, Fedora,
+- `devicemapper` is also supported on Docker Engine - Community running on CentOS, Fedora,
   Ubuntu, or Debian.
 
 - Changing the storage driver makes any containers you have already

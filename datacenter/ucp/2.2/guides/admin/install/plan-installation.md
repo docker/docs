@@ -1,7 +1,7 @@
 ---
 title: Plan a production UCP installation
 description: Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.
-keywords: UCP, install, Docker EE
+keywords: UCP, install, Docker Enterprise
 ---
 
 Docker Universal Control Plane helps you manage your container swarm from a
@@ -18,7 +18,7 @@ machines) that UCP manages:
 
 ## Hostname strategy
 
-Docker UCP requires Docker Enterprise Edition. Before installing Docker EE on
+Docker UCP requires Docker Enterprise Edition. Before installing Docker Enterprise on
 your swarm nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified

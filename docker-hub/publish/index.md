@@ -38,14 +38,6 @@ experience the following benefits:
 Docker Hub welcomes free and open-source content, as well as software sold
 directly by publishers. We support the following commercial models:
 
-### Paid through Docker
-
-This commercial model allows customers to pay for ISV content through Docker, as
-described in the Store Vendor Partner agreement. Paid-through-Docker content
-includes both software that can be deployed on a host, as well as software that
-runs in the cloud and can be accessed by the customer through an agent
-(containerized cloud services, for example).
-
 ### Licensed content through Docker Hub BYOL program
 
 ISVs can use Docker Hub as an entitlement and distribution platform. Using
@@ -61,9 +53,9 @@ information, see [Bring Your Own License (BYOL) products on Store](byol.md).
 
 ### Plugins and agents
 
-ISVs have the ability to create and distribute [plugin images](https://hub.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise Edition deployments.
+ISVs have the ability to create and distribute [plugin images](https://hub.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise deployments.
 
-You can [apply to be a publisher](https://goto.docker.com/partners) and learn more about our [Technology Partner Program](https://www.docker.com/partners/partner-program#/technology_partner).
+You can [apply to be a publisher](https://goto.docker.com/2019-Partner-Program-Technology.html) and learn more about our [Technology Partner Program](https://www.docker.com/partners/partner-program#/technology_partner).
 
 ## What's next?
 

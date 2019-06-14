@@ -114,7 +114,7 @@ updates.
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.
 
-- Take this even further with [Docker EE](/ee/index.md) by requiring
+- Take this even further with [Docker Engine - Enterprise](/ee/index.md) by requiring
   your development, testing, and security teams to sign images before they can
   be deployed into production. This way, you can be sure that before an image is
   deployed into production, it has been tested and signed off by, for instance,
@@ -125,5 +125,5 @@ updates.
 | Development                                                         | Production                                                                                                                                                                                                                                       |
 |:--------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Use bind mounts to give your container access to your source  code. | Use volumes to store container data.                                                                                                                                                                                                             |
-| Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker EE if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
+| Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker Engine - Enterprise if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
 | Don't worry about time drift.                                       | Always run an NTP client on the Docker host and within each container process and sync them all to the same NTP server. If you use swarm services, also ensure that each Docker node syncs its clocks to the same time source as the containers. |

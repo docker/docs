@@ -36,6 +36,26 @@ upgrade your installation to the latest release.
     ```
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
+- Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
+   to a `cluster-admin` `ClusterRole`, as shown in the following example:
+       ```
+       apiVersion: rbac.authorization.k8s.io/v1
+       kind: ClusterRoleBinding
+       metadata:
+         labels:
+           subjectName: kube-system-persistent-volume-binder
+         name: kube-system-persistent-volume-binder:cluster-admin
+       roleRef:
+         apiGroup: rbac.authorization.k8s.io
+         kind: ClusterRole
+         name: cluster-admin
+       subjects:
+       - kind: ServiceAccount
+         name: persistent-volume-binder
+         namespace: kube-system
+       ```
+    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
 
 # Version 3.2.0-beta
 (2019-5-16)
@@ -61,6 +81,12 @@ users can request storage resources without needing underlying infrastructure kn
 ### System for Cross-domain Identity Management (SCIM)
 SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing 
 user status and group membership.
+
+### Support for Pod Security Policies (PSPs) within Kubernetes
+Pod Security Policies are enabled by default in UCP 3.2 allowing platform
+operators to enforce security controls on what can run on top of Kubernetes. For
+more information see
+[Using Pod Security](/ee/ucp/kubernetes/pod-security-policies/)
 
 ## Enhancements
 

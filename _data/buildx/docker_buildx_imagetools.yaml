@@ -11,7 +11,7 @@ clink:
 - docker_buildx_imagetools_inspect.yaml
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

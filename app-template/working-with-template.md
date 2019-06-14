@@ -1,8 +1,12 @@
 ---
-title: Working with Docker Template
+title: Working with Docker Template (experimental)
 description: Working with Docker Application Template
-keywords: Docker, application template, Application Designer
+keywords: Docker, application template, Application Designer,
 ---
+
+>This is an experimental feature.
+>
+>{% include experimental.md %}
 
 ## Overview
 
@@ -98,6 +102,7 @@ COPY assets /assets
 
 `my-service/assets/docker-compose.yaml`
 
+{% raw %}
 ```
 version: "3.6"
 services:
@@ -106,6 +111,7 @@ services:
     ports:
       - {{ .Parameters.externalPort }}:3000
 ```
+{% endraw %}
 
 `my-service/assets/Dockerfile`
 
@@ -250,7 +256,7 @@ When this is complete, use the newly added node option in `my-service/assets/Doc
 
 with
 
-`FROM node:{{ .Parameters.node }}`
+{% raw %}`FROM node:{{ .Parameters.node }}`{% endraw %}
 
 Now, build and push the image to your repository.
 

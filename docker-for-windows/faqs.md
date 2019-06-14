@@ -8,16 +8,16 @@ title: Frequently asked questions (FAQ)
 [Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
 for knowledge base articles, FAQs, technical support for subscription levels, and more.
 
-### Questions about Stable and Edge channels
+## Questions about Stable and Edge channels
 
-#### How do I get the Stable or Edge version of Docker Desktop for Windows?
+### How do I get the Stable or Edge version of Docker Desktop for Windows?
 
 Use the download links for the channels given in the topic
 [Download Docker Desktop for Windows](install#download-docker-for-windows).
 
 This topic also has more information about the two channels.
 
-#### What is the difference between the Stable and Edge versions of Docker Desktop for Windows?
+### What is the difference between the Stable and Edge versions of Docker Desktop for Windows?
 
 Two different download channels are available for Docker Desktop for Windows:
 
@@ -35,7 +35,7 @@ Two different download channels are available for Docker Desktop for Windows:
   Stable, often one or more per month. Usage statistics and crash reports are
   sent by default. You do not have the option to disable this on the Edge channel.
 
-#### Can I switch back and forth between Stable and Edge versions of Docker Desktop for Windows?
+### Can I switch back and forth between Stable and Edge versions of Docker Desktop for Windows?
 
 Yes, you can switch between versions to try out the Edge release to see what's
 new, then go back to Stable for other work. However, **you can have only one app
@@ -54,7 +54,7 @@ to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
 below.</font><br>
 
-#### How to save and restore data
+### How to save and restore data
 
 The following procedure can be used to save/restore images and container data,
 for example, if you want to switch between Edge and Stable, or reset your VM
@@ -82,9 +82,13 @@ disk:
 procedure](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
 explains how to backup and restore data volumes.
 
-### Feedback
+## Experimental features
 
-#### What kind of feedback are we looking for?
+{% include experimental-feature.md %}
+
+## Feedback
+
+### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
 process, startup, functionality available, the GUI, usefulness of the app,
@@ -95,7 +99,7 @@ We are especially interested in getting feedback on the new swarm mode described
 in [Docker Swarm](/engine/swarm/). A good place to start is the
 [tutorial](/engine/swarm/swarm-tutorial/).
 
-#### What if I have problems or questions?
+### What if I have problems or questions?
 
 You can find the list of frequent issues in
 [Logs and Troubleshooting](troubleshoot).
@@ -111,7 +115,7 @@ provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
 
-#### How can I opt out of sending my usage data?
+### How can I opt out of sending my usage data?
 
 If you do not want auto-send of usage data, use the Stable channel. For more
 information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker Desktop for Windows?").
@@ -158,8 +162,9 @@ See also [Docker Engine API](/engine/api) and the Docker Desktop for Windows for
 topic
 [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
 
-### Volumes
-#### Can I change permissions on shared volumes for container-specific deployment requirements?
+## Volumes
+
+### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 No, at this point, Docker Desktop for Windows does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](/docker-for-windows#shared-drives) for
@@ -171,14 +176,14 @@ deployed containers, but rather sets permissions to a default value of
 For workarounds and to learn more, see
 [Permissions errors on data directories for shared volumes](troubleshoot#permissions-errors-on-data-directories-for-shared-volumes).
 
-#### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
+### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
 Currently, `inotify` does not work on Docker Desktop for Windows. This is a known issue.
 For more information and a temporary workaround, see
 [inotify on shared drives does not work](troubleshoot#inotify-on-shared-drives-does-not-work){: target="_blank" class="_"}
 in [Troubleshooting](troubleshoot).
 
-#### Are symlinks supported?
+### Are symlinks supported?
 
 Docker Desktop for Windows supports symbolic links (symlinks) created within containers.
 Symlinks resolve within and across containers.
@@ -192,10 +197,9 @@ To learn more about the reasons for this limitation, see the following discussio
 * Docker Desktop for Windows forums topic:
   [Symlinks on shared volumes not supported](https://forums.docker.com/t/symlinks-on-shared-volumes-not-supported/9288){: target="_blank" class="_"}
 
+## Certificates
 
-### Certificates
-
-#### How do I add custom CA certificates?
+### How do I add custom CA certificates?
 
 Starting with Docker Desktop for Windows 1.12.1, 2016-09-16 (Stable) and Beta 26
 (2016-09-14 1.12.1-beta26), all trusted Certificate Authorities (CA) (root or
@@ -211,7 +215,7 @@ To learn more about how to install a CA root certificate for the registry, see
 [Verify repository client with certificates](/engine/security/certificates)
 in the Docker Engine topics.
 
-#### How do I add client certificates?
+### How do I add client certificates?
 
 Starting with Docker Desktop for Windows 17.06.0-ce, you do not need to push your
 certificates with `git` commands anymore. You can put your client certificates
@@ -262,27 +266,27 @@ Getting Started topic. For more about Docker Machine itself, see
 [What is Docker Machine?](/machine/overview#what-is-docker-machine), and the
 [Hyper-V driver](/machine/drivers/hyper-v) for Docker Machine.
 
-### Windows Requirements
+## Windows Requirements
 
-#### How do I run Windows containers on Docker Desktop on Windows Server 2016?
+### How do I run Windows containers on Docker Desktop on Windows Server 2016?
 
 See [About Windows containers and Windows Server 2016](/install/windows/docker-ee/#about-docker-ee-containers-and-windows-server).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs){: target="_blank" class="_"} at
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
 
-#### Why is Windows 10 Home not supported?
+### Why is Windows 10 Home not supported?
 
 Docker Desktop for Windows requires the Hyper-V Windows feature which is not
 available on Home-edition.
 
-#### Why is Windows 10 required?
+### Why is Windows 10 required?
 
 Docker Desktop for Windows uses Windows Hyper-V. While older Windows versions have
 Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop for
 Windows to work.
 
-#### Why does Docker Desktop for Windows fail to start when firewalls or anti-virus software is installed?
+### Why does Docker Desktop for Windows fail to start when firewalls or anti-virus software is installed?
 
 Some firewalls and anti-virus software might be incompatible with Hyper-V and
 some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
@@ -290,7 +294,7 @@ Desktop for Windows. See details and workarounds in
 [Docker fails to start when firewall or anti-virus software is installed](troubleshoot#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
 in [Troubleshooting](troubleshoot).
 
-### How do I uninstall Docker Toolbox?
+## How do I uninstall Docker Toolbox?
 
 You might decide that you do not need Toolbox now that you have Docker Desktop for
 Windows, and want to uninstall it. For details on how to perform a clean

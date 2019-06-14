@@ -64,7 +64,7 @@ examples: "docker template scaffold react-java-mysql -s back.java=10 -s front.ex
   template scaffold react-java-mysql --server=myregistry:5000 --org=myorg"
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 
