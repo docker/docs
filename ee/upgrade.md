@@ -6,7 +6,17 @@ redirect_from:
   - /enterprise/upgrade/
 ---
 
-## Cluster Upgrade Best Practices
+To upgrade Docker Enterprise, you must individually upgrade each of the
+following components:
+
+1. Docker Engine - Enterprise.
+2. [Universal Control Plane (UCP)](/ee/ucp/admin/install/upgrade/).
+3. [Docker Trusted Registry (DTR)](/ee/dtr/admin/upgrade/).
+
+Because some components become temporarily unavailable during an upgrade, schedule upgrades to occur outside of 
+peak business hours to minimize impact to your business.
+
+## Cluster upgrade best practices
 Docker Engine - Enterprise upgrades in Swarm clusters should follow these guidelines in order to avoid IP address 
 space exhaustion and associated application downtime.
 
@@ -15,18 +25,6 @@ space exhaustion and associated application downtime.
 * Manager nodes should all be upgraded first before upgrading worker nodes. Upgrading manager nodes sequentially is recommended if live workloads are running in the cluster during the upgrade.
 * Once manager nodes are upgraded worker nodes should be upgraded next and then the Swarm cluster upgrade is complete.
 * If running UCP, the UCP upgrade should follow once all of the Swarm engines have been upgraded.
-
-
-To upgrade Docker Engine - Enterprise you need to individually upgrade each of the
-following components:
-
-1. Docker Engine - Enterprise.
-2. [Universal Control Plane (UCP)](/ee/ucp/admin/install/upgrade/).
-3. [Docker Trusted Registry (DTR)](/ee/dtr/admin/upgrade/).
-
-While upgrading, some of these components become temporarily unavailable.
-So you should schedule your upgrades to take place outside business peak hours
-to make sure there's no impact to your business.
 
 ## Create a backup
 
@@ -58,7 +56,7 @@ Before you upgrade, make sure:
 > the UCP controller.
 {: .important}
 
-## IP Address Consumption in 18.09+
+## IP address consumption in 18.09+
 
 In Swarm overlay networks, each task connected to a network consumes an IP address on that network. Swarm networks have a 
 finite amount of IPs based on the `--subnet` configured when the network is created. If no subnet is specified then Swarm 
@@ -182,7 +180,7 @@ i64lee19ia6s         \_ ex_service.11   nginx:latest        tk1706-ubuntu-1     
 
 7. Confirm the adjusted service deployed successfully.
 
-## Manager Upgrades When Moving to Docker Engine - Enterprise 18.09 and later
+### Manager upgrades when moving to Docker Engine - Enterprise 18.09 and later
 
 The following is a constraint introduced by architectural changes to the Swarm overlay networking when 
 upgrading to Docker Engine - Enterprise 18.09 or later. It only applies to this one-time upgrade and to workloads 
@@ -225,7 +223,7 @@ listed below:
 * [Oracle Linux](/install/linux/docker-ee/oracle.md#upgrade-docker-ee)
 * [SLES](/install/linux/docker-ee/suse.md#upgrade-docker-ee)
 
-### Post-Upgrade Steps
+### Post-Upgrade steps for Docker Engine - Enterprise
 
 After all manager and worker nodes have been upgrades, the Swarm cluster can be used again to schedule new 
 workloads. If workloads were previously scheduled off of the managers, they can be rescheduled again. 
@@ -233,26 +231,14 @@ If any worker nodes were drained, they can be undrained again by setting `--avai
 
 ## Upgrade UCP
 
-Once you've upgraded the Docker Engine - Enterprise running on all the nodes, upgrade UCP.
-You can do this from the UCP web UI.
-
-![UCP update notification banner](images/upgrade-1.png){: .with-border}
-
-Click on the banner, and choose the version you want to upgrade to.
-
-![UCP upgrade page - version selection](images/upgrade-2.png){: .with-border}
-
-Once you click **Upgrade UCP**, the upgrade starts. If you want you can upgrade
-UCP from the CLI instead. [Learn more](/ee/ucp/admin/install/upgrade.md).
+Once you've upgraded the Docker Engine - Enterprise running on all the nodes, 
+[upgrade UCP](/ee/ucp/admin/install/upgrade.md).
 
 ## Upgrade DTR
 
-Log in into the DTR web UI to check if there's a new version available.
+After you upgrade Docker Engine - Enterprise and UCP, [upgrade DTR](/ee/dtr/admin/upgrade.md).
 
-![DTR settings page](images/upgrade-3.png){: .with-border}
-
-Then follow these [instructions to upgrade DTR](/ee/dtr/admin/upgrade.md).
-When this is finished, your Docker EE has been upgraded.
+After the DTR upgrade is finished, the Docker Enterprise upgrade is complete.
 
 ## Where to go next
 
