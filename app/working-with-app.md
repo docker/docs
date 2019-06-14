@@ -83,7 +83,7 @@ The name of the directory is the name of the project with `.dockerapp` appended,
 However, the `--single-file` option merges the three YAML files into a single YAML file with three sections. 
 Each of these sections relates to one of the three YAML files mentioned previously: `docker-compose.yml`, 
 `metadata.yml`, and `parameters.yml`. Using the `--single-file` option enables you to share your application 
-via a single configuration file.
+using a single configuration file.
 
 Inspect the YAML with the following command.
 
@@ -144,8 +144,8 @@ Save the changes.
 The application is updated to run a single-container application based on the `hashicorp/http-echo` web server image. 
 This image has it execute a single command that displays some text and exposes itself on a network port.
 
-Following best practices, the configuration of the application is decoupled form the application itself using variables. 
-In this case, the text displayed by the app and the port on which it will be published are controlled bytwo variables defined in the `Parameters` section of the file.
+Following best practices, the configuration of the application is decoupled from the application itself using variables. 
+In this case, the text displayed by the app and the port on which it will be published are controlled by two variables defined in the `Parameters` section of the file.
 
 Docker App provides the `inspect` subcommand to provide a prettified summary of the application configuration. 
 It is a quick way to check how to configure the application before deployment, without having to read 
@@ -172,6 +172,7 @@ every parameter expressed in the app section.
 The application is ready to be validated and rendered.
 
 ### Validate the app
+
 Docker App provides the `validate` subcommand to check syntax and other aspects of the configuration. 
 If the app passes validation, the command returns no arguments.
 
@@ -199,7 +200,7 @@ All three options are discussed, starting with deploying as a native Dock App ap
 
 The process for deploying as a native Docker app is as follows:
 
-1. Use `docker app install` to deploy the application
+Use `docker app install` to deploy the application.
 
 Use the following command to deploy (install) the application.
 
@@ -210,10 +211,10 @@ Creating service my-app_hello
 Application "my-app" installed on context "default"
 ```
 
-By default, `docker app` uses the [current context](../engine/context/working-with-contexts) to run the 
-installation container and as a target context to deploy the application. This second context can be overridden 
-using the flag `--target-context` or the environment variable `DOCKER_TARGET_CONTEXT`. This flag is also 
-available for the commands `status`, `upgrade` and `uninstall`.
+By default, `docker app` uses the [current context](/engine/context/working-with-contexts) to run the 
+installation container and as a target context to deploy the application. You can override the second context 
+using the flag `--target-context` or by using the environment variable `DOCKER_TARGET_CONTEXT`. This flag is also 
+available for the commands `status`, `upgrade`, and `uninstall`.
 
 ```
 $ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
@@ -222,7 +223,7 @@ Creating service my-app_hello
 Application "my-app" installed on context "my-big-production-cluster"
 ```
 
-> **NOTE**: Two applications deployed on the same target context cannot share the same name, but this is 
+> **Note**: Two applications deployed on the same target context cannot share the same name, but this is 
 valid if they are deployed on different target contexts.
 
 You can check the status of the app with the `docker app status <app-name>` command.
@@ -256,7 +257,7 @@ ID              NAME            MODE          REPLICAS    IMAGE             PORT
 miqdk1v7j3zk    my-app_hello    replicated    1/1         hashicorp/http-echo:latest   *:8080->5678/tcp
 ```
 
-The app is deployed using the stack orchestrator. This means you can also inspect it with regular `docker stack` commands.
+The app is deployed using the stack orchestrator. This means you can also inspect it using the regular `docker stack` commands.
 
 ```
 $ docker stack ls
@@ -312,10 +313,10 @@ services:
       protocol: tcp
 ```
 
-Notice that the file contains hard-coded values that were expanded based on the contents of the Parameters 
-section of the project's YAML file. For example, ${hello.text} has been expanded to "Hello world!".
+Notice that the file contains hard-coded values that were expanded based on the contents of the `Parameters` 
+section of the project's YAML file. For example, `${hello.text}` has been expanded to "Hello world!".
 
-> **NOTE**: Almost all the `docker app` commands propose the `--set key=value` flag to override a default parameter.
+> **Note**: Almost all the `docker app` commands propose the `--set key=value` flag to override a default parameter.
 
 Try to render the application with a different text:
 
@@ -343,19 +344,19 @@ WARNING: The Docker Engine you're using is running in swarm mode.
 <Snip>
 ```
 
-The application is now running as a Docker compose app and should be reachable on port `8080` on your Docker host. 
-You must ensure traffic to port 8080 is allowed on the connection form your browser to your Docker host.
+The application is now running as a Docker Compose app and should be reachable on port `8080` on your Docker host. 
+You must ensure traffic to port `8080` is allowed on the connection form your browser to your Docker host.
 
 You can use `docker-compose down` to stop and remove the application.
 
 #### Deploy as a Docker Stack
 
-Deploying the app as a Docker stack is a two-step process very similar to deploying it as a Docker compose app.
+Deploying the app as a Docker stack is a two-step process very similar to deploying it as a Docker Compose app.
 
 1. Render the Docker app project as a `docker-compose.yml` file.
 2. Deploy the app using `docker stack deploy`.
 
-Compete the steps in the previous section to render the Docker app project as a compose file and make sure 
+Complete the steps in the previous section to render the Docker app project as a Compose file and make sure 
 you're ready to deploy it as a Docker Stack. Your Docker host must be in Swarm mode.
 
 ```
@@ -367,7 +368,7 @@ Creating service hello-world-app_hello
 The app is now deployed as a Docker stack and can be reached on port `8080` on your Docker host.
 
 Use the `docker stack rm hello-world-app` command to stop and remove the stack. You must ensure traffic to 
-port 8080 is allowed on the connection form your browser to your Docker host.
+port `8080` is allowed on the connection form your browser to your Docker host.
 
 ### Push the app to Docker Hub
 
@@ -377,7 +378,7 @@ Docker Hub with `docker app push` and `docker app pull`. Other `docker app` comm
 as `install`, `upgrade`, `inspect` and `render` can be performed directly on applications while they are 
 stored in a registry.
 
-Examples are described in the following sections.
+The following section contains some examples.
 
 Push the application to Docker Hub. To complete this step, you need a valid Docker ID and you must be 
 logged in to the registry to which you are pushing the app.
@@ -460,4 +461,3 @@ Application "hello-world" uninstalled on context "default"
 ```
 
 You can see the name of your Docker App with the `docker stack ls` command.
-
