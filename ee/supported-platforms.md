@@ -13,10 +13,9 @@ green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; mar
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
-Docker Enterprise is designed for enterprise development as well as IT teams who build, ship, and run business-critical
-applications in production and at scale. Docker Enterprise is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry. For more info about Docker Enterprise, including purchasing
+Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
+applications in production and at scale. Docker Enterprise is an integrated container platform that includes Docker Desktop Enterprise, a secure image registry, advanced management control plane and Docker Engine - Enterprise.  Docker Engine - Enterprise is a certified and supported container runtime available as a standalone solution supported to provide enterprises with the most secure container engine
+in the industry. For more info about Docker Enterprise and Docker Engine - Enterprise, including purchasing
 options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
@@ -24,19 +23,18 @@ options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 > Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
 {: .important}
 
-## Docker Enterprise tiers
+## Docker Enterprise Products
 
 {% include docker_ee.md %}
 
 > Note
 >
-> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic, Docker Enterprise - Standard,
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise and, Docker Enterprise - Standard,
 > and Docker Enterprise - Advanced are all now called Docker Enterprise.
 
-### Docker Engine - Enterprise
+### Docker Enterprise
 
-With Docker Enterprise, you can deploy Docker Engine - Enterprise
-to manage your container workloads in a flexible way. You can manage workloads on Windows, Linux, on site, or on the cloud.
+With Docker Enterprise, you manage your container workloads in a flexible way. You can manage workloads on Windows, Linux, on site, or on the cloud.
 
 Docker Enterprise has private image management, integrated image signing policies, and cluster
 management with support for Kubernetes and Swarm orchestrators. It allows you to implement
@@ -66,7 +64,7 @@ Additionally, Docker is now distributing the CLI as a separate installation pack
 ### Docker Certified Infrastructure
 
 Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates, and third-party ecosystem solution briefs.
+Certified Infrastructure includes a reference architecture, a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 
 | Platform  | Docker Enterprise support |
 :----------------------------------------------------------------------------------------|:-------------------------:|
