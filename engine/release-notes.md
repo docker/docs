@@ -10,11 +10,11 @@ redirect_from:
 ---
 
 ----DELETE BEFORE MERGING
-Per https://github.com/docker/docker-ce/blob/v19.03.0-rc2/CHANGELOG.md as of 6/12: 
+Contents include https://github.com/docker/docker-ce/blob/v19.03.0-rc2/CHANGELOG.md as of 6/12: 
 https://docker.atlassian.net/browse/ENGCORE-839
-https://docker.atlassian.net/browse/ENGCORE-834 - should this be in known issues?
-https://docker.atlassian.net/browse/ENGORC-1243 - should this be in known issues?
-https://docker.atlassian.net/browse/ENGCORE-686 - should this be in known issues - MIGHT BE INTERNAL ONLY
+https://docker.atlassian.net/browse/ENGCORE-834 
+https://docker.atlassian.net/browse/ENGORC-1243 
+https://docker.atlassian.net/browse/ENGCORE-686  MIGHT BE INTERNAL ONLY
 https://docker.atlassian.net/browse/ENGCORE-810 - added to UCP known issues
 https://docker.atlassian.net/browse/ENGPGM-115 - Swarm info added to known issues
 https://docker.atlassian.net/browse/TAR-850 - added
