@@ -1,6 +1,6 @@
 ---
 title: About Docker Enterprise
-description: Information about Docker Enterprise 2.1
+description: Docker Enterprise product information
 keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
   - /enterprise/supported-platforms/
@@ -13,30 +13,32 @@ green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; mar
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
-Docker Enterprise is designed for enterprise development as well as IT teams who build, ship, and run business-critical
-applications in production and at scale. Docker Enterprise is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry. For more info about Docker Enterprise, including purchasing
-options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
+Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
+applications at scale in production. Docker Enterprise is an integrated container platform that includes 
+Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.
+Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone 
+solution  to provide enterprises with the most secure container engine in the industry. For more information 
+about Docker Enterprise and Docker Engine - Enterprise, including purchasing options, 
+see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
 >
 > Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
 {: .important}
 
-## Docker Enterprise tiers
+## Docker Enterprise products
 
 {% include docker_ee.md %}
 
 > Note
 >
-> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic, Docker Enterprise - Standard,
-> and Docker Enterprise - Advanced are all now called Docker Enterprise.
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise, 
+> and both Docker Enterprise - Standard and Docker Enterprise - Advanced are now called Docker Enterprise.
 
-### Docker Engine - Enterprise
+### Docker Enterprise
 
-With Docker Enterprise, you can deploy Docker Engine - Enterprise
-to manage your container workloads in a flexible way. You can manage workloads on Windows, Linux, on site, or on the cloud.
+With Docker Enterprise, you can manage container workloads on Windows, Linux, on site, or on the cloud 
+in a flexible way.
 
 Docker Enterprise has private image management, integrated image signing policies, and cluster
 management with support for Kubernetes and Swarm orchestrators. It allows you to implement
@@ -44,7 +46,7 @@ node-based RBAC policies, image promotion policies, image mirroring, and
 scan your images for vulnerabilities. It also has support with defined SLAs and extended
 maintenance cycles for patches for up to 24 months.
 
-### New Licensing for Docker Enterprise 
+### New licensing for Docker Enterprise 
 
 Starting in version 18.09, Docker Enterprise is aware of the license applied on the system. The license summary is available in the `docker info` output on standalone or manager nodes.
 
@@ -65,16 +67,15 @@ Additionally, Docker is now distributing the CLI as a separate installation pack
 
 ### Docker Certified Infrastructure
 
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates, and third-party ecosystem solution briefs.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise 
+on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture, 
+a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 
 | Platform  | Docker Enterprise support |
 :----------------------------------------------------------------------------------------|:-------------------------:|
 | [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
 | VMware  |  coming soon  |
 | Microsoft Azure  | coming soon  |
-
-
 
 ## Docker Enterprise release cycles
 
