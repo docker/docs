@@ -1268,8 +1268,8 @@ manuals:
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
-    title: Docker Enterprise
-  - sectiontitle: Release Notes
+    title: Overview
+  - sectiontitle: Release notes
     section:  
     - path: /ee/release-notes/
       title: Platform
