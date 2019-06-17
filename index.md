@@ -13,7 +13,7 @@ notags: true
 
 ## Get started with Docker
 
-Try our new multi-part walkthrough that covers writing your first app,
+Try our multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 
@@ -41,13 +41,13 @@ Docker Enterprise without installing anything.
 
 ### Docker Engine - Community
 
-Get started with Docker and experimenting with container-based apps. Docker CE
+Get started with Docker and experimenting with container-based apps. Docker Engine - Community
 is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
 
-[Learn more about Docker CE](/install/){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
