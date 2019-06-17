@@ -1268,7 +1268,7 @@ manuals:
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
-    title: About Docker Enterprise
+    title: Docker Enterprise
   - sectiontitle: Release Notes
     section:  
     - path: /ee/release-notes/
@@ -1285,6 +1285,28 @@ manuals:
     - path: /ee/desktop/release-notes/
       title: Docker Desktop Enterprise
       nosync: true
+  - sectiontitle: Docker Cluster
+    section:
+    - path: /cluster/overview/
+      title: Overview
+    - path: /cluster/aws/
+      title: Docker Cluster on AWS
+    - path: /cluster/cluster-file/
+      title: Cluster file structure
+    - path: /cluster/reference/
+      title: Subcommands
+    - path: /cluster/reference/envvars/
+      title: Environment variables
+    - path: /cluster/reference/ls/
+      title: List clusters
+    - path: /cluster/reference/inspect/
+      title: Inspect clusters
+    - path: /cluster/reference/update/
+      title: Update clusters
+    - path: /cluster/reference/remove/
+      title: Remove clusters
+    - path: /cluster/reference/version/
+      title: Version information  
   - path: /ee/docker-ee-architecture/
     title: Docker Enterprise Architecture
   - path: /ee/supported-platforms/
@@ -1324,28 +1346,6 @@ manuals:
       title: Overview
   - path: /ee/upgrade/
     title: Upgrade Docker Enterprise
-  - sectiontitle: Docker Cluster
-    section:
-    - path: /cluster/overview/
-      title: Overview
-    - path: /cluster/aws/
-      title: Docker Cluster on AWS
-    - path: /cluster/cluster-file/
-      title: Cluster file structure
-    - path: /cluster/reference/
-      title: Subcommands
-    - path: /cluster/reference/envvars/
-      title: Environment variables
-    - path: /cluster/reference/ls/
-      title: List clusters
-    - path: /cluster/reference/inspect/
-      title: Inspect clusters
-    - path: /cluster/reference/update/
-      title: Update clusters
-    - path: /cluster/reference/remove/
-      title: Remove clusters
-    - path: /cluster/reference/version/
-      title: Version information  
   - path: /ee/telemetry/
     title: Manage usage data collection
   - sectiontitle: Docker Engine - Enterprise
