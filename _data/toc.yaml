@@ -1310,7 +1310,7 @@ manuals:
   - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker Enterprise Engine
+      title: Install Docker Engine - Enterprise
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
