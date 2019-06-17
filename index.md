@@ -34,7 +34,7 @@ Docker Enterprise without installing anything.
 </div>
 </div>
 
-## Docker Editions
+## Docker products
 
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
