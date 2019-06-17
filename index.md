@@ -62,7 +62,7 @@ the industry to modernize all applications. Docker Enterprise comes with enterpr
 orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and 
 securing images in an enterprise grade registry.
 
-[Learn more about Docker Enterprise supported platforms](/ee/supported-platforms/){: class="button outline-btn"}
+[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->
