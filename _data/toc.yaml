@@ -1307,47 +1307,6 @@ manuals:
       title: Remove clusters
     - path: /cluster/reference/version/
       title: Version information  
-  - path: /ee/docker-ee-architecture/
-    title: Docker Enterprise Architecture
-  - path: /ee/supported-platforms/
-    title: Supported platforms
-    nosync: true  
-  - path: /ee/end-to-end-install/
-    title: Deploy Docker Enterprise
-  - path: /ee/enable-client-certificate-authentication/
-    title: Enable client certificate authentication with your PKI
-  - sectiontitle: Back up Docker Enterprise
-    section:
-    - path: /ee/admin/backup/
-      title: Overview
-    - path: /ee/admin/backup/back-up-swarm/
-      title: Back up Docker Swarm
-    - path: /ee/admin/backup/back-up-ucp/
-      title: Back up UCP
-    - path: /ee/admin/backup/back-up-dtr/
-      title: Back up DTR
-    - path: /cluster/reference/backup/
-      title: Back up clusters with Docker Cluster
-  - sectiontitle: Restore Docker Enterprise
-    section:
-    - path: /ee/admin/restore/
-      title: Overview
-    - path: /ee/admin/restore/restore-swarm/
-      title: Restore Docker Swarm
-    - path: /ee/admin/restore/restore-ucp/
-      title: Restore UCP
-    - path: /ee/admin/restore/restore-dtr/
-      title: Restore DTR 
-    - path: /cluster/reference/restore/
-      title: Restore clusters with Docker Cluster
-  - sectiontitle: Disaster Recovery
-    section:
-    - path: /ee/admin/disaster-recovery/
-      title: Overview
-  - path: /ee/upgrade/
-    title: Upgrade Docker Enterprise
-  - path: /ee/telemetry/
-    title: Manage usage data collection
   - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
@@ -3325,6 +3284,49 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
+  - sectiontitle: Manage Docker Enterprise
+    section:
+  - path: /ee/docker-ee-architecture/
+    title: Docker Enterprise Architecture
+  - path: /ee/supported-platforms/
+    title: Supported platforms
+    nosync: true  
+  - path: /ee/end-to-end-install/
+    title: Deploy Docker Enterprise
+  - path: /ee/enable-client-certificate-authentication/
+    title: Enable client certificate authentication with your PKI
+  - sectiontitle: Back up Docker Enterprise
+    section:
+    - path: /ee/admin/backup/
+      title: Overview
+    - path: /ee/admin/backup/back-up-swarm/
+      title: Back up Docker Swarm
+    - path: /ee/admin/backup/back-up-ucp/
+      title: Back up UCP
+    - path: /ee/admin/backup/back-up-dtr/
+      title: Back up DTR
+    - path: /cluster/reference/backup/
+      title: Back up clusters with Docker Cluster
+  - sectiontitle: Restore Docker Enterprise
+    section:
+    - path: /ee/admin/restore/
+      title: Overview
+    - path: /ee/admin/restore/restore-swarm/
+      title: Restore Docker Swarm
+    - path: /ee/admin/restore/restore-ucp/
+      title: Restore UCP
+    - path: /ee/admin/restore/restore-dtr/
+      title: Restore DTR 
+    - path: /cluster/reference/restore/
+      title: Restore clusters with Docker Cluster
+  - sectiontitle: Disaster Recovery
+    section:
+    - path: /ee/admin/disaster-recovery/
+      title: Overview
+  - path: /ee/upgrade/
+    title: Upgrade Docker Enterprise
+  - path: /ee/telemetry/
+    title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
 - sectiontitle: Docker Assemble
