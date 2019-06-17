@@ -134,7 +134,7 @@ DTR provides the Notary service for using Docker Content Trust (DCT) out of the 
 <td><a href="/engine/security/trust/content_trust/#signing-images-with-docker-content-trust">Sign with <code>docker trust sign</code></a></td>
 <td><ul>
 <li>Docker Engine - Enterprise 18.03 or higher</li>
-<li>Docker Engine - Community 17.12 or higher, or</li>
+<li>Docker Engine - Community 17.12 or higher</li>
 </ul></td>
 <td>Copy <code>ca.crt</code> from <code>https://&lt;dtr-external-url&gt;/ca</code> to:
 <ul>
@@ -148,7 +148,8 @@ DTR provides the Notary service for using Docker Content Trust (DCT) out of the 
 <li>Docker Engine - Enterprise 17.06 or higher</li>
 <li>Docker Engine - Community 17.06 or higher</li>
 </ul></td>
-<td><code>export DOCKER_CONTENT_TRUST=1</code> to enable content trust on the Docker client. Copy <code>ca.crt</code> from <code>https:///ca</code> to <code>/&lt;home_directory&gt;/.docker/tls/</code> on Linux and macOS. <code>docker push</code> will sign your images.</td>
+<td><code>export DOCKER_CONTENT_TRUST=1</code> to enable content trust on the Docker client. Copy <code>ca.crt</code> from <code>https://&lt;dtr-external-url&gt;/ca</code> to <code>/&lt;home_directory&gt;/.docker/tls/</code> on Linux and macOS. <code>docker push</code> will sign your images.</td>
+
 </tr>
 <tr class="odd">
 <td><a href="/ee/dtr/user/manage-images/sign-images/">Sign images that UCP can trust</a></td>
