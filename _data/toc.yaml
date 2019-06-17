@@ -1066,7 +1066,7 @@ reference:
     - path: /reference/dtr/2.7/cli/destroy/
       title: destroy
     - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair7
+      title: emergency-repair
     - path: /reference/dtr/2.7/cli/install/
       title: install
     - path: /reference/dtr/2.7/cli/join/
