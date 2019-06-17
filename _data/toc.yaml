@@ -3293,8 +3293,8 @@ manuals:
     nosync: true  
   - path: /ee/end-to-end-install/
     title: Deploy Docker Enterprise
-  - path: /ee/enable-client-certificate-authentication/
-    title: Enable client certificate authentication with your PKI
+  - path: /ee/upgrade/
+    title: Upgrade Docker Enterprise
   - sectiontitle: Back up Docker Enterprise
     section:
     - path: /ee/admin/backup/
@@ -3323,8 +3323,8 @@ manuals:
     section:
     - path: /ee/admin/disaster-recovery/
       title: Overview
-  - path: /ee/upgrade/
-    title: Upgrade Docker Enterprise
+  - path: /ee/enable-client-certificate-authentication/
+    title: Enable client certificate authentication with your PKI
   - path: /ee/telemetry/
     title: Manage usage data collection
   - title: Get support
