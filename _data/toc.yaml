@@ -3389,13 +3389,13 @@ manuals:
   - sectiontitle: Docker Notary
     section:
     - path: /notary/getting_started/
-      title: Getting started with Notary
+      title: Get started with Notary
     - path: /notary/advanced_usage/
       title: Use the Notary client
     - path: /notary/service_architecture/
       title: Understand the service architecture
     - path: /notary/running_a_service/
-      title: Running a Notary service
+      title: Run a Notary service
     - path: /notary/changelog/
       title: Notary changelog
     - sectiontitle: Configuration files
@@ -3413,13 +3413,13 @@ manuals:
     - path: /registry/
       title: Registry overview
     - path: /registry/introduction/
-      title: Understanding the Registry
+      title: Understand the Registry
     - path: /registry/deploying/
       title: Deploy a registry server
     - path: /registry/configuration/
-      title: Configuring a registry
+      title: Configure a registry
     - path: /registry/notifications/
-      title: Working with notifications
+      title: Work with notifications
     - sectiontitle: Recipes
       section:
       - path: /registry/recipes/
