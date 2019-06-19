@@ -27,7 +27,7 @@ constructing your solutions
 
 This example assumes you already have an ASP.NET Core app
 on your machine. If you are new to ASP.NET you can follow a [simple
-tutorial](https://www.asp.net/get-started) to initialize a project or clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker-samples/tree/master/aspnetapp).
+tutorial](https://www.asp.net/get-started) to initialize a project or clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/master/samples/aspnetapp).
 
 ## Create a Dockerfile for an ASP.NET Core application
 
