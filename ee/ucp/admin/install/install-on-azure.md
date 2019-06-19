@@ -105,7 +105,7 @@ seperate resource group.
 - `routeTableName` - If you have defined multiple Route tables within
 an Azure subnet.
 
-See [Kubernetes' azure.go](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go) for more details on this configuration file.
+See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
 
 ## Considerations for IPAM Configuration
 
