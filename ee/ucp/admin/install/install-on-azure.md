@@ -72,7 +72,7 @@ to `0644` to ensure the container user has read access.
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
 parameters as is.
 
-```
+```json
 {
     "cloud":"AzurePublicCloud", 
     "tenantId": "***",
