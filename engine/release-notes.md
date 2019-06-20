@@ -149,11 +149,7 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 * Bumped `runc` to 1.0.0-rc8, opencontainers/selinux v1.2.2. [docker/engine#210](https://github.com/docker/engine/pull/210)
 * Bumped `google.golang.org/grpc` to v1.20.1. [docker/engine#215](https://github.com/docker/engine/pull/215)
 * Performance optimized in aufs and layer store for massively parallel container creation/removal. 
-[moby/moby#39107](https://github.com/moby/moby/pull/39107)
-* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with 
-directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
-* Windows: Support provided for `docker service create --limit-cpu`. 
-[moby/moby#39190](https://github.com/moby/moby/pull/39190)
+[moby/moby#39135](https://github.com/moby/moby/pull/39135) [moby/moby#39209](https://github.com/moby/moby/pull/39209)
 * Root is now passed to chroot for chroot Tar/Untar (CVE-2018-15664) 
 [moby/moby#39292](https://github.com/moby/moby/pull/39292)
 * Fixed `docker --init` with /dev bind mount. [moby/moby#37665](https://github.com/moby/moby/pull/37665)
@@ -171,9 +167,6 @@ directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
 [docker/engine#213](https://github.com/docker/engine/pull/213)
 * Windows: Now forcing a nil IP specified in `PortBindings` to IPv4zero (0.0.0.0). 
 [docker/libnetwork#2376](https://github.com/docker/libnetwork/pull/2376)
-* Fixed changing host target port. If a service has the same number of host-mode published ports 
-with PublishedPort 0, changes to the spec now reflect in the service object. 
-[docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
 
 ### Swarm
 
@@ -198,7 +191,7 @@ with PublishedPort 0, changes to the spec now reflect in the service object.
 
 * Removed v1 manifest support, and removed `--disable-legacy-registry`. Pushing v1 manifests to registries 
 is no longer possible, pushing schema v2 (or OCI) manifests is now the only possible option. However, 
-pulling v1 manifests is still possible. [moby/moby#39365](https://github.com/moby/moby/pull/39365)
+pulling v1 manifests is still possible. [moby/moby#37874](https://github.com/moby/moby/pull/37874)
 * Removed v1.10 migrator. [moby/moby#38265](https://github.com/moby/moby/pull/38265)
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
 * Deprecated AuFS storage driver, and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
@@ -551,6 +544,25 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
+## 18.03.1-ee-9
+
+2019-06-25
+
+### Client
+
+* Fixed annnotation on `docker config create --template-driver`. [docker/cli#1769](https://github.com/docker/cli/pull/1769)
+* Fixed annnotation on `docker secret create --template-driver`. [docker/cli#1785](https://github.com/docker/cli/pull/1785)
+
+### Runtime
+
+* Performance optimized in aufs and layer store for massively parallel container creation/removal. 
+[moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Windows: fixed support for `docker service create --limit-cpu`. 
+[moby/moby#39190](https://github.com/moby/moby/pull/39190)
+* Now using original process spec for execs. [moby/moby#38871](https://github.com/moby/moby/pull/38871)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack 
+with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+
 ## 18.03.1-ee-8
 
  2019-03-28
@@ -686,6 +698,22 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-22
+2019-06-25
+
+### Networking
+
+* Fixed changing host target port. Fixes a bug where if a service has the same number of host-mode published ports with PublishedPort 0, changes to the spec would not reflect in the service object. [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
+
+### Runtime
+
+* Performance optimized in aufs and layer store for massively parallel container creation/removal. 
+[moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with 
+directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+* Windows: provided support for `docker service create --limit-cpu`. 
+[moby/moby#39190](https://github.com/moby/moby/pull/39190)
 
 ## 17.06.2-ee-21 
 2019-04-11
