@@ -35,7 +35,7 @@ references. Docker EE includes enterprise features as well as back-ported fixes 
 and priority defects) from the open source. It also incorporates defect fixes for environments
 in which new features cannot be adopted as quickly for consistency and compatibility reasons.
 
-## 19.03.0 (2019-06-17)
+## 19.03.0 (2019-07-10)
 
 ### Builder
 
@@ -148,16 +148,18 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 * Bumped `containerd` to 1.2.6. [moby/moby#39016](https://github.com/moby/moby/pull/39016)
 * Bumped `runc` to 1.0.0-rc8, opencontainers/selinux v1.2.2. [docker/engine#210](https://github.com/docker/engine/pull/210)
 * Bumped `google.golang.org/grpc` to v1.20.1. [docker/engine#215](https://github.com/docker/engine/pull/215)
-* Performance optimized in aufs and layer store for massively parallel container creation/removal. [moby/moby#39135](https://github.com/moby/moby/pull/39135) [moby/moby#39209](https://github.com/moby/moby/pull/39209)
+* Performance optimized in aufs and layer store for massively parallel container creation/removal. 
+[moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with 
+directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+* Windows: Support provided for `docker service create --limit-cpu`. 
+[moby/moby#39190](https://github.com/moby/moby/pull/39190)
 * Root is now passed to chroot for chroot Tar/Untar (CVE-2018-15664) 
 [moby/moby#39292](https://github.com/moby/moby/pull/39292)
 * Fixed `docker --init` with /dev bind mount. [moby/moby#37665](https://github.com/moby/moby/pull/37665)
 * The right device number is now fetched when greater than 255 and using the `--device-read-bps` option. 
 [moby/moby#39212](https://github.com/moby/moby/pull/39212)
 * Fixed `Path does not exist` error when path definitely exists. [moby/moby#39251](https://github.com/moby/moby/pull/39251)
-* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory 
-traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
-
 
 ### Networking
 
@@ -169,6 +171,9 @@ traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
 [docker/engine#213](https://github.com/docker/engine/pull/213)
 * Windows: Now forcing a nil IP specified in `PortBindings` to IPv4zero (0.0.0.0). 
 [docker/libnetwork#2376](https://github.com/docker/libnetwork/pull/2376)
+* Fixed changing host target port. If a service has the same number of host-mode published ports 
+with PublishedPort 0, changes to the spec now reflect in the service object. 
+[docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
 
 ### Swarm
 
