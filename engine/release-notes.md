@@ -155,6 +155,9 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 * The right device number is now fetched when greater than 255 and using the `--device-read-bps` option. 
 [moby/moby#39212](https://github.com/moby/moby/pull/39212)
 * Fixed `Path does not exist` error when path definitely exists. [moby/moby#39251](https://github.com/moby/moby/pull/39251)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory 
+traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+
 
 ### Networking
 
@@ -190,7 +193,7 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 
 * Removed v1 manifest support, and removed `--disable-legacy-registry`. Pushing v1 manifests to registries 
 is no longer possible, pushing schema v2 (or OCI) manifests is now the only possible option. However, 
-pulling v1 manifests is still possible. [moby/moby#37874](https://github.com/moby/moby/pull/37874)
+pulling v1 manifests is still possible. [moby/moby#39365](https://github.com/moby/moby/pull/39365)
 * Removed v1.10 migrator. [moby/moby#38265](https://github.com/moby/moby/pull/38265)
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
 * Deprecated AuFS storage driver, and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
