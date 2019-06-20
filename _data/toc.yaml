@@ -1518,7 +1518,7 @@ manuals:
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
-            path: /ee/ucp/interlock/usage/websockets/  
+            path: /ee/ucp/interlock/usage/websockets/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources
@@ -1529,8 +1529,6 @@ manuals:
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Using Pod Security Policies
         path: /ee/ucp/kubernetes/pod-security-policies/        
-      - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install an unmanaged CNI plugin
@@ -1551,6 +1549,18 @@ manuals:
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
+      - sectiontitle: Cluster Ingress
+        section:
+        - title: Overview
+          path: /ee/ucp/kubernetes/cluster-ingress/  
+        - title: Install Ingress
+          path: /ee/ucp/kubernetes/cluster-ingress/install/
+        - title: Deploy Simple Application
+          path: /ee/ucp/kubernetes/cluster-ingress/ingress/
+        - title: Deploy a Canary Deployment
+          path: /ee/ucp/kubernetes/cluster-ingress/canary/     
+        - title: Implementing Persistent (sticky) Sessions
+          path: /ee/ucp/kubernetes/cluster-ingress/sticky/
     - title: API reference
       path: /reference/ucp/3.2/api/
       nosync: true
