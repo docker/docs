@@ -11,6 +11,40 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.11
+
+(28 February 2019)
+
+### Changelog
+
+* Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10064)
+
+## Version 2.3.10
+
+(29 January 2019)
+
+### Changelog
+* GoLang version bump to 1.10.7. 
+
+## Version 2.3.9
+
+(25 October 2018)
+
+### Bug Fixes
+* Added CSP (Content Security Policy). (docker/dhe-deploy#9368 and docker/dhe-deploy#9588)
+* Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9575)
+
+### Changelog
+* Patched security vulnerabilities in the load balancer.
+* Patch packages and base OS to eliminate and address some critical vulnerabilities in DTR dependencies.
+
+## Version 2.3.8
+
+(26 July 2018)
+
+### Bug Fixes
+* Fixed bug where repository tag list UI was not loading after a tag migration.
+
 ## Version 2.3.7
 
 (17 May 2018)

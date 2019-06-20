@@ -4,7 +4,7 @@ keywords: machine, rm, subcommand
 title: docker-machine rm
 ---
 
-Remove a machine. This removese the local reference and deletes it
+Remove a machine. This removes the local reference and deletes it
 on the cloud provider or virtualization management platform.
 
 ```none

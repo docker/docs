@@ -199,6 +199,21 @@ capability removal, or less secure through the addition of capabilities.
 The best practice for users would be to remove all capabilities except
 those explicitly required for their processes.
 
+## Docker Content Trust Signature Verification
+
+The Docker Engine can be configured to only run signed images. The Docker Content 
+Trust signature verification feature is built directly into the `dockerd` binary.  
+This is configured in the Dockerd configuration file. 
+
+To enable this feature, trustpinning can be configured in `daemon.json`, whereby 
+only repositories signed with a user-specified root key can be pulled and run.
+  
+This feature provides more insight to administrators than previously available with
+the CLI for enforcing and performing image signature verification. 
+
+For more information on configuring Docker Content Trust Signature Verificiation, go to 
+[Content trust in Docker](../security/trust/content_trust).
+
 ## Other kernel security features
 
 Capabilities are just one of the many security features provided by

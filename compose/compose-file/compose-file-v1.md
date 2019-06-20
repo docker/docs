@@ -205,7 +205,7 @@ the value assigned to a variable that shows up more than once_. The files in the
 list are processed from the top down. For the same variable specified in file
 `a.env` and assigned a different value in file `b.env`, if `b.env` is
 listed below (after), then the value from `b.env` stands. For example, given the
-following declaration in `docker_compose.yml`:
+following declaration in `docker-compose.yml`:
 
 ```yaml
 services:
@@ -415,7 +415,7 @@ id.
 Sets the PID mode to the host PID mode. This turns on sharing between
 container and the host operating system the PID address space. Containers
 launched with this flag can access and manipulate other
-containers in the bare-metal machine's namespace and vise-versa.
+containers in the bare-metal machine's namespace and vice versa.
 
 ### ports
 

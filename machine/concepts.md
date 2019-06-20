@@ -101,5 +101,5 @@ For more information and resources, visit
 
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Docker Machine driver reference](/machine/drivers.md){: target="_blank" class="_"}
+- [Docker Machine driver reference](/machine/drivers/index.md){: target="_blank" class="_"}
 - [Docker Machine subcommand reference](/machine/reference/help.md){: target="_blank" class="_"}

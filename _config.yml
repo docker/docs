@@ -13,26 +13,29 @@ safe: false
 lsi: false
 url: https://docs.docker.com
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06", "v17.09", "v17.12"]
-exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
+keep_files: ["v17.03", "v17.06", "v17.09", "v17.12", "v18.03"]
+exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
 
-# Component versions -- address like site.docker_ce_stable_version
+# Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
 
-latest_stable_docker_engine_api_version: "1.37"
-docker_ce_stable_version: "18.03"
-docker_ce_edge_version: "18.05"
-docker_ee_version: "17.06"
-compose_version: "1.21.2"
-machine_version: "0.14.0"
+latest_engine_api_version: "1.39"
+docker_ce_version: "18.09"
+docker_ee_version: "18.09"
+compose_version: "1.24.0"
+compose_file_v3: "3.7"
+compose_file_v2: "2.4"
+machine_version: "0.16.0"
 distribution_version: "2.6"
-dtr_version: "2.5"
-ucp_version: "3.0"
+dtr_version: "2.6"
+ucp_version: "3.1"
 
 ucp_versions:
-  - version: "3.0"
+  - version: "3.1"
     path: /ee/ucp/
     latest: true
+  - version: "3.0"
+    path: /datacenter/ucp/3.0/guides/
   - version: "2.2"
     path: /datacenter/ucp/2.2/guides/
   - version: "2.1"
@@ -43,9 +46,11 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: "2.5"
+  - version: "2.6"
     path: /ee/dtr/
     latest: true
+  - version: "2.5"
+    path: /datacenter/dtr/2.5/guides/
   - version: "2.4"
     path: /datacenter/dtr/2.4/guides/
   - version: "2.3"
@@ -58,7 +63,7 @@ dtr_versions:
     path: /datacenter/dtr/2.0/
 
 tablabels:
-  dee-2.0: Docker Enterprise Edition 2.0 Beta2
+  dee-2.0: Docker Enterprise Edition 2.0
   ucp-3.0: Universal Control Plane 3.0
   ucp-2.2: Universal Control Plane 2.2
   dtr-2.5: Docker Trusted Registry 2.5
@@ -80,8 +85,7 @@ plugins:
   - jekyll-sitemap
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -92,7 +96,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-14"
+      win_latest_build: "docker-18.09.6"
   - scope:
       path: "datacenter"
     values:
@@ -102,21 +106,28 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.3"
+      dtr_version: "2.6.6"
+  - scope:
+      path: "datacenter/dtr/2.5"
+    values:
+      hide_from_sitemap: true
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.5.11"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.5"
+      dtr_version: "2.4.12"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.7"
+      dtr_version: "2.3.11"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
@@ -138,23 +149,29 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.2"
+      ucp_version: "3.1.7"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.0.2"
-      dtr_version: "2.5.0"
-      dtr_latest_image: "docker/dtr:2.5.3"
+      ucp_version: "3.1.7"
+      dtr_version: "2.6.6"
+  - scope:
+      path: "datacenter/ucp/3.0"
+    values:
+      hide_from_sitemap: true
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "3.0.11"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.10"
+      ucp_version: "2.2.18"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
@@ -168,7 +185,7 @@ defaults:
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
-      docker_image: "docker/ucp:2.0.3"
+      docker_image: "docker/ucp:2.0.4"
   - scope:
       path: "datacenter/ucp/1.1"
     values:

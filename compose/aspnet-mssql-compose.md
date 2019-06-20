@@ -25,8 +25,8 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a new directory for your application.
 
     This directory is the context of your docker-compose project. For
-    [Docker for Windows](/docker-for-windows/#/shared-drives) and
-    [Docker for Mac](/docker-for-mac/#/file-sharing), you
+    [Docker Desktop for Windows](/docker-for-windows/#/shared-drives) and
+    [Docker Desktop for Mac](/docker-for-mac/#/file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
@@ -37,7 +37,7 @@ configure this app to use our SQL Server database, and then create a
     $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
     ```
 
-    > **Note**: If running in Docker for Windows, make sure to use Powershell
+    > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
     or specify the absolute path of your app directory.
 
 1.  Create a `Dockerfile` within your app directory and add the following content:
@@ -54,7 +54,7 @@ configure this app to use our SQL Server database, and then create a
     ```
 
     This file defines how to build the web app image. It uses the
-    [.NET Core SDK image](hub.docker.com/_/microsoft-dotnet-core-sdk),
+    [.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk),
     maps the volume with the generated code, restores the dependencies, builds the
     project and exposes port 80. After that, it calls an `entrypoint` script
     that we create in the next step.
@@ -104,7 +104,7 @@ configure this app to use our SQL Server database, and then create a
             depends_on:
                 - db
         db:
-            image: "microsoft/mssql-server-linux"
+            image: "mcr.microsoft.com/mssql/server"
             environment:
                 SA_PASSWORD: "Your_password123"
                 ACCEPT_EULA: "Y"
@@ -170,8 +170,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker for Mac](/docker-for-mac/#/advanced) and
-    [Docker for Windows](/docker-for-windows/#/advanced).
+    [Docker Desktop for Mac](/docker-for-mac/#/advanced) and
+    [Docker Desktop for Windows](/docker-for-windows/#/advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able
@@ -186,7 +186,7 @@ configure this app to use our SQL Server database, and then create a
     Go ahead and try out the website! This sample uses the SQL Server
     database image in the back-end for authentication.
 
-Ready! You now have a ASP.NET Core application running against SQL Server in
+Ready! You now have an ASP.NET Core application running against SQL Server in
 Docker Compose! This sample made use of some of the most popular Microsoft
 products for Linux. To learn more about Windows Containers, check out
 [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows)
@@ -195,6 +195,6 @@ to try out .NET Framework and more SQL Server tutorials.
 ## Next steps
 
 - [Build your app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/?utm_medium=Referral&utm_source=docs.docker.com)
-- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server-linux/)
+- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server/)
 - [ASP.NET Core](https://www.asp.net/core)
 - [ASP.NET Core Docker image](https://hub.docker.com/r/microsoft/aspnetcore/) on DockerHub

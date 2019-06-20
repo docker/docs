@@ -92,7 +92,7 @@ With multi-stage builds, you use multiple `FROM` statements in your Dockerfile.
 Each `FROM` instruction can use a different base, and each of them begins a new
 stage of the build. You can selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image. To show
-how this works, Let's adapt the Dockerfile from the previous section to use
+how this works, let's adapt the Dockerfile from the previous section to use
 multi-stage builds.
 
 **`Dockerfile`**:
@@ -131,13 +131,13 @@ intermediate artifacts are left behind, and not saved in the final image.
 
 By default, the stages are not named, and you refer to them by their integer
 number, starting with 0 for the first `FROM` instruction. However, you can
-name your stages, by adding an `as <NAME>` to the `FROM` instruction. This
+name your stages, by adding an `AS <NAME>` to the `FROM` instruction. This
 example improves the previous one by naming the stages and using the name in
 the `COPY` instruction. This means that even if the instructions in your
 Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```conf
-FROM golang:1.7.3 as builder
+FROM golang:1.7.3 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
 COPY app.go    .

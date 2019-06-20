@@ -7,15 +7,15 @@ keywords: registry, security, permissions
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.
 
-## Administrator users
+## Administrators
 
 Users are shared across UCP and DTR. When you create a new user in Docker
 Universal Control Plane, that user becomes available in DTR and vice versa.
-When you create an administrator user in DTR, the user has permissions to:
+When you create a trusted admin in DTR, the admin has permissions to manage:
 
-* Manage users across UCP and DTR,
-* Manage DTR repositories and settings,
-* Manage UCP resources and settings.
+* Users across UCP and DTR
+* DTR repositories and settings
+* UCP resources and settings
 
 ## Team permission levels
 
@@ -41,10 +41,10 @@ have the highest permission level defined by those teams.
 
 Here's an overview of the permission levels available in DTR:
 
-* Anonymous users: Can search and pull public repositories.
-* Users: Can search and pull public repos, and create and manage their own repositories.
-* Team member: Everything a user can do, plus the permissions granted by the teams the user is member of.
-* Organization owner: Can manage repositories and teams for the organization.
+* Anonymous or unauthenticated Users: Can search and pull public repositories.
+* Authenticated Users: Can search and pull public repos, and create and manage their own repositories.
+* Team Member: Everything a user can do, plus the permissions granted by the team the user is a member of.
+* Organization Owner: Can manage repositories and teams for the organization.
 * Admin: Can manage anything across UCP and DTR.
 
 ## Where to go next

@@ -1,0 +1,51 @@
+command: docker builder prune
+short: Remove build cache
+long: Remove build cache
+usage: docker builder prune
+pname: docker builder
+plink: docker_builder.yaml
+options:
+- option: all
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Remove all unused images, not just dangling ones
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: filter
+  value_type: filter
+  description: Provide filter values (e.g. 'unused-for=24h')
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: keep-storage
+  value_type: bytes
+  default_value: "0"
+  description: Amount of disk space to keep for cache
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.39"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

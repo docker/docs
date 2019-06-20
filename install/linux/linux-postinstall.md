@@ -12,19 +12,20 @@ better with Docker.
 
 ## Manage Docker as a non-root user
 
-The `docker` daemon binds to a Unix socket instead of a TCP port. By default
+The Docker daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can only access it
-using `sudo`. The `docker` daemon always runs as the `root` user.
+using `sudo`. The Docker daemon always runs as the `root` user.
 
-If you don't want to use `sudo` when you use the `docker` command, create a Unix
-group called `docker` and add users to it. When the `docker` daemon starts, it
-makes the ownership of the Unix socket read/writable by the `docker` group.
+If you don't want to preface the `docker` command with `sudo`, create a Unix
+group called `docker` and add users to it. When the Docker daemon starts, it
+creates a Unix socket accessible by members of the `docker` group.
 
-> **Warning**:
+> Warning
+>
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
 > [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
-{:.warning}
+{: .warning}
 
 To create the `docker` group and add your user:
 
@@ -72,7 +73,7 @@ To create the `docker` group and add your user:
 
     ```bash
     $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-    $ sudo chmod g+rwx "/home/$USER/.docker" -R
+    $ sudo chmod g+rwx "$HOME/.docker" -R
     ```
 
 ## Configure Docker to start on boot
@@ -119,6 +120,10 @@ For information about the different storage engines, see
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
 
+## Configure default logging driver
+
+Docker provides the [capability](/config/containers/logging/) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
+
 ## Configure where the Docker daemon listens for connections
 
 By default, the Docker daemon listens for connections on a UNIX socket to accept requests from local clients. It is possible to allow Docker to accept requests from remote hosts by configuring it to listen on an IP address and port as well as the UNIX socket. For more detailed information on this configuration option take a look at "Bind Docker to another host/port or a unix socket" section of the [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/dockerd/) article. 
@@ -141,9 +146,9 @@ By default, the Docker daemon listens for connections on a UNIX socket to accept
 
 Configuring Docker to accept remote connections can be done with the `docker.service` systemd unit file for Linux distributions using systemd, such as recent versions of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is recommended for Linux distributions that do not use systemd.
 
-> systemd vs `daemon.json`
+> systemd vs daemon.json
 > 
-> Configuring docker to listen for connections using both the systemd unit file and the daemon.json 
+> Configuring Docker to listen for connections using both the `systemd` unit file and the `daemon.json` 
 > file causes a conflict that prevents Docker from starting.
 
 ### Configuring remote access with `systemd` unit file
@@ -478,10 +483,10 @@ and a 10% overall performance degradation, even if Docker is not running.
     ```
 
     If your GRUB configuration file has incorrect syntax, an error occurs.
-    In this case, repeat steps 3 and 4.
+    In this case, repeat steps 2 and 3.
 
     The changes take effect when the system is rebooted.
 
 ## Next steps
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/get-started/index.md).

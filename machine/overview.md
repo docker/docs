@@ -27,11 +27,11 @@ point to a host called `default`, follow on-screen instructions to complete
 `env` setup, and run `docker ps`, `docker run hello-world`, and so forth.
 
 Machine _was_ the _only_ way to run Docker on Mac or Windows previous to Docker
-v1.12. Starting with the beta program and Docker v1.12, [Docker for
-Mac](/docker-for-mac/index.md) and [Docker for
+v1.12. Starting with the beta program and Docker v1.12, [Docker Desktop for
+Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md) are available as native apps and the
 better choice for this use case on newer desktops and laptops. We encourage you
-to try out these new apps. The installers for Docker for Mac and Docker for
+to try out these new apps. The installers for Docker Desktop for Mac and Docker Desktop for
 Windows include Docker Machine, along with Docker Compose.
 
 If you aren't sure where to begin, see [Get Started with Docker](/get-started/),
@@ -51,7 +51,7 @@ Docker Machine has these two broad use cases.
 
   ![Docker Machine on Mac and Windows](img/machine-mac-win.png){: .white-bg}
 
-  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps, then you need Docker Machine run Docker Engine locally. Installing Docker Machine on a Mac or Windows box with the [Docker Toolbox](/toolbox/overview.md) installer provisions a local virtual machine with Docker Engine, gives you the ability to connect it, and run `docker` commands.
+  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for Windows](/docker-for-windows/index.md) apps, then you need Docker Machine to run Docker Engine locally. Installing Docker Machine on a Mac or Windows box with the [Docker Toolbox](/toolbox/overview.md) installer provisions a local virtual machine with Docker Engine, gives you the ability to connect it, and run `docker` commands.
 
 *  **I want to provision Docker hosts on remote systems**
 

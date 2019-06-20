@@ -205,7 +205,7 @@ and using them in a production deployment is highly insecure.
 Notary is a user/client-based system, and it searches for certificates in the
 user's home directory, at `~/.docker/trust`. To streamline using Notary from
 the command line, create an alias that maps the user's `trust` directory to
-the the system's `ca-certificates` directory.
+the system's `ca-certificates` directory.
 
 ```bash
 $ alias notary="notary -s https://<dtr-url> -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/<dtr-url>.crt"

@@ -27,10 +27,10 @@ workloads.
 If Route Reflectors are running on a same node as other workloads, swarm ingress
 and NodePorts might not work in these workloads.
 
-## Choose dedicated notes
+## Choose dedicated nodes
 
-Start by tainting the nodes, so that no other workload runs there. Configure
-your CLI with a UCP client bundle, and for each dedicated node, run:
+Start by tainting the nodes, so that no other workload runs there. [Configure
+your CLI with a UCP client bundle](/ee/ucp/user-access/cli/), and for each dedicated node, run:
 
 ```
 kubectl taint node <node-name> \
@@ -127,45 +127,41 @@ kubectl create -f calico-rr.yaml
 ## Configure calicoctl
 
 To reconfigure Calico to use Route Reflectors instead of a node-to-node mesh,
-you'll need to SSH into a UCP node and download the `calicoctl` tool.
-
-Log in to a UCP node using SSH, and run:
-
-```
-sudo curl --location https://github.com/projectcalico/calicoctl/releases/download/v3.1.1/calicoctl \
-  --output /usr/bin/calicoctl
-sudo chmod +x /usr/bin/calicoctl
-```
-
-Now you need to configure `calicoctl` to communicate with the etcd key-value
-store managed by UCP. Create a file named `/etc/calico/calicoctl.cfg` with
-the following content:
+you'll need to tell `calicoctl` where to find the etcd key-value store managed
+by UCP.  From a CLI with a UCP client bundle, create a shell alias to start
+`calicoctl` using the `{{ page.ucp_org }}/ucp-dsinfo` image:
 
 ```
-apiVersion: projectcalico.org/v3
-kind: CalicoAPIConfig
-metadata:
-spec:
-  datastoreType: "etcdv3"
-  etcdEndpoints: "127.0.0.1:12378"
-  etcdKeyFile: "/var/lib/docker/volumes/ucp-node-certs/_data/key.pem"
-  etcdCertFile: "/var/lib/docker/volumes/ucp-node-certs/_data/cert.pem"
-  etcdCACertFile: "/var/lib/docker/volumes/ucp-node-certs/_data/ca.pem"
+UCP_VERSION=$(docker version --format {% raw %}'{{index (split .Server.Version "/") 1}}'{% endraw %})
+alias calicoctl="\
+docker run -i --rm \
+  --pid host \
+  --net host \
+  -e constraint:ostype==linux \
+  -e ETCD_ENDPOINTS=127.0.0.1:12378 \
+  -e ETCD_KEY_FILE=/ucp-node-certs/key.pem \
+  -e ETCD_CA_CERT_FILE=/ucp-node-certs/ca.pem \
+  -e ETCD_CERT_FILE=/ucp-node-certs/cert.pem \
+  -v /var/run/calico:/var/run/calico \
+  -v ucp-node-certs:/ucp-node-certs:ro \
+  {{ page.ucp_org }}/ucp-dsinfo:${UCP_VERSION} \
+  calicoctl \
+"
 ```
 
 ## Disable node-to-node BGP mesh
 
-Not that you've configured `calicoctl`, you can check the current Calico BGP
+Now that you've configured `calicoctl`, you can check the current Calico BGP
 configuration:
 
 ```
-sudo calicoctl get bgpconfig
+calicoctl get bgpconfig
 ```
 
 If you don't see any configuration listed, create one by running:
 
 ```
-cat << EOF | sudo calicoctl create -f -
+calicoctl create -f - <<EOF
 apiVersion: projectcalico.org/v3
 kind: BGPConfiguration
 metadata:
@@ -182,14 +178,14 @@ If you have a configuration, and `meshenabled` is set to `true`, update your
 configuration:
 
 ```
-sudo calicoctl get bgpconfig --output yaml > bgp.yaml
+calicoctl get bgpconfig --output yaml > bgp.yaml
 ```
 
 Edit the `bgp.yaml` file, updating `nodeToNodeMeshEnabled` to `false`. Then
 update Calico configuration by running:
 
 ```
-sudo calicoctl replace -f bgp.yaml
+calicoctl replace -f - < bgp.yaml
 ```
 
 ## Configure Calico to use Route Reflectors
@@ -198,14 +194,14 @@ To configure Calico to use the Route Reflectors you need to know the AS number
 for your network first. For that, run:
 
 ```
-sudo calicoctl get nodes --output=wide
+calicoctl get nodes --output=wide
 ```
 
 Now that you have the AS number, you can create the Calico configuration.
 For each Route Reflector, customize and run the following snippet:
 
 ```
-sudo calicoctl create -f - << EOF
+calicoctl create -f - << EOF
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
@@ -233,19 +229,34 @@ Using your UCP client bundle, run:
 
 ```
 # Find the Pod name
-kubectl get pods -n kube-system -o wide | grep <node-name>
+kubectl -n kube-system \
+  get pods --selector k8s-app=calico-node -o wide | \
+  grep <node-name>
 
 # Delete the Pod
-kubectl delete pod -n kube-system <pod-name>
+kubectl -n kube-system delete pod <pod-name>
 ```
 
 ## Validate peers
 
-Now you can check that other `calico-node` pods running on other nodes are
-peering with the Route Reflector:
+Now you can check that `calico-node` pods running on other nodes are peering
+with the Route Reflector.  From a CLI with a UCP client bundle, use a Swarm affinity filter to run `calicoctl node
+status` on any node running `calico-node`:
 
 ```
-sudo calicoctl node status
+UCP_VERSION=$(docker version --format {% raw %}'{{index (split .Server.Version "/") 1}}'{% endraw %})
+docker run -i --rm \
+  --pid host \
+  --net host \
+  -e affinity:container=='k8s_calico-node.*' \
+  -e ETCD_ENDPOINTS=127.0.0.1:12378 \
+  -e ETCD_KEY_FILE=/ucp-node-certs/key.pem \
+  -e ETCD_CA_CERT_FILE=/ucp-node-certs/ca.pem \
+  -e ETCD_CERT_FILE=/ucp-node-certs/cert.pem \
+  -v /var/run/calico:/var/run/calico \
+  -v ucp-node-certs:/ucp-node-certs:ro \
+  {{ page.ucp_org }}/ucp-dsinfo:${UCP_VERSION} \
+  calicoctl node status
 ```
 
 You should see something like:

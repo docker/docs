@@ -1,5 +1,5 @@
 ---
-title: Upgrade to UCP 3.0
+title: Upgrade to UCP 3.1
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
 ---
@@ -23,12 +23,15 @@ Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
 Ensure that your cluster nodes meet the minimum requirements for memory and
-disk space. In particular, manager nodes must have at least 4GB of memory.
+disk space. In particular, manager nodes must have at least 8GB of memory.
 Learn about [UCP system requirements](system-requirements.md).
 
 Ensure that your cluster nodes meet the minimum requirements for port openings.
 [Ports used](system-requirements.md/#ports-used) are documented in the UCP system requirements. 
 
+> **Note**: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
+> Azure then please ensure all of the Azure [prerequisites](install-on-azure.md/#azure-prerequisites) 
+> are met.  
 
 ## Back up your cluster
 
@@ -53,17 +56,17 @@ to install the Docker Enterprise Edition.
 Starting with the manager nodes, and then worker nodes:
 
 1. Log into the node using ssh.
-2. Upgrade the Docker Engine to version 17.06.2-ee-8 or higher. See [Upgrade Docker EE](https://docs.docker.com/ee/upgrade/).
+2. Upgrade the Docker Engine to version 18.09.0 or higher. See [Upgrade Docker EE](https://docs.docker.com/ee/upgrade/).
 3. Make sure the node is healthy.
 
-    In your browser, navigate to the **Nodes** page in the UCP web UI,
+    In your browser, navigate to **Nodes** in the UCP web interface,
     and check that the node is healthy and is part of the cluster.
 
 ## Upgrade UCP
 
-You can upgrade UCP from the web UI or the CLI.
+You can upgrade UCP from the web or the command line interface.
 
-### Use the UI to perform an upgrade
+### Use the web interface to perform an upgrade
 
 When an upgrade is available for a UCP installation, a banner appears.
 
@@ -74,17 +77,17 @@ It can be found under the **Upgrade** tab of the **Admin Settings** section.
 
 ![](../../images/upgrade-ucp-2.png){: .with-border}
 
-In the **Available Versions** dropdown, select **3.0.0** and click
+In the **Available Versions** dropdown, select the version you want to update to and click
 **Upgrade UCP**.
 
-During the upgrade, the UI will be unavailable, and you should wait
+During the upgrade, the web interface will be unavailable, and you should wait
 until completion before continuing to interact with it. When the upgrade
-completes, you'll see a notification that a newer version of the UI
-is available and a browser refresh is required to see the latest UI.
+completes, you'll see a notification that a newer version of the web interface
+is available and a browser refresh is required to see it.
 
 ### Use the CLI to perform an upgrade
 
-To upgrade from the CLI, log into a UCP manager node using ssh, and run:
+To upgrade from the CLI, log into a UCP manager node using SSH, and run:
 
 ```
 # Get the latest version of UCP
@@ -97,11 +100,22 @@ docker container run --rm -it \
   upgrade --interactive
 ```
 
-This runs the upgrade command in interactive mode, so that you are prompted
-for any necessary configuration values.
+This runs the upgrade command in interactive mode, which will prompt you
+for required configuration values.
 
-Once the upgrade finishes, navigate to the UCP web UI and make sure that
+Once the upgrade finishes, navigate to the UCP web interface and make sure that
 all the nodes managed by UCP are healthy.
+
+## Recommended upgrade paths
+
+From UCP 3.0: UCP 3.0 -> UCP 3.1
+From UCP 2.2: UCP 2.2 -> UCP 3.0
+From UCP 2.1: UCP 2.1 -> UCP 2.2
+
+If you’re running a UCP version earlier than 2.1, first upgrade to the latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade path to UCP 2.2:
+
+From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
+From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
 
 ## Where to go next
 

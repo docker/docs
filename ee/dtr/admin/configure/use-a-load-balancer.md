@@ -30,6 +30,12 @@ replicas.
 DTR does not provide a load balancing service. You can use an on-premises
 or cloud-based load balancer to balance requests across multiple DTR replicas.
 
+> Additional load balancer requirements for UCP
+>
+> If you are also using UCP, there are [additional requirements](https://docs.docker.com/ee/ucp/admin/configure/join-nodes/use-a-load-balancer/#load-balancing-ucp-and-dtr) if you plan to load balance both UCP and DTR using the same load balancer. 
+>
+>{: .important}
+
 You can use the unauthenticated `/_ping` endpoint on each DTR replica,
 to check if the replica is healthy and if it should remain in the load balancing
 pool or not.

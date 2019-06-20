@@ -9,7 +9,7 @@ A service account represents an identity for processes that run in a pod.
 When a process is authenticated through a service account, it can contact the
 API server and access cluster resources. If a pod doesn't have an assigned
 service account, it gets the `default` service account.
-Learn about [managing service accounts](https://v1-8.docs.kubernetes.io/docs/admin/service-accounts-admin/).
+Learn about [managing service accounts](https://v1-11.docs.kubernetes.io/docs/admin/service-accounts-admin/).
 
 In Docker EE, you give a service account access to cluster resources by
 creating a grant, the same way that you would give access to a user or a team.

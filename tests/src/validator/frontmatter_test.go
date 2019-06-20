@@ -65,7 +65,7 @@ func TestFrontMatterKeywords(t *testing.T) {
 	})
 }
 
-// testFrontMatterKeywords tests if if keywords are present and correctly
+// testFrontMatterKeywords tests if keywords are present and correctly
 // formatted in given markdown file bytes
 func testFrontMatterKeywords(mdBytes []byte) error {
 	fm, _, err := frontparser.ParseFrontmatterAndContent(mdBytes)

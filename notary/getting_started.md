@@ -35,7 +35,7 @@ enable Notary to run in a multi-tenant fashion, you must use this format
 when interacting with Docker Hub through the Notary client. When specifying
 Docker image names for the Notary client, the GUN format is:
 
-- For official images (identifiable by the "Official Repository" moniker), the
+- For official images (identifiable by the "Official Image" moniker), the
   image name as displayed on Docker Hub, prefixed with `docker.io/library/`. For
   example, if you would normally type `docker pull ubuntu` you must enter `notary
   {cmd} docker.io/library/ubuntu`.

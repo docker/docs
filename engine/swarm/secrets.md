@@ -274,7 +274,7 @@ real-world example, continue to
 
 This is a very simple example which shows how to use secrets with a Microsoft
 IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
+Desktop for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
 webpage in a secret.
 
 This example assumes that you have PowerShell installed.

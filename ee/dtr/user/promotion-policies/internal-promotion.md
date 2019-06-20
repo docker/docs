@@ -11,7 +11,7 @@ redirect_from:
 Docker Trusted Registry allows you to create image promotion pipelines based on
 policies.
 
-In this example we'll create an image promotion pipeline such that:
+In this example we will create an image promotion pipeline such that:
 
 1. Developers iterate and push their builds to the `dev/website` repository.
 2. When the team creates a stable build, they make sure their image is tagged
@@ -23,31 +23,35 @@ With this promotion policy, the development team doesn't need access to the
 QA repositories, and the QA team doesn't need access to the development
 repositories.
 
-![promotion example](../../images/internal-promotion-1.svg)
+![promotion example](../../images/internal-promotion-1.png)
 
 ## Configure your repository
 
 Once you've [created the repository](../manage-images/index.md), navigate to
-the **DTR web UI**, go to the **repository details** page, and choose
-**Promotions**.
+the repository page on the DTR web interface, and select the
+**Promotions** tab.
+
+> Only administrators can globally create and edit promotion policies. By default 
+> users can only create and edit promotion policies on repositories within their 
+> user namespace. For more information on user permissions, see 
+> [Authentication and Authorization](/ee/dtr/admin/manage-users/).
 
 ![repository policies](../../images/internal-promotion-2.png){: .with-border}
 
-Click **New promotion policy**, and define the criteria that an image needs
-to meet to be promoted.
+Click **New promotion policy**, and define the image promotion criteria.
 
-DTR allows defining the following criteria:
+DTR allows you to set your promotion policy based on the following image attributes:
 
-| Name            | Description                                        |
-|:----------------|:---------------------------------------------------|
-| Tag name        | If the tag name contains                           |
-| Component name  | If the image has a given component                 |
-| Vulnerabilities | If the image has vulnerabilities                   |
-| License         | If the image uses an intellectual property license |
+| Name            | Description                                        | Example           |
+|:----------------|:---------------------------------------------------| :----------------|
+| Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Promote to Target if Tag name ends in `stable`|
+| Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Promote to Target if Component name starts with `b` |
+| Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number | Promote to Target if Critical vulnerabilities = `3` |
+| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | Promote to Target if License name = `docker` | 
 
 Now you need to choose what happens to an image that meets all the criteria.
 
-Select the **organization** and **repository** where the image is going to be
+Select the target **organization** or **namespace** and **repository** where the image is going to be
 pushed. You can choose to keep the image tag, or transform the tag into
 something more meaningful in the destination repository, by using a tag template.
 
@@ -59,7 +63,12 @@ timestamp of when the image was promoted.
 ![repository with policies](../../images/internal-promotion-3.png){: .with-border}
 
 Everything is set up! Once the development team pushes an image that complies
-with the policy, it automatically gets promoted.
+with the policy, it automatically gets promoted. To confirm, select the **Promotions** tab on the `dev/website` repository.
+
+![tag promoted](../../images/internal-promotion-5.png){: .with-border}
+
+
+You can also review the newly pushed tag in the target repository by navigating to `qa/website` and selecting the **Tags** tab.
 
 ![tag promoted](../../images/internal-promotion-4.png){: .with-border}
 

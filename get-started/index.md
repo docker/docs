@@ -82,7 +82,7 @@ Containerization is increasingly popular because containers are:
 - Scalable: You can increase and automatically distribute container replicas.
 - Stackable: You can stack services vertically and on-the-fly.
 
-![Containers are portable](images/laurel-docker-containers.png){:width="300px"}
+![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
 
 ### Images and containers
 
@@ -105,22 +105,22 @@ By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
 system with _virtual_ access to host resources through a hypervisor. In general,
 VMs provide an environment with more resources than most applications need.
 
-![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png){:width="300px"} | ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png){:width="300px"}
+![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
 
 ## Prepare your Docker environment
 
-Install a [maintained version](https://docs.docker.com/engine/installation/#updates-and-patches){: target="_blank" class="_"}
+Install a [maintained version](/engine/installation/#updates-and-patches){: target="_blank" class="_"}
 of Docker Community Edition (CE) or Enterprise Edition (EE) on a
-[supported platform](https://docs.docker.com/engine/installation/#supported-platforms){: target="_blank" class="_"}.
+[supported platform](/ee/supported-platforms/){: target="_blank" class="_"}.
 
 > For full Kubernetes Integration
 >
-> - [Kubernetes on Docker for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+> - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
 is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
 [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
-> - [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+> - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only. 
+[18.06.0 CE (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} and higher as well as edge channels.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
@@ -135,7 +135,7 @@ is available in
     Docker version 17.12.0-ce, build c97c6d6
     ```
 
-2.  Run `docker info` or (`docker version` without `--`) to view even more details about your docker installation:
+2.  Run `docker info` (or `docker version` without `--`) to view even more details about your Docker installation:
 
     ```shell
     docker info
@@ -150,7 +150,7 @@ is available in
     ...
     ```
 
-> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
+> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
 
 ### Test Docker installation
 
@@ -213,7 +213,7 @@ docker container ls -aq
 
 ## Conclusion of part one
 
-Containerization makes [CI/CD](https://www.docker.com/use-cases/cicd){: target="_blank" class="_"} seamless. For example:
+Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
 
 - applications have no system dependencies
 - updates can be pushed to any part of a distributed application

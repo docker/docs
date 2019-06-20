@@ -14,10 +14,10 @@ upgrade your installation to the latest release.
 
 (18 Jan 2017)
 
-Note: UCP 1.1.6 supports Docker Engine 1.12 but does not use the built-in
-orchestration capabilities provided by the Docker Engine with swarm mode enabled.
-When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
-cluster using the older Docker Swarm v1.2.
+> **Note**: UCP 1.1.6 supports Docker Engine 1.12 but does not use the built-in
+> orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+> When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+> cluster using the older Docker Swarm v1.2.
 
 **Security Update**
 
@@ -41,10 +41,10 @@ the [permissions levels section](user-management/permission-levels.md) for more 
 
 (8 Dec 2016)
 
-Note: UCP 1.1.5 supports Docker Engine 1.12 but does not use the built-in
-orchestration capabilities provided by the Docker Engine with swarm mode enabled.
-When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
-cluster using the older Docker Swarm v1.2.
+> **Note**: UCP 1.1.5 supports Docker Engine 1.12 but does not use the built-in
+> orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+> When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+> cluster using the older Docker Swarm v1.2.
 
 **Bug fixes**
 
@@ -61,10 +61,10 @@ the authentication process.
 
 (29 Sept 2016)
 
-Note: UCP 1.1.4 supports Docker Engine 1.12 but does not use the built-in
-orchestration capabilities provided by the Docker Engine with swarm mode enabled.
-When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
-cluster using Docker Swarm v1.2.5.
+> **Note**: UCP 1.1.4 supports Docker Engine 1.12 but does not use the built-in
+> orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+> When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+> cluster using Docker Swarm v1.2.5.
 
 **Bug fixes**
 
@@ -76,10 +76,10 @@ organization accounts
 
 ## Version 1.1.3
 
-Note: UCP 1.1.3 supports Docker Engine 1.12 but does not use the built-in
-orchestration capabilities provided by the Docker Engine with swarm mode enabled.
-When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
-cluster using Docker Swarm v1.2.5.
+> **Note**: UCP 1.1.3 supports Docker Engine 1.12 but does not use the built-in
+> orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+> When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+> cluster using Docker Swarm v1.2.5.
 
 **Security Update**
 
@@ -125,9 +125,9 @@ enabled, and is not compatible with swarm-mode based APIs, e.g. `docker service`
 
 ## Version 1.1.2
 
-Note: UCP 1.1.2 supports Docker Engine 1.12 but doesn't use the new clustering
-capabilities provided by the Docker swarm mode. When installing this UCP version
-on a Docker Engine 1.12, UCP creates a "classic" Docker Swarm 1.2.3 cluster.
+> **Note**: UCP 1.1.2 supports Docker Engine 1.12 but doesn't use the new clustering
+> capabilities provided by the Docker swarm mode. When installing this UCP version
+> on a Docker Engine 1.12, UCP creates a "classic" Docker Swarm 1.2.3 cluster.
 
 **Features**
 

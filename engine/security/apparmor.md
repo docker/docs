@@ -55,12 +55,8 @@ $ docker run --rm -it --security-opt apparmor=your_profile hello-world
 To unload a profile from AppArmor:
 
 ```bash
-# stop apparmor
-$ /etc/init.d/apparmor stop
 # unload the profile
 $ apparmor_parser -R /path/to/profile
-# start apparmor
-$ /etc/init.d/apparmor start
 ```
 
 ### Resources for writing profiles

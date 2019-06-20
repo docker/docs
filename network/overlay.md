@@ -230,7 +230,7 @@ preferred because it is somewhat self-documenting.
 </tr>
 <tr>
 <td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> or <br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
-<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routine mesh.</td>
+<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routing mesh.</td>
 </tr>
 </table>
 
@@ -241,9 +241,9 @@ When you connect to a published port on any swarm node (whether it is running a
 given service or not), you are redirected to a worker which is running that
 service, transparently. Effectively, Docker acts as a load balancer for your
 swarm services. Services using the routing mesh are running in _virtual IP (VIP)
-mode_. Even a service running on each node (by means of the `--global` flag)
-uses the routing mesh. When using the routing mesh, there is no guarantee about
-which Docker node services client requests.
+mode_. Even a service running on each node (by means of the `--mode global`
+flag) uses the routing mesh. When using the routing mesh, there is no guarantee
+about which Docker node services client requests.
 
 To bypass the routing mesh, you can start a service using _DNS Round Robin
 (DNSRR) mode_, by setting the `--endpoint-mode` flag to `dnsrr`. You must run
@@ -265,7 +265,7 @@ this for each node joining the swarm.
 
 ### Attach a standalone container to an overlay network
 
-The `ingress` network is create without the `--attachable` flag, which means
+The `ingress` network is created without the `--attachable` flag, which means
 that only swarm services can use it, and not standalone containers. You can
 connect standalone containers to user-defined overlay networks which are created
 with the `--attachable` flag. This gives standalone containers running on

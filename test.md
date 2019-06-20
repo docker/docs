@@ -10,7 +10,7 @@ Welcome to the Docker documentation test page!
 This is a demo of components, tags, styles, tools, and strategies we use for the
 docs. We explain the code behind the published page and demo the effects. So, if
 you want to see, for example, how admonitions and notes are coded in markdown,
-read the section on [Admonitions (notes)](/test/#admonitions-notes) on the web
+read the section on [Admonitions (notes)](/test.md#admonitions-notes) on the web
 published page and study the pre-processed `test.md` to see how they are
 implemented. The Docker documentation team uses this page as "note to self"
 reminders. Since we invite docs suggestions and contributions from the
@@ -126,7 +126,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 #### Using a custom target ID
 This topic has a custom target ID above its heading that can be used to link to
-it, in addtion to, or instead of, the default concatenated heading style. The
+it, in addition to, or instead of, the default concatenated heading style. The
 format of this ID is `{: id="custom-target-id"}`.
 
 You can use custom targets to link to headings or even paragraphs. You link to
@@ -162,7 +162,7 @@ might be interesting. You can use them with Markdown or HTML images.
 
 You can add a link to a YouTube video like this:
 
-[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+[Docker 101: Introduction to Docker](https://www.youtube.com/watch?v=V9IJj4MzZBc "Docker 101: Introduction to Docker"){:target="_blank" class="_"}
 
 To make the `.png` shown above, first take a screen snap of the YouTube video
 you want to use, then use a graphics app to overlay a play button onto the
@@ -268,14 +268,14 @@ example, [swarm](glossary.md?term=swarm)).
 ## Site-wide variables
 
 Look in the top-level `_config.yml` for site-wide variables, such as
-`site.docker_ce_stable_version`. To use them, use Liquid like:
+`site.docker_ce_version`. To use them, use Liquid like:
 
 ```liquid
-{% raw %}{{ site.docker_ce_stable_version }}{% endraw %}
+{% raw %}{{ site.docker_ce_version }}{% endraw %}
 ```
 
-The current value of `site.docker_ce_stable_version` is
-{{ site.docker_ce_stable_version }}.
+The current value of `site.docker_ce_version` is
+{{ site.docker_ce_version }}.
 
 ## Mixing Markdown and HTML
 
@@ -479,7 +479,7 @@ To try something more ambitious, you can run an Ubuntu container with:
  $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
- https://cloud.docker.com/
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
@@ -586,66 +586,78 @@ Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
 support these broad categories of admonitions:
 
-- Notes in the old style (no Liquid tag required)
-- Notes with a prefixed icon (no Liquid tag required)
-- Important and Warning admonitions, which take `{: .important}` and `{: .warning}` tags, respectively
+- Notes (no Liquid tag required) (deprecated)
+- Important, which use the `{: .important}` tag
+- Warning , which use the `{: .warning}` tag
 
 The new styles include prepended icons, color sidebars, and bold color titles
 for multi-paragraph notes, but no auto-prepended text. These are defined in a
 way that does not impact admonitions formatted with the original styles, so
 notes in your published documents are not adversely affected.
 
-Examples of both styles are shown below.
+Examples are shown in the following sections.
 
-### Examples (original styles, prefix words)
+### Note (Deprecated)
 
-Admonitions with prefixed icons use the following class tags, as shown in the examples.
+Notes are deprecated and should not longer be used. Use important or warning instead.
 
-* **Note:** No class tag is needed for standard notes.
-* **Important:** Use the `important` class.
-* **Warning:** Use the `warning` class.
+A standard note is formatted like this:
 
+```
+> Handling transient errors
+>
+> Note the way the `get_hit_count` function is written. This basic retry
+> loop lets us attempt our request multiple times if the redis service is
+> not available. This is useful at startup while the application comes
+> online, but also makes our application more resilient if the Redis
+> service needs to be restarted anytime during the app's lifetime. In a
+> cluster, this also helps handling momentary connection drops between
+> nodes.
+```
 
-> **Note**: This is a note using the old note style
+It renders like this with a colored sidebar and icon:
 
+![note admonition example](/images/note-admonition-example.png)
+
+Notes were previously formatted like this:
+
+```
+> **Note**: This is a note using the old note style.
+```
+
+These will still render as a note with a colored sidebar to the left but no icon will be added.
+
+### Important
+
+Add the `important` class to your blockquotes if you want to tell users to be careful about something:
+
+```
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
-
-> It's not safe out there, take this Moby with you
->
-> Add the `important` class to your blockquotes if you want to tell users
- to be careful about something.
 {: .important}
+```
 
+It renders like this  with a colored sidebar and icon:
+
+![important admonition example](/images/important-admonition-example.png)
+
+### Warning
+
+Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
+
+```
 > Ouch, don't do that!
 >
-> Use the `warning` class to let people know this is dangerous or they
- should pay close attention to this part of the road.
+> Sticking your finger in an electrical outlet can result in an electric shock.
 >
-> You can also add more paragraphs here if your explanation is
- super complex.
+> You can also add more paragraphs here if your explanation is super complex.
 {: .warning}
+```
 
->**This is a crazy note**
->
-> This note has tons of content in it:
->
-> - List item 1
-> - List item 2
->
-> |Table column 1  | Table column 2 |
-> |----------------|----------------|
-> | Row 1 column 1 | Row 2 column 2 |
-> | Row 2 column 1 | Row 2 column 2 |
->
-> And another sentence to top it all off.
+It will render like this  with a colored sidebar and icon:
 
-> **Important**: Single paragraph important note with the prefix word "important" manually typed in as bold at the beginning.
-{: .important}
-
-> **Warning**: Single paragraph warning with the prefix word "warning" manually typed in as bold at the beginning.
-{: .warning}
+![warning admonition example](/images/warning-admonition-example.png)
 
 ## Code blocks
 
@@ -655,7 +667,7 @@ we use often.
 
 ### Raw, no highlighting
 
-The raw markup is needed to keep Liquid from interperting the things with double
+The raw markup is needed to keep Liquid from interpreting the things with double
 braces as templating language.
 
 {% raw %}
@@ -695,6 +707,15 @@ incoming := map[string]interface{}{
         "tyui",
     },
 }
+```
+
+### PowerShell
+
+```powershell
+Install-Module DockerMsftProvider -Force
+Install-Package Docker -ProviderName DockerMsftProvider -Force
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
 ```
 
 ### Python
@@ -740,7 +761,7 @@ syntax for comments in JSON!
 ### Markdown
 
 ```md
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=<repo_url>)
+# Hello
 ```
 
 ### ini

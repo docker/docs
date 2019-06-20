@@ -9,7 +9,7 @@ Upgrading Universal Control Plane is the same, whether your hosts have access to
 the internet or not.
 
 The only difference when upgrading on an offline host,
-is that instead of pulling the UCP images from Docker Store, you use a
+is that instead of pulling the UCP images from Docker Hub, you use a
 computer that is connected to the internet to download a single package with
 all the images. Then you copy that package to the host where you’ll upgrade UCP.
 
