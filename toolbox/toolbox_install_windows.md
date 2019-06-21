@@ -97,13 +97,15 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
+> **Note**: Docker are no longer maintaining the download.docker.com url for
+> Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
+> displayed during the installation process. 
 
-> **Note**: To continue with the latest version of Docker Toolbox, see https://github.com/docker/toolbox/releases for information about downloading the latest version and related components. If you choose to download from this location, an unsigned warning (verified publisher dialog) is displayed. 
+1. To download the latest version of Docker Toolbox head to [Toolbox
+   Releases](https://github.com/docker/toolbox/releases) and download the
+   latest `.exe` file.
 
-2. Click the installer link to download.
-
-3. Install Docker Toolbox by double-clicking the installer.
+2. Install Docker Toolbox by double-clicking the installer.
 
     The installer launches the "Setup - Docker Toolbox" dialog.
 
@@ -113,17 +115,17 @@ installer.
 
       ![Release page](images/installer_open.png)
 
-4. Press **Next** to accept all the defaults and then **Install**.
+3. Press **Next** to accept all the defaults and then **Install**.
 
 	  Accept all the installer defaults. The installer takes a few minutes to install all the components:
 
-5.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
+4.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
 
     When it completes, the installer reports it was successful:
 
     ![Success](images/finish.png)
 
-6. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
+5. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
 
 
 ## Step 3: Verify your installation

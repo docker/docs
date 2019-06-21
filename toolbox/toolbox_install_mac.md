@@ -9,10 +9,6 @@ Docker Toolbox provides a way to use Docker on older Macs
 that do not meet
 minimal system requirements for [Docker Desktop for Mac](/docker-for-mac/index.md).
 
-If you have not done so already, download the installer here:
-
-[Get Docker Toolbox for Mac](https://download.docker.com/mac/stable/DockerToolbox.pkg){: class="button outline-btn" }
-
 ## What you get and how it works
 
 Docker Toolbox includes the following Docker tools:
@@ -60,14 +56,22 @@ software. To find out what version of the OS you have:
 
 ## Step 2: Install Docker Toolbox
 
-1. Install Docker Toolbox by double-clicking the package or by right-clicking
+> **Note**: Docker are no longer maintaining the download.docker.com url for
+> Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
+> displayed during the installation process. 
+
+1. To download the latest version of Docker Toolbox head to [Toolbox
+   Releases](https://github.com/docker/toolbox/releases) and download the
+   latest `.pkg` file.
+
+2. Install Docker Toolbox by double-clicking the package or by right-clicking
 and choosing "Open" from the pop-up menu.
 
     The installer launches an introductory dialog, followed by an overview of what's installed.
 
     ![Install Docker Toolbox](images/mac-welcome-page.png)
 
-2. Press **Continue** to install the toolbox.
+3. Press **Continue** to install the toolbox.
 
     The installer presents you with options to customize the standard
     installation.
@@ -82,13 +86,13 @@ and choosing "Open" from the pop-up menu.
 
     For now, don't change any of the defaults.
 
-3. Press **Install** to perform the standard installation.
+4. Press **Install** to perform the standard installation.
 
      The system prompts you for your password.
 
      ![Password prompt](images/mac-password-prompt.png)
 
-4. Provide your password to continue with the installation.
+5. Provide your password to continue with the installation.
 
      When it completes, the installer provides you with some
      shortcuts. You can ignore this for now and click **Continue**.

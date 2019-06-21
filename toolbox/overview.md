@@ -30,26 +30,7 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 
 ## Ready to get started?
 
-1. Get the latest Toolbox installer for your platform:
-
-    <table style="width:100%">
-      <tr>
-        <th style="font-size: medium; font-family: arial;  text-align: center">
-        Toolbox for Mac</th>
-        <th style="font-size: medium; font-family: arial; text-align: center">
-        Toolbox for Windows</th>
-      </tr>
-      <tr valign="top">
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
-        </td>
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
-        </td>
-      </tr>
-    </table>
-
-2. Choose the install instructions for your platform, and follow the steps:
+Choose the install instructions for your platform, and follow the steps:
 
     * [Install Docker Toolbox on macOS](toolbox_install_mac.md)
 
