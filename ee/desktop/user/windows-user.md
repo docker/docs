@@ -251,6 +251,8 @@ The Linux VM restarts after changing the settings on the **Advanced** tab. This 
 
 - **Memory** - Change the amount of memory the Docker Desktop Enterprise Linux VM uses.
 
+- **Swap** - Configure the swap file size.
+
 #### Network
 
 You can configure Docker Desktop Enterprise networking to work on a virtual private network (VPN).
@@ -314,8 +316,7 @@ The **Basic** mode lets you configure the more common daemon options with intera
 Docker Desktop Enterprise has the experimental version
 of Docker Engine enabled, described in the [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
 
-> **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas.
+> {% include experimental.md %}
 
 Run `docker version` to see if you are in Experimental mode. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
@@ -438,7 +439,7 @@ To switch to a different version pack, simply click on the version pack you woul
 
 ![Version Selection](../images/win-ver-select.PNG)
 
-### Diagnose and Feedback
+### Troubleshoot
 
 The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/ee/desktop/troubleshoot/windows-issues).
 
