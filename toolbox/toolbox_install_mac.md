@@ -60,7 +60,7 @@ software. To find out what version of the OS you have:
 > Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
 > displayed during the installation process. 
 
-1. To download the latest version of Docker Toolbox head to [Toolbox
+1. To download the latest version of Docker Toolbox, go to [Toolbox
    Releases](https://github.com/docker/toolbox/releases) and download the
    latest `.pkg` file.
 
