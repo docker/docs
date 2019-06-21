@@ -256,7 +256,7 @@ Hit `CTRL+C` in your terminal to quit.
  >
  > On Windows systems, `CTRL+C` does not stop the container. So, first
  type `CTRL+C` to get the prompt back (or open another shell), then type
- `docker container ls` to list the running containers, followed by
+ `docker container ps` to list the running containers, followed by
  `docker container stop <Container NAME or ID>` to stop the
  container. Otherwise, you get an error response from the daemon
  when you try to re-run the container in the next step.
