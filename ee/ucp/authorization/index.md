@@ -99,7 +99,7 @@ resources.
 
 ## Secure Kubernetes defaults
 
-For cluster security, only UCP admin users and service accounts which are
+For cluster security, only UCP admin users and service accounts that are
 granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
 ClusterRoleBinding can deploy pods with privileged options. This prevents a
 platform user from being able to bypass the Universal Control Plane Security
