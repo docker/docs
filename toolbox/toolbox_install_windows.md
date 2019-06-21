@@ -97,11 +97,11 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-> **Note**: Docker are no longer maintaining the download.docker.com url for
+> **Note**: Docker no longer maintains the download.docker.com url for
 > Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
 > displayed during the installation process. 
 
-1. To download the latest version of Docker Toolbox head to [Toolbox
+1. To download the latest version of Docker Toolbox, go to [Toolbox
    Releases](https://github.com/docker/toolbox/releases) and download the
    latest `.exe` file.
 
