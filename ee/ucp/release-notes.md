@@ -23,42 +23,7 @@ upgrade your installation to the latest release.
 **Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/). 
 
 # Version 3.2
-
-### Known issues
-
-- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
-    ```
-    time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
-    ```
-    This is due to an updated selinux context.
-    Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
-    Until `container-selinux-2.99` is available for CentOS7, current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
-    ```
-    $ sudo yum downgrade container-selinux-2.74-1.el7
-    ```
-- Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
-   to a `cluster-admin` `ClusterRole`, as shown in the following example:
-       ```
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: ClusterRoleBinding
-       metadata:
-         labels:
-           subjectName: kube-system-persistent-volume-binder
-         name: kube-system-persistent-volume-binder:cluster-admin
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: ClusterRole
-         name: cluster-admin
-       subjects:
-       - kind: ServiceAccount
-         name: persistent-volume-binder
-         namespace: kube-system
-       ```
-    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
-
-# Version 3.2.0-beta
-(2019-5-16)
+(2019-7-10)
 
 ## New features
 
@@ -214,6 +179,39 @@ https://github.com/kubernetes/kubernetes/pull/67432
     - Known issues
         - Backwards-incompatible changes in the Kube API that might affect user workloads will require warnings/documentation in the UCP release notes for Amberjack (list of deprecated features and APIs TBD).
         - Does anything need to be noted for Kube 1.12 (deprecations, etc. that is not covered for 1.13?)
+
+### Known issues
+
+- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
+    ```
+    time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
+    ```
+    This is due to an updated selinux context.
+    Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
+    Until `container-selinux-2.99` is available for CentOS7, current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
+    ```
+    $ sudo yum downgrade container-selinux-2.74-1.el7
+    ```
+- Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
+   to a `cluster-admin` `ClusterRole`, as shown in the following example:
+       ```
+       apiVersion: rbac.authorization.k8s.io/v1
+       kind: ClusterRoleBinding
+       metadata:
+         labels:
+           subjectName: kube-system-persistent-volume-binder
+         name: kube-system-persistent-volume-binder:cluster-admin
+       roleRef:
+         apiGroup: rbac.authorization.k8s.io
+         kind: ClusterRole
+         name: cluster-admin
+       subjects:
+       - kind: ServiceAccount
+         name: persistent-volume-binder
+         namespace: kube-system
+       ```
+    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
 
 # Version 3.1
 
