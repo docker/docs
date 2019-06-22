@@ -90,6 +90,11 @@ The following features are deprecated in UCP 3.2:
     ```
     docker node update --label-add com.docker.ucpagent-pause=true <NODE>
     ```
+- SLES12 is deprecated from Docker Enterprise 3.0, and EOL of SLES12 as an operating system will occur 
+in Docker Enterprise 3.1. Upgrade to SLES15 for continued support on Docker Enterprise.
+- Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported 
+on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
+Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
  
 ## Browser support 
 In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
