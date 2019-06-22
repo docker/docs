@@ -196,6 +196,11 @@ pulling v1 manifests is still possible. [moby/moby#37874](https://github.com/mob
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
 * Deprecated AuFS storage driver, and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
 * Removed support for 17.09.
+* SLES12 is deprecated from Docker Enterprise 3.0, and EOL of SLES12 as an operating system will occur 
+in Docker Enterprise 3.1. Upgrade to SLES15 for continued support on Docker Enterprise.
+* Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported 
+on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
+Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
 
 For more information on deprecated flags and APIs, refer to
 https://docs.docker.com/engine/deprecated/ for target removal dates.
