@@ -2,6 +2,8 @@
 title: Install UCP on Azure
 description: Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.
 keywords: Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes
+redirect_from:
+- /ee/ucp/admin/install/install-on-azure/
 ---
 
 Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking 

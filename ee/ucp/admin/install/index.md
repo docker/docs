@@ -14,6 +14,14 @@ of the [requirements UCP needs to run](system-requirements.md).
 Also, you need to ensure that all nodes, physical and virtual, are running
 the same version of Docker Enterprise.
 
+> Cloud Providers
+>
+> If you are installing on a public cloud platform there is cloud specific UCP
+> installation documentation. For [Microsoft
+> Azure](./cloudproviders/install-on-azure/) this is **mandatory**, for
+> [AWS](./cloudproviders/install-on-aws/) this is optional. 
+{: important}
+
 ## Step 2: Install Docker Enterprise on all nodes
 
 UCP is a containerized application that requires the commercially supported
