@@ -229,7 +229,33 @@ intervals, for example, every <x> minutes.
     - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
     - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
     - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
- 
+
+## 18.09.7
+2019-06-25
+
+### Builder
+
+* Fixed panic when building dockerfiles containing only comments. 
+[moby/moby#38487](https://github.com/moby/moby/pull/38487)
+* Builder: added workaround for gcr auth issue. [moby/moby#38246](https://github.com/moby/moby/pull/38246)
+* Builder-next: fixed gcr workaround token cache. [moby/moby#39183](https://github.com/moby/moby/pull/39183)
+
+### Runtime
+
+* Performance optimized in aufs and layer store for massively parallel container creation/removal. 
+[moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Updated to containerd 1.2.6. [moby/moby#39016](https://github.com/moby/moby/pull/39016)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with 
+directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+* Windows: fixed support for `docker service create --limit-cpu`. 
+[moby/moby#39190](https://github.com/moby/moby/pull/39190)
+* Daemon: fixed mirrors validation. [moby/moby#38991](https://github.com/moby/moby/pull/38991)
+* Stopped sorting uid and gid ranges in id maps. [moby/moby#39288](https://github.com/moby/moby/pull/39288)
+
+### Logging
+
+* Large log lines now allowed for logger plugins. [moby/moby#39038](https://github.com/moby/moby/pull/39038)
+
 ## 18.09.6 
 2019-05-06
 
