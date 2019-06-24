@@ -99,11 +99,13 @@ resources.
 
 ## Secure Kubernetes defaults
 
-For cluster security, only users and service accounts granted the `cluster-admin` ClusterRole for 
-all Kubernetes namespaces via a ClusterRoleBinding can deploy pods with privileged options. This prevents a
-platform user from being able to bypass the Universal Control Plane Security Model.
+For cluster security, only UCP admin users and service accounts that are
+granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
+ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user from being able to bypass the Universal Control Plane Security
+Model. These privileged options include:
 
-These privileged options include: 
+Pods with any of the following defined in the Pod Specification:
 
   - `PodSpec.hostIPC` - Prevents a user from deploying a pod in the host's IPC
     Namespace.
@@ -120,6 +122,17 @@ These privileged options include:
     Container](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
   - `Volume.hostPath` - Prevents a user from mounting a path from the host into
     the container. This could be a file, a directory, or even the Docker Socket.
+
+Persistent Volumes using the following storage classes:
+
+  - `Local` - Prevents a user from creating a persistent volume with the
+    [Local Storage
+    Class](https://kubernetes.io/docs/concepts/storage/volumes/#local). The
+    Local storage class allows a user to mount directorys from the host into a
+    pod. This could be a file, a directory, or even the Docker Socket. 
+  
+  > Note: If an Admin has created a persistent volume with the local storage
+  > class, a non-admin could consume this via a persitent volume claim. 
 
 If a user without a cluster admin role tries to deploy a pod with any of these
 privileged options, an error similar to the following example is displayed:
