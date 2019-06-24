@@ -18,15 +18,15 @@ upgrade your installation to the latest release.
 * [Version 3.2](#version-32)
 * [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
-* [Version 2.2](#version-22) 
+* [Version 2.2](#version-22)
 
-**Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/). 
+**Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
 
 ### Known issues
 
-- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
+- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error:
     ```
     time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
     ```
@@ -37,7 +37,7 @@ upgrade your installation to the latest release.
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount
    to a `cluster-admin` `ClusterRole`, as shown in the following example:
        ```
        apiVersion: rbac.authorization.k8s.io/v1
@@ -55,7 +55,6 @@ upgrade your installation to the latest release.
          name: persistent-volume-binder
          namespace: kube-system
        ```
-    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
 
 # Version 3.2.0-beta
 (2019-5-16)
@@ -63,23 +62,23 @@ upgrade your installation to the latest release.
 ## New features
 
 ### Group Managed Service Accounts (gMSA)
-On Windows, you can create or update a service using --credential-spec with the config://<config-name> format. 
-This passes the gMSA credentials file directly to nodes before a container starts. 
+On Windows, you can create or update a service using --credential-spec with the config://<config-name> format.
+This passes the gMSA credentials file directly to nodes before a container starts.
 
 ### Open Security Controls Assessment Language (OSCAL)
 OSCAL API endpoints have been added in Engine and UCP. These endpoints are enabled by default.
 
 ### Container storage interface (CSI)
-Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins. 
-Note: As of May 2019, none of the 
+Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins.
+Note: As of May 2019, none of the
 (available CSI drivers)[https://kubernetes-csi.github.io/docs/drivers.html] are production quality and are considered pre-GA.
 
 ### Internet Small Computer System Interface (iSCSI)
-Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end 
+Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end
 users can request storage resources without needing underlying infrastructure knowledge.
 
 ### System for Cross-domain Identity Management (SCIM)
-SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing 
+SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing
 user status and group membership.
 
 ### Support for Pod Security Policies (PSPs) within Kubernetes
@@ -94,7 +93,7 @@ more information see
 
 - Backups no longer halt UCP containers.
 - Backup contents can now be redirected to a file instead of stdout/err.
-- You can now view information for all backups performed, including the date, status, and contents filenames. 
+- You can now view information for all backups performed, including the date, status, and contents filenames.
 Error log information can be accessed for troubleshooting.
 
 ### Upgrade
@@ -106,109 +105,109 @@ Error log information can be accessed for troubleshooting.
 ### Buildkit
 
 - You can now use a UCP client bundle with buildkit.
- 
+
 ## Deprecations
 The following features are deprecated in UCP 3.2:
 
 - Collections
-    - The ability to create a nested collection of more than 2 layers deep within the root /Swarm/collection is 
-    now deprecated and will not be included in future versions of the product. However, current nested collections 
+    - The ability to create a nested collection of more than 2 layers deep within the root /Swarm/collection is
+    now deprecated and will not be included in future versions of the product. However, current nested collections
     with more than 2 layers are still retained.
-    - Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster 
-    collection designated as /Swarm/. For example, if a production collection called /Swarm/production is created 
-    under the shared cluster collection /Swarm/, only one level of nesting should be created, for 
-    example, /Swarm/production/app/. See Nested collections for more details.    
+    - Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster
+    collection designated as /Swarm/. For example, if a production collection called /Swarm/production is created
+    under the shared cluster collection /Swarm/, only one level of nesting should be created, for
+    example, /Swarm/production/app/. See Nested collections for more details.
 - UCP `stop` and `restart`
-    - Additional upgrade functionality has been included which eliminates the need for these commands. 
+    - Additional upgrade functionality has been included which eliminates the need for these commands.
 - `ucp-agent-pause`
     - `ucp-agent-pause` is no longer supported. To pause UCP reconciliation on a specific node, for example, when repairing unhealthy `etcd` or `rethinkdb` replicas, you can use swarm node labels as shown in the following example:
     ```
     docker node update --label-add com.docker.ucpagent-pause=true <NODE>
     ```
- 
-## Browser support 
+
+## Browser support
 In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
 
 ## Kubernetes
 
 - Integrated Kubernetes Ingress
-    - You can now dynamiclly deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters, 
-    and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a 
+    - You can now dynamiclly deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters,
+    and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a
     centralized and controlled manner.
 
 - Updated Kubernetes to version 1.14.
 
     - Enhancements:
         - PodShareProcessNamespace
-       
-            - The PodShareProcessNamespace feature, available by default, configures PID namespace sharing within a pod. 
+
+            - The PodShareProcessNamespace feature, available by default, configures PID namespace sharing within a pod.
         See [Share Process Namespace between Containers in a Pod](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) for more information.
              - https://github.com/kubernetes/kubernetes/pull/66507
         - Volume Dynamic Provisioning
-    
+
             - Combined `VolumeScheduling` and `DynamicProvisioningScheduling`.
-            - Added allowedTopologies description in kubectl. 
-            - ACTION REQUIRED: The DynamicProvisioningScheduling alpha feature gate has been removed. 
+            - Added allowedTopologies description in kubectl.
+            - ACTION REQUIRED: The DynamicProvisioningScheduling alpha feature gate has been removed.
         The VolumeScheduling beta feature gate is still required for this feature)
 https://github.com/kubernetes/kubernetes/pull/67432
         - TokenRequest and TokenRequestProjection
-    
+
             - Enable these features by starting the API server with the following flags:
                 * --service-account-issuer
                 * --service-account-signing-key-file
                 * --service-account-api-audiences
             - https://github.com/kubernetes/kubernetes/pull/67349
-        - Removed `--cadvisor-port flag` from kubelet 
-    
-            - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed 
+        - Removed `--cadvisor-port flag` from kubelet
+
+            - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed
         in 1.12. If cAdvisor is needed, run it via a DaemonSet.
             - https://github.com/kubernetes/kubernetes/pull/65707
         - Support for Out-of-tree CSI Volume Plugins (stable) with API
-    
+
             - Allows volume plugins to be developed out-of-tree.
             - Not require building volume plugins (or their dependencies) into Kubernetes binaries.
             - Not requiring direct machine access to deploy new volume plugins (drivers).
             - https://github.com/kubernetes/enhancements/issues/178
         - Server-side Apply leveraged by the UCP GUI for the yaml create page
-    
+
             - Moved "apply" and declarative object management from kubectl to the apiserver. Added "field ownership".
             - https://github.com/kubernetes/enhancements/issues/555
         - The PodPriority admission plugin
-    
+
             - For `kube-apiserver`, the `Priority` admission plugin is now enabled by default when using `--enable-admission-plugins`. If using `--admission-control` to fully specify the set of admission plugins, the `Priority` admission plugin should be added if using the `PodPriority` feature, which is enabled by default in 1.11.
             - The priority admission plugin:
-                - Allows pod creation to include an explicit priority field if it matches the computed 
-            priority (allows export/import cases to continue to work on the same cluster, between 
-            clusters that match priorityClass values, and between clusters where priority is unused 
+                - Allows pod creation to include an explicit priority field if it matches the computed
+            priority (allows export/import cases to continue to work on the same cluster, between
+            clusters that match priorityClass values, and between clusters where priority is unused
             and all pods get priority:0)
-                - Preserves existing priority if a pod update does not include a priority value and the old 
-            pod did (allows POST, PUT, PUT, PUT workflows to continue to work, with the admission-set value 
+                - Preserves existing priority if a pod update does not include a priority value and the old
+            pod did (allows POST, PUT, PUT, PUT workflows to continue to work, with the admission-set value
             on create being preserved by the admission plugin on update)
                 - https://github.com/kubernetes/kubernetes/pull/65739
         - Volume Topology
-    
+
             - Made the scheduler aware of a Pod's volume's topology constraints, such as zone or node.
             - https://github.com/kubernetes/enhancements/issues/490, Docs pr here: kubernetes/website#10736
         - Admin RBAC role and edit RBAC roles
-            - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a 
+            - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a
         separate edit and view.
             - https://github.com/kubernetes/kubernetes/pull/66684
-        - API 
-            - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods 
+        - API
+            - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods
         metrics, as well as allow AverageValue targets on Objects, similar to External metrics.
             - https://github.com/kubernetes/kubernetes/pull/64097
     - Version updates
         - Client-go libraries bump
-            - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric 
-    characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or 
+            - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric
+    characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or
     other characters disallowed in HTTP headers.
-            - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. 
+            - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers.
     New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped.
             - https://github.com/kubernetes/kubernetes/pull/65799
         - audit.k8s.io API group bump
             - The audit.k8s.io API group has been bumped to v1.
             - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
-            - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` 
+            - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1`
     to `audit.k8s.io/v1`.
             - https://github.com/kubernetes/kubernetes/pull/65891
     - Known issues
@@ -217,7 +216,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
 
 # Version 3.1
 
-## 3.1.7 
+## 3.1.7
 (2019-05-06)
 
 ### Security
@@ -286,7 +285,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
 | Calico      | 3.5.3 |
 | Interlock (nginx)   | 1.14.0 |
 
-## 3.1.5 
+## 3.1.5
 2019-03-28
 
 ### Kubernetes
@@ -331,7 +330,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
 | Calico      | 3.5.2 |
 | Interlock (nginx)   | 1.14.0 |
 
-## 3.1.4 
+## 3.1.4
 
 2019-02-28
 
@@ -398,7 +397,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
  * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
  * Fixed an issue with manual creation of a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects requiring the ID of the user, organization, or team. (docker/orca#14935)
  * Fixed an issue in which Kube Rolebindings only worked on UCP User ID and not UCP username. (docker/orca#14935)
- 
+
 ### Known issue
  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
 
@@ -448,7 +447,7 @@ now configurable within the UCP web interface. (#15466)
 | Calico      | 3.2.3 |
 | Interlock (nginx)   | 1.14.0 |
 
-## 3.1.1 
+## 3.1.1
 
 (2018-12-04)
 
@@ -463,7 +462,7 @@ now configurable within the UCP web interface. (#15466)
 | Calico      | 3.2.3 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.1.0 
+## 3.1.0
 
 2018-11-08
 
@@ -561,7 +560,7 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
-## 3.0.11 
+## 3.0.11
 
 2019-05-06
 
@@ -607,7 +606,7 @@ The following features are deprecated in UCP 3.1.
   * Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)
   * Non-admin users can no longer create `PersistentVolumes` that mount host directories. (#15936)
   * Added support for the limit arg in `docker ps`. (#15812)
-  
+
 ### Known issue
   * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.
 
@@ -626,21 +625,21 @@ The following features are deprecated in UCP 3.1.
 
 ### Bug fixes
 * Core
-  * Significantly reduced database load in environments with a lot of concurrent 
+  * Significantly reduced database load in environments with a lot of concurrent
   and repeated API requests by the same user. (docker/escalation#911)
   * Added the ability to set custom HTTP response headers to be returned by the
    UCP Controller API Server. (docker/orca#10733)
   * UCP backend will now complain when a service is created/updated if the
-   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015) 
+   `com.docker.lb.network` label is not correctly specified. (docker/orca#15015)
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
   * Fixed an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672, docker/escalation#841)
-  
+
 * Interlock
   * Interlock headers can now be hidden. (docker/escalation#833)
   * Respect `com.docker.lb.network` labels and only attach the specified networks
     to the Interlock proxy. (docker/interlock#169)
-  * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the 
-     backend service's Virtual IP instead of load-balancing directly to each task IP. 
+  * Add support for 'VIP' backend mode, in which the Interlock proxy connects to the
+     backend service's Virtual IP instead of load-balancing directly to each task IP.
      (docker/interlock#206, escalation/920)
 
 ### Components
@@ -652,7 +651,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.7 
+## 3.0.7
 
 2018-12-04
 
@@ -667,7 +666,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.6 
+## 3.0.6
 
 2018-10-25
 
@@ -682,10 +681,10 @@ The following features are deprecated in UCP 3.1.
   * Fixed an issue that caused the Interlock proxy service to keep restarting. (docker/escalation#814)
   * Fixed an issue that caused Kubernetes DNS to not work. (#14064, #11981)
   * Fixed an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
-  
+
 * Security
   * Fixed `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
-  
+
 * UI
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
 
@@ -698,7 +697,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.5 
+## 3.0.5
 
 2018-08-30
 
@@ -715,7 +714,7 @@ The following features are deprecated in UCP 3.1.
  Alternately, you can just `docker pull docker/ucp-agent:3.0.5` on every manager node.
  This issue is fixed in 3.0.5.  Any upgrade from 3.0.5 or above should work without
  manually pulling the images.
- 
+
 
 ### Components
 
@@ -726,7 +725,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.4 
+## 3.0.4
 
 2018-08-09
 
@@ -748,7 +747,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.3 
+## 3.0.3
 
 2018-07-26
 
@@ -780,7 +779,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.2 
+## 3.0.2
 
 2018-06-21
 
@@ -865,7 +864,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
   depending on how quickly `calico-node` gets upgraded on those nodes.
   * `ucp-interlock-proxy` may fail to start when two or more services are
  configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
- 
+
  ### Components
 
 | Component      | Version |
@@ -875,7 +874,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | Calico      | 3.0.1 |
 | Interlock (nginx)   | 1.13.8 |
 
-## Version 3.0.0 
+## Version 3.0.0
 
 2018-04-17
 
@@ -1035,7 +1034,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
-## Version 2.2.18 
+## Version 2.2.18
 
 2019-05-06
 
@@ -1090,7 +1089,7 @@ instead of the correct image for the worker architecture.
 
 ### Bug fixes
  * Added support for the `limit` argument in `docker ps`. (#15812)
- 
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1114,11 +1113,11 @@ instead of the correct image for the worker architecture.
 
 ### Bug fixes
 * Core
-  * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user. 
-  * Added the ability to set custom HTTP response headers to be returned by the UCP Controller API Server. 
+  * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user.
+  * Added the ability to set custom HTTP response headers to be returned by the UCP Controller API Server.
 * Web interface
   * Fixed stack creation for non admin user when UCP uses a custom controller port.
-  
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1136,7 +1135,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.14 
+## Version 2.2.14
 
 2018-10-25
 
@@ -1148,7 +1147,7 @@ instead of the correct image for the worker architecture.
 
 * Web Interface
   * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
-  
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1166,7 +1165,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.13 
+## Version 2.2.13
 
 2018-08-30
 
@@ -1175,7 +1174,7 @@ instead of the correct image for the worker architecture.
 * Security
   * Fixed a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
-    
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1193,7 +1192,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.12 
+## Version 2.2.12
 
 2018-08-09
 
@@ -1204,7 +1203,7 @@ instead of the correct image for the worker architecture.
     were stored in cleartext on UCP hosts. Please refer to the following KB article
     https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
-    
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1222,7 +1221,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.11 
+## Version 2.2.11
 
 2018-07-26
 
@@ -1245,7 +1244,7 @@ instead of the correct image for the worker architecture.
 * UI
   * Fixed an issue that causes the web interface to not parse volume options correctly.
   * Fixed an issue that prevents the user from deploying stacks through the web interface.
-  
+
 ### Known issues
 
 * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
@@ -1263,7 +1262,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.10 
+## Version 2.2.10
 
 2018-05-17
 
@@ -1316,7 +1315,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.9 
+## Version 2.2.9
 
 2018-04-17
 
@@ -1330,7 +1329,7 @@ instead of the correct image for the worker architecture.
 * Core
   * Fixed an issue that causes container fail to start with `container ID not found`
    during high concurrent API calls to create and start containers.
-   
+
 ### Known issues
 
 * RethinkDB can only run with up to 127 CPU cores.
@@ -1352,7 +1351,7 @@ is always used, regardless of which one is actually the best match.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.7 
+## Version 2.2.7
 
 2018-03-26
 
@@ -1361,7 +1360,7 @@ is always used, regardless of which one is actually the best match.
 * Fixed an issue where the minimum TLS version setting is not correctly handled,
   leading to non-default values causing `ucp-controller` and `ucp-agent` to keep
   restarting.
-  
+
 ### Known issues
 
 * RethinkDB can only run with up to 127 CPU cores.
@@ -1383,7 +1382,7 @@ is always used, regardless of which one is actually the best match.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.6 
+## Version 2.2.6
 
 2018-03-19
 
@@ -1453,7 +1452,7 @@ is always used, regardless of which one is actually the best match.
  `<node-name>/<network-name>`.
 
 
-## Version 2.2.5 
+## Version 2.2.5
 
 2018-01-16
 
@@ -1489,7 +1488,7 @@ for volumes.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.4 
+## Version 2.2.4
 
 2017-11-02
 
@@ -1534,7 +1533,7 @@ for volumes.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.3 
+## Version 2.2.3
 
 2017-09-13
 
@@ -1587,7 +1586,7 @@ for volumes.
  * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## version 2.2.2 
+## version 2.2.2
 
 2017-08-30
 
@@ -1649,7 +1648,7 @@ for volumes.
   * If upgrading from an existing deployment, ensure that HRM is using a non-encrypted
   network prior to attaching Windows services.
 
-## Version 2.2.0 
+## Version 2.2.0
 
 2017-08-16
 
