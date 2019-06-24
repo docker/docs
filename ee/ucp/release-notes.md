@@ -95,6 +95,14 @@ in Docker Enterprise 3.1. Upgrade to SLES15 for continued support on Docker Ente
 - Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported 
 on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
 Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
+- Support for updating the UCP config with `docker service update ucp-manager-agent --config-add <Docker config> ...` 
+is deprecated and will be removed in a future release. To update the UCP config, use the `/api/ucp/config-toml` 
+endpoint described in https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/.
+- Generating a backup from a UCP manager that has lost quorum is no longer supported. We recommend that you 
+regularly schedule backups on your cluster so that you have always have a recent backup. 
+Refer to [UCP backup information](/ee/admin/backup/back-up-ucp/) for detailed UCP back up information.
+
+If your cluster has lost quorum and you cannot recover it on your own, please contact Docker Support.
  
 ## Browser support 
 In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
