@@ -51,13 +51,13 @@ Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If t
 There are 2 internal IP ranges used within Kubernetes that may overlap and
 conflict with the underlying infrastructure:
 
-- The Pod Network. Each Pod in Kubernetes is given an IP address from either
+- The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
   IP addresses on the `192.168.0.0/16` range. This can be customised at install
   time using the `--pod-cidr` flag. 
 
-- The Services Network. When a user exposes a Service in Kubernetes it is
-  accesible on a VIP, this VIP comes from a Cluster IP Range. By default on UCP
+- The Services Network - When a user exposes a Service in Kubernetes it is
+  accesible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
   this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
   changed at install time with the `--service-cluster-ip-range` flag.
 
