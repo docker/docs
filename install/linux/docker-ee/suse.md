@@ -3,6 +3,7 @@ description: Instructions for installing Docker EE on SLES
 keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
+- /engine/installation/linux/SUSE/
 - /engine/installation/linux/suse/
 - /engine/installation/linux/docker-ee/suse/
 title: Get Docker EE for SLES
