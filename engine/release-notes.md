@@ -222,9 +222,9 @@ The missing rules are :
 sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ```
-    - Workaround: Add these rules back using a script and cron definitions. The script must contain '-C' commands 
-to check for the presence of a rule and '-A' commands to add rules back. Run the script on a cron in regular 
-intervals, for example, every <x> minutes.
+    - Workaround: Add these rules back using a script and cron definitions. The script must contain '-C' 
+    commands to check for the presence of a rule and '-A' commands to add rules back. Run the script on a 
+    cron in regular intervals, for example, every <x> minutes.
     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
