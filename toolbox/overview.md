@@ -32,9 +32,9 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 
 Choose the install instructions for your platform, and follow the steps:
 
-    * [Install Docker Toolbox on macOS](toolbox_install_mac.md)
+ - [Install Docker Toolbox for macOS](toolbox_install_mac.md)
 
-    * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
+ - [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 
 ## Next steps
 
