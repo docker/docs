@@ -30,9 +30,20 @@ upgrade your installation to the latest release.
 
 ### Enhancements
 
-* Users can now set default values for `restart-delay` and `restart-max-attempts` on Swarm Services. (ENGORC-2437)
-* Users can now set the `kubeletMaxPods` option to configure more than 100 pods per node by using the `ClusterConfig` option. (ENGORC-2334)
-* Added configuration support for `service-cluster-iprange`. (ENGCORE-683)
+* A `user_workload_defaults` section has been added to the UCP configuration
+  file that allows admins to set default field values that will be applied to
+  Swarm services if those fields are not explicitly set when the service is
+  created. Only a subset of Swarm service fields may be set; see [UCP
+  Configuration file](/ee/ucp/admin/configure/ucp-configuration-file/) for more
+  details. (ENGORC-2437)
+* Users can now set the `kubeletMaxPods` option for all nodes in the cluster,
+  see the [UCP Configuration
+  file](/ee/ucp/admin/configure/ucp-configuration-file/) for more details.
+  (ENGORC-2334)
+* Users can now adjust the internal Kubernetes Service IP Range from the default
+  `10.96.0.0/16` at install time. See [Plan
+  Installation](ee/ucp/admin/install/plan-installation.md#avoid-ip-range-conflicts)
+  for more details. (ENGCORE-683)
 
 ### Bug fixes
 
@@ -41,7 +52,8 @@ upgrade your installation to the latest release.
 
 ### Deprecated platforms
 
-* Removed support for Windows Server 1709.
+* Removed support for Windows Server 1709 as it is now [end of
+  life](https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info).
 
 ### Known issues
 * Upgrading from UCP `3.1.4` to `3.1.5` causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
@@ -422,8 +434,9 @@ The following features are deprecated in UCP 3.1.
 
 ### Deprecated platforms
 
-* Removed support for Windows Server 1709.
-
+* Removed support for Windows Server 1709 as it is now [end of
+  life](https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info).
+  
 ### Components
 
 | Component      | Version |

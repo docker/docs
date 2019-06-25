@@ -10,8 +10,6 @@
       url: https://packages.docker.com/caas/ucp_images_3.1.8.tar.gz
     - description: "3.1.8 Windows Server 2016 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_2016_3.1.8.tar.gz
-    - description: "3.1.8 Windows Server 1709"
-      url: https://packages.docker.com/caas/ucp_images_win_1709_3.1.8.tar.gz
     - description: "3.1.8 Windows Server 1803"
       url: https://packages.docker.com/caas/ucp_images_win_1803_3.1.8.tar.gz
     - description: "3.1.8 Windows Server 2019 LTSC"
@@ -99,8 +97,6 @@
       url: https://packages.docker.com/caas/ucp_images_s390x_3.0.12.tar.gz
     - description: "3.0.12 Windows Server 2016 LTSC"
       url: https://packages.docker.com/caas/ucp_images_win_2016_3.0.12.tar.gz
-    - description: "3.0.12 Windows Server 1709"
-      url: https://packages.docker.com/caas/ucp_images_win_1709_3.0.12.tar.gz
     - description: "3.0.12 Windows Server 1803"
       url: https://packages.docker.com/caas/ucp_images_win_1803_3.0.12.tar.gz  
     - description: "3.0.11 Linux"
