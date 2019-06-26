@@ -9,11 +9,11 @@ default in Docker Universal Control Plane (UCP) 3.2. See [Pod Security
 Policy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) for an
 explanation of this Kubernetes concept.
 
-There are two default PSPs in UCP: a `privileged` policy
-and an `unprivileged` policy. Administrators of the cluster can enforce additional
-policies and apply them to users and teams for further control of what runs in the
-Kubernetes cluster. This guide describes the two default policies, and
-provides two example use cases for custom policies.
+There are two default PSPs in UCP: a `privileged` policy and an `unprivileged`
+policy. Administrators of the cluster can enforce additional policies and apply
+them to users and teams for further control of what runs in the Kubernetes
+cluster. This guide describes the two default policies, and provides two
+example use cases for custom policies.
 
 ## Kubernetes Role Based Access Control (RBAC)
 
