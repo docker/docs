@@ -53,6 +53,8 @@ You can find out more about an individual option by clicking the **?** icon.
 
 ## Use the CLI to control telemetry
 
+### For versions prior to 18.09
+
 To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
 
 ```bash
@@ -73,4 +75,32 @@ ID                  NAME                                           [..]
 114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
 
 $ docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
+```
+
+### Since version 18.09
+
+The telemetry module is activated by default with Docker EE 18.09. No plugin are used since this version.
+
+To disable it, you need to modify your configuration file on `/etc/docker/config.json` and add this param:
+```
+{"features":{"telemetry": false}}
+```
+
+Example:
+```
+{
+    "debug": true,
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "10m"
+    },
+    "features":{"telemetry": false}
+}
+```
+
+You will need to restart the docker daemon to take into account the change.
+
+To enable back the telemetry module, you will need to put `true` instead of `false`:
+```
+{"features":{"telemetry": true}}
 ```
