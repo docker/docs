@@ -93,17 +93,6 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 | `service_id`   | yes      | The DTR instance's OpenID Connect Client ID, as registered with the Docker authentication provider.                                                                                         |
 | `ca_bundle`    | no       | If you're using a custom certificate authority (CA), `ca_bundle` specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
 
-### custom headers (optional)
-
-Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
-
-[[custom_api_server_headers]]
-
-| Item | Description |
-| ----------- | ----------- |
-| `name`       | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*". |
-| `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*".  |
-
 
 ### audit_log_configuration table (optional)
 Configures audit logging options for UCP components.
@@ -165,6 +154,29 @@ Specifies whether the your UCP license is automatically renewed.
 |:---------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `auto_refresh` | no       | Set to `true` to enable attempted automatic license renewal when the license nears expiration. If disabled, you must manually upload renewed license after expiration. The default is `true`. |
 
+### custom headers (optional)
+
+Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
+
+[[custom_api_server_headers]]
+
+| Item    | Description                                                                           |
+|:--------|:--------------------------------------------------------------------------------------|
+| `name`  | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*".  |
+| `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*". |
+
+### user_workload_defaults (optional)
+
+`user_workload_defaults.swarm_defaults`
+
+A map describing default values to set on Swarm services at creation time if 
+those fields are not explicitly set in the service spec.
+
+| Parameter                                | Required | Description                                                          |
+|:-----------------------------------------|:---------|:---------------------------------------------------------------------|
+| `tasktemplate.restartpolicy.delay`       | no       | Delay between restart attempts (ns|us|ms|s|m|h).The default is `5s`. |
+| `tasktemplate.restartpolicy.maxattempts` | no       | Maximum number of restarts before giving up. The default is  `3`.    |
+
 ### cluster_config table (required)
 
 Configures the cluster that the current UCP instance manages.
@@ -191,22 +203,23 @@ components. Assigning these values overrides the settings in a container's
 | `metrics_retention_time`               | no       | Adjusts the metrics retention time.                                                                                                                                                              |
 | `metrics_scrape_interval`              | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                                                                          |
 | `metrics_disk_usage_interval`          | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.                                                               |
-| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 1GB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically. |
-| `exclude_server_identity_headers`      | no       | Set to `true` to disable the `X-Server-Ip` and `X-Server-Name` headers.                                                                                                                         |
+| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 1GB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically.   |
+| `exclude_server_identity_headers`      | no       | Set to `true` to disable the `X-Server-Ip` and `X-Server-Name` headers.                                                                                                                          |
 | `cloud_provider`                       | no       | Set the cloud provider for the kubernetes cluster.                                                                                                                                               |
 | `pod_cidr`                             | yes      | Sets the subnet pool from which the IP for the Pod should be allocated from the CNI ipam plugin. Default is `192.168.0.0/16`.                                                                    |
 | `calico_mtu`                           | no       | Set the MTU (maximum transmission unit) size for the Calico plugin.                                                                                                                              |
 | `ipip_mtu`                             | no       | Set the IPIP MTU size for the calico IPIP tunnel interface.                                                                                                                                      |
-| `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                               |
-| `service-cluster-ip-range`             | yes      | Sets the subnet pool from which the IP for Services should be allocated. Default is `10.96.0.0/16`. 
+| `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                  |
+| `service_cluster_ip_range`             | yes      | Sets the subnet pool from which the IP for Services should be allocated. Default is `10.96.0.0/16`.                                                                                              |
 | `nodeport_range`                       | yes      | Set the port range that for Kubernetes services of type NodePort can be exposed in. Default is `32768-35535`.                                                                                    |
-| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                                   |
-| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                            |
-| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets. (dev)                                                                                                                                                      |
-| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler. (dev)                                                                                                                                      |
+| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                               |
+| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                       |
+| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets. (dev)                                                                                                                                                |
+| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler. (dev)                                                                                                                                |
 | `local_volume_collection_mapping`      | no       | Store data about collections for volumes in UCP's local KV store instead of on the volume labels. This is used for enforcing access control on volumes.                                          |
 | `manager_kube_reserved_resources`      | no       | Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.                                                                                                   |
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
+| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.
 
 
 *dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
