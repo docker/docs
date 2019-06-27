@@ -55,7 +55,7 @@ will also be unavailable, as this runs in a Kubernetes pod.
 
 Next, a platform operator should log into UCP, download a UCP client bundle, and
 configure the Kubernetes CLI tool, `kubectl`. See [CLI Based
-Access](ee/ucp/user-access/cli/#download-client-certificates) for more details.
+Access](/ee/ucp/user-access/cli/#download-client-certificates) for more details.
    
 With `kubectl`, you can see that the UCP components running on
 Kubernetes are still pending, waiting for a CNI driver before becoming
