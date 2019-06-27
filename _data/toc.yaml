@@ -3527,7 +3527,7 @@ manuals:
     title: Edge release notes
 - title: Docker ID accounts
   path: /docker-id/
--- sectiontitle: Docker Hub
+- sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
     title: Quickstart
