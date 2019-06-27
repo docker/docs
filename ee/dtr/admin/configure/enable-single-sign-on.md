@@ -39,7 +39,7 @@ This makes it so that when you access DTR's web user interface, you are redirect
 3. Update the **Load balancer / Public Address** field with the external URL where users
 should be redirected once they are logged in. Click **Save** to apply your changes.
 4. Toggle **Single Sign-on** to automatically redirect users to UCP for logging in.
-     ![](/ee/dtr/single-sign-on-1.png){: .with-border}
+     ![](/ee/dtr/images/single-sign-on-1.png){: .with-border}
 
 
 
