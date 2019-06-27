@@ -43,6 +43,9 @@ to successfully deploy Docker UCP on Azure:
   Configuration](#considerations-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
+- Internal IP addresses for all nodes should be [set to
+  Static](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-static-private-ip-arm-pportal),
+  rather than the default of Dynamic.
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
   Computer Name and the Node Operating System's Hostname which is the FQDN of
   the host, including domain names. Note that this requires all characters to be in lowercase.
