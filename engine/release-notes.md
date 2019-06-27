@@ -40,7 +40,7 @@ consistency and compatibility reasons.
 
 ### Runtime
 
-* Added performance optimizations in aufs and layer store that helps in the creation and removal of massively parallel containers. [moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Added performance optimizations in aufs and layer store that helps in massively parallel container creation and removal. [moby/moby#39107](https://github.com/moby/moby/pull/39107), [moby/moby#39135](https://github.com/moby/moby/pull/39135)
 * Updated containerd to version 1.2.6. [moby/moby#39016](https://github.com/moby/moby/pull/39016)
 * Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
 * Windows: fixed support for `docker service create --limit-cpu`. [moby/moby#39190](https://github.com/moby/moby/pull/39190)
