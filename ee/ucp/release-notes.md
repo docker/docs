@@ -22,7 +22,12 @@ upgrade your installation to the latest release.
 # Version 3.1
 
 ## 3.1.8
-(2019-06-25)
+(2019-06-27)
+
+> Upgrading UCP 3.1.8
+>
+> UCP 3.1.8 introduces new features such as setting the `kubeletMaxPods` option for all nodes in the cluster, and an updated UCP configuration file that allows admins to set default values for Swarm services. These features not available in UCP 3.2.0. Customers using either of those features in UCP 3.1.8 or future versions of 3.1.x must upgrade to UCP 3.2.1 or later to avoid any upgrade issues. For information, see [Upgrading your UCP environment](/ee/ucp/admin/install/upgrade/).
+{: .important}
 
 ### Kubernetes
 
@@ -426,6 +431,7 @@ The following features are deprecated in UCP 3.1.
 # Version 3.0
 
 ## 3.0.12
+2019-06-27
 
 ### Bug fixes
 
@@ -923,6 +929,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 # Version 2.2
 
 ## Version 2.2.19
+2019-06-27
 
 ### Bug fixes
 

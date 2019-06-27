@@ -29,6 +29,31 @@ consistency and compatibility reasons.
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 18.09.07
+2019-06-27
+
+### Builder
+
+* Fixed a panic error when building dockerfiles that contain only comments. [moby/moby#38487](https://github.com/moby/moby/pull/38487)
+* Added a workaround for GCR authentication issue. [moby/moby#38246](https://github.com/moby/moby/pull/38246)
+* Builder-next: Fixed a bug in the GCR token cache implementation workaround. [moby/moby#39183](https://github.com/moby/moby/pull/39183)
+
+### Runtime
+
+* Added performance optimizations in aufs and layer store that helps in the creation and removal of massively parallel containers. [moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Updated containerd to version 1.2.6. [moby/moby#39016](https://github.com/moby/moby/pull/39016)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+* Windows: fixed support for `docker service create --limit-cpu`. [moby/moby#39190](https://github.com/moby/moby/pull/39190)
+* daemon: fixed a mirrors validation issue.  [moby/moby#38991](https://github.com/moby/moby/pull/38991)
+* Docker no longer supports sorting UID and GID ranges in ID maps. [moby/moby#39288](https://github.com/moby/moby/pull/39288)
+
+### Logging
+
+* Added a fix that now allows large log lines for logger plugins. [moby/moby#39038](https://github.com/moby/moby/pull/39038)
+ 
+### Known Issue
+* There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
+
 ## 18.09.6 
 
 2019-05-06
@@ -333,6 +358,21 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
+## 18.03.1-ee-9
+
+2019-06-27
+
+### Client
+
+* Fixed annotation issues in `docker config create` and `docker secret create` commands that displayed the `--template-driver` option when connecting to an older daemon that didn't support the option. [docker/cli#1769](https://github.com/docker/cli/pull/1769)  [docker/cli#1785](https://github.com/docker/cli/pull/1785)
+
+### Runtime
+
+* Added performance optimizations in aufs and layer store that helps in the creation and removal of massively parallel containers. [moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Windows: Fixed support for `docker service create --limit-cpu`. [moby/moby#39190](https://github.com/moby/moby/pull/39190)
+* Fixed a bug where the original process spec was not used for exec processes.[moby/moby#38871](https://github.com/moby/moby/pull/38871)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+
 ## 18.03.1-ee-8
 
  2019-03-28
@@ -477,6 +517,41 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-22
+2019-06-27
+
+### Networking
+
+* Fixed a bug where if a service has the same number of host-mode published ports with PublishedPort 0, changes to the spec is not reflected in the service object. [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
+
+### Runtime
+
+* Added performance optimizations in aufs and layer store that helps in the creation and removal of massively parallel containers. [moby/moby#39107](https://github.com/moby/moby/pull/39107)
+* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
+* Windows: fixed support for docker service `create --limit-cpu`. [moby/moby#39190](https://github.com/moby/moby/pull/39190)
+
+### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-21 
 2019-04-11

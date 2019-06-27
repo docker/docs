@@ -22,7 +22,7 @@ to upgrade your installation to the latest release.
 # Version 2.6
 
 ## 2.6.7
-(2019-6-25)
+(2019-6-27)
 
 ### Enhancements
 
@@ -306,7 +306,7 @@ to upgrade your installation to the latest release.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
 ## 2.5.12
-(2019-06-25)
+(2019-06-27)
 
 ### Bug fixes
 
