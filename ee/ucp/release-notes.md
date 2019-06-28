@@ -223,9 +223,9 @@ https://github.com/kubernetes/kubernetes/pull/67432
          namespace: kube-system
        ```
 
-- iSCSI on Kubernetes doesn't work on SLES15
+- Using iSCSI on a SLES 15 Kubernetes cluster results in failures
 
-  - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to mount the iSCSI based persistent volume:
+  - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
   ```
   {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
   ```
