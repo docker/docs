@@ -224,6 +224,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
        ```
 
 - iSCSI on Kubernetes doesn't work on SLES15
+
   - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to mount the iSCSI based persistent volume:
   ```
   {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
@@ -270,7 +271,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
         uxd7uxde21gx        hopeful_margulis.ugb24g32knzvvjq9d82jbuba1   mavenugo/swarm-exec:17.03.0-ce   user
         -testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
 
-   4. Switch cluster to run kubernetes workloads. Now your cluster is set to run iSCSI workloads.
+   4. Switch cluster to run kubernetes workloads. Your cluster is now set to run iSCSI workloads.
 
 # Version 3.1
 
