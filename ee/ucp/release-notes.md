@@ -222,12 +222,16 @@ https://github.com/kubernetes/kubernetes/pull/67432
          name: persistent-volume-binder
          namespace: kube-system
        ```
-    > **Note**: This issue also applies to UCP 3.0.x and 3.1.x.
 
 - iSCSI on Kubernetes doesn't work on SLES15
-    - Workaround: use a swarm service to deploy this change across the cluster as follows:
-  1. Install UCP and have nodes configured as swarm workers.
-  2. Perform iSCSI initiator related configuration on the nodes 
+  - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to mount the iSCSI based persistent volume:
+  ```
+  {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
+  ```
+  - Reason: The failure is because the containerized kubelet in UCP does not contain the library dependency (libopeniscsiusr) for iscsiadm version 2.0.876 on SLES15.
+  - Workaround: use a swarm service to deploy this change across the cluster as follows:
+   1. Install UCP and have nodes configured as swarm workers.
+   2. Perform iSCSI initiator related configuration on the nodes.
       - Install packages: 
         ```
         zypper -n install open-iscsi
@@ -241,7 +245,7 @@ https://github.com/kubernetes/kubernetes/pull/67432
         service start iscsid
         ```
 
-   3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths.         For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
+   3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
         ```
         docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
         4b1qxigqht0vf5y4rtplhygj8
@@ -261,11 +265,12 @@ https://github.com/kubernetes/kubernetes/pull/67432
         $ docker service ps 4b1qxigqht0vf5y4rtplhygj8
         ID                  NAME                                         IMAGE                            NODE                                DESIRED STATE       CURRENT STATE
         ERROR               PORTS
-        bkgqsbsffsvp        hopeful_margulis.ckh79t5dot7pdv2jsl3gs9ifa   mavenugo/swarm-exec:17.03.0-ce   aragunathan-testkit-4DA6F6-sles-1   Shutdown            Complete 7 minutes ago
-        nwnur7r1mq77        hopeful_margulis.2gzhtgazyt3hyjmffq8f2vro4   mavenugo/swarm-exec:17.03.0-ce   aragunathan-testkit-4DA6F6-sles-0   Shutdown            Complete 7 minutes ago
-        uxd7uxde21gx        hopeful_margulis.ugb24g32knzvvjq9d82jbuba1   mavenugo/swarm-exec:17.03.0-ce   aragunathan-testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
+        bkgqsbsffsvp        hopeful_margulis.ckh79t5dot7pdv2jsl3gs9ifa   mavenugo/swarm-exec:17.03.0-ce   user-testkit-4DA6F6-sles-1   Shutdown            Complete 7 minutes ago
+        nwnur7r1mq77        hopeful_margulis.2gzhtgazyt3hyjmffq8f2vro4   mavenugo/swarm-exec:17.03.0-ce   user-testkit-4DA6F6-sles-0   Shutdown            Complete 7 minutes ago
+        uxd7uxde21gx        hopeful_margulis.ugb24g32knzvvjq9d82jbuba1   mavenugo/swarm-exec:17.03.0-ce   user
+        -testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
 
-   4. Switch cluster to run kubernetes workloads.
+   4. Switch cluster to run kubernetes workloads. Now your cluster is set to run iSCSI workloads.
 
 # Version 3.1
 
