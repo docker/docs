@@ -47,7 +47,7 @@ upgrade your installation to the latest release.
   (ENGORC-2334)
 * Users can now adjust the internal Kubernetes Service IP Range from the default
   `10.96.0.0/16` at install time. See [Plan
-  Installation](ee/ucp/admin/install/plan-installation.md#avoid-ip-range-conflicts)
+  Installation](/ee/ucp/admin/install/plan-installation.md#avoid-ip-range-conflicts)
   for more details. (ENGCORE-683)
 
 ### Bug fixes
