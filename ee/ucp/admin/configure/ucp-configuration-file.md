@@ -158,7 +158,7 @@ Specifies whether the your UCP license is automatically renewed.
 
 Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
 
-[[custom_api_server_headers]]
+`[[custom_api_server_headers]]`
 
 | Item    | Description                                                                           |
 |:--------|:--------------------------------------------------------------------------------------|
@@ -167,15 +167,17 @@ Included when you need to set custom API headers. You can repeat this section mu
 
 ### user_workload_defaults (optional)
 
-`user_workload_defaults.swarm_defaults`
-
-A map describing default values to set on Swarm services at creation time if 
+A map describing default values to set on Swarm services at creation time if
 those fields are not explicitly set in the service spec.
 
-| Parameter                                | Required | Description                                                          |
-|:-----------------------------------------|:---------|:---------------------------------------------------------------------|
-| `tasktemplate.restartpolicy.delay`       | no       | Delay between restart attempts (ns|us|ms|s|m|h).The default is `5s`. |
-| `tasktemplate.restartpolicy.maxattempts` | no       | Maximum number of restarts before giving up. The default is  `3`.    |
+`[user_workload_defaults]`
+
+  `[user_workload_defaults.swarm_defaults]`
+
+| Parameter                                  | Required | Description                                                                                              |
+|:-------------------------------------------|:---------|:---------------------------------------------------------------------------------------------------------|
+| `[tasktemplate.restartpolicy.delay]`       | no       | Delay between restart attempts (ns&#124;us&#124;ms&#124;s&#124;m&#124;h). The default is `value = "5s"`. |
+| `[tasktemplate.restartpolicy.maxattempts]` | no       | Maximum number of restarts before giving up. The default is  `value = "3"`.                              |
 
 ### cluster_config table (required)
 
