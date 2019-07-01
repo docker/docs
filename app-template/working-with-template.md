@@ -35,7 +35,7 @@ A service template provides the description required by Docker Template to scaff
 
 1. `/run/configuration`, a JSON file which contains all settings such as parameters, image name, etc. For example:
 
-```
+```json
   {
   "parameters": {
     "externalPort": "80",
@@ -53,7 +53,7 @@ To create a basic service template, you need to create two files — a dockerfil
 
 `docker-compose.yaml`
 
-```
+```yaml
 version: "3.6"
 services:
  mysql:
@@ -62,7 +62,7 @@ services:
 
 `Dockerfile`
 
-```
+```conf
 FROM alpine
 COPY docker-compose.yaml .
 CMD cp docker-compose.yaml /project/
@@ -80,7 +80,7 @@ Services that generate a template using code must contain the following files th
 
 Here’s an example of a simple NodeJS service:
 
-```
+```bash
 my-service
 ├── Dockerfile    # The Dockerfile of the service template
 └── assets
@@ -92,7 +92,7 @@ The NodeJS service contains the following files:
 
 `my-service/Dockerfile`
 
-```
+```conf
 FROM alpine
 COPY assets /assets
 CMD ["cp", "/assets", "/project"]
@@ -103,7 +103,7 @@ COPY assets /assets
 `my-service/assets/docker-compose.yaml`
 
 {% raw %}
-```
+```yaml
 version: "3.6"
 services:
   {{ .Name }}:
@@ -115,7 +115,7 @@ services:
 
 `my-service/assets/Dockerfile`
 
-```
+```conf
 FROM NODE:9
 WORKDIR /app
 COPY package.json .
@@ -128,7 +128,7 @@ CMD ["yarn", "run", "start"]
 
 The next step is to build and push the service template image to a remote repository by running the following command:
 
-```
+```bash
 cd [...]/my-service
 docker build -t org/my-service .
 docker push org/my-service
@@ -136,7 +136,7 @@ docker push org/my-service
 
 To build and push the image to an instance of Docker Trusted Registry(DTR), or to an external registry, specify the name of the repository:
 
-```
+```bash
 cd [...]/my-service
 docker build -t myrepo:5000/my-service .
 docker push myrepo:5000/my-service
@@ -151,7 +151,7 @@ Of all the available service and application definitions, Docker Template has ac
 
 Here is an example of the Express service definition:
 
-```
+```yaml
 - apiVersion: v1alpha1 # constant
   kind: ServiceTemplate  # constant
   metadata:
@@ -180,7 +180,7 @@ To customize a service, you need to complete the following tasks:
 
 Add the parameters available to the application. The following example adds the NodeJS version and the external port:
 
-```
+```yaml
 - [...]
   spec:
     [...]
@@ -209,7 +209,7 @@ When you run the service template container, a volume is mounted making the serv
 
 The file matches the following go struct:
 
-```
+```golang
 type TemplateContext struct {
    ServiceID string            `json:"serviceId,omitempty"`
    Name      string            `json:"name,omitempty"`
@@ -224,7 +224,7 @@ type TemplateContext struct {
 
 Where `ConfiguredService` is:
 
-```
+```go
 type ConfiguredService struct {
 	ID      string            `json:"serviceId,omitempty"`
 	Name    string            `json:"name,omitempty"`
@@ -236,7 +236,7 @@ You can then use the file to obtain values for the parameters and use this infor
 
 To use the `interpolator` image, update `my-service/Dockerfile` to use the following Dockerfile:
 
-```
+```conf
 FROM dockertemplate/interpolator:v0.0.3-beta1
 COPY assets .
 ```
@@ -245,7 +245,7 @@ COPY assets .
 
 This places the  interpolator image in the `/assets` folder and copies the folder to the target `/project` folder. If you prefer to do this manually, use a Dockerfile instead:
 
-```
+```conf
 WORKDIR /assets
 CMD ["/interpolator", "-config", "/run/configuration", "-source", "/assets", "-destination", "/project"]
 ```
@@ -270,7 +270,7 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 `library.yaml`
 
-```
+```yaml
 apiVersion: v1alpha1
 generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
@@ -291,7 +291,7 @@ Now that you have created a local repository and added service definitions to it
 
 1. Edit `~/.docker/dockertemplate/preferences.yaml` as follows:
 
-```
+```yaml
 apiVersion: v1alpha1
 channel: master
 kind: Preferences
@@ -302,7 +302,7 @@ repositories:
 
 2. Add your local repository:
 
-```
+```yaml
 apiVersion: v1alpha1
 channel: master
 kind: Preferences
@@ -311,6 +311,13 @@ repositories:
   url: file://path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+```
+
+When configuring a local repository on Windows, the `url` structure is slightly different:
+
+```yaml
+- name: custom-services
+  url: file://c:/path/to/my/library.yaml
 ```
 
 After updating the `preferences.yaml` file, run `docker template ls` or restart the Application Designer and select **Custom application**. The new service should now be visible in the list of available services.
@@ -343,7 +350,7 @@ Before you create an application template definition, you must create a reposito
 
 For example, to create an Express and MySQL application, the application definition must be similar to the following yaml file:
 
-```
+```yaml
 apiVersion: v1alpha1  #constant
 kind: ApplicationTemplate  #constant
 metadata:
@@ -366,7 +373,7 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 `library.yaml`
 
-```
+```yaml
 apiVersion: v1alpha1
 generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
@@ -391,7 +398,7 @@ Now that you have created a local repository and added application definitions, 
 
 1. Edit `~/.docker/dockertemplate/preferences.yaml` as follows:
 
-```
+```yaml
 apiVersion: v1alpha1
 channel: master
 kind: Preferences
@@ -402,7 +409,7 @@ repositories:
 
 2. Add your local repository:
 
-```
+```yaml
 apiVersion: v1alpha1
 channel: master
 kind: Preferences
@@ -411,6 +418,13 @@ repositories:
   url: file://path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+```
+
+When configuring a local repository on Windows, the `url` structure is slightly different:
+
+```yaml
+- name: custom-services
+  url: file://c:/path/to/my/library.yaml
 ```
 
 After updating the `preferences.yaml` file, run `docker template ls` or restart the Application Designer and select **Custom application**. The new template should now be visible in the list of available templates.
