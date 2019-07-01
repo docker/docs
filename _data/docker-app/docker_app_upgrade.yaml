@@ -82,7 +82,7 @@ options:
 examples: $ docker app upgrade myinstallation --target-context=mycontext --set key=value
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

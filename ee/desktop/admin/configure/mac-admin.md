@@ -65,13 +65,13 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": 1024
     },
+    "dataFolder" : {
+      "locked" : false,
+      "value" : "/Users/..."
+    },
     "diskSizeMiB": {
       "locked": false,
       "value": 65536
-    },
-    "dataFolder" : {
-      "value" : "/Users/...",
-      "locked" : false
     },
     "filesharingDirectories": {
       "locked":false,
@@ -102,7 +102,20 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": null
     }
-  }
+  },
+
+  "template" : {
+      "defaultOrg" : {"value": "myorg", "locked":true},
+      "defaultRegistry" : {"value": "mydtr:5000", "locked":true},
+      "repositories": {
+        "value": [
+          "https://one/library.yaml",
+          "https://two/library.yaml",
+          "https://three/library.yaml"
+          ],
+        "locked" : true
+      }
+    },
 }
 ```
 
@@ -129,3 +142,7 @@ Parameter values and descriptions for environment configuration on Mac:
 | `podNetworkCIDR`                  | This is currently unimplemented. `locked` must be set to true.     |
 | `serviceCIDR`                     | This is currently unimplemented. `locked` must be set to true.     |
 | (End of `kubernetes` section.)    |                                   |
+|`template`|Parameters and settings related to Docker Template and Application Designer - grouped together in this example for convenience. For more information, see [`Docker template config`](/engine/reference/commandline/template_config/).|
+|`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
+|`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
+|`repositories`|Lists the repositories that are allowed.|

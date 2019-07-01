@@ -39,7 +39,7 @@ clink:
 - docker_app_version.yaml
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

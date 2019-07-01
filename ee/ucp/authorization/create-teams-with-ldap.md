@@ -14,7 +14,7 @@ To enable LDAP in UCP and sync to your LDAP directory:
 6. Manually create teams in UCP to mirror those in LDAP.
 6. Click **Sync Now**.
 
-If Docker EE is configured to sync users with your organization's LDAP directory
+If Docker Enterprise is configured to sync users with your organization's LDAP directory
 server, you can enable syncing the new team's members when creating a new team
 or when modifying settings of an existing team.
 

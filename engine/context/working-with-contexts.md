@@ -210,6 +210,8 @@ You can verify that the context was imported with `docker context ls`.
 
 The format of the import command is `docker context import <context-name> <context-file>`.
 
+> **Note**: You can import the client bundle `.zip` file generated from UCP and run a command to set your context to UCP. For example, `docker context import ctx-name ucp-bundle.zip`.
+
 Now, let's look at exporting just the Kubernetes parts of a context.
 
 ### Exporting a Kubernetes context

@@ -67,9 +67,6 @@ to upgrade your installation to the latest release.
 
 ### Known issues
 
-* **Registry CLI**
-
-   * `docker registry info` throws an authentication error even after the user has authenticated to the registry. (ENG-DTR #912)
 
 ### Deprecations
 

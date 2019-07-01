@@ -17,7 +17,7 @@ options:
 examples: $ docker app split myapp.dockerapp --output myapp-directory.dockerapp
 deprecated: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

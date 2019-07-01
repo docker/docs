@@ -92,34 +92,7 @@ guides:
     - title: Microsoft Windows
       path: /docker-for-windows/install/
       nosync: true
-    - sectiontitle: Docker Toolbox (legacy)
-      section:
-      - path: /toolbox/overview/
-        title: Toolbox overview
-      - path: /toolbox/toolbox_install_mac/
-        title: Install Toolbox on Mac
-      - path: /toolbox/toolbox_install_windows/
-        title: Install Toolbox on Windows
-      - sectiontitle: Kitematic
-        section:
-        - path: /kitematic/userguide/
-          title: "Kitematic user guide: intro &amp; overview"
-        - path: /kitematic/nginx-web-server/
-          title: Set up an Nginx web server
-        - path: /kitematic/minecraft-server/
-          title: Set up a Minecraft Server
-        - path: /kitematic/rethinkdb-dev-database/
-          title: Creating a local RethinkDB database for development
-        - path: /kitematic/faq/
-          title: Frequently asked questions
-        - path: /kitematic/known-issues/
-          title: Known issues
-      - path: /toolbox/faqs/troubleshoot/
-        title: Troubleshooting
-    - title: Release notes
-      path: /engine/release-notes/
-      nosync: true
-  - sectiontitle: Docker Enterprise Platform
+  - sectiontitle: Docker Enterprise
     section:
     - title: About Docker Enterprise
       path: /ee/supported-platforms/
@@ -578,7 +551,7 @@ reference:
           title: docker app upgrade
         - path: /engine/reference/commandline/app_validate/
           title: docker app validate
-        - path: /engine/reference/commandine/app_version/
+        - path: /engine/reference/commandline/app_version/
           title: docker app version
     - sectiontitle: docker assemble *
       section:
@@ -618,6 +591,34 @@ reference:
           title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
+    - sectiontitle: docker buildx *
+      section:
+        - path: /engine/reference/commandline/buildx/
+          title: docker buildx
+        - path: /engine/reference/commandline/buildx_bake/
+          title: docker buildx bake
+        - path: /engine/reference/commandline/buildx_build/
+          title: docker buildx build
+        - path: /engine/reference/commandline/buildx_create/
+          title: docker buildx create
+        - path: /engine/reference/commandline/buildx_imagetools/
+          title: docker buildx imagetools
+        - path: /engine/reference/commandline/buildx_imagetools_create/
+          title: docker buildx imagetools create
+        - path: /engine/reference/commandline/buildx_imagetools_inspect/
+          title: docker buildx imagetools inspect
+        - path: /engine/reference/commandline/buildx_inspect/
+          title: docker buildx inspect
+        - path: /engine/reference/commandline/buildx_ls/
+          title: docker buildx ls
+        - path: /engine/reference/commandline/buildx_rm/
+          title: docker buildx rm
+        - path: /engine/reference/commandline/buildx_stop/
+          title: docker buildx stop
+        - path: /engine/reference/commandline/buildx_use/
+          title: docker buildx use
+        - path: /engine/reference/commandline/buildx_version/
+          title: docker buildx version
     - sectiontitle: docker checkpoint *
       section:
       - path: /engine/reference/commandline/checkpoint/
@@ -628,6 +629,27 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
+
+    - sectiontitle: docker cluster *
+      section:
+        - path: /engine/reference/commandline/cluster/
+          title: docker cluster
+        - path: /engine/reference/commandline/cluster_backup/
+          title: docker cluster backup
+        - path: /engine/reference/commandline/cluster_create/
+          title: docker cluster create
+        - path: /engine/reference/commandline/cluster_inspect/
+          title: docker cluster inspect
+        - path: /engine/reference/commandline/cluster_ls/
+          title: docker cluster ls
+        - path: /engine/reference/commandline/cluster_restore/
+          title: docker cluster restore
+        - path: /engine/reference/commandline/cluster_rm/
+          title: docker cluster rm
+        - path: /engine/reference/commandline/cluster_update/
+          title: docker cluster update
+        - path: /engine/reference/commandline/cluster_version/
+          title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker config *
@@ -1065,7 +1087,7 @@ reference:
     - path: /reference/dtr/2.7/cli/destroy/
       title: destroy
     - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair7
+      title: emergency-repair
     - path: /reference/dtr/2.7/cli/install/
       title: install
     - path: /reference/dtr/2.7/cli/join/
@@ -1123,6 +1145,12 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.40/
+        title: v1.40 reference
+      - path: /engine/api/v1.39/
+        title: v1.39 reference
+      - path: /engine/api/v1.38/
+        title: v1.38 reference
       - path: /engine/api/v1.37/
         title: v1.37 reference
       - path: /engine/api/v1.36/
@@ -1258,49 +1286,42 @@ samples:
     title: SSHd
 
 manuals:
-- sectiontitle: Docker Enterprise Edition
+- sectiontitle: Docker Enterprise
   section:
   - path: /ee/
-    title: About Docker Enterprise
-  - path: /ee/docker-ee-architecture/
-    title: Docker Enterprise Architecture
-  - path: /ee/supported-platforms/
-    title: Supported platforms
-    nosync: true
-  - path: /ee/end-to-end-install/
-    title: Deploy Docker Enterprise  
-  - sectiontitle: Back up Docker Enterprise
+    title: Overview
+  - sectiontitle: Release notes
+    section:  
+    - path: /ee/release-notes/
+      title: Platform
+    - path: /engine/release-notes/
+      title: Docker Engine - Enterprise and Engine - Community
+      nosync: true
+    - path: /ee/ucp/release-notes/
+      title: Docker Universal Control Plane
+      nosync: true
+    - path: /ee/dtr/release-notes/
+      title: Docker Trusted Registry
+      nosync: true
+    - path: /ee/desktop/release-notes/
+      title: Docker Desktop Enterprise
+      nosync: true
+  - sectiontitle: Docker Cluster
     section:
-    - path: /ee/admin/backup/
+    - path: /cluster/
       title: Overview
-    - path: /ee/admin/backup/back-up-swarm/
-      title: Back up Docker Swarm
-    - path: /ee/admin/backup/back-up-ucp/
-      title: Back up UCP
-    - path: /ee/admin/backup/back-up-dtr/
-      title: Back up DTR
-  - sectiontitle: Restore Docker Enterprise
-    section:
-    - path: /ee/admin/restore/
-      title: Overview
-    - path: /ee/admin/restore/restore-swarm/
-      title: Restore Docker Swarm
-    - path: /ee/admin/restore/restore-ucp/
-      title: Restore UCP
-    - path: /ee/admin/restore/restore-dtr/
-      title: Restore DTR 
-  - sectiontitle: Disaster Recovery
-    section:
-    - path: /ee/admin/disaster-recovery/
-      title: Overview
-  - path: /ee/upgrade/
-    title: Upgrade Docker Enterprise
-  - path: /ee/telemetry/
-    title: Manage usage data collection
+    - path: /cluster/aws/
+      title: Docker Cluster on AWS
+    - path: /cluster/cluster-file/
+      title: Cluster file structure
+    - path: /cluster/reference/envvars/
+      title: Environment variables
+    - path: /cluster/reference/
+      title: Subcommands
   - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker Enterprise Engine
+      title: Install Docker Engine - Enterprise
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
@@ -1322,8 +1343,12 @@ manuals:
           title: Install
         - path: /ee/ucp/admin/install/install-offline/
           title: Install offline
-        - path: /ee/ucp/admin/install/install-on-azure/
-          title: Install on Azure
+          sectiontitle: Cloud Providers
+          section:
+          - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/
+            title: Install on Azure
+          - path: /ee/ucp/admin/install/cloudproviders/install-on-aws/
+            title: Install on AWS
         - path: /ee/ucp/admin/install/upgrade/
           title: Upgrade
         - path: /ee/ucp/admin/install/upgrade-offline/
@@ -1506,7 +1531,7 @@ manuals:
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
-            path: /ee/ucp/interlock/usage/websockets/  
+            path: /ee/ucp/interlock/usage/websockets/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources
@@ -1515,16 +1540,14 @@ manuals:
         path: /ee/ucp/kubernetes/
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
-      - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/layer-7-routing/
+      - title: Using Pod Security Policies
+        path: /ee/ucp/kubernetes/pod-security-policies/        
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install an unmanaged CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
-      - title: Deploy a CSI plugin
-        path: /ee/ucp/kubernetes/use-csi/
       - sectiontitle: Persistent Storage
         section:
         - title: Use NFS Storage
@@ -1537,6 +1560,20 @@ manuals:
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
+        - title: Deploy a CSI plugin
+          path: /ee/ucp/kubernetes/storage/use-csi/
+      - sectiontitle: Cluster Ingress
+        section:
+        - title: Overview
+          path: /ee/ucp/kubernetes/cluster-ingress/  
+        - title: Install Ingress
+          path: /ee/ucp/kubernetes/cluster-ingress/install/
+        - title: Deploy Simple Application
+          path: /ee/ucp/kubernetes/cluster-ingress/ingress/
+        - title: Deploy a Canary Deployment
+          path: /ee/ucp/kubernetes/cluster-ingress/canary/     
+        - title: Implementing Persistent (sticky) Sessions
+          path: /ee/ucp/kubernetes/cluster-ingress/sticky/
     - title: API reference
       path: /reference/ucp/3.2/api/
       nosync: true
@@ -2319,6 +2356,8 @@ manuals:
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
+          title: Disable persistent cookies
+        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
           title: Enable single sign-on
         - sectiontitle: External storage
           section:
@@ -2459,6 +2498,8 @@ manuals:
             path: /ee/dtr/user/audit-repository-events/
           - title: Auto-delete repository events
             path: /ee/dtr/admin/configure/auto-delete-repo-events/
+      - title: Manage applications
+        path: /ee/dtr/user/manage-applications/
       - title: Manage access tokens
         path: /ee/dtr/user/access-tokens/
       - title: Tag pruning
@@ -3268,6 +3309,49 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
+  - sectiontitle: Manage Docker Enterprise
+    section:
+    - path: /ee/docker-ee-architecture/
+      title: Docker Enterprise Architecture
+    - path: /ee/supported-platforms/
+      title: Supported platforms
+      nosync: true  
+    - path: /ee/end-to-end-install/
+      title: Deploy Docker Enterprise
+    - path: /ee/upgrade/
+      title: Upgrade Docker Enterprise
+    - sectiontitle: Back up Docker Enterprise
+      section:
+      - path: /ee/admin/backup/
+        title: Overview
+      - path: /ee/admin/backup/back-up-swarm/
+        title: Back up Docker Swarm
+      - path: /ee/admin/backup/back-up-ucp/
+        title: Back up UCP
+      - path: /ee/admin/backup/back-up-dtr/
+        title: Back up DTR
+      - path: /cluster/reference/backup/
+        title: Back up clusters with Docker Cluster
+    - sectiontitle: Restore Docker Enterprise
+      section:
+      - path: /ee/admin/restore/
+        title: Overview
+      - path: /ee/admin/restore/restore-swarm/
+        title: Restore Docker Swarm
+      - path: /ee/admin/restore/restore-ucp/
+        title: Restore UCP
+      - path: /ee/admin/restore/restore-dtr/
+        title: Restore DTR 
+      - path: /cluster/reference/restore/
+        title: Restore clusters with Docker Cluster
+    - sectiontitle: Disaster Recovery
+      section:
+      - path: /ee/admin/disaster-recovery/
+        title: Overview
+    - path: /ee/enable-client-certificate-authentication/
+      title: Enable client certificate authentication with your PKI
+    - path: /ee/telemetry/
+      title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
 - sectiontitle: Docker Assemble
@@ -3299,6 +3383,12 @@ manuals:
   - path: /app-template/api-reference/
     title: API reference
   - path: /engine/reference/commandline/template/
+    title: CLI reference
+- sectiontitle: Docker Buildx
+  section:
+  - path: /buildx/working-with-buildx/
+    title: Working with Docker Buildx
+  - path: /engine/reference/commandline/buildx/
     title: CLI reference
 - sectiontitle: Docker Compose
   section:
@@ -3458,110 +3548,6 @@ manuals:
     title: Edge release notes
 - title: Docker ID accounts
   path: /docker-id/
-- sectiontitle: Docker Machine
-  section:
-  - path: /machine/overview/
-    title: Machine overview
-  - path: /machine/install-machine/
-    title: Install Machine
-  - path: /machine/get-started/
-    title: Get started with a local VM
-  - path: /machine/get-started-cloud/
-    title: Provision hosts in the cloud
-  - sectiontitle: Learn by example
-    section:
-    - path: /machine/examples/ocean/
-      title: Provision Digital Ocean Droplets
-    - path: /machine/examples/aws/
-      title: Provision AWS EC2 instances
-  - path: /machine/concepts/
-    title: Machine concepts and help
-  - sectiontitle: Machine (docker-machine) CLI
-    section:
-    - path: /machine/reference/
-      title: Machine CLI overview
-    - path: /machine/completion/
-      title: Machine command-line completion
-    - path: /machine/reference/active/
-      title: active
-    - path: /machine/reference/config/
-      title: config
-    - path: /machine/reference/create/
-      title: create
-    - path: /machine/reference/env/
-      title: env
-    - path: /machine/reference/help/
-      title: help
-    - path: /machine/reference/inspect/
-      title: inspect
-    - path: /machine/reference/ip/
-      title: ip
-    - path: /machine/reference/kill/
-      title: kill
-    - path: /machine/reference/ls/
-      title: ls
-    - path: /machine/reference/mount/
-      title: mount
-    - path: /machine/reference/provision/
-      title: provision
-    - path: /machine/reference/regenerate-certs/
-      title: regenerate-certs
-    - path: /machine/reference/restart/
-      title: restart
-    - path: /machine/reference/rm/
-      title: rm
-    - path: /machine/reference/scp/
-      title: scp
-    - path: /machine/reference/ssh/
-      title: ssh
-    - path: /machine/reference/start/
-      title: start
-    - path: /machine/reference/status/
-      title: status
-    - path: /machine/reference/stop/
-      title: stop
-    - path: /machine/reference/upgrade/
-      title: upgrade
-    - path: /machine/reference/url/
-      title: url
-  - sectiontitle: Machine drivers
-    section:
-    - path: /machine/drivers/
-      title: Drivers overview
-    - path: /machine/drivers/os-base/
-      title: Driver options and operating system defaults
-    - path: /machine/drivers/aws/
-      title: Amazon Web Services
-    - path: /machine/drivers/digital-ocean/
-      title: Digital Ocean
-    - path: /machine/drivers/exoscale/
-      title: Exoscale
-    - path: /machine/drivers/generic/
-      title: Generic
-    - path: /machine/drivers/gce/
-      title: Google Compute Engine
-    - path: /machine/drivers/soft-layer/
-      title: IBM Softlayer
-    - path: /machine/drivers/azure/
-      title: Microsoft Azure
-    - path: /machine/drivers/hyper-v/
-      title: Microsoft Hyper-V
-    - path: /machine/drivers/openstack/
-      title: OpenStack
-    - path: /machine/drivers/virtualbox/
-      title: Oracle VirtualBox
-    - path: /machine/drivers/rackspace/
-      title: Rackspace
-    - path: /machine/drivers/vm-fusion/
-      title: VMware Fusion
-    - path: /machine/drivers/vm-cloud/
-      title: VMware vCloud Air
-    - path: /machine/drivers/vsphere/
-      title: VMware vSphere
-  - path: /machine/migrate-to-machine/
-    title: Migrate from Boot2Docker to Machine
-  - path: /release-notes/docker-machine/
-    title: Docker Machine release notes
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
@@ -3594,6 +3580,8 @@ manuals:
     section:
     - path: /docker-hub/publish/
       title: Overview
+    - path: /docker-hub/publish/publish/
+      title: Submit a product for Docker Hub
     - path: /docker-hub/publish/customer_faq/
       title: User FAQs
     - path: /docker-hub/publish/publisher_faq/
@@ -3708,14 +3696,22 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - path: /engine/release-notes/
-      title: Docker Enterprise and Engine - Community
-      nosync: true
-    - path: /cs-engine/1.13/release-notes/
-      title: CS Docker Engine
-      nosync: true
-    - path: /release-notes/docker-engine/
-      title: Docker (1.13 and earlier)
+    - sectiontitle: Docker Enterprise Platform
+      section:  
+      - path: /ee/release-notes/
+        title: Platform
+      - path: /engine/release-notes/
+        title: Docker Engine - Enterprise and Engine - Community
+        nosync: true
+      - path: /ee/ucp/release-notes/
+        title: Docker Universal Control Plane
+        nosync: true
+      - path: /ee/dtr/release-notes/
+        title: Docker Trusted Registry
+        nosync: true
+      - path: /ee/desktop/release-notes/
+        title: Docker Desktop Enterprise
+        nosync: true
     - path: /docker-for-mac/release-notes/
       title: Docker Desktop for Mac
       nosync: true
@@ -3731,14 +3727,119 @@ manuals:
     - path: /docker-for-azure/release-notes/
       title: Docker for Azure
       nosync: true
-    - path: /release-notes/docker-machine/
-      title: Docker Machine release notes
-      nosync: true
     - path: /release-notes/docker-swarm/
       title: Docker Swarm release notes
       nosync: true
 - sectiontitle: Superseded products and tools
   section:
+  - path: /cs-engine/1.13/release-notes/
+    title: CS Docker Engine
+  - path: /release-notes/docker-engine/
+    title: Docker (1.13 and earlier)
+  - sectiontitle: Docker Machine
+    section:
+    - path: /machine/overview/
+      title: Machine overview
+    - path: /machine/install-machine/
+      title: Install Machine
+    - path: /machine/get-started/
+      title: Get started with a local VM
+    - path: /machine/get-started-cloud/
+      title: Provision hosts in the cloud
+    - sectiontitle: Learn by example
+      section:
+      - path: /machine/examples/ocean/
+        title: Provision Digital Ocean Droplets
+      - path: /machine/examples/aws/
+        title: Provision AWS EC2 instances
+      - path: /machine/concepts/
+        title: Machine concepts and help
+      - sectiontitle: Machine (docker-machine) CLI
+        section:
+        - path: /machine/reference/
+          title: Machine CLI overview
+        - path: /machine/completion/
+          title: Machine command-line completion
+        - path: /machine/reference/active/
+          title: active
+        - path: /machine/reference/config/
+          title: config
+        - path: /machine/reference/create/
+          title: create
+        - path: /machine/reference/env/
+          title: env
+        - path: /machine/reference/help/
+          title: help
+        - path: /machine/reference/inspect/
+          title: inspect
+        - path: /machine/reference/ip/
+          title: ip
+        - path: /machine/reference/kill/
+          title: kill
+        - path: /machine/reference/ls/
+          title: ls
+        - path: /machine/reference/mount/
+          title: mount
+        - path: /machine/reference/provision/
+          title: provision
+        - path: /machine/reference/regenerate-certs/
+          title: regenerate-certs
+        - path: /machine/reference/restart/
+          title: restart
+        - path: /machine/reference/rm/
+          title: rm
+        - path: /machine/reference/scp/
+          title: scp
+        - path: /machine/reference/ssh/
+          title: ssh
+        - path: /machine/reference/start/
+          title: start
+        - path: /machine/reference/status/
+          title: status
+        - path: /machine/reference/stop/
+          title: stop
+        - path: /machine/reference/upgrade/
+          title: upgrade
+        - path: /machine/reference/url/
+          title: url
+      - sectiontitle: Machine drivers
+        section:
+        - path: /machine/drivers/
+          title: Drivers overview
+        - path: /machine/drivers/os-base/
+          title: Driver options and operating system defaults
+        - path: /machine/drivers/aws/
+          title: Amazon Web Services
+        - path: /machine/drivers/digital-ocean/
+          title: Digital Ocean
+        - path: /machine/drivers/exoscale/
+          title: Exoscale
+        - path: /machine/drivers/generic/
+          title: Generic
+        - path: /machine/drivers/gce/
+          title: Google Compute Engine
+        - path: /machine/drivers/soft-layer/
+          title: IBM Softlayer
+        - path: /machine/drivers/azure/
+          title: Microsoft Azure
+        - path: /machine/drivers/hyper-v/
+          title: Microsoft Hyper-V
+        - path: /machine/drivers/openstack/
+          title: OpenStack
+        - path: /machine/drivers/virtualbox/
+          title: Oracle VirtualBox
+        - path: /machine/drivers/rackspace/
+          title: Rackspace
+        - path: /machine/drivers/vm-fusion/
+          title: VMware Fusion
+        - path: /machine/drivers/vm-cloud/
+          title: VMware vCloud Air
+        - path: /machine/drivers/vsphere/
+          title: VMware vSphere
+      - path: /machine/migrate-to-machine/
+        title: Migrate from Boot2Docker to Machine
+      - path: /release-notes/docker-machine/
+        title: Docker Machine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
@@ -3800,4 +3901,29 @@ manuals:
     - path: /swarm/swarm-api/
       title: Docker Swarm API
     - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
+      title: Docker Swarm release notes      
+  - sectiontitle: Docker Toolbox (legacy)
+    section:
+    - path: /toolbox/overview/
+      title: Toolbox overview
+    - path: /toolbox/toolbox_install_mac/
+      title: Install Toolbox on Mac
+    - path: /toolbox/toolbox_install_windows/
+      title: Install Toolbox on Windows
+  - sectiontitle: Kitematic
+    section:
+    - path: /kitematic/userguide/
+      title: "Kitematic user guide: intro &amp; overview"
+    - path: /kitematic/nginx-web-server/
+      title: Set up an Nginx web server
+    - path: /kitematic/minecraft-server/
+      title: Set up a Minecraft Server
+    - path: /kitematic/rethinkdb-dev-database/
+      title: Creating a local RethinkDB database for development
+    - path: /kitematic/faq/
+      title: Frequently asked questions
+    - path: /kitematic/known-issues/
+      title: Known issues
+    - path: /toolbox/faqs/troubleshoot/
+      title: Troubleshooting
+      nosync: true

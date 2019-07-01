@@ -50,7 +50,7 @@ roles by navigating to the **Roles** page.
 
 ## Resource collections
 
-Docker EE enables controlling access to swarm resources by using
+Docker Enterprise enables controlling access to swarm resources by using
 *collections*. A collection is a grouping of swarm cluster resources that you
 access by specifying a directory-like path.
 

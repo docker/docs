@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/grant-permissions/
 ---
 
-Docker EE administrators can create _grants_ to control how users and
+Docker Enterprise administrators can create _grants_ to control how users and
 organizations access [resource sets](group-resources.md).
 
 A grant defines _who_ has _how much_ access to _what_ resources. Each grant is a

@@ -37,6 +37,8 @@ your client and daemon API versions.
 > To enable experimental features on the Docker daemon, edit the
 > [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
 > and set `experimental` to `true`.
+>
+> {% include experimental.md %}
 {: .important }
 
 {% endif %}
@@ -49,6 +51,8 @@ your client and daemon API versions.
 > To enable experimental features in the Docker CLI, edit the
 > [config.json](/engine/reference/commandline/cli.md#configuration-files)
 > and set `experimental` to `enabled`.
+>
+> {% include experimental.md %}
 {: .important }
 
 {% endif %}

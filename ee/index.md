@@ -1,19 +1,18 @@
 ---
 title: Docker Enterprise
-description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
-keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
+description: Learn about Docker Enterprise, the enterprise-grade cluster management solution from Docker.
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
   - /manuals/
 ---
 
-Docker Enterprise 2.1 is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
+Docker Enterprise is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
-Docker Enterprise is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+Docker Enterprise is a secure, scalable, and supported container platform for building and 
+orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 
 Docker Enterprise enables deploying your workloads for high availability (HA) onto the
 orchestrator of your choice. Docker Enterprise automates many of the tasks that
@@ -35,7 +34,7 @@ cluster and applications through a single interface.
 
 ## Docker Enterprise features
 
-Docker Enterprise 2.1 provides multi-architecture orchestration for Kubernetes and
+Docker Enterprise provides multi-architecture orchestration for Kubernetes and
 Swarm workloads. Docker Enterprise enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
@@ -74,16 +73,9 @@ The default Docker Enterprise installation includes both Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
 
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
-
 ### Orchestration platform features
 
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 
 - Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
   to enable high availability

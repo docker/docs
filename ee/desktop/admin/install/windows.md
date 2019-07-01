@@ -63,7 +63,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 
 ## Version packs
 
-Docker Desktop Enterprise is bundled with default version pack [Enterprise 3.0 (Docker Engine 19.03 / Kubernetes 1.14.1)](https://download.docker.com/win/enterprise/enterprise-3.0.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
+Docker Desktop Enterprise is bundled with default version pack [Enterprise 3.0 (Docker Engine 19.03 / Kubernetes 1.14.3)](https://download.docker.com/win/enterprise/enterprise-3.0.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
 
 - [Docker Enterprise 2.0 (17.06/Kubernetes 1.8.11)](https://download.docker.com/win/enterprise/enterprise-2.0.ddvp)
 
@@ -89,7 +89,7 @@ You can also set the following properties:
 
 For example:
 
-    msiexec /i DockerDesktop.msi /quiet AUTOSTART=no STARTMENUSHORTCUT=no INSTALLDIR=”D:\Docker Desktop”
+    msiexec /i DockerDesktop.msi /quiet STARTMENUSHORTCUT=no INSTALLDIR=”D:\Docker Desktop”
 
 Docker Desktop Enterprise includes a command line executable to install and uninstall version packs. When you install DDE, the command line tool is installed at the following location:
 
