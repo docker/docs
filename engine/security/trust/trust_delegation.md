@@ -92,7 +92,7 @@ and ensure that it is available on your path.
 {
   "trust_dir" : "~/.docker/trust",
   "remote_server": {
-    "url": "https://dtr.example.com"
+    "url": "https://dtr.example.com",
 	"root_ca": "../.docker/ca.pem"
   }
 }
