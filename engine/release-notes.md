@@ -29,7 +29,7 @@ consistency and compatibility reasons.
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
-## 18.09.07
+## 18.09.7
 2019-06-27
 
 ### Builder
