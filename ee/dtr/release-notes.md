@@ -20,10 +20,8 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
-# Version 2.7
-
-## 2.7.0-beta4
-(2019-5-16)
+## Version 2.7.0
+(2019-7-10)
 
 ### New Features
 
@@ -37,7 +35,6 @@ to upgrade your installation to the latest release.
 * **App Distribution**
 
   * It is now possible to distribute [docker apps](https://github.com/docker/app) via DTR. This includes application pushes, pulls, and general management features like promotions, mirroring, and pruning.
-
 
 * **Registry CLI**
 
@@ -55,25 +52,31 @@ to upgrade your installation to the latest release.
 
 * Users can now edit mirroring policies. (docker/dhe-deploy #10157)
 * `docker run -it --rm docker/dtr:2.7.0-beta4` now includes a global option, `--version`, which prints the DTR version and associated commit hash. (docker/dhe-deploy #10144)
-* Users can now set up push and pull mirroring policies via the API using an authentication token instead of their credentials. (docker/dhe-deploy#10002)
+* Users can now set up push and pull mirroring policies through the API using an authentication token instead of their credentials. (docker/dhe-deploy#10002)
 * DTR is now on Golang `1.12.4`. (docker/dhe-deploy#10274)
 * For new mirroring policies, the **Mirror direction** now defaults to the Pull tab instead of Push. (docker/dhe-deploy#10004)
-
 
 ### Bug Fixes
 
 * Fixed an issue where a webhook notification was triggered twice on non-scanning image promotion events on a repository with scan on push enabled. (docker/dhe-deploy#9909)
 
-
 ### Known issues
 
+* Application mirroring to and from Docker Hub does not work as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* The Application Configuration in the UI says it is an invocation image.
+* When changing your password if an incorrect password is entered the UI will not give the appropriate error message, and the save button will stay in a loading state.
+    * Workaround: Refresh the page.
+* After a promotion policy is created they cannot be edited through the UI.
+    * Workaround: Either delete the promotion policy and recreate it. Alternatively, use the API to view and 
+    edit the promotion policy.
+* Non admin users cannot create promotion policies through the UI.
 
 ### Deprecations
 
 * **Upgrade**
 
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
-
 
 # Version 2.6
 
