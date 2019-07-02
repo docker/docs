@@ -332,3 +332,22 @@ $ docker run -it --rm --gpus device=0,2 nvidia-smi
 Exposes the first and third GPUs.
 
 > **Note**: NVIDIA GPUs can only be accessed by systems running a single engine.
+
+#### Set NVIDIA capabilities
+
+You can set capabilities manually. For example, on Ubuntu you can run the
+following:
+
+```
+docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
+```
+
+This enables all available GPU driver capabilites with the driver features for
+`nvidia-smi`.
+
+More information on valid variables can be found at the [nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
+GitHub page. These variables can be set in a Dockerfile.
+
+You can also utitize CUDA images which sets these variables automatically. See
+the [CUDA images])https://github.com/NVIDIA/nvidia-docker/wiki/CUDA) GitHub page
+for more information.
