@@ -16,6 +16,22 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ## Docker Desktop Enterprise Releases of 2019
 
+### Docker Desktop Enterprise 2.1.0.1
+
+2019-07-10
+
+Docker Desktop Enterprise 2.1.0.1 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this release.
+
+- Upgrades
+
+  - [Docker 19.03.0](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0
+  - [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3) in Version Pack Enterprise 3.0
+  - [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23) in Version Pack Enterprise 3.0
+  - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+  - [Docker 18.09.7](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 2.1
+  - [Docker 17.06.2-ee-22](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 2.0
+  - [Application Designer 0.1.4](/ee/desktop/app-designer/)
+
 ### Docker Desktop Enterprise 2.0.0.6
 
 2019-06-06
