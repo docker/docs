@@ -349,5 +349,5 @@ More information on valid variables can be found at the [nvidia-container-runtim
 GitHub page. These variables can be set in a Dockerfile.
 
 You can also utitize CUDA images which sets these variables automatically. See
-the [CUDA images])https://github.com/NVIDIA/nvidia-docker/wiki/CUDA) GitHub page
+the [CUDA images](https://github.com/NVIDIA/nvidia-docker/wiki/CUDA) GitHub page
 for more information.
