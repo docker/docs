@@ -30,6 +30,8 @@ Note that Windows container images are typically larger than Linux ones and for
 this reason, you should consider provisioning more local storage for Windows
 nodes and for DTR setups that will store Windows container images.
 
+When image scanning feature is used, we recommend that you have at least 32 GB of RAM. As developers and teams push images into DTR, the repository grows over time so you should inspect RAM, CPU, and disk usage on DTR nodes and increase resources when resource saturation is observed on regular basis.
+
 ## Ports used
 
 When installing DTR on a node, make sure the following ports are open on that
