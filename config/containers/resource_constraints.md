@@ -342,10 +342,12 @@ following:
 docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
 ```
 
-This enables all available GPU driver capabilites with the driver features for
-`nvidia-smi`.
+This enables the `utility` driver capabilites and adds the `nvidia-smi` tool to
+the container.
 
-More information on valid variables can be found at the [nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
+Capabilities as well as other configurations can be set in images via
+environment variables. More information on valid variables can be found at the
+[nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
 GitHub page. These variables can be set in a Dockerfile.
 
 You can also utitize CUDA images which sets these variables automatically. See
