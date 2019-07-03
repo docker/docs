@@ -9,24 +9,6 @@ redirect_from:
  - /release-notes/docker-ce/
 ---
 
-----DELETE BEFORE MERGING
-Contents include https://github.com/docker/docker-ce/blob/v19.03.0-rc2/CHANGELOG.md as of 6/12: 
-https://docker.atlassian.net/browse/ENGCORE-839
-https://docker.atlassian.net/browse/ENGCORE-834 
-https://docker.atlassian.net/browse/ENGORC-1243 
-https://docker.atlassian.net/browse/ENGCORE-686  MIGHT BE INTERNAL ONLY
-https://docker.atlassian.net/browse/ENGCORE-810 - added to UCP known issues
-https://docker.atlassian.net/browse/ENGPGM-115 - Swarm info added to known issues
-https://docker.atlassian.net/browse/TAR-850 - added
-
-Are these no longer valid?
- ### Client
-* Deprecated legacy overlay storage driver. [docker/cli#1425](https://github.com/docker/cli/pull/1425)
-* Deprecated "devicemapper" storage driver. [docker/cli#1424](https://github.com/docker/cli/pull/1424)
-* Build: add SSH agent socket forwarder (`docker build --ssh $SSHMOUNTID=$SSH_AUTH_SOCK`) 
-[docker/cli#1419](https://github.com/docker/cli/pull/1419)
-END OF DELETE BEFORE MERGING--------
-
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine Enterprise (Docker EE).
 
@@ -67,24 +49,21 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 * Added support for Data Path Port configuration. [docker/cli#1509](https://github.com/docker/cli/pull/1509)
 * Added fast context switch: commands. [docker/cli#1501](https://github.com/docker/cli/pull/1501)
 * Support added for `--mount type=bind,bind-nonrecursive,...` [docker/cli#1430](https://github.com/docker/cli/pull/1430)
-* Added maximum replicas per node support to stack version 3.8. [docker/cli#1410](https://github.com/docker/cli/pull/1410)
+* Added maximum replicas per node. [docker/cli#1612](https://github.com/docker/cli/pull/1612)
 * Added option to pull images quietly. [docker/cli#882](https://github.com/docker/cli/pull/882)
 * Added a separate `--domainname` flag. [docker/cli#1130](https://github.com/docker/cli/pull/1130)
-* Added `--from` flag to `context create`. [docker/cli#1773](https://github.com/docker/cli/pull/1773)
 * Added support for secret drivers in `docker stack deploy`. [docker/cli#1783](https://github.com/docker/cli/pull/1783)
 * Added ability to use swarm `Configs` as `CredentialSpecs` on services. 
 [docker/cli#1781](https://github.com/docker/cli/pull/1781)
 * Added `--security-opt systempaths=unconfined` support. [docker/cli#1808](https://github.com/docker/cli/pull/1808)
 * Added basic framework for writing and running CLI plugins. [docker/cli#1564](https://github.com/docker/cli/pull/1564)
-* Cli-plugins: added concept of experimental plugin, only enabled in experimental mode. 
-[docker/cli#1898](https://github.com/docker/cli/pull/1898)
+  [docker/cli#1898](https://github.com/docker/cli/pull/1898)
 * Bumped Docker App to v0.8.0. [docker/docker-ce-packaging#341](https://github.com/docker/docker-ce-packaging/pull/341)
 * Added support for Docker buildx. [docker/docker-ce-packaging#336](https://github.com/docker/docker-ce-packaging/pull/336)
 * Added support for Docker Assemble v0.36.0.
 * Added support for Docker Cluster v1.0.0-rc2.
 * Added support for Docker Template v0.1.4.
 * Added support for Docker Registry v0.1.0-rc1.
-* Updated buildkit. [docker/cli#1804](https://github.com/docker/cli/pull/1804)
 * Bumped google.golang.org/grpc to v1.20.1. [docker/cli#1884](https://github.com/docker/cli/pull/1884)
 * CLI changed to pass driver specific options to `docker run`. [docker/cli#1767](https://github.com/docker/cli/pull/1767)
 * Bumped Golang 1.12.5. [docker/cli#1875](https://github.com/docker/cli/pull/1875)
@@ -94,7 +73,6 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 compose-files service configs. [docker/cli#1617](https://github.com/docker/cli/pull/1617)
 * (Experimental) When targeting Kubernetes, added support for `x-pull-policy: <Never|Always|IfNotPresent>` 
 in compose-files service configs. [docker/cli#1617](https://github.com/docker/cli/pull/1617)
-* Added support for maximum replicas per node without stack. [docker/cli#1612](https://github.com/docker/cli/pull/1612)
 * cp, save, export: Now preventing overwriting irregular files. [docker/cli#1515](https://github.com/docker/cli/pull/1515)
 * npipe volume type on stack file now allowed. [docker/cli#1195](https://github.com/docker/cli/pull/1195)
 * Fixed tty initial size error. [docker/cli#1529](https://github.com/docker/cli/pull/1529)
@@ -189,12 +167,11 @@ fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.co
 
 ### Deprecation
 
-* Removed v1 manifest support, and removed `--disable-legacy-registry`. Pushing v1 manifests to registries 
-is no longer possible, pushing schema v2 (or OCI) manifests is now the only possible option. However, 
-pulling v1 manifests is still possible. [moby/moby#37874](https://github.com/moby/moby/pull/37874)
+* Deprecate image manifest v2 schema1 in favor of v2 schema2. Future version of Docker will remove
+support for v2 schema1 althogether. [moby/moby#39365](https://github.com/moby/moby/pull/39365)
 * Removed v1.10 migrator. [moby/moby#38265](https://github.com/moby/moby/pull/38265)
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
-* Deprecated AuFS storage driver, and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
+* Deprecated `aufs` storage driver and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
 * Removed support for 17.09.
 * SLES12 is deprecated from Docker Enterprise 3.0, and EOL of SLES12 as an operating system will occur 
 in Docker Enterprise 3.1. Upgrade to SLES15 for continued support on Docker Enterprise.
