@@ -311,7 +311,7 @@ Make note of your username.
 Log in to the Docker public registry on your local machine.
 
 ```shell
-$ docker login
+$ docker login -u yourdockeruserid
 ```
 
 ### Tag the image
