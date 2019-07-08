@@ -342,7 +342,7 @@ following:
 docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
 ```
 
-This enables the `utility` driver capabilites and adds the `nvidia-smi` tool to
+This enables the `utility` driver capability which adds the `nvidia-smi` tool to
 the container.
 
 Capabilities as well as other configurations can be set in images via
