@@ -3084,7 +3084,7 @@ manuals:
     path: /ee/get-support/
 - sectiontitle: Docker Compose
   section:
-  - path: /compose/overview/
+  - path: /compose/
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
