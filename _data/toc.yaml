@@ -3371,7 +3371,7 @@ manuals:
     title: CLI reference
 - sectiontitle: Docker Compose
   section:
-  - path: /compose/overview/
+  - path: /compose/
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
