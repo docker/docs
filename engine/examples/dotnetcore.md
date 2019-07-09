@@ -97,5 +97,5 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 
   - [ASP.NET Core](https://docs.microsoft.com/aspnet/core/)
   - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
-  - [Building Docker Images for .NET Core Applications](https://docs.microsoft.com/dotnet/core/docker/building-net-docker-images)
+  - [Building Docker Docker Images for ASP.NET Core](https://docs.microsoft.com/aspnet/core/host-and-deploy/docker/building-net-docker-images)
   - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)
