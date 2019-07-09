@@ -554,4 +554,4 @@ $ docker volume prune
 - Learn about [bind mounts](bind-mounts.md).
 - Learn about [tmpfs mounts](tmpfs.md).
 - Learn about [storage drivers](/storage/storagedriver/).
-- Learn about [3rd party volume driver plugins](https://docs.docker.com/engine/extend/legacy_plugins/)
+- Learn about [3rd party volume driver plugins](/engine/extend/legacy_plugins/).
