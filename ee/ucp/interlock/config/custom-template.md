@@ -8,10 +8,10 @@ keywords: routing, proxy
 A custom extension template can be
 used if a needed option is not available in the extension configuration.
 
-> Warning:
-    This should be used with extreme caution as this completely bypasses the built-in
-    extension template. Therefore, if you update the extension image in the future,
-    you will not receive the updated template because you are using a custom one.
+> Warning: This should be used with extreme caution as this completely bypasses
+> the built-in extension template. Therefore, if you update the extension
+> image in the future, you will not receive the updated template because you are
+> using a custom one.
 
 To use a custom template:
 
@@ -24,6 +24,7 @@ First, create a Swarm config using the new template, as shown in the following e
 
 The contents of the example `custom-template.conf` include:
 
+{% raw %}
 ```
 # CUSTOM INTERLOCK CONFIG
 user {{ .ExtensionConfig.User  }};
@@ -279,6 +280,7 @@ stream {
     }
 }
 ```
+{% endraw %}
 
 ## Creating a Swarm configuration object
 To create a Swarm config object:

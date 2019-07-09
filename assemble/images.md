@@ -12,8 +12,8 @@ To support multi-platform images, images must be pushed to a registry instead of
 
 To enable the multi-platform mode, use the `--push` option. For example:
 
-```
-docker assemble build --push /path/to/my/project
+```bash
+$ docker assemble build --push /path/to/my/project
 ```
 
 To push to an insecure (unencrypted) registry, use `--push-insecure` instead of `--push`.
@@ -96,9 +96,11 @@ The runtime part includes:
 
 You can find the bill of lading by inspecting the resulting image. It is stored using the label `com.docker.assemble.bill-of-lading`:
 
+{% raw %}
+```bash
+$ docker image inspect --format '{{ index .Config.Labels "com.docker.assemble.bill-of-lading" }}' <image>
 ```
-docker image inspect --format '{{ index .Config.Labels "com.docker.assemble.bill-of-lading" }}' <image>
-```
+{% endraw %}
 
 > **Note:** The bill of lading is only supported on the `linux/amd64` platform and only for images which are based on Alpine (`apk`), Red Hat (`rpm`) or Debian (`dpkg-query`).
 
