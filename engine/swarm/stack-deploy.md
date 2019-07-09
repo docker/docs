@@ -139,7 +139,7 @@ counter whenever you visit it.
     pulls the Redis image if you don't already have it, and creates two
     containers.
 
-    You will see a warning about the Engine being in swarm mode. This is because
+    You see a warning about the Engine being in swarm mode. This is because
     Compose doesn't take advantage of swarm mode, and deploys everything to a
     single node. You can safely ignore this.
 
