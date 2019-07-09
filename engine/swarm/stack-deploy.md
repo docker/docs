@@ -136,7 +136,7 @@ counter whenever you visit it.
 ## Test the app with Compose
 
 1.  Start the app with `docker-compose up`. This builds the web app image,
-    pull the Redis image if you don't already have it, and create two
+    pulls the Redis image if you don't already have it, and creates two
     containers.
 
     You see a warning about the Engine being in swarm mode. This is because
