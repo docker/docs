@@ -11,5 +11,5 @@ This section contains the following:
 * [Dockerizing PostgreSQL](postgresql_service.md)
 * [Dockerizing a CouchDB service](couchdb_data_volumes.md)
 * [Dockerizing an apt-cacher-ng service](apt-cacher-ng.md)
-* [Dockerizing a .NET Core application](dotnetcore.md)
+* [Dockerizing an ASP.NET Core application](dotnetcore.md)
 * [Get Started](/get-started/)
