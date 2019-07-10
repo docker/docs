@@ -1117,7 +1117,7 @@ samples:
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/
-    title: .NET Core application
+    title: ASP.NET Core application
   - path: /compose/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/

@@ -1,7 +1,7 @@
 ---
 description: Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.
 keywords: dockerize, dockerizing, dotnet, .NET, Core, article, example, platform, installation, containers, images, image, dockerfile, build, asp.net, asp.net core
-title: Dockerize a .NET Core application
+title: Dockerize an ASP.NET Core application
 ---
 
 ## Introduction
@@ -33,7 +33,7 @@ tutorial](https://www.asp.net/get-started) to initialize a project or clone our 
 
 1.  Create a `Dockerfile` in your project folder.
 2.  Add the text below to your `Dockerfile` for either Linux or [Windows
-   Containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/).
+   Containers](https://docs.microsoft.com/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in [Docker Desktop for
 Windows](/docker-for-windows/). Read more on [switching containers](/docker-for-windows/#switch-between-windows-and-linux-containers).
@@ -95,7 +95,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 
 ## Further reading
 
-  - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
+  - [ASP.NET Core](https://docs.microsoft.com/aspnet/core/)
   - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
-  - [Building Docker Images for .NET Core Applications](https://docs.microsoft.com/dotnet/core/docker/building-net-docker-images)
+  - [Building Docker Docker Images for ASP.NET Core](https://docs.microsoft.com/aspnet/core/host-and-deploy/docker/building-net-docker-images)
   - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)
