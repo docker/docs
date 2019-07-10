@@ -3247,7 +3247,7 @@ manuals:
   - sectiontitle: Learn by example
     section:
     - path: /machine/examples/ocean/
-      title: Provision Digital Ocean Droplets
+      title: Provision DigitalOcean Droplets
     - path: /machine/examples/aws/
       title: Provision AWS EC2 instances
   - path: /machine/concepts/
@@ -3309,7 +3309,7 @@ manuals:
     - path: /machine/drivers/aws/
       title: Amazon Web Services
     - path: /machine/drivers/digital-ocean/
-      title: Digital Ocean
+      title: DigitalOcean
     - path: /machine/drivers/exoscale/
       title: Exoscale
     - path: /machine/drivers/generic/
