@@ -26,7 +26,7 @@ There are three steps you can take to recover an unhealthy DTR cluster:
 2. If the majority of replicas are unhealthy, use this command to revert your
    cluster to a single DTR replica.
 3. If you can't repair your cluster to a single replica, you'll have to
-   restore from an existing backup, using the `restore` command.
+   restore from an existing backup, using the [`restore`](./restore/) command.
 
 When you run this command, a DTR replica of your choice is repaired and
 turned into the only replica in the whole DTR cluster.

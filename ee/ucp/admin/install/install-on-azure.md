@@ -43,6 +43,9 @@ to successfully deploy Docker UCP on Azure:
   Configuration](#considerations-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
+- Internal IP addresses for all nodes should be [set to
+  Static](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-static-private-ip-arm-pportal),
+  rather than the default of Dynamic.
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
   Computer Name and the Node Operating System's Hostname which is the FQDN of
   the host, including domain names. Note that this requires all characters to be in lowercase.
@@ -72,7 +75,7 @@ to `0644` to ensure the container user has read access.
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
 parameters as is.
 
-```
+```json
 {
     "cloud":"AzurePublicCloud", 
     "tenantId": "***",
@@ -105,7 +108,7 @@ seperate resource group.
 - `routeTableName` - If you have defined multiple Route tables within
 an Azure subnet.
 
-See [Kubernetes' azure.go](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure.go) for more details on this configuration file.
+See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
 
 ## Considerations for IPAM Configuration
 
@@ -230,7 +233,7 @@ If you have manually provisioned additional IP addresses for each Virtual
 Machine, and want to disallow UCP from dynamically provisioning IP
 addresses for you, then your UCP configuration file would be: 
 
-```
+```bash
 $ vi example-config-1
 [cluster_config]
   azure_ip_count = "0"
@@ -239,11 +242,12 @@ $ vi example-config-1
 If you want to reduce the IP addresses dynamically allocated from 128 to a
 custom value, then your UCP configuration file would be: 
 
-```
+```bash
 $ vi example-config-2
 [cluster_config]
   azure_ip_count = "20" # This value may be different for your environment
 ```
+
 See [Considerations for IPAM
 Configuration](#considerations-for-ipam-configuration) to calculate an
 appropriate value.
@@ -254,18 +258,20 @@ To preload this configuration file prior to installing UCP:
   
 2. Initiate a Swarm on that Virtual Machine.
 
-    ```
+    ```bash
     $ docker swarm init
     ```
 
 3. Upload the configuration file to the Swarm, by using a [Docker Swarm Config](/engine/swarm/configs/). 
 This Swarm Config will need to be named `com.docker.ucp.config`.
-    ```
+    
+    ```bash
     $ docker config create com.docker.ucp.config <local-configuration-file>
     ```
 
 4. Check that the configuration has been loaded succesfully.
-    ```
+    
+    ```bash
     $ docker config list
     ID                          NAME                                                      CREATED             UPDATED
     igca3q30jz9u3e6ecq1ckyofz   com.docker.ucp.config                                     1 days ago          1 days ago

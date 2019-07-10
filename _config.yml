@@ -22,7 +22,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 latest_engine_api_version: "1.39"
 docker_ce_version: "18.09"
 docker_ee_version: "18.09"
-compose_version: "1.24.0"
+compose_version: "1.24.1"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -96,7 +96,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-18.09.6"
+      win_latest_build: "docker-18.09.7"
   - scope:
       path: "datacenter"
     values:
@@ -106,14 +106,14 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.6"
+      dtr_version: "2.6.7"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.11"
+      dtr_version: "2.5.12"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -149,29 +149,29 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.7"
+      ucp_version: "3.1.8"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.7"
-      dtr_version: "2.6.6"
+      ucp_version: "3.1.8"
+      dtr_version: "2.6.7"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.11"
+      ucp_version: "3.0.12"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.18"
+      ucp_version: "2.2.19"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
