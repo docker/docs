@@ -8,7 +8,7 @@ Compose supports two methods of sharing common configuration:
 
 1. Extending an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
-2. Extending individual services with [the `extends` field](extends.md#extending-services)
+2. Extending individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
 
 
 ## Multiple Compose files
@@ -44,7 +44,7 @@ relative to the base file.
 
 ### Example use case
 
-In this section are two common use cases for multiple compose files: changing a
+In this section, there are two common use cases for multiple Compose files: changing a
 Compose app for different environments, and running administrative tasks
 against a Compose app.
 
@@ -297,7 +297,7 @@ replaces the old value.
 >  `build` and `image` in Compose file version 1
 >
 > In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](compose-file.md#version-1), using one
+> [version 1 of the Compose file format](/compose/compose-file/compose-file-v1.md), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.
 >

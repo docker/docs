@@ -40,7 +40,7 @@ To use Docker EE's built-in authentication, you must [create users manually](#cr
 The general flow of designing an organization with teams in UCP is:
 
 1. Create an organization.
-2. Add users or enable LDAD (for syncing users).
+2. Add users or enable LDAP (for syncing users).
 3. Create teams under the organization.
 4. Add users to teams manually or sync with LDAP.
 

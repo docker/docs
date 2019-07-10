@@ -32,7 +32,7 @@ collection: |
   nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 Compose: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
-  running complex applications with Docker. With compose, you define a
+  running complex applications with Docker. With Compose, you define a
   multi-container application in a single file, then spin your
   application up in a single command which does everything that needs to
   be done to get it running.
@@ -81,24 +81,24 @@ Docker Enterprise Edition: |
   containerized applications, that you can deploy in the cloud or on-premise. It
   includes a tested and certified version of Docker, web UIs for managing
   your app resources, and support.
-Docker for Mac: |
-  [Docker for Mac](/docker-for-mac/) is an easy-to-install, lightweight
+Docker Desktop for Mac: |
+  [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
-  Mac application, Docker for Mac uses the macOS Hypervisor
+  Mac application, Docker Desktop for Mac uses the macOS Hypervisor
   framework, networking, and filesystem. It's the best solution if you want
   to build, debug, test, package, and ship Dockerized applications on a
-  Mac. Docker for Mac supersedes [Docker Toolbox](#toolbox) as
+  Mac. Docker Desktop for Mac supersedes [Docker Toolbox](#toolbox) as
   state-of-the-art Docker on macOS.
-Docker for Windows: |
-  [Docker for Windows](/docker-for-windows/) is an
+Docker Desktop for Windows: |
+  [Docker Desktop for Windows](/docker-for-windows/) is an
   easy-to-install, lightweight Docker development environment designed
   specifically for Windows 10 systems that support Microsoft Hyper-V
-  (Professional, Enterprise and Education). Docker for Windows uses Hyper-V for
+  (Professional, Enterprise and Education). Docker Desktop for Windows uses Hyper-V for
   virtualization, and runs as a native Windows app. It works with Windows Server
   2016, and gives you the ability to set up and run Windows containers as well as
   the standard Linux containers, with an option to switch between the two. Docker
   for Windows is the best solution if you want to build, debug, test, package, and
-  ship Dockerized applications from Windows machines. Docker for Windows
+  ship Dockerized applications from Windows machines. Docker Desktop for Windows
   supersedes [Docker Toolbox](#toolbox) as state-of-the-art Docker on Windows.
 Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
@@ -163,8 +163,8 @@ image: |
   does not have state and it never changes.
 Kitematic: |
   A legacy GUI, bundled with [Docker Toolbox](#toolbox), for managing Docker
-  containers. We recommend upgrading to [Docker for Mac](#docker for Mac) or
-  [Docker for Windows](#docker for Windows), which have superseded Kitematic.
+  containers. We recommend upgrading to [Docker Desktop for Mac](#docker for Mac) or
+  [Docker Desktop for Windows](#docker for Windows), which have superseded Kitematic.
 layer: |
   In an image, a layer is modification to the image, represented by an instruction in the
   Dockerfile. Layers are applied in sequence to the base image to create the final image.
@@ -309,11 +309,11 @@ Toolbox: |
   installer for Mac and Windows users. It uses Oracle VirtualBox for
   virtualization.
 
-  For Macs running OS X El Capitan 10.11 and newer macOS releases, [Docker for
+  For Macs running OS X El Capitan 10.11 and newer macOS releases, [Docker Desktop for
   Mac](/docker-for-mac/) is the better solution.
 
   For Windows 10 systems that support Microsoft Hyper-V (Professional, Enterprise
-  and Education), [Docker for
+  and Education), [Docker Desktop for
   Windows](/docker-for-windows/) is the better solution.
 Union file system: |
   Union file systems implement a [union

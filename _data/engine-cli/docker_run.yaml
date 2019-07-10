@@ -93,6 +93,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-percent
   value_type: int64
   default_value: "0"
@@ -102,6 +103,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-period
   value_type: int64
   default_value: "0"
@@ -423,6 +425,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: io-maxiops
   value_type: uint64
   default_value: "0"
@@ -432,6 +435,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: ip
   value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
@@ -1138,7 +1142,7 @@ examples: |-
   ```
 
   The `my-label` key doesn't specify a value so the label defaults to an empty
-  string(`""`). To add multiple labels, repeat the label flag (`-l` or `--label`).
+  string (`""`). To add multiple labels, repeat the label flag (`-l` or `--label`).
 
   The `key=value` must be unique to avoid overwriting the label value. If you
   specify labels with identical keys but different values, each subsequent value
@@ -1312,7 +1316,7 @@ examples: |-
   |:---------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | `no`                       | Do not automatically restart the container when it exits. This is the default.                                                                                                                                                                                   |
   | `on-failure[:max-retries]` | Restart only if the container exits with a non-zero exit status. Optionally, limit the number of restart retries the Docker daemon attempts.                                                                                                                     |
-  | `unless-stopped`           | Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted. |
+  | `unless-stopped`           | Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.                                                                                                                                                                  |
   | `always`                   | Always restart the container regardless of the exit status. When you specify always, the Docker daemon will try to restart the container indefinitely. The container will also always start on daemon startup, regardless of the current state of the container. |
 
   ```bash
@@ -1323,7 +1327,7 @@ examples: |-
   so that if the container exits, Docker will restart it.
 
   More detailed information on restart policies can be found in the
-  [Restart Policies (--restart)](../run.md#restart-policies-restart)
+  [Restart Policies (--restart)](../run.md#restart-policies---restart)
   section of the Docker run reference page.
 
   ### Add entries to container hosts file (--add-host)
@@ -1450,7 +1454,7 @@ examples: |-
   On Windows server, assuming the default configuration, these commands are equivalent
   and result in `process` isolation:
 
-  ```PowerShell
+  ```powershell
   PS C:\> docker run -d microsoft/nanoserver powershell echo process
   PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo process
   PS C:\> docker run -d --isolation process microsoft/nanoserver powershell echo process
@@ -1460,7 +1464,7 @@ examples: |-
   are running against a Windows client-based daemon, these commands are equivalent and
   result in `hyperv` isolation:
 
-  ```PowerShell
+  ```powershell
   PS C:\> docker run -d microsoft/nanoserver powershell echo hyperv
   PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo hyperv
   PS C:\> docker run -d --isolation hyperv microsoft/nanoserver powershell echo hyperv

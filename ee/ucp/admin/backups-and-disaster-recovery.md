@@ -27,23 +27,33 @@ UCP maintains data about:
 This data is persisted on the host running UCP, using named volumes.
 [Learn more about UCP named volumes](../ucp-architecture.md).
 
-UCP won't backup your routing mesh settings. After restoring you need to
-[re-enable the routing mesh](../interlock/deploy/index.md). If you've customized
-your layer 7 routing deployment, you'll need to re-apply those customizations too.
-
+> Warning: UCP will not back up your routing mesh settings. After restoring,
+[reenable the routing mesh](../interlock/deploy/index.md). Additionally, if you've customized
+your Layer 7 routing deployment, reapply your custom settings.
 ## Backup steps
 
 Back up your Docker EE components in the following order:
 
 1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
 2. Back up UCP
-3. [Back up DTR](../../dtr/2.5/admin/disaster-recovery/index.md)
+3. [Back up DTR](/ee/dtr/admin/disaster-recovery/)
 
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
 DTR is backed up independently.
 [Learn about DTR backups and recovery](../../dtr/2.5/admin/disaster-recovery/index.md).
+
+> Warning: On UCP versions 3.1.0 - 3.1.2, before performing a UCP backup, you must clean up multiple /dev/shm mounts in the ucp-kublet entrypoint script by running the following script on all nodes via cron job:
+
+```
+SHM_MOUNT=$(grep -m1 '^tmpfs./dev/shm' /proc/mounts)
+while [ $(grep -cm2 '^tmpfs./dev/shm' /proc/mounts) -gt 1 ]; do 
+  sudo umount /dev/shm 
+done 
+grep -q '^tmpfs./dev/shm' /proc/mounts || sudo mount "${SHM_MOUNT}"
+``` 
+For additional details, refer to [Docker KB000934](https://success.docker.com/article/more-than-one-dev-shm-mount-in-the-host-namespace){: target="_blank"}
 
 To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the

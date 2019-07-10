@@ -91,11 +91,11 @@ trying to pull and push images from your local Docker installation to DTR.
 
     ![](/datacenter/ucp/2.1/guides/images/dtr-integration-1.png)
 
-2.  Pull the `hello-world` image from Docker Store, re-tag it, and push it to the
+2.  Pull the `hello-world` image from Docker Hub, re-tag it, and push it to the
 DTR repository you created.
 
     ```none
-    # Pull hello-world from Docker Store
+    # Pull hello-world from Docker Hub
     docker pull hello-world:latest
 
     # Re-tag it

@@ -53,7 +53,7 @@ the same variable in the shell in which Compose is run.
 ## The “env_file” configuration option
 
 You can pass multiple environment variables from an external file through to
-a service's containers with the ['env_file' option](compose-file.md#envfile),
+a service's containers with the ['env_file' option](compose-file.md#env_file),
 just like with `docker run --env-file=FILE ...`:
 
 ```yaml
@@ -129,10 +129,11 @@ services:
 When you set the same environment variable in multiple files, here's the
 priority used by Compose to choose which value to use:
 
-1. Compose file,
-2. Environment file,
-3. Dockerfile,
-4. Variable is not defined.
+1. Compose file
+2. Shell environment variables
+3. Environment file
+4. Dockerfile
+5. Variable is not defined
 
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:

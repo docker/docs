@@ -50,20 +50,31 @@ commands:
 
 {% raw %}
 ```bash
-# This command will start a RethinkDB client attached to the database
-# on the current node.
+# List problems in the cluster detected by the current node.
+echo 'r.db("rethinkdb").table("current_issues")' | \
+  docker exec -i \
+    $(docker ps -q --filter name=dtr-rethinkdb) \
+    rethinkcli non-interactive; \
+    echo
+```
+{% endraw %}
+
+On a healthy cluster the output will be `[]`.
+
+RethinkDB stores data in different databases that contain multiple tables. This
+container can also be used to connect to the local DTR replica and
+interactively query the contents of the DB.
+
+{% raw %}
+```bash
 docker exec -it $(docker ps -q --filter name=dtr-rethinkdb) rethinkcli
 ```
 {% endraw %}
 
-RethinkDB stores data in different databases that contain multiple tables. The `rethinkcli`
-tool launches an interactive prompt where you can run RethinkDB
-queries such as:
-
 ```none
-# List problems detected within the rethinkdb cluster
+# List problems in the cluster detected by the current node.
 > r.db("rethinkdb").table("current_issues")
-...
+[]
 
 # List all the DBs in RethinkDB
 > r.dbList()
@@ -94,7 +105,7 @@ queries such as:
 ...
 ```
 
-Indvidual DBs and tables are a private implementation detail and may change in DTR
+Individual DBs and tables are a private implementation detail and may change in DTR
 from version to version, but you can always use `dbList()` and `tableList()` to explore
 the contents and data structure.
 

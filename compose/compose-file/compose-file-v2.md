@@ -50,7 +50,7 @@ definition in version 2.
 
 A set of configuration options to set block IO limits for this service.
 
-    version: '2.2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       foo:
         image: busybox
@@ -196,6 +196,10 @@ or a list:
       args:
         - buildno=1
         - gitcommithash=cdc3b19
+        
+> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
+> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
+> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
@@ -389,7 +393,7 @@ Express dependency between services, which has two effects:
 
 Simple example:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -414,7 +418,7 @@ the healthcheck) before starting.
 
 Example:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -532,7 +536,7 @@ the value assigned to a variable that shows up more than once_. The files in the
 list are processed from the top down. For the same variable specified in file
 `a.env` and assigned a different value in file `b.env`, if `b.env` is
 listed below (after), then the value from `b.env` stands. For example, given the
-following declaration in `docker_compose.yml`:
+following declaration in `docker-compose.yml`:
 
 ```yaml
 services:
@@ -663,7 +667,7 @@ details.
 A full example:
 
 ```
-version: '2'
+version: "{{ site.compose_file_v2 }}"
 services:
   myservice:
     image: alpine
@@ -734,21 +738,19 @@ options and tags it with the specified tag.
 > [Added in version 2.2 file format](compose-versioning.md#version-22).
 
 Run an init inside the container that forwards signals and reaps processes.
-Either set a boolean value to use the default `init`, or specify a path to
-a custom one.
+Set this option to `true` to enable this feature for the service.
 
-    version: '2.2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         image: alpine:latest
         init: true
 
+> The default init binary that is used is [Tini](https://github.com/krallin/tini),
+> and is installed in `/usr/libexec/docker-init` on the daemon host. You can
+> configure the daemon to use a custom init binary through the
+> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
-    version: '2.2'
-    services:
-      web:
-        image: alpine:latest
-        init: /usr/libexec/docker-init
 
 ### isolation
 
@@ -881,7 +883,7 @@ The general format is shown here.
 
 In the example below, three services are provided (`web`, `worker`, and `db`), along with two networks (`new` and `legacy`). The `db` service is reachable at the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on the `legacy` network.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       web:
@@ -916,7 +918,7 @@ The corresponding network configuration in the [top-level networks section](#net
 
 An example:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       app:
@@ -950,7 +952,7 @@ managed by docker (IPAM driver).
 
 Example usage:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     services:
       app:
         image: busybox
@@ -973,7 +975,7 @@ In the following example, the `app` service connects to `app_net_1` first
 as it has the highest priority. It then connects to `app_net_3`, then
 `app_net_2`, which uses the default priority value of `0`.
 
-    version: '2.3'
+    version: "{{ site.compose_file_v2 }}"
     services:
       app:
         image: busybox
@@ -990,7 +992,7 @@ as it has the highest priority. It then connects to `app_net_3`, then
       app_net_2:
       app_net_3:
 
-> **Note:** If multiple networks have the same priority, the connection order
+> **Note**: If multiple networks have the same priority, the connection order
 > is undefined.
 
 ### pid
@@ -1006,7 +1008,7 @@ designated container or service.
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vise-versa.
+other containers in the bare-metal machine's namespace and vice versa.
 
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
@@ -1212,7 +1214,7 @@ expressed in the short form.
 
 
 ```none
-version: "2.3"
+version: "{{ site.compose_file_v2 }}"
 services:
   web:
     image: nginx:alpine
@@ -1235,7 +1237,7 @@ volumes:
   mydata:
 ```
 
-> **Note:** When creating bind mounts, using the long syntax requires the
+> **Note**: When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
@@ -1248,7 +1250,7 @@ service.
 
     volume_driver: mydriver
 
-> **Note:** In [version 2 files](compose-versioning.md#version-2), this
+> **Note**: In [version 2 files](compose-versioning.md#version-2), this
 > option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
@@ -1298,7 +1300,7 @@ then read-write is used.
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
-> **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
+> **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
 > The following options were added in [version 2.1](compose-versioning.md#version-21):
 > `oom_kill_disable`, `cpu_period`
@@ -1376,7 +1378,7 @@ Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
 up:
 
-    version: "2.2"
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       db:
@@ -1420,14 +1422,16 @@ If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other volume configuration keys
-(`driver`, `driver_opts`).
+For version 2.0 of the format, `external` cannot be used in
+conjunction with other volume configuration keys (`driver`, `driver_opts`,
+`labels`). This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       db:
@@ -1478,14 +1482,14 @@ conflicting with those used by other software.
 
 Set a custom name for this volume.
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     volumes:
       data:
         name: my-app-data
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     volumes:
       data:
         external: true
@@ -1593,15 +1597,17 @@ If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
-`external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
+For version 2.0 of the format, `external` cannot be used in conjunction with
+other network configuration keys (`driver`, `driver_opts`, `ipam`, `internal`).
+This limitation no longer exists for
+[version 2.1](compose-versioning.md#version-21) and above.
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
 
     services:
       proxy:
@@ -1636,14 +1642,14 @@ Not supported for version 2 `docker-compose` files. Use
 
 Set a custom name for this network.
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     networks:
       network1:
         name: my-app-net
 
-It can also be used in conjuction with the `external` property:
+It can also be used in conjunction with the `external` property:
 
-    version: '2.1'
+    version: "{{ site.compose_file_v2 }}"
     networks:
       network1:
         external: true

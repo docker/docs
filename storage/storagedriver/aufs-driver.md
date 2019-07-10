@@ -32,7 +32,6 @@ potential performance advantages over the `aufs` storage driver.
   `ecryptfs`. This means that the filesystem which contains
   `/var/lib/docker/aufs` cannot be one of these filesystem types.
 
-
 ## Configure Docker with the `aufs` storage driver
 
 If the AUFS driver is loaded into the kernel when you start Docker, and no other
@@ -66,13 +65,13 @@ storage driver is configured, Docker uses it by default.
     `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
     if Docker has been started with the `--storage-driver` flag.
 
-
 ## How the `aufs` storage driver works
 
 AUFS is a *union filesystem*, which means that it layers multiple directories on
 a single Linux host and presents them as a single directory. These directories
 are called _branches_ in AUFS terminology, and _layers_ in Docker terminology.
-The unification process is referred to a a _union mount_.
+
+The unification process is referred to as a _union mount_.
 
 The diagram below shows a Docker container based on the `ubuntu:latest` image.
 
@@ -169,7 +168,7 @@ Consider some scenarios where files in a container are modified.
   However, AUFS works at the file level rather than the block level. This
   means that all copy_up operations copy the entire file, even if the file is
   very large and only a small part of it is being modified. This can have a
-  noticeable impact on container write performance. AUFS, which can suffer
+  noticeable impact on container write performance. AUFS can suffer
   noticeable latencies when searching for files in images with many layers.
   However, it is worth noting that the copy_up operation only occurs the first
   time a given file is written to. Subsequent writes to the same file operate
@@ -228,7 +227,6 @@ The following generic performance best practices also apply to AUFS.
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
-
+- [Volumes](/storage/volumes.md)
+- [Understand images, containers, and storage drivers](imagesandcontainers.md)
+- [Select a storage driver](selectadriver.md)

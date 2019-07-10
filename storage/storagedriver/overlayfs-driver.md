@@ -1,6 +1,6 @@
 ---
 description: Learn how to optimize your use of OverlayFS driver.
-keywords: container, storage, driver, OverlayFS
+keywords: container, storage, driver, OverlayFS, overlay2, overlay
 title: Use the OverlayFS storage driver
 redirect_from:
 - /engine/userguide/storagedriver/overlayfs-driver/
@@ -16,8 +16,7 @@ storage driver as `overlay` or `overlay2`.
 > **Note**: If you use OverlayFS, use the `overlay2` driver rather than the
 > `overlay` driver, because it is more efficient in terms of inode utilization.
 > To use the new driver, you need version 4.0 or higher of the Linux kernel,
-> unless you are a Docker EE user on RHEL or CentOS, in which case you need
-> version 3.10.0-514 or higher of the kernel and to follow some extra steps.
+> or RHEL or CentOS using version 3.10.0-514 and above.
 >
 > For more information about differences between `overlay` vs `overlay2`, check
 > [Docker storage drivers](select-storage-driver.md).
@@ -26,21 +25,15 @@ storage driver as `overlay` or `overlay2`.
 
 OverlayFS is supported if you meet the following prerequisites:
 
-- The `overlay2` driver is supported for Docker EE 17.06.02-ee5 and later and
-  recommended for Docker CE.
-
-- The `overlay` driver is allowed but not recommended for Docker CE.
-
+- The `overlay2` driver is supported on Docker CE, and Docker EE 17.06.02-ee5 and
+  up, and is the recommended storage driver.
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
-  version 3.10.0-514 of the kernel or higher. Docker EE users using kernels older
-  than 4.0 need to follow some extra steps, outlined below.
-  If you use an older kernel, you need to use the `overlay` driver, which is not
-  recommended.
+  version 3.10.0-514 of the kernel or higher. If you use an older kernel, you need
+  to use the `overlay` driver, which is not recommended.
+- The `overlay` and `overlay2` drivers are supported on `xfs` backing filesystems,
+  but only with `d_type=true` enabled.
 
-- The following backing filesystems are supported:
-  - `ext4` (RHEL 7.1 only)
-  - `xfs` (RHEL 7.2 and higher), but only with `d_type=true` enabled. Use
-    `xfs_info` to verify that the `ftype` option is set to `1`. To format an
+    Use `xfs_info` to verify that the `ftype` option is set to `1`. To format an
     `xfs` filesystem correctly, use the flag `-n ftype=1`.
 
     > **Warning**: Running on XFS without d_type support now causes Docker to
@@ -52,8 +45,8 @@ OverlayFS is supported if you meet the following prerequisites:
 
 - Changing the storage driver makes existing containers and images inaccessible
   on the local system. Use `docker save` to save any images you have built or
-  push them to Docker Hub or a private registry, so that you do not need to
-  re-create them later.
+  push them to Docker Hub or a private registry before changing the storage driver,
+  so that you do not need to re-create them later.
 
 
 ## Configure Docker with the `overlay` or `overlay2` storage driver
@@ -69,6 +62,9 @@ be 4.0 or newer.
 
 Before following this procedure, you must first meet all the
 [prerequisites](#prerequisites).
+
+The steps below outline how to configure the `overlay2` storage driver. If you
+need to use the legacy `overlay` driver, specify it instead.
 
 
 1. Stop Docker.
@@ -96,34 +92,6 @@ Before following this procedure, you must first meet all the
     }
     ```
 
-    > **Note**: RHEL and CentOS users on Docker EE 17.06.02-ee5 and 17.06.02-ee6
-    >
-    > You need to add a second option to the `daemon.json` to disable the check
-    > for version 4.0 or higher of the Linux kernel. Your `daemon.json` should
-    > look like the following. **This is only needed for Docker EE users of RHEL
-    > or CentOS.** Do not attempt to use `overlay2` with kernel versions older
-    > than 3.10.0-514.
-    >
-    > ```json
-    > {
-    >   "storage-driver": "overlay2",
-    >   "storage-opts": [
-    >     "overlay2.override_kernel_check=true"
-    >   ]
-    > }
-    > ```
-    > On kernel versions that support it, Docker EE versions 17.06.02-ee7 and
-    > later enable `overlay2` by default and do not require
-    > `override_kernel_check`.
-
-    If you need to use the legacy `overlay` driver, specify it instead.
-
-    More storage options are available. See all storage options for each storage
-    driver:
-
-    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
-
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
 5.  Start Docker.
@@ -132,7 +100,7 @@ Before following this procedure, you must first meet all the
     $ sudo systemctl start docker
     ```
 
-4.  Verify that the daemon is using the `overlay`/`overlay2` storage driver.
+4.  Verify that the daemon is using the `overlay2` storage driver.
     Use the `docker info` command and look for `Storage Driver` and
     `Backing filesystem`.
 
@@ -142,12 +110,14 @@ Before following this procedure, you must first meet all the
     Containers: 0
     Images: 0
     Storage Driver: overlay2
-     Backing Filesystem: extfs
+     Backing Filesystem: xfs
+     Supports d_type: true
+     Native Overlay Diff: true
     <output truncated>
     ```
 
-Docker is now using the `overlay2` storage driver. Docker has automatically
-created the `overlay` mount with the required `lowerdir`, `upperdir`, `merged`,
+Docker is now using the `overlay2` storage driver and has automatically
+created the overlay mount with the required `lowerdir`, `upperdir`, `merged`,
 and `workdir` constructs.
 
 Continue reading for details about how OverlayFS works within your Docker
@@ -165,9 +135,7 @@ process is referred to as a _union mount_. OverlayFS refers to the lower directo
 as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
-While the `overlay` driver only works with a single lower OverlayFS layer and
-hence requires hard links for implementation of multi-layered images, the
-`overlay2` driver natively supports up to 128 lower OverlayFS layers. This
+The `overlay2` driver natively supports up to 128 lower OverlayFS layers. This
 capability provides better performance for layer-related Docker commands such
 as `docker build` and `docker commit`, and consumes fewer inodes on the backing
 filesystem.
@@ -269,7 +237,7 @@ for `overlay2`.
 
 OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called _layers_ and the unification
-process is referred to a a _union mount_. OverlayFS refers to the lower directory
+process is referred to as a _union mount_. OverlayFS refers to the lower directory
 as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
@@ -289,8 +257,10 @@ The `overlay` driver only works with two layers. This means that multi-layered
 images cannot be implemented as multiple OverlayFS layers. Instead, each image
 layer is implemented as its own directory under `/var/lib/docker/overlay`.  Hard
 links are then used as a space-efficient way to reference data shared with lower
-layers. As of Docker 1.10, image layer IDs no longer correspond to directory
-names in `/var/lib/docker/`.
+layers. The use of hardlinks causes an excessive use of inodes, which is a known
+limitation of the legacy `overlay` storage driver, and may require additional
+configuration of the backing filesystem. Refer to the [overlayFS and Docker
+performance](#overlayfs-and-docker-performance) for details.
 
 To create a container, the `overlay` driver combines the directory representing
 the image's top layer plus a new directory for the container. The image's top
@@ -432,7 +402,7 @@ Consider some scenarios where files in a container are modified.
   writes the changes to the new copy of the file in the container layer.
 
   However, OverlayFS works at the file level rather than the block level. This
-  means that all OverlayFS copy_up operations copy the entire file, even if the\
+  means that all OverlayFS copy_up operations copy the entire file, even if the
   file is very large and only a small part of it is being modified. This can
   have a noticeable impact on container write performance. However, two things
   are worth noting:
@@ -490,7 +460,7 @@ Both `overlay2` and `overlay` drivers are more performant than `aufs` and
   far larger latencies if searching through many AUFS layers. `overlay2` supports
   multiple layers as well, but mitigates any performance hit with caching.
 
-- **Inode limits**. Use of the `overlay` storage driver can cause excessive
+- **Inode limits**. Use of the legacy `overlay` storage driver can cause excessive
   inode consumption. This is especially true in the presence of a large number
   of images and containers on the Docker host. The only way to increase the
   number of inodes available to a filesystem is to reformat it. To avoid running
@@ -509,8 +479,8 @@ The following generic performance best practices also apply to OverlayFS.
   predictable performance for write-heavy workloads. This is because they bypass
   the storage driver and do not incur any of the potential overheads introduced
   by thin provisioning and copy-on-write. Volumes have other benefits, such as
-  allowing you to share data among containers and persisting even when no
-  running container is using them.
+  allowing you to share data among containers and persisting your data even if
+  no running container is using them.
 
 ## Limitations on OverlayFS compatibility
 To summarize the OverlayFS's aspect which is incompatible with other

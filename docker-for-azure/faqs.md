@@ -90,6 +90,8 @@ All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft
 An excerpt of the above regions to use when you create your service principal are:
 
 ```none
+australiacentral
+australiacentral2
 australiaeast
 australiasoutheast
 brazilsouth
@@ -100,6 +102,8 @@ centralus
 eastasia
 eastus
 eastus2
+francecentral
+francesouth
 japaneast
 japanwest
 koreacentral
@@ -111,8 +115,8 @@ southeastasia
 southindia
 uksouth
 ukwest
-usgovvirginia
 usgoviowa
+usgovvirginia
 westcentralus
 westeurope
 westindia

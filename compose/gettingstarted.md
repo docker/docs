@@ -31,7 +31,6 @@ Define the application dependencies.
         import redis
         from flask import Flask
 
-
         app = Flask(__name__)
         cache = redis.Redis(host='redis', port=6379)
 
@@ -52,9 +51,6 @@ Define the application dependencies.
         def hello():
             count = get_hit_count()
             return 'Hello World! I have been seen {} times.\n'.format(count)
-
-        if __name__ == "__main__":
-            app.run(host="0.0.0.0", debug=True)
 
 
       In this example, `redis` is the hostname of the redis container on the
@@ -86,19 +82,25 @@ itself.
 In your project directory, create a file named `Dockerfile` and paste the
 following:
 
-    FROM python:3.4-alpine
-    ADD . /code
+    FROM python:3.7-alpine
     WORKDIR /code
+    ENV FLASK_APP app.py
+    ENV FLASK_RUN_HOST 0.0.0.0
+    RUN apk add --no-cache gcc musl-dev linux-headers
+    COPY requirements.txt requirements.txt
     RUN pip install -r requirements.txt
-    CMD ["python", "app.py"]
+    COPY . .
+    CMD ["flask", "run"]
 
 This tells Docker to:
 
-* Build an image starting with the Python 3.4 image.
-* Add the current directory `.` into the path `/code` in the image.
+* Build an image starting with the Python 3.7 image.
 * Set the working directory to `/code`.
-* Install the Python dependencies.
-* Set the default command for the container to `python app.py`.
+* Set environment variables used by the `flask` command.
+* Install gcc so Python packages such as MarkupSafe and SQLAlchemy can compile speedups.
+* Copy `requirements.txt` and install the Python dependencies.
+* Copy the current directory `.` in the project to the workdir `.` in the image.
+* Set the default command for the container to `flask run`.
 
 For more information on how to write Dockerfiles, see the [Docker user
 guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
@@ -115,19 +117,22 @@ the following:
       web:
         build: .
         ports:
-         - "5000:5000"
+          - "5000:5000"
       redis:
         image: "redis:alpine"
 
-This Compose file defines two services, `web` and `redis`. The `web` service:
+This Compose file defines two services: `web` and `redis`. 
 
-* Uses an image that's built from the `Dockerfile` in the current directory.
-* Forwards the exposed port 5000 on the container to port 5000 on the host
-  machine. We use the default port for the Flask web server, `5000`.
+### Web service
 
-The `redis` service uses a public
-[Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
-Hub registry.
+The `web` service uses an image that's built from the `Dockerfile` in the current directory.
+It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
+the Flask web server, `5000`.
+
+### Redis service
+
+The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
+image pulled from the Docker Hub registry.
 
 ## Step 4: Build and run your app with Compose
 
@@ -158,13 +163,13 @@ Hub registry.
     Compose pulls a Redis image, builds an image for your code, and starts the
     services you defined. In this case, the code is statically copied into the image at build time.
 
-2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
+2.  Enter http://localhost:5000/ in a browser to see the application running.
 
-    If you're using Docker natively on Linux, Docker for Mac, or Docker for
+    If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
     Windows, then the web app should now be listening on port 5000 on your
-    Docker daemon host. Point your web browser to `http://localhost:5000` to
+    Docker daemon host. Point your web browser to http://localhost:5000 to
     find the `Hello World` message. If this doesn't resolve, you can also try
-    `http://0.0.0.0:5000`.
+    http://127.0.0.1:5000.
 
     If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
     MACHINE_VM` to get the IP address of your Docker host. Then, open
@@ -216,15 +221,19 @@ Edit `docker-compose.yml` in your project directory to add a [bind mount](/engin
       web:
         build: .
         ports:
-         - "5000:5000"
+          - "5000:5000"
         volumes:
-         - .:/code
+          - .:/code
+        environment:
+          FLASK_ENV: development
       redis:
         image: "redis:alpine"
 
 The new `volumes` key mounts the project directory (current directory) on the
 host to `/code` inside the container, allowing you to modify the code on the
-fly, without having to rebuild the image.
+fly, without having to rebuild the image. The `environment` key sets the
+`FLASK_ENV` environment variable, which tells `flask run` to run in development
+mode and reload the code on change. This mode should only be used in development.
 
 ## Step 6: Re-build and run the app with Compose
 
@@ -253,15 +262,15 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker for Windows that uses [Linux
+Docker Desktop for Windows that uses [Linux
 containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature). For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
-on Docker for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
+on Docker Desktop for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
 for Mac, and the general examples on how to [Manage data in
 containers](../engine/tutorials/dockervolumes.md).
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+requirements for [Docker Desktop for Windows](/docker-for-windows/install.md) and do not
 need VirtualBox.
 {: .important}
 

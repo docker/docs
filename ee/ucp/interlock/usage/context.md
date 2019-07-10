@@ -1,20 +1,20 @@
 ---
-title: Context/path based routing
-description: Learn how to do route traffic to your Docker swarm services based
-  on a url path
+title: Use context and path-based routing
+description: Learn how to route traffic to your Docker swarm services based
+  on a url path.
 keywords: routing, proxy
 ---
 
-In this example we will publish a service using context or path based routing.
+The following example publishes a service using context or path based routing.
 
-First we will create an overlay network so that service traffic is isolated and secure:
+First, create an overlay network so that service traffic is isolated and secure:
 
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
 
-Next we will create the initial service:
+Next, create the initial service:
 
 ```bash
 $> docker service create \
@@ -29,8 +29,15 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Interlock will detect once the service is available and publish it.  Once the tasks are running
-and the proxy service has been updated the application should be available via `http://demo.local`:
+> Only one path per host
+>
+> Interlock only supports one path per host per service cluster. When a
+> specific `com.docker.lb.hosts` label is applied, it cannot be applied
+> again in the same service cluster.
+{: .important}
+
+Interlock detects when the service is available and publishes it. After tasks are running
+and the proxy service is updated, the application is available via `http://demo.local`:
 
 ```bash
 $> curl -vs -H "Host: demo.local" http://127.0.0.1/app/
@@ -55,4 +62,3 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/app/
 < x-upstream-response-time: 1510928717.306
 ...
 ```
-

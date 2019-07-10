@@ -10,32 +10,30 @@ Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
 leverages the thin provisioning and snapshotting capabilities of this framework
 for image and container management. This article refers to the Device Mapper
-storage driver as `devicemapper`, and the kernel framework as `Device Mapper`.
+storage driver as `devicemapper`, and the kernel framework as _Device Mapper_.
 
 For the systems where it is supported, `devicemapper` support is included in
 the Linux kernel. However, specific configuration is required to use it with
-Docker. For instance, on a stock installation of RHEL or CentOS, Docker
-defaults to `overlay`, which is not a supported configuration.
+Docker. 
 
 The `devicemapper` driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
 adding physical storage to your Docker host, and they perform better than using
-a filesystem at the level of the operating system.
+a filesystem at the operating system (OS) level. 
 
 ## Prerequisites
 
-- `devicemapper` storage driver is the only supported storage driver for Docker
-  EE and Commercially Supported Docker Engine (CS-Engine) on RHEL, CentOS, and
-  Oracle Linux. See the
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
+- `devicemapper` storage driver is a supported storage driver for Docker
+  EE on many OS distribution. See the
+  [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
 
 - `devicemapper` is also supported on Docker CE running on CentOS, Fedora,
   Ubuntu, or Debian.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so that you
-  not need to re-create them later.
+  and push existing images to Docker Hub or a private repository, so you do
+  not need to recreate them later.
 
 ## Configure Docker with the `devicemapper` storage driver
 
@@ -44,10 +42,18 @@ Before following these procedures, you must first meet all the
 
 ### Configure `loop-lvm` mode for testing
 
-This configuration is only appropriate for testing. Loopback devices are slow
-and resource-intensive, and require you to create file on disk at specific sizes.
-They can also introduce race conditions. They are supposed for testing because
-the set-up is easier.
+This configuration is only appropriate for testing. The `loop-lvm` mode makes
+use of a 'loopback' mechanism that allows files on the local disk to be
+read from and written to as if they were an actual physical disk or block
+device.
+However, the addition of the loopback mechanism, and interaction with the OS
+filesystem layer, means that IO operations can be slow and resource-intensive.
+Use of loopback devices can also introduce race conditions.
+However, setting up `loop-lvm` mode can help identify basic issues (such as
+missing user space packages, kernel drivers, etc.) ahead of attempting the more
+complex set up required to enable `direct-lvm` mode. `loop-lvm` mode should
+therefore only be used to perform rudimentary testing prior to configuring
+`direct-lvm`.
 
 For production systems, see
 [Configure direct-lvm mode for production](#configure-direct-lvm-mode-for-production).
@@ -102,7 +108,7 @@ For production systems, see
       Data Space Used: 11.8 MB
       Data Space Total: 107.4 GB
       Data Space Available: 7.44 GB
-      Metadata Space Used: 581.6 kB
+      Metadata Space Used: 581.6 KB
       Metadata Space Total: 2.147 GB
       Metadata Space Available: 2.147 GB
       Thin Pool Minimum Free Space: 10.74 GB
@@ -129,7 +135,7 @@ For production systems, see
 Production hosts using the `devicemapper` storage driver must use `direct-lvm`
 mode. This mode uses block devices to create the thin pool. This is faster than
 using loopback devices, uses system resources more efficiently, and block
-devices can grow as needed. However, more set-up is required than `loop-lvm`
+devices can grow as needed. However, more setup is required than in `loop-lvm`
 mode.
 
 After you have satisfied the [prerequisites](#prerequisites), follow the steps
@@ -138,14 +144,14 @@ below to configure Docker to use the `devicemapper` storage driver in
 
 > **Warning**: Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
-  and push existing images to Docker Hub or a private repository, so that you
-  don't need to recreate them later.
+  and push existing images to Docker Hub or a private repository, so you do not
+  need to recreate them later.
 
 #### Allow Docker to configure direct-lvm mode
 
-In Docker 17.06 and higher, Docker can manage the block device for you,
-simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh
-Docker set-ups only.** You can only use a single block device. If you need to
+With Docker `17.06` and higher, Docker can manage the block device for you,
+simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh 
+Docker setups only.** You can only use a single block device. If you need to
 use multiple block devices, [configure direct-lvm mode
 manually](#configure-direct-lvm-mode-manually) instead. The following new
 configuration options have been added:
@@ -154,13 +160,13 @@ configuration options have been added:
 |:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:--------|:-----------------------------------|
 | `dm.directlvm_device`           | The path to the block device to configure for `direct-lvm`.                                                                                                                        | Yes       |         | `dm.directlvm_device="/dev/xvdf"`  |
 | `dm.thinp_percent`              | The percentage of space to use for storage from the passed in block device.                                                                                                        | No        | 95      | `dm.thinp_percent=95`              |
-| `dm.thinp_metapercent`          | The percentage of space to for metadata storage from the passed-in block device.                                                                                                   | No        | 1       | `dm.thinp_metapercent=1`           |
+| `dm.thinp_metapercent`          | The percentage of space to use for metadata storage from the passed-in block device.                                                                                                   | No        | 1       | `dm.thinp_metapercent=1`           |
 | `dm.thinp_autoextend_threshold` | The threshold for when lvm should automatically extend the thin pool as a percentage of the total storage space.                                                                   | No        | 80      | `dm.thinp_autoextend_threshold=80` |
 | `dm.thinp_autoextend_percent`   | The percentage to increase the thin pool by when an autoextend is triggered.                                                                                                       | No        | 20      | `dm.thinp_autoextend_percent=20`   |
 | `dm.directlvm_device_force`     | Whether to format the block device even if a filesystem already exists on it. If set to `false` and a filesystem is present, an error is logged and the filesystem is left intact. | No        | false   | `dm.directlvm_device_force=true`   |
 
 Edit the `daemon.json` file and set the appropriate options, then restart Docker
-for the changes to take effect. The following `daemon.json` sets all of the
+for the changes to take effect. The following `daemon.json` configuration sets all of the
 options in the table above.
 
 ```json
@@ -257,7 +263,7 @@ assumes that the Docker daemon is in the `stopped` state.
 7.  Convert the volumes to a thin pool and a storage location for metadata for
     the thin pool, using the `lvconvert` command.
 
-    ```none
+    ```bash
     $ sudo lvconvert -y \
     --zero n \
     -c 512K \
@@ -305,23 +311,37 @@ assumes that the Docker daemon is in the `stopped` state.
     Logical volume docker/thinpool changed.
     ```
 
-11. Enable monitoring for logical volumes on your host. Without this step,
-    automatic extension does not occur even in the presence of the LVM profile.
+11. Ensure monitoring of the logical volume is enabled.
 
     ```bash
     $ sudo lvs -o+seg_monitor
 
     LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor
-    thinpool docker twi-a-t--- 95.00g             0.00   0.01                             monitored
+    thinpool docker twi-a-t--- 95.00g             0.00   0.01                             not monitored
     ```
+
+    If the output in the `Monitor` column reports, as above, that the volume is
+    `not monitored`, then monitoring needs to be explicitly enabled. Without
+    this step, automatic extension of the logical volume will not occur,
+    regardless of any settings in the applied profile.
+
+    ```bash
+    $ sudo lvchange --monitor y docker/thinpool
+    ```
+
+    Double check that monitoring is now enabled by running the
+    `sudo lvs -o+seg_monitor` command a second time. The `Monitor` column
+    should now report the logical volume is being `monitored`.
 
 12. If you have ever run Docker on this host before, or if `/var/lib/docker/`
     exists, move it out of the way so that Docker can use the new LVM pool to
     store the contents of image and containers.
 
     ```bash
-    $ mkdir /var/lib/docker.bk
-    $ mv /var/lib/docker/* /var/lib/docker.bk
+    $ sudo su -
+    # mkdir /var/lib/docker.bk
+    # mv /var/lib/docker/* /var/lib/docker.bk
+    # exit
     ```
 
     If any of the following steps fail and you need to restore, you can remove
@@ -396,7 +416,7 @@ assumes that the Docker daemon is in the `stopped` state.
     `/var/lib/docker.bk` directory which contains the previous configuration.
 
     ```bash
-    $ rm -rf /var/lib/docker.bk
+    $ sudo rm -rf /var/lib/docker.bk
     ```
 
 ## Manage devicemapper
@@ -406,17 +426,17 @@ assumes that the Docker daemon is in the `stopped` state.
 Do not rely on LVM auto-extension alone. The volume group
 automatically extends, but the volume can still fill up. You can monitor
 free space on the volume using `lvs` or `lvs -a`. Consider using a monitoring
-tool at the OS level, such a Nagios.
+tool at the OS level, such as Nagios.
 
 To view the LVM logs, you can use `journalctl`:
 
 ```bash
-$ journalctl -fu dm-event.service
+$ sudo journalctl -fu dm-event.service
 ```
 
 If you run into repeated problems with thin pool, you can set the storage option
 `dm.min_free_space` to a value (representing a percentage) in
-`/etc/docker.daemon.json`. For instance, setting it to `10` ensures
+`/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
 [storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" class="_"}.
@@ -809,6 +829,14 @@ storage driver.
   by thin provisioning and copy-on-write. Volumes have other benefits, such as
   allowing you to share data among containers and persisting even when no
   running container is using them.
+  
+- **Note**: when using `devicemapper` and the `json-file` log driver, the log
+  files generated by a container are still stored in Docker's dataroot directory, 
+  by default `/var/lib/docker`.  If your containers generate lots of log messages, 
+  this may lead to increased disk usage or the inability to manage your system due
+  to a full disk.  You can configure a 
+  [log driver](/config/containers/logging/configure.md) to store your container
+  logs externally.
 
 ## Related Information
 

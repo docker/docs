@@ -11,7 +11,7 @@ is ensuring you're running DTR 2.0. If that's not the case, start by upgrading
 your installation to version 2.0.0, and then upgrade to the latest version
 available.
 
-There is no downtime when upgrading an highly-available DTR cluster. If your
+There is no downtime when upgrading a highly-available DTR cluster. If your
 DTR deployment has a single replica, schedule the upgrade to take place outside
 business peak hours to ensure the impact on your business is close to none.
 

@@ -216,7 +216,7 @@ If you have been issued an _intermediate_ certificate instead, see
     $ docker run -d \
       --restart=always \
       --name registry \
-      -v `pwd`/certs:/certs \
+      -v "$(pwd)"/certs:/certs \
       -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
@@ -425,11 +425,11 @@ secrets.
       -p 5000:5000 \
       --restart=always \
       --name registry \
-      -v `pwd`/auth:/auth \
+      -v "$(pwd)"/auth:/auth \
       -e "REGISTRY_AUTH=htpasswd" \
       -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
       -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
-      -v `pwd`/certs:/certs \
+      -v "$(pwd)"/certs:/certs \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
       registry:2
@@ -458,8 +458,8 @@ secrets.
 You may want to leverage more advanced basic auth implementations by using a
 proxy in front of the registry. See the [recipes list](recipes/index.md).
 
-The registry also supports delegated authentiation, which redirects users to a
-specific, trusted token server. This approach is more complicated to set up, and
+The registry also supports delegated authentication which redirects users to a
+specific trusted token server. This approach is more complicated to set up, and
 only makes sense if you need to fully configure ACLs and need more control over
 the registry's integration into your global authorization and authentication
 systems. Refer to the following [background information](spec/auth/token.md) and
@@ -562,6 +562,6 @@ More specific and advanced information is available in the following sections:
  - [Configuration reference](configuration.md)
  - [Working with notifications](notifications.md)
  - [Advanced "recipes"](recipes/index.md)
- - [Registry API](spec/api.md)
+ - [Registry API](/registry/spec/api.md)
  - [Storage driver model](storage-drivers/index.md)
  - [Token authentication](spec/auth/token.md)

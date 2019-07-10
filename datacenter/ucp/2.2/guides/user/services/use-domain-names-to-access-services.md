@@ -152,6 +152,13 @@ These keys are supported:
 | include_forwarded_for | no                                                       | true                                     | If present, include the X-Forwarded-For header in requests                                               |
 
 
+> #### Known issue
+>
+> For SNI (HTTPS) routes, HRM forwards to service tasks before any task
+> health checks have passed.  This may result in traffic loss if a task is not
+> ready to serve traffic immediately after it is scheduled.
+{: .important}
+
 ### Sticky sessions
 
 You can use the `sticky_sessions` value to always route a user to the same
@@ -187,7 +194,8 @@ apply two labels to your service:
 com.docker.ucp.mesh.http.1=external_route=http://example.org,redirect=https://example.org
 com.docker.ucp.mesh.http.2=external_route=sni://example.org
 ```
-Note: It is not possible to redirect HTTPS to HTTP. 
+
+> **Note**: It is not possible to redirect HTTPS to HTTP.
 
 ### X-Forwarded-For header
 
@@ -223,5 +231,5 @@ you can create an overlay network that contains the `com.docker.mesh.http` label
 docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
 ```
 
-If you're creating a a new HRM network you need to disable the HRM service first, or disable
+If you're creating a new HRM network you need to disable the HRM service first, or disable
 and enable the HRM service after you create the network else HRM will not be available on new network.

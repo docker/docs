@@ -17,6 +17,7 @@ container, and monitor your Docker instance using Prometheus.
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
 
+
 ## Configure Docker
 
 To configure the Docker daemon as a Prometheus target, you need to specify the
@@ -26,7 +27,7 @@ exist, create it.
 
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
-- **Docker for Mac / Docker for Windows**: Click the Docker icon in the toolbar,
+- **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
   select **Preferences**, then select **Daemon**. Click **Advanced**.
 
 If the file is currently empty, paste the following:
@@ -42,14 +43,14 @@ If the file is not empty, add those two keys, making sure that the resulting
 file is valid JSON. Be careful that every line ends with a comma (`,`) except
 for the last line.
 
-Save the file, or in the case of Docker for Mac or Docker for Windows, save the
+Save the file, or in the case of Docker Desktop for Mac or Docker Desktop for Windows, save the
 configuration. Restart Docker.
 
 Docker now exposes Prometheus-compatible metrics on port 9323.
 
 ## Configure and run Prometheus
 
-In this example, Prometheus runs as a Docker service on a Docker swarm.
+Prometheus runs as a Docker service on a Docker swarm.
 
 > **Prerequisites**
 >
@@ -62,13 +63,13 @@ In this example, Prometheus runs as a Docker service on a Docker swarm.
 Copy one of the following configuration files and save it to
 `/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
 is a stock Prometheus configuration file, except for the addition of the Docker
-job definition at the bottom of the file. Docker for Mac and Docker for Windows
+job definition at the bottom of the file. Docker Desktop for Mac and Docker Desktop for Windows
 need a slightly different configuration.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-config" data-group="linux">Docker for Linux</a></li>
-<li><a data-toggle="tab" data-target="#mac-config" data-group="mac">Docker for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-config" data-group="win">Docker for Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac-config" data-group="mac">Docker Desktop for Mac</a></li>
+<li><a data-toggle="tab" data-target="#win-config" data-group="win">Docker Desktop for Windows</a></li>
 </ul>
 
 <div class="tab-content">
@@ -199,8 +200,8 @@ Next, start a single-replica Prometheus service using this configuration.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-run" data-group="linux">Docker for Linux</a></li>
-<li><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker for Windows or Windows Server</a></li>
+<li><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker Desktop for Mac</a></li>
+<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker Desktop for Windows or Windows Server</a></li>
 </ul>
 
 <div class="tab-content">
@@ -241,8 +242,8 @@ Verify that the Docker target is listed at http://localhost:9090/targets/.
 
 ![Prometheus targets page](images/prometheus-targets.png)
 
-You can't access the endpoint URLs directly if you use Docker
-for Mac or Docker for Windows.
+You can't access the endpoint URLs directly if you use Docker Desktop 
+for Mac or Docker Desktop for Windows.
 
 ## Use Prometheus
 

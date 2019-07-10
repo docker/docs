@@ -4,42 +4,75 @@ keywords: trust, security, docker, documentation, automation
 title: Automation with content trust
 ---
 
-Your automation systems that pull or build images can also work with trust. Any automation environment must set `DOCKER_CONTENT_TRUST` either manually or in a scripted fashion before processing images.
+It is very common for Docker Content Trust to be built into existing automation
+systems. To allow tools to wrap Docker and push trusted content, there are 
+environment variables that can be passed through to the client. 
 
-## Bypass requests for passphrases
-
-To allow tools to wrap docker and push trusted content, there are two
-environment variables that allow you to provide the passphrases without an
-expect script, or typing them in:
-
- - `DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE`
- - `DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE`
-
-Docker attempts to use the contents of these environment variables as passphrase
-for the keys. For example, an image publisher can export the repository `target`
-and `snapshot` passphrases:
-
-```bash
-$  export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="u7pEQcGoebUHm6LHe6"
-$  export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="l7pEQcTKJjUHm6Lpe4"
-```
-
-Then, when pushing a new tag the Docker client does not request these values but signs automatically:
-
-```bash
-$  docker push docker/trusttest:latest
-The push refers to a repository [docker.io/docker/trusttest] (len: 1)
-a9539b34a6ab: Image already exists
-b3dbab3810fc: Image already exists
-latest: digest: sha256:d149ab53f871 size: 3355
-Signing and pushing trust metadata
-```
+This guide follows the steps as described 
+[here](content_trust/#signing-images-with-docker-content-trust) so please read 
+that and understand its prerequisites. 
 
 When working directly with the Notary client, it uses its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
 
-## Building with content trust
+## Add a delegation private key
 
-You can also build with content trust. Before running the `docker build` command, you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or in a scripted fashion. Consider the simple Dockerfile below.
+To automate importing a delegation private key to the local Docker trust store, we 
+need to pass a passphrase for the new key. This passphrase will be required 
+everytime that delegation signs a tag. 
+
+```
+$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
+
+$ docker trust key load delegation.key --name jeff
+Loading key from "delegation.key"...
+Successfully imported key from delegation.key
+```
+
+## Add a delegation public key
+
+If you initialising a repository at the same time as adding a Delegation
+public key, then you will need to use the local Notary Canonical Root Key's 
+passphrase to create the repositories trust data. If the repository has already 
+been initiated then you only need the repositories passphrase. 
+
+```
+# Export the Local Root Key Passphrase if required.
+$ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
+
+# Export the Repository Passphrase
+$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="repopassphrase123"
+
+# Initialise Repo and Push Delegation
+$ docker trust signer add --key delegation.crt jeff dtr.example.com/admin/demo
+Adding signer "jeff" to dtr.example.com/admin/demo...
+Initializing signed repository for dtr.example.com/admin/demo...
+Successfully initialized "dtr.example.com/admin/demo"
+Successfully added signer: dtr.example.com/admin/demo
+```
+
+## Sign an image
+
+Finally when signing an image, we will need to export the passphrase of the 
+signing key. This was created when the key was loaded into the local Docker 
+trust store with `$ docker trust key load`.
+
+```
+$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
+
+$ docker trust sign dtr.example.com/admin/demo:1
+Signing and pushing trust data for local image dtr.example.com/admin/demo:1, may overwrite remote trust data
+The push refers to repository [dtr.example.com/admin/demo]
+428c97da766c: Layer already exists
+2: digest: sha256:1a6fd470b9ce10849be79e99529a88371dff60c60aab424c077007f6979b4812 size: 524
+Signing and pushing trust metadata
+Successfully signed dtr.example.com/admin/demo:1
+```
+
+## Build with content trust
+
+You can also build with content trust. Before running the `docker build` command, 
+you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or 
+in a scripted fashion. Consider the simple Dockerfile below.
 
 ```Dockerfile
 FROM docker/trusttest:latest
@@ -60,7 +93,8 @@ a9539b34a6ab: Pull complete
 Digest: sha256:d149ab53f871
 ```
 
-If content trust is enabled, building from a Dockerfile that relies on tag without trust data, causes the build command to fail:
+If content trust is enabled, building from a Dockerfile that relies on tag 
+without trust data, causes the build command to fail:
 
 ```bash
 $  docker build -t docker/trusttest:testing .
@@ -69,7 +103,7 @@ unable to process Dockerfile: No trust data for notrust
 
 ## Related information
 
+* [Delegations for content trust](trust_delegation.md)
 * [Content trust in Docker](content_trust.md)
 * [Manage keys for content trust](trust_key_mng.md)
-* [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)

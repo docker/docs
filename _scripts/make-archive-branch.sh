@@ -85,9 +85,7 @@ bash _scripts/fetch-upstream-resources.sh -l
 # Currently, this is:
 # /samples/
 # /docker-id/
-# /docker-cloud/
 # /docker-hub/
-# /docker-store/
 # These rely on _layout/archive-redirect.html
 
 only_live_contents=("samples" "docker-id" "docker-cloud" "docker-hub" "docker-store")
@@ -145,5 +143,3 @@ echo "    and get back to master, run the following:"
 echo
 echo "      git reset --hard; git clean -fd; git checkout master; git branch -D v$version"
 echo
-
-

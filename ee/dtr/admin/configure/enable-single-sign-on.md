@@ -10,6 +10,9 @@ separately on the web UI of both applications.
 You can configure DTR to have single sign-on (SSO) with UCP, so that users only
 have to authenticate once.
 
+> **Note**: After configuring single sign-on with DTR, users accessing DTR via 
+> `docker login` should create an [access token](/ee/dtr/user/access-tokens/) and use it to authenticate. 
+
 ## At installation time
 
 When installing DTR, use the `docker/dtr install --dtr-external-url <url>`
