@@ -30,5 +30,5 @@ updates, such as to let a service settle, use the `update-delay` setting.  For e
 thirty (30) seconds between updates, use the following command:
 
 ```bash
-$> docker service update --update-delay=30s interlock=proxy
+$> docker service update --update-delay=30s interlock-proxy
 ```
