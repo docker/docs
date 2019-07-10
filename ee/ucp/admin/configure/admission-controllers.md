@@ -4,10 +4,10 @@ description: Learn about how admission controllers are used in docker.
 keywords: cluster, psp, security
 ---
 
-# Admission controllers
 
 This is the current list of admission controllers used by Docker:
- ### Default
+
+### Default
 - [NamespaceLifecycle](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#namespacelifecycle)
 - [LimitRanger](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#limitranger)
 - [ServiceAccount](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#serviceaccount)
