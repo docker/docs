@@ -4,7 +4,6 @@ description: Learn how to route traffic to your Kubernetes workloads in
   Docker Enterprise Edition.
 keywords: UCP, Kubernetes, ingress, routing
 redirect_from:
-  - /ee/ucp/kubernetes/deploy-ingress-controller/
 ---
 
 When you deploy a Kubernetes application, you may want to make it accessible
