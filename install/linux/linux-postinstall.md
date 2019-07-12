@@ -47,7 +47,7 @@ To create the `docker` group and add your user:
     
     On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
     
-    On Linux you could also run the following command to activate the changes to groups:
+    On Linux, you can also run the following command to activate the changes to groups:
     
     ```bash 
     $ newgrp docker 
