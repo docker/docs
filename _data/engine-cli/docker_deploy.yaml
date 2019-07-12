@@ -19,12 +19,20 @@ options:
   shorthand: c
   value_type: stringSlice
   default_value: '[]'
-  description: Path to a Compose file
+  description: Path to a Compose file, or "-" to read from stdin
   deprecated: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
   kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
   swarm: false
 - option: prune
   value_type: bool
@@ -122,5 +130,5 @@ min_api_version: "1.25"
 experimental: true
 experimentalcli: false
 kubernetes: false
-swarm: true
+swarm: false
 

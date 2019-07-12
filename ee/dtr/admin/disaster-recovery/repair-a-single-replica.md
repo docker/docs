@@ -54,7 +54,7 @@ To remove unhealthy replicas, you'll first have to find the replica ID
 of one of the replicas you want to keep, and the replica IDs of the unhealthy
 replicas you want to remove.
 
-You can find this in the **Stacks** page of the UCP web UI, or by using the UCP
+You can find the list of replicas by navigating to **Shared Resources > Stacks** or **Swarm > Volumes** (when using [swarm mode](/engine/swarm/)) on the UCP web interface, or by using the UCP
 client bundle to run:
 
 {% raw %}
@@ -63,6 +63,15 @@ docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
+```
+{% endraw %}
+
+Another way to determine the replica ID is to SSH into a DTR node and run the following:
+
+{% raw %}
+```bash
+REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+&& echo $REPLICA_ID
 ```
 {% endraw %}
 

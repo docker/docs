@@ -52,6 +52,12 @@ omitting a `version` key at the root of the YAML.
 be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
+> ### v2 and v3 Declaration
+>
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version.
+
 
 The [Compatibility Matrix](#compatibility-matrix) shows Compose file versions mapped to Docker Engine releases.
 
@@ -121,9 +127,24 @@ discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
 [Networking in Compose](compose-file-v2.md#networking.md).
 
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version. As a result, features added in
+> later versions will not be supported. For example:
+>
+> ```yaml
+> version: "2"
+> ```
+> 
+> is equivalent to:
+> 
+> ```yaml
+> version: "2.0"
+> ```
+
 Simple example:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -136,7 +157,7 @@ Simple example:
 
 A more extended example, defining volumes and networks:
 
-    version: '2'
+    version: "{{ site.compose_file_v2 }}"
     services:
       web:
         build: .
@@ -169,7 +190,7 @@ Several other options were added to support networking, such as:
 * The [`depends_on`](compose-file-v2.md#depends_on) option can be used in place of links to indicate dependencies
 between services and startup order.
 
-      version: '2'
+      version: "{{ site.compose_file_v2 }}"
       services:
         web:
           build: .
@@ -259,6 +280,21 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 - Added: [deploy](/compose/compose-file/index.md#deploy)
 
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version. As a result, features added in
+> later versions will not be supported. For example:
+>
+> ```yaml
+> version: "3"
+> ```
+> 
+> is equivalent to:
+> 
+> ```yaml
+> version: "3.0"
+> ```
+
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
@@ -327,7 +363,7 @@ several options have been removed:
     [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
     and specify the driver there.
 
-        version: "3"
+        version: "{{ site.compose_file_v3 }}"
         services:
           db:
             image: postgres
@@ -422,7 +458,7 @@ It's more complicated if you're using particular configuration features:
     named volume called `data`, you must declare a `data` volume in your
     top-level `volumes` section. The whole file might look like this:
 
-        version: '2'
+        version: "{{ site.compose_file_v2 }}"
         services:
           db:
             image: postgres

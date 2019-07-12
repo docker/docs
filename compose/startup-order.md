@@ -1,16 +1,16 @@
 ---
-description: How to control service startup order in Docker Compose
-keywords: documentation, docs, docker, compose, startup, order
-title: Control startup order in Compose
+description: How to control service startup and shutdown order in Docker Compose
+keywords: documentation, docs, docker, compose, startup, shutdown, order
+title: Control startup and shutdown order in Compose
 notoc: true
 ---
 
-You can control the order of service startup with the
-[depends_on](compose-file.md#depends_on) option. Compose always starts
+You can control the order of service startup and shutdown with the
+[depends_on](compose-file.md#depends-on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
-However, Compose does not wait until a container is "ready" (whatever that means
+However, for startup Compose does not wait until a container is "ready" (whatever that means
 for your particular application) - only until it's running. There's a good
 reason for this.
 
@@ -54,7 +54,7 @@ script:
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
 
-        #!/bin/bash
+        #!/bin/sh
         # wait-for-postgres.sh
 
         set -e

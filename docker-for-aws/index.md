@@ -18,7 +18,7 @@ Enterprise Edition for AWS.
 This release is maintained and receives **security and critical bug fixes for
 one year**.
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
+[Deploy Docker Enterprise Edition (EE) for AWS](https://hub.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
 
 ## Docker Community Edition (CE) for AWS
@@ -27,32 +27,11 @@ one year**.
 
 If your account [has the proper
 permissions](/docker-for-aws/iam-permissions.md), you can
-use the blue button from the stable or edge channel to bootstrap Docker for AWS
-using CloudFormation. For more about stable and edge channels, see the
-[FAQs](/docker-for-aws/faqs.md#stable-and-edge-channels).
+use the blue button to bootstrap Docker for AWS
+using CloudFormation.
 
-<table style="width:100%">
-  <tr>
-    <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Edge channel</th>
-  </tr>
-  <tr valign="top">
-    <td width="33%">This deployment is fully baked and tested, and comes with the latest CE version of Docker. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>Stable is released quarterly and is for users that want an easier-to-maintain release pace.</td>
-    <td width="34%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month. <br><br>We collect usage data on edges across the board.</td>
-  </tr>
-  <tr valign="top">
-  <td width="33%">
-  {{aws_blue_latest}}
-  {{aws_blue_vpc_latest}}
-  </td>
-  <td width="34%">
-  {{aws_blue_edge}}
-  {{aws_blue_vpc_edge}}
-  </td>
-  </tr>
-</table>
-
-> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
+{{aws_blue_latest}}
+{{aws_blue_vpc_latest}}
 
 ### Deployment options
 
@@ -246,3 +225,8 @@ Console](https://aws.amazon.com/){: target="_blank" class="_"}, navigate to
 the Docker stack you want to remove.
 
 ![uninstall](img/aws-delete-stack.png)
+
+Stack removal does not remove EBS and EFS volumes created by the cloudstor
+volume plugin or the S3 bucket associated with DTR. Those resources must be
+removed manually. See the [cloudstor](/docker-for-aws/persistent-data-volumes/#list-or-remove-volumes-created-by-cloudstor)
+docs for instructions on removing volumes.

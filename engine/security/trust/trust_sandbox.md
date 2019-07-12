@@ -77,9 +77,9 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-v0.4.2
+            image: dockersecurity/notary_autobuilds:server-v0.5.1
             volumes:
-              - notarycerts:/go/src/github.com/docker/notary/fixtures
+              - notarycerts:/var/lib/notary/fixtures
             networks:
               - sandbox
             environment:
@@ -121,7 +121,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
     images are downloaded from Docker Hub.
 
 
-## Playing in the sandbox
+## Play in the sandbox
 
 Now that everything is setup, you can go into your `trustsandbox` container and
 start testing Docker content trust. From your host machine, obtain a shell
@@ -283,7 +283,7 @@ feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
 
 
-## Cleaning up your sandbox
+## Clean up your sandbox
 
 When you are done, and want to clean up all the services you've started and any
 anonymous volumes that have been created, just run the following command in the

@@ -565,7 +565,7 @@ services, you specify the number of replica tasks for the swarm manager to
 schedule onto available nodes. For global services, the scheduler places one
 task on each available node that meets the service's
 [placement constraints](#placement-constraints) and
-[resource requirements](#reserve-cpu-or-memory-for-a-service).
+[resource requirements](#reserve-memory-or-cpus-for-a-service).
 
 You control the type of service using the `--mode` flag. If you don't specify a
 mode, the service defaults to `replicated`. For replicated services, you specify
@@ -621,20 +621,20 @@ labels to ensure that your service is deployed to the appropriate swarm nodes.
 
 Use placement constraints to control the nodes a service can be assigned to. In
 the following example, the service only runs on nodes with the
-[label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata)
-`region` set to `east`. If no appropriately-labelled nodes are available,
-deployment fails. The `--constraint` flag uses an equality operator
-(`==` or `!=`). For replicated services, it is possible that all services
-run on the same node, or each node only runs one replica, or that some nodes
-don't run any replicas. For global services, the service runs on every node
-that meets the placement constraint and any
-[resource requirements](#reserve-cpu-or-memory-for-a-service).
+[label](manage-nodes.md#add-or-remove-label-metadata) `region` set
+to `east`. If no appropriately-labelled nodes are available, tasks will wait in
+`Pending` until they become available. The `--constraint` flag uses an equality
+operator (`==` or `!=`). For replicated services, it is possible that all
+services run on the same node, or each node only runs one replica, or that some
+nodes don't run any replicas. For global services, the service runs on every
+node that meets the placement constraint and any [resource
+requirements](#reserve-memory-or-cpus-for-a-service).
 
 ```bash
 $ docker service create \
   --name my-nginx \
   --replicas 5 \
-  --constraint region==east \
+  --constraint node.labels.region==east \
   nginx
 ```
 
@@ -648,9 +648,9 @@ all nodes where `region` is set to `east` and `type` is not set to `devel`:
 ```bash
 $ docker service create \
   --name my-nginx \
-  --global \
-  --constraint region==east \
-  --constraint type!=devel \
+  --mode global \
+  --constraint node.labels.region==east \
+  --constraint node.labels.type!=devel \
   nginx
 ```
 
@@ -664,7 +664,7 @@ For more information on constraints, refer to the `docker service create`
 #### Placement preferences
 
 While [placement constraints](#placement-constraints) limit the nodes a service
-can run on, _placement preferences_ try to place services on appropriate nodes
+can run on, _placement preferences_ try to place tasks on appropriate nodes
 in an algorithmic way (currently, only spread evenly). For instance, if you
 assign each node a `rack` label, you can set a placement preference to spread
 the service evenly across nodes with the `rack` label, by value. This way, if
@@ -696,7 +696,7 @@ $ docker service create \
 > proportion to any of the other groups identified by a specific label
 > value. In a sense, a missing label is the same as having the label with
 > a null value attached to it. If the service should **only** run on
-> nodes with the label being used for the the spread preference, the
+> nodes with the label being used for the spread preference, the
 > preference should be combined with a constraint.
 
 You can specify multiple placement preferences, and they are processed in the

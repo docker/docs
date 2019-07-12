@@ -11,12 +11,12 @@ command-line tool named kubectl.
 
 To access the UCP cluster with kubectl, install the [UCP client bundle](cli.md).
 
-> Kubernetes on Docker for Mac and Docker for Windows
+> Kubernetes on Docker Desktop for Mac and Docker Desktop for Windows
 >
-> Docker for Mac and Docker for Windows provide a standalone Kubernetes server that
+> Docker Desktop for Mac and Docker Desktop for Windows provide a standalone Kubernetes server that
 > runs on your development machine, with kubectl installed by default. This installation is
 > separate from the Kubernetes deployment on a UCP cluster.
-> Learn how to [deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md).
+> Learn how to [deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md).
 {: .important}
 
 ## Install the kubectl binary
@@ -29,7 +29,7 @@ To use kubectl, install the binary on a workstation which has access to your UCP
 {: .important}
 
 First, find which version of Kubernetes is running in your cluster. This can be found 
-within the Universal Control Plane dashboard or at the UCP API endpoint [version](/reference/ucp/3.0/api/). 
+within the Universal Control Plane dashboard or at the UCP API endpoint [version](/reference/ucp/3.1/api/). 
 
 From the UCP dashboard, click on **About Docker EE** within the **Admin** menu in the top left corner
  of the dashboard. Then navigate to **Kubernetes**.
@@ -48,7 +48,7 @@ operating system.
 <div id="mac" class="tab-pane fade in active" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
-k8sversion=v1.8.11
+k8sversion=v1.11.5
 
 # Get the kubectl binary.
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/darwin/amd64/kubectl
@@ -64,7 +64,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 <div id="linux" class="tab-pane fade" markdown="1">
 ```
 # Set the Kubernetes version as found in the UCP Dashboard or API
-k8sversion=v1.8.11
+k8sversion=v1.11.5
 
 # Get the kubectl binary.
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$k8sversion/bin/linux/amd64/kubectl
@@ -83,7 +83,7 @@ You can download the binary from this [link](https://storage.googleapis.com/kube
 If you have curl installed on your system, you use these commands in Powershell.
 
 ```cmd
-$env:k8sversion = "v1.8.11"
+$env:k8sversion = "v1.11.5"
 
 curl https://storage.googleapis.com/kubernetes-release/release/$env:k8sversion/bin/windows/amd64/kubectl.exe
 ```
@@ -100,5 +100,5 @@ Docker Enterprise Edition provides users unique certificates and keys to authent
 ## Where to go next
 
 - [Deploy a workload to a Kubernetes cluster](../kubernetes.md)
-- [Deploy to Kubernetes on Docker for Mac](/docker-for-mac/kubernetes.md)
+- [Deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md)
 

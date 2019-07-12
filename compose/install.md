@@ -12,7 +12,7 @@ You can run Compose on macOS, Windows, and 64-bit Linux.
 Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
 
-- On desktop systems like Docker for Mac and Windows, Docker Compose is
+- On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is
 included as part of those desktop installs.
 
 - On Linux systems, first install the
@@ -29,96 +29,113 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 2016, or Linux systems, or find out about alternatives like using the `pip`
 Python package manager or installing Compose as a container.
 
+> Install a different version
+> 
+> The instructions below outline installation of the current stable release
+> (**v{{site.compose_version}}**) of Compose. To install a different version of
+> Compose, replace the given release number with the one that you want. Compose
+> releases are also listed and available for direct download on the
+> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+> To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
+> section.
+
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#macOS">Mac</a></li>
 <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+<li><a data-toggle="tab" data-target="#windows-server">Windows Server</a></li>
 <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
 <li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
 </ul>
 <div class="tab-content">
 <div id="macOS" class="tab-pane fade in active" markdown="1">
+
 ### Install Compose on macOS
 
-**Docker for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
-  * [Get Docker for Mac](/docker-for-mac/install.md)
+  * [Get Docker Desktop for Mac](/docker-for-mac/install.md)
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
-<hr>
+
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
-### Install Compose on Windows systems
 
-**Docker for Windows** and **Docker Toolbox** already include Compose
+### Install Compose on Windows desktop systems
+
+**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
 along with other Docker apps, so most Windows users do not need to
 install Compose separately. Docker install instructions for these are here:
 
-* [Get Docker for Windows](/docker-for-windows/install.md)
+* [Get Docker Desktop for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
-**If you are running the Docker daemon and client directly on Microsoft
-Windows Server 2016** (with [Docker EE for Windows Server 2016](/install/windows/docker-ee.md), you _do_ need to install
-Docker Compose. To do so, follow these steps:
+If you are running the Docker daemon and client directly on Microsoft
+Windows Server, follow the instructions in the Windows Server tab.
+
+</div>
+<div id="windows-server" class="tab-pane fade in active" markdown="1">
+
+### Install Compose on Windows Server
+
+Follow these instructions if you are running the Docker daemon and client directly
+on Microsoft Windows Server with [Docker Engine - Enterprise](/install/windows/docker-ee.md),
+and want to install Docker Compose.
+
 
 1.  Start an "elevated" PowerShell (run it as administrator).
     Search for PowerShell, right-click, and choose
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
     
-    In Powershell, since Github now requires TLS1.2, run the following:
+2.  In PowerShell, since GitHub now requires TLS1.2, run the following:
     
-    ```none  
+    ```powershell  
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     ```
 
-    Then run the following command to download
-    Docker Compose, replacing `$dockerComposeVersion` with the specific
-    version of Compose you want to use:
+    Then run the following command to download the current stable release of
+    Compose (v{{site.compose_version}}):
 
-    ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    ```powershell
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
-    For example, to download Compose version {{site.compose_version}},
-    the command is:
+**Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
 
-    ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    > To install a different version of Compose, substitute `{{site.compose_version}}`
+    > with the version of Compose you want to use.
+
+3.  Test the installation.
+
+    ```powershell
+    docker-compose --version
+
+    docker-compose version {{site.compose_version}}, build 01110ad01
     ```
-    > Use the latest Compose release number in the download command.
-    >
-    > As already mentioned, the above command is an _example_, and
-    it may become out-of-date once in a while. Always follow the
-    command pattern shown above it. If you cut-and-paste an example,
-    check which release it specifies and, if needed,
-    replace `$dockerComposeVersion` with the release number that
-    you want. Compose releases are also available for direct download
-    on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
-    {: .important}
 
-2.  Run the executable to install Compose.
-<hr>
 </div>
 <div id="linux" class="tab-pane fade" markdown="1">
+
 ### Install Compose on Linux systems
 
-On **Linux**, you can download the Docker Compose binary from the [Compose
+On Linux, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
-running the `curl` command in your terminal to download the binaries. These step
-by step instructions are also included below.
+running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
 
-1.  Run this command to download the latest version of Docker Compose:
+> For `alpine`, the following dependency packages are needed:
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+{: .important}
+
+1.  Run this command to download the current stable release of Docker Compose:
 
     ```bash
     sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
-    > Use the latest Compose release number in the download command.
-    >
-    The above command is an _example_, and it may become out-of-date. To ensure you have the latest version, check the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
-    {: .important}
+    > To install a different version of Compose, substitute `{{site.compose_version}}`
+    > with the version of Compose you want to use.
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
@@ -128,6 +145,15 @@ by step instructions are also included below.
     ```bash
     sudo chmod +x /usr/local/bin/docker-compose
     ```
+    
+> **Note**: If the command `docker-compose` fails after installation, check your path.
+> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+
+For example:
+
+```bash
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
@@ -136,17 +162,21 @@ by step instructions are also included below.
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1719ceb
+    docker-compose version {{site.compose_version}}, build 1110ad01
     ```
-<hr>
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
+
 ### Alternative install options
 
 - [Install using pip](#install-using-pip)
 - [Install as a container](#install-as-a-container)
 
 #### Install using pip
+
+> For `alpine`, the following dependency packages are needed:
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+{: .important}
 
 Compose can be installed from
 [pypi](https://pypi.python.org/pypi/docker-compose) using `pip`. If you install
@@ -171,34 +201,31 @@ sudo pip install docker-compose
 #### Install as a container
 
 Compose can also be run inside a container, from a small bash script wrapper. To
-install compose as a container run this command. Be sure to replace the version
-number with the one that you want, if this example is out-of-date:
+install compose as a container run this command:
 
 ```bash
 $ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
->  Use the latest Compose release number in the download command.
->
-The above command is an _example_, and it may become out-of-date once in a
-while. Check which release it specifies and, if needed, replace the given
-release number with the one that you want. Compose releases are also listed and
-available for direct download on the [Compose repository release page on
-GitHub](https://github.com/docker/compose/releases){: target="_blank"
-class="_"}.
+</div>
+</div>
+
+----
+
+## Install pre-release builds
+
+If you're interested in trying out a pre-release build, you can download release
+candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
+Follow the instructions from the link, which involves running the `curl` command
+in your terminal to download the binaries.
+
+Pre-releases built from the "master" branch are also available for download at
+[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" class="_"}.
+
+> Pre-release builds allow you to try out new features before they are released,
+> but may be less stable.
 {: .important}
-<hr>
-</div>
-</div>
-
-## Master builds
-
-If you're interested in trying out a pre-release build, you can download a binary
-from
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/).
-Pre-release builds allow you to try out new features before they are released,
-but may be less stable.
 
 
 ## Upgrading
@@ -209,7 +236,7 @@ version 1.3, Compose uses Docker labels to keep track of containers, and your
 containers need to be recreated to add the labels.
 
 If Compose detects containers that were created without labels, it refuses
-to run so that you don't end up with two sets of them. If you want to keep using
+to run, so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
 command:

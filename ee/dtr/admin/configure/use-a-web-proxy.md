@@ -38,7 +38,17 @@ docker run -it --rm \
   --https-proxy username:password@<doman>:<port> \
   --ucp-insecure-tls
 ```
-NOTE: DTR will hide the password portion of the URL, when it is displayed in the DTR UI.
+
+> **Note**: DTR will hide the password portion of the URL, when it is displayed in the DTR UI.
+
+## DNS names used by DTR
+
+When proxy is configured to allow access only to whitelisted DNS names, make sure to whitelist these DNS names:
+
+```text
+dss-cve-updates.docker.com
+license.enterprise.docker.com
+```
 
 ## Where to go next
 

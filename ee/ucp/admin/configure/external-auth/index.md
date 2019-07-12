@@ -30,7 +30,7 @@ the *distinguished name* of the node in the LDAP directory tree where the
 search starts looking for users.
 
 Access LDAP settings by navigating to the **Authentication & Authorization**
-page in the UCP web UI. There are two sections for controlling LDAP searches
+page in the UCP web interface. There are two sections for controlling LDAP searches
 and servers.
 
 - **LDAP user search configurations:** This is the section of the
@@ -105,7 +105,7 @@ email address, for example, `jane.doe@subsidiary1.com`.
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users by using an LDAP directory,
-go to the UCP web UI, navigate to the **Admin Settings** page and click
+go to the UCP web interface, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
 
@@ -140,6 +140,8 @@ Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 | Skip TLS verification | Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.                              |
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
 | Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. If you upgraded from UCP 2.0.x, the default is `false`. |
+
+> **Note**: LDAP connections using certificates created with TLS v1.2 do not currently advertise support for sha512WithRSAEncryption in the TLS handshake which leads to issues establishing connections with some clients. Support for advertising sha512WithRSAEncryption will be added in UCP 3.1.0.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
@@ -218,8 +220,16 @@ UCP enables syncing teams with a search query or group in your organization's
 LDAP directory.
 [Sync team members with your organization's LDAP directory](../../../authorization/create-teams-with-ldap.md).
 
+## LDAP Configuration via API
+
+As of UCP 3.1.5, LDAP-specific `GET` and `PUT` API endpoints have been added to the Config resource. Note that swarm mode has to be enabled before you can hit the following endpoints:
+
+- `GET /api/ucp/config/auth/ldap` - Returns information on your current system LDAP configuration.
+- `PUT /api/ucp/config/auth/ldap` - Lets you update your LDAP configuration. 
+
+See [UCP API Documentation](/reference/ucp/3.1/api/) for additonal information.
+
 ## Where to go next
 
 - [Create users and teams manually](../../../authorization/create-users-and-teams-manually.md)
 - [Create teams with LDAP](../../../authorization/create-teams-with-ldap.md)
-- [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)

@@ -22,16 +22,16 @@ Docker UCP requires Docker Enterprise Edition. Before installing Docker EE on
 your cluster nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified
-Domain Names (FQDN), like `engine01.docker.vm`. Whichever you choose,
-ensure that your naming strategy is consistent across the cluster, because
+Domain Names (FQDN), like `node01.company.example.com`. Whichever you choose,
+confirm your naming strategy is consistent across the cluster, because
 Docker Engine and UCP use hostnames.
 
 For example, if your cluster has three hosts, you can name them:
 
 ```none
-node1.company.example.org
-node2.company.example.org
-node3.company.example.org
+node1.company.example.com
+node2.company.example.com
+node3.company.example.com
 ```
 
 ## Static IP addresses
@@ -42,7 +42,32 @@ this.
 
 ## Avoid IP range conflicts
 
-The default Kubernetes cluster IP pool for the pods is `192.168.0.0/16`. If it conflicts with your current networks, please use a custom IP pool by specifying `--pod-cidr` during UCP installation.
+Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). 
+
+> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.
+
+### Kubernetes IP Range Conflicts
+
+There are 2 internal IP ranges used within Kubernetes that may overlap and
+conflict with the underlying infrastructure:
+
+- The Pod Network -  Each Pod in Kubernetes is given an IP address from either
+  the Calico or Azure IPAM services. In a default installation Pods are given
+  IP addresses on the `192.168.0.0/16` range. This can be customised at install
+  time using the `--pod-cidr` flag. 
+
+- The Services Network - When a user exposes a Service in Kubernetes it is
+  accesible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
+  this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
+  changed at install time with the `--service-cluster-ip-range` flag.
+
+## Avoid firewall conflicts
+
+For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is turned on by default in the openSUSE firewall. This speeds up packet processing on the loopback interface, and breaks certain firewall setups that need to redirect outgoing packets via custom rules on the local machine.
+
+To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
+
+For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 ## Time synchronization
 

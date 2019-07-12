@@ -354,7 +354,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect nginxtest` to verify that the bind mount was created
+Use `docker inspect nginxtest` to verify that the readonly mount was created
 correctly. Look for the `Mounts` section:
 
 ```json
@@ -447,6 +447,26 @@ $ docker run -d \
   nginx:latest
 ```
 
+### Create a service which creates an NFS volume
+
+This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
+
+#### NFSv3
+```bash
+$ docker service create -d \
+  --name nfs-service \
+  --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
+  nginx:latest
+```
+
+#### NFSv4
+```bash
+docker service create -d \
+    --name nfs-service \
+    --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/,"volume-opt=o=10.0.0.10,rw,nfsvers=4,async"' \
+    nginx:latest
+```
+
 ## Backup, restore, or migrate data volumes
 
 Volumes are useful for backups, restores, and migrations. Use the
@@ -492,7 +512,7 @@ testing using your preferred tools.
 A Docker data volume persists after a container is deleted. There are two types
 of volumes to consider:
 
-- **Named volumes** have a specific source form outside the container, for example `awesome:/bar`.
+- **Named volumes** have a specific source from outside the container, for example `awesome:/bar`.
 - **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
 
 ### Remove anonymous volumes

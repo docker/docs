@@ -7,7 +7,7 @@ title: Dockerize a Riak service
 The goal of this example is to show you how to build a Docker image with
 Riak pre-installed.
 
-## Creating a Dockerfile
+## Create a Dockerfile
 
 Create an empty file called `Dockerfile`:
 

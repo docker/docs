@@ -27,7 +27,7 @@ installation will fail.
 Use a computer with internet access to download the UCP package from the
 following links.
 
-{% include components/ddc_url_list_2.html product="ucp" version="3.0" %}
+{% include components/ddc_url_list_2.html product="ucp" version="3.1" %}
 
 ## Download the offline package
 
@@ -57,7 +57,7 @@ For each machine that you want to manage with UCP:
     `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
-    $ docker load < ucp.tar.gz
+    $ docker load -i ucp.tar.gz
     ```
 
 Follow the same steps for the DTR binaries.

@@ -9,7 +9,7 @@ notoc: true
 Usage: images [options] [SERVICE...]
 
 Options:
--q     Only display image IDs
+    -q, --quiet  Only display IDs
 ```
 
 List images used by the created containers.

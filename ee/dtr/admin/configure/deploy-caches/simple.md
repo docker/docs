@@ -1,5 +1,5 @@
 ---
-title: Deploy a DTR cache
+title: Deploy a DTR cache with Swarm
 description: Deploy a DTR cache to make users in remove geographical locations
   pull images faster.
 keywords: DTR, cache

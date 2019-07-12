@@ -35,6 +35,7 @@ examples: |-
   Images              5                   2                   16.43 MB            11.63 MB (70%)
   Containers          2                   0                   212 B               212 B (100%)
   Local Volumes       2                   1                   36 B                0 B (0%)
+  Build Cache         0                   0                   0B                  0B
   ```
 
   A more detailed view can be requested using the `-v, --verbose` flag:
@@ -62,6 +63,14 @@ examples: |-
   NAME                                                               LINKS               SIZE
   07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e   2                   36 B
   my-named-vol                                                       0                   0 B
+  
+  Build cache usage: 0B
+
+ 
+  CACHE ID            CACHE TYPE          SIZE                CREATED             LAST USED           USAGE               SHARED
+  0d8ab63ff30d        regular             4.34MB              7 days ago                              0                   true
+  189876ac9226        regular             11.5MB              7 days ago                              0                   true
+
   ```
 
   * `SHARED SIZE` is the amount of space that an image shares with another one (i.e. their common data)

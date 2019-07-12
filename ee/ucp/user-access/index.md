@@ -13,7 +13,7 @@ way, from your browser.
 
 
 Docker UCP secures your cluster by using
-[role-based access control](../../access-control/index.md).
+[role-based access control](../authorization/index.md).
 From the browser, administrators can:
 
 * Manage cluster configurations,

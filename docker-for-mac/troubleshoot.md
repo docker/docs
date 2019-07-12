@@ -7,12 +7,12 @@ title: Logs and troubleshooting
 ---
 
 Here is information about how to diagnose and troubleshoot problems, send logs
-and communicate with the Docker for Mac team, use our forums and Knowledge Hub,
+and communicate with the Docker Desktop for Mac team, use our forums and Knowledge Hub,
 browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Docker Knowledge Hub
 
-**Looking for help with Docker for Mac?** Check out the [Docker Knowledge
+**Looking for help with Docker Desktop for Mac?** Check out the [Docker Knowledge
 Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
 technical support for various subscription levels.
 
@@ -20,84 +20,64 @@ technical support for various subscription levels.
 
 ### In-app diagnostics
 If you encounter problems for which you do not find solutions in this
-documentation, on [Docker for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues), or the [Docker for Mac
+documentation, on [Docker Desktop for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues), or the [Docker Desktop for Mac
 forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
 the log data.
 
-Choose ![whale menu](images/whale-x.png){: .inline} -->
-**Diagnose & Feedback** from the menu bar.
+Choose ![whale menu](images/whale-x.png){: .inline} → **Diagnose & Feedback**
+from the menu bar.
 
 ![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
 
-Select **Diagnose**.  It runs diagnostics, shows results, and uploads the
-results to Docker.  A diagnostic ID is generated, which must be provided when
-communicating with the Docker Team.  Optionally, you can open an issue on GitHub
-using the uploaded results and ID as a basis.
+Once the diagnostics are available, you can upload them and obtain a
+**Diagnostic ID**, which must be provided when communicating with the Docker
+team. For more information on our policy regarding personal data you can read
+[how is personal data handled in Docker
+Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
 
-![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
+![Diagnostics & Feedback with
+ID](images/diagnose-feedback-id.png){:width="600px"}
 
-If you click **Report an issue**, this opens [Docker for Mac issues on
+If you click **Report an issue**, this opens [Docker Desktop for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
-“create new issue” template, to be completed before submission.
+"create new issue" template, to be completed before submission. Do not forget to
+copy/paste your diagnostic ID.
 
 ![issue template](images/issues-template.png){:width="600px"}
 
 ### Diagnosing from the terminal
 
 On occasions it is useful to run the diagnostics yourself, for instance if
-Docker for Mac cannot start.
+Docker Desktop for Mac cannot start.
 
-First locate the `docker-diagnose` tool.  If you installed Docker for Mac in the
-Applications directory, then it is
-`/Applications/Docker.app/Contents/Resources/bin/docker-diagnose`.  Pass
-`--help` to see the supported options:
-
-```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose --help
-```
+First locate the `com.docker.diagnose` tool.  If you installed Docker Desktop for Mac in
+the Applications directory, then it is
+`/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
 
 Then to create *and upload* diagnostics, run:
 
 ```sh
-$ /Applications/Docker.app/Contents/Resources/bin/docker-diagnose \
-  --upload --last 1d
-macOS: version 10.13.4 (build: 17E202)
-Docker.app: version: 18.06.0-ce-rc1-mac67 (1fa4e2acfc1a52f79623add2390604515d32297e)
-Local time: Fri May 25 14:50:51 CEST 2018
-UTC:        Fri May 25 12:50:51 UTC 2018
-Timestamp:  20180525-145051
-Running diagnostic tests:
-[OK]      Files
-[OK]      console-ring does not exist
-[OK]      Kubernetes (disabled)
-[OK]      Docker CLI
-[OK]      environment
-[OK]      vmnetd
-[OK]      osxfs
-[OK]      VPNKit
-[OK]      driver.amd64-linux
-[OK]      Docker
-[OK]      VT-x
-[OK]      kern.hv_support
-[OK]      Hypervisor
-[OK]      Disk
-Docker logs are being collected into /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
-Your unique id is: D1F48686-F045-4708-85E3-0635B729A596
-Please quote this in all correspondence.
+$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
+```
+After the diagnostics have finished, you should have the following output,
+containing your diagnostics ID:
+
+```sh
+Diagnostics Bundle: /tmp/B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610.zip
+Diagnostics ID:     B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610 (uploaded)
 ```
 
-The diagnostics ID (here D1F48686-F045-4708-85E3-0635B729A596/20180525-145051)
-is composed of your user ID (D1F48686-F045-4708-85E3-0635B729A596) and a
-timestamp (20180525-145051).  Be sure to provide us with the full diagnostics
-ID, not just the user ID.
+The diagnostics ID (here B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20180726143610) is
+composed of your user ID (D1F48686-F045-4708-85E3-0635B729A596) and a timestamp
+(20180525-145051).  Be sure to provide us with the full diagnostics ID, not just
+the user ID.
 
 Don't hesitate browsing the content of these diagnostics:
 
 ```sh
-$ open /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.tar.gz
+$ open /tmp/D1F48686-F045-4708-85E3-0635B729A596/20180525-145051.zip
 ```
-
 
 <a name="logs"></a>
 ## Check the logs
@@ -109,7 +89,7 @@ documentation](v17.12/docker-for-mac/troubleshoot/#logs).
 
 #### In a terminal
 
-To watch the live flow of Docker for Mac logs at the command line, run this from
+To watch the live flow of Docker Desktop for Mac logs at the command line, run this from
 your favorite shell.
 
 ```bash
@@ -121,7 +101,7 @@ $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$
 Alternatively, to collect the last day of logs (`1d`) in a file, run:
 
 ```
-$ show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
+$ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
 #### In the Console app
@@ -132,9 +112,7 @@ Docker logs.
 The Console lives in `/Applications/Utilities`; you can search for it with
 Spotlight Search.
 
-To read the Docker app log messages, in the top left corner of the window, type
-"docker" and press Enter.  Then select the "Any" button that appeared on its
-left, and select "Process" instead.
+To read the Docker app log messages, type `docker` in the Console window search bar and press Enter. Then select `ANY` to expand the drop-down list next to your `docker` search entry, and select `Process`. 
 
 ![Mac Console search for Docker app](images/console.png)
 
@@ -147,10 +125,9 @@ ways, and create reports.
 
 ### Make sure certificates are set up correctly
 
-Docker for Mac ignores certificates listed under insecure registries, and
-does not send client certificates to them. Commands like `docker run` that
-attempt to pull from the registry produces error messages on the command
-line, like this:
+Docker Desktop for Mac ignores certificates listed under insecure registries, and does
+not send client certificates to them. Commands like `docker run` that attempt to
+pull from the registry produces error messages on the command line, like this:
 
 ```
 Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
@@ -163,13 +140,12 @@ As well as on the registry. For example:
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
 
-For more about using client and server side certificates, see [Adding
-TLS certificates](index.md#adding-tls-certificates) in
-the Getting Started topic.
+For more about using client and server side certificates, see [Adding TLS
+certificates](index.md#adding-tls-certificates) in the Getting Started topic.
 
-### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
+### Docker Desktop for Mac does not start if Mac user account and home folder are renamed after installing the app
 
-See [Do I need to reinstall Docker for Mac if I change the name of my macOS
+See [Do I need to reinstall Docker Desktop for Mac if I change the name of my macOS
 account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
 in the FAQs.
 
@@ -181,16 +157,16 @@ cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
 you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} -->
-**Preferences** --> **File sharing** and share the drive that contains the
+`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} →
+**Preferences** → **File sharing** and share the drive that contains the
 Dockerfile and volume.
 
 ### Incompatible CPU detected
 
-Docker for Mac requires a processor (CPU) that supports virtualization and, more
+Docker Desktop for Mac requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
 framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
-Docker for Mac is only compatible with Macs that have a CPU that supports the
+Docker Desktop for Mac is only compatible with Macs that have a CPU that supports the
 Hypervisor framework. Most Macs built in 2010 and later support it, as described
 in the Apple Hypervisor Framework documentation about supported hardware:
 
@@ -204,25 +180,25 @@ terminal window.
 sysctl kern.hv_support
 ```
 
-If your Mac supports the Hypervisor Framework,
-the command prints `kern.hv_support: 1`.
+If your Mac supports the Hypervisor Framework, the command prints
+`kern.hv_support: 1`.
 
 If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
-in the Apple documentation, and Docker for Mac system requirements in [What to
+in the Apple documentation, and Docker Desktop for Mac system requirements in [What to
 know before you install](install.md#what-to-know-before-you-install).
 
 
 ### Workarounds for common problems
 
-* If Docker for Mac fails to install or start properly:
+* If Docker Desktop for Mac fails to install or start properly:
 
-  * Make sure you quit Docker for Mac before installing a new version of the
-  application (![whale menu](images/whale-x.png){: .inline} --> **Quit
-  Docker**). Otherwise, you get an "application in use" error when you try to
-  copy the new app from the `.dmg` to `/Applications`.
+  * Make sure you quit Docker Desktop for Mac before installing a new version of the
+    application (![whale menu](images/whale-x.png){: .inline} → **Quit
+    Docker**). Otherwise, you get an "application in use" error when you try to
+    copy the new app from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from
     the previously installed version.
@@ -238,8 +214,8 @@ know before you install](install.md#what-to-know-before-you-install).
   * If you use bash, use the following command: `unset ${!DOCKER_*}`
 
   * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker for
-    Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac
+    in [Setting up to run Docker Desktop for
+    Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker Desktop for Mac
     vs. Docker Toolbox](docker-toolbox.md).
 
 
@@ -248,13 +224,13 @@ know before you install](install.md#what-to-know-before-you-install).
   incoming connections so that the VM can get an IP address.
 
 
-* For the `hello-world-nginx` example, Docker for Mac must be running to get to
+* For the `hello-world-nginx` example, Docker Desktop for Mac must be running to get to
   the webserver on `http://localhost/`. Make sure that the Docker whale is
   showing in the menu bar, and that you run the Docker commands in a shell that
-  is connected to the Docker for Mac Engine (not Engine from
-  Toolbox). Otherwise, you might start the webserver container but get a "web
-  page not available" error when you go to `localhost`. For more on
-  distinguishing between the two environments, see [Docker for Mac vs. Docker
+  is connected to the Docker Desktop for Mac Engine (not Engine from Toolbox).
+  Otherwise, you might start the webserver container but get a "web page not
+  available" error when you go to `localhost`. For more on distinguishing
+  between the two environments, see [Docker Desktop for Mac vs. Docker
   Toolbox](docker-toolbox.md).
 
 <p></p>
@@ -271,12 +247,12 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ## Known issues
 
-* IPv6 is not (yet) supported on Docker for Mac. 
+* IPv6 is not (yet) supported on Docker Desktop for Mac. 
 
   A workaround is provided that auto-filters out the IPv6 addresses in DNS
-  server lists and enables successful network accesss.  For example,
+  server lists and enables successful network access.  For example,
   `2001:4860:4860::8888` would become `8.8.8.8`.  To learn more, see these
-  issues on GitHub and Docker for Mac forums:
+  issues on GitHub and Docker Desktop for Mac forums:
 
   * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
     addresses](https://github.com/docker/for-mac/issues/9)
@@ -286,7 +262,7 @@ know before you install](install.md#what-to-know-before-you-install).
 
   <p></p>
 
-* You might encounter errors when using `docker-compose up` with Docker for Mac
+* You might encounter errors when using `docker-compose up` with Docker Desktop for Mac
   (`ValueError: Extra Data`). We've identified this is likely related to data
   and/or events being passed all at once rather than one by one, so sometimes
   the data comes back as 2+ objects concatenated and causes an error.
@@ -297,21 +273,20 @@ know before you install](install.md#what-to-know-before-you-install).
   resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in ![whale
-  menu](images/whale-x.png){: .inline} --> **Preferences**. This
-  is related to a set of issues with Docker helper, registration, and
-  versioning.
+  menu](images/whale-x.png){: .inline} → **Preferences**. This is related to a
+  set of issues with Docker helper, registration, and versioning.
 
 <p></p>
 
-* Docker for Mac uses the `HyperKit` hypervisor
+* Docker Desktop for Mac uses the `HyperKit` hypervisor
   (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If
   you are developing with tools that have conflicts with `HyperKit`, such as
   [Intel Hardware Accelerated Execution Manager
   (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
   the current workaround is not to run them at the same time. You can pause
-  `HyperKit` by quitting Docker for Mac temporarily while you work with
-  HAXM. This allows you to continue work with the other tools and prevent
-  `HyperKit` from interfering.
+  `HyperKit` by quitting Docker Desktop for Mac temporarily while you work with HAXM.
+  This allows you to continue work with the other tools and prevent `HyperKit`
+  from interfering.
 
 
 * If you are working with applications like [Apache
@@ -351,7 +326,8 @@ know before you install](install.md#what-to-know-before-you-install).
   - Symfony
   - Magento
   - Zend Framework
-  - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder<br><br>
+  - PHP applications that use [Composer](https://getcomposer.org) to install
+    dependencies in a ```vendor``` folder<br><br>
 
   As a work-around for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
@@ -362,15 +338,17 @@ know before you install](install.md#what-to-know-before-you-install).
   and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
 * If your system does not have access to an NTP server, then after a hibernate
-  the time seen by Docker for Mac may be considerably out of sync with the
-  host. Furthermore, the time may slowly drift out of sync during use. To
-  manually reset the time after hibernation, run:
+  the time seen by Docker Desktop for Mac may be considerably out of sync with the host.
+  Furthermore, the time may slowly drift out of sync during use. To manually
+  reset the time after hibernation, run:
 
   ```bash
   docker run --rm --privileged alpine hwclock -s
   ```
 
-  Or, to resolve both issues, you can add the local clock as a low-priority (high stratum) fallback NTP time source for the host. To do this, edit the host's `/etc/ntp-restrict.conf` to add:
+  Or, to resolve both issues, you can add the local clock as a low-priority
+  (high stratum) fallback NTP time source for the host. To do this, edit the
+  host's `/etc/ntp-restrict.conf` to add:
 
   ```
   server 127.127.1.1              # LCL, local clock

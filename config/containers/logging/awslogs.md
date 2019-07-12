@@ -40,6 +40,16 @@ You can set the logging driver for a specific container by using the
 
     docker run --log-driver=awslogs ...
 
+If you are using Docker Compose, set `awslogs` using the following declaration example:
+
+```yaml
+myservice:
+  logging:
+    driver: awslogs
+      options:
+        awslogs-region: us-east-1
+```
+          
 ## Amazon CloudWatch Logs options
 
 You can add logging options to the `daemon.json` to set Docker-wide defaults,
@@ -169,7 +179,7 @@ The following `strftime` codes are supported:
 | `%p` | AM or PM.                                                        | AM       |
 | `%M` | Minute as a zero-padded decimal number.                          | 57       |
 | `%S` | Second as a zero-padded decimal number.                          | 04       |
-| `%L` | Milliseconds as a zero-padded decimal number.                    | 123      |
+| `%L` | Milliseconds as a zero-padded decimal number.                    | .123      |
 | `%f` | Microseconds as a zero-padded decimal number.                    | 000345   |
 | `%z` | UTC offset in the form +HHMM or -HHMM.                           | +1300    |
 | `%Z` | Time zone name.                                                  | PST      |

@@ -25,14 +25,11 @@ repository]({{ labsbase }}).
 
 ## Library references
 
-These docs are imported from
-[the official Docker Library docs](https://github.com/docker-library/docs/),
-and help you use some of the most popular software that has been
-"Dockerized" into Docker images.
+The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
 
 | Image name | Description |
 | ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}]({{ page.url }}) | {{ page.description | strip }} |
+{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}) | {{ page.description | strip }} |
 {% endfor %}
 
 ## Sample applications
@@ -42,6 +39,7 @@ Run popular software using Docker.
 | Sample | Description |
 | ------ | ----------- |
 | [apt-cacher-ng](/engine/examples/apt-cacher-ng) | Run a Dockerized apt-cacher-ng instance. |
+| [.Net Core application](/engine/examples/dotnetcore) | Run a Dockerized ASP.NET Core application. |
 | [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose) | Run a Dockerized ASP.NET Core + SQL Server environment. |
 | [CouchDB](/engine/examples/couchdb_data_volumes) | Run a Dockerized CouchDB instance. |
 | [Django + PostgreSQL](/compose/django/) | Run a Dockerized Django + PostgreSQL environment. |

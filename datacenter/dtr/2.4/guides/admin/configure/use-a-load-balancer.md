@@ -54,7 +54,7 @@ with more details on any one of these services:
 * Content trust (notary)
 
 This endpoint is for checking the health of a *single* replica. To get
-the health of every replica in a cluster, querying each replica individiually is
+the health of every replica in a cluster, querying each replica individually is
 the preferred way to do it in real time.
 
 The `/api/v0/meta/cluster_status`

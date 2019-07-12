@@ -25,7 +25,7 @@ repository URL associated with your trial or subscription. These instructions
 work for Docker EE for Ubuntu and for Docker EE for Linux, which includes access
 to Docker EE for all Linux distributions. To get this information:
 
-- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
+- Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
   button for **Docker Enterprise Edition for Ubuntu**.
 - Copy the URL from the field labeled
@@ -47,7 +47,7 @@ Older versions of Docker were called `docker` or `docker-engine`. In addition,
 if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker-ce docker.io
+$ sudo apt-get remove docker docker-engine docker-ce docker-ce-cli docker.io
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -136,14 +136,14 @@ from the repository.
       ```
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
-    There are currently two versions of Docker EE Engine available:
 
-    * `stable-18.03` - Use this version if you're only running Docker EE Engine.
-    * `stable-17.06` - Use this version if you're using Docker Enterprise Edition (Docker
-    Engine, UCP, and DTR).
+   > **Note**: If you need to run something other than Docker EE 2.0, please see the following instructions:
+   > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+   > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+   > UCP, and DTR).
 
     ```bash
-    $ DOCKER_EE_VERSION=<YOUR_VERSION>
+    $ DOCKER_EE_VERSION=18.09
     ```
 
 5.  Add Docker's official GPG key using your customer Docker EE repository URL:
@@ -173,43 +173,12 @@ from the repository.
     > Ubuntu distribution, such as `xenial`.
     >
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64el_repo">IBM Power (ppc64el)</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
+       "deb [arch=$(dpkg --print-architecture)] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
+       stable-$DOCKER_EE_VERSION"
     ```
-
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
-       $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
-    ```
-
-    </div>
-    <div id="ppc64el_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
-       $(lsb_release -cs) \
-       $DOCKER_EE_VERSION"
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker EE
 
@@ -222,10 +191,10 @@ from the repository.
 2.  Install the latest version of Docker EE, or go to the next step to install a
     specific version. Any existing installation of Docker EE is replaced.
 
-    Use this command to install the latest version of Docker EE:
+    Use this command to install the latest version of Docker EE and containerd:
 
     ```bash
-    $ sudo apt-get install docker-ee
+    $ sudo apt-get install docker-ee docker-ee-cli containerd.io
     ```
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
@@ -253,7 +222,7 @@ from the repository.
     version string to the package name and separate them by an equals sign (`=`):
 
     ```bash
-    $ sudo apt-get install docker-ee=<VERSION>
+    $ sudo apt-get install docker-ee=<VERSION_STRING> docker-ee-cli=<VERSION_STRING> containerd.io
     ```
 
     The Docker daemon starts automatically.
@@ -279,13 +248,13 @@ steps.
 To upgrade Docker EE:
 
 1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 17.03.x to Docker 17.06.x),
+    Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo apt-get update`.
 
 3.  Follow the
-    [installation instructions](#install-docker), choosing the new version you want
+    [installation instructions](#install-docker-ee), choosing the new version you want
     to install.
 
 ### Install from a package

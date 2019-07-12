@@ -126,7 +126,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 #### Using a custom target ID
 This topic has a custom target ID above its heading that can be used to link to
-it, in addtion to, or instead of, the default concatenated heading style. The
+it, in addition to, or instead of, the default concatenated heading style. The
 format of this ID is `{: id="custom-target-id"}`.
 
 You can use custom targets to link to headings or even paragraphs. You link to
@@ -162,7 +162,7 @@ might be interesting. You can use them with Markdown or HTML images.
 
 You can add a link to a YouTube video like this:
 
-[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+[Docker 101: Introduction to Docker](https://www.youtube.com/watch?v=V9IJj4MzZBc "Docker 101: Introduction to Docker"){:target="_blank" class="_"}
 
 To make the `.png` shown above, first take a screen snap of the YouTube video
 you want to use, then use a graphics app to overlay a play button onto the
@@ -268,14 +268,14 @@ example, [swarm](glossary.md?term=swarm)).
 ## Site-wide variables
 
 Look in the top-level `_config.yml` for site-wide variables, such as
-`site.docker_ce_stable_version`. To use them, use Liquid like:
+`site.docker_ce_version`. To use them, use Liquid like:
 
 ```liquid
-{% raw %}{{ site.docker_ce_stable_version }}{% endraw %}
+{% raw %}{{ site.docker_ce_version }}{% endraw %}
 ```
 
-The current value of `site.docker_ce_stable_version` is
-{{ site.docker_ce_stable_version }}.
+The current value of `site.docker_ce_version` is
+{{ site.docker_ce_version }}.
 
 ## Mixing Markdown and HTML
 
@@ -479,7 +479,7 @@ To try something more ambitious, you can run an Ubuntu container with:
  $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
- https://cloud.docker.com/
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
@@ -667,7 +667,7 @@ we use often.
 
 ### Raw, no highlighting
 
-The raw markup is needed to keep Liquid from interperting the things with double
+The raw markup is needed to keep Liquid from interpreting the things with double
 braces as templating language.
 
 {% raw %}
@@ -707,6 +707,15 @@ incoming := map[string]interface{}{
         "tyui",
     },
 }
+```
+
+### PowerShell
+
+```powershell
+Install-Module DockerMsftProvider -Force
+Install-Package Docker -ProviderName DockerMsftProvider -Force
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
 ```
 
 ### Python
@@ -752,7 +761,7 @@ syntax for comments in JSON!
 ### Markdown
 
 ```md
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=<repo_url>)
+# Hello
 ```
 
 ### ini

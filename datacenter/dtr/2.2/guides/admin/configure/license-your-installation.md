@@ -17,7 +17,7 @@ DTR installation:
 
 ## Download your license
 
-Go to [Docker Store](https://store.docker.com/bundles/docker-datacenter) and
+Go to [Docker Hub](https://hub.docker.com/my-content) and
 download your license.
 
 ![](../../images/license-1.png)

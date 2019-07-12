@@ -23,7 +23,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   trust inspect alpine:latest\n[\n  {\n    \"Name\": \"alpine:latest\",\n    \"SignedTags\":
   [\n      {\n        \"SignedTag\": \"latest\",\n        \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
   \       \"Signers\": [\n          \"Repo Admin\"\n        ]\n      }\n    ],\n    \"Signers\":
-  [],\n    \"AdminstrativeKeys\": [\n      {\n        \"Name\": \"Repository\",\n
+  [],\n    \"AdministrativeKeys\": [\n      {\n        \"Name\": \"Repository\",\n
   \       \"Keys\": [\n            {\n                \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
   \           }\n        ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\":
   [\n            {\n                \"ID\": \"a2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\"\n
@@ -43,7 +43,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   \           }\n        ]\n      },\n      {\n        \"Name\": \"carol\",\n        \"Keys\":
   [\n            {\n                \"ID\": \"d32fa8b5ca08273a2880f455fcb318da3dc80aeae1a30610815140deef8f30d9\"\n
   \           },\n            {\n                \"ID\": \"9a8bbec6ba2af88a5fad6047d428d17e6d05dbdd03d15b4fc8a9a0e8049cd606\"\n
-  \           }\n        ]\n      }\n    ],\n    \"AdminstrativeKeys\": [\n      {\n
+  \           }\n        ]\n      }\n    ],\n    \"AdministrativeKeys\": [\n      {\n
   \       \"Name\": \"Repository\",\n        \"Keys\": [\n            {\n                \"ID\":
   \"27df2c8187e7543345c2e0bf3a1262e0bc63a72754e9a7395eac3f747ec23a44\"\n            }\n
   \       ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\": [\n
@@ -53,7 +53,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   docker trust inspect unsigned-img\nNo signatures or cannot access unsigned-img\n```\n\nHowever,
   if other tags are signed in the same image repository,\n`docker trust inspect` reports
   relevant key information:\n\n```bash\n$ docker trust inspect alpine:unsigned\n[\n
-  \ {\n    \"Name\": \"alpine:unsigned\",\n    \"Signers\": [],\n    \"AdminstrativeKeys\":
+  \ {\n    \"Name\": \"alpine:unsigned\",\n    \"Signers\": [],\n    \"AdministrativeKeys\":
   [\n      {\n        \"Name\": \"Repository\",\n        \"Keys\": [\n            {\n
   \               \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
   \           }\n        ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\":
@@ -72,7 +72,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
   \               \"SignedTag\": \"latest\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
   \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
-  \           }\n        ],\n        \"Signers\": [],\n        \"AdminstrativeKeys\":
+  \           }\n        ],\n        \"Signers\": [],\n        \"AdministrativeKeys\":
   [\n            {\n                \"Name\": \"Repository\",\n                \"Keys\":
   [\n                    {\n                        \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
   \                   }\n                ]\n            },\n            {\n                \"Name\":
@@ -95,7 +95,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
   \               \"SignedTag\": \"latest\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
   \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
-  \           }\n        ],\n        \"Signers\": [],\n        \"AdminstrativeKeys\":
+  \           }\n        ],\n        \"Signers\": [],\n        \"AdministrativeKeys\":
   [\n            {\n                \"Name\": \"Repository\",\n                \"Keys\":
   [\n                    {\n                        \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
   \                   }\n                ]\n            },\n            {\n                \"Name\":
@@ -108,7 +108,7 @@ examples: "### Get low-level details about signatures for a single image tag\n\n
   \           },\n            {\n                \"SignedTag\": \"signer\",\n                \"Digest\":
   \"a6122d79b1e74f70b5dd933b18a6d1f99329a4728011079f06b245205f158fe8\",\n                \"Signers\":
   [\n                    \"Repo Admin\"\n                ]\n            }\n        ],\n
-  \       \"Signers\": [],\n        \"AdminstrativeKeys\": [\n            {\n                \"Name\":
+  \       \"Signers\": [],\n        \"AdministrativeKeys\": [\n            {\n                \"Name\":
   \"Root\",\n                \"Keys\": [\n                    {\n                        \"ID\":
   \"8cdcdef5bd039f4ab5a029126951b5985eebf57cabdcdc4d21f5b3be8bb4ce92\"\n                    }\n
   \               ]\n            },\n            {\n                \"Name\": \"Repository\",\n

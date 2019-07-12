@@ -12,7 +12,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for Azure
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
+[Deploy Docker Enterprise Edition (EE) for Azure](https://hub.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
 
 
 ## Docker Community Edition (CE) for Azure
@@ -20,29 +20,9 @@ This deployment is fully baked and tested, and comes with the latest Enterprise 
 ### Quickstart
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
-then choose from the stable or edge channel to bootstrap Docker for Azure using Azure Resource Manager.
-For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-edge-channels).
-<table style="width:100%">
-  <tr>
-    <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Edge channel</th>
-  </tr>
-  <tr valign="top">
-    <td width="50%">This deployment is fully baked and tested, and comes with the latest CE version of Docker. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>Stable is released quarterly and is for users that want an easier-to-maintain release pace.</td>
-    <td width="50%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month <br><br>We collect usage data on edges across the board.</td>
-  </tr>
-  <tr valign="top">
-  <td width="50%">
-  {{azure_blue_latest}}
-  </td>
-  <td width="50%">
-  {{azure_blue_edge}}
-  </td>
-  </tr>
-</table>
+then bootstrap Docker for Azure using Azure Resource Manager.
 
-> **Note* During stable channel updates, edge channel will have the same release (unless it's a patch release)
-
+{{azure_blue_latest}}
 
 ### Prerequisites
 

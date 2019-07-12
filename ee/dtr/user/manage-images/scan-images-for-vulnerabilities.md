@@ -8,7 +8,7 @@ keywords: registry, scan, vulnerability
 
 Docker Trusted Registry can scan images in your repositories to verify that they
 are free from known security vulnerabilities or exposures, using Docker Security
-Scanning. The results of these scans are reported for each image tag.
+Scanning. The results of these scans are reported for each image tag in a repository.
 
 Docker Security Scanning is available as an add-on to Docker Trusted Registry,
 and an administrator configures it for your DTR instance. If you do not see
@@ -22,7 +22,7 @@ a new scan.
 
 ## The Docker Security Scan process
 
-Scans run either on demand when a user clicks the **Start a Scan** links or
+Scans run either on demand when you click the **Start a Scan** link or
 **Scan** button (see [Manual scanning](#manual-scanning) below), or automatically
 on any `docker push` to the repository.
 
@@ -30,14 +30,14 @@ First the scanner performs a binary scan on each layer of the image, identifies
 the software components in each layer, and indexes the SHA of each component in
 a bill-of-materials. A binary scan evaluates the components on a bit-by-bit
 level, so vulnerable components are discovered even if they are
-statically-linked or under a different name.
+statically linked or under a different name.
 
 The scan then compares the SHA of each component against the US National
 Vulnerability Database that is installed on your DTR instance. When
 this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
 
-DTR scans both Linux and Windows images, but but by default Docker doesn't push
+DTR scans both Linux and Windows images, but by default Docker doesn't push
 foreign image layers for Windows images so DTR won't be able to scan them. If
 you want DTR to scan your Windows images, [configure Docker to always push image
 layers](pull-and-push-images.md), and it will scan the non-foreign layers.
@@ -49,15 +49,15 @@ image repository.
 
 If your DTR instance is configured in this way, you do not need to do anything
 once your `docker push` completes. The scan runs automatically, and the results
-are reported in the repository's **Images** tab after the scan finishes.
+are reported in the repository's **Tags** tab after the scan finishes.
 
 ## Manual scanning
 
 If your repository owner enabled Docker Security Scanning but disabled automatic
-scanning, you can manually start a scan for images in repositories to which you
-have `write` access.
+scanning, you can manually start a scan for images in repositories you
+have `write` access to.
 
-To start a security scan, navigate to the **tag details**, and click the **Scan** button.
+To start a security scan, navigate to the repository **Tags** tab on the web interface, click "View details" next to the relevant tag, and click **Scan**.
 
 ![](../../images/scan-images-for-vulns-1.png){: .with-border}
 
@@ -85,33 +85,33 @@ To change the repository scanning mode:
 
 Once DTR has run a security scan for an image, you can view the results.
 
-The **Images** tab for each repository includes a summary of the most recent
+The **Tags** tab for each repository includes a summary of the most recent
 scan results for each image.
 
 ![](../../images/scan-images-for-vulns-3.png){: .with-border}
-- A green shield icon with a check mark indicates that the scan did not find
+- The text "Clean" in green indicates that the scan did not find
 any vulnerabilities.
-- A red or orange shield icon indicates that vulnerabilities were found, and
-the number of vulnerabilities is included on that same line.
+- A red or orange text indicates that vulnerabilities were found, and
+the number of vulnerabilities is included on that same line according to severity: ***Critical***, ***Major***, ***Minor***.
 
-If the vulnerability scan can't detect the version of a component, it reports
+If the vulnerability scan could not detect the version of a component, it reports
 the vulnerabilities for all versions of that component.
 
-From the **Images** tab you can click **View details** for a specific tag to see
+From the repository **Tags** tab, you can click **View details** for a specific tag to see
 the full scan results. The top of the page also includes metadata about the
-image, including the SHA, image size, date last pushed and user who last pushed,
+image, including the SHA, image size, last push date, user who initiated the push,
 the security scan summary, and the security scan progress.
 
 The scan results for each image include two different modes so you can quickly
 view details about the image, its components, and any vulnerabilities found.
 
-- The **Layers** view lists the layers of the image in order as they are built
-by the Dockerfile.
+- The **Layers** view lists the layers of the image in the order that they are built
+by Dockerfile.
 
     This view can help you find exactly which command in the build introduced
     the vulnerabilities, and which components are associated with that single
     command. Click a layer to see a summary of its components. You can then
-    click on a component to switch to the Component view and get more details
+    click on a component to switch to the **Component** view and get more details
     about the specific item.
 
     > **Tip**: The layers view can be long, so be sure
@@ -120,8 +120,7 @@ by the Dockerfile.
    ![](../../images/scan-images-for-vulns-4.png){: .with-border}
 
 - The **Components** view lists the individual component libraries indexed by
-the scanning system, in order of severity and number of vulnerabilities found,
-most vulnerable first.
+the scanning system, in order of severity and number of vulnerabilities found, with the most vulnerable library listed first.
 
     Click on an individual component to view details about the vulnerability it
     introduces, including a short summary and a link to the official CVE
@@ -139,18 +138,17 @@ vulnerability and decide what to do.
 
 If you discover vulnerable components, you should check if there is an updated
 version available where the security vulnerability has been addressed. If
-necessary, you might contact the component's maintainers to ensure that the
-vulnerability is being addressed in a future version or patch update.
+necessary, you can contact the component's maintainers to ensure that the
+vulnerability is being addressed in a future version or a patch update.
 
 If the vulnerability is in a `base layer` (such as an operating system) you
-might not be able to correct the issue in the image. In this case, you might
-switch to a different version of the base layer, or you might find an
-equivalent, less vulnerable base layer. You might also decide that the
-vulnerability or exposure is acceptable.
+might not be able to correct the issue in the image. In this case, you can
+switch to a different version of the base layer, or you can find an
+equivalent, less vulnerable base layer.
 
 Address vulnerabilities in your repositories by updating the images to use
 updated and corrected versions of vulnerable components, or by using a different
-components that provide the same functionality. When you have updated the source
+component offering the same functionality. When you have updated the source
 code, run a build to create a new image, tag the image, and push the updated
 image to your DTR instance. You can then re-scan the image to confirm that you
 have addressed the vulnerabilities.
