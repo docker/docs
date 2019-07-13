@@ -79,7 +79,7 @@ EXPOSE 80
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python", "/app/app.py"]
 ```
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
