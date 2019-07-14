@@ -91,11 +91,6 @@ To install UCP:
 >[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/).
 {: important}
 
-3. Turn off scheduling on UCP managers and DTR nodes since it is on by default. Workloads cannot be run on manager nodes. 
-Make sure all options shown in the following screen shot are unchecked:
-
-    ![Scheduling options](../../images/scheduling-options.png){: .with-border}
-
 ## Step 5: License your installation
 
 Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker Enterprise standard or advanced subscription, or you can test the platform with a free trial license.
