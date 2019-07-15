@@ -106,7 +106,7 @@ consistency and compatibility reasons.
 
 ### Builder
 
-* Added validation for `git ref` to avoid misinterpretation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
+* Fixed [CVE-2019-13139](https://nvd.nist.gov/vuln/detail/CVE-2019-13139) by adding validation for `git ref` to avoid misinterpretation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
 
 ### Runtime
 
