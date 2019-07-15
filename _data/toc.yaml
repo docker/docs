@@ -469,7 +469,7 @@ guides:
       title: NIST ITL Bulletin October 2017
   - sectiontitle: OSCAL
     section:
-    - path: /compliance/oscal
+    - path: /compliance/oscal/
       title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
