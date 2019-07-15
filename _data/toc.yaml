@@ -1290,22 +1290,8 @@ manuals:
   section:
   - path: /ee/
     title: Overview
-  - sectiontitle: Release notes
-    section:  
-    - path: /ee/release-notes/
-      title: Platform
-    - path: /engine/release-notes/
-      title: Docker Engine - Enterprise and Engine - Community
-      nosync: true
-    - path: /ee/ucp/release-notes/
-      title: Docker Universal Control Plane
-      nosync: true
-    - path: /ee/dtr/release-notes/
-      title: Docker Trusted Registry
-      nosync: true
-    - path: /ee/desktop/release-notes/
-      title: Docker Desktop Enterprise
-      nosync: true
+  - path: /ee/release-notes/
+    title: Release notes
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
@@ -3692,44 +3678,8 @@ manuals:
           title: Token scope documentation
         - path: /registry/spec/auth/token/
           title: Token authentication specification
-- sectiontitle: Release notes
-  section:
-    - path: /release-notes/
-      title: Overview
-    - sectiontitle: Docker Enterprise Platform
-      section:  
-      - path: /ee/release-notes/
-        title: Platform
-      - path: /engine/release-notes/
-        title: Docker Engine - Enterprise and Engine - Community
-        nosync: true
-      - path: /ee/ucp/release-notes/
-        title: Docker Universal Control Plane
-        nosync: true
-      - path: /ee/dtr/release-notes/
-        title: Docker Trusted Registry
-        nosync: true
-      - path: /ee/desktop/release-notes/
-        title: Docker Desktop Enterprise
-        nosync: true
-    - path: /docker-for-mac/release-notes/
-      title: Docker Desktop for Mac
-      nosync: true
-    - path: /docker-for-windows/release-notes/
-      title: Docker Desktop for Windows
-      nosync: true
-    - path: /release-notes/docker-compose/
-      title: Docker Compose
-      nosync: true
-    - path: /docker-for-aws/release-notes/
-      title: Docker for AWS
-      nosync: true
-    - path: /docker-for-azure/release-notes/
-      title: Docker for Azure
-      nosync: true
-    - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
-      nosync: true
+- path: /release-notes/
+  title: Release notes          
 - sectiontitle: Superseded products and tools
   section:
   - path: /cs-engine/1.13/release-notes/
