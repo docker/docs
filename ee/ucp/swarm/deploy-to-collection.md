@@ -79,7 +79,7 @@ services:
 networks:
   wp:
     driver: overlay
-    lables:
+    labels:
       com.docker.ucp.access.label: /Shared/wordpress
 ```
 
