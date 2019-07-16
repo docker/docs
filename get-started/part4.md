@@ -415,7 +415,7 @@ You can access your app from the IP address of **either** `myvm1` or `myvm2`.
 
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
-browser on port `:4000`, hitting refresh (or just `curl` them).
+browser on port 4000, hitting refresh (or just `curl` them).
 
 ![Hello World in browser](images/app-in-browser-swarm.png)
 
