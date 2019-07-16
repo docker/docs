@@ -1349,6 +1349,8 @@ manuals:
           title: Add labels to cluster nodes
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
+        - path: /ee/ucp/admin/configure/admission-controllers
+          title: Admission Controllers
         - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/metrics-descriptions/
