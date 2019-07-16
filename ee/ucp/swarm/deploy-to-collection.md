@@ -111,7 +111,7 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
 It is important to note that by default Docker Stacks will create a default `overlay`
 network for your stack. It will be
 attached to each container that is deployed. This works if you have full control over
-your Default Collection or are an adminitrator. If your administrators have locked
+your Default Collection or are an administrator. If your administrators have locked
 down UCP to only allow you access to specific collections and you manage multiple
 collections, then it can get very difficult to manage the networks as well and you
 might run into permissions errors. To fix this, you must define a custom network
