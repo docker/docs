@@ -13,18 +13,20 @@ green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; mar
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
-Docker Enterprise is designed for enterprise development as well as IT teams who build, ship, and run business-critical
-applications in production and at scale. Docker Enterprise is integrated, certified,
+Docker Enterprise is designed for enterprise development as well as IT teams who
+build, ship, and run business-critical applications 
+in production and at scale. Docker Enterprise is integrated, certified,
 and supported to provide enterprises with the most secure container platform
 in the industry. For more info about Docker Enterprise, including purchasing
 options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
 >
-> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) 
+> for the latest list of supported platforms.
 {: .important}
 
-## Docker EE tiers
+## Docker Enterprise tiers
 
 {% include docker_ce_ee.md %}
 
@@ -47,20 +49,23 @@ maintenance cycles for patches for up to 24 months.
 
 ### New Licensing for Docker Enterprise 
 
-In version 18.09, the Docker Enterprise --- Engine is aware of the license applied on the system. The 
-license summary is available in the `docker info` output on standalone or manager nodes.
+In version 18.09, the Docker Enterprise --- Engine is aware of the license 
+applied on the system. The license summary is available in the `docker info`
+output on standalone or manager nodes.
 
-For EE platform customers, when you license UCP, this same license is applied to the underlying 
-engines in the cluster. Docker recommends platform customers use UCP to manage their license.
+For EE platform customers, when you license UCP, this same license is applied to
+the underlying engines in the cluster. Docker recommends platform customers use
+UCP to manage their license.
 
 Standalone EE engines can be licensed using `docker engine activate`.
 
-Offline activation of standalone EE engines can be performed by downloading the license and 
-using the command `docker engine activate --license filename.lic`. 
+Offline activation of standalone EE engines can be performed by downloading the 
+license and using the command `docker engine activate --license filename.lic`. 
 
-Additionally, Docker is now distributing the CLI as a separate installation package. 
-This gives Enterprise users the ability to install as many CLI packages as needed 
-without using the Engine node licenses for client-only systems.
+Additionally, Docker is now distributing the CLI as a separate installation 
+package. This gives Enterprise users the ability to install as many CLI 
+packages as needed without using the Engine node licenses for client-only
+systems.
 
 [Learn more about Docker Enterprise](/ee/index.md).
 
@@ -91,22 +96,21 @@ and third-party ecosystem solution briefs.
 Each Docker Enterprise release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker platform version. We maintain
-careful API backward compatibility and deprecate APIs and features slowly and
-conservatively. We remove features after deprecating them for a period of
-three stable releases. Docker 1.13 introduced improved interoperability
-between clients and servers using different API versions, including dynamic
-feature negotiation.
+The Docker API version is independent of the Docker platform version. We 
+maintain careful API backward compatibility and deprecate APIs and features
+slowly and conservatively. We remove features after deprecating them for a
+period of three stable releases. Docker 1.13 introduced improved
+interoperability between clients and servers using different API versions, 
+including dynamic feature negotiation.
 
 ## Upgrades and support
 
 If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker Enterprise to continue to get support. We will continue to support customers
-with valid subscriptions whether the subscription covers Docker EE or
-Commercially Supported Docker. You can choose to stay with your current
-deployed version, or you can upgrade to the latest Docker EE version. For
-more info, see [Scope of Coverage and Maintenance
-Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
+Docker Enterprise to continue to get support. We will continue to support 
+customers with valid subscriptions whether the subscription covers Docker
+Enterprise or Commercially Supported Docker. You can choose to stay with your
+current deployed version, or you can upgrade to the latest Docker Enterprise
+version. For more info, see [Scope of Coverage and Maintenance Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
 
 ## Where to go next
 
