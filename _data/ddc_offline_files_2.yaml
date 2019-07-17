@@ -6,14 +6,6 @@
 - product: "ucp"
   version: "3.1"
   tar-files:
-    - description: "3.1.9 Linux"
-      url: https://packages.docker.com/caas/ucp_images_3.1.9.tar.gz
-    - description: "3.1.9 Windows Server 2016 LTSC"
-      url: https://packages.docker.com/caas/ucp_images_win_2016_3.1.9.tar.gz
-    - description: "3.1.9 Windows Server 1803"
-      url: https://packages.docker.com/caas/ucp_images_win_1803_3.1.9.tar.gz
-    - description: "3.1.9 Windows Server 2019 LTSC"
-      url: https://packages.docker.com/caas/ucp_images_win_2019_3.1.9.tar.gz   
     - description: "3.1.8 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.1.8.tar.gz
     - description: "3.1.8 Windows Server 2016 LTSC"
