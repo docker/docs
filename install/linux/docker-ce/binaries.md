@@ -17,7 +17,13 @@ system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
-`dockerd`). Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+`dockerd`). 
+Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+
+This topic discusses binary installation for both Linux and macOS:
+
+- [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux )
+- [Install client binaries on macOS](#install-client-binaries-on-macos )
 
 ## Install daemon and client binaries on Linux
 
@@ -28,7 +34,7 @@ meets the prerequisites:
 
 - A 64-bit installation
 - Version 3.10 or higher of the Linux kernel. The latest version of the kernel
-  available for you platform is recommended.
+  available for your platform is recommended.
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
@@ -70,8 +76,8 @@ instructions for enabling and configuring AppArmor or SELinux.
 ### Install static binaries
 
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/x86_64/)
-    (or change `stable` to `edge` or `test`),
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
+    (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
     version of Docker CE you want to install.
 
@@ -110,12 +116,6 @@ instructions for enabling and configuring AppArmor or SELinux.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-### Next steps
-
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
-- Continue with the [User Guide](/engine/userguide/index.md).
-
 ## Install client binaries on macOS
 
 The macOS binary includes the Docker client only. It does not include the
@@ -123,7 +123,7 @@ The macOS binary includes the Docker client only. It does not include the
 
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `edge` or `test`),
+    (or change `stable` to `nightly` or `test`),
     and download the `.tgz` file relating to the version of Docker CE you want
     to install.
 
@@ -162,4 +162,8 @@ version.
 
 ## Next steps
 
-Continue with the [User Guide](/engine/userguide/index.md).
+- On Linux:
+    - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+    - Continue with the [User Guide](/engine/userguide/index.md).
+- On macOS:
+    - Continue with the [User Guide](/get-started/index.md).

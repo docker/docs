@@ -99,7 +99,7 @@ avoid these situations.
 
     This means that user-namespaced processes started by `testuser` are
     owned by host UID `231072` (which looks like UID `0` inside the
-    namespace) through 296608 (231072 + 65536). These ranges should not overlap,
+    namespace) through 296607 (231072 + 65536 - 1). These ranges should not overlap,
     to ensure that namespaced processes cannot access each other's namespaces.
 
     After adding your user, check `/etc/subuid` and `/etc/subgid` to see if your
@@ -244,6 +244,10 @@ for some of these limitations.
 
 To disable user namespaces for a specific container, add the `--userns=host`
 flag to the `docker container create`, `docker container run`, or `docker container exec` command.
+
+There is a side effect when using this flag: user remapping will not be enabled for that container but, because the read-only (image) layers are shared between containers, ownership of the the containers filesystem will still be remapped.
+
+What this means is that the whole container filesystem will belong to the user specified in the `--userns-remap` daemon config (`231072` in the example above). This can lead to unexpected behavior of programs inside the container. For instance `sudo` (which checks that its binaries belong to user `0`) or binaries with a `setuid` flag.
 
 ## User namespace known limitations
 

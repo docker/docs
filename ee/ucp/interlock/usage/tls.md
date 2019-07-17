@@ -1,39 +1,32 @@
 ---
-title: Applications with SSL
-description: Learn how to configure your swarm services with TLS using the layer
-  7 routing solution for UCP.
+title: Secure services with TLS
+description: Learn how to configure your swarm services with TLS.
 keywords: routing, proxy, tls
 redirect_from:
   - /ee/ucp/interlock/usage/ssl/
 ---
 
-Once the [layer 7 routing solution is enabled](../deploy/index.md), you can
-start using it in your swarm services. You have two options for securing your
+After [deploying a layer 7 routing solution](../deploy/index.md), you have two options for securing your
 services with TLS:
 
-* Let the proxy terminate the TLS connection. All traffic between end-users and
+* [Let the proxy terminate the TLS connection.](#let-the-proxy-handle-tls) All traffic between end-users and
 the proxy is encrypted, but the traffic going between the proxy and your swarm
 service is not secured.
-* Let your swarm service terminate the TLS connection. The end-to-end traffic
+* [Let your swarm service terminate the TLS connection.](#let-your-service-handle-tls) The end-to-end traffic
 is encrypted and the proxy service allows TLS traffic to passthrough unchanged.
 
-In this example we'll deploy a service that can be reached at `app.example.org`
-using these two options.
-
-No matter how you choose to secure your swarm services, there are two steps to
+Regardless of the option selected to secure swarm services, there are two steps required to
 route traffic with TLS:
 
 1. Create [Docker secrets](/engine/swarm/secrets.md) to manage from a central
 place the private key and certificate used for TLS.
 2. Add labels to your swarm service for UCP to reconfigure the proxy service.
 
-
 ## Let the proxy handle TLS
-
-In this example we'll deploy a swarm service and let the proxy service handle
+The following example deploys a swarm service and lets the proxy service handle
 the TLS connection. All traffic between the proxy and the swarm service is
-not secured, so you should only use this option if you trust that no one can
-monitor traffic inside services running on your datacenter.
+not secured, so use this option only if you trust that no one can
+monitor traffic inside services running in your datacenter.
 
 ![TLS Termination](../../images/interlock-tls-1.png)
 
@@ -86,15 +79,15 @@ secrets:
     file: ./app.example.org.key
 ```
 
-Notice that the demo service has labels describing that the proxy service should
-route traffic to `app.example.org` to this service. All traffic between the
+Notice that the demo service has labels specifying that the proxy service should
+route `app.example.org` traffic to this service. All traffic between the
 service and proxy takes place using the `demo-network` network. The service also
-has labels describing the Docker secrets to use on the proxy service to terminate
+has labels specifying the Docker secrets to use on the proxy service for terminating
 the TLS connection.
 
-Since the private key and certificate are stored as Docker secrets, you can
+Because the private key and certificate are stored as Docker secrets, you can
 easily scale the number of replicas used for running the proxy service. Docker
-takes care of distributing the secrets to the replicas.
+distributes the secrets to the replicas.
 
 Set up your CLI client with a [UCP client bundle](../../user-access/cli.md),
 and deploy the service:
@@ -103,25 +96,24 @@ and deploy the service:
 docker stack deploy --compose-file docker-compose.yml demo
 ```
 
-The service is now running. To test that everything is working correctly you
-first need to update your `/etc/hosts` file to map `app.example.org` to the
+The service is now running. To test that everything is working correctly, update your `/etc/hosts` file to map `app.example.org` to the
 IP address of a UCP node.
 
-In a production deployment, you'll have to create a DNS entry so that your
+In a production deployment, you must create a DNS entry so that 
 users can access the service using the domain name of your choice.
-After doing that, you'll be able to access your service at:
+After creating the DNS entry, you can access your service:
 
 ```bash
 https://<hostname>:<https-port>
 ```
 
-Where:
-* `hostname` is the name you used with the `com.docker.lb.hosts` label.
-* `https-port` is the port you've configured in the [UCP settings](../deploy/index.md).
+FOr this example:
+* `hostname` is the name you specified with the `com.docker.lb.hosts` label.
+* `https-port` is the port you configured in the [UCP settings](../deploy/index.md).
 
 ![Browser screenshot](../../images/interlock-tls-2.png){: .with-border}
 
-Since we're using self-sign certificates in this example, client tools like
+Because this example uses self-sign certificates, client tools like
 browsers display a warning that the connection is insecure.
 
 You can also test from the CLI:
@@ -132,21 +124,22 @@ curl --insecure \
   https://<hostname>:<https-port>/ping
 ```
 
-If everything is properly configured you should get a JSON payload:
+If everything is properly configured, you should get a JSON payload:
 
 ```json
 {"instance":"f537436efb04","version":"0.1","request_id":"5a6a0488b20a73801aa89940b6f8c5d2"}
 ```
 
-Since the proxy uses SNI to decide where to route traffic, make sure you're
-using a version of curl that includes the SNI header with insecure requests.
-If this doesn't happen, curl displays an error saying that the SSL handshake
-was aborterd.
+Because the proxy uses SNI to decide where to route traffic, make sure you are
+using a version of `curl` that includes the SNI header with insecure requests.
+Otherwise, `curl` displays an error saying that the SSL handshake
+was aborted.
 
+> **Note**: Currently there is no way to update expired certificates using this method.
+> The proper way is to create a new secret then update the corresponding service. 
 
 ## Let your service handle TLS
-
-You can also  encrypt the traffic from end-users to your swarm service.
+The second option for securing with TLS involves encrypting traffic from end users to your swarm service.
 
 ![End-to-end encryption](../../images/interlock-tls-3.png)
 
@@ -187,11 +180,11 @@ secrets:
     file: ./app.example.org.key
 ```
 
-Notice that we've update the service to start using the secrets with the
+The service is updated to start using the secrets with the
 private key and certificate. The service is also labeled with
 `com.docker.lb.ssl_passthrough: true`, signaling UCP to configure the proxy
 service such that TLS traffic for `app.example.org` is passed to the service.
 
-Since the connection is fully encrypt from end-to-end, the proxy service
-won't be able to add metadata such as version info or request ID to the
+Since the connection is fully encrypted from end-to-end, the proxy service
+cannot add metadata such as version information or request ID to the
 response headers.

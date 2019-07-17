@@ -14,6 +14,7 @@ redirect_from:
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
+- /en/latest/installation/
 ---
 
 Docker Community Edition (CE) is ideal for developers and small
@@ -48,7 +49,7 @@ place as needed to address bug fixes during its support cycle.
 
 Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
 as packages for the supported operating systems. Docker EE binaries are
-available on the [Docker Store](https://store.docker.com/) for the supported operating systems. The
+available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.
@@ -152,8 +153,8 @@ to choose the best installation path for you.
 
 | Platform                                                                    |      x86_64       |
 |:----------------------------------------------------------------------------|:-----------------:|
-| [Docker for Mac (macOS)](/docker-for-mac/install.md)                        | {{ green-check }} |
-| [Docker for Windows (Microsoft Windows 10)](/docker-for-windows/install.md) | {{ green-check }} |
+| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
 
 #### Server
 
@@ -162,10 +163,10 @@ to choose the best installation path for you.
 
 | Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
 |:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos.md) | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos.md) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) | [{{ green-check }}]({{ install-prefix-ce }}/debian.md) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora.md) | [{{ green-check }}]({{ install-prefix-ce }}/fedora.md) |                                                        |                                                        |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu.md) |
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
 
 ### Backporting
 

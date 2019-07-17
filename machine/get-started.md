@@ -7,19 +7,19 @@ title: Get started with Docker Machine and a local VM
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
 
-## Prerequisite Information
+## Prerequisite information
 
-With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
+With the advent of [Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
 Docker workflows. You can use these applications to run Docker natively on your
-local system without using Docker Machine at all. (See [Docker for Mac vs.
+local system without using Docker Machine at all. (See [Docker Desktop for Mac vs.
 Docker Toolbox](/docker-for-mac/docker-toolbox.md) for an explanation on the Mac
 side.)
 
 For now, however, if you want to create _multiple_ local machines, you still
 need Docker Machine to create and manage machines for multi-node
-experimentation. Both Docker for Mac and Docker for Windows include the newest
+experimentation. Both Docker Desktop for Mac and Docker Desktop for Windows include the newest
 version of Docker Machine, so when you install either of these, you get
 `docker-machine`.
 
@@ -27,13 +27,13 @@ The new solutions come with their own native virtualization solutions rather
 than Oracle VirtualBox, so keep the following considerations in mind when using
 Machine to create local VMs.
 
-* **Docker for Mac** - You can use `docker-machine create` with the `virtualbox` driver to create additional local machines.
+* **Docker Desktop for Mac** - You can use `docker-machine create` with the `virtualbox` driver to create additional local machines.
 
-* **Docker for Windows** - You can use `docker-machine create` with the `hyperv` driver to create additional local machines.
+* **Docker Desktop for Windows** - You can use `docker-machine create` with the `hyperv` driver to create additional local machines.
 
-#### If you are using Docker for Windows
+#### If you are using Docker Desktop for Windows
 
-Docker for Windows uses [Microsoft
+Docker Desktop for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
 for virtualization, and Hyper-V is not compatible with Oracle VirtualBox.
 Therefore, you cannot run the two solutions simultaneously. But you can still
@@ -42,15 +42,15 @@ driver.
 
 The prerequisites are:
 
-* Have Docker for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
 
 * Set up the Hyper-V driver to use an external virtual network switch See
 the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
 which includes an [example](/machine/drivers/hyper-v.md#example) of how to do this.
 
-#### If you are using Docker for Mac
+#### If you are using Docker Desktop for Mac
 
-Docker for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
+Docker Desktop for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
 lightweight macOS virtualization solution built on top of the
 [Hypervisor.framework](https://developer.apple.com/reference/hypervisor).
 
@@ -58,7 +58,7 @@ Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the [Docker Machine
 driver for Oracle VirtualBox](drivers/virtualbox.md).) You can run
 both HyperKit and Oracle VirtualBox on the same system. To learn more, see
-[Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
+[Docker Desktop for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
 
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
   correctly installed on your system (either as part of an earlier Toolbox install,
@@ -66,7 +66,7 @@ both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 
 #### If you are using Docker Toolbox
 
-Docker for Mac and Docker for Windows both require newer versions of their
+Docker Desktop for Mac and Docker Desktop for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
 Toolbox.
 
@@ -75,14 +75,14 @@ machine based on Oracle [VirtualBox](https://www.virtualbox.org/){:
 target="_blank" class="_"}.  (See the [Docker Machine driver for Oracle
 VirtualBox](drivers/virtualbox.md).)
 
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot run Docker for Windows (for example Windows 8 Pro), you must use the
+* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot run Docker Desktop for Windows (for example Windows 8 Pro), you must use the
 `hyperv` driver to create local machines. (See the [Docker Machine driver for
 Microsoft Hyper-V](drivers/hyper-v.md).)
 
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
   correctly installed on your system. If you used
   [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_"}
-  or [Docker for Windows](/docker-for-windows/index.md){: target="_blank" class="_"}
+  or [Docker Desktop for Windows](/docker-for-windows/index.md){: target="_blank" class="_"}
   to install Docker Machine, VirtualBox is
   automatically installed.
 
@@ -123,9 +123,9 @@ The examples here show how to create and start a machine, run Docker commands, a
 it `default` as shown in the example. If you already have a "default" machine,
 choose another name for this new machine.
 
-    * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker Desktop for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 
-    * On Docker for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](/machine/drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    * On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](/machine/drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 
             $ docker-machine create --driver virtualbox default
             Running pre-create checks...
@@ -290,11 +290,9 @@ For machines other than `default`, and commands other than those listed above, y
 ## Unset environment variables in the current shell
 
 You might want to use the current shell to connect to a different Docker Engine.
-This would be the case if, for example, you are [running Docker for Mac
+This would be the case if, for example, you are [running Docker Desktop for Mac
 concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to
-talk to two different Docker Engines, or running swarms on Docker Cloud and want
-to [switch between managing the swarm and using Docker
-hosts](/docker-cloud/cloud-swarm/connect-to-swarm.md#switch-between-your-swarm-and-docker-hosts-in-the-same-shell).
+talk to two different Docker Engines.
 In both scenarios, you have the option to switch the environment for the current
 shell to talk to different Docker engines.
 
@@ -341,15 +339,12 @@ shell to talk to different Docker engines.
     $ env | grep DOCKER
     ```
 
-    If you are running Docker for Mac, you can run Docker commands to talk
+    If you are running Docker Desktop for Mac, you can run Docker commands to talk
     to the Docker Engine installed with that app.
 
-    If you are running swarms on Docker Cloud, you can re-run the `export`
-    command you used to connect to the swarm.
-
-    Since [Docker for Windows is incompatible with
+    Since [Docker Desktop for Windows is incompatible with
     Toolbox](/docker-for-windows/install.md#what-to-know-before-you-install),
-    this scenario isn't applicable because Docker for Windows uses the Docker
+    this scenario isn't applicable because Docker Desktop for Windows uses the Docker
     Engine and Docker Machine that come with it.
 
 ## Start local machines on startup

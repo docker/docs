@@ -5,8 +5,8 @@ keywords: ucp, architecture
 ---
 
 Universal Control Plane is a containerized application that runs on
-[Docker Enterprise Edition](/ee/index.md) and extends its functionality
-to make it easier to deploy, configure, and monitor your applications at scale.
+[Docker Enterprise Edition](/ee/index.md), extending its functionality
+to simplify the deployment, configuration, and monitoring of your applications at scale.
 
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your Docker cluster.
@@ -68,8 +68,8 @@ on a node depend on whether the node is a manager or a worker.
 
 Internally, UCP uses the following components:
 
-* Calico 3.0.1
-* Kubernetes 1.8.11
+* Calico v3.5.3
+* Kubernetes v1.11.9
 
 ### UCP components in manager nodes
 
@@ -87,7 +87,7 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | k8s_POD_kube-dns                | Pause container for the `kube-dns` pod.                                                                                                                                                                                                                                                                                                                         |
 | k8s_ucp-dnsmasq-nanny           | A dnsmasq instance used in the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only.                                                                                                                                                                                                                                        |
 | k8s_ucp-kube-compose            | A custom Kubernetes resource component that's responsible for translating Compose files into Kubernetes constructs. Part of the `compose` deployment. Runs on one manager node only.                                                                                                                                                                            |
-| k8s_ucp-kube-dns                | The main Kubernetes DNS Service, used by pods to [resolve service names](https://v1-8.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/). Part of the `kube-dns` deployment. Runs on one manager node only. Provides service discovery for Kubernetes services and pods. A set of three containers deployed via Kubernetes as a single pod. |
+| k8s_ucp-kube-dns                | The main Kubernetes DNS Service, used by pods to [resolve service names](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/). Part of the `kube-dns` deployment. Runs on one manager node only. Provides service discovery for Kubernetes services and pods. A set of three containers deployed via Kubernetes as a single pod. |
 | k8s_ucp-kubedns-sidecar         | Health checking and metrics daemon of the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only.                                                                                                                                                                                                                             |
 | ucp-agent                       | Monitors the node and ensures the right UCP services are running.                                                                                                                                                                                                                                                                                               |
 | ucp-auth-api                    | The centralized service for identity and authentication used by UCP and DTR.                                                                                                                                                                                                                                                                                    |
@@ -180,14 +180,13 @@ driver.
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
 
-## Configurations use by UCP
+## Configurations used by UCP
 
 | Configuration name             | Description                                                                                      |
 |:-------------------------------|:-------------------------------------------------------------------------------------------------|
 | com.docker.interlock.extension | Configuration for the Interlock extension service that monitors and configures the proxy service |
 | com.docker.interlock.proxy     | Configuration for the service responsible for handling user requests and routing them            |
 | com.docker.license             | The Docker EE license                                                                            |
-| com.docker.ucp.config          | The UCP controller configuration. Most of the settings available on the UCP UI are stored here   |
 | com.docker.ucp.interlock.conf  | Configuration for the core Interlock service                                                     |
 
 ## How you interact with UCP

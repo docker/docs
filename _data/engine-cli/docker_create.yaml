@@ -93,6 +93,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-percent
   value_type: int64
   default_value: "0"
@@ -102,6 +103,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-period
   value_type: int64
   default_value: "0"
@@ -405,6 +407,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: io-maxiops
   value_type: uint64
   default_value: "0"
@@ -414,6 +417,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: ip
   value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
@@ -961,7 +965,7 @@ examples: |-
   Then, a user could ask `udev` to execute a script that would `docker exec my-container mknod newDevX c 42 <minor>`
   the required device when it is added.
 
-  NOTE: initially present devices still need to be explicitely added to
+  NOTE: initially present devices still need to be explicitly added to
   the create/run command
 deprecated: false
 experimental: false

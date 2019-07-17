@@ -49,8 +49,6 @@ $ sudo yum remove docker \
                   docker-latest \
                   docker-latest-logrotate \
                   docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
                   docker-engine
 ```
 
@@ -96,9 +94,7 @@ from the repository.
       lvm2
     ```
 
-2.  Use the following command to set up the **stable** repository. You always
-    need the **stable** repository, even if you want to install builds from the
-    **edge** or **test** repositories as well.
+2.  Use the following command to set up the **stable** repository.
 
     ```bash
     $ sudo yum-config-manager \
@@ -106,37 +102,38 @@ from the repository.
         {{ download-url-base }}/docker-ce.repo
     ```
 
-3.  **Optional**: Enable the **edge** and **test** repositories. These
-    repositories are included in the `docker.repo` file above but are disabled
-    by default. You can enable them alongside the stable repository.
-
-    ```bash
-    $ sudo yum-config-manager --enable docker-ce-edge
-    ```
-
-    ```bash
-    $ sudo yum-config-manager --enable docker-ce-test
-    ```
-
-    You can disable the **edge** or **test** repository by running the
-    `yum-config-manager` command with the `--disable` flag. To re-enable it, use
-    the `--enable` flag. The following command disables the **edge** repository.
-
-    ```bash
-    $ sudo yum-config-manager --disable docker-ce-edge
-    ```
-
-    > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **test** repositories.
-
-    [Learn about **stable** and **edge** builds](/install/index.md).
+> **Optional**: Enable the **nightly** or **test** repositories.
+>
+> These repositories are included in the `docker.repo` file above but are disabled
+> by default. You can enable them alongside the stable repository.  The following
+> command enables the **nightly** repository.
+>
+> ```bash
+> $ sudo yum-config-manager --enable docker-ce-nightly
+> ```
+>
+> To enable the **test** channel, run the following command:
+>
+> ```bash
+> $ sudo yum-config-manager --enable docker-ce-test
+> ```
+>
+> You can disable the **nightly** or **test** repository by running the
+> `yum-config-manager` command with the `--disable` flag. To re-enable it, use
+> the `--enable` flag. The following command disables the **nightly** repository.
+>
+> ```bash
+> $ sudo yum-config-manager --disable docker-ce-nightly
+> ```
+>
+> [Learn about **nightly** and **test** channels](/install/index.md).
 
 #### Install Docker CE
 
-1.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo yum install docker-ce
+    $ sudo yum install docker-ce docker-ce-cli containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -160,19 +157,22 @@ from the repository.
     ```bash
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.0.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable
+    docker-ce.x86_64  3:18.09.0-3.el7                     docker-ce-stable
+    docker-ce.x86_64  18.06.1.ce-3.el7                    docker-ce-stable
+    docker-ce.x86_64  18.06.0.ce-3.el7                    docker-ce-stable
     ```
 
     The list returned depends on which repositories are enabled, and is specific
     to your version of CentOS (indicated by the `.el7` suffix in this example).
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a hyphen (`-`), for example,
-       `docker-ce-18.03.0.ce`.
+       the package name (`docker-ce`) plus the version string (2nd column)
+       starting at the first colon (`:`), up to the first hyphen, separated by
+       a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
     ```bash
-    $ sudo yum install docker-ce-<VERSION STRING>
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
@@ -183,7 +183,7 @@ from the repository.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -200,23 +200,22 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker CE, follow the
-[installation instructions](#install-docker), choosing the new version you want
-to install.
+To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
+choosing the new version you want to install.
 
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker.
+a new file each time you want to upgrade Docker CE.
 
 1.  Go to
     [{{ download-url-base }}/7/x86_64/stable/Packages/]({{ download-url-base }}/7/x86_64/stable/Packages/)
     and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install an **edge**  package, change the word
-    > `stable` in the above URL to `edge`.
-    > [Learn about **stable** and **edge** channels](/install/index.md).
+    > **Note**: To install a **nightly**  or **test** (pre-release) package,
+    > change the word `stable` in the above URL to `nightly` or `test`.
+    > [Learn about **nightly** and **test** channels](/install/index.md).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
@@ -234,7 +233,7 @@ a new file each time you want to upgrade Docker.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -279,4 +278,4 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/get-started/index.md).

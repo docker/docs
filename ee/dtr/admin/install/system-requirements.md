@@ -11,12 +11,12 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install DTR on-premises or on a cloud provider. To install DTR,
 all nodes must:
-* Be a worker node managed by Universal Control Plane.
+* Be a worker node managed by UCP (Universal Control Plane). See [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for version compatibility.
 * Have a fixed hostname.
 
 ### Minimum requirements
 
-* 8GB of RAM for nodes running DTR
+* 16GB of RAM for nodes running DTR
 * 2 vCPUs for nodes running DTR
 * 10GB of free disk space
 
@@ -46,9 +46,9 @@ These ports are configurable when installing DTR.
 
 Docker Enterprise Edition is a software subscription that includes three products:
 
-* Docker Engine EE,
-* Docker Trusted Registry,
-* Docker Universal Control Plane.
+* Docker Enterprise Engine
+* Docker Trusted Registry
+* Docker Universal Control Plane
 
 [Learn more about the maintenance lifecycle for these products](https://success.docker.com/article/Compatibility_Matrix).
 

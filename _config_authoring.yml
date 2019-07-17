@@ -2,36 +2,40 @@ name: Docker Documentation
 markdown: kramdown
 kramdown:
   input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
   toc_levels: 2..3
+incremental: false
 permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
-incremental: false
 
-# Component versions -- address like site.docker_ce_stable_version
+# Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
 
 # TO USE ME:
 # jekyll serve --incremental --config _config_authoring.yml
 
-docker_ce_stable_version: "17.09"
-latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.09"
-docker_ee_version: "17.06"
-compose_version: "1.16.1"
-machine_version: "0.12.2"
+latest_engine_api_version: "1.39"
+docker_ce_version: "18.09"
+docker_ee_version: "18.09"
+compose_version: "1.24.1"
+compose_file_v3: "3.7"
+compose_file_v2: "2.4"
+machine_version: "0.16.0"
 distribution_version: "2.6"
-dtr_version: "2.5"
-ucp_version: "3.0"
+dtr_version: "2.6"
+ucp_version: "3.1"
 
 ucp_versions:
-  - version: "3.0"
+  - version: "3.1"
     path: /ee/ucp/
     latest: true
+  - version: "3.0"
+    path: /datacenter/ucp/3.0/guides/
   - version: "2.2"
     path: /datacenter/ucp/2.2/guides/
   - version: "2.1"
@@ -42,9 +46,11 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: "2.5"
+  - version: "2.6"
     path: /ee/dtr/
     latest: true
+  - version: "2.5"
+    path: /datacenter/dtr/2.5/guides/
   - version: "2.4"
     path: /datacenter/dtr/2.4/guides/
   - version: "2.3"
@@ -57,7 +63,7 @@ dtr_versions:
     path: /datacenter/dtr/2.0/
 
 tablabels:
-  dee-2.0: Docker Enterprise Edition 2.0 Beta2
+  dee-2.0: Docker Enterprise Edition 2.0
   ucp-3.0: Universal Control Plane 3.0
   ucp-2.2: Universal Control Plane 2.2
   dtr-2.5: Docker Trusted Registry 2.5
@@ -69,52 +75,65 @@ tablabels:
   kubectl: Kubernetes CLI
   cli: CLI
 
+collections:
+  samples:
+    output: true
+
+plugins:
+  - jekyll-redirect-from
+  - jekyll-relative-links
+  - jekyll-sitemap
+
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
       layout: docs
-      defaultassignee: johndmulhausen
       toc_min: 2
       toc_max: 3
       tree: true
   - scope:
-      path: "engine"
+      path: "install"
     values:
-      win_latest_build: "docker-17.06.2-ee-6"
+      win_latest_build: "docker-18.09.1"
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:3.0.0-beta2"
-      dtr_latest_image: "docker/dtr:2.5.0-beta3"
       enterprise: true
   - scope:
       path: "ee/dtr"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.0-beta3"
+      dtr_version: "2.6.1"
+  - scope:
+      path: "datacenter/dtr/2.5"
+    values:
+      hide_from_sitemap: true
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.5.7"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.1"
+      dtr_version: "2.4.8"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
+      hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.4"
+      dtr_version: "2.3.10"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.9"
+      docker_image: "docker/dtr:2.2.11"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -130,29 +149,47 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.0-beta2"
+      ucp_version: "3.1.2"
+  - scope: # This is a bit of a hack for the get-support.md topic.
+      path: "ee"
+    values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      dtr_repo: "dtr"
+      ucp_version: "3.1.2"
+      dtr_version: "2.6.1"
+  - scope:
+      path: "datacenter/ucp/3.0"
+    values:
+      hide_from_sitemap: true
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "3.0.8"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.3"
+      ucp_version: "2.2.15"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/ucp:2.1.5"
+      docker_image: "docker/ucp:2.1.8"
   - scope:
       path: "datacenter/ucp/2.0"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
-      docker_image: "docker/ucp:2.0.3"
+      docker_image: "docker/ucp:2.0.4"
   - scope:
       path: "datacenter/ucp/1.1"
     values:
+      hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
 

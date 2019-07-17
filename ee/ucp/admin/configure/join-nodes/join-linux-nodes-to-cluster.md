@@ -40,7 +40,7 @@ When you join a node to a cluster, you specify its role: manager or worker.
 You can join Windows Server 2016, IBM z System, and Linux nodes to the cluster,
 but only Linux nodes can be managers.
 
-To join nodes to the cluster, go to the Docker EE web UI and navigate to the
+To join nodes to the cluster, go to the UCP web interface and navigate to the
 **Nodes** page.
 
 1.  Click **Add Node** to add a new node.
@@ -60,7 +60,7 @@ To add a Windows node, click **Windows** and follow the instructions in
 [Join Windows worker nodes to a cluster](join-windows-nodes-to-cluster.md).
 
 After you run the join command in the node, the node is displayed on the
-**Nodes** page in the Docker EE web UI. From there, you can change the node's
+**Nodes** page in the UCP web interface. From there, you can change the node's
 cluster configuration, including its assigned orchestrator type.
 [Learn how to change the orchestrator for a node](../set-orchestrator-type.md).    
 
@@ -77,7 +77,7 @@ so that it is:
 
 Pause or drain a node from the **Edit Node** page:
 
-1.  In the Docker EE web UI, browse to the **Nodes** page and select the node.
+1.  In the UCP web interface, browse to the **Nodes** page and select the node.
 2.  In the details pane, click **Configure** and select **Details** to open
     the **Edit Node** page.
 3.  In the **Availability** section, click **Active**, **Pause**, or **Drain**.  
@@ -107,12 +107,16 @@ you demote them to workers.
 
 You can remove worker nodes from the cluster at any time:
 
-1.  Navigate to the **Nodes** page and select the node.
-2.  In the details pane, click **Actions** and select **Remove**.
-3.  Click **Confirm** when you're prompted.
+1.  Shut down the worker node or have it leave the swarm. See [docker swarm leave](/engine/reference/commandline/swarm_leave/#extended-description) for example usage. 
+2.  Navigate to the **Nodes** page, and select the node.
+3.  In the details pane, click **Actions** and select **Remove**.
+4.  Click **Confirm** when prompted.
 
 Since manager nodes are important to the cluster overall health, you need to
 be careful when removing one from the cluster.
+
+
+![](../../../images/ucp-remove-node.png){: .with-border}
 
 To remove a manager node:
 

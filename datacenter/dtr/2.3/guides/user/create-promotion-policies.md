@@ -97,5 +97,5 @@ pipelines.
 Also, users don't need access to all repositories in the promotion pipeline.
 A repository admin can define the promotion policies, and only
 allow access to push to the first repository in that pipeline. Once users push
-to the fist repository, the image gets promoted to the other repositories as
+to the first repository, the image gets promoted to the other repositories as
 long as it satisfies the promotion policies.

@@ -216,7 +216,7 @@ If you have been issued an _intermediate_ certificate instead, see
     $ docker run -d \
       --restart=always \
       --name registry \
-      -v `pwd`/certs:/certs \
+      -v "$(pwd)"/certs:/certs \
       -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
@@ -425,11 +425,11 @@ secrets.
       -p 5000:5000 \
       --restart=always \
       --name registry \
-      -v `pwd`/auth:/auth \
+      -v "$(pwd)"/auth:/auth \
       -e "REGISTRY_AUTH=htpasswd" \
       -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
       -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
-      -v `pwd`/certs:/certs \
+      -v "$(pwd)"/certs:/certs \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
       registry:2
@@ -562,6 +562,6 @@ More specific and advanced information is available in the following sections:
  - [Configuration reference](configuration.md)
  - [Working with notifications](notifications.md)
  - [Advanced "recipes"](recipes/index.md)
- - [Registry API](spec/api.md)
+ - [Registry API](/registry/spec/api.md)
  - [Storage driver model](storage-drivers/index.md)
  - [Token authentication](spec/auth/token.md)

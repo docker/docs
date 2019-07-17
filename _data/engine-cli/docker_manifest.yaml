@@ -9,25 +9,25 @@ long: "The `docker manifest` command by itself performs no action. In order to o
   in the same way as\nan image name in `docker pull` and `docker run` commands, for
   example.\n\nIdeally a manifest list is created from images that are identical in
   function for\ndifferent os/arch combinations. For this reason, manifest lists are
-  often referred to as\n\"multi-arch images.\" However, a user could create a manifest
+  often referred to as\n\"multi-arch images\". However, a user could create a manifest
   list that points\nto two images -- one for windows on amd64, and one for darwin
   on amd64.\n\n### manifest inspect\n\n```\nmanifest inspect --help\n\nUsage:  docker
-  manifest inspect [OPTIONS] [MANIFEST_LIST] MANIFEST\n\nisplay an image manifest,
-  or manifest list\n\nOptions:\n      --help       Print usage\n      --insecure   allow
+  manifest inspect [OPTIONS] [MANIFEST_LIST] MANIFEST\n\nDisplay an image manifest,
+  or manifest list\n\nOptions:\n      --help       Print usage\n      --insecure   Allow
   communication with an insecure registry\n  -v, --verbose    Output additional info
   including layers and platform\n```\n\n### manifest create \n\n```bash\nUsage:  docker
-  manifest create MANFEST_LIST MANIFEST [MANIFEST...]\n\nCreate a local manifest list
-  for annotating and pushing to a registry\n\nOptions:\n  -a, --amend   Amend an existing
-  manifest list\n      --insecure   allow communication with an insecure registry\n
-  \     --help    Print usage\n```\n\n### manifest annotate\n```bash\nUsage:  docker
-  manifest annotate [OPTIONS] MANIFEST_LIST MANIFEST\n\nAdd additional information
+  manifest create MANIFEST_LIST MANIFEST [MANIFEST...]\n\nCreate a local manifest
+  list for annotating and pushing to a registry\n\nOptions:\n  -a, --amend      Amend
+  an existing manifest list\n      --insecure   Allow communication with an insecure
+  registry\n      --help       Print usage\n```\n\n### manifest annotate\n```bash\nUsage:
+  \ docker manifest annotate [OPTIONS] MANIFEST_LIST MANIFEST\n\nAdd additional information
   to a local image manifest\n\nOptions:\n      --arch string               Set architecture\n
   \     --help                      Print usage\n      --os string                 Set
   operating system\n      --os-features stringSlice   Set operating system feature\n
   \     --variant string            Set architecture variant\n\n```\n\n### manifest
   push\n```bash\nUsage:  docker manifest push [OPTIONS] MANIFEST_LIST\n\nPush a manifest
-  list to a repository\n\nOptions:\n      --help    Print usage\n      --insecure
-  \  allow push to an insecure registry\n  -p, --purge   Remove the local manifest
+  list to a repository\n\nOptions:\n      --help       Print usage\n      --insecure
+  \  Allow push to an insecure registry\n  -p, --purge      Remove the local manifest
   list after push\n```\n\n### Working with insecure registries\n\nThe manifest command
   interacts solely with a Docker registry. Because of this, it has no way to query
   the engine for the list of allowed insecure registries. To allow the CLI to interact
@@ -51,7 +51,7 @@ clink:
 - docker_manifest_create.yaml
 - docker_manifest_inspect.yaml
 - docker_manifest_push.yaml
-examples: "### inspect an image's manifest object\n \n```bash\n$ docker manifest inspect
+examples: "### Inspect an image's manifest object\n \n```bash\n$ docker manifest inspect
   hello-world\n{\n        \"schemaVersion\": 2,\n        \"mediaType\": \"application/vnd.docker.distribution.manifest.v2+json\",\n
   \       \"config\": {\n                \"mediaType\": \"application/vnd.docker.container.image.v1+json\",\n
   \               \"size\": 1520,\n                \"digest\": \"sha256:1815c82652c03bfd8644afda26fb184f2ed891d921b20a0703b46768f9755c57\"\n
@@ -64,7 +64,7 @@ examples: "### inspect an image's manifest object\n \n```bash\n$ docker manifest
   as with other docker commands that take image names, you can refer to an image with
   or\nwithout a tag, or by digest (e.g. hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f).\n\nHere
   is an example of inspecting an image's manifest with the `--verbose` flag:\n\n```bash\n$
-  docker manifest inspect -v hello-world\n{\n        \"Ref\": \"docker.io/library/hello-world:latest\",\n
+  docker manifest inspect --verbose hello-world\n{\n        \"Ref\": \"docker.io/library/hello-world:latest\",\n
   \       \"Digest\": \"sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f\",\n
   \       \"SchemaV2Manifest\": {\n                \"schemaVersion\": 2,\n                \"mediaType\":
   \"application/vnd.docker.distribution.manifest.v2+json\",\n                \"config\":

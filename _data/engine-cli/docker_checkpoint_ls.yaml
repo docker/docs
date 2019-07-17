@@ -20,4 +20,5 @@ experimental: true
 experimentalcli: false
 kubernetes: false
 swarm: false
+os_type: linux
 

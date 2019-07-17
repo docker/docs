@@ -24,7 +24,7 @@ restore procedure for the Docker images stored in your registry, taking in
 consideration whether your DTR installation is configured to store images on
 the local filesystem or using a cloud provider.
 
-After restoring, you can add more DTR replicas by using the the 'join' command.
+After restoring, you can add more DTR replicas by using the 'join' command.
 
 
 ## Options
@@ -43,9 +43,9 @@ After restoring, you can add more DTR replicas by using the the 'join' command.
 | `--https-proxy` | $DTR_HTTPS_PROXY | The HTTPS proxy used for outgoing requests. |
 | `--log-host` | $LOG_HOST | Where to send logs to.The endpoint to send logs to. Use this flag if you set --log-protocol to tcp or udp. |
 | `--log-level` | $LOG_LEVEL | Log level for all container logs when logging to syslog. Default: INFO. |
-| `--log-protocol` | $LOG_PROTOCOL | The protocol for sending logs. Default is internal.This allows to define the protocol used to send container logs to an external system. The  supported protocals are tcp, udp, or internal. Use this flag with --log-host. |
+| `--log-protocol` | $LOG_PROTOCOL | The protocol for sending logs. Default is internal.This allows to define the protocol used to send container logs to an external system. The  supported protocols are tcp, udp, or internal. Use this flag with --log-host. |
 | `--nfs-storage-url` | $NFS_STORAGE_URL | NFS to store Docker images. Format nfs://<ip&#124;hostname>/<mountpoint>.By default DTR creates a volume to store the Docker images in the local filesystem  of the node where DTR is running, without high-availability. Use this flag to specify an  NFS mount for DTR to store images, using the format nfs://<ip&#124;hostname>/<mountpoint>. To  use this flag, you need to install an NFS client library like nfs-common in the node  where you're deploying DTR. You can test this by running showmount -e <nfs-server>. When  you join new replicas, they will start using NFS so you don't need to use this flag. To  reconfigure DTR to stop using NFS, leave this option empty. |
-| `--no-proxy` | $DTR_NO_PROXY | List of domains the proxy should not be used for.When using --http-proxy you can use this flag to specify a list  of domains that you don't want to route throught the proxy. Format acme.com[, acme.org]. |
+| `--no-proxy` | $DTR_NO_PROXY | List of domains the proxy should not be used for.When using --http-proxy you can use this flag to specify a list  of domains that you don't want to route through the proxy. Format acme.com[, acme.org]. |
 | `--replica-http-port` | $REPLICA_HTTP_PORT | The public HTTP port for the DTR replica. Default is 80.This allows you to customize the HTTP port where users can reach DTR. Once users access  the HTTP port, they are redirected to use an HTTPS connection, using the port specified  with --replica-https-port. This port can also be used for unencrypted health checks. |
 | `--replica-https-port` | $REPLICA_HTTPS_PORT | The public HTTPS port for the DTR replica. Default is 443.This allows you to customize the HTTPS port where users can reach DTR. Each replica can  use a different port. |
 | `--replica-id` | $DTR_INSTALL_REPLICA_ID | Assign an ID to the DTR replica. Random by default. |

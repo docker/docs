@@ -12,7 +12,7 @@ description: Learn how to create clusters of Dockerized machines.
 - Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
 
 - Get [Docker Machine](/machine/overview.md), which is pre-installed with
-[Docker for Mac](/docker-for-mac/index.md) and [Docker for
+[Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md), but on Linux systems you need to
 [install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, as well as Windows 10 Home, use
 [Docker Toolbox](/toolbox/overview.md).
@@ -126,6 +126,8 @@ so they can connect to each other.
 Now, create a couple of VMs using our node management tool,
 `docker-machine`:
 
+> **Note**: you need to run the following as administrator or else you don't have the permission to create hyperv VMs!
+
 ```shell
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
@@ -142,6 +144,8 @@ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 You now have two VMs created, named `myvm1` and `myvm2`.
 
 Use this command to list the machines and get their IP addresses.
+
+> **Note**: you need to run the following as administrator or else you don't get any reasonable output (only "UNKNOWN").
 
 ```shell
 docker-machine ls
@@ -334,7 +338,7 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 
 Now that you have `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
-3 to `myvm1`, and your local copy of `docker-compose.yml.`. This command may take a few seconds
+3 to `myvm1`, and your local copy of `docker-compose.yml`. This command may take a few seconds
 to complete and the deployment takes some time to be available. Use the
 `docker service ps <service_name>` command on a swarm manager to verify that
 all services have been redeployed.
@@ -411,7 +415,7 @@ You can access your app from the IP address of **either** `myvm1` or `myvm2`.
 
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
-browser, hitting refresh (or just `curl` them).
+browser on port 4000, hitting refresh (or just `curl` them).
 
 ![Hello World in browser](images/app-in-browser-swarm.png)
 
@@ -435,6 +439,10 @@ look:
 >
 > - Port 7946 TCP/UDP for container network discovery.
 > - Port 4789 UDP for the container ingress network.
+>
+> Double check what you have in the ports section under your web
+> service and make sure the ip addresses you enter in your browser
+> or curl reflects that
 
 ## Iterating and scaling your app
 
@@ -491,7 +499,7 @@ with the given command.
 
 This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`
-commands (for example, on Docker for Mac or Docker for Windows). To learn more,
+commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
 see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
 ### Restarting Docker machines

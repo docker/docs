@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/user/manage-images/pull-and-push-images/
 ---
 
-{% assign domain="dtr.example.org" %}
+{% assign domain="dtr-example.com" %}
 {% assign org="library" %}
 {% assign repo="wordpress" %}
 {% assign tag="latest" %}
@@ -25,11 +25,11 @@ from Docker Hub or any other registry. Since DTR is secure by default, you
 always need to authenticate before pulling images.
 
 In this example, DTR can be accessed at {{ domain }}, and the user
-was granted permissions to access the NGINX, and Wordpress repositories.
+was granted permissions to access the `nginx` and `wordpress` repositories in the `library` organization.
 
 ![](../../images/pull-push-images-1.png){: .with-border}
 
-Click on the repository to see its details.
+Click on the repository name to see its details.
 
 ![](../../images/pull-push-images-2.png){: .with-border}
 
@@ -70,7 +70,7 @@ docker login {{ domain }}
 docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 ```
 
-Go back to the **DTR web UI** to validate that the tag was successfully pushed.
+On the web interface, navigate to the **Tags** tab on the repository page to confirm that the tag was successfully pushed.
 
 ![](../../images/pull-push-images-3.png){: .with-border}
 
@@ -82,7 +82,7 @@ pushes the image manifest and all the layers on top of the Windows base layers.
 The Windows base layers are not pushed to DTR. This means that:
 
 * DTR won't be able to scan those images for vulnerabilities since DTR doesn't
-have access to the layers (the Windows base layers are scanned by Docker Store,
+have access to the layers (the Windows base layers are scanned by Docker Hub,
 however).
 * When a user pulls a Windows image from DTR, the Windows base layers are
 automatically fetched from Microsoft and the other layers are fetched from DTR.

@@ -2,6 +2,7 @@ command: docker
 cname:
 - docker attach
 - docker build
+- docker builder
 - docker checkpoint
 - docker commit
 - docker config
@@ -10,6 +11,7 @@ cname:
 - docker create
 - docker deploy
 - docker diff
+- docker engine
 - docker events
 - docker exec
 - docker export
@@ -59,6 +61,7 @@ cname:
 clink:
 - docker_attach.yaml
 - docker_build.yaml
+- docker_builder.yaml
 - docker_checkpoint.yaml
 - docker_commit.yaml
 - docker_config.yaml
@@ -67,6 +70,7 @@ clink:
 - docker_create.yaml
 - docker_deploy.yaml
 - docker_diff.yaml
+- docker_engine.yaml
 - docker_events.yaml
 - docker_exec.yaml
 - docker_export.yaml

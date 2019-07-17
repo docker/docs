@@ -8,7 +8,7 @@ Docker Machine allows you to provision Docker machines in a variety of environme
 
 ## Drivers for creating machines
 
-To create a virtual machine, you supply Docker Machine with the name of the driver you want to use. The driver determines where the virtual machine is created. For example, on a local Mac or Windows system, the driver is typically Oracle VirtualBox. For provisioning physical machines, a generic driver is provided. For cloud providers, Docker Machine supports drivers such as AWS, Microsoft Azure, Digital Ocean, and many more. The Docker Machine reference includes a complete [list of supported drivers](drivers/index.md).
+To create a virtual machine, you supply Docker Machine with the name of the driver you want to use. The driver determines where the virtual machine is created. For example, on a local Mac or Windows system, the driver is typically Oracle VirtualBox. For provisioning physical machines, a generic driver is provided. For cloud providers, Docker Machine supports drivers such as AWS, Microsoft Azure, DigitalOcean, and many more. The Docker Machine reference includes a complete [list of supported drivers](drivers/index.md).
 
 ## Default base operating systems for local and cloud hosts
 
@@ -101,5 +101,5 @@ For more information and resources, visit
 
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Docker Machine driver reference](/machine/drivers.md){: target="_blank" class="_"}
+- [Docker Machine driver reference](/machine/drivers/index.md){: target="_blank" class="_"}
 - [Docker Machine subcommand reference](/machine/reference/help.md){: target="_blank" class="_"}

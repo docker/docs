@@ -1,18 +1,18 @@
 ---
-title: Docker EE architecture
-description: Learn about the architecture of Docker Enterprise Edition and how it delivers high availability for your workloads.
-keywords: Docker EE, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability
+title: Docker Enterprise architecture
+description: Learn about the architecture of Docker Enterprise  and how it delivers high availability for your workloads.
+keywords: Docker Enterprise, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability
 ---
 
-Docker Enterprise Edition (EE) enables deploying your workloads for high
-availability (HA) onto the orchestrator of your choice. Docker EE system
+Docker Enterprise enables deploying your workloads for high
+availability (HA) onto the orchestrator of your choice. Docker Enterprise system
 components can run on multiple manager nodes in the cluster, and if one manager
 node fails, another takes its place automatically, without impact to the
 cluster.
 
 ## Choose your orchestrator
 
-Docker EE provides access to the full API sets of three popular orchestrators:
+Docker Enterprise provides access to the full API sets of three popular orchestrators:
 
 - Kubernetes: Full YAML object support
 - SwarmKit: Service-centric, Compose file version 3
@@ -20,17 +20,17 @@ Docker EE provides access to the full API sets of three popular orchestrators:
 
 ![](images/docker-ee-architecture-1.svg){: .with-border}
 
-Docker EE proxies the underlying API of each orchestrator, giving you access
+Docker Enterprise proxies the underlying API of each orchestrator, giving you access
 to all of the capabilities of each orchestrator, along with the benefits of
-Docker EE, like role-based access control and Docker Content Trust.
+Docker Enterprise, like role-based access control and Docker Content Trust.
 
-## Docker EE components
+## Docker Enterprise components
 
-Docker EE has three major components, which together enable a full software
+Docker Enterprise has three major components, which together enable a full software
 supply chain, from image creation, to secure image storage, to secure image
 deployment.
 
-- **Docker EE Engine**: The commercially supported Docker engine for creating
+- **Docker Engine - Enterprise**: The commercially supported Docker engine for creating
   images and running them in Docker containers.
 
 - **Docker Trusted Registry (DTR)**: The production-grade image storage solution
@@ -57,11 +57,11 @@ deployment.
 
 ### Universal Control Plane (UCP)
 
-Docker UCP is a containerized application that runs on [Docker EE Engine](../engine/index.md)
+Docker UCP is a containerized application that runs on [Docker Engine - Enterprise](../engine/index.md)
 and extends its functionality to make it easier to deploy, configure, and
 monitor your applications at scale.
 
-Docker UCP provides a web UI and a CLI for deploying images from Kubernetes
+Docker UCP provides a web interface and a CLI for deploying images from Kubernetes
 YAML or Compose files. Once your workload is deployed, UCP enables monitoring
 containers and pods across your Docker cluster.
 
@@ -70,7 +70,7 @@ users can make changes and deploy applications to your cluster.
 
 ![](/ee/ucp/images/ucp-architecture-1.svg){: .with-border}
 
-Once a UCP instance is deployed, you don't interact with Docker EE Engine
+Once a UCP instance is deployed, you don't interact with Docker Engine - Enterprise
 directly. Instead, you interact with UCP. Since UCP exposes the standard
 Docker API and the full Kubernetes API transparently, you can use the tools
 you already know and love, like `kubectl`, the Docker CLI client, and Docker

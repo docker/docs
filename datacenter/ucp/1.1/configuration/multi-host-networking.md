@@ -150,7 +150,7 @@ To enable the networking feature, do the following.
 
 5.  Restart the Engine `daemon`.
 
-    The Engine `daemon` is a OS service process running on each node in your
+    The Engine `daemon` is an OS service process running on each node in your
     cluster.  How you restart a service is operating-system dependent. Some
     examples appear below but keep in mind that on your system, the restart
     operation may differ. Check with your system administrator if you are not

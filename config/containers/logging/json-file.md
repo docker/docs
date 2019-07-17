@@ -22,17 +22,20 @@ located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-The following example sets the log driver to `json-file` and sets the `max-size`
-option.
+The following example sets the log driver to `json-file` and sets the `max-size` and 'max-file' options.
 
 ```json
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m"
+    "max-size": "10m",
+    "max-file": "3" 
   }
 }
 ```
+**Note**: `log-opt` configuration options in the `daemon.json` configuration		
+file must be provided as strings. Boolean and numeric values (such as the value		
+for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 
 Restart Docker for the changes to take effect for newly created containers. Existing containers do not use the new logging configuration.
 
@@ -56,6 +59,7 @@ The `json-file` logging driver supports the following logging options:
 | `labels`    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon accepts. Used for advanced [log tag options](log_tags.md).                                          | `--log-opt labels=production_status,geo` |
 | `env`       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Used for advanced [log tag options](log_tags.md).                           | `--log-opt env=os,customer`              |
 | `env-regex` | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                  | `--log-opt env-regex=^(os|customer).`    |
+| `compress`  | Toggles compression for rotated logs. Default is `disabled`. | `--log-opt compress=true` |
 
 
 ### Examples

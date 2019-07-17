@@ -8,7 +8,7 @@ Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
 from Docker. You install it behind your firewall so that you can securely store
 and manage the Docker images you use in your applications.
 
-## Image management
+## Image and job management
 
 DTR can be installed on-premises, or on a virtual private
 cloud. And with it, you can store your Docker images securely, behind your
@@ -17,11 +17,10 @@ firewall.
 You can use DTR as part of your continuous integration, and continuous
 delivery processes to build, ship, and run your applications.
 
-DTR has a web based user interface that allows authorized users in your
-organization to browse docker images. It provides information about
-who pushed what image at what time. It even allows you to see what dockerfile
+DTR has a web user interface that allows authorized users in your
+organization to browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). It even allows you to see what Dockerfile
 lines were used to produce the image and, if security scanning is enabled, to
-see a list of all of the software installed in your images.
+see a list of all of the software installed in your images. Additionally, you can now [review and audit jobs on the web interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
 
 ## Availability
 
@@ -31,23 +30,23 @@ and metadata such that if a machine fails, DTR continues to operate and can be r
 ## Efficiency
 
 DTR has the ability to [cache images closer to users](admin/configure/deploy-caches/index.md)
-to reduce the amount of bandwidth used during docker pulls.
+to reduce the amount of bandwidth used when pulling Docker images.
 
 DTR has the ability to [clean up unreferenced manifests and layers](admin/configure/garbage-collection.md).
 
 ## Built-in access control
 
 DTR uses the same authentication mechanism as Docker Universal Control Plane.
-Users can be managed manually or synched from LDAP or Active Directory. DTR
+Users can be managed manually or synchronized from LDAP or Active Directory. DTR
 uses [Role Based Access Control](admin/manage-users/index.md) (RBAC) to allow you to implement fine-grained
-access control policies for who has access to your Docker images.
+access control policies for your Docker images.
 
 ## Security scanning
 
-DTR has a built in security scanner that can be used to discover what versions
+DTR has a built-in security scanner that can be used to discover what versions
 of software are used in your images. It scans each layer and aggregates the
 results to give you a complete picture of what you are shipping as a part of
-your stack. Most importantly, it co-relates this information with a
+your stack. Most importantly, it correlates this information with a
 vulnerability database that is kept up to date through [periodic
 updates](admin/configure/set-up-vulnerability-scans.md). This
 gives you [unprecedented insight into your exposure to known security
