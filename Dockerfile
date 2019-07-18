@@ -62,7 +62,7 @@ COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
-COPY --from=allysmith424/docker.github.io:v18.09 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v18.09 ${TARGET} ${TARGET}
 
 # Fetch library samples (documentation from official images on Docker Hub)
 # Only add the files that are needed to build these reference docs, so that
