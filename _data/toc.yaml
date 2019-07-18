@@ -1390,6 +1390,259 @@ manuals:
       title: Release notes
     - sectiontitle: Previous versions
       section:
+      - sectiontitle: Universal Control Plane 3.1
+        section:
+        - path: /datacenter/ucp/3.1/guides/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/3.1/guides/ucp-architecture/
+          title: UCP Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/ucp/3.1/guides/admin/install/plan-installation/
+              title: Plan your installation
+            - path: /datacenter/ucp/3.1/guides/admin/install/
+              title: Install
+            - path: /datacenter/ucp/3.1/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/ucp/3.1/guides/admin/install/install-on-azure/
+              title: Install on Azure
+            - path: /datacenter/ucp/3.1/guides/admin/install/upgrade/
+              title: Upgrade
+            - path: /datacenter/ucp/3.1/guides/admin/install/upgrade-offline/
+              title: Upgrade offline
+            - path: /datacenter/ucp/3.1/guides/admin/install/uninstall/
+              title: Uninstall
+            - path: /datacenter/ucp/3.1/guides/admin/install/architecture-specific-images/
+              title: Architecture-specific images
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/configure/add-labels-to-cluster-nodes/
+              title: Add labels to cluster nodes
+            - path: /datacenter/ucp/3.1/guides/admin/configure/add-sans-to-cluster/
+              title: Add SANs to cluster certificates
+            - path: /datacenter/ucp/3.1/guides/admin/configure/collect-cluster-metrics/
+              title: Collect UCP cluster metrics with Prometheus
+            - path: /datacenter/ucp/3.1/guides/admin/configure/metrics-descriptions/
+              title: Using UCP cluster metrics with Prometheus
+            - path: /datacenter/ucp/3.1/guides/admin/configure/configure-rbac-kube/
+              title: Configure native Kubernetes role-based access control
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-audit-logging/
+              title: Create UCP audit logs
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-saml-authentication/
+              title: Enable SAML authentication
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-helm-tiller/
+              title: Enable Helm and Tiller with UCP
+            - path: /datacenter/ucp/3.1/guides/admin/configure/external-auth/
+              title: Integrate with LDAP
+            - path: /datacenter/ucp/3.1/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/ucp/3.1/guides/admin/configure/restrict-services-to-worker-nodes/
+              title: Restrict services to worker nodes
+            - path: /datacenter/ucp/3.1/guides/admin/configure/run-only-the-images-you-trust/
+              title: Run only the images you trust
+            - path: /datacenter/ucp/3.1/guides/admin/configure/set-session-timeout/
+              title: Set the user's session timeout
+            - path: /datacenter/ucp/3.1/guides/admin/configure/ucp-configuration-file/
+              title: UCP configuration file
+            - path: /datacenter/ucp/3.1/guides/admin/configure/use-node-local-network-in-swarm/
+              title: Use a local node network in a swarm
+            - path: /datacenter/ucp/3.1/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - path: /datacenter/ucp/3.1/guides/admin/configure/manage-and-deploy-private-images/
+              title: Manage and deploy private images
+            - path: /datacenter/ucp/3.1/guides/admin/configure/set-orchestrator-type/
+              title: Set the orchestrator type for a node
+            - path: /datacenter/ucp/3.1/guides/admin/configure/view-namespace-resources/
+              title: View Kubernetes objects in a namespace
+            - sectiontitle: Join nodes to your cluster
+              section:
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/
+                title: Set up high availability
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/join-linux-nodes-to-cluster/
+                title: Join nodes to your cluster
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
+                title: Join Windows worker nodes to your cluster
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/use-a-load-balancer/
+                title: Use a load balancer
+            - path: /datacenter/ucp/3.1/guides/admin/configure/deploy-route-reflectors/
+              title: Improve network performance with Route Reflectors
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+              title: Troubleshoot node messages
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+              title: Troubleshoot configurations
+          - path: /datacenter/ucp/3.1/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/ucp/3.1/reference/cli/
+              title: docker/ucp overview
+            - path: /datacenter/ucp/3.1/reference/cli/backup/
+              title: backup
+            - path: /datacenter/ucp/3.1/reference/cli/dump-certs/
+              title: dump-certs
+            - path: /datacenter/ucp/3.1/reference/cli/example-config/
+              title: example-config
+            - path: /datacenter/ucp/3.1/reference/cli/id/
+              title: id
+            - path: /datacenter/ucp/3.1/reference/cli/images/
+              title: images
+            - path: /datacenter/ucp/3.1/reference/cli/install/
+              title: install
+            - path: /datacenter/ucp/3.1/reference/cli/restart/
+              title: restart
+            - path: /datacenter/ucp/3.1/reference/cli/restore/
+              title: restore
+            - path: /datacenter/ucp/3.1/reference/cli/stop/
+              title: stop
+            - path: /datacenter/ucp/3.1/reference/cli/support/
+              title: support
+            - path: /datacenter/ucp/3.1/reference/cli/uninstall-ucp/
+              title: uninstall-ucp
+            - path: /datacenter/ucp/3.1/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: Authorize role-based access
+          section:
+          - path: /datacenter/ucp/3.1/guides/authorization/
+            title: Access control model overview
+          - sectiontitle: The basics
+            section:
+            - path: /datacenter/ucp/3.1/guides/authorization/create-users-and-teams-manually/
+              title: Create users and teams manually
+            - path: /datacenter/ucp/3.1/guides/authorization/create-teams-with-ldap/
+              title: Create teams with LDAP
+            - path: /datacenter/ucp/3.1/guides/authorization/define-roles/
+              title: Define roles with authorized API operations
+            - path: /datacenter/ucp/3.1/guides/authorization/group-resources/
+              title: Group and isolate cluster resources
+            - path: /datacenter/ucp/3.1/guides/authorization/grant-permissions/
+              title: Grant role-access to cluster resources
+            - path: /datacenter/ucp/3.1/guides/authorization/reset-user-password/
+              title: Reset user passwords
+          - sectiontitle: Tutorials and use cases
+            section:
+            - path: /datacenter/ucp/3.1/guides/authorization/deploy-stateless-app/
+              title: Deploy stateless app with RBAC
+            - path: /datacenter/ucp/3.1/guides/authorization/isolate-volumes/
+              title: Isolate volumes
+            - path: /datacenter/ucp/3.1/guides/authorization/isolate-nodes/
+              title: Isolate nodes
+            - path: /datacenter/ucp/3.1/guides/authorization/pull-images/
+              title: Allow users to pull images
+            - path: /datacenter/ucp/3.1/guides/authorization/ee-standard/
+              title: Docker EE Standard use case
+            - path: /datacenter/ucp/3.1/guides/authorization/ee-advanced/
+              title: Docker EE Advanced use case
+        - sectiontitle: Access UCP
+          section:
+          - path: /datacenter/ucp/3.1/guides/user-access/
+            title: Web-based access
+          - path: /datacenter/ucp/3.1/guides/user-access/cli/
+            title: CLI-based access
+          - path: /datacenter/ucp/3.1/guides/user-access/kubectl/
+            title: Install the Kubernetes CLI
+        - path: /datacenter/ucp/3.1/guides/deploy-application-package/
+          title: Deploy an application package
+        - sectiontitle: Deploy apps with Swarm
+          section:
+          - title: Deploy a single service
+            path: /datacenter/ucp/3.1/guides/swarm/
+          - title: Deploy a multi-service app
+            path: /datacenter/ucp/3.1/guides/swarm/deploy-multi-service-app/
+          - title: Deploy application resources to a collection
+            path: /datacenter/ucp/3.1/guides/swarm/deploy-to-collection/
+          - title: Use secrets in your services
+            path: /datacenter/ucp/3.1/guides/swarm/use-secrets/
+          - sectiontitle: Layer 7 routing
+            section:
+            - title: Overview
+              path: /datacenter/ucp/3.1/guides/interlock/
+            - title: Architecture
+              path: /datacenter/ucp/3.1/guides/interlock/architecture/
+            - sectiontitle: Deploy
+              section:
+              - title: Simple deployment
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/
+              - title: Production deployment
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/production/
+              - title: Offline installation
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/offline-install/
+              - title: Layer 7 routing upgrade
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/upgrade/   
+            - sectiontitle: Configuration
+              section:
+              - title: Configure your deployment
+                path: /datacenter/ucp/3.1/guides/interlock/config/
+              - title: Configuring host mode networking
+                path: /datacenter/ucp/3.1/guides/interlock/config/host-mode-networking/
+              - title: Configuring an nginx extension
+                path: /datacenter/ucp/3.1/guides/interlock/config/nginx-config/
+              - title: Tuning the proxy service
+                path: /datacenter/ucp/3.1/guides/interlock/config/tuning/
+              - title: Updating Interlock services
+                path: /datacenter/ucp/3.1/guides/interlock/config/updates/
+            - sectiontitle: Routing traffic to services
+              section:
+              - title: Deploying services
+                path: /datacenter/ucp/3.1/guides/interlock/usage/
+              - title: Publishing a service as a canary instance
+                path: /datacenter/ucp/3.1/guides/interlock/usage/canary/
+              - title: Using context or path-based routing
+                path: /datacenter/ucp/3.1/guides/interlock/usage/context/
+              - title: Specifying a routing mode
+                path: /datacenter/ucp/3.1/guides/interlock/usage/interlock-vip-mode/ 
+              - title: Using routing labels
+                path: /datacenter/ucp/3.1/guides/interlock/usage/labels-reference/ 
+              - title: Implementing redirects
+                path: /datacenter/ucp/3.1/guides/interlock/usage/redirects/
+              - title: Implementing a service cluster
+                path: /datacenter/ucp/3.1/guides/interlock/usage/service-clusters/
+              - title: Implementing persistent (sticky) sessions
+                path: /datacenter/ucp/3.1/guides/interlock/usage/sessions/
+              - title: Securing services with TLS
+                path: /datacenter/ucp/3.1/guides/interlock/usage/tls/
+              - title: Configuring websockets
+                path: /datacenter/ucp/3.1/guides/interlock/usage/websockets/
+        - sectiontitle: Deploy apps with Kubernetes
+          section:
+          - title: Access Kubernetes Resources
+            path: /datacenter/ucp/3.1/guides/kubernetes/kube-resources/
+          - title: Deploy a workload
+            path: /datacenter/ucp/3.1/guides/kubernetes/
+          - title: Deploy a Compose-based app
+            path: /datacenter/ucp/3.1/guides/kubernetes/deploy-with-compose/
+          - title: Deploy an ingress controller
+            path: /datacenter/ucp/3.1/guides/kubernetes/layer-7-routing/
+          - title: Create a service account for a Kubernetes app
+            path: /datacenter/ucp/3.1/guides/kubernetes/create-service-account/
+          - title: Install an unmanaged CNI plugin
+            path: /datacenter/ucp/3.1/guides/kubernetes/install-cni-plugin/
+          - title: Kubernetes network encryption
+            path: /datacenter/ucp/3.1/guides/kubernetes/kubernetes-network-encryption/
+          - sectiontitle: Persistent Storage
+            section:
+            - title: Use NFS Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-nfs-volumes/
+            - title: Use Azure Disk Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-azure-disk/
+            - title: Use Azure Files Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-azure-files/
+            - title: Use AWS EBS Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/configure-aws-storage/  
+        - title: API reference
+          path: /datacenter/ucp/3.1/reference/api/
+          nosync: true
+        - path: /ee/ucp/release-notes/
+          title: Release notes
       - sectiontitle: Universal Control Plane 3.0
         section:
         - path: /datacenter/ucp/3.0/guides/
