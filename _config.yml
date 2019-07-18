@@ -149,14 +149,14 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.8"
+      ucp_version: "3.1.9"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
       dtr_repo: "dtr"
-      ucp_version: "3.1.8"
+      ucp_version: "3.1.9"
       dtr_version: "2.6.8"
   - scope:
       path: "datacenter/ucp/3.0"
