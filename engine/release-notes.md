@@ -80,7 +80,6 @@ consistency and compatibility reasons.
 ### Networking
 * Cleaned up the cluster provider when the agent is closed. [docker/libnetwork#2354](https://github.com/docker/libnetwork/pull/2354)
 * Windows: Now selects a random host port if the user does not specify a host port. [docker/libnetwork#2369](https://github.com/docker/libnetwork/pull/2369)
-* `--service-cluster-ip-range` is now configurable for UCP install. [docker/orca#10263](https://github.com/docker/orca/issues/10263)
  
 ### Known Issues
 * There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
@@ -378,7 +377,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 2019-07-17
 
-## Runtime
+### Runtime
 
 * Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
 
