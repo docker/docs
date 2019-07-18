@@ -994,7 +994,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v{{ site.latest_engine_api_version }} reference (latest)
+      title: v1.39 reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/
@@ -1114,24 +1114,6 @@ samples:
   section:
   - path: /samples/
     title: Samples home
-  - path: /engine/examples/apt-cacher-ng/
-    title: apt-cacher-ng
-  - path: /engine/examples/dotnetcore/
-    title: ASP.NET Core application
-  - path: /compose/aspnet-mssql-compose/
-    title: ASP.NET Core + SQL Server on Linux
-  - path: /engine/examples/couchdb_data_volumes/
-    title: CouchDB
-  - path: /compose/django/
-    title: Django and PostgreSQL
-  - path: /engine/examples/postgresql_service/
-    title: PostgreSQL
-  - path: /compose/rails/
-    title: Rails and PostgreSQL
-  - path: /engine/examples/running_riak_service/
-    title: Riak
-  - path: /engine/examples/running_ssh_service/
-    title: SSHd
 
 manuals:
 - sectiontitle: Docker Enterprise Edition
@@ -3342,48 +3324,6 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
-  - path: /docker-hub/repos/
-    title: Repositories
-  - path: /docker-hub/official_images/
-    title: Official Images
-  - path: /docker-hub/orgs/
-    title: Teams & Organizations
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/slack_integration/
-    title: Slack Integration
-  - path: /docker-hub/upgrade/
-    title: Upgrade your plan
-  - sectiontitle: Automated Builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up Automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in Automated Builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced Automated Builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
-      - path: /docker-hub/builds/classic/
-        title: Classic Automated Builds
-  - sectiontitle: Publisher & Certified Content
-    section:
-    - path: /docker-hub/publish/
-      title: Overview
-    - path: /docker-hub/publish/publish/
-      title: Submit a product for Docker Hub
-    - path: /docker-hub/publish/customer_faq/
-      title: User FAQs
-    - path: /docker-hub/publish/publisher_faq/
-      title: Publisher FAQs
-    - path: /docker-hub/publish/certify-images/
-      title: Certify Images & Plugins
-    - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify Logging Plugins
-    - path: /docker-hub/publish/trustchain/
-      title: Trust Chain
-    - path: /docker-hub/publish/byol/
-      title: Bring Your Own License (BYOL)
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary

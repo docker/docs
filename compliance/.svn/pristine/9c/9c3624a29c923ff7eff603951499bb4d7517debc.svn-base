@@ -1,0 +1,190 @@
+---
+description: NIST 800-37 guidance for Docker EE
+keywords: standards, compliance, security
+title: NIST SP 800-37 (RMF)
+---
+
+One of the key guiding documents that Federal agencies use to adhere to FISMA
+requirements is that of [NIST Special Publication (SP)
+800-37](https://csrc.nist.gov/publications/detail/sp/800-37/rev-1/final), *Guide
+for Applying the Risk Management Framework to Federal Information Systems: a
+security Life Cycle Approach*. This document provides a detailed, six-step
+approach to risk management, known as the Risk Management Framework (RMF):
+categorize, select, implement, assess, authorize, and monitor. Agencies across
+the Federal government, including the Federal Civilian sector, Department of
+Defense, and the Intelligence Community, all incorporate and mandate this
+process in some form or fashion.
+
+![NIST RMF](/compliance/images/nistrmf.png)
+<sub>Source - NIST SP 800-37 Rev. 1</sub>
+
+The primary goal for any Federal information system is to attain an authority to
+operate (ATO), which validates a system for use and is one of the final phases
+of the risk management framework. To help agencies attain ATOs for Docker
+Enterprise Edition (EE) and containerized systems built on top of Docker EE,
+we've highlighted some considerations and corresponding components of the Docker
+stack as they map to applicable requirements of the Risk Management Framework
+(RMF), per NIST 800-37 Rev. 1, and other supporting publications. The guidance
+below has been generalized and can also be tailored to fit the requirements of
+CNSSI 1253, DoD RMF per DoDI 8510.01, and/or other applicable Federal government
+assessment and authorization processes.
+
+It is important to note that the information below merely serves as guidance and
+cannot nor should not be used as the sole source of information in your agency's
+Docker-related ATO efforts. Furthermore, only the Docker Enterprise Edition (EE)
+product is the most suitable for use per the various FISMA requirements. Docker
+Community Edition (CE) lacks many critical security and support capabilities
+that which are required by NIST SP 800-53 controls and mandatory FIPS standards
+and therefore cannot be used to process Federal information without the
+assumption of a significantly greater level of risk to your organization.
+
+## Docker Platform Information System Boundaries and Categorizations
+
+Because Docker introduces a relatively new containerization computing paradigm
+into Federal information systems, it can be challenging for system owners to
+identify appropriate system boundaries. Per NIST 800-37 Rev. 1, Docker EE and
+its containerized workloads can be best classified as a net-centric architecture
+made up of a complex system of systems that also encompasses dynamic subsystems.
+
+To guide information system owners in this process, we've laid out a couple of
+high-level technical recommendations as follows:
+
+- Classify the Docker Enterprise Edition stack itself and all of its components
+  as a **general support system**, as defined by OMB Circular A-130. This
+  includes the Docker EE Engine, Docker Trusted Registry (DTR), and Universal
+  Control Plane (UCP). The Docker EE stack will typically reside on another
+  existing general support system with an existing ATO (e.g. Federal datacenter
+  facility, FedRAMP-certified cloud service provider, etc).
+- Classify each containerized workload as a **major application**, as defined by
+  OMB Circular A-130. For the purposes of this particular recommendation, a
+  *containerized workload* is the equivalent of a Docker Swarm Mode stack (one
+  or more Swarm Mode services) or a Kubernetes deployment (one or more
+  deployments). Supporting artifacts for Swarm Mode stacks and Kubernetes
+  deployments should also be included as part of the application system boundary
+  as appropriate (e.g. overlay networks, Docker secrets, Kubernetes services,
+  volumes, etc). Each containerized workload should be considered a dynamic
+  subsystem of the Docker EE stack.
+
+Individual Docker EE engines that are serving containerized workloads but that
+are not part of a UCP cluster should be considered wholly separate systems (or
+subsystems) as part of the ATO process.
+
+In addition to using the guidance above to identify your Docker system
+boundaries, you should also continue to categorize your Docker deployment and
+its containerized workloads per the guidelines set forth in FIPS 199 and NIST SP
+800-60. Furthermore, it is likely that you will have non-technical,
+organizational system requirements that will have an impact on the
+determination of the Docker system boundary.
+
+NIST 800-37 Rev. 2, which is set to be released later in 2018, aims to modify
+some of these system-related definitions and introduces the constructs of system
+elements, systems-of-interest, and enabling systems. This guidance will be
+updated to reflect these changes accordingly.
+
+## Security Control Selection
+
+NIST SP 800-53, *Security and Privacy Controls for Federal Information Systems
+and Organizations* is the primary directory of security controls used to secure
+information systems per FISMA requirements. There are 900+ controls in this
+publication, many of which are applicable to both the Docker EE stack itself and
+any containers that are deployed on top. All of the 800-53 controls that we have
+deemed applicable to and/or configurable within Docker Enterprise Edition are
+documented in our [NIST 800-53 Reference](/compliance/reference/800-53/) and on
+[GitHub](https://www.github.com/docker/compliance).
+
+Once you have categorized your Docker deployment and/or your containerized
+application workloads per FIPS 199 and SP 800-60, you should proceed with the
+requirements set forth in FIPS 200 and guidance in SP 800-53 to develop your
+system's minimum security baseline (MSB). The controls we've documented for
+Docker are irrespective of the LOW, MODERATE, and HIGH NIST baselines, and as
+such, can be selected per your system's MSB.
+
+If you are pursuing an application ATO for your containerized workload(s), you
+should take into account common controls provided by both the Docker EE stack
+itself and any supporting infrastructure underneath (e.g. cloud service provider
+IaaS, Federal datacenter etc). Typically, inheriting a greater number of common
+controls as part of your Docker EE deployment and/or containerized workload
+ATO(s) results in more consistent, cost-effective, and time-effective ATO
+processes.
+
+![](/compliance/images/atocontrolresponsibilities.svg)
+
+## Implementing Security Controls
+
+Many of the controls that we've documented can be classified as types of hybrid
+controls. More specifically, some of our narratives are simply statements
+highlighting container capabilities or the Docker EE stack that can be used to
+assist in your implementation of a control, but do not necessarily provide a
+complete control implementation in and of themselves. Examples of these include
+a number of the management-focused control families (e.g. CA, PL, PM, RA, and
+SA). Other control narratives that we've provided require you to configure a
+capability in Docker *in addition to* relying on external system components to
+fully satisfy a control. This is true for many of the controls in the Access
+Control (AC) family whereby Docker includes the option to configure integration
+with Active Directory or similar LDAP technology, but doesn't itself provide
+that directory service capability.
+
+Each control narrative in our NIST 800-53 reference includes instructions (or a
+link to instructions) for configuring Docker EE appropriately.
+
+## Assessing Docker Security Controls
+
+When assessing the controls that you've implemented for a Docker EE deployment
+and its containerized workloads, you should continue to follow the guidance and
+procedures outlined in NIST SP 800-53A and NIST SP 800-115. In the event that
+your security control assessor (SCA) is unfamiliar with high-level container
+constructs, it may help to incorporate some of these concepts into your Rules of
+Engagement (ROE) document.
+
+Many of the commonly used test and audit tools used in traditional security
+control assessments can also be used to validate control implementations
+specific to Docker EE. Results from Docker Trusted Registry vulnerability scans,
+Docker EE Engine, UCP and DTR logs, overlay network configurations, and exposed
+container ports are a few of the multitude of different Docker system and
+containerized application components that can be included as part of an
+assessment.
+
+## Authorizing a Docker EE-based system
+
+As with any system authorization, only the authorizing official (AO) can make
+the appropriate authority to operate (or denial of authority to operate)
+decision. Educating your organization's AO, Authorizing Official Designated
+Representative (AODR), and/or Risk Executive on container technologies and some
+of their high-level security capabilities can aid these individuals in
+evaluating any residual risks associated with the use of Docker EE and support
+their decision-making processes.
+
+Certainly don't hesitate to contact your Docker representative or reach out to
+compliance@docker.com if you've identified any Docker EE-specific product gaps
+or security weaknesses as part of your compilation of the Plan of Action and
+Milestones (POA&M) artifacts associated with this step of RMF.
+
+## Continuous Monitoring
+
+One of the key considerations to take into account when expanding your
+organization's continuous monitoring program to cover your Docker Enterprise
+deployment is that of automation. [NIST SP
+800-137](https://csrc.nist.gov/publications/detail/sp/800-137/final),
+*Information Security Continuous Monitoring (ISCM) for Federal Information
+Systems and Organizations*, emphasizes the use of automation to support
+continuous monitoring and highlights 11 automation domains that are all
+applicable to Docker Enterprise. The table below maps each automation domain to
+that of a capability provided by Docker EE and containers and steps for
+incorporating that functionality into your ISCM program. These mappings do not
+provide for completeness in satisfying a particular automation domain, but
+rather a starting point from which to integrate Docker EE with other ISCM tools
+in your environment.
+
+| Automation Domain | Docker Platform Capability | Description |
+| ----------------- | -------------------- | ----------- |
+| Vulnerability Management | Docker Trusted Registry (DTR) Image Scanning (included with Docker EE Advanced) | Docker image scanning can be triggered automatically to check your images against known vulnerability databases |
+| Patch Management | Docker image | Patching software and application dependencies becomes a centralized and easily automatable process that is driven by the Dockerfile format |
+| Event Management | Docker EE Engine | EE Engine includes an event-driven API that can be used to forward critical system information to an appropriate monitoring endpoint |
+| Incident Management | Docker EE platform | The entirety of the Docker EE platform (EE Engine, DTR, and UCP) is API-driven and can be integrated with your incident management system to trigger any required automated processes |
+| Malware Detection | Docker image | Antivirus software installed on underlying Docker EE hosts can be configured to automatically scan Docker image layers for any malware |
+| Asset Management | Docker Trusted Registry (DTR) | All Docker images for your organization can be stored, tagged, and signed in DTR repositories |
+| Configuration Management | Docker EE Certified Infrastructure | Docker EE Certified Infrastructure leverages configuration management tooling (Terraform and Ansible) to deploy and manage your platform's state |
+| Network Management | Universal Control Plane (UCP) | Container networks that are instantiated as part of your Docker EE deployment can be managed and configured using the capabilities provided by Universal Control Plane |
+| License Management | Docker Store | All Docker EE-specific licensing can be managed and automated via Docker Store. Any third-party, Docker Certified images that are licensed directly with the software vendor (i.e. bring-your-own-license [BYOL]) can also be managed and downloaded from Docker Store. |
+| Information Management | Docker EE Platform | There are a number of capabilities provided by the complete Docker EE Platform and container technologies that can be used to support your organization's data loss prevention (DLP) strategy. For more detailed guidance, you can refer to our [NIST 800-53 Reference](/compliance/reference/800-53) for controls [AC-4](/compliance/reference/800-53/ac/#ac-4-information-flow-enforcement), [AC-17](/compliance/reference/800-53/ac/#ac-17-remote-access), [CA-3](/compliance/reference/800-53/ca/#ca-3-system-interconnections), [CA-7](/compliance/reference/800-53/ca/#ca-7-continuous-monitoring), [CM-7](/compliance/reference/800-53/cm/#cm-7-least-functionality), and [SI-12](/compliance/reference/800-53/si/#si-12-information-handling-and-retention). |
+| Software Assurance | Docker Content Trust (DCT) | All Docker images can be cryptographically signed such that your software and applications can satisfy trustworthiness, integrity, and predictable execution requirements |
