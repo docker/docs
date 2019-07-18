@@ -1117,7 +1117,7 @@ samples:
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/
-    title: .NET Core application
+    title: ASP.NET Core application
   - path: /compose/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/
@@ -3084,7 +3084,7 @@ manuals:
     path: /ee/get-support/
 - sectiontitle: Docker Compose
   section:
-  - path: /compose/overview/
+  - path: /compose/
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
@@ -3247,7 +3247,7 @@ manuals:
   - sectiontitle: Learn by example
     section:
     - path: /machine/examples/ocean/
-      title: Provision Digital Ocean Droplets
+      title: Provision DigitalOcean Droplets
     - path: /machine/examples/aws/
       title: Provision AWS EC2 instances
   - path: /machine/concepts/
@@ -3309,7 +3309,7 @@ manuals:
     - path: /machine/drivers/aws/
       title: Amazon Web Services
     - path: /machine/drivers/digital-ocean/
-      title: Digital Ocean
+      title: DigitalOcean
     - path: /machine/drivers/exoscale/
       title: Exoscale
     - path: /machine/drivers/generic/
