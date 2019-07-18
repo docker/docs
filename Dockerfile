@@ -16,7 +16,7 @@
 ARG ENGINE_BRANCH="19.03.x"
 
 # Distribution
-ARG DISTRIBUTION_BRANCH="release/2.6"
+ARG DISTRIBUTION_BRANCH="release/2.7"
 
 
 ###
