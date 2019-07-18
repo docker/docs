@@ -21,6 +21,37 @@ upgrade your installation to the latest release.
 
 # Version 3.1
 
+## 3.1.9
+(2019-07-17)
+
+### Bug fixes
+
+* Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
+* Added a restrictive `robots.txt` to the root of the UCP API server.
+
+### Known issues
+
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.9 |
+| Kubernetes   | 1.11.10 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.8
 (2019-06-27)
 
