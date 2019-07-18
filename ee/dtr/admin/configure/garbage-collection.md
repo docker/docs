@@ -16,11 +16,11 @@ the scheduled time, DTR:
 1. Identifies and marks unused image layers.
 2. Deletes the marked image layers.
 
-Starting in DTR 2.5, we introduced an experimental feature which lets you run garbage collection jobs
-without putting DTR in read-only mode. As of v2.6, online garbage collection is no longer in 
-experimental mode. This means that the registry no longer has to be in read-only mode (or offline) 
-during garbage collection. 
-
+As of v2.6, garbage collection runs without putting DTR into read-only mode.
+This is known as online garbage collection. In previous versions, DTR would be
+put into read-only mode and reject pushes while it ran. Online garbage
+collection was an experimental feature in v2.5 and is the default,
+non-experimental mode in v2.6.
 
 ## Schedule garbage collection
 
