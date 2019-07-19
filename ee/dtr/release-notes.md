@@ -80,6 +80,64 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.8
+(2019-7-17)
+
+### Bug fixes
+
+* Fixed a bug where non-admin user repository pagination was broken. (docker/dhe-deploy #10464)
+* Fixed a bug where the `dockersearch` API returned incorrect results when the search query ended in a digit. (docker/dhe-deploy #10434)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy #10460)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy #10460)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
+## 2.6.7
+(2019-6-27)
+
+### Enhancements
+
+* Added UI support to retain metadata when switching between storage drivers.(docker/dhe-deploy#10340). For more information, see (docker/dhe-deploy #10199) and (docker/dhe-deploy #10181).
+* Added UI support to disable persistent cookies. (docker/dhe-deploy #10353)
+
+### Bug fixes
+
+* Fixed a UI bug where non-admin namespace owners could not create a repository. (docker/dhe-deploy #10371)
+* Fixed a bug where duplicate scan jobs were causing scans to never exit. (docker/dhe-deploy #10316)
+* Fixed a bug where logged in users were unable to pull from public repositories. (docker/dhe-deploy #10343)
+* Fixed a bug where attempts to switch pages to navigate through the list of repositories did not result in an updated list of repositories. (docker/dhe-deploy #10377)
+* Fixed a pagination issue where the number of repositories listed when switching pages was not accurate. (docker/dhe-deploy #10376)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
+
 ## 2.6.6 
 (2019-5-6)
 
@@ -94,7 +152,7 @@ to upgrade your installation to the latest release.
     - Next, add `keep_metadata: true` as a top-level key in the JSON you just created and modify it to contain your new storage settings.
     - Finally, update your Registry settings with your modified JSON file via `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`.
     
-### Bug Fixes
+### Bug fixes
 
 * Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
 
@@ -119,7 +177,7 @@ to upgrade your installation to the latest release.
 ## 2.6.5
 (2019-4-11)
 
-### Bug Fixes
+### Bug fixes
 * Fixed a bug where the web interface was not rendering for non-admin users.
 * Removed `Users` tab from the side navigation [#10222](https://github.com/docker/dhe-deploy/pull/10222)
 
@@ -145,7 +203,7 @@ to upgrade your installation to the latest release.
 * Added `--storage-migrated` option to reconfigure with migrated content when moving content to a new NFS URL. (ENGDTR-794)
 * Added a job log status filter which allows users to exclude jobs that are not currently ***running***. (docker/dhe-deploy #10077)
 
-### Bug Fixes
+### Bug fixes
 
 * If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This also applied when upgrading from 2.5 to 2.6. The issue has been fixed in DTR 2.6.4. (ENGDTR-330 and docker/dhe-deploy #10105) 
 
@@ -172,7 +230,7 @@ to upgrade your installation to the latest release.
 
 * Bump the Golang version that is used to build DTR to version 1.11.5. (docker/dhe-deploy#10060)
 
-### Bug Fixes
+### Bug fixes
 
 * Users with read-only permissions can no longer see the README edit button for a repository. (docker/dhe-deploy#10056)
 
@@ -201,7 +259,7 @@ to upgrade your installation to the latest release.
 
 (2019-1-29)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)
 
@@ -231,7 +289,7 @@ to upgrade your installation to the latest release.
 
 (2019-01-09)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed a bug where notary signing data was not being backed up properly (docker/dhe-deploy #9862)
 * Allow a cluster to go from 2 replicas to 1 without forcing removal (docker/dhe-deploy #9840)
@@ -266,7 +324,7 @@ to upgrade your installation to the latest release.
 
 (2018-11-08)
 
-### New Features
+### New features
 
 * Web Interface
   * Online garbage collection is no longer an experimental feature. Users can now write to DTR and push images during garbage collection. [Learn about garbage collection](/ee/dtr/admin/configure/garbage-collection/).
@@ -325,7 +383,6 @@ to upgrade your installation to the latest release.
     * `DELETE /api/v0/repositories/{namespace}/{reponame}/manifests/{reference}`
   * The `enableManifestLists` field on the `POST /api/v0/repositories/{namespace}` endpoint will be removed in DTR 2.7. See [Deprecation Notice](deprecation-notice) for more details.
 
-
 # Version 2.5
 
 
@@ -333,6 +390,80 @@ to upgrade your installation to the latest release.
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.13
+(2019-07-17)
+
+### Bug fix
+
+* Fixed a bug where the dockersearch API returned incorrect results when the search query ended in a digit. (docker/dhe-deploy #10435)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy#10463)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy#10463)
+
+### Known issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
+
+## 2.5.12
+(2019-06-27)
+
+### Bug fixes
+
+* Fixed a bug where duplicate scan jobs were causing scans to never exit.(docker/dhe-deploy #10322)
+* Fixed a pagination issue where the number of repositories listed when switching pages was not accurate. (docker/dhe-deploy #10383)
+
+### Known issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
 
 ## 2.5.11
 
@@ -344,12 +475,12 @@ to upgrade your installation to the latest release.
 * Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)
 * Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed an issue where read / write permissions were used when copying files into containers. (docker/dhe-deploy #10207)
 * Fixed an issue where non-admin users could not access their repositories from the Repositories page on the web interface. (docker/dhe-deploy #10294)
 
-### Known Issues
+### Known issues
 
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
@@ -380,11 +511,11 @@ to upgrade your installation to the latest release.
 
 (2019-3-28)
 
-### Bug Fixes
+### Bug fixes
 
 * If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` used to fail on images that were pushed to the repository after you upgraded to 2.5 and opted into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -418,7 +549,7 @@ to upgrade your installation to the latest release.
 
 * Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10071)
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -451,11 +582,11 @@ to upgrade your installation to the latest release.
  
 (2019-1-29)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (docker/dhe-deploy #9958)
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -488,7 +619,7 @@ to upgrade your installation to the latest release.
 
 (2019-01-09)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (docker/dhe-deploy #9811)
 * Updated GoRethink library to avoid potential lock contention. (docker/dhe-deploy #9812)
@@ -497,7 +628,7 @@ to upgrade your installation to the latest release.
 ### Changelog
 * GoLang version bump to 1.10.7.
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -530,7 +661,7 @@ to upgrade your installation to the latest release.
 
 (2018-10-25)
 
-### Bug Fixes
+### Bug fixes
 * Fixed a bug where Windows images could not be promoted. (docker/dhe-deploy#9215)
 * Removed Python3 from base image. (docker/dhe-deploy#9219)
 * Added CSP (docker/dhe-deploy#9366)
@@ -539,7 +670,7 @@ to upgrade your installation to the latest release.
 * Backported ManifestList fixes. (docker/dhe-deploy#9547)
 * Removed support sidebar link and associated content. (docker/dhe-deploy#9411)
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -572,13 +703,13 @@ to upgrade your installation to the latest release.
 
 (2018-8-30)
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed bug where repository tag list UI was not loading after a tag migration.
 * Fixed bug to enable poll mirroring with Windows images.
 * The RethinkDB image has been patched to remove unused components with known vulnerabilities including the RethinkCLI. To get an equivalent interface, run RethinkCLI from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.3.0 $REPLICA_ID`.
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -611,17 +742,17 @@ to upgrade your installation to the latest release.
 
 (2018-6-21)
 
-### New Features
+### New features
 
 * Allow users to adjust DTR log levels for alternative logging solutions.
 
-### Bug Fixes
+### Bug fixes
 
 * Fixed URL redirect to release notes.
 * Prevent OOM during garbage collection by reading less data into memory at a time.
 * Fixed issue where worker capacities wouldn't update on minor version upgrades.
 
-### Known Issues
+### Known issues
 * Web Interface
   * The web interface shows "This repository has no tags" in repositories where tags
   have long names. As a workaround, reduce the length of the name for the
@@ -843,8 +974,21 @@ specify `--log-protocol`.
 > **Important DTR Upgrade Information**
 > If you have manifest lists enabled on any of your repositories:
 >
-> Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into > garbage collection.
+> Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into garbage collection.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.4.13
+
+(2019-07-17)
+
+### Bug fix
+
+* Fixed a bug where duplicate scan jobs were causing scans to never exit. (docker/dhe-deploy#10314)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy#10461)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy#10461)
 
 ## 2.4.12
 
@@ -896,7 +1040,7 @@ of testing the server to find which version works.
 
 (2018-10-25)
 
-### Bug Fixes
+### Bug fixes
 * Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)
 * Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9574)
 
@@ -914,7 +1058,7 @@ of testing the server to find which version works.
 
 (2018-07-26)
 
-### Bug Fixes
+### Bug fixes
 * Fixed bug where repository tag list UI was not loading after a tag migration.
 * The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface please run the rethinkcli from a separate image using `docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID`.
 
@@ -928,11 +1072,11 @@ of testing the server to find which version works.
 
 (2018-06-21)
 
-**New Features**
+**New features**
 
 * Allow users to adjust DTR log levels for alternative logging solutions.
 
-**Bug Fixes**
+**Bug fixes**
 
 * Prevent OOM during garbage collection by reading less data into memory at a time.
 

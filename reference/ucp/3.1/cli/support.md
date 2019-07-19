@@ -11,7 +11,8 @@ Create a support dump for specified UCP nodes
 ```
 docker container run --rm \
         --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock \
+        --log-driver none \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp \
         support [command options] > docker-support.tgz
 ```
