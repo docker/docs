@@ -12,7 +12,7 @@ pages listed in the following **Docker Enterprise components install and upgrade
 
 | Feature | Component | Component version |
 |---------|-----------|-------------------|
-| [Group Managed Service Accounts (gMSA)](/engine/swarm/services/) | UCP | 3.2.0 |
+| [Group Managed Service Accounts (gMSA)](/engine/swarm/services/swarm.md#gMSA-for-Swarm) | UCP | 3.2.0 |
 | [Open Security Controls Assessment Language (OSCAL)](/compliance/oscal/) | UCP | 3.2.0 |
 | [Container storage interface (CSI)](/ee/ucp/kubernetes/storage/use-csi/) | UCP | 3.2.0 |
 | [Internet Small Computer System Interface (iSCSI)](/ee/ucp/kubernetes/storage/use-iscsi/) | UCP | 3.2.0 |
