@@ -83,11 +83,15 @@ The following example assumes a gMSA and its credential spec (called credspec.js
 To use a Config as a credential spec, first create the Docker Config containing the credential spec:
 
 
-```docker config create credspec credspec.json```
+```bash
+docker config create credspec credspec.json
+```
 
 Now, you should have a Docker Config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:
 
-```docker service create --credential-spec="config://credspec" <your image>```
+```bash
+docker service create --credential-spec="config://credspec" <your image>
+```
 
 Your service will use the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec will not be mounted into the container.
 
