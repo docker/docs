@@ -112,7 +112,7 @@ level.
 
 Enabling UCP audit logging via the UCP Configuration file can be done before 
 or after a UCP installation. Following the UCP Configuration file documentation 
-[here](../ucp-configuration-file/).
+[here](./ucp-configuration-file/).
 
 The section of the UCP configuration file that controls UCP auditing logging is:
 

@@ -135,14 +135,14 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.12"
+      dtr_version: "2.5.13"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.12"
+      dtr_version: "2.4.13"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
@@ -193,14 +193,14 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.12"
+      ucp_version: "3.0.13"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.19"
+      ucp_version: "2.2.20"
   - scope:
       path: "datacenter/ucp/2.1"
     values:

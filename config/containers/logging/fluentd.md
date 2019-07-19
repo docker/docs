@@ -123,7 +123,7 @@ How long to wait between retries. Defaults to 1 second.
 
 ### fluentd-max-retries
 
-The maximum number of retries. Defaults to `10`.
+The maximum number of retries. Defaults to `4294967295` (2**32 - 1).
 
 ### fluentd-sub-second-precision
 

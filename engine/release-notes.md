@@ -29,6 +29,22 @@ consistency and compatibility reasons.
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 18.09.08
+2019-07-17
+
+### Runtime
+
+* Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
+
+
+### Client
+
+* Fixed rollback config type interpolation for `parallelism` and `max_failure_ratio` fields.
+
+### Known Issue
+
+* There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
+
 ## 18.09.7
 2019-06-27
 
@@ -64,7 +80,6 @@ consistency and compatibility reasons.
 ### Networking
 * Cleaned up the cluster provider when the agent is closed. [docker/libnetwork#2354](https://github.com/docker/libnetwork/pull/2354)
 * Windows: Now selects a random host port if the user does not specify a host port. [docker/libnetwork#2369](https://github.com/docker/libnetwork/pull/2369)
-* `--service-cluster-ip-range` is now configurable for UCP install. [docker/orca#10263](https://github.com/docker/orca/issues/10263)
  
 ### Known Issues
 * There are [important changes](/ee/upgrade) to the upgrade process that, if not correctly followed, can have an impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before 18.09 to version 18.09 or later.
@@ -106,7 +121,7 @@ consistency and compatibility reasons.
 
 ### Builder
 
-* Added validation for `git ref` to avoid misinterpretation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
+* Fixed [CVE-2019-13139](https://nvd.nist.gov/vuln/detail/CVE-2019-13139) by adding validation for `git ref` to avoid misinterpretation as a flag. [moby/moby#38944](https://github.com/moby/moby/pull/38944)
 
 ### Runtime
 
@@ -358,6 +373,14 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
+## 18.03.1-ee-10
+
+2019-07-17
+
+### Runtime
+
+* Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
+
 ## 18.03.1-ee-9
 
 2019-06-27
@@ -517,6 +540,35 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-23
+2019-07-17
+
+### Runtime
+
+* Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
+
+### Known issues
+
+* When all Swarm managers are stopped at the same time, the swarm might end up in a
+split-brain scenario. [Learn more](https://success.docker.com/article/KB000759).
+* Under certain conditions, swarm leader re-election may timeout
+  prematurely. During this period, docker commands may fail. Also during
+  this time, creation of globally-scoped networks may be unstable. As a
+  workaround, wait for leader election to complete before issuing commands
+  to the cluster.
+* It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+* Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+* If a container is spawned on node A, using the same IP of a container destroyed
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
+
+1. Container on A sends a packet out,
+2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).
+
+As a workaround, send at least a packet out from each container like
+(ping, GARP, etc).
 
 ## 17.06.2-ee-22
 2019-06-27
@@ -3173,4 +3225,3 @@ use `--detach` to keep the old behaviour.
 #### Windows
 
 * Block pulling Windows images on non-Windows daemons [#29001](https://github.com/docker/docker/pull/29001)
-

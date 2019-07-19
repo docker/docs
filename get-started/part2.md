@@ -321,7 +321,7 @@ The notation for associating a local image with a repository on a registry is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
 `get-started:part2`. This puts the image in the `get-started` repository and
-tag it as `part2`.
+tags it as `part2`.
 
 Now, put it all together to tag the image. Run `docker tag image` with your
 username, repository, and tag names so that the image uploads to your
@@ -402,7 +402,7 @@ application by running this container in a **service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
-Or, learn how to [launch your container on your own machine using Digital Ocean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
+Or, learn how to [launch your container on your own machine using DigitalOcean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 
 ## Recap and cheat sheet (optional)
 
