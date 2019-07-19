@@ -217,6 +217,37 @@ https://github.com/kubernetes/kubernetes/pull/67432
 
 # Version 3.1
 
+## 3.1.9
+(2019-07-17)
+
+### Bug fixes
+
+* Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
+* Added a restrictive `robots.txt` to the root of the UCP API server.
+
+### Known issues
+
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
+    * Host Bind Mounts
+    * Privileged Mode
+    * Extra Capabilities
+    * Host Networking
+    * Host IPC
+    * Host PID
+* If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
+* Pod Security Policies are not supported in this release. (#15105)
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.9 |
+| Kubernetes   | 1.11.10 |
+| Calico      | 3.5.3 |
+| Interlock (nginx)   | 1.14.0 |
+
 ## 3.1.8
 (2019-06-27)
 
@@ -625,6 +656,24 @@ The following features are deprecated in UCP 3.1.
 | Interlock (nginx)   | 1.13.12 |
 
 # Version 3.0
+
+## 3.0.13
+2019-07-17
+
+### Bug fixes
+
+* Fixed an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
+* Added a restrictive robots.txt  to the root of the UCP API server.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.13 |
+| Kubernetes   | 1.8.15 |
+| Calico      | 3.0.8 |
+| Interlock (nginx)   | 1.13.12 |
+
 
 ## 3.0.12
 2019-06-27
@@ -1123,6 +1172,31 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 | Interlock (nginx)   | 1.13.8 |
 
 # Version 2.2
+
+## Version 2.2.20
+2019-07-17
+
+### Bug fixes
+
+* Fixed an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
+* Added a restrictive robots.txt  to the root of the UCP API server.
+
+### Known issues
+
+* Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+* The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
+* Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.
+* Agent container log is empty even though it's running correctly.
+* Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+* Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+* Searching for images in the UCP images UI doesn't work.
+* Removing a stack may leave orphaned volumes.
+* Storage metrics are not available for Windows.
+* You can't create a bridge network from the web interface. As a workaround use
+ `<node-name>/<network-name>`.
 
 ## Version 2.2.19
 2019-06-27

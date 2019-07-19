@@ -77,6 +77,33 @@ to upgrade your installation to the latest release.
 
 # Version 2.6
 
+## 2.6.8
+(2019-7-17)
+
+### Bug fixes
+
+* Fixed a bug where non-admin user repository pagination was broken. (docker/dhe-deploy #10464)
+* Fixed a bug where the `dockersearch` API returned incorrect results when the search query ended in a digit. (docker/dhe-deploy #10434)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy #10460)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy #10460)
+
+### Known issues
+
+* Docker Engine Enterprise Edition (Docker EE) Upgrade
+  * There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. For DTR-specific changes, see [2.5 to 2.6 upgrade](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+* Web Interface
+  * Poll mirroring for Docker plugins such as `docker/imagefs` is currently broken. (docker/dhe-deploy #9490)
+  * When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)
+  * In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the **Repository Settings** view. (docker/dhe-deploy #9554)
+* Webhooks
+  * When configured for "Image promoted from repository" events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+* System
+  * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
+
 ## 2.6.7
 (2019-6-27)
 
@@ -360,6 +387,45 @@ to upgrade your installation to the latest release.
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.13
+(2019-07-17)
+
+### Bug fix
+
+* Fixed a bug where the dockersearch API returned incorrect results when the search query ended in a digit. (docker/dhe-deploy #10435)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy#10463)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy#10463)
+
+### Known issues
+
+* Web Interface
+  * The web interface shows "This repository has no tags" in repositories where tags
+  have long names. As a workaround, reduce the length of the name for the
+  repository and tag.
+  * When deleting a repository with signed images, the DTR web interface no longer
+  shows instructions on how to delete trust data.
+  * There's no web interface support to update mirroring policies when rotating the TLS
+  certificates used by DTR. Use the API instead.
+  * The web interface for promotion policies is currently broken if you have a large number
+  of repositories.
+  * Clicking "Save & Apply" on a promotion policy doesn't work.
+* Webhooks
+  * There is no webhook event for when an image is pulled.
+  * HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)
+  * When configured for "Image promoted from repository" events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)
+* Online garbage collection
+  * The events API won't report events when tags and manifests are deleted.
+  * The events API won't report blobs deleted by the garbage collection job.
+* Docker EE Advanced features
+  * Scanning any new push after metadatastore migration will not yet work.
+  * Pushes to repos with promotion policies (repo as source) are broken when an
+  image has a layer over 100MB.
+  * On upgrade the scanningstore container may restart with this error message:
+  FATAL:  database files are incompatible with server
 
 ## 2.5.12
 (2019-06-27)
@@ -905,8 +971,21 @@ specify `--log-protocol`.
 > **Important DTR Upgrade Information**
 > If you have manifest lists enabled on any of your repositories:
 >
-> Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into > garbage collection.
+> Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into garbage collection.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.4.13
+
+(2019-07-17)
+
+### Bug fix
+
+* Fixed a bug where duplicate scan jobs were causing scans to never exit. (docker/dhe-deploy#10314)
+
+### Security
+
+* Bumped the Golang version for DTR to `1.12.7`. (docker/dhe-deploy#10461)
+* Bumped the Alpine version of the base images to `3.9.4`. (docker/dhe-deploy#10461)
 
 ## 2.4.12
 

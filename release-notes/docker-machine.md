@@ -505,7 +505,7 @@ toc_max: 2
 - Amazon EC2
   - Convert API calls to official SDK
   - Make DeviceName configurable
-- Digital Ocean
+- DigitalOcean
   - Custom SSH port support
 - Generic
   - Don't support `kill` since `stop` is not supported
@@ -594,7 +594,7 @@ Non-core driver plugins should still work as intended (in externally distributed
 	- Activate the plugin only on OSX
 	- Add id/gid option to mount when using vmhgfs
 	- Fix for vSphere driver boot2docker ISO issues
-- Digital Ocean
+- DigitalOcean
 	- Support for creating Droplets with Cloud-init User Data
 - Openstack
 	- Sanitize keynames by replacing dots with underscores
@@ -877,7 +877,7 @@ Initial beta release.
 ### Included drivers
 
 -   Amazon EC2
--   Digital Ocean
+-   DigitalOcean
 -   Google
 -   Microsoft Azure
 -   Microsoft Hyper-V
