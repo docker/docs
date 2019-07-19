@@ -23,7 +23,8 @@ see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
 >
-> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) 
+> for the latest list of supported platforms.
 {: .important}
 
 ## Docker Enterprise products
@@ -48,9 +49,13 @@ maintenance cycles for patches for up to 24 months.
 
 ### New licensing for Docker Enterprise 
 
-Starting in version 18.09, Docker Enterprise is aware of the license applied on the system. The license summary is available in the `docker info` output on standalone or manager nodes.
+Starting in version 18.09, Docker Enterprise is aware of the license applied on
+the system. The license summary is available in the `docker info` output on
+standalone or manager nodes.
 
-For Docker Enterprise customers, when you license Universal Control Plane (UCP), this same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
+For Docker Enterprise customers, when you license Universal Control Plane
+(UCP), this same license is applied to the underlying engines in the cluster.
+Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 
@@ -82,13 +87,20 @@ a CLI plugin for automated deployment and configuration, and third-party ecosyst
 Each Docker Enterprise release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker version. We maintain careful API backward compatibility and deprecate APIs and features slowly and conservatively. We remove features after deprecating them for a period of
+The Docker API version is independent of the Docker version. We maintain
+careful API backward compatibility and deprecate APIs and features slowly and
+conservatively. We remove features after deprecating them for a period of
 three stable releases. Docker 1.13 introduced improved interoperability
 between clients and servers using different API versions, including dynamic
 feature negotiation.
 
 ## Upgrades and support
-Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the latest minor release of Docker Enterprise are not required, however we recommend staying on the latest maintenance release of the supported minor release you are on. Please see [Maintenance Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more details on EOL of minor and major versions of Docker Enterprise.
+Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the
+latest minor release of Docker Enterprise are not required, however we
+recommend staying on the latest maintenance release of the supported minor
+release you are on. Please see [Maintenance
+Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more
+details on EOL of minor and major versions of Docker Enterprise.
 
 ## Where to go next
 

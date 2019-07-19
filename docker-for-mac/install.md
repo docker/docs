@@ -49,7 +49,7 @@ for Docker Desktop for Mac, and how the two products can coexist.
 
 * **What the install includes**: The installation provides
   [Docker Engine](/engine/userguide/), Docker CLI client,
-  [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
+  [Docker Compose](/compose/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 
 ## Install and run Docker Desktop for Mac
 

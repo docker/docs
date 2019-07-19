@@ -1269,7 +1269,7 @@ samples:
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/
-    title: .NET Core application
+    title: ASP.NET Core application
   - path: /compose/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/
@@ -3380,7 +3380,7 @@ manuals:
     title: CLI reference
 - sectiontitle: Docker Compose
   section:
-  - path: /compose/overview/
+  - path: /compose/
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose

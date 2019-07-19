@@ -88,14 +88,14 @@ bash _scripts/fetch-upstream-resources.sh -l
 # /docker-hub/
 # These rely on _layout/archive-redirect.html
 
-only_live_contents=("samples" "docker-id" "docker-cloud" "docker-hub" "docker-store")
+only_live_contents=("samples" "docker-id" "docker-hub")
 
 for dir in "${only_live_contents[@]}"; do
   echo "Replacing contents of $dir with a redirect stub"
   # Figure out the title, which should be title case with spaces instead of dashes
   dir_title=$(echo $dir | sed 's/-/\ /g' | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) substr($i,2) }}1')
   echo "dir_title is ${dir_title}"
-  rm -Rf \"$dir\"
+  rm -Rf $dir/*
   cat << EOF > "$dir/index.html"
 ---
 layout: archive-redirect

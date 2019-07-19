@@ -18,6 +18,34 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.0.5.0 2019-06-12
+
+[Download](https://download.docker.com/mac/edge/35318/Docker.dmg)
+
+This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after install.
+
+* Upgrades
+  - [Docker 19.03.0-rc2](https://github.com/docker/docker-ce/releases/tag/v19.03.0-rc2)
+  - [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3)
+  - [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23)
+  - [linuxkit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+  - [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
+
+* New
+  - Docker Desktop includes the `buildx` plugin (currently experimental).
+  - Selecting the `Experimental features` checkbox on the Docker Desktop Preferences Daemon page enables experimental features in the  Docker daemon and the Docker CLI.
+  - Docker Desktop has improved the reliability of `com.docker.osxfs trace` performance profiling command.
+  - Users can now run the `com.docker.osxfs trace --summary` option to get a high-level summary of operations, instead of receiving a trace of all operations.
+  - Docker Desktop now supports large lists of DNS resource records on Mac. Fixes [docker/for-mac#2160](https://github.com/docker/for-mac/issues/2160#issuecomment-431571031)
+
+* Bug fixes and minor changes
+  - Docker Desktop does not send DNS queries for `docker-desktop.<domain>` every 10s. It now relies on the host's DNS domain search order rather than trying to replicate it inside the VM.
+  - Docker Desktop has removed the ability to log in using email address as a username as the Docker command line does not support this.
+  - Docker Desktop now allows running a Docker registry inside a container. Fixes [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611)
+  - Fixed a stability issue with the DNS resolver.
+
 ### Docker Community Edition 2.0.4.1 2019-05-07
 
 [Download](https://download.docker.com/mac/edge/34207/Docker.dmg)

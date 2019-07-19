@@ -32,7 +32,7 @@ should already have Machine installed. If you need to install, see the
 instructions for [macOS](/docker-for-mac/) or
 [Windows](/docker-for-windows/).
 
-Machine supports installing on AWS, Digital Ocean, Google Cloud Platform, IBM
+Machine supports installing on AWS, DigitalOcean, Google Cloud Platform, IBM
 Softlayer, Microsoft Azure and Hyper-V, OpenStack, Rackspace, VirtualBox, VMware
 Fusion&reg;, vCloud&reg; Air<sup>TM</sup> and vSphere&reg;. This example uses
 VirtualBox to run several VMs based on the `boot2docker.iso` image.

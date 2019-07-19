@@ -35,7 +35,7 @@ The interlock proxy.1 is then rescheduled with the new nginx configuration that 
 
 ![Interlock default architecture](../images/single-interlock-deploy-2.png)
 
-After proxy.1 is complete, proxy.2 redeploys with the updated ngix configuration for the app.1 task.
+After proxy.1 is complete, proxy.2 redeploys with the updated ngnix configuration for the app.1 task.
 
 ![Interlock default architecture](../images/single-interlock-deploy-3.png)
 

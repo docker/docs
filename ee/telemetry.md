@@ -53,7 +53,36 @@ You can find out more about an individual option by clicking the **?** icon.
 
 ## Use the CLI to control telemetry
 
-To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
+At the engine level, there is a telemetry module built into the Docker
+Enterprise Engine 18.09 or newer. It can be disabled by modifing the [daemon
+configuration
+file](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
+By default this is stored at `/etc/docker/daemon.json`. 
+
+```bash
+{
+  "features": {
+    "telemetry": false
+  }
+}
+```
+
+For the Docker daemon to pick up the changes in the configuration file, the
+Docker daemon will need to be restarted.
+
+```bash
+$ sudo systemctl reboot docker
+```
+
+To reenable the telemetry module, swap the value to `"telemetry": true` or
+completely remove the `"telemetry": false` line, as the default value is `true`.
+
+
+### Docker Enterprise Engine 18.03 or older
+
+For Docker Enterprise Engine 18.03 or older, the telemetry module ran as a
+Docker Plugin. To disable the telemetry plugin, use the `docker plugin disable`
+with either the plugin NAME or ID:
 
 ```bash
 $ docker plugin ls
@@ -65,7 +94,8 @@ $ docker plugin disable docker/telemetry:1.0.0.linux-x86_64-stable
 
 This command must be run on each Docker host.
 
-To re-enable the telemetry plugin, you can use `docker plugin enable` with either the plugin NAME or ID:
+To re-enable the telemetry plugin, you can use `docker plugin enable` with
+either the plugin NAME or ID:
 
 ```bash
 $ docker plugin ls

@@ -6,7 +6,7 @@ title: Machine drivers
 
 -   [Amazon Web Services](aws.md)
 -   [Microsoft Azure](azure.md)
--   [Digital Ocean](digital-ocean.md)
+-   [DigitalOcean](digital-ocean.md)
 -   [Exoscale](exoscale.md)
 -   [Google Compute Engine](gce.md)
 -   [Linode](linode.md) (unofficial plugin, not supported by Docker)
