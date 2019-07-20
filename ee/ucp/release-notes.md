@@ -184,6 +184,29 @@ In order to optimize user experience and security, support for Internet Explorer
 
 ### Known issues
 
+- kubelets or Calico-node pods are Down
+
+    The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages.
+    - Kubelet is unhealthy
+    - Calico-node pod is unhealthy
+
+    This is a rare issue, but there is a race condition in UCP today where Docker iptables rules get permanently deleted. This happens when Calico tries to update the iptables state using delete commands passed to iptables-restore while Docker simultaneously updates its iptables state and Calico ends up deleting the wrong rules.
+
+    Rules that are affected:
+    ```
+    /sbin/iptables --wait -I FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+    /sbin/iptables --wait -I FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+    /sbin/iptables --wait -I  POSTROUTING -s 172.17.0.0/24 ! -o docker0 -j MASQUERADE
+    ```
+
+    The fix for this issue should be available as a minor version release in Calico and incorporated into UCP in a subsequent patch release.
+
+    Until then as a workaround we recommend:
+    - re-adding the above rules manually or via cron or
+    - restarting Docker
+
 - Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
     ```
     time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
