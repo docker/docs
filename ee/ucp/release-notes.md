@@ -186,7 +186,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 - kubelets or Calico-node pods are Down
 
-    The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages.
+    The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages:
     - Kubelet is unhealthy
     - Calico-node pod is unhealthy
 
