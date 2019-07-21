@@ -17,6 +17,7 @@ pages listed in the following **Docker Enterprise components install and upgrade
 | [Container storage interface (CSI)](/ee/ucp/kubernetes/storage/use-csi/) | UCP | 3.2.0 |
 | [Internet Small Computer System Interface (iSCSI)](/ee/ucp/kubernetes/storage/use-iscsi/) | UCP | 3.2.0 |
 | [System for Cross-domain Identity Management (SCIM)](/ee/ucp/admin/configure/integrate-scim/) | UCP | 3.2.0 |
+| [Pod Security Policies](/ee/ucp/kubernetes/pod-security-policies/) | UCP | 3.2.0 |
 | [Docker Registry CLI (Experimental)](/engine/reference/commandline/registry/) | DTR | 2.7.0 |
 | [App Distribution](/ee/dtr/user/manage-applications/) | DTR | 2.7.0 |
 | [Client certificate-based Authentication](/ee/enable-client-certificate-authentication/) | DTR and UCP|2.7.0 (DTR) and 3.2.0 (UCP)|
