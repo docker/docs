@@ -184,7 +184,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect devtest` to verify that the volume was created and mounted
+Use `docker inspect myvol2` to verify that the volume was created and mounted
 correctly. Look for the `Mounts` section:
 
 ```json
