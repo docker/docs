@@ -127,7 +127,7 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.6"
+      dtr_version: "2.6.8"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -185,7 +185,7 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.7"
+      ucp_version: "3.1.9"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
