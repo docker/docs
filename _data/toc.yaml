@@ -1329,7 +1329,7 @@ manuals:
           title: Install
         - path: /ee/ucp/admin/install/install-offline/
           title: Install offline
-          sectiontitle: Cloud Providers
+        - sectiontitle: Cloud Providers
           section:
           - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/
             title: Install on Azure
