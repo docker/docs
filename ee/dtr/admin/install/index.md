@@ -35,32 +35,43 @@ After you configure all the options, you should see a Docker CLI command that yo
 to install DTR.
 
 ```bash
-docker run -it --rm \
-  {{ page.dtr_org }}/{{ page.dtr_repo }} install \
-  --dtr-external-url dtr-example.com
+$ docker run -it --rm \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
+  --dtr-external-url <dtr.example.com> \
   --ucp-node <ucp-node-name> \
   --ucp-username admin \
   --ucp-url <ucp-url>
 ```
 
-You can run the DTR install command on any node where `docker` is installed. To verify, run `docker version`. 
-Check that your DTR version is compatible with your Engine - Enterprise and UCP versions using the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
+You can run the DTR install command on any node with the Docker Engine
+installed, ensure this node also has connectivity to the UCP Cluster. DTR will
+not be installed on the node you run the install command on. DTR will be
+installed on the ucp worker defined by the `--ucp-node` flag.
 
-As an example, you can SSH into a UCP node and install DTR from there. Running the installation command in interactive TTY or `-it` mode means you will be prompted for any required additional information.
-[Learn more about installing DTR](/reference/dtr/2.7/cli/install/). 
+As an example, you could SSH into a UCP node and run the DTR install command
+from there.  Running the installation command in interactive TTY or `-it` mode
+means you will be prompted for any required additional information.  [Learn
+more about installing DTR](/reference/dtr/2.7/cli/install/). 
 
-To pull a specific version of DTR, run the following:
+To install a specific version of DTR, replace `{{ page.dtr_version }}` with your
+desired version in the [installation command](#step-3-install-dtr) above. Find
+all DTR versions in the [DTR release notes](/ee/dtr/release-notes/) page.
 
-```bash
-docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
-```
-Replace `{{ page.dtr_version }}` with your desired version. Run the [installation command](#step-3-install-dtr) with the image you just pulled.
+DTR is deployed with self-signed certificates by default, so UCP might not be
+able to pull images from DTR. Using the `--dtr-external-url <dtr-domain>:<port>`
+optional flag during installation, or during a reconfiguration, so that UCP is
+automatically reconfigured to trust DTR.
 
-DTR is deployed with self-signed certificates by default, so UCP might not be able to pull images from DTR.
-Use the `--dtr-external-url <dtr-domain>:<port>` optional flag during installation, or during a reconfiguration, so that DTR registers itself with UCP. To verify, see `https://<ucp-fqdn>/manage/settings/dtr` or navigate to **Admin Settings > Docker Trusted Registry** from the UCP web UI. Under the hood, UCP modifies `/etc/docker/certs.d` for each host and adds DTR's CA certificate. UCP can then pull images from DTR because the Docker Engine for each node in the UCP swarm has been configured to trust DTR.
+To verify, see `https://<ucp-fqdn>/manage/settings/dtr` or navigate to **Admin
+Settings > Docker Trusted Registry** from the UCP web UI. Under the hood, UCP
+modifies `/etc/docker/certs.d` for each host and adds DTR's CA certificate. UCP
+can then pull images from DTR because the Docker Engine for each node in the
+UCP swarm has been configured to trust DTR.
 
-Additionally, with DTR 2.7, you can [enable browser authentication via client certificates](/ee/enable-authentication-via-client-certificates/) 
-at install time. This bypasses the DTR login page and hides the logout button, thereby skipping the need for entering your username and password.
+Additionally, with DTR 2.7, you can [enable browser authentication via client
+certificates](/ee/enable-authentication-via-client-certificates/) at install
+time. This bypasses the DTR login page and hides the logout button, thereby
+skipping the need for entering your username and password.
 
 ## Step 4. Check that DTR is running
 

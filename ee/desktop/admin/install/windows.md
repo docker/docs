@@ -89,7 +89,7 @@ You can also set the following properties:
 
 For example:
 
-    msiexec /i DockerDesktop.msi /quiet AUTOSTART=no STARTMENUSHORTCUT=no INSTALLDIR=”D:\Docker Desktop”
+    msiexec /i DockerDesktop.msi /quiet STARTMENUSHORTCUT=no INSTALLDIR=”D:\Docker Desktop”
 
 Docker Desktop Enterprise includes a command line executable to install and uninstall version packs. When you install DDE, the command line tool is installed at the following location:
 

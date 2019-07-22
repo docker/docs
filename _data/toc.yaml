@@ -469,7 +469,7 @@ guides:
       title: NIST ITL Bulletin October 2017
   - sectiontitle: OSCAL
     section:
-    - path: /compliance/oscal
+    - path: /compliance/oscal/
       title: OSCAL compliance guidance
   - sectiontitle: CIS Benchmarks
     section:
@@ -629,6 +629,27 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
+
+    - sectiontitle: docker cluster *
+      section:
+        - path: /engine/reference/commandline/cluster/
+          title: docker cluster
+        - path: /engine/reference/commandline/cluster_backup/
+          title: docker cluster backup
+        - path: /engine/reference/commandline/cluster_create/
+          title: docker cluster create
+        - path: /engine/reference/commandline/cluster_inspect/
+          title: docker cluster inspect
+        - path: /engine/reference/commandline/cluster_ls/
+          title: docker cluster ls
+        - path: /engine/reference/commandline/cluster_restore/
+          title: docker cluster restore
+        - path: /engine/reference/commandline/cluster_rm/
+          title: docker cluster rm
+        - path: /engine/reference/commandline/cluster_update/
+          title: docker cluster update
+        - path: /engine/reference/commandline/cluster_version/
+          title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker config *
@@ -1066,7 +1087,7 @@ reference:
     - path: /reference/dtr/2.7/cli/destroy/
       title: destroy
     - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair7
+      title: emergency-repair
     - path: /reference/dtr/2.7/cli/install/
       title: install
     - path: /reference/dtr/2.7/cli/join/
@@ -1268,102 +1289,25 @@ manuals:
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
-    title: About Docker Enterprise
-  - sectiontitle: Release Notes
-    section:  
-    - path: /ee/release-notes/
-      title: Platform
-    - path: /engine/release-notes/
-      title: Docker Engine - Enterprise and Engine - Community
-      nosync: true
-    - path: /ee/ucp/release-notes/
-      title: Docker Universal Control Plane
-      nosync: true
-    - path: /ee/dtr/release-notes/
-      title: Docker Trusted Registry
-      nosync: true
-    - path: /ee/desktop/release-notes/
-      title: Docker Desktop Enterprise
-      nosync: true
-  - path: /ee/docker-ee-architecture/
-    title: Docker Enterprise Architecture
-  - path: /ee/supported-platforms/
-    title: Supported platforms
-    nosync: true  
-  - sectiontitle: Deploy Docker Enterprise
-    section:
-    - sectiontitle: Docker Cluster
-      section:
-      - path: /cluster/overview/
-        title: Overview
-      - path: /cluster/aws/
-        title: Docker Cluster on AWS
-      - path: /cluster/cluster-file/
-        title: Cluster file structure
-      - path: /cluster/reference/
-        title: Subcommands
-      - path: /cluster/reference/envvars/
-        title: Environment variables
-    - path: /ee/end-to-end-install/
-      title: Install components individually
-  - sectiontitle: Back up Docker Enterprise
-    section:
-    - path: /ee/admin/backup/
-      title: Overview
-    - path: /ee/admin/backup/back-up-swarm/
-      title: Back up Docker Swarm
-    - path: /ee/admin/backup/back-up-ucp/
-      title: Back up UCP
-    - path: /ee/admin/backup/back-up-dtr/
-      title: Back up DTR
-    - path: /cluster/reference/backup/
-      title: Back up clusters with Docker Cluster
-  - sectiontitle: Restore Docker Enterprise
-    section:
-    - path: /ee/admin/restore/
-      title: Overview
-    - path: /ee/admin/restore/restore-swarm/
-      title: Restore Docker Swarm
-    - path: /ee/admin/restore/restore-ucp/
-      title: Restore UCP
-    - path: /ee/admin/restore/restore-dtr/
-      title: Restore DTR 
-    - path: /cluster/reference/restore/
-      title: Restore clusters with Docker Cluster
-  - sectiontitle: Disaster Recovery
-    section:
-    - path: /ee/admin/disaster-recovery/
-      title: Overview
-  - path: /ee/upgrade/
-    title: Upgrade Docker Enterprise
+    title: Overview
+  - path: /ee/release-notes/
+    title: Release notes
   - sectiontitle: Docker Cluster
     section:
-    - path: /cluster/overview/
+    - path: /cluster/
       title: Overview
     - path: /cluster/aws/
       title: Docker Cluster on AWS
     - path: /cluster/cluster-file/
       title: Cluster file structure
-    - path: /cluster/reference/
-      title: Subcommands
     - path: /cluster/reference/envvars/
       title: Environment variables
-    - path: /cluster/reference/ls/
-      title: List clusters
-    - path: /cluster/reference/inspect/
-      title: Inspect clusters
-    - path: /cluster/reference/update/
-      title: Update clusters
-    - path: /cluster/reference/remove/
-      title: Remove clusters
-    - path: /cluster/reference/version/
-      title: Version information  
-  - path: /ee/telemetry/
-    title: Manage usage data collection
+    - path: /cluster/reference/
+      title: Subcommands
   - sectiontitle: Docker Engine - Enterprise
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker Enterprise Engine
+      title: Install Docker Engine - Enterprise
       nosync: true
     - title: Release notes
       path: /engine/release-notes/
@@ -1385,10 +1329,12 @@ manuals:
           title: Install
         - path: /ee/ucp/admin/install/install-offline/
           title: Install offline
-        - path: /ee/ucp/admin/install/install-on-azure/
-          title: Install on Azure
-        - path: /ee/ucp/admin/install/install-on-aws/
-          title: Install on AWS
+        - sectiontitle: Cloud Providers
+          section:
+          - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/
+            title: Install on Azure
+          - path: /ee/ucp/admin/install/cloudproviders/install-on-aws/
+            title: Install on AWS
         - path: /ee/ucp/admin/install/upgrade/
           title: Upgrade
         - path: /ee/ucp/admin/install/upgrade-offline/
@@ -1403,6 +1349,8 @@ manuals:
           title: Add labels to cluster nodes
         - path: /ee/ucp/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
+        - path: /ee/ucp/admin/configure/admission-controllers
+          title: Admission Controllers
         - path: /ee/ucp/admin/configure/collect-cluster-metrics/
           title: Collect UCP cluster metrics with Prometheus
         - path: /ee/ucp/admin/configure/metrics-descriptions/
@@ -1571,7 +1519,7 @@ manuals:
           - title: Securing services with TLS
             path: /ee/ucp/interlock/usage/tls/
           - title: Configuring websockets
-            path: /ee/ucp/interlock/usage/websockets/  
+            path: /ee/ucp/interlock/usage/websockets/
     - sectiontitle: Deploy apps with Kubernetes
       section:
       - title: Access Kubernetes Resources
@@ -1582,16 +1530,12 @@ manuals:
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Using Pod Security Policies
         path: /ee/ucp/kubernetes/pod-security-policies/        
-      - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/layer-7-routing/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install an unmanaged CNI plugin
         path: /ee/ucp/kubernetes/install-cni-plugin/
       - title: Kubernetes network encryption
         path: /ee/ucp/kubernetes/kubernetes-network-encryption/
-      - title: Deploy a CSI plugin
-        path: /ee/ucp/kubernetes/use-csi/
       - sectiontitle: Persistent Storage
         section:
         - title: Use NFS Storage
@@ -1604,6 +1548,20 @@ manuals:
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
+        - title: Deploy a CSI plugin
+          path: /ee/ucp/kubernetes/storage/use-csi/
+      - sectiontitle: Cluster Ingress
+        section:
+        - title: Overview
+          path: /ee/ucp/kubernetes/cluster-ingress/  
+        - title: Install Ingress
+          path: /ee/ucp/kubernetes/cluster-ingress/install/
+        - title: Deploy Simple Application
+          path: /ee/ucp/kubernetes/cluster-ingress/ingress/
+        - title: Deploy a Canary Deployment
+          path: /ee/ucp/kubernetes/cluster-ingress/canary/     
+        - title: Implementing Persistent (sticky) Sessions
+          path: /ee/ucp/kubernetes/cluster-ingress/sticky/
     - title: API reference
       path: /reference/ucp/3.2/api/
       nosync: true
@@ -2386,6 +2344,8 @@ manuals:
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
+          title: Disable persistent cookies
+        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
           title: Enable single sign-on
         - sectiontitle: External storage
           section:
@@ -3337,6 +3297,49 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
+  - sectiontitle: Manage Docker Enterprise
+    section:
+    - path: /ee/docker-ee-architecture/
+      title: Docker Enterprise Architecture
+    - path: /ee/supported-platforms/
+      title: Supported platforms
+      nosync: true  
+    - path: /ee/end-to-end-install/
+      title: Deploy Docker Enterprise
+    - path: /ee/upgrade/
+      title: Upgrade Docker Enterprise
+    - sectiontitle: Back up Docker Enterprise
+      section:
+      - path: /ee/admin/backup/
+        title: Overview
+      - path: /ee/admin/backup/back-up-swarm/
+        title: Back up Docker Swarm
+      - path: /ee/admin/backup/back-up-ucp/
+        title: Back up UCP
+      - path: /ee/admin/backup/back-up-dtr/
+        title: Back up DTR
+      - path: /cluster/reference/backup/
+        title: Back up clusters with Docker Cluster
+    - sectiontitle: Restore Docker Enterprise
+      section:
+      - path: /ee/admin/restore/
+        title: Overview
+      - path: /ee/admin/restore/restore-swarm/
+        title: Restore Docker Swarm
+      - path: /ee/admin/restore/restore-ucp/
+        title: Restore UCP
+      - path: /ee/admin/restore/restore-dtr/
+        title: Restore DTR 
+      - path: /cluster/reference/restore/
+        title: Restore clusters with Docker Cluster
+    - sectiontitle: Disaster Recovery
+      section:
+      - path: /ee/admin/disaster-recovery/
+        title: Overview
+    - path: /ee/enable-client-certificate-authentication/
+      title: Enable client certificate authentication with your PKI
+    - path: /ee/telemetry/
+      title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
 - sectiontitle: Docker Assemble
@@ -3368,6 +3371,12 @@ manuals:
   - path: /app-template/api-reference/
     title: API reference
   - path: /engine/reference/commandline/template/
+    title: CLI reference
+- sectiontitle: Docker Buildx
+  section:
+  - path: /buildx/working-with-buildx/
+    title: Working with Docker Buildx
+  - path: /engine/reference/commandline/buildx/
     title: CLI reference
 - sectiontitle: Docker Compose
   section:
@@ -3671,52 +3680,8 @@ manuals:
           title: Token scope documentation
         - path: /registry/spec/auth/token/
           title: Token authentication specification
-- sectiontitle: Release notes
-  section:
-    - path: /release-notes/
-      title: Overview
-    - sectiontitle: Docker Enterprise Platform
-      section:  
-      - path: /ee/release-notes/
-        title: Platform
-      - path: /engine/release-notes/
-        title: Docker Engine - Enterprise and Engine - Community
-        nosync: true
-      - path: /ee/ucp/release-notes/
-        title: Docker Universal Control Plane
-        nosync: true
-      - path: /ee/dtr/release-notes/
-        title: Docker Trusted Registry
-        nosync: true
-      - path: /ee/desktop/release-notes/
-        title: Docker Desktop Enterprise
-        nosync: true
-    - path: /docker-for-mac/release-notes/
-      title: Docker Desktop for Mac
-      nosync: true
-    - path: /docker-for-windows/release-notes/
-      title: Docker Desktop for Windows
-      nosync: true
-    - path: /release-notes/docker-compose/
-      title: Docker Compose
-      nosync: true
-    - path: /docker-for-aws/release-notes/
-      title: Docker for AWS
-      nosync: true
-    - path: /docker-for-azure/release-notes/
-      title: Docker for Azure
-      nosync: true
-    - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
-      nosync: true
-- sectiontitle: Superseded products and tools
-  section:
-  - path: /cs-engine/1.13/release-notes/
-    title: CS Docker Engine
-  - path: /release-notes/docker-engine/
-    title: Docker (1.13 and earlier)
-  - path: /release-notes/docker-machine/
-    title: Docker Machine
+- path: /release-notes/
+  title: Release notes          
 - sectiontitle: Superseded products and tools
   section:
   - path: /cs-engine/1.13/release-notes/

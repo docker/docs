@@ -8,11 +8,11 @@ redirect_from:
 
 Docker Engine - Enterprise version 17.06 and later includes a telemetry plugin.
 The plugin is enabled by default on Ubuntu starting with Docker Engine - Enterprise 17.06.0
-and on the rest of the EE-supported Linux distributions starting with version
+and on the rest of the Docker Engine - Enterprise supported Linux distributions starting with version
 17.06.2-ee-5. The telemetry plugin is not part of Docker Engine - Enterprise for Windows Server.
 
 The telemetry plugin sends system information to Docker Inc. Docker uses this
-information to improve Docker EE. For details about the telemetry plugin and
+information to improve Docker Engine - Enterprise. For details about the telemetry plugin and
 the types of data it collects, see the
 [`telemetry` plugin documentation](https://hub.docker.com/community/images/docker/telemetry).
 
@@ -27,7 +27,7 @@ plugin, either using the Docker CLI or using Universal Control Plane.
 
 > UCP and CLI
 >
-> If you're using Docker EE Standard or Advanced with Universal Control Plane
+> If you're using Docker Engine - Enterprise with Universal Control Plane
 > (UCP), use UCP to enable and disable metrics. Use the CLI only if you don't
 > have UCP. UCP re-enables the telemetry plugin for hosts where it was
 > disabled with the CLI.
@@ -35,7 +35,7 @@ plugin, either using the Docker CLI or using Universal Control Plane.
 
 ### Use Universal Control Plane
 
-If you use Universal Control Plane with Docker EE, do not use the Docker CLI to
+If you use Universal Control Plane with Docker Engine - Enterprise, do not use the Docker CLI to
 disable the telemetry plugin. Instead, you can manage the information sent to
 Docker by going to **Admin Settings** and choosing **Usage**.
 

@@ -74,6 +74,27 @@ $ docker service create --name helloworld alpine:3.6 ping docker.com
 For more details about image tag resolution, see
 [Specify the image version the service should use](#specify-the-image-version-the-service-should-use).
 
+### gMSA for Swarm
+
+Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
+
+The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
+
+To use a Config as a credential spec, first create the Docker Config containing the credential spec:
+
+
+```bash
+docker config create credspec credspec.json
+```
+
+Now, you should have a Docker Config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:
+
+```bash
+docker service create --credential-spec="config://credspec" <your image>
+```
+
+Your service will use the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec will not be mounted into the container.
+
 ### Create a service using an image on a private registry
 
 If your image is available on a private registry which requires login, use the

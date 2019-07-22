@@ -4,6 +4,14 @@ description: Learn how to install Docker Universal Control Plane in an Amazon We
 keywords: Universal Control Plane, UCP, install, Docker EE, AWS, Kubernetes
 ---
 
+Docker Universal Control Plane (UCP) can be installed on top of AWS without any
+customisation following the UCP [install documentation](./install/). Therefore
+this document is **optional**, however if you are deploying Kubernetes
+workloads with UCP and want to leverage the [AWS kubernetes cloud
+provider](https://github.com/kubernetes/cloud-provider-aws), which provides
+dynamic volume and loadbalancer provisioning then you should follow this guide.
+This guide is not required if you are only deploying swarm workloads.
+
 The requirements for installing UCP on AWS are included in the following sections:
 
 ## Instances

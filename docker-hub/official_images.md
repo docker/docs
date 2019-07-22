@@ -16,7 +16,7 @@ designed to:
   starting point for the majority of users.
 
 * Provide drop-in solutions for popular programming language runtimes, data
-  stores, and other services, similar to what a Platform-as-a-Service (PAAS)
+  stores, and other services, similar to what a Platform as a Service (PAAS)
   would offer.
 
 * Exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/)

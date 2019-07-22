@@ -187,7 +187,7 @@ You can configure options on the Docker daemon that determine how your
 containers run.
 
 Select **Basic** to configure the daemon with interactive settings, or select
-**Advanced** to edit the JSON directly.
+**Advanced** to edit the JSON file directly.
 
 ![Daemon](../images/prefs-daemon-basic.png)
 
@@ -196,7 +196,7 @@ Select **Basic** to configure the daemon with interactive settings, or select
 Docker Desktop Enterprise has experimental features enabled
 on Docker Engine, as described in [Docker Experimental Features](https://github.com/docker/cli/blob/master/experimental/README.md) Readme. If you don't select **Experimental Features**, Docker Desktop Enterprise uses the current generally available release of Docker Engine.
 
-> **Note:** Do not enable experimental features in production. Experimental features are not appropriate for production environments or workloads. They are meant to be sandbox experiments for new ideas.
+> {% include experimental.md %}
 
 You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
@@ -224,9 +224,9 @@ For more information, see:
 Click the **Advanced** tab to configure the daemon from the JSON file. For a
 full list of options, see the Docker Engine [dockerd command line reference](https://docs.docker.com/engine/reference/commandline/dockerd).
 
-Click **Apply & Restart** to save your settings and reboot Docker. Or, to cancel
+Click **Apply & Restart** to save your settings and reboot Docker. To cancel
 changes, click another preference tab, then choose to discard or not apply
-changes when asked.
+changes when prompted.
 
 ![Docker Daemon](../images/prefs-daemon-adv.png)
 
@@ -277,7 +277,7 @@ Click on the Docker icon from the menu bar and then **Preferences**. Click **Res
 
 ![Uninstall or reset Docker](../images/prefs-reset-mac.png)
 
-### Diagnose and Feedback
+### Troubleshoot
 
 The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](/ee/desktop/troubleshoot/mac-issues).
 
@@ -316,7 +316,7 @@ an example.
 $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 
-Or, if you prefer to add the certificate to your own local keychain only (rather
+If you prefer to add the certificate to your own local keychain only (rather
 than for all users), run this command instead:
 
 ```

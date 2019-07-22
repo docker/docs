@@ -19,30 +19,34 @@ Using Docker Cluster is a three-step process:
 
 A `cluster.yml` file resembles the following example:
 
-      variable:
-        region: us-east-2
-        ucp_password:
-          type: prompt
+{% raw %}
+```yaml
+variable:
+  region: us-east-2
+  ucp_password:
+    type: prompt
 
-      provider:
-        aws:
-          region: ${region}
+provider:
+  aws:
+    region: ${region}
 
-      cluster:
-        engine:
-          version: "ee-stable-18.09.5"
-        ucp:
-          version: "docker/ucp:3.1.6"
-          username: "admin"
-          password: ${ucp_password}
+cluster:
+  engine:
+    version: "ee-stable-18.09.5"
+  ucp:
+    version: "docker/ucp:3.1.6"
+    username: "admin"
+    password: ${ucp_password}
 
-      resource:
-        aws_instance:
-          managers:
-            quantity: 1
+resource:
+  aws_instance:
+    managers:
+       quantity: 1
+```
+{% endraw %}
 
 For more information about Cluster files, refer to the
-[Cluster file reference](cluster-file/index.md).
+[Cluster file reference](cluster-file.md).
 
 Docker Cluster has commands for managing the whole lifecycle of your cluster:
 
@@ -52,9 +56,9 @@ Docker Cluster has commands for managing the whole lifecycle of your cluster:
  * View the status of clusters
  * Backup and Restore clusters
 
-## Cluster documentation
+## Cluster reference pages
 
 - [Get started with Docker Cluster on AWS](aws.md)
-- [Command line reference](./reference/index.md)
-- [Cluster file reference](./cluster-file/index.md)
+- [Command line reference](/engine/reference/commandline/cluster/)
+- [Cluster file reference](./cluster-file.md)
 

@@ -1,6 +1,6 @@
 ---
 description: Run certification tests against your images
-keywords: Docker, docker, store, certified content, images
+keywords: Docker, Docker Hub, store, certified content, images
 title: Certify Docker images
 redirect_from:
 - /docker-store/certify-images/
@@ -30,7 +30,7 @@ The `inspectDockerImage` tool does the following:
 
 - Checks if a Linux Docker image is running `supervisord` to launch multiple services.
 
-  > Running `supervisord` in a container is not a best practice for images destined for Doctor Store. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.
+  > Running `supervisord` in a container is not a best practice for images destined for Docker Hub. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.
 
 - Attempts to start a container from the Docker image to ensure that the image is functional.
 
