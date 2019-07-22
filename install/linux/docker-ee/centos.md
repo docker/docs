@@ -44,7 +44,7 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 ### Uninstall old Docker versions
 
-The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker CE to Docker EE, remove the Docker CE package as well.
+The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker Engine - Community to Docker EE, remove the Docker Engine - Community package as well.
 
 ```bash
 $ sudo yum remove docker \

@@ -82,6 +82,7 @@ tablabels:
   engine-18.09: Docker EE Engine 18.09
   engine-18.03: Docker EE Engine 18.03
   engine-17.12: Docker EE Engine 17.12
+  engine-17.09: Docker EE Engine 17.09
   engine-17.06: Docker EE Engine 17.06
   engine-17.03: Docker EE Engine 17.03
   docker-cli-linux: Docker CLI on Mac/Linux
@@ -170,7 +171,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.9"
+      ucp_version: "3.2.0"
   - scope: # This is a bit of a hack for the get-support.md topic.
       path: "ee"
     values:

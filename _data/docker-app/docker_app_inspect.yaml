@@ -1,0 +1,52 @@
+command: docker app inspect
+short: Shows metadata, parameters and a summary of the Compose file for a given application
+long: Shows metadata, parameters and a summary of the Compose file for a given application
+usage: docker app inspect [APP_NAME] [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: insecure-registries
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: parameters-file
+  value_type: stringArray
+  default_value: '[]'
+  description: Override parameters file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: pull
+  value_type: bool
+  default_value: "false"
+  description: Pull the bundle
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: set
+  shorthand: s
+  value_type: stringArray
+  default_value: '[]'
+  description: Override parameter value
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app inspect myapp.dockerapp
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

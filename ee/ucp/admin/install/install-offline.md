@@ -27,7 +27,7 @@ installation will fail.
 Use a computer with internet access to download the UCP package from the
 following links.
 
-{% include components/ddc_url_list_2.html product="ucp" version="3.1" %}
+{% include components/ddc_url_list_2.html product="ucp" version="3.2" %}
 
 ## Download the offline package
 

@@ -363,7 +363,7 @@ branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
 
 ## Creating a new archive
 
-When a new Docker CE Stable version is released, the previous state of `master`
+When a new Docker Engine - Community Stable version is released, the previous state of `master`
 is archived into a version-specific branch like `v17.09`, by doing the following:
 
 1.  Create branch based off the commit hash before the new version was released.

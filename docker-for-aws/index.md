@@ -106,7 +106,7 @@ The number of workers you want in your swarm (0-1000).
 
 ##### ManagerSize
 
-The number of managers in your swarm. On Docker CE, you can select either 1,
+The number of managers in your swarm. On Docker Engine - Community, you can select either 1,
 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There
 are no failover guarantees with 1 manager — if the single manager fails the
 swarm goes down as well. Additionally, upgrading single-manager swarms is not

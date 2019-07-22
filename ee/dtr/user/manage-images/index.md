@@ -4,6 +4,7 @@ description: Learn how to create new repositories in Docker Trusted Registry.
 keywords: registry, repository
 redirect_from:
   - /datacenter/dtr/2.3/guides/user/manage-images/
+  - /ee/dtr/deprecation-notice/
 ---
 
 Since DTR is secure by default, you need to create the image repository before
@@ -42,7 +43,7 @@ name of our repository will be `dtr-example.com/test-user-1/wordpress`.
 
     ![](../../images/create-repository-3.png){: .with-border}
 
-> Immutable Tags and Tag Limit
+> Immutable tags and tag limit
 >
 > Starting in DTR 2.6, repository admins can enable tag pruning by [setting a tag limit](../tag-pruning/#set-a-tag-limit). This can only be set if you turn off **Immutability** and allow your repository tags to be overwritten. 
 
@@ -53,6 +54,11 @@ name of our repository will be `dtr-example.com/test-user-1/wordpress`.
 > The 56-character `<user-or-org/repository-name>` limit in DTR is due to an underlying limitation in how the image name information is stored within DTR metadata in RethinkDB.  RethinkDB currently has a Primary Key length limit of 127 characters.
 >
 > When DTR stores the above data it appends a sha256sum comprised of 72 characters to the end of the value to ensure uniqueness within the database.  If the `<user-or-org/repository-name>` exceeds 56 characters it will then exceed the 127 character limit in RethinkDB (72+56=128).
+{: .important}
+
+> Multi-architecture images
+>
+> While you can enable just-in-time creation of multi-archictecture image repositories when creating a repository via the API, Docker does not recommend using this option. This breaks content trust and [causes other issues](/ee/dtr/release-notes/#264). To manage Docker image manifests and manifest lists, use the experimental CLI command, [docker manifest](/engine/reference/commandline/manifest/), instead.
 {: .important}
 
 ## Where to go next
