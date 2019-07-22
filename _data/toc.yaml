@@ -1410,7 +1410,7 @@ manuals:
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
       - title: CLI reference
-        path: /reference/ucp/3.1/cli/
+        path: /reference/ucp/3.2/cli/
         nosync: true
     - sectiontitle: Authorize role-based access
       section:
