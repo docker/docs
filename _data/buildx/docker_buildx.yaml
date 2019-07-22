@@ -1,0 +1,33 @@
+command: docker buildx
+short: Build with BuildKit
+long: Build with BuildKit
+pname: docker
+plink: docker.yaml
+cname:
+- docker buildx bake
+- docker buildx build
+- docker buildx create
+- docker buildx imagetools
+- docker buildx inspect
+- docker buildx ls
+- docker buildx rm
+- docker buildx stop
+- docker buildx use
+- docker buildx version
+clink:
+- docker_buildx_bake.yaml
+- docker_buildx_build.yaml
+- docker_buildx_create.yaml
+- docker_buildx_imagetools.yaml
+- docker_buildx_inspect.yaml
+- docker_buildx_ls.yaml
+- docker_buildx_rm.yaml
+- docker_buildx_stop.yaml
+- docker_buildx_use.yaml
+- docker_buildx_version.yaml
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

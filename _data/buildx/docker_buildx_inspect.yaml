@@ -1,0 +1,22 @@
+command: docker buildx inspect
+short: Inspect current builder instance
+long: Inspect current builder instance
+usage: docker buildx inspect [NAME]
+pname: docker buildx
+plink: docker_buildx.yaml
+options:
+- option: bootstrap
+  value_type: bool
+  default_value: "false"
+  description: Ensure builder has booted before inspecting
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

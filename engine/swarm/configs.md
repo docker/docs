@@ -43,6 +43,10 @@ examples below. Keep the following notable differences in mind:
   UID, GID, and mode are not supported for configs. Configs are currently only
   accessible by administrators and users with `system` access within the
   container.
+  
+- On Windows, create or update a service using `--credential-spec` with the `config://<config-name>` format. 
+This passes the gMSA credentials file directly to nodes before a container starts. No gMSA credentials are written 
+to disk on worker nodes. For more information, refer to [Deploy services to a swarm](/engine/swarmservices/).
 
 ## How Docker manages configs
 

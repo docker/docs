@@ -1,0 +1,22 @@
+command: docker app list
+aliases: ls
+short: List the installations and their last known installation result
+long: List the installations and their last known installation result
+usage: docker app list [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: target-context
+  value_type: string
+  description: List installations on this context
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

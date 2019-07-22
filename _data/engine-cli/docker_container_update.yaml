@@ -126,6 +126,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: pids-limit
+  value_type: int64
+  default_value: "0"
+  description: Tune container pids limit (set -1 for unlimited)
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: restart
   value_type: string
   description: Restart policy to apply when a container exits
