@@ -23,7 +23,7 @@ upgrade your installation to the latest release.
 **Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
-(2019-7-10)
+(2019-7-22)
 
 ### New features
 

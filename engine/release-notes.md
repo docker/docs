@@ -30,7 +30,8 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
-## 19.03.0 (2019-07-10)
+## 19.03.0 
+2019-07-22
 
 ### Builder
 
