@@ -25,28 +25,30 @@ upgrade your installation to the latest release.
 # Version 3.2
 (2019-7-22)
 
+### Security
+Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates, issues, and recommendations.
+
 ### New features
 
-- Group Managed Service Accounts (gMSA)
-On Windows, you can create or update a service using --credential-spec with the config://<config-name> format.
+- Group Managed Service Accounts (gMSA). 
+On Windows, you can create or update a service using ```--credential-spec``` with the ```config://<config-name>``` format.
 This passes the gMSA credentials file directly to nodes before a container starts.
-- Open Security Controls Assessment Language (OSCAL)
+- Open Security Controls Assessment Language (OSCAL). 
 OSCAL API endpoints have been added in Engine and UCP. These endpoints are enabled by default.
-- Container storage interface (CSI)
+- Container storage interface (CSI). 
 Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins.
-Note: As of May 2019, none of the
-(available CSI drivers)[https://kubernetes-csi.github.io/docs/drivers.html] are production quality and are considered pre-GA.
-- Internet Small Computer System Interface (iSCSI)
+Note: As of May 2019, none of the [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) are production quality and are considered pre-GA.
+- Internet Small Computer System Interface (iSCSI). 
 Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end
 users can request storage resources without needing underlying infrastructure knowledge.
-- System for Cross-domain Identity Management (SCIM)
+- System for Cross-domain Identity Management (SCIM). 
 SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing
 user status and group membership.
-- Support for Pod Security Policies (PSPs) within Kubernetes
+- Support for Pod Security Policies (PSPs) within Kubernetes. 
 Pod Security Policies are enabled by default in UCP 3.2 allowing platform
 operators to enforce security controls on what can run on top of Kubernetes. For
 more information see
-[Using Pod Security](/ee/ucp/kubernetes/pod-security-policies/)
+[Using Pod Security](/ee/ucp/kubernetes/pod-security-policies/).
 - Client Cert-based Authentication
     - Users can now use UCP client bundles for DTR authentication.
     - Users can now add their client certificate and key to their local Engine for performing pushes and pulls without logging in.

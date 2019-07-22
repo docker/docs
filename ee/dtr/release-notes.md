@@ -23,6 +23,9 @@ to upgrade your installation to the latest release.
 ## Version 2.7.0
 (2019-7-22)
 
+### Security
+Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken and any status updates, issues, and recommendations.
+
 ### New Features
 
 * **Web Interface**
