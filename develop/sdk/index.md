@@ -29,6 +29,9 @@ installed and coexist together.
 ```bash
 go get github.com/docker/docker/client
 ```
+The client requires a recent version of Go. Run `go version` and ensure that you 
+are running at least version 1.9.4 of Go
+
 
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 
@@ -125,10 +128,10 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
-### Docker EE and CE API mismatch
+### Docker Engine - Enterprise and Docker Engine - Community API mismatch
 
-If you use Docker EE in production, we recommend using Docker EE in development
-too. If you can't, such as when your developers use Docker for Mac or Docker for
+If you use Docker Engine - Enterprise in production, we recommend using Docker Engine - Enterprise in development
+too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for
 Windows and manually build and push images, then your developers need to configure
 their Docker clients to use the same version of the API reported by their Docker
 daemon. This prevents the developer from using a feature that is not yet supported
@@ -177,28 +180,28 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-    "io"
+    "context"
     "os"
 
     "github.com/docker/docker/client"
     "github.com/docker/docker/api/types"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/pkg/stdcopy"
-
-    "golang.org/x/net/context"
 )
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewEnvClient()
+    cli, err := client.NewClientWithOpts(client.FromEnv)
     if err != nil {
         panic(err)
     }
+    cli.NegotiateAPIVersion(ctx)
 
-    _, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {
         panic(err)
     }
+    io.Copy(os.Stdout, reader)
 
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",

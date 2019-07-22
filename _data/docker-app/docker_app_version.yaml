@@ -1,0 +1,12 @@
+command: docker app version
+short: Print version information
+long: Print version information
+usage: docker app version
+pname: docker app
+plink: docker_app.yaml
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

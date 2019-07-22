@@ -10,14 +10,12 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 {% endcomment %}
 
 {% if platform == "mac" %}
-  {% assign product = "Docker for Mac" %}
+  {% assign product = "Docker Desktop for Mac" %}
 
-  {% capture min-version %}{{ product }} 17.12 CE{% endcapture %}
-  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
+  {% capture min-version %}{{ product }} 18.06.0-ce-mac70 CE{% endcapture %}
 
   {% capture version-caveat %}
-    **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
-
+  **Kubernetes is only available in {{ min-version }} and higher.**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -31,26 +29,23 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% assign kubectl-path = "/usr/local/bin/kubectl" %}
 
 {% elsif platform == "windows" %}
-  {% assign product = "Docker for Windows" %}
+  {% assign product = "Docker Desktop for Windows" %}
 
-  {% capture min-version %}{{ product }} 18.02 CE{% endcapture %}
-  {% capture min-stable-version %}{{ product }} 18.06 CE{% endcapture %}
+  {% capture min-version %}{{ product }} 18.06.0-ce-win70 CE{% endcapture %}
 
   {% capture version-caveat %}
-  **Kubernetes is only available in {{ min-version }} and higher on the Edge channel, and in {{ in-stable-version }} and higher in the Stable channel**
+  **Kubernetes is only available in {{ min-version }} and higher.**
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
-If you installed `kubectl` by another method, and experience conflicts, remove it.
+  If you installed `kubectl` by another method, and experience conflicts, remove it.
   {% endcapture %}
 
   {% assign kubectl-path = "C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe" %}
 
 {% endif %}
 
-{{ version-caveat }} To find out more about Stable and Edge channels and how to
-switch between them, see
-[General configuration](/docker-for-{{ platform }}/#general).
+{{ version-caveat }}
 
 {{ min-version }} includes a standalone Kubernetes server and client,
 as well as Docker CLI integration. The Kubernetes server runs locally within
@@ -95,7 +90,7 @@ Run `kubectl get services -n my-app` to see only the services deployed in the
 ### Override the default orchestrator
 
 While testing Kubernetes, you may want to deploy some workloads in swarm mode.
-Use the `DOCKER_ORCHESTRATOR` variable to override the default orchestrator for
+Use the `DOCKER_STACK_ORCHESTRATOR` variable to override the default orchestrator for
 a given terminal session or a single Docker command. This variable can be unset
 (the default, in which case Kubernetes is the orchestrator) or set to `swarm` or
 `kubernetes`. The following command overrides the orchestrator for a single
@@ -103,16 +98,23 @@ deployment, by setting the variable{% if platform == "mac"" %}
 at the start of the command itself.
 
 ```bash
-DOCKER_ORCHESTRATOR=swarm docker stack deploy --compose-file /path/to/docker-compose.yml mystack
+DOCKER_STACK_ORCHESTRATOR=swarm docker stack deploy --compose-file /path/to/docker-compose.yml mystack
 ```{% elsif platform == "windows" %}
 before running the command.
 
 ```shell
-set DOCKER_ORCHESTRATOR=swarm
+set DOCKER_STACK_ORCHESTRATOR=swarm
 docker stack deploy --compose-file /path/to/docker-compose.yml mystack
 ```
 
 {% endif %}
+
+Alternatively, the `--orchestrator` flag may be set to `swarm` or `kubernetes`
+when deploying to override the default orchestrator for that deployment.
+
+```bash
+docker stack deploy --orchestrator swarm --compose-file /path/to/docker-compose.yml mystack
+```
 
 > **Note**: Deploying the same app in Kubernetes and swarm mode may lead to
 > conflicts with ports and service names.
@@ -143,28 +145,23 @@ version: '3.3'
 
 services:
   web:
-    build: web
-    image: dockerdemos/lab-web
-    volumes:
-     - "./web/static:/static"
+    image: dockersamples/k8s-wordsmith-web
     ports:
      - "80:80"
 
   words:
-    build: words
-    image: dockerdemos/lab-words
+    image: dockersamples/k8s-wordsmith-api
     deploy:
       replicas: 5
       endpoint_mode: dnsrr
       resources:
         limits:
-          memory: 16M
+          memory: 50M
         reservations:
-          memory: 16M
+          memory: 50M
 
   db:
-    build: db
-    image: dockerdemos/lab-db
+    image: dockersamples/k8s-wordsmith-db
 ```
 
 If you already have a Kubernetes YAML file, you can deploy it using the

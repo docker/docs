@@ -262,8 +262,8 @@ In this step, you install the keys on the relevant servers in the
 infrastructure. Each server needs three files:
 
 - A copy of the Certificate Authority's public key (`ca.pem`)
-- It's own private key
-- It's own public key (cert)
+- Its own private key
+- Its own public key (cert)
 
 The procedure below shows you how to copy these files from the CA server to each
 server using `scp`. As part of the copy procedure, rename each file as
@@ -543,7 +543,7 @@ do this for the `ubuntu` user on your Docker Engine client.
 
 Congratulations! You have configured a Docker swarm cluster to use TLS.
 
-## Related Information
+## Related information
 
 * [Secure Docker Swarm with TLS](secure-swarm-tls.md)
 * [Docker security](/engine/security/security/)

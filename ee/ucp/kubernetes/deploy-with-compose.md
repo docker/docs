@@ -16,77 +16,58 @@ true Kubernetes app.
 
 To deploy a stack to Kubernetes, you need a namespace for the app's resources.
 Contact your Docker EE administrator to get access to a namespace. In this
-example, the namespace has the name `lab-words`.
-[Learn to grant access to a Kubernetes namespace](../authorization/grant-permissions/#kubernetes-grants).
+example, the namespace is called `labs`.
+[Learn how to grant access to a Kubernetes namespace](../authorization/grant-permissions/#kubernetes-grants).
 
 ## Create a Kubernetes app from a Compose file
 
 In this example, you create a simple app, named "lab-words", by using a Compose
-file. The following yaml defines the stack:
+file. This assumes you are deploying onto a cloud infrastructure. The following YAML defines the stack:
 
 ```yaml
 version: '3.3'
 
 services:
   web:
-    build: web
-    image: dockerdemos/lab-web
-    volumes:
-     - "./web/static:/static"
+    image: dockersamples/k8s-wordsmith-web
     ports:
-     - "80:80"
+     - "8080:80"
 
   words:
-    build: words
-    image: dockerdemos/lab-words
+    image: dockersamples/k8s-wordsmith-api
     deploy:
       replicas: 5
-      endpoint_mode: dnsrr
-      resources:
-        limits:
-          memory: 16M
-        reservations:
-          memory: 16M
 
   db:
-    build: db
-    image: dockerdemos/lab-db
+    image: dockersamples/k8s-wordsmith-db
 ```
 
-1.  Open the UCP web UI, and in the left pane, click **Shared resources**.
-2.  Click **Stacks**, and in the **Stacks** page, click **Create stack**.
-3.  In the **Name** textbox, type "lab-words".
-4.  In the **Mode** dropdown, select **Kubernetes workloads**.
-5.  In the **Namespace** drowdown, select **lab-words**.
-6.  In the **docker-compose.yml** editor, paste the previous YAML.
-7.  Click **Create** to deploy the stack.
+1.  In your browser, log in to `https://<ucp-url>`. Navigate to **Shared Resources > Stacks**.
+2.  Click **Create Stack** to open up the "Create Application" page.
+3.  Under "Configure Application", type "lab-words" for the application name.
+4.  Select **Kubernetes Workloads** for **Orchestrator Mode**.
+5.  In the **Namespace** drowdown, select "labs".
+6.  Under "Application File Mode", leave **Compose File** selected and click **Next**.
+7.  Paste the previous YAML, then click **Create** to deploy the stack.
+    ![](../images/deploy-compose-kubernetes-0.png){: .with-border}
+
+
 
 ## Inspect the deployment
 
 After a few minutes have passed, all of the pods in the `lab-words` deployment
 are running.
 
-1.  In the left pane, click **Pods**. Confirm that there are seven pods and
-    that their status is **Running**. If any have a status of **Pending**,
-    wait until they're all running.
-2.  Click one of the pods that has a name starting with **words**, and in the
-    details pane, scroll down to the **Pod IP** to view the pod's internal IP
-    address.
-
-    ![](../images/deploy-compose-kubernetes-1.png){: .with-border}
-
-3.  In the left pane, click **Load balancers** and find the **web-published** service.
-4.  Click the **web-published** service, and in the details pane, scroll down to the
-    **Spec** section.
-5.  Under **Ports**, click the URL to open the web UI for the `lab-words` app.
+1.  Navigate to **Kubernetes > Pods**. Confirm that there are seven pods and
+    that their status is **Running**. If any pod has a status of **Pending**,
+    wait until every pod is running.
+2.  Next, select **Kubernetes > Load balancers** and find the **web-published** service.
+4.  Click the **web-published** service, and scroll down to the
+    **Ports** section.
+5.  Under **Ports**, grab the Node Port information.
 
     ![](../images/deploy-compose-kubernetes-2.png){: .with-border}
 
-6.  Look at the IP addresses that are displayed in each tile. The IP address
-    of the pod you inspected previously may be listed. If it's not, refresh the
-    page until you see it.
+6.  In a new tab or window, enter your cloud instance public IP Address and append `:<NodePort>` from the previous step. For example, to find the public IP address of an EC2 instance, refer to [Amazon EC2 Instance IP Addressing](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-instance-addressing.html#concepts-public-addresses). The app is displayed. 
 
     ![](../images/deploy-compose-kubernetes-3.png){: .with-border}
-
-7.  Refresh the page to see how the load is balanced across the pods.
-

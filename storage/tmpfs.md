@@ -29,7 +29,7 @@ persist in either the host or the container writable layer.
 containers.
 * This functionality is only available if you're running Docker on Linux.
 
-## Choosing the --tmpfs or --mount flag
+## Choose the --tmpfs or --mount flag
 
 Originally, the `--tmpfs` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker

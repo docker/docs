@@ -27,12 +27,12 @@ cgroups: |
 
   *Also known as : control groups*
 collection: |
-  A collection is a group of swarm resources that Docker EE uses for role-based
+  A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
   nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 Compose: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
-  running complex applications with Docker. With compose, you define a
+  running complex applications with Docker. With Compose, you define a
   multi-container application in a single file, then spin your
   application up in a single command which does everything that needs to
   be done to get it running.
@@ -76,29 +76,29 @@ Docker: |
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
-Docker Enterprise Edition: |
-  Docker Enterprise Edition (Docker EE) is a platform to build, ship, and run
+Docker Enterprise: |
+  Docker Enterprise is a platform to build, ship, and run
   containerized applications, that you can deploy in the cloud or on-premise. It
   includes a tested and certified version of Docker, web UIs for managing
   your app resources, and support.
-Docker for Mac: |
-  [Docker for Mac](/docker-for-mac/) is an easy-to-install, lightweight
+Docker Desktop for Mac: |
+  [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
-  Mac application, Docker for Mac uses the macOS Hypervisor
+  Mac application, Docker Desktop for Mac uses the macOS Hypervisor
   framework, networking, and filesystem. It's the best solution if you want
   to build, debug, test, package, and ship Dockerized applications on a
-  Mac. Docker for Mac supersedes [Docker Toolbox](#toolbox) as
+  Mac. Docker Desktop for Mac supersedes [Docker Toolbox](#toolbox) as
   state-of-the-art Docker on macOS.
-Docker for Windows: |
-  [Docker for Windows](/docker-for-windows/) is an
+Docker Desktop for Windows: |
+  [Docker Desktop for Windows](/docker-for-windows/) is an
   easy-to-install, lightweight Docker development environment designed
   specifically for Windows 10 systems that support Microsoft Hyper-V
-  (Professional, Enterprise and Education). Docker for Windows uses Hyper-V for
+  (Professional, Enterprise and Education). Docker Desktop for Windows uses Hyper-V for
   virtualization, and runs as a native Windows app. It works with Windows Server
   2016, and gives you the ability to set up and run Windows containers as well as
   the standard Linux containers, with an option to switch between the two. Docker
   for Windows is the best solution if you want to build, debug, test, package, and
-  ship Dockerized applications from Windows machines. Docker for Windows
+  ship Dockerized applications from Windows machines. Docker Desktop for Windows
   supersedes [Docker Toolbox](#toolbox) as state-of-the-art Docker on Windows.
 Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
@@ -152,7 +152,7 @@ filesystem: |
   - macOS : HFS+
 grant: |
   A grant enables role-based access control for managing how users and
-  organizations access Docker EE swarm resources. A grant is made up of a
+  organizations access Docker Engine - Enterprise swarm resources. A grant is made up of a
   subject, a role, and a collection. For more about grants and role-based access
   control, see [Grant permissions to users based on roles](/datacenter/ucp/2.2/guides/access-control/grant-permissions/).
 image: |
@@ -163,8 +163,8 @@ image: |
   does not have state and it never changes.
 Kitematic: |
   A legacy GUI, bundled with [Docker Toolbox](#toolbox), for managing Docker
-  containers. We recommend upgrading to [Docker for Mac](#docker for Mac) or
-  [Docker for Windows](#docker for Windows), which have superseded Kitematic.
+  containers. We recommend upgrading to [Docker Desktop for Mac](#docker for Mac) or
+  [Docker Desktop for Windows](#docker for Windows), which have superseded Kitematic.
 layer: |
   In an image, a layer is modification to the image, represented by an instruction in the
   Dockerfile. Layers are applied in sequence to the base image to create the final image.
@@ -233,12 +233,12 @@ repository: |
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
 role: |
-  A role is a set of permitted API operations on a collection of Docker EE swarm
+  A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm
   resources. As part of a grant, a role is assigned to a subject (a user, team, or
   organization) and a collection. For more about roles, see [Roles and
   permission levels](/datacenter/ucp/2.2/guides/access-control/permission-levels/).
 role-based access control: |
-  Role-based access control enables managing how Docker EE users can access
+  Role-based access control enables managing how Docker Engine - Enterprise users can access
   swarm resources. UCP administrators create grants to control how users access
   resource collections. A grant is made up of a subject, a role, and a collection.
   A grant defines who (subject) has how much access (role) to a set of resources
@@ -271,7 +271,7 @@ service discovery: |
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
 subject: |
-  A subject represents a user, team, or organization in Docker EE. A subject is
+  A subject represents a user, team, or organization in Docker Enterprise. A subject is
   granted a role for access to a collection of swarm resources.
   For more about role-based access, see [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 swarm: |
@@ -309,11 +309,11 @@ Toolbox: |
   installer for Mac and Windows users. It uses Oracle VirtualBox for
   virtualization.
 
-  For Macs running OS X El Capitan 10.11 and newer macOS releases, [Docker for
+  For Macs running OS X El Capitan 10.11 and newer macOS releases, [Docker Desktop for
   Mac](/docker-for-mac/) is the better solution.
 
   For Windows 10 systems that support Microsoft Hyper-V (Professional, Enterprise
-  and Education), [Docker for
+  and Education), [Docker Desktop for
   Windows](/docker-for-windows/) is the better solution.
 Union file system: |
   Union file systems implement a [union

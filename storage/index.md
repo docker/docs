@@ -9,7 +9,7 @@ redirect_from:
 By default all files created inside a container are stored on a writable
 container layer. This means that:
 
-- The data doesn't persist when that container is no longer running, and it can be
+- The data doesn't persist when that container no longer exists, and it can be
   difficult to get the data out of the container if another process needs it.
 - A container's writable layer is tightly coupled to the host machine
   where the container is running. You can't easily move the data somewhere else.
@@ -105,7 +105,7 @@ mounts is to think about where the data lives on the Docker host.
   mount can be used for communication between the Docker host and a container. Common use case is
   to run a third-party tool inside of a container and connect to the Docker Engine API using a named pipe.
 
-Bind mounts and volumes can both mounted into containers using the `-v` or
+Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
 mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
 we recommend using the `--mount` flag for both containers and services, for

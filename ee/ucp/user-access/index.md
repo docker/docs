@@ -13,14 +13,14 @@ way, from your browser.
 
 
 Docker UCP secures your cluster by using
-[role-based access control](../../access-control/index.md).
+[role-based access control](../authorization/index.md).
 From the browser, administrators can:
 
 * Manage cluster configurations,
 * Manage the permissions of users, teams, and organizations,
 * See all images, networks, volumes, and containers.
 * Grant permissions to users for scheduling tasks on specific nodes
-  (with the Docker EE Advanced license).  
+  (with the Docker Enterprise license).  
 
 ![](../images/web-based-access-2.png){: .with-border}
 

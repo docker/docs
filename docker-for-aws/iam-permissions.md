@@ -9,8 +9,6 @@ The following IAM permissions are required to use Docker for AWS.
 Before you deploy Docker for AWS, your account needs these permissions for the stack to deploy correctly.
 If you create and use an IAM role with these permissions for creating the stack, CloudFormation uses the role's permissions instead of your own, using the AWS CloudFormation Service Role feature.
 
-For instructions, see [Link Amazon Web Services to Docker Cloud](/docker-cloud/cloud-swarm/link-aws-swarm/).
-
 This feature is called [AWS CloudFormation Service Role](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console)
 follow the link for more information.
 

@@ -16,7 +16,7 @@ you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
 command to add more nodes to your cluster. When joining new nodes, the UCP
 services automatically start running in that node.
 
-When joining a node a a cluster you can specify its role: manager or worker.
+When joining a node a cluster you can specify its role: manager or worker.
 
 * **Manager nodes**
 

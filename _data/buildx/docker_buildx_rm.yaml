@@ -1,0 +1,12 @@
+command: docker buildx rm
+short: Remove a builder instance
+long: Remove a builder instance
+usage: docker buildx rm [NAME]
+pname: docker buildx
+plink: docker_buildx.yaml
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

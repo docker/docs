@@ -13,7 +13,7 @@ is called _live restore_. The live restore option helps reduce container
 downtime due to daemon crashes, planned outages, or upgrades.
 
 > **Note**: Live restore is not supported on Windows containers, but it does work
-for Linux containers running on Docker for Windows.
+for Linux containers running on Docker Desktop for Windows.
 
 ## Enable live restore
 
@@ -21,7 +21,7 @@ There are two ways to enable the live restore setting to keep containers alive
 when the daemon becomes unavailable. **Only do one of the following**.
 
 * Add the configuration to the daemon configuration file. On Linux, this
-  defaults to `/etc/docker/daemon.json`. On Docker for Mac or Docker for Windows,
+  defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker Desktop for Windows,
   select the Docker icon from the task bar, then click
   **Preferences** -> **Daemon** -> **Advanced**.
 
@@ -34,7 +34,7 @@ when the daemon becomes unavailable. **Only do one of the following**.
     ```
 
   - Restart the Docker daemon. On Linux, you can avoid a restart (and avoid any
-    downtime for your containers) by reload the Docker daemon. If you use
+    downtime for your containers) by reloading the Docker daemon. If you use
     `systemd`, then use the command `systemctl reload docker`. Otherwise, send a
     `SIGHUP` signal to the `dockerd` process.
 
@@ -67,8 +67,8 @@ data. The default buffer size is 64K. If the buffers fill, you must restart
 the Docker daemon to flush them.
 
 On Linux, you can modify the kernel's buffer size by changing
-`/proc/sys/fs/pipe-max-size`. You cannot modify the buffer size on Docker for
-Mac or Docker for Windows.
+`/proc/sys/fs/pipe-max-size`. You cannot modify the buffer size on Docker Desktop for
+Mac or Docker Desktop for Windows.
 
 ## Live restore and swarm mode
 

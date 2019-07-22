@@ -6,10 +6,10 @@ title: Machine drivers
 
 -   [Amazon Web Services](aws.md)
 -   [Microsoft Azure](azure.md)
--   [Digital Ocean](digital-ocean.md)
+-   [DigitalOcean](digital-ocean.md)
 -   [Exoscale](exoscale.md)
 -   [Google Compute Engine](gce.md)
--   [Generic](generic.md)
+-   [Linode](linode.md) (unofficial plugin, not supported by Docker)
 -   [Microsoft Hyper-V](hyper-v.md)
 -   [OpenStack](openstack.md)
 -   [Rackspace](rackspace.md)
@@ -20,3 +20,4 @@ title: Machine drivers
 -   [VMware vSphere](vsphere.md)
 -   [VMware Workstation](https://github.com/pecigonzalo/docker-machine-vmwareworkstation) (unofficial plugin, not supported by Docker)
 -   [Grid 5000](https://github.com/Spirals-Team/docker-machine-driver-g5k) (unofficial plugin, not supported by Docker)
+-   [Scaleway](https://github.com/scaleway/docker-machine-driver-scaleway) (unofficial plugin, not supported by Docker)

@@ -18,9 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We start at the bottom of
-the hierarchy of such an app, which is a container, which we cover on this page.
-Above this level is a service, which defines how containers behave in
+It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
 stack, defining the interactions of all the services, covered in
 [Part 5](part5.md).
@@ -56,7 +54,7 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. Change directories (`cd`) into the new directory,
+Create an empty directory on your local machine. Change directories (`cd`) into the new directory,
 create a file called `Dockerfile`, copy-and-paste the following content into
 that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
@@ -149,7 +147,8 @@ you have.
 
 ## Build the app
 
-We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
+We are ready to build the app. Make sure you are still at the top level of your
+new directory. Here's what `ls` should show:
 
 ```shell
 $ ls
@@ -157,10 +156,10 @@ Dockerfile		app.py			requirements.txt
 ```
 
 Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name.
+name using the `--tag` option. Use `-t` if you want to use the shorter option.
 
 ```shell
-docker build -t friendlyhello .
+docker build --tag=friendlyhello .
 ```
 
 Where is your built image? It's in your machine's local Docker image registry:
@@ -172,6 +171,11 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 
 ```
+
+Note how the tag defaulted to `latest`. The full syntax for the tag option would
+be something like `--tag=friendlyhello:v0.0.1`.
+
+
 >  Troubleshooting for Linux users
 >
 > _Proxy server settings_
@@ -201,7 +205,7 @@ friendlyhello         latest              326387cea398
 > ```
 >
 > In the example above, the first element of the list is the address of your DNS
-> server. The second item is the Google's DNS which can be used when the first one is
+> server. The second item is Google's DNS which can be used when the first one is
 > not available.
 >
 > Before proceeding, save `daemon.json` and restart the docker service.
@@ -317,7 +321,7 @@ The notation for associating a local image with a repository on a registry is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
 `get-started:part2`. This puts the image in the `get-started` repository and
-tag it as `part2`.
+tags it as `part2`.
 
 Now, put it all together to tag the image. Run `docker tag image` with your
 username, repository, and tag names so that the image uploads to your
@@ -398,6 +402,7 @@ application by running this container in a **service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
+Or, learn how to [launch your container on your own machine using DigitalOcean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 
 ## Recap and cheat sheet (optional)
 
@@ -413,7 +418,7 @@ ones if you'd like to explore a bit before moving on.
 
 ```shell
 docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -p 4000:80 friendlyhello  # Run "friendlyhello" mapping port 4000 to 80
 docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
 docker container ls                                # List all running containers
 docker container ls -a             # List all containers, even those not running

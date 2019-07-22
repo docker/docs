@@ -1,10 +1,10 @@
 ---
 title: Get support
-description: Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.
+description: Your Docker Enterprise subscription gives you access to prioritized support. You can file tickets via email or the support portal.
 keywords: support, help
 ---
 
-Your Docker Enterprise Edition subscription gives you access to prioritized
+Your Docker Enterprise subscription gives you access to prioritized
 support. The service levels depend on your subscription.
 
 Before reaching out to Docker Support, make sure you're listed as an authorized
@@ -35,11 +35,12 @@ To get the support dump from the Web UI:
 To get the support dump from the CLI, use SSH to log into a node and run:
 
 ```bash
+UCP_VERSION=$((docker container inspect ucp-proxy --format {% raw %}'{{index .Config.Labels "com.docker.ucp.version"}}'{% endraw %} 2>/dev/null || echo -n {{ page.ucp_version  }})|tr -d [[:space:]])
 docker container run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --log-driver none \
-  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:${UCP_VERSION} \
   support > \
   docker-support-${HOSTNAME}-$(date +%Y%m%d-%H_%M_%S).tgz
 ```

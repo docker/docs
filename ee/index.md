@@ -1,53 +1,51 @@
 ---
-title: Docker Enterprise Edition Platform
-description: Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
-keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
+title: Docker Enterprise
+description: Learn about Docker Enterprise, the enterprise-grade cluster management solution from Docker.
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
   - /manuals/
 ---
 
-Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
-Containers-as-a-Service (CaaS) platform that enables a secure software supply
+Docker Enterprise is a Containers as a Service (CaaS) platform that enables a secure software supply
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
-Docker Enterprise Edition is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+Docker Enterprise is a secure, scalable, and supported container platform for building and 
+orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 
-Docker EE enables deploying your workloads for high availability (HA) onto the
-orchestrator of your choice. Docker EE automates many of the tasks that
+Docker Enterprise enables deploying your workloads for high availability (HA) onto the
+orchestrator of your choice. Docker Enterprise automates many of the tasks that
 orchestration requires, like provisioning pods, containers, and cluster
-resources. Self-healing components ensure that Docker EE clusters remain highly
+resources. Self-healing components ensure that Docker Enterprise clusters remain highly
 available.
 
-Role-based access control applies to Kubernetes and Swarm orchestrators, and
+Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
 communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
 
-Docker EE Platform includes Docker Universal Control Plane (UCP), the
-enterprise-grade cluster management solution from Docker. You install it
+Docker Enterprise includes Docker Universal Control Plane (UCP), the
+cluster management solution from Docker. You install it
 on-premises or in your virtual private cloud, and it helps you manage your
 cluster and applications through a single interface.
 
 ![](images/docker-ee-overview-1.png){: .with-border}
 
-## Docker Enterprise Edition features
+## Docker Enterprise features
 
-Docker EE Platform provides multi-architecture orchestration for Kubernetes and
-Swarm workloads. Docker EE enables a secure software supply chain, with image
+Docker Enterprise provides multi-architecture orchestration for Kubernetes and
+Swarm workloads. Docker Enterprise enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
 
 ### Kubernetes support
 
-Kubernetes in Docker EE fully supports all Docker EE features, including
+Kubernetes in Docker Enterprise fully supports all Docker Enterprise features, including
 role-based access control, LDAP/AD integration, scanning, signing enforcement,
 and security policies.
 
-Kubernetes features on Docker EE include:
+Kubernetes features on Docker Enterprise include:
 
 - Kubernetes orchestration full feature set
 - CNCF Certified Kubernetes conformance
@@ -71,22 +69,15 @@ which enable:
 - Resolving images of deployed workloads automatically, and accepting or
   rejecting images based on UCP's signing-policy feature
 
-The default Docker EE installation includes both Kubernetes and Swarm
+The default Docker Enterprise installation includes both Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
 
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
-
 ### Orchestration platform features
 
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 
-- Docker EE manager nodes are both Swarm managers and Kubernetes masters,
+- Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
   to enable high availability
 - Allocate nodes for Swarm and Kubernetes workloads
 - Single pane of glass for monitoring apps
@@ -107,43 +98,41 @@ to schedule Kubernetes or Swarm workloads.
 
 With Docker, you can join up to thousands of physical or virtual machines
 together to create a container cluster, allowing you to deploy your
-applications at scale. Docker EE extends the functionality provided by Docker
+applications at scale. Docker Enterprise extends the functionality provided by Docker
 Engine to make it easier to manage your cluster from a centralized place.
 
-You can manage and monitor your container cluster using a graphical web UI.
+You can manage and monitor your container cluster using a graphical web interface.
 
 ## Deploy, manage, and monitor
 
-With Docker EE, you can manage from a centralized place all of the computing
+With Docker Enterprise, you can manage from a centralized place all of the computing
 resources you have available, like nodes, volumes, and networks.
 
 You can also deploy and monitor your applications and services.
 
 ## Built-in security and access control
 
-Docker EE has its own built-in authentication mechanism with role-based access
-control (RBAC), so that you can control who can access and make changes to your
-swarm and applications. Also, Docker EE authentication integrates with LDAP
-services.
+Docker Enterprise has its own built-in authentication mechanism with RBAC, so that you can control who can access and make changes to your
+swarm and applications. Also, Docker Enterprise authentication integrates with LDAP services.
 [Learn about role-based access control](access-control/index.md).
 
 ![](images/docker-ee-overview-2.png){: .with-border}
 
-Docker EE integrates with Docker Trusted Registry so that you can keep the
+Docker Enterprise integrates with Docker Trusted Registry so that you can keep the
 Docker images you use for your applications behind your firewall, where they
 are safe and can't be tampered with.
 
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
-## Docker EE and the CLI
+## Docker Enterprise and the CLI
 
-Docker EE exposes the standard Docker API, so you can continue using the tools
+Docker Enterprise exposes the standard Docker API, so you can continue using the tools
 that you already know, including the Docker CLI client, to deploy and manage your
 applications.
 
 For example, you can use the `docker info` command to check the
-status of a Swarm managed by Docker EE:
+status of a Swarm managed by Docker Enterprise:
 
 ```bash
 docker info
@@ -169,7 +158,7 @@ Managers: 1
 
 ## Use the Kubernetes CLI
 
-Docker EE exposes the standard Kubernetes API, so you can use `kubectl` to
+Docker Enterprise exposes the standard Kubernetes API, so you can use `kubectl` to
 manage your Kubernetes workloads:
 
 ```bash
@@ -188,4 +177,4 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ## Where to go next
 
 - [Supported platforms](supported-platforms.md)
-- [Docker EE architecture](docker-ee-architecture.md)
+- [Docker Enterprise architecture](docker-ee-architecture.md)

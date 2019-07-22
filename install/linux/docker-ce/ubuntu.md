@@ -1,5 +1,5 @@
 ---
-description: Instructions for installing Docker CE on Ubuntu
+description: Instructions for installing Docker Engine - Community on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/ubuntulinux/
@@ -8,11 +8,11 @@ redirect_from:
 - /engine/installation/linux/docker-ce/ubuntu/
 - /install/linux/ubuntu/
 - /engine/installation/linux/ubuntu/
-title: Get Docker CE for Ubuntu
+title: Get Docker Engine - Community for Ubuntu
 toc_max: 4
 ---
 
-To get started with Docker CE on Ubuntu, make sure you
+To get started with Docker Engine - Community on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 
@@ -29,78 +29,44 @@ To learn more about Docker EE, see
 
 ### OS requirements
 
-To install Docker CE, you need the 64-bit version of one of these Ubuntu
+To install Docker Engine - Community, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Cosmic 18.10
 - Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
-- Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
-
-> **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
+Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, `s390x`
+(IBM Z), and `ppc64le` (IBM Power) architectures.
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them:
+Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+If these are installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker CE package is now called `docker-ce`.
+networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 
 ### Supported storage drivers
 
-Docker CE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+Docker Engine - Community on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
+> **Note**: In Docker Engine - Enterprise, `btrfs` is only supported on SLES. See the documentation on
+> [btrfs](/engine/userguide/storagedriver/btrfs-driver.md) for more details.
 
-- For new installations on version 4 and higher of the Linux kernel, `overlay2`
-  is supported and preferred over `aufs`.
-- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
-  `overlay2` drivers are not supported by that kernel version.
+For new installations on version 4 and higher of the Linux kernel, `overlay2`
+is supported and preferred over `aufs`. Docker Engine - Community uses the `overlay2`
+storage driver by default. If you need to use `aufs` instead, you need to
+configure it manually. See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
-If you need to use `aufs`, you need to do additional preparation as
-outlined below.
+## Install Docker Engine - Community
 
-#### Extra steps for aufs
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 and newer</a></li>
-  <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
-</ul>
-<div class="tab-content">
-<div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
-
-For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
-and Docker CE uses the `overlay2` storage driver by default. If you need
-to use `aufs` instead, you need to configure it manually.
-See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
-
-</div>
-<div id="aufs_prep_trusty" class="tab-pane fade" markdown="1">
-
-Unless you have a strong reason not to, install the
-`linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
-drivers.
-
-```bash
-$ sudo apt-get update
-
-$ sudo apt-get install \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
-```
-
-</div>
-</div> <!-- tab-content -->
-
-## Install Docker CE
-
-You can install Docker CE in different ways, depending on your needs:
+You can install Docker Engine - Community in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -117,9 +83,9 @@ You can install Docker CE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker CE for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install and update Docker from
-the repository.
+Before you install Docker Engine - Community for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker
+from the repository.
 
 #### Set up the repository
 
@@ -138,6 +104,7 @@ the repository.
         apt-transport-https \
         ca-certificates \
         curl \
+        gnupg-agent \
         software-properties-common
     ```
 
@@ -153,31 +120,31 @@ the repository.
 
     ```bash
     $ sudo apt-key fingerprint 0EBFCD88
-
-    pub   4096R/0EBFCD88 2017-02-22
-          Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid                  Docker Release (CE deb) <docker@docker.com>
-    sub   4096R/F273FCD8 2017-02-22
+    
+    pub   rsa4096 2017-02-22 [SCEA]
+          9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+    uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+    sub   rsa4096 2017-02-22 [S]
     ```
 
-4.  Use the following command to set up the **stable** repository. You always
-    need the **stable** repository, even if you want to install builds from the
-    **edge** or **test** repositories as well. To add the **edge** or
-    **test** repository, add the word `edge` or `test` (or both) after the
-    word `stable` in the commands below.
+4.  Use the following command to set up the **stable** repository. To add the
+    **nightly** or **test** repository, add the word `nightly` or `test` (or both)
+    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](/install/index.md).
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
     > like Linux Mint, you might need to change `$(lsb_release -cs)`
     > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Rafaela`, you could use `trusty`.
+    >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
+    > and unsupported Ubuntu distributions.
 
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64le_repo">ppc64le (IBM Power)</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">s390x (IBM Z)</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -190,11 +157,21 @@ the repository.
     ```
 
     </div>
-    <div id="armhf" class="tab-pane fade" markdown="1">
+    <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="arm64_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=arm64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -222,13 +199,7 @@ the repository.
     </div>
     </div> <!-- tab-content -->
 
-    > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **test** repositories.
-
-    [Learn about **stable** and **edge** channels](/install/index.md).
-
-
-#### Install Docker CE
+#### Install Docker Engine - Community
 
 1.  Update the `apt` package index.
 
@@ -236,10 +207,10 @@ the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the _latest version_ of Docker CE, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
@@ -249,27 +220,28 @@ the repository.
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
+3.  To install a _specific version_ of Docker Engine - Community, list the available versions in the repo, then select and install:
 
     a. List the versions available in your repo:
 
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
+      docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+      docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+      ...
     ```
 
-    b. Install a specific version by its fully qualified package name, which is
-       package name (`docker-ce`) "=" version string (2nd column), for example,
-       `docker-ce=18.03.0~ce-0~ubuntu`.
+    b. Install a specific version using the version string from the second column,
+       for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION>
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
-    The Docker daemon starts automatically.
-
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -279,34 +251,34 @@ the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, first run `sudo apt-get update`, then follow the
+To upgrade Docker Engine - Community, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker CE, you can download the
+If you cannot use Docker's repository to install Docker Engine - Community, you can download the
 `.deb` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker CE.
+a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
-    choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
-    `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the Docker
-    version you want to install.
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+    choose your Ubuntu version, browse to `pool/stable/`, choose `amd64`,
+    `armhf`, `arm64`, `ppc64el`, or `s390x`, and download the `.deb` file for the
+    Docker Engine - Community version you want to install.
 
-    > **Note**: To install an **edge**  package, change the word
-    > `stable` in the  URL to `edge`.
-    > [Learn about **stable** and **edge** channels](/install/index.md).
+    > **Note**: To install a **nightly**  package, change the word
+    > `stable` in the  URL to `nightly`.
+    > [Learn about **nightly** and **test** channels](/install/index.md).
 
-2.  Install Docker CE, changing the path below to the path where you downloaded
+2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -315,7 +287,7 @@ a new file each time you want to upgrade Docker CE.
 
     The Docker daemon starts automatically.
 
-3.  Verify that Docker CE is installed correctly by running the `hello-world`
+3.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -325,22 +297,22 @@ a new file each time you want to upgrade Docker CE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+to allow non-privileged users to run Docker commands and for other optional
+configuration steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, download the newer package file and repeat the
+To upgrade Docker Engine - Community, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
 
-## Uninstall Docker CE
+## Uninstall Docker Engine - Community
 
-1.  Uninstall the Docker CE package:
+1.  Uninstall the Docker Engine - Community package:
 
     ```bash
     $ sudo apt-get purge docker-ce
@@ -360,4 +332,4 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/get-started/index.md).

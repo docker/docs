@@ -75,7 +75,7 @@ exist by default, and provide core networking functionality:
 
 - [Network plugins](/engine/extend/plugins_services/): You can install and use
   third-party network plugins with Docker. These plugins are available from
-  [Docker Store](https://store.docker.com/search?category=network&q=&type=plugin)
+  [Docker Hub](https://hub.docker.com/search?category=network&q=&type=plugin)
   or from third-party vendors. See the vendor's documentation for installing and
   using a given network plugin.
 
@@ -118,4 +118,3 @@ understanding using the following tutorials:
 - [Host networking tutorial](network-tutorial-host.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
-

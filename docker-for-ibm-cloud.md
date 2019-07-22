@@ -19,6 +19,7 @@ redirect_from:
   - /docker-for-ibm-cloud/release-notes/
   - /docker-for-ibm-cloud/scaling/
   - /docker-for-ibm-cloud/why/
+  - /v17.12/docker-for-ibm-cloud/quickstart/
 ---
 
 Docker for IBM Cloud has been replaced by
