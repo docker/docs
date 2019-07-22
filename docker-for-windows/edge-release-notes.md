@@ -11,7 +11,7 @@ For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _edge_ releases are listed below, [_stable_ release
-notes](release-notes) are also available. (Following the CE release model,
+notes](release-notes) are also available. (Following the Docker Engine - Community release model,
 'beta' releases are called 'edge' releases.)  You can learn about both kinds of
 releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).

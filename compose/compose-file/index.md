@@ -529,7 +529,7 @@ an error.
 
 ### credential_spec
 
-> **Note**: this option was added in v3.3.
+> **Note**: This option was added in v3.3. Using group Managed Service Account (gMSA) configurations with compose files is supported in Compose version 3.8.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
@@ -556,6 +556,22 @@ in the registry:
 ```yaml
 credential_spec:
   registry: my-credential-spec
+```
+
+#### Example gMSA configuration
+When configuring a gMSA credential spec for a service, you only need 
+to specify a credential spec with `config`, as shown in the following example:
+```
+version: "3.8"
+services:
+  myservice:
+    image: myimage:latest
+    credential_spec:
+      config: my_credential_spec
+
+configs:
+  my_credentials_spec:
+    file: ./my-credential-spec.json|
 ```
 
 ### depends_on

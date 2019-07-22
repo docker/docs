@@ -5,7 +5,6 @@ pipeline {
     label 'ubuntu-1604-aufs-stable'
   }
   environment {
-    DTR_VPN_ADDRESS       = credentials('dtr-vpn-address')
     DTR_URL               = credentials('dtr-url')
     DOCKER_HOST_STRING    = credentials('docker-host')
     UCP_BUNDLE            = credentials('ucp-bundle')
@@ -26,19 +25,17 @@ pipeline {
             branch 'master'
           }
           steps {
-            withVpn("$DTR_VPN_ADDRESS") {
-              sh """
-                cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
-                docker build -t $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} .
-                docker push $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER}
-                unzip -o $UCP_BUNDLE
-                export DOCKER_TLS_VERIFY=1
-                export COMPOSE_TLS_VERSION=TLSv1_2
-                export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
-                export DOCKER_HOST=$DOCKER_HOST_STRING
-                docker service update --detach=false --force --image $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} docs-stage-docker-com_docs --with-registry-auth
-              """
-            }
+            sh """
+              cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
+              docker build -t $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} .
+              docker push $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER}
+              unzip -o $UCP_BUNDLE
+              export DOCKER_TLS_VERIFY=1
+              export COMPOSE_TLS_VERSION=TLSv1_2
+              export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
+              export DOCKER_HOST=$DOCKER_HOST_STRING
+              docker service update --detach=false --force --image $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} docs-stage-docker-com_docs --with-registry-auth
+            """
           }
         }
         stage( 'build + push prod image, update prod swarm' ) {
@@ -46,21 +43,19 @@ pipeline {
             branch 'published'
           }
           steps {
-            withVpn("$DTR_VPN_ADDRESS") {
-              withDockerRegistry(reg) {
-                sh """
-                  docker build -t docs/docker.github.io:prod-${env.BUILD_NUMBER} .
-                  docker push docs/docker.github.io:prod-${env.BUILD_NUMBER}
-                  unzip -o $UCP_BUNDLE
-                  cd ucp-bundle-success_bot
-                  export DOCKER_TLS_VERIFY=1
-                  export COMPOSE_TLS_VERSION=TLSv1_2
-                  export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
-                  export DOCKER_HOST=$DOCKER_HOST_STRING
-                  docker service update --detach=false --force --image docs/docker.github.io:prod-${env.BUILD_NUMBER} docs-docker-com_docs --with-registry-auth
-                  curl -X POST -H 'Content-type: application/json' --data '{"text":"Successfully published docs. https://docs.docker.com/"}' $SLACK
-                """
-              }
+            withDockerRegistry(reg) {
+              sh """
+                docker build -t docs/docker.github.io:prod-${env.BUILD_NUMBER} .
+                docker push docs/docker.github.io:prod-${env.BUILD_NUMBER}
+                unzip -o $UCP_BUNDLE
+                cd ucp-bundle-success_bot
+                export DOCKER_TLS_VERIFY=1
+                export COMPOSE_TLS_VERSION=TLSv1_2
+                export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
+                export DOCKER_HOST=$DOCKER_HOST_STRING
+                docker service update --detach=false --force --image docs/docker.github.io:prod-${env.BUILD_NUMBER} docs-docker-com_docs --with-registry-auth
+                curl -X POST -H 'Content-type: application/json' --data '{"text":"Successfully published docs. https://docs.docker.com/"}' $SLACK
+              """
             }
           }
         }
@@ -76,19 +71,17 @@ pipeline {
             branch 'amberjack'
           }
           steps {
-            withVpn("$DTR_VPN_ADDRESS") {
-              sh """
-                cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
-                docker build -t $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER} .
-                docker push $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER}
-                unzip -o $UCP_BUNDLE
-                export DOCKER_TLS_VERIFY=1
-                export COMPOSE_TLS_VERSION=TLSv1_2
-                export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
-                export DOCKER_HOST=$DOCKER_HOST_STRING
-                docker service update --detach=false --force --image $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER} docs-beta-stage-docker-com_docs --with-registry-auth
-              """
-            }
+            sh """
+              cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
+              docker build -t $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER} .
+              docker push $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER}
+              unzip -o $UCP_BUNDLE
+              export DOCKER_TLS_VERIFY=1
+              export COMPOSE_TLS_VERSION=TLSv1_2
+              export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
+              export DOCKER_HOST=$DOCKER_HOST_STRING
+              docker service update --detach=false --force --image $DTR_URL/docker/docs-private:beta-stage-${env.BUILD_NUMBER} docs-beta-stage-docker-com_docs --with-registry-auth
+            """
           }
         }
         stage( 'build + push beta image, update beta swarm' ) {
@@ -96,19 +89,17 @@ pipeline {
             branch 'published'
           }
           steps {
-            withVpn("$DTR_VPN_ADDRESS") {
-              sh """
-                cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
-                docker build -t $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER} .
-                docker push $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER}
-                unzip -o $UCP_BUNDLE
-                export DOCKER_TLS_VERIFY=1
-                export COMPOSE_TLS_VERSION=TLSv1_2
-                export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
-                export DOCKER_HOST=$DOCKER_HOST_STRING
-                docker service update --detach=false --force --image $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER} docs-beta-docker-com_docs --with-registry-auth
-              """
-            }
+            sh """
+              cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
+              docker build -t $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER} .
+              docker push $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER}
+              unzip -o $UCP_BUNDLE
+              export DOCKER_TLS_VERIFY=1
+              export COMPOSE_TLS_VERSION=TLSv1_2
+              export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
+              export DOCKER_HOST=$DOCKER_HOST_STRING
+              docker service update --detach=false --force --image $DTR_URL/docker/docs-private:beta-${env.BUILD_NUMBER} docs-beta-docker-com_docs --with-registry-auth
+            """
           }
         }
       }

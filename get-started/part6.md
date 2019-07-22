@@ -1,7 +1,7 @@
 ---
 title: "Get Started, Part 6: Deploy your app"
 keywords: deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise
-description: Deploy your app to production using Docker CE or EE.
+description: Deploy your app to production using Docker Engine - Community or EE.
 ---
 {% include_relative nav.html selected="6" %}
 

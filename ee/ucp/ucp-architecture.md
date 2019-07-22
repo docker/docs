@@ -52,7 +52,7 @@ If the node is a:
 
 ## UCP internal components
 
-The core component of UCP is a globally-scheduled service called `ucp-agent`.
+The core component of UCP is a globally scheduled service called `ucp-agent`.
 When you install UCP on a node, or join a node to a swarm that's being managed
 by UCP, the `ucp-agent` service starts running on that node.
 
@@ -66,11 +66,6 @@ on a node depend on whether the node is a manager or a worker.
 > on Windows, the `ucp-agent` component is named `ucp-agent-win`.
 > [Learn about architecture-specific images](admin/install/architecture-specific-images.md).
 
-Internally, UCP uses the following components:
-
-* Calico v3.5.3
-* Kubernetes v1.11.9
-
 ### UCP components in manager nodes
 
 Manager nodes run all UCP services, including the web UI and data stores that
@@ -79,7 +74,7 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | UCP component                   | Description                                                                                                                                                                                                                                                                                                                                                     |
 |:--------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | k8s_calico-kube-controllers     | A cluster-scoped Kubernetes controller used to coordinate Calico networking. Runs on one manager node only.                                                                                                                                                                                                                                                     |
-| k8s_calico-node                 | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. Configure the CNI plugin by using the `--cni-installer-url` flag. If this flag isn't set, UCP uses Calico as the default CNI plugin.                                                     |
+| k8s_calico-node                 | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. Configure the container network interface (CNI) plugin by using the `--cni-installer-url` flag. If this flag isn't set, UCP uses Calico as the default CNI plugin.                                                     |
 | k8s_install-cni_calico-node     | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                                                                                                            |
 | k8s_POD_calico-node             | Pause container for the `calico-node` pod.                                                                                                                                                                                                                                                                                                                      |
 | k8s_POD_calico-kube-controllers | Pause container for the `calico-kube-controllers` pod.                                                                                                                                                                                                                                                                                                          |
@@ -120,7 +115,7 @@ services running on worker nodes:
 |:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | k8s_calico-node             | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                               |
 | k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                 |
-| k8s_POD_calico-node         | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
+| k8s_POD_calico-node         | Pause container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
 | ucp-agent                   | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
 | ucp-interlock-extension     | Helper service that reconfigures the ucp-interlock-proxy service based on the swarm workloads that are running.                                                                                                                                                      |
 | ucp-interlock-proxy         | A service that provides load balancing and proxying for swarm workloads. Only runs when you enable Layer 7 routing.                                                                                                                                                  |

@@ -18,7 +18,7 @@ machines) that you'll manage with UCP:
 
 ## Hostname strategy
 
-Docker UCP requires Docker Enterprise Edition. Before installing Docker EE on
+Docker UCP requires Docker Enterprise. Before installing Docker Enterprise on
 your cluster nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified

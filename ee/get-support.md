@@ -1,10 +1,10 @@
 ---
 title: Get support
-description: Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.
+description: Your Docker Enterprise subscription gives you access to prioritized support. You can file tickets via email or the support portal.
 keywords: support, help
 ---
 
-Your Docker Enterprise Edition subscription gives you access to prioritized
+Your Docker Enterprise subscription gives you access to prioritized
 support. The service levels depend on your subscription.
 
 Before reaching out to Docker Support, make sure you're listed as an authorized

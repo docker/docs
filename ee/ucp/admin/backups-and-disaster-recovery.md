@@ -17,7 +17,7 @@ UCP maintains data about:
 
 | Data                  | Description                                                                                                          |
 |:----------------------|:---------------------------------------------------------------------------------------------------------------------|
-| Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker EE license and swarm and client CAs |
+| Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker Enterprise license and swarm and client CAs |
 | Access control        | Permissions for teams to cluster resources, including resource sets, grants, and roles                               |
 | Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication        |
 | Metrics data          | Monitoring data gathered by UCP                                                                                      |
@@ -32,7 +32,7 @@ This data is persisted on the host running UCP, using named volumes.
 your Layer 7 routing deployment, reapply your custom settings.
 ## Backup steps
 
-Back up your Docker EE components in the following order:
+Back up your Docker Engine - Enterprise components in the following order:
 
 1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
 2. Back up UCP
@@ -106,7 +106,7 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 
 ### Security-Enhanced Linux (SELinux)
 
-For Docker EE 17.06 or higher, if the Docker engine has SELinux enabled,
+For Docker Engine - Enterprise 17.06 or higher, if the Docker engine has SELinux enabled,
 which is typical for RHEL hosts, you need to include `--security-opt label=disable`
 in the `docker` command:
 
@@ -167,7 +167,7 @@ UCP restore recovers the following assets from the backup file:
 
 * Users, teams, and permissions.
 * All UCP configuration options available under `Admin Settings`, like the
-  Docker EE subscription license, scheduling options, content trust, and
+  Docker Enterprise subscription license, scheduling options, content trust, and
   authentication backends.
 
 UCP restore does not include swarm assets such as cluster membership, services, networks,
