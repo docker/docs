@@ -44,6 +44,23 @@ node:
 
 These ports are configurable when installing DTR.
 
+## UCP Configuration
+
+When installing DTR on a UCP cluster, Administrators need to be able to deploy
+containers on "UCP manager nodes or nodes running DTR". This setting can be
+adjusted in the [UCP Settings
+menu](/ee/ucp/admin/configure/restrict-services-to-worker-nodes/). Once the
+installation has complete, and all additional DTR replicas have been deployed
+this UCP setting can be unchecked.
+
+The DTR installation will fail with the following error message if
+Administrators are unable to deploy on "UCP manager nodes or nodes running
+DTR".
+
+```
+Error response from daemon: {"message":"could not find any nodes on which the container could be created"}
+```
+
 ## Compatibility and maintenance lifecycle
 
 Docker Enterprise Edition is a software subscription that includes three products:
