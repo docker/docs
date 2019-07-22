@@ -94,16 +94,16 @@ The following components are available:
 
 - `subscription`: (Optional) A string value representing the subscription ID.
 - `license`: (Optional) A path to the cluster's license file.
-- `cloudstor`: (Optional) Configuration options for Docker CloudStor
-- `dtr`: (Optional) Configuration options for Docker Trusted Registry
-- `engine`: (Optional) Configuration options for Docker Engine
-- `ucp`: (Optional) Configuration options for Docker Universal Control Plane
+- `cloudstor`: (Optional) Configuration options for Docker CloudStor.
+- `dtr`: (Optional) Configuration options for Docker Trusted Registry.
+- `engine`: (Optional) Configuration options for Docker Engine.
+- `ucp`: (Optional) Configuration options for Docker Universal Control Plane.
 - `registry`: (Optional) Configuration options for authenticating nodes with a registry to pull Docker images.
 
 #### cloudstor
 Customizes the installation of Docker Cloudstor.
 
-- `version`: (Optional) The version of Cloudstor to install.  Default is `1.0`
+- `version`: (Optional) The version of Cloudstor to install.  Default is `1.0`.
 - `use_efs`: (Optional) Specifies whether an Elastic File System should be provisioned. Defaults to `false`.
 
 #### dtr
@@ -123,7 +123,7 @@ The following optional elements can be specified:
 - `ca`: (Optional) The path to a root CA public certificate.
 - `key`: (Optional) The path to a TLS private key.
 - `cert`: (Optional) The path to a public key certificate.
-- `install_options`: (Optional) Additional [DTR install options](https://docs.docker.com/reference/dtr/2.6/cli/install/)
+- `install_options`: (Optional) Additional [DTR install options](https://docs.docker.com/reference/dtr/2.6/cli/install/).
 
 #### engine
 Customizes the installation of Docker Enterprise Engine.
@@ -205,7 +205,7 @@ The following optional elements can be specified:
 - `cert`: Specifies a path to a public key certificate.
 - `install_options`: Lists additional [UCP install options](https://docs.docker.com/reference/ucp/3.1/cli/install/)
 
-##### Additional UCP configuration options:
+##### Additional UCP configuration options
 Docker Cluster also accepts all UCP configuration options and creates the initial UCP config on
 installation. The following list provides supported options:
 - `anonymize_tracking`: Anonymizes analytic data. Specify 'true' to hide the license ID. Defaults to 'false'.

@@ -105,7 +105,7 @@ The values are substituted in the cluster definition, which makes it
 easy to define a re-usable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
-Run `docker cluster create --file cluster.yml --name quickstart`
+Run `docker cluster create --file cluster.yml --name quickstart`.
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password
@@ -114,7 +114,7 @@ Run `docker cluster create --file cluster.yml --name quickstart`
     Planning cluster on aws                                                    [OK]
     Creating: [===========================                                   ] 44%
 
-After approximately 10 minutes, resources are provisioned Docker Enterprise installation is started:
+After approximately 10 minutes, resources are provisioned, and Docker Enterprise installation is started:
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password
@@ -156,7 +156,7 @@ To view an inventory of the clusters you created, run `docker cluster ls`:
     ID             NAME         PROVIDER    ENGINE              UCP                DTR                STATE
     911c882340b2   quickstart   acme, aws   ee-stable-18.09.5   docker/ucp:3.1.6   docker/dtr:2.6.5   running
 
-For detailed information about the cluster, run `docker cluster inspect quickstart`
+For detailed information about the cluster, run `docker cluster inspect quickstart`.
 
     $ docker cluster inspect quickstart
 ```yaml

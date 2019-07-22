@@ -21,7 +21,7 @@ to upgrade your installation to the latest release.
 * [Version 2.4](#version-24)
 
 ## Version 2.7.0
-(2019-7-10)
+(2019-7-22)
 
 ### New Features
 
