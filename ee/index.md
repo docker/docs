@@ -7,7 +7,7 @@ redirect_from:
   - /manuals/
 ---
 
-Docker Enterprise is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
+Docker Enterprise is a Containers as a Service (CaaS) platform that enables a secure software supply
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 
@@ -20,7 +20,7 @@ orchestration requires, like provisioning pods, containers, and cluster
 resources. Self-healing components ensure that Docker Enterprise clusters remain highly
 available.
 
-Role-based access control applies to Kubernetes and Swarm orchestrators, and
+Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
 communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
@@ -112,10 +112,8 @@ You can also deploy and monitor your applications and services.
 
 ## Built-in security and access control
 
-Docker Enterprise has its own built-in authentication mechanism with role-based access
-control (RBAC), so that you can control who can access and make changes to your
-swarm and applications. Also, Docker Enterprise authentication integrates with LDAP
-services.
+Docker Enterprise has its own built-in authentication mechanism with RBAC, so that you can control who can access and make changes to your
+swarm and applications. Also, Docker Enterprise authentication integrates with LDAP services.
 [Learn about role-based access control](access-control/index.md).
 
 ![](images/docker-ee-overview-2.png){: .with-border}
