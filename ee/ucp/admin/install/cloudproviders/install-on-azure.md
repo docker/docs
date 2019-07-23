@@ -45,6 +45,7 @@ to successfully deploy Docker UCP on Azure:
   Configuration](#considerations-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
+- All UCP Nodes NIC's (Network Interface) must have IP forwarding enabled.
 - Internal IP addresses for all nodes should be [set to
   Static](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-static-private-ip-arm-pportal),
   rather than the default of Dynamic.
@@ -69,7 +70,7 @@ objects are being deployed.
 
 ### Azure Configuration File
 
-For Docker UCP to integrate with Microsoft Azure,each UCP node in your cluster
+For Docker UCP to integrate with Microsoft Azure, each UCP node in your cluster that runs `kubelet` component
 needs an Azure configuration file, `azure.json`. Place the file within
 `/etc/kubernetes`. Since the config file is owned by `root`, set its permissions 
 to `0644` to ensure the container user has read access.
