@@ -62,6 +62,8 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 ### Bug Fixes
 
 * Fixed an issue where a webhook notification was triggered twice on non-scanning image promotion events on a repository with scan on push enabled. (docker/dhe-deploy#9909)
+*  In 2.7.0 users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
+
 
 ### Known issues
 
