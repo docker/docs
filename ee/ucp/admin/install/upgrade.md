@@ -4,10 +4,11 @@ description: Learn how to upgrade Docker Universal Control Plane with minimal im
 keywords: UCP, upgrade, update
 ---
 
-With UCP version {{ page.ucp_version }}, upgrades provide improved progress information for install and upgrade as well as 
-no downtime for user workloads.
+This page helps you upgrade Docker Universal Control Plane (UCP) to version {{
+page.ucp_version }}.
 
 ## Plan the upgrade
+
 Before upgrading to a new version of UCP, check the
 [release notes](/ee/ucp/release-notes/).
 There you'll find information about new features, breaking changes, and
@@ -56,13 +57,17 @@ Complete the following checks:
     - Perform a Swarm, UCP and DTR backups pre-upgrade
     - Gather compose file/service/stack files 
     - Generate a UCP Support dump (for point in time) pre-upgrade
-    - Preload Engine/UCP/DTR images (in case of offline upgrade method)
-        - To prepare existing cluster nodes with new UCP images, pull the needed images onto new workers that you are 
-        planning to join using the new upgrade flow.
-        ```
-        docker login -u <username>
-        docker run --rm docker/ucp:3.2.0 images --list: | xargs -L 1 docker pull
-        ```
+    - Preload Engine/UCP/DTR images. If your cluster is offline (with no
+      connection to the internet) then Docker provides tarballs containing all
+      of the required container images
+      [here](/ee/ucp/admin/install/upgrade-offline/). If your cluster is
+      online, you can pull the required container images onto your nodes with the
+      following command:
+
+      ```
+      $ docker run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list: | xargs -L 1 docker pull
+      ```
+
     - Load troubleshooting packages (netshoot, etc)
     - Best order for upgrades: Engine, UCP, and then DTR. Note: The scope of this topic is limited to upgrade instructions for UCP. 
 
@@ -84,8 +89,6 @@ with a new worker node. The type of upgrade you perform depends on what is neede
         schedule workloads to run on new nodes, pause, drain, and remove old worker nodes 
         in batches of multiple nodes rather than one at a time, and shut down servers to 
         remove worker nodes. This type of upgrade is the most advanced.   
-
-[Upgrade UCP offline](https://docs.docker.com/ee/ucp/admin/install/upgrade-offline/).
 
 ## Back up your cluster
 
@@ -148,8 +151,9 @@ It can be found under the **Upgrade** tab of the **Admin Settings** section.
 
 ![](../../images/upgrade-ucp-2.png){: .with-border}
 
-In the **Available Versions** dropdown, select the version you want to update. Copy and paste 
-the CLI command provided into a terminal on a manager node to perform the upgrade.
+In the **Available Versions** drop down, select the version you want to update.
+Copy and paste the CLI command provided into a terminal on a manager node to
+perform the upgrade.
 
 During the upgrade, the web interface will be unavailable, and you should wait
 until completion before continuing to interact with it. When the upgrade
@@ -158,77 +162,93 @@ is available and a browser refresh is required to see it.
 
 ### Use the CLI to perform an upgrade
 
-To upgrade using the CLI, log into a UCP manager node using SSH, and run:
+There are two different ways to upgrade a UCP Cluster via the CLI. The first is
+an automated process; this approach will update all UCP components on all nodes
+within the UCP Cluster. The upgrade process is done node by node, but once the
+user has initiated an upgrade it will work its way through the entire cluster.
 
-```
-# Get the latest version of UCP
-docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
-```
+The second UCP upgrade method is a phased approach, once an upgrade has been
+initiated this method will upgrade all UCP components on a single UCP worker
+nodes, giving the user more control to migrate workloads and control traffic
+when upgrading the cluster.
 
 ### Automated in-place cluster upgrade
-This workflow is performed when:
 
-- You are not adding new nodes, AND
-- the order of worker node upgrades is NOT important.
+This is the traditional approach to upgrading UCP and is often used when the
+order in which UCP worker nodes is upgraded is NOT important.
 
-1. On a manager node, to upgrade the entire cluster (both manager and worker nodes), run commands similar to the following examples: 
-    ```
-    export ucp_version=3.2.0
-    docker image pull docker/ucp:$ucp_version
-    docker container run --rm -it \
-      --name ucp \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
-      docker/ucp:$ucp_version \
-      upgrade --interactive
-    ```
+To upgrade UCP, ensure all Docker engines have been upgraded to the
+corresponding new version. Then a user should SSH to a UCP manager node and run
+the following command. The upgrade command should not be run on a workstation
+with a client bundle.
+
+```
+$ docker container run --rm -it \
+  --name ucp \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
+  upgrade \
+  --interactive
+```
         
-    **Note**: The `docker image pull` command in the previous example is not needed if the images are pulled as described 
-    in the **Procedural** section of [prerequisites](#procedural).
+### Phased in-place cluster upgrade
 
-### Upgrade existing nodes in place
-This workflow is performed when:
+The phased approach of upgrading UCP, introduced in UCP 3.2, allows granular
+control of the UCP upgrade process. A user can temporarily run UCP worker nodes
+with different versions of the Docker Engine and UCP. This workflow is useful
+when a user wants to manually control how workloads and traffic are migrated
+around a cluster during an upgrade. This process can also be used if a user
+wants to add additional worker node capacity during an upgrade to handle
+failover. Worker nodes can be added to a partially upgraded UCP Cluster,
+workloads migrated across, and previous worker nodes then taken offline and
+upgraded.
 
-- You are upgrading existing worker nodes in place. This workflow also includes adding additional worker nodes if needed.
+To start a phased upgrade of UCP, first all manager nodes will need to be
+upgraded to the new UCP version. To tell UCP to upgrade the manager nodes but
+not upgrade any worker nodes, pass `--manual-worker-upgrade` into the upgrade
+command.
 
-1. Upgrade manager nodes
-        
-    - Run the upgrade on a manager node. The `--manual-worker-upgrade` option automatically upgrades manager nodes first and then 
-    allows you to control the upgrade of the UCP components on worker nodes using node labels, as shown in the following example.
-    ```
-    export ucp_version=3.2.0
-    docker image pull docker/ucp:$ucp_version
-    docker container run --rm -it \
-      --name ucp \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp:$ucp_version \
-      upgrade --manual-worker-upgrade \
-      --interactive
-    ```
-    Note: The `docker image pull` command in this example is not needed if the images are pulled as described 
-    in the **Procedural** section of [prerequisites](#procedural).  
-2. Upgrade worker nodes in place
-        
-    - On the manager node, after the `--manual-worker-upgrade` command completes, remove the `upgrade-hold` label on one or 
-    more nodes to upgrade the UCP components on those worker nodes in place: 
-    ```
-    docker node update --label-rm com.docker.ucp.upgrade-hold <node name or id>
-    ```
-3. (Optional) Join new worker nodes
-       
-    - New worker nodes have newer engines already installed and have the new UCP version running when they join the cluster. 
-    On the manager node, run commands similar to the following examples to get the Swarm Join token and add 
-    new worker nodes:
-    ```
-    # Get Swarm Join token
-    docker swarm join-token worker
-    ```
-    - On the node to be joined:
-    ```
-    docker swarm join --token SWMTKN-<YOUR TOKEN> <manager ip>:2377
-    ```
+To upgrade UCP, ensure the Docker engine on all UCP manager nodes have been
+upgraded to the corresponding new version. SSH to a UCP manager node and run
+the following command. The upgrade command should not be run on a workstation
+with a client bundle.
+
+```
+$ docker container run --rm -it \
+  --name ucp \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
+  upgrade \
+  --manual-worker-upgrade \
+  --interactive
+```
+
+The `--manual-worker-upgrade` flag will add an upgrade-hold label to all worker
+nodes. UCP will be constantly monitor this label, and if that label is removed
+UCP will then upgrade the node. 
+
+In order to trigger the upgrade on a worker node, you will have to remove the
+label.
+
+```
+$ docker node update --label-rm com.docker.ucp.upgrade-hold <node name or id>
+```
+
+(Optional) Joining new worker nodes to the cluster. Once the manager nodes have
+been upgraded to a new UCP version, new worker nodes can be added to the
+cluster, assuming they are running the corresponding new docker engine
+version. 
+
+The swarm join token can be found in the UCP UI, or while ssh'd on a UCP
+manager node. More information on finding the swarm token can be found
+[here](/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/).
+
+```
+$ docker swarm join --token SWMTKN-<YOUR TOKEN> <manager ip>:2377
+```
 
 ### Replace existing worker nodes using blue-green deployment
+
 This workflow is used to create a parallel environment for a new deployment, which can greatly reduce downtime, upgrades 
 worker node engines without disrupting workloads, and allows traffic to be migrated to the new environment with 
 worker node rollback capability. This type of upgrade creates a parallel environment for reduced downtime and workload disruption.
@@ -240,11 +260,17 @@ nodes in the cluster at one time.
         
     - The `--manual-worker-upgrade` command automatically upgrades manager nodes first, and then allows you to control 
     the upgrade of the UCP components on the worker nodes using node labels.
+
     ```
-    export ucp_version=3.2.0
-    docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:$ucp_version upgrade 
-      -i --manual-worker-upgrade
+    $ docker container run --rm -it \
+      --name ucp \
+      --volume /var/run/docker.sock:/var/run/docker.sock \
+      {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
+      upgrade \
+      --manual-worker-upgrade \
+      --interactive
     ```
+
 2. Join new worker nodes
        
     - New worker nodes have newer engines already installed and have the new UCP version running when they join the cluster. 
@@ -293,59 +319,56 @@ nodes in the cluster at one time.
     docker service rm ucp-agent-win
     docker service rm ucp-agent-s390x
     ```
-### Verify the upgrade
-A successful upgrade exits without errors. If you perform a  manual upgrade, you can use the CLI or UI to verify that all nodes are marked as `Ready`.
-
-### Optional: Configure L7 routing
-[Configure Interlock or the Ingress controller to point L7 traffic to the new services](/ee/ucp/interlock/).
 
 ### Troubleshooting
 
-    - Upgrade compatibility
-      
-        - The upgrade command automatically checks for multiple `ucp-worker-agents` before 
-          proceeding with the upgrade. The existence of multiple `ucp-worker-agents` might indicate 
-          that the cluster still in the middle of a prior manual upgrade and you must resolve the 
-          conflicting node labels issues before proceeding with the upgrade.
+- Upgrade compatibility
+  
+    - The upgrade command automatically checks for multiple `ucp-worker-agents` before 
+      proceeding with the upgrade. The existence of multiple `ucp-worker-agents` might indicate 
+      that the cluster still in the middle of a prior manual upgrade and you must resolve the 
+      conflicting node labels issues before proceeding with the upgrade.
 
-    - Upgrade failures
-        - For worker nodes, an upgrade failure can be rolled back by changing the node label back 
-          to the previous target version. Rollback of manager nodes is not supported. 
+- Upgrade failures
+    - For worker nodes, an upgrade failure can be rolled back by changing the node label back 
+      to the previous target version. Rollback of manager nodes is not supported. 
 
-    - Kubernetes errors in node state messages after upgrading UCP 
-    (from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)
+- Kubernetes errors in node state messages after upgrading UCP 
+(from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)
 
-    - The following information applies If you have upgraded to UCP 3.0.0 or newer:
-      
-        - After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP 
-          dashboard with any of the following errors listed:
-          ```
-          Awaiting healthy status in Kubernetes node inventory
-          Kubelet is unhealthy: Kubelet stopped posting node status
-          ```
+- The following information applies If you have upgraded to UCP 3.0.0 or newer:
+  
+    - After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP 
+      dashboard with any of the following errors listed:
+      ```
+      Awaiting healthy status in Kubernetes node inventory
+      Kubelet is unhealthy: Kubelet stopped posting node status
+      ```
 
-          - Alternatively, you may see other port errors such as the one below in the ucp-controller 
-          container logs:
-          ```
-          http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
-          ```
+      - Alternatively, you may see other port errors such as the one below in the ucp-controller 
+      container logs:
+      ```
+      http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
+      ```
 
-    - UCP 3.x.x requires additional opened ports for Kubernetes use. For ports that are used by the 
-    latest UCP versions and the scope of port use, refer to 
-    [this page](https://docs.docker.com/ee/ucp/admin/install/system-requirements/#ports-used).
+- UCP 3.x.x requires additional opened ports for Kubernetes use. For ports that are used by the 
+latest UCP versions and the scope of port use, refer to 
+[this page](https://docs.docker.com/ee/ucp/admin/install/system-requirements/#ports-used).
 
-        - If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444 and 10250 are 
-        open for Kubernetes traffic.
+    - If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444 and 10250 are 
+    open for Kubernetes traffic.
 
-        - If you have upgraded to UCP 3.1.x, in addition to the ports listed above, do also open 
-        ports 9099 and 12388.
+    - If you have upgraded to UCP 3.1.x, in addition to the ports listed above, do also open 
+    ports 9099 and 12388.
   
 ### Recommended upgrade paths
 
 From UCP 3.0: UCP 3.0 -> UCP 3.1 -> UCP 3.2
 From UCP 2.2: UCP 2.2 -> UCP 3.0 -> UCP 3.1 -> UCP 3.2
 
-If you’re running a UCP version earlier than 2.1, first upgrade to the latest 2.1 version, then upgrade to 2.2. Use the following rules for your upgrade path to UCP 2.2:
+If you’re running a UCP version earlier than 2.1, first upgrade to the latest
+2.1 version, then upgrade to 2.2. Use the following rules for your upgrade path
+to UCP 2.2:
 
 From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
 From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
