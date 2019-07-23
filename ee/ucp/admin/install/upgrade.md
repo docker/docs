@@ -178,8 +178,7 @@ This workflow is performed when:
     docker container run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
-      docker/ucp:$ucp_version \
+      {{ page.ucp_org }}/{{ page.ucp_repo }}:$ucp_version \
       upgrade --interactive
     ```
         
