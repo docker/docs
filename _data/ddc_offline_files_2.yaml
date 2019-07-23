@@ -344,8 +344,10 @@
 - product: "dtr"
   version: "2.7"
   tar-files:
+    - description: "DTR 2.7.1 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.7.1.tar.gz
     - description: "DTR 2.7.0 Linux x86"
-      url: https://packages.docker.com/caas/dtr_images_2.7.0.tar.gz  
+      url: https://packages.docker.com/caas/dtr_images_2.7.0.tar.gz
 - product: "dtr"
   version: "2.6"
   tar-files:
