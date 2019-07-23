@@ -22,7 +22,8 @@ For more information on build options, see the reference guide on the [command l
 
 ## Limitations
 
-* BuildKit mode is incompatible with UCP and Swarm Classic
+* BuildKit mode is incompatible Swarm Classic
+* BuildKit mode is incompatible with UCP when using Docker engine version < 19.03
 * Only supported for building Linux containers
 
 ## To enable buildkit builds
