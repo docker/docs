@@ -11,9 +11,9 @@ This page provides information about Docker Enterprise 3.0 licensing. Docker Ent
 > Important
 >
 > Docker Enterprise 3.0 consists of two separately purchased and licensed products:
-> **Universal Control Plane and Docker Trusted Registry with Docker Engine - Enterprise**: Installed on servers and licensed based on the size of the environment.
+> - **Universal Control Plane (UCP) and Docker Trusted Registry (DTR) with Docker Engine - Enterprise**: Installed on servers and licensed based on the size of the environment.
 >
-> **Docker Desktop Enterprise**: Installed on developer workstations and separately licensed addition to the platform.
+> - **Docker Desktop Enterprise**: Installed on developer workstations and separately licensed addition to the platform.
 
 # Licensing Docker Enterprise
 
@@ -31,12 +31,12 @@ Complete the following steps to license Docker Enterprise 3.0:
 2. Create a Docker Hub ID for each person that requires access to the license file. Visit [Docker Hub](https://hub.docker.com/) to create a Docker ID. This requires email verification. Ensure that you provide a corporate email address.
 3. Decide on the name of the Hub Organization that will be used to access licenses. The designated team leader must log into Docker Hub and create the Hub Organization. For more information about creating organizations, see [Teams and Organizations](https://docs.docker.com/docker-hub/orgs/).
 
-> Note that the name of the Hub Organization must be unique across Docker Hub. If you have multiple independent organizations within your company, for example,if you represent 'OrgB' within 'CompanyA', use an Organization name such as   'CompanyAOrgB' instead of 'CompanyA'. Ensure that a company's licenses are registered to the organization, rather than an individual. Otherwise, the team will not be able to access the license(s).
+    > Note that the name of the Hub Organization must be unique across Docker Hub. If you have multiple independent organizations within your company, for example,if you represent 'OrgB' within 'CompanyA', use an Organization name such as   'CompanyAOrgB' instead of 'CompanyA'. Ensure that a company's licenses are registered to the organization, rather than an individual. Otherwise, the team will not be able to access the license(s).
 
 4. On the **Organizations** page, select your organization, and then click on the **Teams** tab. You should see the name of your organization, and the **Choose Team** option below that. You should also see that you have a special team called **owners**. The owners team has full access to all repositories within the organization.
 5. Click **Add User** and add the Docker ID of every member that needs access to the license files. After entering each Docker ID, ensure the IDs are displayed in the **Members** section within the **owners** team.
 
-## Register your Docker License Key
+## Register your Docker license key
 
 When your license order has been processed by Docker, your support administrator(s), designated support contact, billing contact, or primary sales point of contact will receive a welcome email. This email contains a link to an onboarding experience and your license keys.
 
@@ -75,7 +75,7 @@ After you’ve downloaded the license file, you can apply it to your Docker Ente
 
 ### Engine - Enterprise
 
-When you license Universal Control Plane (UCP), the same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
+When you license UCP, the same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using the command `docker engine activate`.
 
