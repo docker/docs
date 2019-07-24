@@ -31,24 +31,22 @@ Note:
   * The backup contains private keys and other sensitive information. Use the
     `--passphrase` flag to encrypt the backup with PGP-compatible encryption
     or `--no-passphrase` to opt out (not recommended).
-  * If using the `--file` option, the path to the file must be bind mounted onto the container that is performing the backup, and the filepath must be relative to the container's file tree. For example:
-  ```
-  docker run <other options> --mount type=bind,src=/home/user/backup:/backup docker/ucp --file /backup/backup.tar
-  ```
-    
-> **Note**: A bind mount with a `/backup/` target path must be added to the container performing the backup. In this case, the backup file is placed in the source directory of the bind mount. For example:
->    ```
->    docker run -v /nfs/ucp-backups:/backup docker/ucp-backup --file backup1.tar
->    ```
->    This command places the backup under the `/nfs/ucp-backups/backup1.tar` path on the host.
+
+  * If using the `--file` option, the path to the file must be bind mounted
+    onto the container that is performing the backup, and the filepath must be
+    relative to the container's file tree. For example:
+
+    ```
+    docker run <other options> --mount type=bind,src=/home/user/backup:/backup docker/ucp --file /backup/backup.tar
+    ```
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug, D`|Enable debug mode|
-|`--file`|Name of the file for backup contents. This is ignored when `--interactive` is specified. If not provided, backup contents are sent to stdout.|
-|`--include-logs`|Only applicable is `--file` is specified. If `true`, includes logs from the backup execution in a file adjacent to the backup file, specified with the same name but with a `.log` extension. **Note**: Log files are not encrypted.|
-|`--interactive, i`|Run in interactive mode and prompt for configuration values|
-|`--jsonlog`|Produce json formatted output for easier parsing|
-|`--passphrase`|Encrypt the tar file with a passphrase|
+| Option                 | Description                                                                   |
+|:-----------------------|:------------------------------------------------------------------------------|
+| `--debug, -D`          | Enable debug mode                                                             |
+|  --file *value*        | Name of the file to write the backup contents to. Ignored in interactive mode |
+| `--jsonlog`            | Produce json formatted output for easier parsing                              |
+| `--interactive, -i`    | Run in interactive mode and prompt for configuration values                   |
+| `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)           |
+| `--passphrase` *value* | Encrypt the tar file with a passphrase                                        |

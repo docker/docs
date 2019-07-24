@@ -1116,12 +1116,10 @@ reference:
       title: images
     - path: /reference/ucp/3.2/cli/install/
       title: install
-    - path: /reference/ucp/3.2/cli/restart/
-      title: restart
+    - path: /reference/ucp/3.2/cli/port-check-server/
+      title: port-check-server
     - path: /reference/ucp/3.2/cli/restore/
       title: restore
-    - path: /reference/ucp/3.2/cli/stop/
-      title: stop
     - path: /reference/ucp/3.2/cli/support/
       title: support
     - path: /reference/ucp/3.2/cli/uninstall-ucp/
