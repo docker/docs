@@ -208,14 +208,14 @@ In order to optimize user experience and security, support for Internet Explorer
     {{[fs_types]...
     ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}}}
     ```
-    "metadata_csum" for ext4 is great. However, SLES12 and SLES15 call this an "experimental feature" and doesnt allow mounting of such blocks. The kubelet's mke2fs util looks up /etc/mke2fs.conf and formats the block volume with the checksum feature. Then the kubelet tries to mount the volume. But the kernel refuses to mount such a volume and errors with exit 32.
+    "metadata_csum" for ext4 is great. However, SLES12 and SLES15 call this an "experimental feature" and doesn't allow mounting of such blocks. The kubelet's mke2fs util looks up /etc/mke2fs.conf and formats the block volume with the checksum feature. Then the kubelet tries to mount the volume. But the kernel refuses to mount such a volume and errors with exit 32.
 
     Resolution:
     On SLES12 and SLES15 hosts, use `sed` to remove the `metadata_csum` feature from the ucp-kubelet container:`sed -i 's/metadata_csum,//g' /etc/mke2fs.conf`
 
     This resolution can be automated across your cluster of SLES12 and SLES15 hosts, by creating a docker swarm service as follows. Note that, for this, the hosts should be in "swarm" mode:
 
-    Create a global  docker service that remove the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
+    Create a global docker service that remove the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
     ```
     docker service create --mode=global --restart-condition none --mount 
     type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker 
