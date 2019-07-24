@@ -221,7 +221,7 @@ In order to optimize user experience and security, support for Internet Explorer
     type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker 
     exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
     ```
-    You can now make nodes kubernetes workers.
+    You can now switch nodes to be kubernetes workers.
 
 - Kubelets or Calico-node pods are Down
 
