@@ -208,7 +208,7 @@ In order to optimize user experience and security, support for Internet Explorer
     {{[fs_types]...
     ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}}}
     ```
-    "metadata_csum" for ext4 is great. However, SLES12 and SLES15 call this an "experimental feature" and doesn't allow mounting of such blocks. The kubelet's mke2fs util looks up /etc/mke2fs.conf and formats the block volume with the checksum feature. Then the kubelet tries to mount the volume. But the kernel refuses to mount such a volume and errors with exit 32.
+    "metadata_csum" for ext4 on SLES12 and SLES15 is an "experimental feature" and the kernel does not allow mounting of volumes that have been formatted with "metadata checksum" enabled. In the ucp-kubelet container, mke2fs is configured to enable metadata check-summing while formatting block volumes. The kubelet tries to mount such a block volume, but the kernel denies the mount with exit error 32.
 
     Resolution:
     On SLES12 and SLES15 hosts, use `sed` to remove the `metadata_csum` feature from the ucp-kubelet container:`sed -i 's/metadata_csum,//g' /etc/mke2fs.conf`
