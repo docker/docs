@@ -200,9 +200,7 @@ In order to optimize user experience and security, support for Internet Explorer
     ```
     Issuing "dmesg" on the system will show something like:
     ```
-    [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR 
-    because of SUSE-unsupported optional feature METADATA_CSUM.  
-    Load module with allow_unsupported=1.
+    [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
     ```
     Rootcause:
     For block volumes, if a specific filesystem is not specified, then "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes something called "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
@@ -210,7 +208,7 @@ In order to optimize user experience and security, support for Internet Explorer
     {{[fs_types]...
     ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}}}
     ```
-    "metadata_csum" for ext4 is great. However, SLES12 and SLES15 call this an "experimental feature" and doesnt allow mounting of such blocks. The kubelet's mke2fs util looks up /etc/mke2fs.conf and formats the block volume with the checksum feature. Then the kubelet calls mount to mount the volume. But the kernel refuses to mount such a volume and errors with exit 32.
+    "metadata_csum" for ext4 is great. However, SLES12 and SLES15 call this an "experimental feature" and doesnt allow mounting of such blocks. The kubelet's mke2fs util looks up /etc/mke2fs.conf and formats the block volume with the checksum feature. Then the kubelet tries to mount the volume. But the kernel refuses to mount such a volume and errors with exit 32.
 
     Resolution:
     On SLES12 and SLES15 hosts, use `sed` to remove the `metadata_csum` feature from the ucp-kubelet container:`sed -i 's/metadata_csum,//g' /etc/mke2fs.conf`
@@ -223,6 +221,7 @@ In order to optimize user experience and security, support for Internet Explorer
     type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker 
     exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
     ```
+    You can now make nodes kubernetes workers.
 
 - Kubelets or Calico-node pods are Down
 
