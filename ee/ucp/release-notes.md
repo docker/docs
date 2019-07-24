@@ -189,11 +189,18 @@ In order to optimize user experience and security, support for Internet Explorer
 - Kubelet fails mounting local volumes in "Block" mode on SLES 12 and SLES 15 hosts
     The error message from the kubelet looks like this, with mount returning error code 32.
     ```
-    Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175 (durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\" (UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod \"pod-subpath-test-local-preprovisionedpv-l7k9\" (UID: \"364a339d-a98d-11e9-8d2d-0242ac11000b\") : local: failed to mount device /dev/loop0 at /var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ), error exit status 32"
+    Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries 
+    permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175 
+    (durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\" 
+    (UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod 
+    \"pod-subpath-test-local-preprovisionedpv-l7k9\" (UID: \"364a339d-a98d-11e9-8d2d-0242ac11000b\")
+     : local: failed to mount device /dev/loop0 at /var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ), error exit status 32"
     ```
     Issuing "dmesg" on the system will show something like:
     ```
-    [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM.  Load module with allow_unsupported=1.
+    [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR 
+    because of SUSE-unsupported optional feature METADATA_CSUM.  
+    Load module with allow_unsupported=1.
     ```
     Rootcause:
     For block volumes, if a specific filesystem is not specified, then "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes something called "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
@@ -210,7 +217,9 @@ In order to optimize user experience and security, support for Internet Explorer
 
     Create a global  docker service that remove the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
     ```
-    docker service create --mode=global --restart-condition none --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
+    docker service create --mode=global --restart-condition none --mount 
+    type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker 
+    exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
     ```
 
 - Kubelets or Calico-node pods are Down
