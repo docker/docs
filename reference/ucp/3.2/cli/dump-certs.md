@@ -27,9 +27,9 @@ to configure DTR.
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--ca`|Only print the contents of the ca.pem file|
-|`--cluster`|Print the internal UCP swarm root CA and cert instead of the public server cert|
-|`--debug, D`|Enable debug mode|
-|`--jsonlog`|Produce json formatted output for easier parsing|
+| Option       | Description                                                                     |
+|:-------------|:--------------------------------------------------------------------------------|
+| `--debug, D` | Enable debug mode                                                               |
+| `--jsonlog`  | Produce json formatted output for easier parsing                                |
+| `--ca`       | Only print the contents of the ca.pem file                                      |
+| `--cluster`  | Print the internal UCP swarm root CA and cert instead of the public server cert |

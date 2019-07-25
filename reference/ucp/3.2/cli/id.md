@@ -23,3 +23,9 @@ a client bundle.
 
 This ID is used by other commands as confirmation.
 
+## Options
+
+| Option       | Description                                      |
+|:-------------|:-------------------------------------------------|
+| `--debug, D` | Enable debug mode                                |
+| `--jsonlog`  | Produce json formatted output for easier parsing |
