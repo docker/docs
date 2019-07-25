@@ -65,7 +65,7 @@ Complete the following checks:
       following command:
 
       ```
-      $ docker run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list: | xargs -L 1 docker pull
+      $ docker run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list | xargs -L 1 docker pull
       ```
 
     - Load troubleshooting packages (netshoot, etc)
