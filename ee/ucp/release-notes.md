@@ -203,10 +203,10 @@ In order to optimize user experience and security, support for Internet Explorer
     [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
     ```
     Rootcause:
-    For block volumes, if a specific filesystem is not specified, then "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes something called "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
+    For block volumes, if a specific filesystem is not specified, then "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
     ```
-    {{[fs_types]...
-    ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}}}
+    [fs_types]...
+    ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}
     ```
     "metadata_csum" for ext4 on SLES12 and SLES15 is an "experimental feature" and the kernel does not allow mounting of volumes that have been formatted with "metadata checksum" enabled. In the ucp-kubelet container, mke2fs is configured to enable metadata check-summing while formatting block volumes. The kubelet tries to mount such a block volume, but the kernel denies the mount with exit error 32.
 
