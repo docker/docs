@@ -30,13 +30,13 @@ UCP is installed again.
 
 ## Options
 
-| Option                | Description                                                 |
-| :-------------------- | :---------------------------------------------------------- |
-| `--debug, D`          | Enable debug mode                                           |
-| `--id`                | The ID of the UCP instance to uninstall                     |
-| `--interactive, i`    | Run in interactive mode and prompt for configuration values |
-| `--jsonlog`           | Produce json formatted output for easier parsing            |
-| `--pull`              | Pull UCP images: `always`, when `missing`, or `never`       |
-| `--purge-config`      | Remove UCP configs during uninstallation                    |
-| `--registry-username` | Username to use when pulling images                         |
-| `--registry-password` | Password to use when pulling images                         |
+| Option                        | Description                                                 |
+|:------------------------------|:----------------------------------------------------------- |
+| `--debug, D`                  | Enable debug mode                                           |
+| `--jsonlog`                   | Produce json formatted output for easier parsing            |
+| `--interactive, i`            | Run in interactive mode and prompt for configuration values |
+| `--id` *value*                | The ID of the UCP instance to uninstall                     |
+| `--pull` *value*              | Pull UCP images: `always`, when `missing`, or `never`       |
+| `--purge-config`              | Remove UCP configs during uninstallation                    |
+| `--registry-password` *value* | Password to use when pulling images                         |
+| `--registry-username` *value* | Username to use when pulling images                         |
