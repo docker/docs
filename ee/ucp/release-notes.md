@@ -203,7 +203,7 @@ In order to optimize user experience and security, support for Internet Explorer
     [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
     ```
     Rootcause:
-    For block volumes, if a specific filesystem is not specified, then "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
+    For block volumes, if a specific filesystem is not specified, "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
     ```
     [fs_types]...
     ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}
