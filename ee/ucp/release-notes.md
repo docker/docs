@@ -90,8 +90,7 @@ The following features are deprecated in UCP 3.2:
     ```
     docker node update --label-add com.docker.ucpagent-pause=true <NODE>
     ```
-- Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported 
-on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
+- Windows 2016 is formally deprecated from Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
 Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
 - Support for updating the UCP config with `docker service update ucp-manager-agent --config-add <Docker config> ...` 
 is deprecated and will be removed in a future release. To update the UCP config, use the `/api/ucp/config-toml` 
