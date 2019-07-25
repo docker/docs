@@ -187,7 +187,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Known issues
 
 - Kubelet fails mounting local volumes in "Block" mode on SLES 12 and SLES 15 hosts
-    The error message from the kubelet looks like this, with mount returning error code 32.
+    The error message from the kubelet looks like this, with `mount` returning error code 32.
     ```
     Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries 
     permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175 
