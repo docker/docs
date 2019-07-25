@@ -20,8 +20,8 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 # You can't have - characters in these for non-YAML reasons
 
 latest_engine_api_version: "1.40"
-docker_ce_version: "19.03"
-docker_ee_version: "19.03"
+docker_ce_version: "19.03.1"
+docker_ee_version: "19.03.1"
 compose_version: "1.24.1"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
