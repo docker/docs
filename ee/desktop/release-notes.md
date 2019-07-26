@@ -15,6 +15,13 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.2
+2019-07-26
+
+### Upgrades
+
+[Docker 19.03.1](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0.
+
 ## Version 2.1.0.1
 2019-07-22
 
