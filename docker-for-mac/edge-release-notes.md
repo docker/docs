@@ -40,7 +40,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
  - Introduced a new user interface for the Docker Desktop **Preferences** menu.
  - The **Restart**, **Reset**, and **Uninstall** options are now available on the **Troubleshoot** menu.
  
- #### Bug fixes and minor changes
+#### Bug fixes and minor changes
 
 - Changed the host's Kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
 - Restricted cluster-admin role on local Kubernetes cluster to `kube-system` namespace.
