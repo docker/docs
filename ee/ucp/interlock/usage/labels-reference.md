@@ -2,12 +2,30 @@
 title: Use layer 7 routing labels
 description: Learn about the labels you can use in your swarm services to route
   layer 7 traffic.
-keywords: routing, proxy
+redirect_from:
+  - /ee/ucp/interlock/config/service-labels/
+keywords: routing, proxy, interlock, load balancing
 ---
 
 After you enable the layer 7 routing solution, you can
 [start using it in your swarm services](index.md).
 
+Service labels define hostnames that are routed to the
+service, the applicable ports, and other routing configurations. Applications that publish using Interlock use service labels to configure how they are published.
+
+When you deploy or update a swarm service with service labels, the following actions occur:
+
+1. The `ucp-interlock` service monitors the Docker API for events and
+publishes the events to the `ucp-interlock-extension` service.
+2. That service then generates a new configuration for the proxy service,
+based on the labels you added to your services.
+3. The `ucp-interlock` service takes the new configuration and reconfigures the
+`ucp-interlock-proxy` to start using the new configuration.
+
+The previous steps occur in milliseconds and with rolling updates. Even though
+services are being reconfigured, users won't notice it.
+
+## Service label options
 
 | Label                                  | Description                                                                                                                                    | Example                |
 |:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------|

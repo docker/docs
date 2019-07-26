@@ -214,4 +214,4 @@ Some features are not yet supported on Windows nodes:
 
 ## Known Issues
 
-Refer to the [Docker EE UCP release notes](/ee/ucp/release-notes) for Known Issues information.
+Refer to the [Docker Enterprise UCP release notes](/ee/ucp/release-notes) for Known Issues information.

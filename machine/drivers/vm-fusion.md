@@ -19,7 +19,7 @@ Creates machines locally on [VMware Fusion](http://www.vmware.com/products/fusio
 -   `--vmwarefusion-no-share`: Disable the mount of your home directory.
 
 The VMware Fusion driver uses the latest boot2docker image.
-See [frapposelli/boot2docker](https://github.com/frapposelli/boot2docker/tree/vmware-64bit)
+See [frapposelli/boot2docker](https://github.com/boot2docker/boot2docker)
 
 #### Environment variables and default values
 

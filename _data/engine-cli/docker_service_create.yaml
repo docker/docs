@@ -358,6 +358,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: replicas-max-per-node
+  value_type: uint64
+  default_value: "0"
+  description: Maximum number of tasks per node (default 0 = unlimited)
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: reserve-cpu
   value_type: decimal
   description: Reserve CPUs
@@ -493,6 +503,15 @@ options:
   description: Signal to stop the container
   deprecated: false
   min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: sysctl
+  value_type: list
+  description: Sysctl options
+  deprecated: false
+  min_api_version: "1.40"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -636,8 +655,8 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   \ --update-parallelism 2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
   the scheduler updates a\nmaximum of 2 tasks at a time, with `10s` between updates.
   For more information,\nrefer to the [rolling updates\ntutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/).\n\n###
-  Set environment variables (-e, --env)\n\nThis sets an environmental variable for
-  all tasks in a service. For example:\n\n```bash\n$ docker service create \\\n  --name
+  Set environment variables (-e, --env)\n\nThis sets an environment variable for all
+  tasks in a service. For example:\n\n```bash\n$ docker service create \\\n  --name
   redis_2 \\\n  --replicas 5 \\\n  --env MYVAR=foo \\\n  redis:3.0.6\n```\n\nTo specify
   multiple environment variables, specify multiple `--env` flags, each\nwith a separate
   key-value pair.\n\n```bash\n$ docker service create \\\n  --name redis_2 \\\n  --replicas
@@ -652,46 +671,49 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   Add bind mounts, volumes or memory filesystems\n\nDocker supports three different
   kinds of mounts, which allow containers to read\nfrom or write to files or directories,
   either on the host operating system, or\non memory filesystems. These types are
-  _data volumes_ (often referred to simply\nas volumes), _bind mounts_, and _tmpfs_.\n\nA
-  **bind mount** makes a file or directory on the host available to the\ncontainer
-  it is mounted within. A bind mount may be either read-only or\nread-write. For example,
-  a container might share its host's DNS information by\nmeans of a bind mount of
-  the host's `/etc/resolv.conf` or a container might\nwrite logs to its host's `/var/log/myContainerLogs`
-  directory. If you use\nbind mounts and your host and containers have different notions
-  of permissions,\naccess controls, or other such details, you will run into portability
-  issues.\n\nA **named volume** is a mechanism for decoupling persistent data needed
-  by your\ncontainer from the image used to create the container and from the host
-  machine.\nNamed volumes are created and managed by Docker, and a named volume persists\neven
-  when no container is currently using it. Data in named volumes can be\nshared between
-  a container and the host machine, as well as between multiple\ncontainers. Docker
-  uses a _volume driver_ to create, manage, and mount volumes.\nYou can back up or
-  restore volumes using Docker commands.\n\nA **tmpfs** mounts a tmpfs inside a container
-  for volatile data.\n\nConsider a situation where your image starts a lightweight
-  web server. You could\nuse that image as a base image, copy in your website's HTML
-  files, and package\nthat into another image. Each time your website changed, you'd
-  need to update\nthe new image and redeploy all of the containers serving your website.
-  A better\nsolution is to store the website in a named volume which is attached to
-  each of\nyour web server containers when they start. To update the website, you
-  just\nupdate the named volume.\n\nFor more information about named volumes, see\n[Data
-  Volumes](https://docs.docker.com/engine/tutorials/dockervolumes/).\n\nThe following
-  table describes options which apply to both bind mounts and named\nvolumes in a
-  service:\n\n<table>\n  <tr>\n    <th>Option</th>\n    <th>Required</th>\n    <th>Description</th>\n
-  \ </tr>\n  <tr>\n    <td><b>types</b></td>\n    <td></td>\n    <td>\n      <p>The
-  type of mount, can be either <tt>volume</tt>, <tt>bind</tt>, or <tt>tmpfs</tt>.
-  Defaults to <tt>volume</tt> if no type is specified.\n      <ul>\n        <li><tt>volume</tt>:
-  mounts a <a href=\"https://docs.docker.com/engine/reference/commandline/volume_create/\">managed
+  _data volumes_ (often referred to simply\nas volumes), _bind mounts_, _tmpfs_, and
+  _named pipes_.\n\nA **bind mount** makes a file or directory on the host available
+  to the\ncontainer it is mounted within. A bind mount may be either read-only or\nread-write.
+  For example, a container might share its host's DNS information by\nmeans of a bind
+  mount of the host's `/etc/resolv.conf` or a container might\nwrite logs to its host's
+  `/var/log/myContainerLogs` directory. If you use\nbind mounts and your host and
+  containers have different notions of permissions,\naccess controls, or other such
+  details, you will run into portability issues.\n\nA **named volume** is a mechanism
+  for decoupling persistent data needed by your\ncontainer from the image used to
+  create the container and from the host machine.\nNamed volumes are created and managed
+  by Docker, and a named volume persists\neven when no container is currently using
+  it. Data in named volumes can be\nshared between a container and the host machine,
+  as well as between multiple\ncontainers. Docker uses a _volume driver_ to create,
+  manage, and mount volumes.\nYou can back up or restore volumes using Docker commands.\n\nA
+  **tmpfs** mounts a tmpfs inside a container for volatile data.\n\nA **npipe** mounts
+  a named pipe from the host into the container.\n\nConsider a situation where your
+  image starts a lightweight web server. You could\nuse that image as a base image,
+  copy in your website's HTML files, and package\nthat into another image. Each time
+  your website changed, you'd need to update\nthe new image and redeploy all of the
+  containers serving your website. A better\nsolution is to store the website in a
+  named volume which is attached to each of\nyour web server containers when they
+  start. To update the website, you just\nupdate the named volume.\n\nFor more information
+  about named volumes, see\n[Data Volumes](https://docs.docker.com/engine/tutorials/dockervolumes/).\n\nThe
+  following table describes options which apply to both bind mounts and named\nvolumes
+  in a service:\n\n<table>\n  <tr>\n    <th>Option</th>\n    <th>Required</th>\n    <th>Description</th>\n
+  \ </tr>\n  <tr>\n    <td><b>type</b></td>\n    <td></td>\n    <td>\n      <p>The
+  type of mount, can be either <tt>volume</tt>, <tt>bind</tt>, <tt>tmpfs</tt>, or
+  <tt>npipe</tt>. Defaults to <tt>volume</tt> if no type is specified.\n      <ul>\n
+  \       <li><tt>volume</tt>: mounts a <a href=\"https://docs.docker.com/engine/reference/commandline/volume_create/\">managed
   volume</a>\n        into the container.</li> <li><tt>bind</tt>:\n        bind-mounts
   a directory or file from the host into the container.</li>\n        <li><tt>tmpfs</tt>:
-  mount a tmpfs in the container</li>\n      </ul></p>\n    </td>\n  </tr>\n  <tr>\n
-  \   <td><b>src</b> or <b>source</b></td>\n    <td>for <tt>type=bind</tt> only></td>\n
-  \   <td>\n      <ul>\n        <li>\n         <tt>type=volume</tt>: <tt>src</tt>
-  is an optional way to specify the name of the volume (for example, <tt>src=my-volume</tt>).\n
-  \         If the named volume does not exist, it is automatically created. If no
-  <tt>src</tt> is specified, the volume is\n          assigned a random name which
-  is guaranteed to be unique on the host, but may not be unique cluster-wide.\n          A
-  randomly-named volume has the same lifecycle as its container and is destroyed when
-  the <i>container</i>\n          is destroyed (which is upon <tt>service update</tt>,
-  or when scaling or re-balancing the service)\n        </li>\n        <li>\n          <tt>type=bind</tt>:
+  mount a tmpfs in the container</li>\n        <li><tt>npipe</tt>: mounts named pipe
+  from the host into the container (Windows containers only).</li>\n      </ul></p>\n
+  \   </td>\n  </tr>\n  <tr>\n    <td><b>src</b> or <b>source</b></td>\n    <td>for
+  <tt>type=bind</tt> and <tt>type=npipe</tt></td>\n    <td>\n      <ul>\n        <li>\n
+  \        <tt>type=volume</tt>: <tt>src</tt> is an optional way to specify the name
+  of the volume (for example, <tt>src=my-volume</tt>).\n          If the named volume
+  does not exist, it is automatically created. If no <tt>src</tt> is specified, the
+  volume is\n          assigned a random name which is guaranteed to be unique on
+  the host, but may not be unique cluster-wide.\n          A randomly-named volume
+  has the same lifecycle as its container and is destroyed when the <i>container</i>\n
+  \         is destroyed (which is upon <tt>service update</tt>, or when scaling or
+  re-balancing the service)\n        </li>\n        <li>\n          <tt>type=bind</tt>:
   <tt>src</tt> is required, and specifies an absolute path to the file or directory
   to bind-mount\n          (for example, <tt>src=/path/on/host/</tt>). An error is
   produced if the file or directory does not exist.\n        </li>\n        <li>\n
@@ -703,10 +725,16 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   mounting the volume or bind mount.</p>\n    </td>\n  </tr>\n  <tr>\n    <td><p><b>readonly</b>
   or <b>ro</b></p></td>\n    <td></td>\n    <td>\n      <p>The Engine mounts binds
   and volumes <tt>read-write</tt> unless <tt>readonly</tt> option\n      is given
-  when mounting the bind or volume.\n      <ul>\n        <li><tt>true</tt> or <tt>1</tt>
+  when mounting the bind or volume. Note that setting <tt>readonly</tt> for a\n      bind-mount
+  does not make its submounts <tt>readonly</tt> on the current Linux implementation.
+  See also <tt>bind-nonrecursive</tt>.\n      <ul>\n        <li><tt>true</tt> or <tt>1</tt>
   or no value: Mounts the bind or volume read-only.</li>\n        <li><tt>false</tt>
   or <tt>0</tt>: Mounts the bind or volume read-write.</li>\n      </ul></p>\n    </td>\n
-  \ </tr>\n  <tr>\n    <td><b>consistency</b></td>\n    <td></td>\n    <td>\n      <p>The
+  \ </tr>\n</table>\n\n#### Options for Bind Mounts\n\nThe following options can only
+  be used for bind mounts (`type=bind`):\n\n\n<table>\n  <tr>\n    <th>Option</th>\n
+  \   <th>Description</th>\n  </tr>\n  <tr>\n    <td><b>bind-propagation</b></td>\n
+  \   <td>\n      <p>See the <a href=\"#bind-propagation\">bind propagation section</a>.</p>\n
+  \   </td>\n  </tr>\n  <tr>\n    <td><b>consistency</b></td>\n    <td>\n      <p>The
   consistency requirements for the mount; one of\n         <ul>\n           <li><tt>default</tt>:
   Equivalent to <tt>consistent</tt>.</li>\n           <li><tt>consistent</tt>: Full
   consistency.  The container runtime and the host maintain an identical view of the
@@ -715,33 +743,41 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   visible within a container.</li>\n           <li><tt>delegated</tt>: The container
   runtime's view of the mount is authoritative.  There may be delays before updates
   made in a container are visible on the host.</li>\n        </ul>\n     </p>\n    </td>\n
-  \ </tr>\n</table>\n\n#### Bind Propagation\n\nBind propagation refers to whether
-  or not mounts created within a given\nbind mount or named volume can be propagated
-  to replicas of that mount. Consider\na mount point `/mnt`, which is also mounted
-  on `/tmp`. The propation settings\ncontrol whether a mount on `/tmp/a` would also
-  be available on `/mnt/a`. Each\npropagation setting has a recursive counterpoint.
-  In the case of recursion,\nconsider that `/tmp/a` is also mounted as `/foo`. The
-  propagation settings\ncontrol whether `/mnt/a` and/or `/tmp/a` would exist.\n\nThe
-  `bind-propagation` option defaults to `rprivate` for both bind mounts and\nvolume
-  mounts, and is only configurable for bind mounts. In other words, named\nvolumes
-  do not support bind propagation.\n\n- **`shared`**: Sub-mounts of the original mount
-  are exposed to replica mounts,\n                and sub-mounts of replica mounts
-  are also propagated to the\n                original mount.\n- **`slave`**: similar
-  to a shared mount, but only in one direction. If the\n               original mount
-  exposes a sub-mount, the replica mount can see it.\n               However, if the
-  replica mount exposes a sub-mount, the original\n               mount cannot see
-  it.\n- **`private`**: The mount is private. Sub-mounts within it are not exposed
-  to\n                 replica mounts, and sub-mounts of replica mounts are not\n
-  \                exposed to the original mount.\n- **`rshared`**: The same as shared,
-  but the propagation also extends to and from\n                 mount points nested
-  within any of the original or replica mount\n                 points.\n- **`rslave`**:
-  The same as `slave`, but the propagation also extends to and from\n                 mount
+  \ </tr>\n  <tr>\n    <td><b>bind-nonrecursive</b></td>\n    <td>\n      By default,
+  submounts are recursively bind-mounted as well. However, this behavior can be confusing
+  when a\n      bind mount is configured with <tt>readonly</tt> option, because submounts
+  are not mounted as read-only.\n      Set <tt>bind-nonrecursive</tt> to disable recursive
+  bind-mount.<br />\n      <br />\n      A value is optional:<br />\n      <br />\n
+  \     <ul>\n        <li><tt>true</tt> or <tt>1</tt>: Disables recursive bind-mount.</li>\n
+  \       <li><tt>false</tt> or <tt>0</tt>: Default if you do not provide a value.
+  Enables recursive bind-mount.</li>\n      </ul>\n    </td>\n  </tr>\n</table>\n\n#####
+  Bind propagation\n\nBind propagation refers to whether or not mounts created within
+  a given\nbind mount or named volume can be propagated to replicas of that mount.
+  Consider\na mount point `/mnt`, which is also mounted on `/tmp`. The propation settings\ncontrol
+  whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each\npropagation
+  setting has a recursive counterpoint. In the case of recursion,\nconsider that `/tmp/a`
+  is also mounted as `/foo`. The propagation settings\ncontrol whether `/mnt/a` and/or
+  `/tmp/a` would exist.\n\nThe `bind-propagation` option defaults to `rprivate` for
+  both bind mounts and\nvolume mounts, and is only configurable for bind mounts. In
+  other words, named\nvolumes do not support bind propagation.\n\n- **`shared`**:
+  Sub-mounts of the original mount are exposed to replica mounts,\n                and
+  sub-mounts of replica mounts are also propagated to the\n                original
+  mount.\n- **`slave`**: similar to a shared mount, but only in one direction. If
+  the\n               original mount exposes a sub-mount, the replica mount can see
+  it.\n               However, if the replica mount exposes a sub-mount, the original\n
+  \              mount cannot see it.\n- **`private`**: The mount is private. Sub-mounts
+  within it are not exposed to\n                 replica mounts, and sub-mounts of
+  replica mounts are not\n                 exposed to the original mount.\n- **`rshared`**:
+  The same as shared, but the propagation also extends to and from\n                 mount
   points nested within any of the original or replica mount\n                 points.\n-
-  **`rprivate`**: The default. The same as `private`, meaning that no mount points\n
-  \                 anywhere within the original or replica mount points propagate\n
-  \                 in either direction.\n\nFor more information about bind propagation,
-  see the\n[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).\n\n####
-  Options for Named Volumes\n\nThe following options can only be used for named volumes
+  **`rslave`**: The same as `slave`, but the propagation also extends to and from\n
+  \                mount points nested within any of the original or replica mount\n
+  \                points.\n- **`rprivate`**: The default. The same as `private`,
+  meaning that no mount points\n                  anywhere within the original or
+  replica mount points propagate\n                  in either direction.\n\nFor more
+  information about bind propagation, see the\n[Linux kernel documentation for shared
+  subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).\n\n####
+  Options for named volumes\n\nThe following options can only be used for named volumes
   (`type=volume`):\n\n\n<table>\n  <tr>\n    <th>Option</th>\n    <th>Description</th>\n
   \ </tr>\n  <tr>\n    <td><b>volume-driver</b></td>\n    <td>\n      <p>Name of the
   volume-driver plugin to use for the volume. Defaults to\n      <tt>\"local\"</tt>,
@@ -756,8 +792,8 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   \     the Engine copies those files and directories into the volume, allowing\n
   \     the host to access them. Set <tt>volume-nocopy</tt> to disable copying files\n
   \     from the container's filesystem to the volume and mount the empty volume.<br
-  />\n\n      A value is optional:\n\n      <ul>\n        <li><tt>true</tt> or <tt>1</tt>:
-  Default if you do not provide a value. Disables copying.</li>\n        <li><tt>false</tt>
+  />\n      <br />\n      A value is optional:<br />\n      <br />\n      <ul>\n        <li><tt>true</tt>
+  or <tt>1</tt>: Default if you do not provide a value. Disables copying.</li>\n        <li><tt>false</tt>
   or <tt>0</tt>: Enables copying.</li>\n      </ul>\n    </td>\n  </tr>\n  <tr>\n
   \   <td><b>volume-opt</b></td>\n    <td>\n      Options specific to a given volume
   driver, which will be passed to the\n      driver when creating the volume. Options
@@ -868,14 +904,23 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   \ --placement-pref 'spread=node.labels.rack' \\\n  redis:3.0.6\n```\n\nWhen updating
   a service with `docker service update`, `--placement-pref-add`\nappends a new placement
   preference after all existing placement preferences.\n`--placement-pref-rm` removes
-  an existing placement preference that matches the\nargument.\n\n### Attach a service
-  to an existing network (--network)\n\nYou can use overlay networks to connect one
-  or more services within the swarm.\n\nFirst, create an overlay network on a manager
-  node the docker network create\ncommand:\n\n```bash\n$ docker network create --driver
-  overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter you create an overlay
-  network in swarm mode, all manager nodes have\naccess to the network.\n\nWhen you
-  create a service and pass the `--network` flag to attach the service to\nthe overlay
-  network:\n\n```bash\n$ docker service create \\\n  --replicas 3 \\\n  --network
+  an existing placement preference that matches the\nargument.\n\n### Specify maximum
+  replicas per node (--replicas-max-per-node)\n\nUse the `--replicas-max-per-node`
+  flag to set the maximum number of replica tasks that can run on a node.\nThe following
+  command creates a nginx service with 2 replica tasks but only one replica task per
+  node.\n\nOne example where this can be useful is to balance tasks over a set of
+  data centers together with `--placement-pref`\nand let `--replicas-max-per-node`
+  setting make sure that replicas are not migrated to another datacenter during\nmaintenance
+  or datacenter failure.\n\nThe example below illustrates this:\n\n```bash\n$ docker
+  service create \\\n  --name nginx \\\n  --replicas 2 \\\n  --replicas-max-per-node
+  1 \\\n  --placement-pref 'spread=node.labels.datacenter' \\\n  nginx\n```\n\n###
+  Attach a service to an existing network (--network)\n\nYou can use overlay networks
+  to connect one or more services within the swarm.\n\nFirst, create an overlay network
+  on a manager node the docker network create\ncommand:\n\n```bash\n$ docker network
+  create --driver overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter you
+  create an overlay network in swarm mode, all manager nodes have\naccess to the network.\n\nWhen
+  you create a service and pass the `--network` flag to attach the service to\nthe
+  overlay network:\n\n```bash\n$ docker service create \\\n  --replicas 3 \\\n  --network
   my-network \\\n  --name my-web \\\n  nginx\n\n716thylsndqma81j6kkkb5aus\n```\n\nThe
   swarm extends my-network to each node running the service.\n\nContainers on the
   same network can access each other using\n[service discovery](https://docs.docker.com/engine/swarm/networking/#use-swarm-mode-service-discovery).\n\nLong

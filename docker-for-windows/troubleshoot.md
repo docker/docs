@@ -301,7 +301,7 @@ Docker Desktop for Windows requires a Hyper-V as well as the Hyper-V Module for 
 Powershell to be installed and enabled. The Docker Desktop for Windows installer enables
 it for you.
 
-Docker Desktop for Windows also needs two CPU hardware features to use Hyper-V: Virtualization and SLAT (Second Level Adress Translation), which is also called RVI (Rapid Virtualization Indexing).
+Docker Desktop for Windows also needs two CPU hardware features to use Hyper-V: Virtualization and SLAT (Second Level Address Translation), which is also called RVI (Rapid Virtualization Indexing).
 On some systems, Virtualization needs to be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
 To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop for Windows does not work correctly. 

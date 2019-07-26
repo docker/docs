@@ -284,6 +284,17 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: output
+  shorthand: o
+  value_type: stringArray
+  default_value: '[]'
+  description: 'Output destination (format: type=local,dest=path)'
+  deprecated: false
+  min_api_version: "1.40"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: platform
   value_type: string
   description: Set platform if server is multi-platform capable
@@ -551,13 +562,13 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   is preserved with this method.\n\nThe `--squash` option is an experimental feature,
   and should not be considered\nstable.\n\n\nSquashing layers can be beneficial if
   your Dockerfile produces multiple layers\nmodifying the same files, for example,
-  file that are created in one step, and\nremoved in another step. For other use-cases,
+  files that are created in one step, and\nremoved in another step. For other use-cases,
   squashing images may actually have\na negative impact on performance; when pulling
   an image consisting of multiple\nlayers, layers can be pulled in parallel, and allows
   sharing layers between\nimages (saving space).\n\nFor most use cases, multi-stage
-  are a better alternative, as they give more\nfine-grained control over your build,
-  and can take advantage of future\noptimizations in the builder. Refer to the [use
-  multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)\nsection
+  builds are a better alternative, as they give more\nfine-grained control over your
+  build, and can take advantage of future\noptimizations in the builder. Refer to
+  the [use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)\nsection
   in the userguide for more information.\n\n\n#### Known limitations\n\nThe `--squash`
   option has a number of known limitations:\n\n- When squashing layers, the resulting
   image cannot take advantage of layer\n  sharing with other images, and may use significantly
@@ -568,7 +579,7 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   \ impact on performance, as a single layer takes longer to extract, and\n  downloading
   a single layer cannot be parallelized.\n- When attempting to squash an image that
   does not make changes to the\n  filesystem (for example, the Dockerfile only contains
-  `ENV` instructions),\n  the squash step will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)\n\n####
+  `ENV` instructions),\n  the squash step will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)).\n\n####
   Prerequisites\n\nThe example on this page is using experimental mode in Docker 1.13.\n\nExperimental
   mode can be enabled by using the `--experimental` flag when starting the Docker
   daemon or setting `experimental: true` in the `daemon.json` configuration file.\n\nBy

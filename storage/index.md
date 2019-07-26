@@ -22,6 +22,7 @@ container layer. This means that:
 Docker has two options for containers to store files in the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
 _bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
+If you're running Docker on Windows you can also use a _named pipe_.
 
 Keep reading for more information about these two ways of persisting data.
 
@@ -99,6 +100,10 @@ mounts is to think about where the data lives on the Docker host.
   the lifetime of the container, to store non-persistent state or sensitive
   information. For instance, internally, swarm services use `tmpfs` mounts to
   mount [secrets](/engine/swarm/secrets.md) into a service's containers.
+
+- **[named pipes](https://docs.microsoft.com/en-us/windows/desktop/ipc/named-pipes)**: An `npipe`
+  mount can be used for communication between the Docker host and a container. Common use case is
+  to run a third-party tool inside of a container and connect to the Docker Engine API using a named pipe.
 
 Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`

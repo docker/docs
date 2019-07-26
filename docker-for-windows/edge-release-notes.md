@@ -11,12 +11,45 @@ For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _edge_ releases are listed below, [_stable_ release
-notes](release-notes) are also available. (Following the CE release model,
+notes](release-notes) are also available. (Following the Docker Engine - Community release model,
 'beta' releases are called 'edge' releases.)  You can learn about both kinds of
 releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
+
+### Docker Community Edition 2.0.5.0 2019-06-12
+
+[Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
+
+This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
+
+* Upgrades
+  - [Docker 19.03.0-rc2](https://github.com/docker/docker-ce/releases/tag/v19.03.0-rc2)
+  - [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3)
+  - [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23)
+  - [linuxkit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+  - [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
+
+* New
+  - Docker Desktop includes the `buildx` plugin (currently experimental).
+  - Selecting the `Experimental features` checkbox on the Docker Desktop settings Daemon page enables experimental features in the Docker daemon and the Docker CLI.
+  - Docker Desktop now checks for stored credentials at startup before attempting to mount any shared drives. This prompts users to reenter the credentials if they are invalid.
+
+* Bug fixes and minor changes
+  - Fixed race condition where Kubernetes sometimes fails to start after the app is restarted.
+  - The system tray icon now opens the Docker Desktop menu with left or right mouse button.
+  - When displaying the crash report window, Docker Desktop does not send a bugsnag crash report unless the user needs the report to upload diagnostics.
+  - Docker Desktop has removed the ability to log in using email address as a username as the Docker command line does not support this.
+  - For Linux containers on Windows (LCOW), at least one physical computer running Windows 10 Professional or Windows 10 Enterprise version 1809 or later is required.
+  - The `Send usage statistics` checkbox is selected by default in Docker Desktop for Windows (Community). This option cannot be modified.
+  - Docker Desktop has added a new dialog box during startup which allows users to retry mounting a shared drive or remove it from the shared drives list after a failed attempt.
+
+
+* Known issues
+  - Windows containers networking does not work properly on Windows 1903.
 
 ### Docker Community Edition 2.0.4.1 2019-05-07
 

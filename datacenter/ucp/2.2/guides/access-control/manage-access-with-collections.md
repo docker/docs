@@ -4,7 +4,7 @@ description: Use collections to enable access control for worker nodes and conta
 keywords: ucp, grant, role, permission, authentication, resource collection
 ---
 
-Docker EE enables controlling access to container resources by using
+Docker Enterprise enables controlling access to container resources by using
 *collections*. A collection is a group of swarm resources,
 like services, containers, volumes, networks, and secrets.
 

@@ -53,9 +53,9 @@ information, see [Bring Your Own License (BYOL) products on Store](byol.md).
 
 ### Plugins and agents
 
-ISVs have the ability to create and distribute [plugin images](https://hub.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise Edition deployments.
+ISVs have the ability to create and distribute [plugin images](https://hub.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise deployments.
 
-You can [apply to be a publisher](https://goto.docker.com/partners) and learn more about our [Technology Partner Program](https://www.docker.com/partners/partner-program#/technology_partner).
+You can [apply to be a publisher](https://goto.docker.com/2019-Partner-Program-Technology.html) and learn more about our [Technology Partner Program](https://www.docker.com/partners/partner-program#/technology_partner).
 
 ## What's next?
 

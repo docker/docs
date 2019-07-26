@@ -55,7 +55,7 @@ on your network, your container appears to be physically attached to the network
     to it. The `--rm` flag means the container is removed when it is stopped.
 
     ```bash
-    $ docker run --rm -itd \
+    $ docker run --rm -dit \
       --network my-macvlan-net \
       --name my-macvlan-alpine \
       alpine:latest \

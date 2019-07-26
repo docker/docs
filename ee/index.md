@@ -1,20 +1,24 @@
 ---
 title: Docker Enterprise
 description: Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.
-keywords: Docker EE, Enterprise, UCP, DTR, orchestration, cluster, Kubernetes, CaaS
+keywords: Docker EE, Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes, CaaS
 redirect_from:
   - /enterprise/
   - /manuals/
 ---
 
-The Docker Platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
 
-Docker Enterprise is a secure, scalable, and supported container platform for building and orchestrating applications across multi-tenant Linux, Windows Server, and IBM Z environments.
+The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
+
+Docker Enterprise is a secure, scalable, and supported container platform for building and 
+orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 
 Docker Enterprise enables deploying highly available workloads using either the Docker Kubernetes Service or Docker Swarm. Docker Enterprise automates many of the tasks that orchestration requires, like provisioning pods, containers, and cluster
 resources. Self-healing components ensure that Docker Enterprise clusters remain highly available.
 
-Role-based access control applies to Kubernetes and Swarm orchestrators, and communication within the cluster is secured with TLS. [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
+Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
+communication within the cluster is secured with TLS.
+[Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
 
 Docker Enterprise includes Docker Universal Control Plane (UCP), the
@@ -28,7 +32,7 @@ cluster and applications through a single interface.
 
 Docker Enterprise provides multi-architecture orchestration using the Docker Kubernetes Service and
 Docker Swarm orchestrators. Docker Enterprise enables a secure software supply chain, with policy-based image
-promotion, image mirroring between registries (including Docker Hub), and signing & scanning enforcement for container images.
+promotion, image mirroring between registries - including Docker Hub, and signing & scanning enforcement for container images.
 
 ### Docker Kubernetes Service
 
@@ -71,16 +75,9 @@ The default Docker Enterprise installation includes both Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
 
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
-
 ### Orchestration platform features
 
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 
 - Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
   to enable high availability
@@ -121,9 +118,9 @@ You can also deploy and monitor your applications and services.
 
 Docker Enterprise has its own built-in authentication mechanism with role-based access
 control (RBAC), so that you can control who can access and make changes to your
-swarm and applications. Also, Docker Enterprise authentication integrates with LDAP
+cluster and applications. Also, Docker Enterprise authentication integrates with LDAP
 services and supports SAML SCIM to proactively synchronize with authentication providers.
-[Learn about role-based access control](access-control/index.md). You can also opt to enable [PKI authentication](link?) to use client certificates, rather than username and password. 
+[Learn about role-based access control](https://docs.docker.com/ee/ucp/authorization/). You can also opt to enable [PKI authentication](https://docs.docker.com/ee/enable-client-certificate-authentication/) to use client certificates, rather than username and password. 
 
 ![](images/docker-ee-overview-2.png){: .with-border}
 
