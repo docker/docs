@@ -16,7 +16,7 @@ see [the list of features](overview.md#features).
 
 Compose works in all environments: production, staging, development, testing, as
 well as CI workflows. You can learn more about each case in [Common Use
-Cases](overview.md#common-use-cases).
+Cases](#common-use-cases).
 
 Using Compose is basically a three-step process:
 

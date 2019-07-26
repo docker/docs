@@ -20,7 +20,14 @@ to upgrade your installation to the latest release.
 * [Version 2.5](#version-25)
 * [Version 2.4](#version-24)
 
-## Version 2.7.0
+# Version 2.7
+
+## 2.7.1
+(2019-7-22)
+### Bug Fixes
+*  In 2.7.0 users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
+
+## 2.7.0
 (2019-7-22)
 
 ### Security
