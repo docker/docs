@@ -18,31 +18,36 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
-### Docker Community Edition 2.1.0.0 2019-07-26
+This is the Docker Desktop Edge channel, which gives you early access to our newest features. Note that some features may be experimental, and some of the features may not ever reach the Stable release.
+
+### Docker Desktop Community 2.1.0.0 
+2019-07-26
 
 [Download](https://download.docker.com/mac/edge/36792/Docker.dmg)
 
-This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+This release contains Kubernetes security improvements. Note that your local Kubernetes PKI and cluster will be reset after installation.
 
-This release contains Kubernetes security improvements. Your local Kubernetes PKI & cluster will be reset after install.
+#### Upgrades
 
-* Upgrades
-  - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
-  - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
-  - [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
-  - Linux Kernel 4.9.184
-  - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+ - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
+ - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+ - [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
+ - Linux Kernel 4.9.184
+ - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
 
-* New
-  - New user interface for Docker Desktop Preferences. Reset and Uninstall options are now available in Troubleshooting menu, instead of Preferences.
+#### New
 
-* Bug fixes and minor changes
-  - Change the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
-  - Restrict cluster-admin role on local Kubernetes cluster to kube-system namespace.
-  - Fix Kubernetes installation with VPNkit subnet.
-  - Reduce startup time: swap is not recreated for each virtual machine boot
-  - Fix occasional crash when gathering diagnostics on windows due to process output not being redirected to stdout.
-  - Add /etc/machine-id in the virtual machine. Fixes [docker/for-mac#3554](https://github.com/docker/for-mac/issues/3554).
+ - Introduced a new user interface for the Docker Desktop **Preferences** menu.
+ - The **Restart**, **Reset**, and **Uninstall** options are now available on the **Troubleshoot** menu.
+ 
+ #### Bug fixes and minor changes
+
+- Changed the host's Kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
+- Restricted cluster-admin role on local Kubernetes cluster to `kube-system` namespace.
+- Fixed Kubernetes installation with VPNkit subnet.
+- Reduced the VM startup time. swap is not created every time a virtual machine boots.
+- Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in a crash.
+- Added `/etc/machine-id` to the virtual machine. Fixes [docker/for-mac#3554](https://github.com/docker/for-mac/issues/3554).
 
 ### Docker Community Edition 2.0.5.0 2019-06-12
 
