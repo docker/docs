@@ -10,7 +10,7 @@ redirect_from:
 
 The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
 
-Docker Enterprise is a secure, scalable, and supported container platform for building and 
+Docker Enterprise is a secure, scalable, and supported container platform for building and
 orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 
 Docker Enterprise enables deploying highly available workloads using either the Docker Kubernetes Service or Docker Swarm. Docker Enterprise automates many of the tasks that orchestration requires, like provisioning pods, containers, and cluster
@@ -120,7 +120,7 @@ Docker Enterprise has its own built-in authentication mechanism with role-based 
 control (RBAC), so that you can control who can access and make changes to your
 cluster and applications. Also, Docker Enterprise authentication integrates with LDAP
 services and supports SAML SCIM to proactively synchronize with authentication providers.
-[Learn about role-based access control](https://docs.docker.com/ee/ucp/authorization/). You can also opt to enable [PKI authentication](https://docs.docker.com/ee/enable-client-certificate-authentication/) to use client certificates, rather than username and password. 
+[Learn about role-based access control](https://docs.docker.com/ee/ucp/authorization/). You can also opt to enable [PKI authentication](https://docs.docker.com/ee/enable-client-certificate-authentication/) to use client certificates, rather than username and password.
 
 ![](images/docker-ee-overview-2.png){: .with-border}
 
@@ -183,7 +183,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
 ## Docker Context
-A new Docker CLI plugin called `docker context` is available with this release. `docker context` helps manage connections to multiple environments so you do not have to remember and type out connection strings. [Read more](link) about `docker context`.
+A new Docker CLI plugin called `docker context` is available with this release. `docker context` helps manage connections to multiple environments so you do not have to remember and type out connection strings. [Read more](https://docs.docker.com/engine/reference/commandline/context/) about `docker context`.
 
 
 ## Where to go next
