@@ -18,6 +18,33 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
+### Docker Community Edition 2.1.0.0 2019-07-26
+
+[Download](https://download.docker.com/win/edge/36792/Docker%20Desktop%20Installer.exe)
+
+This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+
+This release contains Kubernetes security improvements. Your local Kubernetes PKI & cluster will be reset after install.
+
+* Upgrades
+  - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
+  - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+  - [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
+  - Linux Kernel 4.9.184
+  - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+
+* New
+  - New user interface for Docker Desktop Settings. Reset options are now available in Troubleshooting menu, instead of Settings.
+
+* Bug fixes and minor changes
+  - Change the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
+  - Restrict cluster-admin role on local Kubernetes cluster to kube-system namespace.
+  - Fix Kubernetes installation with VPNkit subnet.
+  - Fix Docker Desktop restart after a Windows logout / login, keeping exported ports on containers.
+  - Reduce startup time: swap is not recreated for each virtual machine boot
+  - Do not crash when user cancels switching the version using Windows UAC
+  - Fix occasional crash when gathering diagnostics on windows due to process output not being redirected to stdout.
+
 ### Docker Community Edition 2.0.5.0 2019-06-12
 
 [Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
