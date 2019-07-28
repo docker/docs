@@ -211,7 +211,7 @@ from the repository.
 2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker docker-compose 
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
