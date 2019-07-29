@@ -342,6 +342,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 ### Bug fixes
 
+* Added toleration to calico-node DaemonSet so it can run on all nodes in the cluster
 * Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
 * Added a restrictive `robots.txt` to the root of the UCP API server.
 
