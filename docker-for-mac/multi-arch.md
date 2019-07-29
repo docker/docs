@@ -58,7 +58,7 @@ Multi-architecture support makes it easy to build <a href="https://blog.docker.c
 
 With the Docker Desktop 2.0.4.0 Edge release, Docker is making it easier than ever to develop containers on, and for Arm servers and devices. Using the standard Docker tooling and processes, you can start to build, push, pull, and run images seamlessly on different compute architectures. Note that you don't have to make any changes to Dockerfiles or source code to start building for Arm.
 
-Docker Desktop 2.0.4.0 Edge release introduces a new CLI command called `buildx`.  Buildx allows you to locally build multi-arch images, link them together with a manifest file, and push them all to a registry using a single command.  With the included emulation, you can transparently build more than just native images.  Buildx accomplishes this by adding new builder instances based on BuildKit, and leveraging Docker Desktop's technology stack to run non-native binaries.
+Docker Desktop 2.0.4.0 Edge release introduces a new CLI command called `buildx`.  Buildx allows you to build multi-arch images, link them together with a manifest file, and push them all to a registry using a single command.  With the included emulation, you can transparently build more than just native images.  Buildx accomplishes this by adding new builder instances based on BuildKit, and leveraging Docker Desktop's technology stack to run non-native binaries.
 
 ### Install
 
@@ -92,6 +92,8 @@ $ docker buildx create --name mybuilder
 
 mybuilder
 ```
+
+Alternatively, run `docker buildx create --name mybuilder --use` to create a new builder and switch to it using a single command.
 
 Switch to the new builder and inspect it.
 
