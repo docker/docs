@@ -18,32 +18,39 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2019
 
-### Docker Community Edition 2.1.0.0 2019-07-26
+This is the Edge channel, which gives you early access to our newest features. Be aware that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-[Download](https://download.docker.com/win/edge/36792/Docker%20Desktop%20Installer.exe)
+### Docker Desktop Community 2.1.0.0 
+2019-07-30
 
-This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
+[Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe)
 
-This release contains Kubernetes security improvements. Your local Kubernetes PKI & cluster will be reset after install.
+This release contains Kubernetes security improvements. Note that your local Kubernetes PKI and cluster will be reset after installation.
 
-* Upgrades
-  - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
-  - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
-  - [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
-  - Linux Kernel 4.9.184
-  - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+#### Upgrades
 
-* New
-  - New user interface for Docker Desktop Settings. Reset options are now available in Troubleshooting menu, instead of Settings.
+ - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
+ - [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+ - [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
+ - Linux Kernel 4.9.184
+ - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
 
-* Bug fixes and minor changes
-  - Change the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
-  - Restrict cluster-admin role on local Kubernetes cluster to kube-system namespace.
-  - Fix Kubernetes installation with VPNkit subnet.
-  - Fix Docker Desktop restart after a Windows logout / login, keeping exported ports on containers.
-  - Reduce startup time: swap is not recreated for each virtual machine boot
-  - Do not crash when user cancels switching the version using Windows UAC
-  - Fix occasional crash when gathering diagnostics on windows due to process output not being redirected to stdout.
+#### New
+
+ - Introduced a new user interface for the Docker Desktop **Settings** menu.
+ - The **Restart** and **Reset** options are now available on the **Troubleshoot** menu. 
+
+#### Bug fixes and minor changes
+
+ - Changed the host's kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
+ - Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
+ - Fixed Kubernetes installation with VPNkit subnet.
+ - Fixed an issue where Docker Desktop restarts when a user logs out of Windows and logs back in, which results in retaining the    
+   exported ports on containers.
+ - Reduced the VM startup time. `swap` is not created every time a virtual machine boots.
+ - Fixed a bug which caused Docker Desktop to crash when a user cancels switching the version using Windows User Account Control (UAC)    settings.
+ - Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in    a crash.
+
 
 ### Docker Community Edition 2.0.5.0 2019-06-12
 
