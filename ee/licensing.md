@@ -31,14 +31,14 @@ Complete the following steps to license Docker Enterprise 3.0:
 2. Create a Docker Hub ID for each person that requires access to the license file. Visit [Docker Hub](https://hub.docker.com/) to create a Docker ID. This requires email verification. Ensure that you provide a corporate email address.
 3. Decide on the name of the Hub Organization that will be used to access licenses. The designated team leader must log into Docker Hub and create the Hub Organization. For more information about creating organizations, see [Teams and Organizations](https://docs.docker.com/docker-hub/orgs/).
 
-    > Note that the name of the Hub Organization must be unique across Docker Hub. If you have multiple independent organizations within your company, for example,if you represent 'OrgB' within 'CompanyA', use an Organization name such as   'CompanyAOrgB' instead of 'CompanyA'. Ensure that a company's licenses are registered to the organization, rather than an individual. Otherwise, the team will not be able to access the license(s).
+    > The name of the Hub Organization must be unique across Docker Hub. If you have multiple independent organizations within your company, for example, if you represent 'OrgB' within 'CompanyA', use an Organization name such as 'CompanyAOrgB' instead of 'CompanyA'. Ensure that the company's licenses are registered to the organization, rather than an individual. Otherwise, the team will not be able to access the license(s).
 
 4. On the **Organizations** page, select your organization, and then click on the **Teams** tab. You should see the name of your organization, and the **Choose Team** option below that. You should also see that you have a special team called **owners**. The owners team has full access to all repositories within the organization.
 5. Click **Add User** and add the Docker ID of every member that needs access to the license files. After entering each Docker ID, ensure the IDs are displayed in the **Members** section within the **owners** team.
 
 ## Register your Docker license key
 
-When your license order has been processed by Docker, your support administrator(s), designated support contact, billing contact, or primary sales point of contact will receive a welcome email. This email contains a link to an onboarding experience and your license keys.
+When your license order has been processed by Docker, your support administrator, designated support contact, billing contact, or the primary sales point of contact receives a welcome email. This email contains a link to an onboarding experience and your license keys.
 
 It is important to note that only one recipient, preferably the support administrator or technical primary point of contact, must click on the links and follow the instructions in the welcome email.
 
@@ -49,17 +49,17 @@ Depending on which type of email your team receives, there may be several interm
 1. Log into the [Docker Store](https://store.docker.com/procurement) using your Docker ID and enter the activation key provided in your welcome email.
 2. Click the **Submit Access Key** button.
 3. From the **Subscribe as** drop-down menu, select the ID you would like the subscription applied to.
-4. Click the checkbox to agree to terms of service and then click **Confirm and Subscribe**.
+4. Click the check box to agree to the terms of service and then click **Confirm and Subscribe**.
 5. Your subscription is now available. You will then be redirected to the **My Content** page.
 6. On the **My Content** page, click the **Setup** button on your Docker Enterprise subscription to access your license keys.
 
 ## Access and download your license
 
-When you click the **Setup** button in step 6 above, you will be redirected to the setup instructions page where you can click the License Key link and download your Enterprise license. This page will also include links and instructions on obtaining software such as UCP, DTR, and the Enterprise Engine.
+When you click the **Setup** button in step 6 above, you will be redirected to the setup instructions page where you can click the License Key link and download your Enterprise license. This page contains links and instructions on obtaining software such as UCP, DTR, Desktop Enterprise, and Engine - Enterprise.
 
 ## Apply the license
 
-After you’ve downloaded the license file, you can apply it to your Docker Enterprise component. The following section contains information on how to apply the license to UCP, DTR, Enterprise - Engine, and Docker Desktop - Enterprise components.
+After you’ve downloaded the license keys, you can apply it to your Docker Enterprise component. The following section contains information on how to apply the license to UCP, DTR, Enterprise - Engine, and Docker Desktop Enterprise components.
 
 ### UCP
 
