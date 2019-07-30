@@ -376,17 +376,17 @@ As mentioned in the introduction, `docker app` lets you manage entire
 applications the same way that you currently manage container images. For
 example, you can push and pull entire applications from registries like Docker
 Hub with `docker app push` and `docker app pull`. Other `docker app` commands,
-such as `install`, `upgrade`, `inspect` and `render` can be performed directly
+such as `install`, `upgrade`, `inspect`, and `render` can be performed directly
 on applications while they are stored in a registry.
 
 Push the application to Docker Hub. To complete this step, you need a valid
 Docker ID and you must be logged in to the registry to which you are pushing
 the app.
 
-By default all platform architectures are pushed to the registry. If you are
+By default, all platform architectures are pushed to the registry. If you are
 pushing an official Docker image as part of your app, you may find your app
 bundle becomes large with all image architectures embedded. To just push the
-architecture required you can add the `--platform` flag.
+architecture required, you can add the `--platform` flag.
 
 ```bash
 $ docker login 
@@ -403,10 +403,10 @@ information](/ee/dtr/user/manage-images/review-repository-info/). To use client
 certificates for DTR authentication, see [Enable Client Certificate
 Authentication](/ee/enable-client-certificate-authentication/).
 
-By default all platform architectures are pushed to DTR. If you are pushing an
+By default, all platform architectures are pushed to DTR. If you are pushing an
 official Docker image as part of your app, you may find your app bundle
 becomes large with all image architectures embedded. To just push the
-architecture required you can add the `--platform` flag.
+architecture required, you can add the `--platform` flag.
 
 ```bash
 $ docker login dtr.example.com
