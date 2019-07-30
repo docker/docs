@@ -142,7 +142,7 @@ Where, `username` is a valid Docker username.
 
 >   **Notes:**
 >
->  - The `--platform` flag informs buildx to generate Linux images for Intel 64-bit, Arm 32-bit, and Arm 64-bit architectures.
+>  - The `--platform` flag informs buildx to generate Linux images for AMD 64-bit, Arm 64-bit, and Armv7 architectures.
 >  - The `--push` flag generates a multi-arch manifest and pushes all the images to Docker Hub.
 
 Inspect the image using `imagetools`.
