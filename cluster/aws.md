@@ -16,7 +16,7 @@ This topic discusses working with docker clusters in AWS, including how to:
 
 ## Prerequisites
 
-- Completed installation of [Docker Desktop Enterprise](/ee/desktop/admin/install).
+- Completed installation of [Docker Desktop Enterprise](../ee/desktop/).
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 
 ## Create a cluster

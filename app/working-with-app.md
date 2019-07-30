@@ -372,44 +372,47 @@ port `8080` is allowed on the connection form your browser to your Docker host.
 
 ### Push the app to Docker Hub
 
-As mentioned in the introduction, `docker app` lets you manage entire applications the same way that you 
-currently manage container images. For example, you can push and pull entire applications from registries like 
-Docker Hub with `docker app push` and `docker app pull`. Other `docker app` commands, such 
-as `install`, `upgrade`, `inspect` and `render` can be performed directly on applications while they are 
-stored in a registry.
+As mentioned in the introduction, `docker app` lets you manage entire
+applications the same way that you currently manage container images. For
+example, you can push and pull entire applications from registries like Docker
+Hub with `docker app push` and `docker app pull`. Other `docker app` commands,
+such as `install`, `upgrade`, `inspect`, and `render` can be performed directly
+on applications while they are stored in a registry.
 
-The following section contains some examples.
+Push the application to Docker Hub. To complete this step, you need a valid
+Docker ID and you must be logged in to the registry to which you are pushing
+the app.
 
-Push the application to Docker Hub. To complete this step, you need a valid Docker ID and you must be 
-logged in to the registry to which you are pushing the app.
+By default, all platform architectures are pushed to the registry. If you are
+pushing an official Docker image as part of your app, you may find your app
+bundle becomes large with all image architectures embedded. To just push the
+architecture required, you can add the `--platform` flag.
 
-Be sure to replace the registry ID in the following example with your own.
+```bash
+$ docker login 
 
+$ docker app push my-app --platform="linux/amd64" --tag <hub-id>/<repo>:0.1.0
 ```
-$ docker app push my-app --tag nigelpoulton/app-test:0.1.0
-docker app push hello-world.dockerapp --tag nigelpoulton/app-test:0.1.0
-docker.io/nigelpoulton/app-test:0.1.0-invoc
-hashicorp/http-echo
- application/vnd.docker.distribution.manifest.v2+json [2/2] (sha256:ba27d460...)
-<Snip>
-```
-
-The app is now stored in the container registry.
 
 ### Push the app to DTR
 
-Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as [pushing an app to Docker Hub](#push-the-app-to-docker-hub) except that you need your DTR user credentials and [your DTR repository information](/ee/dtr/user/manage-images/review-repository-info/). To use client certificates for DTR authentication, see [Enable Client Certificate Authentication](/ee/enable-client-certificate-authentication/).
+Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as
+[pushing an app to Docker Hub](#push-the-app-to-docker-hub) except that you
+need your DTR user credentials and [your DTR repository
+information](/ee/dtr/user/manage-images/review-repository-info/). To use client
+certificates for DTR authentication, see [Enable Client Certificate
+Authentication](/ee/enable-client-certificate-authentication/).
+
+By default, all platform architectures are pushed to DTR. If you are pushing an
+official Docker image as part of your app, you may find your app bundle
+becomes large with all image architectures embedded. To just push the
+architecture required, you can add the `--platform` flag.
 
 ```bash
-$ docker app push my-app --tag <dtr-fqdn>/nigelpoulton/app-test:0.1.0
-<dtr-fqdn>/nigelpoulton/app-test:0.1.0-invoc
-hashicorp/http-echo
- application/vnd.docker.distribution.manifest.v2+json [2/2] (sha256:bd1a813b...)
-Successfully pushed bundle to <dtr-fqdn>/nigelpoulton/app-test:0.1.0. 
-Digest is sha256:bd1a813b6301939fa46e617f96711e0cca1e4065d2d724eb86abde6ef7b18e23.
-```
+$ docker login dtr.example.com
 
-The app is now stored in your DTR.
+$ docker app push my-app --platform="linux/amd64" --tag dtr.example.com/<user>/<repo>:0.1.0
+```
 
 ### Install the app directly from Docker Hub or DTR
 
@@ -417,12 +420,12 @@ Now that the app is pushed to the registry, try an `inspect` and `install` comma
 The location of your app is different from the one provided in the examples.
 
 ```
-$ docker app inspect nigelpoulton/app-test:0.1.0
+$ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
 
 Service (1) Replicas Ports Image
 ----------- -------- ----- -----
-hello       1        8080  nigelpoulton/app-test@sha256:ba27d460cd1f22a1a4331bdf74f4fccbc025552357e8a3249c40ae216275de96
+hello       1        8080  myuser/hello-world@sha256:ba27d460cd1f22a1a4331bdf74f4fccbc025552357e8a3249c40ae216275de96
 
 Parameters (2) Value
 -------------- -----
@@ -435,7 +438,7 @@ This action was performed directly against the app in the registry. Note that fo
 Now install it as a native Docker App by referencing the app in the registry, with a different port.
 
 ```
-$ docker app install nigelpoulton/app-test:0.1.0 --set hello.port=8181
+$ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
 Creating service hello-world_hello
 Application "hello-world" installed on context "default"
