@@ -275,12 +275,12 @@ In order to optimize user experience and security, support for Internet Explorer
          namespace: kube-system
        ```
 
-- Using iSCSI on a SLES 15 Kubernetes cluster results in failures
-  - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
+- Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
+  - Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
   ```
   {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
   ```
-  - Reason: The failure is because the containerized kubelet in UCP does not contain the library dependency (libopeniscsiusr) for iscsiadm version 2.0.876 on SLES15.
+  - Reason: The failure is because the containerized kubelet in UCP does not contain certain library dependencies (libopeniscsiusr and libcrypto) for iscsiadm version 2.0.876 on SLES 12 and SLES 15.
   - Workaround: use a swarm service to deploy this change across the cluster as follows:
     1. Install UCP and have nodes configured as swarm workers.
     2. Perform iSCSI initiator related configuration on the nodes.
@@ -299,7 +299,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
     3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
         ```
-        docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
+        docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && echo /rootfs/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
         4b1qxigqht0vf5y4rtplhygj8
         overall progress: 0 out of 3 tasks
         overall progress: 0 out of 3 tasks
@@ -342,6 +342,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 ### Bug fixes
 
+* Added toleration to calico-node DaemonSet so it can run on all nodes in the cluster
 * Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
 * Added a restrictive `robots.txt` to the root of the UCP API server.
 
