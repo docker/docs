@@ -57,8 +57,6 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 
 ### Bug fixes and minor changes
 
-* Renamed the product from **Docker for Windows** to **Docker Desktop**.
-* Introduced a new user interface for the Docker Desktop **Settings** menu. The **Restart** and **Reset** options are now available on the **Troubleshoot** menu.
 * Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
 * Reduced the VM startup time. swap is not created every time a virtual machine boots.
 * Fixed a bug which caused Windows to crash when a user cancels switching the version using Windows User Account Control (UAC) settings.
@@ -76,6 +74,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 * Docker Desktop now truncates UDP DNS responses which are over 512 bytes in size.
 * Fixed a bug where Docker was not added to PATH after installation in some cases.
 * Fixed port 8080 that was used on localhost when starting Kubernetes.
+* Renamed the product from **Docker for Windows** to **Docker Desktop**.
 * Fixed the **Create issue** link in the Diagnostics window.
 * Fixed a bug related to service log collection in diagnostics.
 * Docker Desktop now gathers `/etc/hosts` to help with diagnostics.

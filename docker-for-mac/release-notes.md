@@ -58,7 +58,6 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Bug fixes and minor changes
 
-* Introduced a new user interface for the Docker Desktop **Preferences** menu. The **Restart**, **Reset**, and **Uninstall** options are now available on the **Troubleshoot** menu.
 * Changed the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
 * Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
 * Reduced the VM startup time. swap is not created every time a virtual machine boots.
