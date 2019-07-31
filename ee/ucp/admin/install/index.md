@@ -81,7 +81,7 @@ To install UCP:
     This runs the install command in interactive mode, so that you're
     prompted for any necessary configuration values.
     To find what other options are available in the install command, check the
-    [reference documentation](/reference/ucp/3.1/cli/install.md).
+    [reference documentation](/reference/ucp/3.2/cli/install.md).
 
 > Custom Container Networking Interface (CNI) plugins
 >

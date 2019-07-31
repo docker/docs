@@ -4,6 +4,8 @@ keywords: Docker Desktop for Mac, stable, release notes
 redirect_from:
 - /mackit/release-notes/
 title: Docker for Mac Stable release notes
+toc_min: 1
+toc_max: 2
 ---
 
 Here are the main improvements and issues per stable release, starting with the
@@ -19,6 +21,63 @@ releases, and download stable and edge product installers at [Download Docker
 Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
+
+## Docker Desktop Community 2.1.0.0
+2019-07-31
+
+[Download](https://hub.docker.com/?overlay=onboarding)
+
+### Upgrades
+
+* [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
+* [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+* [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3)
+* [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23)
+* [Docker Machine 0.16.1](https://github.com/docker/machine/releases/tag/v0.16.1)
+* [linuxkit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+* Linux Kernel 4.9.184
+* [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
+* [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
+* [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
+* [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+
+### New
+
+* Selecting the ‘Experimental features’ checkbox in the Daemon **Preferences** menu turns on experimental features for Docker daemon and Docker CLI.
+* Improved the reliability of `com.docker.osxfs trace` performance profiling command. Users can now run the `com.docker.osxfs trace --summary` option for a high-level summary of operations, instead of receiving a trace of all operations.
+* Docker Desktop now supports large lists of DNS resource records on Mac.  Fixes [docker/for-mac#2160](https://github.com/docker/for-mac/issues/2160#issuecomment-431571031).
+
+### Experimental
+
+> Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
+
+Docker Desktop Community 2.1.0.0 contains the following experimental features.
+
+* Docker App: Docker App is a CLI plugin that helps configure, share, and install applications. For more information, see [Working with Docker App](/app/working-with-app/).
+* Docker Buildx: Docker Buildx is a CLI plugin for extended build capabilities with BuildKit. For more information, see [Working with Docker Buildx](/buildx/working-with-buildx/).
+
+### Bug fixes and minor changes
+
+* Changed the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
+* Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
+* Reduced the VM startup time. swap is not created every time a virtual machine boots.
+* Fixed Kubernetes installation with VPNkit subnet.
+* Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in a crash.
+* Added `/etc/machine-id` to the virtual machine. Fixes [docker/for-mac#3554](https://github.com/docker/for-mac/issues/3554).
+* Docker Desktop does not send DNS queries for `docker-desktop.<domain>` every 10s. It now relies on the host’s DNS domain search order rather than trying to replicate it inside the VM.
+* Removed the ability to log in using email address as a username as the Docker command line does not support this.
+* Docker Desktop now allows running a Docker registry inside a container. Fixes [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611).
+* Fixed a stability issue with the DNS resolver.
+* Docker Desktop truncates UDP DNS responses which are over 512 bytes in sizes.
+* Fixed port 8080 that was used on localhost when starting Kubernetes. Fixes [docker/for-mac#3522](https://github.com/docker/for-mac/issues/3522).
+* Improved error messaging: Docker Desktop does not prompt users to run diagnostics, or to reset to factory default when it is not appropriate.
+* Kubernetes: Docker Desktop now uses the default maximum number of pods for kubelet. [docker/for-mac#3453](https://github.com/docker/for-mac/issues/3453).
+* Fixed DockerHelper crash. [docker/for-mac#3470](https://github.com/docker/for-mac/issues/3470).
+* Fixed binding of privileged ports with specified IP. [docker/for-mac#3464](https://github.com/docker/for-mac/issues/3464)
+* Fixed service log collection in diagnostics.
+* Docker Desktop now gathers `/etc/hosts` to help with diagnostics.
+* When two services have a common exposed port, Docker Desktop now exposes the available ports for the second service. [docker/for-mac#3438](https://github.com/docker/for-mac/issues/3438).
+* Docker Desktop ensures localhost resolves to 127.0.0.1. This is related to [docker/for-mac#2990](https://github.com/docker/for-mac/issues/2990#issuecomment-443097942), [docker/for-mac#3383](https://github.com/docker/for-mac/issues/3383).
 
 ### Docker Community Edition 2.0.0.3 2019-02-15
 

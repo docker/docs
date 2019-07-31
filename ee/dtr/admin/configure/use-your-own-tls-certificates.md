@@ -4,10 +4,22 @@ description: Learn how to configure Docker Trusted Registry with your own TLS ce
 keywords: dtr, tls, certificates, security
 ---
 
-Docker Trusted Registry (DTR) services are exposed using HTTPS by default. This ensures encrypted communications between clients and your trusted registry. If you do not pass a PEM-encoded TLS certificate during installation, DTR will generate a [self-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate). This leads to an insecure site warning when accessing DTR through a browser. Additionally, DTR includes an [HSTS (HTTP Strict-Transport-Security) header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) in all API responses which can further lead to your browser refusing to load DTR's web interface.
+Docker Trusted Registry (DTR) services are exposed using HTTPS by default. This
+ensures encrypted communications between clients and your trusted registry. If
+you do not pass a PEM-encoded TLS certificate during installation, DTR will
+generate a [self-signed
+certificate](https://en.wikipedia.org/wiki/Self-signed_certificate). This leads
+to an insecure site warning when accessing DTR through a browser. Additionally,
+DTR includes an [HSTS (HTTP Strict-Transport-Security)
+header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) in all
+API responses which can further lead to your browser refusing to load DTR's web
+interface.
 
-You can configure DTR to use your own TLS certificates, so that it is automatically
-trusted by your users' browser and client tools. As of v2.7, you can also [enable user authentication via client certificates](/ee/enable-authentication-via-client-certs/) provided by your organization's public key infrastructure (PKI).  
+You can configure DTR to use your own TLS certificates, so that it is
+automatically trusted by your users' browser and client tools. As of v2.7, you
+can also [enable user authentication via client
+certificates](/ee/enable-client-certificate-authentication/) provided by your
+organization's public key infrastructure (PKI).
 
 ## Replace the server certificates
 
