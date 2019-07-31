@@ -35,6 +35,10 @@ Before you install Docker Desktop WSL 2 Tech Preview, you must complete the foll
 
     `wsl --set-version <distro name> 2`
 
+# Download
+
+To download the Tech Preview, click [Docker Desktop WSL 2 Tech Preview Installer](https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe).
+
 # Installation
 
 Ensure you have completed the steps described in the Prerequisites section **before** installing the Tech Preview.
