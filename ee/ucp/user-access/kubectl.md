@@ -29,7 +29,7 @@ To use kubectl, install the binary on a workstation which has access to your UCP
 {: .important}
 
 First, find which version of Kubernetes is running in your cluster. This can be found 
-within the Universal Control Plane dashboard or at the UCP API endpoint [version](/reference/ucp/3.1/api/). 
+within the Universal Control Plane dashboard or at the UCP API endpoint [version](/reference/ucp/3.2/api/). 
 
 From the UCP dashboard, click on **About Docker EE** within the **Admin** menu in the top left corner
  of the dashboard. Then navigate to **Kubernetes**.

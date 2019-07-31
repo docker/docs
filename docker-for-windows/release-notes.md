@@ -4,6 +4,8 @@ keywords: Docker Desktop for Windows, stable, release notes
 redirect_from:
 - /winkit/release-notes/
 title: Docker Desktop for Windows Stable Release notes
+toc_min: 1
+toc_max: 2
 ---
 
 Here are the main improvements and issues per stable release, starting with the
@@ -19,6 +21,66 @@ releases, and download stable and edge product installers at [Download Docker
 for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
+
+## Docker Desktop Community 2.1.0.0
+2019-07-31
+
+[Download](https://hub.docker.com/?overlay=onboarding)
+
+### Upgrades
+
+* [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
+* [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
+* [Kubernetes 1.14.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3)
+* [Compose on Kubernetes 0.4.23](https://github.com/docker/compose-on-kubernetes/releases/tag/v0.4.23)
+* [Docker Machine 0.16.1](https://github.com/docker/machine/releases/tag/v0.16.1)
+* [linuxkit v0.7](https://github.com/linuxkit/linuxkit/releases/tag/v0.7)
+* Linux Kernel 4.9.184
+* [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
+* [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
+* [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
+* [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+
+### New
+
+* Selecting the ‘Experimental features’ checkbox in the Daemon, **Settings** menu turns on experimental features for Docker daemon and Docker CLI.
+* Docker Desktop now checks for stored credentials at startup before attempting to mount any shared drives. This prompts users to reenter the credentials if they are invalid.
+
+### Experimental
+
+> Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
+
+Docker Desktop Community 2.1.0.0 contains the following experimental features:
+
+* Docker App: Docker App is a CLI plugin that helps configure, share, and install applications. For more information, see [Working with Docker App](/app/working-with-app/).
+* Docker Buildx: Docker Buildx is a CLI plugin for extended build capabilities with BuildKit. For more information, see [Working with Docker Buildx](/buildx/working-with-buildx/).
+
+### Bug fixes and minor changes
+
+* Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
+* Reduced the VM startup time. swap is not created every time a virtual machine boots.
+* Fixed a bug which caused Windows to crash when a user cancels switching the version using Windows User Account Control (UAC) settings.
+* Fixed an issue where Docker Desktop restarts when a user logs out of Windows and logs back in, which results in retaining the exported ports on containers.
+* Fixed Kubernetes installation with VPNkit subnet.
+* Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in a crash.
+* Fixed race condition where Kubernetes sometimes fails to start after the app is restarted.
+* The system tray icon now opens the Docker Desktop menu with left and right mouse button.
+* When displaying the crash report window, Docker Desktop does not send a bugsnag crash report unless the user needs the report to upload diagnostics.
+* Docker Desktop has removed the ability to log in using email address as a username as the Docker command line does not support this.
+* For Linux containers on Windows (LCOW), the host must run Windows 10 Professional or Windows 10 Enterprise version 1809 or later.
+* The **Send usage statistics** checkbox is selected by default in Docker Desktop for Windows Community. This option cannot be modified.
+* Docker Desktop has added a new dialog box during startup which allows users to retry mounting a shared drive or remove it from the shared drives list after a failed attempt.
+* Fixed the Kubernetes Delete operation of persistent volume claims on Windows.
+* Docker Desktop now truncates UDP DNS responses which are over 512 bytes in size.
+* Fixed a bug where Docker was not added to PATH after installation in some cases.
+* Fixed port 8080 that was used on localhost when starting Kubernetes.
+* Renamed the product from **Docker for Windows** to **Docker Desktop**.
+* Fixed the **Create issue** link in the Diagnostics window.
+* Fixed a bug related to service log collection in diagnostics.
+* Docker Desktop now gathers `/etc/hosts` to help with diagnostics.
+* Added the missing daemon options in Docker Engine 18.09.
+* When two services have a common exposed port, Docker Desktop exposes the available ports for the second service.
+* Fixed the UI lock when changing the Kubernetes state.
 
 ### Docker Community Edition 2.0.0.3 2019-02-15
 
