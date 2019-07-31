@@ -20,12 +20,12 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 # You can't have - characters in these for non-YAML reasons
 
 latest_engine_api_version: "1.40"
-docker_ce_version: "19.03.1"
-docker_ee_version: "19.03.1"
+docker_ce_version: "19.03"
+docker_ee_version: "19.03"
 compose_version: "1.24.1"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
-machine_version: "0.16.1"
+machine_version: "0.16.0"
 distribution_version: "2.7"
 dtr_version: "2.7"
 ucp_version: "3.2"
@@ -111,7 +111,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-19.03.0"
+      win_latest_build: "docker-19.03.1"
   - scope:
       path: "datacenter"
     values:
@@ -121,14 +121,14 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.7.0"
+      dtr_version: "2.7.1"
   - scope:
       path: "datacenter/dtr/2.6"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.6"
+      dtr_version: "2.6.8"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -179,14 +179,14 @@ defaults:
       ucp_repo: "ucp"
       dtr_repo: "dtr"
       ucp_version: "3.2.0"
-      dtr_version: "2.7.0"
+      dtr_version: "2.7.1"
   - scope:
       path: "datacenter/ucp/3.1"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.7"
+      ucp_version: "3.1.9"
   - scope:
       path: "datacenter/ucp/3.0"
     values:

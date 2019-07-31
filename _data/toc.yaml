@@ -1116,12 +1116,10 @@ reference:
       title: images
     - path: /reference/ucp/3.2/cli/install/
       title: install
-    - path: /reference/ucp/3.2/cli/restart/
-      title: restart
+    - path: /reference/ucp/3.2/cli/port-check-server/
+      title: port-check-server
     - path: /reference/ucp/3.2/cli/restore/
       title: restore
-    - path: /reference/ucp/3.2/cli/stop/
-      title: stop
     - path: /reference/ucp/3.2/cli/support/
       title: support
     - path: /reference/ucp/3.2/cli/uninstall-ucp/
@@ -1410,7 +1408,7 @@ manuals:
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
       - title: CLI reference
-        path: /reference/ucp/3.1/cli/
+        path: /reference/ucp/3.2/cli/
         nosync: true
     - sectiontitle: Authorize role-based access
       section:
@@ -1569,6 +1567,259 @@ manuals:
       title: Release notes
     - sectiontitle: Previous versions
       section:
+      - sectiontitle: Universal Control Plane 3.1
+        section:
+        - path: /datacenter/ucp/3.1/guides/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/3.1/guides/ucp-architecture/
+          title: UCP Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/ucp/3.1/guides/admin/install/plan-installation/
+              title: Plan your installation
+            - path: /datacenter/ucp/3.1/guides/admin/install/
+              title: Install
+            - path: /datacenter/ucp/3.1/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/ucp/3.1/guides/admin/install/install-on-azure/
+              title: Install on Azure
+            - path: /datacenter/ucp/3.1/guides/admin/install/upgrade/
+              title: Upgrade
+            - path: /datacenter/ucp/3.1/guides/admin/install/upgrade-offline/
+              title: Upgrade offline
+            - path: /datacenter/ucp/3.1/guides/admin/install/uninstall/
+              title: Uninstall
+            - path: /datacenter/ucp/3.1/guides/admin/install/architecture-specific-images/
+              title: Architecture-specific images
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/configure/add-labels-to-cluster-nodes/
+              title: Add labels to cluster nodes
+            - path: /datacenter/ucp/3.1/guides/admin/configure/add-sans-to-cluster/
+              title: Add SANs to cluster certificates
+            - path: /datacenter/ucp/3.1/guides/admin/configure/collect-cluster-metrics/
+              title: Collect UCP cluster metrics with Prometheus
+            - path: /datacenter/ucp/3.1/guides/admin/configure/metrics-descriptions/
+              title: Using UCP cluster metrics with Prometheus
+            - path: /datacenter/ucp/3.1/guides/admin/configure/configure-rbac-kube/
+              title: Configure native Kubernetes role-based access control
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-audit-logging/
+              title: Create UCP audit logs
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-saml-authentication/
+              title: Enable SAML authentication
+            - path: /datacenter/ucp/3.1/guides/admin/configure/enable-helm-tiller/
+              title: Enable Helm and Tiller with UCP
+            - path: /datacenter/ucp/3.1/guides/admin/configure/external-auth/
+              title: Integrate with LDAP
+            - path: /datacenter/ucp/3.1/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/ucp/3.1/guides/admin/configure/restrict-services-to-worker-nodes/
+              title: Restrict services to worker nodes
+            - path: /datacenter/ucp/3.1/guides/admin/configure/run-only-the-images-you-trust/
+              title: Run only the images you trust
+            - path: /datacenter/ucp/3.1/guides/admin/configure/set-session-timeout/
+              title: Set the user's session timeout
+            - path: /datacenter/ucp/3.1/guides/admin/configure/ucp-configuration-file/
+              title: UCP configuration file
+            - path: /datacenter/ucp/3.1/guides/admin/configure/use-node-local-network-in-swarm/
+              title: Use a local node network in a swarm
+            - path: /datacenter/ucp/3.1/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - path: /datacenter/ucp/3.1/guides/admin/configure/manage-and-deploy-private-images/
+              title: Manage and deploy private images
+            - path: /datacenter/ucp/3.1/guides/admin/configure/set-orchestrator-type/
+              title: Set the orchestrator type for a node
+            - path: /datacenter/ucp/3.1/guides/admin/configure/view-namespace-resources/
+              title: View Kubernetes objects in a namespace
+            - sectiontitle: Join nodes to your cluster
+              section:
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/
+                title: Set up high availability
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/join-linux-nodes-to-cluster/
+                title: Join nodes to your cluster
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
+                title: Join Windows worker nodes to your cluster
+              - path: /datacenter/ucp/3.1/guides/admin/configure/join-nodes/use-a-load-balancer/
+                title: Use a load balancer
+            - path: /datacenter/ucp/3.1/guides/admin/configure/deploy-route-reflectors/
+              title: Improve network performance with Route Reflectors
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+              title: Troubleshoot node messages
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/ucp/3.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+              title: Troubleshoot configurations
+          - path: /datacenter/ucp/3.1/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/ucp/3.1/reference/cli/
+              title: docker/ucp overview
+            - path: /datacenter/ucp/3.1/reference/cli/backup/
+              title: backup
+            - path: /datacenter/ucp/3.1/reference/cli/dump-certs/
+              title: dump-certs
+            - path: /datacenter/ucp/3.1/reference/cli/example-config/
+              title: example-config
+            - path: /datacenter/ucp/3.1/reference/cli/id/
+              title: id
+            - path: /datacenter/ucp/3.1/reference/cli/images/
+              title: images
+            - path: /datacenter/ucp/3.1/reference/cli/install/
+              title: install
+            - path: /datacenter/ucp/3.1/reference/cli/restart/
+              title: restart
+            - path: /datacenter/ucp/3.1/reference/cli/restore/
+              title: restore
+            - path: /datacenter/ucp/3.1/reference/cli/stop/
+              title: stop
+            - path: /datacenter/ucp/3.1/reference/cli/support/
+              title: support
+            - path: /datacenter/ucp/3.1/reference/cli/uninstall-ucp/
+              title: uninstall-ucp
+            - path: /datacenter/ucp/3.1/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: Authorize role-based access
+          section:
+          - path: /datacenter/ucp/3.1/guides/authorization/
+            title: Access control model overview
+          - sectiontitle: The basics
+            section:
+            - path: /datacenter/ucp/3.1/guides/authorization/create-users-and-teams-manually/
+              title: Create users and teams manually
+            - path: /datacenter/ucp/3.1/guides/authorization/create-teams-with-ldap/
+              title: Create teams with LDAP
+            - path: /datacenter/ucp/3.1/guides/authorization/define-roles/
+              title: Define roles with authorized API operations
+            - path: /datacenter/ucp/3.1/guides/authorization/group-resources/
+              title: Group and isolate cluster resources
+            - path: /datacenter/ucp/3.1/guides/authorization/grant-permissions/
+              title: Grant role-access to cluster resources
+            - path: /datacenter/ucp/3.1/guides/authorization/reset-user-password/
+              title: Reset user passwords
+          - sectiontitle: Tutorials and use cases
+            section:
+            - path: /datacenter/ucp/3.1/guides/authorization/deploy-stateless-app/
+              title: Deploy stateless app with RBAC
+            - path: /datacenter/ucp/3.1/guides/authorization/isolate-volumes/
+              title: Isolate volumes
+            - path: /datacenter/ucp/3.1/guides/authorization/isolate-nodes/
+              title: Isolate nodes
+            - path: /datacenter/ucp/3.1/guides/authorization/pull-images/
+              title: Allow users to pull images
+            - path: /datacenter/ucp/3.1/guides/authorization/ee-standard/
+              title: Docker EE Standard use case
+            - path: /datacenter/ucp/3.1/guides/authorization/ee-advanced/
+              title: Docker EE Advanced use case
+        - sectiontitle: Access UCP
+          section:
+          - path: /datacenter/ucp/3.1/guides/user-access/
+            title: Web-based access
+          - path: /datacenter/ucp/3.1/guides/user-access/cli/
+            title: CLI-based access
+          - path: /datacenter/ucp/3.1/guides/user-access/kubectl/
+            title: Install the Kubernetes CLI
+        - path: /datacenter/ucp/3.1/guides/deploy-application-package/
+          title: Deploy an application package
+        - sectiontitle: Deploy apps with Swarm
+          section:
+          - title: Deploy a single service
+            path: /datacenter/ucp/3.1/guides/swarm/
+          - title: Deploy a multi-service app
+            path: /datacenter/ucp/3.1/guides/swarm/deploy-multi-service-app/
+          - title: Deploy application resources to a collection
+            path: /datacenter/ucp/3.1/guides/swarm/deploy-to-collection/
+          - title: Use secrets in your services
+            path: /datacenter/ucp/3.1/guides/swarm/use-secrets/
+          - sectiontitle: Layer 7 routing
+            section:
+            - title: Overview
+              path: /datacenter/ucp/3.1/guides/interlock/
+            - title: Architecture
+              path: /datacenter/ucp/3.1/guides/interlock/architecture/
+            - sectiontitle: Deploy
+              section:
+              - title: Simple deployment
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/
+              - title: Production deployment
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/production/
+              - title: Offline installation
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/offline-install/
+              - title: Layer 7 routing upgrade
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/upgrade/   
+            - sectiontitle: Configuration
+              section:
+              - title: Configure your deployment
+                path: /datacenter/ucp/3.1/guides/interlock/config/
+              - title: Configuring host mode networking
+                path: /datacenter/ucp/3.1/guides/interlock/config/host-mode-networking/
+              - title: Configuring an nginx extension
+                path: /datacenter/ucp/3.1/guides/interlock/config/nginx-config/
+              - title: Tuning the proxy service
+                path: /datacenter/ucp/3.1/guides/interlock/config/tuning/
+              - title: Updating Interlock services
+                path: /datacenter/ucp/3.1/guides/interlock/config/updates/
+            - sectiontitle: Routing traffic to services
+              section:
+              - title: Deploying services
+                path: /datacenter/ucp/3.1/guides/interlock/usage/
+              - title: Publishing a service as a canary instance
+                path: /datacenter/ucp/3.1/guides/interlock/usage/canary/
+              - title: Using context or path-based routing
+                path: /datacenter/ucp/3.1/guides/interlock/usage/context/
+              - title: Specifying a routing mode
+                path: /datacenter/ucp/3.1/guides/interlock/usage/interlock-vip-mode/ 
+              - title: Using routing labels
+                path: /datacenter/ucp/3.1/guides/interlock/usage/labels-reference/ 
+              - title: Implementing redirects
+                path: /datacenter/ucp/3.1/guides/interlock/usage/redirects/
+              - title: Implementing a service cluster
+                path: /datacenter/ucp/3.1/guides/interlock/usage/service-clusters/
+              - title: Implementing persistent (sticky) sessions
+                path: /datacenter/ucp/3.1/guides/interlock/usage/sessions/
+              - title: Securing services with TLS
+                path: /datacenter/ucp/3.1/guides/interlock/usage/tls/
+              - title: Configuring websockets
+                path: /datacenter/ucp/3.1/guides/interlock/usage/websockets/
+        - sectiontitle: Deploy apps with Kubernetes
+          section:
+          - title: Access Kubernetes Resources
+            path: /datacenter/ucp/3.1/guides/kubernetes/kube-resources/
+          - title: Deploy a workload
+            path: /datacenter/ucp/3.1/guides/kubernetes/
+          - title: Deploy a Compose-based app
+            path: /datacenter/ucp/3.1/guides/kubernetes/deploy-with-compose/
+          - title: Deploy an ingress controller
+            path: /datacenter/ucp/3.1/guides/kubernetes/layer-7-routing/
+          - title: Create a service account for a Kubernetes app
+            path: /datacenter/ucp/3.1/guides/kubernetes/create-service-account/
+          - title: Install an unmanaged CNI plugin
+            path: /datacenter/ucp/3.1/guides/kubernetes/install-cni-plugin/
+          - title: Kubernetes network encryption
+            path: /datacenter/ucp/3.1/guides/kubernetes/kubernetes-network-encryption/
+          - sectiontitle: Persistent Storage
+            section:
+            - title: Use NFS Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-nfs-volumes/
+            - title: Use Azure Disk Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-azure-disk/
+            - title: Use Azure Files Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-azure-files/
+            - title: Use AWS EBS Storage
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/configure-aws-storage/  
+        - title: API reference
+          path: /datacenter/ucp/3.1/reference/api/
+          nosync: true
+        - path: /ee/ucp/release-notes/
+          title: Release notes
       - sectiontitle: Universal Control Plane 3.0
         section:
         - path: /datacenter/ucp/3.0/guides/
@@ -2499,6 +2750,201 @@ manuals:
       title: Release notes
     - sectiontitle: Previous versions
       section:
+      - sectiontitle: Docker Trusted Registry 2.6
+        section:
+        - path: /datacenter/dtr/2.6/guides/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.6/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/dtr/2.6/guides/admin/install/
+              title: Install
+            - path: /datacenter/dtr/2.6/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/dtr/2.6/guides/admin/upgrade/
+              title: Upgrade
+            - path: /datacenter/dtr/2.6/guides/admin/install/uninstall/
+              title: Uninstall
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/dtr/2.6/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - path: /datacenter/dtr/2.6/guides/admin/configure/enable-single-sign-on/
+              title: Enable single sign-on
+            - sectiontitle: External storage
+              section:
+              - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/
+                title: Overview
+              - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/storage-backend-migration/
+                title: Switch storage backends
+              - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/s3/
+                title: S3
+              - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/nfs/
+                title: NFS
+            - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-vulnerability-scans/
+              title: Set up vulnerability scans
+            - sectiontitle: Deploy caches
+              section:
+              - title: Cache overview
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/
+              - title: Cache deployment strategy
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/strategy/
+              - title: Deploy a DTR cache with Docker Swarm
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple/
+              - title: Deploy a DTR cache with Kubernetes
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple-kube/
+              - title: Configure caches for high availability
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/high-availability/
+              - title: Cache configuration reference
+                path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/configuration-reference/
+            - path: /datacenter/dtr/2.6/guides/admin/configure/garbage-collection/
+              title: Garbage collection
+            - title: Allow users to create repositories when pushing
+              path: /datacenter/dtr/2.6/guides/admin/configure/allow-creation-on-push/
+            - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-web-proxy/
+              title: Use a web proxy
+          - sectiontitle: Manage users
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/manage-users/
+              title: Authentication and authorization
+            - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-users/
+              title: Create and manage users
+            - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-teams/
+              title: Create and manage teams
+            - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-orgs/
+              title: Create and manage organizations
+            - path: /datacenter/dtr/2.6/guides/admin/manage-users/permission-levels/
+              title: Permission levels
+          - sectiontitle: Manage webhooks
+            section:
+              - title: Create and manage webhooks
+                path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/
+              - title: Use the web interface
+                path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-web-ui/
+              - title: Use the API
+                path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-api/
+          - sectiontitle: Manage jobs
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/job-queue/
+              title: Job Queue
+            - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-ui/
+              title: Audit Jobs with the Web Interface
+            - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-api/
+              title: Audit Jobs with the API
+            - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/auto-delete-job-logs/
+              title: Enable Auto-Deletion of Job Logs
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+              title: Check Notary audit logs
+            - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
+              title: Troubleshoot Docker Trusted Registry
+          - sectiontitle: Disaster recovery
+            section:
+            - title: Overview
+              path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/
+            - title: Repair a single replica
+              path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-single-replica/
+            - title: Repair a cluster
+              path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-cluster/
+            - title: Create a backup
+              path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/create-a-backup/
+            - title: Restore from a backup
+              path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/restore-from-backup/
+          - sectiontitle: CLI Reference
+            section:
+            - path: /reference/dtr/2.6/cli/
+              title: Overview
+            - path: /reference/dtr/2.6/cli/backup/
+              title: backup
+            - path: /reference/dtr/2.6/cli/destroy/
+              title: destroy
+            - path: /reference/dtr/2.6/cli/emergency-repair/
+              title: emergency-repair
+            - path: /reference/dtr/2.6/cli/install/
+              title: install
+            - path: /reference/dtr/2.6/cli/join/
+              title: join
+            - path: /reference/dtr/2.6/cli/reconfigure/
+              title: reconfigure
+            - path: /reference/dtr/2.6/cli/remove/
+              title: remove
+            - path: /reference/dtr/2.6/cli/restore/
+              title: restore
+            - path: /reference/dtr/2.6/cli/upgrade/
+              title: upgrade
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access DTR
+            section:
+            - path: /datacenter/dtr/2.6/guides/user/access-dtr/
+              title: Configure your Docker daemon
+            - path: /datacenter/dtr/2.6/guides/user/access-dtr/configure-your-notary-client/
+              title: Configure your Notary client
+            - path: /datacenter/dtr/2.6/guides/user/access-dtr/use-a-cache/
+              title: Use a cache
+          - sectiontitle: Manage images
+            section:
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/
+              title: Create a repository
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/review-repository-info/
+              title: Review repository info
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/pull-and-push-images/
+              title: Pull and push images
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/delete-images/
+              title: Delete images
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/scan-images-for-vulnerabilities/
+              title: Scan images for vulnerabilities
+            - title: Override a vulnerability
+              path: /datacenter/dtr/2.6/guides/user/manage-images/override-a-vulnerability/
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/prevent-tags-from-being-overwritten/
+              title: Prevent tags from being overwritten
+            - sectiontitle: Sign images
+              section:
+              - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/
+                title: Sign an image
+              - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/trust-with-remote-ucp/
+                title: Trust with a Remote UCP
+          - sectiontitle: Promotion policies and mirroring
+            section:
+              - title: Overview
+                path: /datacenter/dtr/2.6/guides/user/promotion-policies/
+              - title: Promote an image using policies
+                path: /datacenter/dtr/2.6/guides/user/promotion-policies/internal-promotion/
+              - title: Mirror images to another registry
+                path: /datacenter/dtr/2.6/guides/user/promotion-policies/push-mirror/
+              - title: Mirror images from another registry
+                path: /datacenter/dtr/2.6/guides/user/promotion-policies/pull-mirror/
+              - title: Template reference
+                path: /datacenter/dtr/2.6/guides/user/promotion-policies/templates/
+          - sectiontitle: Manage repository events
+            section:
+              - title: Audit repository events
+                path: /datacenter/dtr/2.6/guides/user/audit-repository-events/
+              - title: Auto-delete repository events
+                path: /datacenter/dtr/2.6/guides/admin/configure/auto-delete-repo-events/
+          - title: Manage access tokens
+            path: /datacenter/dtr/2.6/guides/user/access-tokens/
+          - title: Tag pruning
+            path: /datacenter/dtr/2.6/guides/user/tag-pruning/
+        - title: API reference
+          path: /datacenter/dtr/2.6/reference/api/
+          nosync: true
+        - path: /datacenter/dtr/2.6/guides/release-notes/
+          title: Release notes
       - sectiontitle: Docker Trusted Registry 2.5
         section:
         - path: /datacenter/dtr/2.5/guides/
