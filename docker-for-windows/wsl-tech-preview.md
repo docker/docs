@@ -43,7 +43,7 @@ To download the Tech Preview, click [Docker Desktop WSL 2 Tech Preview Installer
 
 Ensure you have completed the steps described in the Prerequisites section **before** installing the Tech Preview.
 
-Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successfully installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
+Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
 
 ![WSL 2 Tech Preview Desktop UI](images/wsl2-ui.png)
 
