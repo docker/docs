@@ -14,7 +14,7 @@ WSL 2 introduces a significant architectural change as it is a full Linux kernel
 
 Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources, enabling CPU and memory-intensive tasks such as building a container to run much faster.
 
-Additionally, with WSL2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.
+Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.
 
 > Note that it is currently not possible to run Kubernetes while running Docker Desktop on WSL 2. However, you can continue to use Kubernetes in the non-WSL 2 Docker Desktop using the Daemon **Settings** option.
 
@@ -43,7 +43,7 @@ To download the Tech Preview, click [Docker Desktop WSL 2 Tech Preview Installer
 
 Ensure you have completed the steps described in the Prerequisites section **before** installing the Tech Preview.
 
-Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successfully installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
+Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
 
 ![WSL 2 Tech Preview Desktop UI](images/wsl2-ui.png)
 
