@@ -271,7 +271,7 @@ the connection form your browser to your Docker host.
 
 Now change the port of the application using `docker app upgrade <app-name>` command.
 ```
-$ docker app upgrade my-app --hello.port=8181
+$ docker app upgrade my-app --set hello.port=8181
 Upgrading service my-app_hello
 Application "my-app" upgraded on context "default"
 ```
