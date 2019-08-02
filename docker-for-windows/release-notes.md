@@ -82,6 +82,27 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 * When two services have a common exposed port, Docker Desktop exposes the available ports for the second service.
 * Fixed the UI lock when changing the Kubernetes state.
 
+### Known issue
+
+Attempts to upgrade Docker Desktop to version 2.1.0.0 can fail with the error `value cannot be null`. To work around this issue:
+
+1. Open the `settings.json` file located at `%APPDATA%\Docker`.
+2. Find the value for `dataFolder`.
+
+   ```
+    ...
+      "dataFolder": null,
+    ...
+   ```
+3. Replace `null` with `""`.
+
+    ```
+    ...
+      "dataFolder": "",
+    ...
+    ```
+4. Restart Docker Desktop for the settings to take effect.
+
 ### Docker Community Edition 2.0.0.3 2019-02-15
 
 [Download](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe)
