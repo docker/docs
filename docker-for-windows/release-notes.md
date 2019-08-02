@@ -82,7 +82,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 * When two services have a common exposed port, Docker Desktop exposes the available ports for the second service.
 * Fixed the UI lock when changing the Kubernetes state.
 
-### Known issue
+### Known issues
 
 Attempts to upgrade Docker Desktop to version 2.1.0.0 can fail with the error `value cannot be null`. To work around this issue:
 
