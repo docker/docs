@@ -662,10 +662,8 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 - Fixed FIFO, sockets, and device files in userns, and fixed device mode not being detected. [moby/moby#38758](https://github.com/moby/moby/pull/38758)
 - Deleted stale containerd object on start failure. [moby/moby#38364](https://github.com/moby/moby/pull/38364)
 
-## 18.03.1-ee-7
-2019-02-28
-
 ### Bug fixes
+
 * Fixed an issue to address the IPAM state from networkdb if manager is not attached to the overlay network. (docker/escalation#1049)
 
 ## 18.03.1-ee-6
@@ -769,23 +767,6 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
-<<<<<<< HEAD
-## 17.06.2-ee-22
-2019-06-25
-
-### Networking
-
-* Fixed changing host target port. Fixes a bug where if a service has the same number of host-mode published ports with PublishedPort 0, changes to the spec would not reflect in the service object. [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
-
-### Runtime
-
-* Performance optimized in aufs and layer store for massively parallel container creation/removal.
-[moby/moby#39107](https://github.com/moby/moby/pull/39107)
-* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with
-directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
-* Windows: provided support for `docker service create --limit-cpu`.
-[moby/moby#39190](https://github.com/moby/moby/pull/39190)
-=======
 ## 17.06.2-ee-23
 2019-07-17
 
