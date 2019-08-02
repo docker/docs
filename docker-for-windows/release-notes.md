@@ -86,7 +86,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 
 Attempts to upgrade Docker Desktop to version 2.1.0.0 can fail with the error `value cannot be null`. To work around this issue:
 
-1. Open the `settings.json` file located at `%APPDATA%\Docker`.
+1. Open the `settings.json` file located at `%APPDATA%\Docker`. For example, `C:\Users\USERNAME\AppData\Roaming\Docker\settings.json`.
 2. Find the value for `dataFolder`.
 
    ```
