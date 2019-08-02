@@ -606,7 +606,14 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
-<<<<<<< HEAD
+## 18.03.1-ee-10
+
+2019-07-17
+
+### Runtime
+
+* Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
+
 ## 18.03.1-ee-9
 
 2019-06-25
@@ -625,34 +632,10 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 * Now using original process spec for execs. [moby/moby#38871](https://github.com/moby/moby/pull/38871)
 * Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack
 with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
-=======
-## 18.03.1-ee-10
-
-2019-07-17
-
-### Runtime
-
-* Masked the secrets updated to the log files when running Docker Engine in debug mode. [CVE-2019-13509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13509): If a Docker engine is running in debug mode, and `docker stack deploy` is used to redeploy a stack which includes non-external secrets, the logs will contain the secret.
-
-## 18.03.1-ee-9
-
-2019-06-27
-
-### Client
-
-* Fixed annotation issues in `docker config create` and `docker secret create` commands that displayed the `--template-driver` option when connecting to an older daemon that didn't support the option. [docker/cli#1769](https://github.com/docker/cli/pull/1769)  [docker/cli#1785](https://github.com/docker/cli/pull/1785)
-
-### Runtime
-
-* Added performance optimizations in aufs and layer store that helps in the creation and removal of massively parallel containers. [moby/moby#39107](https://github.com/moby/moby/pull/39107)
-* Windows: Fixed support for `docker service create --limit-cpu`. [moby/moby#39190](https://github.com/moby/moby/pull/39190)
-* Fixed a bug where the original process spec was not used for exec processes.[moby/moby#38871](https://github.com/moby/moby/pull/38871)
-* Fixed [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39357)
->>>>>>> master
 
 ## 18.03.1-ee-8
 
- 2019-03-28
+2019-03-28
 
 ### Builder
 
