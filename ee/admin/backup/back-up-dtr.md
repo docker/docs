@@ -4,6 +4,8 @@ description: Learn how to create a DTR backup
 keywords: enterprise, backup, dtr, disaster recovery
 redirect_from:
  - /ee/dtr/admin/disaster-recovery/create-a-backup/
+toc_max: 3
+toc_min: 1
 ---
 
 Backups do not cause downtime for DTR.
@@ -36,7 +38,7 @@ restore. If you have not previously performed a backup, the web interface displa
 
 To create a DTR backup, perform the following steps:
 
-1. Run [docker/dtr backup](/reference/dtr/{{site.dtr_version}}/cli/backup/)
+1. Run [DTR Backup command](#run-the-dtr-backup-command-cli)
 2. [Back up DTR image content](#back-up-image-content)
 3. [Back up DTR metadata](#back-up-dtr-metadata)
 4. [Verify your backup](#verify-your-backup)
@@ -58,7 +60,7 @@ From a terminal [using a UCP client bundle]((/ee/ucp/user-access/cli/), run:
 
 {% raw %}
 ```bash
-docker ps --format "{{.Names}}" | grep dtr
+$ docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
@@ -72,12 +74,12 @@ Another way to determine the replica ID is to SSH into a DTR node and run the fo
 
 {% raw %}
 ```bash
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+$ REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 && echo $REPLICA_ID
 ```
 {% endraw %}
 
-#### Back up image content
+### Back up image content
 
 Since you can configure the storage backend that DTR uses to store images,
 the way you back up images depends on the storage backend you're using.
@@ -88,7 +90,7 @@ and creating a tar archive of the [dtr-registry volume](/ee/dtr/architecture/):
 
 {% raw %}
 ```none
-sudo tar -cf {{ image_backup_file }} \
+$ sudo tar -cf {{ image_backup_file }} \
 -C /var/lib/docker/volumes/ dtr-registry-<replica-id>
 ```
 {% endraw %}
@@ -97,20 +99,25 @@ If you're using a different storage backend, follow the best practices
 recommended for that system.
 
 
-#### Back up DTR metadata
+### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
 command, replacing the placeholders with real values:
 
 ```bash
-read -sp 'ucp password: ' UCP_PASSWORD;
+$ read -sp 'ucp password: ' UCP_PASSWORD;
 ```
 
-This prompts you for the UCP password. Next, run the following to back up your DTR metadata and save the result into a tar archive. You can learn more about the supported flags in
-the [reference documentation](/reference/dtr/2.6/cli/backup/).
+This prompts you for the UCP password. Next, run the following to back up your
+DTR metadata and save the result into a tar archive. You can learn more about
+the supported flags in the [reference
+documentation](/reference/dtr/2.7/cli/backup/).
 
 ```bash
-docker run --log-driver none -i --rm \
+$ docker container run \
+  --rm \
+  --interactive \
+  --log-driver none \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \
   --ucp-url <ucp-url> \
@@ -124,7 +131,6 @@ Where:
 * `<ucp-url>` is the url you use to access UCP.
 * `<ucp-username>` is the username of a UCP administrator.
 * `<replica-id>` is the id of the DTR replica to backup.
-
 
 By default the backup command doesn't stop the DTR replica being backed up.
 This means you can take frequent backups without affecting your users.
@@ -141,7 +147,6 @@ gpg --symmetric {{ metadata_backup_file }}
 
 This prompts you for a password to encrypt the backup, copies the backup file
 and encrypts it.
-
 
 ## Verify your backup
 
@@ -179,12 +184,5 @@ cluster. Then restore DTR on that new cluster to confirm that everything is
 working as expected.
 
 ### Where to go next
-- [Configure your storage backend](/ee/dtr/admin/configure/external-storage/)
-- [Switch your storage backend](/ee/dtr/admin/configure/external-storage/storage-backend-migration/)
-- [Use NFS](/ee/dtr/admin/configure/external-storage/nfs/)
-- [Use S3](/ee/dtr/admin/configure/external-storage/s3/)
-- CLI reference pages
-  - [docker/dtr install](/reference/dtr/2.6/cli/install/)
-  - [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/)
-  - [docker/dtr restore](/reference/dtr/2.6/cli/restore/)
+- [Restoring Docker Enterprise](/ee/admin/restore/)
 

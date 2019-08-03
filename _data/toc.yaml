@@ -3764,7 +3764,7 @@ manuals:
         title: Back up UCP
       - path: /ee/admin/backup/back-up-dtr/
         title: Back up DTR
-      - path: /cluster/reference/backup/
+      - path: /engine/reference/commandline/cluster_backup/
         title: Back up clusters with Docker Cluster
     - sectiontitle: Restore Docker Enterprise
       section:
