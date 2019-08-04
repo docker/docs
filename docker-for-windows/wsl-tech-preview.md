@@ -25,7 +25,7 @@ Before you install Docker Desktop WSL 2 Tech Preview, you must complete the foll
 1. Install Windows 10 Insider Preview build 18932 or later.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 3. Install a default distribution based on Ubuntu 18.04. You can check this with `wsl lsb_release -a`. You can download Ubuntu 18.04 from the [Microsoft store](https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q).
-4. Ensure the Ubuntu distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
+4. Ensure the Ubuntu distribution runs in WSL 2 mode and is setup as default distro. WSL can run distributions in both v1 or v2 mode.
 
     To check the WSL mode, run:
 
@@ -34,6 +34,14 @@ Before you install Docker Desktop WSL 2 Tech Preview, you must complete the foll
     To upgrade to v2, run:
 
     `wsl --set-version <distro name> 2`
+    
+    To check the WSL default distro, run:
+
+    `wsl -l --all`
+
+    To setup Ubuntu as your default, run:
+
+    `wsl --set-default <distro name>`
 
 # Download
 
