@@ -134,7 +134,7 @@ copy the exported private key to the signing machine and execute the command:
 
 ```bash
 $ docker trust key load --name jeff jeff-private-key.pem
-Loading key from "jeff-key.pem"...
+Loading key from "jeff-private-key.pem"...
 Successfully imported key from jeff-private-key.pem
 ```
 
