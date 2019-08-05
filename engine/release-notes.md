@@ -169,7 +169,7 @@ in compose-files service configs. [docker/cli#1617](https://github.com/docker/cl
 * Added pids-limit support in docker update. [moby/moby#32519](https://github.com/moby/moby/pull/32519)
 * Added support for exact list of capabilities. [moby/moby#38380](https://github.com/moby/moby/pull/38380)
 * daemon: Now use 'private' ipc mode by default. [moby/moby#35621](https://github.com/moby/moby/pull/35621)
-* daemon: switched to semaphore-gated WaitGroup for startup tasks. moby/moby#38301](https://github.com/moby/moby/pull/38301)
+* daemon: switched to semaphore-gated WaitGroup for startup tasks. [moby/moby#38301](https://github.com/moby/moby/pull/38301)
 * Now use `idtools.LookupGroup` instead of parsing `/etc/group` file for docker.sock ownership to
 fix: `api.go doesn't respect nsswitch.conf`. [moby/moby#38126](https://github.com/moby/moby/pull/38126)
 * cli: fixed images filter when using multi reference filter. [moby/moby#38171](https://github.com/moby/moby/pull/38171)
