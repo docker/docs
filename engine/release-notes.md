@@ -288,6 +288,9 @@ The missing rules are :
 * Added a workaround for GCR authentication issue. [moby/moby#38246](https://github.com/moby/moby/pull/38246)
 * Builder-next: Fixed a bug in the GCR token cache implementation workaround. [moby/moby#39183](https://github.com/moby/moby/pull/39183)
 
+### Networking
+*  Fixed an error where `--network-rm` would fail to remove a network. [moby/moby#39174](https://github.com/moby/moby/pull/39174)
+
 ### Runtime
 
 * Added performance optimizations in aufs and layer store that helps in massively parallel container creation and removal. [moby/moby#39107](https://github.com/moby/moby/pull/39107), [moby/moby#39135](https://github.com/moby/moby/pull/39135)
