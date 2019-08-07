@@ -64,7 +64,7 @@ You can set the logging driver for a specific container by using the
 
 ```bash
 docker run \
-      -–log-driver syslog –-log-opt syslog-address=udp://1.2.3.4:1111 \
+      --log-driver syslog --log-opt syslog-address=udp://1.2.3.4:1111 \
       alpine echo hello world
 ```
 
