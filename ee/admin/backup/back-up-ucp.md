@@ -83,7 +83,7 @@ docker container run \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /tmp:/backup \
-    $ORG/ucp:$TAG backup \
+    docker/ucp:$version backup \
     --file directory1/directory2/mybackup.tar \
     --passphrase "secret12chars" \
     --include-logs false
