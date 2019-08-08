@@ -22,10 +22,12 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.0
-2019-07-31
+## Docker Desktop Community 2.1.0.1
+2019-08-07
 
 [Download](https://hub.docker.com/?overlay=onboarding)
+
+Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
 ### Upgrades
 
@@ -40,6 +42,7 @@ Desktop for Mac](install.md#download-docker-for-mac).
 * [Qemu 4.0.0](https://github.com/docker/binfmt) for cross compiling for ARM
 * [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
 * [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
+* [Hyperkit v0.20190802](https://github.com/moby/hyperkit/releases/tag/v0.20190802)
 
 ### New
 
@@ -58,6 +61,8 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Bug fixes and minor changes
 
+* Docker Desktop now allows users to expose privileged UDP ports. [docker/for-mac#3775](https://github.com/docker/for-mac/issues/3775)
+* Fixed an issue where running some Docker commands can fail if you are not using Credential Helpers. [docker/for-mac#3785](https://github.com/docker/for-mac/issues/3785)
 * Changed the host's kubernetes context so that `docker run -v .kube:kube ... kubectl` works.
 * Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
 * Reduced the VM startup time. swap is not created every time a virtual machine boots.

@@ -1290,6 +1290,8 @@ manuals:
     title: Overview
   - path: /ee/release-notes/
     title: Release notes
+  - path: /ee/licensing/
+    title: Licensing
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
