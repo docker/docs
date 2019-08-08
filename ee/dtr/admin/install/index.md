@@ -15,6 +15,12 @@ infrastructure meets the [system requirements](./system-requirements) that DTR n
 
 ## Step 2. Install UCP
 
+>**Note:** Before installing DTR:
+
+* When upgrading, upgrade UCP before DTR for each major version. For example, if you are upgrading four major versions, upgrade one major version at a time, first UCP, then DTR, and then repeat for the remaining three versions.
+* UCP should be installed or upgraded to the most recent version before an initial install of DTR.
+* Docker Engine should be updated to the most recent version before installing or updating UCP.
+
 Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to [install UCP](/ee/ucp/admin/install/) on all the nodes where you plan to install DTR.
 
