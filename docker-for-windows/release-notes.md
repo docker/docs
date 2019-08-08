@@ -22,10 +22,12 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.0
-2019-07-31
+## Docker Desktop Community 2.1.0.1
+2019-08-07
 
 [Download](https://hub.docker.com/?overlay=onboarding)
+
+  Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
 ### Upgrades
 
@@ -57,6 +59,12 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 
 ### Bug fixes and minor changes
 
+* Fixed PowerShell script signing issue that caused `AuthorizationManager check failed` errors on machines with strict group policies on PowerShell script signing. [docker/for-win#4376](https://github.com/docker/for-win/issues/4376)
+* Fixed an issue where users were unable to start Docker Desktop after upgrading to version 2.1.0.0. [docker/for-win#4390](https://github.com/docker/for-win/issues/4390)
+* Fixed an issue where attempts to upgrade Docker Desktop to version 2.1.0.0 sometimes failed with the error `value cannot be null`. [docker/for-win#4343](https://github.com/docker/for-win/issues/4343)
+* Fixed an issue that caused the installer to hang when upgrading Docker Desktop to version 2.1.0.0. [docker/for-win#4387](https://github.com/docker/for-win/issues/4387)
+* Improved the error messages displayed during VM lifecycle operations. [docker/for-win#4348](https://github.com/docker/for-win/issues/4348)
+* Docker Desktop now supports a configurable user timeout for VMs on slower machines. [docker/for-win#4393](https://github.com/docker/for-win/issues/4393)
 * Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
 * Reduced the VM startup time. swap is not created every time a virtual machine boots.
 * Fixed a bug which caused Windows to crash when a user cancels switching the version using Windows User Account Control (UAC) settings.
@@ -81,27 +89,6 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 * Added the missing daemon options in Docker Engine 18.09.
 * When two services have a common exposed port, Docker Desktop exposes the available ports for the second service.
 * Fixed the UI lock when changing the Kubernetes state.
-
-### Known issues
-
-Attempts to upgrade Docker Desktop to version 2.1.0.0 can fail with the error `value cannot be null`. To work around this issue:
-
-1. Open the `settings.json` file located at `%APPDATA%\Docker`. For example, `C:\Users\USERNAME\AppData\Roaming\Docker\settings.json`.
-2. Find the value for `dataFolder`.
-
-   ```
-    ...
-      "dataFolder": null,
-    ...
-   ```
-3. Replace `null` with `""`.
-
-    ```
-    ...
-      "dataFolder": "",
-    ...
-    ```
-4. Restart Docker Desktop for the settings to take effect.
 
 ### Docker Community Edition 2.0.0.3 2019-02-15
 
