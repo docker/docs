@@ -20,7 +20,24 @@ for Mac](install.md#download-docker-for-mac).
 
 This is the Docker Desktop Edge channel, which gives you early access to our newest features. Note that some features may be experimental, and some of the features may not ever reach the Stable release.
 
-### Docker Desktop Community 2.1.0.0 
+### Docker Desktop Community 2.1.1.0
+2019-08-09
+
+[Download](Add URL)
+
+#### Upgrades
+
+- Linux Kernel 4.14.131
+- [Hyperkit v0.20190802](https://github.com/moby/hyperkit/releases/tag/v0.20190802)
+
+#### Bug fixes and minor changes
+
+- Docker Desktop now allows users to expose privileged UDP ports. [docker/for-mac#3775](https://github.com/docker/for-mac/issues/3775)
+- Added missing fish completions for Docker Compose. [docker/for-mac#3795](https://github.com/docker/for-mac/issues/3795)
+- Fixed an issue where running some Docker commands can fail if you are not using Credential Helpers. [docker/for-mac#3785](https://github.com/docker/for-mac/issues/3785)
+- Fixed a bug that did not allow users to copy and paste text in the **Preferences** > **Daemon** window. [docker/for-mac#3798](https://github.com/docker/for-mac/issues/3798)
+
+### Docker Desktop Community 2.1.0.0
 2019-07-26
 
 [Download](https://download.docker.com/mac/edge/36792/Docker.dmg)
