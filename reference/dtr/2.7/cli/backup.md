@@ -32,7 +32,7 @@ The following command has been tested on Linux:
 ```none
 DTR_VERSION=$(docker container inspect $(docker container ps -f \
   name=dtr-registry -q) | grep -m1 -Po '(?<=DTR_VERSION=)\d.\d.\d'); \
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')); \
+REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-'); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
 read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
 read -sp 'ucp password: ' UCP_PASSWORD; \
