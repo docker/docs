@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: OpenStack driver for machine
 keywords: machine, OpenStack, driver
 title: OpenStack
