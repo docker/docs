@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Migrate from Boot2Docker to Docker Machine
 keywords: machine, commands, boot2docker, migrate, docker
 title: Migrate from Boot2Docker to Machine
