@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: VMware Fusion driver for machine
 keywords: machine, VMware Fusion, driver
 title: VMware Fusion

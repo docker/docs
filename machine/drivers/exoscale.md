@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Exoscale driver for machine
 keywords: machine, exoscale, driver
 title: Exoscale

@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Identify active machines
 keywords: machine, driver, base, operating system
 title: Driver options and operating system defaults

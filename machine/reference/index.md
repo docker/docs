@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Docker Machine Commands Overview
 keywords: machine, commands
 title: Docker Machine command-line reference
