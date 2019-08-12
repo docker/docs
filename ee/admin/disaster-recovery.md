@@ -51,7 +51,7 @@ desired number of managers.
 
 ```bash
 # From the node to recover
-docker swarm init --force-new-cluster --advertise-addr node01:2377
+$ docker swarm init --force-new-cluster --advertise-addr node01:2377
 ```
 
 When you run the `docker swarm init` command with the `--force-new-cluster`
@@ -226,7 +226,7 @@ client bundle to run:
 
 {% raw %}
 ```bash
-docker ps --format "{{.Names}}" | grep dtr
+$ docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
@@ -237,7 +237,7 @@ Another way to determine the replica ID is to SSH into a DTR node and run the fo
 
 {% raw %}
 ```bash
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+$ REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 && echo $REPLICA_ID
 ```
 {% endraw %}
@@ -245,7 +245,10 @@ REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) |
 Then use the UCP client bundle to remove the unhealthy replicas:
 
 ```bash
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
+$ docker container run \
+  --rm \
+  --interactive \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
   --existing-replica-id <healthy-replica-id> \
   --replica-ids <unhealthy-replica-id> \
   --ucp-insecure-tls \
@@ -268,7 +271,9 @@ Use your UCP client bundle to run the following command which prompts you for
 the necessary parameters:
 
 ```bash
-docker run -it --rm \
+$ docker container run \
+  --rm \
+  --interactive \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
@@ -331,7 +336,7 @@ a UCP client bundle to run:
 
 {% raw %}
 ```bash
-docker ps --format "{{.Names}}" | grep dtr
+$ docker ps --format "{{.Names}}" | grep dtr
 
 # The list of DTR containers with <node>/<component>-<replicaID>, e.g.
 # node-1/dtr-api-a1640e1c15b6
@@ -342,7 +347,7 @@ Another way to determine the replica ID is to SSH into a DTR node and run the fo
 
 {% raw %}
 ```bash
-REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
+$ REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) | cut -f 3 -d '-')
 && echo $REPLICA_ID
 ```
 {% endraw %}
@@ -350,7 +355,10 @@ REPLICA_ID=$(docker inspect -f '{{.Name}}' $(docker ps -q -f name=dtr-rethink) |
 Then, use your UCP client bundle to run the emergency repair command:
 
 ```bash
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} emergency-repair \
+$ docker container run \
+  --rm \
+  --interactive \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} emergency-repair \
   --ucp-insecure-tls \
   --existing-replica-id <replica-id>
 ```

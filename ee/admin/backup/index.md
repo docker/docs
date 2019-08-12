@@ -35,4 +35,4 @@ a fresh installation on a separate infrastructure with the backup. Refer to [Res
 
 ### Where to go next
 
-- [Back up Docker Swarm](back-up-swarm)
+- [Back up Docker Swarm](./back-up-swarm/)
