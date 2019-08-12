@@ -172,11 +172,12 @@ defaults:
       ucp_org: "docker"
       ucp_repo: "ucp"
       ucp_version: "3.2.0"
-  - scope: # This is a bit of a hack for the get-support.md topic.
+  - scope: # This is a bit of a hack for the get-support.md and /ee/admin/
       path: "ee"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
+      dtr_org: "docker"
       dtr_repo: "dtr"
       ucp_version: "3.2.0"
       dtr_version: "2.7.1"

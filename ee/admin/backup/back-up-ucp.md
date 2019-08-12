@@ -71,35 +71,45 @@ There are several options for creating a UCP backup:
 The backup process runs on one manager node.
 
 ### Create a UCP backup using the CLI
-The following example shows how to create a UCP manager node backup, encrypt it by using a passphrase, decrypt it, verify its contents, and store it on `/directory1/directory2/backup.tar`: 
+The following example shows how to create a UCP manager node backup, encrypt it
+by using a passphrase, decrypt it, verify its contents, and store it locally on
+the node at `/tmp/mybackup.tar`:
 
-1. Run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command on a single UCP manager and include the `--file` and `--include-logs`options. This creates a tar archive with the contents of all [volumes used by UCP](/ee/ucp-architecture/)
-and streams it to `stdout`. Replace `version` with the version you are currently running.
+1. Run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+   backup` command on a single UCP manager and include the `--file` and
+`--include-logs`options. This creates a tar archive with the contents of all
+[volumes used by UCP](/ee/ucp-architecture/) and streams it to `stdout`.
+Replace `{{ page.ucp_version }}` with the version you are currently running.
 
 ```bash
-docker container run \
-    --log-driver none --rm \
+$ docker container run \
+    --rm \
     --interactive \
+    --log-driver none \
     --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /tmp:/backup \
-    $ORG/ucp:$TAG backup \
-    --file directory1/directory2/mybackup.tar \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume /tmp:/backup \
+    {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup \
+    --file mybackup.tar \
     --passphrase "secret12chars" \
     --include-logs false
 ```
 
-> **Note**: If you are running with Security-Enhanced Linux (SELinux) enabled, which is typical for RHEL hosts, you must include `--security-opt label=disable` in the `docker` command (replace `version` with the version you are currently running):
+> **Note**: If you are running with Security-Enhanced Linux (SELinux) enabled,
+> which is typical for RHEL hosts, you must include `--security-opt
+> label=disable` in the `docker` command (replace `version` with the version
+> you are currently running):
 
 ```bash
-docker container run \
+$ docker container run \
     --rm \
-   --log-driver=none \ 
+    --interactive \
+    --log-driver none \
     --security-opt label=disable \
     --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp:$version backup \
-    --passphrase "secret12chars" > /directory1/directory2/backup.tar
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup \
+    --passphrase "secret12chars" > /tmp/mybackup.tar
  ```   
 
 > To determine whether SELinux is enabled in the engine, view the host’s `/etc/docker/daemon.json` file, and search for the string `"selinux-enabled":"true"`.
@@ -240,5 +250,5 @@ The following table describes the backup schema returned by the `GET` and `LIST`
 
 ### Where to go next
 
-- [Back up DTR](back-up-dtr)
+- [Back up the Docker Trusted Registry](./back-up-dtr/)
  

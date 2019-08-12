@@ -20,6 +20,28 @@ for Windows](install.md#download-docker-for-windows).
 
 This is the Edge channel, which gives you early access to our newest features. Be aware that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
+### Docker Desktop Community 2.1.1.0
+2019-08-12
+
+[Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
+
+#### Upgrades
+
+- Linux Kernel 4.14.131
+
+#### New
+
+- [Docker Desktop WSL 2 Tech Preview](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)
+
+#### Bug fixes and minor changes
+
+- Fixed a PowerShell script signing issue that caused `AuthorizationManager check failed` errors on machines with strict group policies on PowerShell script signing. [docker/for-win#4376](https://github.com/docker/for-win/issues/4376)
+- Fixed an issue where attempts to upgrade Docker Desktop to version 2.1.0.0 sometimes failed with the error value cannot be null. [docker/for-win#3375](https://github.com/docker/for-win/issues/3375), [docker/for-win#4381](https://github.com/docker/for-win/issues/4381), [docker/for-win#4343](https://github.com/docker/for-win/issues/4343), [docker/for-win#4359](https://github.com/docker/for-win/issues/4359)
+- Fixed an issue to ensure Docker Desktop Community installer does not prompt for UAC when UAC is disabled.
+- Improved the error messages displayed during VM lifecycle operations. [docker/for-win#4348](https://github.com/docker/for-win/issues/4348)
+- Docker Desktop now supports a configurable user timeout for VMs on slower machines. [docker/for-win#4393](https://github.com/docker/for-win/issues/4393)
+- Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
+
 ### Docker Desktop Community 2.1.0.0 
 2019-07-30
 

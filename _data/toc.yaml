@@ -1290,6 +1290,8 @@ manuals:
     title: Overview
   - path: /ee/release-notes/
     title: Release notes
+  - path: /ee/licensing/
+    title: Licensing
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
@@ -3764,7 +3766,7 @@ manuals:
         title: Back up UCP
       - path: /ee/admin/backup/back-up-dtr/
         title: Back up DTR
-      - path: /cluster/reference/backup/
+      - path: /engine/reference/commandline/cluster_backup/
         title: Back up clusters with Docker Cluster
     - sectiontitle: Restore Docker Enterprise
       section:

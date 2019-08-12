@@ -35,7 +35,9 @@ to work.
 Start by removing any DTR container that is still running:
 
 ```none
-docker run -it --rm \
+$ docker container run \
+  --rm \
+  --interactive \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls
 ```
@@ -65,10 +67,14 @@ placeholders for the real values:
 read -sp 'ucp password: ' UCP_PASSWORD;
 ```
 
-This prompts you for the UCP password. Next, run the following to restore DTR from your backup. You can learn more about the supported flags in [docker/dtr restore](/reference/dtr/2.6/cli/restore).
+This prompts you for the UCP password. Next, run the following to restore DTR
+from your backup. You can learn more about the supported flags in [docker/dtr
+restore](/reference/dtr/2.7/cli/restore).
 
 ```bash
-docker run -i --rm \
+$ docker container run \
+  --rm \
+  --interactive \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} restore \
   --ucp-url <ucp-url> \
@@ -114,5 +120,5 @@ would after a fresh installation. [Learn more](/ee/dtr/admin/configure/set-up-vu
 
 ## Where to go next
 
-- [docker/dtr restore](/reference/dtr/2.6/cli/restore/)
+- [docker/dtr restore](/reference/dtr/2.7/cli/restore/)
 

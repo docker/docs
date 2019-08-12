@@ -88,7 +88,7 @@ The following features are deprecated in UCP 3.2:
 - `ucp-agent-pause`
     - `ucp-agent-pause` is no longer supported. To pause UCP reconciliation on a specific node, for example, when repairing unhealthy `etcd` or `rethinkdb` replicas, you can use swarm node labels as shown in the following example:
     ```
-    docker node update --label-add com.docker.ucpagent-pause=true <NODE>
+    docker node update --label-add com.docker.ucp.agent-pause=true <NODE>
     ```
 - Windows 2016 is formally deprecated from Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
 Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
