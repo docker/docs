@@ -21,7 +21,7 @@ for Windows](install.md#download-docker-for-windows).
 This is the Edge channel, which gives you early access to our newest features. Be aware that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 ### Docker Desktop Community 2.1.1.0
-2019-08-09
+2019-08-12
 
 Download
 
