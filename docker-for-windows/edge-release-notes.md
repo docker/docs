@@ -23,7 +23,7 @@ This is the Edge channel, which gives you early access to our newest features. B
 ### Docker Desktop Community 2.1.1.0
 2019-08-12
 
-Download
+[Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
 
 #### Upgrades
 
