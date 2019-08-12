@@ -23,7 +23,7 @@ for Windows](install.md#download-docker-for-windows).
 ## Stable Releases of 2019
 
 ## Docker Desktop Community 2.1.0.1
-2019-08-07
+2019-08-08
 
 [Download](https://hub.docker.com/?overlay=onboarding)
 
