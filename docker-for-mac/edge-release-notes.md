@@ -23,7 +23,7 @@ This is the Docker Desktop Edge channel, which gives you early access to our new
 ### Docker Desktop Community 2.1.1.0
 2019-08-12
 
-Download
+[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
 
 #### Upgrades
 
