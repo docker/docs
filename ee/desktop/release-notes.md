@@ -15,6 +15,17 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.3
+2019-08-21
+
+### Upgrades
+
+Mac: [Hyperkit 0.20190802](https://github.com/moby/hyperkit/releases/tag/v0.20190802)
+
+### Bug fixes and minor changes
+
+Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
+
 ## Version 2.1.0.2
 2019-07-26
 
