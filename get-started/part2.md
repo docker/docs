@@ -213,6 +213,21 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > `sudo service docker restart`
 >
 > Once fixed, retry to run the `build` command.
+>
+> _MTU settings_
+>
+> If the MTU(default is 1500) on the default bridge network is greater than the MTU of the host external network then `pip` > will fail. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration  > file at `/etc/docker/daemon.json` with the `mtu` key, as following:
+>
+> ```json
+>{
+>   "mtu": 1450
+>}
+> ```
+> Once corrected, restart the docker service.
+>
+> `sudo systemctl restart docker`
+>
+> Re-run the `build` command.
 
 ## Run the app
 
