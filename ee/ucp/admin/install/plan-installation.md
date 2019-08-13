@@ -45,14 +45,14 @@ this.
 ### Engine
 
 There are two IP ranges used by the engine for the `docker0` and `docker_gwbridge` interface:
- 
+
 #### docker0
 
-By default, the Docker creates and configures the host system with a network interface called `docker0`, which is an ethernet bridge device. If you don’t specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container. 
+By default, the Docker engine creates and configures the host system with a network interface called `docker0`, which is an ethernet bridge device. If you don't specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.
 
-Docker configures `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16` and the default maximum transmission unit (`MTU`) is `1500` bytes.
+Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16` and the default maximum transmission unit (`MTU`) is `1500` bytes.
 
-The recommended way configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` network:
+The recommended way to configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` interface:
 
 ```
 {
@@ -73,7 +73,9 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
  The `docker_gwbridge` is a virtual bridge that connects the overlay networks (including the `ingress` network) to an individual Docker engine's physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for `docker_gwbridge` is `172.18.0.0/16`.
 
- If you need to customize its settings, you must do so before joining the Docker host to the swarm, or after temporarily removing the host from the swarm. The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the network:
+ > **Note**: If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
+
+ The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the interface:
 
  ```
  {
@@ -87,7 +89,7 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
 ### Swarm
 
-Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). 
+Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md).
 
 > **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.
 
@@ -98,7 +100,7 @@ conflict with the underlying infrastructure:
 
 - The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
-  IP addresses on the `192.168.0.0/16` range. This can be customised at install
+  IP addresses on the `192.168.0.0/16` range. This can be customized at install
   time using the `--pod-cidr` flag.
 
 - The Services Network - When a user exposes a Service in Kubernetes it is
