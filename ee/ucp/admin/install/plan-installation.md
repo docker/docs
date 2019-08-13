@@ -54,7 +54,7 @@ Docker engine creates `docker0` with a configurable IP range. Containers which a
 
 The recommended way to configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` interface:
 
-```
+```json
 {
   "bip": "172.17.0.1/16",
   "fixed-cidr": "172.17.0.0/16",
@@ -77,7 +77,7 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
  The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the interface:
 
- ```
+ ```json
  {
      "default-address-pools": [
          {"base":"172.18.0.0/16","size":16}
@@ -98,13 +98,13 @@ Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If t
 There are 2 internal IP ranges used within Kubernetes that may overlap and
 conflict with the underlying infrastructure:
 
-- The Pod Network -  Each Pod in Kubernetes is given an IP address from either
+* The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
   IP addresses on the `192.168.0.0/16` range. This can be customized at install
   time using the `--pod-cidr` flag.
 
-- The Services Network - When a user exposes a Service in Kubernetes it is
-  accesible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
+* The Services Network - When a user exposes a Service in Kubernetes it is
+  accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
   this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
   changed at install time with the `--service-cluster-ip-range` flag.
 
@@ -143,8 +143,8 @@ DTR, your load balancer needs to distinguish traffic between the two by IP
 address or port number.
 
 * If you want to configure your load balancer to listen on port 443:
-    * Use one load balancer for UCP and another for DTR,
-    * Use the same load balancer with multiple virtual IPs.
+  * Use one load balancer for UCP and another for DTR,
+  * Use the same load balancer with multiple virtual IPs.
 * Configure your load balancer to expose UCP or DTR on a port other than 443.
 
 If you want to install UCP in a high-availability configuration that uses
@@ -180,6 +180,6 @@ manager nodes joining the cluster or being promoted to a manager role.
 
 ## Where to go next
 
-- [System requirements](system-requirements.md)
-- [Install UCP](index.md)
+* [System requirements](system-requirements.md)
+* [Install UCP](index.md)
 
