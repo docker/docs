@@ -35,7 +35,7 @@ An example Kubernetes manifest file container all 3 deployments can be found [he
   2) Download the sample Kubernetes manifest file
 
   ```
-    $ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
+  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
   ```
 
   3) Deploy the sample Kubernetes manifest file 
