@@ -99,55 +99,23 @@ Docker Enterprise Edition provides users unique certificates and keys to authent
 
 ## Install Helm on Docker EE
 
-This section describes how to grant the correct service account/permissions on tiller to install applications into the cluster.
+Helm is the package manager for Kubernetes. Tiller is the server portion of Helm. Before installing Helm on Docker EE, you must meet the following requirements:
 
-### Prerequisites
-Before performing these steps, you must meet the following requirements:
-- You must be running a Docker EE 2.1 or higher cluster
-- You must have kubectl configured to communicate with the cluster (usually this is done via a client bundle)
+* You must be running a Docker EE 2.1 or higher cluster.
+* You must have kubectl configured to communicate with the cluster (usually this is done via a client bundle).
 
-To create a service account for tiller and apply the correct grants:
-
-1. Create the tiller service account:
+To use Helm and Tiller with UCP, you must modify the kube-system default service account to define the necessary roles. Enter the following kubectl commands in this order:
 
 ```bash
-$ kubectl create serviceaccount --namespace kube-system tiller
+kubectl create rolebinding default-view --clusterrole=view --serviceaccount=kube-system:default --namespace=kube-system
+
+kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
 ```
 
-2. In the UCP UI, navigate to **Access Control > Grants**, and click **Create Role Binding**. Make sure you have selected Kubernetes first.
+It is recommended that you specify Role and RoleBinding to limit Tiller’s scope to a particular namespace, as described in [Helm's documentation](https://helm.sh/docs/using_helm/#example-deploy-tiller-in-a-namespace-restricted-to-deploying-resources-only-in-that-namespace)
 
-3. In Subject, select the following:
-- Select Subject Type as **Service Account**
-- Namespace as **kube-system**
-- Service Account as **tiller**
+See [Initialize Helm and Install Tiller](https://helm.sh/docs/using_helm/#initialize-helm-and-install-tiller) for more information.
 
-4. Click **Next**.
-
-5. In the Resource Set area, move the slider to enable **Apply Role Binding to all namespace (Cluster Role Binding)**.
-
-6. Click **Next**.
-
-7. In the Role area, select **cluster-admin**.
-
-8. Click **Create**.
-
-9.  At this stage, if you have tiller installed in the cluster already, you need to patch the tiller deployment to use the tiller service account you created:
-
-```bash
-$ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-```
-
-However, if you do not currently have tiller installed, you can install and direct it to use the correct service account at the same time using the following command:
-
-```bash
-$ helm init --service-account tiller
-```
-
-10. After waiting for the tiller pod to be (re-)created, try to run helm install again:
-
-```bash
-$ helm install --name mysql stable/mysql
-```
 
 ## Where to go next
 
