@@ -13,12 +13,13 @@ redirect_from:
 title: Get started with Docker for Windows
 ---
 
-Welcome to Docker Desktop for Windows!
+Welcome to Docker Desktop!
 
-Docker is a full development platform for creating containerized apps, and
-Docker Desktop for Windows is the best way to get started with Docker _on Windows_.
+This page contains information about Docker Desktop for Windows Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
-> See [Install Docker Desktop for Windows](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
+Docker is a full development platform for creating containerized apps. Docker Desktop for Windows is the best way to get started with Docker _on Windows_.
+
+> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
 
 ## Test your installation
 
@@ -29,7 +30,7 @@ Docker Desktop for Windows is the best way to get started with Docker _on Window
     ```shell
     > docker --version
 
-    Docker version 18.03.0-ce, build 0520e24
+    Docker version 19.03.1
     ```
 
 3.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and run a container:
@@ -82,7 +83,7 @@ Docker Desktop for Windows is the best way to get started with Docker _on Window
 In this section, we demonstrate the ease and power of Dockerized applications by
 running something more complex, such as an OS and a webserver.
 
-1.  Pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/) and run an interactive terminal inside the spawned container:
+1. Pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/) and run an interactive terminal inside the spawned container:
 
     ```shell
     > docker run --interactive --tty ubuntu bash
@@ -107,22 +108,23 @@ running something more complex, such as an OS and a webserver.
     >
     > Interactive terminals do not work in PowerShell ISE (but they do in PowerShell). See [docker/for-win/issues/223](https://github.com/docker/for-win/issues/223).
 
-2.  You are in the container. At the root `#` prompt, check the `hostname` of the container:
+2. You are in the container. At the root `#` prompt, check the `hostname` of the container:
 
     ```shell
     root@8aea0acb7423:/# hostname
     8aea0acb7423
     ```
+
     Notice that the hostname is assigned as the container ID (and is also used in the prompt).
 
-3.  Exit the shell with the `exit` command (which also stops the container):
+3. Exit the shell with the `exit` command (which also stops the container):
 
     ```shell
     root@8aea0acb7423:/# exit
     >
     ```
 
-4.  List containers with the `--all` option (because no containers are running).
+4. List containers with the `--all` option (because no containers are running).
 
     The `hello-world` container (randomly named, `relaxed_sammet`) stopped after displaying its message. The `ubuntu` container (randomly named, `laughing_kowalevski`) stopped when you exited the container.
 
@@ -134,7 +136,7 @@ running something more complex, such as an OS and a webserver.
     45f77eb48e78    hello-world    "/hello"    3 minutes ago    Exited (0) 3 minutes ago             relaxed_sammet
     ```
 
-5.  Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) web server that we name, `webserver`:
+5. Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) web server that we name, `webserver`:
 
     ```shell
     > docker run --detach --publish 80:80 --name webserver nginx
@@ -151,11 +153,11 @@ running something more complex, such as an OS and a webserver.
     dfe13c68b3b86f01951af617df02be4897184cbf7a8b4d5caf1c3c5bd3fc267f
     ```
 
-6.  Point your web browser at `http://localhost` to display the nginx start page. (You don't need to append `:80` because you specified the default HTTP port in the `docker` command.)
+6. Point your web browser at `http://localhost` to display the nginx start page. (You don't need to append `:80` because you specified the default HTTP port in the `docker` command.)
 
     ![Run nginx edge](images/nginx-homepage.png)
 
-7.  List only your _running_ containers:
+7. List only your _running_ containers:
 
     ```shell
     > docker container ls
@@ -164,13 +166,13 @@ running something more complex, such as an OS and a webserver.
     0e788d8e4dfd    nginx    "nginx -g 'daemon of…"    2 minutes ago    Up 2 minutes    0.0.0.0:80->80/tcp    webserver
     ```
 
-8.  Stop the running nginx container by the name we assigned it, `webserver`:
+8. Stop the running nginx container by the name we assigned it, `webserver`:
 
     ```shell
     >  docker container stop webserver
     ```
 
-9.  Remove all three containers by their names -- the latter two names will differ for you:
+9. Remove all three containers by their names -- the latter two names will differ for you:
 
     ```shell
     > docker container rm webserver laughing_kowalevski relaxed_sammet
@@ -178,19 +180,18 @@ running something more complex, such as an OS and a webserver.
 
 ## Docker Settings dialog
 
-The **Docker Desktop for Windows menu** is a popup by which you can configure your
-Docker settings -- installation, updates, version channels, Docker Hub login,
+The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
 and more.
 
 This section explains the configuration options accessible from the **Settings** dialog.
 
-1.  Open the Docker Desktop for Windows menu by right-clicking the Docker icon in the Notifications area (or System tray):
+1. Open the Docker Desktop menu by clicking the Docker icon in the Notifications area (or System tray):
 
     ![Showing hidden apps in the taskbar](images/whale-icon-systray-hidden.png){:width="250px"}
 
-2.  Select **Settings...** to open the Settings dialog:
+2. Select **Settings** to open the Settings dialog:
 
-    ![Docker Desktop for Windows popup menu](images/docker-menu-settings.png){:width="400px"}
+    ![Docker Desktop popup menu](images/docker-menu-settings.png){:width="450px"}
 
 ### General
 
@@ -198,23 +199,22 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 ![Settings](images/settings-general.png){:width="600px"}
 
-* **Start Docker when you log in** - Automatically start the Docker Desktop for Windows
-application upon Windows system login.
+* **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
 
-* **Automatically check for updates** - By default, Docker Desktop for Windows
-automatically checks for updates and notifies you when an update is available.
+* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
 Click **OK** to accept and install updates (or cancel to keep the current
 version). You can manually update by choosing **Check for Updates** from the
 main Docker menu.
 
-* **Send usage statistics** - By default, Docker Desktop for Windows sends diagnostics,
+* **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
-troubleshoot the application. Uncheck to opt out. Docker may also  sometimes
-prompt you for more information.
+troubleshoot the application. Clear the check box to opt out. Docker may also  sometimes prompt you for more information.
+
+* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
 ### Shared drives
 
-Share your local drives (volumes) with Docker Desktop for Windows, so that they are
+Share your local drives (volumes) with Docker Desktop, so that they are
 available to your [Linux containers](#switch-between-windows-and-linux-containers).
 
 ![Shared drives](images/settings-shared-drives.png){:width="600px"}
@@ -237,10 +237,11 @@ credentials so that you don't need to enter them every time.
  * If possible, avoid volume mounts from the Windows host, and instead mount on
  the Linux VM, or use a [data volume](/engine/tutorials/dockervolumes.md#data-volumes)
  (named volume) or [data container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
- There are a number of issues with using host-mounted volumes and network paths
+
+    There are a number of issues with using host-mounted volumes and network paths
  for database files. See [Volume mounts from host paths use a nobrl option to override database locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
- * Docker Desktop for Windows sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
+ * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
  * Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes).
@@ -276,7 +277,7 @@ popup asking if you want to share the specified drive.
 
 You can select to **Share it**, in which case it is added your Docker Desktop for
 Windows [Shared Drives list](index.md#shared-drives) and available to
-containers. Alternatively, you can opt not to share it by hitting Cancel.
+containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](images/shared-drive-on-demand.png)
 
@@ -288,11 +289,13 @@ The Linux VM restarts after changing the settings on the Advanced tab. This take
 
 * **CPUs** - Change the number of processors assigned to the Linux VM.
 
-* **Memory** - Change the amount of memory the Docker Desktop for Windows Linux VM uses.
+* **Memory** - Change the amount of memory the Docker Desktop Linux VM uses.
+
+* **Swap** - Configure the swap file size.
 
 ### Network
 
-You can configure Docker Desktop for Windows networking to work on a virtual private network (VPN).
+You can configure Docker Desktop networking to work on a virtual private network (VPN).
 
 ![Network settings](images/settings-network.png){:width="600px"}
 
@@ -312,7 +315,7 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Proxies
 
-Docker Desktop for Windows lets you configure HTTP/HTTPS Proxy Settings and
+Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
 if you set your proxy settings to `http://proxy.example.com`, Docker uses this
 proxy when pulling containers.
@@ -339,29 +342,22 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 [restart policies](/engine/reference/run/#restart-policies-restart).
 
-<p id="daemon-experimental-mode" />
 ### Daemon
 
 You can configure the Docker daemon to hone how your containers run.
 **Advanced mode** lets you edit the JSON directly. **Basic mode** lets you
-configure the more common daemon options with interactive settings (and also JSON).
+configure the common daemon options with interactive settings.
 
 ![Docker Daemon](images/settings-daemon-basic.png){:width="600px"}
 
-#### Experimental mode
+#### Experimental features
 
-Both Docker Desktop for Windows Stable and Edge releases have the experimental version
-of Docker Engine enabled, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on
-GitHub.
+Docker Desktop Edge releases have the experimental version
+of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
 
-Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas. Some
-experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Edge releases, and never
-released on Stable.
+{% include experimental.md %}
 
-On both Edge and Stable releases, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker Desktop for Windows uses the current generally
+On both Edge and Stable releases, you can toggle the **Experimental features** on and off. If you toggle it off, Docker Desktop uses the current generally
 available release of Docker Engine.
 
 Run `docker version` to see if you are in Experimental mode. Experimental mode
@@ -371,38 +367,45 @@ running in experimental mode, as shown here:
 ```shell
 > docker version
 
-Client:
- Version:       18.03.0-ce
- API version:   1.37
- Go version:    go1.9.4
- Git commit:    0520e24
- Built: Wed Mar 21 23:06:28 2018
- OS/Arch:       windows/amd64
- Experimental:  true
- Orchestrator:  swarm
+Client: Docker Engine - Community
+ Version:           19.03.1
+ API version:       1.40
+ Go version:        go1.12.5
+ Git commit:        74b1e89
+ Built:             Thu Jul 25 21:17:08 2019
+ OS/Arch:           windows/amd64
+ Experimental:      true
 
-Server:
+Server: Docker Engine - Community
  Engine:
-  Version:      18.03.0-ce
-  API version:  1.37 (minimum version 1.24)
-  Go version:   go1.9.4
-  Git commit:   0520e24
-  Built:        Wed Mar 21 23:21:06 2018
-  OS/Arch:      windows/amd64
-  Experimental: true
+  Version:          19.03.1
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.5
+  Git commit:       74b1e89
+  Built:            Thu Jul 25 21:17:52 2019
+  OS/Arch:          linux/amd64
+  Experimental:     true
+ containerd:
+  Version:          v1.2.6
+  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
+ runc:
+  Version:          1.0.0-rc8
+  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
 ```
 
-#### Custom registries
+#### Insecure registries
 
 You can set up your own [registries](/registry/introduction.md) on the **Basic**
 Daemon settings.
 
 Normally, you store public or private images in [Docker Hub](https://hub.docker.com/)
 and [Docker Trusted Registry](/datacenter/dtr/2.4/guides/index.md). Here, you
-can use Docker to set up your own insecure [registry](/registry/introduction.md).
-Simply add URLs for insecure registries and registry mirrors on which to host your images.
+can use Docker to set up your own insecure [registry](/registry/introduction.md). Simply add URLs for insecure registries and registry mirrors on which to host your images.
 
-See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
+For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in the FAQs.
 
 #### Daemon configuration file
@@ -424,14 +427,9 @@ For a full list of options on the Docker daemon, see [daemon](/engine/reference/
 
 ### Kubernetes
 
-[Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher, and in [18.06 Stable (win70)](/docker-for-windows/edge-release-notes/#docker-community-edition-18060-ce-win70-2018-07-25) and higher.
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
 
 ![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
-
-From Docker Desktop for Windows 18.02 CE Edge and 18.06 CE Stable a standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your
-Docker workloads on Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
@@ -443,45 +441,49 @@ to change context so that `kubectl` is pointing to `docker-for-desktop`:
 > kubectl config use-context docker-for-desktop
 ```
 
-You can also change it through the Docker Desktop for Windows menu:
+You can also change it through the Docker Desktop menu:
 
-![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="600px"}
+![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="450px"}
 
 If you installed `kubectl` by another method, and
 experience conflicts, remove it.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply and restart** button.
+  **Apply** button.
 
-  An Internet connection is required. Images required to run the Kubernetes
-  server are downloaded and instantiated as containers, and the
-  > Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
+  Note that you must have Internet connection. Images required to run the Kubernetes server are downloaded and instantiated as containers, and the kubectl.exe command is installed in the path.
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
-  visible, select **Show system containers (advanced)** and click **Apply and restart**.
+  visible, select **Show system containers (advanced)** and click **Apply**.
   Most users do not need this option.
 
 - To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
   The Kubernetes containers are stopped and removed, and the
   `/usr/local/bin/kubectl` command is removed.
 
-  For more about using the Kubernetes integration with Docker Desktop for Windows,
-  see [Deploy on Kubernetes](kubernetes.md).
+  For more about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
 
 ### Reset
 
-On the Reset tab, you can restart Docker or reset its configuration.
+> Reset and Restart options
+>
+> On Edge releases, the **Restart Docker Desktop**, **Reset Kubernetes Cluster**, and **Reset to factory defaults** options are available on the **Troubleshoot** menu.
+
+On Stable releases, you can restart Docker or reset its configuration using the Reset tab.
 
 ![Reset](images/settings-reset.png){:width="600px"}
 
-* **Restart Docker** - Shuts down and restarts the Docker application.
+
+* **Restart Docker Desktop** - Shuts down and restarts the Docker application.
+
+* **Reset Kubernetes Cluster** - Deletes all stacks and Kubernetes resources.
 
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
 
-### Diagnose & feedback
+### Troubleshoot
 
 Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
 
@@ -489,18 +491,18 @@ Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/doc
 
 Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
 
-To give feedback on the documentation or update it yourself, use the Feedback options at the bottom of each docs page.
+For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 
 ## Switch between Windows and Linux containers
 
-From the Docker Desktop for Windows menu, you can toggle which daemon (Linux or Windows)
+From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
 the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
 containers, or select **Switch to Linux containers** to use Linux containers
 (the default).
 
-![Windows-Linux container types switch](images/docker-menu-switch.png){:width="400px"}
+![Windows-Linux container types switch](images/docker-menu-switch.png){:width="450px"}
 
-For more information on Windows containers, refer to this documentation:
+For more information on Windows containers, refer to the following documentation:
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
@@ -512,17 +514,17 @@ For more information on Windows containers, refer to this documentation:
   application with Windows containers. The MusicStore is a standard .NET application and,
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
-- To understand how to connect to Windows containers from the local host, see:
+- To understand how to connect to Windows containers from the local host, see
   [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
 
 > Settings dialog changes with Windows containers
 >
 > When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
 >
+
   * [General](#general)
   * [Proxies](#proxies)
-  * [Docker daemon](#docker-daemon)
-  * [Diagnose and Feedback](#diagnose-and-feedback)
+  * [Daemon](#docker-daemon)
   * [Reset](#reset)
 >
 If you set proxies or daemon configuration in Windows containers mode, these
@@ -532,23 +534,21 @@ containers. Your Windows container settings are retained and become available
 again when you switch back.
 >
 
-## Adding TLS certificates
-
-To your Docker daemon, you can add trusted **Certificate Authorities (CAs)**, to verify registry server
-certificates, and **client certificates**, to authenticate to registries.
-
-See [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
-in the FAQs.
-
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop for Windows menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" clas="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop for Windows menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 
-See these [Docker Hub topics](/docker-hub/index.md){: target="_blank" class="_" } to learn more:
+For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){: target="_blank" class="_" }:
 
 * [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
+
+## Adding TLS certificates
+
+You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server
+certificates, and **client certificates**, to authenticate to registries. For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
+in the FAQs.
 
 ## Where to go next
 

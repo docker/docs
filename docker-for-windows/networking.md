@@ -5,15 +5,15 @@ title: Networking features in Docker Desktop for Windows
 ---
 {% assign Arch = 'Windows' %}
 
-Docker Desktop for {{Arch}} provides several networking features to make it easier to
+Docker Desktop provides several networking features to make it easier to
 use.
 
 ## Features
 
 ### VPN Passthrough
 
-Docker Desktop for {{Arch}}'s networking can work when attached to a VPN. To do this,
-Docker Desktop for {{Arch}} intercepts traffic from the containers and injects it into
+Docker Desktop networking can work when attached to a VPN. To do this,
+Docker Desktop intercepts traffic from the containers and injects it into
 {{Arch}} as if it originated from the Docker application.
 
 ### Port Mapping
@@ -24,7 +24,7 @@ When you run a container with the `-p` argument, for example:
 $ docker run -p 80:80 -d nginx
 ```
 
-Docker Desktop for {{Arch}} makes whatever is running on port 80 in the container (in
+Docker Desktop makes whatever is running on port 80 in the container (in
 this case, `nginx`) available on port 80 of `localhost`. In this example, the
 host and container ports are the same. What if you need to specify a different
 host port? If, for example, you already have something running on port 80 of
