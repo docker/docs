@@ -116,12 +116,17 @@ defaults:
       path: "datacenter"
     values:
       enterprise: true
+  # Latest Enterprise Platform Release
   - scope:
-      path: "ee/dtr"
+      path: "ee"
     values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
+      ucp_version: "3.2.0"
       dtr_version: "2.7.1"
+  # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
     values:
@@ -166,21 +171,7 @@ defaults:
     values:
       ucp_version: "1.1"
       dtr_version: "2.0"
-  - scope:
-      path: "ee/ucp"
-    values:
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      ucp_version: "3.2.0"
-  - scope: # This is a bit of a hack for the get-support.md and /ee/admin/
-      path: "ee"
-    values:
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      ucp_version: "3.2.0"
-      dtr_version: "2.7.1"
+  # Previous UCP Releases
   - scope:
       path: "datacenter/ucp/3.1"
     values:
