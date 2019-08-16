@@ -17,9 +17,9 @@ Welcome to Docker Desktop!
 
 This page contains information about Docker Desktop for Windows Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
-Docker is a full development platform for creating containerized apps. Docker Desktop for Windows is the best way to get started with Docker _on Windows_.
+Docker is a full development platform for creating containerized applications. Docker Desktop for Windows is the best way to get started with Docker _on Windows_.
 
-> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
+> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and Stable and Edge channels.
 
 ## Test your installation
 

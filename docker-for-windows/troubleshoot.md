@@ -286,7 +286,7 @@ In order for Docker Desktop to function properly your machine needs:
 
 #### Hyper-V
 
-Docker Desktop requires a Hyper-V as well as the Hyper-V Module for Windows
+Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
 it for you.
 
@@ -361,8 +361,8 @@ Here are some steps to take if you experience similar problems:
 
 ### Windows containers and Windows Server
 
-Docker Desktop is not supported on Windows Server 2016, instead you can use
-[Docker Enterprise Basic Edition](/ee/index.md) at no additional cost.
+Docker Desktop is not supported on Windows Server. Instead, you can use
+[Docker Enterprise Basic](/ee/index.md) at no additional cost.
 
 If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux

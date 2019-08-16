@@ -44,9 +44,7 @@ To safely switch between Edge and Stable versions, ensure that you save images a
 
 ### How to save and restore data
 
-The following procedure can be used to save/restore images and container data,
-for example, if you want to switch between Edge and Stable, or reset your VM
-disk:
+You can use the following procedure to save and restore images and container data, for example, if you want to switch between Edge and Stable, or reset your VM disk:
 
 1.  Use `docker save -o images.tar image1 [image2 ...]` to save any images you
     want to keep. (See [save](/engine/reference/commandline/save) in the Docker
@@ -56,8 +54,7 @@ disk:
     want to keep. (See [export](/engine/reference/commandline/export) in the
     Docker Engine command line reference.)
 
-3.  Uninstall the current app and install a different version of the app (Stable
-    or Edge), or reset your VM disk.
+3.  Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
 
 5.  Use `docker load -i images.tar` to reload previously saved images. (See
     [load](/engine/reference/commandline/load) in the Docker Engine.
