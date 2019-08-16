@@ -226,12 +226,12 @@ repository does not contain a `Dockerfile`, or if you want to build with a custo
 `Dockerfile`, without maintaining your own fork of the repository.
 
 The example below builds an image using a `Dockerfile` from `stdin`, and adds
-the `README.md` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
+the `hello.c` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
 
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY README.md .
+COPY hello.c .
 EOF
 ```
 
