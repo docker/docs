@@ -14,7 +14,7 @@ This page contains information on how to diagnose and troubleshoot problems, sen
 **Looking for help with Docker Desktop for Windows?** Check out [Docker Success Center](http://success.docker.com/q) for knowledge base articles, FAQs, and
 technical support for various subscription levels.
 
-## Diagnose problems, send feebdack, and create GitHub issues
+## Diagnose problems, send feedback, and create GitHub issues
 
 ### In-app diagnostics
 
@@ -301,7 +301,7 @@ In the subsequent screen, verify that Hyper-V is enabled:
 
 #### Hyper-V driver for Docker Machine
 
-Docker Desktop installation includes the legacy tool Docker Machine which uses the old
+The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
 [`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:
 target="_blank" class="_"}, and the [Microsoft Hyper-V
 driver](/machine/drivers/hyper-v.md) to create local virtual machines. _This is
@@ -325,7 +325,7 @@ Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
 
 Some users may experience networking issues during install and startup of
 Docker Desktop. For example, upon install or auto-reboot, network adapters
-and/or WiFi gets disabled. In some scenarios, problems are due to having
+and/or WiFi may get disabled. In some scenarios, problems are due to having
 VirtualBox or its network adapters still installed, but in other scenarios this
 is not the case. See the GitHub issue [Enabling
 Hyper-V feature turns my wi-fi

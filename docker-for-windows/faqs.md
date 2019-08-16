@@ -80,7 +80,7 @@ process, startup, functionality available, the GUI, usefulness of the app,
 command line integration, and so on. Tell us about problems, what you like, or
 functionality you'd like to see added.
 
-We are especially interested in getting feedback on the new swarm mode described
+We are especially interested in getting feedback on the swarm mode described
 in [Docker Swarm](/engine/swarm/). A good place to start is the
 [tutorial](/engine/swarm/swarm-tutorial/).
 
@@ -116,7 +116,7 @@ issue is closed, Docker Inc. will remove the referenced diagnostics bundles
 within 30 days. You may also request the removal of a diagnostics bundle by
 either specifying the diagnostics ID or through your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high level (non-personal) metrics such as the rate of issues from it.
 
-### Can I use Docker Desktop with the new Swarm mode?
+### Can I use Docker Desktop with the Swarm mode?
 
 Yes! You can use Docker Desktop to test single-node features of
 [swarm mode](/engine/swarm/) introduced with Docker Engine 1.12, including

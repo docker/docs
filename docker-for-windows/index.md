@@ -191,7 +191,7 @@ This section explains the configuration options accessible from the **Settings**
 
 2. Select **Settings** to open the Settings dialog:
 
-    ![Docker Desktop popup menu](images/docker-menu-settings.png){:width="450px"}
+    ![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
 
 ### General
 
@@ -452,7 +452,7 @@ experience conflicts, remove it.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply** button.
 
-  Note that you must have Internet connection. Images required to run the Kubernetes server are downloaded and instantiated as containers, and the kubectl.exe command is installed in the path.
+  Note that you must have an Internet connection. Images required to run the Kubernetes server are downloaded and instantiated as containers, and the kubectl.exe command is installed in the path.
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -500,7 +500,7 @@ the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
 containers, or select **Switch to Linux containers** to use Linux containers
 (the default).
 
-![Windows-Linux container types switch](images/docker-menu-switch.png){:width="450px"}
+![Windows-Linux container types switch](images/docker-menu-switch.png){:width="300px"}
 
 For more information on Windows containers, refer to the following documentation:
 
@@ -526,13 +526,12 @@ For more information on Windows containers, refer to the following documentation
   * [Proxies](#proxies)
   * [Daemon](#docker-daemon)
   * [Reset](#reset)
->
+
 If you set proxies or daemon configuration in Windows containers mode, these
 apply only on Windows containers. If you switch back to Linux containers,
 proxies and daemon configurations return to what you had set for Linux
 containers. Your Windows container settings are retained and become available
 again when you switch back.
->
 
 ## Docker Hub
 
