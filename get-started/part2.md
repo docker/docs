@@ -216,14 +216,14 @@ be something like `--tag=friendlyhello:v0.0.1`.
 >
 > _MTU settings_
 >
-> If the MTU(default is 1500) on the default bridge network is greater than the MTU of the host external network then `pip` will fail. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as following:
+> If the MTU (default is 1500) on the default bridge network is greater than the MTU of the host external network, then `pip` fails. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as follows:
 >
 > ```json
 >{
 >   "mtu": 1450
 >}
 > ```
-> Once corrected, restart the docker service.
+> Before proceeding, save `daemon.json` and restart the docker service.
 >
 > `sudo systemctl restart docker`
 >
