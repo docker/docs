@@ -117,6 +117,7 @@ documentation](/reference/dtr/2.7/cli/backup/).
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   --log-driver none \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \

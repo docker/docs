@@ -16,7 +16,8 @@ a working state is by restoring from an existing backup.
 
 To restore DTR, you need to:
 
-1. Stop any DTR containers that might be running
+1. [Destroy](/reference/dtr/2.7/cli/destroy/) any existing DTR replicas on the
+   UCP cluster
 2. Restore the images from a backup
 3. Restore DTR metadata from a backup
 4. Re-fetch the vulnerability database
@@ -27,7 +28,7 @@ owned by users that don't exist, so you'll not be able to manage the resources,
 even though they're stored in the DTR data store.
 
 When restoring, you need to use the same version of the `docker/dtr` image
-that you've used when creating the update. Other versions are not guaranteed
+that you've used when creating the backup. Other versions are not guaranteed
 to work.
 
 ### Remove DTR containers
@@ -38,6 +39,7 @@ Start by removing any DTR container that is still running:
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls
 ```
@@ -68,13 +70,42 @@ read -sp 'ucp password: ' UCP_PASSWORD;
 ```
 
 This prompts you for the UCP password. Next, run the following to restore DTR
-from your backup. You can learn more about the supported flags in [docker/dtr
-restore](/reference/dtr/2.7/cli/restore).
+from your backup.
+
+#### Backend Image Storage
+
+As a DTR backup tarball does not contain the image layers stored on the
+external storage system, an external storage flag is required in the `restore`
+command. A user should not be changing storage backends between a DTR backup
+and a DTR restore.
+
+Using `--dtr-use-default-storage` will use either local storage or cloud
+storage. If cloud storage was configured on DTR when the backup was created,
+then the default storage on the restore is cloud storage. Otherwise, local
+storage is used.
+
+To `restore` a DTR which used NFS backend storage, a user must manually create
+a Docker storage volume on each DTR node and specify `--dtr-storage-volume
+$VOLUME_NAME` during the `restore` command.  For more details on this see this
+[kbase](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume).
+For users running DTR 2.5 with NFS as a storage backend, `--nfs-storage-url
+$NFS_URL` can be used instead of `--dtr-storage-volume` when using the
+`restore` command.
+
+More information on this topic can be found
+[here](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage).
+
+#### Using the DTR Restore Command
+
+This example command assumes the user has stored the image layers on local or
+external cloud storage, for NFS backends see [Backend Image
+Storage](#backend-image-storage) for more information.
 
 ```bash
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} restore \
   --ucp-url <ucp-url> \
@@ -82,6 +113,7 @@ $ docker container run \
   --ucp-username <ucp-username> \
   --ucp-node <hostname> \
   --replica-id <replica-id> \
+  --dtr-use-default-storage \
   --dtr-external-url <dtr-external-url> < {{ metadata_backup_file }}
 ```
 
@@ -93,11 +125,8 @@ Where:
 * `<replica-id>` the id of the replica you backed up
 * `<dtr-external-url>`the url that clients use to access DTR
 
-#### DTR 2.5 and below
-
-If you're using NFS as a storage backend, also include `--nfs-storage-url` as
-part of your restore command, otherwise DTR is restored but starts using a
-local volume to persist your Docker images. 
+The full DTR `restore` CLI reference guide can be found
+[here](https://docs.docker.com/reference/dtr/2.7/cli/restore/)
 
 #### DTR 2.5 (with experimental online garbage collection) and DTR 2.6.0-2.6.3
 
@@ -116,7 +145,7 @@ local volume to persist your Docker images.
 If you're scanning images, you now need to download the vulnerability database.
 
 After you successfully restore DTR, you can join new replicas the same way you
-would after a fresh installation. [Learn more](/ee/dtr/admin/configure/set-up-vulnerability-scans.md).
+would after a fresh installation. [Learn more](/ee/dtr/admin/configure/set-up-vulnerability-scans/).
 
 ## Where to go next
 

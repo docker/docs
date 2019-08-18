@@ -248,6 +248,7 @@ Then use the UCP client bundle to remove the unhealthy replicas:
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
   --existing-replica-id <healthy-replica-id> \
   --replica-ids <unhealthy-replica-id> \
@@ -274,6 +275,7 @@ the necessary parameters:
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
@@ -358,6 +360,7 @@ Then, use your UCP client bundle to run the emergency repair command:
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} emergency-repair \
   --ucp-insecure-tls \
   --existing-replica-id <replica-id>

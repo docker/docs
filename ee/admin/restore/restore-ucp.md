@@ -41,6 +41,7 @@ The following example shows how to restore UCP from an existing backup file, pre
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   --name ucp \
   --volume /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore < /tmp/backup.tar
@@ -52,6 +53,7 @@ If the backup file is encrypted with a passphrase, provide the passphrase to the
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   --name ucp \
   --volume /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore --passphrase "secret" < /tmp/backup.tar  
@@ -65,6 +67,7 @@ backup file should be mounted to the container rather than streamed through
 $ docker container run \
   --rm \
   --interactive \
+  --tty \
   --name ucp \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   -v /tmp/backup.tar:/config/backup.tar \
