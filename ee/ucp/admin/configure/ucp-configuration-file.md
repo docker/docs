@@ -236,7 +236,6 @@ Configures iSCSI options for UCP.
 | `--iscsidb-path=<path>` | no       | specifies the path of the iscsi database on the host. Default value is `/etc/iscsi`.  |
 
 ### pre_logon_message
-
 Configures a pre-logon message.
 | Parameter               | Required | Description                                                                                                                                                                          |
 |:------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
