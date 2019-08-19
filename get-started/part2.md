@@ -181,7 +181,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > _Proxy server settings_
 >
 > Proxy servers can block connections to your web app once it's up and running.
-> If you are behind a proxy server, add the following lines to your
+> If you are behind a proxy server, add the following lines before `RUN pip` in your
 > Dockerfile, using the `ENV` command to specify the host and port for your
 > proxy servers:
 >
