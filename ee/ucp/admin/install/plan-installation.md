@@ -42,6 +42,12 @@ this.
 
 ## Avoid IP range conflicts
 
+Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.
+Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.
+Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.
+Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.
+Kubernetes `service-cluster-ip-range` - CIDR range for Kubernetes services
+
 ### Engine
 
 There are two IP ranges used by the engine for the `docker0` and `docker_gwbridge` interface:
@@ -50,7 +56,7 @@ There are two IP ranges used by the engine for the `docker0` and `docker_gwbridg
 
 By default, the Docker engine creates and configures the host system with a network interface called `docker0`, which is an ethernet bridge device. If you don't specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.
 
-Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16` and the default maximum transmission unit (`MTU`) is `1500` bytes.
+Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16`.
 
 The recommended way to configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` interface:
 
@@ -58,7 +64,6 @@ The recommended way to configure the `docker0` settings is to use the `daemon.js
 {
   "bip": "172.17.0.1/16",
   "fixed-cidr": "172.17.0.0/16",
-  "mtu": 1500
 }
 ```
 
@@ -66,8 +71,6 @@ The recommended way to configure the `docker0` settings is to use the `daemon.js
 
 `fixed-cidr`: Restrict the IP range for `docker0`, using standard CIDR notation. Default is `172.17.0.0/16`.
 This range must be an IPv4 range for fixed IPs, and must be a subset of the bridge IP range (`bip` in `daemon.json`). For example, with `172.17.0.0/17`, IPs for your containers will be chosen from the first half of addresses(`172.17.0.1` - `172.17.127.254`) included in the `bip`(`172.17.0.0/16`) subnet.
-
-`mtu`: Set the maximum packet size in bytes for `docker0`.
 
 #### docker_gwbridge
 
@@ -80,18 +83,25 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
  ```json
  {
      "default-address-pools": [
-         {"base":"172.18.0.0/16","size":16}
+         {"base":"172.18.0.0/16","size":24},
+         {"base":"###.###.###.###/##","size":##}
      ]
  }
  ```
 
-`default-address-pools`:  Set the default address pools for local node networks.
+`default-address-pools`:  A list of IP address pools for local bridge networks, the default is a single pool `{"base":"172.18.0.0/16","size":24}`. This allocates `/24` network from the `172.18.0.0/16` CIDR range for local bridge networks. Each entry in the list contain the following:
+
+`base`: CIDR range to be divided up for bridge networks, the default is `172.18.0.0/16`
+
+`size`: CIDR netmask that determines the default overlay network size to allocate from the `base` pool, the default is `24`
 
 ### Swarm
 
-Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md).
+Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-addr-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md).
 
-> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.
+> **Note**: The Swarm `default-addr-pool` setting is separate from the Docker engine `default-address-pools` setting. They are two separate ranges that are used for different purposes.
+
+> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.
 
 ### Kubernetes
 
