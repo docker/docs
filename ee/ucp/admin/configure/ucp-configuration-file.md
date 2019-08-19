@@ -237,6 +237,7 @@ Configures iSCSI options for UCP.
 
 ### pre_logon_message
 Configures a pre-logon message.
+
 | Parameter               | Required | Description                                                                                                                                                                          |
 |:------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  `pre_logon_message` | no | Sets pre-logon message to alert users before they proceed with login. |
