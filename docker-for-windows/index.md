@@ -256,7 +256,7 @@ Shared drives require port 445 to be open between the host machine and the
 virtual machine that runs Linux containers. Docker detects if port 445 is closed
 and shows the following message when you try to add a shared drive:
 
-![Port 445 blocked](images/shared-drive-firewall-blocked.png)
+![Port 445 blocked](images/shared-drive-firewall-blocked.png){:width="600px"}
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
@@ -279,7 +279,7 @@ You can select to **Share it**, in which case it is added your Docker Desktop fo
 Windows [Shared Drives list](index.md#shared-drives) and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
-![Shared drive on demand](images/shared-drive-on-demand.png)
+![Shared drive on demand](images/shared-drive-on-demand.png){:width="600px"}
 
 ### Advanced
 
@@ -450,9 +450,7 @@ experience conflicts, remove it.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply** button.
-
-  Note that you must have an Internet connection. Images required to run the Kubernetes server are downloaded and instantiated as containers, and the kubectl.exe command is installed in the path.
+  **Apply** button. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
