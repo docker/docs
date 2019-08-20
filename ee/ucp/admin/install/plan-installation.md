@@ -93,7 +93,7 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
 `base`: CIDR range to be divided up for bridge networks, the default is `172.18.0.0/16`
 
-`size`: CIDR netmask that determines the default overlay network size to allocate from the `base` pool, the default is `24`
+`size`: CIDR netmask that determines the default network size to allocate from the `base` pool, the default is `24`
 
 ### Swarm
 
