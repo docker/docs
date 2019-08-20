@@ -69,10 +69,11 @@ objects are being deployed.
 
 ### Azure Configuration File
 
-For Docker UCP to integrate with Microsoft Azure,each UCP node in your cluster
-needs an Azure configuration file, `azure.json`. Place the file within
-`/etc/kubernetes`. Since the config file is owned by `root`, set its permissions 
-to `0644` to ensure the container user has read access.
+For UCP to integrate with Microsoft Azure, all Linux UCP Manager and Linux UCP
+Worker nodes in your cluster need an identical Azure configuration file,
+`azure.json`.  Place this file within `/etc/kubernetes` on each host. Since the
+configution file is owned by `root`, set its permissions to `0644` to ensure
+the container user has read access.
 
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
 parameters as is.
@@ -85,19 +86,10 @@ parameters as is.
     "aadClientId": "***",
     "aadClientSecret": "***",
     "resourceGroup": "***",
-    "location": "****",
-    "subnetName": "/****",
-    "securityGroupName": "****",
-    "vnetName": "****",
-    "cloudProviderBackoff": false,
-    "cloudProviderBackoffRetries": 0,
-    "cloudProviderBackoffExponent": 0,
-    "cloudProviderBackoffDuration": 0,
-    "cloudProviderBackoffJitter": 0,
-    "cloudProviderRatelimit": false,
-    "cloudProviderRateLimitQPS": 0,
-    "cloudProviderRateLimitBucket": 0,
-    "useManagedIdentityExtension": false,
+    "location": "***",
+    "subnetName": "***",
+    "securityGroupName": "***",
+    "vnetName": "***",
     "useInstanceMetadata": true
 }
 ```

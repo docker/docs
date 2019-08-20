@@ -1298,7 +1298,7 @@ then read-write is used.
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 
 > **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.

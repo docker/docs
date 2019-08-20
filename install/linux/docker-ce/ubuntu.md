@@ -14,7 +14,7 @@ toc_max: 4
 
 To get started with Docker Engine - Community on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ce).
+[install Docker](#install-docker-engine---community-1).
 
 ## Prerequisites
 

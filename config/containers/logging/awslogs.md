@@ -46,8 +46,8 @@ If you are using Docker Compose, set `awslogs` using the following declaration e
 myservice:
   logging:
     driver: awslogs
-      options:
-        awslogs-region: us-east-1
+    options:
+      awslogs-region: us-east-1
 ```
           
 ## Amazon CloudWatch Logs options
