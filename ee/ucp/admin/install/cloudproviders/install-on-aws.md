@@ -110,4 +110,20 @@ Subnets  must be tagged with ` kubernetes.io/cluster/<UniqueID for Cluster>` and
 
 ## UCP 
 ### UCP install 
-Pass `--cloud-providers=aws` to the installation.
+
+Once all pre-requisities have been met, run the following command to install
+UCP on a manager node. The `--host-address` flag maps to the private IP address
+of the master node.
+
+```bash
+$ docker container run --rm -it \
+  --name ucp \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
+  --host-address <ucp-ip> \
+  --cloud-provider aws \
+  --interactive
+```
+
+The full Docker UCP install CLI reference can be found
+[here](/reference/ucp/3.2/cli/install/)
