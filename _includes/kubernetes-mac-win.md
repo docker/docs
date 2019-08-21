@@ -45,9 +45,7 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 
 {% endif %}
 
-{{ version-caveat }}
-
-{{ min-version }} includes a standalone Kubernetes server and client,
+Docker Desktop includes a standalone Kubernetes server and client,
 as well as Docker CLI integration. The Kubernetes server runs locally within
 your Docker instance, is not configurable, and is a single-node cluster.
 
