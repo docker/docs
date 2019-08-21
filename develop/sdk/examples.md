@@ -559,8 +559,9 @@ func main() {
 ```python
 import docker
 client = docker.from_env()
-image = client.images.pull("alpine")
-print image.id
+images = client.images.pull("alpine")
+for image in images:
+	print image.id
 ```
 
 </div>
@@ -652,8 +653,9 @@ uses these credentials automatically.
 ```python
 import docker
 client = docker.from_env()
-image = client.images.pull("alpine")
-print image.id
+images = client.images.pull("alpine")
+for image in images:
+	print image.id
 ```
 
 </div>
