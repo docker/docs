@@ -24,7 +24,7 @@ GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Wi
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
 troubleshoot the log data.
 
-Choose ![whale menu](images/whale-x.png){: .inline} → **Troubleshoot**
+Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu.
 
 ![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
@@ -136,8 +136,8 @@ cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
 you might need to enable [shared drives](index.md#shared-drives).
 
 Volume mounting requires shared drives for Linux containers (not for Windows
-containers). Go to ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
-→ **Settings** → **Shared Drives** and share the drive that contains the
+containers). Click ![whale menu](images/whale-x.png){: .inline}
+ and then **Settings** > **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
 
 #### Verify domain user has permissions for shared drives (volumes)
@@ -457,7 +457,7 @@ For best results, we recommend you run Docker Desktop natively on a Windows syst
 #### If you still want to use nested virtualization
 
 * Make sure nested virtualization support is enabled in VMWare or Parallels.
-  Check the settings in **Hardware → CPU & Memory → Advanced Options → Enable
+  Check the settings in **Hardware > CPU & Memory > Advanced Options > Enable
   nested virtualization** (the exact menu sequence might vary slightly).
 
 * Configure your VM with at least 2 CPUs and sufficient memory to run your
@@ -514,8 +514,8 @@ See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
 ```
 
 As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings**
-→ **Network** dialog, as described in the topic [Network](index.md#network).
+Google DNS fixed address: `8.8.8.8`. You can configure this through the **Settings**
+> **Network** dialog, as described in the topic [Network](index.md#network).
 Docker automatically restarts when you apply this setting, which could take some
 time.
 
