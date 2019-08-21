@@ -25,7 +25,7 @@ services:
     ports:
       - "6379"
     networks:
-      - frontend
+      - backend
 
   # A PostgreSQL database for persistent storage
   db:
@@ -51,7 +51,7 @@ services:
     ports:
       - 5001:80
     networks:
-      - backend
+      - frontend
     depends_on:
       - db
 
