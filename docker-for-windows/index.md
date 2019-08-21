@@ -15,9 +15,9 @@ title: Get started with Docker for Windows
 
 Welcome to Docker Desktop!
 
-This page contains information about Docker Desktop for Windows Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+This page contains information about Docker Desktop Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
-Docker is a full development platform for creating containerized applications. Docker Desktop for Windows is the best way to get started with Docker _on Windows_.
+Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
 
 > See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and Stable and Edge channels.
 
@@ -208,7 +208,7 @@ main Docker menu.
 
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
-troubleshoot the application. Clear the check box to opt out. Docker may also  sometimes prompt you for more information.
+troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
 
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
@@ -236,9 +236,7 @@ credentials so that you don't need to enter them every time.
 >
  * If possible, avoid volume mounts from the Windows host, and instead mount on
  the Linux VM, or use a [data volume](/engine/tutorials/dockervolumes.md#data-volumes)
- (named volume) or [data container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
-
-    There are a number of issues with using host-mounted volumes and network paths
+ (named volume) or [data container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container). There are a number of issues with using host-mounted volumes and network paths
  for database files. See [Volume mounts from host paths use a nobrl option to override database locking](troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
@@ -275,8 +273,7 @@ If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified drive.
 
-You can select to **Share it**, in which case it is added your Docker Desktop for
-Windows [Shared Drives list](index.md#shared-drives) and available to
+You can select to **Share it**, in which case it is added your Docker Desktop [Shared Drives list](index.md#shared-drives) and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](images/shared-drive-on-demand.png){:width="600px"}
@@ -303,8 +300,7 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 * **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
 
-> **Note**: Some users reported problems connecting to Docker Hub on Docker Desktop for
-> Windows stable version. This would manifest as an error when trying to run
+> **Note**: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
 > `docker` commands that pull images from Docker Hub that are not already
 > downloaded, such as a first time run of `docker run hello-world`. If you
 > encounter this, reset the DNS server to use the Google DNS fixed address:
@@ -461,7 +457,7 @@ experience conflicts, remove it.
   The Kubernetes containers are stopped and removed, and the
   `/usr/local/bin/kubectl` command is removed.
 
-  For more about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
+  For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
 
 ### Reset
 

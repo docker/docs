@@ -38,7 +38,7 @@ installed at a time**. Switching back and forth between Stable and Edge apps can
 destabilize your development environment, particularly in cases where you switch
 from a newer (Edge) channel to older version (Stable).
 
-For example, containers created with a newer Edge version of Docker Desktop may not work after you switch back to Stable because they may have been created leveraging Edge features that aren't in Stable yet. Just keep this in mind as you create and work with Edge containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
+For example, containers created with a newer Edge version of Docker Desktop may not work after you switch back to Stable because they may have been created using Edge features that aren't in Stable yet. Just keep this in mind as you create and work with Edge containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
 
 To safely switch between Edge and Stable versions, ensure that you save images and export the containers you need, then uninstall the current version before installing another. The workflow is described in detail in the following section.
 
@@ -114,7 +114,7 @@ who are directly involved in diagnosing Docker Desktop issues. By default, Docke
 [docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
 issue is closed, Docker Inc. will remove the referenced diagnostics bundles
 within 30 days. You may also request the removal of a diagnostics bundle by
-either specifying the diagnostics ID or through your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high level (non-personal) metrics such as the rate of issues from it.
+either specifying the diagnostics ID or through your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non-personal) metrics such as the rate of issues from it.
 
 ### Can I use Docker Desktop with the Swarm mode?
 
@@ -122,7 +122,7 @@ Yes! You can use Docker Desktop to test single-node features of
 [swarm mode](/engine/swarm/) introduced with Docker Engine 1.12, including
 initializing a swarm with a single node, creating services, and scaling
 services. Docker “Moby” on Hyper-V serves as the single swarm node. You can also
-use Docker Machine, which is bundled in Docker Desktop, to create and
+use Docker Machine, which is bundled with Docker Desktop, to create and
 experiment with a multi-node swarm. Check out the tutorial at
 [Get started with swarm mode](/engine/swarm/swarm-tutorial/).
 
@@ -266,4 +266,4 @@ in [Troubleshooting](troubleshoot).
 
 ## How do I uninstall Docker Toolbox?
 
-Now that you have Docker Desktop, you might decide that you do not need Toolbox anymore. For details on how to perform a clean uninstall of Toolbox on Windows, see [How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the Toolbox Windows topics.
+Now that you have Docker Desktop, you might decide that you do not need the legacy Docker Toolbox anymore. For details on how to perform a clean uninstall of Toolbox on Windows, see [How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the Toolbox Windows topics.

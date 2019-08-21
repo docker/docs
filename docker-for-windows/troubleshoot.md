@@ -277,7 +277,7 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Virtualization
 
-In order for Docker Desktop to function properly your machine needs:
+For Docker Desktop to function correctly, your machine must have the following features:
 
 1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
    installed and working
@@ -290,11 +290,11 @@ Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
 it for you.
 
-Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and SLAT (Second Level Address Translation), which is also called RVI (Rapid Virtualization Indexing). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
+Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
 To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
 
-From the start menu, type **Turn Windows features on or off** and hit enter.
+From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled:
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
@@ -306,7 +306,7 @@ The Docker Desktop installation includes the legacy tool Docker Machine which us
 target="_blank" class="_"}, and the [Microsoft Hyper-V
 driver](/machine/drivers/hyper-v.md) to create local virtual machines. _This is
 tangential to using Docker Desktop_, but if you want to use Docker Machine
-to create multiple local VMs, or to provision remote machines, see the [Docker
+to create multiple local Virtual Machines (VMs), or to provision remote machines, see the [Docker
 Machine](/machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command [as described in the Docker
 Machine driver example](/machine/drivers/hyper-v.md#example).
 
@@ -449,10 +449,10 @@ For more information, see:
 
 ### Running Docker Desktop in nested virtualization scenarios
 
-Docker Desktop can run inside a Windows 10 virtual machine (VM) running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker Desktop is not supported in nested virtualization scenarios**_. It might work
+Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker Desktop is not supported in nested virtualization scenarios**_. It might work
 in some cases, and not in others.
 
-The better solution is to run Docker Desktop natively on a Windows system (to work with Windows or Linux containers), or on Mac to work with Linux containers.
+For best results, we recommend you run Docker Desktop natively on a Windows system (to work with Windows or Linux containers), or on Mac to work with Linux containers.
 
 #### If you still want to use nested virtualization
 
@@ -489,8 +489,8 @@ The better solution is to run Docker Desktop natively on a Windows system (to wo
   likely to be higher.
 
 * Ensure "PMU Virtualization" is turned off in Parallels on Macs. Check the
-  settings in **Hardware → CPU & Memory → Advanced Settings → PMU
-  Virtualization**
+  settings in **Hardware > CPU & Memory > Advanced Settings > PMU
+  Virtualization**.
 
 #### Related issues
 

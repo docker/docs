@@ -28,7 +28,7 @@ Hyper-V on Windows 10:
 
 > **Note:** Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
-**README for Docker Toolbox and Docker Machine users**: Microsoft Hyper-V is required in order to run Docker Desktop. The Docker Desktop Windows installer enables Hyper-V if required, and restarts your machine. When Hyper-V is enabled, VirtualBox no longer works. However, any existing VirtualBox VM images are retained.
+**README for Docker Toolbox and Docker Machine users**: Microsoft Hyper-V is required to run Docker Desktop. The Docker Desktop Windows installer enables Hyper-V if required, and restarts your machine. When Hyper-V is enabled, VirtualBox no longer works. However, any existing VirtualBox VM images are retained.
 
 VirtualBox VMs created with `docker-machine` (including the `default` one
 typically created during Toolbox install) no longer start. These VMs cannot be
@@ -72,7 +72,7 @@ Looking for information on using Windows containers?
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. Follow the instructions on the install wizard to accept the license, authorize the installer, and proceed with the install.
+2. Follow the instructions on the installation wizard to accept the license, authorize the installer, and proceed with the install.
 
     When prompted, authorize the Docker Desktop Installer with your system password during the
     install process. Privileged access is needed to install networking
@@ -93,7 +93,7 @@ When the whale icon in the status bar stays steady, Docker Desktop is up-and-run
 If the whale icon is hidden in the Notifications area, click the up arrow on the
 taskbar to show it. To learn more, see [Docker Settings](/docker-for-windows/index.md#docker-settings-dialog).
 
-After installing the Docker Desktop app, you also get a popup success message with
+After installing the Docker Desktop app, you also get a pop-up success message with
 suggested next steps, and a link to this documentation.
 
 ![Startup information](images/docker-app-welcome.png){:width="400px"}
