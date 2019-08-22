@@ -25,10 +25,6 @@ security, and deployment details.
 
 1. Select a storage provider from the list of [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) 
 or as documented by your storage vendor. 
-
-> Disclaimer: As of Docker Enterprise 3.0, none of the [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) 
-are production quality and are considered pre-GA. 
-
 2. Install Docker Enterprise 3.0, which includes UCP 3.2. 
 3. Optionally, set the `--storage-expt-enabled` flag in the UCP install configuration if you want to enable
 experimental storage features in Kubernetes 1.14. Features that are enabled include `VolumeSnapshotDataSource`,
