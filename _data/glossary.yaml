@@ -26,6 +26,8 @@ cgroups: |
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
   *Also known as : control groups*
+cluster: |
+  A cluster is a group of machines that work together to run workloads and provide high availability.
 collection: |
   A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
@@ -69,8 +71,6 @@ container: |
 
   The concept is borrowed from Shipping Containers, which define a standard to ship
   goods globally. Docker defines a standard to ship software.
-cluster: |
-  A cluster is a group of machines that work together to run workloads and provide high availability.
 Docker: |
   The term Docker can refer to
 
