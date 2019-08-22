@@ -161,6 +161,7 @@ name using the `--tag` option. Use `-t` if you want to use the shorter option.
 ```shell
 docker build --tag=friendlyhello .
 ```
+The trailing .(dot) in the docker build command is to represent that the docker file is in the current directory.
 
 Where is your built image? It's in your machine's local Docker image registry:
 
