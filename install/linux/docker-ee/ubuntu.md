@@ -265,8 +265,8 @@ a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-<VERSION>` and download the `.deb` file for the
-    Docker EE version and architecture you want to install.
+    `/ubuntu/dists/bionic/pool/stable-<VERSION>/amd64/` and download the `.deb` file for the Ubuntu release,
+    Docker EE version, and architecture you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker EE package.
