@@ -85,7 +85,8 @@ always created as a directory.**
 
 If you use `--mount` to bind-mount a file or directory that does not
 yet exist on the Docker host, Docker does **not** automatically create it for
-you, but generates an error.
+you, but generates an error. If you use `type=volume`, Docker creates the
+endpoint for you.
 
 ## Start a container with a bind mount
 
