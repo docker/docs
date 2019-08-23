@@ -6,11 +6,11 @@ redirect_from:
 - /ee/ucp/admin/install/install-on-azure/
 ---
 
-Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking 
+Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking
 and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure,
-the Calico CNI leverages the Azure networking infrastructure for data path 
-networking and the Azure IPAM for IP address management. There are 
-infrastructure prerequisites required prior to UCP installation for the 
+the Calico CNI leverages the Azure networking infrastructure for data path
+networking and the Azure IPAM for IP address management. There are
+infrastructure prerequisites required prior to UCP installation for the
 Calico / Azure integration.
 
 ## Docker UCP Networking
@@ -31,10 +31,9 @@ There are two options for provisoning IPs for the Kubernetes cluster on Azure:
   or an ARM template. You can find an example of an ARM template
   [here](#manually-provision-ip-address-as-part-of-an-azure-virtual-machine-scale-set).
 
-## Azure Prerequisites 
+## Azure Prerequisites
 
-You must meet the following infrastructure prerequisites in order 
-to successfully deploy Docker UCP on Azure:
+You must meet the following infrastructure prerequisites to successfully deploy Docker UCP on Azure. **Failure to meet these prerequisites may result in significant errors during the installation process.**
 
 - All UCP Nodes (Managers and Workers) need to be deployed into the same Azure
   Resource Group. The Azure Networking components (Virtual Network, Subnets,
@@ -60,10 +59,10 @@ to successfully deploy Docker UCP on Azure:
 
 UCP requires the following information for the installation:
 
-- `subscriptionId` - The Azure Subscription ID in which the UCP 
-objects are being deployed. 
-- `tenantId` - The Azure Active Directory Tenant ID in which the UCP 
-objects are being deployed. 
+- `subscriptionId` - The Azure Subscription ID in which the UCP
+objects are being deployed.
+- `tenantId` - The Azure Active Directory Tenant ID in which the UCP
+objects are being deployed.
 - `aadClientId` - The Azure Service Principal ID.
 - `aadClientSecret` - The Azure Service Principal Secret Key.
 
@@ -80,7 +79,7 @@ parameters as is.
 
 ```json
 {
-    "cloud":"AzurePublicCloud", 
+    "cloud":"AzurePublicCloud",
     "tenantId": "***",
     "subscriptionId": "***",
     "aadClientId": "***",
@@ -97,14 +96,20 @@ parameters as is.
 There are some optional parameters for Azure deployments:
 
 - `primaryAvailabilitySetName` - The Worker Nodes availability set.
-- `vnetResourceGroup` - The Virtual Network Resource group, if your Azure Network objects live in a 
+- `vnetResourceGroup` - The Virtual Network Resource group, if your Azure Network objects live in a
 seperate resource group.
 - `routeTableName` - If you have defined multiple Route tables within
 an Azure subnet.
 
 See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
 
-## Considerations for IPAM Configuration
+## Guidelines for IPAM Configuration
+
+> **Warning**
+>
+> You must follow these guidelines and either use the appropriate size network in Azure or take the proper action to fit within the subnet.
+> Failure to follow these guidelines may cause significant issues during the
+> installation process.
 
 The subnet and the virtual network associated with the primary interface of the
 Azure virtual machines need to be configured with a large enough address
@@ -113,7 +118,7 @@ the number of nodes in the cluster.
 
 For example, in a cluster of 256 nodes, make sure that the address space of the subnet and the
 virtual network can allocate at least 128 * 256 IP addresses, in order to run a maximum of 128 pods
-concurrently on a node. This would be ***in addition to*** initial IP allocations to virtual machine 
+concurrently on a node. This would be ***in addition to*** initial IP allocations to virtual machine
 NICs (network interfaces) during Azure resource creation.
 
 Accounting for IP addresses that are allocated to NICs during virtual machine bring-up, set
@@ -122,7 +127,7 @@ ensures that the network can dynamically allocate at least 32768 addresses,
 plus a buffer for initial allocations for primary IP addresses.
 
 > Azure IPAM, UCP, and Kubernetes
-> 
+>
 > The Azure IPAM module queries an Azure virtual machine's metadata to obtain
 > a list of IP addresses which are assigned to the virtual machine's NICs. The
 > IPAM module allocates these IP addresses to Kubernetes pods. You configure the
@@ -192,7 +197,7 @@ for each virtual machine in the virtual machine scale set.
 }
 ```
 
-## UCP Installation 
+## UCP Installation
 
 ### Adjust the IP Count Value
 
@@ -217,15 +222,17 @@ to installing UCP in order to override the default `azure_ip_count` value of 128
 addresses per node. See [UCP configuration file](../configure/ucp-configuration-file/)
 to learn more about the configuration file, and other variables that can be staged pre-install.
 
-> Note: Do not set the `azure_ip_count` to a value of less than 6 if you have not
+> **Note**
+>
+> Do not set the `azure_ip_count` to a value of less than 6 if you have not
 > manually provisioned additional IP addresses for each Virtual Machine. The UCP
-> installation will need at least 6 IP addresses to allocate to the core UCP components 
+> installation will need at least 6 IP addresses to allocate to the core UCP components
 > that run as Kubernetes pods. That is in addition to the Virtual
 > Machine's private IP address.
 
 If you have manually provisioned additional IP addresses for each Virtual
 Machine, and want to disallow UCP from dynamically provisioning IP
-addresses for you, then your UCP configuration file would be: 
+addresses for you, then your UCP configuration file would be:
 
 ```bash
 $ vi example-config-1
@@ -234,7 +241,7 @@ $ vi example-config-1
 ```
 
 If you want to reduce the IP addresses dynamically allocated from 128 to a
-custom value, then your UCP configuration file would be: 
+custom value, then your UCP configuration file would be:
 
 ```bash
 $ vi example-config-2
@@ -248,23 +255,23 @@ appropriate value.
 
 To preload this configuration file prior to installing UCP:
 
-1. Copy the configuration file to a Virtual Machine that you wish to become a UCP Manager Node. 
-  
+1. Copy the configuration file to a Virtual Machine that you wish to become a UCP Manager Node.
+
 2. Initiate a Swarm on that Virtual Machine.
 
     ```bash
     $ docker swarm init
     ```
 
-3. Upload the configuration file to the Swarm, by using a [Docker Swarm Config](/engine/swarm/configs/). 
+3. Upload the configuration file to the Swarm, by using a [Docker Swarm Config](/engine/swarm/configs/).
 This Swarm Config will need to be named `com.docker.ucp.config`.
-    
+
     ```bash
     $ docker config create com.docker.ucp.config <local-configuration-file>
     ```
 
 4. Check that the configuration has been loaded succesfully.
-    
+
     ```bash
     $ docker config list
     ID                          NAME                                                      CREATED             UPDATED
@@ -273,12 +280,12 @@ This Swarm Config will need to be named `com.docker.ucp.config`.
 
 5. You are now ready to [install UCP](#install-ucp). As you have already staged
    a UCP configuration file, you will need to add `--existing-config` to the
-   install command below.  
+   install command below.
 
 If you need to adjust this value post-installation, see [instructions](../configure/ucp-configuration-file/)
-on how to download the UCP configuration file, change the value, and update the configuration via the API. 
+on how to download the UCP configuration file, change the value, and update the configuration via the API.
 If you reduce the value post-installation, existing virtual machines will not be
-reconciled, and you will have to manually edit the IP count in Azure.  
+reconciled, and you will have to manually edit the IP count in Azure.
 
 ### Install UCP
 
@@ -289,7 +296,9 @@ node. Finally if you have set the [Ip Count
 Value](#adjusting-the-ip-count-value) you will need to add `--existing-config`
 to the install command below.
 
-> Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet
+> **Note**
+>
+> The `pod-cidr` range must match the Azure Virtual Network's Subnet
 > attached the hosts. For example, if the Azure Virtual Network had the range
 > `172.0.0.0/16` with Virtual Machines provisioned on an Azure Subnet of
 > `172.0.1.0/24`, then the Pod CIDR should also be `172.0.1.0/24`.
