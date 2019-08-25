@@ -166,7 +166,7 @@ needs to write a large volume of non-persistent state data.
 
 If you use either bind mounts or volumes, keep the following in mind:
 
-- If you mount an **empty volume** into a directory in the container in which files
+- If you mount an **non-empty volume** into a directory in the container in which files
   or directories exist, these files or directories are propagated (copied)
   into the volume. Similarly, if you start a container and specify a volume which
   does not already exist, an empty volume is created for you.
