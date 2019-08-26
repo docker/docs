@@ -145,11 +145,28 @@ prevent accidental damage:
 
     $ chmod -v 0444 ca.pem server-cert.pem cert.pem
 
-Now you can make the Docker daemon only accept connections from clients
-providing a certificate trusted by your CA:
+The server certificates should be placed in a secure location, such as `/etc/docker`
+on your daemon's host machine:
 
-    $ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
-      -H=0.0.0.0:2376
+    $ cp ca.pem /etc/docker
+    $ mv server-cert.pem server-key.pem /etc/docker
+
+Now you can make the Docker daemon only accept remote connections from clients
+providing a certificate trusted by your CA by editing your `/etc/docker/daemon.json`.
+If it does not yet exist, create it.
+
+```json
+{
+  "hosts": [
+    "unix:///var/run/docker.sock",
+    "tcp://0.0.0.0:2376"
+  ],
+  "tlscacert": "/etc/docker/ca.pem",
+  "tlscert": "/etc/docker/server-cert.pem",
+  "tlskey": "/etc/docker/server-key.pem",
+  "tlsverify": true
+}
+```
 
 To connect to Docker and validate its certificate, provide your client keys,
 certificates and trusted CA:
