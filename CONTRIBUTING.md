@@ -7,7 +7,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](opensource/).
+[Contribution guidelines](/opensource/).
 
 ### Files not edited here
 
