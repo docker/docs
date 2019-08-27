@@ -109,6 +109,14 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
 
 2.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
+> Docker Machine is in maintenance mode
+>
+> This tutorial uses Docker Machine to setup local virtual machines for your cluster.
+>  As of July 2018, Docker Machine is in [maintenance mode](https://github.com/docker/machine/issues/4537). 
+> Only bugfixes will be added. Provisioning on a variety of cloud providers 
+> is better achieved using [infrakit](https://github.com/docker/deploykit). 
+{: .important }
+
     * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next to it.
 
     * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
