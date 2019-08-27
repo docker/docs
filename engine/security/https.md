@@ -29,7 +29,7 @@ it only connects to servers with a certificate signed by that CA.
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
-First, on the **Docker daemon's host machine**, generate CA private and public keys:
+First, on the **Docker daemon's host machine**, generate CA private key:
 
     $ openssl genrsa -aes256 -out ca-key.pem 4096
     Generating RSA private key, 4096 bit long modulus
@@ -38,6 +38,8 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
     e is 65537 (0x10001)
     Enter pass phrase for ca-key.pem:
     Verifying - Enter pass phrase for ca-key.pem:
+
+Then generate the CA's public key:
 
     $ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
     Enter pass phrase for ca-key.pem:
@@ -58,10 +60,12 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
 
 Now that you have a CA, you can create a server key and certificate
 signing request (CSR). Make sure that "Common Name" matches the hostname you use
-to connect to Docker:
+to connect to Docker.
 
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
+
+Generate the server's private key:
 
     $ openssl genrsa -out server-key.pem 4096
     Generating RSA private key, 4096 bit long modulus
@@ -69,13 +73,13 @@ to connect to Docker:
     .................................................................................................++
     e is 65537 (0x10001)
 
+Then generate the server's CSR:
+
     $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 
-Next, we're going to sign the public key with our CA:
-
-Since TLS connections can be made through IP address as well as DNS name, the IP addresses
-need to be specified when creating the certificate. For example, to allow connections
-using `10.10.10.20` and `127.0.0.1`:
+Next, we're going to sign the public key with our CA. Since TLS connections can be made through
+IP address as well as DNS name, the IP addresses need to be specified when creating the
+certificate. For example, to allow connections using `10.10.10.20` and `127.0.0.1`:
 
     $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
 
@@ -100,16 +104,20 @@ running on a Docker daemon receive the certificate information for connecting
 Docker clients.
 
 For client authentication, create a client key and certificate signing
-request:
+request.
 
 > **Note**: For simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
+
+Generate the client's private key:
 
     $ openssl genrsa -out key.pem 4096
     Generating RSA private key, 4096 bit long modulus
     .........................................................++
     ................++
     e is 65537 (0x10001)
+
+Then generate the client's CSR:
 
     $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 
