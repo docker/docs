@@ -57,20 +57,30 @@ services:
 
   wordpress:
     image: wordpress
+    networks:
+      - wp
     ports:
       - 8080:80
     environment:
       WORDPRESS_DB_PASSWORD: example
-    deploy:  
+    deploy:
       labels:
         com.docker.ucp.access.label: /Shared/wordpress
   mysql:
     image: mysql:5.7
+    networks:
+      - wp
     environment:
       MYSQL_ROOT_PASSWORD: example
-    deploy:  
+    deploy:
       labels:
         com.docker.ucp.access.label: /Shared/wordpress
+
+networks:
+  wp:
+    driver: overlay
+    labels:
+      com.docker.ucp.access.label: /Shared/wordpress
 ```
 
 To deploy the application:
@@ -95,6 +105,21 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
    make sure that the **Collection** is `/Shared/wordpress`.
 
 ![](../images/deploy-stack-to-collection-2.png){: .with-border}
+
+### Notes
+
+It is important to note that by default Docker Stacks will create a default `overlay`
+network for your stack. It will be
+attached to each container that is deployed. This works if you have full control over
+your Default Collection or are an administrator. If your administrators have locked
+down UCP to only allow you access to specific collections and you manage multiple
+collections, then it can get very difficult to manage the networks as well and you
+might run into permissions errors. To fix this, you must define a custom network
+and attach that to each service. The network must have the same `com.docker.ucp.access.label`
+Label as your service. If configured correctly, then your network will correctly
+be grouped with the other resources in your stack.
+
+
 
 ## Where to go next
 

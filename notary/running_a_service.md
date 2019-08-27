@@ -8,7 +8,7 @@ This document is for anyone who wants to run their own Notary
 service (such as those who want to use Notary with a
 private Docker registry). Running a Notary service requires that you are already
 familiar with using [Docker Engine](/engine/userguide/)
-and [Docker Compose](/compose/overview/).
+and [Docker Compose](/compose/).
 
 ## Run a service for testing or development
 
@@ -178,7 +178,7 @@ One way to do this would be:
 		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
 
 You can do the same using
-[Docker Compose](/compose/overview/) by setting volumes,
+[Docker Compose](/compose/) by setting volumes,
 environment variables, and overriding the default command for the Notary server
 containers in the Compose file.
 

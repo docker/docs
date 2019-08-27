@@ -1,0 +1,24 @@
+command: docker app completion
+short: Generates completion scripts for the specified shell (bash or zsh)
+long: |
+  # Load the "docker app" completion code for bash into the current shell
+  . <(docker app completion bash)
+  # Set the "docker app" completion code for bash to autoload on startup in your ~/.bashrc,
+  # ~/.profile or ~/.bash_profile
+  . <(docker app completion bash)
+  # Note: bash-completion is needed.
+
+  # Load the "docker app" completion code for zsh into the current shell
+  source <(docker app completion zsh)
+  # Set the "docker app" completion code for zsh to autoload on startup in your ~/.zshrc,
+  source <(docker app completion zsh)
+usage: docker app completion SHELL
+pname: docker app
+plink: docker_app.yaml
+examples: $ . <(docker app completion bash)
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

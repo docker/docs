@@ -281,7 +281,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
-    Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
+    Also, check the visualizer at port 8080 on either node's IP address, and notice the `redis` service running along with the `web` and `visualizer` services.
 
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 

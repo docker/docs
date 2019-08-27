@@ -64,7 +64,7 @@ If you don't have three hosts handy, an easy solution is to set up three
 Ubuntu hosts on a cloud provider such as Amazon EC2, all on the same network
 with all communications allowed to all hosts on that network (using a mechanism
 such as EC2 security groups), and then to follow the
-[installation instructions for Docker CE on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
+[installation instructions for Docker Engine - Community on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
 
 ### Walkthrough
 

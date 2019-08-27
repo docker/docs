@@ -1,7 +1,7 @@
 ---
 title: UCP System requirements
 description: Learn about the system requirements for installing Docker Universal Control Plane.
-keywords: UCP, architecture, requirements, Docker EE
+keywords: UCP, architecture, requirements, Docker Engine - Enterprise
 redirect_from:
 - /enterprise/admin/install/system-requirements/
 ---
@@ -13,7 +13,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker EE Engine](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
+* [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
  
@@ -22,7 +22,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 8GB of RAM for manager nodes
 * 4GB of RAM for worker nodes
 * 2 vCPUs for manager nodes
-* 5GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
+* 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
 
 **Note**: Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
@@ -37,7 +37,7 @@ Note that Windows container images are typically larger than Linux container ima
 this reason, you should provision more local storage for Windows
 nodes and for any DTR setups that store Windows container images.
 
-Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
+Also, make sure the nodes are running an [operating system support by Docker Enterprise](https://success.docker.com/Policies/Compatibility_Matrix).
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
@@ -86,6 +86,16 @@ host types:
 | managers          | TCP 12386               | Internal           | Port for the authentication worker                                            |
 | managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                   |
 
+## Disable `CLOUD_NETCONFIG_MANAGE` for SLES 15
+For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE` 
+prior to installing UCP.
+
+    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set 
+    ```
+    CLOUD_NETCONFIG_MANAGE="no"
+    ```
+    2. Run `service network restart`.
+
 ## Avoid firewall conflicts
 
 For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is turned on by default in the openSUSE firewall. This speeds up packet processing on the loopback interface, and breaks certain firewall setups that need to redirect outgoing packets via custom rules on the local machine.
@@ -130,9 +140,9 @@ unexpected behavior may cause poor performance or even failures.
 
 ## Compatibility and maintenance lifecycle
 
-Docker EE is a software subscription that includes three products:
+Docker Enterprise is a software subscription that includes three products:
 
-* Docker Engine with enterprise-grade support
+* Docker Engine - Enterprise with enterprise-grade support
 * Docker Trusted Registry
 * Docker Universal Control Plane
 

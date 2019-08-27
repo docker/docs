@@ -125,6 +125,7 @@ examples: "### List all networks\n\n```bash\n$ sudo docker network ls\nNETWORK I
   by a colon for all networks:\n\n```bash\n$ docker network ls --format \"{{.ID}}:
   {{.Driver}}\"\nafaaab448eb2: bridge\nd1584f8dc718: host\n391df270dc66: null\n```"
 deprecated: false
+min_api_version: "1.21"
 experimental: false
 experimentalcli: false
 kubernetes: false

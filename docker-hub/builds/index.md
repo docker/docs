@@ -101,7 +101,7 @@ run an initial test.
 By default when you set up automated builds, a basic build rule is created for you.
 This default rule watches for changes to the `master` branch in your source code
 repository, and builds the `master` branch into a Docker image tagged with
-`latest`. You
+`latest`.
 
 In the **Build Rules** section, enter one or more sources to build.
 

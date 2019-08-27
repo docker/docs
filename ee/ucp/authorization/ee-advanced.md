@@ -1,6 +1,6 @@
 ---
-title: Access control design with Docker EE Advanced
-description: Learn how to architect multitenancy with Docker Enterprise Edition Advanced.
+title: Access control design with Docker Enterprise
+description: Learn how to architect multitenancy with Docker Enterprise.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 

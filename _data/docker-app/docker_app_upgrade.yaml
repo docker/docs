@@ -1,0 +1,88 @@
+command: docker app upgrade
+short: Upgrade an installed application
+long: Upgrade an installed application
+usage: docker app upgrade INSTALLATION_NAME [--target-context TARGET_CONTEXT] [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: app-name
+  value_type: string
+  description: Override the installation with another Application Package
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: credential-set
+  value_type: stringArray
+  default_value: '[]'
+  description: |
+    Use a YAML file containing a credential set or a credential set present in the credential store
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: insecure-registries
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: parameters-file
+  value_type: stringArray
+  default_value: '[]'
+  description: Override parameters file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: pull
+  value_type: bool
+  default_value: "false"
+  description: Pull the bundle
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: set
+  shorthand: s
+  value_type: stringArray
+  default_value: '[]'
+  description: Override parameter value
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: target-context
+  value_type: string
+  description: |
+    Context on which the application is installed (default: <current-context>)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: with-registry-auth
+  value_type: bool
+  default_value: "false"
+  description: Sends registry auth
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app upgrade myinstallation --target-context=mycontext --set key=value
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

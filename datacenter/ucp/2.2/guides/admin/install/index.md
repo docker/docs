@@ -1,7 +1,7 @@
 ---
 title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production.
-keywords: Universal Control Plane, UCP, install, Docker EE
+keywords: Universal Control Plane, UCP, install, Docker Enterprise
 ---
 
 Docker Universal Control Plane (UCP) is a containerized application that you
@@ -14,18 +14,18 @@ of the [requirements UCP needs to run](system-requirements.md).
 Also, you need to ensure that all nodes, physical and virtual, are running
 the same version of Docker Enterprise Edition.
 
-## Step 2: Install Docker EE on all nodes
+## Step 2: Install Docker Enterprise on all nodes
 
 UCP is a containerized application that requires the commercially supported
 Docker Engine to run.
 
-Install Docker EE on each host that you plan to manage with UCP.
+Install Docker Enterprise on each host that you plan to manage with UCP.
 View the [supported platforms](/install/index.md#supported-platforms)
 and click on your platform to get platform-specific instructions for installing
-Docker EE.
+Docker Enterprise.
 
-Make sure you install the same Docker EE version on all the nodes. Also,
-if you're creating virtual machine templates with Docker EE already
+Make sure you install the same Docker Enterprise version on all the nodes. Also,
+if you're creating virtual machine templates with Docker Enterprise already
 installed, make sure the `/etc/docker/key.json` file is not included in the
 virtual machine image. When provisioning the virtual machine, restart the Docker
 daemon to generate a new `/etc/docker/key.json` file.

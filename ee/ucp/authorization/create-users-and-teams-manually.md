@@ -25,7 +25,7 @@ acme-datacenter
 
 ## Authentication
 
-All users are authenticated on the backend. Docker EE provides built-in
+All users are authenticated on the backend. Docker Enterprise provides built-in
 authentication and also integrates with LDAP directory services.
 
 To use Docker EE's built-in authentication, you must [create users manually](#create-users-manually).

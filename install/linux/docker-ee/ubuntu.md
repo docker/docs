@@ -16,8 +16,8 @@ To get started with Docker EE on Ubuntu, make sure you
 
 ## Prerequisites
 
-Docker CE users should go to
-[Get Docker CE for Ubuntu](/install/linux/docker-ce/ubuntu.md)
+Docker Engine - Community users should go to
+[Get Docker Engine - Community for Ubuntu](/install/linux/docker-ce/ubuntu.md)
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
@@ -44,7 +44,7 @@ check the [compatibility matrix](https://success.docker.com/article/compatibilit
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. In addition,
-if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
+if you are upgrading from Docker Engine - Community to Docker EE, remove the Docker Engine - Community package.
 
 ```bash
 $ sudo apt-get remove docker docker-engine docker-ce docker-ce-cli docker.io

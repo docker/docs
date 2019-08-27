@@ -474,7 +474,13 @@ Volumes are useful for backups, restores, and migrations. Use the
 
 ### Backup a container
 
-For example, in the next command, we:
+For example, create a new container named `dbstore`:
+
+```
+$ docker run -v /dbdata --name dbstore ubuntu /bin/bash
+```
+
+Then in the next command, we:
 
 - Launch a new container and mount the volume from the `dbstore` container
 - Mount a local host directory as `/backup`
@@ -554,3 +560,4 @@ $ docker volume prune
 - Learn about [bind mounts](bind-mounts.md).
 - Learn about [tmpfs mounts](tmpfs.md).
 - Learn about [storage drivers](/storage/storagedriver/).
+- Learn about [third-party volume driver plugins](/engine/extend/legacy_plugins/).

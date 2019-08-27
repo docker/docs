@@ -2,6 +2,10 @@
 title: Troubleshoot UCP node states
 description: Learn how to troubleshoot individual UCP nodes.
 keywords: UCP, troubleshoot, health, swarm
+redirect_from:
+  - /ucp/monitor/troubleshoot-ucp/
+  - /ucp/kv_store/
+  - /ucp/monitor/troubleshoot-configurations/
 ---
 
 There are several cases in the lifecycle of UCP when a node is actively

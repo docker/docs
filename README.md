@@ -6,6 +6,30 @@ Welcome to the repo for our documentation. This is the source for
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
 
+## Table of Contents
+
+- [Providing feedback](#providing-feedback)
+- [Contributing](#contributing)
+  - [Files not edited here](#files-not-edited-here)
+  - [Overall doc improvements](#overall-doc-improvements)
+  - [Specific new features for a project](#specific-new-features-for-a-project)
+- [Per-PR staging on GitHub](#per-pr-staging-on-github)
+- [Staging the docs](#staging-the-docs)
+- [Read these docs offline](#read-these-docs-offline)
+- [Important files](#important-files)
+- [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
+  - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
+  - [Per-page front-matter](#per-page-front-matter)
+  - [Creating tabs](#creating-tabs)
+  - [Running in-page Javascript](#running-in-page-javascript)
+  - [Images](#images)
+- [Beta content disclaimer](#beta-content-disclaimer)
+- [Accessing unsupported archived documentation](#accessing-unsupported-archived-documentation)
+- [Building archives and the live published docs](#building-archives-and-the-live-published-docs)
+- [Creating a new archive](#creating-a-new-archive)
+- [Copyright and license](#copyright-and-license)
+
+
 ## Providing feedback
 
 We really want your feedback, and we've made it easy.  You can edit a page or
@@ -363,7 +387,7 @@ branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
 
 ## Creating a new archive
 
-When a new Docker CE Stable version is released, the previous state of `master`
+When a new Docker Engine - Community Stable version is released, the previous state of `master`
 is archived into a version-specific branch like `v17.09`, by doing the following:
 
 1.  Create branch based off the commit hash before the new version was released.
