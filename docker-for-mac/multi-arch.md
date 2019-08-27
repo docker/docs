@@ -16,56 +16,28 @@ automatically select an image variant which matches your OS and architecture.
 Most of the official images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64).
 For example, the `busybox` image supports `amd64`, `arm32v5`, `arm32v6`,
 `arm32v7`, `arm64v8`, `i386`, `ppc64le`, and `s390x`. When running this image
-on an `x86_64` / `amd64` machine, the `x86_64` variant will be pulled and run,
-which can be seen from the output of the `uname -a` command that's run inside
-the container:
+on an `x86_64` / `amd64` machine, the `x86_64` variant will be pulled and run.
 
-```bash
-$ docker run busybox uname -a
-
-Linux 82ef1a0c07a2 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 x86_64 GNU/Linux
-```
-
-**Docker Desktop for Mac** provides `binfmt_misc` multi-architecture support,
+**Docker Desktop** provides `binfmt_misc` multi-architecture support,
 which means you can run containers for different Linux architectures
 such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 
 This does not require any special configuration in the container itself as it uses
 <a href="http://wiki.qemu.org/" target="_blank">qemu-static</a> from the **Docker for
 Mac VM**. Because of this, you can run an ARM container, like the `arm32v7` or `ppc64le`
-variants of the busybox image:
-
-### arm32v7 variant
-```bash
-$ docker run arm32v7/busybox uname -a
-
-Linux 9e3873123d09 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 armv7l GNU/Linux
-```
-
-### ppc64le variant
-```bash
-$ docker run ppc64le/busybox uname -a
-
-Linux 57a073cc4f10 4.9.125-linuxkit #1 SMP Fri Sep 7 08:20:28 UTC 2018 ppc64le GNU/Linux
-```
-
-Notice that this time, the `uname -a` output shows `armv7l` and
-`ppc64le` respectively.
-
-Multi-architecture support makes it easy to build <a href="https://blog.docker.com/2017/11/multi-arch-all-the-things/" target="_blank">multi-architecture Docker images</a> or experiment with ARM images and binaries from your Mac.
+variants of the busybox image.
 
 ## Buildx (Experimental)
 
-With the Docker Desktop 2.0.4.0 Edge release, Docker is making it easier than ever to develop containers on, and for Arm servers and devices. Using the standard Docker tooling and processes, you can start to build, push, pull, and run images seamlessly on different compute architectures. Note that you don't have to make any changes to Dockerfiles or source code to start building for Arm.
+Docker is now making it easier than ever to develop containers on, and for Arm servers and devices. Using the standard Docker tooling and processes, you can start to build, push, pull, and run images seamlessly on different compute architectures. Note that you don't have to make any changes to Dockerfiles or source code to start building for Arm.
 
-Docker Desktop 2.0.4.0 Edge release introduces a new CLI command called `buildx`.  Buildx allows you to build multi-arch images, link them together with a manifest file, and push them all to a registry using a single command.  With the included emulation, you can transparently build more than just native images.  Buildx accomplishes this by adding new builder instances based on BuildKit, and leveraging Docker Desktop's technology stack to run non-native binaries.
+Docker introduces a new CLI command called `buildx`. You can use the `buildx` command on Docker Desktop for Mac and Windows to build multi-arch images, link them together with a manifest file, and push them all to a registry using a single command.  With the included emulation, you can transparently build more than just native images.  Buildx accomplishes this by adding new builder instances based on BuildKit, and leveraging Docker Desktop's technology stack to run non-native binaries.
+
+For more information about the Buildx CLI command, see [Buildx](/buildx/working-with-buildx/).
 
 ### Install
 
-1. Download Docker Desktop 2.0.4.0 or higher.
-
-    - [Docker Desktop 2.0.4.0 for Mac](https://docs.docker.com/docker-for-mac/edge-release-notes/)
-    - [Docker Desktop 2.0.4.0 for Windows](https://docs.docker.com/docker-for-windows/edge-release-notes/)
+1. Download the latest version of [Docker Desktop](https://hub.docker.com/?overlay=onboarding).
 
 1. Follow the on-screen instructions to complete the installation process. After you have successfully installed Docker Desktop, you will see the Docker icon in your task tray.
 
@@ -173,17 +145,13 @@ Manifests:
   You can run the images using the SHA tag, and verify the architecture. For example, when you run the following on a macOS:
 
  ```bash
- $ docker run --rm docker.io/username/demo:latest@sha256:2b77acdfea5dc5baa489ffab2a0b4a387666d1d526490e31845eb64e3e73ed20 uname -m aarch64
+ $ docker run --rm docker.io/username/demo:latest@sha256:2b77acdfea5dc5baa489ffab2a0b4a387666d1d526490e31845eb64e3e73ed20 uname -m
+ aarch64
 ```
 
 ```bash
-$ docker run --rm docker.io/username/demo:latest@sha256:723c22f366ae44e419d12706453a544ae92711ae52f510e226f6467d8228d191 uname -m armv7l
+$ docker run --rm docker.io/username/demo:latest@sha256:723c22f366ae44e419d12706453a544ae92711ae52f510e226f6467d8228d191 uname -m
+armv7l
 ```
 
 In the above example, `uname -m` returns `aarch64` and `armv7l` as expected, even when running the commands on a native macOS developer machine.
-
-### Buildx demo
-
-The following GIF demonstrates the features discussed in the [Buildx Tech Preview](#buildx-tech-preview) section.
-
- ![buildx Tech Preview demo](https://engineering.docker.com/wp-content/uploads/engineering/2019/04/demo_loop.gif)
