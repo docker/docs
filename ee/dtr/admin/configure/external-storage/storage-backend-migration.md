@@ -51,7 +51,7 @@ If you have a long maintenance window, you can skip some steps from above and do
 ## DTR 2.6.0-2.6.4 and DTR 2.5 (with experimental garbage collection)
 
 Make sure to [perform a backup](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-data) before you change your storage backend when running DTR 2.5 (with online garbage collection) and 2.6.0-2.6.3. If you encounter an issue with lost tags, refer to the following resources:
-  * For changes to reconfigure and restore options in DTR 2.6, see [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/) and [docker/dtr restore](/reference/dtr/2.6/cli/restore).
+  * For changes to reconfigure and restore options in DTR 2.6, see [docker/dtr reconfigure](/datacenter/dtr/2.6/reference/cli/reconfigure/) and [docker/dtr restore](/datacenter/dtr/2.6/reference/cli/restore/).
   * For Docker's recommended recovery strategies, see [DTR 2.6 lost tags after reconfiguring storage](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage).
   * For NFS-specific changes, see [Use NFS](nfs.md).
   * For S3-specific changes, see [Learn how to configure DTR with Amazon S3](s3.md).
