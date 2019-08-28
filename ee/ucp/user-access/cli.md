@@ -102,7 +102,7 @@ To confirm that your client tools are now communicating with UCP, run:
 {% raw %}
 docker version --format '{{.Server.Version}}'
 {% endraw %}
-{{ page.ucp_repo }}/{{ page.ucp_version }}
+
 ```
 <hr>
 </div>
