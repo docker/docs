@@ -7,7 +7,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](opensource/).
+[Contribution guidelines](/opensource/).
 
 ### Files not edited here
 
@@ -121,5 +121,5 @@ know.
 
 ## Style guide
 
-Docker does not currently maintain a style guide. Use your best judgment, and 
+Docker does not currently maintain a style guide. Use your best judgment, and
 try to follow the example set by the existing documentation.

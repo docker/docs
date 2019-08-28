@@ -2868,25 +2868,25 @@ manuals:
               path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/restore-from-backup/
           - sectiontitle: CLI Reference
             section:
-            - path: /reference/dtr/2.6/cli/
+            - path: /datacenter/dtr/2.6/reference/cli/
               title: Overview
-            - path: /reference/dtr/2.6/cli/backup/
+            - path: /datacenter/dtr/2.6/reference/cli/backup/
               title: backup
-            - path: /reference/dtr/2.6/cli/destroy/
+            - path: /datacenter/dtr/2.6/reference/cli/destroy/
               title: destroy
-            - path: /reference/dtr/2.6/cli/emergency-repair/
+            - path: /datacenter/dtr/2.6/reference/cli/emergency-repair/
               title: emergency-repair
-            - path: /reference/dtr/2.6/cli/install/
+            - path: /datacenter/dtr/2.6/reference/cli/install/
               title: install
-            - path: /reference/dtr/2.6/cli/join/
+            - path: /datacenter/dtr/2.6/reference/cli/join/
               title: join
-            - path: /reference/dtr/2.6/cli/reconfigure/
+            - path: /datacenter/dtr/2.6/reference/cli/reconfigure/
               title: reconfigure
-            - path: /reference/dtr/2.6/cli/remove/
+            - path: /datacenter/dtr/2.6/reference/cli/remove/
               title: remove
-            - path: /reference/dtr/2.6/cli/restore/
+            - path: /datacenter/dtr/2.6/reference/cli/restore/
               title: restore
-            - path: /reference/dtr/2.6/cli/upgrade/
+            - path: /datacenter/dtr/2.6/reference/cli/upgrade/
               title: upgrade
         - sectiontitle: User guides
           section:
