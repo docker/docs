@@ -53,7 +53,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
            - db
          image: wordpress:latest
          ports:
-           - "8000:80"
+           - "8080:80"
          restart: always
          environment:
            WORDPRESS_DB_HOST: db:3306
