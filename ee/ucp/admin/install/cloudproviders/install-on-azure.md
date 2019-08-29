@@ -86,19 +86,10 @@ parameters as is.
     "aadClientId": "***",
     "aadClientSecret": "***",
     "resourceGroup": "***",
-    "location": "****",
-    "subnetName": "/****",
-    "securityGroupName": "****",
-    "vnetName": "****",
-    "cloudProviderBackoff": false,
-    "cloudProviderBackoffRetries": 0,
-    "cloudProviderBackoffExponent": 0,
-    "cloudProviderBackoffDuration": 0,
-    "cloudProviderBackoffJitter": 0,
-    "cloudProviderRatelimit": false,
-    "cloudProviderRateLimitQPS": 0,
-    "cloudProviderRateLimitBucket": 0,
-    "useManagedIdentityExtension": false,
+    "location": "***",
+    "subnetName": "***",
+    "securityGroupName": "***",
+    "vnetName": "***",
     "useInstanceMetadata": true
 }
 ```

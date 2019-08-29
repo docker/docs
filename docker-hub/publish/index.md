@@ -49,7 +49,7 @@ content to many different audiences:
 
 Docker provides a fulfillment service so that ISVs can programmatically entitle
 users, by creating subscriptions to their content in Docker Hub. For more
-information, see [Bring Your Own License (BYOL) products on Store](byol.md).
+information, see [Bring Your Own License (BYOL) products on Hub](byol.md).
 
 ### Plugins and agents
 

@@ -15,6 +15,13 @@ infrastructure meets the [system requirements](./system-requirements) that DTR n
 
 ## Step 2. Install UCP
 
+>**Note**
+>
+> Before installing DTR:
+> * When upgrading, upgrade UCP before DTR for each major version. For example, if you are upgrading four major versions, upgrade one major version at a time, first UCP, then DTR, and then repeat for the remaining three versions.
+> * UCP should be installed or upgraded to the most recent version before an initial install of DTR.
+> * Docker Engine should be updated to the most recent version before installing or updating UCP.
+
 Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to [install UCP](/ee/ucp/admin/install/) on all the nodes where you plan to install DTR.
 
@@ -26,7 +33,7 @@ You cannot install DTR on a standalone Docker Engine.
 
 ## Step 3. Install DTR
 
-Once UCP is installed, navigate to the UCP web interface as an admin. Expand your profile on the left 
+Once UCP is installed, navigate to the UCP web interface as an admin. Expand your profile on the left
 navigation pane, and select **Admin Settings > Docker Trusted Registry**.
 
 ![](../../images/install-dtr-2.png){: .with-border}
@@ -51,7 +58,7 @@ installed on the ucp worker defined by the `--ucp-node` flag.
 As an example, you could SSH into a UCP node and run the DTR install command
 from there.  Running the installation command in interactive TTY or `-it` mode
 means you will be prompted for any required additional information.  [Learn
-more about installing DTR](/reference/dtr/2.7/cli/install/). 
+more about installing DTR](/reference/dtr/2.7/cli/install/).
 
 To install a specific version of DTR, replace `{{ page.dtr_version }}` with your
 desired version in the [installation command](#step-3-install-dtr) above. Find
@@ -81,8 +88,8 @@ DTR listed as a stack.
 
 To verify that DTR is accessible from the browser, enter your DTR IP address or FQDN on the address bar.
 Since [HSTS (HTTP Strict-Transport-Security)
-header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) is included in all API responses, 
-make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR prefixed with `https://`, 
+header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) is included in all API responses,
+make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR prefixed with `https://`,
 or your browser may refuse to load the web interface.
 
 ![](../../images/create-repository-1.png){: .with-border}
@@ -97,11 +104,11 @@ After installing DTR, you should configure:
 
 ### Web interface
 
-  * To update your TLS certificates, access DTR from the browser and navigate to **System > General**. 
+  * To update your TLS certificates, access DTR from the browser and navigate to **System > General**.
   * To configure your storage backend, navigate to **System > Storage**. If you are upgrading and changing your existing storage backend, see [Switch storage backends](/ee/dtr/admin/configure/external-storage/storage-backend-migration/) for recommended steps.
-  
+
 ### Command line interface
-  
+
   To reconfigure DTR using the CLI, see the reference page for [the reconfigure command](/reference/dtr/2.7/cli/reconfigure/).
 
 ## Step 6. Test pushing and pulling
@@ -122,7 +129,7 @@ you can add more replicas to your DTR cluster. Adding more replicas allows you
 to load-balance requests across all replicas, and keep DTR working if a
 replica fails.
 
-For high-availability, you should set 3 or 5 DTR replicas. The replica nodes also need 
+For high-availability, you should set 3 or 5 DTR replicas. The replica nodes also need
 to be managed by the same UCP.
 
 To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) command:
@@ -143,13 +150,13 @@ To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) c
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
-    
+
     > --ucp-node
     >
     > The `<ucp-node-name>` following the `--ucp-node` flag is the target node to
     > install the DTR replica. This is NOT the UCP Manager URL.
     {: .important}
-    
+
 3. Check that all replicas are running.
 
     In your browser, navigate to UCP's

@@ -21,3 +21,4 @@ title: Machine drivers
 -   [VMware Workstation](https://github.com/pecigonzalo/docker-machine-vmwareworkstation) (unofficial plugin, not supported by Docker)
 -   [Grid 5000](https://github.com/Spirals-Team/docker-machine-driver-g5k) (unofficial plugin, not supported by Docker)
 -   [Scaleway](https://github.com/scaleway/docker-machine-driver-scaleway) (unofficial plugin, not supported by Docker)
+-   [Hetzner Cloud](https://github.com/JonasProgrammer/docker-machine-driver-hetzner) (unofficial plugin, not supported by Docker)
