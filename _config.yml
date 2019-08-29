@@ -111,38 +111,43 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-19.03.1"
+      win_latest_build: "docker-19.03.2"
   - scope:
       path: "datacenter"
     values:
       enterprise: true
+  # Latest Enterprise Platform Release
   - scope:
-      path: "ee/dtr"
+      path: "ee"
     values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.7.1"
+      ucp_version: "3.2.1"
+      dtr_version: "2.7.2"
+  # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.8"
+      dtr_version: "2.6.9"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.13"
+      dtr_version: "2.5.14"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.13"
+      dtr_version: "2.4.14"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
@@ -166,42 +171,28 @@ defaults:
     values:
       ucp_version: "1.1"
       dtr_version: "2.0"
-  - scope:
-      path: "ee/ucp"
-    values:
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      ucp_version: "3.2.0"
-  - scope: # This is a bit of a hack for the get-support.md and /ee/admin/
-      path: "ee"
-    values:
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      ucp_version: "3.2.0"
-      dtr_version: "2.7.1"
+  # Previous UCP Releases
   - scope:
       path: "datacenter/ucp/3.1"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.9"
+      ucp_version: "3.1.10"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.13"
+      ucp_version: "3.0.14"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.20"
+      ucp_version: "2.2.21"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
