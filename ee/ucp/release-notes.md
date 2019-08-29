@@ -257,6 +257,7 @@ In order to optimize user experience and security, support for Internet Explorer
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
     - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount to a `cluster-admin` `ClusterRole`, as shown in the following example:
+      
       ```
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
