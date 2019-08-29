@@ -1,4 +1,4 @@
-amd64: |
+﻿amd64: |
   AMD64 is AMD's 64-bit extension of Intel's x86 architecture, and is also
   referred to as x86_64 (or x86-64).
 aufs: |
@@ -26,6 +26,8 @@ cgroups: |
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
   *Also known as : control groups*
+cluster: |
+  A cluster is a group of machines that work together to run workloads and provide high availability.		
 collection: |
   A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
@@ -219,6 +221,8 @@ parent image: |
   in the image's Dockerfile. All subsequent commands are applied to this parent
   image. A Dockerfile with no `FROM` directive has no parent image, and is called
   a **base image**.
+persistent storage: |
+  Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the life cycle of the container, allowing a user to retain state.
 registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.
