@@ -25,7 +25,7 @@ upgrade your installation to the latest release.
 # Version 3.2
 
 ## 3.2.1 
-2019-08
+2019-08-29
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
@@ -367,7 +367,7 @@ In order to optimize user experience and security, support for Internet Explorer
 # Version 3.1
 
 ## 3.1.10 
-2019-08
+2019-08-29
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.11.0-docker-2 that is built on Golang 1.12.9.
@@ -825,7 +825,7 @@ The following features are deprecated in UCP 3.1.
 # Version 3.0
 
 ## 3.0.14 
-2019-08
+2019-08-29
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.8.15-docker-7 that is built on Golang 1.12.9.
@@ -1353,7 +1353,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 # Version 2.2
 
 ## Version 2.2.21 
-2019-08
+2019-08-29
 
 ### Security
 
