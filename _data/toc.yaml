@@ -1296,6 +1296,8 @@ manuals:
     section:
     - path: /cluster/
       title: Overview
+    - path: /cluster/release-notes/
+      title: Release notes
     - path: /cluster/aws/
       title: Docker Cluster on AWS
     - path: /cluster/cluster-file/

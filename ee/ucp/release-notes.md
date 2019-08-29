@@ -23,7 +23,36 @@ upgrade your installation to the latest release.
 **Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
-(2019-7-22)
+
+## 3.2.1 
+2019-08
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.6.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now replicated for HA.
+
+### Networking
+* Calico has been upgraded to version 3.8.2.
+* Interlock has been upgraded to version 2.6.1.
+* Added `azure-ip-count` at installation.
+
+### Security
+* Upgraded Golang to 1.12.9.
+* Added CSP header to prevent cross-site scripting attacks (XSS)
+
+### Bootstrap
+* Fixed various issues in install, uninstall, backup and restore.
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.2.0 |
+| Kubernetes   | 1.14.6 |
+| Calico      | 3.8.2 |
+| Interlock   | 2.6.1 |
+| Interlock NGINX proxy | 1.14.2 |
+
+## 3.2.0
+2019-7-22
 
 ### Security
 Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates, issues, and recommendations.
@@ -337,8 +366,25 @@ In order to optimize user experience and security, support for Internet Explorer
 
 # Version 3.1
 
-## 3.1.9
-(2019-07-17)
+## 3.1.10 
+2019-08
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.11.0-docker-2 that is built on Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now replicated for HA.
+
+### Networking
+* Calico has been upgraded to version 3.8.2.
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+
+### UI
+* A warning message will be shown when one attempts to upgrade 3.1 to 3.2 via GUI.
+ 
+## 3.1.9 
+2019-07-17
 
 ### Bug fixes
 
@@ -778,6 +824,20 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.14 
+2019-08
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.8.15-docker-7 that is built on Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13.
+
+### Networking
+* Calico has been upgraded to version 3.0.12.
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+* 
 ## 3.0.13
 2019-07-17
 
@@ -1133,8 +1193,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | Calico      | 3.0.1 |
 | Interlock (nginx)   | 1.13.8 |
 
-## Version 3.0.0
-
+## 3.0.0
 2018-04-17
 
 The UCP system requirements were updated with 3.0.0. Make sure to
@@ -1293,7 +1352,14 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
-## Version 2.2.20
+## Version 2.2.21 
+2019-08
+
+### Security
+
+* Upgraded Golang to 1.12.9.
+
+## Version 2.2.20 
 2019-07-17
 
 ### Bug fixes
