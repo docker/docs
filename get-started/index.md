@@ -174,7 +174,7 @@ is available in
 2.  List the `hello-world` image that was downloaded to your machine:
 
     ```shell
-    docker image ls
+    docker images ls
     ```
 
 3.  List the `hello-world` container (spawned by the image) which exits after
@@ -203,7 +203,7 @@ docker info
 docker run hello-world
 
 ## List Docker images
-docker image ls
+docker images ls
 
 ## List Docker containers (running, all, all in quiet mode)
 docker container ls
