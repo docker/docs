@@ -256,24 +256,24 @@ In order to optimize user experience and security, support for Internet Explorer
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
-   to a `cluster-admin` `ClusterRole`, as shown in the following example:
-       ```
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: ClusterRoleBinding
-       metadata:
-         labels:
-           subjectName: kube-system-persistent-volume-binder
-         name: kube-system-persistent-volume-binder:cluster-admin
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: ClusterRole
-         name: cluster-admin
-       subjects:
-       - kind: ServiceAccount
-         name: persistent-volume-binder
-         namespace: kube-system
-       ```
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount to a `cluster-admin` `ClusterRole`, as shown in the following example:
+      
+      ```
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        labels:
+          subjectName: kube-system-persistent-volume-binder
+        name: kube-system-persistent-volume-binder:cluster-admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+      - kind: ServiceAccount
+        name: persistent-volume-binder
+        namespace: kube-system
+      ```
 
 - Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
   - Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
