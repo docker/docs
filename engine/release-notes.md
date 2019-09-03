@@ -30,6 +30,77 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 > `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
 > for the corresponding linux distro for details.
 
+## 19.03.2
+2019-09-03
+
+### Builder
+
+* Fix `COPY --from` to non-existing directory on Windows. [moby/moby#39695](https://github.com/moby/moby/pull/39695)
+
+* Fix builder-next: metadata commands not having created time in history. [moby/moby#39456](https://github.com/moby/moby/issues/39456)
+
+* Fix builder-next: close progress on layer export error. [moby/moby#39782](https://github.com/moby/moby/pull/39782)
+
+* Update buildkit to 588c73e1e4. [moby/moby#39781](https://github.com/moby/moby/pull/39781)
+
+### Client
+
+* Fix Windows absolute path detection on non-Windows [docker/cli#1990](https://github.com/docker/cli/pull/1990)
+
+* Fix to zsh completion script for `docker login --username`.
+
+* Fix context: produce consistent output on `context create`. [docker/cli#1985](https://github.com/docker/cli/pull/1874)
+
+* Fix support for HTTP proxy env variable. [docker/cli#2059](https://github.com/docker/cli/pull/2059)
+
+### Logging
+
+* Fix for reading journald logs. [moby/moby#37819](https://github.com/moby/moby/pull/37819) [moby/moby#38859](http://github.com/moby/moby/pull/38859)
+
+### Networking
+
+* Prevent panic on network attached to a container with disabled networking. [moby/moby#39589](https://github.com/moby/moby/pull/39589)
+
+### Runtime
+
+* Bump Golang to 1.12.8.
+
+* Fix a potential engine panic when using XFS disk quota for containers. [moby/moby#39644](https://github.com/moby/moby/pull/39644)
+
+### Swarm
+
+* Fix an issue where nodes with several tasks could not be removed. [docker/swarmkit#2867](https://github.com/docker/swarmkit/pull/2867)
+
+### Known issues
+
+* In some circumstances, in large clusters, docker information might, as part of the Swarm section,
+  include the error `code = ResourceExhausted desc = grpc: received message larger than
+  max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
+  and requires no response.
+* Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager
+  requests in a short amount of time, some services are not able to receive traffic and are causing a `404`
+  error after being deployed.
+     - Workaround: restart all tasks via `docker service update --force`.
+
+* Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
+  The missing rules are :
+     ```
+     sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+     /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+     ```
+     - Workaround: Add these rules back using a script and cron definitions. The script
+     must contain '-C' commands to check for the presence of a rule and '-A' commands to add
+     rules back. Run the script on a cron in regular intervals, for example, every <x> minutes.
+     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
+* [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
+* `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
+* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
+
+     - Workaround options:
+         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
+         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
+         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
+
 ## 19.03.1
 2019-07-25
 
@@ -262,6 +333,35 @@ The missing rules are :
         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
+
+## 18.09.9
+2019-09-03
+
+### Client
+
+* Fix Windows absolute path detection on non-Windows. [docker/cli#1990](https://github.com/docker/cli/pull/1990)
+* Fix Docker refusing to load key from delegation.key on Windows. [docker/cli#1968](https://github.com/docker/cli/pull/1968)
+* Completion scripts updates for bash and zsh.
+
+### Logging
+
+* Fix for reading journald logs. [moby/moby#37819](https://github.com/moby/moby/pull/37819) [moby/moby#38859](https://github.com/moby/moby/pull/38859)
+
+### Networking
+
+* Prevent panic on network attached to a container with disabled networking. [moby/moby#39589](https://github.com/moby/moby/pull/39589)
+* Fix service port for an application becomes unavailable randomly. [docker/libnetwork#2069](https://github.com/docker/libnetwork/pull/2069)
+* Fix cleaning up `--config-only` networks `--config-from` networkshave ungracefully exited. [docker/libnetwork#2373](https://github.com/docker/libnetwork/pull/2373)
+
+### Runtime
+
+* Update to Go 1.11.13.
+* Fix a potential engine panic when using XFS disk quota for containers. [moby/moby#39644](https://github.com/moby/moby/pull/39644)
+
+### Swarm
+
+* Fix "grpc: received message larger than max" errors. [moby/moby#39306](https://github.com/moby/moby/pull/39306)
+* Fix an issue where nodes several tasks could not be removed. [docker/swarmkit#2867](https://github.com/docker/swarmkit/pull/2867)
 
 ## 18.09.8
 2019-07-17
@@ -609,7 +709,37 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## Older Docker Engine EE Release notes
 
-## 18.03.1-ee-10
+## 18.03.1-ee-11
+
+2019-09-03
+
+### Runtime
+
+* Fix [CVE-2019-14271](https://nvd.nist.gov/vuln/detail/CVE-2019-14271) loading of nsswitch based config inside chroot under Glibc.
+
+* Fix a potential engine panic when using XFS disk quota for containers. [moby/moby#39644](https://github.com/mony/moby/pull/39644)
+
+* Fix overlay2 storage driver getting "device or resource busy" on mount. [moby/moby#37993](https://github.com/moby/moby/pull/37993)
+
+* Update to Go 1.11.13.
+
+### Logging
+
+* Fix for reading journald logs. [moby/moby#37819](https://github.com/moby/moby/pull/37819) [moby/moby#38859](https://github.com/moby/moby/pull/38859)
+
+### Networking
+
+* Fix cluster connectivity issue caused by high qLen in networkdb. [docker/libnetwork#2216](https://github.com/docker/libnetwork/pull/2216)
+
+* Fix possible nil pointer exception. [docker/libnetwork#2325](https://github.com/docker/libnetwork/pull/2325)
+
+* Fix service port for an application becomes unavailable randomly. [docker/libnetwork#2069](https://github.com/docker/libnetwork/pull/2069)
+
+### Swarm
+
+* Fix swarm overlay networking not working after `--force-new-cluster`. [docker/libnetwork#2307](https://github.com/docker/libnetwork/pull/2307)
+
+## .1-ee-10
 
 2019-07-17
 
@@ -769,6 +899,24 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-24
+2019-09-03
+
+### Runtime
+
+* Fix [CVE-2019-14271](https://nvd.nist.gov/vuln/detail/CVE-2019-14271) loading of nsswitch based config inside chroot under Glibc.
+* Fix Fix a potential engine panic when using XFS disk quota for containers. [moby/moby#39644](https://github.com/moby/moby/pull/39644)
+* Update to Go 1.11.13.
+
+### Logging
+
+* Fix for reading journald logs. [moby/moby#37819](https://github.com/moby/moby/pull/37819) [moby/moby#38859](https://github.com/moby/moby/pull/38859)
+
+### Networking
+
+* Fix cluster connectivity issue caused by high qLen in networkdb. [docker/libnetwork#2216](https://github.com/docker/libnetwork/pull/2216)
+* Fix service port for an application becomes unavailable randomly. [docker/libnetwork#2069](docker/libnetwork#2069)
 
 ## 17.06.2-ee-23
 2019-07-17
