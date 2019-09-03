@@ -373,30 +373,6 @@ In order to optimize user experience and security, support for Internet Explorer
 
 # Version 3.1
 
-<<<<<<< HEAD
-### Kubernetes
-* Kubernetes has been upgraded to version 1.14.6.
-* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
-  than 1 replica by default.
-
-### Networking
-* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
-  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
-* Interlock has been upgraded to version 2.6.1.
-* The `azure-ip-count` variable is now exposed at install time, allowing a User
-  to customize the number of IP addresses UCP provisions for each node.
-  Additional information can be found
-  [here](/ee/ucp/admin/install/cloudproviders/install-on-azure/#adjust-the-ip-count-value)
-
-### Security
-* Upgraded Golang to 1.12.9.
-* Added CSP header to prevent cross-site scripting attacks (XSS)
-
-### Bootstrap
-* Fixed various issues in install, uninstall, backup and restore when UCP
-  Telemetry data had been disabled.
-
-
 ## 3.1.10
 2019-09-03
 
