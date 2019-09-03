@@ -72,6 +72,11 @@ FROM builderbase AS library-samples
 COPY ./_scripts/fetch-library-samples.sh ./_scripts/
 RUN bash ./_scripts/fetch-library-samples.sh
 
+# Temporary stage to export the samples using;
+# DOCKER_BUILDKIT=1 docker build --target=export-samples -o type=local,dest=./_samples/library/ .
+FROM scratch AS export-samples
+COPY --from=library-samples /usr/src/app/md_source/_samples/library/. /
+
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that
 # these docs are only rebuilt if changes were made to the configuration.
