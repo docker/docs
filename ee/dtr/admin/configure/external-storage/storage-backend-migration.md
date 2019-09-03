@@ -56,7 +56,7 @@ Make sure to [perform a backup](/ee/dtr/admin/disaster-recovery/create-a-backup/
   * For NFS-specific changes, see [Use NFS](nfs.md).
   * For S3-specific changes, see [Learn how to configure DTR with Amazon S3](s3.md).
 
-Upgrade to [DTR 2.6.4](#dtr-264-and-above) and follow [best practice for data migration](#best-practice-for-data-migration) to avoid the wiped tags issue when moving from one NFS serverto another.
+Upgrade to [DTR 2.6.4](#dtr-264-and-above) and follow [best practice for data migration](#best-practice-for-data-migration) to avoid the wiped tags issue when moving from one NFS server to another.
 
 ## Where to go next
 
