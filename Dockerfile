@@ -70,7 +70,6 @@ COPY --from=docs/docker.github.io:v18.09 ${TARGET} ${TARGET}
 # @todo find a way to build HTML in this stage, and still have them included in the navigation tree
 FROM builderbase AS library-samples
 COPY ./_scripts/fetch-library-samples.sh ./_scripts/
-COPY ./_samples/boilerplate.txt ./_samples/
 RUN bash ./_scripts/fetch-library-samples.sh
 
 # Fetch upstream resources (reference documentation)
