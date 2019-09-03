@@ -23,12 +23,13 @@ to upgrade your installation to the latest release.
 # Version 2.7
 
 ## 2.7.2
-(2019-8-29)
+(2019-09-03)
 
 ### Bug fixes
 
 * Fixed a bug which prevented non-admin users from creating or editing promotion policies. (docker/dhe-deploy #10551)
 * Fixed an issue where promotion policy details could not be displayed. (docker/dhe-deploy #10510)
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10632)
 
 ### Security
 
@@ -105,11 +106,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 # Version 2.6
 
 ## 2.6.9
-(2019-8-28)
+(2019-09-03)
 
 ### Security
 
 * Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10557)
+
+### Bug fixes
+
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10633)
 
 ## 2.6.8
 (2019-7-17)
@@ -422,11 +427,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
 ## 2.5.14
-(2019-8-28)
+(2019-09-03)
 
 ### Security
 
 * Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10558)
+
+### Bug fixes
+
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10634)
 
 ## 2.5.13
 (2019-07-17)
@@ -1015,7 +1024,7 @@ specify `--log-protocol`.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
 ## 2.4.14
-(2019-8-28)
+(2019-09-03)
 
 ### Security
 

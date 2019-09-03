@@ -15,8 +15,8 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
-## Version 2.1.0.3
-2019-08-29
+## Version 2.1.0.4
+2019-09-03
 
 Docker Desktop Enterprise 2.1.0.3 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
