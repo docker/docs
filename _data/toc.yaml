@@ -1257,8 +1257,6 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- path: /samples/#library-references
-  title: Library references
 - sectiontitle: Sample applications
   section:
   - path: /samples/
@@ -1281,6 +1279,8 @@ samples:
     title: Riak
   - path: /engine/examples/running_ssh_service/
     title: SSHd
+- path: /samples/#library-references
+  title: Library references
 
 manuals:
 - sectiontitle: Docker Enterprise

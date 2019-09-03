@@ -23,15 +23,6 @@ repository]({{ labsbase }}).
 | [Docker Security]({{ labsbase }}/security/README.md){: target="_blank"} | How to take advantage of Docker security features. |
 | [Building a 12-factor application with Docker]({{ labsbase}}/12factor){: target="_blank"} | Use Docker to create an app that conforms to Heroku's "12 factors for cloud-native applications." |
 
-## Library references
-
-The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
-
-| Image name | Description |
-| ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}) | {{ page.description | strip }} |
-{% endfor %}
-
 ## Sample applications
 
 Run popular software using Docker.
@@ -47,3 +38,12 @@ Run popular software using Docker.
 | [Rails + PostgreSQL](/compose/rails/) | Run a Dockerized Rails + PostgreSQL environment. |
 | [Riak](/engine/examples/running_riak_service) | Run a Dockerized Riak instance. |
 | [SSHd](/engine/examples/running_ssh_service) | Run a Dockerized SSHd instance. |
+
+## Library references
+
+The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
+
+| Image name | Description |
+| ---------- | ----------- |
+{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}) | {{ page.description | strip }} |
+{% endfor %}
