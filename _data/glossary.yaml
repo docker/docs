@@ -222,7 +222,7 @@ parent image: |
   image. A Dockerfile with no `FROM` directive has no parent image, and is called
   a **base image**.
 persistent storage: |
-  Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the life cycle of the container, allowing a user to retain state.
+  Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the lifecycle of the container, allowing a user to retain state.
 registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.
