@@ -227,7 +227,7 @@ As of UCP 3.1.5, LDAP-specific `GET` and `PUT` API endpoints have been added to 
 - `GET /api/ucp/config/auth/ldap` - Returns information on your current system LDAP configuration.
 - `PUT /api/ucp/config/auth/ldap` - Lets you update your LDAP configuration.
 
-See [UCP API Documentation](/reference/ucp/3.2/api/) for additonal information.
+See [UCP API Documentation](/reference/ucp/3.2/api/) for additional information.
 
 ## Where to go next
 
