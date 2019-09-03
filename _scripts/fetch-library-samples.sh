@@ -37,9 +37,10 @@ do
     gitrepo=$(cat ${curdir}/github-repo)
     echo >> ${curdir}/front-matter.txt
   fi
-  cat ${curdir}/front-matter.txt > ${curdir}/index.md
-  echo {% include library-samples.md %} >> ${curdir}/index.md
+  cat ${curdir}/front-matter.txt > ${curdir}/../${justcurdir}.md
+  echo {% include library-samples.md %} >> ${curdir}/../${justcurdir}.md
 done
 
-# Remove everything except for the index.md's we generated
-find ./_samples/ ! -name 'index.md' -type f -exec rm -f {} +
+# Remove all files and subdirectory, except for the Markdown files we generated
+find ./_samples/library/ ! -name 'library' -type d -exec rm -rf {} +
+find ./_samples/library/ ! -name '*.md' -type f -exec rm -f {} +
