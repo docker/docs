@@ -1257,9 +1257,8 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- sectiontitle: Library references
-  section:
-  - generateTOC: library
+- path: /samples/#library-references
+  title: Library references
 - sectiontitle: Sample applications
   section:
   - path: /samples/
