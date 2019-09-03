@@ -25,7 +25,7 @@ upgrade your installation to the latest release.
 # Version 3.2
 
 ## 3.2.1
-2019-08-29
+2019-09-03
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
@@ -373,6 +373,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 # Version 3.1
 
+<<<<<<< HEAD
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
 * Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
@@ -397,7 +398,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 
 ## 3.1.10
-2019-08-29
+2019-09-03
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built
@@ -869,7 +870,7 @@ The following features are deprecated in UCP 3.1.
 # Version 3.0
 
 ## 3.0.14
-2019-08-29
+2019-09-03
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.8.15-docker-7, this has been built
@@ -1413,7 +1414,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 # Version 2.2
 
 ## Version 2.2.21
-2019-08-29
+2019-09-03
 
 ### Security
 

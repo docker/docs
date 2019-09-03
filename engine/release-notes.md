@@ -31,7 +31,7 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 > for the corresponding linux distro for details.
 
 ## 19.03.2
-2019-08-29
+2019-09-03
 
 ### Builder
 
@@ -335,7 +335,7 @@ The missing rules are :
         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
 ## 18.09.9
-2019-08-29
+2019-09-03
 
 ### Client
 
@@ -711,7 +711,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 ## 18.03.1-ee-11
 
-2019-08-29
+2019-09-03
 
 ### Runtime
 
@@ -901,7 +901,7 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
 ## 17.06.2-ee-24
-2019-08-29
+2019-09-03
 
 ### Runtime
 
