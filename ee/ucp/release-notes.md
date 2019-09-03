@@ -291,7 +291,7 @@ In order to optimize user experience and security, support for Internet Explorer
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` ServiceAccount
    to a `cluster-admin` `ClusterRole`, as shown in the following example:
 
       ```

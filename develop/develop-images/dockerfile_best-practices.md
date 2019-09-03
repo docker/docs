@@ -222,7 +222,7 @@ docker build [OPTIONS] -f- PATH
 ```
 
 This syntax can be useful in situations where you want to build an image from a
-repository does not contain a `Dockerfile`, or if you want to build with a custom
+repository that does not contain a `Dockerfile`, or if you want to build with a custom
 `Dockerfile`, without maintaining your own fork of the repository.
 
 The example below builds an image using a `Dockerfile` from `stdin`, and adds
@@ -898,7 +898,7 @@ image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
 `Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/c43fef8a60cea31eb9e7d960a076d633cb62ba8d/2.4/jessie/onbuild/Dockerfile).
 
-Images built from `ONBUILD` should get a separate tag, for example:
+Images built with `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
 Be careful when putting `ADD` or `COPY` in `ONBUILD`. The "onbuild" image
