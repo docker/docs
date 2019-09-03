@@ -51,12 +51,17 @@ to successfully deploy Docker UCP on Azure:
 - The Azure Virtual Machine Object Name needs to match the Azure Virtual Machine
   Computer Name and the Node Operating System's Hostname which is the FQDN of
   the host, including domain names. Note that this requires all characters to be in lowercase.
-- An Azure Service Principal with `Contributor` access to the Azure Resource
-  Group hosting the UCP Nodes. This Service principal will be used by Kubernetes
-  to communicate with the Azure API. The Service Principal ID and Secret Key are
-  needed as part of the UCP prerequisites. If you are using a separate Resource
-  Group for the networking components, the same Service Principal will need
-  `Network Contributor` access to this Resource Group.
+- An Azure Service Principal created and granted permissions to the Azure 
+  Resource Group hosting the UCP Cluster nodes. This role can either be the [built-in 
+  `Contributor`](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) 
+  role, or a [custom role](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles) 
+  inclusive of the 
+  [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/azure-permissions.md)
+  required by the Kubernetes Cloud Provider Plugin. 
+  This Service Principal will be used by Kubernetes to communicate with the Azure API,
+  making the Service Principal ID and Secret Key part of the UCP prerequisites. 
+  If a separate Resource Group is used for for the networking components, the same 
+  Service Principal will need `Network Contributor` access to this second Resource Group.
 
 UCP requires the following information for the installation:
 
