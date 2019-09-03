@@ -84,7 +84,7 @@ When you install Docker Desktop Enterprise, the command line tool is installed a
 
 Run the following command to install or upgrade a version pack to the version contained in the specified `.ddvp` archive:
 
-    dockerdesktop-admin version-pack install [path-to-archive]
+    sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin version-pack install [path-to-archive]
 
  >**Note:** You must stop Docker Desktop before installing a version pack.
 
@@ -92,7 +92,7 @@ Run the following command to install or upgrade a version pack to the version co
 
  Run the following command to uninstall the specified version pack:
 
-    dockerdesktop-admin version-pack uninstall [version-pack-name]
+    sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin version-pack uninstall [version-pack-name]
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 
