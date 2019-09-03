@@ -45,5 +45,5 @@ The following table provides a list of popular official Docker images. For detai
 
 | Image name | Description |
 | ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}) | {{ page.description | strip }} |
+{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}){: target="_blank"} | {{ page.description | strip }} |
 {% endfor %}
