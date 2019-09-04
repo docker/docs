@@ -4,16 +4,20 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, Azur
 title: Get started with Docker Cluster on Azure
 ---
 
-On this page you will create a docker cluster in Azure.  The cluster created will have:
- - 3 UCP Managers
- - 3 Workers
- - 3 DTR Replicas
+This topic discusses working with docker clusters in Azure, including how to:
+
+- [Create a cluster](#create-a-cluster)
+- [View cluster information](#view-cluster-information)
+- [Use context](#use-context)
+- [Scale a cluster](#scale-a-cluster)
+- [Back up a cluster](#back-up-a-cluster)
+- [Upgrade a cluster](#upgrade-a-cluster)
+- [Destroy a cluster](#destroy-a-cluster)
 
 ## Prerequisites
 
-Make sure you have already installed [Docker Enterprise 3.0](https://www.docker.com/products/docker-enterprise)
-
-Make sure you have already acquired the following items for your Azure account:
+- Completed installation of [Docker Enterprise 3.0](https://www.docker.com/products/docker-enterprise)
+- Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret
   - Subscription UUID
@@ -45,6 +49,11 @@ Docker cluster will bindmount this file into its container runtime to inject the
 credential data as needed.
 
 ## Create a cluster
+
+When you create a docker cluster in Azure, the cluster created has:
+ - 3 UCP Managers
+ - 3 Workers
+ - 3 DTR Replicas
 
 Create a file called `cluster.yml` in your directory and paste this in:
 
