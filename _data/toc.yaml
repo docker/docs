@@ -1300,6 +1300,8 @@ manuals:
       title: Release notes
     - path: /cluster/aws/
       title: Docker Cluster on AWS
+    - path: /cluster/azure/
+      title: Docker Cluster on Azure
     - path: /cluster/cluster-file/
       title: Cluster file structure
     - path: /cluster/reference/envvars/
