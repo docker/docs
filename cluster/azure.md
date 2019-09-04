@@ -4,16 +4,6 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, Azur
 title: Get started with Docker Cluster on Azure
 ---
 
-This topic discusses working with docker clusters in Azure, including how to:
-
-- [Create a cluster](#create-a-cluster)
-- [View cluster information](#view-cluster-information)
-- [Use context](#use-context)
-- [Scale a cluster](#scale-a-cluster)
-- [Back up a cluster](#back-up-a-cluster)
-- [Upgrade a cluster](#upgrade-a-cluster)
-- [Destroy a cluster](#destroy-a-cluster)
-
 ## Prerequisites
 
 - Completed installation of [Docker Enterprise 3.0](https://www.docker.com/products/docker-enterprise)
