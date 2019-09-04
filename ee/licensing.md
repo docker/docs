@@ -46,7 +46,7 @@ Depending on which type of email your team receives, there may be several interm
 
 ## Activate your subscription
 
-1. Log into the [Docker Store](https://store.docker.com/procurement) using your Docker ID and enter the activation key provided in your welcome email.
+1. Log into the [Docker Hub](https://hub.docker.com/procurement) using your Docker ID and enter the activation key provided in your welcome email.
 2. Click the **Submit Access Key** button.
 3. From the **Subscribe as** drop-down menu, select the ID you would like the subscription applied to.
 4. Click the check box to agree to the terms of service and then click **Confirm and Subscribe**.
