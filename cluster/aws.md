@@ -4,16 +4,6 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, AWS
 title: Get started with Docker Cluster on AWS
 ---
 
-This topic discusses working with docker clusters in AWS, including how to:
-
-- [Create a cluster](#create-a-cluster)
-- [View cluster information](#view-cluster-information)
-- [Use context](#use-context)
-- [Scale a cluster](#scale-a-cluster)
-- [Back up a cluster](#back-up-a-cluster)
-- [Upgrade a cluster](#upgrade-a-cluster)
-- [Destroy a cluster](#destroy-a-cluster)
-
 ## Prerequisites
 
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker CLI](https://docs.docker.com/ee/supported-platforms/) on Linux.
