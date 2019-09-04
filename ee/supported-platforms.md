@@ -79,8 +79,8 @@ a CLI plugin for automated deployment and configuration, and third-party ecosyst
 | Platform  | Docker Enterprise support |
 :----------------------------------------------------------------------------------------|:-------------------------:|
 | [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| Microsoft Azure  | {{ page.green-check }}  |
 | VMware  |  coming soon  |
-| Microsoft Azure  | coming soon  |
 
 ## Docker Enterprise release cycles
 
