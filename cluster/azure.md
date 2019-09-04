@@ -44,7 +44,7 @@ $ docker cluster create ....
 Docker cluster will bindmount this file into its container runtime to inject the
 credential data as needed.
 
-## Step 1: Define the cluster
+## Create a cluster
 
 Create a file called `cluster.yml` in your directory and paste this in:
 
@@ -94,8 +94,6 @@ The values will be substituted in the cluster definition.  This makes it
 easy to define a re-usable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
-## Step 2: Create the cluster
-
 Run `docker cluster create --file cluster.yml --name quickstart`
 
     $ docker cluster create --file cluster.yml --name quickstart
@@ -139,7 +137,7 @@ After about 15-20 minutes, Docker Enterprise installation will complete:
 After all operations complete succesfully, the cluster id will be the last statement
 to print.  You can login to the URL and begin interacting with the cluster.
 
-## Step 2: Examine the cluster
+## View cluster information
 
 To see an inventory of the current clusters you've created, run `docker cluster ls`
 
@@ -216,7 +214,7 @@ resource:
 
 The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
 
-## Step 3: Using the context
+## Use context
 
 Docker cluster creates a context on your local machine.  To use this context, and interact with the cluster, run `docker context use quickstart`
 
@@ -284,7 +282,7 @@ Server: Docker Enterprise 3.0
     default
     Current context is now "default"
 
-## Step 4: Scaling up the cluster
+## Scale a cluster
 
 Open `cluster.yml`.  Change the number of workers to 6:
 ```yaml
@@ -333,7 +331,7 @@ A quick `docker cluster inspect e58dd2a77567` will show the worker count increas
       role: worker
 ```
 
-## Step 5: Backup the cluster
+## Backup a cluster
 
 Before we proceed with more operations on the cluster, let's take a backup of the running cluster.  To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `
 
@@ -352,7 +350,7 @@ To restore a cluster, run `docker cluster restore quickstart --file backup-2019-
 
 Provide the passphrase from the backup step to decrypt the UCP backup.
 
-## Step 6: Upgrade the cluster
+## Upgrade a cluster
 
 Open `cluster.yml`.  Change the cluster versions:
 ```yaml
@@ -380,7 +378,7 @@ Run  `docker cluster update quickstart --file cluster.yml `
     e58dd2a77567
 
 
-## Step 7: Destroy the cluster
+## Destroy a cluster
 When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
     $ docker cluster rm quickstart
