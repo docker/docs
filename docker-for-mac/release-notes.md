@@ -22,6 +22,22 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+
+> [Download](https://hub.docker.com/?overlay=onboarding)
+>
+> You must sign in to Docker Hub to download Docker Desktop.
+
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+
 ## Docker Desktop Community 2.1.0.1
 2019-08-08
 
