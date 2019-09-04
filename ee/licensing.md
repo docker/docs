@@ -117,4 +117,4 @@ Refer to the following articles for more information:
 
 - [Get Ready for your Licenses and Access to Technical Support](https://success.docker.com/article/get-ready-for-licenses-and-support)
 - [Commercial Support Service Levels](https://success.docker.com/article/commercial-support-service-levels)
-- [Where is my Docker Enterprise Edition license?](https://success.docker.com/article/where-is-my-docker-enterprise-edition-license)
+- [Where is my Docker Enterprise license?](https://success.docker.com/article/where-is-my-docker-enterprise-edition-license)
