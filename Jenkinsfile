@@ -46,7 +46,9 @@ pipeline {
             withDockerRegistry(reg) {
               sh """
                 docker build -t docs/docker.github.io:prod-${env.BUILD_NUMBER} .
+                docker tag docs/docker.github.io:prod-${env.BUILD_NUMBER} docs/docker.github.io:latest
                 docker push docs/docker.github.io:prod-${env.BUILD_NUMBER}
+                docker push docs/docker.github.io:latest .
                 unzip -o $UCP_BUNDLE
                 cd ucp-bundle-success_bot
                 export DOCKER_TLS_VERIFY=1
