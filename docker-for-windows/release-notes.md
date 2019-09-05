@@ -41,7 +41,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 ## Docker Desktop Community 2.1.0.1
 2019-08-08
 
-[Download](https://hub.docker.com/?overlay=onboarding)
+[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
 
   Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
