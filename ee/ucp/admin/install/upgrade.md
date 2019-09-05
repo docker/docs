@@ -178,7 +178,7 @@ This is the traditional approach to upgrading UCP and is often used when the
 order in which UCP worker nodes is upgraded is NOT important.
 
 To upgrade UCP, ensure all Docker engines have been upgraded to the
-corresponding new version. Then a user should SSH to a UCP manager node and run
+corresponding new version. Then a user should SSH to one UCP manager node and run
 the following command. The upgrade command should not be run on a workstation
 with a client bundle.
 
@@ -190,6 +190,9 @@ $ docker container run --rm -it \
   upgrade \
   --interactive
 ```
+
+The upgrade command will print messages regarding the progress of the upgrade as
+it automatically upgrades UCP on all nodes in the cluster.
         
 ### Phased in-place cluster upgrade
 

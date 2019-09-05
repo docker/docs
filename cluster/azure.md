@@ -140,9 +140,9 @@ to print.  You can login to the URL and begin interacting with the cluster.
 
 To see an inventory of the current clusters you've created, run `docker cluster ls`
 
-$ docker cluster ls
-ID             NAME         PROVIDER        ENDPOINT                                                     STATE
-e58dd2a77567   quickstart   azurerm         https://ucp-e58dd2a77567-y4pl.centralus.cloudapp.azure.com   running
+    $ docker cluster ls
+    ID             NAME         PROVIDER        ENDPOINT                                                     STATE
+    e58dd2a77567   quickstart   azurerm         https://ucp-e58dd2a77567-y4pl.centralus.cloudapp.azure.com   running
 
 To see detailed information about an individual cluster, run `docker cluster inspect quickstart`
 
@@ -223,59 +223,59 @@ Docker cluster creates a context on your local machine.  To use this context, an
 
 To verify that the client is connected to the cluster, run `docker version`
 
-$ docker version
-Client: Docker Engine - Enterprise
- Version:           19.03.1
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        f660560
- Built:             Thu Jul 25 20:56:44 2019
- OS/Arch:           darwin/amd64
- Experimental:      false
+    $ docker version
+    Client: Docker Engine - Enterprise
+     Version:           19.03.1
+     API version:       1.40
+     Go version:        go1.12.5
+     Git commit:        f660560
+     Built:             Thu Jul 25 20:56:44 2019
+     OS/Arch:           darwin/amd64
+     Experimental:      false
 
-Server: Docker Enterprise 3.0
- Engine:
-  Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       f660560
-  Built:            Thu Jul 25 20:57:45 2019
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
- Universal Control Plane:
-  Version:          3.2.0
-  ApiVersion:       1.40
-  Arch:             amd64
-  BuildTime:        Wed Jul 17 23:27:40 UTC 2019
-  GitCommit:        586d782
-  GoVersion:        go1.12.7
-  MinApiVersion:    1.20
-  Os:               linux
- Kubernetes:
-  Version:          1.14+
-  buildDate:        2019-06-06T16:18:13Z
-  compiler:         gc
-  gitCommit:        7cfcb52617bf94c36953159ee9a2bf14c7fcc7ba
-  gitTreeState:     clean
-  gitVersion:       v1.14.3-docker-2
-  goVersion:        go1.12.5
-  major:            1
-  minor:            14+
-  platform:         linux/amd64
- Calico:
-  Version:          v3.5.7
-  cni:              v3.5.7
-  kube-controllers: v3.5.7
-  node:             v3.5.7
+    Server: Docker Enterprise 3.0
+     Engine:
+      Version:          19.03.1
+      API version:      1.40 (minimum version 1.12)
+      Go version:       go1.12.5
+      Git commit:       f660560
+      Built:            Thu Jul 25 20:57:45 2019
+      OS/Arch:          linux/amd64
+      Experimental:     false
+     containerd:
+      Version:          1.2.6
+      GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
+     runc:
+      Version:          1.0.0-rc8
+      GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
+     docker-init:
+      Version:          0.18.0
+      GitCommit:        fec3683
+     Universal Control Plane:
+      Version:          3.2.0
+      ApiVersion:       1.40
+      Arch:             amd64
+      BuildTime:        Wed Jul 17 23:27:40 UTC 2019
+      GitCommit:        586d782
+      GoVersion:        go1.12.7
+      MinApiVersion:    1.20
+      Os:               linux
+     Kubernetes:
+      Version:          1.14+
+      buildDate:        2019-06-06T16:18:13Z
+      compiler:         gc
+      gitCommit:        7cfcb52617bf94c36953159ee9a2bf14c7fcc7ba
+      gitTreeState:     clean
+      gitVersion:       v1.14.3-docker-2
+      goVersion:        go1.12.5
+      major:            1
+      minor:            14+
+      platform:         linux/amd64
+     Calico:
+      Version:          v3.5.7
+      cni:              v3.5.7
+      kube-controllers: v3.5.7
+      node:             v3.5.7
 
     $ docker context use default
     default
