@@ -101,7 +101,6 @@ more information see
 
 - Improved progress information for install and upgrade.
 - You can now manually control worker node upgrades.
-- User workloads no longer experience downtime during an upgrade.
 
 #### Buildkit
 
