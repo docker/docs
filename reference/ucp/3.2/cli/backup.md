@@ -50,3 +50,5 @@ Note:
 | `--interactive, -i`    | Run in interactive mode and prompt for configuration values                   |
 | `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)           |
 | `--passphrase` *value* | Encrypt the tar file with a passphrase                                        |
+| `--include-logs`		 | If set to false, there is no log file generated, and the backup is the contents of the UCP backup without a log file. 							     |
+| `--security-opt label=disable` | If Docker Enterprise Engine has SELinux enabled, include this option to back up UCP.                                                        |
