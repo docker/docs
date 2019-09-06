@@ -101,18 +101,23 @@ see the [organizations documentation](/docker-hub/orgs.md).
 
 ## Viewing repository tags
 
-Docker Hub's repository "Tags" view shows you the available tags and the size
-of the associated image.
+Docker Hub's individual repositories view shows you the available tags and the
+size of the associated image. Go to the "Repositories" view and click on a
+repository to see its tags.
 
-![View Repo Tags](images/repos-tags-view.png)
+![Repository View](images/repo-view-2019.png)
+
+![View Repo Tags](images/repos-tags-view-2019.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
-images. This is also the disk space used by the contents of the .tar file created
-when you `docker save` an image.
+images. This is also the disk space used by the contents of the .tar file
+created when you `docker save` an image.
 
-To edit tags, click on Manage Repository or find your repository under *Repositories*:
+To view tags, click on "Tags" tab and then select a tag to view.
 
-![Manage Repo Tags](images/repos-tags-manage.png)
+![Manage Repo Tags](images/repos-tags-manage-2019.png)
+
+![View Tag](images/repo-single-tag-view-2019.png)
 
 ## Searching for Repositories
 

@@ -62,19 +62,28 @@ these efforts.
 
 ## Official Image Vulnerability Scanning
 
-Each of the images in the Official Images is scanned for vulnerabilities. The results of
-these security scans provide valuable information about which images contain
-security vulnerabilities, and allow you to choose images that align with your
-security standards.
+Each of the images in the Official Images is scanned for vulnerabilities. The
+results of these security scans provide valuable information about which images
+contain security vulnerabilities, and allow you to choose images that align with
+your security standards.
 
 To view the Docker Security Scanning results:
 
-1. Make sure you're logged in to Docker Hub.
-    You can view Official Images even while logged out, however the scan results are only available once you log in.
-2. Navigate to the repository of the Official Image whose security scan you want to view.
-3. Click the `Tags` tab to see a list of tags and their security scan summaries.
+1. Make sure you're logged in to Docker Hub. You can view Official Images even
+    while logged out, however the scan results are only available once you log
+    in.
 
-![Official Image Tags](images/official_images-tags.png)
+2. Navigate to the repository of the Official Image whose security scan you want
+   to view.
+
+3. Click the `Tags` tab to see a list of tags. and their security scan summaries.
+
+    ![Official Image Tags](images/official_images-tags-home.png)
+
+4. Click on a tag to see the image's security scan summary.
+
+    ![Official Image Tags](images/official_images-tags-2019.png)
+
 
 You can click into a tag's detail page to see more information about which
 layers in the image and which components within the layer are vulnerable.
