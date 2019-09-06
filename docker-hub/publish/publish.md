@@ -208,54 +208,19 @@ To interpret the results of a scanned image:
 1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
 
 2.  Navigate to the repository details page (for example,
-    [Nginx](https://hub.docker.com/images/nginx){: target="_blank" class="_"}).
+    [busybox](https://hub.docker.com/_/busybox){: target="_blank" class="_"}).
 
-3.  Click **View Available Tags** under the pull command in the upper right of
-    the UI.
-
-    Displalyed is a list of each tag scan with its age. A solid green bar
-    indicates a clean scan without known vulnerabilities. Yellow, orange, and
-    red indicate minor, major, and critical vulnerabilities respectively.
-
+3.  Click **Tags**.
     ![Scanned tags](images/scan-tags.png)
+    In this section, you can now view the different architectures separately to easily identify the right image for the architecture you need, complete with image size and operating system information.
+    ![system info](images/Docker-Hub-tags-system-info.png)
 
-    > Vulnerability scores
-    >
-    > Vulnerability scores are defined by the entity that issues the
-    > vulnerability, such as [NVD](https://nvd.nist.gov/){: target="_blank" class="_"},
-    > and are based on a
-    > [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale){: target="_blank" class="_"}
-    > defined as part of the
-    > [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document){: target="_blank" class="_"}.
+4.  Click on the digest for a particular architecture, you will now also be able to see the actual source of the image – the layer-by-layer details that make up the image. ![system info](images/Docker-Hub-tags-vulnerabilities.png)
 
-4.  Click a scan summary to see a list of results for each layer of the image.
+5.  Click on the first row, you’ll see that the image contains multiple components and that multiple components have known vulnerabilities ranging from minor to critical. To explore further, click on the caret to expand and view all of the found vulnerabilities:
 
-    Each layer may have one or more scannable components represented by colored
-    squares in a grid.
-
-    ![Scanned results](images/scan-view.png)
-
-    > Base layers
-    >
-    > Base layers contain components that are included in the parent image,
-    > but that you did not build and may not be able to edit. If a base layer
-    > has a vulnerability, switch to a version of the parent image that does not
-    > have any vulnerabilities, or to a similar but more secure image.
-
-5.  Hover over a square in the grid, then click to see the vulnerability report
-    for that specific component.
-
-    Only components that add software are scanned. If a layer has
-    no scannable components, it shows a `No components in this layer` message.
-
-    ![Scanned component preview](images/scan-single.png)
-
-6.  Click the arrow icon (twice) to expand the list and show all vulnerable
-    components and their CVE report codes.
-
-    ![Scanned components](images/scan-full-details.png)
-
-7.  Click one of the CVE codes to view the original vulnerability report.
+    ![Scanned components](images/Docker-hub-tags-vulnerability-details.png)
+Each vulnerability is linked directly to the CVE so that you can learn more about the CVE and its implications. 
 
 #### Classification of issues
 
@@ -333,21 +298,6 @@ Docker Hub promotes Docker Certified Containers and Plugins running on Docker
 Certified Infrastructure trusted and high quality content. The Docker Certified badge
 can also be listed alongside external references to your product.
 
-#### How is the Docker Certified Container image listed on Docker Hub?
-
-These images are differentiated from other images through a
-certification badge. A user can search specifically for CI’s by limiting their
-search parameters to show only certified content.
-
-![certified content example](images/FAQ-certified-content.png)
-
-#### Is certification optional or required?
-
-Certification is recommended for all commercial and supported container images.
-Free, community, and other commercial (non-certified) content may also be listed
-on Docker Hub.
-
-![certified content example](images/FAQ-types-of-certified-content.png)
 
 #### How is support handled?
 
