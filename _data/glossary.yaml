@@ -1,4 +1,4 @@
-amd64: |
+﻿amd64: |
   AMD64 is AMD's 64-bit extension of Intel's x86 architecture, and is also
   referred to as x86_64 (or x86-64).
 aufs: |
@@ -26,8 +26,10 @@ cgroups: |
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
   *Also known as : control groups*
+cluster: |
+  A cluster is a group of machines that work together to run workloads and provide high availability.		
 collection: |
-  A collection is a group of swarm resources that Docker EE uses for role-based
+  A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
   nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 Compose: |
@@ -76,8 +78,8 @@ Docker: |
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
-Docker Enterprise Edition: |
-  Docker Enterprise Edition (Docker EE) is a platform to build, ship, and run
+Docker Enterprise: |
+  Docker Enterprise is a platform to build, ship, and run
   containerized applications, that you can deploy in the cloud or on-premise. It
   includes a tested and certified version of Docker, web UIs for managing
   your app resources, and support.
@@ -152,7 +154,7 @@ filesystem: |
   - macOS : HFS+
 grant: |
   A grant enables role-based access control for managing how users and
-  organizations access Docker EE swarm resources. A grant is made up of a
+  organizations access Docker Engine - Enterprise swarm resources. A grant is made up of a
   subject, a role, and a collection. For more about grants and role-based access
   control, see [Grant permissions to users based on roles](/datacenter/ucp/2.2/guides/access-control/grant-permissions/).
 image: |
@@ -219,6 +221,8 @@ parent image: |
   in the image's Dockerfile. All subsequent commands are applied to this parent
   image. A Dockerfile with no `FROM` directive has no parent image, and is called
   a **base image**.
+persistent storage: |
+  Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the lifecycle of the container, allowing a user to retain state.
 registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.
@@ -233,12 +237,12 @@ repository: |
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
 role: |
-  A role is a set of permitted API operations on a collection of Docker EE swarm
+  A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm
   resources. As part of a grant, a role is assigned to a subject (a user, team, or
   organization) and a collection. For more about roles, see [Roles and
   permission levels](/datacenter/ucp/2.2/guides/access-control/permission-levels/).
 role-based access control: |
-  Role-based access control enables managing how Docker EE users can access
+  Role-based access control enables managing how Docker Engine - Enterprise users can access
   swarm resources. UCP administrators create grants to control how users access
   resource collections. A grant is made up of a subject, a role, and a collection.
   A grant defines who (subject) has how much access (role) to a set of resources
@@ -271,7 +275,7 @@ service discovery: |
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
 subject: |
-  A subject represents a user, team, or organization in Docker EE. A subject is
+  A subject represents a user, team, or organization in Docker Enterprise. A subject is
   granted a role for access to a collection of swarm resources.
   For more about role-based access, see [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 swarm: |

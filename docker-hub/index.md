@@ -141,7 +141,7 @@ Congratulations! You've successfully:
 - Built a Docker container image on your computer
 - Pushed it to Docker Hub
 
-### Next Steps
+### Next steps
 
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [Builds](builds/index.md).

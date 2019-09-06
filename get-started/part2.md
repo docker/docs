@@ -181,7 +181,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > _Proxy server settings_
 >
 > Proxy servers can block connections to your web app once it's up and running.
-> If you are behind a proxy server, add the following lines to your
+> If you are behind a proxy server, add the following lines before `RUN pip` in your
 > Dockerfile, using the `ENV` command to specify the host and port for your
 > proxy servers:
 >
@@ -213,6 +213,21 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > `sudo service docker restart`
 >
 > Once fixed, retry to run the `build` command.
+>
+> _MTU settings_
+>
+> If the MTU (default is 1500) on the default bridge network is greater than the MTU of the host external network, then `pip` fails. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as follows:
+>
+> ```json
+>{
+>   "mtu": 1450
+>}
+> ```
+> Before proceeding, save `daemon.json` and restart the docker service.
+>
+> `sudo systemctl restart docker`
+>
+> Re-run the `build` command.
 
 ## Run the app
 
@@ -321,7 +336,7 @@ The notation for associating a local image with a repository on a registry is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
 `get-started:part2`. This puts the image in the `get-started` repository and
-tag it as `part2`.
+tags it as `part2`.
 
 Now, put it all together to tag the image. Run `docker tag image` with your
 username, repository, and tag names so that the image uploads to your
@@ -402,6 +417,7 @@ application by running this container in a **service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
+Or, learn how to [launch your container on your own machine using DigitalOcean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 
 ## Recap and cheat sheet (optional)
 
@@ -417,7 +433,7 @@ ones if you'd like to explore a bit before moving on.
 
 ```shell
 docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -p 4000:80 friendlyhello  # Run "friendlyhello" mapping port 4000 to 80
 docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
 docker container ls                                # List all running containers
 docker container ls -a             # List all containers, even those not running

@@ -1,11 +1,11 @@
 ---
-title: Upgrade to UCP 2.2
+title: Upgrade to UCP 3.0
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
 ---
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
-version 2.2.
+version 3.0.
 
 Before upgrading to a new version of UCP, check the
 [release notes](../../release-notes/index.md) for this version for information
@@ -37,8 +37,8 @@ This allows you to recover if something goes wrong during the upgrade process.
 > Upgrading and backup archives
 >
 > The backup archive is version-specific, so you can't use it during the
-> upgrade process. For example, if you create a backup archive for a UCP 2.1
-> swarm, you can't use the archive file after you upgrade to UCP 2.2.
+> upgrade process. For example, if you create a backup archive for a UCP 2.2
+> swarm, you can't use the archive file after you upgrade to UCP 3.0.
 
 ## Upgrade Docker Engine
 
@@ -112,13 +112,13 @@ all the nodes managed by UCP are healthy.
 
 ## Recommended upgrade paths
 
-If you're running a UCP version that's lower than 2.1, first upgrade to the
-latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade
-path to UCP 2.2:
+If you're running a UCP version that's lower than 2.2, first upgrade to the
+latest 2.2 version, then upgrade to 3.0. Use these rules for your upgrade
+path to UCP 3.0:
 
-- From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
-- From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
-- From UCP 2.1: UCP 2.1 -> UCP 2.2
+- From UCP 1.1: UCP 1.1 -> UCP 2.2 -> UCP 3.0
+- From UCP 2.0: UCP 2.0 -> UCP 2.2 -> UCP 3.0
+- From UCP 2.2: UCP 2.2 -> UCP 3.0
 
 ## Where to go next
 

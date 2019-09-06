@@ -11,7 +11,11 @@ notoc: true
   of `up` command.
 
 ```
-Usage: scale [SERVICE=NUM...]
+Usage: scale [options] [SERVICE=NUM...]
+
+Options:
+  -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
+                             (default: 10)
 ```
 
 Sets the number of containers to run for a service.

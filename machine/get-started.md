@@ -7,7 +7,7 @@ title: Get started with Docker Machine and a local VM
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
 
-## Prerequisite Information
+## Prerequisite information
 
 With the advent of [Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md) as replacements for [Docker

@@ -9,7 +9,8 @@ notoc: true
 Usage: restart [options] [SERVICE...]
 
 Options:
--t, --timeout TIMEOUT      Specify a shutdown timeout in seconds. (default: 10)
+  -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
+                             (default: 10)
 ```
 
 Restarts all stopped and running services.

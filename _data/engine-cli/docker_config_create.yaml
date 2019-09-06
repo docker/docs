@@ -18,6 +18,7 @@ options:
   value_type: string
   description: Template driver
   deprecated: false
+  min_api_version: "1.37"
   experimental: false
   experimentalcli: false
   kubernetes: false

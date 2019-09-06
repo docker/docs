@@ -35,6 +35,13 @@ docker container run --rm -it \
 This runs the uninstall command in interactive mode, so that you are prompted
 for any necessary configuration values.
 
+> **Important**: If the `uninstall-ucp` command fails, you can run the following commands to manually uninstall UCP:
+```
+docker service rm ucp-agent-win ucp-agent-s390x ucp-agent
+docker ps -a | grep ucp | awk '{print $1}' | xargs docker rm -f
+docker volume ls | grep ucp | awk '{print $2}' | xargs docker volume rm
+```
+
 The UCP configuration is kept in case you want to reinstall UCP with the same
 configuration. If you want to also delete the configuration, run the uninstall
 command with the `--purge-config` option.

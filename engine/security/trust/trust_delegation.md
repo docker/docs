@@ -2,36 +2,37 @@
 description: Delegations for content trust
 keywords: trust, security, delegations, keys, repository
 title: Delegations for content trust
+redirect_from:
+- /ee/dtr/user/access-dtr/configure-your-notary-client/
 ---
 
 Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign
-an image tag. A delegation will have a pair of delegation keys, public and 
-private. A delegation could contain multiple pairs of keys, contributors, to 
-allow multiple users to be part of a delegation, and to support key rotation.  
+an image tag. A delegation will have a pair of private and public delegation keys. A delegation 
+could contain multiple pairs of keys and contributors in order to a) allow multiple users 
+to be part of a delegation, and b) to support key rotation.  
 
 The most important delegation within Docker Content Trust is `targets/releases`.
 This is seen as the canonical source of a trusted image tag, and without a 
 contributor's key being under this delegation, they will be unable to sign a tag.
 
 Fortunately when using the `$ docker trust` commands, we will automatically 
-initialise a repository, manage the repository keys, and when a collaborator
-gets added with `docker trust signer add` we will add their key to the 
-`targets/releases` delegation automatically. 
+initialize a repository, manage the repository keys, and add a collaborator's key to the 
+`targets/releases` delegation via `docker trust signer add`. 
 
 ## Configuring the Docker Client
 
-By default the `$ docker trust` commands are expecting the Notary server URL
-to be the same as the Docker Registry URL specified in the image tag. When 
-using the Docker Hub or Docker Trusted Registry this is the case as a internal 
-proxy redirects the request; however for self hosted environments or 3rd party 
-registries you will need to specify an alternative URL for the notary server. 
-This is done with:
+By default, the `$ docker trust` commands expect the notary server URL to be the
+same as the registry URL specified in the image tag (following a similar logic to
+`$ docker push`). When using Docker Hub or DTR, the notary
+server URL is the same as the registry URL. However, for self-hosted
+environments or 3rd party registries, you will need to specify an alternative
+URL for the notary server. This is done with:
 
 ```
 export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 
-If you do not export this variable in self-hosted environments you may see 
+If you do not export this variable in self-hosted environments, you may see 
 errors such as: 
 
 ```
@@ -45,30 +46,61 @@ WARN[0000] Error while downloading remote metadata, using cached timestamp - thi
 [...]
 ```
 
+If you have enabled authentication for your notary server, or are using DTR, you will need to log in 
+before you can push data to the notary server. 
+
+```
+$ docker login dtr.example.com/user/repo
+Username: admin
+Password:
+
+Login Succeeded
+
+$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
+Adding signer "jeff" to dtr.example.com/user/repo...
+Initializing signed repository for dtr.example.com/user/repo...
+Successfully initialized "dtr.example.com/user/repo"
+Successfully added signer: jeff to dtr.example.com/user/repo
+```
+
+If you do not log in, you will see:
+
+```bash
+$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
+Adding signer "jeff" to dtr.example.com/user/repo...
+Initializing signed repository for dtr.example.com/user/repo...
+you are not authorized to perform this operation: server returned 401.
+
+Failed to add signer to: dtr.example.com/user/repo
+```
+
+If you are using DTR and would like to work with a remote UCP's signing policy, 
+you must [register your DTR instance with that remote UCP](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane). 
+See [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/) for more details. 
+
 ## Configuring the Notary Client
 
 Some of the more advanced features of DCT require the Notary CLI. To install and 
 configure the Notary CLI:
 
 1) Download the [client](https://github.com/theupdateframework/notary/releases) 
-and ensure that it is available on your path
+and ensure that it is available on your path.
 
-2) Create a configuration file at ~/.notary/config.json with the following content:
+2) Create a configuration file at `~/.notary/config.json` with the following content:
 
 ```
 {
   "trust_dir" : "~/.docker/trust",
   "remote_server": {
-    "url": "https://dtr.example.com"
-	"root_ca": "../.docker/ca.pem"
+    "url": "https://dtr.example.com",
+    "root_ca": "../.docker/ca.pem"
   }
 }
 ```
 
-This configuration file will tell Notary where the local Docker Trust data is 
-stored, as well as which Notary server to use by default.
+The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.
 
-For more detailed information about how to use Notary outside of the 
+For more detailed information about how to use notary outside of the 
 Docker Content Trust use cases, refer to the Notary CLI documentation 
 [here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md)
 
@@ -338,7 +370,7 @@ Successfully removed ben from dtr.example.com/admin/demo
 
 #### Troubleshooting
 
-1) If you see an error that there are no useable keys in `targets/releases`, you 
+1) If you see an error that there are no usable keys in `targets/releases`, you 
 will need to add additional delegations using `docker trust signer add` before 
 resigning images.
 
@@ -474,3 +506,4 @@ No signatures or cannot access dtr.example.com/admin/demo
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
+* [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp.md)

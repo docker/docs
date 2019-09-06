@@ -19,7 +19,6 @@ unless you configure it to use a different logging driver.
 In addition to using the logging drivers included with Docker, you can also
 implement and use [logging driver plugins](/engine/admin/logging/plugins.md).
 
-
 ## Configure the default logging driver
 
 To configure the Docker daemon to default to a specific logging driver, set the
@@ -36,7 +35,7 @@ logging driver to `syslog`:
 ```
 
 If the logging driver has configurable options, you can set them in the
-`daemon.json` file as a JSON array with the key `log-opts`. The following
+`daemon.json` file as a JSON object with the key `log-opts`. The following
 example sets two configurable options on the `json-file` logging driver:
 
 ```json
@@ -60,7 +59,7 @@ the default output for commands such as `docker inspect <CONTAINER>` is JSON.
 
 To find the current default logging driver for the Docker daemon, run
 `docker info` and search for `Logging Driver`. You can use the following
-command:
+command on Linux, macOS, or PowerShell on Windows:
 
 {% raw %}
 ```bash
@@ -146,8 +145,8 @@ see more options.
 | Driver                        | Description                                                                                                   |
 |:------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `none`                        | No logs are available for the container and `docker logs` does not return any output.                         |
+| [`local`](local.md)           | Logs are stored in a custom format designed for minimal overhead.                                             |
 | [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
-| [`local`](local.md)           | Writes logs messages to local filesystem in binary files using Protobuf.                                        |
 | [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
 | [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
 | [`gelf`](gelf.md)             | Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.             |
@@ -160,6 +159,25 @@ see more options.
 
 ## Limitations of logging drivers
 
-The `docker logs` command is not available for drivers other than `json-file`
-and `journald`.
+- Users of Docker Enterprise can make use of "dual logging", which enables you to use the `docker logs`
+command for any logging driver. Refer to 
+[Reading logs when using remote logging drivers](/config/containers/logging/dual-logging/) for information about 
+using `docker logs` to read container logs locally for many third party logging solutions, including: 
 
+    - syslog	
+    - gelf	
+    - fluentd	
+    - awslogs	
+    - splunk	
+    - etwlogs	
+    - gcplogs	
+    - Logentries
+    
+- When using Docker Community Engine, the `docker logs` command is only available on the following drivers:
+
+    - `local`
+    - `json-file`
+    - `journald`
+
+- Reading log information requires decompressing rotated log files, which causes a temporary increase in disk usage (until the log entries from the rotated files are read) and an increased CPU usage while decompressing. 
+- The capacity of the host storage where docker’s data directory resides determines the maximum size of the log file information.

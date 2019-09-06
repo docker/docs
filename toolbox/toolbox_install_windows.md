@@ -10,10 +10,6 @@ Windows systems that do not
 meet minimal system requirements for the [Docker Desktop for
 Windows](/docker-for-windows/index.md) app.
 
-If you have not done so already, download the installer here:
-
-[Get Docker Toolbox for Windows](https://download.docker.com/win/stable/DockerToolbox.exe){: class="button outline-btn" }
-
 ## What you get and how it works
 
 Docker Toolbox includes the following Docker tools:
@@ -101,11 +97,15 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
+> **Note**: Docker no longer maintains the download.docker.com url for
+> Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
+> displayed during the installation process. 
 
-2. Click the installer link to download.
+1. To download the latest version of Docker Toolbox, go to [Toolbox
+   Releases](https://github.com/docker/toolbox/releases) and download the
+   latest `.exe` file.
 
-3. Install Docker Toolbox by double-clicking the installer.
+2. Install Docker Toolbox by double-clicking the installer.
 
     The installer launches the "Setup - Docker Toolbox" dialog.
 
@@ -115,17 +115,17 @@ installer.
 
       ![Release page](images/installer_open.png)
 
-4. Press **Next** to accept all the defaults and then **Install**.
+3. Press **Next** to accept all the defaults and then **Install**.
 
 	  Accept all the installer defaults. The installer takes a few minutes to install all the components:
 
-5.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
+4.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
 
     When it completes, the installer reports it was successful:
 
     ![Success](images/finish.png)
 
-6. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
+5. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
 
 
 ## Step 3: Verify your installation

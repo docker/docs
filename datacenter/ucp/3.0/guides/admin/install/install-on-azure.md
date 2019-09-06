@@ -272,10 +272,14 @@ for each VM in the VM scale set.
 
 ## Install UCP 
 
-Use the following command to install UCP on the manager node.
-The `--pod-cidr` option maps to the IP address range that you configured for
-the subnets in the previous sections, and the `--host-address` maps to the
-IP address of the master node.
+Run the following command to install UCP on a manager node. The `--pod-cidr`
+option maps to the IP address range that you have configured for the Azure
+subnet, and the `--host-address` maps to the private IP address of the master node
+
+> Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet host.
+> attached the hosts. For example, if the Azure Virtual Network had the range
+> `172.0.0.0/16` with Virtual Machines provisioned on an Azure Subnet of
+> `172.0.1.0/24`, then the Pod CIDR should also be `172.0.1.0/24`.
 
 ```bash
 docker container run --rm -it \
@@ -283,8 +287,7 @@ docker container run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <ucp-ip> \
-  --interactive \
-  --swarm-port 3376 \
   --pod-cidr <ip-address-range> \
-  --cloud-provider Azure
+  --cloud-provider Azure \
+  --interactive
 ```

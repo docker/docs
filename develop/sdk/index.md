@@ -128,9 +128,9 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
-### Docker EE and CE API mismatch
+### Docker Engine - Enterprise and Docker Engine - Community API mismatch
 
-If you use Docker EE in production, we recommend using Docker EE in development
+If you use Docker Engine - Enterprise in production, we recommend using Docker Engine - Enterprise in development
 too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for
 Windows and manually build and push images, then your developers need to configure
 their Docker clients to use the same version of the API reported by their Docker
@@ -180,13 +180,14 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-    "context"
-    "os"
+	"context"
+	"io"
+	"os"
 
-    "github.com/docker/docker/client"
-    "github.com/docker/docker/api/types"
-    "github.com/docker/docker/api/types/container"
-    "github.com/docker/docker/pkg/stdcopy"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stdcopy"
 )
 
 func main() {

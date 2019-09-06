@@ -1,0 +1,51 @@
+command: docker buildx imagetools create
+short: Create a new image based on source images
+long: Create a new image based on source images
+usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
+pname: docker buildx imagetools
+plink: docker_buildx_imagetools.yaml
+options:
+- option: append
+  value_type: bool
+  default_value: "false"
+  description: Append to existing manifest
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: dry-run
+  value_type: bool
+  default_value: "false"
+  description: Show final image instead of pushing
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: file
+  shorthand: f
+  value_type: stringArray
+  default_value: '[]'
+  description: Read source descriptor from file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tag
+  shorthand: t
+  value_type: stringArray
+  default_value: '[]'
+  description: Set reference for new image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

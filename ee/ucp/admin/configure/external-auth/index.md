@@ -17,20 +17,20 @@ all manually created users whose usernames don't match any LDAP search results
 are still available.
 
 When you enable LDAP authentication, you can choose whether UCP creates user
-accounts only when users log in for the first time. Select the 
+accounts only when users log in for the first time. Select the
 **Just-In-Time User Provisioning** option to ensure that the only LDAP
 accounts that exist in UCP are those that have had a user log in to UCP.
 
 ## How UCP integrates with LDAP
 
-You control how UCP integrates with LDAP by creating searches for users. 
+You control how UCP integrates with LDAP by creating searches for users.
 You can specify multiple search configurations, and you can specify multiple
 LDAP servers to integrate with. Searches start with the `Base DN`, which is
 the *distinguished name* of the node in the LDAP directory tree where the
 search starts looking for users.
 
 Access LDAP settings by navigating to the **Authentication & Authorization**
-page in the UCP web UI. There are two sections for controlling LDAP searches
+page in the UCP web interface. There are two sections for controlling LDAP searches
 and servers.
 
 - **LDAP user search configurations:** This is the section of the
@@ -44,7 +44,7 @@ and servers.
   server is considered the default domain server. Any others are associated
   with the domain that you specify in the page.
 
-Here's what happens when UCP synchronizes with LDAP: 
+Here's what happens when UCP synchronizes with LDAP:
 
 1. UCP creates a set of search results by iterating over each of the user
    search configs, in the order that you specify.
@@ -82,7 +82,7 @@ Here are three user search configs with the following `Base DNs`:
 
   For this search config, two of the domain servers have a domain which is a
   suffix of this base DN, but `dc=subsidiary2,dc=subsidiary1,dc=com` is the
-  longer of the two, so UCP uses the server `ldaps://ldap.subsidiary2.com` 
+  longer of the two, so UCP uses the server `ldaps://ldap.subsidiary2.com`
   for the search request.
 
 - baseDN=`ou=eng,dc=example,dc=com`
@@ -105,7 +105,7 @@ email address, for example, `jane.doe@subsidiary1.com`.
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users by using an LDAP directory,
-go to the UCP web UI, navigate to the **Admin Settings** page and click
+go to the UCP web interface, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
 
@@ -127,7 +127,7 @@ remain unchanged for all existing users.
 
 ## LDAP enabled
 
-Click **Yes** to enable integrating UCP users and teams with LDAP servers.  
+Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 
 ## LDAP server
 
@@ -198,7 +198,7 @@ You can also manually synchronize users by clicking **Sync Now**.
 ## Revoke user access
 
 When a user is removed from LDAP, the effect on the user's UCP account depends
-on the **Just-In-Time User Provisioning** setting: 
+on the **Just-In-Time User Provisioning** setting:
 
 - **Just-In-Time User Provisioning** is `false`: Users deleted from LDAP become
   inactive in UCP after the next LDAP synchronization runs.
@@ -219,6 +219,15 @@ UCP does not store any additional data from the directory server.
 UCP enables syncing teams with a search query or group in your organization's
 LDAP directory.
 [Sync team members with your organization's LDAP directory](../../../authorization/create-teams-with-ldap.md).
+
+## LDAP Configuration via API
+
+As of UCP 3.1.5, LDAP-specific `GET` and `PUT` API endpoints have been added to the Config resource. Note that swarm mode has to be enabled before you can hit the following endpoints:
+
+- `GET /api/ucp/config/auth/ldap` - Returns information on your current system LDAP configuration.
+- `PUT /api/ucp/config/auth/ldap` - Lets you update your LDAP configuration.
+
+See [UCP API Documentation](/reference/ucp/3.2/api/) for additional information.
 
 ## Where to go next
 

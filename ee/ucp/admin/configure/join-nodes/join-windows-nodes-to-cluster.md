@@ -6,50 +6,37 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise 2.1 supports worker nodes that run on Windows Server 2016, 1709, 
-or 1803. Only worker nodes are supported on Windows, and all manager nodes in the cluster
-must run on Linux.
+Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and
+Windows Server 2019. Only worker nodes are supported on Windows, and all
+manager nodes in the cluster must run on Linux. Additionally Windows worker
+nodes can only be used by the Swarm Orchestrator.
 
 Follow these steps to enable a worker node on Windows.
 
-1.  Install Docker Engine - Enterprise on Windows Server 2016, 1709, or 1803.
+1.  Install Docker Engine - Enterprise on Windows Server 2016 or 2019.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
+**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
+
 ## Install Docker Engine - Enterprise on Windows Server 
 
-[Install Docker Engine - Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
-on a Windows Server 2016, 1709 or 1803 instance to enable joining a cluster that's managed by
-Docker Enterprise 2.1.
+[Install Docker Engine -
+Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
+on a Windows Server 2016 or 2019 instance before joining the node to a Docker
+Enterprise Cluster.
 
 ## Configure the Windows node
 
 Follow these steps to configure the docker daemon and the Windows environment.
 
-1. Add a label to the node.
-2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
-3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker UCP web interface or CLI.
+1. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
+2. Run the Windows worker setup script provided with `ucp-agent-win`.
+3. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
-Configure the Docker Engine running on the node to have a label. This makes
-it easier to deploy applications on nodes with this label.
-
-Create the file `C:\ProgramData\docker\config\daemon.json` with the following
-content:
-
-```
-{
-  "labels": ["os=windows"]
-}
-```
-
-Restart Docker for the changes to take effect:
-
-```
-Restart-Service docker
-```
+As of Docker Enterprise 2.1, which includes UCP 3.1, this step is no longer necessary. Windows nodes are automatically assigned the `ostype` label `ostype=windows`. 
 
 ### Pull the Windows-specific images
 
@@ -62,13 +49,19 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
-On Windows Server 2016, in a PowerShell terminal running as Administrator,
-log in to Docker Hub with the `docker login` command and pull the listed images.
+On a Windows Server node, in a PowerShell terminal running as Administrator,
+log in to Docker Hub with the `docker login` command and pull the listed
+images.
 
 ```powershell
 docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
 docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
+
+If the cluster is deployed in an offline site, where the nodes do not have
+access to the Docker Hub, UCP images can be sideloaded onto the Windows Server
+nodes. Follow the instructions on the [install
+offline](/ee/ucp/admin/install/install-offline/) page to sideload the images.
 
 ### Run the Windows node setup script
 
@@ -104,12 +97,12 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 ```json
 {
 ...
-		"debug":     true,
-		"tls":       true,
-		"tlscacert": "C:\ProgramData\docker\daemoncerts\ca.pem",
-		"tlscert":   "C:\ProgramData\docker\daemoncerts\cert.pem",
-		"tlskey":    "C:\ProgramData\docker\daemoncerts\key.pem",
-		"tlsverify": true,
+    "debug":     true,
+    "tls":       true,
+    "tlscacert": "C:\ProgramData\docker\daemoncerts\ca.pem",
+    "tlscert":   "C:\ProgramData\docker\daemoncerts\cert.pem",
+    "tlskey":    "C:\ProgramData\docker\daemoncerts\key.pem",
+    "tlsverify": true,
 ...
 }
 ```
@@ -206,12 +199,9 @@ The `dockerd` service and the Windows environment are now configured to join a D
 
 ## Windows nodes limitations
 
-Some features are not yet supported on Windows nodes:
+The following features are not yet supported on Windows Server 2016 or 2019:
 
 * Networking
-  * The cluster mode routing mesh can't be used on Windows nodes. You can expose
-  a port for your service in the host where it is running, and use the HTTP
-  routing mesh to make your service accessible using a domain name.
   * Encrypted networks are not supported. If you've upgraded from a previous
   version, you'll also need to recreate the `ucp-hrm` network to make it
   unencrypted.
@@ -226,7 +216,16 @@ Some features are not yet supported on Windows nodes:
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
+* Orchestration
+  * Windows Containers can only be scheduled by the Docker Swarm orchestrator.
+
+The following features are not yet supported on Windows Server 2016:
+
+* Networking
+  * The cluster mode routing mesh can't be used on Windows nodes. You can expose
+  a port for your service in the host where it is running, and use the HTTP
+  routing mesh to make your service accessible using a domain name.
 
 ## Known Issues
 
-* [Newly added Windows node reports "Awaiting healthy status in classic node inventory"](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory)
+Refer to the [Docker Enterprise UCP release notes](/ee/ucp/release-notes) for Known Issues information.

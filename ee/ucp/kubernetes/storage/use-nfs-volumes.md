@@ -20,7 +20,7 @@ To mount existing NFS shares within Kubernetes Pods, we have 2 options:
  - Define NFS shares within the Pod definitions. NFS shares are defined
    manually by each tenant when creating a workload.
  - Define NFS shares as a Cluster object through Persistent Volumes, with
-   the CLuster object lifecycle handled separately from the workload. This is common for
+   the Cluster object lifecycle handled separately from the workload. This is common for
    operators who want to define a range of NFS shares for tenants to request and
    consume.
 

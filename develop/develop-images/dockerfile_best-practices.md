@@ -22,8 +22,8 @@ A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
-```conf
-FROM ubuntu:15.04
+```Dockerfile
+FROM ubuntu:18.04
 COPY . /app
 RUN make /app
 CMD python /app/app.py
@@ -31,7 +31,7 @@ CMD python /app/app.py
 
 Each instruction creates one layer:
 
-- `FROM` creates a layer from the `ubuntu:15.04` Docker image.
+- `FROM` creates a layer from the `ubuntu:18.04` Docker image.
 - `COPY` adds files from your Docker client's current directory.
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
@@ -101,37 +101,146 @@ Sending build context to Docker daemon  187.8MB
 
 ### Pipe Dockerfile through `stdin`
 
-Docker 17.05 added the ability to build images by piping `Dockerfile` through
-`stdin` with a _local or remote build-context_. In earlier versions, building an
-image with a `Dockerfile` from `stdin` did not send the build-context.
+Docker has the ability to build images by piping `Dockerfile` through `stdin`
+with a _local or remote build context_. Piping a `Dockerfile` through `stdin`
+can be useful to perform one-off builds without writing a Dockerfile to disk,
+or in situations where the `Dockerfile` is generated, and should not persist
+afterwards.
 
-**Docker 17.04 and lower**
+> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> for convenience, but any method to provide the `Dockerfile` on `stdin` can be
+> used.
+> 
+> For example, the following commands are equivalent: 
+> 
+> ```bash
+> echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
+> ```
+> 
+> ```bash
+> docker build -<<EOF
+> FROM busybox
+> RUN echo "hello world"
+> EOF
+> ```
+> 
+> You can substitute the examples with your preferred approach, or the approach
+> that best fits your use-case.
 
+
+#### Build an image using a Dockerfile from stdin, without sending build context
+
+Use this syntax to build an image using a `Dockerfile` from `stdin`, without
+sending additional files as build context. The hyphen (`-`) takes the position
+of the `PATH`, and instructs Docker to read the build context (which only
+contains a `Dockerfile`) from `stdin` instead of a directory:
+
+```bash
+docker build [OPTIONS] -
 ```
-docker build -t foo -<<EOF
+
+The following example builds an image using a `Dockerfile` that is passed through
+`stdin`. No files are sent as build context to the daemon.
+
+```bash
+docker build -t myimage:latest -<<EOF
 FROM busybox
 RUN echo "hello world"
 EOF
 ```
 
-**Docker 17.05 and higher (local build-context)**
+Omitting the build context can be useful in situations where your `Dockerfile`
+does not require files to be copied into the image, and improves the build-speed,
+as no files are sent to the daemon.
 
+If you want to improve the build-speed by excluding _some_ files from the build-
+context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
+
+> **Note**: Attempting to build a Dockerfile that uses `COPY` or `ADD` will fail
+> if this syntax is used. The following example illustrates this:
+> 
+> ```bash
+> # create a directory to work in
+> mkdir example
+> cd example
+> 
+> # create an example file
+> touch somefile.txt
+> 
+> docker build -t myimage:latest -<<EOF
+> FROM busybox
+> COPY somefile.txt .
+> RUN cat /somefile.txt
+> EOF
+> 
+> # observe that the build fails
+> ...
+> Step 2/3 : COPY somefile.txt .
+> COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
+> ```
+
+#### Build from a local build context, using a Dockerfile from stdin
+
+Use this syntax to build an image using files on your local filesystem, but using
+a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
+specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
+Docker to read the `Dockerfile` from `stdin`:
+
+```bash
+docker build [OPTIONS] -f- PATH
 ```
-docker build -t foo . -f-<<EOF
+
+The example below uses the current directory (`.`) as the build context, and builds
+an image using a `Dockerfile` that is passed through `stdin` using a [here
+document](http://tldp.org/LDP/abs/html/here-docs.html).
+
+```bash
+# create a directory to work in
+mkdir example
+cd example
+
+# create an example file
+touch somefile.txt
+
+# build an image using the current directory as context, and a Dockerfile passed through stdin
+docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-RUN echo "hello world"
-COPY . /my-copied-files
+COPY somefile.txt .
+RUN cat /somefile.txt
 EOF
 ```
 
-**Docker 17.05 and higher (remote build-context)**
+#### Build from a remote build context, using a Dockerfile from stdin
 
+Use this syntax to build an image using files from a remote `git` repository, 
+using a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
+specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
+Docker to read the `Dockerfile` from `stdin`:
+
+```bash
+docker build [OPTIONS] -f- PATH
 ```
-docker build -t foo https://github.com/thajeztah/pgadmin4-docker.git -f-<<EOF
+
+This syntax can be useful in situations where you want to build an image from a
+repository that does not contain a `Dockerfile`, or if you want to build with a custom
+`Dockerfile`, without maintaining your own fork of the repository.
+
+The example below builds an image using a `Dockerfile` from `stdin`, and adds
+the `hello.c` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
+
+```bash
+docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY LICENSE config_distro.py /usr/local/lib/python2.7/site-packages/pgadmin4/
+COPY hello.c .
 EOF
 ```
+
+> **Under the hood**
+>
+> When building an image using a remote Git repository as build context, Docker 
+> performs a `git clone` of the repository on the local machine, and sends
+> those files as build context to the daemon. This feature requires `git` to be
+> installed on the host where you run the `docker build` command.
 
 ### Exclude with .dockerignore
 
@@ -142,9 +251,9 @@ similar to `.gitignore` files. For information on creating one, see the
 
 ### Use multi-stage builds
 
-[Multi-stage builds](multistage-build.md) (in [Docker 17.05](/release-notes/docker-ce/#17050-ce-2017-05-04) or higher)
-allow you to drastically reduce the size of your final image, without struggling
-to reduce the number of intermediate layers and files.
+[Multi-stage builds](multistage-build.md) allow you to drastically reduce the
+size of your final image, without struggling to reduce the number of intermediate
+layers and files.
 
 Because an image is built during the final stage of the build process, you can
 minimize image layers by [leveraging build cache](#leverage-build-cache).
@@ -161,8 +270,8 @@ frequently changed:
 
 A Dockerfile for a Go application could look like:
 
-```
-FROM golang:1.9.2-alpine3.6 AS build
+```Dockerfile
+FROM golang:1.11-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -220,14 +329,13 @@ In older versions of Docker, it was important that you minimized the number of
 layers in your images to ensure they were performant. The following features
 were added to reduce this limitation:
 
-- In Docker 1.10 and higher, only the instructions `RUN`, `COPY`, `ADD` create
-  layers. Other instructions create temporary intermediate images, and do not
-  directly increase the size of the build.
+- Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
+  create temporary intermediate images, and do not increase the size of the build.
 
-- In Docker 17.05 and higher, you can do [multi-stage builds](multistage-build.md)
-  and only copy the artifacts you need into the final image. This allows you to
-  include tools and debug information in your intermediate build stages without
-  increasing the size of the final image.
+- Where possible, use [multi-stage builds](multistage-build.md), and only copy
+  the artifacts you need into the final image. This allows you to include tools
+  and debug information in your intermediate build stages without increasing the
+  size of the final image.
 
 ### Sort multi-line arguments
 
@@ -238,12 +346,14 @@ review. Adding a space before a backslash (`\`) helps as well.
 
 Here’s an example from the [`buildpack-deps` image](https://github.com/docker-library/buildpack-deps):
 
-    RUN apt-get update && apt-get install -y \
-      bzr \
-      cvs \
-      git \
-      mercurial \
-      subversion
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion
+```
 
 ### Leverage build cache
 
@@ -308,7 +418,7 @@ The following examples show the different acceptable formats. Explanatory commen
 > Strings with spaces must be quoted **or** the spaces must be escaped. Inner
 > quote characters (`"`), must also be escaped.
 
-```conf
+```Dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -322,14 +432,14 @@ to combine all labels into a single `LABEL` instruction, to prevent extra layers
 from being created. This is no longer necessary, but combining labels is still
 supported.
 
-```conf
+```Dockerfile
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 
 The above can also be written as:
 
-```conf
+```Dockerfile
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -368,26 +478,31 @@ know there is a particular package, `foo`, that needs to be updated, use
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
-        RUN apt-get update && apt-get install -y \
-            package-bar \
-            package-baz \
-            package-foo
-
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo
+```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
 subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
-        FROM ubuntu:14.04
-        RUN apt-get update
-        RUN apt-get install -y curl
+```Dockerfile
+FROM ubuntu:18.04
+RUN apt-get update
+RUN apt-get install -y curl
+```
 
 After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
-        FROM ubuntu:14.04
-        RUN apt-get update
-        RUN apt-get install -y curl nginx
+```Dockerfile
+FROM ubuntu:18.04
+RUN apt-get update
+RUN apt-get install -y curl nginx
+```
 
 Docker sees the initial and modified instructions as identical and reuses the
 cache from previous steps. As a result the `apt-get update` is _not_ executed
@@ -401,10 +516,12 @@ intervention. This technique is known as "cache busting". You can also achieve
 cache-busting by specifying a package version. This is known as version pinning,
 for example:
 
-        RUN apt-get update && apt-get install -y \
-            package-bar \
-            package-baz \
-            package-foo=1.3.*
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo=1.3.*
+```
 
 Version pinning forces the build to retrieve a particular version regardless of
 what’s in the cache. This technique can also reduce failures due to unanticipated changes
@@ -413,20 +530,22 @@ in required packages.
 Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
 recommendations.
 
-    RUN apt-get update && apt-get install -y \
-        aufs-tools \
-        automake \
-        build-essential \
-        curl \
-        dpkg-sig \
-        libcap-dev \
-        libsqlite3-dev \
-        mercurial \
-        reprepro \
-        ruby1.9.1 \
-        ruby1.9.1-dev \
-        s3cmd=1.1.* \
-     && rm -rf /var/lib/apt/lists/*
+```Dockerfile
+RUN apt-get update && apt-get install -y \
+    aufs-tools \
+    automake \
+    build-essential \
+    curl \
+    dpkg-sig \
+    libcap-dev \
+    libsqlite3-dev \
+    mercurial \
+    reprepro \
+    ruby1.9.1 \
+    ruby1.9.1-dev \
+    s3cmd=1.1.* \
+ && rm -rf /var/lib/apt/lists/*
+```
 
 The `s3cmd` argument specifies a version `1.1.*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
@@ -522,10 +641,12 @@ variables specific to services you wish to containerize, such as Postgres’s
 Lastly, `ENV` can also be used to set commonly used version numbers so that
 version bumps are easier to maintain, as seen in the following example:
 
-    ENV PG_MAJOR 9.3
-    ENV PG_VERSION 9.3.4
-    RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
-    ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+```Dockerfile
+ENV PG_MAJOR 9.3
+ENV PG_VERSION 9.3.4
+RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+```
 
 Similar to having constant variables in a program (as opposed to hard-coding
 values), this approach lets you change a single `ENV` instruction to
@@ -541,11 +662,10 @@ FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
-CMD sh
 ```
 
 ```bash
-$ docker run --rm -it test sh echo $ADMIN_USER
+$ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
 ```
@@ -567,7 +687,7 @@ CMD sh
 ```
 
 ```bash
-$ docker run --rm -it test sh echo $ADMIN_USER
+$ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
 
@@ -591,9 +711,11 @@ the specifically required files change.
 
 For example:
 
-    COPY requirements.txt /tmp/
-    RUN pip install --requirement /tmp/requirements.txt
-    COPY . /tmp/
+```Dockerfile
+COPY requirements.txt /tmp/
+RUN pip install --requirement /tmp/requirements.txt
+COPY . /tmp/
+```
 
 Results in fewer cache invalidations for the `RUN` step, than if you put the
 `COPY . /tmp/` before it.
@@ -604,16 +726,20 @@ delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 
-    ADD http://example.com/big.tar.xz /usr/src/things/
-    RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
-    RUN make -C /usr/src/things all
+```Dockerfile
+ADD http://example.com/big.tar.xz /usr/src/things/
+RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
+RUN make -C /usr/src/things all
+```
 
 And instead, do something like:
 
-    RUN mkdir -p /usr/src/things \
-        && curl -SL http://example.com/big.tar.xz \
-        | tar -xJC /usr/src/things \
-        && make -C /usr/src/things all
+```Dockerfile
+RUN mkdir -p /usr/src/things \
+    && curl -SL http://example.com/big.tar.xz \
+    | tar -xJC /usr/src/things \
+    && make -C /usr/src/things all
+```
 
 For other items (files, directories) that do not require `ADD`’s tar
 auto-extraction capability, you should always use `COPY`.
@@ -628,16 +754,22 @@ default flags).
 
 Let's start with an example of an image for the command line tool `s3cmd`:
 
-    ENTRYPOINT ["s3cmd"]
-    CMD ["--help"]
+```Dockerfile
+ENTRYPOINT ["s3cmd"]
+CMD ["--help"]
+```
 
 Now the image can be run like this to show the command's help:
 
-    $ docker run s3cmd
+```bash
+$ docker run s3cmd
+```
 
 Or using the right parameters to execute a command:
 
-    $ docker run s3cmd ls s3://mybucket
+```bash
+$ docker run s3cmd ls s3://mybucket
+```
 
 This is useful because the image name can double as a reference to the binary as
 shown in the command above.
@@ -676,23 +808,31 @@ exec "$@"
 The helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
 
-    COPY ./docker-entrypoint.sh /
-    ENTRYPOINT ["/docker-entrypoint.sh"]
-    CMD ["postgres"]
+```Dockerfile
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["postgres"]
+```
 
 This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-    $ docker run postgres
+```bash
+$ docker run postgres
+```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-    $ docker run postgres postgres --help
+```bash
+$ docker run postgres postgres --help
+```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-    $ docker run --rm -it postgres bash
+```bash
+$ docker run --rm -it postgres bash
+```
 
 ### VOLUME
 
@@ -727,7 +867,7 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 Avoid installing or using `sudo` as it has unpredictable TTY and
 signal-forwarding behavior that can cause problems. If you absolutely need
 functionality similar to `sudo`, such as initializing the daemon as `root` but
-running it as non-`root`), consider using ["gosu"](https://github.com/tianon/gosu).
+running it as non-`root`, consider using [“gosu”](https://github.com/tianon/gosu).
 
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
@@ -756,9 +896,9 @@ A Docker build executes `ONBUILD` commands before any command in a child
 `ONBUILD` is useful for images that are going to be built `FROM` a given
 image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
-`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile).
+`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/c43fef8a60cea31eb9e7d960a076d633cb62ba8d/2.4/jessie/onbuild/Dockerfile).
 
-Images built from `ONBUILD` should get a separate tag, for example:
+Images built with `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
 Be careful when putting `ADD` or `COPY` in `ONBUILD`. The "onbuild" image

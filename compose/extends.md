@@ -44,7 +44,7 @@ relative to the base file.
 
 ### Example use case
 
-In this section are two common use cases for multiple compose files: changing a
+In this section, there are two common use cases for multiple Compose files: changing a
 Compose app for different environments, and running administrative tasks
 against a Compose app.
 

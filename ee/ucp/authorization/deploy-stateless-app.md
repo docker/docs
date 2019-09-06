@@ -9,7 +9,7 @@ team with role-based access control (RBAC).
 
 ## Scenario
 
-You are the Docker EE system administrator at Acme Company and need to configure
+You are the Docker Enteprise system administrator at Acme Company and need to configure
 permissions to company resources. The best way to do this is to:
 
 - Build the organization with teams and users.

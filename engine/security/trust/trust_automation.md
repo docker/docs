@@ -14,7 +14,7 @@ that and understand its prerequisites.
 
 When working directly with the Notary client, it uses its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
 
-## Adding a Delegation Private Key
+## Add a delegation private key
 
 To automate importing a delegation private key to the local Docker trust store, we 
 need to pass a passphrase for the new key. This passphrase will be required 
@@ -28,7 +28,7 @@ Loading key from "delegation.key"...
 Successfully imported key from delegation.key
 ```
 
-## Adding a Delegation Public Key
+## Add a delegation public key
 
 If you initialising a repository at the same time as adding a Delegation
 public key, then you will need to use the local Notary Canonical Root Key's 
@@ -50,7 +50,7 @@ Successfully initialized "dtr.example.com/admin/demo"
 Successfully added signer: dtr.example.com/admin/demo
 ```
 
-## Signing an Image
+## Sign an image
 
 Finally when signing an image, we will need to export the passphrase of the 
 signing key. This was created when the key was loaded into the local Docker 
@@ -68,7 +68,7 @@ Signing and pushing trust metadata
 Successfully signed dtr.example.com/admin/demo:1
 ```
 
-## Building with content trust
+## Build with content trust
 
 You can also build with content trust. Before running the `docker build` command, 
 you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or 

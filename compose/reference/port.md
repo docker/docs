@@ -9,9 +9,9 @@ notoc: true
 Usage: port [options] SERVICE PRIVATE_PORT
 
 Options:
---protocol=proto  tcp or udp [default: tcp]
---index=index     index of the container if there are multiple
-                  instances of a service [default: 1]
+    --protocol=proto  tcp or udp [default: tcp]
+    --index=index     index of the container if there are multiple
+                      instances of a service [default: 1]
 ```
 
 Prints the public port for a port binding.

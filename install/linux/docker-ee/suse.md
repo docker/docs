@@ -3,6 +3,7 @@ description: Instructions for installing Docker EE on SLES
 keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
+- /engine/installation/linux/SUSE/
 - /engine/installation/linux/suse/
 - /engine/installation/linux/docker-ee/suse/
 title: Get Docker EE for SLES
@@ -177,19 +178,21 @@ from the repository.
 
     ```bash
     $ DOCKER_EE_BASE_URL="<DOCKER-EE-URL>"
-    $ DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/12.3/<ARCHITECTURE>/stable-<VERSION>"
+    $ DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/<SLES_VERSION>/<ARCH>/stable-<DOCKER_VERSION>"
     ```
 
     Where:
     * `DOCKER-EE-URL` is the URL from your Docker Hub subscription.
-    * `ARCHITECTURE` is `x86_64`, `s390x`, or `ppc64le`.
-    * `VERSION` is `18.09` 
+    * `SLES_VERSION` is `15` or `12.3`.
+    * `ARCH` is `x86_64`, `s390x`, or `ppc64le`.
+    * `DOCKER_VERSION` is `19.03` or one of the older releases (`18.09`, `18.03`, `17.06` etc.)
 
     As an example your command should look like:
 
     ```bash
 
     DOCKER_EE_BASE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555"
+    DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/15/x86_64/stable-19.03
     
     ```
 

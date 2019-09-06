@@ -6,6 +6,30 @@ Welcome to the repo for our documentation. This is the source for
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
 
+## Table of Contents
+
+- [Providing feedback](#providing-feedback)
+- [Contributing](#contributing)
+  - [Files not edited here](#files-not-edited-here)
+  - [Overall doc improvements](#overall-doc-improvements)
+  - [Specific new features for a project](#specific-new-features-for-a-project)
+- [Per-PR staging on GitHub](#per-pr-staging-on-github)
+- [Staging the docs](#staging-the-docs)
+- [Read these docs offline](#read-these-docs-offline)
+- [Important files](#important-files)
+- [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
+  - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
+  - [Per-page front-matter](#per-page-front-matter)
+  - [Creating tabs](#creating-tabs)
+  - [Running in-page Javascript](#running-in-page-javascript)
+  - [Images](#images)
+- [Beta content disclaimer](#beta-content-disclaimer)
+- [Accessing unsupported archived documentation](#accessing-unsupported-archived-documentation)
+- [Building archives and the live published docs](#building-archives-and-the-live-published-docs)
+- [Creating a new archive](#creating-a-new-archive)
+- [Copyright and license](#copyright-and-license)
+
+
 ## Providing feedback
 
 We really want your feedback, and we've made it easy.  You can edit a page or
@@ -107,7 +131,7 @@ of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging the docs
 
-You have two options:
+You have three options:
 
 1.  On your local machine, clone this repo and run our staging container:
 
@@ -169,7 +193,17 @@ You have two options:
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
+    
+3. Build and run a Docker image for your working branch.
+    
+   ```bash
+   $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
+   $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
+    ```
 
+   After the `docker run` command, copy the URL provided in the container build output in a browser, 
+   http://0.0.0.0:4000, and verify your changes.
+   
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
@@ -353,7 +387,7 @@ branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
 
 ## Creating a new archive
 
-When a new Docker CE Stable version is released, the previous state of `master`
+When a new Docker Engine - Community Stable version is released, the previous state of `master`
 is archived into a version-specific branch like `v17.09`, by doing the following:
 
 1.  Create branch based off the commit hash before the new version was released.

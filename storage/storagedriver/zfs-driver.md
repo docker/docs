@@ -29,7 +29,7 @@ use unless you have substantial experience with ZFS on Linux.
 
 - ZFS requires one or more dedicated block devices, preferably solid-state
   drives (SSDs).
-- ZFS is only supported on Docker CE with Ubuntu 14.04 or higher, with the `zfs`
+- ZFS is only supported on Docker Engine - Community with Ubuntu 14.04 or higher, with the `zfs`
   package (16.04 and higher) or `zfs-native` and `ubuntu-zfs` packages (14.04)
   installed.
   - For Ubuntu 14.04, you need to enable a supplemental package repository
@@ -263,7 +263,7 @@ There are several factors that influence the performance of Docker using the
   filesystems like ZFS. ZFS mitigates this by using a small block size of 128k.
   The ZFS intent log (ZIL) and the coalescing of writes (delayed writes) also
   help to reduce fragmentation. You can monitor fragmentation using
-  `zfs status`. However, there is no way to defragment ZFS without reformatting
+  `zpool status`. However, there is no way to defragment ZFS without reformatting
   and restoring the filesystem.
 
 - **Use the native ZFS driver for Linux**: The ZFS FUSE implementation is not

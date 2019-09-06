@@ -120,7 +120,7 @@ is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-
 [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
 > - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+[18.06.0 CE (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} and higher as well as edge channels.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
@@ -135,7 +135,7 @@ is available in
     Docker version 17.12.0-ce, build c97c6d6
     ```
 
-2.  Run `docker info` or (`docker version` without `--`) to view even more details about your docker installation:
+2.  Run `docker info` (or `docker version` without `--`) to view even more details about your Docker installation:
 
     ```shell
     docker info

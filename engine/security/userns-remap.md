@@ -99,7 +99,7 @@ avoid these situations.
 
     This means that user-namespaced processes started by `testuser` are
     owned by host UID `231072` (which looks like UID `0` inside the
-    namespace) through 296608 (231072 + 65536). These ranges should not overlap,
+    namespace) through 296607 (231072 + 65536 - 1). These ranges should not overlap,
     to ensure that namespaced processes cannot access each other's namespaces.
 
     After adding your user, check `/etc/subuid` and `/etc/subgid` to see if your

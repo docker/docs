@@ -237,7 +237,7 @@ coherence:
 different files that don't exist on the shared volume. Even with a 2× speedup
 via latency reduction this use case still seems "slow".
 With caching enabled the performance increases around 3.5×, as described in
-the [user-guided caching post](link-TODO).
+the [user-guided caching post](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/).
 We expect to see further performance improvements for rake with a "negative dcache" that
 keeps track of, in the Linux kernel itself, the files that do not exist.
 However, even this is not sufficient for the first time rake is run on a

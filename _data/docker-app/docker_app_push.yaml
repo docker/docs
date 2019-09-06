@@ -1,0 +1,44 @@
+command: docker app push
+short: Push an application package to a registry
+long: Push an application package to a registry
+usage: docker app push [APP_NAME] --tag TARGET_REFERENCE [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: insecure-registries
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: platform
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    For multi-arch service images, only push the specified platforms
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tag
+  shorthand: t
+  value_type: string
+  description: |
+    Target registry reference (default: <name>:<version> from metadata)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app push myapp --tag myrepo/myapp:mytag
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

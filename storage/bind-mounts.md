@@ -23,7 +23,7 @@ manage bind mounts.
 
 ![bind mounts on the Docker host](images/types-of-mounts-bind.png)
 
-## Choosing the -v or --mount flag
+## Choose the -v or --mount flag
 
 Originally, the `-v` or `--volume` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker
@@ -159,7 +159,7 @@ $ docker container stop devtest
 $ docker container rm devtest
 ```
 
-### Mounting into a non-empty directory on the container
+### Mount into a non-empty directory on the container
 
 If you bind-mount into a non-empty directory on the container, the directory's
 existing contents are obscured by the bind mount. This can be beneficial,

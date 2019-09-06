@@ -96,8 +96,9 @@ This `docker-compose.yml` file tells Docker to do the following:
 - Pull [the image we uploaded in step 2](part2.md) from the registry.
 
 - Run 5 instances of that image as a service
-  called `web`, limiting each one to use, at most, 10% of the CPU (across all
-  cores), and 50MB of RAM.
+  called `web`, limiting each one to use, at most, 10% of a single core of 
+  CPU time (this could also be e.g. "1.5" to mean 1 and half core for each), 
+  and 50MB of RAM.
 
 - Immediately restart containers if one fails.
 
