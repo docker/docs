@@ -27,6 +27,9 @@ upgrade your installation to the latest release.
 ## 3.2.1
 2019-09-03
 
+### Bug fixes
+* Fixed an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
+
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
 * Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
