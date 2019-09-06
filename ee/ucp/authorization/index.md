@@ -67,7 +67,7 @@ To control user access, cluster resources are grouped into Docker Swarm
   networks, nodes, services, secrets, and volumes.
 
 - **Kubernetes namespaces**: A
-[namespace](https://v1-11.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
   is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
   namespace for your cluster objects, plus two more namespaces for system and
   public resources. You can create custom namespaces, but unlike Swarm
