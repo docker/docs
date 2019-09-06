@@ -54,8 +54,8 @@ ENGINE_SVN_BRANCH="branches/19.03"
 ENGINE_BRANCH="19.03"
 
 # Distribution
-DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
-DISTRIBUTION_BRANCH="release/2.6"
+DISTRIBUTION_SVN_BRANCH="branches/release/2.7"
+DISTRIBUTION_BRANCH="release/2.7"
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ./engine/extend || (echo "Failed engine/extend download" && exit 1)
