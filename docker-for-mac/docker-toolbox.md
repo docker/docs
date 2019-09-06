@@ -1,13 +1,13 @@
 ---
-description: Docker Desktop for Mac and Docker Toolbox
+description: Docker Desktop on Mac and Docker Toolbox
 keywords: mac, windows, alpha, beta, toolbox, docker-machine, tutorial
 redirect_from:
 - /mackit/docker-toolbox/
-title: Docker Desktop for Mac vs. Docker Toolbox
+title: Docker Desktop on Mac vs. Docker Toolbox
 ---
 
 If you already have an installation of Docker Toolbox, read these topics
-first to learn how Docker Desktop for Mac and Docker Toolbox differ, and how they can
+first to learn how Docker Desktop on Mac and Docker Toolbox differ, and how they can
 coexist.
 
 ## The Docker Toolbox environment
@@ -28,50 +28,40 @@ This setup is shown in the following diagram.
 
 ![Docker Toolbox Install](images/toolbox-install.png)
 
+## The Docker Desktop on Mac environment
 
-## The Docker Desktop for Mac environment
-
-Docker Desktop for Mac is a Mac native application, that you install in `/Applications`.
+Docker Desktop on Mac is a Mac-native application, that you install in `/Applications`.
 At installation time, it creates symlinks in `/usr/local/bin` for `docker` and
 `docker-compose` and others, to the commands in the application
 bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
 
-Here are some key points to know about Docker Desktop for Mac before you get started:
+Here are some key points to know about Docker Desktop on Mac before you get started:
 
-* Docker Desktop for Mac uses
-  [HyperKit](https://github.com/docker/HyperKit/) instead of Virtual Box.
-  Hyperkit is a lightweight macOS virtualization solution built on top of
-  Hypervisor.framework in macOS 10.10 Yosemite and higher.
+* Docker Desktop uses [HyperKit](https://github.com/docker/HyperKit/) instead of Virtual Box. Hyperkit is a lightweight macOS virtualization solution built on top of Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
-* When you install Docker Desktop for Mac, machines created with Docker Machine are
-  not affected.
+* When you install Docker Desktop on Mac, machines created with Docker Machine are not affected.
 
-* Docker Desktop for Mac does not use `docker-machine` to provision its VM.
+* Docker Desktop does not use `docker-machine` to provision its VM.
   The Docker Engine API is exposed on a
   socket available to the Mac host at `/var/run/docker.sock`. This is the
   default location Docker and Docker Compose clients use to connect to
   the Docker daemon, so you can use `docker` and `docker-compose` CLI commands
   on your Mac.
 
-
 This setup is shown in the following diagram.
 
 ![Docker Desktop for Mac Install](images/docker-for-mac-install.png)
 
-With Docker Desktop for Mac, you only get (and only usually need) one VM, managed by Docker
-for Mac. Docker Desktop for Mac automatically upgrades the Docker client and
-daemon when updates are available.
+With Docker Desktop on Mac, you only get (and only usually need) one VM, managed by Docker Desktop. Docker Desktop automatically upgrades the Docker client and daemon when updates are available.
 
-Also note that Docker Desktop for Mac can’t route traffic to containers, so you can't
+Also note that Docker Desktop can’t route traffic to containers, so you can't
 directly access an exposed port on a running container from the hosting machine.
 
 If you do need multiple VMs, such as when testing multi-node swarms, you can
-continue to use Docker Machine, which operates outside the scope of Docker Desktop for
-Mac. See [Docker Toolbox and Docker Desktop for Mac
-coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
+continue to use Docker Machine, which operates outside the scope of Docker Desktop. See [Docker Toolbox and Docker Desktop
+coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
 
-
-## Setting up to run Docker Desktop for Mac
+## Setting up to run Docker Desktop on Mac
 
 1. Check whether Toolbox DOCKER environment variables are set:
 
@@ -85,7 +75,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
     If it returns output (as shown in the example), unset
     the `DOCKER` environment variables to make the client talk to the
-    Docker Desktop for Mac Engine (next step).
+    Docker Desktop Engine (next step).
 
 2. Run the `unset` command on the following `DOCKER` environment variables to
    unset them in the current shell.
@@ -107,9 +97,9 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 > `DOCKER` environment variables automatically each time you open a command
 > window, then you need to unset these each time you want to use Docker Desktop for Mac.
 
-> If you install Docker Desktop for Mac on a machine where Docker Toolbox is installed..
+> If you install Docker Desktop on a machine where Docker Toolbox is installed..
 >
-> Docker Desktop for Mac replaces the `docker` and `docker-compose` command lines in
+> Docker Desktop replaces the `docker` and `docker-compose` command lines in
 > `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
@@ -117,10 +107,10 @@ See also [Unset environment variables in the current
 shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell)
 in the Docker Machine topics.
 
-## Docker Toolbox and Docker Desktop for Mac coexistence
+## Docker Toolbox and Docker Desktop coexistence
 
-You can use Docker Desktop for Mac and Docker Toolbox together on the same machine. When
-you want to use Docker Desktop for Mac, make sure all DOCKER environment variables are
+You can use Docker Desktop and Docker Toolbox together on the same machine. When
+you want to use Docker Desktop make sure all DOCKER environment variables are
 unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use
 one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval
 $(docker-machine env default)` (or the name of the machine you want to target).
@@ -131,15 +121,13 @@ This setup is represented in the following diagram.
 
 ![Docker Toolbox and Docker Desktop for Mac coexistence](images/docker-for-mac-and-toolbox.png)
 
-
 ## Using different versions of Docker tools
 
 The coexistence setup works as is as long as your VirtualBox VMs provisioned
-with `docker-machine` run the same version of Docker Engine as Docker Desktop for Mac.
+with `docker-machine` run the same version of Docker Engine as Docker Desktop.
 If you need to use VMs running older versions of Docker Engine, you can use a
 tool like [Docker Version Manager](https://github.com/getcarina/dvm) to manage
 several versions of docker client.
-
 
 ### Checking component versions
 
@@ -148,11 +136,8 @@ Mismatches between client and server, and among host machines you might have
 created with Docker Machine can cause problems (client can't talk to the server
 or host machines).
 
-If you already have [Docker Toolbox](/toolbox/overview/) installed, and then
-install Docker Desktop for Mac, you might get a newer version of the Docker client. Run
-`docker version` in a command shell to see client and server versions. In this
-example, the client installed with Docker Desktop for Mac is `Version: 1.11.1` and the
-server (which was installed earlier with Toolbox) is Version: 1.11.0.
+If you have already installed [Docker Toolbox](/toolbox/overview/), and then
+install Docker Desktop for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker Desktop is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
 
     $ docker version
     Client:
@@ -164,7 +149,7 @@ server (which was installed earlier with Toolbox) is Version: 1.11.0.
     ...
 
 Also, if you created machines with Docker Machine (installed with Toolbox) then
-upgraded or installed Docker Desktop for Mac, you might have machines running different
+upgraded or installed Docker Desktop, you might have machines running different
 versions of Engine. Run `docker-machine ls` to view version information for the
 machines you created. In this example, the DOCKER column shows that each machine
 is running a different version of server.
@@ -181,9 +166,9 @@ There are a few ways to address this problem and keep using your older
 machines. One solution is to use a version manager like
 [DVM](https://github.com/getcarina/dvm).
 
-## Migrating from Docker Toolbox to Docker Desktop for Mac
+## Migrating from Docker Toolbox to Docker Desktop on Mac
 
-Docker Desktop for Mac does not propose Toolbox image migration as part of its
+Docker Desktop does not propose Toolbox image migration as part of its
 installer since version 18.01.0.  You can migrate existing Docker
 Toolbox images with the scripts described below. (This migration
 cannot merge images from both Docker and Toolbox: any existing Docker image is
@@ -206,7 +191,7 @@ $ file "$vmdk"
 ```
 
 Second, find out the location and format of the disk image used by your Docker
-for Mac.
+Desktop.
 
 ```sh
 $ settings=~/Library/Group\ Containers/group.com.docker/settings.json
@@ -235,8 +220,8 @@ it](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbo
 
 ## How do I uninstall Docker Toolbox?
 
-You might decide that you do not need Toolbox now that you have Docker Desktop for Mac,
+You might decide that you do not need Toolbox now that you have Docker Desktop,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on the Mac, see [How to uninstall
+Toolbox on Mac, see [How to uninstall
 Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
 Toolbox Mac topics.
