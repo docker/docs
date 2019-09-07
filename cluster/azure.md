@@ -19,7 +19,7 @@ To securely utilize this Azure credential information, we will create a cluster 
 file which will inject this data into the environment at runtime.  For example, create
 a file named `my-azure-creds.sh` similar to the following containing your credentials:
 
-```
+```bash
 export ARM_CLIENT_ID='aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
 export ARM_CLIENT_SECRET='ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdef='
 export ARM_SUBSCRIPTION_ID='ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'
@@ -30,7 +30,8 @@ This file should be treated as sensitive data with file permissions set appropri
 To use this file, we _don't_ source or run this file directly in the shell.  Instead,
 we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
 running cluster:
-```
+
+```bash
 $ export CLUSTER_SECRETS_FILE=~/.my-secrets/my-azure-creds.sh
 $ docker cluster create ....
 ```
