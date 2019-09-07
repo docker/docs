@@ -48,41 +48,41 @@ When you create a docker cluster in Azure, the cluster created has:
 Create a file called `cluster.yml` in your directory and paste this in:
 
 ```yaml
-    variable:
-      region: "Azure region to deploy"
-      ucp_password: 
-        type: prompt
-    ​
-    provider:
-      azurerm:
-        region: ${region}
-    ​
-    cluster:
-      engine:
-        version: ee-stable-19.03
-      ucp:
-        version: docker/ucp:3.2.0
-        username: admin
-        password: ${ucp_password}
-      dtr:
-        version: docker/dtr:2.7.1
-    ​
-    resource:
-      azurerm_virtual_machine:
-        managers:
-          quantity: 3
-        registry:
-          quantity: 3
-        workers:
-          quantity: 3
-    
-      azurerm_lb:
-        ucp:
-          instances:
-          - managers
-          ports:
-          - "443:443"
-          - "6443:6443"
+variable:
+  region: "Azure region to deploy"
+  ucp_password: 
+    type: prompt
+
+provider:
+  azurerm:
+    region: ${region}
+
+cluster:
+  engine:
+    version: ee-stable-19.03
+  ucp:
+    version: docker/ucp:3.2.0
+    username: admin
+    password: ${ucp_password}
+  dtr:
+    version: docker/dtr:2.7.1
+
+resource:
+  azurerm_virtual_machine:
+    managers:
+      quantity: 3
+    registry:
+      quantity: 3
+    workers:
+      quantity: 3
+
+  azurerm_lb:
+    ucp:
+      instances:
+      - managers
+      ports:
+      - "443:443"
+      - "6443:6443"
 ```
 
 Provide values for the variable section.  For instance:
