@@ -439,7 +439,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.8
-(2019-06-27)
+2019-06-27
 
 > Upgrading UCP 3.1.8
 >
@@ -502,7 +502,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.7
-(2019-05-06)
+2019-05-06
 
 ### Security
 * Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
@@ -535,7 +535,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.6
-(2019-04-11)
+2019-04-11
 
 ### Kubernetes
 * Updated Kubernetes to version 1.11.9.
@@ -736,7 +736,7 @@ now configurable within the UCP web interface. (#15466)
 
 ## 3.1.1
 
-(2018-12-04)
+2018-12-04
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
 
