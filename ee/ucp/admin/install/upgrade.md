@@ -138,28 +138,6 @@ advanced than the automated, in-place cluster upgrade.
         in batches of multiple nodes rather than one at a time, and shut down servers to 
         remove worker nodes. This type of upgrade is the most advanced.
 
-### Use the web interface to perform an upgrade
-
-> **Note**: If you plan to add nodes to the UCP cluster, use the [CLI](#use-the-cli-to-perform-an-upgrade) for the upgrade. 
-
-When an upgrade is available for a UCP installation, a banner appears.
-
-![](../../images/upgrade-ucp-1.png){: .with-border}
-
-Clicking this message takes an admin user directly to the upgrade process.
-It can be found under the **Upgrade** tab of the **Admin Settings** section.
-
-![](../../images/upgrade-ucp-2.png){: .with-border}
-
-In the **Available Versions** drop down, select the version you want to update.
-Copy and paste the CLI command provided into a terminal on a manager node to
-perform the upgrade.
-
-During the upgrade, the web interface will be unavailable, and you should wait
-until completion before continuing to interact with it. When the upgrade
-completes, you'll see a notification that a newer version of the web interface
-is available and a browser refresh is required to see it.
-
 ### Use the CLI to perform an upgrade
 
 There are two different ways to upgrade a UCP Cluster via the CLI. The first is
