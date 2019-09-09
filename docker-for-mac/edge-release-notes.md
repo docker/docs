@@ -24,6 +24,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 - [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
 - [Qemu 4.0.1](https://github.com/docker/binfmt)
 - [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
 
 #### Bug fixes and minor changes
 
