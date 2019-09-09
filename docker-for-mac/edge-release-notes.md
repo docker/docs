@@ -4,21 +4,31 @@ keywords: Docker Desktop for Mac, edge, release notes
 title: Docker Desktop for Mac Edge release notes
 ---
 
-Here are the main improvements and issues per edge release, starting with the
-current release. The documentation is updated for each release.
+This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For system requirements, see
+For information about Stable releases, see the [Stable release
+notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
-
-Release notes for _edge_ releases are listed below, [_stable_ release
-notes](release-notes) are also available. (Following the Docker Engine - Community release model,
-'beta' releases are called 'edge' releases.) You can learn about both kinds of
-releases, and download stable and edge product installers at [Download Docker
-for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
-This is the Docker Desktop Edge channel, which gives you early access to our newest features. Note that some features may be experimental, and some of the features may not ever reach the Stable release.
+### Docker Desktop Community 2.1.2.0
+2019-09-09
+
+[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+
+#### Upgrades
+
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Qemu 4.0.1](https://github.com/docker/binfmt)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+
+#### Bug fixes and minor changes
+
+- Reduced the Virtual Machine (VM) startup time.
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
 
 ### Docker Desktop Community 2.1.1.0
 2019-08-12
