@@ -955,50 +955,6 @@ devices:
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
-### depends_on
-
-Express dependency between services, Service dependencies cause the following
-behaviors:
-
-- `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` are started before `web`.
-
-- `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  creates and starts `db` and `redis`.
-  
-- `docker-compose stop` stops services in dependency order. In the following
-  example, `web` is stopped before `db` and `redis`.
-
-Simple example:
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  web:
-    build: .
-    depends_on:
-      - db
-      - redis
-  redis:
-    image: redis
-  db:
-    image: postgres
-```
-
-> There are several things to be aware of when using `depends_on`:
->
-> - `depends_on` does not wait for `db` and `redis` to be "ready" before
->   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
->   for more on this problem and strategies for solving it.
->
-> - Version 3 no longer supports the `condition` form of `depends_on`.
->
-> - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
->   with a version 3 Compose file.
-
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
