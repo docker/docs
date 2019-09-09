@@ -3994,6 +3994,8 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - path: /docker-hub/release-notes/
+    title: Release notes
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
