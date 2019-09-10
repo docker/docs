@@ -92,13 +92,22 @@ Specifies components to install and configure for a cluster.
 
 The following components are available:
 
-- `subscription`: (Optional) A string value representing the subscription ID.
-- `license`: (Optional) A path to the cluster's license file.
+- `subscription`: (Optional) Configuration options for Docker Enterprise
+  Subscriptions.
 - `cloudstor`: (Optional) Configuration options for Docker CloudStor.
 - `dtr`: (Optional) Configuration options for Docker Trusted Registry.
 - `engine`: (Optional) Configuration options for Docker Engine.
 - `ucp`: (Optional) Configuration options for Docker Universal Control Plane.
 - `registry`: (Optional) Configuration options for authenticating nodes with a registry to pull Docker images.
+
+#### subscription
+Provide Docker Enterprise subscription information
+-  `id`: (Optional) The subscription UUID for this Docker Enterprise
+   installation `sub-xxxx`.
+-  `license`: (Optional) The absolute path to a local Docker Enterprise license
+   file `/path/to/docker_subscription.lic`.
+-  `trial`: (Optional) Specify if this is a trial subscription. Default is
+   `false`
 
 #### cloudstor
 Customizes the installation of Docker Cloudstor.
@@ -520,10 +529,18 @@ Docker cluster supports basic parameterization. The variable section defines a m
 variable:
   region: "us-east-1"
   password:
-    type: prompt
+    prompt: true
+  instance_type:
+    env: AWS_INSTANCE_TYPE
 ```
 
-Variables are referenced in the cluster definition as `${variable_name}`. For example, `${region}` is substituted as `us-east-2` through the cluster definition.
+Variables are referenced in the cluster definition as `${variable_name}`. For
+example, `${region}` is substituted as `us-east-2` through the cluster
+definition.
 
-The type defines how the variable behaves. This is currently limited in scope to:
-- `prompt`: Requests the value from the user and does not echo characters as the value is entered.
+In addition to providing a literal value for variables, you can specify values
+by:
+
+ - `prompt: true` - Request the value from the user and do not echo characters
+   as the value is entered.
+ - `env`: Obtain the value from an environment variable
