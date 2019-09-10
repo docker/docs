@@ -739,7 +739,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 * Fix swarm overlay networking not working after `--force-new-cluster`. [docker/libnetwork#2307](https://github.com/docker/libnetwork/pull/2307)
 
-## .1-ee-10
+## 18.03.1-ee-10
 
 2019-07-17
 
