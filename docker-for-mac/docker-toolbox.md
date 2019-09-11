@@ -71,7 +71,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
         DOCKER_TLS_VERIFY=1
         DOCKER_CERT_PATH=/Users/<your_username>/.docker/machine/machines/default
 
-    If this command returns no output, you are ready to use Docker Desktop for Mac.
+    If this command returns no output, you are ready to use Docker Desktop.
 
     If it returns output (as shown in the example), unset
     the `DOCKER` environment variables to make the client talk to the
@@ -95,7 +95,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
 
 > **Note**: If you have a shell script as part of your profile that sets these
 > `DOCKER` environment variables automatically each time you open a command
-> window, then you need to unset these each time you want to use Docker Desktop for Mac.
+> window, then you need to unset these each time you want to use Docker Desktop.
 
 > If you install Docker Desktop on a machine where Docker Toolbox is installed..
 >
@@ -132,20 +132,20 @@ several versions of docker client.
 ### Checking component versions
 
 Ideally, the Docker CLI client and Docker Engine should be the same version.
-Mismatches between client and server, and among host machines you might have
+Mismatches between client and server, and host machines you might have
 created with Docker Machine can cause problems (client can't talk to the server
 or host machines).
 
 If you have already installed [Docker Toolbox](/toolbox/overview/), and then
-install Docker Desktop for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker Desktop is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
+installed Docker Desktop, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker Desktop is `Version: 19.03.1` and the server (which was installed earlier with Toolbox) is `Version: 19.03.2`.
 
     $ docker version
     Client:
-    Version:      1.11.1
+    Version:      19.03.1
     ...
 
     Server:
-    Version:      1.11.0
+    Version:      19.03.2
     ...
 
 Also, if you created machines with Docker Machine (installed with Toolbox) then
@@ -156,9 +156,9 @@ is running a different version of server.
 
     $ docker-machine ls
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER    ERRORS
-    aws-sandbox      -        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0
-    default          *        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.1
-    docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.10.0
+    aws-sandbox      -        amazonec2      Running   tcp://52.90.113.128:2376            v19.03.1
+    default          *        virtualbox     Running   tcp://192.168.99.100:2376           v19.03.2
+    docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v19.03.1
 
 You might also run into a similar situation with Docker Universal Control Plane (UCP).
 
