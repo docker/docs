@@ -285,7 +285,7 @@ guides:
     - path: /config/containers/runmetrics/
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/
-      title: Limit a container's resources
+      title: Runtime options with Memory, CPUs, and GPUs
     - path: /config/labels-custom-metadata/
       title: Apply custom metadata to containers
       nosync: true
