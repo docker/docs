@@ -272,7 +272,6 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 ```yaml
 apiVersion: v1alpha1
-generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
 services: # List of service templates available
 - apiVersion: v1alpha1 # here is the service definition for our service template.
@@ -307,8 +306,8 @@ apiVersion: v1alpha1
 channel: master
 kind: Preferences
 repositories:
-- name: custom-services                # here
-  url: file://path/to/my/library.yaml
+- name: custom-services
+  url: file:///path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
 ```
@@ -375,7 +374,6 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 ```yaml
 apiVersion: v1alpha1
-generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
 services: # List of service templates available
 - apiVersion: v1alpha1 # here is the service definition for our service template.
@@ -414,8 +412,8 @@ apiVersion: v1alpha1
 channel: master
 kind: Preferences
 repositories:
-- name: custom-services                # here
-  url: file://path/to/my/library.yaml
+- name: custom-services
+  url: file:///path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
 ```
