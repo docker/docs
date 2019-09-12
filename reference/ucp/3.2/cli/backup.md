@@ -9,9 +9,12 @@ Create a backup of a UCP manager node.
 ## Usage
 
 ```bash
-docker container run --log-driver none --rm -i \
+docker container run \
+    --rm \
+    --interactive \
     --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    --log-driver none \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
     backup [command options] > backup.tar
 ```
@@ -40,15 +43,47 @@ Note:
     docker run <other options> --mount type=bind,src=/home/user/backup:/backup docker/ucp --file /backup/backup.tar
     ```
 
+### SELinux
+
+If you are installing UCP on a manager node with SELinunx enabled at the daemon
+and operating system level, you will need to pass `--security-opt
+label=disable` in to your install command. This flag will disable SELinux
+policies on the installation container.  The UCP installation container mounts
+and configures the Docker Socket as part of the UCP installation container,
+therefore the UCP installation will fail with a permission denied error if you
+fail to pass in this flag.
+
+```
+FATA[0000] unable to get valid Docker client: unable to ping Docker daemon: Got
+permission denied while trying to connect to the Docker daemon socket at
+unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/_ping: dial
+unix /var/run/docker.sock: connect: permission denied - If SELinux is enabled
+on the Docker daemon, make sure you run UCP with "docker run --security-opt
+label=disable -v /var/run/docker.sock:/var/run/docker.sock ..."
+```
+
+An installation command for a system with SELinux enabled at the daemon level
+would be:
+
+```bash
+docker container run \
+    --rm \
+    --interactive \
+    --name ucp \
+    --security-opt label=disable \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    backup [command options] > backup.tar
+```
+
 ## Options
 
-| Option                 | Description                                                                   |
-|:-----------------------|:------------------------------------------------------------------------------|
-| `--debug, -D`          | Enable debug mode                                                             |
-| `--file *value*`       | Name of the file to write the backup contents to. Ignored in interactive mode |
-| `--jsonlog`            | Produce json formatted output for easier parsing                              |
-| `--interactive, -i`    | Run in interactive mode and prompt for configuration values                   |
-| `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)           |
-| `--passphrase` *value* | Encrypt the tar file with a passphrase                                        |
-| `--include-logs`		 | If set to false, there is no log file generated, and the backup is the contents of the UCP backup without a log file. 							     |
-| `--security-opt label=disable` | If Docker Enterprise Engine has SELinux enabled, include this option to back up UCP.                                                        |
+| Option                 | Description                                                                                                                                                                 |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--debug, -D`          | Enable debug mode                                                                                                                                                           |
+| `--file *value*`       | Name of the file to write the backup contents to. Ignored in interactive mode                                                                                               |
+| `--jsonlog`            | Produce json formatted output for easier parsing                                                                                                                            |
+| `--include-logs`       | Only relevant if `--file` is also included. If true, an encrypted `backup.log` file will be stored along side the `backup.tar` in the mounted directory. Default is `true`. |
+| `--interactive, -i`    | Run in interactive mode and prompt for configuration values                                                                                                                 |
+| `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)                                                                                                         |
+| `--passphrase` *value* | Encrypt the tar file with a passphrase                                                                                                                                      |
