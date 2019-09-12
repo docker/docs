@@ -2,9 +2,9 @@
 redirect_from:
 - /engine/articles/systemd/
 - /engine/admin/resource_constraints/
-title: "Specify a container's resources"
-description: "Specify the system resources a container can use"
-keywords: "docker, daemon, configuration"
+title: "Runtime options with Memory, CPUs, and GPUs"
+description: "Specify the runtime options for a container"
+keywords: "docker, daemon, configuration, runtime"
 ---
 
 By default, a container has no resource constraints and can use as much of a

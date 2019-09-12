@@ -50,7 +50,7 @@ upgrade your installation to the latest release.
 
 ### Bootstrap
 * Fixed various issues in install, uninstall, backup and restore when UCP
-  Telemetry data had been disabled.
+  Telemetry data had been disabled. (ENGORC-2593)
 
 | Component             | Version |
 | --------------------- | ------- |

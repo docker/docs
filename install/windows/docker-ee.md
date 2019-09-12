@@ -60,9 +60,21 @@ To install the Docker Engine - Enterprise on your hosts, Docker provides a
 3.  Test your Docker Engine - Enterprise installation by running the 
     `hello-world` container.
 
+    **Windows Server 2019**
+
     ```powershell
     docker run hello-world:nanoserver
+    ```
 
+    **Windows Server 2016**
+
+    ```powershell
+    docker run hello-world:nanoserver-sac2016
+    ```
+
+    The container starts, prints the hello message, and then exits.
+
+    ```
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
     bce2fbc256ea: Pull complete
@@ -187,8 +199,16 @@ manually, via a script, or on air-gapped systems.
 
 3.  Test your Docker EE installation by running the `hello-world` container.
 
+    **Windows Server 2019**
+
     ```powershell
     docker container run hello-world:nanoserver
+    ```
+
+    **Windows Server 2016**
+
+    ```powershell
+    docker container run hello-world:nanoserver-sac2016
     ```
 
 ## Install a specific version

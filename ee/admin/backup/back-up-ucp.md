@@ -92,7 +92,7 @@ $ docker container run \
     {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup \
     --file mybackup.tar \
     --passphrase "secret12chars" \
-    --include-logs false
+    --include-logs=false
 ```
 
 > **Note**: If you are running with Security-Enhanced Linux (SELinux) enabled,
