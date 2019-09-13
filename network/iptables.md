@@ -17,7 +17,7 @@ before any rules Docker creates automatically.
 
 ### Add a DOCKER-USER filter chain to allow persistent rules 
 This can be useful if you need to pre-populate `iptables` rules that need to be in place before 
-Docker runs. The following example creates a new chain named `FILTERS` in which network traffic 
+Docker runs. The following example illustrates how rules can be added to the DOCKER-USER chain
 from `INPUT` AND `DOCKER-USER` is put.
 
 ### Restrict connections to the Docker daemon
