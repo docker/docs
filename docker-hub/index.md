@@ -77,14 +77,19 @@ redirect_from:
 - /apidocs/overview/
 ---
 
-[Docker Hub](https://hub.docker.com) is a service provided by Docker for finding and sharing container images with your team. It provides the following major features:
+[Docker Hub](https://hub.docker.com) is a service provided by Docker for
+finding and sharing container images with your team. It provides the following
+major features:
 * [Repositories](/docker-hub/repos.md): Push and pull container images.
-* [Teams & Organizations](/docker-hub/orgs.md): Manage access to private repositories of container images.
-* [Official Images](/docker-hub/official_images.md): Pull and use high-quality container images provided by Docker.
-* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull and use high-quality container
-  images provided by external vendors. Certified images also include support and guarantee
-  compatibility with Docker Enterprise.
-* [Builds](/docker-hub/builds.md): Automatically build container images from GitHub and Bitbucket and push them to Docker Hub
+* [Teams & Organizations](/docker-hub/orgs.md): Manage access to private
+repositories of container images.
+* [Official Images](/docker-hub/official_images.md): Pull and use high-quality
+container images provided by Docker.
+* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull and use high-
+quality container images provided by external vendors. Certified images also
+include support and guarantee compatibility with Docker Enterprise.
+* [Builds](/docker-hub/builds.md): Automatically build container images from
+GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](/docker-hub/webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
 
@@ -97,43 +102,57 @@ Start by [creating an account](https://hub.docker.com/signup).
 ### Step 2: Create your first repository
 
 To create a repo:
-1. Sign in to [Docker Hub](https://hub.docker.com)
-2. Click on Create Repository on the Docker Hub welcome page: ![Welcome](images/index-welcome.png)
-3. Name it **<your_username>/my-first-repo** as shown below. Select **Private**:
 
-![Create Repository](images/index-create-repo.png)
+1. Sign in to [Docker Hub](https://hub.docker.com).
 
-You've created your first repo. You should see:
+2. Click on **Create a Repository** on the Docker Hub welcome page:
 
-![Repository Created](images/index-repo-created.png)
+    ![Welcome](images/index-welcome.png)
+
+3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select **Private**:
+
+    ![Create Repository](images/index-create-repo.png)
+
+    You've created your first repo. You should see:
+
+    ![Repository Created](images/index-repo-created.png)
 
 ### Step 3: Download and install Docker Desktop
 
-We'll need to download Docker Desktop to build and push a container image to Docker Hub.
+We'll need to download Docker Desktop to build and push a container image to
+Docker Hub.
 
-1. Download and install [Docker Desktop](https://docker.com/get-started). If on Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community)
-2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`
+1. Download and install [Docker Desktop](https://docker.com/get-started). If on
+Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community).
+
+2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`.
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
-Start by creating a Dockerfile to specify your application as shown below. (More on Dockerfiles [here](https://docs.docker.com/engine/reference/builder/))
+1. Start by creating a [Dockerfile](https://docs.docker.com/engine/reference/builder/)
+to specify your application as shown below:
 ```shell
 cat > Dockerfile <<EOF
 FROM busybox
 CMD echo "Hello world! This is my first Docker image."
 EOF
 ```
-2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image
-3. Test your docker image locally by running `docker run <your_username>/my-first-repo`
-4. Run `docker push <your_username>/my-first-repo` to push your Docker image to Docker Hub
 
-You should see output similar to:
+2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image.
 
-![Terminal](images/index-terminal.png)
+3. Test your docker image locally by running `docker run <your_username>/my-first-repo`.
 
-And in Docker Hub, your repository should have a new `latest` tag available under **Tags**:
+4. Run `docker push <your_username>/my-first-repo` to push your Docker image to
+Docker Hub.
 
-![Tag Created](images/index-tag.png)
+    You should see output similar to:
+
+    ![Terminal](images/index-terminal-2019.png)
+
+    And in Docker Hub, your repository should have a new `latest` tag available
+    under **Tags**:
+
+    ![Tag Created](images/index-tag.png)
 
 Congratulations! You've successfully:
 - Signed up for Docker Hub
@@ -143,7 +162,8 @@ Congratulations! You've successfully:
 
 ### Next steps
 
-- Create an [Organization](orgs.md) to use Docker Hub with your team.
-- Automatically build container images from code through [Builds](builds/index.md).
-- [Explore](https://hub.docker.com/explore) Official & Publisher Images
-- [Upgrade your plan](upgrade.md) to push additional private Docker images to Docker Hub
+- Create an [organization](orgs.md) to use Docker Hub with your team.
+- Automatically build container images from code through [builds](builds/index.md).
+- [Explore](https://hub.docker.com/explore) official & publisher Images.
+- [Upgrade your plan](upgrade.md) to push additional private Docker images to
+Docker Hub.
