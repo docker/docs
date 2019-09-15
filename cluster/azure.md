@@ -20,10 +20,10 @@ file which will inject this data into the environment at runtime.  For example, 
 a file named `my-azure-creds.sh` similar to the following containing your credentials:
 
 ```bash
-export ARM_CLIENT_ID='aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
-export ARM_CLIENT_SECRET='ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdef='
-export ARM_SUBSCRIPTION_ID='ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'
-export ARM_TENANT_ID='kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'
+export ARM_CLIENT_ID='****'
+export ARM_CLIENT_SECRET='****'
+export ARM_SUBSCRIPTION_ID='****'
+export ARM_TENANT_ID='****'
 ```
 
 This file should be treated as sensitive data with file permissions set appropriately.
@@ -51,7 +51,7 @@ Create a file called `cluster.yml` in your directory and paste this in:
 ```yaml
 variable:
   region: "Azure region to deploy"
-  ucp_password: 
+  ucp_password:
     type: prompt
 
 provider:
@@ -60,13 +60,13 @@ provider:
 
 cluster:
   engine:
-    version: ee-stable-19.03
+    version: ee-stable-{{ site.docker_ee_version }}
   ucp:
-    version: docker/ucp:3.2.0
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
     username: admin
     password: ${ucp_password}
   dtr:
-    version: docker/dtr:2.7.1
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 
 resource:
   azurerm_virtual_machine:
@@ -161,11 +161,11 @@ provider:
     version: ~> 1.32.1
 cluster:
   dtr:
-    version: docker/dtr:2.7.1
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
   engine:
     storage_volume: /dev/disk/azure/scsi1/lun0
     url: https://storebits.docker.com/ee/ubuntu/sub-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    version: ee-stable-19.03
+    version: ee-stable-{{ site.docker_ee_version }}
   kubernetes:
     cloud_provider: true
     load_balancer: false
@@ -178,7 +178,7 @@ cluster:
     azure_ip_count: "128"
     pod_cidr: 172.31.0.0/16
     username: admin
-    version: docker/ucp:3.2.0
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 resource:
   azurerm_lb:
     ucp:
@@ -362,11 +362,11 @@ Open `cluster.yml`.  Change the cluster versions:
 ```yaml
 cluster:
   dtr:
-    version: docker/dtr:2.7.0
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
   engine:
-    version: ee-stable-19.03.01
+    version: ee-stable-{{ site.docker_ee_version }}
   ucp:
-    version: docker/ucp:3.2.0
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 ```
 
 Run  `docker cluster update quickstart --file cluster.yml `

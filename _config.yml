@@ -119,6 +119,7 @@ defaults:
   # Latest Enterprise Platform Release
   - scope:
       path: "ee"
+      path: "cluster"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"

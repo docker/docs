@@ -17,69 +17,72 @@ When you create a docker cluster in AWS, the created cluster has:
 
 Create a `cluster.yml` file with the following information:
 ```yaml
-    variable:
-      domain: "YOUR DOMAIN, e.g. docker.com"
-      subdomain: "A SUBDOMAIN, e.g. cluster"
-      region: "THE AWS REGION TO DEPLOY, e.g. us-east-1"
-      email: "YOUR.EMAIL@COMPANY.COM"
-      ucp_password:
-        type: prompt
+variable:
+  domain: "YOUR DOMAIN, e.g. docker.com"
+  subdomain: "A SUBDOMAIN, e.g. cluster"
+  region: "THE AWS REGION TO DEPLOY, e.g. us-east-1"
+  email: "YOUR.EMAIL@COMPANY.COM"
+  ucp_password:
+    type: prompt
 
-    provider:
-      acme:
-        email: ${email}
-        server_url: https://acme-staging-v02.api.letsencrypt.org/directory
-      aws:
-        region: ${region}
-    cluster:
-      dtr:
-        version: docker/dtr:2.6.5
-      engine:
-        version: ee-stable-18.09.5
-      ucp:
-        username: admin
-        password: ${ucp_password}
-        version: docker/ucp:3.1.6
-    resource:
-      aws_instance:
-        managers:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-        registry:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-        workers:
-          instance_type: t2.xlarge
-          os: Ubuntu 16.04
-          quantity: 3
-      aws_lb:
-        apps:
-          domain: ${subdomain}.${domain}
-          instances:
-          - workers
-          ports:
-          - 80:8080
-          - 443:8443
-        dtr:
-          domain: ${subdomain}.${domain}
-          instances:
-          - registry
-          ports:
-          - 443:443
-        ucp:
-          domain: ${subdomain}.${domain}
-          instances:
-          - managers
-          ports:
-          - 443:443
-          - 6443:6443
-      aws_route53_zone:
-        dns:
-          domain: ${domain}
-          subdomain: ${subdomain}
+provider:
+  acme:
+    email: ${email}
+    server_url: https://acme-staging-v02.api.letsencrypt.org/directory
+  aws:
+    region: ${region}
+
+cluster:
+  engine:
+    version: ee-stable-{{ site.docker_ee_version }}
+  ucp:
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+    username: admin
+    password: ${ucp_password}
+  dtr:
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
+
+resource:
+  aws_instance:
+    managers:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+    registry:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+    workers:
+      instance_type: t2.xlarge
+      os: Ubuntu 16.04
+      quantity: 3
+  aws_lb:
+    apps:
+      domain: ${subdomain}.${domain}
+      instances:
+      - workers
+      ports:
+      - 80:8080
+      - 443:8443
+    dtr:
+      domain: ${subdomain}.${domain}
+      instances:
+      - registry
+      ports:
+      - 443:443
+    ucp:
+      domain: ${subdomain}.${domain}
+      instances:
+      - managers
+      ports:
+      - 443:443
+      - 6443:6443
+  aws_route53_zone:
+    dns:
+      domain: ${domain}
+      subdomain: ${subdomain}
 ```
+
 In this example, the cluster takes on the following topology:
 
 ![Docker Cluster Topology](./images/docker_cluster_aws.png)
@@ -144,7 +147,7 @@ To view an inventory of the clusters you created, run `docker cluster ls`:
 
     $ docker cluster ls
     ID             NAME         PROVIDER    ENGINE              UCP                DTR                STATE
-    911c882340b2   quickstart   acme, aws   ee-stable-18.09.5   docker/ucp:3.1.6   docker/dtr:2.6.5   running
+    911c882340b2   quickstart   acme, aws   ee-stable-{{ site.docker_ee_version }}  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}   {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}   running
 
 For detailed information about the cluster, run `docker cluster inspect quickstart`.
 
@@ -165,16 +168,16 @@ provider:
     version: ~> 1.0
 cluster:
   dtr:
-    version: docker/dtr:2.6.5
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
   engine:
     storage_volume: /dev/xvdb
-    version: ee-stable-18.09.5
+    version: ee-stable-{{ site.docker_ee_version }}
   registry:
     url: https://index.docker.io/v1/
     username: user
   ucp:
     username: admin
-    version: docker/ucp:3.1.6
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 resource:
   aws_instance:
     managers:
@@ -352,11 +355,11 @@ Open `cluster.yml`.  Change the cluster versions:
 ```yaml
 cluster:
   dtr:
-    version: docker/dtr:2.7.0
+    version: {{ page.ucp_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
   engine:
-    version: ee-stable-19.03
+    version: ee-stable-{{ site.docker_ee_version }}
   ucp:
-    version: docker/ucp:3.2.0
+    version: {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 ```
 Run  `docker cluster update quickstart --file cluster.yml `:
 
