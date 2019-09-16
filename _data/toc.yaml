@@ -3996,6 +3996,17 @@ manuals:
     title: Quickstart
   - path: /docker-hub/release-notes/
     title: Release notes
+  - sectiontitle: Two-factor Authentication
+    path: /docker-hub/2fa/
+    section:
+      - path: /docker-hub/2fa/
+        title: Enable two-factor authentication on Docker Hub
+      - path: /docker-hub/2fa/disable-2fa/
+        title: Disable two-factor authentication on Docker Hub
+      - path: /docker-hub/2fa/new-recovery-code/
+        title: Generate a new recovery code
+      - path: /docker-hub/2fa/recover-hub-account/
+        title: Recover your Docker Hub account
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
