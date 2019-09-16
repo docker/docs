@@ -3948,38 +3948,6 @@ manuals:
     title: Working with Docker Contexts
   - path: /engine/reference/commandline/context/
     title: CLI reference
-- sectiontitle: Experimental
-  section:
-  - sectiontitle: Docker Assemble
-    section:
-    - path: /assemble/install/
-      title: Install
-    - path: /assemble/spring-boot/
-      title: Build a Spring Boot project
-    - path: /assemble/dot-net/
-      title: Build a C# ASP.NET Core project
-    - path: /assemble/configure/
-      title: Configure
-    - path: /assemble/images/
-      title: Images
-    - path: /assemble/adv-backend-manage/
-      title: Advanced Backend Management
-    - path: /engine/reference/commandline/assemble/
-      title: CLI reference
-  - sectiontitle: Docker Buildx
-    section:
-    - path: /buildx/working-with-buildx/
-      title: Working with Docker Buildx
-    - path: /engine/reference/commandline/buildx/
-      title: CLI reference
-  - sectiontitle: Docker Template
-    section:
-    - path: /app-template/working-with-template/
-      title: Working with Docker Template
-    - path: /app-template/api-reference/
-      title: API reference
-    - path: /engine/reference/commandline/template/
-      title: CLI reference
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Hub
@@ -4030,6 +3998,38 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+- sectiontitle: Experimental
+  section:
+  - sectiontitle: Docker Assemble
+    section:
+    - path: /assemble/install/
+      title: Install
+    - path: /assemble/spring-boot/
+      title: Build a Spring Boot project
+    - path: /assemble/dot-net/
+      title: Build a C# ASP.NET Core project
+    - path: /assemble/configure/
+      title: Configure
+    - path: /assemble/images/
+      title: Images
+    - path: /assemble/adv-backend-manage/
+      title: Advanced Backend Management
+    - path: /engine/reference/commandline/assemble/
+      title: CLI reference
+  - sectiontitle: Docker Buildx
+    section:
+    - path: /buildx/working-with-buildx/
+      title: Working with Docker Buildx
+    - path: /engine/reference/commandline/buildx/
+      title: CLI reference
+  - sectiontitle: Docker Template
+    section:
+    - path: /app-template/working-with-template/
+      title: Working with Docker Template
+    - path: /app-template/api-reference/
+      title: API reference
+    - path: /engine/reference/commandline/template/
+      title: CLI reference
 - sectiontitle: Standards and compliance
   section:
   - path: /compliance/
