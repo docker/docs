@@ -22,12 +22,21 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.2
-2019-09-04
+## Docker Desktop Community 2.1.0.3
+2019-09-16
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
+
+### Upgrades
+
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
 
 Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
