@@ -12,6 +12,16 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.3.0
+2019-09-16
+
+[Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+
 ### Docker Desktop Community 2.1.2.0
 2019-09-09
 
