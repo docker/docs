@@ -5,7 +5,7 @@ noratings: true
 notoc: true
 notags: true
 title: "Docs search"
-tree: false
+skip_read_time: true
 ---
 
 <style type='text/css'>

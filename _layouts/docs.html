@@ -126,7 +126,7 @@
 							{% else %}
 								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
 							{% if page.ui_tabs or page.cli_tabs or page.api_tabs %}{% capture content %}
 
