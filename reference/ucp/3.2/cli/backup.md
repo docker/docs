@@ -45,7 +45,7 @@ Note:
 | Option                 | Description                                                                   |
 |:-----------------------|:------------------------------------------------------------------------------|
 | `--debug, -D`          | Enable debug mode                                                             |
-|  --file *value*        | Name of the file to write the backup contents to. Ignored in interactive mode |
+| `--file *value*`       | Name of the file to write the backup contents to. Ignored in interactive mode |
 | `--jsonlog`            | Produce json formatted output for easier parsing                              |
 | `--interactive, -i`    | Run in interactive mode and prompt for configuration values                   |
 | `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)           |

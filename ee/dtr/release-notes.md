@@ -22,10 +22,25 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.2
+(2019-09-03)
+
+### Bug fixes
+
+* Fixed a bug which prevented non-admin users from creating or editing promotion policies. (docker/dhe-deploy #10551)
+* Fixed an issue where promotion policy details could not be displayed. (docker/dhe-deploy #10510)
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10632)
+
+### Security
+
+* Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10570)
+
 ## 2.7.1
 (2019-7-22)
-### Bug Fixes
-*  In 2.7.0 users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
+
+### Bug fixes
+
+* In 2.7.0, users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
 
 ## 2.7.0
 (2019-7-22)
@@ -89,6 +104,17 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.9
+(2019-09-03)
+
+### Security
+
+* Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10557)
+
+### Bug fixes
+
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10633)
 
 ## 2.6.8
 (2019-7-17)
@@ -395,11 +421,21 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 # Version 2.5
 
-
 > **Important DTR Upgrade Information**
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.14
+(2019-09-03)
+
+### Security
+
+* Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10558)
+
+### Bug fixes
+
+* Fixed a bug which can cause scanning jobs to deadlock. (docker/dhe-deploy #10634)
 
 ## 2.5.13
 (2019-07-17)
@@ -986,6 +1022,13 @@ specify `--log-protocol`.
 >
 > Upgrade path from 2.4.x to 2.5: Do not opt into garbage collection, or directly upgrade to 2.5.10 if you need to opt into garbage collection.
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.4.14
+(2019-09-03)
+
+### Security
+
+* Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10554)
 
 ## 2.4.13
 

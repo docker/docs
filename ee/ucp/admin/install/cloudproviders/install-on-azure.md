@@ -196,98 +196,55 @@ for each virtual machine in the virtual machine scale set.
 
 ### Adjust the IP Count Value
 
-If you have manually attached additional IP addresses to the Virtual Machines
-(via an ARM Template, Azure CLI or Azure Portal) or you want to reduce the
-number of IP Addresses automatically provisioned by UCP from the default of 128
-addresses, you can alter the `azure_ip_count` variable in the UCP
-Configuration file before installation. If you are happy with 128 addresses per
-Virtual Machine, proceed to [installing UCP](#install-ucp).
+During a UCP installation, a user can alter the number of Azure IP addresses
+UCP will automatically provision for pods. By default UCP will provision 128
+addresses, from the same Azure Subnet as the hosts, for each Virtual Machine in
+the cluster. However if you have manually attached additional IP addresses
+to the Virtual Machines (via an ARM Template, Azure CLI or Azure Portal) or you
+are deploying in to small Azure subnet (less than /16), an `--azure-ip-count`
+flag can be used at install time. 
 
-Once UCP has been installed, the UCP [configuration
-file](../configure/ucp-configuration-file/) is managed by UCP and populated with
-all of the cluster configuration data, such as AD/LDAP information or networking
-configuration. As there is no Universal Control Plane deployed yet, we are able
-to stage a [configuration file](../configure/ucp-configuration-file/) just
-containing the Azure IP Count value. UCP will populate the rest of the cluster
-variables during and after the installation.
+> Note: Do not set the `--azure-ip-count` variable to a value of less than 6 if
+> you have not manually provisioned additional IP addresses for each Virtual
+> Machine. The UCP installation will need at least 6 IP addresses to allocate
+> to the core UCP components that run as Kubernetes pods. That is in addition
+> to the Virtual Machine's private IP address.
 
-Below are some example configuration files with just the `azure_ip_count`
-variable defined. These 3-line files can be preloaded into a Docker Swarm prior
-to installing UCP in order to override the default `azure_ip_count` value of 128 IP
-addresses per node. See [UCP configuration file](../configure/ucp-configuration-file/)
-to learn more about the configuration file, and other variables that can be staged pre-install.
+Below are some example scenarios which require the `--azure-ip-count` variable
+to be defined. 
 
-> Note: Do not set the `azure_ip_count` to a value of less than 6 if you have not
-> manually provisioned additional IP addresses for each Virtual Machine. The UCP
-> installation will need at least 6 IP addresses to allocate to the core UCP components 
-> that run as Kubernetes pods. That is in addition to the Virtual
-> Machine's private IP address.
+**Scenario 1 - Manually Provisioned Addresses**
 
 If you have manually provisioned additional IP addresses for each Virtual
-Machine, and want to disallow UCP from dynamically provisioning IP
-addresses for you, then your UCP configuration file would be: 
+Machine, and want to disable UCP from dynamically provisioning more IP
+addresses for you, then you would pass `--azure-ip-count 0` into the UCP
+installation command.
 
-```bash
-$ vi example-config-1
-[cluster_config]
-  azure_ip_count = "0"
-```
+**Scenario 2 - Reducing the number of Provisioned Addresses**
 
-If you want to reduce the IP addresses dynamically allocated from 128 to a
-custom value, then your UCP configuration file would be: 
+If you want to reduce the number of IP addresses dynamically allocated from 128
+addresses to a custom value due to:
 
-```bash
-$ vi example-config-2
-[cluster_config]
-  azure_ip_count = "20" # This value may be different for your environment
-```
+- Primarily using the Swarm Orchestrator
+- Deploying UCP on a small Azure subnet (for example /24)
+- Plan to run a small number of Kubernetes pods on each node. 
 
-See [Considerations for IPAM
-Configuration](#considerations-for-ipam-configuration) to calculate an
-appropriate value.
+For example if you wanted to provision 16 addresses per virtual machine, then
+you would pass `--azure-ip-count 16` into the UCP installation command. 
 
-To preload this configuration file prior to installing UCP:
-
-1. Copy the configuration file to a Virtual Machine that you wish to become a UCP Manager Node. 
-  
-2. Initiate a Swarm on that Virtual Machine.
-
-    ```bash
-    $ docker swarm init
-    ```
-
-3. Upload the configuration file to the Swarm, by using a [Docker Swarm Config](/engine/swarm/configs/). 
-This Swarm Config will need to be named `com.docker.ucp.config`.
-    
-    ```bash
-    $ docker config create com.docker.ucp.config <local-configuration-file>
-    ```
-
-4. Check that the configuration has been loaded succesfully.
-    
-    ```bash
-    $ docker config list
-    ID                          NAME                                                      CREATED             UPDATED
-    igca3q30jz9u3e6ecq1ckyofz   com.docker.ucp.config                                     1 days ago          1 days ago
-    ```
-
-5. You are now ready to [install UCP](#install-ucp). As you have already staged
-   a UCP configuration file, you will need to add `--existing-config` to the
-   install command below.  
-
-If you need to adjust this value post-installation, see [instructions](../configure/ucp-configuration-file/)
-on how to download the UCP configuration file, change the value, and update the configuration via the API. 
-If you reduce the value post-installation, existing virtual machines will not be
-reconciled, and you will have to manually edit the IP count in Azure.  
+If you need to adjust this value post-installation, see
+[instructions](../configure/ucp-configuration-file/) on how to download the UCP
+configuration file, change the value, and update the configuration via the API.
+If you reduce the value post-installation, existing virtual machines will not
+be reconciled, and you will have to manually edit the IP count in Azure.  
 
 ### Install UCP
 
 Run the following command to install UCP on a manager node. The `--pod-cidr`
 option maps to the IP address range that you have configured for the Azure
 subnet, and the `--host-address` maps to the private IP address of the master
-node. Finally if you have set the [Ip Count
-Value](#adjusting-the-ip-count-value) you will need to add `--existing-config`
-to the install command below.
+node. Finally if you want to adjust the amount of IP addresses provisioned to
+each virtual machine pass `--azure-ip-count`.
 
 > Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet
 > attached the hosts. For example, if the Azure Virtual Network had the range

@@ -96,7 +96,7 @@ The NodeJS service contains the following files:
 FROM alpine
 COPY assets /assets
 CMD ["cp", "/assets", "/project"]
-FROM dockertemplate/interpolator:v0.0.8 as interpolator
+FROM dockertemplate/interpolator:v0.1.5 as interpolator
 COPY assets /assets
 ```
 
@@ -237,7 +237,7 @@ You can then use the file to obtain values for the parameters and use this infor
 To use the `interpolator` image, update `my-service/Dockerfile` to use the following Dockerfile:
 
 ```conf
-FROM dockertemplate/interpolator:v0.0.3-beta1
+FROM dockertemplate/interpolator:v0.1.5
 COPY assets .
 ```
 
@@ -272,7 +272,6 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 ```yaml
 apiVersion: v1alpha1
-generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
 services: # List of service templates available
 - apiVersion: v1alpha1 # here is the service definition for our service template.
@@ -289,7 +288,7 @@ services: # List of service templates available
 
 Now that you have created a local repository and added service definitions to it, you must make Docker Template aware of these. To do this:
 
-1. Edit `~/.docker/dockertemplate/preferences.yaml` as follows:
+1. Edit `~/.docker/application-template/preferences.yaml` as follows:
 
 ```yaml
 apiVersion: v1alpha1
@@ -307,8 +306,8 @@ apiVersion: v1alpha1
 channel: master
 kind: Preferences
 repositories:
-- name: custom-services                # here
-  url: file://path/to/my/library.yaml
+- name: custom-services
+  url: file:///path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
 ```
@@ -375,7 +374,6 @@ Create a local repository file called `library.yaml` anywhere on your local driv
 
 ```yaml
 apiVersion: v1alpha1
-generated: "2018-06-13T09:24:07.392654524Z"
 kind: RepositoryContent
 services: # List of service templates available
 - apiVersion: v1alpha1 # here is the service definition for our service template.
@@ -396,7 +394,7 @@ templates: # List of application templates available
 
 Now that you have created a local repository and added application definitions, you must make Docker Template aware of these. To do this:
 
-1. Edit `~/.docker/dockertemplate/preferences.yaml` as follows:
+1. Edit `~/.docker/application-template/preferences.yaml` as follows:
 
 ```yaml
 apiVersion: v1alpha1
@@ -414,8 +412,8 @@ apiVersion: v1alpha1
 channel: master
 kind: Preferences
 repositories:
-- name: custom-services                # here
-  url: file://path/to/my/library.yaml
+- name: custom-services
+  url: file:///path/to/my/library.yaml
 - name: library-master
   url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
 ```

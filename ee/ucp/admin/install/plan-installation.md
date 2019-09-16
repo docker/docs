@@ -42,22 +42,79 @@ this.
 
 ## Avoid IP range conflicts
 
-Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-address-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md). 
+Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.  
+Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.  
+Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.  
+Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.  
+Kubernetes `service-cluster-ip-range` - CIDR range for Kubernetes services, default `10.96.0.0/16`.
 
-> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.
+### Engine
 
-### Kubernetes IP Range Conflicts
+There are two IP ranges used by the engine for the `docker0` and `docker_gwbridge` interface:
+
+#### docker0
+
+By default, the Docker engine creates and configures the host system with a network interface called `docker0`, which is an ethernet bridge device. If you don't specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.
+
+Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16`.
+
+The recommended way to configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` interface:
+
+```json
+{
+  "bip": "172.17.0.1/16",
+  "fixed-cidr": "172.17.0.0/16",
+}
+```
+
+`bip`: Supply a specific bridge IP range for the `docker0` interface, using standard CIDR notation. Default is `172.17.0.1/16`.
+
+`fixed-cidr`: Restrict the IP range for `docker0`, using standard CIDR notation. Default is `172.17.0.0/16`.
+This range must be an IPv4 range for fixed IPs, and must be a subset of the bridge IP range (`bip` in `daemon.json`). For example, with `172.17.0.0/17`, IPs for your containers will be chosen from the first half of addresses(`172.17.0.1` - `172.17.127.254`) included in the `bip`(`172.17.0.0/16`) subnet.
+
+#### docker_gwbridge
+
+ The `docker_gwbridge` is a virtual bridge that connects the overlay networks (including the `ingress` network) to an individual Docker engine's physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for `docker_gwbridge` is `172.18.0.0/16`.
+
+ > **Note**: If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
+
+ The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the interface:
+
+ ```json
+ {
+     "default-address-pools": [
+         {"base":"172.18.0.0/16","size":24},
+         {"base":"###.###.###.###/##","size":##}
+     ]
+ }
+ ```
+
+`default-address-pools`:  A list of IP address pools for local bridge networks, the default is a single pool `{"base":"172.18.0.0/16","size":24}`. This allocates `/24` network from the `172.18.0.0/16` CIDR range for local bridge networks. Each entry in the list contain the following:
+
+`base`: CIDR range to be divided up for bridge networks, the default is `172.18.0.0/16`
+
+`size`: CIDR netmask that determines the default network size to allocate from the `base` pool, the default is `24`
+
+### Swarm
+
+Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-addr-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md).
+
+> **Note**: The Swarm `default-addr-pool` setting is separate from the Docker engine `default-address-pools` setting. They are two separate ranges that are used for different purposes.
+
+> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.
+
+### Kubernetes
 
 There are 2 internal IP ranges used within Kubernetes that may overlap and
 conflict with the underlying infrastructure:
 
-- The Pod Network -  Each Pod in Kubernetes is given an IP address from either
+* The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
-  IP addresses on the `192.168.0.0/16` range. This can be customised at install
-  time using the `--pod-cidr` flag. 
+  IP addresses on the `192.168.0.0/16` range. This can be customized at install
+  time using the `--pod-cidr` flag.
 
-- The Services Network - When a user exposes a Service in Kubernetes it is
-  accesible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
+* The Services Network - When a user exposes a Service in Kubernetes it is
+  accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
   this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
   changed at install time with the `--service-cluster-ip-range` flag.
 
@@ -96,8 +153,8 @@ DTR, your load balancer needs to distinguish traffic between the two by IP
 address or port number.
 
 * If you want to configure your load balancer to listen on port 443:
-    * Use one load balancer for UCP and another for DTR,
-    * Use the same load balancer with multiple virtual IPs.
+  * Use one load balancer for UCP and another for DTR,
+  * Use the same load balancer with multiple virtual IPs.
 * Configure your load balancer to expose UCP or DTR on a port other than 443.
 
 If you want to install UCP in a high-availability configuration that uses
@@ -133,6 +190,6 @@ manager nodes joining the cluster or being promoted to a manager role.
 
 ## Where to go next
 
-- [System requirements](system-requirements.md)
-- [Install UCP](index.md)
+* [System requirements](system-requirements.md)
+* [Install UCP](index.md)
 

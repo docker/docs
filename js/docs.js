@@ -223,7 +223,10 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-if (readCookie("night") == "true") {
+var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var selectedNightTheme = readCookie("night");
+
+if (selectedNightTheme == "true" || (selectedNightTheme === null && prefersDark)) {
   applyNight();
   $('#switch-style').prop('checked', true);
 } else {
@@ -344,8 +347,7 @@ $('ul.nav li.dropdown').hover(function() {
 //     document.getElementById('pagestyle').setAttribute('href', sheet);
 // }
 
-function applyNight()
-{
+function applyNight() {
   $( "body" ).addClass( "night" );
 }
 
@@ -360,8 +362,7 @@ $('#switch-style').change(function() {
         createCookie("night",true,999)
     } else {
         applyDay();
-    //     swapStyleSheet('/css/style.css');
-        eraseCookie("night")
+        createCookie("night",false,999);
     }
 });
 
