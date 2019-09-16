@@ -20,7 +20,7 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ### Bug fixes and minor changes
 
- Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina.  For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+ Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
 
 ## Version 2.1.0.4
 2019-09-03
