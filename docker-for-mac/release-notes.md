@@ -22,12 +22,24 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.2
-2019-09-04
+## Docker Desktop Community 2.1.0.3
+2019-09-16
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
+
+### Upgrades
+
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+### Bug fixes and minor changes
+
+- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+
+[Download](https://download.docker.com/mac/stable/37877/Docker.dmg)
 
 Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
