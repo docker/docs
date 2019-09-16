@@ -109,7 +109,8 @@ To create a repo:
 
     ![Welcome](images/index-welcome.png)
 
-3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select **Private**:
+3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select
+   **Private**:
 
     ![Create Repository](images/index-create-repo.png)
 
@@ -125,7 +126,8 @@ Docker Hub.
 1. Download and install [Docker Desktop](https://docker.com/get-started). If on
 Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community).
 
-2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`.
+2. Open the terminal and sign in to Docker Hub on your computer by running
+   `docker login`.
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
@@ -138,7 +140,8 @@ CMD echo "Hello world! This is my first Docker image."
 EOF
 ```
 
-2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image.
+2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker
+   image.
 
 3. Test your docker image locally by running `docker run <your_username>/my-first-repo`.
 
