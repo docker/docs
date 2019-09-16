@@ -83,7 +83,7 @@ docker container run \
 | `--debug, -D`          | Enable debug mode                                                                                                                                                           |
 | `--file *value*`       | Name of the file to write the backup contents to. Ignored in interactive mode                                                                                               |
 | `--jsonlog`            | Produce json formatted output for easier parsing                                                                                                                            |
-| `--include-logs`       | Only relevant if `--file` is also included. If true, an encrypted `backup.log` file will be stored along side the `backup.tar` in the mounted directory. Default is `true`. |
+| `--include-logs`       | Only relevant if `--file` is also included. If true, an encrypted `backup.log` file will be stored alongside the `backup.tar` in the mounted directory. Default is `true`.  |
 | `--interactive, -i`    | Run in interactive mode and prompt for configuration values                                                                                                                 |
 | `--no-passphrase`      | Opt out to encrypt the tar file with a passphrase (not recommended)                                                                                                         |
 | `--passphrase` *value* | Encrypt the tar file with a passphrase                                                                                                                                      |
