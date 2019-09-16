@@ -32,6 +32,7 @@ Desktop for Mac](install.md#download-docker-for-mac).
 ### Upgrades
 
 - [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+
 ### Bug fixes and minor changes
 
 - All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
