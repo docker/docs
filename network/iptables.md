@@ -53,7 +53,7 @@ the source and destination. For instance, if the Docker daemon listens on both
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
-### Filtering container and host traffic
+### Filtering container traffic
 The following example provides a set of filters and uses those filters for container and host traffic: 
 
 #### To filter container traffic:
