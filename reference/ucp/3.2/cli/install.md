@@ -76,9 +76,9 @@ docker container run \
 If you are installing on a public cloud platform there is cloud specific UCP
 installation documentation:
 
-- For [Microsoft Azure](./cloudproviders/install-on-azure/) this is
+- For [Microsoft Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure/) this is
   **mandatory**
-- For [AWS](./cloudproviders/install-on-aws/) this is optional.
+- For [AWS](/ee/ucp/admin/install/cloudproviders/install-on-aws/) this is optional.
 
 ## Options
 
