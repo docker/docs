@@ -17,13 +17,13 @@ before any rules Docker creates automatically.
 
 ### Add a DOCKER-USER filter chain to allow persistent rules 
 This can be useful if you need to pre-populate `iptables` rules that need to be in place before 
-Docker runs. The following example illustrates how rules can be added to the DOCKER-USER chain
+Docker runs. The following example illustrates how rules can be added to the `DOCKER-USER` chain
 
 ### Restrict connections to the Docker daemon
 
 By default, all external source IPs are allowed to connect to the Docker daemon.
 To allow only a specific IP or network to access the containers, insert a
-negated rule at the top of the DOCKER filter chain. For example, the following
+negated rule at the top of the `DOCKER-USER` filter chain. For example, the following
 rule restricts external access to all IP addresses except 192.168.1.1:
 
 ```bash
@@ -56,11 +56,7 @@ for a lot more information.
 ### Filtering container traffic
 The following example provides a set of filters and uses those filters for container and host traffic: 
 
-#### To filter container traffic:
-
 ```
-*filter
-
 # WAN = eth0 ; LAN = eth1
 
 # Reset counters
@@ -94,72 +90,9 @@ COMMIT
 	For tighter control, all rules allowing the connection should have `--ctdir` added to specifically 
 	express their meaning, as shown in the following example:
 	
-	```
 	-A DOCKER-USER -s 1.2.3.4/32 -i eth0 -p tcp -m conntrack --ctorigdstport 80 --ctdir ORIGINAL -j ACCEPT
-	```
-#### To filter host traffic:
 
-> **Note**: Set the filter for WAN based on your host WAN interface.
-
-```
-*filter
-
-# WAN = eth0 ; LAN = eth1
-
-# Reset counters
-:INPUT ACCEPT [0:0]
-:FORWARD DROP [0:0]
-:OUTPUT ACCEPT [0:0]
-:FILTERS - [0:0]
-:FILTERS-LAN - [0:0]
-
-# Flush
--F INPUT
--F FILTERS
--F FILTERS-LAN
-
-# Select
--A INPUT -i lo -j ACCEPT
--A INPUT -i eth1 -j FILTERS-LAN
--A INPUT -i eth0 -j FILTERS
-
-# Filters
-## Activate established connexions
--A FILTERS -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-## Monitoring
--A FILTERS -s 10.1.1.1/32 -p udp -m udp --dport 161 -j ACCEPT
--A FILTERS -s 10.1.1.1/32 -p tcp -m tcp --dport 5666 -j ACCEPT
--A FILTERS -s 10.1.1.1/32 -p icmp --icmp-type any -j ACCEPT
-
-## Admin ssh
--A FILTERS -s 10.0.0.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
--A FILTERS -s 10.0.1.1/32 -p tcp -m tcp --dport 22 -j ACCEPT
-
-## Admin ping
--A FILTERS -s 10.0.0.1/32 -p icmp --icmp-type any -j ACCEPT
--A FILTERS -s 10.0.1.1/32 -p icmp --icmp-type any -j ACCEPT
-
-## Drop public in
--A FILTERS -j DROP
-
-# Filters-LAN
-## Activate established connexions
--A FILTERS-LAN -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-## Admin allow all
--A FILTERS-LAN -s 10.0.1.1/32 -j ACCEPT
-
-## Ping
--A FILTERS-LAN -s 10.0.1.1/24 -p icmp --icmp-type any -j ACCEPT
-
-## Log and Drop lan in
--A FILTERS-LAN -j LOG --log-prefix "[LAN BLOCK] "
--A FILTERS-LAN -j DROP
-
-## Commit
-COMMIT
-Load this into the kernel with:
+Load these rules with:
 	
 	```bash
 	$ iptables-restore -n /etc/iptables.conf
