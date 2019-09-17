@@ -25,11 +25,11 @@ There are two options for provisoning IPs for the Kubernetes cluster on Azure:
 - _An automated mechanism provided by UCP which allows for IP pool configuration and maintenance
   for standalone Azure virtual machines._ This service runs within the
   `calico-node` daemonset and provisions 128 IP addresses for each
-  node by default. For information on customizing this value, see [Adjusting the IP count value](#adjusting-the-ip-count-value).
+  node by default. For information on customizing this value, see [Adjust the IP count value](#adjust-the-ip-count-value).
 - _Manual provision of additional IP address for each Azure virtual machine._ This
   could be done through the Azure Portal, the Azure CLI `$ az network nic ip-config create`,
   or an ARM template. You can find an example of an ARM template
-  [here](#manually-provision-ip-address-as-part-of-an-azure-virtual-machine-scale-set).
+  [here](#manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set).
 
 ## Azure Prerequisites 
 
@@ -233,7 +233,7 @@ For example if you wanted to provision 16 addresses per virtual machine, then
 you would pass `--azure-ip-count 16` into the UCP installation command. 
 
 If you need to adjust this value post-installation, see
-[instructions](../configure/ucp-configuration-file/) on how to download the UCP
+[instructions](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/) on how to download the UCP
 configuration file, change the value, and update the configuration via the API.
 If you reduce the value post-installation, existing virtual machines will not
 be reconciled, and you will have to manually edit the IP count in Azure.  
