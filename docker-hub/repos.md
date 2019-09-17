@@ -66,7 +66,7 @@ You can also make an existing repository private by going to the repo's **Settin
 
 You get one private repository for free with your Docker Hub user account (not usable for
 organizations you're a member of). If you need more private repositories for your user account, upgrade
-your Docker Hub plan from your [Billing Information](https://hub.docker.com/account/billing-plans/) page.
+your Docker Hub plan from your [Billing Information](https://hub.docker.com/billing/plan) page.
 
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
