@@ -159,7 +159,11 @@ COMMIT
 
 ## Commit
 COMMIT
-```
+Load this into the kernel with:
+	
+	```bash
+	$ iptables-restore -n /etc/iptables.conf
+	```
 
 ## Prevent Docker from manipulating iptables
 
