@@ -30,7 +30,7 @@ you give it a try!
 
 ### Overall doc improvements
 
-Most commits will be made against the `master` branch. This include:
+Most commits will be made against the `master` branch. This includes:
 
 - Conceptual and task-based information not specific to new features
 - Restructuring / rewriting
