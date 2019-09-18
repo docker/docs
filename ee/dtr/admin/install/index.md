@@ -138,12 +138,6 @@ To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) c
 
 2.  Run the join command.
 
-    When you join a replica to a DTR cluster, you need to specify the
-    ID of a replica that is already part of the cluster. You can find an
-    existing replica ID by going to the **Shared Resources > Stacks** page on UCP.
-
-    Then run:
-
     ```bash
     docker run -it --rm \
       {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
@@ -157,6 +151,10 @@ To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) c
     > install the DTR replica. This is NOT the UCP Manager URL.
     {: .important}
 
+    When you join a replica to a DTR cluster, you need to specify the
+    ID of a replica that is already part of the cluster. You can find an
+    existing replica ID by going to the **Shared Resources > Stacks** page on UCP.
+    
 3. Check that all replicas are running.
 
     In your browser, navigate to UCP's
