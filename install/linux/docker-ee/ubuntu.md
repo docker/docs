@@ -137,13 +137,15 @@ from the repository.
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
 
-   > **Note**: If you need to run something other than Docker EE 2.0, please see the following instructions:
+   > **Note**: If you need to run something other than Docker EE 3.0, please see the following instructions:
+   > * [18.09](https://docs.docker.com/v18.09/ee/supported-platforms/) - Docker Enterprise Edition 2.1 (Docker Engine, 
+   > UCP, and DTR).
    > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
    > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
    > UCP, and DTR).
 
     ```bash
-    $ DOCKER_EE_VERSION=18.09
+    $ DOCKER_EE_VERSION=19.03
     ```
 
 5.  Add Docker's official GPG key using your customer Docker EE repository URL:
