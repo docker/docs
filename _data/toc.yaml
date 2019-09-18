@@ -20,7 +20,169 @@ guides:
   section:
   - path: /engine/docker-overview/
     title: Docker overview
-  - sectiontitle: Get started with Docker
+  - sectiontitle: Get Docker
+    section:
+    - path: /install/overview/
+      title: Docker editions
+    - sectiontitle: Docker Engine - Community
+      section:
+      - title: About Docker Engine - Community
+        path: /install/
+      - sectiontitle: Cloud
+        section:
+        - sectiontitle: Docker for AWS
+          section:
+          - path: /docker-for-aws/why/
+            title: Why Docker for AWS?
+          - path: /docker-for-aws/
+            title: Setup & prerequisites
+          - path: /docker-for-aws/iam-permissions/
+            title: IAM permissions
+          - path: /docker-for-aws/scaling/
+            title: Scaling
+          - path: /docker-for-aws/upgrade/
+            title: Upgrading
+          - path: /docker-for-aws/deploy/
+            title: Deploy your app
+          - path: /docker-for-aws/persistent-data-volumes/
+            title: Persistent data volumes
+          - path: /docker-for-aws/load-balancer/
+            title: Load balancer
+          - path: /docker-for-aws/faqs/
+            title: FAQs
+          - path: /docker-for-aws/opensource/
+            title: Open source licensing
+          - path: /docker-for-aws/release-notes/
+            title: Release notes
+          - path: /docker-for-aws/archive/
+            title: Template archive
+        - sectiontitle: Docker for Azure
+          section:
+          - path: /docker-for-azure/why/
+            title: Why Docker for Azure?
+          - path: /docker-for-azure/
+            title: Setup & prerequisites
+          - path: /docker-for-azure/upgrade/
+            title: Upgrading
+          - path: /docker-for-azure/deploy/
+            title: Deploy your app
+          - path: /docker-for-azure/persistent-data-volumes/
+            title: Persistent data volumes
+          - path: /docker-for-azure/faqs/
+            title: FAQs
+          - path: /docker-for-azure/opensource/
+            title: Open source licensing
+          - path: /docker-for-azure/release-notes/
+            title: Release notes
+          - path: /docker-for-azure/archive/
+            title: Template archive
+      - sectiontitle: Linux
+        section:
+        - path: /install/linux/docker-ce/centos/
+          title: CentOS
+        - path: /install/linux/docker-ce/debian/
+          title: Debian
+        - path: /install/linux/docker-ce/fedora/
+          title: Fedora
+        - path: /install/linux/docker-ce/ubuntu/
+          title: Ubuntu
+        - path: /install/linux/docker-ce/binaries/
+          title: Binaries
+        - path: /install/linux/linux-postinstall/
+          title: Optional Linux post-installation steps
+      - title: MacOS
+        path: /docker-for-mac/install/
+        nosync: true
+      - title: Microsoft Windows
+        path: /docker-for-windows/install/
+        nosync: true
+    - sectiontitle: Docker Enterprise - old
+      section:
+      - title: About Docker Enterprise
+        path: /ee/supported-platforms/
+      - sectiontitle: Linux
+        section:
+        - path: /install/linux/docker-ee/centos/
+          title: CentOS
+        - path: /install/linux/docker-ee/oracle/
+          title: Oracle Linux
+        - path: /install/linux/docker-ee/rhel/
+          title: RHEL
+        - path: /install/linux/docker-ee/suse/
+          title: SLES
+        - path: /install/linux/docker-ee/ubuntu/
+          title: Ubuntu
+      - path: /install/windows/docker-ee/
+        title: Microsoft Windows Server
+      - title: Release notes
+        path: /engine/release-notes/
+        nosync: true
+    - sectiontitle: Docker Enterprise
+      section:
+      - path: /ee/
+        title: Overview
+      - path: /ee/release-notes/
+        title: Release notes
+      - path: /ee/licensing/
+        title: Licensing
+      - sectiontitle: Manage Docker Enterprise
+        section:
+        - path: /ee/docker-ee-architecture/
+          title: Docker Enterprise Architecture
+        - path: /ee/supported-platforms/
+          title: Supported platforms
+          nosync: true
+        - path: /ee/end-to-end-install/
+          title: Deploy Docker Enterprise
+        - path: /ee/upgrade/
+          title: Upgrade Docker Enterprise
+        - sectiontitle: Back up Docker Enterprise
+          section:
+          - path: /ee/admin/backup/
+            title: Overview
+          - path: /ee/admin/backup/back-up-swarm/
+            title: Back up Docker Swarm
+          - path: /ee/admin/backup/back-up-ucp/
+            title: Back up UCP
+          - path: /ee/admin/backup/back-up-dtr/
+            title: Back up DTR
+          - path: /engine/reference/commandline/cluster_backup/
+            title: Back up clusters with Docker Cluster
+        - sectiontitle: Restore Docker Enterprise
+          section:
+          - path: /ee/admin/restore/
+            title: Overview
+          - path: /ee/admin/restore/restore-swarm/
+            title: Restore Docker Swarm
+          - path: /ee/admin/restore/restore-ucp/
+            title: Restore UCP
+          - path: /ee/admin/restore/restore-dtr/
+            title: Restore DTR
+          - path: /cluster/reference/restore/
+            title: Restore clusters with Docker Cluster
+        - sectiontitle: Disaster Recovery
+          section:
+          - path: /ee/admin/disaster-recovery/
+            title: Overview
+        - path: /ee/enable-client-certificate-authentication/
+          title: Enable client certificate authentication with your PKI
+        - path: /ee/telemetry/
+          title: Manage usage data collection
+      - title: Get support
+        path: /ee/get-support/
+    - sectiontitle: Compatibility between Docker versions
+      section:
+        - path: /engine/ce-ee-node-activate/
+          title: Docker Engine Community to Enterprise Node Activate
+        - path: /engine/migration/
+          title: Migrate to Docker 1.10
+        - path: /engine/breaking_changes/
+          title: Breaking changes
+        - path: /engine/deprecated/
+          title: Deprecated Docker features
+        - path: /engine/faq/
+          title: FAQ
+  - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation"
       path: /get-started/
@@ -34,168 +196,6 @@ guides:
       path: /get-started/part5/
     - title: "Part 6: Deploy your app"
       path: /get-started/part6/
-- sectiontitle: Docker editions
-  section:
-  - path: /install/overview/
-    title: Docker editions
-  - sectiontitle: Docker Engine - Community
-    section:
-    - title: About Docker Engine - Community
-      path: /install/
-    - sectiontitle: Cloud
-      section:
-      - sectiontitle: Docker for AWS
-        section:
-        - path: /docker-for-aws/why/
-          title: Why Docker for AWS?
-        - path: /docker-for-aws/
-          title: Setup & prerequisites
-        - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
-        - path: /docker-for-aws/scaling/
-          title: Scaling
-        - path: /docker-for-aws/upgrade/
-          title: Upgrading
-        - path: /docker-for-aws/deploy/
-          title: Deploy your app
-        - path: /docker-for-aws/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-aws/load-balancer/
-          title: Load balancer
-        - path: /docker-for-aws/faqs/
-          title: FAQs
-        - path: /docker-for-aws/opensource/
-          title: Open source licensing
-        - path: /docker-for-aws/release-notes/
-          title: Release notes
-        - path: /docker-for-aws/archive/
-          title: Template archive
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
-    - title: MacOS
-      path: /docker-for-mac/install/
-      nosync: true
-    - title: Microsoft Windows
-      path: /docker-for-windows/install/
-      nosync: true
-  - sectiontitle: Docker Enterprise - old
-    section:
-    - title: About Docker Enterprise
-      path: /ee/supported-platforms/
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ee/centos/
-        title: CentOS
-      - path: /install/linux/docker-ee/oracle/
-        title: Oracle Linux
-      - path: /install/linux/docker-ee/rhel/
-        title: RHEL
-      - path: /install/linux/docker-ee/suse/
-        title: SLES
-      - path: /install/linux/docker-ee/ubuntu/
-        title: Ubuntu
-    - path: /install/windows/docker-ee/
-      title: Microsoft Windows Server
-    - title: Release notes
-      path: /engine/release-notes/
-      nosync: true
-  - sectiontitle: Docker Enterprise
-    section:
-    - path: /ee/
-      title: Overview
-    - path: /ee/release-notes/
-      title: Release notes
-    - path: /ee/licensing/
-      title: Licensing
-    - sectiontitle: Manage Docker Enterprise
-      section:
-      - path: /ee/docker-ee-architecture/
-        title: Docker Enterprise Architecture
-      - path: /ee/supported-platforms/
-        title: Supported platforms
-        nosync: true
-      - path: /ee/end-to-end-install/
-        title: Deploy Docker Enterprise
-      - path: /ee/upgrade/
-        title: Upgrade Docker Enterprise
-      - sectiontitle: Back up Docker Enterprise
-        section:
-        - path: /ee/admin/backup/
-          title: Overview
-        - path: /ee/admin/backup/back-up-swarm/
-          title: Back up Docker Swarm
-        - path: /ee/admin/backup/back-up-ucp/
-          title: Back up UCP
-        - path: /ee/admin/backup/back-up-dtr/
-          title: Back up DTR
-        - path: /engine/reference/commandline/cluster_backup/
-          title: Back up clusters with Docker Cluster
-      - sectiontitle: Restore Docker Enterprise
-        section:
-        - path: /ee/admin/restore/
-          title: Overview
-        - path: /ee/admin/restore/restore-swarm/
-          title: Restore Docker Swarm
-        - path: /ee/admin/restore/restore-ucp/
-          title: Restore UCP
-        - path: /ee/admin/restore/restore-dtr/
-          title: Restore DTR
-        - path: /cluster/reference/restore/
-          title: Restore clusters with Docker Cluster
-      - sectiontitle: Disaster Recovery
-        section:
-        - path: /ee/admin/disaster-recovery/
-          title: Overview
-      - path: /ee/enable-client-certificate-authentication/
-        title: Enable client certificate authentication with your PKI
-      - path: /ee/telemetry/
-        title: Manage usage data collection
-    - title: Get support
-      path: /ee/get-support/
-  - sectiontitle: Compatibility between Docker versions
-    section:
-      - path: /engine/ce-ee-node-activate/
-        title: Docker Engine Community to Enterprise Node Activate
-      - path: /engine/migration/
-        title: Migrate to Docker 1.10
-      - path: /engine/breaking_changes/
-        title: Breaking changes
-      - path: /engine/deprecated/
-        title: Deprecated Docker features
-      - path: /engine/faq/
-        title: FAQ
 - sectiontitle: Develop with Docker
   section:
     - sectiontitle: Develop your apps on Docker
@@ -502,40 +502,6 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
-- sectiontitle: Standards and compliance
-  section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
-    section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
-    section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
-    section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
 
 reference:
 - sectiontitle: File formats
@@ -1289,7 +1255,40 @@ reference:
       title: System and information integrity
     - path: /compliance/reference/800-53/sa/
       title: System and services acquisition
-
+- sectiontitle: Standards and compliance
+  section:
+  - path: /compliance/
+    title: Docker standards and compliance
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_37/
+      title: NIST SP 800-37 (RMF)
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/fips140_2/
+      title: FIPS 140-2
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal/
+      title: OSCAL compliance guidance
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker Enterprise Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker Engine - Community Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
+  - path: /compliance/fedramp/
+    title: FedRAMP
+  - path: /compliance/fisma/
+    title: FISMA
 
 
 
@@ -1325,7 +1324,7 @@ samples:
 manuals:
 - path: /release-notes/
   title: Release notes
-- sectiontitle: Docker Cluster
+- sectiontitle: Cluster
   section:
   - path: /cluster/
     title: Overview
@@ -1341,7 +1340,7 @@ manuals:
     title: Environment variables
   - path: /cluster/reference/
     title: Subcommands
-- sectiontitle: Docker Engine - Enterprise
+- sectiontitle: Engine - Enterprise
   section:
   - path: /ee/supported-platforms/
     title: Install Docker Engine - Enterprise
@@ -3748,7 +3747,7 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
-- sectiontitle: Docker Desktop
+- sectiontitle: Desktop
   section:
   - sectiontitle: Docker Desktop Enterprise
     section:
@@ -3838,13 +3837,13 @@ manuals:
       title: Edge release notes
     - path: /docker-for-windows/wsl-tech-preview/
       title: Docker Desktop WSL 2 Tech Preview
-- sectiontitle: Docker App
+- sectiontitle: App
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
   - path: /engine/reference/commandline/app/
     title: CLI reference
-- sectiontitle: Docker Compose
+- sectiontitle: Compose
   section:
   - path: /compose/
     title: Overview of Docker Compose
@@ -3942,48 +3941,16 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Context
+- sectiontitle: Context
   section:
   - path: /engine/context/working-with-contexts/
     title: Working with Docker Contexts
   - path: /engine/reference/commandline/context/
     title: CLI reference
-- sectiontitle: Experimental
+- sectiontitle: Hub
   section:
-  - sectiontitle: Docker Assemble
-    section:
-    - path: /assemble/install/
-      title: Install
-    - path: /assemble/spring-boot/
-      title: Build a Spring Boot project
-    - path: /assemble/dot-net/
-      title: Build a C# ASP.NET Core project
-    - path: /assemble/configure/
-      title: Configure
-    - path: /assemble/images/
-      title: Images
-    - path: /assemble/adv-backend-manage/
-      title: Advanced Backend Management
-    - path: /engine/reference/commandline/assemble/
-      title: CLI reference
-  - sectiontitle: Docker Buildx
-    section:
-    - path: /buildx/working-with-buildx/
-      title: Working with Docker Buildx
-    - path: /engine/reference/commandline/buildx/
-      title: CLI reference
-  - sectiontitle: Docker Template
-    section:
-    - path: /app-template/working-with-template/
-      title: Working with Docker Template
-    - path: /app-template/api-reference/
-      title: API reference
-    - path: /engine/reference/commandline/template/
-      title: CLI reference
-- title: Docker ID accounts
-  path: /docker-id/
-- sectiontitle: Docker Hub
-  section:
+  - title: Docker ID accounts
+    path: /docker-id/
   - path: /docker-hub/
     title: Quickstart
   - path: /docker-hub/release-notes/
@@ -4030,40 +3997,38 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-- sectiontitle: Standards and compliance
+- sectiontitle: Experimental
   section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
+  - sectiontitle: Docker Assemble
     section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
+    - path: /assemble/install/
+      title: Install
+    - path: /assemble/spring-boot/
+      title: Build a Spring Boot project
+    - path: /assemble/dot-net/
+      title: Build a C# ASP.NET Core project
+    - path: /assemble/configure/
+      title: Configure
+    - path: /assemble/images/
+      title: Images
+    - path: /assemble/adv-backend-manage/
+      title: Advanced Backend Management
+    - path: /engine/reference/commandline/assemble/
+      title: CLI reference
+  - sectiontitle: Docker Buildx
     section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
+    - path: /buildx/working-with-buildx/
+      title: Working with Docker Buildx
+    - path: /engine/reference/commandline/buildx/
+      title: CLI reference
+  - sectiontitle: Docker Template
     section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
+    - path: /app-template/working-with-template/
+      title: Working with Docker Template
+    - path: /app-template/api-reference/
+      title: API reference
+    - path: /engine/reference/commandline/template/
+      title: CLI reference
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary
