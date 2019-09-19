@@ -134,7 +134,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes is Running'.
 
-3. In order to confirm that Kubernetes is up and running, open a terminal and create a text file called `pod.yaml` with the following content:
+3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
     ```yaml
     apiVersion: v1
@@ -150,7 +150,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
-4. Create your pod:
+4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
@@ -202,9 +202,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings -> Kubernetes**.
 
-2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
+2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
 
-3. In order to confirm that Kubernetes is up and running, open a powershell and create a text file called `pod.yaml` with the following content:
+3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
     ```yaml
     apiVersion: v1
@@ -220,7 +220,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
-4. Create your pod:
+4. In powershell, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
@@ -287,7 +287,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     docker swarm init
     ```    
 
-    if all goes well, you should see a message similar to the following:    
+    If all goes well, you should see a message similar to the following:    
 
     ```shell
     Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
@@ -355,7 +355,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     docker swarm init
     ```    
 
-    if all goes well, you should see a message similar to the following:    
+    If all goes well, you should see a message similar to the following:    
 
     ```shell
     Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
@@ -418,5 +418,15 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
 
-
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+
+## CLI References
+
+Further documentation for all CLI commands used in this article are available here:
+
+- [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
+- [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
+- [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
+- [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
+- [`docker swarm init`](https://docs.docker.com/engine/reference/commandline/swarm_init/)
+- [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
