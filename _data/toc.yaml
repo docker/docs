@@ -3994,6 +3994,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - sectiontitle: Security and Authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Managing Access Tokens
   - path: /docker-hub/release-notes/
     title: Release notes
   - path: /docker-hub/repos/
