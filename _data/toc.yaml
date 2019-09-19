@@ -23,10 +23,10 @@ guides:
   - sectiontitle: Get Docker
     section:
     - path: /install/overview/
-      title: Docker editions
-    - sectiontitle: Docker Engine - Community
+      title: Docker products
+    - sectiontitle: Engine - Community
       section:
-      - title: About Docker Engine - Community
+      - title: Install
         path: /install/
       - sectiontitle: Cloud
         section:
@@ -96,10 +96,16 @@ guides:
       - title: Microsoft Windows
         path: /docker-for-windows/install/
         nosync: true
-    - sectiontitle: Docker Enterprise - old
+    - sectiontitle: Enterprise
       section:
       - title: About Docker Enterprise
         path: /ee/supported-platforms/
+      - path: /ee/
+        title: Overview
+      - path: /ee/release-notes/
+        title: Release notes
+      - path: /ee/licensing/
+        title: Licensing     
       - sectiontitle: Linux
         section:
         - path: /install/linux/docker-ee/centos/
@@ -117,14 +123,6 @@ guides:
       - title: Release notes
         path: /engine/release-notes/
         nosync: true
-    - sectiontitle: Docker Enterprise
-      section:
-      - path: /ee/
-        title: Overview
-      - path: /ee/release-notes/
-        title: Release notes
-      - path: /ee/licensing/
-        title: Licensing
       - sectiontitle: Manage Docker Enterprise
         section:
         - path: /ee/docker-ee-architecture/
