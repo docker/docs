@@ -3,7 +3,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /release-notes/
+  path: /product-manuals/
   node: manuals
 - title: Glossary
   path: /glossary/
@@ -511,7 +511,6 @@ reference:
   - title: Compose file reference
     path: /compose/compose-file/
     nosync: true
-
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
   - sectiontitle: Docker CLI (docker)
@@ -1131,7 +1130,6 @@ reference:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
   - sectiontitle: Docker Engine API
@@ -1201,7 +1199,6 @@ reference:
   - title: Registry API
     path: /registry/spec/api/
     nosync: true
-
 - sectiontitle: Drivers and specifications
   section:
   - title: Image specification
@@ -1212,7 +1209,6 @@ reference:
     path: /registry/spec/auth/
   - title: Registry storage drivers
     path: /registry/storage-drivers/
-
 - sectiontitle: Compliance control references
   section:
   - sectiontitle: NIST 800-53
@@ -1290,8 +1286,6 @@ reference:
   - path: /compliance/fisma/
     title: FISMA
 
-
-
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
@@ -1322,8 +1316,6 @@ samples:
     title: SSHd
 
 manuals:
-- path: /release-notes/
-  title: Release notes
 - sectiontitle: Cluster
   section:
   - path: /cluster/
