@@ -121,11 +121,11 @@ The best way to get started developing containerized applications is with Docker
 Docker Desktop will set up Kubernetes for you quickly and easily. Follow the setup and validation instructions appropriate for your operating system:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#local">OSX</a></li>
-  <li><a data-toggle="tab" href="#localwin">Windows</a></li>
+  <li class="active"><a data-toggle="tab" href="#kubeosx">OSX</a></li>
+  <li><a data-toggle="tab" href="#kubewin">Windows</a></li>
 </ul>
 <div class="tab-content">
-  <div id="local" class="tab-pane fade in active">
+  <div id="kubeosx" class="tab-pane fade in active">
 {% capture local-content %}
 
 #### OSX
@@ -195,7 +195,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 {{ local-content | markdownify }}
 
 </div>
-<div id="localwin" class="tab-pane fade" markdown="1">
+<div id="kubewin" class="tab-pane fade" markdown="1">
 {% capture localwin-content %}
 
 #### Windows
@@ -272,11 +272,11 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#local">OSX</a></li>
-  <li><a data-toggle="tab" href="#localwin">Windows</a></li>
+  <li class="active"><a data-toggle="tab" href="#swarmosx">OSX</a></li>
+  <li><a data-toggle="tab" href="#swarmwin">Windows</a></li>
 </ul>
 <div class="tab-content">
-  <div id="local" class="tab-pane fade in active">
+  <div id="swarmosx" class="tab-pane fade in active">
 {% capture local-content %}
 
 #### OSX
@@ -344,7 +344,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 {{ local-content | markdownify }}
 
 </div>
-<div id="localwin" class="tab-pane fade" markdown="1">
+<div id="swarmwin" class="tab-pane fade" markdown="1">
 {% capture localwin-content %}
 
 #### Windows
