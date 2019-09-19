@@ -61,165 +61,372 @@ teaches you how to:
 
 1. Set up your Docker environment (on this page)
 2. [Build an image and run it as one container](part2.md)
-3. [Scale your app to run multiple containers](part3.md)
-4. [Distribute your app across a cluster](part4.md)
-5. [Stack services by adding a backend database](part5.md)
-6. [Deploy your app to production](part6.md)
+3. [Set up and use a Kubernetes environment on your development machine](part3.md)
+4. [Set up and use a Swarm environment on your development machine](part4.md)
+5. [Share your containerized applications on Docker Hub](part5.md)
+6. [Continue your learning journey with further resources](part6.md)
 
 ## Docker concepts
 
-Docker is a platform for developers and sysadmins to **develop, deploy, and run**
-applications with containers. The use of Linux containers to deploy applications
+Docker is a platform for developers and sysadmins to **build, share, and run**
+applications with containers. The use of containers to deploy applications
 is called _containerization_. Containers are not new, but their use for easily
 deploying applications is.
 
 Containerization is increasingly popular because containers are:
 
 - Flexible: Even the most complex applications can be containerized.
-- Lightweight: Containers leverage and share the host kernel.
-- Interchangeable: You can deploy updates and upgrades on-the-fly.
+- Lightweight: Containers leverage and share the host kernel, 
+  making them much more efficient in terms of system resources than virtual machines.
 - Portable: You can build locally, deploy to the cloud, and run anywhere.
-- Scalable: You can increase and automatically distribute container replicas.
-- Stackable: You can stack services vertically and on-the-fly.
+- Loosely coupled: Containers are highly self sufficient and encapsulated,
+  allowing you to replace or upgrade one without disrupting others.
+- Scalable: You can increase and automatically distribute container replicas across a datacenter.
+- Secure: Containers apply aggressive constraints and isolations to processes without
+  any configuration required on the part of the user.
 
 ![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
 
 ### Images and containers
 
-A container is launched by running an image. An **image** is an executable
-package that includes everything needed to run an application--the code, a
-runtime, libraries, environment variables, and configuration files.
-
-A **container** is a runtime instance of an image--what the image becomes in
-memory when executed (that is, an image with state, or a user process). You can
-see a list of your running containers with the command, `docker ps`, just as you
-would in Linux.
+Fundamentally, a container is nothing but a running process, 
+with some added encapsulation features applied to it in order to keep it isolated from the host
+and from other containers.
+One of the most important aspects of container isolation is that each container interacts
+with its own, private filesystem; this filesystem is provided by a Docker **image**.
+An image includes everything needed to run an application -- the code or binary,
+runtimes, dependencies, and any other filesystem objects required.
 
 ### Containers and virtual machines
 
-A **container** runs _natively_ on Linux and shares the kernel of the host
+A container runs _natively_ on Linux and shares the kernel of the host
 machine with other containers. It runs a discrete process, taking no more memory
 than any other executable, making it lightweight.
 
 By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
 system with _virtual_ access to host resources through a hypervisor. In general,
-VMs provide an environment with more resources than most applications need.
+VMs incur a lot of overhead beyond what is being consumed by your application logic.
 
 ![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
 
-## Prepare your Docker environment
+## Install Docker Desktop
 
-Install a [maintained version](/engine/installation/#updates-and-patches){: target="_blank" class="_"}
-of Docker Community Edition (CE) or Enterprise Edition (EE) on a
-[supported platform](/ee/supported-platforms/){: target="_blank" class="_"}.
+The best way to get started developing containerized applications is with Docker Desktop, for OSX or Windows. Docker Desktop will allow you to easily set up Kubernetes or Swarm on your local development machine, so you can use all the features of the orchestrator you're developing applications for right away, no cluster required. Follow the installation instructions appropriate for your operating system:
 
-> For full Kubernetes Integration
->
-> - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
-is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
-[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
-> - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.06.0 CE (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} and higher as well as edge channels.
+ - [OSX](/docker-for-mac/install/){: target="_blank" class="_"}
+ - [Windows](/docker-for-windows/install/){: target="_blank" class="_"}
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
-<div style="clear:left"></div>
+## Enable Kubernetes
 
-### Test Docker version
+Docker Desktop will set up Kubernetes for you quickly and easily. Follow the setup and validation instructions appropriate for your operating system:
 
-1.  Run `docker --version` and ensure that you have a supported version of Docker:
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#kubeosx">OSX</a></li>
+  <li><a data-toggle="tab" href="#kubewin">Windows</a></li>
+</ul>
+<div class="tab-content">
+  <div id="kubeosx" class="tab-pane fade in active">
+{% capture local-content %}
 
-    ```shell
-    docker --version
+#### OSX
 
-    Docker version 17.12.0-ce, build c97c6d6
+1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate **Preferences... -> Kubernetes**.
+
+2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes is Running'.
+
+3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
+
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: demo
+    spec:
+      containers:
+      - name: testpod
+        image: alpine:3.5
+        command: ["ping", "8.8.8.8"]
     ```
 
-2.  Run `docker info` (or `docker version` without `--`) to view even more details about your Docker installation:
+    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+
+4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
-    docker info
+    kubectl apply -f pod.yaml
+    ```
 
-    Containers: 0
-     Running: 0
-     Paused: 0
-     Stopped: 0
-    Images: 0
-    Server Version: 17.12.0-ce
-    Storage Driver: overlay2
+5. Check that your pod is up and running:
+
+    ```shell
+    kubectl get pods
+    ```    
+
+    You should see something like:    
+
+    ```shell
+    NAME      READY     STATUS    RESTARTS   AGE
+    demo      1/1       Running   0          4s
+    ```
+
+6. Check that you get the logs you'd expect for a ping process:
+
+    ```shell
+    kubectl logs demo
+    ```    
+
+    You should see the output of a healthy ping process:    
+
+    ```shell
+    PING 8.8.8.8 (8.8.8.8): 56 data bytes
+    64 bytes from 8.8.8.8: seq=0 ttl=37 time=21.393 ms
+    64 bytes from 8.8.8.8: seq=1 ttl=37 time=15.320 ms
+    64 bytes from 8.8.8.8: seq=2 ttl=37 time=11.111 ms
     ...
     ```
 
-> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
-
-### Test Docker installation
-
-1.  Test that your installation works by running the simple Docker image,
-[hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
+7. Finally, tear down your test pod:
 
     ```shell
-    docker run hello-world
+    kubectl delete -f pod.yaml
+    ```
 
-    Unable to find image 'hello-world:latest' locally
-    latest: Pulling from library/hello-world
-    ca4f61b1923c: Pull complete
-    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-    Status: Downloaded newer image for hello-world:latest
+{% endcapture %}
+{{ local-content | markdownify }}
 
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
+</div>
+<div id="kubewin" class="tab-pane fade" markdown="1">
+{% capture localwin-content %}
+
+#### Windows
+
+1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings -> Kubernetes**.
+
+2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
+
+3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
+
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: demo
+    spec:
+      containers:
+      - name: testpod
+        image: alpine:3.5
+        command: ["ping", "8.8.8.8"]
+    ```    
+
+    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+
+4. In powershell, navigate to where you created `pod.yaml` and create your pod:
+
+    ```shell
+    kubectl apply -f pod.yaml
+    ```
+
+5. Check that your pod is up and running:
+
+    ```shell
+    kubectl get pods
+    ```    
+
+    You should see something like:    
+
+    ```shell
+    NAME      READY     STATUS    RESTARTS   AGE
+    demo      1/1       Running   0          4s
+    ```
+
+6. Check that you get the logs you'd expect for a ping process:
+
+    ```shell
+    kubectl logs demo
+    ```    
+
+    You should see the output of a healthy ping process:    
+
+    ```shell
+    PING 8.8.8.8 (8.8.8.8): 56 data bytes
+    64 bytes from 8.8.8.8: seq=0 ttl=37 time=21.393 ms
+    64 bytes from 8.8.8.8: seq=1 ttl=37 time=15.320 ms
+    64 bytes from 8.8.8.8: seq=2 ttl=37 time=11.111 ms
     ...
     ```
 
-2.  List the `hello-world` image that was downloaded to your machine:
+7. Finally, tear down your test pod:
 
     ```shell
-    docker image ls
+    kubectl delete -f pod.yaml
     ```
 
-3.  List the `hello-world` container (spawned by the image) which exits after
-    displaying its message. If it were still running, you would not need the `--all` option:
+{% endcapture %}
+{{ localwin-content | markdownify }}
+</div>
+<hr>
+</div>
+
+## Enable Docker Swarm
+
+Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#swarmosx">OSX</a></li>
+  <li><a data-toggle="tab" href="#swarmwin">Windows</a></li>
+</ul>
+<div class="tab-content">
+  <div id="swarmosx" class="tab-pane fade in active">
+{% capture local-content %}
+
+#### OSX
+
+1. Open a terminal, and initialize Docker Swarm mode:
 
     ```shell
-    docker container ls --all
+    docker swarm init
+    ```    
 
-    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+    If all goes well, you should see a message similar to the following:    
+
+    ```shell
+    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
+
+    To add a worker to this swarm, run the following command:    
+
+        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377    
+
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
-## Recap and cheat sheet
+2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
-```shell
-## List Docker CLI commands
-docker
-docker container --help
+    ```shell
+    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```
 
-## Display Docker version and info
-docker --version
-docker version
-docker info
+3. Check that your service created one running container:
 
-## Execute Docker image
-docker run hello-world
+    ```shell
+    docker service ps demo
+    ```    
 
-## List Docker images
-docker image ls
+    You should see something like:    
 
-## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
-```
+    ```shell
+    ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago 
+    ```
 
-## Conclusion of part one
+4. Check that you get the logs you'd expect for a ping process:
 
-Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
+    ```shell
+    docker service logs demo
+    ```    
 
-- applications have no system dependencies
-- updates can be pushed to any part of a distributed application
-- resource density can be optimized.
+    You should see the output of a healthy ping process:    
 
-With Docker, scaling your application is a matter of spinning up new
-executables, not running heavy VM hosts.
+    ```shell
+    demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=0 ttl=37 time=13.005 ms
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=1 ttl=37 time=13.847 ms
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=2 ttl=37 time=41.296 ms
+    ...
+    ```
+
+5. Finally, tear down your test service:
+
+    ```shell
+    docker service rm demo
+    ```
+
+{% endcapture %}
+{{ local-content | markdownify }}
+
+</div>
+<div id="swarmwin" class="tab-pane fade" markdown="1">
+{% capture localwin-content %}
+
+#### Windows
+
+1. Open a powershell, and initialize Docker Swarm mode:
+
+    ```shell
+    docker swarm init
+    ```    
+
+    If all goes well, you should see a message similar to the following:    
+
+    ```shell
+    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
+
+    To add a worker to this swarm, run the following command:    
+
+        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377    
+
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+    ```
+
+2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
+
+    ```shell
+    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```
+
+3. Check that your service created one running container:
+
+    ```shell
+    docker service ps demo
+    ```    
+
+    You should see something like:    
+
+    ```shell
+    ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago 
+    ```
+
+4. Check that you get the logs you'd expect for a ping process:    
+
+    ```shell
+    docker service logs demo
+    ```    
+
+    You should see the output of a healthy ping process:    
+
+    ```shell
+    demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=0 ttl=37 time=13.005 ms
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=1 ttl=37 time=13.847 ms
+    demo.1.463j2s3y4b5o@docker-desktop    | 64 bytes from 8.8.8.8: seq=2 ttl=37 time=41.296 ms
+    ...
+    ```
+
+5. Finally, tear down your test service:
+
+    ```shell
+    docker service rm demo
+    ```
+
+{% endcapture %}
+{{ localwin-content | markdownify }}
+</div>
+<hr>
+</div>
+
+## Conclusion
+
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+
+## CLI References
+
+Further documentation for all CLI commands used in this article are available here:
+
+- [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
+- [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
+- [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
+- [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
+- [`docker swarm init`](https://docs.docker.com/engine/reference/commandline/swarm_init/)
+- [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
