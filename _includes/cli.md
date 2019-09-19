@@ -47,13 +47,13 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> This  command is experimental on the Docker client. It should not be used in
+> This command is experimental on the Docker client. It should not be used in
 > production environments.
 > To enable experimental features in the Docker CLI, edit the
 > [config.json](/engine/reference/commandline/cli.md#configuration-files)
-> and set `experimental` to `enabled`.
->
-> {% include experimental.md %}
+> and set `experimental` to `enabled`. You can go [here](https://github.com/docker/docker.github.io/blob/master/_includes/experimental.md)
+> for more information.
+{: .important }
 
 {% endif %}
 
