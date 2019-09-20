@@ -8,7 +8,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Prerequisites
 
-- Work throught setup and orientation in [Part 1](index.md).
+- Work through setup and orientation in [Part 1](index.md).
 
 ## Introduction
 
@@ -59,7 +59,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 
     The steps above built up the filesystem of our image, but there's one more line in our Dockerfile. The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based off of this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
 
-    What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directive than just the few we see above; for a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+    What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few we see above; for a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 
 ## Build and Test Your Image
 
@@ -74,6 +74,8 @@ Now that we have some source code and a Dockerfile, it's time to build our first
     ```
 
     You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
+
+    > **Windows Users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write and execute permissions being set for files added to your image; we aren't handling any sensitive information in this example, so feel free to disregard this warning in this example.
 
 2.  Start a container based on your new image:
 
