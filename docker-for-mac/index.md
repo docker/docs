@@ -229,7 +229,7 @@ On the Command Line page, you can specify whether or not to enable experimental 
 
 {% include experimental.md %}
 
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle it off, Docker Desktop uses the current generally available release of Docker Engine.
+On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
@@ -286,7 +286,7 @@ If you installed `kubectl` with Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**. To choose Kubernetes as the
+  running as a Docker container, select **Enable Kubernetes**. To set Kubernetes as the
   [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
 
    Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the
@@ -321,7 +321,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
 > Reset and Restart options
 >
-> On Docker Desktop Mac, the **Restart Docker Desktop**, **Reset to factory defaults**, and other reset options are available on the **Troubleshoot** menu.
+> On Docker Desktop Mac, the **Restart Docker Desktop**, **Reset to factory defaults**, and other reset options are available from the **Troubleshoot** menu.
 
 For information about the reset options, see [Logs and Troubleshooting](troubleshoot.md).
 

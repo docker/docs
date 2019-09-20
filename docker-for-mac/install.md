@@ -32,7 +32,7 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
   **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
 
-- At least 4GB of RAM.
+- At least 4 GB of RAM.
 
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
 
@@ -46,7 +46,7 @@ The Docker Desktop installation includes
 
 ## Install and run Docker Desktop on Mac
 
-1. Double-click `Docker.dmg` to open the installer, then drag Moby the whale to
+1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
     the Applications folder.
 
       ![Install Docker app](images/docker-app-drag.png)

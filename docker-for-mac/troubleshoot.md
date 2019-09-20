@@ -22,20 +22,20 @@ from the menu bar to see the troubleshoot options.
 
 The Troubleshoot page contains the following options:
 
-* **Restart Docker Desktop** - Select to restart Docker Desktop.
+* **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Run Diagnostics** - Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues)
+* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
 
-* **Reset disk image** - This option resets all Docker data _without_ a
+* **Reset disk image**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
 
-* **Reset to factory defaults** - Choose this option to reset all options on
-Docker Desktop to its initial state, the same as when it was first installed.
+* **Reset to factory defaults**: Choose this option to reset all options on
+Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
-* **Uninstall** - Choose this option to remove Docker Desktop from your
+* **Uninstall**: Choose this option to remove Docker Desktop from your
 system.
 
-> Uninstall Docker Desktop from the commandline
+> Uninstall Docker Desktop from the command line
 >
 >To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
 >--uninstall`. If your instance is installed in the default location, this
@@ -75,7 +75,7 @@ If you click **Report an issue**, this opens Docker Desktop [for Mac](https://gi
 
 ### Diagnosing from the terminal
 
-In some cases, it is useful to run the diagnostics yourself, for instance if
+In some cases, it is useful to run the diagnostics yourself, for instance, if
 Docker Desktop cannot start.
 
 First, locate the `com.docker.diagnose` tool.  If you have installed Docker Desktop in the Applications directory, then it is located at
@@ -99,10 +99,9 @@ Diagnostics ID:     BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051 (uploade
 
 The diagnostics ID (here BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051) is
 composed of your user ID (BE9AFAAF-F68B-41D0-9D12-84760E6B8740) and a timestamp
-(20190905152051).  Be sure to provide us with the full diagnostics ID, not just
-the user ID.
+(20190905152051). Ensure you provide the full diagnostics ID, and not just the user ID.
 
-Don't hesitate browsing the content of these diagnostics:
+To view the contents of the diagnostic file, run:
 
 ```sh
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
@@ -241,7 +240,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   incoming connections so that the VM can get an IP address.
 
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
-  the webserver on `http://localhost/`. Make sure that the Docker icon is
+  the web server on `http://localhost/`. Make sure that the Docker icon is
   displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
   Otherwise, you might start the webserver container but get a "web page not
   available" error when you go to `localhost`. For more information on distinguishing between the two environments, see [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
