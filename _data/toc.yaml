@@ -3989,7 +3989,7 @@ manuals:
       title: Bring Your Own License (BYOL)
 - sectiontitle: Experimental
   section:
-  - sectiontitle: Docker Assemble
+  - sectiontitle: Assemble
     section:
     - path: /assemble/install/
       title: Install
@@ -4005,13 +4005,13 @@ manuals:
       title: Advanced Backend Management
     - path: /engine/reference/commandline/assemble/
       title: CLI reference
-  - sectiontitle: Docker Buildx
+  - sectiontitle: Buildx
     section:
     - path: /buildx/working-with-buildx/
       title: Working with Docker Buildx
     - path: /engine/reference/commandline/buildx/
       title: CLI reference
-  - sectiontitle: Docker Template
+  - sectiontitle: Template
     section:
     - path: /app-template/working-with-template/
       title: Working with Docker Template
