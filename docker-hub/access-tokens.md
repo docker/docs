@@ -4,10 +4,7 @@ description: Learn how to create and manage your personal Docker Hub access toke
 keywords: docker hub, hub, security, PAT, personal access token
 ---
 
-Docker Hub lets you create personal access tokens as alternatives to
-your password. Access tokens are linked to a particular user account and
-duplicate any permissions that account has. If the account changes
-permissions, so will the token.
+Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
 
 Access tokens are useful in cases such as building integrations since
 you can issue multiple tokens &ndash; one for each integration &ndash;
@@ -55,4 +52,4 @@ select multiple tokens to delete them all once.
 You can use an access token anywhere that requires your Docker Hub
 password.
 
-For example, when logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. When you're prompted for a password, enter your token instead. 
+For example, when logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. When you're prompted for a password, enter your token instead.
