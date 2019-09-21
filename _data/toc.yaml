@@ -17,165 +17,165 @@ horizontalnav:
 
 guides:
 - sectiontitle: Get Docker
+  section:
+  - path: /install/overview/
+    title: Docker products
+  - sectiontitle: Engine - Community
     section:
-    - path: /install/overview/
-      title: Docker products
-    - sectiontitle: Engine - Community
+    - title: Install
+      path: /install/
+    - sectiontitle: Cloud
       section:
-      - title: Install
-        path: /install/
-      - sectiontitle: Cloud
+      - sectiontitle: Docker for AWS
         section:
-        - sectiontitle: Docker for AWS
-          section:
-          - path: /docker-for-aws/why/
-            title: Why Docker for AWS?
-          - path: /docker-for-aws/
-            title: Setup & prerequisites
-          - path: /docker-for-aws/iam-permissions/
-            title: IAM permissions
-          - path: /docker-for-aws/scaling/
-            title: Scaling
-          - path: /docker-for-aws/upgrade/
-            title: Upgrading
-          - path: /docker-for-aws/deploy/
-            title: Deploy your app
-          - path: /docker-for-aws/persistent-data-volumes/
-            title: Persistent data volumes
-          - path: /docker-for-aws/load-balancer/
-            title: Load balancer
-          - path: /docker-for-aws/faqs/
-            title: FAQs
-          - path: /docker-for-aws/opensource/
-            title: Open source licensing
-          - path: /docker-for-aws/release-notes/
-            title: Release notes
-          - path: /docker-for-aws/archive/
-            title: Template archive
-        - sectiontitle: Docker for Azure
-          section:
-          - path: /docker-for-azure/why/
-            title: Why Docker for Azure?
-          - path: /docker-for-azure/
-            title: Setup & prerequisites
-          - path: /docker-for-azure/upgrade/
-            title: Upgrading
-          - path: /docker-for-azure/deploy/
-            title: Deploy your app
-          - path: /docker-for-azure/persistent-data-volumes/
-            title: Persistent data volumes
-          - path: /docker-for-azure/faqs/
-            title: FAQs
-          - path: /docker-for-azure/opensource/
-            title: Open source licensing
-          - path: /docker-for-azure/release-notes/
-            title: Release notes
-          - path: /docker-for-azure/archive/
-            title: Template archive
-      - sectiontitle: Linux
+        - path: /docker-for-aws/why/
+          title: Why Docker for AWS?
+        - path: /docker-for-aws/
+          title: Setup & prerequisites
+        - path: /docker-for-aws/iam-permissions/
+          title: IAM permissions
+        - path: /docker-for-aws/scaling/
+          title: Scaling
+        - path: /docker-for-aws/upgrade/
+          title: Upgrading
+        - path: /docker-for-aws/deploy/
+          title: Deploy your app
+        - path: /docker-for-aws/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-aws/load-balancer/
+          title: Load balancer
+        - path: /docker-for-aws/faqs/
+          title: FAQs
+        - path: /docker-for-aws/opensource/
+          title: Open source licensing
+        - path: /docker-for-aws/release-notes/
+          title: Release notes
+        - path: /docker-for-aws/archive/
+          title: Template archive
+      - sectiontitle: Docker for Azure
         section:
-        - path: /install/linux/docker-ce/centos/
-          title: CentOS
-        - path: /install/linux/docker-ce/debian/
-          title: Debian
-        - path: /install/linux/docker-ce/fedora/
-          title: Fedora
-        - path: /install/linux/docker-ce/ubuntu/
-          title: Ubuntu
-        - path: /install/linux/docker-ce/binaries/
-          title: Binaries
-        - path: /install/linux/linux-postinstall/
-          title: Optional Linux post-installation steps
-      - title: MacOS
-        path: /docker-for-mac/install/
-        nosync: true
-      - title: Microsoft Windows
-        path: /docker-for-windows/install/
-        nosync: true
-    - sectiontitle: Enterprise
+        - path: /docker-for-azure/why/
+          title: Why Docker for Azure?
+        - path: /docker-for-azure/
+          title: Setup & prerequisites
+        - path: /docker-for-azure/upgrade/
+          title: Upgrading
+        - path: /docker-for-azure/deploy/
+          title: Deploy your app
+        - path: /docker-for-azure/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-azure/faqs/
+          title: FAQs
+        - path: /docker-for-azure/opensource/
+          title: Open source licensing
+        - path: /docker-for-azure/release-notes/
+          title: Release notes
+        - path: /docker-for-azure/archive/
+          title: Template archive
+    - sectiontitle: Linux
       section:
-      - title: About Docker Enterprise
-        path: /ee/supported-platforms/
-      - path: /ee/
-        title: Overview
-      - path: /ee/release-notes/
-        title: Release notes
-      - path: /ee/licensing/
-        title: Licensing     
-      - sectiontitle: Linux
-        section:
-        - path: /install/linux/docker-ee/centos/
-          title: CentOS
-        - path: /install/linux/docker-ee/oracle/
-          title: Oracle Linux
-        - path: /install/linux/docker-ee/rhel/
-          title: RHEL
-        - path: /install/linux/docker-ee/suse/
-          title: SLES
-        - path: /install/linux/docker-ee/ubuntu/
-          title: Ubuntu
-      - path: /install/windows/docker-ee/
-        title: Microsoft Windows Server
-      - title: Release notes
-        path: /engine/release-notes/
-        nosync: true
-      - sectiontitle: Manage Docker Enterprise
-        section:
-        - path: /ee/docker-ee-architecture/
-          title: Docker Enterprise Architecture
-        - path: /ee/supported-platforms/
-          title: Supported platforms
-          nosync: true
-        - path: /ee/end-to-end-install/
-          title: Deploy Docker Enterprise
-        - path: /ee/upgrade/
-          title: Upgrade Docker Enterprise
-        - sectiontitle: Back up Docker Enterprise
-          section:
-          - path: /ee/admin/backup/
-            title: Overview
-          - path: /ee/admin/backup/back-up-swarm/
-            title: Back up Docker Swarm
-          - path: /ee/admin/backup/back-up-ucp/
-            title: Back up UCP
-          - path: /ee/admin/backup/back-up-dtr/
-            title: Back up DTR
-          - path: /engine/reference/commandline/cluster_backup/
-            title: Back up clusters with Docker Cluster
-        - sectiontitle: Restore Docker Enterprise
-          section:
-          - path: /ee/admin/restore/
-            title: Overview
-          - path: /ee/admin/restore/restore-swarm/
-            title: Restore Docker Swarm
-          - path: /ee/admin/restore/restore-ucp/
-            title: Restore UCP
-          - path: /ee/admin/restore/restore-dtr/
-            title: Restore DTR
-          - path: /cluster/reference/restore/
-            title: Restore clusters with Docker Cluster
-        - sectiontitle: Disaster Recovery
-          section:
-          - path: /ee/admin/disaster-recovery/
-            title: Overview
-        - path: /ee/enable-client-certificate-authentication/
-          title: Enable client certificate authentication with your PKI
-        - path: /ee/telemetry/
-          title: Manage usage data collection
-      - title: Get support
-        path: /ee/get-support/
-    - sectiontitle: Compatibility between Docker versions
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
+    - title: MacOS
+      path: /docker-for-mac/install/
+      nosync: true
+    - title: Microsoft Windows
+      path: /docker-for-windows/install/
+      nosync: true
+  - sectiontitle: Enterprise
+    section:
+    - title: About Docker Enterprise
+      path: /ee/supported-platforms/
+    - path: /ee/
+      title: Overview
+    - path: /ee/release-notes/
+      title: Release notes
+    - path: /ee/licensing/
+      title: Licensing     
+    - sectiontitle: Linux
       section:
-        - path: /engine/ce-ee-node-activate/
-          title: Docker Engine Community to Enterprise Node Activate
-        - path: /engine/migration/
-          title: Migrate to Docker 1.10
-        - path: /engine/breaking_changes/
-          title: Breaking changes
-        - path: /engine/deprecated/
-          title: Deprecated Docker features
-        - path: /engine/faq/
-          title: FAQ
+      - path: /install/linux/docker-ee/centos/
+        title: CentOS
+      - path: /install/linux/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /install/linux/docker-ee/rhel/
+        title: RHEL
+      - path: /install/linux/docker-ee/suse/
+        title: SLES
+      - path: /install/linux/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /install/windows/docker-ee/
+      title: Microsoft Windows Server
+    - title: Release notes
+      path: /engine/release-notes/
+      nosync: true
+    - sectiontitle: Manage Docker Enterprise
+      section:
+      - path: /ee/docker-ee-architecture/
+        title: Docker Enterprise Architecture
+      - path: /ee/supported-platforms/
+        title: Supported platforms
+        nosync: true
+      - path: /ee/end-to-end-install/
+        title: Deploy Docker Enterprise
+      - path: /ee/upgrade/
+        title: Upgrade Docker Enterprise
+      - sectiontitle: Back up Docker Enterprise
+        section:
+        - path: /ee/admin/backup/
+          title: Overview
+        - path: /ee/admin/backup/back-up-swarm/
+          title: Back up Docker Swarm
+        - path: /ee/admin/backup/back-up-ucp/
+          title: Back up UCP
+        - path: /ee/admin/backup/back-up-dtr/
+          title: Back up DTR
+        - path: /engine/reference/commandline/cluster_backup/
+          title: Back up clusters with Docker Cluster
+      - sectiontitle: Restore Docker Enterprise
+        section:
+        - path: /ee/admin/restore/
+          title: Overview
+        - path: /ee/admin/restore/restore-swarm/
+          title: Restore Docker Swarm
+        - path: /ee/admin/restore/restore-ucp/
+          title: Restore UCP
+        - path: /ee/admin/restore/restore-dtr/
+          title: Restore DTR
+        - path: /cluster/reference/restore/
+          title: Restore clusters with Docker Cluster
+      - sectiontitle: Disaster Recovery
+        section:
+        - path: /ee/admin/disaster-recovery/
+          title: Overview
+      - path: /ee/enable-client-certificate-authentication/
+        title: Enable client certificate authentication with your PKI
+      - path: /ee/telemetry/
+        title: Manage usage data collection
+    - title: Get support
+      path: /ee/get-support/
+  - sectiontitle: Compatibility between Docker versions
+    section:
+      - path: /engine/ce-ee-node-activate/
+        title: Docker Engine Community to Enterprise Node Activate
+      - path: /engine/migration/
+        title: Migrate to Docker 1.10
+      - path: /engine/breaking_changes/
+        title: Breaking changes
+      - path: /engine/deprecated/
+        title: Deprecated Docker features
+      - path: /engine/faq/
+        title: FAQ
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -266,7 +266,6 @@ guides:
         title: (Legacy) Container links
       - path: /network/overlay-standalone.swarm/
         title: Overlay networks for Swarm Classic
-
 - sectiontitle: Manage data
   section:
     - path: /storage/
