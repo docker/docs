@@ -16,11 +16,7 @@ horizontalnav:
   node: samples
 
 guides:
-- sectiontitle: Get started
-  section:
-  - path: /engine/docker-overview/
-    title: Docker overview
-  - sectiontitle: Get Docker
+- sectiontitle: Get Docker
     section:
     - path: /install/overview/
       title: Docker products
@@ -180,6 +176,10 @@ guides:
           title: Deprecated Docker features
         - path: /engine/faq/
           title: FAQ
+- sectiontitle: Get started
+  section:
+  - path: /engine/docker-overview/
+    title: Docker overview
   - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation"
