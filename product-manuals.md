@@ -8,15 +8,8 @@ notags: true
 ---
 
 
-## Get started with Docker
 
-Try our multi-part Quickstart that covers writing your first app,
-data storage, networking, and swarms, and ends with your app running on
-production servers in the cloud. Total reading time is less than an hour.
-
-[Get started with Docker](/get-started/){: class="button outline-btn"}
-
-## Run Docker anywhere
+## Get Docker Desktop
 
 <div class="component-container">
     <!--start row-->
