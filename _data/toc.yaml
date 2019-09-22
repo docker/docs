@@ -2603,8 +2603,6 @@ manuals:
       path: /docker-for-windows/install/
   - sectiontitle: Engine - Enterprise
     section:
-    - path: /ee/supported-platforms/
-      title: About Docker Enterprise
     - path: /ee/
       title: Overview
     - path: /ee/licensing/
@@ -2623,54 +2621,55 @@ manuals:
         title: Ubuntu
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
-    - title: Release notes
-      path: /engine/release-notes/
+- sectiontitle: Enterprise
+  section:
+  - path: /ee/supported-platforms/
+    title: About Docker Enterprise
+  - sectiontitle: Manage Docker Enterprise
+    section:
+    - path: /ee/docker-ee-architecture/
+      title: Docker Enterprise Architecture
+    - path: /ee/supported-platforms/
+      title: Supported platforms
       nosync: true
-    - sectiontitle: Manage Docker Enterprise
+    - path: /ee/end-to-end-install/
+      title: Deploy Docker Enterprise
+    - path: /ee/upgrade/
+      title: Upgrade Docker Enterprise
+    - sectiontitle: Back up Docker Enterprise
       section:
-      - path: /ee/docker-ee-architecture/
-        title: Docker Enterprise Architecture
-      - path: /ee/supported-platforms/
-        title: Supported platforms
-        nosync: true
-      - path: /ee/end-to-end-install/
-        title: Deploy Docker Enterprise
-      - path: /ee/upgrade/
-        title: Upgrade Docker Enterprise
-      - sectiontitle: Back up Docker Enterprise
-        section:
-        - path: /ee/admin/backup/
-          title: Overview
-        - path: /ee/admin/backup/back-up-swarm/
-          title: Back up Docker Swarm
-        - path: /ee/admin/backup/back-up-ucp/
-          title: Back up UCP
-        - path: /ee/admin/backup/back-up-dtr/
-          title: Back up DTR
-        - path: /engine/reference/commandline/cluster_backup/
-          title: Back up clusters with Docker Cluster
-      - sectiontitle: Restore Docker Enterprise
-        section:
-        - path: /ee/admin/restore/
-          title: Overview
-        - path: /ee/admin/restore/restore-swarm/
-          title: Restore Docker Swarm
-        - path: /ee/admin/restore/restore-ucp/
-          title: Restore UCP
-        - path: /ee/admin/restore/restore-dtr/
-          title: Restore DTR
-        - path: /cluster/reference/restore/
-          title: Restore clusters with Docker Cluster
-      - sectiontitle: Disaster Recovery
-        section:
-        - path: /ee/admin/disaster-recovery/
-          title: Overview
-      - path: /ee/enable-client-certificate-authentication/
-        title: Enable client certificate authentication with your PKI
-      - path: /ee/telemetry/
-        title: Manage usage data collection
-    - title: Get support
-      path: /ee/get-support/
+      - path: /ee/admin/backup/
+        title: Overview
+      - path: /ee/admin/backup/back-up-swarm/
+        title: Back up Docker Swarm
+      - path: /ee/admin/backup/back-up-ucp/
+        title: Back up UCP
+      - path: /ee/admin/backup/back-up-dtr/
+        title: Back up DTR
+      - path: /engine/reference/commandline/cluster_backup/
+        title: Back up clusters with Docker Cluster
+    - sectiontitle: Restore Docker Enterprise
+      section:
+      - path: /ee/admin/restore/
+        title: Overview
+      - path: /ee/admin/restore/restore-swarm/
+        title: Restore Docker Swarm
+      - path: /ee/admin/restore/restore-ucp/
+        title: Restore UCP
+      - path: /ee/admin/restore/restore-dtr/
+        title: Restore DTR
+      - path: /cluster/reference/restore/
+        title: Restore clusters with Docker Cluster
+    - sectiontitle: Disaster Recovery
+      section:
+      - path: /ee/admin/disaster-recovery/
+        title: Overview
+    - path: /ee/enable-client-certificate-authentication/
+      title: Enable client certificate authentication with your PKI
+    - path: /ee/telemetry/
+      title: Manage usage data collection
+  - title: Get support
+    path: /ee/get-support/
 - sectiontitle: Hub
   section:
   - title: Docker ID accounts
