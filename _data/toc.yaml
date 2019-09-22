@@ -16,170 +16,168 @@ horizontalnav:
   node: samples
 
 guides:
+- sectiontitle: Get Docker
+  section:
+  - path: /install/overview/
+    title: Docker products
+  - sectiontitle: Engine - Community
+    section:
+    - title: Install
+      path: /install/
+    - sectiontitle: Cloud
+      section:
+      - sectiontitle: Docker for AWS
+        section:
+        - path: /docker-for-aws/why/
+          title: Why Docker for AWS?
+        - path: /docker-for-aws/
+          title: Setup & prerequisites
+        - path: /docker-for-aws/iam-permissions/
+          title: IAM permissions
+        - path: /docker-for-aws/scaling/
+          title: Scaling
+        - path: /docker-for-aws/upgrade/
+          title: Upgrading
+        - path: /docker-for-aws/deploy/
+          title: Deploy your app
+        - path: /docker-for-aws/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-aws/load-balancer/
+          title: Load balancer
+        - path: /docker-for-aws/faqs/
+          title: FAQs
+        - path: /docker-for-aws/opensource/
+          title: Open source licensing
+        - path: /docker-for-aws/release-notes/
+          title: Release notes
+        - path: /docker-for-aws/archive/
+          title: Template archive
+      - sectiontitle: Docker for Azure
+        section:
+        - path: /docker-for-azure/why/
+          title: Why Docker for Azure?
+        - path: /docker-for-azure/
+          title: Setup & prerequisites
+        - path: /docker-for-azure/upgrade/
+          title: Upgrading
+        - path: /docker-for-azure/deploy/
+          title: Deploy your app
+        - path: /docker-for-azure/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-azure/faqs/
+          title: FAQs
+        - path: /docker-for-azure/opensource/
+          title: Open source licensing
+        - path: /docker-for-azure/release-notes/
+          title: Release notes
+        - path: /docker-for-azure/archive/
+          title: Template archive
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
+    - title: MacOS
+      path: /docker-for-mac/install/
+      nosync: true
+    - title: Microsoft Windows
+      path: /docker-for-windows/install/
+      nosync: true
+  - sectiontitle: Enterprise
+    section:
+    - title: About Docker Enterprise
+      path: /ee/supported-platforms/
+    - path: /ee/
+      title: Overview
+    - path: /ee/licensing/
+      title: Licensing     
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ee/centos/
+        title: CentOS
+      - path: /install/linux/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /install/linux/docker-ee/rhel/
+        title: RHEL
+      - path: /install/linux/docker-ee/suse/
+        title: SLES
+      - path: /install/linux/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /install/windows/docker-ee/
+      title: Microsoft Windows Server
+    - title: Release notes
+      path: /engine/release-notes/
+      nosync: true
+    - sectiontitle: Manage Docker Enterprise
+      section:
+      - path: /ee/docker-ee-architecture/
+        title: Docker Enterprise Architecture
+      - path: /ee/supported-platforms/
+        title: Supported platforms
+        nosync: true
+      - path: /ee/end-to-end-install/
+        title: Deploy Docker Enterprise
+      - path: /ee/upgrade/
+        title: Upgrade Docker Enterprise
+      - sectiontitle: Back up Docker Enterprise
+        section:
+        - path: /ee/admin/backup/
+          title: Overview
+        - path: /ee/admin/backup/back-up-swarm/
+          title: Back up Docker Swarm
+        - path: /ee/admin/backup/back-up-ucp/
+          title: Back up UCP
+        - path: /ee/admin/backup/back-up-dtr/
+          title: Back up DTR
+        - path: /engine/reference/commandline/cluster_backup/
+          title: Back up clusters with Docker Cluster
+      - sectiontitle: Restore Docker Enterprise
+        section:
+        - path: /ee/admin/restore/
+          title: Overview
+        - path: /ee/admin/restore/restore-swarm/
+          title: Restore Docker Swarm
+        - path: /ee/admin/restore/restore-ucp/
+          title: Restore UCP
+        - path: /ee/admin/restore/restore-dtr/
+          title: Restore DTR
+        - path: /cluster/reference/restore/
+          title: Restore clusters with Docker Cluster
+      - sectiontitle: Disaster Recovery
+        section:
+        - path: /ee/admin/disaster-recovery/
+          title: Overview
+      - path: /ee/enable-client-certificate-authentication/
+        title: Enable client certificate authentication with your PKI
+      - path: /ee/telemetry/
+        title: Manage usage data collection
+    - title: Get support
+      path: /ee/get-support/
+  - sectiontitle: Compatibility between Docker versions
+    section:
+      - path: /engine/ce-ee-node-activate/
+        title: Docker Engine Community to Enterprise Node Activate
+      - path: /engine/migration/
+        title: Migrate to Docker 1.10
+      - path: /engine/breaking_changes/
+        title: Breaking changes
+      - path: /engine/deprecated/
+        title: Deprecated Docker features
+      - path: /engine/faq/
+        title: FAQ
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
     title: Docker overview
-  - sectiontitle: Get Docker
-    section:
-    - path: /install/overview/
-      title: Docker products
-    - sectiontitle: Engine - Community
-      section:
-      - title: Install
-        path: /install/
-      - sectiontitle: Cloud
-        section:
-        - sectiontitle: Docker for AWS
-          section:
-          - path: /docker-for-aws/why/
-            title: Why Docker for AWS?
-          - path: /docker-for-aws/
-            title: Setup & prerequisites
-          - path: /docker-for-aws/iam-permissions/
-            title: IAM permissions
-          - path: /docker-for-aws/scaling/
-            title: Scaling
-          - path: /docker-for-aws/upgrade/
-            title: Upgrading
-          - path: /docker-for-aws/deploy/
-            title: Deploy your app
-          - path: /docker-for-aws/persistent-data-volumes/
-            title: Persistent data volumes
-          - path: /docker-for-aws/load-balancer/
-            title: Load balancer
-          - path: /docker-for-aws/faqs/
-            title: FAQs
-          - path: /docker-for-aws/opensource/
-            title: Open source licensing
-          - path: /docker-for-aws/release-notes/
-            title: Release notes
-          - path: /docker-for-aws/archive/
-            title: Template archive
-        - sectiontitle: Docker for Azure
-          section:
-          - path: /docker-for-azure/why/
-            title: Why Docker for Azure?
-          - path: /docker-for-azure/
-            title: Setup & prerequisites
-          - path: /docker-for-azure/upgrade/
-            title: Upgrading
-          - path: /docker-for-azure/deploy/
-            title: Deploy your app
-          - path: /docker-for-azure/persistent-data-volumes/
-            title: Persistent data volumes
-          - path: /docker-for-azure/faqs/
-            title: FAQs
-          - path: /docker-for-azure/opensource/
-            title: Open source licensing
-          - path: /docker-for-azure/release-notes/
-            title: Release notes
-          - path: /docker-for-azure/archive/
-            title: Template archive
-      - sectiontitle: Linux
-        section:
-        - path: /install/linux/docker-ce/centos/
-          title: CentOS
-        - path: /install/linux/docker-ce/debian/
-          title: Debian
-        - path: /install/linux/docker-ce/fedora/
-          title: Fedora
-        - path: /install/linux/docker-ce/ubuntu/
-          title: Ubuntu
-        - path: /install/linux/docker-ce/binaries/
-          title: Binaries
-        - path: /install/linux/linux-postinstall/
-          title: Optional Linux post-installation steps
-      - title: MacOS
-        path: /docker-for-mac/install/
-        nosync: true
-      - title: Microsoft Windows
-        path: /docker-for-windows/install/
-        nosync: true
-    - sectiontitle: Enterprise
-      section:
-      - title: About Docker Enterprise
-        path: /ee/supported-platforms/
-      - path: /ee/
-        title: Overview
-      - path: /ee/release-notes/
-        title: Release notes
-      - path: /ee/licensing/
-        title: Licensing     
-      - sectiontitle: Linux
-        section:
-        - path: /install/linux/docker-ee/centos/
-          title: CentOS
-        - path: /install/linux/docker-ee/oracle/
-          title: Oracle Linux
-        - path: /install/linux/docker-ee/rhel/
-          title: RHEL
-        - path: /install/linux/docker-ee/suse/
-          title: SLES
-        - path: /install/linux/docker-ee/ubuntu/
-          title: Ubuntu
-      - path: /install/windows/docker-ee/
-        title: Microsoft Windows Server
-      - title: Release notes
-        path: /engine/release-notes/
-        nosync: true
-      - sectiontitle: Manage Docker Enterprise
-        section:
-        - path: /ee/docker-ee-architecture/
-          title: Docker Enterprise Architecture
-        - path: /ee/supported-platforms/
-          title: Supported platforms
-          nosync: true
-        - path: /ee/end-to-end-install/
-          title: Deploy Docker Enterprise
-        - path: /ee/upgrade/
-          title: Upgrade Docker Enterprise
-        - sectiontitle: Back up Docker Enterprise
-          section:
-          - path: /ee/admin/backup/
-            title: Overview
-          - path: /ee/admin/backup/back-up-swarm/
-            title: Back up Docker Swarm
-          - path: /ee/admin/backup/back-up-ucp/
-            title: Back up UCP
-          - path: /ee/admin/backup/back-up-dtr/
-            title: Back up DTR
-          - path: /engine/reference/commandline/cluster_backup/
-            title: Back up clusters with Docker Cluster
-        - sectiontitle: Restore Docker Enterprise
-          section:
-          - path: /ee/admin/restore/
-            title: Overview
-          - path: /ee/admin/restore/restore-swarm/
-            title: Restore Docker Swarm
-          - path: /ee/admin/restore/restore-ucp/
-            title: Restore UCP
-          - path: /ee/admin/restore/restore-dtr/
-            title: Restore DTR
-          - path: /cluster/reference/restore/
-            title: Restore clusters with Docker Cluster
-        - sectiontitle: Disaster Recovery
-          section:
-          - path: /ee/admin/disaster-recovery/
-            title: Overview
-        - path: /ee/enable-client-certificate-authentication/
-          title: Enable client certificate authentication with your PKI
-        - path: /ee/telemetry/
-          title: Manage usage data collection
-      - title: Get support
-        path: /ee/get-support/
-    - sectiontitle: Compatibility between Docker versions
-      section:
-        - path: /engine/ce-ee-node-activate/
-          title: Docker Engine Community to Enterprise Node Activate
-        - path: /engine/migration/
-          title: Migrate to Docker 1.10
-        - path: /engine/breaking_changes/
-          title: Breaking changes
-        - path: /engine/deprecated/
-          title: Deprecated Docker features
-        - path: /engine/faq/
-          title: FAQ
   - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation"
@@ -266,7 +264,6 @@ guides:
         title: (Legacy) Container links
       - path: /network/overlay-standalone.swarm/
         title: Overlay networks for Swarm Classic
-
 - sectiontitle: Manage data
   section:
     - path: /storage/
@@ -1314,6 +1311,12 @@ samples:
     title: SSHd
 
 manuals:
+- sectiontitle: App
+  section:
+  - path: /app/working-with-app/
+    title: Working with Docker App
+  - path: /engine/reference/commandline/app/
+    title: CLI reference
 - sectiontitle: Cluster
   section:
   - path: /cluster/
@@ -1330,6 +1333,1345 @@ manuals:
     title: Environment variables
   - path: /cluster/reference/
     title: Subcommands
+- sectiontitle: Compose
+  section:
+  - path: /compose/
+    title: Overview of Docker Compose
+  - path: /compose/install/
+    title: Install Compose
+  - path: /compose/gettingstarted/
+    title: Getting started
+  - sectiontitle: Compose (docker-compose) CLI reference
+    section:
+    - path: /compose/reference/overview/
+      title: Overview of docker-compose CLI
+    - path: /compose/reference/envvars/
+      title: CLI environment variables
+    - path: /compose/completion/
+      title: Command-line completion
+    - path: /compose/reference/build/
+      title: build
+    - path: /compose/reference/bundle/
+      title: bundle
+    - path: /compose/reference/config/
+      title: config
+    - path: /compose/reference/create/
+      title: create
+    - path: /compose/reference/down/
+      title: down
+    - path: /compose/reference/events/
+      title: events
+    - path: /compose/reference/exec/
+      title: exec
+    - path: /compose/reference/help/
+      title: help
+    - path: /compose/reference/kill/
+      title: kill
+    - path: /compose/reference/logs/
+      title: logs
+    - path: /compose/reference/pause/
+      title: pause
+    - path: /compose/reference/port/
+      title: port
+    - path: /compose/reference/ps/
+      title: ps
+    - path: /compose/reference/pull/
+      title: pull
+    - path: /compose/reference/push/
+      title: push
+    - path: /compose/reference/restart/
+      title: restart
+    - path: /compose/reference/rm/
+      title: rm
+    - path: /compose/reference/run/
+      title: run
+    - path: /compose/reference/scale/
+      title: scale
+    - path: /compose/reference/start/
+      title: start
+    - path: /compose/reference/stop/
+      title: stop
+    - path: /compose/reference/top/
+      title: top
+    - path: /compose/reference/unpause/
+      title: unpause
+    - path: /compose/reference/up/
+      title: up
+  - sectiontitle: Compose file reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently asked questions
+  - path: /compose/bundles/
+    title: Docker stacks and distributed application bundles
+  - path: /compose/swarm/
+    title: Using Compose with Swarm
+  - path: /compose/env-file/
+    title: Environment file
+  - path: /compose/environment-variables/
+    title: Environment variables in Compose
+  - path: /compose/extends/
+    title: Extend services in Compose
+  - path: /compose/networking/
+    title: Networking in Compose
+  - path: /compose/production/
+    title: Using Compose in production
+  - path: /compose/link-env-deprecated/
+    title: Link environment variables (deprecated)
+  - path: /compose/startup-order/
+    title: Control startup order
+  - path: /compose/samples-for-compose/
+    title: Sample apps with Compose
+  - path: /release-notes/docker-compose/
+    title: Docker Compose release notes
+- sectiontitle: Context
+  section:
+  - path: /engine/context/working-with-contexts/
+    title: Working with Docker Contexts
+  - path: /engine/reference/commandline/context/
+    title: CLI reference
+- sectiontitle: Desktop
+  section:
+  - sectiontitle: Docker Desktop Enterprise
+    section:
+    - path: /ee/desktop/
+      title: Overview
+    - path: /ee/desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Admin
+      section:
+      - sectiontitle: Install
+        section:
+        - path: /ee/desktop/admin/install/mac/
+          title: Install DDE on Mac
+        - path: /ee/desktop/admin/install/windows/
+          title: Install DDE on Windows
+      - sectiontitle: Configure
+        section:
+        - path: /ee/desktop/admin/configure/mac-admin/
+          title: Configure DDE on Mac
+        - path: /ee/desktop/admin/configure/windows-admin/
+          title: Configure DDE on Windows
+    - sectiontitle: User
+      section:
+      - path: /ee/desktop/user/mac-user/
+        title: Use DDE on Mac
+      - path: /ee/desktop/user/windows-user/
+        title: Use DDE on Windows
+    - path: /ee/desktop/app-designer/
+      title: Application designer
+    - sectiontitle: Troubleshoot
+      section:
+      - path: /ee/desktop/troubleshoot/mac-issues/
+        title: Troubleshoot DDE issues on Mac
+      - path: /ee/desktop/troubleshoot/windows-issues/
+        title: Troubleshoot DDE issues on Windows
+  - sectiontitle: Docker Desktop for Mac
+    section:
+    - path: /docker-for-mac/
+      title: Getting started
+    - path: /docker-for-mac/install/
+      title: Install Docker Desktop for Mac
+    - path: /docker-for-mac/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /docker-for-mac/docker-toolbox/
+      title: Docker Desktop for Mac vs. Docker Toolbox
+    - path: /docker-for-mac/multi-arch/
+      title: Leveraging Multi-CPU architecture support
+    - path: /docker-for-mac/networking/
+      title: Networking
+    - path: /docker-for-mac/osxfs/
+      title: File system sharing
+    - path: /docker-for-mac/osxfs-caching/
+      title: Performance tuning for volume mounts (shared filesystems)
+    - path: /docker-for-mac/space/
+      title: Disk utilization
+    - path: /docker-for-mac/troubleshoot/
+      title: Logs and troubleshooting
+    - path: /docker-for-mac/faqs/
+      title: FAQs
+    - path: /docker-for-mac/opensource/
+      title: Open source licensing
+    - path: /docker-for-mac/release-notes/
+      title: Stable release notes
+    - path: /docker-for-mac/edge-release-notes/
+      title: Edge release notes
+  - sectiontitle: Docker Desktop for Windows
+    section:
+    - path: /docker-for-windows/
+      title: Getting started
+    - path: /docker-for-windows/install/
+      title: Install Docker Desktop for Windows
+    - path: /docker-for-windows/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /docker-for-windows/networking/
+      title: Networking
+    - path: /docker-for-windows/docker-toolbox/
+      title: Migrate Docker Toolbox
+    - path: /docker-for-windows/troubleshoot/
+      title: Logs and troubleshooting
+    - path: /docker-for-windows/faqs/
+      title: FAQs
+    - path: /docker-for-windows/opensource/
+      title: Open source licensing
+    - path: /docker-for-windows/release-notes/
+      title: Stable release notes
+    - path: /docker-for-windows/edge-release-notes/
+      title: Edge release notes
+    - path: /docker-for-windows/wsl-tech-preview/
+      title: Docker Desktop WSL 2 Tech Preview
+- sectiontitle: Docker Trusted Registry
+  section:
+  - path: /ee/dtr/
+    title: Docker Trusted Registry overview
+  - path: /ee/dtr/architecture/
+    title: Architecture
+  - sectiontitle: Administration
+    section:
+    - sectiontitle: Install
+      section:
+      - path: /ee/dtr/admin/install/system-requirements/
+        title: System requirements
+      - path: /ee/dtr/admin/install/
+        title: Install
+      - path: /ee/dtr/admin/install/install-offline/
+        title: Install offline
+      - path: /ee/dtr/admin/upgrade/
+        title: Upgrade
+      - path: /ee/dtr/admin/install/uninstall/
+        title: Uninstall
+    - sectiontitle: Configure
+      section:
+      - path: /ee/dtr/admin/configure/license-your-installation/
+        title: License your installation
+      - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
+        title: Use your own TLS certificates
+      - path: /ee/dtr/admin/configure/enable-single-sign-on/
+        title: Disable persistent cookies
+      - path: /ee/dtr/admin/configure/disable-persistent-cookies/
+        title: Enable single sign-on
+      - sectiontitle: External storage
+        section:
+        - path: /ee/dtr/admin/configure/external-storage/
+          title: Overview
+        - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
+          title: Switch storage backends
+        - path: /ee/dtr/admin/configure/external-storage/s3/
+          title: S3
+        - path: /ee/dtr/admin/configure/external-storage/nfs/
+          title: NFS
+      - path: /ee/dtr/admin/configure/set-up-high-availability/
+        title: Set up high availability
+      - path: /ee/dtr/admin/configure/use-a-load-balancer/
+        title: Use a load balancer
+      - path: /ee/dtr/admin/configure/set-up-vulnerability-scans/
+        title: Set up vulnerability scans
+      - sectiontitle: Deploy caches
+        section:
+        - title: Cache overview
+          path: /ee/dtr/admin/configure/deploy-caches/
+        - title: Cache deployment strategy
+          path: /ee/dtr/admin/configure/deploy-caches/strategy/
+        - title: Deploy a DTR cache with Docker Swarm
+          path: /ee/dtr/admin/configure/deploy-caches/simple/
+        - title: Deploy a DTR cache with Kubernetes
+          path: /ee/dtr/admin/configure/deploy-caches/simple-kube/
+        - title: Configure caches for high availability
+          path: /ee/dtr/admin/configure/deploy-caches/high-availability/
+        - title: Cache configuration reference
+          path: /ee/dtr/admin/configure/deploy-caches/configuration-reference/
+      - path: /ee/dtr/admin/configure/garbage-collection/
+        title: Garbage collection
+      - title: Allow users to create repositories when pushing
+        path: /ee/dtr/admin/configure/allow-creation-on-push/
+      - path: /ee/dtr/admin/configure/use-a-web-proxy/
+        title: Use a web proxy
+    - sectiontitle: Manage users
+      section:
+      - path: /ee/dtr/admin/manage-users/
+        title: Authentication and authorization
+      - path: /ee/dtr/admin/manage-users/create-and-manage-users/
+        title: Create and manage users
+      - path: /ee/dtr/admin/manage-users/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /ee/dtr/admin/manage-users/create-and-manage-orgs/
+        title: Create and manage organizations
+      - path: /ee/dtr/admin/manage-users/permission-levels/
+        title: Permission levels
+    - sectiontitle: Manage webhooks
+      section:
+        - title: Create and manage webhooks
+          path: /ee/dtr/admin/manage-webhooks/
+        - title: Use the web interface
+          path: /ee/dtr/admin/manage-webhooks/use-the-web-ui/
+        - title: Use the API
+          path: /ee/dtr/admin/manage-webhooks/use-the-api/
+    - sectiontitle: Manage jobs
+      section:
+      - path: /ee/dtr/admin/manage-jobs/job-queue/
+        title: Job Queue
+      - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
+        title: Audit Jobs with the Web Interface
+      - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
+        title: Audit Jobs with the API
+      - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
+        title: Enable Auto-Deletion of Job Logs
+    - sectiontitle: Monitor and troubleshoot
+      section:
+      - path: /ee/dtr/admin/monitor-and-troubleshoot/
+        title: Monitor the cluster status
+      - path: /ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/
+        title: Check Notary audit logs
+      - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-dtr/
+        title: Troubleshoot Docker Trusted Registry
+    - sectiontitle: Disaster recovery
+      section:
+      - title: Overview
+        path: /ee/dtr/admin/disaster-recovery/
+      - title: Repair a single replica
+        path: /ee/dtr/admin/disaster-recovery/repair-a-single-replica/
+      - title: Repair a cluster
+        path: /ee/dtr/admin/disaster-recovery/repair-a-cluster/
+      - title: Create a backup
+        path: /ee/dtr/admin/disaster-recovery/create-a-backup/
+      - title: Restore from a backup
+        path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
+    - title: CLI reference
+      path: /reference/dtr/2.7/cli/
+      nosync: true
+  - sectiontitle: User guides
+    section:
+    - sectiontitle: Access DTR
+      section:
+      - path: /ee/dtr/user/access-dtr/
+        title: Configure your Docker daemon
+      - path: /ee/dtr/user/access-dtr/configure-your-notary-client/
+        title: Configure your Notary client
+      - path: /ee/dtr/user/access-dtr/use-a-cache/
+        title: Use a cache
+    - sectiontitle: Manage images
+      section:
+      - path: /ee/dtr/user/manage-images/
+        title: Create a repository
+      - path: /ee/dtr/user/manage-images/review-repository-info/
+        title: Review repository info
+      - path: /ee/dtr/user/manage-images/pull-and-push-images/
+        title: Pull and push images
+      - path: /ee/dtr/user/manage-images/delete-images/
+        title: Delete images
+      - path: /ee/dtr/user/manage-images/scan-images-for-vulnerabilities/
+        title: Scan images for vulnerabilities
+      - title: Override a vulnerability
+        path: /ee/dtr/user/manage-images/override-a-vulnerability/
+      - path: /ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/
+        title: Prevent tags from being overwritten
+      - sectiontitle: Sign images
+        section:
+        - path: /ee/dtr/user/manage-images/sign-images/
+          title: Sign an image
+        - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
+          title: Trust with a Remote UCP
+    - sectiontitle: Promotion policies and mirroring
+      section:
+        - title: Overview
+          path: /ee/dtr/user/promotion-policies/
+        - title: Promote an image using policies
+          path: /ee/dtr/user/promotion-policies/internal-promotion/
+        - title: Mirror images to another registry
+          path: /ee/dtr/user/promotion-policies/push-mirror/
+        - title: Mirror images from another registry
+          path: /ee/dtr/user/promotion-policies/pull-mirror/
+        - title: Template reference
+          path: /ee/dtr/user/promotion-policies/templates/
+    - sectiontitle: Manage repository events
+      section:
+        - title: Audit repository events
+          path: /ee/dtr/user/audit-repository-events/
+        - title: Auto-delete repository events
+          path: /ee/dtr/admin/configure/auto-delete-repo-events/
+    - title: Manage applications
+      path: /ee/dtr/user/manage-applications/
+    - title: Manage access tokens
+      path: /ee/dtr/user/access-tokens/
+    - title: Tag pruning
+      path: /ee/dtr/user/tag-pruning/
+  - title: API reference
+    path: /reference/dtr/2.7/api/
+    nosync: true
+  - path: /ee/dtr/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
+    section:
+    - sectiontitle: Docker Trusted Registry 2.6
+      section:
+      - path: /datacenter/dtr/2.6/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.6/guides/architecture/
+        title: Architecture
+      - sectiontitle: Administration
+        section:
+        - sectiontitle: Install
+          section:
+          - path: /datacenter/dtr/2.6/guides/admin/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.6/guides/admin/install/
+            title: Install
+          - path: /datacenter/dtr/2.6/guides/admin/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.6/guides/admin/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.6/guides/admin/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configure
+          section:
+          - path: /datacenter/dtr/2.6/guides/admin/configure/license-your-installation/
+            title: License your installation
+          - path: /datacenter/dtr/2.6/guides/admin/configure/use-your-own-tls-certificates/
+            title: Use your own TLS certificates
+          - path: /datacenter/dtr/2.6/guides/admin/configure/enable-single-sign-on/
+            title: Enable single sign-on
+          - sectiontitle: External storage
+            section:
+            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/
+              title: Overview
+            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/storage-backend-migration/
+              title: Switch storage backends
+            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/s3/
+              title: S3
+            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/nfs/
+              title: NFS
+          - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-load-balancer/
+            title: Use a load balancer
+          - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-vulnerability-scans/
+            title: Set up vulnerability scans
+          - sectiontitle: Deploy caches
+            section:
+            - title: Cache overview
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/
+            - title: Cache deployment strategy
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/strategy/
+            - title: Deploy a DTR cache with Docker Swarm
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple/
+            - title: Deploy a DTR cache with Kubernetes
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple-kube/
+            - title: Configure caches for high availability
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/high-availability/
+            - title: Cache configuration reference
+              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/configuration-reference/
+          - path: /datacenter/dtr/2.6/guides/admin/configure/garbage-collection/
+            title: Garbage collection
+          - title: Allow users to create repositories when pushing
+            path: /datacenter/dtr/2.6/guides/admin/configure/allow-creation-on-push/
+          - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-web-proxy/
+            title: Use a web proxy
+        - sectiontitle: Manage users
+          section:
+          - path: /datacenter/dtr/2.6/guides/admin/manage-users/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.6/guides/admin/manage-users/permission-levels/
+            title: Permission levels
+        - sectiontitle: Manage webhooks
+          section:
+            - title: Create and manage webhooks
+              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/
+            - title: Use the web interface
+              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-web-ui/
+            - title: Use the API
+              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-api/
+        - sectiontitle: Manage jobs
+          section:
+          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/job-queue/
+            title: Job Queue
+          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-ui/
+            title: Audit Jobs with the Web Interface
+          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-api/
+            title: Audit Jobs with the API
+          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/auto-delete-job-logs/
+            title: Enable Auto-Deletion of Job Logs
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/
+            title: Monitor the cluster status
+          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+            title: Check Notary audit logs
+          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
+            title: Troubleshoot Docker Trusted Registry
+        - sectiontitle: Disaster recovery
+          section:
+          - title: Overview
+            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/
+          - title: Repair a single replica
+            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-single-replica/
+          - title: Repair a cluster
+            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-cluster/
+          - title: Create a backup
+            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/create-a-backup/
+          - title: Restore from a backup
+            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/restore-from-backup/
+        - sectiontitle: CLI Reference
+          section:
+          - path: /datacenter/dtr/2.6/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.6/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.6/reference/cli/destroy/
+            title: destroy
+          - path: /datacenter/dtr/2.6/reference/cli/emergency-repair/
+            title: emergency-repair
+          - path: /datacenter/dtr/2.6/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.6/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.6/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.6/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.6/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.6/reference/cli/upgrade/
+            title: upgrade
+      - sectiontitle: User guides
+        section:
+        - sectiontitle: Access DTR
+          section:
+          - path: /datacenter/dtr/2.6/guides/user/access-dtr/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.6/guides/user/access-dtr/configure-your-notary-client/
+            title: Configure your Notary client
+          - path: /datacenter/dtr/2.6/guides/user/access-dtr/use-a-cache/
+            title: Use a cache
+        - sectiontitle: Manage images
+          section:
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/
+            title: Create a repository
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/review-repository-info/
+            title: Review repository info
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/pull-and-push-images/
+            title: Pull and push images
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/delete-images/
+            title: Delete images
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/scan-images-for-vulnerabilities/
+            title: Scan images for vulnerabilities
+          - title: Override a vulnerability
+            path: /datacenter/dtr/2.6/guides/user/manage-images/override-a-vulnerability/
+          - path: /datacenter/dtr/2.6/guides/user/manage-images/prevent-tags-from-being-overwritten/
+            title: Prevent tags from being overwritten
+          - sectiontitle: Sign images
+            section:
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/
+              title: Sign an image
+            - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/trust-with-remote-ucp/
+              title: Trust with a Remote UCP
+        - sectiontitle: Promotion policies and mirroring
+          section:
+            - title: Overview
+              path: /datacenter/dtr/2.6/guides/user/promotion-policies/
+            - title: Promote an image using policies
+              path: /datacenter/dtr/2.6/guides/user/promotion-policies/internal-promotion/
+            - title: Mirror images to another registry
+              path: /datacenter/dtr/2.6/guides/user/promotion-policies/push-mirror/
+            - title: Mirror images from another registry
+              path: /datacenter/dtr/2.6/guides/user/promotion-policies/pull-mirror/
+            - title: Template reference
+              path: /datacenter/dtr/2.6/guides/user/promotion-policies/templates/
+        - sectiontitle: Manage repository events
+          section:
+            - title: Audit repository events
+              path: /datacenter/dtr/2.6/guides/user/audit-repository-events/
+            - title: Auto-delete repository events
+              path: /datacenter/dtr/2.6/guides/admin/configure/auto-delete-repo-events/
+        - title: Manage access tokens
+          path: /datacenter/dtr/2.6/guides/user/access-tokens/
+        - title: Tag pruning
+          path: /datacenter/dtr/2.6/guides/user/tag-pruning/
+      - title: API reference
+        path: /datacenter/dtr/2.6/reference/api/
+        nosync: true
+      - path: /datacenter/dtr/2.6/guides/release-notes/
+        title: Release notes
+    - sectiontitle: Docker Trusted Registry 2.5
+      section:
+      - path: /datacenter/dtr/2.5/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.5/guides/architecture/
+        title: Architecture
+      - sectiontitle: Administration
+        section:
+        - sectiontitle: Install
+          section:
+          - path: /datacenter/dtr/2.5/guides/admin/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.5/guides/admin/install/
+            title: Install
+          - path: /datacenter/dtr/2.5/guides/admin/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.5/guides/admin/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.5/guides/admin/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configure
+          section:
+          - path: /datacenter/dtr/2.5/guides/admin/configure/license-your-installation/
+            title: License your installation
+          - path: /datacenter/dtr/2.5/guides/admin/configure/use-your-own-tls-certificates/
+            title: Use your own TLS certificates
+          - path: /datacenter/dtr/2.5/guides/admin/configure/enable-single-sign-on/
+            title: Enable single sign-on
+          - sectiontitle: External storage
+            section:
+            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/
+              title: Overview
+            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/s3/
+              title: S3
+            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/nfs/
+              title: NFS
+          - path: /datacenter/dtr/2.5/guides/admin/configure/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-load-balancer/
+            title: Use a load balancer
+          - path: /datacenter/dtr/2.5/guides/admin/configure/set-up-vulnerability-scans/
+            title: Set up vulnerability scans
+          - sectiontitle: Deploy caches
+            section:
+            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/
+              title: Overview
+            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/strategy/
+              title: Cache deployment strategy
+            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/simple/
+              title: Deploy a DTR cache
+            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/high-availability/
+              title: Configure caches for high availability
+            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/configuration-reference/
+              title: Cache configuration reference
+          - path: /datacenter/dtr/2.5/guides/admin/configure/garbage-collection/
+            title: Garbage collection
+          - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-web-proxy/
+            title: Use a web proxy
+        - sectiontitle: Manage users
+          section:
+          - path: /datacenter/dtr/2.5/guides/admin/manage-users/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.5/guides/admin/manage-users/permission-levels/
+            title: Permission levels
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/
+            title: Monitor the cluster status
+          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+            title: Check Notary audit logs
+          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
+            title: Troubleshoot Docker Trusted Registry
+          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+            title: Troubleshoot batch jobs
+        - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/dtr/2.5/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.5/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.5/reference/cli/destroy/
+            title: destroy
+          - path: /datacenter/dtr/2.5/reference/cli/images/
+            title: images
+          - path: /datacenter/dtr/2.5/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.5/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.5/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.5/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.5/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.5/reference/cli/upgrade/
+            title: upgrade
+      - sectiontitle: User guides
+        section:
+        - sectiontitle: Access DTR
+          section:
+          - path: /datacenter/dtr/2.5/guides/user/access-dtr/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.5/guides/user/access-dtr/configure-your-notary-client/
+            title: Configure your Notary client
+          - path: /datacenter/dtr/2.5/guides/user/access-dtr/use-a-cache/
+            title: Use a cache
+        - sectiontitle: Manage images
+          section:
+          - path: /datacenter/dtr/2.5/guides/user/manage-images/
+            title: Create a repository
+          - path: /datacenter/dtr/2.5/guides/user/manage-images/pull-and-push-images/
+            title: Pull and push images
+          - path: /datacenter/dtr/2.5/guides/user/manage-images/delete-images/
+            title: Delete images
+          - path: /datacenter/dtr/2.5/guides/user/manage-images/scan-images-for-vulnerabilities/
+            title: Scan images for vulnerabilities
+          - path: /datacenter/dtr/2.5/guides/user/manage-images/prevent-tags-from-being-overwritten/
+            title: Prevent tags from being overwritten
+          - sectiontitle: Sign images
+            section:
+            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/
+              title: Sign an image
+            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/delegate-image-signing/
+              title: Delegate image signing
+            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/manage-trusted-repositories/
+              title: Manage trusted repositories
+        - path: /datacenter/dtr/2.5/guides/user/create-and-manage-webhooks/
+          title: Create and manage webhooks
+        - path: /datacenter/dtr/2.5/guides/user/create-promotion-policies/
+          title: Create promotion policies
+      - path: /datacenter/dtr/2.5/reference/api/
+        title: API reference
+      - path: /ee/dtr/release-notes/
+        title: Release notes
+        nosync: true
+      - path: /datacenter/dtr/2.5/guides/support/
+        title: Get support
+    - sectiontitle: Docker Trusted Registry 2.4
+      section:
+      - path: /datacenter/dtr/2.4/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.4/guides/architecture/
+        title: Architecture
+      - sectiontitle: Administration
+        section:
+        - sectiontitle: Install
+          section:
+          - path: /datacenter/dtr/2.4/guides/admin/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.4/guides/admin/install/
+            title: Install
+          - path: /datacenter/dtr/2.4/guides/admin/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.4/guides/admin/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.4/guides/admin/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configure
+          section:
+          - path: /datacenter/dtr/2.4/guides/admin/configure/license-your-installation/
+            title: License your installation
+          - path: /datacenter/dtr/2.4/guides/admin/configure/use-your-own-tls-certificates/
+            title: Use your own TLS certificates
+          - path: /datacenter/dtr/2.4/guides/admin/configure/enable-single-sign-on/
+            title: Enable single sign-on
+          - sectiontitle: External storage
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/
+              title: Overview
+            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/s3/
+              title: S3
+            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/nfs/
+              title: NFS
+          - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-load-balancer/
+            title: Use a load balancer
+          - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-vulnerability-scans/
+            title: Set up vulnerability scans
+          - sectiontitle: Deploy caches
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/
+              title: Overview
+            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/tls/
+              title: Deploy caches with TLS
+            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/chaining/
+              title: Chain multiple caches
+          - path: /datacenter/dtr/2.4/guides/admin/configure/garbage-collection/
+            title: Garbage collection
+          - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-web-proxy/
+            title: Use a web proxy
+        - sectiontitle: Manage users
+          section:
+          - path: /datacenter/dtr/2.4/guides/admin/manage-users/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.4/guides/admin/manage-users/permission-levels/
+            title: Permission levels
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/
+            title: Monitor the cluster status
+          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+            title: Check Notary audit logs
+          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+            title: Troubleshoot with logs
+          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+            title: Troubleshoot batch jobs
+        - path: /datacenter/dtr/2.4/guides/admin/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/dtr/2.4/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.4/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.4/reference/cli/destroy/
+            title: destroy
+          - path: /datacenter/dtr/2.4/reference/cli/images/
+            title: images
+          - path: /datacenter/dtr/2.4/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.4/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.4/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.4/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.4/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.4/reference/cli/upgrade/
+            title: upgrade
+      - sectiontitle: User guides
+        section:
+        - sectiontitle: Access DTR
+          section:
+          - path: /datacenter/dtr/2.4/guides/user/access-dtr/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.4/guides/user/access-dtr/configure-your-notary-client/
+            title: Configure your Notary client
+          - path: /datacenter/dtr/2.4/guides/user/access-dtr/use-a-cache/
+            title: Use a cache
+        - sectiontitle: Manage images
+          section:
+          - path: /datacenter/dtr/2.4/guides/user/manage-images/
+            title: Create a repository
+          - path: /datacenter/dtr/2.4/guides/user/manage-images/pull-and-push-images/
+            title: Pull and push images
+          - path: /datacenter/dtr/2.4/guides/user/manage-images/delete-images/
+            title: Delete images
+          - path: /datacenter/dtr/2.4/guides/user/manage-images/scan-images-for-vulnerabilities/
+            title: Scan images for vulnerabilities
+          - path: /datacenter/dtr/2.4/guides/user/manage-images/prevent-tags-from-being-overwritten/
+            title: Prevent tags from being overwritten
+          - sectiontitle: Sign images
+            section:
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/
+              title: Sign an image
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/delegate-image-signing/
+              title: Delegate image signing
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/manage-trusted-repositories/
+              title: Manage trusted repositories
+        - path: /datacenter/dtr/2.4/guides/user/create-and-manage-webhooks/
+          title: Create and manage webhooks
+        - path: /datacenter/dtr/2.4/guides/user/create-promotion-policies/
+          title: Create promotion policies
+      - path: /datacenter/dtr/2.4/reference/api/
+        title: API reference
+      - path: /ee/dtr/release-notes/
+        title: Release notes
+        nosync: true
+      - path: /datacenter/dtr/2.4/guides/support/
+        title: Get support
+    - sectiontitle: Docker Trusted Registry 2.3
+      section:
+      - path: /datacenter/dtr/2.3/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.3/guides/architecture/
+        title: Architecture
+      - sectiontitle: Administration
+        section:
+        - sectiontitle: Install
+          section:
+          - path: /datacenter/dtr/2.3/guides/admin/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.3/guides/admin/install/
+            title: Install
+          - path: /datacenter/dtr/2.3/guides/admin/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.3/guides/admin/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.3/guides/admin/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configure
+          section:
+          - path: /datacenter/dtr/2.3/guides/admin/configure/license-your-installation/
+            title: License your installation
+          - path: /datacenter/dtr/2.3/guides/admin/configure/use-your-own-tls-certificates/
+            title: Use your own TLS certificates
+          - path: /datacenter/dtr/2.3/guides/admin/configure/enable-single-sign-on/
+            title: Enable single sign-on
+          - sectiontitle: External storage
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/
+              title: Overview
+            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/s3/
+              title: S3
+            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/nfs/
+              title: NFS
+          - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-load-balancer/
+            title: Use a load balancer
+          - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-vulnerability-scans/
+            title: Set up vulnerability scans
+          - sectiontitle: Deploy caches
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/
+              title: Overview
+            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/tls/
+              title: Deploy caches with TLS
+            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/chaining/
+              title: Chain multiple caches
+          - path: /datacenter/dtr/2.3/guides/admin/configure/garbage-collection/
+            title: Garbage collection
+          - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-web-proxy/
+            title: Use a web proxy
+        - sectiontitle: Manage users
+          section:
+          - path: /datacenter/dtr/2.3/guides/admin/manage-users/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.3/guides/admin/manage-users/permission-levels/
+            title: Permission levels
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/
+            title: Monitor the cluster status
+          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+            title: Troubleshoot with logs
+          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+            title: Troubleshoot batch jobs
+        - path: /datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/dtr/2.3/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.3/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.3/reference/cli/destroy/
+            title: destroy
+          - path: /datacenter/dtr/2.3/reference/cli/dumpcerts/
+            title: dumpcerts
+          - path: /datacenter/dtr/2.3/reference/cli/images/
+            title: images
+          - path: /datacenter/dtr/2.3/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.3/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.3/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.3/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.3/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.3/reference/cli/upgrade/
+            title: upgrade
+      - sectiontitle: User guides
+        section:
+        - sectiontitle: Access DTR
+          section:
+          - path: /datacenter/dtr/2.3/guides/user/access-dtr/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.3/guides/user/access-dtr/configure-your-notary-client/
+            title: Configure your Notary client
+          - path: /datacenter/dtr/2.3/guides/user/access-dtr/use-a-cache/
+            title: Use a cache
+        - sectiontitle: Manage images
+          section:
+          - path: /datacenter/dtr/2.3/guides/user/manage-images/
+            title: Create a repository
+          - path: /datacenter/dtr/2.3/guides/user/manage-images/pull-and-push-images/
+            title: Pull and push images
+          - path: /datacenter/dtr/2.3/guides/user/manage-images/delete-images/
+            title: Delete images
+          - path: /datacenter/dtr/2.3/guides/user/manage-images/scan-images-for-vulnerabilities/
+            title: Scan images for vulnerabilities
+          - path: /datacenter/dtr/2.3/guides/user/manage-images/prevent-tags-from-being-overwritten/
+            title: Prevent tags from being overwritten
+          - sectiontitle: Sign images
+            section:
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/
+              title: Sign an image
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/delegate-image-signing/
+              title: Delegate image signing
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/manage-trusted-repositories/
+              title: Manage trusted repositories
+        - path: /datacenter/dtr/2.3/guides/user/create-and-manage-webhooks/
+          title: Create and manage webhooks
+        - path: /datacenter/dtr/2.3/guides/user/create-promotion-policies/
+          title: Create promotion policies
+      - path: /datacenter/dtr/2.3/reference/api/
+        title: API reference
+      - path: /datacenter/dtr/2.3/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/dtr/2.3/guides/support/
+        title: Get support
+    - sectiontitle: Docker Trusted Registry 2.2
+      section:
+      - path: /datacenter/dtr/2.2/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.2/guides/architecture/
+        title: Architecture
+      - sectiontitle: Administration
+        section:
+        - sectiontitle: Install
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.2/guides/admin/install/
+            title: Install
+          - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configure
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
+            title: License your installation
+          - path: /datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/
+            title: Use your own TLS certificates
+          - sectiontitle: External storage
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
+              title: Overview
+            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
+              title: S3
+            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
+              title: NFS
+          - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.2/guides/admin/configure/use-a-load-balancer/
+            title: Use a load balancer
+          - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
+            title: Set up vulnerability scans
+          - sectiontitle: Deploy caches
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/
+              title: Overview
+            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/
+              title: Deploy caches with TLS
+            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/
+              title: Chain multiple caches
+          - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
+            title: Garbage collection
+        - sectiontitle: Manage users
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
+            title: Permission levels
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/
+            title: Monitor the cluster status
+          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+            title: Troubleshoot with logs
+          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+            title: Troubleshoot batch jobs
+        - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/dtr/2.2/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.2/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.2/reference/cli/destroy/
+            title: destroy
+          - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
+            title: dumpcerts
+          - path: /datacenter/dtr/2.2/reference/cli/images/
+            title: images
+          - path: /datacenter/dtr/2.2/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.2/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.2/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.2/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.2/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.2/reference/cli/upgrade/
+            title: upgrade
+      - sectiontitle: User guides
+        section:
+        - sectiontitle: Access DTR
+          section:
+          - path: /datacenter/dtr/2.2/guides/user/access-dtr/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
+            title: Configure your Notary client
+          - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
+            title: Use a cache
+        - sectiontitle: Manage images
+          section:
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/
+            title: Create a repository
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/
+            title: Pull and push images
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/delete-images/
+            title: Delete images
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
+            title: Scan images for vulnerabilities
+          - sectiontitle: Sign images
+            section:
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/
+              title: Sign an image
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/
+              title: Delegate image signing
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/
+              title: Manage trusted repositories
+        - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
+          title: Create and manage webhooks
+      - path: /datacenter/dtr/2.2/reference/api/
+        title: API reference
+      - sectiontitle: Release notes
+        section:
+        - path: /datacenter/dtr/2.2/guides/release-notes/
+          title: Release notes
+        - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
+          title: Incompatibilities and breaking changes
+      - path: /datacenter/dtr/2.2/guides/support/
+        title: Get support
+    - sectiontitle: Docker Trusted Registry 2.1
+      section:
+      - path: /datacenter/dtr/2.1/guides/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.1/guides/architecture/
+        title: Architecture
+      - sectiontitle: Installation
+        section:
+        - path: /datacenter/dtr/2.1/guides/install/system-requirements/
+          title: System requirements
+        - path: /datacenter/dtr/2.1/guides/install/
+          title: Install Docker Trusted Registry
+        - path: /datacenter/dtr/2.1/guides/install/install-offline/
+          title: Install offline
+        - path: /datacenter/dtr/2.1/guides/install/license/
+          title: License your deployment
+        - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
+          title: Scale your deployment
+        - path: /datacenter/dtr/2.1/guides/install/upgrade/
+          title: Upgrade
+        - path: /datacenter/dtr/2.1/guides/install/uninstall/
+          title: Uninstall
+      - sectiontitle: Configuration
+        section:
+        - path: /datacenter/dtr/2.1/guides/configure/
+          title: Use your own certificates
+        - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
+          title: Storage configuration
+        - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
+          title: Use NFS
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/
+          title: Monitor DTR
+        - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/troubleshoot/
+          title: Troubleshoot DTR
+      - sectiontitle: High-availability
+        section:
+        - path: /datacenter/dtr/2.1/guides/high-availability/
+          title: Set up high availability
+        - path: /datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+      - sectiontitle: User management
+        section:
+        - path: /datacenter/dtr/2.1/guides/user-management/
+          title: Authentication and authorization
+        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/
+          title: Create and manage organizations
+        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/dtr/2.1/guides/user-management/permission-levels/
+          title: Permission levels
+      - sectiontitle: Repositories and images
+        section:
+        - path: /datacenter/dtr/2.1/guides/repos-and-images/
+          title: Configure your Docker daemon
+        - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
+          title: Pull an image
+        - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
+          title: Push an image
+        - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
+          title: Delete an image
+      - sectiontitle: API and CLI reference
+        section:
+        - path: /datacenter/dtr/2.1/reference/api/
+          title: API reference
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/dtr/2.1/reference/cli/
+            title: Overview
+          - path: /datacenter/dtr/2.1/reference/cli/backup/
+            title: backup
+          - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
+            title: dumpcerts
+          - path: /datacenter/dtr/2.1/reference/cli/images/
+            title: images
+          - path: /datacenter/dtr/2.1/reference/cli/install/
+            title: install
+          - path: /datacenter/dtr/2.1/reference/cli/join/
+            title: join
+          - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.1/reference/cli/remove/
+            title: remove
+          - path: /datacenter/dtr/2.1/reference/cli/restore/
+            title: restore
+          - path: /datacenter/dtr/2.1/reference/cli/upgrade/
+            title: upgrade
+      - path: /datacenter/dtr/2.1/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/dtr/2.1/guides/support/
+        title: Get support
+    - sectiontitle: Docker Trusted Registry 2.0
+      section:
+      - path: /datacenter/dtr/2.0/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.0/architecture/
+        title: Architecture
+      - sectiontitle: Installation
+        section:
+        - path: /datacenter/dtr/2.0/install/system-requirements/
+          title: System requirements
+        - path: /datacenter/dtr/2.0/install/
+          title: Install Docker Trusted Registry
+        - path: /datacenter/dtr/2.0/install/install-dtr-offline/
+          title: Install offline
+        - path: /datacenter/dtr/2.0/install/license/
+          title: License DTR
+        - sectiontitle: Upgrade
+          section:
+          - path: /datacenter/dtr/2.0/install/upgrade/upgrade-major/
+            title: Upgrade from 1.4.3
+          - path: /datacenter/dtr/2.0/install/upgrade/
+            title: Upgrade from 2.0.0
+        - path: /datacenter/dtr/2.0/install/uninstall/
+          title: Uninstall
+        - sectiontitle: docker/dtr image reference
+          section:
+          - path: /datacenter/dtr/2.0/reference/
+            title: Overview
+          - path: /datacenter/dtr/2.0/reference/backup/
+            title: backup
+          - path: /datacenter/dtr/2.0/reference/dumpcerts/
+            title: dumpcerts
+          - path: /datacenter/dtr/2.0/reference/images/
+            title: images
+          - path: /datacenter/dtr/2.0/reference/install/
+            title: install
+          - path: /datacenter/dtr/2.0/reference/join/
+            title: join
+          - path: /datacenter/dtr/2.0/reference/migrate/
+            title: migrate
+          - path: /datacenter/dtr/2.0/reference/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.0/reference/remove/
+            title: remove
+          - path: /datacenter/dtr/2.0/reference/restore/
+            title: restore
+          - path: /datacenter/dtr/2.0/reference/upgrade/
+            title: upgrade
+      - sectiontitle: Configuration
+        section:
+        - path: /datacenter/dtr/2.0/configure/configuration/
+          title: Configuration overview
+        - path: /datacenter/dtr/2.0/configure/config-general/
+          title: Configure general settings
+        - path: /datacenter/dtr/2.0/configure/config-security/
+          title: Security configuration
+        - path: /datacenter/dtr/2.0/configure/config-storage/
+          title: Storage configuration
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/dtr/2.0/monitor-troubleshoot/
+          title: Monitor DTR
+        - path: /datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot/
+          title: Troubleshoot DTR
+      - sectiontitle: High-availability
+        section:
+        - path: /datacenter/dtr/2.0/high-availability/
+          title: Set up high availability
+        - path: /datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+      - sectiontitle: User management
+        section:
+        - path: /datacenter/dtr/2.0/user-management/
+          title: Authentication and authorization
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-orgs/
+          title: Create and manage organizations
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/dtr/2.0/user-management/permission-levels/
+          title: Permission levels
+      - sectiontitle: Repositories and images
+        section:
+        - path: /datacenter/dtr/2.0/repos-and-images/
+          title: Configure your Docker daemon
+        - path: /datacenter/dtr/2.0/repos-and-images/pull-an-image/
+          title: Pull an image
+        - path: /datacenter/dtr/2.0/repos-and-images/push-an-image/
+          title: Push an image
+        - path: /datacenter/dtr/2.0/repos-and-images/delete-an-image/
+          title: Delete an image
+      - sectiontitle: Release notes
+        section:
+        - path: /datacenter/dtr/2.0/release-notes/
+          title: Trusted Registry release notes
+        - path: /datacenter/dtr/2.0/release-notes/prior-release-notes/
+          title: Prior Trusted Registry release notes
+      - sectiontitle: Trusted Registry API
+        section:
+        - path: /apidocs/v2.0.1/
+          title: API v2.0.1
+        - path: /apidocs/v2.0.0/
+          title: API v2.0.0
+        - path: /apidocs/v1.4.0/
+          title: API v1.4.0
+        - path: /apidocs/v1.3.3/
+          title: API v1.3.3
+      - path: /datacenter/dtr/2.0/support/
+        title: Get support
+- sectiontitle: Engine - Community
+  section:
+  - path: /install/
+    title: Engine here
 - sectiontitle: Engine - Enterprise
   section:
   - path: /ee/supported-platforms/
@@ -2596,1347 +3938,6 @@ manuals:
           title: Get support
         - path: /datacenter/ucp/1.1/release_notes/
         title: Release notes
-- sectiontitle: Docker Trusted Registry
-  section:
-  - path: /ee/dtr/
-    title: Docker Trusted Registry overview
-  - path: /ee/dtr/architecture/
-    title: Architecture
-  - sectiontitle: Administration
-    section:
-    - sectiontitle: Install
-      section:
-      - path: /ee/dtr/admin/install/system-requirements/
-        title: System requirements
-      - path: /ee/dtr/admin/install/
-        title: Install
-      - path: /ee/dtr/admin/install/install-offline/
-        title: Install offline
-      - path: /ee/dtr/admin/upgrade/
-        title: Upgrade
-      - path: /ee/dtr/admin/install/uninstall/
-        title: Uninstall
-    - sectiontitle: Configure
-      section:
-      - path: /ee/dtr/admin/configure/license-your-installation/
-        title: License your installation
-      - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
-        title: Use your own TLS certificates
-      - path: /ee/dtr/admin/configure/enable-single-sign-on/
-        title: Disable persistent cookies
-      - path: /ee/dtr/admin/configure/disable-persistent-cookies/
-        title: Enable single sign-on
-      - sectiontitle: External storage
-        section:
-        - path: /ee/dtr/admin/configure/external-storage/
-          title: Overview
-        - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
-          title: Switch storage backends
-        - path: /ee/dtr/admin/configure/external-storage/s3/
-          title: S3
-        - path: /ee/dtr/admin/configure/external-storage/nfs/
-          title: NFS
-      - path: /ee/dtr/admin/configure/set-up-high-availability/
-        title: Set up high availability
-      - path: /ee/dtr/admin/configure/use-a-load-balancer/
-        title: Use a load balancer
-      - path: /ee/dtr/admin/configure/set-up-vulnerability-scans/
-        title: Set up vulnerability scans
-      - sectiontitle: Deploy caches
-        section:
-        - title: Cache overview
-          path: /ee/dtr/admin/configure/deploy-caches/
-        - title: Cache deployment strategy
-          path: /ee/dtr/admin/configure/deploy-caches/strategy/
-        - title: Deploy a DTR cache with Docker Swarm
-          path: /ee/dtr/admin/configure/deploy-caches/simple/
-        - title: Deploy a DTR cache with Kubernetes
-          path: /ee/dtr/admin/configure/deploy-caches/simple-kube/
-        - title: Configure caches for high availability
-          path: /ee/dtr/admin/configure/deploy-caches/high-availability/
-        - title: Cache configuration reference
-          path: /ee/dtr/admin/configure/deploy-caches/configuration-reference/
-      - path: /ee/dtr/admin/configure/garbage-collection/
-        title: Garbage collection
-      - title: Allow users to create repositories when pushing
-        path: /ee/dtr/admin/configure/allow-creation-on-push/
-      - path: /ee/dtr/admin/configure/use-a-web-proxy/
-        title: Use a web proxy
-    - sectiontitle: Manage users
-      section:
-      - path: /ee/dtr/admin/manage-users/
-        title: Authentication and authorization
-      - path: /ee/dtr/admin/manage-users/create-and-manage-users/
-        title: Create and manage users
-      - path: /ee/dtr/admin/manage-users/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /ee/dtr/admin/manage-users/create-and-manage-orgs/
-        title: Create and manage organizations
-      - path: /ee/dtr/admin/manage-users/permission-levels/
-        title: Permission levels
-    - sectiontitle: Manage webhooks
-      section:
-        - title: Create and manage webhooks
-          path: /ee/dtr/admin/manage-webhooks/
-        - title: Use the web interface
-          path: /ee/dtr/admin/manage-webhooks/use-the-web-ui/
-        - title: Use the API
-          path: /ee/dtr/admin/manage-webhooks/use-the-api/
-    - sectiontitle: Manage jobs
-      section:
-      - path: /ee/dtr/admin/manage-jobs/job-queue/
-        title: Job Queue
-      - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-ui/
-        title: Audit Jobs with the Web Interface
-      - path: /ee/dtr/admin/manage-jobs/audit-jobs-via-api/
-        title: Audit Jobs with the API
-      - path: /ee/dtr/admin/manage-jobs/auto-delete-job-logs/
-        title: Enable Auto-Deletion of Job Logs
-    - sectiontitle: Monitor and troubleshoot
-      section:
-      - path: /ee/dtr/admin/monitor-and-troubleshoot/
-        title: Monitor the cluster status
-      - path: /ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/
-        title: Check Notary audit logs
-      - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-dtr/
-        title: Troubleshoot Docker Trusted Registry
-    - sectiontitle: Disaster recovery
-      section:
-      - title: Overview
-        path: /ee/dtr/admin/disaster-recovery/
-      - title: Repair a single replica
-        path: /ee/dtr/admin/disaster-recovery/repair-a-single-replica/
-      - title: Repair a cluster
-        path: /ee/dtr/admin/disaster-recovery/repair-a-cluster/
-      - title: Create a backup
-        path: /ee/dtr/admin/disaster-recovery/create-a-backup/
-      - title: Restore from a backup
-        path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
-    - title: CLI reference
-      path: /reference/dtr/2.7/cli/
-      nosync: true
-  - sectiontitle: User guides
-    section:
-    - sectiontitle: Access DTR
-      section:
-      - path: /ee/dtr/user/access-dtr/
-        title: Configure your Docker daemon
-      - path: /ee/dtr/user/access-dtr/configure-your-notary-client/
-        title: Configure your Notary client
-      - path: /ee/dtr/user/access-dtr/use-a-cache/
-        title: Use a cache
-    - sectiontitle: Manage images
-      section:
-      - path: /ee/dtr/user/manage-images/
-        title: Create a repository
-      - path: /ee/dtr/user/manage-images/review-repository-info/
-        title: Review repository info
-      - path: /ee/dtr/user/manage-images/pull-and-push-images/
-        title: Pull and push images
-      - path: /ee/dtr/user/manage-images/delete-images/
-        title: Delete images
-      - path: /ee/dtr/user/manage-images/scan-images-for-vulnerabilities/
-        title: Scan images for vulnerabilities
-      - title: Override a vulnerability
-        path: /ee/dtr/user/manage-images/override-a-vulnerability/
-      - path: /ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/
-        title: Prevent tags from being overwritten
-      - sectiontitle: Sign images
-        section:
-        - path: /ee/dtr/user/manage-images/sign-images/
-          title: Sign an image
-        - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
-          title: Trust with a Remote UCP
-    - sectiontitle: Promotion policies and mirroring
-      section:
-        - title: Overview
-          path: /ee/dtr/user/promotion-policies/
-        - title: Promote an image using policies
-          path: /ee/dtr/user/promotion-policies/internal-promotion/
-        - title: Mirror images to another registry
-          path: /ee/dtr/user/promotion-policies/push-mirror/
-        - title: Mirror images from another registry
-          path: /ee/dtr/user/promotion-policies/pull-mirror/
-        - title: Template reference
-          path: /ee/dtr/user/promotion-policies/templates/
-    - sectiontitle: Manage repository events
-      section:
-        - title: Audit repository events
-          path: /ee/dtr/user/audit-repository-events/
-        - title: Auto-delete repository events
-          path: /ee/dtr/admin/configure/auto-delete-repo-events/
-    - title: Manage applications
-      path: /ee/dtr/user/manage-applications/
-    - title: Manage access tokens
-      path: /ee/dtr/user/access-tokens/
-    - title: Tag pruning
-      path: /ee/dtr/user/tag-pruning/
-  - title: API reference
-    path: /reference/dtr/2.7/api/
-    nosync: true
-  - path: /ee/dtr/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
-    section:
-    - sectiontitle: Docker Trusted Registry 2.6
-      section:
-      - path: /datacenter/dtr/2.6/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.6/guides/architecture/
-        title: Architecture
-      - sectiontitle: Administration
-        section:
-        - sectiontitle: Install
-          section:
-          - path: /datacenter/dtr/2.6/guides/admin/install/system-requirements/
-            title: System requirements
-          - path: /datacenter/dtr/2.6/guides/admin/install/
-            title: Install
-          - path: /datacenter/dtr/2.6/guides/admin/install/install-offline/
-            title: Install offline
-          - path: /datacenter/dtr/2.6/guides/admin/upgrade/
-            title: Upgrade
-          - path: /datacenter/dtr/2.6/guides/admin/install/uninstall/
-            title: Uninstall
-        - sectiontitle: Configure
-          section:
-          - path: /datacenter/dtr/2.6/guides/admin/configure/license-your-installation/
-            title: License your installation
-          - path: /datacenter/dtr/2.6/guides/admin/configure/use-your-own-tls-certificates/
-            title: Use your own TLS certificates
-          - path: /datacenter/dtr/2.6/guides/admin/configure/enable-single-sign-on/
-            title: Enable single sign-on
-          - sectiontitle: External storage
-            section:
-            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/
-              title: Overview
-            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/storage-backend-migration/
-              title: Switch storage backends
-            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/s3/
-              title: S3
-            - path: /datacenter/dtr/2.6/guides/admin/configure/external-storage/nfs/
-              title: NFS
-          - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-high-availability/
-            title: Set up high availability
-          - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-load-balancer/
-            title: Use a load balancer
-          - path: /datacenter/dtr/2.6/guides/admin/configure/set-up-vulnerability-scans/
-            title: Set up vulnerability scans
-          - sectiontitle: Deploy caches
-            section:
-            - title: Cache overview
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/
-            - title: Cache deployment strategy
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/strategy/
-            - title: Deploy a DTR cache with Docker Swarm
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple/
-            - title: Deploy a DTR cache with Kubernetes
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/simple-kube/
-            - title: Configure caches for high availability
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/high-availability/
-            - title: Cache configuration reference
-              path: /datacenter/dtr/2.6/guides/admin/configure/deploy-caches/configuration-reference/
-          - path: /datacenter/dtr/2.6/guides/admin/configure/garbage-collection/
-            title: Garbage collection
-          - title: Allow users to create repositories when pushing
-            path: /datacenter/dtr/2.6/guides/admin/configure/allow-creation-on-push/
-          - path: /datacenter/dtr/2.6/guides/admin/configure/use-a-web-proxy/
-            title: Use a web proxy
-        - sectiontitle: Manage users
-          section:
-          - path: /datacenter/dtr/2.6/guides/admin/manage-users/
-            title: Authentication and authorization
-          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-teams/
-            title: Create and manage teams
-          - path: /datacenter/dtr/2.6/guides/admin/manage-users/create-and-manage-orgs/
-            title: Create and manage organizations
-          - path: /datacenter/dtr/2.6/guides/admin/manage-users/permission-levels/
-            title: Permission levels
-        - sectiontitle: Manage webhooks
-          section:
-            - title: Create and manage webhooks
-              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/
-            - title: Use the web interface
-              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-web-ui/
-            - title: Use the API
-              path: /datacenter/dtr/2.6/guides/admin/manage-webhooks/use-the-api/
-        - sectiontitle: Manage jobs
-          section:
-          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/job-queue/
-            title: Job Queue
-          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-ui/
-            title: Audit Jobs with the Web Interface
-          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/audit-jobs-via-api/
-            title: Audit Jobs with the API
-          - path: /datacenter/dtr/2.6/guides/admin/manage-jobs/auto-delete-job-logs/
-            title: Enable Auto-Deletion of Job Logs
-        - sectiontitle: Monitor and troubleshoot
-          section:
-          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/
-            title: Monitor the cluster status
-          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
-            title: Check Notary audit logs
-          - path: /datacenter/dtr/2.6/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
-            title: Troubleshoot Docker Trusted Registry
-        - sectiontitle: Disaster recovery
-          section:
-          - title: Overview
-            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/
-          - title: Repair a single replica
-            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-single-replica/
-          - title: Repair a cluster
-            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/repair-a-cluster/
-          - title: Create a backup
-            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/create-a-backup/
-          - title: Restore from a backup
-            path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/restore-from-backup/
-        - sectiontitle: CLI Reference
-          section:
-          - path: /datacenter/dtr/2.6/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.6/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.6/reference/cli/destroy/
-            title: destroy
-          - path: /datacenter/dtr/2.6/reference/cli/emergency-repair/
-            title: emergency-repair
-          - path: /datacenter/dtr/2.6/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.6/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.6/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.6/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.6/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.6/reference/cli/upgrade/
-            title: upgrade
-      - sectiontitle: User guides
-        section:
-        - sectiontitle: Access DTR
-          section:
-          - path: /datacenter/dtr/2.6/guides/user/access-dtr/
-            title: Configure your Docker daemon
-          - path: /datacenter/dtr/2.6/guides/user/access-dtr/configure-your-notary-client/
-            title: Configure your Notary client
-          - path: /datacenter/dtr/2.6/guides/user/access-dtr/use-a-cache/
-            title: Use a cache
-        - sectiontitle: Manage images
-          section:
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/
-            title: Create a repository
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/review-repository-info/
-            title: Review repository info
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/pull-and-push-images/
-            title: Pull and push images
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/delete-images/
-            title: Delete images
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/scan-images-for-vulnerabilities/
-            title: Scan images for vulnerabilities
-          - title: Override a vulnerability
-            path: /datacenter/dtr/2.6/guides/user/manage-images/override-a-vulnerability/
-          - path: /datacenter/dtr/2.6/guides/user/manage-images/prevent-tags-from-being-overwritten/
-            title: Prevent tags from being overwritten
-          - sectiontitle: Sign images
-            section:
-            - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/
-              title: Sign an image
-            - path: /datacenter/dtr/2.6/guides/user/manage-images/sign-images/trust-with-remote-ucp/
-              title: Trust with a Remote UCP
-        - sectiontitle: Promotion policies and mirroring
-          section:
-            - title: Overview
-              path: /datacenter/dtr/2.6/guides/user/promotion-policies/
-            - title: Promote an image using policies
-              path: /datacenter/dtr/2.6/guides/user/promotion-policies/internal-promotion/
-            - title: Mirror images to another registry
-              path: /datacenter/dtr/2.6/guides/user/promotion-policies/push-mirror/
-            - title: Mirror images from another registry
-              path: /datacenter/dtr/2.6/guides/user/promotion-policies/pull-mirror/
-            - title: Template reference
-              path: /datacenter/dtr/2.6/guides/user/promotion-policies/templates/
-        - sectiontitle: Manage repository events
-          section:
-            - title: Audit repository events
-              path: /datacenter/dtr/2.6/guides/user/audit-repository-events/
-            - title: Auto-delete repository events
-              path: /datacenter/dtr/2.6/guides/admin/configure/auto-delete-repo-events/
-        - title: Manage access tokens
-          path: /datacenter/dtr/2.6/guides/user/access-tokens/
-        - title: Tag pruning
-          path: /datacenter/dtr/2.6/guides/user/tag-pruning/
-      - title: API reference
-        path: /datacenter/dtr/2.6/reference/api/
-        nosync: true
-      - path: /datacenter/dtr/2.6/guides/release-notes/
-        title: Release notes
-    - sectiontitle: Docker Trusted Registry 2.5
-      section:
-      - path: /datacenter/dtr/2.5/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.5/guides/architecture/
-        title: Architecture
-      - sectiontitle: Administration
-        section:
-        - sectiontitle: Install
-          section:
-          - path: /datacenter/dtr/2.5/guides/admin/install/system-requirements/
-            title: System requirements
-          - path: /datacenter/dtr/2.5/guides/admin/install/
-            title: Install
-          - path: /datacenter/dtr/2.5/guides/admin/install/install-offline/
-            title: Install offline
-          - path: /datacenter/dtr/2.5/guides/admin/upgrade/
-            title: Upgrade
-          - path: /datacenter/dtr/2.5/guides/admin/install/uninstall/
-            title: Uninstall
-        - sectiontitle: Configure
-          section:
-          - path: /datacenter/dtr/2.5/guides/admin/configure/license-your-installation/
-            title: License your installation
-          - path: /datacenter/dtr/2.5/guides/admin/configure/use-your-own-tls-certificates/
-            title: Use your own TLS certificates
-          - path: /datacenter/dtr/2.5/guides/admin/configure/enable-single-sign-on/
-            title: Enable single sign-on
-          - sectiontitle: External storage
-            section:
-            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/
-              title: Overview
-            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/s3/
-              title: S3
-            - path: /datacenter/dtr/2.5/guides/admin/configure/external-storage/nfs/
-              title: NFS
-          - path: /datacenter/dtr/2.5/guides/admin/configure/set-up-high-availability/
-            title: Set up high availability
-          - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-load-balancer/
-            title: Use a load balancer
-          - path: /datacenter/dtr/2.5/guides/admin/configure/set-up-vulnerability-scans/
-            title: Set up vulnerability scans
-          - sectiontitle: Deploy caches
-            section:
-            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/
-              title: Overview
-            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/strategy/
-              title: Cache deployment strategy
-            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/simple/
-              title: Deploy a DTR cache
-            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/high-availability/
-              title: Configure caches for high availability
-            - path: /datacenter/dtr/2.5/guides/admin/configure/deploy-caches/configuration-reference/
-              title: Cache configuration reference
-          - path: /datacenter/dtr/2.5/guides/admin/configure/garbage-collection/
-            title: Garbage collection
-          - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-web-proxy/
-            title: Use a web proxy
-        - sectiontitle: Manage users
-          section:
-          - path: /datacenter/dtr/2.5/guides/admin/manage-users/
-            title: Authentication and authorization
-          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-teams/
-            title: Create and manage teams
-          - path: /datacenter/dtr/2.5/guides/admin/manage-users/create-and-manage-orgs/
-            title: Create and manage organizations
-          - path: /datacenter/dtr/2.5/guides/admin/manage-users/permission-levels/
-            title: Permission levels
-        - sectiontitle: Monitor and troubleshoot
-          section:
-          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/
-            title: Monitor the cluster status
-          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
-            title: Check Notary audit logs
-          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-dtr/
-            title: Troubleshoot Docker Trusted Registry
-          - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
-            title: Troubleshoot batch jobs
-        - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.5/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.5/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.5/reference/cli/destroy/
-            title: destroy
-          - path: /datacenter/dtr/2.5/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.5/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.5/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.5/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.5/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.5/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.5/reference/cli/upgrade/
-            title: upgrade
-      - sectiontitle: User guides
-        section:
-        - sectiontitle: Access DTR
-          section:
-          - path: /datacenter/dtr/2.5/guides/user/access-dtr/
-            title: Configure your Docker daemon
-          - path: /datacenter/dtr/2.5/guides/user/access-dtr/configure-your-notary-client/
-            title: Configure your Notary client
-          - path: /datacenter/dtr/2.5/guides/user/access-dtr/use-a-cache/
-            title: Use a cache
-        - sectiontitle: Manage images
-          section:
-          - path: /datacenter/dtr/2.5/guides/user/manage-images/
-            title: Create a repository
-          - path: /datacenter/dtr/2.5/guides/user/manage-images/pull-and-push-images/
-            title: Pull and push images
-          - path: /datacenter/dtr/2.5/guides/user/manage-images/delete-images/
-            title: Delete images
-          - path: /datacenter/dtr/2.5/guides/user/manage-images/scan-images-for-vulnerabilities/
-            title: Scan images for vulnerabilities
-          - path: /datacenter/dtr/2.5/guides/user/manage-images/prevent-tags-from-being-overwritten/
-            title: Prevent tags from being overwritten
-          - sectiontitle: Sign images
-            section:
-            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/
-              title: Sign an image
-            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/delegate-image-signing/
-              title: Delegate image signing
-            - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/manage-trusted-repositories/
-              title: Manage trusted repositories
-        - path: /datacenter/dtr/2.5/guides/user/create-and-manage-webhooks/
-          title: Create and manage webhooks
-        - path: /datacenter/dtr/2.5/guides/user/create-promotion-policies/
-          title: Create promotion policies
-      - path: /datacenter/dtr/2.5/reference/api/
-        title: API reference
-      - path: /ee/dtr/release-notes/
-        title: Release notes
-        nosync: true
-      - path: /datacenter/dtr/2.5/guides/support/
-        title: Get support
-    - sectiontitle: Docker Trusted Registry 2.4
-      section:
-      - path: /datacenter/dtr/2.4/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.4/guides/architecture/
-        title: Architecture
-      - sectiontitle: Administration
-        section:
-        - sectiontitle: Install
-          section:
-          - path: /datacenter/dtr/2.4/guides/admin/install/system-requirements/
-            title: System requirements
-          - path: /datacenter/dtr/2.4/guides/admin/install/
-            title: Install
-          - path: /datacenter/dtr/2.4/guides/admin/install/install-offline/
-            title: Install offline
-          - path: /datacenter/dtr/2.4/guides/admin/upgrade/
-            title: Upgrade
-          - path: /datacenter/dtr/2.4/guides/admin/install/uninstall/
-            title: Uninstall
-        - sectiontitle: Configure
-          section:
-          - path: /datacenter/dtr/2.4/guides/admin/configure/license-your-installation/
-            title: License your installation
-          - path: /datacenter/dtr/2.4/guides/admin/configure/use-your-own-tls-certificates/
-            title: Use your own TLS certificates
-          - path: /datacenter/dtr/2.4/guides/admin/configure/enable-single-sign-on/
-            title: Enable single sign-on
-          - sectiontitle: External storage
-            section:
-            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/
-              title: Overview
-            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/s3/
-              title: S3
-            - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/nfs/
-              title: NFS
-          - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-high-availability/
-            title: Set up high availability
-          - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-load-balancer/
-            title: Use a load balancer
-          - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-vulnerability-scans/
-            title: Set up vulnerability scans
-          - sectiontitle: Deploy caches
-            section:
-            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/
-              title: Overview
-            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/tls/
-              title: Deploy caches with TLS
-            - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/chaining/
-              title: Chain multiple caches
-          - path: /datacenter/dtr/2.4/guides/admin/configure/garbage-collection/
-            title: Garbage collection
-          - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-web-proxy/
-            title: Use a web proxy
-        - sectiontitle: Manage users
-          section:
-          - path: /datacenter/dtr/2.4/guides/admin/manage-users/
-            title: Authentication and authorization
-          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-teams/
-            title: Create and manage teams
-          - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-orgs/
-            title: Create and manage organizations
-          - path: /datacenter/dtr/2.4/guides/admin/manage-users/permission-levels/
-            title: Permission levels
-        - sectiontitle: Monitor and troubleshoot
-          section:
-          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/
-            title: Monitor the cluster status
-          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
-            title: Check Notary audit logs
-          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
-            title: Troubleshoot with logs
-          - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
-            title: Troubleshoot batch jobs
-        - path: /datacenter/dtr/2.4/guides/admin/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.4/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.4/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.4/reference/cli/destroy/
-            title: destroy
-          - path: /datacenter/dtr/2.4/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.4/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.4/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.4/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.4/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.4/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.4/reference/cli/upgrade/
-            title: upgrade
-      - sectiontitle: User guides
-        section:
-        - sectiontitle: Access DTR
-          section:
-          - path: /datacenter/dtr/2.4/guides/user/access-dtr/
-            title: Configure your Docker daemon
-          - path: /datacenter/dtr/2.4/guides/user/access-dtr/configure-your-notary-client/
-            title: Configure your Notary client
-          - path: /datacenter/dtr/2.4/guides/user/access-dtr/use-a-cache/
-            title: Use a cache
-        - sectiontitle: Manage images
-          section:
-          - path: /datacenter/dtr/2.4/guides/user/manage-images/
-            title: Create a repository
-          - path: /datacenter/dtr/2.4/guides/user/manage-images/pull-and-push-images/
-            title: Pull and push images
-          - path: /datacenter/dtr/2.4/guides/user/manage-images/delete-images/
-            title: Delete images
-          - path: /datacenter/dtr/2.4/guides/user/manage-images/scan-images-for-vulnerabilities/
-            title: Scan images for vulnerabilities
-          - path: /datacenter/dtr/2.4/guides/user/manage-images/prevent-tags-from-being-overwritten/
-            title: Prevent tags from being overwritten
-          - sectiontitle: Sign images
-            section:
-            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/
-              title: Sign an image
-            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/delegate-image-signing/
-              title: Delegate image signing
-            - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/manage-trusted-repositories/
-              title: Manage trusted repositories
-        - path: /datacenter/dtr/2.4/guides/user/create-and-manage-webhooks/
-          title: Create and manage webhooks
-        - path: /datacenter/dtr/2.4/guides/user/create-promotion-policies/
-          title: Create promotion policies
-      - path: /datacenter/dtr/2.4/reference/api/
-        title: API reference
-      - path: /ee/dtr/release-notes/
-        title: Release notes
-        nosync: true
-      - path: /datacenter/dtr/2.4/guides/support/
-        title: Get support
-    - sectiontitle: Docker Trusted Registry 2.3
-      section:
-      - path: /datacenter/dtr/2.3/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.3/guides/architecture/
-        title: Architecture
-      - sectiontitle: Administration
-        section:
-        - sectiontitle: Install
-          section:
-          - path: /datacenter/dtr/2.3/guides/admin/install/system-requirements/
-            title: System requirements
-          - path: /datacenter/dtr/2.3/guides/admin/install/
-            title: Install
-          - path: /datacenter/dtr/2.3/guides/admin/install/install-offline/
-            title: Install offline
-          - path: /datacenter/dtr/2.3/guides/admin/upgrade/
-            title: Upgrade
-          - path: /datacenter/dtr/2.3/guides/admin/install/uninstall/
-            title: Uninstall
-        - sectiontitle: Configure
-          section:
-          - path: /datacenter/dtr/2.3/guides/admin/configure/license-your-installation/
-            title: License your installation
-          - path: /datacenter/dtr/2.3/guides/admin/configure/use-your-own-tls-certificates/
-            title: Use your own TLS certificates
-          - path: /datacenter/dtr/2.3/guides/admin/configure/enable-single-sign-on/
-            title: Enable single sign-on
-          - sectiontitle: External storage
-            section:
-            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/
-              title: Overview
-            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/s3/
-              title: S3
-            - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/nfs/
-              title: NFS
-          - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-high-availability/
-            title: Set up high availability
-          - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-load-balancer/
-            title: Use a load balancer
-          - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-vulnerability-scans/
-            title: Set up vulnerability scans
-          - sectiontitle: Deploy caches
-            section:
-            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/
-              title: Overview
-            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/tls/
-              title: Deploy caches with TLS
-            - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/chaining/
-              title: Chain multiple caches
-          - path: /datacenter/dtr/2.3/guides/admin/configure/garbage-collection/
-            title: Garbage collection
-          - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-web-proxy/
-            title: Use a web proxy
-        - sectiontitle: Manage users
-          section:
-          - path: /datacenter/dtr/2.3/guides/admin/manage-users/
-            title: Authentication and authorization
-          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-teams/
-            title: Create and manage teams
-          - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-orgs/
-            title: Create and manage organizations
-          - path: /datacenter/dtr/2.3/guides/admin/manage-users/permission-levels/
-            title: Permission levels
-        - sectiontitle: Monitor and troubleshoot
-          section:
-          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/
-            title: Monitor the cluster status
-          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
-            title: Troubleshoot with logs
-          - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
-            title: Troubleshoot batch jobs
-        - path: /datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.3/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.3/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.3/reference/cli/destroy/
-            title: destroy
-          - path: /datacenter/dtr/2.3/reference/cli/dumpcerts/
-            title: dumpcerts
-          - path: /datacenter/dtr/2.3/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.3/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.3/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.3/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.3/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.3/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.3/reference/cli/upgrade/
-            title: upgrade
-      - sectiontitle: User guides
-        section:
-        - sectiontitle: Access DTR
-          section:
-          - path: /datacenter/dtr/2.3/guides/user/access-dtr/
-            title: Configure your Docker daemon
-          - path: /datacenter/dtr/2.3/guides/user/access-dtr/configure-your-notary-client/
-            title: Configure your Notary client
-          - path: /datacenter/dtr/2.3/guides/user/access-dtr/use-a-cache/
-            title: Use a cache
-        - sectiontitle: Manage images
-          section:
-          - path: /datacenter/dtr/2.3/guides/user/manage-images/
-            title: Create a repository
-          - path: /datacenter/dtr/2.3/guides/user/manage-images/pull-and-push-images/
-            title: Pull and push images
-          - path: /datacenter/dtr/2.3/guides/user/manage-images/delete-images/
-            title: Delete images
-          - path: /datacenter/dtr/2.3/guides/user/manage-images/scan-images-for-vulnerabilities/
-            title: Scan images for vulnerabilities
-          - path: /datacenter/dtr/2.3/guides/user/manage-images/prevent-tags-from-being-overwritten/
-            title: Prevent tags from being overwritten
-          - sectiontitle: Sign images
-            section:
-            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/
-              title: Sign an image
-            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/delegate-image-signing/
-              title: Delegate image signing
-            - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/manage-trusted-repositories/
-              title: Manage trusted repositories
-        - path: /datacenter/dtr/2.3/guides/user/create-and-manage-webhooks/
-          title: Create and manage webhooks
-        - path: /datacenter/dtr/2.3/guides/user/create-promotion-policies/
-          title: Create promotion policies
-      - path: /datacenter/dtr/2.3/reference/api/
-        title: API reference
-      - path: /datacenter/dtr/2.3/guides/release-notes/
-        title: Release notes
-      - path: /datacenter/dtr/2.3/guides/support/
-        title: Get support
-    - sectiontitle: Docker Trusted Registry 2.2
-      section:
-      - path: /datacenter/dtr/2.2/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.2/guides/architecture/
-        title: Architecture
-      - sectiontitle: Administration
-        section:
-        - sectiontitle: Install
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/install/system-requirements/
-            title: System requirements
-          - path: /datacenter/dtr/2.2/guides/admin/install/
-            title: Install
-          - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
-            title: Install offline
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
-            title: Upgrade
-          - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
-            title: Uninstall
-        - sectiontitle: Configure
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
-            title: License your installation
-          - path: /datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/
-            title: Use your own TLS certificates
-          - sectiontitle: External storage
-            section:
-            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
-              title: Overview
-            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
-              title: S3
-            - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
-              title: NFS
-          - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
-            title: Set up high availability
-          - path: /datacenter/dtr/2.2/guides/admin/configure/use-a-load-balancer/
-            title: Use a load balancer
-          - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
-            title: Set up vulnerability scans
-          - sectiontitle: Deploy caches
-            section:
-            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/
-              title: Overview
-            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/
-              title: Deploy caches with TLS
-            - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/
-              title: Chain multiple caches
-          - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
-            title: Garbage collection
-        - sectiontitle: Manage users
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
-            title: Create and manage users
-          - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
-            title: Create and manage teams
-          - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
-            title: Permission levels
-        - sectiontitle: Monitor and troubleshoot
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/
-            title: Monitor the cluster status
-          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
-            title: Troubleshoot with logs
-          - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
-            title: Troubleshoot batch jobs
-        - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.2/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.2/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.2/reference/cli/destroy/
-            title: destroy
-          - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
-            title: dumpcerts
-          - path: /datacenter/dtr/2.2/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.2/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.2/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.2/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.2/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.2/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.2/reference/cli/upgrade/
-            title: upgrade
-      - sectiontitle: User guides
-        section:
-        - sectiontitle: Access DTR
-          section:
-          - path: /datacenter/dtr/2.2/guides/user/access-dtr/
-            title: Configure your Docker daemon
-          - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
-            title: Configure your Notary client
-          - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
-            title: Use a cache
-        - sectiontitle: Manage images
-          section:
-          - path: /datacenter/dtr/2.2/guides/user/manage-images/
-            title: Create a repository
-          - path: /datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/
-            title: Pull and push images
-          - path: /datacenter/dtr/2.2/guides/user/manage-images/delete-images/
-            title: Delete images
-          - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
-            title: Scan images for vulnerabilities
-          - sectiontitle: Sign images
-            section:
-            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/
-              title: Sign an image
-            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/
-              title: Delegate image signing
-            - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/
-              title: Manage trusted repositories
-        - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
-          title: Create and manage webhooks
-      - path: /datacenter/dtr/2.2/reference/api/
-        title: API reference
-      - sectiontitle: Release notes
-        section:
-        - path: /datacenter/dtr/2.2/guides/release-notes/
-          title: Release notes
-        - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
-          title: Incompatibilities and breaking changes
-      - path: /datacenter/dtr/2.2/guides/support/
-        title: Get support
-    - sectiontitle: Docker Trusted Registry 2.1
-      section:
-      - path: /datacenter/dtr/2.1/guides/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.1/guides/architecture/
-        title: Architecture
-      - sectiontitle: Installation
-        section:
-        - path: /datacenter/dtr/2.1/guides/install/system-requirements/
-          title: System requirements
-        - path: /datacenter/dtr/2.1/guides/install/
-          title: Install Docker Trusted Registry
-        - path: /datacenter/dtr/2.1/guides/install/install-offline/
-          title: Install offline
-        - path: /datacenter/dtr/2.1/guides/install/license/
-          title: License your deployment
-        - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
-          title: Scale your deployment
-        - path: /datacenter/dtr/2.1/guides/install/upgrade/
-          title: Upgrade
-        - path: /datacenter/dtr/2.1/guides/install/uninstall/
-          title: Uninstall
-      - sectiontitle: Configuration
-        section:
-        - path: /datacenter/dtr/2.1/guides/configure/
-          title: Use your own certificates
-        - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
-          title: Storage configuration
-        - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
-          title: Use NFS
-      - sectiontitle: Monitor and troubleshoot
-        section:
-        - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/
-          title: Monitor DTR
-        - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/troubleshoot/
-          title: Troubleshoot DTR
-      - sectiontitle: High-availability
-        section:
-        - path: /datacenter/dtr/2.1/guides/high-availability/
-          title: Set up high availability
-        - path: /datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-      - sectiontitle: User management
-        section:
-        - path: /datacenter/dtr/2.1/guides/user-management/
-          title: Authentication and authorization
-        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-users/
-          title: Create and manage users
-        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/
-          title: Create and manage organizations
-        - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/
-          title: Create and manage teams
-        - path: /datacenter/dtr/2.1/guides/user-management/permission-levels/
-          title: Permission levels
-      - sectiontitle: Repositories and images
-        section:
-        - path: /datacenter/dtr/2.1/guides/repos-and-images/
-          title: Configure your Docker daemon
-        - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
-          title: Pull an image
-        - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
-          title: Push an image
-        - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
-          title: Delete an image
-      - sectiontitle: API and CLI reference
-        section:
-        - path: /datacenter/dtr/2.1/reference/api/
-          title: API reference
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.1/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.1/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
-            title: dumpcerts
-          - path: /datacenter/dtr/2.1/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.1/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.1/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.1/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.1/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.1/reference/cli/upgrade/
-            title: upgrade
-      - path: /datacenter/dtr/2.1/guides/release-notes/
-        title: Release notes
-      - path: /datacenter/dtr/2.1/guides/support/
-        title: Get support
-    - sectiontitle: Docker Trusted Registry 2.0
-      section:
-      - path: /datacenter/dtr/2.0/
-        title: Docker Trusted Registry overview
-      - path: /datacenter/dtr/2.0/architecture/
-        title: Architecture
-      - sectiontitle: Installation
-        section:
-        - path: /datacenter/dtr/2.0/install/system-requirements/
-          title: System requirements
-        - path: /datacenter/dtr/2.0/install/
-          title: Install Docker Trusted Registry
-        - path: /datacenter/dtr/2.0/install/install-dtr-offline/
-          title: Install offline
-        - path: /datacenter/dtr/2.0/install/license/
-          title: License DTR
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/dtr/2.0/install/upgrade/upgrade-major/
-            title: Upgrade from 1.4.3
-          - path: /datacenter/dtr/2.0/install/upgrade/
-            title: Upgrade from 2.0.0
-        - path: /datacenter/dtr/2.0/install/uninstall/
-          title: Uninstall
-        - sectiontitle: docker/dtr image reference
-          section:
-          - path: /datacenter/dtr/2.0/reference/
-            title: Overview
-          - path: /datacenter/dtr/2.0/reference/backup/
-            title: backup
-          - path: /datacenter/dtr/2.0/reference/dumpcerts/
-            title: dumpcerts
-          - path: /datacenter/dtr/2.0/reference/images/
-            title: images
-          - path: /datacenter/dtr/2.0/reference/install/
-            title: install
-          - path: /datacenter/dtr/2.0/reference/join/
-            title: join
-          - path: /datacenter/dtr/2.0/reference/migrate/
-            title: migrate
-          - path: /datacenter/dtr/2.0/reference/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.0/reference/remove/
-            title: remove
-          - path: /datacenter/dtr/2.0/reference/restore/
-            title: restore
-          - path: /datacenter/dtr/2.0/reference/upgrade/
-            title: upgrade
-      - sectiontitle: Configuration
-        section:
-        - path: /datacenter/dtr/2.0/configure/configuration/
-          title: Configuration overview
-        - path: /datacenter/dtr/2.0/configure/config-general/
-          title: Configure general settings
-        - path: /datacenter/dtr/2.0/configure/config-security/
-          title: Security configuration
-        - path: /datacenter/dtr/2.0/configure/config-storage/
-          title: Storage configuration
-      - sectiontitle: Monitor and troubleshoot
-        section:
-        - path: /datacenter/dtr/2.0/monitor-troubleshoot/
-          title: Monitor DTR
-        - path: /datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot/
-          title: Troubleshoot DTR
-      - sectiontitle: High-availability
-        section:
-        - path: /datacenter/dtr/2.0/high-availability/
-          title: Set up high availability
-        - path: /datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery/
-          title: Backups and disaster recovery
-      - sectiontitle: User management
-        section:
-        - path: /datacenter/dtr/2.0/user-management/
-          title: Authentication and authorization
-        - path: /datacenter/dtr/2.0/user-management/create-and-manage-users/
-          title: Create and manage users
-        - path: /datacenter/dtr/2.0/user-management/create-and-manage-orgs/
-          title: Create and manage organizations
-        - path: /datacenter/dtr/2.0/user-management/create-and-manage-teams/
-          title: Create and manage teams
-        - path: /datacenter/dtr/2.0/user-management/permission-levels/
-          title: Permission levels
-      - sectiontitle: Repositories and images
-        section:
-        - path: /datacenter/dtr/2.0/repos-and-images/
-          title: Configure your Docker daemon
-        - path: /datacenter/dtr/2.0/repos-and-images/pull-an-image/
-          title: Pull an image
-        - path: /datacenter/dtr/2.0/repos-and-images/push-an-image/
-          title: Push an image
-        - path: /datacenter/dtr/2.0/repos-and-images/delete-an-image/
-          title: Delete an image
-      - sectiontitle: Release notes
-        section:
-        - path: /datacenter/dtr/2.0/release-notes/
-          title: Trusted Registry release notes
-        - path: /datacenter/dtr/2.0/release-notes/prior-release-notes/
-          title: Prior Trusted Registry release notes
-      - sectiontitle: Trusted Registry API
-        section:
-        - path: /apidocs/v2.0.1/
-          title: API v2.0.1
-        - path: /apidocs/v2.0.0/
-          title: API v2.0.0
-        - path: /apidocs/v1.4.0/
-          title: API v1.4.0
-        - path: /apidocs/v1.3.3/
-          title: API v1.3.3
-      - path: /datacenter/dtr/2.0/support/
-        title: Get support
-- sectiontitle: Desktop
-  section:
-  - sectiontitle: Docker Desktop Enterprise
-    section:
-    - path: /ee/desktop/
-      title: Overview
-    - path: /ee/desktop/release-notes/
-      title: Release notes
-    - sectiontitle: Admin
-      section:
-      - sectiontitle: Install
-        section:
-        - path: /ee/desktop/admin/install/mac/
-          title: Install DDE on Mac
-        - path: /ee/desktop/admin/install/windows/
-          title: Install DDE on Windows
-      - sectiontitle: Configure
-        section:
-        - path: /ee/desktop/admin/configure/mac-admin/
-          title: Configure DDE on Mac
-        - path: /ee/desktop/admin/configure/windows-admin/
-          title: Configure DDE on Windows
-    - sectiontitle: User
-      section:
-      - path: /ee/desktop/user/mac-user/
-        title: Use DDE on Mac
-      - path: /ee/desktop/user/windows-user/
-        title: Use DDE on Windows
-    - path: /ee/desktop/app-designer/
-      title: Application designer
-    - sectiontitle: Troubleshoot
-      section:
-      - path: /ee/desktop/troubleshoot/mac-issues/
-        title: Troubleshoot DDE issues on Mac
-      - path: /ee/desktop/troubleshoot/windows-issues/
-        title: Troubleshoot DDE issues on Windows
-  - sectiontitle: Docker Desktop for Mac
-    section:
-    - path: /docker-for-mac/
-      title: Getting started
-    - path: /docker-for-mac/install/
-      title: Install Docker Desktop for Mac
-    - path: /docker-for-mac/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /docker-for-mac/docker-toolbox/
-      title: Docker Desktop for Mac vs. Docker Toolbox
-    - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU architecture support
-    - path: /docker-for-mac/networking/
-      title: Networking
-    - path: /docker-for-mac/osxfs/
-      title: File system sharing
-    - path: /docker-for-mac/osxfs-caching/
-      title: Performance tuning for volume mounts (shared filesystems)
-    - path: /docker-for-mac/space/
-      title: Disk utilization
-    - path: /docker-for-mac/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
-    - path: /docker-for-mac/opensource/
-      title: Open source licensing
-    - path: /docker-for-mac/release-notes/
-      title: Stable release notes
-    - path: /docker-for-mac/edge-release-notes/
-      title: Edge release notes
-  - sectiontitle: Docker Desktop for Windows
-    section:
-    - path: /docker-for-windows/
-      title: Getting started
-    - path: /docker-for-windows/install/
-      title: Install Docker Desktop for Windows
-    - path: /docker-for-windows/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /docker-for-windows/networking/
-      title: Networking
-    - path: /docker-for-windows/docker-toolbox/
-      title: Migrate Docker Toolbox
-    - path: /docker-for-windows/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
-    - path: /docker-for-windows/opensource/
-      title: Open source licensing
-    - path: /docker-for-windows/release-notes/
-      title: Stable release notes
-    - path: /docker-for-windows/edge-release-notes/
-      title: Edge release notes
-    - path: /docker-for-windows/wsl-tech-preview/
-      title: Docker Desktop WSL 2 Tech Preview
-- sectiontitle: App
-  section:
-  - path: /app/working-with-app/
-    title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
-- sectiontitle: Compose
-  section:
-  - path: /compose/
-    title: Overview of Docker Compose
-  - path: /compose/install/
-    title: Install Compose
-  - path: /compose/gettingstarted/
-    title: Getting started
-  - sectiontitle: Compose (docker-compose) CLI reference
-    section:
-    - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
-    - path: /compose/reference/build/
-      title: build
-    - path: /compose/reference/bundle/
-      title: bundle
-    - path: /compose/reference/config/
-      title: config
-    - path: /compose/reference/create/
-      title: create
-    - path: /compose/reference/down/
-      title: down
-    - path: /compose/reference/events/
-      title: events
-    - path: /compose/reference/exec/
-      title: exec
-    - path: /compose/reference/help/
-      title: help
-    - path: /compose/reference/kill/
-      title: kill
-    - path: /compose/reference/logs/
-      title: logs
-    - path: /compose/reference/pause/
-      title: pause
-    - path: /compose/reference/port/
-      title: port
-    - path: /compose/reference/ps/
-      title: ps
-    - path: /compose/reference/pull/
-      title: pull
-    - path: /compose/reference/push/
-      title: push
-    - path: /compose/reference/restart/
-      title: restart
-    - path: /compose/reference/rm/
-      title: rm
-    - path: /compose/reference/run/
-      title: run
-    - path: /compose/reference/scale/
-      title: scale
-    - path: /compose/reference/start/
-      title: start
-    - path: /compose/reference/stop/
-      title: stop
-    - path: /compose/reference/top/
-      title: top
-    - path: /compose/reference/unpause/
-      title: unpause
-    - path: /compose/reference/up/
-      title: up
-  - sectiontitle: Compose file reference
-    section:
-    - path: /compose/compose-file/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
-  - path: /compose/bundles/
-    title: Docker stacks and distributed application bundles
-  - path: /compose/swarm/
-    title: Using Compose with Swarm
-  - path: /compose/env-file/
-    title: Environment file
-  - path: /compose/environment-variables/
-    title: Environment variables in Compose
-  - path: /compose/extends/
-    title: Extend services in Compose
-  - path: /compose/networking/
-    title: Networking in Compose
-  - path: /compose/production/
-    title: Using Compose in production
-  - path: /compose/link-env-deprecated/
-    title: Link environment variables (deprecated)
-  - path: /compose/startup-order/
-    title: Control startup order
-  - path: /compose/samples-for-compose/
-    title: Sample apps with Compose
-  - path: /release-notes/docker-compose/
-    title: Docker Compose release notes
-- sectiontitle: Context
-  section:
-  - path: /engine/context/working-with-contexts/
-    title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
 - sectiontitle: Hub
   section:
   - title: Docker ID accounts
