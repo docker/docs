@@ -1,7 +1,7 @@
 ---
 title: Enable authentication using TLS client certificates
 description: Learn how to enable user authentication via client certificates from your own public key infrastructure (PKI).
-keywords: PKI, Client Certificates, Passwordless Authentication, Docker Enterprise
+keywords: PKI, Client Certificates, Passwordless Authentication, Docker Enterprise, UCP, DTR, UCP PKI, DTR PKI
 ---
 
 ## Overview
@@ -19,7 +19,7 @@ The following table outlines existing and added capabilities when using client c
 | [Image pulls and pushes to DTR](#image-pulls-and-pushes-to-dtr)        | You can update Docker engine with a client certificate for image pulls and pushes to DTR without the need for `docker login`. |
 | [Image signing](#image-signing)                   | You can use client certificates to sign images that you push to DTR. Depending on which you configure to talk to DTR, the certificate files need to be located in certain directories. Alternatively, you can enable system-wide trust of your custom root certificates. |
 | [DTR API access](#dtr-api-access)                  | You can use TLS client certificates in lieu of your user credentials to access the DTR API. |
-| [Notary CLI operations with DTR](#notary-cli-operations-with-dtr)      | You can set your DTR as the remote trust server location and pass the certificate flags directly to the Notary CLI to access your DTR repositories. |                                                                                                                                                                                                                               
+| [Notary CLI operations with DTR](#notary-cli-operations-with-dtr)      | You can set your DTR as the remote trust server location and pass the certificate flags directly to the Notary CLI to access your DTR repositories. |
 
 ## Limitations
 
@@ -49,7 +49,7 @@ To bypass the browser login pages and hide the logout buttons for both UCP and D
      docker run --rm -it docker/dtr:2.7.0 reconfigure --debug --ucp-url \
       <ucp-url> --ucp-username <ucp_admin_user> --ucp-password \ <ucp_admin_password> --enable-client-cert-auth
       --client-cert-auth-ca "$(cat ca.pem)"
-     ```     
+     ```
 
      See [DTR installation](/reference/dtr/2.7/cli/install/) and [DTR reconfiguration](/reference/dtr/2.7/cli/reconfigure/) CLI reference pages for an explanation of the different options.
 
@@ -69,9 +69,9 @@ Create with a simple password, you will be prompted for it when you import the c
 
 Instructions on how to import a certificate into a web browser vary according to your platform, OS, preferred browser and browser version. As a general rule, refer to one of the following how-to articles:
 - ***Firefox***:
-https://www.sslsupportdesk.com/how-to-import-a-certificate-into-firefox/ 
+https://www.sslsupportdesk.com/how-to-import-a-certificate-into-firefox/
 - ***Chrome***:
-https://www.comodo.com/support/products/authentication_certs/setup/win_chrome.php 
+https://www.comodo.com/support/products/authentication_certs/setup/win_chrome.php
 - ***Internet Explorer***:
 https://www.comodo.com/support/products/authentication_certs/setup/ie7.php
 
@@ -83,13 +83,13 @@ For pulling and pushing images to your DTR (with client certificate authenticati
 
 1. As a [superuser](https://en.wikipedia.org/wiki/Superuser), copy the private key (`client.pem`) and certificate (`client.cert`) to the machine you are using for pulling and pushing to DTR without doing a `docker login`. Note that the filenames must match.
 
-1. Obtain the CA certificate from your DTR server, `ca.crt` from `https://<dtrurl>/ca`, and copy `ca.crt` to your operating system's TLS certificate directory so that your machine's Docker Engine will trust DTR. For Linux, this is `/etc/docker/certs.d/<dtrurl>/`. On Docker for Mac, this is `/<home_directory>/certs.d/<dtr_fqdn>/`.  
+1. Obtain the CA certificate from your DTR server, `ca.crt` from `https://<dtrurl>/ca`, and copy `ca.crt` to your operating system's TLS certificate directory so that your machine's Docker Engine will trust DTR. For Linux, this is `/etc/docker/certs.d/<dtrurl>/`. On Docker for Mac, this is `/<home_directory>/certs.d/<dtr_fqdn>/`.
 
     This is a convenient alternative to, for Ubuntu as an example, adding the DTR server certificate to `/etc/ca-certs` and running `update-ca-certificates`.
     ```curl
      curl -k https://<dtr>/ca -o ca.crt
     ```
-    
+
     On Ubuntu
     ````bash
     cp ca.crt /etc/ca-certs

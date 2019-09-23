@@ -80,7 +80,7 @@ with a new worker node. The type of upgrade you perform depends on what is neede
     - Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
     nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
     advanced than the automated, in-place cluster upgrade.
-        - [Upgrade existing nodes in place](#upgrade-existing-nodes-in-place): Performed using the CLI.
+        - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. 
         Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
         - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment):
         Performed using the CLI. This type of upgrade allows you to
@@ -95,7 +95,7 @@ with a new worker node. The type of upgrade you perform depends on what is neede
 Before starting an upgrade, make sure that your cluster is healthy. If a problem
 occurs, this makes it easier to find and troubleshoot it.
 
-[Create a backup](/ee/ucp/admin/backup/) of your cluster.
+[Create a backup](/ee/admin/backup/back-up-ucp/) of your cluster.
 This allows you to recover if something goes wrong during the upgrade process.
 
 > The backup archive is version-specific, so you can't use it during the
@@ -128,7 +128,7 @@ manager node. Automatically upgrades the entire cluster.
 - Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
 nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
 advanced than the automated, in-place cluster upgrade.
-    - [Upgrade existing nodes in place](#upgrade-existing-nodes-in-place): Performed using the CLI.
+    - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. 
         Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
     - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment):
     Performed using the CLI. This type of upgrade allows you to
@@ -326,7 +326,7 @@ nodes in the cluster at one time.
       Kubelet is unhealthy: Kubelet stopped posting node status
       ```
 
-      - Alternatively, you may see other port errors such as the one below in the ucp-controller
+    - Alternatively, you may see other port errors such as the one below in the ucp-controller
       container logs:
       ```
       http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
