@@ -66,3 +66,12 @@ instead.
 | `FTP_PROXY`   | `ENV FTP_PROXY "ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
 | `NO_PROXY`    | `ENV NO_PROXY "*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
 
+Please note if you are setting environment variables in Linux-like systems (Ubuntu etc.)
+variables should be in lowercase.
+
+| Variable      | Dockerfile example                                | `docker run` Example                                |
+|:--------------|:--------------------------------------------------|:----------------------------------------------------|
+| `HTTP_PROXY`  | `ENV http_proxy "http://127.0.0.1:3001"`          | `--env http_proxy="http://127.0.0.1:3001"`          |
+| `HTTPS_PROXY` | `ENV https_proxy "https://127.0.0.1:3001"`        | `--env https_proxy="https://127.0.0.1:3001"`        |
+| `FTP_PROXY`   | `ENV ftp_proxy "ftp://127.0.0.1:3001"`            | `--env ftp_proxy="ftp://127.0.0.1:3001"`            |
+| `NO_PROXY`    | `ENV no_proxy "*.test.example.com,.example2.com"` | `--env no_proxy="*.test.example.com,.example2.com"` |
