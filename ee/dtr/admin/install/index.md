@@ -79,7 +79,7 @@ the install command on. DTR will be installed on the UCP worker defined by the
     automatically reconfigured to trust DTR.
 
     * With DTR 2.7, you can [enable browser authentication via client
-    certificates](https://docs.docker.com/ee/enable-client-certificate-authentication/) at install
+    certificates](/ee/enable-client-certificate-authentication/) at install
     time. This bypasses the DTR login page and hides the logout button, thereby
     skipping the need for entering your username and password.
 
