@@ -10,11 +10,4 @@ var pages = [{% assign firstPage = "yes" %}
 "keywords":{{ page.keywords | jsonify }}
 }
 {% endif %}{% endfor %}
-{% for page in site.samples %},
-{
-"url":{{ page.url | jsonify }},
-"title":{{ page.title | jsonify }},
-"description":{{ page.description | strip | jsonify }},
-"keywords":{{ page.keywords | jsonify }}
-}
-{% endfor %}]
+]
