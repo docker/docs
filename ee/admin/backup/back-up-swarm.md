@@ -30,7 +30,7 @@ You must perform a manual backup on each manager node, because logs contain node
     [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).
 
 2.  Because you must stop the engine of the manager node before performing the backup, having three manager 
-    nodes is recommended for high availability [HA]). For a cluster to be operational, a majority of managers 
+    nodes is recommended for high availability (HA). For a cluster to be operational, a majority of managers 
     must be online. If less than 3 managers exists, the cluster is unavailable during the backup.
 
     > **Note**: During the time that a manager is shut down, your swarm is more vulnerable to
@@ -76,7 +76,7 @@ You must perform a manual backup on each manager node, because logs contain node
     ```
     systemctl start docker
     ```
-7. Except for step 1, repeat the previous steps for each node.
+7. Except for step 1, repeat the previous steps for each manager node.
 
 ### Where to go next
 
