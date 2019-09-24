@@ -5,7 +5,7 @@ keywords: routing, proxy, interlock
 ---
 
 To install Interlock on a Docker cluster without internet access, the Docker images must be loaded.  This topic describes how to export the images from a local Docker
-engine and then loading them to the Docker Swarm cluster.
+engine and then load them to the Docker Swarm cluster.
 
 First, using an existing Docker engine, save the images:
 
@@ -15,17 +15,19 @@ $> docker save {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
 $> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > nginx.tar
 ```
 
-Note: replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version
-}}` and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
-corresponding extension and proxy image if you are not using Nginx.
+> Note
+> 
+> Replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version
+> }}` and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
+> corresponding extension and proxy image if you are not using Nginx.
 
-You should have the following two files:
+You should have the following three files:
 
 - `interlock.tar`: This is the core Interlock application.
-- `interlock-extension-nginx.tar`: This is the Interlock extension for Nginx.
-- `nginx:alpine`: This is the official Nginx image based on Alpine.
+- `interlock-extension-nginx.tar`: This is the Interlock extension for NGINX.
+- `nginx:alpine`: This is the official NGINX image based on Alpine.
 
-Copy these files to each node in the Docker Swarm cluster and run the following commands to load each image:
+Next, copy these files to each node in the Docker Swarm cluster and run the following commands to load each image:
 
 ```bash
 $> docker load < interlock.tar
