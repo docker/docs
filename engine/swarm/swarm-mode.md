@@ -79,11 +79,11 @@ To create the custom address pool for Swarm, you must define at least one defaul
 
 Docker allocates subnet addresses from the address ranges specified by the `--default-addr-pool` option. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
 
-The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-address-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
+The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-addr-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
 
 The format of the command is:
 ```
-$ docker swarm init --default-address-pool <IP range in CIDR> [--default-address-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
+$ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
 ```
 To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
 
@@ -105,7 +105,7 @@ all the subnets are exhausted.
 Refer to the following pages for more information:
 - [Swarm networking](./networking.md) for more information about the default address pool usage
 - [UCP Installation Planning](../../ee/ucp/admin/install/plan-installation.md) for more information about planning the network design before installation
-- `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-address-pool` flag.
+- `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-addr-pool` flag.
 
 ### Configure the advertise address
 
