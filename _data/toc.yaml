@@ -3997,6 +3997,16 @@ manuals:
     section:
       - path: /docker-hub/access-tokens/
         title: Managing Access Tokens
+      - sectiontitle: Two-factor Authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enabling two-factor authentication
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover Docker Hub account with Recovery Code
   - path: /docker-hub/release-notes/
     title: Release notes
   - path: /docker-hub/repos/
