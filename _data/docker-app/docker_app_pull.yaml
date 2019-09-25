@@ -1,0 +1,24 @@
+command: docker app pull
+short: Pull an application package from a registry
+long: Pull an application package from a registry
+usage: docker app pull NAME:TAG [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: insecure-registries
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app pull docker/app-example:0.1.0
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

@@ -1,33 +1,28 @@
 ---
-title: Deploy Enterprise Edition on Linux servers
-description: Learn how to get a trial license and install Docker Enterprise Edition.
+title: Install individual Docker Enterprise components on Linux servers
+description: Learn how to get a trial license and install Docker Enterprise.
 keywords: ucp, dtr, install, orchestration
 redirect_from:
   - /datacenter/try/
   - /datacenter/install/linux/
 ---
 
-The best way to try Docker Enterprise Edition for yourself is to get the [30-day
-trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
+Get the [30-day
+trial available at the Docker hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial).
 
-Once you get your trial license, you can install Docker EE on your
-Linux servers. Make sure all the hosts you want to manage with Docker
-EE have a minimum of:
+Once you get your trial license, you can install Docker Enterprise's Universal
+Control Plane and Docker Trusted Regsitry on Linux Servers. Windows Servers
+can only be used as Universal Control Plane Worker Nodes.
 
-* [Docker Enterprise Edition](/engine/installation/index.md) 17.06.2-ee-8.
-Values of n in the -ee-<n> suffix must be 8 or higher
-* Linux kernel version 3.10 or higher
-* 4.00 GB of RAM
-* 3.00 GB of available disk space
+Learn more about the Universal Control Plane's system requirements 
+[here](ucp/admin/install/system-requirements.md). Also, make sure the hosts are 
+running one of the supported operating systems from Docker Enterprise's 
+[Compatibility Matrix](https://success.docker.com/article/compatibility-matrix).
 
-Also, make sure the hosts are running one of the supported operating systems from the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix).
-
-[Learn more about Docker EE system requirements](ucp/admin/install/system-requirements.md).
-
-## Step 1: Install Docker EE Container Engine
+## Step 1: Install Docker Enterprise Container Engine
 
 [Select a platform](/ee/supported-platforms) and click through to install the
-Docker Enterprise Edition container engine on all hosts you want to manage.
+Docker Enterprise container engine on all hosts you want to manage.
 
 ## Step 2: Install Universal Control Plane
 
@@ -58,20 +53,20 @@ Now that UCP is installed, you need to license it. In your browser, navigate
 to the UCP web UI, log in with your administrator credentials and upload your
 license.
 
-![UCP login page](images/try-ddc-1.png){: .with-border}
+![UCP login page](images/try-ee-1.png){: .with-border}
 
-[Get a free trial license if you don't have one](https://store.docker.com/editions/enterprise/docker-ee-trial).
+[Get a free trial license if you don't have one](https://hub.docker.com/editions/enterprise/docker-ee-trial).
 
 ## Step 4: Join more nodes to UCP
 
 Join more nodes so that you can manage them from UCP.
 Go to the UCP web UI and navigate to the **Nodes** page.
 
-![Nodes page](images/try-ddc-2.png){: .with-border}
+![Nodes page](images/try-ee-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![Add node page](images/try-ddc-3.png){: .with-border}
+![Add node page](images/try-ee-3.png){: .with-border}
 
 Check **Add node as a manager** to join the node as a manager
 to provide replication and make UCP highly available. For a highly available

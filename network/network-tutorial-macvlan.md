@@ -22,7 +22,7 @@ container to it.
   to your networking equipment.
 
 - The `macvlan` networking driver only works on Linux hosts, and is not supported
-  on Docker for Mac, Docker for Windows, or Docker EE for Windows Server.
+  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 
 - You need at least version 3.9 of the Linux kernel, and version 4.0 or higher
   is recommended.
@@ -47,7 +47,7 @@ on your network, your container appears to be physically attached to the network
       my-macvlan-net
     ```
 
-    You can use `docker network ls` and `docker network inspect pub_net`
+    You can use `docker network ls` and `docker network inspect my-macvlan-net`
     commands to verify that the network exists and is a `macvlan` network.
 
 2.  Start an `alpine` container and attach it to the `my-macvlan-net` network. The
@@ -55,7 +55,7 @@ on your network, your container appears to be physically attached to the network
     to it. The `--rm` flag means the container is removed when it is stopped.
 
     ```bash
-    $ docker run --rm -itd \
+    $ docker run --rm -dit \
       --network my-macvlan-net \
       --name my-macvlan-alpine \
       alpine:latest \
@@ -138,7 +138,7 @@ be physically attached to the network.
       my-8021q-macvlan-net
     ```
 
-    You can use `docker network ls` and `docker network inspect pub_net`
+    You can use `docker network ls` and `docker network inspect my-8021q-macvlan-net`
     commands to verify that the network exists, is a `macvlan` network, and
     has parent `eth0.10`. You can use `ip addr show` on the Docker host to
     verify that the interface `eth0.10` exists and has a separate IP address
@@ -208,7 +208,7 @@ be physically attached to the network.
     the network.
 
     ```bash
-    $ docker container stop my-second-macvlan-alpin
+    $ docker container stop my-second-macvlan-alpine
 
     $ docker network rm my-8021q-macvlan-net
     ```

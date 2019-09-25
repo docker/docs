@@ -8,8 +8,8 @@ your Compose file and their name start with the `x-` character sequence.
 > (for the 2.x series), extension fields are also allowed at the root
 > of service, volume, network, config and secret definitions.
 
-```none
-version: '2.1'
+```yaml
+version: '3.4'
 x-custom:
   items:
     - a
@@ -24,7 +24,7 @@ inserted in your resource definitions using [YAML anchors](http://www.yaml.org/s
 For example, if you want several of your services to use the same logging
 configuration:
 
-```none
+```yaml
 logging:
   options:
     max-size: '12m'
@@ -34,7 +34,7 @@ logging:
 
 You may write your Compose file as follows:
 
-```none
+```yaml
 version: '3.4'
 x-logging:
   &default-logging
@@ -55,7 +55,7 @@ services:
 It is also possible to partially override values in extension fields using
 the [YAML merge type](http://yaml.org/type/merge.html). For example:
 
-```none
+```yaml
 version: '3.4'
 x-volumes:
   &default-volume

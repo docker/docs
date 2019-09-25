@@ -64,7 +64,7 @@ If you don't have three hosts handy, an easy solution is to set up three
 Ubuntu hosts on a cloud provider such as Amazon EC2, all on the same network
 with all communications allowed to all hosts on that network (using a mechanism
 such as EC2 security groups), and then to follow the
-[installation instructions for Docker CE on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
+[installation instructions for Docker Engine - Community on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
 
 ### Walkthrough
 
@@ -73,7 +73,7 @@ such as EC2 security groups), and then to follow the
 At the end of this procedure, all three Docker hosts will be joined to the swarm
 and will be connected together using an overlay network called `ingress`.
 
-1.  On `master`. initialize the swarm. If the host only has one network
+1.  On `manager`. initialize the swarm. If the host only has one network
     interface, the `--advertise-addr` flag is optional.
 
     ```bash
@@ -88,7 +88,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-1> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
@@ -97,7 +97,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-2> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
@@ -192,7 +192,7 @@ connect a service to each of them.
 3.  Run `docker service ls` to monitor the progress of service bring-up, which
     may take a few seconds.
 
-4.  Inspect the `nginx-net` network on `master`, `worker-1`, and `worker-2`.
+4.  Inspect the `nginx-net` network on `manager`, `worker-1`, and `worker-2`.
     Remember that you did not need to create it manually on `worker-1` and
     `worker-2` because Docker created it for you. The output will be long, but
     notice the `Containers` and `Peers` sections. `Containers` lists all
@@ -295,7 +295,7 @@ open between the two Docker hosts:
 - TCP and UDP port 7946
 - UDP port 4789
 
-One easy way to set this is up is to have two VMs (either local or on a cloud
+One easy way to set this up is to have two VMs (either local or on a cloud
 provider like AWS), each with Docker installed and running. If you're using AWS
 or a similar cloud computing platform, the easiest configuration is to use a
 security group that opens all incoming ports between the two hosts and the SSH
@@ -623,7 +623,7 @@ need to have Docker installed and running.
     ping: bad address 'alpine2'
     ```
 
-7.  Detach from `alpine2` without stopping it by using the detach sequence,
+7.  Detach from `alpine1` without stopping it by using the detach sequence,
     `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
     If you wish, attach to `alpine2` and repeat steps 4, 5, and 6 there,
     substituting `alpine1` for `alpine2`.

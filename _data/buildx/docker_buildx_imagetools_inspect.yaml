@@ -1,0 +1,22 @@
+command: docker buildx imagetools inspect
+short: Show details of image in the registry
+long: Show details of image in the registry
+usage: docker buildx imagetools inspect [OPTIONS] NAME
+pname: docker buildx imagetools
+plink: docker_buildx_imagetools.yaml
+options:
+- option: raw
+  value_type: bool
+  default_value: "false"
+  description: Show original JSON manifest
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

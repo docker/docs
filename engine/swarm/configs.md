@@ -43,6 +43,10 @@ examples below. Keep the following notable differences in mind:
   UID, GID, and mode are not supported for configs. Configs are currently only
   accessible by administrators and users with `system` access within the
   container.
+  
+- On Windows, create or update a service using `--credential-spec` with the `config://<config-name>` format. 
+This passes the gMSA credentials file directly to nodes before a container starts. No gMSA credentials are written 
+to disk on worker nodes. For more information, refer to [Deploy services to a swarm](/engine/swarmservices/).
 
 ## How Docker manages configs
 
@@ -59,11 +63,11 @@ containers, configs are all mounted into `C:\ProgramData\Docker\configs` and
 symbolic links are created to the desired location, which defaults to
 `C:\<config-name>`.
 
-You can set the ownership (`uid` and `gid`) or the config, using either the
+You can set the ownership (`uid` and `gid`) for the config, using either the
 numerical ID or the name of the user or group. You can also specify the file
 permissions (`mode`). These settings are ignored for Windows containers.
 
-- If not set, the config is owned by the user and that running the container
+- If not set, the config is owned by the user running the container
   command (often `root`) and that user's default group (also often `root`).
 - If not set, the config has world-readable permissions (mode `0444`), unless a
   `umask` is set within the container, in which case the mode is impacted by
@@ -122,8 +126,8 @@ Docker configs.
 
 ### Defining and using configs in compose files
 
-Both the `docker compose` and `docker stack` commands support defining configs
-in a compose file. See
+The `docker stack` command supports defining configs in a Compose file.
+However, the `configs` key is not supported for `docker compose`. See
 [the Compose file reference](/compose/compose-file/#configs) for details.
 
 ### Simple example: Get started with configs
@@ -586,7 +590,7 @@ configuration file.
     ```
 
 4.  Verify that the `nginx` service is fully re-deployed, using
-    `docker service ls nginx`. When it is, you can remove the old `site.conf`
+    `docker service ps nginx`. When it is, you can remove the old `site.conf`
     config.
 
     ```bash

@@ -54,7 +54,7 @@ Starting with the manager nodes, and then worker nodes:
 > Swarm mode
 >
 > UCP 2.0 and higher requires swarm mode. Upgrading from a UCP 1.x version
-> enables swarm mode in Docker EE Engine.
+> enables swarm mode in Docker Engine - Enterprise.
 
 ## Upgrade UCP
 

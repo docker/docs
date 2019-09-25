@@ -6,7 +6,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/grant-permissions/
 ---
 
-Docker EE administrators can create _grants_ to control how users and
+Docker Enterprise administrators can create _grants_ to control how users and
 organizations access [resource sets](group-resources.md).
 
 A grant defines _who_ has _how much_ access to _what_ resources. Each grant is a
@@ -31,10 +31,10 @@ With Kubernetes orchestration, a grant is made up of *subject*, *role*, and
 > namespace.
 {: .important}
 
-To create a Kubernetes grant in UCP:
+To create a Kubernetes grant (role binding) in UCP:
 
-1. Click **Grants** under **User Management**.
-2. Click **Create Grant**.
+1. Click **Grants** under **Access Control**.
+2. Click **Create Role Binding**.
 3. Click **Namespaces** under **Kubernetes**.
 4. Find the desired namespace and click **Select Namespace**.
 5. On the **Roles** tab, select a role.
@@ -55,13 +55,14 @@ With Swarm orchestration, a grant is made up of *subject*, *role*, and
 
 To create a grant in UCP:
 
-1. Click **Grants** under **User Management**.
-2. Click **Create Grant**.
-3. On the Collections tab, click **Collections** (for Swarm).
-4. Click **View Children** until you get to the desired collection and **Select**.
-5. On the **Roles** tab, select a role.
-6. On the **Subjects** tab, select a user, team, or organization to authorize.
-7. Click **Create**.
+1. Click **Grants** under **Access Control**.
+2. Click **Swarm**
+3. Click **Create Grant**.
+4. In the **Select Subject Type** section, select **Users** or **Organizations**.
+5. Click **View Children** until you get to the desired collection and **Select**.
+6. On the **Roles** tab, select a role.
+7. On the **Subjects** tab, select a user, team, or organization to authorize.
+8. Click **Create**.
 
 > By default, all new users are placed in the `docker-datacenter` organization.
 > To apply permissions to all Docker EE users, create a grant with the

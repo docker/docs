@@ -1,0 +1,19 @@
+command: docker builder
+short: Manage builds
+long: Manage builds
+usage: docker builder
+pname: docker
+plink: docker.yaml
+cname:
+- docker builder build
+- docker builder prune
+clink:
+- docker_builder_build.yaml
+- docker_builder_prune.yaml
+deprecated: false
+min_api_version: "1.31"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

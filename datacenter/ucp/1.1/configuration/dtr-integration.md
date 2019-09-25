@@ -10,7 +10,7 @@ title: Integrate with Docker Trusted Registry
 You can integrate UCP with Docker Trusted Registry (DTR). This allows you to
 securely store and manage the Docker images that are used in your UCP cluster.
 
-At an high-level, there are three steps to integrate UCP with DTR:
+At a high-level, there are three steps to integrate UCP with DTR:
 
 * Configure UCP to know about DTR,
 * Configure DTR to trust UCP,

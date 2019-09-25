@@ -33,11 +33,13 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> This command is experimental on the Docker daemon. It should not be used in production environments.
+> This command is experimental on the Docker daemon. It should not be used in
+> production environments.
 > To enable experimental features on the Docker daemon, edit the
 > [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
 > and set `experimental` to `true`.
-{: .important }
+>
+> {% include experimental.md %}
 
 {% endif %}
 
@@ -45,10 +47,12 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> This  command is experimental on the Docker client. It should not be used in production environments.
+> This command is experimental on the Docker client. It should not be used in
+> production environments.
 > To enable experimental features in the Docker CLI, edit the
 > [config.json](/engine/reference/commandline/cli.md#configuration-files)
-> and set `experimental` to `enabled`.
+> and set `experimental` to `enabled`. You can go [here](https://github.com/docker/docker.github.io/blob/master/_includes/experimental.md)
+> for more information.
 {: .important }
 
 {% endif %}

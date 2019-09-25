@@ -168,6 +168,11 @@ Or with node discovery:
 
 ## Docker Hub as a hosted discovery service
 
+> ### Deprecation Notice
+>
+> The Docker Hub Hosted Discovery Service will be removed on June 19th, 2019. Please switch to one of the other discovery mechanisms. Several brownouts of the service will take place in the weeks leading up to the removal in order for users to find places where this is still used and give them time to prepare.
+{:.info}
+
 > **Warning**:
 > The Docker Hub Hosted Discovery Service **is not recommended** for production use. It's intended to be used for testing/development. See the discovery backends for production use.
 {:.warning}

@@ -98,9 +98,6 @@ function walkTree(tree)
       var subTree = tree[j].section;
       walkTree(subTree);
       outputLetNav.push('</ul></li>');
-    } else if (tree[j].generateTOC) {
-      // auto-generate a TOC from a collection
-      walkTree(collectionsTOC[tree[j].generateTOC])
     } else {
       // just a regular old topic; this is a leaf, not a branch; render a link!
       outputLetNav.push('<li><a href="' + tree[j].path + '"')
@@ -136,15 +133,6 @@ function renderNav(docstoc) {
   }
   if (outputLetNav.length==0)
   {
-    // didn't find the current topic in the standard TOC; maybe it's a collection;
-    for (var key in collectionsTOC)
-    {
-      var itsHere = findMyTopic(collectionsTOC[key]);
-      if (itsHere) {
-        walkTree(collectionsTOC[key]);
-        break;
-      }
-    }
     // either glossary was true or no left nav has been built; default to glossary
     // show pages tagged with term and highlight term in left nav if applicable
     renderTagsPage()
@@ -161,48 +149,15 @@ function renderNav(docstoc) {
 
 function highlightRightNav(heading)
 {
-  if (document.location.pathname.indexOf("/glossary/")<0){
-    //console.log("highlightRightNav called on",document.location.pathname)
-    if (heading == "title")
-    {
-      history.replaceState({},"Top of page on " + document.location.pathname,document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname);
-      $("#my_toc a").each(function(){
-        $(this).removeClass("active");
-      });
-      $("#sidebar-wrapper").animate({
-        scrollTop: 0
-      },800);
-    } else {
-      var targetAnchorHREF = document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname + "#" + heading;
-      // make sure we aren't filtering out that heading level
-      var noFilterFound = false;
-      $("#my_toc a").each(function(){
-        if (this.href==targetAnchorHREF) {
-          noFilterFound = true;
-        }
-      });
-      // now, highlight that heading
-      if (noFilterFound)
-      {
-        $("#my_toc a").each(function(){
-          //console.log("right-nav",this.href);
-          if (this.href==targetAnchorHREF)
-          {
-            history.replaceState({},this.innerText,targetAnchorHREF);
-            $(this).addClass("active");
-            var sidebarOffset = (sidebarBottom > 200) ? 200 : headerOffset - 20;
-            $("#sidebar-wrapper").animate({
-              scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - sidebarOffset
-            },100);
-            //document.getElementById("sidebar-wrapper").scrollTop = this.getBoundingClientRect().top - 200;
-          } else {
-            $(this).removeClass("active");
-          }
-        });
-      }
+  if (document.location.pathname.indexOf("/glossary/") < 0){
+    $("#my_toc a.active").removeClass("active");
+
+    if (heading !== "title") {
+      $("#my_toc a[href='#" + heading + "']").addClass('active');
     }
   }
 }
+
 var currentHeading = "";
 $(window).scroll(function(){
   var headingPositions = new Array();
@@ -256,7 +211,10 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-if (readCookie("night") == "true") {
+var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var selectedNightTheme = readCookie("night");
+
+if (selectedNightTheme == "true" || (selectedNightTheme === null && prefersDark)) {
   applyNight();
   $('#switch-style').prop('checked', true);
 } else {
@@ -377,8 +335,7 @@ $('ul.nav li.dropdown').hover(function() {
 //     document.getElementById('pagestyle').setAttribute('href', sheet);
 // }
 
-function applyNight()
-{
+function applyNight() {
   $( "body" ).addClass( "night" );
 }
 
@@ -393,8 +350,7 @@ $('#switch-style').change(function() {
         createCookie("night",true,999)
     } else {
         applyDay();
-    //     swapStyleSheet('/css/style.css');
-        eraseCookie("night")
+        createCookie("night",false,999);
     }
 });
 

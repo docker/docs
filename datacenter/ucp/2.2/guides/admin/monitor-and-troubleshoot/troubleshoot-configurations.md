@@ -132,16 +132,21 @@ NUM_MANAGERS=$(docker node ls --filter role=manager -q | wc -l)
 VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This reconfigure-db command will repair the RethinkDB cluster to have a
 # number of replicas equal to the number of manager nodes in the cluster.
-docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
+docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} 
 
 time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..."
 time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]"
 time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1"
-time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
-time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Reconfiguring Table Replication..."
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Reconfigured Replication of Table \"grant_objects\""
 ...
 ```
 {% endraw %}
+
+> #### Loss of Quorum in RethinkDB Tables
+>
+> When there is loss of quorum in any of the RethinkDB tables, run the `reconfigure-db` command 
+> with the `--emergency-repair` flag.
 
 ## Where to go next
 

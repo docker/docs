@@ -23,7 +23,7 @@ For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 
 ## Subjects
 
-A subject represents a user, team, organization, or service account. A subject
+A subject represents a user, team, organization, or a service account. A subject
 can be granted a role that defines permitted operations against one or more
 resource sets.
 
@@ -34,19 +34,19 @@ resource sets.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 - **Service account**: A Kubernetes object that enables a workload to access
-  cluster resources that are assigned to a namespace.
+  cluster resources which are assigned to a namespace.
 
 Learn to [create and configure users and teams](create-users-and-teams-manually.md).
 
 ## Roles
 
 Roles define what operations can be done by whom. A role is a set of permitted
-operations against a type of resource, like a container or volume, that's
-assigned to a user or team with a grant.
+operations against a type of resource, like a container or volume, which is
+assigned to a user or a team with a grant.
 
-For example, the built-in role, **Restricted Control**, includes permission to
+For example, the built-in role, **Restricted Control**, includes permissions to
 view and schedule nodes but not to update nodes. A custom **DBA** role might
-include permissions to `r-w-x` volumes and secrets.
+include permissions to `r-w-x` (read, write, and execute) volumes and secrets.
 
 Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
@@ -67,11 +67,11 @@ To control user access, cluster resources are grouped into Docker Swarm
   networks, nodes, services, secrets, and volumes.
 
 - **Kubernetes namespaces**: A
-[namespace](https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
   is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
   namespace for your cluster objects, plus two more namespaces for system and
   public resources. You can create custom namespaces, but unlike Swarm
-  collections, namespaces _can't be nested_. Resource types that users can
+  collections, namespaces _cannot be nested_. Resource types that users can
   access in a Kubernetes namespace include pods, deployments, network policies,
   nodes, services, secrets, and many more.
 
@@ -80,11 +80,12 @@ Together, collections and namespaces are named *resource sets*. Learn to
 
 ## Grants
 
-A grant is made up of *subject*, *role*, and *resource set*.
+A grant is made up of a *subject*, a *role*, and a *resource set*.
 
 Grants define which users can access what resources in what way. Grants are
-effectively Access Control Lists (ACLs), and when grouped together, they
-provide comprehensive access policies for an entire organization.
+effectively **Access Control Lists** (ACLs) which
+provide comprehensive access policies for an entire organization when grouped
+together.
 
 Only an administrator can manage grants, subjects, roles, and access to
 resources.
@@ -95,6 +96,50 @@ resources.
 > into collections or namespaces, defines roles by selecting allowable operations,
 > and applies grants to users and teams.
 {: .important}
+
+## Secure Kubernetes defaults
+
+For cluster security, only UCP admin users and service accounts that are
+granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
+ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user from being able to bypass the Universal Control Plane Security
+Model. These privileged options include:
+
+Pods with any of the following defined in the Pod Specification:
+
+  - `PodSpec.hostIPC` - Prevents a user from deploying a pod in the host's IPC
+    Namespace.
+  - `PodSpec.hostNetwork` - Prevents a user from deploying a pod in the host's
+    Network Namespace.
+  - `PodSpec.hostPID` - Prevents a user from deploying a pod in the host's PID
+    Namespace.
+  - `SecurityContext.allowPrivilegeEscalation` - Prevents a child process
+    of a container from gaining more privileges than its parent.
+  - `SecurityContext.capabilities` - Prevents additional  [Linux
+    Capabilities](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
+    from being added to a pod.
+  - `SecurityContext.privileged` - Prevents a user from deploying a [Privileged
+    Container](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
+  - `Volume.hostPath` - Prevents a user from mounting a path from the host into
+    the container. This could be a file, a directory, or even the Docker Socket.
+
+Persistent Volumes using the following storage classes:
+
+  - `Local` - Prevents a user from creating a persistent volume with the
+    [Local Storage
+    Class](https://kubernetes.io/docs/concepts/storage/volumes/#local). The
+    Local storage class allows a user to mount directorys from the host into a
+    pod. This could be a file, a directory, or even the Docker Socket. 
+  
+  > Note: If an Admin has created a persistent volume with the local storage
+  > class, a non-admin could consume this via a persitent volume claim. 
+
+If a user without a cluster admin role tries to deploy a pod with any of these
+privileged options, an error similar to the following example is displayed:
+
+```bash
+Error from server (Forbidden): error when creating "pod.yaml": pods "mypod" is forbidden: user "<user-id>" is not an admin and does not have permissions to use privileged mode for resource
+```
 
 ## Where to go next
 

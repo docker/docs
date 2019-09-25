@@ -92,7 +92,7 @@ $(document).on('click', 'a[href*="#"]:not(.noanchor , .find_a_partner_section .c
     // find the target of the clicked anchor tag
     var targetBSR = $(this).find('a')[0].hash;
     var parentBSR = $(this);
-    // hide detail containers, not the the current target
+    // hide detail containers, not the current target
     $('.bsr-item-detail').not(targetBSR).hide();
     // toggle current target detail container
     $(targetBSR).slideToggle();

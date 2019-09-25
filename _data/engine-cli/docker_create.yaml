@@ -93,6 +93,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-percent
   value_type: int64
   default_value: "0"
@@ -102,6 +103,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: cpu-period
   value_type: int64
   default_value: "0"
@@ -268,6 +270,14 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: domainname
+  value_type: string
+  description: Container NIS domain name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: entrypoint
   value_type: string
   description: Overwrite the default ENTRYPOINT of the image
@@ -297,6 +307,15 @@ options:
   value_type: list
   description: Expose a port or a range of ports
   deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: gpus
+  value_type: gpu-request
+  description: GPU devices to add to the container ('all' to pass all GPUs)
+  deprecated: false
+  min_api_version: "1.40"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -405,6 +424,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: io-maxiops
   value_type: uint64
   default_value: "0"
@@ -414,6 +434,7 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+  os_type: windows
 - option: ip
   value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
@@ -567,8 +588,7 @@ options:
   kubernetes: false
   swarm: false
 - option: net
-  value_type: string
-  default_value: default
+  value_type: network
   description: Connect a container to a network
   deprecated: false
   experimental: false
@@ -584,8 +604,7 @@ options:
   kubernetes: false
   swarm: false
 - option: network
-  value_type: string
-  default_value: default
+  value_type: network
   description: Connect a container to a network
   deprecated: false
   experimental: false
@@ -961,7 +980,7 @@ examples: |-
   Then, a user could ask `udev` to execute a script that would `docker exec my-container mknod newDevX c 42 <minor>`
   the required device when it is added.
 
-  NOTE: initially present devices still need to be explicitely added to
+  NOTE: initially present devices still need to be explicitly added to
   the create/run command
 deprecated: false
 experimental: false

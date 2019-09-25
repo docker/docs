@@ -8,7 +8,7 @@ title: Docker frequently asked questions (FAQ)
 
 ### Does Docker run on Linux, macOS, and Windows?
 
-You can run both Linux and Windows programs and excutables in Docker containers. The Docker platform runs natively on Linux (on x86-64, ARM and many other CPU architectures) and on Windows (x86-64).
+You can run both Linux and Windows programs and executables in Docker containers. The Docker platform runs natively on Linux (on x86-64, ARM and many other CPU architectures) and on Windows (x86-64).
 
 Docker Inc. builds products that let you build and run containers on Linux, Windows and macOS.
 
@@ -116,6 +116,7 @@ Linux:
  - Any distribution running version 3.10+ of the Linux kernel
  - Specific instructions are available for most Linux distributions, including
    [RHEL](installation/linux/rhel.md), [Ubuntu](installation/linux/ubuntulinux.md),
+   [Oracle Linux](installation/linux/oracle.md),
    [SuSE](installation/linux/suse.md), and many others.
 
 Microsoft Windows:
@@ -129,6 +130,7 @@ Cloud:
  - Google Compute Engine
  - Microsoft Azure
  - Rackspace
+ - Oracle Cloud Infrastructure
 
 ### How do I report a security issue with Docker?
 

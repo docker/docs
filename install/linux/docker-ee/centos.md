@@ -24,13 +24,13 @@ that require action are explained below.
 
 - Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`.
 - Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
-- Find the URL for your Docker EE repo at [Docker Store](https://store.docker.com/my-content){: target="_blank" class="_" }.
+- Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.1 and higher (7.1, 7.2, 7.3, 7.4), running on  `x86_64`.
+Docker EE supports {{ linux-dist-long }} 64-bit, latest version, running on  `x86_64`.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
@@ -44,7 +44,7 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 ### Uninstall old Docker versions
 
-The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker CE to Docker EE, remove the Docker CE package as well.
+The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker Engine - Community to Docker EE, remove the Docker Engine - Community package as well.
 
 ```bash
 $ sudo yum remove docker \
@@ -56,8 +56,7 @@ $ sudo yum remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine \
-                  docker-ce
+                  docker-engine
 ```
 
 ## Repo install and upgrade

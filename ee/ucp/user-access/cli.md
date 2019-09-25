@@ -3,7 +3,6 @@ title: CLI-based access
 description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords: ucp, cli, administration
 redirect_from:
-  - /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/
   - /ee/ucp/user/access-ucp/cli-based-access/
 ---
 
@@ -80,11 +79,25 @@ cd client-bundle; Import-Module .\env.ps1
 </div>
 </div>
 
-The client bundle utility scripts update the the environment variables
+The client bundle utility scripts update the environment variables
 `DOCKER_HOST` to make your client tools communicate with your UCP deployment,
 and the `DOCKER_CERT_PATH` environment variable to use the client certificates
 that are included in the client bundle you downloaded. The utility scripts also
 run the `kubectl config` command to configure kubectl.
+
+### Use client certificates with Docker contexts
+
+In Docker Enterprise 3.0, new files are contained in the UCP bundle. These changes support 
+the use of `.zip` files with `docker context import` and allow you to directly change 
+your context using the bundle `.zip` file. Navigate to the directory where you downloaded 
+the user bundle and use `docker context import` to add the new context:
+
+```bash
+cd client-bundle && docker context import myucp ucp-bundle-$USER.zip"
+```
+
+> **Note**: Refer to [Working with Contexts](/engine/context/working-with-contexts/) 
+for more information on using Docker contexts.
 
 To confirm that your client tools are now communicating with UCP, run:
 
@@ -98,7 +111,7 @@ To confirm that your client tools are now communicating with UCP, run:
 {% raw %}
 docker version --format '{{.Server.Version}}'
 {% endraw %}
-{{ page.ucp_repo }}/{{ page.ucp_version }}
+
 ```
 <hr>
 </div>
@@ -159,6 +172,16 @@ $AUTHTOKEN=((Invoke-WebRequest -Body '{"username":"<username>", "password":"<pas
 
 [io.file]::WriteAllBytes("ucp-bundle.zip", ((Invoke-WebRequest -Uri https://`<ucp-ip`>/api/clientbundle -Headers @{"Authorization"="Bearer $AUTHTOKEN"}).Content))
  ```
+
+## Docker Build and UCP
+When using a UCP client bundle and buildkit, follow the instructions provided 
+in [Restrict services to worker nodes](/ee/ucp/admin/configure/restrict-services-to-worker-nodes/) 
+to make sure that builds are not accidentally scheduled on manager nodes. 
+
+For additional information on 'docker build' and buildkit, refer 
+to [build command documentation](/engine/reference/commandline/build/) and 
+[buildkit documentation](/develop/develop-images/build_enhancements/).
+
 
 ## Where to go next
 

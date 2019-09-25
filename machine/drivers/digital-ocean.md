@@ -1,12 +1,12 @@
 ---
-description: Digital Ocean driver for machine
-keywords: machine, Digital Ocean, driver
-title: Digital Ocean
+description: DigitalOcean driver for machine
+keywords: machine, digitalocean, driver
+title: DigitalOcean
 ---
 
-Create Docker machines on [Digital Ocean](https://www.digitalocean.com/).
+Create Docker machines on [DigitalOcean](https://www.digitalocean.com/).
 
-You need to create a personal access token under "Apps & API" in the Digital Ocean
+You need to create a personal access token under "Apps & API" in the DigitalOcean
 Control Panel and pass that to `docker-machine create` with the `--digitalocean-access-token` option.
 
 ## Usage
@@ -26,14 +26,14 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 
 ## Options
 
--   `--digitalocean-access-token`: **required**. Your personal access token for the Digital Ocean API.
--   `--digitalocean-backups`: Enable Digital Ocean backups for the droplet.
--   `--digitalocean-image`: The name of the Digital Ocean image to use.
+-   `--digitalocean-access-token`: **required**. Your personal access token for the DigitalOcean API.
+-   `--digitalocean-backups`: Enable DigitalOcean backups for the droplet.
+-   `--digitalocean-image`: The name of the DigitalOcean image to use.
 -   `--digitalocean-ipv6`: Enable IPv6 support for the droplet.
 -   `--digitalocean-monitoring`: Enable monitoring for the droplet.
 -   `--digitalocean-private-networking`: Enable private networking support for the droplet.
 -   `--digitalocean-region`: The region to create the droplet in, see [Regions API](https://developers.digitalocean.com/documentation/v2/#regions) for how to get a list.
--   `--digitalocean-size`: The size of the Digital Ocean droplet (larger than default options are of the form `2gb`).
+-   `--digitalocean-size`: The size of the DigitalOcean droplet (larger than default options are of the form `2gb`).
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
 -   `--digitalocean-ssh-key-path`: SSH private key path.
 -   `--digitalocean-ssh-port`: SSH port.

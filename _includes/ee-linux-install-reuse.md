@@ -12,25 +12,25 @@ Usage: {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 
 {% if section == "ee-install-intro" %}
 
-There are two ways to install and upgrade [Docker Enterprise Edition (Docker EE)](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
+There are two ways to install and upgrade [Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
 on {{ linux-dist-long }}:
 
-- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker EE from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
+- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker Engine - Enterprise from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
 
-- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker EE on air-gapped systems with no access to the internet.
+- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker Engine - Enterprise on air-gapped systems with no access to the internet.
 
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-Docker Community Edition (Docker CE) is _not_ supported on {{ linux-dist-long }}.
+Docker Engine - Community is _not_ supported on {{ linux-dist-long }}.
 {% endif %}
 {% if linux-dist == "centos" %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for CentOS](/install/linux/docker-ce/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
 {% endif %}
 
 {% elsif section == "find-ee-repo-url" %}
 
-To install Docker EE, you will need the URL of the Docker EE repository associated with your trial or subscription:
+To install Docker Enterprise, you will need the URL of the Docker Enterprise repository associated with your trial or subscription:
 
-1.  Go to [https://store.docker.com/my-content](https://store.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
+1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
 2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
 3.  Copy the URL from **Copy and paste this URL to download your Edition** and save it for later use.
 
@@ -39,11 +39,11 @@ You will use this URL in a later step to create a variable called, `DOCKERURL`.
 
 {% elsif section == "using-yum-repo" %}
 
-The advantage of using a repository from which to install Docker EE (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
+The advantage of using a repository from which to install Docker Engine - Enterprise (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
 
 
 {% elsif section == "set-up-yum-repo" %}
-You only need to set up the repository once, after which you can install Docker EE _from_ the repo and repeatedly upgrade as necessary.
+You only need to set up the repository once, after which you can install Docker Engine - Enterprise _from_ the repo and repeatedly upgrade as necessary.
 
 1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
 
@@ -116,7 +116,17 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% endif %}
 
-6.  Add the Docker EE **stable** repository:
+{% if linux-dist == "oraclelinux" %}
+
+5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable ol7_addons
+    ```
+
+{% endif %}
+
+6.  Add the Docker Engine - Enterprise **stable** repository:
 
     ```bash
     $ sudo -E yum-config-manager \
@@ -127,48 +137,47 @@ You only need to set up the repository once, after which you can install Docker 
 
 {% elsif section == "install-using-yum-repo" %}
 
-There are currently two versions of Docker EE Engine available:
+> **Note**: If you need to run Docker Engine - Enterprise 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker Engine - Enterprise Engine only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> UCP, and DTR).
 
-* 18.03 - Use this version if you're only running Docker EE Engine.
-* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
-Engine, UCP, and DTR).
-
-1. By default, Docker EE Engine 17.06 is installed. If you want to install the
-18.03 version run:
+1.  Install the latest patch release, or go to the next step to install a specific version:
 
     ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.03
-    ```
-
-2.  Install the latest patch release, or go to the next step to install a specific version:
-
-    ```bash
-    $ sudo yum -y install docker-ee
+    $ sudo yum -y install docker-ee docker-ee-cli containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-3.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+
+2.  To install a _specific version_ of Docker Engine - Enterprise (recommended in production), list versions and install:
 
     a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
 
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-17.06
+    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
     ```
 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    b.  Install a specific version by its **fully qualified package name** which is the package name (`docker-ee`) plus the version string (2nd column) up to the hyphen, for example: `docker-ee-17.06.1.ee.2`
+    b.  Install a specific version by its fully qualified package name, which is the package name (`docker-ee`) plus the version string (2nd column) starting at the first colon (`:`), up to the first hyphen, separated by a hyphen (`-`). For example, `docker-ee-18.09.1`.
 
     ```bash
-    $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
+    $ sudo yum -y install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
+    ```
+
+    For example, if you want to install the 18.09 version run the following:
+
+    ```bash
+    sudo yum-config-manager --enable docker-ee-stable-18.09
     ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-4.  Start Docker:
+3.  Start Docker:
 
     > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
@@ -176,7 +185,7 @@ Engine, UCP, and DTR).
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 
@@ -184,7 +193,7 @@ Engine, UCP, and DTR).
     $ sudo docker run hello-world
     ```
 
-    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
     [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
@@ -198,7 +207,7 @@ Engine, UCP, and DTR).
 
 {% elsif section == "package-installation" %}
 
-To manually install Docker EE, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker EE.
+To manually install Docker Enterprise, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker Enterprise.
 
 {% elsif section == "install-using-yum-package" %}
 
@@ -213,13 +222,13 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
 {% endif %}
 
 {% if linux-dist == "centos" %}
-1.  Go to the Docker EE repository URL associated with your trial or subscription
+1.  Go to the Docker Engine - Enterprise repository URL associated with your trial or subscription
     in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
     and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endif %}
 
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-1.  Go to the Docker EE repository URL associated with your
+1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to
     `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
     architecture, and Docker version. Download the
@@ -231,7 +240,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
   {% endif %}
 {% endif %}
 
-2.  Install Docker EE, changing the path below to the path where you downloaded
+2.  Install Docker Enterprise, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -249,7 +258,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 
@@ -257,7 +266,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
     $ sudo docker run hello-world
     ```
 
-    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
     [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
@@ -272,7 +281,7 @@ To manually install Docker EE, download the `.{{ package-format | downcase }}` f
 
 {% elsif section == "yum-uninstall" %}
 
-1.  Uninstall the Docker EE package:
+1.  Uninstall the Docker Engine - Enterprise package:
 
     ```bash
     $ sudo yum -y remove docker-ee
@@ -301,6 +310,6 @@ You must delete any edited configuration files manually.
 
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 
 {% endif %}

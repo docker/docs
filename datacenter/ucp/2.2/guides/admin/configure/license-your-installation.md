@@ -9,7 +9,7 @@ installation. Here's how to do it.
 
 ## Download your license
 
-Go to [Docker Store](https://www.docker.com/enterprise-edition) and
+Go to [Docker Hub](https://www.docker.com/enterprise-edition) and
 download your UCP license, or get a free trial license.
 
 ![](../../images/license-ucp-1.png){: .with-border}
@@ -17,7 +17,7 @@ download your UCP license, or get a free trial license.
 ## License your installation
 
 Once you've downloaded the license file, you can apply it to your UCP
-installation. 
+installation.
 
 In the UCP web UI, log in with administrator credentials and
 navigate to the **Admin Settings** page.

@@ -5,8 +5,8 @@ keywords: ucp, architecture
 ---
 
 Universal Control Plane is a containerized application that runs on
-[Docker Enterprise Edition](/ee/index.md) and extends its functionality
-to make it easier to deploy, configure, and monitor your applications at scale.
+[Docker Enterprise Edition](/ee/index.md), extending its functionality
+to simplify the deployment, configuration, and monitoring of your applications at scale.
 
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your Docker cluster.
@@ -52,7 +52,7 @@ If the node is a:
 
 ## UCP internal components
 
-The core component of UCP is a globally-scheduled service called `ucp-agent`.
+The core component of UCP is a globally scheduled service called `ucp-agent`.
 When you install UCP on a node, or join a node to a swarm that's being managed
 by UCP, the `ucp-agent` service starts running on that node.
 
@@ -66,11 +66,6 @@ on a node depend on whether the node is a manager or a worker.
 > on Windows, the `ucp-agent` component is named `ucp-agent-win`.
 > [Learn about architecture-specific images](admin/install/architecture-specific-images.md).
 
-Internally, UCP uses the following components:
-
-* Calico 3.0.1
-* Kubernetes 1.8.11
-
 ### UCP components in manager nodes
 
 Manager nodes run all UCP services, including the web UI and data stores that
@@ -79,7 +74,7 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | UCP component                   | Description                                                                                                                                                                                                                                                                                                                                                     |
 |:--------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | k8s_calico-kube-controllers     | A cluster-scoped Kubernetes controller used to coordinate Calico networking. Runs on one manager node only.                                                                                                                                                                                                                                                     |
-| k8s_calico-node                 | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. Configure the CNI plugin by using the `--cni-installer-url` flag. If this flag isn't set, UCP uses Calico as the default CNI plugin.                                                     |
+| k8s_calico-node                 | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. Configure the container network interface (CNI) plugin by using the `--cni-installer-url` flag. If this flag isn't set, UCP uses Calico as the default CNI plugin.                                                     |
 | k8s_install-cni_calico-node     | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                                                                                                            |
 | k8s_POD_calico-node             | Pause container for the `calico-node` pod.                                                                                                                                                                                                                                                                                                                      |
 | k8s_POD_calico-kube-controllers | Pause container for the `calico-kube-controllers` pod.                                                                                                                                                                                                                                                                                                          |
@@ -87,7 +82,7 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | k8s_POD_kube-dns                | Pause container for the `kube-dns` pod.                                                                                                                                                                                                                                                                                                                         |
 | k8s_ucp-dnsmasq-nanny           | A dnsmasq instance used in the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only.                                                                                                                                                                                                                                        |
 | k8s_ucp-kube-compose            | A custom Kubernetes resource component that's responsible for translating Compose files into Kubernetes constructs. Part of the `compose` deployment. Runs on one manager node only.                                                                                                                                                                            |
-| k8s_ucp-kube-dns                | The main Kubernetes DNS Service, used by pods to [resolve service names](https://v1-8.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/). Part of the `kube-dns` deployment. Runs on one manager node only. Provides service discovery for Kubernetes services and pods. A set of three containers deployed via Kubernetes as a single pod. |
+| k8s_ucp-kube-dns                | The main Kubernetes DNS Service, used by pods to [resolve service names](https://v1-11.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/). Part of the `kube-dns` deployment. Runs on one manager node only. Provides service discovery for Kubernetes services and pods. A set of three containers deployed via Kubernetes as a single pod. |
 | k8s_ucp-kubedns-sidecar         | Health checking and metrics daemon of the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only.                                                                                                                                                                                                                             |
 | ucp-agent                       | Monitors the node and ensures the right UCP services are running.                                                                                                                                                                                                                                                                                               |
 | ucp-auth-api                    | The centralized service for identity and authentication used by UCP and DTR.                                                                                                                                                                                                                                                                                    |
@@ -120,7 +115,7 @@ services running on worker nodes:
 |:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | k8s_calico-node             | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                               |
 | k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                 |
-| k8s_POD_calico-node         | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
+| k8s_POD_calico-node         | Pause container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
 | ucp-agent                   | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
 | ucp-interlock-extension     | Helper service that reconfigures the ucp-interlock-proxy service based on the swarm workloads that are running.                                                                                                                                                      |
 | ucp-interlock-proxy         | A service that provides load balancing and proxying for swarm workloads. Only runs when you enable Layer 7 routing.                                                                                                                                                  |
@@ -180,14 +175,13 @@ driver.
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
 
-## Configurations use by UCP
+## Configurations used by UCP
 
 | Configuration name             | Description                                                                                      |
 |:-------------------------------|:-------------------------------------------------------------------------------------------------|
 | com.docker.interlock.extension | Configuration for the Interlock extension service that monitors and configures the proxy service |
 | com.docker.interlock.proxy     | Configuration for the service responsible for handling user requests and routing them            |
 | com.docker.license             | The Docker EE license                                                                            |
-| com.docker.ucp.config          | The UCP controller configuration. Most of the settings available on the UCP UI are stored here   |
 | com.docker.ucp.interlock.conf  | Configuration for the core Interlock service                                                     |
 
 ## How you interact with UCP

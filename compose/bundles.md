@@ -56,8 +56,8 @@ Wrote bundle to vossibility-stack.dab
 > you need to install an experimental build of Docker Engine to use it.
 >
 > If you're on Mac or Windows, download the “Beta channel” version of
-> [Docker for Mac](/docker-for-mac/) or
-> [Docker for Windows](/docker-for-windows/) to install
+> [Docker Desktop for Mac](/docker-for-mac/) or
+> [Docker Desktop for Windows](/docker-for-windows/) to install
 > it. If you're on Linux, follow the instructions in the
 > [experimental build README](https://github.com/docker/cli/blob/master/experimental/README.md).
 

@@ -244,7 +244,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
 3.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
-    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next it.
+    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next to it.
 
     * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
 
@@ -281,7 +281,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
-    Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
+    Also, check the visualizer at port 8080 on either node's IP address, and notice the `redis` service running along with the `web` and `visualizer` services.
 
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 

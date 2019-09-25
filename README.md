@@ -6,6 +6,30 @@ Welcome to the repo for our documentation. This is the source for
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
 
+## Table of Contents
+
+- [Providing feedback](#providing-feedback)
+- [Contributing](#contributing)
+  - [Files not edited here](#files-not-edited-here)
+  - [Overall doc improvements](#overall-doc-improvements)
+  - [Specific new features for a project](#specific-new-features-for-a-project)
+- [Per-PR staging on GitHub](#per-pr-staging-on-github)
+- [Staging the docs](#staging-the-docs)
+- [Read these docs offline](#read-these-docs-offline)
+- [Important files](#important-files)
+- [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
+  - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
+  - [Per-page front-matter](#per-page-front-matter)
+  - [Creating tabs](#creating-tabs)
+  - [Running in-page Javascript](#running-in-page-javascript)
+  - [Images](#images)
+- [Beta content disclaimer](#beta-content-disclaimer)
+- [Accessing unsupported archived documentation](#accessing-unsupported-archived-documentation)
+- [Building archives and the live published docs](#building-archives-and-the-live-published-docs)
+- [Creating a new archive](#creating-a-new-archive)
+- [Copyright and license](#copyright-and-license)
+
+
 ## Providing feedback
 
 We really want your feedback, and we've made it easy.  You can edit a page or
@@ -169,12 +193,23 @@ You have three options:
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
+    
+3. Build and run a Docker image for your working branch.
+    
+   ```bash
+   $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
+   $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
+    ```
 
+   After the `docker run` command, copy the URL provided in the container build output in a browser, 
+   http://0.0.0.0:4000, and verify your changes.
+   
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+[Docker Hub](https://docs.docker.com/docker-hub/).
+
 The following examples use the `latest` tag:
 
 - Run a single container:
@@ -197,7 +232,7 @@ Either way, you can now access the docs at port 4000 on your Docker host.
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
 - `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
-- `/css/documentation.css` defines the docs-specific style rules
+- `/css/style.scss` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
 ## Relative linking for GitHub viewing
@@ -307,11 +342,33 @@ In order to keep the Git repository light, _please_ compress the images
 (losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
 instance.  Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
-still optimizes the bandwith during browsing).
+still optimizes the bandwidth during browsing).
+
+## Beta content disclaimer
+```bash
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+```
+
+## Accessing unsupported archived documentation
+
+Supported documentation includes the current version plus the previous five versions. 
+
+If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
+
+- By entering your version number and selecting it from the branch selection list for this repo 
+- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9` 
+- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline) 
+in Docker Hub. For example, run the following to access `v1.9`:
+
+ ```bash
+  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```
 
 ## Building archives and the live published docs
 
-All the images described below are automatically built using Docker Cloud. To
+All the images described below are automatically built using Docker Hub. To
 build the site manually, from scratch, including all utility and archive images,
 see the [README in the publish-tools
 branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
@@ -330,7 +387,7 @@ branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
 
 ## Creating a new archive
 
-When a new Docker CE Stable version is released, the previous state of `master`
+When a new Docker Engine - Community Stable version is released, the previous state of `master`
 is archived into a version-specific branch like `v17.09`, by doing the following:
 
 1.  Create branch based off the commit hash before the new version was released.
