@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 3: Deploying to Swarm"
+title: "Get Started, Part 4: Deploying to Swarm"
 keywords: services, replicas, scale, ports, compose, compose file, stack, networking
 description: Learn how to define load-balanced and scalable service that runs containers.
 ---
@@ -44,52 +44,45 @@ Swarm never creates individual containers like we did in the previous step of th
 1.  Deploy your application to Swarm:
 
     ```shell
-    docker stack deploy -c bb-stack.yaml
+    docker stack deploy -c bb-stack.yaml demo
 
-    deployment.apps/bb-demo created
-    service/bb-entrypoint created
+    Creating network demo_default
+    Creating service demo_bb-app
     ```
 
-2.  Make sure everything worked by listing your deployments:
+    Notice that in addition to your service, Swarm also creates a Docker network by default to isolate the containers deployed as part of your stack.
+
+2.  Make sure everything worked by listing your service:
 
     ```shell
-    kubectl get deployments
+    docker service ls
 
-    NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    bb-demo   1         1         1            1           48s
+    ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+    il7elwunymbs        demo_bb-app         replicated          1/1                 bulletinboard:1.0   *:8000->8080/tcp
     ```
 
-    This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:
+    This indicates 1/1 containers you asked for as part of your services are up and running Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.
 
-    ```shell
-    kubectl get services
-
-    NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    bb-entrypoint   NodePort    10.106.145.116   <none>        8080:30001/TCP   53s
-    Swarm      ClusterIP   10.96.0.1        <none>        443/TCP          138d
-    ```
-
-    In addition to the default `Swarm` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
-
-3.  Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in the previous step of this tutorial.
+3.  Open a browser and visit your bulletin board at `localhost:8000`; you should see your bulletin board, the same as when we ran it as a stand-alone container in Step 2 of this tutorial.
 
 4.  Once satisfied, tear down your application:
 
     ```shell
-    kubectl delete -f bb.yaml
+    docker stack rm demo
     ```
 
 ## Conclusion
 
 At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Swarm environment on our development machine. We haven't done much with Swarm yet, but the door is now open: you can being adding other components to your app and taking advantage of all the features and power of Swarm, right on your own machine.
 
-In addition to deploying to Swarm, we have also described our application as a Swarm YAML file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
+In addition to deploying to Swarm, we have also described our application as a stack file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
 
-## Swarm References
+## Swarm &amp; CLI References
 
-Further documentation for all new Swarm objects used in this article are available here:
+Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Pods](https://Swarm.io/docs/concepts/workloads/pods/pod/)
- - [Swarm Deployments](https://Swarm.io/docs/concepts/workloads/controllers/deployment/)
- - [Swarm Services](https://Swarm.io/docs/concepts/services-networking/service/)
+ - [Swarm Services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
+ - [Swarm Stacks](https://docs.docker.com/engine/swarm/stack-deploy/)
+ - [`docker stack *`](https://docs.docker.com/engine/reference/commandline/stack/)
+ - [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
 
