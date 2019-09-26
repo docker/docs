@@ -1039,7 +1039,11 @@ on which platform the service's build will be performed.
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
-port (an ephemeral host port is chosen).
+port (an ephemeral host port is chosen).  
+Notice that when using ports which are not bound to the host (i.e. `"127.0.0.1:3000:3000"`)
+these ports will be accessible from the outside. This also applies if you configured 
+UFW to block this specific port, as Docker manages his own iptables rules. 
+[Read more](/network/iptables.md)
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
