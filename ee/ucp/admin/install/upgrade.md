@@ -356,4 +356,4 @@ From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
 
 ## Where to go next
 
-- [Upgrade DTR](/e/dtr/admin/upgrade/)
+- [Upgrade DTR](/ee/dtr/admin/upgrade/)
