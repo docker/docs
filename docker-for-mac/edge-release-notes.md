@@ -12,6 +12,18 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.3.0
+2019-09-16
+
+[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+
 ### Docker Desktop Community 2.1.2.0
 2019-09-09
 

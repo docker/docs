@@ -21,7 +21,7 @@ In this example, we'll create the `wordpress` repository in DTR.
     ![](../../images/create-repository-1.png){: .with-border}
 
 
-3. Select your namespace and enter a name for your repository. You can optionally add a description.
+3. Select your namespace and enter a name for your repository (upper case letters and some special characters not accepted). You can optionally add a description.
 
 4.  Choose whether your repository is `public` or `private`:
 

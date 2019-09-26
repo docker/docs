@@ -1257,9 +1257,6 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- sectiontitle: Library references
-  section:
-  - generateTOC: library
 - sectiontitle: Sample applications
   section:
   - path: /samples/
@@ -1282,6 +1279,8 @@ samples:
     title: Riak
   - path: /engine/examples/running_ssh_service/
     title: SSHd
+- path: /samples/#library-references
+  title: Library references
 
 manuals:
 - sectiontitle: Docker Enterprise
@@ -3994,6 +3993,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - sectiontitle: Security and Authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Managing Access Tokens
   - path: /docker-hub/release-notes/
     title: Release notes
   - sectiontitle: Two-factor Authentication

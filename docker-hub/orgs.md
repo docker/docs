@@ -15,7 +15,7 @@ Docker Hub Organizations let you create teams so you can give your team access t
 
 > **Note**: in Docker Hub, users cannot be associated directly to an organization. They belong only to teams within an organization.
 
-### Creating an organization
+### Create an organization
 
 1. Start by clicking on [Organizations](https://cloud.docker.com/orgs) in Docker Hub
 2. Click on "Create Organization"
@@ -34,7 +34,7 @@ Members of this team can:
 - Create a team and modify the membership of any team
 - Access and modify any repository belonging to the Organization
 
-### Creating a team
+### Create a team
 
 To create a team:
 
@@ -42,21 +42,21 @@ To create a team:
 2. Click **Create Team** ![Create Team](images/orgs-team-create.png)
 3. Fill out your team's information and click **Create** ![Create Modal](images/orgs-team-create-submit.png)
 
-### Adding a member to a team
+### Add a member to a team
 
 1. Visit your team's page in Docker Hub. Click on **Organizations** > **_Your Organization_** > **_Your Team Name_**
 2. Click on **Add User**
 3. Provide the user's Docker ID username _or_ email to add them to the team ![Add User to Team](images/orgs-team-add-user.png)
 
-> **Note**: you are not automatically added to teams created by your organization.
+> **Note**: You are not automatically added to teams created by your organization.
 
-### Removing team members
+### Remove team members
 
 To remove a member from a team, click the **x** next to their name:
 
 ![Add User to Team](images/orgs-team-remove-user.png)
 
-### Giving a team access to a repository
+### Give a team access to a repository
 
 To provide a team access to a repository:
 
@@ -67,14 +67,14 @@ To provide a team access to a repository:
 5. Select the team, permissions level (more on this below) and click **+**
 6. Click the **+** button to add ![Add Repo Permissions for Team](images/orgs-add-team-permissions.png)
 
-### Viewing a team's permissions for all repositories
+### View a team's permissions for all repositories
 
 To view a team's permissions over all repos:
 1. Click on **Organizations**, then select your organization and team.
 2. Click on the **Permissions** tab where you can view which repositories this team has access to ![Team Audit Permissions](images/orgs-audit-permissions.png)
 
 
-### Permissions Reference
+### Permissions reference
 
 Permissions are cumulative. For example, if you have Write permissions, you
 automatically have Read permissions:
