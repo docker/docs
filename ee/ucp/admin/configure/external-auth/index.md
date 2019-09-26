@@ -109,7 +109,7 @@ go to the UCP web interface, navigate to the **Admin Settings** page, and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users. [Learn about additional UCP configuration options](../../configure/ucp-configuration-file.md#configuration-options).
 
-![](../../../images/admin-settings-tab-session.png){: .with-border}
+![](../../../images/authentication-authorization.png)
 
 In the **LDAP Enabled** section, click **Yes**. 
 Now configure your LDAP directory integration.

@@ -82,7 +82,7 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 | `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 60 minutes.                                                                                                                                                                                                                     |
 | `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 20 minutes.                                                          |
 | `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 10. |
-| `auth.storeTokenPerSession` | no | If set, the user token is stored in `sessionStorage` instead of `localStorage`. Note that this option will log the user out and require them to log back in since they are actively changing how their authentication is stored. |
+| `store_token_per_session` | no | If set, the user token is stored in `sessionStorage` instead of `localStorage`. Note that this option will log the user out and require them to log back in since they are actively changing how their authentication is stored. |
 
 ### registries array (optional)
 
@@ -108,7 +108,9 @@ Configures audit logging options for UCP components.
 
 Specifies scheduling options and the default orchestrator for new nodes.
 
-> **Note**: If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
+> Note
+> 
+> If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
 
 | Parameter                     | Required | Description                                                                                                                                |
 |:------------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -137,7 +139,9 @@ Specifies whether DTR images require signing.
 
 ### log_configuration table (optional)
 
-> Note: This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
+> Note
+> 
+> This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
 
 Configures the logging options for UCP components.
 
@@ -224,8 +228,9 @@ components. Assigning these values overrides the settings in a container's
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
 | `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.
 
-
-*dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
+> Note
+> 
+> dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
 
 ### iSCSI (optional)
 Configures iSCSI options for UCP.
