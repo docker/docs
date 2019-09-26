@@ -82,6 +82,7 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 | `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 60 minutes.                                                                                                                                                                                                                     |
 | `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 20 minutes.                                                          |
 | `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 10. |
+| `auth.storeTokenPerSession` | no | If set, the user token is stored in `sessionStorage` instead of `localStorage`. Note that this option will log the user out and require them to log back in since they are actively changing how their authentication is stored. |
 
 ### registries array (optional)
 
