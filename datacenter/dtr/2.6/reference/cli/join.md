@@ -11,6 +11,7 @@ Add a new replica to an existing DTR cluster. Use SSH to log into any node that 
 ```bash
 docker run -it --rm \
   docker/dtr:2.6.0 join \
+  --ucp-url <ucp-url>
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
