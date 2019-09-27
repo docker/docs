@@ -2288,7 +2288,6 @@ services:
 networks:
   hostnet:
     external: true
-    name: host
 ```
 
 ```yaml
@@ -2312,7 +2311,6 @@ services:
 networks:
   nonet:
     external: true
-    name: none
 ```
 
 ### driver_opts
