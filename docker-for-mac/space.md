@@ -4,8 +4,7 @@ keywords: mac, disk
 title: Disk utilization in Docker for Mac
 ---
 
-Docker for Mac stores Linux containers and images in a single, large "disk image" file
-in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
+Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
 
 ## Where is the disk image file?
 
@@ -72,7 +71,7 @@ It might take a few minutes to reclaim space on the host depending on the format
 Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. To trigger a space reclamation at any point, run the command:
 
 ```
-$ docker run --privileged --pid=host username/nsenter1 /sbin/fstrim /var/lib/docker
+$ docker run --privileged --pid=host docker/desktop-reclaim-space
 ```
 
 Note that many tools report the maximum file size, not the actual file size.
@@ -80,7 +79,7 @@ To query the actual size of the file on the host from a terminal, run:
 
 ```bash
 $ cd ~/Library/Containers/com.docker.docker/Data
-$ cd vms/0   # or com.docker.driver.amd64-linux
+$ cd vms/0/data
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 username  staff    64G Dec 13 17:42 Docker.raw
 ```
