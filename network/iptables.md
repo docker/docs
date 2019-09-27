@@ -53,9 +53,9 @@ for a lot more information.
 
 ## Prevent Docker from manipulating iptables
 
-To prevent Docker from manipulating the `iptables` policies at all, set the
-`iptables` key to `false` in `/etc/docker/daemon.json`. This is inappropriate
-for most users, because the `iptables` policies then need to be managed by hand.
+It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker.daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions.  Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
+
+For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
 
 ## Next steps
 
