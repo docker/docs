@@ -10,9 +10,9 @@ description: Learn how to define load-balanced and scalable service that runs co
 - Work through containerizing an application in [Part 2](part2.md).
 - Make sure that Kubernetes is enabled on your Docker Desktop:
   - **OSX**: click the Docker icon in your menu bar and make sure there's a green light beside 'Kubernetes is Running'
-  - **Windows**: right-click the Docker icon in the system tray and navigate to Settings, and make sure there's a green light beside 'Kubernetes is Running'.
+  - **Windows**: click the Docker icon in the system tray and navigate to Kubernetes, and make sure there's a green light beside 'Kubernetes is Running'.
 
-  If Kubernetes isn't running, follow the instructions in Part 1 of this tutorial to finish setting it up.
+  If Kubernetes isn't running, follow the instructions in [Part 1](part1.md) of this tutorial to finish setting it up.
 
 ## Introduction
 
@@ -73,11 +73,15 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 ##  Deploying and Checking Your Application
 
-1.  Deploy your application to Kubernetes:
+1.  In a terminal, navigate to where you created `bb.yaml` and deploy your application to Kubernetes:
 
     ```shell
-    kubectl apply -f bb.yaml 
+    kubectl apply -f bb.yaml
+    ```
 
+    you should see output that looks like the following, indicating your Kubernetes objects were created successfully:
+
+    ```shell
     deployment.apps/bb-demo created
     service/bb-entrypoint created
     ```
@@ -86,7 +90,11 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     ```shell
     kubectl get deployments
+    ```
 
+    if all is well, your deployment should be listed as follows:
+
+    ```shell
     NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     bb-demo   1         1         1            1           48s
     ```
@@ -113,7 +121,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 ## Conclusion
 
-At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Kubernetes environment on our development machine. We haven't done much with Kubernetes yet, but the door is now open: you can being adding other components to your app and taking advantage of all the features and power of Kubernetes, right on your own machine.
+At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Kubernetes environment on our development machine. We haven't done much with Kubernetes yet, but the door is now open: you can begin adding other components to your app and taking advantage of all the features and power of Kubernetes, right on your own machine.
 
 In addition to deploying to Kubernetes, we have also described our application as a Kubernetes YAML file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
 
