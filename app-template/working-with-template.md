@@ -43,7 +43,7 @@ complete the following steps:
 3. Add the service template to the library
 4. Share the service template
 
-### A service container image
+### Create a service container image
 
 A service template provides the description required by Docker Template to
 scaffold a project. A service template runs inside a container with two bind
@@ -52,15 +52,15 @@ mounts:
 1. `/run/configuration`, a JSON file which contains all settings such as
    parameters, image name, etc. For example:
 
-```json
-  {
-  "parameters": {
-    "externalPort": "80",
-    "artifactId": "com.company.app"
-  },
-  ...
-}
-```
+    ```json
+      {
+      "parameters": {
+        "externalPort": "80",
+        "artifactId": "com.company.app"
+      },
+      ...
+    }
+    ```
 
 2. `/project`, the output folder to which the container image writes the generated assets.
 
@@ -316,14 +316,14 @@ it, you must make Docker Template aware of these. To do this:
 
 1. Edit `~/.docker/application-template/preferences.yaml` as follows:
 
-```yaml
-apiVersion: v1alpha1
-channel: master
-kind: Preferences
-repositories:
-- name: library-master
-  url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
-```
+   ```yaml
+   apiVersion: v1alpha1
+   channel: master
+   kind: Preferences
+   repositories:
+   - name: library-master
+     url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+   ```
 
 2. Add your local repository:
 
@@ -331,16 +331,16 @@ repositories:
 > This library contain template plugins that are required to build all Docker
 > Templates.
 
-```yaml
-apiVersion: v1alpha1
-channel: master
-kind: Preferences
-repositories:
-- name: custom-services
-  url: file:///path/to/my/library.yaml
-- name: library-master
-  url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
-```
+   ```yaml
+   apiVersion: v1alpha1
+   channel: master
+   kind: Preferences
+   repositories:
+   - name: custom-services
+     url: file:///path/to/my/library.yaml
+   - name: library-master
+     url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+   ```
 
 When configuring a local repository on Windows, the `url` structure is slightly
 different:
@@ -444,14 +444,14 @@ you must make Docker Template aware of these. To do this:
 
 1. Edit `~/.docker/application-template/preferences.yaml` as follows:
 
-```yaml
-apiVersion: v1alpha1
-channel: master
-kind: Preferences
-repositories:
-- name: library-master
-  url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
-```
+   ```yaml
+   apiVersion: v1alpha1
+   channel: master
+   kind: Preferences
+   repositories:
+   - name: library-master
+     url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+   ```
 
 2. Add your local repository:
 
@@ -459,16 +459,16 @@ repositories:
 > This library contain template plugins that are required to build all Docker
 > Templates.
 
-```yaml
-apiVersion: v1alpha1
-channel: master
-kind: Preferences
-repositories:
-- name: custom-services
-  url: file:///path/to/my/library.yaml
-- name: library-master
-  url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
-```
+   ```yaml
+   apiVersion: v1alpha1
+   channel: master
+   kind: Preferences
+   repositories:
+   - name: custom-services
+     url: file:///path/to/my/library.yaml
+   - name: library-master
+     url: https://docker-application-template.s3.amazonaws.com/master/library.yaml
+   ```
 
 When configuring a local repository on Windows, the `url` structure is slightly
 different:
