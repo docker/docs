@@ -14,7 +14,7 @@ description: Learn how to define load-balanced and scalable service that runs co
 
 ## Introduction
 
-Now that we've demonstrated that the individual components of our application run as stand-alone containers, it's time to arrange for them to be managed by an orchestrator like Docker Swarm. Swarm provides many tools for scaling, networking, securing and maintaining your containerized applications, above and beyond the abilities of containers themselves.
+Now that we've demonstrated that the individual components of our application run as stand-alone containers and shown how to deploy it using Kubernetes, let's look at how to arrange for them to be managed by Docker Swarm. Swarm provides many tools for scaling, networking, securing and maintaining your containerized applications, above and beyond the abilities of containers themselves.
 
 In order to validate that our containerized application works well on Swarm, we'll use Docker Desktop's built in Swarm environment right on our development machine to deploy our application, before handing it off to run on a full Swarm cluster in production. The Swarm environment created by Docker Desktop is _fully featured_, meaning it has all the Swarm features your app will enjoy on a real cluster, accessible from the convenience of your development machine.
 
@@ -45,7 +45,11 @@ Swarm never creates individual containers like we did in the previous step of th
 
     ```shell
     docker stack deploy -c bb-stack.yaml demo
+    ```
 
+    If all goes well, Swarm will report creating all your stack objects with no complaints:
+
+    ```shell
     Creating network demo_default
     Creating service demo_bb-app
     ```
@@ -56,12 +60,16 @@ Swarm never creates individual containers like we did in the previous step of th
 
     ```shell
     docker service ls
+    ```
 
+    If all has gone well, your service will report with 1/1 of its replicas created:
+
+    ```shell
     ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
     il7elwunymbs        demo_bb-app         replicated          1/1                 bulletinboard:1.0   *:8000->8080/tcp
     ```
 
-    This indicates 1/1 containers you asked for as part of your services are up and running Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.
+    This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.
 
 3.  Open a browser and visit your bulletin board at `localhost:8000`; you should see your bulletin board, the same as when we ran it as a stand-alone container in Step 2 of this tutorial.
 
@@ -73,7 +81,7 @@ Swarm never creates individual containers like we did in the previous step of th
 
 ## Conclusion
 
-At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Swarm environment on our development machine. We haven't done much with Swarm yet, but the door is now open: you can being adding other components to your app and taking advantage of all the features and power of Swarm, right on your own machine.
+At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Swarm environment on our development machine. We haven't done much with Swarm yet, but the door is now open: you can begin adding other components to your app and taking advantage of all the features and power of Swarm, right on your own machine.
 
 In addition to deploying to Swarm, we have also described our application as a stack file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
 
