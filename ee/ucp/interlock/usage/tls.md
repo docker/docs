@@ -107,7 +107,7 @@ After creating the DNS entry, you can access your service:
 https://<hostname>:<https-port>
 ```
 
-FOr this example:
+For this example:
 * `hostname` is the name you specified with the `com.docker.lb.hosts` label.
 * `https-port` is the port you configured in the [UCP settings](../deploy/index.md).
 
