@@ -50,7 +50,7 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 
     Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 
-    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, per the above steps.
+    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, per the above steps. If the push seemed to work but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
 
 ## Conclusion
 
