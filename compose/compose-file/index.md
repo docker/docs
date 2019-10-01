@@ -931,7 +931,6 @@ The following sub-options (supported for `docker-compose up` and `docker-compose
 - [network_mode](#network_mode)
 - [restart](#restart)
 - [security_opt](#security_opt)
-- [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
 >**Tip:** See the section on [how to configure volumes
@@ -1730,7 +1729,12 @@ sysctls:
   - net.ipv4.tcp_syncookies=0
 ```
 
-> **Note**: This option is ignored when
+You can only use sysctls that are namespaced in the kernel. Docker does not
+support changing sysctls inside a container that also modify the host system.
+For an overview of supported sysctls, refer to [configure namespaced kernel
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+
+> This option requires Docker Engine 19.03 or up when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
