@@ -23,28 +23,66 @@ upgrade your installation to the latest release.
 **Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
-(2019-7-22)
+
+## 3.2.1
+2019-09-03
+
+### Bug fixes
+* Fixed an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.6.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
+  than 1 replica by default.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+* The `azure-ip-count` variable is now exposed at install time, allowing a User
+  to customize the number of IP addresses UCP provisions for each node.
+  Additional information can be found
+  [here](/ee/ucp/admin/install/cloudproviders/install-on-azure/#adjust-the-ip-count-value)
+
+### Security
+* Upgraded Golang to 1.12.9.
+* Added CSP header to prevent cross-site scripting attacks (XSS)
+
+### Bootstrap
+* Fixed various issues in install, uninstall, backup and restore when UCP
+  Telemetry data had been disabled. (ENGORC-2593)
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.1   |
+| Kubernetes            | 1.14.6  |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
+## 3.2.0
+2019-7-22
 
 ### Security
 Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates, issues, and recommendations.
 
 ### New features
 
-- Group Managed Service Accounts (gMSA). 
+- Group Managed Service Accounts (gMSA).
 On Windows, you can create or update a service using ```--credential-spec``` with the ```config://<config-name>``` format.
 This passes the gMSA credentials file directly to nodes before a container starts.
-- Open Security Controls Assessment Language (OSCAL). 
+- Open Security Controls Assessment Language (OSCAL).
 OSCAL API endpoints have been added in Engine and UCP. These endpoints are enabled by default.
-- Container storage interface (CSI). 
+- Container storage interface (CSI).
 Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins.
 Note: As of May 2019, none of the [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) are production quality and are considered pre-GA.
-- Internet Small Computer System Interface (iSCSI). 
+- Internet Small Computer System Interface (iSCSI).
 Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end
 users can request storage resources without needing underlying infrastructure knowledge.
-- System for Cross-domain Identity Management (SCIM). 
+- System for Cross-domain Identity Management (SCIM).
 SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing
 user status and group membership.
-- Support for Pod Security Policies (PSPs) within Kubernetes. 
+- Support for Pod Security Policies (PSPs) within Kubernetes.
 Pod Security Policies are enabled by default in UCP 3.2 allowing platform
 operators to enforce security controls on what can run on top of Kubernetes. For
 more information see
@@ -66,7 +104,6 @@ more information see
 
 - Improved progress information for install and upgrade.
 - You can now manually control worker node upgrades.
-- User workloads no longer experience downtime during an upgrade.
 
 #### Buildkit
 
@@ -90,13 +127,13 @@ The following features are deprecated in UCP 3.2:
     ```
     docker node update --label-add com.docker.ucp.agent-pause=true <NODE>
     ```
-- Windows 2016 is formally deprecated from Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker 
+- Windows 2016 is formally deprecated from Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker
 Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
-- Support for updating the UCP config with `docker service update ucp-manager-agent --config-add <Docker config> ...` 
-is deprecated and will be removed in a future release. To update the UCP config, use the `/api/ucp/config-toml` 
+- Support for updating the UCP config with `docker service update ucp-manager-agent --config-add <Docker config> ...`
+is deprecated and will be removed in a future release. To update the UCP config, use the `/api/ucp/config-toml`
 endpoint described in https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/.
-- Generating a backup from a UCP manager that has lost quorum is no longer supported. We recommend that you 
-regularly schedule backups on your cluster so that you have always have a recent backup. 
+- Generating a backup from a UCP manager that has lost quorum is no longer supported. We recommend that you
+regularly schedule backups on your cluster so that you have always have a recent backup.
 Refer to [UCP backup information](/ee/admin/backup/back-up-ucp/) for detailed UCP back up information.
 
 If your cluster has lost quorum and you cannot recover it on your own, please contact Docker Support.
@@ -188,13 +225,13 @@ In order to optimize user experience and security, support for Internet Explorer
 - Kubelet fails mounting local volumes in "Block" mode on SLES 12 and SLES 15 hosts
     The error message from the kubelet looks like this, with `mount` returning error code 32.
     ```
-    Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries 
-    permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175 
-    (durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\" 
-    (UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod 
+    Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries
+    permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175
+    (durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\"
+    (UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod
     \"pod-subpath-test-local-preprovisionedpv-l7k9\" (UID: \"364a339d-a98d-11e9-8d2d-0242ac11000b\")
-     : local: failed to mount device /dev/loop0 at 
-     /var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ), 
+     : local: failed to mount device /dev/loop0 at
+     /var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ),
      error exit status 32"
     ```
     Issuing "dmesg" on the system will show something like:
@@ -202,7 +239,7 @@ In order to optimize user experience and security, support for Internet Explorer
     [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
     ```
     Rootcause:
-    For block volumes, if a specific filesystem is not specified, "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity. 
+    For block volumes, if a specific filesystem is not specified, "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity.
     ```
     [fs_types]...
     ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}
@@ -214,10 +251,10 @@ In order to optimize user experience and security, support for Internet Explorer
 
     This resolution can be automated across your cluster of SLES12 and SLES15 hosts, by creating a docker swarm service as follows. Note that, for this, the hosts should be in "swarm" mode:
 
-    Create a global docker service that removes the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
+    Create a global docker service that removes the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
     ```
-    docker service create --mode=global --restart-condition none --mount 
-    type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker 
+    docker service create --mode=global --restart-condition none --mount
+    type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker
     exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
     ```
     You can now switch nodes to be kubernetes workers.
@@ -245,7 +282,7 @@ In order to optimize user experience and security, support for Internet Explorer
     - re-adding the above rules manually or via cron or
     - restarting Docker
 
-- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error: 
+- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error:
     ```
     time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
     ```
@@ -256,24 +293,25 @@ In order to optimize user experience and security, support for Internet Explorer
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount 
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` ServiceAccount
    to a `cluster-admin` `ClusterRole`, as shown in the following example:
-       ```
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: ClusterRoleBinding
-       metadata:
-         labels:
-           subjectName: kube-system-persistent-volume-binder
-         name: kube-system-persistent-volume-binder:cluster-admin
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: ClusterRole
-         name: cluster-admin
-       subjects:
-       - kind: ServiceAccount
-         name: persistent-volume-binder
-         namespace: kube-system
-       ```
+
+      ```
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        labels:
+          subjectName: kube-system-persistent-volume-binder
+        name: kube-system-persistent-volume-binder:cluster-admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+      - kind: ServiceAccount
+        name: persistent-volume-binder
+        namespace: kube-system
+      ```
 
 - Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
   - Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
@@ -284,20 +322,20 @@ In order to optimize user experience and security, support for Internet Explorer
   - Workaround: use a swarm service to deploy this change across the cluster as follows:
     1. Install UCP and have nodes configured as swarm workers.
     2. Perform iSCSI initiator related configuration on the nodes.
-        - Install packages: 
+        - Install packages:
         ```
         zypper -n install open-iscsi
         ```
-        - Modprobe the relevant kernel modules 
+        - Modprobe the relevant kernel modules
         ```
         modprobe iscsi_tcp
         ```
-        - Start the iscsi daemon 
+        - Start the iscsi daemon
         ```
         service start iscsid
         ```
 
-    3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands: 
+    3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
         ```
         docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && echo /rootfs/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
         4b1qxigqht0vf5y4rtplhygj8
@@ -307,8 +345,8 @@ In order to optimize user experience and security, support for Internet Explorer
         ugb24g32knzv: running
         overall progress: 0 out of 3 tasks
         overall progress: 0 out of 3 tasks
-        overall progress: 0 out of 3 tasks 
-        overall progress: 0 out of 3 tasks 
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
 
         <Ctrl-C>
         Operation continuing in background.
@@ -324,7 +362,7 @@ In order to optimize user experience and security, support for Internet Explorer
         ```
 
     4. Switch cluster to run kubernetes workloads. Your cluster is now set to run iSCSI workloads.
-   
+
 ### Components
 
 | Component      | Version |
@@ -337,8 +375,39 @@ In order to optimize user experience and security, support for Internet Explorer
 
 # Version 3.1
 
+## 3.1.10
+2019-09-03
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built
+  with Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
+  than 1 replica by default.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+
+### UI
+* A warning message will be shown when one attempts to upgrade from 3.1.x to
+  3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.1.10  |
+| Kubernetes            | 1.11.10 |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.1.9
-(2019-07-17)
+2019-07-17
 
 ### Bug fixes
 
@@ -370,7 +439,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.8
-(2019-06-27)
+2019-06-27
 
 > Upgrading UCP 3.1.8
 >
@@ -432,8 +501,8 @@ In order to optimize user experience and security, support for Internet Explorer
 | Calico      | 3.5.3 |
 | Interlock (nginx)   | 1.14.0 |
 
-## 3.1.7 
-(2019-05-06)
+## 3.1.7
+2019-05-06
 
 ### Security
 * Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
@@ -466,7 +535,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock (nginx)   | 1.14.0 |
 
 ## 3.1.6
-(2019-04-11)
+2019-04-11
 
 ### Kubernetes
 * Updated Kubernetes to version 1.11.9.
@@ -667,7 +736,7 @@ now configurable within the UCP web interface. (#15466)
 
 ## 3.1.1
 
-(2018-12-04)
+2018-12-04
 
 * To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
 
@@ -778,6 +847,36 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.14
+2019-09-03
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.8.15-docker-7, this has been built
+  with Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+
+### UI
+* A warning message will be shown when one attempts to upgrade from 3.1.x to
+  3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.0.14  |
+| Kubernetes            | 1.8.15  |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.0.13
 2019-07-17
 
@@ -808,7 +907,7 @@ The following features are deprecated in UCP 3.1.
 
 * Removed support for Windows Server 1709 as it is now [end of
   life](https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info).
-  
+
 ### Components
 
 | Component      | Version |
@@ -818,7 +917,7 @@ The following features are deprecated in UCP 3.1.
 | Calico      | 3.0.8 |
 | Interlock (nginx)   | 1.13.12 |
 
-## 3.0.11 
+## 3.0.11
 2019-05-06
 
 ### Bug fixes
@@ -1133,8 +1232,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | Calico      | 3.0.1 |
 | Interlock (nginx)   | 1.13.8 |
 
-## Version 3.0.0
-
+## 3.0.0
 2018-04-17
 
 The UCP system requirements were updated with 3.0.0. Make sure to
@@ -1293,6 +1391,13 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.21
+2019-09-03
+
+### Security
+
+* Upgraded Golang to 1.12.9.
+
 ## Version 2.2.20
 2019-07-17
 
@@ -1342,7 +1447,7 @@ instead of the correct image for the worker architecture.
 * You can't create a bridge network from the web interface. As a workaround use
  `<node-name>/<network-name>`.
 
-## Version 2.2.18 
+## Version 2.2.18
 2019-05-06
 
 ### Bug fixes

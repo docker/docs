@@ -27,7 +27,7 @@ in containers.
 
 To fix this problem, try the following:
 
-* Make sure you're using the JSON form of `CMD` and `ENTRYPOINT`
+* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 
   For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.

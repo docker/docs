@@ -285,7 +285,7 @@ guides:
     - path: /config/containers/runmetrics/
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/
-      title: Limit a container's resources
+      title: Runtime options with Memory, CPUs, and GPUs
     - path: /config/labels-custom-metadata/
       title: Apply custom metadata to containers
       nosync: true
@@ -1257,9 +1257,6 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- sectiontitle: Library references
-  section:
-  - generateTOC: library
 - sectiontitle: Sample applications
   section:
   - path: /samples/
@@ -1282,6 +1279,8 @@ samples:
     title: Riak
   - path: /engine/examples/running_ssh_service/
     title: SSHd
+- path: /samples/#library-references
+  title: Library references
 
 manuals:
 - sectiontitle: Docker Enterprise
@@ -1296,8 +1295,12 @@ manuals:
     section:
     - path: /cluster/
       title: Overview
+    - path: /cluster/release-notes/
+      title: Release notes
     - path: /cluster/aws/
       title: Docker Cluster on AWS
+    - path: /cluster/azure/
+      title: Docker Cluster on Azure
     - path: /cluster/cluster-file/
       title: Cluster file structure
     - path: /cluster/reference/envvars/
@@ -1479,7 +1482,7 @@ manuals:
           - title: Offline installation
             path: /ee/ucp/interlock/deploy/offline-install/
           - title: Layer 7 routing upgrade
-            path: /ee/ucp/interlock/deploy/upgrade/   
+            path: /ee/ucp/interlock/deploy/upgrade/
         - sectiontitle: Configuration
           section:
           - title: Configure your deployment
@@ -1501,15 +1504,15 @@ manuals:
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
           - title: Specifying a routing mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference/ 
+            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Publishing a default host service
             path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/ 
+            path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/ 
+            path: /ee/ucp/interlock/usage/labels-reference.md/
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -1529,7 +1532,7 @@ manuals:
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Using Pod Security Policies
-        path: /ee/ucp/kubernetes/pod-security-policies/        
+        path: /ee/ucp/kubernetes/pod-security-policies/
       - title: Create a service account for a Kubernetes app
         path: /ee/ucp/kubernetes/create-service-account/
       - title: Install an unmanaged CNI plugin
@@ -1545,7 +1548,7 @@ manuals:
         - title: Use Azure Files Storage
           path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
-          path: /ee/ucp/kubernetes/storage/configure-aws-storage/ 
+          path: /ee/ucp/kubernetes/storage/configure-aws-storage/
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
         - title: Deploy a CSI plugin
@@ -1553,13 +1556,13 @@ manuals:
       - sectiontitle: Cluster Ingress
         section:
         - title: Overview
-          path: /ee/ucp/kubernetes/cluster-ingress/  
+          path: /ee/ucp/kubernetes/cluster-ingress/
         - title: Install Ingress
           path: /ee/ucp/kubernetes/cluster-ingress/install/
         - title: Deploy Simple Application
           path: /ee/ucp/kubernetes/cluster-ingress/ingress/
         - title: Deploy a Canary Deployment
-          path: /ee/ucp/kubernetes/cluster-ingress/canary/     
+          path: /ee/ucp/kubernetes/cluster-ingress/canary/
         - title: Implementing Persistent (sticky) Sessions
           path: /ee/ucp/kubernetes/cluster-ingress/sticky/
     - title: API reference
@@ -1756,7 +1759,7 @@ manuals:
               - title: Offline installation
                 path: /datacenter/ucp/3.1/guides/interlock/deploy/offline-install/
               - title: Layer 7 routing upgrade
-                path: /datacenter/ucp/3.1/guides/interlock/deploy/upgrade/   
+                path: /datacenter/ucp/3.1/guides/interlock/deploy/upgrade/
             - sectiontitle: Configuration
               section:
               - title: Configure your deployment
@@ -1778,9 +1781,9 @@ manuals:
               - title: Using context or path-based routing
                 path: /datacenter/ucp/3.1/guides/interlock/usage/context/
               - title: Specifying a routing mode
-                path: /datacenter/ucp/3.1/guides/interlock/usage/interlock-vip-mode/ 
+                path: /datacenter/ucp/3.1/guides/interlock/usage/interlock-vip-mode/
               - title: Using routing labels
-                path: /datacenter/ucp/3.1/guides/interlock/usage/labels-reference/ 
+                path: /datacenter/ucp/3.1/guides/interlock/usage/labels-reference/
               - title: Implementing redirects
                 path: /datacenter/ucp/3.1/guides/interlock/usage/redirects/
               - title: Implementing a service cluster
@@ -1816,7 +1819,7 @@ manuals:
             - title: Use Azure Files Storage
               path: /datacenter/ucp/3.1/guides/kubernetes/storage/use-azure-files/
             - title: Use AWS EBS Storage
-              path: /datacenter/ucp/3.1/guides/kubernetes/storage/configure-aws-storage/  
+              path: /datacenter/ucp/3.1/guides/kubernetes/storage/configure-aws-storage/
         - title: API reference
           path: /datacenter/ucp/3.1/reference/api/
           nosync: true
@@ -2084,7 +2087,7 @@ manuals:
             - path: /datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/
               title: Run only the images you trust
             - path: /datacenter/ucp/2.2/guides/admin/configure/use-trusted-images-for-ci/
-              title: Use trusted images for continuous integration  
+              title: Use trusted images for continuous integration
             - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
               title: Scale your cluster
             - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/
@@ -2868,25 +2871,25 @@ manuals:
               path: /datacenter/dtr/2.6/guides/admin/disaster-recovery/restore-from-backup/
           - sectiontitle: CLI Reference
             section:
-            - path: /reference/dtr/2.6/cli/
+            - path: /datacenter/dtr/2.6/reference/cli/
               title: Overview
-            - path: /reference/dtr/2.6/cli/backup/
+            - path: /datacenter/dtr/2.6/reference/cli/backup/
               title: backup
-            - path: /reference/dtr/2.6/cli/destroy/
+            - path: /datacenter/dtr/2.6/reference/cli/destroy/
               title: destroy
-            - path: /reference/dtr/2.6/cli/emergency-repair/
+            - path: /datacenter/dtr/2.6/reference/cli/emergency-repair/
               title: emergency-repair
-            - path: /reference/dtr/2.6/cli/install/
+            - path: /datacenter/dtr/2.6/reference/cli/install/
               title: install
-            - path: /reference/dtr/2.6/cli/join/
+            - path: /datacenter/dtr/2.6/reference/cli/join/
               title: join
-            - path: /reference/dtr/2.6/cli/reconfigure/
+            - path: /datacenter/dtr/2.6/reference/cli/reconfigure/
               title: reconfigure
-            - path: /reference/dtr/2.6/cli/remove/
+            - path: /datacenter/dtr/2.6/reference/cli/remove/
               title: remove
-            - path: /reference/dtr/2.6/cli/restore/
+            - path: /datacenter/dtr/2.6/reference/cli/restore/
               title: restore
-            - path: /reference/dtr/2.6/cli/upgrade/
+            - path: /datacenter/dtr/2.6/reference/cli/upgrade/
               title: upgrade
         - sectiontitle: User guides
           section:
@@ -3751,7 +3754,7 @@ manuals:
       title: Docker Enterprise Architecture
     - path: /ee/supported-platforms/
       title: Supported platforms
-      nosync: true  
+      nosync: true
     - path: /ee/end-to-end-install/
       title: Deploy Docker Enterprise
     - path: /ee/upgrade/
@@ -3777,7 +3780,7 @@ manuals:
       - path: /ee/admin/restore/restore-ucp/
         title: Restore UCP
       - path: /ee/admin/restore/restore-dtr/
-        title: Restore DTR 
+        title: Restore DTR
       - path: /cluster/reference/restore/
         title: Restore clusters with Docker Cluster
     - sectiontitle: Disaster Recovery
@@ -3990,6 +3993,12 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - sectiontitle: Security and Authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Managing Access Tokens
+  - path: /docker-hub/release-notes/
+    title: Release notes
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
@@ -4100,6 +4109,8 @@ manuals:
           title: Image manifest v 2, schema 1
         - path: /registry/spec/manifest-v2-2/
           title: Image manifest v 2, schema 2
+        - path: /registry/spec/deprecated-schema-v1/
+          title: Update deprecated schema v1 images
       - sectiontitle: Registry storage drivers
         section:
         - path: /registry/storage-drivers/
@@ -4131,7 +4142,7 @@ manuals:
         - path: /registry/spec/auth/token/
           title: Token authentication specification
 - path: /release-notes/
-  title: Release notes          
+  title: Release notes
 - sectiontitle: Superseded products and tools
   section:
   - path: /cs-engine/1.13/release-notes/
@@ -4303,7 +4314,7 @@ manuals:
     - path: /swarm/swarm-api/
       title: Docker Swarm API
     - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes      
+      title: Docker Swarm release notes
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/

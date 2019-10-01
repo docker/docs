@@ -15,6 +15,33 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.5
+2019-09-16
+
+### Bug fixes and minor changes
+
+ Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+
+## Version 2.1.0.4
+2019-09-03
+
+Docker Desktop Enterprise 2.1.0.3 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.2](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6) in Version Pack Enterprise 3.0
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved) in Version Pack Enterprise 3.0
+- [Qemu 4.1.0](https://github.com/docker/binfmt) to cross-compile ARM devices
+- Application Designer 0.1.6
+- Mac: [Hyperkit 0.20190802](https://github.com/moby/hyperkit/releases/tag/v0.20190802)
+
+### Bug fixes and minor changes
+
+- Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
+- Mac: Docker Desktop checks the `admin-settings.json` file and enforces the CLI config whenever Docker Engine is restarted.
+- Windows: Updated the Access Control List (ACL) on `cli-plugins` and `version-bin` folders to ensure only administrators have read/write access to these folders.
+
 ## Version 2.1.0.2
 2019-07-26
 

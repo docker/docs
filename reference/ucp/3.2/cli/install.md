@@ -9,9 +9,12 @@ Install UCP on a node
 ## Usage
 
 ```bash
-docker container run --rm -it \
+docker container run \
+    --rm \
+    --interactive \
+    --tty \
     --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
     install [command options]
 ```
@@ -34,11 +37,48 @@ firewall:
   * 12376, 12379, 12380, 12381, 12382, 12383, 12384, 12385, 12386, 12387
   * 4789 (udp) and 7946 (tcp/udp) for overlay networking
 
-If you have SELinux policies enabled for your Docker install, you will need to
-use `docker container run --rm -it --security-opt label=disable ...` when running this
-command.
+### SELinux
 
-If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install/install-on-azure/).
+If you are installing UCP on a manager node with SELinunx enabled at the daemon
+and operating system level, you will need to pass `--security-opt
+label=disable` in to your install command. This flag will disable SELinux
+policies on the installation container.  The UCP installation container mounts
+and configures the Docker Socket as part of the UCP installation container,
+therefore the UCP installation will fail with a permission denied error if you
+fail to pass in this flag.
+
+```
+FATA[0000] unable to get valid Docker client: unable to ping Docker daemon: Got
+permission denied while trying to connect to the Docker daemon socket at
+unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/_ping: dial
+unix /var/run/docker.sock: connect: permission denied - If SELinux is enabled
+on the Docker daemon, make sure you run UCP with "docker run --security-opt
+label=disable -v /var/run/docker.sock:/var/run/docker.sock ..."
+```
+
+An installation command for a system with SELinux enabled at the daemon level
+would be:
+
+```bash
+docker container run \
+    --rm \
+    --interactive \
+    --tty \
+    --name ucp \
+    --security-opt label=disable \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    install [command options]
+```
+
+### Cloud Providers
+
+If you are installing on a public cloud platform there is cloud specific UCP
+installation documentation:
+
+- For [Microsoft Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure/) this is
+  **mandatory**
+- For [AWS](/ee/ucp/admin/install/cloudproviders/install-on-aws/) this is optional.
 
 ## Options
 
@@ -49,6 +89,7 @@ If you are installing on Azure, see [Install UCP on Azure](/ee/ucp/admin/install
 | `--interactive, -i`                  | Run in interactive mode and prompt for configuration values                                                                                                                                                                                            |
 | `--admin-password` *value*           | The UCP administrator password [$UCP_ADMIN_PASSWORD]                                                                                                                                                                                                   |
 | `--admin-username` *value*           | The UCP administrator username [$UCP_ADMIN_USER]                                                                                                                                                                                                       |
+| `--azure-ip-count` *value*           | Configure the Number of IP Address to be provisioned for each Azure Virtual Machine (default: "128")                                                                                                                                                   |
 | `--binpack`                          | Set the Docker Swarm scheduler to binpack mode. Used for backwards compatibility                                                                                                                                                                       |
 | `--cloud-provider` *value*           | The cloud provider for the cluster                                                                                                                                                                                                                     |
 | `--cni-installer-url` *value*        | A URL pointing to a kubernetes YAML file to be used as an installer for the CNI plugin of the cluster. If specified, the default CNI plugin will not be installed. If the URL is using the HTTPS scheme, no certificate verification will be performed |

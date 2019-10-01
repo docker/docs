@@ -62,7 +62,7 @@ services.
 
     web:
       image: example/my_web_app:latest
-      links:
+      depends_on:
         - db
         - cache
 
@@ -136,7 +136,7 @@ Start with a **docker-compose.yml**.
 
     web:
       image: example/my_web_app:latest
-      links:
+      depends_on:
         - db
 
     db:
@@ -147,7 +147,7 @@ export or backup.
 
     dbadmin:
       build: database_admin/
-      links:
+      depends_on:
         - db
 
 To start a normal environment run `docker-compose up -d`. To run a database
@@ -177,9 +177,9 @@ is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
-Keep in mind that `links`, `volumes_from`, and `depends_on` are never shared
-between services using `extends`. These exceptions exist to avoid implicit
-dependencies; you always define `links` and `volumes_from` locally. This ensures
+Keep in mind that `volumes_from` and `depends_on` are never shared between
+services using `extends`. These exceptions exist to avoid implicit
+dependencies; you always define `volumes_from` locally. This ensures
 dependencies between services are clearly visible when reading the current file.
 Defining these locally also ensures that changes to the referenced file don't
 break anything.
@@ -233,7 +233,7 @@ You can also write other services and link your `web` service to them:
       environment:
         - DEBUG=1
       cpu_shares: 5
-      links:
+      depends_on:
         - db
     db:
       image: postgres
@@ -264,7 +264,7 @@ common configuration:
       command: /code/run_web_app
       ports:
         - 8080:8080
-      links:
+      depends_on:
         - queue
         - db
 
@@ -273,7 +273,7 @@ common configuration:
         file: common.yml
         service: app
       command: /code/run_worker
-      links:
+      depends_on:
         - queue
 
 ## Adding and overriding configuration

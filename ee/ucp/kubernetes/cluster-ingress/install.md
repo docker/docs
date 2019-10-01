@@ -91,10 +91,10 @@ istio-pilot            ClusterIP   10.96.199.152   <none>        15010/TCP,15011
 
 5) Test the Ingress Deployment
 
-To test that the Envory proxy is working correclty in the Isitio Gateway pods,
+To test that the Envoy proxy is working correclty in the Isitio Gateway pods,
 there is a status port configured on an internal port 15020. From the above
 output we can see that port 15020 is exposed as a Kubernetes NodePort, in the
-output above the NodePort is 34300 put this could be different in each
+output above the NodePort is 34300 but this could be different in each
 environment. 
 
 To check the envoy proxy's status, there is a health endpoint at

@@ -10,7 +10,7 @@ Configure webhooks through the "Webhooks" tab on your Docker Hub repository:
 
 ![Webhooks Page](images/webhooks-empty.png)
 
-### Creating Webhooks
+### Create Webhooks
 
 To create a webhook, visit the webhooks tab for your repository. Then:
 1. Provide a name for the webhooks
@@ -18,7 +18,7 @@ To create a webhook, visit the webhooks tab for your repository. Then:
 
 ![Webhooks Create](images/webhooks-create.png)
 
-### Viewing Webhook Delivery History
+### View Webhook delivery history
 
 You can view Webhook Delivery History by clicking on the submenu of the webhook and then clicking "View History"
 
@@ -28,7 +28,7 @@ You can then view the delivery history, and whether delivering the POST request 
 
 ![Webhooks History](images/webhooks-history.png)
 
-### Example Webhook Payload
+### Example Webhook payload
 
 Docker Hub Webhook payloads have the following payload JSON format:
 
@@ -65,7 +65,7 @@ Docker Hub Webhook payloads have the following payload JSON format:
 }
 ```
 
-### Validating a webhook callback
+### Validate a webhook callback
 
 To validate a callback in a webhook chain, you need to
 

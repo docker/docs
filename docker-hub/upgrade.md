@@ -12,19 +12,26 @@ Docker Hub includes one private Docker Hub repository for free. If you need
 more private repositories, you can upgrade from your free account to a paid
 plan.
 
-To upgrade:
-1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/)
-2. Click Change Plan
-3. Select your plan and provide your payment information to upgrade ![Upgrade Plan](images/index-upgrade-plan.png)
+To upgrade your personal plan:
+
+1. Open the [billing page](https://hub.docker.com/billing/plan) for your
+account.
+
+2. Click **Upgrade Plan**.
+
+3. Select your plan and provide your payment information to upgrade.
+
+    ![Upgrade Plan](images/index-upgrade-plan2019.png)
 
 ## Upgrade your organization's plan
 
-To upgrade an Organization's plan:
+To upgrade an organization's plan:
 
-1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/)
-2. Change the selected account to your Organization whose plan you'd like to upgrade ![Change Account](images/upgrade-change-account.png)
+1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/).
 
-3. Click Change Plan ![Change Plan](images/upgrade-change-plan.png)
+2. Change the selected account to your Organization whose plan you'd like to upgrade. ![Change Account](images/upgrade-change-account.png)
+
+3. Click **Change Plan**. ![Change Plan](images/upgrade-change-plan.png)
 
 
 ## Docker Hub repo plan billing FAQ

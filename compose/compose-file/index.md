@@ -931,7 +931,6 @@ The following sub-options (supported for `docker-compose up` and `docker-compose
 - [network_mode](#network_mode)
 - [restart](#restart)
 - [security_opt](#security_opt)
-- [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
 >**Tip:** See the section on [how to configure volumes
@@ -954,50 +953,6 @@ devices:
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
-
-### depends_on
-
-Express dependency between services, Service dependencies cause the following
-behaviors:
-
-- `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` are started before `web`.
-
-- `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  creates and starts `db` and `redis`.
-  
-- `docker-compose stop` stops services in dependency order. In the following
-  example, `web` is stopped before `db` and `redis`.
-
-Simple example:
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  web:
-    build: .
-    depends_on:
-      - db
-      - redis
-  redis:
-    image: redis
-  db:
-    image: postgres
-```
-
-> There are several things to be aware of when using `depends_on`:
->
-> - `depends_on` does not wait for `db` and `redis` to be "ready" before
->   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
->   for more on this problem and strategies for solving it.
->
-> - Version 3 no longer supports the `condition` form of `depends_on`.
->
-> - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
->   with a version 3 Compose file.
 
 ### dns
 
@@ -1774,7 +1729,12 @@ sysctls:
   - net.ipv4.tcp_syncookies=0
 ```
 
-> **Note**: This option is ignored when
+You can only use sysctls that are namespaced in the kernel. Docker does not
+support changing sysctls inside a container that also modify the host system.
+For an overview of supported sysctls, refer to [configure namespaced kernel
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+
+> This option requires Docker Engine 19.03 or up when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 

@@ -56,7 +56,7 @@ Docker Desktop Enterprise requires the following firewall exceptions. If you do 
 
 ## Version packs
 
-Docker Desktop Enterprise is bundled with default version pack [Enterprise 3.0 (Docker Engine 19.03 / Kubernetes 1.14.3)](https://download.docker.com/mac/enterprise/enterprise-3.0.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
+Docker Desktop Enterprise is bundled with default version pack [Enterprise 3.0 (Docker Engine 19.03 / Kubernetes 1.14)](https://download.docker.com/mac/enterprise/enterprise-3.0.ddvp). System administrators can install version packs using a command line tool to use a different version of the Docker Engine and Kubernetes for development work:
 
 - [Docker Enterprise 2.0 (17.06/Kubernetes 1.8.11)](https://download.docker.com/mac/enterprise/enterprise-2.0.ddvp)
 
@@ -84,7 +84,7 @@ When you install Docker Desktop Enterprise, the command line tool is installed a
 
 Run the following command to install or upgrade a version pack to the version contained in the specified `.ddvp` archive:
 
-    dockerdesktop-admin version-pack install [path-to-archive]
+    sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin version-pack install [path-to-archive]
 
  >**Note:** You must stop Docker Desktop before installing a version pack.
 
@@ -92,7 +92,7 @@ Run the following command to install or upgrade a version pack to the version co
 
  Run the following command to uninstall the specified version pack:
 
-    dockerdesktop-admin version-pack uninstall [version-pack-name]
+    sudo /Applications/Docker.app/Contents/Resources/bin/dockerdesktop-admin version-pack uninstall [version-pack-name]
 
 >**Note:** You must stop Docker Desktop before uninstalling a version pack.
 

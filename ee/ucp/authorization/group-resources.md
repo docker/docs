@@ -24,7 +24,7 @@ and resource quotas for the namespace.
 Each Kubernetes resources can only be in one namespace, and namespaces cannot
 be nested inside one another.
 
-[Learn more about Kubernetes namespaces](https://v1-11.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
+[Learn more about Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces).
 
 ## Swarm collections
 
