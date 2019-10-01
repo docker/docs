@@ -1,7 +1,7 @@
 ---
 title: "Get Started, Part 3: Deploying to Kubernetes"
-keywords: services, replicas, scale, ports, compose, compose file, stack, networking
-description: Learn how to define load-balanced and scalable service that runs containers.
+keywords: kubernetes, pods, deployments, kubernetes services
+description: Learn how to describe and deploy a simple application on Kubernetes.
 ---
 {% include_relative nav.html selected="3" %}
 
