@@ -1,7 +1,7 @@
 ---
 title: "Get Started, Part 5: Sharing Images on Docker Hub"
-keywords: stack, data, persist, dependencies, redis, storage, volume, port
-description: Learn how to create a multi-container application that uses all the machines in a cluster.
+keywords: docker hub, push, images
+description: Learn how to share images on Docker Hub.
 ---
 
 {% include_relative nav.html selected="5" %}

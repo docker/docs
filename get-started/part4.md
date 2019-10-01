@@ -1,7 +1,7 @@
 ---
 title: "Get Started, Part 4: Deploying to Swarm"
-keywords: services, replicas, scale, ports, compose, compose file, stack, networking
-description: Learn how to define load-balanced and scalable service that runs containers.
+keywords: swarm, swarm services, stacks
+description: Learn how to describe and deploy a simple application on Docker Swarm.
 ---
 {% include_relative nav.html selected="4" %}
 
