@@ -60,12 +60,12 @@ Docker Cluster has commands for managing the whole lifecycle of your cluster:
 
 You can export both Terraform and Ansible scripts to deploy certain components standalone or with custom configurations. Use the following commands to export those scripts:
 
-```yaml
-docker run -d --name dci --entrypoint sh 
-docker/cluster:latest -ldocker cp dci:/cluster/terraform terraform
-docker cp dci:/cluster/ansible ansible
-docker stop dci
-docker rm dci
+```bash
+docker container run --detach --name dci --entrypoint sh docker/cluster:latest
+docker container cp dci:/cluster/terraform terraform
+docker container cp dci:/cluster/ansible ansible
+docker container stop dci
+docker container rm dci
 ```
 
 ## Where to go next
