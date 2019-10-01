@@ -64,7 +64,6 @@ teaches you how to:
 3. [Set up and use a Kubernetes environment on your development machine](part3.md)
 4. [Set up and use a Swarm environment on your development machine](part4.md)
 5. [Share your containerized applications on Docker Hub](part5.md)
-6. [Continue your learning journey with further resources](part6.md)
 
 ## Docker concepts
 
