@@ -20,15 +20,43 @@ upgrade your installation to the latest release.
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
-**Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
+**Note:** For archived versions of UCP documentation, [view the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
+
+## 3.2.2
+2019-10-07
+
+### UI
+* Fixes a UI issue that caused incorrect line breaks at pre-logon banner notification (ENGORG-2678)
+* Users have an option to store sessionToken per window tab session. (ENGORC-2597)
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.7.
+* Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
+
+### Networking
+* Interlock has been upgraded to version 3.0.0. (ENGCORE-792)
+
+### Bug fixes
+* Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
+* Fixes an issue that caused slow response with increasing number of collections. (ENGORC-2638)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.2   |
+| Kubernetes            | 1.14.7  |
+| Calico                | 3.8.2   |
+| Interlock             | 3.0.0   |
+| Interlock NGINX proxy | 1.14.2  |
 
 ## 3.2.1
 2019-09-03
 
 ### Bug fixes
-* Fixed an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
+* Fixes an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
@@ -36,7 +64,7 @@ upgrade your installation to the latest release.
   than 1 replica by default.
 
 ### Networking
-* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+* Calico has been upgraded to version 3.8.2. For more information, see the [Calico Release
   Notes](https://docs.projectcalico.org/v3.8/release-notes/).
 * Interlock has been upgraded to version 2.6.1.
 * The `azure-ip-count` variable is now exposed at install time, allowing a User
@@ -49,8 +77,10 @@ upgrade your installation to the latest release.
 * Added CSP header to prevent cross-site scripting attacks (XSS)
 
 ### Bootstrap
-* Fixed various issues in install, uninstall, backup and restore when UCP
+* Fixes various issues in install, uninstall, backup, and restore when UCP
   Telemetry data had been disabled. (ENGORC-2593)
+
+### Components
 
 | Component             | Version |
 | --------------------- | ------- |
@@ -361,7 +391,7 @@ In order to optimize user experience and security, support for Internet Explorer
         -testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
         ```
 
-    4. Switch cluster to run kubernetes workloads. Your cluster is now set to run iSCSI workloads.
+    4. Switch cluster to run Kubernetes workloads. Your cluster is now set to run iSCSI workloads.
 
 ### Components
 
@@ -374,6 +404,26 @@ In order to optimize user experience and security, support for Internet Explorer
 | Interlock NGINX proxy | 1.14.2 |
 
 # Version 3.1
+
+## 3.1.11
+2019-10-07
+
+### Bug fixes
+* Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
+* Fixes an issue that caused slow response with increasing number of collections. (ENGORC-2638)
+
+### Kubernetes
+* Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.1.11  |
+| Kubernetes            | 1.11.10 |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
 
 ## 3.1.10
 2019-09-03
@@ -412,7 +462,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Bug fixes
 
 * Added toleration to calico-node DaemonSet so it can run on all nodes in the cluster
-* Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
+* Fixes an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
 * Added a restrictive `robots.txt` to the root of the UCP API server.
 
 ### Known issues
@@ -470,7 +520,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Bug fixes
 
 * Added a migration logic to remove all actions on `pods/exec` and `pods/attach` Kubernetes subresource from the migrated UCP View-Only role. (ENGORC-2434)
-* Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)
+* Fixes an issue that allows unauthenticated user to list directories. (ENGORC-2175)
 
 ### Deprecated platforms
 
@@ -588,7 +638,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Bug fixes
 * Changed Interlock proxy service default `update-action-failure` to rollback. (ENGCORE-117)
 * Added validation for service configuration label values. (ENGCORE-114)
-* Fixed an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
+* Fixes an issue with continuous interlock reconciliation if `ucp-interlock` service image does not match expected version. (ENGORC-2081)
 
 ### Known issues
 
@@ -628,11 +678,11 @@ In order to optimize user experience and security, support for Internet Explorer
 
 ### Bug fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
-* Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
-* Fixed an issue that caused ucp-agent(s) on worker nodes to constantly reboot when audit logging is enabled. (docker/orca#16122)
-* Fixed an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)
-* Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
-* Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
+* Fixes an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)
+* Fixes an issue that caused ucp-agent(s) on worker nodes to constantly reboot when audit logging is enabled. (docker/orca#16122)
+* Fixes an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)
+* Fixes an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
+* Fixes an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)
 * Kubelet no longer deletes images, starting with the oldest unused images, after exceeding 85% disk space utilization. This was an issue in air-gapped environments. (docker/orca#16082)
 
 ### Enhancements
@@ -676,14 +726,14 @@ In order to optimize user experience and security, support for Internet Explorer
  * Upgraded Calico to version 3.5. (#15884)
 
 ### Bug fixes
- * Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
+ * Fixes system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
  * Non-admin users can no longer create `PersistentVolumes` using the `Local`
    Storage Class, as this allowed non-admins to by pass security controls and
    mount host directories. (docker/orca#15936)
  * Added support for the limit arg in `docker ps`. (docker/orca#15812)
- * Fixed an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
- * Fixed an issue with manual creation of a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects requiring the ID of the user, organization, or team. (docker/orca#14935)
- * Fixed an issue in which Kube Rolebindings only worked on UCP User ID and not UCP username. (docker/orca#14935)
+ * Fixes an issue with ucp-proxy health check. (docker/orca#15814, docker/orca#15813, docker/orca#16021, docker/orca#15811)
+ * Fixes an issue with manual creation of a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects requiring the ID of the user, organization, or team. (docker/orca#14935)
+ * Fixes an issue in which Kube Rolebindings only worked on UCP User ID and not UCP username. (docker/orca#14935)
 
 ### Known issue
  * By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)
@@ -764,35 +814,35 @@ now configurable within the UCP web interface. (#15466)
 
 ### New features
 
-### Kubernetes
+#### Kubernetes
 
 * Kubernetes is updated to version 1.11.2.
 * Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes. Your old Kubernetes grants and roles will be automatically migrated during the UCP upgrade.
 
-### Logging
+#### Logging
 
 Admins can now enable audit logging in the UCP config. This logs all incoming user-initiated requests in the `ucp-controller` logs. Admins can choose whether to log only metadata for incoming requests or the full request body as well. For more information, see [Create UCP audit logs](https://docs.docker.com/ee/ucp/admin/configure/create-audit-logs/).
 
-### Authentication
+#### Authentication
 
 Admins can configure UCP to use a SAML-enabled identity provider for user authentication. If enabled, users who log into the UCP web interface are redirected to the identity provider's website to log in. Upon login, users are redirected back to the UCP web interface, authenticated as the user chosen. For more information, see [Enable SAML authentication](https://docs.docker.com/ee/ucp/admin/configure/enable-saml-authentication/).
 
-### Metrics
+#### Metrics
 
 * The `ucp-metrics` Prometheus server (used to render charts in the UCP interface) was engineered from a container on manager nodes to a Kubernetes daemonset. This lets admins change the daemonset's scheduling rules so that it runs on a set of worker nodes instead of manager nodes. Admins can designate certain UCP nodes to be metrics server nodes, freeing up resources on manager nodes. For more information, see [Collect UCP cluster metrics with Prometheus](https://docs.docker.com/ee/ucp/admin/configure/collect-cluster-metrics/).
 * The UCP controller has a `/metricsdiscovery` endpoint so users can connect their own Prometheus instances to scrape UCP metrics data.
 
-### UCP web interface
+#### UCP web interface
 
 * If you enable single sign-on for a DTR instance with UCP, the UCP web interface shows image vulnerability data for images in that DTR instance. Containers and services that use images from that DTR instance show any vulnerabilities DTR detects.
 * The UCP web interface is redesigned to offer larger views for viewing individual resources, with more information for Kubernetes resources.
 
-### Configs
+#### Configs
 
 * UCP now stores its configurations in its internal key-value store instead of in a Swarm configuration so changes can propagate across the cluster more quickly.
 * You can now use the `custom_api_server_headers` field in the UCP configuration to set arbitrary headers that are included with every UCP response.
 
-### API updates
+#### API updates
 
 There are several backward-incompatible changes in the Kubernetes API that may affect user workloads. They are:
 
@@ -847,6 +897,27 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.15
+2019-10-07
+
+### Bug fixes
+* Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
+* Fixes an issue that caused slow response with increasing number of collections. (ENGORC-2638)
+
+### Kubernetes
+* Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
+* Kube-dns is now deployed with 2 replicas. (ENGORC-1816)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.0.15  |
+| Kubernetes            | 1.8.15  |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.0.14
 2019-09-03
 
@@ -882,7 +953,7 @@ The following features are deprecated in UCP 3.1.
 
 ### Bug fixes
 
-* Fixed an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
+* Fixes an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
 * Added a restrictive robots.txt  to the root of the UCP API server.
 
 ### Components
@@ -901,7 +972,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Added migration logic to remove all actions on `pods/exec` and `pods/attach` Kubernetes subresource from the migrated UCP View-Only role. (ENGORC-2434)
-* Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)
+* Fixes an issue that allows unauthenticated user to list directories. (ENGORC-2175)
 
 ### Deprecated platforms
 
@@ -939,7 +1010,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8.
 * Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)
-* Fixed an issue that causes UCP fail to upgrade with Interlock deployment. (docker/orca/#16009)
+* Fixes an issue that caused UCP fail to upgrade with Interlock deployment. (docker/orca/#16009)
 * Validate Calico certs expiration date and update accordingly. (escalation#981)
 
 ### Components
@@ -990,7 +1061,7 @@ The following features are deprecated in UCP 3.1.
   * UCP backend will now complain when a service is created/updated if the
    `com.docker.lb.network` label is not correctly specified. (docker/orca#15015)
   * LDAP group member attribute is now case insensitive. (docker/escalation#917)
-  * Fixed an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672, docker/escalation#841)
+  * Fixes an issue that caused a system hang after UCP backup and the attempted shutdown of the Docker daemon to perform a swarm backup. /dev/shm is now unmounted when starting the kubelet container. (docker/orca#15672, docker/escalation#841)
 
 * Interlock
   * Interlock headers can now be hidden. (docker/escalation#833)
@@ -1033,18 +1104,18 @@ The following features are deprecated in UCP 3.1.
 * Core
   * Updated Kubernetes to version 1.8.15.
   * Resolved an issue where LDAP sync jobs terminated when processing an org admin search result that did not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
-  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
-  * Fixed an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
-  * Fixed an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
-  * Fixed an issue that caused the Interlock proxy service to keep restarting. (docker/escalation#814)
-  * Fixed an issue that caused Kubernetes DNS to not work. (#14064, #11981)
-  * Fixed an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
+  * Fixes an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixes an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
+  * Fixes an issue that caused unsuccessful installation of UCP on Azure. (docker/escalation#863)
+  * Fixes an issue that caused the Interlock proxy service to keep restarting. (docker/escalation#814)
+  * Fixes an issue that caused Kubernetes DNS to not work. (#14064, #11981)
+  * Fixes an issue that caused "Missing swarm placement constraints" warning banner to appear unnecessarily. (docker/orca#14539)
 
 * Security
-  * Fixed `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
+  * Fixes `libcurl` vulnerability in RethinkDB image. (docker/orca#15169)
 
 * UI
-  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+  * Fixes an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
 
 ### Components
 
@@ -1062,7 +1133,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue to prevent UCP from accepting certificates from
+  * Fixes a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
 
 ### Known Issue
@@ -1081,7 +1152,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.5 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.4
 
@@ -1090,7 +1161,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password were stored in cleartext on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
+  * Fixes a critical security issue where the LDAP bind user name and password were stored in clear text on UCP hosts. Please refer to [this KB article](https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/) for proper implementation of this fix.
 
 ### Known Issue
 
@@ -1119,14 +1190,14 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Core
-   * Optimize swarm service read api calls through UCP
+   * Optimize swarm service read API calls through UCP
    * Fixes an issue where some UCP Controller API calls may hang indefinitely.
    * Default Calico MTU set to 1480
    * Calico is upgraded to 3.0.8
    * Compose for Kubernetes logging improvements
    * Fixes an issue where backups would fail if UCP was not licensed.
    * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the web interface.
-   * Add support for bind mount volumes to kubernetes stacks and fixes sporadic errors in kubernetes stack validator that would incorrectly reject stacks.
+   * Add support for bind mount volumes to Kubernetes stacks and fixes sporadic errors in Kubernetes stack validator that would incorrectly reject stacks.
 
 ### Components
 
@@ -1135,7 +1206,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.3 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.2
 
@@ -1154,10 +1225,10 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 
 ### Bug fixes
 * Core
-   * Fixed an issue for anonymous volumes in Compose for Kubernetes.
-   * Fixed an issue where a fresh install would have an initial per-user session
+   * Fixes an issue for anonymous volumes in Compose for Kubernetes.
+   * Fixes an issue where a fresh install would have an initial per-user session
    limit of unlimited rather than the expected limit of 10 minutes.
-   * Added separate resource types for Kubernetes subresources (e.g. pod/log)
+   * Added separate resource types for Kubernetes subresources (for example, pod/log)
    so that users can get separate permissions for those resources, as with the
    built-in Kubernetes RBAC authorizer. If you had a custom role with
    (for instance) Pod Get permissions, you may need to create a new custom
@@ -1170,7 +1241,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
      behavior) instead of a 404.
 
 * UI/UX
-   * Fixed an issue that causes LDAP configuration UI to not work properly.
+   * Fixes an issue that caused LDAP configuration UI to not work properly.
 
 ### Components
 
@@ -1179,7 +1250,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | UCP      | 3.0.2 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.1 |
-| Interlock (nginx)   | 1.13.8 |
+| Interlock (NGINX)   | 1.13.8 |
 
 ## 3.0.1
 
@@ -1192,19 +1263,19 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
   This port must be in the `NodePort` range.
   * Kubernetes API server port is now configurable via `--kube-apiserver-port`
   flag at install or `cluster_config.kube_apiserver_port` in UCP config.
-  * Fixed an issue where upgrade fails due to missing `ucp-kv` snapshots.
-  * Fixed an issue where upgrade fails due to layer 7 routing issues.
+  * Fixes an issue where upgrade fails due to missing `ucp-kv` snapshots.
+  * Fixes an issue where upgrade fails due to layer 7 routing issues.
   * `ucp-interlock-proxy` no longer tries to schedule components on Windows nodes.
-  * Fixed an issue where a Kubernetes networking failure would not stop UCP from
+  * Fixes an issue where a Kubernetes networking failure would not stop UCP from
   installing successfully.
-  * Fixed an issue where encrypted overlay networks could not communicate on
+  * Fixes an issue where encrypted overlay networks could not communicate on
   firewalled hosts.
-  * Fixed an issue where Pod CIDR and Node IP values could conflict at install
+  * Fixes an issue where Pod CIDR and Node IP values could conflict at install
   Installation no longer fails if an empty `PodCIDR` value is set in the UCP
   config at install time. Instead, it falls back to default CIDR.
 
 *  UI/UX
-  * Fixed an issue where UCP banners redirected to older UCP 2.2 documentation.
+  * Fixes an issue where UCP banners redirected to older UCP 2.2 documentation.
 
 
 ### Known issues
@@ -1221,7 +1292,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
   networking disruption for pods on each node during the upgrade process,
   depending on how quickly `calico-node` gets upgraded on those nodes.
   * `ucp-interlock-proxy` may fail to start when two or more services are
- configured with two or more backend hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
+ configured with two or more back-end hosts.  [You can use this workaround](https://success.docker.com/article/how-do-i-ensure-the-ucp-routing-mesh-ucp-interlock-proxy-continues-running-in-the-event-of-a-failed-update).
 
  ### Components
 
@@ -1230,7 +1301,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | UCP      | 3.0.1 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.1 |
-| Interlock (nginx)   | 1.13.8 |
+| Interlock (NGINX)   | 1.13.8 |
 
 ## 3.0.0
 2018-04-17
@@ -1293,7 +1364,7 @@ will be available in future releases.
   * You can now create custom roles with Kubernetes API permissions. Default
   roles include Kubernetes API permissions based on their access type.
   As an example, View-Only contains Swarm and Kubernetes read-only API permissions.
-  * In addition to collections, grants can now use Kubernetes Namespaces as
+  * In addition to collections, grants can now use Kubernetes namespaces as
   a resource set type.
   * Admins can now link a Kubernetes namespace to a collection of nodes in order
   to isolate users and workloads between different nodes.
@@ -1391,6 +1462,14 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.22
+2019-10-07
+
+### Bug fixes
+* Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
+* Now UI timeout is obeyed with browser tab open or closed. (ENGORC-2576)
+* Fixes an issue that caused slow response with increasing number of collections. (ENGORC-2638)
+
 ## Version 2.2.21
 2019-09-03
 
@@ -1402,8 +1481,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 2019-07-17
 
 ### Bug fixes
-
-* Fixed an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
+* Fixes an issue that caused sensitive command line arguments provided to the UCP installer command to also print in debug logs.
 * Added a restrictive robots.txt  to the root of the UCP API server.
 
 ### Known issues
@@ -1428,7 +1506,7 @@ instead of the correct image for the worker architecture.
 
 ### Bug fixes
 
-* Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)
+* Fixes an issue that allows unauthenticated user to list directories. (ENGORC-2175)
 
 ### Known issues
 
@@ -1528,7 +1606,7 @@ instead of the correct image for the worker architecture.
   * Significantly reduced database load in environments with a lot of concurrent and repeated API requests by the same user.
   * Added the ability to set custom HTTP response headers to be returned by the UCP Controller API Server.
 * Web interface
-  * Fixed stack creation for non admin user when UCP uses a custom controller port.
+  * Fixes stack creation for non-admin user when UCP uses a custom controller port.
 
 ### Known issues
 
@@ -1555,10 +1633,10 @@ instead of the correct image for the worker architecture.
 
 * Core
   * Resolved an issue where LDAP sync jobs terminated when processing an org admin search result that did not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
-  * Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
+  * Fixes an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
 
 * Web Interface
-  * Fixed an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
+  * Fixes an issue that prevented "Per User Limit" on Admin Settings from working. (docker/escalation#639)
 
 ### Known issues
 
@@ -1584,7 +1662,7 @@ instead of the correct image for the worker architecture.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue to prevent UCP from accepting certificates from
+  * Fixes a critical security issue to prevent UCP from accepting certificates from
     the system pool when adding client CAs to the server that requires mutual authentication.
 
 ### Known issues
@@ -1611,7 +1689,7 @@ instead of the correct image for the worker architecture.
 ### Bug fixes
 
 * Security
-  * Fixed a critical security issue where the LDAP bind username and password
+  * Fixes a critical security issue where the LDAP bind user name and password
     were stored in cleartext on UCP hosts. Please refer to the following KB article
     https://success.docker.com/article/upgrading-to-ucp-2-2-12-ucp-3-0-4/
     for proper implementation of this fix.
@@ -1643,19 +1721,19 @@ instead of the correct image for the worker architecture.
 ### Bug fixes
 
 * Security
-  * Fixed an issue that causes some security headers to not be added to all API responses.
+  * Fixes an issue that caused some security headers to not be added to all API responses.
 
 * Core
   * Optimized swarm service read API calls through UCP.
   * Upgraded `RethinkDB` image to address potential security vulnerabilities.
-  * Fixee an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
+  * Fixes an issue where removing a worker node from the cluster would cause an etcd member to be removed on a manager node.
   * Upgraded `etcd` version to 2.3.8.
-  * Fixed an issue that causes classic Swarm to provide outdated data.
-  * Fixed an issue that raises `ucp-kv` collection error with unnamed volumes.
+  * Fixes an issue that caused classic Swarm to provide outdated data.
+  * Fixes an issue that raises `ucp-kv` collection error with unnamed volumes.
 
 * UI
-  * Fixed an issue that causes the web interface to not parse volume options correctly.
-  * Fixed an issue that prevents the user from deploying stacks through the web interface.
+  * Fixes an issue that caused the web interface to not parse volume options correctly.
+  * Fixes an issue that prevents the user from deploying stacks through the web interface.
 
 ### Known issues
 
@@ -1686,9 +1764,9 @@ instead of the correct image for the worker architecture.
 * UI
   * Users can now set log driver name and options on both create and update
    service screens.
-  * Fixed an issue that causes legacy collections on services to break the web interface. Now
+  * Fixes an issue that caused legacy collections on services to break the web interface. Now
    legacy collections are properly prepended with "/Shared/Legacy/".
-  * Fixed an issue that causes service counts in status summary to be shown
+  * Fixes an issue that caused service counts in status summary to be shown
    incorrectly.
 
 * Authentication/Authorization
@@ -1696,14 +1774,14 @@ instead of the correct image for the worker architecture.
    previously logged in.
   * The logic which reconciles collection labels is now skipped if the
    node already has an access label.
-  * Fixed an issue where LDAP syncs would always search against the last server
+  * Fixes an issue where LDAP syncs would always search against the last server
    in the list of additional domains if the search base DN matched any of those
    domains.
 
 * Core
   * UCP can now be displayed in an iframe for pages hosted on the same domain.
-  * Fixed an issue that prevents non-admin users to do `docker build` on UCP.
-  * Fixed an issue where a node's status may be reported incorrectly in node
+  * Fixes an issue that prevents non-admin users to do `docker build` on UCP.
+  * Fixes an issue where a node's status may be reported incorrectly in node
    listings.
   * UCP can now be installed on a system with more than 127 logical CPU cores.
   * Improved the performance of UCP's local and global health checks.
@@ -1734,12 +1812,12 @@ instead of the correct image for the worker architecture.
 ### Bug fixes
 
 * Security
-  * Fixed an issue that allows users to incorrectly interact with local volumes.
-  * Fixed an issue where setting minimum TLS version causes `ucp-agent` to
+  * Fixes an issue that allows users to incorrectly interact with local volumes.
+  * Fixes an issue where setting minimum TLS version caused `ucp-agent` to
    keep restarting on worker nodes.
 
 * Core
-  * Fixed an issue that causes container fail to start with `container ID not found`
+  * Fixes an issue that caused container fail to start with `container ID not found`
    during high concurrent API calls to create and start containers.
 
 ### Known issues
@@ -1769,7 +1847,7 @@ is always used, regardless of which one is actually the best match.
 
 ### Bug fixes
 
-* Fixed an issue where the minimum TLS version setting is not correctly handled,
+* Fixes an issue where the minimum TLS version setting is not correctly handled,
   leading to non-default values causing `ucp-controller` and `ucp-agent` to keep
   restarting.
 
@@ -1814,14 +1892,14 @@ is always used, regardless of which one is actually the best match.
 * Core
   * The HRM service is no longer deployed with constraints that might prevent
   the service from ever getting scheduled.
-  * Fixed a problem causing the HRM service to be restarted multiple times.
+  * Fixes an issue that caused the HRM service to restart multiple times.
   * The `ucp-agent` service is now deployed without adding extra collection labels.
   This doesn't change the behavior of the service.
-  * Fixed problem causing a healthy `ucp-auth-store` component to be reported as
+  * Fixes an issue that caused a healthy `ucp-auth-store` component to be reported as
   unhealthy.
-  * Fixed a race condition causing the labels for the UCP controller container
+  * Fixes a race condition causing the labels for the UCP controller container
   to be reset.
-  * Fixed an issue causing the `ucp-agent` service to be deployed with the wrong
+  * Fixes an issue causing the `ucp-agent` service to be deployed with the wrong
   architecture on Windows nodes.
 * RBAC
   * Role-based access control can now be enforced for third-party volume plugins,
@@ -1831,16 +1909,16 @@ is always used, regardless of which one is actually the best match.
   to go onto each node and clean up those resources directly.
   * When upgrading from UCP 2.1, inactive user accounts are no longer migrated
   to the new RBAC model.
-  * Fixed an issue preventing users from seeing a collection when they have
+  * Fixes an issue preventing users from seeing a collection when they have
   permissions to deploy services on a child collection.
   * Grants are now deleted when deleting an organization whose teams have grants.
 * UI
-  * Fixed a problem in the Settings page that would cause Docker to stop when
+  * Fixes a issue in the Settings page that caused Docker to stop when
   you made changes to UCP settings and a new manager node is promoted to leader.
-  * Fixed bug causing the Grants list page not to render after deleting an
+  * Fixes a bug causing the Grants list page not to render after deleting an
   organization mentioned used on a grant.
-  * Fixed a problem that would intermittently cause settings not to be persisted.
-  * Fixed an issue that prevented users from being able to change LDAP settings.
+  * Fixes an issue that intermittently caused settings not to be persisted.
+  * Fixes an issue that prevented users from being able to change LDAP settings.
 
 ### Known issues
 
@@ -1924,7 +2002,7 @@ for volumes.
   * Additional translations added for internationalization.
   * UI for adding users to teams simplified.
   * The grant list can now sorted and pagination in the grants view has been improved. The grants view previously had glitches on systems with many grants.
-  * Fixed problem where the web interface would hang when pulling images.
+  * Fixes an issue where the web interface would hang when pulling images.
   * "Max failure ratio" and "Failure action" re-introduced in service definitions. These settings were not available in UCP 2.2, but were available in previous UCP versions.
   * Collection labels are no longer applied to UCP system services. UCP previously auto-applied labels, which was confusing.
 
@@ -1966,7 +2044,7 @@ for volumes.
   * Windows nodes are no longer displayed in the DTR install UI.
   * DTR settings state in UCP is now preserved when switching tabs. Previously,
   un-saved state was lost when switching tabs.
-  * Fixed problem where first manager node may have IP address `0.0.0.0`,
+  * Fixes an issue where the first manager node may have IP address `0.0.0.0`,
   causing dashboard to not update.
   * UI for adding Windows nodes improved to include full join instructions.
   * Node Task UI fixed. Displaying tasks for a node previously did not work.
@@ -2005,24 +2083,24 @@ for volumes.
 ### Bug fixes
 
 * Core
-  * Fixed an issue that caused timeouts during install, preventing UCP 2.2.1 from
+  * Fixes an issue that caused timeouts during install, preventing UCP 2.2.1 from
   being released.
-  * Fixed a number of issues in which access control labels and roles could not
+  * Fixes a number of issues in which access control labels and roles could not
   be upgraded to their new format, when upgrading UCP.
   [Learn more](https://success.docker.com/KBase/Auth_system_migration_errors).
-  * Fixed an issue that caused an upgrade with multiple manager nodes to fail
+  * Fixes an issue that caused an upgrade with multiple manager nodes to fail
   with RethinkDB startup errors.
-  * Fixed an issue that caused upgrades to fail due to UCP being unable to
+  * Fixes an issue that caused upgrades to fail due to UCP being unable to
   remove and replace older UCP containers.
-  * Fixed an issue in which upgrade timed out due to lack of available disk space.
-  * Fixed an issue in which rescheduling of containers not belonging in services
+  * Fixes an issue in which upgrade timed out due to lack of available disk space.
+  * Fixes an issue in which rescheduling of containers not belonging in services
   could fail due to a request for a duplicate IP address.
   * DTR containers are no longer omitted from `docker ps` commands.
 * UI/UX
-  * Fixed known issue from 2.2.0 where config changes (including LDAP/AD) take
+  * Fixes known issue from 2.2.0 where config changes (including LDAP/AD) take
   an extended period to update after making changes in the UI settings.
-  * Fixed an issue where the `/apidocs` url redirected to the login page.
-  * Fixed an issue in which the UI does not redirect to a bad URL immediately
+  * Fixes an issue where the `/apidocs` url redirected to the login page.
+  * Fixes an issue in which the UI does not redirect to a bad URL immediately
   after an upgrade.
   * Config and API docs now show the correct LDAP sync cron schedule format.
 * docker/ucp image
@@ -2103,7 +2181,7 @@ and the API is fully interactive within the UCP web interface.
   * Redesigned dashboard with time-series historical graphs for usage metrics.
   * Compact layout to more easily view resource information at a glance.
   * Detail panels for resources no longer slide out and cover the main panel.
-  * Filtering mechanism to display related items (e.g. resources in a collection or stack).
+  * Filtering mechanism to display related items (for example, resources in a collection or stack).
 
 ### Known issues
 
