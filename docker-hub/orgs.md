@@ -6,72 +6,137 @@ redirect_from:
 - /docker-cloud/orgs/
 ---
 
-Docker Hub Organizations let you create teams so you can give your team access to shared image repositories.
+Docker Hub Organizations let you create teams so you can give your team access
+to shared image repositories.
 
-### How Organizations & Teams Work
+- **Organizations** are collections of teams and repositories that can be managed together.
+- **Teams** are groups of Docker Hub users that belong to an organization.
 
-- **Organizations** are a collection of teams and repositories that can be managed together.
-- **Teams** are groups of Docker Hub users that belong to your organization.
+> **Note**: in Docker Hub, users cannot belong directly to an organization.
+They belong only to teams within an organization.
 
-> **Note**: in Docker Hub, users cannot be associated directly to an organization. They belong only to teams within an organization.
+## Working with organizations
 
 ### Create an organization
 
-1. Start by clicking on [Organizations](https://cloud.docker.com/orgs) in Docker Hub
-2. Click on "Create Organization"
+1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
+Docker Hub.
+
+2. Click on **Create Organization**.
+
 3. Provide information about your organization:
 
-![Create Organization](images/orgs-create.png)
+      ![Create organization](images/orgs-create2019.png)
 
-You've created an organization. You'll see you have a team, the **owners** team with a single member (you!)
+You've created an organization. You'll see you have a team, the **owners** team
+with a single member (you!).
 
-### The owners team
+#### The owners team
 
-The **owners** team is a special team that has full access to all repositories in the Organization.
+The **owners** team is a special team that has full access to all repositories
+in the organization.
 
 Members of this team can:
-- Manage Organization settings and billing
+- Manage organization settings and billing
 - Create a team and modify the membership of any team
-- Access and modify any repository belonging to the Organization
+- Access and modify any repository belonging to the organization
+
+## Working with teams and members
 
 ### Create a team
 
-To create a team:
+1. Go to **Organizations** in Docker Hub, and select your organization.
 
-1. Go to your organization by clicking on **Organizations** in Docker Hub, and select your organization.
-2. Click **Create Team** ![Create Team](images/orgs-team-create.png)
-3. Fill out your team's information and click **Create** ![Create Modal](images/orgs-team-create-submit.png)
+2. Open the **Teams** tab and click **Create Team**.
+
+      ![Teams view](images/orgs-teams2019.png)
+
+3. Fill out your team's information and click **Create**.
+
+      ![Create a team](images/orgs-new-team2019.png)
+
 
 ### Add a member to a team
 
-1. Visit your team's page in Docker Hub. Click on **Organizations** > **_Your Organization_** > **_Your Team Name_**
-2. Click on **Add User**
-3. Provide the user's Docker ID username _or_ email to add them to the team ![Add User to Team](images/orgs-team-add-user.png)
+You can add a member to a team in one of two ways.
 
-> **Note**: You are not automatically added to teams created by your organization.
+If the user isn't in your organization:
+
+1. Go **Organizations** in Docker Hub, and select your organization.
+
+2. Click **Add Member**.
+
+      ![Add member from members list](images/org-members2019.png)
+
+3. Provide the user's Docker ID username _or_ email, and select a team from the dropdown.
+
+      ![Add user to team from org page](images/orgs-add-member2019.png)
+
+
+If the user already belongs to another team in the organization:
+
+1. Open the team's page in Docker Hub: **Organizations** > **_Your Organization_** > **Teams** > **_Your Team Name_**
+
+2. Click **Add User**.
+3. Provide the user's Docker ID username _or_ email to add them to the team.
+
+      ![Add user to team from team page](images/teams-add-member2019.png)
+
+      > **Note**: You are not automatically added to teams created by your organization.
 
 ### Remove team members
 
-To remove a member from a team, click the **x** next to their name:
+To remove a member from all teams in an organization:
 
-![Add User to Team](images/orgs-team-remove-user.png)
+1. Go **Organizations** in Docker Hub, and select your organization.
+
+2. Click the **x** next to a member's name:
+
+      ![Add User to Team](images/org-members2019.png)
+
+
+To remove a member from a specific team:
+
+1. Open the team this user is on. You can do this in one of two ways:
+
+      * If you know the team name, go to **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+
+          > **Note:** You can filter the **Teams** tab by username, but you have to use the format _@username_ in the search field (partial names will not work).
+
+      * If you don't know the team name, go to **Organizations** > **_Your Organization_** and search for the user. Hover over **View** to see all of their teams, then click on **View** > **_Team Name_**.
+
+2. Find the user in the list, and click the **x** next to the user's name to remove them.
+
+      ![List of members on a team](images/orgs-team-members2019.png)
+
 
 ### Give a team access to a repository
 
-To provide a team access to a repository:
+1. Visit the repository list on Docker Hub by clicking on **Repositories**.
 
-1. Visit the repository list on Docker Hub by clicking on **Repositories**
-2. Select your organization in the namespace dropdown list
-3. Click the repository you'd like to edit ![Org Repos](images/orgs-list-repos.png)
-4. Click the **Permissions** tab
-5. Select the team, permissions level (more on this below) and click **+**
-6. Click the **+** button to add ![Add Repo Permissions for Team](images/orgs-add-team-permissions.png)
+2. Select your organization in the namespace dropdown list.
+
+3. Click the repository you'd like to edit.
+
+      ![Org Repos](images/repos-list2019.png)
+
+4. Click the **Permissions** tab.
+
+5. Select the team, the [permissions level](#permissions-reference), and click **+** to save.
+
+      ![Add Repo Permissions for Team](images/orgs-repo-perms2019.png)
 
 ### View a team's permissions for all repositories
 
 To view a team's permissions over all repos:
-1. Click on **Organizations**, then select your organization and team.
-2. Click on the **Permissions** tab where you can view which repositories this team has access to ![Team Audit Permissions](images/orgs-audit-permissions.png)
+
+1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+
+2. Click on the **Permissions** tab, where you can view the repositories this team can access.
+
+      ![Team Audit Permissions](images/orgs-teams-perms2019.png)
+
+You can also edit repository permissions from this tab.
 
 
 ### Permissions reference
@@ -81,7 +146,7 @@ automatically have Read permissions:
 
 - `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
 - `Write` access allows users to push to repositories on Docker Hub.
-- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility and "Delete".
+- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility, and "Delete".
 
 > **Note**: A User who has not yet verified their email address only has
 > `Read` access to the repository, regardless of the rights their team

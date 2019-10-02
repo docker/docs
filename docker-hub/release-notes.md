@@ -8,6 +8,21 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2019-10-02
+
+### Enhancements
+* You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs). Each organization page now breaks down into these tabs:
+  * **New:** Members - manage your members directly from this page (delete, add, or open their teams)
+  * **New:** Teams - search by team or username, and open up any team page to manage the team
+  * Repositories
+  * Settings
+  * Billing
+
+### Bug fixes
+
+* Fixed an issue where Kinematic could not connect and log in to Docker Hub.
+
+
 ## 2019-09-19
 
 ### New features
