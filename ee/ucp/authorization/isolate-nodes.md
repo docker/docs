@@ -1,5 +1,5 @@
 ---
-title: Isolate cluster nodes in Docker Enterprise
+title: Isolate cluster nodes 
 description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication, node, Kubernetes
 ---
