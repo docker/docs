@@ -1512,7 +1512,7 @@ manuals:
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/
+            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -4052,6 +4052,8 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or an organization
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary
