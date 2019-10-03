@@ -415,6 +415,9 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Kubernetes
 * Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
 
+### Networking
+* Interlock has been upgraded to version 3.0.0. (ENGCORE-792)
+
 ### Components
 
 | Component             | Version |
@@ -422,7 +425,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP                   | 3.1.11  |
 | Kubernetes            | 1.11.10 |
 | Calico                | 3.8.2   |
-| Interlock             | 2.6.1   |
+| Interlock             | 3.0.0   |
 | Interlock NGINX proxy | 1.14.2  |
 
 ## 3.1.10
