@@ -27,7 +27,7 @@ to upgrade your installation to the latest release.
 
 ### Bug Fixes
 
-* Fixed an bug where attempting to pull mirror manifest lists would not trigger
+* Fixed a bug where attempting to pull mirror manifest lists would not trigger
 an evaluation of their existing push mirroring policies, and they would not get
 push mirrored to a remote DTR. (docker/dhe-deploy #10669)
 
