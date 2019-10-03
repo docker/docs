@@ -39,7 +39,7 @@ healthy and that all nodes have been upgraded successfully.
 | `--force-minimums`            | Force the install/upgrade even if the system does not meet the minimum requirements |
 | `--host-address` *value*      | Override the previously configured host address with this IP or network interface   |
 | `--id`                        | The ID of the UCP instance to upgrade                                               |
-|  --manual-worker-upgrade      | Whether to manually upgrade worker nodes. Defaults to false                         |
+| `--manual-worker-upgrade`     | Whether to manually upgrade worker nodes. Defaults to false                         |
 | `--pull`                      | Pull UCP images: `always`, when `missing`, or `never`                               |
 | `--registry-password` *value* | Password to use when pulling images                                                 |
 | `--registry-username` *value* | Username to use when pulling images                                                 |
