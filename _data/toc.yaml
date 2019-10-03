@@ -1512,7 +1512,7 @@ manuals:
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/
+            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -3993,35 +3993,35 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
-  - sectiontitle: Security and Authentication
+  - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Managing Access Tokens
-      - sectiontitle: Two-factor Authentication
+        title: Managing access tokens
+      - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
-            title: Enabling two-factor authentication
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
+            title: Enable two-factor authentication
           - path: /docker-hub/2fa/disable-2fa/
             title: Disable two-factor authentication
           - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover Docker Hub account with Recovery Code
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/release-notes/
     title: Release notes
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
-    title: Official Images
+    title: Official images
   - path: /docker-hub/orgs/
-    title: Teams & Organizations
+    title: Teams & organizations
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
-    title: Slack Integration
+    title: Slack integration
   - path: /docker-hub/upgrade/
     title: Upgrade your plan
-  - sectiontitle: Automated Builds
+  - sectiontitle: Automated builds
     section:
       - path: /docker-hub/builds/
         title: Set up Automated builds
@@ -4033,7 +4033,7 @@ manuals:
         title: Link to GitHub and BitBucket
       - path: /docker-hub/builds/classic/
         title: Classic Automated Builds
-  - sectiontitle: Publisher & Certified Content
+  - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
       title: Overview
@@ -4044,13 +4044,15 @@ manuals:
     - path: /docker-hub/publish/publisher_faq/
       title: Publisher FAQs
     - path: /docker-hub/publish/certify-images/
-      title: Certify Images & Plugins
+      title: Certify images & plugins
     - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify Logging Plugins
+      title: Certify logging plugins
     - path: /docker-hub/publish/trustchain/
-      title: Trust Chain
+      title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or an organization
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary

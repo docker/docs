@@ -11,7 +11,7 @@ Get the [30-day
 trial available at the Docker hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial).
 
 Once you get your trial license, you can install Docker Enterprise's Universal
-Control Plane and Docker Trusted Regsitry on Linux Servers. Windows Servers
+Control Plane and Docker Trusted Registry on Linux Servers. Windows Servers
 can only be used as Universal Control Plane Worker Nodes.
 
 Learn more about the Universal Control Plane's system requirements 
