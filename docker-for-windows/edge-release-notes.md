@@ -12,6 +12,24 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.4.0
+2019-10-07
+
+[Download](https://download.docker.com/win/edge/39097/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
+- [Kubernetes 1.15.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved) for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+
+### Bug fixes and minor changes
+
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Users can no longer edit the `/etc/hosts` file inside Windows containers to add `*.docker.internal` DNS entries.
+- Fixed a bug that prevented users from accessing WSL 2 Tech Preview. Fixes [docker/for-win#4734](https://github.com/docker/for-win/issues/4734).
+
 ### Docker Desktop Community 2.1.3.0
 2019-09-16
 

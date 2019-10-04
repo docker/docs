@@ -12,6 +12,25 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.4.0
+2019-10-07
+
+[Download](https://download.docker.com/mac/edge/39097/Docker.dmg)
+
+### Upgrades
+
+- [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
+- [Kubernetes 1.15.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved) for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+
+### Bug fixes and minor changes
+
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
+
+### Bug fixes and minor changes
+
 ### Docker Desktop Community 2.1.3.0
 2019-09-16
 
