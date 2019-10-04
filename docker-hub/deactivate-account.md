@@ -30,6 +30,7 @@ Before deactivating your Docker Hub account, please complete the following:
 Once you have completed all the steps above, you may deactivate your account. On Docker Hub, go to **_Your Account_** > **Accounts Settings** > **Deactivate Account**.
 
 > This cannot be undone! Be sure you've gathered all the data you need from your account before deactivating it.
+{: .warning }
 
 
 ## Deactivating an organization
@@ -48,3 +49,4 @@ Before deactivating an organization, please complete the following:
 Once you have completed all the steps above, you may deactivate your organization. On Docker Hub, go to **Organizations** > **_Your Organization_** > **Settings** > **Deactivate Org**.
 
 > This cannot be undone! Be sure you've gathered all the data you need from your organization before deactivating it.
+{: .warning }
