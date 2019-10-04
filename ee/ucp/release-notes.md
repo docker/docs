@@ -135,6 +135,7 @@ endpoint described in https://docs.docker.com/ee/ucp/admin/configure/ucp-configu
 - Generating a backup from a UCP manager that has lost quorum is no longer supported. We recommend that you
 regularly schedule backups on your cluster so that you have always have a recent backup.
 Refer to [UCP backup information](/ee/admin/backup/back-up-ucp/) for detailed UCP back up information.
+- The ability to upgrade UCP through the web UI is no longer supported. We recommend that you use the CLI to updgrade UCP to 3.2.x and later versions.
 
 If your cluster has lost quorum and you cannot recover it on your own, please contact Docker Support.
 
