@@ -25,7 +25,7 @@ You should have the following three files:
 
 - `interlock.tar`: This is the core Interlock application.
 - `interlock-extension-nginx.tar`: This is the Interlock extension for NGINX.
-- `nginx:alpine`: This is the official NGINX image based on Alpine.
+- `interlock-proxy-nginx.tar`: This is the official NGINX image based on Alpine.
 
 Next, copy these files to each node in the Docker Swarm cluster and run the following commands to load each image:
 
