@@ -169,7 +169,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Kubernetes
 
 - Integrated Kubernetes Ingress
-- You can now dynamiclly deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters, and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a centralized and controlled manner.
+- You can now dynamically deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters, and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a centralized and controlled manner.
 - Updated Kubernetes to version 1.14.
 
 #### Enhancements
@@ -189,7 +189,7 @@ In order to optimize user experience and security, support for Internet Explorer
   - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed in 1.12. If cAdvisor is needed, run it via a DaemonSet. [kubernetes #65707](https://github.com/kubernetes/kubernetes/pull/65707)
 - Support for Out-of-tree CSI Volume Plugins (stable) with API
   - Allows volume plugins to be developed out-of-tree.
-  - Not require building volume plugins (or their dependencies) into Kubernetes binaries.
+  - Not requiring building volume plugins (or their dependencies) into Kubernetes binaries.
   - Not requiring direct machine access to deploy new volume plugins (drivers). [kubernetes #178](https://github.com/kubernetes/enhancements/issues/178)
 - Server-side Apply leveraged by the UCP GUI for the yaml create page
   - Moved "apply" and declarative object management from kubectl to the apiserver. Added "field ownership". [kubernetes #555](https://github.com/kubernetes/enhancements/issues/555)
@@ -203,13 +203,13 @@ In order to optimize user experience and security, support for Internet Explorer
    - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a separate edit and view. [kubernetes #66684](https://github.com/kubernetes/kubernetes/pull/66684)
 - API
   - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods metrics, as well as allow AverageValue targets on Objects, similar to External metrics. [kubernetes #64097](https://github.com/kubernetes/kubernetes/pull/64097)
-  - Version updates
-   - Client-go libraries bump
+- Version updates
+  - Client-go libraries bump
     - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or other characters disallowed in HTTP headers.
    - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
-  - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
-  - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
-  - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
+   - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
+   - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
+   - Default value of option `--audit-webhook-version` and `--audit-log-version` are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
 
 ### Known issues
 
@@ -450,7 +450,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.9 |
 | Kubernetes   | 1.11.10 |
 | Calico      | 3.5.3 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.8
 2019-06-27
@@ -513,7 +513,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.8 |
 | Kubernetes   | 1.11.10 |
 | Calico      | 3.5.3 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.7
 2019-05-06
@@ -546,7 +546,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.7 |
 | Kubernetes   | 1.11.9 |
 | Calico      | 3.5.3 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.6
 2019-04-11
@@ -563,7 +563,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Known issues
 * Upgrading from UCP `3.1.4` to `3.1.5` causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
     - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
-* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
@@ -582,7 +582,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.6 |
 | Kubernetes   | 1.11.9 |
 | Calico      | 3.5.3 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.5
 2019-03-28
@@ -608,7 +608,7 @@ In order to optimize user experience and security, support for Internet Explorer
 
 * Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
     - Workaround: Delete any `ucp-*-s390x` Swarm services. For example, `ucp-auth-api-s390x`.
-* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
     * Privileged Mode
@@ -627,7 +627,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.5 |
 | Kubernetes   | 1.11.8 |
 | Calico      | 3.5.2 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.4
 
@@ -655,7 +655,7 @@ In order to optimize user experience and security, support for Internet Explorer
 ### Known issues
 
 * Newly added Windows node reports "Awaiting healthy status in classic node inventory". [Learn more](https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory).
-* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
 * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
     * Host Bind Mounts
@@ -675,7 +675,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.4 |
 | Kubernetes   | 1.11.7 |
 | Calico      | 3.5.0 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.3
 
@@ -709,7 +709,7 @@ In order to optimize user experience and security, support for Internet Explorer
 | UCP      | 3.1.3 |
 | Kubernetes   | 1.11.5 |
 | Calico      | 3.5.0 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 
 ## 3.1.2
@@ -746,7 +746,7 @@ now configurable within the UCP web interface. (#15466)
 | UCP      | 3.1.2 |
 | Kubernetes   | 1.11.5 |
 | Calico      | 3.2.3 |
-| Interlock (nginx)   | 1.14.0 |
+| Interlock (NGINX)   | 1.14.0 |
 
 ## 3.1.1
 
@@ -761,7 +761,7 @@ now configurable within the UCP web interface. (#15466)
 | UCP      | 3.1.1 |
 | Kubernetes   | 1.11.5 |
 | Calico      | 3.2.3 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.1.0
 
@@ -815,11 +815,11 @@ There are several backward-incompatible changes in the Kubernetes API that may a
     * Change `node.alpha.kubernetes.io/notReady` to `node.kubernetes.io/not-ready`
     * Change `node.alpha.kubernetes.io/unreachable` to `node.kubernetes.io/unreachable`
     For more information about taints and tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-* JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behaviour has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
+* JSON configuration used with `kubectl create -f pod.json` containing fields with incorrect casing are no longer valid. You must correct these files before upgrading. When specifying keys in JSON resource definitions during direct API server communication, the keys are case-sensitive. A bug introduced in Kubernetes 1.8 caused the API server to accept a request with incorrect case and coerce it to correct case, but this behavior has been fixed in 1.11 so the API server will again enforce correct casing. During this time, the `kubectl` tool continued to enforce case-sensitive keys, so users that strictly manage resources with `kubectl` will be unaffected by this change.
 * If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see [this pull request](https://github.com/kubernetes/kubernetes/pull/61373). It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.
 
 ### Known issues
-* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade)
+* There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
 * In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)
 * You must use the ID of the user, organization, or team if you manually create a **ClusterRoleBinding** or **RoleBinding** for `User` or `Group` subjects. (#14935)
     * For the `User` subject Kind, the `Name` field contains the ID of the user.
@@ -857,7 +857,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.1.0 |
 | Kubernetes   | 1.11.2 |
 | Calico      | 3.2.3 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 # Version 3.0
 
@@ -927,7 +927,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.13 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 
 ## 3.0.12
@@ -950,7 +950,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.12 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.11
 2019-05-06
@@ -965,7 +965,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.11 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.10
 
@@ -984,7 +984,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.10 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.9
 
@@ -1010,7 +1010,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.9 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.8
 
@@ -1042,7 +1042,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.8 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.7
 
@@ -1057,7 +1057,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.7 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.6
 
@@ -1088,7 +1088,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.6 |
 | Kubernetes   | 1.8.15 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.5
 
@@ -1138,7 +1138,7 @@ The following features are deprecated in UCP 3.1.
 | UCP      | 3.0.4 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.8 |
-| Interlock (nginx)   | 1.13.12 |
+| Interlock (NGINX)   | 1.13.12 |
 
 ## 3.0.3
 
@@ -1422,7 +1422,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 | UCP      | 3.0.1 |
 | Kubernetes   | 1.8.11 |
 | Calico      | 3.0.1 |
-| Interlock (nginx)   | 1.13.8 |
+| Interlock (NGINX)   | 1.13.8 |
 
 # Version 2.2
 
