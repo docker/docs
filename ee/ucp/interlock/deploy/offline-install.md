@@ -12,25 +12,25 @@ First, using an existing Docker engine, save the images:
 ```bash
 $> docker save {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} > interlock.tar
 $> docker save {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }} > interlock-extension-nginx.tar
-$> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > nginx.tar
+$> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > interlock-proxy-nginx.tar
 ```
 
 Note: replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version
 }}` and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
 corresponding extension and proxy image if you are not using Nginx.
 
-You should have the following two files:
+You should have the following three files:
 
 - `interlock.tar`: This is the core Interlock application.
 - `interlock-extension-nginx.tar`: This is the Interlock extension for Nginx.
-- `nginx:alpine`: This is the official Nginx image based on Alpine.
+- `interlock-proxy-nginx.tar`: This is the official Nginx image based on Alpine.
 
 Copy these files to each node in the Docker Swarm cluster and run the following commands to load each image:
 
 ```bash
 $> docker load < interlock.tar
 $> docker load < interlock-extension-nginx.tar
-$> docker load < nginx:alpine.tar
+$> docker load < interlock-proxy-nginx.tar
 ```
 
 ## Next steps

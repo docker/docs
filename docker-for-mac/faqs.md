@@ -94,10 +94,7 @@ no separate VirtualBox is required.
 
 ### What are system requirements for Docker for Mac?
 
-You need a Mac that supports hardware virtualization and can run at
-least macOS `10.11` (macOS El Capitan). See also
-[What to know before you install](install#what-to-know-before-you-install) in
-the install guide.
+You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install/#system-requirements).
 
 ### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
 

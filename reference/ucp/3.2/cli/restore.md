@@ -68,5 +68,5 @@ Notes:
 | `--host-address` *value*   | The network address to advertise to other nodes. Format: IP address or network interface name |
 | `--passphrase` *value*     | Decrypt the backup tar file with the provided passphrase                                      |
 | `--san` *value*            | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)  |
-| `--swarm-grpc-port *value* | Port for communication between nodes (default: 2377)                                          |
+| `--swarm-grpc-port` *value* | Port for communication between nodes (default: 2377)                                          |
 | `--unlock-key` *value*     | The unlock key for this swarm-mode cluster, if one exists.                                    |

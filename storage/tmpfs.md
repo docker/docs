@@ -50,7 +50,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `tmpfs-type` and `tmpfs-mode` options. See
-    [tmpfs options](#tmpfs-options).
+    [tmpfs options](#specify-tmpfs-options).
 
 The examples below show both the `--mount` and `--tmpfs` syntax where possible,
 and `--mount` is presented first.
