@@ -209,7 +209,7 @@ In order to optimize user experience and security, support for Internet Explorer
   - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
  - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
  - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
- - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
+ - Default value of option `--audit-webhook-version` and `--audit-log-version` are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
 
 ### Known issues
 
