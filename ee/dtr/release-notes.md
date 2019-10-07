@@ -29,7 +29,14 @@ to upgrade your installation to the latest release.
 
 * Fixed a bug where attempting to pull mirror manifest lists would not trigger
 an evaluation of their existing push mirroring policies, and they would not get
-push mirrored to a remote DTR. (docker/dhe-deploy #10669)
+push mirrored to a remote DTR. (docker/dhe-deploy #10676)
+* Fixed a bug where the S3 storage driver did not honor HTTP proxy settings. (docker/dhe-deploy #10639)
+* Content Security Policy (CSSP) headers are now on one line to comply with RFC 7230. (docker/dhe-deploy #10594)
+
+### Security
+
+* Bumped the version of the Alpine base images from `3.9` to `3.10`. (docker/dhe-deploy #10716)
+
 
 ## 2.7.2
 (2019-09-03)
