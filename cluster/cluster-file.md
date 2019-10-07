@@ -123,7 +123,7 @@ cluster:
 For more information on Docker Cloudstor see:
 
 - [Cloudstor for AWS](/docker-for-aws/persistent-data-volumes/)
-- [Cloudstor for Azure]([/docker-for-azure/persistent-data-volumes/)
+- [Cloudstor for Azure](/docker-for-azure/persistent-data-volumes/)
 
 The following optional elements can be specified:
 
