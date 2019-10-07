@@ -18,6 +18,15 @@ These syntax rules apply to the `.env` file:
 * There is no special handling of quotation marks. This means that
   **they are part of the VAL**.
 
+### Example file
+A example for the .env file:
+```
+# This is comment
+PORT=3306
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=pass
+```
+
 ## Compose file and CLI variables
 
 The environment variables you define here are used for [variable
