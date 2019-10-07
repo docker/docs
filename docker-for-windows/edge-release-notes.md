@@ -27,7 +27,6 @@ notes](release-notes). For Docker Desktop system requirements, see
 ### Bug fixes and minor changes
 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
-- Users can no longer edit the `/etc/hosts` file inside Windows containers to add `*.docker.internal` DNS entries.
 - Fixed a bug that prevented users from accessing WSL 2 Tech Preview. Fixes [docker/for-win#4734](https://github.com/docker/for-win/issues/4734).
 
 ### Docker Desktop Community 2.1.3.0
