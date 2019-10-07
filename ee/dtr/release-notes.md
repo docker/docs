@@ -23,7 +23,7 @@ to upgrade your installation to the latest release.
 # Version 2.7
 
 ## 2.7.3
-(2019-10-07)
+(2019-10-08)
 
 ### Bug Fixes
 
