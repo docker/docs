@@ -90,7 +90,7 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` is present because of that `Dockerfile`'s `COPY` command,
+`requirements.txt` are present because of that `Dockerfile`'s `COPY` command,
 and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 
