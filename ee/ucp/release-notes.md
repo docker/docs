@@ -203,13 +203,13 @@ In order to optimize user experience and security, support for Internet Explorer
    - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a separate edit and view. [kubernetes #66684](https://github.com/kubernetes/kubernetes/pull/66684)
 - API
   - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods metrics, as well as allow AverageValue targets on Objects, similar to External metrics. [kubernetes #64097](https://github.com/kubernetes/kubernetes/pull/64097)
-  - Version updates
-   - Client-go libraries bump
-    - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or other characters disallowed in HTTP headers.
-   - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
-  - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
-  - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
-  - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
+ - Version updates
+  - Client-go libraries bump
+   - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or other characters disallowed in HTTP headers.
+  - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
+ - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
+ - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
+ - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
 
 ### Known issues
 
