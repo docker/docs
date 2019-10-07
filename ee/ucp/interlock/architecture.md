@@ -69,7 +69,7 @@ Swarm services use `update-delay` to control the speed at which a service is upd
 
 Use `update-delay` if …
 
-- You are optimizing for the least number of dropped connections and a longer update cycle is an acceptable tradeoff.
+- You are optimizing for the least number of dropped connections and a longer update cycle as an acceptable tradeoff.
 - Interlock update convergence takes a long time in your environment (can occur when having large amount of overlay networks). 
 
 Do not use `update-delay` if …

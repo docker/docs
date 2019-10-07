@@ -82,7 +82,7 @@ $ docker buildx build --platform linux/amd64,linux/arm64 .
 Finally, depending on your project, the language that you use may have good support for cross-compilation. In that case, multi-stage builds in Dockerfiles can be effectively used to build binaries for the platform specified with `--platform` using the native architecture of the build node. A list of build arguments like `BUILDPLATFORM` and `TARGETPLATFORM` is available automatically inside your Dockerfile and can be leveraged by the processes running as part of your build.
 
 ```
-FROM --platform $BUILDPLATFORM golang:alpine AS build
+FROM --platform=$BUILDPLATFORM golang:alpine AS build
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log

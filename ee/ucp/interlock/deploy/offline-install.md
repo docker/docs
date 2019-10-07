@@ -12,7 +12,7 @@ First, using an existing Docker engine, save the images:
 ```bash
 $> docker save {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} > interlock.tar
 $> docker save {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }} > interlock-extension-nginx.tar
-$> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > nginx.tar
+$> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > interlock-proxy-nginx.tar
 ```
 
 > Note
@@ -32,7 +32,7 @@ Next, copy these files to each node in the Docker Swarm cluster and run the foll
 ```bash
 $> docker load < interlock.tar
 $> docker load < interlock-extension-nginx.tar
-$> docker load < nginx:alpine.tar
+$> docker load < interlock-proxy-nginx.tar
 ```
 
 ## Next steps

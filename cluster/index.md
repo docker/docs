@@ -51,12 +51,24 @@ For more information about Cluster files, refer to the
 Docker Cluster has commands for managing the whole lifecycle of your cluster:
 
  * Create and destroy clusters
- * Scale up or Scale down clusters
+ * Scale up or scale down clusters
  * Upgrade clusters
  * View the status of clusters
- * Backup and Restore clusters
+ * Backup and restore clusters
 
-## Cluster reference pages
+## Export Docker Cluster artifacts
+
+You can export both Terraform and Ansible scripts to deploy certain components standalone or with custom configurations. Use the following commands to export those scripts:
+
+```bash
+docker container run --detach --name dci --entrypoint sh docker/cluster:latest
+docker container cp dci:/cluster/terraform terraform
+docker container cp dci:/cluster/ansible ansible
+docker container stop dci
+docker container rm dci
+```
+
+## Where to go next
 
 - [Get started with Docker Cluster on AWS](aws.md)
 - [Command line reference](/engine/reference/commandline/cluster/)
