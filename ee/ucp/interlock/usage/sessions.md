@@ -14,14 +14,11 @@ You can publish a service and configure the proxy for persistent (sticky) sessio
 To configure sticky sessions using cookies:
 
 1. Create an overlay network so that service traffic is isolated and secure, as shown in the following example:
-
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
-
 2. Create a service with the cookie to use for sticky sessions:
-
 ```bash
 $> docker service create \
     --name demo \
@@ -75,14 +72,11 @@ The following example shows how to configure sticky sessions using client IP has
 as cookies but enables workarounds for some applications that cannot use the other method. When using IP hashing, reconfigure Interlock proxy to use [host mode networking](../config/host-mode-networking.md), because the default `ingress` networking mode uses SNAT, which obscures client IP addresses.
 
 1. Create an overlay network so that service traffic is isolated and secure:
-
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
-
 2. Create a service with the cookie to use for sticky sessions using IP hashing:
-
 ```bash
 $> docker service create \
     --name demo \
@@ -128,6 +122,8 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 You can use `docker service scale demo=10` to add more replicas. When scaled, requests are pinned
 to a specific backend.
 
-> **Note**: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
+> Note
+> 
+> Due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
 > expected, because internally the proxy uses the new set of replicas to determine a backend on which to pin. When the upstreams are
 > determined, a new "sticky" backend is chosen as the dedicated upstream.

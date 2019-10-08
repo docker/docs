@@ -95,6 +95,7 @@ Minimizing the number of overlay networks that Interlock connects to can be acco
 
 - Reduce the number of networks. If the architecture permits it, applications can be grouped together to use the same networks.
 - Use Interlock service clusters. By segmenting Interlock, service clusters also segment which networks are connected to Interlock, reducing the number of networks to which each proxy is connected.
+- Use admin-defined networks and limit the number of networks per service cluster.
 
 #### Use Interlock VIP Mode
 VIP Mode can be used to reduce the impact of application updates on the Interlock proxies. It utilizes the Swarm L4 load balancing VIPs instead of individual task IPs to load balance traffic to a more stable internal endpoint. This prevents the proxy LB configs from changing for most kinds of app service updates reducing churn for Interlock. The following features are not supported in VIP mode:
