@@ -26,15 +26,15 @@ guides:
     title: Docker overview
   - sectiontitle: Quickstart
     section:
-    - title: "Part 1: Orientation"
+    - title: "Orientation  and setup"
       path: /get-started/
-    - title: "Part 2: Containers"
+    - title: "Containerizing an application"
       path: /get-started/part2/
-    - title: "Part 3: Services"
+    - title: "Deploying to Kubernetes"
       path: /get-started/part3/
-    - title: "Part 4: Swarms"
+    - title: "Deploying to Swarm"
       path: /get-started/part4/
-    - title: "Part 5: Stacks"
+    - title: "Sharing images on Hub"
       path: /get-started/part5/
 - sectiontitle: Develop with Docker
   section:
