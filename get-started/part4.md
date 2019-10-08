@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 4: Deploying to Swarm"
+title: "Deploying to Swarm"
 keywords: swarm, swarm services, stacks
 description: Learn how to describe and deploy a simple application on Docker Swarm.
 ---

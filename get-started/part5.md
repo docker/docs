@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 5: Sharing Images on Docker Hub"
+title: "Sharing Images on Docker Hub"
 keywords: docker hub, push, images
 description: Learn how to share images on Docker Hub.
 ---

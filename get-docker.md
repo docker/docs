@@ -44,8 +44,6 @@ channel for more predictability.
 </div>
 </div><!-- end row -->
 
-## Docker Desktop
-
 <div class="component-container">
     <!--start row-->
     <div class="row">

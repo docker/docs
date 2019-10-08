@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 3: Deploying to Kubernetes"
+title: "Deploying to Kubernetes"
 keywords: kubernetes, pods, deployments, kubernetes services
 description: Learn how to describe and deploy a simple application on Kubernetes.
 ---
