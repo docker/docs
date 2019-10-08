@@ -1559,7 +1559,7 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/
         - title: Install Ingress
           path: /ee/ucp/kubernetes/cluster-ingress/install/
-        - title: Deploy Simple Application
+        - title: Deploy a Sample Application
           path: /ee/ucp/kubernetes/cluster-ingress/ingress/
         - title: Deploy a Canary Deployment
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
