@@ -151,13 +151,6 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 - [Compatibility Matrix](https://success.docker.com/Policies/Compatibility_Matrix)
 - [Maintenance Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle)
 
-## Version compatibility
-
-UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
-
-- Docker Enterprise Engine 18.09.0-ee-1 or higher
-- DTR 2.6 or higher
-
 ## Where to go next
 
 - [Plan your installation](plan-installation.md)
