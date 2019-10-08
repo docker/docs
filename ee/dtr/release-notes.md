@@ -22,6 +22,22 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.3
+(2019-10-08)
+
+### Bug Fixes
+
+* Fixed a bug where attempting to pull mirror manifest lists would not trigger
+an evaluation of their existing push mirroring policies, and they would not get
+push mirrored to a remote DTR. (docker/dhe-deploy #10676)
+* Fixed a bug where the S3 storage driver did not honor HTTP proxy settings. (docker/dhe-deploy #10639)
+* Content Security Policy (CSSP) headers are now on one line to comply with RFC 7230. (docker/dhe-deploy #10594)
+
+### Security
+
+* Bumped the version of the Alpine base images from `3.9` to `3.10`. (docker/dhe-deploy #10716)
+
+
 ## 2.7.2
 (2019-09-03)
 
@@ -93,7 +109,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * When changing your password if an incorrect password is entered the UI will not give the appropriate error message, and the save button will stay in a loading state.
     * Workaround: Refresh the page.
 * After a promotion policy is created they cannot be edited through the UI.
-    * Workaround: Either delete the promotion policy and recreate it. Alternatively, use the API to view and 
+    * Workaround: Either delete the promotion policy and recreate it. Alternatively, use the API to view and
     edit the promotion policy.
 * Non admin users cannot create promotion policies through the UI.
 
@@ -174,7 +190,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
 
-## 2.6.6 
+## 2.6.6
 (2019-5-6)
 
 ### Security
@@ -187,7 +203,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
     - To use this option, first write your current storage settings to a JSON file via `curl ... /api/v0/admin/settings/registry > storage.json`.
     - Next, add `keep_metadata: true` as a top-level key in the JSON you just created and modify it to contain your new storage settings.
     - Finally, update your Registry settings with your modified JSON file via `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`.
-    
+
 ### Bug fixes
 
 * Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
@@ -231,7 +247,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
-## 2.6.4 
+## 2.6.4
 (2019-3-28)
 
 ### Enhancements
@@ -241,7 +257,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 ### Bug fixes
 
-* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This also applied when upgrading from 2.5 to 2.6. The issue has been fixed in DTR 2.6.4. (ENGDTR-330 and docker/dhe-deploy #10105) 
+* If you have a repository in DTR 2.4 with manifest lists enabled, `docker pull` would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This also applied when upgrading from 2.5 to 2.6. The issue has been fixed in DTR 2.6.4. (ENGDTR-330 and docker/dhe-deploy #10105)
 
 ### Known issues
 
@@ -291,7 +307,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
-## 2.6.2 
+## 2.6.2
 
 (2019-1-29)
 
@@ -321,7 +337,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
-## 2.6.1 
+## 2.6.1
 
 (2019-01-09)
 
@@ -356,7 +372,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](/ee/dtr/admin/upgrade/#25-to-26-upgrade).
 
-## 2.6.0 
+## 2.6.0
 
 (2018-11-08)
 
@@ -378,7 +394,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * API
   * Security admins can now export vulnerability scans to CSV via the `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}/export` endpoint. Specify `text/csv` as an Accept request HTTP header.
   * Repository admins can now interact with repository pruning policies using the following endpoints:
-   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies` 
+   * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies`
    * `POST /api/v0/repositories/{namespace}/{reponame}/pruningPolicies`
    * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/test`
    * `GET /api/v0/repositories/{namespace}/{reponame}/pruningPolicies/{pruningpolicyid}`
@@ -413,9 +429,9 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 ### Deprecations
 
 * API
-  * `GET /api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` is deprecated in favor of `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}`. 
-  * The following endpoints have been removed since online garbage collection will take care of these operations: 
-    * `DELETE /api/v0/accounts/{namespace}/repositories` 
+  * `GET /api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` is deprecated in favor of `GET /api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}`.
+  * The following endpoints have been removed since online garbage collection will take care of these operations:
+    * `DELETE /api/v0/accounts/{namespace}/repositories`
     * `DELETE /api/v0/repositories/{namespace}/{reponame}/manifests/{reference}`
   * The `enableManifestLists` field on the `POST /api/v0/repositories/{namespace}` endpoint will be removed in DTR 2.7. See [Deprecation Notice](deprecation-notice) for more details.
 
@@ -625,7 +641,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 ## 2.5.8
- 
+
 (2019-1-29)
 
 ### Bug fixes
@@ -661,7 +677,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.7 
+## 2.5.7
 
 (2019-01-09)
 
@@ -703,7 +719,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.6 
+## 2.5.6
 
 (2018-10-25)
 
@@ -745,7 +761,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.5 
+## 2.5.5
 
 (2018-8-30)
 
@@ -784,7 +800,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.3 
+## 2.5.3
 
 (2018-6-21)
 
@@ -828,7 +844,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
 
-## 2.5.2 
+## 2.5.2
 
 (2018-5-21)
 
@@ -865,7 +881,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.1 
+## 2.5.1
 
 (2018-5-17)
 
@@ -891,7 +907,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * Enhancements to the mirroring interface including:
   * Fixed URL for the destination repository.
   * Option to skip TLS verification when testing mirroring.
-  
+
   ### Known issues
 
 * Web Interface
@@ -921,7 +937,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * System
   * When opting into online garbage collection, the system will run a `metadatastoremigration` job after a successful upgrade. If the three system attempts fail, you will have to retrigger the `metadatastoremigration` job manually. [Learn about manual metadata store migration](../../v18.03/ee/dtr/admin/configure/garbage-collection/#metadata-store-migration).
 
-## 2.5.0 
+## 2.5.0
 
 (2018-4-17)
 
@@ -1160,7 +1176,7 @@ of testing the server to find which version works.
 * The `--nfs-storage-url` option uses the system's default NFS version instead
 of testing the server to find which version works.
 
-## Version 2.4.3 
+## Version 2.4.3
 
 (2018-03-19)
 
@@ -1168,7 +1184,7 @@ of testing the server to find which version works.
 
 * Dependencies updated to consume upstream CVE patches.
 
-## Version 2.4.2 
+## Version 2.4.2
 
 (2018-02-13)
 
@@ -1186,7 +1202,7 @@ potentially disclosed due to the vulnerability.
 Use the `--log-driver=none` option for `docker run` when running a DTR backup, HA
 cluster join or dumpcerts.
 
-## 2.4.1 
+## 2.4.1
 
 (2017-11-20)
 
@@ -1225,7 +1241,7 @@ removed in DTR 2.5. You can use the
 of testing the server to find which version works.
 
 
-## DTR 2.4.0 
+## DTR 2.4.0
 
 (2017-11-2)
 
