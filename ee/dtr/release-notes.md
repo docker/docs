@@ -121,6 +121,14 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 # Version 2.6
 
+## 2.6.10
+(2019-10-08)
+
+### Bug fixes
+
+* Fixed a bug where the S3 storage driver did not honor HTTP proxy settings. (docker/dhe-deploy #10639)
+* Content Security Policy (CSSP) headers are now on one line to comply with RFC 7230. (docker/dhe-deploy #10594)
+
 ## 2.6.9
 (2019-09-03)
 
