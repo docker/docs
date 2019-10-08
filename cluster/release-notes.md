@@ -10,7 +10,7 @@ This page provides information about Docker Cluster versions.
 
 
 ## 1.2.0
-(2019-10-2)
+(2019-10-8)
 
 ### Features
 
