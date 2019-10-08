@@ -1,6 +1,6 @@
 ---
 title: Docker Engine release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE
+description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
@@ -10,25 +10,75 @@ redirect_from:
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine Enterprise (Docker EE).
+for Docker Engine - Enterprise.
 
-Docker EE builds upon the corresponding Docker CE that it
-references. Docker EE includes enterprise features as well as back-ported fixes (security-related
-and priority defects) from the open source. It also incorporates defect fixes for environments
-in which new features cannot be adopted as quickly for consistency and compatibility reasons.
-
-> **Note**:
-> New in 18.09 is an aligned release model for Docker Engine - Community and Docker
-> Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing
-> patch version. The enterprise engine is a superset of the community engine. They
-> will ship concurrently with the same x patch version based on the same code base.
+Docker Engine - Enterprise builds upon the corresponding Docker Engine -
+Community that it references. Docker Engine - Enterprise includes enterprise
+features as well as back-ported fixes (security-related and priority defects)
+from the open source. It also incorporates defect fixes for environments in
+which new features cannot be adopted as quickly for consistency and
+compatibility reasons.
 
 > **Note**:
-> The client and container runtime are now in separate packages from the daemon in
-> Docker Engine 18.09. Users should install and update all three packages at the same time
-> to get the latest patch releases. For example, on Ubuntu:
-> `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install instructions
-> for the corresponding linux distro for details.
+> New in 18.09 is an aligned release model for Docker Engine - Community and
+> Docker Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an
+> incrementing patch version. The enterprise engine is a superset of the
+> community engine. They will ship concurrently with the same x patch version
+> based on the same code base.
+
+> **Note**:
+> The client and container runtime are now in separate packages from the daemon
+> in Docker Engine 18.09. Users should install and update all three packages at
+> the same time to get the latest patch releases. For example, on Ubuntu:
+> `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install
+> instructions for the corresponding linux distro for details.
+
+## 19.03.3
+2019-10-08
+
+### Security
+
+* Patched `runc` in containerd. [CVE-2017-18367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18367)
+
+### Builder
+
+* Fix builder-next: resolve digest for third party registries. [docker/engine#339](https://github.com/docker/engine/pull/339)
+
+* Fix builder-next: user namespace builds when daemon started with socket activation. [docker/engine#373](https://github.com/docker/engine/pull/373)
+
+* Fix builder-next; session: release forwarded ssh socket connection per connection. [docker/engine#373](https://github.com/docker/engine/pull/373)
+
+* Fix build-next: llbsolver: error on multiple cache importers. [docker/engine#373](https://github.com/docker/engine/pull/373)
+
+### Client
+
+* Added support for Docker Template 0.1.6.
+
+* Mitigate against YAML files that have excessive aliasing. [docker/cli#2119](https://github.com/docker/cli/pull/2119)
+
+### Runtime
+
+* Bump Golang to 1.12.10. [docker/engine#387](https://github.com/docker/engine/pull/387)
+
+* Bump containerd to 1.2.10. [docker/engine#385](https://github.com/docker/engine/pull/385)
+
+* Distribution: modify warning logic when pulling v2 schema1 manifests. [docker/engine#368](https://github.com/docker/engine/pull/368)
+
+* Fix `POST /images/create` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
+
+* Fix `POST /build` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
+
+* Fix panic on 32-bit ARMv7 caused by misaligned struct member. [docker/engine#363](https://github.com/docker/engine/pull/363)
+
+* Fix to return "invalid parameter" when linking to non-existing container. [docker/engine#352](https://github.com/docker/engine/pull/352)
+
+* Fix overlay2: busy error on mount when using kernel >= 5.2. [docker/engine#332](https://github.com/docker/engine/pull/332)
+
+* Fix `docker rmi` stuck in certain misconfigured systems, e.g. dead NFS share. [docker/engine#335](https://github.com/docker/engine/pull/335)
+
+* Fix handling of blocked I/O of exec'd processes. [docker/engine#296](https://github.com/docker/engine/pull/296)
+
+* Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [docker/engine#378](https://github.com/docker/engine/pull/378)
 
 ## 19.03.2
 2019-09-03
@@ -334,6 +384,26 @@ The missing rules are :
         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
+## 18.09.10
+2019-10-08
+
+### Client
+
+* Fix client version not being pinned when set. [docker/engine#118](https://github.com/docker/engine/pull/188)
+* Improve error message shown on Windows when daemon is not running or client does not have elevated permissions. [docker/engine#343](https://github.com/docker/engine/pull/343)
+* Mitigate against YAML files that have excessive aliasing. [docker/cli#2119](https://github.com/docker/cli/pull/2119)
+
+### Runtime
+
+* Send exec exit event even if the exec fails to find the binary. [docker/engine#357](https://github.com/docker/engine/pull/357)
+* Devicemapper: use correct API to get the free loop device index. [docker/engine#348](https://github.com/docker/engine/pull/348)
+* Fix overlay2 busy error on mount using kernels >=5.2. [docker/engine#333](https://github.com/docker/engine/pull/333)
+* Sleep before attemping to restart event processing. [docker/engine#362](https://github.com/docker/engine/pull/362)
+* Seccomp: add sigprocmask (used by x86 glibc) to default profile. [docker/engine#341](https://github.com/docker/engine/pull/341)
+* Fix panic on 32-bit ARMv7 caused by misaligned struct member. [docker/engine#364](https://github.com/docker/engine/pull/364)
+* Fix `docker rmi` stuck in case of misconfigured system (such as dead NFS share). [docker/engine#336](https://github.com/docker/engine/pull/336)
+* Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [docker/engine#377](https://github.com/docker/engine/pull/377)
+
 ## 18.09.9
 2019-09-03
 
@@ -611,6 +681,8 @@ Update your configuration if this command prints a non-empty value for `MountFla
 * Added configuration option for cri-containerd [moby/moby#37519](https://github.com/moby/moby/pull/37519)
 * Updates containerd client to v1.2.0-rc.1 [moby/moby#37664](https://github.com/moby/moby/pull/37664), [docker/engine#75](https://github.com/docker/engine/pull/75) / [moby/moby#37710](https://github.com/moby/moby/pull/37710)
 * Added support for global default address pools [moby/moby#37558](https://github.com/moby/moby/pull/37558) [docker/cli#1233](https://github.com/docker/cli/pull/1233)
+* Moved the `POST /session` endpoint out of experimental. [moby/moby#40028](https://github.com/moby/moby/pull/40028)
+
 
 ### Improvements for Docker Engine EE and CE
 
