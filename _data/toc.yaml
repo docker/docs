@@ -2600,9 +2600,9 @@ manuals:
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
-          title: Disable persistent cookies
-        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
           title: Enable single sign-on
+        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
+          title: Disable persistent cookies
         - sectiontitle: External storage
           section:
           - path: /ee/dtr/admin/configure/external-storage/
