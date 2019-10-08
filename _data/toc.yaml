@@ -86,22 +86,6 @@ guides:
         title: Overlay networking tutorial
       - path: /network/network-tutorial-macvlan/
         title: Macvlan network tutorial
-    - sectiontitle: Configure the daemon and containers
-      section:
-      - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
-      - path: /network/iptables/
-        title: Docker and iptables
-      - path: /config/containers/container-networking/
-        title: Container networking
-      - path: /network/proxy/
-        title: Configure Docker to use a proxy server
-    - sectiontitle: Legacy networking content
-      section:
-      - path: /network/links/
-        title: (Legacy) Container links
-      - path: /network/overlay-standalone.swarm/
-        title: Overlay networks for Swarm Classic
 - sectiontitle: Manage data
   section:
     - path: /storage/
@@ -132,7 +116,7 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Run your app in production
+- sectiontitle: Configure and deploy
   section:
   - sectiontitle: Configure all objects
     section:
@@ -154,6 +138,14 @@ guides:
     - path: /config/containers/logging/configure/
       title: Configuring default drivers
       nosync: true
+    - path: /config/daemon/ipv6/
+      title: Configure the daemon for IPv6
+    - path: /network/iptables/
+      title: Docker and iptables
+    - path: /config/containers/container-networking/
+      title: Container networking
+    - path: /network/proxy/
+      title: Configure Docker to use a proxy server
   - sectiontitle: Work with external tools
     section:
     - path: /config/thirdparty/
