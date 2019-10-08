@@ -25,7 +25,7 @@ upgrade your installation to the latest release.
 # Version 3.2
 
 ## 3.2.2
-2019-10-07
+2019-10-08
 
 ### UI
 * Fixes a UI issue that caused incorrect line breaks at pre-logon banner notification (ENGORC-2678)
@@ -367,7 +367,7 @@ In order to optimize user experience and security, support for Internet Explorer
 # Version 3.1
 
 ## 3.1.11
-2019-10-07
+2019-10-08
 
 ### Bug fixes
 * Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
@@ -862,7 +862,7 @@ The following features are deprecated in UCP 3.1.
 # Version 3.0
 
 ## 3.0.15
-2019-10-07
+2019-10-08
 
 ### Bug fixes
 * Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
@@ -1427,7 +1427,7 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 # Version 2.2
 
 ## Version 2.2.22
-2019-10-07
+2019-10-08
 
 ### Bug fixes
 * Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
