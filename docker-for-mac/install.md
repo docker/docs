@@ -76,6 +76,41 @@ The Docker Desktop installation includes
 
 Congratulations! You are now successfully running Docker Desktop.
 
+## Switch between Stable and Edge versions
+
+Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to older (Stable).
+
+For example, containers created with a newer Edge version of Docker Desktop may
+not work after you switch back to Stable because they may have been created
+using Edge features that aren't in Stable yet. Just keep this in mind as
+you create and work with Edge containers, perhaps in the spirit of a playground
+space where you are prepared to troubleshoot or start over.
+
+To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section Save and Restore data below.
+
+### Save and restore data
+
+You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+
+1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
+    want to keep. (See [save](/engine/reference/commandline/save) in the Docker
+    Engine command line reference.)
+
+2. Use `docker export -o myContainner1.tar container1` to export containers you
+    want to keep. (See [export](/engine/reference/commandline/export) in the
+    Docker Engine command line reference.)
+
+3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
+
+4. Use `docker load -i images.tar` to reload previously saved images. (See
+    [load](/engine/reference/commandline/load) in the Docker Engine.
+
+5. Use `docker import -i myContainer1.tar` to create a filesystem image
+    corresponding to the previously exported containers. (See
+    [import](/engine/reference/commandline/import) in the Docker Engine.
+
+For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
+
 ## Where to go next
 
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
