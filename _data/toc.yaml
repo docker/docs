@@ -5,15 +5,15 @@ horizontalnav:
 - title: Manuals
   path: /Manuals/
   node: manuals
-- title: Glossary
-  path: /glossary/
-  node: glossary
 - title: Reference
   path: /reference/
   node: reference
 - title: Samples
   path: /samples/
   node: samples
+- title: Glossary
+  path: /glossary/
+  node: glossary
 
 guides:
 - sectiontitle: Get Docker
