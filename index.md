@@ -8,4 +8,8 @@ notags: true
 ---
 {% assign page.title = site.name %}
 
-## Placeholder for docs landing page
+## Placeholder page for docs guides
+
+Intro text and context for links to the guides and what you'll learn there. Why do I want to look at this section?
+
+Do we want a different topic for docs all up?

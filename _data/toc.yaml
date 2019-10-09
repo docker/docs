@@ -116,7 +116,7 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Configure and deploy
+- sectiontitle: Run your app in production
   section:
   - sectiontitle: Configure all objects
     section:
