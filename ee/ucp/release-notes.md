@@ -10,9 +10,7 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/release-notes/
 ---
 
-Here you can learn about new features, bug fixes, breaking changes, and
-known issues for the latest UCP version.
-You can then use [the upgrade instructions](admin/install/upgrade.md) to
+Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest UCP version. You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
 * [Version 3.2](#version-32)
@@ -20,7 +18,9 @@ upgrade your installation to the latest release.
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
 
-**Note:** For archived versions of UCP documentation, [view the docs archives](https://docs.docker.com/docsarchive/).
+> Note
+> 
+> For archived versions of UCP documentation, [view the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
 
@@ -36,7 +36,12 @@ upgrade your installation to the latest release.
 * Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
 
 ### Networking
-* Interlock has been upgraded to version 3.0.0. (ENGCORE-792)
+- Interlock has been upgraded to version 3.0.0. This upgrade includes the following updates:
+  - New Interlock configuration options:
+    - HitlessServiceUpdate: When set to `true`, the proxy service no longer needs to restart when services are updated, reducing service interruptions. The proxy also does not have to restart when services are added or removed, as long as the set of service networks attached to the proxy is unchanged. If secrets or service networks need to be added or removed, the proxy service will restart as in previous releases. (ENGCORE-792)
+    - Networks: Defines a list of networks to which the proxy service will connect at startup. The proxy service will only connect to these networks and will no longer automatically connect to back-end service networks. This allows administrators to control which networks are used to connect to the proxy service and to avoid unnecessary proxy restarts caused by network changes . (ENGCORE-912)
+  - Log an error if the `com.docker.lb.network` label does not match any of the networks to which the service is attached. (ENGCORE-837)
+  - Do not generate an invalid NGINX configuration file if `HTTPVersion` is invalid. (FIELD-2046)
 
 ### Bug fixes
 * Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
@@ -60,17 +65,12 @@ upgrade your installation to the latest release.
 
 ### Kubernetes
 * Kubernetes has been upgraded to version 1.14.6.
-* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
-  than 1 replica by default.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more than one replica by default.
 
 ### Networking
-* Calico has been upgraded to version 3.8.2. For more information, see the [Calico Release
-  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Calico has been upgraded to version 3.8.2. For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.8/release-notes/).
 * Interlock has been upgraded to version 2.6.1.
-* The `azure-ip-count` variable is now exposed at install time, allowing a User
-  to customize the number of IP addresses UCP provisions for each node.
-  Additional information can be found
-  [here](/ee/ucp/admin/install/cloudproviders/install-on-azure/#adjust-the-ip-count-value).
+* The `azure-ip-count` variable is now exposed at install time, allowing a user to customize the number of IP addresses UCP provisions for each node. Additional information can be found [here](/ee/ucp/admin/install/cloudproviders/install-on-azure/#adjust-the-ip-count-value).
 
 ### Security
 * Upgraded Golang to 1.12.9.
@@ -203,92 +203,93 @@ In order to optimize user experience and security, support for Internet Explorer
   - Admin RBAC role and edit RBAC roles
    - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a separate edit and view. [kubernetes #66684](https://github.com/kubernetes/kubernetes/pull/66684)
 - API
-  - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods metrics, as well as allow AverageValue targets on Objects, similar to External metrics. [kubernetes #64097](https://github.com/kubernetes/kubernetes/pull/64097)
+  - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods metrics, as well as allow AverageValue targets on Objects, similar to External metric.[kubernetes #64097](https://github.com/kubernetes/kubernetes/pull/64097)
 - Version updates
- - Client-go libraries bump
-  - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or other characters disallowed in HTTP headers.
- - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
- - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
- - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
- - Default value of option `--audit-webhook-version` and `--audit-log-version` are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
+   - Client-go libraries bump
+     - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or other characters disallowed in HTTP headers.
+   - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers. New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped. [kubernetes #65799](https://github.com/kubernetes/kubernetes/pull/65799)
+   - audit.k8s.io API group bump. The audit.k8s.io API group has been bumped to v1.
+   - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
+   - Default value of option `--audit-webhook-version` and `--audit-log-version` are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`. [kubernetes #65891](https://github.com/kubernetes/kubernetes/pull/65891)
 
 ### Known issues
 
-- Kubelet fails mounting local volumes in "Block" mode on SLES 12 and SLES 15 hosts
-    The error message from the kubelet looks like this, with `mount` returning error code 32.
-    ```
-    Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries
-    permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175
-    (durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\"
-    (UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod
-    \"pod-subpath-test-local-preprovisionedpv-l7k9\" (UID: \"364a339d-a98d-11e9-8d2d-0242ac11000b\")
-     : local: failed to mount device /dev/loop0 at
-     /var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ),
-     error exit status 32"
-    ```
-    Issuing "dmesg" on the system will show something like:
-    ```
-    [366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
-    ```
-    Rootcause:
-    For block volumes, if a specific filesystem is not specified, "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity.
-    ```
-    [fs_types]...
-    ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}
-    ```
-    "metadata_csum" for ext4 on SLES12 and SLES15 is an "experimental feature" and the kernel does not allow mounting of volumes that have been formatted with "metadata checksum" enabled. In the ucp-kubelet container, mke2fs is configured to enable metadata check-summing while formatting block volumes. The kubelet tries to mount such a block volume, but the kernel denies the mount with exit error 32.
+#### Kubelet fails mounting local volumes in "Block" mode
 
-    Resolution:
-    On SLES12 and SLES15 hosts, use `sed` to remove the `metadata_csum` feature from the ucp-kubelet container:`sed -i 's/metadata_csum,//g' /etc/mke2fs.conf`
+Kubelet fails mounting local volumes in "Block" mode on SLES 12 and SLES 15 hosts. The error message from the kubelet looks like the following, with `mount` returning error code 32.
 
-    This resolution can be automated across your cluster of SLES12 and SLES15 hosts, by creating a docker swarm service as follows. Note that, for this, the hosts should be in "swarm" mode:
+```
+Operation for "\"kubernetes.io/local-volume/local-pxjz5\"" failed. No retries
+permitted until 2019-07-18 20:28:28.745186772 +0000 UTC m=+5936.009498175
+(durationBeforeRetry 2m2s). Error: "MountVolume.MountDevice failed for volume \"local-pxjz5\"
+(UniqueName: \"kubernetes.io/local-volume/local-pxjz5\") pod
+\"pod-subpath-test-local-preprovisionedpv-l7k9\" (UID: \"364a339d-a98d-11e9-8d2d-0242ac11000b\")
+: local: failed to mount device /dev/loop0 at
+/var/lib/kubelet/plugins/kubernetes.io/local-volume/mounts/local-pxjz5 (fstype: ),
+error exit status 32"
+```
 
-    Create a global docker service that removes the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
-    ```
-    docker service create --mode=global --restart-condition none --mount
-    type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker
-    exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
-    ```
-    You can now switch nodes to be kubernetes workers.
+Issuing "dmesg" on the system will show something like the following:
 
-- Kubelets or Calico-node pods are Down
+```
+[366633.029514] EXT4-fs (loop3): Couldn't mount RDWR because of SUSE-unsupported optional feature METADATA_CSUM. Load module with allow_unsupported=1.
+```
+For block volumes, if a specific filesystem is not specified, "ext4" is used as the default to format the volume. "mke2fs" is the util used for formatting and is part of the hyperkube image. The config file for mke2fs is at /etc/mke2fs.conf. The config file by default has the following line for ext4. Note that the features list includes "metadata_csum", which enables storing checksums to ensure filesystem integrity.
 
-    The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages:
-    - Kubelet is unhealthy
-    - Calico-node pod is unhealthy
+```
+[fs_types]...
+ext4 = {features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isizeinode_size = 256}
+```
+"metadata_csum" for ext4 on SLES12 and SLES15 is an "experimental feature" and the kernel does not allow mounting of volumes that have been formatted with "metadata checksum" enabled. In the ucp-kubelet container, mke2fs is configured to enable metadata check-summing while formatting block volumes. The kubelet tries to mount such a block volume, but the kernel denies the mount with exit error 32.
 
-    This is a rare issue, but there is a race condition in UCP today where Docker iptables rules get permanently deleted. This happens when Calico tries to update the iptables state using delete commands passed to iptables-restore while Docker simultaneously updates its iptables state and Calico ends up deleting the wrong rules.
+To resolve this issue on SLES12 and SLES15 hosts, use `sed` to remove the `metadata_csum` feature from the ucp-kubelet container:`sed -i 's/metadata_csum,//g' /etc/mke2fs.conf` This resolution can be automated across your cluster of SLES12 and SLES15 hosts, by creating a Docker swarm service as follows. Note that, for this, the hosts should be in "swarm" mode:
 
-    Rules that are affected:
-    ```
-    /sbin/iptables --wait -I FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+Create a global docker service that removes the "metadata_csum" feature from the mke2fs config file (/etc/mke2fs.conf) in ucp-kubelet container. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
 
-    /sbin/iptables --wait -I FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+```
+docker service create --mode=global --restart-condition none --mount
+type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker
+exec ucp-kubelet "/bin/bash" "-c" "sed -i 's/metadata_csum,//g' /etc/mke2fs.conf"
+```
+You can now switch nodes to be kubernetes workers.
 
-    /sbin/iptables --wait -I  POSTROUTING -s 172.17.0.0/24 ! -o docker0 -j MASQUERADE
-    ```
+#### Kubelets or Calico-node pods are down
 
-    The fix for this issue should be available as a minor version release in Calico and incorporated into UCP in a subsequent patch release.
+The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages:
+- Kubelet is unhealthy
+- Calico-node pod is unhealthy
 
-    Until then as a workaround we recommend:
-    - re-adding the above rules manually or via cron or
-    - restarting Docker
+This is a rare issue, but there is a race condition in UCP today where Docker iptables rules get permanently deleted. This happens when Calico tries to update the iptables state using delete commands passed to iptables-restore while Docker simultaneously updates its iptables state and Calico ends up deleting the wrong rules.
 
-- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error:
-    ```
-    time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
-    ```
-    This is due to an updated selinux context.
-    Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
-    Until `container-selinux-2.99` is available for CentOS7, current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
-    ```
-    $ sudo yum downgrade container-selinux-2.74-1.el7
-    ```
-- Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` ServiceAccount
-   to a `cluster-admin` `ClusterRole`, as shown in the following example:
+Rules that are affected:
 
-      ```
+```
+/sbin/iptables --wait -I FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+/sbin/iptables --wait -I FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+/sbin/iptables --wait -I  POSTROUTING -s 172.17.0.0/24 ! -o docker0 -j MASQUERADE
+```
+
+The fix for this issue should be available as a minor version release in Calico and incorporated into UCP in a subsequent patch release. Until then, as a workaround we recommend:
+- re-adding the above rules manually or via cron or
+- restarting Docker
+
+#### Running the engine with `"selinux-enabled": true` and installing UCP returns the following error
+
+Running the engine with `"selinux-enabled": true` and installing UCP returns the following error:
+
+```
+time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
+```
+This is due to an updated selinux context. Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled. Until `container-selinux-2.99` is available for CentOS7, the current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
+
+```
+$ sudo yum downgrade container-selinux-2.74-1.el7
+```
+#### Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
+
+Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role. The workaround is to create a `ClusterRoleBinding` that binds the `persistent-volume-binder` ServiceAccount to a `cluster-admin` `ClusterRole`, as shown in the following example:
+
+```
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
       metadata:
@@ -303,32 +304,35 @@ In order to optimize user experience and security, support for Internet Explorer
       - kind: ServiceAccount
         name: persistent-volume-binder
         namespace: kube-system
-      ```
+```
 
-- Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
-  - Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
-  ```
-  {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
-  ```
-  - Reason: The failure is because the containerized kubelet in UCP does not contain certain library dependencies (libopeniscsiusr and libcrypto) for iscsiadm version 2.0.876 on SLES 12 and SLES 15.
-  - Workaround: use a swarm service to deploy this change across the cluster as follows:
-    1. Install UCP and have nodes configured as swarm workers.
-    2. Perform iSCSI initiator related configuration on the nodes.
-        - Install packages:
+#### Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
+
+Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors, similar to the following, when there is an attempt to attach the iSCSI-based persistent volume:
+
+```
+{kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
+```
+The failure is because the containerized kubelet in UCP does not contain certain library dependencies (libopeniscsiusr and libcrypto) for iscsiadm version 2.0.876 on SLES 12 and SLES 15.
+
+The workaround is to use a swarm service to deploy this change across the cluster as follows:
+
+1. Install UCP and have nodes configured as swarm workers.
+2. Perform iSCSI initiator related configuration on the nodes.
+  - Install packages:
         ```
         zypper -n install open-iscsi
         ```
-        - Modprobe the relevant kernel modules
+  - Modprobe the relevant kernel modules
         ```
         modprobe iscsi_tcp
         ```
-        - Start the iscsi daemon
+  - Start the iSCSI daemon
         ```
         service start iscsid
         ```
-
-    3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
-        ```
+3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. Use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
+```
         docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && echo /rootfs/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
         4b1qxigqht0vf5y4rtplhygj8
         overall progress: 0 out of 3 tasks
@@ -351,9 +355,9 @@ In order to optimize user experience and security, support for Internet Explorer
         nwnur7r1mq77        hopeful_margulis.2gzhtgazyt3hyjmffq8f2vro4   mavenugo/swarm-exec:17.03.0-ce   user-testkit-4DA6F6-sles-0   Shutdown            Complete 7 minutes ago
         uxd7uxde21gx        hopeful_margulis.ugb24g32knzvvjq9d82jbuba1   mavenugo/swarm-exec:17.03.0-ce   user
         -testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
-        ```
+```
 
-    4. Switch cluster to run Kubernetes workloads. Your cluster is now set to run iSCSI workloads.
+4. Switch the cluster to run Kubernetes workloads. Your cluster is now set to run iSCSI workloads.
 
 ### Components
 
@@ -378,7 +382,12 @@ In order to optimize user experience and security, support for Internet Explorer
 * Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
 
 ### Networking
-* Interlock has been upgraded to version 3.0.0. (ENGCORE-792)
+- Interlock has been upgraded to version 3.0.0. This upgrade includes the following updates:
+  - New Interlock configuration options:
+    - HitlessServiceUpdate: When set to `true`, the proxy service no longer needs to restart when services are updated, reducing service interruptions. The proxy also does not have to restart when services are added or removed, as long as the set of service networks attached to the proxy is unchanged. If secrets or service networks need to be added or removed, the proxy service will restart as in previous releases. (ENGCORE-792)
+    - Networks: Defines a list of networks to which the proxy service will connect at startup. The proxy service will only connect to these networks and will no longer automatically connect to back-end service networks. This allows administrators to control which networks are used to connect to the proxy service and to avoid unnecessary proxy restarts caused by network changes . (ENGCORE-912)
+  - Log an error if the `com.docker.lb.network` label does not match any of the networks to which the service is attached. (ENGCORE-837)
+  - Do not generate an invalid NGINX configuration file if `HTTPVersion` is invalid. (FIELD-2046)
 
 ### Components
 
@@ -394,22 +403,18 @@ In order to optimize user experience and security, support for Internet Explorer
 2019-09-03
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built
-  with Golang 1.12.9.
-* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
-  than 1 replica by default.
+* Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built with Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more than one replica by default.
 
 ### Networking
-* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
-  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Calico has been upgraded to version 3.8.2. For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.8/release-notes/).
 * Interlock has been upgraded to version 2.6.1.
 
 ### Security
 * Upgraded Golang to 1.12.9.
 
 ### UI
-* A warning message will be shown when one attempts to upgrade from 3.1.x to
-  3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
+* A warning message will be shown when one attempts to upgrade from 3.1.x to 3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
 
 ### Components
 
@@ -1862,7 +1867,8 @@ is always used, regardless of which one is actually the best match.
   This doesn't change the behavior of the service.
   * Fixes an issue that caused a healthy `ucp-auth-store` component to be reported as
   unhealthy.
-  * Fixes a race condition causing the labels for the UCP controller container
+  * Fixes a 
+  *  condition causing the labels for the UCP controller container
   to be reset.
   * Fixes an issue causing the `ucp-agent` service to be deployed with the wrong
   architecture on Windows nodes.
