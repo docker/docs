@@ -16,9 +16,9 @@ $> docker save {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }} > i
 ```
 
 > Note
-> 
-> Replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version
-> }}` and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
+>
+> Replace `{{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}`
+> and `{{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}` with the
 > corresponding extension and proxy image if you are not using Nginx.
 
 You should have the following three files:
