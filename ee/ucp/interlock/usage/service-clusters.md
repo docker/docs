@@ -6,7 +6,7 @@ keywords: ucp, interlock, load balancing, routing
 
 ## Configure Proxy Services
 With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
-workers for each region. FOr example, from a manager, run the following commands to pin the proxy services to the ingress workers:
+workers for each region. For example, from a manager, run the following commands to pin the proxy services to the ingress workers:
 
 ```bash
 $> docker service update \
@@ -25,6 +25,12 @@ You are now ready to deploy applications. First, create individual networks for 
 $> docker network create -d overlay demo-east
 $> docker network create -d overlay demo-west
 ```
+
+Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See *Minimizing the number of overlay networks* in [Interlock architecture](https://docs.docker.com/ee/ucp/interlock/architecture/) for more information. 
+
+> Note
+> 
+> Interlock will _only_ connect to the specified networks, and will connect to them all at startup.
 
 Next, deploy the application in the `us-east` service cluster:
 
@@ -120,7 +126,9 @@ map[nodetype:loadbalancer region:us-west]
 
 Next, create an Interlock configuration object that contains multiple extensions with varying service clusters.
 
-< Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
+> Important
+> 
+> The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
 
 If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
 
@@ -185,9 +193,11 @@ PollInterval = "3s"
 EOF
 oqkvv1asncf6p2axhx41vylgt
 ```
-Note that "host" mode networking is used in order to use the same ports (`8080` and `8443`) in the cluster. You cannot use ingress
-networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
-for each service cluster.
+> Note 
+> 
+> "Host" mode networking is used in order to use the same ports (`8080` and `8443`) in the cluster. You cannot use ingress
+> networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
+> for each service cluster.
 
 Next, create a dedicated network for Interlock and the extensions:
 
