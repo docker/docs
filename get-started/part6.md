@@ -7,6 +7,7 @@ description: Deploy your app to production using Docker Engine - Community or EE
 
 ## Prerequisites
 
+
 - [Install Docker](/install/index.md).
 - Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
 - Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).

@@ -10,18 +10,7 @@ notags: true
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Get started with Docker
-
-Try our multi-part walkthrough that covers writing your first app,
-data storage, networking, and swarms, and ends with your app running on
-production servers in the cloud. Total reading time is less than an hour.
-
-[Get started with Docker](/get-started/){: class="button outline-btn"}
-
-</div>
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-## Try Docker Enterprise
+### Docker Enterprise
 
 Run your solution in production with Docker Enterprise to get a
 management dashboard, security scanning, LDAP integration, content signing,
@@ -31,12 +20,13 @@ Docker Enterprise without installing anything.
 [Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
 </div>
-</div>
 
-## Docker products
 
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
+
+### Docker Engine - Enterprise
+
 
 ### Docker Engine - Community
 
@@ -51,22 +41,8 @@ channel for more predictability.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Enterprise
-
-Designed for enterprise development and IT teams who build, ship, and run
-business critical applications in production at scale. Integrated, certified,
-and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker Enterprise comes with enterprise
-[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and 
-orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and 
-securing images in an enterprise grade registry.
-
-[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
-
 </div>
 </div><!-- end row -->
-
-## Run Docker anywhere
 
 <div class="component-container">
     <!--start row-->
