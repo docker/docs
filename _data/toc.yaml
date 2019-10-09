@@ -1019,6 +1019,8 @@ reference:
         title: v1.18 reference
   - title: DTR API
     path: /reference/dtr/2.7/api/
+  - title: Template API reference
+    path: /app-template/api-reference/
   - title: UCP API
     path: /reference/ucp/3.2/api/
   - title: Registry API
@@ -1365,32 +1367,6 @@ manuals:
       title: Install
     - sectiontitle: Cloud
       section:
-      - sectiontitle: Docker for AWS
-        section:
-        - path: /docker-for-aws/why/
-          title: Why Docker for AWS?
-        - path: /docker-for-aws/
-          title: Setup & prerequisites
-        - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
-        - path: /docker-for-aws/scaling/
-          title: Scaling
-        - path: /docker-for-aws/upgrade/
-          title: Upgrading
-        - path: /docker-for-aws/deploy/
-          title: Deploy your app
-        - path: /docker-for-aws/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-aws/load-balancer/
-          title: Load balancer
-        - path: /docker-for-aws/faqs/
-          title: FAQs
-        - path: /docker-for-aws/opensource/
-          title: Open source licensing
-        - path: /docker-for-aws/release-notes/
-          title: Release notes
-        - path: /docker-for-aws/archive/
-          title: Template archive
       - sectiontitle: Docker for Azure
         section:
         - path: /docker-for-azure/why/
@@ -2694,7 +2670,11 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
-      - sectiontitle: Universal Control Plane
+- sectiontitle: Template
+  section:
+  - path: /app-template/working-with-template/
+    title: Working with Docker Template
+- sectiontitle: Universal Control Plane
   section:
   - path: /ee/ucp/
     title: Universal Control Plane overview
@@ -3976,14 +3956,6 @@ manuals:
     - path: /buildx/working-with-buildx/
       title: Working with Docker Buildx
     - path: /engine/reference/commandline/buildx/
-      title: CLI reference
-  - sectiontitle: Template
-    section:
-    - path: /app-template/working-with-template/
-      title: Working with Docker Template
-    - path: /app-template/api-reference/
-      title: API reference
-    - path: /engine/reference/commandline/template/
       title: CLI reference
 - sectiontitle: Open-source projects
   section:
