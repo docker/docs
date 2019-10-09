@@ -3,46 +3,7 @@ description: Home page for Get Docker
 keywords: Docker, documentation, manual
 landing: true
 title: Get Docker
-notoc: true
-notags: true
 ---
-
-<div class="row">
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Enterprise
-
-Run your solution in production with Docker Enterprise to get a
-management dashboard, security scanning, LDAP integration, content signing,
-multi-cloud support, and more. Click below to test-drive a running instance of
-Docker Enterprise without installing anything.
-
-[Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
-
-</div>
-
-
-<div class="row">
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Engine - Enterprise
-
-
-### Docker Engine - Community
-
-Get started with Docker and experimenting with container-based apps. Docker Engine - Community
-is available on many platforms, from desktop to cloud to server. Build and share
-containers and automate the development pipeline from a single environment.
-Choose the Edge channel to get access to the latest features, or the Stable
-channel for more predictability.
-
-[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
-
-</div>
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-</div>
-</div><!-- end row -->
 
 <div class="component-container">
     <!--start row-->
