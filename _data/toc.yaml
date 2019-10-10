@@ -16,10 +16,8 @@ horizontalnav:
   node: glossary
 
 guides:
-- sectiontitle: Get Docker
-  section:
-  - path: /get-docker/
-    title: Get Docker
+- path: /get-docker/
+  title: Get Docker
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -116,7 +114,7 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Run your app in production
+- sectiontitle: Configure your Docker environment
   section:
   - sectiontitle: Configure all objects
     section:
@@ -2498,7 +2496,7 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
-- sectiontitle: Engine
+- sectiontitle: Docker Engine
   section:
   - path: /engine/release-notes/
     title: Release notes
@@ -2567,7 +2565,7 @@ manuals:
         title: Ubuntu
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
-- sectiontitle: Enterprise
+- sectiontitle: Docker Enterprise
   section:
   - path: /ee/supported-platforms/
     title: About Docker Enterprise
