@@ -16,7 +16,7 @@ the same version of Docker Enterprise.
 
 > Cloud Providers
 >
-> If you are installing on a public cloud platform there is cloud specific UCP
+> If you are installing on a public cloud platform, there is cloud specific UCP
 > installation documentation. For [Microsoft
 > Azure](./cloudproviders/install-on-azure/) this is **mandatory**, for
 > [AWS](./cloudproviders/install-on-aws/) this is optional. 
@@ -94,7 +94,7 @@ To install UCP:
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker Enterprise standard or advanced subscription, or you can test the platform with a free trial license.
+Now that UCP is installed, you need to license it. To use UCP, you are required to have a Docker Enterprise subscription, or you can test the platform with a free trial license.
 
 1.  Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial)
     to get a free trial license.  
