@@ -23,7 +23,7 @@ Desktop for Mac](install.md#download-docker-for-mac).
 ## Stable Releases of 2019
 
 ## Docker Desktop Community 2.1.0.4
-2019-10-07
+2019-10-15
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
