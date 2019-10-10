@@ -25,70 +25,51 @@ This can lead to misconfigurations that are difficult to troubleshoot.
 ### Environment checklist
 Complete the following checks:
 
-- Systems:
+#### Systems
+- Confirm time sync across all nodes (and check time daemon logs for any large time drifting)
+- Check system requirements `PROD=4` `vCPU/16GB` for UCP managers and DTR replicas
+- Review the full UCP/DTR/Engine port requirements
+- Ensure that your cluster nodes meet the minimum requirements
+- Before performing any upgrade, ensure that you meet all minimum requirements listed in [UCP System requirements](/ee/ucp/admin/install/system-requirements/), including port openings (UCP 3.x added more required ports for Kubernetes), memory, and disk space. For example, manager nodes must have at least 8GB of memory.
 
-    - Confirm time sync across all nodes (and check time daemon logs for any large time drifting)
-    - Check system requirements `PROD=4` `vCPU/16GB` for UCP managers and DTR replicas
-    - Review the full UCP/DTR/Engine port requirements
-    - Ensure that your cluster nodes meet the minimum requirements
-    - Before performing any upgrade, ensure that you meet all minimum requirements listed
-    in [UCP System requirements](/ee/ucp/admin/install/system-requirements/), including port openings (UCP 3.x added more
-    required ports for Kubernetes), memory, and disk space. For example, manager nodes must have at least 8GB of memory.
-    > **Note**: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
-    > Azure then please ensure all of the Azure [prerequisites](install-on-azure.md/#azure-prerequisites)
-    > are met.
+> Note
+> 
+> If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
+> Azure, please ensure that all of the Azure [prerequisites](install-on-azure.md/#azure-prerequisites)
+> are met.
 
-- Storage:
+#### Storage
+- Check `/var/` storage allocation and increase if it is over 70% usage.
+- In addition, check all nodes’ local file systems for any disk storage issues (and DTR back-end storage, for example, NFS).
+- If not using Overlay2 storage drivers please take this opportunity to do so, you will find stability there. Note that the transition from Device mapper to Overlay2 is a destructive rebuild.
 
-    - Check `/var/` storage allocation and increase if it is over 70% usage.
-    - In addition, check all nodes’ local filesystems for any disk storage issues (and DTR backend storage, for example, NFS).
-    - If not using Overlay2 storage drivers please take this opportunity to do so, you will find stability there. (Note:
-    The transition from Device mapper to Overlay2 is a destructive rebuild.)
+#### Operating system
+- If cluster nodes OS branch is older (Ubuntu 14.x, RHEL 7.3, etc), consider patching all relevant packages to the most recent (including kernel).
+- Rolling restart of each node before upgrade (to confirm in-memory settings are the same as startup-scripts).
+- Run `check-config.sh` on each cluster node (after rolling restart) for any kernel compatibility issues.
 
-- Operating system:
+#### Procedural
+- Perform Swarm, UCP and DTR backups before upgrading
+- Gather Compose file/service/stack files
+- Generate a UCP Support dump (for point in time) before upgrading
+- Preinstall Engine/UCP/DTR images. If your cluster is offline (with no connection to the internet), then Docker provides tarballs containing all of the required container images [here](/ee/ucp/admin/install/upgrade-offline/). If your cluster is
+online, you can pull the required container images onto your nodes with the following command:
 
-    - If cluster nodes OS branch is older (Ubuntu 14.x, RHEL 7.3, etc), consider patching all relevant packages to the
-    most recent (including kernel).
-    - Rolling restart of each node before upgrade (to confirm in-memory settings are the same as startup-scripts).
-    - Run `check-config.sh` on each cluster node (after rolling restart) for any kernel compatibility issues.
+```bash
+$ docker run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list | xargs -L 1 docker pull
+```
+- Load troubleshooting packages (netshoot, etc)
+- Best order for upgrades: Engine, UCP, and then DTR. Note that the scope of this topic is limited to upgrade instructions for UCP.
 
-- Procedural:
+#### Upgrade strategy
 
-    - Perform a Swarm, UCP and DTR backups pre-upgrade
-    - Gather compose file/service/stack files
-    - Generate a UCP Support dump (for point in time) pre-upgrade
-    - Preload Engine/UCP/DTR images. If your cluster is offline (with no
-      connection to the internet) then Docker provides tarballs containing all
-      of the required container images
-      [here](/ee/ucp/admin/install/upgrade-offline/). If your cluster is
-      online, you can pull the required container images onto your nodes with the
-      following command:
-
-      ```
-      $ docker run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list | xargs -L 1 docker pull
-      ```
-
-    - Load troubleshooting packages (netshoot, etc)
-    - Best order for upgrades: Engine, UCP, and then DTR. Note: The scope of this topic is limited to upgrade instructions for UCP.
-
-- Upgrade strategy:
 For each worker node that requires an upgrade, you can upgrade that node in place or you can replace the node
 with a new worker node. The type of upgrade you perform depends on what is needed for each node:
 
-    - [Automated, in-place cluster upgrade](#automated-in-place-cluster-upgrade): Performed on any
-    manager node. Automatically upgrades the entire cluster.
-    - Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
-    nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
-    advanced than the automated, in-place cluster upgrade.
-        - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. 
-        Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
-        - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment):
-        Performed using the CLI. This type of upgrade allows you to
-        stand up a new cluster in parallel to the current code
-        and cut over when complete. This type of upgrade allows you to join new worker nodes,
-        schedule workloads to run on new nodes, pause, drain, and remove old worker nodes
-        in batches of multiple nodes rather than one at a time, and shut down servers to
-        remove worker nodes. This type of upgrade is the most advanced.
+- [Automated, in-place cluster upgrade](#automated-in-place-cluster-upgrade): Performed on any manager node. Automatically upgrades the entire cluster.
+- Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more advanced than the automated, in-place cluster upgrade.
+  - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
+  - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment): Performed using the CLI. This type of upgrade allows you to stand up a new cluster in parallel to the current code and cut over when complete. This type of upgrade allows you to join new worker nodes, schedule workloads to run on new nodes, pause, drain, and remove old worker nodes in batches of multiple nodes rather than one at a time, and shut down servers to remove worker nodes. This type of upgrade is the most advanced.
 
 ## Back up your cluster
 
@@ -98,6 +79,8 @@ occurs, this makes it easier to find and troubleshoot it.
 [Create a backup](/ee/admin/backup/back-up-ucp/) of your cluster.
 This allows you to recover if something goes wrong during the upgrade process.
 
+> Note
+> 
 > The backup archive is version-specific, so you can't use it during the
 > upgrade process. For example, if you create a backup archive for a UCP 2.2
 > cluster, you can't use the archive file after you upgrade to UCP 3.0.
@@ -114,29 +97,27 @@ Starting with the manager nodes, and then worker nodes:
 2. Upgrade the Docker Engine to version 18.09.0 or higher. See [Upgrade Docker EE](/ee/upgrade/).
 3. Make sure the node is healthy.
 
-    In your browser, navigate to **Nodes** in the UCP web interface,
-    and check that the node is healthy and is part of the cluster.
+> Note
+> 
+> In your browser, navigate to **Nodes** in the UCP web interface, and check that the node is healthy and is part of the cluster.
 
 ## Upgrade UCP
-When upgrading Docker Universal Control Plane (UCP) to version {{ page.ucp_version }}, you can choose from
+When upgrading UCP to version {{ page.ucp_version }}, you can choose from
 different upgrade workflows:
-> **Important**: In all upgrade workflows, manager nodes are automatically upgraded in place. You cannot control the order
-of manager node upgrades.
+
+> Note
+>  
+> In all upgrade workflows, manager nodes are automatically upgraded in place. You cannot control the order
+> of manager node upgrades.
+{: .important}
 
 - [Automated, in-place cluster upgrade](#automated-in-place-cluster-upgrade): Performed on any
 manager node. Automatically upgrades the entire cluster.
 - Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
 nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
 advanced than the automated, in-place cluster upgrade.
-    - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. 
-        Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
-    - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment):
-    Performed using the CLI. This type of upgrade allows you to
-        stand up a new cluster in parallel to the current code
-        and cut over when complete. This type of upgrade allows you to join new worker nodes,
-        schedule workloads to run on new nodes, pause, drain, and remove old worker nodes
-        in batches of multiple nodes rather than one at a time, and shut down servers to
-        remove worker nodes. This type of upgrade is the most advanced.
+  - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI. Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.
+  - [Replace all worker nodes using blue-green deployment](#replace-existing-worker-nodes-using-blue-green-deployment): Performed using the CLI. This type of upgrade allows you to stand up a new cluster in parallel to the current code and cut over when complete. This type of upgrade allows you to join new worker nodes, schedule workloads to run on new nodes, pause, drain, and remove old worker nodes in batches of multiple nodes rather than one at a time, and shut down servers to remove worker nodes. This type of upgrade is the most advanced.
 
 ### Use the CLI to perform an upgrade
 
@@ -208,14 +189,16 @@ The `--manual-worker-upgrade` flag will add an upgrade-hold label to all worker
 nodes. UCP will be constantly monitor this label, and if that label is removed
 UCP will then upgrade the node.
 
-In order to trigger the upgrade on a worker node, you will have to remove the
+To trigger the upgrade on a worker node, you will have to remove the
 label.
 
 ```
 $ docker node update --label-rm com.docker.ucp.upgrade-hold <node name or id>
 ```
 
-(Optional) Joining new worker nodes to the cluster. Once the manager nodes have
+> Optional
+> 
+> Joining new worker nodes to the cluster. Once the manager nodes have
 been upgraded to a new UCP version, new worker nodes can be added to the
 cluster, assuming they are running the corresponding new docker engine
 version.
@@ -234,7 +217,9 @@ This workflow is used to create a parallel environment for a new deployment, whi
 worker node engines without disrupting workloads, and allows traffic to be migrated to the new environment with
 worker node rollback capability. This type of upgrade creates a parallel environment for reduced downtime and workload disruption.
 
-> **Note**: Steps 2 through 6 can be repeated for groups of nodes - you do not have to replace all worker
+> Note
+> 
+> Steps 2 through 6 can be repeated for groups of nodes - you do not have to replace all worker
 nodes in the cluster at one time.
 
 1. Upgrade manager nodes
@@ -304,55 +289,46 @@ nodes in the cluster at one time.
 ### Troubleshooting
 
 - Upgrade compatibility
-
-    - The upgrade command automatically checks for multiple `ucp-worker-agents` before
+  - The upgrade command automatically checks for multiple `ucp-worker-agents` before
       proceeding with the upgrade. The existence of multiple `ucp-worker-agents` might indicate
       that the cluster still in the middle of a prior manual upgrade and you must resolve the
       conflicting node labels issues before proceeding with the upgrade.
-
 - Upgrade failures
-    - For worker nodes, an upgrade failure can be rolled back by changing the node label back
+  - For worker nodes, an upgrade failure can be rolled back by changing the node label back
       to the previous target version. Rollback of manager nodes is not supported.
-
 - Kubernetes errors in node state messages after upgrading UCP
 (from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)
-
-- The following information applies If you have upgraded to UCP 3.0.0 or newer:
-
-    - After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP
+- The following information applies if you have upgraded to UCP 3.0.0 or newer:
+  - After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP
       dashboard with any of the following errors listed:
       ```
       Awaiting healthy status in Kubernetes node inventory
       Kubelet is unhealthy: Kubelet stopped posting node status
       ```
-
-    - Alternatively, you may see other port errors such as the one below in the ucp-controller
+  - Alternatively, you may see other port errors such as the one below in the ucp-controller
       container logs:
       ```
       http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
       ```
-
 - UCP 3.x.x requires additional opened ports for Kubernetes use. For ports that are used by the
 latest UCP versions and the scope of port use, refer to
 [this page](https://docs.docker.com/ee/ucp/admin/install/system-requirements/#ports-used).
-
-    - If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444 and 10250 are
+  - If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444, and 10250 are
     open for Kubernetes traffic.
-
-    - If you have upgraded to UCP 3.1.x, in addition to the ports listed above, do also open
+  - If you have upgraded to UCP 3.1.x, in addition to the ports listed above, also open
     ports 9099 and 12388.
 
 ### Recommended upgrade paths
 
-From UCP 3.0: UCP 3.0 -> UCP 3.1 -> UCP 3.2
-From UCP 2.2: UCP 2.2 -> UCP 3.0 -> UCP 3.1 -> UCP 3.2
+- From UCP 3.0: UCP 3.0 > UCP 3.1 > UCP 3.2
+- From UCP 2.2: UCP 2.2 > UCP 3.0 > UCP 3.1 > UCP 3.2
 
 If you’re running a UCP version earlier than 2.1, first upgrade to the latest
 2.1 version, then upgrade to 2.2. Use the following rules for your upgrade path
 to UCP 2.2:
 
-From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
-From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
+- From UCP 1.1: UCP 1.1 > UCP 2.1 > UCP 2.2
+- From UCP 2.0: UCP 2.0 > UCP 2.1 > UCP 2.2
 
 ## Where to go next
 
