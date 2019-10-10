@@ -12,12 +12,17 @@ UCP is fully supported with Docker providing guidance on the
 [CNI components](https://github.com/projectcalico/cni-plugin).
 
 At install time, UCP can be configured to install an alternative CNI plugin 
-to support alternative use cases. The alternative CNI plugin is certified by 
+to support alternative use cases. The alternative CNI plugin may be certified by 
 Docker and its partners, and published on Docker Hub. UCP components are still 
 fully supported by Docker and respective partners. Docker will provide
 pointers to basic configuration, however for additional guidance on managing third party 
 CNI components, the platform operator will need to refer to the partner documentation 
 or contact that third party.
+
+UCP does manage the version or configuration of alternative CNI plugins.  UCP
+upgrade will not upgrade or reconfigure alternative CNI plugins.  To switch
+between managed and unmanaged CNI plugins or vice versa you must uninstall and
+reinstall UCP.
 
 ## Install an unmanaged CNI plugin on Docker UCP
 
