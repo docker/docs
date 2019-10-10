@@ -75,14 +75,6 @@ swarm mode and make your current machine a swarm manager, then run
 Choose a tab below to see how this plays out in various contexts. We use VMs
 to quickly create a two-machine cluster and turn it into a swarm.
 
-> Docker Machine is in maintenance mode
->
-> This tutorial uses Docker Machine to setup local virtual machines for your cluster.
->  As of July 2018, Docker Machine is in [maintenance mode](https://github.com/docker/machine/issues/4537). 
-> Only bugfixes will be added. Provisioning on a variety of cloud providers 
-> is better achieved using [infrakit](https://github.com/docker/deploykit). 
-{: .important }
-
 ### Create a cluster
 
 <ul class="nav nav-tabs">
