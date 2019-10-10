@@ -13,7 +13,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ## Edge Releases of 2019
 
 ### Docker Desktop Community 2.1.4.0
-2019-10-07
+2019-10-14
 
 [Download](https://download.docker.com/mac/edge/39097/Docker.dmg)
 
@@ -28,8 +28,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
 - Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
-
-### Bug fixes and minor changes
+- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
 
 ### Docker Desktop Community 2.1.3.0
 2019-09-16
