@@ -114,7 +114,7 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Configure your Docker environment
+- sectiontitle: Configure Docker
   section:
   - sectiontitle: Configure all objects
     section:
@@ -144,12 +144,6 @@ guides:
       title: Container networking
     - path: /network/proxy/
       title: Configure Docker to use a proxy server
-  - sectiontitle: Work with external tools
-    section:
-    - path: /config/thirdparty/
-      title: Third-party monitoring tools
-    - path: /config/thirdparty/prometheus/
-      title: Collect Docker metrics with Prometheus
   - sectiontitle: Configure containers
     section:
     - path: /config/containers/start-containers-automatically/
