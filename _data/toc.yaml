@@ -1145,8 +1145,6 @@ manuals:
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
 - sectiontitle: Docker Cluster
   section:
   - path: /cluster/
@@ -1263,8 +1261,6 @@ manuals:
   section:
   - path: /engine/context/working-with-contexts/
     title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
 - sectiontitle: Docker Desktop
   section:
   - sectiontitle: Docker Desktop Enterprise
@@ -2503,31 +2499,31 @@ manuals:
   - sectiontitle: Engine - Community
     section:
     - path: /install/
-      title: Install
-    - sectiontitle: Cloud
+      title: About Docker Engine - Community
+    - sectiontitle: Docker for Azure
       section:
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
+      - path: /docker-for-azure/why/
+        title: Why Docker for Azure?
+      - path: /docker-for-azure/
+        title: Setup & prerequisites
+      - path: /docker-for-azure/upgrade/
+        title: Upgrading
+      - path: /docker-for-azure/deploy/
+        title: Deploy your app
+      - path: /docker-for-azure/persistent-data-volumes/
+        title: Persistent data volumes
+      - path: /docker-for-azure/faqs/
+        title: FAQs
+      - path: /docker-for-azure/opensource/
+        title: Open source licensing
+      - path: /docker-for-azure/release-notes/
+        title: Release notes
+      - path: /docker-for-azure/archive/
+        title: Template archive
     - sectiontitle: Linux
       section:
+      - path: /install/linux/docker-ce/linux-landing/
+        title: Overview
       - path: /install/linux/docker-ce/centos/
         title: CentOS
       - path: /install/linux/docker-ce/debian/
@@ -2553,6 +2549,8 @@ manuals:
       title: Licensing     
     - sectiontitle: Linux
       section:
+      - path: /install/linux/docker-ee/linux-landing/
+        title: Overview
       - path: /install/linux/docker-ee/centos/
         title: CentOS
       - path: /install/linux/docker-ee/oracle/
