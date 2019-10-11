@@ -62,11 +62,11 @@ You must meet the following infrastructure prerequisites to successfully deploy 
   may expose containerized services on a range of underlying ports, resulting in
   a manual process to open an NSG port every time a new containerized service is
   deployed on to the platform. This would only affect workloads deployed on to
-  the Kubernetes orchestrator. To remove this manual step, it is advisable to
-  have an "open" NSG between all IPs on the Azure Subnet passed into UCP at
-  [install time](#install-ucp). To limit exposure, this Azure subnet should be
-  locked down to only be used for Container Host VMs and Kubernetes Pods.
-  Additionally, end users can leverage [Kubernetes Network
+  the Kubernetes orchestrator. It is advisable to have an "open" NSG between
+  all IPs on the Azure Subnet passed into UCP at [install time](#install-ucp).
+  To limit exposure, this Azure subnet should be locked down to only be used
+  for Container Host VMs and Kubernetes Pods.  Additionally, end users can
+  leverage [Kubernetes Network
   Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
   to provide micro segmentation for containerized applications and services.
 

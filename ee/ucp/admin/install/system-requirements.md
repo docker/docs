@@ -61,8 +61,8 @@ indicated as the "Scope" of that port. The three scopes are:
 
 > Note
 >
-> When installing UCP on to Microsoft Azure, an overlay network is not used for
-> Kubernetes, therefore any containerized service deployed onto Kubernetes and
+> When installing UCP on Microsoft Azure, an overlay network is not used for
+> Kubernetes; therefore, any containerized service deployed onto Kubernetes and
 > exposed as a Kubernetes Service may need its corresponding port to be opened
 > on the underlying Azure Network Security Group. For more information see
 > [Installing on
