@@ -16,10 +16,8 @@ horizontalnav:
   node: glossary
 
 guides:
-- sectiontitle: Get Docker
-  section:
-  - path: /get-docker/
-    title: Get Docker
+- path: /get-docker/
+  title: Get Docker
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -116,7 +114,7 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Run your app in production
+- sectiontitle: Configure your Docker environment
   section:
   - sectiontitle: Configure all objects
     section:
@@ -1143,13 +1141,11 @@ samples:
     title: SSHd
 
 manuals:
-- sectiontitle: App
+- sectiontitle: Docker App
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
-- sectiontitle: Cluster
+- sectiontitle: Docker Cluster
   section:
   - path: /cluster/
     title: Overview
@@ -1163,7 +1159,7 @@ manuals:
     title: Cluster file structure
   - path: /cluster/reference/envvars/
     title: Environment variables
-- sectiontitle: Compose
+- sectiontitle: Docker Compose
   section:
   - path: /compose/
     title: Overview of Docker Compose
@@ -1261,13 +1257,11 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Context
+- sectiontitle: Docker Context
   section:
   - path: /engine/context/working-with-contexts/
     title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
-- sectiontitle: Desktop
+- sectiontitle: Docker Desktop
   section:
   - sectiontitle: Docker Desktop Enterprise
     section:
@@ -1357,179 +1351,7 @@ manuals:
       title: Edge release notes
     - path: /docker-for-windows/wsl-tech-preview/
       title: Docker Desktop WSL 2 Tech Preview
-- sectiontitle: Engine
-  section:
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Engine - Community
-    section:
-    - path: /install/
-      title: Install
-    - sectiontitle: Cloud
-      section:
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
-    - title: MacOS
-      path: /docker-for-mac/install/
-      nosync: true
-    - title: Microsoft Windows
-      path: /docker-for-windows/install/
-  - sectiontitle: Engine - Enterprise
-    section:
-    - path: /ee/
-      title: Overview
-    - path: /ee/licensing/
-      title: Licensing     
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ee/centos/
-        title: CentOS
-      - path: /install/linux/docker-ee/oracle/
-        title: Oracle Linux
-      - path: /install/linux/docker-ee/rhel/
-        title: RHEL
-      - path: /install/linux/docker-ee/suse/
-        title: SLES
-      - path: /install/linux/docker-ee/ubuntu/
-        title: Ubuntu
-    - path: /install/windows/docker-ee/
-      title: Microsoft Windows Server
-- sectiontitle: Enterprise
-  section:
-  - path: /ee/supported-platforms/
-    title: About Docker Enterprise
-  - sectiontitle: Manage Docker Enterprise
-    section:
-    - path: /ee/docker-ee-architecture/
-      title: Docker Enterprise Architecture
-    - path: /ee/supported-platforms/
-      title: Supported platforms
-      nosync: true
-    - path: /ee/end-to-end-install/
-      title: Deploy Docker Enterprise
-    - path: /ee/upgrade/
-      title: Upgrade Docker Enterprise
-    - sectiontitle: Back up Docker Enterprise
-      section:
-      - path: /ee/admin/backup/
-        title: Overview
-      - path: /ee/admin/backup/back-up-swarm/
-        title: Back up Docker Swarm
-      - path: /ee/admin/backup/back-up-ucp/
-        title: Back up UCP
-      - path: /ee/admin/backup/back-up-dtr/
-        title: Back up DTR
-      - path: /engine/reference/commandline/cluster_backup/
-        title: Back up clusters with Docker Cluster
-    - sectiontitle: Restore Docker Enterprise
-      section:
-      - path: /ee/admin/restore/
-        title: Overview
-      - path: /ee/admin/restore/restore-swarm/
-        title: Restore Docker Swarm
-      - path: /ee/admin/restore/restore-ucp/
-        title: Restore UCP
-      - path: /ee/admin/restore/restore-dtr/
-        title: Restore DTR
-      - path: /cluster/reference/restore/
-        title: Restore clusters with Docker Cluster
-    - sectiontitle: Disaster Recovery
-      section:
-      - path: /ee/admin/disaster-recovery/
-        title: Overview
-    - path: /ee/enable-client-certificate-authentication/
-      title: Enable client certificate authentication with your PKI
-    - path: /ee/telemetry/
-      title: Manage usage data collection
-  - title: Get support
-    path: /ee/get-support/
-- sectiontitle: Hub
-  section:
-  - title: Docker ID accounts
-    path: /docker-id/
-  - path: /docker-hub/
-    title: Quickstart
-  - sectiontitle: Security and Authentication
-    section:
-    - path: /docker-hub/access-tokens/
-      title: Managing Access Tokens
-    - path: /docker-hub/release-notes/
-      title: Release notes
-    - path: /docker-hub/repos/
-      title: Repositories
-    - path: /docker-hub/official_images/
-      title: Official Images
-    - path: /docker-hub/orgs/
-      title: Teams & Organizations
-    - path: /docker-hub/webhooks/
-      title: Webhooks
-    - path: /docker-hub/slack_integration/
-      title: Slack Integration
-    - path: /docker-hub/upgrade/
-      title: Upgrade your plan
-  - sectiontitle: Automated Builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up Automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in Automated Builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced Automated Builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
-      - path: /docker-hub/builds/classic/
-        title: Classic Automated Builds
-  - sectiontitle: Publisher & Certified Content
-    section:
-    - path: /docker-hub/publish/
-      title: Overview
-    - path: /docker-hub/publish/publish/
-      title: Submit a product for Docker Hub
-    - path: /docker-hub/publish/customer_faq/
-      title: User FAQs
-    - path: /docker-hub/publish/publisher_faq/
-      title: Publisher FAQs
-    - path: /docker-hub/publish/certify-images/
-      title: Certify Images & Plugins
-    - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify Logging Plugins
-    - path: /docker-hub/publish/trustchain/
-      title: Trust Chain
-    - path: /docker-hub/publish/byol/
-      title: Bring Your Own License (BYOL)
-- sectiontitle: Registry
+- sectiontitle: Docker Trusted Registry
   section:
   - path: /ee/dtr/
     title: Docker Trusted Registry overview
@@ -2670,7 +2492,181 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
-- sectiontitle: Template
+- sectiontitle: Docker Engine
+  section:
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Engine - Community
+    section:
+    - path: /install/
+      title: About Docker Engine - Community
+    - sectiontitle: Docker for Azure
+      section:
+      - path: /docker-for-azure/why/
+        title: Why Docker for Azure?
+      - path: /docker-for-azure/
+        title: Setup & prerequisites
+      - path: /docker-for-azure/upgrade/
+        title: Upgrading
+      - path: /docker-for-azure/deploy/
+        title: Deploy your app
+      - path: /docker-for-azure/persistent-data-volumes/
+        title: Persistent data volumes
+      - path: /docker-for-azure/faqs/
+        title: FAQs
+      - path: /docker-for-azure/opensource/
+        title: Open source licensing
+      - path: /docker-for-azure/release-notes/
+        title: Release notes
+      - path: /docker-for-azure/archive/
+        title: Template archive
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/linux-landing/
+        title: Overview
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
+    - title: MacOS
+      path: /docker-for-mac/install/
+      nosync: true
+    - title: Microsoft Windows
+      path: /docker-for-windows/install/
+  - sectiontitle: Engine - Enterprise
+    section:
+    - path: /ee/
+      title: Overview
+    - path: /ee/licensing/
+      title: Licensing     
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ee/linux-landing/
+        title: Overview
+      - path: /install/linux/docker-ee/centos/
+        title: CentOS
+      - path: /install/linux/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /install/linux/docker-ee/rhel/
+        title: RHEL
+      - path: /install/linux/docker-ee/suse/
+        title: SLES
+      - path: /install/linux/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /install/windows/docker-ee/
+      title: Microsoft Windows Server
+- sectiontitle: Docker Enterprise
+  section:
+  - path: /ee/supported-platforms/
+    title: About Docker Enterprise
+  - sectiontitle: Manage Docker Enterprise
+    section:
+    - path: /ee/docker-ee-architecture/
+      title: Docker Enterprise Architecture
+    - path: /ee/supported-platforms/
+      title: Supported platforms
+      nosync: true
+    - path: /ee/end-to-end-install/
+      title: Deploy Docker Enterprise
+    - path: /ee/upgrade/
+      title: Upgrade Docker Enterprise
+    - sectiontitle: Back up Docker Enterprise
+      section:
+      - path: /ee/admin/backup/
+        title: Overview
+      - path: /ee/admin/backup/back-up-swarm/
+        title: Back up Docker Swarm
+      - path: /ee/admin/backup/back-up-ucp/
+        title: Back up UCP
+      - path: /ee/admin/backup/back-up-dtr/
+        title: Back up DTR
+      - path: /engine/reference/commandline/cluster_backup/
+        title: Back up clusters with Docker Cluster
+    - sectiontitle: Restore Docker Enterprise
+      section:
+      - path: /ee/admin/restore/
+        title: Overview
+      - path: /ee/admin/restore/restore-swarm/
+        title: Restore Docker Swarm
+      - path: /ee/admin/restore/restore-ucp/
+        title: Restore UCP
+      - path: /ee/admin/restore/restore-dtr/
+        title: Restore DTR
+      - path: /cluster/reference/restore/
+        title: Restore clusters with Docker Cluster
+    - sectiontitle: Disaster Recovery
+      section:
+      - path: /ee/admin/disaster-recovery/
+        title: Overview
+    - path: /ee/enable-client-certificate-authentication/
+      title: Enable client certificate authentication with your PKI
+    - path: /ee/telemetry/
+      title: Manage usage data collection
+  - title: Get support
+    path: /ee/get-support/
+- sectiontitle: Docker Hub
+  section:
+  - title: Docker ID accounts
+    path: /docker-id/
+  - path: /docker-hub/
+    title: Quickstart
+  - sectiontitle: Security and Authentication
+    section:
+    - path: /docker-hub/access-tokens/
+      title: Managing Access Tokens
+    - path: /docker-hub/release-notes/
+      title: Release notes
+    - path: /docker-hub/repos/
+      title: Repositories
+    - path: /docker-hub/official_images/
+      title: Official Images
+    - path: /docker-hub/orgs/
+      title: Teams & Organizations
+    - path: /docker-hub/webhooks/
+      title: Webhooks
+    - path: /docker-hub/slack_integration/
+      title: Slack Integration
+    - path: /docker-hub/upgrade/
+      title: Upgrade your plan
+  - sectiontitle: Automated Builds
+    section:
+      - path: /docker-hub/builds/
+        title: Set up Automated builds
+      - path: /docker-hub/builds/automated-testing/
+        title: Testing in Automated Builds
+      - path: /docker-hub/builds/advanced/
+        title: Advanced Automated Builds
+      - path: /docker-hub/builds/link-source/
+        title: Link to GitHub and BitBucket
+      - path: /docker-hub/builds/classic/
+        title: Classic Automated Builds
+  - sectiontitle: Publisher & Certified Content
+    section:
+    - path: /docker-hub/publish/
+      title: Overview
+    - path: /docker-hub/publish/publish/
+      title: Submit a product for Docker Hub
+    - path: /docker-hub/publish/customer_faq/
+      title: User FAQs
+    - path: /docker-hub/publish/publisher_faq/
+      title: Publisher FAQs
+    - path: /docker-hub/publish/certify-images/
+      title: Certify Images & Plugins
+    - path: /docker-hub/publish/certify-plugins-logging/
+      title: Certify Logging Plugins
+    - path: /docker-hub/publish/trustchain/
+      title: Trust Chain
+    - path: /docker-hub/publish/byol/
+      title: Bring Your Own License (BYOL)
+- sectiontitle: Docker Template
   section:
   - path: /app-template/working-with-template/
     title: Working with Docker Template
