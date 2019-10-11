@@ -82,6 +82,41 @@ compatibility reasons.
 
 * Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [docker/engine#378](https://github.com/docker/engine/pull/378)
 
+### Known Issues
+
+#### New
+
+* `DOCKER-USER` iptables chain is missing: [docker/for-linux#810](https://github.com/docker/for-linux/issues/810).
+  Users cannot perform additional container network traffic filtering on top of
+  this iptables chain. You are not affected by this issue if you are not
+  customizing iptable chains on top of `DOCKER-USER`.
+     - **Workaround:** Insert the iptables chain after the docker daemon starts.
+       For example:
+       ```
+       iptables -N DOCKER-USER
+       iptables -I FORWARD -j DOCKER-USER
+       iptables -A DOCKER-USER -j RETURN
+       ```
+
+#### Existing
+
+* In some circumstances with large clusters, docker information might, as part of the Swarm section,
+  include the error `code = ResourceExhausted desc = grpc: received message larger than
+  max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
+  and requires no response.
+* Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager
+  requests in a short amount of time, some services are not able to receive traffic and are causing a `404`
+  error after being deployed.
+     - **Workaround:** restart all tasks via `docker service update --force`.
+* [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
+* `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
+* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
+
+     - **Workaround options:**
+         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
+         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
+         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
+
 ## 19.03.2
 2019-09-03
 
@@ -125,7 +160,7 @@ compatibility reasons.
 
 ### Known issues
 
-* In some circumstances, in large clusters, docker information might, as part of the Swarm section,
+* In some circumstances with large clusters, docker information might, as part of the Swarm section,
   include the error `code = ResourceExhausted desc = grpc: received message larger than
   max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
   and requires no response.
@@ -137,7 +172,7 @@ compatibility reasons.
 * Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
   The missing rules are :
      ```
-     sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+     /sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      ```
      - Workaround: Add these rules back using a script and cron definitions. The script
@@ -174,7 +209,7 @@ compatibility reasons.
  * Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
  The missing rules are :
      ```
-     sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+     /sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      ```
      - Workaround: Add these rules back using a script and cron definitions. The script
@@ -358,7 +393,7 @@ https://docs.docker.com/engine/deprecated/ for target removal dates.
 
 ### Known issues
 
-* In some circumstances, in large clusters, docker information might, as part of the Swarm section,
+* In some circumstances with large clusters, docker information might, as part of the Swarm section,
 include the error `code = ResourceExhausted desc = grpc: received message larger than
 max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
 and requires no response.
@@ -370,7 +405,7 @@ error after being deployed.
 * Traffic cannot egress the HOST because of missing Iptables rules in the FORWARD chain
 The missing rules are :
     ```
-    sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    /sbin/iptables --wait -C FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     /sbin/iptables --wait -C FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     ```
     - Workaround: Add these rules back using a script and cron definitions. The script
