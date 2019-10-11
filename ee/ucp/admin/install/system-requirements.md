@@ -16,7 +16,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
- 
+
 ### Minimum requirements
 
 * 8GB of RAM for manager nodes
@@ -59,6 +59,15 @@ indicated as the "Scope" of that port. The three scopes are:
 - Internal: Traffic arrives from other hosts in the same cluster.
 - Self: Traffic arrives to that port only from processes on the same host.
 
+> Note
+>
+> When installing UCP on Microsoft Azure, an overlay network is not used for
+> Kubernetes; therefore, any containerized service deployed onto Kubernetes and
+> exposed as a Kubernetes Service may need its corresponding port to be opened
+> on the underlying Azure Network Security Group. For more information see
+> [Installing on
+> Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure/#azure-prerequisites).
+
 Make sure the following ports are open for incoming traffic on the respective
 host types:
 
@@ -87,10 +96,10 @@ host types:
 | managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                   |
 
 ## Disable `CLOUD_NETCONFIG_MANAGE` for SLES 15
-For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE` 
+For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE`
 prior to installing UCP.
 
-    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set 
+    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set
     ```
     CLOUD_NETCONFIG_MANAGE="no"
     ```
