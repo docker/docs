@@ -12,7 +12,7 @@ redirect_from:
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
 
-You can then use [the upgrade instructions](admin/upgrade.md),
+You can then use [the upgrade instructions](admin/upgrade.md)
 to upgrade your installation to the latest release.
 
 * [Version 2.7](#version-27)
@@ -37,6 +37,19 @@ push mirrored to a remote DTR. (docker/dhe-deploy #10676)
 
 * Bumped the version of the Alpine base images from `3.9` to `3.10`. (docker/dhe-deploy #10716)
 
+### Known issues
+
+#### New
+* Immediately after updating a license, it looks like no license exists.
+  * Workaround: Refresh the page.
+
+#### Existing
+* The tags tab takes a long time to load, and the security scan details of a tag can take even longer.
+* Application mirroring to and from Docker Hub does not work, as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will not give the appropriate error message, and the save button will stay in a loading state.
+    * Workaround: Refresh the page.
+
 
 ## 2.7.2
 (2019-09-03)
@@ -51,12 +64,36 @@ push mirrored to a remote DTR. (docker/dhe-deploy #10676)
 
 * Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10570)
 
+### Known issues
+
+#### New
+* The tags tab takes a long time to load, and the security scan details of a tag can take even longer.
+
+#### Existing
+* Application mirroring to and from Docker Hub does not work, as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will not give the appropriate error message, and the save button will stay in a loading state.
+    * Workaround: Refresh the page.
+
 ## 2.7.1
 (2019-7-22)
 
 ### Bug fixes
 
 * In 2.7.0, users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
+
+### Known issues
+
+* Application mirroring to and from Docker Hub does not work as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will
+not give the appropriate error message, and the save button will stay in a
+loading state.
+    * Workaround: Refresh the page.
+* After a promotion policy is created, it cannot be edited through the UI.
+    * Workaround: Either delete the promotion policy and re-create it, or use
+    the API to view and edit the promotion policy.
+* Non-admin users cannot create promotion policies through the UI.
 
 ## 2.7.0
 (2019-7-22)
@@ -108,10 +145,9 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * The Application Configuration in the UI says it is an invocation image.
 * When changing your password if an incorrect password is entered the UI will not give the appropriate error message, and the save button will stay in a loading state.
     * Workaround: Refresh the page.
-* After a promotion policy is created they cannot be edited through the UI.
-    * Workaround: Either delete the promotion policy and recreate it. Alternatively, use the API to view and
-    edit the promotion policy.
-* Non admin users cannot create promotion policies through the UI.
+* After a promotion policy is created, it cannot be edited through the UI.
+    * Workaround: Either delete the promotion policy and re-create it, or use the API to view and edit the promotion policy.
+* Non-admin users cannot create promotion policies through the UI.
 
 ### Deprecations
 
