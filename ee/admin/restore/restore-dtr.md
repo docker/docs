@@ -36,7 +36,7 @@ Start by removing any DTR container that is still running:
 
 ```none
 $ docker container run \
-  --rm \
+  --rm -it \
   --interactive \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls
@@ -73,7 +73,7 @@ restore](/reference/dtr/2.7/cli/restore).
 
 ```bash
 $ docker container run \
-  --rm \
+  --rm -it \
   --interactive \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} restore \
