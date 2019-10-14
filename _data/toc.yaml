@@ -2494,6 +2494,22 @@ manuals:
     section:
     - path: /install/
       title: About Docker Engine - Community
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/linux-landing/
+        title: Overview
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
     - sectiontitle: Docker for Azure
       section:
       - path: /docker-for-azure/why/
@@ -2514,22 +2530,6 @@ manuals:
         title: Release notes
       - path: /docker-for-azure/archive/
         title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/linux-landing/
-        title: Overview
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
   - sectiontitle: Engine - Enterprise
     section:
     - path: /ee/
@@ -2648,10 +2648,8 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-- sectiontitle: Docker Template
-  section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
+- path: /app-template/working-with-template/
+  title: Docker Template
 - sectiontitle: Universal Control Plane
   section:
   - path: /ee/ucp/
@@ -3913,7 +3911,7 @@ manuals:
         title: Release notes
 - sectiontitle: Experimental
   section:
-  - sectiontitle: Assemble
+  - sectiontitle: Docker Assemble
     section:
     - path: /assemble/install/
       title: Install
@@ -3927,14 +3925,8 @@ manuals:
       title: Images
     - path: /assemble/adv-backend-manage/
       title: Advanced Backend Management
-    - path: /engine/reference/commandline/assemble/
-      title: CLI reference
-  - sectiontitle: Buildx
-    section:
-    - path: /buildx/working-with-buildx/
-      title: Working with Docker Buildx
-    - path: /engine/reference/commandline/buildx/
-      title: CLI reference
+  - path: /buildx/working-with-buildx/
+    title: Buildx
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Notary
