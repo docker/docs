@@ -28,7 +28,7 @@ VIP mode optimizes for fewer proxy updates in a tradeoff for a reduced feature s
 Most application updates do not require configuring backends in VIP mode.
 
 In VIP routing mode Interlock uses the service VIP (a persistent endpoint that exists from service creation to service deletion) as the proxy backend.
-VIP routing mode was introduced in Universal Control Plane (UCP) 3.0 version 3.0.3 and 3.1 version 3.1.2.
+VIP routing mode was introduced in UCP 3.0 version 3.0.3 and 3.1 version 3.1.2.
 VIP routing mode applies L7 routing and then sends packets to the Swarm L4 load balancer which routes traffic service containers.
 
 ![vip mode](../../images/interlock-vip-mode.png)
@@ -91,21 +91,19 @@ $> docker service create \
 ```
 
 Interlock detects when the service is available and publishes it. After tasks are running
-and the proxy service is updated, the application is available via any url that is not
+and the proxy service is updated, the application is available via any URL that is not
 configured:
 
 
 ![Default Backend](../../images/interlock_default_backend.png)
 
-#### Publish a service using "vip" backend mode.
+#### Publish a service using "vip" backend mode
 
 1. Create an overlay network so that service traffic is isolated and secure:
-
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
-
 2. Create the initial service:
 
 ```bash

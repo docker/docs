@@ -256,18 +256,24 @@ You can back up the swarm using any manager. Use the following procedure.
     results are less predictable when restoring. While the manager is down,
     other nodes continue generating swarm data that is not part of this backup.
 
-    > **Note**: Be sure to maintain the quorum of swarm managers. During the
+    > Note
+    > 
+    > Be sure to maintain the quorum of swarm managers. During the
     > time that a manager is shut down, your swarm is more vulnerable to
     > losing the quorum if further nodes are lost. The number of managers you
     > run is a trade-off. If you regularly take down managers to do backups,
-    > consider running a 5-manager swarm, so that you can lose an additional
+    > consider running a five manager swarm, so that you can lose an additional
     > manager while the backup is running, without disrupting your services.
 
 3.  Back up the entire `/var/lib/docker/swarm` directory.
 
 4.  Restart the manager.
 
-To restore, see [Restore from a backup](#restore-from-a-backup).
+To restore, see [Restore from a backup](#restore-from-a-backup). 
+
+> Note
+> 
+> When trying to restore swarm with UCP installed, swarm mode relies on UCP to provide the CA certificates that allow nodes in the cluster to identify one another.
 
 ## Recover from disaster
 
@@ -285,7 +291,9 @@ restore the data to a new swarm.
 4.  Restore the `/var/lib/docker/swarm` directory with the contents of the
     backup.
 
-    > **Note**: The new node uses the same encryption key for on-disk
+    > Note
+    > 
+    > The new node uses the same encryption key for on-disk
     > storage as the old one. It is not possible to change the on-disk storage
     > encryption keys at this time.
     >
@@ -326,7 +334,7 @@ manager nodes back online. If that is not possible, continue reading for some
 options for recovering your swarm.
 
 In a swarm of `N` managers, a quorum (a majority) of manager nodes must always
-be available. For example, in a swarm with 5 managers, a minimum of 3 must be
+be available. For example, in a swarm with five managers, a minimum of three must be
 operational and in communication with each other. In other words, the swarm can
 tolerate up to `(N-1)/2` permanent failures beyond which requests involving
 swarm management cannot be processed. These types of failures include data

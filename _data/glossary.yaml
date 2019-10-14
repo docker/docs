@@ -218,8 +218,8 @@ overlay storage driver: |
   It is supported by the Docker daemon as a storage driver.
 parent image: |
   An image's **parent image** is the image designated in the `FROM` directive
-  in the image's Dockerfile. All subsequent commands are applied to this parent
-  image. A Dockerfile with no `FROM` directive has no parent image, and is called
+  in the image's Dockerfile. All subsequent commands are based on this parent
+  image. A Dockerfile with the `FROM scratch` directive has no parent image, and is called
   a **base image**.
 persistent storage: |
   Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the lifecycle of the container, allowing a user to retain state.

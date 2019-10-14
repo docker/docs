@@ -94,7 +94,7 @@ The following components are available:
 
 - `subscription`: (Optional) Configuration options for Docker Enterprise
   Subscriptions.
-- `cloudstor`: (Optional) Configuration options for Docker CloudStor.
+- `cloudstor`: (Optional) Configuration options for Docker Cloudstor.
 - `dtr`: (Optional) Configuration options for Docker Trusted Registry.
 - `engine`: (Optional) Configuration options for Docker Engine.
 - `ucp`: (Optional) Configuration options for Docker Universal Control Plane.
@@ -110,10 +110,29 @@ Provide Docker Enterprise subscription information
    `false`
 
 #### cloudstor
-Customizes the installation of Docker Cloudstor.
+Docker Cloudstor is a Docker Swarm Plugin that provides persistent storage to
+Docker Swarm Clusters deployed on to AWS or Azure. By default Docker Cloudstor
+is not installed on Docker Enterprise environments created with Docker Cluster.
 
-- `version`: (Optional) The version of Cloudstor to install.  Default is `1.0`.
-- `use_efs`: (Optional) Specifies whether an Elastic File System should be provisioned. Defaults to `false`.
+```yaml
+cluster:
+  cloudstor:
+    version: '1.0'
+```
+
+For more information on Docker Cloudstor see:
+
+- [Cloudstor for AWS](/docker-for-aws/persistent-data-volumes/)
+- [Cloudstor for Azure](/docker-for-azure/persistent-data-volumes/)
+
+The following optional elements can be specified:
+
+- `version`: (Required) The version of Docker Cloudstor to install. The default
+  is `disabled`. The only released version of Docker Cloudstor at this time is
+  `1.0`.
+- `use_efs`: (Optional) Specifies whether an Elastic File System should be
+  provisioned. By default Docker Cloudstor on AWS uses Elastic Block Store,
+  therefore this value defaults to `false`.
 
 #### dtr
 Customizes the installation of Docker Trusted Registry.

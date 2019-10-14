@@ -5,7 +5,7 @@ keywords: ucp, grant, role, permission, authentication, authorization, resource,
 ---
 
 [Docker Universal Control Plane (UCP)](../index.md),
-the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
+the UI for [Docker Enterprise](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
 permissions against resource sets.
 
@@ -131,8 +131,10 @@ Persistent Volumes using the following storage classes:
     Local storage class allows a user to mount directorys from the host into a
     pod. This could be a file, a directory, or even the Docker Socket. 
   
-  > Note: If an Admin has created a persistent volume with the local storage
-  > class, a non-admin could consume this via a persitent volume claim. 
+  > Note
+  > 
+  > If an admin has created a persistent volume with the local storage
+  > class, a non-admin could consume this via a persistent volume claim. 
 
 If a user without a cluster admin role tries to deploy a pod with any of these
 privileged options, an error similar to the following example is displayed:

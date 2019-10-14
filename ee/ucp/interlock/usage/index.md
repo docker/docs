@@ -94,6 +94,7 @@ networks:
 
 Note that:
 
+* Docker Compose files _must_ reference networks as external. Include `external:true` in the `docker-compose.yml` file.
 * The `com.docker.lb.hosts` label defines the hostname for the service. When
 the layer 7 routing solution gets a request containing `app.example.org` in
 the host header, that request is forwarded to the demo service.

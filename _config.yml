@@ -111,7 +111,7 @@ defaults:
   - scope:
       path: "install"
     values:
-      win_latest_build: "docker-19.03.2"
+      win_latest_build: "docker-19.03.3"
   - scope:
       path: "datacenter"
     values:
@@ -125,7 +125,7 @@ defaults:
       dtr_org: "docker"
       dtr_repo: "dtr"
       ucp_version: "3.2.1"
-      dtr_version: "2.7.2"
+      dtr_version: "2.7.3"
   # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
@@ -133,7 +133,7 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.9"
+      dtr_version: "2.6.10"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
@@ -178,21 +178,21 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.10"
+      ucp_version: "3.1.11"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.14"
+      ucp_version: "3.0.15"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.21"
+      ucp_version: "2.2.22"
   - scope:
       path: "datacenter/ucp/2.1"
     values:

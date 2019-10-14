@@ -127,20 +127,18 @@ guides:
         title: FAQ
 - sectiontitle: Get started
   section:
-  - sectiontitle: Get started with Docker
+  - sectiontitle: Quickstart
     section:
-    - title: "Part 1: Orientation"
+    - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Containers"
+    - title: "Part 2: Containerizing an Application"
       path: /get-started/part2/
-    - title: "Part 3: Services"
+    - title: "Part 3: Deploying to Kubernetes"
       path: /get-started/part3/
-    - title: "Part 4: Swarms"
+    - title: "Part 4: Deploying to Swarm"
       path: /get-started/part4/
-    - title: "Part 5: Stacks"
+    - title: "Part 5: Sharing Images on Docker Hub"
       path: /get-started/part5/
-    - title: "Part 6: Deploy your app"
-      path: /get-started/part6/
   - path: /engine/docker-overview/
     title: Docker overview
 - sectiontitle: Develop with Docker
@@ -1257,9 +1255,6 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- sectiontitle: Library references
-  section:
-  - generateTOC: library
 - sectiontitle: Sample applications
   section:
   - path: /samples/
@@ -1282,6 +1277,8 @@ samples:
     title: Riak
   - path: /engine/examples/running_ssh_service/
     title: SSHd
+- path: /samples/#library-references
+  title: Library references
 
 manuals:
 - sectiontitle: Docker Enterprise
@@ -1445,9 +1442,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Docker Enterprise Standard use case
+          title: Access control design  
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Docker Enterprise Advanced use case
+          title: Access control design using additional security requirements 
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
@@ -1513,7 +1510,7 @@ manuals:
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference.md/
+            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Implementing redirects
             path: /ee/ucp/interlock/usage/redirects/
           - title: Implementing a service cluster
@@ -1560,7 +1557,7 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/
         - title: Install Ingress
           path: /ee/ucp/kubernetes/cluster-ingress/install/
-        - title: Deploy Simple Application
+        - title: Deploy a Sample Application
           path: /ee/ucp/kubernetes/cluster-ingress/ingress/
         - title: Deploy a Canary Deployment
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
@@ -2601,9 +2598,9 @@ manuals:
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
-          title: Disable persistent cookies
-        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
           title: Enable single sign-on
+        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
+          title: Disable persistent cookies
         - sectiontitle: External storage
           section:
           - path: /ee/dtr/admin/configure/external-storage/
@@ -3994,6 +3991,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - sectiontitle: Security and Authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Managing Access Tokens
   - path: /docker-hub/release-notes/
     title: Release notes
   - path: /docker-hub/repos/
@@ -4038,6 +4039,8 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or an organization
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary

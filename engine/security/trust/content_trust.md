@@ -84,7 +84,7 @@ The following image depicts the various signing keys and their relationships:
 
 ![Content Trust components](images/trust_components.png)
 
->**WARNING**:
+> **WARNING**:
 > Loss of the root key is **very difficult** to recover from.
 >Correcting this loss requires intervention from [Docker
 >Support](https://support.docker.com) to reset the repository state. This loss
@@ -99,7 +99,8 @@ read how to [manage keys for DCT](trust_key_mng.md).
 
 ## Signing Images with Docker Content Trust
 
-> Note this applies to Docker Community Engine 17.12 and newer, and Docker
+> **Note:**
+> This applies to Docker Community Engine 17.12 and newer, and Docker
 > Enterprise Engine 18.03 and newer.
 
 Within the Docker CLI we can sign and push a container image with the
@@ -217,7 +218,8 @@ Successfully deleted signature for dtr.example.com/admin/demo:1
 
 ## Runtime Enforcement with Docker Content Trust
 
-> Note this only applies to Docker Enterprise Engine 18.09 or newer. This
+> **Note:**
+> This only applies to Docker Enterprise Engine 18.09 or newer. This
 > implementation is also separate from the `only run signed images` feature of
 > [Universal Control Plane](/ee/ucp/admin/configure/run-only-the-images-you-trust/)
 
@@ -233,7 +235,8 @@ Engine Signature Verification prevents the following:
 * `$ docker pull` of an unsigned or altered image.
 * `$ docker build` where the `FROM` image is not signed or is not scratch.
 
-> **Note**: The implicit pulls and runs performed by worker
+> **Note:**
+> The implicit pulls and runs performed by worker
 > nodes for a [Swarm service](/engine/swarm/services.md) on `$ docker service create` and
 > `$ docker service update` are also verified. Tag resolution of services
 > requires that all nodes in the Swarm including managers have content trust
@@ -250,6 +253,9 @@ unsigned images from being imported, loaded, or created.
 DCT is controlled by the Docker Engine's configuration file. By default this is
 found at `/etc/docker/daemon.json`. More details on this file can be found
 [here](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+
+> **Note:**
+> This configuration can be set on Linux machines **only**.
 
 The `content-trust` flag is based around a `mode` variable instructing
 the engine whether to enforce signed images, and a `trust-pinning` variable

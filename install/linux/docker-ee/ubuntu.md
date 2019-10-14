@@ -57,38 +57,10 @@ networks, are preserved. The Docker EE package is now called `docker-ee`.
 
 #### Extra steps for aufs
 
-If your version supports the `aufs` storage driver, you need some preparation
-before installing Docker.
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 or higher</a></li>
-  <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
-</ul>
-<div class="tab-content">
-<div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
-
 For Ubuntu 16.04 and higher, the Linux kernel includes support for overlay2,
 and Docker EE uses it as the default storage driver. If you need
 to use `aufs` instead, you need to configure it manually.
 See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
-
-</div>
-<div id="aufs_prep_trusty" class="tab-pane fade" markdown="1">
-
-Unless you have a strong reason not to, install the
-`linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
-drivers.
-
-```bash
-$ sudo apt-get update
-
-$ sudo apt-get install \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
-```
-
-</div>
-</div> <!-- tab-content -->
 
 ## Install Docker EE
 
@@ -137,13 +109,17 @@ from the repository.
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
 
-   > **Note**: If you need to run something other than Docker EE 2.0, please see the following instructions:
-   > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
-   > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
-   > UCP, and DTR).
+   > **Note**: If you need to run something other than Docker EE 3.0, please
+   > see the following instructions:
+   > * [18.09](https://docs.docker.com/v18.09/ee/supported-platforms/) - Docker
+   >   Enterprise Edition 2.1 (Docker Engine, UCP, and DTR).
+   > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older
+   >   Docker EE Engine only release
+   > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker
+   >   Enterprise Edition 2.0 (Docker Engine, UCP, and DTR).
 
     ```bash
-    $ DOCKER_EE_VERSION=18.09
+    $ DOCKER_EE_VERSION={{ site.docker_ee_version }}
     ```
 
 5.  Add Docker's official GPG key using your customer Docker EE repository URL:
