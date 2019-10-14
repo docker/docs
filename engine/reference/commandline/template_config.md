@@ -2,6 +2,7 @@
 datafolder: application-template
 datafile: docker_template_config
 title: docker template config
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

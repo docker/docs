@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_backup
 title: docker cluster backup
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

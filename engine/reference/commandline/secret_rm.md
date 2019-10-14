@@ -4,6 +4,7 @@ datafile: docker_secret_rm
 title: docker secret rm
 redirect_from:
   - /edge/engine/reference/commandline/secret_rm/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -4,6 +4,7 @@ datafile: docker_exec
 title: docker exec
 redirect_from:
   - /edge/engine/reference/commandline/exec/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
