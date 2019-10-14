@@ -40,7 +40,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     
     The working directory is set to `/code`. While the `WORKDIR` keyword does create a new directory if required, it does so at root. It is therefore preferable to create a directory with `mkdir` before, which allows the container to be run as a different user.
 
-    Next we `COPY` `requirements.txt` into the working directory before `RUN`-ing the `pip install -r requirements.txt` command. The order of copying `requirements.txt` (a list of dependencies to install) before running the install command is commonly used in Docker. It ensures only changes made to `requirements.txt` (or a previous line) would bust the build cache. Without changes the result of the install command can be served from the build cache, greatly speeding up the build time.
+    Next we `COPY` `requirements.txt` into the working directory before `RUN`-ing the `pip install -r requirements.txt` command. The order of copying `requirements.txt` (a list of dependencies to install) before running the install command is commonly used in Dockerfiles. It ensures only changes made to `requirements.txt` (or a previous line) would bust the build cache. Without changes affecting prior lines, the result of the install command can be served from the build cache, greatly speeding up the build time.
     
     Lastly we `COPY` our remaining files from our current directory to our working directory.
     The `COPY` of remaining files is deliberately left until the end, as it means changes to _any_ file would invalidate the cache from that command onwards.
