@@ -32,9 +32,9 @@ open source and we deeply appreciate contributions from our community!
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy.  You can edit a page or
+We really want your feedback, and we've made it easy. You can edit a page or
 request changes in the right column of every page on
-[docs.docker.com](https://docs.docker.com/).  You can also rate each page by
+[docs.docker.com](https://docs.docker.com/). You can also rate each page by
 clicking a link at the footer.
 
 **Only file issues about the documentation in this repository.** One way
@@ -43,11 +43,11 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
-  ask in [https://forums.docker.com](https://forums.docker.com) instead.
+ ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
-  of Docker, or have found a bug in part of Docker, file that issue in
-  the project's code repository.
+ of Docker, or have found a bug in part of Docker, file that issue in
+ the project's code repository.
 
 ## Contributing
 
@@ -316,19 +316,19 @@ Bootstrap JS are loaded.
 
 ### Images
 
-Don't forget to remove images that are no longer used.  Keep the images sorted
+Don't forget to remove images that are no longer used. Keep the images sorted
 in the local `images/` directory, with names that naturally group related images
-together in alphabetical order.  For instance prefer `settings-file-share.png`
+together in alphabetical order. For instance prefer `settings-file-share.png`
 and `settings-proxies.png` to `file-share-settings.png` and
-`proxies-settings.png`.  You may also use numbers, especially in the case of a
+`proxies-settings.png`. You may also use numbers, especially in the case of a
 sequence, e.g., `run-only-the-images-you-trust-1.svg`
 `run-only-the-images-you-trust-2.png` `run-only-the-images-you-trust-3.png`.
 
-When applicable, capture windows rather than rectangular regions.  This
+When applicable, capture windows rather than rectangular regions. This
 eliminates unpleasant background and saves the editors the need to crop.
 
-On Mac, capture windows without shadows.  To this end, once you pressed
-`Command-Shift-4`, press Option while clicking on the window.  To disable
+On Mac, capture windows without shadows. To this end, once you pressed
+`Command-Shift-4`, press Option while clicking on the window. To disable
 shadows once for all, run:
 
 ```bash
@@ -339,8 +339,8 @@ $ killall SystemUIServer  # restart it.
 You can restore shadows later with `-bool FALSE`.
 
 In order to keep the Git repository light, _please_ compress the images
-(losslessly).  On Mac you may use (ImageOptim)[https://imageoptim.com] for
-instance.  Be sure to compress the images *before* adding them to the
+(losslessly). On Mac you may use (ImageOptim)[https://imageoptim.com] for
+instance. Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
 still optimizes the bandwidth during browsing).
 
@@ -363,7 +363,7 @@ If you are using a version of the documentation that is no longer supported, whi
 in Docker Hub. For example, run the following to access `v1.9`:
 
  ```bash
-  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  docker run -it -p 4000:4000 docs/docker.github.io:v1.9
   ```
 
 ## Building archives and the live published docs
@@ -398,7 +398,7 @@ is archived into a version-specific branch like `v17.09`, by doing the following
     ```
 
 2.  Run the `_scripts/fetch-upstream-resources.sh` script. This puts static
-    copies of the files in place that the `master`  build typically fetches
+    copies of the files in place that the `master` build typically fetches
     each build.
 
     ```bash
