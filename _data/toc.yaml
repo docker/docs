@@ -2494,6 +2494,22 @@ manuals:
     section:
     - path: /install/
       title: About Docker Engine - Community
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/linux-landing/
+        title: Overview
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
     - sectiontitle: Docker for Azure
       section:
       - path: /docker-for-azure/why/
@@ -2514,27 +2530,6 @@ manuals:
         title: Release notes
       - path: /docker-for-azure/archive/
         title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/linux-landing/
-        title: Overview
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
-    - title: MacOS
-      path: /docker-for-mac/install/
-      nosync: true
-    - title: Microsoft Windows
-      path: /docker-for-windows/install/
   - sectiontitle: Engine - Enterprise
     section:
     - path: /ee/
@@ -2561,49 +2556,42 @@ manuals:
   section:
   - path: /ee/supported-platforms/
     title: About Docker Enterprise
-  - sectiontitle: Manage Docker Enterprise
+  - path: /ee/docker-ee-architecture/
+    title: Docker Enterprise Architecture
+  - path: /ee/end-to-end-install/
+    title: Install Docker Enterprise
+  - path: /ee/upgrade/
+    title: Upgrade Docker Enterprise
+  - sectiontitle: Back up Docker Enterprise
     section:
-    - path: /ee/docker-ee-architecture/
-      title: Docker Enterprise Architecture
-    - path: /ee/supported-platforms/
-      title: Supported platforms
-      nosync: true
-    - path: /ee/end-to-end-install/
-      title: Deploy Docker Enterprise
-    - path: /ee/upgrade/
-      title: Upgrade Docker Enterprise
-    - sectiontitle: Back up Docker Enterprise
-      section:
-      - path: /ee/admin/backup/
-        title: Overview
-      - path: /ee/admin/backup/back-up-swarm/
-        title: Back up Docker Swarm
-      - path: /ee/admin/backup/back-up-ucp/
-        title: Back up UCP
-      - path: /ee/admin/backup/back-up-dtr/
-        title: Back up DTR
-      - path: /engine/reference/commandline/cluster_backup/
-        title: Back up clusters with Docker Cluster
-    - sectiontitle: Restore Docker Enterprise
-      section:
-      - path: /ee/admin/restore/
-        title: Overview
-      - path: /ee/admin/restore/restore-swarm/
-        title: Restore Docker Swarm
-      - path: /ee/admin/restore/restore-ucp/
-        title: Restore UCP
-      - path: /ee/admin/restore/restore-dtr/
-        title: Restore DTR
-      - path: /cluster/reference/restore/
-        title: Restore clusters with Docker Cluster
-    - sectiontitle: Disaster Recovery
-      section:
-      - path: /ee/admin/disaster-recovery/
-        title: Overview
-    - path: /ee/enable-client-certificate-authentication/
-      title: Enable client certificate authentication with your PKI
-    - path: /ee/telemetry/
-      title: Manage usage data collection
+    - path: /ee/admin/backup/
+      title: Overview
+    - path: /ee/admin/backup/back-up-swarm/
+      title: Back up Docker Swarm
+    - path: /ee/admin/backup/back-up-ucp/
+      title: Back up UCP
+    - path: /ee/admin/backup/back-up-dtr/
+      title: Back up DTR
+    - path: /engine/reference/commandline/cluster_backup/
+      title: Back up clusters with Docker Cluster
+  - sectiontitle: Restore Docker Enterprise
+    section:
+    - path: /ee/admin/restore/
+      title: Overview
+    - path: /ee/admin/restore/restore-swarm/
+      title: Restore Docker Swarm
+    - path: /ee/admin/restore/restore-ucp/
+      title: Restore UCP
+    - path: /ee/admin/restore/restore-dtr/
+      title: Restore DTR
+    - path: /cluster/reference/restore/
+      title: Restore clusters with Docker Cluster
+    - path: /ee/admin/disaster-recovery/
+      title: Disaster recovery
+  - path: /ee/enable-client-certificate-authentication/
+    title: Enable client certificate authentication with your PKI
+  - path: /ee/telemetry/
+    title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
 - sectiontitle: Docker Hub
@@ -2660,10 +2648,8 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-- sectiontitle: Docker Template
-  section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
+- path: /app-template/working-with-template/
+  title: Docker Template
 - sectiontitle: Universal Control Plane
   section:
   - path: /ee/ucp/
@@ -3925,7 +3911,7 @@ manuals:
         title: Release notes
 - sectiontitle: Experimental
   section:
-  - sectiontitle: Assemble
+  - sectiontitle: Docker Assemble
     section:
     - path: /assemble/install/
       title: Install
@@ -3939,17 +3925,11 @@ manuals:
       title: Images
     - path: /assemble/adv-backend-manage/
       title: Advanced Backend Management
-    - path: /engine/reference/commandline/assemble/
-      title: CLI reference
-  - sectiontitle: Buildx
-    section:
-    - path: /buildx/working-with-buildx/
-      title: Working with Docker Buildx
-    - path: /engine/reference/commandline/buildx/
-      title: CLI reference
+  - path: /buildx/working-with-buildx/
+    title: Buildx
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Docker Notary
+  - sectiontitle: Notary
     section:
     - path: /notary/getting_started/
       title: Get started with Notary
