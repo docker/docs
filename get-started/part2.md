@@ -103,10 +103,7 @@ Now that we have some source code and a Dockerfile, it's time to build our first
 
 At this point, we've performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes which we'll study in Part 3 of this tutorial, or to write the stack file that will let us do the same on Docker Swarm, which we discuss in Part 4. 
 
-<<<<<<< HEAD
-=======
 [On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
->>>>>>> 43b79cd8efec8343677fb5a75ac4ce4ca4307038
 
 ## CLI References
 
