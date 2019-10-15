@@ -13,7 +13,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ## Edge Releases of 2019
 
 ### Docker Desktop Community 2.1.4.0
-2019-10-14
+2019-10-15
 
 [Download](https://download.docker.com/win/edge/39097/Docker%20Desktop%20Installer.exe)
 
