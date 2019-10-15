@@ -110,7 +110,7 @@ pipeline {
   post {
     unsuccessful {
       sh """
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"Error in docker.github.io:published build. Please contact the Customer Success Engineering team for help."}' $SLACK
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"Error in Jenkins build. Please contact the Customer Success Engineering team for help."}' $SLACK
       """
     }
   }

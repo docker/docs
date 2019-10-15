@@ -1,18 +1,20 @@
 ---
 title: Deploy a Sample Application with a Canary release (Experimental)
-description: Stage a canary release using weight-based load balancing between multiple backend applications.
+description: Stage a canary release using weight-based load balancing between multiple back-end applications.
 keywords: ucp, cluster, ingress, kubernetes
 ---
 
 {% include experimental-feature.md %}
 
-# Deploy a Sample Application with a Canary release
+## Overview 
 
 This example stages a canary release using weight-based load balancing between
-multiple backend applications.
+multiple back-end applications.
 
-> **Note**: This guide assumes the [Deploy Sample Application](./ingress/)
-> tutorial was followed, with the artefacts still running on the cluster. If
+> Note
+> 
+> This guide assumes the [Deploy Sample Application](./ingress/)
+> tutorial was followed, with the artifacts still running on the cluster. If
 > they are not, please go back and follow this guide.
 
 The following schema is used for this tutorial:
@@ -20,21 +22,16 @@ The following schema is used for this tutorial:
 - 20% of client traffic is sent to the staging v2 service.
 - All test traffic using the header `stage=dev` is sent to the v3 service.
 
-A new Kubernetes manifest file with updated ingress rules can be found
-[here](./yaml/ingress-weighted.yaml)
+A new Kubernetes manifest file with updated ingress rules can be found [here](./yaml/ingress-weighted.yaml).
 
-  1) Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a
-     cluster with Cluster Ingress installed. 
-
-  2) Download the sample Kubernetes manifest file
-
-  ```
-    $ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
-  ```
-
-  3) Deploy the Kubernetes manifest file 
-  
-  ```bash
+1. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a cluster with Cluster Ingress installed. 
+2. Download the sample Kubernetes manifest file.
+```bash
+$ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
+```
+3. Deploy the Kubernetes manifest file.
+ 
+```bash
   $ kubectl apply -f ingress-weighted.yaml
   
   $ kubectl describe vs
@@ -64,14 +61,12 @@ A new Kubernetes manifest file with updated ingress rules can be found
             Number:  8080
           Subset:    v2
         Weight:      20
-    ```
+```
 
 This virtual service performs the following actions:
-
-  - Receives all traffic with host=demo.example.com.
-  - If an exact match for HTTP header `stage=dev` is found, traffic is routed
-      to v3.
-  - All other traffic is routed to v1 and v2 in an 80:20 ratio.
+- Receives all traffic with host=demo.example.com.
+- If an exact match for HTTP header `stage=dev` is found, traffic is routed to v3.
+- All other traffic is routed to v1 and v2 in an 80:20 ratio.
 
 Now we can send traffic to the application to view the applied load balancing
 algorithms.
@@ -92,10 +87,10 @@ $ for i in {1..5}; do curl -H "Host: demo.example.com" http://$IPADDR:$PORT/ping
 ```
 
 The split between v1 and v2 corresponds to the specified criteria. Within the
-v1 service, requests are load-balanced across the 3 backend replicas. v3 does
+v1 service, requests are load-balanced across the three back-end replicas. v3 does
 not appear in the requests.
 
-To send traffic to the 3rd service, we can add the HTTP header `stage=dev`.
+To send traffic to the third service, add the HTTP header `stage=dev`.
 
 ```bash
 for i in {1..5}; do curl -H "Host: demo.example.com" -H "Stage: dev" http://$IPADDR:$PORT/ping; done
@@ -106,8 +101,7 @@ for i in {1..5}; do curl -H "Host: demo.example.com" -H "Stage: dev" http://$IPA
 {"instance":"demo-v3-d88dddb74-9k7qg","version":"v3","metadata":"dev","request_id":"bae52f09-0510-42d9-aec0-ca6bbbaae168"}
 ```
 
-In this case, 100% of the traffic with the stage=dev header is sent to the v3
-service.
+In this case, 100% of the traffic with the `stage=dev` header is sent to the v3 service.
 
 ## Where to go next
 
