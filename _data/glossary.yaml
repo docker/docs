@@ -6,7 +6,8 @@ aufs: |
   Docker supports as a storage backend. It implements the
   [union mount](http://en.wikipedia.org/wiki/Union_mount) for Linux file systems.
 base image: |
-  An image that has no parent is a **base image**.
+  A **base image** has no parent image specified in its Dockerfile. It is created
+  using a Dockerfile with the `FROM scratch` directive.
 boot2docker: |
   [boot2docker](http://boot2docker.io/) is a lightweight Linux distribution made
   specifically to run Docker containers. The boot2docker management tool for Mac
@@ -27,7 +28,7 @@ cgroups: |
 
   *Also known as : control groups*
 cluster: |
-  A cluster is a group of machines that work together to run workloads and provide high availability.		
+  A cluster is a group of machines that work together to run workloads and provide high availability.
 collection: |
   A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
   access control. Collections enable organizing permissions for resources like
@@ -218,8 +219,8 @@ overlay storage driver: |
   It is supported by the Docker daemon as a storage driver.
 parent image: |
   An image's **parent image** is the image designated in the `FROM` directive
-  in the image's Dockerfile. All subsequent commands are applied to this parent
-  image. A Dockerfile with no `FROM` directive has no parent image, and is called
+  in the image's Dockerfile. All subsequent commands are based on this parent
+  image. A Dockerfile with the `FROM scratch` directive uses no parent image, and creates
   a **base image**.
 persistent storage: |
   Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container's file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the lifecycle of the container, allowing a user to retain state.

@@ -56,6 +56,19 @@ You must meet the following infrastructure prerequisites to successfully deploy 
   needed as part of the UCP prerequisites. If you are using a separate Resource
   Group for the networking components, the same Service Principal will need
   `Network Contributor` access to this Resource Group.
+- Kubernetes pods integrate into the underlying Azure networking stack, from
+  an IPAM and routing perspective with the Azure CNI IPAM module. Therefore
+  Azure Network Security Groups (NSG) impact pod to pod communication. End users
+  may expose containerized services on a range of underlying ports, resulting in
+  a manual process to open an NSG port every time a new containerized service is
+  deployed on to the platform. This would only affect workloads deployed on to
+  the Kubernetes orchestrator. It is advisable to have an "open" NSG between
+  all IPs on the Azure Subnet passed into UCP at [install time](#install-ucp).
+  To limit exposure, this Azure subnet should be locked down to only be used
+  for Container Host VMs and Kubernetes Pods.  Additionally, end users can
+  leverage [Kubernetes Network
+  Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+  to provide micro segmentation for containerized applications and services.
 
 UCP requires the following information for the installation:
 
@@ -207,7 +220,7 @@ addresses, from the same Azure Subnet as the hosts, for each Virtual Machine in
 the cluster. However if you have manually attached additional IP addresses
 to the Virtual Machines (via an ARM Template, Azure CLI or Azure Portal) or you
 are deploying in to small Azure subnet (less than /16), an `--azure-ip-count`
-flag can be used at install time. 
+flag can be used at install time.
 
 > Note: Do not set the `--azure-ip-count` variable to a value of less than 6 if
 > you have not manually provisioned additional IP addresses for each Virtual
@@ -216,7 +229,7 @@ flag can be used at install time.
 > to the Virtual Machine's private IP address.
 
 Below are some example scenarios which require the `--azure-ip-count` variable
-to be defined. 
+to be defined.
 
 **Scenario 1 - Manually Provisioned Addresses**
 
@@ -232,16 +245,16 @@ addresses to a custom value due to:
 
 - Primarily using the Swarm Orchestrator
 - Deploying UCP on a small Azure subnet (for example /24)
-- Plan to run a small number of Kubernetes pods on each node. 
+- Plan to run a small number of Kubernetes pods on each node.
 
 For example if you wanted to provision 16 addresses per virtual machine, then
-you would pass `--azure-ip-count 16` into the UCP installation command. 
+you would pass `--azure-ip-count 16` into the UCP installation command.
 
 If you need to adjust this value post-installation, see
 [instructions](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/) on how to download the UCP
 configuration file, change the value, and update the configuration via the API.
 If you reduce the value post-installation, existing virtual machines will not
-be reconciled, and you will have to manually edit the IP count in Azure.  
+be reconciled, and you will have to manually edit the IP count in Azure.
 
 ### Install UCP
 

@@ -32,7 +32,7 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 
 1.  Click on the Docker icon in your menu bar, and navigate to **Repositories -> Create...**. You'll be taken to a Docker Hub page to create a new repository.
 
-2.  Fill out the Repository Name as `bulletin`. Leave all the other options alone for now, and click **Create** at the bottom.
+2.  Fill out the Repository Name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
 
     ![make a repo](images/newrepo.png){:width="100%"}
 

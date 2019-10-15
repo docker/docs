@@ -5,6 +5,7 @@ description: Get oriented on some basics of Docker and install Docker Desktop.
 redirect_from:
 - /getstarted/
 - /get-started/part1/
+- /get-started/part6/
 - /engine/getstarted/
 - /learn/
 - /engine/getstarted/step_one/

@@ -65,7 +65,7 @@ use GET instead.
 
 ## Monitoring vulnerability counts
 
-For those implementations with an EE Advanced subscription, UCP displays image 
+For those implementations with a subscription, UCP displays image 
 vulnerability count data from the DTR image scanning feature. UCP  displays 
 vulnerability counts for containers, Swarm services, pods, and images.
 
