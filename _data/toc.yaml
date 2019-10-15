@@ -34,32 +34,24 @@ guides:
       path: /get-started/part4/
     - title: "Sharing images on Hub"
       path: /get-started/part5/
-- sectiontitle: Develop with Docker
+- sectiontitle: Develop Images
   section:
-    - sectiontitle: Develop your apps on Docker
-      section:
-        - path: /develop/
-          title: App development overview
-        - path: /develop/dev-best-practices/
-          title: App development best practices
-        - sectiontitle: Develop images
-          section:
-          - path: /develop/develop-images/dockerfile_best-practices/
-            title: Best practices for writing Dockerfiles
-          - path: /develop/develop-images/baseimages/
-            title: Create a base image
-          - path: /develop/develop-images/build_enhancements/
-            title: Docker build enhancements for 18.09
-          - path: /develop/develop-images/multistage-build/
-            title: Use multi-stage builds
-          - path: /develop/develop-images/image_management/
-            title: Manage images
-    - sectiontitle: Develop using the Docker Engine SDKs and API
-      section:
-        - path: /develop/sdk/
-          title: Overview
-        - path: /develop/sdk/examples/
-          title: SDK and API examples
+  - path: /develop/
+    title: Image development overview
+  - path: /develop/dev-best-practices/
+    title: Image development best practices
+  - path: /develop/develop-images/dockerfile_best-practices/
+    title: Best practices for writing Dockerfiles
+  - path: /develop/develop-images/baseimages/
+    title: Create a base image
+  - path: /develop/develop-images/multistage-build/
+    title: Use multi-stage builds
+  - path: /develop/develop-images/image_management/
+    title: Manage images
+  - path: /develop/sdk/
+    title: Engine SDK overview
+  - path: /develop/sdk/examples/
+    title: Engine SDK and API examples
 - sectiontitle: Configure networking
   section:
     - path: /network/
@@ -323,11 +315,24 @@ guides:
 reference:
 - sectiontitle: File formats
   section:
+  - path: /cluster/cluster-file/
+    title: Cluster file structure
+  - path: /cluster/reference/envvars/
+    title: Environment variables
+  - sectiontitle: Compose file reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently asked questions
   - title: Dockerfile reference
     path: /engine/reference/builder/
-  - title: Compose file reference
-    path: /compose/compose-file/
-    nosync: true
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
   - sectiontitle: Docker CLI (docker)
@@ -895,10 +900,62 @@ reference:
     path: /engine/reference/commandline/dockerd/
   - title: Machine (docker-machine) CLI
     path: /machine/reference/
-    nosync: true
-  - title: Compose (docker-compose) CLI
-    path: /compose/reference/overview/
-    nosync: true
+  - sectiontitle: Compose (docker-compose) CLI reference
+    section:
+    - path: /compose/reference/overview/
+      title: Overview of docker-compose CLI
+    - path: /compose/reference/envvars/
+      title: CLI environment variables
+    - path: /compose/completion/
+      title: Command-line completion
+    - path: /compose/reference/build/
+      title: build
+    - path: /compose/reference/bundle/
+      title: bundle
+    - path: /compose/reference/config/
+      title: config
+    - path: /compose/reference/create/
+      title: create
+    - path: /compose/reference/down/
+      title: down
+    - path: /compose/reference/events/
+      title: events
+    - path: /compose/reference/exec/
+      title: exec
+    - path: /compose/reference/help/
+      title: help
+    - path: /compose/reference/kill/
+      title: kill
+    - path: /compose/reference/logs/
+      title: logs
+    - path: /compose/reference/pause/
+      title: pause
+    - path: /compose/reference/port/
+      title: port
+    - path: /compose/reference/ps/
+      title: ps
+    - path: /compose/reference/pull/
+      title: pull
+    - path: /compose/reference/push/
+      title: push
+    - path: /compose/reference/restart/
+      title: restart
+    - path: /compose/reference/rm/
+      title: rm
+    - path: /compose/reference/run/
+      title: run
+    - path: /compose/reference/scale/
+      title: scale
+    - path: /compose/reference/start/
+      title: start
+    - path: /compose/reference/stop/
+      title: stop
+    - path: /compose/reference/top/
+      title: top
+    - path: /compose/reference/unpause/
+      title: unpause
+    - path: /compose/reference/up/
+      title: up
   - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.7/cli/
@@ -1149,10 +1206,6 @@ manuals:
     title: Docker Cluster on AWS
   - path: /cluster/azure/
     title: Docker Cluster on Azure
-  - path: /cluster/cluster-file/
-    title: Cluster file structure
-  - path: /cluster/reference/envvars/
-    title: Environment variables
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -1161,74 +1214,6 @@ manuals:
     title: Install Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - sectiontitle: Compose (docker-compose) CLI reference
-    section:
-    - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
-    - path: /compose/reference/build/
-      title: build
-    - path: /compose/reference/bundle/
-      title: bundle
-    - path: /compose/reference/config/
-      title: config
-    - path: /compose/reference/create/
-      title: create
-    - path: /compose/reference/down/
-      title: down
-    - path: /compose/reference/events/
-      title: events
-    - path: /compose/reference/exec/
-      title: exec
-    - path: /compose/reference/help/
-      title: help
-    - path: /compose/reference/kill/
-      title: kill
-    - path: /compose/reference/logs/
-      title: logs
-    - path: /compose/reference/pause/
-      title: pause
-    - path: /compose/reference/port/
-      title: port
-    - path: /compose/reference/ps/
-      title: ps
-    - path: /compose/reference/pull/
-      title: pull
-    - path: /compose/reference/push/
-      title: push
-    - path: /compose/reference/restart/
-      title: restart
-    - path: /compose/reference/rm/
-      title: rm
-    - path: /compose/reference/run/
-      title: run
-    - path: /compose/reference/scale/
-      title: scale
-    - path: /compose/reference/start/
-      title: start
-    - path: /compose/reference/stop/
-      title: stop
-    - path: /compose/reference/top/
-      title: top
-    - path: /compose/reference/unpause/
-      title: unpause
-    - path: /compose/reference/up/
-      title: up
-  - sectiontitle: Compose file reference
-    section:
-    - path: /compose/compose-file/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
   - path: /compose/bundles/
     title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
@@ -2572,8 +2557,6 @@ manuals:
       title: Back up UCP
     - path: /ee/admin/backup/back-up-dtr/
       title: Back up DTR
-    - path: /engine/reference/commandline/cluster_backup/
-      title: Back up clusters with Docker Cluster
   - sectiontitle: Restore Docker Enterprise
     section:
     - path: /ee/admin/restore/
@@ -2648,8 +2631,8 @@ manuals:
       title: Trust Chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-- path: /app-template/working-with-template/
-  title: Docker Template
+- title: Docker Template
+  path: /app-template/working-with-template/
 - sectiontitle: Universal Control Plane
   section:
   - path: /ee/ucp/
