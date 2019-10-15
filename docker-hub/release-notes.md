@@ -13,6 +13,8 @@ known issues for each Docker Hub release.
 
 ### New features
 * **Beta:** Docker Hub now supports [two-factor authentication (2FA)](/docker-hub/2fa). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+> If you lose both your 2FA authentication device and recovery code, you may not be able to recover your account. {: .important }
+
 
 
 ### Enhancements
