@@ -279,7 +279,7 @@ redirect_from:
 title: Get Docker for Ubuntu
 toc_min: 1
 toc_max: 6
-tree: false
+skip_read_time: true
 no_ratings: true
 ---
 ```
