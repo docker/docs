@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_version
 title: docker assemble version
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

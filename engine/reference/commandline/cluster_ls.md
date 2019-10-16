@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_ls
 title: docker cluster ls
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

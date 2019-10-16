@@ -4,8 +4,8 @@ datafile: docker_stack_services
 title: docker stack services
 redirect_from:
   - /edge/engine/reference/commandline/stack_services/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

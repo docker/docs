@@ -4,6 +4,7 @@ datafile: docker_ps
 title: docker ps
 redirect_from:
   - /edge/engine/reference/commandline/ps/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

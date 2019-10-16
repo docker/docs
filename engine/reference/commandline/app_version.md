@@ -2,6 +2,7 @@
 datafolder: docker-app
 datafile: docker_app_version
 title: docker app version
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
