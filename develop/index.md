@@ -15,8 +15,8 @@ most benefits from Docker.
 - Learn to [build an image from a Dockerfile](/get-started/part2.md){: target="_blank" class="_"}
 - Use [multistage builds](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} to keep your images lean
 - Manage application data using [volumes](/engine/admin/volumes/volumes.md) and [bind mounts](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"}
-- [Scale your app](/get-started/part3.md){: target="_blank" class="_"} as a swarm service
-- [Define your app stack](/get-started/part5.md){: target="_blank" class="_"} using a compose file
+- [Scale your app](/get-started/part3.md){: target="_blank" class="_"} with kubernetes
+- [Scale your app](/get-started/part4.md){: target="_blank" class="_"} as a swarm service
 - General application development best practices
 
 ## Learn about language-specific app development with Docker
