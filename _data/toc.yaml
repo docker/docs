@@ -937,8 +937,6 @@ reference:
       title: docker wait
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
-  - title: Machine (docker-machine) CLI
-    path: /machine/reference/
   - sectiontitle: Compose (docker-compose) CLI reference
     section:
     - path: /compose/reference/overview/
@@ -1118,8 +1116,6 @@ reference:
   section:
   - title: Image specification
     path: /registry/spec/manifest-v2-2/
-  - title: Machine drivers
-    path: /machine/drivers/os-base/
   - title: Registry token authentication
     path: /registry/spec/auth/
   - title: Registry storage drivers
