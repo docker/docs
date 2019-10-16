@@ -54,7 +54,7 @@ are trying to upgrade to. [Check the compatibility matrix](https://success.docke
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
 Make sure you are running DTR {{ previous_version }}. If that is not the case,
-[upgrade your installation to the {{ previous_version }} version](../datacenter/dtr/{{ previous_version }}/guides/admin/upgrade/). 
+[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade/). 
 
 ### Step 2. Upgrade DTR
 
