@@ -49,9 +49,6 @@ guides:
   - path: /develop/develop-images/image_management/
     title: Manage images
   - path: /develop/sdk/
-    title: Engine SDK overview
-  - path: /develop/sdk/examples/
-    title: Engine SDK and API examples
 - sectiontitle: Configure networking
   section:
     - path: /network/
@@ -333,6 +330,48 @@ reference:
       title: Frequently asked questions
   - title: Dockerfile reference
     path: /engine/reference/builder/
+  - sectiontitle: Registry reference
+    section:
+    - path: /registry/spec/api/
+      title: Registry HTTP API v2
+    - sectiontitle: Registry image manifests
+      section:
+      - path: /registry/spec/manifest-v2-1/
+        title: Image manifest v 2, schema 1
+      - path: /registry/spec/manifest-v2-2/
+        title: Image manifest v 2, schema 2
+      - path: /registry/spec/deprecated-schema-v1/
+        title: Update deprecated schema v1 images
+    - sectiontitle: Registry storage drivers
+      section:
+      - path: /registry/storage-drivers/
+        title: Storage driver overview
+      - path: /registry/storage-drivers/oss/
+        title: Aliyun OSS storage driver
+      - path: /registry/storage-drivers/filesystem/
+        title: Filesystem storage driver
+      - path: /registry/storage-drivers/gcs/
+        title: GCS storage driver
+      - path: /registry/storage-drivers/inmemory/
+        title: In-memory storage driver
+      - path: /registry/storage-drivers/azure/
+        title: Microsoft Azure storage driver
+      - path: /registry/storage-drivers/s3/
+        title: S3 storage driver
+      - path: /registry/storage-drivers/swift/
+        title: Swift storage driver
+    - sectiontitle: Registry specifications
+      section:
+      - path: /registry/spec/auth/
+        title: Docker Registry token authentication
+      - path: /registry/spec/auth/jwt/
+        title: Token authentication implementation
+      - path: /registry/spec/auth/oauth/
+        title: Oauth2 token authentication
+      - path: /registry/spec/auth/scope/
+        title: Token scope documentation
+      - path: /registry/spec/auth/token/
+        title: Token authentication specification
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
   - sectiontitle: Docker CLI (docker)
@@ -1236,10 +1275,8 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Context
-  section:
-  - path: /engine/context/working-with-contexts/
-    title: Working with Docker Contexts
+- title: Docker Context
+  path: /engine/context/working-with-contexts/
 - sectiontitle: Docker Desktop
   section:
   - sectiontitle: Docker Desktop Enterprise
@@ -1446,9 +1483,6 @@ manuals:
         path: /ee/dtr/admin/disaster-recovery/create-a-backup/
       - title: Restore from a backup
         path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
-    - title: CLI reference
-      path: /reference/dtr/2.7/cli/
-      nosync: true
   - sectiontitle: User guides
     section:
     - sectiontitle: Access DTR
@@ -1505,9 +1539,6 @@ manuals:
       path: /ee/dtr/user/access-tokens/
     - title: Tag pruning
       path: /ee/dtr/user/tag-pruning/
-  - title: API reference
-    path: /reference/dtr/2.7/api/
-    nosync: true
   - path: /ee/dtr/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
@@ -2731,9 +2762,6 @@ manuals:
         title: Troubleshoot with logs
       - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
         title: Troubleshoot configurations
-    - title: CLI reference
-      path: /reference/ucp/3.2/cli/
-      nosync: true
   - sectiontitle: Authorize role-based access
     section:
     - path: /ee/ucp/authorization/
@@ -2884,9 +2912,6 @@ manuals:
         path: /ee/ucp/kubernetes/cluster-ingress/canary/
       - title: Implementing Persistent (sticky) Sessions
         path: /ee/ucp/kubernetes/cluster-ingress/sticky/
-  - title: API reference
-    path: /reference/ucp/3.2/api/
-    nosync: true
   - path: /ee/ucp/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
@@ -3968,48 +3993,6 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
-    - sectiontitle: Registry reference
-      section:
-      - path: /registry/spec/api/
-        title: Registry HTTP API v2
-      - sectiontitle: Registry image manifests
-        section:
-        - path: /registry/spec/manifest-v2-1/
-          title: Image manifest v 2, schema 1
-        - path: /registry/spec/manifest-v2-2/
-          title: Image manifest v 2, schema 2
-        - path: /registry/spec/deprecated-schema-v1/
-          title: Update deprecated schema v1 images
-      - sectiontitle: Registry storage drivers
-        section:
-        - path: /registry/storage-drivers/
-          title: Storage driver overview
-        - path: /registry/storage-drivers/oss/
-          title: Aliyun OSS storage driver
-        - path: /registry/storage-drivers/filesystem/
-          title: Filesystem storage driver
-        - path: /registry/storage-drivers/gcs/
-          title: GCS storage driver
-        - path: /registry/storage-drivers/inmemory/
-          title: In-memory storage driver
-        - path: /registry/storage-drivers/azure/
-          title: Microsoft Azure storage driver
-        - path: /registry/storage-drivers/s3/
-          title: S3 storage driver
-        - path: /registry/storage-drivers/swift/
-          title: Swift storage driver
-      - sectiontitle: Registry specifications
-        section:
-        - path: /registry/spec/auth/
-          title: Docker Registry token authentication
-        - path: /registry/spec/auth/jwt/
-          title: Token authentication implementation
-        - path: /registry/spec/auth/oauth/
-          title: Oauth2 token authentication
-        - path: /registry/spec/auth/scope/
-          title: Token scope documentation
-        - path: /registry/spec/auth/token/
-          title: Token authentication specification
   - sectiontitle: Documentation
     section:
     - path: /opensource/
