@@ -54,7 +54,7 @@ are trying to upgrade to. [Check the compatibility matrix](https://success.docke
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
 Make sure you are running DTR {{ previous_version }}. If that is not the case,
-[upgrade your installation to the {{ previous_version }} version](../{{ previous_version }}/guides/admin/upgrade/). 
+[upgrade your installation to the {{ previous_version }} version](../datacenter/dtr/{{ previous_version }}/guides/admin/upgrade/). 
 
 ### Step 2. Upgrade DTR
 
@@ -102,7 +102,7 @@ If the three attempts fail, you will have to retrigger the `metadatastoremigrati
 ```bash
 curl https://<dtr-external-url>/api/v0/jobs -X POST \
 -u username:accesstoken -H 'Content-Type':'application/json' -d \
-'{"action": "metadatastoremigration"}' 
+'{"action": "metadatastoremigration"}'
 ```
 Alternatively, select **API** from the bottom left navigation pane of the DTR web interface and use the Swagger UI to send your API request.
 
