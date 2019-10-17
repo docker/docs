@@ -101,9 +101,8 @@ the reason each syscall is blocked rather than white-listed.
 | `request_key`       | Prevent containers from using the kernel keyring, which is not namespaced.                                    |
 | `set_mempolicy`     | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                       |
 | `setns`             | Deny associating a thread with a namespace. Also gated by `CAP_SYS_ADMIN`.                                    |
-| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.
-| `socket`, `socketcall` | Used to send or receive packets and for other socket operations. All `socket` and `socketcall` calls are blocked except communication domains `AF_UNIX`, `AF_INET`, `AF_INET6`, `AF_NETLINK`, and `AF_PACKET`. |
-| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                    |
+| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
+| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
 | `swapon`            | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `swapoff`           | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `sysfs`             | Obsolete syscall.                                                                                             |
