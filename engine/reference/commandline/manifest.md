@@ -4,6 +4,7 @@ datafile: docker_manifest
 title: docker manifest
 redirect_from:
   - /edge/engine/reference/commandline/manifest/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

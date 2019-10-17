@@ -5,8 +5,8 @@ title: docker
 redirect_from:
   - /engine/reference/commandline/
   - /edge/engine/reference/commandline/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

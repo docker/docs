@@ -2,6 +2,7 @@
 datafolder: buildx
 datafile: docker_buildx_ls
 title: docker buildx ls
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -4,6 +4,7 @@ datafile: docker_diff
 title: docker diff
 redirect_from:
   - /edge/engine/reference/commandline/diff/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

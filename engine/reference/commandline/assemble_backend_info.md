@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_info
 title: docker assemble backend info
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
