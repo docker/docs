@@ -15,7 +15,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ### Docker Desktop Community 2.1.4.0
 2019-10-15
 
-[Download](https://download.docker.com/mac/edge/39097/Docker.dmg)
+[Download](https://download.docker.com/mac/edge/39357/Docker.dmg)
 
 ### Upgrades
 

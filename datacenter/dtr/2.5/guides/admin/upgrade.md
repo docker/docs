@@ -96,4 +96,4 @@ After upgrading DTR, you need to re-download the vulnerability database.
 
 ## Where to go next
 
-* [Release notes](../release-notes.md)
+* [Release notes](../release-notes/#version-25.md)

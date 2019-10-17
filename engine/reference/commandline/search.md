@@ -4,6 +4,7 @@ datafile: docker_search
 title: docker search
 redirect_from:
   - /edge/engine/reference/commandline/search/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

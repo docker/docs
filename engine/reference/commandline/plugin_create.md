@@ -4,6 +4,7 @@ datafile: docker_plugin_create
 title: docker plugin create
 redirect_from:
   - /edge/engine/reference/commandline/plugin_create/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

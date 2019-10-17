@@ -2,6 +2,7 @@
 datafolder: docker-app
 datafile: docker_app_bundle
 title: docker app bundle
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

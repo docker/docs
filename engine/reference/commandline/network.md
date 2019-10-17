@@ -4,6 +4,7 @@ datafile: docker_network
 title: docker network
 redirect_from:
   - /edge/engine/reference/commandline/network/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

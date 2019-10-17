@@ -4,6 +4,7 @@ datafile: docker_logout
 title: docker logout
 redirect_from:
   - /edge/engine/reference/commandline/logout/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

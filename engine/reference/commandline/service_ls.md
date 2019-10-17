@@ -4,6 +4,7 @@ datafile: docker_service_ls
 title: docker service ls
 redirect_from:
   - /edge/engine/reference/commandline/service_ls/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
