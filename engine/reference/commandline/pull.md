@@ -4,6 +4,7 @@ datafile: docker_pull
 title: docker pull
 redirect_from:
   - /edge/engine/reference/commandline/pull/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

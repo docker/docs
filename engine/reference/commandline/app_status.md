@@ -2,6 +2,7 @@
 datafolder: docker-app
 datafile: docker_app_status
 title: docker app status
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -6,7 +6,7 @@ keywords: ucp, cluster, ingress, kubernetes
 
 {% include experimental-feature.md %}
 
-# Install Cluster Ingress
+## Overview
 
 Cluster Ingress for Kubernetes is currently deployed manually outside of UCP.
 Future plans for UCP include managing the full lifecycle of the Ingress
@@ -18,12 +18,12 @@ Kubernetes deployment manifests.
 If you are installing Cluster Ingress on a UCP cluster that does not have access
 to the Docker Hub, you will need to pre-pull the Ingress container images. If
 your cluster has access to the Docker Hub, you can move on to [deploying cluster
-ingress](#deploy-cluster-ingress)
+ingress](#deploy-cluster-ingress).
 
 Without access to the Docker Hub, you will need to download the container images
 on a workstation with access to the internet. Container images are distributed
-in a `.tar.gz` and can be downloaded at the following
-[URL](https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.tgz).
+in a `.tar.gz` and can be downloaded from 
+[here](https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.tgz).
 
 Once the container images have been downloaded, they would then need to be
 copied on to the hosts in your UCP cluster, and then side loaded in Docker.
@@ -49,34 +49,32 @@ docker/pilot            1.1.2               58b6e18f3545        6 days ago      
 This step deploys the Ingress controller components `istio-pilot` and
 `istio-ingressgateway`. Together, these components act as the control-plane and
 data-plane for ingress traffic. These components are a simplified deployment of
-Istio cluster Ingress functionality. Many other custom K8s resources (CRDs) are
+Istio cluster Ingress functionality. Many other custom Kubernetes resources (CRDs) are
 also created that aid in the Ingress functionality. 
 
-> **Note**: This does not deploy the service mesh capabilities of Istio as its
+> Note
+> 
+> This does not deploy the service mesh capabilities of Istio as its
 > function in UCP is for Ingress.
 
-As Cluster Ingress is not built into UCP in this release, a Cluster Admin will
-need to manually download and apply the following Kubernetes Manifest
-[file](https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml). 
+> Note
+> 
+> As Cluster Ingress is not built into UCP in this release, a Cluster Admin will
+> need to manually download and apply the following Kubernetes Manifest [file](https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml). 
 
-1) Download the Kubernetes manifest yaml 
-
+1. Download the Kubernetes manifest file.
 ```bash
 $ wget https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml
 ```
-2) Source a [UCP Client Bundle](/ee/ucp/user-access/cli/)
-
-3) Deploy the Kubernetes manifest file
-
+2. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/).
+3. Deploy the Kubernetes manifest file.
 ```bash
 $ kubectl apply -f istio-ingress-1.1.2.yaml
 ```
+4. Verify that the installation was successful. It may take 1-2 minutes for all pods to become ready.
 
-4) Check the installation has been completely succesfully. It may take a minute
-   or 2 for all pods to become ready.
-
-```
- kubectl get pods -n istio-system -o wide
+```bash
+$ kubectl get pods -n istio-system -o wide
 NAME                                    READY   STATUS    RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
 istio-ingressgateway-747bc6b4cb-fkt6k   2/2     Running   0          44s   172.0.1.23   manager-02   <none>           <none>
 istio-ingressgateway-747bc6b4cb-gr8f7   2/2     Running   0          61s   172.0.1.25   manager-02   <none>           <none>
@@ -89,16 +87,10 @@ istio-ingressgateway   NodePort    10.96.32.197    <none>        80:33000/TCP,44
 istio-pilot            ClusterIP   10.96.199.152   <none>        15010/TCP,15011/TCP,8080/TCP,15014/TCP                                                       85s   istio=pilot
 ```
 
-5) Test the Ingress Deployment
-
-To test that the Envory proxy is working correclty in the Isitio Gateway pods,
-there is a status port configured on an internal port 15020. From the above
-output we can see that port 15020 is exposed as a Kubernetes NodePort, in the
-output above the NodePort is 34300 put this could be different in each
+Now you can test the Ingress deployment. To test that the Envoy proxy is working correctly in the Istio Gateway pods, there is a status port configured on an internal port 15020. From the above output, we can see that port 15020 is exposed as a Kubernetes NodePort. In the output above, the NodePort is 34300, but this could be different in each
 environment. 
 
-To check the envoy proxy's status, there is a health endpoint at
-`/healthz/ready`.
+To check the envoy proxy's status, there is a health endpoint at `/healthz/ready`.
 
 ```bash
 # Node Port
@@ -124,8 +116,7 @@ $ curl -vvv http://$IPADDR:$PORT/healthz/ready
 * Connection #0 to host 51.141.127.241 left intact
 ```
 
-If the output is `HTTP/1.1 200 OK` Envoy is running correctly, ready to service
-applications.
+If the output is `HTTP/1.1 200 OK`, then Envoy is running correctly, ready to service applications.
 
 ## Where to go next
 

@@ -6,12 +6,14 @@ title: Get started with Docker Cluster on Azure
 
 ## Prerequisites
 
-- Completed installation of [Docker Enterprise 3.0](https://www.docker.com/products/docker-enterprise)
+- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret
   - Subscription UUID
   - Tenant UUID
+- Organizations wishing to provision roles with explicit permissions should refer to [custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles) 
+and [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/azure-permissions.md) for more information.
 
 More information can be found on obtaining these with either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) or through the [Azure Portal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
 
@@ -19,7 +21,7 @@ To securely utilize this Azure credential information, we will create a cluster 
 file which will inject this data into the environment at runtime.  For example, create
 a file named `my-azure-creds.sh` similar to the following containing your credentials:
 
-```
+```bash
 export ARM_CLIENT_ID='aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
 export ARM_CLIENT_SECRET='ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdef='
 export ARM_SUBSCRIPTION_ID='ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'
@@ -27,10 +29,11 @@ export ARM_TENANT_ID='kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'
 ```
 
 This file should be treated as sensitive data with file permissions set appropriately.
-To use this file, we _don't_ source or run this file directly in the shell.  Instead,
+To use this file, we _do not_ source or run this file directly in the shell.  Instead,
 we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
 running cluster:
-```
+
+```bash
 $ export CLUSTER_SECRETS_FILE=~/.my-secrets/my-azure-creds.sh
 $ docker cluster create ....
 ```
@@ -48,41 +51,41 @@ When you create a docker cluster in Azure, the cluster created has:
 Create a file called `cluster.yml` in your directory and paste this in:
 
 ```yaml
-    variable:
-      region: "Azure region to deploy"
-      ucp_password: 
-        type: prompt
-    ​
-    provider:
-      azurerm:
-        region: ${region}
-    ​
-    cluster:
-      engine:
-        version: ee-stable-19.03
-      ucp:
-        version: docker/ucp:3.2.0
-        username: admin
-        password: ${ucp_password}
-      dtr:
-        version: docker/dtr:2.7.1
-    ​
-    resource:
-      azurerm_virtual_machine:
-        managers:
-          quantity: 3
-        registry:
-          quantity: 3
-        workers:
-          quantity: 3
-    
-      azurerm_lb:
-        ucp:
-          instances:
-          - managers
-          ports:
-          - "443:443"
-          - "6443:6443"
+variable:
+  region: "Azure region to deploy"
+  ucp_password: 
+    type: prompt
+
+provider:
+  azurerm:
+    region: ${region}
+
+cluster:
+  engine:
+    version: ee-stable-19.03
+  ucp:
+    version: docker/ucp:3.2.0
+    username: admin
+    password: ${ucp_password}
+  dtr:
+    version: docker/dtr:2.7.1
+
+resource:
+  azurerm_virtual_machine:
+    managers:
+      quantity: 3
+    registry:
+      quantity: 3
+    workers:
+      quantity: 3
+
+  azurerm_lb:
+    ucp:
+      instances:
+      - managers
+      ports:
+      - "443:443"
+      - "6443:6443"
 ```
 
 Provide values for the variable section.  For instance:
@@ -90,7 +93,7 @@ Provide values for the variable section.  For instance:
     region: "centralus"
 
 The values will be substituted in the cluster definition.  This makes it
-easy to define a re-usable cluster definition and then change the variables
+easy to define a reusable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
 Run `docker cluster create --file cluster.yml --name quickstart`
@@ -102,7 +105,7 @@ Run `docker cluster create --file cluster.yml --name quickstart`
     Planning cluster on azurerm                                                  OK
     Creating: [===========>                                              ]  19%  [ ]
 
-After about 5-10 minutes, depending on amount resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:
+After about 5-10 minutes, depending on the number of resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password:
@@ -223,67 +226,70 @@ Docker cluster creates a context on your local machine.  To use this context, an
 
 To verify that the client is connected to the cluster, run `docker version`
 
-    $ docker version
-    Client: Docker Engine - Enterprise
-     Version:           19.03.1
-     API version:       1.40
-     Go version:        go1.12.5
-     Git commit:        f660560
-     Built:             Thu Jul 25 20:56:44 2019
-     OS/Arch:           darwin/amd64
-     Experimental:      false
+```bash
+$ docker version
+Client: Docker Engine - Enterprise
+ Version:           19.03.1
+ API version:       1.40
+ Go version:        go1.12.5
+ Git commit:        f660560
+ Built:             Thu Jul 25 20:56:44 2019
+ OS/Arch:           darwin/amd64
+ Experimental:      false
 
-    Server: Docker Enterprise 3.0
-     Engine:
-      Version:          19.03.1
-      API version:      1.40 (minimum version 1.12)
-      Go version:       go1.12.5
-      Git commit:       f660560
-      Built:            Thu Jul 25 20:57:45 2019
-      OS/Arch:          linux/amd64
-      Experimental:     false
-     containerd:
-      Version:          1.2.6
-      GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
-     runc:
-      Version:          1.0.0-rc8
-      GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
-     docker-init:
-      Version:          0.18.0
-      GitCommit:        fec3683
-     Universal Control Plane:
-      Version:          3.2.0
-      ApiVersion:       1.40
-      Arch:             amd64
-      BuildTime:        Wed Jul 17 23:27:40 UTC 2019
-      GitCommit:        586d782
-      GoVersion:        go1.12.7
-      MinApiVersion:    1.20
-      Os:               linux
-     Kubernetes:
-      Version:          1.14+
-      buildDate:        2019-06-06T16:18:13Z
-      compiler:         gc
-      gitCommit:        7cfcb52617bf94c36953159ee9a2bf14c7fcc7ba
-      gitTreeState:     clean
-      gitVersion:       v1.14.3-docker-2
-      goVersion:        go1.12.5
-      major:            1
-      minor:            14+
-      platform:         linux/amd64
-     Calico:
-      Version:          v3.5.7
-      cni:              v3.5.7
-      kube-controllers: v3.5.7
-      node:             v3.5.7
+Server: Docker Enterprise 3.0
+ Engine:
+  Version:          19.03.1
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.5
+  Git commit:       f660560
+  Built:            Thu Jul 25 20:57:45 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.6
+  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
+ runc:
+  Version:          1.0.0-rc8
+  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+ Universal Control Plane:
+  Version:          3.2.0
+  ApiVersion:       1.40
+  Arch:             amd64
+  BuildTime:        Wed Jul 17 23:27:40 UTC 2019
+  GitCommit:        586d782
+  GoVersion:        go1.12.7
+  MinApiVersion:    1.20
+  Os:               linux
+ Kubernetes:
+  Version:          1.14+
+  buildDate:        2019-06-06T16:18:13Z
+  compiler:         gc
+  gitCommit:        7cfcb52617bf94c36953159ee9a2bf14c7fcc7ba
+  gitTreeState:     clean
+  gitVersion:       v1.14.3-docker-2
+  goVersion:        go1.12.5
+  major:            1
+  minor:            14+
+  platform:         linux/amd64
+ Calico:
+  Version:          v3.5.7
+  cni:              v3.5.7
+  kube-controllers: v3.5.7
+  node:             v3.5.7
 
-    $ docker context use default
-    default
-    Current context is now "default"
+$ docker context use default
+default
+Current context is now "default"
+```
 
 ## Scale a cluster
 
 Open `cluster.yml`.  Change the number of workers to 6:
+
 ```yaml
 resource:
   azurerm_virtual_machine:
@@ -294,6 +300,7 @@ resource:
     workers:
       quantity: 6
 ```
+
 Since the cluster is already created, the next step is to `update` the cluster's
 desired state.  Run  `docker cluster update quickstart --file cluster.yml`
 
@@ -319,6 +326,7 @@ After about 10 minutes the update operation adds the new nodes and joins them to
     e58dd2a77567
 
 A quick `docker cluster inspect e58dd2a77567` will show the worker count increased:
+
 ```yaml
 ...
     workers:
@@ -352,6 +360,7 @@ Provide the passphrase from the backup step to decrypt the UCP backup.
 ## Upgrade a cluster
 
 Open `cluster.yml`.  Change the cluster versions:
+
 ```yaml
 cluster:
   dtr:
@@ -361,6 +370,7 @@ cluster:
   ucp:
     version: docker/ucp:3.2.0
 ```
+
 Run  `docker cluster update quickstart --file cluster.yml `
 
     $ docker cluster update quickstart --file examples/docs.yml
@@ -376,8 +386,8 @@ Run  `docker cluster update quickstart --file cluster.yml `
 
     e58dd2a77567
 
-
 ## Destroy a cluster
+
 When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
     $ docker cluster rm quickstart

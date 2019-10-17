@@ -3,6 +3,7 @@ datafolder: cluster
 datafile: docker_cluster
 title: docker cluster
 redirect_from: /cluster/reference/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

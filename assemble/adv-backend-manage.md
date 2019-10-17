@@ -85,6 +85,6 @@ Pulling image «…»: Success
 Started container "docker-assemble-backend-username" (74476d3fdea7)
 ```
 
-For information regarding the current cache contents, run the command `docker assemble backend cache`.
+For information regarding the current cache contents, run the command `docker assemble backend cache usage`.
 
-To clean the cache, run`docker assemble backend cache purge`.
+To clean the cache, run `docker assemble backend cache purge`.

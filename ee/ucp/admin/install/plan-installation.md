@@ -42,10 +42,10 @@ this.
 
 ## Avoid IP range conflicts
 
-Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.
-Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.
-Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.
-Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.
+Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.  
+Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.  
+Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.  
+Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.  
 Kubernetes `service-cluster-ip-range` - CIDR range for Kubernetes services, default `10.96.0.0/16`.
 
 ### Engine

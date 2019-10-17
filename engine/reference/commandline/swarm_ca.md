@@ -4,8 +4,8 @@ datafile: docker_swarm_ca
 title: docker swarm ca
 redirect_from:
   - /edge/engine/reference/commandline/swarm_ca/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

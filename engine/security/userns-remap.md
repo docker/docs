@@ -125,7 +125,7 @@ avoid these situations.
     Along the same lines, if you disable `userns-remap` you can't access any
     of the resources created while it was enabled.
 
-5.  Check the [limitations](#user-namespace-known-restrictions) on user
+5.  Check the [limitations](#user-namespace-known-limitations) on user
     namespaces to be sure your use case is possible.
 
 ## Enable userns-remap on the daemon
@@ -239,7 +239,7 @@ If you enable user namespaces on the daemon, all containers are started with
 user namespaces enabled by default. In some situations, such as privileged
 containers, you may need to disable user namespaces for a specific container.
 See
-[user namespace known limitations](#user-namespace-known-restrictions)
+[user namespace known limitations](#user-namespace-known-limitations)
 for some of these limitations.
 
 To disable user namespaces for a specific container, add the `--userns=host`

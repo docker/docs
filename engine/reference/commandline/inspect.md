@@ -4,6 +4,7 @@ datafile: docker_inspect
 title: docker inspect
 redirect_from:
   - /edge/engine/reference/commandline/inspect/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

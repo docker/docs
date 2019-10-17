@@ -105,20 +105,20 @@ email address, for example, `jane.doe@subsidiary1.com`.
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users by using an LDAP directory,
-go to the UCP web interface, navigate to the **Admin Settings** page and click
+go to the UCP web interface, navigate to the **Admin Settings** page, and click
 **Authentication & Authorization** to select the method used to create and
-authenticate users.
+authenticate users. [Learn about additional UCP configuration options](../../configure/ucp-configuration-file.md#configuration-options).
 
 ![](../../../images/authentication-authorization.png)
 
-In the **LDAP Enabled** section, click **Yes** to The LDAP settings appear.
+In the **LDAP Enabled** section, click **Yes**. 
 Now configure your LDAP directory integration.
 
 ## Default role for all private collections
 
 Use this setting to change the default permissions of new users.
 
-Click the dropdown to select the permission level that UCP assigns by default
+Click the drop-down menu to select the permission level that UCP assigns by default
 to the private collections of new users. For example, if you change the value
 to `View Only`, all users who log in for the first time after the setting is
 changed have `View Only` access to their private collections, but permissions
@@ -141,13 +141,16 @@ Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
 | Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. If you upgraded from UCP 2.0.x, the default is `false`. |
 
-> **Note**: LDAP connections using certificates created with TLS v1.2 do not currently advertise support for sha512WithRSAEncryption in the TLS handshake which leads to issues establishing connections with some clients. Support for advertising sha512WithRSAEncryption will be added in UCP 3.1.0.
+> Note
+> 
+> LDAP connections using certificates created with TLS v1.2 do not currently advertise support for sha512WithRSAEncryption in the TLS handshake which leads to issues establishing connections with 
+> some clients. Support for advertising sha512WithRSAEncryption will be added in UCP 3.1.0.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
 Click **Confirm** to add your LDAP domain.
 
- To integrate with more LDAP servers, click **Add LDAP Domain**.
+To integrate with more LDAP servers, click **Add LDAP Domain**.
 
 ## LDAP user search configurations
 

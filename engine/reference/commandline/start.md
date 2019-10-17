@@ -4,8 +4,8 @@ datafile: docker_start
 title: docker start
 redirect_from:
   - /edge/engine/reference/commandline/start/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

@@ -89,7 +89,7 @@ Because the private key and certificate are stored as Docker secrets, you can
 easily scale the number of replicas used for running the proxy service. Docker
 distributes the secrets to the replicas.
 
-Set up your CLI client with a [UCP client bundle](../../user-access/cli.md),
+Set up your CLI client with a [UCP client bundle](../../user-access/cli.md)
 and deploy the service:
 
 ```bash
@@ -107,7 +107,7 @@ After creating the DNS entry, you can access your service:
 https://<hostname>:<https-port>
 ```
 
-FOr this example:
+For this example:
 * `hostname` is the name you specified with the `com.docker.lb.hosts` label.
 * `https-port` is the port you configured in the [UCP settings](../deploy/index.md).
 
@@ -135,7 +135,9 @@ using a version of `curl` that includes the SNI header with insecure requests.
 Otherwise, `curl` displays an error saying that the SSL handshake
 was aborted.
 
-> **Note**: Currently there is no way to update expired certificates using this method.
+> Note
+> 
+> Currently there is no way to update expired certificates using this method.
 > The proper way is to create a new secret then update the corresponding service. 
 
 ## Let your service handle TLS

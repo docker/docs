@@ -2,6 +2,7 @@
 datafolder: buildx
 datafile: docker_buildx_inspect
 title: docker buildx inspect
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

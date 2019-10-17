@@ -4,6 +4,7 @@ datafile: docker_attach
 title: docker attach
 redirect_from:
   - /edge/engine/reference/commandline/attach/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
