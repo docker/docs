@@ -4,6 +4,7 @@ datafile: docker_plugin_enable
 title: docker plugin enable
 redirect_from:
   - /edge/engine/reference/commandline/plugin_enable/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -92,19 +92,47 @@ Specifies components to install and configure for a cluster.
 
 The following components are available:
 
-- `subscription`: (Optional) A string value representing the subscription ID.
-- `license`: (Optional) A path to the cluster's license file.
-- `cloudstor`: (Optional) Configuration options for Docker CloudStor.
+- `subscription`: (Optional) Configuration options for Docker Enterprise
+  Subscriptions.
+- `cloudstor`: (Optional) Configuration options for Docker Cloudstor.
 - `dtr`: (Optional) Configuration options for Docker Trusted Registry.
 - `engine`: (Optional) Configuration options for Docker Engine.
 - `ucp`: (Optional) Configuration options for Docker Universal Control Plane.
 - `registry`: (Optional) Configuration options for authenticating nodes with a registry to pull Docker images.
 
-#### cloudstor
-Customizes the installation of Docker Cloudstor.
+#### subscription
+Provide Docker Enterprise subscription information
+-  `id`: (Optional) The subscription UUID for this Docker Enterprise
+   installation `sub-xxxx`.
+-  `license`: (Optional) The absolute path to a local Docker Enterprise license
+   file `/path/to/docker_subscription.lic`.
+-  `trial`: (Optional) Specify if this is a trial subscription. Default is
+   `false`
 
-- `version`: (Optional) The version of Cloudstor to install.  Default is `1.0`.
-- `use_efs`: (Optional) Specifies whether an Elastic File System should be provisioned. Defaults to `false`.
+#### cloudstor
+Docker Cloudstor is a Docker Swarm Plugin that provides persistent storage to
+Docker Swarm Clusters deployed on to AWS or Azure. By default Docker Cloudstor
+is not installed on Docker Enterprise environments created with Docker Cluster.
+
+```yaml
+cluster:
+  cloudstor:
+    version: '1.0'
+```
+
+For more information on Docker Cloudstor see:
+
+- [Cloudstor for AWS](/docker-for-aws/persistent-data-volumes/)
+- [Cloudstor for Azure](/docker-for-azure/persistent-data-volumes/)
+
+The following optional elements can be specified:
+
+- `version`: (Required) The version of Docker Cloudstor to install. The default
+  is `disabled`. The only released version of Docker Cloudstor at this time is
+  `1.0`.
+- `use_efs`: (Optional) Specifies whether an Elastic File System should be
+  provisioned. By default Docker Cloudstor on AWS uses Elastic Block Store,
+  therefore this value defaults to `false`.
 
 #### dtr
 Customizes the installation of Docker Trusted Registry.
@@ -520,10 +548,18 @@ Docker cluster supports basic parameterization. The variable section defines a m
 variable:
   region: "us-east-1"
   password:
-    type: prompt
+    prompt: true
+  instance_type:
+    env: AWS_INSTANCE_TYPE
 ```
 
-Variables are referenced in the cluster definition as `${variable_name}`. For example, `${region}` is substituted as `us-east-2` through the cluster definition.
+Variables are referenced in the cluster definition as `${variable_name}`. For
+example, `${region}` is substituted as `us-east-2` through the cluster
+definition.
 
-The type defines how the variable behaves. This is currently limited in scope to:
-- `prompt`: Requests the value from the user and does not echo characters as the value is entered.
+In addition to providing a literal value for variables, you can specify values
+by:
+
+ - `prompt: true` - Request the value from the user and do not echo characters
+   as the value is entered.
+ - `env`: Obtain the value from an environment variable

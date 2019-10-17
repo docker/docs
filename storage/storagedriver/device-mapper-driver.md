@@ -687,7 +687,7 @@ the Devicemapper configuration itself and about each image and container layer
 that exist. The `devicemapper` storage driver uses snapshots, and this metadata
 include information about those snapshots. These files are in JSON format.
 
-The `/var/lib/devicemapper/mnt/` directory contains a mount point for each image
+The `/var/lib/docker/devicemapper/mnt/` directory contains a mount point for each image
 and container layer that exists. Image layer mount points are empty, but a
 container's mount point shows the container's filesystem as it appears from
 within the container.

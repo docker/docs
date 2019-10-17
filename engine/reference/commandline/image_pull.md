@@ -4,8 +4,8 @@ datafile: docker_image_pull
 title: docker image pull
 redirect_from:
   - /edge/engine/reference/commandline/image_pull/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears
@@ -15,4 +15,3 @@ https://github.com/docker/cli
 -->
 
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}
-

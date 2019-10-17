@@ -4,6 +4,7 @@ datafile: docker_plugin_upgrade
 title: docker plugin upgrade
 redirect_from:
   - /edge/engine/reference/commandline/plugin_upgrade/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

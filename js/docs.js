@@ -98,9 +98,6 @@ function walkTree(tree)
       var subTree = tree[j].section;
       walkTree(subTree);
       outputLetNav.push('</ul></li>');
-    } else if (tree[j].generateTOC) {
-      // auto-generate a TOC from a collection
-      walkTree(collectionsTOC[tree[j].generateTOC])
     } else {
       // just a regular old topic; this is a leaf, not a branch; render a link!
       outputLetNav.push('<li><a href="' + tree[j].path + '"')
@@ -136,15 +133,6 @@ function renderNav(docstoc) {
   }
   if (outputLetNav.length==0)
   {
-    // didn't find the current topic in the standard TOC; maybe it's a collection;
-    for (var key in collectionsTOC)
-    {
-      var itsHere = findMyTopic(collectionsTOC[key]);
-      if (itsHere) {
-        walkTree(collectionsTOC[key]);
-        break;
-      }
-    }
     // either glossary was true or no left nav has been built; default to glossary
     // show pages tagged with term and highlight term in left nav if applicable
     renderTagsPage()
@@ -223,7 +211,10 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-if (readCookie("night") == "true") {
+var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var selectedNightTheme = readCookie("night");
+
+if (selectedNightTheme == "true" || (selectedNightTheme === null && prefersDark)) {
   applyNight();
   $('#switch-style').prop('checked', true);
 } else {
@@ -344,8 +335,7 @@ $('ul.nav li.dropdown').hover(function() {
 //     document.getElementById('pagestyle').setAttribute('href', sheet);
 // }
 
-function applyNight()
-{
+function applyNight() {
   $( "body" ).addClass( "night" );
 }
 
@@ -360,8 +350,7 @@ $('#switch-style').change(function() {
         createCookie("night",true,999)
     } else {
         applyDay();
-    //     swapStyleSheet('/css/style.css');
-        eraseCookie("night")
+        createCookie("night",false,999);
     }
 });
 

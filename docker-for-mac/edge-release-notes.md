@@ -4,21 +4,62 @@ keywords: Docker Desktop for Mac, edge, release notes
 title: Docker Desktop for Mac Edge release notes
 ---
 
-Here are the main improvements and issues per edge release, starting with the
-current release. The documentation is updated for each release.
+This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For system requirements, see
+For information about Stable releases, see the [Stable release
+notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
-
-Release notes for _edge_ releases are listed below, [_stable_ release
-notes](release-notes) are also available. (Following the Docker Engine - Community release model,
-'beta' releases are called 'edge' releases.) You can learn about both kinds of
-releases, and download stable and edge product installers at [Download Docker
-for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2019
 
-This is the Docker Desktop Edge channel, which gives you early access to our newest features. Note that some features may be experimental, and some of the features may not ever reach the Stable release.
+### Docker Desktop Community 2.1.4.0
+2019-10-15
+
+[Download](https://download.docker.com/mac/edge/39357/Docker.dmg)
+
+### Upgrades
+
+- [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
+- [Kubernetes 1.15.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved) for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+
+### Bug fixes and minor changes
+
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
+- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
+
+### Docker Desktop Community 2.1.3.0
+2019-09-16
+
+[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+
+### Docker Desktop Community 2.1.2.0
+2019-09-09
+
+[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+
+#### Upgrades
+
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Qemu 4.0.1](https://github.com/docker/binfmt)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+
+#### Bug fixes and minor changes
+
+- Reduced the Virtual Machine (VM) startup time.
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
 
 ### Docker Desktop Community 2.1.1.0
 2019-08-12

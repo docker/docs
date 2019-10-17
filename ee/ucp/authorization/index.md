@@ -5,7 +5,7 @@ keywords: ucp, grant, role, permission, authentication, authorization, resource,
 ---
 
 [Docker Universal Control Plane (UCP)](../index.md),
-the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
+the UI for [Docker Enterprise](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
 permissions against resource sets.
 
@@ -67,7 +67,7 @@ To control user access, cluster resources are grouped into Docker Swarm
   networks, nodes, services, secrets, and volumes.
 
 - **Kubernetes namespaces**: A
-[namespace](https://v1-11.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
   is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
   namespace for your cluster objects, plus two more namespaces for system and
   public resources. You can create custom namespaces, but unlike Swarm
@@ -131,8 +131,10 @@ Persistent Volumes using the following storage classes:
     Local storage class allows a user to mount directorys from the host into a
     pod. This could be a file, a directory, or even the Docker Socket. 
   
-  > Note: If an Admin has created a persistent volume with the local storage
-  > class, a non-admin could consume this via a persitent volume claim. 
+  > Note
+  > 
+  > If an admin has created a persistent volume with the local storage
+  > class, a non-admin could consume this via a persistent volume claim. 
 
 If a user without a cluster admin role tries to deploy a pod with any of these
 privileged options, an error similar to the following example is displayed:

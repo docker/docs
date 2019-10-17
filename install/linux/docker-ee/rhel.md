@@ -46,22 +46,34 @@ On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `de
 
 ### FIPS 140-2 cryptographic module support
 
-[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules. 
+[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf)
+is a United States Federal security requirement for cryptographic modules.
 
-With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS supported cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+With Docker Engine - Enterprise Basic license for versions 18.03 and later,
+Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a
+FIPS supported cryptographic module. If the RHEL implementation already has FIPS
+support enabled, FIPS is also automatically enabled in the Docker engine. If
+FIPS support is not already enabled in your RHEL implementation, visit the
+[Red Hat Product Documentation](https://access.redhat.com/documentation/en-us/)
+for instructions on how to enable it.
 
-To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file `/proc/sys/crypto/fips_enabled` contains `1`.
+To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file
+`/proc/sys/crypto/fips_enabled` contains `1`.
 
 ```
 $ cat /proc/sys/crypto/fips_enabled
 1
 ```
 
-> **Note**: FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2.
+> **Note**: FIPS is only supported in the Docker Engine Engine - Enterprise. UCP
+> and DTR currently do not have support for FIPS-140-2.
 
-To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
+You can override FIPS 140-2 compliance on a system that is not in FIPS 140-2
+mode. Note, this **does not** change FIPS 140-2 mode on the system. To override
+the FIPS 140-2 mode, follow ths steps below.
 
-Create a file called `/etc/systemd/system/docker.service.d/fips-module.conf`. It needs to contain the following:
+Create a file called `/etc/systemd/system/docker.service.d/fips-module.conf`.
+Add the following:
 
 ```
 [Service]
@@ -76,7 +88,8 @@ Restart the Docker service as root.
 
 `$ sudo systemctl restart docker`
 
-To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info`
+command:
 
 {% raw %}
 ```
@@ -85,13 +98,13 @@ docker info --format {{.SecurityOptions}}
 ```
 {% endraw %}
 
-### Disabling FIPS-140-2 
+### Disabling FIPS-140-2
 
-If the system has the FIPS 140-2 cryptographic module installed on the operating system, 
-it is possible to disable FIPS-140-2 compliance. 
+If the system has the FIPS 140-2 cryptographic module installed on the operating
+system, it is possible to disable FIPS-140-2 compliance.
 
-To disable FIPS 140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0` 
-in the `/etc/systemd/system/docker.service.d/fips-module.conf`.
+To disable FIPS 140-2 in Docker but not the operating system, set the value
+`DOCKER_FIPS=0` in the `/etc/systemd/system/docker.service.d/fips-module.conf`.
 
 Reload the Docker configuration to systemd.
 

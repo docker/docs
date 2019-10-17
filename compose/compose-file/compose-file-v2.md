@@ -1292,6 +1292,7 @@ then read-write is used.
       - restart: no
       - restart: always
       - restart: on-failure
+      - restart: unless-stopped
 
 {: id="cpu-and-other-resources"}
 

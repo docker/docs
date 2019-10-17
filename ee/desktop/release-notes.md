@@ -15,6 +15,29 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.6
+2019-10-08
+
+Docker Desktop Enterprise 2.1.0.6 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.3](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0
+- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7) in Version Pack Enterprise 3.0
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
+- Application Designer 0.1.8
+
+### Bug fixes and minor changes
+
+Windows: Docker Desktop no longer tries to modify the `/etc/hosts` file inside Windows containers to add `*.docker.internal` DNS entries.
+
+## Version 2.1.0.5
+2019-09-16
+
+### Bug fixes and minor changes
+
+ Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+
 ## Version 2.1.0.4
 2019-09-03
 

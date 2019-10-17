@@ -129,10 +129,10 @@ in addition to the values in the `docker-compose.yml` file.
 
 ### Specifying a path to a single Compose file
 
-You can use `-f` flag to specify a path to Compose file that is not located in
-the current directory, either from the command line or by setting up a
-[COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or in
-an environment file.
+You can use the `-f` flag to specify a path to a Compose file that is not
+located in the current directory, either from the command line or by setting up
+a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
+in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
 running the [Compose Rails sample](/compose/rails/), and

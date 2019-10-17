@@ -22,10 +22,35 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
 
+## Docker Desktop Community 2.1.0.3
+2019-09-16
+
+> [Download](https://hub.docker.com/?overlay=onboarding)
+>
+> You must sign in to Docker Hub to download Docker Desktop.
+
+### Upgrades
+
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+
 ## Docker Desktop Community 2.1.0.1
 2019-08-08
 
-[Download](https://hub.docker.com/?overlay=onboarding)
+[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
 
   Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
