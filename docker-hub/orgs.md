@@ -6,13 +6,13 @@ redirect_from:
 - /docker-cloud/orgs/
 ---
 
-Docker Hub Organizations let you create teams so you can give your team access
+Docker Hub organizations let you create teams so you can give your team access
 to shared image repositories.
 
 - **Organizations** are collections of teams and repositories that can be managed together.
 - **Teams** are groups of Docker Hub users that belong to an organization.
 
-> **Note**: in Docker Hub, users cannot belong directly to an organization.
+> **Note:** in Docker Hub, users cannot belong directly to an organization.
 They belong only to teams within an organization.
 
 ## Working with organizations
@@ -31,6 +31,8 @@ Docker Hub.
 You've created an organization. You'll see you have a team, the **owners** team
 with a single member (you!).
 
+In some situations, you can also create an organization by [converting a user account](/convert-account.md).
+
 #### The owners team
 
 The **owners** team is a special team that has full access to all repositories
@@ -40,6 +42,21 @@ Members of this team can:
 - Manage organization settings and billing
 - Create a team and modify the membership of any team
 - Access and modify any repository belonging to the organization
+
+
+### Access an organization
+
+You can't _directly_ log into an organization. This is especially important to note if you create an organization by converting a user account, as conversion means you lose the ability to log into that "account", since it no longer exists.
+
+To access an organization:
+
+1. Log into Docker Hub with a user account that is a member of any team in the organization.
+
+    > If you want access to organization settings, this account has to be part of the **owners** team.
+
+2. Click **Organizations** in the top navigation bar, then choose your organization from the list.
+
+If you don't see the organization, then you are neither a member or an owner of it. An organization administrator will need to add you as a member of the organization team.
 
 ## Working with teams and members
 
