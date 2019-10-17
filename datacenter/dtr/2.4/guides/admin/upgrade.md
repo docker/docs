@@ -87,4 +87,4 @@ upgrade. The command is the same as for a minor upgrade.
 
 ## Where to go next
 
-* [Release notes](../release-notes.md)
+* [Release notes](../release-notes/#version-24.md)

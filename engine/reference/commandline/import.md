@@ -4,6 +4,7 @@ datafile: docker_import
 title: docker import
 redirect_from:
   - /edge/engine/reference/commandline/import/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

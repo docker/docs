@@ -2,6 +2,7 @@
 datafolder: buildx
 datafile: docker_buildx_stop
 title: docker buildx stop
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

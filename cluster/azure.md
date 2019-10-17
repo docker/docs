@@ -38,12 +38,12 @@ $ export CLUSTER_SECRETS_FILE=~/.my-secrets/my-azure-creds.sh
 $ docker cluster create ....
 ```
 
-Docker Cluster will bindmount this file into its container runtime to inject the
+Docker cluster will bindmount this file into its container runtime to inject the
 credential data as needed.
 
 ## Create a cluster
 
-When you create a Docker Cluster in Azure, the cluster created has:
+When you create a docker cluster in Azure, the cluster created has:
  - 3 UCP Managers
  - 3 Workers
  - 3 DTR Replicas
@@ -96,7 +96,7 @@ The values will be substituted in the cluster definition.  This makes it
 easy to define a reusable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
-Run `docker cluster create --file cluster.yml --name quickstart`.
+Run `docker cluster create --file cluster.yml --name quickstart`
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password:
@@ -136,21 +136,21 @@ After about 15-20 minutes, Docker Enterprise installation will complete:
 
     e58dd2a77567
 
-After all operations complete successfully, the cluster id will be the last statement
-to print.  You can log in to the URL and begin interacting with the cluster.
+After all operations complete succesfully, the cluster id will be the last statement
+to print.  You can login to the URL and begin interacting with the cluster.
 
 ## View cluster information
 
-To see an inventory of the current clusters you've created, run `docker cluster ls`.
+To see an inventory of the current clusters you've created, run `docker cluster ls`
 
     $ docker cluster ls
     ID             NAME         PROVIDER        ENDPOINT                                                     STATE
     e58dd2a77567   quickstart   azurerm         https://ucp-e58dd2a77567-y4pl.centralus.cloudapp.azure.com   running
 
-To see detailed information about an individual cluster, run `docker cluster inspect quickstart`.
+To see detailed information about an individual cluster, run `docker cluster inspect quickstart`
 
-```yaml
 $ docker cluster inspect quickstart
+```yaml
 name: quickstart
 shortid: e58dd2a77567
 variable:
@@ -218,13 +218,13 @@ The information displayed by `docker cluster inspect` can be used as a cluster d
 
 ## Use context
 
-Docker Cluster creates a context on your local machine.  To use this context, and interact with the cluster, run `docker context use quickstart`.
+Docker cluster creates a context on your local machine.  To use this context, and interact with the cluster, run `docker context use quickstart`
 
     $ docker context use quickstart
     quickstart
     Current context is now "quickstart"
 
-To verify that the client is connected to the cluster, run `docker version`.
+To verify that the client is connected to the cluster, run `docker version`
 
 ```bash
 $ docker version
@@ -302,7 +302,7 @@ resource:
 ```
 
 Since the cluster is already created, the next step is to `update` the cluster's
-desired state.  Run  `docker cluster update quickstart --file cluster.yml`.
+desired state.  Run  `docker cluster update quickstart --file cluster.yml`
 
     $ docker cluster update quickstart --file cluster.yml
     Docker Enterprise Platform 3.0
@@ -310,7 +310,7 @@ desired state.  Run  `docker cluster update quickstart --file cluster.yml`.
     Planning cluster on azure                                                  [OK]
     Updating: [==================                                            ] 30%
 
-After about 10 minutes, the update operation adds the new nodes and joins them to the cluster:
+After about 10 minutes the update operation adds the new nodes and joins them to the cluster:
 
     $ docker cluster update quickstart --file examples/docs.yml
     Please provide a value for ucp_password
@@ -325,7 +325,7 @@ After about 10 minutes, the update operation adds the new nodes and joins them t
 
     e58dd2a77567
 
-Run `docker cluster inspect e58dd2a77567` to view increased worker count.
+A quick `docker cluster inspect e58dd2a77567` will show the worker count increased:
 
 ```yaml
 ...
@@ -340,7 +340,7 @@ Run `docker cluster inspect e58dd2a77567` to view increased worker count.
 
 ## Backup a cluster
 
-Before we proceed with more operations on the cluster, let's take a backup of the running cluster.  To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `.
+Before we proceed with more operations on the cluster, let's take a backup of the running cluster.  To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `
 
 Provide a passphrase to encrypt the UCP backup.
 
@@ -353,7 +353,7 @@ Provide a passphrase to encrypt the UCP backup.
 
 Save the backups on external storage for disaster recovery.
 
-To restore a cluster, run `docker cluster restore quickstart --file backup-2019-05-07.tar.gz`.
+To restore a cluster, run `docker cluster restore quickstart --file backup-2019-05-07.tar.gz`
 
 Provide the passphrase from the backup step to decrypt the UCP backup.
 
@@ -371,7 +371,7 @@ cluster:
     version: docker/ucp:3.2.0
 ```
 
-Run  `docker cluster update quickstart --file cluster.yml `.
+Run  `docker cluster update quickstart --file cluster.yml `
 
     $ docker cluster update quickstart --file examples/docs.yml
     Please provide a value for ucp_password
@@ -388,7 +388,7 @@ Run  `docker cluster update quickstart --file cluster.yml `.
 
 ## Destroy a cluster
 
-When the cluster has reached end-of-life, run `docker cluster rm quickstart`.
+When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
     $ docker cluster rm quickstart
     Removing quickstart

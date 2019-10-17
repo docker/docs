@@ -4,6 +4,7 @@ datafile: docker_checkpoint_rm
 title: docker checkpoint rm
 redirect_from:
   - /edge/engine/reference/commandline/checkpoint_rm/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

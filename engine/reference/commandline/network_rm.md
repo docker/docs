@@ -4,6 +4,7 @@ datafile: docker_network_rm
 title: docker network rm
 redirect_from:
   - /edge/engine/reference/commandline/network_rm/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -351,7 +351,7 @@ volume: |
   A volume is a specially-designated directory within one or more containers
   that bypasses the Union File System. Volumes are designed to persist data,
   independent of the container's life cycle. Docker therefore never automatically
-  delete volumes when you remove a container, nor will it "garbage collect"
+  deletes volumes when you remove a container, nor will it "garbage collect"
   volumes that are no longer referenced by a container.
   *Also known as: data volume*
 
