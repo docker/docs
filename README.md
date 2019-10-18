@@ -183,7 +183,7 @@ You have three options:
        bundle install
        ```
 
-       >**Note**: You may need to install some packages manually.   
+       >**Note**: You may need to install some packages manually.
 
     f. Change the directory to `docker.github.io`.
 
@@ -193,17 +193,17 @@ You have three options:
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
-    
+
 3. Build and run a Docker image for your working branch.
-    
+
    ```bash
    $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
    $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
     ```
 
-   After the `docker run` command, copy the URL provided in the container build output in a browser, 
+   After the `docker run` command, copy the URL provided in the container build output in a browser,
    http://0.0.0.0:4000, and verify your changes.
-   
+
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
@@ -264,6 +264,7 @@ following keys are supported. The title, description, and keywords are required.
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
 | tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
+| skip_read_time             | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
 
 The following is an example of valid (but contrived) page metadata. The order of
 the metadata elements in the front-matter is not important.
@@ -353,13 +354,13 @@ still optimizes the bandwidth during browsing).
 
 ## Accessing unsupported archived documentation
 
-Supported documentation includes the current version plus the previous five versions. 
+Supported documentation includes the current version plus the previous five versions.
 
 If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
 
-- By entering your version number and selecting it from the branch selection list for this repo 
-- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9` 
-- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline) 
+- By entering your version number and selecting it from the branch selection list for this repo
+- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9`
+- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline)
 in Docker Hub. For example, run the following to access `v1.9`:
 
  ```bash
