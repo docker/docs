@@ -4,6 +4,7 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
+skip_read_time: true
 redirect_from:
  - /ee/engine/release-notes/
  - /release-notes/docker-ce/
@@ -34,6 +35,35 @@ compatibility reasons.
 > instructions for the corresponding linux distro for details.
 
 # Version 19.03
+
+## 19.03.4
+2019-10-17
+
+### Networking
+
+* Rollback libnetwork changes to fix `DOCKER-USER` iptables chain issue. [docker/engine#404](https://github.com/docker/engine/pull/404)
+
+### Known Issues
+
+#### Existing
+
+* In some circumstances with large clusters, Docker information might, as part of the Swarm section,
+  include the error `code = ResourceExhausted desc = grpc: received message larger than
+  max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
+  and requires no response.
+* Orchestrator port conflict can occur when redeploying all services as new. Due to many Swarm manager
+  requests in a short amount of time, some services are not able to receive traffic and are causing a `404`
+  error after being deployed.
+     - **Workaround:** restart all tasks via `docker service update --force`.
+* [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
+* `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
+* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
+
+     - **Workaround options:**
+         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
+         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
+         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
+
 
 ## 19.03.3
 2019-10-08
