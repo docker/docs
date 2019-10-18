@@ -76,7 +76,7 @@ deploying applications is.
 Containerization is increasingly popular because containers are:
 
 - Flexible: Even the most complex applications can be containerized.
-- Lightweight: Containers leverage and share the host kernel,
+- Lightweight: Containers leverage and share the host kernel, 
   making them much more efficient in terms of system resources than virtual machines.
 - Portable: You can build locally, deploy to the cloud, and run anywhere.
 - Loosely coupled: Containers are highly self sufficient and encapsulated,
@@ -85,11 +85,11 @@ Containerization is increasingly popular because containers are:
 - Secure: Containers apply aggressive constraints and isolations to processes without
   any configuration required on the part of the user.
 
-![Containers are portable](images/laurel-docker-containers2019.jpg){:width="100%"}
+![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
 
 ### Images and containers
 
-Fundamentally, a container is nothing but a running process,
+Fundamentally, a container is nothing but a running process, 
 with some added encapsulation features applied to it in order to keep it isolated from the host
 and from other containers.
 One of the most important aspects of container isolation is that each container interacts
@@ -160,9 +160,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     ```shell
     kubectl get pods
-    ```
+    ```    
 
-    You should see something like:
+    You should see something like:    
 
     ```shell
     NAME      READY     STATUS    RESTARTS   AGE
@@ -173,9 +173,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     ```shell
     kubectl logs demo
-    ```
+    ```    
 
-    You should see the output of a healthy ping process:
+    You should see the output of a healthy ping process:    
 
     ```shell
     PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -216,7 +216,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
       - name: testpod
         image: alpine:3.5
         command: ["ping", "8.8.8.8"]
-    ```
+    ```    
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
@@ -230,9 +230,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     ```shell
     kubectl get pods
-    ```
+    ```    
 
-    You should see something like:
+    You should see something like:    
 
     ```shell
     NAME      READY     STATUS    RESTARTS   AGE
@@ -243,9 +243,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     ```shell
     kubectl logs demo
-    ```
+    ```    
 
-    You should see the output of a healthy ping process:
+    You should see the output of a healthy ping process:    
 
     ```shell
     PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -285,16 +285,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     docker swarm init
-    ```
+    ```    
 
-    If all goes well, you should see a message similar to the following:
+    If all goes well, you should see a message similar to the following:    
 
     ```shell
-    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.
+    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
 
-    To add a worker to this swarm, run the following command:
+    To add a worker to this swarm, run the following command:    
 
-        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377
+        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377    
 
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
@@ -309,22 +309,22 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     docker service ps demo
-    ```
+    ```    
 
-    You should see something like:
+    You should see something like:    
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago 
     ```
 
 4. Check that you get the logs you'd expect for a ping process:
 
     ```shell
     docker service logs demo
-    ```
+    ```    
 
-    You should see the output of a healthy ping process:
+    You should see the output of a healthy ping process:    
 
     ```shell
     demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -353,16 +353,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     docker swarm init
-    ```
+    ```    
 
-    If all goes well, you should see a message similar to the following:
+    If all goes well, you should see a message similar to the following:    
 
     ```shell
-    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.
+    Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.    
 
-    To add a worker to this swarm, run the following command:
+    To add a worker to this swarm, run the following command:    
 
-        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377
+        docker swarm join --token SWMTKN-1-3e0hh0jd5t4yjg209f4g5qpowbsczfahv2dea9a1ay2l8787cf-2h4ly330d0j917ocvzw30j5x9 192.168.65.3:2377    
 
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
@@ -377,22 +377,22 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     docker service ps demo
-    ```
+    ```    
 
-    You should see something like:
+    You should see something like:    
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago 
     ```
 
-4. Check that you get the logs you'd expect for a ping process:
+4. Check that you get the logs you'd expect for a ping process:    
 
     ```shell
     docker service logs demo
-    ```
+    ```    
 
-    You should see the output of a healthy ping process:
+    You should see the output of a healthy ping process:    
 
     ```shell
     demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
