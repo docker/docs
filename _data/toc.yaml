@@ -1446,9 +1446,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Access control design  
+          title: Access control design
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Access control design using additional security requirements 
+          title: Access control design using additional security requirements
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
@@ -4007,6 +4007,8 @@ manuals:
     title: Official Images
   - path: /docker-hub/orgs/
     title: Teams & Organizations
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
