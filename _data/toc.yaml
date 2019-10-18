@@ -127,6 +127,8 @@ guides:
         title: FAQ
 - sectiontitle: Get started
   section:
+  - path: /engine/docker-overview/
+    title: Docker overview
   - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation and setup"
@@ -139,8 +141,8 @@ guides:
       path: /get-started/part4/
     - title: "Part 5: Sharing Images on Docker Hub"
       path: /get-started/part5/
-  - path: /engine/docker-overview/
-    title: Docker overview
+  - path: /get-started/resources/
+    title: "Educational resources"
 - sectiontitle: Develop with Docker
   section:
     - sectiontitle: Develop your apps on Docker
@@ -1446,9 +1448,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Access control design  
+          title: Access control design
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Access control design using additional security requirements 
+          title: Access control design using additional security requirements
     - sectiontitle: Access UCP
       section:
       - path: /ee/ucp/user-access/
@@ -4007,6 +4009,8 @@ manuals:
     title: Official Images
   - path: /docker-hub/orgs/
     title: Teams & Organizations
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
