@@ -141,7 +141,7 @@ guides:
       path: /get-started/part4/
     - title: "Part 5: Sharing Images on Docker Hub"
       path: /get-started/part5/
-  - path: /resources/
+  - path: /get-started/resources/
     title: Educational Resources
 - sectiontitle: Develop with Docker
   section:
