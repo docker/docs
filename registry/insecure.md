@@ -129,7 +129,8 @@ certificate at the OS level.
 #### Ubuntu
 
 ```bash
-$ cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
+$ mkdir -p /etc/docker/certs.d/myregistrydomain.com
+$ cp certs/domain.crt /etc/docker/certs.d/myregistrydomain.com
 update-ca-certificates
 ```
 
