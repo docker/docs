@@ -24,6 +24,40 @@ upgrade your installation to the latest release.
 
 # Version 3.2
 
+## 3.2.3
+2019-10-21
+
+### UI
+* Fixes a UI issue that caused incorrect line breaks at pre-logon banner notification (ENGORC-2678)
+* Users have an option to store sessionToken per window tab session. (ENGORC-2597)
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.7.
+* Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
+
+### Networking
+- Interlock has been upgraded to version 3.0.0. This upgrade includes the following updates:
+  - New Interlock configuration options:
+    - HitlessServiceUpdate: When set to `true`, the proxy service no longer needs to restart when services are updated, reducing service interruptions. The proxy also does not have to restart when services are added or removed, as long as the set of service networks attached to the proxy is unchanged. If secrets or service networks need to be added or removed, the proxy service will restart as in previous releases. (ENGCORE-792)
+    - Networks: Defines a list of networks to which the proxy service will connect at startup. The proxy service will only connect to these networks and will no longer automatically connect to back-end service networks. This allows administrators to control which networks are used to connect to the proxy service and to avoid unnecessary proxy restarts caused by network changes . (ENGCORE-912)
+  - Log an error if the `com.docker.lb.network` label does not match any of the networks to which the service is attached. (ENGCORE-837)
+  - Do not generate an invalid NGINX configuration file if `HTTPVersion` is invalid. (FIELD-2046)
+
+### Bug fixes
+* Upgraded RethinkDB Go Client to v5. (ENGORC-2704)
+* Fixes an issue that caused slow response with increasing number of collections. (ENGORC-2638)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.3   |
+| Kubernetes            | 1.14.7  |
+| Calico                | 3.8.2   |
+| Interlock             | 3.0.0   |
+| Interlock NGINX proxy | 1.14.2  |
+
+
 ## 3.2.1
 2019-09-03
 
