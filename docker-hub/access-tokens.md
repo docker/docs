@@ -14,7 +14,7 @@ Access tokens are also useful in building integrations, since you can issue
 multiple tokens &ndash; one for each integration &ndash; and revoke them at
 any time.
 
-> Note: If you have [two-factor authentication (2FA)](/2fa) enabled on your account, you must create at least one personal access token. Otherwise, you will be unable to log in to your account from the Docker CLI.
+> Note: If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on your account, you must create at least one personal access token. Otherwise, you will be unable to log in to your account from the Docker CLI.
 {: .important }
 
 ## Create an access token
