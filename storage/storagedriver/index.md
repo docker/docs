@@ -187,7 +187,7 @@ layers are the same.
 
 1.  Make a new directory `cow-test/` and change into it.
 
-2.  Within `cow-test/`, create a new file `hello.sh` with the following contents:
+2.  Within `cow-test/`, create a new file called `hello.sh` with the following contents:
 
     ```bash
     #!/bin/sh
