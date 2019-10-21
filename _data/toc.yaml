@@ -3993,10 +3993,20 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
-  - sectiontitle: Security and Authentication
+  - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Managing Access Tokens
+        title: Managing access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/release-notes/
     title: Release notes
   - sectiontitle: Two-factor Authentication
@@ -4013,16 +4023,16 @@ manuals:
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
-    title: Official Images
+    title: Official images
   - path: /docker-hub/orgs/
-    title: Teams & Organizations
+    title: Teams & organizations
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
-    title: Slack Integration
+    title: Slack integration
   - path: /docker-hub/upgrade/
     title: Upgrade your plan
-  - sectiontitle: Automated Builds
+  - sectiontitle: Automated builds
     section:
       - path: /docker-hub/builds/
         title: Set up Automated builds
@@ -4034,7 +4044,7 @@ manuals:
         title: Link to GitHub and BitBucket
       - path: /docker-hub/builds/classic/
         title: Classic Automated Builds
-  - sectiontitle: Publisher & Certified Content
+  - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
       title: Overview
@@ -4045,11 +4055,11 @@ manuals:
     - path: /docker-hub/publish/publisher_faq/
       title: Publisher FAQs
     - path: /docker-hub/publish/certify-images/
-      title: Certify Images & Plugins
+      title: Certify images & plugins
     - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify Logging Plugins
+      title: Certify logging plugins
     - path: /docker-hub/publish/trustchain/
-      title: Trust Chain
+      title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
   - path: /docker-hub/deactivate-account/
