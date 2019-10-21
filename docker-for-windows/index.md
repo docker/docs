@@ -540,7 +540,7 @@ For more information, refer to the following [Docker Hub topics](/docker-hub/ind
 
 Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
 
-You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions on enabling two-factor authentication, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
+You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
 
 After you have enabled two-factor authentication:
 
