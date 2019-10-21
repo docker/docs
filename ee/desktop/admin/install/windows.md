@@ -12,7 +12,15 @@ This page contains information about the system requirements and specific instru
 
 - Windows 10 Pro or Enterprise version 15063 or later.
 
-- Hyper-V and Containers Windows features must be enabled.
+- Hyper-V and Containers Windows features must be enabled **before** installing DDE.
+
+    To enable Hyper-V and Containers features using PowerShell, run the following commands as Administrator:
+
+    `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All`
+
+    `Enable-WindowsOptionalFeature -Online -FeatureName Containers -All`
+
+    After running the commands, reboot your system.
 
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
