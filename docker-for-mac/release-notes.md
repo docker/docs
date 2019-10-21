@@ -23,7 +23,7 @@ Desktop for Mac](install.md#download-docker-for-mac).
 ## Stable Releases of 2019
 
 ## Docker Desktop Community 2.1.0.4
-2019-10-15
+2019-10-21
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
@@ -33,7 +33,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 
 ### Upgrades
 
-- [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
+- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
 - [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
 - [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
 - [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
