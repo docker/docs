@@ -73,7 +73,7 @@ host types:
 
 |       Hosts       |          Port           |       Scope        |                                    Purpose                                    |
 | :---------------- | :---------------------- | :----------------- | :---------------------------------------------------------------------------- |
-| managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for kubernetes networking                            |
+| managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for Kubernetes networking                            |
 | managers          | TCP 443  (configurable) | External, Internal | Port for the UCP web UI and API                                               |
 | managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
 | managers          | TCP 2377 (configurable) | Internal           | Port for control communication between swarm nodes                            |
@@ -104,14 +104,6 @@ prior to installing UCP.
     CLOUD_NETCONFIG_MANAGE="no"
     ```
     2. Run `service network restart`.
-
-## Avoid firewall conflicts
-
-For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is turned on by default in the openSUSE firewall. This speeds up packet processing on the loopback interface, and breaks certain firewall setups that need to redirect outgoing packets via custom rules on the local machine.
-
-To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
-
-For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 ## Enable ESP traffic
 
