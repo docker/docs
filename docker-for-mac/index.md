@@ -494,12 +494,30 @@ For information about providing feedback on the documentation or update it yours
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
-Check out the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
-class="_"}  to learn more:
+For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
+class="_"}:
 
 * [Organizations and Teams in Docker
   Hub](/docker-cloud/orgs/index.md){:target="_blank" class="_"}
 * [Builds](/docker-hub/builds/index.md){:target="_blank" class="_"}
+
+### Two-factor authentication
+
+Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
+
+You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions on enabling two-factor authentication, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
+
+After you have enabled two-factor authentication:
+
+1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
+
+2. Enter your Docker ID and password and click **Sign in**.
+
+3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six digit code from your phone and then click **Verify**.
+
+![Docker Desktop 2FA](images/desktop-mac-2fa.png){:width="500px"}
+
+After you have successfully signed in, you can access your organizations and repositories directly from the Docker Desktop menu.
 
 ## Where to go next
 
