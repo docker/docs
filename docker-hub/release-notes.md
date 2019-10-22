@@ -9,6 +9,25 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2019-10-21
+
+### New features
+* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](/docker-hub/2fa). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+
+    > If you lose both your 2FA authentication device and recovery code, you may
+    > not be able to recover your account.
+    {: .important }
+
+
+
+### Enhancements
+* As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
+
+### Known Issues
+
+* Scan results don't appear for some official images.
+
+
 # 2019-10-02
 
 ### Enhancements
