@@ -7,6 +7,7 @@ keywords: Universal Control Plane, UCP, Docker Enterprise, Kubernetes, storage, 
 The [vSphere Storage for Kubernetes driver](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html) enables customers to address persistent storage requirements for Kubernetes pods  in vSphere environments. The driver allows you to create a persistent  volume on a Virtual Machine File System (VMFS), and use it to manage persistent storage requirements independent of pod and VM lifecycle.
 
 > Note
+> 
 > Of the three main storage backends offered by vSphere on Kubernetes (VMFS, vSAN, and NFS), we support VMFS.
 
 You can use vSphere Cloud Provider to manage storage with Kubernetes in UCP 3.1 and later. This includes support for :
