@@ -46,14 +46,9 @@ The next page will remind you to download an authenticator app. Click **Set up**
 After you have saved your code, click **Next**.
 
 Open your authenticator app. You can choose between scanning the QR code or
-entering a text code into your authenticator app.
-
-![QR code example](../images/2fa-qr-code.png)
-
-![Text code example](../images/2fa-text-code.png)
-
-Once you have linked your authenticator app, it will give you a six-digit code
-to enter in text field. Click **Next**.
+entering a text code into your authenticator app. Once you have linked your
+authenticator app, it will give you a six-digit code to enter in text field.
+Click **Next**.
 
 ![Enter special code](../images/2fa-enter-code.png)
 
