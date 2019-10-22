@@ -536,6 +536,24 @@ For more information, refer to the following [Docker Hub topics](/docker-hub/ind
 * [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
 
+### Two-factor authentication
+
+Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
+
+You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
+
+After you have enabled two-factor authentication:
+
+1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
+
+2. Enter your Docker ID and password and click **Sign in**.
+
+3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
+
+![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
+
+After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
+
 ## Adding TLS certificates
 
 You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server
