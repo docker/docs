@@ -38,6 +38,10 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 - [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
 - [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
 
+### New
+
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](/docker-for-mac/#docker-hub).
+
 ## Docker Desktop Community 2.1.0.3
 2019-09-16
 
