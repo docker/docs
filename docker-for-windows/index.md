@@ -548,7 +548,7 @@ After you have enabled two-factor authentication:
 
 2. Enter your Docker ID and password and click **Sign in**.
 
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six digit code from your phone and then click **Verify**.
+3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
 
 ![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
 
