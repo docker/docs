@@ -30,7 +30,7 @@ Backup contents are stored in a `.tar` file. Backups contain UCP configuration m
 | Certificates and keys | Certificates and public and private keys used for authentication and mutual TLS communication         | yes
 | Metrics data          | Monitoring data gathered by UCP                                                    | yes
 | Organizations         | Users, teams, and organizations                                                        | yes
-| Volumes               | All [UCP named volumes](/ee/ucp/ucp-architecture/#volumes-used-by-ucp/), including all UCP component certicates and data. [Learn more about UCP named volumes](/ee/ucp/ucp-architecture/).              | yes
+| Volumes               | All [UCP named volumes](/ee/ucp/ucp-architecture/#volumes-used-by-ucp/), including all UCP component certificates and data. [Learn more about UCP named volumes](/ee/ucp/ucp-architecture/).              | yes
 | Overlay Networks      | Swarm-mode overlay network definitions, including port information                                             | no
 | Configs, Secrets      | Create a Swarm backup to backup these data                                         | no
 | Services              | Stacks and services are stored in Swarm-mode or SCM/Config Management              | no  
@@ -59,7 +59,7 @@ sudo chown nobody:nogroup /path/to/folder
 ```
 > **Important**:  
     - Specify a different name for each backup file. Otherwise, the existing backup file with the same name is overwritten.
-    - Specify a location that is mounted on an fault-tolerant file system (such as NFS) rather than the node's local disk. Otherwise, it is important to regularly move backups from the manager node's local disk to ensure adequate space for ongoing backups.
+    - Specify a location that is mounted on a fault-tolerant file system (such as NFS) rather than the node's local disk. Otherwise, it is important to regularly move backups from the manager node's local disk to ensure adequate space for ongoing backups.
  
 ## UCP backup steps
 There are several options for creating a UCP backup:
@@ -118,7 +118,7 @@ $ docker container run \
 To view backup progress and error reporting, view the contents of the stderr streams of the running backup container during the backup. Progress is updated for each backup step, for example, after validation, after volumes are backed up, after `etcd` is backed up, and after `rethinkDB`. Progress is not preserved after the backup has completed. 
 
 #### Verify a UCP backup
-In a valid backup file, 27 or more files are displayed in the list and the `./ucp-controller-server-certs/key.pem` file is present. Ensure the backup is a valid tar file by listing its contents, as shown in the following exampele: 
+In a valid backup file, 27 or more files are displayed in the list and the `./ucp-controller-server-certs/key.pem` file is present. Ensure the backup is a valid tar file by listing its contents, as shown in the following example: 
 
 ```
 $ gpg --decrypt /directory1/directory2/backup.tar | tar --list
@@ -137,9 +137,9 @@ $ tar --list -f /directory1/directory2/backup.tar
 3. Select **Backup Now** to trigger an immediate backup.
 
 The UI also provides the following options:
-    - Display the status of a running backup
-    - Display backup history
-    - View backup contents
+ - Display the status of a running backup
+ - Display backup history
+ - View backup contents
 
 ### Create, list, and retrieve UCP backups using the API
 
@@ -174,8 +174,8 @@ $ curl -sk -H 'Authorization: Bearer $AUTHTOKEN' https://$UCP_HOSTNAME/api/ucp/b
 
 where:
 
- - `$AUTHTOKEN` is your authentication bearer token if using using auth token identification.
- - `$UCP_HOSTNAME ` is your UCP hostname.
+ - `$AUTHTOKEN` is your authentication bearer token if using auth token identification.
+ - `$UCP_HOSTNAME` is your UCP hostname.
 
 #### List all backups using the API
 
