@@ -40,7 +40,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 
 ### New
 
-Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](/docker-for-windows/#docker-hub).
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
 
 ## Docker Desktop Community 2.1.0.3
 2019-09-16
@@ -169,7 +169,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
 
 * Bug fixes and minor changes
-  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918) 
+  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918)
 
 ### Docker Community Edition 2.0.0.0-win78 2018-11-19
 
@@ -187,9 +187,9 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 
 * Deprecation
   - Removed support of AUFS
-  
+
 * Bug fixes and minor changes
-  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647) 
+  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647)
   - Windows Containers: Better host.docker.internal resolution, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
   - Do not try to update samba share mounts when using Windows Containers
   - Improved dns update too verbose in logs
