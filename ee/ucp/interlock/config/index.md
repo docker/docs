@@ -115,7 +115,7 @@ Interlock must contain at least one extension to service traffic. The following 
 | `PublishedSSLPort` | int | Port on which the proxy service serves SSL traffic |
 | `Template` | string | Docker configuration object that is used as the extension template |
 | `Config` | Config | Proxy configuration used by the extensions as described in this section |
-| `HitlessServiceUpdate` | Config | When set to `true`, services can be updated without restarting the proxy container. |
+| `HitlessServiceUpdate` | bool | When set to `true`, services can be updated without restarting the proxy container. |
 | `ConfigImage` | Config | Name for the config service (used by hitless service updates). For example, `docker/ucp-interlock-config:3.2.1`. |
 | `ConfigServiceName` | Config | Name of the config service. This name is equivalent to `ProxyServiceName`. For example, `ucp-interlock-config`. |
 
