@@ -552,7 +552,7 @@ After you have enabled two-factor authentication:
 
 ![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
 
-After you have successfully signed in, you can access your organizations and repositories directly from the Docker Desktop menu.
+After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
 
 ## Adding TLS certificates
 

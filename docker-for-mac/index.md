@@ -517,7 +517,7 @@ After you have enabled two-factor authentication:
 
 ![Docker Desktop 2FA](images/desktop-mac-2fa.png){:width="500px"}
 
-After you have successfully signed in, you can access your organizations and repositories directly from the Docker Desktop menu.
+After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
 
 ## Where to go next
 
