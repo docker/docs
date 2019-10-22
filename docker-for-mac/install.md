@@ -28,7 +28,9 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 
-- macOS must be version 10.12 or newer. We recommend upgrading to the latest version of macOS.
+- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
+
+  If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with the macOS.
 
   **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
 
