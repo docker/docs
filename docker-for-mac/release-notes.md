@@ -40,7 +40,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 
 ### New
 
-Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](/docker-for-mac/#docker-hub).
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
 
 ## Docker Desktop Community 2.1.0.3
 2019-09-16
@@ -151,7 +151,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 * Bug fixes and minor changes
   - Add 18.09 missing daemon options
-  
+
 ## Stable Releases of 2018
 
 ### Docker Community Edition 2.0.0.0-mac81 2018-12-07
@@ -267,7 +267,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
   - [Docker Machine 0.14.0](https://github.com/docker/machine/releases/tag/v0.14.0)
   - [Docker compose 1.20.1](https://github.com/docker/compose/releases/tag/1.20.1)
   - [Notary 0.6.0](https://github.com/docker/notary/releases/tag/v0.6.0)
-  - Linux Kernel 4.9.87  
+  - Linux Kernel 4.9.87
   - AUFS 20180312
 
 * New
