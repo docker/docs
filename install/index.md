@@ -15,6 +15,7 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
+- /linux/
 ---
 
 Docker Engine - Community is ideal for developers and small
