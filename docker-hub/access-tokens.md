@@ -6,6 +6,7 @@ keywords: docker hub, hub, security, PAT, personal access token
 
 Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
 
+<<<<<<< HEAD
 Using personal access tokens provides some advantages over a password:
 * You can investigate when an access token was used last, and disable or delete it if you find any suspicious activity.
 * When logged in with an access token, you can't perform any admin activity on the account, including changing the password.
@@ -16,6 +17,11 @@ any time.
 
 > Note: If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on your account, you must create at least one personal access token. Otherwise, you will be unable to log in to your account from the Docker CLI.
 {: .important }
+=======
+Access tokens are useful in cases such as building integrations since
+you can issue multiple tokens &ndash; one for each integration &ndash;
+and revoke them at any time.
+>>>>>>> updating master on my fork (#3)
 
 ## Create an access token
 
@@ -59,6 +65,7 @@ select multiple tokens to delete them all once.
 You can use an access token anywhere that requires your Docker Hub
 password.
 
+<<<<<<< HEAD
 When logging in from your Docker CLI client (`docker login --username <username>`),
 omit the password in the login command. When you're prompted for
 a password, enter your token instead.
@@ -66,3 +73,6 @@ a password, enter your token instead.
 If you have 2FA enabled, you must use a personal access token when logging in
 from the Docker CLI. If you don't have it enabled, this is an optional (but
 more secure) method of authentication.
+=======
+For example, when logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. When you're prompted for a password, enter your token instead.
+>>>>>>> updating master on my fork (#3)

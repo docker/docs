@@ -85,7 +85,11 @@ Containerization is increasingly popular because containers are:
 - Secure: Containers apply aggressive constraints and isolations to processes without
   any configuration required on the part of the user.
 
+<<<<<<< HEAD
 ![Containers are portable](images/laurel-docker-containers2019.png){:width="100%"}
+=======
+![Containers are portable](images/laurel-docker-containers2019.jpg){:width="100%"}
+>>>>>>> updating master on my fork (#3)
 
 ### Images and containers
 

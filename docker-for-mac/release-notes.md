@@ -22,13 +22,19 @@ Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
+<<<<<<< HEAD
 ## Docker Desktop Community 2.1.0.4
 2019-10-21
+=======
+## Docker Desktop Community 2.1.0.3
+2019-09-16
+>>>>>>> updating master on my fork (#3)
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
 
+<<<<<<< HEAD
 Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
 ### Upgrades
@@ -47,6 +53,8 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 
 [Download](https://download.docker.com/mac/stable/38240/Docker.dmg)
 
+=======
+>>>>>>> updating master on my fork (#3)
 ### Upgrades
 
 - [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)

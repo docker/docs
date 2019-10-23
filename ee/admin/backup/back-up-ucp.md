@@ -118,7 +118,11 @@ $ docker container run \
 To view backup progress and error reporting, view the contents of the stderr streams of the running backup container during the backup. Progress is updated for each backup step, for example, after validation, after volumes are backed up, after `etcd` is backed up, and after `rethinkDB`. Progress is not preserved after the backup has completed. 
 
 #### Verify a UCP backup
+<<<<<<< HEAD
 In a valid backup file, 27 or more files are displayed in the list and the `./ucp-controller-server-certs/key.pem` file is present. Ensure the backup is a valid tar file by listing its contents, as shown in the following example: 
+=======
+In a valid backup file, 27 or more files are displayed in the list and the `./ucp-controller-server-certs/key.pem` file is present. Ensure the backup is a valid tar file by listing its contents, as shown in the following exampele: 
+>>>>>>> updating master on my fork (#3)
 
 ```
 $ gpg --decrypt /directory1/directory2/backup.tar | tar --list
