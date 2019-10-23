@@ -12,7 +12,9 @@ This page contains information about the system requirements and specific instru
 
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 
-- macOS 10.12 and newer macOS releases are supported. We recommend upgrading to the latest version of macOS.
+- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
+
+    If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
 - At least 4GB of RAM
 
