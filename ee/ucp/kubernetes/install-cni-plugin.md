@@ -15,7 +15,7 @@ At install time, UCP can be configured to install an alternative CNI plugin
 to support alternative use cases. The alternative CNI plugin may be certified by 
 Docker and its partners, and published on Docker Hub. UCP components are still 
 fully supported by Docker and respective partners. Docker will provide
-pointers to basic configuration, however for additional guidance on managing third party 
+pointers to basic configuration, however for additional guidance on managing third-party 
 CNI components, the platform operator will need to refer to the partner documentation 
 or contact that third party.
 
