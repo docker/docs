@@ -30,7 +30,7 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
 - macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
 
-  If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with the macOS.
+  If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
   **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
 
