@@ -22,7 +22,7 @@ or contact that third party.
 UCP does manage the version or configuration of alternative CNI plugins. UCP
 upgrade will not upgrade or reconfigure alternative CNI plugins. To switch
 between managed and unmanaged CNI plugins or vice versa, you must uninstall and
-reinstall UCP.
+then reinstall UCP.
 
 ## Install an unmanaged CNI plugin on Docker UCP
 
