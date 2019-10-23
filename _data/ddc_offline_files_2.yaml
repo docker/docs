@@ -6,6 +6,12 @@
 - product: "ucp"
   version: "3.2"
   tar-files:
+    - description: "3.2.3 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.2.3.tar.gz
+    - description: "3.2.3 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.2.3.tar.gz
+    - description: "3.2.3 Windows Server 2019 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2019_3.2.3.tar.gz
     - description: "3.2.1 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.2.1.tar.gz
     - description: "3.2.1 Windows Server 2016 LTSC"
