@@ -9,7 +9,6 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-<<<<<<< HEAD
 # 2019-10-21
 
 ### New features
@@ -29,8 +28,6 @@ known issues for each Docker Hub release.
 * Scan results don't appear for some official images.
 
 
-=======
->>>>>>> updating master on my fork (#3)
 # 2019-10-02
 
 ### Enhancements

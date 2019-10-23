@@ -158,7 +158,6 @@ Choose the local directories you'd like to share with your containers. File shar
 File share settings are:
 
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
-<<<<<<< HEAD
 
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
@@ -177,26 +176,6 @@ For more information, see:
 
 #### Proxies
 
-=======
-
-- **Apply & Restart** makes the directory available to containers using Docker's
-  bind mount (`-v`) feature.
-
-  There are some limitations on the directories that can be shared:
-
-  - It is not possible to share a directory that is a subdirectory of an already shared directory.
-  - The directory must not exist inside of Docker.
-
-For more information, see:
-
-- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
-  [osxfs file system sharing](osxfs.md).
-- [Volume mounting requires file sharing for any project directories outside of
-  `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
-
-#### Proxies
-
->>>>>>> updating master on my fork (#3)
 Docker Desktop detects HTTP/HTTPS Proxy Settings from macOS and automatically
 propagates these to Docker and to your containers. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
@@ -222,7 +201,6 @@ You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
 `no_proxy` environment variables are set. When your proxy configuration changes,
 Docker restarts automatically to pick up the new settings. If you have any
 containers that you would like to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
-<<<<<<< HEAD
 
 #### Network
 
@@ -244,29 +222,6 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ### Command Line
 
-=======
-
-#### Network
-
-You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
-
-![Network settings](images/menu/prefs-network.png)
-
-### Docker Engine
-
-The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
-
-![Daemon](images/menu/engine.png)
-
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
-reference](/engine/reference/commandline/dockerd.md){:target="_blank"
-class="_"}.
-
-Click **Apply & Restart** to save your settings and restart Docker Desktop.
-
-### Command Line
-
->>>>>>> updating master on my fork (#3)
 On the Command Line page, you can specify whether or not to enable experimental features.
 
 ![Command Line](images/menu/command-line.png)
@@ -537,7 +492,6 @@ For information about providing feedback on the documentation or update it yours
 ## Docker Hub
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
-<<<<<<< HEAD
 
 For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
 class="_"}:
@@ -555,11 +509,6 @@ You must enable two-factor authentication in Docker Hub before signing into your
 After you have enabled two-factor authentication:
 
 1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
-=======
-
-Check out the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
-class="_"}  to learn more:
->>>>>>> updating master on my fork (#3)
 
 2. Enter your Docker ID and password and click **Sign in**.
 
