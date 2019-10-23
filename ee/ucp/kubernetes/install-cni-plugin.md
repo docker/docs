@@ -19,9 +19,9 @@ pointers to basic configuration, however for additional guidance on managing thi
 CNI components, the platform operator will need to refer to the partner documentation 
 or contact that third party.
 
-UCP does manage the version or configuration of alternative CNI plugins.  UCP
-upgrade will not upgrade or reconfigure alternative CNI plugins.  To switch
-between managed and unmanaged CNI plugins or vice versa you must uninstall and
+UCP does manage the version or configuration of alternative CNI plugins. UCP
+upgrade will not upgrade or reconfigure alternative CNI plugins. To switch
+between managed and unmanaged CNI plugins or vice versa, you must uninstall and
 reinstall UCP.
 
 ## Install an unmanaged CNI plugin on Docker UCP
