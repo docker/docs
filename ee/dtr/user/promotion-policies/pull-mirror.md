@@ -30,10 +30,11 @@ Specify the following details:
 | Repository | Enter the `namespace` and the `repository_name` after the `/`.|
 | Show advanced settings | Enter the TLS details for the remote repository or check `Skip TLS verification`. If the DTR remote repository is using self-signed certificates or certificates signed by your own certificate authority, you also need to provide the public key certificate for that CA. You can retrieve the certificate by accessing `https://<dtr-domain>/ca`. "Remote certificate authority" is optional for a remote repository in Docker Hub. |
 
+After you have filled out the details, click **Connect** to test the integration. 
+
   ![Setting up a pull mirroring policy](../../images/pull-mirror-2.7.png)
 
-
-Click **Connect** to test the integration. Once you have successfully connected to the remote repository, new buttons appear:
+Once you have successfully connected to the remote repository, new buttons appear:
   * Click **Save** to mirror future tag, or;
   * To mirror all existing and future tags, click **Save & Apply** instead.
 
