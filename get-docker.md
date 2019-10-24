@@ -1,10 +1,9 @@
 ---
-description: Home page for Docker's documentation
-keywords: Docker, documentation, manual, guide, reference, api, samples
+description: Home page for Get Docker
+keywords: Docker, documentation, manual
 landing: true
-title: Docker Documentation
+title: Get Docker
 ---
-{% assign page.title = site.name %}
 
 <div class="component-container">
     <!--start row-->

@@ -1,11 +1,12 @@
 ---
-description: Home page for Docker's documentation
-keywords: Docker, documentation, manual, guide, reference, api, samples
+description: Home page for Docker manuals tab
+keywords: Docker, documentation, manual
 landing: true
-title: Docker Documentation
+title: Manuals
 ---
-{% assign page.title = site.name %}
 
+<div><h2>Docker Enterprise</h2>
+</div>
 <div class="component-container">
     <!--start row-->
     <div class="row">
@@ -14,8 +15,7 @@ title: Docker Documentation
                 <div class="component-icon">
                     <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
                 </div>
-                <h3 id="docker-for-mac"><a href="docker-for-mac/">Docker Desktop for Mac</a></h3>
-                <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
+                <h3 id="docker-for-mac"><a href="docker-for-mac/">Docker Desktop Enterprise</a></h3>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
@@ -23,8 +23,7 @@ title: Docker Documentation
                 <div class="component-icon">
                     <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
                 </div>
-                <h3 id="docker-for-windows"><a href="docker-for-windows/">Docker Desktop for Windows</a></h3>
-                <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
+                <h3 id="docker-for-windows"><a href="docker-for-windows/">Universal Control Plane</a></h3>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">

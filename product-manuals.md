@@ -1,10 +1,15 @@
 ---
-description: Home page for Docker's documentation
-keywords: Docker, documentation, manual, guide, reference, api, samples
+description: Home page for Docker manuals tab
+keywords: Docker, documentation, manual
 landing: true
-title: Docker Documentation
+title: Product manuals
+notoc: true
+notags: true
 ---
-{% assign page.title = site.name %}
+
+
+
+## Get Docker Desktop
 
 <div class="component-container">
     <!--start row-->
