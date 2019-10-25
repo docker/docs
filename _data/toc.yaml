@@ -86,12 +86,6 @@ guides:
         title: Binaries
       - path: /install/linux/linux-postinstall/
         title: Optional Linux post-installation steps
-    - title: MacOS
-      path: /docker-for-mac/install/
-      nosync: true
-    - title: Microsoft Windows
-      path: /docker-for-windows/install/
-      nosync: true
   - sectiontitle: Docker Enterprise
     section:
     - title: About Docker Enterprise
@@ -110,9 +104,6 @@ guides:
         title: Ubuntu
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
-    - title: Release notes
-      path: /engine/release-notes/
-      nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/ce-ee-node-activate/
@@ -161,14 +152,8 @@ guides:
             title: Docker build enhancements for 18.09
           - path: /develop/develop-images/multistage-build/
             title: Use multi-stage builds
-          - path: /engine/reference/builder/
-            title: Dockerfile reference
-            nosync: true
           - path: /develop/develop-images/image_management/
             title: Manage images
-        - path: /samples/
-          title: Docker app examples
-          nosync: true
     - sectiontitle: Develop using the Docker Engine SDKs and API
       section:
         - path: /develop/sdk/
@@ -262,12 +247,6 @@ guides:
       title: Configure and run Docker
     - path: /config/daemon/systemd/
       title: Control Docker with systemd
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to daemons
-      nosync: true
-    - path: /config/containers/logging/configure/
-      title: Configuring default drivers
-      nosync: true
   - sectiontitle: Work with external tools
     section:
     - path: /config/thirdparty/
@@ -286,12 +265,6 @@ guides:
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/
       title: Runtime options with Memory, CPUs, and GPUs
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to containers
-      nosync: true
-    - path: /config/pruning/
-      title: Prune unused containers
-      nosync: true
     - sectiontitle: Logging
       section:
       - path: /config/containers/logging/
@@ -328,9 +301,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - path: /registry/recipes/mirror/
-      title: Run a local registry mirror
-      nosync: true
     - sectiontitle: Work with external tools
       section:
       - path: /config/thirdparty/dsc/
@@ -341,8 +311,6 @@ guides:
         title: Chef
       - path: /config/thirdparty/puppet/
         title: Puppet
-      - path: /config/thirdparty/ambassador_pattern_linking/
-        title: (Obsolete) Link via an ambassador container
     - sectiontitle: Security
       section:
       - path: /engine/security/security/
@@ -427,8 +395,6 @@ guides:
         title: Manage sensitive data with Docker secrets
       - path: /engine/swarm/swarm_manager_locking/
         title: Lock your swarm
-      - path: /engine/swarm/networking/
-        title: Manage swarm service networks
       - path: /engine/swarm/admin_guide/
         title: Swarm administration guide
       - path: /engine/swarm/raft/
@@ -495,17 +461,12 @@ guides:
   section:
   - path: /docsarchive/
     title: View the docs archives
-  - path: /hackathon/
-    title: Docs hackathon results
 
 reference:
 - sectiontitle: File formats
   section:
   - title: Dockerfile reference
     path: /engine/reference/builder/
-  - title: Compose file reference
-    path: /compose/compose-file/
-    nosync: true
 
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
@@ -1072,12 +1033,6 @@ reference:
       title: docker wait
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
-  - title: Machine (docker-machine) CLI
-    path: /machine/reference/
-    nosync: true
-  - title: Compose (docker-compose) CLI
-    path: /compose/reference/overview/
-    nosync: true
   - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.7/cli/
@@ -1305,13 +1260,8 @@ manuals:
       title: Cluster file structure
     - path: /cluster/reference/envvars/
       title: Environment variables
-    - path: /cluster/reference/
-      title: Subcommands
   - sectiontitle: Docker Engine - Enterprise
     section:
-    - path: /ee/supported-platforms/
-      title: Install Docker Engine - Enterprise
-      nosync: true
     - title: Release notes
       path: /engine/release-notes/
   - sectiontitle: Universal Control Plane
@@ -1416,9 +1366,6 @@ manuals:
         path: /ee/admin/backup/back-up-ucp/
       - title: Restore UCP
         path: /ee/admin/restore/restore-ucp/
-      - title: CLI reference
-        path: /reference/ucp/3.2/cli/
-        nosync: true
     - sectiontitle: Authorize role-based access
       section:
       - path: /ee/ucp/authorization/
@@ -1507,10 +1454,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Specifying a routing mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/
-          - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Publishing a default host service
             path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
@@ -1569,9 +1512,6 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
         - title: Implementing Persistent (sticky) Sessions
           path: /ee/ucp/kubernetes/cluster-ingress/sticky/
-    - title: API reference
-      path: /reference/ucp/3.2/api/
-      nosync: true
     - path: /ee/ucp/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -3756,9 +3696,6 @@ manuals:
     section:
     - path: /ee/docker-ee-architecture/
       title: Docker Enterprise Architecture
-    - path: /ee/supported-platforms/
-      title: Supported platforms
-      nosync: true
     - path: /ee/end-to-end-install/
       title: Deploy Docker Enterprise
     - path: /ee/upgrade/
@@ -3769,24 +3706,12 @@ manuals:
         title: Overview
       - path: /ee/admin/backup/back-up-swarm/
         title: Back up Docker Swarm
-      - path: /ee/admin/backup/back-up-ucp/
-        title: Back up UCP
-      - path: /ee/admin/backup/back-up-dtr/
-        title: Back up DTR
-      - path: /engine/reference/commandline/cluster_backup/
-        title: Back up clusters with Docker Cluster
     - sectiontitle: Restore Docker Enterprise
       section:
       - path: /ee/admin/restore/
         title: Overview
       - path: /ee/admin/restore/restore-swarm/
         title: Restore Docker Swarm
-      - path: /ee/admin/restore/restore-ucp/
-        title: Restore UCP
-      - path: /ee/admin/restore/restore-dtr/
-        title: Restore DTR
-      - path: /cluster/reference/restore/
-        title: Restore clusters with Docker Cluster
     - sectiontitle: Disaster Recovery
       section:
       - path: /ee/admin/disaster-recovery/
@@ -3811,28 +3736,20 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
-  - path: /engine/reference/commandline/assemble/
-    title: CLI reference
 - sectiontitle: Docker App
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
 - sectiontitle: Docker Template
   section:
   - path: /app-template/working-with-template/
     title: Working with Docker Template
   - path: /app-template/api-reference/
     title: API reference
-  - path: /engine/reference/commandline/template/
-    title: CLI reference
 - sectiontitle: Docker Buildx
   section:
   - path: /buildx/working-with-buildx/
     title: Working with Docker Buildx
-  - path: /engine/reference/commandline/buildx/
-    title: CLI reference
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -3935,8 +3852,6 @@ manuals:
   section:
   - path: /engine/context/working-with-contexts/
     title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
@@ -4359,6 +4274,3 @@ manuals:
       title: Frequently asked questions
     - path: /kitematic/known-issues/
       title: Known issues
-    - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
-      nosync: true
