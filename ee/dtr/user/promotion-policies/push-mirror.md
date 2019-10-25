@@ -27,55 +27,57 @@ cluster.
 
 You need to have permissions to push to the destination repository in order to set up the mirroring policy.
 
-## Configure your repository
+## Configure your repository connection
 
 Once you have [created the repository](../manage-images/index.md), navigate to
-the repository page on the web interface, and select the
-**Mirrors** tab.
+the repository page on the web interface, and select the **Mirrors** tab.
 
-![create integration](../../images/push-mirror-2.png){: .with-border}
+  ![create integration](../../images/push-mirror-2.png)
 
-Click **New mirror**, and define where the image will be pushed if
-it meets the mirroring criteria. Make sure the account you use for the integration
-has permissions to write to the remote repository. Under **Mirror direction**, choose **Push to remote registry**. 
+Click **New mirror** to define where the image will be pushed if it meets the mirroring criteria.
 
-In this example, the image gets pushed to the `qa/website` repository of a
+Under **Mirror direction**, choose **Push to remote registry**. Specify the following details:
+
+| Field                | Description                                   |
+|:---------------------|:----------------------------------------------|
+| Registry type  | You can choose between **Docker Trusted Registry** and **Docker Hub**. If you choose DTR, enter your DTR URL. Otherwise, **Docker Hub** defaults to `https://index.docker.io`. |
+| Username and password or access token | Your credentials in the remote repository you wish to push to. To use an access token instead of your password, see [authentication token](../access-tokens.md). |
+| Repository | Enter the `namespace` and the `repository_name` after the `/`.|
+| Show advanced settings | Enter the TLS details for the remote repository or check `Skip TLS verification`. If the DTR remote repository is using self-signed TLS certificates or certificates signed by your own certificate authority, you also need to provide the public key certificate for that CA. You can retrieve the certificate by accessing `https://<dtr-domain>/ca`. "Remote certificate authority" is optional for a remote repository in Docker Hub. |
+
+> Note: Make sure the account you use for the integration
+> has permissions to write to the remote repository.
+
+Click **Connect** to test the integration.
+
+  ![Setting up a push mirroring policy](../../images/push-mirror-2.7.png)
+
+In this example, the image gets pushed to the `qa/example` repository of a
 DTR deployment available at `qa-example.com` using a service account
-that was created just for mirroring images between repositories. Note that you may use a password or access token to log in to your remote registry.
+that was created just for mirroring images between repositories.
 
-If the destination DTR deployment is using self-signed TLS certificates or
-certificates issued by your own certificate authority, click
-**Show advanced settings** to provide the CA certificate used by the
-DTR where the image will be pushed.
+Next, set your push triggers. DTR allows you to set your mirroring policy based on the following image attributes:
 
-You can get that CA certificate by accessing `https://<destination-dtr>/ca`.
-
-Once you're done, click **Connect** to test the integration.
-
-![test connection](../../images/push-mirror-3.png){: .with-border}
-
-DTR allows you to set your mirroring policy based on the following image attributes:
-
-| Name            | Description                                        | Example           |
-|:----------------|:---------------------------------------------------| :----------------|
+| Name            | Description                              | Example           |
+|:----------------|:-----------------------------------------| :----------------|
 | Tag name        | Whether the tag name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Copy image to remote repository if Tag name ends in `stable`|
 | Component name  | Whether the image has a given component and the component name equals, starts with, ends with, contains, is one of, or is not one of your specified string values | Copy image to remote repository if Component name starts with `b` |
 | Vulnerabilities | Whether the image has vulnerabilities &ndash; critical, major, minor, or all &ndash; and your selected vulnerability filter is greater than or equals, greater than, equals, not equals, less than or equals, or less than your specified number | Copy image to remote repository if Critical vulnerabilities = `3` |
-| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | Copy image to remote repository if License name = `docker` | 
+| License         | Whether the image uses an intellectual property license and is one of or not one of your specified words | Copy image to remote repository if License name = `docker` |
 
-Finally you can choose to keep the image tag, or transform the tag into
+You can choose to keep the image tag, or transform the tag into
 something more meaningful in the remote registry by using a tag template.
 
-![choose policy](../../images/push-mirror-4.png){: .with-border}
+  ![choose policy](../../images/push-mirror-4.png)
 
 In this example, if an image in the `dev/website` repository is tagged with
 a word that ends in "stable", DTR will automatically push that image to
 the DTR deployment available at `qa-example.com`. The image is pushed to the
-`qa/website` repository and is tagged with the timestamp of when the image
+`qa/example` repository and is tagged with the timestamp of when the image
 was promoted.
 
 Everything is set up! Once the development team pushes an image that complies
-with the policy, it automatically gets promoted to `qa/website` in the remote trusted registry at `qa-example.com`.
+with the policy, it automatically gets promoted to `qa/example` in the remote trusted registry at `qa-example.com`.
 
 ## Metadata persistence
 
