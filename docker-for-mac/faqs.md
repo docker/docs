@@ -157,7 +157,7 @@ For information on adding client certificates, see
 ### Can I pass through a USB device to a container?
 
 Unfortunately, it is not possible to pass through a USB device (or a
-serial port) to a container.
+serial port) to a container as it requires support at the hypervisor level.
 
 ### Can I run Docker Desktop in nested virtualization scenarios?
 
