@@ -5,6 +5,7 @@ landing: true
 title: Docker Documentation
 notoc: true
 notags: true
+skip_read_time: true
 ---
 {% assign page.title = site.name %}
 
@@ -58,8 +59,8 @@ Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
 the industry to modernize all applications. Docker Enterprise comes with enterprise
-[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and 
-orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and 
+[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
+orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
 securing images in an enterprise grade registry.
 
 [Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
