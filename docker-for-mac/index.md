@@ -16,12 +16,11 @@ title: Get started with Docker Desktop for Mac
 
 Welcome to Docker Desktop!
 
-This page contains information about Docker Desktop Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+The _Docker Desktop for Mac_ section contains information about the Docker Desktop Community Stable release. For information about Edge releases, see [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
 Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
 
-> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for
-> information on system requirements and Stable and Edge channels.
+See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
 
 ## Check versions
 
