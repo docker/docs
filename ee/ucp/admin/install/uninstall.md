@@ -40,7 +40,7 @@ for any necessary configuration values.
 #Run the following command on one manager node to remove remaining UCP services
 docker service rm $(docker service ls -f name=ucp- -q)
 #Run the following command on each manager node to remove remaining UCP containers
-docker container rm -f $(docker container ps -f name=ucp- -f name=k8s_ -q)
+docker container rm -f $(docker container ps -a -f name=ucp- -f name=k8s_ -q)
 #Run the following command on each manager node to remove remaining UCP volumes
 docker volume rm $(docker volume ls -f name=ucp -q)
 ```
