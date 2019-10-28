@@ -200,7 +200,6 @@ guides:
         title: (Legacy) Container links
       - path: /network/overlay-standalone.swarm/
         title: Overlay networks for Swarm Classic
-
 - sectiontitle: Manage application data
   section:
     - path: /storage/
@@ -449,14 +448,12 @@ guides:
     title: FedRAMP
   - path: /compliance/fisma/
     title: FISMA
-
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
     title: Contribute to documentation
   - path: /opensource/ways/
     title: Other ways to contribute
-
 - sectiontitle: Documentation archive
   section:
   - path: /docsarchive/
@@ -467,6 +464,18 @@ reference:
   section:
   - title: Dockerfile reference
     path: /engine/reference/builder/
+  - sectiontitle: Compose file reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently asked questions
 
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
@@ -590,7 +599,6 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
-
     - sectiontitle: docker cluster *
       section:
         - path: /engine/reference/commandline/cluster/
@@ -1031,6 +1039,62 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
+  - sectiontitle: Compose (docker-compose) CLI reference
+    section:
+    - path: /compose/reference/overview/
+      title: Overview of docker-compose CLI
+    - path: /compose/reference/envvars/
+      title: CLI environment variables
+    - path: /compose/completion/
+      title: Command-line completion
+    - path: /compose/reference/build/
+      title: build
+    - path: /compose/reference/bundle/
+      title: bundle
+    - path: /compose/reference/config/
+      title: config
+    - path: /compose/reference/create/
+      title: create
+    - path: /compose/reference/down/
+      title: down
+    - path: /compose/reference/events/
+      title: events
+    - path: /compose/reference/exec/
+      title: exec
+    - path: /compose/reference/help/
+      title: help
+    - path: /compose/reference/kill/
+      title: kill
+    - path: /compose/reference/logs/
+      title: logs
+    - path: /compose/reference/pause/
+      title: pause
+    - path: /compose/reference/port/
+      title: port
+    - path: /compose/reference/ps/
+      title: ps
+    - path: /compose/reference/pull/
+      title: pull
+    - path: /compose/reference/push/
+      title: push
+    - path: /compose/reference/restart/
+      title: restart
+    - path: /compose/reference/rm/
+      title: rm
+    - path: /compose/reference/run/
+      title: run
+    - path: /compose/reference/scale/
+      title: scale
+    - path: /compose/reference/start/
+      title: start
+    - path: /compose/reference/stop/
+      title: stop
+    - path: /compose/reference/top/
+      title: top
+    - path: /compose/reference/unpause/
+      title: unpause
+    - path: /compose/reference/up/
+      title: up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
   - sectiontitle: DTR CLI
@@ -1150,19 +1214,49 @@ reference:
     path: /reference/ucp/3.2/api/
   - title: Registry API
     path: /registry/spec/api/
-    nosync: true
+  - path: /app-template/api-reference/
+    title: Template API reference
 
 - sectiontitle: Drivers and specifications
   section:
-  - title: Image specification
-    path: /registry/spec/manifest-v2-2/
-  - title: Machine drivers
-    path: /machine/drivers/os-base/
-  - title: Registry token authentication
-    path: /registry/spec/auth/
-  - title: Registry storage drivers
-    path: /registry/storage-drivers/
-
+  - sectiontitle: Registry image manifests
+    section:
+    - path: /registry/spec/manifest-v2-1/
+      title: Image manifest v 2, schema 1
+    - path: /registry/spec/manifest-v2-2/
+      title: Image manifest v 2, schema 2
+    - path: /registry/spec/deprecated-schema-v1/
+      title: Update deprecated schema v1 images
+  - sectiontitle: Registry specifications
+    section:
+    - path: /registry/spec/auth/
+      title: Docker Registry token authentication
+    - path: /registry/spec/auth/jwt/
+      title: Token authentication implementation
+    - path: /registry/spec/auth/oauth/
+      title: Oauth2 token authentication
+    - path: /registry/spec/auth/scope/
+      title: Token scope documentation
+    - path: /registry/spec/auth/token/
+      title: Token authentication specification  
+  - sectiontitle: Registry storage drivers
+    section:
+    - path: /registry/storage-drivers/
+      title: Storage driver overview
+    - path: /registry/storage-drivers/oss/
+      title: Aliyun OSS storage driver
+    - path: /registry/storage-drivers/filesystem/
+      title: Filesystem storage driver
+    - path: /registry/storage-drivers/gcs/
+      title: GCS storage driver
+    - path: /registry/storage-drivers/inmemory/
+      title: In-memory storage driver
+    - path: /registry/storage-drivers/azure/
+      title: Microsoft Azure storage driver
+    - path: /registry/storage-drivers/s3/
+      title: S3 storage driver
+    - path: /registry/storage-drivers/swift/
+      title: Swift storage driver
 - sectiontitle: Compliance control references
   section:
   - sectiontitle: NIST 800-53
@@ -3744,8 +3838,6 @@ manuals:
   section:
   - path: /app-template/working-with-template/
     title: Working with Docker Template
-  - path: /app-template/api-reference/
-    title: API reference
 - sectiontitle: Docker Buildx
   section:
   - path: /buildx/working-with-buildx/
@@ -3758,74 +3850,6 @@ manuals:
     title: Install Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - sectiontitle: Compose (docker-compose) CLI reference
-    section:
-    - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
-    - path: /compose/reference/build/
-      title: build
-    - path: /compose/reference/bundle/
-      title: bundle
-    - path: /compose/reference/config/
-      title: config
-    - path: /compose/reference/create/
-      title: create
-    - path: /compose/reference/down/
-      title: down
-    - path: /compose/reference/events/
-      title: events
-    - path: /compose/reference/exec/
-      title: exec
-    - path: /compose/reference/help/
-      title: help
-    - path: /compose/reference/kill/
-      title: kill
-    - path: /compose/reference/logs/
-      title: logs
-    - path: /compose/reference/pause/
-      title: pause
-    - path: /compose/reference/port/
-      title: port
-    - path: /compose/reference/ps/
-      title: ps
-    - path: /compose/reference/pull/
-      title: pull
-    - path: /compose/reference/push/
-      title: push
-    - path: /compose/reference/restart/
-      title: restart
-    - path: /compose/reference/rm/
-      title: rm
-    - path: /compose/reference/run/
-      title: run
-    - path: /compose/reference/scale/
-      title: scale
-    - path: /compose/reference/start/
-      title: start
-    - path: /compose/reference/stop/
-      title: stop
-    - path: /compose/reference/top/
-      title: top
-    - path: /compose/reference/unpause/
-      title: unpause
-    - path: /compose/reference/up/
-      title: up
-  - sectiontitle: Compose file reference
-    section:
-    - path: /compose/compose-file/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
   - path: /compose/bundles/
     title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
@@ -3840,8 +3864,6 @@ manuals:
     title: Networking in Compose
   - path: /compose/production/
     title: Using Compose in production
-  - path: /compose/link-env-deprecated/
-    title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/samples-for-compose/
@@ -4036,48 +4058,6 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
-    - sectiontitle: Registry reference
-      section:
-      - path: /registry/spec/api/
-        title: Registry HTTP API v2
-      - sectiontitle: Registry image manifests
-        section:
-        - path: /registry/spec/manifest-v2-1/
-          title: Image manifest v 2, schema 1
-        - path: /registry/spec/manifest-v2-2/
-          title: Image manifest v 2, schema 2
-        - path: /registry/spec/deprecated-schema-v1/
-          title: Update deprecated schema v1 images
-      - sectiontitle: Registry storage drivers
-        section:
-        - path: /registry/storage-drivers/
-          title: Storage driver overview
-        - path: /registry/storage-drivers/oss/
-          title: Aliyun OSS storage driver
-        - path: /registry/storage-drivers/filesystem/
-          title: Filesystem storage driver
-        - path: /registry/storage-drivers/gcs/
-          title: GCS storage driver
-        - path: /registry/storage-drivers/inmemory/
-          title: In-memory storage driver
-        - path: /registry/storage-drivers/azure/
-          title: Microsoft Azure storage driver
-        - path: /registry/storage-drivers/s3/
-          title: S3 storage driver
-        - path: /registry/storage-drivers/swift/
-          title: Swift storage driver
-      - sectiontitle: Registry specifications
-        section:
-        - path: /registry/spec/auth/
-          title: Docker Registry token authentication
-        - path: /registry/spec/auth/jwt/
-          title: Token authentication implementation
-        - path: /registry/spec/auth/oauth/
-          title: Oauth2 token authentication
-        - path: /registry/spec/auth/scope/
-          title: Token scope documentation
-        - path: /registry/spec/auth/token/
-          title: Token authentication specification
 - path: /release-notes/
   title: Release notes
 - sectiontitle: Superseded products and tools
