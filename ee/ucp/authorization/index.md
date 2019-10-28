@@ -103,7 +103,12 @@ For cluster security, only UCP admin users and service accounts that are
 granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
 ClusterRoleBinding can deploy pods with privileged options. This prevents a
 platform user from being able to bypass the Universal Control Plane Security
-Model. These privileged options include:
+Model. 
+
+> Note: Granting the `cluster admin` ClusterRole to normal users does not allow 
+> them to deploy privilaged pods. 
+
+These privileged options include:
 
 Pods with any of the following defined in the Pod Specification:
 
