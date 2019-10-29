@@ -1096,7 +1096,7 @@ reference:
     - path: /compose/reference/up/
       title: up
   - title: Daemon CLI (dockerd)
-    path: /engine/reference/commandline/dockerd/
+    path: engine/reference/commandline/dockerd/
   - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.7/cli/
