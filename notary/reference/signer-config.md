@@ -4,36 +4,35 @@ keywords: docker, notary, notary-client, notary-server, notary server, notary-si
 title: Notary signer configuration file
 ---
 
-This document is for those who are [running their own Notary service](../running_a_service.md) who
-want to specify custom options.
+This document is for those who are [running their own Notary service](../running_a_service.md)
+and want to specify custom options.
 
 ## Overview
 
 Notary signer [requires environment variables](signer-config.md#environment-variables-required-if-using-mysql)
-to encrypt private keys at rest. It also requires a configuration file, the path to which is
-specified on the command line using the `-config` flag.
+to encrypt private keys at rest. It also requires a configuration file, the
+path to which is specified on the command line using the `-config` flag.
 
-Here is a full signer configuration file example; click on the top level JSON keys to
-learn more about the configuration section corresponding to that key:
+Here is a full signer configuration file example:
 
 ```json
 {
-  <a href="signer-config.md#server-section-required">"server"</a>: {
+  "server": {
     "http_addr": ":4444",
     "grpc_addr": ":7899",
     "tls_cert_file": "./fixtures/notary-signer.crt",
     "tls_key_file": "./fixtures/notary-signer.key",
     "client_ca_file": "./fixtures/notary-server.crt"
   },
-  <a href="../common-configs/#logging-section-optional">"logging"</a>: {
+  "logging": {
     "level": 2
   },
-  <a href="signer-config.md#storage-section-required">"storage"</a>: {
+  "storage": {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
     "default_alias": "passwordalias1"
   },
-  <a href="../common-configs/#reporting-section-optional">"reporting"</a>: {
+  "reporting": {
     "bugsnag": {
       "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
       "release_stage": "production"
@@ -41,6 +40,9 @@ learn more about the configuration section corresponding to that key:
   }
 }
 ```
+
+For details on the `reporting` and `logging` sections, see the documentation on
+[common Notary configuration sections](/notary/reference/common-configs/).
 
 ## server section (required)
 
