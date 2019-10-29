@@ -6,7 +6,7 @@ keywords: Docker Engine - Enterprise, UCP, cluster, scale, worker, manager
 
 Docker Engine - Enterprise is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
-to your needs. You can join Windows Server 2016, IBM z System, and Linux nodes
+to your needs. You can join Windows Server and Linux nodes
 to the cluster.
 
 Because Docker Engine - Enterprise leverages the clustering functionality provided by Docker
@@ -37,7 +37,7 @@ When you join a node to a cluster, you specify its role: manager or worker.
 
 ## Join a node to the cluster
 
-You can join Windows Server 2016, IBM z System, and Linux nodes to the cluster,
+You can join Windows Server and Linux nodes to the cluster,
 but only Linux nodes can be managers.
 
 To join nodes to the cluster, go to the UCP web interface and navigate to the
