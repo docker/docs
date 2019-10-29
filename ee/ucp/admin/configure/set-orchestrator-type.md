@@ -24,7 +24,7 @@ both on the same node. Although you can choose to mix orchestrator types on the
 same node, this isn't recommended for production deployments because of the
 likelihood of resource contention.
 
-Change a node's orchestrator type on the **Edit node** page:
+To change a node's orchestrator type from the **Edit node** page:
 
 1.  Log in to the Docker Enterprise web UI with an administrator account.
 2.  Navigate to the **Nodes** page, and click the node that you want to assign
@@ -86,8 +86,7 @@ To set the orchestrator for new nodes:
 
 1.  Log in to the Docker Enterprise web UI with an administrator account.
 2.  Open the **Admin Settings** page, and in the left pane, click **Scheduler**.
-3.  Under **Set orchestrator type for new nodes** click **Swarm**
-    or **Kubernetes**.
+3.  Under **Set orchestrator type for new nodes** click **Swarm** or **Kubernetes**.
 4.  Click **Save**.
     
     ![](../../images/join-nodes-to-cluster-1.png){: .with-border}
@@ -99,6 +98,10 @@ aren't affected.
 Once a node is joined to the cluster, you can
 [change the orchestrator](#change-the-orchestrator-for-a-node) that schedules its
 workloads.
+
+> DTR in mixed mode
+>
+> The default and expected behavior for DTR nodes is to be in mixed orchestration. Additionally, if the DTR mode type is changed to Swarm only or Kubernetes only, reconciliation will revert the node back to mixed mode. This is expected behavior. 
 
 ## Choosing the orchestrator type
 
