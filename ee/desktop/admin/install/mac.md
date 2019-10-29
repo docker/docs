@@ -4,9 +4,11 @@ description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Mac, Docker Desktop, Enterprise
 ---
 
-This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Mac.
+This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Mac. If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install DDE.
 
-> **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
+[Download Docker Desktop Enterprise for Mac](https://download.docker.com/mac/enterprise/Docker.pkg){: .button .outline-btn}
+
+> **Note:** By downloading DDE, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement (DPA)](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 
 ## System requirements
 
@@ -24,7 +26,7 @@ This page contains information about the system requirements and specific instru
 
 ## Installation
 
-Download Docker Desktop Enterprise for [**Mac**](https://download.docker.com/mac/enterprise/Docker.pkg). The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.
+The DDE installer includes Docker Engine, Docker CLI client, and Docker Compose.
 
 Double-click the `.pkg` file to begin the installation and follow the on-screen instructions. When the installation is complete, click the Launchpad icon in the Dock and then **Docker** to start Docker Desktop.
 
