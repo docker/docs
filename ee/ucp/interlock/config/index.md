@@ -94,7 +94,7 @@ Interlock must contain at least one extension to service traffic. The following 
 | `Labels` | map[string]string | Labels to add to the extension service |
 | `ContainerLabels` | map[string]string | Labels to be added to the extension service tasks |
 | `Constraints` | []string | One or more [constraints](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint) to use when scheduling the extension service |
-|`Network` | string | Allows the administrator to cherry-pick a list of networks that Interlock can connect to. If this option is not specified, the proxy-service can connect to all networks. | 
+|`Networks` | []string | Allows the administrator to cherry-pick a list of networks that Interlock can connect to. If this option is not specified, the proxy-service can connect to all networks. | 
 | `PlacementPreferences` | []string | One or more [placement prefs](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref) to use when scheduling the extension service |
 | `ServiceName` | string | Name of the extension service |
 | `ProxyImage` | string | Name of the Docker Image to use for the proxy service |
