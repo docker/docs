@@ -100,7 +100,7 @@ exist by default, and provide core networking functionality:
 The following two features are only possible when using Docker EE and managing
 your Docker services using Universal Control Plane (UCP):
 
-- The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/)
+- The [HTTP routing mesh](/ee/ucp/interlock/deploy/upgrade/)
   allows you to share the same network IP address and port among multiple
   services. UCP routes the traffic to the appropriate service using the
   combination of hostname and port, as requested from the client.
