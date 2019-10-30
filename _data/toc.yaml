@@ -1336,6 +1336,8 @@ manuals:
           section:
           - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/
             title: Install on Azure
+          - path: /ee/ucp/admin/install/cloudproviders/install-on-azure-custom/
+            title: Custom Azure roles
           - path: /ee/ucp/admin/install/cloudproviders/install-on-aws/
             title: Install on AWS
         - path: /ee/ucp/admin/install/upgrade/
