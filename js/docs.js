@@ -131,18 +131,18 @@ function renderNav(docstoc) {
     }
     outputHorzTabs.push('><a href="'+docstoc.horizontalnav[i].path+'">'+docstoc.horizontalnav[i].title+'</a></li>\n');
   }
-  if (outputLetNav.length==0)
-  {
-    // either glossary was true or no left nav has been built; default to glossary
-    // show pages tagged with term and highlight term in left nav if applicable
-    renderTagsPage()
-    for (var i=0;i<glossary.length;i++)
-    {
-      var highlightGloss = '';
-      if (tagToLookup) highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
-      outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
-    }
-  }
+//  if (outputLetNav.length==0)
+//  {
+//     either glossary was true or no left nav has been built; default to glossary
+//     show pages tagged with term and highlight term in left nav if applicable
+//    renderTagsPage()
+//    for (var i=0;i<glossary.length;i++)
+//    {
+//      var highlightGloss = '';
+//      if (tagToLookup) highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
+//      outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
+//    }
+//  }
   document.getElementById('jsTOCHorizontal').innerHTML = outputHorzTabs.join('');
   document.getElementById('jsTOCLeftNav').innerHTML = outputLetNav.join('');
 }
