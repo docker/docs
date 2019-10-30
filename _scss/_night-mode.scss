@@ -148,6 +148,10 @@ body.night {
         margin-bottom: 30px;
         display: inline-block;
     }
+    a.glossary,
+        .toc-nav i.fa{
+            color: $body-text-color-night;
+        }
     .component img, .component-full-icon img {
         opacity: 1;
         -webkit-filter: grayscale(100%);
