@@ -101,7 +101,7 @@ workloads.
 
 > DTR in mixed mode
 >
-> The default and expected behavior for DTR nodes is to be in mixed orchestration. Additionally, if the DTR mode type is changed to Swarm only or Kubernetes only, reconciliation will revert the node back to mixed mode. This is expected behavior. 
+> The default behavior for DTR nodes is to be in mixed orchestration. Additionally, if the DTR mode type is changed to Swarm only or Kubernetes only, reconciliation will revert the node back to mixed mode. This is the expected behavior. 
 
 ## Choosing the orchestrator type
 
