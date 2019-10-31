@@ -82,6 +82,7 @@ $ docker container run \
   --ucp-username <ucp-username> \
   --ucp-node <hostname> \
   --replica-id <replica-id> \
+  --dtr-use-default-storage \
   --dtr-external-url <dtr-external-url> < {{ metadata_backup_file }}
 ```
 
