@@ -67,11 +67,15 @@ After you’ve downloaded the license keys, you can apply it to your Docker Ente
 2. Navigate to the **Admin Settings** page.
 3. On the left pane, click **License** and then **Upload License**. The license is refreshed immediately.
 
+For details, see [Licensing UCP](https://docs.docker.com/ee/ucp/admin/configure/license-your-installation/).
+
 ### DTR
 
 1. Navigate to {% raw %} https://<dtr-url>{% endraw %} and log in with your credentials.
 2. Select **System** from the left navigation pane.
 3. Click **Apply new license** and upload your license key.
+    
+For details, see [Licensing DTR](https://docs.docker.com/ee/dtr/admin/configure/license-your-installation/).
 
 ### Engine - Enterprise
 
@@ -81,9 +85,13 @@ Standalone Docker Engine - Enterprise users can license engines using the comman
 
 You can perform offline activation of standalone enterprise engines by downloading the license and running the command `docker engine activate --license filename.lic`.
 
+For more information on the command, see the reference on [docker engine activate](https://docs.docker.com/engine/reference/commandline/engine_activate/).
+
+Additionally, from Docker Engine 18.09 onward, there is a feature called [CE-EE Node Activate](https://docs.docker.com/engine/ce-ee-node-activate/), which is a seamless in-place upgrade from Docker Engine - Community to Docker Engine - Enteprise.
+
 ### Desktop Enterprise
 
-> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain Docker Desktop Enterprise licenses.
+> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/ee/desktop/) licenses.
 
 Install the Docker Desktop Enterprise license file at the following location:
 
@@ -101,13 +109,13 @@ You must create the path if it doesn’t already exist. If the license file is m
 
 If there is a lapse in your Docker Enterprise entitlements, you will be alerted in the product until a new license is applied. However, you will not lose access to the software.
 
-**Engine**: Docker Engine doesn't depend on the license being installed for ongoing functionality. It only requires licensing to access the package repositories. Note tha an expired license may affect your ability to upgrade.
+**Engine**: Docker Engine doesn't depend on the license being installed for ongoing functionality. It only requires licensing to access the package repositories. Note that an expired license may affect the node's ability to upgrade.
 
-**UCP**: UCP components continue to work as expected when the license expires. However, warnings regarding the license expiry appear in the web UI.
+**UCP**: UCP components continue to work as expected when the license expires. However, warning banners regarding the license expiry will appear in the UCP web UI.
 
-**DTR**: Image pushes to the DTR is be disabled when the license expires. All other functionality will persist.
+**DTR**: Image pushes to DTR will be disabled once the license expires. All other functionality will persist.
 
-**Desktop**: Warnings regarding the license expiry appear in the Desktop UI. You will not be able to upgrade after your license has expired.
+**Desktop**: Warnings regarding the license expiry appear in the Desktop UI. Note that an expired license may affect the software's ability to upgrade.
 
 Please work with your sales team to ensure that your licenses are renewed before the expiration date on your licenses.
 
