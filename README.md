@@ -39,11 +39,11 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
- ask in [https://forums.docker.com](https://forums.docker.com) instead.
+  ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
- of Docker, or have found a bug in part of Docker, file that issue in
- the project's code repository.
+  of Docker, or have found a bug in part of Docker, file that issue in
+  the project's code repository.
 
 ## Contributing
 
