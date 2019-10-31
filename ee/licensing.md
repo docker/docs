@@ -67,7 +67,7 @@ After you’ve downloaded the license keys, you can apply it to your Docker Ente
 2. Navigate to the **Admin Settings** page.
 3. On the left pane, click **License** and then **Upload License**. The license is refreshed immediately.
 
-[Licensing UCP](https://docs.docker.com/ee/ucp/admin/configure/license-your-installation/)
+For details, see [Licensing UCP](https://docs.docker.com/ee/ucp/admin/configure/license-your-installation/).
 
 ### DTR
 
@@ -75,18 +75,19 @@ After you’ve downloaded the license keys, you can apply it to your Docker Ente
 2. Select **System** from the left navigation pane.
 3. Click **Apply new license** and upload your license key.
     
-[Licensing DTR](https://docs.docker.com/ee/dtr/admin/configure/license-your-installation/)
+For details, see [Licensing DTR](https://docs.docker.com/ee/dtr/admin/configure/license-your-installation/).
 
 ### Engine - Enterprise
 
 When you license UCP, the same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using the command `docker engine activate`.
-[docker engine activate](https://docs.docker.com/engine/reference/commandline/engine_activate/)
 
 You can perform offline activation of standalone enterprise engines by downloading the license and running the command `docker engine activate --license filename.lic`.
 
-The Docker Engine 18.09 release introduces a new feature called [CE-EE Node Activate](https://docs.docker.com/engine/ce-ee-node-activate/), which is a seamless in-place upgrade from Docker CE to Docker EE.
+For more information on the command, see the reference on [docker engine activate](https://docs.docker.com/engine/reference/commandline/engine_activate/).
+
+Additionally, from Docker Engine 18.09 onward, there is a feature called [CE-EE Node Activate](https://docs.docker.com/engine/ce-ee-node-activate/), which is a seamless in-place upgrade from Docker Engine - Community to Docker Engine - Enteprise.
 
 ### Desktop Enterprise
 
