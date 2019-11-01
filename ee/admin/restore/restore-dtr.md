@@ -94,9 +94,12 @@ Where:
 * `<replica-id>` is the ID of the replica you backed up
 * `<dtr-external-url>` is the URL that clients use to access DTR
 
-You also need at least one flag specifying the storage backend: `--dtr-use-default-storage`, `--dtr-storage-volume`, or `--nfs-storage-url`.
+You also need at least one flag specifying the storage backend: `--dtr-use-default-storage`,
+ `--dtr-storage-volume`, or `--nfs-storage-url`.
 
-If you're using a cloud storage provider, set the `--dtr-use-default-storage` flag. This flag will tell DTR to either use the cloud provider, or use local storage if no cloud provider storage is configured.
+If you're using a cloud storage provider, set the `--dtr-use-default-storage`
+flag. This flag will tell DTR to either use the cloud provider, or use local
+storage if no cloud provider storage is configured.
 
 
 #### DTR 2.5 and below
