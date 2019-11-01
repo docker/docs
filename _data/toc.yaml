@@ -1145,7 +1145,6 @@ reference:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
   - sectiontitle: Docker Engine API
@@ -1216,7 +1215,6 @@ reference:
     path: /registry/spec/api/
   - path: /app-template/api-reference/
     title: Template API reference
-
 - sectiontitle: Drivers and specifications
   section:
   - sectiontitle: Registry image manifests
