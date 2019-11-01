@@ -1,5 +1,5 @@
 ---
-title: Working with Docker App (experimental)
+title: Docker App (experimental)
 description: Learn about Docker App
 keywords: Docker App, applications, compose, orchestration
 ---

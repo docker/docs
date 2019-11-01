@@ -1,6 +1,6 @@
 ---
-title: Working with Contexts
-description: Learn about Docker Contexts
+title: Docker Context
+description: Learn about Docker Context
 keywords: engine, contexts, cli, kubernetes
 ---
 

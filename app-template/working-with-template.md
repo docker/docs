@@ -1,6 +1,6 @@
 ---
-title: Working with Docker Template (experimental)
-description: Working with Docker Application Template
+title: Docker Template (experimental)
+description: Working with Docker Template
 keywords: Docker, application template, Application Designer,
 ---
 

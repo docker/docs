@@ -3830,18 +3830,12 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
-- sectiontitle: Docker App
-  section:
-  - path: /app/working-with-app/
-    title: Working with Docker App
-- sectiontitle: Docker Template
-  section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
-- sectiontitle: Docker Buildx
-  section:
-  - path: /buildx/working-with-buildx/
-    title: Working with Docker Buildx
+- path: /app/working-with-app/
+  title: Docker App
+- path: /app-template/working-with-template/
+  title: Docker Template
+- path: /buildx/working-with-buildx/
+  title: Docker Buildx
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -3870,10 +3864,8 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Context
-  section:
-  - path: /engine/context/working-with-contexts/
-    title: Working with Docker Contexts
+- path: /engine/context/working-with-contexts/
+  title: Docker Context
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
