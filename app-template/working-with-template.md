@@ -26,7 +26,7 @@ given service, and writes the output to the `/project` mounted folder.
   definition.  It contains the name of the service, description, and available
 parameters such as ports, volumes, etc. For a complete list of parameters that
 are allowed, see [Docker Template API
-reference](/ee/app-template/api-reference).
+reference](/app-template/api-reference/).
 
 An _application template_ is a collection of one or more service templates. An
 application template generates a Dockerfile per service and only one Compose
