@@ -12,6 +12,38 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.5.0
+2019-11-04
+
+Download
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
+
+### Upgrades
+
+- [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
+- [Docker Compose 1.25.0-rc4](https://github.com/docker/compose/releases/tag/1.25.0-rc4)
+- Linux kernel 4.19.76
+
+### New
+
+- **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
+
+  To access the Dashboard UI, select the Docker menu from the system tray and then click **Dashboard**.
+
+- **WSL 2 Backend:** Docker Desktop WSL 2 Tech Preview has been replaced with the new Docker Desktop WSL 2 Backend. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 Backend](https://engineering.docker.com/2019/10/new-docker-desktop-wsl2-backend/).
+
+- **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation which uses gRPC, FUSE, and Hypervisor sockets instead of Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
+
+  - Users don't have to expose the Samba port, and therefore no need to experience issues related to IT firewall or the drive-sharing policy.
+  - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
+
+### Known issues
+
+- When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
+
+- When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
+
 ### Docker Desktop Community 2.1.4.0
 2019-10-15
 
