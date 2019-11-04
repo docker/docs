@@ -42,11 +42,19 @@ this.
 
 ## Avoid IP range conflicts
 
-Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.  
-Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.  
-Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.  
-Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.  
-Kubernetes `service-cluster-ip-range` - CIDR range for Kubernetes services, default `10.96.0.0/16`.
+The following table indicates which subnet configurations can safely overlap explicitly **between** clusters and which can overlap **within** a cluster.
+
+
+| Subnet                                   | Overlap between clusters             | Overlap within a cluster             |
+|------------------------------------------|------------------------------------------|------------------------------------------|
+| `default-address-pools`                  | Only accessible on the local node.  Can be the same between clusters, even on the same infra subnet. Can be the same on all nodes in a cluster. |                                          |
+| `fixed-cidr` and `bip`                   | docker0 subset of `default-address-pools` and for the purposes of avoiding subnet overlaps, potentially redundant to `default-address-pools`.  Not a required configuration for subnet overlap avoidance. Can be the same on all nodes in a cluster. |                                          |
+| `default-addr-pool`                      | Encapsulated within swarm VXLAN overlay.  Only accessible within the cluster.  Can be the same between clusters, even on the same infra subnet. |                                          |
+| `pod-cidr`[^1]                              | Encapsulated in IP-IP (or VXLAN with forthcoming Windows CNI).  Only accessible from within the cluster.  Can be the same between clusters, even on the same infra subnet.  |                                          |
+| `service-cluster-ip-range`[^1]             | Also encapsulated in IP-IP or VXLAN. Only accessible from within the cluster.  Can be the same between clusters, even on the same infra subnet.  |                                          |
+| `default-address-pool`, `default-addr-pool`, `pod-cidr`, or `service-cluster-ip-range`  |                                          | None of these should overlap between clusters |
+
+[^1]: Azure without Windows VXLAN CNI uses infrastructure routes pod-pod, so whether or not these can overlap between clusters depends on the routing and security policies between the clusters.
 
 ### Engine
 
