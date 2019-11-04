@@ -35,7 +35,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation which uses gRPC, FUSE, and Hypervisor sockets instead of Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
 
-  - Users don't have to expose the Samba port, and therefore no need to experience issues related to IT firewall or the drive-sharing policy.
+  - Users don't have to expose the Samba port, and therefore do not experience issues related to IT firewall or the drive-sharing policy.
   - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
 
   > To switch back to the Samba file system:
