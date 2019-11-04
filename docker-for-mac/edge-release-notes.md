@@ -15,7 +15,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ### Docker Desktop Community 2.1.5.0
 2019-11-04
 
-Download
+[Download](https://download.docker.com/mac/edge/40323/Docker.dmg)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
 

@@ -15,7 +15,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ### Docker Desktop Community 2.1.5.0
 2019-11-04
 
-Download
+[Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
 
@@ -37,6 +37,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
   - Users don't have to expose the Samba port, and therefore no need to experience issues related to IT firewall or the drive-sharing policy.
   - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
+
+  > To switch back to the Samba file system:
+  >
+  > From the Docker menu, select **Settings** > **Command line**, and then clear the **Enable experimental features** check box. Alternatively, install a Docker Desktop Stable release.
 
 ### Known issues
 
