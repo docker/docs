@@ -136,8 +136,8 @@ Windows applications typically require Active Directory authentication in order 
 ## Docker Enterprise and the CLI
 
 Docker Enterprise exposes the standard Docker API, so you can continue using the tools
-that you already know, including the Docker CLI client, to deploy and manage your
-applications.
+that you already know, [including the Docker CLI client](./ucp/user-access/cli/),
+to deploy and manage your applications.
 
 For example, you can use the `docker info` command to check the
 status of a Swarm managed by Docker Enterprise:
@@ -166,8 +166,8 @@ Managers: 1
 
 ## Use the Kubernetes CLI
 
-Docker Enterprise exposes the standard Kubernetes API, so you can use `kubectl` to
-manage your Kubernetes workloads:
+Docker Enterprise exposes the standard Kubernetes API, so you can use [kubectl
+to manage your Kubernetes workloads](./ucp/user-access/cli/):
 
 ```bash
 kubectl cluster-info
