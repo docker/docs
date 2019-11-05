@@ -154,12 +154,6 @@ guides:
             title: Use multi-stage builds
           - path: /develop/develop-images/image_management/
             title: Manage images
-    - sectiontitle: Develop using the Docker Engine SDKs and API
-      section:
-        - path: /develop/sdk/
-          title: Overview
-        - path: /develop/sdk/examples/
-          title: SDK and API examples
 - sectiontitle: Configure networking
   section:
     - path: /network/
@@ -1209,12 +1203,12 @@ reference:
         title: v1.18 reference
   - title: DTR API
     path: /reference/dtr/2.7/api/
-  - title: UCP API
-    path: /reference/ucp/3.2/api/
   - title: Registry API
     path: /registry/spec/api/
-  - path: /app-template/api-reference/
-    title: Template API reference
+  - title: Template API
+    path: /app-template/api-reference/
+  - title: UCP API
+    path: /reference/ucp/3.2/api/
 - sectiontitle: Drivers and specifications
   section:
   - sectiontitle: Registry image manifests
@@ -1225,7 +1219,7 @@ reference:
       title: Image manifest v 2, schema 2
     - path: /registry/spec/deprecated-schema-v1/
       title: Update deprecated schema v1 images
-  - sectiontitle: Registry specifications
+  - sectiontitle: Registry token authorization
     section:
     - path: /registry/spec/auth/
       title: Docker Registry token authentication

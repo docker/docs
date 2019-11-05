@@ -1,5 +1,5 @@
 ---
-title: Docker Buildx (experimental)
+title: Docker Buildx
 description: Working with Docker Buildx
 keywords: Docker, buildx, multi-arch
 ---
