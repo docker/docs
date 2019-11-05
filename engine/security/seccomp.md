@@ -37,9 +37,8 @@ default, then whitelists specific system calls. The profile works by defining a
 system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
 error. Next, the profile defines a specific list of system calls which are fully
 allowed, because their `action` is overridden to be `SCMP_ACT_ALLOW`. Finally,
-some specific rules are for individual system calls such as `personality`,
-`socket`, `socketcall`, and others, to allow variants of those system calls with
-specific arguments.
+some specific rules are for individual system calls such as `personality`, and others, 
+to allow variants of those system calls with specific arguments.
 
 `seccomp` is instrumental for running Docker containers with least privilege. It
 is not recommended to change the default `seccomp` profile.
@@ -101,9 +100,8 @@ the reason each syscall is blocked rather than white-listed.
 | `request_key`       | Prevent containers from using the kernel keyring, which is not namespaced.                                    |
 | `set_mempolicy`     | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                       |
 | `setns`             | Deny associating a thread with a namespace. Also gated by `CAP_SYS_ADMIN`.                                    |
-| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.
-| `socket`, `socketcall` | Used to send or receive packets and for other socket operations. All `socket` and `socketcall` calls are blocked except communication domains `AF_UNIX`, `AF_INET`, `AF_INET6`, `AF_NETLINK`, and `AF_PACKET`. |
-| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                    |
+| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
+| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
 | `swapon`            | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `swapoff`           | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `sysfs`             | Obsolete syscall.                                                                                             |

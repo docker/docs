@@ -12,15 +12,16 @@ various APIs, CLIs, and file formats.
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile](/engine/reference/builder/)                            | Defines the contents and startup behavior of a single container |
 | [Compose file](/compose/compose-file/)                              | Defines a multi-container application                           |
+| [Daemon CLI (dockerd)]()| 
 
 
 ## Command-line interfaces (CLIs)
 
 | CLI                                                           | Description                                                                                                     |
 |:--------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| [Engine CLI](/engine/reference/commandline/cli/)              | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands |
+| [Docker CLI](/engine/reference/commandline/cli/)              | The main CLI for Docker, includes all `docker` commands |
 | [Compose CLI](/compose/reference/overview/)                   | The CLI for Docker Compose, which allows you to build and run multi-container applications                      |
-| [Machine CLI](/machine/reference/)                            | Manages virtual machines that are pre-configured to run Docker                                                  |
+| [Daemon CLI (dockerd)](/engine/reference/commandline/dockerd/)                            | Persistent process that manages containers                                                 |
 | [DTR CLI](/reference/dtr/{{ site.dtr_version }}/cli/index.md) | Deploy and manage Docker Trusted Registry                                                                       |
 | [UCP CLI](/reference/ucp/{{ site.ucp_version }}/cli/index.md) | Deploy and manage Universal Control Plane                                                                       |
 
@@ -28,18 +29,17 @@ various APIs, CLIs, and file formats.
 
 | API                                                   | Description                                                                            |
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
-| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
-| [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
+| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon |
 | [DTR API](/reference/dtr/{{ site.dtr_version }}/api/) | Provides programmatic access to a Docker Trusted Registry deployment                   |
+| [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
+| [Template API](app-template/api-reference)| Allows users to create new Docker applications by using a library of templates.|
 | [UCP API](/reference/ucp/{{ site.ucp_version }}/api/) | Provides programmatic access to a Universal Control Plane deployment                   |
-
 
 ## Drivers and specifications
 
 | Driver                                                 | Description                                                                        |
 |:-------------------------------------------------------|:-----------------------------------------------------------------------------------|
 | [Image specification](/registry/spec/manifest-v2-2/)   | Describes the various components of a Docker image                                 |
-| [Machine drivers](/machine/drivers/os-base/)           | Enables support for given cloud providers when provisioning resources with Machine |
 | [Registry token authentication](/registry/spec/auth/)  | Outlines the Docker registry authentication scheme                                 |
 | [Registry storage drivers](/registry/storage-drivers/) | Enables support for given cloud providers when storing images with Registry        |
 
