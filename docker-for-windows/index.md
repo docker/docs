@@ -39,22 +39,15 @@ See [Install Docker Desktop](install.md){: target="_blank" class="_"} for downlo
     > docker run hello-world
 
     docker : Unable to find image 'hello-world:latest' locally
-    ...
-
-    latest:
-    Pulling from library/hello-world
-    ca4f61b1923c:
-    Pulling fs layer
-    ca4f61b1923c:
-    Download complete
-    ca4f61b1923c:
-    Pull complete
-    Digest: sha256:97ce6fa4b6cdc0790cda65fe7290b74cfebd9fa0c9b8c38e979330d547d22ce1
+    latest: Pulling from library/hello-world
+    1b930d010525: Pull complete
+    Digest: sha256:c3b4ada4687bbaa170745b3e4dd8ac3f194ca95b2d0518b417fb47e5879d9b5f
     Status: Downloaded newer image for hello-world:latest
 
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
     ...
+
     ```
 
 4.  List the `hello-world` _image_ that was downloaded from Docker Hub:
@@ -89,18 +82,12 @@ running something more complex, such as an OS and a webserver.
     > docker run --interactive --tty ubuntu bash
 
     docker : Unable to find image 'ubuntu:latest' locally
-    ...
-
-    latest:
-    Pulling from library/ubuntu
-    22dc81ace0ea:
-    Pulling fs layer
-    1a8b3c87dba3:
-    Pulling fs layer
-    91390a1c435a:
-    Pulling fs layer
-    ...
-    Digest: sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
+    latest: Pulling from library/ubuntu
+    22e816666fd6: Pull complete
+    079b6d2a1e53: Pull complete
+    11048ebae908: Pull complete
+    c58094023a2e: Pull complete
+    Digest: sha256:a7b8b7b33e44b123d7f997bd4d3d0a59fafc63e203d17efedf09ff3f6f516152
     Status: Downloaded newer image for ubuntu:latest
     ```
 
