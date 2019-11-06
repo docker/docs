@@ -44,15 +44,22 @@ this.
 
 The following table indicates which subnet configurations can safely overlap explicitly **between** clusters and which can overlap **within** a cluster.
 
+| Subnet                     | Can overlap between clusters | Can overlap within clusters |
+|----------------------------|------------------------------|-----------------------------|
+| `default-address-pools`    | Yes                          | No                          |
+| `fixed-cidr`               | Yes                          |   No                          |
+| `bip`                      | Yes                          | No                            |
+| `default-addr-pool`        | Yes                          | No                          |
+| `pod-cidr`[^1]                 | Yes                          | No                          |
+| `service-cluster-ip-range`[^1] | Yes                          | No                          |
 
-| Subnet                                   | Overlap between clusters             | Overlap within a cluster             |
-|------------------------------------------|------------------------------------------|------------------------------------------|
-| `default-address-pools`                  | Only accessible on the local node.  Can be the same between clusters, even on the same infra subnet. Can be the same on all nodes in a cluster. |                                          |
-| `fixed-cidr` and `bip`                   | docker0 subset of `default-address-pools` and for the purposes of avoiding subnet overlaps, potentially redundant to `default-address-pools`.  Not a required configuration for subnet overlap avoidance. Can be the same on all nodes in a cluster. |                                          |
-| `default-addr-pool`                      | Encapsulated within swarm VXLAN overlay.  Only accessible within the cluster.  Can be the same between clusters, even on the same infra subnet. |                                          |
-| `pod-cidr`[^1]                              | Encapsulated in IP-IP (or VXLAN with forthcoming Windows CNI).  Only accessible from within the cluster.  Can be the same between clusters, even on the same infra subnet.  |                                          |
-| `service-cluster-ip-range`[^1]             | Also encapsulated in IP-IP or VXLAN. Only accessible from within the cluster.  Can be the same between clusters, even on the same infra subnet.  |                                          |
-| `default-address-pool`, `default-addr-pool`, `pod-cidr`, or `service-cluster-ip-range`  |                                          | None of these should overlap between clusters |
+The following list provides more information about the subnets described in the table.
+
+* **`default-address-pools`:** This subnet is only accessible on the local node. This subnet can be the same between clusters, even on the same infra subnet. This subnet Can be the same on all nodes in a cluster. This subnet should **not** overlap between clusters.
+* **`fixed-cidr` and `bip`:** `docker0` is a subset of `default-address-pools`, and for the purposes of avoiding subnet overlaps, is potentially redundant to `default-address-pools`. This is not a required configuration for subnet overlap avoidance. These subnets can be the same on all nodes in a cluster.	
+* **`default-addr-pool`:** This subnet is sncapsulated within swarm VXLAN overlay. This subnet is only accessible within the cluster. This subnet can be the same between clusters, even on the same infra subnet. This subnet should **not** overlap between clusters.
+* **`pod-cidr`:**	This subnet is encapsulated in IP-IP (or VXLAN with forthcoming Windows CNI). This subnet is only accessible from within the cluster. This subnet can be the same between clusters, even on the same infra subnet. This subnet should **not** overlap between clusters.
+* **`service-cluster-ip-range`:**	This subent is also encapsulated in IP-IP or VXLAN. This subnet is only accessible from within the cluster. This subnet can be the same between clusters, even on the same infra subnet. This subnet should **not** overlap between clusters.
 
 [^1]: Azure without Windows VXLAN CNI uses infrastructure routes pod-pod, so whether or not these can overlap between clusters depends on the routing and security policies between the clusters.
 
