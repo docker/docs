@@ -3828,8 +3828,6 @@ manuals:
     title: Advanced Backend Management
 - path: /app/working-with-app/
   title: Docker App
-- path: /app-template/working-with-template/
-  title: Docker Template
 - path: /buildx/working-with-buildx/
   title: Docker Buildx
 - sectiontitle: Docker Compose
@@ -3988,6 +3986,8 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+- path: /app-template/working-with-template/
+  title: Docker Template
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary
