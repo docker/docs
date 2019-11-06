@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 2: Containerizing an Application"
+title: "Containerizing an Application"
 keywords: containers, images, dockerfiles, node, code, coding, build, push, run
 description: Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.
 ---
