@@ -1,7 +1,5 @@
 # Docs @ Docker
 
-**Please do not submit pull requests to master in this repo.**
-
 ## Table of Contents
 
 - [Providing feedback](#providing-feedback)
