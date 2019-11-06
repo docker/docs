@@ -3828,8 +3828,6 @@ manuals:
     title: Advanced Backend Management
 - path: /app/working-with-app/
   title: Docker App
-- path: /app-template/working-with-template/
-  title: Docker Template
 - path: /buildx/working-with-buildx/
   title: Docker Buildx
 - sectiontitle: Docker Compose
