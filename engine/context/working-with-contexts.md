@@ -1,7 +1,7 @@
 ---
 title: Docker Context
 description: Learn about Docker Context
-keywords: engine, contexts, cli, kubernetes
+keywords: engine, context, cli, kubernetes
 ---
 
 
