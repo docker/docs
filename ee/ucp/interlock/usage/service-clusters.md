@@ -34,28 +34,156 @@ Next, modify Interlock's configuration to create two service clusters. Start by 
 
 ```bash
 CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ (index .Spec.TaskTemplate.ContainerSpec.Configs 0).ConfigName }}' ucp-interlock)
-docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > config.toml
+docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > old_config.toml
 ```
 
-Open up the file `config.toml` in your text editor of choice, and make the following replacements:
+Make a new config file called `config.toml` with the following content, which declares two service clusters, `east` and `west`. **Note** you will have to change the UCP version (`3.2.3` in the example below) to match yours, as well as all instances of `*.ucp.InstanceID` (`vl5umu06ryluu66uzjcv5h1bo` below):
 
- - Replace `[Extensions.default]` with `[Extensions.east]`
- - Change `ServiceName` to `"ucp-interlock-extension-east"`
- - Change `ProxyServiceName` to `"ucp-interlock-proxy-east"`
- - Add the constraint `"node.labels.region==east"` to the list `ProxyConstraints`
- - Add the key `ServiceCluster="east"` immediately below and inline with `ProxyServiceName`
- - Add the key `Networks=["eastnet"]` immediately below and inline with `ServiceCluster` (*Note this list can contain as many overlay networks as you like; Interlock will _only_ connect to the specified networks, and will connect to them all at startup.*)
- - Change `PublishMode="ingress"` to `PublishMode="host"`
- - Change the section title `[Extensions.default.Labels]` to `[Extensions.east.Labels]`
- - Add the key `"ext_region" = "east"` under the `[Extensions.east.Labels]` section
- - Change the section title `[Extensions.default.ContainerLabels]` to `[Extensions.east.ContainerLabels]`
- - Change the section title `[Extensions.default.ProxyLabels]` to `[Extensions.east.ProxyLabels]`
- - Add the key `"proxy_region" = "east"` under the `[Extensions.east.ProxyLabels]` section
- - Change the section title `[Extensions.default.ProxyContainerLabels]` to `[Extensions.east.ProxyContainerLabels]`
- - Change the section title `[Extensions.default.Config]` to `[Extensions.east.Config]`
- - [Optional] change `ProxyReplicas=2` to `ProxyReplicas=1`, necessary only if there is a single node labeled to be a proxy for each service cluster.
+```
+ListenAddr = ":8080"
+DockerURL = "unix:///var/run/docker.sock"
+AllowInsecure = false
+PollInterval = "3s"
 
-Finally, cut-and-paste the entire `[Extensions.east]` block below, and change every instance of `east` to `west` to create a second service cluster for your `west` region.
+[Extensions]
+  [Extensions.east]
+    Image = "docker/ucp-interlock-extension:3.2.3"
+    ServiceName = "ucp-interlock-extension-east"
+    Args = []
+    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
+    ConfigImage = "docker/ucp-interlock-config:3.2.3"
+    ConfigServiceName = "ucp-interlock-config-east"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.3"
+    ProxyServiceName = "ucp-interlock-proxy-east"
+    ServiceCluster="east"
+    Networks=["eastnet"]
+    ProxyConfigPath = "/etc/nginx/nginx.conf"
+    ProxyReplicas = 1
+    ProxyStopSignal = "SIGQUIT"
+    ProxyStopGracePeriod = "5s"
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.region==east"]
+    PublishMode = "host"
+    PublishedPort = 80
+    TargetPort = 80
+    PublishedSSLPort = 8443
+    TargetSSLPort = 443
+    [Extensions.east.Labels]
+      "ext_region" = "east"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ProxyLabels]
+      "proxy_region" = "east"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ProxyContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.Config]
+      Version = ""
+      HTTPVersion = "1.1"
+      User = "nginx"
+      PidPath = "/var/run/proxy.pid"
+      MaxConnections = 1024
+      ConnectTimeout = 5
+      SendTimeout = 600
+      ReadTimeout = 600
+      IPHash = false
+      AdminUser = ""
+      AdminPass = ""
+      SSLOpts = ""
+      SSLDefaultDHParam = 1024
+      SSLDefaultDHParamPath = ""
+      SSLVerify = "required"
+      WorkerProcesses = 1
+      RLimitNoFile = 65535
+      SSLCiphers = "HIGH:!aNULL:!MD5"
+      SSLProtocols = "TLSv1.2"
+      AccessLogPath = "/dev/stdout"
+      ErrorLogPath = "/dev/stdout"
+      MainLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" '\n\t\t    '$status $body_bytes_sent \"$http_referer\" '\n\t\t    '\"$http_user_agent\" \"$http_x_forwarded_for\"';"
+      TraceLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" $status '\n\t\t    '$body_bytes_sent \"$http_referer\" \"$http_user_agent\" '\n\t\t    '\"$http_x_forwarded_for\" $reqid $msec $request_time '\n\t\t    '$upstream_connect_time $upstream_header_time $upstream_response_time';"
+      KeepaliveTimeout = "75s"
+      ClientMaxBodySize = "32m"
+      ClientBodyBufferSize = "8k"
+      ClientHeaderBufferSize = "1k"
+      LargeClientHeaderBuffers = "4 8k"
+      ClientBodyTimeout = "60s"
+      UnderscoresInHeaders = false
+      UpstreamZoneSize = 64
+      ServerNamesHashBucketSize = 128
+      GlobalOptions = []
+      HTTPOptions = []
+      TCPOptions = []
+      HideInfoHeaders = false
+
+  [Extensions.west]
+    Image = "docker/ucp-interlock-extension:3.2.3"
+    ServiceName = "ucp-interlock-extension-west"
+    Args = []
+    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
+    ConfigImage = "docker/ucp-interlock-config:3.2.3"
+    ConfigServiceName = "ucp-interlock-config-west"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.3"
+    ProxyServiceName = "ucp-interlock-proxy-west"
+    ServiceCluster="west"
+    Networks=["westnet"]
+    ProxyConfigPath = "/etc/nginx/nginx.conf"
+    ProxyReplicas = 1
+    ProxyStopSignal = "SIGQUIT"
+    ProxyStopGracePeriod = "5s"
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.region==west"]
+    PublishMode = "host"
+    PublishedPort = 80
+    TargetPort = 80
+    PublishedSSLPort = 8443
+    TargetSSLPort = 443
+    [Extensions.west.Labels]
+      "ext_region" = "west"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ProxyLabels]
+      "proxy_region" = "west"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ProxyContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.Config]
+      Version = ""
+      HTTPVersion = "1.1"
+      User = "nginx"
+      PidPath = "/var/run/proxy.pid"
+      MaxConnections = 1024
+      ConnectTimeout = 5
+      SendTimeout = 600
+      ReadTimeout = 600
+      IPHash = false
+      AdminUser = ""
+      AdminPass = ""
+      SSLOpts = ""
+      SSLDefaultDHParam = 1024
+      SSLDefaultDHParamPath = ""
+      SSLVerify = "required"
+      WorkerProcesses = 1
+      RLimitNoFile = 65535
+      SSLCiphers = "HIGH:!aNULL:!MD5"
+      SSLProtocols = "TLSv1.2"
+      AccessLogPath = "/dev/stdout"
+      ErrorLogPath = "/dev/stdout"
+      MainLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" '\n\t\t    '$status $body_bytes_sent \"$http_referer\" '\n\t\t    '\"$http_user_agent\" \"$http_x_forwarded_for\"';"
+      TraceLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" $status '\n\t\t    '$body_bytes_sent \"$http_referer\" \"$http_user_agent\" '\n\t\t    '\"$http_x_forwarded_for\" $reqid $msec $request_time '\n\t\t    '$upstream_connect_time $upstream_header_time $upstream_response_time';"
+      KeepaliveTimeout = "75s"
+      ClientMaxBodySize = "32m"
+      ClientBodyBufferSize = "8k"
+      ClientHeaderBufferSize = "1k"
+      LargeClientHeaderBuffers = "4 8k"
+      ClientBodyTimeout = "60s"
+      UnderscoresInHeaders = false
+      UpstreamZoneSize = 64
+      ServerNamesHashBucketSize = 128
+      GlobalOptions = []
+      HTTPOptions = []
+      TCPOptions = []
+      HideInfoHeaders = false
+```
 
 Create a new `docker config` object from this configuration file:
 
