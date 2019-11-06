@@ -3828,6 +3828,11 @@ manuals:
     title: Advanced Backend Management
 - path: /app/working-with-app/
   title: Docker App
+<<<<<<< HEAD
+=======
+- path: /app-template/working-with-template/
+  title: Docker Template
+>>>>>>> public-fork/toc-sync-fix
 - path: /buildx/working-with-buildx/
   title: Docker Buildx
 - sectiontitle: Docker Compose
