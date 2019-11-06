@@ -12,7 +12,6 @@ various APIs, CLIs, and file formats.
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile](/engine/reference/builder/)                            | Defines the contents and startup behavior of a single container |
 | [Compose file](/compose/compose-file/)                              | Defines a multi-container application                           |
-| [Daemon CLI (dockerd)]()| 
 
 
 ## Command-line interfaces (CLIs)
