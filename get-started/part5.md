@@ -1,5 +1,5 @@
 ---
-title: "Sharing Images on Docker Hub"
+title: "Sharing images on Docker Hub"
 keywords: docker hub, push, images
 description: Learn how to share images on Docker Hub.
 ---

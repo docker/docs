@@ -124,13 +124,13 @@ guides:
     section:
     - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Containerizing an Application"
+    - title: "Part 2: Containerizing an application"
       path: /get-started/part2/
     - title: "Part 3: Deploying to Kubernetes"
       path: /get-started/part3/
     - title: "Part 4: Deploying to Swarm"
       path: /get-started/part4/
-    - title: "Part 5: Sharing Images on Docker Hub"
+    - title: "Part 5: Sharing images on Docker Hub"
       path: /get-started/part5/
   - path: /get-started/resources/
     title: "Educational resources"
