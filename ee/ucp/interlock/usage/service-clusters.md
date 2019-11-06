@@ -185,6 +185,26 @@ PollInterval = "3s"
       HideInfoHeaders = false
 ```
 
+If instead you prefer to modify the config file Interlock creates by default, the crucial parts to adjust for a service cluster are:
+
+ - Replace `[Extensions.default]` with `[Extensions.east]`
+ - Change `ServiceName` to `"ucp-interlock-extension-east"`
+ - Change `ProxyServiceName` to `"ucp-interlock-proxy-east"`
+ - Add `ConfigImage = "docker/ucp-interlock-config:3.2.3"` and `ConfigServiceName = "ucp-interlock-config-east"` directly beneath and inline with `ProxyServiceName`
+ - Add the constraint `"node.labels.region==east"` to the list `ProxyConstraints`
+ - Add the key `ServiceCluster="east"` immediately below and inline with `ProxyServiceName`
+ - Add the key `Networks=["eastnet"]` immediately below and inline with `ServiceCluster` (*Note this list can contain as many overlay networks as you like; Interlock will _only_ connect to the specified networks, and will connect to them all at startup.*)
+ - Change `PublishMode="ingress"` to `PublishMode="host"`
+ - Change the section title `[Extensions.default.Labels]` to `[Extensions.east.Labels]`
+ - Add the key `"ext_region" = "east"` under the `[Extensions.east.Labels]` section
+ - Change the section title `[Extensions.default.ContainerLabels]` to `[Extensions.east.ContainerLabels]`
+ - Change the section title `[Extensions.default.ProxyLabels]` to `[Extensions.east.ProxyLabels]`
+ - Add the key `"proxy_region" = "east"` under the `[Extensions.east.ProxyLabels]` section
+ - Change the section title `[Extensions.default.ProxyContainerLabels]` to `[Extensions.east.ProxyContainerLabels]`
+ - Change the section title `[Extensions.default.Config]` to `[Extensions.east.Config]`
+ - [Optional] change `ProxyReplicas=2` to `ProxyReplicas=1`, necessary only if there is a single node labeled to be a proxy for each service cluster.
+ - Copy the entire `[Extensions.east]` block a second time, changing `east` to `west` for your `west` service cluster.
+
 Create a new `docker config` object from this configuration file:
 
 ```bash
