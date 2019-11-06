@@ -10,7 +10,7 @@ Reconfiguring Interlock's proxy can take a long time (1-2 seconds) per overlay n
 
 In this example, we'll assume you have a UCP cluster set up with at least two worker nodes, `ucp-node-0` and `ucp-node-1`; we'll use these as dedicated proxy servers for two independent Interlock service clusters. 
 
-We'll also assume you've already enabled Interlock, per the [instructions here](https://docs.docker.com/ee/ucp/interlock/deploy/).
+We'll also assume you've already enabled Interlock, per the [instructions here](https://docs.docker.com/ee/ucp/interlock/deploy/), with an HTTP port of 80 and an HTTPS port of 8443.
 
 ## Setting Up Interlock Service Clusters
 
