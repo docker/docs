@@ -30,7 +30,7 @@ The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
-A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
+A [container](/../../glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
@@ -196,8 +196,8 @@ or a list:
       args:
         - buildno=1
         - gitcommithash=cdc3b19
-        
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
+
+> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
 

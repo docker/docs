@@ -28,7 +28,7 @@ various APIs, CLIs, and file formats.
 
 | API                                                   | Description                                                                            |
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
-| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
+| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon |
 | [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
 | [DTR API](/reference/dtr/{{ site.dtr_version }}/api/) | Provides programmatic access to a Docker Trusted Registry deployment                   |
 | [UCP API](/reference/ucp/{{ site.ucp_version }}/api/) | Provides programmatic access to a Universal Control Plane deployment                   |
