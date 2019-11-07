@@ -1033,7 +1033,7 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
-  - sectiontitle: Compose (docker-compose) CLI reference
+  - sectiontitle: Docker Compose CLI reference
     section:
     - path: /compose/reference/overview/
       title: Overview of docker-compose CLI
