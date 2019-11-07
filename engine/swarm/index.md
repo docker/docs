@@ -34,7 +34,7 @@ run. When you scale up or down, the swarm manager automatically adapts by
 adding or removing tasks to maintain the desired state.
 
 * **Desired state reconciliation:** The swarm manager node constantly monitors
-the cluster state and reconcile any differences between the actual state and your
+the cluster state and reconciles any differences between the actual state and your
 expressed desired state. For example, if you set up a service to run 10
 replicas of a container, and a worker machine hosting two of those replicas
 crashes, the manager creates two new replicas to replace the replicas that
@@ -61,7 +61,7 @@ certificates from a custom root CA.
 * **Rolling updates:** At rollout time you can apply service updates to nodes
 incrementally. The swarm manager lets you control the delay between service
 deployment to different sets of nodes. If anything goes wrong, you can
-roll-back to a previous version of the service.
+roll back to a previous version of the service.
 
 ## What's next?
 
