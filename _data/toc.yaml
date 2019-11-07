@@ -2720,9 +2720,9 @@ manuals:
         - title: Repair a cluster
           path: /ee/dtr/admin/disaster-recovery/repair-a-cluster/
         - title: Create a backup
-          path: /ee/dtr/admin/disaster-recovery/create-a-backup/
+          path: /ee/admin/backup/back-up-dtr/
         - title: Restore from a backup
-          path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
+          path: /ee/admin/restore/restore-dtr/
       - title: CLI reference
         path: /reference/dtr/2.7/cli/
         nosync: true
