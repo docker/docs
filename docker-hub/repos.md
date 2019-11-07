@@ -7,11 +7,14 @@ title: Repositories
 Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) command. A single Docker Hub repository can hold many Docker images (stored as **tags**).
+Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/)
+command. A single Docker Hub repository can hold many Docker images (stored as
+**tags**).
 
 ## Creating repositories
 
-To create a repository, sign into Docker Hub, click on **Repositories** then **Create Repository**:
+To create a repository, sign into Docker Hub, click on **Repositories** then
+**Create Repository**:
 
 ![Create repo](images/repos-create.png)
 
@@ -34,7 +37,8 @@ later in the repository settings.
 ![Setting page for creating a repo](images/repo-create-details.png)
 
 
-After you hit the **Create** button, you can start using `docker push` to push images to this repository.
+After you hit the **Create** button, you can start using `docker push` to push
+images to this repository.
 
 ## Pushing a Docker container image to Docker Hub
 
@@ -77,7 +81,8 @@ You can also make an existing repository private by going to its **Settings** ta
 
 You get one private repository for free with your Docker Hub user account (not
 usable for organizations you're a member of). If you need more private
-repositories for your user account, upgrade your Docker Hub plan from your [Billing Information](https://hub.docker.com/billing/plan) page.
+repositories for your user account, upgrade your Docker Hub plan from your
+[Billing Information](https://hub.docker.com/billing/plan) page.
 
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
@@ -85,7 +90,8 @@ from it using Docker.
 > **Note**: You need to be signed in and have access to work with a
 > private repository.
 
-> **Note**: Private repositories are not currently available to search through the top-level search or `docker search`.
+> **Note**: Private repositories are not currently available to search through
+> the top-level search or `docker search`.
 
 You can designate collaborators and manage their access to a private
 repository from that repository's **Settings** page. You can also toggle the

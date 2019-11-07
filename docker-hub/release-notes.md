@@ -13,7 +13,9 @@ known issues for each Docker Hub release.
 
 ### Enhancements
 
-* The [repositories page](https://docs.docker.com/docker-hub/repos/) and all related settings and tabs have been updated and moved from `cloud.docker.com` to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories). 
+* The [repositories page](https://docs.docker.com/docker-hub/repos/) and all
+related settings and tabs have been updated and moved from `cloud.docker.com`
+to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories). 
 
 ### Known Issues
 
