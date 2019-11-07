@@ -25,7 +25,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 
 ## Setting Up
 
-1.  Clone an example project from GitHub (if you don't have git installed, see the [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) first):
+1.  Clone an example project from GitHub (if you don't have git installed, see the [install instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) first):
 
     ```shell
     git clone -b v1 https://github.com/docker-training/node-bulletin-board
