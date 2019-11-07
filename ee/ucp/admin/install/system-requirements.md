@@ -14,7 +14,7 @@ Before installing, be sure your infrastructure has these requirements.
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
-* Linux kernel version 3.10 or higher
+* Linux kernel version 3.10 or higher (For debugging purposes, it is suggested to match the host OS kernel versions as close as possible)
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
 
 ### Minimum requirements
@@ -24,6 +24,11 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 2 vCPUs for manager nodes
 * 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
+
+* Default install directories:
+   - /var/lib/docker (Docker Data Root Directory)
+   - /var/lib/kubelet (Kubelet Data Root Directory)
+   - /var/lib/containerd (Containerd Data Root Directory)
 
 > Note
 >
