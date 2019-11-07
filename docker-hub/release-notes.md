@@ -9,6 +9,16 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2019-11-04
+
+### Enhancements
+
+* The [repositories page](https://docs.docker.com/docker-hub/repos/) and all related settings and tabs have been updated and moved from `cloud.docker.com` to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories). 
+
+### Known Issues
+
+* Scan results don't appear for some official images.
+
 # 2019-10-21
 
 ### New features
@@ -17,8 +27,6 @@ known issues for each Docker Hub release.
     > If you lose both your 2FA authentication device and recovery code, you may
     > not be able to recover your account.
     {: .important }
-
-
 
 ### Enhancements
 * As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
