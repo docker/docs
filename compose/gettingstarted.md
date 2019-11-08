@@ -119,7 +119,7 @@ the following:
         ports:
           - "5000:5000"
       redis:
-        image: "redis:alpine"
+        image: "redis:5.0.6-alpine"
 
 This Compose file defines two services: `web` and `redis`. 
 
