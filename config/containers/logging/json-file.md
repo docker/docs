@@ -32,8 +32,9 @@ The following example sets the log driver to `json-file` and sets the `max-size`
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m",
-    "max-file": "3" 
+    "max-size": "30m",
+    "max-file": "4",
+    "compress": "true"
   }
 }
 ```
