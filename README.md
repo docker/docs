@@ -1,11 +1,9 @@
 # Docs @ Docker
+Welcome to the repo for our documentation. This is the source for	
+[https://docs.docker.com/](https://docs.docker.com/).	
 
-Welcome to the repo for our documentation. This is the source for
-[https://docs.docker.com/](https://docs.docker.com/).
-
-Feel free to send us pull requests and file issues. Our docs are completely
+Feel free to send us pull requests and file issues. Our docs are completely	
 open source and we deeply appreciate contributions from our community!
-
 ## Table of Contents
 
 - [Providing feedback](#providing-feedback)

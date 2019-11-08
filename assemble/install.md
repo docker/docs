@@ -1,5 +1,5 @@
 ---
-title: Docker Assemble (experimental)
+title: Docker Assemble
 description: Installing Docker Assemble
 keywords: Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#
 ---
