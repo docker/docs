@@ -86,12 +86,6 @@ guides:
         title: Binaries
       - path: /install/linux/linux-postinstall/
         title: Optional Linux post-installation steps
-    - title: MacOS
-      path: /docker-for-mac/install/
-      nosync: true
-    - title: Microsoft Windows
-      path: /docker-for-windows/install/
-      nosync: true
   - sectiontitle: Docker Enterprise
     section:
     - title: About Docker Enterprise
@@ -110,9 +104,6 @@ guides:
         title: Ubuntu
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
-    - title: Release notes
-      path: /engine/release-notes/
-      nosync: true
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/ce-ee-node-activate/
@@ -133,13 +124,13 @@ guides:
     section:
     - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Containerizing an Application"
+    - title: "Part 2: Containerizing an application"
       path: /get-started/part2/
     - title: "Part 3: Deploying to Kubernetes"
       path: /get-started/part3/
     - title: "Part 4: Deploying to Swarm"
       path: /get-started/part4/
-    - title: "Part 5: Sharing Images on Docker Hub"
+    - title: "Part 5: Sharing images on Docker Hub"
       path: /get-started/part5/
   - path: /get-started/resources/
     title: "Educational resources"
@@ -161,20 +152,8 @@ guides:
             title: Docker build enhancements for 18.09
           - path: /develop/develop-images/multistage-build/
             title: Use multi-stage builds
-          - path: /engine/reference/builder/
-            title: Dockerfile reference
-            nosync: true
           - path: /develop/develop-images/image_management/
             title: Manage images
-        - path: /samples/
-          title: Docker app examples
-          nosync: true
-    - sectiontitle: Develop using the Docker Engine SDKs and API
-      section:
-        - path: /develop/sdk/
-          title: Overview
-        - path: /develop/sdk/examples/
-          title: SDK and API examples
 - sectiontitle: Configure networking
   section:
     - path: /network/
@@ -215,7 +194,6 @@ guides:
         title: (Legacy) Container links
       - path: /network/overlay-standalone.swarm/
         title: Overlay networks for Swarm Classic
-
 - sectiontitle: Manage application data
   section:
     - path: /storage/
@@ -262,12 +240,6 @@ guides:
       title: Configure and run Docker
     - path: /config/daemon/systemd/
       title: Control Docker with systemd
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to daemons
-      nosync: true
-    - path: /config/containers/logging/configure/
-      title: Configuring default drivers
-      nosync: true
   - sectiontitle: Work with external tools
     section:
     - path: /config/thirdparty/
@@ -286,12 +258,6 @@ guides:
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/
       title: Runtime options with Memory, CPUs, and GPUs
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to containers
-      nosync: true
-    - path: /config/pruning/
-      title: Prune unused containers
-      nosync: true
     - sectiontitle: Logging
       section:
       - path: /config/containers/logging/
@@ -328,9 +294,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - path: /registry/recipes/mirror/
-      title: Run a local registry mirror
-      nosync: true
     - sectiontitle: Work with external tools
       section:
       - path: /config/thirdparty/dsc/
@@ -341,8 +304,6 @@ guides:
         title: Chef
       - path: /config/thirdparty/puppet/
         title: Puppet
-      - path: /config/thirdparty/ambassador_pattern_linking/
-        title: (Obsolete) Link via an ambassador container
     - sectiontitle: Security
       section:
       - path: /engine/security/security/
@@ -427,8 +388,6 @@ guides:
         title: Manage sensitive data with Docker secrets
       - path: /engine/swarm/swarm_manager_locking/
         title: Lock your swarm
-      - path: /engine/swarm/networking/
-        title: Manage swarm service networks
       - path: /engine/swarm/admin_guide/
         title: Swarm administration guide
       - path: /engine/swarm/raft/
@@ -483,29 +442,34 @@ guides:
     title: FedRAMP
   - path: /compliance/fisma/
     title: FISMA
-
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
     title: Contribute to documentation
   - path: /opensource/ways/
     title: Other ways to contribute
-
 - sectiontitle: Documentation archive
   section:
   - path: /docsarchive/
     title: View the docs archives
-  - path: /hackathon/
-    title: Docs hackathon results
 
 reference:
 - sectiontitle: File formats
   section:
   - title: Dockerfile reference
     path: /engine/reference/builder/
-  - title: Compose file reference
-    path: /compose/compose-file/
-    nosync: true
+  - sectiontitle: Compose file reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently asked questions
 
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
@@ -629,7 +593,6 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
-
     - sectiontitle: docker cluster *
       section:
         - path: /engine/reference/commandline/cluster/
@@ -1070,14 +1033,64 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
+  - sectiontitle: Docker Compose CLI reference
+    section:
+    - path: /compose/reference/overview/
+      title: Overview of docker-compose CLI
+    - path: /compose/reference/envvars/
+      title: CLI environment variables
+    - path: /compose/completion/
+      title: Command-line completion
+    - path: /compose/reference/build/
+      title: build
+    - path: /compose/reference/bundle/
+      title: bundle
+    - path: /compose/reference/config/
+      title: config
+    - path: /compose/reference/create/
+      title: create
+    - path: /compose/reference/down/
+      title: down
+    - path: /compose/reference/events/
+      title: events
+    - path: /compose/reference/exec/
+      title: exec
+    - path: /compose/reference/help/
+      title: help
+    - path: /compose/reference/kill/
+      title: kill
+    - path: /compose/reference/logs/
+      title: logs
+    - path: /compose/reference/pause/
+      title: pause
+    - path: /compose/reference/port/
+      title: port
+    - path: /compose/reference/ps/
+      title: ps
+    - path: /compose/reference/pull/
+      title: pull
+    - path: /compose/reference/push/
+      title: push
+    - path: /compose/reference/restart/
+      title: restart
+    - path: /compose/reference/rm/
+      title: rm
+    - path: /compose/reference/run/
+      title: run
+    - path: /compose/reference/scale/
+      title: scale
+    - path: /compose/reference/start/
+      title: start
+    - path: /compose/reference/stop/
+      title: stop
+    - path: /compose/reference/top/
+      title: top
+    - path: /compose/reference/unpause/
+      title: unpause
+    - path: /compose/reference/up/
+      title: up
   - title: Daemon CLI (dockerd)
-    path: /engine/reference/commandline/dockerd/
-  - title: Machine (docker-machine) CLI
-    path: /machine/reference/
-    nosync: true
-  - title: Compose (docker-compose) CLI
-    path: /compose/reference/overview/
-    nosync: true
+    path: engine/reference/commandline/dockerd/
   - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.7/cli/
@@ -1126,7 +1139,6 @@ reference:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
   - sectiontitle: Docker Engine API
@@ -1191,23 +1203,52 @@ reference:
         title: v1.18 reference
   - title: DTR API
     path: /reference/dtr/2.7/api/
-  - title: UCP API
-    path: /reference/ucp/3.2/api/
   - title: Registry API
     path: /registry/spec/api/
-    nosync: true
-
+  - title: Template API
+    path: /app-template/api-reference/
+  - title: UCP API
+    path: /reference/ucp/3.2/api/
 - sectiontitle: Drivers and specifications
   section:
-  - title: Image specification
-    path: /registry/spec/manifest-v2-2/
-  - title: Machine drivers
-    path: /machine/drivers/os-base/
-  - title: Registry token authentication
-    path: /registry/spec/auth/
-  - title: Registry storage drivers
-    path: /registry/storage-drivers/
-
+  - sectiontitle: Registry image manifests
+    section:
+    - path: /registry/spec/manifest-v2-1/
+      title: Image manifest v 2, schema 1
+    - path: /registry/spec/manifest-v2-2/
+      title: Image manifest v 2, schema 2
+    - path: /registry/spec/deprecated-schema-v1/
+      title: Update deprecated schema v1 images
+  - sectiontitle: Registry token authorization
+    section:
+    - path: /registry/spec/auth/
+      title: Docker Registry token authentication
+    - path: /registry/spec/auth/jwt/
+      title: Token authentication implementation
+    - path: /registry/spec/auth/oauth/
+      title: Oauth2 token authentication
+    - path: /registry/spec/auth/scope/
+      title: Token scope documentation
+    - path: /registry/spec/auth/token/
+      title: Token authentication specification  
+  - sectiontitle: Registry storage drivers
+    section:
+    - path: /registry/storage-drivers/
+      title: Storage driver overview
+    - path: /registry/storage-drivers/oss/
+      title: Aliyun OSS storage driver
+    - path: /registry/storage-drivers/filesystem/
+      title: Filesystem storage driver
+    - path: /registry/storage-drivers/gcs/
+      title: GCS storage driver
+    - path: /registry/storage-drivers/inmemory/
+      title: In-memory storage driver
+    - path: /registry/storage-drivers/azure/
+      title: Microsoft Azure storage driver
+    - path: /registry/storage-drivers/s3/
+      title: S3 storage driver
+    - path: /registry/storage-drivers/swift/
+      title: Swift storage driver
 - sectiontitle: Compliance control references
   section:
   - sectiontitle: NIST 800-53
@@ -1305,13 +1346,8 @@ manuals:
       title: Cluster file structure
     - path: /cluster/reference/envvars/
       title: Environment variables
-    - path: /cluster/reference/
-      title: Subcommands
   - sectiontitle: Docker Engine - Enterprise
     section:
-    - path: /ee/supported-platforms/
-      title: Install Docker Engine - Enterprise
-      nosync: true
     - title: Release notes
       path: /engine/release-notes/
   - sectiontitle: Universal Control Plane
@@ -1418,9 +1454,6 @@ manuals:
         path: /ee/admin/backup/back-up-ucp/
       - title: Restore UCP
         path: /ee/admin/restore/restore-ucp/
-      - title: CLI reference
-        path: /reference/ucp/3.2/cli/
-        nosync: true
     - sectiontitle: Authorize role-based access
       section:
       - path: /ee/ucp/authorization/
@@ -1509,10 +1542,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Specifying a routing mode
-            path: /ee/ucp/interlock/usage/interlock-vip-mode/
-          - title: Using routing labels
-            path: /ee/ucp/interlock/usage/labels-reference/
           - title: Publishing a default host service
             path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
@@ -1573,9 +1602,6 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
         - title: Implementing Persistent (sticky) Sessions
           path: /ee/ucp/kubernetes/cluster-ingress/sticky/
-    - title: API reference
-      path: /reference/ucp/3.2/api/
-      nosync: true
     - path: /ee/ucp/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -2694,9 +2720,9 @@ manuals:
         - title: Repair a cluster
           path: /ee/dtr/admin/disaster-recovery/repair-a-cluster/
         - title: Create a backup
-          path: /ee/dtr/admin/disaster-recovery/create-a-backup/
+          path: /ee/admin/backup/back-up-dtr/
         - title: Restore from a backup
-          path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
+          path: /ee/admin/restore/restore-dtr/
       - title: CLI reference
         path: /reference/dtr/2.7/cli/
         nosync: true
@@ -3760,9 +3786,6 @@ manuals:
     section:
     - path: /ee/docker-ee-architecture/
       title: Docker Enterprise Architecture
-    - path: /ee/supported-platforms/
-      title: Supported platforms
-      nosync: true
     - path: /ee/end-to-end-install/
       title: Deploy Docker Enterprise
     - path: /ee/upgrade/
@@ -3773,24 +3796,12 @@ manuals:
         title: Overview
       - path: /ee/admin/backup/back-up-swarm/
         title: Back up Docker Swarm
-      - path: /ee/admin/backup/back-up-ucp/
-        title: Back up UCP
-      - path: /ee/admin/backup/back-up-dtr/
-        title: Back up DTR
-      - path: /engine/reference/commandline/cluster_backup/
-        title: Back up clusters with Docker Cluster
     - sectiontitle: Restore Docker Enterprise
       section:
       - path: /ee/admin/restore/
         title: Overview
       - path: /ee/admin/restore/restore-swarm/
         title: Restore Docker Swarm
-      - path: /ee/admin/restore/restore-ucp/
-        title: Restore UCP
-      - path: /ee/admin/restore/restore-dtr/
-        title: Restore DTR
-      - path: /cluster/reference/restore/
-        title: Restore clusters with Docker Cluster
     - sectiontitle: Disaster Recovery
       section:
       - path: /ee/admin/disaster-recovery/
@@ -3815,28 +3826,10 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
-  - path: /engine/reference/commandline/assemble/
-    title: CLI reference
-- sectiontitle: Docker App
-  section:
-  - path: /app/working-with-app/
-    title: Working with Docker App
-  - path: /engine/reference/commandline/app/
-    title: CLI reference
-- sectiontitle: Docker Template
-  section:
-  - path: /app-template/working-with-template/
-    title: Working with Docker Template
-  - path: /app-template/api-reference/
-    title: API reference
-  - path: /engine/reference/commandline/template/
-    title: CLI reference
-- sectiontitle: Docker Buildx
-  section:
-  - path: /buildx/working-with-buildx/
-    title: Working with Docker Buildx
-  - path: /engine/reference/commandline/buildx/
-    title: CLI reference
+- path: /app/working-with-app/
+  title: Docker App
+- path: /buildx/working-with-buildx/
+  title: Docker Buildx
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -3845,74 +3838,6 @@ manuals:
     title: Install Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - sectiontitle: Compose (docker-compose) CLI reference
-    section:
-    - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
-    - path: /compose/reference/build/
-      title: build
-    - path: /compose/reference/bundle/
-      title: bundle
-    - path: /compose/reference/config/
-      title: config
-    - path: /compose/reference/create/
-      title: create
-    - path: /compose/reference/down/
-      title: down
-    - path: /compose/reference/events/
-      title: events
-    - path: /compose/reference/exec/
-      title: exec
-    - path: /compose/reference/help/
-      title: help
-    - path: /compose/reference/kill/
-      title: kill
-    - path: /compose/reference/logs/
-      title: logs
-    - path: /compose/reference/pause/
-      title: pause
-    - path: /compose/reference/port/
-      title: port
-    - path: /compose/reference/ps/
-      title: ps
-    - path: /compose/reference/pull/
-      title: pull
-    - path: /compose/reference/push/
-      title: push
-    - path: /compose/reference/restart/
-      title: restart
-    - path: /compose/reference/rm/
-      title: rm
-    - path: /compose/reference/run/
-      title: run
-    - path: /compose/reference/scale/
-      title: scale
-    - path: /compose/reference/start/
-      title: start
-    - path: /compose/reference/stop/
-      title: stop
-    - path: /compose/reference/top/
-      title: top
-    - path: /compose/reference/unpause/
-      title: unpause
-    - path: /compose/reference/up/
-      title: up
-  - sectiontitle: Compose file reference
-    section:
-    - path: /compose/compose-file/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
   - path: /compose/bundles/
     title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
@@ -3927,20 +3852,14 @@ manuals:
     title: Networking in Compose
   - path: /compose/production/
     title: Using Compose in production
-  - path: /compose/link-env-deprecated/
-    title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Context
-  section:
-  - path: /engine/context/working-with-contexts/
-    title: Working with Docker Contexts
-  - path: /engine/reference/commandline/context/
-    title: CLI reference
+- path: /engine/context/working-with-contexts/
+  title: Docker Context
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
@@ -4067,6 +3986,8 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+- path: /app-template/working-with-template/
+  title: Docker Template
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary
@@ -4125,48 +4046,6 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
-    - sectiontitle: Registry reference
-      section:
-      - path: /registry/spec/api/
-        title: Registry HTTP API v2
-      - sectiontitle: Registry image manifests
-        section:
-        - path: /registry/spec/manifest-v2-1/
-          title: Image manifest v 2, schema 1
-        - path: /registry/spec/manifest-v2-2/
-          title: Image manifest v 2, schema 2
-        - path: /registry/spec/deprecated-schema-v1/
-          title: Update deprecated schema v1 images
-      - sectiontitle: Registry storage drivers
-        section:
-        - path: /registry/storage-drivers/
-          title: Storage driver overview
-        - path: /registry/storage-drivers/oss/
-          title: Aliyun OSS storage driver
-        - path: /registry/storage-drivers/filesystem/
-          title: Filesystem storage driver
-        - path: /registry/storage-drivers/gcs/
-          title: GCS storage driver
-        - path: /registry/storage-drivers/inmemory/
-          title: In-memory storage driver
-        - path: /registry/storage-drivers/azure/
-          title: Microsoft Azure storage driver
-        - path: /registry/storage-drivers/s3/
-          title: S3 storage driver
-        - path: /registry/storage-drivers/swift/
-          title: Swift storage driver
-      - sectiontitle: Registry specifications
-        section:
-        - path: /registry/spec/auth/
-          title: Docker Registry token authentication
-        - path: /registry/spec/auth/jwt/
-          title: Token authentication implementation
-        - path: /registry/spec/auth/oauth/
-          title: Oauth2 token authentication
-        - path: /registry/spec/auth/scope/
-          title: Token scope documentation
-        - path: /registry/spec/auth/token/
-          title: Token authentication specification
 - path: /release-notes/
   title: Release notes
 - sectiontitle: Superseded products and tools
