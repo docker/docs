@@ -1090,7 +1090,7 @@ reference:
     - path: /compose/reference/up/
       title: up
   - title: Daemon CLI (dockerd)
-    path: engine/reference/commandline/dockerd/
+    path: /engine/reference/commandline/dockerd/
   - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.7/cli/
@@ -1230,7 +1230,7 @@ reference:
     - path: /registry/spec/auth/scope/
       title: Token scope documentation
     - path: /registry/spec/auth/token/
-      title: Token authentication specification  
+      title: Token authentication specification
   - sectiontitle: Registry storage drivers
     section:
     - path: /registry/storage-drivers/
