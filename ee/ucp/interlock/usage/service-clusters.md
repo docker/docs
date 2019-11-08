@@ -190,7 +190,6 @@ If instead you prefer to modify the config file Interlock creates by default, th
  - Replace `[Extensions.default]` with `[Extensions.east]`
  - Change `ServiceName` to `"ucp-interlock-extension-east"`
  - Change `ProxyServiceName` to `"ucp-interlock-proxy-east"`
- - Add `ConfigImage = "docker/ucp-interlock-config:3.2.3"` and `ConfigServiceName = "ucp-interlock-config-east"` directly beneath and inline with `ProxyServiceName`
  - Add the constraint `"node.labels.region==east"` to the list `ProxyConstraints`
  - Add the key `ServiceCluster="east"` immediately below and inline with `ProxyServiceName`
  - Add the key `Networks=["eastnet"]` immediately below and inline with `ServiceCluster` (*Note this list can contain as many overlay networks as you like; Interlock will _only_ connect to the specified networks, and will connect to them all at startup.*)
