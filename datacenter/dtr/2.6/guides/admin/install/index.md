@@ -55,8 +55,8 @@ By default DTR is deployed with self-signed certificates, so your UCP deployment
 might not be able to pull images from DTR.
 Use the `--dtr-external-url <dtr-domain>:<port>` optional flag while deploying
 DTR, so that UCP is automatically reconfigured to trust DTR. Since [HSTS (HTTP Strict-Transport-Security)
-header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) is included in all API responses, 
-make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR, or your browser may refuse 
+header](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) is included in all API responses,
+make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR, or your browser may refuse
 to load the web interface.
 
 ## Step 4. Check that DTR is running
@@ -125,13 +125,13 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
-    
+
     > --ucp-node
     >
     > The <ucp-node-name> following the --ucp-node flag is the target node to
     > install the DTR replica. This is NOT the UCP Manager URL.
     {: .important}
-    
+
 3. Check that all replicas are running.
 
     In your browser, navigate to the Docker **Universal Control Plane**
