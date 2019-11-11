@@ -1,5 +1,5 @@
 ---
-title: "Sharing images on Docker Hub"
+title: "Get Started, Part 5: Sharing Images on Docker Hub"
 keywords: docker hub, push, images
 description: Learn how to share images on Docker Hub.
 ---
@@ -57,3 +57,5 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 Now that your image is available on Docker Hub, you'll be able to run it anywhere; if you try to use it on a new cluster that doesn't have it yet, Docker will automatically try and download it from Docker Hub. By moving images around in this way, we no longer need to install any dependencies except Docker and our orchestrator on the machines we want to run our software on; the dependencies of our containerized applications are completely encapsulated and isolated within our images, which we can share via Docker Hub in the manner above.
 
 Another thing to keep in mind: at the moment, we've only pushed your image to Docker Hub; what about your Dockerfiles, Kube YAML and stack files? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application, and add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
+
+

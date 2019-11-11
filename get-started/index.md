@@ -1,5 +1,5 @@
 ---
-title: "Orientation and setup"
+title: "Get Started, Part 1: Orientation and setup"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Get oriented on some basics of Docker and install Docker Desktop.
 redirect_from:
