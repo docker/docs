@@ -39,8 +39,7 @@ docker container run --rm -it --name ucp \
   --interactive
 ```
 
-This runs the install command in interactive mode, so that you're prompted
-for any necessary configuration values.
+This runs the [docker/ucp install](https://docs.docker.com/reference/ucp/3.2/cli/install/) command in interactive mode, so that you're prompted for any necessary configuration values.
 
 [Learn more about the UCP installation](ucp/admin/install/index.md).
 
@@ -91,9 +90,11 @@ docker container run -it --rm \
   --ucp-insecure-tls
 ```
 
-Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
-DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
+This runs the [docker/dtr install](https://docs.docker.com/reference/dtr/2.7/cli/install/) command where the `--ucp-node` is the hostname of the UCP node where you want to deploy
+DTR and `--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
+
+[Learn more about the DTR installation](ee/dtr/admin/install/install.md).
 
 ## Where to go next
 
