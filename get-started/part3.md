@@ -1,5 +1,5 @@
 ---
-title: "Deploying to Kubernetes"
+title: "Get Started, Part 3: Deploying to Kubernetes"
 keywords: kubernetes, pods, deployments, kubernetes services
 description: Learn how to describe and deploy a simple application on Kubernetes.
 ---
@@ -24,7 +24,7 @@ In order to validate that our containerized application works well on Kubernetes
 
 All containers in Kubernetes are scheduled as _pods_, which are groups of co-located containers that share some resources. Furthermore, in a realistic application we almost never create individual pods; instead, most of our workloads are scheduled as _deployments_, which are scalable groups of pods maintained automatically by Kubernetes. Lastly, all Kubernetes objects can and should be described in manifests called _Kubernetes YAML_ files; these YAML files describe all the components and configurations of your Kubernetes app, and can be used to easily create and destroy your app in any Kubernetes environment.
 
-1.  You already wrote a very basic Kubernetes YAML file in the first part of this tutorial; let's write a slightly more sophisticated one now, to run and manage our bulletin board. Place the following in a file called `bb.yaml`:
+1.  You already wrote a very basic Kubernetes YAML file in the first part of this tutorial; let's write a slightly more sophisticated one now, to run and manage our bulletin board. Place the following in a file called `bb.yaml`and save it in the same place you put the other yaml file.
 
     ```yaml
     apiVersion: apps/v1
@@ -124,6 +124,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Kubernetes environment on our development machine. We haven't done much with Kubernetes yet, but the door is now open: you can begin adding other components to your app and taking advantage of all the features and power of Kubernetes, right on your own machine.
 
 In addition to deploying to Kubernetes, we have also described our application as a Kubernetes YAML file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
+
+[On to Part 4 >>](part4.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
 ## Kubernetes References
 
