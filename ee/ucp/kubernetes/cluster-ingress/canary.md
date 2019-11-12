@@ -27,7 +27,7 @@ A new Kubernetes manifest file with updated ingress rules can be found [here](./
 1. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a cluster with Cluster Ingress installed. 
 2. Download the sample Kubernetes manifest file.
 ```bash
-$ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
+$ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
 ```
 3. Deploy the Kubernetes manifest file.
  
