@@ -49,7 +49,7 @@ You can run that snippet on any node where Docker is installed. As an example
 you can SSH into a UCP node and run the DTR installer from there. By default
 the installer runs in interactive mode and prompts you for any additional
 information that is necessary.
-[Learn more about the installer](/reference/dtr/2.6/cli/install/).
+[Learn more about the installer](/v18.09/reference/dtr/2.6/cli/install/).
 
 By default DTR is deployed with self-signed certificates, so your UCP deployment
 might not be able to pull images from DTR.
