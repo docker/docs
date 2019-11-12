@@ -194,7 +194,7 @@ There are several options for deploying a Docker App project.
 - Deploy as a Compose app application
 - Deploy as a Docker Stack application
 
-All three options are discussed, starting with deploying as a native Dock App application.
+All three options are discussed, starting with deploying as a native Docker App application.
 
 #### Deploy as a native Docker App
 
