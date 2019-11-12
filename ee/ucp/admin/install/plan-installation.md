@@ -1,5 +1,5 @@
 ---
-title: Plan a production UCP installation
+title: Plan your installation
 description: Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.
 keywords: UCP, install, Docker EE
 ---
@@ -10,7 +10,7 @@ deploying Docker Universal Control Plane for production.
 
 ## System requirements
 
-Before installing UCP you should make sure that all nodes (physical or virtual
+Before installing UCP, make sure that all nodes (physical or virtual
 machines) that you'll manage with UCP:
 
 * [Comply with the system requirements](system-requirements.md), and
@@ -42,11 +42,16 @@ this.
 
 ## Avoid IP range conflicts
 
-Engine `fixed-cidr` - CIDR range for `docker0` interface and local containers, default `172.17.0.0/16`.  
-Engine `default-address-pools` - CIDR range for `docker_gwbridge` interface and bridge networks, default `172.18.0.0/16`.  
-Swarm `default-addr-pool` - CIDR range for Swarm overlay networks, default `10.0.0.0/8`.  
-Kubernetes `pod-cidr` - CIDR range for Kubernetes pods, default `192.168.0.0/16`.  
-Kubernetes `service-cluster-ip-range` - CIDR range for Kubernetes services, default `10.96.0.0/16`.
+The following table lists recommendations to avoid IP range conflicts.
+
+| Component  | Subnet                     | Range                                    | Default IP address     |
+|------------|----------------------------|------------------------------------------|----------------|
+| Engine     | `fixed-cidr`               | CIDR range for `docker0` interface and local containers | 172.17.0.0/16  |
+| Engine     | `default-address-pools`    | CIDR range for `docker_gwbridge` interface and bridge networks | 172.18.0.0/16  |
+| Swarm      | `default-addr-pool`        | CIDR range for Swarm overlay networks    | 10.0.0.0/8     |
+| Kubernetes | `pod-cidr`                 | CIDR range for Kubernetes pods           | 192.168.0.0/16 |
+| Kubernetes | `service-cluster-ip-range` | CIDR range for Kubernetes services       | 10.96.0.0/16   |
+
 
 ### Engine
 
@@ -76,7 +81,9 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
  The `docker_gwbridge` is a virtual bridge that connects the overlay networks (including the `ingress` network) to an individual Docker engine's physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for `docker_gwbridge` is `172.18.0.0/16`.
 
- > **Note**: If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
+ > Note
+ >
+ > If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
 
  The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the interface:
 
@@ -99,23 +106,26 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 
 Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the `--default-addr-pool` command line option during [Swarm initialization](../../../../engine/swarm/swarm-mode.md).
 
-> **Note**: The Swarm `default-addr-pool` setting is separate from the Docker engine `default-address-pools` setting. They are two separate ranges that are used for different purposes.
+> Note
+>
+> The Swarm `default-addr-pool` setting is separate from the Docker engine `default-address-pools` setting. They are two separate ranges that are used for different purposes.
 
-> **Note**: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.
+> Note
+> 
+> Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.
 
 ### Kubernetes
 
-There are 2 internal IP ranges used within Kubernetes that may overlap and
+There are two internal IP ranges used within Kubernetes that may overlap and
 conflict with the underlying infrastructure:
 
 * The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
   IP addresses on the `192.168.0.0/16` range. This can be customized at install
   time using the `--pod-cidr` flag.
-
 * The Services Network - When a user exposes a Service in Kubernetes it is
   accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
-  this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
+  this range is `10.96.0.0/16`. Beginning with 3.1.8, this value can be
   changed at install time with the `--service-cluster-ip-range` flag.
 
 ## Avoid firewall conflicts
@@ -124,8 +134,14 @@ For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is tu
 
 To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
 
-For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
+For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
+For Red Hat Enterprise Linux (RHEL) 8, if firewalld is running and `FirewallBackend=nftables` is set in `/etc/firewalld/firewalld.conf`, change this to `FirewallBackend=iptables`, or you can explicitly run the following commands to allow traffic to enter the default bridge (docker0) network:
+
+```
+firewall-cmd --permanent --zone=trusted --add-interface=docker0
+firewall-cmd --reload
+```
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
@@ -153,7 +169,7 @@ DTR, your load balancer needs to distinguish traffic between the two by IP
 address or port number.
 
 * If you want to configure your load balancer to listen on port 443:
-  * Use one load balancer for UCP and another for DTR,
+  * Use one load balancer for UCP and another for DTR.
   * Use the same load balancer with multiple virtual IPs.
 * Configure your load balancer to expose UCP or DTR on a port other than 443.
 
