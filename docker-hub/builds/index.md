@@ -271,17 +271,7 @@ tag that is applied to the built image.
 
 You can use up to nine regular expression capture groups
 (expressions enclosed in parentheses) to select a source to build, and reference
-these in the Docker Tag field using `{\1}` through `{\9}`.
-
-**Regex example: build from version number branch and tag with version number**
-
-You might want to automatically build any branches that end with a number
-formatted like a version number, and tag their resulting Docker images using a
-name that incorporates that branch name.
-
-To do this, specify a `branch` build with the regex `/[0-9.]+$/` in the
-**Source** field, and use the formula `version-{sourceref}` in the **Docker
-tag** field.
+these in the **Docker Tag** field using `{\1}` through `{\9}`.
 
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
