@@ -15,6 +15,19 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.8
+2019-11-13
+
+Docker Desktop Enterprise 2.1.0.8 contains a Kubernetes upgrade. Note that your local Kubernetes cluster in Version Pack 3.0 will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.5](https://docs.docker.com/engine/release-notes/#19035/) in Version Pack Enterprise 3.0
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8) in Version Pack Enterprise 3.0
+- [Docker 18.09.11](https://docs.docker.com/engine/release-notes/#180911) in Version Pack Enterprise 2.1
+- [Docker 17.06.2-ee-25](https://docs.docker.com/engine/release-notes/#17062-ee-25) in Version Pack Enterprise 2.0
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
 ## Version 2.1.0.7
 2019-10-18
 
