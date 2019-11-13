@@ -46,7 +46,7 @@ Complete the following checks:
 #### Operating system
 - If cluster nodes OS branch is older (Ubuntu 14.x, RHEL 7.3, etc), consider patching all relevant packages to the most recent (including kernel).
 - Rolling restart of each node before upgrade (to confirm in-memory settings are the same as startup-scripts).
-- Run `check-config.sh` on each cluster node (after rolling restart) for any kernel compatibility issues.
+- Run `check-config.sh` on each cluster node (after rolling restart) for any kernel compatibility issues. Latest version of the script can be found here: https://github.com/moby/moby/blob/master/contrib/check-config.sh
 
 #### Procedural
 - Perform Swarm, UCP and DTR backups before upgrading
