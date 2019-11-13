@@ -1230,7 +1230,7 @@ reference:
     - path: /registry/spec/auth/scope/
       title: Token scope documentation
     - path: /registry/spec/auth/token/
-      title: Token authentication specification  
+      title: Token authentication specification
   - sectiontitle: Registry storage drivers
     section:
     - path: /registry/storage-drivers/
@@ -3966,8 +3966,6 @@ manuals:
         title: Advanced automated builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
-      - path: /docker-hub/builds/classic/
-        title: Classic automated builds
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
