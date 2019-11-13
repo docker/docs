@@ -1,12 +1,12 @@
 ---
-description: Instructions for installing Docker EE on RHEL
+description: Instructions for installing Docker Engine - Enterprise on RHEL
 keywords: requirements, installation, rhel, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/rhel/
 - /installation/rhel/
 - /engine/installation/linux/rhel/
 - /engine/installation/linux/docker-ee/rhel/
-title: Get Docker EE for Red Hat Enterprise Linux
+title: Get Docker Engine - Enterprise for Red Hat Enterprise Linux
 ---
 
 {% assign linux-dist = "rhel" %}
@@ -36,7 +36,7 @@ Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher running
 
 > Little-endian format only
 >
-> On IBM Power systems, Docker EE only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
+> On IBM Power systems, Docker Engine - Enterprise only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
 
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
 
@@ -114,7 +114,7 @@ Restart the Docker service as root.
 
 `$ sudo systemctl restart docker`
 
-### Find your Docker EE repo URL
+### Find your Docker Engine - Enterprise repo URL
 
 {% include ee-linux-install-reuse.md section="find-ee-repo-url" %}
 
@@ -178,7 +178,7 @@ $ sudo yum remove docker \
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-package" %}
 
 
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 
 {% include ee-linux-install-reuse.md section="yum-uninstall" %}
 
