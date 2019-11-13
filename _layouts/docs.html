@@ -179,7 +179,7 @@
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
 							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
-							{% capture keywordlist %}{{ keywordlist }}<a href="/glossary/?term={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
+							{% capture keywordlist %}{{ keywordlist }}<a href="https://docs.docker.com/search/?q={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
 							{% endfor %}
 							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
 							{% endunless %}
