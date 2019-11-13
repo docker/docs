@@ -111,12 +111,14 @@ conflict with the underlying infrastructure:
 * The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
   IP addresses on the `192.168.0.0/16` range. This can be customized at install
-  time by passing the `--pod-cidr` flag to the [ucp installation command](https://docs.docker.com/reference/ucp/3.2/cli/install/). 
+  time by passing the `--pod-cidr` flag to the 
+  [ucp installation command](/reference/ucp/{{ site.ucp_version }}/cli/install/). 
 
 * The Services Network - When a user exposes a Service in Kubernetes it is
   accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
   this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
-  changed at install time by passing the `--service-cluster-ip-range` flag to the [ucp installation command]( https://docs.docker.com/reference/ucp/3.2/cli/install/).
+  changed at install time by passing the `--service-cluster-ip-range` flag to 
+  the [ucp installation command](/reference/ucp/{{ site.ucp_version }}/cli/install/).
 
 ## Avoid firewall conflicts
 
@@ -160,7 +162,7 @@ address or port number.
 If you want to install UCP in a high-availability configuration that uses
 a load balancer in front of your UCP controllers, include the appropriate IP
 address and FQDN of the load balancer's VIP by using
-one or more `--san` flags in the [install command](https://docs.docker.com/reference/ucp/3.2/cli/install/)
+one or more `--san` flags in the [install command](/reference/ucp/{{ site.ucp_version }}/cli/install/)
 or when you're asked for additional SANs in interactive mode.
 [Learn about high availability](../configure/set-up-high-availability.md).
 
