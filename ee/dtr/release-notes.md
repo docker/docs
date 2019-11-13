@@ -28,7 +28,6 @@ to upgrade your installation to the latest release.
 ### Bug fixes
 * Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
 
-
 ### Security
 * Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
