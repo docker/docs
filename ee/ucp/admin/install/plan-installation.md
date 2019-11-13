@@ -36,7 +36,7 @@ node3.company.example.com
 
 ## Static IP addresses
 
-Docker UCP requires each node on the cluster to have a static IP address.
+Docker UCP requires each node on the cluster to have a static IPv4 address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
@@ -126,14 +126,14 @@ For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is tu
 
 To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
 
-For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
+For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
 the engines in a UCP cluster, all engines should regularly synchronize time
-with a Network Time Protocol (NTP) server. If a server's clock is skewed,
+with a Network Time Protocol (NTP) server. If a host node's clock is skewed,
 unexpected behavior may cause poor performance or even failures.
 
 ## Load balancing strategy
