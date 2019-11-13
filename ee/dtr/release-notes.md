@@ -23,7 +23,7 @@ to upgrade your installation to the latest release.
 # Version 2.7
 
 ## 2.7.4
-(2019-11-12)
+(2019-11-13)
 
 ## Bug fixes
 * Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
@@ -168,7 +168,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 # Version 2.6
 
 ## 2.6.11
-(2019-11-12)
+(2019-11-13)
 
 ### Bug fixes
 * DTR 2.6 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
@@ -507,7 +507,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
 ## 2.5.15
-(2019-11-12)
+(2019-11-13)
 
 ### Bug fixes
 * DTR 2.5 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
