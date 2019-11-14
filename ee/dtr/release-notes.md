@@ -25,11 +25,10 @@ to upgrade your installation to the latest release.
 ## 2.7.4
 (2019-11-13)
 
-## Bug fixes
+### Bug fixes
 * Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
 
-
-## Security
+### Security
 * Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.7.3
@@ -174,7 +173,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * DTR 2.6 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
 * Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
 
-## Security
+### Security
 * Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.6.10
@@ -512,7 +511,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 ### Bug fixes
 * DTR 2.5 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
 
-## Security
+### Security
 * Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.5.14
