@@ -26,12 +26,6 @@ However, [swarm mode](/engine/swarm/index.md), multi-service applications, and
 stack files now are fully supported. A stack file is a particular type of
 [version 3 Compose file](/compose/compose-file/index.md).
 
-If you are just getting started with Docker and want to learn the best way to
-deploy multi-service applications, a good place to start is the [Get Started
-walkthrough](/get-started/). This shows you how to define
-a service configuration in a Compose file, deploy the app, and use
-the relevant tools and commands.
-
 ## Produce a bundle
 
 The easiest way to produce a bundle is to generate it using `docker-compose`
@@ -211,8 +205,6 @@ A service has the following fields:
 > including volume mounts.
 
 ## Related topics
-
-* [Get started walkthrough](/get-started/)
 
 * [docker stack deploy](/engine/reference/commandline/stack_deploy/) command
 
