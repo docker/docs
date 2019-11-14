@@ -36,7 +36,7 @@ node3.company.example.com
 
 ## Static IP addresses
 
-Docker UCP requires each node on the cluster to have a static IP address.
+Docker UCP requires each node on the cluster to have a static IPv4 address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
@@ -111,12 +111,14 @@ conflict with the underlying infrastructure:
 * The Pod Network -  Each Pod in Kubernetes is given an IP address from either
   the Calico or Azure IPAM services. In a default installation Pods are given
   IP addresses on the `192.168.0.0/16` range. This can be customized at install
-  time using the `--pod-cidr` flag.
+  time by passing the `--pod-cidr` flag to the 
+  [UCP install command](/reference/ucp/{{ site.ucp_version }}/cli/install/). 
 
 * The Services Network - When a user exposes a Service in Kubernetes it is
   accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
   this range is `10.96.0.0/16`. From UCP 3.1.8 and onwards this value can be
-  changed at install time with the `--service-cluster-ip-range` flag.
+  changed at install time by passing the `--service-cluster-ip-range` flag to 
+  the [UCP install command](/reference/ucp/{{ site.ucp_version }}/cli/install/).
 
 ## Avoid firewall conflicts
 
@@ -124,14 +126,14 @@ For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is tu
 
 To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
 
-For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
+For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 ## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
 the engines in a UCP cluster, all engines should regularly synchronize time
-with a Network Time Protocol (NTP) server. If a server's clock is skewed,
+with a Network Time Protocol (NTP) server. If a host node's clock is skewed,
 unexpected behavior may cause poor performance or even failures.
 
 ## Load balancing strategy
@@ -160,7 +162,8 @@ address or port number.
 If you want to install UCP in a high-availability configuration that uses
 a load balancer in front of your UCP controllers, include the appropriate IP
 address and FQDN of the load balancer's VIP by using
-one or more `--san` flags in the [install command](/reference/ucp/3.0/cli/install.md)
+one or more `--san` flags in the 
+[UCP install command](/reference/ucp/{{ site.ucp_version }}/cli/install/)
 or when you're asked for additional SANs in interactive mode.
 [Learn about high availability](../configure/set-up-high-availability.md).
 

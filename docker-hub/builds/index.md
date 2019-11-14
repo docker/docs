@@ -1,12 +1,13 @@
 ---
-description: Set up Automated builds
-keywords: automated, build, images
+description: Set up automated builds
+keywords: automated, build, images, Docker Hub
 redirect_from:
 - /docker-hub/builds/automated-build/
 - /docker-cloud/feature-reference/automated-build/
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
-title: Set up Automated builds
+- /docker-hub/builds/classic/
+title: Set up automated builds
 ---
 
 
@@ -268,22 +269,9 @@ You can specify a regular expression (regex) so that only matching branches or
 tags are built. You can also use the results of the regex to create the Docker
 tag that is applied to the built image.
 
-You can use the variable `{sourceref}` to use the branch or tag name that
-matched the regex in the Docker tag applied to the resulting built image. (The
-variable includes the whole source name, not just the portion that matched the
-regex.) You can also use up to nine regular expression capture groups
+You can use up to nine regular expression capture groups
 (expressions enclosed in parentheses) to select a source to build, and reference
-these in the Docker Tag field using `{\1}` through `{\9}`.
-
-**Regex example: build from version number branch and tag with version number**
-
-You might want to automatically build any branches that end with a number
-formatted like a version number, and tag their resulting Docker images using a
-name that incorporates that branch name.
-
-To do this, specify a `branch` build with the regex `/[0-9.]+$/` in the
-**Source** field, and use the formula `version-{sourceref}` in the **Docker
-tag** field.
+these in the **Docker Tag** field using `{\1}` through `{\9}`.
 
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
