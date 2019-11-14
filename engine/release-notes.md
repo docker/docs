@@ -37,7 +37,7 @@ compatibility reasons.
 # Version 19.03
 
 ## 19.03.5
-2019-11-13
+2019-11-14
 
 ### Builder
 
@@ -474,7 +474,7 @@ The missing rules are :
 # Version 18.09
 
 ## 18.09.11
-2019-11-13
+2019-11-14
 
 ### Builder
 
@@ -887,7 +887,7 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 # Older Docker Engine EE Release notes
 
 ## 18.03.1-ee-12
-2019-11-13
+2019-11-14
 
 ### Client
 
@@ -1094,7 +1094,7 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
 ## 17.06.2-ee-25
-2019-11-13
+2019-11-14
 
 ### Builder
 
