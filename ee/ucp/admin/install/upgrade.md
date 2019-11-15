@@ -296,8 +296,7 @@ nodes in the cluster at one time.
 - Upgrade failures
   - For worker nodes, an upgrade failure can be rolled back by changing the node label back
       to the previous target version. Rollback of manager nodes is not supported.
-- Kubernetes errors in node state messages after upgrading UCP
-(from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)
+- [Kubernetes errors in node state messages after upgrading UCP](https://success.docker.com/article/how-to-resolve-kubernetes-errors-after-upgrading-ucp)
 - The following information applies if you have upgraded to UCP 3.0.0 or newer:
   - After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP
       dashboard with any of the following errors listed:
