@@ -228,6 +228,8 @@ components. Assigning these values overrides the settings in a container's
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
 | `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.|
 | `secure-overlay` | no | Set to `true` to enable IPSec network encryption in Kubernetes. Default is `false`. |
+| `image_scan_aggregation_enabled` | no | Set to `true` to enable image scan result aggregation. This feature displays image vulnerabilities in shared resource/containers and shared resources/images pages. Default is `false`.|
+|`swarm_polling_disabled` | no | Set to `true` to turn off auto-refresh (which defaults to 15 seconds) and only call the Swarm API once. Default is `false`. |
 
 > Note
 > 
