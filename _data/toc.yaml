@@ -336,6 +336,8 @@ guides:
         title: Seccomp security profiles for Docker
       - path: /engine/security/userns-remap/
         title: Isolate containers with a user namespace
+      - path: /engine/security/rootless/
+        title: Run the Docker daemon as a non-root user (Rootless mode)
     - sectiontitle: Scale your app
       section:
       - path: /engine/swarm/

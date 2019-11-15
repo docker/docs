@@ -66,6 +66,13 @@ Docker Engine - Community is installed. It starts automatically on `DEB`-based d
 `systemctl` or `service` command. As the message indicates, non-root users can't
 run Docker commands by default.
 
+> **Note**:
+>
+> To install Docker without root privileges, see
+> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless.md).
+>
+> Rootless mode is currently available as an experimental feature.
+
 #### Upgrade Docker after using the convenience script
 
 If you installed Docker using the convenience script, you should upgrade Docker
