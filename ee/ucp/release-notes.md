@@ -44,8 +44,8 @@ upgrade your installation to the latest release.
 * Added a feature that allows the user to enable SecureOverlay as an add-on on UCP via an install flag called `secure-overlay`. This flag enables IPSec Network Encryption in Kubernetes.
 
 ### Security
-* Upgraded Golang to 1.13.2. (ENGORC-2762)
-* Fixed an issue that allowed a user with a "restricted control" role to obtain Admin access to UCP by starting a container with `docker run --volumes-from ucp-proxy`. (ENGORC-2781)
+* Upgraded Golang to 1.12.12. (ENGORC-2762)
+* Fixed an issue that allowed a user with a `Restricted Control` role to obtain Admin access to UCP. (ENGORC-2781)
 
 ### Bug fixes
 * Fixed an issue where UCP 3.2 backup performs an append not overwrite when `--file` switch is used. (FIELD-2043)
@@ -978,7 +978,7 @@ leading to a gap in permissions checks.  (ENGORC-2781)
 2019-09-03
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.8.15-docker-7. This version was built with Golang 1.12.9..
+* Kubernetes has been upgraded to version 1.8.15-docker-7. This version was built with Golang 1.12.9.
 * Kubernetes DNS has been upgraded to 1.14.13.
 
 ### Networking
