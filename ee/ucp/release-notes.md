@@ -45,7 +45,7 @@ upgrade your installation to the latest release.
 
 ### Security
 * Upgraded Golang to 1.13.2. (ENGORC-2762)
-* Fixed an issue that allowed a user with a "restricted control" role to obtain Admin access to UCP by starting a container with `docker run --volumes-from ucp-proxy`. (ENGORC-2781)
+* Fixed an issue that allowed a user with a "restricted control" role to obtain Admin access to UCP. (ENGORC-2781)
 
 ### Bug fixes
 * Fixed an issue where UCP 3.2 backup performs an append not overwrite when `--file` switch is used. (FIELD-2043)
