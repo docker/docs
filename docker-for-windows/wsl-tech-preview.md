@@ -36,7 +36,7 @@ Before you install Docker Desktop WSL 2 Tech Preview, you must complete the foll
     `wsl --set-version <distro name> 2`
 5. Set Ubuntu 18.04 as the default distribution.
 
-    `wsl -s ubuntu 18.04`
+    `wsl -s Ubuntu-18.04`
 
 # Download
 
