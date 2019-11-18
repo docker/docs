@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Amazon Web Services driver for machine
 keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services

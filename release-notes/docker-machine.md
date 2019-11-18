@@ -1,4 +1,5 @@
 ---
+advisory: machine
 title: Docker Machine release notes
 description: Release notes for Docker Machine
 keywords: release notes, machine

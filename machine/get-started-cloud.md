@@ -1,4 +1,5 @@
 ---
+advisory: machine
 description: Using Docker Machine to provision hosts on cloud providers
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Use Docker Machine to provision hosts on cloud providers
