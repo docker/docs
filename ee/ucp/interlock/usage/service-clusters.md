@@ -4,40 +4,61 @@ description: Learn how to route traffic to different proxies using a service clu
 keywords: ucp, interlock, load balancing, routing
 ---
 
-Reconfiguring Interlock's proxy can take a long time (1-2 seconds) per overlay network managed by that proxy. In order to scale up to larger number of Docker networks and services routed to by Interlock, you may consider implementing *service clusters*: multiple proxy services managed by Interlock (rather than the default single proxy service), each responsible for routing to a separate set of Docker services and their corresponding networks, thereby minimizing proxy reconfiguration time.
+Reconfiguring Interlock's proxy can take a long time (1-2 seconds) per overlay
+network managed by that proxy. In order to scale up to larger number of Docker 
+networks and services routed to by Interlock, you may consider implementing 
+*service clusters*. Service clusters are multiple proxy services managed by 
+Interlock (rather than the default single proxy service), each responsible for 
+routing to a separate set of Docker services and their corresponding networks, 
+thereby minimizing proxy reconfiguration time.
 
 ## Prerequisites
 
-In this example, we'll assume you have a UCP cluster set up with at least two worker nodes, `ucp-node-0` and `ucp-node-1`; we'll use these as dedicated proxy servers for two independent Interlock service clusters. 
+In this example, we'll assume you have a UCP cluster set up with at least two 
+worker nodes, `ucp-node-0` and `ucp-node-1`; we'll use these as dedicated 
+proxy servers for two independent Interlock service clusters. 
 
-We'll also assume you've already enabled Interlock, per the [instructions here](https://docs.docker.com/ee/ucp/interlock/deploy/), with an HTTP port of 80 and an HTTPS port of 8443.
+We'll also assume you've already enabled Interlock, per the 
+[instructions here](../../deploy/), 
+with an HTTP port of 80 and an HTTPS port of 8443.
 
-## Setting Up Interlock Service Clusters
+## Setting Up Interlock service clusters
 
-First, apply some node labels to the UCP workers you've chosen to use as your proxy servers. From a UCP manager:
+First, apply some node labels to the UCP workers you've chosen to use 
+as your proxy servers. From a UCP manager:
 
 ```bash
 docker node update --label-add nodetype=loadbalancer --label-add region=east ucp-node-0
 docker node update --label-add nodetype=loadbalancer --label-add region=west ucp-node-1
 ```
 
-We've labeled `ucp-node-0` to be the proxy for our `east` region, and `ucp-node-1` to be the proxy for our `west` region.
+We've labeled `ucp-node-0` to be the proxy for our `east` region, and 
+`ucp-node-1` to be the proxy for our `west` region.
 
-Let's also create a dedicated overlay network for each region's proxy to manage traffic on. We could create many for each, but bear in mind the cumulative performance hit that incurs:
+Let's also create a dedicated overlay network for each region's proxy to manage 
+traffic on. We could create many for each, but bear in mind the cumulative 
+performance hit that incurs:
 
 ```bash
 docker network create --driver overlay eastnet
 docker network create --driver overlay westnet
 ```
 
-Next, modify Interlock's configuration to create two service clusters. Start by writing its current configuration out to a file which you can modify:
+Next, modify Interlock's configuration to create two service clusters. Start 
+by writing its current configuration out to a file which you can modify:
 
 ```bash
 CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ (index .Spec.TaskTemplate.ContainerSpec.Configs 0).ConfigName }}' ucp-interlock)
 docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > old_config.toml
 ```
 
-Make a new config file called `config.toml` with the following content, which declares two service clusters, `east` and `west`. **Note** you will have to change the UCP version (`3.2.3` in the example below) to match yours, as well as all instances of `*.ucp.InstanceID` (`vl5umu06ryluu66uzjcv5h1bo` below):
+Make a new config file called `config.toml` with the following content, 
+which declares two service clusters, `east` and `west`. 
+
+> **Note** you will have to change the UCP version 
+> (`3.2.3` in the example below) to match yours, 
+> as well as all instances of `*.ucp.InstanceID` 
+> (`vl5umu06ryluu66uzjcv5h1bo` below):
 
 ```
 ListenAddr = ":8080"
@@ -185,7 +206,8 @@ PollInterval = "3s"
       HideInfoHeaders = false
 ```
 
-If instead you prefer to modify the config file Interlock creates by default, the crucial parts to adjust for a service cluster are:
+If instead you prefer to modify the config file Interlock creates by default, 
+the crucial parts to adjust for a service cluster are:
 
  - Replace `[Extensions.default]` with `[Extensions.east]`
  - Change `ServiceName` to `"ucp-interlock-extension-east"`
@@ -220,11 +242,17 @@ docker service update \
   ucp-interlock
 ```
 
-Finally, do a `docker service ls`. You should see two services providing Interlock proxies, `ucp-interlock-proxy-east` and `-west`. If you only see one Interlock proxy service, delete it with `docker service rm`. After a moment, the two new proxy services should be created, and Interlock will be successfully configured with two service clusters.
+Finally, do a `docker service ls`. You should see two services providing 
+Interlock proxies, `ucp-interlock-proxy-east` and `-west`. If you only see 
+one Interlock proxy service, delete it with `docker service rm`. 
+After a moment, the two new proxy services should be created, and Interlock 
+will be successfully configured with two service clusters.
 
-## Deploying Services in Separate Service Clusters
+## Deploying services in separate service clusters
 
-Now that you've set up your service clusters, you can deploy services to be routed to by each proxy by using the `service_cluster` label. Create two example services:
+Now that you've set up your service clusters, you can deploy services to be 
+routed to by each proxy by using the `service_cluster` label. Create two example 
+services:
 
 ```bash
 docker service create --name demoeast \
@@ -242,19 +270,30 @@ docker service create --name demowest \
         training/whoami:latest
 ```
 
-Recall that `ucp-node-0` was your proxy for the `east` service cluster. Attempt to reach your `whoami` service there:
+Recall that `ucp-node-0` was your proxy for the `east` service cluster. 
+Attempt to reach your `whoami` service there:
 
 ```bash
 curl -H "Host: demo.A" http://<ucp-node-0 public IP>
 ```
 
-You should receive a response indicating the container ID of the `whoami` container declared by the `demoeast` service. Attempt the same `curl` at `ucp-node-1`'s IP, and it will fail: the Interlock proxy running there only routes traffic to services with the `service_cluster=west` label, connected to the `westnet` Docker network you listed in that service cluster's configuration.
+You should receive a response indicating the container ID of the `whoami` 
+container declared by the `demoeast` service. Attempt the same `curl` at 
+`ucp-node-1`'s IP, and it will fail: the Interlock proxy running there only 
+routes traffic to services with the `service_cluster=west` label, connected 
+to the `westnet` Docker network you listed in that service cluster's 
+configuration.
 
-Finally, make sure your second service cluster is working analogously to the first:
+Finally, make sure your second service cluster is working analogously to the 
+first:
 
 ```bash
 curl -H "Host: demo.B" http://<ucp-node-1 public IP>
 ```
 
-The service routed by `Host: demo.B` is reachable via (and only via) the Interlock proxy mapped to port 80 on `ucp-node-1`. At this point, you have successfully set up and demonstrated that Interlock can manage multiple proxies routing only to services attached to a select subset of Docker networks.
+The service routed by `Host: demo.B` is reachable via (and only via) the 
+Interlock proxy mapped to port 80 on `ucp-node-1`. At this point, you have 
+successfully set up and demonstrated that Interlock can manage multiple 
+proxies routing only to services attached to a select subset of Docker 
+networks.
 
