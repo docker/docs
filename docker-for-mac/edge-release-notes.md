@@ -12,6 +12,25 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.6.0
+2019-11-18
+
+[Download](https://download.docker.com/mac/edge/40807/Docker.dmg)
+
+### Upgrades
+
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
+### New
+
+Added the ability to start and stop Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
+
+### Bug fixes and minor changes
+
+- Fixed port forwarding when containers are using `overlay` networks.
+- Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`. Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
+
 ### Docker Desktop Community 2.1.5.0
 2019-11-04
 
@@ -58,6 +77,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
 - Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
 - Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 
 ### Docker Desktop Community 2.1.3.0
 2019-09-16
