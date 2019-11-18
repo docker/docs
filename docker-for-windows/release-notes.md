@@ -15,12 +15,25 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.4
-2019-10-21
+## Docker Desktop Community 2.1.0.5
+2019-11-18
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
+
+Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
+## Docker Desktop Community 2.1.0.4
+2019-10-21
+
+[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
 
 Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
