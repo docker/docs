@@ -46,12 +46,12 @@ To download the Tech Preview, click [Docker Desktop WSL 2 Tech Preview Installer
 
 Ensure you have completed the steps described in the Prerequisites section **before** installing the Tech Preview.
 
-Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
+Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop UI displays the **Enable the experimental WSL 2 based engine** option at **General**.
 
-![WSL 2 Tech Preview Desktop UI](images/wsl2-ui.png)
+![WSL 2 Tech Preview Desktop UI menu](https://i.imgur.com/cH0bhwv.png)
 
 Select **WSL 2 Tech Preview** from the menu to start, stop, and configure the daemon running in WSL 2. When the WSL 2 daemon starts, a docker CLI context is automatically created for it, and the CLI configuration points to the context. You can list contexts by running `docker context ls`.
 
-![WSL 2 Tech Preview Context](images/wsl2-context.png)
+![WSL 2 Tech Preview Context](https://engineering.docker.com/wp-content/uploads/engineering/2019/10/wsl2_docker_settings-1110x679.jpg)
 
 Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run `docker context use default`. To switch to WSL 2, run `docker context use wsl`.
