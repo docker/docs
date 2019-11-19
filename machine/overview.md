@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Introduction and Overview of Machine
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine Overview

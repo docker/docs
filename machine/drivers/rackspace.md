@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Rackspace driver for machine
 keywords: machine, Rackspace, driver
 title: Rackspace

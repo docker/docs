@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Generic driver for machine
 keywords: machine, Generic, driver
 title: Generic

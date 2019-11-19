@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Google Compute Engine driver for machine
 keywords: machine, Google Compute Engine, driver
 title: Google Compute Engine

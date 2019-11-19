@@ -195,7 +195,6 @@
   makes it really easy to create Docker hosts on  your computer, on
   cloud providers and inside your own data center. It creates servers,
   installs Docker on them, then configures the Docker client to talk to them.
-  As of July 2018, Docker Machine is in maintenance mode. Only bugfixes will be added
 
   *Also known as : docker-machine*
 <a class="glossary" name="namespace">namespace</a>: |

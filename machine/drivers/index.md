@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Reference for drivers Docker Machine supports
 keywords: machine, drivers, supports
 title: Machine drivers

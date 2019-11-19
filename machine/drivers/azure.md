@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Microsoft Azure driver for machine
 keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure

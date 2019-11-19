@@ -1,11 +1,8 @@
 ---
-advisory: machine
 description: Using Docker Machine to provision hosts on AWS
 keywords: docker, machine, cloud, aws
 title: Amazon Web Services (AWS) EC2 example
 ---
-
-> docker-machine is unable to launch Amazon Linux machines, including ECS-Optimized instances. [Github issue](https://github.com/docker/machine/issues/3098)
 
 Follow along with this example to create a Dockerized [Amazon Web Services (AWS)](https://aws.amazon.com/) EC2 instance.
 

@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Oracle VirtualBox driver for machine
 keywords: machine, Oracle VirtualBox, driver
 title: Oracle VirtualBox

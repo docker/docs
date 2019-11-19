@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Using Docker Machine to provision hosts on DigitalOcean
 keywords: docker, machine, cloud, digitalocean
 title: DigitalOcean example
