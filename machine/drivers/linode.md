@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Linode driver for machine
 keywords: machine, Linode, driver
 title: Linode

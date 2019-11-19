@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: DigitalOcean driver for machine
 keywords: machine, digitalocean, driver
 title: DigitalOcean

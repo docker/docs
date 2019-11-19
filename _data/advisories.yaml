@@ -17,7 +17,7 @@ texts:
   swarm: "See [Swarm mode overview](/engine/swarm/) for the orchestration features introduced in Docker Engine 1.12. Only refer to the Docker Swarm documents below for information on the standalone Swarm product."
   swarm-standalone: "**You are viewing docs for legacy standalone Swarm.** These topics describe standalone Docker Swarm. In Docker 1.12 and higher, [Swarm mode](/engine/swarm/) is integrated with Docker Engine. Most users should use integrated Swarm mode &#8212; a good place to start is [Getting started with swarm mode](/engine/swarm/swarm-tutorial/), [Swarm mode CLI commands](/engine/swarm/index.md#swarm-mode-cli-commands), and the [Get started with Docker walkthrough](/get-started/)). Standalone Docker Swarm is not integrated into the Docker Engine API and CLI commands."
   engine: "This site contains documentation for the v1.12 release candidate version of Docker Engine. For the Docker Engine v1.11 docs, see [https://docs.docker.com/v1.11/](https://docs.docker.com/v1.11/). Docker Desktop for Mac and Docker Desktop for Windows are currently in Beta."
-  machine: "As of July 2018, Docker Machine is in [maintenance mode](https://github.com/docker/machine/issues/4537). Only bugfixes will be added. Provisioning on a variety of cloud providers is better achieved using [infrakit](https://github.com/docker/deploykit)." 
+
 
 # URL based advisories
 # any URL that begins with "/engine/" will get the "engine" advisory

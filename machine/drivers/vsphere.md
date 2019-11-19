@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: VMware vSphere driver for machine
 keywords: machine, VMware vSphere, driver
 title: VMware vSphere
