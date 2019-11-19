@@ -40,6 +40,10 @@ Added the ability to start and stop Compose-based applications and view combined
 - Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
 - To make VM startup more reliable, Docker Desktop now avoids adding a Hyper-V NIC to the Windows VM when using Hypervisor sockets for Windows file sharing (rather than Samba).
 
+### Known issue
+
+Windows Insider Preview Slow Ring users cannot run WSL 2 after upgrading to Docker Desktop Edge 2.1.6.0 release as WSL 2 requires Windows 10 Insider Preview build 19018 or higher.
+
 ### Docker Desktop Community 2.1.5.0
 2019-11-04
 
