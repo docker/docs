@@ -54,4 +54,6 @@ Select **WSL 2 Tech Preview** from the menu to start, stop, and configure the da
 
 ![WSL 2 Tech Preview Context](https://engineering.docker.com/wp-content/uploads/engineering/2019/10/wsl2_docker_settings-1110x679.jpg)
 
+![WSL 2 Tech Preview Context with WSL 2](https://i.imgur.com/2L50UkF.png)
+
 Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run `docker context use default`. To switch to WSL 2, run `docker context use wsl`.
