@@ -12,7 +12,7 @@ redirect_from:
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
 
-You can then use [the upgrade instructions](admin/upgrade.md),
+You can then use [the upgrade instructions](admin/upgrade.md)
 to upgrade your installation to the latest release.
 
 * [Version 2.7](#version-27)
@@ -21,6 +21,15 @@ to upgrade your installation to the latest release.
 * [Version 2.4](#version-24)
 
 # Version 2.7
+
+## 2.7.4
+(2019-11-13)
+
+### Bug fixes
+* Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.7.3
 (2019-10-08)
@@ -37,6 +46,19 @@ push mirrored to a remote DTR. (docker/dhe-deploy #10676)
 
 * Bumped the version of the Alpine base images from `3.9` to `3.10`. (docker/dhe-deploy #10716)
 
+### Known issues
+
+#### New
+* Immediately after updating a license, it looks like no license exists.
+  * Workaround: Refresh the page.
+
+#### Existing
+* The tags tab takes a long time to load, and the security scan details of a tag can take even longer.
+* Application mirroring to and from Docker Hub does not work, as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will not give the appropriate error message, and the save button will stay in a loading state.
+    * Workaround: Refresh the page.
+
 
 ## 2.7.2
 (2019-09-03)
@@ -51,12 +73,36 @@ push mirrored to a remote DTR. (docker/dhe-deploy #10676)
 
 * Updated the Go programming language version for DTR to `1.12.9`. (docker/dhe-deploy #10570)
 
+### Known issues
+
+#### New
+* The tags tab takes a long time to load, and the security scan details of a tag can take even longer.
+
+#### Existing
+* Application mirroring to and from Docker Hub does not work, as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will not give the appropriate error message, and the save button will stay in a loading state.
+    * Workaround: Refresh the page.
+
 ## 2.7.1
 (2019-7-22)
 
 ### Bug fixes
 
 * In 2.7.0, users may see ```vuln_db_update``` jobs fail with the message ```Unable to get update url: Could not get signed urls with errors``` -- 2.7.1 addresses this issue. With it your vulnerability database update jobs should succeed.
+
+### Known issues
+
+* Application mirroring to and from Docker Hub does not work as experimental applications are not yet fully supported on Docker Hub.
+* The time that an application is pushed is incorrect.
+* If an incorrect password is entered when changing your password, the UI will
+not give the appropriate error message, and the save button will stay in a
+loading state.
+    * Workaround: Refresh the page.
+* After a promotion policy is created, it cannot be edited through the UI.
+    * Workaround: Either delete the promotion policy and re-create it, or use
+    the API to view and edit the promotion policy.
+* Non-admin users cannot create promotion policies through the UI.
 
 ## 2.7.0
 (2019-7-22)
@@ -69,7 +115,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * **Web Interface**
 
    * Users can now filter events by object type. (docker/dhe-deploy #10231)
-   * Docker artifacts such as apps, plugins, images, and multi-arch images are shown as distinct types with granular views into app details including metadata and scan results for an application's constituent images. [Learn more](https://beta.docs.docker.com/app/working-with-app/).
+   * Docker artifacts such as apps, plugins, images, and multi-arch images are shown as distinct types with granular views into app details including metadata and scan results for an application's constituent images. [Learn more](https://docs.docker.com/app/working-with-app/).
    * Users can now import a client certificate and key to the browser in order to access the web interface without using their credentials.
    * The **Logout** menu item is hidden from the left navigation pane if client certificates are used for DTR authentication instead of user credentials. (docker/dhe-deploy#10147)
 
@@ -81,7 +127,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
   * The Docker CLI now includes a `docker registry` management command which lets you interact with Docker Hub and trusted registries.
      * Features supported on both DTR and Hub include listing remote tags and inspecting image manifests.
-     * Features supported on DTR alone include removing tags, listing repository events (such as image pushes and pulls), listing asynchronous jobs (such as mirroring pushes and pulls), and reviewing job logs. [Learn more](https://beta.docs.docker.com/engine/reference/commandline/registry/).
+     * Features supported on DTR alone include removing tags, listing repository events (such as image pushes and pulls), listing asynchronous jobs (such as mirroring pushes and pulls), and reviewing job logs. [Learn more](https://docs.docker.com/engine/reference/commandline/registry/).
 
 * **Client Cert-based Authentication**
 
@@ -108,10 +154,9 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * The Application Configuration in the UI says it is an invocation image.
 * When changing your password if an incorrect password is entered the UI will not give the appropriate error message, and the save button will stay in a loading state.
     * Workaround: Refresh the page.
-* After a promotion policy is created they cannot be edited through the UI.
-    * Workaround: Either delete the promotion policy and recreate it. Alternatively, use the API to view and
-    edit the promotion policy.
-* Non admin users cannot create promotion policies through the UI.
+* After a promotion policy is created, it cannot be edited through the UI.
+    * Workaround: Either delete the promotion policy and re-create it, or use the API to view and edit the promotion policy.
+* Non-admin users cannot create promotion policies through the UI.
 
 ### Deprecations
 
@@ -120,6 +165,16 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.11
+(2019-11-13)
+
+### Bug fixes
+* DTR 2.6 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
+* Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.6.10
 (2019-10-08)
@@ -449,6 +504,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.15
+(2019-11-13)
+
+### Bug fixes
+* DTR 2.5 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.5.14
 (2019-09-03)

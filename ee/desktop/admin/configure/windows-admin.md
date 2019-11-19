@@ -12,7 +12,7 @@ The administrator configuration file allows you to customize and standardize you
 
 When you install Docker Desktop Enterprise, a configuration file with default values is installed at the following location. Do not change the location of the `admin-settings.json` file.
 
-`\%ProgramData%\DockerDesktop\admin-settings.json`
+`%ProgramData%\DockerDesktop\admin-settings.json`
 
 which defaults to:
 

@@ -46,14 +46,14 @@ the source and destination. For instance, if the Docker daemon listens on both
 192.168.1.99 and 10.1.2.3, you can make rules specific to `10.1.2.3` and leave
 `192.168.1.99` open.
 
-`iptables` is complicated and more complicated rule are out of scope for this
+`iptables` is complicated and more complicated rules are out of scope for this
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
 
 ## Prevent Docker from manipulating iptables
 
-It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker.daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions.  Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
+It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker/daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
 
 For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
 

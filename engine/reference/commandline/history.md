@@ -4,6 +4,7 @@ datafile: docker_history
 title: docker history
 redirect_from:
   - /edge/engine/reference/commandline/history/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -4,15 +4,25 @@ description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Docker Desktop, Enterprise
 ---
 
-This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Windows.
+This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Windows. If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install DDE.
 
-> **Warning:** If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install Docker Desktop Enterprise.
+[Download Docker Desktop Enterprise for Windows](https://download.docker.com/win/enterprise/DockerDesktop.msi){: .button .outline-btn}
+
+>**Note:** By downloading DDE, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement (DPA)](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 
 ## System requirements
 
 - Windows 10 Pro or Enterprise version 15063 or later.
 
-- Hyper-V and Containers Windows features must be enabled.
+- Hyper-V and Containers Windows features must be enabled **before** installing DDE.
+
+    To enable Hyper-V and Containers features using PowerShell, run the following commands as Administrator:
+
+    `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All`
+
+    `Enable-WindowsOptionalFeature -Online -FeatureName Containers -All`
+
+    After running the commands, reboot your system.
 
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -29,8 +39,6 @@ Hyper-V on Windows 10:
 > **Note:** Docker supports Docker Desktop Enterprise on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
 ## Installation
-
-Download Docker Desktop Enterprise for [**Windows**](https://download.docker.com/win/enterprise/DockerDesktop.msi).
 
 The Docker Desktop Enterprise installer includes Docker Engine, Docker CLI client, and Docker Compose.
 

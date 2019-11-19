@@ -6,7 +6,7 @@ title: "Quickstart: Compose and ASP.NET Core with SQL Server"
 
 This quick-start guide demonstrates how to use Docker Engine on Linux and Docker
 Compose to set up and run the sample ASP.NET Core application using the
-[.NET Core SDK image](hub.docker.com/_/microsoft-dotnet-core-sdk)
+[.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk)
 with the
 [SQL Server on Linux image](https://hub.docker.com/_/microsoft-mssql-server).
 You just need to have [Docker Engine](/install/index.md)
@@ -112,7 +112,7 @@ configure this app to use our SQL Server database, and then create a
 
     This file defines the `web` and `db` micro-services, their relationship, the
     ports they are using, and their specific environment variables.
-    
+
     > **Note**: You may receive an error if you choose the wrong Compose file
     > version. Be sure to choose a verison that is compatible with your system.
 

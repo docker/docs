@@ -100,12 +100,12 @@ exist by default, and provide core networking functionality:
 The following two features are only possible when using Docker EE and managing
 your Docker services using Universal Control Plane (UCP):
 
-- The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/)
+- The [HTTP routing mesh](/ee/ucp/interlock)
   allows you to share the same network IP address and port among multiple
   services. UCP routes the traffic to the appropriate service using the
   combination of hostname and port, as requested from the client.
 
-- [Session stickiness](/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/#sticky-sessions) allows you to specify information in the HTTP header
+- [Session stickiness](/ee/ucp/interlock/usage/sessions/) allows you to specify information in the HTTP header
   which UCP uses to route subsequent requests to the same service task, for
   applications which require stateful sessions.
 

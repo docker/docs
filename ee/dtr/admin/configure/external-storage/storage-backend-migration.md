@@ -8,7 +8,7 @@ Starting in DTR 2.6, switching storage backends initializes a new metadata store
 
 ## DTR 2.6.4 and above
 
-In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/2.7/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. If you are not worried about losing your existing tags, you can skip the recommended steps below and [perform a reconfigure](/reference/dtr/2.7/cli/reconfigure/).
+In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. If you are not worried about losing your existing tags, you can skip the recommended steps below and [perform a reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/).
 
 ### Best practice for data migration
 
@@ -18,11 +18,11 @@ Docker recommends the following steps for your storage backend and metadata migr
 
     ![](/ee/dtr/images/garbage-collection-0.png){: .img-fluid .with-border}
 
-2. [Back up your existing metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata). See [docker/dtr backup](/reference/dtr/2.7/cli/backup/) for CLI command description and options.
+2. [Back up your existing metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata). See [docker/dtr backup](/reference/dtr/{{ site.dtr_version }}/cli/backup/) for CLI command description and options.
 
 3. Migrate the contents of your current storage backend to the new one you are switching to. For example, upload your current storage data to your new NFS server.
 
-4. [Restore DTR from your backup](/ee/dtr/admin/disaster-recovery/restore-from-backup/) and specify your new storage backend. See [docker/dtr destroy](/reference/dtr/2.7/cli/destroy/) and [docker/dtr restore](/reference/dtr/2.7/cli/backup/) for CLI command descriptions and options.
+4. [Restore DTR from your backup](/ee/dtr/admin/disaster-recovery/restore-from-backup/) and specify your new storage backend. See [docker/dtr destroy](/reference/dtr/2.7/cli/destroy/) and [docker/dtr restore](/reference/dtr/{{ site.dtr_version }}/cli/backup/) for CLI command descriptions and options.
 
 5. With DTR restored from your backup and your storage data migrated to your new backend, garbage collect any dangling blobs using the following API request:
 
@@ -45,7 +45,7 @@ If you have a long maintenance window, you can skip some steps from above and do
 
 2. Migrate the contents of your current storage backend to the new one you are switching to. For example, upload your current storage data to your new NFS server.
 
-3. [Reconfigure DTR](/reference/dtr/2.7/cli/reconfigure) while specifying the `--storage-migrated` flag to preserve your existing tags.
+3. [Reconfigure DTR](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure) while specifying the `--storage-migrated` flag to preserve your existing tags.
 
 
 ## DTR 2.6.0-2.6.4 and DTR 2.5 (with experimental garbage collection)
@@ -63,5 +63,5 @@ Upgrade to [DTR 2.6.4](#dtr-264-and-above) and follow [best practice for data mi
 - [Use NFS](nfs.md)
 - [Use S3](s3.md)
 - CLI reference pages
-  - [docker/dtr install](/reference/dtr/2.7/cli/install/)
-  - [docker/dtr reconfigure](/reference/dtr/2.7/cli/reconfigure/)
+  - [docker/dtr install](/reference/dtr/{{ site.dtr_version }}/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/)

@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_stop
 title: docker assemble backend stop
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

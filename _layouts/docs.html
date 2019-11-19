@@ -126,7 +126,7 @@
 							{% else %}
 								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
 							{% if page.ui_tabs or page.cli_tabs or page.api_tabs %}{% capture content %}
 
@@ -179,7 +179,7 @@
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
 							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
-							{% capture keywordlist %}{{ keywordlist }}<a href="/glossary/?term={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
+							{% capture keywordlist %}{{ keywordlist }}<a href="https://docs.docker.com/search/?q={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
 							{% endfor %}
 							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
 							{% endunless %}

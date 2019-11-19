@@ -40,7 +40,7 @@ to avoid any business impacts.
 
 > Upgrade Best Practices
 >
-> There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. See [Cluster Upgrade Best Practices](/ee/upgrade.md#cluster-upgrade-best-practices) for more details. Additionally, to ensure high availability during the DTR upgrade, you can also drain the DTR replicas and move their workloads to updated workers. To do this, you can join new workers as DTR replicas to your existing cluster and then remove the old replicas. See [docker/dtr join](/reference/dtr/2.6/cli/join) and [docker/dtr remove](/reference/dtr/2.6/cli/remove) for command options and details.
+> There are [important changes to the upgrade process](/ee/upgrade) that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before `18.09` to version `18.09` or greater. See [Cluster Upgrade Best Practices](/ee/upgrade.md#cluster-upgrade-best-practices) for more details. Additionally, to ensure high availability during the DTR upgrade, you can also drain the DTR replicas and move their workloads to updated workers. To do this, you can join new workers as DTR replicas to your existing cluster and then remove the old replicas. See [docker/dtr join](/v18.09/reference/dtr/2.6/cli/join) and [docker/dtr remove](/v18.09/reference/dtr/2.6/cli/remove) for command options and details.
 
 ## Minor upgrade
 
@@ -54,7 +54,7 @@ are trying to upgrade to. [Check the compatibility matrix](https://success.docke
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
 Make sure you are running DTR {{ previous_version }}. If that is not the case,
-[upgrade your installation to the {{ previous_version }} version](../{{ previous_version }}/guides/admin/upgrade/). 
+[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade/).
 
 ### Step 2. Upgrade DTR
 
@@ -79,7 +79,7 @@ docker run -it --rm \
 
 By default the upgrade command runs in interactive mode and prompts you for
 any necessary information. You can also check the
-[reference documentation](/reference/dtr/2.6/cli/index.md) for other existing flags.
+[reference documentation](/v18.09/reference/dtr/2.6/cli/index.md) for other existing flags.
 
 The upgrade command will start replacing every container in your DTR cluster,
 one replica at a time. It will also perform certain data migrations. If anything
@@ -89,7 +89,7 @@ command and it will resume from where it left off.
 
 #### Metadata Store Migration
 
-When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This involves migrating the blob links for your images which is necessary for online garbage collection. With `2.6`, you can log in to the DTR web interface and navigate to **System > Job Logs** to check the status of the `metadatastoremigration` job. See [Audit Jobs via the Web Interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/) for more details.
+When upgrading from `2.5` to `2.6`, the system will run a `metadatastoremigration` job after a successful upgrade. This involves migrating the blob links for your images which is necessary for online garbage collection. With `2.6`, you can log in to the DTR web interface and navigate to **System > Job Logs** to check the status of the `metadatastoremigration` job. See [Audit Jobs via the Web Interface](/manage-jobs/audit-jobs-via-ui/) for more details.
 
 ![](../images/migration-warning.png){: .with-border}
 
@@ -102,7 +102,7 @@ If the three attempts fail, you will have to retrigger the `metadatastoremigrati
 ```bash
 curl https://<dtr-external-url>/api/v0/jobs -X POST \
 -u username:accesstoken -H 'Content-Type':'application/json' -d \
-'{"action": "metadatastoremigration"}' 
+'{"action": "metadatastoremigration"}'
 ```
 Alternatively, select **API** from the bottom left navigation pane of the DTR web interface and use the Swagger UI to send your API request.
 
@@ -113,7 +113,7 @@ upgrade. The command is the same as for a minor upgrade.
 
 ## DTR cache upgrade
 
-If you have previously [deployed a cache](/ee/dtr/admin/configure/deploy-caches/), make sure to [upgrade the node dedicated for your cache](/ee/upgrade) to keep it in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
+If you have previously [deployed a cache](/admin/configure/deploy-caches/), make sure to [upgrade the node dedicated for your cache](/ee/upgrade) to keep it in sync with your upstream DTR replicas. This prevents authentication errors and other weird behaviors.
 
 ## Download the vulnerability database
 

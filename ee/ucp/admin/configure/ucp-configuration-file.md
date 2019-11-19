@@ -226,7 +226,8 @@ components. Assigning these values overrides the settings in a container's
 | `local_volume_collection_mapping`      | no       | Store data about collections for volumes in UCP's local KV store instead of on the volume labels. This is used for enforcing access control on volumes.                                          |
 | `manager_kube_reserved_resources`      | no       | Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.                                                                                                   |
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
-| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.
+| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.|
+| `secure-overlay` | no | Set to `true` to enable IPSec network encryption in Kubernetes. Default is `false`. |
 
 > Note
 > 

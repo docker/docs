@@ -123,7 +123,7 @@ $ docker container run \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \
-  --existing-replica-id <replica-id> > {{ metadata_backup_file }}
+  --existing-replica-id <replica-id> > dtr-backup-v{{ page.dtr_version }}.tar.gz
 ```
 
 Where:
@@ -142,7 +142,7 @@ Also, the backup contains sensitive information
 like private keys, so you can encrypt the backup by running:
 
 ```none
-gpg --symmetric {{ metadata_backup_file }}
+gpg --symmetric dtr-backup-v{{ page.dtr_version }}.tar.gz
 ```
 
 This prompts you for a password to encrypt the backup, copies the backup file
@@ -154,7 +154,7 @@ To validate that the backup was correctly performed, you can print the contents
 of the tar file created. The backup of the images should look like:
 
 ```none
-tar -tf {{ metadata_backup_file }}
+tar -tf dtr-backup-v{{ page.dtr_version }}.tar.gz
 
 dtr-backup-v{{ page.dtr_version }}/
 dtr-backup-v{{ page.dtr_version }}/rethink/

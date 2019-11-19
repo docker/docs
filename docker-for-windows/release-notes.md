@@ -8,26 +8,50 @@ toc_min: 1
 toc_max: 2
 ---
 
-Here are the main improvements and issues per stable release, starting with the
-current release. The documentation is always updated for each release.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
 
-For system requirements, see
+For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
-
-Release notes for _stable_ releases are listed below, [_edge_ release
-notes](edge-release-notes) are also available. (Following the Docker Engine - Community release model,
-'beta' releases are called 'edge' releases.)  You can learn about both kinds of
-releases, and download stable and edge product installers at [Download Docker
-for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.3
-2019-09-16
+## Docker Desktop Community 2.1.0.5
+2019-11-18
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
+
+Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
+## Docker Desktop Community 2.1.0.4
+2019-10-21
+
+[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
+
+Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
+- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+
+### New
+
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
+
+## Docker Desktop Community 2.1.0.3
+2019-09-16
+
+[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -151,7 +175,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
 
 * Bug fixes and minor changes
-  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918) 
+  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918)
 
 ### Docker Community Edition 2.0.0.0-win78 2018-11-19
 
@@ -169,9 +193,9 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 
 * Deprecation
   - Removed support of AUFS
-  
+
 * Bug fixes and minor changes
-  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647) 
+  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647)
   - Windows Containers: Better host.docker.internal resolution, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
   - Do not try to update samba share mounts when using Windows Containers
   - Improved dns update too verbose in logs

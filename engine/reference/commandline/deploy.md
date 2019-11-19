@@ -4,6 +4,7 @@ datafile: docker_deploy
 title: docker deploy
 redirect_from:
   - /edge/engine/reference/commandline/deploy/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

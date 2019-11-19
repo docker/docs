@@ -16,7 +16,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
- 
+
 ### Minimum requirements
 
 * 8GB of RAM for manager nodes
@@ -25,7 +25,9 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
 
-**Note**: Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
+> Note
+>
+> Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
 
 ### Recommended production requirements
 
@@ -44,10 +46,7 @@ between hosts.
 
 > Workloads on manager nodes
 >
-> These requirements assume that manager nodes won't run regular workloads.
-> If you plan to run additional workloads on manager nodes, you may need to
-> provision more powerful nodes. If manager nodes become overloaded, the
-> cluster may experience issues.
+> Docker does not support workloads other than those required for UCP on UCP manager nodes.
 
 ## Ports used
 
@@ -59,12 +58,21 @@ indicated as the "Scope" of that port. The three scopes are:
 - Internal: Traffic arrives from other hosts in the same cluster.
 - Self: Traffic arrives to that port only from processes on the same host.
 
+> Note
+>
+> When installing UCP on Microsoft Azure, an overlay network is not used for
+> Kubernetes; therefore, any containerized service deployed onto Kubernetes and
+> exposed as a Kubernetes Service may need its corresponding port to be opened
+> on the underlying Azure Network Security Group. For more information see
+> [Installing on
+> Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure/#azure-prerequisites).
+
 Make sure the following ports are open for incoming traffic on the respective
 host types:
 
 |       Hosts       |          Port           |       Scope        |                                    Purpose                                    |
 | :---------------- | :---------------------- | :----------------- | :---------------------------------------------------------------------------- |
-| managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for kubernetes networking                            |
+| managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for Kubernetes networking                            |
 | managers          | TCP 443  (configurable) | External, Internal | Port for the UCP web UI and API                                               |
 | managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
 | managers          | TCP 2377 (configurable) | Internal           | Port for control communication between swarm nodes                            |
@@ -87,22 +95,14 @@ host types:
 | managers          | TCP 12388               | Internal           | Internal Port for the Kubernetes API Server                                   |
 
 ## Disable `CLOUD_NETCONFIG_MANAGE` for SLES 15
-For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE` 
+For SUSE Linux Enterprise Server 15 (SLES 15) installations, you must disable `CLOUD_NETCONFIG_MANAGE`
 prior to installing UCP.
 
-    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set 
+    1. In the network interface configuration file, `/etc/sysconfig/network/ifcfg-eth0`, set
     ```
     CLOUD_NETCONFIG_MANAGE="no"
     ```
     2. Run `service network restart`.
-
-## Avoid firewall conflicts
-
-For SUSE Linux Enterprise Server 12 SP2 (SLES12), the `FW_LO_NOTRACK` flag is turned on by default in the openSUSE firewall. This speeds up packet processing on the loopback interface, and breaks certain firewall setups that need to redirect outgoing packets via custom rules on the local machine.
-
-To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` file and set `FW_LO_NOTRACK="no"`. Save the file and restart the firewall or reboot.
-
-For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 ## Enable ESP traffic
 
@@ -150,13 +150,6 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 
 - [Compatibility Matrix](https://success.docker.com/Policies/Compatibility_Matrix)
 - [Maintenance Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle)
-
-## Version compatibility
-
-UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
-
-- Docker Enterprise Engine 18.09.0-ee-1 or higher
-- DTR 2.6 or higher
 
 ## Where to go next
 

@@ -327,6 +327,36 @@ that are running on worker nodes.
 
 *dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
 
+#### vpc
+
+If you are deploying on to AWS, by default Docker Cluster will create a new AWS
+VPC (Virtual Private Cloud) for the Docker Enterprise resources. To specify an
+existing VPC, a user can specify a VPC ID in the Cluster File.
+
+```yaml
+cluster:
+  vpc:
+    id: vpc-existing-vpc-id
+```
+
+Docker Cluster assumes the VPC CIDR is `172.31.0.0/16`, so will therefore
+attempt to create AWS subnets from this range. Docker Cluster can not utilise
+existing AWS subnets. To instruct Docker Cluster to provision subnets for an
+alternative CIDR you can pass a new CIDR into the Cluster File.
+
+```yaml
+cluster:
+  vpc:
+    id: vpc-existing-vpc-id
+    cidr: "192.168.0.0/16"
+```
+
+The following elements can be specified:
+
+- `id` - (Required) The existing AWS VPC ID `vpc-xxx`
+- `cidr` - If the VPC's CIDR is not the default `172.31.0.0/16` an alternative
+  CIDR can be specified here.
+
 ### provider
 Defines where the cluster's resources are provisioned, as well as provider-specific configuration such as tags.
 

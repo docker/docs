@@ -4,6 +4,7 @@ datafile: docker_node_demote
 title: docker node demote
 redirect_from:
   - /edge/engine/reference/commandline/node_demote/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

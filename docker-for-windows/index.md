@@ -15,11 +15,11 @@ title: Get started with Docker for Windows
 
 Welcome to Docker Desktop!
 
-This page contains information about Docker Desktop Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
 Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
 
-> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and Stable and Edge channels.
+See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
 
 ## Test your installation
 
@@ -39,22 +39,15 @@ Docker is a full development platform for creating containerized applications. D
     > docker run hello-world
 
     docker : Unable to find image 'hello-world:latest' locally
-    ...
-
-    latest:
-    Pulling from library/hello-world
-    ca4f61b1923c:
-    Pulling fs layer
-    ca4f61b1923c:
-    Download complete
-    ca4f61b1923c:
-    Pull complete
-    Digest: sha256:97ce6fa4b6cdc0790cda65fe7290b74cfebd9fa0c9b8c38e979330d547d22ce1
+    latest: Pulling from library/hello-world
+    1b930d010525: Pull complete
+    Digest: sha256:c3b4ada4687bbaa170745b3e4dd8ac3f194ca95b2d0518b417fb47e5879d9b5f
     Status: Downloaded newer image for hello-world:latest
 
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
     ...
+
     ```
 
 4.  List the `hello-world` _image_ that was downloaded from Docker Hub:
@@ -89,18 +82,12 @@ running something more complex, such as an OS and a webserver.
     > docker run --interactive --tty ubuntu bash
 
     docker : Unable to find image 'ubuntu:latest' locally
-    ...
-
-    latest:
-    Pulling from library/ubuntu
-    22dc81ace0ea:
-    Pulling fs layer
-    1a8b3c87dba3:
-    Pulling fs layer
-    91390a1c435a:
-    Pulling fs layer
-    ...
-    Digest: sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
+    latest: Pulling from library/ubuntu
+    22e816666fd6: Pull complete
+    079b6d2a1e53: Pull complete
+    11048ebae908: Pull complete
+    c58094023a2e: Pull complete
+    Digest: sha256:a7b8b7b33e44b123d7f997bd4d3d0a59fafc63e203d17efedf09ff3f6f516152
     Status: Downloaded newer image for ubuntu:latest
     ```
 
@@ -535,6 +522,24 @@ For more information, refer to the following [Docker Hub topics](/docker-hub/ind
 
 * [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
+
+### Two-factor authentication
+
+Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
+
+You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
+
+After you have enabled two-factor authentication:
+
+1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
+
+2. Enter your Docker ID and password and click **Sign in**.
+
+3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
+
+![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
+
+After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
 
 ## Adding TLS certificates
 

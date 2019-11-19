@@ -8,13 +8,15 @@ redirect_from:
 
 ## Permitted content and support options
 
-* Content that runs on Docker Enterprise may be published on Docker Hub under a Verified Publisher profile. This content may also qualify
-  to become a Docker Certified Container or Plugin image, and thus backed by
-  collaborative Docker/Publisher support. 
+* Content that runs on Docker Enterprise may be published on Docker Hub under a
+Verified Publisher profile. This content may also qualify to become a Docker
+Certified Container or Plugin image, and thus become backed by collaborative
+Docker/Publisher support.
 
-* Content that runs on the Docker Community may be published in Docker Hub, but is not supported by Docker nor is it eligible to become Certified.
+* Content that runs on the Docker Community may be published in Docker Hub, but
+is not supported by Docker nor is it eligible to become Certified.
 
-* Content that requires a non Certified Infrastructure environment may not be
+* Content that requires a non-Certified Infrastructure environment may not be
   published.
 
 
@@ -28,8 +30,7 @@ redirect_from:
 ## Onboarding
 
 The Docker Hub publishing process begins from the landing page: sign in with
-your Docker ID and specify a product name and image source from a private or public
-repository. 
+your Docker ID and specify a product name and image source from a private or public repository.
 
 After specifying a source, provide the content-manifest items to populate your
 product details page. These items include logos, descriptions, and licensing and
@@ -208,19 +209,28 @@ To interpret the results of a scanned image:
 1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
 
 2.  Navigate to the repository details page (for example,
-    [busybox](https://hub.docker.com/_/busybox){: target="_blank" class="_"}).
+    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" class="_"}).
 
 3.  Click **Tags**.
-    ![Scanned tags](images/scan-tags.png)
-    In this section, you can now view the different architectures separately to easily identify the right image for the architecture you need, complete with image size and operating system information.
-    ![system info](images/Docker-Hub-tags-system-info.png)
 
-4.  Click on the digest for a particular architecture, you will now also be able to see the actual source of the image – the layer-by-layer details that make up the image. ![system info](images/Docker-Hub-tags-vulnerabilities.png)
+    ![Scanned tags](images/image-tags.png)
 
-5.  Click on the first row, you’ll see that the image contains multiple components and that multiple components have known vulnerabilities ranging from minor to critical. To explore further, click on the caret to expand and view all of the found vulnerabilities:
+    In this section, you can now view the different architectures separately to
+    easily identify the right image for the architecture you need, complete
+    with image size and operating system information.
 
-    ![Scanned components](images/Docker-hub-tags-vulnerability-details.png)
-Each vulnerability is linked directly to the CVE so that you can learn more about the CVE and its implications. 
+    ![system info](images/node-tags-system-info.png)
+
+4.  Click on the digest for a particular architecture. You can now also see the
+actual source of the image: the layer-by-layer details that make up the image.
+
+    ![system info](images/node-tags-vulnerabilities.png)
+
+5.  Click on any row in the **Image History** list. You’ll see that the image contains multiple components, and that some of them have known vulnerabilities ranging from minor to critical. To explore further, click on the caret to expand and view all of the found vulnerabilities:
+
+    ![Scanned components](images/node-tags-vulnerability-details.png)
+
+Each vulnerability is linked directly to the CVE (Common Vulnerabilities and Exposures) list entry so that you can learn more about the CVE entry and its implications.
 
 #### Classification of issues
 
@@ -301,7 +311,7 @@ can also be listed alongside external references to your product.
 
 #### How is support handled?
 
-All Docker Certified Container images and plugins running on Docker Enterprise come with support provided directly by the publisher, under your existing SLA. 
+All Docker Certified Container images and plugins running on Docker Enterprise come with support provided directly by the publisher, under your existing SLA.
 Normally, a customer contacts the publisher for container and application level
 issues. Likewise, a customer contacts Docker for Docker Enterprise support. In the
 case where a customer calls Docker (or vice versa) about an issue on the
@@ -316,11 +326,11 @@ Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target=
 
 #### What is the difference between Official Images and Docker Certified?
 
-Official Images is a program sponsored by Docker for the curation and packaging of Open Source Software. While upstream vendors are sometimes involved, this is not always the case. Docker Certified content is explicitly provided, maintained, and supported directly by the ISV. 
+Official Images is a program sponsored by Docker for the curation and packaging of Open Source Software. While upstream vendors are sometimes involved, this is not always the case. Docker Certified content is explicitly provided, maintained, and supported directly by the ISV.
 
 #### How is certification of plugins handled?
 
 Docker Certification program recognizes the need to apply special scrutiny and
 testing to containers that access system level interfaces like storage volumes
 and networking. Docker identifies these special containers as “Plugins” which
-require additional testing by the publisher or Docker. 
+require additional testing by the publisher or Docker.

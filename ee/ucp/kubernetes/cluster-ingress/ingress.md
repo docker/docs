@@ -6,7 +6,7 @@ keywords: ucp, cluster, ingress, kubernetes
 
 {% include experimental-feature.md %}
 
-# Deploy a Sample Application with Ingress 
+## Overview 
 
 Cluster Ingress is capable of routing based on many HTTP attributes, but most
 commonly the HTTP host and path. The following example shows the basics of
@@ -21,32 +21,28 @@ deployed. The docker-demo application is able to display the container hostname,
 environment variables or labels in its HTTP responses, therefore is good sample
 application for an Ingress controller.
 
-The 3 versions of the sample application are:
+The three versions of the sample application are:
 
-- v1: a production version with 3 replicas running.
+- v1: a production version with three replicas running.
 - v2: a staging version with a single replica running.
 - v3: a development version also with a single replica. 
 
-An example Kubernetes manifest file container all 3 deployments can be found [here](./yaml/demo-app.yaml)
+> Note
+> 
+> An example Kubernetes manifest file containing all three deployments can be found [here](./yaml/demo-app.yaml).
 
-  1) Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a
-     cluster with Cluster Ingress installed. 
+1. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a cluster with Cluster Ingress installed. 
+2. Download the sample Kubernetes manifest file.
+```bash
+$ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
+```
+3. Deploy the sample Kubernetes manifest file. 
+```bash
+$ kubectl apply -f demo-app.yaml
+```
+4. Verify that the sample applications are running.
 
-  2) Download the sample Kubernetes manifest file
-
-  ```
-  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
-  ```
-
-  3) Deploy the sample Kubernetes manifest file 
-  
-  ```bash
-  $ kubectl apply -f demo-app.yaml
-  ```
-
-  4) Verify the sample applications are running
-
-  ```bash
+```bash
   $ kubectl get pods -n default
   NAME                                  READY   STATUS    RESTARTS   AGE
   demo-v1-7797b7c7c8-5vts2              1/1     Running   0          3h
@@ -59,11 +55,11 @@ An example Kubernetes manifest file container all 3 deployments can be found [he
   NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE   SELECTOR
   demo-service   NodePort    10.96.97.215   <none>        8080:33383/TCP   3h    app=demo
   kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP          1d    <none>
-  ```
+```
 
-This first part of the tutorial deployed the pods and a Kubernetes service,
-using Kubernetes NodePorts these pods can be accessed outside of the Cluster
-Ingress. This illustrate the standard L4 load balancing that a Kubernetes
+This first part of the tutorial deployed the pods and a Kubernetes service. 
+Using Kubernetes NodePorts, these pods can be accessed outside of the Cluster
+Ingress. This illustrates the standard L4 load balancing that a Kubernetes
 service applies. 
 
 ```bash
@@ -74,8 +70,6 @@ $ IPADDR=51.141.127.241
 $ PORT=$(kubectl get service demo-service --output jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
 
 # Send traffic directly to the NodePort to bypass L7 Ingress
-
-```bash
 $ for i in {1..5}; do curl http://$IPADDR:$PORT/ping; done
 {"instance":"demo-v3-d88dddb74-9k7qg","version":"v3","metadata":"dev"}
 {"instance":"demo-v3-d88dddb74-9k7qg","version":"v3","metadata":"dev"}
@@ -86,31 +80,28 @@ $ for i in {1..5}; do curl http://$IPADDR:$PORT/ping; done
 
 The L4 load balancing is applied to the number of replicas that exist for each
 service. Different scenarios require more complex logic to load balancing.
-Make sure to detach the number of backend instances from the load balancing
+Make sure to detach the number of back-end instances from the load balancing
 algorithms used by the Ingress.
 
-## Apply Ingress rules to Sample Application
+## Apply Ingress Rules to the Sample Application
 
 To leverage the Cluster Ingress for the sample application, there are three custom resources types that need to be deployed:
+- Gateway
+- Virtual Service 
+- Destinationrule
 
-  - Gateway
-  - Virtual Service 
-  - Destinationrule
+> Note
+> 
+> For the sample application, an example manifest file with all three objects defined can be found [here](./yaml/ingress-simple.yaml).
 
-For the sample application, an example manifest file with all 3 objects defined is [here](./yaml/ingress-simple.yaml).
+1. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a cluster with Cluster Ingress installed. 
+2. Download the sample Kubernetes manifest file.
+```bash
+$ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml
+```
+3. Deploy the sample Kubernetes manifest file.
 
-  1) Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a
-     cluster with Cluster Ingress installed. 
-
-  2) Download the sample Kubernetes manifest file
-
-  ```
-  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml
-  ```
-  
-  3) Deploy the sample Kubernetes manifest file 
-  
-  ```bash
+```bash
   $ kubectl apply -f ingress-simple.yaml
 
   $ kubectl describe virtualservice demo-vs
@@ -128,11 +119,11 @@ For the sample application, an example manifest file with all 3 objects defined 
           Port:
             Number:  8080
           Subset:    v1
-  ```
+```
 
 This configuration matches all traffic with `demo.example.com` and sends it to
-the backend version=v1 deployment, regardless of the quantity of replicas in
-the backend. 
+the back end version=v1 deployment, regardless of the quantity of replicas in
+the back end. 
 
 Curl the service again using the port of the Ingress gateway. Because DNS is
 not set up, use the `--header` flag from curl to manually set the host header.
@@ -152,14 +143,13 @@ $ for i in {1..5}; do curl --header "Host: demo.example.com" http://$IPADDR:$POR
 {"instance":"demo-v1-7797b7c7c8-kw6gp","version":"v1","metadata":"production","request_id":"197cbb1d-5381-4e40-bc6f-cccec22eccbc"}
 ```
 
-To have SNI (Server Name Indication) work with TLS services, use curl's
-`--resolve` flag.
+To have Server Name Indication (SNI) work with TLS services, use curl's `--resolve` flag.
 
 ```bash
 $ curl --resolve demo.example.com:$IPADDR:$PORT http://demo.example.com/ping
 ```
 
-In this instance, the three backend v1 replicas are load balanced and no
+In this instance, the three back-end v1 replicas are load balanced and no
 requests are sent to the other versions.
 
 ## Where to go next

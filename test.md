@@ -262,8 +262,8 @@ The glossary source lives in the documentation repository
 
 To update glossary content, edit `_data/glossary.yaml`.
 
-To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
-example, [swarm](glossary.md?term=swarm)).
+To link to a glossary term, link to `glossary.md#YourGlossaryTerm` (for
+example, [swarm](glossary.md#swarm)).
 
 ## Site-wide variables
 
@@ -714,7 +714,7 @@ incoming := map[string]interface{}{
 ```powershell
 Install-Module DockerMsftProvider -Force
 Install-Package Docker -ProviderName DockerMsftProvider -Force
-[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine")
 Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
 ```
 
