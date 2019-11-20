@@ -1094,7 +1094,7 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
 
 ## 17.06.2-ee-25
-2019-11-14
+2019-11-19
 
 ### Builder
 
