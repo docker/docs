@@ -176,7 +176,7 @@ YAML file (which is discussed further in this document.)
 
 >**Note**: Changing your storage backend requires you to restart the Trusted Registry.
 
-See the [Registry configuration](/registry/configuration.md)
+See the [Docker Registry storage driver](/registry/storage-drivers/)
 documentation for the full options specific to each driver. Storage drivers can
 be customized through the [Docker Registry storage driver
 API](/registry/storage-drivers/index.md#storage-driver-api).
@@ -184,21 +184,21 @@ API](/registry/storage-drivers/index.md#storage-driver-api).
 
 ### Filesystem settings
 
-The [filesystem storage backend](/registry/configuration.md#filesystem)
+The [filesystem storage backend](/registry/storage-drivers/filesystem)
 has only one setting, the "Storage directory".
 
 ### S3 settings
 
-If you select the [S3 storage backend](/registry/configuration.md#s3), then you
+If you select the [S3 storage backend](/registry/storage-drivers/s3), then you
 need to set  "AWS region", "Bucket name", "Access Key", and "Secret Key".
 
 ### Azure settings
 
-Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/configuration.md#azure) page.
+Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/storage-drivers/azure) page.
 
 ### Openstack Swift settings
 
-View the [Openstack Swift settings](/registry/configuration.md#openstack-swift)
+View the [Openstack Swift settings](/registry/storage-drivers/openstack-swift)
 documentation so that you can set up your storage settings: authurl, username,
 password, container, tenant, tenantid, domain, domainid, insecureskipverify,
 region, chunksize, and prefix.
