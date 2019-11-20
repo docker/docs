@@ -1,12 +1,12 @@
 ---
-description: Instructions for installing Docker EE on SLES
+description: Instructions for installing Docker Engine - Enterprise on SLES
 keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/SUSE/
 - /engine/installation/linux/suse/
 - /engine/installation/linux/docker-ee/suse/
-title: Get Docker EE for SLES
+title: Get Docker Engine - Enterprise for SLES
 toc_max: 4
 ---
 
@@ -16,12 +16,13 @@ To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 
 ## Prerequisites
 
-### Docker EE URL
+### Docker Engine - Enterprise URL
 
-To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. These instructions
-work for Docker EE for SLES and for Docker EE for Linux, which includes access
-to Docker EE for all Linux distributions. To get this information:
+To install Docker Engine - Enterprise, you need to know the Docker Engine -
+Enterprise repository URL associated with your trial or subscription. These
+instructions work for Docker on SLES and for Docker on Linux, which includes
+access to Docker Engine - Enterprise for all Linux distributions. To get this
+information, do the following:
 
 - Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
@@ -31,20 +32,23 @@ to Docker EE for all Linux distributions. To get this information:
 
 Use this URL when you see the placeholder text `<DOCKER-EE-URL>`.
 
-To learn more about Docker EE, see
+To learn more about Docker Enterprise, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-Docker Community Edition (Docker CE) is not supported on SLES.
+Docker Engine - Community is not supported on SLES.
 
 ### OS requirements
 
-To install Docker EE, you need the 64-bit version of SLES 12.x, running on
-`x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures. Docker EE is
-not supported on OpenSUSE.
+To install Docker Engine - Enterprise, you need the 64-bit version of SLES 12.x,
+running on the `x86_64` architecture. Docker Engine - Enterprise is not
+supported on OpenSUSE.
 
-The only supported storage driver for Docker EE on SLES is Btrfs, which is
-used by default if the underlying filesystem hosting `/var/lib/docker/` is a
-BTRFS filesystem.
+The only supported storage driver for Docker Engine - Enterprise on SLES is
+`Btrfs`, which is used by default if the underlying filesystem hosting
+`/var/lib/docker/` is a BTRFS filesystem.
+
+> **Note:**
+> IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only.
 
 #### Firewall configuration
 
@@ -70,7 +74,7 @@ See the
 
 Older versions of Docker were called `docker` or `docker-engine`. If you use OS
 images from a cloud provider, you may need to remove the `runc` package, which
-conflicts with Docker EE. If these are installed, uninstall them, along with
+conflicts with Docker. If these are installed, uninstall them, along with
 associated dependencies.
 
 ```bash
@@ -87,7 +91,8 @@ $ sudo rpm -e docker-engine
 It's OK if `zypper` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker EE package is now called `docker-ee`.
+networks, are preserved. The Docker Engine - Enterprise package is now called
+`docker-ee`.
 
 ## Configure the Btrfs filesystem
 
@@ -106,8 +111,8 @@ BTRFS filesystem and mount it on `/var/lib/docker/`.
     $ df -T / /var /var/lib /var/lib/docker
     ```
 
-    You need to complete the rest of these steps **only if one of the following
-    is true**:
+    You need to complete the rest of these steps **only if one of the**
+    **following is true**:
 
     - You have a separate `/var/` filesystem that is not formatted with Btrfs
     - You do not have a separate `/var/` or `/var/lib/` or `/var/lib/docker/`
@@ -146,9 +151,10 @@ BTRFS filesystem and mount it on `/var/lib/docker/`.
     during step 1, restore them onto `/var/lib/docker`.
 
 
-## Install Docker EE
+## Install Docker Engine - Enterprise
 
-You can install Docker EE in different ways, depending on your needs:
+You can install Docker Engine - Enterprise in different ways, depending on your
+needs.
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -161,39 +167,41 @@ You can install Docker EE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker EE for the first time on a new host machine, you need
-to set up the Docker repository. Afterward, you can install and update Docker EE
-from the repository.
+Before you install Docker Engine - Enterprise for the first time on a new host
+machine, you need to set up the Docker repository. Afterward, you can install
+and update Docker from the repository.
 
-> **Note**: If you need to run Docker EE 2.0, please see the following instructions:
-> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
-> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
-> UCP, and DTR).
+> **Note:** If you need to run Docker Enterprise 2.0, please see the
+> following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older
+>   Docker Engine - Enterprise only release
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker
+>   Enterprise Edition 2.0 (Docker Engine, UCP, and DTR).
 
 #### Set up the repository
 
-1.  Temporarily add the `$DOCKER_EE_BASE_URL` and `$DOCKER_EE_URL` variables into your environment. This
-    only persists until you log out of the session. Replace `<DOCKER-EE-URL>`
-    listed below with the URL you noted down in the [prerequisites](#prerequisites).
+1.  Temporarily add the `$DOCKER_EE_BASE_URL` and `$DOCKER_EE_URL` variables
+    into your environment. This only persists until you log out of the session.
+    Replace `<DOCKER-EE-URL>` listed below with the URL you noted down in the
+    [prerequisites](#prerequisites).
 
     ```bash
     $ DOCKER_EE_BASE_URL="<DOCKER-EE-URL>"
     $ DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/<SLES_VERSION>/<ARCH>/stable-<DOCKER_VERSION>"
     ```
 
-    Where:
+    And substitute the following:
     * `DOCKER-EE-URL` is the URL from your Docker Hub subscription.
     * `SLES_VERSION` is `15` or `12.3`.
-    * `ARCH` is `x86_64`, `s390x`, or `ppc64le`.
-    * `DOCKER_VERSION` is `19.03` or one of the older releases (`18.09`, `18.03`, `17.06` etc.)
+    * `ARCH` is `x86_64`.
+    * `DOCKER_VERSION` is `19.03` or one of the older releases (`18.09`,
+      `18.03`, `17.06` etc.)
 
-    As an example your command should look like:
+    As an example, your command should look like:
 
     ```bash
-
     DOCKER_EE_BASE_URL="https://storebits.docker.com/ee/sles/sub-555-55-555"
-    DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/15/x86_64/stable-19.03
-    
+    DOCKER_EE_URL="${DOCKER_EE_BASE_URL}/sles/15/x86_64/stable-19.03"
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
@@ -211,7 +219,7 @@ from the repository.
     $ sudo rpm --import "${DOCKER_EE_BASE_URL}/sles/gpg"
     ```
 
-#### Install Docker EE
+#### Install Docker Engine - Enterprise
 
 1.  Update the `zypper` package index.
 
@@ -225,23 +233,23 @@ from the repository.
     `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
     key.
 
-2.  Install the latest version of Docker EE and containerd, or go to the next step to install a
-    specific version.
+2.  Install the latest version of Docker Engine - Enterprise and containerd, or
+    go to the next step to install a specific version.
 
     ```bash
     $ sudo zypper install docker-ee docker-ee-cli containerd.io
     ```
 
-    Start Docker:
+    Start Docker.
 
     ```bash
     $ sudo service docker start
     ```
 
-3.  On production systems, you should install a specific version of Docker EE
-    instead of always using the latest. List the available versions. The
-    following example only lists binary packages and is truncated. To also list
-    source packages, omit the `-t package` flag from the command.
+3.  On production systems, you should install a specific version of Docker
+    Engine - Enterprise instead of always using the latest. List the available
+    versions. The following example only lists binary packages and is truncated.
+    To also list source packages, omit the `-t package` flag from the command.
 
     ```bash
     $ zypper search -s --match-exact -t package docker-ee
@@ -249,7 +257,7 @@ from the repository.
       Loading repository data...
       Reading installed packages...
 
-      S | Name          | Type    | Version                               | Arch   | Repository    
+      S | Name          | Type    | Version                               | Arch   | Repository
       --+---------------+---------+---------------------------------------+--------+---------------
         | docker-ee     | package | {{ site.docker_ee_version }}-1                 | x86_64 | docker-ee-stable
     ```
@@ -268,9 +276,9 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
-    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
-    `storage-driver` has no harmful side effects.
+4.  Configure Docker to use the Btrfs filesystem. **This is only required if**
+    **the `/` filesystem is not using BTRFS.** However, explicitly specifying
+    the `storage-driver` has no harmful side effects.
 
     Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
     add the following contents:
@@ -283,13 +291,13 @@ from the repository.
 
     Save and close the file.
 
-5.  Start Docker:
+5.  Start Docker.
 
     ```bash
     $ sudo service docker start
     ```
 
-6.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -299,58 +307,58 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to configure the
-graph storage driver, allow non-privileged users to run Docker commands, and for
-other optional configuration steps.
+Docker Engine - Enterprise is installed and running. You need to use `sudo` to
+run Docker commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md)
+to configure the graph storage driver, allow non-privileged users to run Docker
+commands, and for other optional configuration steps.
 
-> **Important**: Be sure Docker is configured to start after the system
+> **Important:** Be sure Docker is configured to start after the system
 > firewall. See [Firewall configuration](#firewall-configuration).
 
-#### Upgrade Docker EE
+#### Upgrade Docker Engine - Enterprise
 
-To upgrade Docker EE:
+To upgrade Docker Engine - Enterprise, follow the steps below:
 
-1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 18.03.x to Docker 18.09.x),
+1.  If upgrading to a new major Docker Engine - Enterprise version (such as when
+    going from Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo zypper refresh`.
 
 3.  Follow the
-    [installation instructions](#install-docker-ee), choosing the new version you want
-    to install.
+    [installation instructions](#install-docker-ee), choosing the new version
+    you want to install.
 
 ### Install from a package
 
-If you cannot use the official Docker repository to install Docker EE, you can
-download the `.rpm` file for your release and install it manually. You
-need to download a new file each time you want to upgrade Docker EE.
+If you cannot use the official Docker repository to install Docker Engine -
+Enterprise, you can download the `.rpm` file for your release and install it
+manually. You need to download a new file each time you want to upgrade Docker.
 
-1.  Go to the Docker EE repository URL associated with your
+1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to `sles/12.3/` choose the
-    directory corresponding to your architecture and desired Docker EE version.
-    Download the `.rpm` file from the `Packages` directory.
+    directory corresponding to your architecture and desired Docker Engine -
+    Enterprise version. Download the `.rpm` file from the `Packages` directory.
 
-2.  Import Docker's official GPG key:
+2.  Import Docker's official GPG key.
 
     ```bash
     $ sudo rpm --import <DOCKER-EE-URL>/sles/gpg
     ```
 
-3.  Install Docker EE, changing the path below to the path where you downloaded
-    the Docker package.
+3.  Install Docker, changing the path below to the path where you downloaded the
+    Docker package.
 
     ```bash
     $ sudo zypper install /path/to/package.rpm
     ```
 
-    Docker EE is installed but not started. The `docker` group is created, but no
+    Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
-    the `/` filesystem is not using Btrfs.** However, explicitly specifying the
-    `storage-driver` has no harmful side effects.
+4.  Configure Docker to use the Btrfs filesystem. **This is only required if**
+    **the `/` filesystem is not using Btrfs.** However, explicitly specifying
+    the `storage-driver` has no harmful side effects.
 
     Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
     add the following contents:
@@ -363,13 +371,13 @@ need to download a new file each time you want to upgrade Docker EE.
 
     Save and close the file.
 
-5.  Start Docker:
+5.  Start Docker.
 
     ```bash
     $ sudo service docker start
     ```
 
-6.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -379,23 +387,23 @@ need to download a new file each time you want to upgrade Docker EE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+Docker Engine - Enterprise is installed and running. You need to use `sudo` to
+run Docker commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
-> **Important**: Be sure Docker is configured to start after the system
+> **Important:** Be sure Docker is configured to start after the system
 > firewall. See [Firewall configuration](#firewall-configuration).
 
-#### Upgrade Docker EE
+#### Upgrade Docker Engine - Enterprise
 
-To upgrade Docker EE, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), using `zypper update`
-instead of `zypper install`, and pointing to the new file.
+To upgrade Docker Engine - Enterprise, download the newer package file and
+repeat the [installation procedure](#install-from-a-package), using
+`zypper update` instead of `zypper install`, and pointing to the new file.
 
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 
-1.  Uninstall the Docker EE package using the following command.
+1.  Uninstall the Docker Engine - Enterprise package using the command below.
 
     ```bash
     $ sudo zypper rm docker-ee
@@ -403,7 +411,7 @@ instead of `zypper install`, and pointing to the new file.
 
 2.  Images, containers, volumes, or customized configuration files on your host
     are not automatically removed. To delete all images, containers, and
-    volumes:
+    volumes.
 
     ```bash
     $ sudo rm -rf /var/lib/docker/*
