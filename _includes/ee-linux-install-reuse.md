@@ -118,6 +118,15 @@ You only need to set up the repository once, after which you can install Docker 
     ```bash
     $ sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
     ```
+    
+6.  Add the Docker Engine - Enterprise **stable** repository:
+
+    ```bash
+    $ sudo -E yum-config-manager \
+        --add-repo \
+        "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
+    ```
+
 </div>
 <div id="RHEL_8" class="tab-pane fade" markdown="1">
 1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
@@ -152,6 +161,15 @@ You only need to set up the repository once, after which you can install Docker 
       device-mapper-persistent-data \
       lvm2
     ```
+
+5.  Add the Docker Engine - Enterprise **stable** repository:
+
+    ```bash
+    $ sudo -E yum-config-manager \
+        --add-repo \
+        "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
+    ```
+    
 </div>
 </div>
 {% endif %}

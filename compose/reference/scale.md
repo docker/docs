@@ -5,10 +5,11 @@ title: docker-compose scale
 notoc: true
 ---
 
-> **Note**: This command is deprecated. Use the [up](up.md) command with the
-  `--scale` flag instead. Beware that using `up` with `--scale` flag has some
-  [subtle differences](https://github.com/docker/compose/issues/5251) with the `scale` command as it incorporates the behaviour
-  of `up` command.
+> **This command is deprecated.** Use the [up](up.md) command with the
+  `--scale` flag instead. Beware that using `up` with the `--scale` flag has
+  some [subtle differences](https://github.com/docker/compose/issues/5251) with
+  the `scale` command, as it incorporates the behaviour of the `up` command.
+  {: .warning }
 
 ```
 Usage: scale [options] [SERVICE=NUM...]
