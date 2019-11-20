@@ -12,6 +12,20 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.6.1
+2019-11-20
+
+[Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that prevented Kubernetes to start with WSL 2 on machines with multiple CPU cores.
+- Fixed a rare issue that caused to Docker Desktop to crash with the error `Unable to stop Hyper-V VM: Cannot validate argument on parameter 'SwitchName'. The argument is null or empty.`
+
+### Known issue
+
+Windows Insider Preview Slow Ring users cannot run WSL 2 after upgrading to Docker Desktop Edge 2.1.6.1 release as WSL 2 requires Windows 10 Insider Preview build 19018 or higher.
+
 ### Docker Desktop Community 2.1.6.0
 2019-11-18
 
