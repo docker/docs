@@ -22,8 +22,7 @@ the Docker CLI client and Docker Compose.
 
 ## Under the hood
 
-UCP leverages the clustering and orchestration functionality provided
-by Docker.
+UCP leverages the clustering and orchestration functionality provided by Docker.
 
 ![](images/ucp-architecture-2.svg){: .with-border}
 
