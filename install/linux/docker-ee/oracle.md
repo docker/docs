@@ -1,11 +1,11 @@
 ---
-description: Instructions for installing Docker EE on Oracle Linux
+description: Instructions for installing Docker Engine - Enterprise on Oracle Linux
 keywords: requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/oracle/
 - /engine/installation/linux/oracle/
 - /engine/installation/linux/docker-ee/oracle/
-title: Get Docker EE for Oracle Linux
+title: Get Docker Engine - Enterprise for Oracle Linux
 ---
 
 {% assign linux-dist = "oraclelinux" %}
@@ -20,28 +20,39 @@ title: Get Docker EE for Oracle Linux
 
 ## Prerequisites
 
-This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
+This section lists what you need to consider before installing Docker Engine -
+Enterprise. Items that require action are explained below.
 
 - Use {{ linux-dist-cap }} 64-bit 7.3 or higher on RHCK 3.10.0-514 or higher.
 - Use the `devicemapper` storage driver only (`direct-lvm` mode in production).
-- Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
+- Find the URL for your Docker Engine - Enterprise repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux if installing or upgrading Docker EE 17.06.1 or newer.
+- Disable SELinux if installing or upgrading Docker Engine - Enterprise 17.06.1
+  or newer.
 
 ### Architectures and storage drivers
 
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.3 and higher, running the Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher. Older versions of {{ linux-dist-long }} are not supported.
+Docker Engine - Enterprise supports {{ linux-dist-long }} 64-bit, versions 7.3
+and higher, running the Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher.
+Older versions of {{ linux-dist-long }} are not supported.
 
-On {{ linux-dist-long }}, Docker EE only supports the `devicemapper` storage driver. In production, you must use it in `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+On {{ linux-dist-long }}, Docker Engine - Enterprise only supports the
+`devicemapper` storage driver. In production, you must use it in `direct-lvm`
+mode, which requires one or more dedicated block devices. Fast storage such as
+solid-state media (SSD) is recommended. Do not start Docker until properly
+configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
-### Find your Docker EE repo URL
+### Find your Docker Engine - Enterprise repo URL
 
 {% include ee-linux-install-reuse.md section="find-ee-repo-url" %}
 
 ### Uninstall old Docker versions
 
-The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks.
+The Docker Engine - Enterprise package is called `docker-ee`. Older versions
+were called `docker` or `docker-engine`. Uninstall all older versions and
+associated dependencies. The contents of `/var/lib/docker/` are preserved,
+including images, containers, volumes, and networks.
 
 ```bash
 $ sudo yum remove docker \
@@ -82,7 +93,7 @@ $ sudo yum remove docker \
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-package" %}
 
 
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 
 {% include ee-linux-install-reuse.md section="yum-uninstall" %}
 
