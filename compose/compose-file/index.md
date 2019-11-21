@@ -2586,6 +2586,5 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Docker](/get-started/)
 - [Samples](/samples/)
 - [Command line reference](/compose/reference/)

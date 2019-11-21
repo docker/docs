@@ -8,28 +8,32 @@ toc_min: 1
 toc_max: 2
 ---
 
-Here are the main improvements and issues per stable release, starting with the
-current release. The documentation is updated for each release.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
 
-For system requirements, see
+For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
-
-Release notes for _stable_ releases are listed below, [_edge_ release
-notes](edge-release-notes) are also available. (Following the Docker Engine - Community release model,
-'beta' releases are called 'edge' releases.) You can learn about both kinds of
-releases, and download stable and edge product installers at [Download Docker
-Desktop for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2019
 
-## Docker Desktop Community 2.1.0.4
-2019-10-21
+## Docker Desktop Community 2.1.0.5
+2019-11-18
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
 
-Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
+
+### Upgrades
+
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
+## Docker Desktop Community 2.1.0.4
+2019-10-21
+
+[Download](https://download.docker.com/mac/stable/39773/Docker.dmg)
 
 ### Upgrades
 

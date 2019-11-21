@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 2: Containerizing an Application"
+title: "Containerizing an application"
 keywords: containers, images, dockerfiles, node, code, coding, build, push, run
 description: Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.
 ---
@@ -25,7 +25,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 
 ## Setting Up
 
-1.  Clone an example project from GitHub (if you don't have git installed, see the [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](install instructions) first):
+1.  Clone an example project from GitHub (if you don't have git installed, see the [install instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) first):
 
     ```shell
     git clone -b v1 https://github.com/docker-training/node-bulletin-board

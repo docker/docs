@@ -59,7 +59,6 @@ Compose has commands for managing the whole lifecycle of your application:
 ## Compose documentation
 
 - [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
@@ -71,10 +70,10 @@ Compose has commands for managing the whole lifecycle of your application:
 
 The features of Compose that make it effective are:
 
-* [Multiple isolated environments on a single host](overview.md#Multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](overview.md#preserve-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](overview.md#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](overview.md#variables-and-moving-a-composition-between-environments)
+* [Multiple isolated environments on a single host](#multiple-isolated-environments-on-a-single-host)
+* [Preserve volume data when containers are created](#preserve-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](#only-recreate-containers-that-have-changed)
+* [Variables and moving a composition between environments](#variables-and-moving-a-composition-between-environments)
 
 ### Multiple isolated environments on a single host
 

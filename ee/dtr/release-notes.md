@@ -22,6 +22,15 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.4
+(2019-11-13)
+
+### Bug fixes
+* Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
+
 ## 2.7.3
 (2019-10-08)
 
@@ -106,7 +115,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * **Web Interface**
 
    * Users can now filter events by object type. (docker/dhe-deploy #10231)
-   * Docker artifacts such as apps, plugins, images, and multi-arch images are shown as distinct types with granular views into app details including metadata and scan results for an application's constituent images. [Learn more](https://beta.docs.docker.com/app/working-with-app/).
+   * Docker artifacts such as apps, plugins, images, and multi-arch images are shown as distinct types with granular views into app details including metadata and scan results for an application's constituent images. [Learn more](https://docs.docker.com/app/working-with-app/).
    * Users can now import a client certificate and key to the browser in order to access the web interface without using their credentials.
    * The **Logout** menu item is hidden from the left navigation pane if client certificates are used for DTR authentication instead of user credentials. (docker/dhe-deploy#10147)
 
@@ -118,7 +127,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
   * The Docker CLI now includes a `docker registry` management command which lets you interact with Docker Hub and trusted registries.
      * Features supported on both DTR and Hub include listing remote tags and inspecting image manifests.
-     * Features supported on DTR alone include removing tags, listing repository events (such as image pushes and pulls), listing asynchronous jobs (such as mirroring pushes and pulls), and reviewing job logs. [Learn more](https://beta.docs.docker.com/engine/reference/commandline/registry/).
+     * Features supported on DTR alone include removing tags, listing repository events (such as image pushes and pulls), listing asynchronous jobs (such as mirroring pushes and pulls), and reviewing job logs. [Learn more](https://docs.docker.com/engine/reference/commandline/registry/).
 
 * **Client Cert-based Authentication**
 
@@ -156,6 +165,16 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.11
+(2019-11-13)
+
+### Bug fixes
+* DTR 2.6 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
+* Fixed a bug where UCP pulling image vulnerability summaries from DTR caused excessive CPU load in UCP. (docker/dhe-deploy #10784)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.6.10
 (2019-10-08)
@@ -485,6 +504,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.15
+(2019-11-13)
+
+### Bug fixes
+* DTR 2.5 will now refuse to accept Docker App pushes, as apps are only available in experimental mode from 2.7 onward. (docker/dhe-deploy #10775)
+
+### Security
+* Bumped the Golang version for DTR to `1.12.12`. (docker/dhe-deploy #10769)
 
 ## 2.5.14
 (2019-09-03)

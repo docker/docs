@@ -1,11 +1,9 @@
 # Docs @ Docker
+Welcome to the repo for our documentation. This is the source for	
+[https://docs.docker.com/](https://docs.docker.com/).	
 
-Welcome to the repo for our documentation. This is the source for
-[https://docs.docker.com/](https://docs.docker.com/).
-
-Feel free to send us pull requests and file issues. Our docs are completely
+Feel free to send us pull requests and file issues. Our docs are completely	
 open source and we deeply appreciate contributions from our community!
-
 ## Table of Contents
 
 - [Providing feedback](#providing-feedback)
@@ -360,7 +358,7 @@ If you are using a version of the documentation that is no longer supported, whi
 
 - By entering your version number and selecting it from the branch selection list for this repo
 - By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9`
-- By running a container of the specific [tag for your documentation version](https://cloud.docker.com/u/docs/repository/docker/docs/docker.github.io/general#read-these-docs-offline)
+- By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io/tags)
 in Docker Hub. For example, run the following to access `v1.9`:
 
  ```bash
