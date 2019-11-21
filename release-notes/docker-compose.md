@@ -5,6 +5,93 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
+## 1.25.0
+(2019-11-18)
+
+### Features
+
+- Set no-colors to true by changing `CLICOLOR` env variable to `0`.
+
+- Added working directory, config files, and env file to service labels.
+
+- Added ARM build dependencies.
+
+- Added BuildKit support (use `DOCKER_BUILDKIT=1` and `COMPOSE_DOCKER_CLI_BUILD=1`).
+
+- Raised Paramiko to version 2.6.0.
+
+- Added the following tags: docker-compose:latest, docker-compose:<version>-alpine, and docker-compose:<version>-debian.
+
+- Raised `docker-py` to version 4.1.0.
+
+- Enhanced support for `requests`, up to version 2.22.0.
+
+- Removed empty tag on `build:cache_from`.
+
+- `Dockerfile` enhancement that provides for the generation of `libmusl` binaries for Alpine Linux.
+
+- Pulling only of images that cannot be built.
+
+- The `scale` attribute now accepts `0` as a value.
+
+- Added a `--quite` option to the `docker-compose` build command.
+
+- Added a `--no-interpolate` option to the `docker-compose config` command.
+
+- Raised OpenSSL for MacOS build from `1.1.0j` to `1.1.1c`.
+
+- Added a `--no-rm` option to the `docker-compose build` command.
+
+- Added support for the `docker-compose.yml` file's `credential_spec` configuration option.
+
+- Resolution of digests without having to pull the image.
+
+- Upgraded `pyyaml` to version `4.2b1`.
+
+- Lowered the severity to `warning` for instances in which `down` attempts to remove a non-existent image.
+
+- Mandated the use of improved API fields for project events, when possible.
+
+- Updated `setup.py` for modern `pypi/setuptools`, and removed `pandoc` dependencies.
+
+- Removal of `Dockerfile.armhf`, which is no longer required.
+
+### Bugfixes
+
+- Made container service color deterministic, including the removal of the color red.
+
+- Fixed non-ASCII character errors (Python2 only).
+
+- Changed image sizing to decimal format, to align with Docker CLI.
+
+- `tty` size acquired via Python Posix support.
+
+- Fixed same file 'extends' optimization.
+
+- Fixed stdin_open.
+
+- Fixed the issue of `--remove-orphans` being ignored encountered during use with `up --no-start` option.
+
+- Fixed `docker-compose ps --all` command.
+
+- Fixed the `depends_on` dependency recreation behavior.
+
+- Fixed bash completion for the build --memory command.
+
+- Fixed the misleading environmental variables warning that occurs when the `exec` command is performed.
+
+- Fixed the failure check in the `parallel_execute_watch function`.
+
+- Fixed the race condition that occurs following the pulling of an image.
+
+- Fixed error on duplicate mount points. It displays a configuration error message now.
+
+- Fixed the merge on `networks` section.
+
+- Compose container is always connected to `stdin`.
+
+- Fixed the presentation of failed services on the `docker-compose start` command when containers are not available.
+
 ## 1.24.1
 (2019-06-24)
 
