@@ -51,7 +51,7 @@ To install the Docker Engine - Enterprise on your hosts, Docker provides a
     Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
 
-2.  Check if a reboot is required, and if yes, restart your instance:
+2.  Check if a reboot is required, and if yes, restart your instance.
 
     ```powershell
     (Install-WindowsFeature Containers).RestartNeeded
@@ -260,32 +260,32 @@ index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.
 Use the following commands to completely remove the Docker Engine - Enterprise
 from a Windows Server:
 
-1. Leave any active Docker Swarm
+1. Leave any active Docker Swarm.
 
     ```powershell
     docker swarm leave --force
     ```
 
-2. Remove all running and stopped containers
+2. Remove all running and stopped containers.
 
     ```powershell
     docker rm -f $(docker ps --all --quiet)
     ```
 
-3. Prune container data
+3. Prune container data.
 
     ```powershell
     docker system prune --all --volumes
     ```
 
-4. Uninstall Docker PowerShell Package and Module
+4. Uninstall Docker PowerShell Package and Module.
 
     ```powershell
     Uninstall-Package -Name docker -ProviderName DockerMsftProvider
     Uninstall-Module -Name DockerMsftProvider
     ```
 
-5. Clean up Windows Networking and file system
+5. Clean up Windows Networking and file system.
 
     ```powershell
     Get-HNSNetwork | Remove-HNSNetwork

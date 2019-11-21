@@ -40,7 +40,7 @@ Enterprise. Items that require action are explained below.
 ### Architectures and storage drivers
 
 Docker Engine - Enterprise supports {{ linux-dist-long }} 64-bit, versions 7.4
-and higher running on `x86_64`. See [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }
+and higher running on `x86_64`. See [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }
 for specific details.
 
 On {{ linux-dist-long }}, Docker Engine - Enterprise supports storage drivers,
