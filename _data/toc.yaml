@@ -3917,7 +3917,7 @@ manuals:
   - path: /docker-for-windows/edge-release-notes/
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
-    title: Docker Desktop WSL 2 Tech Preview
+    title: Docker Desktop WSL 2 backend
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Hub

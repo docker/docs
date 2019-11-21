@@ -1,31 +1,45 @@
 ---
-description: Docker Desktop WSL 2 Tech Preview
-keywords: Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux
-title: Docker Desktop WSL 2 Tech Preview
+description: Docker Desktop WSL 2 backend
+keywords: WSL, WSL 2 Tech Preview, Windows Subsystem for Linux
+title: Docker Desktop WSL 2 backend
 toc_min: 1
 toc_max: 2
 ---
 
-# Overview
+The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features.
 
-Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
+WSL 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop running on WSL 2, users can leverageLinux workspaces and avoid having to maintain both Linux and Windows build scripts.
 
-WSL 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop WSL 2 Tech Preview, users can access Linux workspaces without having to maintain both Linux and Windows build scripts.
-
-Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources, enabling CPU and memory-intensive tasks such as building a container to run much faster.
+Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources it needs, while enabling CPU and memory-intensive tasks such as building a container to run much faster.
 
 Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.
 
-> Note that it is currently not possible to run Kubernetes while running Docker Desktop on WSL 2. However, you can continue to use Kubernetes in the non-WSL 2 Docker Desktop using the Daemon **Settings** option.
+ Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
 
 # Prerequisites
 
-Before you install Docker Desktop WSL 2 Tech Preview, you must complete the following steps:
+Before you install Docker Desktop WSL 2 backend, you must complete the following steps:
 
-1. Install Windows 10 Insider Preview build 18932 or later.
+1. Install Windows 10 Insider Preview build 19018 or higher.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
-3. Install a default distribution based on Ubuntu 18.04. You can check this with `wsl lsb_release -a`. You can download Ubuntu 18.04 from the [Microsoft store](https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q).
-4. Ensure the Ubuntu distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
+
+# Download
+
+Download [Docker Desktop Edge 2.1.6.0](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe) or a later release.
+
+# Install
+
+Ensure you have completed the steps described in the Prerequisites section **before** installing the Docker Desktop Edge release.
+
+1. Follow the usual Docker Desktop installation instructions to install Docker Desktop.
+2. Start Docker Desktop from the Windows Start menu.
+3. From the Docker menu, select **Settings** > **General**.
+
+    ![WSL 2 Tech Preview Desktop UI](images/wsl2-enable.png)
+
+4. Select the **Enable the experimental WSL 2 based engine** check box.
+5. Click **Apply & Restart**.
+6. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
 
     To check the WSL mode, run:
 
@@ -34,24 +48,8 @@ Before you install Docker Desktop WSL 2 Tech Preview, you must complete the foll
     To upgrade to v2, run:
 
     `wsl --set-version <distro name> 2`
-5. Set Ubuntu 18.04 as the default distribution.
+7. When Docker Desktop restarts, go to **Settings** > **Resources** > **WSL Integration** and then select from which WSL 2 distributions you would like to access Docker.
 
-    `wsl -s ubuntu 18.04`
+    ![WSL 2 Tech Preview Context](images/wsl2-choose-distro.png)
 
-# Download
-
-To download the Tech Preview, click [Docker Desktop WSL 2 Tech Preview Installer](https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe).
-
-# Installation
-
-Ensure you have completed the steps described in the Prerequisites section **before** installing the Tech Preview.
-
-Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the **WSL 2 Tech Preview** option.
-
-![WSL 2 Tech Preview Desktop UI](images/wsl2-ui.png)
-
-Select **WSL 2 Tech Preview** from the menu to start, stop, and configure the daemon running in WSL 2. When the WSL 2 daemon starts, a docker CLI context is automatically created for it, and the CLI configuration points to the context. You can list contexts by running `docker context ls`.
-
-![WSL 2 Tech Preview Context](images/wsl2-context.png)
-
-Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run `docker context use default`. To switch to WSL 2, run `docker context use wsl`.
+8. Click **Apply & Restart** for the changes to take effect.
