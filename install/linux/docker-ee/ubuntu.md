@@ -269,8 +269,8 @@ Engine - Enterprise.
     $ sudo dpkg -i /path/to/package.deb
     ```
 
-    Or, if you downloaded the three `.deb` files, install them in the following
-    order:
+    Or, if you downloaded the three `.deb` files, **you must** install them in
+    the following order:
 
     ```bash
     $ sudo dpkg -i /path/to/docker-ee-cli_<version>.deb
