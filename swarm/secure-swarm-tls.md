@@ -53,7 +53,7 @@ customs, digital certificates authenticate computers on a network.
 
 Public key infrastructure (PKI) is the combination of technologies, policies,
 and procedures that work behind the scenes to enable digital certificates. Some
-of the technologies, policies and procedures provided by PKI include:
+of the technologies, policies, and procedures provided by PKI include:
 
 - Services to securely request certificates
 - Procedures to authenticate the entity requesting the certificate
@@ -140,7 +140,7 @@ and overheads. However, for a large corporation, it still may reduce costs in
 comparison to using an external 3rd party service.
 
 Assuming you operate and manage your own internal CAs and PKI properly, an
-internal, corporate CA  can be a highly scalable and highly secure option.
+internal, corporate CA can be a highly scalable and highly secure option.
 
 ### Self-signed certificates
 
