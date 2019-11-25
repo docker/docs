@@ -258,7 +258,7 @@ Engine - Enterprise.
     to install.
 
     > **Note:**
-    > Starting with 19.03, you will download three `.deb` files. They
+    > Starting with 19.03, you have to download three `.deb` files. They
     > are `docker-ee-cli_<version>.deb`, `containerd.io_<version>.deb`, and
     > `docker-ee_<version>.deb`.
 
