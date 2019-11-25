@@ -247,19 +247,35 @@ To upgrade Docker Engine - Enterprise, follow the steps below:
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker Engine - Enterprise, you
-can download the `.deb` file for your release and install it manually. You need
-to download a new file each time you want to upgrade Docker Engine - Enterprise.
+can download the `.deb` files for your release and install them manually. You
+need to download a new file or set of files each time you want to upgrade Docker
+Engine - Enterprise.
 
 1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-<VERSION>` and download the `.deb` file for the
-    Docker Engine - Enterprise version and architecture you want to install.
+    `ubuntu/dists/<distribution>/pool/stable-<VERSION>` and download the `.deb`
+    file(s) for the Docker Engine - Enterprise version and architecture you want
+    to install.
+
+    > **Note:**
+    > Starting with 19.03, you have to download three `.deb` files. They
+    > are `docker-ee-cli_<version>.deb`, `containerd.io_<version>.deb`, and
+    > `docker-ee_<version>.deb`.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker Engine - Enterprise package.
 
     ```bash
     $ sudo dpkg -i /path/to/package.deb
+    ```
+
+    Or, if you downloaded the three `.deb` files, **you must** install them in
+    the following order:
+
+    ```bash
+    $ sudo dpkg -i /path/to/docker-ee-cli_<version>.deb
+    $ sudo dpkg -i /path/to/containerd.io_<version>.deb
+    $ sudo dpkg -i /path/to/docker-ee_<version>.deb
     ```
 
     The Docker daemon starts automatically.
