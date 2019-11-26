@@ -18,7 +18,7 @@ and [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/
 More information can be found on obtaining these with either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) or through the [Azure Portal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
 
 To securely utilize this Azure credential information, we will create a cluster secrets
-file which will inject this data into the environment at runtime.  For example, create
+file which will inject this data into the environment at runtime. For example, create
 a file named `my-azure-creds.sh` similar to the following containing your credentials:
 
 ```bash
@@ -29,7 +29,7 @@ export ARM_TENANT_ID='kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'
 ```
 
 This file should be treated as sensitive data with file permissions set appropriately.
-To use this file, we _do not_ source or run this file directly in the shell.  Instead,
+To use this file, we _do not_ source or run this file directly in the shell. Instead,
 we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
 running cluster:
 
@@ -88,11 +88,11 @@ resource:
       - "6443:6443"
 ```
 
-Provide values for the variable section.  For instance:
+Provide values for the variable section. For instance:
 
     region: "centralus"
 
-The values will be substituted in the cluster definition.  This makes it
+The values will be substituted in the cluster definition. This makes it
 easy to define a reusable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
@@ -136,8 +136,8 @@ After about 15-20 minutes, Docker Enterprise installation will complete:
 
     e58dd2a77567
 
-After all operations complete succesfully, the cluster id will be the last statement
-to print.  You can login to the URL and begin interacting with the cluster.
+After all operations complete succesfully, the cluster ID will be the last statement
+to print. You can login to the URL and begin interacting with the cluster.
 
 ## View cluster information
 
@@ -218,7 +218,7 @@ The information displayed by `docker cluster inspect` can be used as a cluster d
 
 ## Use context
 
-Docker cluster creates a context on your local machine.  To use this context, and interact with the cluster, run `docker context use quickstart`
+Docker cluster creates a context on your local machine. To use this context, and interact with the cluster, run `docker context use quickstart`
 
     $ docker context use quickstart
     quickstart
@@ -288,7 +288,7 @@ Current context is now "default"
 
 ## Scale a cluster
 
-Open `cluster.yml`.  Change the number of workers to 6:
+Open `cluster.yml`. Change the number of workers to 6:
 
 ```yaml
 resource:
@@ -340,7 +340,7 @@ A quick `docker cluster inspect e58dd2a77567` will show the worker count increas
 
 ## Backup a cluster
 
-Before we proceed with more operations on the cluster, let's take a backup of the running cluster.  To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `
+Before we proceed with more operations on the cluster, let's take a backup of the running cluster. To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `
 
 Provide a passphrase to encrypt the UCP backup.
 
