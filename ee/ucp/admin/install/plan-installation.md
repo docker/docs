@@ -52,7 +52,6 @@ The following table lists recommendations to avoid IP range conflicts.
 | Kubernetes | `pod-cidr`                 | CIDR range for Kubernetes pods           | 192.168.0.0/16 |
 | Kubernetes | `service-cluster-ip-range` | CIDR range for Kubernetes services       | 10.96.0.0/16   |
 
-
 ### Engine
 
 There are two IP ranges used by the engine for the `docker0` and `docker_gwbridge` interface:

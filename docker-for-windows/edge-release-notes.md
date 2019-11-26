@@ -24,7 +24,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ### Known issue
 
-Windows Insider Preview Slow Ring users cannot run WSL 2 after upgrading to Docker Desktop Edge 2.1.6.1 release as WSL 2 requires Windows 10 Insider Preview build 19018 or higher.
+Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.1. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
 
 ### Docker Desktop Community 2.1.6.0
 2019-11-18
@@ -56,7 +56,7 @@ Added the ability to start and stop Compose-based applications and view combined
 
 ### Known issue
 
-Windows Insider Preview Slow Ring users cannot run WSL 2 after upgrading to Docker Desktop Edge 2.1.6.0 release as WSL 2 requires Windows 10 Insider Preview build 19018 or higher.
+Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.0. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
 
 ### Docker Desktop Community 2.1.5.0
 2019-11-04

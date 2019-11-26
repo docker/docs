@@ -28,7 +28,7 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 ## Creating and Pushing to a Docker Hub Repository
 
-At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now lets make our first repo, and share our bulletin board app there.
+At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
 
 1.  Click on the Docker icon in your menu bar, and navigate to **Repositories -> Create...**. You'll be taken to a Docker Hub page to create a new repository.
 
