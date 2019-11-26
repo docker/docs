@@ -1886,8 +1886,11 @@ expressed in the short form.
 - `volume`: configure additional volume options
   - `nocopy`: flag to disable copying of data from a container when a volume is
     created
-- `tmpfs`: configure additional tmpfs options
-  - `size`: the size for the tmpfs mount in bytes
+- `tmpfs`: configure additional tmpfs options.
+
+  The supported mount options are the same as the Linux default mount flag. If you do not specify any options, the system uses the default `rw,noexec,nosuid,nodev,size=65536k` options.
+
+  - `size`: the size for the tmpfs mount in bytes.
 - `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```yaml
@@ -1906,6 +1909,8 @@ services:
       - type: bind
         source: ./static
         target: /opt/app/static
+    tmpfs:
+      - /tempFiles:exec,mode=777,size=1G,uid=104,gid=107
 
 networks:
   webnet:
