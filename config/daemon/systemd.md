@@ -179,7 +179,7 @@ you need to add this configuration in the Docker systemd service file.
      
     Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
     ```bash
-    $ systemctl --user --property=Environment docker
+    $ systemctl --user show --property=Environment docker
     ```
     
 
