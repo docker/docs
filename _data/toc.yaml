@@ -483,7 +483,7 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
-    - sectiontitle: docker app *
+    - sectiontitle: docker app
       section:
         - path: /engine/reference/commandline/app/
           title: docker app
@@ -519,7 +519,7 @@ reference:
           title: docker app validate
         - path: /engine/reference/commandline/app_version/
           title: docker app version
-    - sectiontitle: docker assemble *
+    - sectiontitle: docker assemble
       section:
         - path: /engine/reference/commandline/assemble/
           title: docker assemble
@@ -549,7 +549,7 @@ reference:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
-    - sectiontitle: docker builder *
+    - sectiontitle: docker builder
       section:
         - path: /engine/reference/commandline/builder/
           title: docker builder
@@ -557,7 +557,7 @@ reference:
           title: docker builder build
         - path: /engine/reference/commandline/builder_prune/
           title: docker builder prune
-    - sectiontitle: docker buildx *
+    - sectiontitle: docker buildx
       section:
         - path: /engine/reference/commandline/buildx/
           title: docker buildx
@@ -585,7 +585,7 @@ reference:
           title: docker buildx use
         - path: /engine/reference/commandline/buildx_version/
           title: docker buildx version
-    - sectiontitle: docker checkpoint *
+    - sectiontitle: docker checkpoint
       section:
       - path: /engine/reference/commandline/checkpoint/
         title: docker checkpoint
@@ -595,7 +595,7 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
-    - sectiontitle: docker cluster *
+    - sectiontitle: docker cluster
       section:
         - path: /engine/reference/commandline/cluster/
           title: docker cluster
@@ -617,7 +617,7 @@ reference:
           title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
-    - sectiontitle: docker config *
+    - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
         title: docker config
@@ -629,7 +629,7 @@ reference:
         title: docker config ls
       - path: /engine/reference/commandline/config_rm/
         title: docker config rm
-    - sectiontitle: docker container *
+    - sectiontitle: docker container
       section:
       - path: /engine/reference/commandline/container/
         title: docker container
@@ -683,7 +683,7 @@ reference:
         title: docker container update
       - path: /engine/reference/commandline/container_wait/
         title: docker container wait
-    - sectiontitle: docker context *
+    - sectiontitle: docker context
       section:
         - path: /engine/reference/commandline/context/
           title: docker context
@@ -719,7 +719,7 @@ reference:
       title: docker export
     - path: /engine/reference/commandline/history/
       title: docker history
-    - sectiontitle: docker engine *
+    - sectiontitle: docker engine
       section:
         - path: /engine/reference/commandline/engine/
           title: docker engine
@@ -729,7 +729,7 @@ reference:
           title: docker engine check
         - path: /engine/reference/commandline/engine_update/
           title: docker engine update
-    - sectiontitle: docker image *
+    - sectiontitle: docker image
       section:
       - path: /engine/reference/commandline/image/
         title: docker image
@@ -775,7 +775,7 @@ reference:
       title: docker logout
     - path: /engine/reference/commandline/logs/
       title: docker logs
-    - sectiontitle: docker manifest *
+    - sectiontitle: docker manifest
       section:
       - path: /engine/reference/commandline/manifest/
         title: docker manifest
@@ -787,7 +787,7 @@ reference:
         title: docker manifest inspect
       - path: /engine/reference/commandline/manifest_push/
         title: docker manifest push
-    - sectiontitle: docker network *
+    - sectiontitle: docker network
       section:
       - path: /engine/reference/commandline/network/
         title: docker network
@@ -805,7 +805,7 @@ reference:
         title: docker network prune
       - path: /engine/reference/commandline/network_rm/
         title: docker network rm
-    - sectiontitle: docker node *
+    - sectiontitle: docker node
       section:
       - path: /engine/reference/commandline/node/
         title: docker node
@@ -825,7 +825,7 @@ reference:
         title: docker node update
     - path: /engine/reference/commandline/pause/
       title: docker pause
-    - sectiontitle: docker plugin *
+    - sectiontitle: docker plugin
       section:
       - path: /engine/reference/commandline/plugin/
         title: docker plugin
@@ -855,7 +855,7 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
-    - sectiontitle: docker registry *
+    - sectiontitle: docker registry
       section:
         - path: /engine/reference/commandline/registry/
           title: docker registry
@@ -887,7 +887,7 @@ reference:
       title: docker save
     - path: /engine/reference/commandline/search/
       title: docker search
-    - sectiontitle: docker secret *
+    - sectiontitle: docker secret
       section:
       - path: /engine/reference/commandline/secret/
         title: docker secret
@@ -899,7 +899,7 @@ reference:
         title: docker secret ls
       - path: /engine/reference/commandline/secret_rm/
         title: docker secret rm
-    - sectiontitle: docker service *
+    - sectiontitle: docker service
       section:
       - path: /engine/reference/commandline/service/
         title: docker service
@@ -921,7 +921,7 @@ reference:
         title: docker service scale
       - path: /engine/reference/commandline/service_update/
         title: docker service update
-    - sectiontitle: docker stack *
+    - sectiontitle: docker stack
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
@@ -939,7 +939,7 @@ reference:
       title: docker stats
     - path: /engine/reference/commandline/stop/
       title: docker stop
-    - sectiontitle: docker swarm *
+    - sectiontitle: docker swarm
       section:
       - path: /engine/reference/commandline/swarm/
         title: docker swarm
@@ -959,7 +959,7 @@ reference:
         title: docker swarm unlock
       - path: /engine/reference/commandline/swarm_update/
         title: docker swarm update
-    - sectiontitle: docker system *
+    - sectiontitle: docker system
       section:
       - path: /engine/reference/commandline/system/
         title: docker system
@@ -973,7 +973,7 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
-    - sectiontitle: docker template *
+    - sectiontitle: docker template
       section:
         - path: /engine/reference/commandline/template/
           title: docker template
@@ -993,7 +993,7 @@ reference:
           title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
-    - sectiontitle: docker trust *
+    - sectiontitle: docker trust
       section:
       - path: /engine/reference/commandline/trust/
         title: docker trust
@@ -1021,7 +1021,7 @@ reference:
       title: docker update
     - path: /engine/reference/commandline/version/
       title: docker version
-    - sectiontitle: docker volume *
+    - sectiontitle: docker volume
       section:
       - path: /engine/reference/commandline/volume_create/
         title: docker volume create
