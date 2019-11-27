@@ -77,6 +77,11 @@ you need to add this configuration in the Docker systemd service file.
     ```bash
     $ sudo mkdir -p /etc/systemd/system/docker.service.d
     ```
+     
+    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker:
+    ```bash
+    $ mkdir -p ~/.config/systemd/user/docker.service.d
+    ```
 
 2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`
     that adds the `HTTP_PROXY` environment variable:
@@ -94,6 +99,16 @@ you need to add this configuration in the Docker systemd service file.
     [Service]
     Environment="HTTPS_PROXY=https://proxy.example.com:443/"
     ```
+     
+    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
+    create following files, with similar contents as described above:
+    - `~/.config/systemd/user/docker.service.d/http-proxy.conf`
+      
+      
+    Or,
+      
+      
+    - `~/.config/systemd/user/docker.service.d/https-proxy.conf`
 
 3.  If you have internal Docker registries that you need to contact without
     proxying you can specify them via the `NO_PROXY` environment variable.
@@ -131,11 +146,21 @@ you need to add this configuration in the Docker systemd service file.
     ```bash
     $ sudo systemctl daemon-reload
     ```
+     
+    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
+    ```bash
+    $ systemctl --user daemon-reload
+    ```
 
 5.  Restart Docker:
 
     ```bash
     $ sudo systemctl restart docker
+    ```
+     
+    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
+    ```bash
+    $ systemctl --user restart docker
     ```
 
 6.  Verify that the configuration has been loaded:
@@ -151,6 +176,12 @@ you need to add this configuration in the Docker systemd service file.
     $ systemctl show --property=Environment docker
     Environment=HTTPS_PROXY=https://proxy.example.com:443/
     ```
+     
+    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
+    ```bash
+    $ systemctl --user show --property=Environment docker
+    ```
+    
 
 ## Configure where the Docker daemon listens for connections
 
