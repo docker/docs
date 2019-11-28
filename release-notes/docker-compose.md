@@ -34,11 +34,11 @@ toc_max: 2
 
 - The `scale` attribute now accepts `0` as a value.
 
-- Added a `--quite` option to the `docker-compose` build command.
+- Added a `--quiet` option to the `docker-compose` build command.
 
 - Added a `--no-interpolate` option to the `docker-compose config` command.
 
-- Raised OpenSSL for MacOS build from `1.1.0j` to `1.1.1c`.
+- Raised OpenSSL for MacOS build from `1.1.0` to `1.1.1c`.
 
 - Added a `--no-rm` option to the `docker-compose build` command.
 
@@ -84,7 +84,7 @@ toc_max: 2
 
 - Fixed the race condition that occurs following the pulling of an image.
 
-- Fixed error on duplicate mount points. It displays a configuration error message now.
+- Fixed error on duplicate mount points (a configuration error message now displays).
 
 - Fixed the merge on `networks` section.
 
