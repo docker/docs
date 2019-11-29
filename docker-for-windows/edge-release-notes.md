@@ -12,6 +12,35 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.7.0
+2019-12-03
+
+[Download](ADD URL)
+
+> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+
+### Upgrades
+
+- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
+
+### New
+
+- Added a new option in the Settings window to select WSL 2 distributions.
+- File sharing: The new gRPC FUSE system is no longer experimental and is enabled by default even when experimental features are turned off.
+
+### Bug fixes and minor changes
+
+- The Docker Desktop Dashboard now displays port information inline with the container status.
+- Fixed an issue which caused the 'back' button on the Dashboard UI to behave inconsistently when repeatedly switching between container details and the Settings window.
+- Various improvements to the Dashboard UI.
+- Fixed a bug that caused a rare crash when uninstalling Docker Desktop.
+- Fixed an issue when overwriting existing files with the WSL 2 CLI bundle, such as kubectl.
+- Fixed various stability issues.
+
+### Known issue
+
+- The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
+
 ### Docker Desktop Community 2.1.6.1
 2019-11-20
 
