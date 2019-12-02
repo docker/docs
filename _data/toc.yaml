@@ -86,24 +86,6 @@ guides:
         title: Binaries
       - path: /install/linux/linux-postinstall/
         title: Optional Linux post-installation steps
-  - sectiontitle: Docker Enterprise
-    section:
-    - title: About Docker Enterprise
-      path: /ee/supported-platforms/
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ee/centos/
-        title: CentOS
-      - path: /install/linux/docker-ee/oracle/
-        title: Oracle Linux
-      - path: /install/linux/docker-ee/rhel/
-        title: RHEL
-      - path: /install/linux/docker-ee/suse/
-        title: SLES
-      - path: /install/linux/docker-ee/ubuntu/
-        title: Ubuntu
-    - path: /install/windows/docker-ee/
-      title: Microsoft Windows Server
   - sectiontitle: Compatibility between Docker versions
     section:
       - path: /engine/ce-ee-node-activate/
@@ -1350,8 +1332,24 @@ manuals:
       title: Environment variables
   - sectiontitle: Docker Engine - Enterprise
     section:
+    - title: Overview
+      path: /ee/supported-platforms/
     - title: Release notes
       path: /engine/release-notes/
+    - sectiontitle: Linux
+      section:
+      - path: /ee/docker-ee/centos/
+        title: CentOS
+      - path: /ee/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /ee/docker-ee/rhel/
+        title: RHEL
+      - path: /ee/docker-ee/suse/
+        title: SLES
+      - path: /ee/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /ee/docker-ee/windows/docker-ee/
+      title: Microsoft Windows Server
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
