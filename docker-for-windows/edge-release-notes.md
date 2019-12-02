@@ -13,7 +13,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ## Edge Releases of 2019
 
 ### Docker Desktop Community 2.1.7.0
-2019-12-03
+2019-12-
 
 [Download](ADD URL)
 
@@ -25,16 +25,18 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ### New
 
-- Added a new option in the Settings window to select WSL 2 distributions.
+- Added the **WSL Integration** option in **Settings** > **Resources** to select WSL 2 distributions. This option will be visible only after enabling WSL 2 on your machine.
 - File sharing: The new gRPC FUSE system is no longer experimental and is enabled by default even when experimental features are turned off.
 
 ### Bug fixes and minor changes
 
 - The Docker Desktop Dashboard now displays port information inline with the container status.
 - Fixed an issue which caused the 'back' button on the Dashboard UI to behave inconsistently when repeatedly switching between container details and the Settings window.
-- Various improvements to the Dashboard UI.
+- Various minor improvements to the Dashboard UI.
 - Fixed a bug that caused a rare crash when uninstalling Docker Desktop.
 - Fixed an issue when overwriting existing files with the WSL 2 CLI bundle, such as kubectl.
+- Fixed an issue where WSL 2 to failed to start when the distribution directory is compressed or encrypted. Fixes [docker/for-win#5256](https://github.com/docker/for-win/issues/5256).
+- Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 - Fixed various stability issues.
 
 ### Known issue

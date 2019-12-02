@@ -13,7 +13,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ## Edge Releases of 2019
 
 ### Docker Desktop Community 2.1.7.0
-2019-12-03
+2019-12-
 
 [Download](ADD URL)
 
@@ -25,12 +25,13 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ### Bug fixes and minor changes
 
-- Docker Desktop Dashboard now displays port information inline with the container status.
+- The Docker Desktop Dashboard now displays port information inline with the container status.
 - Fixed an issue that caused the 'back' button on the Dashboard UI to behave inconsistently when repeatedly switching between the container details and the Settings window.
 - Various minor improvements to the Dashboard UI.
 - Fixed an issue that occurs when sharing overlapping directories.
 - Fixed a bug that prevented users from changing the location of the VM disk image.
 - Docker Desktop does not inject `inotify` events on directories anymore as these can cause mount points to disappear inside containers. Fixes [docker/for-mac#3976](https://github.com/docker/for-mac/issues/3976).
+- Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 
 ### Docker Desktop Community 2.1.6.0
 2019-11-18
