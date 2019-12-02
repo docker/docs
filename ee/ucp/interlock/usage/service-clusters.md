@@ -19,10 +19,10 @@ worker nodes, `ucp-node-0` and `ucp-node-1`; we'll use these as dedicated
 proxy servers for two independent Interlock service clusters. 
 
 We'll also assume you've already enabled Interlock, per the 
-[instructions here](../../deploy/), 
+[instructions here](../deploy/), 
 with an HTTP port of 80 and an HTTPS port of 8443.
 
-## Setting Up Interlock service clusters
+## Setting up Interlock service clusters
 
 First, apply some node labels to the UCP workers you've chosen to use 
 as your proxy servers. From a UCP manager:
