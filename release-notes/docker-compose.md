@@ -8,7 +8,7 @@ toc_max: 2
 ## 1.25.0
 (2019-11-18)
 
-### Features
+### New features
 
 - Set no-colors to true by changing `CLICOLOR` env variable to `0`.
 
@@ -20,7 +20,7 @@ toc_max: 2
 
 - Raised Paramiko to version 2.6.0.
 
-- Added the following tags: docker-compose:latest, docker-compose:<version>-alpine, and docker-compose:<version>-debian.
+- Added the following tags: `docker-compose:latest`, `docker-compose:<version>-alpine`, and `docker-compose:<version>-debian`.
 
 - Raised `docker-py` to version 4.1.0.
 
@@ -34,13 +34,11 @@ toc_max: 2
 
 - The `scale` attribute now accepts `0` as a value.
 
-- Added a `--quiet` option to the `docker-compose` build command.
+- Added a `--quiet` option and a `--no-rm` option to the `docker-compose build` command.
 
 - Added a `--no-interpolate` option to the `docker-compose config` command.
 
 - Raised OpenSSL for MacOS build from `1.1.0` to `1.1.1c`.
-
-- Added a `--no-rm` option to the `docker-compose build` command.
 
 - Added support for the `docker-compose.yml` file's `credential_spec` configuration option.
 
@@ -54,21 +52,21 @@ toc_max: 2
 
 - Updated `setup.py` for modern `pypi/setuptools`, and removed `pandoc` dependencies.
 
-- Removal of `Dockerfile.armhf`, which is no longer required.
+- Removed `Dockerfile.armhf`, which is no longer required.
 
-### Bugfixes
+### Bug fixes
 
 - Made container service color deterministic, including the removal of the color red.
 
-- Fixed non-ASCII character errors (Python2 only).
+- Fixed non-ASCII character errors (Python 2 only).
 
 - Changed image sizing to decimal format, to align with Docker CLI.
 
-- `tty` size acquired via Python Posix support.
+- `tty` size acquired through Python POSIX support.
 
-- Fixed same file 'extends' optimization.
+- Fixed same file `extends` optimization.
 
-- Fixed stdin_open.
+- Fixed `stdin_open`.
 
 - Fixed the issue of `--remove-orphans` being ignored encountered during use with `up --no-start` option.
 
@@ -76,9 +74,9 @@ toc_max: 2
 
 - Fixed the `depends_on` dependency recreation behavior.
 
-- Fixed bash completion for the build --memory command.
+- Fixed bash completion for the `docker-compose build --memory` command.
 
-- Fixed the misleading environmental variables warning that occurs when the `exec` command is performed.
+- Fixed the misleading environmental variables warning that occurs when the `docker-compose exec` command is performed.
 
 - Fixed the failure check in the `parallel_execute_watch function`.
 
@@ -88,7 +86,7 @@ toc_max: 2
 
 - Fixed the merge on `networks` section.
 
-- Compose container is always connected to `stdin`.
+- Compose container is always connected to `stdin` by default.
 
 - Fixed the presentation of failed services on the `docker-compose start` command when containers are not available.
 
