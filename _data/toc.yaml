@@ -18,8 +18,6 @@ horizontalnav:
 guides:
 - sectiontitle: Get Docker
   section:
-  - path: /install/overview/
-    title: Overview of Docker editions
   - sectiontitle: Docker Engine - Community
     section:
     - title: About Docker Engine - Community
