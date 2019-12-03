@@ -4,8 +4,8 @@ description: Learn how to route traffic to different proxies using a service clu
 keywords: ucp, interlock, load balancing, routing
 ---
 
-Reconfiguring Interlock's proxy can take a long time (1-2 seconds) per overlay
-network managed by that proxy. In order to scale up to larger number of Docker 
+Reconfiguring Interlock's proxy can take 1-2 seconds per overlay
+network managed by that proxy. To scale up to larger number of Docker 
 networks and services routed to by Interlock, you may consider implementing 
 *service clusters*. Service clusters are multiple proxy services managed by 
 Interlock (rather than the default single proxy service), each responsible for 
