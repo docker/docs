@@ -93,7 +93,7 @@ the reason each syscall is blocked rather than white-listed.
 | `pivot_root`        | Deny `pivot_root`, should be privileged operation.                                                           |
 | `process_vm_readv`  | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
 | `process_vm_writev` | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
-| `ptrace`            | Tracing/profiling syscall, which could leak a lot of information on the host. Already blocked by dropping `CAP_PTRACE`. |
+| `ptrace`            | Tracing/profiling syscall, which could leak a lot of information on the host. Already blocked by dropping `CAP_PTRACE`. Blocked in Linux kernel versions before 4.8 to avoid seccomp bypass. |
 | `query_module`      | Deny manipulation and functions on kernel modules. Obsolete.                                                  |
 | `quotactl`          | Quota syscall which could let containers disable their own resource limits or process accounting. Also gated by `CAP_SYS_ADMIN`. |
 | `reboot`            | Don't let containers reboot the host. Also gated by `CAP_SYS_BOOT`.                                           |
