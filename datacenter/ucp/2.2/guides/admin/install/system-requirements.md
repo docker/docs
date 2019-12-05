@@ -80,7 +80,7 @@ to communicate before they time out.
 | RethinkDB                              | 10000        | no           |
 | Stand-alone swarm                      | 90000        | no           |
 
-## Time Synchronization
+## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
