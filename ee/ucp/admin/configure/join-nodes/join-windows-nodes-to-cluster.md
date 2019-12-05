@@ -79,7 +79,7 @@ Invoke-Command $script
 
 > Note 
 >
-> When restarting Docker daemon, note that when running `windows-script`, the Docker service is unavailable temporarily.
+> If you run `windows-script` when restarting Docker daemon, the Docker service is unavailable temporarily.
 
 The Windows node is ready to join the cluster. Run the setup script on each
 instance of Windows Server that will be a worker node.
@@ -117,7 +117,7 @@ To join the cluster using the `docker swarm join` command provided by the Docker
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
-5.  In the **Step 2** section, select the check box for "I have followed the instructions and I'm ready to join my windows node."
+5.  In the **Step 2** section, select the check box for "I have followed the instructions and I'm ready to join my Windows node."
 6.  Select the **Use a custom listen address** option to specify the address
     and port where new node listens for inbound cluster management traffic.
 7.  Select the **Use a custom listen address** option to specify the
