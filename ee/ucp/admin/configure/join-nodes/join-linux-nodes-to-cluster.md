@@ -26,7 +26,7 @@ When you join a node to a cluster, you specify its role: manager or worker.
   Manager nodes also run all Docker Engine - Enterprise components in a replicated way, so
   by adding additional manager nodes, you're also making the cluster highly
   available.
-  [Learn more about the Docker Engine - Enterprise architecture.](/enterprise/docker-ee-architecture.md)
+  [Learn more about the Docker Engine - Enterprise architecture.](https://docs.docker.com/ee/docker-ee-architecture/)
 
 - **Worker**: Worker nodes receive and execute your services and applications.
   Having multiple worker nodes allows you to scale the computing capacity of

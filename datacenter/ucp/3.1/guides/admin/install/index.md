@@ -57,7 +57,6 @@ To install UCP:
 1. Use ssh to log in to the host where you want to install UCP.
 
 2.  Run the following command:
-
     ```none
     # Pull the latest version of UCP
     docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
@@ -69,11 +68,7 @@ To install UCP:
       --host-address <node-ip-address> \
       --interactive
     ```
-
-    This runs the install command in interactive mode, so that you're
-    prompted for any necessary configuration values.
-    To find what other options are available in the install command, check the
-    [reference documentation](/reference/ucp/3.1/cli/install.md).
+This runs the install command in interactive mode, so that you're prompted for any necessary configuration values. To find what other options are available in the install command, check the [reference documentation](https://docs.docker.com/reference/).
 
 > Custom Container Networking Interface (CNI) plugins
 >
