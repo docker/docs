@@ -587,16 +587,6 @@ reference:
       title: docker export
     - path: /engine/reference/commandline/history/
       title: docker history
-    - sectiontitle: docker engine
-      section:
-        - path: /engine/reference/commandline/engine/
-          title: docker engine
-        - path: /engine/reference/commandline/engine_activate/
-          title: docker engine activate
-        - path: /engine/reference/commandline/engine_check/
-          title: docker engine check
-        - path: /engine/reference/commandline/engine_update/
-          title: docker engine update
     - sectiontitle: docker image
       section:
       - path: /engine/reference/commandline/image/

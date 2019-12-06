@@ -3,6 +3,7 @@ description: Engine
 keywords: Engine
 redirect_from:
 - /engine/misc/
+- /engine/ce-ee-node-activate/
 title: About Docker Engine
 ---
 
