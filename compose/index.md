@@ -59,6 +59,7 @@ Compose has commands for managing the whole lifecycle of your application:
 ## Compose documentation
 
 - [Installing Compose](install.md)
+- [Getting Started with Compose](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
