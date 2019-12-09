@@ -6,6 +6,7 @@ redirect_from:
 - /engine/installation/linux/SUSE/
 - /engine/installation/linux/suse/
 - /engine/installation/linux/docker-ee/suse/
+- /install/linux/docker-ee/suse/
 title: Get Docker Engine - Enterprise for SLES
 toc_max: 4
 ---
