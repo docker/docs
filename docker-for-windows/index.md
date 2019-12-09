@@ -548,6 +548,42 @@ certificates, and **client certificates**, to authenticate to registries. For mo
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
 
+### How do I add custom CA certificates?
+
+Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
+intermediate). Docker recognizes certs stored under Trust Root
+Certification Authorities or Intermediate Certification Authorities.
+
+Docker Desktop creates a certificate bundle of all user-trusted CAs based on
+the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
+
+To learn more about how to install a CA root certificate for the registry, see
+[Verify repository client with certificates](/engine/security/certificates)
+in the Docker Engine topics.
+
+### How do I add client certificates?
+
+You can add your client certificates
+in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+
+When the Docker Desktop application starts, it copies the
+`~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
+directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
+
+You need to restart Docker Desktop after making any changes to the keychain
+or to the `~/.docker/certs.d` directory in order for the changes to take effect.
+
+The registry cannot be listed as an _insecure registry_ (see
+[Docker Daemon](/docker-for-windows#daemon)). Docker Desktop ignores
+certificates listed under insecure registries, and does not send client
+certificates. Commands like `docker run` that attempt to pull from the registry
+produce error messages on the command line, as well as on the registry.
+
+To learn more about how to set the client TLS certificate for verification, see
+[Verify repository client with certificates](/engine/security/certificates)
+in the Docker Engine topics.
+
 ## Where to go next
 
 * Try out the walkthrough at [Get Started](/get-started/){: target="_blank" class="_"}.

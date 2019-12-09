@@ -6,108 +6,40 @@ redirect_from:
 title: Frequently asked questions (FAQ)
 ---
 
-**Looking for popular FAQs on Docker Desktop?** Check out the
-[Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
-for knowledge base articles, FAQs, technical support for subscription levels, and more.
+## Stable and Edge releases
 
-## Questions about Docker Desktop
+### How do I get the Stable or the Edge version of Docker Desktop?
 
-### Stable and Edge channels
-
-**Q: How do I get the Stable or Edge version of Docker Desktop?**
-
-A: You can download the Stable version of Docker Desktop from [Docker Hub](https://hub.docker.com/?overlay=onboarding). To download the Edge version, see the [Edge release notes](/docker-for-mac/edge-release-notes/).
+You can download the Stable version of Docker Desktop from [Docker Hub](https://hub.docker.com/?overlay=onboarding). To download the Edge version, see the [Edge release notes](/docker-for-mac/edge-release-notes/).
 
 For installation instructions, see [Install Docker Desktop on Mac](install.md){: target="_blank" class="_"}.
 
-**Q: What is the difference between the Stable and Edge versions of Docker Desktop?**
+### What is the difference between the Stable and Edge versions of Docker Desktop?
 
-A: Two different download channels are available in the Community version of Docker Desktop:
+Two different download channels are available in the Community version of Docker Desktop:
 
 The **Stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The Stable version of Docker Desktop comes with the latest released version of Docker Engine. The release
 schedule is synched with Docker Engine releases and patch releases. On the Stable channel, you can select whether to send usage statistics and other data.
 
 The **Edge channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes, and issues are more likely to occur with the Edge version, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for Stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the Edge channel.
 
-**Q: Can I switch between Stable and Edge versions of Docker Desktop?**
+### Can I switch between Stable and Edge versions of Docker Desktop?
 
-A: Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](/docker-for-mac/install/#switch-between-stable-and-edge-versions).
+Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](/docker-for-mac/install/#switch-between-stable-and-edge-versions).
 
 ### What is Docker.app?
 
 `Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers, which means that a separate VirtualBox is not required to run Docker Desktop.
 
-### What are the system requirements for Docker Desktop?
+## What are the system requirements for Docker Desktop?
 
 You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install/#system-requirements).
 
-### Do I need to uninstall Docker Toolbox to use Docker Desktop?
-
-No, you can use these side by side. Docker Toolbox leverages a Docker daemon
-installed using `docker-machine` in a machine called `default`. Running `eval
-$(docker-machine env default)` in a shell sets DOCKER environment variables
-locally to connect to the default machine using Engine from Toolbox. To check
-whether Toolbox DOCKER environment variables are set, run `env | grep DOCKER`.
-
-To make the client talk to the Docker for Mac Engine, run the command `unset
-${!DOCKER_*}` to unset all DOCKER environment variables in the current shell.
-(Now, `env | grep DOCKER` should return no output.) You can have multiple
-command line shells open, some set to talk to Engine from Toolbox and others set
-to talk to Docker Desktop. The same applies to `docker-compose`.
-
-### How do I uninstall Docker Toolbox?
-
-Now that you have installed Docker Desktop, you might decide that you do not need the legacy Docker Toolbox anymore. For details on how to perform a clean uninstall of Toolbox on Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox).
-
-## Experimental features
+## What is an experimental feature?
 
 {% include experimental.md %}
 
-## Questions about feedback and help
-
-### What kind of feedback are we looking for?
-
-Everything is fair game. We'd like your impressions on the download-install
-process, startup, functionality available, the GUI, usefulness of the app,
-command line integration, and so on. Tell us about problems, what you like, or
-functionality you'd like to see added.
-
-### What if I have problems or questions?
-
-You can find the list of frequent issues in [Logs and Troubleshooting](troubleshoot.md).
-
-If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} or create a new one. You can also create new issues based on diagnostics. To learn more, see
-[Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
-
-[Docker Desktop for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" class="_"}
-provides discussion threads as well, and you can create discussion topics there,
-but we recommend using the GitHub issues over the forums for better tracking and
-response.
-
-### How can I opt out of sending my usage data?
-
-If you do not want to send of usage data, use the Stable channel. For more
-information, see _What is the difference between the Stable and Edge versions of Docker Desktop?_ in [Stable and Edge channels](#stable-and-edge-channels).
-
-### How is personal data handled in Docker Desktop?
-
-When uploading diagnostics to help Docker with investigating issues, the
-uploaded diagnostics bundle may contain personal data such as usernames and IP
-addresses. The diagnostics bundles are only accessible to Docker Inc. employees
-who are directly involved in diagnosing Docker Desktop issues. By default Docker
-Inc. will delete uploaded diagnostics bundles after 30 days unless they are
-referenced in an open issue on the
-[docker/for-mac](https://github.com/docker/for-mac/issues) or
-[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
-issue is closed, Docker Inc. will remove the referenced diagnostics bundles
-within 30 days. You may also request the removal of a diagnostics bundle by
-either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
-ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the
-diagnostics bundle to investigate specific user issues, but may derive high
-level (non personal) metrics such as the rate of issues from it.
-
-## How can I...?
+## How do I?
 
 ### How do I connect to the remote Docker Engine API?
 
@@ -147,12 +79,12 @@ For more information and examples, see
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates](/docker-for-mac/index/#add-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](/docker-for-mac/index/#adding-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
 For information on adding client certificates, see
-[Add client certificates](/docker-for-mac/index/#add-client-certificates) in the Getting Started topic.
+[Add client certificates](/docker-for-mac/index/#adding-client-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 
@@ -175,11 +107,53 @@ VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 
-It is thinner than VirtualBox and VMWare fusion, and the version we include is
-tailor made for Docker workloads on the Mac.
+HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
 
 ### Why is com.docker.vmnetd running after I quit the app?
 
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process does not consume any resources unless
 Docker.app connects to it, so it's safe to ignore.
+
+## Feedback
+
+### What kind of feedback are we looking for?
+
+Everything is fair game. We'd like your impressions on the download-install
+process, startup, functionality available, the GUI, usefulness of the app,
+command line integration, and so on. Tell us about problems, what you like, or
+functionality you'd like to see added.
+
+### What if I have problems or questions?
+
+You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) topic.
+
+If you do not find a solution in Troubleshooting, browse issues on
+[Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} or create a new one. You can also create new issues based on diagnostics. To learn more, see
+[Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
+
+The [Docker Desktop for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" class="_"}
+provides discussion threads as well, and you can create discussion topics there,
+but we recommend using the GitHub issues over the forums for better tracking and
+response.
+
+### How can I opt out of sending my usage data?
+
+If you do not want to send of usage data, use the Stable channel. For more
+information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-channels).
+
+### How is personal data handled in Docker Desktop?
+
+When uploading diagnostics to help Docker with investigating issues, the
+uploaded diagnostics bundle may contain personal data such as usernames and IP
+addresses. The diagnostics bundles are only accessible to Docker, Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. 
+
+By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
+[docker/for-mac](https://github.com/docker/for-mac/issues) or
+[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
+issue is closed, Docker, Inc. will remove the referenced diagnostics bundles
+within 30 days. You may also request the removal of a diagnostics bundle by
+either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
+ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the
+diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
