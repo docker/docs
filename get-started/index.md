@@ -109,6 +109,24 @@ VMs incur a lot of overhead beyond what is being consumed by your application lo
 
 ![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
 
+### Orchestration
+
+The portability and reproducibility of a containerized process mean we have 
+an opportunity to move and scale our containerized applications across 
+clouds and datacenters; containers effectively guarantee that those 
+applications will run the same way anywhere, allowing us to quickly and 
+easily take advantage of all these environments. 
+Furthermore, as we scale our applications up, we'll 
+want some tooling to help automate the maintenance of those applications, 
+able to replace failed containers automatically and manage the rollout of updates 
+and reconfigurations of those containers during their lifecycle. 
+
+Tools to manage, scale, and maintain containerized applications are called 
+_orchestrators_, and the most common examples of these are _Kubernetes_ and 
+_Docker Swarm_. Development environment deployments of both of these 
+orchestrators are provided by Docker Desktop, which we'll use throughout 
+this guide to create our first orchestrated, containerized application.
+
 ## Install Docker Desktop
 
 The best way to get started developing containerized applications is with Docker Desktop, for OSX or Windows. Docker Desktop will allow you to easily set up Kubernetes or Swarm on your local development machine, so you can use all the features of the orchestrator you're developing applications for right away, no cluster required. Follow the installation instructions appropriate for your operating system:

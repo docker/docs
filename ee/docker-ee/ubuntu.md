@@ -6,6 +6,7 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ee/ubuntu/
+- /install/linux/docker-ee/ubuntu/
 title: Get Docker Engine - Enterprise for Ubuntu
 toc_max: 4
 ---
