@@ -32,6 +32,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 - Fixed a bug that prevented users from changing the location of the VM disk image.
 - Docker Desktop does not inject `inotify` events on directories anymore as these can cause mount points to disappear inside containers. Fixes [docker/for-mac#3976](https://github.com/docker/for-mac/issues/3976).
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
+- Fixed an issue where attempts to log into Docker through Docker Desktop could sometimes fail with the `Incorrect authentication credentials` error. Fixes [docker/for-mac#4010](https://github.com/docker/for-mac/issues/4010).
 
 ### Docker Desktop Community 2.1.6.0
 2019-11-18
