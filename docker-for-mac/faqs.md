@@ -107,7 +107,7 @@ VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is tailor made for Docker workloads on the Mac.
+HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
 
 ### Why is com.docker.vmnetd running after I quit the app?
 
@@ -146,15 +146,14 @@ information, see [What is the difference between the Stable and Edge versions of
 
 When uploading diagnostics to help Docker with investigating issues, the
 uploaded diagnostics bundle may contain personal data such as usernames and IP
-addresses. The diagnostics bundles are only accessible to Docker Inc. employees
-who are directly involved in diagnosing Docker Desktop issues. By default Docker
-Inc. will delete uploaded diagnostics bundles after 30 days unless they are
-referenced in an open issue on the
+addresses. The diagnostics bundles are only accessible to Docker, Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. 
+
+By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
 [docker/for-mac](https://github.com/docker/for-mac/issues) or
 [docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
-issue is closed, Docker Inc. will remove the referenced diagnostics bundles
+issue is closed, Docker, Inc. will remove the referenced diagnostics bundles
 within 30 days. You may also request the removal of a diagnostics bundle by
 either specifying the diagnostics ID or via your GitHub ID (if the diagnostics
-ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the
-diagnostics bundle to investigate specific user issues, but may derive high
-level (non personal) metrics such as the rate of issues from it.
+ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the
+diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
