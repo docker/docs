@@ -8,6 +8,8 @@ title: Install Docker Desktop on Mac
 
 [Download from Docker Hub](https://hub.docker.com/?overlay=onboarding){: .button .outline-btn}
 
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+
 ## What to know before you install
 
 > README FIRST for Docker Toolbox and Docker Machine users
@@ -27,6 +29,8 @@ VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox
 Your Mac must meet the following requirements to successfully install Docker Desktop:
 
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+
+  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
 
 - macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
 
