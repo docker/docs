@@ -11,6 +11,8 @@ You can download Docker Desktop for Windows from Docker Hub.
 Hub](https://hub.docker.com/?overlay=onboarding){:
 .button .outline-btn}
 
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+
 ## What to know before you install
 
 ### System Requirements
