@@ -2,6 +2,8 @@
 description: Change log / release notes per edge release
 keywords: Docker Desktop for Windows, edge, release notes
 title: Docker Desktop for Windows Edge Release notes
+toc_min: 1
+toc_max: 2
 ---
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
@@ -10,9 +12,7 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Edge Releases of 2019
-
-### Docker Desktop Community 2.1.7.0
+## Docker Desktop Community 2.1.7.0
 2019-12-
 
 [Download](ADD URL)
@@ -35,15 +35,16 @@ notes](release-notes). For Docker Desktop system requirements, see
 - Various minor improvements to the Dashboard UI.
 - Fixed a bug that caused a rare crash when uninstalling Docker Desktop.
 - Fixed an issue when overwriting existing files with the WSL 2 CLI bundle, such as kubectl.
-- Fixed an issue where WSL 2 to failed to start when the distribution directory is compressed or encrypted. Fixes [docker/for-win#5256](https://github.com/docker/for-win/issues/5256).
+- Fixed an issue where WSL 2 failed to start when the distribution directory is compressed or encrypted. Fixes [docker/for-win#5256](https://github.com/docker/for-win/issues/5256).
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 - Fixed various stability issues.
 
-### Known issue
+### Known issues
 
 - The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
+- The new gRPC FUSE file sharing implementation does not support connecting to new drives after Docker Desktop starts (for example, a USB drive). If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
 
-### Docker Desktop Community 2.1.6.1
+## Docker Desktop Community 2.1.6.1
 2019-11-20
 
 [Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
@@ -89,7 +90,7 @@ Added the ability to start and stop Compose-based applications and view combined
 
 Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.0. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
 
-### Docker Desktop Community 2.1.5.0
+## Docker Desktop Community 2.1.5.0
 2019-11-04
 
 [Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
@@ -125,7 +126,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
 
-### Docker Desktop Community 2.1.4.0
+## Docker Desktop Community 2.1.4.0
 2019-10-15
 
 [Download](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe)
@@ -143,7 +144,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Fixed a bug that prevented users from accessing WSL 2 Tech Preview. Fixes [docker/for-win#4734](https://github.com/docker/for-win/issues/4734).
 - Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 
-### Docker Desktop Community 2.1.3.0
+## Docker Desktop Community 2.1.3.0
 2019-09-16
 
 [Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe)
@@ -153,7 +154,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
 - Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
 
-### Docker Desktop Community 2.1.2.0
+## Docker Desktop Community 2.1.2.0
 2019-09-09
 
 [Download](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe)
@@ -172,7 +173,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Reduced the Virtual Machine (VM) startup time.
 - Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
 
-### Docker Desktop Community 2.1.1.0
+## Docker Desktop Community 2.1.1.0
 2019-08-12
 
 [Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
@@ -194,7 +195,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Docker Desktop now supports a configurable user timeout for VMs on slower machines. [docker/for-win#4393](https://github.com/docker/for-win/issues/4393)
 - Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
 
-### Docker Desktop Community 2.1.0.0 
+## Docker Desktop Community 2.1.0.0 
 2019-07-30
 
 [Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe)
@@ -226,7 +227,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
  - Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in    a crash.
 
 
-### Docker Community Edition 2.0.5.0 2019-06-12
+## Docker Community Edition 2.0.5.0 2019-06-12
 
 [Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
 
@@ -259,14 +260,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Known issues
   - Windows containers networking does not work properly on Windows 1903.
 
-### Docker Community Edition 2.0.4.1 2019-05-07
+## Docker Community Edition 2.0.4.1 2019-05-07
 
 [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
 
 * Bug fixes and minor changes
   - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices.
 
-### Docker Community Edition 2.0.4.0 2019-04-30
+## Docker Community Edition 2.0.4.0 2019-04-30
 
 [Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe)
 
@@ -301,7 +302,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Fix `Delete` of persistent volume claims
   - Truncate UDP DNS responses which are over 512 bytes in size
 
-### Docker Community Edition 2.0.3.0 2019-03-05
+## Docker Community Edition 2.0.3.0 2019-03-05
 
 [Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe)
 
@@ -313,14 +314,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Fixed port 8080 that was used on localhost when starting Kubernetes.
   - Fixed "create issue" link in diagnostics windows.
 
-### Docker Community Edition 2.0.2.1 2019-02-15
+## Docker Community Edition 2.0.2.1 2019-02-15
 
 [Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
-### Docker Community Edition 2.0.2.0 2019-02-06
+## Docker Community Edition 2.0.2.0 2019-02-06
 
 [Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe)
 
@@ -335,7 +336,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Bug fixes and minor changes
   - Kubernetes: use default maximum number of pods for kubelet. [docker/for-mac#3453](https://github.com/docker/for-mac/issues/3453)
 
-### Docker Community Edition 2.0.1.0 2019-01-11
+## Docker Community Edition 2.0.1.0 2019-01-11
 
 [Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe)
 

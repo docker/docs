@@ -2,6 +2,8 @@
 description: Change log / release notes per Edge release
 keywords: Docker Desktop for Mac, edge, release notes
 title: Docker Desktop for Mac Edge release notes
+toc_min: 1
+toc_max: 2
 ---
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
@@ -10,9 +12,7 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Edge Releases of 2019
-
-### Docker Desktop Community 2.1.7.0
+## Docker Desktop Community 2.1.7.0
 2019-12-
 
 [Download](ADD URL)
@@ -34,7 +34,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 - Fixed an issue where attempts to log into Docker through Docker Desktop could sometimes fail with the `Incorrect authentication credentials` error. Fixes [docker/for-mac#4010](https://github.com/docker/for-mac/issues/4010).
 
-### Docker Desktop Community 2.1.6.0
+## Docker Desktop Community 2.1.6.0
 2019-11-18
 
 [Download](https://download.docker.com/mac/edge/40807/Docker.dmg)
@@ -53,7 +53,7 @@ Added the ability to start and stop Compose-based applications and view combined
 - Fixed port forwarding when containers are using `overlay` networks.
 - Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`. Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
 
-### Docker Desktop Community 2.1.5.0
+## Docker Desktop Community 2.1.5.0
 2019-11-04
 
 [Download](https://download.docker.com/mac/edge/40323/Docker.dmg)
@@ -82,7 +82,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 
 - When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
 
-### Docker Desktop Community 2.1.4.0
+## Docker Desktop Community 2.1.4.0
 2019-10-15
 
 [Download](https://download.docker.com/mac/edge/39357/Docker.dmg)
@@ -101,7 +101,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
 - Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 
-### Docker Desktop Community 2.1.3.0
+## Docker Desktop Community 2.1.3.0
 2019-09-16
 
 [Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
@@ -113,7 +113,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
 - Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
 
-### Docker Desktop Community 2.1.2.0
+## Docker Desktop Community 2.1.2.0
 2019-09-09
 
 [Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
@@ -132,7 +132,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Reduced the Virtual Machine (VM) startup time.
 - Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
 
-### Docker Desktop Community 2.1.1.0
+## Docker Desktop Community 2.1.1.0
 2019-08-12
 
 [Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
@@ -149,7 +149,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Fixed an issue where running some Docker commands can fail if you are not using Credential Helpers. [docker/for-mac#3785](https://github.com/docker/for-mac/issues/3785)
 - Fixed a bug that did not allow users to copy and paste text in the **Preferences** > **Daemon** window. [docker/for-mac#3798](https://github.com/docker/for-mac/issues/3798)
 
-### Docker Desktop Community 2.1.0.0 
+## Docker Desktop Community 2.1.0.0 
 2019-07-26
 
 [Download](https://download.docker.com/mac/edge/36792/Docker.dmg)
@@ -178,7 +178,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 - Fixed a bug where the process output was not redirected to stdout when gathering diagnostics on Windows, which sometimes resulted in a crash.
 - Added `/etc/machine-id` to the virtual machine. Fixes [docker/for-mac#3554](https://github.com/docker/for-mac/issues/3554).
 
-### Docker Community Edition 2.0.5.0 2019-06-12
+## Docker Community Edition 2.0.5.0 2019-06-12
 
 [Download](https://download.docker.com/mac/edge/35318/Docker.dmg)
 
@@ -206,14 +206,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Docker Desktop now allows running a Docker registry inside a container. Fixes [docker/for-mac#3611](https://github.com/docker/for-mac/issues/3611)
   - Fixed a stability issue with the DNS resolver.
 
-### Docker Community Edition 2.0.4.1 2019-05-07
+## Docker Community Edition 2.0.4.1 2019-05-07
 
 [Download](https://download.docker.com/mac/edge/34207/Docker.dmg)
 
 * Bug fixes and minor changes
   - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices.
 
-### Docker Community Edition 2.0.4.0 2019-04-30
+## Docker Community Edition 2.0.4.0 2019-04-30
 
 [Download](https://download.docker.com/mac/edge/33772/Docker.dmg)
 
@@ -245,7 +245,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Bug fixes and minor changes
   - Truncate UDP DNS responses which are over 512 bytes in size
 
-### Docker Community Edition 2.0.3.0 2019-03-05
+## Docker Community Edition 2.0.3.0 2019-03-05
 
 [Download](https://download.docker.com/mac/edge/31778/Docker.dmg)
 
@@ -263,7 +263,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
-### Docker Community Edition 2.0.2.0 2019-02-06
+## Docker Community Edition 2.0.2.0 2019-02-06
 
 [Download](https://download.docker.com/mac/edge/30972/Docker.dmg)
 
@@ -280,7 +280,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Fix DockerHelper crash. [docker/for-mac#3470](https://github.com/docker/for-mac/issues/3470)
   - Fix binding of privileged ports with specified IP. [docker/for-mac#3464](https://github.com/docker/for-mac/issues/3464)
 
-### Docker Community Edition 2.0.1.0 2019-01-11
+## Docker Community Edition 2.0.1.0 2019-01-11
 
 [Download](https://download.docker.com/mac/edge/30090/Docker.dmg)
 
