@@ -430,9 +430,9 @@ leading to a gap in permissions checks.  (ENGORC-2781)
 | Component      | Version |
 | ----------- | ----------- |
 | UCP      | 3.1.12 |
-| Kubernetes   | 1.14.3 |
-| Calico      | 3.5.7 |
-| Interlock   | 2.4.0 |
+| Kubernetes   | 1.11.10 |
+| Calico      | 3.8.2 |
+| Interlock   | 3.0.0 |
 | Interlock NGINX proxy | 1.14.2 |
 
 ## 3.1.11
