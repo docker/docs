@@ -434,7 +434,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ## Conclusion
 
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. In the next section, we'll start developing our first containerized application.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
