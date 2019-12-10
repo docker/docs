@@ -15,11 +15,11 @@ title: Get started with Docker for Windows
 
 Welcome to Docker Desktop!
 
-This page contains information about Docker Desktop Community (Stable and Edge) releases. For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
 Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
 
-> See [Install Docker Desktop](install.md){: target="_blank" class="_"} for information on system requirements and Stable and Edge channels.
+See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
 
 ## Test your installation
 
@@ -39,22 +39,15 @@ Docker is a full development platform for creating containerized applications. D
     > docker run hello-world
 
     docker : Unable to find image 'hello-world:latest' locally
-    ...
-
-    latest:
-    Pulling from library/hello-world
-    ca4f61b1923c:
-    Pulling fs layer
-    ca4f61b1923c:
-    Download complete
-    ca4f61b1923c:
-    Pull complete
-    Digest: sha256:97ce6fa4b6cdc0790cda65fe7290b74cfebd9fa0c9b8c38e979330d547d22ce1
+    latest: Pulling from library/hello-world
+    1b930d010525: Pull complete
+    Digest: sha256:c3b4ada4687bbaa170745b3e4dd8ac3f194ca95b2d0518b417fb47e5879d9b5f
     Status: Downloaded newer image for hello-world:latest
 
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
     ...
+
     ```
 
 4.  List the `hello-world` _image_ that was downloaded from Docker Hub:
@@ -89,18 +82,12 @@ running something more complex, such as an OS and a webserver.
     > docker run --interactive --tty ubuntu bash
 
     docker : Unable to find image 'ubuntu:latest' locally
-    ...
-
-    latest:
-    Pulling from library/ubuntu
-    22dc81ace0ea:
-    Pulling fs layer
-    1a8b3c87dba3:
-    Pulling fs layer
-    91390a1c435a:
-    Pulling fs layer
-    ...
-    Digest: sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
+    latest: Pulling from library/ubuntu
+    22e816666fd6: Pull complete
+    079b6d2a1e53: Pull complete
+    11048ebae908: Pull complete
+    c58094023a2e: Pull complete
+    Digest: sha256:a7b8b7b33e44b123d7f997bd4d3d0a59fafc63e203d17efedf09ff3f6f516152
     Status: Downloaded newer image for ubuntu:latest
     ```
 
@@ -560,6 +547,42 @@ You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to v
 certificates, and **client certificates**, to authenticate to registries. For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
+
+### How do I add custom CA certificates?
+
+Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
+intermediate). Docker recognizes certs stored under Trust Root
+Certification Authorities or Intermediate Certification Authorities.
+
+Docker Desktop creates a certificate bundle of all user-trusted CAs based on
+the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
+
+To learn more about how to install a CA root certificate for the registry, see
+[Verify repository client with certificates](/engine/security/certificates)
+in the Docker Engine topics.
+
+### How do I add client certificates?
+
+You can add your client certificates
+in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+
+When the Docker Desktop application starts, it copies the
+`~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
+directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
+
+You need to restart Docker Desktop after making any changes to the keychain
+or to the `~/.docker/certs.d` directory in order for the changes to take effect.
+
+The registry cannot be listed as an _insecure registry_ (see
+[Docker Daemon](/docker-for-windows#daemon)). Docker Desktop ignores
+certificates listed under insecure registries, and does not send client
+certificates. Commands like `docker run` that attempt to pull from the registry
+produce error messages on the command line, as well as on the registry.
+
+To learn more about how to set the client TLS certificate for verification, see
+[Verify repository client with certificates](/engine/security/certificates)
+in the Docker Engine topics.
 
 ## Where to go next
 

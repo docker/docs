@@ -32,13 +32,3 @@ Docker Compose to set up and run a Rails/PostgreSQL app.
 - [Quickstart: Compose and WordPress](/compose/wordpress.md) - Shows how to
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
-
-## Samples that include Compose in the workflows
-
-These samples include working with Docker Compose as part of broader learning
-goals:
-
-- [Get Started with Docker](/get-started/index.md) - This multi-part tutorial covers writing your first app, data storage, networking, and swarms,
-and ends with your app running on production servers in the cloud.
-
-- [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) - This tutorial from [Docker Labs](https://github.com/docker/labs/blob/master/README.md) shows you how to create and customize a sample voting app, deploy it to a [swarm](/engine/swarm.md), test it, reconfigure the app, and redeploy.

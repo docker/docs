@@ -2,12 +2,13 @@
 title: Restore from a backup
 description: Learn how to restore a DTR cluster from an existing backup
 keywords: dtr, disaster recovery
-redirect_from: 
+redirect_from:
   - /ee/dtr/admin/disaster-recovery/restore-from-backup/
 ---
 
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
+
 
 ## Restore DTR data
 
@@ -56,11 +57,11 @@ recommended for that system.
 
 ### Restore DTR metadata
 
-You can restore the DTR metadata with the `docker/dtr restore` command. This
+You can restore the DTR metadata using `docker/dtr restore` [command](/reference/dtr/{{ site.dtr_version }}/cli/restore/). This
 performs a fresh installation of DTR, and reconfigures it with
 the configuration created during a backup.
 
-Load your UCP client bundle, and run the following command, replacing the
+Load your UCP client bundle and run the following command, replacing the
 placeholders for the real values:
 
 ```bash
@@ -68,8 +69,7 @@ read -sp 'ucp password: ' UCP_PASSWORD;
 ```
 
 This prompts you for the UCP password. Next, run the following to restore DTR
-from your backup. You can learn more about the supported flags in [docker/dtr
-restore](/reference/dtr/2.7/cli/restore).
+from your backup. You can learn more about the supported flags in [docker/dtr restore ](/reference/dtr/{{ site.dtr_version }}/cli/restore/).
 
 ```bash
 $ docker container run \
@@ -82,33 +82,42 @@ $ docker container run \
   --ucp-username <ucp-username> \
   --ucp-node <hostname> \
   --replica-id <replica-id> \
+  --dtr-use-default-storage \
   --dtr-external-url <dtr-external-url> < {{ metadata_backup_file }}
 ```
 
 Where:
 
-* `<ucp-url>` is the url you use to access UCP
+* `<ucp-url>` is the URL you use to access UCP
 * `<ucp-username>` is the username of a UCP administrator
 * `<hostname>` is the hostname of the node where you've restored the images
-* `<replica-id>` the id of the replica you backed up
-* `<dtr-external-url>`the url that clients use to access DTR
+* `<replica-id>` is the ID of the replica you backed up
+* `<dtr-external-url>` is the URL that clients use to access DTR
+
+You also need at least one flag specifying the storage backend: `--dtr-use-default-storage`,
+ `--dtr-storage-volume`, or `--nfs-storage-url`.
+
+If you're using a cloud storage provider, set the `--dtr-use-default-storage`
+flag. This flag will tell DTR to either use the cloud provider, or use local
+storage if no cloud provider storage is configured.
+
 
 #### DTR 2.5 and below
 
 If you're using NFS as a storage backend, also include `--nfs-storage-url` as
 part of your restore command, otherwise DTR is restored but starts using a
-local volume to persist your Docker images. 
+local volume to persist your Docker images.
 
 #### DTR 2.5 (with experimental online garbage collection) and DTR 2.6.0-2.6.3
 
->  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with 
-> [reconfiguring and restoring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to 
-> erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) 
-> before you proceed. To work around the `--nfs-storage-url`flag issue, manually create a storage volume on each DTR node. 
-> To [restore DTR](/reference/dtr/2.6/cli/restore/) from an existing backup, use `docker/dtr restore` 
-> with `--dtr-storage-volume` and the new volume. 
-> See [Restore to a Local NFS Volume]( https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume) 
-> for Docker's recommended recovery strategy.  
+>  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with
+> [reconfiguring and restoring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to
+> erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata)
+> before you proceed. To work around the `--nfs-storage-url`flag issue, manually create a storage volume on each DTR node.
+> To [restore DTR](/reference/dtr/2.6/cli/restore/) from an existing backup, use `docker/dtr restore`
+> with `--dtr-storage-volume` and the new volume.
+> See [Restore to a Local NFS Volume]( https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#restoretoalocalnfsvolume)
+> for Docker's recommended recovery strategy.
 {: .info}
 
 ### Re-fetch the vulnerability database
@@ -121,4 +130,3 @@ would after a fresh installation. [Learn more](/ee/dtr/admin/configure/set-up-vu
 ## Where to go next
 
 - [docker/dtr restore](/reference/dtr/2.7/cli/restore/)
-

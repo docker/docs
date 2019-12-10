@@ -6,11 +6,16 @@ redirect_from:
 - /docker-ee-for-windows/install/
 - /engine/installation/windows/docker-ee/
 - /install/windows/ee-preview/
+- /install/windows/docker-ee/
 ---
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
-Docker Engine - Enterprise enables native Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker Engine - Enterprise installation package includes everything you need to run Docker on Windows Server.  This topic describes pre-install considerations, and how to download and install Docker Engine - Enterprise.
+Docker Engine - Enterprise enables native Docker containers on Windows Server.
+Windows Server 2016 and later versions are supported. The Docker Engine -
+Enterprise installation package includes everything you need to run Docker on
+Windows Server.  This topic describes pre-install considerations, and how to
+download and install Docker Engine - Enterprise.
 
 > Release notes
 >
@@ -25,19 +30,20 @@ This provides information for specific CPU and memory specs and capabilities
 (instruction sets like CMPXCHG16b, LAHF/SAHF, and PrefetchW, security: DEP/NX,
 etc.).
 
-* OS Versions: 
+* OS Versions:
   - Long Term Service Channel (LTSC) - 2016 and 2019 (Core and GUI)
   - Semi-annual Channel (SAC) - 1709, 1803 and 1809
 * RAM: 4GB
-* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements). 
-Docker recommends an additional 32 GB of space for base images for ServerCore 
-and NanoServer along with buffer space for workload containers running IIS, SQL Server and .Net apps.
+* Disk space: [32 GB minimum recommendation for Windows](https://docs.microsoft.com/en-us/windows-server/get-started/system-requirements).
+  Docker recommends an additional 32 GB of space for base images for ServerCore
+  and NanoServer along with buffer space for workload containers running IIS,
+  SQL Server and .Net apps.
 
 
 ## Install Docker Engine - Enterprise
 
 To install the Docker Engine - Enterprise on your hosts, Docker provides a
-[OneGet](https://github.com/oneget/oneget) PowerShell Module. 
+[OneGet](https://github.com/oneget/oneget) PowerShell Module.
 
 1.  Open an elevated PowerShell command prompt, and type the following commands.
 
@@ -46,7 +52,7 @@ To install the Docker Engine - Enterprise on your hosts, Docker provides a
     Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
 
-2.  Check if a reboot is required, and if yes, restart your instance:
+2.  Check if a reboot is required, and if yes, restart your instance.
 
     ```powershell
     (Install-WindowsFeature Containers).RestartNeeded
@@ -57,7 +63,7 @@ To install the Docker Engine - Enterprise on your hosts, Docker provides a
     Restart-Computer
     ```
 
-3.  Test your Docker Engine - Enterprise installation by running the 
+3.  Test your Docker Engine - Enterprise installation by running the
     `hello-world` container.
 
     **Windows Server 2019**
@@ -107,19 +113,20 @@ Select option `6) Download and Install Updates`.
 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf)
 is a United States Federal security requirement for cryptographic modules.
 
-With Docker EE Basic license for versions 18.09 and later, Docker provides FIPS
-140-2 support in Windows Server. This includes a FIPS supported cryptographic
-module. If the Windows implementation already has FIPS support enabled, FIPS is
-automatically enabled in the Docker engine.
+With Docker Engine - Enterprise Basic license for versions 18.09 and later,
+Docker provides FIPS 140-2 support in Windows Server. This includes a FIPS
+supported cryptographic module. If the Windows implementation already has FIPS
+support enabled, FIPS is automatically enabled in the Docker engine.
 
 
-> **Note**: FIPS 140-2 is only supported in the Docker EE engine. UCP and DTR currently do not have support for FIPS 140-2.
+> **Note:** FIPS 140-2 is only supported in the Docker Engine - Enterprise
+> engine. UCP and DTR currently do not have support for FIPS 140-2.
 
 To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode,
 execute the following command in PowerShell:
 
 ```powershell
-[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine") 
+[System.Environment]::SetEnvironmentVariable("DOCKER_FIPS", "1", "Machine")
 ```
 
 FIPS 140-2 mode may also be enabled via the Windows Registry. To update the
@@ -140,13 +147,16 @@ net start docker
 To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
 
 ```yaml
-Labels:    
- com.docker.security.fips=enabled 
+Labels:
+ com.docker.security.fips=enabled
 ```
 
-> **Note**: If the system has the FIPS-140-2 cryptographic module installed on the operating system, it is possible to disable FIPS-140-2 compliance. To disable FIPS-140-2 in Docker but not the operating system, set the value `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
+> **Note:** If the system has the FIPS-140-2 cryptographic module installed on
+> the operating system, it is possible to disable FIPS-140-2 compliance. To
+> disable FIPS-140-2 in Docker but not the operating system, set the value
+> `"DOCKER_FIPS","0"` in the `[System.Environment]`.`
 
-## Use a script to install Docker EE
+## Use a script to install Docker Engine - Enterprise
 
 Use the following guide if you wanted to install the Docker Engine - Enterprise
 manually, via a script, or on air-gapped systems.
@@ -159,8 +169,8 @@ manually, via a script, or on air-gapped systems.
     Invoke-WebRequest -UseBasicParsing -OutFile {{ filename }} {{ download_url }}
     ```
 
-    If you need to download a specific Docker EE Engine release, all URLs can be
-    found on this [JSON index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
+    If you need to download a specific Docker Engine - Enterprise Engine
+    release, all URLs can be found on this [JSON index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
     PowerShell command prompt, use the following commands to extract the archive,
@@ -169,7 +179,7 @@ manually, via a script, or on air-gapped systems.
     ```powershell
     # Stop Docker service
     Stop-Service docker
-    
+
     # Extract the archive.
     Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles -Force
 
@@ -197,7 +207,8 @@ manually, via a script, or on air-gapped systems.
     Start-Service docker
     ```
 
-3.  Test your Docker EE installation by running the `hello-world` container.
+3.  Test your Docker Engine - Enterprise installation by running the
+    `hello-world` container.
 
     **Windows Server 2019**
 
@@ -225,8 +236,8 @@ Docker                    {{ site.docker_ee_version }}                 Docker   
 
 ### Updating the DockerMsftProvider
 
-Installing specific Docker EE versions may require an update to previously
-installed DockerMsftProvider modules. To update:
+Installing specific Docker Engine - Enterprise versions may require an update to
+previously installed DockerMsftProvider modules. To update:
 
 ```powershell
 Update-Module DockerMsftProvider
@@ -245,37 +256,37 @@ Install-Package -Name docker -ProviderName DockerMsftProvider -RequiredVersion {
 The required version number must match a version available on the [JSON
 index](https://dockermsft.blob.core.windows.net/dockercontainer/DockerMsftIndex.json)
 
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 
- Use the following commands to completely remove the Docker Engine - Enterprise
- from a Windows Server:
+Use the following commands to completely remove the Docker Engine - Enterprise
+from a Windows Server:
 
-1. Leave any active Docker Swarm
+1. Leave any active Docker Swarm.
 
     ```powershell
     docker swarm leave --force
     ```
 
-1. Remove all running and stopped containers
+2. Remove all running and stopped containers.
 
     ```powershell
     docker rm -f $(docker ps --all --quiet)
     ```
 
-1. Prune container data
+3. Prune container data.
 
     ```powershell
     docker system prune --all --volumes
     ```
 
-1. Uninstall Docker PowerShell Package and Module
+4. Uninstall Docker PowerShell Package and Module.
 
     ```powershell
     Uninstall-Package -Name docker -ProviderName DockerMsftProvider
     Uninstall-Module -Name DockerMsftProvider
     ```
-    
-1. Clean up Windows Networking and file system
+
+5. Clean up Windows Networking and file system.
 
     ```powershell
     Get-HNSNetwork | Remove-HNSNetwork
@@ -303,8 +314,8 @@ posts](https://www.docker.com/microsoft/) on the Docker website.
 ## Where to go next
 
 * [Getting started](/docker-for-windows/index.md) provides an overview of
-Docker Desktop for Windows, basic Docker command examples, how to get help or give
-feedback, and links to all topics in the Docker Desktop for Windows guide.
+Docker Desktop for Windows, basic Docker command examples, how to get help or
+give feedback, and links to all topics in the Docker Desktop for Windows guide.
 
 * [FAQs](/docker-for-windows/faqs.md) provides answers to frequently asked
 questions.

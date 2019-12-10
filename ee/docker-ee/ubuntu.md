@@ -1,16 +1,17 @@
 ---
-description: Instructions for installing Docker EE on Ubuntu
+description: Instructions for installing Docker Engine - Enterprise on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ee/ubuntu/
-title: Get Docker EE for Ubuntu
+- /install/linux/docker-ee/ubuntu/
+title: Get Docker Engine - Enterprise for Ubuntu
 toc_max: 4
 ---
 
-To get started with Docker EE on Ubuntu, make sure you
+To get started with Docker Engine - Enterprise on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ee).
 
@@ -20,10 +21,11 @@ Docker Engine - Community users should go to
 [Get Docker Engine - Community for Ubuntu](/install/linux/docker-ce/ubuntu.md)
 **instead of this topic**.
 
-To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. These instructions
-work for Docker EE for Ubuntu and for Docker EE for Linux, which includes access
-to Docker EE for all Linux distributions. To get this information:
+To install Docker Engine - Enterprise, you need to know the Docker Engine -
+Enterprise repository URL associated with your trial or subscription. These
+instructions work for Docker on Ubuntu and for Docker on Linux, which includes
+access to Docker Engine - Enterprise for all Linux distributions. To get this
+information, do the following:
 
 - Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
 - Each subscription or trial you have access to is listed. Click the **Setup**
@@ -33,18 +35,22 @@ to Docker EE for all Linux distributions. To get this information:
 
 Use this URL when you see the placeholder text `<DOCKER-EE-URL>`.
 
-To learn more about Docker EE, see
+To learn more about Docker Enterprise, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-### System requirements
+### OS requirements
 
 To learn more about software requirements and supported storage drivers,
 check the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
 
+> **Note:**
+> IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. In addition,
-if you are upgrading from Docker Engine - Community to Docker EE, remove the Docker Engine - Community package.
+if you are upgrading from Docker Engine - Community to Docker Engine -
+Enterprise, remove the Docker Engine - Community package.
 
 ```bash
 $ sudo apt-get remove docker docker-engine docker-ce docker-ce-cli docker.io
@@ -53,18 +59,20 @@ $ sudo apt-get remove docker docker-engine docker-ce docker-ce-cli docker.io
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker EE package is now called `docker-ee`.
+networks, are preserved. The Docker Engine - Enterprise package is now called
+`docker-ee`.
 
 #### Extra steps for aufs
 
 For Ubuntu 16.04 and higher, the Linux kernel includes support for overlay2,
-and Docker EE uses it as the default storage driver. If you need
-to use `aufs` instead, you need to configure it manually.
-See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
+and Docker Engine - Enterprise uses it as the default storage driver. If you
+need to use `aufs` instead, you need to configure it manually.
+See [aufs](/engine/userguide/storagedriver/aufs-driver.md).
 
-## Install Docker EE
+## Install Docker Engine - Enterprise
 
-You can install Docker EE in different ways, depending on your needs:
+You can install Docker Engine - Enterprise in different ways, depending on your
+needs.
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -77,19 +85,19 @@ You can install Docker EE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker EE for the first time on a new host machine, you need
-to set up the Docker repository. Afterward, you can install and update Docker EE
-from the repository.
+Before you install Docker Engine - Enterprise for the first time on a new host
+machine, you need to set up the Docker repository. Afterward, you can install
+and update Docker Engine - Enterprise from the repository.
 
 #### Set up the repository
 
-1.  Update the `apt` package index:
+1.  Update the `apt` package index.
 
     ```bash
     $ sudo apt-get update
     ```
 
-2.  Install packages to allow `apt` to use a repository over HTTPS:
+2.  Install packages to allow `apt` to use a repository over HTTPS.
 
     ```bash
     $ sudo apt-get install \
@@ -109,12 +117,12 @@ from the repository.
 
 4. Temporarily add a `$DOCKER_EE_VERSION` variable into your environment.
 
-   > **Note**: If you need to run something other than Docker EE 3.0, please
-   > see the following instructions:
+   > **Note:** If you need to run Docker Enterprise 2.0, please see the
+   > following instructions:
    > * [18.09](https://docs.docker.com/v18.09/ee/supported-platforms/) - Docker
    >   Enterprise Edition 2.1 (Docker Engine, UCP, and DTR).
    > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older
-   >   Docker EE Engine only release
+   >   Docker Engine - Enterprise only release
    > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker
    >   Enterprise Edition 2.0 (Docker Engine, UCP, and DTR).
 
@@ -122,7 +130,8 @@ from the repository.
     $ DOCKER_EE_VERSION={{ site.docker_ee_version }}
     ```
 
-5.  Add Docker's official GPG key using your customer Docker EE repository URL:
+5.  Add Docker's official GPG key using your customer Docker Engine - Enterprise
+    repository URL.
 
     ```bash
     $ curl -fsSL "${DOCKER_EE_URL}/ubuntu/gpg" | sudo apt-key add -
@@ -145,7 +154,7 @@ from the repository.
 6.  Use the following command to set up the **stable** repository. Use the
     command as-is. It works because of the variable you set earlier.
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+    > **Note:** The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`.
     >
 
@@ -156,7 +165,7 @@ from the repository.
        stable-$DOCKER_EE_VERSION"
     ```
 
-#### Install Docker EE
+#### Install Docker Engine - Enterprise
 
 1.  Update the `apt` package index.
 
@@ -164,24 +173,26 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the latest version of Docker EE, or go to the next step to install a
-    specific version. Any existing installation of Docker EE is replaced.
+2.  Install the latest version of Docker Engine - Enterprise, or go to the next
+    step to install a specific version. Any existing installation of Docker is
+    replaced.
 
-    Use this command to install the latest version of Docker EE and containerd:
+    Use this command to install the latest version of Docker Engine - Enterprise
+    and containerd:
 
     ```bash
     $ sudo apt-get install docker-ee docker-ee-cli containerd.io
     ```
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > **Warning:** If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning}
 
-3.  On production systems, you should install a specific version of Docker EE
-    instead of always using the latest. This output is truncated. List the
-    available versions.
+3.  On production systems, you should install a specific version of Docker
+    Engine - Enterprise instead of always using the latest. This output is
+    truncated. List the available versions.
 
     ```bash
     $ apt-cache madison docker-ee
@@ -195,7 +206,8 @@ from the repository.
     install. The second column is the version string. The third column is the
     repository name, which indicates which repository the package is from and
     by extension its stability level. To install a specific version, append the
-    version string to the package name and separate them by an equals sign (`=`):
+    version string to the package name and separate them by an equals sign
+    (`=`).
 
     ```bash
     $ sudo apt-get install docker-ee=<VERSION_STRING> docker-ee-cli=<VERSION_STRING> containerd.io
@@ -203,7 +215,7 @@ from the repository.
 
     The Docker daemon starts automatically.
 
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -213,18 +225,18 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. The `docker` group is created but no users
-are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Docker Engine - Enterprise is installed and running. The `docker` group is
+created but no users are added to it. You need to use `sudo` to run Docker
+commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md)
+to allow non-privileged users to run Docker commands and for other optional
+configuration steps.
 
-#### Upgrade Docker EE
+#### Upgrade Docker Engine - Enterprise
 
-To upgrade Docker EE:
+To upgrade Docker Engine - Enterprise, follow the steps below:
 
-1.  If upgrading to a new major Docker EE version (such as when going from
-    Docker 18.03.x to Docker 18.09.x),
+1.  If upgrading to a new major Docker Engine - Enterprise version (such as when
+    going from Docker 18.03.x to Docker 18.09.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
 2.  Run `sudo apt-get update`.
@@ -235,25 +247,41 @@ To upgrade Docker EE:
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker EE, you can download the
-`.deb` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker EE.
+If you cannot use Docker's repository to install Docker Engine - Enterprise, you
+can download the `.deb` files for your release and install them manually. You
+need to download a new file or set of files each time you want to upgrade Docker
+Engine - Enterprise.
 
-1.  Go to the Docker EE repository URL associated with your
+1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-<VERSION>` and download the `.deb` file for the
-    Docker EE version and architecture you want to install.
+    `ubuntu/dists/<distribution>/pool/stable-<VERSION>` and download the `.deb`
+    file(s) for the Docker Engine - Enterprise version and architecture you want
+    to install.
 
-2.  Install Docker EE, changing the path below to the path where you downloaded
-    the Docker EE package.
+    > **Note:**
+    > Starting with 19.03, you have to download three `.deb` files. They
+    > are `docker-ee-cli_<version>.deb`, `containerd.io_<version>.deb`, and
+    > `docker-ee_<version>.deb`.
+
+2.  Install Docker, changing the path below to the path where you downloaded
+    the Docker Engine - Enterprise package.
 
     ```bash
     $ sudo dpkg -i /path/to/package.deb
     ```
 
+    Or, if you downloaded the three `.deb` files, **you must** install them in
+    the following order:
+
+    ```bash
+    $ sudo dpkg -i /path/to/docker-ee-cli_<version>.deb
+    $ sudo dpkg -i /path/to/containerd.io_<version>.deb
+    $ sudo dpkg -i /path/to/docker-ee_<version>.deb
+    ```
+
     The Docker daemon starts automatically.
 
-3.  Verify that Docker EE is installed correctly by running the `hello-world`
+3.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -263,20 +291,21 @@ a new file each time you want to upgrade Docker EE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. The `docker` group is created but no users
-are added to it. You need to use `sudo` to run Docker
+Docker Engine - Enterprise is installed and running. The `docker` group is
+created but no users are added to it. You need to use `sudo` to run Docker
 commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
-#### Upgrade Docker EE
+#### Upgrade Docker Engine - Enterprise
 
-To upgrade Docker EE, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), pointing to the new file.
+To upgrade Docker Engine - Enterprise, download the newer package file and
+repeat the [installation procedure](#install-from-a-package), pointing to the
+new file.
 
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 
-1.  Uninstall the Docker EE package:
+1.  Uninstall the Docker Engine - Enterprise package.
 
     ```bash
     $ sudo apt-get purge docker-ee
@@ -284,7 +313,7 @@ To upgrade Docker EE, download the newer package file and repeat the
 
 2.  Images, containers, volumes, or customized configuration files on your host
     are not automatically removed. To delete all images, containers, and
-    volumes:
+    volumes.
 
     ```bash
     $ sudo rm -rf /var/lib/docker

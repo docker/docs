@@ -4,8 +4,8 @@ keywords: docker, notary, notary-client, notary-server, notary server, notary-si
 title: Notary server configuration file
 ---
 
-This document is for those who are [running their own Notary service](../running_a_service.md) who
-want to specify custom options.
+This document is for those who are [running their own Notary service](../running_a_service.md)
+and want to specify custom options.
 
 ## Overview
 
@@ -15,17 +15,16 @@ line.
 
 Notary server also allows you to [increase/decrease](server-config.md#hot-logging-level-reload) the logging level without having to restart.
 
-Here is a full server configuration file example; click on the top level JSON keys to
-learn more about the configuration section corresponding to that key:
+Here is a full server configuration file example:
 
 ```json
 {
-  <a href="server-config.md#server-section-required">"server"</a>: {
+  "server": {
     "http_addr": ":4443",
     "tls_key_file": "./fixtures/notary-server.key",
     "tls_cert_file": "./fixtures/notary-server.crt"
   },
-  <a href="server-config.md#trust-service-section-required">"trust_service"</a>: {
+  "trust-service": {
     "type": "remote",
     "hostname": "notarysigner",
     "port": "7899",
@@ -34,11 +33,11 @@ learn more about the configuration section corresponding to that key:
     "tls_client_cert": "./fixtures/notary-server.crt",
     "tls_client_key": "./fixtures/notary-server.key"
   },
-  <a href="server-config.md#storage-section-required">"storage"</a>: {
+  "storage": {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
   },
-  <a href="server-config.md#auth-section-optional">"auth"</a>: {
+  "auth": {
     "type": "token",
     "options": {
       "realm": "https://auth.docker.io/token",
@@ -47,26 +46,29 @@ learn more about the configuration section corresponding to that key:
       "rootcertbundle": "/path/to/auth.docker.io/cert"
     }
   },
-  <a href="../common-configs/#logging-section-optional">"logging"</a>: {
+  "logging": {
     "level": "debug"
   },
-  <a href="../common-configs/#reporting-section-optional">"reporting"</a>: {
+  "reporting": {
     "bugsnag": {
       "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
       "release_stage": "production"
     }
   },
-  <a href="server-config.md#caching-section-optional">"caching"</a>: {
+  "caching": {
     "max_age": {
       "current_metadata": 300,
       "consistent_metadata": 31536000,
     }
   },
-  <a href="server-config.md#repositories-section-optional">"repositories"</a>: {
+  "repositories": {
     "gun_prefixes": ["docker.io/", "my-own-registry.com/"]
   }
 }
 ```
+
+For details on the `reporting` and `logging` sections, see the documentation on
+[common Notary configuration sections](/notary/reference/common-configs/).
 
 ## server section (required)
 

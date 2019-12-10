@@ -4,127 +4,39 @@ keywords: windows faqs
 title: Frequently asked questions (FAQ)
 ---
 
-**Looking for popular FAQs on Docker Desktop for Windows?** Check out the
-[Docker Success Center](http://success.docker.com/){: target="_blank" class="_"}
-for knowledge base articles, FAQs, technical support for subscription levels, and more.
+## Stable and Edge releases
 
-## Questions about Stable and Edge channels
+### How do I get the Stable or the Edge version of Docker Desktop?
 
-### How do I get the Stable or Edge version of Docker Desktop?
+A. You can download the Stable version of Docker Desktop from [Docker Hub](https://hub.docker.com/?overlay=onboarding). To download the Edge version, see the [Edge release notes](/docker-for-windows/edge-release-notes/).
 
-Use the download links for the channels given in the topic
-[Download Docker Desktop for Windows](install#download-docker-for-windows).
-
-This topic also has more information about the two channels.
+For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" class="_"}.
 
 ### What is the difference between the Stable and Edge versions of Docker Desktop?
 
-Two different download channels are available for Docker Desktop:
+Two different download channels are available in the Community version of Docker Desktop:
 
-* The **Stable channel** provides a general availability release-ready installer
-  for a fully baked and tested, more reliable app. The Stable version of Docker
-  Desktop includes the latest released version of Docker Engine. The
-  release schedule is synced with Docker Engine releases and hotfixes. On the
-  Stable channel, you can select whether to send usage statistics and other data.
+The **Stable channel** provides a general availability release-ready installer
+for a fully baked and tested, more reliable app. The Stable version of Docker
+Desktop includes the latest released version of Docker Engine. The
+release schedule is synced with Docker Engine releases and patch releases. On the Stable channel, you can select whether to send usage statistics and other data.
 
-* The **Edge channel** provides an installer with new features we are working on, but is not necessarily fully tested. It includes the experimental version of
-  Docker Engine. Bugs, crashes, and issues can occur when using the Edge version, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Edge releases are typically more frequent than for Stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the Edge channel.
+The **Edge channel** provides an installer with new features we are working on, but is not necessarily fully tested. It includes the experimental version of
+Docker Engine. Bugs, crashes, and issues can occur when using the Edge version, but you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than for Stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the Edge channel.
 
-### Can I switch back and forth between Stable and Edge versions of Docker Desktop?
+### Can I switch between Stable and Edge versions of Docker Desktop?
 
-Yes, you can switch between versions to try out the Edge release to see what's
-new, then go back to Stable for other work. However, **you can have only one app
-installed at a time**. Switching back and forth between Stable and Edge apps can
-destabilize your development environment, particularly in cases where you switch
-from a newer (Edge) channel to older version (Stable).
+Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](/docker-for-windows/install/#switch-between-stable-and-edge-versions).
 
-For example, containers created with a newer Edge version of Docker Desktop may not work after you switch back to Stable because they may have been created using Edge features that aren't in Stable yet. Just keep this in mind as you create and work with Edge containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
+## What are the system requirements for Docker Desktop?
 
-To safely switch between Edge and Stable versions, ensure that you save images and export the containers you need, then uninstall the current version before installing another. The workflow is described in detail in the following section.
+For information about system requirements, see [Docker Desktop Windows system requirements](install/#system-requirements).
 
-### How to save and restore data
-
-You can use the following procedure to save and restore images and container data, for example, if you want to switch between Edge and Stable, or reset your VM disk:
-
-1.  Use `docker save -o images.tar image1 [image2 ...]` to save any images you
-    want to keep. (See [save](/engine/reference/commandline/save) in the Docker
-    Engine command line reference.)
-
-2.  Use `docker export -o myContainner1.tar container1` to export containers you
-    want to keep. (See [export](/engine/reference/commandline/export) in the
-    Docker Engine command line reference.)
-
-3.  Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
-
-5.  Use `docker load -i images.tar` to reload previously saved images. (See
-    [load](/engine/reference/commandline/load) in the Docker Engine.
-
-6.  Use `docker import -i myContainer1.tar` to create a filesystem image
-    corresponding to previously exported containers. (See
-    [import](/engine/reference/commandline/import) in the Docker Engine.
-
-[This
-procedure](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)
-explains how to backup and restore data volumes.
-
-## Experimental features
+## What is an experimental feature?
 
 {% include experimental.md %}
 
-## Feedback
-
-### What kind of feedback are we looking for?
-
-Everything is a fair game. We'd like your impressions on the download-install
-process, startup, functionality available, the GUI, usefulness of the app,
-command line integration, and so on. Tell us about problems, what you like, or
-functionality you'd like to see added.
-
-We are especially interested in getting feedback on the swarm mode described
-in [Docker Swarm](/engine/swarm/). A good place to start is the
-[tutorial](/engine/swarm/swarm-tutorial/).
-
-### What if I have problems or questions?
-
-You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) section.
-
-If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
-or create a new one. You can also create new issues based on diagnostics. To
-learn more about running diagnostics and about Docker Desktop for Windows GitHub issues,
-see [Diagnose and Feedback](/docker-for-windows#diagnose--feedback).
-
-[Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
-contains discussion threads. You can also create discussion topics there,
-but we recommend using the GitHub issues over the forums for better tracking and
-response.
-
-### How can I opt out of sending my usage data?
-
-If you do not want to send usage data, use the Stable channel. For more
-information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker Desktop?").
-
-### How is personal data handled in Docker Desktop?
-
-When uploading diagnostics to help Docker with investigating issues, the
-uploaded diagnostics bundle may contain personal data such as usernames and IP
-addresses. The diagnostics bundles are only accessible to Docker Inc. employees
-who are directly involved in diagnosing Docker Desktop issues. By default, Docker Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
-[docker/for-mac](https://github.com/docker/for-mac/issues) or
-[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
-issue is closed, Docker Inc. will remove the referenced diagnostics bundles
-within 30 days. You may also request the removal of a diagnostics bundle by
-either specifying the diagnostics ID or through your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non-personal) metrics such as the rate of issues from it.
-
-### Can I use Docker Desktop with the Swarm mode?
-
-Yes! You can use Docker Desktop to test single-node features of
-[swarm mode](/engine/swarm/) introduced with Docker Engine 1.12, including
-initializing a swarm with a single node, creating services, and scaling
-services. Docker “Moby” on Hyper-V serves as the single swarm node. You can also
-use Docker Machine, which is bundled with Docker Desktop, to create and
-experiment with a multi-node swarm. Check out the tutorial at
-[Get started with swarm mode](/engine/swarm/swarm-tutorial/).
+## How do I?
 
 ### How do I connect to the remote Docker Engine API?
 
@@ -137,7 +49,23 @@ On Docker Desktop, clients can connect to the Docker Engine through a
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
 given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Engine API](/engine/api) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+See also [Docker Engine API](/engine/api.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+
+### How do I connect from a container to a service on the host?
+
+Windows has a changing IP address (or none if you have no network access). We recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and will not work in a production environment outside of Docker Desktop for Windows.
+
+The gateway is also reachable as `gateway.docker.internal`.
+
+For more information about the networking features in Docker Desktop for Windows, see
+[Networking](/docker-for-windows/networking/).
+
+### How do I connect to a container from Windows?
+
+We recommend that you publish a port, or connect from another container. You can use the same method on Linux if the container is on an overlay network and not a bridge network, as these are not routed.
+
+For more information and examples, see
+[I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows) in the [Networking](/docker-for-windows/networking/) topic.
 
 ## Volumes
 
@@ -177,52 +105,31 @@ To learn more about the reasons for this limitation, see the following discussio
 
 ### How do I add custom CA certificates?
 
-Starting with Docker Desktop 1.12.1, 2016-09-16 (Stable) and Beta 26
-(2016-09-14 1.12.1-beta26), all trusted Certificate Authorities (CA) (root or
-intermediate) are supported. Docker recognizes certs stored under Trust Root
+Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
+intermediate). Docker recognizes certs stored under Trust Root
 Certification Authorities or Intermediate Certification Authorities.
 
-Docker Desktop creates a certificate bundle of all user-trusted CAs based on
-the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
-
-To learn more about how to install a CA root certificate for the registry, see
-[Verify repository client with certificates](/engine/security/certificates)
-in the Docker Engine topics.
+ For more information on adding server and client side certs, see [Add TLS certificates](/docker-for-windows/index/#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
-You can add your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+For information on adding client certificates, see [Add TLS certificates](/docker-for-windows/index/#add-tls-certificates) in the Getting Started topic.
 
-When the Docker Desktop application starts, it copies the
-`~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
-directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
+### Can I pass through a USB device to a container?
 
-You need to restart Docker Desktop after making any changes to the keychain
-or to the `~/.docker/certs.d` directory in order for the changes to take effect.
+Unfortunately, it is not possible to pass through a USB device (or a
+serial port) to a container as it requires support at the hypervisor level.
 
-The registry cannot be listed as an _insecure registry_ (see
-[Docker Daemon](/docker-for-windows#daemon)). Docker Desktop ignores
-certificates listed under insecure registries, and does not send client
-certificates. Commands like `docker run` that attempt to pull from the registry
-produce error messages on the command line, as well as on the registry.
+### Can I run Docker Desktop in nested virtualization scenarios?
 
-To learn more about how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](/engine/security/certificates)
-in the Docker Engine topics.
-
-### Why does Docker Desktop sometimes lose network connectivity, causing `push` or `pull` commands to fail?
-
-Networking is not yet fully stable across network changes and system sleep
-cycles. Quit and start Docker Desktop to restore connectivity.
+Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, **Docker Desktop is not supported in nested virtualization scenarios**. It might work in some cases, and not in others. For more information, see [Running Docker Desktop in nested virtualization scenarios](/docker-for-windows/troubleshoot/#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ### Can I use VirtualBox alongside Docker Desktop?
 
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
 
-### Can I share local drives and filesystem with my Docker Machine VMs?
+### Can I share local drives and file system with my Docker Machine VMs?
 
 No, you cannot share local drives with Docker Machine nodes when using Docker
 Desktop with Hyper-V. Shared drives can be made available to containers, but
@@ -239,13 +146,11 @@ Getting Started topic. For more about Docker Machine itself, see
 [What is Docker Machine?](/machine/overview#what-is-docker-machine), and the
 [Hyper-V driver](/machine/drivers/hyper-v) for Docker Machine.
 
-## Windows Requirements
+## Windows requirements
 
 ### How do I run Windows containers on Docker Desktop on Windows Server?
 
-See [About Windows containers and Windows Server](/install/windows/docker-ee/#about-docker-ee-containers-and-windows-server).
-
-A full tutorial is available in [docker/labs](https://github.com/docker/labs){: target="_blank" class="_"} at
+You can find a tutorial about running Windows containers on Windows Server in
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
 
 ### Why is Windows 10 Home not supported?
@@ -264,6 +169,44 @@ Desktop. See details and workarounds in
 [Docker fails to start when firewall or anti-virus software is installed](troubleshoot#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
 in [Troubleshooting](troubleshoot).
 
-## How do I uninstall Docker Toolbox?
+## Feedback
 
-Now that you have Docker Desktop, you might decide that you do not need the legacy Docker Toolbox anymore. For details on how to perform a clean uninstall of Toolbox on Windows, see [How to uninstall Toolbox](/toolbox/toolbox_install_windows#how-to-uninstall-toolbox) in the Toolbox Windows topics.
+### What kind of feedback are we looking for?
+
+Everything is fair game. We'd like your impressions on the download and install
+process, startup, functionality available, the GUI, usefulness of the app,
+command line integration, and so on. Tell us about problems, what you like, or
+functionality you'd like to see added.
+
+### What if I have problems or questions?
+
+You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) topic.
+
+If you do not find a solution in Troubleshooting, browse issues on
+[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
+or create a new one. You can also create new issues based on diagnostics. To learn more, see
+[Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
+
+The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
+contains discussion threads. You can also create discussion topics there,
+but we recommend using the GitHub issues over the forums for better tracking and
+response.
+
+### How can I opt out of sending my usage data?
+
+If you do not want to send usage data, use the Stable channel. For more
+information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
+
+### How is personal data handled in Docker Desktop?
+
+When uploading diagnostics to help Docker with investigating issues, the
+uploaded diagnostics bundle may contain personal data such as usernames and IP
+addresses. The diagnostics bundles are only accessible to Docker, Inc. employees
+who are directly involved in diagnosing Docker Desktop issues. 
+
+By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
+[docker/for-mac](https://github.com/docker/for-mac/issues) or
+[docker/for-win](https://github.com/docker/for-win/issues) issue trackers. If an
+issue is closed, Docker, Inc. will remove the referenced diagnostics bundles
+within 30 days. You may also request the removal of a diagnostics bundle by
+either specifying the diagnostics ID or through your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non-personal) metrics such as the rate of issues from it.

@@ -24,6 +24,11 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Compose file structure and examples
 
+Here is a sample Compose file from the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
+
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Compose file version 3
@@ -132,20 +137,6 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 `networks`, and so on, are listed with the options that support them as
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
-
-A good place to start is the [Getting Started](/get-started/index.md) tutorial
-which uses version 3 Compose stack files to implement multi-container apps,
-service definitions, and swarm mode. Here are some Compose files used in the
-tutorial.
-
-- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
-
-- [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
-
-Another good reference is the Compose file for the voting app sample used in the
-[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
-topic on [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
 
 ## Service configuration reference
 
@@ -279,7 +270,7 @@ build:
     - gitcommithash=cdc3b19
 ```
 
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
+> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
@@ -559,7 +550,7 @@ credential_spec:
 ```
 
 #### Example gMSA configuration
-When configuring a gMSA credential spec for a service, you only need 
+When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
 ```
 version: "3.8"
@@ -585,7 +576,7 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
-  
+
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
 
@@ -800,7 +791,7 @@ Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
-50M of memory and `0.50` (50% of a single core) of available processing time (CPU), 
+50M of memory and `0.50` (50% of a single core) of available processing time (CPU),
 and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```yaml
@@ -2269,8 +2260,8 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
-If you want to use a particular network on a common build, use [network] as 
-mentioned in the second yaml file example.  
+If you want to use a particular network on a common build, use [network] as
+mentioned in the second yaml file example.
 
 The syntax for using built-in networks such as `host` and `none` is a little
 different. Define an external network with the name `host` or `none` (that
@@ -2595,6 +2586,5 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Docker](/get-started/)
 - [Samples](/samples/)
 - [Command line reference](/compose/reference/)

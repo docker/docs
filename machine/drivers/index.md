@@ -8,6 +8,7 @@ title: Machine drivers
 -   [Microsoft Azure](azure.md)
 -   [DigitalOcean](digital-ocean.md)
 -   [Exoscale](exoscale.md)
+-   [Generic](generic.md)
 -   [Google Compute Engine](gce.md)
 -   [Linode](linode.md) (unofficial plugin, not supported by Docker)
 -   [Microsoft Hyper-V](hyper-v.md)

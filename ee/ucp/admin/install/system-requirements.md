@@ -16,6 +16,7 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
+* User namespaces should not be configured on any node. This function is not currently supported by UCP. See [Isolate containers with a user namespace](https://docs.docker.com/engine/security/userns-remap/) for more information.
 
 ### Minimum requirements
 
@@ -25,7 +26,9 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
 
-**Note**: Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
+> Note
+>
+> Increased storage is required for Kubernetes manager nodes in UCP 3.1. If you are upgrading to UCP 3.1, refer to [Kubelet restarting after upgrade to Universal Control Plane 3.1](https://success.docker.com/article/kublet-restarting-after-upgrade-to-universal-control-plane-31) for information on how to increase the size of the `/var/lib/kubelet` filesystem.
 
 ### Recommended production requirements
 
@@ -44,10 +47,7 @@ between hosts.
 
 > Workloads on manager nodes
 >
-> These requirements assume that manager nodes won't run regular workloads.
-> If you plan to run additional workloads on manager nodes, you may need to
-> provision more powerful nodes. If manager nodes become overloaded, the
-> cluster may experience issues.
+> Docker does not support workloads other than those required for UCP on UCP manager nodes.
 
 ## Ports used
 

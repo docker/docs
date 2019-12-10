@@ -12,6 +12,88 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 ## Edge Releases of 2019
 
+### Docker Desktop Community 2.1.6.1
+2019-11-20
+
+[Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that prevented Kubernetes to start with WSL 2 on machines with multiple CPU cores.
+- Fixed a rare issue that caused to Docker Desktop to crash with the error `Unable to stop Hyper-V VM: Cannot validate argument on parameter 'SwitchName'. The argument is null or empty.`
+
+### Known issue
+
+Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.1. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
+
+### Docker Desktop Community 2.1.6.0
+2019-11-18
+
+[Download](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
+
+### New
+
+Added the ability to start and stop Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
+
+### Bug fixes and minor changes
+
+- Docker Desktop now automatically restarts after an update.
+- Fixed an issue where Docker Desktop auto-start was not being disabled properly on some machines.
+- Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`). Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
+- Fixed an issue which caused Docker Desktop to crash when resetting to factory defaults while running Windows containers.
+- Fixed multiple issues related to Fast Startup.
+- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distros when Docker Desktop WSL integration is enabled.
+- Fixed an issue where bind mounts created with Docker Compose from a WSL distro were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
+- Docker Desktop now supports inotify events on shared filesystems for Windows file sharing.
+- Fixed a cache invalidation bug when a file in a shared volume is renamed on the host for Windows file sharing.
+- Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
+- To make VM startup more reliable, Docker Desktop now avoids adding a Hyper-V NIC to the Windows VM when using Hypervisor sockets for Windows file sharing (rather than Samba).
+
+### Known issue
+
+Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.0. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
+
+### Docker Desktop Community 2.1.5.0
+2019-11-04
+
+[Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
+
+### Upgrades
+
+- [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
+- [Docker Compose 1.25.0-rc4](https://github.com/docker/compose/releases/tag/1.25.0-rc4)
+- Linux kernel 4.19.76
+
+### New
+
+- **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
+
+  To access the Dashboard UI, select the Docker menu from the system tray and then click **Dashboard**.
+
+- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl-tech-preview/).
+
+- **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation which uses gRPC, FUSE, and Hypervisor sockets instead of Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
+
+  - Users don't have to expose the Samba port, and therefore do not experience issues related to IT firewall or the drive-sharing policy.
+  - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
+
+  > To switch back to the Samba file system:
+  >
+  > From the Docker menu, select **Settings** > **Command line**, and then clear the **Enable experimental features** check box. Alternatively, install a Docker Desktop Stable release.
+
+### Known issues
+
+- When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
+
+- When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
+
 ### Docker Desktop Community 2.1.4.0
 2019-10-15
 
@@ -28,6 +110,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
 - Fixed a bug that prevented users from accessing WSL 2 Tech Preview. Fixes [docker/for-win#4734](https://github.com/docker/for-win/issues/4734).
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 
 ### Docker Desktop Community 2.1.3.0
 2019-09-16

@@ -17,3 +17,7 @@ This section discusses the security features you can configure and use within yo
 * You can configure secure computing mode (Seccomp) policies to secure system calls in a container. For more information, see [Seccomp security profiles for Docker](seccomp.md).
 
 * An AppArmor profile for Docker is installed with the official *.deb* packages. For information about this profile and overriding it, see [AppArmor security profiles for Docker](apparmor.md).
+
+* You can map the root user in the containers to a non-root user. See [Isolate containers with a user namespace](userns-remap.md).
+
+* You can also run the Docker daemon as a non-root user. See [Run the Docker daemon as a non-root user (Rootless mode)](rootless.md).
