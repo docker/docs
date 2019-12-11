@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_rm
 title: docker cluster rm
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

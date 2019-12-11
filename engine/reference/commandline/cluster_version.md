@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_version
 title: docker cluster version
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
