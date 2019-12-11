@@ -186,7 +186,7 @@ Delete the `wordpress-password-v1` secret, and click **Update**.
 Then do the same thing for the WordPress service. After this is done, the
 WordPress application is running and using the new password.
 
-## Managing secrets through the CLI
+## Manage secrets through the CLI
 
 You can find additional documentation on managing secrets through the CLI at [How Docker manages secrets](/engine/swarm/secrets/#read-more-about-docker-secret-commands).
 
