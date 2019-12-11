@@ -13,11 +13,11 @@ notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.1.7.0
-2019-12-
+2019-12-11
 
-[Download](ADD URL)
+[Download](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe)
 
-> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.
 
 ### Upgrades
 
