@@ -26,10 +26,10 @@ $> docker network create -d overlay demo-east
 $> docker network create -d overlay demo-west
 ```
 
-Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See *Minimizing the number of overlay networks* in [Interlock architecture](https://docs.docker.com/ee/ucp/interlock/architecture/) for more information. 
+Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See *Minimizing the number of overlay networks* in [Interlock architecture](https://docs.docker.com/ee/ucp/interlock/architecture/) for more information.
 
 > Note
-> 
+>
 > Interlock will _only_ connect to the specified networks, and will connect to them all at startup.
 
 Next, deploy the application in the `us-east` service cluster:
@@ -88,7 +88,7 @@ Application traffic is isolated to each service cluster.  Interlock also ensures
 The following example configures an eight (8) node Swarm cluster that uses service clusters
 to route traffic to different proxies. This example includes:
 
-- Three (3) managers and five (5) workers 
+- Three (3) managers and five (5) workers
 - Four workers that are configured with node labels to be dedicated
 ingress cluster load balancer nodes. These nodes receive all application traffic.
 
@@ -127,10 +127,11 @@ map[nodetype:loadbalancer region:us-west]
 Next, create an Interlock configuration object that contains multiple extensions with varying service clusters.
 
 > Important
-> 
-> The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
-
-If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
+>
+> The configuration object specified in the following code sample applies to
+> UCP versions 3.0.10 and later, and versions 3.1.4 and later. If you are
+> working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, the config object
+> should be named `com.docker.ucp.interlock.service-clusters.conf`.
 
 ```bash
 $> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -
@@ -193,8 +194,8 @@ PollInterval = "3s"
 EOF
 oqkvv1asncf6p2axhx41vylgt
 ```
-> Note 
-> 
+> Note
+>
 > "Host" mode networking is used in order to use the same ports (`8080` and `8443`) in the cluster. You cannot use ingress
 > networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
 > for each service cluster.

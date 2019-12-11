@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_inspect
 title: docker cluster inspect
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

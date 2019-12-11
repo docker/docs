@@ -167,6 +167,9 @@ unzip bundle.zip
 
 # Run the utility script.
 eval "$(<env.sh)"
+
+# Confirm that you can see UCP containers:
+docker ps -af state=running
 ```
 
 On Windows Server 2016, open an elevated PowerShell prompt and run:

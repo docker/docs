@@ -3,6 +3,7 @@ datafolder: cluster
 datafile: docker_cluster
 title: docker cluster
 redirect_from: /cluster/reference/
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

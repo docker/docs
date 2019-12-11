@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_create
 title: docker cluster create
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

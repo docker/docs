@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_build
 title: docker assemble build
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
