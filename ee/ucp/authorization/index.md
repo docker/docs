@@ -90,7 +90,7 @@ together.
 Only an administrator can manage grants, subjects, roles, and access to
 resources.
 
-> About administrators
+> Note
 >
 > An administrator is a user who creates subjects, groups resources by moving them
 > into collections or namespaces, defines roles by selecting allowable operations,
@@ -105,8 +105,10 @@ ClusterRoleBinding can deploy pods with privileged options. This prevents a
 platform user from being able to bypass the Universal Control Plane Security
 Model. 
 
-> Note: Granting the `cluster admin` ClusterRole to normal users does not allow 
-> them to deploy privilaged pods. 
+> Note
+> 
+> Granting the `cluster admin` ClusterRole to normal users does not allow 
+> them to deploy privileged pods. 
 
 These privileged options include:
 
