@@ -75,4 +75,4 @@ The Docker Enterprise platform business, including products, customers, and empl
 
 As part of Mirantis, the Enterprise team will continue to develop and support the Docker Enterprise platform. For more information on the acquisition and how it may affect you and your business, refer to the [Docker Enterprise Customer FAQ](https://www.docker.com/faq-for-docker-enterprise-customers-and-partners). 
 
-For Docker Enterprise documentation, see the [Docker Enterprise tab](/ee/).
+For Docker Enterprise documentation, see the [Docker Enterprise](/ee/) tab.
