@@ -23,27 +23,9 @@ production servers in the cloud. Total reading time is less than an hour.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Try Docker Enterprise
+## Docker Engine - Community
 
-Run your solution in production with Docker Enterprise to get a
-management dashboard, security scanning, LDAP integration, content signing,
-multi-cloud support, and more. Click below to test-drive a running instance of
-Docker Enterprise without installing anything.
-
-[Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
-
-</div>
-</div>
-
-## Docker products
-
-<div class="row">
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Engine - Community
-
-Get started with Docker and experimenting with container-based apps. Docker Engine - Community
-is available on many platforms, from desktop to cloud to server. Build and share
+Get started with Docker and experimenting with container-based apps. Docker Engine - Community is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
@@ -51,25 +33,9 @@ channel for more predictability.
 [Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
 
 </div>
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Enterprise
-
-Designed for enterprise development and IT teams who build, ship, and run
-business critical applications in production at scale. Integrated, certified,
-and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker Enterprise comes with enterprise
-[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
-orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
-securing images in an enterprise grade registry.
-
-[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
-
 </div>
-</div><!-- end row -->
 
 ## Run Docker anywhere
-
 <div class="component-container">
     <!--start row-->
     <div class="row">
@@ -102,3 +68,9 @@ securing images in an enterprise grade registry.
         </div>
     </div>
 </div>
+
+## Docker Enterprise
+
+The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. Among the Docker Enterprise platform technology and associated IP procured by Mirantis are Docker Engine - Enterprise, Docker Trusted Registry, Docker Universal Control Plane, and parts of the Docker CLI.
+
+As part of Mirantis, the Enterprise team will continue to develop and support the Docker Enterprise platform. For more information on the acquisition and how it may affect you and your business, refer to the [Docker Enterprise Customer FAQ](https://www.docker.com/faq-for-docker-enterprise-customers-and-partners).
