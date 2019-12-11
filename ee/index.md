@@ -1,7 +1,7 @@
 ---
 title: Docker Enterprise
 description: Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.
-keywords: Docker EE, Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes, CaaS
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
   - /manuals/
