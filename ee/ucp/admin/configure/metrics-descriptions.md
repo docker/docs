@@ -1,7 +1,7 @@
 ---
 description: Using UCP cluster metrics with Prometheus
 keywords: prometheus, metrics, ucp
-title: Using UCP cluster metrics with Prometheus
+title: Use UCP cluster metrics with Prometheus
 redirect_from:
 - /engine/admin/prometheus/
 ---
