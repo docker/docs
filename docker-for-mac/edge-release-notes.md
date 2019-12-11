@@ -17,7 +17,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 
 [Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
 
-> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
 ### Upgrades
 
