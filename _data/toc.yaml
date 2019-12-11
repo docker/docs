@@ -3,7 +3,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /ee/
+  path: /manuals/
   node: manuals
 - title: Glossary
   path: /glossary/
@@ -14,6 +14,9 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+- title: Docker Enterprise
+  path: /ee/
+  node: enterprise
 
 guides:
 - sectiontitle: Get Docker
