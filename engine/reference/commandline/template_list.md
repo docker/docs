@@ -2,6 +2,7 @@
 datafolder: application-template
 datafile: docker_template_list
 title: docker template list
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

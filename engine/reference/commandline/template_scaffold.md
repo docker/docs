@@ -2,6 +2,7 @@
 datafolder: application-template
 datafile: docker_template_scaffold
 title: docker template scaffold
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
