@@ -2,6 +2,7 @@
 datafolder: registry-cli
 datafile: docker_registry
 title: docker registry
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

@@ -2,6 +2,7 @@
 datafolder: registry-cli
 datafile: docker_registry_history
 title: docker registry history
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
