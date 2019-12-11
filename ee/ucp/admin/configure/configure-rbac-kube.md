@@ -15,7 +15,7 @@ Kubernetes RBAC is turned on by default for Kubernetes clusters when customers u
 
 Starting with UCP 3.1, Kubernetes & Swarm roles have separate views. You can view all the roles for a particular cluster under **Access Control** then **Roles**. Select Kubernetes or Swarm to view the specific roles for each.
 
-## Creating roles
+## Create roles
 
 You create Kubernetes roles either through the CLI using `kubectl` or through the UCP web interface.
 
@@ -39,7 +39,7 @@ To create a Kuberenetes role in the UCP web interface:
 8. When you have finished specifying the YAML, Select **Create** to complete role creation.
 
 
-## Creating role grants
+## Create role grants
 
 Kubernetes provides 2 types of role grants:
 
