@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_logs
 title: docker assemble backend logs
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

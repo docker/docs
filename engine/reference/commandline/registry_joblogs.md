@@ -2,6 +2,7 @@
 datafolder: registry-cli
 datafile: docker_registry_joblogs
 title: docker registry joblogs
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

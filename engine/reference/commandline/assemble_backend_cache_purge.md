@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_cache_purge
 title: docker assemble backend cache purge
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
