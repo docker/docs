@@ -15,7 +15,7 @@ An application package can have one of these formats:
 
 Once an application package has been deployed, you manipulate and manage it as you would any stack.
 
-## Creating a stack in the UCP web interface
+## Create a stack in the UCP web interface
 
 To create a stack in the UCP web interface, follow these steps:
 
