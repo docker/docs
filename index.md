@@ -23,9 +23,9 @@ production servers in the cloud. Total reading time is less than an hour.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Docker Engine - Community
+## Install Docker Engine - Community
 
-Get started with Docker and experimenting with container-based apps. Docker Engine - Community is available on many platforms, from desktop to cloud to server. Build and share
+Docker Engine - Community is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.

@@ -4,7 +4,6 @@ description: Learn about Docker Enterprise, the industry-leading container platf
 keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
-  - /manuals/
 ---
 
 
