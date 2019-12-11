@@ -181,12 +181,3 @@ KubeDNS is running at https://54.200.115.43:6443/api/v1/namespaces/kube-system/s
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
-
-## Docker Context
-A new Docker CLI plugin called `docker context` is available with client version 19.03.0. `docker context` helps manage connections to multiple environments so you do not have to remember and type out connection strings. [Read more](../engine/reference/commandline/context/) about `docker context`.
-
-
-## Where to go next
-
-- [Supported platforms](supported-platforms.md)
-- [Docker Enterprise architecture](docker-ee-architecture.md)
