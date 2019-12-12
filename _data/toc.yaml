@@ -1243,10 +1243,8 @@ samples:
   title: Library references
 
 manuals:
-- sectiontitle: Docker Engine - Community
-- section:
-  - path: /install/
-    title: Install Docker - Engine - Community
+- path: /install/
+  title: Docker Engine - Community
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -4186,7 +4184,7 @@ enterprise:
       title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
-  - title: DTR API
+  - title: DTR API (swagger)
     path: /reference/dtr/2.7/api/
   - sectiontitle: DTR CLI
     section:
@@ -4210,7 +4208,7 @@ enterprise:
       title: restore
     - path: /reference/dtr/2.7/cli/upgrade/
       title: upgrade
-  - title: UCP API
+  - title: UCP API (swagger)
     path: /reference/ucp/3.2/api/
   - sectiontitle: UCP CLI
     section:
