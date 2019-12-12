@@ -173,8 +173,7 @@ azurefile  kubernetes.io/azure-file   1m
 
 After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Files Shares. This is done using
-Kubernetes Persistent Volumes Claims
-[PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
+Kubernetes [Persistent Volumes Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
 Kubernetes uses an existing Azure Storage Account if one exists inside of the
 Azure Resource Group. If an Azure Storage Account does not exist,
 Kubernetes creates one.
@@ -242,7 +241,7 @@ EOF
 
 ### Troubleshooting
 
-When creating Persistent Volume Claims the volume may constantly stay in a
+When creating Persistent Volume Claims, the volume may constantly stay in a
 `Pending` state.
 
 ```
@@ -256,6 +255,8 @@ have the relevant Kubernetes RBAC permissions. The storage account creates a
 Kubernetes secret to store the Azure Files Storage Account Key.
 
 ```
+$ kubectl describe pvc azure-file-pvc
+...
 Warning    ProvisioningFailed  7s (x3 over 37s)  persistentvolume-controller
 Failed to provision volume with StorageClass "standard": Couldn't create secret
 secrets is forbidden: User "system:serviceaccount:kube-system:persistent-volume-binder"
