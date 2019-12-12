@@ -1692,7 +1692,7 @@ manuals:
 enterprise:
 - sectiontitle: Docker Enterprise
   section:
-  - path: /ee/
+  - path: /ee/overview/
     title: Overview
   - path: /ee/release-notes/
     title: Release notes
