@@ -23,7 +23,7 @@ guides:
   section:
   - sectiontitle: Docker Engine - Community
     section:
-    - title: About Docker Engine - Community
+    - title: Docker Engine - Community
       path: /install/
     - sectiontitle: Cloud
       section:
