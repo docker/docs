@@ -11,18 +11,16 @@ skip_read_time: true
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Get started with Docker
+## Docker Quickstart
 
-Try our multi-part walkthrough that covers writing your first app,
-data storage, networking, and swarms, and ends with your app running on
-production servers in the cloud. Total reading time is less than an hour.
+Try our multi-part Quickstart that covers building an image, using kubernetes and swarm on your development machine, and sharing your containerized applications on [Docker Hub](http://hub.docker.com). Total reading time is less than an hour.
 
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Install Docker Engine - Community
+## Docker Engine - Community
 
 Docker Engine - Community is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
@@ -34,7 +32,8 @@ channel for more predictability.
 </div>
 </div>
 
-## Run Docker anywhere
+## Docker Desktop
+
 <div class="component-container">
     <!--start row-->
     <div class="row">
@@ -54,15 +53,6 @@ channel for more predictability.
                 </div>
                 <h3 id="docker-for-windows"><a href="docker-for-windows/">Docker Desktop for Windows</a></h3>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
-            <div class="component">
-                <div class="component-icon">
-                    <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
-                </div>
-                <h3 id="docker-for-linux"><a href="install/linux/ubuntu/">Docker for Linux</a></h3>
-                <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>
     </div>
