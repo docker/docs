@@ -46,6 +46,7 @@ Enterprise. Items that require action are explained below.
 - Find the URL for your Docker Engine - Enterprise repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
+- At least 10 MB of free space in `/tmp`
 
 > **Note:**
 > IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only. If
