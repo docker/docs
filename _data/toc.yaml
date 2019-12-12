@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /manuals/
+  path: /install/
   node: manuals
 - title: Glossary
   path: /glossary/
@@ -24,8 +24,6 @@ guides:
   section:
   - sectiontitle: Docker Engine - Community
     section:
-    - title: Docker Engine - Community
-      path: /install/
     - sectiontitle: Cloud
       section:
       - sectiontitle: Docker for AWS
@@ -88,18 +86,6 @@ guides:
         title: Binaries
       - path: /install/linux/linux-postinstall/
         title: Optional Linux post-installation steps
-  - sectiontitle: Compatibility between Docker versions
-    section:
-      - path: /engine/ce-ee-node-activate/
-        title: Docker Engine Community to Enterprise Node Activate
-      - path: /engine/migration/
-        title: Migrate to Docker 1.10
-      - path: /engine/breaking_changes/
-        title: Breaking changes
-      - path: /engine/deprecated/
-        title: Deprecated Docker features
-      - path: /engine/faq/
-        title: FAQ
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
