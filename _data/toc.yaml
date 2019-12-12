@@ -1,21 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@DawnWood-Docker 
-5
-235docker/docs-private Private
- Code Issues 26 Pull requests 6 Actions Projects 3 Wiki Security Insights Settings
-docs-private/_data/toc.yaml
- Dawn W Docker toc fix for enterprise landing page
-5406958 2 hours ago
-@mistyhacks@bermudezmt@johndmulhausen@ollypom@joaofnfernandes@usha-mandya@JustinINevill@thaJeztah@londoncalling@DawnWood-Docker@gbarr01@ddeyo@traci-morrison@lena-larionova@FrenchBen@allysmith424@ahh-docker@adrian-plata@bfirsh@kencochrane@anweiss@vieux@tonyhb@nigelpoulton@marcaurele@kendrahavens
-4249 lines (4241 sloc)  191 KB
-  
 horizontalnav:
 - title: Guides
   path: /
@@ -1709,7 +1692,7 @@ manuals:
 enterprise:
 - sectiontitle: Docker Enterprise
   section:
-  - path: /ee/overview
+  - path: /ee/
     title: Overview
   - path: /ee/release-notes/
     title: Release notes
@@ -4265,15 +4248,3 @@ enterprise:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
