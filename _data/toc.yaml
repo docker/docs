@@ -455,7 +455,6 @@ reference:
       title: About versions and upgrading
     - path: /compose/faq/
       title: Frequently asked questions
-
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
   - sectiontitle: Docker CLI (docker)
@@ -1076,54 +1075,6 @@ reference:
       title: up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
-  - sectiontitle: DTR CLI
-    section:
-    - path: /reference/dtr/2.7/cli/
-      title: Overview
-    - path: /reference/dtr/2.7/cli/backup/
-      title: backup
-    - path: /reference/dtr/2.7/cli/destroy/
-      title: destroy
-    - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair
-    - path: /reference/dtr/2.7/cli/install/
-      title: install
-    - path: /reference/dtr/2.7/cli/join/
-      title: join
-    - path: /reference/dtr/2.7/cli/reconfigure/
-      title: reconfigure
-    - path: /reference/dtr/2.7/cli/remove/
-      title: remove
-    - path: /reference/dtr/2.7/cli/restore/
-      title: restore
-    - path: /reference/dtr/2.7/cli/upgrade/
-      title: upgrade
-  - sectiontitle: UCP CLI
-    section:
-    - path: /reference/ucp/3.2/cli/
-      title: docker/ucp overview
-    - path: /reference/ucp/3.2/cli/backup/
-      title: backup
-    - path: /reference/ucp/3.2/cli/dump-certs/
-      title: dump-certs
-    - path: /reference/ucp/3.2/cli/example-config/
-      title: example-config
-    - path: /reference/ucp/3.2/cli/id/
-      title: id
-    - path: /reference/ucp/3.2/cli/images/
-      title: images
-    - path: /reference/ucp/3.2/cli/install/
-      title: install
-    - path: /reference/ucp/3.2/cli/port-check-server/
-      title: port-check-server
-    - path: /reference/ucp/3.2/cli/restore/
-      title: restore
-    - path: /reference/ucp/3.2/cli/support/
-      title: support
-    - path: /reference/ucp/3.2/cli/uninstall-ucp/
-      title: uninstall-ucp
-    - path: /reference/ucp/3.2/cli/upgrade/
-      title: upgrade
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
   - sectiontitle: Docker Engine API
@@ -4248,3 +4199,51 @@ enterprise:
       title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
+  - sectiontitle: DTR CLI
+    section:
+    - path: /reference/dtr/2.7/cli/
+      title: Overview
+    - path: /reference/dtr/2.7/cli/backup/
+      title: backup
+    - path: /reference/dtr/2.7/cli/destroy/
+      title: destroy
+    - path: /reference/dtr/2.7/cli/emergency-repair/
+      title: emergency-repair
+    - path: /reference/dtr/2.7/cli/install/
+      title: install
+    - path: /reference/dtr/2.7/cli/join/
+      title: join
+    - path: /reference/dtr/2.7/cli/reconfigure/
+      title: reconfigure
+    - path: /reference/dtr/2.7/cli/remove/
+      title: remove
+    - path: /reference/dtr/2.7/cli/restore/
+      title: restore
+    - path: /reference/dtr/2.7/cli/upgrade/
+      title: upgrade
+  - sectiontitle: UCP CLI
+    section:
+    - path: /reference/ucp/3.2/cli/
+      title: docker/ucp overview
+    - path: /reference/ucp/3.2/cli/backup/
+      title: backup
+    - path: /reference/ucp/3.2/cli/dump-certs/
+      title: dump-certs
+    - path: /reference/ucp/3.2/cli/example-config/
+      title: example-config
+    - path: /reference/ucp/3.2/cli/id/
+      title: id
+    - path: /reference/ucp/3.2/cli/images/
+      title: images
+    - path: /reference/ucp/3.2/cli/install/
+      title: install
+    - path: /reference/ucp/3.2/cli/port-check-server/
+      title: port-check-server
+    - path: /reference/ucp/3.2/cli/restore/
+      title: restore
+    - path: /reference/ucp/3.2/cli/support/
+      title: support
+    - path: /reference/ucp/3.2/cli/uninstall-ucp/
+      title: uninstall-ucp
+    - path: /reference/ucp/3.2/cli/upgrade/
+      title: upgrade
