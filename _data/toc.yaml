@@ -1681,7 +1681,7 @@ enterprise:
   - path: /ee/
     title: Docker Enterprise
   - path: /ee/release-notes/
-    title: Release notes
+    title: Install or upgrade
   - path: /ee/licensing/
     title: Licensing
   - sectiontitle: Docker Cluster
