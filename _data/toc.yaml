@@ -1689,7 +1689,7 @@ manuals:
       nosync: true
 
 enterprise:
-- path: /ee/overview
+- path: /ee/overview/
   title: Overview
 - path: /ee/release-notes/
   title: Release notes
