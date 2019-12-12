@@ -36,7 +36,7 @@ channel for more predictability.
 <div class="component-container">
     <!--start row-->
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
@@ -45,7 +45,7 @@ channel for more predictability.
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
