@@ -2,6 +2,9 @@
 datafolder: engine-cli
 datafile: docker_manifest_create
 title: docker manifest create
+redirect_from:
+  - /edge/engine/reference/commandline/manifest_create/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
@@ -10,9 +13,5 @@ here, you'll need to find the string by searching this repo:
 
 https://github.com/docker/cli
 -->
-
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

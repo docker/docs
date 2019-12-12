@@ -4,7 +4,7 @@
 	branch = f28e87c7b9dae139855b574e96f22822986249a8
 [submodule "tests/src/golang.org/x/net"]
 	path = tests/src/golang.org/x/net
-	url = https://go.googlesource.com/net
+	url = https://github.com/golang/net
 	branch = 45e771701b814666a7eb299e6c7a57d0b1799e91
 [submodule "tests/src/gopkg.in/yaml.v2"]
 	path = tests/src/gopkg.in/yaml.v2

@@ -202,7 +202,7 @@ host for the controller works fine.
     supplied to replace it with the actual IP address.
 
     The first time you run the `ucp` tool, the `docker run` command pulls the
-    UCP bootstrapper image from Docker Cloud. The tool downloads the packages it
+    UCP bootstrapper image from Docker Hub. The tool downloads the packages it
     needs, and verifies that your system will support a UCP installation.
 
 4. Enter a password for UCP when prompted, and then confirm it.

@@ -1,17 +1,17 @@
 ---
 title: Join Linux nodes to your cluster
 description: Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.
-keywords: Docker EE, UCP, cluster, scale, worker, manager
+keywords: Docker Engine - Enterprise, UCP, cluster, scale, worker, manager
 ---
 
-Docker EE is designed for scaling horizontally as your applications grow in
+Docker Engine - Enterprise is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
-to your needs. You can join Windows Server 2016, IBM z System, and Linux nodes
+to your needs. You can join Windows Server and Linux nodes
 to the cluster.
 
-Because Docker EE leverages the clustering functionality provided by Docker
+Because Docker Engine - Enterprise leverages the clustering functionality provided by Docker
 Engine, you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
-command to add more nodes to your cluster. When you join a new node, Docker EE
+command to add more nodes to your cluster. When you join a new node, Docker Engine - Enterprise
 services start running on the node automatically.
 
 ## Node roles
@@ -23,10 +23,10 @@ When you join a node to a cluster, you specify its role: manager or worker.
   manager nodes allows your swarm to be highly available and tolerant of
   node failures.
 
-  Manager nodes also run all Docker EE components in a replicated way, so
+  Manager nodes also run all Docker Engine - Enterprise components in a replicated way, so
   by adding additional manager nodes, you're also making the cluster highly
   available.
-  [Learn more about the Docker EE architecture.](/enterprise/docker-ee-architecture.md)
+  [Learn more about the Docker Engine - Enterprise architecture.](https://docs.docker.com/ee/docker-ee-architecture/)
 
 - **Worker**: Worker nodes receive and execute your services and applications.
   Having multiple worker nodes allows you to scale the computing capacity of
@@ -37,10 +37,10 @@ When you join a node to a cluster, you specify its role: manager or worker.
 
 ## Join a node to the cluster
 
-You can join Windows Server 2016, IBM z System, and Linux nodes to the cluster,
+You can join Windows Server and Linux nodes to the cluster,
 but only Linux nodes can be managers.
 
-To join nodes to the cluster, go to the Docker EE web UI and navigate to the
+To join nodes to the cluster, go to the UCP web interface and navigate to the
 **Nodes** page.
 
 1.  Click **Add Node** to add a new node.
@@ -60,7 +60,7 @@ To add a Windows node, click **Windows** and follow the instructions in
 [Join Windows worker nodes to a cluster](join-windows-nodes-to-cluster.md).
 
 After you run the join command in the node, the node is displayed on the
-**Nodes** page in the Docker EE web UI. From there, you can change the node's
+**Nodes** page in the UCP web interface. From there, you can change the node's
 cluster configuration, including its assigned orchestrator type.
 [Learn how to change the orchestrator for a node](../set-orchestrator-type.md).    
 
@@ -77,7 +77,7 @@ so that it is:
 
 Pause or drain a node from the **Edit Node** page:
 
-1.  In the Docker EE web UI, browse to the **Nodes** page and select the node.
+1.  In the UCP web interface, browse to the **Nodes** page and select the node.
 2.  In the details pane, click **Configure** and select **Details** to open
     the **Edit Node** page.
 3.  In the **Availability** section, click **Active**, **Pause**, or **Drain**.  
@@ -99,7 +99,7 @@ To promote or demote a manager node:
 4.  Click **Save** and wait until the operation completes.
 5.  Navigate to the **Nodes** page, and confirm that the node role has changed.
 
-If you're load-balancing user requests to Docker EE across multiple manager
+If you're load-balancing user requests to Docker Engine - Enterprise across multiple manager
 nodes, don't forget to remove these nodes from your load-balancing pool when
 you demote them to workers.
 
@@ -107,12 +107,16 @@ you demote them to workers.
 
 You can remove worker nodes from the cluster at any time:
 
-1.  Navigate to the **Nodes** page and select the node.
-2.  In the details pane, click **Actions** and select **Remove**.
-3.  Click **Confirm** when you're prompted.
+1.  Shut down the worker node or have it leave the swarm. See [docker swarm leave](/engine/reference/commandline/swarm_leave/#extended-description) for example usage. 
+2.  Navigate to the **Nodes** page, and select the node.
+3.  In the details pane, click **Actions** and select **Remove**.
+4.  Click **Confirm** when prompted.
 
 Since manager nodes are important to the cluster overall health, you need to
 be careful when removing one from the cluster.
+
+
+![](../../../images/ucp-remove-node.png){: .with-border}
 
 To remove a manager node:
 

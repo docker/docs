@@ -2,7 +2,7 @@
 title: Install UCP offline
 description: Learn how to install Docker Universal Control Plane. on a machine with
   no internet access.
-keywords: UCP, install, offline, Docker EE
+keywords: UCP, install, offline, Docker Enterprise
 ---
 
 The procedure to install Docker Universal Control Plane on a host is the same,
@@ -36,6 +36,15 @@ line:
 
 ```bash
 $ wget <ucp-package-url> -O ucp.tar.gz
+```
+
+### Download a specific version
+
+> ***Note***: Offline packages for UCP 2.2.x are available for different OS distributions. 
+> Copy the URL of your specific OS and version to work with the example below.
+
+```
+$ wget https://packages.docker.com/caas/ucp_images_2.2.14.tar.gz -O ucp_2.2.14.tar.gz
 ```
 
 Now that you have the package in your local machine, you can transfer it to

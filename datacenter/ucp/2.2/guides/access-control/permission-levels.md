@@ -39,7 +39,7 @@ The system provides the following default roles:
 | `View Only`          | The user can view resources like services, volumes, and networks but can't create them. |
 | `Restricted Control` | The user can view and edit volumes, networks, and images but can't run a service or container in a way that might affect the node where it's running. The user can't mount a node directory and can't `exec` into containers. Also, The user can't run containers in privileged mode or with additional kernel capabilities. |
 | `Scheduler`          | The user can view nodes and schedule workloads on them. Worker nodes and manager nodes are affected by `Scheduler` grants. Having `Scheduler` access doesn't allow the user to view workloads on these nodes. They need the appropriate resource permissions, like `Container View`. By default, all users get a grant with the `Scheduler` role against the `/Shared` collection. |
-| `Full Control`       | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users' containers. |
+| `Full Control`       | The user can view and edit volumes, networks, and images. They can create containers without any restriction, but can't see other users' containers. |
 
 ![Diagram showing UCP permission levels](../images/permissions-ucp.svg)
 
@@ -76,4 +76,4 @@ the grants that use the role.
 
 * [Create and manage users](create-and-manage-users.md)
 * [Create and manage teams](create-and-manage-teams.md)
-* [Docker Reference Architecture: Securing Docker EE and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)
+* [Docker Reference Architecture: Securing Docker Enterprise and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)

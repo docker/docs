@@ -1,119 +1,157 @@
 ---
-description: How to install Docker for Windows
+description: How to install Docker Desktop for Windows
 keywords: windows, beta, edge, alpha, install, download
-title: Install Docker for Windows
+title: Install Docker Desktop on Windows
 ---
 
-Docker for Windows is the [Community Edition
-(CE)](https://www.docker.com/community-edition) of Docker for Microsoft Windows.
-To download Docker for Windows, head to Docker Store.
+Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
+You can download Docker Desktop for Windows from Docker Hub.
 
 [Download from Docker
-Store](https://store.docker.com/editions/community/docker-ce-desktop-windows){:
+Hub](https://hub.docker.com/?overlay=onboarding){:
 .button .outline-btn}
 
-##  What to know before you install
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for
-  Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer
-  enables Hyper-V for you, if needed, and restart your machine. After Hyper-V is
-  enabled, VirtualBox no longer works, but any VirtualBox VM images remain.
-  VirtualBox VMs created with `docker-machine` (including the `default` one
-  typically created during Toolbox install) no longer start. These VMs cannot be
-  used side-by-side with Docker for Windows. However, you can still use
-  `docker-machine` to manage remote VMs.
+## What to know before you install
 
-* **System Requirements**:
-  - Windows 10 64bit: Pro, Enterprise or Education (1607 Anniversary Update,
-    Build 14393 or later).
-  - Virtualization is enabled in BIOS. Typically, virtualization is enabled by
-    default. This is different from having Hyper-V enabled. For more detail see
-    [Virtualization must be
-    enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
-  - CPU SLAT-capable feature.
-  - At least 4GB of RAM.
+### System Requirements
 
->  **Note**: If your system does not meet the requirements to run Docker for
-> Windows, you can install [Docker Toolbox](/toolbox/overview.md), which uses
-> Oracle Virtual Box instead of Hyper-V.
+  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later).
+  - Hyper-V and Containers Windows features must be enabled.
+  - The following hardware prerequisites are required to successfully run Client
+Hyper-V on Windows 10:
 
-* **What the Docker for Windows install includes**: The installation provides
-  [Docker Engine](/engine/userguide/), Docker CLI client, [Docker
-  Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and
-  [Kitematic](/kitematic/userguide.md).
-* Containers and images created with Docker for Windows are shared between all
-  user accounts on machines where it is installed. This is because all Windows
-  accounts use the same VM to build and run containers.
-* Nested virtualization scenarios, such as running Docker for Windows on a
-  VMWare or Parallels instance, might work, but come with no guarantees. For
-  more information, see [Running Docker for Windows in nested virtualization
-  scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
+     - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 4GB system RAM
+    - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+
+> **Note:** Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
+**README for Docker Toolbox and Docker Machine users**: Microsoft Hyper-V is required to run Docker Desktop. The Docker Desktop Windows installer enables Hyper-V if required, and restarts your machine. When Hyper-V is enabled, VirtualBox no longer works. However, any existing VirtualBox VM images are retained.
+
+VirtualBox VMs created with `docker-machine` (including the `default` one
+typically created during Toolbox install) no longer start. These VMs cannot be
+used side-by-side with Docker Desktop. However, you can still use
+`docker-machine` to manage remote VMs.
+
+### What's included in the installer
+
+The Docker Desktop installation includes [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and [Kitematic](/kitematic/userguide.md).
+
+Containers and images created with Docker Desktop are shared between all
+user accounts on machines where it is installed. This is because all Windows
+accounts use the same VM to build and run containers.
+
+Nested virtualization scenarios, such as running Docker Desktop on a
+VMWare or Parallels instance might work, but there are no guarantees. For
+more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-for-windows-in-nested-virtualization-scenarios).
+
+**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server.
 
 ### About Windows containers
 
 Looking for information on using Windows containers?
 
 * [Switch between Windows and Linux
-  containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)
-  describes the Linux / Windows containers toggle in Docker for Windows and
-  points you to the tutorial mentioned above.
+  containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers)
+  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers
   (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  provides a tutorial on how to set up and run Windows containers on Windows 10
-  or with Windows Server 2016. It shows you how to use a MusicStore application
+  provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
   with Windows containers.
-* Docker Container Platform for Windows Server 2016 [articles and blog
-  posts](https://www.docker.com/microsoft/) on the Docker website
+* Docker Container Platform for Windows [articles and blog
+  posts](https://www.docker.com/microsoft/) on the Docker website.
 
-## Install Docker for Windows desktop app
+## Install Docker Desktop on Windows
 
-1. Double-click **Docker for Windows Installer.exe** to run the installer.
+1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
-    If you haven't already downloaded the installer (`Docker for Windows
-    Installer.exe`), you can get it from
-    [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
-    It typically downloads to your `Downloads folder`, or you can run it from
+    If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
+    [**Docker Hub**](https://hub.docker.com/?overlay=onboarding).
+    It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. Follow the install wizard to accept the license, authorize the installer, and
-   proceed with the install.
+2. Follow the instructions on the installation wizard to accept the license, authorize the installer, and proceed with the install.
 
-    You are asked to authorize `Docker.app` with your system password during the
+    When prompted, authorize the Docker Desktop Installer with your system password during the
     install process. Privileged access is needed to install networking
     components, links to the Docker apps, and manage the Hyper-V VMs.
 
-3. Click **Finish** on the setup complete dialog to launch Docker.
+3. Click **Finish** on the setup complete dialog and launch the Docker Desktop application.
 
-## Start Docker for Windows
+## Start Docker Desktop
 
-Docker does not start automatically after installation. To start it, search for
-Docker, select **Docker for Windows** in the search results, and click it (or
-hit Enter).
+Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select **Docker Desktop** in the search results.
 
 ![search for Docker app](images/docker-app-search.png){:width="400px"}
 
-When the whale in the status bar stays steady, Docker is up-and-running, and
-accessible from any terminal window.
+When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
 
 ![whale on taskbar](images/whale-icon-systray.png)
 
-If the whale is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker
-Settings](index.md#docker-settings-dialog).
+If the whale icon is hidden in the Notifications area, click the up arrow on the
+taskbar to show it. To learn more, see [Docker Settings](/docker-for-windows/index.md#docker-settings-dialog).
 
-If you just installed the app, you also get a popup success message with
+After installing the Docker Desktop app, you also get a pop-up success message with
 suggested next steps, and a link to this documentation.
 
 ![Startup information](images/docker-app-welcome.png){:width="400px"}
 
-When initialization is complete, select **About Docker** from the notification
-area icon to verify that you have the latest version.
+When initialization is complete, click the whale icon in the Notifications area and select **About Docker Desktop** to verify that you have the latest version.
 
-Congratulations! You are up and running with Docker for Windows.
+Congratulations! You are successfully running Docker Desktop on Windows.
+
+## Uninstall Docker Desktop
+
+To uninstall Docker Desktop from your Windows machine:
+
+1. From the Windows **Start** menu, select **Settings** > **Apps** > **Apps & features**.
+2. Select **Docker Desktop** from the **Apps & features** list and then select **Uninstall**.
+3. Click **Uninstall** to confirm your selection.
+
+> **Note:** Uninstalling Docker Desktop will destroy Docker containers and images local to the machine and remove the files generated by the application.
+
+## Switch between Stable and Edge versions
+
+Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
+
+For example, containers created with a newer Edge version of Docker Desktop may
+not work after you switch back to Stable because they may have been created
+using Edge features that aren't in Stable yet. Keep this in mind as
+you create and work with Edge containers, perhaps in the spirit of a playground
+space where you are prepared to troubleshoot or start over.
+
+To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
+
+### Save and restore data
+
+You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+
+1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
+    want to keep. See [save](/engine/reference/commandline/save) in the Docker
+    Engine command line reference.
+
+2. Use `docker export -o myContainner1.tar container1` to export containers you
+    want to keep. See [export](/engine/reference/commandline/export) in the
+    Docker Engine command line reference.
+
+3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
+
+4. Use `docker load -i images.tar` to reload previously saved images. See
+    [load](/engine/reference/commandline/load) in the Docker Engine.
+
+5. Use `docker import -i myContainer1.tar` to create a file system image
+    corresponding to the previously exported containers. See
+    [import](/engine/reference/commandline/import) in the Docker Engine.
+
+For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
 
 ## Where to go next
 
-* [Getting started](index.md) introduces Docker for Windows.
+* [Getting started](index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to
   deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and

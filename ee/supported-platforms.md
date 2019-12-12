@@ -1,112 +1,93 @@
 ---
-title: About Docker EE
-description: Information about Docker Enterprise Edition Platform 2.0
-keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
+title: Overview
+description: Docker Enterprise product information
+keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
   - /enterprise/supported-platforms/
+  - /cs-engine/
+  - /cs-engine/1.12/
+  - /cs-engine/1.12/upgrade/
+  - /cs-engine/1.13/
+  - /cs-engine/1.13/upgrade/
 green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; margin:auto;"}'
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
-Docker Enterprise Edition (*Docker EE*) is designed for enterprise
-development and IT teams who build, ship, and run business-critical
-applications in production and at scale. Docker EE is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry. For more info about Docker EE, including purchasing
-options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/).
-
-There are currently two versions of Docker EE Engine available:
-
-* 18.03 - Use this version if you're only running Docker EE Engine.
-* 17.06 - Use this version if you're using Docker Enterprise Edition 2.0 (Docker
-Engine, UCP, and DTR).
-
-[Learn more](https://success.docker.com/article/engine-18-03-faqs)
-
-## Docker EE tiers
-
-{% include docker_ce_ee.md %}
-
-### Enterprise Edition Basic
-
-With Docker EE Basic, you can deploy Docker Enterprise Engine
-to manage your container workloads in a flexible way. You can manage workloads
-on Windows, Linux, on-premise or on the cloud.
-
-Docker EE Basic has enterprise class support with defined SLAs, extended
-maintenance cycles for patches for up to 24 months.
-
-[Learn more about the supported platforms](#supported-platforms).
-
-### Enterprise Edition Standard and Advanced
-
-Docker EE Standard has everything the Basic edition has, and extends it with
-private image management, integrated image signing policies, and cluster
-management with support for Kubernetes and Swarm orchestrators.
-
-Docker EE Advanced takes this one step further and allows you to implement
-node-based RBAC policies, image promotion policies, image mirroring, and
-scan your images for vulnerabilities.
-
-[Learn more about Docker EE Standard and Advanced](/ee/index.md).
+Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
+applications at scale in production. Docker Enterprise is an integrated container platform that includes
+Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.
+Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone
+solution  to provide enterprises with the most secure container engine in the industry. For more information
+about Docker Enterprise and Docker Engine - Enterprise, including purchasing options,
+see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
 >
-> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) for the latest list of supported platforms.
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix)
+> for the latest list of supported platforms.
 {: .important}
 
-## Supported platforms
+## Docker Enterprise products
 
-The following table shows all of the platforms that are available for Docker EE.
-Each link in the first column takes you to the installation
-instructions for the corresponding platform. Docker EE is an integrated,
-supported, and certified container platform for the listed cloud providers and
-operating systems.
+{% include docker_ee.md %}
 
-
-### On-premises
-
-These are the operating systems where you can install Docker EE.
-
-| Platform                                                             |     x86_64 / amd64     |  IBM Power (ppc64le)   |     IBM Z (s390x)      |
-|:---------------------------------------------------------------------|:----------------------:|:----------------------:|:----------------------:|
-| [CentOS]({{ page.install-prefix-ee }}/centos.md)                     | {{ page.green-check }} |                        |                        |
-| [Oracle Linux]({{ page.install-prefix-ee }}/oracle.md)               | {{ page.green-check }} |                        |                        |
-| [Red Hat Enterprise Linux]({{ page.install-prefix-ee }}/rhel.md)     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
-| [SUSE Linux Enterprise Server]({{ page.install-prefix-ee }}/suse.md) | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
-| [Ubuntu]({{ page.install-prefix-ee }}/ubuntu.md)                     | {{ page.green-check }} | {{ page.green-check }} | {{ page.green-check }} |
-| [Microsoft Windows Server 2016](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
-| [Microsoft Windows Server 1709](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
-| [Microsoft Windows Server 1803](/install/windows/docker-ee.md)       | {{ page.green-check }} |                        |                        |
-
-
-> When using Docker EE Standard or Advanced
+> Note
 >
-> IBM Power is not supported as managers or workers.
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise,
+> and both Docker Enterprise - Standard and Docker Enterprise - Advanced are now called Docker Enterprise.
+
+### Docker Enterprise
+
+With Docker Enterprise, you can manage container workloads on Windows, Linux, on site, or on the cloud
+in a flexible way.
+
+Docker Enterprise has private image management, integrated image signing policies, and cluster
+management with support for Kubernetes and Swarm orchestrators. It allows you to implement
+node-based RBAC policies, image promotion policies, image mirroring, and
+scan your images for vulnerabilities. It also has support with defined SLAs and extended
+maintenance cycles for patches for up to 24 months.
+
+### New licensing for Docker Enterprise
+
+Starting in version 18.09, Docker Enterprise is aware of the license applied on
+the system. The license summary is available in the `docker info` output on
+standalone or manager nodes.
+
+For Docker Enterprise customers, when you license Universal Control Plane
+(UCP), this same license is applied to the underlying engines in the cluster.
+Docker recommends that Enterprise customers use UCP to manage their license.
+
+Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
+
+Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
+
+Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
+
+[Learn more about Docker Enterprise](/ee/index.md).
+
+
+> When using Docker Enterprise
 > Microsoft Windows Server is not supported as a manager. Microsoft Windows
 > Server 1803 is not supported as a worker.
 
 ### Docker Certified Infrastructure
 
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
-Docker Enterprise Edition (EE) on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates,
-and third-party ecosystem solution briefs.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise
+on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture,
+a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 
-| Platform                                                                                | Docker Enterprise Edition |
-|:----------------------------------------------------------------------------------------|:-------------------------:|
-| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}   |
-| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}   |
-| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}   |
-| IBM Cloud                                                                               |        Coming soon        |
+| Platform  | Docker Enterprise support |
+:----------------------------------------------------------------------------------------|:-------------------------:|
+| [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| [Azure](..\cluster\azure.md) |  {{ page.green-check }}   |
+| VMware  |  coming soon  |
 
+## Docker Enterprise release cycles
 
-## Docker Enterprise Edition release cycles
-
-Each Docker EE release is supported and maintained for 24 months, and
+Each Docker Enterprise release is supported and maintained for 24 months, and
 receives security and critical bug fixes during this period.
 
-The Docker API version is independent of the Docker platform version. We maintain
+The Docker API version is independent of the Docker version. We maintain
 careful API backward compatibility and deprecate APIs and features slowly and
 conservatively. We remove features after deprecating them for a period of
 three stable releases. Docker 1.13 introduced improved interoperability
@@ -114,16 +95,15 @@ between clients and servers using different API versions, including dynamic
 feature negotiation.
 
 ## Upgrades and support
-
-If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker EE to continue to get support. We will continue to support customers
-with valid subscriptions whether the subscription covers Docker EE or
-Commercially Supported Docker. You can choose to stay with your current
-deployed version, or you can upgrade to the latest Docker EE version. For
-more info, see [Scope of Coverage and Maintenance
-Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
+Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the
+latest minor release of Docker Enterprise are not required, however we
+recommend staying on the latest maintenance release of the supported minor
+release you are on. Please see [Maintenance
+Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more
+details on EOL of minor and major versions of Docker Enterprise.
 
 ## Where to go next
 
-- [Install Docker](/engine/installation/index.md)
-- [Get Started with Docker](/get-started/index.md)
+- [Install Docker Engine - Enterprise for RHEL](/install/linux/docker-ee/rhel/)
+- [Install Docker Engine - Enterprise for Ubuntu](/install/linux/docker-ee/ubuntu/)
+- [Install Docker Engine - Enterprise for Windows Server](/install/windows/docker-ee/)

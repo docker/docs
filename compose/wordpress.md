@@ -59,8 +59,9 @@ Compose to set up and run WordPress. Before starting, make sure you have
            WORDPRESS_DB_HOST: db:3306
            WORDPRESS_DB_USER: wordpress
            WORDPRESS_DB_PASSWORD: wordpress
+           WORDPRESS_DB_NAME: wordpress
     volumes:
-        db_data:
+        db_data: {}
     ```
 
    > **Notes**:
@@ -75,7 +76,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
 Now, run `docker-compose up -d` from your project directory.
 
-This runs [docker-compose up](/compose/reference/up/) in detached mode, pulls
+This runs [`docker-compose up`](/compose/reference/up/) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
@@ -120,7 +121,7 @@ If you are using [Docker Machine](/machine/index.md), you can run the command
 `docker-machine ip MACHINE_VM` to get the machine address, and then open
 `http://MACHINE_VM_IP:8000` in a web browser.
 
-If you are using Docker for Mac or Docker for Windows, you can use
+If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
 `http://localhost` as the IP address, and open `http://localhost:8000` in a web
 browser.
 
@@ -130,7 +131,7 @@ browser.
 
 ### Shutdown and cleanup
 
-The command [docker-compose down](/compose/reference/down.md) removes the
+The command [`docker-compose down`](/compose/reference/down.md) removes the
 containers and default network, but preserves your WordPress database.
 
 The command `docker-compose down --volumes` removes the containers, default

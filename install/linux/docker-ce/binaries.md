@@ -1,7 +1,7 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
-title: Install Docker CE from binaries
+title: Install Docker Engine - Community from binaries
 redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
@@ -17,7 +17,13 @@ system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
-`dockerd`). Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+`dockerd`). 
+Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+
+This topic discusses binary installation for both Linux and macOS:
+
+- [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux )
+- [Install client binaries on macOS](#install-client-binaries-on-macos )
 
 ## Install daemon and client binaries on Linux
 
@@ -70,10 +76,10 @@ instructions for enabling and configuring AppArmor or SELinux.
 ### Install static binaries
 
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/x86_64/)
-    (or change `stable` to `edge` or `test`),
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
+    (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
-    version of Docker CE you want to install.
+    version of Docker Engine - Community you want to install.
 
 2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
     binaries are extracted.
@@ -110,12 +116,6 @@ instructions for enabling and configuring AppArmor or SELinux.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-### Next steps
-
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
-- Continue with the [User Guide](/engine/userguide/index.md).
-
 ## Install client binaries on macOS
 
 The macOS binary includes the Docker client only. It does not include the
@@ -123,8 +123,8 @@ The macOS binary includes the Docker client only. It does not include the
 
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `edge` or `test`),
-    and download the `.tgz` file relating to the version of Docker CE you want
+    (or change `stable` to `nightly` or `test`),
+    and download the `.tgz` file relating to the version of Docker Engine - Community you want
     to install.
 
 2.  Extract the archive using the `tar` utility. The `docker` binary is
@@ -155,11 +155,15 @@ The macOS binary includes the Docker client only. It does not include the
 
 ## Upgrade static binaries
 
-To upgrade your manual installation of Docker CE, first stop any
+To upgrade your manual installation of Docker Engine - Community, first stop any
 `dockerd` or `dockerd.exe`  processes running locally, then follow the
 regular installation steps to install the new version on top of the existing
 version.
 
 ## Next steps
 
-Continue with the [User Guide](/engine/userguide/index.md).
+- On Linux:
+    - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+    - Continue with the [User Guide](/engine/userguide/index.md).
+- On macOS:
+    - Continue with the [User Guide](/get-started/index.md).

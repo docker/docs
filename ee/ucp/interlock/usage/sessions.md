@@ -1,24 +1,24 @@
 ---
-title: Persistent (sticky) sessions
+title: Implement persistent (sticky) sessions
 description: Learn how to configure your swarm services with persistent sessions
   using UCP.
-keywords: routing, proxy
+keywords: routing, proxy, cookies, IP hash
 ---
 
-In this example we will publish a service and configure the proxy for persistent (sticky) sessions.
+You can publish a service and configure the proxy for persistent (sticky) sessions using:
 
-# Cookies
-In the following example we will show how to configure sticky sessions using cookies.
+- Cookies
+- IP hashing
 
-First we will create an overlay network so that service traffic is isolated and secure:
+## Cookies
+To configure sticky sessions using cookies:
 
+1. Create an overlay network so that service traffic is isolated and secure, as shown in the following example:
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
-
-Next we will create the service with the cookie to use for sticky sessions:
-
+2. Create a service with the cookie to use for sticky sessions:
 ```bash
 $> docker service create \
     --name demo \
@@ -32,9 +32,9 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Interlock will detect once the service is available and publish it.  Once the tasks are running
-and the proxy service has been updated the application should be available via `http://demo.local`
-and configured to use sticky sessions:
+Interlock detects when the service is available and publishes it. When tasks are running
+and the proxy service is updated, the application is available via `http://demo.local`
+and is configured to use sticky sessions:
 
 ```bash
 $> curl -vs -c cookie.txt -b cookie.txt -H "Host: demo.local" http://127.0.0.1/ping
@@ -64,22 +64,19 @@ $> curl -vs -c cookie.txt -b cookie.txt -H "Host: demo.local" http://127.0.0.1/p
 {"instance":"9c67a943ffce","version":"0.1","metadata":"demo-sticky","request_id":"3014728b429320f786728401a83246b8"}
 ```
 
-Notice the `Set-Cookie` from the application.  This is stored by the `curl` command and sent with subsequent requests
-which are pinned to the same instance.  If you make a few requests you will notice the same `x-upstream-addr`.
+Notice the `Set-Cookie` from the application. This is stored by the `curl` command and is sent with subsequent requests,
+which are pinned to the same instance. If you make a few requests, you will notice the same `x-upstream-addr`.
 
-# IP Hashing
-In this example we show how to configure sticky sessions using client IP hashing.  This is not as flexible or consistent
-as cookies but enables workarounds for some applications that cannot use the other method.
+## IP Hashing
+The following example shows how to configure sticky sessions using client IP hashing. This is not as flexible or consistent
+as cookies but enables workarounds for some applications that cannot use the other method. When using IP hashing, reconfigure Interlock proxy to use [host mode networking](../config/host-mode-networking.md), because the default `ingress` networking mode uses SNAT, which obscures client IP addresses.
 
-First we will create an overlay network so that service traffic is isolated and secure:
-
+1. Create an overlay network so that service traffic is isolated and secure:
 ```bash
 $> docker network create -d overlay demo
 1se1glh749q1i4pw0kf26mfx5
 ```
-
-Next we will create the service with the cookie to use for sticky sessions using IP hashing:
-
+2. Create a service with the cookie to use for sticky sessions using IP hashing:
 ```bash
 $> docker service create \
     --name demo \
@@ -93,9 +90,9 @@ $> docker service create \
     ehazlett/docker-demo
 ```
 
-Interlock will detect once the service is available and publish it.  Once the tasks are running
-and the proxy service has been updated the application should be available via `http://demo.local`
-and configured to use sticky sessions:
+Interlock detects when the service is available and publishes it. When tasks are running
+and the proxy service is updated, the application is available via `http://demo.local`
+and is configured to use sticky sessions:
 
 ```bash
 $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
@@ -122,10 +119,11 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 {"instance":"9c67a943ffce","version":"0.1","metadata":"demo-sticky","request_id":"3014728b429320f786728401a83246b8"}
 ```
 
-You can use `docker service scale demo=10` to add some more replicas.  Once scaled, you will notice that requests are pinned
+You can use `docker service scale demo=10` to add more replicas. When scaled, requests are pinned
 to a specific backend.
 
-Note: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
-expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
-determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
-
+> Note
+> 
+> Due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
+> expected, because internally the proxy uses the new set of replicas to determine a backend on which to pin. When the upstreams are
+> determined, a new "sticky" backend is chosen as the dedicated upstream.

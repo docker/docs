@@ -120,6 +120,16 @@ a.anchorLink {
     visibility: hidden;
 }
 
+a.glossary {
+    color: $body-text-color;
+    text-decoration: none;
+    outline: none;
+     &:hover {
+        opacity: 1;
+        text-decoration: none;
+    }
+}
+
 .highlighter-rouge {
     margin: 15px 0;
 }

@@ -4,7 +4,10 @@ description: Learn how to integrate Docker Trusted Registry with NFS
 keywords: registry, dtr, storage, nfs
 ---
 
-You can configure DTR to store Docker images in an NFS directory.
+You can configure DTR to store Docker images in an NFS directory. Starting in DTR 2.6,
+changing storage backends involves initializing a new metadatastore instead of reusing an existing volume.
+This helps facilitate [online garbage collection](/ee/dtr/admin/configure/garbage-collection/#under-the-hood).
+See [changes to NFS reconfiguration below](/ee/dtr/admin/configure/external-storage/nfs/#reconfigure-dtr-to-use-nfs) if you have previously configured DTR to use NFS.
 
 Before installing or configuring DTR to use an NFS directory, make sure that:
 
@@ -31,41 +34,54 @@ mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory> /tmp/mydir
 One way to configure DTR to use an NFS directory is at install time:
 
 ```bash
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} install \
+docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
   --nfs-storage-url <nfs-storage-url> \
   <other options>
 ```
 
-The NFS storage URL should be in the format `nfs://<nfs server>/<directory>`.
+Use the format `nfs://<nfs server>/<directory>` for the NFS storage URL. To support **NFS v4**, you can now specify additional options when running [docker/dtr install](/reference/dtr/2.6/cli/install/) with `--nfs-storage-url`.
 
-When you join replicas to the DTR cluster, the replicas will pick up that
-configuration, so you don't need to specify it again.
+When joining replicas to a DTR cluster, the replicas will pick up your storage
+configuration, so you will not need to specify it again.
 
 ### Reconfigure DTR to use NFS
 
-If you're upgrading from a previous version of DTR and are already using
-NFS you can continue using the same configurations.
+To support **NFS v4**, more NFS options have been added to the CLI. See [New Features for 2.6.0 - CLI](/ee/dtr/release-notes/#260) for updates to [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/).
 
-If you want to start using the new DTR built-in support for NFS you can
-reconfigure DTR:
+> When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with [reconfiguring and restoring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) before you proceed. To work around the `--nfs-storage-url` flag issue, manually create a storage volume. If DTR is already installed in your cluster, [reconfigure DTR](/reference/dtr/2.6/cli/reconfigure/) with the `--dtr-storage-volume` flag using your newly-created volume.
+>
+> See [Reconfigure Using a Local NFS Volume]( https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) for Docker's recommended recovery strategy.
+{: .warning}
+
+#### DTR 2.6.4
+
+In DTR 2.6.4, a new flag, `--storage-migrated`, [has been added to `docker/dtr reconfigure`](/reference/dtr/2.6/cli/reconfigure/) which lets you indicate the migration status of your storage data during a reconfigure. [Upgrade to 2.6.4](/reference/dtr/2.6/cli/upgrade/) and follow [Best practice for data migration in 2.6.4](/ee/dtr/admin/configure/external-storage/storage-backend-migration/#best-practice-for-data-migration) when switching storage backends. The following shows you how to reconfigure DTR using an NFSv4 volume as a storage backend:
 
 ```bash
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} reconfigure \
-  --nfs-storage-url <nfs-storage-url>
+docker run --rm -it \
+  docker/dtr:{{ page.dtr_version}} reconfigure \
+  --ucp-url <ucp_url> \
+  --ucp-username <ucp_username> \
+  --nfs-storage-url <dtr-registry-nf>
+  --async-nfs
+  --storage-migrated
 ```
 
-If you want to reconfigure DTR to stop using NFS storage, leave the option
-in blank:
+To reconfigure DTR to stop using NFS storage, leave the `--nfs-storage-url` option
+blank:
 
 ```bash
-docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version}} reconfigure \
+docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version}} reconfigure \
   --nfs-storage-url ""
 ```
 
-If the IP address of your NFS server changes, even if the DNS address is kept
-the same, you should reconfigure DTR to stop using NFS storage, and then
-add it back again.
-
 ## Where to go next
 
+- [Switch storage backends](storage-backend-migration.md)
+- [Create a backup](/ee/dtr/admin/disaster-recovery/create-a-backup/)
+- [Restore from a backup](/ee/dtr/admin/disaster-recovery/restore-from-backup/)
 - [Configure where images are stored](index.md)
+- CLI reference pages
+  - [docker/dtr install](/reference/dtr/{{ site.dtr_version }}/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/)
+  - [docker/dtr restore](/reference/dtr/{{ site.dtr_version }}/cli/restore/)

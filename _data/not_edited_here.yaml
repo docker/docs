@@ -12,7 +12,7 @@
 
 overrides:
 - path: /apidocs/
-  description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
+  description: "Auto-generated API docs for DTR and UCP. File an issue."
 
 - path: /engine/api/
   description: "ReDoc/Swagger API specs"
@@ -36,11 +36,11 @@ overrides:
 
 - path: /registry/configuration/
   description: Reference docs for configuring Docker Registry
-  source: https://github.com/docker/distribution/tree/release/2.5/docs/configuration.md
+  source: https://github.com/docker/distribution/tree/release/2.7/docs/configuration.md
 
 - path: /registry/spec/
   description: Docker Registry API references
-  source: https://github.com/docker/distribution/tree/release/2.5/docs/spec/
+  source: https://github.com/docker/distribution/tree/release/2.7/docs/spec/
 
 - path: /compliance/
   description: Docker compliance

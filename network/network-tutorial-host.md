@@ -24,7 +24,7 @@ host.
   [documentation for the `nginx` image](https://hub.docker.com/_/nginx/)
 
 - The `host` networking driver only works on Linux hosts, and is not supported
-  on Docker for Mac, Docker for Windows, or Docker EE for Windows Server.
+  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 
 ## Procedure
 

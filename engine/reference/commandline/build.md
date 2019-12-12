@@ -2,6 +2,9 @@
 datafolder: engine-cli
 datafile: docker_build
 title: docker build
+redirect_from:
+  - /edge/engine/reference/commandline/build/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
@@ -10,7 +13,4 @@ here, you'll need to find the string by searching this repo:
 
 https://github.com/docker/cli
 -->
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

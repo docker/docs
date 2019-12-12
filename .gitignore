@@ -6,5 +6,4 @@ _site/**
 .sass-cache/**
 CNAME
 Gemfile.lock
-_samples/library/**
 _kbase/**

@@ -131,13 +131,13 @@ intermediate artifacts are left behind, and not saved in the final image.
 
 By default, the stages are not named, and you refer to them by their integer
 number, starting with 0 for the first `FROM` instruction. However, you can
-name your stages, by adding an `as <NAME>` to the `FROM` instruction. This
+name your stages, by adding an `AS <NAME>` to the `FROM` instruction. This
 example improves the previous one by naming the stages and using the name in
 the `COPY` instruction. This means that even if the instructions in your
 Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```conf
-FROM golang:1.7.3 as builder
+FROM golang:1.7.3 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
 COPY app.go    .
@@ -181,3 +181,19 @@ if necessary and copies the artifact from there. The syntax is:
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
+## Use a previous stage as a new stage
+
+You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+
+```Dockerfile
+FROM alpine:latest as builder
+RUN apk --no-cache add build-base
+
+FROM builder as build1
+COPY source1.cpp source.cpp
+RUN g++ -o /binary source.cpp
+
+FROM builder as build2
+COPY source2.cpp source.cpp
+RUN g++ -o /binary source.cpp
+```

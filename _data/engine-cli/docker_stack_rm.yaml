@@ -4,26 +4,34 @@ short: Remove one or more stacks
 long: |-
   Remove the stack from the swarm. This command has to be run targeting
   a manager node.
-usage: docker stack rm STACK [STACK...]
+usage: docker stack rm [OPTIONS] STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
+options:
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
 inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
   deprecated: false
   experimental: false
-  experimentalcli: true
+  experimentalcli: false
   kubernetes: true
   swarm: false
-- option: namespace
+- option: orchestrator
   value_type: string
-  default_value: default
-  description: Kubernetes namespace to use
+  description: Orchestrator to use (swarm|kubernetes|all)
   deprecated: false
   experimental: false
-  experimentalcli: true
-  kubernetes: true
+  experimentalcli: false
+  kubernetes: false
   swarm: false
 examples: |-
   ### Remove a stack
@@ -65,6 +73,6 @@ deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: true
-swarm: true
+kubernetes: false
+swarm: false
 

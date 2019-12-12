@@ -1,6 +1,6 @@
 ---
-title: Access control design with Docker EE Standard
-description: Learn how to architect multitenancy by using Docker Enterprise Edition Advanced.
+title: Access control design 
+description: Learn how to architect multi-tenancy by using Docker Enterprise.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 
@@ -53,9 +53,6 @@ built-in collection, `/Shared`.
 
 Other collections are also being created to enable shared `db` applications.
 
-> **Note:** For increased security with node-based isolation, use Docker
-> Enterprise Advanced.
-
 - `/Shared/mobile` hosts all Mobile applications and resources.
 - `/Shared/payments` hosts all Payments applications and resources.
 - `/Shared/db` is a top-level collection for all `db` resources.
@@ -107,9 +104,11 @@ collection boundaries. By assigning multiple grants per team, the Mobile and
 Payments applications teams can connect to dedicated Database resources through
 a secure and controlled interface, leveraging Database networks and secrets.
 
-> **Note:** In Docker Enterprise Standard, all resources are deployed across the
+> Note
+> 
+> In Docker Enterprise, all resources are deployed across the
 > same  group of UCP worker nodes. Node segmentation is provided in Docker
-> Enterprise Advanced and discussed in the [next tutorial](ee-advanced.md).
+> Enterprise and discussed in the [next tutorial](ee-advanced.md).
 
 ![image](../images/design-access-control-adv-2.png){: .with-border}
 
@@ -130,4 +129,4 @@ minus the database tier that is managed by the `db` team.
 
 ## Where to go next
 
-- [Access control design with Docker EE Advanced](ee-advanced.md)
+- [Access control design with Docker Enterprise](ee-advanced.md)

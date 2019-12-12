@@ -1,55 +1,44 @@
 ---
 title: Join Windows worker nodes to your cluster
-description: Join worker nodes that are running on Windows Server 2016 to a Docker EE cluster.
-keywords: Docker EE, UCP, cluster, scale, worker, Windows
+description: Join worker nodes that are running on Windows Server to a Docker Enterprise cluster.
+keywords: Docker Enterprise, UCP, cluster, scale, worker, Windows
 redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
-Docker Enterprise Edition supports worker nodes that run on Windows Server 2016 or 1709.
-Only worker nodes are supported on Windows, and all manager nodes in the cluster
-must run on Linux.
+Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and
+Windows Server 2019. Only worker nodes are supported on Windows, and all
+manager nodes in the cluster must run on Linux. Additionally Windows worker
+nodes can only be used by the Swarm Orchestrator.
 
-Follow these steps to enable a worker node on Windows.
+To enable a worker node on Windows:
 
-1.  Install Docker EE Engine on Windows Server 2016.
+1.  Install Docker Engine - Enterprise on Windows Server 2016 or 2019.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-## Install Docker EE Engine on Windows Server 2016 or 1709
+> Note
+>
+> Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
 
-[Install Docker EE Engine](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
-on a Windows Server 2016 or 1709 instance to enable joining a cluster that's managed by
-Docker Enterprise Edition.
+## Install Docker Engine - Enterprise on Windows Server 
+
+[Install Docker Engine -
+Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
+on a Windows Server 2016 or 2019 instance before joining the node to a Docker
+Enterprise Cluster.
 
 ## Configure the Windows node
 
-Follow these steps to configure the docker daemon and the Windows environment.
+To configure the docker daemon and the Windows environment:
 
-1. Add a label to the node.
-2. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
-3. Run the Windows worker setup script provided with `ucp-agent-win`.
-4. Join the cluster with the token provided by the Docker EE web UI or CLI.
+1. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
+2. Run the Windows worker setup script provided with `ucp-agent-win`.
+3. Join the cluster with the token provided by the Docker UCP web interface or CLI.
 
 ### Add a label to the node
 
-Configure the Docker Engine running on the node to have a label. This makes
-it easier to deploy applications on nodes with this label.
-
-Create the file `C:\ProgramData\docker\config\daemon.json` with the following
-content:
-
-```
-{
-  "labels": ["os=windows"]
-}
-```
-
-Restart Docker for the changes to take effect:
-
-```
-Restart-Service docker
-```
+As of Docker Enterprise 2.1, which includes UCP 3.1, this step is no longer necessary. Windows nodes are automatically assigned the `ostype` label `ostype=windows`. 
 
 ### Pull the Windows-specific images
 
@@ -62,13 +51,19 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
-On Windows Server 2016, in a PowerShell terminal running as Administrator,
-log in to Docker Hub with the `docker login` command and pull the listed images.
+On a Windows Server node, in a PowerShell terminal running as Administrator,
+log in to Docker Hub with the `docker login` command and pull the listed
+images.
 
 ```powershell
 docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
 docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
+
+If the cluster is deployed in an offline site, where the nodes do not have
+access to the Docker Hub, UCP images can be sideloaded onto the Windows Server
+nodes. Follow the instructions on the [install
+offline](/ee/ucp/admin/install/install-offline/) page to sideload the images.
 
 ### Run the Windows node setup script
 
@@ -82,9 +77,9 @@ $script = [ScriptBlock]::Create((docker run --rm {{ page.ucp_org }}/ucp-agent-wi
 Invoke-Command $script
 ```
 
-> Docker daemon restart
+> Note 
 >
-> When you run `windows-script`, the Docker service is unavailable temporarily.
+> If you run `windows-script` when restarting Docker daemon, the Docker service is unavailable temporarily.
 
 The Windows node is ready to join the cluster. Run the setup script on each
 instance of Windows Server that will be a worker node.
@@ -104,30 +99,28 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 ```json
 {
 ...
-		"debug":     true,
-		"tls":       true,
-		"tlscacert": "C:\ProgramData\docker\daemoncerts\ca.pem",
-		"tlscert":   "C:\ProgramData\docker\daemoncerts\cert.pem",
-		"tlskey":    "C:\ProgramData\docker\daemoncerts\key.pem",
-		"tlsverify": true,
+    "debug":     true,
+    "tls":       true,
+    "tlscacert": "C:\\ProgramData\\docker\\daemoncerts\\ca.pem",
+    "tlscert":   "C:\\ProgramData\\docker\\daemoncerts\\cert.pem",
+    "tlskey":    "C:\\ProgramData\\docker\\daemoncerts\\key.pem",
+    "tlsverify": true,
 ...
 }
 ```
 
 ## Join the Windows node to the cluster
 
-Now you can join the cluster by using the `docker swarm join` command that's
-provided by the Docker EE web UI and CLI.
+To join the cluster using the `docker swarm join` command provided by the Docker UCP web interface and CLI:
 
-1.  Log in to the Docker EE web UI with an administrator account.
+1.  Log in to the Docker UCP web interface with an administrator account.
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
-5.  In the **Step 2** section, click the checkbox for
-    "I'm ready to join my windows node."
-6.  Check the **Use a custom listen address** option to specify the address
+5.  In the **Step 2** section, select the check box for "I have followed the instructions and I'm ready to join my Windows node."
+6.  Select the **Use a custom listen address** option to specify the address
     and port where new node listens for inbound cluster management traffic.
-7.  Check the **Use a custom listen address** option to specify the
+7.  Select the **Use a custom listen address** option to specify the
     IP address that's advertised to all members of the cluster for API access.
 
     ![](../../../images/join-windows-nodes-to-cluster-1.png){: .with-border}
@@ -151,8 +144,7 @@ will be a worker node.
 ## Configure a Windows worker node manually
 
 The following sections describe how to run the commands in the setup script
-manually to configure the `dockerd` service and the Windows environment.
-The script opens ports in the firewall and sets up certificates for `dockerd`.
+manually to configure the `dockerd` service and the Windows environment. `dockerd` is the persistent process that manages containers. The script opens ports in the firewall and sets up certificates for `dockerd`.
 
 To see the script, you can run the `windows-script` command without piping
 to the `Invoke-Expression` cmdlet.
@@ -163,7 +155,7 @@ docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }
 
 ### Open ports in the Windows firewall
 
-Docker EE requires that ports 2376 and 12376 are open for inbound TCP traffic.
+Docker Enterprise requires that ports 2376 and 12376 are open for inbound TCP traffic.
 
 In a PowerShell terminal running as Administrator, run these commands
 to add rules to the Windows firewall.
@@ -174,6 +166,8 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
 ```
 
 ### Set up certs for the dockerd service
+
+To set up certs for the dockerd service:
 
 1.  Create the directory `C:\ProgramData\docker\daemoncerts`.
 2.  In a PowerShell terminal running as Administrator, run the following command
@@ -193,12 +187,12 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
     Start-Service docker
     ```
 
-The `dockerd` service and the Windows environment are now configured to join a Docker EE cluster.
+The `dockerd` service and the Windows environment are now configured to join a Docker Enterprise cluster.
 
-> TLS certificate setup
+> Note
 >
-> If the TLS certificates aren't set up correctly, the Docker EE web UI shows the
-> following warning.
+> If the TLS certificates aren't set up correctly, the Docker UCP web interface shows the
+> following warning:
 >
 > ```
 > Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
@@ -206,12 +200,9 @@ The `dockerd` service and the Windows environment are now configured to join a D
 
 ## Windows nodes limitations
 
-Some features are not yet supported on Windows nodes:
+The following features are not yet supported on Windows Server 2016 or 2019:
 
 * Networking
-  * The cluster mode routing mesh can't be used on Windows nodes. You can expose
-  a port for your service in the host where it is running, and use the HTTP
-  routing mesh to make your service accessible using a domain name.
   * Encrypted networks are not supported. If you've upgraded from a previous
   version, you'll also need to recreate the `ucp-hrm` network to make it
   unencrypted.
@@ -226,3 +217,16 @@ Some features are not yet supported on Windows nodes:
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
   instead.
+* Orchestration
+  * Windows Containers can only be scheduled by the Docker Swarm orchestrator.
+
+The following features are not yet supported on Windows Server 2016:
+
+* Networking
+  * The cluster mode routing mesh can't be used on Windows nodes. You can expose
+  a port for your service in the host where it is running, and use the HTTP
+  routing mesh to make your service accessible using a domain name.
+
+## Known Issues
+
+Refer to the [Docker Enterprise UCP release notes](/ee/ucp/release-notes) for Known Issues information.

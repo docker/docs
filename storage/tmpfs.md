@@ -29,7 +29,7 @@ persist in either the host or the container writable layer.
 containers.
 * This functionality is only available if you're running Docker on Linux.
 
-## Choosing the --tmpfs or --mount flag
+## Choose the --tmpfs or --mount flag
 
 Originally, the `--tmpfs` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker
@@ -49,8 +49,8 @@ the `--mount` flag was used for swarm services. However, starting with Docker
   - The `destination` takes as its value the path where the `tmpfs` mount
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
-  - The `tmpfs-type` and `tmpfs-mode` options. See
-    [tmpfs options](#tmpfs-options).
+  - The `tmpfs-size` and `tmpfs-mode` options. See
+    [tmpfs options](#specify-tmpfs-options).
 
 The examples below show both the `--mount` and `--tmpfs` syntax where possible,
 and `--mount` is presented first.

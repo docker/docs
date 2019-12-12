@@ -27,6 +27,13 @@ creates a Unix socket accessible by members of the `docker` group.
 > [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
 {: .warning}
 
+> **Note**:
+>
+> To run Docker without root privileges, see
+> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless.md).
+>
+> Rootless mode is currently available as an experimental feature.
+
 To create the `docker` group and add your user:
 
 1.  Create the `docker` group.
@@ -44,8 +51,14 @@ To create the `docker` group and add your user:
 3.  Log out and log back in so that your group membership is re-evaluated.
 
     If testing on a virtual machine, it may be necessary to restart the virtual machine for changes to take effect.
-
+    
     On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
+    
+    On Linux, you can also run the following command to activate the changes to groups:
+    
+    ```bash 
+    $ newgrp docker 
+    ```
 
 4.  Verify that you can run `docker` commands without `sudo`.
 
@@ -119,6 +132,10 @@ For information about the different storage engines, see
 [Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
+
+## Configure default logging driver
+
+Docker provides the [capability](/config/containers/logging/) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
 
 ## Configure where the Docker daemon listens for connections
 
@@ -479,10 +496,10 @@ and a 10% overall performance degradation, even if Docker is not running.
     ```
 
     If your GRUB configuration file has incorrect syntax, an error occurs.
-    In this case, repeat steps 3 and 4.
+    In this case, repeat steps 2 and 3.
 
     The changes take effect when the system is rebooted.
 
 ## Next steps
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/get-started/index.md).

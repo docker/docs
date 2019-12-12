@@ -1,107 +1,172 @@
 ---
-description: Docker Hub overview
+description: Docker Hub Quickstart
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams
+title: Docker Hub Quickstart
 redirect_from:
 - /docker-hub/overview/
-title: Overview of Docker Hub
+- /apidocs/docker-cloud/
+- /docker-cloud/
+- /docker-cloud/migration/
+- /docker-cloud/migration/cloud-to-swarm/
+- /docker-cloud/migration/cloud-to-kube-aks/
+- /docker-cloud/migration/cloud-to-kube-gke/
+- /docker-cloud/migration/cloud-to-aws-ecs/
+- /docker-cloud/migration/deregister-swarms/
+- /docker-cloud/migration/kube-primer/
+- /docker-cloud/cloud-swarm/
+- /docker-cloud/cloud-swarm/using-swarm-mode/
+- /docker-cloud/cloud-swarm/register-swarms/
+- /docker-cloud/cloud-swarm/register-swarms/
+- /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
+- /docker-cloud/cloud-swarm/create-cloud-swarm-azure/
+- /docker-cloud/cloud-swarm/connect-to-swarm/
+- /docker-cloud/cloud-swarm/link-aws-swarm/
+- /docker-cloud/cloud-swarm/link-azure-swarm/
+- /docker-cloud/cloud-swarm/ssh-key-setup/
+- /docker-cloud/infrastructure/
+- /docker-cloud/infrastructure/deployment-strategies/
+- /docker-cloud/infrastructure/link-aws/
+- /docker-cloud/infrastructure/link-do/
+- /docker-cloud/infrastructure/link-azure/
+- /docker-cloud/infrastructure/link-packet/
+- /docker-cloud/infrastructure/link-softlayer/
+- /docker-cloud/infrastructure/ssh-into-a-node/
+- /docker-cloud/infrastructure/docker-upgrade/
+- /docker-cloud/infrastructure/byoh/
+- /docker-cloud/infrastructure/cloud-on-packet.net-faq/
+- /docker-cloud/infrastructure/cloud-on-aws-faq/
+- /docker-cloud/standard/
+- /docker-cloud/getting-started/
+- /docker-cloud/getting-started/intro_cloud/
+- /docker-cloud/getting-started/connect-infra/
+- /docker-cloud/getting-started/your_first_node/
+- /docker-cloud/getting-started/your_first_service/
+- /docker-cloud/getting-started/deploy-app/1_introduction/
+- /docker-cloud/getting-started/deploy-app/2_set_up/
+- /docker-cloud/getting-started/deploy-app/3_prepare_the_app/
+- /docker-cloud/getting-started/deploy-app/4_push_to_cloud_registry/
+- /docker-cloud/getting-started/deploy-app/5_deploy_the_app_as_a_service/
+- /docker-cloud/getting-started/deploy-app/6_define_environment_variables/
+- /docker-cloud/getting-started/deploy-app/7_scale_the_service/
+- /docker-cloud/getting-started/deploy-app/8_view_logs/
+- /docker-cloud/getting-started/deploy-app/9_load-balance_the_service/
+- /docker-cloud/getting-started/deploy-app/10_provision_a_data_backend_for_your_service/
+- /docker-cloud/getting-started/deploy-app/11_service_stacks/
+- /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
+- /docker-cloud/apps/
+- /docker-cloud/apps/deploy-to-cloud-btn/
+- /docker-cloud/apps/auto-destroy/
+- /docker-cloud/apps/autorestart/
+- /docker-cloud/apps/auto-redeploy/
+- /docker-cloud/apps/load-balance-hello-world/
+- /docker-cloud/apps/deploy-tags/
+- /docker-cloud/apps/stacks/
+- /docker-cloud/apps/ports/
+- /docker-cloud/apps/service-redeploy/
+- /docker-cloud/apps/service-scaling/
+- /docker-cloud/apps/api-roles/
+- /docker-cloud/apps/service-links/
+- /docker-cloud/apps/triggers/
+- /docker-cloud/apps/volumes/
+- /docker-cloud/apps/stack-yaml-reference/
+- /docker-cloud/installing-cli/
+- /docker-cloud/docker-errors-faq/
+- /docker-cloud/release-notes/
+- /docker-store/
+- /apidocs/
+- /apidocs/overview/
 ---
 
-[Docker Hub](https://hub.docker.com) is a cloud-based registry service which
-allows you to link to code repositories, build your images and test them, stores
-manually pushed images, and links to [Docker Cloud](/docker-cloud/) so you can
-deploy images to your hosts. It provides a centralized resource for container
-image discovery, distribution and change management,
-[user and team collaboration](/docker-hub/orgs.md), and workflow automation
-throughout the development pipeline.
-
-Log in to Docker Hub and Docker Cloud using
-[your free Docker ID](/docker-hub/accounts.md).
-
-![Getting started with Docker Hub](/docker-hub/images/getting-started.png)
-
-Docker Hub provides the following major features:
-
-* [Image Repositories](/docker-hub/repos.md): Find and pull images from
-  community and official libraries, and manage, push to, and pull from private
-  image libraries to which you have access.
-* [Automated Builds](/docker-hub/builds.md): Automatically create new images
-  when you make changes to a source code repository.
-* [Webhooks](/docker-hub/webhooks.md): A feature of Automated Builds, Webhooks
-  let you trigger actions after a successful push to a repository.
-* [Organizations](/docker-hub/orgs.md): Create work groups to manage access to
-  image repositories.
-* GitHub and Bitbucket Integration: Add the Hub and your Docker Images to your
-  current workflows.
+[Docker Hub](https://hub.docker.com) is a service provided by Docker for
+finding and sharing container images with your team. It provides the following
+major features:
+* [Repositories](/docker-hub/repos.md): Push and pull container images.
+* [Teams & Organizations](/docker-hub/orgs.md): Manage access to private
+repositories of container images.
+* [Official Images](/docker-hub/official_images.md): Pull and use high-quality
+container images provided by Docker.
+* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull and use high-
+quality container images provided by external vendors. Certified images also
+include support and guarantee compatibility with Docker Enterprise.
+* [Builds](/docker-hub/builds.md): Automatically build container images from
+GitHub and Bitbucket and push them to Docker Hub.
+* [Webhooks](/docker-hub/webhooks.md): Trigger actions after a successful push
+  to a repository to integrate Docker Hub with other services.
 
 
-## Create a Docker ID
 
-To explore Docker Hub, you need to create an account by following the
-directions in [Your Docker ID](/docker-hub/accounts.md).
+### Step 1: Sign up for Docker Hub
 
-> **Note**: You can search for and pull Docker images from Hub without logging
-> in, however to push images you must log in.
+Start by [creating an account](https://hub.docker.com/signup).
 
-Your Docker ID gives you one private Docker Hub repository for free. If you need
-more private repositories, you can upgrade from your free account to a paid
-plan. To learn more, log in to Docker Hub and go to [Billing &
-Plans](https://hub.docker.com/account/billing-plans/), in the Settings menu.
+### Step 2: Create your first repository
 
-### Explore repositories
+To create a repo:
 
-You can find public repositories and images from Docker Hub in two ways. You can
-"Search" from the Docker Hub website, or you can use the Docker command line
-tool to run the `docker search` command. For example if you were looking for an
-ubuntu image, you might run the following command line search:
+1. Sign in to [Docker Hub](https://hub.docker.com).
 
+2. Click on **Create a Repository** on the Docker Hub welcome page:
+
+    ![Welcome](images/index-welcome.png)
+
+3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select
+   **Private**:
+
+    ![Create Repository](images/index-create-repo.png)
+
+    You've created your first repo. You should see:
+
+    ![Repository Created](images/index-repo-created.png)
+
+### Step 3: Download and install Docker Desktop
+
+We'll need to download Docker Desktop to build and push a container image to
+Docker Hub.
+
+1. Download and install [Docker Desktop](https://docker.com/get-started). If on
+Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community).
+
+2. Open the terminal and sign in to Docker Hub on your computer by running
+   `docker login`.
+
+### Step 4: Build and push a container image to Docker Hub from your computer
+
+1. Start by creating a [Dockerfile](https://docs.docker.com/engine/reference/builder/)
+to specify your application as shown below:
+```shell
+cat > Dockerfile <<EOF
+FROM busybox
+CMD echo "Hello world! This is my first Docker image."
+EOF
 ```
-    $ docker search ubuntu
-```
 
-Both methods list the available public repositories on Docker Hub which match
-the search term.
+2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker
+   image.
 
-Private repositories do not appear in the repository search results. To see all
-the repositories you can access and their status, view your "Dashboard" page on
-[Docker Hub](https://hub.docker.com).
+3. Test your docker image locally by running `docker run <your_username>/my-first-repo`.
 
-### Use Official Repositories
+4. Run `docker push <your_username>/my-first-repo` to push your Docker image to
+Docker Hub.
 
-Docker Hub contains a number of [Official
-Repositories](http://hub.docker.com/explore/). These are public, certified
-repositories from vendors and contributors to Docker. They contain Docker images
-from vendors like Canonical, Oracle, and Red Hat that you can use as the basis
-to build your applications and services.
+    You should see output similar to:
 
-With Official Repositories you know you're using an optimized and
-up-to-date image that was built by experts to power your applications.
+    ![Terminal](images/index-terminal-2019.png)
 
-> **Note**: If you would like to contribute an Official Repository for your
-> organization or product, see the documentation on
-> [Official Repositories on Docker Hub](/docker-hub/official_repos.md) for more
-> information.
+    And in Docker Hub, your repository should have a new `latest` tag available
+    under **Tags**:
 
+    ![Tag Created](images/index-tag.png)
 
-##  Work with Docker Hub image repositories
+Congratulations! You've successfully:
+- Signed up for Docker Hub
+- Created your first repository
+- Built a Docker container image on your computer
+- Pushed it to Docker Hub
 
-Docker Hub provides a place for you and your team to build and ship Docker
-images.
+### Next steps
 
-You can configure Docker Hub repositories in two ways:
-
-* [Repositories](/docker-hub/repos.md), which allow you to push images from a
-  local Docker daemon to Docker Hub, and
-* [Automated Builds](/docker-hub/builds.md), which link to a source code
-  repository and trigger an image rebuild process on Docker Hub when changes are
-  detected in the source code.
-
-You can create public repositories which can be accessed by any other Hub user,
-or you can create private repositories with limited access you control.
-
-### Docker commands and Docker Hub
-
-Docker itself provides access to Docker Hub services via the
-[`docker search`](/engine/reference/commandline/search.md),
-[`pull`](/engine/reference/commandline/pull.md),
-[`login`](/engine/reference/commandline/login.md), and
-[`push`](/engine/reference/commandline/push.md) commands.
+- Create an [organization](orgs.md) to use Docker Hub with your team.
+- Automatically build container images from code through [builds](builds/index.md).
+- [Explore](https://hub.docker.com/explore) official & publisher images.
+- [Upgrade your plan](upgrade.md) to push additional private Docker images to
+Docker Hub.

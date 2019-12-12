@@ -9,7 +9,7 @@ redirect_from:
 By default all files created inside a container are stored on a writable
 container layer. This means that:
 
-- The data doesn't persist when that container is no longer running, and it can be
+- The data doesn't persist when that container no longer exists, and it can be
   difficult to get the data out of the container if another process needs it.
 - A container's writable layer is tightly coupled to the host machine
   where the container is running. You can't easily move the data somewhere else.
@@ -22,6 +22,7 @@ container layer. This means that:
 Docker has two options for containers to store files in the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
 _bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
+If you're running Docker on Windows you can also use a _named pipe_.
 
 Keep reading for more information about these two ways of persisting data.
 
@@ -100,7 +101,11 @@ mounts is to think about where the data lives on the Docker host.
   information. For instance, internally, swarm services use `tmpfs` mounts to
   mount [secrets](/engine/swarm/secrets.md) into a service's containers.
 
-Bind mounts and volumes can both mounted into containers using the `-v` or
+- **[named pipes](https://docs.microsoft.com/en-us/windows/desktop/ipc/named-pipes)**: An `npipe`
+  mount can be used for communication between the Docker host and a container. Common use case is
+  to run a third-party tool inside of a container and connect to the Docker Engine API using a named pipe.
+
+Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
 mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
 we recommend using the `--mount` flag for both containers and services, for

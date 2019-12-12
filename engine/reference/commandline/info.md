@@ -2,6 +2,9 @@
 datafolder: engine-cli
 datafile: docker_info
 title: docker info
+redirect_from:
+  - /edge/engine/reference/commandline/info/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
@@ -10,9 +13,6 @@ here, you'll need to find the string by searching this repo:
 
 https://www.github.com/docker/cli
 -->
-{% if page.datafolder contains '-edge' %}
-  {% include edge_only.md section="cliref" %}
-{% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}
 
 ## Warnings about kernel support

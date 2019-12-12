@@ -26,8 +26,9 @@ rule restricts external access to all IP addresses except 192.168.1.1:
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
 ```
 
-You could instead allow connections from a source subnet. The following rule
-only allows access from the subnet 192.168.1.0/24:
+Please note that you will need to change `ext_if` to correspond with your
+host's actual external interface. You could instead allow connections from a
+source subnet. The following rule only allows access from the subnet 192.168.1.0/24:
 
 ```bash
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.0/24 -j DROP
@@ -45,16 +46,16 @@ the source and destination. For instance, if the Docker daemon listens on both
 192.168.1.99 and 10.1.2.3, you can make rules specific to `10.1.2.3` and leave
 `192.168.1.99` open.
 
-`iptables` is complicated and more complicated rule are out of scope for this
+`iptables` is complicated and more complicated rules are out of scope for this
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
 
 ## Prevent Docker from manipulating iptables
 
-To prevent Docker from manipulating the `iptables` policies at all, set the
-`iptables` key to `false` in `/etc/docker/daemon.json`. This is inappropriate
-for most users, because the `iptables` policies then need to be managed by hand.
+It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker/daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
+
+For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
 
 ## Next steps
 

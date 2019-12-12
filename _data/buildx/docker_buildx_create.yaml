@@ -1,0 +1,73 @@
+command: docker buildx create
+short: Create a new builder instance
+long: Create a new builder instance
+usage: docker buildx create [OPTIONS] [CONTEXT|ENDPOINT]
+pname: docker buildx
+plink: docker_buildx.yaml
+options:
+- option: append
+  value_type: bool
+  default_value: "false"
+  description: Append a node to builder instead of changing it
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: driver
+  value_type: string
+  description: 'Driver to use (available: [])'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: leave
+  value_type: bool
+  default_value: "false"
+  description: Remove a node from builder instead of changing it
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: name
+  value_type: string
+  description: Builder instance name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: node
+  value_type: string
+  description: Create/modify node with given name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: platform
+  value_type: stringArray
+  default_value: '[]'
+  description: Fixed platforms for current node
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: use
+  value_type: bool
+  default_value: "false"
+  description: Set the current builder instance
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

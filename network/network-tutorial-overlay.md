@@ -64,7 +64,7 @@ If you don't have three hosts handy, an easy solution is to set up three
 Ubuntu hosts on a cloud provider such as Amazon EC2, all on the same network
 with all communications allowed to all hosts on that network (using a mechanism
 such as EC2 security groups), and then to follow the
-[installation instructions for Docker CE on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
+[installation instructions for Docker Engine - Community on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
 
 ### Walkthrough
 
@@ -88,7 +88,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-1> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
@@ -97,7 +97,7 @@ and will be connected together using an overlay network called `ingress`.
     the `--advertise-addr` flag is optional.
 
     ```bash
-    $ docker swarm --join --token <TOKEN> \
+    $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-2> \
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
@@ -623,7 +623,7 @@ need to have Docker installed and running.
     ping: bad address 'alpine2'
     ```
 
-7.  Detach from `alpine2` without stopping it by using the detach sequence,
+7.  Detach from `alpine1` without stopping it by using the detach sequence,
     `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
     If you wish, attach to `alpine2` and repeat steps 4, 5, and 6 there,
     substituting `alpine1` for `alpine2`.
