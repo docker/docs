@@ -4,6 +4,7 @@ datafile: docker_plugin_set
 title: docker plugin set
 redirect_from:
   - /edge/engine/reference/commandline/plugin_set/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

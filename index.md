@@ -5,6 +5,7 @@ landing: true
 title: Docker Documentation
 notoc: true
 notags: true
+skip_read_time: true
 ---
 {% assign page.title = site.name %}
 
@@ -13,7 +14,7 @@ notags: true
 
 ## Get started with Docker
 
-Try our new multi-part walkthrough that covers writing your first app,
+Try our multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 
@@ -22,45 +23,47 @@ production servers in the cloud. Total reading time is less than an hour.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Try Docker Enterprise Edition
+## Try Docker Enterprise
 
-Run your solution in production with Docker Enterprise Edition to get a
+Run your solution in production with Docker Enterprise to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
-Docker EE without installing anything.
+Docker Enterprise without installing anything.
 
-[Try Docker Enterprise Edition](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
+[Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
 </div>
 </div>
 
-## Docker Editions
+## Docker products
 
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Community Edition
+### Docker Engine - Community
 
-Get started with Docker and experimenting with container-based apps. Docker CE
+Get started with Docker and experimenting with container-based apps. Docker Engine - Community
 is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
 
-[Learn more about Docker CE](/install/){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Enterprise Edition
+### Docker Enterprise
 
 Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker EE Advanced comes with enterprise
-[add-ons](#docker-ee-add-ons) like UCP and DTR.
+the industry to modernize all applications. Docker Enterprise comes with enterprise
+[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
+orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
+securing images in an enterprise grade registry.
 
-[Learn more about Docker EE](/ee/supported-platforms/){: class="button outline-btn"}
+[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->

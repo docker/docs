@@ -1,12 +1,12 @@
 ---
-title: Deploy a layer 7 routing solution 
+title: Deploy a layer 7 routing solution
 description: Learn the deployment steps for the UCP layer 7 routing solution
 keywords: routing, proxy, interlock
 redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
 ---
 
-This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.
+This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh (HRM).
 
 ## Prerequisites
 
@@ -20,8 +20,9 @@ By default, layer 7 routing is disabled, so you must first
 enable this service from the UCP web UI.
 
 1. Log in to the UCP web UI as an administrator.
-2. Navigate to **Admin Settings**
-3. Select **Layer 7 Routing** and then select **Enable Layer 7 Routing**
+2. Navigate to **Admin Settings**.
+3. Select **Layer 7 Routing**.
+4. Select the **Enable Layer 7 Routing** check box.
 
 ![http routing mesh](../../images/interlock-install-4.png){: .with-border}
 
@@ -29,7 +30,7 @@ By default, the routing mesh service listens on port 8080 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
 them.
 
-When 7 routing is enabled:
+When layer 7 routing is enabled:
 
 1. UCP creates the `ucp-interlock` overlay network.
 2. UCP deploys the `ucp-interlock` service and attaches it both to the Docker
@@ -42,14 +43,13 @@ to communicate.
 4. The `ucp-interlock-extension` generates a configuration to be used by
 the proxy service. By default the proxy service is NGINX, so this service
 generates a standard NGINX configuration. UCP creates the `com.docker.ucp.interlock.conf-1` configuration file and uses it to configure all
-the internal components of this service. 
+the internal components of this service.
 5. The `ucp-interlock` service takes the proxy configuration and uses it to
 start the `ucp-interlock-proxy` service.
 
-At this point everything is ready for you to start using the layer 7 routing
-service with your swarm workloads.
+Now you are ready to use the layer 7 routing service with your Swarm workloads. There are three primary Interlock services: core, extension, and proxy. To learn more about these services, see [TOML configuration options](https://docs.docker.com/ee/ucp/interlock/config/#toml-file-configuration-options).
 
-The following code sample provides a default UCP configuration (this will be created automatically when enabling Interlock as per section [Enable layer 7 routing](#enable-layer-7-routing)):
+The following code sample provides a default UCP configuration. This will be created automatically when enabling Interlock as described in this section.
 
 ```toml
 ListenAddr = ":8080"
@@ -118,7 +118,7 @@ PollInterval = "3s"
 
 ## Enable layer 7 routing manually
 
-Interlock can also be enabled from the command line by following the below sections.
+Interlock can also be enabled from the command line, as described in the following sections.
 
 ### Work with the core service configuration file
 
@@ -160,25 +160,24 @@ oqkvv1asncf6p2axhx41vylgt
 Next, create a dedicated network for Interlock and the extensions:
 
 ```bash
-$> docker network create -d overlay interlock
+$> docker network create --driver overlay ucp-interlock
 ```
 
 ### Create the Interlock service
 
 Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
-are recommended to run on workers.  See the [Production](./production.md) section for more information
-on setting up for an production environment.
+are recommended to run on workers. See the [Production](./production.md) section for more information
+on setting up for a production environment.
 
 ```bash
 $> docker service create \
-    --name interlock \
+    --name ucp-interlock \
     --mount src=/var/run/docker.sock,dst=/var/run/docker.sock,type=bind \
-    --network interlock \
+    --network ucp-interlock \
     --constraint node.role==manager \
     --config src=service.interlock.conf,target=/config.toml \
     {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
-sjpgq7h621exno6svdnsvpv9z
 ```
 
 At this point, there should be three (3) services created: one for the Interlock service,
@@ -186,17 +185,17 @@ one for the extension service, and one for the proxy service:
 
 ```bash
 $> docker service ls
-ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
-lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                *:80->80/tcp *:443->443/tcp
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
-sjpgq7h621ex        interlock           replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
+ID                  NAME                     MODE                REPLICAS            IMAGE                                                                PORTS
+sjpgq7h621ex        ucp-interlock            replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
+oxjvqc6gxf91        ucp-interlock-extension  replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
+lheajcskcbby        ucp-interlock-proxy      replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}        *:80->80/tcp *:443->443/tcp
 ```
 
-The Interlock traffic layer is now deployed. 
+The Interlock traffic layer is now deployed.
 
 ## Next steps
 
-- [Configure Interlock](../config/index.md) 
+- [Configure Interlock](../config/index.md)
 - [Deploy applications](../usage/index.md)
 - [Production deployment information](./production.md)
 - [Offline installation](./offline-install.md)

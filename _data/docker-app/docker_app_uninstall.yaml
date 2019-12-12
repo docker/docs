@@ -1,0 +1,51 @@
+command: docker app uninstall
+short: Uninstall an application
+long: Uninstall an application
+usage: docker app uninstall INSTALLATION_NAME [--target-context TARGET_CONTEXT] [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: credential-set
+  value_type: stringArray
+  default_value: '[]'
+  description: |
+    Use a YAML file containing a credential set or a credential set present in the credential store
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: force
+  value_type: bool
+  default_value: "false"
+  description: Force removal of installation
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: target-context
+  value_type: string
+  description: |
+    Context on which the application is installed (default: <current-context>)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: with-registry-auth
+  value_type: bool
+  default_value: "false"
+  description: Sends registry auth
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app uninstall myinstallation --target-context=mycontext
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

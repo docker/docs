@@ -30,7 +30,7 @@ The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
-A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
+A [container](/../../glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
@@ -196,8 +196,8 @@ or a list:
       args:
         - buildno=1
         - gitcommithash=cdc3b19
-        
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
+
+> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
 
@@ -1292,13 +1292,14 @@ then read-write is used.
       - restart: no
       - restart: always
       - restart: on-failure
+      - restart: unless-stopped
 
 {: id="cpu-and-other-resources"}
 
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 
 > **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.

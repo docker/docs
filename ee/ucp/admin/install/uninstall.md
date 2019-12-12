@@ -35,6 +35,16 @@ docker container run --rm -it \
 This runs the uninstall command in interactive mode, so that you are prompted
 for any necessary configuration values.
 
+> **Important**: If the `uninstall-ucp` command fails, you can run the following commands to manually uninstall UCP:
+```bash
+#Run the following command on one manager node to remove remaining UCP services
+docker service rm $(docker service ls -f name=ucp- -q)
+#Run the following command on each manager node to remove remaining UCP containers
+docker container rm -f $(docker container ps -a -f name=ucp- -f name=k8s_ -q)
+#Run the following command on each manager node to remove remaining UCP volumes
+docker volume rm $(docker volume ls -f name=ucp -q)
+```
+
 The UCP configuration is kept in case you want to reinstall UCP with the same
 configuration. If you want to also delete the configuration, run the uninstall
 command with the `--purge-config` option.

@@ -4,8 +4,8 @@ datafile: docker_volume_inspect
 title: docker volume inspect
 redirect_from:
   - /edge/engine/reference/commandline/volume_inspect/
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

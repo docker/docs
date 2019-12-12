@@ -13,16 +13,20 @@ and writes them in files using the JSON format. The JSON format annotates each l
 origin (`stdout` or `stderr`) and its timestamp. Each log file contains information about
 only one container.
 
+```json
+{"log":"Log line is here\n","stream":"stdout","time":"2019-01-01T11:11:11.111111111Z"}
+```
+
 ## Usage
 
 To use the `json-file` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more information about
+`C:\ProgramData\docker\config\` on Windows Server. For more information about
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-The following example sets the log driver to `json-file` and sets the `max-size` and 'max-file' options.
+The following example sets the log driver to `json-file` and sets the `max-size` and `max-file` options.
 
 ```json
 {
@@ -33,7 +37,7 @@ The following example sets the log driver to `json-file` and sets the `max-size`
   }
 }
 ```
-**Note**: `log-opt` configuration options in the `daemon.json` configuration		
+**Note**: `log-opts` configuration options in the `daemon.json` configuration		
 file must be provided as strings. Boolean and numeric values (such as the value		
 for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 

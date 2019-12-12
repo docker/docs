@@ -5,9 +5,12 @@ title: docker-compose create
 notoc: true
 ---
 
+> **This command is deprecated.** Use the [up](up.md) command with `--no-start`
+instead.
+{: .warning }
+
 ```
 Creates containers for a service.
-This command is deprecated. Use the `up` command with `--no-start` instead.
 
 Usage: create [options] [SERVICE...]
 

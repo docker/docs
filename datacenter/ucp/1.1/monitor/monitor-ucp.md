@@ -1,9 +1,6 @@
 ---
 description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
 keywords: Docker, UCP, troubleshoot
-redirect_from:
-- /ucp/manage/monitor-ucp/
-- /ucp/monitor/monitor-ucp/
 title: Monitor your cluster
 ---
 

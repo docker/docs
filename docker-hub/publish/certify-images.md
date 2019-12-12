@@ -1,6 +1,6 @@
 ---
 description: Run certification tests against your images
-keywords: Docker, docker, store, certified content, images
+keywords: Docker, Docker Hub, store, certified content, images
 title: Certify Docker images
 redirect_from:
 - /docker-store/certify-images/
@@ -30,7 +30,7 @@ The `inspectDockerImage` tool does the following:
 
 - Checks if a Linux Docker image is running `supervisord` to launch multiple services.
 
-  > Running `supervisord` in a container is not a best practice for images destined for Doctor Store. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.
+  > Running `supervisord` in a container is not a best practice for images destined for Docker Hub. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.
 
 - Attempts to start a container from the Docker image to ensure that the image is functional.
 
@@ -46,15 +46,15 @@ The `inspectDockerImage` tool will detect issues and output them as **warnings**
 
 If you are publishing and certifying multiple versions for a Docker image, you will need to run the `inspectDockerImage` tool on each Docker image and send each result to Docker Hub.
 
-If you are publishing and certifying a multi-architecture Docker image (for example, Linux, Power, s390x, Windows) you will need to run the `inspectDockerImage` tool on the Docker EE server running on each architecture and send the results to Docker Hub.
+If you are publishing and certifying a multi-architecture Docker image (for example, Linux, Power, s390x, Windows) you will need to run the `inspectDockerImage` tool on the Docker Engine - Enterprise server running on each architecture and send the results to Docker Hub.
 
 Details on how to run the `inspectDockerImage` tool and send the results to Docker Hub are in the sections that follow.
 
 ### Prerequisites
 
-Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://hub.docker.com/editions/enterprise/docker-ee-trial).
+Your Docker Engine - Enterprise installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://hub.docker.com/editions/enterprise/docker-ee-trial).
 
-- Docker EE (on the server for verifying submissions)
+- Docker Engine - Enterprise (on the server for verifying submissions)
 - inspectDockerImage tool
 
 ### Set up testing environment

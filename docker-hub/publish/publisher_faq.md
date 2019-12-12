@@ -9,38 +9,21 @@ redirect_from:
 
 ## Certification program
 
-### What is the certification program for images and plugins, and what are some benefits?
+### What is the certification program for containers and plugins, and what are some benefits?
 
-The Docker Certification program for Infrastructure, Images, and Plugins is
+The Docker Certification program for Containers and Plugins is
 designed for both technology partners and enterprise customers to recognize
 high-quality Containers and Plugins, provide collaborative support, and ensure
-compatibility with Docker EE. Docker Certification is aligned to the available
-Docker EE infrastructure and gives enterprises a trusted way to run more
+compatibility with the Docker Enterprise platform. Docker Certified products give enterprises a trusted way to run more
 technology in containers with support from both Docker and the publisher. The
-[Docker Technology Partner guide](https://www.docker.com/partners/partner-program#/technology_partner)
-explains the Technology Partner program and the Docker Certification Program for
-Infrastructure, Images, and Plugins in more detail.
+[Docker Technology Partner guide](https://www.docker.com/sites/default/files/d8/2018-12/Docker-Technology-Partner-Program-Guide-120418.pdf)
+explains the Technology Partner program, inclusive of process and requirements to Certify Containers and Plugins.
 
 ## Publisher signup and approval
 
 ### How do I get started with the publisher signup and approval process?
 
-Start by applying to be a Docker Technology Partner at https://goto.docker.com/partner and click on "Publisher".
-
-* Requires acceptance of partnership agreement for completion
-* Identify content that can be listed on Hub and includes a support offering
-* Test your image against Docker Certified Infrastructure version 17.03 and
-above (Plugins must run on 17.03 and above).
-* Submit your image for Certification through the publisher portal. Docker
-scans the image and work with you to address vulnerabilities. Docker also
-conducts a best practices review of the image.
-* Be a TSAnet member or join the Docker Limited Group.
-* Upon completion of Certification criteria, and acceptance by Docker,
-Publisher’s product page is updated to reflect Certified status.
-
-### What is the Docker Hub Publisher Program application timeline?
-
-1-2 weeks.
+Start by completing our [Technology Partner application](https://goto.docker.com/2019-Partner-Program-Technology.html). Docker's partner team will review your application, and follow up directly with further steps. If you have any questions or concerns, please reach out directly to us at partners@docker.com!
 
 ### Can we have a group of people work on the same product and publish to Docker Hub? (This replicates our internal workflow where more than one person is working on Dockerizing our product.)
 
@@ -52,13 +35,14 @@ Yes. You can submit your content as a team.
 
 The customer will be given the permissions to docker pull any tag associated with the source repo specified. We recommend that you create a distinct repo per plan and only use tags for different versions of that specific plan. For example, if you have a community, pro, and enterprise plan of a single product, you should create three separate repos, `namespace/community, namespace/pro, and namespace/enterprise`. Once a customer is entitled to your enterprise plan, they will be able to pull `store/namespace/enterprise:anytag`.
 
-### How long does it typically take to have an image approved?
-
-2 Weeks.
+### What is the typical publishing time for new products and updates?
+Products are typically published within 24hrs of submission. 
 
 ### Once a product is published, what is the process for pushing a new build (1.2, 1.3)? Will we simply edit the same product, adding the newly tagged repos?
 
 Edit the same product and update with the newly tagged repos.
+
+Additionally, for product updates, you may include a set of *Release Notes*. These notes will not be published with the product listing itself. Instead, they will be emailed directly to the current subscriber of the product. This ensures that consumers will have timely, valuable alerts about the availability of new images and significant changes. 
 
 ### On the Information page, organization details are required. Do we need to fill those in again for every product we publish, or are they carried over? And if we change them for a later image publish, are they updated for all images published by our organization?
 
@@ -71,7 +55,7 @@ We don't support the abiltiy to view available tags for published products becau
 
 Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
 
-We aim to have product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access. (Expected Q3 2018)
+In the future, we may enable product listings published with the concept of versions, allowing publishers to manage which versions of their products they expose to customers for access.
 
 ### On the page for another vendor’s product on Docker Hub, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
@@ -99,7 +83,7 @@ We aim to have product listings published with the concept of versions, allowing
 *Tier Description* is what you see once users get entitled to a plan. For instance, in https://hub.docker.com/images/openmaptiles-openstreetmap-maps/plans/f1fc533a-76f0-493a-80a1-4e0a2b38a563?tab=instructions `A detailed street map of any place on a planet. Evaluation and non-production use. Production use license available separately` is what this publisher entered in the Tier description
 *Installation instructions* is documentation on installing your software. In this case the documentation is just `Just launch the container and the map is going to be available on port 80 - ready-to-use - with instructions and list of available styles.` (We recommend more details for any content that's a certification candidate).
 
-### How can I remove a submission? I don’t want to currently have this image published as it is missing several information.
+### How can I remove a published product?
 
 If you would like your submission removed, let us know by contacting us at
 publisher-support@docker.com.
@@ -133,9 +117,9 @@ For instance, if you have a `Developer` Plan, that is mapped to repositories sto
 ### What options are presented to users to pull an image?
 
 We provide users the following options to access your software
-* logged-in users.
-* users who have accepted ToS
-* all users (including users without Docker Identity)
+* Logged-in users
+* Subscribed users only (requires ToS acceptance)
+* All users (including users without Docker Identity)
 Here is a [screenshot](https://user-images.githubusercontent.com/2453622/32067299-00cf1210-ba83-11e7-89f8-15deed6fef62.png) to describe how publishers can update the options provided to customers.
 
 ### If something is published as a free tier, for subscribed users only, does a user need to explicitly click Accept on the license terms for which we provide the link before they can download the image?
@@ -158,21 +142,8 @@ from Docker Hub. The container may continue running. If you have a licensing
 scheme built into the container, the licensing scheme can be a forcing function
 and stop the container. (_We do not build anything into the container, it is up to the publisher_).
 
-### How does a customer transition from a Trial to a Paid subscription? Question assumes these are two separate pulls from Docker Hub, or can they just drop in a license through Docker Hub?
-
-Publisher can provide two different tokens or let customers use the same token
-and internally map the customer to a paid plan vs a free trial.
-
-### What are Docker Hub pricing plans like? Can I have metered pricing?
-
-As a publisher you can charge a subscription fee every month in USD. The amount
-is determined by you. We are working on other pricing options. If you have
-feedback about pricing, send us an email at publisher-support@docker.com
-
-### As a publisher, I have not setup any payment account. How does money get to me if my commercial content gets purchased by customers?
-
-We (Docker) cut you a check post a revenue share. Your Docker Hub Vendor
-Agreement should cover specifics.
+### Does Docker Hub offer a Subscription service, handle our invoicing, payments, etc? What happened to Pay-via-Docker?
+Docker has deprecated the Pay-via-Docker subscription service. At this time, Docker Hub only supports distribution of content, under the BYOL Ungated model. In the future, we intend to release BYOL Gated functionality as well. If neither of these options will work for your product and licensing structure, please do inform your partner manager to help guide our feature prioritization. 
 
 ### How does Docker handle Export control? Can individual countries be specified if differing from Docker's list of embargoed countries?
 
@@ -185,16 +156,15 @@ specific groups. Send us an email at publisher-support if you have questions
 
 ### Where can I view customer insights?
 
-Analytics reports are only available to Publishers with Certified or Commercial
-Content. Go to https://hub.docker.com/publisher/center and click on "Actions"
+Analytics reports are only available to Publishers with Certified. Go to https://hub.docker.com/publisher/center and click on "Actions"
 for the product you'd like to view analytics for. Here is a
 [screenshot](https://user-images.githubusercontent.com/2453622/32352202-6e87ce6e-bfdd-11e7-8fb0-08fe5a3e8930.png).
 
-### How do metrics differentiate between Free and Paid subscribers?
+### How do metrics differentiate between the different Pull Requirement options?
 
 The Analytics reports contain information about the Subscriber and the
 relevant product plan. You can identify subscribers for each plan
-for each product.
+for each product. Only anonymous information is available to our publishers. If you'd like the opportunity to receive Lead information, Subscribed Users Only will need to be selected as the pull requirement. Please review the Technology Partner Program guide, and consult with your partner manager, for more information on Lead Generation plans. 
 
 ### Can I preview my submission before publishing?
 
@@ -212,4 +182,17 @@ Yes
 
 ### Can I have a publish by date for my content?
 
-Not yet. Potential ETA Q2 2018.
+Not yet. This is a planned enhancement, but we have no specific availability date at this time.
+In lieu of an automated approach, you may coordinate publication timeline directly with your partner manager. 
+
+### Can I convert my Hub Community profile to a Verified Publisher profile?
+
+No, at this time you will need to separately sign up to become a Verified Publisher. Following that, you may migrate or re-publish your public repo's under the new Verified Publisher profile.
+
+### Once I've completed the process to become a Verified Publisher with my partner manager, how do I get access to the Publisher Portal?
+
+You will need to apply for access. Please either follow [this direct link](https://hub.docker.com/publisher/center) or click the "Publisher Center" link at the bottom of any Docker Hub page. Please note, that you will need to be logged in with a DockerID in order to see this link. 
+
+### What kind of DockerID should I use to publish my content?
+
+Publishing should be done with an [Organization level DockerID](https://docs.docker.com/docker-hub/orgs/). We recommend that this account utilize a shared alias with your corporate email account and only individual DockerIDs with company email are added to that organization. 

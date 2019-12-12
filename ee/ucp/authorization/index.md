@@ -5,7 +5,7 @@ keywords: ucp, grant, role, permission, authentication, authorization, resource,
 ---
 
 [Docker Universal Control Plane (UCP)](../index.md),
-the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
+the UI for [Docker Enterprise](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
 permissions against resource sets.
 
@@ -67,7 +67,7 @@ To control user access, cluster resources are grouped into Docker Swarm
   networks, nodes, services, secrets, and volumes.
 
 - **Kubernetes namespaces**: A
-[namespace](https://v1-11.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
   is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
   namespace for your cluster objects, plus two more namespaces for system and
   public resources. You can create custom namespaces, but unlike Swarm
@@ -90,7 +90,7 @@ together.
 Only an administrator can manage grants, subjects, roles, and access to
 resources.
 
-> About administrators
+> Note
 >
 > An administrator is a user who creates subjects, groups resources by moving them
 > into collections or namespaces, defines roles by selecting allowable operations,
@@ -99,11 +99,20 @@ resources.
 
 ## Secure Kubernetes defaults
 
-For cluster security, only users and service accounts granted the `cluster-admin` ClusterRole for 
-all Kubernetes namespaces via a ClusterRoleBinding can deploy pods with privileged options. This prevents a
-platform user from being able to bypass the Universal Control Plane Security Model.
+For cluster security, only UCP admin users and service accounts that are
+granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
+ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user from being able to bypass the Universal Control Plane Security
+Model. 
 
-These privileged options include: 
+> Note
+> 
+> Granting the `cluster admin` ClusterRole to normal users does not allow 
+> them to deploy privileged pods. 
+
+These privileged options include:
+
+Pods with any of the following defined in the Pod Specification:
 
   - `PodSpec.hostIPC` - Prevents a user from deploying a pod in the host's IPC
     Namespace.
@@ -120,6 +129,19 @@ These privileged options include:
     Container](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
   - `Volume.hostPath` - Prevents a user from mounting a path from the host into
     the container. This could be a file, a directory, or even the Docker Socket.
+
+Persistent Volumes using the following storage classes:
+
+  - `Local` - Prevents a user from creating a persistent volume with the
+    [Local Storage
+    Class](https://kubernetes.io/docs/concepts/storage/volumes/#local). The
+    Local storage class allows a user to mount directorys from the host into a
+    pod. This could be a file, a directory, or even the Docker Socket. 
+  
+  > Note
+  > 
+  > If an admin has created a persistent volume with the local storage
+  > class, a non-admin could consume this via a persistent volume claim. 
 
 If a user without a cluster admin role tries to deploy a pod with any of these
 privileged options, an error similar to the following example is displayed:

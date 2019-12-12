@@ -4,6 +4,7 @@ datafile: docker_node_rm
 title: docker node rm
 redirect_from:
   - /edge/engine/reference/commandline/node_rm/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

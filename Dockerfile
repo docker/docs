@@ -13,10 +13,10 @@
 
 
 # Engine
-ARG ENGINE_BRANCH="18.09.x"
+ARG ENGINE_BRANCH="19.03.x"
 
 # Distribution
-ARG DISTRIBUTION_BRANCH="release/2.6"
+ARG DISTRIBUTION_BRANCH="release/2.7"
 
 
 ###
@@ -62,15 +62,7 @@ COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
-
-# Fetch library samples (documentation from official images on Docker Hub)
-# Only add the files that are needed to build these reference docs, so that
-# these docs are only rebuilt if changes were made to the configuration.
-# @todo find a way to build HTML in this stage, and still have them included in the navigation tree
-FROM builderbase AS library-samples
-COPY ./_scripts/fetch-library-samples.sh ./_scripts/
-COPY ./_samples/boilerplate.txt ./_samples/
-RUN bash ./_scripts/fetch-library-samples.sh
+COPY --from=docs/docker.github.io:v18.09 ${TARGET} ${TARGET}
 
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that
@@ -85,7 +77,6 @@ RUN bash ./_scripts/fetch-upstream-resources.sh .
 # Build the current docs from the checked out branch
 FROM builderbase AS current
 COPY . .
-COPY --from=library-samples /usr/src/app/md_source/. ./
 COPY --from=upstream-resources /usr/src/app/md_source/. ./
 
 # Build the static HTML, now that everything is in place

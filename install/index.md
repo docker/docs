@@ -1,8 +1,9 @@
 ---
-title: About Docker CE
+title: About Docker Engine - Community
 description: Lists the installation methods
-keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
+keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
 redirect_from:
+- /install/overview/
 - /installation/
 - /engine/installation/linux/
 - /engine/installation/linux/frugalware/
@@ -15,22 +16,20 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
+- /linux/
 ---
 
-Docker Community Edition (CE) is ideal for developers and small
+Docker Engine - Community is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
-apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
+apps. Docker Engine - Community has three types of update channels, **stable**, **test**, and **nightly**:
 
 * **Stable** gives you latest releases for general availability.
 * **Test** gives pre-releases that are ready for testing before general availability.
 * **Nightly** gives you latest builds of work in progress for the next major release.
 
-For more information about Docker CE, see
-[Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
-
 ## Releases
 
-For the Docker CE engine, the open
+For the Docker Engine - Community engine, the open
 repositories [Docker Engine](https://github.com/docker/engine) and
 [Docker Client](https://github.com/docker/cli) apply.
 
@@ -47,8 +46,8 @@ The cadence of the year-month releases is every 6 months starting with
 the `18.09` release. The patch releases for a year-month release take
 place as needed to address bug fixes during its support cycle.
 
-Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
-as packages for the supported operating systems. Docker EE binaries are
+Docker Engine - Community binaries for a release are available on [download.docker.com](https://download.docker.com/)
+as packages for the supported operating systems. Docker Engine - Enterprise binaries are
 available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
@@ -98,18 +97,13 @@ Binaries built from this releases are available in the stable channel
 `stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
 test channel.
 
-### Relationship between CE and EE code
+### Relationship between Docker Engine - Community and Docker Engine - Enterprise code
 
-For a given year-month release, Docker releases both CE and EE
-variants concurrently. EE is a superset of the code delivered in
-CE. Docker maintains publicly visible repositories for the CE code
-as well as private repositories for the EE code. Automation (a bot)
-is used to keep the branches between CE and EE in sync so as features
-and fixes are merged on the various branches in the CE repositories
-(upstream), the corresponding EE repositories and branches are kept
+For a given year-month release, Docker releases both Docker Engine - Community and Docker Engine - Enterprise variants concurrently. Docker Engine - Enterprise is a superset of the code delivered in Docker Engine - Community. Docker maintains publicly visible repositories for the Docker Engine - Community code
+as well as private repositories for the Docker Engine - Enterprise code. Automation (a bot) is used to keep the branches between Docker Engine - Community and Docker Engine - Enterprise in sync so as features
+and fixes are merged on the various branches in the Docker Engine - Community repositories (upstream), the corresponding Docker Engine - Enterprise repositories and branches are kept
 in sync (downstream). While Docker and its partners make every effort
-to minimize merge conflicts between CE and EE, occasionally they will
-happen, and Docker will work hard to resolve them in a timely fashion.
+to minimize merge conflicts between Docker Engine - Community and Docker Engine - Enterprise, occasionally they will happen, and Docker will work hard to resolve them in a timely fashion.
 
 ## Next release
 
@@ -118,9 +112,9 @@ of the repository.
 
 ## Support
 
-Docker CE releases of a year-month branch are supported with patches
+Docker Engine - Community releases of a year-month branch are supported with patches
 as needed for 7 months after the first year-month general availability
-release. Docker EE releases are supported for 24 months after the first
+release. Docker Engine - Enterprise releases are supported for 24 months after the first
 year-month general availability release.
 
 This means bug reports and backports to release branches are assessed
@@ -144,7 +138,7 @@ but are not ruling it out in the future.
 
 ### Supported platforms
 
-Docker CE is available on multiple platforms. Use the following tables
+Docker Engine - Community is available on multiple platforms. Use the following tables
 to choose the best installation path for you.
 
 #### Desktop

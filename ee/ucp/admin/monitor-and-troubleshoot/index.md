@@ -2,6 +2,9 @@
 title: Monitor the cluster status
 description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
 keywords: UCP, troubleshoot, health, cluster
+redirect_from:
+  - /ucp/manage/monitor-ucp/
+  - /ucp/monitor/monitor-ucp/
 ---
 
 You can monitor the status of UCP by using the web UI or the CLI.
@@ -62,7 +65,7 @@ use GET instead.
 
 ## Monitoring vulnerability counts
 
-For those implementations with an EE Advanced subscription, UCP displays image 
+For those implementations with a subscription, UCP displays image 
 vulnerability count data from the DTR image scanning feature. UCP  displays 
 vulnerability counts for containers, Swarm services, pods, and images.
 
