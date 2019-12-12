@@ -43,6 +43,8 @@ To learn more about Docker Enterprise, see
 To learn more about software requirements and supported storage drivers,
 check the [compatibility matrix](https://success.docker.com/article/compatibility-matrix).
 
+- At least 10MB of free space is required in `/tmp`
+
 > **Note:**
 > IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only.
 
