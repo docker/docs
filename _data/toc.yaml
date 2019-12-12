@@ -1689,6 +1689,8 @@ manuals:
       nosync: true
 
 enterprise:
+- path: /ee/
+  title: Docker Enterprise
 - path: /ee/overview/
   title: Overview
 - path: /ee/release-notes/
