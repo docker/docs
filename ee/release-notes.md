@@ -6,8 +6,6 @@ keywords: engine enterprise, ucp, dtr, desktop enterprise, whats new, release no
 
 This page provides information about Docker Enterprise 3.0. For detailed information about for each enterprise component, refer to the individual component release notes below.
 
-## Docker Enterprise components install and upgrade
-
 | Component Release Notes | Version | Install | Upgrade |
 |---------|-----------|-------------------|-------------- |
 | [Docker Engine - Enterprise](/engine/release-notes/) | 19.03 | [Install Docker Engine - Enterprise](/ee/supported-platforms/) | [Upgrade Docker Engine - Enterprise](/ee/upgrade/) |

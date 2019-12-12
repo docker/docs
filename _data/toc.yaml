@@ -1243,6 +1243,10 @@ samples:
   title: Library references
 
 manuals:
+- sectiontitle: Docker Engine - Community
+- section:
+  - path: /install/
+    title: Install Docker - Engine - Community
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
