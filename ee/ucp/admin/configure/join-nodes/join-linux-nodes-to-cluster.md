@@ -99,9 +99,7 @@ To promote or demote a manager node:
 4.  Click **Save** and wait until the operation completes.
 5.  Navigate to the **Nodes** page, and confirm that the node role has changed.
 
-If you're load balancing user requests to Docker Engine - Enterprise across multiple manager
-nodes, don't forget to remove these nodes from your load-balancing pool when
-you demote them to workers.
+If you are load balancing user requests to Docker Engine - Enterprise across multiple manager nodes, remember to remove these nodes from the load-balancing pool when demoting them to workers.
 
 ## Remove a node from the cluster
 
@@ -120,10 +118,9 @@ be careful when removing one from the cluster.
 
 To remove a manager node:
 
-1. Make sure all nodes in the cluster are healthy. Don't remove manager nodes
-if that's not the case.
-2. Demote the manager node into a worker.
-3. Remove that node from the cluster.
+1. Confirm that all nodes in the cluster are healthy (otherwise, do not remove manager nodes).
+2. Demote the manager nodes into workers.
+3. Remove the newly-demoted workers from the cluster.
 
 ## Use the CLI to manage your nodes
 
@@ -143,4 +140,4 @@ You can use the API to manage your nodes in the following ways:
 ```bash
 /nodes/{id}/update
 ```
-- Use the /api/ucp/config-toml API to change the default orchestrator setting. See [scheduling_configuration table (optional)](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#scheduling_configuration-table-optional) for more information.
+- Use the /api/ucp/config-toml API to change the default orchestrator setting. Refer to [scheduling_configuration table (optional)](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#scheduling_configuration-table-optional) for more information.
