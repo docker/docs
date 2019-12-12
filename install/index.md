@@ -1,7 +1,7 @@
 ---
 title: Docker Engine - Community
 description: Lists the installation methods
-keywords: docker, installation, install, Docker Engine - Community, stable, edge
+keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
 redirect_from:
 - /install/overview/
 - /installation/

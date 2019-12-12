@@ -1,6 +1,6 @@
 ---
 description: Home page for Docker Enterprise documentation
-keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
+keywords: Docker Enterprise, documentation, manual, guide, reference, api, CLI
 landing: true
 skip_read_time: true
 title: "Docker Enterprise"
