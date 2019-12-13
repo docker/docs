@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: windows, edge, tutorial
+keywords: windows, edge, tutorial, run, docker, local, machine
 redirect_from:
 - /winkit/getting-started/
 - /winkit/
@@ -17,7 +17,7 @@ Welcome to Docker Desktop!
 
 The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
-Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
+Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
 
 See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
 

@@ -2,6 +2,7 @@
 description: Exoscale driver for machine
 keywords: machine, exoscale, driver
 title: Exoscale
+hide_from_sitemap: true
 ---
 
 Create machines on [Exoscale](https://www.exoscale.com/).
