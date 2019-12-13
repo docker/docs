@@ -20,72 +20,8 @@ horizontalnav:
   node: enterprise
 
 guides:
-- sectiontitle: Get Docker
-  section:
-  - sectiontitle: Docker Engine - Community
-    section:
-    - sectiontitle: Cloud
-      section:
-      - sectiontitle: Docker for AWS
-        section:
-        - path: /docker-for-aws/why/
-          title: Why Docker for AWS?
-        - path: /docker-for-aws/
-          title: Setup & prerequisites
-        - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
-        - path: /docker-for-aws/scaling/
-          title: Scaling
-        - path: /docker-for-aws/upgrade/
-          title: Upgrading
-        - path: /docker-for-aws/deploy/
-          title: Deploy your app
-        - path: /docker-for-aws/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-aws/load-balancer/
-          title: Load balancer
-        - path: /docker-for-aws/faqs/
-          title: FAQs
-        - path: /docker-for-aws/opensource/
-          title: Open source licensing
-        - path: /docker-for-aws/release-notes/
-          title: Release notes
-        - path: /docker-for-aws/archive/
-          title: Template archive
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
+- title: Get Docker
+  path: /get-docker/
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -1209,8 +1145,24 @@ samples:
   title: Library references
 
 manuals:
-- path: /install/
-  title: Docker Engine - Community
+- sectiontitle: Docker Engine - Community
+  section:
+  - path: /install/
+    title: Docker Engine - Community
+  - sectiontitle: Linux
+    section:
+    - path: /install/linux/docker-ce/centos/
+      title: CentOS
+    - path: /install/linux/docker-ce/debian/
+      title: Debian
+    - path: /install/linux/docker-ce/fedora/
+      title: Fedora
+    - path: /install/linux/docker-ce/ubuntu/
+      title: Ubuntu
+    - path: /install/linux/docker-ce/binaries/
+      title: Binaries
+    - path: /install/linux/linux-postinstall/
+      title: Optional Linux post-installation steps
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
