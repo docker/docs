@@ -20,72 +20,8 @@ horizontalnav:
   node: enterprise
 
 guides:
-- sectiontitle: Get Docker
-  section:
-  - sectiontitle: Docker Engine - Community
-    section:
-    - sectiontitle: Cloud
-      section:
-      - sectiontitle: Docker for AWS
-        section:
-        - path: /docker-for-aws/why/
-          title: Why Docker for AWS?
-        - path: /docker-for-aws/
-          title: Setup & prerequisites
-        - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
-        - path: /docker-for-aws/scaling/
-          title: Scaling
-        - path: /docker-for-aws/upgrade/
-          title: Upgrading
-        - path: /docker-for-aws/deploy/
-          title: Deploy your app
-        - path: /docker-for-aws/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-aws/load-balancer/
-          title: Load balancer
-        - path: /docker-for-aws/faqs/
-          title: FAQs
-        - path: /docker-for-aws/opensource/
-          title: Open source licensing
-        - path: /docker-for-aws/release-notes/
-          title: Release notes
-        - path: /docker-for-aws/archive/
-          title: Template archive
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
+- title: Get Docker
+  path: /install/docker-ce/
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -380,40 +316,6 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
-- sectiontitle: Standards and compliance
-  section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
-    section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
-    section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
-    section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
@@ -1243,8 +1145,25 @@ samples:
   title: Library references
 
 manuals:
-- path: /install/
-  title: Docker Engine - Community
+
+- sectiontitle: Docker Engine - Community
+  section:
+  - path: /install/
+    title: Docker Engine - Community
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -4236,3 +4155,37 @@ enterprise:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
+- sectiontitle: Standards and compliance
+  section:
+  - path: /compliance/
+    title: Docker standards and compliance
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_37/
+      title: NIST SP 800-37 (RMF)
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/fips140_2/
+      title: FIPS 140-2
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal/
+      title: OSCAL compliance guidance
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker Enterprise Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker Engine - Community Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
+  - path: /compliance/fedramp/
+    title: FedRAMP
+  - path: /compliance/fisma/
+    title: FISMA
