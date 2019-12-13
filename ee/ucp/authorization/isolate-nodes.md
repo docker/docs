@@ -208,11 +208,11 @@ Create a grant to the `namespace-name` namespace:
 
 1. On the **Create Grant** page, select **Namespaces**.
 
-![](../images/isolate-nodes-5.png){: .with-border}
+    ![](../images/isolate-nodes-5.png){: .with-border}
 
-Select the **namespace-name** namespace, and create a `Full Control` grant.
+2. Select the **namespace-name** namespace, and create a `Full Control` grant.
 
-![](../images/isolate-nodes-6.png){: .with-border}
+    ![](../images/isolate-nodes-6.png){: .with-border}
 
 ### Associate nodes with the namespace
 
