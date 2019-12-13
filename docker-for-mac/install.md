@@ -1,6 +1,6 @@
 ---
 description: How to install Docker Desktop on Mac
-keywords: mac, beta, alpha, install, download
+keywords: mac, install, download, run, docker, local, machine
 title: Install Docker Desktop on Mac
 ---
 

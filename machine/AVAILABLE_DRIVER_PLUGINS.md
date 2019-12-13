@@ -3,6 +3,7 @@ published: false
 title: "Machine plugins"
 description: "Machine plugins"
 keywords: ["Docker, documentation, manual, guide, reference, api"]
+hide_from_sitemap: true
 ---
 
 
