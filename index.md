@@ -2,48 +2,24 @@
 description: Home page for Docker's documentation
 keywords: Docker, documentation, manual, guide, reference, api, samples
 landing: true
-title: Docker Documentation
-notoc: true
-notags: true
 skip_read_time: true
 ---
-{% assign page.title = site.name %}
 
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Get started with Docker
+## Docker Quickstart
 
-Try our multi-part walkthrough that covers writing your first app,
-data storage, networking, and swarms, and ends with your app running on
-production servers in the cloud. Total reading time is less than an hour.
+Try our multi-part Quickstart that covers building an image, using kubernetes and swarm on your development machine, and sharing your containerized applications on [Docker Hub](http://hub.docker.com). Total reading time is less than an hour.
 
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Try Docker Enterprise
+## Docker Engine - Community
 
-Run your solution in production with Docker Enterprise to get a
-management dashboard, security scanning, LDAP integration, content signing,
-multi-cloud support, and more. Click below to test-drive a running instance of
-Docker Enterprise without installing anything.
-
-[Try Docker Enterprise](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
-
-</div>
-</div>
-
-## Docker products
-
-<div class="row">
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Engine - Community
-
-Get started with Docker and experimenting with container-based apps. Docker Engine - Community
-is available on many platforms, from desktop to cloud to server. Build and share
+Docker Engine - Community is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
@@ -51,29 +27,14 @@ channel for more predictability.
 [Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
 
 </div>
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
-### Docker Enterprise
-
-Designed for enterprise development and IT teams who build, ship, and run
-business critical applications in production at scale. Integrated, certified,
-and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker Enterprise comes with enterprise
-[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
-orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
-securing images in an enterprise grade registry.
-
-[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
-
 </div>
-</div><!-- end row -->
 
-## Run Docker anywhere
+## Docker Desktop
 
 <div class="component-container">
     <!--start row-->
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
@@ -82,7 +43,7 @@ securing images in an enterprise grade registry.
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
@@ -91,14 +52,11 @@ securing images in an enterprise grade registry.
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
-            <div class="component">
-                <div class="component-icon">
-                    <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
-                </div>
-                <h3 id="docker-for-linux"><a href="install/linux/ubuntu/">Docker for Linux</a></h3>
-                <p>Install Docker on a computer which already has a Linux distribution installed.</p>
-            </div>
-        </div>
     </div>
 </div>
+
+### Docker Enterprise
+
+TThe Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the [Docker Enterprise Customer FAQ](https://www.docker.com/faq-for-docker-enterprise-customers-and-partners).
+
+For Docker Enterprise documentation, see the [Docker Enterprise](/ee/) tab.
