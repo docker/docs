@@ -1,17 +1,17 @@
 ---
 title: Join Linux nodes to your cluster
 description: Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.
-keywords: Docker Engine - Enterprise, UCP, cluster, scale, worker, manager
+keywords: Docker Enterprise, UCP, cluster, scale, worker, manager
 ---
 
-Docker Engine - Enterprise is designed for scaling horizontally as your applications grow in
+Docker Enterprise is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
 to your needs. You can join Windows Server and Linux nodes
 to the cluster.
 
-Because Docker Engine - Enterprise leverages the clustering functionality provided by Docker
+Because Docker Enterprise leverages the clustering functionality provided by Docker
 Engine, you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
-command to add more nodes to your cluster. When you join a new node, Docker Engine - Enterprise
+command to add more nodes to your cluster. When you join a new node, Docker Enterprise
 services start running on the node automatically.
 
 ## Node roles
@@ -23,10 +23,10 @@ When you join a node to a cluster, you specify its role: manager or worker.
   manager nodes allows your swarm to be highly available and tolerant of
   node failures.
 
-  Manager nodes also run all Docker Engine - Enterprise components in a replicated way, so
+  Manager nodes also run all Docker Enterprise components in a replicated way, so
   by adding additional manager nodes, you're also making the cluster highly
   available.
-  [Learn more about the Docker Engine - Enterprise architecture.](https://docs.docker.com/ee/docker-ee-architecture/)
+  [Learn more about the Docker Enterprise architecture.](https://docs.docker.com/ee/docker-ee-architecture/)
 
 - **Worker**: Worker nodes receive and execute your services and applications.
   Having multiple worker nodes allows you to scale the computing capacity of
@@ -62,7 +62,7 @@ To add a Windows node, click **Windows** and follow the instructions in
 After you run the join command in the node, the node is displayed on the
 **Nodes** page in the UCP web interface. From there, you can change the node's
 cluster configuration, including its assigned orchestrator type.
-[Learn how to change the orchestrator for a node](../set-orchestrator-type.md).    
+[Learn how to change the orchestrator for a node](../set-orchestrator-type.md).
 
 ## Pause or drain a node
 
@@ -80,7 +80,7 @@ Pause or drain a node from the **Edit Node** page:
 1.  In the UCP web interface, browse to the **Nodes** page and select the node.
 2.  In the details pane, click **Configure** and select **Details** to open
     the **Edit Node** page.
-3.  In the **Availability** section, click **Active**, **Pause**, or **Drain**.  
+3.  In the **Availability** section, click **Active**, **Pause**, or **Drain**.
 4.  Click **Save** to change the availability of the node.
 
 ![](../../../images/join-nodes-to-cluster-3.png){: .with-border}
@@ -99,7 +99,7 @@ To promote or demote a manager node:
 4.  Click **Save** and wait until the operation completes.
 5.  Navigate to the **Nodes** page, and confirm that the node role has changed.
 
-If you're load-balancing user requests to Docker Engine - Enterprise across multiple manager
+If you're load-balancing user requests to Docker Enterprise across multiple manager
 nodes, don't forget to remove these nodes from your load-balancing pool when
 you demote them to workers.
 
@@ -107,7 +107,7 @@ you demote them to workers.
 
 You can remove worker nodes from the cluster at any time:
 
-1.  Shut down the worker node or have it leave the swarm. See [docker swarm leave](/engine/reference/commandline/swarm_leave/#extended-description) for example usage. 
+1.  Shut down the worker node or have it leave the swarm. See [docker swarm leave](/engine/reference/commandline/swarm_leave/#extended-description) for example usage.
 2.  Navigate to the **Nodes** page, and select the node.
 3.  In the details pane, click **Actions** and select **Remove**.
 4.  Click **Confirm** when prompted.
