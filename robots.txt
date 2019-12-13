@@ -33,6 +33,4 @@ Disallow: /datacenter/ucp/1.1
 
 Disallow: /apidocs/v*
 
-Disallow: /machine/
-
 Sitemap: https://docs.docker.com/sitemap.xml
