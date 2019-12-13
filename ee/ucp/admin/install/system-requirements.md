@@ -123,6 +123,19 @@ Number 4 for IP-in-IP encapsulation.
 If you're deploying to AWS or another cloud provider, enable IP-in-IP
 traffic for your cloud provider's security group.
 
+## Enable connection tracking on the loopback interface for SLES
+Calico's Kubernetes controllers can't reach the Kubernetes API server
+unless connection tracking is enabled on the loopback interface. SLES
+disables connection tracking by default.
+
+On each node in the cluster:
+
+```
+sudo mkdir -p /etc/sysconfig/SuSEfirewall2.d/defaults
+echo FW_LO_NOTRACK=no | sudo tee /etc/sysconfig/SuSEfirewall2.d/defaults/99-docker.cfg
+sudo SuSEfirewall2 start
+```
+
 ## Timeout settings
 
 Make sure the networks you're using allow the UCP components enough time
