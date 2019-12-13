@@ -1,6 +1,6 @@
 ---
 description: How to install Docker Desktop for Windows
-keywords: windows, beta, edge, alpha, install, download
+keywords: windows, install, download, run, docker, local, machine,
 title: Install Docker Desktop on Windows
 ---
 
