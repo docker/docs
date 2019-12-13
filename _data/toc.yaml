@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /manuals/
+  path: /install/
   node: manuals
 - title: Glossary
   path: /glossary/
@@ -24,8 +24,6 @@ guides:
   section:
   - sectiontitle: Docker Engine - Community
     section:
-    - title: Docker Engine - Community
-      path: /install/
     - sectiontitle: Cloud
       section:
       - sectiontitle: Docker for AWS
@@ -88,18 +86,6 @@ guides:
         title: Binaries
       - path: /install/linux/linux-postinstall/
         title: Optional Linux post-installation steps
-  - sectiontitle: Compatibility between Docker versions
-    section:
-      - path: /engine/ce-ee-node-activate/
-        title: Docker Engine Community to Enterprise Node Activate
-      - path: /engine/migration/
-        title: Migrate to Docker 1.10
-      - path: /engine/breaking_changes/
-        title: Breaking changes
-      - path: /engine/deprecated/
-        title: Deprecated Docker features
-      - path: /engine/faq/
-        title: FAQ
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -394,40 +380,6 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
-- sectiontitle: Standards and compliance
-  section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
-    section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
-    section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
-    section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
@@ -1257,6 +1209,8 @@ samples:
   title: Library references
 
 manuals:
+- path: /install/
+  title: Docker Engine - Community
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1692,10 +1646,10 @@ manuals:
 enterprise:
 - sectiontitle: Docker Enterprise
   section:
-  - path: /ee/overview/
-    title: Overview
+  - path: /ee/
+    title: Docker Enterprise
   - path: /ee/release-notes/
-    title: Release notes
+    title: Install or upgrade
   - path: /ee/licensing/
     title: Licensing
   - sectiontitle: Docker Cluster
@@ -4196,7 +4150,7 @@ enterprise:
       title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
-  - title: DTR API
+  - title: DTR API (swagger)
     path: /reference/dtr/2.7/api/
   - sectiontitle: DTR CLI
     section:
@@ -4220,7 +4174,7 @@ enterprise:
       title: restore
     - path: /reference/dtr/2.7/cli/upgrade/
       title: upgrade
-  - title: UCP API
+  - title: UCP API (swagger)
     path: /reference/ucp/3.2/api/
   - sectiontitle: UCP CLI
     section:
@@ -4248,3 +4202,37 @@ enterprise:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
+- sectiontitle: Standards and compliance
+  section:
+  - path: /compliance/
+    title: Docker standards and compliance
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_37/
+      title: NIST SP 800-37 (RMF)
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/fips140_2/
+      title: FIPS 140-2
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: OSCAL
+    section:
+    - path: /compliance/oscal/
+      title: OSCAL compliance guidance
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker Enterprise Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker Engine - Community Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
+  - path: /compliance/fedramp/
+    title: FedRAMP
+  - path: /compliance/fisma/
+    title: FISMA
