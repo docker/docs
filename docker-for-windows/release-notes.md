@@ -13,7 +13,73 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Stable Releases of 2019
+## Docker Desktop Community 2.2.0.0
+
+> [Download](https://hub.docker.com/?overlay=onboarding)
+>
+> You must sign in to Docker Hub to download Docker Desktop.
+
+### Upgrades
+
+- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
+- [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
+- Linux kernel 4.19.76
+- [QEMU 4.0.1](https://github.com/docker/binfmt)
+
+### New
+
+- **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
+For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](dashboard.md).
+
+- **WSL 2 backend:** The experimental Docker Desktop WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl-tech-preview/).
+
+- **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation that replaces Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
+
+  - Users don't have to expose the Samba port, and therefore do not experience issues related to IT firewall or the drive-sharing policy.
+  - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
+
+    For more information, see the blog post [ New file sharing implementation in Docker Desktop Windows](https://www.docker.com/blog/new-filesharing-implementation-in-docker-desktop-windows/).
+
+- Added the **WSL Integration** option in **Settings** > **Resources** to select WSL 2 distributions. This option will be visible only after enabling WSL 2 on your machine.
+- Introduced a new user interface for the Docker Desktop **Settings** menu.
+- The Restart, Reset, and Uninstall options are now available on the **Troubleshoot** menu.
+- Added the ability to start and stop existing Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
+
+### Bug fixes and minor changes
+
+- Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug that prevented users from accessing WSL 2 Tech Preview. Fixes [docker/for-win#4734](https://github.com/docker/for-win/issues/4734).
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
+- Docker Desktop now automatically restarts after an update.
+- Fixed an issue where Docker Desktop auto-start was not being disabled properly on some machines.
+- Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`). Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
+- Fixed an issue which caused Docker Desktop to crash when resetting to factory defaults while running Windows containers.
+- Fixed multiple issues related to Fast Startup.
+- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distros when Docker Desktop WSL integration is enabled.
+- Fixed an issue where bind mounts created with Docker Compose from a WSL distro were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
+- Docker Desktop now supports `inotify` events on shared filesystems for Windows file sharing.
+- Fixed a cache invalidation bug when a file in a shared volume is renamed on the host for Windows file sharing.
+- Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
+- To make VM startup more reliable, Docker Desktop now avoids adding a Hyper-V NIC to the Windows VM when using Hypervisor sockets for Windows file sharing (rather than Samba).
+- Fixed an issue that prevented Kubernetes to start with WSL 2 on machines with multiple CPU cores.
+- Fixed a rare issue that caused to Docker Desktop to crash with the error `Unable to stop Hyper-V VM: Cannot validate argument on parameter 'SwitchName'. The argument is null or empty.`
+- Fixed a bug that caused a rare crash when uninstalling Docker Desktop.
+- Fixed an issue when overwriting existing files with the WSL 2 CLI bundle, such as kubectl.
+- Fixed an issue where WSL 2 failed to start when the distribution directory is compressed or encrypted. Fixes [docker/for-win#5256](https://github.com/docker/for-win/issues/5256).
+- Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
+- Fixed various stability issues.
+
+### Known issues
+
+- When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
+- When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
+- Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.1. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
+- The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
+- The new gRPC FUSE file sharing implementation does not support connecting to new drives after Docker Desktop starts (for example, a USB drive). If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
 
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
