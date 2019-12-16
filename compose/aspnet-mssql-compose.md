@@ -44,13 +44,13 @@ configure this app to use our SQL Server database, and then create a
 
     ```dockerfile
     FROM mcr.microsoft.com/dotnet/core/sdk:3.1
-    RUN ["dotnet", "tool", "install", "--global", "dotnet-ef"]
+    RUN dotnet tool install --global dotnet-ef
     ENV PATH "~/.dotnet/tools/:$PATH"
     COPY . /app
     WORKDIR /app
-    RUN ["dotnet", "restore"]
-    RUN ["dotnet", "build"]
-    RUN ["dotnet", "ef", "migrations", "add", "InitialCreate"]
+    RUN dotnet restore
+    RUN dotnet build
+    RUN dotnet ef migrations add InitialCreate
     EXPOSE 80/tcp
     RUN chmod +x ./entrypoint.sh
     CMD /bin/bash ./entrypoint.sh
