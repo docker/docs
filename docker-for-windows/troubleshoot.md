@@ -568,20 +568,12 @@ currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
 docker app.
 
-### Docker fails to start when firewall or anti-virus software is installed
+### Docker Desktop fails to start when anti-virus software is installed
 
-Some firewalls and anti-virus software might be incompatible with Microsoft
-**Windows 10 builds**, such as Windows 10 Anniversary Update. The conflict
-typically occurs after a Windows update or new install of the firewall, and
-manifests as an error response from the Docker daemon and a **Docker Desktop start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+Some anti-virus software may be incompatible with with Hyper-V and Microsoft
+Windows 10 builds. The conflict
+typically occurs after a Windows update and
+manifests as an error response from the Docker daemon and a Docker Desktop start failure.
 
-See the Comodo forums topics [Comodo Firewall conflict with
-Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
-and [Windows 10 Anniversary build doesn't allow Comodo drivers to be
-installed](https://forums.comodo.com/install-setup-configuration-help-cis/windows-10-aniversary-build-doesnt-allow-comodo-drivers-to-be-installed-t116322.0.html).
-A Docker Desktop user-created issue describes the problem specifically as it
-relates to Docker: [Docker fails to start on Windows
-10](https://github.com/docker/for-win/issues/27).
-
-For a temporary workaround, uninstall the firewall or anti-virus software, or
-explore other workarounds suggested on the forum.
+For a temporary workaround, uninstall the anti-virus software, or
+explore other workarounds suggested on Docker Desktop forums.
