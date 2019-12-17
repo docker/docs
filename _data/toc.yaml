@@ -15,9 +15,6 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
-- title: Docker Enterprise
-  path: /ee/
-  node: enterprise
 
 guides:
 - title: Get Docker
@@ -1243,28 +1240,28 @@ manuals:
     title: Edge release notes
 - sectiontitle: Docker Desktop for Windows
   section:
-- path: /docker-for-windows/
-  title: Getting started
-- path: /docker-for-windows/install/
-  title: Install Docker Desktop for Windows
-- path: /docker-for-windows/kubernetes/
-  title: Deploy on Kubernetes
-- path: /docker-for-windows/networking/
-  title: Networking
-- path: /docker-for-windows/docker-toolbox/
-  title: Migrate Docker Toolbox
-- path: /docker-for-windows/troubleshoot/
-  title: Logs and troubleshooting
-- path: /docker-for-windows/faqs/
-  title: FAQs
-- path: /docker-for-windows/opensource/
-  title: Open source licensing
-- path: /docker-for-windows/release-notes/
-  title: Stable release notes
-- path: /docker-for-windows/edge-release-notes/
-  title: Edge release notes
-- path: /docker-for-windows/wsl-tech-preview/
-  title: Docker Desktop WSL 2 backend
+  - path: /docker-for-windows/
+    title: Getting started
+  - path: /docker-for-windows/install/
+    title: Install Docker Desktop for Windows
+  - path: /docker-for-windows/kubernetes/
+    title: Deploy on Kubernetes
+  - path: /docker-for-windows/networking/
+    title: Networking
+  - path: /docker-for-windows/docker-toolbox/
+    title: Migrate Docker Toolbox
+  - path: /docker-for-windows/troubleshoot/
+    title: Logs and troubleshooting
+  - path: /docker-for-windows/faqs/
+    title: FAQs
+  - path: /docker-for-windows/opensource/
+    title: Open source licensing
+  - path: /docker-for-windows/release-notes/
+    title: Stable release notes
+  - path: /docker-for-windows/edge-release-notes/
+    title: Edge release notes
+  - path: /docker-for-windows/wsl-tech-preview/
+    title: Docker Desktop WSL 2 backend
 - sectiontitle: Docker Desktop Enterprise
   section:
   - path: /ee/desktop/
@@ -1628,8 +1625,6 @@ manuals:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
       nosync: true
-
-enterprise:
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
@@ -4072,34 +4067,6 @@ enterprise:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
-  - sectiontitle: Manage Docker Enterprise
-    section:
-    - path: /ee/docker-ee-architecture/
-      title: Docker Enterprise Architecture
-    - path: /ee/end-to-end-install/
-      title: Deploy Docker Enterprise
-    - path: /ee/upgrade/
-      title: Upgrade Docker Enterprise
-    - sectiontitle: Back up Docker Enterprise
-      section:
-      - path: /ee/admin/backup/
-        title: Overview
-      - path: /ee/admin/backup/back-up-swarm/
-        title: Back up Docker Swarm
-    - sectiontitle: Restore Docker Enterprise
-      section:
-      - path: /ee/admin/restore/
-        title: Overview
-      - path: /ee/admin/restore/restore-swarm/
-        title: Restore Docker Swarm
-    - sectiontitle: Disaster Recovery
-      section:
-      - path: /ee/admin/disaster-recovery/
-        title: Overview
-    - path: /ee/enable-client-certificate-authentication/
-      title: Enable client certificate authentication with your PKI
-    - path: /ee/telemetry/
-      title: Manage usage data collection
   - title: Get support
     path: /ee/get-support/
   - title: DTR API (swagger)
@@ -4154,37 +4121,39 @@ enterprise:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-- sectiontitle: Standards and compliance
-  section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
+  - sectiontitle: Standards and compliance
     section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
-    section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
-    section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
+    - path: /compliance/
+      title: Docker Enterprise standards and compliance
+    - sectiontitle: NIST
+      section:
+      - path: /compliance/nist/800_37/
+        title: NIST SP 800-37 (RMF)
+      - path: /compliance/nist/800_53/
+        title: NIST SP 800-53
+      - path: /compliance/nist/800_190/
+        title: NIST SP 800-190
+      - path: /compliance/nist/fips140_2/
+        title: FIPS 140-2
+      - path: /compliance/nist/nistir_8176/
+        title: NISTIR 8176
+      - path: /compliance/nist/itl_october2017/
+        title: NIST ITL Bulletin October 2017
+    - sectiontitle: OSCAL
+      section:
+      - path: /compliance/oscal/
+        title: OSCAL compliance guidance
+    - sectiontitle: CIS Benchmarks
+      section:
+      - path: /compliance/cis/docker_ee/
+        title: Docker Enterprise Benchmark
+      - path: /compliance/cis/docker_ce/
+        title: Docker Engine - Community Benchmark
+      - path: /compliance/cis/k8s/
+        title: Kubernetes Benchmark
+    - path: /compliance/fedramp/
+      title: FedRAMP
+    - path: /compliance/fisma/
+      title: FISMA
+
+  
