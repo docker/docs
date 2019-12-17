@@ -170,31 +170,22 @@ For more information, see:
 
 #### Proxies
 
-Docker Desktop detects HTTP/HTTPS Proxy Settings from macOS and automatically
-propagates these to Docker and to your containers. For example, if you set your
-proxy settings to `http://proxy.example.com`, Docker uses this proxy when
-pulling containers.
+HTTP/HTTPS Proxy Settings are used by the Docker daemon when pulling images
+from remote registries. Docker can inherit the macOS system proxy settings
+(which could be a direct-connection, no-proxy), or you can manually configure
+specific HTTP and HTTPS proxy servers.
 
-![Proxies settings](images/menu/prefs-proxies.png)
+Previous versions of Docker Desktop for Mac also propagated the Docker daemon
+proxy setting to container environments. This is no longer the case, and
+Docker Desktop for Mac now behaves the same as the Docker daemon on Linux. If
+your container build or run requires proxy settings, you must pass them
+as `--build-arg http_proxy=http://...` or `-e http_proxy=http://...`
+respectively.
 
-When you start a container, your proxy settings propagate into the containers.
-For example:
-
-```
-$ docker run -it alpine env
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-http_proxy=http://proxy.example.com:3128
-no_proxy=*.local, 169.254/16
-```
-
-You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
-`no_proxy` environment variables are set. When your proxy configuration changes,
-Docker restarts automatically to pick up the new settings. If you have any
-containers that you would like to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
+When your proxy configuration changes, Docker restarts automatically to pick
+up the new settings. If you have containers that you wish to keep running
+across restarts, you should consider using
+[restart policies](/engine/reference/run/#restart-policies-restart).
 
 #### Network
 
