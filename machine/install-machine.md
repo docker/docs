@@ -2,6 +2,7 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
+hide_from_sitemap: true
 ---
 
 On macOS and Windows, Machine is installed along with other Docker products when

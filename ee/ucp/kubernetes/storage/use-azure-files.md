@@ -6,15 +6,15 @@ redirect_from:
 ---
 
 Platform operators can provide persistent storage for workloads running on
-Docker Enterprise and Microsoft Azure by using Azure Files. You can either 
+Docker Enterprise and Microsoft Azure by using Azure Files. You can either
 pre-provision Azure Files Shares to be consumed by
 Kubernetes Pods or can you use the Azure Kubernetes integration to dynamically
 provision Azure Files Shares on demand.
 
 ## Prerequisites
 
-This guide assumes you have already provisioned a UCP environment on 
-Microsoft Azure. The cluster must be provisioned after meeting all 
+This guide assumes you have already provisioned a UCP environment on
+Microsoft Azure. The cluster must be provisioned after meeting all
 prerequisites listed in [Install UCP on
 Azure](/ee/ucp/admin/install/install-on-azure.md).
 
@@ -29,8 +29,8 @@ Access](/ee/ucp/user-access/cli/).
 You can use existing Azure Files Shares or manually provision new ones to
 provide persistent storage for Kubernetes Pods. Azure Files Shares can be
 manually provisioned in the Azure Portal using ARM Templates or using the Azure
-CLI. The following example uses the Azure CLI to manually provision 
-Azure Files Shares. 
+CLI. The following example uses the Azure CLI to manually provision
+Azure Files Shares.
 
 ### Creating an Azure Storage Account
 
@@ -40,7 +40,7 @@ a Storage Account, you can skip to [Creating an Azure Files
 Share](#creating-an-azure-file-share).
 
 > **Note**: the Azure Kubernetes Driver does not support Azure Storage Accounts
-> created using Azure Premium Storage. 
+> created using Azure Premium Storage.
 
 ```bash
 $ REGION=ukwest
@@ -81,7 +81,7 @@ $ az storage share create \
 After a File Share has been created, you must load the Azure Storage
 Account Access key as a Kubernetes Secret into UCP. This provides access to
 the file share when Kubernetes attempts to mount the share into a pod. This key
-can be found in the Azure Portal or retrieved as shown in the following example by the Azure CLI: 
+can be found in the Azure Portal or retrieved as shown in the following example by the Azure CLI:
 
 ```bash
 $ SA=mystorageaccount
@@ -140,7 +140,7 @@ Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
 > Today, only the Standard Storage Class is supported when using the Azure
 > Kubernetes Plugin. File shares using the Premium Storage Class will fail to
-> mount. 
+> mount.
 
 ```bash
 $ cat <<EOF | kubectl create -f -
@@ -156,6 +156,8 @@ mountOptions:
   - gid=1000
 parameters:
   skuName: Standard_LRS
+  storageAccount: <existingstorageaccount> # Optional
+  location: <existingstorageaccountlocation> # Optional
 EOF
 ```
 
@@ -171,14 +173,13 @@ azurefile  kubernetes.io/azure-file   1m
 
 After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Files Shares. This is done using
-Kubernetes Persistent Volumes Claims
-[PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
-Kubernetes uses an existing Azure Storage Account if one exists inside of the 
+Kubernetes [Persistent Volumes Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
+Kubernetes uses an existing Azure Storage Account if one exists inside of the
 Azure Resource Group. If an Azure Storage Account does not exist,
-Kubernetes creates one. 
+Kubernetes creates one.
 
 The following example uses the standard storage class and creates a 5 GB Azure
-File Share. Alter these values to fit your use case. 
+File Share. Alter these values to fit your use case.
 
 ```bash
 $ cat <<EOF | kubectl create -f -
@@ -196,7 +197,7 @@ spec:
 EOF
 ```
 
-At this point, you should see a newly created Persistent Volume Claim and Persistent Volume: 
+At this point, you should see a newly created Persistent Volume Claim and Persistent Volume:
 
 ```bash
 $ kubectl get pvc
@@ -236,6 +237,50 @@ spec:
       persistentVolumeClaim:
        claimName: azure-file-pvc
 EOF
+```
+
+### Troubleshooting
+
+When creating Persistent Volume Claims, the volume may constantly stay in a
+`Pending` state.
+
+```
+$ kubectl get pvc
+NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+azure-file-pvc   Pending                                      standard       32s
+```
+
+If that is the case, the `persistent-volume-binder` service account does not
+have the relevant Kubernetes RBAC permissions. The storage account creates a
+Kubernetes secret to store the Azure Files Storage Account Key.
+
+```
+$ kubectl describe pvc azure-file-pvc
+...
+Warning    ProvisioningFailed  7s (x3 over 37s)  persistentvolume-controller
+Failed to provision volume with StorageClass "standard": Couldn't create secret
+secrets is forbidden: User "system:serviceaccount:kube-system:persistent-volume-binder"
+cannot create resource "secrets" in API group "" in the namespace "default": access denied
+```
+
+To grant the `persistent-volume-binder` service account the relevant the RBAC
+permissions, create the following RBAC ClusterRole.
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    subjectName: kube-system-persistent-volume-binder
+  name: kube-system-persistent-volume-binder:cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: persistent-volume-binder
+  namespace: kube-system
 ```
 
 ## Where to go next

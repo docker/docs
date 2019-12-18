@@ -15,77 +15,10 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
-- title: Docker Enterprise
-  path: /ee/
-  node: enterprise
 
 guides:
-- sectiontitle: Get Docker
-  section:
-  - sectiontitle: Docker Engine - Community
-    section:
-    - sectiontitle: Cloud
-      section:
-      - sectiontitle: Docker for AWS
-        section:
-        - path: /docker-for-aws/why/
-          title: Why Docker for AWS?
-        - path: /docker-for-aws/
-          title: Setup & prerequisites
-        - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
-        - path: /docker-for-aws/scaling/
-          title: Scaling
-        - path: /docker-for-aws/upgrade/
-          title: Upgrading
-        - path: /docker-for-aws/deploy/
-          title: Deploy your app
-        - path: /docker-for-aws/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-aws/load-balancer/
-          title: Load balancer
-        - path: /docker-for-aws/faqs/
-          title: FAQs
-        - path: /docker-for-aws/opensource/
-          title: Open source licensing
-        - path: /docker-for-aws/release-notes/
-          title: Release notes
-        - path: /docker-for-aws/archive/
-          title: Template archive
-      - sectiontitle: Docker for Azure
-        section:
-        - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
-        - path: /docker-for-azure/
-          title: Setup & prerequisites
-        - path: /docker-for-azure/upgrade/
-          title: Upgrading
-        - path: /docker-for-azure/deploy/
-          title: Deploy your app
-        - path: /docker-for-azure/persistent-data-volumes/
-          title: Persistent data volumes
-        - path: /docker-for-azure/faqs/
-          title: FAQs
-        - path: /docker-for-azure/opensource/
-          title: Open source licensing
-        - path: /docker-for-azure/release-notes/
-          title: Release notes
-        - path: /docker-for-azure/archive/
-          title: Template archive
-    - sectiontitle: Linux
-      section:
-      - path: /install/linux/docker-ce/centos/
-        title: CentOS
-      - path: /install/linux/docker-ce/debian/
-        title: Debian
-      - path: /install/linux/docker-ce/fedora/
-        title: Fedora
-      - path: /install/linux/docker-ce/ubuntu/
-        title: Ubuntu
-      - path: /install/linux/docker-ce/binaries/
-        title: Binaries
-      - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
+- title: Get Docker
+  path: /get-docker/
 - sectiontitle: Get started
   section:
   - path: /engine/docker-overview/
@@ -1134,49 +1067,6 @@ reference:
       title: S3 storage driver
     - path: /registry/storage-drivers/swift/
       title: Swift storage driver
-- sectiontitle: Compliance control references
-  section:
-  - sectiontitle: NIST 800-53
-    section:
-    - path: /compliance/reference/800-53/
-      title: Overview
-    - path: /compliance/reference/800-53/ac/
-      title: Access control
-    - path: /compliance/reference/800-53/au/
-      title: Audit and accountability
-    - path: /compliance/reference/800-53/at/
-      title: Awareness and training
-    - path: /compliance/reference/800-53/cm/
-      title: Configuration management
-    - path: /compliance/reference/800-53/cp/
-      title: Contingency planning
-    - path: /compliance/reference/800-53/ia/
-      title: Identification and authentication
-    - path: /compliance/reference/800-53/ir/
-      title: Incident response
-    - path: /compliance/reference/800-53/ma/
-      title: Maintenance
-    - path: /compliance/reference/800-53/mp/
-      title: Media protection
-    - path: /compliance/reference/800-53/ps/
-      title: Personnel security
-    - path: /compliance/reference/800-53/pe/
-      title: Physical and environmental protection
-    - path: /compliance/reference/800-53/pl/
-      title: Planning
-    - path: /compliance/reference/800-53/pm/
-      title: Program management
-    - path: /compliance/reference/800-53/ra/
-      title: Risk assessment
-    - path: /compliance/reference/800-53/ca/
-      title: Security assessment and authorization
-    - path: /compliance/reference/800-53/sc/
-      title: System and communications protection
-    - path: /compliance/reference/800-53/si/
-      title: System and information integrity
-    - path: /compliance/reference/800-53/sa/
-      title: System and services acquisition
-
 
 
 
@@ -1209,8 +1099,24 @@ samples:
   title: Library references
 
 manuals:
-- path: /install/
-  title: Docker Engine - Community
+- sectiontitle: Docker Engine - Community
+  section:
+  - path: /install/
+    title: Docker Engine - Community
+  - sectiontitle: Linux
+    section:
+    - path: /install/linux/docker-ce/centos/
+      title: CentOS
+    - path: /install/linux/docker-ce/debian/
+      title: Debian
+    - path: /install/linux/docker-ce/fedora/
+      title: Fedora
+    - path: /install/linux/docker-ce/ubuntu/
+      title: Ubuntu
+    - path: /install/linux/docker-ce/binaries/
+      title: Binaries
+    - path: /install/linux/linux-postinstall/
+      title: Optional Linux post-installation steps
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1313,6 +1219,40 @@ manuals:
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
     title: Docker Desktop WSL 2 backend
+- sectiontitle: Docker Desktop Enterprise
+  section:
+  - path: /ee/desktop/
+    title: Overview
+  - path: /ee/desktop/release-notes/
+    title: Release notes
+  - sectiontitle: Admin
+    section:
+    - sectiontitle: Install
+      section:
+      - path: /ee/desktop/admin/install/mac/
+        title: Install DDE on Mac
+      - path: /ee/desktop/admin/install/windows/
+        title: Install DDE on Windows
+    - sectiontitle: Configure
+      section:
+      - path: /ee/desktop/admin/configure/mac-admin/
+        title: Configure DDE on Mac
+      - path: /ee/desktop/admin/configure/windows-admin/
+        title: Configure DDE on Windows
+  - sectiontitle: User
+    section:
+    - path: /ee/desktop/user/mac-user/
+      title: Use DDE on Mac
+    - path: /ee/desktop/user/windows-user/
+      title: Use DDE on Windows
+  - path: /ee/desktop/app-designer/
+    title: Application designer
+  - sectiontitle: Troubleshoot
+    section:
+    - path: /ee/desktop/troubleshoot/mac-issues/
+      title: Troubleshoot DDE issues on Mac
+    - path: /ee/desktop/troubleshoot/windows-issues/
+      title: Troubleshoot DDE issues on Windows
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Hub
@@ -1642,8 +1582,6 @@ manuals:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
       nosync: true
-
-enterprise:
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
@@ -1652,6 +1590,8 @@ enterprise:
     title: Install or upgrade
   - path: /ee/licensing/
     title: Licensing
+  - title: Get support
+    path: /ee/get-support/
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
@@ -3122,7 +3062,28 @@ enterprise:
         path: /ee/dtr/user/tag-pruning/
     - title: API reference
       path: /reference/dtr/2.7/api/
-      nosync: true
+    - sectiontitle: CLI reference
+      section:
+      - path: /reference/dtr/2.7/cli/
+        title: Overview
+      - path: /reference/dtr/2.7/cli/backup/
+        title: backup
+      - path: /reference/dtr/2.7/cli/destroy/
+        title: destroy
+      - path: /reference/dtr/2.7/cli/emergency-repair/
+        title: emergency-repair
+      - path: /reference/dtr/2.7/cli/install/
+        title: install
+      - path: /reference/dtr/2.7/cli/join/
+        title: join
+      - path: /reference/dtr/2.7/cli/reconfigure/
+        title: reconfigure
+      - path: /reference/dtr/2.7/cli/remove/
+        title: remove
+      - path: /reference/dtr/2.7/cli/restore/
+        title: restore
+      - path: /reference/dtr/2.7/cli/upgrade/
+        title: upgrade
     - path: /ee/dtr/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -4086,94 +4047,6 @@ enterprise:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
-  - sectiontitle: Docker Desktop Enterprise
-    section:
-    - path: /ee/desktop/
-      title: Overview
-    - path: /ee/desktop/release-notes/
-      title: Release notes
-    - sectiontitle: Admin
-      section:
-      - sectiontitle: Install
-        section:
-        - path: /ee/desktop/admin/install/mac/
-          title: Install DDE on Mac
-        - path: /ee/desktop/admin/install/windows/
-          title: Install DDE on Windows
-      - sectiontitle: Configure
-        section:
-        - path: /ee/desktop/admin/configure/mac-admin/
-          title: Configure DDE on Mac
-        - path: /ee/desktop/admin/configure/windows-admin/
-          title: Configure DDE on Windows
-    - sectiontitle: User
-      section:
-      - path: /ee/desktop/user/mac-user/
-        title: Use DDE on Mac
-      - path: /ee/desktop/user/windows-user/
-        title: Use DDE on Windows
-    - path: /ee/desktop/app-designer/
-      title: Application designer
-    - sectiontitle: Troubleshoot
-      section:
-      - path: /ee/desktop/troubleshoot/mac-issues/
-        title: Troubleshoot DDE issues on Mac
-      - path: /ee/desktop/troubleshoot/windows-issues/
-        title: Troubleshoot DDE issues on Windows
-  - sectiontitle: Manage Docker Enterprise
-    section:
-    - path: /ee/docker-ee-architecture/
-      title: Docker Enterprise Architecture
-    - path: /ee/end-to-end-install/
-      title: Deploy Docker Enterprise
-    - path: /ee/upgrade/
-      title: Upgrade Docker Enterprise
-    - sectiontitle: Back up Docker Enterprise
-      section:
-      - path: /ee/admin/backup/
-        title: Overview
-      - path: /ee/admin/backup/back-up-swarm/
-        title: Back up Docker Swarm
-    - sectiontitle: Restore Docker Enterprise
-      section:
-      - path: /ee/admin/restore/
-        title: Overview
-      - path: /ee/admin/restore/restore-swarm/
-        title: Restore Docker Swarm
-    - sectiontitle: Disaster Recovery
-      section:
-      - path: /ee/admin/disaster-recovery/
-        title: Overview
-    - path: /ee/enable-client-certificate-authentication/
-      title: Enable client certificate authentication with your PKI
-    - path: /ee/telemetry/
-      title: Manage usage data collection
-  - title: Get support
-    path: /ee/get-support/
-  - title: DTR API (swagger)
-    path: /reference/dtr/2.7/api/
-  - sectiontitle: DTR CLI
-    section:
-    - path: /reference/dtr/2.7/cli/
-      title: Overview
-    - path: /reference/dtr/2.7/cli/backup/
-      title: backup
-    - path: /reference/dtr/2.7/cli/destroy/
-      title: destroy
-    - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair
-    - path: /reference/dtr/2.7/cli/install/
-      title: install
-    - path: /reference/dtr/2.7/cli/join/
-      title: join
-    - path: /reference/dtr/2.7/cli/reconfigure/
-      title: reconfigure
-    - path: /reference/dtr/2.7/cli/remove/
-      title: remove
-    - path: /reference/dtr/2.7/cli/restore/
-      title: restore
-    - path: /reference/dtr/2.7/cli/upgrade/
-      title: upgrade
   - title: UCP API (swagger)
     path: /reference/ucp/3.2/api/
   - sectiontitle: UCP CLI
@@ -4202,37 +4075,83 @@ enterprise:
       title: uninstall-ucp
     - path: /reference/ucp/3.2/cli/upgrade/
       title: upgrade
-- sectiontitle: Standards and compliance
-  section:
-  - path: /compliance/
-    title: Docker standards and compliance
-  - sectiontitle: NIST
+  - sectiontitle: Standards and compliance
     section:
-    - path: /compliance/nist/800_37/
-      title: NIST SP 800-37 (RMF)
-    - path: /compliance/nist/800_53/
-      title: NIST SP 800-53
-    - path: /compliance/nist/800_190/
-      title: NIST SP 800-190
-    - path: /compliance/nist/fips140_2/
-      title: FIPS 140-2
-    - path: /compliance/nist/nistir_8176/
-      title: NISTIR 8176
-    - path: /compliance/nist/itl_october2017/
-      title: NIST ITL Bulletin October 2017
-  - sectiontitle: OSCAL
+    - path: /compliance/
+      title: Docker Enterprise standards and compliance
+    - sectiontitle: NIST
+      section:
+      - path: /compliance/nist/800_37/
+        title: NIST SP 800-37 (RMF)
+      - path: /compliance/nist/800_53/
+        title: NIST SP 800-53
+      - path: /compliance/nist/800_190/
+        title: NIST SP 800-190
+      - path: /compliance/nist/fips140_2/
+        title: FIPS 140-2
+      - path: /compliance/nist/nistir_8176/
+        title: NISTIR 8176
+      - path: /compliance/nist/itl_october2017/
+        title: NIST ITL Bulletin October 2017
+    - sectiontitle: OSCAL
+      section:
+      - path: /compliance/oscal/
+        title: OSCAL compliance guidance
+    - sectiontitle: CIS Benchmarks
+      section:
+      - path: /compliance/cis/docker_ee/
+        title: Docker Enterprise Benchmark
+      - path: /compliance/cis/docker_ce/
+        title: Docker Engine - Community Benchmark
+      - path: /compliance/cis/k8s/
+        title: Kubernetes Benchmark
+    - path: /compliance/fedramp/
+      title: FedRAMP
+    - path: /compliance/fisma/
+      title: FISMA
+  - sectiontitle: Compliance control references
     section:
-    - path: /compliance/oscal/
-      title: OSCAL compliance guidance
-  - sectiontitle: CIS Benchmarks
-    section:
-    - path: /compliance/cis/docker_ee/
-      title: Docker Enterprise Benchmark
-    - path: /compliance/cis/docker_ce/
-      title: Docker Engine - Community Benchmark
-    - path: /compliance/cis/k8s/
-      title: Kubernetes Benchmark
-  - path: /compliance/fedramp/
-    title: FedRAMP
-  - path: /compliance/fisma/
-    title: FISMA
+    - sectiontitle: NIST 800-53
+      section:
+      - path: /compliance/reference/800-53/
+        title: Overview
+      - path: /compliance/reference/800-53/ac/
+        title: Access control
+      - path: /compliance/reference/800-53/au/
+        title: Audit and accountability
+      - path: /compliance/reference/800-53/at/
+        title: Awareness and training
+      - path: /compliance/reference/800-53/cm/
+        title: Configuration management
+      - path: /compliance/reference/800-53/cp/
+        title: Contingency planning
+      - path: /compliance/reference/800-53/ia/
+        title: Identification and authentication
+      - path: /compliance/reference/800-53/ir/
+        title: Incident response
+      - path: /compliance/reference/800-53/ma/
+        title: Maintenance
+      - path: /compliance/reference/800-53/mp/
+        title: Media protection
+      - path: /compliance/reference/800-53/ps/
+        title: Personnel security
+      - path: /compliance/reference/800-53/pe/
+        title: Physical and environmental protection
+      - path: /compliance/reference/800-53/pl/
+        title: Planning
+      - path: /compliance/reference/800-53/pm/
+        title: Program management
+      - path: /compliance/reference/800-53/ra/
+        title: Risk assessment
+      - path: /compliance/reference/800-53/ca/
+        title: Security assessment and authorization
+      - path: /compliance/reference/800-53/sc/
+        title: System and communications protection
+      - path: /compliance/reference/800-53/si/
+        title: System and information integrity
+      - path: /compliance/reference/800-53/sa/
+        title: System and services acquisition
+
+
+
+  

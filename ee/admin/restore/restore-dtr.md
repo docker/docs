@@ -38,6 +38,7 @@ Start by removing any DTR container that is still running:
 ```none
 $ docker container run \
   --rm \
+  --tty \
   --interactive \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls
