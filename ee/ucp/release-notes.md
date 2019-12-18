@@ -10,6 +10,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/release-notes/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest UCP version. You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 

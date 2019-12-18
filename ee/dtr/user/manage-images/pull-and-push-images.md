@@ -11,6 +11,8 @@ redirect_from:
 {% assign repo="wordpress" %}
 {% assign tag="latest" %}
 
+>{% include enterprise_label_shortform.md %}
+
 You interact with Docker Trusted registry in the same way you interact with
 Docker Hub or any other registry:
 

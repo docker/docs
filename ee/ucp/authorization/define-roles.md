@@ -4,6 +4,8 @@ description: Learn how to create roles and set permissions in Docker Universal C
 keywords: rbac, authorization, authentication, users, teams, UCP, swarm
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 A role defines a set of API operations permitted against a resource set.
 You apply roles to users and teams by creating grants.
 

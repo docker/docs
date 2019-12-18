@@ -4,6 +4,8 @@ description: Storage configuration for Docker Trusted Registry
 keywords: dtr, storage drivers, NFS, Azure, S3
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Configure your storage backend
 
 By default DTR uses the local filesystem of the node where it is running to

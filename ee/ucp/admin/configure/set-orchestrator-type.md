@@ -4,6 +4,8 @@ description: Learn how to specify the orchestrator for nodes in a Docker Enterpr
 keywords: Docker Enterprise, UCP, cluster, orchestrator
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When you add a node to the cluster, the node's workloads are managed by a
 default orchestrator, either Docker Swarm or Kubernetes. When you install
 Docker Enterprise, new nodes are managed by Docker Swarm, but you can change the

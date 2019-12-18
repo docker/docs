@@ -5,6 +5,8 @@ description: Learn how to configure Docker Content Trust to use a web proxy to
 keywords: dtr, configure, http, proxy
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry makes outgoing connections to check for new versions,
 automatically renew its license, and update its vulnerability database.
 If DTR can't access the internet, then you'll have to manually apply updates.

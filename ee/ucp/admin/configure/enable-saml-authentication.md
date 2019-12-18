@@ -4,6 +4,8 @@ description: Learn how to configure user authentication with SAML 2.0
 keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
 
 SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.

@@ -4,6 +4,8 @@ description: Learn how to route traffic to different proxies using a service clu
 keywords: ucp, interlock, load balancing, routing
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Configure Proxy Services
 With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
 workers for each region. For example, from a manager, run the following commands to pin the proxy services to the ingress workers:

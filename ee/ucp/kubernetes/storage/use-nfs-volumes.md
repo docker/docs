@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/admin/configure/use-nfs-volumes/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Users can provide persistent storage for workloads running on Docker Enterprise
 by using NFS storage. These NFS shares, when mounted into the running container,
 provide state to the application, managing data external to the container's

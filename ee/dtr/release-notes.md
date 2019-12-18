@@ -9,6 +9,8 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/release-notes/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
 

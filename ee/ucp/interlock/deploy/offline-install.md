@@ -4,6 +4,8 @@ description: Learn how to to install Interlock on a Docker cluster without inter
 keywords: routing, proxy, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To install Interlock on a Docker cluster without internet access, the Docker images must be loaded.  This topic describes how to export the images from a local Docker
 engine and then load them to the Docker Swarm cluster.
 

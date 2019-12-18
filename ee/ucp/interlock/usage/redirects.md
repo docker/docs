@@ -5,6 +5,8 @@ description: Learn how to implement redirects using swarm services and the
 keywords: routing, proxy, redirects, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The following example publishes a service and configures a redirect from `old.local` to `new.local`.
 
 First, create an overlay network so that service traffic is isolated and secure:

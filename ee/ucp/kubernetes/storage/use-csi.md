@@ -4,6 +4,8 @@ description: Learn how to deploy a CSI driver with UCP.
 keywords: Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The Container Storage Interface (CSI) is a specification for container orchestrators to manage block and file-based 
 volumes for storing data. Storage vendors can each create a single CSI driver that works with multiple 
 container orchestrators. The Kubernetes community maintains sidecar containers that can be used by a containerized 

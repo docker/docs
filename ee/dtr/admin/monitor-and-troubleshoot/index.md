@@ -4,6 +4,8 @@ description: Learn how to monitor your DTR installation.
 keywords: registry, monitor, troubleshoot
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other
 containerized applications running on your cluster. One way to monitor

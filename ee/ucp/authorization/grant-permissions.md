@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/grant-permissions/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise administrators can create _grants_ to control how users and
 organizations access [resource sets](group-resources.md).
 

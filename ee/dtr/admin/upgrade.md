@@ -6,6 +6,8 @@ keywords: dtr, upgrade, install
 
 {% assign previous_version="2.6" %}
 
+>{% include enterprise_label_shortform.md %}
+
 DTR uses [semantic versioning](http://semver.org/) and Docker aims to achieve specific
 guarantees while upgrading between versions. While downgrades are not supported, Docker supports upgrades according to the following rules:
 

@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/usage/default-backend/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can publish services using "vip" and "task" backend routing modes.
 
 ## Task routing mode

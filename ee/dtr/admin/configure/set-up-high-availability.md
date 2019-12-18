@@ -4,6 +4,8 @@ description: Lean how to scale Docker Trusted Registry by adding and removing re
 keywords: dtr, install, deploy
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry is designed to scale horizontally as your usage
 increases. You can add more replicas to make DTR scale to your demand and for
 high availability.

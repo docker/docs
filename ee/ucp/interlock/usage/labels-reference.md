@@ -7,6 +7,8 @@ redirect_from:
 keywords: routing, proxy, interlock, load balancing
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After you enable the layer 7 routing solution, you can
 [start using it in your swarm services](index.md).
 

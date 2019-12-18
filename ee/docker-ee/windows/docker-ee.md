@@ -11,6 +11,8 @@ redirect_from:
 
 {% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Engine - Enterprise enables native Docker containers on Windows Server.
 Windows Server 2016 and later versions are supported. The Docker Engine -
 Enterprise installation package includes everything you need to run Docker on

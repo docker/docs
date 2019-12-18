@@ -5,6 +5,8 @@ description: Learn how to deploy a DTR cache with fault tolerance and high
 keywords: DTR, cache
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 If you're deploying a DTR cache in a zone with few users and with no uptime
 SLAs, a [single cache service is enough for you](simple.md).
 

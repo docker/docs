@@ -3,6 +3,9 @@ title: Disable persistent cookies
 description: Learn how to disable persistent cookies for Docker Trusted Registry.	
 keywords: dtr, browser cookies, sso
 ---
+
+>{% include enterprise_label_shortform.md %}
+
 If you want your Docker Trusted Registry (DTR) to use session-based authentication cookies that expire when you close your browser, toggle "Disable persistent cookies".
   
 ![](/ee/dtr/images/disable-persistent-cookies-1.png){: .with-border}

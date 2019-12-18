@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/deploy/configuration-reference/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh (HRM).
 
 ## Prerequisites

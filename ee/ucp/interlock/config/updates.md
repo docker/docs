@@ -4,6 +4,8 @@ description: Learn how to update the UCP layer 7 routing solution services
 keywords: routing, proxy, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 There are two parts to the update process:
 
 1. Update the Interlock configuration to specify the new extension and/or proxy image versions.

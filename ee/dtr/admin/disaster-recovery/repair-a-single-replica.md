@@ -4,6 +4,8 @@ description: Learn how to repair a single DTR replica when it is unhealthy.
 keywords: dtr, disaster recovery
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When one or more DTR replicas are unhealthy but the overall majority
 (n/2 + 1) is healthy and able to communicate with one another, your DTR
 cluster is still functional and healthy.

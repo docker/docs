@@ -4,6 +4,8 @@ description: Learn how to use cookies with Ingress host and path routing.
 keywords: ucp, cluster, ingress, kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% include experimental-feature.md %}
 
 ## Overview

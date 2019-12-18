@@ -4,6 +4,8 @@ description: Learn how to deploy Ingress rules for Kubernetes applications.
 keywords: ucp, cluster, ingress, kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% include experimental-feature.md %}
 
 ## Overview 

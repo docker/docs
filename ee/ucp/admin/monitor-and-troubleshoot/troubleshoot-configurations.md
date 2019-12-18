@@ -4,6 +4,8 @@ description: Learn how to troubleshoot your Docker Universal Control Plane clust
 keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, cluster
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
 

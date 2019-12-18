@@ -6,6 +6,8 @@ keywords: registry, tag pruning, tag limit, repo management
 
 ## Overview
 
+>{% include enterprise_label_shortform.md %}
+
 Tag pruning is the process of cleaning up unnecessary or unwanted repository tags. As of v2.6, you can configure the Docker Trusted Registry (DTR) to automatically perform tag pruning on repositories that you manage by:
 
 * specifying a tag pruning policy or alternatively,

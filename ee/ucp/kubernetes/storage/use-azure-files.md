@@ -5,6 +5,8 @@ keywords: Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume
 redirect_from:
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Platform operators can provide persistent storage for workloads running on
 Docker Enterprise and Microsoft Azure by using Azure Files. You can either 
 pre-provision Azure Files Shares to be consumed by

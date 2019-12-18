@@ -4,6 +4,8 @@ description: Learn how to deploy Docker Universal Control Plane using images tha
 keywords: UCP, Docker EE, image, Windows
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane deploys images for a number of different
 hardware architectures. Some architectures require
 pulling images with specific tags or names indicating the target

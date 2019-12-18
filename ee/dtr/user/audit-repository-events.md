@@ -4,6 +4,8 @@ description: View and audit your repository events.
 keywords: dtr, events, log, activity stream
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Overview 
 
 Starting in DTR 2.6, each repository page includes an **Activity** tab which displays a sortable and paginated list of the most recent events within the repository. This offers better visibility along with the ability to audit events. Event types listed will vary according to your [repository permission level](/ee/dtr/admin/manage-users/permission-levels/). Additionally, DTR admins can [enable auto-deletion of repository events](/ee/dtr/admin/configure/auto-delete-repo-events/) as part of maintenance and cleanup.

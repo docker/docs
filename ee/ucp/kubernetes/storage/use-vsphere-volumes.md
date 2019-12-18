@@ -4,6 +4,8 @@ description: Learn how to add persistent storage to your Docker Enterprise clust
 keywords: Universal Control Plane, UCP, Docker Enterprise, Kubernetes, storage, volume
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The [vSphere Storage for Kubernetes driver](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html) enables customers to address persistent storage requirements for Kubernetes pods  in vSphere environments. The driver allows you to create a persistent  volume on a Virtual Machine File System (VMFS), and use it to manage persistent storage requirements independent of pod and VM lifecycle.
 
 > Note

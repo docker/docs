@@ -5,6 +5,8 @@ description: Learn how to create a promotion policies that can automatically
 keywords: registry, promotion, mirror
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry allows you to automatically promote and mirror images
 based on a policy. In DTR 2.7, you have the option to promote applications with [the experimental `docker app` CLI addition](/ee/dtr/user/manage-applications/).
 Note that scanning-based promotion policies do not take effect until all application-bundled images have been scanned.

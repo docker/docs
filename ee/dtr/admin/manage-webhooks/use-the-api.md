@@ -4,6 +4,8 @@ description: Learn how to create, configure, and test webhooks for DTR using the
 keywords: dtr, webhooks, api, registry
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Prerequisite
 
 See [Webhook types](/ee/dtr/admin/manage-webhooks/index.md/#webhook-types) for a list of events you can trigger notifications for via the API.

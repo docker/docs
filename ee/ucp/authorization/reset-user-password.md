@@ -4,6 +4,8 @@ description: Learn how to recover your Docker Enterprise Edition credentials.
 keywords: ucp, authentication, password
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Change user passwords
 
 ### Managed in UCP

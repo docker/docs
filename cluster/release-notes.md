@@ -4,6 +4,8 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: cluster, whats new, release notes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This page provides information about Docker Cluster versions. 
 
 # Version 1

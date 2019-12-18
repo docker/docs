@@ -4,6 +4,8 @@ description: Learn how to set the Kubernetes namespace context in a Docker Enter
 keywords: Docker EE, UCP, Kubernetes, namespace
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker Enterprise Edition, administrators can filter the view of
 Kubernetes objects by the namespace the objects are assigned to. You can
 specify a single namespace, or you can specify all available namespaces.

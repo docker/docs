@@ -10,6 +10,8 @@ keywords: registry, immutable
 {% assign repo="wordpress" %}
 {% assign tag="latest" %}
 
+>{% include enterprise_label_shortform.md %}
+
 By default, users with [read and write access](../../admin/manage-users/permission-levels/) to a repository can push the same tag
 multiple times to that repository. For example, when ***user A*** pushes an image to `{{ org }}/{{ repo }}:{{ tag }}`, there is no preventing ***user B***
 from pushing an image with the same name but a completely different functionality. This can make it difficult to trace the image back to the build that generated	

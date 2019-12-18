@@ -4,6 +4,8 @@ description: Learn how to configure an nginx extension
 keywords: routing, proxy, interlock, load balancing
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default, nginx is used as a proxy, so the following configuration options are
 available for the nginx extension:
 

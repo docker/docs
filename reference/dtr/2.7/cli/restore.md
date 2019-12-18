@@ -4,6 +4,8 @@ description: Install and restore DTR from an existing backup
 keywords: dtr, cli, restore
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Install and restore DTR from an existing backup
 
 ## Usage

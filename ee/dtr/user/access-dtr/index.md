@@ -4,6 +4,8 @@ description: Learn how to configure your Docker Engine to push and pull images f
 keywords: registry, TLS, certificates
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
 

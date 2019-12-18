@@ -4,6 +4,8 @@ description: Learn how to restore UCP from a backup
 keywords: enterprise, restore, swarm
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To restore UCP, select one of the following options:
 
 * Run the restore on the machines from which the backup originated or on new machines. You can use the same swarm from which the backup originated or a new swarm.  

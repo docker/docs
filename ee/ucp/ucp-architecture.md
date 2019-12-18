@@ -4,6 +4,8 @@ description: Learn about the architecture of Docker Universal Control Plane.
 keywords: ucp, architecture
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane (UCP) is a containerized application that runs on
 [Docker Enterprise Edition](/ee/index.md), extending its functionality
 to simplify the deployment, configuration, and monitoring of your applications at scale.

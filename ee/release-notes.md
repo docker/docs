@@ -4,6 +4,8 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This page provides information about Docker Enterprise 3.0. For 
 detailed information about for each enterprise component, refer to the individual component release notes 
 pages listed in the following **Docker Enterprise components install and upgrade** section.

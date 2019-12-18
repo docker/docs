@@ -4,6 +4,8 @@ description: Learn how to add new SANs to cluster nodes, allowing you to connect
 keywords: cluster, node, label, certificate, SAN
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP always runs with HTTPS enabled. When you connect to UCP, you need to make
 sure that the hostname that you use to connect is recognized by UCP's
 certificates. If, for instance, you put UCP behind a load balancer that

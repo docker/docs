@@ -5,6 +5,8 @@ description: Learn how to integrate UCP with an LDAP service, so that you can
 keywords: LDAP, UCP, authentication, user management
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and it will automatically
 propagate that information to UCP and DTR.

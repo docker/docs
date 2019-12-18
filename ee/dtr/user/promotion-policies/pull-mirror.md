@@ -4,6 +4,8 @@ description: Learn how to set up a repository to poll for changes in another reg
 keywords: registry, promotion, mirror
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry allows you to set up a mirror of a repository by
 constantly polling it and pulling new image tags as they are pushed. This ensures your images are replicated across different registries for high availability. It also makes it easy to create a development pipeline that allows different
 users access to a certain image without giving them access to everything in the remote registry.

@@ -11,6 +11,8 @@ title: Get Docker Engine - Enterprise for SLES
 toc_max: 4
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ee).

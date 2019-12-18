@@ -4,6 +4,8 @@ description: Learn how to troubleshoot your Docker Universal Control Plane clust
 keywords: ucp, troubleshoot, health, cluster
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the
 [individual UCP components](../../ucp-architecture.md). Only administrator users can

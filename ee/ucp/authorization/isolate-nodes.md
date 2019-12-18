@@ -4,6 +4,8 @@ description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication, node, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker Enterprise, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
 different users. To control access to nodes, move them to dedicated collections

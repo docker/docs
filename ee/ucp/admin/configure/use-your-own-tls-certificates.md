@@ -4,6 +4,8 @@ description: Learn how to configure Docker Universal Control Plane to use your o
 keywords: Universal Control Plane, UCP, certificate, authentication, tls
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 All UCP services are exposed using HTTPS, to ensure all communications between
 clients and UCP are encrypted. By default, this is done using self-signed TLS
 certificates that are not trusted by client tools like web browsers. So when

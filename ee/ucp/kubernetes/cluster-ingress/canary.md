@@ -4,6 +4,8 @@ description: Stage a canary release using weight-based load balancing between mu
 keywords: ucp, cluster, ingress, kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% include experimental-feature.md %}
 
 ## Overview 

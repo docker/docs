@@ -5,6 +5,8 @@ description: Learn how to deploy Calico Route Reflectors to improve performance
 keywords: cluster, node, label, certificate, SAN
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP uses Calico as the default Kubernetes networking solution. Calico is
 configured to create a BGP mesh between all nodes in the cluster.
 

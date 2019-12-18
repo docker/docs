@@ -7,6 +7,7 @@ redirect_from:
   - /manuals/
 ---
 
+>{% include enterprise_label_shortform.md %}
 
 The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
 

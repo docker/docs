@@ -4,6 +4,8 @@ description: Learn how to configure Universal Control Plane to only allow runnin
 keywords: ucp, configuration, worker
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can configure UCP to allow users to deploy and run services only in
 worker nodes. This ensures all cluster management functionality stays
 performant, and makes the cluster more secure.
