@@ -1067,49 +1067,6 @@ reference:
       title: S3 storage driver
     - path: /registry/storage-drivers/swift/
       title: Swift storage driver
-- sectiontitle: Compliance control references
-  section:
-  - sectiontitle: NIST 800-53
-    section:
-    - path: /compliance/reference/800-53/
-      title: Overview
-    - path: /compliance/reference/800-53/ac/
-      title: Access control
-    - path: /compliance/reference/800-53/au/
-      title: Audit and accountability
-    - path: /compliance/reference/800-53/at/
-      title: Awareness and training
-    - path: /compliance/reference/800-53/cm/
-      title: Configuration management
-    - path: /compliance/reference/800-53/cp/
-      title: Contingency planning
-    - path: /compliance/reference/800-53/ia/
-      title: Identification and authentication
-    - path: /compliance/reference/800-53/ir/
-      title: Incident response
-    - path: /compliance/reference/800-53/ma/
-      title: Maintenance
-    - path: /compliance/reference/800-53/mp/
-      title: Media protection
-    - path: /compliance/reference/800-53/ps/
-      title: Personnel security
-    - path: /compliance/reference/800-53/pe/
-      title: Physical and environmental protection
-    - path: /compliance/reference/800-53/pl/
-      title: Planning
-    - path: /compliance/reference/800-53/pm/
-      title: Program management
-    - path: /compliance/reference/800-53/ra/
-      title: Risk assessment
-    - path: /compliance/reference/800-53/ca/
-      title: Security assessment and authorization
-    - path: /compliance/reference/800-53/sc/
-      title: System and communications protection
-    - path: /compliance/reference/800-53/si/
-      title: System and information integrity
-    - path: /compliance/reference/800-53/sa/
-      title: System and services acquisition
-
 
 
 
@@ -1633,6 +1590,8 @@ manuals:
     title: Install or upgrade
   - path: /ee/licensing/
     title: Licensing
+  - title: Get support
+    path: /ee/get-support/
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
@@ -3103,7 +3062,28 @@ manuals:
         path: /ee/dtr/user/tag-pruning/
     - title: API reference
       path: /reference/dtr/2.7/api/
-      nosync: true
+    - sectiontitle: CLI reference
+      section:
+      - path: /reference/dtr/2.7/cli/
+        title: Overview
+      - path: /reference/dtr/2.7/cli/backup/
+        title: backup
+      - path: /reference/dtr/2.7/cli/destroy/
+        title: destroy
+      - path: /reference/dtr/2.7/cli/emergency-repair/
+        title: emergency-repair
+      - path: /reference/dtr/2.7/cli/install/
+        title: install
+      - path: /reference/dtr/2.7/cli/join/
+        title: join
+      - path: /reference/dtr/2.7/cli/reconfigure/
+        title: reconfigure
+      - path: /reference/dtr/2.7/cli/remove/
+        title: remove
+      - path: /reference/dtr/2.7/cli/restore/
+        title: restore
+      - path: /reference/dtr/2.7/cli/upgrade/
+        title: upgrade
     - path: /ee/dtr/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -4067,32 +4047,6 @@ manuals:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
-  - title: Get support
-    path: /ee/get-support/
-  - title: DTR API (swagger)
-    path: /reference/dtr/2.7/api/
-  - sectiontitle: DTR CLI
-    section:
-    - path: /reference/dtr/2.7/cli/
-      title: Overview
-    - path: /reference/dtr/2.7/cli/backup/
-      title: backup
-    - path: /reference/dtr/2.7/cli/destroy/
-      title: destroy
-    - path: /reference/dtr/2.7/cli/emergency-repair/
-      title: emergency-repair
-    - path: /reference/dtr/2.7/cli/install/
-      title: install
-    - path: /reference/dtr/2.7/cli/join/
-      title: join
-    - path: /reference/dtr/2.7/cli/reconfigure/
-      title: reconfigure
-    - path: /reference/dtr/2.7/cli/remove/
-      title: remove
-    - path: /reference/dtr/2.7/cli/restore/
-      title: restore
-    - path: /reference/dtr/2.7/cli/upgrade/
-      title: upgrade
   - title: UCP API (swagger)
     path: /reference/ucp/3.2/api/
   - sectiontitle: UCP CLI
@@ -4155,5 +4109,49 @@ manuals:
       title: FedRAMP
     - path: /compliance/fisma/
       title: FISMA
+  - sectiontitle: Compliance control references
+    section:
+    - sectiontitle: NIST 800-53
+      section:
+      - path: /compliance/reference/800-53/
+        title: Overview
+      - path: /compliance/reference/800-53/ac/
+        title: Access control
+      - path: /compliance/reference/800-53/au/
+        title: Audit and accountability
+      - path: /compliance/reference/800-53/at/
+        title: Awareness and training
+      - path: /compliance/reference/800-53/cm/
+        title: Configuration management
+      - path: /compliance/reference/800-53/cp/
+        title: Contingency planning
+      - path: /compliance/reference/800-53/ia/
+        title: Identification and authentication
+      - path: /compliance/reference/800-53/ir/
+        title: Incident response
+      - path: /compliance/reference/800-53/ma/
+        title: Maintenance
+      - path: /compliance/reference/800-53/mp/
+        title: Media protection
+      - path: /compliance/reference/800-53/ps/
+        title: Personnel security
+      - path: /compliance/reference/800-53/pe/
+        title: Physical and environmental protection
+      - path: /compliance/reference/800-53/pl/
+        title: Planning
+      - path: /compliance/reference/800-53/pm/
+        title: Program management
+      - path: /compliance/reference/800-53/ra/
+        title: Risk assessment
+      - path: /compliance/reference/800-53/ca/
+        title: Security assessment and authorization
+      - path: /compliance/reference/800-53/sc/
+        title: System and communications protection
+      - path: /compliance/reference/800-53/si/
+        title: System and information integrity
+      - path: /compliance/reference/800-53/sa/
+        title: System and services acquisition
+
+
 
   
