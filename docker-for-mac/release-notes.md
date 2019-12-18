@@ -37,7 +37,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 
 ### Bug fixes and minor changes
 
-- Added missing fish completions for Docker Compose. [docker/for-mac#3795](https://github.com/docker/for-mac/issues/3795)
+- Added missing completions for the `fish shell` for Docker Compose [docker/for-mac#3795](https://github.com/docker/for-mac/issues/3795)
 - Fixed a bug that did not allow users to copy and paste text in the **Preferences** > **Daemon** window. [docker/for-mac#3798](https://github.com/docker/for-mac/issues/3798)
 - Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
 - Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.

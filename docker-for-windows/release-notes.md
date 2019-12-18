@@ -35,7 +35,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 
 - **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation that replaces Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
 
-  - Users don't have to expose the Samba port, and therefore do not experience issues related to IT firewall or the drive-sharing policy.
+  - Users don't have to expose the Samba port, and therefore do not experience issues related to IT firewall or drive-sharing policy.
   - There is no need to provide user credentials to Docker Desktop. File access rights are automatically enforced when accessing mounted folders through containers.
 
     For more information, see the blog post [ New file sharing implementation in Docker Desktop Windows](https://www.docker.com/blog/new-filesharing-implementation-in-docker-desktop-windows/).
@@ -58,10 +58,8 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 - Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`). Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
 - Fixed an issue which caused Docker Desktop to crash when resetting to factory defaults while running Windows containers.
 - Fixed multiple issues related to Fast Startup.
-- Docker Desktop now supports `inotify` events on shared filesystems for Windows file sharing.
-- Fixed a cache invalidation bug when a file in a shared volume is renamed on the host for Windows file sharing.
-- Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
-- To make VM startup more reliable, Docker Desktop now avoids adding a Hyper-V NIC to the Windows VM when using Hypervisor sockets for Windows file sharing (rather than Samba).
+- Docker Desktop now supports `inotify` events on shared filesystems.
+- Docker Desktop startup is now more reliable and does not clash with host firewall software.
 - Fixed a rare issue that caused to Docker Desktop to crash with the error `Unable to stop Hyper-V VM: Cannot validate argument on parameter 'SwitchName'. The argument is null or empty.`
 - Fixed a bug that caused a rare crash when uninstalling Docker Desktop.
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
@@ -71,9 +69,9 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 
 - When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
 - When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
-- Windows Insider Preview Slow Ring users running OS builds older than 19025 cannot run WSL 2 following upgrade to Docker Desktop Edge 2.1.6.1. WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
+- WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
 - The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
-- The new gRPC FUSE file sharing implementation does not support connecting to new drives after Docker Desktop starts (for example, a USB drive). If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
+- The new gRPC FUSE file sharing implementation does not support connecting to new drives (for example, USB drives) after Docker Desktop starts. If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
 
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
