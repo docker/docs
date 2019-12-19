@@ -9,9 +9,6 @@ skip_read_time: true
 ---
 {% assign page.title = site.name %}
 
-<div class="row">
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-
 ## Get started with Docker
 
 Try our multi-part walkthrough that covers writing your first app,
@@ -19,11 +16,6 @@ data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 
 [Get started with Docker](/get-started/){: class="button outline-btn"}
-
-</div>
-<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-</div>
-</div>
 
 ## Docker products
 
