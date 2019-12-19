@@ -1882,6 +1882,34 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
         - title: Implementing Persistent (sticky) Sessions
           path: /ee/ucp/kubernetes/cluster-ingress/sticky/
+    - title: UCP API
+      path: /reference/ucp/3.2/api/
+    - sectiontitle: UCP CLI
+      section:
+      - path: /reference/ucp/3.2/cli/
+        title: docker/ucp overview
+      - path: /reference/ucp/3.2/cli/backup/
+        title: backup
+      - path: /reference/ucp/3.2/cli/dump-certs/
+        title: dump-certs
+      - path: /reference/ucp/3.2/cli/example-config/
+        title: example-config
+      - path: /reference/ucp/3.2/cli/id/
+        title: id
+      - path: /reference/ucp/3.2/cli/images/
+        title: images
+      - path: /reference/ucp/3.2/cli/install/
+        title: install
+      - path: /reference/ucp/3.2/cli/port-check-server/
+        title: port-check-server
+      - path: /reference/ucp/3.2/cli/restore/
+        title: restore
+      - path: /reference/ucp/3.2/cli/support/
+        title: support
+      - path: /reference/ucp/3.2/cli/uninstall-ucp/
+        title: uninstall-ucp
+      - path: /reference/ucp/3.2/cli/upgrade/
+        title: upgrade
     - path: /ee/ucp/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -4049,34 +4077,6 @@ manuals:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
-  - title: UCP API (swagger)
-    path: /reference/ucp/3.2/api/
-  - sectiontitle: UCP CLI
-    section:
-    - path: /reference/ucp/3.2/cli/
-      title: docker/ucp overview
-    - path: /reference/ucp/3.2/cli/backup/
-      title: backup
-    - path: /reference/ucp/3.2/cli/dump-certs/
-      title: dump-certs
-    - path: /reference/ucp/3.2/cli/example-config/
-      title: example-config
-    - path: /reference/ucp/3.2/cli/id/
-      title: id
-    - path: /reference/ucp/3.2/cli/images/
-      title: images
-    - path: /reference/ucp/3.2/cli/install/
-      title: install
-    - path: /reference/ucp/3.2/cli/port-check-server/
-      title: port-check-server
-    - path: /reference/ucp/3.2/cli/restore/
-      title: restore
-    - path: /reference/ucp/3.2/cli/support/
-      title: support
-    - path: /reference/ucp/3.2/cli/uninstall-ucp/
-      title: uninstall-ucp
-    - path: /reference/ucp/3.2/cli/upgrade/
-      title: upgrade
   - sectiontitle: Standards and compliance
     section:
     - path: /compliance/
