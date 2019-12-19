@@ -1099,10 +1099,10 @@ samples:
   title: Library references
 
 manuals:
-- sectiontitle: Docker Engine - Community
+- sectiontitle: Docker Engine
   section:
   - path: /install/
-    title: Docker Engine - Community
+    title: Overview
   - sectiontitle: Linux
     section:
     - path: /install/linux/docker-ce/centos/
@@ -1117,6 +1117,8 @@ manuals:
       title: Binaries
     - path: /install/linux/linux-postinstall/
       title: Optional Linux post-installation steps
+  - path: /engine/release-notes/
+    title: Release notes
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1611,7 +1613,7 @@ manuals:
     - title: Overview
       path: /ee/supported-platforms/
     - title: Release notes
-      path: /engine/release-notes/
+      path: /ee/docker-ee/release-notes/
     - sectiontitle: Linux
       section:
       - path: /ee/docker-ee/centos/
