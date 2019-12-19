@@ -1414,6 +1414,8 @@ manuals:
           title: Restrict services to worker nodes
         - path: /ee/ucp/admin/configure/run-only-the-images-you-trust/
           title: Run only the images you trust
+        - path: /ee/ucp/admin/configure/scale-your-cluster/
+          title: Scale your cluster
         - path: /ee/ucp/admin/configure/set-session-timeout/
           title: Set the user's session timeout
         - path: /ee/ucp/admin/configure/ucp-configuration-file/
