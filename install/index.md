@@ -1,5 +1,5 @@
 ---
-title: About Docker Engine - Community
+title: Docker Engine overview
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
 redirect_from:
@@ -29,7 +29,7 @@ apps. Docker Engine - Community has three types of update channels, **stable**, 
 
 ## Releases
 
-For the Docker Engine - Community engine, the open
+For the Docker Engine - Community, the open
 repositories [Docker Engine](https://github.com/docker/engine) and
 [Docker Client](https://github.com/docker/cli) apply.
 
@@ -96,14 +96,6 @@ released, all subsequent patch releases are built from the `18.09` branch.
 Binaries built from this releases are available in the stable channel
 `stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
 test channel.
-
-### Relationship between Docker Engine - Community and Docker Engine - Enterprise code
-
-For a given year-month release, Docker releases both Docker Engine - Community and Docker Engine - Enterprise variants concurrently. Docker Engine - Enterprise is a superset of the code delivered in Docker Engine - Community. Docker maintains publicly visible repositories for the Docker Engine - Community code
-as well as private repositories for the Docker Engine - Enterprise code. Automation (a bot) is used to keep the branches between Docker Engine - Community and Docker Engine - Enterprise in sync so as features
-and fixes are merged on the various branches in the Docker Engine - Community repositories (upstream), the corresponding Docker Engine - Enterprise repositories and branches are kept
-in sync (downstream). While Docker and its partners make every effort
-to minimize merge conflicts between Docker Engine - Community and Docker Engine - Enterprise, occasionally they will happen, and Docker will work hard to resolve them in a timely fashion.
 
 ## Next release
 
