@@ -14,12 +14,12 @@ of the [requirements UCP needs to run](system-requirements.md).
 Also, you need to ensure that all nodes, physical and virtual, are running
 the same version of Docker Enterprise.
 
-> Cloud Providers
+> Note
 >
-> If you are installing on a public cloud platform, there is cloud specific UCP
+> If you are installing UCP on a public cloud platform, refer to the cloud-specific UCP
 > installation documentation. For [Microsoft
-> Azure](./cloudproviders/install-on-azure/) this is **mandatory**, for
-> [AWS](./cloudproviders/install-on-aws/) this is optional. 
+> Azure](./cloudproviders/install-on-azure/), this is **mandatory**. For
+> [AWS](./cloudproviders/install-on-aws/), this is optional. 
 {: important}
 
 ## Step 2: Install Docker Enterprise on all nodes
@@ -84,12 +84,12 @@ To install UCP:
     with SELinux enabled, check the [reference
     documentation](/reference/ucp/3.2/cli/install.md).
 
-> Custom Container Networking Interface (CNI) plugins
+> Note
 >
 > UCP will install [Project Calico](https://docs.projectcalico.org/v3.7/introduction/) 
 > for container-to-container communication for Kubernetes. A platform operator may 
 > choose to install an alternative CNI plugin, such as Weave or Flannel. Please see
->[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/).
+>[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/) for more information.
 {: important}
 
 ## Step 5: License your installation
@@ -123,7 +123,7 @@ To join manager nodes to the swarm,
 1.  In the UCP web UI, navigate to the **Nodes** page, and click the
     **Add Node** button to add a new node.
 
-    ![](../../images/nodes-page-ucp.png){: .with-border}
+    ![](../../images/v32-add-node.png){: .with-border}
 
 2.  In the **Add Node** page, check **Add node as a manager** to turn this node
     into a manager and replicate UCP for high-availability.
@@ -141,12 +141,11 @@ To join manager nodes to the swarm,
     contact UCP. The joining node should be able to contact itself at this
     address. The format is `interface:port` or `ip:port`.
 
-    Click the copy icon ![](../../images/copy-swarm-token.png) to copy the
-    `docker swarm join` command that nodes use to join the swarm.
+5.    Click the copy icon to copy the `docker swarm join` command that nodes use to join the swarm.
 
-    ![](../../images/add-node-ucp.png){: .with-border}
+        ![](../../images/add-node-ucp.png){: .with-border}
 
-5.  For each manager node that you want to join to the swarm, log in using
+6.  For each manager node that you want to join to the swarm, log in using
     ssh and run the join command that you copied. After the join command
     completes, the node appears on the **Nodes** page in the UCP web UI.
 
