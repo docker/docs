@@ -21,13 +21,10 @@ addresses.
 
 There are two options for provisioning IPs for the Kubernetes cluster on Azure:
 
-- _An automated mechanism provided by UCP which allows for IP pool configuration and maintenance
-  for standalone Azure VMs._ This service runs within the
-  `calico-node` daemonset and provisions 128 IP addresses for each
-  node by default. For information on customizing this value, see [Adjust the IP count value](#adjust-the-ip-count-value).
-- _Manual provision of additional IP address for each Azure VM._ This
-  could be done through the Azure Portal, the Azure CLI `$ az network nic ip-config create`,
-  or an ARM template. You can find an example of an ARM template
+- **An automated mechanism provided by UCP which allows for IP pool configuration and maintenance for standalone Azure virtual machines (VMs).** This service runs within the
+`calico-node` daemonset and provisions 128 IP addresses for each node by default. For information on customizing this value, see [Adjust the IP count value](#adjust-the-ip-count-value).
+- **Manual provision of additional IP address for each Azure VM.** This
+  could be done through the Azure Portal, the Azure CLI `$ az network nic ip-config create`, or an ARM template. You can find an example of an ARM template
   [here](#manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set).
 
 ## Azure Prerequisites
@@ -133,10 +130,8 @@ virtual network can allocate at least 128 * 256 IP addresses, in order to run a 
 concurrently on a node. This would be ***in addition to*** initial IP allocations to VM
 network interface card (NICs) during Azure resource creation.
 
-Accounting for IP addresses that are allocated to NICs during VM bring-up, set
-the address space of the subnet and virtual network to `10.0.0.0/16`. This
-ensures that the network can dynamically allocate at least 32768 addresses,
-plus a buffer for initial allocations for primary IP addresses.
+Accounting for IP addresses that are allocated to NICs during VM bring-up, set the address space of the subnet and virtual network to `10.0.0.0/16`. This
+ensures that the network can dynamically allocate at least 32768 addresses, plus a buffer for initial allocations for primary IP addresses.
 
 > Note
 >
@@ -215,8 +210,7 @@ for each VM in the VM scale set.
 
 During a UCP installation, a user can alter the number of Azure IP addresses
 UCP will automatically provision for pods. By default, UCP will provision 128
-addresses, from the same Azure Subnet as the hosts, for each VM in
-the cluster. However if you have manually attached additional IP addresses
+addresses, from the same Azure Subnet as the hosts, for each VM in the cluster. However, if you have manually attached additional IP addresses
 to the VMs (via an ARM Template, Azure CLI or Azure Portal) or you
 are deploying in to small Azure subnet (less than /16), an `--azure-ip-count`
 flag can be used at install time.
@@ -246,7 +240,7 @@ addresses to a custom value due to:
 - Deploying UCP on a small Azure subnet (for example, /24)
 - Plan to run a small number of Kubernetes pods on each node.
 
-For example, if you wanted to provision 16 addresses per VM, then
+For example if you wanted to provision 16 addresses per VM, then
 you would pass `--azure-ip-count 16` into the UCP installation command.
 
 If you need to adjust this value post-installation, see
