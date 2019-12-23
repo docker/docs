@@ -357,21 +357,23 @@ data. Then, you try and pull it.
         $ docker-compose exec registry sh
         root@65084fc6f047:/#
 
-3. List the layers for the `test/trusttest` image you pushed:
+3. Navigate to the docker registry folder.
 
-        root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+        / # cd /var/lib/registry/docker/registry/v2/
+
+4. List the layers for the `test/trusttest` image you pushed:
+
+        /var/lib/registry/docker/registry/v2/ # ls -l repositories/test/trusttest/_layers/sha256
         total 12
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
-
-4. Change into the registry storage for one of those layers (this is in a different directory):
-
-        root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+        drwxr-xr-x    2 root     root          4096 Dec 23 15:24 4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+        drwxr-xr-x    2 root     root          4096 Dec 23 15:24 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
+        drwxr-xr-x    2 root     root          4096 Dec 23 15:24 fbe94c69c9b964ffe67daa6e1654ab4f1db1dc14decc30f7c03ae43284cfa72
 
 5. Add malicious data to one of the `trusttest` layers:
 
-        root@65084fc6f047:/# echo "Malicious data" > data
+        root@65084fc6f047:/# vi blobs/sha256/cc/cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd/data
+
+    Change some date in for example the command and save the file.
 
 6. Go back to your `trustsandbox` terminal.
 
@@ -401,12 +403,11 @@ data. Then, you try and pull it.
 
         / # docker pull registry:5000/test/trusttest
         Using default tag: latest
-        Pull (1 of 1): registry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
-        sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e: Pulling from test/trusttest
-
-        aac0c133338d: Retrying in 5 seconds
-        a3ed95caeb02: Download complete
-        error pulling image configuration: unexpected EOF
+        Pull (1 of 1): registry:5000/test/trusttest:latest@sha256:7034d197b82fcb07299fda8b05c91d1601ce64f31bc102b1345d03a2953d210a
+        sha256:7034d197b82fcb07299fda8b05c91d1601ce64f31bc102b1345d03a2953d210a: Pulling from test/trusttest
+        fbe94c69c9b9: Downloading [>                                                  ]  36.41kB/2.296MB
+        4f4fb700ef54: Download complete
+        error pulling image configuration: image config verification failed for digest sha256:cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
 
       The pull did not complete because the trust system couldn't verify the
       image.
