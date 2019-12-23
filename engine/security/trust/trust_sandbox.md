@@ -330,41 +330,52 @@ Now, pull some images from within the `sandbox` container.
         Status: Downloaded newer image for registry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
         Tagging registry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 as registry:5000/test/trusttest:latest
 
+8. Inspect the Docker Trust data for the image
+
+        / # docker trust inspect --pretty registry:5000/test/trusttest
+        Signatures for registry:5000/test/trusttest
+
+        SIGNED TAG          DIGEST                                                             SIGNERS
+        latest              7034d197b82fcb07299fda8b05c91d1601ce64f31bc102b1345d03a2953d210a   (Repo Admin)
+
+        Administrative keys for registry:5000/test/trusttest
+
+        Repository Key: 0c0015a8db104e0138de5af72171100c38df1245c21c2ac1068abb2db6326287
+        Root Key:       6ac70a9c3e844f90a74eed5605a2d00ed9bdb3af75813d8fadb338d4c063e442
+
 ### Test with malicious images
 
 What happens when data is corrupted and you try to pull it when trust is
 enabled? In this section, you go into the `registry` and tamper with some
 data. Then, you try and pull it.
 
-1.  Leave the `sandbox` shell and container running.
+1. Leave the `sandbox` shell and container running.
 
-2.  Open a new interactive terminal from your host, and obtain a shell into the
+2. Open a new interactive terminal from your host, and obtain a shell into the
     `registry` container.
 
         $ docker-compose exec registry sh
         root@65084fc6f047:/#
 
-3.  List the layers for the `test/trusttest` image you pushed:
+3. List the layers for the `test/trusttest` image you pushed:
 
-    ```bash
-    root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
-    total 12
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
-    ```
+        root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+        total 12
+        drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+        drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+        drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
 
-4.  Change into the registry storage for one of those layers (this is in a different directory):
+4. Change into the registry storage for one of those layers (this is in a different directory):
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
-5.  Add malicious data to one of the `trusttest` layers:
+5. Add malicious data to one of the `trusttest` layers:
 
         root@65084fc6f047:/# echo "Malicious data" > data
 
-6.  Go back to your `trustsandbox` terminal.
+6. Go back to your `trustsandbox` terminal.
 
-7.  List the `trusttest` image.
+7. List the `trusttest` image.
 
         / # docker image ls | grep trusttest
         REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
@@ -372,7 +383,7 @@ data. Then, you try and pull it.
         registry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
         registry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
 
-8.  Remove the `trusttest:latest` image from our local cache.
+8. Remove the `trusttest:latest` image from our local cache.
 
         / # docker image rm -f cc7629d1331a
         Untagged: docker/trusttest:latest
@@ -386,7 +397,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9. Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull registry:5000/test/trusttest
         Using default tag: latest
