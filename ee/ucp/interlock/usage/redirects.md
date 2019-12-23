@@ -1,11 +1,14 @@
 ---
 title: Implement application redirects
-description: Learn how to implement redirects using swarm services and the
-  layer 7 routing solution for UCP.
+description: Learn how to implement redirects using swarm services and the Layer 7 routing solution for UCP.
 keywords: routing, proxy, redirects, interlock
 ---
 
 The following example publishes a service and configures a redirect from `old.local` to `new.local`.
+
+> Note
+>
+> There is currently a limitation where redirects do not work if a service is configured for TLS passthrough in Interlock proxy.
 
 First, create an overlay network so that service traffic is isolated and secure:
 

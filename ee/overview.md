@@ -1,12 +1,8 @@
 ---
-description: Home page for Docker Enterprise documentation
-keywords: Docker Enterprise, documentation, manual, guide, reference, api, CLI
 title: Docker Enterprise
+description: Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 ---
-
-The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the [Docker Enterprise Customer FAQ](https://www.docker.com/faq-for-docker-enterprise-customers-and-partners).
-
-## Docker Enterprise platform
 
 The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker Enterprise is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
 
