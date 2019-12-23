@@ -74,65 +74,190 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
 3. Add the following to the new file.
 
-        version: "2"
+        ```yaml
+        version: "2.1"
         services:
-          notaryserver:
-            image: dockersecurity/notary_autobuilds:server-v0.5.1
+          bootstrap:
+            image: golang:1.13-alpine
+            networks:
+              - mdb
+            depends_on:
+              - mysql
             volumes:
-              - notarycerts:/var/lib/notary/fixtures
-            networks:
-              - sandbox
+              - ./notary/migrations:/go/migrations
             environment:
-              - NOTARY_SERVER_STORAGE_TYPE=memory
-              - NOTARY_SERVER_TRUST_SERVICE_TYPE=local
-          sandboxregistry:
-            image: registry:2.4.1
+              GO111MODULE: 'on'
+              MIGRATE_VER: v4.6.2
+            command: |-
+              sh -c 'go get -tags 'mysql' github.com/golang-migrate/migrate/v4/cli@$${MIGRATE_VER} &&
+                mv /go/bin/cli /go/bin/migrate &&
+                SERVICE_NAME=notary_signer ./migrations/migrate.sh &&
+                SERVICE_NAME=notary_server ./migrations/migrate.sh'
+
+          server:
+            image: notary:server
+            networks:
+              mdb:
+              sig:
+              sandbox:
+                aliases:
+                  - notary-server
+            ports:
+              - "8080"
+              - "4443:4443"
+            volumes:
+              - ./certs:/certs
+            depends_on:
+              - mysql
+              - signer
+              - bootstrap
+            entrypoint: /usr/bin/env sh
+            command: -c 'sleep 21s && notary-server -config server-config.json'
+
+          signer:
+            image: notary:signer
+            networks:
+              mdb:
+              sig:
+                aliases:
+                  - notarysigner
+            volumes:
+              - ./certs:/certs
+            depends_on:
+              - mysql
+              - bootstrap
+            environment:
+              NOTARY_SIGNER_DEFAULT_ALIAS: timestamp_1
+              NOTARY_SIGNER_TIMESTAMP_1: testpassword
+            entrypoint: /usr/bin/env sh
+            command: -c 'sleep 20s && notary-signer -config signer-config.json'
+
+          mysql:
+            image: mariadb:10.4
+            networks:
+              - mdb
+            volumes:
+              - ./notary/notarysql/mysql-initdb.d:/docker-entrypoint-initdb.d
+              - notary_data:/var/lib/mysql
+            environment:
+              TERM: dumb
+              MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+            command: mysqld --innodb_file_per_table
+
+          registry:
+            image: registry:2.7
+            environment:
+              REGISTRY_HTTP_SECRET: topS3cr3t
             networks:
               - sandbox
-            container_name: sandboxregistry
-          trustsandbox:
+
+          sandbox:
             image: docker:dind
             networks:
               - sandbox
             volumes:
-              - notarycerts:/notarycerts
+              - ./certs:/certs
+            depends_on:
+              - server
             privileged: true
-            container_name: trustsandbox
-            entrypoint: ""
+            environment:
+              # DOCKER_CONTENT_TRUST: "1"
+              # DOCKER_CONTENT_TRUST_SERVER: https://notary-server:4443
+            entrypoint: /usr/bin/env sh
             command: |-
-                sh -c '
-                    cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
-                    update-ca-certificates &&
-                    dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
-        volumes:
-          notarycerts:
-            external: false
-        networks:
-          sandbox:
-            external: false
+              -c 'cp /certs/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
+                  update-ca-certificates &&
+                  dockerd-entrypoint.sh --insecure-registry registry:5000'
+
+          volumes:
+            notary_data:
+              external: false
+
+          networks:
+            mdb:
+              external: false
+            sig:
+              external: false
+            sandbox:
+              external: false
+        ```
 
 4. Save and close the file.
 
-5. Run the containers on your local system.
+    > **Note:** You can also uncomment the *DOCKER_CONTENT_TRUST* variables to enable Content Trust and point to your local notary straight away.
+
+5. Clone the notary repository
+
+    As the notary `server` and `signer` images need some certificates and a database to be in place we will grab those for brevity from the [notary github repository](https://github.com/theupdateframework/notary).
+
+    > **NOTE:** for production notary servers you should not rely on these certificates.
+
+    Furthermore this repository contains the database migration scripts which are used in our docker-compose setup as well.
+
+        $ git clone https://github.com/theupdateframework/notary.git
+
+6. Copy the test certificates required for notary server
+
+        $ mkdir -p certs
+        $ cp notary/fixtures/root-ca.crt certs
+        $ cp notary/fixtures/notary-{server,signer}.{key,crt} certs
+
+7. Verify your folder structure and content
+
+    If you followed the steps accordingly you should now have the following folders and files
+
+        $ tree .
+        trustsandbox
+        ├── ...
+        ├── certs
+        │   ├── notary-server.crt
+        │   ├── notary-server.key
+        │   ├── notary-signer.crt
+        │   ├── notary-signer.key
+        │   └── root-ca.crt
+        ├── docker-compose.yml
+        └── notary
+                ├── ...
+                ├── left for brevity...
+                ├── ...
+                ├── fixtures
+                │   ├── ...
+                │   ├── notary-server.crt
+                │   ├── notary-server.key
+                │   ├── notary-signer.crt
+                │   ├── notary-signer.key
+                │   ├── root-ca.crt
+                │   └── ...
+                ├── ...
+                ├── notarysql
+                │   ├── mysql-initdb.d
+                │   │   ├── initial-notaryserver.sql
+                │   │   └── initial-notarysigner.sql
+                │   └── ...
+                ├── ...
+                └── ...
+
+        103 directories, 356 files
+
+8. Run the containers on your local system.
 
         $ docker-compose up -d
 
     The first time you run this, the docker-in-docker, Notary server, and registry
     images are downloaded from Docker Hub.
 
-
 ## Play in the sandbox
 
-Now that everything is setup, you can go into your `trustsandbox` container and
+Now that everything is setup, you can go into your `sandbox` container and
 start testing Docker content trust. From your host machine, obtain a shell
-in the `trustsandbox` container.
+in the `sandbox` container.
 
-    $ docker container exec -it trustsandbox sh
+    $ docker-compose exec sandbox sh
     / #
 
 ### Test some trust operations
 
-Now, pull some images from within the `trustsandbox` container.
+Now, pull some images from within the `sandbox` container.
 
 1. Download a `docker` image to test with.
 
@@ -148,7 +273,7 @@ Now, pull some images from within the `trustsandbox` container.
 
 2. Tag it to be pushed to our sandbox registry:
 
-        / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
+        / # docker tag docker/trusttest registry:5000/test/trusttest:latest
 
 3. Enable content trust.
 
@@ -156,23 +281,23 @@ Now, pull some images from within the `trustsandbox` container.
 
 4. Identify the trust server.
 
-        / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
+        / # export DOCKER_CONTENT_TRUST_SERVER=https://notary-server:4443
 
     This step is only necessary because the sandbox is using its own server.
     Normally, if you are using the Docker Public Hub this step isn't necessary.
 
 5. Pull the test image.
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        / # docker pull registry:5000/test/trusttest
         Using default tag: latest
-        Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest: notaryserver:4443 does not have trust data for sandboxregistry:5000/test/trusttest
+        Error: remote trust data does not exist for registry:5000/test/trusttest: notary-server:4443 does not have trust data for registry:5000/test/trusttest
 
-      You see an error, because this content doesn't exist on the `notaryserver` yet.
+      You see an error, because this content doesn't exist on the `notary-server` yet.
 
 6. Push and sign the trusted image.
 
-        / # docker push sandboxregistry:5000/test/trusttest:latest
-        The push refers to a repository [sandboxregistry:5000/test/trusttest]
+        / # docker push registry:5000/test/trusttest:latest
+        The push refers to a repository [registry:5000/test/trusttest]
         5f70bf18a086: Pushed
         c22f7bc058a9: Pushed
         latest: digest: sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 size: 734
@@ -185,10 +310,10 @@ Now, pull some images from within the `trustsandbox` container.
         way to recover this key. You can find the key in your config directory.
         Enter passphrase for new root key with ID 27ec255:
         Repeat passphrase for new root key with ID 27ec255:
-        Enter passphrase for new repository key with ID 58233f9 (sandboxregistry:5000/test/trusttest):
-        Repeat passphrase for new repository key with ID 58233f9 (sandboxregistry:5000/test/trusttest):
-        Finished initializing "sandboxregistry:5000/test/trusttest"
-        Successfully signed "sandboxregistry:5000/test/trusttest":latest
+        Enter passphrase for new repository key with ID 58233f9 (registry:5000/test/trusttest):
+        Repeat passphrase for new repository key with ID 58233f9 (registry:5000/test/trusttest):
+        Finished initializing "registry:5000/test/trusttest"
+        Successfully signed "registry:5000/test/trusttest":latest
 
     Because you are pushing this repository for the first time, Docker creates
     new root and repository keys and asks you for passphrases with which to
@@ -197,27 +322,26 @@ Now, pull some images from within the `trustsandbox` container.
 
 7. Try pulling the image you just pushed:
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        / # docker pull registry:5000/test/trusttest
         Using default tag: latest
-        Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
+        Pull (1 of 1): registry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
         sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926: Pulling from test/trusttest
         Digest: sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        Status: Downloaded newer image for sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        Tagging sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 as sandboxregistry:5000/test/trusttest:latest
-
+        Status: Downloaded newer image for registry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
+        Tagging registry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 as registry:5000/test/trusttest:latest
 
 ### Test with malicious images
 
 What happens when data is corrupted and you try to pull it when trust is
-enabled? In this section, you go into the `sandboxregistry` and tamper with some
+enabled? In this section, you go into the `registry` and tamper with some
 data. Then, you try and pull it.
 
-1.  Leave the `trustsandbox` shell and container running.
+1.  Leave the `sandbox` shell and container running.
 
 2.  Open a new interactive terminal from your host, and obtain a shell into the
-    `sandboxregistry` container.
+    `registry` container.
 
-        $ docker container exec -it sandboxregistry bash
+        $ docker-compose exec registry sh
         root@65084fc6f047:/#
 
 3.  List the layers for the `test/trusttest` image you pushed:
@@ -243,17 +367,17 @@ data. Then, you try and pull it.
 7.  List the `trusttest` image.
 
         / # docker image ls | grep trusttest
-        REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
-        docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
-        sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
-        sandboxregistry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
+        REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+        docker/trusttest               latest              cc7629d1331a        11 months ago       5.025 MB
+        registry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
+        registry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
 
 8.  Remove the `trusttest:latest` image from our local cache.
 
         / # docker image rm -f cc7629d1331a
         Untagged: docker/trusttest:latest
-        Untagged: sandboxregistry:5000/test/trusttest:latest
-        Untagged: sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
+        Untagged: registry:5000/test/trusttest:latest
+        Untagged: registry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
         Deleted: sha256:cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
         Deleted: sha256:2a1f6535dc6816ffadcdbe20590045e6cbf048d63fd4cc753a684c9bc01abeea
         Deleted: sha256:c22f7bc058a9a8ffeb32989b5d3338787e73855bf224af7aa162823da015d44c
@@ -264,9 +388,9 @@ data. Then, you try and pull it.
 
 8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        / # docker pull registry:5000/test/trusttest
         Using default tag: latest
-        Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
+        Pull (1 of 1): registry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
         sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e: Pulling from test/trusttest
 
         aac0c133338d: Retrying in 5 seconds
@@ -281,7 +405,6 @@ data. Then, you try and pull it.
 Now, you have a full Docker content trust sandbox on your local system,
 feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
-
 
 ## Clean up your sandbox
 
