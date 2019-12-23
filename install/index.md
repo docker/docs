@@ -24,24 +24,52 @@ Docker Engine is an open source containerization technology for building and
 containerizing your applications. Docker Engine acts as a client-server
 application with:
 * A server with a long-running daemon process ([`dockerd`](https://docs.docker.com/engine/reference/commandline/dockerd/)).
-* A REST API which specifies interfaces that programs can use to talk to and
+* APIs which specify interfaces that programs can use to talk to and
   instruct the Docker daemon.
 * A command line interface (CLI) client ([`docker`](https://docs.docker.com/engine/reference/commandline/cli/)).
 
-The CLI uses the Docker REST API to control or interact with the Docker daemon
+The CLI uses Docker APIs to control or interact with the Docker daemon
 through scripting or direct CLI commands. Many other Docker applications use the
 underlying API and CLI. The daemon creates and manage Docker objects, such as
 images, containers, networks, and volumes.
 
-## Releases
-
-Docker Engine - Community is ideal for developers and small
-teams looking to get started with Docker and experimenting with container-based
-apps. Docker Engine - Community has three types of update channels, **stable**, **test**, and **nightly**:
+Docker Engine has three types of update channels, **stable**, **test**, and **nightly**:
 
 * **Stable** gives you latest releases for general availability.
 * **Test** gives pre-releases that are ready for testing before general availability.
 * **Nightly** gives you latest builds of work in progress for the next major release.
+
+For more information, see [Release channels](#release-channels).
+
+## Supported platforms
+
+Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install/)
+and [Windows](/docker-for-windows/install/) through Docker Desktop, Windows
+Server, and as a static binary installation. Find your preferred operating
+system below.
+
+#### Desktop
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+
+| Platform                                                                    |      x86_64       |
+|:----------------------------------------------------------------------------|:-----------------:|
+| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
+
+#### Server
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign install-prefix-ce = '/install/linux/docker-ce' %}
+
+| Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
+|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
+
+## Release channels
 
 ### Stable
 
@@ -51,10 +79,6 @@ branch. The branch is created with format `<year>.<month>`, for example
 month to expect the release to be generally available. All further patch
 releases are performed from that branch. For example, once `v18.09.0` is
 released, all subsequent patch releases are built from the `18.09` branch.
-
-Binaries built from this releases are available in the stable channel
-`stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
-test channel.
 
 ### Test
 
@@ -91,42 +115,9 @@ These builds allow for testing from the latest code on the master branch.
 
 The release channel for these builds is called `nightly`.
 
-### Next release
-
-The activity for upcoming year-month releases is tracked in the milestones
-of the repository.
-
-## Supported platforms
-
-Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install/)
-and [Windows](/docker-for-windows/install/) through Docker Desktop, Windows
-Server, and as a static binary installation. Find your preferred operating
-system below.
-
-#### Desktop
-
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-
-| Platform                                                                    |      x86_64       |
-|:----------------------------------------------------------------------------|:-----------------:|
-| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
-| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
-
-#### Server
-
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-{% assign install-prefix-ce = '/install/linux/docker-ce' %}
-
-| Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
-|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
-
 ## Support
 
-Docker Engine - Community releases of a year-month branch are supported with patches as needed for 7 months after the first year-month general availability
+Docker Engine releases of a year-month branch are supported with patches as needed for 7 months after the first year-month general availability
 release.
 
 This means bug reports and backports to release branches are assessed
@@ -149,7 +140,13 @@ or by adding a comment to the PR.
 
 Patch releases are always backward compatible with its year-month version.
 
-### Reporting security issues
+### Licensing
+
+Docker is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
+license text.
+
+## Reporting security issues
 
 The Docker maintainers take security seriously. If you discover a security
 issue, please bring it to their attention right away!
@@ -159,19 +156,6 @@ to security@docker.com.
 
 Security reports are greatly appreciated, and Docker will publicly thank you
 for it.
-
-### Exceptions
-
-Exceptions are made in the interest of __security patches__. If a break
-in release procedure or product functionality is required, it will
-be communicated clearly, and the solution will be considered against
-total impact.
-
-### Licensing
-
-Docker is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
-license text.
 
 ## Get started
 
