@@ -23,10 +23,10 @@ toc_max: 2
 Docker Engine is an open source containerization technology for building and
 containerizing your applications. Docker Engine acts as a client-server
 application with:
-* A server with a long-running daemon process ([`dockerd`](https://docs.docker.com/engine/reference/commandline/dockerd/)).
+* A server with a long-running daemon process [`dockerd`](/engine/reference/commandline/dockerd/).
 * APIs which specify interfaces that programs can use to talk to and
   instruct the Docker daemon.
-* A command line interface (CLI) client ([`docker`](https://docs.docker.com/engine/reference/commandline/cli/)).
+* A command line interface (CLI) client [`docker`](/engine/reference/commandline/cli/).
 
 The CLI uses Docker APIs to control or interact with the Docker daemon
 through scripting or direct CLI commands. Many other Docker applications use the
