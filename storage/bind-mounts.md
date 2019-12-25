@@ -159,7 +159,7 @@ $ docker container stop devtest
 $ docker container rm devtest
 ```
 
-> **Note** A popular way to run Docker in Docker on \*nix machine is to bind mount Docker's socket to itself using an option like `--volume /var/run/docker.sock:/var/run/docker.sock`.
+> **Note**: A popular way to run Docker in Docker on \*nix machine is to bind mount Docker's socket to itself using an option like `--volume /var/run/docker.sock:/var/run/docker.sock`.
 > However, this method actually allows to run sibling containers, *not* nested ones.
 > An important consequence is that if a directory is bind mounted while starting *container B* from inside *container A*, the directory which is mounted is always the one on the host, *not* the one inside *container A*.
 
