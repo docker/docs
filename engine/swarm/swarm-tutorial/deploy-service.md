@@ -31,8 +31,8 @@ is not a requirement to deploy a service.
     ```bash
     $ docker service ls
 
-    ID            NAME        SCALE  IMAGE   COMMAND
-    9uk4639qpg7n  helloworld  1/1    alpine  ping docker.com
+   ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+    kpqkgof0idiq        helloworld          replicated          1/1                 alpine:latest
     ```
 
 ## What's next?
