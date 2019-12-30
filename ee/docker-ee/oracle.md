@@ -44,8 +44,6 @@ Enterprise. Items that require action are explained below.
 - Find the URL for your Docker Engine - Enterprise repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux if installing or upgrading Docker Engine - Enterprise 17.06.1
-  or newer.
 
 ### Architectures and storage drivers
 
