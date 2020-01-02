@@ -12,37 +12,35 @@ solution from Docker. You install it on-premises or in your virtual private
 cloud, and it helps you manage your Docker cluster and applications through a
 single interface.
 
-![](images/overview-1.png){: .with-border}
+![](images/v32dashboard.png){: .with-border}
 
 ## Centralized cluster management
 
 With Docker, you can join up to thousands of physical or virtual machines
 together to create a container cluster that allows you to deploy your
-applications at scale. Docker Universal Control Plane extends the
-functionality provided by Docker to make it easier to manage your cluster
-from a centralized place.
+applications at scale. UCP extends the functionality provided by Docker to make it easier to manage your cluster from a centralized place.
 
 You can manage and monitor your container cluster using a graphical UI.
 
-![](images/overview-2.png){: .with-border}
+![](images/v32nodes.png){: .with-border}
 
 ## Deploy, manage, and monitor
 
-With Docker UCP, you can manage from a centralized place all of the computing
+With UCP, you can manage from a centralized place all of the computing
 resources you have available, like nodes, volumes, and networks.
 
 You can also deploy and monitor your applications and services.
 
 ## Built-in security and access control
 
-Docker UCP has its own built-in authentication mechanism and integrates with
+UCP has its own built-in authentication mechanism and integrates with
 LDAP services. It also has role-based access control (RBAC), so that you can
 control who can access and make changes to your cluster and applications.
 [Learn about role-based access control](authorization/index.md).
 
-![](images/overview-3.png){: .with-border}
+![](images/v32users.png){: .with-border}
 
-Docker UCP integrates with Docker Trusted Registry so that you can keep the
+UCP integrates with Docker Trusted Registry (DTR) so that you can keep the
 Docker images you use for your applications behind your firewall, where they
 are safe and can't be tampered with.
 
@@ -62,7 +60,7 @@ cluster that's managed by UCP:
 docker info
 ```
 
-This command produces the output that you expect from the Docker EE Engine:
+This command produces the output that you expect from Docker Enterprise:
 
 ```bash
 Containers: 38
@@ -83,4 +81,4 @@ Managers: 1
 ## Where to go next
 
 - [Install UCP](admin/install/index.md)
-- [Docker EE Platform 2.0 architecture](/ee/docker-ee-architecture.md)
+- [Docker Enterprise architecture](/ee/docker-ee-architecture.md)
