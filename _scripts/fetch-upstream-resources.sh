@@ -83,10 +83,9 @@ wget --quiet --directory-prefix=./engine/api/v1.36/ https://raw.githubuserconten
 wget --quiet --directory-prefix=./engine/api/v1.37/ https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/engine/api/swagger.yaml || (echo "Failed 1.37 swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/api/v1.38/ https://raw.githubusercontent.com/docker/docker-ce/v18.06.3-ce/components/engine/api/swagger.yaml || (echo "Failed 1.38 swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/api/v1.39/ https://raw.githubusercontent.com/docker/docker-ce/v18.09.9/components/engine/api/swagger.yaml    || (echo "Failed 1.39 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/v1.40/ https://raw.githubusercontent.com/docker/docker-ce/19.03/components/engine/api/swagger.yaml || (echo "Failed 1.40 swagger download" && exit 1)
-
 
 # Get a few one-off files that we use directly from upstream
+wget --quiet --directory-prefix=./engine/api/v"${latest_engine_api_version}"/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/engine/api/swagger.yaml     || (echo "Failed ${latest_engine_api_version} swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                    || (echo "Failed engine/deprecated.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md             || (echo "Failed engine/reference/builder.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md                 || (echo "Failed engine/reference/run.md download" && exit 1)
