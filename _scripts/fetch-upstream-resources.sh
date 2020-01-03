@@ -71,7 +71,7 @@ wget --quiet --directory-prefix=./engine/api/v1.25/ https://raw.githubuserconten
 wget --quiet --directory-prefix=./engine/api/v1.26/ https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml                || (echo "Failed 1.26 swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/api/v1.27/ https://raw.githubusercontent.com/docker/docker/v17.03.1-ce/api/swagger.yaml                || (echo "Failed 1.27 swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/api/v1.28/ https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml                || (echo "Failed 1.28 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/v1.29/ https://raw.githubusercontent.com/docker/docker/17.05.x/api/swagger.yaml                    || (echo "Failed 1.29 swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v1.29/ https://raw.githubusercontent.com/docker/docker/v17.05.0-ce/api/swagger.yaml                || (echo "Failed 1.29 swagger download" && exit 1)
 # New location for swagger.yaml for 17.06+
 wget --quiet --directory-prefix=./engine/api/v1.30/ https://raw.githubusercontent.com/docker/docker-ce/17.06/components/engine/api/swagger.yaml || (echo "Failed 1.30 swagger download" && exit 1)
 wget --quiet --directory-prefix=./engine/api/v1.31/ https://raw.githubusercontent.com/docker/docker-ce/17.07/components/engine/api/swagger.yaml || (echo "Failed 1.31 swagger download" && exit 1)
