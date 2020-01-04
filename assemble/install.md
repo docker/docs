@@ -29,7 +29,7 @@ Docker Assemble requires its own buildkit instance to be running in a Docker con
 To start the backend, run:
 
 ```
-~$ docker assemble backend start`
+~$ docker assemble backend start
 Pulling image «…»: Success
 Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```
