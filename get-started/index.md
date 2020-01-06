@@ -57,7 +57,7 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
+Welcome! We are excited that you want to learn Docker. The _Docker Community QuickStart_
 teaches you how to:
 
 1. Set up your Docker environment (on this page)

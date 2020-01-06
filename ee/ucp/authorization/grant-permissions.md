@@ -24,51 +24,69 @@ A common workflow for creating grants has four steps:
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
 - Create **grants** by combining subject + role + resource set.
 
-## Kubernetes grants
+## Creating grants
+ To create a grant:
+ 
+ 1. Log in to the UCP web UI.
+ 2. Click **Access Control**.
+ 3. Click **Grants**.
+ 4. In the Grants window, select **Kubernetes** or **Swarm**.
+
+### Kubernetes grants
 
 With Kubernetes orchestration, a grant is made up of *subject*, *role*, and
 *namespace*.
 
+> Note
+> 
 > This section assumes that you have created objects for the grant: subject, role,
 > namespace.
 {: .important}
 
 To create a Kubernetes grant (role binding) in UCP:
 
-1. Click **Grants** under **Access Control**.
-2. Click **Create Role Binding**.
-3. Click **Namespaces** under **Kubernetes**.
-4. Find the desired namespace and click **Select Namespace**.
-5. On the **Roles** tab, select a role.
-6. On the **Subjects** tab, select a user, team, organization, or service
-   account to authorize.
+1. Click **Create Role Binding**.
+2. Under Subject, select **Users**, **Organizations**, or **Service Account**.
+    - For Users, select the user from the pull-down menu (these should have already been created as objects).
+    - For Organizations, select the Organization and Team (optional) from the pull-down menu.
+    - For Service Account, select the Namespace and Service Account from the pull-down menu.
+3. Click **Next** to save your selections.
+4. Under Resource Set, toggle the **Apply Role Binding to all namespaces (Cluster Role Binding)** switch.
+5. Click **Next**.
+6. Under Role, select a cluster role.
 7. Click **Create**.
 
-## Swarm grants
+### Swarm grants
 
 With Swarm orchestration, a grant is made up of *subject*, *role*, and
 *collection*.
 
+> Note
+> 
 > This section assumes that you have created objects to grant: teams/users,
 > roles (built-in or custom), and a collection.
 
 ![](../images/ucp-grant-model-0.svg){: .with-border}
 ![](../images/ucp-grant-model.svg){: .with-border}
 
-To create a grant in UCP:
+To create a Swarm grant in UCP:
 
-1. Click **Grants** under **Access Control**.
-2. Click **Swarm**
-3. Click **Create Grant**.
-4. In the **Select Subject Type** section, select **Users** or **Organizations**.
-5. Click **View Children** until you get to the desired collection and **Select**.
-6. On the **Roles** tab, select a role.
-7. On the **Subjects** tab, select a user, team, or organization to authorize.
+1. Click **Create Grant**.
+2. Under Subject, select **Users** or **Organizations**.
+    - For Users, select a user from the pull-down menu.
+    - For Organizations, select the Organization and Team (optional) from the pull-down menu.
+3. Click **Next**.
+4. Under Resource Set, click **View Children** until you get to the desired collection.
+5. Click **Select Collection**.
+6. Click **Next**.
+7. Under Role, select a role from the pull-down menu.
 8. Click **Create**.
 
+> Note
+>
 > By default, all new users are placed in the `docker-datacenter` organization.
-> To apply permissions to all Docker EE users, create a grant with the
-> `docker-datacenter` org as a subject.
+> To apply permissions to all Docker Enterprise users, create a grant with the
+> `docker-datacenter` organization as a subject.
 {: .important}
 
 ## Where to go next

@@ -1,18 +1,30 @@
 ---
 title: Docker Engine release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community
-keywords: docker, docker engine, ce, whats new, release notes
+description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise
+keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
 skip_read_time: true
 redirect_from:
- - /release-notes/docker-ce/
+ - /ee/engine/release-notes/
 ---
 
->{% include enterprise_label_shortform.md %}
-
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine - Community.
+for Docker Engine - Enterprise.
+
+Docker Engine - Enterprise builds upon the corresponding Docker Engine -
+Community that it references. Docker Engine - Enterprise includes enterprise
+features as well as back-ported fixes (security-related and priority defects)
+from the open source. It also incorporates defect fixes for environments in
+which new features cannot be adopted as quickly for consistency and
+compatibility reasons.
+
+> **Note:**
+> New in 18.09 is an aligned release model for Docker Engine - Community and
+> Docker Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an
+> incrementing patch version. The enterprise engine is a superset of the
+> community engine. They will ship concurrently with the same x patch version
+> based on the same code base.
 
 > **Note:**
 > The client and container runtime are now in separate packages from the daemon
