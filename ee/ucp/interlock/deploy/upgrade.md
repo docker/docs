@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/upgrade/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services.md)
 functionality was redesigned in UCP 3.0 for greater security and flexibility.
 The functionality was also renamed to "layer 7 routing", to make it easier for
@@ -33,7 +35,7 @@ deployed. As part of this, services using HRM labels are inspected.
 3. The HRM service is removed.
 4. The `ucp-interlock` service is deployed with the configuration created.
 5. The `ucp-interlock` service deploys the `ucp-interlock-extension` and
-`ucp-interlock-proxy-services`.
+`ucp-interlock-proxy` services.
 
 The only way to rollback from an upgrade is by restoring from a backup taken
 before the upgrade. If something goes wrong during the upgrade process, you
@@ -90,7 +92,7 @@ don't have any configuration with the same name by running:
 * If either the `ucp-interlock-extension` or `ucp-interlock-proxy` services are
 not running, it's possible that there are port conflicts.
 As a workaround re-enable the layer 7 routing configuration from the
-[UCP settings page](deploy/index.md). Make sure the ports you choose are not
+[UCP settings page](index.md). Make sure the ports you choose are not
 being used by other services.
 
 ## Workarounds and clean-up

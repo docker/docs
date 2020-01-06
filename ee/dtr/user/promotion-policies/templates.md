@@ -4,6 +4,8 @@ description: Learn how to use templates when setting your promotion policies to 
 keywords: registry, promotion, mirror
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When defining promotion policies you can use templates to dynamically name the
 tag that is going to be created.
 

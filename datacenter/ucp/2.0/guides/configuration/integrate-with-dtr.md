@@ -139,4 +139,4 @@ steps as you used to configure your local computer.
 
 ## Where to go next
 
-* [use your own externally-signed TLS certificates](index.md#customize-the-ucp-tls-certificates)
+* [Use your own externally-signed TLS certificates](/datacenter/ucp/2.0/guides/configuration/index.md#customize-the-ucp-tls-certificates)

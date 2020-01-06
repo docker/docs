@@ -4,6 +4,8 @@ description: Learn how to recover your Docker Enterprise Edition credentials.
 keywords: ucp, authentication, password
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Change user passwords
 
 ### Managed in UCP
@@ -36,7 +38,9 @@ docker run --net=host -v ucp-auth-api-certs:/tls -it "$(docker inspect --format 
 
 ### With DEBUG Global Log Level
 
+{% raw %}
 If you have DEBUG set as your global log level within UCP, running `$(docker inspect --format '{{ index .Spec.TaskTemplate.ContainerSpec.Args 0 }}` returns `--debug` instead of `--db-addr`. Pass `Args 1` to `$docker inspect` instead to reset your admin password.
+{% endraw %}
 
 {% raw %}
 ```bash

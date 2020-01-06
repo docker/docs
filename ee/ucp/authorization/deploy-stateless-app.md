@@ -4,12 +4,14 @@ description: Learn how to deploy a simple application and customize access to re
 keywords: rbac, authorize, authentication, user, team, UCP, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This tutorial explains how to deploy a NGINX web server and limit access to one
 team with role-based access control (RBAC).
 
 ## Scenario
 
-You are the Docker EE system administrator at Acme Company and need to configure
+You are the Docker Enteprise system administrator at Acme Company and need to configure
 permissions to company resources. The best way to do this is to:
 
 - Build the organization with teams and users.

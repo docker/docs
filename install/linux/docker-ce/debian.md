@@ -1,16 +1,16 @@
 ---
-description: Instructions for installing Docker CE on Debian
+description: Instructions for installing Docker Engine - Community on Debian
 keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 - /engine/installation/linux/docker-ce/debian/
-title: Get Docker CE for Debian
+title: Get Docker Engine - Community for Debian
 toc_max: 4
 ---
 
-To get started with Docker CE on Debian, make sure you
+To get started with Docker Engine - Community on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 
@@ -24,17 +24,17 @@ and distributions for different Docker editions, see
 
 ### OS requirements
 
-To install Docker CE, you need the 64-bit version of one of these Debian or
+To install Docker Engine - Community, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
 - Buster 10
 - Stretch 9 (stable) / Raspbian Stretch
 
-Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash
@@ -44,11 +44,11 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker CE package is now called `docker-ce`.
+networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 
-## Install Docker CE
+## Install Docker Engine - Community
 
-You can install Docker CE in different ways, depending on your needs:
+You can install Docker Engine - Community in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -66,7 +66,7 @@ You can install Docker CE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker CE for the first time on a new host machine, you need
+Before you install Docker Engine - Community for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
@@ -164,7 +164,7 @@ from the repository.
     </div>
     </div> <!-- tab-content -->
 
-#### Install Docker CE
+#### Install Docker Engine - Community
 
 > **Note**: This procedure works for Debian on `x86_64` / `amd64`, Debian ARM,
 > or Raspbian.
@@ -175,7 +175,7 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
     ```bash
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
@@ -188,7 +188,7 @@ from the repository.
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
+3.  To install a _specific version_ of Docker Engine - Community, list the available versions in the repo, then select and install:
 
     a. List the versions available in your repo:
 
@@ -209,7 +209,7 @@ from the repository.
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -219,34 +219,34 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, first run `sudo apt-get update`, then follow the
+To upgrade Docker Engine - Community, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker CE, you can download the
+If you cannot use Docker's repository to install Docker Engine - Community, you can download the
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
     choose your Debian version, browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64` and download the `.deb` file for the Docker CE version
+    `armhf`, or `arm64` and download the `.deb` file for the Docker Engine - Community version
     you want to install.
 
     > **Note**: To install a **nightly**  package, change the word
     > `stable` in the  URL to `nightly`.
     > [Learn about **nightly** and **test** channels](/install/index.md).
 
-2.  Install Docker CE, changing the path below to the path where you downloaded
+2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -255,7 +255,7 @@ a new file each time you want to upgrade Docker.
 
     The Docker daemon starts automatically.
 
-3.  Verify that Docker CE is installed correctly by running the `hello-world`
+3.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -265,22 +265,22 @@ a new file each time you want to upgrade Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 
-To upgrade Docker CE, download the newer package file and repeat the
+To upgrade Docker Engine - Community, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
 
-## Uninstall Docker CE
+## Uninstall Docker Engine - Community
 
-1.  Uninstall the Docker CE package:
+1.  Uninstall the Docker Engine - Community package:
 
     ```bash
     $ sudo apt-get purge docker-ce

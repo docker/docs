@@ -7,6 +7,8 @@ redirect_from:
   - /ee/dtr/user/create-and-manage-webhooks/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can configure DTR to automatically post event notifications to a webhook URL of your choosing. This lets you build complex CI and CD pipelines with your Docker images. The following is a complete list of event types you can trigger webhook notifications for via the [web interface](use-the-web-ui) or the [API](use-the-API).
 
 ## Webhook types

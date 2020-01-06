@@ -4,6 +4,8 @@ description: Learn about the permission levels available on Docker Trusted Regis
 keywords: registry, security, permissions, users
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With DTR you get to control which users have access to your image repositories.
 
 By default, anonymous users can only pull images from public repositories.

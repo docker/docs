@@ -4,6 +4,8 @@ description: View your repository permissions.
 keywords: dtr, repository, permissions
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The **Repository Info** tab includes the following details:
    *  README (which you can [edit if you have admin rights to the repository](../../admin/manage-users/permission-levels/#team-permission-levels))
    *  Docker Pull Command

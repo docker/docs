@@ -2,6 +2,7 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
+hide_from_sitemap: true
 ---
 
 On macOS and Windows, Machine is installed along with other Docker products when
@@ -34,7 +35,8 @@ on GitHub.
     ```console
     $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-      sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+      sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+      chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:

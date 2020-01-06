@@ -4,6 +4,8 @@ description: Create grants that limit access to volumes to specific teams.
 keywords: ucp, grant, role, permission, authentication
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 In this example, two teams are granted access to volumes in two different
 resource collections. UCP access control prevents the teams from viewing and
 accessing each other's volumes, even though they may be located in the same

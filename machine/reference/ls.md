@@ -2,6 +2,7 @@
 description: List machines
 keywords: machine, ls, subcommand
 title: docker-machine ls
+hide_from_sitemap: true
 ---
 
 ```none

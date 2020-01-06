@@ -5,6 +5,8 @@ description: Learn more about the architecture of the layer 7 routing solution
 keywords: routing, UCP, interlock, load balancing
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This document covers the following considerations:
 
 - **Interlock default architecture**
@@ -35,7 +37,7 @@ The interlock proxy.1 is then rescheduled with the new nginx configuration that 
 
 ![Interlock default architecture](../images/single-interlock-deploy-2.png)
 
-After proxy.1 is complete, proxy.2 redeploys with the updated ngix configuration for the app.1 task.
+After proxy.1 is complete, proxy.2 redeploys with the updated ngnix configuration for the app.1 task.
 
 ![Interlock default architecture](../images/single-interlock-deploy-3.png)
 
@@ -69,7 +71,7 @@ Swarm services use `update-delay` to control the speed at which a service is upd
 
 Use `update-delay` if …
 
-- You are optimizing for the least number of dropped connections and a longer update cycle is an acceptable tradeoff.
+- You are optimizing for the least number of dropped connections and a longer update cycle as an acceptable tradeoff.
 - Interlock update convergence takes a long time in your environment (can occur when having large amount of overlay networks). 
 
 Do not use `update-delay` if …
@@ -95,6 +97,7 @@ Minimizing the number of overlay networks that Interlock connects to can be acco
 
 - Reduce the number of networks. If the architecture permits it, applications can be grouped together to use the same networks.
 - Use Interlock service clusters. By segmenting Interlock, service clusters also segment which networks are connected to Interlock, reducing the number of networks to which each proxy is connected.
+- Use admin-defined networks and limit the number of networks per service cluster.
 
 #### Use Interlock VIP Mode
 VIP Mode can be used to reduce the impact of application updates on the Interlock proxies. It utilizes the Swarm L4 load balancing VIPs instead of individual task IPs to load balance traffic to a more stable internal endpoint. This prevents the proxy LB configs from changing for most kinds of app service updates reducing churn for Interlock. The following features are not supported in VIP mode:

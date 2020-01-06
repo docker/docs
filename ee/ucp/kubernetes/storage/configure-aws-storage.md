@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/kubernetes/configure-aws-storage/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [AWS Elastic Block Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html) (EBS) can be deployed with Kubernetes in Docker Enterprise 2.1 to use AWS volumes as peristent storage for applications. Before using EBS volumes, configure UCP and the AWS infrastructure for storage orchestration to function.
 
 ## Configure AWS Infrastructure for Kubernetes
@@ -39,7 +41,7 @@ Instances must have the following [AWS Identity and Access Management](https://d
 
 ### Cluster Configuration
 
-- In addition to your existing [install flags](https://docs.docker.com/reference/ucp/3.1/cli/install/) the cloud provider flag `--cloud-provider=aws` is required at install time.
+- In addition to your existing install flags, the cloud provider flag `--cloud-provider=aws` is required at install time.
 - The cloud provider can also be enabled post-install through the UCP config. The `ucp-agent` needs to be updated to propogate the new config, as described in [UCP configuration file](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#inspect-and-modify-existing-configuration).
 
 ```
@@ -138,3 +140,4 @@ The AWS console shows a volume has been provisioned having a matching name with 
 
 - [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
 - [Discover Network Encryption on Kubernetes](/ee/ucp/kubernetes/kubernetes-network-encryption/)
+- [UCP CLI reference](https://docs.docker.com/reference/)

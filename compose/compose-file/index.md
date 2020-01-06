@@ -24,6 +24,11 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Compose file structure and examples
 
+Here is a sample Compose file from the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
+
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Compose file version 3
@@ -132,20 +137,6 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 `networks`, and so on, are listed with the options that support them as
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
-
-A good place to start is the [Getting Started](/get-started/index.md) tutorial
-which uses version 3 Compose stack files to implement multi-container apps,
-service definitions, and swarm mode. Here are some Compose files used in the
-tutorial.
-
-- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
-
-- [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
-
-Another good reference is the Compose file for the voting app sample used in the
-[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
-topic on [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
 
 ## Service configuration reference
 
@@ -279,7 +270,7 @@ build:
     - gitcommithash=cdc3b19
 ```
 
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction, 
+> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
@@ -529,7 +520,7 @@ an error.
 
 ### credential_spec
 
-> **Note**: this option was added in v3.3.
+> **Note**: This option was added in v3.3. Using group Managed Service Account (gMSA) configurations with compose files is supported in Compose version 3.8.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
@@ -558,6 +549,22 @@ credential_spec:
   registry: my-credential-spec
 ```
 
+#### Example gMSA configuration
+When configuring a gMSA credential spec for a service, you only need
+to specify a credential spec with `config`, as shown in the following example:
+```
+version: "3.8"
+services:
+  myservice:
+    image: myimage:latest
+    credential_spec:
+      config: my_credential_spec
+
+configs:
+  my_credentials_spec:
+    file: ./my-credential-spec.json|
+```
+
 ### depends_on
 
 Express dependency between services, Service dependencies cause the following
@@ -569,7 +576,7 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
-  
+
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
 
@@ -784,7 +791,7 @@ Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
-50M of memory and `0.50` (50% of a single core) of available processing time (CPU), 
+50M of memory and `0.50` (50% of a single core) of available processing time (CPU),
 and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```yaml
@@ -915,7 +922,6 @@ The following sub-options (supported for `docker-compose up` and `docker-compose
 - [network_mode](#network_mode)
 - [restart](#restart)
 - [security_opt](#security_opt)
-- [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
 >**Tip:** See the section on [how to configure volumes
@@ -938,50 +944,6 @@ devices:
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
-
-### depends_on
-
-Express dependency between services, Service dependencies cause the following
-behaviors:
-
-- `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` are started before `web`.
-
-- `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  creates and starts `db` and `redis`.
-  
-- `docker-compose stop` stops services in dependency order. In the following
-  example, `web` is stopped before `db` and `redis`.
-
-Simple example:
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  web:
-    build: .
-    depends_on:
-      - db
-      - redis
-  redis:
-    image: redis
-  db:
-    image: postgres
-```
-
-> There are several things to be aware of when using `depends_on`:
->
-> - `depends_on` does not wait for `db` and `redis` to be "ready" before
->   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
->   for more on this problem and strategies for solving it.
->
-> - Version 3 no longer supports the `condition` form of `depends_on`.
->
-> - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
->   with a version 3 Compose file.
 
 ### dns
 
@@ -1758,7 +1720,12 @@ sysctls:
   - net.ipv4.tcp_syncookies=0
 ```
 
-> **Note**: This option is ignored when
+You can only use sysctls that are namespaced in the kernel. Docker does not
+support changing sysctls inside a container that also modify the host system.
+For an overview of supported sysctls, refer to [configure namespaced kernel
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+
+> This option requires Docker Engine 19.03 or up when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -1908,7 +1875,7 @@ volumes:
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
 
-- `type`: the mount type `volume`, `bind` or `tmpfs`
+- `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
   [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
@@ -2293,8 +2260,8 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
-If you want to use a particular network on a common build, use [network] as 
-mentioned in the second yaml file example.  
+If you want to use a particular network on a common build, use [network] as
+mentioned in the second yaml file example.
 
 The syntax for using built-in networks such as `host` and `none` is a little
 different. Define an external network with the name `host` or `none` (that
@@ -2619,6 +2586,5 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Docker](/get-started/)
 - [Samples](/samples/)
 - [Command line reference](/compose/reference/)

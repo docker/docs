@@ -2,6 +2,7 @@
 description: Introduction and Overview of Machine
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine Overview
+hide_from_sitemap: true
 ---
 
 You can use Docker Machine to:
@@ -15,7 +16,7 @@ You can use Docker Machine to:
 Docker Machine is a tool that lets you install Docker Engine on virtual hosts,
 and manage the hosts with `docker-machine` commands. You can use Machine to
 create Docker hosts on your local Mac or Windows box, on your company network,
-in your data center, or on cloud providers like Azure, AWS, or Digital Ocean.
+in your data center, or on cloud providers like Azure, AWS, or DigitalOcean.
 
 Using `docker-machine` commands, you can start, inspect, stop, and restart a
 managed host, upgrade the Docker client and daemon, and configure a Docker

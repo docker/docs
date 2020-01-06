@@ -4,6 +4,8 @@ description: Deploy a DTR cache to allow users in remote geographical locations 
 keywords: DTR, cache, kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This example guides you through deploying a DTR cache, assuming that you've got
 a DTR deployment up and running. The below guide has been tested on 
 Universal Control Plane 3.1, however it should work on any Kubernetes Cluster 

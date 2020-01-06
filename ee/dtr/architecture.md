@@ -4,6 +4,8 @@ description: Learn about the architecture of Docker Trusted Registry.
 keywords: registry, dtr, architecture
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker Universal Control Plane cluster.
 

@@ -8,32 +8,29 @@ redirect_from:
 
 ## Permitted content and support options
 
-* Content that runs on a Docker Enterprise Edition (Docker Certified
-  Infrastructure) may be published in the Store. This content may also qualify
-  to become a Docker Certified Container or Plugin image and be backed by
-  collaborative Docker/Publisher support
+* Content that runs on Docker Enterprise may be published on Docker Hub under a
+Verified Publisher profile. This content may also qualify to become a Docker
+Certified Container or Plugin image, and thus become backed by collaborative
+Docker/Publisher support.
 
-* Content that runs on the Docker Community Edition may be published in the
-  Store, but is not supported by Docker nor is it eligible for certification.
+* Content that runs on the Docker Community may be published in Docker Hub, but
+is not supported by Docker nor is it eligible to become Certified.
 
-* Content that requires a non Certified Infrastructure environment may not be
-  published in the Store.
+* Content that requires a non-Certified Infrastructure environment may not be
+  published.
 
 
-| If your content: | Can publish on Store  | Can be certified and supported by Docker | Supported by publisher |
+| If your content: | Can publish  | Can be Certified | Supported by publisher |
 |:-----|:--------|:------|:-----|
-| Works on Docker Enterprise Edition  | YES | YES |  Required |
-| Works on Docker Community Edition  | YES | NO  |  Optional |
+| Works on Docker Enterprise  | YES | YES |  Required |
+| Works on Docker Community  | YES | NO  |  Optional |
 | Does not work on Docker Certified Infrastructure | NO                       |   N/A       |    N/A     |
 
 
 ## Onboarding
 
 The Docker Hub publishing process begins from the landing page: sign in with
-your Docker ID and specify a product name and image source from a private
-repository. Your product images must be stored in private repositories of Docker
-Cloud and/or Hub as they serve as an internal staging area from which you can
-revise and submit content for review.
+your Docker ID and specify a product name and image source from a private or public repository.
 
 After specifying a source, provide the content-manifest items to populate your
 product details page. These items include logos, descriptions, and licensing and
@@ -127,7 +124,7 @@ of your product, keep your images up-to-date:
   `apt-get install ...` pull the latest versions of dependencies, which may
   include security fixes.
 
-## Create and maintain your publisher profile in the Store
+## Create and maintain your Verified Publisher profile
 
 Let the Docker community know who you are. Add your details, your company
 story, and what you do. At the very minimum, we require:
@@ -136,12 +133,12 @@ story, and what you do. At the very minimum, we require:
 * Company website
 * Phone number
 * Valid company email
-* Company icon/logo (square; at least 512x512px
+* Company icon/logo (square; at least 512x512px)
 
 
 ## Prepare your image-manifest materials
 
-You must provide the namespace (including repository and tags) of a private
+You must provide the namespace (including repository and tags) of a private or public
 repository on Docker Hub that contains the source for your product.
 This repository path is not shown to users, but the repositories you choose
 determine the Product Tiers available for customers to download.
@@ -160,18 +157,17 @@ discoverable:
 9.  Product tier description
 10. Product tier price
 11. Installation instructions
-12. Link to license agreements
+12. Link to, or text of, license agreements
 
 ### How the manifest information is displayed in the UI
 
-This is an approximate representation. We frequently make enhancements to the
-look and some elements might shift around.
+This is an approximate representation, and some elements might shift around as we make enhancements.
 
 ![manifest information displayed on store UI](images/subscribed.png)
 
 ## Support your users
 
-Docker users who download your content from the Store might need your help
+Docker users who download your content might need help
 later, so be prepared for questions! The information you provide with your
 submission saves support time in the future.
 
@@ -183,14 +179,13 @@ there self-help or troubleshooting resources available?
 
 ### Support SLA
 
-Include a Service Level Agreement (SLA) for each image you're offering for the
-Store. An SLA is your commitment to your users about the nature and level of
+Include a Service Level Agreement (SLA) for each image you're offering. An SLA is your commitment to your users about the nature and level of
 support you provide to them. Make sure your SLA includes support hours and
 response-time expectations, where applicable.
 
 ## Security and audit policies
 
-Docker Hub [scans](#docker-security-scanning) your official images for
+Docker Hub [scans](#docker-security-scanning) your content for
 vulnerabilities with the Docker Security Scanning tool, and
 [audits](#usage-audit-and-reporting) consumer activity of your images to provide
 you intelligence about the use of your product.
@@ -214,54 +209,28 @@ To interpret the results of a scanned image:
 1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
 
 2.  Navigate to the repository details page (for example,
-    [Nginx](https://hub.docker.com/images/nginx){: target="_blank" class="_"}).
+    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" class="_"}).
 
-3.  Click **View Available Tags** under the pull command in the upper right of
-    the UI.
+3.  Click **Tags**.
 
-    Displalyed is a list of each tag scan with its age. A solid green bar
-    indicates a clean scan without known vulnerabilities. Yellow, orange, and
-    red indicate minor, major, and critical vulnerabilities respectively.
+    ![Scanned tags](images/image-tags.png)
 
-    ![Scanned tags](images/scan-tags.png)
+    In this section, you can now view the different architectures separately to
+    easily identify the right image for the architecture you need, complete
+    with image size and operating system information.
 
-    > Vulnerability scores
-    >
-    > Vulnerability scores are defined by the entity that issues the
-    > vulnerability, such as [NVD](https://nvd.nist.gov/){: target="_blank" class="_"},
-    > and are based on a
-    > [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale){: target="_blank" class="_"}
-    > defined as part of the
-    > [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document){: target="_blank" class="_"}.
+    ![system info](images/node-tags-system-info.png)
 
-4.  Click a scan summary to see a list of results for each layer of the image.
+4.  Click on the digest for a particular architecture. You can now also see the
+actual source of the image: the layer-by-layer details that make up the image.
 
-    Each layer may have one or more scannable components represented by colored
-    squares in a grid.
+    ![system info](images/node-tags-vulnerabilities.png)
 
-    ![Scanned results](images/scan-view.png)
+5.  Click on any row in the **Image History** list. You’ll see that the image contains multiple components, and that some of them have known vulnerabilities ranging from minor to critical. To explore further, click on the caret to expand and view all of the found vulnerabilities:
 
-    > Base layers
-    >
-    > Base layers contain components that are included in the parent image,
-    > but that you did not build and may not be able to edit. If a base layer
-    > has a vulnerability, switch to a version of the parent image that does not
-    > have any vulnerabilities, or to a similar but more secure image.
+    ![Scanned components](images/node-tags-vulnerability-details.png)
 
-5.  Hover over a square in the grid, then click to see the vulnerability report
-    for that specific component.
-
-    Only components that add software are scanned. If a layer has
-    no scannable components, it shows a `No components in this layer` message.
-
-    ![Scanned component preview](images/scan-single.png)
-
-6.  Click the arrow icon (twice) to expand the list and show all vulnerable
-    components and their CVE report codes.
-
-    ![Scanned components](images/scan-full-details.png)
-
-7.  Click one of the CVE codes to view the original vulnerability report.
+Each vulnerability is linked directly to the CVE (Common Vulnerabilities and Exposures) list entry so that you can learn more about the CVE entry and its implications.
 
 #### Classification of issues
 
@@ -285,15 +254,6 @@ To interpret the results of a scanned image:
   National Vulnerability Database (NVD) provides CVSS scores for
   almost all known vulnerabilities.
 
-* Docker classifies the severity of issues per CVSS range, Docker classification,
-  and service level agreement (SLA) as follows.
-
-| CVSS range | Docker classification | SLA for fixing issues |
-|:-----|:--------|:------|
-| 7.0 to 10.0  | Critical | Within 72 hours of notification |
-| 4.0 to 6.9  | Major | Within 7 days of notification |
-| 0.1 to 3.9 | Minor | No SLA. Best-effort to fix or address in documentation. |
-
 * In addition to CVSS, the Docker Security team can identify or classify
   vulnerabilities that need to be fixed, and categorize them in the
   minor-to-critical range.
@@ -303,14 +263,6 @@ To interpret the results of a scanned image:
 
 * If you use Docker’s Scanning Service, you can subscribe to a notification
   service for new vulnerabilities.
-
-* Failure to meet above SLAs may cause the listing to be put on “hold”.
-
-* A warning label shows up on the marketplace listing. An email is sent to the
-  users who have downloaded and subscribed for notifications.
-
-* A Repo’s listing can stay in the "hold" state for a maximum of 1 month, after
-  which the listing is revoked.
 
 ### Usage audit and reporting
 
@@ -330,7 +282,7 @@ There are three types of certification that appear in Docker Hub.
 ![certified container badge](images/certified_container.png)
 
 Certifies that a container image on Docker Hub has been tested; complies best
-practices guidelines; runs on a Docker Certified Infrastructure; has proven
+practices guidelines; runs on Docker Certified Infrastructure; has proven
 provenance; been scanned for vulnerabilities; and is supported by Docker and the
 content publisher
 
@@ -341,12 +293,6 @@ access system level Docker APIs. Docker Certified Plugins provide the same level
 of assurance as a Docker Certified Container, but go further by having passed an
 additional suite of API compliance testing.
 
-![certified plugins badge](images/certified_infrastructure.png)
-
-Indicates that the release of the Docker Edition and the underlying platform
-have been tested together and are supported in combination by both Docker and
-the partner.
-
 ### Docker Certified Publisher FAQ
 
 #### What is the Docker Certified program?
@@ -354,40 +300,20 @@ the partner.
 Docker Certified Container images and plugins are meant to differentiate high
 quality content on Docker Hub. Customers can consume Certified Containers with
 confidence knowing that both Docker and the publisher stands behind the
-solution. Further details can be found in the
-[Docker Partner Program Guide](https://www.docker.com/partnerprogramguide){: target="_blank" class="_"}.
+solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}.
 
 #### What are the benefits of Docker Certified?
 
 Docker Hub promotes Docker Certified Containers and Plugins running on Docker
-Certified Infrastructure trusted and high quality content. With over 8B image
-pulls and access to Docker’s large customer base, a publisher can differentiate
-their content by certifying their images and plugins. With a revenue share
-agreement, Docker can be a channel for your content. The Docker Certified badge
+Certified Infrastructure trusted and high quality content. The Docker Certified badge
 can also be listed alongside external references to your product.
 
-#### How is the Docker Certified Container image listed on Docker Hub?
-
-These images are differentiated from other images through a
-certification badge. A user can search specifically for CI’s by limiting their
-search parameters to show only certified content.
-
-![certified content example](images/FAQ-certified-content.png)
-
-#### Is certification optional or required?
-
-Certification is recommended for most commercial and supported container images.
-Free, community, and other commercial (non-certified) content may also be listed
-on Docker Hub.
-
-![certified content example](images/FAQ-types-of-certified-content.png)
 
 #### How is support handled?
 
-All Docker Certified Container images and plugins running on Docker Certified
-Infrastructure come with SLA based support provided by the publisher and Docker.
+All Docker Certified Container images and plugins running on Docker Enterprise come with support provided directly by the publisher, under your existing SLA.
 Normally, a customer contacts the publisher for container and application level
-issues. Likewise, a customer contacts Docker for Docker Edition support. In the
+issues. Likewise, a customer contacts Docker for Docker Enterprise support. In the
 case where a customer calls Docker (or vice versa) about an issue on the
 application, Docker advises the customer about the publisher support process and
 performs a handover directly to the publisher if required. TSAnet is required
@@ -396,42 +322,15 @@ for exchange of support tickets between the publisher and Docker.
 #### How does a publisher apply to the Docker Certified program?
 
 Start by applying to be a [Docker Technology
-Partner](https://goto.docker.com/partners){: target="_blank" class="_"}
-
-* Requires acceptance of partnership agreement for completion
-
-* Identify commercial content that can be listed on Store and includes a support
-  offering
-
-* Test your image against the Docker CS Engine 1.12+ or on a Docker Certified
-  Infrastructure version 17.03 and above (Plugins must run on 17.03 and above)
-
-* Submit your image for Certification through the publisher portal. Docker
-  scans the image and works with you to address vulnerabilities. Docker also
-  conducts a best practices review of the image.
-
-* Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or
-  join the Docker Limited Group.
-
-* Upon completion of Certification criteria, and acceptance by
-  Docker, the Publisher’s product page is updated to reflect Certified status.
-
-#### Is there a fee to join the program?
-
-In the future, Docker may charge a small annual listing fee. This is waived for
-the initial period.
+Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}
 
 #### What is the difference between Official Images and Docker Certified?
 
-Many Official images transition to the Docker Certified program and are
-maintained and updated by the original owner of the software. Docker
-continues to maintain some of the base OS images and language frameworks.
+Official Images is a program sponsored by Docker for the curation and packaging of Open Source Software. While upstream vendors are sometimes involved, this is not always the case. Docker Certified content is explicitly provided, maintained, and supported directly by the ISV.
 
 #### How is certification of plugins handled?
 
 Docker Certification program recognizes the need to apply special scrutiny and
 testing to containers that access system level interfaces like storage volumes
 and networking. Docker identifies these special containers as “Plugins” which
-require additional testing by the publisher or Docker. These plugins employ the
-V2 Plugin Architecture that was first made available in 1.12 (experimental) and
-now available in Docker Enterprise Edition 17.03
+require additional testing by the publisher or Docker.

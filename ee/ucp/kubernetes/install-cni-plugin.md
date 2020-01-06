@@ -4,6 +4,8 @@ description: Learn how to install a Container Networking Interface (CNI) plugin 
 keywords: ucp, kubernetes, cni, container networking interface, flannel, weave, calico
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 For Docker Universal Control Plane (UCP), [Calico](https://docs.projectcalico.org/v3.7/introduction/) 
 provides the secure networking functionality for container-to-container communication within
 Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
@@ -12,12 +14,17 @@ UCP is fully supported with Docker providing guidance on the
 [CNI components](https://github.com/projectcalico/cni-plugin).
 
 At install time, UCP can be configured to install an alternative CNI plugin 
-to support alternative use cases. The alternative CNI plugin is certified by 
+to support alternative use cases. The alternative CNI plugin may be certified by 
 Docker and its partners, and published on Docker Hub. UCP components are still 
 fully supported by Docker and respective partners. Docker will provide
-pointers to basic configuration, however for additional guidance on managing third party 
+pointers to basic configuration, however for additional guidance on managing third-party 
 CNI components, the platform operator will need to refer to the partner documentation 
 or contact that third party.
+
+UCP does manage the version or configuration of alternative CNI plugins. UCP
+upgrade will not upgrade or reconfigure alternative CNI plugins. To switch
+between managed and unmanaged CNI plugins or vice versa, you must uninstall and
+then reinstall UCP.
 
 ## Install an unmanaged CNI plugin on Docker UCP
 
@@ -55,7 +62,7 @@ will also be unavailable, as this runs in a Kubernetes pod.
 
 Next, a platform operator should log into UCP, download a UCP client bundle, and
 configure the Kubernetes CLI tool, `kubectl`. See [CLI Based
-Access](ee/ucp/user-access/cli/#download-client-certificates) for more details.
+Access](/ee/ucp/user-access/cli/#download-client-certificates) for more details.
    
 With `kubectl`, you can see that the UCP components running on
 Kubernetes are still pending, waiting for a CNI driver before becoming
@@ -91,6 +98,8 @@ https://github.com/containernetworking/cni/releases/tag/
 Follow the CNI plugin documentation for specific installation 
 instructions.
 
+> Note
+> 
 > While troubleshooting a custom CNI plugin, you may wish to access logs
 > within the kubelet. Connect to a UCP manager node and run
 > `$ docker logs ucp-kubelet`.
@@ -110,10 +119,12 @@ ucp-metrics-nwt2z              3/3       Running   0          22m       10.32.0.
 weave-net-wgvcd                2/2       Running   0          8m        172.31.6.95   manager-01   <none>
 ```
 
-> **Note**: The above example deployment uses Weave. If you are using an alternative 
+> Note
+>
+> The above example deployment uses Weave. If you are using an alternative 
 > CNI plugin, look for the relevant name and review its status.
 
 ## Where to go next
 
 - [Make your Cluster Highly Available](https://docs.docker.com/ee/ucp/admin/install/#step-6-join-manager-nodes)
-- [Install an Ingress Controller on Kubernetes](ee/ucp/kubernetes/layer-7-routing/)
+- [Deploy a Sample Application with Ingress](https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/)

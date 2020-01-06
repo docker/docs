@@ -5,6 +5,8 @@ description: Learn how to install Docker Trusted Registry on a machine with no i
 keywords: registry, install, offline
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The procedure to install Docker Trusted Registry on a host is the same,
 whether that host has access to the internet or not.
 
@@ -15,7 +17,7 @@ all the images. Then you copy that package to the host where you’ll install DT
 
 ## Versions available
 
-{% include components/ddc_url_list_2.html product="dtr" version="2.6" %}
+{% include components/ddc_url_list_2.html product="dtr" version="2.7" %}
 
 ## Download the offline package
 

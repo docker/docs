@@ -1,0 +1,31 @@
+command: docker buildx use
+short: Set the current builder instance
+long: Set the current builder instance
+usage: docker buildx use [OPTIONS] NAME
+pname: docker buildx
+plink: docker_buildx.yaml
+options:
+- option: default
+  value_type: bool
+  default_value: "false"
+  description: Set builder as default for current context
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: global
+  value_type: bool
+  default_value: "false"
+  description: Builder persists context changes
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

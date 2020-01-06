@@ -4,6 +4,8 @@ description: Learn how to upgrade Docker Universal Control Plane on a machine wi
 keywords: ucp, upgrade, offline
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Upgrading Universal Control Plane is the same, whether your hosts have access to
 the internet or not.
 
@@ -17,7 +19,7 @@ copy this package to the host where you upgrade UCP.
 Use a computer with internet access to download the UCP package from the
 following links.
 
-{% include components/ddc_url_list_2.html product="ucp" version="3.1" %}
+{% include components/ddc_url_list_2.html product="ucp" version="3.2" %}
 
 ## Download the offline package
 

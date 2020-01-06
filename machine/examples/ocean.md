@@ -1,22 +1,23 @@
 ---
-description: Using Docker Machine to provision hosts on Digital Ocean
-keywords: docker, machine, cloud, digital ocean
-title: Digital Ocean example
+description: Using Docker Machine to provision hosts on DigitalOcean
+keywords: docker, machine, cloud, digitalocean
+title: DigitalOcean example
+hide_from_sitemap: true
 ---
 
-Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
+Follow along with this example to create a Dockerized [DigitalOcean](https://digitalocean.com) Droplet (cloud host).
 
-### Step 1. Create a Digital Ocean account
+### Step 1. Create a DigitalOcean account
 
-If you have not done so already, go to [Digital Ocean](https://digitalocean.com), create an account, and log in.
+If you have not done so already, go to [DigitalOcean](https://digitalocean.com), create an account, and log in.
 
 ### Step 2. Generate a personal access token
 
 To generate your access token:
 
-1.  Go to the Digital Ocean administrator console and click **API** in the header.
+1.  Go to the DigitalOcean administrator console and click **API** in the header.
 
-    ![Click API in Digital Ocean console](../img/ocean_click_api.png)
+    ![Click API in DigitalOcean console](../img/ocean_click_api.png)
 
 2.  Click **Generate new token** to get to the token generator.
 
@@ -59,9 +60,9 @@ To generate your access token:
 
       When the Droplet is created, Docker generates a unique SSH key and stores it on your local system in `~/.docker/machines`. Initially, this is used to provision the host. Later, it's used under the hood to access the Droplet directly with the `docker-machine ssh` command. Docker Engine is installed on the cloud server and the daemon is configured to accept remote connections over TCP using TLS for authentication.
 
-2. Go to the Digital Ocean console to view the new Droplet.
+2. Go to the DigitalOcean console to view the new Droplet.
 
-    ![Droplet in Digital Ocean created with Machine](../img/ocean_droplet.png)
+    ![Droplet in DigitalOcean created with Machine](../img/ocean_droplet.png)
 
 3. At the command terminal, run `docker-machine ls`.
 
@@ -131,7 +132,7 @@ To remove a host and all of its containers and images, first stop the machine, t
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
     default   *        virtualbox   Running   tcp:////xxx.xxx.xx.xxx:xxxx
 
-If you monitor the Digital Ocean console while you run these commands, notice
+If you monitor the DigitalOcean console while you run these commands, notice
 that it updates first to reflect that the Droplet was stopped, and then removed.
 
 If you create a host with Docker Machine, but remove it through the cloud

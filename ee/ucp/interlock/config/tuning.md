@@ -4,6 +4,8 @@ description: Learn how to tune the proxy service for environment optimization
 keywords: routing, proxy, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Constrain the proxy service to multiple dedicated worker nodes
 Refer to [Proxy service constraints](../deploy/production.md) for information on how to constrain the proxy service to multiple dedicated worker nodes.
 
@@ -30,5 +32,5 @@ updates, such as to let a service settle, use the `update-delay` setting.  For e
 thirty (30) seconds between updates, use the following command:
 
 ```bash
-$> docker service update --update-delay=30s interlock=proxy
+$> docker service update --update-delay=30s interlock-proxy
 ```

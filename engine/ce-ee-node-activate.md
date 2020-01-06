@@ -1,37 +1,37 @@
 ---
 description: Engine
-keywords: Engine, CE, EE, node, activation, enterprise, patching
+keywords: Engine, Docker Engine - Community, EE, node, activation, enterprise, patching
 title: CE-EE Node Activate
 ---
 
-The Docker Engine `18.09` release introduces a new feature called **CE-EE Node Activate**, which allows a user to perform an in-place seamless activation of the Enterprise engine feature set on an existing Community Edition (CE) node through the Docker command line.
+The Docker Engine `18.09` release introduces a new feature called **CE-EE Node Activate**, which allows a user to perform an in-place seamless activation of the Enterprise engine feature set on an existing Docker Engine - Community node through the Docker command line.
 
 CE-EE Node Activate will apply a license, and switch the Docker engine to the Enterprise engine binary.
 
 ## Requirements:
-* The Docker Community Edition (CE) version must be 18.09 or higher.
+* The Docker Engine - Community version must be 18.09 or higher.
 * All of the Docker packages must be installed: docker-cli, docker-server, and containerd.
 
 ## Limitations
 
 * This feature is only supported on x86 Linux nodes.
 * Windows nodes are not currently supported.
-* Node-level Engine activation between CE and EE is only supported in the same version of Docker Enterprise Engine for Docker.
-* Prior versions of Docker CE do not support this feature.
+* Node-level Engine activation between Docker Engine - Community and EE is only supported in the same version of Docker Enterprise Engine for Docker.
+* Prior versions of Docker Engine - Community do not support this feature.
 
-## Notes on patching after running CE to EE Node Activation
+## Notes on patching after running Docker Engine - Community to EE Node Activation
 
-Docker recommends replacing the apt or yum repository from CE with the EE repository that appears 
+Docker recommends replacing the apt or yum repository from Docker Engine - Community with the EE repository that appears 
 on your hub/store account after starting the trial or paid license. This allows apt/yum 
 upgrade operations to work as expected and keep them current as long as your license is still
 valid and has not expired.
 
 > **Note**: You can use the `docker engine update` command. However, if you continue to use
-> the CE packages, the OS package will no longer replace the active daemon binary during apt/yum 
+> the Docker Engine - Community packages, the OS package will no longer replace the active daemon binary during apt/yum 
 > updates, so you are responsible for performing the `docker engine update` operation periodically 
 > to keep your engine up to date.
 
-## Docker Engine 18.09 CE to EE Node Activation Process
+## Docker Engine 18.09 Docker Engine - Community to EE Node Activation Process
 
 The activation can be performed either online with connection to Docker Hub, or offline.
 

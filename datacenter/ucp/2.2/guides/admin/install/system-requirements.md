@@ -1,7 +1,7 @@
 ---
 title: UCP System requirements
 description: Learn about the system requirements for installing Docker Universal Control Plane.
-keywords: UCP, architecture, requirements, Docker EE
+keywords: UCP, architecture, requirements, Docker Enterprise
 ---
 
 Docker Universal Control Plane can be installed on-premises or on the cloud.
@@ -31,7 +31,7 @@ Windows container images are typically larger than Linux ones and for that reaso
 
 When planning for host storage, workflows based around `docker pull` through UCP will result in higher storage requirements on manager nodes, since `docker pull` through UCP results in the image being pulled on all nodes.
 
-Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
+Also, make sure the nodes are running an [operating system support by Docker Enterprise](https://success.docker.com/Policies/Compatibility_Matrix).
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
@@ -80,7 +80,7 @@ to communicate before they time out.
 | RethinkDB                              | 10000        | no           |
 | Stand-alone swarm                      | 90000        | no           |
 
-## Time Synchronization
+## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
@@ -90,7 +90,7 @@ unexpected behavior may cause poor performance or even failures.
 
 ## Compatibility and maintenance lifecycle
 
-Docker EE is a software subscription that includes three products:
+Docker Enterprise is a software subscription that includes three products:
 
 * Docker Engine with enterprise-grade support,
 * Docker Trusted Registry,

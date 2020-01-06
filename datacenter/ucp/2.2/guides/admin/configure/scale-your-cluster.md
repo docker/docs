@@ -95,7 +95,7 @@ To promote or demote a manager node:
 4.  Click **Save** and wait until the operation completes.
 5.  Navigate to the **Nodes** page, and confirm that the node role has changed.
 
-If you're load-balancing user requests to Docker EE across multiple manager
+If you're load-balancing user requests to Docker Enterprise across multiple manager
 nodes, don't forget to remove these nodes from your load-balancing pool when
 you demote them to workers.
 

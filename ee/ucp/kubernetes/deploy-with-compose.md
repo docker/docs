@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/services/deploy-compose-on-kubernetes/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md/)
 files to Kubernetes clusters. Starting in Compose file version 3.3, you use the
 same `docker-compose.yml` file that you use for Swarm deployments, but you
@@ -29,19 +31,16 @@ version: '3.3'
 
 services:
   web:
-    build: web
     image: dockersamples/k8s-wordsmith-web
     ports:
      - "8080:80"
 
   words:
-    build: words
     image: dockersamples/k8s-wordsmith-api
     deploy:
       replicas: 5
 
   db:
-    build: db
     image: dockersamples/k8s-wordsmith-db
 ```
 

@@ -1,10 +1,12 @@
 ---
-title: Isolate cluster nodes in Docker Advanced
+title: Isolate cluster nodes 
 description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication, node, Kubernetes
 ---
 
-With Docker EE Advanced, you can enable physical isolation of resources
+>{% include enterprise_label_shortform.md %}
+
+With Docker Enterprise, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
 different users. To control access to nodes, move them to dedicated collections
 where you can grant access to specific users, teams, and organizations.
@@ -15,8 +17,12 @@ In this example, a team gets access to a node collection and a resource
 collection, and UCP access control ensures that the team members can't view
 or use swarm resources that aren't in their collection.
 
-You need a Docker EE Advanced license and at least two worker nodes to
-complete this example.
+> Note
+> 
+> You need a Docker Enterprise license and at least two worker nodes to
+> complete this example.
+
+To isolate cluster nodes:
 
 1.  Create an `Ops` team and assign a user to it.
 2.  Create a `/Prod` collection for the team's node.
@@ -73,12 +79,12 @@ Move a worker node by changing the value of its access label key,
     its value from `/Shared` to `/Prod`.
 4.  Click **Save** to move the node to the `/Prod` collection.
 
-> Docker EE Advanced required
+> Note
 >
-> If you don't have a Docker EE Advanced license, you'll get the following
+> If you don't have a Docker Enterprise license, you will get the following
 > error message when you try to change the access label:
-> **Nodes must be in either the shared or system collection without an advanced license.**
-> [Get a Docker EE Advanced license](https://www.docker.com/pricing).
+> **Nodes must be in either the shared or system collection without a license.**
+> [Get a Docker Enterprise license](https://www.docker.com/pricing).
 
 ![](../images/isolate-nodes-1.png){: .with-border}
 

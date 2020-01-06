@@ -8,6 +8,8 @@ redirect_from:
   - /ee/ucp/interlock/deploy/host-mode-networking/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default, layer 7 routing components communicate with one another using
 overlay networks, but Interlock supports
 host mode networking in a variety of ways, including proxy only, Interlock only, application only, and hybrid. 
@@ -107,9 +109,11 @@ It assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm joi
 See the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
 getting a Swarm cluster deployed.
 
-Note: When using host mode networking, you cannot use the DNS service discovery because that
-requires overlay networking.  You can use other tooling such as [Registrator](https://github.com/gliderlabs/registrator)
-that will give you that functionality if needed.
+> Note
+> 
+> When using host mode networking, you cannot use the DNS service discovery because that
+> requires overlay networking.  You can use other tooling such as [Registrator](https://github.com/gliderlabs/registrator)
+> that will give you that functionality if needed.
 
 Configure the load balancer worker nodes (`lb-00` and `lb-01`) with node labels in order to pin the Interlock Proxy
 service.  Once you are logged into one of the Swarm managers run the following to add node labels

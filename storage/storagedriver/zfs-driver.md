@@ -29,7 +29,7 @@ use unless you have substantial experience with ZFS on Linux.
 
 - ZFS requires one or more dedicated block devices, preferably solid-state
   drives (SSDs).
-- ZFS is only supported on Docker CE with Ubuntu 14.04 or higher, with the `zfs`
+- ZFS is only supported on Docker Engine - Community with Ubuntu 14.04 or higher, with the `zfs`
   package (16.04 and higher) or `zfs-native` and `ubuntu-zfs` packages (14.04)
   installed.
   - For Ubuntu 14.04, you need to enable a supplemental package repository

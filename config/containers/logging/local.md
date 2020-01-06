@@ -11,8 +11,9 @@ The `local` logging driver captures output from container's stdout/stderr and
 writes them to an internal storage that is optimized for performance and disk
 use.
 
-By default the `local` driver preserves 100MB of log messages per container and
-uses automatic compression to reduce the size on disk.
+By default, the `local` driver preserves 100MB of log messages per container and
+uses automatic compression to reduce the size on disk. The 100MB default value is based on a 20M default size 
+for each file and a default count of 5 for the number of such files (to account for log rotation).
 
 > *Note*: the `local` logging driver currently uses file-based storage. The
 > file-format and storage mechanism are designed to be exclusively accessed by
@@ -58,7 +59,7 @@ The `local` logging driver supports the following logging options:
 | Option      | Description                                                                                                                                                                                                   | Example  value                           |
 |:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
 | `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to 20m.                                          | `--log-opt max-size=10m`                 |
-| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. Defaults to 5. | `--log-opt max-file=3`                   |
+| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. A positive integer. Defaults to 5. | `--log-opt max-file=3`                   |
 | `compress`  | Toggle compression of rotated log files. Enabled by default. | `--log-opt compress=false` |
 
 ### Examples
@@ -67,5 +68,5 @@ This example starts an `alpine` container which can have a maximum of 3 log
 files no larger than 10 megabytes each.
 
 ```bash
-$ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
+$ docker run -it --log-driver local --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```

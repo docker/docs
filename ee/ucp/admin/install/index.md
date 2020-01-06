@@ -1,8 +1,10 @@
 ---
 title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production.
-keywords: Universal Control Plane, UCP, install, Docker EE
+keywords: Universal Control Plane, UCP, install, Docker Enterprise
 ---
+
+>{% include enterprise_label_shortform.md %}
 
 Docker Universal Control Plane (UCP) is a containerized application that you
 can install on-premise or on a cloud infrastructure.
@@ -12,20 +14,28 @@ can install on-premise or on a cloud infrastructure.
 The first step to installing UCP is ensuring that your infrastructure has all
 of the [requirements UCP needs to run](system-requirements.md).
 Also, you need to ensure that all nodes, physical and virtual, are running
-the same version of Docker Enterprise Edition.
+the same version of Docker Enterprise.
 
-## Step 2: Install Docker EE on all nodes
+> Note
+>
+> If you are installing UCP on a public cloud platform, refer to the cloud-specific UCP
+> installation documentation. For [Microsoft
+> Azure](./cloudproviders/install-on-azure/), this is **mandatory**. For
+> [AWS](./cloudproviders/install-on-aws/), this is optional. 
+{: important}
+
+## Step 2: Install Docker Enterprise on all nodes
 
 UCP is a containerized application that requires the commercially supported
 Docker Engine to run.
 
-Install Docker EE on each host that you plan to manage with UCP.
+Install Docker Enterprise on each host that you plan to manage with UCP.
 View the [supported platforms](/engine/installation/#supported-platforms)
 and click on your platform to get platform-specific instructions for installing
-Docker EE.
+Docker Enterprise.
 
-Make sure you install the same Docker EE version on all the nodes. Also,
-if you're creating virtual machine templates with Docker EE already
+Make sure you install the same Docker Enterprise version on all the nodes. Also,
+if you're creating virtual machine templates with Docker Enterprise already
 installed, make sure the `/etc/docker/key.json` file is not included in the
 virtual machine image. When provisioning the virtual machine, restart the Docker
 daemon to generate a new `/etc/docker/key.json` file.
@@ -70,22 +80,23 @@ To install UCP:
       --interactive
     ```
 
-    This runs the install command in interactive mode, so that you're
-    prompted for any necessary configuration values.
-    To find what other options are available in the install command, check the
-    [reference documentation](/reference/ucp/3.1/cli/install.md).
+    This runs the install command in interactive mode, so that you're prompted
+    for any necessary configuration values.  To find what other options are
+    available in the install command, including how to install UCP on a system
+    with SELinux enabled, check the [reference
+    documentation](/reference/ucp/3.2/cli/install.md).
 
-> Custom Container Networking Interface (CNI) plugins
+> Note
 >
 > UCP will install [Project Calico](https://docs.projectcalico.org/v3.7/introduction/) 
 > for container-to-container communication for Kubernetes. A platform operator may 
 > choose to install an alternative CNI plugin, such as Weave or Flannel. Please see
->[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/).
+>[Install an unmanaged CNI plugin](/ee/ucp/kubernetes/install-cni-plugin/) for more information.
 {: important}
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker EE standard or advanced subscription, or you can test the platform with a free trial license.
+Now that UCP is installed, you need to license it. To use UCP, you are required to have a Docker Enterprise subscription, or you can test the platform with a free trial license.
 
 1.  Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial)
     to get a free trial license.  
@@ -114,7 +125,7 @@ To join manager nodes to the swarm,
 1.  In the UCP web UI, navigate to the **Nodes** page, and click the
     **Add Node** button to add a new node.
 
-    ![](../../images/nodes-page-ucp.png){: .with-border}
+    ![](../../images/v32-add-node.png){: .with-border}
 
 2.  In the **Add Node** page, check **Add node as a manager** to turn this node
     into a manager and replicate UCP for high-availability.
@@ -132,12 +143,11 @@ To join manager nodes to the swarm,
     contact UCP. The joining node should be able to contact itself at this
     address. The format is `interface:port` or `ip:port`.
 
-    Click the copy icon ![](../../images/copy-swarm-token.png) to copy the
-    `docker swarm join` command that nodes use to join the swarm.
+5.    Click the copy icon to copy the `docker swarm join` command that nodes use to join the swarm.
 
-    ![](../../images/add-node-ucp.png){: .with-border}
+        ![](../../images/add-node-ucp.png){: .with-border}
 
-5.  For each manager node that you want to join to the swarm, log in using
+6.  For each manager node that you want to join to the swarm, log in using
     ssh and run the join command that you copied. After the join command
     completes, the node appears on the **Nodes** page in the UCP web UI.
 

@@ -4,6 +4,7 @@ datafile: docker_plugin_inspect
 title: docker plugin inspect
 redirect_from:
   - /edge/engine/reference/commandline/plugin_inspect/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

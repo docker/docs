@@ -2,6 +2,7 @@
 description: Using Docker Machine to provision hosts on cloud providers
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Use Docker Machine to provision hosts on cloud providers
+hide_from_sitemap: true
 ---
 
 Docker Machine driver plugins are available for many cloud platforms, so you can
@@ -13,15 +14,15 @@ cloud provider.
 
 Then you provide account verification, security credentials, and configuration
 options for the providers as flags to `docker-machine create`. The flags are
-unique for each cloud-specific driver. For instance, to pass a Digital Ocean
+unique for each cloud-specific driver. For instance, to pass a DigitalOcean
 access token you use the `--digitalocean-access-token` flag. Take a look at the
-examples below for Digital Ocean and AWS.
+examples below for DigitalOcean and AWS.
 
 ## Examples
 
-### Digital Ocean
+### DigitalOcean
 
-For Digital Ocean, this command creates a Droplet (cloud host) called
+For DigitalOcean, this command creates a Droplet (cloud host) called
 "docker-sandbox".
 
 ```shell
@@ -29,7 +30,7 @@ $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx 
 ```
 
 For a step-by-step guide on using Machine to create Docker hosts on Digital
-Ocean, see the [Digital Ocean Example](examples/ocean.md).
+Ocean, see the [DigitalOcean Example](examples/ocean.md).
 
 ### Amazon Web Services (AWS)
 
@@ -72,7 +73,7 @@ Machine driver reference.
 ## Drivers for cloud providers
 
 When you install Docker Machine, you get a set of drivers for various cloud
-providers (like Amazon Web Services, Digital Ocean, or Microsoft Azure) and
+providers (like Amazon Web Services, DigitalOcean, or Microsoft Azure) and
 local providers (like Oracle VirtualBox, VMWare Fusion, or Microsoft Hyper-V).
 
 See [Docker Machine driver reference](/machine/drivers/index.md){:
@@ -120,7 +121,7 @@ tutorials:
 
 
 ## Where to go next
--   Example: Provision Dockerized [Digital Ocean Droplets](examples/ocean.md)
+-   Example: Provision Dockerized [DigitalOcean Droplets](examples/ocean.md)
 -   Example: Provision Dockerized [AWS EC2 Instances](examples/aws.md)
 -   [Understand Machine concepts](concepts.md)
 -   [Docker Machine driver reference](drivers/index.md)

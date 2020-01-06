@@ -78,34 +78,6 @@ keep image size small:
   standalone containers, consider migrating to use single-replica services, so
   that you can take advantage of these service-only features.
 
-## Use swarm services when possible
-
-- When possible, design your application with the ability to scale using swarm
-  services.
-- Even if you only need to run a single instance of your application, swarm
-  services provide several advantages over standalone containers. A service's
-  configuration is declarative, and Docker is always working to keep the
-  desired and actual state in sync.
-- Networks and volumes can be connected and disconnected from swarm services,
-  and Docker handles redeploying the individual service containers in a
-  non-disruptive way. Standalone containers need to be manually stopped, removed,
-  and recreated to accommodate configuration changes.
-- Several features, such as the ability to store
-  [secrets](/engine/swarm/secrets.md) and [configs](/engine/swarm/configs.md),
-  are only available to services rather than standalone containers. These
-  features allow you to keep your images as generic as possible and to avoid
-  storing sensitive data within the Docker images or containers themselves.
-- Let `docker stack deploy` handle any image pulls for you, instead of using
-  `docker pull`. This way, your deployment doesn't try to pull from nodes
-  that are down. Also, when new nodes are added to the swarm, images are
-  pulled automatically.
-
-There are limitations around sharing data amongst nodes of a swarm service.
-If you use [Docker for AWS](/docker-for-aws/persistent-data-volumes.md) or
-[Docker for Azure](/docker-for-azure/persistent-data-volumes.md), you can use the
-Cloudstor plugin to share data amongst your swarm service nodes. You can also
-write your application data into a separate database which supports simultaneous
-updates.
 
 ## Use CI/CD for testing and deployment
 
@@ -114,7 +86,7 @@ updates.
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.
 
-- Take this even further with [Docker EE](/ee/index.md) by requiring
+- Take this even further with [Docker Engine - Enterprise](/ee/index.md) by requiring
   your development, testing, and security teams to sign images before they can
   be deployed into production. This way, you can be sure that before an image is
   deployed into production, it has been tested and signed off by, for instance,
@@ -125,5 +97,5 @@ updates.
 | Development                                                         | Production                                                                                                                                                                                                                                       |
 |:--------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Use bind mounts to give your container access to your source  code. | Use volumes to store container data.                                                                                                                                                                                                             |
-| Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker EE if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
+| Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker Engine - Enterprise if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
 | Don't worry about time drift.                                       | Always run an NTP client on the Docker host and within each container process and sync them all to the same NTP server. If you use swarm services, also ensure that each Docker node syncs its clocks to the same time source as the containers. |

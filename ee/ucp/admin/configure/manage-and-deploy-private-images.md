@@ -4,6 +4,8 @@ description: Learn how to push an image to Docker Trusted Registry and deploy it
 keywords: Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise Edition (EE) has its own image registry (DTR) so that
 you can store and manage the images that you deploy to your cluster.
 In this topic, you push an image to DTR and later deploy it to your cluster,
@@ -11,7 +13,7 @@ using the Kubernetes orchestrator.
 
 ## Open the DTR web UI
 
-1.  In the Docker EE web UI, click **Admin Settings**.
+1.  In the Docker Enterprise web UI, click **Admin Settings**.
 2.  In the left pane, click **Docker Trusted Registry**.
 3.  In the **Installed DTRs** section, note the URL of your cluster's DTR
     instance.
@@ -41,7 +43,7 @@ Docker EE.
 - [License your installation](license-your-installation.md).
 - [Set up your Docker CLI](../../user-access/cli.md).
 
-When you're set up for CLI-based access to a licensed Docker EE instance,
+When you're set up for CLI-based access to a licensed Docker Enterprise instance,
 you can push images to DTR.
 
 1.  Pull the public WordPress image from Docker Hub:
@@ -55,7 +57,7 @@ you can push images to DTR.
     ```bash
     docker tag wordpress:latest <dtr-url>:<port>/admin/wordpress:latest
     ```
-3.  Log in to a Docker EE manager node.
+3.  Log in to a Docker Enterprise manager node.
 4.  Push the tagged image to DTR:
 
     ```bash
@@ -78,7 +80,7 @@ You're ready to deploy the `wordpress:latest` image into production.
 
 ## Deploy the private image to UCP
 
-With the WordPress image stored in DTR, Docker EE can deploy the image to a
+With the WordPress image stored in DTR, Docker Enterprise can deploy the image to a
 Kubernetes cluster with a simple Deployment object:
 
 ```yaml
@@ -122,7 +124,7 @@ The Deployment object's YAML specifies your DTR image in the pod template spec:
 a `NodePort` service that exposes the WordPress application, so it's accessible
 from outside the cluster.
 
-1.  Open the Docker EE web UI, and in the left pane, click **Kubernetes**.
+1.  Open the Docker Enterprise web UI, and in the left pane, click **Kubernetes**.
 2.  Click **Create** to open the **Create Kubernetes Object** page.
 3.  In the **Namespace** dropdown, select **default**.
 4.  In the **Object YAML** editor, paste the Deployment object's YAML.

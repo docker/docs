@@ -35,7 +35,7 @@ logging driver to `syslog`:
 ```
 
 If the logging driver has configurable options, you can set them in the
-`daemon.json` file as a JSON array with the key `log-opts`. The following
+`daemon.json` file as a JSON object with the key `log-opts`. The following
 example sets two configurable options on the `json-file` logging driver:
 
 ```json
@@ -50,7 +50,7 @@ example sets two configurable options on the `json-file` logging driver:
 }
 ```
 
-> **Note**: `log-opt` configuration options in the `daemon.json` configuration
+> **Note**: `log-opts` configuration options in the `daemon.json` configuration
 > file must be provided as strings. Boolean and numeric values (such as the value
 > for `max-file` in the example above) must therefore be enclosed in quotes (`"`).
 

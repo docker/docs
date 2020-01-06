@@ -1,8 +1,6 @@
 ---
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: docker, ucp, troubleshoot
-redirect_from:
-- /ucp/monitor/troubleshoot-ucp/
 title: Troubleshoot your cluster
 ---
 

@@ -4,6 +4,8 @@ description: Set up UCP deployments by using a configuration file.
 keywords: Docker EE, UCP, configuration, config
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 There are two ways to configure UCP:
 - through the web interface, or
 - by importing and exporting the UCP config in a TOML file. For more information about TOML, see the [TOML README on GitHub](https://github.com/toml-lang/toml/blob/master/README.md).
@@ -77,11 +79,12 @@ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_ver
 
 ### auth.sessions
 
-| Parameter                   | Required | Description                                                                                                                                                                                                                                                                             |
-|:----------------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 4320, which is 72 hours.                                                                                                                                                                                                       |
-| `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 1440, which is 24 hours.                                            |
-| `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5. |
+| Parameter                   | Required | Description                                                                                                                                                                                                                                                                              |
+|:----------------------------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 60 minutes.                                                                                                                                                                                                                     |
+| `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 20 minutes.                                                          |
+| `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 10. |
+| `store_token_per_session` | no | If set, the user token is stored in `sessionStorage` instead of `localStorage`. Note that this option will log the user out and require them to log back in since they are actively changing how their authentication is stored. |
 
 ### registries array (optional)
 
@@ -92,17 +95,6 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 | `host_address` | yes      | The address for connecting to the DTR instance tied to this UCP cluster.                                                                                                                    |
 | `service_id`   | yes      | The DTR instance's OpenID Connect Client ID, as registered with the Docker authentication provider.                                                                                         |
 | `ca_bundle`    | no       | If you're using a custom certificate authority (CA), `ca_bundle` specifies the root CA bundle for the DTR instance. The value is a string with the contents of a `ca.pem` file. |
-
-### custom headers (optional)
-
-Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
-
-[[custom_api_server_headers]]
-
-| Item | Description |
-| ----------- | ----------- |
-| `name`       | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*". |
-| `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*".  |
 
 
 ### audit_log_configuration table (optional)
@@ -118,7 +110,9 @@ Configures audit logging options for UCP components.
 
 Specifies scheduling options and the default orchestrator for new nodes.
 
-> **Note**: If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
+> Note
+> 
+> If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
 
 | Parameter                     | Required | Description                                                                                                                                |
 |:------------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -147,7 +141,9 @@ Specifies whether DTR images require signing.
 
 ### log_configuration table (optional)
 
-> Note: This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
+> Note
+> 
+> This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
 
 Configures the logging options for UCP components.
 
@@ -164,6 +160,31 @@ Specifies whether the your UCP license is automatically renewed.
 | Parameter      | Required | Description                                                                                                                                                                                   |
 |:---------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `auto_refresh` | no       | Set to `true` to enable attempted automatic license renewal when the license nears expiration. If disabled, you must manually upload renewed license after expiration. The default is `true`. |
+
+### custom headers (optional)
+
+Included when you need to set custom API headers. You can repeat this section multiple times to specify multiple separate headers. If you include custom headers, you must specify both `name` and `value`.
+
+`[[custom_api_server_headers]]`
+
+| Item    | Description                                                                           |
+|:--------|:--------------------------------------------------------------------------------------|
+| `name`  | Set to specify the name of the custom header with `name` = "*X-Custom-Header-Name*".  |
+| `value` | Set to specify the value of the custom header with `value` = "*Custom Header Value*". |
+
+### user_workload_defaults (optional)
+
+A map describing default values to set on Swarm services at creation time if
+those fields are not explicitly set in the service spec.
+
+`[user_workload_defaults]`
+
+  `[user_workload_defaults.swarm_defaults]`
+
+| Parameter                                  | Required | Description                                                                                              |
+|:-------------------------------------------|:---------|:---------------------------------------------------------------------------------------------------------|
+| `[tasktemplate.restartpolicy.delay]`       | no       | Delay between restart attempts (ns&#124;us&#124;ms&#124;s&#124;m&#124;h). The default is `value = "5s"`. |
+| `[tasktemplate.restartpolicy.maxattempts]` | no       | Maximum number of restarts before giving up. The default is  `value = "3"`.                              |
 
 ### cluster_config table (required)
 
@@ -191,21 +212,43 @@ components. Assigning these values overrides the settings in a container's
 | `metrics_retention_time`               | no       | Adjusts the metrics retention time.                                                                                                                                                              |
 | `metrics_scrape_interval`              | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                                                                          |
 | `metrics_disk_usage_interval`          | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.                                                               |
-| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 1GB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically. |
+| `rethinkdb_cache_size`                 | no       | Sets the size of the cache used by UCP's RethinkDB servers. The default is 1GB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically.   |
+| `exclude_server_identity_headers`      | no       | Set to `true` to disable the `X-Server-Ip` and `X-Server-Name` headers.                                                                                                                          |
 | `cloud_provider`                       | no       | Set the cloud provider for the kubernetes cluster.                                                                                                                                               |
 | `pod_cidr`                             | yes      | Sets the subnet pool from which the IP for the Pod should be allocated from the CNI ipam plugin. Default is `192.168.0.0/16`.                                                                    |
 | `calico_mtu`                           | no       | Set the MTU (maximum transmission unit) size for the Calico plugin.                                                                                                                              |
 | `ipip_mtu`                             | no       | Set the IPIP MTU size for the calico IPIP tunnel interface.                                                                                                                                      |
-| `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                               |
-| `service-cluster-ip-range`             | yes      | Sets the subnet pool from which the IP for Services should be allocated. Default is `10.96.0.0/16`. 
+| `azure_ip_count`                       | no       | Set the IP count for azure allocator to allocate IPs per Azure virtual machine.                                                                                                                  |
+| `service_cluster_ip_range`             | yes      | Sets the subnet pool from which the IP for Services should be allocated. Default is `10.96.0.0/16`.                                                                                              |
 | `nodeport_range`                       | yes      | Set the port range that for Kubernetes services of type NodePort can be exposed in. Default is `32768-35535`.                                                                                    |
-| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                                   |
-| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                            |
-| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets. (dev)                                                                                                                                                      |
-| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler. (dev)                                                                                                                                      |
+| `custom_kube_api_server_flags`         | no       | Set the configuration options for the Kubernetes API server. (dev)                                                                                                                               |
+| `custom_kube_controller_manager_flags` | no       | Set the configuration options for the Kubernetes controller manager. (dev)                                                                                                                       |
+| `custom_kubelet_flags`                 | no       | Set the configuration options for Kubelets. (dev)                                                                                                                                                |
+| `custom_kube_scheduler_flags`          | no       | Set the configuration options for the Kubernetes scheduler. (dev)                                                                                                                                |
 | `local_volume_collection_mapping`      | no       | Store data about collections for volumes in UCP's local KV store instead of on the volume labels. This is used for enforcing access control on volumes.                                          |
 | `manager_kube_reserved_resources`      | no       | Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.                                                                                                   |
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
+| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.|
+| `secure-overlay` | no | Set to `true` to enable IPSec network encryption in Kubernetes. Default is `false`. |
+| `image_scan_aggregation_enabled` | no | Set to `true` to enable image scan result aggregation. This feature displays image vulnerabilities in shared resource/containers and shared resources/images pages. Default is `false`.|
+|`swarm_polling_disabled` | no | Set to `true` to turn off auto-refresh (which defaults to 15 seconds) and only call the Swarm API once. Default is `false`. |
 
+> Note
+> 
+> dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
 
-*dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
+### iSCSI (optional)
+Configures iSCSI options for UCP.
+
+| Parameter               | Required | Description                                                                                                                                                                          |
+|:------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--storage-iscsi=true`               | no       | Enables iSCSI based Persistent Volumes in Kubernetes. Default value is `false`.             |
+| `--iscsiadm-path=<path>` | no       | Specifies the path of the iscsiadm binary on the host. Default value is `/usr/sbin/iscsiadm`.  |
+| `--iscsidb-path=<path>` | no       | specifies the path of the iscsi database on the host. Default value is `/etc/iscsi`.  |
+
+### pre_logon_message
+Configures a pre-logon message.
+
+| Parameter               | Required | Description                                                                                                                                                                          |
+|:------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  `pre_logon_message` | no | Sets pre-logon message to alert users before they proceed with login. |

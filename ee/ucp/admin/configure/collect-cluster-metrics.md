@@ -6,6 +6,8 @@ redirect_from:
 - /engine/admin/prometheus/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
 alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
@@ -17,7 +19,7 @@ The data is stored locally on disk for each Prometheus server, so data is not re
 
 Events, logs, and metrics are sources of data that provide observability of your cluster. Metrics monitors numerical data values that have a time-series component. There are several sources from which metrics can be derived, each providing different kinds of meaning for a business and its applications.
 
-The Docker EE platform provides a base set of metrics that gets you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
+The Docker Enterprise platform provides a base set of metrics that gets you running and into production without having to rely on external or 3rd party tools. Docker strongly encourages the use of additional monitoring to provide more comprehensive visibility into your specific Docker environment, but recognizes the need for a basic set of metrics built into the product. The following are examples of these metrics:
 
 ## Business metrics ##
 

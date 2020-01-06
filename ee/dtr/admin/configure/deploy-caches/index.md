@@ -5,6 +5,8 @@ description: Deploy DTR caches in different geographical locations for users to
 keywords: DTR, cache
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The further away you are from the geographical location where DTR is deployed,
 the longer it will take to pull and push images.
 This happens because the files being transferred from DTR to your machine

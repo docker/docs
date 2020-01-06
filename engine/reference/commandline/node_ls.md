@@ -4,6 +4,7 @@ datafile: docker_node_ls
 title: docker node ls
 redirect_from:
   - /edge/engine/reference/commandline/node_ls/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

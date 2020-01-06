@@ -2,6 +2,7 @@
 description: Identify active machines
 keywords: machine, driver, base, operating system
 title: Driver options and operating system defaults
+hide_from_sitemap: true
 ---
 
 When Docker Machine provisions containers on local network provider or with a

@@ -55,9 +55,9 @@ Best practices require Docker logging plugins to support the [ReadLogs API](/eng
 
 ### Prerequisites
 
-Your Docker EE installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://hub.docker.com/editions/enterprise/docker-ee-trial).
+Your Docker Engine - Enterprise installation must be running on the server used to verify your submissions. If necessary, request entitlement to a specific [Docker Enterprise Edition](https://hub.docker.com/editions/enterprise/docker-ee-trial).
 
-- Docker EE (on the server for verifying submissions)
+- Docker Engine - Enterprise (on the server for verifying submissions)
 - git client
 - inspectDockerLoggingPlugin tool
 

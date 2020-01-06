@@ -5,6 +5,8 @@ description: Learn how to configure the layer 7 routing solution for a productio
 keywords: routing, proxy, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This section includes documentation on configuring Interlock
 for a production environment.  If you have not yet deployed Interlock, refer to [Deploying Interlock](./index.md) because this information builds upon the basic deployment. This topic does not cover infrastructure deployment -
 it assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
@@ -62,7 +64,7 @@ map[nodetype:loadbalancer]
 The command should print "loadbalancer".
 
 ## Update proxy service
-Now that your nodes are labelled, you need to update the `ucp-interlock-proxy`
+Now that your nodes are labeled, you need to update the `ucp-interlock-proxy`
 service configuration to deploy the proxy service with the correct constraints (constrained to those
 workers). From a manager, add a constraint to the `ucp-interlock-proxy` service to update the running service:
 
@@ -98,7 +100,7 @@ configuration so it takes effect if Interlock is restored from backup:
     ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.nodetype==loadbalancer"]
 ```
 
-[Learn how to configure ucp-interlock](../config/index.md).
+By default, the config service is global, scheduling one task on every node in the cluster, but it will use proxy constraints if available. To add or change scheduling restraints, update the `ProxyConstraints` variable in the Interlock configuration file. See [configure ucp-interlock](../config/index.md) for more information.
 
 Once reconfigured, you can check if the proxy service is running on the dedicated nodes:
 

@@ -4,6 +4,7 @@ datafile: docker_kill
 title: docker kill
 redirect_from:
   - /edge/engine/reference/commandline/kill/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

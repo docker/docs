@@ -29,26 +29,39 @@ your client and daemon API versions.
 
 {% endif %}
 
+{% if page.enterprise_only == true %}
+
+> This command is only available on Docker Enterprise Edition.
+>
+> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+{: .important }
+
+{% endif %}
+
 {% if site.data[include.datafolder][include.datafile].experimental %}
 
 > This command is experimental.
 >
-> This command is experimental on the Docker daemon. It should not be used in production environments.
+> This command is experimental on the Docker daemon. It should not be used in
+> production environments.
 > To enable experimental features on the Docker daemon, edit the
 > [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
 > and set `experimental` to `true`.
-{: .important }
+>
+> {% include experimental.md %}
 
 {% endif %}
 
 {% if site.data[include.datafolder][include.datafile].experimentalcli %}
 
-> This command is experimental.
+> This command is experimental on the Docker client.
 >
-> This  command is experimental on the Docker client. It should not be used in production environments.
+> **It should not be used in production environments.**
+>
 > To enable experimental features in the Docker CLI, edit the
 > [config.json](/engine/reference/commandline/cli.md#configuration-files)
-> and set `experimental` to `enabled`.
+> and set `experimental` to `enabled`. You can go [here](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
+> for more information.
 {: .important }
 
 {% endif %}

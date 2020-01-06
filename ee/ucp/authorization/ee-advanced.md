@@ -1,11 +1,13 @@
 ---
-title: Access control design with Docker EE Advanced
-description: Learn how to architect multitenancy with Docker Enterprise Edition Advanced.
+title: Access control design using additional security requirements 
+description: Learn how to architect multi-tenancy with Docker Enterprise.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 
-Go through the [Docker Enterprise Standard tutorial](ee-standard.md),
-before continuing here with Docker Enterprise Advanced.
+>{% include enterprise_label_shortform.md %}
+
+Go through the [Docker Enterprise tutorial](ee-standard.md),
+before completing the following tutorial.
 
 In the first tutorial, the fictional company, OrcaBank, designed an architecture
 with role-based access control (RBAC) to meet their organization's security
@@ -15,16 +17,17 @@ collection boundaries on a single platform.
 In this tutorial, OrcaBank implements new and more stringent security
 requirements for production applications:
 
-First, OrcaBank adds staging zone to their deployment model. They will no longer
-move developed appliciatons directly in to production. Instead, they will deploy
+1. First, OrcaBank adds staging zone to their deployment model. They will no longer
+move developed applications directly in to production. Instead, they will deploy
 apps from their dev cluster to staging for testing, and then to production.
-
-Second, production applications are no longer permitted to share any physical
+2. Second, production applications are no longer permitted to share any physical
 infrastructure with non-production infrastructure. OrcaBank segments the
 scheduling and access of applications with [Node Access Control](isolate-nodes.md).
 
-> [Node Access Control](isolate-nodes.md) is a feature of Docker EE
-> Advanced and provides secure multi-tenancy with node-based isolation. Nodes
+> Note
+> 
+> [Node Access Control](isolate-nodes.md) is a feature of Docker Enterprise
+> and provides secure multi-tenancy with node-based isolation. Nodes
 > can be placed in different collections so that resources can be scheduled and
 > isolated on disparate physical or virtual hardware resources.
 
@@ -109,7 +112,7 @@ access shared `db` networks and secrets.
 
 ## OrcaBank access architecture
 
-The resulting access architecture, designed with Docker EE Advanced, provides
+The resulting access architecture, designed with Docker Enterprise, provides
 physical segmentation between production and staging using node access control.
 
 Applications are scheduled only on UCP worker nodes in the dedicated application

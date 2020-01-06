@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/create-users-and-teams-manually/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Users, teams, and organizations are referred to as subjects in Docker EE.
 
 Individual users can belong to one or more teams but each team can only be in
@@ -25,7 +27,7 @@ acme-datacenter
 
 ## Authentication
 
-All users are authenticated on the backend. Docker EE provides built-in
+All users are authenticated on the backend. Docker Enterprise provides built-in
 authentication and also integrates with LDAP directory services.
 
 To use Docker EE's built-in authentication, you must [create users manually](#create-users-manually).

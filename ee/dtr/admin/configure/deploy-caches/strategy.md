@@ -5,6 +5,8 @@ description: Learn how to deploy DTR caches across multiple datacenters to make
 keywords: DTR, cache
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The main reason to use a DTR cache is so that users can pull images from
 a service that's geographically closer to them.
 

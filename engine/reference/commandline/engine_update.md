@@ -2,8 +2,8 @@
 datafolder: engine-cli
 datafile: docker_engine_update
 title: docker engine update
+skip_read_time: true
 ---
-
 <!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears

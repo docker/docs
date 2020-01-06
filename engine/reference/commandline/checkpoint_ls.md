@@ -4,6 +4,7 @@ datafile: docker_checkpoint_ls
 title: docker checkpoint ls
 redirect_from:
   - /edge/engine/reference/commandline/checkpoint_ls/
+skip_read_time: true
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

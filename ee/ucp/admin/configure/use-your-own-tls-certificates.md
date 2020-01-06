@@ -4,6 +4,8 @@ description: Learn how to configure Docker Universal Control Plane to use your o
 keywords: Universal Control Plane, UCP, certificate, authentication, tls
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 All UCP services are exposed using HTTPS, to ensure all communications between
 clients and UCP are encrypted. By default, this is done using self-signed TLS
 certificates that are not trusted by client tools like web browsers. So when
@@ -39,21 +41,27 @@ navigate to the **Admin Settings** page.
 
 Upload your certificates and keys:
 
-* A `ca.pem` file with the root CA public certificate.
+* A `ca.pem` file with the root CA (Certificate Authority) public certificate.
 * A `cert.pem` file with the TLS certificate for your domain and any intermediate public
 certificates, in this order.
 * A `key.pem` file with TLS private key. Make sure it is not encrypted with a password.
 Encrypted keys should have `ENCRYPTED` in the first line.
 
+After replacing the TLS certificates, your users will not be able to authenticate
+with their old client certificate bundles. Ask your users to access the UCP
+web UI and [download new client certificate bundles](../../user-access/cli.md).
+
+As of UCP v3.2, the **Certificates** page includes a new text field,
+***Client CA***, that allows you to paste or upload one or more custom root CA certificates which the UCP Controller will use to
+verify the authenticity of client certificates issued by your corporate or
+trusted third-party CAs. Note that your custom root certificates will be appended to UCP's internal root CA certificates.
+
 Finally, click **Save** for the changes to take effect.
 
-After replacing the TLS certificates, your users won't be able to authenticate
-with their old client certificate bundles. Ask your users to go to the UCP
-web UI and [get new client certificate bundles](../../user-access/cli.md).
 
 If you deployed Docker Trusted Registry, you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
-[Learn how to configure DTR](/reference/dtr/2.6/cli/reconfigure.md).
+[Learn how to configure DTR](/reference/dtr/2.7/cli/reconfigure.md).
 
 ## Where to go next
 

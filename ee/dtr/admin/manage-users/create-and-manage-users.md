@@ -4,6 +4,8 @@ description: Learn how to manage user permissions in Docker Trusted Registry.
 keywords: registry, security, permissions, users
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When using the built-in authentication, you can create users
 to grant them fine-grained permissions.
 

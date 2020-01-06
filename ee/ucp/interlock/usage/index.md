@@ -7,6 +7,8 @@ redirect_from:
   - /ee/ucp/interlock/deploy/configure/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After Interlock is deployed, you can launch and publish services and applications.
 Use [Service Labels](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label)
 to configure services to publish themselves to the load balancer.
@@ -94,6 +96,7 @@ networks:
 
 Note that:
 
+* Docker Compose files _must_ reference networks as external. Include `external:true` in the `docker-compose.yml` file.
 * The `com.docker.lb.hosts` label defines the hostname for the service. When
 the layer 7 routing solution gets a request containing `app.example.org` in
 the host header, that request is forwarded to the demo service.
@@ -101,7 +104,7 @@ the host header, that request is forwarded to the demo service.
 should attach to in order to be able to communicate with the demo service.
 To use layer 7 routing, your services need to be attached to at least one network.
 If your service is only attached to a single network, you don't need to add
-a label to specify which network to use for routing. When using a common stack file for multiple deployments leveraging UCP Interlock / Layer 7 Routing, prefix `com.docker.lb.network` with the stack name to ensure traffic will be directed to the correct overlay network.
+a label to specify which network to use for routing. When using a common stack file for multiple deployments leveraging UCP Interlock / Layer 7 Routing, prefix `com.docker.lb.network` with the stack name to ensure traffic will be directed to the correct overlay network. When using in combination with `com.docker.lb.ssl_passthrough` the label in mandatory, even if your service is only attached to a single network.
 * The `com.docker.lb.port` label specifies which port the `ucp-interlock-proxy`
 service should use to communicate with this demo service.
 * Your service doesn't need to expose a port in the swarm routing mesh. All
