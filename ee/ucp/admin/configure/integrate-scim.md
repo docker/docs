@@ -4,6 +4,8 @@ description: Learn how to configure SCIM with UCP.
 keywords: authentication, authorization, SSO, SAML, SCIM, management
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 # SCIM integration
 
 Simple-Cloud-Identity-Management/System-for-Cross-domain-Identity-Management (SCIM) provides an LDAP alternative for provisioning and managing users and groups, as well as syncing users and groups with an upstream identity provider. Using SCIM schema and API, you can utilize Single Sign-on services (SSO) across various tools.

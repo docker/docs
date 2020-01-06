@@ -4,6 +4,8 @@ description: Learn how to manage applications in Docker Trusted Registry.
 keywords: DTR, trusted registry, Docker apps
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With the introduction of [the experimental `app` plugin](/engine/reference/commandline/app/) to the Docker CLI, DTR has been enhanced to include application management. In DTR 2.7, you can push an app to your DTR repository and have an application be clearly distinguished from [individual and multi-architecture container images](/ee/dtr/user/manage-images/pull-and-push-images/#push-an-image/), as well as [plugins](/engine/reference/commandline/plugin_push/). When you push an application to DTR, you see two image tags:
 
 | Image | Tag | Type | Under the hood |

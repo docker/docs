@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/access-ucp/cli-based-access/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Universal Control Plane you can continue using the tools you know and
 love like the Docker CLI client and kubectl. You just need to download and use
 a UCP client bundle.

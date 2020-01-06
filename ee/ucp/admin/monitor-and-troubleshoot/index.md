@@ -7,6 +7,8 @@ redirect_from:
   - /ucp/monitor/monitor-ucp/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can monitor the status of UCP by using the web UI or the CLI.
 You can also use the `_ping` endpoint to build monitoring automation.
 

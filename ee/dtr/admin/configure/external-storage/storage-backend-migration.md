@@ -4,6 +4,8 @@ description: Storage backend migration for Docker Trusted Registry
 keywords: dtr, storage drivers, local volume, NFS, Azure, S3,
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Starting in DTR 2.6, switching storage backends initializes a new metadata store and erases your existing tags. This helps facilitate online garbage collection, which has been introduced in 2.5 as an experimental feature. In earlier versions, DTR would subsequently start a `tagmigration` job to rebuild tag metadata from the file layout in the image layer store. This job has been discontinued for DTR 2.5.x (with garbage collection) and DTR 2.6, as your storage backend could get out of sync with your DTR metadata, like your manifests and existing repositories. As best practice, DTR storage backends and metadata should always be moved, backed up, and restored together.
 
 ## DTR 2.6.4 and above

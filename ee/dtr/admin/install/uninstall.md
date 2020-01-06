@@ -4,6 +4,8 @@ description: Learn how to uninstall your Docker Trusted Registry installation.
 keywords: dtr, install, uninstall
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Uninstalling DTR can be done by simply removing all data associated with each
 replica. To do that, you just run the destroy command once per replica:
 

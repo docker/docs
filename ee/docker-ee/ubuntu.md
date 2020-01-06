@@ -11,6 +11,8 @@ title: Get Docker Engine - Enterprise for Ubuntu
 toc_max: 4
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To get started with Docker Engine - Enterprise on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ee).

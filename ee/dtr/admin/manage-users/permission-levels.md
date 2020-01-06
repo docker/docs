@@ -4,6 +4,8 @@ description: Learn about the permission levels available in Docker Trusted Regis
 keywords: registry, security, permissions
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.
 

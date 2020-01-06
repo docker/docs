@@ -7,6 +7,8 @@ keywords: dtr, disaster recovery
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
 
+>{% include enterprise_label_shortform.md %}
+
 ## Restore DTR data
 
 If your DTR has a majority of unhealthy replicas, the one way to restore it to

@@ -4,6 +4,8 @@ description: Configure a Docker UCP cluster to only allow running applications t
 keywords: ucp, dtr, security, trust
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker Universal Control Plane you can enforce applications to only use
 Docker images signed by UCP users you trust. When a user tries to deploy an
 application to the cluster, UCP checks if the application uses a Docker image

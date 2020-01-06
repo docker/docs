@@ -8,6 +8,8 @@ redirect_from:
   - /ee/ucp/swarm/deploy-from-ui/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane allows you to use the tools you already know,
 like `docker stack deploy` to deploy multi-service applications. You can
 also deploy your applications from the UCP web UI.

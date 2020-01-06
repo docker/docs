@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/admin/configure/set-up-high-availability/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane is designed for high availability (HA). You can
 join multiple manager nodes to the cluster, so that if one manager node fails,
 another can automatically take its place without impact to the cluster.

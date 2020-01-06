@@ -4,6 +4,8 @@ description: Learn how to set the session timeout for users and other session pr
 keywords: UCP, authorization, authentication, security, session, timeout
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane enables setting properties of user sessions,
 like session timeout and number of concurrent sessions.
 

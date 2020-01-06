@@ -7,6 +7,8 @@ redirect_from:
   - /ee/ucp/interlock/usage/default-service/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To further customize the layer 7 routing solution, you must update the
 `ucp-interlock` service with a new Docker configuration.
 

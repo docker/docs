@@ -5,6 +5,8 @@ keywords: logs, ucp, swarm, kubernetes, audits
 redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Audit logs are a chronological record of security-relevant activities by 
 individual users, administrators or software components that have affected the 
 system. They are focused on external user/agent actions and security rather than 

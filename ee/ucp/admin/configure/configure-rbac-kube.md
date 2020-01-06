@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/authorization/migrate-kubernetes-roles/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP 3.0 used its own role-based access control (RBAC) for Kubernetes clusters. New in UCP 3.1 is the ability to use native Kubernetes RBAC. The benefits of doing this are:
 
 - Many ecosystem applications and integrations expect Kubernetes RBAC as a part of their YAML files to provide access to service accounts.

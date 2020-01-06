@@ -4,6 +4,8 @@ description: Learn how to configure your Docker Trusted Registry account to pull
 keywords: registry, cache
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry can be configured to have one or more caches. This
 allows you to choose from which cache to pull images from for faster
 download times.

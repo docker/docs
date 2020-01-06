@@ -4,6 +4,8 @@ description: Destroy a DTR replica's data
 keywords: dtr, cli, destroy
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Destroy a DTR replica's data
 
 ## Usage

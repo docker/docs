@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/admin/configure/integrate-with-multiple-registries/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 For more advanced deployments, you may want to share one Docker Trusted Registry
 across multiple Universal Control Planes. However, customers wanting to adopt
 this model alongside the [Only Run Signed

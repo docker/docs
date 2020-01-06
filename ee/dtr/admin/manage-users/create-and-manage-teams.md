@@ -5,6 +5,8 @@ description: Learn how to manage teams to enforce fine-grain access control in D
 keywords: registry, security, permissions, teams
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can extend a user's default permissions by granting them individual
 permissions in other image repositories, by adding the user to a team. A team
 defines the permissions a set of users have for a set of repositories.

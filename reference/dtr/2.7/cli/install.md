@@ -4,6 +4,8 @@ description: Install Docker Trusted Registry
 keywords: dtr, cli, install
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Install Docker Trusted Registry
 
 ## Usage

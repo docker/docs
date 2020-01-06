@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/usage/ssl/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After [deploying a layer 7 routing solution](../deploy/index.md), you have two options for securing your
 services with TLS:
 

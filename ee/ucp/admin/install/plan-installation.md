@@ -4,6 +4,8 @@ description: Learn about the Docker Universal Control Plane architecture, and th
 keywords: UCP, install, Docker EE
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane helps you manage your container cluster from a
 centralized place. This article explains what you need to consider before
 deploying Docker Universal Control Plane for production.

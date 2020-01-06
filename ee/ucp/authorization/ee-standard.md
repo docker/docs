@@ -4,6 +4,8 @@ description: Learn how to architect multi-tenancy by using Docker Enterprise.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [Collections and grants](index.md) are strong tools that can be used to control
 access and visibility to resources in UCP.
 

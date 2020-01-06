@@ -4,6 +4,8 @@ description: Learn how to integrate Docker Trusted Registry with NFS
 keywords: registry, dtr, storage, nfs
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can configure DTR to store Docker images in an NFS directory. Starting in DTR 2.6,
 changing storage backends involves initializing a new metadatastore instead of reusing an existing volume.
 This helps facilitate [online garbage collection](/ee/dtr/admin/configure/garbage-collection/#under-the-hood).

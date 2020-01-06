@@ -4,6 +4,8 @@ description: Learn about the commands available in the docker/dtr image.
 keywords: dtr, install, uninstall, configure
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.
 By default the tool runs in interactive mode. It prompts you for

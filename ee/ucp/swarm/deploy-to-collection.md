@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/services/deploy-stack-to-collection/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane enforces role-based access control when you
 deploy services. By default, you don't need to do anything, because UCP deploys
 your services to a default collection, unless you specify another one. You can

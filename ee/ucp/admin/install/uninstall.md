@@ -4,7 +4,10 @@ description: Learn how to uninstall a Docker Universal Control Plane.
 keywords: UCP, uninstall, install, Docker EE
 ---
 
-Docker Universal Control Plane (UCP) is designed to scale as your applications grow in size and usage. You can [add and remove nodes](../configure/scale-your-cluster.md) from the
+>{% include enterprise_label_shortform.md %}
+
+Docker UCP is designed to scale as your applications grow in size and usage.
+You can [add and remove nodes](../configure/scale-your-cluster.md) from the
 cluster to make it scale to your needs.
 
 You can also uninstall UCP from your cluster. In this case, the UCP services are stopped and removed, but your Docker Engines will continue running in swarm mode. You applications will continue running normally.

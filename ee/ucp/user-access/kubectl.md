@@ -4,6 +4,8 @@ description: Learn how to install kubectl, the Kubernetes command-line tool, on 
 keywords: ucp, cli, administration, kubectl, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise 2.0 and higher deploys Kubernetes as part of a UCP installation.
 Deploy, manage, and monitor Kubernetes workloads from the UCP dashboard. Users can
 also interact with the Kubernetes deployment through the Kubernetes

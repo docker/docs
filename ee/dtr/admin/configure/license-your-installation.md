@@ -4,6 +4,8 @@ description: Learn how to license your Docker Trusted Registry installation.
 keywords: dtr, install, license
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default, Docker Trusted Registry (DTR) automatically uses the same license file applied to
 your Universal Control Plane (UCP). In the following scenarios, you need to
 manually apply a license to your DTR:

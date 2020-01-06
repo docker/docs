@@ -6,6 +6,8 @@ toc_max: 5
 toc_min: 1
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This topic describes version 1 of the Cluster file format.
 
 ## Cluster file structure and examples

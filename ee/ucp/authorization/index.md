@@ -4,6 +4,8 @@ description: Manage access to resources with role-based access control.
 keywords: ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [Docker Universal Control Plane (UCP)](../index.md),
 the UI for [Docker Enterprise](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based

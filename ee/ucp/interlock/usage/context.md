@@ -5,6 +5,8 @@ description: Learn how to route traffic to your Docker swarm services based
 keywords: routing, proxy
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The following example publishes a service using context or path based routing.
 
 First, create an overlay network so that service traffic is isolated and secure:

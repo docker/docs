@@ -4,6 +4,8 @@ description: Learn how to enable LDAP and sync users and teams in Docker Univers
 keywords: authorize, authentication, users, teams, UCP, LDAP
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To enable LDAP in UCP and sync to your LDAP directory:
 
 1. Click **Admin Settings** under your username drop down.

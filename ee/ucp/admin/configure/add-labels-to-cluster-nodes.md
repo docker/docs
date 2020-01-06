@@ -4,6 +4,8 @@ description: Learn how to add metadata to cluster nodes that can be used to spec
 keywords: cluster, node, label, swarm, metadata
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker UCP, you can add labels to your nodes. Labels are metadata that
 describe the node, like its role (development, QA, production), its region
 (US, EU, APAC), or the kind of disk (HDD, SSD). Once you have labeled your

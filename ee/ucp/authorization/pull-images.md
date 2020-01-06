@@ -5,6 +5,8 @@ description: Learn how to grant permissions for users to pull images into a
 keywords: ucp, grant, images
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default only admin users can pull images into a cluster managed by UCP.
 
 Images are a shared resource, as such they are always in the `swarm` collection.

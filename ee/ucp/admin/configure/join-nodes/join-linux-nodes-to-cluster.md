@@ -4,6 +4,8 @@ description: Learn how to scale a Docker Enterprise Edition cluster by adding ma
 keywords: Docker Enterprise, UCP, cluster, scale, worker, manager
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
 to your needs. You can join Windows Server and Linux nodes

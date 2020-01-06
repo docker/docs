@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/upgrade/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services.md)
 functionality was redesigned in UCP 3.0 for greater security and flexibility.
 The functionality was also renamed to "layer 7 routing", to make it easier for

@@ -13,6 +13,8 @@ green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; mar
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
 applications at scale in production. Docker Enterprise is an integrated container platform that includes
 Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.

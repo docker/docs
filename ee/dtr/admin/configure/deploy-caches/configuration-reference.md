@@ -4,6 +4,8 @@ description: Learn about the different configuration options for DTR caches.
 keywords: DTR, cache
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 DTR caches are based on Docker Registry, and use the same configuration
 file format.
 [Learn more about the configuration options](/registry/configuration.md).

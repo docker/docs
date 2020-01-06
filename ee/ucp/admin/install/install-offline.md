@@ -5,6 +5,8 @@ description: Learn how to install Docker Universal Control Plane. on a machine w
 keywords: UCP, install, offline, Docker EE
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The procedure to install Docker Universal Control Plane on a host is the same,
 whether the host has access to the internet or not.
 

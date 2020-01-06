@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/admin/install/install-on-azure/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking
 and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure,
 the Calico CNI leverages the Azure networking infrastructure for data path

@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/kubernetes/configure-aws-storage/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [AWS Elastic Block Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html) (EBS) can be deployed with Kubernetes in Docker Enterprise 2.1 to use AWS volumes as peristent storage for applications. Before using EBS volumes, configure UCP and the AWS infrastructure for storage orchestration to function.
 
 ## Configure AWS Infrastructure for Kubernetes
