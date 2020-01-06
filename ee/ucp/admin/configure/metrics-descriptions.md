@@ -6,6 +6,8 @@ redirect_from:
 - /engine/admin/prometheus/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 # UCP metrics
 
 The following table lists the metrics that UCP exposes in Prometheus, along with descriptions. Note that only the metrics 

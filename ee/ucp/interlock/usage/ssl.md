@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/interlock/usage/ssl/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 # Implementing SSL
 This topic covers implementing Swarm services with SLL:
 

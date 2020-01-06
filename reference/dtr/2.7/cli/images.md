@@ -4,6 +4,8 @@ description: List all the images necessary to install DTR
 keywords: dtr, cli, images
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 List all the images necessary to install DTR
 
 ## Usage

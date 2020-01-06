@@ -6,6 +6,8 @@ redirect_from:
 - /ee/ucp/admin/install/install-on-azure/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking
 and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure,
 the Calico CNI leverages the Azure networking infrastructure for data path
@@ -16,8 +18,7 @@ Calico / Azure integration.
 ## Docker UCP Networking
 
 Docker UCP configures the Azure IPAM module for Kubernetes to allocate IP
-addresses for Kubernetes pods. The Azure IPAM module requires each Azure virtual
-machine which is part of the Kubernetes cluster to be configured with a pool of IP
+addresses for Kubernetes pods. The Azure IPAM module requires each Azure VM which is part of the Kubernetes cluster to be configured with a pool of IP
 addresses.
 
 There are two options for provisioning IPs for the Kubernetes cluster on Azure:
@@ -81,7 +82,7 @@ objects are being deployed.
 For UCP to integrate with Microsoft Azure, all Linux UCP Manager and Linux UCP
 Worker nodes in your cluster need an identical Azure configuration file,
 `azure.json`.  Place this file within `/etc/kubernetes` on each host. Since the
-configution file is owned by `root`, set its permissions to `0644` to ensure
+configuration file is owned by `root`, set its permissions to `0644` to ensure
 the container user has read access.
 
 The following is an example template for `azure.json`. Replace `***` with real values, and leave the other
@@ -107,11 +108,11 @@ There are some optional parameters for Azure deployments:
 
 - `primaryAvailabilitySetName` - The Worker Nodes availability set.
 - `vnetResourceGroup` - The Virtual Network Resource group, if your Azure Network objects live in a
-seperate resource group.
+separate resource group.
 - `routeTableName` - If you have defined multiple Route tables within
 an Azure subnet.
 
-See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
+See the [Kubernetes Azure Cloud Provider Configuration](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
 
 ## Guidelines for IPAM Configuration
 
@@ -122,21 +123,26 @@ See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/c
 > installation process.
 
 The subnet and the virtual network associated with the primary interface of the
-Azure VMs need to be configured with a large enough address prefix/range. The number of required IP addresses depends on the workload and the number of nodes in the cluster.
+Azure VMs needs to be configured with a large enough address
+prefix/range. The number of required IP addresses depends on the workload and
+the number of nodes in the cluster.
 
-For example, in a cluster of 256 nodes, make sure that the address space of the subnet and the virtual network can allocate at least 128 * 256 IP addresses, in order to run a maximum of 128 pods concurrently on a node. This would be ***in addition to*** initial IP allocations to VM network interface cards (NICs) during Azure resource creation.
+For example, in a cluster of 256 nodes, make sure that the address space of the subnet and the
+virtual network can allocate at least 128 * 256 IP addresses, in order to run a maximum of 128 pods
+concurrently on a node. This would be ***in addition to*** initial IP allocations to VM
+network interface card (NICs) during Azure resource creation.
 
-Accounting for IP addresses that are allocated to NICs during VM bring up, set
-the address space of the subnet and virtual network to `10.0.0.0/16`. This
-ensures that the network can dynamically allocate at least 32768 addresses,
-plus a buffer for initial allocations for primary IP addresses.
+Accounting for IP addresses that are allocated to NICs during VM bring-up, set the address space of the subnet and virtual network to `10.0.0.0/16`. This
+ensures that the network can dynamically allocate at least 32768 addresses, plus a buffer for initial allocations for primary IP addresses.
 
-> Note 
+> Note
 >
 > The Azure IPAM module queries an Azure VM's metadata to obtain
 > a list of IP addresses which are assigned to the VM's NICs. The
 > IPAM module allocates these IP addresses to Kubernetes pods. You configure the
-> IP addresses as `ipConfigurations` in the NICs associated with a VM or scale set member, so that Azure IPAM can provide them to Kubernetes when requested.
+> IP addresses as `ipConfigurations` in the NICs associated with a VM
+> or scale set member, so that Azure IPAM can provide them to Kubernetes when
+> requested.
 {: .important}
 
 ## Manually provision IP address pools as part of an Azure VM scale set
@@ -206,8 +212,7 @@ for each VM in the VM scale set.
 
 During a UCP installation, a user can alter the number of Azure IP addresses
 UCP will automatically provision for pods. By default, UCP will provision 128
-addresses, from the same Azure Subnet as the hosts, for each VM in
-the cluster. However, if you have manually attached additional IP addresses
+addresses, from the same Azure Subnet as the hosts, for each VM in the cluster. However, if you have manually attached additional IP addresses
 to the VMs (via an ARM Template, Azure CLI or Azure Portal) or you
 are deploying in to small Azure subnet (less than /16), an `--azure-ip-count`
 flag can be used at install time.
@@ -215,8 +220,7 @@ flag can be used at install time.
 > Note
 > 
 > Do not set the `--azure-ip-count` variable to a value of less than 6 if
-> you have not manually provisioned additional IP addresses for each Virtual
-> Machine. The UCP installation will need at least 6 IP addresses to allocate
+> you have not manually provisioned additional IP addresses for each VM. The UCP installation will need at least 6 IP addresses to allocate
 > to the core UCP components that run as Kubernetes pods. This is in addition
 > to the VM's private IP address.
 
@@ -225,8 +229,7 @@ to be defined.
 
 **Scenario 1 - Manually Provisioned Addresses**
 
-If you have manually provisioned additional IP addresses for each Virtual
-Machine, and want to disable UCP from dynamically provisioning more IP
+If you have manually provisioned additional IP addresses for each VM, and want to disable UCP from dynamically provisioning more IP
 addresses for you, then you would pass `--azure-ip-count 0` into the UCP
 installation command.
 
@@ -236,7 +239,7 @@ If you want to reduce the number of IP addresses dynamically allocated from 128
 addresses to a custom value due to:
 
 - Primarily using the Swarm Orchestrator
-- Deploying UCP on a small Azure subnet (for example /24)
+- Deploying UCP on a small Azure subnet (for example, /24)
 - Plan to run a small number of Kubernetes pods on each node.
 
 For example if you wanted to provision 16 addresses per VM, then

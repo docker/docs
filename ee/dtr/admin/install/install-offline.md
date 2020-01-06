@@ -5,6 +5,8 @@ description: Learn how to install Docker Trusted Registry on a machine with no i
 keywords: registry, install, offline
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The procedure to install Docker Trusted Registry on a host is the same,
 whether that host has access to the internet or not.
 

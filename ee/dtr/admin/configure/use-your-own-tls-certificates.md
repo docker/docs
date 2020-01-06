@@ -4,6 +4,8 @@ description: Learn how to configure Docker Trusted Registry with your own TLS ce
 keywords: dtr, tls, certificates, security
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry (DTR) services are exposed using HTTPS by default. This
 ensures encrypted communications between clients and your trusted registry. If
 you do not pass a PEM-encoded TLS certificate during installation, DTR will

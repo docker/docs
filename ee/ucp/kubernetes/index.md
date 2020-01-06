@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/services/deploy-kubernetes-workload/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The Docker EE web UI enables deploying your Kubernetes YAML files. In most
 cases, no modifications are necessary to deploy on a cluster that's managed by
 Docker EE.

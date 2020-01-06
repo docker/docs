@@ -8,6 +8,8 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/user/create-promotion-policies/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry allows you to create image promotion pipelines based on
 policies.
 

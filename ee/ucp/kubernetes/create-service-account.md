@@ -4,6 +4,8 @@ description: Learn how to use a service account to give a Kubernetes workload ac
 keywords: UCP, Docker EE, Kubernetes, authorization, access control, grant
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Kubernetes enables access control for workloads by providing service accounts.
 A service account represents an identity for processes that run in a pod.
 When a process is authenticated through a service account, it can contact the

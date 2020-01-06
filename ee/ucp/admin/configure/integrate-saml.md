@@ -4,6 +4,8 @@ description: Learn how to use SAML to link a UCP team with an Identity Provider 
 keywords: cluster, node, join
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## SAML integration
 
 Security Assertion Markup Language (SAML) is an open standard for exchanging authentication and authorization data between parties. The SAML integration process is described below.

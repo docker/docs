@@ -4,6 +4,8 @@ description: Learn how to push an image to Docker Trusted Registry and deploy it
 keywords: Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise Edition (EE) has its own image registry (DTR) so that
 you can store and manage the images that you deploy to your cluster.
 In this topic, you push an image to DTR and later deploy it to your cluster,

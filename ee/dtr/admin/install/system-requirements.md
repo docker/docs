@@ -4,6 +4,8 @@ description: Learn about the system requirements for installing Docker Trusted R
 keywords: DTR, architecture, requirements
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
 

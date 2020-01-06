@@ -4,6 +4,8 @@ description: Learn how to configure a load balancer to balance user requests acr
 keywords: dtr, load balancer
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Once you’ve joined multiple DTR replicas nodes for
 [high-availability](set-up-high-availability.md), you can configure your own
 load balancer to balance user requests across all replicas.

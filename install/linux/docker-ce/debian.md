@@ -34,7 +34,7 @@ Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `a
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash

@@ -4,6 +4,8 @@ description: Change DTR configurations
 keywords: dtr, cli, reconfigure
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Change DTR configurations. 
 
 ## Usage

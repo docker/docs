@@ -6,6 +6,8 @@ redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
 ---
 
 
+>{% include enterprise_label_shortform.md %}
+
 ## Overview
 
 This covers troubleshooting batch jobs via the API and was introduced in DTR 2.2. Starting in DTR 2.6, admins have the ability to [audit jobs](audit-jobs-via-ui.md) using the web interface. 

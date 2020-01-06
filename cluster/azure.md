@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, Azur
 title: Get started with Docker Cluster on Azure
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Prerequisites
 
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.

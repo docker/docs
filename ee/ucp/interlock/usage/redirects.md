@@ -4,6 +4,8 @@ description: Learn how to implement redirects using swarm services and the Layer
 keywords: routing, proxy, redirects, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The following example publishes a service and configures a redirect from `old.local` to `new.local`.
 
 > Note

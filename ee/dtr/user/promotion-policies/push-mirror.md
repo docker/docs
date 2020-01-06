@@ -4,6 +4,8 @@ description: Learn how to create a promotion policy that promotes images to an e
 keywords: registry, promotion, mirror
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry allows you to create mirroring policies for a repository.
 When an image gets pushed to a repository and meets the mirroring criteria,
 DTR automatically pushes it to a repository in a remote Docker Trusted or Hub registry.

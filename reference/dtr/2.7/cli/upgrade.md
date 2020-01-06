@@ -4,6 +4,8 @@ description: Upgrade DTR 2.5.x cluster to this version
 keywords: dtr, cli, upgrade
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Upgrade DTR 2.5.x cluster to this version
 
 ## Usage

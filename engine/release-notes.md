@@ -9,6 +9,8 @@ redirect_from:
  - /release-notes/docker-ce/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine - Community.
 

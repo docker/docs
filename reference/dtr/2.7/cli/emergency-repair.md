@@ -4,6 +4,8 @@ description: Recover DTR from loss of quorum
 keywords: dtr, cli, emergency-repair
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Recover DTR from loss of quorum
 
 ## Usage

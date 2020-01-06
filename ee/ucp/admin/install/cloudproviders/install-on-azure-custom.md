@@ -4,6 +4,8 @@ description: Learn how to create custom RBAC roles to run Docker Enterprise on A
 keywords: Universal Control Plane, UCP, install, Docker Enterprise, Azure, Swarm
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Overview
 
 This document describes how to create Azure custom roles to deploy Docker Enterprise resources.

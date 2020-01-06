@@ -4,6 +4,8 @@ description: Learn how to deploy a simple application and customize access to re
 keywords: rbac, authorize, authentication, user, team, UCP, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This tutorial explains how to deploy a NGINX web server and limit access to one
 team with role-based access control (RBAC).
 

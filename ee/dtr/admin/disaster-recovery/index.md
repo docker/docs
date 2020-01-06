@@ -5,6 +5,8 @@ description: Learn the multiple disaster recovery strategies you can use with
 keywords: dtr, disaster recovery
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry is a clustered application. You can join multiple
 replicas for high availability.
 

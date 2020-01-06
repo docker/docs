@@ -4,6 +4,8 @@ description: Learn how to architect multi-tenancy with Docker Enterprise.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Go through the [Docker Enterprise tutorial](ee-standard.md),
 before completing the following tutorial.
 

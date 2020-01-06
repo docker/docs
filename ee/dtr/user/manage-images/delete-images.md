@@ -4,6 +4,8 @@ description: Learn how to delete images from Docker Trusted Registry.
 keywords: registry, delete
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To delete an image, navigate to the **Tags** tab of the repository page on the DTR web interface.
 In the **Tags** tab, select all the image
 tags you want to delete, and click the **Delete** button.

@@ -5,6 +5,8 @@ description: Learn how to set up organizations to enforce security in Docker Tru
 keywords: registry, security, permissions, organizations
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When a user creates a repository, only that user has permissions to make changes
 to the repository.
 

@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and
 Windows Server 2019. Only worker nodes are supported on Windows, and all
 manager nodes in the cluster must run on Linux. Additionally Windows worker

@@ -5,6 +5,8 @@ description: Learn how to configure your swarm services with persistent sessions
 keywords: routing, proxy, cookies, IP hash
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can publish a service and configure the proxy for persistent (sticky) sessions using:
 
 - Cookies

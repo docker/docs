@@ -7,6 +7,8 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/admin/configure/allow-creation-on-push/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default DTR only allows pushing images if the repository exists, and you
 have write access to the repository.
 

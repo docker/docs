@@ -6,6 +6,8 @@ redirect_from:
 - /enterprise/admin/install/system-requirements/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
 

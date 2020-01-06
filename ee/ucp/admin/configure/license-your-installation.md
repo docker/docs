@@ -4,6 +4,8 @@ description: Learn how to license your Docker Universal Control Plane installati
 keywords: Universal Control Plane, UCP, install, license
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After installing Docker Universal Control Plane, you need to license your
 installation. Here's how to do it.
 

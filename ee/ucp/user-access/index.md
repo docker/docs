@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/access-ucp/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane allows you to manage your cluster in a visual
 way, from your browser.
 

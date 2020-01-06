@@ -6,6 +6,8 @@ redirect_from:
  - /ee/ucp/admin/backups-and-disaster-recovery/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP backups no longer require pausing the reconciler and deleting UCP containers, and backing up a UCP manager does not disrupt the manager’s activities. 
 
 Because UCP stores the same data on all manager nodes, you only need to back up a single UCP manager node.

@@ -5,6 +5,8 @@ keywords: cluster, psp, security
 ---
 
 
+>{% include enterprise_label_shortform.md %}
+
 This is the current list of admission controllers used by Docker:
 
 ### Default

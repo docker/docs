@@ -4,6 +4,8 @@ description: Learn how to use websockets in your swarm services.
 keywords: routing, proxy, websockets
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 First, create an overlay network to isolate and secure service traffic:
 
 ```bash

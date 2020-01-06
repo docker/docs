@@ -7,6 +7,8 @@ redirect_from:
   - /ee/dtr/deprecation-notice/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Since DTR is secure by default, you need to create the image repository before
 being able to push the image to DTR.
 

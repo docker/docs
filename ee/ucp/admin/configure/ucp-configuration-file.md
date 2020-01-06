@@ -4,6 +4,8 @@ description: Set up UCP deployments by using a configuration file.
 keywords: Docker EE, UCP, configuration, config
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 There are two ways to configure UCP:
 - through the web interface, or
 - by importing and exporting the UCP config in a TOML file. For more information about TOML, see the [TOML README on GitHub](https://github.com/toml-lang/toml/blob/master/README.md).

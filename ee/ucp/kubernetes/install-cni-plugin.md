@@ -4,6 +4,8 @@ description: Learn how to install a Container Networking Interface (CNI) plugin 
 keywords: ucp, kubernetes, cni, container networking interface, flannel, weave, calico
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 For Docker Universal Control Plane (UCP), [Calico](https://docs.projectcalico.org/v3.7/introduction/) 
 provides the secure networking functionality for container-to-container communication within
 Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
