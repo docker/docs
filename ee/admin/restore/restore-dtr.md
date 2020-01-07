@@ -10,6 +10,8 @@ redirect_from:
 {% assign image_backup_file = "dtr-image-backup.tar" %}
 
 
+>{% include enterprise_label_shortform.md %}
+
 ## Restore DTR data
 
 If your DTR has a majority of unhealthy replicas, the one way to restore it to

@@ -4,6 +4,8 @@ description: Restore a UCP cluster from a backup
 keywords: ucp, cli, restore
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Restore a UCP cluster from a backup.
 
 ## Usage

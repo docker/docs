@@ -8,6 +8,8 @@ toc_max: 3
 toc_min: 1
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Backups do not cause downtime for DTR.
 
 ## DTR backup contents

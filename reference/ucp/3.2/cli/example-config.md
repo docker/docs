@@ -4,6 +4,8 @@ description: Display an example configuration file for UCP
 keywords: ucp, cli, config, configuration
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Display an example configuration file for UCP.
 
 ## Usage

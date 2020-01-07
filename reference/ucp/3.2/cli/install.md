@@ -4,6 +4,8 @@ description: Install UCP on a node
 keywords: ucp, cli, install
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Install UCP on a node
 
 ## Usage
