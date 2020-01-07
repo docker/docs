@@ -89,7 +89,6 @@ docker container run -it --rm \
 ```
 
 This runs the [docker/dtr install](https://docs.docker.com/reference/dtr/2.7/cli/install/) command, where:
-
 * `--ucp-node` is the hostname of the UCP node where you want to deploy DTR 
 * `--ucp-insecure-tls` tells the installer to trust the certificates used by UCP
 
