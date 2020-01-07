@@ -22,7 +22,7 @@ url: https://docs.docker.com
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
-compose_version: "1.25.1"
+compose_version: "1.25.3"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
