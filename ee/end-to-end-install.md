@@ -11,10 +11,10 @@ Get the [30-day
 trial available at the Docker hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial).
 
 Once you get your trial license, you can install Docker Enterprise's Universal
-Control Plane and Docker Trusted Registry on Linux Servers. Windows Servers
-can only be used as Universal Control Plane Worker Nodes.
+Control Plane (UCP) and Docker Trusted Registry (DTR) on Linux Servers. Windows Servers
+can only be used as UCP Worker Nodes.
 
-Learn more about the Universal Control Plane's system requirements 
+Learn more about UCP's system requirements 
 [here](ucp/admin/install/system-requirements.md). Also, make sure the hosts are 
 running one of the supported operating systems from Docker Enterprise's 
 [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix).
@@ -26,8 +26,7 @@ Docker Enterprise container engine on all hosts you want to manage.
 
 ## Step 2: Install Universal Control Plane
 
-Docker Universal Control Plane (UCP) allows managing from a centralized place
-your images, applications, networks, and other computing resources.
+UCP allows managing your images, applications, networks, and other computing resources from a centralized place.
 
 Use ssh to log in to the host where you want to install UCP and run:
 
@@ -39,7 +38,7 @@ docker container run --rm -it --name ucp \
   --interactive
 ```
 
-This runs the [docker/ucp install](https://docs.docker.com/reference/ucp/3.2/cli/install/) command in interactive mode, so that you're prompted for any necessary configuration values.
+This runs the [docker/ucp install](https://docs.docker.com/reference/ucp/3.2/cli/install/) command in interactive mode so that you're prompted for any necessary configuration values.
 
 [Learn more about the UCP installation](ucp/admin/install/index.md).
 
@@ -49,7 +48,7 @@ This runs the [docker/ucp install](https://docs.docker.com/reference/ucp/3.2/cli
 ## Step 3: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI, log in with your administrator credentials and upload your
+to the UCP web UI, log in with your administrator credentials, and upload your
 license.
 
 ![UCP login page](images/try-ee-1.png){: .with-border}
@@ -77,8 +76,7 @@ will show up in the UP web UI.
 
 ## Step 5: Install Docker Trusted Registry
 
-Docker Trusted Registry (DTR) is a private image registry so that you can
-manage who has access to your Docker images. DTR needs to be installed on
+DTR is a private image registry where you can manage who has access to your Docker images. DTR needs to be installed on
 a node that is being managed by UCP.
 
 Use ssh to log in to the host where you already installed UCP, and run:
@@ -90,13 +88,13 @@ docker container run -it --rm \
   --ucp-insecure-tls
 ```
 
-This runs the [docker/dtr install](https://docs.docker.com/reference/dtr/2.7/cli/install/) command where the `--ucp-node` is the hostname of the UCP node where you want to deploy
-DTR and `--ucp-insecure-tls` tells the installer to trust the certificates used
-by UCP.
+This runs the [docker/dtr install](https://docs.docker.com/reference/dtr/2.7/cli/install/) command, where:
 
-[Learn more about the DTR installation](ee/dtr/admin/install/install.md).
+* `--ucp-node` is the hostname of the UCP node where you want to deploy DTR 
+* `--ucp-insecure-tls` tells the installer to trust the certificates used by UCP
 
 ## Where to go next
 
 * [Scale your cluster](ucp/admin/configure/join-nodes/index.md)
 * [Deploy an application](ucp/swarm/index.md)
+* [DTR installation](ee/dtr/admin/install/install.md)
