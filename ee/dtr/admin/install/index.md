@@ -31,7 +31,7 @@ DTR requires Docker Universal Control Panel (UCP) to run. If UCP is not yet inst
 > * Docker Engine should be updated to the most recent version before
 > installing or updating UCP.
 
-DTR and UCP must not be installed on the same node, due to the potential for resource and port conflicts, Instead, install DTR on worker nodes that will be managed by UCP. Note also that DTR cannot be installed on a standalone Docker Engine.
+DTR and UCP must not be installed on the same node, due to the potential for resource and port conflicts. Instead, install DTR on worker nodes that will be managed by UCP. Note also that DTR cannot be installed on a standalone Docker Engine.
 
 ![](../../images/install-dtr-1.svg)
 
