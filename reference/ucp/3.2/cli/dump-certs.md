@@ -4,6 +4,8 @@ description: Print the public certificates used by this UCP web server
 keywords: ucp, cli, dump-certs
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Print the public certificates used by this UCP web server.
 
 ## Usage
