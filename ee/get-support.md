@@ -4,6 +4,8 @@ description: Your Docker Enterprise subscription gives you access to prioritized
 keywords: support, help
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Your Docker Enterprise subscription gives you access to prioritized
 support. The service levels depend on your subscription.
 

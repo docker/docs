@@ -4,6 +4,8 @@ description: Upgrade the UCP components on this node
 keywords: ucp, cli, upgrade
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Upgrade the UCP cluster.
 
 ## Usage

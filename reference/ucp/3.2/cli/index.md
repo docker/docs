@@ -4,6 +4,8 @@ description: Learn about the commands available in the docker/ucp image.
 keywords: ucp, cli, ucp
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This image has commands to install and manage
 Docker Universal Control Plane (UCP) on a Docker Engine.
 

@@ -4,6 +4,8 @@ description: Create a backup of a UCP manager node
 keywords: ucp, cli, backup
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Create a backup of a UCP manager node.
 
 ## Usage
