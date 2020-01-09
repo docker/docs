@@ -16,15 +16,6 @@ To get started with Docker Engine - Community on CentOS, make sure you
 
 ## Prerequisites
 
-### Docker EE customers
-
-To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for CentOS](/install/linux/docker-ee/centos/)
-**instead of this topic**.
-
-To learn more about Docker EE, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
-
 ### OS requirements
 
 To install Docker Engine - Community, you need a maintained version of CentOS 7. Archived

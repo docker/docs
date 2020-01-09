@@ -15,12 +15,7 @@ To get started with Docker Engine - Community on Debian, make sure you
 [install Docker](#install-docker-ce).
 
 ## Prerequisites
-
-### Docker EE customers
-
-Docker EE is not supported on Debian. For a list of supported operating systems
-and distributions for different Docker editions, see
-[Docker variants](/install/index.md#docker-variants).
+ 
 
 ### OS requirements
 
