@@ -4,6 +4,8 @@ description: Uninstall UCP from this swarm
 keywords: ucp, cli, uninstall-ucp
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Uninstall UCP from this swarm.
 
 ## Usage

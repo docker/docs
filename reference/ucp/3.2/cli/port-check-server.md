@@ -4,6 +4,8 @@ description: Check the firewall ports for UCP
 keywords: ucp, cli, images
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Checks the suitablility of the node for a UCP installation
 
 ## Usage

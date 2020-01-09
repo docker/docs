@@ -16,7 +16,6 @@ title: Get Docker Engine - Enterprise for Oracle Linux
 {% assign package-format = "RPM" %}
 {% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
-
 >{% include enterprise_label_shortform.md %}
 
 There are two ways to install and upgrade [Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
