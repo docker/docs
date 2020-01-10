@@ -109,10 +109,6 @@ defaults:
       toc_max: 3
       tree: true
   - scope:
-      path: "install"
-    values:
-      win_latest_build: "docker-19.03.5"
-  - scope:
       path: "datacenter"
     values:
       enterprise: true
@@ -126,6 +122,7 @@ defaults:
       dtr_repo: "dtr"
       ucp_version: "3.2.4"
       dtr_version: "2.7.4"
+      win_latest_build: "docker-19.03.5"
   # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
