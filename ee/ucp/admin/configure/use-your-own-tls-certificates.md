@@ -36,7 +36,7 @@ To configure UCP to use your own TLS certificates and keys:
 
 2. Click **Certificates**.
 
-    ![](../../images/ucp-certs.png)
+    ![](../../images/use-externally-signed-certs-2.png)
     
 3. Upload your certificates and keys based on the following table:
 
