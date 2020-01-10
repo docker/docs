@@ -1822,8 +1822,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Publishing a default host service
-            path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
@@ -4156,4 +4154,3 @@ manuals:
 
 
 
-  
