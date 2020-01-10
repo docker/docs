@@ -111,7 +111,7 @@ Configures audit logging options for UCP components.
 Specifies scheduling options and the default orchestrator for new nodes.
 
 > Note
-> 
+>
 > If you run the `kubectl` command, such as `kubectl describe nodes`, to view scheduling rules on Kubernetes nodes, it does not reflect what is configured in UCP Admin settings. UCP uses taints to control container scheduling on nodes and is unrelated to kubectl's `Unschedulable` boolean flag.
 
 | Parameter                     | Required | Description                                                                                                                                |
@@ -142,7 +142,7 @@ Specifies whether DTR images require signing.
 ### log_configuration table (optional)
 
 > Note
-> 
+>
 > This feature has been deprecated. Refer to the [Deprecation notice](https://docs.docker.com/ee/ucp/release-notes/#deprecation-notice) for additional information.
 
 Configures the logging options for UCP components.
@@ -228,13 +228,13 @@ components. Assigning these values overrides the settings in a container's
 | `local_volume_collection_mapping`      | no       | Store data about collections for volumes in UCP's local KV store instead of on the volume labels. This is used for enforcing access control on volumes.                                          |
 | `manager_kube_reserved_resources`      | no       | Reserve resources for Docker UCP and Kubernetes components which are running on manager nodes.                                                                                                   |
 | `worker_kube_reserved_resources`       | no       | Reserve resources for Docker UCP and Kubernetes components which are running on worker nodes.                                                                                                    |
-| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.|
-| `secure-overlay` | no | Set to `true` to enable IPSec network encryption in Kubernetes. Default is `false`. |
-| `image_scan_aggregation_enabled` | no | Set to `true` to enable image scan result aggregation. This feature displays image vulnerabilities in shared resource/containers and shared resources/images pages. Default is `false`.|
-|`swarm_polling_disabled` | no | Set to `true` to turn off auto-refresh (which defaults to 15 seconds) and only call the Swarm API once. Default is `false`. |
+| `kubelet_max_pods`                     | yes      | Set Number of Pods that can run on a node. Default is `110`.                                                                                                                                     |
+| `secure_overlay`                       | no       | Set to `true` to enable IPSec network encryption in Kubernetes. Default is `false`.                                                                                                              |
+| `image_scan_aggregation_enabled`       | no       | Set to `true` to enable image scan result aggregation. This feature displays image vulnerabilities in shared resource/containers and shared resources/images pages. Default is `false`.          |
+| `swarm_polling_disabled`               | no       | Set to `true` to turn off auto-refresh (which defaults to 15 seconds) and only call the Swarm API once. Default is `false`.                                                                      |
 
 > Note
-> 
+>
 > dev indicates that the functionality is only for development and testing. Arbitrary Kubernetes configuration parameters are not tested and supported under the Docker Enterprise Software Support Agreement.
 
 ### iSCSI (optional)
