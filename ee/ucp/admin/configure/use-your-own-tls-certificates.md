@@ -32,7 +32,7 @@ will have to download new ones to [access UCP from the CLI](../../user-access/cl
 
 To configure UCP to use your own TLS certificates and keys:
 
-1. Log into the UCP web UI with administrator credentials and navigate to the **Admin Settings** page
+1. Log into the UCP web UI with administrator credentials and navigate to the **Admin Settings** page.
 
 2. Click **Certificates**.
 
