@@ -1596,17 +1596,17 @@ manuals:
     path: /ee/get-support/
   - sectiontitle: Docker Cluster
     section:
-    - path: /cluster/
+    - path: /ee/cluster/
       title: Overview
-    - path: /cluster/release-notes/
+    - path: /ee/cluster/release-notes/
       title: Release notes
-    - path: /cluster/aws/
+    - path: /ee/cluster/aws/
       title: Docker Cluster on AWS
-    - path: /cluster/azure/
+    - path: /ee/cluster/azure/
       title: Docker Cluster on Azure
-    - path: /cluster/cluster-file/
+    - path: /ee/cluster/cluster-file/
       title: Cluster file structure
-    - path: /cluster/reference/envvars/
+    - path: /ee/cluster/reference/envvars/
       title: Environment variables
   - sectiontitle: Docker Engine - Enterprise
     section:
@@ -1822,8 +1822,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Publishing a default host service
-            path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
@@ -4156,4 +4154,3 @@ manuals:
 
 
 
-  
