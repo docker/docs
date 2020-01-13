@@ -64,7 +64,7 @@ Confirm that at least [16GB RAM is available](install/system-requirements) on th
 Once you have the latest image on your machine (and the images on the target
 nodes, if upgrading offline), run the upgrade command.
 
-> On which node should the upgrade command be run?
+> Note:
 >
 > The upgrade command can be run from any available node, as UCP is aware of of which worker nodes have replicas.
 
@@ -73,7 +73,7 @@ docker run -it --rm \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} upgrade
 ```
 
-By default the upgrade command runs in interactive mode and prompts for
+By default, the upgrade command runs in interactive mode and prompts for
 any necessary information. You can also check the
 [upgrade reference page](/reference/dtr/2.7/cli/upgrade/) for other existing flags.
 If you are performing the upgrade on an existing replica, pass the `--existing-replica-id` flag.
@@ -94,7 +94,7 @@ Garbage collection is disabled while the migration is running. In the case of a 
 
 ![](../images/migration-error.png){: .with-border}
 
-If the three attempts fail it will be necessary to manually retrigger the `metadatastoremigration` job. To do this, send a `POST` request to the `/api/v0/jobs` endpoint:
+If the three attempts fail, it will be necessary to manually retrigger the `metadatastoremigration` job. To do this, send a `POST` request to the `/api/v0/jobs` endpoint:
 
 ```bash
 curl https://<dtr-external-url>/api/v0/jobs -X POST \
