@@ -32,34 +32,30 @@ will have to download new ones to [access UCP from the CLI](../../user-access/cl
 
 ## Configure UCP to use your own TLS certificates and keys
 
-In the UCP web UI, log in with administrator credentials and
-navigate to the **Admin Settings** page.
+To configure UCP to use your own TLS certificates and keys:
 
-  In the left pane, click **Certificates**.
+1. Log into the UCP web UI with administrator credentials and navigate to the **Admin Settings** page.
 
-![](../../images/use-externally-signed-certs-2.png)
+2. Click **Certificates**.
 
-Upload your certificates and keys:
+    ![](../../images/use-externally-signed-certs-2.png)
+    
+3. Upload your certificates and keys based on the following table:
 
-* A `ca.pem` file with the root CA (Certificate Authority) public certificate.
-* A `cert.pem` file with the TLS certificate for your domain and any intermediate public
-certificates, in this order.
-* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password.
-Encrypted keys should have `ENCRYPTED` in the first line.
+    | Type     | Description |
+| ----------- | ----------- |
+| Private key      | The unencrypted private key of UCP. This key must correspond to the public key used in the server certificate. Click **Upload Key**.        |
+| Server certificate   | The public key certificate of UCP followed by the certificates of any intermediate certificate authorities which establishes a chain of trust up to the root CA certificate. Click **Upload Certificate** to upload a PEM file.        |
+| CA certificate      | The public key certificate of the root certificate authority that issued the UCP server certificate. If you don’t have one, use the top-most intermediate certificate instead. Click **Upload CA Certificate** to upload a PEM file.        |
+| Client CA   | This field is available in UCP 3.2. This field may contain one or more Root CA certificates which the UCP Controller will use to verify that client certificates are issued by a trusted entity. UCP is automatically configured to trust its internal CAs which issue client certificates as part of generated client bundles, however, you may supply UCP with additional custom root CA certificates here so that UCP may trust client certificates issued by your corporate or trusted third-party certificate authorities. Note that your custom root certificates will be appended to UCP’s internal root CA certificates. Click **Upload CA Certificate** to upload a PEM file. Click **Download UCP Server CA Certificate** to download the certificate as a PEM file.        |
+
+4. Click **Save**.
 
 After replacing the TLS certificates, your users will not be able to authenticate
 with their old client certificate bundles. Ask your users to access the UCP
 web UI and [download new client certificate bundles](../../user-access/cli.md).
 
-As of UCP v3.2, the **Certificates** page includes a new text field,
-***Client CA***, that allows you to paste or upload one or more custom root CA certificates which the UCP Controller will use to
-verify the authenticity of client certificates issued by your corporate or
-trusted third-party CAs. Note that your custom root certificates will be appended to UCP's internal root CA certificates.
-
-Finally, click **Save** for the changes to take effect.
-
-
-If you deployed Docker Trusted Registry, you'll also need to reconfigure it
+If you deployed Docker Trusted Registry (DTR), you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
 [Learn how to configure DTR](/reference/dtr/2.7/cli/reconfigure.md).
 
