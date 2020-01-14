@@ -2,12 +2,14 @@
 description: Reference for drivers Docker Machine supports
 keywords: machine, drivers, supports
 title: Machine drivers
+hide_from_sitemap: true
 ---
 
 -   [Amazon Web Services](aws.md)
 -   [Microsoft Azure](azure.md)
 -   [DigitalOcean](digital-ocean.md)
 -   [Exoscale](exoscale.md)
+-   [Generic](generic.md)
 -   [Google Compute Engine](gce.md)
 -   [Linode](linode.md) (unofficial plugin, not supported by Docker)
 -   [Microsoft Hyper-V](hyper-v.md)

@@ -61,7 +61,7 @@ certificates from a custom root CA.
 * **Rolling updates:** At rollout time you can apply service updates to nodes
 incrementally. The swarm manager lets you control the delay between service
 deployment to different sets of nodes. If anything goes wrong, you can
-roll-back a task to a previous version of the service.
+roll back to a previous version of the service.
 
 ## What's next?
 

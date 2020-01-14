@@ -4,7 +4,9 @@ description: Learn how to scale Docker Universal Control Plane cluster, by addin
 keywords: UCP, cluster, scale
 ---
 
-Docker UCP is designed for scaling horizontally as your applications grow in
+>{% include enterprise_label_shortform.md %}
+
+/Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
 scale to your needs.
 

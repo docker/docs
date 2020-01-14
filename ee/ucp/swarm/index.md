@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/services/deploy-a-service/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 You can deploy and monitor your services from the UCP web UI. In this example
 we'll deploy an [NGINX](https://www.nginx.com/) web server and make it
 accessible on port `8000`.

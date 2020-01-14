@@ -5,6 +5,8 @@ description: Learn how to configure the layer 7 routing solution for a productio
 keywords: routing, proxy, interlock
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This section includes documentation on configuring Interlock
 for a production environment.  If you have not yet deployed Interlock, refer to [Deploying Interlock](./index.md) because this information builds upon the basic deployment. This topic does not cover infrastructure deployment -
 it assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).

@@ -4,6 +4,8 @@ description: Learn how to set up a load balancer to access the UCP web UI using 
 keywords: UCP, high-availability, load balancer
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Once you've joined multiple manager nodes for high-availability, you can
 configure your own load balancer to balance user requests across all
 manager nodes.

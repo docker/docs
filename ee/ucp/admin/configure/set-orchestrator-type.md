@@ -4,6 +4,8 @@ description: Learn how to specify the orchestrator for nodes in a Docker Enterpr
 keywords: Docker Enterprise, UCP, cluster, orchestrator
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When you add a node to the cluster, the node's workloads are managed by a
 default orchestrator, either Docker Swarm or Kubernetes. When you install
 Docker Enterprise, new nodes are managed by Docker Swarm, but you can change the
@@ -24,14 +26,14 @@ both on the same node. Although you can choose to mix orchestrator types on the
 same node, this isn't recommended for production deployments because of the
 likelihood of resource contention.
 
-To change a node's orchestrator type from the **Edit node** page:
+To change a node's orchestrator type from the Edit Node page:
 
 1.  Log in to the Docker Enterprise web UI with an administrator account.
 2.  Navigate to the **Nodes** page, and click the node that you want to assign
     to a different orchestrator.
 3.  In the details pane, click **Configure** and select **Details** to open
-    the **Edit node** page.
-4.  In the **Orchestrator properties** section, click the orchestrator type
+    the Edit Node page.
+4.  In the **Orchestrator Properties** section, click the orchestrator type
     for the node.
 5.  Click **Save** to assign the node to the selected orchestrator.
 
@@ -73,7 +75,7 @@ you'll be in the same situation as if you were running in `Mixed` node.
 > committed to another workload that was scheduled by the other orchestrator.
 > When this happens, the node could run out of memory or other resources.
 >
-> For this reason, we recommend against mixing orchestrators on a production
+> For this reason, we recommend not mixing orchestrators on a production
 > node. 
 {: .warning}
 
@@ -86,10 +88,10 @@ To set the orchestrator for new nodes:
 
 1.  Log in to the Docker Enterprise web UI with an administrator account.
 2.  Open the **Admin Settings** page, and in the left pane, click **Scheduler**.
-3.  Under **Set orchestrator type for new nodes** click **Swarm** or **Kubernetes**.
+3.  Under **Set Orchestrator Type for New Nodes**, click **Swarm** or **Kubernetes**.
 4.  Click **Save**.
     
-    ![](../../images/join-nodes-to-cluster-1.png){: .with-border}
+    ![](../../images/v32scheduler.png){: .with-border}
 
 From now on, when you join a node to the cluster, new workloads on the node
 are scheduled by the specified orchestrator type. Existing nodes in the cluster

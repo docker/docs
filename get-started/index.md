@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 1: Orientation and setup"
+title: "Orientation and setup"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Get oriented on some basics of Docker and install Docker Desktop.
 redirect_from:
@@ -57,7 +57,7 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
+Welcome! We are excited that you want to learn Docker. The _Docker Community QuickStart_
 teaches you how to:
 
 1. Set up your Docker environment (on this page)
@@ -108,6 +108,24 @@ system with _virtual_ access to host resources through a hypervisor. In general,
 VMs incur a lot of overhead beyond what is being consumed by your application logic.
 
 ![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
+
+### Orchestration
+
+The portability and reproducibility of a containerized process mean we have 
+an opportunity to move and scale our containerized applications across 
+clouds and datacenters; containers effectively guarantee that those 
+applications will run the same way anywhere, allowing us to quickly and 
+easily take advantage of all these environments. 
+Furthermore, as we scale our applications up, we'll 
+want some tooling to help automate the maintenance of those applications, 
+able to replace failed containers automatically and manage the rollout of updates 
+and reconfigurations of those containers during their lifecycle. 
+
+Tools to manage, scale, and maintain containerized applications are called 
+_orchestrators_, and the most common examples of these are _Kubernetes_ and 
+_Docker Swarm_. Development environment deployments of both of these 
+orchestrators are provided by Docker Desktop, which we'll use throughout 
+this guide to create our first orchestrated, containerized application.
 
 ## Install Docker Desktop
 
@@ -416,7 +434,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ## Conclusion
 
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. In the next section, we'll start developing our first containerized application.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 

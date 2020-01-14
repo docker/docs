@@ -6,6 +6,8 @@ redirect_from:
  - /ee/ucp/admin/backups-and-disaster-recovery/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 UCP backups no longer require pausing the reconciler and deleting UCP containers, and backing up a UCP manager does not disrupt the manager’s activities. 
 
 Because UCP stores the same data on all manager nodes, you only need to back up a single UCP manager node.
@@ -35,7 +37,9 @@ Backup contents are stored in a `.tar` file. Backups contain UCP configuration m
 | Configs, Secrets      | Create a Swarm backup to backup these data                                         | no
 | Services              | Stacks and services are stored in Swarm-mode or SCM/Config Management              | no  
 
-**Note**: Because kube stores the state of resources on `etcd`, a backup of `etcd` is sufficient for stateless backups and is described [here](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster).
+> Note
+> 
+> Because Kubernetes stores the state of resources on `etcd`, a backup of `etcd` is sufficient for stateless backups and is described [here](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster).
 
 ## Data not included in the backup
 * `ucp-metrics-data`: holds the metrics server's data.
@@ -44,10 +48,12 @@ Backup contents are stored in a `.tar` file. Backups contain UCP configuration m
 
 ## Kubernetes settings, data, and state
 
-UCP backups include all kubernetes declarative objects (pods, deployments, replicasets, configs...), including secrets.
+UCP backups include all Kubernetes declarative objects (pods, deployments, replicasets, configurations, and so on), including secrets. These objects are stored in the `ucp-kv etcd` database that is backed up (and restored) as part of UCP backup/restore.
 
-> **Note**: Kube volumes and kube node labels are not be backed up. 
-Upon restore, kubernetes declarative objects are re-created. Containers are re-created and IPs are resolved. 
+
+> Note
+>
+> You cannot back up Kubernetes volumes and node labels. Instead, upon restore, Kubernetes declarative objects are re-created. Containers are re-created and IP addresses are resolved. 
 
 For more information, see [Backing up an etcd cluster](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster).
 
@@ -57,9 +63,9 @@ To avoid directly managing backup files, you can specify a file name and host di
 ```
 sudo chown nobody:nogroup /path/to/folder
 ```
-> **Important**:  
-    - Specify a different name for each backup file. Otherwise, the existing backup file with the same name is overwritten.
-    - Specify a location that is mounted on a fault-tolerant file system (such as NFS) rather than the node's local disk. Otherwise, it is important to regularly move backups from the manager node's local disk to ensure adequate space for ongoing backups.
+> Important
+> 
+> Specify a different name for each backup file. Otherwise, the existing backup file with the same name is overwritten. Specify a location that is mounted on a fault-tolerant file system (such as NFS) rather than the node's local disk. Otherwise, it is important to regularly move backups from the manager node's local disk to ensure adequate space for ongoing backups.
  
 ## UCP backup steps
 There are several options for creating a UCP backup:
@@ -75,10 +81,7 @@ The following example shows how to create a UCP manager node backup, encrypt it
 by using a passphrase, decrypt it, verify its contents, and store it locally on
 the node at `/tmp/mybackup.tar`:
 
-1. Run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
-   backup` command on a single UCP manager and include the `--file` and
-`--include-logs`options. This creates a tar archive with the contents of all
-[volumes used by UCP](/ee/ucp-architecture/) and streams it to `stdout`.
+Run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command on a single UCP manager and include the `--file` and `--include-logs`options. This creates a tar archive with the contents of all [volumes used by UCP](/ee/ucp-architecture/) and streams it to `stdout`.
 Replace `{{ page.ucp_version }}` with the version you are currently running.
 
 ```bash
@@ -95,7 +98,9 @@ $ docker container run \
     --include-logs=false
 ```
 
-> **Note**: If you are running with Security-Enhanced Linux (SELinux) enabled,
+> Note
+>
+> If you are running with Security-Enhanced Linux (SELinux) enabled,
 > which is typical for RHEL hosts, you must include `--security-opt
 > label=disable` in the `docker` command (replace `version` with the version
 > you are currently running):
@@ -112,6 +117,8 @@ $ docker container run \
     --passphrase "secret12chars" > /tmp/mybackup.tar
  ```   
 
+> Note
+>
 > To determine whether SELinux is enabled in the engine, view the host’s `/etc/docker/daemon.json` file, and search for the string `"selinux-enabled":"true"`.
 
 #### View log and progress information
@@ -132,6 +139,8 @@ $ tar --list -f /directory1/directory2/backup.tar
 
 ### Create a UCP backup using the UI
 
+To create a UCP backup using the UI:
+
 1. In the UCP UI, navigate to **Admin Settings**.
 2. Select **Backup Admin**. 
 3. Select **Backup Now** to trigger an immediate backup.
@@ -146,7 +155,7 @@ The UI also provides the following options:
 The UCP API provides three endpoints for managing UCP backups. You must be a UCP administrator to access these API endpoints. 
 
 #### Create a UCP backup using the API
-Create a backup with the `POST: /api/ucp/backup` endpoint. This is a json endpoint with the following arguments: 
+You can create a backup with the `POST: /api/ucp/backup` endpoint. This is a JSON endpoint with the following arguments: 
  
 | field name 	|   JSON data type*  	|                description               	|
 |:----------:	|:-------:	|:----------------------------------------:	|
@@ -179,7 +188,7 @@ where:
 
 #### List all backups using the API
 
-List existing backups with the `GET: /api/ucp/backups` endpoint. This request does not expect a payload and returns a list of backups, each as a JSON object following the schema found in the [Backup schema](#backup-schema) section.
+You can view all existing backups with the `GET: /api/ucp/backups` endpoint. This request does not expect a payload and returns a list of backups, each as a JSON object following the schema found in the [Backup schema](#backup-schema) section.
 
 The request returns one of the following HTTP status codes and, if successful, a list of existing backups:
 
@@ -220,7 +229,7 @@ curl -sk -H 'Authorization: Bearer $AUTHTOKEN' https://$UCP_HOSTNAME/api/ucp/bac
 
 #### Retrieve backup details using the API
 
-Retrieve details for a specific backup using the `GET: /api/ucp/backup/{backup_id}` endpoint, where `{backup_id}` is the ID of an existing backup. This request returns the backup, if it exists, for the specified ID, as a JSON object following the schema found in the [Backup schema](#backup-schema) section.
+You can retrieve details for a specific backup using the `GET: /api/ucp/backup/{backup_id}` endpoint, where `{backup_id}` is the ID of an existing backup. This request returns the backup, if it exists, for the specified ID, as a JSON object following the schema found in the [Backup schema](#backup-schema) section.
 
 The request returns one of the following HTTP status codes, and if successful, the backup for the specified ID:
 
@@ -245,7 +254,9 @@ The following table describes the backup schema returned by the `GET` and `LIST`
 |  created_at  	|      string     	|                     Time of backup creation                     	|
 | completed_at 	|      string     	|                    Time of backup completion                    	|
 
-> *: JSON data type as defined per [JSON RFC 7159](https://tools.ietf.org/html/rfc7159).
+> Note
+> 
+> *= JSON data type as defined per [JSON RFC 7159](https://tools.ietf.org/html/rfc7159).
 
 
 ### Where to go next

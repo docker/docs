@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/group-resources/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise enables access control to cluster resources by grouping resources
 into **resource sets**. Combine resource sets with [grants](grant-permissions)
 to give users permission to access specific cluster resources.

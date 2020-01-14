@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/kubernetes/layer-7-routing/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% include experimental-feature.md %}
 
 ## Cluster Ingress capabilities

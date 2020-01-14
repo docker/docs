@@ -4,6 +4,8 @@ description: Learn how to install Docker Trusted Registry for production.
 keywords: dtr, registry, install
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 swarm managed by the Universal Control Plane (UCP). It can be installed
 on-premises or on a cloud infrastructure.
@@ -16,23 +18,20 @@ needs to run.
 
 ## Step 2. Install UCP
 
+DTR requires Docker Universal Control Panel (UCP) to run. If UCP is not yet installed, refer to [install UCP for production](/ee/ucp/admin/install/).
+
 >**Note**
 >
-> Before installing DTR:
+> Prior to installing DTR:
 > * When upgrading, upgrade UCP before DTR for each major version. For example,
 > if you are upgrading four major versions, upgrade one major version at a
 > time, first UCP, then DTR, and then repeat for the remaining three versions.
-> * UCP should be installed or upgraded to the most recent version before an
+> * UCP upgraded to the most recent version before an
 > initial install of DTR.
 > * Docker Engine should be updated to the most recent version before
 > installing or updating UCP.
 
-Since DTR requires Docker Universal Control Plane (UCP)
-to run, you need to [install UCP](/ee/ucp/admin/install/) on all the nodes
-where you plan to install DTR.
-
-DTR needs to be installed on a worker node that is being managed by UCP.
-You cannot install DTR on a standalone Docker Engine.
+DTR and UCP must not be installed on the same node, due to the potential for resource and port conflicts. Instead, install DTR on worker nodes that will be managed by UCP. Note also that DTR cannot be installed on a standalone Docker Engine.
 
 ![](../../images/install-dtr-1.svg)
 

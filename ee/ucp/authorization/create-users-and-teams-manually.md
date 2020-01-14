@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/authorization/create-users-and-teams-manually/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Users, teams, and organizations are referred to as subjects in Docker EE.
 
 Individual users can belong to one or more teams but each team can only be in

@@ -4,6 +4,8 @@ description: Print the ID of UCP running on this node
 keywords: ucp, cli, id
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Print the ID of UCP running on this node.
 
 ## Usage

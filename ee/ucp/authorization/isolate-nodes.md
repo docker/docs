@@ -4,6 +4,8 @@ description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication, node, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker Enterprise, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
 different users. To control access to nodes, move them to dedicated collections
@@ -179,23 +181,15 @@ collection. In this case, the user sets the value of the service's access label,
 `com.docker.ucp.access.label`, to the new collection or one of its children
 that has a `Service Create` grant for the user.
 
-## Deploy a Kubernetes application
+## Isolating nodes to Kubernetes namespaces
 
 Starting in Docker Enterprise Edition 2.0, you can deploy a Kubernetes workload
 to worker nodes, based on a Kubernetes namespace.
 
-1.  Convert a node to use the Kubernetes orchestrator.
-2.  Create a Kubernetes namespace.
-3.  Create a grant for the namespace.
-4.  Link the namespace to a node collection.
-5.  Deploy a Kubernetes workload.
-
-### Convert a node to Kubernetes
-
-To deploy Kubernetes workloads, an administrator must convert a worker node to
-use the Kubernetes orchestrator.
-[Learn how to set the orchestrator type](../admin/configure/set-orchestrator-type.md)
-for your nodes in the `/Prod` collection.
+1.  Create a Kubernetes namespace.
+2.  Create a grant for the namespace.
+3.  Associate nodes with the namespace.
+4.  Deploy a Kubernetes workload.
 
 ### Create a Kubernetes namespace
 
@@ -210,78 +204,46 @@ for Kubernetes workloads.
     apiVersion: v1
     kind: Namespace
     metadata:
-      Name: ops-nodes
+      Name: namespace-name
     ```
-4.  Click **Create** to create the `ops-nodes` namespace.
+4.  Click **Create** to create the `namespace-name` namespace.
 
 ### Grant access to the Kubernetes namespace
 
-Create a grant to the `ops-nodes` namespace for the `Ops` team by following the
-same steps that you used to grant access to the `/Prod` collection, only this
-time, on the **Create Grant** page, pick **Namespaces**, instead of
-**Collections**.
+Create a grant to the `namespace-name` namespace:
 
-![](../images/isolate-nodes-5.png){: .with-border}
+1. On the **Create Grant** page, select **Namespaces**.
 
-Select the **ops-nodes** namespace, and create a `Full Control` grant for the
-`Ops` team.
+    ![](../images/isolate-nodes-5.png){: .with-border}
 
-![](../images/isolate-nodes-6.png){: .with-border}
+2. Select the **namespace-name** namespace, and create a `Full Control` grant.
 
-### Link the namespace to a node collection
+    ![](../images/isolate-nodes-6.png){: .with-border}
 
-The last step is to link the Kubernetes namespace the `/Prod` collection.
+### Associate nodes with the namespace
 
-1.  Navigate to the **Namespaces** page, and find the **ops-nodes** namespace
-    in the list.
-2.  Click the **More options** icon and select **Link nodes in collection**.
+Namespaces can be associated with a node collection in either of the following ways:
+    - Define an annotation key during namespace creation. This is described in the following paragraphs.
+    - [Provide the namespace definition information in a configuration file](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#configuration-file-format-1).
 
-    ![](../images/isolate-nodes-7.png){: .with-border}
+#### Annotation file
+The `scheduler.alpha.kubernetes.io/node-selector` annotation key assigns node selectors to namespaces. If you define a `scheduler.alpha.kubernetes.io/node-selector: name-of-node-selector` annotation key when creating a namespace, all applications deployed in that namespace are pinned to the nodes with the node selector specified. 
 
-3.  In the **Choose collection** section, click **View children** on the
-    **Swarm** collection to navigate to the **Prod** collection.
-4.  On the **Prod** collection, click **Select collection**.
-5.  Click **Confirm** to link the namespace to the collection.
+The following example labels nodes as `example-zone`, and adds a scheduler node selector annotation as part of the `ops-nodes` namespace definition:
 
-    ![](../images/isolate-nodes-8.png){: .with-border}
 
-### Deploy a Kubernetes workload to the node collection
+For example, to pin all applications deployed in the `ops-nodes` namespace to nodes in the `example-zone` region:
+1. Label the nodes with `example-zone`.
+2. Add an scheduler node selector annotation as part of the namespace definition.
 
-1.  Log in in as a non-admin who's on the `Ops` team.
-2.  In the left pane, open the **Kubernetes** section.
-3.  Confirm that **ops-nodes** is displayed under **Namespaces**.
-4.  Click **Create**, and in the **Object YAML** editor, paste the following
-    YAML definition for an NGINX server.
-
-    ```yaml
-    apiVersion: v1
-    kind: ReplicationController
-    metadata:
-      name: nginx
-    spec:
-      replicas: 1
-      selector:
-        app: nginx
-      template:
-        metadata:
-          name: nginx
-          labels:
-            app: nginx
-        spec:
-          containers:
-          - name: nginx
-            image: nginx
-            ports:
-            - containerPort: 80
     ```
-
-    ![](../images/isolate-nodes-9.png){: .with-border}
-
-5.  Click **Create** to deploy the workload.
-6.  In the left pane, click **Pods** and confirm that the workload is running
-    on pods in the `ops-nodes` namespace.
-
-    ![](../images/isolate-nodes-10.png){: .with-border}
+    apiVersion: v1
+        kind: Namespace
+        metadata:
+          annotations:
+            scheduler.alpha.kubernetes.io/node-selector: zone=example-zone
+          name: ops-nodes
+    ```
 
 ## Where to go next
 

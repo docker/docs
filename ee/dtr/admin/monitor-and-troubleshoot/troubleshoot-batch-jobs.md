@@ -4,6 +4,8 @@ description: Learn how Docker Trusted Registry run batch jobs, so that you can t
 keywords: dtr, troubleshoot
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 DTR uses a job queue to schedule batch jobs. A job is placed on this work queue,
 and a job runner component of DTR consumes work from this cluster-wide job
 queue and executes it.

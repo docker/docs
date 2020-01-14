@@ -6,6 +6,8 @@ redirect_from:
 - /enterprise/admin/install/system-requirements/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Universal Control Plane can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
 
@@ -14,8 +16,9 @@ Before installing, be sure your infrastructure has these requirements.
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
-* Linux kernel version 3.10 or higher
+* Linux kernel version 3.10 or higher. For debugging purposes, it is suggested to match the host OS kernel versions as close as possible.
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
+* User namespaces should not be configured on any node. This function is not currently supported by UCP. See [Isolate containers with a user namespace](https://docs.docker.com/engine/security/userns-remap/) for more information.
 
 ### Minimum requirements
 
@@ -24,6 +27,11 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
 * 2 vCPUs for manager nodes
 * 10GB of free disk space for the `/var` partition for manager nodes (A minimum of 6GB is recommended.)
 * 500MB of free disk space for the `/var` partition for worker nodes
+
+* Default install directories:
+   - /var/lib/docker (Docker Data Root Directory)
+   - /var/lib/kubelet (Kubelet Data Root Directory)
+   - /var/lib/containerd (Containerd Data Root Directory)
 
 > Note
 >
@@ -116,6 +124,19 @@ Number 4 for IP-in-IP encapsulation.
 
 If you're deploying to AWS or another cloud provider, enable IP-in-IP
 traffic for your cloud provider's security group.
+
+## Enable connection tracking on the loopback interface for SLES
+Calico's Kubernetes controllers can't reach the Kubernetes API server
+unless connection tracking is enabled on the loopback interface. SLES
+disables connection tracking by default.
+
+On each node in the cluster:
+
+```
+sudo mkdir -p /etc/sysconfig/SuSEfirewall2.d/defaults
+echo FW_LO_NOTRACK=no | sudo tee /etc/sysconfig/SuSEfirewall2.d/defaults/99-docker.cfg
+sudo SuSEfirewall2 start
+```
 
 ## Timeout settings
 

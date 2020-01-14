@@ -15,12 +15,7 @@ To get started with Docker Engine - Community on Debian, make sure you
 [install Docker](#install-docker-ce).
 
 ## Prerequisites
-
-### Docker EE customers
-
-Docker EE is not supported on Debian. For a list of supported operating systems
-and distributions for different Docker editions, see
-[Docker variants](/install/index.md#docker-variants).
+ 
 
 ### OS requirements
 
@@ -34,7 +29,7 @@ Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `a
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash

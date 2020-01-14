@@ -7,6 +7,8 @@ redirect_from:
   - /ee/ucp/interlock/usage/default-service/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To further customize the layer 7 routing solution, you must update the
 `ucp-interlock` service with a new Docker configuration.
 
@@ -38,15 +40,15 @@ service and save it to a file:
      ucp-interlock
    ```
 
-By default, the `ucp-interlock` service is configured to pause if you provide an
-invalid configuration. The service will not restart without manual intervention.
+By default, the `ucp-interlock` service is configured to roll back to
+a previous stable configuration if you provide an invalid configuration.
 
-If you want the service to automatically rollback to a previous stable
-configuration, you can update it with the following command:
+If you want the service to pause instead of rolling back, you can update
+it with the following command:
 
 ```bash
 docker service update \
-  --update-failure-action rollback \
+  --update-failure-action pause \
   ucp-interlock
 ```
 

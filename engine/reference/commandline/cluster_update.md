@@ -2,6 +2,7 @@
 datafolder: cluster
 datafile: docker_cluster_update
 title: docker cluster update
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

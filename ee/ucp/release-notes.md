@@ -10,6 +10,8 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/release-notes/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest UCP version. You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
@@ -24,6 +26,46 @@ upgrade your installation to the latest release.
 
 # Version 3.2
 
+## 3.2.4
+2019-11-14
+
+### Known issues
+* UCP currently turns on vulnerability information for images deployed within UCP by default for upgrades. This may cause clusters to fail due to performance issues. (ENGORC-2746)
+* For Red Hat Enterprise Linux (RHEL) 8, if firewalld is running and `FirewallBackend=nftables` is set in `/etc/firewalld/firewalld.conf`, change this to `FirewallBackend=iptables`, or you can explicitly run the following commands to allow traffic to enter the default bridge (docker0) network:
+
+    ```
+    firewall-cmd --permanent --zone=trusted --add-interface=docker0
+    firewall-cmd --reload
+    ```
+
+### Platforms
+* RHEL 8.0 is now supported.
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.8 that fixes CVE-2019-11253.
+* Added a feature that allows the user to enable SecureOverlay as an add-on on UCP via an install flag called `secure-overlay`. This flag enables IPSec Network Encryption in Kubernetes.
+
+### Security
+* Upgraded Golang to 1.12.12. (ENGORC-2762)
+* Fixed an issue that allowed a user with a `Restricted Control` role to obtain Admin access to UCP. (ENGORC-2781)
+
+### Bug fixes
+* Fixed an issue where UCP 3.2 backup performs an append not overwrite when `--file` switch is used. (FIELD-2043)
+* Fixed an issue where the Calico/latest image was missing from the UCP offline bundle. (FIELD-1584)
+* Image scan result aggregation is now disabled by default for new UCP installations. This feature can be configured by a new `ImageScanAggregationEnabled` setting in the UCP tuning config. (ENGORC-2746)
+* Adds authorization checks for the volumes referenced by the `VolumesFrom` Containers option. Previously, this field was ignored by the container create request parser, 
+leading to a gap in permissions checks.  (ENGORC-2781)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.4   |
+| Kubernetes            | 1.14.8  |
+| Calico                | 3.8.2   |
+| Interlock             | 3.0.0   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.2.3
 2019-10-21
 
@@ -32,7 +74,8 @@ upgrade your installation to the latest release.
 * Users have an option to store sessionToken per window tab session. (ENGORC-2597)
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.14.7.
+* Kubernetes has been upgraded to version 1.14.7. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#v1147).
+
 * Enabled Kubernetes Node Authorizer Plugin. (ENGORC-2652)
 
 ### Networking
@@ -65,7 +108,7 @@ upgrade your installation to the latest release.
 * Fixes an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.14.6.
+* Kubernetes has been upgraded to version 1.14.6. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#v1147).
 * Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more than one replica by default.
 
 ### Networking
@@ -172,7 +215,8 @@ In order to optimize user experience and security, support for Internet Explorer
 
 - Integrated Kubernetes Ingress
 - You can now dynamically deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters, and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a centralized and controlled manner.
-- Updated Kubernetes to version 1.14.
+- Kubernetes has been upgraded to version 1.14.3. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#v1143).
+
 
 #### Enhancements
 
@@ -372,6 +416,29 @@ The workaround is to use a swarm service to deploy this change across the cluste
 
 # Version 3.1
 
+## 3.1.12
+2019-11-14
+
+### Security
+* Upgraded Golang to 1.12.12.
+
+### Kubernetes
+* Kubernetes has been upgraded to fix CVE-2019-11253.
+
+### Bug fixes
+* Adds authorization checks for the volumes referenced by the `VolumesFrom` Containers option. Previously, this field was ignored by the container create request parser, 
+leading to a gap in permissions checks.  (ENGORC-2781)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.12 |
+| Kubernetes   | 1.11.10 |
+| Calico      | 3.8.2 |
+| Interlock   | 3.0.0 |
+| Interlock NGINX proxy | 1.14.2 |
+
 ## 3.1.11
 2019-10-08
 
@@ -404,7 +471,7 @@ The workaround is to use a swarm service to deploy this change across the cluste
 2019-09-03
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built with Golang 1.12.9.
+* Kubernetes has been upgraded to version 1.11.10-docker-1. This version was built with Golang 1.12.9.
 * Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more than one replica by default.
 
 ### Networking
@@ -469,7 +536,7 @@ The workaround is to use a swarm service to deploy this change across the cluste
 
 ### Kubernetes
 
-* Kubernetes has been updated to version 1.11.10.
+* Kubernetes has been upgraded to version 1.11.10. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v11110).
 
 ### Enhancements
 
@@ -559,10 +626,10 @@ The workaround is to use a swarm service to deploy this change across the cluste
 2019-04-11
 
 ### Kubernetes
-* Updated Kubernetes to version 1.11.9.
+* Kubernetes has been upgraded to version 1.11.9. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1119).
 
 ### Networking
-* Updated Calico to version 3.5.3.
+* Calico has been upgraded to version 3.5.3. For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.5/releases/)
 
 ### Authentication and Authorization
 * Accessing the `ListAccount` API endpoint now requires an admin user. Accessing the `GetAccount` API endpoint now requires an admin user, the actual user, or a member of the organization being inspected. [ENGORC-100](https://docker.atlassian.net/browse/ENGORC-100)
@@ -595,10 +662,10 @@ The workaround is to use a swarm service to deploy this change across the cluste
 2019-03-28
 
 ### Kubernetes
-* Updated Kubernetes to version 1.11.8. (ENGORC-2024)
+* Kubernetes has been upgraded to version 1.11.8 (ENGORC-2024). For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1118).
 
 ### Networking
-* Updated Calico to version 3.5.2. (ENGORC-2045)
+* Calico has been upgraded to version 3.5.2. (ENGORC-2045). For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.5/releases/)
 
 ### Authentication and Authorization
 * Added LDAP Settings API to the list of publicly documented API endpoints. (ENGORC-98)
@@ -645,7 +712,7 @@ The workaround is to use a swarm service to deploy this change across the cluste
 * Added support for Oracle 7.6.
 
 ### Kubernetes
-* Kubernetes has been updated to version 1.11.7. (docker/orca#16157)
+* Kubernetes has been upgraded to version 1.11.7. (docker/orca#16157).  For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1117).
 
 ### Bug fixes
 * Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)
@@ -694,7 +761,7 @@ The workaround is to use a swarm service to deploy this change across the cluste
  * Added support for Oracle Enterprise Linux 7.6 with Overlay2 storage driver. (docker/orca#15791)
 
 ### Networking
- * Upgraded Calico to version 3.5. (#15884)
+ * Calico has been upgraded to version 3.5.0 (#15884). For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.5/releases/)
 
 ### Bug fixes
  * Fixes system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)
@@ -759,7 +826,8 @@ now configurable within the UCP web interface. (#15466)
 
 2018-12-04
 
-* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.
+* To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1115).
+
 
 ### Components
 
@@ -787,8 +855,11 @@ now configurable within the UCP web interface. (#15466)
 
 #### Kubernetes
 
-* Kubernetes is updated to version 1.11.2.
+* Kubernetes has been upgraded to version 1.11.2. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1112).
 * Kubernetes native RBAC feature manages access control for Kubernetes resources. Users can now create roles for Kubernetes APIs using Kubernetes `Role` and `ClusterRole` objects in the Kubernetes API. They can also grant permissions to users and service accounts with the `RoleBinding` and `ClusterRoleBinding` objects. The web interface for Kubernetes RBAC reflects these changes. Your old Kubernetes grants and roles will be automatically migrated during the UCP upgrade.
+
+### Networking
+ * Calico has been upgraded to version 3.2.3. For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.2/releases/).
 
 #### Logging
 
@@ -868,6 +939,28 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.16
+2019-11-14
+
+### Security
+* Upgraded Golang to 1.12.12.
+
+### Kubernetes
+* Kubernetes has been upgraded to fix CVE-2019-11253.
+
+### Bug fixes
+* Adds authorization checks for the volumes referenced by the `VolumesFrom` Containers option. Previously, this field was ignored by the container create request parser, 
+leading to a gap in permissions checks.  (ENGORC-2781)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.16 |
+| Kubernetes   | 1.11.2 |
+| Calico      | 3.2.3 |
+| Interlock (NGINX)   | 1.13.12 |
+
 ## 3.0.15
 2019-10-08
 
@@ -893,8 +986,7 @@ The following features are deprecated in UCP 3.1.
 2019-09-03
 
 ### Kubernetes
-* Kubernetes has been upgraded to version 1.8.15-docker-7, this has been built
-  with Golang 1.12.9.
+* Kubernetes has been upgraded to version 1.8.15-docker-7. This version was built with Golang 1.12.9.
 * Kubernetes DNS has been upgraded to 1.14.13.
 
 ### Networking
@@ -1073,7 +1165,7 @@ The following features are deprecated in UCP 3.1.
 ### Bug fixes
 
 * Core
-  * Updated Kubernetes to version 1.8.15.
+  * Kubernetes has been upgraded to version 1.8.15. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.8.md#v1815).
   * Resolved an issue where LDAP sync jobs terminated when processing an org admin search result that did not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)
   * Fixes an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)
   * Fixes an issue that caused Azure IPAM to not release addresses. (docker/escalation#815)
@@ -1164,7 +1256,7 @@ The following features are deprecated in UCP 3.1.
    * Optimize swarm service read API calls through UCP
    * Fixes an issue where some UCP Controller API calls may hang indefinitely.
    * Default Calico MTU set to 1480
-   * Calico is upgraded to 3.0.8
+   * Calico has been upgraded to version 3.0.8. For more information, see the [Calico Release Notes](https://docs.projectcalico.org/v3.0/releases/).
    * Compose for Kubernetes logging improvements
    * Fixes an issue where backups would fail if UCP was not licensed.
    * Fixes an issue where DTR admins are missing the Full Control Grant against /Shared Collection even though they have logged in at least once to the web interface.
@@ -1229,7 +1321,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 
 ### Bug fixes
 * Core
-  * Bumped Kubernetes version to 1.8.11.
+  * Kubernetes has been upgraded to version 1.8.11. For more information, see the [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.8.md#v1811).
   * Compose for Kubernetes now respects the specified port services are exposed on.
   This port must be in the `NodePort` range.
   * Kubernetes API server port is now configurable via `--kube-apiserver-port`
@@ -1301,7 +1393,7 @@ a UCP client bundle and `kubectl`.
 ### Networking
 
 * UCP includes Calico as the default CNI plugin for networking of Kubernetes
-applications. [Learn more](https://docs.projectcalico.org/v3.1/introduction/).
+applications. [Learn more](https://docs.projectcalico.org/v3.0/introduction/.
 The following Calico features are supported:
    * L3 IP-IP Overlay Data Path.
    * BGP control plane.
@@ -1433,6 +1525,16 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 
 # Version 2.2
 
+## Version 2.2.23
+2019-11-14
+
+### Security
+* Upgraded Golang to 1.12.12.
+
+### Bug fixes
+* Adds authorization checks for the volumes referenced by the `VolumesFrom` Containers option. Previously, this field was ignored by the container create request parser, 
+leading to a gap in permissions checks.  (ENGORC-2781)
+
 ## Version 2.2.22
 2019-10-08
 
@@ -1469,7 +1571,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.19
@@ -1493,7 +1595,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.18
@@ -1516,7 +1618,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.17
@@ -1541,7 +1643,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.16
@@ -1565,7 +1667,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.15
@@ -1593,7 +1695,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.14
@@ -1623,7 +1725,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.13
@@ -1650,7 +1752,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.12
@@ -1679,7 +1781,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.11
@@ -1720,7 +1822,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.10
@@ -1773,7 +1875,7 @@ instead of the correct image for the worker architecture.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.9
@@ -1809,7 +1911,7 @@ is always used, regardless of which one is actually the best match.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.7
@@ -1840,7 +1942,7 @@ is always used, regardless of which one is actually the best match.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.6
@@ -1910,7 +2012,7 @@ is always used, regardless of which one is actually the best match.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 
@@ -1947,7 +2049,7 @@ for volumes.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.4
@@ -1992,7 +2094,7 @@ for volumes.
 * Searching for images in the UCP images UI doesn't work.
 * Removing a stack may leave orphaned volumes.
 * Storage metrics are not available for Windows.
-* You can't create a bridge network from the web interface. As a workaround use
+* You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## Version 2.2.3
@@ -2045,7 +2147,7 @@ for volumes.
  * Searching for images in the UCP images UI doesn't work.
  * Removing a stack may leave orphaned volumes.
  * Storage metrics are not available for Windows.
- * You can't create a bridge network from the web interface. As a workaround use
+ * You can't create a bridge network from the web interface. As a workaround, use
  `<node-name>/<network-name>`.
 
 ## version 2.2.2
@@ -2177,7 +2279,7 @@ and the API is fully interactive within the UCP web interface.
   session timeout](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/).
 * docker/ucp
   * The `support` command does not currently produce a valid support dump. As a
-  workaround you can download a support dumps from the web interface.
+  workaround, you can download a support dumps from the web interface.
 * Windows issues
   * Disk related metrics do not display for Windows worker nodes.
   * If upgrading from an existing deployment, ensure that HRM is using a non-encrypted

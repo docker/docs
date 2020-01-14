@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation
 title: Cluster CLI environment variables
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Use the following environment variables as needed to configure the Docker Cluster command-line behavior.
 
 ## AWS\_ACCESS\_KEY\_ID

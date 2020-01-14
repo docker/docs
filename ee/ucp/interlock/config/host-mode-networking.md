@@ -8,6 +8,8 @@ redirect_from:
   - /ee/ucp/interlock/deploy/host-mode-networking/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 By default, layer 7 routing components communicate with one another using
 overlay networks, but Interlock supports
 host mode networking in a variety of ways, including proxy only, Interlock only, application only, and hybrid. 

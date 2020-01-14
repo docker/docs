@@ -4,6 +4,8 @@ description: Learn how to configure iSCSI.
 keywords: Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Internet Small Computer System Interface (iSCSI) is an IP-based standard that provides block-level access
 to storage devices. iSCSI takes requests from clients and fulfills these requests on remote SCSI devices.
 iSCSI support in UCP enables Kubernetes workloads to consume persistent storage from iSCSI targets.

@@ -2,6 +2,7 @@
 description: Set environment variables on a machine
 keywords: machine, env, subcommand
 title: docker-machine env
+hide_from_sitemap: true
 ---
 
 Set environment variables to dictate that `docker` should run a command against

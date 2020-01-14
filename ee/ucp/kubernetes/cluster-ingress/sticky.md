@@ -4,6 +4,8 @@ description: Learn how to use cookies with Ingress host and path routing.
 keywords: ucp, cluster, ingress, kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% include experimental-feature.md %}
 
 ## Overview
@@ -32,7 +34,7 @@ requests.
 1. Source a [UCP Client Bundle](/ee/ucp/user-access/cli/) attached to a cluster with Cluster Ingress installed. 
 2. Download the sample Kubernetes manifest file.
 ```bash
-$ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-sticky.yaml
+$ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-sticky.yaml
 ```
 3. Deploy the Kubernetes manifest file with the new DestinationRule. This file includes the consistentHash loadBalancer policy. 
 ```bash

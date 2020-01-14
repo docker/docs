@@ -4,6 +4,8 @@ description: Remove a DTR replica from a cluster
 keywords: dtr, cli, remove
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Remove a DTR replica from a cluster
 
 ## Usage

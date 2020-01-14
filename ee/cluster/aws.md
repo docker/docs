@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, AWS
 title: Get started with Docker Cluster on AWS
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Prerequisites
 
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
@@ -389,4 +391,4 @@ All provisioned resources are destroyed and the context for the cluster is remov
 
 - View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
 - [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
-- [Cluster configuration file reference](./cluster-file.md)
+- [Cluster configuration file reference](/ee/cluster-file.md)

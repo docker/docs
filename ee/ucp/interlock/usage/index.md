@@ -7,6 +7,8 @@ redirect_from:
   - /ee/ucp/interlock/deploy/configure/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After Interlock is deployed, you can launch and publish services and applications.
 Use [Service Labels](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label)
 to configure services to publish themselves to the load balancer.

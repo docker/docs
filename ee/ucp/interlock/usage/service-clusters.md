@@ -4,6 +4,7 @@ description: Learn how to route traffic to different proxies using a service clu
 keywords: ucp, interlock, load balancing, routing
 ---
 
+<<<<<<< HEAD
 Reconfiguring Interlock's proxy can take 1-2 seconds per overlay
 network managed by that proxy. To scale up to larger number of Docker 
 networks and services routed to by Interlock, you may consider implementing 
@@ -11,6 +12,13 @@ networks and services routed to by Interlock, you may consider implementing
 Interlock (rather than the default single proxy service), each responsible for 
 routing to a separate set of Docker services and their corresponding networks, 
 thereby minimizing proxy reconfiguration time.
+=======
+>{% include enterprise_label_shortform.md %}
+
+## Configure Proxy Services
+With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
+workers for each region. For example, from a manager, run the following commands to pin the proxy services to the ingress workers:
+>>>>>>> master
 
 ## Prerequisites
 
@@ -18,11 +26,19 @@ In this example, we'll assume you have a UCP cluster set up with at least two
 worker nodes, `ucp-node-0` and `ucp-node-1`; we'll use these as dedicated 
 proxy servers for two independent Interlock service clusters. 
 
+<<<<<<< HEAD
 We'll also assume you've already enabled Interlock, per the 
 [instructions here](../deploy/), 
 with an HTTP port of 80 and an HTTPS port of 8443.
 
 ## Setting up Interlock service clusters
+=======
+Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See *Minimizing the number of overlay networks* in [Interlock architecture](https://docs.docker.com/ee/ucp/interlock/architecture/) for more information.
+
+> Note
+>
+> Interlock will _only_ connect to the specified networks, and will connect to them all at startup.
+>>>>>>> master
 
 First, apply some node labels to the UCP workers you've chosen to use 
 as your proxy servers. From a UCP manager:
@@ -44,8 +60,44 @@ docker network create --driver overlay eastnet
 docker network create --driver overlay westnet
 ```
 
+<<<<<<< HEAD
 Next, modify Interlock's configuration to create two service clusters. Start 
 by writing its current configuration out to a file which you can modify:
+=======
+Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy is updated only if it has corresponding updates to its designated service cluster. In this example, updates to the `us-east` cluster do not affect the `us-west` cluster.  If there is a problem, the others are not affected.
+
+## Usage
+
+The following example configures an eight (8) node Swarm cluster that uses service clusters
+to route traffic to different proxies. This example includes:
+
+- Three (3) managers and five (5) workers
+- Four workers that are configured with node labels to be dedicated
+ingress cluster load balancer nodes. These nodes receive all application traffic.
+
+This example does not cover infrastructure deployment.
+It assumes you have a vanilla Swarm cluster (`docker init` and `docker swarm join` from the nodes).
+See the [Swarm](https://docs.docker.com/engine/swarm/) documentation if you need help
+getting a Swarm cluster deployed.
+
+![Interlock Service Clusters](../../images/interlock_service_clusters.png)
+
+Configure four load balancer worker nodes (`lb-00` through `lb-03`) with node labels in order to pin the Interlock Proxy
+service for each Interlock service cluster.  After you log in to one of the Swarm managers, run the following commands to add node labels to the dedicated ingress workers:
+
+```bash
+$> docker node update --label-add nodetype=loadbalancer --label-add region=us-east lb-00
+lb-00
+$> docker node update --label-add nodetype=loadbalancer --label-add region=us-east lb-01
+lb-01
+$> docker node update --label-add nodetype=loadbalancer --label-add region=us-west lb-02
+lb-02
+$> docker node update --label-add nodetype=loadbalancer --label-add region=us-west lb-03
+lb-03
+```
+
+Inspect each node to ensure the labels were successfully added:
+>>>>>>> master
 
 ```bash
 CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ (index .Spec.TaskTemplate.ContainerSpec.Configs 0).ConfigName }}' ucp-interlock)
@@ -55,12 +107,24 @@ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NA
 Make a new config file called `config.toml` with the following content, 
 which declares two service clusters, `east` and `west`. 
 
+<<<<<<< HEAD
 > **Note** you will have to change the UCP version 
 > (`3.2.3` in the example below) to match yours, 
 > as well as all instances of `*.ucp.InstanceID` 
 > (`vl5umu06ryluu66uzjcv5h1bo` below):
 
 ```
+=======
+> Important
+>
+> The configuration object specified in the following code sample applies to
+> UCP versions 3.0.10 and later, and versions 3.1.4 and later. If you are
+> working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, the config object
+> should be named `com.docker.ucp.interlock.service-clusters.conf`.
+
+```bash
+$> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -
+>>>>>>> master
 ListenAddr = ":8080"
 DockerURL = "unix:///var/run/docker.sock"
 AllowInsecure = false
@@ -232,6 +296,14 @@ Create a new `docker config` object from this configuration file:
 NEW_CONFIG_NAME="com.docker.ucp.interlock.conf-$(( $(cut -d '-' -f 2 <<< "$CURRENT_CONFIG_NAME") + 1 ))"
 docker config create $NEW_CONFIG_NAME config.toml
 ```
+<<<<<<< HEAD
+=======
+> Note
+>
+> "Host" mode networking is used in order to use the same ports (`8080` and `8443`) in the cluster. You cannot use ingress
+> networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
+> for each service cluster.
+>>>>>>> master
 
 Update the `ucp-interlock` service to start using this new configuration:
 

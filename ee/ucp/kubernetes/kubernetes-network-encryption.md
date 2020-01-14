@@ -4,10 +4,12 @@ description: Learn how to configure network encryption in Kubernetes
 keywords: ucp, cli, administration, kubectl, Kubernetes, security, network, ipsec, ipip, esp, calico
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise Edition provides data-plane level IPSec network encryption to securely encrypt application 
 traffic in a Kubernetes cluster. This secures application traffic within a cluster when running in untrusted 
-infrastructure or environments. It is an optional feature of UCP that is enabled by deploying the Secure Overlay 
-components on Kuberenetes when using the default Calico driver for networking configured for IPIP tunnelling 
+infrastructure or environments. It is an optional feature of UCP that is enabled by deploying the SecureOverlay 
+components on Kubernetes when using the default Calico driver for networking configured for IPIP tunneling 
 (the default configuration).
 
 Kubernetes network encryption is enabled by two components in UCP: the SecureOverlay Agent and SecureOverlay 
@@ -27,7 +29,7 @@ interface in the UCP host.
 
 ## Requirements
 
-Kubernetes Network Encryption is supported for the following platforms:
+Kubernetes network encryption is supported for the following platforms:
 * Docker Enterprise 2.1+ (UCP 3.1+)
 * Kubernetes 1.11+
 * On-premise, AWS, GCE
@@ -37,15 +39,15 @@ Kubernetes Network Encryption is supported for the following platforms:
 
 ## Configuring MTUs
 
-Before deploying the SecureOverlay components one must ensure that Calico is configured so that the IPIP tunnel 
-MTU leaves sufficient headroom for the encryption overhead.   Encryption adds 26 bytes of overhead but every IPSec 
-packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of encapsulation overhead.  So the IPIP 
-tunnel interface MTU must be no more than "EXTMTU - 46 - ((EXTMTU - 46) modulo 4)" where EXTMTU is the minimum MTU 
+Before deploying the SecureOverlay components, ensure that Calico is configured so that the IPIP tunnel 
+MTU maximum transmission unit (MTU), or the largest packet length that the container will allow, leaves sufficient headroom for the encryption overhead.   Encryption adds 26 bytes of overhead, but every IPSec 
+packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of encapsulation overhead.  The IPIP 
+tunnel interface MTU must be no more than "EXTMTU - 46 - ((EXTMTU - 46) modulo 4)", where EXTMTU is the minimum MTU 
 of the external interfaces.   An IPIP MTU of 1452 should generally be safe for most deployments. 
 
 Changing UCP's MTU requires updating the UCP configuration.  This process is described [here](/ee/ucp/admin/configure/ucp-configuration-file).  
 
-The user must update the following values to the new MTU:
+Update the following values to the new MTU:
 
      [cluster_config]
       ...
@@ -55,11 +57,21 @@ The user must update the following values to the new MTU:
 
 ## Configuring SecureOverlay
 
-Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the Secure Overlay YAML file to UCP.
+SecureOverlay allows you to enable IPSec network encryption in Kubernetes. Once the cluster nodes’ MTUs are properly configured, deploy the SecureOverlay components using the SecureOverlay YAML file to UCP.
 
-[Download the Secure Overlay YAML file here.](ucp-secureoverlay.yml)
+Beginning with UCP 3.2.4, you can configure SecureOverlay in two ways:
+* Using the UCP configuration file or
+* Using the SecureOverlay YAML file 
 
-After downloading the YAML file, run the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials:
+### UCP configuration file
+
+Add `secure-overlay` to the UCP configuration file. Set this option to `true` to enable IPSec network encryption. The default is `false`. See [cluster_config options](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#cluster_config-table-required) for more information.
+
+### SecureOverlay YAML file
+
+First, [download the SecureOverlay YAML file.](ucp-secureoverlay.yml)
+
+Next, issue the following command from any machine with the properly configured kubectl environment and the proper UCP bundle's credentials:
 
 ```
 $ kubectl apply -f ucp-secureoverlay.yml
@@ -67,7 +79,7 @@ $ kubectl apply -f ucp-secureoverlay.yml
 
 Run this command at cluster installation time before starting any workloads.
 
-To remove the encryption from the system, issue the command:
+To remove the encryption from the system, issue the following command:
 
 ```
 $ kubectl delete -f ucp-secureoverlay.yml

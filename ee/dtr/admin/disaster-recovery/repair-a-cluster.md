@@ -6,6 +6,8 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/admin/disaster-recovery/repair-a-cluster/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 For a DTR cluster to be healthy, a majority of its replicas (n/2 + 1) need to
 be healthy and be able to communicate with the other replicas. This is known
 as maintaining quorum.

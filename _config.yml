@@ -22,7 +22,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
-compose_version: "1.24.1"
+compose_version: "1.25.0"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -109,10 +109,6 @@ defaults:
       toc_max: 3
       tree: true
   - scope:
-      path: "install"
-    values:
-      win_latest_build: "docker-19.03.3"
-  - scope:
       path: "datacenter"
     values:
       enterprise: true
@@ -124,8 +120,9 @@ defaults:
       ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
-      ucp_version: "3.2.3"
-      dtr_version: "2.7.3"
+      ucp_version: "3.2.4"
+      dtr_version: "2.7.4"
+      win_latest_build: "docker-19.03.5"
   # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
@@ -133,14 +130,14 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.10"
+      dtr_version: "2.6.11"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.14"
+      dtr_version: "2.5.15"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -178,14 +175,14 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.11"
+      ucp_version: "3.1.12"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.15"
+      ucp_version: "3.0.16"
   - scope:
       path: "datacenter/ucp/2.2"
     values:

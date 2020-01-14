@@ -4,6 +4,8 @@ description: Learn how to create, configure, and test repository webhooks for DT
 keywords: dtr, webhooks, ui, web interface, registry
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Prerequisites
 
 - You must have admin privileges to the repository in order to create a webhook.

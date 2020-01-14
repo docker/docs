@@ -4,6 +4,8 @@ description: Learn how to install a Container Networking Interface (CNI) plugin 
 keywords: ucp, kubernetes, cni, container networking interface, flannel, weave, calico
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 For Docker Universal Control Plane (UCP), [Calico](https://docs.projectcalico.org/v3.7/introduction/) 
 provides the secure networking functionality for container-to-container communication within
 Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
@@ -96,6 +98,8 @@ https://github.com/containernetworking/cni/releases/tag/
 Follow the CNI plugin documentation for specific installation 
 instructions.
 
+> Note
+> 
 > While troubleshooting a custom CNI plugin, you may wish to access logs
 > within the kubelet. Connect to a UCP manager node and run
 > `$ docker logs ucp-kubelet`.
@@ -115,10 +119,12 @@ ucp-metrics-nwt2z              3/3       Running   0          22m       10.32.0.
 weave-net-wgvcd                2/2       Running   0          8m        172.31.6.95   manager-01   <none>
 ```
 
-> **Note**: The above example deployment uses Weave. If you are using an alternative 
+> Note
+>
+> The above example deployment uses Weave. If you are using an alternative 
 > CNI plugin, look for the relevant name and review its status.
 
 ## Where to go next
 
 - [Make your Cluster Highly Available](https://docs.docker.com/ee/ucp/admin/install/#step-6-join-manager-nodes)
-- [Install an Ingress Controller on Kubernetes](ee/ucp/kubernetes/layer-7-routing/)
+- [Deploy a Sample Application with Ingress](https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/)

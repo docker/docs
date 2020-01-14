@@ -5,6 +5,8 @@ keywords: registry, monitor, troubleshoot
 redirect_from: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-with-logs
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This guide contains tips and tricks for troubleshooting DTR problems.
 
 ## Troubleshoot overlay networks

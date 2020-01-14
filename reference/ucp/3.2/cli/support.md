@@ -4,6 +4,8 @@ description: Create a support dump for UCP nodes
 keywords: ucp, cli, support, support dump, troubleshooting
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Create a support dump for specified UCP nodes.
 
 ## Usage

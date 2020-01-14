@@ -7,6 +7,8 @@ redirect_from:
   - /datacenter/dtr/2.5/guides/user/access-tokens/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Trusted Registry lets you create and distribute access tokens to enable programmatic access to DTR. Access tokens are linked to a particular user account and duplicate whatever permissions that account has at the time of use. If the account changes permissions, so will the token.
 
 Access tokens are useful in cases such as building integrations since you can issue multiple tokens &ndash; one for each integration &ndash; and revoke them at any time.

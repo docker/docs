@@ -4,6 +4,8 @@ description: Add a new replica to an existing DTR cluster
 keywords: dtr, cli, join
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Add a new replica to an existing DTR cluster. Use SSH to log into any node that is already part of UCP.
 
 ## Usage

@@ -5,6 +5,8 @@ keywords: dtr, disaster recovery
 toc_max_header: 3
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
 

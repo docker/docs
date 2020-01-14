@@ -1,4 +1,4 @@
-<h3>Term</h3>: |
+﻿<h3>Term</h3>: |
   <h3>Definition</h3>
 <a class="glossary" name="amd64">amd64</a>: |
   AMD64 is AMD's 64-bit extension of Intel's x86 architecture, and is also
@@ -31,10 +31,6 @@
   *Also known as : control groups*
 <a class="glossary" name="cluster">cluster</a>: |
   A cluster is a group of machines that work together to run workloads and provide high availability.
-<a class="glossary" name="collection">collection</a>: |
-  A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based
-  access control. Collections enable organizing permissions for resources like
-  nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/).
 <a class="glossary" name="compose">Compose</a>: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
   running complex applications with Docker. With Compose, you define a
@@ -82,10 +78,9 @@
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
 <a class="glossary" name="docker_enterprise">Docker Enterprise</a>: |
-  Docker Enterprise is a platform to build, ship, and run
-  containerized applications, that you can deploy in the cloud or on-premise. It
-  includes a tested and certified version of Docker, web UIs for managing
-  your app resources, and support.
+  Docker Enterprise is a platform to build, ship, and run containerized applications, that 
+  you can deploy in the cloud or on-premise. It includes a tested and certified version of Docker, 
+  web UIs for managing your app resources, and support.
 <a class="glossary" name="docker_desktop_for_mac">Docker Desktop for Mac</a>: |
   [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
@@ -155,11 +150,6 @@
   - Linux : ext4, aufs, btrfs, zfs
   - Windows : NTFS
   - macOS : HFS+
-<a class="glossary" name="grant">grant</a>: |
-  A grant enables role-based access control for managing how users and
-  organizations access Docker Engine - Enterprise swarm resources. A grant is made up of a
-  subject, a role, and a collection. For more about grants and role-based access
-  control, see [Grant permissions to users based on roles](/datacenter/ucp/2.2/guides/access-control/grant-permissions/).
 <a class="glossary" name="image">image</a>: |
   Docker images are the basis of [containers](#container). An Image is an
   ordered collection of root filesystem changes and the corresponding
@@ -199,8 +189,8 @@
   *Also known as : docker-machine*
 <a class="glossary" name="namespace">namespace</a>: |
   A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html)
-  is a Linux kernel feature that isolates and virtualizes system resources. Processes which restricted to
-  a class="glossary" namespace can only interact with resources or processes that are part of the same namespace. Namespaces
+  is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to
+  a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
   are an important part of Docker's isolation model. Namespaces exist for each type of
   resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
   and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run/)
@@ -244,18 +234,6 @@
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
-<a class="glossary" name="role">role</a>: |
-  A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm
-  resources. As part of a grant, a role is assigned to a subject (a user, team, or
-  organization) and a collection. For more about roles, see [Roles and
-  permission levels](/datacenter/ucp/2.2/guides/access-control/permission-levels/).
-<a class="glossary" name="role-based_access_control">role-based access control</a>: |
-  Role-based access control enables managing how Docker Engine - Enterprise users can access
-  swarm resources. UCP administrators create grants to control how users access
-  resource collections. A grant is made up of a subject, a role, and a collection.
-  A grant defines who (subject) has how much access (role) to a set of resources
-  (collection). For more about role-based access control, see
-  [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 <a class="glossary" name="SSH">SSH</a>: |
   SSH (secure shell) is a secure protocol for accessing remote machines and applications.
   It provides authentication and encrypts data communication over insecure networks such
@@ -282,10 +260,6 @@
   You don’t need to expose service-specific ports to make the service available to
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
-<a class="glossary" name="subject">subject</a>: |
-  A subject represents a user, team, or organization in Docker Enterprise. A subject is
-  granted a role for access to a collection of swarm resources.
-  For more about role-based access, see [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 <a class="glossary" name="swarm">swarm</a>: |
   A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm_mode).
 <a class="glossary" name="docker_swarm">Docker Swarm</a>: |

@@ -4,6 +4,8 @@ description: Learn how to do canary deployments for your Docker swarm services
 keywords: routing, proxy
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 The following example publishes a service as a canary instance.
 
 First, create an overlay network to isolate and secure service traffic:

@@ -4,6 +4,8 @@ description: Enable auto-deletion of image events within a repository for mainte
 keywords: registry, events, log, activity stream
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Overview 
 
 Docker Trusted Registry has a global setting for repository event auto-deletion. This allows event records to be removed as part of [garbage collection](../admin/configure/garbage-collection.md). DTR administrators can enable auto-deletion of repository events in DTR 2.6 based on specified conditions which are covered below.

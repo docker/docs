@@ -4,6 +4,8 @@ description: Learn how to modify service accounts to enable Helm and Tiller to o
 keywords: Helm, ucp, Tiller, Kubernetes, service accounts, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 To use [Helm and Tiller](https://helm.sh/) with UCP, you must modify the `kube-system` default service account to define the necessary roles. Enter the following `kubectl` commands in this order:
 
 ```

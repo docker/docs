@@ -6,6 +6,8 @@ redirect_from:
   - /ee/ucp/user/secrets/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 When deploying and orchestrating services, you often need to configure them
 with sensitive information like passwords, TLS certificates, or private keys.
 

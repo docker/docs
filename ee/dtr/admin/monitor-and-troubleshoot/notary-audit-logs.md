@@ -5,6 +5,8 @@ description: When you push signed images, Docker Trusted Registry keeps audit
 keywords: registry, monitor, troubleshoot
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Content Trust (DCT) keeps audit logs of changes made to trusted repositories.
 Every time you push a signed image to a repository, or delete trust data for a
 repository, DCT logs that information.

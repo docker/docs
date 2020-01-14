@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_cache
 title: docker assemble backend cache
+enterprise_only: true
 skip_read_time: true
 ---
 <!--

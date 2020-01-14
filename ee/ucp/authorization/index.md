@@ -4,6 +4,8 @@ description: Manage access to resources with role-based access control.
 keywords: ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 [Docker Universal Control Plane (UCP)](../index.md),
 the UI for [Docker Enterprise](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
@@ -90,7 +92,7 @@ together.
 Only an administrator can manage grants, subjects, roles, and access to
 resources.
 
-> About administrators
+> Note
 >
 > An administrator is a user who creates subjects, groups resources by moving them
 > into collections or namespaces, defines roles by selecting allowable operations,
@@ -103,7 +105,14 @@ For cluster security, only UCP admin users and service accounts that are
 granted the `cluster-admin` ClusterRole for all Kubernetes namespaces via a
 ClusterRoleBinding can deploy pods with privileged options. This prevents a
 platform user from being able to bypass the Universal Control Plane Security
-Model. These privileged options include:
+Model. 
+
+> Note
+> 
+> Granting the `cluster admin` ClusterRole to normal users does not allow 
+> them to deploy privileged pods. 
+
+These privileged options include:
 
 Pods with any of the following defined in the Pod Specification:
 

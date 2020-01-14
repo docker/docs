@@ -1,5 +1,5 @@
 ---
-title: Docker Assemble (experimental)
+title: Docker Assemble
 description: Installing Docker Assemble
 keywords: Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#
 ---
@@ -29,7 +29,7 @@ Docker Assemble requires its own buildkit instance to be running in a Docker con
 To start the backend, run:
 
 ```
-~$ docker assemble backend start`
+~$ docker assemble backend start
 Pulling image «…»: Success
 Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```

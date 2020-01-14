@@ -6,18 +6,22 @@ redirect_from:
   - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and
 Windows Server 2019. Only worker nodes are supported on Windows, and all
 manager nodes in the cluster must run on Linux. Additionally Windows worker
 nodes can only be used by the Swarm Orchestrator.
 
-Follow these steps to enable a worker node on Windows.
+To enable a worker node on Windows:
 
 1.  Install Docker Engine - Enterprise on Windows Server 2016 or 2019.
 2.  Configure the Windows node.
 3.  Join the Windows node to the cluster.
 
-**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
+> Note
+>
+> Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server. 
 
 ## Install Docker Engine - Enterprise on Windows Server 
 
@@ -28,7 +32,7 @@ Enterprise Cluster.
 
 ## Configure the Windows node
 
-Follow these steps to configure the docker daemon and the Windows environment.
+To configure the docker daemon and the Windows environment:
 
 1. Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 2. Run the Windows worker setup script provided with `ucp-agent-win`.
@@ -75,9 +79,9 @@ $script = [ScriptBlock]::Create((docker run --rm {{ page.ucp_org }}/ucp-agent-wi
 Invoke-Command $script
 ```
 
-> Docker daemon restart
+> Note 
 >
-> When you run `windows-script`, the Docker service is unavailable temporarily.
+> If you run `windows-script` when restarting Docker daemon, the Docker service is unavailable temporarily.
 
 The Windows node is ready to join the cluster. Run the setup script on each
 instance of Windows Server that will be a worker node.
@@ -99,9 +103,9 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 ...
     "debug":     true,
     "tls":       true,
-    "tlscacert": "C:\ProgramData\docker\daemoncerts\ca.pem",
-    "tlscert":   "C:\ProgramData\docker\daemoncerts\cert.pem",
-    "tlskey":    "C:\ProgramData\docker\daemoncerts\key.pem",
+    "tlscacert": "C:\\ProgramData\\docker\\daemoncerts\\ca.pem",
+    "tlscert":   "C:\\ProgramData\\docker\\daemoncerts\\cert.pem",
+    "tlskey":    "C:\\ProgramData\\docker\\daemoncerts\\key.pem",
     "tlsverify": true,
 ...
 }
@@ -109,18 +113,16 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 
 ## Join the Windows node to the cluster
 
-Now you can join the cluster by using the `docker swarm join` command that's
-provided by the Docker UCP web interface and CLI.
+To join the cluster using the `docker swarm join` command provided by the Docker UCP web interface and CLI:
 
 1.  Log in to the Docker UCP web interface with an administrator account.
 2.  Navigate to the **Nodes** page.
 3.  Click **Add Node** to add a new node.
 4.  In the **Node Type** section, click **Windows**.
-5.  In the **Step 2** section, click the checkbox for
-    "I'm ready to join my windows node."
-6.  Check the **Use a custom listen address** option to specify the address
+5.  In the **Step 2** section, select the check box for "I have followed the instructions and I'm ready to join my Windows node."
+6.  Select the **Use a custom listen address** option to specify the address
     and port where new node listens for inbound cluster management traffic.
-7.  Check the **Use a custom listen address** option to specify the
+7.  Select the **Use a custom listen address** option to specify the
     IP address that's advertised to all members of the cluster for API access.
 
     ![](../../../images/join-windows-nodes-to-cluster-1.png){: .with-border}
@@ -144,8 +146,7 @@ will be a worker node.
 ## Configure a Windows worker node manually
 
 The following sections describe how to run the commands in the setup script
-manually to configure the `dockerd` service and the Windows environment.
-The script opens ports in the firewall and sets up certificates for `dockerd`.
+manually to configure the `dockerd` service and the Windows environment. `dockerd` is the persistent process that manages containers. The script opens ports in the firewall and sets up certificates for `dockerd`.
 
 To see the script, you can run the `windows-script` command without piping
 to the `Invoke-Expression` cmdlet.
@@ -168,6 +169,8 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
 
 ### Set up certs for the dockerd service
 
+To set up certs for the dockerd service:
+
 1.  Create the directory `C:\ProgramData\docker\daemoncerts`.
 2.  In a PowerShell terminal running as Administrator, run the following command
     to generate certificates.
@@ -188,10 +191,10 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
 
 The `dockerd` service and the Windows environment are now configured to join a Docker Enterprise cluster.
 
-> TLS certificate setup
+> Note
 >
 > If the TLS certificates aren't set up correctly, the Docker UCP web interface shows the
-> following warning.
+> following warning:
 >
 > ```
 > Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.

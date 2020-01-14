@@ -4,6 +4,8 @@ description: Verify the UCP images on this node
 keywords: ucp, cli, images
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Verify the UCP images on this node.
 
 ## Usage

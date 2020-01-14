@@ -8,6 +8,8 @@ redirect_from:
   - /ucp/monitor/troubleshoot-configurations/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 There are several cases in the lifecycle of UCP when a node is actively
 transitioning from one state to another, such as when a new node is joining the
 cluster or during node promotion and demotion. In these cases, the current step

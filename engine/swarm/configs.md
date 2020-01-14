@@ -43,10 +43,12 @@ examples below. Keep the following notable differences in mind:
   UID, GID, and mode are not supported for configs. Configs are currently only
   accessible by administrators and users with `system` access within the
   container.
-  
-- On Windows, create or update a service using `--credential-spec` with the `config://<config-name>` format. 
-This passes the gMSA credentials file directly to nodes before a container starts. No gMSA credentials are written 
-to disk on worker nodes. For more information, refer to [Deploy services to a swarm](/engine/swarmservices/).
+
+- On Windows, create or update a service using `--credential-spec` with the
+  `config://<config-name>` format.  This passes the gMSA credentials file
+  directly to nodes before a container starts. No gMSA credentials are written
+  to disk on worker nodes. For more information, refer to [Deploy services to a
+  swarm](/engine/swarm/services/#gmsa-for-swarm).
 
 ## How Docker manages configs
 
@@ -159,7 +161,7 @@ real-world example, continue to
     $ docker service ps redis
 
     ID            NAME     IMAGE         NODE              DESIRED STATE  CURRENT STATE          ERROR  PORTS
-    bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 seconds ago  
+    bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 seconds ago
     ```
 
 4.  Get the ID of the `redis` service task container using `docker ps`, so that
@@ -176,7 +178,7 @@ real-world example, continue to
 
     $ docker container exec $(docker ps --filter name=redis -q) ls -l /my-config
 
-    -r--r--r--    1 root     root            12 Jun  5 20:49 my-config                                                     
+    -r--r--r--    1 root     root            12 Jun  5 20:49 my-config
 
     $ docker container exec $(docker ps --filter name=redis -q) cat /my-config
 

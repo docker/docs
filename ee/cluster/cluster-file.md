@@ -6,6 +6,8 @@ toc_max: 5
 toc_min: 1
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This topic describes version 1 of the Cluster file format.
 
 ## Cluster file structure and examples
@@ -151,7 +153,7 @@ The following optional elements can be specified:
 - `ca`: (Optional) The path to a root CA public certificate.
 - `key`: (Optional) The path to a TLS private key.
 - `cert`: (Optional) The path to a public key certificate.
-- `install_options`: (Optional) Additional [DTR install options](https://docs.docker.com/reference/dtr/2.6/cli/install/).
+- `install_options`: (Optional) Additional DTR install options.
 
 #### engine
 Customizes the installation of Docker Enterprise Engine.
@@ -231,7 +233,7 @@ The following optional elements can be specified:
 - `ca`: Specifies a path to a root CA public certificate.
 - `key`: Specifies a path to a TLS private key.
 - `cert`: Specifies a path to a public key certificate.
-- `install_options`: Lists additional [UCP install options](https://docs.docker.com/reference/ucp/3.1/cli/install/)
+- `install_options`: Lists additional UCP install options.
 
 ##### Additional UCP configuration options
 Docker Cluster also accepts all UCP configuration options and creates the initial UCP config on
@@ -487,7 +489,9 @@ The following aliases are supported by `docker cluster`:
     - `Windows Server 1709`
     - `Windows Server 1803`
     - `Windows Server 2019`
-    > Note: Make sure the OS you select is [compatible](https://success.docker.com/article/compatibility-matrix)
+    > Note
+    > 
+    > Make sure the OS you select is [compatible](https://success.docker.com/article/compatibility-matrix)
     with the product you're installing. Docker Cluster validates the support during installation.
 - `instance_type`: Specifies the [AWS instance type](https://aws.amazon.com/ec2/instance-types/) to provision.
 - `key_name`: By default, Docker Cluster creates an [AWS EC2 Key Pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) and registers it with AWS for the cluster.
@@ -593,3 +597,8 @@ by:
  - `prompt: true` - Request the value from the user and do not echo characters
    as the value is entered.
  - `env`: Obtain the value from an environment variable
+
+### Where to go next
+ * [UCP CLI reference](https://docs.docker.com/reference/)
+ * [DTR CLI reference](https://docs.docker.com/reference/)
+ 

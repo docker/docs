@@ -1,33 +1,20 @@
 ---
 title: Docker Engine release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise
-keywords: docker, docker engine, ee, ce, whats new, release notes
+description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community
+keywords: docker, docker engine, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
 skip_read_time: true
 redirect_from:
- - /ee/engine/release-notes/
  - /release-notes/docker-ce/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine - Enterprise.
+for Docker Engine - Community.
 
-Docker Engine - Enterprise builds upon the corresponding Docker Engine -
-Community that it references. Docker Engine - Enterprise includes enterprise
-features as well as back-ported fixes (security-related and priority defects)
-from the open source. It also incorporates defect fixes for environments in
-which new features cannot be adopted as quickly for consistency and
-compatibility reasons.
-
-> **Note**:
-> New in 18.09 is an aligned release model for Docker Engine - Community and
-> Docker Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an
-> incrementing patch version. The enterprise engine is a superset of the
-> community engine. They will ship concurrently with the same x patch version
-> based on the same code base.
-
-> **Note**:
+> **Note:**
 > The client and container runtime are now in separate packages from the daemon
 > in Docker Engine 18.09. Users should install and update all three packages at
 > the same time to get the latest patch releases. For example, on Ubuntu:
@@ -35,6 +22,26 @@ compatibility reasons.
 > instructions for the corresponding linux distro for details.
 
 # Version 19.03
+
+## 19.03.5
+2019-11-14
+
+### Builder
+
+* builder-next: Added `entitlements` in builder config. [docker/engine#412](https://github.com/docker/engine/pull/412)
+* Fix builder-next: permission errors on using build secrets or ssh forwarding with userns-remap. [docker/engine#420](https://github.com/docker/engine/pull/420)
+* Fix builder-next: copying a symlink inside an already copied directory. [docker/engine#420](https://github.com/docker/engine/pull/420)
+
+### Packaging
+
+* Support RHEL 8 packages
+
+### Runtime
+
+* Bump Golang to 1.12.12. [docker/engine#418](https://github.com/docker/engine/pull/418)
+* Update to RootlessKit to v0.7.0 to harden slirp4netns with mount namespace and seccomp. [docker/engine#397](https://github.com/docker/engine/pull/397)
+* Fix to propagate GetContainer error from event processor. [docker/engine#407](https://github.com/docker/engine/pull/407)
+* Fix push of OCI image. [docker/engine#405](https://github.com/docker/engine/pull/405)
 
 ## 19.03.4
 2019-10-17
@@ -453,6 +460,22 @@ The missing rules are :
 
 # Version 18.09
 
+## 18.09.11
+2019-11-14
+
+### Builder
+
+* Fix builder-next: filter type in BuildKit GC config. [docker/engine#409](https://github.com/docker/engine/pull/409)
+
+### Runtime
+
+* Bump Golang to 1.12.12.
+
+### Swarm
+
+* Fix update out of sequence and increase max recv gRPC message size for nodes and secrets. [docker/swarmkit#2900](https://github.com/docker/swarmkit/pull/2900)
+* Fix for specifying `--default-addr-pool` for `docker swarm init` not picked up by ingress network. [docker/swarmkit#2892](https://github.com/docker/swarmkit/pull/2892)
+
 ## 18.09.10
 2019-10-08
 
@@ -850,6 +873,22 @@ Ubuntu 14.04 "Trusty Tahr" [docker-ce-packaging#255](https://github.com/docker/d
 
 # Older Docker Engine EE Release notes
 
+## 18.03.1-ee-12
+2019-11-14
+
+### Client
+
+* Fix potential out of memory in CLI when running `docker image prune`. [docker/cli#1423](https://github.com/docker/cli/pull/1423)
+
+### Logging
+
+* Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [moby/moby#39969](https://github.com/moby/moby/pull/39969)
+
+### Runtime
+
+* Update to Go 1.12.12.
+* Seccomp: add sigprocmask (used by x86 glibc) to default seccomp profile. [moby/moby#39824](https://github.com/moby/moby/pull/39824)
+
 ## 18.03.1-ee-11
 
 2019-09-03
@@ -1040,6 +1079,36 @@ with directory traversal. [moby/moby#39357](https://github.com/moby/moby/pull/39
 + Windows opt-out telemetry stream.
 + Support for `--chown` with `COPY` and `ADD` in `Dockerfile`.
 + Added functionality for the `docker logs` command to include the output of multiple logging drivers.
+
+## 17.06.2-ee-25
+2019-11-19
+
+### Builder
+
+* Fix for ENV in multi-stage builds not being isolated. [moby/moby#35456](https://github.com/moby/moby/pull/35456)
+
+### Client
+
+* Fix potential out of memory in CLI when running `docker image prune`. [docker/cli#1423](https://github.com/docker/cli/pull/1423)
+* Fix compose file schema to prevent invalid properties in `deploy.resources`. [docker/cli#455](https://github.com/docker/cli/pull/455)
+
+### Logging
+
+* Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [moby/moby#39969](https://github.com/moby/moby/pull/39969)
+
+### Runtime
+
+* Update to Go 1.12.12.
+* Seccomp: add sigprocmask (used by x86 glibc) to default seccomp profile. [moby/moby#39824](https://github.com/moby/moby/pull/39824)
+* Fix "device or resource busy" error on container removal with devicemapper. [moby/moby#34573](https://github.com/moby/moby/pull/34573)
+* Fix `daemon.json` configuration `default-ulimits` not working. [moby/moby#32547](https://github.com/moby/moby/pull/32547)
+* Fix denial of service with large numbers in `--cpuset-cpus` and `--cpuset-mems`. [moby/moby#37967](https://github.com/moby/moby/pull/37967)
+* Fix for `docker start` creates host-directory for bind mount, but shouldn't. [moby/moby#35833](https://github.com/moby/moby/pull/35833)
+* Fix OCI image media types. [moby/moby#37359](https://github.com/moby/moby/pull/37359)
+
+### Windows
+
+* Windows: bump RW layer size to 127GB. [moby/moby#35925](https://github.com/moby/moby/pull/35925)
 
 ## 17.06.2-ee-24
 2019-09-03

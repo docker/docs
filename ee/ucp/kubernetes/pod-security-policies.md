@@ -4,6 +4,8 @@ description: Learn how to use Pod Security Policies to lock down Kubernetes as p
 keywords: UCP, Kubernetes, psps, pod security policies
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Pod Security Policies (PSPs) are cluster-level resources which are enabled by
 default in Docker Universal Control Plane (UCP) 3.2. See [Pod Security
 Policy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) for an

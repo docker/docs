@@ -5,15 +5,17 @@ keywords: logs, ucp, swarm, kubernetes, audits
 redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Audit logs are a chronological record of security-relevant activities by 
 individual users, administrators or software components that have affected the 
 system. They are focused on external user/agent actions and security rather than 
 understanding state or events of the system itself.
 
-Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP 
+Audit logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP 
 API, Swarm API and Kubernetes API endpoints that are invoked (except for the 
 ignored list) and sent to Docker Engine via stdout. Creating audit logs is a UCP 
-component that integrates with Swarm, K8s, and UCP APIs.
+component that integrates with Swarm, Kubernetes, and UCP APIs.
 
 ## Logging levels
 
@@ -35,6 +37,8 @@ logging levels are provided:
 - **Request**: includes all fields from the Metadata level as well as the 
 request payload.
 
+> Note
+>
 > Once UCP audit logging has been enabled, audit logs can be found within the 
 > container logs of the `ucp-controller` container on each UCP manager node. 
 > Please ensure you have a 
@@ -46,10 +50,10 @@ request payload.
 
 You can use audit logs to help with the following use cases:
 
-- **Historical Troubleshooting** - Audit logs are helpful in determining a 
-sequence of past events that explain why an issue occured.
+- **Historical troubleshooting** - Audit logs are helpful in determining a 
+sequence of past events that explain why an issue occurred.
 
-- **Security Analysis and Auditing** - Security is one of the primary uses for 
+- **Security analysis and auditing** - Security is one of the primary uses for 
 audit logs. A full record of all user interactions with the container 
 infrastructure gives your security team full visibility to questionable or 
 attempted unauthorized accesses.
@@ -61,27 +65,24 @@ generate chargeback information.
 created by the event, alerting features can be built on top of event tools that 
 generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
 
-## Enabling UCP Audit Logging
+## Enabling UCP audit logging
 
 UCP audit logging can be enabled via the UCP web user interface, the UCP API or 
 via the UCP configuration file.
 
-### Enabling UCP Audit Logging via UI
+### Enabling UCP audit logging using the web UI
 
-1) Log in to the **UCP** Web User Interface
-
-2) Navigate to **Admin Settings**
-
-3) Select **Audit Logs**
-
-4) In the **Configure Audit Log Level** section, select the relevant logging
+1. Log in to the **UCP** Web User Interface
+2. Navigate to **Admin Settings**
+3. Select **Audit Logs**
+4. In the **Configure Audit Log Level** section, select the relevant logging
 level. 
 
-![Enabling Audit Logging in UCP](../../images/auditlogging.png){: .with-border}
+    ![Enabling Audit Logging in UCP](../../images/auditlogging.png){: .with-border}
 
-5) Click **Save**
+5. Click **Save**
 
-### Enabling UCP Audit Logging via API
+### Enabling UCP audit logging using the API
 
 1. Download the UCP Client bundle [Download client bundle from the command line](https://success.docker.com/article/download-client-bundle-from-the-cli).
 
@@ -108,11 +109,10 @@ level.
     curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -H "Content-Type: application/json" -X PUT --data $(cat auditlog.json) https://ucp-domain/api/ucp/config/logging
     ```
 
-### Enabling UCP Audit Logging via Config File
+### Enabling UCP audit logging using the configuration file
 
-Enabling UCP audit logging via the UCP Configuration file can be done before 
-or after a UCP installation. Following the UCP Configuration file documentation 
-[here](./ucp-configuration-file/).
+Enabling UCP audit logging via the UCP configuration file can be done before 
+or after a UCP installation. Refer to the [UCP configuration file](./ucp-configuration-file/) topic for more information. 
 
 The section of the UCP configuration file that controls UCP auditing logging is:
 
@@ -124,20 +124,23 @@ The section of the UCP configuration file that controls UCP auditing logging is:
 
 The supported variables for `level` are `""`, `"metadata"` or `"request"`.
 
-> Important: The `support_dump_include_audit_logs` flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that `support_dump_include_audit_logs` is set to `false`.  When disabled, the support dump collection tool filters out any lines from the `ucp-controller` container logs that contain the substring `auditID`.
+> Note
+> 
+> The `support_dump_include_audit_logs` flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that `support_dump_include_audit_logs` is set to `false`.  When disabled, the support dump collection tool filters out any lines from the `ucp-controller` container logs that contain the substring `auditID`.
+{: .important} 
 
-
-## Accessing Audit Logs
+## Accessing audit logs
 
 The audit logs are exposed today through the `ucp-controller` logs. You can 
-access these logs locally through the Docker cli or through an external 
+access these logs locally through the Docker CLI or through an external 
 container logging solution, such as [ELK](https://success.docker.com/article/elasticsearch-logstash-kibana-logging)
 
-### Accessing Audit Logs via the Docker Cli
+### Accessing audit logs using the Docker CLI
 
-1) Source a UCP Client Bundle
+To access audit logs using the Docker CLI:
 
-2) Run `docker logs` to obtain audit logs. In the following example,
+1. Source a UCP Client Bundle
+2. Run `docker logs` to obtain audit logs. In the following example,
 we are tailing the command to show the last log entry.
 
 ```
@@ -208,7 +211,7 @@ Information for the following API endpoints is redacted from the audit logs for 
 - `/swarm/join` (POST)
 - `/swarm/update` (POST)
 -`/auth/login` (POST)
-- Kube secrete create/update endpoints
+- Kubernetes secrete create/update endpoints
 
 ## Where to go next
 

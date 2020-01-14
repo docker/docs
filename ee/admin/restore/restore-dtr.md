@@ -10,6 +10,8 @@ redirect_from:
 {% assign image_backup_file = "dtr-image-backup.tar" %}
 
 
+>{% include enterprise_label_shortform.md %}
+
 ## Restore DTR data
 
 If your DTR has a majority of unhealthy replicas, the one way to restore it to
@@ -38,6 +40,7 @@ Start by removing any DTR container that is still running:
 ```none
 $ docker container run \
   --rm \
+  --tty \
   --interactive \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls

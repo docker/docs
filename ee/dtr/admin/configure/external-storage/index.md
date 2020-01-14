@@ -4,6 +4,8 @@ description: Storage configuration for Docker Trusted Registry
 keywords: dtr, storage drivers, NFS, Azure, S3
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 ## Configure your storage backend
 
 By default DTR uses the local filesystem of the node where it is running to
@@ -30,7 +32,7 @@ DTR supports the following storage systems:
    * [OpenStack Swift](/registry/storage-drivers/swift/)
    * [Google Cloud Storage](/registry/storage-drivers/gcs/)
 
-> **Note**: Some of the previous links are meant to be informative and are not representative of DTR's implementation of these storage systems. 
+> **Note**: Some of the previous links are meant to be informative and are not representative of DTR's implementation of these storage systems.
 
 To configure the storage backend, log in to the DTR web interface
 as an admin, and navigate to **System > Storage**.
@@ -46,9 +48,9 @@ See [Docker Registry Configuration](/registry/configuration.md) for configuratio
 
 By default, DTR creates a volume named `dtr-registry-<replica-id>` to store
 your images using the local filesystem. You can customize the name and path of
-the volume by using `docker/dtr install --dtr-storage-volume` or `docker/dtr reconfigure --dtr-storage-volume`. 
+the volume by using `docker/dtr install --dtr-storage-volume` or `docker/dtr reconfigure --dtr-storage-volume`.
 
->  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with [reconfiguring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) before you proceed. To work around the `--nfs-storage-url` flag issue, manually create a storage volume on each DTR node. If DTR is already installed in your cluster, [reconfigure DTR](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) with the `--dtr-storage-volume` flag using your newly-created volume.  
+>  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with [reconfiguring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata) before you proceed. To work around the `--nfs-storage-url` flag issue, manually create a storage volume on each DTR node. If DTR is already installed in your cluster, [reconfigure DTR](https://success.docker.com/article/dtr-26-lost-tags-after-reconfiguring-storage#reconfigureusingalocalnfsvolume) with the `--dtr-storage-volume` flag using your newly-created volume.
 {: .warning}
 
 If you're deploying DTR with high-availability, you need to use NFS or any other
@@ -80,7 +82,7 @@ all replicas can share the same storage backend.
 ### Amazon S3
 
 DTR supports Amazon S3 or other storage systems that are S3-compatible like Minio.
-[Learn how to configure DTR with Amazon S3](s3.md). 
+[Learn how to configure DTR with Amazon S3](s3.md).
 
 
 
@@ -90,6 +92,6 @@ DTR supports Amazon S3 or other storage systems that are S3-compatible like Mini
 - [Use NFS](nfs.md)
 - [Use S3](s3.md)
 - CLI reference pages
-  - [docker/dtr install](/reference/dtr/2.6/cli/install/)
-  - [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/)
-  - [docker/dtr restore](/reference/dtr/2.6/cli/restore/)
+  - [docker/dtr install](/reference/dtr/{{ site.dtr_version }}/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/)
+  - [docker/dtr restore](/reference/dtr/{{ site.dtr_version }}/cli/restore/)

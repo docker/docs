@@ -1,5 +1,5 @@
 ---
-title: About Docker Enterprise
+title: Overview
 description: Docker Enterprise product information
 keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
@@ -13,17 +13,19 @@ green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; mar
 install-prefix-ee: '/install/linux/docker-ee'
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
-applications at scale in production. Docker Enterprise is an integrated container platform that includes 
+applications at scale in production. Docker Enterprise is an integrated container platform that includes
 Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.
-Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone 
-solution  to provide enterprises with the most secure container engine in the industry. For more information 
-about Docker Enterprise and Docker Engine - Enterprise, including purchasing options, 
+Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone
+solution  to provide enterprises with the most secure container engine in the industry. For more information
+about Docker Enterprise and Docker Engine - Enterprise, including purchasing options,
 see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Compatibility Matrix
 >
-> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix) 
+> Refer to the [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix)
 > for the latest list of supported platforms.
 {: .important}
 
@@ -33,12 +35,12 @@ see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 
 > Note
 >
-> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise, 
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise,
 > and both Docker Enterprise - Standard and Docker Enterprise - Advanced are now called Docker Enterprise.
 
 ### Docker Enterprise
 
-With Docker Enterprise, you can manage container workloads on Windows, Linux, on site, or on the cloud 
+With Docker Enterprise, you can manage container workloads on Windows, Linux, on site, or on the cloud
 in a flexible way.
 
 Docker Enterprise has private image management, integrated image signing policies, and cluster
@@ -47,7 +49,7 @@ node-based RBAC policies, image promotion policies, image mirroring, and
 scan your images for vulnerabilities. It also has support with defined SLAs and extended
 maintenance cycles for patches for up to 24 months.
 
-### New licensing for Docker Enterprise 
+### New licensing for Docker Enterprise
 
 Starting in version 18.09, Docker Enterprise is aware of the license applied on
 the system. The license summary is available in the `docker info` output on
@@ -59,7 +61,7 @@ Docker recommends that Enterprise customers use UCP to manage their license.
 
 Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 
-Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`. 
+Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
 
 Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
 
@@ -72,8 +74,8 @@ Additionally, Docker is now distributing the CLI as a separate installation pack
 
 ### Docker Certified Infrastructure
 
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise 
-on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture, 
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise
+on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture,
 a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 
 | Platform  | Docker Enterprise support |

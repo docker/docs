@@ -7,6 +7,8 @@ redirect_from:
 keywords: routing, proxy, interlock, load balancing
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 After you enable the layer 7 routing solution, you can
 [start using it in your swarm services](index.md).
 
@@ -33,7 +35,7 @@ services are being reconfigured, users won't notice it.
 | `com.docker.lb.port`                   | Port to use for internal upstream communication.                                                                                               | `8080`                 |
 | `com.docker.lb.network`                | Name of network the proxy service should attach to for upstream connectivity.                                                                  | `app-network-a`        |
 | `com.docker.lb.context_root`           | Context or path to use for the application.                                                                                                    | `/app`                 |
-| `com.docker.lb.context_root_rewrite`   | Boolean to enable rewrite for the context root.                                                                                                | `true`                 |
+| `com.docker.lb.context_root_rewrite`   | When set to `true`, this option changes the path from the value of label `com.docker.lb.context_root` to `/`.                                                                                                | `true`                 |
 | `com.docker.lb.ssl_cert`               | Docker secret to use for the SSL certificate.                                                                                                  | `example.com.cert`     |
 | `com.docker.lb.ssl_key`                | Docker secret to use for the SSL key.                                                                                                          | `example.com.key`      |
 | `com.docker.lb.websocket_endpoints`    | Comma separated list of endpoints to configure to be upgraded for websockets.                                                                  | `/ws,/foo`             |

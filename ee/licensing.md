@@ -6,7 +6,9 @@ toc_min: 1
 toc_max: 2
 ---
 
-This page provides information about Docker Enterprise 3.0 licensing. Docker Enterprise 3.0 is a soft bundle of products that deliver the complete the desktop-to-cloud workflow.
+>{% include enterprise_label_shortform.md %}
+
+This page provides information about Docker Enterprise 3.0 licensing. Docker Enterprise 3.0 is a soft bundle of products that deliver the complete desktop-to-cloud workflow.
 
 > Important
 >

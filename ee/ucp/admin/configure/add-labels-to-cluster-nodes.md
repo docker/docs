@@ -4,9 +4,11 @@ description: Learn how to add metadata to cluster nodes that can be used to spec
 keywords: cluster, node, label, swarm, metadata
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 With Docker UCP, you can add labels to your nodes. Labels are metadata that
 describe the node, like its role (development, QA, production), its region
-(US, EU, APAC), or the kind of disk (hdd, ssd). Once you have labeled your
+(US, EU, APAC), or the kind of disk (HDD, SSD). Once you have labeled your
 nodes, you can add deployment constraints to your services, to ensure they
 are scheduled on a node with a specific label.
 
@@ -22,7 +24,7 @@ to organize access to your cluster.
 
 ## Apply labels to a node
 
-In this example we'll apply the `ssd` label to a node. Then we'll deploy
+In this example, we'll apply the `ssd` label to a node. Next, we'll deploy
 a service with a deployment constraint to make sure the service is always
 scheduled to run on a node that has the `ssd` label.
 
@@ -31,7 +33,7 @@ scheduled to run on a node that has the `ssd` label.
 3. In the nodes list, select the node to which you want to apply labels.
 4. In the details pane, select the edit node icon in the upper-right corner to edit the node.
 
-    ![](../../images/add-labels-to-cluster-nodes-3.png)
+    ![](../../images/v32-edit-node.png)
 
 5. In the **Edit Node** page, scroll down to the **Labels** section.
 6. Select **Add Label**.
@@ -113,13 +115,13 @@ click **Done**.
 
 6. Navigate to the **Nodes** page, and click the node that has the
 `disk` label. In the details pane, click the **Inspect Resource**
-dropdown and select **Containers**.
+drop-down menu and select **Containers**.
 
    ![](../../images/use-constraints-in-stack-deployment-2.png)
 
    Dismiss the filter and navigate to the **Nodes** page. Click a node that
    doesn't have the `disk` label. In the details pane, click the
-   **Inspect Resource** dropdown and select **Containers**. There are no
+   **Inspect Resource** drop-down menu and select **Containers**. There are no
    WordPress containers scheduled on the node. Dismiss the filter.
 
 ## Add a constraint to a service by using the UCP web UI

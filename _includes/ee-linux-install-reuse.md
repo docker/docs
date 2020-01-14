@@ -45,6 +45,14 @@ The advantage of using a repository from which to install Docker Engine - Enterp
 {% elsif section == "set-up-yum-repo" %}
 You only need to set up the repository once, after which you can install Docker Engine - Enterprise _from_ the repo and repeatedly upgrade as necessary.
 
+{% if linux-dist == "rhel" %}
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#RHEL_7" data-group="7">RHEL 7</a></li>
+  <li><a data-toggle="tab" data-target="#RHEL_8" data-group="8">RHEL 8</a></li>
+</ul>
+<div class="tab-content" id="myFirstTab">
+<div id="RHEL_7" class="tab-pane fade in active" markdown="1">
 1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
 
     ```bash
@@ -63,14 +71,12 @@ You only need to set up the repository once, after which you can install Docker 
     $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
     ```
 
-    {% if linux-dist == "rhel" %}
-    Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `7`, but you can also use the more specific minor version, starting from `7.2`.
+    Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `7` or `8`, but you can also use the more specific minor version, starting from `7.2`.
 
     ```bash
     $ sudo sh -c 'echo "7" > /etc/yum/vars/dockerosversion'
     ```
 
-    {% endif %}
 
 4.  Install required packages: `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver:
 
@@ -80,7 +86,6 @@ You only need to set up the repository once, after which you can install Docker 
       lvm2
     ```
 
-{% if linux-dist == "rhel" %}
 5.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package required by `docker-ee`.
 
     The repository can differ per your architecture and cloud provider, so review the options in this step before running:
@@ -113,8 +118,89 @@ You only need to set up the repository once, after which you can install Docker 
     ```bash
     $ sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
     ```
+    
+6.  Add the Docker Engine - Enterprise **stable** repository:
 
+    ```bash
+    $ sudo -E yum-config-manager \
+        --add-repo \
+        "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
+    ```
+
+</div>
+<div id="RHEL_8" class="tab-pane fade" markdown="1">
+1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
+
+    ```bash
+    $ sudo rm /etc/yum.repos.d/docker*.repo
+    ```
+
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
+
+    ```bash
+    $ export DOCKERURL="<DOCKER-EE-URL>"
+    ```
+
+3.  Store the value of the variable, `DOCKERURL` (from the previous step), in a `yum` variable in `/etc/yum/vars/`:
+
+    ```bash
+    $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
+    ```
+
+    Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `8`, but you can also use the more specific minor version.
+
+    ```bash
+    $ sudo sh -c 'echo "8" > /etc/yum/vars/dockerosversion'
+    ```
+
+
+4.  Install required packages: `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver:
+
+    ```bash
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
+    ```
+
+5.  Add the Docker Engine - Enterprise **stable** repository:
+
+    ```bash
+    $ sudo -E yum-config-manager \
+        --add-repo \
+        "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
+    ```
+    
+</div>
+</div>
 {% endif %}
+
+{% if linux-dist != "rhel" %}
+
+1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
+
+    ```bash
+    $ sudo rm /etc/yum.repos.d/docker*.repo
+    ```
+
+2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
+
+    ```bash
+    $ export DOCKERURL="<DOCKER-EE-URL>"
+    ```
+
+3.  Store the value of the variable, `DOCKERURL` (from the previous step), in a `yum` variable in `/etc/yum/vars/`:
+
+    ```bash
+    $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
+    ```
+
+4.  Install required packages: `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver:
+
+    ```bash
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
+    ```
 
 {% if linux-dist == "oraclelinux" %}
 
@@ -133,13 +219,13 @@ You only need to set up the repository once, after which you can install Docker 
         --add-repo \
         "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
     ```
-
+{% endif %}
 
 {% elsif section == "install-using-yum-repo" %}
 
 > **Note**: If you need to run Docker Engine - Enterprise 2.0, please see the following instructions:
 > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker Engine - Enterprise Engine only release
-> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, 
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine,
 > UCP, and DTR).
 
 1.  Install the latest patch release, or go to the next step to install a specific version:
@@ -212,6 +298,15 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
 {% elsif section == "install-using-yum-package" %}
 
 {% if linux-dist == "rhel" %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#RHEL-7" data-group="7">RHEL 7</a></li>
+  <li><a data-toggle="tab" data-target="#RHEL-8" data-group="8">RHEL 8</a></li>
+</ul>
+
+<div class="tab-content" id="mySecondTab">
+
+<div id="RHEL-7" class="tab-pane fade in active" markdown="1">
+
 1.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package which is required by `docker-ee`:
 
     ```bash
@@ -219,26 +314,58 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
     ```
 
     Alternately, obtain that package manually from Red Hat. There is no way to publicly browse this repository.
-{% endif %}
 
-{% if linux-dist == "centos" %}
-1.  Go to the Docker Engine - Enterprise repository URL associated with your trial or subscription
-    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
-    and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
-{% endif %}
+2.  Go to the Docker Engine - Enterprise repository URL associated with your
+    trial or subscription in your browser. Go to
+    `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
+    architecture, and Docker version. Download the
+    `.{{ package-format | downcase }}` file from the `Packages` directory.
 
-{% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
+    > If you have trouble with `selinux` using the packages under the `7` directory,
+    > try choosing the version-specific directory instead, such as `7.3`.
+
+3.  Install Docker Enterprise, changing the path below to the path where you downloaded
+    the Docker package.
+
+    ```bash
+    $ sudo yum install /path/to/package.rpm
+    ```
+
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
+
+4.  Start Docker:
+
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+5.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
+    image. This command downloads a test image, runs it in a container, prints
+    an informational message, and exits:
+
+    ```bash
+    $ sudo docker run hello-world
+    ```
+
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
+    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    non-privileged users to run Docker commands.
+
+</div>
+
+<div id="RHEL-8" class="tab-pane fade" markdown="1">
+
 1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to
     `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
     architecture, and Docker version. Download the
     `.{{ package-format | downcase }}` file from the `Packages` directory.
 
-  {% if linux-dist == "rhel" %}
-    > If you have trouble with `selinux` using the packages under the `7` directory,
-    > try choosing the version-specific directory instead, such as `7.3`.
-  {% endif %}
-{% endif %}
+    > If you have trouble with `selinux` using the packages under the `8` directory,
+    > try choosing the version-specific directory instead.
 
 2.  Install Docker Enterprise, changing the path below to the path where you downloaded
     the Docker package.
@@ -270,6 +397,56 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
     [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
+</div>
+</div>
+
+{% endif %}
+{% if linux-dist != "rhel" %}
+{% if linux-dist == "centos" %}
+1.  Go to the Docker Engine - Enterprise repository URL associated with your trial or subscription
+    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
+    and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
+{% endif %}
+
+{% if linux-dist == "oraclelinux" %}
+1.  Go to the Docker Engine - Enterprise repository URL associated with your
+    trial or subscription in your browser. Go to
+    `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
+    architecture, and Docker version. Download the
+    `.{{ package-format | downcase }}` file from the `Packages` directory.
+
+{% endif %}
+
+2.  Install Docker Enterprise, changing the path below to the path where you downloaded
+    the Docker package.
+
+    ```bash
+    $ sudo yum install /path/to/package.rpm
+    ```
+
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
+
+3.  Start Docker:
+
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
+    image. This command downloads a test image, runs it in a container, prints
+    an informational message, and exits:
+
+    ```bash
+    $ sudo docker run hello-world
+    ```
+
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
+    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    non-privileged users to run Docker commands.
+{% endif %}
 
 {% elsif section == "upgrade-using-yum-package" %}
 

@@ -2,6 +2,7 @@
 datafolder: assemble
 datafile: docker_assemble_backend_image
 title: docker assemble backend image
+enterprise_only: true
 skip_read_time: true
 ---
 <!--
