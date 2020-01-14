@@ -66,7 +66,7 @@ nodes, if upgrading offline), run the upgrade command.
 
 > Note:
 >
-> The upgrade command can be run from any available node, as UCP is aware of of which worker nodes have replicas.
+> The upgrade command can be run from any available node, as UCP is aware of which worker nodes have replicas.
 
 ```bash
 docker run -it --rm \
