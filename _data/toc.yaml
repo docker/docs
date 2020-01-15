@@ -3435,6 +3435,8 @@ manuals:
               title: Delete images
             - path: /datacenter/dtr/2.5/guides/user/manage-images/scan-images-for-vulnerabilities/
               title: Scan images for vulnerabilities
+            - title: Override a vulnerability
+              path: /datacenter/dtr/2.5/guides/user/manage-images/override-a-vulnerability/
             - path: /datacenter/dtr/2.5/guides/user/manage-images/prevent-tags-from-being-overwritten/
               title: Prevent tags from being overwritten
             - sectiontitle: Sign images
