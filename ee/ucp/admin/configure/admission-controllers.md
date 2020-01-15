@@ -1,13 +1,15 @@
 ---
 title: Admission controllers
-description: Learn about how admission controllers are used in docker.
+description: Learn about how admission controllers are used in Docker.
 keywords: cluster, psp, security
 ---
 
 
 >{% include enterprise_label_shortform.md %}
 
-This is the current list of admission controllers used by Docker:
+Admission controllers are plugins that govern and enforce how the cluster is used. There are two types of admission controllers used, Default and Custom.
+
+This topic describes the current list of admission controllers used by Docker. 
 
 ### Default
 - [NamespaceLifecycle](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#namespacelifecycle)
@@ -22,7 +24,7 @@ This is the current list of admission controllers used by Docker:
 - [PodSecurityPolicy](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecuritypolicy)
 
 ### Custom
-- **UCPAuthorization**
+- **UCPAuthorization:**
 This custom admission controller does several things:
     - Annotates Docker Compose-on-Kubernetes `Stack` resources with the identity
 of the user performing the request so that the Docker Compose-on-Kubernetes
@@ -39,11 +41,11 @@ resources with host paths.
     - Works in conjunction with the built-in `PodSecurityPolicies` admission
 controller to prevent under-privileged users from creating `Pods` with
 privileged options.
-- **CheckImageSigning**
+- **CheckImageSigning:**
 Enforces UCP's Docker Content Trust policy which, if enabled, requires that all
 pods use container images which have been digitally signed by trusted and
 authorized users which are members of one or more teams in UCP.
-- **UCPNodeSelector**
+- **UCPNodeSelector:**
 Adds a `com.docker.ucp.orchestrator.kubernetes:*` toleration to pods in the
 kube-system namespace and removes `com.docker.ucp.orchestrator.kubernetes`
 tolerations from pods in other namespaces. This ensures that user workloads do
@@ -52,6 +54,11 @@ not run on swarm-only nodes, which UCP taints with
 affinity to prevent pods from running on manager nodes depending on UCP's
 settings.
 
-**Note:** you cannot enable or disable your own admission controllers. For more information, see [Supportability of custom kubernetes flags in universal control plane](https://success.docker.com/article/supportability-of-custom-kubernetes-flags-in-universal-control-plane)
+> **Note** 
+> 
+> You cannot enable or disable your own admission controllers. For more information, see [Supportability of custom Kubernetes flags in universal control plane](https://success.docker.com/article/supportability-of-custom-kubernetes-flags-in-universal-control-plane).
 
-For more information about pod security policies in Docker, see [Pod security policies](/ee/ucp/kubernetes/pod-security-policies.md).
+## Where to go next
+
+* [Pod security policies](/ee/ucp/kubernetes/pod-security-policies.md)
+* [A Guide to Kubernetes Admission Controllers](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/)
