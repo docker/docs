@@ -57,7 +57,7 @@ Clicking the link opens a new tab that shows the default NGINX home page.
 ## Use the CLI to deploy the service
 
 You can also deploy the same service from the CLI. Once you've set up your
-[UCP client bundle](../user-access/cli.md), enter the following command:
+UCP client bundle, enter the following command:
 
 ```bash
 docker service create --name nginx \
@@ -65,6 +65,8 @@ docker service create --name nginx \
   --label com.docker.ucp.access.owner=<your-username> \
   nginx
 ```
+For more information about UCP client bundles, see [CLI-based access](../user-access/cli.md).
+
 ## Where to go next
 * [Deploy a multi-service app](https://docs.docker.com/ee/ucp/swarm/deploy-multi-service-app/)
 * [Deploy application resources to a collection](https://docs.docker.com/ee/ucp/swarm/deploy-to-collection/)
