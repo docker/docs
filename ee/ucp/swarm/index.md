@@ -48,11 +48,11 @@ page by going to `http://<node-ip>:8000`. In the **Services** list, click the
 **nginx** service, and in the details pane, click the link under
 **Published Endpoints**. 
 
-    ![](../images/deploy-a-service-4.png){: .with-border}
+![](../images/deploy-a-service-4.png){: .with-border}
 
 Clicking the link opens a new tab that shows the default NGINX home page. 
 
-    ![](../images/deploy-a-service-5.png){: .with-border}
+![](../images/deploy-a-service-5.png){: .with-border}
 
 ## Use the CLI to deploy the service
 
