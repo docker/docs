@@ -9,10 +9,23 @@ title: Logs and troubleshooting
 
 This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
 
-## Docker Knowledge Hub
+## Troubleshoot
 
-**Looking for help with Docker Desktop for Windows?** Check out [Docker Success Center](http://success.docker.com/q) for knowledge base articles, FAQs, and
-technical support for various subscription levels.
+Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
+from the menu bar to see the troubleshoot options.
+
+![Uninstall or reset Docker](images/troubleshoot.png){:width="750px"}
+
+The Troubleshoot page contains the following options:
+
+* **Restart Docker Desktop**: Select to restart Docker Desktop.
+
+* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-windows/index/#kubernetes).
+
+* **Reset to factory defaults**: Choose this option to reset all options on
+Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
 ## Diagnose problems, send feedback, and create GitHub issues
 
