@@ -244,9 +244,9 @@ Engine Signature Verification prevents the following:
 
 DCT does not verify that a running container’s filesystem has not been altered
 from what was in the image. For example, it does not prevent a container from
-writing to the filesystem, once the container is running, nor does it prevent
-the container’s filesystem from being altered on disk. DCT will also not prevent
-unsigned images from being imported, loaded, or created.
+writing to the filesystem, once the container is running. Furthermore, it does 
+not prevent the image's or container’s filesystem from being altered on disk. 
+DCT will also not prevent unsigned images from being imported, loaded, or created.
 
 ### Enabling DCT within the Docker Enterprise Engine
 
