@@ -17,8 +17,12 @@ toc_max: 4
 > 
 > Docker Engine - Community users should go to
 [Get Docker Engine - Community for Ubuntu](/install/linux/docker-ce/ubuntu.md)
-**instead of this topic**. Confirm that all prerequisites are met before installing Docker Engine - Enterprise on Ubuntu
+**instead of this topic**. 
 {: .important}
+
+## Prerequisites
+
+Confirm that all prerequisites are met before installing Docker Engine - Enterprise on Ubuntu.
 
 The product URL associated with your trial or subscription is required to install Docker Engine - Enterprise, which can be attained using the following procedure (note that these instructions apply to Docker on Ubuntu and for Docker on Linux, which includes access to Docker Engine - Enterprise for all Linux distributions):
 
@@ -40,7 +44,7 @@ check the [compatibility matrix](https://success.docker.com/article/compatibilit
 
 > **Note**
 > 
-> IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.04.xx only.
+> IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only.
 
 ### Uninstall old versions
 
