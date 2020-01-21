@@ -9,10 +9,23 @@ title: Logs and troubleshooting
 
 This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
 
-## Docker Knowledge Hub
+## Troubleshoot
 
-**Looking for help with Docker Desktop for Windows?** Check out [Docker Success Center](http://success.docker.com/q) for knowledge base articles, FAQs, and
-technical support for various subscription levels.
+Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
+from the menu bar to see the troubleshoot options.
+
+![Uninstall or reset Docker](images/troubleshoot.png){:width="750px"}
+
+The Troubleshoot page contains the following options:
+
+* **Restart Docker Desktop**: Select to restart Docker Desktop.
+
+* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-windows/index/#kubernetes).
+
+* **Reset to factory defaults**: Choose this option to reset all options on
+Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
 ## Diagnose problems, send feedback, and create GitHub issues
 
@@ -568,20 +581,12 @@ currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
 docker app.
 
-### Docker fails to start when firewall or anti-virus software is installed
+### Docker Desktop fails to start when anti-virus software is installed
 
-Some firewalls and anti-virus software might be incompatible with Microsoft
-**Windows 10 builds**, such as Windows 10 Anniversary Update. The conflict
-typically occurs after a Windows update or new install of the firewall, and
-manifests as an error response from the Docker daemon and a **Docker Desktop start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+Some anti-virus software may be incompatible with with Hyper-V and Microsoft
+Windows 10 builds. The conflict
+typically occurs after a Windows update and
+manifests as an error response from the Docker daemon and a Docker Desktop start failure.
 
-See the Comodo forums topics [Comodo Firewall conflict with
-Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
-and [Windows 10 Anniversary build doesn't allow Comodo drivers to be
-installed](https://forums.comodo.com/install-setup-configuration-help-cis/windows-10-aniversary-build-doesnt-allow-comodo-drivers-to-be-installed-t116322.0.html).
-A Docker Desktop user-created issue describes the problem specifically as it
-relates to Docker: [Docker fails to start on Windows
-10](https://github.com/docker/for-win/issues/27).
-
-For a temporary workaround, uninstall the firewall or anti-virus software, or
-explore other workarounds suggested on the forum.
+For a temporary workaround, uninstall the anti-virus software, or
+explore other workarounds suggested on Docker Desktop forums.
