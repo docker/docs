@@ -11,6 +11,8 @@ redirect_from:
 - /engine/installation/windows/
 - /docker-for-windows/index/
 title: Get started with Docker for Windows
+toc_min: 1
+toc_max: 2
 ---
 
 Welcome to Docker Desktop!
@@ -513,6 +515,10 @@ apply only on Windows containers. If you switch back to Linux containers,
 proxies and daemon configurations return to what you had set for Linux
 containers. Your Windows container settings are retained and become available
 again when you switch back.
+
+## Dashboard
+
+The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](dashboard.md).
 
 ## Docker Hub
 
