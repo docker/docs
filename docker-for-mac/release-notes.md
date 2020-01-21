@@ -19,6 +19,8 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 >
 > You must sign in to Docker Hub to download Docker Desktop.
 
+Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+
 ### Upgrades
 
 - [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
