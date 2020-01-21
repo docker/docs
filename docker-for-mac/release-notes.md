@@ -21,7 +21,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 ### Upgrades
 
-- [Docker Compose 1.25.1](https://github.com/docker/compose/releases/tag/1.25.1)
+- [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
 - Linux kernel 4.19.76
 - [QEMU 4.0.1](https://github.com/docker/binfmt)

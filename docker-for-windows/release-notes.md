@@ -21,7 +21,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 ### Upgrades
 
-- [Docker Compose 1.25.1](https://github.com/docker/compose/releases/tag/1.25.1)
+- [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
 - Linux kernel 4.19.76
 - [QEMU 4.0.1](https://github.com/docker/binfmt)
@@ -72,6 +72,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 - WSL 2 requires Windows 10 Insider Preview build 19018 or greater.
 - The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
 - The new gRPC FUSE file sharing implementation does not support connecting to new drives (for example, USB drives) added after Docker Desktop starts. If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
+- Sharing files from virtual drives created by `ImDisk Toolkit` does not work.
 
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
