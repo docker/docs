@@ -81,13 +81,6 @@ deployed containers, but rather sets permissions to a default value of
 For workarounds and to learn more, see
 [Permissions errors on data directories for shared volumes](troubleshoot#permissions-errors-on-data-directories-for-shared-volumes).
 
-### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
-
-Currently, `inotify` does not work on Docker Desktop. This is a known issue.
-For more information and a temporary workaround, see
-[inotify on shared drives does not work](troubleshoot#inotify-on-shared-drives-does-not-work){: target="_blank" class="_"}
-in [Troubleshooting](troubleshoot).
-
 ### Are symlinks supported?
 
 Docker Desktop supports symbolic links (symlinks) created within containers.
@@ -129,23 +122,6 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or 
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
 
-### Can I share local drives and file system with my Docker Machine VMs?
-
-No, you cannot share local drives with Docker Machine nodes when using Docker
-Desktop with Hyper-V. Shared drives can be made available to containers, but
-Docker Desktop does not support mounts for nodes you created with
-`docker-machine`.
-
-For more about sharing local drives with containers using Docker Desktop,
-see [Shared drives](/docker-for-windows#shared-drives) in the Getting
-Started topic.
-
-To learn more about using Docker Desktop and Docker Machine, see
-[What to know before you install](install#what-to-know-before-you-install) in the
-Getting Started topic. For more about Docker Machine itself, see
-[What is Docker Machine?](/machine/overview#what-is-docker-machine), and the
-[Hyper-V driver](/machine/drivers/hyper-v) for Docker Machine.
-
 ## Windows requirements
 
 ### How do I run Windows containers on Docker Desktop on Windows Server?
@@ -161,13 +137,11 @@ Docker Desktop requires the Hyper-V feature which is not available in the Window
 
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 
-### Why does Docker Desktop fail to start when firewalls or anti-virus software is installed?
+### Why does Docker Desktop fail to start when anti-virus software is installed?
 
-Some firewalls and anti-virus software might be incompatible with Hyper-V and
-some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
-Desktop. See details and workarounds in
-[Docker fails to start when firewall or anti-virus software is installed](troubleshoot#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
-in [Troubleshooting](troubleshoot).
+Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](/docker-for-windows/troubleshoot/#docker-desktop-fails-to-start-when-anti-virus-software-is-installed)
+in [Troubleshooting](troubleshoot.md).
 
 ## Feedback
 
