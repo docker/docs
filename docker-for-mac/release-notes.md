@@ -13,7 +13,54 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Stable Releases of 2019
+## Docker Desktop Community 2.2.0.0
+
+> [Download](https://hub.docker.com/?overlay=onboarding)
+>
+> You must sign in to Docker Hub to download Docker Desktop.
+
+### Upgrades
+
+- [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
+- [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
+- Linux kernel 4.19.76
+- [QEMU 4.0.1](https://github.com/docker/binfmt)
+
+### New
+
+- **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
+For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](dashboard.md).
+
+- Introduced a new user interface for the Docker Desktop **Preferences** menu.
+- The Restart, Reset, and Uninstall options are now available on the **Troubleshoot** menu.
+- Added the ability to start and stop existing Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
+
+### Bug fixes and minor changes
+
+- Added missing completions for the `fish` shell for Docker Compose. Fixes [docker/for-mac#3795](https://github.com/docker/for-mac/issues/3795).
+- Fixed a bug that did not allow users to copy and paste text in the **Preferences** > **Daemon** window. Fixes [docker/for-mac#3798](https://github.com/docker/for-mac/issues/3798).
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
+- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
+- Fixed an issue that caused VMs running on older hardware with macOS Catalina to fail on startup with the error `processor does not support desired secondary processor-based controls`.
+- Fixed port forwarding when containers are using `overlay` networks.
+- Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`. Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
+- Fixed an issue that occurs when sharing overlapping directories.
+- Fixed a bug that prevented users from changing the location of the VM disk image.
+- Docker Desktop does not inject `inotify` events on directories anymore as these can cause mount points to disappear inside containers. Fixes [docker/for-mac#3976](https://github.com/docker/for-mac/issues/3976).
+- Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
+- Fixed an issue where attempts to log into Docker through Docker Desktop could sometimes fail with the `Incorrect authentication credentials` error. Fixes [docker/for-mac#4010](https://github.com/docker/for-mac/issues/4010).
+
+### Known issues
+
+- When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
+
+- When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
+
 
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
