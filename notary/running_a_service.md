@@ -17,7 +17,7 @@ purposes is to use the Docker compose file in the
 [Notary project](https://github.com/docker/notary).
 
 ```bash
-$ git clone https://github.com/docker/notary.git
+$ git clone https://github.com/theupdateframework/notary.git
 $ cd notary
 $ docker-compose up
 ```
