@@ -11,7 +11,6 @@ cname:
 - docker cp
 - docker create
 - docker diff
-- docker engine
 - docker events
 - docker exec
 - docker export
@@ -70,7 +69,6 @@ clink:
 - docker_cp.yaml
 - docker_create.yaml
 - docker_diff.yaml
-- docker_engine.yaml
 - docker_events.yaml
 - docker_exec.yaml
 - docker_export.yaml
