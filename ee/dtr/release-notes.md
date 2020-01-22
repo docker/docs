@@ -24,6 +24,18 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.5
+(2020-__-__)
+
+### Bug fixes
+* Fixed the bug caused that the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10807)
+* Fixed the bug that resulted in added licenses not presenting in the UI prior to a page refresh. (docker/dhe-deploy #10815)
+* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10835)
+* Addition of more descriptive error messaging for a situation in which an advanced license for tag pruning and poll mirroring is missing. (docker/dhe-deploy #10827)
+
+### Security
+* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10845)
+
 ## 2.7.4
 (2019-11-13)
 
@@ -167,6 +179,16 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.12
+(2020-__-__)
+
+### Bug fixes
+* Fixed the bug caused that the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
+* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10836)
+
+### Security
+* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10847)
 
 ## 2.6.11
 (2019-11-13)
@@ -506,6 +528,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.16
+(2020-__-__)
+
+### Bug fixes
+* When a repository is deleted the corresponding webhook metadata is also deleted.  (docker/dhe-deploy #10830)
+
+### Security
+* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10849)
 
 ## 2.5.15
 (2019-11-13)
