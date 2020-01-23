@@ -18,11 +18,11 @@ toc_max: 2
 
 ### New features
 
-- Docker Compose now allows the compatibility option with COMPOSE_COMPATIBILITY environment variable.
+- Docker Compose now allows the compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 
 ### Bug fixes
 
-- Fixed an issue that caused Docker Compose to crash when the version field was set to an invalid value. Docker Compose now displays an error message when invalid values are used in the version field.
+- Fixed an issue that caused Docker Compose to crash when the `version` field was set to an invalid value. Docker Compose now displays an error message when invalid values are used in the version field.
 
 - Fixed an issue that caused Docker Compose to render messages incorrectly when running commands outside a terminal.
 
@@ -31,13 +31,13 @@ toc_max: 2
 
 ### Bugfixes
 
-- Decoded the APIError explanation to Unicode before using it to create and start a container.
+- Decoded the `APIError` explanation to Unicode before using it to create and start a container.
 
-- Docker Compose discards `com.docker.compose.filepaths` labels that have None as value. This usually occurs when labels originate from stdin.
+- Docker Compose discards `com.docker.compose.filepaths` labels that have `None` as value. This usually occurs when labels originate from stdin.
 
 - Added OS X binary as a directory to solve slow start up time issues caused by macOS Catalina binary scan.
 
-- Passed the HOME environment variable in container mode when running with script/run/run.sh.
+- Passed the `HOME` environment variable in container mode when running with `script/run/run.sh`.
 
 - Docker Compose now reports images that cannot be pulled, however, are required to be built.
 
