@@ -350,10 +350,7 @@ of Docker Engine enabled by default, described in the [Docker Experimental Featu
 
 {% include experimental.md %}
 
-On both Edge and Stable releases, you can toggle the **Experimental features** on and off. If you toggle it off, Docker Desktop uses the current generally
-available release of Docker Engine.
-
-Run `docker version` to see if you are in Experimental mode. Experimental mode
+Run `docker version` to verify whether you have enabled experimental features. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
 running in experimental mode, as shown here:
 
