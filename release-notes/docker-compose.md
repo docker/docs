@@ -4,6 +4,42 @@ description: Release notes for Docker Compose
 keywords: release notes, compose
 toc_max: 2
 ---
+## 1.25.3
+(2020-01-23)
+
+### Bug fixes
+
+- Fixed the CI script to enforce the compilation with Python3.
+
+- Updated the binary's sha256 on the release page.
+
+## 1.25.2
+(2020-01-20)
+
+### New features
+
+- Docker Compose now allows the compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
+
+### Bug fixes
+
+- Fixed an issue that caused Docker Compose to crash when the `version` field was set to an invalid value. Docker Compose now displays an error message when invalid values are used in the version field.
+
+- Fixed an issue that caused Docker Compose to render messages incorrectly when running commands outside a terminal.
+
+## 1.25.1
+(2020-01-06)
+
+### Bugfixes
+
+- Decoded the `APIError` explanation to Unicode before using it to create and start a container.
+
+- Docker Compose discards `com.docker.compose.filepaths` labels that have `None` as value. This usually occurs when labels originate from stdin.
+
+- Added OS X binary as a directory to solve slow start up time issues caused by macOS Catalina binary scan.
+
+- Passed the `HOME` environment variable in container mode when running with `script/run/run.sh`.
+
+- Docker Compose now reports images that cannot be pulled, however, are required to be built.
 
 ## 1.25.0
 (2019-11-18)
