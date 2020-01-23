@@ -4,19 +4,8 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, kubernet
 description: Get started resources learning docker
 ---
 
-Docker and the broader community of Docker experts have put together many different ways to get further training and hands-on experience with the Docker platform. Expand your understanding of Docker and Kubernetes with these additional free and paid resources.
+Docker and the broader community of Docker experts have put together many different ways to get further training and hands-on experience with Docker. Expand your understanding of Docker and Kubernetes with these additional free and paid resources.
 
-# Instructor-Led Training
-Docker and our Authorized Training Partners offer instructor-led courses around the world. Great for teams and organizations and also available for private sponsored classrooms, register for an upcoming class at [https://training.docker.com](https://training.docker.com).
-
-Courses offered include:
-* [Docker Fundamentals](https://success.docker.com/training/courses/docker-fundamentals)
-* [Docker for Enterprise Developers](https://success.docker.com/training/courses/docker-for-enterprise-developers)
-* [Docker for Enterprise Operations](https://success.docker.com/training/courses/docker-for-enterprise-operations)
-* [Docker Kubernetes Service](https://success.docker.com/training/courses/docker-kubernetes-service)
-* [Docker Troubleshooting and Support](https://success.docker.com/training/courses/docker-support-troubleshooting)
-
-\* Courses are fee-based
 
 # Hosted Labs 
 These self-paced and hands-on workshops use free, hosted environments ([Play with Docker](https://labs.play-with-docker.com/) and [Play with Kubernetes](https://labs.play-with-k8s.com/)) that do not require anything to be installed. Follow along and learn more about Docker and Kubernetes.
@@ -43,15 +32,13 @@ Created by experts in the Docker community, these free tutorials provide guided 
     * [Windows Containers Multi-Container Applications](https://training.play-with-docker.com/windows-containers-multicontainer/)
 
 # Books
-If books are your preferred learning style, check out these from Docker Architect Elton Stoneman:
-* [Learn Docker in a Month of Lunches (use the code `webdoc40` for 40% off)](https://www.manning.com/books/learn-docker-in-a-month-of-lunches)
-* [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/)
+If books are your preferred learning style, check out these written by the [Docker Captains](https://www.docker.com/community/captains). Docker Captain is a distinction that Docker awards to select members of the community that are both experts in their field and are committed to sharing their Docker knowledge with others.
 
-Or these written by the [Docker Captains](https://www.docker.com/community/captains). Docker Captain is a distinction that Docker awards to select members of the community that are both experts in their field and are committed to sharing their Docker knowledge with others.
-
+* [Learn Docker in a Month of Lunches (use the code `webdoc40` for 40% off)](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), Elton Stoneman
+* [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/), Elton Stoneman
+* [Docker in Action 2nd Edition](https://www.manning.com/books/docker-in-action-second-edition) Jeff Nickoloff, Oct 2019
 * [The Kubernetes Book](https://www.amazon.com/Kubernetes-Book-Nigel-Poulton/dp/1521823634/ref=sr_1_3?ie=UTF8&qid=1509660871&sr=8-3&keywords=nigel+poulton), Nigel Poulton, Nov 2018
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton), Nigel Poulton, March 2018
-* [Docker in Action](https://www.amazon.com/Docker-Action-Jeff-Nickoloff/dp/1633430235/)  **Updated (2018)** Jeff Nickoloff
 * [Portuguese] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores) (2017) by Rafael Gomes
 
 # Self-Paced Online Learning
