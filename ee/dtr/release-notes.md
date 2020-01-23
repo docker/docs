@@ -34,7 +34,8 @@ to upgrade your installation to the latest release.
 * Addition of more descriptive error messaging for a situation in which an advanced license for tag pruning and poll mirroring is missing. (docker/dhe-deploy #10827)
 
 ### Security
-* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10845)
+
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10845)
 
 ## 2.7.4
 (2019-11-13)
@@ -188,7 +189,8 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10836)
 
 ### Security
-* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10847)
+
+* * Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10847)
 
 ## 2.6.11
 (2019-11-13)
@@ -536,7 +538,8 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 * When a repository is deleted the corresponding webhook metadata is also deleted.  (docker/dhe-deploy #10830)
 
 ### Security
-* Update to a new scanner scheme which re-enables daily updates of the scanning database. (docker/dhe-deploy #10849)
+
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10849)
 
 ## 2.5.15
 (2019-11-13)
