@@ -76,10 +76,32 @@ We recommend that you publish a port, or connect from another container. You can
 For more information and examples, see
 [I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](/docker-for-mac/networking/) topic.
 
+### Can I use an SSH agent inside a container?
+
+Yes, you can use the host’s SSH agent inside a container. To do this:
+
+1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
+
+    `-v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock`
+
+1. Add the `SSH_AUTH_SOCK` environment variable in your container:
+
+    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+
+To enable the SSH agent in Docker Compose, add the following flags to your service:
+
+ ```
+    volumes:
+      - /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+ ```
+
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
 [Add TLS certificates](/docker-for-mac/index/#adding-tls-certificates) in the Getting Started topic.
+
 
 ### How do I add client certificates?
 
