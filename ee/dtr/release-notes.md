@@ -190,7 +190,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 ### Security
 
-* * Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10847)
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10847)
 
 ## 2.6.11
 (2019-11-13)
