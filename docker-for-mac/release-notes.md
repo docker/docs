@@ -14,6 +14,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.0
+2020-01-21
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
