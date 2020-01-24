@@ -1,9 +1,8 @@
 ---
-title: "Deploying to Swarm"
+title: "Deploy to Swarm"
 keywords: swarm, swarm services, stacks
 description: Learn how to describe and deploy a simple application on Docker Swarm.
 ---
-{% include_relative nav.html selected="4" %}
 
 ## Prerequisites
 
