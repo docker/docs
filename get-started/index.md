@@ -285,6 +285,13 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 <hr>
 </div>
 
+#### Linux
+Docker Desktop is not available for Linux , below is the other way that you have to follow to do the activities that yo do in Docker desktop.
+...............................
+...............................
+..plese update this............
+..............................
+
 ## Enable Docker Swarm
 
 Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
