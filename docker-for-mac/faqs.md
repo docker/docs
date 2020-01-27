@@ -78,24 +78,7 @@ For more information and examples, see
 
 ### Can I use an SSH agent inside a container?
 
-Yes, you can use the host’s SSH agent inside a container. To do this:
-
-1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
-
-    `-v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock`
-
-1. Add the `SSH_AUTH_SOCK` environment variable in your container:
-
-    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
-
-To enable the SSH agent in Docker Compose, add the following flags to your service:
-
- ```
-    volumes:
-      - /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock
-    environment:
-      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
- ```
+Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](/docker-for-mac/networking/#ssh-agent-forwarding).
 
 ### How do I add custom CA certificates?
 
