@@ -17,32 +17,30 @@ title: Get Docker Engine - Enterprise for CentOS
 
 >{% include enterprise_label_shortform.md %}
 
-There are two ways to install and upgrade [Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
-on {{ linux-dist-long }}:
-
-- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker Engine - Enterprise from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
-
-- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker Engine - Enterprise on air-gapped systems with no access to the internet.
-
-<!---
-Shared between centOS.md, rhel.md, oracle.md
---->
-
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
+> **Important** 
+> 
+> Docker Engine - Community users should go to
+[Get Docker Engine - Community for Centos](/install/linux/docker-ce/centos.md)
+**instead of this topic**. 
+{: .important}
 
 ## Prerequisites
 
-This section lists what you need to consider before installing Docker Engine -
-Enterprise. Items that require action are explained below.
+Confirm that all prerequisites are met before installing Docker Engine - Enterprise on CentOS. These prerequisites include:
 
-- Use {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`.
-- Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in
-  production).
-- Find the URL for your Docker Engine - Enterprise repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
-- Uninstall old versions of Docker.
-- Remove old Docker repos from `/etc/yum.repos.d/`.
+- Confirming architecture and storage drivers
+    * {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`
+    * Storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in
+  production)
+- Locating the URL for the Docker Engine - Enterprise repo
+- Uninstalling all old Docker versions
+- Removing old Docker repos from `/etc/yum.repos.d/`
 
-### Architectures and storage drivers
+> **Note**
+>
+> Learn more about Docker Engine - Enterprise at [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+
+### Confirming Architectures and Storage Drivers
 
 Docker Engine - Enterprise supports {{ linux-dist-long }} 64-bit, latest
 version, running on  `x86_64`.
@@ -64,28 +62,24 @@ apply:
   solid-state media (SSD) is recommended. Do not start Docker until properly
   configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
-### Find your Docker Engine - Enterprise repo URL
+### Locating the URL for the Docker Engine - Enterprise Repo
 
-To install Docker Enterprise, you will need the URL of the Docker Enterprise repository associated with your trial or subscription:
+The product URL associated with your trial or subscription is required to install Docker Engine - Enterprise, which can be attained using the following procedure (note that these instructions apply to Docker on CentOS and for Docker on Linux, which includes access to Docker Engine - Enterprise for all Linux distributions):
 
-1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
-2.  Click the **Setup** button for **Docker Enterprise Edition for {{ linux-dist-long }}**.
-3.  Copy the URL from **Copy and paste this URL to download your Edition** and save it for later use.
+1. Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content).
+2. Each subscription or trial you have access to is listed. Click the **Setup**
+  button for **Docker Enterprise Edition for CentOS**.
+3. Copy the URL from  **Copy and paste this URL to download your Edition** and save it for later use.
 
-You will use this URL in a later step to create a variable called, `DOCKERURL`.
+Note that the URL will be put to use in a later step to create a variable called `DOCKERURL`.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Uninstall old Docker versions
+### Uninstalling All Old Docker Versions
 
-The Docker Engine - Enterprise package is called `docker-ee`. Older versions
-were called `docker` or `docker-engine`. Uninstall all older versions and
-associated dependencies. The contents of `/var/lib/docker/` are preserved,
-including images, containers, volumes, and networks. If you are upgrading from
-Docker Engine - Community to Docker Engine - Enterprise, remove the Docker
-Engine - Community package as well.
+Use the `yum remove` command to uninstall older versions and associated dependencies of Docker Engine - Enterprise (called `docker` or `docker-engine`. Note that the contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. In addition, if you are upgrading from Docker Engine - Community to Docker Engine - Enterprise, remove the Docker Engine - Community package.
 
 ```bash
 $ sudo yum remove docker \
@@ -100,7 +94,11 @@ $ sudo yum remove docker \
                   docker-engine
 ```
 
-## Repo install and upgrade
+## Install Docker Engine - Enterprise
+
+Docker Engine - Enterprise can be installed either via YUM repositories, or by downloading and installing the RPM package and thereafter manually managing all upgrades. The Docker repository method is recommended, for the ease it lends in terms of both installation and upgrade tasks. The more manual RPM package approach, however, is useful in certain situations, such as installing Docker on air-gapped system that have no access to the Internet.
+
+### Installing from a YUM Repository
 
 The advantage of using a repository from which to install Docker Engine - Enterprise (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
 
@@ -108,34 +106,35 @@ The advantage of using a repository from which to install Docker Engine - Enterp
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Set up the repository
+#### Set up the Repository
 
-You only need to set up the repository once, after which you can install Docker Engine - Enterprise _from_ the repo and repeatedly upgrade as necessary.
+Naturally, to install Docker Engine - Enterprise on a new host machine using the Docker repository you must first set the repository up on the machine. It is only necessary to set up the repository once, after which Docker Engine - Enterprise can be installed _from_ the repo and repeatedly upgraded as necessary.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-
-1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
+1.  Remove existing Docker repositories from `/etc/yum.repos.d/`.
 
     ```bash
     $ sudo rm /etc/yum.repos.d/docker*.repo
     ```
 
-2.  Temporarily store the URL (that you [copied above](#find-your-docker-ee-repo-url)) in an environment variable. Replace `<DOCKER-EE-URL>` with your URL in the following command. This variable assignment does not persist when the session ends:
+2. Temporarily add a `$DOCKER_EE_URL` variable into your environment (it persists only up until you log out of the session). Replace `<DOCKER-EE-URL>` with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
     $ export DOCKERURL="<DOCKER-EE-URL>"
     ```
 
-3.  Store the value of the variable, `DOCKERURL` (from the previous step), in a `yum` variable in `/etc/yum/vars/`:
+3.  Store the value of the variable, `DOCKERURL` (from the previous step), in a `yum` variable in `/etc/yum/vars/`.
 
     ```bash
     $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
     ```
 
-4.  Install required packages: `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver:
+4.  Install required packages.
+
+    `yum-utils` provides the _yum-config-manager_ utility, and `device-mapper-persistent-data` and `lvm2` are required by the _devicemapper_ storage driver.
 
     ```bash
     $ sudo yum install -y yum-utils \
@@ -143,11 +142,7 @@ Shared between centOS.md, rhel.md, oracle.md
       lvm2
     ```
 
-<!---
-Shared between centOS.md, oracle.md
---->
-
-5.  Add the Docker Engine - Enterprise **stable** repository:
+5.  Add the Docker Engine - Enterprise **stable** repository.
 
     ```bash
     $ sudo -E yum-config-manager \
@@ -159,74 +154,76 @@ Shared between centOS.md, oracle.md
 Shared between centOS.md, oracle.md
 --->
 
-### Install from the repository
+#### Install from the Repository
 
-
-> **Note**: If you need to run Docker Engine - Enterprise 2.0, please see the following instructions:
+> **Note**
+>
+> To run Docker Engine - Enterprise 2.0, refer to:
 > * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker Engine - Enterprise Engine only release
-> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine,
-> UCP, and DTR).
+> * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine, UCP, and DTR).
 
-1.  Install the latest patch release, or go to the next step to install a specific version:
+1. Install either the latest patch release or a _specific version_ of Docker Engine - Enterprise.
 
-    ```bash
-    $ sudo yum -y install docker-ee docker-ee-cli containerd.io
-    ```
+    * To install the latest patch release:
 
-    If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
+        ```bash
+        $ sudo yum -y install docker-ee docker-ee-cli containerd.io
+        ```
 
+        If prompted to accept the GPG key, verify that the fingerprint matches `{{ gpg-fingerprint }}`, and if so, accept it.
 
-2.  To install a _specific version_ of Docker Engine - Enterprise (recommended in production), list versions and install:
+    **— or —**
 
-    a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
+    * To install a _specific version_ of Docker Engine - Enterprise (recommended in production), list versions and install:
 
-    ```bash
-    $ sudo yum list docker-ee  --showduplicates | sort -r
+        a. List and sort the versions available in your repo. This example sorts   results by version number, highest to lowest, and is truncated:
 
-    docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
-    ```
+            ```bash
+            $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
+            docker-ee.x86_64      {{ site.docker_ee_version }}.ee.2-1.el7.{{ linux-dist }}      docker-ee-stable-18.09
+            ```
 
-    b.  Install a specific version by its fully qualified package name, which is the package name (`docker-ee`) plus the version string (2nd column) starting at the first colon (`:`), up to the first hyphen, separated by a hyphen (`-`). For example, `docker-ee-18.09.1`.
+        The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
 
-    ```bash
-    $ sudo yum -y install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
-    ```
+        b.  Install a specific version by its fully qualified package name, which is the package name (`docker-ee`) plus the version string (2nd column) starting at the first colon (`:`), up to the first hyphen, separated by a hyphen (`-`). For example, `docker-ee-18.09.1`.
 
-    For example, if you want to install the 18.09 version run the following:
+        ```bash
+        $ sudo yum -y install docker-ee-<VERSION_STRING> docker-ee-cli-<VERSION_STRING> containerd.io
+        ```
 
-    ```bash
-    sudo yum-config-manager --enable docker-ee-stable-18.09
-    ```
+        For example, run the following to install the 18.09 version:
+
+        ```bash
+        sudo yum-config-manager --enable docker-ee-stable-18.09
+        ```
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-3.  Start Docker:
+2.  Start Docker.
 
+    > **Note**
+    >
     > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
-    image. This command downloads a test image, runs it in a container, prints
-    an informational message, and exits:
+3.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world` image.
 
     ```bash
     $ sudo docker run hello-world
     ```
+    This command downloads a test image, runs it in a container, prints an informational message, and exits.
 
-    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
-    non-privileged users to run Docker commands.
+Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow non-privileged users to run Docker commands and for other optional configuration steps.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Upgrade from the repository
+#### Upgrade from the Repository
 
 1.  [Add the new repository](#set-up-the-repository).
 
@@ -236,59 +233,59 @@ Shared between centOS.md, rhel.md, oracle.md
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-## Package install and upgrade
+### Installing and Upgrading from an RPM Package
 
-To manually install Docker Enterprise, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker Enterprise.
+To manually install Docker Enterprise, download the `.{{ package-format | downcase }}` file for your release. Note that it will be necessry to download a new file each time you want to upgrade Docker Enterprise.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Install with a package
+#### Install with a Package
 
-1.  Go to the Docker Engine - Enterprise repository URL associated with your trial or subscription
-    in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
-    and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
+1.  Download the file for Docker Enterprise - Engine. 
+
+    a. Use a browser to go to the Docker Engine - Enterprise repository URL associated with your trial or subscription.
+    
+    b. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages` and download the `.{{ package-format | downcase }}` file for the desired version.
 
 <!---
 Not shared
 --->
 
-2.  Install Docker Enterprise, changing the path below to the path where you downloaded
-    the Docker package.
+2.  Install Docker Enterprise.
 
     ```bash
-    $ sudo yum install /path/to/package.rpm
+    $ sudo yum install </path/to/package>/<file>.rpm
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  Start Docker:
+3.  Start Docker.
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > **Note**
+    >
+    >If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
-    image. This command downloads a test image, runs it in a container, prints
-    an informational message, and exits:
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world` image.
 
     ```bash
     $ sudo docker run hello-world
     ```
+    This command downloads a test image, runs it in a container, prints an informational message, and exits.
 
-    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
-    non-privileged users to run Docker commands.
+Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow non-privileged users to run Docker commands and for other optional configuration steps.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Upgrade with a package
+#### Upgrade with a Package
 
 1.  Download the newer package file.
 
@@ -299,21 +296,21 @@ Shared between centOS.md, rhel.md, oracle.md
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-## Uninstall Docker Engine - Enterprise
+### Uninstall Docker Engine - Enterprise
 
-1.  Uninstall the Docker Engine - Enterprise package:
+1.  Uninstall the Docker Engine - Enterprise package.
 
     ```bash
     $ sudo yum -y remove docker-ee
     ```
 
-2.  Delete all images, containers, and volumes (because these are not automatically removed from your host):
+2.  Delete all images, containers, and volumes (as these are not automatically removed from your host).
 
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
 
-3.  Delete other Docker related resources:
+3.  Delete other Docker related resources.
     ```bash
     $ sudo rm -rf /run/docker
     $ sudo rm -rf /var/run/docker
@@ -323,7 +320,9 @@ Shared between centOS.md, rhel.md, oracle.md
 4.  If desired, remove the `devicemapper` thin pool and reformat the block
     devices that were part of it.
 
-You must delete any edited configuration files manually.
+> **Note**
+>
+> Any edited configuration files must be manually deleted.
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
