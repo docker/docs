@@ -28,7 +28,7 @@ title: Get Docker Engine - Enterprise for CentOS
 
 Confirm that all prerequisites are met before installing Docker Engine - Enterprise on CentOS. These prerequisites include:
 
-- Confirming architecture and storage drivers
+- Confirming architecture and storage drivers:
     * {{ linux-dist-cap }} 64-bit 7.1 and higher on `x86_64`
     * Storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in
   production)
@@ -243,15 +243,15 @@ Shared between centOS.md, rhel.md, oracle.md
 
 #### Install with a Package
 
-1.  Download the file for Docker Enterprise - Engine. 
+1.  Download the file for Docker Enterprise - Engine.
 
     a. Use a browser to go to the Docker Engine - Enterprise repository URL associated with your trial or subscription.
-    
+
     b. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages` and download the `.{{ package-format | downcase }}` file for the desired version.
 
-<!---
-Not shared
---->
+    <!---
+    Not shared
+    --->
 
 2.  Install Docker Enterprise.
 
@@ -296,7 +296,7 @@ Shared between centOS.md, rhel.md, oracle.md
 Shared between centOS.md, rhel.md, oracle.md
 --->
 
-### Uninstall Docker Engine - Enterprise
+## Uninstall Docker Engine - Enterprise
 
 1.  Uninstall the Docker Engine - Enterprise package.
 
