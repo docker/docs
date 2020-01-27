@@ -7,9 +7,7 @@ keywords: cluster, psp, security
 
 >{% include enterprise_label_shortform.md %}
 
-Admission controllers are plugins that govern and enforce how the cluster is used. There are two types of admission controllers used, Default and Custom.
-
-This topic describes the current list of admission controllers used by Docker. 
+Admission controllers are plugins that govern and enforce how the cluster is used. There are two types of admission controllers used, **Default** and **Custom**.
 
 ### Default
 - [NamespaceLifecycle](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#namespacelifecycle)
@@ -25,7 +23,6 @@ This topic describes the current list of admission controllers used by Docker.
 
 ### Custom
 - **UCPAuthorization:**
-This custom admission controller does several things:
     - Annotates Docker Compose-on-Kubernetes `Stack` resources with the identity
 of the user performing the request so that the Docker Compose-on-Kubernetes
 resource controller can manage `Stacks` with correct user authorization.
@@ -56,7 +53,7 @@ settings.
 
 > **Note** 
 > 
-> You cannot enable or disable your own admission controllers. For more information, see [Supportability of custom Kubernetes flags in universal control plane](https://success.docker.com/article/supportability-of-custom-kubernetes-flags-in-universal-control-plane).
+> Custom admission controllers cannot be enabled or disabled by the user. For more information, see [Supportability of custom Kubernetes flags in universal control plane](https://success.docker.com/article/supportability-of-custom-kubernetes-flags-in-universal-control-plane).
 
 ## Where to go next
 
