@@ -28,7 +28,7 @@ to upgrade your installation to the latest release.
 (2020-__-__)
 
 ### Bug fixes
-* Fixed the bug caused that the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10807)
+* Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10807)
 * Fixed the bug that resulted in added licenses not presenting in the UI prior to a page refresh. (docker/dhe-deploy #10815)
 * Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10835)
 * Addition of more descriptive error messaging for a situation in which an advanced license for tag pruning and poll mirroring is missing. (docker/dhe-deploy #10827)
@@ -185,7 +185,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 (2020-__-__)
 
 ### Bug fixes
-* Fixed the bug caused that the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
+* Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
 * Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10836)
 
 ### Security
