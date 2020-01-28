@@ -25,7 +25,7 @@ to upgrade your installation to the latest release.
 # Version 2.7
 
 ## 2.7.5
-(2020-01-27)
+(2020-01-28)
 
 ### Bug fixes
 * Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10807)
@@ -184,7 +184,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 # Version 2.6
 
 ## 2.6.12
-(2020-01-27)
+(2020-01-28)
 
 ### Bug fixes
 * Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
@@ -536,7 +536,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
 
 ## 2.5.16
-(2020-01-27)
+(2020-01-28)
 
 ### Bug fixes
 * When a repository is deleted the corresponding webhook metadata is also deleted.  (docker/dhe-deploy #10830)
