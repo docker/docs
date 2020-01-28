@@ -299,4 +299,3 @@ Interlock proxy mapped to port 80 on `ucp-node-1`. At this point, you have
 successfully set up and demonstrated that Interlock can manage multiple 
 proxies routing only to services attached to a select subset of Docker 
 networks.
-

@@ -1688,7 +1688,7 @@ manuals:
           title: Set the user's session timeout
         - path: /ee/ucp/admin/configure/ucp-configuration-file/
           title: UCP configuration file
-	      - path: /ee/ucp/admin/configure/kms-plugin/
+        - path: /ee/ucp/admin/configure/kms-plugin/
           title: KMS plugin support for UCP
         - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
