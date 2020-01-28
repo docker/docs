@@ -78,7 +78,7 @@ For more information and examples, see
 
 ### Can I use an SSH agent inside a container?
 
-Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](/docker-for-mac/networking/#ssh-agent-forwarding).
+Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](/docker-for-mac/osxfs/#ssh-agent-forwarding).
 
 ### How do I add custom CA certificates?
 
