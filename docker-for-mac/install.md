@@ -1,6 +1,6 @@
 ---
 description: How to install Docker Desktop on Mac
-keywords: mac, install, download, run, docker, local, machine
+keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 ---
 
@@ -47,8 +47,8 @@ Your Mac must meet the following requirements to successfully install Docker Des
 ## What's included in the installer
 
 The Docker Desktop installation includes
-  [Docker Engine](/engine/userguide/), Docker CLI client,
-  [Docker Compose](/compose/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
+  [Docker Engine](/install/), Docker CLI client,
+  [Docker Compose](/compose/), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 ## Install and run Docker Desktop on Mac
 
