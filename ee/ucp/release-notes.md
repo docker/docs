@@ -38,7 +38,7 @@ upgrade your installation to the latest release.
     firewall-cmd --reload
     ```
 ### Kubernetes
-* Enabled support for a user-managed Kubernetes KMS plugin. See [KMS plugin support for UCP](/ee/ucp/admin/configure/kms-support.md) for more information.
+* Enabled support for a user-managed Kubernetes KMS plugin. See [KMS plugin support for UCP](/ee/ucp/admin/configure/kms-plugin.md) for more information.
 
 ### Components
 
