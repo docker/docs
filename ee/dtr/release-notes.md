@@ -35,7 +35,7 @@ to upgrade your installation to the latest release.
 
 ### Security
 
-* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10845)
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. If DTR is configured for offline updates, download the database for version 2.7.5 or higher. (docker/dhe-deploy #10845)
 
 ## 2.7.4
 (2019-11-13)
@@ -186,7 +186,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 ### Bug fixes
 * Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
-* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10836)
+* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). Download CVE Vulernatability Database for DTR version 2.6fuji.12 or higher. (docker/dhe-deploy #10836)
 
 ### Security
 
@@ -539,7 +539,7 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 ### Security
 
-* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10849)
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. Download CVE Vulernatability Database for DTR version 2.5.16 or higher. (docker/dhe-deploy #10849)
 
 ## 2.5.15
 (2019-11-13)
