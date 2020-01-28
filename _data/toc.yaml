@@ -1709,7 +1709,7 @@ manuals:
           - path: /ee/ucp/admin/configure/join-nodes/use-a-load-balancer/
             title: Use a load balancer
         - path: /ee/ucp/admin/configure/deploy-route-reflectors/
-          title: Improve network performance with Route Reflectors
+          title: Improve network performance with route reflectors
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /ee/ucp/admin/monitor-and-troubleshoot/
