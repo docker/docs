@@ -1,6 +1,6 @@
 ---
 description: How to install Docker Desktop for Windows
-keywords: windows, install, download, run, docker, local, machine,
+keywords: windows, install, download, run, docker, local
 title: Install Docker Desktop on Windows
 ---
 
@@ -39,7 +39,7 @@ used side-by-side with Docker Desktop. However, you can still use
 
 ### What's included in the installer
 
-The Docker Desktop installation includes [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and [Kitematic](/kitematic/userguide.md).
+The Docker Desktop installation includes [Docker Engine](/install/), Docker CLI client, [Docker Compose](/compose/overview.md), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
