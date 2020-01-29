@@ -71,7 +71,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
         image: postgres
       web:
         build: .
-        command: python manage.py runserver 0.0.0.0:8000
+        command: python composeexample/manage.py runserver 0.0.0.0:8000
         volumes:
           - .:/code
         ports:
