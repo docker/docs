@@ -2,6 +2,8 @@
 title: "Sharing images on Docker Hub"
 keywords: docker hub, push, images
 description: Learn how to share images on Docker Hub.
+redirect_from:
+- /get-started/part5/
 ---
 
 {% include_relative nav.html selected="3" %}

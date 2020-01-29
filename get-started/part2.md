@@ -1,5 +1,5 @@
 ---
-title: "Containerizing an application"
+title: "Build an image and run it as a container"
 keywords: containers, images, dockerfiles, node, code, coding, build, push, run
 description: Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.
 ---
@@ -8,7 +8,7 @@ description: Learn how to create a Docker image by writing a Dockerfile, and use
 
 ## Prerequisites
 
-- Work through setup and orientation in [Part 1](index.md).
+Work through the orientation and setup in [Part 1](index.md).
 
 ## Introduction
 

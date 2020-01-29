@@ -61,12 +61,14 @@ Welcome! We are excited that you want to learn Docker. The _Docker Community Qui
 teaches you how to:
 
 1. Set up your Docker environment (on this page)
+
 2. [Build an image and run it as one container](part2.md)
+
 3. [Share your containerized applications on Docker Hub](part3.md)
 
 ## Docker concepts
 
-Docker is a platform for developers and sysadmins to **build, share, and run**
+Docker is a platform for developers and sysadmins to **build, run, and share**
 applications with containers. The use of containers to deploy applications
 is called _containerization_. Containers are not new, but their use for easily
 deploying applications is.
@@ -105,35 +107,56 @@ VMs incur a lot of overhead beyond what is being consumed by your application lo
 
 ![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
 
-### Orchestration
+## Set up your Docker environment
 
-The portability and reproducibility of a containerized process mean we have 
-an opportunity to move and scale our containerized applications across 
-clouds and datacenters; containers effectively guarantee that those 
-applications will run the same way anywhere, allowing us to quickly and 
-easily take advantage of all these environments. 
-Furthermore, as we scale our applications up, we'll 
-want some tooling to help automate the maintenance of those applications, 
-able to replace failed containers automatically and manage the rollout of updates 
-and reconfigurations of those containers during their lifecycle. 
+### Download and install Docker Desktop
 
-Tools to manage, scale, and maintain containerized applications are called 
-_orchestrators_, and the most common examples of these are _Kubernetes_ and 
-_Docker Swarm_. Development environment deployments of both of these 
-orchestrators are provided by Docker Desktop, which we'll use throughout 
-this guide to create our first orchestrated, containerized application.
+Docker Desktop is the best way to build and share containerized applications. Follow the instructions appropriate for your operating system to download and install Docker Desktop:
 
-## Install Docker Desktop
+ - [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}
+ - [Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
 
-The best way to get started developing containerized applications is with Docker Desktop, for OSX or Windows. Docker Desktop will allow you to easily set up Kubernetes or Swarm on your local development machine, so you can use all the features of the orchestrator you're developing applications for right away, no cluster required. Follow the installation instructions appropriate for your operating system:
+### Test Docker version
 
- - [OSX](/docker-for-mac/install/){: target="_blank" class="_"}
- - [Windows](/docker-for-windows/install/){: target="_blank" class="_"}
+After you've successfully installed Docker Desktop, open a terminal and run `docker --version` to check the version of Docker installed on your machine.
 
+```shell
+$ docker --version
+Docker version 19.03.5, build 633a0ea
+```
+
+### Test Docker installation
+
+1. Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+
+ ```shell
+    $ docker run hello-world
+
+    Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
+
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
+    ...
+```
+
+2. Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
+
+3. List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
+
+```shell
+    $ docker container ls --all
+
+    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+```
 
 ## Conclusion
 
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. In the next section, we'll start developing our first containerized application.
+At this point, you've installed Docker Desktop on your development machine, and ran a quick test to ensure you are set up to build and run your first containerized application.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
