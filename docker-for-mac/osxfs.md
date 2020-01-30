@@ -153,6 +153,32 @@ Extended attributes are not yet supported.
 `osxfs` does not use OSXFUSE. `osxfs` does not run under, inside, or
 between macOS userspace processes and the macOS kernel.
 
+### SSH agent forwarding
+
+Docker Desktop for Mac allows you to use the host’s SSH agent inside a container. To do this:
+
+1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
+
+    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+
+1. Add the `SSH_AUTH_SOCK` environment variable in your container:
+
+    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+
+To enable the SSH agent in Docker Compose, add the following flags to your service:
+
+ ```yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        source: /run/host-services/ssh-auth.sock
+        target: /run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+ ```
+
 ### Performance issues, solutions, and roadmap
 
 > See **[Performance tuning for volume mounts (shared filesystems)](osxfs-caching.md)**
