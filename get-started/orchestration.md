@@ -42,9 +42,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 #### OSX
 
-1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate **Preferences... -> Kubernetes**.
+1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate **Preferences** > **Kubernetes**.
 
-2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes is Running'.
+2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes'.
 
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
@@ -112,9 +112,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 #### Windows
 
-1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings -> Kubernetes**.
+1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings** > **Kubernetes**.
 
-2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
+2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes'.
 
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
@@ -328,9 +328,11 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ## Conclusion
 
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. In the next section, we'll start developing our first containerized application.
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes.
 
-[On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+[On to deploying to Kubernetes >>](kube-deploy.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+
+To learn how to write the stack file to help you run and manage containers on Swarm, see [Deploying to Swarm](swarm-deploy.md)
 
 ## CLI References
 

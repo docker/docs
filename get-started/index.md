@@ -62,7 +62,7 @@ teaches you how to:
 
 1. Set up your Docker environment (on this page)
 
-2. [Build an image and run it as one container](part2.md)
+2. [Build an image and run it as a container](part2.md)
 
 3. [Share your containerized applications on Docker Hub](part3.md)
 
@@ -162,11 +162,9 @@ At this point, you've installed Docker Desktop on your development machine, and 
 
 ## CLI References
 
-Further documentation for all CLI commands used in this article are available here:
+Further documentation for all CLI commands used in this article is available here:
 
-- [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
-- [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
-- [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
-- [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
-- [`docker swarm init`](https://docs.docker.com/engine/reference/commandline/swarm_init/)
-- [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
+- [`docker version`](https://docs.docker.com/engine/reference/commandline/version/)
+- [`docker run`](https://docs.docker.com/engine/reference/commandline/run/)
+- [`docker image`](https://docs.docker.com/engine/reference/commandline/image/)
+- [`docker container`](https://docs.docker.com/engine/reference/commandline/container/)
