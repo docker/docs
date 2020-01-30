@@ -8,7 +8,7 @@ Docker Desktop for Windows is the [Community](https://www.docker.com/community-e
 You can download Docker Desktop for Windows from Docker Hub.
 
 [Download from Docker
-Hub](https://hub.docker.com/?overlay=onboarding){:
+Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows){:
 .button .outline-btn}
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
@@ -70,7 +70,7 @@ Looking for information on using Windows containers?
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
     If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
-    [**Docker Hub**](https://hub.docker.com/?overlay=onboarding).
+    [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows).
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
