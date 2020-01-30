@@ -6,23 +6,22 @@ keywords: registry, repository, images
 
 >{% include enterprise_label_shortform.md %}
 
-Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
-from Docker. You install it behind your firewall so that you can securely store
-and manage the Docker images you use in your applications.
+Docker Trusted Registry (DTR) is Mirantis's enterprise-grade image storage solution. Installed behind the firewall, either on-premises or on a virtual private cloud, DTR provides a secure environment from which users can store and manage Docker images.
 
-## Image and job management
+Specifically, DTR offers a wide range of benefits, including:
 
-DTR can be installed on-premises, or on a virtual private
-cloud. And with it, you can store your Docker images securely, behind your
-firewall.
+* [Image and Job Management](image-and-job-management)
+* [Availability](availability)
+* [Efficiency](efficiency)
+* [Built-in Access Control](built-in-access-control)
+* [Security Scanning](security-scanning)
+* [Image Signing](image-signing)
 
-You can use DTR as part of your continuous integration, and continuous
-delivery processes to build, ship, and run your applications.
+## Image and Job Management
 
-DTR has a web user interface that allows authorized users in your
-organization to browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). It even allows you to see what Dockerfile
-lines were used to produce the image and, if security scanning is enabled, to
-see a list of all of the software installed in your images. Additionally, you can now [review and audit jobs on the web interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+DTR offers a web user interface that allows authorized users to browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). With this UI you can see which Dockerfile lines were used to produce an image, and if security scanning is enabled you can also view a list of all of the software installed in that image. In addition, the web UI can be used to [review and audit jobs](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+
+DTR can serve as a Continuous Integration and Continuous Delivery component, in the building, shipping, and running of applications.
 
 ## Availability
 
