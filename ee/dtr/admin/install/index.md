@@ -127,9 +127,10 @@ To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) c
       --ucp-insecure-tls
     ```
 
-    > Important
+    > **Important**
     >
     > The `<ucp-node-name>` following the `--ucp-node` flag is the target node on which to install the DTR replica. It is NOT the UCP Manager URL.
+    {:.important}
 
     When joining a replica to a DTR cluster, it is necessary to specify the
     ID of a replica that is already part of the cluster. Locate an
