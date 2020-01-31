@@ -18,8 +18,7 @@ Specifically, DTR offers a wide range of benefits, including:
 * [Image Signing](image-signing)
 
 ## Image and Job Management
-
-DTR offers a web user interface that allows authorized users to browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). With this UI you can see which Dockerfile lines were used to produce an image, and if security scanning is enabled you can also view a list of all of the software installed in that image. In addition, the web UI can be used to [review and audit jobs](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+ With this UI you can see which Dockerfile lines were used to produce an image, and if security scanning is enabled you can also view a list of all of the software installed in that image. In addition, the web UI can be used to [review and audit jobs](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
 
 DTR can serve as a Continuous Integration and Continuous Delivery component, in the building, shipping, and running of applications.
 
