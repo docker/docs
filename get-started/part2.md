@@ -66,9 +66,9 @@ Writing a Dockerfile is the first step to containerizing an application. You can
 - `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
 - `COPY` in the rest of your app's source code from your host to your image filesystem.
 
-You can see that these are much the same steps you might have taken to set up and install your app on your host - but capturing these as a Dockerfile allows us to do the same thing inside a portable, isolated Docker image.
+You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows us to do the same thing inside a portable, isolated Docker image.
 
-The steps above built up the filesystem of our image, but there's one more line in our Dockerfile. The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based off of this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
+The steps above built up the filesystem of our image, but there's one more line in our Dockerfile. The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
 
 What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few we see above; for a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 
@@ -76,9 +76,9 @@ What you see above is a good way to organize a simple Dockerfile; always start w
 
 Now that we have some source code and a Dockerfile, it's time to build our first image, and make sure the containers launched from it work as expected.
 
-> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking 'Switch to Linux containers...' if the option appears. Don't worry - everything you'll learn in this tutorial works the exact same way for Windows containers.
+> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - everything you'll learn in this tutorial works the exact same way for Windows containers.
 
-Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or powershell, and build your bulletin board image:
+Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell. Let's build your bulletin board image:
 
 ```script
 docker image build -t bulletinboard:1.0 .
@@ -86,7 +86,7 @@ docker image build -t bulletinboard:1.0 .
 
 You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
 
-> **Windows Users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write and execute permissions being set for files added to your image; we aren't handling any sensitive information in this example, so feel free to disregard this warning in this example.
+> **Windows Users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
 
 ## Run your image as a container
 
@@ -106,7 +106,7 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 
 2. Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, we would normally do everything we could to ensure our container works the way we expected; now would be the time to run unit tests, for example.
 
-3. Once you're satisfied that your bulletin board container works correctly, delete it:
+3. Once you're satisfied that your bulletin board container works correctly, you can delete it:
 
     ```script
     docker container rm --force bb
@@ -114,14 +114,14 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 
 ## Conclusion
 
-At this point, we've performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination cluster.
+At this point, we've successfully built an image, performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination cluster.
 
 [On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
-## CLI References
+## CLI references
 
 Further documentation for all CLI commands used in this article are available here:
 
- - [docker image](https://docs.docker.com/engine/reference/commandline/image/)
- - [docker container](https://docs.docker.com/engine/reference/commandline/container/)
- - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
+- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
+- [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)

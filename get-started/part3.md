@@ -32,13 +32,13 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
 
-1. Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
+1. Click on the Docker icon in your menu bar, and navigate to **Repositories > Create Repository**. You'll be taken to a Docker Hub page to create a new repository.
 
-2. Fill out the Repository Name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
+2. Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
 
     ![make a repo](images/newrepo.png){:width="100%"}
 
-3. Now we're ready to share our image on Docker Hub, but there's one thing we must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, images must be named like `<Docker Hub ID>/<Repository Name>:<tag>`. We can relabel our `bulletinboard:1.0` image like this (of course please replace `gordon` with your Docker ID):
+3. Now we're ready to share our image on Docker Hub, but there's one thing we must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, images must be named like `<Docker ID>/<Repository Name>:<tag>`. We can relabel our `bulletinboard:1.0` image like this (of course, please replace `gordon` with your Docker ID):
 
     ```shell
     docker image tag bulletinboard:1.0 gordon/bulletinboard:1.0
@@ -52,10 +52,10 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 
     Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 
-    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, per the above steps. If the push seemed to work but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
+    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
 
 ## Conclusion
 
-Now that your image is available on Docker Hub, you'll be able to run it anywhere; if you try to use it on a new cluster that doesn't have it yet, Docker will automatically try and download it from Docker Hub. By moving images around in this way, we no longer need to install any dependencies except Docker and our orchestrator on the machines we want to run our software on; the dependencies of our containerized applications are completely encapsulated and isolated within our images, which we can share using Docker Hub as described above.
+Now that your image is available on Docker Hub, you'll be able to run it anywhere; if you try to use it on a new cluster that doesn't have it yet, Docker will automatically try and download it from Docker Hub. By moving images around in this way, you no longer need to install any dependencies except Docker on the machines you want to run our software on. The dependencies of containerized applications are completely encapsulated and isolated within your images, which we can share using Docker Hub as described above.
 
-Another thing to keep in mind: at the moment, we've only pushed your image to Docker Hub; what about your Dockerfile? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application, and add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
+Another thing to keep in mind: at the moment, we've only pushed your image to Docker Hub; what about your Dockerfile? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application. You can add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.

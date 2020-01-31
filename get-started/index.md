@@ -57,8 +57,7 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited that you want to learn Docker. The _Docker Community QuickStart_
-teaches you how to:
+Welcome! We are excited that you want to learn Docker. The Docker Quickstart training module teaches you how to:
 
 1. Set up your Docker environment (on this page)
 
@@ -75,24 +74,21 @@ deploying applications is.
 
 Containerization is increasingly popular because containers are:
 
-- Flexible: Even the most complex applications can be containerized.
-- Lightweight: Containers leverage and share the host kernel,
+- **Flexible**: Even the most complex applications can be containerized.
+- **Lightweight**: Containers leverage and share the host kernel,
   making them much more efficient in terms of system resources than virtual machines.
-- Portable: You can build locally, deploy to the cloud, and run anywhere.
-- Loosely coupled: Containers are highly self sufficient and encapsulated,
+- **Portable**: You can build locally, deploy to the cloud, and run anywhere.
+- **Loosely coupled**: Containers are highly self sufficient and encapsulated,
   allowing you to replace or upgrade one without disrupting others.
-- Scalable: You can increase and automatically distribute container replicas across a datacenter.
-- Secure: Containers apply aggressive constraints and isolations to processes without
-  any configuration required on the part of the user.
+- **Scalable**: You can increase and automatically distribute container replicas across a datacenter.
+- **Secure**: Containers apply aggressive constraints and isolations to processes without any configuration required on the part of the user.
 
 ### Images and containers
 
 Fundamentally, a container is nothing but a running process,
-with some added encapsulation features applied to it in order to keep it isolated from the host
-and from other containers.
-One of the most important aspects of container isolation is that each container interacts
-with its own, private filesystem; this filesystem is provided by a Docker **image**.
-An image includes everything needed to run an application -- the code or binary,
+with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers.
+One of the most important aspects of container isolation is that each container interacts with its own private filesystem; this filesystem is provided by a Docker **image**.
+An image includes everything needed to run an application - the code or binary,
 runtimes, dependencies, and any other filesystem objects required.
 
 ### Containers and virtual machines
@@ -111,10 +107,12 @@ VMs incur a lot of overhead beyond what is being consumed by your application lo
 
 ### Download and install Docker Desktop
 
-Docker Desktop is the best way to build and share containerized applications. Follow the instructions appropriate for your operating system to download and install Docker Desktop:
+Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to start coding and containerizing in minutes. Docker Desktop includes everything you need to build, run, and share containerized applications right from your machine.
+
+Follow the instructions appropriate for your operating system to download and install Docker Desktop:
 
  - [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}
- - [Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
+ - [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
 
 ### Test Docker version
 
@@ -129,30 +127,30 @@ Docker version 19.03.5, build 633a0ea
 
 1. Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
 
- ```shell
-    $ docker run hello-world
+    ```shell
+        $ docker run hello-world
 
-    Unable to find image 'hello-world:latest' locally
-    latest: Pulling from library/hello-world
-    ca4f61b1923c: Pull complete
-    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-    Status: Downloaded newer image for hello-world:latest
+        Unable to find image 'hello-world:latest' locally
+        latest: Pulling from library/hello-world
+        ca4f61b1923c: Pull complete
+        Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+        Status: Downloaded newer image for hello-world:latest
 
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    ...
-```
+        Hello from Docker!
+        This message shows that your installation appears to be working correctly.
+        ...
+    ```
 
 2. Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
 
 3. List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
 
-```shell
-    $ docker container ls --all
+    ```shell
+        $ docker container ls --all
 
-    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
-```
+        CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+        54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+    ```
 
 ## Conclusion
 
@@ -160,7 +158,7 @@ At this point, you've installed Docker Desktop on your development machine, and 
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
-## CLI References
+## CLI references
 
 Further documentation for all CLI commands used in this article is available here:
 

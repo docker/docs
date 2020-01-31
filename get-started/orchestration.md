@@ -4,22 +4,12 @@ keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
 ---
 
-Welcome! We are excited that you have successfully completed the Quick Start modules and are ready to learn about Orchestration.
+Congratulations on successfully completing the [Quickstart](index.md) modules. Now, let us learn about Orchestration.
 
-The portability and reproducibility of a containerized process mean we have 
-an opportunity to move and scale our containerized applications across 
-clouds and datacenters; containers effectively guarantee that those 
-applications will run the same way anywhere, allowing us to quickly and 
-easily take advantage of all these environments. 
-Furthermore, as we scale our applications up, we'll 
-want some tooling to help automate the maintenance of those applications, 
-able to replace failed containers automatically and manage the rollout of updates 
-and reconfigurations of those containers during their lifecycle. 
+The portability and reproducibility of a containerized process mean we have an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Furthermore, as we scale our applications up, we'll want some tooling to help automate the maintenance of those applications, able to replace failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
 
-Tools to manage, scale, and maintain containerized applications are called 
-_orchestrators_, and the most common examples of these are _Kubernetes_ and 
-_Docker Swarm_. Development environment deployments of both of these 
-orchestrators are provided by Docker Desktop, which we'll use throughout 
+Tools to manage, scale, and maintain containerized applications are called _orchestrators_, and the most common examples of these are _Kubernetes_ and _Docker Swarm_. Development environment deployments of both of these
+orchestrators are provided by Docker Desktop, which we'll use throughout
 this guide to create our first orchestrated, containerized application.
 
 The advanced modules teach you how to:
@@ -27,24 +17,23 @@ The advanced modules teach you how to:
 1. [Set up and use a Kubernetes environment on your development machine](part3.md)
 2. [Set up and use a Swarm environment on your development machine](part4.md)
 
-
 ## Enable Kubernetes
 
 Docker Desktop will set up Kubernetes for you quickly and easily. Follow the setup and validation instructions appropriate for your operating system:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#kubeosx">OSX</a></li>
+  <li class="active"><a data-toggle="tab" href="#kubeosx">Mac</a></li>
   <li><a data-toggle="tab" href="#kubewin">Windows</a></li>
 </ul>
 <div class="tab-content">
   <div id="kubeosx" class="tab-pane fade in active">
 {% capture local-content %}
 
-#### OSX
+### Mac
 
-1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate **Preferences** > **Kubernetes**.
+1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate to **Preferences** > **Kubernetes**.
 
-2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes'.
+2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the Preferences menu.
 
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
@@ -110,11 +99,11 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 <div id="kubewin" class="tab-pane fade" markdown="1">
 {% capture localwin-content %}
 
-#### Windows
+### Windows
 
 1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings** > **Kubernetes**.
 
-2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes'.
+2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
 
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
@@ -132,7 +121,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
-4. In powershell, navigate to where you created `pod.yaml` and create your pod:
+4. In PowerShell, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
@@ -184,14 +173,14 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#swarmosx">OSX</a></li>
+  <li class="active"><a data-toggle="tab" href="#swarmosx">Mac</a></li>
   <li><a data-toggle="tab" href="#swarmwin">Windows</a></li>
 </ul>
 <div class="tab-content">
   <div id="swarmosx" class="tab-pane fade in active">
 {% capture local-content %}
 
-#### OSX
+### Mac
 
 1. Open a terminal, and initialize Docker Swarm mode:
 
@@ -259,7 +248,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 <div id="swarmwin" class="tab-pane fade" markdown="1">
 {% capture localwin-content %}
 
-#### Windows
+### Windows
 
 1. Open a powershell, and initialize Docker Swarm mode:
 
@@ -328,13 +317,13 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ## Conclusion
 
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes.
+At this point, you've confirmed that you can run simple containerized workloads in Kubernetes and Swarm. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes.
 
-[On to deploying to Kubernetes >>](kube-deploy.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+[On to deploying to Kubernetes >>](kube-deploy.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 200%"}
 
-To learn how to write the stack file to help you run and manage containers on Swarm, see [Deploying to Swarm](swarm-deploy.md)
+To learn how to write the stack file to help you run and manage containers on Swarm, see [Deploying to Swarm](swarm-deploy.md).
 
-## CLI References
+## CLI references
 
 Further documentation for all CLI commands used in this article are available here:
 
