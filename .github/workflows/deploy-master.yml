@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-static-page:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build image
+        run: docker build -t documentation:latest .
+      - name: copy static files locally
+        run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site

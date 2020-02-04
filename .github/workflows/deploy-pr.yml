@@ -1,0 +1,22 @@
+name: deploy website to netlify
+
+on: [pull_request]
+
+jobs:
+  build-static-page:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build image
+        run: docker build -t documentation:latest .
+      - name: copy static files locally
+        run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
+      - name: deploy to netlify
+        uses: ./.github/actions/netlify-deploy
+        id: netlify_deploy
+        with:
+          NETLIFY_ACCOUNT_SLUG: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_DIRECTORY: _site
+          NETLIFY_SITE_NAME: "${{ github.sha }}-${{ github.run_id }}"

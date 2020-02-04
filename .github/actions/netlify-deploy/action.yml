@@ -1,0 +1,29 @@
+# action.yml
+name: 'Deploy to netlify'
+description: 'Creates a site and deploy to it'
+inputs:
+  NETLIFY_ACCOUNT_SLUG:
+    description: 'Account slug to link the site to'
+    required: true
+  NETLIFY_AUTH_TOKEN:
+    description: 'Authentication token to netlify'
+    required: true
+  NETLIFY_DIRECTORY:
+    description: 'Directory to deploy to site'
+    required: true
+  NETLIFY_SITE_NAME:
+    description: 'Name to give to the site that will be created'
+    required: true
+outputs:
+  site_id:
+    description: 'id of the site'
+  site_url:
+    description: 'url of the site'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    NETLIFY_ACCOUNT_SLUG: ${{ inputs.NETLIFY_ACCOUNT_SLUG }}
+    NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
+    NETLIFY_DIRECTORY: ${{ inputs.NETLIFY_DIRECTORY }}
+    NETLIFY_SITE_NAME: ${{ inputs.NETLIFY_SITE_NAME }}
