@@ -26,6 +26,31 @@ upgrade your installation to the latest release.
 
 # Version 3.2
 
+## 3.2.5
+2020-01-28
+
+### Known issues
+* UCP currently turns on vulnerability information for images deployed within UCP by default for upgrades. This may cause clusters to fail due to performance issues. (ENGORC-2746)
+* For Red Hat Enterprise Linux (RHEL) 8, if firewalld is running and `FirewallBackend=nftables` is set in `/etc/firewalld/firewalld.conf`, change this to `FirewallBackend=iptables`, or you can explicitly run the following commands to allow traffic to enter the default bridge (docker0) network:
+
+    ```
+    firewall-cmd --permanent --zone=trusted --add-interface=docker0
+    firewall-cmd --reload
+    ```
+    
+### Kubernetes
+* Enabled support for a user-managed Kubernetes KMS plugin. See [KMS plugin support for UCP](/ee/ucp/admin/configure/kms-plugin.md) for more information.
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.5   |
+| Kubernetes            | 1.14.8  |
+| Calico                | 3.8.2   |
+| Interlock             | 3.0.0   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.2.4
 2019-11-14
 

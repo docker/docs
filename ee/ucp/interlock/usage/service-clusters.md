@@ -50,18 +50,22 @@ docker network create --driver overlay westnet
 Next, modify Interlock's configuration to create two service clusters. Start 
 by writing its current configuration out to a file which you can modify:
 
+{% raw %}
 ```bash
 CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ (index .Spec.TaskTemplate.ContainerSpec.Configs 0).ConfigName }}' ucp-interlock)
 docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > old_config.toml
 ```
+{% endraw %}
 
 Make a new config file called `config.toml` with the following content, 
 which declares two service clusters, `east` and `west`. 
 
-> **Note** you will have to change the UCP version 
+> **Note** 
+> 
+> You will have to change the UCP version 
 > (`3.2.3` in the example below) to match yours, 
 > as well as all instances of `*.ucp.InstanceID` 
-> (`vl5umu06ryluu66uzjcv5h1bo` below):
+> (`vl5umu06ryluu66uzjcv5h1bo` below).
 
 ```
 ListenAddr = ":8080"
@@ -209,7 +213,7 @@ PollInterval = "3s"
       HideInfoHeaders = false
 ```
 
-If instead you prefer to modify the config file Interlock creates by default, 
+If instead you prefer to modify the configuration file Interlock creates by default, 
 the crucial parts to adjust for a service cluster are:
 
  - Replace `[Extensions.default]` with `[Extensions.east]`
@@ -299,4 +303,3 @@ Interlock proxy mapped to port 80 on `ucp-node-1`. At this point, you have
 successfully set up and demonstrated that Interlock can manage multiple 
 proxies routing only to services attached to a select subset of Docker 
 networks.
-

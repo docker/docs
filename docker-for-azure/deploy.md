@@ -149,7 +149,7 @@ This tool internally makes use of docker global-mode service that runs a task on
 
 ### Docker Stack deployment
 
-To deploy complex multi-container apps, you can use the docker stack deploy command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the docker-compose.yml file to a manager node via scp for example. You can then SSH into the manager node and run docker stack deploy with the --compose-file or -c option. See docker stack deploy options for the list of different options. If you have multiple manager nodes, make sure you are logged in to the one with the stack file copy.
+To deploy complex multi-container apps, you can use the docker stack deploy command. You can either deploy a compose file on your machine over an SSH tunnel, or copy the docker-compose.yml file to a manager node via scp for example. You can then SSH into the manager node and run docker stack deploy with the --compose-file or -c option. See docker stack deploy options for the list of different options. If you have multiple manager nodes, make sure you are logged in to the one with the stack file copy.
 
 For example:
 

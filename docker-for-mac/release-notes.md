@@ -14,10 +14,13 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.0
+2020-01-21
 
 > [Download](https://hub.docker.com/?overlay=onboarding)
 >
 > You must sign in to Docker Hub to download Docker Desktop.
+
+Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
 ### Upgrades
 
@@ -61,13 +64,10 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 
 - When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.
 
-
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
 
-> [Download](https://hub.docker.com/?overlay=onboarding)
->
-> You must sign in to Docker Hub to download Docker Desktop.
+[Download](https://download.docker.com/mac/stable/40693/Docker.dmg)
 
 Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 

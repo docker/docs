@@ -103,7 +103,7 @@ menu bar and configure the runtime options described below.
 
 ### General
 
-![Preferences](images/menu/prefs-general.png)
+![Preferences](images/menu/prefs-general.png){:width="750px"}
 
 On the **General** tab, you can configure when to start and update Docker:
 
@@ -126,7 +126,7 @@ The **Resources** tab allows you to configure CPU, memory, disk, proxies, networ
 On the Advanced tab, you can limit resources available to Docker.
 
 ![Advanced Preference
-settings-advanced](images/menu/prefs-advanced.png)
+settings-advanced](images/menu/prefs-advanced.png){:width="750px"}
 
 Advanced settings are:
 
@@ -148,8 +148,6 @@ You can also move the disk image to a different location. If you attempt to move
 #### File sharing
 
 Choose the local directories you'd like to share with your containers. File sharing is required for volume mounting if the project lives outside of the `/Users` directory. In that case, share the drive where the Dockerfile and volume are located. Otherwise, you get `file not found` or `cannot start service` errors at runtime`.
-
-![File Sharing](images/menu/prefs-fileshare.png)
 
 File share settings are:
 
@@ -177,8 +175,6 @@ propagates these to Docker and to your containers. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
 
-![Proxies settings](images/menu/prefs-proxies.png)
-
 When you start a container, your proxy settings propagate into the containers.
 For example:
 
@@ -202,13 +198,9 @@ containers that you would like to keep running across restarts, you should consi
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
-![Network settings](images/menu/prefs-network.png)
-
 ### Docker Engine
 
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
-
-![Daemon](images/menu/engine.png)
 
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
 reference](/engine/reference/commandline/dockerd.md){:target="_blank"
@@ -219,8 +211,6 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 ### Command Line
 
 On the Command Line page, you can specify whether or not to enable experimental features.
-
-![Command Line](images/menu/command-line.png)
 
 {% include experimental.md %}
 
@@ -287,12 +277,10 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
    Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the
   `/usr/local/bin/kubectl` command on your Mac.
 
-  ![Enable Kubernetes](images/kubernetes/kube.png)
+  ![Enable Kubernetes](images/kubernetes/kube.png){:width="750px"}
 
   When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom right of the Docker Desktop Preferences dialog.
-
-  ![Installation complete](images/kubernetes/kube-running.png)
+  at the bottom right of the Docker Desktop Settings dialog.
 
   The status of Kubernetes shows in the Docker menu and the context points to
   `docker-desktop`.

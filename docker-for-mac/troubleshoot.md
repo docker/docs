@@ -8,23 +8,20 @@ title: Logs and troubleshooting
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 
-## Docker Success Center
-
-**Looking for help with Docker Desktop on Mac?** Check out the [Docker Success Center](http://success.docker.com/) for knowledge base articles, FAQs, and
-technical support for various subscription levels.
-
 ## Troubleshoot
 
 Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu bar to see the troubleshoot options.
 
-![Uninstall or reset Docker](images/menu/troubleshoot.png){: .with-border}
+![Uninstall or reset Docker](images/menu/troubleshoot.png){:width="750px"}
 
 The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
 * **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-mac/index/#kubernetes).
 
 * **Reset disk image**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.

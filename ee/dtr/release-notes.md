@@ -24,6 +24,21 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.5
+(2020-01-28)
+
+### Bug fixes
+* Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10807)
+* Fixed the bug that resulted in added licenses not presenting in the UI prior to a page refresh. (docker/dhe-deploy #10815)
+* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10835)
+* Addition of more descriptive error messaging for a situation in which an advanced license for tag pruning and poll mirroring is missing. (docker/dhe-deploy #10827)
+
+### Security
+
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. 
+
+  If DTR is configured for offline updates, download the database for version 2.7.5 or higher. (docker/dhe-deploy #10845)
+
 ## 2.7.4
 (2019-11-13)
 
@@ -167,6 +182,19 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.12
+(2020-01-28)
+
+### Bug fixes
+* Fixed the bug that caused the jobrunner logs to flood with `unable to cancel request: nil`. (docker/dhe-deploy #10805)
+* Update offline license instructions, to direct users to hub.docker.com (and not store.docker.com). (docker/dhe-deploy #10836)
+
+### Security
+
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. (docker/dhe-deploy #10847)
+
+  If DTR is configured for offline updates, download CVE Vulnerability Database for DTR version 2.6.12 or higher.
 
 ## 2.6.11
 (2019-11-13)
@@ -506,6 +534,18 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.16
+(2020-01-28)
+
+### Bug fixes
+* When a repository is deleted the corresponding webhook metadata is also deleted.  (docker/dhe-deploy #10830)
+
+### Security
+
+* Includes a new version of the security scanner which re-enables daily CVE database updates. Following the patch release upgrade, security scans will fail until a new version of the database is provided (if DTR is configured for online updates, this will occur automatically within 24 hours). To trigger an immediate update, (1) access the DTR UI, (2) go to the **Security** under **System** settings, and (3) click the **Sync database now** button. 
+
+  If DTR is configured for offline updates, download CVE Vulnerability Database for DTR version 2.5.16 or higher. (docker/dhe-deploy #10849)
 
 ## 2.5.15
 (2019-11-13)

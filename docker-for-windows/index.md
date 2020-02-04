@@ -186,7 +186,7 @@ This section explains the configuration options accessible from the **Settings**
 
 On the **General** tab of the Settings dialog, you can configure when to start and update Docker.
 
-![Settings](images/settings-general.png){:width="600px"}
+![Settings](images/settings-general.png){:width="750px"}
 
 * **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
 
@@ -195,33 +195,51 @@ Click **OK** to accept and install updates (or cancel to keep the current
 version). You can manually update by choosing **Check for Updates** from the
 main Docker menu.
 
+* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
 
-* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+### Resources
 
-### Shared drives
+The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
 
-Share your local drives (volumes) with Docker Desktop, so that they are
-available to your [Linux containers](#switch-between-windows-and-linux-containers).
+![Resources](images/settings-resources.png){:width="750px"}
 
-![Shared drives](images/settings-shared-drives.png){:width="600px"}
+#### Advanced
 
-Permission for shared drives are tied to the credentials you provide here. If
+Use the **Advanced** tab to limit resources available to Docker.
+
+**CPUs**: By default, Docker Desktop is set to use half the number of processors
+available on the host machine. To increase processing power, set this to a
+higher number; to decrease, lower the number.
+
+**Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
+allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+
+**Swap**: Configure swap file size as needed. The default is 1 GB.
+
+**Disk image size**: Specify the size of the disk image.
+
+**Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+
+You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you get a prompt asking if you want to use the existing image or replace it.
+
+#### File sharing
+
+Choose the local directories you'd like to share with your Linux containers. File sharing is required for mounting volumes in [Linux containers](#switch-between-windows-and-linux-containers),
+ not for Windows containers. For Linux containers, you need to share the drive
+ where the Dockerfile and volume are located. Otherwise, you get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).
+
+File sharing permissions are tied to the credentials you provide here. If
 you run `docker` commands under a different username than the one configured
 here, your containers cannot access the mounted volumes.
 
-To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker store the
-credentials so that you don't need to enter them every time.
+When you select a local drive to share with your containers, Docker Desktop prompts you for your Windows system (domain)
+username and password. Enter your credentials and then click **Apply & Restart**.
 
 > Tips on shared drives, permissions, and volume mounts
->
- * Shared drives are only required for mounting volumes in [Linux containers](#switch-between-windows-and-linux-containers),
- not for Windows containers. For Linux containers, you need to share the drive
- where the Dockerfile and volume are located. If you get errors such as `file not found`
- or `cannot start service` you may need to enable shared drives. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
  * If possible, avoid volume mounts from the Windows host, and instead mount on
  the Linux VM, or use a [data volume](/engine/tutorials/dockervolumes.md#data-volumes)
@@ -267,45 +285,12 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared drive on demand](images/shared-drive-on-demand.png){:width="600px"}
 
-### Advanced
-
-The Linux VM restarts after changing the settings on the Advanced tab. This takes a few seconds.
-
-![CPU and Memory settings](images/settings-advanced.png){:width="600px"}
-
-* **CPUs** - Change the number of processors assigned to the Linux VM.
-
-* **Memory** - Change the amount of memory the Docker Desktop Linux VM uses.
-
-* **Swap** - Configure the swap file size.
-
-### Network
-
-You can configure Docker Desktop networking to work on a virtual private network (VPN).
-
-![Network settings](images/settings-network.png){:width="600px"}
-
-* **Internal Virtual Switch** - You can specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
-
-* **DNS Server** - You can configure the DNS server to use dynamic or static IP addressing.
-
-> **Note**: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
-> `docker` commands that pull images from Docker Hub that are not already
-> downloaded, such as a first time run of `docker run hello-world`. If you
-> encounter this, reset the DNS server to use the Google DNS fixed address:
-> `8.8.8.8`. For more information, see
-> [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
-
-Updating these settings requires a reconfiguration and reboot of the Linux VM.
-
-### Proxies
+#### Proxies
 
 Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
 if you set your proxy settings to `http://proxy.example.com`, Docker uses this
 proxy when pulling containers.
-
-![Proxies](images/settings-proxies.png){:width="600px"}
 
 When you start a container, your proxy settings propagate into the containers. For example:
 
@@ -327,13 +312,36 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 [restart policies](/engine/reference/run/#restart-policies-restart).
 
-### Daemon
+#### Network
 
-You can configure the Docker daemon to hone how your containers run.
-**Advanced mode** lets you edit the JSON directly. **Basic mode** lets you
-configure the common daemon options with interactive settings.
+You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
-![Docker Daemon](images/settings-daemon-basic.png){:width="600px"}
+**DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
+
+> **Note**: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+> `docker` commands that pull images from Docker Hub that are not already
+> downloaded, such as a first time run of `docker run hello-world`. If you
+> encounter this, reset the DNS server to use the Google DNS fixed address:
+> `8.8.8.8`. For more information, see
+> [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+
+Updating these settings requires a reconfiguration and reboot of the Linux VM.
+
+### Docker Engine
+
+The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
+
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
+reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+class="_"}.
+
+Click **Apply & Restart** to save your settings and restart Docker Desktop.
+
+### Command Line
+
+On the Command Line page, you can specify whether or not to enable experimental features.
+
+On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 #### Experimental features
 
@@ -342,10 +350,7 @@ of Docker Engine enabled by default, described in the [Docker Experimental Featu
 
 {% include experimental.md %}
 
-On both Edge and Stable releases, you can toggle the **Experimental features** on and off. If you toggle it off, Docker Desktop uses the current generally
-available release of Docker Engine.
-
-Run `docker version` to see if you are in Experimental mode. Experimental mode
+Run `docker version` to verify whether you have enabled experimental features. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
 running in experimental mode, as shown here:
 
@@ -381,40 +386,11 @@ Server: Docker Engine - Community
   GitCommit:        fec3683
 ```
 
-#### Insecure registries
-
-You can set up your own [registries](/registry/introduction.md) on the **Basic**
-Daemon settings.
-
-Normally, you store public or private images in [Docker Hub](https://hub.docker.com/)
-and [Docker Trusted Registry](/datacenter/dtr/2.4/guides/index.md). Here, you
-can use Docker to set up your own insecure [registry](/registry/introduction.md). Simply add URLs for insecure registries and registry mirrors on which to host your images.
-
-For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in the FAQs.
-
-#### Daemon configuration file
-
-The **Advanced** daemon settings provide the original option to directly edit
-the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd.md).
-
-> Updating these settings requires a reconfiguration and reboot of the Linux VM.
-
-![Docker Daemon](images/settings-daemon-advanced.png){:width="600px"}
-
-For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd.md), and also sub-topics:
-
-* [Daemon configuration file](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
-
-* [Linux configuration file](/engine/reference/commandline/dockerd.md#linux-configuration-file)
-
-* [Windows configuration file](/engine/reference/commandline/dockerd.md#windows-configuration-file)
-
 ### Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
 
-![Enable Kubernetes](images/settings-kubernetes.png){:width="600px"}
+![Enable Kubernetes](images/settings-kubernetes.png){:width="750px"}
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
@@ -426,45 +402,36 @@ to change context so that `kubectl` is pointing to `docker-for-desktop`:
 > kubectl config use-context docker-for-desktop
 ```
 
-You can also change it through the Docker Desktop menu:
+ To enable Kubernetes support and install a standalone instance of Kubernetes
+  running as a Docker container, select **Enable Kubernetes**.
 
-![Change Kubernetes Context](images/docker-menu-context-switch.png){:width="450px"}
+To set Kubernetes as the
+  [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
 
-If you installed `kubectl` by another method, and
-experience conflicts, remove it.
+By default, Kubernetes containers are hidden from commands like `docker
+service ls`, because managing them manually is not supported. To make them
+visible, select **Show system containers (advanced)**. Most users do not need this option.
 
-- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply** button. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
+Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
 
-- By default, Kubernetes containers are hidden from commands like `docker
-  service ls`, because managing them manually is not supported. To make them
-  visible, select **Show system containers (advanced)** and click **Apply**.
-  Most users do not need this option.
+- When Kubernetes is enabled and running, an additional status bar item displays
+at the bottom right of the Docker Desktop Settings dialog. The status of Kubernetes shows in the Docker menu and the context points to
+  `docker-desktop`.
 
-- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
+- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box.
   The Kubernetes containers are stopped and removed, and the
   `/usr/local/bin/kubectl` command is removed.
+
+- To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
+
+- If you installed `kubectl` by another method, and
+experience conflicts, remove it.
 
   For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
 
 ### Reset
 
-> Reset and Restart options
->
-> On Edge releases, the **Restart Docker Desktop**, **Reset Kubernetes Cluster**, and **Reset to factory defaults** options are available on the **Troubleshoot** menu.
-
-On Stable releases, you can restart Docker or reset its configuration using the Reset tab.
-
-![Reset](images/settings-reset.png){:width="600px"}
-
-
-* **Restart Docker Desktop** - Shuts down and restarts the Docker application.
-
-* **Reset Kubernetes Cluster** - Deletes all stacks and Kubernetes resources.
-
-* **Reset to factory defaults** - Resets Docker to factory defaults. This is
-  useful in cases where Docker stops working or becomes unresponsive.
+The **Restart Docker Desktop** and **Reset to factory defaults** options are now available on the **Troubleshoot** menu. For information, see [Logs and Troubleshooting](troubleshoot.md).
 
 ### Troubleshoot
 
@@ -482,8 +449,6 @@ From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
 the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
 containers, or select **Switch to Linux containers** to use Linux containers
 (the default).
-
-![Windows-Linux container types switch](images/docker-menu-switch.png){:width="300px"}
 
 For more information on Windows containers, refer to the following documentation:
 

@@ -83,14 +83,6 @@ For details, see [Licensing DTR](https://docs.docker.com/ee/dtr/admin/configure/
 
 When you license UCP, the same license is applied to the underlying engines in the cluster. Docker recommends that Enterprise customers use UCP to manage their license.
 
-Standalone Docker Engine - Enterprise users can license engines using the command `docker engine activate`.
-
-You can perform offline activation of standalone enterprise engines by downloading the license and running the command `docker engine activate --license filename.lic`.
-
-For more information on the command, see the reference on [docker engine activate](https://docs.docker.com/engine/reference/commandline/engine_activate/).
-
-Additionally, from Docker Engine 18.09 onward, there is a feature called [CE-EE Node Activate](https://docs.docker.com/engine/ce-ee-node-activate/), which is a seamless in-place upgrade from Docker Engine - Community to Docker Engine - Enteprise.
-
 ### Desktop Enterprise
 
 > Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/ee/desktop/) licenses.
