@@ -1,55 +1,53 @@
 ---
 title: Enable SAML authentication
-description: Learn how to configure user authentication with SAML 2.0
+description: Learn how to configure user authentication with SAML 2.0.
 keywords: SAML, ucp, authentication, SSO, Okta, ADFS
 ---
 
 >{% include enterprise_label_shortform.md %}
 
-SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider.
-
-SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
+Security Assertion Markup Language (SAML) is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) is designed to access to UCP through a SAML 2.0-compliant identity provider. UCP supports SAML for authentication as a service provider integrated with your identity provider.
 
 For more information about SAML, see the [SAML XML website](http://saml.xml.org/).
 
-UCP supports these identity providers:
+UCP supports the following identity providers:
 
 - [Okta](https://www.okta.com/)
 - [ADFS](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
 
 ## Configure identity provider integration
 
-There are values your identity provider needs for successful integration with UCP, as follows. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
+Your identity provider needs specific values for successful integration with UCP. These values can vary between identity providers. Consult your identity provider documentation for instructions on providing these values as part of their integration process.
 
 ### Okta integration values
 
 Okta integration requires these values:
 
-- URL for single signon (SSO). This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
-- Service provider audience URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
-- NameID format. Select Unspecified.
-- Application username. Email (For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username portion of the email address.
-- Attribute Statements:
-    - Name: `fullname`, Value: `user.displayName`.
-    - Group Attribute Statement:
-Name: `member-of`, Filter: (user defined) for associate group membership. The group name is returned with the assertion.
-Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin.
+- **URL for SSO.** This value is the URL for UCP, qualified with `/enzi/v0/saml/acs`. For example, `https://111.111.111.111/enzi/v0/saml/acs`.
+- **Service provider audience URI.** This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
+- **NameID format.** Select Unspecified.
+- **Application username.** Email. For example, a custom `${f:substringBefore(user.email, "@")}` specifies the username portion of the email address.
+- **Attribute Statements:**
+    - **Name.** `fullname`, Value: `user.displayName`.
+    - **Group Attribute Statement:**
+        - Name: `member-of`, Filter: (user defined) for associate group membership. The group name is returned with the assertion.
+        - Name: `is-admin`, Filter: (user defined) for identifying if the user is an admin.
 
 
 ### ADFS integration values
 
 ADFS integration requires the following steps:
 
-1. Add a relying party trust. For example: https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)
+1. Add a relying party trust. See [Create a Relying Party Trust](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust) for an example.
 
 2. Obtain the service provider metadata URI. This value is the URL for UCP, qualified with `/enzi/v0/saml/metadata`. For example, `https://111.111.111.111/enzi/v0/saml/metadata`.
 
 3. Add claim rules:      
                
     * Convert values from AD to SAML
-        - Display-name : Common Name
-        - E-Mail-Addresses : E-Mail Address
-        - SAM-Account-Name : Name ID   
+        - **Display-name:** Common Name
+        - **E-Mail-Addresses:** E-Mail Address
+        - **SAM-Account-Name:** Name ID   
     * Create full name for UCP (custom rule):
         ```
         c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
@@ -57,28 +55,26 @@ ADFS integration requires the following steps:
         ValueType = c.ValueType);
         ```
     * Transform account name to Name ID:
-        - Incoming type: Name ID
-        - Incoming format: Unspecified
-        - Outgoing claim type: Name ID
-        - Outgoing format: Transient ID
+        - **Incoming type:** Name ID
+        - **Incoming format:** Unspecified
+        - **Outgoing claim type:** Name ID
+        - **Outgoing format:** Transient ID
     * Pass admin value to allow admin access based on AD group (send group membership as claim):
-         - Users group : Your admin group
-         - Outgoing claim type: is-admin
-         - Outgoing claim value: 1     
-    * Configure group membership (for more complex organizations with multiple groups to manage access)
-        - Send LDAP attributes as claims
-        - Attribute store: Active Directory
+         - **Users group:** Your admin group
+         - **Outgoing claim type:** is-admin
+         - **Outgoing claim value:** 1     
+    * Configure group membership (for more complex organizations with multiple groups to manage access):
+        - **Send LDAP attributes as claims**
+        - **Attribute store:** Active Directory
             - Add two rows with the following information:
-                - LDAP attribute = email address; outgoing claim type: email address
-                - LDAP attribute = Display-Name; outgoing claim type: common name
+                - **LDAP attribute:** email address; outgoing claim type: email address
+                - **LDAP attribute:** Display-Name; outgoing claim type: common name
         - Mapping:
-            - Token-Groups - Unqualified Names : member-of
+            - **Token-Groups - Unqualified Names:** member-of
 
 ## Configure the SAML integration
 
-To enable SAML authentication:
-
-1. Go to the UCP web interface.
+1. Browse to the UCP web UI.
 2. Navigate to the **Admin Settings**.
 3. Select **Authentication & Authorization**.
 
@@ -88,26 +84,32 @@ To enable SAML authentication:
 
     ![Configuring IdP values for SAML in UCP](../../images/saml_settings.png)
 
-5. In **IdP Metadata URL** enter the URL for the identity provider's metadata.
-6. If the metadata URL is publicly certified, you can leave **Skip TLS Verification** unchecked and **Root Certificates Bundle** blank, which is the default. Skipping TLS verification is not recommended in production environments. If the metadata URL cannot be certified by the default certificate authority store, you must provide the certificates from the identity provider in the **Root Certificates Bundle** field.
-7. In **UCP Host** enter the URL that includes the IP address or domain of your UCP installation. The port number is optional. The current IP address or domain appears by default.
+5. In the **IdP Metadata URL** field, enter the URL for the identity provider's metadata.
+6. If the metadata URL is publicly certified, you can leave **Skip TLS Verification** unchecked and the **Root Certificates Bundle** field blank, which is the default. Skipping TLS verification is not recommended in production environments. If the metadata URL cannot be certified by the default certificate authority store, you must provide the certificates from the identity provider in the **Root Certificates Bundle** field.
+7. In the **UCP Host** field, enter the URL that includes the IP address or domain of your UCP installation. The port number is optional. The current IP address or domain appears by default.
 
     ![Configuring service provider values for SAML in UCP](../../images/saml_settings_2.png)
 
-8. To customize the text of the sign-in button, enter your button text in the **Customize Sign In Button Text** field. The default text is 'Sign in with SAML'.
-9. The **Service Provider Metadata URL** and **Assertion Consumer Service (ACS) URL** appear in shaded boxes. Select the copy icon at the right side of each box to copy that URL to the clipboard for pasting in the identity provider workflow.
-9. Select **Save** to complete the integration.
+8. To customize the text of the sign-in button, enter your button text in the **Customize Sign In Button Text** field. The default text is "Sign in with SAML".
+9. The **Service Provider Metadata URL** and **Assertion Consumer Service (ACS) URL** appear in shaded boxes. Select the copy icon on the right side of each box to copy that URL to the clipboard for pasting in the identity provider workflow.
+9. Click **Save**.
 
 ## Security considerations
 
-You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from UCP web interface that enables command line as well as API access to UCP. It lets you  authorize a remote Docker engine to access specific user accounts managed in Docker EE, absorbing all associated RBAC controls in the process. You can now execute docker swarm commands from your remote machine that take effect on the remote cluster. You can download the client bundle in the **Admin Settings** under **My Profile**.
+You can download a client bundle to access UCP. A client bundle is a group of certificates downloadable directly from the UCP web interface that enables command line as well as API access to UCP. 
+
+The client bundle authorizes a remote Docker engine to access specific user accounts managed in Docker Enterprise, absorbing all associated role-based access control (RBAC) settings in the process. You can now execute `docker swarm` commands from your remote machine that take effect on the remote cluster. You can download the client bundle from **Admin Settings** > **My Profile**.
 
 ![Downloading UCP Client Profile](../../images/client-bundle.png)
 
 > Caution
 >
->Users who have been previously authorized using a Client Bundle will continue to be able to access UCP regardless of the newly configured SAML access controls. To ensure that access from the client bundle is synced with the identity provider, we recommend the following steps. Otherwise, a previously-authorized user could get access to UCP through their existing client bundle.
+> Users previously authorized using a client bundle will continue to have access to UCP regardless of the newly configured SAML access controls. To ensure that access from the client bundle is synced with the identity provider, we recommend the following best practices. Otherwise, a previously authorized user could get access to UCP through their existing client bundle.
 >
 > - Remove the user account from UCP that grants the client bundle access.
 > - If group membership in the identity provider changes, replicate this change in UCP.
 > - Continue to use LDAP to sync group membership.
+ {: .caution}
+ 
+## Where to go next
+- [SAML integration](https://docs.docker.com/ee/ucp/admin/configure/integrate-saml/) 
