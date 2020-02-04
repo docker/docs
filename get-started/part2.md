@@ -1,5 +1,5 @@
 ---
-title: "Build an image and run it as a container"
+title: "Build and run your image"
 keywords: containers, images, dockerfiles, node, code, coding, build, push, run
 description: Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.
 ---
@@ -28,7 +28,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 Clone an example project from GitHub (if you don't have git installed, see the [install instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) first):
 
 ```shell
-git clone -b v1 https://github.com/docker-training/node-bulletin-board
+git clone -b v1 https://github.com/dockersamples/node-bulletin-board
 cd node-bulletin-board/bulletin-board-app
 ```
 
@@ -40,7 +40,7 @@ Take a look at the file called `Dockerfile` in the bulletin board application. D
 
 ```dockerfile
 # Use the official image as a parent image
-FROM node:6.11.5
+FROM node:current-slim
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -51,16 +51,19 @@ COPY package.json .
 # Run the command inside your image filesystem
 RUN npm install
 
-# Copy the rest of your app's source code from your host to your image filesystem.
-COPY . .
+# Inform Docker that the container is listening on the specified port at runtime.
+EXPOSE 8080
 
 # Run the specified command within the container.
 CMD [ "npm", "start" ]
+
+# Copy the rest of your app's source code from your host to your image filesystem.
+COPY . .
 ```
 
 Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up our image. This one takes the following steps:
 
-- Start `FROM` the pre-existing `node:6.11.5` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the node 6.11.5 interpreter and basic dependencies.
+- Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the node 6.11.5 interpreter and basic dependencies.
 - Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
 - `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
 - `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
@@ -68,7 +71,11 @@ Writing a Dockerfile is the first step to containerizing an application. You can
 
 You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows us to do the same thing inside a portable, isolated Docker image.
 
-The steps above built up the filesystem of our image, but there's one more line in our Dockerfile. The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
+The steps above built up the filesystem of our image, but there are other lines in our Dockerfile.
+
+The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
+
+The `EXPOSE 8080` informs Docker that the container is listening on port 8000 at runtime.
 
 What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few we see above; for a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 
@@ -86,7 +93,7 @@ docker image build -t bulletinboard:1.0 .
 
 You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
 
-> **Windows Users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
+> **Windows users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
 
 ## Run your image as a container
 

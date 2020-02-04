@@ -4,7 +4,7 @@ keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
 ---
 
-Congratulations on successfully completing the [Quickstart](index.md) modules. Now, let us learn about Orchestration.
+Now that you have successfully completed the [Quickstart](index.md) modules, you are ready to learn about Orchestration.
 
 The portability and reproducibility of a containerized process mean we have an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Furthermore, as we scale our applications up, we'll want some tooling to help automate the maintenance of those applications, able to replace failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
 
@@ -14,8 +14,8 @@ this guide to create our first orchestrated, containerized application.
 
 The advanced modules teach you how to:
 
-1. [Set up and use a Kubernetes environment on your development machine](part3.md)
-2. [Set up and use a Swarm environment on your development machine](part4.md)
+1. [Set up and use a Kubernetes environment on your development machine](kube-deploy.md)
+2. [Set up and use a Swarm environment on your development machine](swarm-deploy.md)
 
 ## Enable Kubernetes
 

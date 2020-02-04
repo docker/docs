@@ -31,7 +31,7 @@ guides:
       path: /get-started/part2/
     - title: "Part 3: Share images on Docker Hub"
       path: /get-started/part3/
-  - sectiontitle: Advanced - Orchestration
+  - sectiontitle: Orchestration
     section:
     - title: "Overview"
       path: /get-started/orchestration/

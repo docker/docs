@@ -24,7 +24,7 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 2. Fill out the form and submit to create your Docker ID.
 
-3. Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**. Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID will appear in the Docker Desktop menu in place of the 'Sign In' option you just used.
+3. Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**. Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
 
     > You can do the same thing from the command line by typing `docker login`.
 
@@ -32,7 +32,7 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
 
-1. Click on the Docker icon in your menu bar, and navigate to **Repositories > Create Repository**. You'll be taken to a Docker Hub page to create a new repository.
+1. Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
 
 2. Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
 
@@ -52,7 +52,7 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 
     Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 
-    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
+    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
 
 ## Conclusion
 

@@ -86,7 +86,7 @@ At this point, we have successfully used Docker Desktop to deploy our applicatio
 
 In addition to deploying to Swarm, we have also described our application as a stack file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.
 
-## Swarm &amp; CLI references
+## Swarm and CLI references
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
