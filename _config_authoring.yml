@@ -22,6 +22,7 @@ url: https://docs.docker.com
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
+docker_ee_patch_version: "19.03.5"
 compose_version: "1.25.1"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
@@ -154,7 +155,6 @@ defaults:
       dtr_repo: "dtr"
       ucp_version: "3.1.2"
       dtr_version: "2.6.1"
-      win_latest_build: "docker-19.03.5"
   - scope:
       path: "datacenter/ucp/3.0"
     values:

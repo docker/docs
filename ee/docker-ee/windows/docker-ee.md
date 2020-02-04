@@ -9,7 +9,7 @@ redirect_from:
 - /install/windows/docker-ee/
 ---
 
-{% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
+{% capture filename %}docker-{{ site.docker_ee_patch_version }}.zip{% endcapture %} {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
 >{% include enterprise_label_shortform.md %}
 

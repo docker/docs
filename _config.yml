@@ -22,6 +22,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
+docker_ee_patch_version: "19.03.5"
 compose_version: "1.25.1"
 compose_file_v3: "3.7"
 compose_file_v2: "2.4"
@@ -120,9 +121,8 @@ defaults:
       ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
-      ucp_version: "3.2.4"
-      dtr_version: "2.7.4"
-      win_latest_build: "docker-19.03.5"
+      ucp_version: "3.2.5"
+      dtr_version: "2.7.5"
   # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
@@ -130,14 +130,14 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.11"
+      dtr_version: "2.6.12"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.15"
+      dtr_version: "2.5.16"
   - scope:
       path: "datacenter/dtr/2.4"
     values:

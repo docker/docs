@@ -6,6 +6,12 @@
 - product: "ucp"
   version: "3.2"
   tar-files:
+    - description: "3.2.5 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.2.5.tar.gz
+    - description: "3.2.5 Windows Server 2016 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2016_3.2.5.tar.gz
+    - description: "3.2.5 Windows Server 2019 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2019_3.2.5.tar.gz
     - description: "3.2.4 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.2.4.tar.gz
     - description: "3.2.4 Windows Server 2016 LTSC"
@@ -422,6 +428,8 @@
 - product: "dtr"
   version: "2.7"
   tar-files:
+    - description: "DTR 2.7.5 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.7.5.tar.gz
     - description: "DTR 2.7.4 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.7.4.tar.gz
     - description: "DTR 2.7.3 Linux x86"
@@ -435,6 +443,8 @@
 - product: "dtr"
   version: "2.6"
   tar-files:
+    - description: "DTR 2.6.12 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.6.12.tar.gz
     - description: "DTR 2.6.11 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.6.11.tar.gz
     - description: "DTR 2.6.10 Linux x86"
@@ -462,6 +472,8 @@
 - product: "dtr"
   version: "2.5"
   tar-files:
+    - description: "DTR 2.5.16 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.5.16.tar.gz
     - description: "DTR 2.5.15 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.5.15.tar.gz
     - description: "DTR 2.5.14 Linux x86"
