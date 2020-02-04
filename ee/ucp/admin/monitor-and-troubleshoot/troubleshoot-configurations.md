@@ -21,10 +21,11 @@ key-value store and [RethinkDB](https://rethinkdb.com/) database that are
 replicated on all manager nodes of the UCP cluster. These data stores are for
 internal use only and should not be used by other applications.
 
+There are two options available for troubleshooting the etcd key-value store, the **HTTP API**, and the **CLI client**.
+
 ### With the HTTP API
 
-In this example we'll use `curl` for making requests to the key-value
-store REST API, and `jq` to process the responses.
+In this example, we use `curl` for making requests to the key-value store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:
 
@@ -49,15 +50,15 @@ sudo apt-get update && sudo apt-get install curl jq
         ${KV_URL}/v2/keys | jq "."
    ```
 
-To learn more about the key-value store REST API, check the
+To learn more about the key-value store REST API, see the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 ### With the CLI client
 
-The containers running the key-value store, include `etcdctl`, a command line
-client for etcd. You can run it using the `docker exec` command.
+The containers running the key-value store, include `etcdctl`, which is a command-line
+client for etcd. You can run `etcdctl` using the `docker exec` command.
 
-The examples below assume you are logged in with ssh into a UCP manager node.
+The following example assumes you are logged in with ssh into a UCP manager node.
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -75,21 +76,15 @@ cluster is healthy
 
 On failure, the command exits with an error code and no output.
 
-To learn more about the `etcdctl` utility, check the
-[etcd official documentation](https://coreos.com/etcd/docs/latest/).
+To learn more about the `etcdctl` utility, see the [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 ## RethinkDB Database
 
-User and organization data for Docker Enterprise Edition is stored in a
-RethinkDB database which is replicated across all manager nodes in the UCP
-cluster.
+User and organization data for Docker Enterprise is stored in a RethinkDB database which is replicated across all manager nodes in the UCP cluster.
 
-Replication and failover of this database is typically handled automatically by
-UCP's own configuration management processes, but detailed database status and
-manual reconfiguration of database replication is available through a command
-line tool available as part of UCP.
+Replication and failover of this database are typically handled automatically by the UCP configuration management processes; however, detailed database status and manual reconfiguration of database replication are available through a command-line tool available as part of UCP.
 
-The examples below assume you are logged in with ssh into a UCP manager node.
+The following examples assume you are logged in with ssh into a UCP manager node.
 
 ### Check the status of the database
 
@@ -145,10 +140,9 @@ time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Reconfigured Replication of
 {% endraw %}
 ```
 
-> #### Loss of Quorum in RethinkDB Tables
->
-> When there is loss of quorum in any of the RethinkDB tables, run the `reconfigure-db` command 
-> with the `--emergency-repair` flag.
+> **Note**
+> 
+> When there is loss of quorum in any of the RethinkDB tables, run the `reconfigure-db` command with the `--emergency-repair` flag.
 
 ## Where to go next
 

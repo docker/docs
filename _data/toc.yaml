@@ -1721,7 +1721,7 @@ manuals:
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
-          title: Troubleshoot configurations
+          title: Troubleshoot cluster configurations
       - title: Back up UCP
         path: /ee/admin/backup/back-up-ucp/
       - title: Restore UCP
