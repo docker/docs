@@ -171,7 +171,7 @@ To request SSH access for a `RUN` command in the `Dockerfile`, define a mount wi
 
 Here is an example Dockerfile using SSH in the container:
 
-```Dockerfile
+```dockerfile
 # syntax=docker/dockerfile:experimental
 FROM alpine
 

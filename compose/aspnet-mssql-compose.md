@@ -42,7 +42,7 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Create a `Dockerfile` within your app directory and add the following content:
 
-    ```conf
+    ```dockerfile
     FROM microsoft/dotnet:2.1-sdk
     COPY . /app
     WORKDIR /app

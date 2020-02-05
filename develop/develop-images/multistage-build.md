@@ -37,7 +37,7 @@ builder pattern above:
 
 **`Dockerfile.build`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 COPY app.go .
@@ -52,7 +52,7 @@ and forget to continue the line using the `\` character, for example.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
@@ -97,7 +97,7 @@ multi-stage builds.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
@@ -136,7 +136,7 @@ example improves the previous one by naming the stages and using the name in
 the `COPY` instruction. This means that even if the instructions in your
 Dockerfile are re-ordered later, the `COPY` doesn't break.
 
-```conf
+```dockerfile
 FROM golang:1.7.3 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
@@ -177,7 +177,7 @@ copy from a separate image, either using the local image name, a tag available
 locally or on a Docker registry, or a tag ID. The Docker client pulls the image
 if necessary and copies the artifact from there. The syntax is:
 
-```Dockerfile
+```dockerfile
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
@@ -185,7 +185,7 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 
 You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
 
-```Dockerfile
+```dockerfile
 FROM alpine:latest as builder
 RUN apk --no-cache add build-base
 

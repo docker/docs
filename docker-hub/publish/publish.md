@@ -100,7 +100,7 @@ containerized application. To avoid this, you can:
   `curl` and `python-pip` after they are used to install the Python `requests`
   package, all in a single Dockerfile directive:
 
-  ```shell
+  ```dockerfile
   RUN apt-get update && \
            apt-get install -y --no-install-recommends curl python-pip && \
            pip install requests && \

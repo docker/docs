@@ -29,7 +29,7 @@ A Docker image is built up from a series of layers. Each layer represents an
 instruction in the image's Dockerfile. Each layer except the very last one is
 read-only. Consider the following Dockerfile:
 
-```conf
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -163,7 +163,7 @@ Docker 1.10).
 Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
 
-```conf
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 ```
@@ -171,7 +171,7 @@ COPY . /app
 The second one is based on `acme/my-base-image:1.0`, but has some additional
 layers:
 
-```conf
+```dockerfile
 FROM acme/my-base-image:1.0
 CMD /app/hello.sh
 ```
