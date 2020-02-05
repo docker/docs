@@ -90,7 +90,7 @@ The NodeJS service contains the following files:
 
 `my-service/Dockerfile`
 
-```conf
+```dockerfile
 FROM alpine
 COPY assets /assets
 CMD ["cp", "/assets", "/project"]
@@ -113,7 +113,7 @@ services:
 
 `my-service/assets/Dockerfile`
 
-```conf
+```dockerfile
 FROM NODE:9
 WORKDIR /app
 COPY package.json .
@@ -252,7 +252,7 @@ is used to interpolate the variables. Therefore, we provide a utility called
 To use the `interpolator` image, update `my-service/Dockerfile` to use the
 following Dockerfile:
 
-```conf
+```dockerfile
 FROM dockertemplate/interpolator:v0.1.5
 COPY assets .
 ```
@@ -264,7 +264,7 @@ This places the  interpolator image in the `/assets` folder and copies the
 folder to the target `/project` folder. If you prefer to do this manually, use
 a Dockerfile instead:
 
-```conf
+```dockerfile
 WORKDIR /assets
 CMD ["/interpolator", "-config", "/run/configuration", "-source", "/assets", "-destination", "/project"]
 ```

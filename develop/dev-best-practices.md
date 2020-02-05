@@ -35,12 +35,12 @@ keep image size small:
     fragments. The first creates two layers in the image, while the second
     only creates one.
 
-    ```conf
+    ```dockerfile
     RUN apt-get -y update
     RUN apt-get install -y python
     ```
 
-    ```conf
+    ```dockerfile
     RUN apt-get -y update && apt-get install -y python
     ```
 

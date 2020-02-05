@@ -104,7 +104,7 @@ counter whenever you visit it.
 
 4.  Create a file called `Dockerfile` and paste this in:
 
-    ```Dockerfile
+    ```dockerfile
     FROM python:3.4-alpine
     ADD . /code
     WORKDIR /code
