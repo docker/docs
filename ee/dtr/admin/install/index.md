@@ -26,14 +26,21 @@ Before installing DTR, confirm that your infrastructure meets DTR's [system requ
 
 ## 2. Install UCP
 
-UCP must be installed to run DTR. If UCP is not yet installed, refer to [install UCP for production](/ee/ucp/admin/install/).
+DTR requires UCP to run.
 
 >**Note**
 >
-> Prior to installing DTR:
-> * When upgrading, upgrade UCP before DTR for each major version. For example, if you are upgrading four major versions, upgrade one major version at a time, first UCP, then DTR, and then repeat for the remaining three versions.
-> * UCP upgraded to the most recent version before an initial install of DTR.
-> * Docker Engine should be updated to the most recent version before installing or updating UCP.
+>Before installing or upgrading UCP, confirm that you are running the latest version of Docker Engine.
+
+*  If UCP is not yet installed, refer to [Install UCP for production](/ee/ucp/admin/install/).
+*  If UCP is installed but is not the latest version, go to the [latest UCP upgrade instruction](/ee/ucp/admin/install/upgrade/).
+
+    When upgrading, upgrade UCP before DTR for each major version. For example, to upgrade systems currently running UCP 3.0 and DTR 2.5 to UCP 3.2 and DTR 2.7, the upgrade flow is:
+
+            1. UCP: 3.0 -> 3.1 upgrade
+            2. DTR: 2.5 -> 2.6 upgrade
+            3. UCP: 3.1 -> 3.2 upgrade
+            4. DTR: 2.6 -> 2.7 upgrade
 
 ## 3. Install DTR
 

@@ -12,6 +12,13 @@ DTR uses [semantic versioning](http://semver.org/) and Docker aims to achieve sp
 
 * When upgrading from one patch version to another, you can skip patch versions because no data migration is performed for patch versions.
 * When upgrading between minor versions, you ***cannot*** skip versions, however you can upgrade from any patch version of the previous minor version to any patch version of the current minor version.
+* When upgrading between major versions, upgrade UCP before DTR for each major version. For example, to upgrade systems currently running UCP 3.0 and DTR 2.5 to UCP 3.2 and DTR 2.7, the upgrade flow is:
+
+            1. UCP: 3.0 -> 3.1 upgrade
+            2. DTR: 2.5 -> 2.6 upgrade
+            3. UCP: 3.1 -> 3.2 upgrade
+            4. DTR: 2.6 -> 2.7 upgrade
+
 * When upgrading between major versions, make sure to upgrade one major version at a time &ndash; and also to upgrade to the earliest available minor version. It is strongly recommended that you first upgrade to the latest minor/patch version for your major version.
 
 | Description                          | From  | To        | Supported |
