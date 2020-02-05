@@ -5,18 +5,12 @@ title: Install Docker Machine
 hide_from_sitemap: true
 ---
 
-On macOS and Windows, Machine is installed along with other Docker products when
-you install the [Docker for Mac](/docker-for-mac/index.md),
-[Docker for Windows](/docker-for-windows/index.md), or
-[Docker Toolbox](/toolbox/overview.md).
-
-If you want only Docker Machine, you can install the Machine binaries directly
-by following the instructions in the next section. You can find the latest
+Install Docker Machine binaries by following the instructions in the following section. You can find the latest
 versions of the binaries on the [docker/machine release
 page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
 on GitHub.
 
-## Install Machine directly
+## Install Docker Machine
 
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
 
