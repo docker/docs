@@ -26,9 +26,7 @@ Before installing DTR, confirm that your infrastructure meets DTR's [system requ
 
 ## 2. Install UCP
 
-To run, DTR requires Docker Enterprise's UCP. If UCP is not yet installed, refer to [install UCP for production](/ee/ucp/admin/install/).
-
-## 3. Install DTR
+UCP must be installed to run DTR. If UCP is not yet installed, refer to [install UCP for production](/ee/ucp/admin/install/).
 
 >**Note**
 >
@@ -37,7 +35,11 @@ To run, DTR requires Docker Enterprise's UCP. If UCP is not yet installed, refer
 > * UCP upgraded to the most recent version before an initial install of DTR.
 > * Docker Engine should be updated to the most recent version before installing or updating UCP.
 
-DTR and UCP must not be installed on the same node, due to the potential for resource and port conflicts. Instead, install DTR on worker nodes that will be managed by UCP. Note also that DTR cannot be installed on a standalone Docker Engine.
+## 3. Install DTR
+
+>**Note**
+>
+> DTR and UCP must not be installed on the same node, due to the potential for resource and port conflicts. Instead, install DTR on worker nodes that will be managed by UCP. Note also that DTR cannot be installed on a standalone Docker Engine.
 
 ![](../../images/install-dtr-1.svg)
 
@@ -64,14 +66,14 @@ DTR and UCP must not be installed on the same node, due to the potential for res
 
     * To install a specific version of DTR, replace `{{ page.dtr_version }}` with the  desired version in the [installation command](#step-3-install-dtr). (All DTR versions can be found on the [DTR release notes](/ee/dtr/release-notes/) page.)
 
-    * As DTR is deployed with self-signed certificates by default, UCP might not be able to pull images from it. To automatically configure UCP to trust DTR, use the `--dtr-external-url <dtr-domain>:<port>` optional flag during installation, or during a reconfiguration.
+    * DTR uses self-signed certificates by default, which may cause errors when UCP attempts to pull images from it. To configure UCP to accept the DTR  certicates, use the [`--dtr-external-url <dtr-domain>:<port>`](/reference/dtr/2.7/cli/install/) optional flag when installing or configuring UCP.
 
     * With DTR 2.7, it is possible to [enable browser authentication via client
     certificates](/ee/enable-client-certificate-authentication/) at the time of install, and thus remove the need to enter user credentials.
 
 5. Verify that DTR is installed, either by navigating to `https://<ucp-fqdn>/manage/settings/dtr`, or by navigating in the UCP web UI to **Admin Settings > Docker Trusted Registry**.
 
-    Note that UCP modifies `/etc/docker/certs.d` for each host and adds the DTR CA certificate. UCP is thus able to pull images from DTR, because the Docker Engine for each node in the UCP swarm is configured to trust DTR.
+    UCP modifies `/etc/docker/certs.d` for each host and adds the DTR CA certificate. UCP is thus able to pull images from DTR, because the Docker Engine for each node in the UCP swarm is configured to trust DTR.
 
 6. Reconfigure the load balancer back to the desired protocol and port.
 
@@ -136,7 +138,7 @@ To add replicas to a DTR cluster, use the [join](/reference/dtr/2.7/cli/join/) c
     ID of a replica that is already part of the cluster. Locate an
     existing replica ID on the **Shared Resources > Stacks** UCP page.
 
-3. Confirm that all replicas are running by navigating to the UCP web interface and selecting **Shared Resources > Stacks**. All replicas should be on display.
+3. Confirm that all of the replicas are running by navigating to the UCP web interface and selecting **Shared Resources > Stacks** (a list of the running replicas should display).
 
     ![](../../images/install-dtr-6.png){: .with-border}
 
