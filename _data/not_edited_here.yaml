@@ -44,4 +44,4 @@ overrides:
 
 - path: /compliance/
   description: Docker compliance
-  source: https://github.com/docker/compliance/tree/master/docs/compliance
+  source: https://github.com/mirantis/compliance/tree/master/docs/compliance
