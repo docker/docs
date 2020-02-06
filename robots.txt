@@ -1,6 +1,7 @@
 User-agent: *
 
 # Docker Engine archives
+Disallow: /edge/
 Disallow: /v1.4/
 Disallow: /v1.5/
 Disallow: /v1.6/
