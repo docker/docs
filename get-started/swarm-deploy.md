@@ -24,7 +24,7 @@ In order to validate that our containerized application works well on Swarm, we'
 
 Swarm never creates individual containers like we did in the previous step of this tutorial. Instead, all Swarm workloads are scheduled as _services_, which are scalable groups of containers with added networking features maintained automatically by Swarm. Furthermore, all Swarm objects can and should be described in manifests called _stack files_. These YAML files describe all the components and configurations of your Swarm app, and can be used to easily create and destroy your app in any Swarm environment.
 
-1. Let's write a simple stack file to run and manage our bulletin board. Place the following in a file called `bb-stack.yaml`:
+Let's write a simple stack file to run and manage our bulletin board. Place the following in a file called `bb-stack.yaml`:
 
     ```yaml
     version: '3.7'
@@ -42,7 +42,7 @@ Swarm never creates individual containers like we did in the previous step of th
 
 ## Deploy and check your application
 
-1. Deploy your application to Swarm:
+1.  Deploy your application to Swarm:
 
     ```shell
     docker stack deploy -c bb-stack.yaml demo
@@ -57,7 +57,7 @@ Swarm never creates individual containers like we did in the previous step of th
 
     Notice that in addition to your service, Swarm also creates a Docker network by default to isolate the containers deployed as part of your stack.
 
-2. Make sure everything worked by listing your service:
+2.  Make sure everything worked by listing your service:
 
     ```shell
     docker service ls
@@ -72,9 +72,9 @@ Swarm never creates individual containers like we did in the previous step of th
 
     This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.
 
-3. Open a browser and visit your bulletin board at `localhost:8000`; you should see your bulletin board, the same as when we ran it as a stand-alone container in Part 2 of the Quickstart tutorial.
+3.  Open a browser and visit your bulletin board at `localhost:8000`; you should see your bulletin board, the same as when we ran it as a stand-alone container in Part 2 of the Quickstart tutorial.
 
-4. Once satisfied, tear down your application:
+4.  Once satisfied, tear down your application:
 
     ```shell
     docker stack rm demo

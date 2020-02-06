@@ -25,14 +25,67 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 
 ## Set up
 
-Clone an example project from GitHub (if you don't have git installed, see the [install instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) first):
+Let us download an example project from the [Docker Samples](https://github.com/dockersamples/node-bulletin-board) page.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#clonegit">Git</a></li>
+  <li><a data-toggle="tab" href="#clonewin">Windows (without Git)</a></li>
+  <li><a data-toggle="tab" href="#clonemac">Mac or Linux (without Git)</a></li>
+</ul>
+<div class="tab-content">
+  <div id="clonegit" class="tab-pane fade in active">
+{% capture git-clone-content %}
+
+### Git
+
+If you are using Git, you can clone the example project from GitHub:
 
 ```shell
-git clone -b v1 https://github.com/dockersamples/node-bulletin-board
+git clone https://github.com/dockersamples/node-bulletin-board
 cd node-bulletin-board/bulletin-board-app
 ```
 
-This is a simple bulletin board application, written in Node.js. In this example, let's imagine you wrote this app, and are now trying to containerize it.
+{% endcapture %}
+{{ git-clone-content | markdownify }}
+
+</div>
+<div id="clonewin" class="tab-pane fade" markdown="1">
+{% capture win-clone-content %}
+
+### Windows (without Git)
+
+If you are using a Windows machine and prefer to download the example project without installing Git, run the following commands in PowerShell:
+
+```shell
+curl.exe -LO https://github.com/dockersamples/node-bulletin-board/archive/master.zip
+tar.exe xf master.zip
+cd node-bulletin-board-master\bulletin-board-app
+```
+
+{% endcapture %}
+{{ win-clone-content | markdownify }}
+</div>
+
+<div id="clonemac" class="tab-pane fade" markdown="1">
+{% capture mac-clone-content %}
+
+### Mac or Linux (without Git)
+
+If you are using a Mac or a Linux machine and prefer to download the example project without installing Git, run the following commands in a terminal:
+
+```shell
+curl -LO https://github.com/dockersamples/node-bulletin-board/archive/master.zip
+unzip master.zip
+cd node-bulletin-board-master/bulletin-board-app
+```
+
+{% endcapture %}
+{{ mac-clone-content | markdownify }}
+</div>
+<hr>
+</div>
+
+The `node-bulletin-board` project is a simple bulletin board application, written in Node.js. In this example, let's imagine you wrote this app, and are now trying to containerize it.
 
 ## Define a container with Dockerfile
 
@@ -63,7 +116,7 @@ COPY . .
 
 Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up our image. This one takes the following steps:
 
-- Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the node 6.11.5 interpreter and basic dependencies.
+- Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
 - Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
 - `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
 - `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
@@ -97,7 +150,7 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 
 ## Run your image as a container
 
-1. Start a container based on your new image:
+1.  Start a container based on your new image:
 
     ```script
     docker container run --publish 8000:8080 --detach --name bb bulletinboard:1.0
@@ -111,9 +164,9 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 
     Also notice, we didn't specify what process we wanted our container to run. We didn't have to, since we used the `CMD` directive when building our Dockerfile; thanks to this, Docker knows to automatically run the process `npm start` inside our container when it starts up.
 
-2. Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, we would normally do everything we could to ensure our container works the way we expected; now would be the time to run unit tests, for example.
+2.  Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, we would normally do everything we could to ensure our container works the way we expected; now would be the time to run unit tests, for example.
 
-3. Once you're satisfied that your bulletin board container works correctly, you can delete it:
+3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
 
     ```script
     docker container rm --force bb
