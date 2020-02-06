@@ -1,0 +1,15 @@
+# action.yml
+name: 'Create a check'
+description: 'Create a check on github with the link to the live PR'
+inputs:
+  SITE_URL:
+    description: 'URL to the website'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}
+    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+    GITHUB_SHA: ${{ inputs.GITHUB_SHA }}
+    SITE_URL: ${{ inputs.SITE_URL }}

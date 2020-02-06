@@ -20,3 +20,10 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_DIRECTORY: _site
           NETLIFY_SITE_NAME: "${{ github.sha }}-${{ github.run_id }}"
+      - name: notify website is live
+        uses: ./.github/actions/create-status-check
+        with:
+          SITE_URL: ${{ steps.netlify_deploy.outputs.site_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ github.token }}

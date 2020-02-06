@@ -1,0 +1,11 @@
+{
+  "name": "create-status-check",
+  "description": "Creates a check with a link to the live website",
+  "authors": {
+    "name": "Jeremie Drouet",
+    "email": "jeremie.drouet@docker.com"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.43.1"
+  }
+}
