@@ -1667,7 +1667,7 @@ manuals:
         - path: /ee/ucp/admin/configure/configure-rbac-kube/
           title: Configure native Kubernetes role-based access control
         - path: /ee/ucp/admin/configure/enable-audit-logging/
-          title: Create UCP audit logs
+          title: Audit logging on UCP
         - path: /ee/ucp/admin/configure/enable-saml-authentication/
           title: Enable SAML authentication
         - path: /ee/ucp/admin/configure/integrate-saml/
