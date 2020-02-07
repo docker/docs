@@ -61,7 +61,7 @@ DISTRIBUTION_BRANCH="release/2.7"
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ./engine/extend || (echo "Failed engine/extend download" && exit 1)
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api ./engine/api || (echo "Failed engine/api download" && exit 1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec ./registry/spec || (echo "Failed registry/spec download" && exit 1)
-svn co https://github.com/docker/compliance/trunk/docs/compliance ./compliance || (echo "Failed docker/compliance download" && exit 1)
+svn co https://github.com/mirantis/compliance/trunk/docs/compliance ./compliance || (echo "Failed docker/compliance download" && exit 1)
 
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
