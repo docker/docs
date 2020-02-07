@@ -171,6 +171,8 @@ from the repository.
     $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
     ```
 
+    Reboot the system before moving onto next step
+
 4.  Start Docker
 
     ```bash
