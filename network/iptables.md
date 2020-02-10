@@ -85,7 +85,7 @@ are not allowed on IPs the service is not bound to), without the necessity
 for disabling the iptables mechanisms altogether, because they do honor this
 setting and do not expose services on IPs they shall not be exposed on.
 
-However, `--ip` is not a _binding_ option: Setting it only changes the _default_,
+However, setting `--ip` only changes the _default_,
 it does not _restrict_ services to that IP. This means that while containers
 deployed via a simple `docker run` command mostly honor this setting (unless
 a `-p` option string explicitly overrides it), other container management
