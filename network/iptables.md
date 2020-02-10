@@ -37,8 +37,8 @@ when a port gets exposed through Docker, you _must_ add these rules to the
 
 By default, all external source IPs are allowed to connect to the Docker daemon.
 To allow only a specific IP or network to access the containers, insert a
-negated rule at the top of the DOCKER filter chain. For example, the following
-rule restricts external access to all IP addresses except 192.168.1.1:
+negated rule at the top of the `DOCKER-USER` filter chain. For example, the
+following rule restricts external access to all IP addresses except 192.168.1.1:
 
 ```bash
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
