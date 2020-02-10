@@ -1,0 +1,16 @@
+# action.yml
+name: 'Clean netlify'
+description: 'Creates a site and deploy to it'
+inputs:
+  NETLIFY_AUTH_TOKEN:
+    description: 'Authentication token to netlify'
+    required: true
+  NETLIFY_SITE_NAME:
+    description: 'Name of the site to delete'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
+    NETLIFY_SITE_NAME: ${{ inputs.NETLIFY_SITE_NAME }}
