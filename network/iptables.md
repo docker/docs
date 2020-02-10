@@ -33,12 +33,12 @@ rules your firewall has configured. If you want those rules to apply even
 when a port gets exposed through Docker, you _must_ add these rules to the
 `DOCKER-USER` chain.
 
-### Restrict connections to the Docker daemon
+### Restrict connections to the Docker host
 
-By default, all external source IPs are allowed to connect to the Docker daemon.
+By default, all external source IPs are allowed to connect to the Docker host.
 To allow only a specific IP or network to access the containers, insert a
 negated rule at the top of the `DOCKER-USER` filter chain. For example, the
-following rule restricts external access to all IP addresses except 192.168.1.1:
+following rule restricts external access from all IP addresses except `192.168.1.1`:
 
 ```bash
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
@@ -46,7 +46,7 @@ $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
 
 Please note that you will need to change `ext_if` to correspond with your
 host's actual external interface. You could instead allow connections from a
-source subnet. The following rule only allows access from the subnet 192.168.1.0/24:
+source subnet. The following rule only allows access from the subnet `192.168.1.0/24`:
 
 ```bash
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.0/24 -j DROP
@@ -61,7 +61,7 @@ $ iptables -I DOCKER-USER -m iprange -i ext_if ! --src-range 192.168.1.1-192.168
 
 You can combine `-s` or `--src-range` with `-d` or `--dst-range` to control both
 the source and destination. For instance, if the Docker daemon listens on both
-192.168.1.99 and 10.1.2.3, you can make rules specific to `10.1.2.3` and leave
+`192.168.1.99` and `10.1.2.3`, you can make rules specific to `10.1.2.3` and leave
 `192.168.1.99` open.
 
 `iptables` is complicated and more complicated rules are out of scope for this
