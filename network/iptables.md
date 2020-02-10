@@ -5,15 +5,33 @@ keywords: network, iptables
 ---
 
 On Linux, Docker manipulates `iptables` rules to provide network isolation.
-This is an implementation detail, and you should not modify the rules Docker
-inserts into your `iptables` policies.
+While this is an implementation detail and you should not modify the rules
+Docker inserts into your `iptables` policies, it does have some implications
+on what you need to do if you want to have your own policies in addition to
+those managed by Docker.
+
+If you're running Docker on a host that is exposed to the Internet, you will
+probably want to have iptables policies in place that prevent unauthorized
+access to containers or other services running on your host. This page
+describes how to achieve that, and what caveats you need to be aware of.
 
 ## Add iptables policies before Docker's rules
 
+Docker installs two custom iptables chains named `DOCKER-USER` and `DOCKER`,
+and it ensures that incoming packets are always checked by these two chains
+first.
+
 All of Docker's `iptables` rules are added to the `DOCKER` chain. Do not
-manipulate this table manually. If you need to add rules which load before
-Docker's rules, add them to the `DOCKER-USER` chain. These rules are loaded
+manipulate this chain manually. If you need to add rules which load before
+Docker's rules, add them to the `DOCKER-USER` chain. These rules are applied
 before any rules Docker creates automatically.
+
+Rules added to the `FORWARD` chain -- either manually, or by another
+iptables-based firewall -- are evaluated _after_ these chains. This means that
+if you expose a port through Docker, this port gets exposed no matter what
+rules your firewall has configured. If you want those rules to apply even
+when a port gets exposed through Docker, you _must_ add these rules to the
+`DOCKER-USER` chain.
 
 ### Restrict connections to the Docker daemon
 
@@ -56,6 +74,24 @@ for a lot more information.
 It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker/daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
 
 For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
+
+## Note on the `--ip` option
+
+By default, the Docker daemon will expose ports on the `0.0.0.0` address, i.e.
+any address on the host. If you want to change that behavior to e.g. only
+expose ports on an internal IP address, you can use the `--ip` option to
+specify a different IP address. This method heightens security (connections
+are not allowed on IPs the service is not bound to), without the necessity
+for disabling the iptables mechanisms altogether, because they do honor this
+setting and do not expose services on IPs they shall not be exposed on.
+
+However, `--ip` is not a _binding_ option: Setting it only changes the _default_,
+it does not _restrict_ services to that IP. This means that while containners
+deployed via a simple `docker run` command mostly honor this setting (unless
+a `-p` option string explicitly overrides it), other container management
+systems may feel free to ignore this setting (or simply be unaware of it).
+Thus if they specify `0.0.0.0` explicitly, the container will be reachable
+on any interface regardless of the `--ip` option.
 
 ## Next steps
 
