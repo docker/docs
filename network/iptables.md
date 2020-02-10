@@ -68,6 +68,17 @@ the source and destination. For instance, if the Docker daemon listens on both
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
 
+## Docker on a router
+
+Docker also sets the policy for the `FORWARD` chain to `DROP`. If your Docker
+host also acts as a router, this will result in that router not forwarding
+any traffic anymore. If you want your system to continue functioning as a
+router, you can add explicit `ACCEPT` rules to the `DOCKER-USER` chain to
+allow it:
+
+```bash
+$ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
+```
 
 ## Prevent Docker from manipulating iptables
 
