@@ -481,21 +481,27 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   example shows the use of the `.dockerignore` file to exclude the `.git`\ndirectory
   from the context. Its effect can be seen in the changed size of the\nuploaded context.
   The builder reference contains detailed information on\n[creating a .dockerignore
-  file](../builder.md#dockerignore-file)\n\n### Tag an image (-t)\n\n```bash\n$ docker
-  build -t vieux/apache:2.0 .\n```\n\nThis will build like the previous example, but
-  it will then tag the resulting\nimage. The repository name will be `vieux/apache`
-  and the tag will be `2.0`.\n[Read more about valid tags](tag.md).\n\nYou can apply
-  multiple tags to an image. For example, you can apply the `latest`\ntag to a newly
-  built image and add another tag that references a specific\nversion.\nFor example,
-  to tag an image both as `whenry/fedora-jboss:latest` and\n`whenry/fedora-jboss:v2.1`,
-  use the following:\n\n```bash\n$ docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1
-  .\n```\n\n### Specify a Dockerfile (-f)\n\n```bash\n$ docker build -f Dockerfile.debug
-  .\n```\n\nThis will use a file called `Dockerfile.debug` for the build instructions\ninstead
-  of `Dockerfile`.\n\n```bash\n$ curl example.com/remote/Dockerfile | docker build
-  -f - .\n```\n\nThe above command will use the current directory as the build context
-  and read\na Dockerfile from stdin.\n\n```bash\n$ docker build -f dockerfiles/Dockerfile.debug
-  -t myapp_debug .\n$ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .\n```\n\nThe
-  above commands will build the current build context (as specified by the\n`.`) twice,
+  file](../builder.md#dockerignore-file).\n\nWhen using the [BuildKit backend](../builder.md#buildkit),
+  `docker build` searches\nfor a `.dockerignore` file relative to the Dockerfile name.
+  For example, running\n`docker build -f myapp.Dockerfile .` will first look for an
+  ignore file named\n`myapp.Dockerfile.dockerignore`. If such a file is not found,
+  the `.dockerignore`\nfile is used if present. Using a Dockerfile based `.dockerignore`
+  is useful if a\nproject contains multiple Dockerfiles that expect to ignore different
+  sets of\nfiles.\n\n\n### Tag an image (-t)\n\n```bash\n$ docker build -t vieux/apache:2.0
+  .\n```\n\nThis will build like the previous example, but it will then tag the resulting\nimage.
+  The repository name will be `vieux/apache` and the tag will be `2.0`.\n[Read more
+  about valid tags](tag.md).\n\nYou can apply multiple tags to an image. For example,
+  you can apply the `latest`\ntag to a newly built image and add another tag that
+  references a specific\nversion.\nFor example, to tag an image both as `whenry/fedora-jboss:latest`
+  and\n`whenry/fedora-jboss:v2.1`, use the following:\n\n```bash\n$ docker build -t
+  whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .\n```\n\n### Specify a Dockerfile
+  (-f)\n\n```bash\n$ docker build -f Dockerfile.debug .\n```\n\nThis will use a file
+  called `Dockerfile.debug` for the build instructions\ninstead of `Dockerfile`.\n\n```bash\n$
+  curl example.com/remote/Dockerfile | docker build -f - .\n```\n\nThe above command
+  will use the current directory as the build context and read\na Dockerfile from
+  stdin.\n\n```bash\n$ docker build -f dockerfiles/Dockerfile.debug -t myapp_debug
+  .\n$ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .\n```\n\nThe above
+  commands will build the current build context (as specified by the\n`.`) twice,
   once using a debug version of a `Dockerfile` and once using a\nproduction version.\n\n```bash\n$
   cd /home/me/myapp/some/dir/really/deep\n$ docker build -f /home/me/myapp/dockerfiles/debug
   /home/me/myapp\n$ docker build -f ../../../../dockerfiles/debug /home/me/myapp\n```\n\nThese
@@ -554,21 +560,88 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   stage by name as a final stage for the resulting\nimage. Commands after the target
   stage will be skipped.\n\n```Dockerfile\nFROM debian AS build-env\n...\n\nFROM alpine
   AS production-env\n...\n```\n\n```bash\n$ docker build -t mybuildimage --target
-  build-env .\n```\n\n### Squash an image's layers (--squash) (experimental)\n\n####
-  Overview\n\nOnce the image is built, squash the new layers into a new image with
-  a single\nnew layer. Squashing does not destroy any existing image, rather it creates
-  a new\nimage with the content of the squashed layers. This effectively makes it
-  look\nlike all `Dockerfile` commands were created with a single layer. The build\ncache
-  is preserved with this method.\n\nThe `--squash` option is an experimental feature,
-  and should not be considered\nstable.\n\n\nSquashing layers can be beneficial if
-  your Dockerfile produces multiple layers\nmodifying the same files, for example,
-  files that are created in one step, and\nremoved in another step. For other use-cases,
-  squashing images may actually have\na negative impact on performance; when pulling
-  an image consisting of multiple\nlayers, layers can be pulled in parallel, and allows
-  sharing layers between\nimages (saving space).\n\nFor most use cases, multi-stage
-  builds are a better alternative, as they give more\nfine-grained control over your
-  build, and can take advantage of future\noptimizations in the builder. Refer to
-  the [use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)\nsection
+  build-env .\n```\n\n### Custom build outputs\n\nBy default, a local container image
+  is created from the build result. The\n`--output` (or `-o`) flag allows you to override
+  this behavior, and a specify a\ncustom exporter. For example, custom exporters allow
+  you to export the build\nartifacts as files on the local filesystem instead of a
+  Docker image, which can\nbe useful for generating local binaries, code generation
+  etc.\n\nThe value for `--output` is a CSV-formatted string defining the exporter
+  type\nand options. Currently, `local` and `tar` exporters are supported. The `local`\nexporter
+  writes the resulting build files to a directory on the client side. The\n`tar` exporter
+  is similar but writes the files as a single tarball (`.tar`).\n\nIf no type is specified,
+  the value defaults to the output directory of the local\nexporter. Use a hyphen
+  (`-`) to write the output tarball to standard output\n(`STDOUT`).\n\nThe following
+  example builds an image using the current directory (`.`) as build\ncontext, and
+  exports the files to a directory named `out` in the current directory.\nIf the directory
+  does not exist, Docker creates the directory automatically:\n\n```bash\n$ docker
+  build -o out .\n```\n\nThe example above uses the short-hand syntax, omitting the
+  `type` options, and\nthus uses the default (`local`) exporter. The example below
+  shows the equivalent\nusing the long-hand CSV syntax, specifying both `type` and
+  `dest` (destination\npath):\n\n```bash\n$ docker build --output type=local,dest=out
+  .\n```\n\nUse the `tar` type to export the files as a `.tar` archive: \n\n```bash\n$
+  docker build --output type=tar,dest=out.tar .\n```\n\nThe example below shows the
+  equivalent when using the short-hand syntax. In this\ncase, `-` is specified as
+  destination, which automatically selects the `tar` type,\nand writes the output
+  tarball to standard output, which is then redirected to\nthe `out.tar` file:\n\n```bash\ndocker
+  build -o - . > out.tar\n```\n\nThe `--output` option exports all files from the
+  target stage. A common pattern\nfor exporting only specific files is to do multi-stage
+  builds and to copy the\ndesired files to a new scratch stage with [`COPY --from`](../builder.md#copy).\n\nThe
+  example `Dockerfile` below uses a separate stage to collect the\nbuild-artifacts
+  for exporting:\n\n```Dockerfile\nFROM golang AS build-stage\nRUN go get -u github.com/LK4D4/vndr\n\nFROM
+  scratch AS export-stage\nCOPY --from=build-stage /go/bin/vndr /\n```\n\nWhen building
+  the Dockerfile with the `-o` option, only the files from the final\nstage are exported
+  to the `out` directory, in this case, the `vndr` binary:\n\n```bash\n$ docker build
+  -o out .\n\n[+] Building 2.3s (7/7) FINISHED\n => [internal] load build definition
+  from Dockerfile                                                                          0.1s\n
+  => => transferring dockerfile: 176B                                                                                          0.0s\n
+  => [internal] load .dockerignore                                                                                             0.0s\n
+  => => transferring context: 2B                                                                                               0.0s\n
+  => [internal] load metadata for docker.io/library/golang:latest                                                              1.6s\n
+  => [build-stage 1/2] FROM docker.io/library/golang@sha256:2df96417dca0561bf1027742dcc5b446a18957cd28eba6aa79269f23f1846d3f
+  \  0.0s\n => => resolve docker.io/library/golang@sha256:2df96417dca0561bf1027742dcc5b446a18957cd28eba6aa79269f23f1846d3f
+  \              0.0s\n => CACHED [build-stage 2/2] RUN go get -u github.com/LK4D4/vndr
+  \                                                             0.0s\n => [export-stage
+  1/1] COPY --from=build-stage /go/bin/vndr /                                                                 0.2s\n
+  => exporting to client                                                                                                       0.4s\n
+  => => copying files 10.30MB                                                                                                  0.3s\n\n$
+  ls ./out\nvndr\n```\n\n> **Note**: This feature requires the BuildKit backend. You
+  can either\n> [enable BuildKit](../builder.md#buildkit) or use the [buildx](https://github.com/docker/buildx)\n>
+  plugin which provides more output type options.\n\n### Specifying external cache
+  sources\n\nIn addition to local build cache, the builder can reuse the cache generated
+  from\nprevious builds with the `--cache-from` flag pointing to an image in the registry.\n\nTo
+  use an image as a cache source, cache metadata needs to be written into the\nimage
+  on creation. This can be done by setting `--build-arg BUILDKIT_INLINE_CACHE=1`\nwhen
+  building the image. After that, the built image can be used as a cache source\nfor
+  subsequent builds.\n\nUpon importing the cache, the builder will only pull the JSON
+  metadata from the\nregistry and determine possible cache hits based on that information.
+  If there\nis a cache hit, the matched layers are pulled into the local environment.\n\nIn
+  addition to images, the cache can also be pulled from special cache manifests\ngenerated
+  by [`buildx`](https://github.com/docker/buildx) or the BuildKit CLI\n(`buildctl`).
+  These manifests (when built with the `type=registry` and `mode=max`\noptions) allow
+  pulling layer data for intermediate stages in multi-stage builds.\n\nThe following
+  example builds an image with inline-cache metadata and pushes it\nto a registry,
+  then uses the image as a cache source on another machine:\n\n```bash\n$ docker build
+  -t myname/myapp --build-arg BUILDKIT_INLINE_CACHE=1 .\n$ docker push myname/myapp\n```\n\nAfter
+  pushing the image, the image is used as cache source on another machine.\nBuildKit
+  automatically pulls the image from the registry if needed.\n\n```bash\n# on another
+  machine\n$ docker build --cache-from myname/myapp .\n```\n\n> **Note**: This feature
+  requires the BuildKit backend. You can either\n> [enable BuildKit](../builder.md#buildkit)
+  or use the [buildx](https://github.com/docker/buildx)\n> plugin. The previous builder
+  has limited support for reusing cache from\n> pre-pulled images.\n\n### Squash an
+  image's layers (--squash) (experimental)\n\n#### Overview\n\nOnce the image is built,
+  squash the new layers into a new image with a single\nnew layer. Squashing does
+  not destroy any existing image, rather it creates a new\nimage with the content
+  of the squashed layers. This effectively makes it look\nlike all `Dockerfile` commands
+  were created with a single layer. The build\ncache is preserved with this method.\n\nThe
+  `--squash` option is an experimental feature, and should not be considered\nstable.\n\n\nSquashing
+  layers can be beneficial if your Dockerfile produces multiple layers\nmodifying
+  the same files, for example, files that are created in one step, and\nremoved in
+  another step. For other use-cases, squashing images may actually have\na negative
+  impact on performance; when pulling an image consisting of multiple\nlayers, layers
+  can be pulled in parallel, and allows sharing layers between\nimages (saving space).\n\nFor
+  most use cases, multi-stage builds are a better alternative, as they give more\nfine-grained
+  control over your build, and can take advantage of future\noptimizations in the
+  builder. Refer to the [use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)\nsection
   in the userguide for more information.\n\n\n#### Known limitations\n\nThe `--squash`
   option has a number of known limitations:\n\n- When squashing layers, the resulting
   image cannot take advantage of layer\n  sharing with other images, and may use significantly
