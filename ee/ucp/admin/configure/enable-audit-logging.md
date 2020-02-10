@@ -1,6 +1,6 @@
 ---
-title: Enable audit logging on UCP
-description: Learn how to enable audit logging of all activity in UCP
+title: Audit logging on UCP
+description: Learn how to enable audit logging of all activity in UCP.
 keywords: logs, ucp, swarm, kubernetes, audits
 redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 ---
@@ -8,92 +8,69 @@ redirect_from: /ee/ucp/admin/configure/create-audit-logs/
 >{% include enterprise_label_shortform.md %}
 
 Audit logs are a chronological record of security-relevant activities by 
-individual users, administrators or software components that have affected the 
+individual users, administrators, or software components that have affected the 
 system. They are focused on external user/agent actions and security rather than 
 understanding state or events of the system itself.
 
 Audit logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP 
-API, Swarm API and Kubernetes API endpoints that are invoked (except for the 
-ignored list) and sent to Docker Engine via stdout. Creating audit logs is a UCP 
-component that integrates with Swarm, Kubernetes, and UCP APIs.
+API, Swarm API, and Kubernetes API endpoints that are invoked (except for the 
+ignored list) and sent to Docker Engine through standard output (stdout). Creating audit logs is a UCP component that integrates with Swarm, Kubernetes, and UCP APIs.
 
 ## Logging levels
 
-To allow more control to administrators over the audit logging, three audit 
-logging levels are provided:
+Three audit logging levels are provided to give administrators more control: 
 
-- **None**: audit logging is disabled
-
-- **Metadata**: includes the following:
+- **None:** Audit logging is disabled. 
+- **Metadata:** Includes the following:
     - Method and API endpoint for the request
     - UCP user who made the request
     - Response Status (success or failure)
     - Timestamp of the call
     - Object ID of any created or updated resource (for create or update API 
-    calls). We do not include names of created or updated resources
+    calls). The names of created or updated resources are not included.
     - License Key
     - Remote Address
-
-- **Request**: includes all fields from the Metadata level as well as the 
+- **Request:** Includes all fields from the Metadata level as well as the 
 request payload.
 
 > Note
 >
 > Once UCP audit logging has been enabled, audit logs can be found within the 
 > container logs of the `ucp-controller` container on each UCP manager node. 
-> Please ensure you have a 
-> [logging driver](../../../../config/containers/logging/configure/) 
-> configured appropriately with log rotation set as audit logging can start to 
-> generate a lot of data. 
+> Ensure that you have a [logging  driver](../../../../config/containers/logging/configure/) 
+> configured appropriately with log rotation set, as audit logging can generate a large amount of data. 
 
-## Benefits
+## Benefits of audit logging
 
-You can use audit logs to help with the following use cases:
-
-- **Historical troubleshooting** - Audit logs are helpful in determining a 
-sequence of past events that explain why an issue occurred.
-
-- **Security analysis and auditing** - Security is one of the primary uses for 
-audit logs. A full record of all user interactions with the container 
-infrastructure gives your security team full visibility to questionable or 
-attempted unauthorized accesses.
-
-- **Chargeback** - You can use audit logs and information about the resources to 
-generate chargeback information.
-
-- **Alerting** - If there is a watch on an event stream or a notification 
-created by the event, alerting features can be built on top of event tools that 
-generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
+Audit logs can be of help with historical troubleshooting, security analysis and auditing, generating chargeback information, and creating useful alerts.
 
 ## Enabling UCP audit logging
 
-UCP audit logging can be enabled via the UCP web user interface, the UCP API or 
-via the UCP configuration file.
+Enable audit logging using either the UCP UI, the UCP API, or the UCP configuration file.
 
-### Enabling UCP audit logging using the web UI
+### Enabling UCP audit logging through the UI
 
-1. Log in to the **UCP** Web User Interface
-2. Navigate to **Admin Settings**
-3. Select **Audit Logs**
-4. In the **Configure Audit Log Level** section, select the relevant logging
+1. Access the UCP UI and browse to the Admin Settings page.
+2. Select **Audit Logs.**
+3. In the **Configure Audit Log Level** section, select the relevant logging
 level. 
 
     ![Enabling Audit Logging in UCP](../../images/auditlogging.png){: .with-border}
 
-5. Click **Save**
+4. Click **Save.**
 
 ### Enabling UCP audit logging using the API
 
-1. Download the UCP Client bundle [Download client bundle from the command line](https://success.docker.com/article/download-client-bundle-from-the-cli).
+1. Download the UCP Client bundle [from the command line](https://success.docker.com/article/download-client-bundle-from-the-cli).
 
-2. Retrieve JSON for current audit log configuration.
+2. Retrieve the JSON file for the current audit log configuration.
 
     ```
     export DOCKER_CERT_PATH=~/ucp-bundle-dir/
     curl --cert ${DOCKER_CERT_PATH}/cert.pem --key ${DOCKER_CERT_PATH}/key.pem --cacert ${DOCKER_CERT_PATH}/ca.pem -k -X GET https://ucp-domain/api/ucp/config/logging > auditlog.json
     ```
 
-3. Open auditlog.json to modify the 'auditlevel' field to `metadata` or `request`.
+3. Open auditlog.json to modify the `auditlevel` field to `metadata` or `request`.
 
     ```
     {
@@ -111,7 +88,7 @@ level.
 
 ### Enabling UCP audit logging using the configuration file
 
-Enabling UCP audit logging via the UCP configuration file can be done before 
+Enabling UCP audit logging through the UCP configuration file can be done before 
 or after a UCP installation. Refer to the [UCP configuration file](./ucp-configuration-file/) topic for more information. 
 
 The section of the UCP configuration file that controls UCP auditing logging is:
@@ -124,22 +101,20 @@ The section of the UCP configuration file that controls UCP auditing logging is:
 
 The supported variables for `level` are `""`, `"metadata"` or `"request"`.
 
-> Note
+> Important
 > 
 > The `support_dump_include_audit_logs` flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that `support_dump_include_audit_logs` is set to `false`.  When disabled, the support dump collection tool filters out any lines from the `ucp-controller` container logs that contain the substring `auditID`.
 {: .important} 
 
 ## Accessing audit logs
 
-The audit logs are exposed today through the `ucp-controller` logs. You can 
+The audit logs are exposed through the `ucp-controller` logs. You can 
 access these logs locally through the Docker CLI or through an external 
-container logging solution, such as [ELK](https://success.docker.com/article/elasticsearch-logstash-kibana-logging)
+container logging solution, such as [ELK](https://success.docker.com/article/elasticsearch-logstash-kibana-logging).
 
 ### Accessing audit logs using the Docker CLI
 
-To access audit logs using the Docker CLI:
-
-1. Source a UCP Client Bundle
+1. Source a UCP client bundle.
 2. Run `docker logs` to obtain audit logs. In the following example,
 we are tailing the command to show the last log entry.
 
@@ -204,7 +179,7 @@ events and may create a large amount of log entries.
 
 ## API endpoint information redacted
 
-Information for the following API endpoints is redacted from the audit logs for security purposes:
+Information for the following API endpoints is redacted from the audit logs for security purposes.
 
 - `/secrets/create` (POST)
 - `/secrets/{id}/update` (POST)
@@ -215,5 +190,5 @@ Information for the following API endpoints is redacted from the audit logs for 
 
 ## Where to go next
 
-- [Collect UCP Cluster Metrics with Prometheus](collect-cluster-metrics.md)
+- [Collect UCP cluster metrics with Prometheus](collect-cluster-metrics.md)
 - [Learn more about the UCP Configuration File](ucp-configuration-file.md)
