@@ -89,7 +89,7 @@ the container exits successfully.
 ### Use container linking
 
 Containers can be linked to another container's ports directly using
-`-link remote_name:local_alias` in the client's
+`--link remote_name:local_alias` in the client's
 `docker run`. This sets a number of environment
 variables that can then be used to connect:
 
