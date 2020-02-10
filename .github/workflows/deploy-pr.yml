@@ -19,7 +19,7 @@ jobs:
           NETLIFY_ACCOUNT_SLUG: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_DIRECTORY: _site
-          NETLIFY_SITE_NAME: "${{ github.sha }}-${{ github.run_id }}"
+          NETLIFY_SITE_NAME: ${{ github.ref }}
       - name: notify website is live
         uses: ./.github/actions/create-status-check
         with:
