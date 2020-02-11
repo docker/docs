@@ -17,6 +17,7 @@ redirect_from:
 - /engine/installation/
 - /en/latest/installation/
 - /linux/
+- /edge/
 toc_max: 2
 ---
 
