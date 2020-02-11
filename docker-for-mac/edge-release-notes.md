@@ -12,6 +12,16 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.1.0
+2020-02-12
+
+[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
+
+### Upgrades
+
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+
 ## Docker Desktop Community 2.1.7.0
 2019-12-11
 
