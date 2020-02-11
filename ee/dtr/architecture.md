@@ -13,22 +13,22 @@ Docker Universal Control Plane cluster.
 
 Following DTR deployment use the Docker CLI client to login, push, and pull images.
 
-## High Availability
+## High availability
 
-To assure high-availability, deploy multiple DTR replicas, one on each UCP
+To ensure high-availability, deploy multiple DTR replicas, one on each UCP
 worker node.
 
 ![](images/architecture-2.svg)
 
 All DTR replicas run the same set of services, and any changes made to the configuration of one replica is automatically propagated to the other replicas.
 
-## DTR Internal Components
+## DTR internal components
 
-The installation of DTR on a node starts a selection of containers. Be aware that these containers are for the **internal DTR use ONLY** and are not intended for application use.
+Installing DTR on a node starts a selection of containers. Be aware that these containers are for the **internal DTR use ONLY** and are not intended for application use.
 
 | Container Name                                 | Description                                                                                                                        |
 |:-------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|
-| dtr-api-&lt;replica_id&gt;           | Executes  DTR business logic;  serves the DTR web application, and API                                                        |
+| dtr-api-&lt;replica_id&gt;           | Executes DTR business logic;  serves the DTR web application and API                                                        |
 | dtr-garant-&lt;replica_id&gt;        | Manages DTR authentication                                                                                                         |
 | dtr-jobrunner-&lt;replica_id&gt;     | Runs cleanup jobs in the background                                                                                                |
 | dtr-nginx-&lt;replica_id&gt;         | Receives http and https requests and proxies these requests to other DTR components; listens to ports 80 and 443 of the host, by default   |
@@ -38,11 +38,11 @@ The installation of DTR on a node starts a selection of containers. Be aware tha
 | dtr-rethinkdb-&lt;replica_id&gt;     | Database for persisting repository metadata                                                                                      |
 | dtr-scanningstore-&lt;replica_id&gt; | Stores security scanning data                                                                                                      |
 
-## DTR Networks
+## DTR networks
 
-The *dtr-ol* overlay network is created when DTR is installed. This network DTR containers running on different nodes to connect for data replication purposes.
+The *dtr-ol* overlay network is created when DTR is installed. This network allows DTR containers running on different nodes to connect for data replication purposes.
 
-## DTR Volumes
+## DTR volumes
 
 DTR uses a selection of volumes for persisting data.
 
@@ -55,12 +55,12 @@ DTR uses a selection of volumes for persisting data.
 | dtr-rethink-&lt;replica_id&gt;      | Repository metadata                                                              |
 | dtr-nfs-registry-&lt;replica_id&gt; | Docker images data (if DTR is configured to store images on NFS)                  |
 
-To customize tbe volume driver for these volumes, create the volumes prior to installing DTR. Then, during the installation, DTR will determine which existing volumes do not yet exist on the node and create them there using the default volume driver.
+To customize the volume driver for these volumes, create the volumes prior to installing DTR. Then, during the installation, DTR will determine which existing volumes do not yet exist on the node and create them there using the default volume driver.
 
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
 
-## Image Storage
+## Image storage
 
 By default, Docker Trusted Registry stores images on the filesystem of the node on which it is running. It should, though, be configured to use a centralized storage backend.
 
@@ -75,15 +75,15 @@ DTR supports the following storage backends:
 * OpenStack Swift
 * Microsoft Azure
 
-## How to Interact with DTR
+## How to interact with DTR
 
 DTR offers a web UI for managing settings and user permissions.
 
 ![](images/architecture-4.svg)
 
-The standard Docker CLI client can be used to push and pull images, as can any other tool that is able to interact with a Docker registry.
+The Docker CLI client can be used to push and pull images, as can any other tool that is able to interact with a Docker registry.
 
-## Where to Go Next
+## Where to go next
 
 * [System requirements](admin/install/system-requirements.md)
 * [Install DTR](admin/install/index.md)
