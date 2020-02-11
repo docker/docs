@@ -1,40 +1,40 @@
 ---
 title: Restrict services to worker nodes
-description: Learn how to configure Universal Control Plane to only allow running services in worker nodes.
+description: Learn how to configure Docker Universal Control Plane to only allow running services in worker nodes.
 keywords: ucp, configuration, worker
 ---
 
 >{% include enterprise_label_shortform.md %}
 
-You can configure UCP to allow users to deploy and run services only in
-worker nodes. This ensures all cluster management functionality stays
-performant, and makes the cluster more secure.
+Docker Universal Control Plane (UCP) is set to run on both manager and worker nodes by default, however, it can be configured to run only on worker nodes. This ensures that all cluster management functionality stays performant, while also serving to make the cluster more secure.
 
-If a user deploys a malicious service that can affect the node where it
-is running, it won't be able to affect other nodes in the cluster, or
-any cluster management functionality.
+> **Important**
+> 
+> In the event that a user deploys a malicious service capable of affecting the node on which it is running, that service will not be able to strike any other nodes in the cluster or have any impact on cluster management functionality.
+{: .important} 
 
-## Swarm Workloads
+## Swarm workloads
 
-To restrict users from deploying to manager nodes, log in with administrator
-credentials to the UCP web interface, navigate to the **Admin Settings**
-page, and choose **Scheduler**.
+To change user options for deploying workloads to manager nodes:
 
-![](../../images/restrict-services-to-worker-nodes-1.png){: .with-border}
+1. Log into the UCP UI with administrator credentials.
+2. Navigate to **Admin Settings**.
+3. Click **Scheduler** from the left menu.
 
-You can then choose if user services should be allowed to run on manager nodes
-or not.
+    ![](../../images/restrict-services-to-worker-nodes-1.png){: .with-border}
 
-Having a grant with the `Scheduler` role against the `/` collection takes
+4. Select the **Allow users to schedule on all nodes, including UCP managers and DTR nodes.** check box if user services are allowed to run on manager nodes. 
+
+> **Note**
+> 
+> Creating a grant with the `Scheduler` role against the `/` collection takes
 precedence over any other grants with `Node Schedule` on subcollections.
 
-## Kubernetes Workloads
+## Kubernetes workloads
 
-By default Universal Control Plane clusters takes advantage of [Taints and
-Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
-to prevent a User's workload being deployed on to UCP Manager or DTR Nodes. 
+By default, UCP clusters use [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to prevent a user's workload from being deployed on UCP manager or DTR nodes. 
 
-You can view this taint by running:
+To view the default taint:
 
 ```bash
 $ kubectl get nodes <ucpmanager> -o json | jq -r '.spec.taints | .[]'
@@ -44,26 +44,19 @@ $ kubectl get nodes <ucpmanager> -o json | jq -r '.spec.taints | .[]'
 }
 ```
 
-> Note: Workloads deployed by an Administrator in the `kube-system` namespace do
-> not follow these scheduling constraints. If an Administrator deploys a
-> workload in the `kube-system` namespace, a toleration is applied to bypass
-> this taint, and the workload is scheduled on all node types.
+> **Note**
+> 
+> Workloads deployed by an administrator in the `kube-system` namespace do not follow these scheduling constraints. If an administrator deploys a workload in the `kube-system` namespace, a toleration is applied to bypass this taint, which then schedules the workload on all node types. 
 
-### Allow Administrators to Schedule on Manager / DTR Nodes
+### Allow administrators to schedule workloads on manager / DTR nodes
 
-To allow Administrators to deploy workloads accross all nodes types, an
-Administrator can tick the "Allow administrators to deploy containers on UCP
-managers or nodes running DTR" box in the UCP web interface. 
+To allow administrators to deploy workloads across all nodes types, select the **Allow administrators to deploy containers on UCP managers or nodes running DTR** check box in the UCP UI. 
 
 ![](../../images/restrict-services-to-worker-nodes-2.png){: .with-border}
 
-For all new workloads deployed by Administrators after this box has been
-ticked, UCP will apply a toleration to your workloads to allow the pods to be
-scheduled on all node types.
+When this option is enabled, UCP will apply a toleration to all new workloads deployed by administers, which allows the pods to be scheduled on all node types. 
 
-For existing workloads, the Administrator will need to edit the Pod
-specification, through `kubectl edit <object> <workload>` or the UCP web interface and add
-the following toleration:
+For existing workloads, administrators must use `kubectl edit <object> <workload>` or the UCP UI to add the following toleration to the pod specification:
 
 ```bash
 tolerations:
@@ -71,7 +64,7 @@ tolerations:
   operator: "Exists"
 ```
 
-You can check this has been applied succesfully by:
+To verify that the toleration was applied successfully:
 
 ```bash
 $ kubectl get <object> <workload> -o json | jq -r '.spec.template.spec.tolerations | .[]'
@@ -81,29 +74,38 @@ $ kubectl get <object> <workload> -o json | jq -r '.spec.template.spec.toleratio
 }
 ```
 
-### Allow Users and Service Accounts to Schedule on Manager / DTR Nodes
+### Allow users and service accounts to schedule workloads on manager / DTR nodes
 
-To allow Kubernetes Users and Service Accounts to deploy workloads accross all
-node types in your cluster, an Administrator will need to tick "Allow all
-authenticated users, including service accounts, to schedule on all nodes,
-including UCP managers and DTR nodes." in the UCP web interface. 
+To allow Kubernetes users and service accounts to deploy workloads across all node types in a cluster, an administrator must select the **Allow all authenticated users, including service accounts, to schedule on all nodes, including UCP managers and DTR nodes.** check box in the UCP UI. 
 
 ![](../../images/restrict-services-to-worker-nodes-3.png){: .with-border}
 
-For all new workloads deployed by Kubernetes Users after this box has been
-ticked, UCP will apply a toleration to your workloads to allow the pods to be
-scheduled on all node types. For existing workloads, the User would need to edit
-Pod Specification as detailed above in the "Allow Administrators to Schedule on
-Manager / DTR Nodes" section.
+When this option is enabled, UCP will apply a toleration to all new workloads deployed by Kubernetes, which allows the pods to be scheduled on all node types.
 
-There is a NoSchedule taint on UCP managers and DTR nodes and if you have
-scheduling on managers/workers disabled in the UCP scheduling options, then a
-toleration for that taint will not get applied to the deployments, so they
-should not schedule on those nodes. Unless the Kube workload is deployed in the
-`kube-system` name space.
+For existing workloads, users will need to edit the pod specification, using `kubectl edit <object> <workload>` or the UCP UI to add the following toleration to the pod specification:
+
+```bash
+tolerations:
+- key: "com.docker.ucp.manager"
+  operator: "Exists"
+```
+
+To verify that the toleration was applied successfully:
+
+```bash
+$ kubectl get <object> <workload> -o json | jq -r '.spec.template.spec.tolerations | .[]'
+{
+  "key": "com.docker.ucp.manager",
+  "operator": "Exists"
+}
+```
+
+> **Note**
+>
+> There is a `NoSchedule` taint value available on UCP managers and DTR nodes. If the option to schedule managers and DTR nodes is disabled, a toleration for that taint will not be applied to the deployments. Note that workloads are only scheduled on the nodes if the Kubernetes workload is deployed in the `kube-system` namespace.
 
 ## Where to go next
 
-- [Deploy an Application Package](/ee/ucp/deploy-application-package/)
-- [Deploy a Swarm Workload](/ee/ucp/swarm/)
-- [Deploy a Kubernetes Workload](/ee/ucp/kubernetes//)
+- [Deploy an application package](/ee/ucp/deploy-application-package/)
+- [Deploy a Swarm workload](/ee/ucp/swarm/)
+- [Deploy a Kubernetes workload](/ee/ucp/kubernetes//)
