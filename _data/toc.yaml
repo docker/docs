@@ -3053,7 +3053,7 @@ manuals:
         - sectiontitle: Sign images
           section:
           - path: /ee/dtr/user/manage-images/sign-images/
-            title: Sign an image
+            title: Using Notary to sign an image
           - path: /ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/
             title: Trust with a Remote UCP
       - sectiontitle: Promotion policies and mirroring

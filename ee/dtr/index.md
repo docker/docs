@@ -18,9 +18,10 @@ Specifically, DTR offers a wide range of benefits that include:
 * [Image signing](image-signing)
 
 ## Image and job management
- DTR offers a web-based user interface with which users can browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). With the UI, in fact, users can even see which Dockerfile lines were used to produce an image and, if security scanning is enabled, a list of all of the software installed in that image. In addition, the web UI can be used to [review and audit jobs](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
 
-DTR can serve as a Continuous Integration and Continuous Delivery component, in the building, shipping, and running of applications.
+ DTR has a web-based user interface that you ca use to browse images and [audit repository events](/ee/dtr/user/audit-repository-events/). With the UI, you can see which Dockerfile lines produced an image and, if security scanning is enabled, a list of all of the software installed in that image. You can also [audit jobs with the web interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+
+DTR can serve as a Continuous Integration and Continuous Delivery (CI/CD) component, in the building, shipping, and running of applications.
 
 ## Availability
 
@@ -28,11 +29,11 @@ DTR is highly available through the use of multiple replicas of all containers a
 
 ## Efficiency
 
-DTR is able to reduce the amount of bandwidth used when pulling Docker images by [caching images closer to users](admin/configure/deploy-caches/index.md). in addition, DTR can [clean up unreferenced manifests and layers](admin/configure/garbage-collection.md).
+DTR is able to reduce the bandwidth used when pulling Docker images by [caching images closer to users](admin/configure/deploy-caches/index.md). In addition, DTR can [clean up unreferenced manifests and layers](admin/configure/garbage-collection.md).
 
 ## Built-in access control
 
-DTR uses the [same authentication mechanism](https://docs.docker.com/ee/ucp/#built-in-security-and-access-control) as the Universal Control Plane, with which users can be managed manually or synchronized from LDAP or Active Directory. DTR employs [Role Based Access Control](admin/manage-users/index.md) (RBAC), which allow the implementation of fine-grained access control policies for Docker images.
+As with Universal Control Plane (UCP), DTR uses [Role Based Access Control (RBAC)](admin/manage-users/index.md), which allows you to manage image access, either manually, with LDAP, or with Active Directory.
 
 ## Security scanning
 
@@ -40,7 +41,7 @@ A security scanner is built into DTR, which can be used to discover the versions
 
 ## Image signing
 
-DTR ships with [Notary](/notary/getting_started.md) built in, which allows [Docker Content Trust](/engine/security/trust/content_trust.md) to be be put to use in image signing and verification. For more information about managing Notary data in DTR, refer to the [DTR-specific notary documentation](user/manage-images/sign-images/index.md).
+DTR ships with [Notary](/notary/getting_started.md), which allows you to sign and verify images using [Docker Content Trust](/engine/security/trust/content_trust.md). For more information on managing Notary data in DTR, refer to the [Using Notary to sign an image](user/manage-images/sign-images/index.md).
 
 ## Where to go next
 
