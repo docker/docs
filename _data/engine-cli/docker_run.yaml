@@ -1090,6 +1090,11 @@ examples: |-
   The [Docker User Guide](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/)
   explains in detail how to manipulate ports in Docker.
 
+  Note that ports which are not bound to the host (i.e., `-p 80:80` instead of
+  `-p 127.0.0.1:80:80`) will be accessible from the outside. This also applies if
+  you configured UFW to block this specific port, as Docker manages his
+  own iptables rules. [Read more](https://docs.docker.com/network/iptables/)
+
   ```bash
   $ docker run --expose 80 ubuntu bash
   ```
@@ -1422,7 +1427,7 @@ examples: |-
   flags for IPv4 address retrieval for a network device named `eth0`:
 
   ```bash
-  $ HOSTIP=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$2}' | cut -d / -f 1`
+  $ HOSTIP=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print $2}' | cut -d / -f 1 | sed -n 1p`
   $ docker run  --add-host=docker:${HOSTIP} --rm -it debian
   ```
 
@@ -1607,3 +1612,4 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
+

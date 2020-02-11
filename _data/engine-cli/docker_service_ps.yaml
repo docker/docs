@@ -1,8 +1,11 @@
 command: docker service ps
 short: List the tasks of one or more services
 long: |-
-  Lists the tasks that are running as part of the specified services. This command
-  has to be run targeting a manager node.
+  Lists the tasks that are running as part of the specified services.
+
+  > **Note**: This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the [Swarm mode
+  > section](https://docs.docker.com/engine/swarm/) in the documentation.
 usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
