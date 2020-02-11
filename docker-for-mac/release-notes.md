@@ -13,13 +13,20 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.0.3
+2020-02-11
+
+> [Download](https://hub.docker.com/?overlay=onboarding)
+
+### Upgrades
+
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+
 ## Docker Desktop Community 2.2.0.0
 2020-01-21
 
-> [Download](https://hub.docker.com/?overlay=onboarding)
->
-> You must sign in to Docker Hub to download Docker Desktop.
-
+> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
 Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
 ### Upgrades
