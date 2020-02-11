@@ -12,15 +12,15 @@ on-premises or on a cloud infrastructure.
 
 DTR installation is comprised of seven distinct steps:
 
-  1. [Validate System Requirements](validate-the-system-requirements)
+  1. [Validate system requirements](validate-the-system-requirements)
   2. [Install UCP](install-ucp)
   3. [Install DTR](install-dtr)
-  4. [Confirm that DTR is Running](confirm-that-dtr-is-running)
+  4. [Confirm that DTR is running](confirm-that-dtr-is-running)
   5. [Configure DTR](configure-dtr)
-  6. [Push/Pull Testing](push/pull-testing)
-  7. [Join Replicas to the Cluster](join-replicas-top-the-cluster) (optional)
+  6. [Push and pull testing](push-and-pull-testing)
+  7. [Join replicas to the cluster](join-replicas-top-the-cluster) (optional)
 
-## 1. Validate the System Requirements
+## 1. Validate the system requirements
 
 Before installing DTR, confirm that your infrastructure meets DTR's [system requirements](./system-requirements).
 
@@ -85,7 +85,7 @@ DTR requires UCP to run.
 6. Reconfigure the load balancer back to the desired protocol and port.
 
 
-## 4. Confirm that DTR is Running
+## 4. Confirm that DTR is running
 
 1. Using a browser, navigate to the UCP web interface.
 
@@ -100,16 +100,16 @@ DTR requires UCP to run.
 
 Once DTR has been successfully installed, configure the certificates used for TLS communication ([learn more](../configure/use-your-own-tls-certificates.md)) and the storage backend in which to store the Docker images ([learn more](../configure/external-storage/index.md)).
 
-### Web Interface
+### Web interface
 
   * To update the TLS certificates, access DTR from the browser and navigate to **System > General**.
   * To configure the storage backend, navigate to **System > Storage**. If you are upgrading and changing the existing storage backend, refer to [Switch storage backends](/ee/dtr/admin/configure/external-storage/storage-backend-migration/).
 
-### Command Line Interface
+### Command line interface
 
   To reconfigure DTR using the CLI, refer to the [the reconfigure command](/reference/dtr/2.7/cli/reconfigure/) reference page.
 
-## 6. Push and Pull Testing
+## 6. Push and pull testing
 
 Once the DTR instance is up and running, test whether images can be pushed and pulled.
 
@@ -117,7 +117,7 @@ Once the DTR instance is up and running, test whether images can be pushed and p
 * [Create a repository](../../user/manage-images/index.md)
 * [Push and pull images](../../user/manage-images/pull-and-push-images.md)
 
-## 7. Join Replicas to the Cluster (optional)
+## 7. Join replicas to the cluster (optional)
 
 To set up DTR for high availability, add more replicas to your DTR cluster. Doing this allows for the load-balancing of requests across all replicas, and it will keep DTR working in the event that a replica fails.
 
