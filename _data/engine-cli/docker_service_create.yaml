@@ -1,8 +1,11 @@
 command: docker service create
 short: Create a new service
 long: |-
-  Creates a service as described by the specified parameters. You must run this
-  command on a manager node.
+  Creates a service as described by the specified parameters.
+
+  > **Note**: This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the [Swarm mode
+  > section](https://docs.docker.com/engine/swarm/) in the documentation.
 usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker service
 plink: docker_service.yaml
@@ -646,13 +649,27 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   docker service create --name redis \\\n    --secret source=ssh-key,target=ssh \\\n
   \   --secret source=app-key,target=app,uid=1000,gid=1001,mode=0400 \\\n    redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nTo
   grant a service access to multiple secrets, use multiple `--secret` flags.\n\nSecrets
-  are located in `/run/secrets` in the container.  If no target is\nspecified, the
-  name of the secret will be used as the in memory file in the\ncontainer.  If a target
-  is specified, that will be the filename.  In the\nexample above, two files will
-  be created: `/run/secrets/ssh` and\n`/run/secrets/app` for each of the secret targets
-  specified.\n\n### Create a service with a rolling update policy\n\n```bash\n$ docker
-  service create \\\n  --replicas 10 \\\n  --name redis \\\n  --update-delay 10s \\\n
-  \ --update-parallelism 2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
+  are located in `/run/secrets` in the container if no target is specified.\nIf no
+  target is specified, the name of the secret is used as the in memory file\nin the
+  container. If a target is specified, that is used as the filename. In the\nexample
+  above, two files are created: `/run/secrets/ssh` and\n`/run/secrets/app` for each
+  of the secret targets specified.\n\n### Create a service with configs\n\nUse the
+  `--config` flag to give a container access to a\n[config](config_create.md).\n\nCreate
+  a service with a config. The config will be mounted into `redis-config`,\nbe owned
+  by the user who runs the command inside the container (often `root`),\nand have
+  file mode `0444` or world-readable. You can specify the `uid` and `gid`\nas numerical
+  IDs or names. When using names, the provided group/user names must\npre-exist in
+  the container. The `mode` is specified as a 4-number sequence such\nas `0755`.\n\n```bash\n$
+  docker service create --name=redis --config redis-conf redis:3.0.6\n```\n\nCreate
+  a service with a config and specify the target location and file mode:\n\n```bash\n$
+  docker service create --name redis \\\n  --config source=redis-conf,target=/etc/redis/redis.conf,mode=0400
+  redis:3.0.6\n```\n\nTo grant a service access to multiple configs, use multiple
+  `--config` flags.\n\nConfigs are located in `/` in the container if no target is
+  specified. If no\ntarget is specified, the name of the config is used as the name
+  of the file in\nthe container. If a target is specified, that is used as the filename.\n\n###
+  Create a service with a rolling update policy\n\n```bash\n$ docker service create
+  \\\n  --replicas 10 \\\n  --name redis \\\n  --update-delay 10s \\\n  --update-parallelism
+  2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
   the scheduler updates a\nmaximum of 2 tasks at a time, with `10s` between updates.
   For more information,\nrefer to the [rolling updates\ntutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/).\n\n###
   Set environment variables (-e, --env)\n\nThis sets an environment variable for all
@@ -753,15 +770,15 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   Enables recursive bind-mount.</li>\n      </ul>\n    </td>\n  </tr>\n</table>\n\n#####
   Bind propagation\n\nBind propagation refers to whether or not mounts created within
   a given\nbind mount or named volume can be propagated to replicas of that mount.
-  Consider\na mount point `/mnt`, which is also mounted on `/tmp`. The propation settings\ncontrol
-  whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each\npropagation
-  setting has a recursive counterpoint. In the case of recursion,\nconsider that `/tmp/a`
-  is also mounted as `/foo`. The propagation settings\ncontrol whether `/mnt/a` and/or
-  `/tmp/a` would exist.\n\nThe `bind-propagation` option defaults to `rprivate` for
-  both bind mounts and\nvolume mounts, and is only configurable for bind mounts. In
-  other words, named\nvolumes do not support bind propagation.\n\n- **`shared`**:
-  Sub-mounts of the original mount are exposed to replica mounts,\n                and
-  sub-mounts of replica mounts are also propagated to the\n                original
+  Consider\na mount point `/mnt`, which is also mounted on `/tmp`. The propagation
+  settings\ncontrol whether a mount on `/tmp/a` would also be available on `/mnt/a`.
+  Each\npropagation setting has a recursive counterpoint. In the case of recursion,\nconsider
+  that `/tmp/a` is also mounted as `/foo`. The propagation settings\ncontrol whether
+  `/mnt/a` and/or `/tmp/a` would exist.\n\nThe `bind-propagation` option defaults
+  to `rprivate` for both bind mounts and\nvolume mounts, and is only configurable
+  for bind mounts. In other words, named\nvolumes do not support bind propagation.\n\n-
+  **`shared`**: Sub-mounts of the original mount are exposed to replica mounts,\n
+  \               and sub-mounts of replica mounts are also propagated to the\n                original
   mount.\n- **`slave`**: similar to a shared mount, but only in one direction. If
   the\n               original mount exposes a sub-mount, the replica mount can see
   it.\n               However, if the replica mount exposes a sub-mount, the original\n
@@ -848,27 +865,42 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   in the swarm.\n\nThe following command creates a global service:\n\n```bash\n$ docker
   service create \\\n --name redis_2 \\\n --mode global \\\n redis:3.0.6\n```\n\n###
   Specify service constraints (--constraint)\n\nYou can limit the set of nodes where
-  a task can be scheduled by defining\nconstraint expressions. Multiple constraints
+  a task can be scheduled by defining\nconstraint expressions. Constraint expressions
+  can either use a _match_ (`==`)\nor _exclude_ (`!=`) rule. Multiple constraints
   find nodes that satisfy every\nexpression (AND match). Constraints can match node
-  or Docker Engine labels as\nfollows:\n\n\n<table>\n  <tr>\n    <th>node attribute</th>\n
-  \   <th>matches</th>\n    <th>example</th>\n  </tr>\n  <tr>\n    <td><tt>node.id</tt></td>\n
-  \   <td>Node ID</td>\n    <td><tt>node.id==2ivku8v2gvtg4</tt></td>\n  </tr>\n  <tr>\n
-  \   <td><tt>node.hostname</tt></td>\n    <td>Node hostname</td>\n    <td><tt>node.hostname!=node-2</tt></td>\n
-  \ </tr>\n  <tr>\n    <td><tt>node.role</tt></td>\n    <td>Node role</td>\n    <td><tt>node.role==manager</tt></td>\n
-  \ </tr>\n  <tr>\n    <td><tt>node.labels</tt></td>\n    <td>user defined node labels</td>\n
-  \   <td><tt>node.labels.security==high</tt></td>\n  </tr>\n  <tr>\n    <td><tt>engine.labels</tt></td>\n
-  \   <td>Docker Engine's labels</td>\n    <td><tt>engine.labels.operatingsystem==ubuntu
-  14.04</tt></td>\n  </tr>\n</table>\n\n\n`engine.labels` apply to Docker Engine labels
-  like operating system,\ndrivers, etc. Swarm administrators add `node.labels` for
-  operational purposes by\nusing the [`docker node update`](node_update.md) command.\n\nFor
-  example, the following limits tasks for the redis service to nodes where the\nnode
-  type label equals queue:\n\n```bash\n$ docker service create \\\n  --name redis_2
-  \\\n  --constraint 'node.labels.type == queue' \\\n  redis:3.0.6\n```\n\n### Specify
-  service placement preferences (--placement-pref)\n\nYou can set up the service to
-  divide tasks evenly over different categories of\nnodes. One example of where this
-  can be useful is to balance tasks over a set\nof datacenters or availability zones.
+  or Docker Engine labels as\nfollows:\n\nnode attribute       | matches                        |
+  example\n---------------------|--------------------------------|-----------------------------------------------\n`node.id`
+  \           | Node ID                        | `node.id==2ivku8v2gvtg4`\n`node.hostname`
+  \     | Node hostname                  | `node.hostname!=node-2`\n`node.role`          |
+  Node role (`manager`/`worker`) | `node.role==manager`\n`node.platform.os`   | Node
+  operating system          | `node.platform.os==windows`\n`node.platform.arch` |
+  Node architecture              | `node.platform.arch==x86_64`\n`node.labels`        |
+  User-defined node labels       | `node.labels.security==high`\n`engine.labels`      |
+  Docker Engine's labels         | `engine.labels.operatingsystem==ubuntu-14.04`\n\n\n`engine.labels`
+  apply to Docker Engine labels like operating system, drivers,\netc. Swarm administrators
+  add `node.labels` for operational purposes by using\nthe [`docker node update`](node_update.md)
+  command.\n\nFor example, the following limits tasks for the redis service to nodes
+  where the\nnode type label equals queue:\n\n```bash\n$ docker service create \\\n
+  \ --name redis_2 \\\n  --constraint node.platform.os==linux \\\n  --constraint node.labels.type==queue
+  \\\n  redis:3.0.6\n```\n\nIf the service constraints exclude all nodes in the cluster,
+  a message is printed\nthat no suitable node is found, but the scheduler will start
+  a reconciliation\nloop and deploy the service once a suitable node becomes available.\n\nIn
+  the example below, no node satisfying the constraint was found, causing the\nservice
+  to not reconcile with the desired state:\n\n```bash\n$ docker service create \\\n
+  \ --name web \\\n  --constraint node.labels.region==east \\\n  nginx:alpine\n\nlx1wrhhpmbbu0wuk0ybws30bc\noverall
+  progress: 0 out of 1 tasks\n1/1: no suitable node (scheduling constraints not satisfied
+  on 5 nodes)\n\n$ docker service ls\nID                  NAME     MODE         REPLICAS
+  \  IMAGE               PORTS\nb6lww17hrr4e        web      replicated   0/1        nginx:alpine\n```\n\nAfter
+  adding the `region=east` label to a node in the cluster, the service\nreconciles,
+  and the desired number of replicas are deployed:\n\n```bash\n$ docker node update
+  --label-add region=east yswe2dm4c5fdgtsrli1e8ya5l \nyswe2dm4c5fdgtsrli1e8ya5l\n\n$
+  docker service ls\nID                  NAME     MODE         REPLICAS   IMAGE               PORTS\nb6lww17hrr4e
+  \       web      replicated   1/1        nginx:alpine\n```\n\n### Specify service
+  placement preferences (--placement-pref)\n\nYou can set up the service to divide
+  tasks evenly over different categories of\nnodes. One example of where this can
+  be useful is to balance tasks over a set\nof datacenters or availability zones.
   The example below illustrates this:\n\n```bash\n$ docker service create \\\n  --replicas
-  9 \\\n  --name redis_2 \\\n  --placement-pref 'spread=node.labels.datacenter' \\\n
+  9 \\\n  --name redis_2 \\\n  --placement-pref spread=node.labels.datacenter \\\n
   \ redis:3.0.6\n```\n\nThis uses `--placement-pref` with a `spread` strategy (currently
   the only\nsupported strategy) to spread tasks evenly over the values of the `datacenter`\nnode
   label. In this example, we assume that every node has a `datacenter` node\nlabel
@@ -904,24 +936,66 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   \ --placement-pref 'spread=node.labels.rack' \\\n  redis:3.0.6\n```\n\nWhen updating
   a service with `docker service update`, `--placement-pref-add`\nappends a new placement
   preference after all existing placement preferences.\n`--placement-pref-rm` removes
-  an existing placement preference that matches the\nargument.\n\n### Specify maximum
-  replicas per node (--replicas-max-per-node)\n\nUse the `--replicas-max-per-node`
-  flag to set the maximum number of replica tasks that can run on a node.\nThe following
-  command creates a nginx service with 2 replica tasks but only one replica task per
-  node.\n\nOne example where this can be useful is to balance tasks over a set of
-  data centers together with `--placement-pref`\nand let `--replicas-max-per-node`
-  setting make sure that replicas are not migrated to another datacenter during\nmaintenance
-  or datacenter failure.\n\nThe example below illustrates this:\n\n```bash\n$ docker
-  service create \\\n  --name nginx \\\n  --replicas 2 \\\n  --replicas-max-per-node
-  1 \\\n  --placement-pref 'spread=node.labels.datacenter' \\\n  nginx\n```\n\n###
-  Attach a service to an existing network (--network)\n\nYou can use overlay networks
-  to connect one or more services within the swarm.\n\nFirst, create an overlay network
-  on a manager node the docker network create\ncommand:\n\n```bash\n$ docker network
-  create --driver overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter you
-  create an overlay network in swarm mode, all manager nodes have\naccess to the network.\n\nWhen
-  you create a service and pass the `--network` flag to attach the service to\nthe
-  overlay network:\n\n```bash\n$ docker service create \\\n  --replicas 3 \\\n  --network
-  my-network \\\n  --name my-web \\\n  nginx\n\n716thylsndqma81j6kkkb5aus\n```\n\nThe
+  an existing placement preference that matches the\nargument.\n\n### Specify memory
+  requirements and constraints for a service (--reserve-memory and --limit-memory)\n\nIf
+  your service needs a minimum amount of memory in order to run correctly,\nyou can
+  use `--reserve-memory` to specify that the service should only be\nscheduled on
+  a node with this much memory available to reserve. If no node is\navailable that
+  meets the criteria, the task is not scheduled, but remains in a\npending state.\n\nThe
+  following example requires that 4GB of memory be available and reservable\non a
+  given node before scheduling the service to run on that node.\n\n```bash\n$ docker
+  service create --reserve-memory=4GB --name=too-big nginx:alpine\n```\n\nThe managers
+  won't schedule a set of containers on a single node whose combined\nreservations
+  exceed the memory available on that node.\n\nAfter a task is scheduled and running,
+  `--reserve-memory` does not enforce a\nmemory limit. Use `--limit-memory` to ensure
+  that a task uses no more than a\ngiven amount of memory on a node. This example
+  limits the amount of memory used\nby the task to 4GB. The task will be scheduled
+  even if each of your nodes has\nonly 2GB of memory, because `--limit-memory` is
+  an upper limit.\n\n```bash\n$ docker service create --limit-memory=4GB --name=too-big
+  nginx:alpine\n```\n\nUsing `--reserve-memory` and `--limit-memory` does not guarantee
+  that Docker\nwill not use more memory on your host than you want. For instance,
+  you could\ncreate many services, the sum of whose memory usage could exhaust the
+  available\nmemory.\n\nYou can prevent this scenario from exhausting the available
+  memory by taking\ninto account other (non-containerized) software running on the
+  host as well. If\n`--reserve-memory` is greater than or equal to `--limit-memory`,
+  Docker won't\nschedule a service on a host that doesn't have enough memory. `--limit-memory`\nwill
+  limit the service's memory to stay within that limit, so if every service\nhas a
+  memory-reservation and limit set, Docker services will be less likely to\nsaturate
+  the host. Other non-service containers or applications running directly\non the
+  Docker host could still exhaust memory.\n\nThere is a downside to this approach.
+  Reserving memory also means that you may\nnot make optimum use of the memory available
+  on the node. Consider a service\nthat under normal circumstances uses 100MB of memory,
+  but depending on load can\n\"peak\" at 500MB. Reserving 500MB for that service (to
+  guarantee can have 500MB\nfor those \"peaks\") results in 400MB of memory being
+  wasted most of the time.\n\nIn short, you can take a more conservative or more flexible
+  approach:\n\n- **Conservative**: reserve 500MB, and limit to 500MB. Basically you're
+  now\n  treating the service containers as VMs, and you may be losing a big advantage\n
+  \ containers, which is greater density of services per host.\n\n- **Flexible**:
+  limit to 500MB in the assumption that if the service requires\n  more than 500MB,
+  it is malfunctioning. Reserve something between the 100MB\n  \"normal\" requirement
+  and the 500MB \"peak\" requirement\". This assumes that when\n  this service is
+  at \"peak\", other services or non-container workloads probably\n  won't be.\n\nThe
+  approach you take depends heavily on the memory-usage patterns of your\nworkloads.
+  You should test under normal and peak conditions before settling\non an approach.\n\nOn
+  Linux, you can also limit a service's overall memory footprint on a given\nhost
+  at the level of the host operating system, using `cgroups` or other\nrelevant operating
+  system tools.\n\n### Specify maximum replicas per node (--replicas-max-per-node)\n\nUse
+  the `--replicas-max-per-node` flag to set the maximum number of replica tasks that
+  can run on a node.\nThe following command creates a nginx service with 2 replica
+  tasks but only one replica task per node.\n\nOne example where this can be useful
+  is to balance tasks over a set of data centers together with `--placement-pref`\nand
+  let `--replicas-max-per-node` setting make sure that replicas are not migrated to
+  another datacenter during\nmaintenance or datacenter failure.\n\nThe example below
+  illustrates this:\n\n```bash\n$ docker service create \\\n  --name nginx \\\n  --replicas
+  2 \\\n  --replicas-max-per-node 1 \\\n  --placement-pref 'spread=node.labels.datacenter'
+  \\\n  nginx\n```\n\n### Attach a service to an existing network (--network)\n\nYou
+  can use overlay networks to connect one or more services within the swarm.\n\nFirst,
+  create an overlay network on a manager node the docker network create\ncommand:\n\n```bash\n$
+  docker network create --driver overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter
+  you create an overlay network in swarm mode, all manager nodes have\naccess to the
+  network.\n\nWhen you create a service and pass the `--network` flag to attach the
+  service to\nthe overlay network:\n\n```bash\n$ docker service create \\\n  --replicas
+  3 \\\n  --network my-network \\\n  --name my-web \\\n  nginx\n\n716thylsndqma81j6kkkb5aus\n```\n\nThe
   swarm extends my-network to each node running the service.\n\nContainers on the
   same network can access each other using\n[service discovery](https://docs.docker.com/engine/swarm/networking/#use-swarm-mode-service-discovery).\n\nLong
   form syntax of `--network` allows to specify list of aliases and driver options:
