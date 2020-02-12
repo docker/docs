@@ -1,6 +1,6 @@
 name: deploy website to netlify
 
-on: [pull_request]
+on: pull_request
 
 jobs:
   build-static-page:
@@ -19,7 +19,7 @@ jobs:
           NETLIFY_ACCOUNT_SLUG: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_DIRECTORY: _site
-          NETLIFY_SITE_NAME: ${{ github.ref }}
+          NETLIFY_SITE_NAME: "${{ github.repository }}/${{ github.head_ref }}"
       - name: notify website is live
         uses: ./.github/actions/create-status-check
         with:

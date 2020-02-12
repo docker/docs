@@ -17,4 +17,4 @@ jobs:
         uses: ./.github/actions/netlify-clean
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_NAME: ${{ github.ref }}
+          NETLIFY_SITE_NAME: "${{ github.repository }}/${{ github.head_ref }}"
