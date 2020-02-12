@@ -141,8 +141,8 @@ future release. Configure user authentication in UCP.
   This issue should be fixed on CS Engine 1.12.
   * When the DTR proxy container stops, it may seem that the DTR UI is
   responding, but it shows an "empty" notification when saving settings.
-  * When configuring DTR to use a proxy, connections to the Docker Notary server
-  are routed through the proxy. If the Docker Notary is not reachable through
+  * When configuring DTR to use a proxy, connections to the Notary server
+  are routed through the proxy. If the Notary is not reachable through
   the proxy, you need to add the Notary server url to the NO_PROXY settings.
 
 ## Version 2.0.0

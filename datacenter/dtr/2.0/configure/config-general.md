@@ -30,7 +30,7 @@ for the new domain. This also works with IP addresses.
 
 ## Docker Content Trust
 
-The Trusted Registry's includes integration with of Docker Notary to provide
+The Trusted Registry's includes integration with of Notary to provide
 Content Trust functionality, allowing your organization to push and pull
 trusted images. After pushing images in the Trusted Registry, you can see
 which image tags were signed by viewing the appropriate repositories through
