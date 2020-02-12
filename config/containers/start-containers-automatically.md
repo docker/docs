@@ -38,6 +38,18 @@ restart unless it is explicitly stopped or Docker is restarted.
 $ docker run -dit --restart unless-stopped redis
 ```
 
+This command changes the restart policy for an already running container named `redis`.
+
+```bash
+$ docker update --restart unless-stopped redis
+```
+
+And this command will ensure all currently running containers will be restarted unless stopped.
+
+```bash
+$ docker update --restart unless-stopped $(docker ps -q)
+```
+
 ### Restart policy details
 
 Keep the following in mind when using restart policies:
