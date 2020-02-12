@@ -80,7 +80,7 @@ you need to add this configuration in the Docker systemd service file.
      
     Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker:
     ```bash
-    $ mdkir -p ~/.config/systemd/user/docker.service.d
+    $ mkdir -p ~/.config/systemd/user/docker.service.d
     ```
 
 2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`
