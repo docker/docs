@@ -136,9 +136,9 @@ What you see above is a good way to organize a simple Dockerfile; always start w
 
 Now that we have some source code and a Dockerfile, it's time to build our first image, and make sure the containers launched from it work as expected.
 
-> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - everything you'll learn in this tutorial works the exact same way for Windows containers.
+> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
 
-Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell. Let's build your bulletin board image:
+Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
 
 ```script
 docker image build -t bulletinboard:1.0 .
@@ -171,6 +171,8 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
     ```script
     docker container rm --force bb
     ```
+
+    The `--force` option removes the running container.
 
 ## Conclusion
 

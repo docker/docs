@@ -63,7 +63,7 @@ Welcome! We are excited that you want to learn Docker. The Docker Quickstart tra
 
 2. [Build and run your image](part2.md)
 
-3. [Share your containerized applications on Docker Hub](part3.md)
+3. [Share images on Docker Hub](part3.md)
 
 ## Docker concepts
 
