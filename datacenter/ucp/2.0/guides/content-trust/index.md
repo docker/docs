@@ -33,7 +33,7 @@ team, or someone that is a member of all those teams.
 If you don't specify any team, the image will be trusted as long as it is signed
 by any UCP user whose keys are trusted in a Notary delegation role.
 
-## Set up the Docker Notary CLI client
+## Set up the Notary CLI client
 
 After you configure UCP to only run applications that use Docker images you
 trust, you need to specify which Docker images can be trusted using the Docker
@@ -67,7 +67,7 @@ $ alias notary="notary -s https://<dtr_url> -d ~/.docker/trust --tlscacert <dtr_
 
 ## Set up a trusted image repository
 
-Once your Docker Notary CLI client is configured, you can check if Notary has
+Once your Notary CLI client is configured, you can check if Notary has
 information about a specific repository:
 
 ```bash
@@ -90,7 +90,7 @@ a passphrase to encrypt the private key, and stores the key pair in the
 directory you've specified with the `notary -d` flag.
 You should ensure you create backups for these keys, and that they are kept
 securely and offline.
-[Learn more about the keys used by Docker Notary.](/engine/security/trust/trust_key_mng.md)
+[Learn more about the keys used by Notary.](/engine/security/trust/trust_key_mng.md)
 
 ## Sign and push an image
 
