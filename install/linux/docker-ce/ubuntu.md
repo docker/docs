@@ -32,8 +32,7 @@ To learn more about Docker EE, see
 To install Docker Engine - Community, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Disco 19.04
-- Cosmic 18.10
+- Eoan 19.10
 - Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
 
