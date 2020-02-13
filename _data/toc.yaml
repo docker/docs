@@ -1319,7 +1319,7 @@ manuals:
   title: Docker Template
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Docker Notary
+  - sectiontitle: Notary
     section:
     - path: /notary/getting_started/
       title: Get started with Notary
