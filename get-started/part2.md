@@ -176,7 +176,7 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 
 ## Conclusion
 
-At this point, we've successfully built an image, performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination cluster.
+At this point, we've successfully built an image, performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
 
 [On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 

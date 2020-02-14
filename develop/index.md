@@ -4,7 +4,11 @@ description: Overview of developer resources
 keywords: developer, developing, apps, api, sdk
 ---
 
-This page lists resources for application developers using Docker.
+This page contains a list of resources for application developers who would like to build new applications using Docker.
+
+## Prerequisites
+
+Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
 
 ## Develop new apps on Docker
 
@@ -12,12 +16,11 @@ If you're just getting started developing a brand new app on Docker, check out
 these resources to understand some of the most common patterns for getting the
 most benefits from Docker.
 
-- Learn to [build an image from a Dockerfile](/get-started/part2.md){: target="_blank" class="_"}
 - Use [multistage builds](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} to keep your images lean
 - Manage application data using [volumes](/engine/admin/volumes/volumes.md) and [bind mounts](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"}
 - [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
 - [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
-- General application development best practices
+- [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
 
 ## Learn about language-specific app development with Docker
 
