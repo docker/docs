@@ -116,8 +116,16 @@ pre code {
 }
 
 a.anchorLink {
+    font-size: 0.5em;
     margin-left: 5px;
     visibility: hidden;
+}
+
+h1:hover > a.anchorLink,
+h2:hover > a.anchorLink,
+h3:hover > a.anchorLink
+{
+    visibility: visible;
 }
 
 a.glossary {

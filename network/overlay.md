@@ -11,9 +11,9 @@ redirect_from:
 The `overlay` network driver creates a distributed network among multiple
 Docker daemon hosts. This network sits on top of (overlays) the host-specific
 networks, allowing containers connected to it (including swarm service
-containers) to communicate securely. Docker transparently handles routing of
-each packet to and from the correct Docker daemon host and the correct
-destination container.
+containers) to communicate securely when encryption is enabled. Docker
+transparently handles routing of each packet to and from the correct Docker
+daemon host and the correct destination container.
 
 When you initialize a swarm or join a Docker host to an existing swarm, two
 new networks are created on that Docker host:

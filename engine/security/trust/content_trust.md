@@ -20,7 +20,7 @@ client-side or runtime verification of the integrity and publisher of specific
 image tags.
 
 Through DCT, image publishers can sign their images and image consumers can
-ensure that the images they use are signed. Publishers could be individuals
+ensure that the images they pull are signed. Publishers could be individuals
 or organizations manually signing their content or automated software supply
 chains signing content as part of their release process.
 
@@ -244,9 +244,9 @@ Engine Signature Verification prevents the following:
 
 DCT does not verify that a running container’s filesystem has not been altered
 from what was in the image. For example, it does not prevent a container from
-writing to the filesystem, once the container is running, nor does it prevent
-the container’s filesystem from being altered on disk. DCT will also not prevent
-unsigned images from being imported, loaded, or created.
+writing to the filesystem, once the container is running. Moreover, it does not 
+prevent the image's filesystem from being altered on a docker host's disk. DCT 
+will also not prevent unsigned images from being imported, loaded, or created.
 
 ### Enabling DCT within the Docker Enterprise Engine
 

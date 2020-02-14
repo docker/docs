@@ -93,7 +93,7 @@ and creating a tar archive of the [dtr-registry volume](/ee/dtr/architecture/):
 {% raw %}
 ```none
 $ sudo tar -cf {{ image_backup_file }} \
--C /var/lib/docker/volumes/ dtr-registry-<replica-id>
+-C /var/lib/docker/volumes/dtr-registry-<replica-id>
 ```
 {% endraw %}
 
