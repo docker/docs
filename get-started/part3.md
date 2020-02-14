@@ -24,7 +24,11 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 2. Fill out the form and submit to create your Docker ID.
 
-3. Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**. Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
+3. Verify your email address to complete the registration process.
+
+4. Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**.
+
+5. Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
 
     > You can do the same thing from the command line by typing `docker login`.
 
