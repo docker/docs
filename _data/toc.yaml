@@ -27,14 +27,10 @@ guides:
     section:
     - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Containerizing an application"
+    - title: "Part 2: Build and run your image"
       path: /get-started/part2/
-    - title: "Part 3: Deploying to Kubernetes"
+    - title: "Part 3: Share images on Docker Hub"
       path: /get-started/part3/
-    - title: "Part 4: Deploying to Swarm"
-      path: /get-started/part4/
-    - title: "Part 5: Sharing images on Docker Hub"
-      path: /get-started/part5/
   - path: /get-started/resources/
     title: "Educational resources"
 - sectiontitle: Develop with Docker
@@ -129,6 +125,14 @@ guides:
         title: Use the VFS storage driver
 - sectiontitle: Run your app in production
   section:
+  - sectiontitle: Orchestration
+    section:
+    - title: "Overview"
+      path: /get-started/orchestration/
+    - title: "Deploy to Kubernetes"
+      path: /get-started/kube-deploy/
+    - title: "Deploy to Swarm"
+      path: /get-started/swarm-deploy/
   - sectiontitle: Configure all objects
     section:
     - path: /config/labels-custom-metadata/
