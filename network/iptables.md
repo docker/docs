@@ -86,7 +86,7 @@ It is possible to set the `iptables` key to `false` in the Docker engine's confi
 
 For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
 
-## Note on the `--ip` option
+## Setting the default bind address for containers
 
 By default, the Docker daemon will expose ports on the `0.0.0.0` address, i.e.
 any address on the host. If you want to change that behavior to only
