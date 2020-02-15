@@ -89,20 +89,10 @@ For system integrators who wish to build the Docker runtime into other applicati
 ## Note on the `--ip` option
 
 By default, the Docker daemon will expose ports on the `0.0.0.0` address, i.e.
-any address on the host. If you want to change that behavior to e.g. only
+any address on the host. If you want to change that behavior to only
 expose ports on an internal IP address, you can use the `--ip` option to
-specify a different IP address. This method heightens security (connections
-are not allowed on IPs the service is not bound to), without the necessity
-for disabling the iptables mechanisms altogether, because they do honor this
-setting and do not expose services on IPs they shall not be exposed on.
-
-However, setting `--ip` only changes the _default_,
-it does not _restrict_ services to that IP. This means that while containers
-deployed via a simple `docker run` command mostly honor this setting (unless
-a `-p` option string explicitly overrides it), other container management
-systems may feel free to ignore this setting (or simply be unaware of it).
-Thus if they specify `0.0.0.0` explicitly, the container will be reachable
-on any interface regardless of the `--ip` option.
+specify a different IP address. However, setting `--ip` only changes the
+_default_, it does not _restrict_ services to that IP.
 
 ## Next steps
 
