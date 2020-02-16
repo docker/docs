@@ -26,19 +26,20 @@ Swarm never creates individual containers like we did in the previous step of th
 
 Let's write a simple stack file to run and manage our bulletin board. Place the following in a file called `bb-stack.yaml`:
 
-    ```yaml
-    version: '3.7'
 
-    services:
-      bb-app:
-        image: bulletinboard:1.0
-        ports:
-          - "8000:8080"
-    ```
+```yaml
+version: '3.7'
 
-    In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based off of your `bulletinboard:1.0` image created in [Part 2](part2.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.
+services:
+  bb-app:
+    image: bulletinboard:1.0
+    ports:
+      - "8000:8080"
+```
 
-    > **Kubernetes Services and Swarm Services are very different!** Despite the similar name, the two orchestrators mean very different things by the term 'service'. In Swarm, a service provides both scheduling _and_ networking facilities, creating containers and providing tools for routing traffic to them. In Kubernetes, scheduling and networking are handled separately: _deployments_ (or other controllers) handle the scheduling of containers as pods, while _services_ are responsible only for adding networking features to those pods.
+In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based off of your `bulletinboard:1.0` image created in [Part 2](part2.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.
+
+> **Kubernetes Services and Swarm Services are very different!** Despite the similar name, the two orchestrators mean very different things by the term 'service'. In Swarm, a service provides both scheduling _and_ networking facilities, creating containers and providing tools for routing traffic to them. In Kubernetes, scheduling and networking are handled separately: _deployments_ (or other controllers) handle the scheduling of containers as pods, while _services_ are responsible only for adding networking features to those pods.
 
 ## Deploy and check your application
 
