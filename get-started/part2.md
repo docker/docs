@@ -128,7 +128,7 @@ The steps above built up the filesystem of our image, but there are other lines 
 
 The `CMD` directive is our first example of specifying some metadata in our image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
 
-The `EXPOSE 8080` informs Docker that the container is listening on port 8000 at runtime.
+The `EXPOSE 8080` informs Docker that the container is listening on port 8080 at runtime.
 
 What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few we see above; for a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 
