@@ -20,15 +20,15 @@ At this point, you've built a containerized application in [Part 2](part2.md) on
 
 If you don't yet have a Docker ID, follow these steps to set one up; this will allow you to share images on Docker Hub.
 
-1. Visit the Docker Hub sign up page, [https://hub.docker.com/signup](https://hub.docker.com/signup).
+1.  Visit the Docker Hub sign up page, [https://hub.docker.com/signup](https://hub.docker.com/signup).
 
-2. Fill out the form and submit to create your Docker ID.
+2.  Fill out the form and submit to create your Docker ID.
 
-3. Verify your email address to complete the registration process.
+3.  Verify your email address to complete the registration process.
 
-4. Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**.
+4.  Click on the Docker icon in your toolbar or system tray, and click **Sign in / Create Docker ID**.
 
-5. Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
+5.  Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
 
     > You can do the same thing from the command line by typing `docker login`.
 
@@ -36,19 +36,19 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
 
-1. Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
+1.  Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
 
-2. Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
+2.  Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
 
     ![make a repo](images/newrepo.png){:width="100%"}
 
-3. Now we're ready to share our image on Docker Hub, but there's one thing we must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, images must be named like `<Docker ID>/<Repository Name>:<tag>`. We can relabel our `bulletinboard:1.0` image like this (of course, please replace `gordon` with your Docker ID):
+3.  Now we're ready to share our image on Docker Hub, but there's one thing we must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, images must be named like `<Docker ID>/<Repository Name>:<tag>`. We can relabel our `bulletinboard:1.0` image like this (of course, please replace `gordon` with your Docker ID):
 
     ```shell
     docker image tag bulletinboard:1.0 gordon/bulletinboard:1.0
     ```
 
-4. Finally, push your image to Docker Hub:
+4.  Finally, push your image to Docker Hub:
 
     ```shell
     docker image push gordon/bulletinboard:1.0
