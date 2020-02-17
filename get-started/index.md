@@ -61,7 +61,7 @@ Welcome! We are excited that you want to learn Docker. The Docker Quickstart tra
 
 1. Set up your Docker environment (on this page)
 
-2. [Build and run your image](part2.md)
+2. [Build and run your Docker image](part2.md)
 
 3. [Share images on Docker Hub](part3.md)
 
