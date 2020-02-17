@@ -24,7 +24,7 @@ In order to validate that our containerized application works well on Kubernetes
 
 All containers in Kubernetes are scheduled as _pods_, which are groups of co-located containers that share some resources. Furthermore, in a realistic application we almost never create individual pods; instead, most of our workloads are scheduled as _deployments_, which are scalable groups of pods maintained automatically by Kubernetes. Lastly, all Kubernetes objects can and should be described in manifests called _Kubernetes YAML_ files. These YAML files describe all the components and configurations of your Kubernetes app, and can be used to easily create and destroy your app in any Kubernetes environment.
 
-1. You already wrote a very basic Kubernetes YAML file in the Orchestration overview part of this tutorial. Now, let's write a slightly more sophisticated YAML file to run and manage our bulletin board. Place the following in a file called `bb.yaml`:
+1.  You already wrote a very basic Kubernetes YAML file in the Orchestration overview part of this tutorial. Now, let's write a slightly more sophisticated YAML file to run and manage our bulletin board. Place the following in a file called `bb.yaml`:
 
     ```yaml
     apiVersion: apps/v1
@@ -73,7 +73,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 ## Deploy and check your application
 
-1. In a terminal, navigate to where you created `bb.yaml` and deploy your application to Kubernetes:
+1.  In a terminal, navigate to where you created `bb.yaml` and deploy your application to Kubernetes:
 
     ```shell
     kubectl apply -f bb.yaml
@@ -86,7 +86,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
     service/bb-entrypoint created
     ```
 
-2. Make sure everything worked by listing your deployments:
+2.  Make sure everything worked by listing your deployments:
 
     ```shell
     kubectl get deployments
@@ -111,9 +111,9 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     In addition to the default `kubernetes` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
 
-3. Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in [Part 2](part2.md) of the Quickstart tutorial.
+3.  Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in [Part 2](part2.md) of the Quickstart tutorial.
 
-4. Once satisfied, tear down your application:
+4.  Once satisfied, tear down your application:
 
     ```shell
     kubectl delete -f bb.yaml
