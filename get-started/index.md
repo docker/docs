@@ -160,9 +160,9 @@ At this point, you've installed Docker Desktop on your development machine, and 
 
 ## CLI references
 
-Further documentation for all CLI commands used in this article is available here:
+Refer to the following topics for further documentation on all CLI commands used in this article:
 
-- [`docker version`](https://docs.docker.com/engine/reference/commandline/version/)
-- [`docker run`](https://docs.docker.com/engine/reference/commandline/run/)
-- [`docker image`](https://docs.docker.com/engine/reference/commandline/image/)
-- [`docker container`](https://docs.docker.com/engine/reference/commandline/container/)
+- [docker version](https://docs.docker.com/engine/reference/commandline/version/)
+- [docker run](https://docs.docker.com/engine/reference/commandline/run/)
+- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
+- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
