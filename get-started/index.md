@@ -59,11 +59,11 @@ redirect_from:
 
 Welcome! We are excited that you want to learn Docker. The Docker Quickstart training module teaches you how to:
 
-1. Set up your Docker environment (on this page)
+1.  Set up your Docker environment (on this page)
 
-2. [Build and run your image](part2.md)
+2.  [Build and run your image](part2.md)
 
-3. [Share images on Docker Hub](part3.md)
+3.  [Share images on Docker Hub](part3.md)
 
 ## Docker concepts
 
@@ -125,7 +125,7 @@ Docker version 19.03.5, build 633a0ea
 
 ### Test Docker installation
 
-1. Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
 
     ```shell
         $ docker run hello-world
@@ -141,9 +141,9 @@ Docker version 19.03.5, build 633a0ea
         ...
     ```
 
-2. Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
+2.  Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
 
-3. List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
+3.  List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
 
     ```shell
         $ docker container ls --all
@@ -160,9 +160,9 @@ At this point, you've installed Docker Desktop on your development machine, and 
 
 ## CLI references
 
-Further documentation for all CLI commands used in this article is available here:
+Refer to the following topics for further documentation on all CLI commands used in this article:
 
-- [`docker version`](https://docs.docker.com/engine/reference/commandline/version/)
-- [`docker run`](https://docs.docker.com/engine/reference/commandline/run/)
-- [`docker image`](https://docs.docker.com/engine/reference/commandline/image/)
-- [`docker container`](https://docs.docker.com/engine/reference/commandline/container/)
+- [docker version](https://docs.docker.com/engine/reference/commandline/version/)
+- [docker run](https://docs.docker.com/engine/reference/commandline/run/)
+- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
+- [docker container](https://docs.docker.com/engine/reference/commandline/container/)

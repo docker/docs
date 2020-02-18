@@ -49,13 +49,13 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
-4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
+4.  In a terminal, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
     ```
 
-5. Check that your pod is up and running:
+5.  Check that your pod is up and running:
 
     ```shell
     kubectl get pods
@@ -68,7 +68,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     demo      1/1       Running   0          4s
     ```
 
-6. Check that you get the logs you'd expect for a ping process:
+6.  Check that you get the logs you'd expect for a ping process:
 
     ```shell
     kubectl logs demo
@@ -84,7 +84,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     ...
     ```
 
-7. Finally, tear down your test pod:
+7.  Finally, tear down your test pod:
 
     ```shell
     kubectl delete -f pod.yaml
@@ -99,11 +99,11 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 ### Windows
 
-1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings** > **Kubernetes**.
+1.  After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings** > **Kubernetes**.
 
-2. Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
+2.  Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
 
-3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
+3.  In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
     ```yaml
     apiVersion: v1
@@ -119,13 +119,13 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
-4. In PowerShell, navigate to where you created `pod.yaml` and create your pod:
+4.  In PowerShell, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
     ```
 
-5. Check that your pod is up and running:
+5.  Check that your pod is up and running:
 
     ```shell
     kubectl get pods
@@ -138,7 +138,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     demo      1/1       Running   0          4s
     ```
 
-6. Check that you get the logs you'd expect for a ping process:
+6.  Check that you get the logs you'd expect for a ping process:
 
     ```shell
     kubectl logs demo
@@ -154,7 +154,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     ...
     ```
 
-7. Finally, tear down your test pod:
+7.  Finally, tear down your test pod:
 
     ```shell
     kubectl delete -f pod.yaml
@@ -180,7 +180,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ### Mac
 
-1. Open a terminal, and initialize Docker Swarm mode:
+1.  Open a terminal, and initialize Docker Swarm mode:
 
     ```shell
     docker swarm init
@@ -198,13 +198,13 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
-2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
+2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
-3. Check that your service created one running container:
+3.  Check that your service created one running container:
 
     ```shell
     docker service ps demo
@@ -217,7 +217,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
     ```
 
-4. Check that you get the logs you'd expect for a ping process:
+4.  Check that you get the logs you'd expect for a ping process:
 
     ```shell
     docker service logs demo
@@ -233,7 +233,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     ...
     ```
 
-5. Finally, tear down your test service:
+5.  Finally, tear down your test service:
 
     ```shell
     docker service rm demo
@@ -248,7 +248,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 ### Windows
 
-1. Open a powershell, and initialize Docker Swarm mode:
+1.  Open a powershell, and initialize Docker Swarm mode:
 
     ```shell
     docker swarm init
@@ -266,13 +266,13 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
-2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
+2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
-3. Check that your service created one running container:
+3.  Check that your service created one running container:
 
     ```shell
     docker service ps demo
@@ -285,7 +285,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
     ```
 
-4. Check that you get the logs you'd expect for a ping process:
+4.  Check that you get the logs you'd expect for a ping process:
 
     ```shell
     docker service logs demo
@@ -301,7 +301,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     ...
     ```
 
-5. Finally, tear down your test service:
+5.  Finally, tear down your test service:
 
     ```shell
     docker service rm demo
