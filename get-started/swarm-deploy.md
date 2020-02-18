@@ -26,7 +26,6 @@ Swarm never creates individual containers like we did in the previous step of th
 
 Let's write a simple stack file to run and manage our bulletin board. Place the following in a file called `bb-stack.yaml`:
 
-
 ```yaml
 version: '3.7'
 

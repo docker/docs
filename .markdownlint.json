@@ -1,0 +1,5 @@
+{
+    "default": true,
+    "MD013": { "line_length": -1 },
+    "MD030": { "ol_multi": 2 }
+}
