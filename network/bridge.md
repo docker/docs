@@ -34,25 +34,6 @@ network.**
 
 ## Differences between user-defined bridges and the default bridge
 
-- **User-defined bridges provide better isolation and interoperability between containerized applications**.
-
-  Containers connected to the same user-defined bridge network automatically
-  expose **all ports** to each other, and **no ports** to the outside world. This allows
-  containerized applications to communicate with each other easily, without
-  accidentally opening access to the outside world.
-
-  Imagine an application with a web front-end and a database back-end. The
-  outside world needs access to the web front-end (perhaps on port 80), but only
-  the back-end itself needs access to the database host and port. Using a
-  user-defined bridge, only the web port needs to be opened, and the database
-  application doesn't need any ports open, since the web front-end can reach it
-  over the user-defined bridge.
-
-  If you run the same application stack on the default bridge network, you need
-  to open both the web port and the database port, using the `-p` or `--publish`
-  flag for each. This means the Docker host needs to block access to the
-  database port by other means.
-
 - **User-defined bridges provide automatic DNS resolution between containers**.
 
   Containers on the default bridge network can only access each other by IP
