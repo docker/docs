@@ -16,7 +16,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ## Docker Desktop Community 2.2.0.3
 2020-02-11
 
-> [Download](https://hub.docker.com/?overlay=onboarding)
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
 ### Upgrades
 
@@ -27,6 +27,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 2020-01-21
 
 > [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+
 Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
 ### Upgrades

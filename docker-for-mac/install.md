@@ -4,9 +4,10 @@ keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 ---
 
-  To download Docker Desktop, go to Docker Hub and sign in with your Docker ID.
+Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
+You can download Docker Desktop for Mac from Docker Hub.
 
-[Download from Docker Hub](https://hub.docker.com/?overlay=onboarding){: .button .outline-btn}
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 
