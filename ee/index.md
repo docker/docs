@@ -2,6 +2,8 @@
 description: Home page for Docker Enterprise documentation
 keywords: Docker Enterprise, documentation, manual, guide, reference, api, CLI
 title: Docker Enterprise
+redirect_from:
+  - /enterprise/
 ---
 
 >{% include enterprise_label_shortform.md %}
