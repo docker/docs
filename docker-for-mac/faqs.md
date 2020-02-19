@@ -10,7 +10,7 @@ title: Frequently asked questions (FAQ)
 
 ### How do I get the Stable or the Edge version of Docker Desktop?
 
-You can download the Stable version of Docker Desktop from [Docker Hub](https://hub.docker.com/?overlay=onboarding). To download the Edge version, see the [Edge release notes](/docker-for-mac/edge-release-notes/).
+You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/).
 
 For installation instructions, see [Install Docker Desktop on Mac](install.md){: target="_blank" class="_"}.
 
