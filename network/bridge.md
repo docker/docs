@@ -41,10 +41,9 @@ network.**
   considered legacy. On a user-defined bridge network, containers can resolve
   each other by name or alias.
 
-  Imagine the same application as in the previous point, with a web front-end
-  and a database back-end. If you call your containers `web` and `db`, the web
-  container can connect to the db container at `db`, no matter which Docker host
-  the application stack is running on.
+  Imagine an application with a web front-end and a database back-end. If you call
+  your containers `web` and `db`, the web container can connect to the db container
+  at `db`, no matter which Docker host the application stack is running on.
 
   If you run the same application stack on the default bridge network, you need
   to manually create links between the containers (using the legacy `--link`
