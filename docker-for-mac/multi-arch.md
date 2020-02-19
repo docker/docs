@@ -37,7 +37,7 @@ For more information about the Buildx CLI command, see [Buildx](/buildx/working-
 
 ### Install
 
-1. Download the latest version of [Docker Desktop](https://hub.docker.com/?overlay=onboarding).
+1. Download the latest version of [Docker Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-mac/).
 
 1. Follow the on-screen instructions to complete the installation process. After you have successfully installed Docker Desktop, you will see the Docker icon in your task tray.
 

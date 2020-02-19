@@ -16,7 +16,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ## Docker Desktop Community 2.2.0.3
 2020-02-11
 
-> [Download](https://hub.docker.com/?overlay=onboarding)
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
 ### Upgrades
 
