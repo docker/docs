@@ -91,8 +91,6 @@ guides:
       section:
       - path: /network/links/
         title: (Legacy) Container links
-      - path: /network/overlay-standalone.swarm/
-        title: Overlay networks for Swarm Classic
 - sectiontitle: Manage application data
   section:
     - path: /storage/
@@ -1517,6 +1515,8 @@ manuals:
       title: High availability in Swarm
     - path: /swarm/networking/
       title: Swarm and container networks
+    - path: /swarm/multi-host-networking/
+      title: Multi-host networking
     - path: /swarm/discovery/
       title: Discovery
     - path: /swarm/provision-with-machine/
