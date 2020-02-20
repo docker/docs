@@ -3,7 +3,8 @@ services:
   docs:
     build:
       context: .
-      dockerfile: Dockerfile
+      args:
+        - ENABLE_ARCHIVES=false
     image: docs/docstage
     ports:
      - "4000:4000"
