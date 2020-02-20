@@ -10,9 +10,9 @@ toc_max: 2
 
 ### Bug fixes
 
-- Fixed the CI script to enforce the minimal MacOS version to 10.11
+- Fixed the CI script to enforce the minimal MacOS version to 10.11.
 
-- Fixed docker-compose exec for keys with no value on environment files
+- Fixed docker-compose exec for keys with no value on environment files.
 
 ## 1.25.3
 (2020-01-23)
