@@ -83,7 +83,7 @@ Yes, you can use the host’s SSH agent inside a container. For more information
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates](/docker-for-mac/index/#add-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](/docker-for-mac/#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
