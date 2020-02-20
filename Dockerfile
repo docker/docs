@@ -52,17 +52,18 @@ COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
 
 
-# Build the archived docs
-# these docs barely change, so can be cached
-FROM deploybase AS archives
-# Get all the archive static HTML and put it into place. To add a new archive,
-# add it here, and ALSO edit _data/docsarchives/archives.yaml to add it to the drop-down
-COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v18.09 ${TARGET} ${TARGET}
+# Stage with static HTML for all archives
+FROM scratch AS archives
+ENV TARGET=/usr/share/nginx/html
+# To add a new archive, add it here and ALSO edit _data/docsarchive/archives.yaml
+# to add it to the drop-down
+COPY --from=docs/docker.github.io:v17.03 ${TARGET} /
+COPY --from=docs/docker.github.io:v17.06 ${TARGET} /
+COPY --from=docs/docker.github.io:v17.09 ${TARGET} /
+COPY --from=docs/docker.github.io:v17.12 ${TARGET} /
+COPY --from=docs/docker.github.io:v18.03 ${TARGET} /
+COPY --from=docs/docker.github.io:v18.09 ${TARGET} /
+
 
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that
@@ -74,20 +75,16 @@ COPY ./_data/toc.yaml ./_data/
 RUN bash ./_scripts/fetch-upstream-resources.sh .
 
 
-# Build the current docs from the checked out branch
+# Build the static HTML for the current docs.
+# After building with jekyll, fix up some links, but don't touch the archives
 FROM builderbase AS current
 COPY . .
 COPY --from=upstream-resources /usr/src/app/md_source/. ./
-
-# Build the static HTML, now that everything is in place
 RUN jekyll build -d ${TARGET}
-
-# Fix up some links, don't touch the archives
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
 
-# Docs with archives (for deploy)
-FROM archives AS deploy
-
-# Add the current version of the docs
-COPY --from=current ${TARGET} ${TARGET}
+# Final stage, which includes nginx, current docs, and archived versions
+FROM deploybase AS deploy
+COPY --from=archives / ${TARGET}
+COPY --from=current  ${TARGET} ${TARGET}
