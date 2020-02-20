@@ -4,7 +4,6 @@ description: Use overlay for multi-host networking
 keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Multi-host networking with standalone swarms
 redirect_from:
-- /engine/userguide/networking/get-started-overlay/
 - /engine/userguide/networking/overlay-standalone-swarm/
 - /network/overlay-standalone.swarm/
 ---
