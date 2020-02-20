@@ -18,6 +18,8 @@ ARG ENGINE_BRANCH="19.03.x"
 # Distribution
 ARG DISTRIBUTION_BRANCH="release/2.7"
 
+# Set to "false" to build the documentation without archives
+ARG ENABLE_ARCHIVES=true
 
 ###
 # Set up base stages for building and deploying
@@ -52,8 +54,11 @@ COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
 
 
-# Stage with static HTML for all archives
-FROM scratch AS archives
+# Empty stage if archives are disabled (ENABLE_ARCHIVES=false)
+FROM scratch AS archives-false
+
+# Stage with static HTML for all archives (ENABLE_ARCHIVES=true)
+FROM scratch AS archives-true
 ENV TARGET=/usr/share/nginx/html
 # To add a new archive, add it here and ALSO edit _data/docsarchive/archives.yaml
 # to add it to the drop-down
@@ -64,6 +69,8 @@ COPY --from=docs/docker.github.io:v17.12 ${TARGET} /
 COPY --from=docs/docker.github.io:v18.03 ${TARGET} /
 COPY --from=docs/docker.github.io:v18.09 ${TARGET} /
 
+# Stage either with, or without archives, depending on ENABLE_ARCHIVES
+FROM archives-${ENABLE_ARCHIVES} AS archives
 
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that
@@ -84,7 +91,15 @@ RUN jekyll build -d ${TARGET}
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
 
-# Final stage, which includes nginx, current docs, and archived versions
+# Final stage, which includes nginx, and, depending on ENABLE_ARCHIVES, either
+# current docs and archived versions (ENABLE_ARCHIVES=true), or only the current
+# docs (ENABLE_ARCHIVES=false).
+#
+# To build current docs, including archives:
+# DOCKER_BUILDKIT=1 docker build -t docs .
+#
+# To build without archives:
+# DOCKER_BUILDKIT=1 docker build -t docs --build-arg ENABLE_ARCHIVES=false .
 FROM deploybase AS deploy
 COPY --from=archives / ${TARGET}
 COPY --from=current  ${TARGET} ${TARGET}
