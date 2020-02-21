@@ -3,10 +3,10 @@ title: Examples using the Docker Engine SDKs and Docker API
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
-- /engine/api/get-started/
 - /engine/api/client-libraries/
 - /engine/reference/api/remote_api_client_libraries/
 - /reference/api/remote_api_client_libraries/
+- /develop/sdk/examples/
 ---
 
 After you

@@ -1,14 +1,12 @@
 ---
-title: Develop with Docker Engine SDKs and API
-description: Using Docker SDKs and APIs to automate Docker tasks in your language of choice
-keywords: developing, api, sdk
+title: Develop with Docker Engine API
+description: Using Docker APIs to automate Docker tasks in your language of choice
+keywords: developing, api
 redirect_from:
-- /engine/api/
 - /engine/reference/api/
 - /engine/reference/api/docker_remote_api/
 - /reference/api/
 - /reference/api/docker_remote_api/
-- /engine/api/sdks/
 ---
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
@@ -16,36 +14,10 @@ Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
 scale Docker apps and solutions quickly and easily. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 
+For information about Docker Engine SDKs, see [Develop with Docker Engine SDKs](/engine/api/sdk/).
+
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
 `curl`, or the HTTP library which is part of most modern programming languages.
-
-## Install the SDKs
-
-Use the following commands to install the Go or Python SDK. Both SDKs can be
-installed and coexist together.
-
-### Go SDK
-
-```bash
-go get github.com/docker/docker/client
-```
-The client requires a recent version of Go. Run `go version` and ensure that you 
-are running at least version 1.9.4 of Go
-
-
-[Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
-
-### Python SDK
-
-- **Recommended**: Run `pip install docker`.
-
-- **If you can't use `pip`**:
-
-  1.  [Download the package directly](https://pypi.python.org/pypi/docker/).
-  2.  Extract it and change to the extracted directory,
-  3.  Run `python setup.py install`.
-
-[Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 
 ## View the API reference
 
@@ -84,21 +56,23 @@ To see the highest version of the API your Docker daemon and client support, use
 $ docker version
 
 Client:
- Version:      17.04.0-ce
- API version:  1.28
- Go version:   go1.7.5
- Git commit:   4845c56
- Built:        Wed Apr  5 06:06:36 2017
- OS/Arch:      darwin/amd64
+  Version:           19.03.5
+  API version:       1.40
+  Go version:        go1.12.12
+  Git commit:        633a0ea
+  Built:             Wed Nov 13 07:22:37 2019
+  OS/Arch:           windows/amd64
+  Experimental:      true
+
 
 Server:
- Version:      17.04.0-ce
- API version:  1.28 (minimum version 1.12)
- Go version:   go1.7.5
- Git commit:   4845c56
- Built:        Tue Apr  4 00:37:25 2017
- OS/Arch:      linux/amd64
- Experimental: true
+  Version:          19.03.5
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.12
+  Git commit:       633a0ea
+  Built:            Wed Nov 13 07:29:19 2019
+  OS/Arch:          linux/amd64
+  ...
 ```
 
 You can specify the API version to use, in one of the following ways:
@@ -108,7 +82,7 @@ You can specify the API version to use, in one of the following ways:
 
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/`, you can use
-  `/v1.27/containers/`.
+  `/v1.40/containers/`.
 
 - To force the Docker CLI or the Docker Engine SDKs to use an old version
   version of the API than the version reported by `docker version`, set the
@@ -116,7 +90,7 @@ You can specify the API version to use, in one of the following ways:
   on Linux, Windows, or macOS clients.
 
   ```bash
-  DOCKER_API_VERSION='1.27'
+  DOCKER_API_VERSION='1.40'
   ```
 
   While the environment variable is set, that version of the API is used, even
@@ -150,7 +124,7 @@ are encouraged to use an API version of 1.24 or higher.
 
 {% include api-version-matrix.md %}
 
-### Choose the SDK or API version to use
+## SDK and API quickstart
 
 Use the following guidelines to choose the SDK or API version to use in your
 code:
@@ -161,8 +135,6 @@ code:
 - If you need a new feature, update your code to use at least the minimum version
   that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
-
-## SDK and API quickstart
 
 As an example, the `docker run` command can be easily implemented using the
 Docker API directly, or using the Python or Go SDK.
@@ -265,7 +237,7 @@ hello world
 </div>
 
 For more examples, take a look at the
-[getting started guide](examples.md).
+[Get started guide](/get-started.md).
 
 ## Unofficial libraries
 
