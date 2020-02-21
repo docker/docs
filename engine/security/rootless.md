@@ -181,7 +181,7 @@ To run the daemon directly without systemd, you need to run
 $ dockerd-rootless.sh --experimental --storage-driver vfs
 ```
 
-As Rootless mode is currently experimental, you always need to run
+As Rootless mode is experimental, you need to run
 `dockerd-rootless.sh` with `--experimental`.
 You also need `--storage-driver vfs` unless using Ubuntu or Debian 10 kernel.
 You don't need to care these flags if you manage the daemon using systemd, as
