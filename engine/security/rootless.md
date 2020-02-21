@@ -5,11 +5,11 @@ title: Run the Docker daemon as a non-root user (Rootless mode)
 ---
 
 Rootless mode allows running the Docker daemon and containers as a non-root
-user, for the sake of mitigating potentail vulnerabilities in the daemon and
+user, for the sake of mitigating potential vulnerabilities in the daemon and
 the container runtime.
 
 Rootless mode does not require root privileges even for installation of the
-Docker daemon, as long as [the prerequisites](#prerequiresites) are satisfied.
+Docker daemon, as long as [the prerequisites](#prerequisites) are satisfied.
 
 Rootless mode was introduced in Docker Engine 19.03.
 
@@ -181,7 +181,7 @@ To run the daemon directly without systemd, you need to run
 $ dockerd-rootless.sh --experimental --storage-driver vfs
 ```
 
-As Rootless mode is experimental, currently you always need to run
+As Rootless mode is experimental, you need to run
 `dockerd-rootless.sh` with `--experimental`.
 You also need `--storage-driver vfs` unless using Ubuntu or Debian 10 kernel.
 You don't need to care these flags if you manage the daemon using systemd, as
@@ -258,7 +258,7 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 
 ### Limiting resources
 
-Currently rootless mode ignores cgroup-related `docker run` flags such as 
+Currently, rootless mode ignores cgroup-related `docker run` flags such as 
 `--cpus` and `memory`.
 
 However, traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit)
