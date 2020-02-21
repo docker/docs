@@ -953,14 +953,12 @@ reference:
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
-  - sectiontitle: Docker Engine API
+  - sectiontitle: Docker Engine SDK and API
     section:
-    - path: /engine/api/
+    - path: /develop/sdk/
       title: Overview
-    - path: /engine/api/get-started/
+    - path: /develop/sdk/examples/
       title: Get started
-    - path: /engine/api/sdks/
-      title: SDKs
     - path: /engine/api/latest/
       title: v{{ site.latest_engine_api_version }} reference (latest)
     - sectiontitle: API reference by version
