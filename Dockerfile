@@ -91,6 +91,19 @@ RUN jekyll build -d ${TARGET}
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
 
+# This stage only contains the generated files. It can be used to host the
+# documentation on a non-containerised service (e.g. to deploy to an s3 bucket).
+# When using BuildKit, use the '--output' option to build the files and to copy
+# them to your local filesystem.
+#
+# To build current docs, including archives:
+# DOCKER_BUILDKIT=1 docker build --target=deploy-source --output=./_site .
+#
+# To build without archives:
+# DOCKER_BUILDKIT=1 docker build --target=deploy-source --build-arg ENABLE_ARCHIVES=false --output=./_site .
+FROM archives AS deploy-source
+COPY --from=current /usr/share/nginx/html /
+
 # Final stage, which includes nginx, and, depending on ENABLE_ARCHIVES, either
 # current docs and archived versions (ENABLE_ARCHIVES=true), or only the current
 # docs (ENABLE_ARCHIVES=false).
@@ -101,5 +114,5 @@ RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i;
 # To build without archives:
 # DOCKER_BUILDKIT=1 docker build -t docs --build-arg ENABLE_ARCHIVES=false .
 FROM deploybase AS deploy
-COPY --from=archives / ${TARGET}
-COPY --from=current  ${TARGET} ${TARGET}
+WORKDIR $TARGET
+COPY --from=deploy-source / .
