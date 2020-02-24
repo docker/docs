@@ -108,21 +108,6 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
-### Docker Engine - Enterprise and Docker Engine - Community API mismatch
-
-If you use Docker Engine - Enterprise in production, we recommend using Docker Engine - Enterprise in development
-too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for
-Windows and manually build and push images, then your developers need to configure
-their Docker clients to use the same version of the API reported by their Docker
-daemon. This prevents the developer from using a feature that is not yet supported
-on the daemon where the workload runs in production. You can do this one of two ways:
-
-- Configure the Docker client to connect to an external daemon running Docker EE.
-  You can use the `-H` flag on the `docker` command or set the `DOCKER_HOST`
-  environment variable. The client uses the daemon's latest supported API version.
-- Configure the Docker client to use a specific API by setting the `DOCKER_API_VERSION`
-  environment variable to the API version to use, such as `1.30`.
-
 ### API version matrix
 
 {% include api-version-matrix.md %}
