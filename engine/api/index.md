@@ -236,8 +236,7 @@ hello world
   </div>
 </div>
 
-For more examples, take a look at the
-[Get started guide](/get-started.md).
+For more examples, take a look at the [SDK examples](/engine/api/sdk/examples.md).
 
 ## Unofficial libraries
 
