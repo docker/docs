@@ -12,6 +12,20 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.2.0
+2020-02-
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
+
+### Upgrades
+
+- [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
+- [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
+
+### Bug fixes and minor changes
+
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+
 ## Docker Desktop Community 2.2.1.0
 2020-02-12
 
