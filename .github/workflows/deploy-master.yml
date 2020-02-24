@@ -13,3 +13,5 @@ jobs:
         run: docker build -t documentation:latest .
       - name: copy static files locally
         run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
+      - name: upload files to S3 bucket
+        run: aws s3 sync _site s3://docs.docker.com-test-us-east-1/ --delete
