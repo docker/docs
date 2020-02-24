@@ -94,11 +94,17 @@ You can specify the API version to use, in one of the following ways:
   ```
 
   While the environment variable is set, that version of the API is used, even
-  if the Docker daemon supports a newer version.
+  if the Docker daemon supports a newer version. This environment variable
+  disables API version negotiation, and as such should only be used if you must
+  use a specific version of the API, or for debugging purposes.
+
+- The Docker Go SDK allows you to enable API version negotiation, automatically
+  selects an API version that is supported by both the client, and the Docker Engine
+  that is used.
 
 - For the SDKs, you can also specify the API version programmatically, as a
   parameter to the `client` object. See the
-  [Go constructor](https://github.com/moby/moby/blob/master/client/client.go#L136){: target="_blank" class="_"}
+  [Go constructor](https://github.com/moby/moby/blob/v19.03.6/client/client.go#L119){: target="_blank" class="_"}
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
@@ -118,8 +124,5 @@ on the daemon where the workload runs in production. You can do this one of two 
   environment variable to the API version to use, such as `1.30`.
 
 ### API version matrix
-
-Docker does not recommend running versions prior to 1.12, which means you
-are encouraged to use an API version of 1.24 or higher.
 
 {% include api-version-matrix.md %}

@@ -61,9 +61,9 @@ section in the API documentation for details.
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 
-- If you're starting a new project, use the
-  [latest version](/engine/api/latest/), but do specify the version you are
-  using. This helps prevent surprises.
+- If you're starting a new project, use the [latest version](/engine/api/latest/),
+  but use API version negotiation or specify the version you are using. This
+  helps prevent surprises.
 - If you need a new feature, update your code to use at least the minimum version
   that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
@@ -96,11 +96,10 @@ import (
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewClientWithOpts(client.FromEnv)
+    cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
     if err != nil {
         panic(err)
     }
-    cli.NegotiateAPIVersion(ctx)
 
     reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {
