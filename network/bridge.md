@@ -52,6 +52,12 @@ network.**
   Alternatively, you can manipulate the `/etc/hosts` files within the containers,
   but this creates problems that are difficult to debug.
 
+- **User-defined bridges provide better isolation**.
+
+  All containers without a `--network` specified, are attached to the default bridge network. This can be a risk, as unrelated stacks/services/containers are then able to communicate.
+
+  Using a user-defined network provides a scoped network in which only containers attached to that network are able to communicate.
+
 - **Containers can be attached and detached from user-defined networks on the fly**.
 
   During a container's lifetime, you can connect or disconnect it from
