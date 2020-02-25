@@ -3,15 +3,15 @@ title: Examples using the Docker Engine SDKs and Docker API
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
-- /engine/api/get-started/
 - /engine/api/client-libraries/
 - /engine/reference/api/remote_api_client_libraries/
 - /reference/api/remote_api_client_libraries/
+- /develop/sdk/examples/
 ---
 
 After you
 [install Docker](/install/index.md), you can
-[install the Go and Python SDKs](/develop/sdk/index.md#install-the-sdks) and
+[install the Go or Python SDK](/engine/api/sdk/index.md#install-the-sdks) and
 also try out the Docker Engine API.
 
 Each of these examples show how to perform a given Docker operation using the Go
@@ -40,13 +40,14 @@ command prompt:
 package main
 
 import (
-	"os"
+	"context"
 	"io"
+	"os"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
+	"github.com/docker/docker/pkg/stdcopy"
 )
 
 func main() {
@@ -144,6 +145,7 @@ You can also run containers in the background, the equivalent of typing
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
@@ -151,7 +153,6 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -230,11 +231,11 @@ You can use the API to list containers that are running, just like using
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -306,11 +307,11 @@ This example stops all running containers.
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -386,12 +387,12 @@ to change the hard-coded ID of the container to print the logs for.
 package main
 
 import (
+	"context"
 	"io"
 	"os"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -456,11 +457,11 @@ List the images on your Engine, similar to `docker image ls`:
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -526,12 +527,12 @@ Pull an image, like `docker pull`:
 package main
 
 import (
+	"context"
 	"io"
 	"os"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -600,6 +601,7 @@ Pull an image, like `docker pull`, with authentication:
 package main
 
 import (
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"io"
@@ -607,7 +609,6 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {
@@ -699,12 +700,12 @@ Commit a container to create an image from its contents:
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
 func main() {

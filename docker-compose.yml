@@ -1,11 +1,10 @@
-version: "2"
+version: "3.7"
 services:
   docs:
     build:
       context: .
-      dockerfile: Dockerfile
+      args:
+        - ENABLE_ARCHIVES=false
     image: docs/docstage
     ports:
      - "4000:4000"
-    volumes:
-     - "./:/usr/src/app"
