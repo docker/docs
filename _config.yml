@@ -13,7 +13,7 @@ safe: false
 lsi: false
 url: https://docs.docker.com
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
-keep_files: ["v17.03", "v17.06", "v17.09", "v17.12", "v18.03", "v18.09"]
+keep_files: ["v17.06", "v18.03", "v18.09"]
 exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
 
 # Component versions -- address like site.docker_ce_version
@@ -81,10 +81,7 @@ tablabels:
   engine-19.03: Docker EE Engine 19.03
   engine-18.09: Docker EE Engine 18.09
   engine-18.03: Docker EE Engine 18.03
-  engine-17.12: Docker EE Engine 17.12
-  engine-17.09: Docker EE Engine 17.09
   engine-17.06: Docker EE Engine 17.06
-  engine-17.03: Docker EE Engine 17.03
   docker-cli-linux: Docker CLI on Mac/Linux
   docker-cli-win: Docker CLI on Windows
   kubectl: Kubernetes CLI

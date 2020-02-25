@@ -59,10 +59,7 @@ FROM scratch AS archives-true
 ENV TARGET=/usr/share/nginx/html
 # To add a new archive, add it here and ALSO edit _data/docsarchive/archives.yaml
 # to add it to the drop-down
-COPY --from=docs/docker.github.io:v17.03 ${TARGET} /
 COPY --from=docs/docker.github.io:v17.06 ${TARGET} /
-COPY --from=docs/docker.github.io:v17.09 ${TARGET} /
-COPY --from=docs/docker.github.io:v17.12 ${TARGET} /
 COPY --from=docs/docker.github.io:v18.03 ${TARGET} /
 COPY --from=docs/docker.github.io:v18.09 ${TARGET} /
 
