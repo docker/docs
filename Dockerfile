@@ -39,13 +39,10 @@ ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
 
 
-# Reset to alpine so we don't get any docs source or extra apps
+# Base stage to be used for deploying the docs
 FROM nginx:alpine AS deploybase
 ENV TARGET=/usr/share/nginx/html
-
-# Get the nginx config from the nginx-onbuild image
-# This hardly ever changes so should usually be cached
-COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Set the default command to serve the static HTML site
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
