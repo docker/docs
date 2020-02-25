@@ -2,10 +2,12 @@
 
 # Fetches upstream resources from docker/docker and docker/distribution
 # before handing off the site to Jekyll to build
-# Relies on the following environment variables which are usually set by
-# the Dockerfile. Uncomment them here to override for debugging
+# Relies on the "ENGINE_BRANCH" and "DISTRIBUTION_BRANCH" environment variables,
+# which are usually set by the Dockerfile.
+: "${ENGINE_BRANCH?No release branch set for docker/docker and docker/cli}"
+: "${DISTRIBUTION_BRANCH?No release branch set for docker/distribution}"
 
-# Helper functino to deal with sed differences between osx and Linux
+# Helper function to deal with sed differences between osx and Linux
 # See https://stackoverflow.com/a/38595160
 sedi () {
     sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
@@ -49,19 +51,24 @@ done < <(cat ./_config.yml |grep '_version:' |grep '^[a-z].*')
 # Replace variable in toc.yml with value from above
 sedi "s/{{ site.latest_engine_api_version }}/$latest_engine_api_version/g" ./_data/toc.yaml
 
-# Engine stable
-ENGINE_SVN_BRANCH="branches/19.03"
-ENGINE_BRANCH="19.03"
-
-# Distribution
-DISTRIBUTION_SVN_BRANCH="branches/release/2.7"
-DISTRIBUTION_BRANCH="release/2.7"
+# Translate branches for use by svn
+engine_svn_branch="branches/${ENGINE_BRANCH}"
+if [ engine_svn_branch = "branches/master" ]; then
+	engine_svn_branch=trunk
+fi
+distribution_svn_branch="branches/${DISTRIBUTION_BRANCH}"
+if [ distribution_svn_branch = "branches/master" ]; then
+	distribution_svn_branch=trunk
+fi
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
-svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ./engine/extend || (echo "Failed engine/extend download" && exit 1)
-svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api ./engine/api || (echo "Failed engine/api download" && exit 1) # This will only get you the old API MD files 1.18 through 1.24
-svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec ./registry/spec || (echo "Failed registry/spec download" && exit 1)
-svn co https://github.com/mirantis/compliance/trunk/docs/compliance ./compliance || (echo "Failed docker/compliance download" && exit 1)
+svn co "https://github.com/docker/docker-ce/${engine_svn_branch}/components/cli/docs/extend" ./engine/extend || (echo "Failed engine/extend download" && exit 1)
+svn co "https://github.com/docker/docker-ce/${engine_svn_branch}/components/engine/docs/api" ./engine/api    || (echo "Failed engine/api download" && exit 1) # This will only get you the old API MD files 1.18 through 1.24
+svn co "https://github.com/docker/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec         || (echo "Failed registry/spec download" && exit 1)
+svn co "https://github.com/mirantis/compliance/trunk/docs/compliance" ./compliance                           || (echo "Failed docker/compliance download" && exit 1)
+
+# Cleanup svn directories
+find . -name .svn -exec rm -rf '{}' \;
 
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
@@ -85,13 +92,13 @@ wget --quiet --directory-prefix=./engine/api/v1.38/ https://raw.githubuserconten
 wget --quiet --directory-prefix=./engine/api/v1.39/ https://raw.githubusercontent.com/docker/docker-ce/v18.09.9/components/engine/api/swagger.yaml    || (echo "Failed 1.39 swagger download" && exit 1)
 
 # Get a few one-off files that we use directly from upstream
-wget --quiet --directory-prefix=./engine/api/v"${latest_engine_api_version}"/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/engine/api/swagger.yaml     || (echo "Failed ${latest_engine_api_version} swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                    || (echo "Failed engine/deprecated.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md             || (echo "Failed engine/reference/builder.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md                 || (echo "Failed engine/reference/run.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/cli.md     || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
-wget --quiet --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                       || (echo "Failed registry/configuration.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/api/v"${latest_engine_api_version}"/ "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/engine/api/swagger.yaml"     || (echo "Failed ${latest_engine_api_version} swagger download" && exit 1)
+wget --quiet --directory-prefix=./engine/                       "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/cli/docs/deprecated.md"                    || (echo "Failed engine/deprecated.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/cli/docs/reference/builder.md"             || (echo "Failed engine/reference/builder.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/cli/docs/reference/run.md"                 || (echo "Failed engine/reference/run.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/cli/docs/reference/commandline/cli.md"     || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ "https://raw.githubusercontent.com/docker/docker-ce/${ENGINE_BRANCH}/components/cli/docs/reference/commandline/dockerd.md" || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
+wget --quiet --directory-prefix=./registry/                     "https://raw.githubusercontent.com/docker/distribution/${DISTRIBUTION_BRANCH}/docs/configuration.md"                       || (echo "Failed registry/configuration.md download" && exit 1)
 
 # Remove things we don't want in the build
 rm ./registry/spec/api.md.tmpl

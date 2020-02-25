@@ -13,7 +13,7 @@
 
 
 # Engine
-ARG ENGINE_BRANCH="19.03.x"
+ARG ENGINE_BRANCH="19.03"
 
 # Distribution
 ARG DISTRIBUTION_BRANCH="release/2.7"
@@ -30,16 +30,13 @@ FROM docs/docker.github.io:docs-builder AS builderbase
 ENV TARGET=/usr/share/nginx/html
 WORKDIR /usr/src/app/md_source/
 
-# Set vars used by fetch-upstream-resources.sh script
-# Branch to pull from, per ref doc. To get master from svn the svn branch needs
-# to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
+# Set vars used by fetch-upstream-resources.sh script as an environment variable,
+# so that they are persisted in the image for use in later stages.
 ARG ENGINE_BRANCH
 ENV ENGINE_BRANCH=${ENGINE_BRANCH}
-ENV ENGINE_SVN_BRANCH=branches/${ENGINE_BRANCH}
 
 ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
-ENV DISTRIBUTION_SVN_BRANCH=branches/${DISTRIBUTION_BRANCH}
 
 
 # Reset to alpine so we don't get any docs source or extra apps
@@ -77,6 +74,10 @@ FROM archives-${ENABLE_ARCHIVES} AS archives
 # these docs are only rebuilt if changes were made to the configuration.
 FROM builderbase AS upstream-resources
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
+# Add the _config.yml and toc.yaml here so that the fetch-upstream-resources
+# can extract the latest_engine_api_version value, and substitute the
+# "{site.latest_engine_api_version}" in the title for the latest API docs
+# TODO find a different mechanism for substituting the API version, to prevent invalidating the cache
 COPY ./_config.yml .
 COPY ./_data/toc.yaml ./_data/
 RUN bash ./_scripts/fetch-upstream-resources.sh .
