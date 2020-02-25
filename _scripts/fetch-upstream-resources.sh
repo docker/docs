@@ -49,17 +49,13 @@ done < <(cat ./_config.yml |grep '_version:' |grep '^[a-z].*')
 # Replace variable in toc.yml with value from above
 sedi "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" ./_data/toc.yaml
 
-# Engine stable
-ENGINE_SVN_BRANCH="branches/18.03"
-ENGINE_BRANCH="18.03"
-
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 DISTRIBUTION_BRANCH="release/2.6"
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
-svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ./engine/extend || (echo "Failed engine/extend download" && exit 1)
-svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api ./engine/api || (echo "Failed engine/api download" && exit 1) # This will only get you the old API MD files 1.18 through 1.24
+svn co https://github.com/docker/docker-ce/tags/v18.03.1-ce/components/cli/docs/extend ./engine/extend || (echo "Failed engine/extend download" && exit 1)
+svn co https://github.com/docker/docker-ce/tags/v18.03.1-ce/components/engine/docs/api ./engine/api || (echo "Failed engine/api download" && exit 1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 svn co https://github.com/docker/compliance/trunk/docs/compliance ./compliance || (echo "Failed docker/compliance download" && exit 1)
 
@@ -130,12 +126,12 @@ wget --quiet --directory-prefix=./engine/api/v1.37/ https://raw.githubuserconten
 
 
 # Get a few one-off files that we use directly from upstream
-wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/deprecated.md                    || (echo "Failed engine/deprecated.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md             || (echo "Failed engine/reference/builder.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md                 || (echo "Failed engine/reference/run.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/cli.md     || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
-wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
-wget --quiet --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                       || (echo "Failed registry/configuration.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/                       https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/cli/docs/deprecated.md                    || (echo "Failed engine/deprecated.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/cli/docs/reference/builder.md             || (echo "Failed engine/reference/builder.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/             https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/cli/docs/reference/run.md                 || (echo "Failed engine/reference/run.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/cli/docs/reference/commandline/cli.md     || (echo "Failed engine/reference/commandline/cli.md download" && exit 1)
+wget --quiet --directory-prefix=./engine/reference/commandline/ https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
+wget --quiet --directory-prefix=./registry/                     https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md                  || (echo "Failed registry/configuration.md download" && exit 1)
 
 # Remove things we don't want in the build
 rm ./registry/spec/api.md.tmpl
