@@ -11,14 +11,5 @@
   name: v18.03
   image: docs/docker.github.io:v18.03
 - archive:
-  name: v17.12
-  image: docs/docker.github.io:v17.12
-- archive:
-  name: v17.09
-  image: docs/docker.github.io:v17.09
-- archive:
   name: v17.06
   image: docs/docker.github.io:v17.06
-- archive:
-  name: v17.03
-  image: docs/docker.github.io:v17.03
