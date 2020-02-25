@@ -74,6 +74,10 @@ FROM archives-${ENABLE_ARCHIVES} AS archives
 # these docs are only rebuilt if changes were made to the configuration.
 FROM builderbase AS upstream-resources
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
+# Add the _config.yml and toc.yaml here so that the fetch-upstream-resources
+# can extract the latest_engine_api_version value, and substitute the
+# "{site.latest_engine_api_version}" in the title for the latest API docs
+# TODO find a different mechanism for substituting the API version, to prevent invalidating the cache
 COPY ./_config.yml .
 COPY ./_data/toc.yaml ./_data/
 RUN bash ./_scripts/fetch-upstream-resources.sh .
