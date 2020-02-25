@@ -67,6 +67,9 @@ svn co "https://github.com/docker/docker-ce/${engine_svn_branch}/components/engi
 svn co "https://github.com/docker/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec         || (echo "Failed registry/spec download" && exit 1)
 svn co "https://github.com/mirantis/compliance/trunk/docs/compliance" ./compliance                           || (echo "Failed docker/compliance download" && exit 1)
 
+# Cleanup svn directories
+find . -name .svn -exec rm -rf '{}' \;
+
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
 # When you change this you need to make sure to copy the previous
