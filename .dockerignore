@@ -1,6 +1,7 @@
 .dockerignore
 .git
 .gitignore
+tests
 Dockerfile
 docker-compose.yml
 _site

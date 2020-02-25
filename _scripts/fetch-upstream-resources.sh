@@ -92,5 +92,3 @@ wget --quiet --directory-prefix=./registry/                     "https://raw.git
 
 # Remove things we don't want in the build
 rm ./registry/spec/api.md.tmpl
-rm -rf ./apidocs/cloud-api-source
-rm -rf ./tests
