@@ -8,6 +8,8 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
+      - name: print docker info
+        run: docker version && docker info
       - uses: actions/checkout@v2
       - name: build image
         run: docker build --build-arg=ENABLE_ARCHIVES=true --target=current -t documentation:latest .
