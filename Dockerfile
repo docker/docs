@@ -30,16 +30,13 @@ FROM docs/docker.github.io:docs-builder AS builderbase
 ENV TARGET=/usr/share/nginx/html
 WORKDIR /usr/src/app/md_source/
 
-# Set vars used by fetch-upstream-resources.sh script
-# Branch to pull from, per ref doc. To get master from svn the svn branch needs
-# to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
+# Set vars used by fetch-upstream-resources.sh script as an environment variable,
+# so that they are persisted in the image for use in later stages.
 ARG ENGINE_BRANCH
 ENV ENGINE_BRANCH=${ENGINE_BRANCH}
-ENV ENGINE_SVN_BRANCH=branches/${ENGINE_BRANCH}
 
 ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
-ENV DISTRIBUTION_SVN_BRANCH=branches/${DISTRIBUTION_BRANCH}
 
 
 # Reset to alpine so we don't get any docs source or extra apps
