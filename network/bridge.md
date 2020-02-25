@@ -34,25 +34,6 @@ network.**
 
 ## Differences between user-defined bridges and the default bridge
 
-- **User-defined bridges provide better isolation and interoperability between containerized applications**.
-
-  Containers connected to the same user-defined bridge network automatically
-  expose **all ports** to each other, and **no ports** to the outside world. This allows
-  containerized applications to communicate with each other easily, without
-  accidentally opening access to the outside world.
-
-  Imagine an application with a web front-end and a database back-end. The
-  outside world needs access to the web front-end (perhaps on port 80), but only
-  the back-end itself needs access to the database host and port. Using a
-  user-defined bridge, only the web port needs to be opened, and the database
-  application doesn't need any ports open, since the web front-end can reach it
-  over the user-defined bridge.
-
-  If you run the same application stack on the default bridge network, you need
-  to open both the web port and the database port, using the `-p` or `--publish`
-  flag for each. This means the Docker host needs to block access to the
-  database port by other means.
-
 - **User-defined bridges provide automatic DNS resolution between containers**.
 
   Containers on the default bridge network can only access each other by IP
@@ -60,10 +41,9 @@ network.**
   considered legacy. On a user-defined bridge network, containers can resolve
   each other by name or alias.
 
-  Imagine the same application as in the previous point, with a web front-end
-  and a database back-end. If you call your containers `web` and `db`, the web
-  container can connect to the db container at `db`, no matter which Docker host
-  the application stack is running on.
+  Imagine an application with a web front-end and a database back-end. If you call
+  your containers `web` and `db`, the web container can connect to the db container
+  at `db`, no matter which Docker host the application stack is running on.
 
   If you run the same application stack on the default bridge network, you need
   to manually create links between the containers (using the legacy `--link`
@@ -71,6 +51,12 @@ network.**
   gets complex with more than two containers which need to communicate.
   Alternatively, you can manipulate the `/etc/hosts` files within the containers,
   but this creates problems that are difficult to debug.
+
+- **User-defined bridges provide better isolation**.
+
+  All containers without a `--network` specified, are attached to the default bridge network. This can be a risk, as unrelated stacks/services/containers are then able to communicate.
+
+  Using a user-defined network provides a scoped network in which only containers attached to that network are able to communicate.
 
 - **Containers can be attached and detached from user-defined networks on the fly**.
 
