@@ -957,10 +957,10 @@ reference:
     section:
     - path: /engine/api/
       title: Overview
-    - path: /engine/api/get-started/
-      title: Get started
-    - path: /engine/api/sdks/
+    - path: /engine/api/sdk/
       title: SDKs
+    - path: /engine/api/sdk/examples/
+      title: SDK examples
     - path: /engine/api/latest/
       title: v{{ site.latest_engine_api_version }} reference (latest)
     - sectiontitle: API reference by version

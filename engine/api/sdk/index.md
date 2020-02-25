@@ -1,14 +1,10 @@
 ---
-title: Develop with Docker Engine SDKs and API
-description: Using Docker SDKs and APIs to automate Docker tasks in your language of choice
-keywords: developing, api, sdk
+title: Develop with Docker Engine SDKs
+description: Using Docker SDKs to automate Docker tasks in your language of choice
+keywords: developing, sdk
 redirect_from:
-- /engine/api/
-- /engine/reference/api/
-- /engine/reference/api/docker_remote_api/
-- /reference/api/
-- /reference/api/docker_remote_api/
 - /engine/api/sdks/
+- /develop/sdk/
 ---
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
@@ -29,8 +25,9 @@ installed and coexist together.
 ```bash
 go get github.com/docker/docker/client
 ```
+
 The client requires a recent version of Go. Run `go version` and ensure that you 
-are running at least version 1.9.4 of Go
+are running a currently supported version of Go
 
 
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
@@ -56,113 +53,20 @@ or [choose a specific version](/engine/api/version-history/).
 ## Versioned API and SDK
 
 The version of the Docker Engine API you should use depends upon the version of
-your Docker daemon and Docker client.
+your Docker daemon and Docker client. Refer to the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
+section in the API documentation for details.
 
-A given version of the Docker Engine SDK supports a specific version of the
-Docker Engine API, as well as all earlier versions. If breaking changes occur,
-they are documented prominently.
-
-> Daemon and client API mismatches
->
-> The Docker daemon and client do not necessarily need to be the same version
-> at all times. However, keep the following in mind.
->
-> - If the daemon is newer than the client, the client does not know about new
->   features or deprecated API endpoints in the daemon.
->
-> - If the client is newer than the daemon, the client can request API
->   endpoints that the daemon does not know about.
-
-A new version of the API is released when new features are added. The Docker API
-is backward-compatible, so you do not need to update code that uses the API
-unless you need to take advantage of new features.
-
-To see the highest version of the API your Docker daemon and client support, use
-`docker version`:
-
-```bash
-$ docker version
-
-Client:
- Version:      17.04.0-ce
- API version:  1.28
- Go version:   go1.7.5
- Git commit:   4845c56
- Built:        Wed Apr  5 06:06:36 2017
- OS/Arch:      darwin/amd64
-
-Server:
- Version:      17.04.0-ce
- API version:  1.28 (minimum version 1.12)
- Go version:   go1.7.5
- Git commit:   4845c56
- Built:        Tue Apr  4 00:37:25 2017
- OS/Arch:      linux/amd64
- Experimental: true
-```
-
-You can specify the API version to use, in one of the following ways:
-
-- When using the SDK, use the latest version you can, but at least the version
-  that incorporates the API version with the features you need.
-
-- When using `curl` directly, specify the version as the first part of the URL.
-  For instance, if the endpoint is `/containers/`, you can use
-  `/v1.27/containers/`.
-
-- To force the Docker CLI or the Docker Engine SDKs to use an old version
-  version of the API than the version reported by `docker version`, set the
-  environment variable `DOCKER_API_VERSION` to the correct version. This works
-  on Linux, Windows, or macOS clients.
-
-  ```bash
-  DOCKER_API_VERSION='1.27'
-  ```
-
-  While the environment variable is set, that version of the API is used, even
-  if the Docker daemon supports a newer version.
-
-- For the SDKs, you can also specify the API version programmatically, as a
-  parameter to the `client` object. See the
-  [Go constructor](https://github.com/moby/moby/blob/master/client/client.go#L136){: target="_blank" class="_"}
-  or the
-  [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
-
-### Docker Engine - Enterprise and Docker Engine - Community API mismatch
-
-If you use Docker Engine - Enterprise in production, we recommend using Docker Engine - Enterprise in development
-too. If you can't, such as when your developers use Docker Desktop for Mac or Docker Desktop for
-Windows and manually build and push images, then your developers need to configure
-their Docker clients to use the same version of the API reported by their Docker
-daemon. This prevents the developer from using a feature that is not yet supported
-on the daemon where the workload runs in production. You can do this one of two ways:
-
-- Configure the Docker client to connect to an external daemon running Docker EE.
-  You can use the `-H` flag on the `docker` command or set the `DOCKER_HOST`
-  environment variable. The client uses the daemon's latest supported API version.
-- Configure the Docker client to use a specific API by setting the `DOCKER_API_VERSION`
-  environment variable to the API version to use, such as `1.30`.
-
-### API version matrix
-
-Docker does not recommend running versions prior to 1.12, which means you
-are encouraged to use an API version of 1.24 or higher.
-
-{% include api-version-matrix.md %}
-
-### Choose the SDK or API version to use
+## SDK and API quickstart
 
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 
-- If you're starting a new project, use the
-  [latest version](/engine/api/latest/), but do specify the version you are
-  using. This helps prevent surprises.
+- If you're starting a new project, use the [latest version](/engine/api/latest/),
+  but use API version negotiation or specify the version you are using. This
+  helps prevent surprises.
 - If you need a new feature, update your code to use at least the minimum version
   that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
-
-## SDK and API quickstart
 
 As an example, the `docker run` command can be easily implemented using the
 Docker API directly, or using the Python or Go SDK.
@@ -192,11 +96,10 @@ import (
 
 func main() {
     ctx := context.Background()
-    cli, err := client.NewClientWithOpts(client.FromEnv)
+    cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
     if err != nil {
         panic(err)
     }
-    cli.NegotiateAPIVersion(ctx)
 
     reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {
@@ -264,8 +167,7 @@ hello world
   </div>
 </div>
 
-For more examples, take a look at the
-[getting started guide](examples.md).
+For more examples, take a look at the [SDK examples](/engine/api/sdk/examples.md).
 
 ## Unofficial libraries
 
