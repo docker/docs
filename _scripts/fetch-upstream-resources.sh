@@ -2,10 +2,12 @@
 
 # Fetches upstream resources from docker/docker and docker/distribution
 # before handing off the site to Jekyll to build
-# Relies on the following environment variables which are usually set by
-# the Dockerfile. Uncomment them here to override for debugging
+# Relies on the "ENGINE_BRANCH" and "DISTRIBUTION_BRANCH" environment variables,
+# which are usually set by the Dockerfile.
+: "${ENGINE_BRANCH?No release branch set for docker/docker and docker/cli}"
+: "${DISTRIBUTION_BRANCH?No release branch set for docker/distribution}"
 
-# Helper functino to deal with sed differences between osx and Linux
+# Helper function to deal with sed differences between osx and Linux
 # See https://stackoverflow.com/a/38595160
 sedi () {
     sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
@@ -48,12 +50,6 @@ done < <(cat ./_config.yml |grep '_version:' |grep '^[a-z].*')
 
 # Replace variable in toc.yml with value from above
 sedi "s/{{ site.latest_engine_api_version }}/$latest_engine_api_version/g" ./_data/toc.yaml
-
-# Engine stable
-ENGINE_BRANCH="19.03"
-
-# Distribution
-DISTRIBUTION_BRANCH="release/2.7"
 
 # Translate branches for use by svn
 engine_svn_branch="branches/${ENGINE_BRANCH}"
