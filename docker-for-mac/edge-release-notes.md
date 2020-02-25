@@ -22,6 +22,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
 - [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
 
+### Bug fixes and minor changes
+
+- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
+- Ceph support has been removed from Docker Desktop to save disk space.
+
 ## Docker Desktop Community 2.2.1.0
 2020-02-12
 

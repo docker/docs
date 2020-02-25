@@ -22,9 +22,16 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
 - [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
 
+### New
+
+- Windows 10 Home users can now use Docker Desktop through the experimental WSL 2 support. This requires Windows Insider Preview Build 19018 or later.
+- Docker Desktop now allows sharing individual folders, rather than whole drives, giving more control to users over what is being shared.
+
 ### Bug fixes and minor changes
 
 - DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+- Ceph support has been removed from Docker Desktop to save disk space.
+- Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 
 ## Docker Desktop Community 2.2.1.0
 2020-02-12
