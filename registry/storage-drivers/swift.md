@@ -37,4 +37,4 @@ configuration file can specify the following optional parameters :
 |  Optional parameter | Description |
 |:--------------|:---------|
 | `tempurlcontainerkey`  |  Specify whether to use container secret key to generate temporary URL when set to true, or the account secret key otherwise. |
-| `tempurlmethods`  |  Array of HTTP methods that are supported by the TempURL middleware of the Swift server. For example: - `tempurlmethods:` `- GET` `- PUT` `- HEAD` `- POST` `- DELETE` |
+| `tempurlmethods`  |  Array of HTTP methods that are supported by the TempURL middleware of the Swift server. For example: `["GET", "PUT", "HEAD", "POST", "DELETE"]` |
