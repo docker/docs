@@ -13,13 +13,13 @@ storage.
 | Parameter     | Required | Description                                                                                                                                                                                                                                                         |
 |:--------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `authurl`  |  yes  | URL for obtaining an auth token. https://storage.myprovider.com/v2.0 or https://storage.myprovider.com/v3/auth |
-| `username`  |  yes  |	Your Openstack user name. |
+| `username`  |  yes  | Your Openstack user name. |
 | `password`  |  yes | Your Openstack password. |
-| `region`  | no   |The Openstack region in which your container exists. |
-| `container`  |  yes  |The name of your Swift container where you wish to store the registry's data. The driver creates the named container during its initialization.|
-| `tenant`  | no   |Your Openstack tenant name. You can either use `tenant` or `tenantid`. |
+| `region`  | no   | The Openstack region in which your container exists. |
+| `container`  |  yes  | The name of your Swift container where you wish to store the registry's data. The driver creates the named container during its initialization. |
+| `tenant`  | no   | Your Openstack tenant name. You can either use `tenant` or `tenantid`. |
 | `tenantid`  |  no | Your Openstack tenant name. You can either use `tenant` or `tenantid`. |
-| `domain`  |  no  |Your Openstack domain name for Identity v3 API. You can either use `domain` or `domainid`. |
+| `domain`  |  no  | Your Openstack domain name for Identity v3 API. You can either use `domain` or `domainid`. |
 | `domainid`  | no   | Your Openstack domain name for Identity v3 API. You can either use `domain` or `domainid`. |
 | `trustid`  |  no  | Your Openstack trust ID for Identity v3 API. |
 | `insecureskipverify`  | no   | Skips TLS verification if the value is wet to	`true`. The default is `false`. |
@@ -27,7 +27,7 @@ storage.
 | `prefix`  |  no  | This is a prefix that is applied to all Swift keys to allow you to segment data in your container if necessary. Defaults to the empty string which is the container's root. |
 | `secretkey`  |  no  | The secret key used to generate temporary URLs. |
 | `accesskey`  |  no  | The access key to generate temporary URLs. It is used by HP Cloud Object Storage in addition to the `secretkey` parameter. |
-| `authversion`  | no  |Specify the OpenStack Auth's version, for example `3`. By default the driver autodetects the auth's version from the AuthURL.|
+| `authversion`  | no  | Specify the OpenStack Auth's version, for example `3`. By default the driver autodetects the auth's version from the AuthURL. |
 | `endpointtype`  | no   | The endpoint type used when connecting to swift. Possible values are `public`, `internal`, and `admin`. The default is `public`. |
 
 The features supported by the Swift server are queried by requesting the `/info`
