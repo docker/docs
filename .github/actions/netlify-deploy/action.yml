@@ -22,8 +22,8 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    NETLIFY_ACCOUNT_SLUG: ${{ inputs.NETLIFY_ACCOUNT_SLUG }}
-    NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
-    NETLIFY_DIRECTORY: ${{ inputs.NETLIFY_DIRECTORY }}
-    NETLIFY_SITE_NAME: ${{ inputs.NETLIFY_SITE_NAME }}
+  args:
+    - ${{ inputs.NETLIFY_ACCOUNT_SLUG }}
+    - ${{ inputs.NETLIFY_AUTH_TOKEN }}
+    - ${{ inputs.NETLIFY_DIRECTORY }}
+    - ${{ inputs.NETLIFY_SITE_NAME }}

@@ -16,6 +16,9 @@ jobs:
         run: docker build --build-arg=ENABLE_ARCHIVES=false --target=current -t documentation:latest .
       - name: copy static files locally
         run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
+      - name: check if secrets are well defined
+        # not really a secret
+        run: echo "${{ secrets.NETLIFY_ACCOUNT_SLUG }}"
       - name: deploy to netlify
         uses: ./.github/actions/netlify-deploy
         id: netlify_deploy

@@ -14,6 +14,19 @@ function get_site_url() {
   netlify sites:list --json | jq --raw-output ".[] | select(.name==\"$1\") | .url"
 }
 
+NETLIFY_AUTH_TOKEN=$1
+NETLIFY_SITE_NAME=$2
+
+if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+  echo "\$NETLIFY_AUTH_TOKEN is empty"
+  exit 1;
+fi
+
+if [ -z "$NETLIFY_SITE_NAME" ]; then
+  echo "\$NETLIFY_SITE_NAME is empty"
+  exit 1;
+fi
+
 echo "searching site ${NETLIFY_SITE_NAME}"
 
 CLEAN_NAME=$(slug $NETLIFY_SITE_NAME)
