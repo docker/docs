@@ -117,15 +117,10 @@ volume defaults at container runtime, you need to either use non-host-mounted
 volumes or find a way to make the applications work with the default file
 permissions.
 
-Docker Desktop currently implements host-mounted volumes based on [Microsoft SMB
-protocol](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx), which does not support fine-grained, `chmod` control over these permissions.
-
 See also, [Can I change permissions on shared volumes for container-specific
 deployment
 requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
-in the FAQs, and for more of an explanation, the GitHub issue, [Controlling
-Unix-style perms on directories passed through from shared Windows
-drives](https://github.com/docker/docker.github.io/issues/3298).
+in the FAQs.
 
 #### inotify on shared drives does not work
 
@@ -152,117 +147,6 @@ Volume mounting requires shared drives for Linux containers (not for Windows
 containers). Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
-
-#### Verify domain user has permissions for shared drives (volumes)
-
-> **Tip**: Shared drives are only required for volume mounting [Linux
-> containers](index.md#switch-between-windows-and-linux-containers), not Windows
-> containers.
-
-Permissions to access shared drives are tied to the username and password you
-use to set up [shared drives](index.md#shared-drives). If you run `docker`
-commands and tasks under a different username than the one used to set up shared
-drives, your containers don't have permissions to access the mounted volumes.
-The volumes show as empty.
-
-The solution to this is to switch to the domain user account and reset
-credentials on shared drives.
-
-Here is an example of how to debug this problem, given a scenario where you
-shared the `C` drive as a local user instead of as the domain user. Assume the
-local user is `samstevens` and the domain user is `merlin`.
-
-1. Make sure you are logged in as the Windows domain user (for our example,
-   `merlin`).
-
-2. Run `net share c` to view user permissions for `<host>\<username>, FULL`.
-
-   ```
-   > net share c
-
-   Share name        C
-   Path              C:\
-   Remark
-   Maximum users     No limit
-   Users             SAMSTEVENS
-   Caching           Caching disabled
-   Permission        windowsbox\samstevens, FULL
-   ```
-
-3. Run the following command to remove the share.
-
-   ```
-   > net share c /delete
-   ```
-
-4. Re-share the drive via the [Shared Drives dialog](index.md#shared-drives),
-   and provide the Windows domain user account credentials.
-
-5. Re-run `net share c`.
-
-   ```
-   > net share c
-
-   Share name        C
-   Path              C:\
-   Remark
-   Maximum users     No limit
-   Users             MERLIN
-   Caching           Caching disabled
-   Permission        windowsbox\merlin, FULL
-   ```
-
-See also, the related issue on GitHub, [Mounted volumes are empty in the
-container](https://github.com/docker/for-win/issues/25).
-
-#### Volume mounts from host paths use a `nobrl` option to override database locking
-
-You may encounter problems using volume mounts on the host, depending on the
-database software and which options are enabled. Docker Desktop for Windows uses
-[SMB/CIFS
-protocols](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx)
-to mount host paths, and mounts them with the `nobrl` option, which prevents
-lock requests from being sent to the database server
-([docker/for-win#11](https://github.com/docker/for-win/issues/11),
-[docker/for-win#694](https://github.com/docker/for-win/issues/694)). This is
-done to ensure container access to database files shared from the host. Although
-it solves the over-the-network database access problem, this "unlocked" strategy
-can interfere with other aspects of database functionality (for example,
-write-ahead logging (WAL) with SQLite, as described in
-[docker/for-win#1886](https://github.com/Sonarr/Sonarr/issues/1886)).
-
-If possible, avoid using shared drives for volume mounts on the host with
-network paths, and instead mount on the MobyVM, or create a [data
-volume](/engine/tutorials/dockervolumes.md#data-volumes) (named volume) or [data
-container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
-See also, the [volumes key under service
-configuration](/compose/compose-file/index.md#volumes) and the [volume
-configuration
-reference](/compose/compose-file/index.md#volume-configuration-reference) in the
-Compose file documentation.
-
-#### Local security policies can block shared drives and cause login errors
-
-You need permissions to mount shared drives to use the Docker Desktop for Windows
-[shared drives](index.md#shared-drives) feature.
-
-If local policy prevents this, you get errors when you attempt to enable shared
-drives on Docker. This is not something Docker can resolve, since you do need
-these permissions to use the feature.
-
-Here are snip-its from example error messages:
-
-```none
-Logon failure: the user has not been granted the requested logon type at
-this computer.
-
-[19:53:26.900][SambaShare     ][Error  ] Unable to mount C drive: mount
-error(5): I/O error Refer to the mount.cifs(8) manual page (e.g. man mount.cifs)
-mount: mounting //10.0.75.1/C on /c failed: Invalid argument
-```
-
-See also, <a href="https://github.com/docker/for-win/issues/98">Docker for
-Windows issue #98</a>.
 
 #### Understand symlinks limitations
 
