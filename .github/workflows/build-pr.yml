@@ -1,0 +1,16 @@
+name: build docker image when PR is opened
+
+on: pull_request
+
+jobs:
+  build-static-page:
+    name: build
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: '1'
+    steps:
+      - name: print docker info
+        run: docker version && docker info
+      - uses: actions/checkout@v2
+      - name: build image
+        run: docker build --build-arg=ENABLE_ARCHIVES=false --target=current -t documentation:latest .
