@@ -18,6 +18,8 @@ Disaster recovery procedures should be performed in the following order:
 
 ### Recover from losing the quorum
 
+#### in case of emergency
+
 Swarm is resilient to failures and the swarm can recover from any number
 of temporary node failures (machine reboots or crash with restart) or other
 transient errors. However, a swarm cannot automatically recover if it loses a
