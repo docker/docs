@@ -55,16 +55,11 @@ COPY --from=docs/docker.github.io:v18.09 ${TARGET} /
 FROM archives-${ENABLE_ARCHIVES} AS archives
 
 # Fetch upstream resources (reference documentation)
-# Only add the files that are needed to build these reference docs, so that
-# these docs are only rebuilt if changes were made to the configuration.
+# Only add the files that are needed to build these reference docs, so that these
+# docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
+# Disable caching (docker build --no-cache) to force updating these docs.
 FROM builderbase AS upstream-resources
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
-# Add the _config.yml and toc.yaml here so that the fetch-upstream-resources
-# can extract the latest_engine_api_version value, and substitute the
-# "{site.latest_engine_api_version}" in the title for the latest API docs
-# TODO find a different mechanism for substituting the API version, to prevent invalidating the cache
-COPY ./_config.yml .
-COPY ./_data/toc.yaml ./_data/
 RUN ./_scripts/fetch-upstream-resources.sh .
 
 
@@ -73,6 +68,9 @@ RUN ./_scripts/fetch-upstream-resources.sh .
 FROM builderbase AS current
 COPY . .
 COPY --from=upstream-resources /usr/src/app/md_source/. ./
+# substitute the "{site.latest_engine_api_version}" in the title for the latest
+# API docs, based on the latest_engine_api_version parameter in _config.yml
+RUN ./_scripts/update-api-toc.sh
 RUN jekyll build -d ${TARGET}
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
