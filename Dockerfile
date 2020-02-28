@@ -110,4 +110,6 @@ COPY --from=current /usr/share/nginx/html /
 # DOCKER_BUILDKIT=1 docker build -t docs --build-arg ENABLE_ARCHIVES=false .
 FROM deploybase AS deploy
 WORKDIR $TARGET
-COPY --from=deploy-source / .
+
+COPY --from=archives / .
+COPY --from=current  /usr/share/nginx/html .
