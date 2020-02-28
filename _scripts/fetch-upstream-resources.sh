@@ -13,23 +13,6 @@ sedi () {
     sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
 }
 
-# Assume non-local mode until we check for -l
-LOCAL=0
-
-while getopts ":hl" opt; do
-  case ${opt} in
-    l ) LOCAL=1
-        echo "Running in local mode"
-        break
-      ;;
-    \? ) echo "Usage: $0 [-h] | -l"
-         echo "When running in local mode, operates on the current working directory."
-         echo "Otherwise, operates on md_source in the scope of the Dockerfile"
-         break
-      ;;
-  esac
-done
-
 # Do some sanity-checking to make sure we are running this from the right place
 if ! [ -f _config.yml ]; then
   echo "Could not find _config.yml. We may not be in the right place. Bailing."
