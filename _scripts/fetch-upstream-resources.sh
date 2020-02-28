@@ -53,11 +53,11 @@ sedi "s/{{ site.latest_engine_api_version }}/$latest_engine_api_version/g" ./_da
 
 # Translate branches for use by svn
 engine_svn_branch="branches/${ENGINE_BRANCH}"
-if [ engine_svn_branch = "branches/master" ]; then
+if [ "${engine_svn_branch}" = "branches/master" ]; then
 	engine_svn_branch=trunk
 fi
 distribution_svn_branch="branches/${DISTRIBUTION_BRANCH}"
-if [ distribution_svn_branch = "branches/master" ]; then
+if [ "${distribution_svn_branch}" = "branches/master" ]; then
 	distribution_svn_branch=trunk
 fi
 
