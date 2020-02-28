@@ -39,15 +39,6 @@ ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
 
 
-# Base stage to be used for deploying the docs
-FROM nginx:alpine AS deploybase
-ENV TARGET=/usr/share/nginx/html
-COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# Set the default command to serve the static HTML site
-CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
-
-
 # Empty stage if archives are disabled (ENABLE_ARCHIVES=false)
 FROM scratch AS archives-false
 
@@ -108,8 +99,13 @@ COPY --from=current /usr/share/nginx/html /
 #
 # To build without archives:
 # DOCKER_BUILDKIT=1 docker build -t docs --build-arg ENABLE_ARCHIVES=false .
-FROM deploybase AS deploy
+FROM nginx:alpine AS deploy
+ENV TARGET=/usr/share/nginx/html
 WORKDIR $TARGET
 
 COPY --from=archives / .
 COPY --from=current  /usr/share/nginx/html .
+
+# Configure NGINX
+COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
