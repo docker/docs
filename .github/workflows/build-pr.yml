@@ -14,3 +14,14 @@ jobs:
       - uses: actions/checkout@v2
       - name: build image
         run: docker build --build-arg=ENABLE_ARCHIVES=false --target=current -t documentation:latest .
+
+  lint-markdown:
+    name: linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v1.1.1
+        with:
+          files: .
+          config_file: ".markdownlint.json"
