@@ -74,7 +74,7 @@ COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
 # TODO find a different mechanism for substituting the API version, to prevent invalidating the cache
 COPY ./_config.yml .
 COPY ./_data/toc.yaml ./_data/
-RUN bash ./_scripts/fetch-upstream-resources.sh .
+RUN ./_scripts/fetch-upstream-resources.sh .
 
 
 # Build the static HTML for the current docs.
