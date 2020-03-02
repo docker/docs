@@ -25,7 +25,7 @@ Before you install Docker Desktop WSL 2 backend, you must complete the following
 
 # Download
 
-Download [Docker Desktop Edge 2.1.6.0](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe) or a later release.
+Download [Docker Desktop Edge](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) 2.1.6.0 or a later release.
 
 # Install
 
