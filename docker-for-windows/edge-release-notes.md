@@ -15,7 +15,7 @@ notes](release-notes). For Docker Desktop system requirements, see
 ## Docker Desktop Community 2.2.2.0
 2020-03-02
 
-> [Download](https://download.docker.com/win/edge/43066/Docker%2520Desktop%2520Installer.exe)
+> [Download](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
