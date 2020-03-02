@@ -46,62 +46,155 @@ this.
 
 The following table lists recommendations to avoid IP range conflicts.
 
-| Component  | Subnet                     | Range                                    | Default IP address     |
-|------------|----------------------------|------------------------------------------|----------------|
-| Engine     | `fixed-cidr`               | CIDR range for `docker0` interface and local containers | 172.17.0.0/16  |
-| Engine     | `default-address-pools`    | CIDR range for `docker_gwbridge` interface and bridge networks | 172.18.0.0/16  |
-| Swarm      | `default-addr-pool`        | CIDR range for Swarm overlay networks    | 10.0.0.0/8     |
-| Kubernetes | `pod-cidr`                 | CIDR range for Kubernetes pods           | 192.168.0.0/16 |
-| Kubernetes | `service-cluster-ip-range` | CIDR range for Kubernetes services       | 10.96.0.0/16   |
+| Component  | Subnet                     | Range                                        | Default IP address                            |
+| ---------- | -------------------------- | -------------------------------------------- | --------------------------------------------- |
+| Engine     | `default-address-pools`    | CIDR range for interface and bridge networks | 172.17.0.0/16 - 172.30.0.0/16, 192.168.0.0/16 |
+| Swarm      | `default-addr-pool`        | CIDR range for Swarm overlay networks        | 10.0.0.0/8                                    |
+| Kubernetes | `pod-cidr`                 | CIDR range for Kubernetes pods               | 192.168.0.0/16                                |
+| Kubernetes | `service-cluster-ip-range` | CIDR range for Kubernetes services           | 10.96.0.0/16                                  |
 
 ### Engine
 
 There are two IP ranges used by the engine for the `docker0` and `docker_gwbridge` interface:
 
-#### docker0
+#### default-address-pools
 
-By default, the Docker engine creates and configures the host system with a network interface called `docker0`, which is an ethernet bridge device. If you don't specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.
+`default-address-pools` defines a pool of CIDR ranges that are used to allocated subnets for local bridge networks. By default the first available subnet(`172.17.0.0/16`) is assigned to `docker0` and the next available subnet(`172.18.0.0/16`) is assigned to `docker_gwbridge`. Both the `docker0` and `docker_gwbridge` subnet can be modified by changing the `default-address-pools` value or as described in their individual sections below.
 
-Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker` unless you specify otherwise. The default subnet for `docker0` is `172.17.0.0/16`.
-
-The recommended way to configure the `docker0` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the `docker0` interface:
-
-```json
-{
-  "bip": "172.17.0.1/16",
-  "fixed-cidr": "172.17.0.0/16",
-}
-```
-
-`bip`: Supply a specific bridge IP range for the `docker0` interface, using standard CIDR notation. Default is `172.17.0.1/16`.
-
-`fixed-cidr`: Restrict the IP range for `docker0`, using standard CIDR notation. Default is `172.17.0.0/16`.
-This range must be an IPv4 range for fixed IPs, and must be a subset of the bridge IP range (`bip` in `daemon.json`). For example, with `172.17.0.0/17`, IPs for your containers will be chosen from the first half of addresses(`172.17.0.1` - `172.17.127.254`) included in the `bip`(`172.17.0.0/16`) subnet.
-
-#### docker_gwbridge
-
- The `docker_gwbridge` is a virtual bridge that connects the overlay networks (including the `ingress` network) to an individual Docker engine's physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for `docker_gwbridge` is `172.18.0.0/16`.
-
- > Note
- >
- > If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
-
- The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file. You can specify one or more of the following settings to configure the interface:
+The default value for `default-address-pools` is:
 
  ```json
  {
      "default-address-pools": [
-         {"base":"172.18.0.0/16","size":24},
-         {"base":"###.###.###.###/##","size":##}
+          {"base":"172.17.0.0/16","size":16}, <-- docker0
+          {"base":"172.18.0.0/16","size":16}, <-- docker_gwbridge
+          {"base":"172.19.0.0/16","size":16},
+          {"base":"172.20.0.0/16","size":16},
+          {"base":"172.21.0.0/16","size":16},
+          {"base":"172.22.0.0/16","size":16},
+          {"base":"172.23.0.0/16","size":16},
+          {"base":"172.24.0.0/16","size":16},
+          {"base":"172.25.0.0/16","size":16},
+          {"base":"172.26.0.0/16","size":16},
+          {"base":"172.27.0.0/16","size":16},
+          {"base":"172.28.0.0/16","size":16},
+          {"base":"172.29.0.0/16","size":16},
+          {"base":"172.30.0.0/16","size":16},
+          {"base":"192.168.0.0/16","size":20}
      ]
  }
  ```
 
-`default-address-pools`:  A list of IP address pools for local bridge networks, the default is a single pool `{"base":"172.18.0.0/16","size":24}`. This allocates `/24` network from the `172.18.0.0/16` CIDR range for local bridge networks. Each entry in the list contain the following:
+`default-address-pools`:  A list of IP address pools for local bridge networks. Each entry in the list contain the following:
 
-`base`: CIDR range to be divided up for bridge networks, the default is `172.18.0.0/16`
+`base`: CIDR range to be allocated for bridge networks.
 
-`size`: CIDR netmask that determines the default network size to allocate from the `base` pool, the default is `24`
+`size`: CIDR netmask that determines the subnet size to allocate from the `base` pool
+
+As an example, `{"base":"192.168.0.0/16","size":20}` will allocate `/20` subnets from `192.168.0.0/16` yielding the following subnets for bridge networks:\
+`192.168.0.0/20` (`192.168.0.0` - `192.168.15.255`)\
+`192.168.16.0/20` (`192.168.16.0` - `192.168.31.255`)\
+`192.168.32.0/20` (`192.168.32.0` - `192.168.47.255`)\
+`192.168.48.0/20` (`192.168.32.0` - `192.168.63.255`)\
+`192.168.64.0/20` (`192.168.64.0` - `192.168.79.255`)\
+...\
+`192.168.240.0/20` (`192.168.240.0` - `192.168.255.255`)
+
+> Note
+> 
+> If the `size` matches the netmask of the `base`, then that pool only containers one subnet.
+> 
+> For example, `{"base":"172.17.0.0/16","size":16}` will only yield one subnet `172.17.0.0/16` (`172.17.0.0` - `172.17.255.255`).
+
+#### docker0
+
+By default, the Docker engine creates and configures the host system with a virtual network interface called `docker0`, which is an ethernet bridge device. If you don't specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.
+
+Docker engine creates `docker0` with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to `docker0` unless you specify otherwise. The default subnet for `docker0` is the first pool in `default-address-pools` which is `172.17.0.0/16`.
+
+The recommended way to configure the `docker0` settings is to use the `daemon.json` file.
+
+If only the subnet needs to be customized, it can be changed by modifying the first pool of `default-address-pools`  in the `daemon.json` file.
+
+```json
+ {
+     "default-address-pools": [
+          {"base":"172.17.0.0/16","size":16}, <-- Modify this value
+          {"base":"172.18.0.0/16","size":16},
+          {"base":"172.19.0.0/16","size":16},
+          {"base":"172.20.0.0/16","size":16},
+          {"base":"172.21.0.0/16","size":16},
+          {"base":"172.22.0.0/16","size":16},
+          {"base":"172.23.0.0/16","size":16},
+          {"base":"172.24.0.0/16","size":16},
+          {"base":"172.25.0.0/16","size":16},
+          {"base":"172.26.0.0/16","size":16},
+          {"base":"172.27.0.0/16","size":16},
+          {"base":"172.28.0.0/16","size":16},
+          {"base":"172.29.0.0/16","size":16},
+          {"base":"172.30.0.0/16","size":16},
+          {"base":"192.168.0.0/16","size":20}
+     ]
+ }
+```
+
+> Note
+>
+> Modifying this value can also affect the `docker_gwbridge` if the `size` doesn't match the netmask of the `base`.
+
+To configure a CIDR range and not rely on `default-address-pools`, the `fixed-cidr` setting can used:
+
+```json
+{
+  "fixed-cidr": "172.17.0.0/16",
+}
+```
+
+`fixed-cidr`: Specify the subnet for `docker0`, using standard CIDR notation. Default is `172.17.0.0/16`, the network gateway will be `172.17.0.1` and IPs for your containers will be allocated from (`172.17.0.2` - `172.17.255.254`).
+
+To configure a gateway IP and CIDR range while not relying on `default-address-pools`, the `bip` setting can used:
+
+```json
+{
+  "bip": "172.17.0.1/16",
+}
+```
+
+`bip`: Specific a gateway IP address and CIDR netmask of the `docker0` network. The notation is `<gateway IP>/<CIDR netmask>` and the default is `172.17.0.1/16` which will make the `docker0` network gateway `172.17.0.1` and subnet `172.17.0.0/16`.
+
+#### docker_gwbridge
+
+The `docker_gwbridge` is a virtual network interface that connects the overlay networks (including the `ingress` network) to an individual Docker engine's physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for `docker_gwbridge` is the next available subnet in `default-address-pools` which with defaults is `172.18.0.0/16`.
+
+> Note
+>
+> If you need to customize the `docker_gwbridge` settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.
+
+The recommended way to configure the `docker_gwbridge` settings is to use the `daemon.json` file.
+
+For `docker_gwbridge`, the second available subnet will be allocated from `default-address-pools`. If any customizations where made to the `docker0` interface it could affect which subnet is allocated. With the default `default-address-pools` settings you would modify the second pool.
+
+```json
+ {
+     "default-address-pools": [
+          {"base":"172.17.0.0/16","size":16},
+          {"base":"172.18.0.0/16","size":16}, <-- Modify this value
+          {"base":"172.19.0.0/16","size":16},
+          {"base":"172.20.0.0/16","size":16},
+          {"base":"172.21.0.0/16","size":16},
+          {"base":"172.22.0.0/16","size":16},
+          {"base":"172.23.0.0/16","size":16},
+          {"base":"172.24.0.0/16","size":16},
+          {"base":"172.25.0.0/16","size":16},
+          {"base":"172.26.0.0/16","size":16},
+          {"base":"172.27.0.0/16","size":16},
+          {"base":"172.28.0.0/16","size":16},
+          {"base":"172.29.0.0/16","size":16},
+          {"base":"172.30.0.0/16","size":16},
+          {"base":"192.168.0.0/16","size":20}
+     ]
+ }
+```
 
 ### Swarm
 
@@ -112,7 +205,7 @@ Swarm uses a default address pool of `10.0.0.0/8` for its overlay networks. If t
 > The Swarm `default-addr-pool` setting is separate from the Docker engine `default-address-pools` setting. They are two separate ranges that are used for different purposes.
 
 > Note
-> 
+>
 > Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.
 
 ### Kubernetes

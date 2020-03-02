@@ -232,12 +232,7 @@ Choose the local directories you'd like to share with your Linux containers. Fil
  not for Windows containers. For Linux containers, you need to share the drive
  where the Dockerfile and volume are located. Otherwise, you get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).
 
-File sharing permissions are tied to the credentials you provide here. If
-you run `docker` commands under a different username than the one configured
-here, your containers cannot access the mounted volumes.
-
-When you select a local drive to share with your containers, Docker Desktop prompts you for your Windows system (domain)
-username and password. Enter your credentials and then click **Apply & Restart**.
+**Apply & Restart** makes the directory available to containers using Docker's bind mount (`-v`) feature.
 
 > Tips on shared drives, permissions, and volume mounts
 >
@@ -249,28 +244,9 @@ username and password. Enter your credentials and then click **Apply & Restart**
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
- * Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes).
->
  * You can share local drives with your _containers_ but not with Docker Machine
 nodes. See the FAQ, [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms).
 >
-
-#### Firewall rules for shared drives
-
-Shared drives require port 445 to be open between the host machine and the
-virtual machine that runs Linux containers. Docker detects if port 445 is closed
-and shows the following message when you try to add a shared drive:
-
-![Port 445 blocked](images/shared-drive-firewall-blocked.png){:width="600px"}
-
-To share the drive, allow connections between the Windows host machine and the
-virtual machine in Windows Firewall or your third party firewall software. You
-do not need to open port 445 on any other network.
-
-By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
-`10.0.75.2` (the virtual machine). If your firewall rules seem correct, you may
-need to toggle or
-[reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
 
 #### Shared drives on demand
 
