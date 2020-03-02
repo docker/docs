@@ -13,7 +13,9 @@ notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.2.0
-2020-02-
+2020-03-02
+
+> [Download](https://download.docker.com/mac/edge/43066/Docker.dmg)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
