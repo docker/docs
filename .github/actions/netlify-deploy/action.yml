@@ -1,0 +1,23 @@
+name: netlify action
+description: handle the integration with netlify
+inputs:
+  netlify_token:
+    description: Access token for netlify
+    required: true
+  netlify_account_slug:
+    description: Account slug on netlify
+    required: true
+  site_name:
+    description: Site name on netlify
+    required: true
+  directory:
+    description: Directory containing the files to deploy
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.netlify_token }}
+    - ${{ inputs.netlify_account_slug }}
+    - ${{ inputs.site_name }}
+    - ${{ inputs.directory }}
