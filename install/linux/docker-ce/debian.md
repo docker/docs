@@ -87,7 +87,7 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg2 \
+        gnupg-agent \
         software-properties-common
     ```
 
