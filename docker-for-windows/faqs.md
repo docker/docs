@@ -129,9 +129,11 @@ Hyper-V is enabled on Windows.
 You can find a tutorial about running Windows containers on Windows Server in
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
 
-### Why is Windows 10 Home not supported?
+### Can I install Docker Desktop on Windows 10 Home?
 
-Docker Desktop requires the Hyper-V feature which is not available in the Windows Home edition.
+Windows 10 Insider Preview (Windows 10 Home) users can now install [Docker Desktop Edge 2.2.2.0](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe) or a later release with the [experimental WSL 2 support](/docker-for-windows/wsl-tech-preview/). This requires Windows Insider Preview Build 19018 or later.
+
+Docker Desktop Stable releases require the Hyper-V feature which is not available in the Windows 10 Home edition.
 
 ### Why is Windows 10 required?
 
