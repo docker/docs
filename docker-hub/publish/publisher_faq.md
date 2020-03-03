@@ -51,7 +51,7 @@ once updates this for all images published by your organization.
 
 ### Can we show customers all tags for a specific repository, the way we show all tags for official images?
 
-We don't support the abiltiy to view available tags for published products because published products usually require entitlement.
+We don't support the ability to view available tags for published products because published products usually require entitlement.
 
 Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
 
