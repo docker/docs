@@ -12,13 +12,11 @@ This page describes the different types of hosted discovery. These are:
 
 ## Use a distributed key/value store
 
-The recommended way to do node discovery in Swarm is Docker's libkv project. The libkv project is an abstraction layer over existing distributed key/value stores. As of this writing, the project supports:
+Swarm node discovery supports the following backends:
 
 * Consul 0.5.1 or higher
 * Etcd 2.0 or higher
 * ZooKeeper 3.4.5 or higher
-
-For details about libkv and a detailed technical overview of the supported backends, refer to the [libkv project](https://github.com/docker/libkv).
 
 ### Use a hosted discovery key store
 
@@ -170,54 +168,9 @@ Or with node discovery:
 
 > ### Deprecation Notice
 >
-> The Docker Hub Hosted Discovery Service will be removed on June 19th, 2019. Please switch to one of the other discovery mechanisms. Several brownouts of the service will take place in the weeks leading up to the removal in order for users to find places where this is still used and give them time to prepare.
-{:.info}
-
-> **Warning**:
-> The Docker Hub Hosted Discovery Service **is not recommended** for production use. It's intended to be used for testing/development. See the discovery backends for production use.
+> The Docker Hub Hosted Discovery Service has been removed on June 19th, 2019.
+> Please switch to one of the other discovery mechanisms.
 {:.warning}
-
-This example uses the hosted discovery service on Docker Hub. Using
-Docker Hub's hosted discovery service requires that each node in the
-swarm is connected to the public internet. To create your cluster:
-
-1. Create a cluster.
-
-        $ swarm create
-        6856663cdefdec325839a4b7e1de38e8 # <- this is your unique <cluster_id>
-
-2. Create each node and join them to the cluster.
-
-    On each of your nodes, start the swarm agent. The node IP address doesn't need to be public (eg. 192.168.0.X) but the swarm manager must be able to access it.
-
-        $ swarm join --advertise=<node_ip:2375> token://<cluster_id>
-
-3. Start the swarm manager.
-
-    This can be on any machine or even your laptop.
-
-        $ swarm manage -H tcp://<swarm_ip:swarm_port> token://<cluster_id>
-
-4. Use regular Docker commands to interact with your cluster.
-
-        docker -H tcp://<swarm_ip:swarm_port> info
-        docker -H tcp://<swarm_ip:swarm_port> run ...
-        docker -H tcp://<swarm_ip:swarm_port> ps
-        docker -H tcp://<swarm_ip:swarm_port> logs ...
-        ...
-
-5. List the nodes in your cluster.
-
-        swarm list token://<cluster_id>
-        <node_ip:2375>
-
-## Contribute a new discovery backend
-
-You can contribute a new discovery backend to Swarm. For information on how to
-do this, see <a
-href="https://github.com/moby/moby/tree/master/pkg/discovery">
-github.com/moby/moby/pkg/discovery</a>.
-
 
 ## Docker Swarm documentation index
 

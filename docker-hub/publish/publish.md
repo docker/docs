@@ -192,7 +192,7 @@ you intelligence about the use of your product.
 
 ### Docker Security Scanning
 
-Docker Security Scanning automatically and continuously assesses the intergity
+Docker Security Scanning automatically and continuously assesses the integrity
 of your products. The Docker Security Scanning tool deconstructs an image,
 conducts a binary scan of the bits to identify the open-source components
 present in each image layer, and associates those components with known
