@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-static-page:
+    name: build
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: '1'
+    steps:
+      - name: print docker info
+        run: docker version && docker info
+      - uses: actions/checkout@v2
+      - name: build image
+        run: docker build --build-arg=ENABLE_ARCHIVES=true --target=current -t documentation:latest .
+      - name: copy static files locally
+        run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
+      - name: upload files to S3 bucket
+        run: aws s3 sync _site s3://docs.docker.com-test-us-east-1/ --delete
