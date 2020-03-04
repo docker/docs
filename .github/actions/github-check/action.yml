@@ -1,0 +1,19 @@
+name: 'Github custom check'
+description: 'Set a custom message and link for a check'
+inputs:
+  message:
+    description: 'Message to display on check'
+    required: true
+  token:
+    description: 'Github Access Token'
+    required: true
+  url:
+    description: 'Link to redirect to'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.message }}
+    - ${{ inputs.url }}

@@ -1,0 +1,17 @@
+{
+  "name": "@docker/github-check",
+  "description": "Create a check on a github PR",
+  "author": {
+    "email": "jeremie.drouet@docker.com",
+    "name": "Jeremie Drouet"
+  },
+  "main": "src/index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^17.0.0",
+    "commander": "^4.1.1"
+  }
+}

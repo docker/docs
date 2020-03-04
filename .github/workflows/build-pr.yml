@@ -24,3 +24,9 @@ jobs:
           netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify_account_slug: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
           site_name: "${{ github.repository }}/${{ github.head_ref }}"
+      - uses: ./.github/actions/github-check
+        if: github.repository == 'docker/docker.github.io'
+        with:
+          message: "netlify deployment"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          url: "https://docs.docker.com"
