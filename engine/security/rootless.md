@@ -122,8 +122,7 @@ testuser::231072:65536
 
 - To use `ping` command, see [Routing ping packets](#routing-ping-packets)
 
-- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports]
-  (#exposing-privileged-ports)
+- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports)
 
 ## Install
 
