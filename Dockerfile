@@ -39,15 +39,6 @@ ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
 
 
-# Base stage to be used for deploying the docs
-FROM nginx:alpine AS deploybase
-ENV TARGET=/usr/share/nginx/html
-COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# Set the default command to serve the static HTML site
-CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
-
-
 # Empty stage if archives are disabled (ENABLE_ARCHIVES=false)
 FROM scratch AS archives-false
 
@@ -64,17 +55,12 @@ COPY --from=docs/docker.github.io:v18.09 ${TARGET} /
 FROM archives-${ENABLE_ARCHIVES} AS archives
 
 # Fetch upstream resources (reference documentation)
-# Only add the files that are needed to build these reference docs, so that
-# these docs are only rebuilt if changes were made to the configuration.
+# Only add the files that are needed to build these reference docs, so that these
+# docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
+# Disable caching (docker build --no-cache) to force updating these docs.
 FROM builderbase AS upstream-resources
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
-# Add the _config.yml and toc.yaml here so that the fetch-upstream-resources
-# can extract the latest_engine_api_version value, and substitute the
-# "{site.latest_engine_api_version}" in the title for the latest API docs
-# TODO find a different mechanism for substituting the API version, to prevent invalidating the cache
-COPY ./_config.yml .
-COPY ./_data/toc.yaml ./_data/
-RUN bash ./_scripts/fetch-upstream-resources.sh .
+RUN ./_scripts/fetch-upstream-resources.sh .
 
 
 # Build the static HTML for the current docs.
@@ -82,6 +68,9 @@ RUN bash ./_scripts/fetch-upstream-resources.sh .
 FROM builderbase AS current
 COPY . .
 COPY --from=upstream-resources /usr/src/app/md_source/. ./
+# substitute the "{site.latest_engine_api_version}" in the title for the latest
+# API docs, based on the latest_engine_api_version parameter in _config.yml
+RUN ./_scripts/update-api-toc.sh
 RUN jekyll build -d ${TARGET}
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
@@ -108,6 +97,13 @@ COPY --from=current /usr/share/nginx/html /
 #
 # To build without archives:
 # DOCKER_BUILDKIT=1 docker build -t docs --build-arg ENABLE_ARCHIVES=false .
-FROM deploybase AS deploy
+FROM nginx:alpine AS deploy
+ENV TARGET=/usr/share/nginx/html
 WORKDIR $TARGET
-COPY --from=deploy-source / .
+
+COPY --from=archives / .
+COPY --from=current  /usr/share/nginx/html .
+
+# Configure NGINX
+COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'

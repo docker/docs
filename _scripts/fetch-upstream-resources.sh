@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Fetches upstream resources from docker/docker and docker/distribution
 # before handing off the site to Jekyll to build
@@ -7,57 +7,13 @@
 : "${ENGINE_BRANCH?No release branch set for docker/docker and docker/cli}"
 : "${DISTRIBUTION_BRANCH?No release branch set for docker/distribution}"
 
-# Helper function to deal with sed differences between osx and Linux
-# See https://stackoverflow.com/a/38595160
-sedi () {
-    sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
-}
-
-# Assume non-local mode until we check for -l
-LOCAL=0
-
-while getopts ":hl" opt; do
-  case ${opt} in
-    l ) LOCAL=1
-        echo "Running in local mode"
-        break
-      ;;
-    \? ) echo "Usage: $0 [-h] | -l"
-         echo "When running in local mode, operates on the current working directory."
-         echo "Otherwise, operates on md_source in the scope of the Dockerfile"
-         break
-      ;;
-  esac
-done
-
-# Do some sanity-checking to make sure we are running this from the right place
-if ! [ -f _config.yml ]; then
-  echo "Could not find _config.yml. We may not be in the right place. Bailing."
-  exit 1
-fi
-
-# Parse some variables from _config.yml and make them available to this script
-# This only finds top-level variables with _version in them that don't have any
-# leading space. This is brittle!
-
-while read i; do
-  # Store the key as a variable name and the value as the variable value
-  varname=$(echo "$i" | sed 's/"//g' | awk -F ':' {'print $1'} | tr -d '[:space:]')
-  varvalue=$(echo "$i" | sed 's/"//g' | awk -F ':' {'print $2'} | tr -d '[:space:]')
-  echo "Setting \$${varname} to $varvalue"
-  declare "$varname=$varvalue"
-done < <(cat ./_config.yml |grep '_version:' |grep '^[a-z].*')
-
-# Replace variable in toc.yml with value from above
-sedi "s/{{ site.latest_engine_api_version }}/$latest_engine_api_version/g" ./_data/toc.yaml
-
 # Translate branches for use by svn
 engine_svn_branch="branches/${ENGINE_BRANCH}"
-if [ engine_svn_branch = "branches/master" ]; then
+if [ "${engine_svn_branch}" = "branches/master" ]; then
 	engine_svn_branch=trunk
 fi
 distribution_svn_branch="branches/${DISTRIBUTION_BRANCH}"
-if [ distribution_svn_branch = "branches/master" ]; then
+if [ "${distribution_svn_branch}" = "branches/master" ]; then
 	distribution_svn_branch=trunk
 fi
 
