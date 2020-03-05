@@ -21,6 +21,54 @@ for Docker Engine - Community.
 
 # Version 19.03
 
+## 19.03.7
+2020-03-03
+
+### Builder
+
+- builder-next: Fix deadlock issues in corner cases. [moby/moby#40557](https://github.com/moby/moby/pull/40557)
+
+### Runtime
+
+* overlay: remove modprobe execs. [moby/moby#40462](https://github.com/moby/moby/pull/40462)
+* selinux: display better error messages when setting file labels. [moby/moby#40547](https://github.com/moby/moby/pull/40547)
+* Speed up initial stats collection. [moby/moby#40549](https://github.com/moby/moby/pull/40549)
+- rootless: use certs.d from XDG_CONFIG_HOME. [moby/moby#40461](https://github.com/moby/moby/pull/40461)
+- Bump Golang 1.12.17. [moby/moby#40533](https://github.com/moby/moby/pull/40533) 
+- Bump google.golang.org/grpc to v1.23.1. [moby/moby#40566](https://github.com/moby/moby/pull/40566)
+- Update containerd binary to v1.2.13. [moby/moby#40540](https://github.com/moby/moby/pull/40540)
+- Prevent showing stopped containers as running in an edge case. [moby/moby#40555](https://github.com/moby/moby/pull/40555)
+- Prevent potential lock. [moby/moby#40604](https://github.com/moby/moby/pull/40604)
+
+### Client
+
+- Bump Golang 1.12.17. [docker/cli#2342](https://github.com/docker/cli/pull/2342)
+- Bump google.golang.org/grpc to v1.23.1. [docker/cli#1884](https://github.com/docker/cli/pull/1884) [docker/cli#2373](https://github.com/docker/cli/pull/2373)
+
+## 19.03.6
+2020-02-12
+
+### Builder
+
+- builder-next: Allow modern sign hashes for ssh forwarding. [docker/engine#453](https://github.com/docker/engine/pull/453)
+- builder-next: Clear onbuild rules after triggering. [docker/engine#453](https://github.com/docker/engine/pull/453)
+- builder-next: Fix issue with directory permissions when usernamespaces is enabled. [moby/moby#40440](https://github.com/moby/moby/pull/40440)
+- Bump hcsshim to fix docker build failing on Windows 1903. [docker/engine#429](https://github.com/docker/engine/pull/429)
+
+### Networking
+
+- Shorten controller ID in exec-root to not hit UNIX_PATH_MAX. [docker/engine#424](https://github.com/docker/engine/pull/424)
+- Fix panic in drivers/overlay/encryption.go. [docker/engine#424](https://github.com/docker/engine/pull/424)
+- Fix hwaddr set race between us and udev. [docker/engine#439](https://github.com/docker/engine/pull/439)
+
+### Runtime
+
+* Bump Golang 1.12.16. [moby/moby#40433](https://github.com/moby/moby/pull/40433)
+* Update containerd binary to v1.2.12. [moby/moby#40433](https://github.com/moby/moby/pull/40453)
+* Update to runc v1.0.0-rc10. [moby/moby#40433](https://github.com/moby/moby/pull/40453)
+- Fix possible runtime panic in Lgetxattr. [docker/engine#454](https://github.com/docker/engine/pull/454)
+- rootless: fix proxying UDP packets. [docker/engine#434](https://github.com/docker/engine/pull/434)
+
 ## 19.03.5
 2019-11-14
 
