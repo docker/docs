@@ -15,10 +15,10 @@ jobs:
       - name: build image
         run: docker build --build-arg=ENABLE_ARCHIVES=false --target=current -t documentation:latest .
       - name: copy static files
-        if: github.repository == 'docker/docker.github.io'
+        if: github.event.pull_request.head.repo.fork == false
         run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
       - uses: ./.github/actions/netlify-deploy
-        if: github.repository == 'docker/docker.github.io'
+        if: github.event.pull_request.head.repo.fork == false
         with:
           directory: _site
           netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
