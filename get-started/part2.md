@@ -76,7 +76,7 @@ If you are using a Mac or a Linux machine and prefer to download the example pro
 ```shell
 curl -LO https://github.com/dockersamples/node-bulletin-board/archive/master.zip
 unzip master.zip
-cd node-bulletin-board-master/bulletin-board-app
+cd node-bulletin-board-master/bulletin-board
 ```
 
 {% endcapture %}
