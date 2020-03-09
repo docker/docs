@@ -122,8 +122,7 @@ testuser::231072:65536
 
 - To use `ping` command, see [Routing ping packets](#routing-ping-packets)
 
-- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports]
-  (#exposing-privileged-ports)
+- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports)
 
 ## Install
 
@@ -144,7 +143,7 @@ $ curl -fsSL https://get.docker.com/rootless | sh
 # WARN: dockerd is not in your current PATH or pointing to /home/testuser/bin/dockerd
 # Make sure the following environment variables are set (or add them to ~/.bashrc):
 
-export PATH=/home/testuser:/bin:$PATH
+export PATH=/home/testuser/bin:$PATH
 export PATH=$PATH:/sbin
 export DOCKER_HOST=unix:///run/user/1001/docker.sock
 

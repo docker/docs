@@ -9,7 +9,7 @@ jobs:
   remove-site-from-netlify:
     name: build
     runs-on: ubuntu-latest
-    if: github.repository == 'docker/docker.github.io'
+    if: github.event.pull_request.head.repo.fork == false
     steps:
       - uses: actions/checkout@v2
         with:
