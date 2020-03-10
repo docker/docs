@@ -6,7 +6,7 @@ keywords: Assemble, Docker Enterprise, Spring Boot, container image
 
 Ensure you are running the `backend` before you build any projects using Docker Assemble. For instructions on running the backend, see [Install Docker Assemble](/assemble/install).
 
-Clone the git repository you would like to use. The following example uses the `docker-springfamework` repository.
+Clone the git repository you would like to use. The following example uses the `docker-springframework` repository.
 
 ```
 ~$ git clone https://github.com/anokun7/docker-springframework

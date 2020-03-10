@@ -26,6 +26,30 @@ upgrade your installation to the latest release.
 
 # Version 3.2
 
+## 3.2.6
+2020-03-10
+
+### Security
+* Upgraded Golang to 1.13.8.
+* Updated several Golang vendors to address security issues.
+* Fixed an issue that caused file descriptors to remain open in `ucp-agent`. (FIELD-2331)
+
+### Bug Fixes
+* Updated `swarm-rafttool`. (FIELD-2081)
+* Fixed a permission issue to prevent reconciler from looping. (FIELD-2235) 
+* Improved the speed to generate a Windows support dump. (FIELD-2304)
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.6   |
+| Kubernetes            | 1.14.8  |
+| Calico                | 3.8.2   |
+| Interlock             | 3.0.0   |
+| Interlock NGINX proxy | 1.14.2  |
+| Golang | 1.13.8  |
+
 ## 3.2.5
 2020-01-28
 
@@ -440,6 +464,32 @@ The workaround is to use a swarm service to deploy this change across the cluste
 | Interlock NGINX proxy | 1.14.2 |
 
 # Version 3.1
+
+## 3.1.13 
+2020-03-10
+
+### Security
+* Upgraded Golang to 1.13.8.
+* Updated several Golang vendors to address security issues.
+
+### Platform
+* Windows Server 1803 is EOL and is no longer supported by UCP, starting with this release.
+
+### Bug Fixes
+* Updated `swarm-rafttool`. (FIELD-2081) 
+* Improved the speed to generate a Windows support dump. (FIELD-2304)
+* Fixed an issue during authz migration for upgrading UCP 3.0 to UCP 3.1. (FIELD-2253)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.1.13 |
+| Kubernetes   | 1.11.10 |
+| Calico      | 3.8.2 |
+| Interlock   | 3.0.0 |
+| Interlock NGINX proxy | 1.14.2 |
+| Golang | 1.13.8 |
 
 ## 3.1.12
 2019-11-14
@@ -963,6 +1013,30 @@ The following features are deprecated in UCP 3.1.
 | Interlock (NGINX)   | 1.13.12 |
 
 # Version 3.0
+
+## 3.0.17
+2020-03-10
+
+### Security
+* Upgraded Golang to 1.13.8.
+* Updated several Golang vendors to address security issues.
+
+### Platforms
+* Windows Server 1803 is EOL and is no longer supported by UCP, starting with this release.
+* IBM Z (s390x) is no longer supported, starting with this release.
+
+### Bug Fixes
+* Improved the speed to generate a Windows support dump. (FIELD-2304)
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.0.17 |
+| Kubernetes   | 1.11.2 |
+| Calico      | 3.2.3 |
+| Interlock (NGINX)   | 1.13.12 |
+| Golang   | 1.13.8 |
 
 ## 3.0.16
 2019-11-14
