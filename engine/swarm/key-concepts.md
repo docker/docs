@@ -39,8 +39,7 @@ started on any daemon. Docker daemons can participate in a swarm as managers,
 workers, or both.
 
 In the same way that you can use [Docker Compose](/compose/) to define and run
-containers, you can define and run swarm service
-[stacks](/get-started/part5.md).
+containers, you can define and run [Swarm service](/engine/swarm/services.md) stacks.
 
 Keep reading for details about concepts relating to Docker swarm services,
 including nodes, services, tasks, and load balancing.
@@ -107,5 +106,6 @@ distribute requests among services within the cluster based upon the DNS name of
 the service.
 
 ## What's next?
-* Read the [swarm mode overview](index.md).
-* Get started with the [swarm mode tutorial](swarm-tutorial/index.md).
+
+* Read the [Swarm mode overview](index.md).
+* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).

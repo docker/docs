@@ -293,7 +293,5 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-
-- Continue with the [User Guide](/get-started/index.md).
-
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
