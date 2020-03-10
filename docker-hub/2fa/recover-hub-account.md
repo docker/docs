@@ -9,6 +9,7 @@ Docker Hub account, you can gain access to your account using your two-factor
 authentication recovery code.
 
 ## Prerequisites
+
 Two-factor authentication is enabled on your Docker Hub account and you have
 your two-factor authentication recovery code.
 
@@ -19,7 +20,7 @@ your two-factor authentication recovery code.
 ## Recover your Docker Hub account with a recovery code
 
 Go through the login process on Docker Hub. When you're asked to enter your
-two-factor authentication code, click "I've lost my authentication device".
+two-factor authentication code, click **I've lost my authentication device**.
 
 ![Lost authentication device](../images/2fa-enter-2fa-code.png){:width="250px"}
 
@@ -37,6 +38,4 @@ authentication. See [Enabling two-factor authentication on Docker Hub](/docker-h
 ## Alternative recovery methods
 
 If you have lost access to both your two-factor authentication application and
-your recovery code, send an email to [support@docker.com](mailto:support@docker.com)
-from the primary email associated with your Docker Hub ID for recovery
-instructions.
+your recovery code, send an email to [Docker Hub Support](mailto:hub-support@docker.com) from the primary email associated with your Docker ID for recovery instructions.

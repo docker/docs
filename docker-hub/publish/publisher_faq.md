@@ -85,8 +85,7 @@ In the future, we may enable product listings published with the concept of vers
 
 ### How can I remove a published product?
 
-If you would like your submission removed, let us know by contacting us at
-publisher-support@docker.com.
+If you would like to remove your submission, contact us at [publisher-support@docker.com](mailto:publisher-support@docker.com).
 
 ### Can publishers publish multi-container apps?
 
