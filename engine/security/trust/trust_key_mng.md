@@ -72,8 +72,8 @@ Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 ## Lost keys
 
 If a publisher loses keys it means losing the ability to sign trusted content for
-your repositories.  If you lose a key, contact [Docker
-Support](https://support.docker.com) (support@docker.com) to reset the repository
+your repositories.  If you lose a key, send an email to [Docker Hub
+Support](mailto:hub-support@docker.com) to reset the repository
 state.
 
 This loss also requires **manual intervention** from every consumer that pulled
