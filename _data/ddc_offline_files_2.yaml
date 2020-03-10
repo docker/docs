@@ -6,6 +6,10 @@
 - product: "ucp"
   version: "3.2"
   tar-files:
+    - description: "3.2.6 Linux"
+      url: https://packages.docker.com/caas/ucp_images_3.2.6.tar.gz
+    - description: "3.2.6 Windows Server 2019 LTSC"
+      url: https://packages.docker.com/caas/ucp_images_win_2019_3.2.6.tar.gz 
     - description: "3.2.5 Linux"
       url: https://packages.docker.com/caas/ucp_images_3.2.5.tar.gz
     - description: "3.2.5 Windows Server 2016 LTSC"
@@ -428,6 +432,8 @@
 - product: "dtr"
   version: "2.7"
   tar-files:
+    - description: "DTR 2.7.6 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.7.6.tar.gz
     - description: "DTR 2.7.5 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.7.5.tar.gz
     - description: "DTR 2.7.4 Linux x86"

@@ -117,8 +117,8 @@ defaults:
       ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
-      ucp_version: "3.2.5"
-      dtr_version: "2.7.5"
+      ucp_version: "3.2.6"
+      dtr_version: "2.7.6"
       win_latest_build: "docker-19.03.5"
   # Previous DTR Releases
   - scope:
