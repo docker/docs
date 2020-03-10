@@ -24,6 +24,19 @@ to upgrade your installation to the latest release.
 
 # Version 2.7
 
+## 2.7.6
+(2020-03-10)
+
+### Bug Fixes
+* UX improvement with regard to replica removal. By default, DTR now checks whether the replica being moved actually exists (the `--force` argument can be used to skip the check). (docker/dhe-deploy #10886)
+* Fixed pagination issues encountered when non-admin users list the repositories in a namespace. (docker/dhe-deploy #10873)
+* Fixed UI for OpenStack Swift storage backend settings. (docker/dhe-deploy #10866)
+* Fixed issue that prevented non-admin users from being able to create promotion policies. (docker/dhe-deploy #10862)
+* Fixed discrepencies in promotion policy creation UX. (docker/dhe-deploy #10865)
+
+### Security
+* Update tooling to Golang 1.13.8. (docker/dhe-deploy #10901)
+
 ## 2.7.5
 (2020-01-28)
 
@@ -182,6 +195,19 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
   * The `--no-image-check` flag has been removed from the `upgrade` command as image check is no longer a part of the upgrade process.
 
 # Version 2.6
+
+## 2.6.13
+(2020-03-10)
+
+### Bug Fixes
+* UX improvement with regard to replica removal. By default, DTR now checks whether the replica being moved actually exists (the `--force` argument can be used to skip the check). (docker/dhe-deploy #10887)
+* Fixed pagination issues encountered when non-admin users list the repositories in a namespace. (docker/dhe-deploy #10875)
+* Fixed UI for OpenStack Swift storage backend settings. (docker/dhe-deploy #10867)
+* Fixed cause of "failed to migrate blob links: tagmigration has not completed"
+  error message (encountered when upgrading from DTR 2.6). (docker/dhe-deploy #10869)
+
+### Security
+* Update tooling to Golang 1.13.8. (docker/dhe-deploy #10902)
 
 ## 2.6.12
 (2020-01-28)
@@ -534,6 +560,15 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 > If you have manifest lists enabled on any of your repositories:
 >
 > Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.
+
+## 2.5.17
+(2020-03-10)
+
+### Bug Fixes
+* Fixed pagination issues encountered when non-admin users list the repositories in a namespace. (docker/dhe-deploy #10879)
+
+### Security
+* Update tooling to Golang 1.13.8. (docker/dhe-deploy #10907)
 
 ## 2.5.16
 (2020-01-28)
