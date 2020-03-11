@@ -162,8 +162,6 @@ version.
 
 ## Next steps
 
-- On Linux:
-    - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-    - Continue with the [User Guide](/engine/userguide/index.md).
-- On macOS:
-    - Continue with the [User Guide](/get-started/index.md).
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
