@@ -14,7 +14,13 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.4
-2020-03-
+2020-03-12
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+
+### Upgrades
+
+- [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
 
 ### Bug fixes and minor changes
 
@@ -24,7 +30,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ## Docker Desktop Community 2.2.0.3
 2020-02-11
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://download.docker.com/mac/stable/42716/Docker.dmg)
 
 ### Upgrades
 
