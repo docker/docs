@@ -39,7 +39,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ### Known issues
 
 - Some CLI commands fail if you are running Docker Desktop in the experimental Linux Containers on Windows (LCOW) mode. As alternatives, we recommend running either traditional Linux containers, or the experimental [WSL backend](wsl-tech-preview.md).
-- It is not possible to resize the disk image using the Docker Desktop **Settings** UI. If you would like to update the size of the disk image, run the following command in PowerShell:
+- It is not possible to resize the disk image using the Docker Desktop **Settings** UI. If you would like to update the size of the disk image (for example, to 128 GB), run the following command in PowerShell:
 
   ```powershell
   Resize-VHD -Path 'C:\ProgramData\DockerDesktop\vm-data\DockerDesktop.vhdx' -SizeBytes 128gb
