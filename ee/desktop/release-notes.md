@@ -15,6 +15,13 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.1.0.9
+2020-03-12
+
+### Bug fixes and minor changes
+
+Windows: Security fix - Diagnostics were collected with Administrator privileges, which led to a possible privilege escalation on systems where the Docker Desktop user was not an administrator.
+
 ## Version 2.1.0.8
 2019-11-14
 
