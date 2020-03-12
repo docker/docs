@@ -21,6 +21,13 @@ for Docker Engine - Community.
 
 # Version 19.03
 
+## 19.03.8
+2020-03-10
+
+### Runtime
+
+- Improve mitigation for [CVE-2019-14271](https://nvd.nist.gov/vuln/detail/CVE-2019-14271) for some nscd configuration.
+
 ## 19.03.7
 2020-03-03
 
