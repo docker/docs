@@ -16,13 +16,13 @@ if (current[0]) {
 }
 
 function navClicked(sourceLink) {
-    var classString = document.getElementById('#item' + sourceLink).className;
-    if (classString.indexOf(' in') > -1) {
+    var classString = document.getElementById("#item" + sourceLink).className;
+    if (classString.indexOf(" in") > -1) {
         //collapse
-        document.getElementById('#item' + sourceLink).className = classString.replace(' in', '');
+        document.getElementById("#item" + sourceLink).className = classString.replace(" in", "");
     } else {
         //expand
-        document.getElementById('#item' + sourceLink).className = classString.concat(' in');
+        document.getElementById("#item" + sourceLink).className = classString.concat(" in");
     }
 }
 
@@ -62,19 +62,19 @@ function walkTree(tree) {
             } else {
                 outputLetNav.push('class="collapsed" aria-expanded="false"')
             }
-            outputLetNav.push('>' + tree[j].sectiontitle + '<span class="caret arrow"></span></a>');
+            outputLetNav.push(">" + tree[j].sectiontitle + '<span class="caret arrow"></span></a>');
             outputLetNav.push('<ul class="nav collapse');
-            if (sectionHasPath) outputLetNav.push(' in');
+            if (sectionHasPath) outputLetNav.push(" in");
             outputLetNav.push('" id="#item' + totalTopics + '" aria-expanded="');
             if (sectionHasPath) {
-                outputLetNav.push('true');
+                outputLetNav.push("true");
             } else {
-                outputLetNav.push('false');
+                outputLetNav.push("false");
             }
             outputLetNav.push('">');
             var subTree = tree[j].section;
             walkTree(subTree);
-            outputLetNav.push('</ul></li>');
+            outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
             outputLetNav.push('<li><a href="' + tree[j].path + '"')
@@ -82,13 +82,13 @@ function walkTree(tree) {
                 sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
             }
-            outputLetNav.push('>' + tree[j].title + '</a></li>')
+            outputLetNav.push(">" + tree[j].title + "</a></li>")
         }
     }
 }
 
 function renderNav(docstoc) {
-    for (i = 0; i < docstoc.horizontalnav.length; i++) {
+    for (var i = 0; i < docstoc.horizontalnav.length; i++) {
         if (docstoc.horizontalnav[i].node !== "glossary") {
             currentSection = docstoc.horizontalnav[i].node;
             // build vertical nav
@@ -102,10 +102,10 @@ function renderNav(docstoc) {
         if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
             outputHorzTabs.push(' class="active"');
         }
-        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + '</a></li>\n');
+        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
     }
-    document.getElementById('jsTOCHorizontal').innerHTML = outputHorzTabs.join('');
-    document.getElementById('jsTOCLeftNav').innerHTML = outputLetNav.join('');
+    document.getElementById("jsTOCHorizontal").innerHTML = outputHorzTabs.join("");
+    document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
 }
 
 function highlightRightNav(heading) {
@@ -113,7 +113,7 @@ function highlightRightNav(heading) {
         $("#my_toc a.active").removeClass("active");
 
         if (heading !== "title") {
-            $("#my_toc a[href='#" + heading + "']").addClass('active');
+            $("#my_toc a[href='#" + heading + "']").addClass("active");
         }
     }
 }
@@ -158,24 +158,24 @@ function createCookie(name, value, days) {
 
 function readCookie(name) {
     var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
+    var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
 
-var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 var selectedNightTheme = readCookie("night");
 
 if (selectedNightTheme === "true" || (selectedNightTheme === null && prefersDark)) {
     applyNight();
-    $('#switch-style').prop('checked', true);
+    $("#switch-style").prop("checked", true);
 } else {
     applyDay();
-    $('#switch-style').prop('checked', false);
+    $("#switch-style").prop("checked", false);
 }
 
 
@@ -203,26 +203,22 @@ $(".navbar-toggle").click(function () {
     });
 });
 
-var navHeight = $('.navbar').outerHeight(true) + 80;
+var navHeight = $(".navbar").outerHeight(true) + 80;
 
 $(document.body).scrollspy({
-    target: '#leftCol',
+    target: "#leftCol",
     offset: navHeight
 });
 
 function loadHash(hashObj) {
     // Using jQuery's animate() method to add smooth page scroll
     // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-    $('html, body').animate({
-        scrollTop: $(hashObj).offset().top - 80
-    }, 800);
+    $("html, body").animate({scrollTop: $(hashObj).offset().top - 80}, 800);
 }
 
 $(document).ready(function () {
     // Add smooth scrolling to all links
-    // $( ".toc-nav a" ).addClass( "active" );
-    $(".toc-nav a").on('click', function (event) {
-        // $(this).addClass('active');
+    $(".toc-nav a").on("click", function (event) {
         // Make sure this.hash has a value before overriding default behavior
         if (this.hash !== "") {
             // Prevent default anchor click behavior
@@ -244,7 +240,7 @@ $(document).ready(function () {
     $(".sidebar").Stickyfill();
 
     // Add smooth scrolling to all links
-    $(".nav-sidebar ul li a").on('click', function (event) {
+    $(".nav-sidebar ul li a").on("click", function (event) {
 
         // Make sure this.hash has a value before overriding default behavior
         if (this.hash !== "") {
@@ -256,7 +252,7 @@ $(document).ready(function () {
 
             // Using jQuery's animate() method to add smooth page scroll
             // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-            $('html, body').animate({
+            $("html, body").animate({
                 scrollTop: $(hash).offset().top - 80
             }, 800, function () {
                 // Add hash (#) to URL when done scrolling (default click behavior)
@@ -273,10 +269,10 @@ $(document).ready(function () {
  *
  */
 
-$('ul.nav li.dropdown').hover(function () {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+$("ul.nav li.dropdown").hover(function () {
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeIn(500);
 }, function () {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeOut(500);
 });
 
 /*
@@ -293,9 +289,8 @@ function applyDay() {
     $("body").removeClass("night");
 }
 
-$('#switch-style').change(function () {
-
-    if ($(this).is(':checked')) {
+$("#switch-style").change(function () {
+    if ($(this).is(":checked")) {
         applyNight();
         createCookie("night", true, 999)
     } else {
@@ -311,13 +306,13 @@ $('#switch-style').change(function () {
  *
  */
 
-$('.nav-sidebar ul li a').click(function () {
-    $(this).addClass('collapse').siblings().toggleClass('in');
+$(".nav-sidebar ul li a").click(function () {
+    $(this).addClass("collapse").siblings().toggleClass("in");
 });
 
-if ($('.nav-sidebar ul a.active').length !== 0) {
-    $('.nav-sidebar ul').click(function () {
-        $(this).addClass('collapse in').siblings;
+if ($(".nav-sidebar ul a.active").length !== 0) {
+    $(".nav-sidebar ul").click(function () {
+        $(this).addClass("collapse in").siblings;
     });
 }
 
@@ -332,25 +327,25 @@ $(function () {
 });
 
 // Enable glossary link popovers
-$('.glossLink').popover();
+$(".glossLink").popover();
 
 // sync tabs with the same data-group
 window.onload = function () {
-    $('.nav-tabs > li > a').click(function (e) {
-        var group = $(this).attr('data-group');
-        $('.nav-tabs > li > a[data-group="' + group + '"]').tab('show');
+    $(".nav-tabs > li > a").click(function (e) {
+        var group = $(this).attr("data-group");
+        $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
     });
 
     // isArchive is set by logic in archive.js
     if (isArchive === false) {
         // Hide elements that are not appropriate for archives
         // PollDaddy
-        $('#ratings-div').css("visibility", "visible");
+        $("#ratings-div").css("visibility", "visible");
         // Archive drop-down
-        $('.ctrl-right .btn-group').css("visibility", "visible");
-        // Swarch
-        $('.search-form').css("visibility", "visible");
+        $(".ctrl-right .btn-group").css("visibility", "visible");
+        // Search
+        $(".search-form").css("visibility", "visible");
         // Page edit link
-        $('.feedback-links li').first().css("visibility", "visible");
+        $(".feedback-links li").first().css("visibility", "visible");
     }
 };
