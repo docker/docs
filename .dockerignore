@@ -2,7 +2,10 @@
 .git
 .gitignore
 tests
-Dockerfile
-docker-compose.yml
 _site
+CONTRIBUTING.md
+Dockerfile
+Dockerfile.archive
+docker-compose.yml
 Gemfile.lock
+Jenkinsfile
