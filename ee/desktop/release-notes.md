@@ -16,7 +16,7 @@ For information on system requirements, installation, and download, see:
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
 ## Version 2.1.0.9
-2020-03-12
+2020-03-13
 
 ### Bug fixes and minor changes
 
