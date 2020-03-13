@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-static-page:
+    name: build
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: '1'
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - name: print docker info
+        run: docker version && docker info
+      - uses: actions/checkout@v2
+      - name: build current docs
+        run: docker build --build-arg=ENABLE_ARCHIVES=true --target=deploy-source --output=./_site .
+      - name: upload files to S3 bucket
+        run: aws s3 sync --acl public-read _site s3://docs.docker.com-test-us-east-1/ --delete
+      - name: invalidate docs website cache
+        run: aws --region us-east-1 lambda invoke --function-name arn:aws:lambda:us-east-1:710015040892:function:docs-test-cache-invalidator response.json

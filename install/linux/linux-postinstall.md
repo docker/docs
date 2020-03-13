@@ -502,4 +502,5 @@ and a 10% overall performance degradation, even if Docker is not running.
 
 ## Next steps
 
-- Continue with the [User Guide](/get-started/index.md).
+- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.

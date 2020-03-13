@@ -30,7 +30,7 @@ so they can be run together in an isolated environment.
 
 A `docker-compose.yml` looks like this:
 
-    version: '3'
+    version: '2.0'
     services:
       web:
         build: .
