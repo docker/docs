@@ -109,7 +109,7 @@ Getting Started topic.
 
 #### Permissions errors on data directories for shared volumes
 
-Docker Desktop sets permissions on [shared volumes](index.md#shared-drives)
+Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
 to a default value of [0777](http://permissions-calculator.org/decode/0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
@@ -123,16 +123,16 @@ See also,
 [Can I change permissions on shared volumes for container-specific deployment requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
-#### Volume mounting requires shared drives for Linux containers
+#### Volume mounting requires shared folders for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
-you might need to enable [shared drives](index.md#shared-drives).
+you might need to enable [shared folders](index.md#file-sharing).
 
-Volume mounting requires shared drives for Linux containers (not for Windows
+Volume mounting requires shared folders for Linux containers (not for Windows
 containers). Click ![whale menu](images/whale-x.png){: .inline}
- and then **Settings** > **Shared Drives** and share the drive that contains the
+ and then **Settings** > **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 
 #### Support for symlinks

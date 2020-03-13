@@ -245,16 +245,22 @@ You can also move the disk image to a different location. If you attempt to move
 > The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
 > and Windows container mode all files are automatically shared by Windows.
 
-Use File sharing to allow local drives on Windows to be shared with Linux containers.
+Use File sharing to allow local directories on Windows to be shared with Linux containers.
 This is especially useful for
 editing source code in an IDE on the host while running and testing the code in a container.
- If a drive is not shared with a Linux container you may get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).
+Note that configuring file sharing is not necessary for Windows containers, only [Linux containers](#switch-between-windows-and-linux-containers).
+ If a directory is not shared with a Linux container you may get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared folders for Linux containers](troubleshoot.md#volume-mounting-requires-shared-folders-for-linux-containers).
 
-**Apply & Restart** makes the drives available to containers using Docker's bind mount (`-v`) feature.
+File share settings are:
 
-> Tips on shared drives, permissions, and volume mounts
+- **Add a Directory**: Click `+` and navigate to the directory you want to add.
+
+- **Apply & Restart** makes the directory available to containers using Docker's
+  bind mount (`-v`) feature.
+
+> Tips on shared folders, permissions, and volume mounts
 >
- * Shared drives are designed to allow application code to be edited on the host while being executed in containers. For non-code items
+ * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
  the Linux VM, using a [data volume](../storage/volumes.md)
  (named volume) or [data container](../storage/volumes.md).
@@ -264,18 +270,18 @@ editing source code in an IDE on the host while running and testing the code in 
 >
  * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 
-#### Shared drives on demand
+#### Shared folders on demand
 
-You can share a drive "on demand" the first time a particular mount is requested.
+You can share a folder "on demand" the first time a particular folder is used by a container.
 
 If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
-popup asking if you want to share the specified drive.
+popup asking if you want to share the specified folder.
 
-You can select to **Share it**, in which case it is added your Docker Desktop [Shared Drives list](index.md#shared-drives) and available to
+You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
-![Shared drive on demand](images/shared-drive-on-demand.png){:width="600px"}
+![Shared folder on demand](images/shared-folder-on-demand.png){:width="600px"}
 
 #### Proxies
 
