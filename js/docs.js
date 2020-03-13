@@ -1,5 +1,5 @@
 // Right nav highlighting
-var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0]
+var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
 var sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
 var footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
 var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
@@ -28,17 +28,15 @@ function navClicked(sourceLink) {
     var classString = document.getElementById('#item' + sourceLink).className;
     if (classString.indexOf(' in') > -1) {
         //collapse
-        var newClass = classString.replace(' in', '');
-        document.getElementById('#item' + sourceLink).className = newClass;
+        document.getElementById('#item' + sourceLink).className = classString.replace(' in', '');
     } else {
         //expand
-        var newClass = classString.concat(' in');
-        document.getElementById('#item' + sourceLink).className = newClass;
+        document.getElementById('#item' + sourceLink).className = classString.concat(' in');
     }
 }
 
-var outputHorzTabs = new Array();
-var outputLetNav = new Array();
+var outputHorzTabs = [];
+var outputLetNav = [];
 var totalTopics = 0;
 var currentSection;
 var sectionToHighlight;
@@ -49,7 +47,7 @@ function findMyTopic(tree) {
             if (branch[k].section) {
                 processBranch(branch[k].section);
             } else {
-                if (branch[k].path == pageURL && !branch[k].nosync) {
+                if (branch[k].path === pageURL && !branch[k].nosync) {
                     // console.log(branch[k].path + ' was == ' + pageURL)
                     thisIsIt = true;
                     break;
@@ -61,7 +59,7 @@ function findMyTopic(tree) {
     }
 
     var thisIsIt = false;
-    processBranch(tree)
+    processBranch(tree);
     return thisIsIt;
 }
 
@@ -92,7 +90,7 @@ function walkTree(tree) {
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
             outputLetNav.push('<li><a href="' + tree[j].path + '"')
-            if (tree[j].path == pageURL && !tree[j].nosync) {
+            if (tree[j].path === pageURL && !tree[j].nosync) {
                 sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
             }
@@ -103,17 +101,17 @@ function walkTree(tree) {
 
 function renderNav(docstoc) {
     for (i = 0; i < docstoc.horizontalnav.length; i++) {
-        if (docstoc.horizontalnav[i].node != "glossary") {
+        if (docstoc.horizontalnav[i].node !== "glossary") {
             currentSection = docstoc.horizontalnav[i].node;
             // build vertical nav
             var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
-            if (itsHere || docstoc.horizontalnav[i].path == pageURL) {
+            if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
                 walkTree(docstoc[docstoc.horizontalnav[i].node]);
             }
         }
         // build horizontal nav
         outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
-        if (docstoc.horizontalnav[i].path == pageURL || docstoc.horizontalnav[i].node == sectionToHighlight) {
+        if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
             outputHorzTabs.push(' class="active"');
         }
         outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + '</a></li>\n');
@@ -146,17 +144,20 @@ function highlightRightNav(heading) {
 
 var currentHeading = "";
 $(window).scroll(function () {
-    var headingPositions = new Array();
+    var headingPositions = [];
     $("h1, h2, h3, h4, h5, h6").each(function () {
-        if (this.id == "") this.id = "title";
+        if (this.id === "") this.id = "title";
         headingPositions[this.id] = this.getBoundingClientRect().top;
     });
     headingPositions.sort();
     // the headings have all been grabbed and sorted in order of their scroll
     // position (from the top of the page). First one is toppermost.
     for (var key in headingPositions) {
+        if (!headingPositions.hasOwnProperty(key)) {
+            continue;
+        }
         if (headingPositions[key] > 0 && headingPositions[key] < 200) {
-            if (currentHeading != key) {
+            if (currentHeading !== key) {
                 // a new heading has scrolled to within 200px of the top of the page.
                 // highlight the right-nav entry and de-highlight the others.
                 highlightRightNav(key);
@@ -184,8 +185,8 @@ function readCookie(name) {
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
@@ -197,7 +198,7 @@ function eraseCookie(name) {
 var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 var selectedNightTheme = readCookie("night");
 
-if (selectedNightTheme == "true" || (selectedNightTheme === null && prefersDark)) {
+if (selectedNightTheme === "true" || (selectedNightTheme === null && prefersDark)) {
     applyNight();
     $('#switch-style').prop('checked', true);
 } else {
@@ -346,7 +347,7 @@ $('.nav-sidebar ul li a').click(function () {
     $(this).addClass('collapse').siblings().toggleClass('in');
 });
 
-if ($('.nav-sidebar ul a.active').length != 0) {
+if ($('.nav-sidebar ul a.active').length !== 0) {
     $('.nav-sidebar ul').click(function () {
         $(this).addClass('collapse in').siblings;
     });
@@ -361,7 +362,7 @@ if ($('.nav-sidebar ul a.active').length != 0) {
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-})
+});
 
 // Enable glossary link popovers
 $('.glossLink').popover();
@@ -371,10 +372,10 @@ window.onload = function () {
     $('.nav-tabs > li > a').click(function (e) {
         var group = $(this).attr('data-group');
         $('.nav-tabs > li > a[data-group="' + group + '"]').tab('show');
-    })
+    });
 
     // isArchive is set by logic in archive.js
-    if (isArchive == false) {
+    if (isArchive === false) {
         //console.log("Showing content that should only be in the current version.");
         // Hide elements that are not appropriate for archives
         // PollDaddy
