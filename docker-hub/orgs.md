@@ -24,9 +24,7 @@ Docker Hub.
 
 2. Click on **Create Organization**.
 
-3. Provide information about your organization:
-
-      ![Create organization](images/orgs-create2019.png)
+3. Provide information about your organization.
 
 You've created an organization. You'll see you have a team, the **owners** team
 with a single member (you!).
