@@ -324,22 +324,6 @@ guides:
     title: View the docs archives
 
 reference:
-- sectiontitle: File formats
-  section:
-  - title: Dockerfile reference
-    path: /engine/reference/builder/
-  - sectiontitle: Compose file reference
-    section:
-    - path: /compose/compose-file/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
 - sectiontitle: Command-line reference
   section:
   - sectiontitle: Docker CLI (docker)
@@ -1014,6 +998,22 @@ reference:
     path: /registry/spec/api/
   - title: Template API
     path: /app-template/api-reference/
+- sectiontitle: File formats
+  section:
+    - title: Dockerfile reference
+      path: /engine/reference/builder/
+    - sectiontitle: Compose file reference
+      section:
+        - path: /compose/compose-file/
+          title: Version 3
+        - path: /compose/compose-file/compose-file-v2/
+          title: Version 2
+        - path: /compose/compose-file/compose-file-v1/
+          title: Version 1
+        - path: /compose/compose-file/compose-versioning/
+          title: About versions and upgrading
+        - path: /compose/faq/
+          title: Frequently asked questions
 - sectiontitle: Drivers and specifications
   section:
   - sectiontitle: Registry image manifests
