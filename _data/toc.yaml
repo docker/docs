@@ -340,7 +340,7 @@ reference:
       title: About versions and upgrading
     - path: /compose/faq/
       title: Frequently asked questions
-- sectiontitle: Command-Line Interfaces (CLIs)
+- sectiontitle: Command-line reference
   section:
   - sectiontitle: Docker CLI (docker)
     section:
@@ -948,7 +948,7 @@ reference:
       title: up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
-- sectiontitle: Application Programming Interfaces (APIs)
+- sectiontitle: API reference
   section:
   - sectiontitle: Docker Engine API
     section:
