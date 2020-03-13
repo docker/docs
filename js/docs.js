@@ -1,8 +1,5 @@
 // Right nav highlighting
 var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
-var sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
-var footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
-var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
 
 // ensure that the left nav visibly displays the current topic
 var current = document.getElementsByClassName("active currentPage");
@@ -16,12 +13,6 @@ if (current[0]) {
     if (document.location.pathname.indexOf("/samples/") > -1) {
         $(".currentPage").closest("ul").addClass("in");
     }
-}
-
-function addMyClass(classToAdd) {
-    var classString = this.className; // returns the string of all the classes for myDiv
-    // Adds the class "main__section" to the string (notice the leading space)
-    this.className = newClass; // sets className to the new string
 }
 
 function navClicked(sourceLink) {
@@ -48,11 +39,8 @@ function findMyTopic(tree) {
                 processBranch(branch[k].section);
             } else {
                 if (branch[k].path === pageURL && !branch[k].nosync) {
-                    // console.log(branch[k].path + ' was == ' + pageURL)
                     thisIsIt = true;
                     break;
-                } else {
-                    // console.log(branch[k].path + ' was != ' + pageURL)
                 }
             }
         }
@@ -116,18 +104,6 @@ function renderNav(docstoc) {
         }
         outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + '</a></li>\n');
     }
-//  if (outputLetNav.length==0)
-//  {
-//     either glossary was true or no left nav has been built; default to glossary
-//     show pages tagged with term and highlight term in left nav if applicable
-//    renderTagsPage()
-//    for (var i=0;i<glossary.length;i++)
-//    {
-//      var highlightGloss = '';
-//      if (tagToLookup) highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
-//      outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
-//    }
-//  }
     document.getElementById('jsTOCHorizontal').innerHTML = outputHorzTabs.join('');
     document.getElementById('jsTOCLeftNav').innerHTML = outputLetNav.join('');
 }
@@ -191,10 +167,6 @@ function readCookie(name) {
     return null;
 }
 
-function eraseCookie(name) {
-    createCookie(name, "", -1);
-}
-
 var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 var selectedNightTheme = readCookie("night");
 
@@ -218,10 +190,12 @@ $("#menu-toggle").click(function (e) {
     $(".wrapper").toggleClass("right-open");
     $(".col-toc").toggleClass("col-toc-hidden");
 });
+
 $("#menu-toggle-left").click(function (e) {
     e.preventDefault();
     $(".col-nav").toggleClass("col-toc-hidden");
 });
+
 $(".navbar-toggle").click(function () {
     $("#sidebar-nav").each(function () {
         $(this).toggleClass("hidden-sm");
@@ -260,8 +234,7 @@ $(document).ready(function () {
 
             // Add hash (#) to URL when done scrolling (default click behavior)
             window.location.hash = hash;
-
-        } // End if
+        }
     });
     if (window.location.hash) loadHash(window.location.hash);
 });
@@ -286,11 +259,10 @@ $(document).ready(function () {
             $('html, body').animate({
                 scrollTop: $(hash).offset().top - 80
             }, 800, function () {
-
                 // Add hash (#) to URL when done scrolling (default click behavior)
                 window.location.hash = hash;
             });
-        } // End if
+        }
     });
 });
 
@@ -312,10 +284,6 @@ $('ul.nav li.dropdown').hover(function () {
  * swapStyleSheet*********************************************************************
  *
  */
-
-// function swapStyleSheet(sheet) {
-//     document.getElementById('pagestyle').setAttribute('href', sheet);
-// }
 
 function applyNight() {
     $("body").addClass("night");
@@ -353,7 +321,6 @@ if ($('.nav-sidebar ul a.active').length !== 0) {
     });
 }
 
-
 /*
  *
  * Components *********************************************************************
@@ -376,21 +343,14 @@ window.onload = function () {
 
     // isArchive is set by logic in archive.js
     if (isArchive === false) {
-        //console.log("Showing content that should only be in the current version.");
         // Hide elements that are not appropriate for archives
         // PollDaddy
         $('#ratings-div').css("visibility", "visible");
-        //console.log("Ratings widget shown.");
         // Archive drop-down
         $('.ctrl-right .btn-group').css("visibility", "visible");
-        //console.log("Archive widget shown.");
         // Swarch
         $('.search-form').css("visibility", "visible");
-        //console.log("Search widget shown.");
         // Page edit link
         $('.feedback-links li').first().css("visibility", "visible");
-        //console.log("Page edit link shown.");
-    } else {
-        //console.log("Keeping non-applicable elements hidden.");
     }
 };
