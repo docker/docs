@@ -30,7 +30,7 @@ The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
-A [container](/../../glossary.md#container) definition contains configuration which are applied to each
+A [container](/glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.

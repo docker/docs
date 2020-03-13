@@ -6,9 +6,6 @@ horizontalnav:
 - title: Product manuals
   path: /install/
   node: manuals
-- title: Glossary
-  path: /glossary/
-  node: glossary
 - title: Reference
   path: /reference/
   node: reference
@@ -1057,6 +1054,8 @@ reference:
       title: S3 storage driver
     - path: /registry/storage-drivers/swift/
       title: Swift storage driver
+- path: /glossary/
+  title: Glossary
 
 
 

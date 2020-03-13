@@ -1,4 +1,4 @@
-[SSH](/../../../glossary.md#SSH) is a secure protocol for accessing remote machines and applications. It
+[SSH](/glossary.md#SSH) is a secure protocol for accessing remote machines and applications. It
 provides authentication and encrypts data communication over insecure networks.
 
 These topics describe how to find existing SSH keys or generate new ones, and
