@@ -64,7 +64,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 9.  Add the following configuration to the file.
 
     ```none
-    version: '3'
+    version: '2.0'
 
     services:
       db:
