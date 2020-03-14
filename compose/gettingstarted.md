@@ -112,7 +112,7 @@ and the [Dockerfile reference](/engine/reference/builder.md).
 Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 
-    version: '3'
+    version: '2.0'
     services:
       web:
         build: .
@@ -216,7 +216,7 @@ hitting CTRL+C in the original terminal where you started the app.
 
 Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
 
-    version: '3'
+    version: '2.0'
     services:
       web:
         build: .
