@@ -165,7 +165,7 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
 3.  Cgroups Exception
-    For Fedora 31, you'll have to enable the [backwards compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
+    For Fedora 31, you'll have to enable the [backwards compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues). (You'll also have to reboot to run hello world. Maybe you can just log out, someone will need to test)
 
     ```bash
     $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
