@@ -47,7 +47,7 @@ software. To find out what version of the OS you have:
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have macOS 10.12.0 Sierra or newer, consider using [Docker Desktop for
+    If you have macOS 10.13.0 High Sierra or newer, consider using [Docker Desktop for
     Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no
     need for a pre-configured Docker QuickStart shell. It uses the native macOS
     Hypervisor framework for virtualization, instead of Oracle VirutalBox. Full
