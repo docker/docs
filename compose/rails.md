@@ -69,7 +69,7 @@ one's Docker image (the database just runs on a pre-made PostgreSQL image, and
 the web app is built from the current directory), and the configuration needed
 to link them together and expose the web app's port.
 
-    version: '3'
+    version: '2.0'
     services:
       db:
         image: postgres
