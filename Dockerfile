@@ -24,9 +24,7 @@ ARG ENABLE_ARCHIVES=true
 ###
 # Set up base stages for building and deploying
 ###
-
-# Get basic configs and Jekyll env
-FROM docs/docker.github.io:docs-builder AS builderbase
+FROM starefossen/github-pages:198 AS builderbase
 ENV TARGET=/usr/share/nginx/html
 WORKDIR /usr/src/app/md_source/
 
