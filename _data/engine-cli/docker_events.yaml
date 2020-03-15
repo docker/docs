@@ -1,58 +1,184 @@
 command: docker events
 short: Get real time events from the server
-long: "Use `docker events` to get real-time events from the server. These events differ\nper
-  Docker object type. Different event types have different scopes. Local \nscoped
-  events are only seen on the node they take place on, and swarm scoped \nevents are
-  seen on all managers.\n\nOnly the last 1000 log events are returned. You can use
-  filters to further limit \nthe number of events returned.\n\n### Object types\n\n####
-  Containers\n\nDocker containers report the following events:\n\n- `attach`\n- `commit`\n-
-  `copy`\n- `create`\n- `destroy`\n- `detach`\n- `die`\n- `exec_create`\n- `exec_detach`\n-
-  `exec_die`\n- `exec_start`\n- `export`\n- `health_status`\n- `kill`\n- `oom`\n-
-  `pause`\n- `rename`\n- `resize`\n- `restart`\n- `start`\n- `stop`\n- `top`\n- `unpause`\n-
-  `update`\n\n#### Images\n\nDocker images report the following events:\n\n- `delete`\n-
-  `import`\n- `load`\n- `pull`\n- `push`\n- `save`\n- `tag`\n- `untag`\n\n#### Plugins\n\nDocker
-  plugins report the following events:\n\n- `enable`\n- `disable`\n- `install`\n-
-  `remove`\n\n#### Volumes\n\nDocker volumes report the following events:\n\n- `create`\n-
-  `destroy`\n- `mount`\n- `unmount`\n\n#### Networks\n\nDocker networks report the
-  following events:\n\n- `create`\n- `connect`\n- `destroy`\n- `disconnect`\n- `remove`\n\n####
-  Daemons\n\nDocker daemons report the following events:\n\n- `reload`\n\n#### Services\n\nDocker
-  services report the following events:\n\n- `create`\n- `remove`\n- `update`\n\n####
-  Nodes\n\nDocker nodes report the following events:\n\n- `create`\n- `remove`\n-
-  `update`\n\n#### Secrets\n\nDocker secrets report the following events:\n\n- `create`\n-
-  `remove`\n- `update`\n\n#### Configs\n\nDocker configs report the following events:\n\n-
-  `create`\n- `remove`\n- `update`\n\n### Limiting, filtering, and formatting the
-  output\n\n#### Limit events by time\n\nThe `--since` and `--until` parameters can
-  be Unix timestamps, date formatted\ntimestamps, or Go duration strings (e.g. `10m`,
-  `1h30m`) computed\nrelative to the client machine’s time. If you do not provide
-  the `--since` option,\nthe command returns only new and/or live events.  Supported
-  formats for date\nformatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,\n`2006-01-02T15:04:05.999999999`,
-  `2006-01-02Z07:00`, and `2006-01-02`. The local\ntimezone on the client will be
-  used if you do not provide either a `Z` or a\n`+-00:00` timezone offset at the end
-  of the timestamp.  When providing Unix\ntimestamps enter seconds[.nanoseconds],
-  where seconds is the number of seconds\nthat have elapsed since January 1, 1970
-  (midnight UTC/GMT), not counting leap\nseconds (aka Unix epoch or Unix time), and
-  the optional .nanoseconds field is a\nfraction of a second no more than nine digits
-  long.\n\nOnly the last 1000 log events are returned. You can use filters to further
-  limit \nthe number of events returned.\n\n#### Filtering\n\nThe filtering flag (`-f`
-  or `--filter`) format is of \"key=value\". If you would\nlike to use multiple filters,
-  pass multiple flags (e.g.,\n`--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nUsing
-  the same filter multiple times will be handled as a *OR*; for example\n`--filter
-  container=588a23dac085 --filter container=a8f7720b8c22` will display\nevents for
-  container 588a23dac085 *OR* container a8f7720b8c22\n\nUsing multiple filters will
-  be handled as a *AND*; for example\n`--filter container=588a23dac085 --filter event=start`
-  will display events for\ncontainer container 588a23dac085 *AND* the event type is
-  *start*\n\nThe currently supported filters are:\n\n* config (`config=<name or id>`)\n*
-  container (`container=<name or id>`)\n* daemon (`daemon=<name or id>`)\n* event
-  (`event=<event action>`)\n* image (`image=<repository or tag>`)\n* label (`label=<key>`
-  or `label=<key>=<value>`)\n* network (`network=<name or id>`)\n* node (`node=<id>`)\n*
-  plugin (`plugin=<name or id>`)\n* scope (`scope=<local or swarm>`)\n* secret (`secret=<name
-  or id>`)\n* service (`service=<name or id>`)\n* type (`type=<container or image
-  or volume or network or daemon or plugin or service or node or secret or config>`)\n*
-  volume (`volume=<name>`)\n\n#### Format\n\nIf a format (`--format`) is specified,
-  the given template will be executed\ninstead of the default\nformat. Go's [text/template](http://golang.org/pkg/text/template/)
-  package\ndescribes all the details of the format.\n\nIf a format is set to `{{json
-  .}}`, the events are streamed as valid JSON\nLines. For information about JSON Lines,
-  please refer to http://jsonlines.org/ ."
+long: |-
+  Use `docker events` to get real-time events from the server. These events differ
+  per Docker object type. Different event types have different scopes. Local
+  scoped events are only seen on the node they take place on, and swarm scoped
+  events are seen on all managers.
+
+  Only the last 1000 log events are returned. You can use filters to further limit
+  the number of events returned.
+
+  ### Object types
+
+  #### Containers
+
+  Docker containers report the following events:
+
+  - `attach`
+  - `commit`
+  - `copy`
+  - `create`
+  - `destroy`
+  - `detach`
+  - `die`
+  - `exec_create`
+  - `exec_detach`
+  - `exec_die`
+  - `exec_start`
+  - `export`
+  - `health_status`
+  - `kill`
+  - `oom`
+  - `pause`
+  - `rename`
+  - `resize`
+  - `restart`
+  - `start`
+  - `stop`
+  - `top`
+  - `unpause`
+  - `update`
+
+  #### Images
+
+  Docker images report the following events:
+
+  - `delete`
+  - `import`
+  - `load`
+  - `pull`
+  - `push`
+  - `save`
+  - `tag`
+  - `untag`
+
+  #### Plugins
+
+  Docker plugins report the following events:
+
+  - `enable`
+  - `disable`
+  - `install`
+  - `remove`
+
+  #### Volumes
+
+  Docker volumes report the following events:
+
+  - `create`
+  - `destroy`
+  - `mount`
+  - `unmount`
+
+  #### Networks
+
+  Docker networks report the following events:
+
+  - `create`
+  - `connect`
+  - `destroy`
+  - `disconnect`
+  - `remove`
+
+  #### Daemons
+
+  Docker daemons report the following events:
+
+  - `reload`
+
+  #### Services
+
+  Docker services report the following events:
+
+  - `create`
+  - `remove`
+  - `update`
+
+  #### Nodes
+
+  Docker nodes report the following events:
+
+  - `create`
+  - `remove`
+  - `update`
+
+  #### Secrets
+
+  Docker secrets report the following events:
+
+  - `create`
+  - `remove`
+  - `update`
+
+  #### Configs
+
+  Docker configs report the following events:
+
+  - `create`
+  - `remove`
+  - `update`
+
+  ### Limiting, filtering, and formatting the output
+
+  #### Limit events by time
+
+  The `--since` and `--until` parameters can be Unix timestamps, date formatted
+  timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed
+  relative to the client machine’s time. If you do not provide the `--since` option,
+  the command returns only new and/or live events.  Supported formats for date
+  formatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,
+  `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
+  timezone on the client will be used if you do not provide either a `Z` or a
+  `+-00:00` timezone offset at the end of the timestamp.  When providing Unix
+  timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+  that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+  seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+  fraction of a second no more than nine digits long.
+
+  Only the last 1000 log events are returned. You can use filters to further limit
+  the number of events returned.
+
+  #### Filtering
+
+  The filtering flag (`-f` or `--filter`) format is of "key=value". If you would
+  like to use multiple filters, pass multiple flags (e.g.,
+  `--filter "foo=bar" --filter "bif=baz"`)
+
+  Using the same filter multiple times will be handled as a *OR*; for example
+  `--filter container=588a23dac085 --filter container=a8f7720b8c22` will display
+  events for container 588a23dac085 *OR* container a8f7720b8c22
+
+  Using multiple filters will be handled as a *AND*; for example
+  `--filter container=588a23dac085 --filter event=start` will display events for
+  container container 588a23dac085 *AND* the event type is *start*
+
+  The currently supported filters are:
+
+  * config (`config=<name or id>`)
+  * container (`container=<name or id>`)
+  * daemon (`daemon=<name or id>`)
+  * event (`event=<event action>`)
+  * image (`image=<repository or tag>`)
+  * label (`label=<key>` or `label=<key>=<value>`)
+  * network (`network=<name or id>`)
+  * node (`node=<id>`)
+  * plugin (`plugin=<name or id>`)
+  * scope (`scope=<local or swarm>`)
+  * secret (`secret=<name or id>`)
+  * service (`service=<name or id>`)
+  * type (`type=<container or image or volume or network or daemon or plugin or service or node or secret or config>`)
+  * volume (`volume=<name>`)
+
+  #### Format
+
+  If a format (`--format`) is specified, the given template will be executed
+  instead of the default
+  format. Go's [text/template](http://golang.org/pkg/text/template/) package
+  describes all the details of the format.
+
+  If a format is set to `{{json .}}`, the events are streamed as valid JSON
+  Lines. For information about JSON Lines, please refer to http://jsonlines.org/.
 usage: docker events [OPTIONS]
 pname: docker
 plink: docker.yaml
@@ -290,14 +416,14 @@ examples: |-
 
   #### Format as JSON
 
-  ```none
-      $ docker events --format '{{json .}}'
+  ```bash
+  $ docker events --format '{{json .}}'
 
-      {"status":"create","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
-      {"status":"attach","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
-      {"Type":"network","Action":"connect","Actor":{"ID":"1b50a5bf755f6021dfa78e..
-      {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
-      {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"status":"create","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"status":"attach","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"Type":"network","Action":"connect","Actor":{"ID":"1b50a5bf755f6021dfa78e..
+  {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
+  {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
   ```
 deprecated: false
 experimental: false
