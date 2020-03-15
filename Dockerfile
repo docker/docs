@@ -71,8 +71,8 @@ COPY --from=upstream-resources /usr/src/app/md_source/. ./
 # substitute the "{site.latest_engine_api_version}" in the title for the latest
 # API docs, based on the latest_engine_api_version parameter in _config.yml
 RUN ./_scripts/update-api-toc.sh
-RUN jekyll build -d ${TARGET}
-RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
+RUN jekyll build -d ${TARGET} \
+ && find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
 
 # This stage only contains the generated files. It can be used to host the
