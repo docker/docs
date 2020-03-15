@@ -58,8 +58,12 @@ FROM archives-${ENABLE_ARCHIVES} AS archives
 # Only add the files that are needed to build these reference docs, so that these
 # docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
 # Disable caching (docker build --no-cache) to force updating these docs.
-FROM builderbase AS upstream-resources
+FROM alpine AS upstream-resources
+RUN apk add --no-cache subversion wget
+WORKDIR /usr/src/app/md_source/
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
+ARG ENGINE_BRANCH
+ARG DISTRIBUTION_BRANCH
 RUN ./_scripts/fetch-upstream-resources.sh .
 
 
