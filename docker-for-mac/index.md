@@ -147,7 +147,11 @@ You can also move the disk image to a different location. If you attempt to move
 
 #### File sharing
 
-Choose the local directories you'd like to share with your containers. File sharing is required for volume mounting if the project lives outside of the `/Users` directory. In that case, share the drive where the Dockerfile and volume are located. Otherwise, you get `file not found` or `cannot start service` errors at runtime`.
+Use File sharing to allow local directories on the Mac to be shared with Linux containers.
+This is especially useful for
+editing source code in an IDE on the host while running and testing the code in a container.
+By default the `/Users`, `/Volume`, `/private`, `/tmp` and `/var/folders` directory are shared. If your project is outside this directory then it must be added
+to the list. Otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
 
 File share settings are:
 
