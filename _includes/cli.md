@@ -96,6 +96,11 @@ your client and daemon API versions.
 {{ site.data[include.datafolder][include.datafile].long }}
 
 {% endunless %}
+
+{% if site.data[include.datafolder][include.datafile].examples %}
+For example uses of this command, refer to the [examples section](#examples) below.
+{% endif %}
+
 {% if site.data[include.datafolder][include.datafile].options %}
   {% if site.data[include.datafolder][include.datafile].inherited_options %}
     {% assign alloptions = site.data[include.datafolder][include.datafile].options | concat:site.data[include.datafolder][include.datafile].inherited_options %}
