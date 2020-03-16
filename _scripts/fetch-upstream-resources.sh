@@ -24,7 +24,7 @@ svn co "https://github.com/docker/distribution/${distribution_svn_branch}/docs/s
 svn co "https://github.com/mirantis/compliance/trunk/docs/compliance"                ./compliance    || (echo "Failed docker/compliance download" && exit 1)
 
 # Cleanup svn directories
-find . -name .svn -exec rm -rf '{}' \;
+find . -name ".svn" -print0 | xargs -0 /bin/rm -rf
 
 # Get the Engine APIs that are in Swagger
 # Add a new engine/api/<version>.md file to add a new API version page.

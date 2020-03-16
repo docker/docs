@@ -24,9 +24,7 @@ ARG ENABLE_ARCHIVES=true
 ###
 # Set up base stages for building and deploying
 ###
-
-# Get basic configs and Jekyll env
-FROM docs/docker.github.io:docs-builder AS builderbase
+FROM starefossen/github-pages:198 AS builderbase
 ENV TARGET=/usr/share/nginx/html
 WORKDIR /usr/src/app/md_source/
 
@@ -58,8 +56,12 @@ FROM archives-${ENABLE_ARCHIVES} AS archives
 # Only add the files that are needed to build these reference docs, so that these
 # docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
 # Disable caching (docker build --no-cache) to force updating these docs.
-FROM builderbase AS upstream-resources
+FROM alpine AS upstream-resources
+RUN apk add --no-cache subversion wget
+WORKDIR /usr/src/app/md_source/
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
+ARG ENGINE_BRANCH
+ARG DISTRIBUTION_BRANCH
 RUN ./_scripts/fetch-upstream-resources.sh .
 
 
@@ -71,8 +73,8 @@ COPY --from=upstream-resources /usr/src/app/md_source/. ./
 # substitute the "{site.latest_engine_api_version}" in the title for the latest
 # API docs, based on the latest_engine_api_version parameter in _config.yml
 RUN ./_scripts/update-api-toc.sh
-RUN jekyll build -d ${TARGET}
-RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
+RUN jekyll build -d ${TARGET} \
+ && find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
 
 # This stage only contains the generated files. It can be used to host the
