@@ -89,6 +89,13 @@ your client and daemon API versions.
 ```
 
 {% endif %}
+{% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
+
+## Extended description
+
+{{ site.data[include.datafolder][include.datafile].long }}
+
+{% endunless %}
 {% if site.data[include.datafolder][include.datafile].options %}
   {% if site.data[include.datafolder][include.datafile].inherited_options %}
     {% assign alloptions = site.data[include.datafolder][include.datafile].options | concat:site.data[include.datafolder][include.datafile].inherited_options %}
@@ -129,14 +136,6 @@ your client and daemon API versions.
 </table>
 
 {% endif %} <!-- end if options -->
-
-{% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
-
-## Extended description
-
-{{ site.data[include.datafolder][include.datafile].long }}
-
-{% endunless %}
 
 {% if site.data[include.datafolder][include.datafile].examples %}
 
