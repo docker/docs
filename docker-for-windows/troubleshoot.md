@@ -122,20 +122,6 @@ deployment
 requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
-#### inotify on shared drives does not work
-
-Currently, `inotify` does not work on Docker Desktop. This becomes evident,
-for example, when an application needs to read/write to a container across a
-mounted drive. Instead of relying on filesystem inotify, we recommend using
-polling features for your framework or programming language.
-
-* **Workaround for nodemon and Node.js** - If you are using
-  [nodemon](https://github.com/remy/nodemon) with `Node.js`, try the fallback
-  polling mode described here: [nodemon isn't restarting node
-  applications](https://github.com/remy/nodemon#application-isnt-restarting).
-
-* **Docker Desktop for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
-
 #### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
@@ -423,14 +409,6 @@ the prefix from the **Settings** menu. See the [Network](index.md#network) topic
 under [Settings](index.md#docker-settings).
 
 ## Workarounds
-
-### `inotify` currently does not work on Docker Desktop
-
-If you are using `Node.js` with `nodemon`, a temporary workaround is to try the
-fallback polling mode described here: [nodemon isn't restarting node
-applications](https://github.com/remy/nodemon#application-isnt-restarting). See
-also this issue on GitHub [Inotify on shared drives does not
-work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
 
 ### Reboot
 
