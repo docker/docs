@@ -11,7 +11,6 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-url: https://docs.docker.com
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
 keep_files: ["v17.06", "v18.03", "v18.09"]
 exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
