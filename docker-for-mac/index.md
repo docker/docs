@@ -162,7 +162,6 @@ File share settings are:
 
   There are some limitations on the directories that can be shared:
 
-  - It is not possible to share a directory that is a subdirectory of an already shared directory.
   - The directory must not exist inside of Docker.
 
 For more information, see:
