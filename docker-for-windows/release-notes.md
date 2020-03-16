@@ -30,7 +30,6 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 - Attempts to create files in a shared volume with an identical filename but a different case (uppercase/lowercase) on Windows filesystem will now fail with the error `EEXIST`. Fixes [docker/for-win#5894](https://github.com/docker/for-win/issues/5894).
 - Fixed cache invalidation and event injection in shared volumes with host paths longer than 260 characters.
 - Docker Desktop now allows users to rename open files in shared volumes. Fixes [docker/for-win#5565](https://github.com/docker/for-win/issues/5565).
-- Fixed an issue where containers did not synchronize time with the host when the host machine wakes up from the sleep mode. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
 - Fixed an issue which caused Docker Desktop Dashboard to attempt connecting to all exposed ports inside a container. Fixes [docker/for-win#5903](https://github.com/docker/for-win/issues/5903).
 - Kubernetes: Persistent volumes created by claims are now stored in the virtual machine. Fixes [docker/for-win#5665](https://github.com/docker/for-win/issues/5665).
 - Fixed an issue which caused Docker Desktop to hang when users tried to reset to factory defaults.
