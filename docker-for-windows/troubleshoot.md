@@ -148,10 +148,9 @@ containers). Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
 
-#### Understand symlinks limitations
+#### Support for symlinks
 
-Symlinks work within and across containers. However, symlinks created outside of
-containers (for example, on the host) do not work. To learn more, see [Are
+Symlinks work within and across containers. To learn more, see [Are
 symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
