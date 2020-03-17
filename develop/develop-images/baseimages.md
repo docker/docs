@@ -69,7 +69,7 @@ run it, or tag any image with the name `scratch`. Instead, you can refer to it
 in your `Dockerfile`. For example, to create a minimal container using
 `scratch`:
 
-```Dockerfile
+```dockerfile
 FROM scratch
 ADD hello /
 CMD ["/hello"]

@@ -16,7 +16,8 @@ Description:
 
 For example:
 
-```
+```bash
 $ docker-machine status dev
+
 Running
 ```

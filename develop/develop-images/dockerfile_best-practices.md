@@ -22,7 +22,7 @@ A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -270,7 +270,7 @@ frequently changed:
 
 A Dockerfile for a Go application could look like:
 
-```Dockerfile
+```dockerfile
 FROM golang:1.11-alpine AS build
 
 # Install tools required for project
@@ -346,7 +346,7 @@ review. Adding a space before a backslash (`\`) helps as well.
 
 Here’s an example from the [`buildpack-deps` image](https://github.com/docker-library/buildpack-deps):
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
   bzr \
   cvs \
@@ -418,7 +418,7 @@ The following examples show the different acceptable formats. Explanatory commen
 > Strings with spaces must be quoted **or** the spaces must be escaped. Inner
 > quote characters (`"`), must also be escaped.
 
-```Dockerfile
+```dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -432,14 +432,14 @@ to combine all labels into a single `LABEL` instruction, to prevent extra layers
 from being created. This is no longer necessary, but combining labels is still
 supported.
 
-```Dockerfile
+```dockerfile
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 
 The above can also be written as:
 
-```Dockerfile
+```dockerfile
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -478,7 +478,7 @@ know there is a particular package, `foo`, that needs to be updated, use
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
@@ -489,7 +489,7 @@ Using `apt-get update` alone in a `RUN` statement causes caching issues and
 subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -498,7 +498,7 @@ RUN apt-get install -y curl
 After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -516,7 +516,7 @@ intervention. This technique is known as "cache busting". You can also achieve
 cache-busting by specifying a package version. This is known as version pinning,
 for example:
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
@@ -530,7 +530,7 @@ in required packages.
 Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
 recommendations.
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     aufs-tools \
     automake \
@@ -564,7 +564,7 @@ refreshed prior to `apt-get install`.
 
 Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
 
-```Dockerfile
+```dockerfile
 RUN wget -O - https://some.site | wc -l > /number
 ```
 
@@ -577,7 +577,7 @@ If you want the command to fail due to an error at any stage in the pipe,
 prepend `set -o pipefail &&` to ensure that an unexpected error prevents the
 build from inadvertently succeeding. For example:
 
-```Dockerfile
+```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
 > Not all shells support the `-o pipefail` option.
@@ -586,7 +586,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 > Debian-based images, consider using the _exec_ form of `RUN` to explicitly
 > choose a shell that does support the `pipefail` option. For example:
 >
-> ```Dockerfile
+> ```dockerfile
 > RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
 > ```
 
@@ -641,7 +641,7 @@ variables specific to services you wish to containerize, such as Postgres’s
 Lastly, `ENV` can also be used to set commonly used version numbers so that
 version bumps are easier to maintain, as seen in the following example:
 
-```Dockerfile
+```dockerfile
 ENV PG_MAJOR 9.3
 ENV PG_VERSION 9.3.4
 RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
@@ -657,7 +657,7 @@ means that even if you unset the environment variable in a future layer, it
 still persists in this layer and its value can't be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
-```Dockerfile
+```dockerfile
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -678,7 +678,7 @@ good idea. Using `\` as a line continuation character for Linux Dockerfiles
 improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
 
-```Dockerfile
+```dockerfile
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \
@@ -711,7 +711,7 @@ the specifically required files change.
 
 For example:
 
-```Dockerfile
+```dockerfile
 COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 COPY . /tmp/
@@ -726,7 +726,7 @@ delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 
-```Dockerfile
+```dockerfile
 ADD http://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
@@ -734,7 +734,7 @@ RUN make -C /usr/src/things all
 
 And instead, do something like:
 
-```Dockerfile
+```dockerfile
 RUN mkdir -p /usr/src/things \
     && curl -SL http://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
@@ -754,7 +754,7 @@ default flags).
 
 Let's start with an example of an image for the command line tool `s3cmd`:
 
-```Dockerfile
+```dockerfile
 ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 ```
@@ -808,7 +808,7 @@ exec "$@"
 The helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
 
-```Dockerfile
+```dockerfile
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]

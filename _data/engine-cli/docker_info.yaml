@@ -31,66 +31,209 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-examples: "### Show output\n\nThe example below shows the output for a daemon running
-  on Red Hat Enterprise Linux,\nusing the `devicemapper` storage driver. As can be
-  seen in the output, additional\ninformation about the `devicemapper` storage driver
-  is shown:\n\n```bash\n$ docker info\nClient:\n Debug Mode: false\n\nServer:\n Containers:
-  14\n  Running: 3\n  Paused: 1\n  Stopped: 10\n Images: 52\n Server Version: 1.10.3\n
-  Storage Driver: devicemapper\n  Pool Name: docker-202:2-25583803-pool\n  Pool Blocksize:
-  65.54 kB\n  Base Device Size: 10.74 GB\n  Backing Filesystem: xfs\n  Data file:
-  /dev/loop0\n  Metadata file: /dev/loop1\n  Data Space Used: 1.68 GB\n  Data Space
-  Total: 107.4 GB\n  Data Space Available: 7.548 GB\n  Metadata Space Used: 2.322
-  MB\n  Metadata Space Total: 2.147 GB\n  Metadata Space Available: 2.145 GB\n  Udev
-  Sync Supported: true\n  Deferred Removal Enabled: false\n  Deferred Deletion Enabled:
-  false\n  Deferred Deleted Device Count: 0\n  Data loop file: /var/lib/docker/devicemapper/devicemapper/data\n
-  \ Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata\n  Library
-  Version: 1.02.107-RHEL7 (2015-12-01)\n Execution Driver: native-0.2\n Logging Driver:
-  json-file\n Plugins:\n  Volume: local\n  Network: null host bridge\n Kernel Version:
-  3.10.0-327.el7.x86_64\n Operating System: Red Hat Enterprise Linux Server 7.2 (Maipo)\n
-  OSType: linux\n Architecture: x86_64\n CPUs: 1\n Total Memory: 991.7 MiB\n Name:
-  ip-172-30-0-91.ec2.internal\n ID: I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S\n
-  Docker Root Dir: /var/lib/docker\n Debug Mode: false\n Username: gordontheturtle\n
-  Registry: https://index.docker.io/v1/\n Insecure registries:\n  myinsecurehost:5000\n
-  \ 127.0.0.0/8\n```\n \n### Show debugging output\n\nHere is a sample output for
-  a daemon running on Ubuntu, using the overlay2\nstorage driver and a node that is
-  part of a 2-node swarm:\n\n```bash\n$ docker -D info\nClient:\n Debug Mode: true\n\nServer:\n
-  Containers: 14\n  Running: 3\n  Paused: 1\n  Stopped: 10\n Images: 52\n Server Version:
-  1.13.0\n Storage Driver: overlay2\n  Backing Filesystem: extfs\n  Supports d_type:
-  true\n  Native Overlay Diff: false\n Logging Driver: json-file\n Cgroup Driver:
-  cgroupfs\n Plugins:\n  Volume: local\n  Network: bridge host macvlan null overlay\n
-  Swarm: active\n  NodeID: rdjq45w1op418waxlairloqbm\n  Is Manager: true\n  ClusterID:
-  te8kdyw33n36fqiz74bfjeixd\n  Managers: 1\n  Nodes: 2\n  Orchestration:\n   Task
-  History Retention Limit: 5\n  Raft:\n   Snapshot Interval: 10000\n   Number of Old
-  Snapshots to Retain: 0\n   Heartbeat Tick: 1\n   Election Tick: 3\n  Dispatcher:\n
-  \  Heartbeat Period: 5 seconds\n  CA Configuration:\n   Expiry Duration: 3 months\n
-  \ Root Rotation In Progress: false\n  Node Address: 172.16.66.128 172.16.66.129\n
-  \ Manager Addresses:\n   172.16.66.128:2477\n Runtimes: runc\n Default Runtime:
-  runc\n Init Binary: docker-init\n containerd version: 8517738ba4b82aff5662c97ca4627e7e4d03b531\n
-  runc version: ac031b5bf1cc92239461125f4c1ffb760522bbf2\n init version: N/A (expected:
-  v0.13.0)\n Security Options:\n  apparmor\n  seccomp\n   Profile: default\n Kernel
-  Version: 4.4.0-31-generic\n Operating System: Ubuntu 16.04.1 LTS\n OSType: linux\n
-  Architecture: x86_64\n CPUs: 2\n Total Memory: 1.937 GiB\n Name: ubuntu\n ID: H52R:7ZR6:EIIA:76JG:ORIY:BVKF:GSFU:HNPG:B5MK:APSC:SZ3Q:N326\n
-  Docker Root Dir: /var/lib/docker\n Debug Mode: true\n  File Descriptors: 30\n  Goroutines:
-  123\n  System Time: 2016-11-12T17:24:37.955404361-08:00\n  EventsListeners: 0\n
-  Http Proxy: http://test:test@proxy.example.com:8080\n Https Proxy: https://test:test@proxy.example.com:8080\n
-  No Proxy: localhost,127.0.0.1,docker-registry.somecorporation.com\n Registry: https://index.docker.io/v1/\n
-  WARNING: No swap limit support\n Labels:\n  storage=ssd\n  staging=true\n Experimental:
-  false\n Insecure Registries:\n  127.0.0.0/8\n Registry Mirrors:\n   http://192.168.1.2/\n
-  \  http://registry-mirror.example.com:5000/\n Live Restore Enabled: false\n```\n\nThe
-  global `-D` option causes all `docker` commands to output debug information.\n\n###
-  Format the output\n\nYou can also specify the output format:\n\n```bash\n$ docker
-  info --format '{{json .}}'\n\n{\"ID\":\"I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S\",\"Containers\":14,
-  ...}\n```\n\n### Run `docker info` on Windows\n\nHere is a sample output for a daemon
-  running on Windows Server 2016:\n\n```none\nE:\\docker>docker info\nClient:\n Debug
-  Mode: false\n\nServer:\n Containers: 1\n  Running: 0\n  Paused: 0\n  Stopped: 1\n
-  Images: 17\n Server Version: 1.13.0\n Storage Driver: windowsfilter\n  Windows:\n
-  Logging Driver: json-file\n Plugins:\n  Volume: local\n  Network: nat null overlay\n
-  Swarm: inactive\n Default Isolation: process\n Kernel Version: 10.0 14393 (14393.206.amd64fre.rs1_release.160912-1937)\n
-  Operating System: Windows Server 2016 Datacenter\n OSType: windows\n Architecture:
-  x86_64\n CPUs: 8\n Total Memory: 3.999 GiB\n Name: WIN-V0V70C0LU5P\n ID: NYMS:B5VK:UMSL:FVDZ:EWB5:FKVK:LPFL:FJMQ:H6FT:BZJ6:L2TD:XH62\n
-  Docker Root Dir: C:\\control\n Debug Mode: false\n Registry: https://index.docker.io/v1/\n
-  Insecure Registries:\n  127.0.0.0/8\n Registry Mirrors:\n   http://192.168.1.2/\n
-  \  http://registry-mirror.example.com:5000/\n Live Restore Enabled: false\n```"
+examples: |-
+  ### Show output
+
+  The example below shows the output for a daemon running on Red Hat Enterprise Linux,
+  using the `devicemapper` storage driver. As can be seen in the output, additional
+  information about the `devicemapper` storage driver is shown:
+
+  ```bash
+  $ docker info
+  Client:
+   Debug Mode: false
+
+  Server:
+   Containers: 14
+    Running: 3
+    Paused: 1
+    Stopped: 10
+   Images: 52
+   Server Version: 1.10.3
+   Storage Driver: devicemapper
+    Pool Name: docker-202:2-25583803-pool
+    Pool Blocksize: 65.54 kB
+    Base Device Size: 10.74 GB
+    Backing Filesystem: xfs
+    Data file: /dev/loop0
+    Metadata file: /dev/loop1
+    Data Space Used: 1.68 GB
+    Data Space Total: 107.4 GB
+    Data Space Available: 7.548 GB
+    Metadata Space Used: 2.322 MB
+    Metadata Space Total: 2.147 GB
+    Metadata Space Available: 2.145 GB
+    Udev Sync Supported: true
+    Deferred Removal Enabled: false
+    Deferred Deletion Enabled: false
+    Deferred Deleted Device Count: 0
+    Data loop file: /var/lib/docker/devicemapper/devicemapper/data
+    Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
+    Library Version: 1.02.107-RHEL7 (2015-12-01)
+   Execution Driver: native-0.2
+   Logging Driver: json-file
+   Plugins:
+    Volume: local
+    Network: null host bridge
+   Kernel Version: 3.10.0-327.el7.x86_64
+   Operating System: Red Hat Enterprise Linux Server 7.2 (Maipo)
+   OSType: linux
+   Architecture: x86_64
+   CPUs: 1
+   Total Memory: 991.7 MiB
+   Name: ip-172-30-0-91.ec2.internal
+   ID: I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S
+   Docker Root Dir: /var/lib/docker
+   Debug Mode: false
+   Username: gordontheturtle
+   Registry: https://index.docker.io/v1/
+   Insecure registries:
+    myinsecurehost:5000
+    127.0.0.0/8
+  ```
+
+  ### Show debugging output
+
+  Here is a sample output for a daemon running on Ubuntu, using the overlay2
+  storage driver and a node that is part of a 2-node swarm:
+
+  ```bash
+  $ docker -D info
+  Client:
+   Debug Mode: true
+
+  Server:
+   Containers: 14
+    Running: 3
+    Paused: 1
+    Stopped: 10
+   Images: 52
+   Server Version: 1.13.0
+   Storage Driver: overlay2
+    Backing Filesystem: extfs
+    Supports d_type: true
+    Native Overlay Diff: false
+   Logging Driver: json-file
+   Cgroup Driver: cgroupfs
+   Plugins:
+    Volume: local
+    Network: bridge host macvlan null overlay
+   Swarm: active
+    NodeID: rdjq45w1op418waxlairloqbm
+    Is Manager: true
+    ClusterID: te8kdyw33n36fqiz74bfjeixd
+    Managers: 1
+    Nodes: 2
+    Orchestration:
+     Task History Retention Limit: 5
+    Raft:
+     Snapshot Interval: 10000
+     Number of Old Snapshots to Retain: 0
+     Heartbeat Tick: 1
+     Election Tick: 3
+    Dispatcher:
+     Heartbeat Period: 5 seconds
+    CA Configuration:
+     Expiry Duration: 3 months
+    Root Rotation In Progress: false
+    Node Address: 172.16.66.128 172.16.66.129
+    Manager Addresses:
+     172.16.66.128:2477
+   Runtimes: runc
+   Default Runtime: runc
+   Init Binary: docker-init
+   containerd version: 8517738ba4b82aff5662c97ca4627e7e4d03b531
+   runc version: ac031b5bf1cc92239461125f4c1ffb760522bbf2
+   init version: N/A (expected: v0.13.0)
+   Security Options:
+    apparmor
+    seccomp
+     Profile: default
+   Kernel Version: 4.4.0-31-generic
+   Operating System: Ubuntu 16.04.1 LTS
+   OSType: linux
+   Architecture: x86_64
+   CPUs: 2
+   Total Memory: 1.937 GiB
+   Name: ubuntu
+   ID: H52R:7ZR6:EIIA:76JG:ORIY:BVKF:GSFU:HNPG:B5MK:APSC:SZ3Q:N326
+   Docker Root Dir: /var/lib/docker
+   Debug Mode: true
+    File Descriptors: 30
+    Goroutines: 123
+    System Time: 2016-11-12T17:24:37.955404361-08:00
+    EventsListeners: 0
+   Http Proxy: http://test:test@proxy.example.com:8080
+   Https Proxy: https://test:test@proxy.example.com:8080
+   No Proxy: localhost,127.0.0.1,docker-registry.somecorporation.com
+   Registry: https://index.docker.io/v1/
+   WARNING: No swap limit support
+   Labels:
+    storage=ssd
+    staging=true
+   Experimental: false
+   Insecure Registries:
+    127.0.0.0/8
+   Registry Mirrors:
+     http://192.168.1.2/
+     http://registry-mirror.example.com:5000/
+   Live Restore Enabled: false
+  ```
+
+  The global `-D` option causes all `docker` commands to output debug information.
+
+  ### Format the output
+
+  You can also specify the output format:
+
+  ```bash
+  $ docker info --format '{{json .}}'
+
+  {"ID":"I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S","Containers":14, ...}
+  ```
+
+  ### Run `docker info` on Windows
+
+  Here is a sample output for a daemon running on Windows Server 2016:
+
+  ```none
+  E:\docker>docker info
+  Client:
+   Debug Mode: false
+
+  Server:
+   Containers: 1
+    Running: 0
+    Paused: 0
+    Stopped: 1
+   Images: 17
+   Server Version: 1.13.0
+   Storage Driver: windowsfilter
+    Windows:
+   Logging Driver: json-file
+   Plugins:
+    Volume: local
+    Network: nat null overlay
+   Swarm: inactive
+   Default Isolation: process
+   Kernel Version: 10.0 14393 (14393.206.amd64fre.rs1_release.160912-1937)
+   Operating System: Windows Server 2016 Datacenter
+   OSType: windows
+   Architecture: x86_64
+   CPUs: 8
+   Total Memory: 3.999 GiB
+   Name: WIN-V0V70C0LU5P
+   ID: NYMS:B5VK:UMSL:FVDZ:EWB5:FKVK:LPFL:FJMQ:H6FT:BZJ6:L2TD:XH62
+   Docker Root Dir: C:\control
+   Debug Mode: false
+   Registry: https://index.docker.io/v1/
+   Insecure Registries:
+    127.0.0.0/8
+   Registry Mirrors:
+     http://192.168.1.2/
+     http://registry-mirror.example.com:5000/
+   Live Restore Enabled: false
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

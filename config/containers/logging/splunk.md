@@ -116,7 +116,7 @@ and `raw`.
 The default format is `inline` where each log message is embedded as a string.
 For example:
 
-```none
+```json
 {
     "attrs": {
         "env1": "val1",
@@ -126,6 +126,8 @@ For example:
     "source":  "stdout",
     "line": "my message"
 }
+```
+```json
 {
     "attrs": {
         "env1": "val1",
@@ -144,7 +146,7 @@ To format messages as `json` objects, set `--log-opt splunk-format=json`. The
 driver trys to parse every line as a JSON object and send it as an embedded
 object. If it cannot parse the message, it is sent `inline`. For example:
 
-```none
+```json
 {
     "attrs": {
         "env1": "val1",
@@ -154,6 +156,8 @@ object. If it cannot parse the message, it is sent `inline`. For example:
     "source":  "stdout",
     "line": "my message"
 }
+```
+```json
 {
     "attrs": {
         "env1": "val1",
@@ -182,7 +186,7 @@ Splunk Logging Driver allows you to configure few advanced options by specifying
 
 | Environment variable name                        | Default value | Description                                                                                                                                        |
 |:-------------------------------------------------|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `SPLUNK_LOGGING_DRIVER_POST_MESSAGES_FREQUENCY`  | `5s`          | If there is nothing to batch how often driver posts messages. You can think about this as the maximum time to wait for more messages to batch. |
+| `SPLUNK_LOGGING_DRIVER_POST_MESSAGES_FREQUENCY`  | `5s`          | If there is nothing to batch how often driver posts messages. You can think about this as the maximum time to wait for more messages to batch.     |
 | `SPLUNK_LOGGING_DRIVER_POST_MESSAGES_BATCH_SIZE` | `1000`        | How many messages driver should wait before sending them in one batch.                                                                             |
 | `SPLUNK_LOGGING_DRIVER_BUFFER_MAX`               | `10 * 1000`   | If driver cannot connect to remote server, what is the maximum amount of messages it can hold in buffer for retries.                               |
 | `SPLUNK_LOGGING_DRIVER_CHANNEL_SIZE`             | `4 * 1000`    | How many pending messages can be in the channel which is used to send messages to background logger worker, which batches them.                    |

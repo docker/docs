@@ -14,7 +14,7 @@ originally specified Swarm or Engine configuration).
 
 Usage is `docker-machine provision [name]`.  Multiple names may be specified.
 
-```none
+```bash
 $ docker-machine provision foo bar
 
 Copying certs to the local machine directory...

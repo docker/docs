@@ -81,18 +81,12 @@ deployed containers, but rather sets permissions to a default value of
 For workarounds and to learn more, see
 [Permissions errors on data directories for shared volumes](troubleshoot#permissions-errors-on-data-directories-for-shared-volumes).
 
-### Are symlinks supported?
+### How do symlinks work on Windows?
 
-Docker Desktop supports symbolic links (symlinks) created within containers.
-Symlinks resolve within and across containers. Symlinks created outside of Docker do not work.
+Docker Desktop supports 2 kinds of symlink:
 
-To learn more about the reasons for this limitation, see the following discussions:
-
-* GitHub issue:
-  [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391){: target="_blank" class="_"}
-
-* Docker Desktop for Windows forums topic:
-  [Symlinks on shared volumes not supported](https://forums.docker.com/t/symlinks-on-shared-volumes-not-supported/9288){: target="_blank" class="_"}
+1. Windows native symlinks: these are visible inside containers as symlinks.
+2. Symlinks created inside a container: these are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks) i.e. regular Windows files with special metadata. These appear as symlinks inside containers but not as symlinks on the host.
 
 ## Certificates
 

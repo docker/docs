@@ -16,12 +16,15 @@ Description:
 
 For example:
 
-```none
+```bash
 $ docker-machine ls
+
 NAME   ACTIVE   DRIVER       STATE     URL
 dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+
 $ docker-machine kill dev
 $ docker-machine ls
+
 NAME   ACTIVE   DRIVER       STATE     URL
 dev    *        virtualbox   Stopped
 ```

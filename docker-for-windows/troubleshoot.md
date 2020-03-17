@@ -122,20 +122,6 @@ deployment
 requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
-#### inotify on shared drives does not work
-
-Currently, `inotify` does not work on Docker Desktop. This becomes evident,
-for example, when an application needs to read/write to a container across a
-mounted drive. Instead of relying on filesystem inotify, we recommend using
-polling features for your framework or programming language.
-
-* **Workaround for nodemon and Node.js** - If you are using
-  [nodemon](https://github.com/remy/nodemon) with `Node.js`, try the fallback
-  polling mode described here: [nodemon isn't restarting node
-  applications](https://github.com/remy/nodemon#application-isnt-restarting).
-
-* **Docker Desktop for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
-
 #### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
@@ -148,11 +134,9 @@ containers). Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
 
-#### Understand symlinks limitations
+#### Support for symlinks
 
-Symlinks work within and across containers. However, symlinks created outside of
-containers (for example, on the host) do not work. To learn more, see [Are
-symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -424,14 +408,6 @@ the prefix from the **Settings** menu. See the [Network](index.md#network) topic
 under [Settings](index.md#docker-settings).
 
 ## Workarounds
-
-### `inotify` currently does not work on Docker Desktop
-
-If you are using `Node.js` with `nodemon`, a temporary workaround is to try the
-fallback polling mode described here: [nodemon isn't restarting node
-applications](https://github.com/remy/nodemon#application-isnt-restarting). See
-also this issue on GitHub [Inotify on shared drives does not
-work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
 
 ### Reboot
 

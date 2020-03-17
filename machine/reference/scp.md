@@ -15,11 +15,13 @@ machine's case, you don't need to specify the name, just the path.
 
 Consider the following example:
 
-```none
+```bash
 $ cat foo.txt
 cat: foo.txt: No such file or directory
+
 $ docker-machine ssh dev pwd
 /home/docker
+
 $ docker-machine ssh dev 'echo A file created remotely! >foo.txt'
 $ docker-machine scp dev:/home/docker/foo.txt .
 foo.txt                                                           100%   28     0.0KB/s   00:00
@@ -40,7 +42,7 @@ transferring all of the files.
 When transferring directories and not just files, avoid rsync surprises
 by using trailing slashes on both the source and destination. For example:
 
-```none
+```bash
 $ mkdir -p bar
 $ touch bar/baz
 $ docker-machine scp -r -d bar/ dev:/home/docker/bar/
@@ -61,7 +63,7 @@ For example, imagine you want to transfer your local directory
 container on the remote host. If the remote user is `ubuntu`, use a command like
 this:
 
-```none
+```bash
 $ docker-machine scp -r /Users/<username>/webapp MACHINE-NAME:/home/ubuntu/webapp
 ```
 
@@ -79,7 +81,7 @@ services:
 
 And we can try it out like so:
 
-```none
+```bash
 $ eval $(docker-machine env MACHINE-NAME)
 $ docker-compose run webapp
 ```

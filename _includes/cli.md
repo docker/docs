@@ -89,6 +89,18 @@ your client and daemon API versions.
 ```
 
 {% endif %}
+{% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
+
+## Extended description
+
+{{ site.data[include.datafolder][include.datafile].long }}
+
+{% endunless %}
+
+{% if site.data[include.datafolder][include.datafile].examples %}
+For example uses of this command, refer to the [examples section](#examples) below.
+{% endif %}
+
 {% if site.data[include.datafolder][include.datafile].options %}
   {% if site.data[include.datafolder][include.datafile].inherited_options %}
     {% assign alloptions = site.data[include.datafolder][include.datafile].options | concat:site.data[include.datafolder][include.datafile].inherited_options %}
@@ -130,27 +142,17 @@ your client and daemon API versions.
 
 {% endif %} <!-- end if options -->
 
-{% if site.data[include.datafolder][include.datafile].cname %}
+{% if site.data[include.datafolder][include.datafile].examples %}
 
-## Child commands
+## Examples
 
-<table>
-<thead>
-  <tr>
-    <td>Command</td>
-    <td>Description</td>
-  </tr>
-</thead>
-<tbody>
-{% for command in site.data[include.datafolder][include.datafile].cname %}
-  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-  <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
-    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
-  </tr>
-{% endfor %}
-</tbody>
-</table>
+{{ site.data[include.datafolder][include.datafile].examples }}
+
+{% endif %}
+{% else %}
+
+The include.datafolder or include.datafile was not set.
+
 {% endif %}
 
 {% if site.data[include.datafolder][include.datafile].pname %}
@@ -172,6 +174,29 @@ your client and daemon API versions.
 | [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
 {% endunless %}
+{% endif %}
+
+{% if site.data[include.datafolder][include.datafile].cname %}
+
+## Child commands
+
+<table>
+<thead>
+  <tr>
+    <td>Command</td>
+    <td>Description</td>
+  </tr>
+</thead>
+<tbody>
+{% for command in site.data[include.datafolder][include.datafile].cname %}
+  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  <tr>
+    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
 {% endif %}
 
 {% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" or include.datafile=="docker" %}
@@ -197,24 +222,3 @@ your client and daemon API versions.
 </table>
 
 {% endunless %}
-
-{% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
-
-## Extended description
-
-{{ site.data[include.datafolder][include.datafile].long }}
-
-{% endunless %}
-
-{% if site.data[include.datafolder][include.datafile].examples %}
-
-## Examples
-
-{{ site.data[include.datafolder][include.datafile].examples }}
-
-{% endif %}
-{% else %}
-
-The include.datafolder or include.datafile was not set.
-
-{% endif %}

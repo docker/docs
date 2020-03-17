@@ -16,7 +16,7 @@ This PostgreSQL setup is for development-only purposes. Refer to the
 PostgreSQL documentation to fine-tune these settings so that it is
 suitably secure.
 
-```conf
+```dockerfile
 #
 # example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
 #
