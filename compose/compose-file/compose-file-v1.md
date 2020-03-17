@@ -6,6 +6,7 @@ redirect_from:
 title: Compose file version 1 reference
 toc_max: 4
 toc_min: 1
+hide_from_sitemap: true
 ---
 
 ## Reference and guidelines
