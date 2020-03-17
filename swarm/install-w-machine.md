@@ -68,8 +68,9 @@ Daemon running on each node. Other discovery service backends such as
     haven't got the `swarm:latest` image on your local machine, Docker pulls it
     for you.
 
-    ```none
+    ```console
     $ docker run swarm create
+
     Unable to find image 'swarm:latest' locally
     latest: Pulling from swarm
     de939d6ed512: Pull complete
@@ -122,8 +123,9 @@ In this section, you create a swarm manager and two nodes.
 
     For example:
 
-    ```none
+    ```console
     $ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-master
+
     INFO[0000] Creating SSH key...
     INFO[0000] Creating VirtualBox VM...
     INFO[0005] Starting VirtualBox VM...
@@ -184,6 +186,7 @@ your swarm, and start an image on your swarm.
 
     ```bash
     $ docker info
+
     Containers: 4
     Strategy: spread
     Filters: affinity, health, constraint, port, dependency
@@ -207,8 +210,9 @@ your swarm, and start an image on your swarm.
 
 3.  Check the images currently running on your swarm.
 
-    ```none
+    ```console
     $ docker ps  -a
+
     CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                     NAMES
     78be991b58d1        swarm:latest        "/swarm join --addr    3 minutes ago       Up 2 minutes        2375/tcp                                  swarm-agent-01/swarm-agent
     da5127e4f0f9        swarm:latest        "/swarm join --addr    6 minutes ago       Up 6 minutes        2375/tcp                                  swarm-agent-00/swarm-agent
@@ -220,6 +224,7 @@ your swarm, and start an image on your swarm.
 
     ```bash
     $ docker run hello-world
+
     Hello from Docker.
     This message shows that your installation appears to be working correctly.
 
@@ -245,6 +250,7 @@ your swarm, and start an image on your swarm.
 
     ```bash
     $ docker ps -a
+
     CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS                     PORTS                                     NAMES
     54a8690043dd        hello-world:latest   "/hello"               22 seconds ago      Exited (0) 3 seconds ago                                             swarm-agent-00/modest_goodall
     78be991b58d1        swarm:latest         "/swarm join --addr    5 minutes ago       Up 4 minutes               2375/tcp                                  swarm-agent-01/swarm-agent

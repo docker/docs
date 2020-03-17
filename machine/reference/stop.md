@@ -16,7 +16,7 @@ Description:
 
 For example:
 
-```none
+```bash
 $ docker-machine ls
 
 NAME   ACTIVE   DRIVER       STATE     URL
