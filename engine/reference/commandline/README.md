@@ -22,7 +22,7 @@ The output files are composed from two sources:
 
 The process for generating the YAML files is still in flux. Check with
 @thaJeztah. Be sure to generate the YAML files with the correct
-branch of `docker/docker` checked out (probably not `master`).
+release branch of `docker/cli`, for example, the `19.03` branch.
 
 After generating the YAML files, replace the YAML files in
 [https://github.com/docker/docker.github.io/tree/master/_data/engine-cli](https://github.com/docker/docker.github.io/tree/master/_data/engine-cli)
