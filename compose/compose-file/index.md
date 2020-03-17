@@ -60,7 +60,8 @@ services:
       - backend
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -108,7 +109,8 @@ services:
         max_attempts: 3
         window: 120s
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
   visualizer:
     image: dockersamples/visualizer:stable
@@ -119,7 +121,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
 networks:
   frontend:
@@ -772,8 +775,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
-          - engine.labels.operatingsystem == ubuntu 14.04
+          - "node.role==manager"
+          - "engine.labels.operatingsystem==ubuntu 18.04"
         preferences:
           - spread: node.labels.zone
 ```
