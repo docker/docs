@@ -186,13 +186,7 @@ The entrypoint can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#entrypoint):
 
 ```yaml
-entrypoint:
-  - php
-  - -d
-  - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
-  - -d
-  - memory_limit=-1
-  - vendor/bin/phpunit
+entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
 ```
 
 > **Note**: Setting `entrypoint` both overrides any default entrypoint set
