@@ -145,8 +145,7 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
 #### context
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
-> [build](#build).
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
 
@@ -177,7 +176,7 @@ build:
 
 #### args
 
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 
 Add build arguments, which are environment variables accessible only during the
 build process.
@@ -211,10 +210,13 @@ build:
     - gitcommithash=cdc3b19
 ```
 
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
+> Scope of build-args
+>
+> In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
-> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
-> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+> If you need an argument to be available in both places, also specify it under
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
@@ -225,8 +227,11 @@ args:
   - gitcommithash
 ```
 
-> **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
-> be enclosed in quotes, so that the parser interprets them as strings.
+> Tip when using boolean values
+>
+> YAML boolean values (`"true"`, `"false"`, `"yes"`, `"no"`, `"on"`,
+> `"off"`) must be enclosed in quotes, so that the parser interprets them as
+> strings.
 
 #### cache_from
 
@@ -261,7 +266,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 
 #### isolation
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
@@ -422,7 +427,7 @@ cpu_rt_period: 11000
 
 ### device_cgroup_rules
 
-> [Added in version 2.3 file format](compose-versioning.md#version-23).
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 
 Add rules to the cgroup allowed devices list.
 
@@ -444,7 +449,7 @@ devices:
 
 ### depends_on
 
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 
 Express dependency between services. Service dependencies cause the following
 behaviors:
@@ -473,12 +478,14 @@ services:
     image: postgres
 ```
 
-> **Note**: `depends_on` does not wait for `db` and `redis` to be "ready" before
+> **Note**
+>
+> `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 A healthcheck indicates that you want a dependency to wait
 for another container to be "healthy" (as indicated by a successful state from
@@ -569,10 +576,12 @@ entrypoint:
   - vendor/bin/phpunit
 ```
 
-> **Note**: Setting `entrypoint` both overrides any default entrypoint set
-> on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clears out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it is ignored.
+> **Note**
+>
+> Setting `entrypoint` both overrides any default entrypoint set on the service's
+> image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default
+> command on the image - meaning that if there's a `CMD` instruction in the
+> Dockerfile, it is ignored.
 
 ### env_file
 
@@ -605,10 +614,12 @@ also ignored.
 RACK_ENV=development
 ```
 
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> environment files are _not_ automatically visible during the build. Use
+> the [args](#args) sub-option of `build` to define build-time environment
+> variables.
 
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
@@ -668,10 +679,12 @@ environment:
   - SESSION_SECRET
 ```
 
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> `environment` are _not_ automatically visible during the build. Use the
+> [args](#args) sub-option of `build` to define build-time environment
+> variables.
 
 ### expose
 
@@ -729,15 +742,12 @@ external_links:
   - project_db_1:postgresql
 ```
 
-> **Notes:**
+> **Note**
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2),
 > the externally-created  containers must be connected to at least one of the same
 > networks as the service that is linking to them. [Links](compose-file-v2#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
->
-> This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
 
 ### extra_hosts
 
@@ -784,7 +794,7 @@ used.
 
 ### healthcheck
 
-> [Version 2.1 file format](compose-versioning.md#version-21) and up.
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
@@ -803,8 +813,9 @@ healthcheck:
 `interval`, `timeout` and `start_period` are specified as
 [durations](#specifying-durations).
 
-> **Note**: `start_period` is only supported for [version 2.3 file format](compose-versioning.md#version-23)
-> and higher.
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
+>
+> The `start_period` option was added in file format 2.3.
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
@@ -860,7 +871,7 @@ options and tags it with the specified tag.
 
 ### init
 
-> [Added in version 2.2 file format](compose-versioning.md#version-22).
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
 
 Run an init inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
@@ -880,7 +891,7 @@ services:
 
 ### isolation
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
@@ -967,9 +978,11 @@ driver: "syslog"
 driver: "none"
 ```
 
-> **Note**: Only the `json-file` and `journald` drivers make the logs available
-> directly from `docker-compose up` and `docker-compose logs`. Using any other
-> driver does not print any logs.
+> **Note**
+>
+> Only the `json-file` and `journald` drivers make the logs available directly
+> from `docker-compose up` and `docker-compose logs`. Using any other driver
+> does not print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
 
@@ -983,7 +996,9 @@ options:
 
 ### network_mode
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+> Changed in [version 2](compose-versioning.md#version-2) file format.
+>
+> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
@@ -1006,7 +1021,9 @@ net: "container:[container name/id]"
 
 ### networks
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+> Changed in [version 2](compose-versioning.md#version-2) file format.
+>
+> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Networks to join, referencing entries under the
 [top-level `networks` key](#network-configuration-reference).
@@ -1025,7 +1042,11 @@ Aliases (alternative hostnames) for this service on the network. Other container
 
 Since `aliases` is network-scoped, the same service can have different aliases on different networks.
 
-> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
+> **Note**
+>
+> A network-wide alias can be shared by multiple containers, and even by multiple
+> services. If it is, then exactly which container the name resolves to is not
+> guaranteed.
 
 The general format is shown here.
 
@@ -1115,7 +1136,7 @@ networks:
 
 #### link_local_ips
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Specify a list of link-local IPs. Link-local IPs are special IPs which belong
 to a well known subnet and are purely managed by the operator, usually
@@ -1168,8 +1189,9 @@ networks:
   app_net_3:
 ```
 
-> **Note**: If multiple networks have the same priority, the connection order
-> is undefined.
+> **Note**
+>
+> If multiple networks have the same priority, the connection order is undefined.
 
 ### pid
 
@@ -1192,12 +1214,13 @@ on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
 other containers in the bare-metal machine's namespace and vice versa.
 
-> **Note**: the `service:` and `container:` forms require
-> [version 2.1](compose-versioning.md#version-21) or above
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> The `service:` and `container:` forms require [version 2.1](compose-versioning.md#version-21) or above
 
 ### pids_limit
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 
@@ -1207,7 +1230,7 @@ pids_limit: 10
 
 ### platform
 
-> [Added in version 2.4 file format](compose-versioning.md#version-24).
+> Added in [version 2.4](compose-versioning.md#version-24) file format.
 
 Target platform containers for this service will run on, using the
 `os[/arch[/variant]]` syntax, e.g.
@@ -1230,7 +1253,9 @@ on which platform the service's build will be performed.
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (an ephemeral host port is chosen).
 
-> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**
+>
+> When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
@@ -1250,7 +1275,7 @@ ports:
 
 ### runtime
 
-> [Added in version 2.3 file format](compose-versioning.md#version-23)
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 
 Specify which runtime to use for the service's containers. Default runtime
 and available runtimes are listed in the output of `docker info`.
@@ -1264,7 +1289,7 @@ web:
 
 ### scale
 
-> [Added in version 2.2 file format](compose-versioning.md#version-22)
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
 
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
@@ -1318,7 +1343,7 @@ stop_signal: SIGUSR1
 
 ### storage_opt
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Set storage driver options for this service.
 
@@ -1329,7 +1354,7 @@ storage_opt:
 
 ### sysctls
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Kernel parameters to set in the container. You can use either an array or a
 dictionary.
@@ -1375,7 +1400,7 @@ ulimits:
 
 ### userns_mode
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 ```yaml
 userns_mode: "host"
@@ -1390,16 +1415,16 @@ more information.
 Mount host paths or named volumes. Named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
 
-You can mount a relative path on the host, which expands relative to
-the directory of the Compose configuration file being used. Relative paths
-should always begin with `.` or `..`.
-
 #### Short syntax
 
 The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where
 `SOURCE` can be either a host path or volume name. `TARGET` is the container
 path where the volume is mounted. Standard modes are `ro` for read-only
 and `rw` for read-write (default).
+
+You can mount a relative path on the host, which expands relative to
+the directory of the Compose configuration file being used. Relative paths
+should always begin with `.` or `..`.
 
 ```yaml
 volumes:
@@ -1421,7 +1446,7 @@ volumes:
 
 #### Long syntax
 
-> [Added in version 2.3 file format](compose-versioning.md#version-23).
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
@@ -1465,7 +1490,9 @@ volumes:
   mydata:
 ```
 
-> **Note**: When creating bind mounts, using the long syntax requires the
+> **Note**
+>
+> When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
@@ -1480,7 +1507,9 @@ service.
 volume_driver: mydriver
 ```
 
-> **Note**: In [version 2 files](compose-versioning.md#version-2), this
+> **Note**
+>
+> In [version 2 files](compose-versioning.md#version-2), this
 > option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
@@ -1504,13 +1533,11 @@ volumes_from:
   - container:container_name:rw
 ```
 
-> **Notes**
+> Changed in [version 2](compose-versioning.md#version-2) file format.
 >
->* The `container:...` formats are only supported in the
-> [version 2 file format](compose-versioning.md#version-2).
->
->* In [version 1](compose-versioning.md#version-1), you can use
-> container names without marking them as such:
+> The `container:...` formats are only supported in the [version 2](compose-versioning.md#version-2)
+> file format. In [version 1](compose-versioning.md#version-1), you can use container
+> names without marking them as such:
 >
 >     - `service_name`
 >     - `service_name:ro`
@@ -1541,10 +1568,13 @@ restart: unless-stopped
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 
-> **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
-> `cpu_count`, `cpu_percent`, `cpus`.
-> The following options were added in [version 2.1](compose-versioning.md#version-21):
-> `oom_kill_disable`, `cpu_period`
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
+>
+> The `cpu_count`, `cpu_percent`, and `cpus` options were added in [version 2.2](compose-versioning.md#version-22).
+
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> The `oom_kill_disable` and `cpu_period` options were added in [version 2.1](compose-versioning.md#version-21).
 
 ```yaml
 cpu_count: 2
@@ -1710,12 +1740,14 @@ volumes:
       name: actual-name-of-volume
 ```
 
-> **Note**: In newer versions of Compose, the `external.name` property is
-> deprecated in favor of simply using the `name` property.
+> Deprecated in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> external.name was deprecated in version 2.1 file format use `name` instead.
+{: .important }
 
 ### labels
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
@@ -1740,7 +1772,7 @@ labels:
 
 ### name
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21)
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Set a custom name for this volume. The name field can be used to reference
 volumes that contain special characters. The name is used as is
@@ -1783,9 +1815,11 @@ The Docker Engine returns an error if the driver is not available.
 driver: overlay
 ```
 
-Starting in Compose file format 2.1, overlay networks are always created as
-`attachable`, and this is not configurable. This means that standalone
-containers can connect to overlay networks.
+> Changed in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> Starting in Compose file format 2.1, overlay networks are always created as
+> `attachable`, and this is not configurable. This means that standalone
+> containers can connect to overlay networks.
 
 ### driver_opts
 
@@ -1801,7 +1835,7 @@ driver_opts:
 
 ### enable_ipv6
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Enable IPv6 networking on this network.
 
@@ -1846,7 +1880,7 @@ you can set this option to `true`.
 
 ### labels
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
@@ -1920,7 +1954,7 @@ Not supported for version 2 `docker-compose` files. Use
 
 ### name
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21)
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Set a custom name for this network. The name field can be used to reference
 networks which contain special characters. The name is used as is
@@ -1949,7 +1983,7 @@ networks:
 
 ## Extension fields
 
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 {% include content/compose-extfields-sub.md %}
 
