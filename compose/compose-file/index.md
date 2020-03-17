@@ -3,7 +3,7 @@ description: Compose file reference
 keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
-- /compose/compose-file-v3.md
+- /compose/compose-file-v3/
 title: Compose file version 3 reference
 toc_max: 4
 toc_min: 1
@@ -146,21 +146,21 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
-They both work.
+> **Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> They both work.
 
 A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
-`docker container create`. Likewise, network and volume definitions are analogous to
+`docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker container create`, options specified in the Dockerfile, such as `CMD`,
+As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like
-`${VARIABLE}` syntax - see
-[variable substitution](#variable-substitution) for full details.
+`${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
+full details.
 
 This section contains a list of all configuration options supported by a service
 definition in version 3.
@@ -243,7 +243,7 @@ build process.
 
 First, specify the arguments in your Dockerfile:
 
-```Dockerfile
+```dockerfile
 ARG buildno
 ARG gitcommithash
 
@@ -289,7 +289,7 @@ args:
 
 #### cache_from
 
-> **Note**: This option is new in v3.2
+> Added in [version 3.2](compose-versioning.md#version-32) file format
 
 A list of images that the engine uses for cache resolution.
 
@@ -303,13 +303,13 @@ build:
 
 #### labels
 
-> **Note**: This option is new in v3.3
+> Added in [version 3.3](compose-versioning.md#version-33) file format
 
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
-We recommend that you use reverse-DNS notation to prevent your labels from conflicting with
-those used by other software.
+It's recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.
 
 ```yaml
 build:
@@ -520,7 +520,8 @@ an error.
 
 ### credential_spec
 
-> **Note**: This option was added in v3.3. Using group Managed Service Account (gMSA) configurations with compose files is supported in Compose version 3.8.
+> **Note**: This option was added in v3.3. Using group Managed Service Account
+> (gMSA) configurations with compose files is supported in Compose version 3.8.
 
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
@@ -552,8 +553,9 @@ credential_spec:
 #### Example gMSA configuration
 When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
-```
-version: "3.8"
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   myservice:
     image: myimage:latest
@@ -567,16 +569,14 @@ configs:
 
 ### depends_on
 
-Express dependency between services, Service dependencies cause the following
+Express dependency between services. Service dependencies cause the following
 behaviors:
 
 - `docker-compose up` starts services in dependency order. In the following
   example, `db` and `redis` are started before `web`.
-
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
+  dependencies. In the example below, `docker-compose up web` also
   creates and starts `db` and `redis`.
-
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
 
@@ -602,9 +602,7 @@ services:
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 >   for more on this problem and strategies for solving it.
->
 > - Version 3 no longer supports the `condition` form of `depends_on`.
->
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
@@ -986,12 +984,12 @@ The entrypoint can also be a list, in a manner similar to
 
 ```yaml
 entrypoint:
-    - php
-    - -d
-    - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
-    - -d
-    - memory_limit=-1
-    - vendor/bin/phpunit
+  - php
+  - -d
+  - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+  - -d
+  - memory_limit=-1
+  - vendor/bin/phpunit
 ```
 
 > **Note**: Setting `entrypoint` both overrides any default entrypoint set
@@ -1018,14 +1016,14 @@ env_file: .env
 env_file:
   - ./common.env
   - ./apps/web.env
-  - /opt/secrets.env
+  - /opt/runtime_opts.env
 ```
 
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
 beginning with `#` are treated as comments and are ignored. Blank lines are
 also ignored.
 
-```bash
+```console
 # Set Rails/Rack environment
 RACK_ENV=development
 ```
@@ -1056,14 +1054,14 @@ services:
 
 And the following files:
 
-```bash
+```console
 # a.env
 VAR=1
 ```
 
 and
 
-```bash
+```console
 # b.env
 VAR=hello
 ```
@@ -1105,8 +1103,8 @@ accessible to linked services. Only the internal port can be specified.
 
 ```yaml
 expose:
- - "3000"
- - "8000"
+  - "3000"
+  - "8000"
 ```
 
 ### external_links
@@ -1118,20 +1116,20 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
 ```yaml
 external_links:
- - redis_1
- - project_db_1:mysql
- - project_db_1:postgresql
+  - redis_1
+  - project_db_1:mysql
+  - project_db_1:postgresql
 ```
 
 > **Notes:**
 >
-> If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
-must be connected to at least one of the same networks as the service that is
-linking to them. [Links](compose-file-v2#links) are a
-legacy option. We recommend using [networks](#networks) instead.
+> If you're using the [version 2 or above file format](compose-versioning.md#version-2),
+> the externally-created  containers must be connected to at least one of the same
+> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> are a legacy option. We recommend using [networks](#networks) instead.
 >
 > This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-with a (version 3) Compose file.
+> with a (version 3) Compose file.
 
 ### extra_hosts
 
@@ -1139,13 +1137,13 @@ Add hostname mappings. Use the same values as the docker client `--add-host` par
 
 ```yaml
 extra_hosts:
- - "somehost:162.242.195.82"
- - "otherhost:50.31.209.229"
+  - "somehost:162.242.195.82"
+  - "otherhost:50.31.209.229"
 ```
 
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
 
-```none
+```console
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ```
@@ -1168,10 +1166,11 @@ healthcheck:
   start_period: 40s
 ```
 
-`interval`, `timeout` and `start_period` are specified as [durations](#specifying-durations).
+`interval`, `timeout` and `start_period` are specified as
+[durations](#specifying-durations).
 
 > **Note**: `start_period` is only supported for v3.4 and higher of the compose
-file format.
+> file format.
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
@@ -1192,8 +1191,8 @@ test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
 test: curl -f https://localhost || exit 1
 ```
 
-To disable any default healthcheck set by the image, you can use `disable:
-true`. This is equivalent to specifying `test: ["NONE"]`.
+To disable any default healthcheck set by the image, you can use `disable: true`.
+This is equivalent to specifying `test: ["NONE"]`.
 
 ```yaml
 healthcheck:
@@ -1205,11 +1204,21 @@ healthcheck:
 Specify the image to start the container from. Can either be a repository/tag or
 a partial image ID.
 
-    image: redis
-    image: ubuntu:14.04
-    image: tutum/influxdb
-    image: example-registry.com:4000/postgresql
-    image: a4bc65fd
+```yaml
+image: redis
+```
+```yaml
+image: ubuntu:18.04
+```
+```yaml
+image: tutum/influxdb
+```
+```yaml
+image: example-registry.com:4000/postgresql
+```
+```yaml
+image: a4bc65fd
+```
 
 If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
@@ -1276,14 +1285,14 @@ containers in a more controlled way.
 {:.warning}
 
 Link to containers in another service. Either specify both the service name and
-a link alias (`SERVICE:ALIAS`), or just the service name.
+a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
 ```yaml
 web:
   links:
-   - db
-   - db:database
-   - redis
+    - "db"
+    - "db:database"
+    - "redis"
 ```
 
 Containers for the linked service are reachable at a hostname identical to
@@ -1299,12 +1308,11 @@ Links also express dependency between services in the same way as
 > **Notes**
 >
 > * If you define both links and [networks](#networks), services with
-> links between them must share at least one network in common to
-> communicate.
->
-> *  This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+>   links between them must share at least one network in common to
+>   communicate.
+> * This option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a (version 3) Compose file.
 
 ### logging
 
@@ -1323,13 +1331,19 @@ containers, as with the ``--log-driver`` option for docker run
 
 The default value is json-file.
 
-    driver: "json-file"
-    driver: "syslog"
-    driver: "none"
+```yaml
+driver: "json-file"
+```
+```yaml
+driver: "syslog"
+```
+```yaml
+driver: "none"
+```
 
-> **Note**: Only the `json-file` and `journald` drivers make the logs
-available directly from `docker-compose up` and `docker-compose logs`.
-Using any other driver does not print any logs.
+> **Note**: Only the `json-file` and `journald` drivers make the logs available
+> directly from `docker-compose up` and `docker-compose logs`. Using any other
+> driver does not print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
 
@@ -1381,11 +1395,21 @@ For a full list of supported logging drivers and their options, see
 Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
 
-    network_mode: "bridge"
-    network_mode: "host"
-    network_mode: "none"
-    network_mode: "service:[service name]"
-    network_mode: "container:[container name/id]"
+```yaml
+network_mode: "bridge"
+```
+```yaml
+network_mode: "host"
+```
+```yaml
+network_mode: "none"
+```
+```yaml
+network_mode: "service:[service name]"
+```
+```yaml
+network_mode: "container:[container name/id]"
+```
 
 > **Notes**
 >
@@ -1425,11 +1449,11 @@ services:
     networks:
       some-network:
         aliases:
-         - alias1
-         - alias3
+          - alias1
+          - alias3
       other-network:
         aliases:
-         - alias2
+          - alias2
 ```
 
 In the example below, three services are provided (`web`, `worker`, and `db`),
@@ -1502,7 +1526,9 @@ networks:
 
 ### pid
 
-    pid: "host"
+```yaml
+pid: "host"
+```
 
 Sets the PID mode to the host PID mode.  This turns on sharing between
 container and the host operating system the PID address space.  Containers
@@ -1527,14 +1553,15 @@ port (an ephemeral host port is chosen).
 
 ```yaml
 ports:
- - "3000"
- - "3000-3005"
- - "8000:8000"
- - "9090-9091:8080-8081"
- - "49100:22"
- - "127.0.0.1:8001:8001"
- - "127.0.0.1:5000-5010:5000-5010"
- - "6060:6060/udp"
+  - "3000"
+  - "3000-3005"
+  - "8000:8000"
+  - "9090-9091:8080-8081"
+  - "49100:22"
+  - "127.0.0.1:8001:8001"
+  - "127.0.0.1:5000-5010:5000-5010"
+  - "6060:6060/udp"
+  - "12400-12500:1240"
 ```
 
 #### Long syntax
@@ -1687,8 +1714,13 @@ handle SIGTERM (or whatever stop signal has been specified with
 [`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
-    stop_grace_period: 1s
-    stop_grace_period: 1m30s
+```yaml
+stop_grace_period: 1s
+```
+
+```yaml
+stop_grace_period: 1m30s
+```
 
 By default, `stop` waits 10 seconds for the container to exit before sending
 SIGKILL.
@@ -1731,8 +1763,6 @@ parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-na
 
 ### tmpfs
 
-> [Version 2 file format](compose-versioning.md#version-2) and up.
-
 Mount a temporary file system inside the container. Can be a single value or a list.
 
 ```yaml
@@ -1765,7 +1795,6 @@ of the tmpfs mount in bytes. Unlimited by default.
 
 Override the default ulimits for a container. You can either specify a single
 limit as an integer or soft/hard limits as a mapping.
-
 
 ```yaml
 ulimits:
@@ -1848,7 +1877,7 @@ volumes:
 Optionally specify a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 
-You can mount a relative path on the host, that expands relative to
+You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 
@@ -1888,7 +1917,9 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
-- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
+- `consistency`: the consistency requirements of the mount, one of `consistent`
+  (host and container have identical view), `cached` (read cache, host view is
+  authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1954,23 +1985,19 @@ services:
 
 #### Caching options for volume mounts (Docker Desktop for Mac)
 
-On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
-configure container-and-host consistency requirements for bind-mounted
+You can configure container-and-host consistency requirements for bind-mounted
 directories in Compose files to allow for better performance on read/write of
 volume mounts. These options address issues specific to `osxfs` file sharing,
 and therefore are only applicable on Docker Desktop for Mac.
 
 The flags are:
 
-* `consistent`: Full consistency. The container runtime and the
-host maintain an identical view of the mount at all times.  This is the default.
-
-* `cached`: The host's view of the mount is authoritative. There may be
-delays before updates made on the host are visible within a container.
-
-* `delegated`: The container runtime's view of the mount is
-authoritative. There may be delays before updates made in a container
-are visible on the host.
+* `consistent`: Full consistency. The container runtime and the host maintain an
+  identical view of the mount at all times.  This is the default.
+* `cached`: The host's view of the mount is authoritative. There may be delays
+  before updates made on the host are visible within a container.
+* `delegated`: The container runtime's view of the mount is authoritative. There
+  may be delays before updates made in a container are visible on the host.
 
 Here is an example of configuring a volume as `cached`:
 
@@ -2026,7 +2053,6 @@ format that looks like this:
 
 The supported units are `us`, `ms`, `s`, `m` and `h`.
 
-
 ## Specifying byte values
 
 Some configuration options, such as the `shm_size` sub-option for
@@ -2042,18 +2068,17 @@ that looks like this:
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
 `mb` and `gb`. Decimal values are not supported at this time.
 
-
 ## Volume configuration reference
 
-While it is possible to declare [volumes](#volumes) on the file as part of the
-service declaration, this section allows you to create named volumes (without
-relying on `volumes_from`) that can be reused across multiple services, and are
-easily retrieved and inspected using the docker command line or API. See the
-[docker volume](/engine/reference/commandline/volume_create.md) subcommand
-documentation for more information.
+While it is possible to declare [volumes](#volumes) on the fly as part of the
+service declaration, this section allows you to create named volumes that can be
+reused across multiple services (without relying on `volumes_from`), and are
+easily retrieved and inspected using the docker command line or API.
+See the [docker volume](/engine/reference/commandline/volume_create.md)
+subcommand documentation for more information.
 
-See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
-Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+See [use volumes](/engine/admin/volumes/volumes.md) and [volume
+plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
@@ -2212,12 +2237,10 @@ volumes:
 The top-level `networks` key lets you specify networks to be created.
 
 * For a full explanation of Compose's use of Docker networking features and all
-network driver options, see the [Networking guide](../networking.md).
-
+  network driver options, see the [Networking guide](/compose/networking.md).
 * For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
-tutorials on networking, start with [Designing Scalable, Portable Docker
-Container
-Networks](https://github.com/docker/labs/blob/master/networking/README.md)
+  tutorials on networking, start with [Designing Scalable, Portable Docker
+  Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 
 ### driver
 
@@ -2584,7 +2607,7 @@ stack.
 ## Compose documentation
 
 - [User guide](/compose/index.md)
-- [Installing Compose](/compose/install/)
+- [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Samples](/samples/)
 - [Command line reference](/compose/reference/)
