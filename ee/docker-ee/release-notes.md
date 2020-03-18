@@ -659,12 +659,12 @@ The missing rules are :
 
 2019-02-28
 
-### Networking fixes for Docker Engine EE and CE
+### Networking fixes
 * Windows: now avoids regeneration of network IDs to prevent broken references to networks. [docker/engine#149](https://github.com/docker/engine/pull/149)
 * Windows: Fixed an issue to address `- restart always` flag on standalone containers not working when specifying a network. (docker/escalation#1037)
 * Fixed an issue to address the IPAM state from networkdb if the manager is not attached to the overlay network. (docker/escalation#1049)
 
-### Runtime fixes and updates for Docker Engine EE and CE
+### Runtime fixes and updates
 
 * Updated to Go version 1.10.8.
 * Modified names in the container name generator. [docker/engine#159](https://github.com/docker/engine/pull/159)
@@ -705,12 +705,12 @@ MountFlags=
 ```
 Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
 
-### Security fixes for Docker Engine EE and CE
+### Security fixes
 * Upgraded Go language to 1.10.6 to resolve [CVE-2018-16873](https://nvd.nist.gov/vuln/detail/CVE-2018-16873), [CVE-2018-16874](https://nvd.nist.gov/vuln/detail/CVE-2018-16874), and [CVE-2018-16875](https://nvd.nist.gov/vuln/detail/CVE-2018-16875).
 * Fixed authz plugin for 0-length content and path validation.
 * Added `/proc/asound` to masked paths [docker/engine#126](https://github.com/docker/engine/pull/126)
 
-### Improvements for Docker Engine EE and CE
+### Improvements
 * Updated to BuildKit 0.3.3 [docker/engine#122](https://github.com/docker/engine/pull/122)
 * Updated to containerd 1.2.2 [docker/engine#144](https://github.com/docker/engine/pull/144)
 * Provided additional warnings for use of deprecated legacy overlay and devicemapper storage drivers [docker/engine#85](https://github.com/docker/engine/pull/85)
@@ -718,7 +718,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 * Added bash completion for experimental CLI commands (manifest) [docker/cli#1542](https://github.com/docker/cli/pull/1542)
 * Windows: allow process isolation on Windows 10 [docker/engine#81](https://github.com/docker/engine/pull/81)
 
-### Fixes for Docker Engine EE and CE
+### Fixes
 * Disable kmem accounting in runc on RHEL/CentOS (docker/escalation#614, docker/escalation#692) [docker/engine#121](https://github.com/docker/engine/pull/121)
 * Fixed inefficient networking configuration [docker/engine#123](https://github.com/docker/engine/pull/123)
 * Fixed docker system prune doesn't accept until filter [docker/engine#122](https://github.com/docker/engine/pull/122)
@@ -768,7 +768,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 * [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee)
 * [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Engine - Enterprise to run containers not signed by a specific organization.
 
-### New features for Docker Engine EE and CE
+### New features
 
 * Updated API version to 1.39 [moby/moby#37640](https://github.com/moby/moby/pull/37640)
 * Added support for remote connections using SSH [docker/cli#1014](https://github.com/docker/cli/pull/1014)
@@ -796,7 +796,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 * Moved the `POST /session` endpoint out of experimental. [moby/moby#40028](https://github.com/moby/moby/pull/40028)
 
 
-### Improvements for Docker Engine EE and CE
+### Improvements
 
 * Does not return "`<unknown>`" in /info response [moby/moby#37472](https://github.com/moby/moby/pull/37472)
 * BuildKit: Changes `--console=[auto,false,true]` to `--progress=[auto,plain,tty]` [docker/cli#1276](https://github.com/docker/cli/pull/1276)
@@ -818,7 +818,7 @@ Update your configuration if this command prints a non-empty value for `MountFla
 * Builds binaries with Go 1.10.4 [docker-ce-packaging#181](https://github.com/docker/docker-ce-packaging/pull/181)
 * Removes `-ce` / `-ee` suffix from version string [docker-ce-packaging#206](https://github.com/docker/docker-ce-packaging/pull/206)
 
-### Fixes for Docker Engine EE and CE
+### Fixes
 
 * BuildKit: Do not cancel buildkit status request. [moby/moby#37597](https://github.com/moby/moby/pull/37597)
 * Fixes no error is shown if build args are missing during docker build [moby/moby#37396](https://github.com/moby/moby/pull/37396)
