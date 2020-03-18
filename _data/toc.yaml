@@ -142,12 +142,8 @@ guides:
       title: Configure and run Docker
     - path: /config/daemon/systemd/
       title: Control Docker with systemd
-  - sectiontitle: Work with external tools
-    section:
-    - path: /config/thirdparty/
-      title: Third-party monitoring tools
-    - path: /config/thirdparty/prometheus/
-      title: Collect Docker metrics with Prometheus
+  - path: /config/daemon/prometheus/
+    title: Collect metrics with Prometheus
   - sectiontitle: Configure containers
     section:
     - path: /config/containers/start-containers-automatically/
@@ -196,16 +192,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - sectiontitle: Work with external tools
-      section:
-      - path: /config/thirdparty/dsc/
-        title: PowerShell DSC usage
-      - path: /config/thirdparty/ansible/
-        title: Ansible
-      - path: /config/thirdparty/chef/
-        title: Chef
-      - path: /config/thirdparty/puppet/
-        title: Puppet
     - sectiontitle: Security
       section:
       - path: /engine/security/security/
