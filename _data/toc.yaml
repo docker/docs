@@ -1167,6 +1167,8 @@ manuals:
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
+  - path: /compose/release-notes/
+    title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/swarm/
@@ -1421,6 +1423,8 @@ manuals:
       title: Machine overview
     - path: /machine/install-machine/
       title: Install Machine
+    - path: /machine/release-notes/
+      title: Release notes
     - path: /machine/get-started/
       title: Get started with a local VM
     - path: /machine/get-started-cloud/
@@ -1517,14 +1521,14 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-      - path: /release-notes/docker-machine/
-        title: Docker Machine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
       title: Swarm overview
     - path: /swarm/get-swarm/
       title: How to get Swarm
+    - path: /swarm/release-notes/
+      title: Release notes
     - path: /swarm/install-w-machine/
       title: Evaluate Swarm in a sandbox
     - path: /swarm/plan-for-production/
@@ -1581,8 +1585,6 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
-    - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/

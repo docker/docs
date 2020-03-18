@@ -3,6 +3,8 @@ title: Docker Machine release notes
 description: Release notes for Docker Machine
 keywords: release notes, machine
 toc_max: 2
+redirect_from:
+  - /release-notes/docker-machine/
 ---
 
 ## 0.16.0 (2018-11-08)

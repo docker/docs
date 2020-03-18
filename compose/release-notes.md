@@ -3,6 +3,8 @@ title: Docker Compose release notes
 description: Release notes for Docker Compose
 keywords: release notes, compose
 toc_max: 2
+redirect_from:
+  - /release-notes/docker-compose/
 ---
 
 ## 1.25.4
