@@ -1,4 +1,4 @@
-{% capture tabChar %} {% endcapture %}<!-- Make sure atom is using hard tabs -->
+{% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
 {% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
