@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - master
+      # TODO remove next line with branch switch-stage-to-s3 before merging PR
+      - switch-stage-to-s3
 
 jobs:
   build-static-page:
