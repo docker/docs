@@ -74,7 +74,7 @@ You can also build with content trust. Before running the `docker build` command
 you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or 
 in a scripted fashion. Consider the simple Dockerfile below.
 
-```Dockerfile
+```dockerfile
 FROM docker/trusttest:latest
 RUN echo
 ```

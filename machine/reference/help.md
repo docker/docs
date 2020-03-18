@@ -15,8 +15,9 @@ Usage: docker-machine help _subcommand_
 
 For example:
 
-```none
+```bash
 $ docker-machine help config
+
 Usage: docker-machine config [OPTIONS] [arg...]
 
 Print the connection config for machine

@@ -1,4 +1,4 @@
-{% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
+{% capture tabChar %} {% endcapture %}<!-- Make sure atom is using hard tabs -->
 {% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
@@ -91,6 +91,18 @@ your client and daemon API versions.
 ```
 
 {% endif %}
+{% unless controller_data.long == controller_data.short %}
+
+## Extended description
+
+{{ controller_data.long }}
+
+{% endunless %}
+
+{% if controller_data.examples %}
+For example uses of this command, refer to the [examples section](#examples) below.
+{% endif %}
+
 {% if controller_data.options %}
   {% if controller_data.inherited_options %}
     {% assign alloptions = controller_data.options | concat:controller_data.inherited_options %}
@@ -132,27 +144,17 @@ your client and daemon API versions.
 
 {% endif %} <!-- end if options -->
 
-{% if controller_data.cname %}
+{% if controller_data.examples %}
 
-## Child commands
+## Examples
 
-<table>
-<thead>
-  <tr>
-    <td>Command</td>
-    <td>Description</td>
-  </tr>
-</thead>
-<tbody>
-{% for command in controller_data.cname %}
-  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-  <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
-    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
-  </tr>
-{% endfor %}
-</tbody>
-</table>
+{{ controller_data.examples }}
+
+{% endif %}
+{% else %}
+
+The include.datafolder or include.datafile was not set.
+
 {% endif %}
 
 {% if controller_data.pname %}
@@ -174,6 +176,29 @@ your client and daemon API versions.
 | [{{ controller_data.pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
 {% endunless %}
+{% endif %}
+
+{% if controller_data.cname %}
+
+## Child commands
+
+<table>
+<thead>
+  <tr>
+    <td>Command</td>
+    <td>Description</td>
+  </tr>
+</thead>
+<tbody>
+{% for command in controller_data.cname %}
+  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  <tr>
+    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
 {% endif %}
 
 {% unless controller_data.pname == "docker" or controller_data.pname == "dockerd" or include.datafile=="docker" %}
@@ -199,24 +224,3 @@ your client and daemon API versions.
 </table>
 
 {% endunless %}
-
-{% unless controller_data.long == controller_data.short %}
-
-## Extended description
-
-{{ controller_data.long }}
-
-{% endunless %}
-
-{% if controller_data.examples %}
-
-## Examples
-
-{{ controller_data.examples }}
-
-{% endif %}
-{% else %}
-
-The include.datafolder or include.datafile was not set.
-
-{% endif %}

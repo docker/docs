@@ -8,7 +8,7 @@ hide_from_sitemap: true
 See which machine is "active" (a machine is considered active if the
 `DOCKER_HOST` environment variable points to it).
 
-```none
+```bash
 $ docker-machine ls
 
 NAME      ACTIVE   DRIVER         STATE     URL

@@ -17,7 +17,8 @@ Description:
 
 For example:
 
-```none
+```bash
 $ docker-machine start dev
+
 Starting VM...
 ```
