@@ -20,24 +20,6 @@ pipeline {
         expression { env.GIT_URL == 'https://github.com/Docker/docker.github.io.git' }
       }
       stages {
-        stage( 'build + push stage image, update stage swarm' ) {
-          when {
-            branch 'master'
-          }
-          steps {
-            sh """
-              cat $SUCCESS_BOT_TOKEN | docker login  $DTR_URL --username 'success_bot' --password-stdin
-              docker build -t $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} .
-              docker push $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER}
-              unzip -o $UCP_BUNDLE
-              export DOCKER_TLS_VERIFY=1
-              export COMPOSE_TLS_VERSION=TLSv1_2
-              export DOCKER_CERT_PATH=${WORKSPACE}/ucp-bundle-success_bot
-              export DOCKER_HOST=$DOCKER_HOST_STRING
-              docker service update --detach=false --force --image $DTR_URL/docker/docker.github.io:stage-${env.BUILD_NUMBER} docs-stage-docker-com_docs --with-registry-auth
-            """
-          }
-        }
         stage( 'build + push prod image, update prod swarm' ) {
           when {
             branch 'published'
