@@ -1106,6 +1106,43 @@ manuals:
       title: Optional Linux post-installation steps
   - path: /engine/release-notes/
     title: Release notes
+  - sectiontitle: Previous versions
+    section:
+    - path: /engine/release-notes/18.09/
+      title: Engine 18.09 release notes
+    - path: /engine/release-notes/18.06/
+      title: Engine 18.06 release notes
+    - path: /engine/release-notes/18.05/
+      title: Engine 18.05 release notes
+    - path: /engine/release-notes/18.04/
+      title: Engine 18.04 release notes
+    - path: /engine/release-notes/18.03/
+      title: Engine 18.03 release notes
+    - path: /engine/release-notes/18.02/
+      title: Engine 18.02 release notes
+    - path: /engine/release-notes/18.01/
+      title: Engine 18.01 release notes
+    - path: /engine/release-notes/17.12/
+      title: Engine 17.12 release notes
+    - path: /engine/release-notes/17.11/
+      title: Engine 17.11 release notes
+    - path: /engine/release-notes/17.10/
+      title: Engine 17.10 release notes
+    - path: /engine/release-notes/17.09/
+      title: Engine 17.09 release notes
+    - path: /engine/release-notes/17.07/
+      title: Engine 17.07 release notes
+    - path: /engine/release-notes/17.06/
+      title: Engine 17.06 release notes
+    - path: /engine/release-notes/17.05/
+      title: Engine 17.05 release notes
+    - path: /engine/release-notes/17.04/
+      title: Engine 17.04 release notes
+    - path: /engine/release-notes/17.03/
+      title: Engine 17.03 release notes
+    - path: /engine/release-notes/prior-releases/
+      title: Engine 1.13 and earlier
+
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1130,6 +1167,8 @@ manuals:
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
+  - path: /compose/release-notes/
+    title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/swarm/
@@ -1378,16 +1417,14 @@ manuals:
   title: Release notes
 - sectiontitle: Superseded products and tools
   section:
-  - path: /cs-engine/1.13/release-notes/
-    title: CS Docker Engine
-  - path: /release-notes/docker-engine/
-    title: Docker (1.13 and earlier)
   - sectiontitle: Docker Machine
     section:
     - path: /machine/overview/
       title: Machine overview
     - path: /machine/install-machine/
       title: Install Machine
+    - path: /machine/release-notes/
+      title: Release notes
     - path: /machine/get-started/
       title: Get started with a local VM
     - path: /machine/get-started-cloud/
@@ -1484,14 +1521,14 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-      - path: /release-notes/docker-machine/
-        title: Docker Machine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
       title: Swarm overview
     - path: /swarm/get-swarm/
       title: How to get Swarm
+    - path: /swarm/release-notes/
+      title: Release notes
     - path: /swarm/install-w-machine/
       title: Evaluate Swarm in a sandbox
     - path: /swarm/plan-for-production/
@@ -1548,8 +1585,6 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
-    - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
