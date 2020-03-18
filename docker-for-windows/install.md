@@ -39,7 +39,11 @@ used side-by-side with Docker Desktop. However, you can still use
 
 ### What's included in the installer
 
-The Docker Desktop installation includes [Docker Engine](/install/), Docker CLI client, [Docker Compose](/compose/overview.md), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+The Docker Desktop installation includes [Docker Engine](/engine/index.md),
+Docker CLI client, [Docker Compose](/compose/index.md),
+[Notary](/notary/getting_started.md),
+[Kubernetes](https://github.com/kubernetes/kubernetes/),
+and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows

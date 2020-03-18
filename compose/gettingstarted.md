@@ -11,7 +11,7 @@ understandable even if you're not familiar with it.
 
 ## Prerequisites
 
-Make sure you have already installed both [Docker Engine](/install/index.md)
+Make sure you have already installed both [Docker Engine](/get-docker.md)
 and [Docker Compose](install.md). You don't need to install Python or Redis, as
 both are provided by Docker images.
 

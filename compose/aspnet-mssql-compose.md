@@ -9,7 +9,7 @@ Compose to set up and run the sample ASP.NET Core application using the
 [.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk)
 with the
 [SQL Server on Linux image](https://hub.docker.com/_/microsoft-mssql-server).
-You just need to have [Docker Engine](/install/index.md)
+You just need to have [Docker Engine](/get-docker.md)
 and [Docker Compose](/compose/install.md) installed on your
 platform of choice: Linux, Mac or Windows.
 

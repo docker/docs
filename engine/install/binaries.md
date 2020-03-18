@@ -1,10 +1,11 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
-title: Install Docker Engine - Community from binaries
+title: Install Docker Engine from binaries
 redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
+- /install/linux/docker-ce/binaries/
 ---
 
 > **Note**: You may have been redirected to this page because there is no longer
@@ -79,7 +80,7 @@ instructions for enabling and configuring AppArmor or SELinux.
     [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
     (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
-    version of Docker Engine - Community you want to install.
+    version of Docker Engine you want to install.
 
 2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
     binaries are extracted.
@@ -124,7 +125,7 @@ The macOS binary includes the Docker client only. It does not include the
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
     (or change `stable` to `nightly` or `test`),
-    and download the `.tgz` file relating to the version of Docker Engine - Community you want
+    and download the `.tgz` file relating to the version of Docker Engine you want
     to install.
 
 2.  Extract the archive using the `tar` utility. The `docker` binary is
@@ -155,13 +156,13 @@ The macOS binary includes the Docker client only. It does not include the
 
 ## Upgrade static binaries
 
-To upgrade your manual installation of Docker Engine - Community, first stop any
+To upgrade your manual installation of Docker Engine, first stop any
 `dockerd` or `dockerd.exe`  processes running locally, then follow the
 regular installation steps to install the new version on top of the existing
 version.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Continue to [Post-installation steps for Linux](linux-postinstall.md).
 - Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
 - Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.

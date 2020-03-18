@@ -1,31 +1,31 @@
 ---
-description: Instructions for installing Docker Engine - Community on Debian
+description: Instructions for installing Docker Engine on Debian
 keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 - /engine/installation/linux/docker-ce/debian/
-title: Get Docker Engine - Community for Debian
+- /install/linux/docker-ce/debian/
+title: Install Docker Engine on Debian
 toc_max: 4
 ---
 
-To get started with Docker Engine - Community on Debian, make sure you
+To get started with Docker Engine on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ce).
+[install Docker](#installation-methods).
 
 ## Prerequisites
- 
 
 ### OS requirements
 
-To install Docker Engine - Community, you need the 64-bit version of one of these Debian or
+To install Docker Engine, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
 - Buster 10 (stable)
 - Stretch 9 / Raspbian Stretch
 
-Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
 ### Uninstall old versions
 
@@ -39,11 +39,11 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
+networks, are preserved. The Docker Engine package is now called `docker-ce`.
 
-## Install Docker Engine - Community
+## Installation methods
 
-You can install Docker Engine - Community in different ways, depending on your needs:
+You can install Docker Engine in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -61,7 +61,7 @@ You can install Docker Engine - Community in different ways, depending on your n
 
 ### Install using the repository
 
-Before you install Docker Engine - Community for the first time on a new host machine, you need
+Before you install Docker Engine for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
@@ -74,15 +74,12 @@ from the repository.
 
 {% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
-1.  Update the `apt` package index:
+1.  Update the `apt` package index and install packages to allow `apt` to use a
+    repository over HTTPS:
 
     ```bash
     $ sudo apt-get update
-    ```
 
-2.  Install packages to allow `apt` to use a repository over HTTPS:
-
-    ```bash
     $ sudo apt-get install \
         apt-transport-https \
         ca-certificates \
@@ -91,7 +88,7 @@ from the repository.
         software-properties-common
     ```
 
-3.  Add Docker's official GPG key:
+2.  Add Docker's official GPG key:
 
     ```bash
     $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
@@ -110,9 +107,9 @@ from the repository.
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-4.  Use the following command to set up the **stable** repository. To add the
+3.  Use the following command to set up the **stable** repository. To add the
     **nightly** or **test** repository, add the word `nightly` or `test` (or both)
-    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](/install/index.md).
+    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Debian distribution, such as `helium`. Sometimes, in a distribution
@@ -159,20 +156,16 @@ from the repository.
     </div>
     </div> <!-- tab-content -->
 
-#### Install Docker Engine - Community
+#### Install Docker Engine
 
 > **Note**: This procedure works for Debian on `x86_64` / `amd64`, Debian ARM,
 > or Raspbian.
 
-1.  Update the `apt` package index.
+1. Update the `apt` package index, and install the _latest version_ of Docker
+   Engine and containerd, or go to the next step to install a specific version:
 
     ```bash
     $ sudo apt-get update
-    ```
-
-2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
-
-    ```bash
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
@@ -183,7 +176,8 @@ from the repository.
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-3.  To install a _specific version_ of Docker Engine - Community, list the available versions in the repo, then select and install:
+2.  To install a _specific version_ of Docker Engine, list the available versions
+    in the repo, then select and install:
 
     a. List the versions available in your repo:
 
@@ -204,7 +198,7 @@ from the repository.
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
-4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
+3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -214,34 +208,33 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker Engine - Community is installed and running. The `docker` group is created but no users
+Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
+users to run Docker commands and for other optional configuration steps.
 
-#### Upgrade Docker Engine - Community
+#### Upgrade Docker Engine
 
-To upgrade Docker Engine - Community, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker-ce), choosing the new version you want
-to install.
+To upgrade Docker Engine, first run `sudo apt-get update`, then follow the
+[installation instructions](#install-using-the-repository), choosing the new
+version you want to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker Engine - Community, you can download the
+If you cannot use Docker's repository to install Docker Engine, you can download the
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
-    choose your Debian version, browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64` and download the `.deb` file for the Docker Engine - Community version
+    choose your Debian version, then browse to `pool/stable/`, choose `amd64`,
+    `armhf`, or `arm64` and download the `.deb` file for the Docker version
     you want to install.
 
-    > **Note**: To install a **nightly**  package, change the word
-    > `stable` in the  URL to `nightly`.
-    > [Learn about **nightly** and **test** channels](/install/index.md).
+    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > change the word `stable` in the above URL to `nightly` or `test`.
+    > [Learn about **nightly** and **test** channels](index.md).
 
-2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
+2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -250,7 +243,7 @@ a new file each time you want to upgrade Docker.
 
     The Docker daemon starts automatically.
 
-3.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
+3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -260,25 +253,25 @@ a new file each time you want to upgrade Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker Engine - Community is installed and running. The `docker` group is created but no users
+Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.
 
-#### Upgrade Docker Engine - Community
+#### Upgrade Docker Engine
 
-To upgrade Docker Engine - Community, download the newer package file and repeat the
+To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
 
-## Uninstall Docker Engine - Community
+## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine - Community package:
+1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```bash
-    $ sudo apt-get purge docker-ce
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
@@ -293,5 +286,5 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Continue to [Post-installation steps for Linux](linux-postinstall.md).
 - Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.

@@ -6,6 +6,7 @@ redirect_from:
 - /engine/userguide/basics/
 - /engine/introduction/understanding-docker/
 - /engine/understanding-docker/
+- /engine/docker-overview/
 title: Docker overview
 ---
 
@@ -260,8 +261,6 @@ the future, Docker may support other container formats by integrating with
 technologies such as BSD Jails or Solaris Zones.
 
 ## Next steps
-- Read about [installing Docker](installation/index.md#installation).
-- Get hands-on experience with the [Getting started with Docker](getstarted/index.md)
+- Read about [installing Docker](/get-docker.md).
+- Get hands-on experience with the [Getting started with Docker](index.md)
     tutorial.
-- Check out examples and deep dive topics in the
-    [Docker Engine user guide](userguide/index.md).

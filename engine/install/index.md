@@ -1,10 +1,8 @@
 ---
-title: Docker Engine overview
+title: Install Docker Engine
 description: Lists the installation methods
-keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
+keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:
-- /install/overview/
-- /installation/
 - /engine/installation/linux/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
@@ -16,8 +14,6 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
-- /linux/
-- /edge/
 toc_max: 2
 ---
 
@@ -44,31 +40,28 @@ For more information, see [Release channels](#release-channels).
 
 ## Supported platforms
 
-Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install/)
-and [Windows](/docker-for-windows/install/) through Docker Desktop, Windows
+Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install.md)
+and [Windows](/docker-for-windows/install.md) through Docker Desktop, Windows
 Server, and as a static binary installation. Find your preferred operating
 system below.
 
 #### Desktop
 
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                                    |      x86_64       |
-|:----------------------------------------------------------------------------|:-----------------:|
-| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
-| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
+| Platform                                                     | x86_64 / amd64                              |
+|:-------------------------------------------------------------|:-------------------------------------------:|
+| [Docker Desktop for Mac (macOS)](/docker-for-mac/install.md) | [{{ yes }}](/docker-for-mac/install.md)     |
+| [Docker Desktop for Windows](/docker-for-windows/install.md) | [{{ yes }}](/docker-for-windows/install.md) |
 
 #### Server
 
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-{% assign install-prefix-ce = '/install/linux/docker-ce' %}
-
-| Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
-|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
+| Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        | IBM Power (ppc64le)    | IBM Z (s390x)          |
+|:----------------------|:-----------------------|:-------------------------|:-----------------------|:-----------------------|:-----------------------|
+| [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |                        |                        |
+| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |                        |                        |
+| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |                        |                        |
+| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
 
 ## Release channels
 
@@ -118,8 +111,8 @@ The release channel for these builds is called `nightly`.
 
 ## Support
 
-Docker Engine releases of a year-month branch are supported with patches as needed for 7 months after the first year-month general availability
-release.
+Docker Engine releases of a year-month branch are supported with patches as
+needed for one month after the the next year-month general availability release.
 
 This means bug reports and backports to release branches are assessed
 until the end-of-life date.
@@ -161,4 +154,4 @@ for it.
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Getting started with Docker](/get-started/).
+[Getting started with Docker](/get-started/index.md).

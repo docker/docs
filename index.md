@@ -63,7 +63,7 @@ containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
 
-[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](/engine/index.md){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">

@@ -215,7 +215,7 @@ Shared between centOS.md, oracle.md
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -281,7 +281,7 @@ Not shared
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -332,6 +332,6 @@ Shared between centOS.md, rhel.md, oracle.md
 ## Next steps
 
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
 
 - Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }

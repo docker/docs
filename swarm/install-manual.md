@@ -109,9 +109,9 @@ To create the instances do the following:
 
 ## Step 3. Install Engine on each node
 
-1.  [Install Docker](/install/){: target="_blank" class="_"} on each
-    host, using the appropriate instructions for your operating system and
-    distribution.
+1.  [Install Docker](/engine/install/index.md){: target="_blank" class="_"}
+    on each host, using the appropriate instructions for your operating system
+    and distribution.
 
 2.  Edit `/etc/docker/daemon.json`. Create it if it does not exist. Assuming the
     file was empty, its contents should be:

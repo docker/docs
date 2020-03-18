@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /install/
+  path: /engine/
   node: manuals
 - title: Reference
   path: /reference/
@@ -1023,22 +1023,24 @@ samples:
 manuals:
 - sectiontitle: Docker Engine
   section:
-  - path: /install/
+  - path: /engine/
     title: Overview
-  - sectiontitle: Linux
+  - path: /engine/install/
+    title: Install
+  - sectiontitle: Installation per distro
     section:
-    - path: /install/linux/docker-ce/centos/
-      title: CentOS
-    - path: /install/linux/docker-ce/debian/
-      title: Debian
-    - path: /install/linux/docker-ce/fedora/
-      title: Fedora
-    - path: /install/linux/docker-ce/ubuntu/
-      title: Ubuntu
-    - path: /install/linux/docker-ce/binaries/
-      title: Binaries
-    - path: /install/linux/linux-postinstall/
-      title: Optional Linux post-installation steps
+    - path: /engine/install/centos/
+      title: Install on CentOS
+    - path: /engine/install/debian/
+      title: Install on Debian
+    - path: /engine/install/fedora/
+      title: Install on Fedora
+    - path: /engine/install/ubuntu/
+      title: Install on Ubuntu
+    - path: /engine/install/binaries/
+      title: Install binaries
+    - path: /engine/install/linux-postinstall/
+      title: Optional post-installation steps
   - path: /engine/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
@@ -1077,6 +1079,9 @@ manuals:
       title: Engine 17.03 release notes
     - path: /engine/release-notes/prior-releases/
       title: Engine 1.13 and earlier
+  - path: /engine/deprecated/
+    title: Deprecated features
+
   - path: /app/working-with-app/
     title: Docker App
   - path: /buildx/working-with-buildx/
