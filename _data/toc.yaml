@@ -1104,10 +1104,10 @@ manuals:
       title: Binaries
     - path: /install/linux/linux-postinstall/
       title: Optional Linux post-installation steps
-  - sectiontitle: Docker Engine
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
     section:
-    - path: /engine/release-notes/
-      title: Release notes
     - path: /engine/release-notes/18.09/
       title: Engine 18.09 release notes
     - path: /engine/release-notes/18.06/
@@ -1140,6 +1140,8 @@ manuals:
       title: Engine 17.04 release notes
     - path: /engine/release-notes/17.03/
       title: Engine 17.03 release notes
+    - path: /engine/release-notes/prior-releases/
+      title: Engine 1.13 and earlier
 
 - sectiontitle: Docker Assemble
   section:
@@ -1413,10 +1415,6 @@ manuals:
   title: Release notes
 - sectiontitle: Superseded products and tools
   section:
-  - path: /cs-engine/1.13/release-notes/
-    title: CS Docker Engine
-  - path: /release-notes/docker-engine/
-    title: Docker (1.13 and earlier)
   - sectiontitle: Docker Machine
     section:
     - path: /machine/overview/

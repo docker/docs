@@ -6,7 +6,8 @@ toc_min: 1
 toc_max: 2
 skip_read_time: true
 redirect_from:
- - /release-notes/docker-ce/
+  - /release-notes/docker-ce/
+  - /release-notes/docker-engine/
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
