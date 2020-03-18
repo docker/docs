@@ -2326,7 +2326,7 @@ not reachable until one of these 2 conditions happens:
 As a workaround, send at least a packet out from each container like
 (ping, GARP, etc).
 
-## Docker EE 17.03.2-ee-8
+## 17.03.2-ee-8
 2017-12-13
 
 * Handle cleanup DNS for attachable container to prevent leak in name resolution [docker/libnetwork#1999](https://github.com/docker/libnetwork/pull/1999)
@@ -2341,13 +2341,13 @@ As a workaround, send at least a packet out from each container like
 * Don't abort when setting `may_detach_mounts` [moby/moby#35172](https://github.com/moby/moby/pull/35172)
 * Protect health monitor channel to prevent engine panic [moby/moby#35482](https://github.com/moby/moby/pull/35482)
 
-## Docker EE 17.03.2-ee-7
+## 17.03.2-ee-7
 2017-10-04
 
 * Fix logic in network resource reaping to prevent memory leak [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
 * Increase max GRPC message size to 128MB for larger snapshots so newly added managers can successfully join [docker/swarmkit#2375](https://github.com/docker/swarmkit/pull/2375)
 
-## Docker EE 17.03.2-ee-6
+## 17.03.2-ee-6
 2017-08-24
 
 * Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
@@ -2357,7 +2357,7 @@ As a workaround, send at least a packet out from each container like
 * Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
 * Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## Docker EE 17.03.2-ee-5
+## 17.03.2-ee-5
 20 Jul 2017
 
 * Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
@@ -2377,7 +2377,7 @@ As a workaround, send at least a packet out from each container like
 * Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
 * Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
 
-## Docker EE 17.03.2-ee-4
+## 17.03.2-ee-4
 2017-06-01
 
 > **Note**
@@ -2406,12 +2406,12 @@ As a workaround, send at least a packet out from each container like
 - Fix an issue preventing to deploy services if the registry cannot be reached despite the needed images being locally present [#33117](https://github.com/moby/moby/pull/33117)
 
 
-## Docker EE 17.03.1-ee-3
+## 17.03.1-ee-3
 2017-03-30
 
 * Fix an issue with the SELinux policy for Oracle Linux [#31501](https://github.com/docker/docker/pull/31501)
 
-## Docker EE 17.03.1-ee-2
+## 17.03.1-ee-2
 2017-03-28
 
 ### Remote API (v1.27) & Client
@@ -2445,7 +2445,8 @@ As a workaround, send at least a packet out from each container like
 
 * Cleanup HCS on restore [#31503](https://github.com/docker/docker/pull/31503)
 
-## Docker EE 17.03.0-ee-1 (2 Mar 2017)
+## 17.03.0-ee-1
+2017-03-02
 
 Initial Docker EE release, based on Docker CE 17.03.0
 
