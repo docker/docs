@@ -118,13 +118,6 @@ for Docker Engine - Community.
      - **Workaround:** restart all tasks via `docker service update --force`.
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
-* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
-
-     - **Workaround options:**
-         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
-         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
-         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
-
 
 ## 19.03.3
 2019-10-08
@@ -201,12 +194,6 @@ for Docker Engine - Community.
      - **Workaround:** restart all tasks via `docker service update --force`.
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
-* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
-
-     - **Workaround options:**
-         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
-         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
-         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
 ## 19.03.2
 2019-09-03
@@ -269,15 +256,9 @@ for Docker Engine - Community.
      - Workaround: Add these rules back using a script and cron definitions. The script
      must contain '-C' commands to check for the presence of a rule and '-A' commands to add
      rules back. Run the script on a cron in regular intervals, for example, every <x> minutes.
-     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
+     - Affected versions: 18.09.1, 19.03.0
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
-* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
-
-     - Workaround options:
-         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
-         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
-         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
 ## 19.03.1
 2019-07-25
@@ -306,15 +287,9 @@ for Docker Engine - Community.
      - Workaround: Add these rules back using a script and cron definitions. The script
      must contain '-C' commands to check for the presence of a rule and '-A' commands to add
      rules back. Run the script on a cron in regular intervals, for example, every <x> minutes.
-     - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
+     - Affected versions: 18.09.1, 19.03.0
  * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
  * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
- * Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
-
-     - Workaround options:
-         - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
-         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
-         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
 ## 19.03.0
 2019-07-22
@@ -473,11 +448,6 @@ support for v2 schema1 althogether. [moby/moby#39365](https://github.com/moby/mo
 * Now skipping deprecated storage-drivers in auto-selection. [moby/moby#38019](https://github.com/moby/moby/pull/38019)
 * Deprecated `aufs` storage driver and added warning. [moby/moby#38090](https://github.com/moby/moby/pull/38090)
 * Removed support for 17.09.
-* SLES12 is deprecated from Docker Enterprise 3.0, and EOL of SLES12 as an operating system will occur
-in Docker Enterprise 3.1. Upgrade to SLES15 for continued support on Docker Enterprise.
-* Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported
-on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker
-Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
 
 For more information on deprecated flags and APIs, refer to
 https://docs.docker.com/engine/deprecated/ for target removal dates.
@@ -502,12 +472,6 @@ The missing rules are :
     - Workaround: Add these rules back using a script and cron definitions. The script
     must contain '-C' commands to check for the presence of a rule and '-A' commands to add
     rules back. Run the script on a cron in regular intervals, for example, every <x> minutes.
-    - Affected versions: 17.06.2-ee-16, 18.09.1, 19.03.0
+    - Affected versions: 18.09.1, 19.03.0
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
-* Install Docker Engine - Enterprise fails to install on RHEL on Azure. This affects any RHEL version that uses an Extended Update Support (EUS) image. At the time of this writing, known versions affected are RHEL 7.4, 7.5, and 7.6.
-
-    - Workaround options:
-        - Use an older image and don't get updates. Examples of EUS images are here: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#rhel-images-with-eus.
-        - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
-        - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
