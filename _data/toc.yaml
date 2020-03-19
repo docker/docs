@@ -32,24 +32,22 @@ guides:
     title: "Educational resources"
 - sectiontitle: Develop with Docker
   section:
-    - sectiontitle: Develop your apps on Docker
-      section:
-        - path: /develop/
-          title: App development overview
-        - path: /develop/dev-best-practices/
-          title: App development best practices
-        - sectiontitle: Develop images
-          section:
-          - path: /develop/develop-images/dockerfile_best-practices/
-            title: Best practices for writing Dockerfiles
-          - path: /develop/develop-images/baseimages/
-            title: Create a base image
-          - path: /develop/develop-images/build_enhancements/
-            title: Docker build enhancements for 18.09
-          - path: /develop/develop-images/multistage-build/
-            title: Use multi-stage builds
-          - path: /develop/develop-images/image_management/
-            title: Manage images
+  - path: /develop/
+    title: Overview
+  - path: /develop/dev-best-practices/
+    title: Best practices
+  - sectiontitle: Build images
+    section:
+    - path: /develop/develop-images/dockerfile_best-practices/
+      title: Dockerfile best practices
+    - path: /develop/develop-images/build_enhancements/
+      title: Build images with BuildKit
+    - path: /develop/develop-images/multistage-build/
+      title: Use multi-stage builds
+    - path: /develop/develop-images/image_management/
+      title: Manage images
+    - path: /develop/develop-images/baseimages/
+      title: Create your own base image (advanced)
 - sectiontitle: Configure networking
   section:
     - path: /network/
