@@ -122,11 +122,6 @@ cluster:
     version: '1.0'
 ```
 
-For more information on Docker Cloudstor see:
-
-- [Cloudstor for AWS](/docker-for-aws/persistent-data-volumes/)
-- [Cloudstor for Azure](/docker-for-azure/persistent-data-volumes/)
-
 The following optional elements can be specified:
 
 - `version`: (Required) The version of Docker Cloudstor to install. The default
