@@ -1233,40 +1233,6 @@ manuals:
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
     title: Docker Desktop WSL 2 backend
-- sectiontitle: Docker Desktop Enterprise
-  section:
-  - path: /ee/desktop/
-    title: Overview
-  - path: /ee/desktop/release-notes/
-    title: Release notes
-  - sectiontitle: Admin
-    section:
-    - sectiontitle: Install
-      section:
-      - path: /ee/desktop/admin/install/mac/
-        title: Install DDE on Mac
-      - path: /ee/desktop/admin/install/windows/
-        title: Install DDE on Windows
-    - sectiontitle: Configure
-      section:
-      - path: /ee/desktop/admin/configure/mac-admin/
-        title: Configure DDE on Mac
-      - path: /ee/desktop/admin/configure/windows-admin/
-        title: Configure DDE on Windows
-  - sectiontitle: User
-    section:
-    - path: /ee/desktop/user/mac-user/
-      title: Use DDE on Mac
-    - path: /ee/desktop/user/windows-user/
-      title: Use DDE on Windows
-  - path: /ee/desktop/app-designer/
-    title: Application designer
-  - sectiontitle: Troubleshoot
-    section:
-    - path: /ee/desktop/troubleshoot/mac-issues/
-      title: Troubleshoot DDE issues on Mac
-    - path: /ee/desktop/troubleshoot/windows-issues/
-      title: Troubleshoot DDE issues on Windows
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Hub
@@ -1594,6 +1560,40 @@ manuals:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
       nosync: true
+- sectiontitle: Docker Desktop Enterprise
+  section:
+  - path: /ee/desktop/
+    title: Overview
+  - path: /ee/desktop/release-notes/
+    title: Release notes
+  - sectiontitle: Admin
+    section:
+    - sectiontitle: Install
+      section:
+      - path: /ee/desktop/admin/install/mac/
+        title: Install DDE on Mac
+      - path: /ee/desktop/admin/install/windows/
+        title: Install DDE on Windows
+    - sectiontitle: Configure
+      section:
+      - path: /ee/desktop/admin/configure/mac-admin/
+        title: Configure DDE on Mac
+      - path: /ee/desktop/admin/configure/windows-admin/
+        title: Configure DDE on Windows
+  - sectiontitle: User
+    section:
+    - path: /ee/desktop/user/mac-user/
+      title: Use DDE on Mac
+    - path: /ee/desktop/user/windows-user/
+      title: Use DDE on Windows
+  - path: /ee/desktop/app-designer/
+    title: Application designer
+  - sectiontitle: Troubleshoot
+    section:
+    - path: /ee/desktop/troubleshoot/mac-issues/
+      title: Troubleshoot DDE issues on Mac
+    - path: /ee/desktop/troubleshoot/windows-issues/
+      title: Troubleshoot DDE issues on Windows
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
