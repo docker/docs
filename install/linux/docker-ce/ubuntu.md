@@ -116,10 +116,10 @@ from the repository.
 
     Verify that you now have the key with the fingerprint
     `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
-    last 8 characters of the fingerprint.
+    key by it's fingerprint.
 
     ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
+    $ sudo apt-key fingerprint "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88"
     
     pub   rsa4096 2017-02-22 [SCEA]
           9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
