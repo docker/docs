@@ -45,13 +45,13 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 3.  Now you are ready to share your image on Docker Hub, but there's one thing you must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, you must name images like `<Docker ID>/<Repository Name>:<tag>`. You can relabel your `bulletinboard:1.0` image like this (of course, please replace `gordon` with your Docker ID):
 
     ```shell
-    docker image tag bulletinboard:1.0 gordon/bulletinboard:1.0
+    docker tag bulletinboard:1.0 gordon/bulletinboard:1.0
     ```
 
 4.  Finally, push your image to Docker Hub:
 
     ```shell
-    docker image push gordon/bulletinboard:1.0
+    docker push gordon/bulletinboard:1.0
     ```
 
     Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
