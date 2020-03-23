@@ -351,32 +351,6 @@ reference:
           title: docker app validate
         - path: /engine/reference/commandline/app_version/
           title: docker app version
-    - sectiontitle: docker assemble
-      section:
-        - path: /engine/reference/commandline/assemble/
-          title: docker assemble
-        - path: /engine/reference/commandline/assemble_backend/
-          title: docker assemble backend
-        - path: /engine/reference/commandline/assemble_backend_cache/
-          title: docker assemble backend cache
-        - path: /engine/reference/commandline/assemble_backend_cache_purge/
-          title: docker assemble backend cache purge
-        - path: /engine/reference/commandline/assemble_backend_cache_usage/
-          title: docker assemble backend cache usage
-        - path: /engine/reference/commandline/assemble_backend_image/
-          title: docker assemble backend image
-        - path: /engine/reference/commandline/assemble_backend_info/
-          title: docker assemble backend info
-        - path: /engine/reference/commandline/assemble_backend_logs/
-          title: docker assemble backend logs
-        - path: /engine/reference/commandline/assemble_backend_start/
-          title: docker assemble backend start
-        - path: /engine/reference/commandline/assemble_backend_stop/
-          title: docker assemble backend stop
-        - path: /engine/reference/commandline/assemble_build/
-          title: docker assemble build
-        - path: /engine/reference/commandline/assemble_version/
-          title: docker assemble version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -1129,20 +1103,6 @@ manuals:
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
-- sectiontitle: Docker Assemble
-  section:
-  - path: /assemble/install/
-    title: Install
-  - path: /assemble/spring-boot/
-    title: Build a Spring Boot project
-  - path: /assemble/dot-net/
-    title: Build a C# ASP.NET Core project
-  - path: /assemble/configure/
-    title: Configure
-  - path: /assemble/images/
-    title: Images
-  - path: /assemble/adv-backend-manage/
-    title: Advanced Backend Management
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
