@@ -1123,7 +1123,12 @@ manuals:
       title: Engine 17.03 release notes
     - path: /engine/release-notes/prior-releases/
       title: Engine 1.13 and earlier
-
+  - path: /app/working-with-app/
+    title: Docker App
+  - path: /buildx/working-with-buildx/
+    title: Docker Buildx
+  - path: /engine/context/working-with-contexts/
+    title: Docker Context
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1138,10 +1143,6 @@ manuals:
     title: Images
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
-- path: /app/working-with-app/
-  title: Docker App
-- path: /buildx/working-with-buildx/
-  title: Docker Buildx
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -1170,8 +1171,6 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- path: /engine/context/working-with-contexts/
-  title: Docker Context
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
@@ -1230,12 +1229,12 @@ manuals:
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
     title: Docker Desktop WSL 2 backend
-- title: Docker ID accounts
-  path: /docker-id/
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
     title: Quickstart
+  - path: /docker-id/
+    title: Docker ID accounts
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
