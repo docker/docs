@@ -146,7 +146,7 @@ Docker version 19.03.5, build 633a0ea
 3.  List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
 
     ```shell
-        $ docker container ls --all
+        $ docker ps --all
 
         CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
         54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
