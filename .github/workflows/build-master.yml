@@ -1,3 +1,5 @@
+name: deploy stage website from master branch
+
 on:
   push:
     branches:

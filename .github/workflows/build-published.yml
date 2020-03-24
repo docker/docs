@@ -1,3 +1,5 @@
+name: deploy website from published branch
+
 on:
   push:
     branches:
