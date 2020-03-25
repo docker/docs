@@ -141,7 +141,7 @@ Now that you have some source code and a Dockerfile, it's time to build your fir
 Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
 
 ```script
-docker image build -t bulletinboard:1.0 .
+docker build --tag bulletinboard:1.0 .
 ```
 
 You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
@@ -153,7 +153,7 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 1.  Start a container based on your new image:
 
     ```script
-    docker container run --publish 8000:8080 --detach --name bb bulletinboard:1.0
+    docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
     ```
 
     There are a couple of common flags here:
@@ -169,10 +169,10 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
 
     ```script
-    docker container rm --force bb
+    docker rm --force bb
     ```
 
-    The `--force` option removes the running container.
+    The `--force` option removes the running container. If you stop the container running with `docker stop bb` you do not need to use `--force`.
 
 ## Conclusion
 

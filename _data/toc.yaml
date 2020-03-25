@@ -351,32 +351,6 @@ reference:
           title: docker app validate
         - path: /engine/reference/commandline/app_version/
           title: docker app version
-    - sectiontitle: docker assemble
-      section:
-        - path: /engine/reference/commandline/assemble/
-          title: docker assemble
-        - path: /engine/reference/commandline/assemble_backend/
-          title: docker assemble backend
-        - path: /engine/reference/commandline/assemble_backend_cache/
-          title: docker assemble backend cache
-        - path: /engine/reference/commandline/assemble_backend_cache_purge/
-          title: docker assemble backend cache purge
-        - path: /engine/reference/commandline/assemble_backend_cache_usage/
-          title: docker assemble backend cache usage
-        - path: /engine/reference/commandline/assemble_backend_image/
-          title: docker assemble backend image
-        - path: /engine/reference/commandline/assemble_backend_info/
-          title: docker assemble backend info
-        - path: /engine/reference/commandline/assemble_backend_logs/
-          title: docker assemble backend logs
-        - path: /engine/reference/commandline/assemble_backend_start/
-          title: docker assemble backend start
-        - path: /engine/reference/commandline/assemble_backend_stop/
-          title: docker assemble backend stop
-        - path: /engine/reference/commandline/assemble_build/
-          title: docker assemble build
-        - path: /engine/reference/commandline/assemble_version/
-          title: docker assemble version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -795,24 +769,6 @@ reference:
         title: docker system prune
     - path: /engine/reference/commandline/tag/
       title: docker tag
-    - sectiontitle: docker template
-      section:
-        - path: /engine/reference/commandline/template/
-          title: docker template
-        - path: /engine/reference/commandline/template_config/
-          title: docker template config
-        - path: /engine/reference/commandline/template_config_set/
-          title: docker template config set
-        - path: /engine/reference/commandline/template_config_view/
-          title: docker template config view
-        - path: /engine/reference/commandline/template_inspect/
-          title: docker template inspect
-        - path: /engine/reference/commandline/template_list/
-          title: docker template list
-        - path: /engine/reference/commandline/template_scaffold/
-          title: docker template scaffold
-        - path: /engine/reference/commandline/template_version/
-          title: docker template version
     - path: /engine/reference/commandline/top/
       title: docker top
     - sectiontitle: docker trust
@@ -977,8 +933,6 @@ reference:
         title: v1.18 reference
   - title: Registry API
     path: /registry/spec/api/
-  - title: Template API
-    path: /app-template/api-reference/
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
@@ -1123,25 +1077,12 @@ manuals:
       title: Engine 17.03 release notes
     - path: /engine/release-notes/prior-releases/
       title: Engine 1.13 and earlier
-
-- sectiontitle: Docker Assemble
-  section:
-  - path: /assemble/install/
-    title: Install
-  - path: /assemble/spring-boot/
-    title: Build a Spring Boot project
-  - path: /assemble/dot-net/
-    title: Build a C# ASP.NET Core project
-  - path: /assemble/configure/
-    title: Configure
-  - path: /assemble/images/
-    title: Images
-  - path: /assemble/adv-backend-manage/
-    title: Advanced Backend Management
-- path: /app/working-with-app/
-  title: Docker App
-- path: /buildx/working-with-buildx/
-  title: Docker Buildx
+  - path: /app/working-with-app/
+    title: Docker App
+  - path: /buildx/working-with-buildx/
+    title: Docker Buildx
+  - path: /engine/context/working-with-contexts/
+    title: Docker Context
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -1170,8 +1111,6 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- path: /engine/context/working-with-contexts/
-  title: Docker Context
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
@@ -1230,12 +1169,12 @@ manuals:
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
     title: Docker Desktop WSL 2 backend
-- title: Docker ID accounts
-  path: /docker-id/
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
     title: Quickstart
+  - path: /docker-id/
+    title: Docker ID accounts
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
@@ -1300,8 +1239,6 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-- path: /app-template/working-with-template/
-  title: Docker Template
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Notary
