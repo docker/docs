@@ -12,6 +12,59 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.3.0
+Date
+
+> [Download](Add URL)
+
+### Upgrades
+
+- [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
+- [Docker Compose 1.26.0-rc3](https://github.com/docker/compose/releases/tag/1.26.0-rc3)
+- [Linux 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-4e5d9e5f3bde0abf236f97e4a81b029ae0f5f6e7-amd64/images/sha256-11dc0f6ee3187088219ba1463ebb378f5093a7d98f176ddfd62dd6b741c2dd2d?context=repo)
+
+### New
+
+- Docker Desktop introduces a new onboarding tutorial upon first startup. The Quick Start tutorial guides users to get started with Docker in a few easy steps. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+
+### Bug fixes and minor changes
+
+> Docker Desktop Edge 2.2.3.0 fixes 28 issues reported on the [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.
+
+**WSL 2**
+- Docker Desktop only exposes host ports in Linux if the Windows port is available.
+- Docker Desktop now allows users to refresh the list of Linux distros.
+- Docker Desktop defaults to WSL 2 on install on compatible OS versions.
+- Docker Desktop detects missing Linux kernel and adds a pointer to the Microsoft documentation to download the kernel.
+
+**File sharing**
+- Kubernetes: Persistent volumes created by claims are now stored in the virtual machine. Fixes [for-win/issues/5665](https://github.com/docker/for-win/issues/5665).
+- Docker Desktop ensures that host paths accessed by containers are within the shared folders list.
+- Fixed a bug where opening a read-only file would fail with an `Operation not permitted error`. Fixes [docker/for-win#6016](https://github.com/docker/for-win/issues/6016) and [docker/for-win#6017](https://github.com/docker/for-win/issues/6017).
+- Fixed path handling for `docker volume create -o type=none -o o=bind -o device=C:\Some\Windows\path`.
+- Fixed a bug which prevented open files from being deleted. Fixes [docker/for-win#5565](https://github.com/docker/for-win/issues/5565).
+- Docker Desktop now avoids locking files on the host which are open in containers.
+- Docker Desktop generates `fsnotify.WRITE` events in Linux containers when files are changed on the host. [docker/for-win#5530](https://github.com/docker/for-win/issues/5530#issuecomment-585572414)
+- Docker Desktop now displays hidden files on shared volumes. Fixes [docker/for-win#5808](https://github.com/docker/for-win/issues/5808).
+- Fixed cache invalidation and event injection for shared volumes with long paths.
+- Docker Desktop now handles case-insensitivity correctly during file creation.
+- Docker Desktop represents valid directory junctions as directories (rather than symlinks) and handles cache invalidation and event injection properly. Fixes [docker/for-win#5582](https://github.com/docker/for-win/issues/5582).
+- Fixed a race condition in `readlink` on shared volumes using "mfsymlinks". Fixes [docker/for-win#5793](https://github.com/docker/for-win/issues/5793)
+- Fixed a bug where files did not change in shared volumes when using `volumes_from` in docker-compose.yml. Fixes [docker/for-win#5530](https://github.com/docker/for-win/issues/5530).
+
+**Other fixes**
+- Added an option to delete container and image data from the **Troubleshoot** screen.
+- Docker Desktop now reads the Hyper-V VM disk max size on startup and uses it as the value to display in the Settings.
+- Fixed the Hyper-V used disk image size being reported incorrectly.
+- Fixed the Hyper-V VM disk size increase. Fixes [docker/for-win#5881](https://github.com/docker/for-win/issues/5881).
+- Fixed container time drift when system hibernates. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
+- Fixed a bug where the Docker Desktop UI could be started without the engine. Fixes [docker/for-win#5376](https://github.com/docker/for-win/issues/5376).
+- Docker Desktop now uses the least possible privilege for querying the `Server service`. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
+- Fixed a bug where diagnostics upload could fail silently.
+- Capturing diagnostics is now faster and easier.
+- Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-win#5546](https://github.com/docker/for-mac/issues/5546).
+- Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-win#5903](https://github.com/docker/for-win/issues/5903).
+
 ## Docker Desktop Community 2.2.2.0
 2020-03-02
 
