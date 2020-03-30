@@ -26,8 +26,7 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 Here is a sample Compose file from the voting app sample used in the
 [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
-topic on [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
+topic on [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
@@ -281,7 +280,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -317,7 +316,7 @@ build:
 
 > Added in [version 3.3](compose-versioning.md#version-33) file format
 
-Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -366,7 +365,7 @@ build:
 > Added in [version 3.4](compose-versioning.md#version-34) file format
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
+[multi-stage build docs](/develop/develop-images/multistage-build.md) for
 details.
 
 ```yaml
@@ -710,13 +709,12 @@ networks:
 
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
 [docker service create](/engine/reference/commandline/service_create.md). For a
-quick list of all swarm related `docker` commands, see [Swarm mode CLI
-commands](/engine/swarm.md#swarm-mode-key-concepts-and-tutorial).
+quick list of all swarm related `docker` commands, see
+[Swarm mode CLI commands](/engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
 
 To learn more about service discovery and networking in swarm mode, see
-[Configure service
-discovery](/engine/swarm/networking.md#configure-service-discovery) in the swarm
-mode topics.
+[Configure service discovery](/engine/swarm/networking.md#configure-service-discovery)
+in the swarm mode topics.
 
 
 #### labels
@@ -749,9 +747,8 @@ services:
 
 Either `global` (exactly one container per swarm node) or `replicated` (a
 specified number of containers). The default is `replicated`. (To learn more,
-see [Replicated and global
-services](/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-services)
-in the [swarm](/engine/swarm/) topics.)
+see [Replicated and global services](/engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
+in the [swarm](/engine/swarm/index.md) topics.)
 
 
 ```yaml
@@ -808,11 +805,11 @@ Configures resource constraints.
 > The `resources` section replaces  the [older resource constraint options](compose-file-v2.md#cpu-and-other-resources)
 > in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`, `cpuset`,
 > `mem_limit`, `memswap_limit`, `mem_swappiness`).
-> Refer to [Upgrading version 2.x to 3.x](/compose/compose-file/compose-versioning.md#upgrading)
+> Refer to [Upgrading version 2.x to 3.x](compose-versioning.md#upgrading)
 > to learn about differences between version 2 and 3 of the compose-file format.
 
-Each of these is a single value, analogous to its [docker service
-create](/engine/reference/commandline/service_create.md) counterpart.
+Each of these is a single value, analogous to its
+[docker service create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
 50M of memory and `0.50` (50% of a single core) of available processing time (CPU),
@@ -841,8 +838,7 @@ services or containers in a swarm.
 > The options described here are specific to the
 `deploy` key and swarm mode. If you want to set resource constraints
 on non swarm deployments, use
-[Compose file format version 2 CPU, memory, and other resource
-options](compose-file-v2.md#cpu-and-other-resources).
+[Compose file format version 2 CPU, memory, and other resource options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, refer to the discussion on the GitHub
 issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
 {: .important}
@@ -853,8 +849,7 @@ If your services or containers attempt to use more memory than the system has
 available, you may experience an Out Of Memory Exception (OOME) and a container,
 or the Docker daemon, might be killed by the kernel OOM killer. To prevent this
 from happening, ensure that your application runs on hosts with adequate memory
-and see [Understand the risks of running out of
-memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+and see [Understand the risks of running out of memory](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
 
 #### restart_policy
@@ -1286,7 +1281,7 @@ for details.
 
 ### labels
 
-Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -1310,7 +1305,7 @@ labels:
 >
 > The `--link` flag is a legacy feature of Docker. It may eventually be removed.
 > Unless you absolutely need to continue using it, we recommend that you use
-> [user-defined networks](/engine/userguide/networking/#user-defined-networks)
+> [user-defined networks](/compose/networking.md)
 > to facilitate communication between two containers instead of using `--link`.
 >
 > One feature that user-defined networks do not support that you can do with
@@ -1365,7 +1360,7 @@ logging:
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/engine/admin/logging/overview.md)).
+([documented here](/config/containers/logging/configure.md)).
 
 The default value is json-file.
 
@@ -1395,7 +1390,7 @@ options:
   syslog-address: "tcp://192.168.0.42:123"
 ```
 
-The default driver [json-file](/engine/admin/logging/overview.md#json-file), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
+The default driver [json-file](/config/containers/logging/json-file.md), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
 
 ```yaml
 options:
@@ -1425,10 +1420,10 @@ services:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-> specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
+> specific to the [json-file driver](/config/containers/logging/json-file.md).
 > These particular options are not available on other logging drivers.
 > For a full list of supported logging drivers and their options, refer to the
-> [logging drivers](/engine/admin/logging/overview.md) documentation.
+> [logging drivers](/config/containers/logging/configure.md) documentation.
 
 ### network_mode
 
@@ -1540,7 +1535,7 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md##enable_ipv6)
+> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
 > option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 
@@ -1766,7 +1761,7 @@ security_opt:
 
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+[`stop_signal`](#stop_signal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
 ```yaml
@@ -1809,8 +1804,8 @@ sysctls:
 
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
-For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+For an overview of supported sysctls, refer to
+[configure namespaced kernel parameters (sysctls) at runtime](/engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 > Note when using docker stack deploy
 >
@@ -1869,7 +1864,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
+See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
 more information.
 
 > Note when using docker stack deploy
@@ -1931,8 +1926,8 @@ volumes:
 
 > **Note**
 > 
-> For general information on volumes, refer to the [use volumes](/engine/admin/volumes/volumes.md)
-> and [volume plugins](/engine/extend/plugins_volume.md) sections in the documentation.
+> For general information on volumes, refer to the [use volumes](/storage/volumes.md)
+> and [volume plugins](/engine/extend/plugins_volume/) sections in the documentation.
 
 
 #### Short syntax
@@ -2017,7 +2012,7 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 
 #### Volumes for services, swarms, and stack files
@@ -2038,10 +2033,10 @@ constraints on the service so that its tasks are deployed on a node that has the
 volume present.
 
 As an example, the `docker-stack.yml` file for the
-[votingapp sample in Docker
-Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) defines a service called `db` that runs a `postgres` database. It is
-configured as a named volume to persist the data on the swarm,
-_and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
+[votingapp sample in Docker Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md)
+defines a service called `db` that runs a `postgres` database. It is configured
+as a named volume to persist the data on the swarm, _and_ is constrained to run
+only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -2087,8 +2082,8 @@ services:
 ```
 
 Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker Desktop for Mac topic [Performance tuning for
-volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
+`docker run` counterparts is in the Docker Desktop for Mac topic
+[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
@@ -2151,8 +2146,8 @@ easily retrieved and inspected using the docker command line or API.
 See the [docker volume](/engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
-See [use volumes](/engine/admin/volumes/volumes.md) and [volume
-plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+See [use volumes](/storage/volumes.md) and [volume
+plugins](/engine/extend/plugins_volume/) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
@@ -2251,18 +2246,18 @@ volumes:
 
 > Note when using docker stack deploy
 >
-> External volumes that do not exist _are created_ if you use [docker stack
-> deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
-> (instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
-> volume is automatically created when it is defined by a service. As service
-> tasks are scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
+> External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
+> to launch the app in [swarm mode](/engine/swarm/index.md) (instead of
+> [docker compose up](/compose/reference/up.md)). In swarm mode, a volume is
+> automatically created when it is defined by a service. As service tasks are
+> scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
 {: .important }
 
 ### labels
 
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -2314,8 +2309,7 @@ The top-level `networks` key lets you specify networks to be created.
 * For a full explanation of Compose's use of Docker networking features and all
   network driver options, see the [Networking guide](/compose/networking.md).
 * For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
-  tutorials on networking, start with [Designing Scalable, Portable Docker
-  Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
+  tutorials on networking, start with [Designing Scalable, Portable Docker Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 
 ### driver
 
@@ -2334,22 +2328,21 @@ driver: overlay
 #### bridge
 
 Docker defaults to using a `bridge` network on a single host. For examples of
-how to work with bridge networks, see the Docker Labs tutorial on [Bridge
-networking](https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md).
+how to work with bridge networks, see the Docker Labs tutorial on
+[Bridge networking](https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md).
 
 #### overlay
 
 The `overlay` driver creates a named network across multiple nodes in a
-[swarm](/engine/swarm/).
+[swarm](/engine/swarm/index.md).
 
 * For a working example of how to build and use an
 `overlay` network with a service in swarm mode, see the Docker Labs tutorial on
-[Overlay networking and service
-discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md).
+[Overlay networking and service discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md).
 
 * For an in-depth look at how it works under the hood, see the
-networking concepts lab on the [Overlay Driver Network
-Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
+networking concepts lab on the
+[Overlay Driver Network Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
 
 #### host or none
 
@@ -2475,7 +2468,7 @@ you can set this option to `true`.
 ### labels
 
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -2688,5 +2681,5 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/)
-- [Command line reference](/compose/reference/)
+- [Samples](/samples/index.md)
+- [Command line reference](/compose/reference/index.md)

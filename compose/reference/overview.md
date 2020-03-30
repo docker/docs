@@ -135,9 +135,9 @@ a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
 in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
-running the [Compose Rails sample](/compose/rails/), and
+running the [Compose Rails sample](/compose/rails.md), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
-use a command like [docker-compose pull](/compose/reference/pull.md) to get the
+use a command like [docker-compose pull](pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
 follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 
@@ -168,8 +168,7 @@ Status: Downloaded newer image for postgres:latest
 
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the [COMPOSE_PROJECT_NAME environment variable](
-envvars.md#compose_project_name).
+directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars.md#compose_project_name).
 
 ## Set up environment variables
 
@@ -177,11 +176,10 @@ You can set [environment variables](envvars.md) for various
 `docker-compose` options, including the `-f` and `-p` flags.
 
 For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
-relates to the `-f` flag, and [COMPOSE_PROJECT_NAME environment
-variable](envvars.md#compose_project_name) relates to the `-p` flag.
+relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
+[environment variable](envvars.md#compose_project_name) relates to the `-p` flag.
 
-Also, you can set some of these variables in an [environment
-file](/compose/env-file.md).
+Also, you can set some of these variables in an [environment file](/compose/env-file.md).
 
 ## Where to go next
 

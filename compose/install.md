@@ -79,7 +79,7 @@ Windows Server, follow the instructions in the Windows Server tab.
 ### Install Compose on Windows Server
 
 Follow these instructions if you are running the Docker daemon and client directly
-on Microsoft Windows Server with [Docker Engine - Enterprise](/install/windows/docker-ee.md),
+on Microsoft Windows Server with [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md),
 and want to install Docker Compose.
 
 
@@ -119,10 +119,11 @@ and want to install Docker Compose.
 
 ### Install Compose on Linux systems
 
-On Linux, you can download the Docker Compose binary from the [Compose
-repository release page on GitHub](https://github.com/docker/compose/releases){:
-target="_blank" class="_"}. Follow the instructions from the link, which involve
-running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
+On Linux, you can download the Docker Compose binary from the
+[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+Follow the instructions from the link, which involve running the `curl` command
+in your terminal to download the binaries. These step-by-step instructions are
+also included below.
 
 > For `alpine`, the following dependency packages are needed:
 > `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
@@ -282,4 +283,4 @@ pip uninstall docker-compose
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](/compose/reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Compose file reference](/compose/compose-file/index.md)

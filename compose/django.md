@@ -20,9 +20,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
     The Dockerfile defines an application's image content via one or more build
     commands that configure that image. Once built, you can run the image in a
-    container.  For more information on `Dockerfile`, see the [Docker user
-    guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
-    and the [Dockerfile reference](/engine/reference/builder.md).
+    container.  For more information on `Dockerfile`, see the [Docker user guide](/get-started/index.md)
+    and the [Dockerfile reference](/engine/reference/builder/).
 
 3. Add the following content to the `Dockerfile`.
 
@@ -58,7 +57,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     also describes which Docker images these services use, how they link
     together, any volumes they might need mounted inside the containers.
     Finally, the `docker-compose.yml` file describes which ports these services
-    expose. See the [`docker-compose.yml` reference](compose-file.md) for more
+    expose. See the [`docker-compose.yml` reference](/compose/compose-file/index.md) for more
     information on how this file works.
 
 9.  Add the following configuration to the file.
@@ -91,7 +90,7 @@ In this step, you create a Django starter project by building the image from the
 1. Change to the root of your project directory.
 
 2. Create the Django project by running
-the [docker-compose run](/compose/reference/run/) command as follows.
+the [docker-compose run](/compose/reference/run.md) command as follows.
 
        sudo docker-compose run web django-admin startproject composeexample .
 
@@ -152,12 +151,12 @@ In this section, you set up the database connection for Django.
         }
 
     These settings are determined by the
-    [postgres](https://hub.docker.com/images/postgres) Docker image
+    [postgres](https://hub.docker.com/_/postgres) Docker image
     specified in `docker-compose.yml`.
 
 3.  Save and close the file.
 
-4.  Run the [docker-compose up](/compose/reference/up/) command from the top level directory for your project.
+4.  Run the [docker-compose up](/compose/reference/up.md) command from the top level directory for your project.
 
     ```none
     $ docker-compose up
@@ -223,7 +222,7 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       Killing test_db_1 ... done
       ```
 
-    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](/compose/reference/down/) from the top level of your Django sample project directory.
+    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](/compose/reference/down.md) from the top level of your Django sample project directory.
 
       ```none
       vmb at mymachine in ~/sandbox/django
@@ -245,5 +244,5 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 - [Getting Started](gettingstarted.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)

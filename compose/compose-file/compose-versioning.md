@@ -81,15 +81,15 @@ These differences are explained below.
 ### Version 1
 
 Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](/compose/compose-file/index.md#service-configuration-reference) are
+files, all the [services](index.md#service-configuration-reference) are
 declared at the root of the document.
 
 Version 1 is supported by **Compose up to 1.6.x**. It will be deprecated in a
 future Compose release.
 
 Version 1 files cannot declare named
-[volumes](/compose/compose-file/index.md#volume-configuration-reference), [networks](/compose/compose-file/index.md#network-configuration-reference) or
-[build arguments](/compose/compose-file/index.md#args).
+[volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
+[build arguments](index.md#args).
 
 Compose does not take advantage of [networking](/compose/networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
@@ -125,7 +125,7 @@ under the `networks` key.
 By default, every container joins an application-wide default network, and is
 discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
-[Networking in Compose](compose-file-v2.md#networking.md).
+[Networking in Compose](/compose/networking.md).
 
 > **Note**: When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
@@ -214,7 +214,7 @@ supported by **Compose 1.9.0+**.
 
 Introduces the following additional parameters:
 
-- [`link_local_ips`](compose-file-v2.md#linklocalips)
+- [`link_local_ips`](compose-file-v2.md#link_local_ips)
 - [`isolation`](compose-file-v2.md#isolation) in build configurations and
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
@@ -223,8 +223,8 @@ Introduces the following additional parameters:
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
-- [`pids_limit`](compose-file-v2.md#pidslimit)
-- [`oom_kill_disable`](compose-file-v2.md#oomkilldisable)
+- [`pids_limit`](compose-file-v2.md#pids_limit)
+- [`oom_kill_disable`](compose-file-v2.md#cpu-and-other-resources)
 - [`cpu_period`](compose-file-v2.md)
 
 ### Version 2.2
@@ -248,7 +248,7 @@ supported by **Compose 1.16.0+**.
 
 Introduces the following additional parameters:
 
-- [`target`](compose-file-v2.md#target), [`extra_hosts`](compose-file-v2.md#extrahosts) and
+- [`target`](compose-file-v2.md#target), [`extra_hosts`](compose-file-v2.md#extra_hosts-1) and
   [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
@@ -270,7 +270,7 @@ Introduces the following additional parameters:
 ### Version 3
 
 Designed to be cross-compatible between Compose and the Docker Engine's
-[swarm mode](/engine/swarm/index.md), version 3 removes several options and adds
+[swarm mode](/engine/swarm/), version 3 removes several options and adds
 several more.
 
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
@@ -278,7 +278,7 @@ several more.
 the [upgrading](#upgrading) guide for how to migrate away from these.
 (For more information on `extends`, see [Extending services](/compose/extends.md#extending-services).)
 
-- Added: [deploy](/compose/compose-file/index.md#deploy)
+- Added: [deploy](index.md#deploy)
 
 > **Note**: When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
@@ -302,10 +302,10 @@ available with Docker Engine version **17.06.0+**, and higher.
 
 Introduces the following additional parameters:
 
-- [build `labels`](/compose/compose-file/index.md#build)
-- [`credential_spec`](/compose/compose-file/index.md#credentialspec)
-- [`configs`](/compose/compose-file/index.md#configs)
-- [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
+- [build `labels`](index.md#build)
+- [`credential_spec`](index.md#credential_spec)
+- [`configs`](index.md#configs)
+- [deploy `endpoint_mode`](index.md#endpoint_mode)
 
 ### Version 3.4
 
@@ -314,10 +314,10 @@ only available with Docker Engine version **17.09.0** and higher.
 
 Introduces the following additional parameters:
 
-- `target` and `network` in [build configurations](/compose/compose-file/index.md#build)
-- `start_period` for [`healthchecks`](/compose/compose-file/index.md#healthcheck)
-- `order` for [update configurations](/compose/compose-file/index.md#update_config)
-- `name` for [volumes](/compose/compose-file/index.md#volume-configuration-reference)
+- `target` and `network` in [build configurations](index.md#build)
+- `start_period` for [`healthchecks`](index.md#healthcheck)
+- `order` for [update configurations](index.md#update_config)
+- `name` for [volumes](index.md#volume-configuration-reference)
 
 ### Version 3.5
 
@@ -360,7 +360,7 @@ several options have been removed:
 
 -   `volume_driver`: Instead of setting the volume driver on the service, define
     a volume using the
-    [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
+    [top-level `volumes` option](index.md#volume-configuration-reference)
     and specify the driver there.
 
         version: "{{ site.compose_file_v3 }}"
@@ -374,12 +374,12 @@ several options have been removed:
             driver: mydriver
 
 -   `volumes_from`: To share a volume between services, define it using the
-    [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
+    [top-level `volumes` option](index.md#volume-configuration-reference)
     and reference it from each service that shares it using the
-    [service-level `volumes` option](/compose/compose-file/index.md#volumes-volumedriver).
+    [service-level `volumes` option](index.md#driver).
 
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
-    have been replaced by the [resources](/compose/compose-file/index.md#resources) key under
+    have been replaced by the [resources](index.md#resources) key under
     `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
@@ -413,7 +413,7 @@ It's more complicated if you're using particular configuration features:
             syslog-address: "tcp://192.168.0.42:123"
 
 -   `links` with environment variables: As documented in the
-    [environment variables reference](link-env-deprecated.md), environment variables
+    [environment variables reference](/compose/link-env-deprecated.md), environment variables
     created by
     links have been deprecated for some time. In the new Docker network system,
     they have been removed. You should either connect directly to the
@@ -432,11 +432,11 @@ It's more complicated if you're using particular configuration features:
     communicate, even if explicitly linked together.
 
     Either connect the external container to your app's
-    [default network](networking.md), or connect both the external container and
+    [default network](/compose/networking.md), or connect both the external container and
     your service's containers to an
-    [external network](networking.md#using-a-pre-existing-network).
+    [external network](/compose/networking.md#use-a-pre-existing-network).
 
--   `net`: This is now replaced by [network_mode](compose-file-v1.md#network_mode):
+-   `net`: This is now replaced by [network_mode](index.md#network_mode):
 
         net: host    ->  network_mode: host
         net: bridge  ->  network_mode: bridge
@@ -485,7 +485,7 @@ the following deploy keys are translated:
 
 - [resources](index.md#resources) limits and memory reservations
 - [replicas](index.md#replicas)
-- [restart_policy](index.md#restartpolicy) `condition` and `max_attempts`
+- [restart_policy](index.md#restart_policy) `condition` and `max_attempts`
 
 All other keys are ignored and produce a warning if present. You can review
 the configuration that will be used to deploy by using the `--compatibility`

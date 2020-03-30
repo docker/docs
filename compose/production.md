@@ -76,5 +76,5 @@ Read more about the Compose/Swarm integration in the
 ## Compose documentation
 
 - [Installing Compose](install.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)

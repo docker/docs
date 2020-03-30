@@ -16,7 +16,7 @@ Yes - see [Controlling startup order](startup-order.md).
 ## Why do my services take 10 seconds to recreate or stop?
 
 Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](./reference/stop.md).  After the timeout,
+for a [default timeout of 10 seconds](/compose/reference/stop.md).  After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
@@ -54,9 +54,8 @@ handling `SIGTERM` properly.
 
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
-set a custom project name using the [`-p` command line
-option](./reference/overview.md) or the [`COMPOSE_PROJECT_NAME`
-environment variable](./reference/envvars.md#compose-project-name).
+set a custom project name using the [`-p` command line option](/compose/reference/overview.md)
+or the [`COMPOSE_PROJECT_NAME` environment variable](/compose/reference/envvars.md#compose_project_name).
 
 ## What's the difference between `up`, `run`, and `start`?
 
@@ -116,5 +115,5 @@ github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
