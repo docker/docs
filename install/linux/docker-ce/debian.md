@@ -22,8 +22,8 @@ To get started with Docker Engine - Community on Debian, make sure you
 To install Docker Engine - Community, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Buster 10
-- Stretch 9 (stable) / Raspbian Stretch
+- Buster 10 (stable)
+- Stretch 9 / Raspbian Stretch
 
 Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
@@ -87,7 +87,7 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg2 \
+        gnupg-agent \
         software-properties-common
     ```
 
