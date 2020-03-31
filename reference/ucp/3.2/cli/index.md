@@ -41,9 +41,7 @@ docker container run -it --rm \
 | `images`            | Verify the UCP images on this node                        |
 | `install`           | Install UCP on this node                                  |
 | `port-check-server` | Checks the ports on a node before a UCP installation      |
-| `restart`           | Start or restart UCP components running on this node      |
 | `restore`           | Restore a UCP cluster from a backup                       |
-| `stop`              | Stop UCP components running on this node                  |
 | `support`           | Create a support dump for this UCP node                   |
 | `uninstall-ucp`     | Uninstall UCP from this swarm                             |
 | `upgrade`           | Upgrade the UCP cluster                                   |
