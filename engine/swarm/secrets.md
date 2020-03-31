@@ -147,7 +147,7 @@ a similar way, see
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](/compose/compose-file/#secrets) for details.
+[the Compose file reference](/compose/compose-file/index.md#secrets) for details.
 
 ### Simple example: Get started with secrets
 

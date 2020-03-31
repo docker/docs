@@ -47,8 +47,8 @@ examples below. Keep the following notable differences in mind:
 - On Windows, create or update a service using `--credential-spec` with the
   `config://<config-name>` format.  This passes the gMSA credentials file
   directly to nodes before a container starts. No gMSA credentials are written
-  to disk on worker nodes. For more information, refer to [Deploy services to a
-  swarm](/engine/swarm/services/#gmsa-for-swarm).
+  to disk on worker nodes. For more information, refer to
+  [Deploy services to a swarm](services.md#gmsa-for-swarm).
 
 ## How Docker manages configs
 
@@ -110,7 +110,7 @@ those remaining after a `docker service update --config-rm`.
 ## Read more about `docker config` commands
 
 Use these links to read about specific commands, or continue to the
-[example about using configs with a service](configs.md#example-use-configs-with-a-service).
+[example about using configs with a service](#advanced-example-use-configs-with-a-nginx-service).
 
 - [`docker config create`](/engine/reference/commandline/config_create.md)
 - [`docker config inspect`](/engine/reference/commandline/config_inspect.md)
@@ -130,7 +130,7 @@ Docker configs.
 
 The `docker stack` command supports defining configs in a Compose file.
 However, the `configs` key is not supported for `docker compose`. See
-[the Compose file reference](/compose/compose-file/#configs) for details.
+[the Compose file reference](/compose/compose-file/index.md#configs) for details.
 
 ### Simple example: Get started with configs
 

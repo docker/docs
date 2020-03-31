@@ -72,7 +72,7 @@ $ docker service create --name helloworld alpine:3.6 ping docker.com
 ```
 
 For more details about image tag resolution, see
-[Specify the image version the service should use](#specify-the-image-version-the-service-should-use).
+[Specify the image version the service should use](#specify-the-image-version-a-service-should-use).
 
 ### gMSA for Swarm
 
@@ -205,8 +205,8 @@ define a configuration at service creation, you can also update an existing
 service's configuration in a similar way.
 
 See the command-line references for
-[`docker service create`](/engine/reference/commandline/service_create/) and
-[`docker service update`](/engine/reference/commandline/service_update/), or run
+[`docker service create`](/engine/reference/commandline/service_create.md) and
+[`docker service update`](/engine/reference/commandline/service_update.md), or run
 one of those commands with the `--help` flag.
 
 ### Configure the runtime environment
@@ -397,7 +397,7 @@ If the swarm manager cannot resolve the image to a digest, all is not lost:
 When you create a swarm service, you can publish that service's ports to hosts
 outside the swarm in two ways:
 
-- [You can rely on the routing mesh](#publish-a services-ports-using-the-routing-mesh).
+- [You can rely on the routing mesh](#publish-a-services-ports-using-the-routing-mesh).
   When you publish a service port, the swarm makes the service accessible at the
   target port on every node, regardless of whether there is a task for the
   service running on that node or not. This is less complex and is the right
@@ -422,7 +422,7 @@ The external host does not need to know the IP addresses or internally-used
 ports of the service tasks to interact with the service. When a user or process
 connects to a service, any worker node running a service task may respond. For
 more details about swarm service networking, see
-[Manage swarm service networks](/engine/swarm/networking/).
+[Manage swarm service networks](/engine/swarm/networking.md).
 
 ##### Example: Run a three-task Nginx service on 10-node swarm
 
@@ -544,7 +544,7 @@ $ docker service update --network-rm my-network my-web
 
 For more information on overlay networking and service discovery, refer to
 [Attach services to an overlay network](networking.md) and
-[Docker swarm mode overlay network security model](/engine/userguide/networking/overlay-security-model.md).
+[Docker swarm mode overlay network security model](/network/overlay.md).
 
 ### Grant a service access to secrets
 
@@ -670,7 +670,7 @@ you may experience an Out Of Memory Exception (OOME) and a container, or the
 Docker daemon, might be killed by the kernel OOM killer. To prevent this from
 happening, ensure that your application runs on hosts with adequate memory and
 see
-[Understand the risks of running out of memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+[Understand the risks of running out of memory](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
 Swarm services allow you to use resource constraints, placement preferences, and
 labels to ensure that your service is deployed to the appropriate swarm nodes.
@@ -685,8 +685,7 @@ to `east`. If no appropriately-labelled nodes are available, tasks will wait in
 operator (`==` or `!=`). For replicated services, it is possible that all
 services run on the same node, or each node only runs one replica, or that some
 nodes don't run any replicas. For global services, the service runs on every
-node that meets the placement constraint and any [resource
-requirements](#reserve-memory-or-cpus-for-a-service).
+node that meets the placement constraint and any [resource requirements](#reserve-memory-or-cpus-for-a-service).
 
 ```bash
 $ docker service create \
@@ -938,7 +937,7 @@ $ docker service create \
 ```
 
 For more information on how to create data volumes and the use of volume
-drivers, see [Use volumes](/storage/volumes/).
+drivers, see [Use volumes](/storage/volumes.md).
 
 
 #### Bind mounts
