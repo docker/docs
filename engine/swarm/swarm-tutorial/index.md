@@ -80,8 +80,8 @@ serve as the single swarm node.
 <p />
 
 * Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm. However, you can use the included version of [Docker
-Machine](/machine/overview.md) to create the swarm nodes (see
+_multi-node_ swarm. However, you can use the included version of
+[Docker Machine](/machine/overview.md) to create the swarm nodes (see
 [Get started with Docker Machine and a local VM](/machine/get-started.md)), then
 follow the tutorial for all multi-node features. For this scenario, you run
 commands from a Docker Desktop for Mac or Docker Desktop for Windows host, but that Docker host itself is

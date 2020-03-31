@@ -189,8 +189,8 @@ manager failures, the system should be configured for
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
    command.
-6. If any nodes are listed as `down`, you need to manually [remove these
-   nodes](../configure/scale-your-cluster.md) from the swarm and then re-join
+6. If any nodes are listed as `down`, you need to manually
+   [remove these nodes](configure/scale-your-cluster.md) from the swarm and then re-join
    them using a `docker swarm join` operation with the swarm's new join-token.
 
 ## Where to go next

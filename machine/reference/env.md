@@ -117,6 +117,6 @@ export NO_PROXY="192.168.99.104"
 # eval "$(docker-machine env default)"
 ```
 
-You may also want to visit the [documentation on setting `HTTP_PROXY` for the
-created daemon using the `--engine-env` flag for `docker-machine
-create`](/machine/reference/create.md#specifying-configuration-options-for-the-created-docker-engine).
+You may also want to visit the documentation on setting `HTTP_PROXY` for the
+created daemon using the `--engine-env` flag for 
+[`docker-machine create`](/machine/reference/create.md#specifying-configuration-options-for-the-created-docker-engine).

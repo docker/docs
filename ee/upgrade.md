@@ -217,7 +217,7 @@ To upgrade a node individually by operating system, please follow the instructio
 listed below:
 
 * [Windows Server](/install/windows/docker-ee/#update-docker-engine---enterprise)
-* [Ubuntu](/install/linux/docker-ee/ubuntu.md/#upgrade-docker-engine---enterprise)
+* [Ubuntu](/install/linux/docker-ee/ubuntu.md#upgrade-docker-engine---enterprise)
 * [RHEL](/install/linux/docker-ee/rhel/#upgrade-from-the-repository)
 * [CentOS](/install/linux/docker-ee/centos/#upgrade-from-the-repository)
 * [Oracle Linux](/install/linux/docker-ee/oracle/#upgrade-from-the-repository)

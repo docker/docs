@@ -6,7 +6,7 @@ keywords: dtr, webhooks, api, registry
 
 ## Prerequisite
 
-See [Webhook types](/ee/dtr/admin/manage-webhooks/index.md/#webhook-types) for a list of events you can trigger notifications for via the API.
+See [Webhook types](/ee/dtr/admin/manage-webhooks/index.md#webhook-types) for a list of events you can trigger notifications for via the API.
 
 ## API Base URL
 

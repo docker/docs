@@ -307,8 +307,8 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
-reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
+[dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank"
 class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.

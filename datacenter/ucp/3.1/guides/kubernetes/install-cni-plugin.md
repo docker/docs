@@ -21,10 +21,10 @@ or contact that third party.
 
 ## Install an unmanaged CNI plugin on Docker UCP
 
-Once a platform operator has complied with [UCP system
-requirements](/ee/ucp/admin/install/system-requirements/) and
+Once a platform operator has complied with
+[UCP system requirements](/ee/ucp/admin/install/system-requirements.md) and
 taken into consideration any requirements for the custom CNI plugin, you can 
-[run the UCP install command](/reference/ucp/3.1/cli/install/) with the `--unmanaged-cni` flag
+[run the UCP install command](/datacenter/ucp/3.1/reference/cli/install.md) with the `--unmanaged-cni` flag
 to bring up the platform.
 
 This command will install UCP, and bring up components
@@ -54,8 +54,9 @@ will also be unavailable, as this runs in a Kubernetes pod.
 ### Configure CLI access to UCP
 
 Next, a platform operator should log into UCP, download a UCP client bundle, and
-configure the Kubernetes CLI tool, `kubectl`. See [CLI Based
-Access](/ee/ucp/user-access/cli/#download-client-certificates) for more details.
+configure the Kubernetes CLI tool, `kubectl`. See
+[CLI Based Access](/ee/ucp/user-access/cli.md#download-client-certificates)
+for more details.
    
 With `kubectl`, you can see that the UCP components running on
 Kubernetes are still pending, waiting for a CNI driver before becoming

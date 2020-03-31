@@ -54,9 +54,8 @@ You can find out more about an individual option by clicking the **?** icon.
 ## Use the CLI to control telemetry
 
 At the engine level, there is a telemetry module built into the Docker
-Enterprise Engine 18.09 or newer. It can be disabled by modifing the [daemon
-configuration
-file](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
+Enterprise Engine 18.09 or newer. It can be disabled by modifing the
+[daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
 By default this is stored at `/etc/docker/daemon.json`. 
 
 ```bash

@@ -90,10 +90,9 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 
 * Run the `docker-machine create` commands to create machines.
 
-    For example, if you follow along with the [Swarm mode
-tutorial](/engine/swarm/swarm-tutorial/index.md) which asks you to create [three
-networked host machines](/engine/swarm/swarm-tutorial/index.md#three-networked-host-machines),
-you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
+    For example, if you follow along with the [Swarm mode tutorial](/engine/swarm/swarm-tutorial/index.md)
+    which asks you to create [three networked host machines](/engine/swarm/swarm-tutorial/index.md#three-networked-host-machines),
+    you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
 
 *   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
 

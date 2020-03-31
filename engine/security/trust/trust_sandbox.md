@@ -10,8 +10,8 @@ This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without
 impacting your production images.
 
-Before working through this sandbox, you should have read through the [trust
-overview](content_trust.md).
+Before working through this sandbox, you should have read through the
+[trust overview](content_trust.md).
 
 ### Prerequisites
 

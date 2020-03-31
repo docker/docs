@@ -157,8 +157,8 @@ Managers: 1
 
 ## Use the Kubernetes CLI
 
-Docker Enterprise exposes the standard Kubernetes API, so you can use [kubectl
-to manage your Kubernetes workloads](./ucp/user-access/cli/):
+Docker Enterprise exposes the standard Kubernetes API, so you can use
+[kubectl to manage your Kubernetes workloads](ucp/user-access/cli.md):
 
 ```bash
 kubectl cluster-info

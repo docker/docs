@@ -17,8 +17,8 @@ directory's contents.
 The file or directory does not need to exist on the Docker host already. It is
 created on demand if it does not yet exist. Bind mounts are very performant, but
 they rely on the host machine's filesystem having a specific directory structure
-available. If you are developing new Docker applications, consider using [named
-volumes](volumes.md) instead. You can't use Docker CLI commands to directly
+available. If you are developing new Docker applications, consider using
+[named volumes](volumes.md) instead. You can't use Docker CLI commands to directly
 manage bind mounts.
 
 ![bind mounts on the Docker host](images/types-of-mounts-bind.png)

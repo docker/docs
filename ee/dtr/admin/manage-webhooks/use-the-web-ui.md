@@ -9,7 +9,7 @@ keywords: dtr, webhooks, ui, web interface, registry
 ## Prerequisites
 
 - You must have admin privileges to the repository in order to create a webhook.
-- See [Webhook types](/ee/dtr/admin/manage-webhooks/index.md/#webhook-types) for a list of events you can trigger notifications for using the web interface.
+- See [Webhook types](/ee/dtr/admin/manage-webhooks/index.md#webhook-types) for a list of events you can trigger notifications for using the web interface.
 
 ## Create a webhook for your repository
 

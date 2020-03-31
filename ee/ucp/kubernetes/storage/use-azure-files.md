@@ -17,14 +17,12 @@ provision Azure Files Shares on demand.
 
 This guide assumes you have already provisioned a UCP environment on
 Microsoft Azure. The cluster must be provisioned after meeting all
-prerequisites listed in [Install UCP on
-Azure](/ee/ucp/admin/install/install-on-azure.md).
+prerequisites listed in [Install UCP on Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure.md).
 
 Additionally, this guide uses the Kubernetes Command Line tool `$
 kubectl` to provision Kubernetes objects within a UCP cluster. Therefore, you must download
 this tool along with a UCP client bundle. For more
-information on configuring CLI access to UCP, see [CLI Based
-Access](/ee/ucp/user-access/cli/).
+information on configuring CLI access to UCP, see [CLI Based Access](/ee/ucp/user-access/cli.md).
 
 ## Manually Provisioning Azure Files
 
@@ -39,7 +37,7 @@ Azure Files Shares.
 When manually creating an Azure Files Share, first create an Azure
 Storage Account for the file shares. If you have already provisioned
 a Storage Account, you can skip to [Creating an Azure Files
-Share](#creating-an-azure-file-share).
+Share](#creating-an-azure-files-share).
 
 > **Note**: the Azure Kubernetes Driver does not support Azure Storage Accounts
 > created using Azure Premium Storage.
@@ -287,7 +285,5 @@ subjects:
 
 ## Where to go next
 
-- [Deploy an Ingress Controller on
-  Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
-- [Discover Network Encryption on
-  Kubernetes](/ee/ucp/kubernetes/kubernetes-network-encryption/)
+- [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
+- [Discover Network Encryption on Kubernetes](../kubernetes-network-encryption.md)

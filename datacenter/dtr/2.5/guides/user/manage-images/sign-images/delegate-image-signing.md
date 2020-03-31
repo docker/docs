@@ -63,8 +63,8 @@ notary delegation add --publish \
   --all-paths <user-1-cert.pem> <user-2-cert.pem>
 ```
 
-Now members from the QA team just need to [configure their Notary CLI client
-with UCP private keys](../../access-dtr/configure-your-notary-client.md)
+Now members from the QA team just need to
+[configure their Notary CLI client with UCP private keys](../../access-dtr/configure-your-notary-client.md)
 to [push and sign images](index.md) into the `dev/nginx` repository.
 
 ## Where to go next

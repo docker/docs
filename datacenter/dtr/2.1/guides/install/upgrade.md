@@ -21,8 +21,8 @@ business peak hours to ensure the impact on your business is close to none.
 
 ## Step 1. Upgrade DTR to 2.0
 
-Make sure you're running DTR 2.0. If that's not the case, [upgrade your
-installation to the 2.0 version](/datacenter/dtr/2.0/install/upgrade/upgrade-major.md).
+Make sure you're running DTR 2.0. If that's not the case,
+[upgrade your installation to the 2.0 version](/datacenter/dtr/2.0/install/upgrade/upgrade-major.md).
 
 ## Step 2. Upgrade DTR
 

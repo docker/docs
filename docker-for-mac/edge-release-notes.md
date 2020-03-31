@@ -1437,8 +1437,8 @@ issue is being investigated. The workaround is to restart Docker.app
 with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
-trees, may suffer from poor performance. More information is available in [Known
-Issues](troubleshoot.md#known-issues) in Troubleshooting.
+trees, may suffer from poor performance. More information is available in
+[Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app.
 

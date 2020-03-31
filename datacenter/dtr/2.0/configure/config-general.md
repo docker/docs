@@ -37,9 +37,9 @@ which image tags were signed by viewing the appropriate repositories through
 Trusted Registry's web interface.
 
 To configure your Docker client to push signed images to Docker
-Trusted Registry refer to the CLI Reference's [Environment Variables
-Section](/engine/reference/commandline/cli.md#environment-variables) and
-[Notary Section](/engine/reference/commandline/cli.md#notary).
+Trusted Registry refer to the CLI Reference's
+[Environment Variables Section](/engine/reference/commandline/cli.md#environment-variables)
+and [Notary Section](/engine/reference/commandline/cli.md#notary).
 
 This requires you to set the `DOCKER_CONTENT_TRUST` variable and configure
 your system to trust Docker Trusted Registry's TLS certificate if it doesn't

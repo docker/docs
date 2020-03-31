@@ -12,9 +12,8 @@ This tutorial guides you through these steps:
 
 ### Set up RethinkDB in Kitematic
 
-First, if you haven't yet done so, [download and start
-Kitematic](index.md). Once open, the app should look like
-this:
+First, if you haven't yet done so, [download and start Kitematic](index.md).
+Once open, the app should look like this:
 
 ![Rethink create button](images/rethink-create.png)
 

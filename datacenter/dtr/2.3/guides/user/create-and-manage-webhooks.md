@@ -45,4 +45,4 @@ the event is triggered.
 
 ## Where to go next
 
-* [Create deployment policies](create-deployment-policies.md)
+* [Create deployment policies](create-promotion-policies.md)
