@@ -25,6 +25,8 @@ Raspbian versions:
 - Buster 10 (stable)
 - Stretch 9 / Raspbian Stretch
 
+> **Note**: If you want to install Docker Client and Docker Engine on older versions of deb-based Linux distros, you can use "apt-get" instead of "apt".
+
 Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
 ### Uninstall old versions
@@ -33,10 +35,10 @@ Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ sudo apt remove docker docker-engine docker.io containerd runc
 ```
 
-It's OK if `apt-get` reports that none of these packages are installed.
+It's OK if `apt` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
@@ -77,13 +79,13 @@ from the repository.
 1.  Update the `apt` package index:
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install packages to allow `apt` to use a repository over HTTPS:
 
     ```bash
-    $ sudo apt-get install \
+    $ sudo apt install \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -167,20 +169,20 @@ from the repository.
 1.  Update the `apt` package index.
 
     ```bash
-    $ sudo apt-get update
+    $ sudo apt update
     ```
 
 2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
+    > or updating without specifying a version in the `apt install` or
+    > `apt update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
 3.  To install a _specific version_ of Docker Engine - Community, list the available versions in the repo, then select and install:
@@ -201,7 +203,7 @@ from the repository.
        for example, `5:18.09.1~3-0~debian-stretch `.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
@@ -222,7 +224,7 @@ steps.
 
 #### Upgrade Docker Engine - Community
 
-To upgrade Docker Engine - Community, first run `sudo apt-get update`, then follow the
+To upgrade Docker Engine - Community, first run `sudo apt update`, then follow the
 [installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 
@@ -278,7 +280,7 @@ To upgrade Docker Engine - Community, download the newer package file and repeat
 1.  Uninstall the Docker Engine - Community package:
 
     ```bash
-    $ sudo apt-get purge docker-ce
+    $ sudo apt purge docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
