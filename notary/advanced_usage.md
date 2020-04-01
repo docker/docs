@@ -11,11 +11,11 @@ their own Notary service. Make sure you have first read and understood how to
 ## An important note about the examples
 
 This document's command examples omit the `-s` and `-d` flags. If you do not
-know what these options do, read the [Getting
-Started](getting_started.md) docs or run `notary --help` before continuing. Once
-you understand what these flags do, you must provide your own values for these
-options while following this document. You can also configure these options, see
-[advanced configuration options](reference/index.md) for more information.
+know what these options do, read the [Getting Started](getting_started.md) docs
+or run `notary --help` before continuing. Once you understand what these flags do,
+you must provide your own values for these options while following this document.
+You can also configure these options, see [advanced configuration options](reference/index.md)
+for more information.
 
 ## Initialize a Trusted Collection
 

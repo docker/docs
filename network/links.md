@@ -16,7 +16,7 @@ with `--link` is sharing environment variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
 >
-> See [Differences between user-defined bridges and the default bridge](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge)
+> See [Differences between user-defined bridges and the default bridge](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
 {:.warning}
 
@@ -24,12 +24,12 @@ The information in this section explains legacy container links within the
 Docker default `bridge` network which is created automatically when you install
 Docker.
 
-Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
+Before the [Docker networks feature](/network/index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks).
+[user defined networks](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
@@ -43,7 +43,7 @@ Let's say you used this command to run a simple Python Flask application:
 > **Note**:
 > Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](/engine/userguide/networking/index.md).
+> information on Docker networking [here](/network/index.md).
 
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
@@ -107,7 +107,7 @@ configurations. For example, if you've bound the container port to the
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
+> Refer to [differences between user-defined bridges and the default bridge](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one

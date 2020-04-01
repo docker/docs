@@ -23,7 +23,7 @@ Don't make changes to UCP configurations while you're upgrading.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
 > **Note**: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
-> Azure then please ensure all of the Azure [prerequisities](install-on-azure.md/#azure-prerequisites) 
+> Azure then please ensure all of the Azure [prerequisities](install-on-azure.md#azure-prerequisites) 
 > are met.  
 
 ## Back up your swarm

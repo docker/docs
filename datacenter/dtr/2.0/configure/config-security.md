@@ -22,8 +22,7 @@ options for setting this up:
 2. You can generate your own certificates using a public service or your enterprise's infrastructure. See the [Generating SSL certificates](config-security.md#generating-ssl-certificates) section for the options available.
 
 If you are generating your own certificates, you can install them by following
-the instructions for [Adding your own registry certificates to Docker Trusted
-Registry](config-security.md#adding-your-own-registry-certificates-to-dtr).
+the instructions for [Adding your own registry certificates to Docker Trusted Registry](config-security.md#adding-your-own-registry-certificates-to-dtr).
 
 However, if you choose to use the Trusted Registry-generated certificates, or
 the certificates you generate yourself are not trusted by your client Docker

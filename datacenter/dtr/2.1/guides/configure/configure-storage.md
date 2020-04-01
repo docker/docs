@@ -157,8 +157,8 @@ YAML file (which is discussed further in this document.)
 
 See the [Docker Registry storage driver](/registry/storage-drivers/)
 documentation for the full options specific to each driver. Storage drivers can
-be customized through the [Docker Registry storage driver
-API](/registry/storage-drivers/index.md#storage-driver-api).
+be customized through the
+[Docker Registry storage driver API](/registry/storage-drivers/index.md#storage-driver-api).
 
 
 ### Filesystem settings

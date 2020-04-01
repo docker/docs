@@ -55,11 +55,9 @@ more information, see [Running Docker Desktop in nested virtualization scenarios
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux
-  containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers)
+* [Switch between Windows and Linux containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers)
   describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
-* [Getting Started with Windows Containers
-  (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
   with Windows containers.
 * Docker Container Platform for Windows [articles and blog
@@ -157,5 +155,4 @@ For information on how to back up and restore data volumes, see [Backup, restore
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
-* [Stable Release Notes](release-notes.md) or [Edge Release
-  Notes](edge-release-notes.md).
+* [Stable Release Notes](release-notes.md) or [Edge Release Notes](edge-release-notes.md).

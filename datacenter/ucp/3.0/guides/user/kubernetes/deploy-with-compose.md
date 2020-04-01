@@ -6,7 +6,7 @@ redirect_from:
   - /ee/ucp/user/services/deploy-compose-on-kubernetes/
 ---
 
-Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md/)
+Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md)
 files to Kubernetes clusters. Starting in Compile file version 3.3, you use the
 same `docker-compose.yml` file that you use for Swarm deployments, but you
 specify **Kubernetes workloads** when you deploy the stack. The result is a

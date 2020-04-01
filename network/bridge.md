@@ -23,8 +23,8 @@ other.
 
 Bridge networks apply to containers running on the **same** Docker daemon host.
 For communication among containers running on different Docker daemon hosts, you
-can either manage routing at the OS level, or you can use an [overlay
-network](overlay.md).
+can either manage routing at the OS level, or you can use an
+[overlay network](overlay.md).
 
 When you start Docker, a [default bridge network](#use-the-default-bridge-network) (also
 called `bridge`) is created automatically, and newly-started containers connect

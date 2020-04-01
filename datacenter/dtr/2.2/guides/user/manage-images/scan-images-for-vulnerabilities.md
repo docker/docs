@@ -13,8 +13,9 @@ Scanning. The results of these scans are reported for each image tag.
 Docker Security Scanning is available as an add-on to Docker Trusted Registry,
 and an administrator configures it for your DTR instance. If you do not see
 security scan results available on your repositories, your organization may not
-have purchased the Security Scanning feature or it may be disabled. See [Set up
-Security Scanning in DTR](../../admin/configure/set-up-vulnerability-scans.md) for more details.
+have purchased the Security Scanning feature or it may be disabled. See
+[Set up Security Scanning in DTR](../../admin/configure/set-up-vulnerability-scans.md)
+for more details.
 
 > **Tip**: Only users with write access to a repository can manually start a
 scan. Users with read-only access can view the scan results, but cannot start

@@ -49,10 +49,9 @@ DTR has a built-in security scanner that can be used to discover what versions
 of software are used in your images. It scans each layer and aggregates the
 results to give you a complete picture of what you are shipping as a part of
 your stack. Most importantly, it correlates this information with a
-vulnerability database that is kept up to date through [periodic
-updates](admin/configure/set-up-vulnerability-scans.md). This
-gives you [unprecedented insight into your exposure to known security
-threats](user/manage-images/scan-images-for-vulnerabilities.md).
+vulnerability database that is kept up to date through
+[periodic updates](admin/configure/set-up-vulnerability-scans.md). This gives you
+[unprecedented insight into your exposure to known security threats](user/manage-images/scan-images-for-vulnerabilities.md).
 
 ## Image signing
 

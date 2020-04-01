@@ -37,8 +37,8 @@ Finally, click **Save** for the changes to take effect.
 
 If you're using certificates issued by a globally trusted certificate authority,
 any web browser or client tool should now trust DTR. If you're using an internal
-certificate authority, you need to [configure your system to trust that
-certificate authority](../repos-and-images/index.md).
+certificate authority, you need to
+[configure your system to trust that certificate authority](../repos-and-images/index.md).
 
 ## Where to go next
 

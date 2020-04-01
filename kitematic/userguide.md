@@ -47,8 +47,8 @@ The container list includes all containers, even those not started by Kitematic,
 giving you a quick over-view of the state of your Docker daemon.
 
 You can click on any container to view its logs (the output of the main container
-process), restart, stop or exec `sh` in that container. See [Working with a
-container](userguide.md#working-with-a-container) for more details.
+process), restart, stop or exec `sh` in that container. See
+[Working with a container](userguide.md#working-with-a-container) for more details.
 
 ## Creating a new container
 

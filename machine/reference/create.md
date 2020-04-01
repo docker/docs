@@ -11,8 +11,7 @@ argument to indicate the name of the created machine.
 > Looking for the full list of available drivers?
 >
 >For a full list of drivers that work with `docker-machine create` and
-information on how to use them, see [Machine
-drivers](/machine/drivers/index.md).
+information on how to use them, see [Machine drivers](/machine/drivers/index.md).
 {: .important}
 
 ## Example
@@ -130,8 +129,7 @@ Docker Machine uses them for the default value of the flag.
 As part of the process of creation, Docker Machine installs Docker and
 configures it with some sensible defaults. For instance, it allows connection
 from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage
-driver](/engine/reference/commandline/dockerd.md#daemon-storage-driver-option)
+as the [storage driver](/engine/reference/commandline/dockerd.md#daemon-storage-driver-option)
 when available.
 
 There are several cases where the user might want to set options for the created
@@ -194,9 +192,8 @@ In addition to this subset of daemon flags which are directly supported, Docker
 Machine also supports an additional flag, `--engine-opt`, which can be used to
 specify arbitrary daemon options with the syntax `--engine-opt flagname=value`.
 For example, to specify that the daemon should use `8.8.8.8` as the DNS server
-for all containers, and always use the `syslog` [log
-driver](/engine/reference/run.md#logging-drivers-log-driver) you
-could run the following create command:
+for all containers, and always use the `syslog` [log driver](/engine/reference/run.md#logging-drivers-log-driver)
+you could run the following create command:
 
 ```bash
 $ docker-machine create -d virtualbox \

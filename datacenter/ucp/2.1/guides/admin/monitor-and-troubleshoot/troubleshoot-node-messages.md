@@ -8,8 +8,8 @@ There are several cases in the lifecycle of UCP when a node is actively
 transitioning from one state to another, such as when a new node is joining the
 cluster or during node promotion and demotion. In these cases, the current step
 of the transition will be reported by UCP as a node message.  You can view the
-state of each individual node by following the same steps required to [monitor
-cluster status](index.md).
+state of each individual node by following the same steps required to
+[monitor cluster status](index.md).
 
 
 ## UCP node states

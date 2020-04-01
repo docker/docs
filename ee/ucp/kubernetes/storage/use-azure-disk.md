@@ -18,14 +18,12 @@ Disks on demand.
 
 This guide assumes you have already provisioned a UCP environment on 
 Microsoft Azure. The Cluster must be provisioned after meeting all of the
-prerequisites listed in [Install UCP on
-Azure](/ee/ucp/admin/install/install-on-azure.md).
+prerequisites listed in [Install UCP on Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure.md).
 
 Additionally, this guide uses the Kubernetes Command Line tool `$
 kubectl` to provision Kubernetes objects within a UCP cluster. Therefore, this
 tool must be downloaded, along with a UCP client bundle. For more
-information on configuring CLI access for UCP, see [CLI Based
-Access](/ee/ucp/user-access/cli/).
+information on configuring CLI access for UCP, see [CLI Based Access](/ee/ucp/user-access/cli.md).
 
 ## Manually provision Azure Disks
 

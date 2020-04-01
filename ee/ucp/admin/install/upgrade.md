@@ -37,7 +37,7 @@ Complete the following checks:
 > Note
 > 
 > If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
-> Azure, please ensure that all of the Azure [prerequisites](install-on-azure.md/#azure-prerequisites)
+> Azure, please ensure that all of the Azure [prerequisites](install-on-azure.md#azure-prerequisites)
 > are met.
 
 #### Storage

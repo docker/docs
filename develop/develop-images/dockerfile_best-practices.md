@@ -320,7 +320,7 @@ processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
+containers depend on each other, you can use [Docker container networks](/network/index.md)
 to ensure that these containers can communicate.
 
 ### Minimize the number of layers
@@ -450,9 +450,9 @@ LABEL vendor=ACME\ Incorporated \
 
 See [Understanding object labels](/config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
-querying labels, refer to the items related to filtering in [Managing labels on
-objects](/config/labels-custom-metadata.md#managing-labels-on-objects). See also
-[LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
+querying labels, refer to the items related to filtering in
+[Managing labels on objects](/config/labels-custom-metadata.md#manage-labels-on-objects).
+See also [LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
 
 ### RUN
 

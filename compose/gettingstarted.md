@@ -11,9 +11,9 @@ understandable even if you're not familiar with it.
 
 ## Prerequisites
 
-Make sure you have already installed both [Docker Engine](/install/index.md) and [Docker
-Compose](install.md). You don't need to install Python or Redis, as both are
-provided by Docker images.
+Make sure you have already installed both [Docker Engine](/install/index.md)
+and [Docker Compose](install.md). You don't need to install Python or Redis, as
+both are provided by Docker images.
 
 ## Step 1: Setup
 
@@ -102,9 +102,9 @@ This tells Docker to:
 * Copy the current directory `.` in the project to the workdir `.` in the image.
 * Set the default command for the container to `flask run`.
 
-For more information on how to write Dockerfiles, see the [Docker user
-guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
-and the [Dockerfile reference](/engine/reference/builder.md).
+For more information on how to write Dockerfiles, see the
+[Docker user guide](/develop/index.md)
+and the [Dockerfile reference](/engine/reference/builder/).
 
 
 ## Step 3: Define services in a Compose file
@@ -214,7 +214,8 @@ hitting CTRL+C in the original terminal where you started the app.
 
 ## Step 5: Edit the Compose file to add a bind mount
 
-Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
+Edit `docker-compose.yml` in your project directory to add a
+[bind mount](/storage/bind-mounts.md) for the `web` service:
 
     version: '3'
     services:
@@ -262,11 +263,10 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Windows that uses [Linux
-containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature). For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
-on Docker Desktop for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
-for Mac, and the general examples on how to [Manage data in
-containers](../engine/tutorials/dockervolumes.md).
+Docker Desktop for Windows that uses [Linux containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+For more information, see [File sharing](/docker-for-mac/index.md#file-sharing) on Docker
+for Mac, and the general examples on how to
+> [Manage data in containers](/storage/volumes.md).
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
@@ -332,7 +332,7 @@ At this point, you have seen the basics of how Compose works.
 ## Where to go next
 
 - Next, try the quick start guide for [Django](django.md),
-  [Rails](rails.md), or [WordPress](/samples/library/wordpress/)
-- [Explore the full list of Compose commands](./reference/)
-- [Compose configuration file reference](compose-file/)
-- To learn more about volumes and bind mounts, see [Manage data in Docker](/engine/admin/volumes/index.md)
+  [Rails](rails.md), or [WordPress](wordpress.md)
+- [Explore the full list of Compose commands](/compose/reference/index.md)
+- [Compose configuration file reference](/compose/compose-file/index.md)
+- To learn more about volumes and bind mounts, see [Manage data in Docker](/storage/index.md)

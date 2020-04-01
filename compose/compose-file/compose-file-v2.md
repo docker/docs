@@ -215,7 +215,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -281,7 +281,7 @@ to determine the value to use for builds.
 
 > Added in [version 2.1](compose-versioning.md#version-21) file format
 
-Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -349,7 +349,7 @@ build:
 > Added in [version 2.3](compose-versioning.md#version-23) file format
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
+[multi-stage build docs](/develop/develop-images/multistage-build.md) for
 details.
 
 ```yaml
@@ -740,7 +740,7 @@ external_links:
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2),
 > the externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 
 ### extra_hosts
@@ -881,7 +881,7 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+> [`init-path` configuration option](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 ### isolation
 
@@ -895,7 +895,7 @@ for details.
 
 ### labels
 
-Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -958,7 +958,7 @@ logging:
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/engine/admin/logging/overview.md)).
+([documented here](/config/containers/logging/configure.md)).
 
 The default value is json-file.
 
@@ -1311,7 +1311,7 @@ security_opt:
 
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+[`stop_signal`](#stop_signal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
 ```yaml
@@ -1401,7 +1401,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
+See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
 more information.
 
 ### volumes
@@ -1489,7 +1489,7 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 
 ### volume\_driver
@@ -1510,8 +1510,8 @@ volume_driver: mydriver
 > entry in the [top-level `volumes` option](#volume-configuration-reference).
 
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+See [Docker Volumes](/storage/volumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume/) for more information.
 
 ### volumes_from
 
@@ -1641,8 +1641,8 @@ easily retrieved and inspected using the docker command line or API.
 See the [docker volume](/engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
-See [use volumes](/engine/admin/volumes/volumes.md) and [volume
-plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+See [use volumes](/storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
+for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
@@ -1744,7 +1744,7 @@ volumes:
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -1877,7 +1877,7 @@ you can set this option to `true`.
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -1986,5 +1986,5 @@ networks:
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/)
-- [Command line reference](/compose/reference/)
+- [Samples](/samples/index.md)
+- [Command line reference](/compose/reference/index.md)

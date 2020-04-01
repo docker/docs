@@ -27,12 +27,12 @@ the image repository:
 
 Delegation keys are optional, and not generated as part of the normal `docker`
 workflow.  They need to be
-[manually generated and added to the repository](trust_delegation.md#generating-delegation-keys).
+[manually generated and added to the repository](trust_delegation.md#creating-delegation-keys).
 
 **Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
-locally client-side. [Use the Notary CLI to manage your snapshot key locally
-again](/notary/advanced_usage.md#rotate-keys) for
-repositories created with newer versions of Docker.
+locally client-side.
+Use the Notary CLI to [manage your snapshot key locally again](/notary/advanced_usage.md#rotate-keys)
+for repositories created with newer versions of Docker.
 
 ## Choose a passphrase
 

@@ -263,6 +263,7 @@ your swarm, and start an image on your swarm.
 
 At this point, you've installed Docker Swarm by pulling the latest image of
 it from Docker Hub. Then, you built and ran a swarm on your local machine
-using VirtualBox. If you want, you can onto read an [overview of Docker Swarm
-features](index.md). Alternatively, you can develop a more in-depth view of Swarm by
-[manually installing Swarm](install-manual.md) on a network.
+using VirtualBox. If you want, you can onto read an
+[overview of Docker Swarm features](index.md). Alternatively, you can develop a
+more in-depth view of Swarm by [manually installing Swarm](install-manual.md) on
+a network.

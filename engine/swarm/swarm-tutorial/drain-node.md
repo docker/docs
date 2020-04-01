@@ -35,8 +35,8 @@ node and launches replica tasks on a node with `ACTIVE` availability.
     e216jshn25ckzbvmwlnh5jr3g *  manager1  Ready   Active        Leader
     ```
 
-3.  If you aren't still running the `redis` service from the [rolling
-update](rolling-update.md) tutorial, start it now:
+3.  If you aren't still running the `redis` service from the
+    [rolling update](rolling-update.md) tutorial, start it now:
 
     ```bash
     $ docker service create --replicas 3 --name redis --update-delay 10s redis:3.0.6

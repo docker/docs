@@ -385,7 +385,7 @@ In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
 `docker service update` command to force the service to redistribute its tasks
 across the available worker nodes. This causes the service tasks to restart.
 Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](/engine/swarm/swarm-tutorial/rolling-update/).
+uses a [rolling update](/engine/swarm/swarm-tutorial/rolling-update.md).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm

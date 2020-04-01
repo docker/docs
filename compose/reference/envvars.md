@@ -93,7 +93,7 @@ using this character as path separator.
 
 ## COMPOSE\_FORCE\_WINDOWS\_HOST
 
-If set, volume declarations using the [short syntax](../compose-file/index.md#short-syntax-3)
+If set, volume declarations using the [short syntax](/compose/compose-file/#short-syntax-3)
 are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
@@ -119,5 +119,5 @@ Supported: `true` or `1` to enable, `false` or `0` to disable.
 
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
-- [Compose file reference](/compose/compose-file.md)
+- [Compose file reference](/compose/compose-file/index.md)
 - [Environment file](/compose/env-file.md)

@@ -163,13 +163,13 @@ As well as on the registry. For example:
 2019/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
 
-For more about using client and server side certificates, see [Adding TLS
-certificates](index.md#adding-tls-certificates) in the Getting Started topic.
+For more about using client and server side certificates, see
+[Adding TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
 
-See [Do I need to reinstall Docker Desktop if I change the name of my macOS
-account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
+See
+[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
 in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
@@ -229,8 +229,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   * If you use bash, use the following command: `unset ${!DOCKER_*}`
 
   * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker Desktop on
-    Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac) in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+    in [Setting up to run Docker Desktop on Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac)
+    in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
 
 * Network connections fail if the macOS Firewall is set to "Block all incoming
   connections". You can enable the firewall, but `bootpd` must be allowed
@@ -335,8 +335,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   outside of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
   actively working on `osxfs` performance using a number of different
-  techniques.  To learn more, see the topic on [Performance issues, solutions,
-  and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  techniques.  To learn more, see the topic on
+  [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
 * If your system does not have access to an NTP server, then after a hibernate
   the time seen by Docker Desktop may be considerably out of sync with the host.
