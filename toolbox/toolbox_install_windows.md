@@ -5,10 +5,9 @@ keywords: docker, documentation, install, toolbox, win
 title: Install Docker Toolbox on Windows
 ---
 
-Docker Toolbox provides a way to use Docker on
-Windows systems that do not
-meet minimal system requirements for the [Docker Desktop for
-Windows](/docker-for-windows/index.md) app.
+Docker Toolbox provides a way to use Docker on Windows systems that do not meet
+minimal system requirements for the [Docker Desktop for Windows](/docker-for-windows/index.md)
+app.
 
 ## What you get and how it works
 
@@ -29,8 +28,7 @@ small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
 >**Tip**: One of the advantages of the newer
-[Docker Desktop for
-Windows](/docker-for-windows/index.md) solution is that
+[Docker Desktop for Windows](/docker-for-windows/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.
 
@@ -251,12 +249,9 @@ To uninstall Toolbox on Windows, do the following:
     Successfully removed my-docker-machine
     ```
 
-    This step is optional because if you plan
-    to re-install Docker Machine as a part
-    of [Docker Desktop for
-    Windows](/docker-for-windows/index.md), you can import and
-    continue to manage those machines
-    through Docker.
+    This step is optional because if you plan to re-install Docker Machine as a
+    part of [Docker Desktop for Windows](/docker-for-windows/index.md), you can
+    import and continue to manage those machines through Docker.
 
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel (programs and features).
 

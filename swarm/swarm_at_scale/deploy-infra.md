@@ -10,8 +10,8 @@ title: Deploy application infrastructure
 ---
 
 In this step, you create several Docker hosts to run your application stack on.
-Before you continue, make sure you have taken the time to [learn the application
-architecture](about.md).
+Before you continue, make sure you have taken the time to
+[learn the application architecture](about.md).
 
 ## About these instructions
 

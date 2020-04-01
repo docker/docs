@@ -418,5 +418,5 @@ the containers at once. This extra credit
 Congratulations. You have successfully walked through manually deploying a
 microservice-based application to a swarm cluster. Of course, not every
 deployment goes smoothly. Now that you've learned how to successfully deploy an
-application at scale, you should learn [what to consider when troubleshooting
-large applications running on a swarm cluster](troubleshoot.md).
+application at scale, you should learn what to consider when
+[troubleshooting large applications running on a swarm cluster](troubleshoot.md).

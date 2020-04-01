@@ -58,8 +58,8 @@ Also note that Docker Desktop can’t route traffic to containers, so you can't
 directly access an exposed port on a running container from the hosting machine.
 
 If you do need multiple VMs, such as when testing multi-node swarms, you can
-continue to use Docker Machine, which operates outside the scope of Docker Desktop. See [Docker Toolbox and Docker Desktop
-coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
+continue to use Docker Machine, which operates outside the scope of Docker Desktop. See
+[Docker Toolbox and Docker Desktop coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
 
 ## Setting up to run Docker Desktop on Mac
 
@@ -103,8 +103,7 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-desktop-coexistence).
 > `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
-See also [Unset environment variables in the current
-shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell)
+See also [Unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell)
 in the Docker Machine topics.
 
 ## Docker Toolbox and Docker Desktop coexistence
@@ -222,6 +221,5 @@ it](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbo
 
 You might decide that you do not need Toolbox now that you have Docker Desktop,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on Mac, see [How to uninstall
-Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
-Toolbox Mac topics.
+Toolbox on Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox)
+in the Toolbox Mac topics.

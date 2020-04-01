@@ -34,14 +34,14 @@ do not have `systemctl`, use the `service` command.
 ### Start automatically at system boot
 
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Custom Docker daemon options
 
 There are a number of ways to configure the daemon flags and environment variables
 for your Docker daemon. The recommended way is to use the platform-independent
 `daemon.json` file, which is located in `/etc/docker/` on Linux by default. See
-[Daemon configuration file](/engine/reference/commandline/dockerd.md/#daemon-configuration-file).
+[Daemon configuration file](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 You can configure nearly all daemon configuration options using `daemon.json`. The following
 example configures two options. One thing you cannot configure using `daemon.json` mechanism is
@@ -161,6 +161,5 @@ See
 
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files
-(`service` and `socket`) from [the github
-repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
+(`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.

@@ -86,8 +86,7 @@ Several Docker Machine driver plugins for use with other cloud platforms are
 available from 3rd party contributors. These are use-at-your-own-risk plugins,
 not maintained by or formally associated with Docker.
 
-See [Available driver
-plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
 target="_blank" class="_"}.
 
 ## Add a host without a driver

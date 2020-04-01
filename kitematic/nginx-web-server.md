@@ -17,8 +17,8 @@ This example website serves the popular 2048 game. Let's get to it!
 
 #### Run the Nginx web server container
 
-First, if you haven't yet done so, [download and start
-Kitematic](index.md). Once installed and running, the app should look like this:
+First, if you haven't yet done so, [download and start Kitematic](index.md).
+Once installed and running, the app should look like this:
 
 ![Nginx create](images/nginx-create.png)
 

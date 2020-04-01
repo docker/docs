@@ -106,8 +106,8 @@ The following two examples demonstrate how to utilize this using the existing Do
 ### Authenticate using registry tokens
 
 > **Note**: This example requires Docker Engine 1.10 with auth token support.
-> For older Engine versions, refer to [authenticate using username and
-> password](swarm-api.md#authenticate-using-username-and-password).
+> For older Engine versions, refer to
+> [authenticate using username and password](swarm-api.md#authenticate-using-username-and-password).
 
 This example uses the [`jq` command-line utility](https://stedolan.github.io/jq/).
 To run this example, install `jq` using your package manager (`apt-get install jq` or `yum install jq`).

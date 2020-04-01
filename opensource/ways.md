@@ -84,10 +84,8 @@ and how long it lasts. Usual meetups tend to last 2 hours, and start between
 
 ## Learn about the Docker Community
 
-Go to the **[Docker Community GitHub
-repository](https://github.com/docker/community/blob/master/README.md){:
-target="_blank" class="_"}** for
-resources and information on the community. Those pages are the most
+Go to the **[Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" class="_"}**
+for resources and information on the community. Those pages are the most
 up-to-date for finding out about the community and making connections.
 
 The topics below provide some additional links, but it's likely that everything

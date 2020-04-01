@@ -1312,10 +1312,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 **New**
 
-- Windows containers settings panel and options are working. In previous releases, settings were not implemented for [Windows containers
-mode](index.md#switch-between-windows-and-linux-containers-beta-feature). (See
-[About the Docker Windows containers specific
-dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+- Windows containers settings panel and options are working. In previous releases, settings were not implemented for
+[Windows containers mode](index.md#switch-between-windows-and-linux-containers). (See
+[About the Docker Windows containers specific dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified

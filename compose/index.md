@@ -47,7 +47,7 @@ A `docker-compose.yml` looks like this:
       logvolume01: {}
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file/index.md).
+[Compose file reference](/compose/compose-file/index.md).
 
 Compose has commands for managing the whole lifecycle of your application:
 
@@ -64,8 +64,8 @@ Compose has commands for managing the whole lifecycle of your application:
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
 - [Frequently asked questions](faq.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file/index.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
 
 ## Features
 
@@ -88,8 +88,8 @@ Compose uses a project name to isolate environments from each other. You can mak
 
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](./reference/overview.md) or the
-[`COMPOSE_PROJECT_NAME` environment variable](./reference/envvars.md#compose-project-name).
+[`-p` command line option](/compose/reference/overview.md) or the
+[`COMPOSE_PROJECT_NAME` environment variable](/compose/reference/envvars.md#compose_project_name).
 
 ### Preserve volume data when containers are created
 
@@ -99,7 +99,7 @@ the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
 If you use `docker-compose` on a Windows machine, see
-[Environment variables](reference/envvars.md) and adjust the necessary environment
+[Environment variables](/compose/reference/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 
 
@@ -115,7 +115,7 @@ environment very quickly.
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file.md#variable-substitution) for more
+See [Variable substitution](/compose/compose-file/index.md#variable-substitution) for more
 details.
 
 You can extend a Compose file using the `extends` field or by creating multiple
@@ -133,7 +133,7 @@ When you're developing software, the ability to run an application in an
 isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
-The [Compose file](compose-file.md) provides a way to document and configure
+The [Compose file](/compose/compose-file/index.md) provides a way to document and configure
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
@@ -148,7 +148,7 @@ started guide" to a single machine readable Compose file and a few commands.
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file.md), you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](/compose/compose-file/index.md), you can create and destroy these environments in just a few commands:
 
     $ docker-compose up -d
     $ ./run_tests
@@ -180,8 +180,6 @@ individuals, we have a number of open channels for communication.
 * To report bugs or file feature requests: use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
 * To talk about the project with people in real time: join the
-  `#docker-compose` channel on freenode IRC.
+  `#docker-compose` channel on the Docker Community Slack.
 
 * To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
-
-For more information and resources, visit the [Getting Help project page](/opensource/get-help/).

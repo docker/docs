@@ -10,8 +10,9 @@ redirect_from:
 
 For more advanced deployments, you may want to share one Docker Trusted Registry
 across multiple Universal Control Planes. However, customers wanting to adopt
-this model alongside the [Only Run Signed
-Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md) UCP feature, run into problems as each UCP operates an independent set of users.
+this model alongside the
+[Only Run Signed Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md)
+UCP feature, run into problems as each UCP operates an independent set of users.
 
 Docker Content Trust (DCT) gets around this problem, since users from
 a remote UCP are able to sign images in the central DTR and still apply runtime
@@ -28,9 +29,8 @@ cluster separately.
 
 > Before attempting this guide, familiarize yourself with [Docker Content
 > Trust](engine/security/trust/content_trust/#signing-images-with-docker-content-trust)
-> and [Only Run Signed
-> Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md) on a
-> single UCP. Many of the concepts within this guide may be new without that
+> and [Only Run Signed Images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md)
+> on a single UCP. Many of the concepts within this guide may be new without that
 > background. 
 
 ## Prerequisites

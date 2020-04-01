@@ -10,8 +10,8 @@ using Kitematic and Docker.
 
 ### Create Minecraft server container
 
-First, if you haven't yet done so, [download and start
-Kitematic](index.md). Once installed and running, the app should look like this:
+First, if you haven't yet done so, [download and start Kitematic](index.md).
+Once installed and running, the app should look like this:
 
 Create a container from the recommended Minecraft image by clicking the "Create"
 button.
@@ -68,5 +68,5 @@ Go back to your Minecraft client and join your server. The new map should load.
 
 ## Next steps
 
-For an example using Kitematic to run Nginx, take a look at the [Nginx web
-server](./nginx-web-server.md) page.
+For an example using Kitematic to run Nginx, take a look at the
+[Nginx web server](./nginx-web-server.md) page.

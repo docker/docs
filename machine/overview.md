@@ -28,14 +28,14 @@ point to a host called `default`, follow on-screen instructions to complete
 `env` setup, and run `docker ps`, `docker run hello-world`, and so forth.
 
 Machine _was_ the _only_ way to run Docker on Mac or Windows previous to Docker
-v1.12. Starting with the beta program and Docker v1.12, [Docker Desktop for
-Mac](/docker-for-mac/index.md) and [Docker Desktop for
-Windows](/docker-for-windows/index.md) are available as native apps and the
+v1.12. Starting with the beta program and Docker v1.12,
+[Docker Desktop for Mac](/docker-for-mac/index.md) and
+[Docker Desktop for Windows](/docker-for-windows/index.md) are available as native apps and the
 better choice for this use case on newer desktops and laptops. We encourage you
 to try out these new apps. The installers for Docker Desktop for Mac and Docker Desktop for
 Windows include Docker Machine, along with Docker Compose.
 
-If you aren't sure where to begin, see [Get Started with Docker](/get-started/),
+If you aren't sure where to begin, see [Get Started with Docker](/get-started/index.md),
 which guides you through a brief end-to-end tutorial on Docker.
 
 ## Why should I use it?

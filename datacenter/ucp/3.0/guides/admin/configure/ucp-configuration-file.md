@@ -215,7 +215,7 @@ Configures the swarm cluster that the current UCP instance manages.
 The `dns`, `dns_opt`, and `dns_search` settings configure the DNS settings for UCP
 components. Assigning these values overrides the settings in a container's
 `/etc/resolv.conf` file. For more info, see
-[Configure container DNS](/engine/userguide/networking/default_network/configure-dns/).
+[Configure container DNS](/config/containers/container-networking.md#dns-services).
 
 | Parameter                         | Required | Description                                                                                                                                                                                                           |
 |:----------------------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

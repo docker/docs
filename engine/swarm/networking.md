@@ -73,7 +73,7 @@ subnet and uses default options. You can see information about the network using
 When no containers are connected to the overlay network, its configuration is
 not very exciting:
 
-```json
+```bash
 $ docker network inspect my-network
 [
     {
@@ -194,7 +194,7 @@ $ docker network create \
 
 ##### Using custom default address pools
 
-To customize subnet allocation for your Swarm networks, you can [optionally configure them](./swarm-mode.md) during `swarm init`.
+To customize subnet allocation for your Swarm networks, you can [optionally configure them](swarm-mode.md) during `swarm init`.
 
 For example, the following command is used when initializing Swarm:
 
@@ -223,7 +223,7 @@ endpoint mode with an external load balancer, or use multiple smaller overlay ne
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](/engine/userguide/networking/overlay-security-model.md).
+[Docker swarm mode overlay network security model](/network/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker

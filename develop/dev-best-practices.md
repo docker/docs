@@ -20,7 +20,7 @@ keep image size small:
   starting with a generic `ubuntu` image and installing `openjdk` as part of the
   Dockerfile.
 
-- [Use multistage builds](/engine/userguide/eng-image/multistage-build.md). For
+- [Use multistage builds](/develop/develop-images/multistage-build.md). For
   instance, you can use the `maven` image to build your Java application, then
   reset to the `tomcat` image and copy the Java artifacts into the correct
   location to deploy your app, all in the same Dockerfile. This means that your
@@ -45,7 +45,7 @@ keep image size small:
     ```
 
 - If you have multiple images with a lot in common, consider creating your own
-  [base image](/engine/userguide/eng-image/baseimages.md) with the shared
+  [base image](/develop/develop-images/baseimages.md) with the shared
   components, and basing your unique images on that. Docker only needs to load
   the common layers once, and they are cached. This means that your
   derivative images use memory on the Docker host more efficiently and load more
@@ -63,12 +63,12 @@ keep image size small:
 ## Where and how to persist application data
 
 - **Avoid** storing application data in your container's writable layer using
-  [storage drivers](/engine/userguide/storagedriver.md). This increases the
+  [storage drivers](/storage/storagedriver/select-storage-driver.md). This increases the
   size of your container and is less efficient from an I/O perspective than
   using volumes or bind mounts.
-- Instead, store data using [volumes](/engine/admin/volumes/volumes.md).
+- Instead, store data using [volumes](/storage/volumes.md).
 - One case where it is appropriate to use
-  [bind mounts](/engine/admin/volumes/bind-mounts.md) is during development,
+  [bind mounts](/storage/bind-mounts.md) is during development,
   when you may want to mount your source directory or a binary you just built
   into your container. For production, use a volume instead, mounting it into
   the same location as you mounted a bind mount during development.
@@ -82,7 +82,7 @@ keep image size small:
 ## Use CI/CD for testing and deployment
 
 - When you check a change into source control or create a pull request, use
-  [Docker Hub](/docker-hub/builds/automated-build.md) or
+  [Docker Hub](/docker-hub/builds/index.md) or
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.
 

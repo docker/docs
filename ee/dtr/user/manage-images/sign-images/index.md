@@ -11,9 +11,9 @@ redirect_from:
 
 Two key components of the Docker Trusted Registry are the Notary Server and the Notary
 Signer. These two containers provide the required components for using Docker Content
-Trust (DCT) out of the box. [Docker Content
-Trust](/engine/security/trust/content_trust/) allows you to sign image tags,
-therefore giving consumers a way to verify the integrity of your image.
+Trust (DCT) out of the box. [Docker Content Trust](/engine/security/trust/content_trust.md)
+allows you to sign image tags, therefore giving consumers a way to verify the integrity
+of your image.
 
 As part of DTR, both the Notary and the Registry
 servers are accessed through a front-end proxy, with both components sharing the
@@ -29,13 +29,12 @@ DCT is integrated with the Docker CLI, and allows you to:
 
 ## Sign images that UCP can trust
 
-UCP has a feature which will prevent [untrusted
-images](/ee/ucp/admin/configure/run-only-the-images-you-trust/) from being
-deployed on the cluster. To use the feature, you need to sign and push images to your DTR. 
-To tie the signed images back to UCP, you need to sign the
+UCP has a feature which will prevent [untrusted images](/ee/ucp/admin/configure/run-only-the-images-you-trust.md)
+from being deployed on the cluster. To use the feature, you need to sign and push
+images to your DTR.  To tie the signed images back to UCP, you need to sign the
 images with the private keys of the UCP users. From a UCP client bundle, use
-`key.pem` as your private key, and `cert.pem` as your public key
-on an `x509` certificate. 
+`key.pem` as your private key, and `cert.pem` as your public key on an `x509`
+certificate. 
 
 To sign images in a way that UCP can trust, you need to:
 

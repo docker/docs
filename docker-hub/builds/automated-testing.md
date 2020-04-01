@@ -44,9 +44,8 @@ make sure all of your services start.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file
 that ends in `.test.yml` is used for testing, and the tests run sequentially.
-You can also use [custom build
-hooks](advanced.md#override-build-test-or-push-commands) to further customize
-your test behavior.
+You can also use [custom build hooks](advanced.md#override-build-test-or-push-commands)
+to further customize your test behavior.
 
 > **Note**: If you enable Automated builds, they also run any tests defined
 in the `test.yml` files.

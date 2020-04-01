@@ -115,11 +115,11 @@ Pods with any of the following defined in the Pod Specification:
     Namespace.
   - `SecurityContext.allowPrivilegeEscalation` - Prevents a child process
     of a container from gaining more privileges than its parent.
-  - `SecurityContext.capabilities` - Prevents additional  [Linux
-    Capabilities](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
+  - `SecurityContext.capabilities` - Prevents additional
+    [Linux Capabilities](/engine/security/security.md#linux-kernel-capabilities)
     from being added to a pod.
-  - `SecurityContext.privileged` - Prevents a user from deploying a [Privileged
-    Container](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
+  - `SecurityContext.privileged` - Prevents a user from deploying a
+    [Privileged Container](/engine/reference/run/#runtime-privilege-and-linux-capabilities).
   - `Volume.hostPath` - Prevents a user from mounting a path from the host into
     the container. This could be a file, a directory, or even the Docker Socket.
 

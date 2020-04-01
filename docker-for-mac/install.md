@@ -134,6 +134,6 @@ For information on how to back up and restore data volumes, see [Backup, restore
   to run and submit diagnostics, and submit issues.
 - [FAQs](faqs.md) provide answers to frequently asked questions.
 - [Release notes](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases. For information about Edge releases, see [Edge release
-  notes](edge-release-notes.md).
+  improvements associated with Stable releases. For information about Edge releases, see
+  [Edge release notes](edge-release-notes.md).
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.

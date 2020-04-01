@@ -121,5 +121,5 @@ Enjoy working with Compose faster and with fewer typos!
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)

@@ -657,8 +657,8 @@ naming scheme accordingly before upgrading.
 
 - Added support for `extra_hosts` in build configuration
 
-- Added support for the [long syntax](/compose/compose-file.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
-  Using this syntax will create [mounts](/engine/admin/volumes/bind-mounts.md) instead of volumes.
+- Added support for the [long syntax](/compose/compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+  Using this syntax will create [mounts](/storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
 
@@ -1986,8 +1986,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `pid: host`, like `docker run --pid=host`, lets you reuse the same PID namespace as the host machine.
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
-- `security_opt`, like `docker run --security-opt`, lets you specify [security options](https://docs.docker.com/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver).
+- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers-log-driver).
 
 ### Bug Fixes
 
@@ -2072,7 +2072,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](https://docs.docker.com/installation/mac/). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](/docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 

@@ -13,8 +13,9 @@ Scanning. The results of these scans are reported for each image tag.
 Docker Security Scanning is available as an add-on to Docker Trusted Registry,
 and an administrator configures it for your DTR instance. If you do not see
 security scan results available on your repositories, your organization may not
-have purchased the Security Scanning feature or it may be disabled. See [Set up
-Security Scanning in DTR](../../admin/configure/set-up-vulnerability-scans.md) for more details.
+have purchased the Security Scanning feature or it may be disabled. See
+[Set up Security Scanning in DTR](../../admin/configure/set-up-vulnerability-scans.md)
+for more details.
 
 > **Tip**: Only users with write access to a repository can manually start a
 scan. Users with read-only access can view the scan results, but cannot start
@@ -39,8 +40,9 @@ discovered vulnerabilities.
 
 DTR scans both Linux and Windows images, but by default Docker doesn't push
 foreign image layers for Windows images so DTR can't scan them. If
-you want DTR to scan your Windows images, [configure Docker to always push image
-layers](pull-and-push-images.md), and it will scan the non-foreign layers.
+you want DTR to scan your Windows images, 
+[configure Docker to always push image layers](pull-and-push-images.md), and it
+will scan the non-foreign layers.
 
 ## Security scan on push
 

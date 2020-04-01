@@ -369,8 +369,7 @@ in Docker Hub. For example, run the following to access `v1.9`:
 
 All the images described below are automatically built using Docker Hub. To
 build the site manually, from scratch, including all utility and archive images,
-see the [README in the publish-tools
-branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
+see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
 
 - Some utility images are built from Dockerfiles in the `publish-tools` branch.
   See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
