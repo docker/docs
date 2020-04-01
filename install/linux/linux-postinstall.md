@@ -36,7 +36,7 @@ creates a Unix socket accessible by members of the `docker` group.
 
 To create the `docker` group and add your user:
 
-1.  Create the `docker` group.
+1.  Create the `docker` group. On a current MacOS, you may find the following commands absent in the Terminal. In this case, try creating the group in the Users and Groups System Preference Pane. Then, add your user account there too. 
 
     ```bash
     $ sudo groupadd docker
