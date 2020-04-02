@@ -30,3 +30,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
+      - name: send slack notification
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Successfully promoted docs-stage from master. https://docs-stage.docker.com/"}' $SLACK
+        env:
+          SLACK: ${{ secrets.SLACK_WEBHOOK }}
+        if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
