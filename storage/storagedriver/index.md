@@ -222,7 +222,7 @@ layers are the same.
     ```
 
 3.  Copy the contents of the first Dockerfile above into a new file called
-    `Dockerfile.base`.
+    `base.Dockerfile`.
 
 4.  Copy the contents of the second Dockerfile above into a new file called
     `Dockerfile`.
@@ -232,9 +232,9 @@ layers are the same.
     Docker where to look for any files that need to be added to the image.
 
     ```console
-    $ docker build -t acme/my-base-image:1.0 -f Dockerfile.base .
+    $ docker build -t acme/my-base-image:1.0 -f base.Dockerfile .
     [+] Building 6.0s (11/11) FINISHED
-    => [internal] load build definition from Dockerfile.base                                      0.4s
+    => [internal] load build definition from base.Dockerfile                                      0.4s
     => => transferring dockerfile: 116B                                                           0.0s
     => [internal] load .dockerignore                                                              0.3s
     => => transferring context: 2B                                                                0.0s
@@ -242,7 +242,7 @@ layers are the same.
     => [auth] docker/dockerfile:pull token for registry-1.docker.io                               0.0s
     => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:9e2c9eca7367393aecc68795c671... 0.0s
     => [internal] load .dockerignore                                                              0.0s
-    => [internal] load build definition from Dockerfile.base                                      0.0s
+    => [internal] load build definition from base.Dockerfile                                      0.0s
     => [internal] load metadata for docker.io/library/alpine:latest                               0.0s
     => CACHED [1/2] FROM docker.io/library/alpine                                                 0.0s
     => [2/2] RUN apk add --no-cache bash                                                          3.1s
