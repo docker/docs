@@ -13,9 +13,9 @@ notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.3.0
-Date
+2020-04-02
 
-> [Download](<add-link>)
+> [Download](https://download.docker.com/mac/edge/43965/Docker.dmg)
 
 ### Upgrades
 
@@ -31,6 +31,7 @@ Date
 
 > Docker Desktop Edge 2.2.3.0 fixes 7 issues reported on the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
+- Reduced the size of the Docker Desktop installer from 710 MB to 445 MB.
 - Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of `docker-machine` being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
 - Fixed a bug where the Docker UI could be started without the engine.
 - Switched from `ahci-hd` to `virtio-blk` to avoid an AHCI deadlock, see [moby/hyperkit#94](https://github.com/moby/hyperkit/issues/94) and [docker/for-mac#1835](https://github.com/docker/for-mac/issues/1835).

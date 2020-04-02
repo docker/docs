@@ -13,9 +13,9 @@ notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.3.0
-Date
+2020-04-02
 
-> [Download](Add URL)
+> [Download](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -53,6 +53,7 @@ Date
 - Fixed a bug where files did not change in shared volumes when using `volumes_from` in docker-compose.yml. Fixes [docker/for-win#5530](https://github.com/docker/for-win/issues/5530).
 
 **Other fixes**
+- Reduced the size of the Docker Desktop installer from 960 MB to 400 MB.
 - Added an option to delete container and image data from the **Troubleshoot** screen.
 - Docker Desktop now reads the Hyper-V VM disk max size on startup and uses it as the value to display in the Settings.
 - Fixed the Hyper-V used disk image size being reported incorrectly.
