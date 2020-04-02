@@ -388,11 +388,11 @@ Docker workloads on Kubernetes.
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-for-desktop`:
+to change context so that `kubectl` is pointing to `docker-desktop`:
 
 ```bash
 > kubectl config get-contexts
-> kubectl config use-context docker-for-desktop
+> kubectl config use-context docker-desktop
 ```
 
 You can also change it through the Docker Desktop Enterprise menu:

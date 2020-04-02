@@ -20,8 +20,8 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
 
   {% capture local-kubectl-warning %}
 > If you independently installed the Kubernetes CLI, `kubectl`, make sure that
-> it is pointing to `docker-for-desktop` and not some other context such as
-> `minikube` or a GKE cluster. Run: `kubectl config use-context docker-for-desktop`.
+> it is pointing to `docker-desktop` and not some other context such as
+> `minikube` or a GKE cluster. Run: `kubectl config use-context docker-desktop`.
 > If you experience conflicts with an existing `kubectl` installation, remove `/usr/local/bin/kubectl`.
 
   {% endcapture %}
@@ -130,7 +130,7 @@ You can test the command by listing the available nodes:
 kubectl get nodes
 
 NAME                 STATUS    ROLES     AGE       VERSION
-docker-for-desktop   Ready     master    3h        v1.8.2
+docker-desktop       Ready     master    3h        v1.8.2
 ```
 
 ## Example app
