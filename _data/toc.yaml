@@ -48,44 +48,6 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
-- sectiontitle: Configure networking
-  section:
-    - path: /network/
-      title: Networking overview
-    - path: /network/bridge/
-      title: Use bridge networks
-    - path: /network/overlay/
-      title: Use overlay networks
-    - path: /network/host/
-      title: Use host networking
-    - path: /network/macvlan/
-      title: Use Macvlan networks
-    - path: /network/none/
-      title: Disable networking for a container
-    - sectiontitle: Networking tutorials
-      section:
-      - path: /network/network-tutorial-standalone/
-        title: Bridge network tutorial
-      - path: /network/network-tutorial-host/
-        title: Host networking tutorial
-      - path: /network/network-tutorial-overlay/
-        title: Overlay networking tutorial
-      - path: /network/network-tutorial-macvlan/
-        title: Macvlan network tutorial
-    - sectiontitle: Configure the daemon and containers
-      section:
-      - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
-      - path: /network/iptables/
-        title: Docker and iptables
-      - path: /config/containers/container-networking/
-        title: Container networking
-      - path: /network/proxy/
-        title: Configure Docker to use a proxy server
-    - sectiontitle: Legacy networking content
-      section:
-      - path: /network/links/
-        title: (Legacy) Container links
 - sectiontitle: Manage application data
   section:
     - path: /storage/
@@ -295,7 +257,45 @@ guides:
       - title: Plugin configuration
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
-        title: Plugins API
+        title: Plugins
+  - sectiontitle: Configure networking
+    section:
+    - path: /network/
+      title: Networking overview
+    - path: /network/bridge/
+      title: Use bridge networks
+    - path: /network/overlay/
+      title: Use overlay networks
+    - path: /network/host/
+      title: Use host networking
+    - path: /network/macvlan/
+      title: Use Macvlan networks
+    - path: /network/none/
+      title: Disable networking for a container
+    - sectiontitle: Networking tutorials
+      section:
+      - path: /network/network-tutorial-standalone/
+        title: Bridge network tutorial
+      - path: /network/network-tutorial-host/
+        title: Host networking tutorial
+      - path: /network/network-tutorial-overlay/
+        title: Overlay networking tutorial
+      - path: /network/network-tutorial-macvlan/
+        title: Macvlan network tutorial
+    - sectiontitle: Configure the daemon and containers
+      section:
+      - path: /config/daemon/ipv6/
+        title: Configure the daemon for IPv6
+      - path: /network/iptables/
+        title: Docker and iptables
+      - path: /config/containers/container-networking/
+        title: Container networking
+      - path: /network/proxy/
+        title: Configure Docker to use a proxy server
+    - sectiontitle: Legacy networking content
+      section:
+      - path: /network/links/
+        title: (Legacy) Container links
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
