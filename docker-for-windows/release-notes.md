@@ -13,10 +13,23 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.0.5
+2020-04-02
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+
+### Bug fixes and minor changes
+
+- Docker Desktop generates `fsnotify.WRITE` events in Linux containers when files are changed on the host. Fixes [docker/for-win#5530](https://github.com/docker/for-win/issues/5530#issuecomment-585572414).
+- Fixed a race condition in `readlink` on shared volumes using "mfsymlinks". Fixes [docker/for-win#5793](https://github.com/docker/for-win/issues/5793).
+- Made the VM time sync more reliable. See [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
+- Fixed bug where files did not change in shared volumes when using `volumes_from` in `docker-compose.yml`. See [docker/for-win#5530](https://github.com/docker/for-win/issues/5530).
+- Fixed a bug where opening a read-only file would fail with an `Operation not permitted` error. Fixes [docker/for-win#6016](https://github.com/docker/for-win/issues/6016) and [docker/for-win#6017](https://github.com/docker/for-win/issues/6017).
+
 ## Docker Desktop Community 2.2.0.4
 2020-03-13
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 

@@ -15,4 +15,3 @@ Dockerfile.archive
 docker-compose.yml
 Gemfile
 Gemfile.lock
-Jenkinsfile

@@ -13,10 +13,19 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.2.0.5
+2020-04-02
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+
+### Bug fixes and minor changes
+
+- Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of  Docker Machine being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
+
 ## Docker Desktop Community 2.2.0.4
 2020-03-13
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
 
 ### Upgrades
 
