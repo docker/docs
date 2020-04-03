@@ -33,7 +33,7 @@ to a `/Shared/database` collection:
 ```bash
 docker service create \
   --name redis_2 \
-  --label com.docker.ucp.access.label="/Shared/database"
+  --label com.docker.ucp.access.label="/Shared/database" \
   redis:3.0.6
 ```
 
