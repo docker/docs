@@ -40,6 +40,10 @@ notes](release-notes). For Docker Desktop system requirements, see
 - Kubernetes: Persistent volumes created by claims are now stored in the virtual machine. Fixes [docker/for-win#5665](https://github.com/docker/for-win/issues/5665).
 - Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
 
+### Known issues
+
+- Loopback and unspecified IPv6 addresses (`::` and `::1`) within a container do not currently work. Some web servers and other programs may be using these addresses in their configuration files.
+
 ## Docker Desktop Community 2.2.2.0
 2020-03-02
 
