@@ -11,7 +11,7 @@ skip_read_time: true
 
 ## Get started with Docker
 
-Try our multi-part walkthrough that covers writing your first app,
+啊Try our multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 
