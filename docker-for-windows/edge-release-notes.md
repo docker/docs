@@ -66,6 +66,10 @@ notes](release-notes). For Docker Desktop system requirements, see
 - Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-win#5546](https://github.com/docker/for-mac/issues/5546).
 - Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-win#5903](https://github.com/docker/for-win/issues/5903).
 
+### Known issues
+
+- Loopback and unspecified IPv6 addresses (`::` and `::1`) within a container do not currently work. Some web servers and other programs may be using these addresses in their configuration files.
+
 ## Docker Desktop Community 2.2.2.0
 2020-03-02
 
