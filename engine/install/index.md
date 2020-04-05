@@ -17,26 +17,6 @@ redirect_from:
 toc_max: 2
 ---
 
-Docker Engine is an open source containerization technology for building and
-containerizing your applications. Docker Engine acts as a client-server
-application with:
-* A server with a long-running daemon process [`dockerd`](/engine/reference/commandline/dockerd/).
-* APIs which specify interfaces that programs can use to talk to and
-  instruct the Docker daemon.
-* A command line interface (CLI) client [`docker`](/engine/reference/commandline/cli/).
-
-The CLI uses Docker APIs to control or interact with the Docker daemon
-through scripting or direct CLI commands. Many other Docker applications use the
-underlying API and CLI. The daemon creates and manage Docker objects, such as
-images, containers, networks, and volumes.
-
-Docker Engine has three types of update channels, **stable**, **test**, and **nightly**:
-
-* **Stable** gives you latest releases for general availability.
-* **Test** gives pre-releases that are ready for testing before general availability.
-* **Nightly** gives you latest builds of work in progress for the next major release.
-
-For more information, see [Release channels](#release-channels).
 
 ## Supported platforms
 
