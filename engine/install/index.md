@@ -20,10 +20,10 @@ toc_max: 2
 
 ## Supported platforms
 
-Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install.md)
-and [Windows](/docker-for-windows/install.md) through Docker Desktop, Windows
-Server, and as a static binary installation. Find your preferred operating
-system below.
+Docker Engine is available on a variety of [Linux platforms](#server),
+[macOS](/docker-for-mac/install.md) and [Windows 10](/docker-for-windows/install.md)
+through Docker Desktop, and as a [static binary installation](binaries.md). Find
+your preferred operating system below.
 
 #### Desktop
 
@@ -36,14 +36,49 @@ system below.
 
 #### Server
 
+Docker provides `.deb` and `.rpm` packages form the following Linux distributions
+and architectures:
+
 | Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        | IBM Power (ppc64le)    | IBM Z (s390x)          |
 |:----------------------|:-----------------------|:-------------------------|:-----------------------|:-----------------------|:-----------------------|
 | [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |                        |                        |
 | [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |                        |                        |
 | [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |                        |                        |
+| [Raspbian](debian.md) |                        | [{{ yes }}](fedora.md)   | [{{ yes }}](fedora.md) |                        |                        |
 | [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
 
+##### Other Linux distributions
+
+- Users of Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
+  "Linux Mint" should follow the installation instructions for [Debian](debian.md),
+  substituting the version of their distro for the corresponding Debian release.
+  Refer to the documentation of your distro to find which Debian release
+  corresponds with your derivative version.
+- Likewise, users of Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
+  should follow the installation instructions for [Ubuntu](ubuntu.md),
+  substituting the version of their distro for the corresponding Ubuntu release.
+  Refer to the documentation of your distro to find which Ubuntu release
+  corresponds with your derivative version.
+- Some Linux distributions are providing a package of Docker Engine through their
+  package repositories. These packages are built and maintained by the Linux
+  distribution's package maintainers and may have differences in configuration
+  or built from modified source code. Docker is not involved in releasing these
+  packages and bugs or issues involving these packages should be reported in
+  your Linux distribution's issue tracker.
+
+Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
+These binaries are statically linked and can be used on any Linux distribution.
+
 ## Release channels
+
+Docker Engine has three types of update channels, **stable**, **test**,
+and **nightly**:
+
+* The **Stable** channel gives you latest releases for general availability.
+* The **Test** channel gives pre-releases that are ready for testing before
+  general availability (GA).
+* The **Nightly** channel gives you latest builds of work in progress for the
+  next major release.
 
 ### Stable
 
@@ -63,14 +98,6 @@ such as betas and release candidates are conducted from their respective release
 branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
 
-> **Note:**
-> While pre-releases are done to assist in the stabilization process, no
-> guarantees are provided.
-
-Binaries built for pre-releases are available in the test channel for
-the targeted year-month release using the naming format `test-YY.mm`,
-for example `test-18.09`.
-
 ### Nightly
 
 Nightly builds give you the latest builds of work in progress for the next major
@@ -86,8 +113,6 @@ These builds allow for testing from the latest code on the master branch.
 
 > **Note:**
 > No qualifications or guarantees are made for the nightly builds.
-
-The release channel for these builds is called `nightly`.
 
 ## Support
 

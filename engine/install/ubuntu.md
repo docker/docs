@@ -33,9 +33,9 @@ To learn more about Docker EE, see
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Eoan 19.10
-- Bionic 18.04 (LTS)
-- Xenial 16.04 (LTS)
+- Ubuntu Eoan 19.10
+- Ubuntu Bionic 18.04 (LTS)
+- Ubuntu Xenial 16.04 (LTS)
 
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, `s390x`
 (IBM Z), and `ppc64le` (IBM Power) architectures.
