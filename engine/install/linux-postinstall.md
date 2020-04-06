@@ -5,6 +5,7 @@ title: Post-installation steps for Linux
 redirect_from:
 - /engine/installation/linux/docker-ee/linux-postinstall/
 - /engine/installation/linux/linux-postinstall/
+- /install/linux/linux-postinstall/
 ---
 
 This section contains optional procedures for configuring Linux hosts to work

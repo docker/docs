@@ -24,7 +24,7 @@ WARNING: No swap limit support
 ```
 
 Consult your operating system's documentation for enabling them.
-[Learn more](/install/linux/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
+[Learn more](/engine/install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
 
 ## Memory
 

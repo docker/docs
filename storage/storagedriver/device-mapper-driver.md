@@ -26,10 +26,10 @@ a filesystem at the operating system (OS) level.
 - `devicemapper` storage driver is a supported storage driver for Docker
   EE on many OS distribution. See the
   [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
-
 - `devicemapper` is also supported on Docker Engine - Community running on CentOS, Fedora,
   Ubuntu, or Debian.
-
+- `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
+  to be installed.
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so you do

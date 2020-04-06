@@ -34,7 +34,7 @@ do not have `systemctl`, use the `service` command.
 ### Start automatically at system boot
 
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Custom Docker daemon options
 
@@ -155,7 +155,7 @@ you need to add this configuration in the Docker systemd service file.
 ## Configure where the Docker daemon listens for connections
 
 See
-[Configure where the Docker daemon listens for connections](/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+[Configure where the Docker daemon listens for connections](/engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 
 ## Manually create the systemd unit files
 

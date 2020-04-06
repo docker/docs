@@ -20,7 +20,7 @@ UCP is a containerized application that requires the commercially supported
 Docker Engine to run.
 
 Install Docker EE on each host that you plan to manage with UCP.
-View the [supported platforms](/install/index.md#supported-platforms)
+View the [supported platforms](/ee/supported-platforms.md)
 and click on your platform to get platform-specific instructions for installing
 Docker EE.
 

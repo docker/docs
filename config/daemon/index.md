@@ -34,9 +34,9 @@ not manually by a user. This makes it easier to automatically start Docker when
 the machine reboots.
 
 The command to start Docker depends on your operating system. Check the correct
-page under [Install Docker](/install/index.md). To configure Docker
+page under [Install Docker](/engine/install/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Start the daemon manually
 
