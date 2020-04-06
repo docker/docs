@@ -822,51 +822,51 @@ reference:
     - path: /compose/completion/
       title: Command-line completion
     - path: /compose/reference/build/
-      title: build
+      title: docker-compose build
     - path: /compose/reference/config/
-      title: config
+      title: docker-compose config
     - path: /compose/reference/create/
-      title: create
+      title: docker-compose create
     - path: /compose/reference/down/
-      title: down
+      title: docker-compose down
     - path: /compose/reference/events/
-      title: events
+      title: docker-compose events
     - path: /compose/reference/exec/
-      title: exec
+      title: docker-compose exec
     - path: /compose/reference/help/
-      title: help
+      title: docker-compose help
     - path: /compose/reference/kill/
-      title: kill
+      title: docker-compose kill
     - path: /compose/reference/logs/
-      title: logs
+      title: docker-compose logs
     - path: /compose/reference/pause/
-      title: pause
+      title: docker-compose pause
     - path: /compose/reference/port/
-      title: port
+      title: docker-compose port
     - path: /compose/reference/ps/
-      title: ps
+      title: docker-compose ps
     - path: /compose/reference/pull/
-      title: pull
+      title: docker-compose pull
     - path: /compose/reference/push/
-      title: push
+      title: docker-compose push
     - path: /compose/reference/restart/
-      title: restart
+      title: docker-compose restart
     - path: /compose/reference/rm/
-      title: rm
+      title: docker-compose rm
     - path: /compose/reference/run/
-      title: run
+      title: docker-compose run
     - path: /compose/reference/scale/
-      title: scale
+      title: docker-compose scale
     - path: /compose/reference/start/
-      title: start
+      title: docker-compose start
     - path: /compose/reference/stop/
-      title: stop
+      title: docker-compose stop
     - path: /compose/reference/top/
-      title: top
+      title: docker-compose top
     - path: /compose/reference/unpause/
-      title: unpause
+      title: docker-compose unpause
     - path: /compose/reference/up/
-      title: up
+      title: docker-compose up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: API reference
