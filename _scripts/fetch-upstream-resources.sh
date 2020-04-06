@@ -26,18 +26,6 @@ svn co "https://github.com/mirantis/compliance/trunk/docs/compliance"           
 # Cleanup svn directories
 find . -name ".svn" -print0 | xargs -0 /bin/rm -rf
 
-# Get the Engine APIs that are in Swagger
-# Add a new engine/api/<version>.md file to add a new API version page.
-# @TODO stop fetching individual files, onces all API docs are unified upstream in moby/moby
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.06.2-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.30.yaml || (echo "Failed 1.30 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.07.0-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.31.yaml || (echo "Failed 1.31 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.09.1-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.32.yaml || (echo "Failed 1.32 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.10.0-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.33.yaml || (echo "Failed 1.33 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.11.0-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.34.yaml || (echo "Failed 1.34 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v17.12.1-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.35.yaml || (echo "Failed 1.35 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v18.02.0-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.36.yaml || (echo "Failed 1.36 swagger download" && exit 1)
-wget --quiet --directory-prefix=./engine/api/ https://raw.githubusercontent.com/docker/docker-ce/v18.03.1-ce/components/engine/api/swagger.yaml; mv ./engine/api/swagger.yaml ./engine/api/v1.37.yaml || (echo "Failed 1.37 swagger download" && exit 1)
-
 # Get a few one-off files that we use directly from upstream
 wget --quiet --directory-prefix=./engine/                       "https://raw.githubusercontent.com/docker/cli/${ENGINE_BRANCH}/docs/deprecated.md"                    || (echo "Failed engine/deprecated.md download" && exit 1)
 wget --quiet --directory-prefix=./engine/reference/             "https://raw.githubusercontent.com/docker/cli/${ENGINE_BRANCH}/docs/reference/builder.md"             || (echo "Failed engine/reference/builder.md download" && exit 1)
