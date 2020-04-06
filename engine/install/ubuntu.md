@@ -8,7 +8,7 @@ redirect_from:
 - /engine/installation/linux/ubuntulinux/
 - /engine/installation/linux/docker-ce/ubuntu/
 - /install/linux/ubuntu/
-- /install/linux/docker-ce/debian/
+- /install/linux/docker-ce/ubuntu/
 title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
