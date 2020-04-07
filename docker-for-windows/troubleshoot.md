@@ -157,12 +157,12 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Virtualization
 
-For Docker Desktop to function correctly, your machine must have the following features:
+ Your machine must have the following features for Docker Desktop to function correctly:
 
 1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
    installed and working
 
-2. Virtualization enabled
+2. Virtualization enabled in the BIOS
 
 #### Hyper-V
 
@@ -191,12 +191,12 @@ as described in the [Docker Machine driver example](/machine/drivers/hyper-v.md#
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](/docker-for-windows/wsl-tech-preview.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](images/virtualization-enabled.png){:width="700px"}
 
-If you manually uninstall Hyper-V or disable virtualization,
+If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
 Docker Desktop cannot start. See [Unable to run Docker for Windows on
 Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
 
