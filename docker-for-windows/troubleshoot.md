@@ -375,6 +375,8 @@ Discussion thread on GitHub at [Docker for Windows issue
 
 ### Networking issues
 
+IPv6 is not (yet) supported on Docker Desktop.
+
 Some users have reported problems connecting to Docker Hub on the Docker Desktop stable version. (See GitHub issue
 [22567](https://github.com/moby/moby/issues/22567).)
 

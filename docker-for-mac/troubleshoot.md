@@ -256,17 +256,6 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
 * IPv6 is not (yet) supported on Docker Desktop.
 
-  A workaround is provided that auto-filters out the IPv6 addresses in DNS
-  server lists and enables successful network access.  For example,
-  `2001:4860:4860::8888` would become `8.8.8.8`.  To learn more, see these
-  issues on GitHub and Docker Desktop forums:
-
-  * [Network timeout when top two DNS servers in /etc/resolv.conf are IPv6
-    addresses](https://github.com/docker/for-mac/issues/9)
-
-  * [ERROR: Network timed out while trying to connect to
-    index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
-
 * You might encounter errors when using `docker-compose up` with Docker Desktop
   (`ValueError: Extra Data`). We've identified this is likely related to data
   and/or events being passed all at once rather than one by one, so sometimes
