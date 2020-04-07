@@ -43,9 +43,9 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
+                    <a href="engine/install/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="install/linux/ubuntu/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="engine/install/">Docker for Linux</a></h3>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>
