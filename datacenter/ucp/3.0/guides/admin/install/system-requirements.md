@@ -11,7 +11,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker Enterprise Edition](/install/index.md) version 17.06 or higher
+* [Docker Enterprise Edition](/ee/supported-platforms.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
 * A static IP address
 

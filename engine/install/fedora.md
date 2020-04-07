@@ -1,27 +1,27 @@
 ---
-description: Instructions for installing Docker Engine - Community on Fedora
+description: Instructions for installing Docker Engine on Fedora
 keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 - /engine/installation/linux/docker-ce/fedora/
-title: Get Docker Engine - Community for Fedora
+- /install/linux/docker-ce/fedora/
+title: Install Docker Engine on Fedora
 toc_max: 4
 ---
 
-To get started with Docker Engine - Community on Fedora, make sure you
+To get started with Docker Engine on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ce).
+[install Docker](#installation-methods).
 
 ## Prerequisites
 
-
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Fedora versions:
+To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
 
-- 30
-- 31
+- Fedora 30
+- Fedora 31
 
 ### Uninstall old versions
 
@@ -44,11 +44,11 @@ $ sudo dnf remove docker \
 It's OK if `dnf` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
+networks, are preserved. The Docker Engine package is now called `docker-ce`.
 
-## Install Docker Engine - Community
+## Installation methods
 
-You can install Docker Engine - Community in different ways, depending on your needs:
+You can install Docker Engine in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -65,7 +65,7 @@ You can install Docker Engine - Community in different ways, depending on your n
 
 ### Install using the repository
 
-Before you install Docker Engine - Community for the first time on a new host machine, you need
+Before you install Docker Engine for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
@@ -73,20 +73,18 @@ from the repository.
 
 {% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
-1.  Install the `dnf-plugins-core` package which provides the commands to manage
-    your DNF repositories from the command line.
+Install the `dnf-plugins-core` package (which provides the commands to manage
+your DNF repositories) and set up the **stable** repository.
 
-    ```bash
-    $ sudo dnf -y install dnf-plugins-core
-    ```
+```bash
+$ sudo dnf -y install dnf-plugins-core
 
-2.  Use the following command to set up the **stable** repository.
+$ sudo dnf -y install dnf-plugins-core
 
-    ```bash
-    $ sudo dnf config-manager \
-        --add-repo \
-        {{ download-url-base }}/docker-ce.repo
-    ```
+$ sudo dnf config-manager \
+    --add-repo \
+    {{ download-url-base }}/docker-ce.repo
+```
 
 > **Optional**: Enable the **nightly** or **test** repositories.
 >
@@ -113,11 +111,11 @@ from the repository.
 > $ sudo dnf config-manager --set-disabled docker-ce-nightly
 > ```
 >
-> [Learn about **nightly** and **test** channels](/install/index.md).
+> [Learn about **nightly** and **test** channels](index.md).
 
-#### Install Docker Engine - Community
+#### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
 
     ```bash
     $ sudo dnf install docker-ce docker-ce-cli containerd.io
@@ -135,7 +133,7 @@ from the repository.
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-2.  To install a _specific version_ of Docker Engine - Community, list the available versions
+2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
 
     a. List and sort the versions available in your repo. This example sorts
@@ -164,20 +162,22 @@ from the repository.
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-3.  Cgroups Exception
-    For Fedora 31, you'll have to enable the [backwards compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
+3.  Cgroups Exception:
+    For Fedora 31 and higher, you need to enable the [backward compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
 
     ```bash
     $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
     ```
-
-4.  Start Docker
+    
+    After running the command, you must reboot for the changes to take effect.
+    
+4.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
+5.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -187,36 +187,39 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker Engine - Community is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
+Docker Engine is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker Engine - Community
+#### Upgrade Docker Engine
 
-To upgrade Docker Engine - Community, follow the [installation instructions](#install-docker-ce),
+To upgrade Docker Engine, follow the [installation instructions](#install-using-the-repository),
 choosing the new version you want to install.
 
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker Engine - Community.
+a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
-    version of Fedora. Go to `x86_64/stable/Packages/`
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install a **nightly**  or **test** (pre-release) package,
+    > **Note**: To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](/install/index.md).
+    > [Learn about **nightly** and **test** channels](index.md).
 
-2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
+2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
     $ sudo dnf -y install /path/to/package.rpm
     ```
+
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
 
 3.  Start Docker.
 
@@ -224,7 +227,7 @@ a new file each time you want to upgrade Docker Engine - Community.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -234,25 +237,25 @@ a new file each time you want to upgrade Docker Engine - Community.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker Engine - Community is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
+Docker Engine is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker Engine - Community
+#### Upgrade Docker Engine
 
-To upgrade Docker Engine - Community, download the newer package file and repeat the
+To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 
 {% include install-script.md %}
 
-## Uninstall Docker Engine - Community
+## Uninstall Docker Engine
 
-1.  Uninstall the Docker package:
+1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```bash
-    $ sudo dnf remove docker-ce
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
@@ -267,5 +270,5 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Continue to [Post-installation steps for Linux](linux-postinstall.md).
 - Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.

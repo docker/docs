@@ -23,7 +23,7 @@ on {{ linux-dist-long }}:
 Docker Engine - Community is _not_ supported on {{ linux-dist-long }}.
 {% endif %}
 {% if linux-dist == "centos" %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/engine/install/centos.md).
 {% endif %}
 
 {% elsif section == "find-ee-repo-url" %}
@@ -280,7 +280,7 @@ You only need to set up the repository once, after which you can install Docker 
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 
@@ -351,7 +351,7 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -394,7 +394,7 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -444,7 +444,7 @@ To manually install Docker Enterprise, download the `.{{ package-format | downca
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 {% endif %}
 
@@ -485,7 +485,7 @@ You must delete any edited configuration files manually.
 
 {% elsif section == "linux-install-nextsteps" %}
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
 
 - Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
 

@@ -3,6 +3,10 @@ description: Home page for Get Docker
 keywords: Docker, download, documentation, manual
 landing: true
 title: Get Docker
+redirect_from:
+- /install/
+- /install/overview/
+- /installation/
 ---
 
 
@@ -36,7 +40,7 @@ You can download and install Docker on multiple platforms. Refer to the followin
                 <div class="component-icon">
                     <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="install/linux/ubuntu/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="engine/install/">Docker for Linux</a></h3>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>

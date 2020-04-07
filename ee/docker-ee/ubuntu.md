@@ -16,7 +16,7 @@ toc_max: 4
 > **Important** 
 > 
 > Docker Engine - Community users should go to
-[Get Docker Engine - Community for Ubuntu](/install/linux/docker-ce/ubuntu.md)
+[Get Docker Engine - Community for Ubuntu](/engine/install/ubuntu.md)
 **instead of this topic**. 
 {: .important}
 
@@ -203,7 +203,7 @@ Naturally, to install Docker Engine - Enterprise on a new host machine using the
 
 Docker Engine - Enterprise is installed and running. The `docker` group is
 created but no users are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md)
+commands. Continue to [Linux postinstall](/engine/install/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -265,7 +265,7 @@ Engine - Enterprise.
 
 Docker Engine - Enterprise is installed and running. The `docker` group is
 created but no users are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+commands. Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -295,5 +295,5 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md).
 - Continue with the [User Guide](/engine/userguide/index.md).

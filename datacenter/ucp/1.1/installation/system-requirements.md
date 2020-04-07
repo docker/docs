@@ -17,7 +17,7 @@ all nodes must have:
 
 * Linux kernel version 3.10 or higher
 * CS Docker Engine version 1.10 or higher. Learn about the
-[operating systems supported by CS Docker Engine](/install/).
+[operating systems supported by CS Docker Engine](/ee/supported-platforms.md).
 * 2.00 GB of RAM
 * 3.00 GB of available disk space
 * A static IP address

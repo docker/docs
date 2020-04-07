@@ -765,8 +765,8 @@ Update your configuration if this command prints a non-empty value for `MountFla
 
 ### New features for Docker Engine EE
 
-* [FIPS Compliance added for Windows Server 2016 and later](/install/windows/docker-ee)
-* [Docker Content Trust Enforcement](/engine/security/trust/content_trust) for the Enterprise Engine. This allows the Docker Engine - Enterprise to run containers not signed by a specific organization.
+* [FIPS Compliance added for Windows Server 2016 and later](/ee/docker-ee/windows/docker-ee.md)
+* [Docker Content Trust Enforcement](/engine/security/trust/content_trust.md) for the Enterprise Engine. This allows the Docker Engine - Enterprise to run containers not signed by a specific organization.
 
 ### New features
 

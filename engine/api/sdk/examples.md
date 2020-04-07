@@ -10,7 +10,7 @@ redirect_from:
 ---
 
 After you
-[install Docker](/install/index.md), you can
+[install Docker](/get-docker.md), you can
 [install the Go or Python SDK](/engine/api/sdk/index.md#install-the-sdks) and
 also try out the Docker Engine API.
 

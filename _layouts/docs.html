@@ -177,11 +177,16 @@
 							{{ content }}
 							<!-- tags -->
 							{% unless page.notags == true %}
-							{% assign keywords = page.keywords | split:"," %}
-							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
-							{% capture keywordlist %}{{ keywordlist }}<a href="https://docs.docker.com/search/?q={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
-							{% endfor %}
-							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
+							{% assign keywords = page.keywords | split:"," -%}
+							{% if keywords.size > 0 -%}
+							  <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
+							  {%- for keyword in keywords -%}
+							    {%- assign strippedKeyword = keyword | strip -%}
+							    <a href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+							    {%- unless forloop.last %}, {% endunless -%}
+							  {% endfor -%}
+							  </span>
+							{% endif -%}
 							{% endunless %}
 							<!-- link corrections -->
               <script language="JavaScript">

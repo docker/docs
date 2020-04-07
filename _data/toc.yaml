@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: guides
 - title: Product manuals
-  path: /install/
+  path: /engine/
   node: manuals
 - title: Reference
   path: /reference/
@@ -822,51 +822,51 @@ reference:
     - path: /compose/completion/
       title: Command-line completion
     - path: /compose/reference/build/
-      title: build
+      title: docker-compose build
     - path: /compose/reference/config/
-      title: config
+      title: docker-compose config
     - path: /compose/reference/create/
-      title: create
+      title: docker-compose create
     - path: /compose/reference/down/
-      title: down
+      title: docker-compose down
     - path: /compose/reference/events/
-      title: events
+      title: docker-compose events
     - path: /compose/reference/exec/
-      title: exec
+      title: docker-compose exec
     - path: /compose/reference/help/
-      title: help
+      title: docker-compose help
     - path: /compose/reference/kill/
-      title: kill
+      title: docker-compose kill
     - path: /compose/reference/logs/
-      title: logs
+      title: docker-compose logs
     - path: /compose/reference/pause/
-      title: pause
+      title: docker-compose pause
     - path: /compose/reference/port/
-      title: port
+      title: docker-compose port
     - path: /compose/reference/ps/
-      title: ps
+      title: docker-compose ps
     - path: /compose/reference/pull/
-      title: pull
+      title: docker-compose pull
     - path: /compose/reference/push/
-      title: push
+      title: docker-compose push
     - path: /compose/reference/restart/
-      title: restart
+      title: docker-compose restart
     - path: /compose/reference/rm/
-      title: rm
+      title: docker-compose rm
     - path: /compose/reference/run/
-      title: run
+      title: docker-compose run
     - path: /compose/reference/scale/
-      title: scale
+      title: docker-compose scale
     - path: /compose/reference/start/
-      title: start
+      title: docker-compose start
     - path: /compose/reference/stop/
-      title: stop
+      title: docker-compose stop
     - path: /compose/reference/top/
-      title: top
+      title: docker-compose top
     - path: /compose/reference/unpause/
-      title: unpause
+      title: docker-compose unpause
     - path: /compose/reference/up/
-      title: up
+      title: docker-compose up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: API reference
@@ -1023,22 +1023,24 @@ samples:
 manuals:
 - sectiontitle: Docker Engine
   section:
-  - path: /install/
+  - path: /engine/
     title: Overview
-  - sectiontitle: Linux
+  - path: /engine/install/
+    title: Install
+  - sectiontitle: Installation per distro
     section:
-    - path: /install/linux/docker-ce/centos/
-      title: CentOS
-    - path: /install/linux/docker-ce/debian/
-      title: Debian
-    - path: /install/linux/docker-ce/fedora/
-      title: Fedora
-    - path: /install/linux/docker-ce/ubuntu/
-      title: Ubuntu
-    - path: /install/linux/docker-ce/binaries/
-      title: Binaries
-    - path: /install/linux/linux-postinstall/
-      title: Optional Linux post-installation steps
+    - path: /engine/install/centos/
+      title: Install on CentOS
+    - path: /engine/install/debian/
+      title: Install on Debian
+    - path: /engine/install/fedora/
+      title: Install on Fedora
+    - path: /engine/install/ubuntu/
+      title: Install on Ubuntu
+    - path: /engine/install/binaries/
+      title: Install binaries
+    - path: /engine/install/linux-postinstall/
+      title: Optional post-installation steps
   - path: /engine/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
@@ -1077,6 +1079,9 @@ manuals:
       title: Engine 17.03 release notes
     - path: /engine/release-notes/prior-releases/
       title: Engine 1.13 and earlier
+  - path: /engine/deprecated/
+    title: Deprecated features
+
   - path: /app/working-with-app/
     title: Docker App
   - path: /buildx/working-with-buildx/

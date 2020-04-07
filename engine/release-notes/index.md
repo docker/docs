@@ -1,6 +1,6 @@
 ---
 title: Docker Engine release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community
+description: Learn about the new features, bug fixes, and breaking changes for Docker Engine
 keywords: docker, docker engine, ce, whats new, release notes
 toc_min: 1
 toc_max: 2
@@ -11,7 +11,7 @@ redirect_from:
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
-for Docker Engine - Community.
+for Docker Engine.
 
 > **Note:**
 > The client and container runtime are now in separate packages from the daemon

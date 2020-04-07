@@ -24,7 +24,7 @@ potential performance advantages over the `aufs` storage driver.
   Stretch.
 - For Docker EE, AUFS is supported on Ubuntu.
 - If you use Ubuntu, you need to
-  [install extra packages](/install/linux/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
+  [install extra packages](/engine/install/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
   to add the AUFS module to the kernel. If you do not install these packages,
   you need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
   or `overlay2` on Ubuntu 16.04 and higher, which is also supported.
