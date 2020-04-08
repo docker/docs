@@ -36,9 +36,11 @@ The daemon.json file is located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-> **Note**: `log-opt` configuration options in the `daemon.json` configuration
-> file must be provided as strings. Boolean and numeric values (such as the value
-> for `splunk-gzip` or `splunk-gzip-level`) must therefore be enclosed in quotes
+> **Note**
+>
+> `log-opts` configuration options in the `daemon.json` configuration file must
+> be provided as strings. Boolean and numeric values (such as the value for
+> `splunk-gzip` or `splunk-gzip-level`) must therefore be enclosed in quotes
 > (`"`).
 
 To use the `splunk` driver for a specific container, use the commandline flags
@@ -60,12 +62,12 @@ The following properties let you configure the splunk logging driver.
 | Option                      | Required | Description                                                                                                                                                                                                                                                                                                                                 |
 |:----------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `splunk-token`              | required | Splunk HTTP Event Collector token.                                                                                                                                                                                                                                                                                                          |
-| `splunk-url`                | required | Path to your Splunk Enterprise, self-service Splunk Cloud instance, or Splunk Cloud managed cluster (including port and scheme used by HTTP Event Collector) in one of the following formats: `https://your_splunk_instance:8088` or `https://input-prd-p-XXXXXXX.cloud.splunk.com:8088` or `https://http-inputs-XXXXXXXX.splunkcloud.com`. |
+| `splunk-url`                | required | Path to your Splunk Enterprise, self-service Splunk Cloud instance, or Splunk Cloud managed cluster (including port and scheme used by HTTP Event Collector) in one of the following formats: `https://your_splunk_instance:8088`, `https://input-prd-p-XXXXXXX.cloud.splunk.com:8088`, or `https://http-inputs-XXXXXXXX.splunkcloud.com`.  |
 | `splunk-source`             | optional | Event source.                                                                                                                                                                                                                                                                                                                               |
 | `splunk-sourcetype`         | optional | Event source type.                                                                                                                                                                                                                                                                                                                          |
 | `splunk-index`              | optional | Event index.                                                                                                                                                                                                                                                                                                                                |
 | `splunk-capath`             | optional | Path to root certificate.                                                                                                                                                                                                                                                                                                                   |
-| `splunk-caname`             | optional | Name to use for validating server certificate; by default the hostname of the `splunk-url` is used.                                                                                                                                                                                                                                    |
+| `splunk-caname`             | optional | Name to use for validating server certificate; by default the hostname of the `splunk-url` is used.                                                                                                                                                                                                                                         |
 | `splunk-insecureskipverify` | optional | Ignore server certificate validation.                                                                                                                                                                                                                                                                                                       |
 | `splunk-format`             | optional | Message format. Can be `inline`, `json` or `raw`. Defaults to `inline`.                                                                                                                                                                                                                                                                     |
 | `splunk-verify-connection`  | optional | Verify on start, that docker can connect to Splunk server. Defaults to true.                                                                                                                                                                                                                                                                |
@@ -90,17 +92,18 @@ automatically generated by Splunk certificates.
 
 {% raw %}
 ```bash
-$ docker run --log-driver=splunk \
-           --log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20 \
-           --log-opt splunk-url=https://splunkhost:8088 \
-           --log-opt splunk-capath=/path/to/cert/cacert.pem \
-           --log-opt splunk-caname=SplunkServerDefaultCert \
-           --log-opt tag="{{.Name}}/{{.FullID}}" \
-           --log-opt labels=location \
-           --log-opt env=TEST \
-           --env "TEST=false" \
-           --label location=west \
-       your/application
+$ docker run \
+    --log-driver=splunk \
+    --log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20 \
+    --log-opt splunk-url=https://splunkhost:8088 \
+    --log-opt splunk-capath=/path/to/cert/cacert.pem \
+    --log-opt splunk-caname=SplunkServerDefaultCert \
+    --log-opt tag="{{.Name}}/{{.FullID}}" \
+    --log-opt labels=location \
+    --log-opt env=TEST \
+    --env "TEST=false" \
+    --label location=west \
+    your/application
 ```
 {% endraw %}
 
@@ -175,7 +178,7 @@ To format messages as `raw`, set `--log-opt splunk-format=raw`. Attributes
 (environment variables and labels) and tags are prefixed to the message. For
 example:
 
-```none
+```console
 MyImage/MyContainer env1=val1 label1=label1 my message
 MyImage/MyContainer env1=val1 label1=label1 {"foo": "bar"}
 ```
