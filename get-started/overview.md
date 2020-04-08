@@ -72,13 +72,13 @@ delivery (CI/CD) workflows.
 
 Consider the following example scenario:
 
-- Your developers write code locally and share their work with their colleagues
+* Your developers write code locally and share their work with their colleagues
   using Docker containers.
-- They use Docker to push their applications into a test environment and execute
+* They use Docker to push their applications into a test environment and execute
   automated and manual tests.
-- When developers find bugs, they can fix them in the development environment
+* When developers find bugs, they can fix them in the development environment
   and redeploy them to the test environment for testing and validation.
-- When testing is complete, getting the fix to the customer is as simple as
+* When testing is complete, getting the fix to the customer is as simple as
   pushing the updated image to the production environment.
 
 **Responsive deployment and scaling**
@@ -232,13 +232,13 @@ in a separate namespace and its access is limited to that namespace.
 
 Docker Engine uses namespaces such as the following on Linux:
 
- - **The `pid` namespace:** Process isolation (PID: Process ID).
- - **The `net` namespace:** Managing network interfaces (NET:
+ * **The `pid` namespace:** Process isolation (PID: Process ID).
+ * **The `net` namespace:** Managing network interfaces (NET:
  Networking).
- - **The `ipc` namespace:** Managing access to IPC
+ * **The `ipc` namespace:** Managing access to IPC
  resources (IPC: InterProcess Communication).
- - **The `mnt` namespace:** Managing filesystem mount points (MNT: Mount).
- - **The `uts` namespace:** Isolating kernel and version identifiers. (UTS: Unix
+ * **The `mnt` namespace:** Managing filesystem mount points (MNT: Mount).
+ * **The `uts` namespace:** Isolating kernel and version identifiers. (UTS: Unix
 Timesharing System).
 
 ### Control groups
@@ -261,6 +261,6 @@ the future, Docker may support other container formats by integrating with
 technologies such as BSD Jails or Solaris Zones.
 
 ## Next steps
-- Read about [installing Docker](/get-docker.md).
-- Get hands-on experience with the [Getting started with Docker](index.md)
+* Read about [installing Docker](/get-docker.md).
+* Get hands-on experience with the [Getting started with Docker](index.md)
     tutorial.
