@@ -15,7 +15,7 @@ on when you should set such limits and the possible implications of setting them
 
 Many of these features require your kernel to support Linux capabilities. To
 check for support, you can use the
-[`docker info`](/engine/reference/commandline/info.md) command. If a capability
+[`docker info`](../../engine/reference/commandline/info.md) command. If a capability
 is disabled in your kernel, you may see a warning at the end of the output like
 the following:
 
@@ -24,7 +24,7 @@ WARNING: No swap limit support
 ```
 
 Consult your operating system's documentation for enabling them.
-[Learn more](/engine/install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
+[Learn more](../../engine/install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
 
 ## Memory
 
@@ -59,7 +59,7 @@ You can mitigate the risk of system instability due to OOME by:
 - Be mindful when configuring swap on your Docker hosts. Swap is slower and
   less performant than memory but can provide a buffer against running out of
   system memory.
-- Consider converting your container to a [service](/engine/swarm/services.md),
+- Consider converting your container to a [service](../../engine/swarm/services.md),
   and using service-level constraints and node labels to ensure that the
   application runs only on hosts with enough memory
 
@@ -233,7 +233,7 @@ for realtime tasks per runtime period. For instance, with the default period of
 containers using the realtime scheduler can run for 950000 microseconds for every
 1000000-microsecond period, leaving at least 50000 microseconds available for
 non-realtime tasks. To make this configuration permanent on systems which use
-`systemd`, see [Control and configure Docker with systemd](/config/daemon/systemd.md).
+`systemd`, see [Control and configure Docker with systemd](../daemon/systemd.md).
 
 #### Configure individual containers
 

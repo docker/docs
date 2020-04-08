@@ -8,7 +8,7 @@ redirect_from:
 title: Start containers automatically
 ---
 
-Docker provides [restart policies](/engine/reference/run.md#restart-policies---restart)
+Docker provides [restart policies](../../engine/reference/run.md#restart-policies---restart)
 to control whether your containers start automatically when they exit, or when
 Docker restarts. Restart policies ensure that linked containers are started in
 the correct order. Docker recommends that you use restart policies, and avoid
@@ -53,7 +53,7 @@ Keep the following in mind when using restart policies:
 
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
-  [flags related to service restart](/engine/reference/commandline/service_create/).
+  [flags related to service restart](../../engine/reference/commandline/service_create/).
 
 
 ## Use a process manager

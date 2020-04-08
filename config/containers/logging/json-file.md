@@ -24,7 +24,7 @@ and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\` on Windows Server. For more information about
 configuring Docker using `daemon.json`, see
-[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `json-file` and sets the `max-size` and `max-file` options.
 
