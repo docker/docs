@@ -73,10 +73,8 @@ For production systems, see
     }
     ```
 
-    See all storage options for each storage driver:
-
-    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+    See all storage options for each storage driver in the
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
 
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
@@ -183,10 +181,8 @@ options in the table above.
 }
 ```
 
-See all storage options for each storage driver:
-
-- [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-- [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+See all storage options for each storage driver in the
+[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
@@ -835,11 +831,11 @@ storage driver.
   by default `/var/lib/docker`.  If your containers generate lots of log messages, 
   this may lead to increased disk usage or the inability to manage your system due
   to a full disk.  You can configure a 
-  [log driver](/config/containers/logging/configure.md) to store your container
+  [log driver](../../config/containers/logging/configure.md) to store your container
   logs externally.
 
 ## Related Information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)
