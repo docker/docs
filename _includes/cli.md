@@ -19,7 +19,7 @@ your client and daemon API versions.
 
 {% if controller_data.deprecated %}
 
-> This command is [deprecated](/engine/deprecated.md){: target="_blank" class="_"}.
+> This command is [deprecated](/engine/deprecated/){: target="_blank" class="_"}.
 >
 > It may be removed in a future Docker version.
 {: .warning }
@@ -42,7 +42,7 @@ your client and daemon API versions.
 > This command is experimental on the Docker daemon. It should not be used in
 > production environments.
 > To enable experimental features on the Docker daemon, edit the
-> [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
+> [daemon.json](/engine/reference/commandline/dockerd/#daemon-configuration-file)
 > and set `experimental` to `true`.
 >
 > {% include experimental.md %}
@@ -56,7 +56,7 @@ your client and daemon API versions.
 > **It should not be used in production environments.**
 >
 > To enable experimental features in the Docker CLI, edit the
-> [config.json](/engine/reference/commandline/cli.md#configuration-files)
+> [config.json](/engine/reference/commandline/cli/#configuration-files)
 > and set `experimental` to `enabled`. You can go [here](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
 > for more information.
 {: .important }
@@ -117,9 +117,9 @@ For example uses of this command, refer to the [examples section](#examples) bel
 <tbody>
 {% for option in alloptions %}
 
-  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated.md" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli.md#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
   {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
 
