@@ -1116,64 +1116,66 @@ manuals:
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
     title: Docker Compose release notes
-- sectiontitle: Docker Desktop for Mac
+- sectiontitle: Docker Desktop
   section:
-  - path: /docker-for-mac/
-    title: Getting started
-  - path: /docker-for-mac/install/
-    title: Install Docker Desktop for Mac
-  - path: /docker-for-mac/dashboard/
-    title: Dashboard
-  - path: /docker-for-mac/kubernetes/
-    title: Deploy on Kubernetes
-  - path: /docker-for-mac/docker-toolbox/
-    title: Docker Desktop for Mac vs. Docker Toolbox
-  - path: /docker-for-mac/multi-arch/
-    title: Leveraging Multi-CPU architecture support
-  - path: /docker-for-mac/networking/
-    title: Networking
-  - path: /docker-for-mac/osxfs/
-    title: File system sharing
-  - path: /docker-for-mac/osxfs-caching/
-    title: Performance tuning for volume mounts (shared filesystems)
-  - path: /docker-for-mac/space/
-    title: Disk utilization
-  - path: /docker-for-mac/troubleshoot/
-    title: Logs and troubleshooting
-  - path: /docker-for-mac/faqs/
-    title: FAQs
-  - path: /docker-for-mac/opensource/
-    title: Open source licensing
-  - path: /docker-for-mac/release-notes/
-    title: Stable release notes
-  - path: /docker-for-mac/edge-release-notes/
-    title: Edge release notes
-- sectiontitle: Docker Desktop for Windows
-  section:
-  - path: /docker-for-windows/
-    title: Getting started
-  - path: /docker-for-windows/install/
-    title: Install Docker Desktop for Windows
-  - path: /docker-for-windows/dashboard/
-    title: Dashboard
-  - path: /docker-for-windows/kubernetes/
-    title: Deploy on Kubernetes
-  - path: /docker-for-windows/networking/
-    title: Networking
-  - path: /docker-for-windows/docker-toolbox/
-    title: Migrate Docker Toolbox
-  - path: /docker-for-windows/troubleshoot/
-    title: Logs and troubleshooting
-  - path: /docker-for-windows/faqs/
-    title: FAQs
-  - path: /docker-for-windows/opensource/
-    title: Open source licensing
-  - path: /docker-for-windows/release-notes/
-    title: Stable release notes
-  - path: /docker-for-windows/edge-release-notes/
-    title: Edge release notes
-  - path: /docker-for-windows/wsl-tech-preview/
-    title: Docker Desktop WSL 2 backend
+  - sectiontitle: Mac
+    section:
+    - path: /docker-for-mac/
+      title: Getting started
+    - path: /docker-for-mac/install/
+      title: Install Docker Desktop for Mac
+    - path: /docker-for-mac/dashboard/
+      title: Dashboard
+    - path: /docker-for-mac/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /docker-for-mac/docker-toolbox/
+      title: Docker Desktop for Mac vs. Docker Toolbox
+    - path: /docker-for-mac/multi-arch/
+      title: Leveraging Multi-CPU architecture support
+    - path: /docker-for-mac/networking/
+      title: Networking
+    - path: /docker-for-mac/osxfs/
+      title: File system sharing
+    - path: /docker-for-mac/osxfs-caching/
+      title: Performance tuning for volume mounts (shared filesystems)
+    - path: /docker-for-mac/space/
+      title: Disk utilization
+    - path: /docker-for-mac/troubleshoot/
+      title: Logs and troubleshooting
+    - path: /docker-for-mac/faqs/
+      title: FAQs
+    - path: /docker-for-mac/opensource/
+      title: Open source licensing
+    - path: /docker-for-mac/release-notes/
+      title: Stable release notes
+    - path: /docker-for-mac/edge-release-notes/
+      title: Edge release notes
+  - sectiontitle: Windows
+    section:
+    - path: /docker-for-windows/
+      title: Getting started
+    - path: /docker-for-windows/install/
+      title: Install Docker Desktop for Windows
+    - path: /docker-for-windows/dashboard/
+      title: Dashboard
+    - path: /docker-for-windows/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /docker-for-windows/networking/
+      title: Networking
+    - path: /docker-for-windows/docker-toolbox/
+      title: Migrate Docker Toolbox
+    - path: /docker-for-windows/troubleshoot/
+      title: Logs and troubleshooting
+    - path: /docker-for-windows/faqs/
+      title: FAQs
+    - path: /docker-for-windows/opensource/
+      title: Open source licensing
+    - path: /docker-for-windows/release-notes/
+      title: Stable release notes
+    - path: /docker-for-windows/edge-release-notes/
+      title: Edge release notes
+    - path: /docker-for-windows/wsl-tech-preview/
+      title: Docker Desktop WSL 2 backend
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
