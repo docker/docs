@@ -86,7 +86,7 @@ In the following example, we define a build hook that uses `docker build` argume
 docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
-> **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build.md) command
+> **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build/) command
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 
