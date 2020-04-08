@@ -20,8 +20,8 @@ production. These changes may include:
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
 - Binding to different ports on the host
-- Setting environment variables differently, such as when you need to decrease the verbosity of
-  logging, or to enable email sending)
+- Setting environment variables differently, such as reducing the verbosity of
+  logging, or to specify settings for external services such as an email server
 - Specifying a restart policy like `restart: always` to avoid downtime
 - Adding extra services such as a log aggregator
 
