@@ -22,7 +22,7 @@ The Troubleshoot page contains the following options:
 
 * **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
 
-* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-windows/index/#kubernetes).
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
 
 * **Reset to factory defaults**: Choose this option to reset all options on
 Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
@@ -125,7 +125,7 @@ in the FAQs.
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
-cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
+cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
 you might need to enable [shared drives](index.md#shared-drives).
 
 Volume mounting requires shared drives for Linux containers (not for Windows
@@ -183,15 +183,15 @@ In the subsequent screen, verify that Hyper-V is enabled:
 
 The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
 [`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" class="_"},
-and the [Microsoft Hyper-V driver](/machine/drivers/hyper-v.md) to create local
+and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
 virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
 to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
-[Docker Machine](/machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command
-as described in the [Docker Machine driver example](/machine/drivers/hyper-v.md#example).
+[Docker Machine](../machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command
+as described in the [Docker Machine driver example](../machine/drivers/hyper-v.md#example).
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](/docker-for-windows/wsl-tech-preview.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl-tech-preview.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](images/virtualization-enabled.png){:width="700px"}
@@ -224,9 +224,9 @@ Here are some steps to take if you experience similar problems:
     ![Hyper-V manager](images/hyperv-manager.png)
 
 4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](/machine/overview.md) to set up multiple local VMs, you
+    [Docker Machine](../machine/overview.md) to set up multiple local VMs, you
     need this anyway, as described in the topic on the
-    [Hyper-V driver for Docker Machine](/machine/drivers/hyper-v.md#example).
+    [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
     You can replace `DockerNAT` with this switch.
 
 5.  If previous steps fail to solve the problems, follow steps on the
@@ -241,7 +241,7 @@ Here are some steps to take if you experience similar problems:
 ### Windows containers and Windows Server
 
 Docker Desktop is not supported on Windows Server. Instead, you can use
-[Docker Enterprise Basic](/ee/index.md) at no additional cost.
+Docker Enterprise Basic at no additional cost.
 
 If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
@@ -284,7 +284,7 @@ Linux containers).
 To reach a Windows container from the local host, you need to specify the IP
 address and port for the container that is running the service.
 
-You can get the container IP address by using [`docker inspect`](/engine/reference/commandline/inspect.md) with some `--format` options
+You can get the container IP address by using [`docker inspect`](../engine/reference/commandline/inspect.md) with some `--format` options
 and the ID or name of the container. For the example above, the command would
 look like this, using the name we gave to the container (`webserver`) instead of
 the container ID:

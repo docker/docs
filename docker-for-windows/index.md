@@ -240,8 +240,8 @@ Note that configuring file sharing is not necessary for Windows containers, only
 >
  * Shared drives are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
- the Linux VM, using a [data volume](/engine/tutorials/dockervolumes.md#data-volumes)
- (named volume) or [data container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+ the Linux VM, using a [data volume](../storage/volumes.md)
+ (named volume) or [data container](../storage/volumes.md).
 >
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
@@ -308,7 +308,7 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
 class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -465,10 +465,10 @@ The Docker Desktop Dashboard enables you to interact with containers and applica
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){: target="_blank" class="_" }:
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
 
-* [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){: target="_blank" class="_" }
-* [Builds and Images](/docker-cloud/builds/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
+* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
 
 ### Two-factor authentication
 
@@ -522,19 +522,19 @@ You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
 The registry cannot be listed as an _insecure registry_ (see
-[Docker Daemon](/docker-for-windows#daemon)). Docker Desktop ignores
+[Docker Daemon](#docker-engine)). Docker Desktop ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
 
 To learn more about how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](/engine/security/certificates)
+[Verify repository client with certificates](../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](/get-started/){: target="_blank" class="_"}.
+* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" class="_"}.
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
-* Refer to the [Docker CLI Reference Guide](/engine/api.md){: target="_blank" class="_"}.
+* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" class="_"}.

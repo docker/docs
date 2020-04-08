@@ -48,8 +48,8 @@ Your Mac must meet the following requirements to successfully install Docker Des
 ## What's included in the installer
 
 The Docker Desktop installation includes
-  [Docker Engine](/engine/index.md), Docker CLI client,
-  [Docker Compose](/compose/index.md), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+  [Docker Engine](../engine/index.md), Docker CLI client,
+  [Docker Compose](../compose/index.md), [Notary](../notary/getting_started.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 ## Install and run Docker Desktop on Mac
 

@@ -16,9 +16,9 @@ The Docker Desktop Dashboard offers the following benefits:
 
 In addition, the Dashboard UI allows you to:
 
-- Navigate to the [Settings](/docker-for-windows/index/#docker-settings-dialog) menu to configure Docker Desktop preferences
+- Navigate to the [Settings](index.md#docker-settings-dialog) menu to configure Docker Desktop preferences
 - Access the [Troubleshoot](troubleshoot.md) menu to debug and perform restart operations
-- Sign into [Docker Hub](/docker-for-windows/index/#docker-hub) using your Docker ID
+- Sign into [Docker Hub](index.md#docker-hub) using your Docker ID
 
 To access the Docker Desktop Dashboard, from the Docker menu, select **Dashboard**. The Dashboard provides a runtime view of all your containers and applications.
 

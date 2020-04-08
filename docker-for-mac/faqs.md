@@ -25,7 +25,7 @@ The **Edge channel** provides an installer with new features we are working on, 
 
 ### Can I switch between Stable and Edge versions of Docker Desktop?
 
-Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](/docker-for-mac/install/#switch-between-stable-and-edge-versions).
+Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](install.md#switch-between-stable-and-edge-versions).
 
 ### What is Docker.app?
 
@@ -49,7 +49,7 @@ development tools.
 On Docker Desktop, clients can connect to the Docker Engine through a Unix
 socket: `unix:///var/run/docker.sock`.
 
-See also [Docker Engine API](/engine/api.md) and Docker Desktop for Mac forums topic
+See also [Docker Engine API](../engine/api/index.md) and Docker Desktop for Mac forums topic
 [Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" class="_"}.
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" class="_"}
@@ -67,7 +67,7 @@ Mac has a changing IP address (or none if you have no network access). We recomm
 Mac so that containers can connect to this address.
 
 For more information and examples, see
-[I want to connect from a container to a service on the host](networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) in the [Networking](/docker-for-mac/networking/) topic.
+[I want to connect from a container to a service on the host](networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) in the [Networking](networking.md) topic.
 
 ### How do I connect to a container from Mac?
 
@@ -78,17 +78,17 @@ For more information and examples, see
 
 ### Can I use an SSH agent inside a container?
 
-Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](/docker-for-mac/osxfs/#ssh-agent-forwarding).
+Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](osxfs.md#ssh-agent-forwarding).
 
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates](/docker-for-mac/#add-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
 For information on adding client certificates, see
-[Add client certificates](/docker-for-mac/index/#adding-client-certificates) in the Getting Started topic.
+[Add client certificates](index.md#add-client-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 
