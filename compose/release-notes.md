@@ -668,8 +668,8 @@ naming scheme accordingly before upgrading.
 
 - Added support for `extra_hosts` in build configuration
 
-- Added support for the [long syntax](/compose/compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
-  Using this syntax will create [mounts](/storage/bind-mounts.md) instead of volumes.
+- Added support for the [long syntax](compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+  Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
 
@@ -2083,7 +2083,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](/docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](../docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 

@@ -9,8 +9,8 @@ Compose to set up and run the sample ASP.NET Core application using the
 [.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk)
 with the
 [SQL Server on Linux image](https://hub.docker.com/_/microsoft-mssql-server).
-You just need to have [Docker Engine](/get-docker.md)
-and [Docker Compose](/compose/install.md) installed on your
+You just need to have [Docker Engine](../get-docker.md)
+and [Docker Compose](install.md) installed on your
 platform of choice: Linux, Mac or Windows.
 
 For this sample, we create a sample .NET Core Web Application using the
@@ -25,8 +25,8 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a new directory for your application.
 
     This directory is the context of your docker-compose project. For
-    [Docker Desktop for Windows](/docker-for-windows/index.md#file-sharing) and
-    [Docker Desktop for Mac](/docker-for-mac/index.md#file-sharing), you
+    [Docker Desktop for Windows](../docker-for-windows/index.md#file-sharing) and
+    [Docker Desktop for Mac](../docker-for-mac/index.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
@@ -173,8 +173,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker Desktop for Mac](/docker-for-mac/index.md#advanced) and
-    [Docker Desktop for Windows](/docker-for-windows/index.md#advanced).
+    [Docker Desktop for Mac](../docker-for-mac/index.md#advanced) and
+    [Docker Desktop for Windows](../docker-for-windows/index.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able

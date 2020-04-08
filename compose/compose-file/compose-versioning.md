@@ -50,7 +50,7 @@ omitting a `version` key at the root of the YAML.
 
 - Version 3.x, the latest and recommended version, designed to
 be cross-compatible between Compose and the Docker Engine's
-[swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+[swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
 > ### v2 and v3 Declaration
 >
@@ -65,8 +65,8 @@ To move your project to a later version, see the [Upgrading](#upgrading)
 section.
 
 > **Note**: If you're using
-> [multiple Compose files](/compose/extends.md#multiple-compose-files) or
-> [extending services](/compose/extends.md#extending-services), each file must be of the
+> [multiple Compose files](../extends.md#multiple-compose-files) or
+> [extending services](../extends.md#extending-services), each file must be of the
 > same version - you cannot, for example, mix version 1 and 2 in a single
 > project.
 
@@ -91,7 +91,7 @@ Version 1 files cannot declare named
 [volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
 [build arguments](index.md#args).
 
-Compose does not take advantage of [networking](/compose/networking.md) when you
+Compose does not take advantage of [networking](../networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
 reachable from every other container at its IP address. You need to use
 [links](compose-file-v1.md#links) to enable discovery between containers.
@@ -125,7 +125,7 @@ under the `networks` key.
 By default, every container joins an application-wide default network, and is
 discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
-[Networking in Compose](/compose/networking.md).
+[Networking in Compose](../networking.md).
 
 > **Note**: When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
@@ -278,7 +278,7 @@ several more.
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
 the [upgrading](#upgrading) guide for how to migrate away from these.
-(For more information on `extends`, see [Extending services](/compose/extends.md#extending-services).)
+(For more information on `extends`, see [Extending services](../extends.md#extending-services).)
 
 - Added: [deploy](index.md#deploy)
 
@@ -408,7 +408,7 @@ several options have been removed:
     `docker stack deploy`, and is ignored by `docker-compose`.
 
 -   `extends`: This option has been removed for `version: "3.x"`
-Compose files. (For more information, see [Extending services](/compose/extends.md#extending-services).)
+Compose files. (For more information, see [Extending services](../extends.md#extending-services).)
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
@@ -437,7 +437,7 @@ It's more complicated if you're using particular configuration features:
             syslog-address: "tcp://192.168.0.42:123"
 
 -   `links` with environment variables: As documented in the
-    [environment variables reference](/compose/link-env-deprecated.md), environment variables
+    [environment variables reference](../link-env-deprecated.md), environment variables
     created by
     links have been deprecated for some time. In the new Docker network system,
     they have been removed. You should either connect directly to the
@@ -456,9 +456,9 @@ It's more complicated if you're using particular configuration features:
     communicate, even if explicitly linked together.
 
     Either connect the external container to your app's
-    [default network](/compose/networking.md), or connect both the external container and
+    [default network](../networking.md), or connect both the external container and
     your service's containers to an
-    [external network](/compose/networking.md#use-a-pre-existing-network).
+    [external network](../networking.md#use-a-pre-existing-network).
 
 -   `net`: This is now replaced by [network_mode](index.md#network_mode):
 

@@ -6,12 +6,12 @@ keywords: documentation, docs,  docker, compose, orchestration, containers, swar
 title: Use Compose with Swarm
 ---
 
-Docker Compose and [Docker Swarm](/swarm/overview.md) aim to have full integration, meaning
+Docker Compose and [Docker Swarm](../swarm/overview.md) aim to have full integration, meaning
 you can point a Compose app at a Swarm cluster and have it all just work as if
 you were using a single Docker host.
 
 The actual extent of integration depends on which version of the
-[Compose file format](/compose/compose-file/compose-versioning.md) you are using:
+[Compose file format](compose-file/compose-versioning.md) you are using:
 
 1.  If you're using version 1 along with `links`, your app works, but Swarm
     schedules all containers on one host, because links between containers
@@ -21,11 +21,11 @@ The actual extent of integration depends on which version of the
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](/network/overlay.md),
+    - as long as the Swarm cluster is configured to use the [overlay driver](../network/overlay.md),
       or a custom driver which supports multi-host networking.
 
-Read [Get started with multi-host networking](/network/network-tutorial-overlay.md) to see how to
-set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
+Read [Get started with multi-host networking](../network/network-tutorial-overlay.md) to see how to
+set up a Swarm cluster with [Docker Machine](../machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
     $ docker-compose up
@@ -171,4 +171,4 @@ them.
       - "affinity:image==redis"
 
 For the full set of available filters and expressions, see the
-[Swarm documentation](/swarm/scheduler/filter.md).
+[Swarm documentation](../swarm/scheduler/filter.md).

@@ -21,9 +21,9 @@ These syntax rules apply to the `.env` file:
 ## Compose file and CLI variables
 
 The environment variables you define here are used for
-[variable substitution](/compose/compose-file/index.md#variable-substitution)
+[variable substitution](compose-file/index.md#variable-substitution)
 in your Compose file, and can also be used to define the following
-[CLI variables](/compose/reference/envvars.md):
+[CLI variables](reference/envvars.md):
 
 - `COMPOSE_API_VERSION`
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
@@ -43,12 +43,12 @@ in your Compose file, and can also be used to define the following
 > * Environment variables defined in the `.env` file are not automatically
 >   visible inside containers. To set container-applicable environment variables,
 >   follow the guidelines in the topic
->   [Environment variables in Compose](/compose/environment-variables.md), which
+>   [Environment variables in Compose](environment-variables.md), which
 >   describes how to pass shell environment variables through to containers,
 >   define environment variables in Compose files, and more.
 
 ## More Compose documentation
 
 - [User guide](index.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
