@@ -4,7 +4,7 @@ keywords: trust, security, notary, deployment
 title: Deploy Notary Server with Compose
 ---
 
-The easiest way to deploy Notary Server is by using Docker Compose. To follow the procedure on this page, you must have already [installed Docker Compose](/compose/install.md).
+The easiest way to deploy Notary Server is by using Docker Compose. To follow the procedure on this page, you must have already [installed Docker Compose](../../../compose/install.md).
 
 1. Clone the Notary repository.
 
@@ -15,7 +15,7 @@ The easiest way to deploy Notary Server is by using Docker Compose. To follow th
        docker-compose up -d
 
 
-    For more detailed documentation about how to deploy Notary Server, see the [instructions to run a Notary service](/notary/running_a_service.md) as well as [the Notary repository](https://github.com/theupdateframework/notary) for more information.
+  For more detailed documentation about how to deploy Notary Server, see the [instructions to run a Notary service](../../../notary/running_a_service.md) as well as [the Notary repository](https://github.com/theupdateframework/notary) for more information.
 3. Make sure that your Docker or Notary client trusts Notary Server's certificate before you try to interact with the Notary server.
 
 See the instructions for [Docker](../../reference/commandline/cli.md#notary) or

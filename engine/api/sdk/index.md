@@ -167,7 +167,7 @@ hello world
   </div>
 </div>
 
-For more examples, take a look at the [SDK examples](/engine/api/sdk/examples.md).
+For more examples, take a look at the [SDK examples](examples.md).
 
 ## Unofficial libraries
 

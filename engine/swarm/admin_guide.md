@@ -11,13 +11,13 @@ for managing the swarm and storing the swarm state. It is important to
 understand some key features of manager nodes to properly deploy and
 maintain the swarm.
 
-Refer to [How nodes work](/engine/swarm/how-swarm-mode-works/nodes.md)
+Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
 worker nodes.
 
 ## Operate manager nodes in a swarm
 
-Swarm manager nodes use the [Raft Consensus Algorithm](/engine/swarm/raft.md) to manage the
+Swarm manager nodes use the [Raft Consensus Algorithm](raft.md) to manage the
 swarm state. You only need to understand some general concepts of Raft in
 order to manage a swarm.
 
@@ -54,7 +54,7 @@ troubleshooting steps if you do lose the quorum of managers.
 
 When initiating a swarm, you must specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
-information, see [Run Docker Engine in swarm mode](/engine/swarm/swarm-mode.md#configure-the-advertise-address). Because manager nodes are
+information, see [Run Docker Engine in swarm mode](swarm-mode.md#configure-the-advertise-address). Because manager nodes are
 meant to be a stable component of the infrastructure, you should use a *fixed
 IP address* for the advertise address to prevent the swarm from becoming
 unstable on machine reboot.
@@ -99,7 +99,7 @@ swarm becomes unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
 You manage swarm membership with the `docker swarm` and `docker node`
-subsystems. Refer to [Add nodes to a swarm](/engine/swarm/join-nodes.md) for more information
+subsystems. Refer to [Add nodes to a swarm](join-nodes.md) for more information
 on how to add worker nodes and promote a worker node to be a manager.
 
 ### Distribute manager nodes
@@ -143,7 +143,7 @@ assigning tasks to the node.
 
 ## Add worker nodes for load balancing
 
-[Add nodes to the swarm](/engine/swarm/join-nodes.md) to balance your swarm's
+[Add nodes to the swarm](join-nodes.md) to balance your swarm's
 load. Replicated service tasks are distributed across the swarm as evenly as
 possible over time, as long as the worker nodes are matched to the requirements
 of the services. When limiting a service to run on only specific types of nodes,
@@ -213,7 +213,7 @@ To cleanly re-join a manager node to a cluster:
 3. Re-join the node to the swarm with a fresh state using `docker swarm join`.
 
 For more information on joining a manager node to a swarm, refer to
-[Join nodes to a swarm](/engine/swarm/join-nodes.md).
+[Join nodes to a swarm](join-nodes.md).
 
 ## Forcibly remove a node
 
@@ -248,7 +248,7 @@ You can back up the swarm using any manager. Use the following procedure.
 1.  If the swarm has auto-lock enabled, you need the unlock key
     to restore the swarm from backup. Retrieve the unlock key if necessary and
     store it in a safe location. If you are unsure, read
-    [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).
+    [Lock your swarm to protect its encryption key](swarm_manager_locking.md).
 
 2.  Stop Docker on the manager before backing up the data, so that no data is
     being changed during the backup. It is possible to take a backup while the
@@ -315,7 +315,7 @@ restore the data to a new swarm.
     `docker service ls` to be sure that all expected services are present.
 
 7.  If you use auto-lock,
-    [rotate the unlock key](/engine/swarm/swarm_manager_locking.md#rotate-the-unlock-key).
+    [rotate the unlock key](swarm_manager_locking.md#rotate-the-unlock-key).
 
 8.  Add manager and worker nodes to bring your new swarm up to operating
     capacity.
@@ -385,7 +385,7 @@ In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
 `docker service update` command to force the service to redistribute its tasks
 across the available worker nodes. This causes the service tasks to restart.
 Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](/engine/swarm/swarm-tutorial/rolling-update.md).
+uses a [rolling update](swarm-tutorial/rolling-update.md).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm
@@ -401,5 +401,5 @@ down to the original scale. You can use `docker service ps` to assess the curren
 balance of your service across nodes.
 
 See also
-[`docker service scale`](/engine/reference/commandline/service_scale.md) and
-[`docker service ps`](/engine/reference/commandline/service_ps.md).
+[`docker service scale`](../reference/commandline/service_scale.md) and
+[`docker service ps`](../reference/commandline/service_ps.md).

@@ -21,7 +21,7 @@ toc_max: 2
 ## Supported platforms
 
 Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](/docker-for-mac/install.md) and [Windows 10](/docker-for-windows/install.md)
+[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -29,10 +29,10 @@ your preferred operating system below.
 
 {% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                     | x86_64 / amd64                              |
-|:-------------------------------------------------------------|:-------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](/docker-for-mac/install.md) | [{{ yes }}](/docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](/docker-for-windows/install.md) | [{{ yes }}](/docker-for-windows/install.md) |
+| Platform                                                          | x86_64 / amd64                                   |
+|:------------------------------------------------------------------|:------------------------------------------------:|
+| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
+| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
 
 #### Server
 
@@ -159,4 +159,4 @@ for it.
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Getting started with Docker](/get-started/index.md).
+[Getting started with Docker](../../get-started/index.md).
