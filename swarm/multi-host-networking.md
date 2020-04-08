@@ -15,14 +15,9 @@ Docker, as opposed to swarm mode. Standalone swarms (sometimes known as Swarm
 Classic) rely on an external key-value store to store networking information.
 Docker swarm mode stores networking information in the Raft logs on the swarm
 managers. If you use swarm mode, see
-[swarm mode networking](/engine/swarm/networking.md) instead of this article.
+[swarm mode networking](../engine/swarm/networking.md) instead of this article.
 
-Users of Universal Control Plane **do** use an external key-value store, but UCP
-manages it for you, and you do not need to manually intervene.
-If you run into issues with the key-value store, see
-[Troubleshoot the etcd key-value store](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations.md#troubleshoot-the-etcd-key-value-store)
-
-If you are using standalone swarms and not using UCP, this article may be useful
+If you are using standalone swarms, this article may be useful
 to you. This article uses an example to explain the basics of creating a
 multi-host network using a standalone swarm and the `overlay` network driver.
 Unlike `bridge` networks, overlay networks require some pre-existing conditions
@@ -412,10 +407,10 @@ to have external connectivity outside of their cluster.
 ## Use Docker Compose with swarm classic
 
 Refer to the Networking feature introduced in
-[Compose V2 format](/compose/networking/)
+[Compose V2 format](../compose/networking.md)
 and execute the multi-host networking scenario in the swarm cluster used above.
 
 ## Next steps
 
-- [Networking overview](/network/index.md)
-- [Overlay networks](/network/overlay.md)
+- [Networking overview](../network/index.md)
+- [Overlay networks](../network/overlay.md)

@@ -10,7 +10,7 @@ Welcome to the Docker documentation test page!
 This is a demo of components, tags, styles, tools, and strategies we use for the
 docs. We explain the code behind the published page and demo the effects. So, if
 you want to see, for example, how admonitions and notes are coded in markdown,
-read the section on [Admonitions (notes)](/test.md#admonitions-notes) on the web
+read the section on [Admonitions (notes)](test.md#admonitions-notes) on the web
 published page and study the pre-processed `test.md` to see how they are
 implemented. The Docker documentation team uses this page as "note to self"
 reminders. Since we invite docs suggestions and contributions from the
@@ -134,7 +134,7 @@ it as you would any other link, using `#custom-target-id` as the ultimate
 target.
 
 An example of a custom target ID in the documentation is the topic on
-[Compose file version 2 topic on CPU and other resources](/compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
+[Compose file version 2 topic on CPU and other resources](compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
 It has a long heading that breaks the normal markdown linking mechanism,
 so we added a custom ID above the target heading.
 
@@ -447,7 +447,7 @@ and CSS only.)
 >For each drop-down, the value for `data-target` and
 `collapse` `id` must match, and id's must be unique per page. In this example,
 we name these `collapseSample1` and `collapseSample2`. Check out the
-[Compose file structure example](/compose/compose-file/index.md#compose-file-structure-and-examples)
+[Compose file structure example](compose/compose-file/index.md#compose-file-structure-and-examples)
 to see another example.
 {: .important-vanilla}
 

@@ -211,4 +211,4 @@ machine, then use `docker-machine rm`.
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](/swarm/provision-with-machine.md)
+-   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)

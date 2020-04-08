@@ -11,7 +11,7 @@ argument to indicate the name of the created machine.
 > Looking for the full list of available drivers?
 >
 >For a full list of drivers that work with `docker-machine create` and
-information on how to use them, see [Machine drivers](/machine/drivers/index.md).
+information on how to use them, see [Machine drivers](../drivers/index.md).
 {: .important}
 
 ## Example
@@ -129,12 +129,12 @@ Docker Machine uses them for the default value of the flag.
 As part of the process of creation, Docker Machine installs Docker and
 configures it with some sensible defaults. For instance, it allows connection
 from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage driver](/engine/reference/commandline/dockerd.md#daemon-storage-driver-option)
+as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
 when available.
 
 There are several cases where the user might want to set options for the created
 Docker engine (also known as the Docker _daemon_) themselves. For example, they
-may want to allow connection to a [registry](/registry/index.md)
+may want to allow connection to a [registry](../../registry/index.md)
 that they are running themselves using the `--insecure-registry` flag for the
 daemon. Docker Machine supports the configuration of such options for the
 created engines via the `create` command flags which begin with `--engine`.
@@ -180,10 +180,10 @@ Labels:
 
 The supported flags are as follows:
 
--   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli.md#insecure-registries) to allow with the created engine
--   `--engine-registry-mirror`: Specify [registry mirrors](/registry/recipes/mirror.md) to use
--   `--engine-label`: Specify [labels](/engine/userguide/labels-custom-metadata.md#daemon-labels) for the created engine
--   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli.md#daemon-storage-driver-option) to use with the engine
+-   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli/#insecure-registries) to allow with the created engine
+-   `--engine-registry-mirror`: Specify [registry mirrors](../../registry/recipes/mirror.md) to use
+-   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
+-   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
 
 If the engine supports specifying the flag multiple times (such as with
 `--label`), then so does Docker Machine.
@@ -192,7 +192,7 @@ In addition to this subset of daemon flags which are directly supported, Docker
 Machine also supports an additional flag, `--engine-opt`, which can be used to
 specify arbitrary daemon options with the syntax `--engine-opt flagname=value`.
 For example, to specify that the daemon should use `8.8.8.8` as the DNS server
-for all containers, and always use the `syslog` [log driver](/engine/reference/run.md#logging-drivers-log-driver)
+for all containers, and always use the `syslog` [log driver](../../config/containers/logging/configure.md)
 you could run the following create command:
 
 ```bash
@@ -218,7 +218,7 @@ $ docker-machine create -d virtualbox \
 In addition to configuring Docker Engine options as listed above,
 you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
-the [scheduling strategy](/swarm/scheduler/strategy.md)
+the [scheduling strategy](../../swarm/scheduler/strategy.md)
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
 There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
 for the `swarm manage` command (used to boot a master node) instead of the base
