@@ -211,7 +211,7 @@ the default registry configuration):
 
 Services allow you to scale containers across multiple Docker daemons, which
 all work together as a _swarm_ with multiple _managers_ and _workers_. Each
-member of a swarm is a Docker daemon, and the daemons all communicate using
+member of a swarm is a Docker daemon, and all the daemons communicate using
 the Docker API. A service allows you to define the desired state, such as the
 number of replicas of the service that must be available at any given time.
 By default, the service is load-balanced across all worker nodes. To
