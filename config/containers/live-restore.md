@@ -12,8 +12,10 @@ containers remain running if the daemon becomes unavailable. This functionality
 is called _live restore_. The live restore option helps reduce container
 downtime due to daemon crashes, planned outages, or upgrades.
 
-> **Note**: Live restore is not supported on Windows containers, but it does work
-for Linux containers running on Docker Desktop for Windows.
+> **Note**
+>
+> Live restore is not supported on Windows containers, but it does work for
+> Linux containers running on Docker Desktop for Windows.
 
 ## Enable live restore
 
@@ -21,8 +23,8 @@ There are two ways to enable the live restore setting to keep containers alive
 when the daemon becomes unavailable. **Only do one of the following**.
 
 * Add the configuration to the daemon configuration file. On Linux, this
-  defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker Desktop for Windows,
-  select the Docker icon from the task bar, then click
+  defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker
+  Desktop for Windows, select the Docker icon from the task bar, then click
   **Preferences** -> **Daemon** -> **Advanced**.
 
   - Use the following JSON to enable `live-restore`.
@@ -46,7 +48,9 @@ when the daemon becomes unavailable. **Only do one of the following**.
 
 ## Live restore during upgrades
 
-Live restore supports keeping containers running across Docker daemon upgrades, though this is limited to patch releases and does not support minor or major daemon upgrades.
+Live restore allows you to keep containers running across Docker daemon updates,
+but is only supported when installing patch releases (`YY.MM.x`), not for
+major (`YY.MM`) daemon upgrades.
 
 If you skip releases during an upgrade, the daemon may not restore its
 connection to the containers. If the daemon can't restore the connection, it
@@ -76,5 +80,3 @@ The live restore option only pertains to standalone containers, and not to swarm
 services. Swarm services are managed by swarm managers. If swarm managers are
 not available, swarm services continue to run on worker nodes but cannot be
 managed until enough swarm managers are available to maintain a quorum.
-
-

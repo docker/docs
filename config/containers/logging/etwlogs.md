@@ -24,12 +24,12 @@ before the provider has been registered with the system.
 Here is an example of how to listen to these events using the logman utility program
 included in most installations of Windows:
 
-   1. `logman start -ets DockerContainerLogs -p {a3693192-9ed6-46d2-a981-f8226c8363bd} 0 0 -o trace.etl`
-   2. Run your container(s) with the etwlogs driver, by adding `--log-driver=etwlogs`
-   to the Docker run command, and generate log messages.
-   3. `logman stop -ets DockerContainerLogs`
-   4. This generates an etl file that contains the events. One way to convert this file into
-   human-readable form is to run: `tracerpt -y trace.etl`.
+1. `logman start -ets DockerContainerLogs -p {a3693192-9ed6-46d2-a981-f8226c8363bd} 0 0 -o trace.etl`
+2. Run your container(s) with the etwlogs driver, by adding
+   `--log-driver=etwlogs` to the Docker run command, and generate log messages.
+3. `logman stop -ets DockerContainerLogs`
+4. This generates an etl file that contains the events. One way to convert this
+   file into human-readable form is to run: `tracerpt -y trace.etl`.
 
 Each ETW event contains a structured message string in this format:
 
@@ -46,18 +46,22 @@ Details on each item in the message can be found below:
 | `source`             | `stdout` or `stderr`.                           |
 | `log`                | The container log message.                      |
 
-Here is an example event message:
+Here is an example event message (output formatted for readability):
 
-    container_name: backstabbing_spence,
-    image_name: windowsservercore,
-    container_id: f14bb55aa862d7596b03a33251c1be7dbbec8056bbdead1da8ec5ecebbe29731,
-    image_id: sha256:2f9e19bd998d3565b4f345ac9aaf6e3fc555406239a4fb1b1ba879673713824b,
-    source: stdout,
-    log: Hello world!
+```yaml
+container_name: backstabbing_spence,
+image_name: windowsservercore,
+container_id: f14bb55aa862d7596b03a33251c1be7dbbec8056bbdead1da8ec5ecebbe29731,
+image_id: sha256:2f9e19bd998d3565b4f345ac9aaf6e3fc555406239a4fb1b1ba879673713824b,
+source: stdout,
+log: Hello world!
+```
 
 A client can parse this message string to get both the log message, as well as its
 context information. The timestamp is also available within the ETW event.
 
-> **Note**:  This ETW provider emits only a message string, and not a specially
-> structured ETW event. Therefore, it is not required to register a manifest file
-> with the system to read and interpret its ETW events.
+> **Note**
+>
+> This ETW provider emits only a message string, and not a specially structured
+> ETW event. Therefore, it is not required to register a manifest file with the
+> system to read and interpret its ETW events.

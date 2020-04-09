@@ -15,10 +15,12 @@ By default, the `local` driver preserves 100MB of log messages per container and
 uses automatic compression to reduce the size on disk. The 100MB default value is based on a 20M default size 
 for each file and a default count of 5 for the number of such files (to account for log rotation).
 
-> *Note*: the `local` logging driver currently uses file-based storage. The
-> file-format and storage mechanism are designed to be exclusively accessed by
-> the Docker daemon, and should not be used by external tools as the
-> implementation may change in future releases.
+> *Note*
+>
+> The `local` logging driver uses file-based storage. The file-format and
+> storage mechanism are designed to be exclusively accessed by the Docker
+> daemon, and should not be used by external tools as the implementation may
+> change in future releases.
 
 ## Usage
 
@@ -56,11 +58,11 @@ $ docker run \
 
 The `local` logging driver supports the following logging options:
 
-| Option      | Description                                                                                                                                                                                                   | Example  value                           |
-|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
-| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to 20m.                                          | `--log-opt max-size=10m`                 |
-| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. A positive integer. Defaults to 5. | `--log-opt max-file=3`                   |
-| `compress`  | Toggle compression of rotated log files. Enabled by default. | `--log-opt compress=false` |
+| Option      | Description                                                                                                                                                   | Example  value             |
+|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to 20m.     | `--log-opt max-size=10m`   |
+| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. A positive integer. Defaults to 5. | `--log-opt max-file=3`     |
+| `compress`  | Toggle compression of rotated log files. Enabled by default.                                                                                                  | `--log-opt compress=false` |
 
 ### Examples
 
