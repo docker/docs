@@ -1,0 +1,16 @@
+name: update website config
+description: update the S3 website configuration
+inputs:
+  bucketName:
+    description: Name of the S3 bucket
+    required: true
+  regionName:
+    description: Name of the AWS region of the S3 bucket
+    required: true
+  websiteConfig:
+    description: Name of the website config JSON file
+    required: true
+  
+runs:
+  using: docker
+  image: Dockerfile
