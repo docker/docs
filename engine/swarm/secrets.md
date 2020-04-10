@@ -26,7 +26,7 @@ runtime but you don't want to store in the image or in source control, such as:
 - Generic strings or binary content (up to 500 kb in size)
 
 > **Note**: Docker secrets are only available to swarm services, not to
-> standalone containers. To use this feature, consider adapting your container
+> standalone containers. To use this feature, consider udapting your container
 > to run as a service. Stateful containers can typically run with a scale of 1
 > without changing the container code.
 
