@@ -79,8 +79,6 @@ your DNF repositories) and set up the **stable** repository.
 ```bash
 $ sudo dnf -y install dnf-plugins-core
 
-$ sudo dnf -y install dnf-plugins-core
-
 $ sudo dnf config-manager \
     --add-repo \
     {{ download-url-base }}/docker-ce.repo
