@@ -136,7 +136,7 @@ However, the `configs` key is not supported for `docker compose`. See
 
 This simple example shows how configs work in just a few commands. For a
 real-world example, continue to
-[Intermediate example: Use configs with a Nginx service](#advanced-example-use-configs-with-a-nginx-service).
+[Advanced example: Use configs with a Nginx service](#advanced-example-use-configs-with-a-nginx-service).
 
 1.  Add a config to Docker. The `docker config create` command reads standard
     input because the last argument, which represents the file to read the
