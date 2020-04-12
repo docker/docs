@@ -27,7 +27,7 @@ your preferred operating system below.
 
 #### Desktop
 
-{% assign yes = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
 | Platform                                                     | x86_64 / amd64                              |
 |:-------------------------------------------------------------|:-------------------------------------------:|
