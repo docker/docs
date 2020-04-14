@@ -1,0 +1,180 @@
+{
+ "ErrorDocument": {
+  "Key": "404.html"
+ },
+ "IndexDocument": {
+  "Suffix": "index.html"
+ },
+ "RedirectAllRequestsTo": null,
+ "RoutingRules": [
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.4/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.5/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.6/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.7/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.8/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.9/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.10/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.11/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.12/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v1.13/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v17.03/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v17.09/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  },
+  {
+   "Condition": {
+    "HttpErrorCodeReturnedEquals": null,
+    "KeyPrefixEquals": "v17.12/"
+   },
+   "Redirect": {
+    "HostName": "docs-stage.docker.com",
+    "HttpRedirectCode": null,
+    "Protocol": "https",
+    "ReplaceKeyPrefixWith": "",
+    "ReplaceKeyWith": null
+   }
+  }
+ ]
+}

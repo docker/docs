@@ -28,54 +28,63 @@ startup and whenever a connection is lost for any reason. However, if you don't
 need this level of resilience, you can work around the problem with a wrapper
 script:
 
--   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-    [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
-    [wait-for](https://github.com/Eficode/wait-for). These are small
-    wrapper scripts which you can include in your application's image to
-    poll a given host and port until it's accepting TCP connections.
+- Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
+  [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
+  [wait-for](https://github.com/Eficode/wait-for). These are small
+  wrapper scripts which you can include in your application's image to
+  poll a given host and port until it's accepting TCP connections.
 
-    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
+  For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
 
-        version: "2"
-        services:
-          web:
-            build: .
-            ports:
-              - "80:8000"
-            depends_on:
-              - "db"
-            command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
-          db:
-            image: postgres
+  ```yaml
+  version: "2"
+  services:
+    web:
+      build: .
+      ports:
+        - "80:8000"
+      depends_on:
+        - "db"
+      command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+    db:
+      image: postgres
+  ```
 
-    >**Tip**: There are limitations to this first solution. For example, it doesn't verify when a specific service is really ready. If you add more arguments to the command, use the `bash shift` command with a loop, as shown in the next example.
+  > **Tip**
+  >
+  > There are limitations to this first solution. For example, it doesn't verify
+  > when a specific service is really ready. If you add more arguments to the
+  > command, use the `bash shift` command with a loop, as shown in the next
+  > example.
 
--   Alternatively, write your own wrapper script to perform a more application-specific health
-    check. For example, you might want to wait until Postgres is definitely
-    ready to accept commands:
+- Alternatively, write your own wrapper script to perform a more application-specific
+  health check. For example, you might want to wait until Postgres is ready to
+  accept commands:
 
-        #!/bin/sh
-        # wait-for-postgres.sh
+  ```bash
+  #!/bin/sh
+  # wait-for-postgres.sh
 
-        set -e
+  set -e
+  
+  host="$1"
+  shift
+  cmd="$@"
+  
+  until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
+    >&2 echo "Postgres is unavailable - sleeping"
+    sleep 1
+  done
+  
+  >&2 echo "Postgres is up - executing command"
+  exec $cmd
+  ```
 
-        host="$1"
-        shift
-        cmd="$@"
+  You can use this as a wrapper script as in the previous example, by setting:
 
-        until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
-          >&2 echo "Postgres is unavailable - sleeping"
-          sleep 1
-        done
-
-        >&2 echo "Postgres is up - executing command"
-        exec $cmd
-
-    You can use this as a wrapper script as in the previous example, by setting:
-
-    ```none
-    command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
-    ```
+  ```yaml
+  command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+  ```
 
 
 ## Compose documentation
