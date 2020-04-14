@@ -22,8 +22,8 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Ubuntu Buster 10 (stable)
-- Ubuntu Stretch 9 / Raspbian Stretch
+- Debian Buster 10 (stable)
+- Debian Stretch 9 / Raspbian Stretch
 
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
