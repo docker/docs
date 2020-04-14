@@ -1,4 +1,4 @@
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign green-check = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
 |  Capabilities                                                                    | Docker Engine - Enterprise | Docker Enterprise |
 |:---------------------------------------------------------------------|:-------------------------:|:----------------------------:|
