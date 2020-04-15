@@ -1100,10 +1100,10 @@ manuals:
     title: Getting started
   - path: /compose/swarm/
     title: Using Compose with Swarm
-  - path: /compose/env-file/
-    title: Environment file
   - path: /compose/environment-variables/
     title: Environment variables in Compose
+  - path: /compose/env-file/
+    title: Environment file
   - path: /compose/extends/
     title: Extend services in Compose
   - path: /compose/networking/
