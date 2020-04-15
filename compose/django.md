@@ -63,16 +63,12 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 9. Add the following configuration to the file.
 
     ```none
-    # docker-compose.yml
-    
      version: '3'
     
      services:
        db:
          image: postgres
-         ports:                       #add line.
-           - '5432'
-         environment:           # add line.
+         environment:
            - POSTGRES_DB=postgres
            - POSTGRES_USER=postgres
            - POSTGRES_PASSWORD=postgres
@@ -155,7 +151,7 @@ In this section, you set up the database connection for Django.
                'ENGINE': 'django.db.backends.postgresql',
                'NAME': 'postgres',
                'USER': 'postgres',
-               'PASSWORD': 'postgres',  #add line.
+               'PASSWORD': 'postgres',
                'HOST': 'db',
                'PORT': 5432,
            }
