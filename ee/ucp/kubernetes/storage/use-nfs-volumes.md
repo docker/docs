@@ -64,7 +64,7 @@ spec:
 To deploy the pod, and ensure that it started up correctly, use the [kubectl](../../user-access/kubectl/) command line tool. 
 
 ```bash
-$ kubectl create -f nfsinapod.yaml
+$ kubectl create -f nfs-in-a-pod.yaml
 
 $ kubectl get pods
 NAME                     READY     STATUS      RESTARTS   AGE
