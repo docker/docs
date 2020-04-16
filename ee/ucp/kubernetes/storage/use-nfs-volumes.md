@@ -121,7 +121,6 @@ spec:
     storage: 5Gi # This size is used to match a volume to a tenents claim
   accessModes:
     - ReadWriteOnce # Access modes are defined below
-  persistentVolumeReclaimPolicy: Recycle # Reclaim policies are defined below 
   nfs:
     server: nfs.example.com # Please change this to your NFS server
     path: /share1 # Please change this to the relevant share
@@ -183,6 +182,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce # Access modes for volumes is defined under Persistent Volumes
+  storageClassName: ""
   resources:
     requests:
       storage: 5Gi # volume size requested
