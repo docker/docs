@@ -7,6 +7,17 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.25.5
+(2020-04-10)
+
+### Features
+
+- Bumped OpenSSL from 1.1.1d to 1.1.1f.
+
+- Added Compose version 3.8.
+
+  - Limited service scale to the size specified by the field `deploy.placement.max_replicas_per_node`.
+
 ## 1.25.4
 (2020-02-03)
 
