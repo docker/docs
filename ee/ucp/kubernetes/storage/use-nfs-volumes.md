@@ -75,7 +75,7 @@ Verify everything was mounted correctly by getting a shell prompt
 within the container and searching for your mount. 
 
 ```bash
-$ kubectl exec -it nfs-in-a-pod sh
+$ kubectl exec -it nfs-in-a-pod -- sh
 / #
 / # mount | grep nfs.example.com
 nfs.example.com://share1 on /var/nfs type nfs4 (rw,relatime,vers=4.0,rsize=262144,wsize=262144,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.42.23,local_lock=none,addr=nfs.example.com)
@@ -226,7 +226,7 @@ spec:
       image: alpine
       volumeMounts:
       - name: data
-          mountPath: /var/nfs # Please change the destination you like the share to be mounted too
+        mountPath: /var/nfs # Please change the destination you like the share to be mounted too
       command: ["/bin/sh"]
       args: ["-c", "sleep 500000"]  
   volumes:
@@ -247,7 +247,7 @@ $ kubectl get pod
 NAME                     READY     STATUS      RESTARTS   AGE
 pod-using-nfs            1/1       Running     0          1m
 
-$ kubectl exec -it pod-using-nfs sh
+$ kubectl exec -it pod-using-nfs -- sh
 / # mount | grep nfs.example.com
 nfs.example.com://share1 on /var/nfs type nfs4 (rw,relatime,vers=4.1,rsize=262144,wsize=262144,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.42.23,local_lock=none,addr=nfs.example.com)
 / #
