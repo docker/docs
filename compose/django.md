@@ -60,23 +60,27 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     expose. See the [`docker-compose.yml` reference](/compose/compose-file/index.md) for more
     information on how this file works.
 
-9.  Add the following configuration to the file.
+9. Add the following configuration to the file.
 
     ```none
-    version: '3'
-
-    services:
-      db:
-        image: postgres
-      web:
-        build: .
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-          - .:/code
-        ports:
-          - "8000:8000"
-        depends_on:
-          - db
+     version: '3'
+    
+     services:
+       db:
+         image: postgres
+         environment:
+           - POSTGRES_DB=postgres
+           - POSTGRES_USER=postgres
+           - POSTGRES_PASSWORD=postgres
+       web:
+         build: .
+         command: python manage.py runserver 0.0.0.0:8000
+         volumes:
+           - .:/code
+         ports:
+           - "8000:8000"
+         depends_on:
+           - db
     ```
 
     This file defines two services: The `db` service and the `web` service.
@@ -138,21 +142,24 @@ In this section, you set up the database connection for Django.
 
 1.  In your project directory, edit the `composeexample/settings.py` file.
 
-2.  Replace the `DATABASES = ...` with the following:
+2. Replace the `DATABASES = ...` with the following:
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': 'postgres',
-                'USER': 'postgres',
-                'HOST': 'db',
-                'PORT': 5432,
-            }
-        }
+       # setting.py
+       
+       DATABASES = {
+           'default': {
+               'ENGINE': 'django.db.backends.postgresql',
+               'NAME': 'postgres',
+               'USER': 'postgres',
+               'PASSWORD': 'postgres',
+               'HOST': 'db',
+               'PORT': 5432,
+           }
+       }
 
-    These settings are determined by the
-    [postgres](https://hub.docker.com/_/postgres) Docker image
-    specified in `docker-compose.yml`.
+   These settings are determined by the
+   [postgres](https://hub.docker.com/_/postgres) Docker image
+   specified in `docker-compose.yml`.
 
 3.  Save and close the file.
 
