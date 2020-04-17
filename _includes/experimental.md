@@ -12,3 +12,5 @@ Docker does not offer support for experimental features.
 > **Settings** (**Preferences** on macOS) > **Command Line** and then turn on
 > the **Enable experimental features** toggle. Click **Apply & Restart**.
 {: .important }
+
+For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
