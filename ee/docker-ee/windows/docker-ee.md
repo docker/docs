@@ -53,6 +53,18 @@ To install the Docker Engine - Enterprise on your hosts, Docker provides a
     Install-Module DockerMsftProvider -Force
     Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
+     
+    PowerShell's execution policy might be set to **Restricted** in which case the installation fails with no indication to that.
+    
+    ```powershell
+    Get-ExecutionPolicy
+    ```
+    
+    Please make sure that it is set to **RemoteSigned** at least. [More on Execution Policies](https://docs.microsoft.com/en-gb/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7#powershell-execution-policies)
+    
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+    ```    
 
 2.  Check if a reboot is required, and if yes, restart your instance.
 
