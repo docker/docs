@@ -25,6 +25,15 @@ docker inspect --format '{{join .Args " , "}}' container
 ```
 {% endraw %}
 
+## table
+
+`table` specifies which fields you want to see its output.
+
+{% raw %}
+```
+docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
+```
+{% endraw %}
 
 ## json
 
