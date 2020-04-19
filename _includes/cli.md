@@ -1,5 +1,6 @@
 {% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
 {% assign controller_data = site.data[include.datafolder][include.datafile] %}
+{% assign parentPath = page.path | prepend: "/" | remove: page.name %}
 
 ## Description
 
@@ -151,7 +152,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
 
 | Command | Description |
 | ------- | ----------- |
-| [{{ controller_data.pname }}]({{ parentfile }}) | {{ parentDesc }}|
+| [{{ controller_data.pname }}]({{parentPath}}{{ parentfile }}/) | {{ parentDesc }}|
 
 {% endunless %}
 {% endif %}
@@ -171,7 +172,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
 {% for command in controller_data.cname %}
   {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | remove_first: "docker_" }}/)</td>
+    <td markdown="span">[{{ command }}]({{ parentPath }}{{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
 {% endfor %}
@@ -194,7 +195,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
 {% for command in site.data[include.datafolder][parentdatafile].cname %}
   {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | remove_first: "docker_" }}/)</td>
+    <td markdown="span">[{{ command }}]({{ parentPath }}{{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
 {% endfor %}
