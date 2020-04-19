@@ -203,3 +203,58 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </table>
 
 {% endunless %}
+
+<script>
+    // This is a horrible hack, and cute little kittens are sacrificed every time it's run, so we
+    // need to remove it as soon as possible.
+    //
+    // Fix up links to markdown pages that weren't resolved by Jekyll (or the "jekyll-relative-links"
+    // plugin). This is a horrible hack, and should not rely on JavaScript (perhaps be re-implemented
+    // using Liquid). We need this hack to work around two bugs in the "jekyll-relative-links" plugin;
+    // 1. As reported in https://github.com/benbalter/jekyll-relative-links/issues/54, (relative) links
+    //    to markdown pages in includes are not processed by Jekyll. This means that (for example) our
+    //    reference pages (which use includes) contain broken links. We can work around this by modifying
+    //    the markdown for those pages to use "absolute" "html" links (/link/to/other/page/#some-anchor),
+    //    but doing so would render the links broken when viewed on GitHub. Instead, we're fixing them up
+    //    here, hoping the bug will be fixed, and it's only temporarily.
+    // 2. As reported in https://github.com/benbalter/jekyll-relative-links/issues/61, (relative) links
+    //    to markdown pages are not resolved if the link's caption/title is wrapped.
+    //
+    Array.prototype.forEach.call(document.querySelectorAll("section.section a:not(.nomunge)"), function (el) {
+        let href = el.getAttribute("href");
+        if (href.startsWith("/") || href.startsWith("#") || href.includes("://") || !href.includes('.md')) {
+            // Don't modify anchor links, absolute links, links to external websites,
+            // or links not pointing to a .md file; we assume those were
+            // resolved successfully by Jekyll.
+            return
+        }
+        if (href.startsWith("./")) {
+            href = href.substr(2)
+        }
+        if ("{{ page.name }}" !== "index.md") {
+            // For non-index pages, things are a bit hairy. For example, for /foo/bar/mypage.md, Jekyll
+            // will generate a page named /foo/bar/mypage/index.html. This means that all links relative
+            // to mypage.md expect those links to be relative to the /foo/bar/ directory, but end up
+            // being relative to /foo/bar/mypage/.
+            //
+            // For files "next to", or "below" this file, such as "file.md" or "nested/dir/file.md" we
+            // prepend the "parent-dir" to the URL.
+            //
+            // For links to files "up" the directory tree, we prepend
+            // "../" to the URL and have the browser handle this. For example, "../file.md" and "../../file.md"
+            // become "../../file.md" and "../../../file.md".
+            if (href.startsWith("../")) {
+                href = "../" + href
+            } else {
+                // Generate "parentPath" with Liquid, which is used below. Liquid's page.path (and page.dir)
+                // are relative to the _generated_ HTML page, not the source page, so we have to remove the
+                // last part of the path:
+                // {% raw %}{% assign parentPath = page.path | prepend: "/" | remove: page.name %}{% endraw %}
+                // {% assign parentPath = page.path | prepend: "/" | remove: page.name %}
+                href = "{{ parentPath}}" + href
+            }
+        }
+        // finally, we replace the .md extension for a slash, and update the link's href
+        el.setAttribute("href", href.replace(".md", "/"))
+    });
+</script>
