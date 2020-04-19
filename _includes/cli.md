@@ -1,6 +1,4 @@
 {% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
-{% if include.datafolder and include.datafile %}
-
 {% assign controller_data = site.data[include.datafolder][include.datafile] %}
 
 ## Description
@@ -139,11 +137,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 ## Examples
 
 {{ controller_data.examples }}
-
-{% endif %}
-{% else %}
-
-The include.datafolder or include.datafile was not set.
 
 {% endif %}
 
