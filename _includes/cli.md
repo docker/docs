@@ -81,8 +81,8 @@ your client and daemon API versions.
 
 ## Usage
 
-```none
-{{ controller_data.usage | replace: tabChar,"" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
+```console
+{{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
 ```
 
 {% endif %}
@@ -116,15 +116,12 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </thead>
 <tbody>
 {% for option in alloptions %}
-
   {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
   {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
   {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
   {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
-
   {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
-
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
@@ -132,11 +129,9 @@ For example uses of this command, refer to the [examples section](#examples) bel
     <td markdown="span">{{ option-default }}</td>
     <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
   </tr>
-
 {% endfor %} <!-- end for option -->
 </tbody>
 </table>
-
 {% endif %} <!-- end if options -->
 
 {% if controller_data.examples %}
@@ -157,8 +152,8 @@ The include.datafolder or include.datafile was not set.
 
 ## Parent command
 
-{% capture parentfile %}{{ controller_data.plink | replace: ".yaml", "" | replace: "docker_","" }}{% endcapture %}
-{% capture parentdatafile %}{{ controller_data.plink | replace: ".yaml", "" }}{% endcapture %}
+{% capture parentfile %}{{ controller_data.plink | remove_first: ".yaml" | remove_first: "docker_" }}{% endcapture %}
+{% capture parentdatafile %}{{ controller_data.plink | remove_first: ".yaml" }}{% endcapture %}
 {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 
 | Command | Description |
@@ -181,9 +176,9 @@ The include.datafolder or include.datafile was not set.
 </thead>
 <tbody>
 {% for command in controller_data.cname %}
-  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">[{{ command }}]({{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
 {% endfor %}
@@ -204,9 +199,9 @@ The include.datafolder or include.datafile was not set.
 </thead>
 <tbody>
 {% for command in site.data[include.datafolder][parentdatafile].cname %}
-  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
-    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">[{{ command }}]({{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
 {% endfor %}
