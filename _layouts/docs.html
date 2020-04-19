@@ -1,21 +1,5 @@
 <!-- Page generated {{ site.time }} -->
-<!-- relative link basehrefs -->
-{% if page.path contains "index.md" %}
-	{% capture basehref %}{{ page.url }}{% endcapture %}
-{% else %}
-	{% assign crumbs = page.url | split: '/' %}
-	{% assign stoppingpoint = crumbs | size | minus: 1 %}
-	{% for crumb in crumbs %}
-		{% if forloop.index == stoppingpoint %}
-			{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-			{% break %}
-		{% else %}
-			{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-		{% endif %}
-	{% endfor %}
-{% endif %}
-
-<!-- Logic for 'edit this button' -->
+<!-- Logic for 'edit this button'
 {% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
 {% for entry in site.data.not_edited_here.overrides %}
 	{% if page.path contains entry.path %}
@@ -27,13 +11,9 @@
 	{% break %}
 	{% endif %}
 {% endfor %}
-
-<!-- End of logic for 'edit this button' -->
-
-
+-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<base href="{{ basehref }}" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,18 +72,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
 	<title>{{ page.title }} | Docker Documentation</title>
-<meta property="og:title" content="{{ page.title }}" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="{{ page.description }}" />
-<meta property="og:description" content="{{ page.description }}" />
-<link rel="canonical" href="{{ page.url }}" />
-<meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
-<meta property="og:site_name" content="Docker Documentation" />
-<script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+	<meta property="og:title" content="{{ page.title }}" />
+	<meta property="og:locale" content="en_US" />
+	<meta name="description" content="{{ page.description }}" />
+	<meta property="og:description" content="{{ page.description }}" />
+	<link rel="canonical" href="{{ page.url }}" />
+	<meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+	<meta property="og:site_name" content="Docker Documentation" />
+	<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
 	<!-- END SEO STUFF -->
 	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
-	<script language="javascript">
+	<script>
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
@@ -112,9 +91,12 @@
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
 	<header>
-		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
+		{% if page.landing == true %}
+			{% include global-header.html %}
+		{% else %}
+			{% include header.html %}
+		{% endif %}
 	</header>
-
 	<div class="{% if page.landing == true %}wrapper{%else%}wrapper right-open{% endif %}">
 		<div class="container-fluid">
 			<div class="row">
@@ -128,45 +110,37 @@
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
-							{% if page.ui_tabs or page.cli_tabs or page.api_tabs %}{% capture content %}
+							{% if page.ui_tabs or page.cli_tabs or page.api_tabs %}
+								{% capture content %}
 
 								{% if page.intro %}{{ page.intro | markdownify }}{% else %}{{ page.description | markdownify }}{% endif %}
 
 								{% if page.ui_tabs %}
-
 								<ul class="nav nav-tabs">{% for tab in page.ui_tabs %}
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#ui-{{ tab.version | slugify }}" id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %} (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.ui_tabs %}
 								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
 								</div>
-
 								{% endif %}
 								{% if page.cli_tabs %}
-
 								<ul class="nav nav-tabs">{% for tab in page.cli_tabs %}
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#cli-{{ tab.version | slugify }}" id="cli-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.cli_tabs %}
 								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
 								</div>
-
 								{% endif %}
 								{% if page.api_tabs %}
-
 								<ul class="nav nav-tabs">{% for tab in page.api_tabs %}
 									<li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#api-{{ tab.version | slugify }}" id="api-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.api_tabs %}
 									<div id="api-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version api="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}</div>{% endfor %}
 								</div>
-
 								{% endif %}
-
 								{% if page.next_steps %}
-
 								<h2>Next steps</h2>
-
 								<ul>
 								{% for step in page.next_steps %}  <li><a href="{{ step.path }}">{{ step.title }}</a></li>
 								{% endfor %}
@@ -177,19 +151,19 @@
 							{{ content }}
 							<!-- tags -->
 							{% unless page.notags == true %}
-							{% assign keywords = page.keywords | split:"," -%}
-							{% if keywords.size > 0 -%}
-							  <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
-							  {%- for keyword in keywords -%}
-							    {%- assign strippedKeyword = keyword | strip -%}
-							    <a href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
-							    {%- unless forloop.last %}, {% endunless -%}
-							  {% endfor -%}
-							  </span>
-							{% endif -%}
+								{% assign keywords = page.keywords | split:"," -%}
+								{% if keywords.size > 0 -%}
+								<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
+								{%- for keyword in keywords -%}
+								{%- assign strippedKeyword = keyword | strip -%}
+								<a href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+								{%- unless forloop.last %}, {% endunless -%}
+								{% endfor -%}
+								</span>
+								{% endif -%}
 							{% endunless %}
 							<!-- link corrections -->
-              <script language="JavaScript">
+							<script>
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
 							for (i = 0; i < x; i++) {
@@ -210,7 +184,7 @@
 							}
 							</script>
 							{% if page.noratings != true %}
-						  <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+							<div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
@@ -240,7 +214,7 @@
 						</div>
 					</nav>
 					<div class="col-toc">
-							<div class="sidebar hidden-xs hidden-sm">
+						<div class="sidebar hidden-xs hidden-sm">
 							<div class="toc-nav">
 								<div class="feedback-links">
 									<ul>
@@ -268,10 +242,10 @@
 									</ul>
 								</div>
 								{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
-									<div id="side-toc-title">On this page:</div>
+								<div id="side-toc-title">On this page:</div>
 									{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
-								</div>
 								{% endunless %}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -280,14 +254,14 @@
 	</div>
 
 	{% if page.path == "404.md" %}
-		<script type="text/javascript">
-			var path = window.location.pathname.replace("#","");
-			var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
-			document.getElementsByClassName("nomunge")[1].onclick = function() {
-				 document.getElementsByClassName("nomunge")[1].href = ghIssueQueryString;
-				 return true;
-			};
-		</script>
+	<script type="text/javascript">
+		var path = window.location.pathname.replace("#","");
+		var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
+		document.getElementsByClassName("nomunge")[1].onclick = function() {
+			 document.getElementsByClassName("nomunge")[1].href = ghIssueQueryString;
+			 return true;
+		};
+	</script>
 	{% endif %}
 	<footer class="footer">
 		{% include footer.html %}
@@ -304,7 +278,7 @@
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
-	<script language="javascript">
+	<script>
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
@@ -312,7 +286,7 @@
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = '{{ jekyll.environment }}';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
-	if (jekyllEnv == 'development') {
+	if (jekyllEnv === 'development') {
 		jekyllEnv = '';
 	}
 	var pageURL = jekyllEnv + '{{ page.url }}';
@@ -323,11 +297,8 @@
 	<script src="/js/glossary.js"></script>
 	<script defer src="/js/docs.js"></script>
 	<script defer src="/js/toc.js"></script>
-	<script language="javascript">
-	jQuery(document).ready(function(){
-				hookupTOCEvents();
-			});
+	<script>
+	jQuery(document).ready(function(){hookupTOCEvents();});
 	</script>
 </body>
-
 </html>
