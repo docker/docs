@@ -2,6 +2,8 @@
 title: Docker Desktop Enterprise overview
 description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/
 ---
 
 Welcome to Docker Desktop Enterprise. This page contains information about the Docker Desktop Enterprise (DDE) release. For information about Docker Desktop Community, see:

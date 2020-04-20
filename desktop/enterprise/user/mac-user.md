@@ -1,6 +1,8 @@
 ---
 title: Use Docker Desktop Enterprise on Mac
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/user/mac-user/
 ---
 
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Mac.

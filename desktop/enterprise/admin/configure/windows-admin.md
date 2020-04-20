@@ -2,6 +2,8 @@
 title: Configure Docker Desktop Enterprise on Windows
 description: Learn about Docker Desktop Enterprise configuration
 keywords: Docker Admin, Windows, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/admin/configure/windows-admin/
 ---
 
 This page contains information on how system administrators can configure Docker Desktop Enterprise (DDE) settings, specify and lock configuration parameters to create a standardized development environment on Windows operating systems.

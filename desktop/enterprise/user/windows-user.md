@@ -2,6 +2,8 @@
 title: Use Docker Desktop Enterprise on Windows
 description: Exploring the Windows user interface
 keywords: Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user
+redirect_from:
+- /ee/desktop/user/windows-user/
 ---
 
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Windows.

@@ -4,6 +4,8 @@ description: Release notes for Docker Desktop Enterprise
 keywords: Docker Desktop Enterprise, Windows, Mac, Docker Desktop, Enterprise,
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /ee/desktop/release-notes/
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in the Docker Desktop Enterprise release. Documentation is updated for each release. We suggest that you regularly visit this page to learn about updates.
