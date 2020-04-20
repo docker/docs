@@ -2,6 +2,8 @@
 title: Application Designer
 description: Docker Desktop Enterprise Application Designer
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer
+redirect_from:
+- /ee/desktop/app-designer/
 ---
 
 ## Overview
