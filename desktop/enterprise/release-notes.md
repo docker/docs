@@ -17,6 +17,20 @@ For information on system requirements, installation, and download, see:
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
+## Version 2.3.0.0
+2020-04-22
+
+Docker Desktop Enterprise 2.3.0.0 contains a Kubernetes upgrade. Note that your local Kubernetes cluster in Version Pack 3.0 will be reset after installing this version.
+
+This version includes all the bug fixes and minor changes between Docker Desktop Community versions 2.1.0.1 and 2.3.0.0. For details see:
+- [Docker Desktop Community release notes on Mac](/docker-for-mac/release-notes) 
+- [Docker Desktop Community release notes on Windows](/docker-for-windows/release-notes) 
+
+### Bug fixes and minor changes
+- Windows: in the `admin-settings.json` configuration file, the `sharedDrives` and `sharedFolders` fields have been replaced by a unique `filesharingDirectories` field.
+- Mac: in the `admin-settings.json` configuration file, the `filesharingDirectories` has been moved out of the `linuxVM` section.
+- The `admin-settings.json` configuration file version number has been increased from 1 to 2. 
+
 ## Version 2.1.0.9
 2020-03-13
 
