@@ -62,19 +62,13 @@ The Docker Desktop installation includes
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
-    You are prompted to authorize `Docker.app` with your system password after you launch it.
-    Privileged access is needed to install networking components and links to the Docker apps.
-
     The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
 
       ![Whale in menu bar](images/whale-in-menu-bar.png)
 
-    If you just installed the app, you also get a message with suggested
-    next steps and a link to the documentation. Click the Docker menu (![whale
-    menu](images/whale-x.png){: .inline}) in the status bar to
-    dismiss this pop-up notification.
+    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
-      ![Startup information](images/mac-install-success.png)
+    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 
 3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
 **Preferences** and other options.
