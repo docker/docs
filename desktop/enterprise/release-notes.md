@@ -22,7 +22,7 @@ For Docker Enterprise Engine release notes, see [Docker Engine release notes](/e
 
 ### Bug fixes and minor changes
 
-Windows: Security fix - Diagnostics were collected with Administrator privileges, which led to a possible privilege escalation on systems where the Docker Desktop user was not an administrator.
+- Windows: Security fix - Diagnostics were collected with Administrator privileges, which led to a possible privilege escalation on systems where the Docker Desktop user was not an administrator.
 
 ## Version 2.1.0.8
 2019-11-14
@@ -58,14 +58,14 @@ Docker Desktop Enterprise 2.1.0.6 contains a Kubernetes upgrade. Note that your 
 
 ### Bug fixes and minor changes
 
-Windows: Docker Desktop no longer tries to modify the `/etc/hosts` file inside Windows containers to add `*.docker.internal` DNS entries.
+- Windows: Docker Desktop no longer tries to modify the `/etc/hosts` file inside Windows containers to add `*.docker.internal` DNS entries.
 
 ## Version 2.1.0.5
 2019-09-16
 
 ### Bug fixes and minor changes
 
- Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+ - Mac: All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
 
 ## Version 2.1.0.4
 2019-09-03
@@ -92,7 +92,7 @@ Docker Desktop Enterprise 2.1.0.3 contains a Kubernetes upgrade. Note that your 
 
 ### Upgrades
 
-[Docker 19.03.1](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0.
+- [Docker 19.03.1](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 3.0.
 
 ## Version 2.1.0.1
 2019-07-22
