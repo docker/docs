@@ -41,7 +41,7 @@ The following `admin-settings.json` code and table provide the required syntax a
 
 ```json
 {
-  "configurationFileVersion": 1,
+  "configurationFileVersion": 2,
   "engine": {
     "locked": false,
     "value": "linux"
@@ -154,11 +154,11 @@ The following `admin-settings.json` code and table provide the required syntax a
       }
     },
 
-  "sharedDrives": {
-    "locked": true,
-    "value": [ ]
+  "filesharingDirectories": {
+    "locked":false,
+    "value":["%USERPROFILE%", "..."]
   },
-  "sharedFolders": ["%USERPROFILE%", "\\\\.\\pipe\\docker_engine"]
+
 }
 ```
 
@@ -197,5 +197,4 @@ Parameter values and descriptions for environment configuration on Windows:
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
-| `sharedDrives`                    | If `sharedDrives` is set to `true`, this locks the drives users are allowed to share ( `["C", "D"]` ), but does not actually share drives by default (sharing a drive prompts the user for a password). `value` is a whitelist of drives that can be shared. **Warning:** Note that when updating this value, if you remove drives that have been shared, you must also `net share /delete` those drives. |
-| `sharedFolders`                   | If specified, restricts the folders or named pipes the user is allowed to share with Windows containers.     |
+| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |

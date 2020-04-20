@@ -35,7 +35,7 @@ The following `admin-settings.json` code and table provide the required syntax a
 
 ```json
 {
-  "configurationFileVersion": 1,
+  "configurationFileVersion": 2,
    "analyticsEnabled": {
     "locked": false,
     "value": false
@@ -75,10 +75,6 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": 65536
     },
-    "filesharingDirectories": {
-      "locked":false,
-      "value":["/Users", "..."]
-    },
     "dockerDaemonOptions": {
       "experimental": {
          "locked": false,
@@ -86,8 +82,8 @@ The following `admin-settings.json` code and table provide the required syntax a
       }
     }
   },
-  "kubernetes": {
 
+  "kubernetes": {
     "enabled": {
       "locked": false,
       "value": false
@@ -118,6 +114,12 @@ The following `admin-settings.json` code and table provide the required syntax a
         "locked" : true
       }
     },
+
+  "filesharingDirectories": {
+    "locked":false,
+    "value":["/Users", "..."]
+  },
+
 }
 ```
 
@@ -135,7 +137,6 @@ Parameter values and descriptions for environment configuration on Mac:
 | `swapMiB`                         | Specifies the amount of memory in MiB (1 MiB = 1048576 bytes) allocated for the swap file.                |
 | `dataFolder`                      | Specifies the directory containing the VM disk files.  |
 | `diskSizeMiB`                     | Specifies the amount of disk storage in MiB (1 MiB = 1048576 bytes) allocated for images and containers.                       |
-| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
 | `dockerDaemonOptions`             | Overrides the options in the linux daemon config file. For more information, see [Docker engine reference](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).        |
 | (End of `linuxVM` section.)       |                                   |
 | `kubernetes`                      | Parameters and settings related to kubernetes options - grouped together here for convenience.                  |
@@ -148,3 +149,4 @@ Parameter values and descriptions for environment configuration on Mac:
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
+| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
