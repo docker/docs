@@ -36,10 +36,10 @@ The following `admin-settings.json` code and table provide the required syntax a
 ```json
 {
   "configurationFileVersion": 2,
-   "analyticsEnabled": {
+  "analyticsEnabled": {
     "locked": false,
     "value": false
-   },
+  },
   "dockerCliOptions": {
     "stackOrchestrator": {
       "locked": false,
@@ -54,10 +54,10 @@ The following `admin-settings.json` code and table provide the required syntax a
       "exclude": "docker.com,github.com"
     }
   },
-"linuxVM": {
-  "cpus": {
-    "locked": false,
-    "value": 2
+  "linuxVM": {
+    "cpus": {
+      "locked": false,
+      "value": 2
     },
     "memoryMiB": {
       "locked": false,
@@ -67,9 +67,9 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": 1024
     },
-    "dataFolder" : {
-      "locked" : false,
-      "value" : "/Users/..."
+    "dataFolder": {
+      "locked": false,
+      "value": "/Users/..."
     },
     "diskSizeMiB": {
       "locked": false,
@@ -77,12 +77,11 @@ The following `admin-settings.json` code and table provide the required syntax a
     },
     "dockerDaemonOptions": {
       "experimental": {
-         "locked": false,
-         "value": true
+        "locked": false,
+        "value": true
       }
     }
   },
-
   "kubernetes": {
     "enabled": {
       "locked": false,
@@ -101,25 +100,30 @@ The following `admin-settings.json` code and table provide the required syntax a
       "value": null
     }
   },
-
-  "template" : {
-      "defaultOrg" : {"value": "myorg", "locked":true},
-      "defaultRegistry" : {"value": "mydtr:5000", "locked":true},
-      "repositories": {
-        "value": [
-          "https://one/library.yaml",
-          "https://two/library.yaml",
-          "https://three/library.yaml"
-          ],
-        "locked" : true
-      }
+  "template": {
+    "defaultOrg": {
+      "value": "myorg",
+      "locked": true
     },
-
-  "filesharingDirectories": {
-    "locked":false,
-    "value":["/Users", "..."]
+    "defaultRegistry": {
+      "value": "mydtr:5000",
+      "locked": true
+    },
+    "repositories": {
+      "value": [
+        "https://one/library.yaml",
+        "https://two/library.yaml",
+        "https://three/library.yaml"
+      ],
+      "locked": true
+    }
   },
-
+  "filesharingDirectories": {
+    "locked": false,
+    "value": [
+      "/Users"
+    ]
+  }
 }
 ```
 
