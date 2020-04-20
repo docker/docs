@@ -105,8 +105,8 @@ You have the option to add your DTR server CA certificate to your system's trust
 
 - [Docker Engine](https://docs.docker.com/engine/security/certificates/)
 - Docker Desktop
-  - [Enterprise for Mac](/ee/desktop/user/mac-user/#add-tls-certificates)
-  - [Enterprise for Windows](/ee/desktop/user/windows-user/#adding-tls-certificates)
+  - [Enterprise for Mac](/desktop/enterprise/user/mac-user/#add-tls-certificates)
+  - [Enterprise for Windows](/desktop/enterprise/user/windows-user/#adding-tls-certificates)
   - [Community for Mac](/docker-for-mac/#add-tls-certificates)
   - [Community for Windows](/docker-for-windows/faqs/#certificates)
 

@@ -8,7 +8,7 @@ title: Get started with Docker Cluster on Azure
 
 ## Prerequisites
 
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret
