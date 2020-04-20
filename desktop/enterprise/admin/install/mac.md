@@ -2,6 +2,8 @@
 title: Install Docker Desktop Enterprise on Mac
 description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Mac, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/admin/install/mac/
 ---
 
 This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Mac. If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install DDE.
@@ -32,7 +34,7 @@ Double-click the `.pkg` file to begin the installation and follow the on-screen 
 
 Mac administrators can use the command line option `\$ sudo installer -pkg Docker.pkg -target /` for fine tuning and mass installation. After running this command, you can start Docker Desktop from the Applications folder on each machine.
 
-Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/ee/desktop/admin/configure/mac-admin).
+Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/desktop/enterprise/admin/configure/mac-admin).
 
 ## License file
 

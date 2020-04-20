@@ -1503,37 +1503,37 @@ manuals:
       nosync: true
 - sectiontitle: Docker Desktop Enterprise
   section:
-  - path: /ee/desktop/
+  - path: /desktop/enterprise/
     title: Overview
-  - path: /ee/desktop/release-notes/
+  - path: /desktop/enterprise/release-notes/
     title: Release notes
   - sectiontitle: Admin
     section:
     - sectiontitle: Install
       section:
-      - path: /ee/desktop/admin/install/mac/
+      - path: /desktop/enterprise/admin/install/mac/
         title: Install DDE on Mac
-      - path: /ee/desktop/admin/install/windows/
+      - path: /desktop/enterprise/admin/install/windows/
         title: Install DDE on Windows
     - sectiontitle: Configure
       section:
-      - path: /ee/desktop/admin/configure/mac-admin/
+      - path: /desktop/enterprise/admin/configure/mac-admin/
         title: Configure DDE on Mac
-      - path: /ee/desktop/admin/configure/windows-admin/
+      - path: /desktop/enterprise/admin/configure/windows-admin/
         title: Configure DDE on Windows
   - sectiontitle: User
     section:
-    - path: /ee/desktop/user/mac-user/
+    - path: /desktop/enterprise/user/mac-user/
       title: Use DDE on Mac
-    - path: /ee/desktop/user/windows-user/
+    - path: /desktop/enterprise/user/windows-user/
       title: Use DDE on Windows
-  - path: /ee/desktop/app-designer/
+  - path: /desktop/enterprise/app-designer/
     title: Application designer
   - sectiontitle: Troubleshoot
     section:
-    - path: /ee/desktop/troubleshoot/mac-issues/
+    - path: /desktop/enterprise/troubleshoot/mac-issues/
       title: Troubleshoot DDE issues on Mac
-    - path: /ee/desktop/troubleshoot/windows-issues/
+    - path: /desktop/enterprise/troubleshoot/windows-issues/
       title: Troubleshoot DDE issues on Windows
 - sectiontitle: Docker Enterprise
   section:

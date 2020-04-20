@@ -1,6 +1,8 @@
 ---
 title: Use Docker Desktop Enterprise on Mac
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/user/mac-user/
 ---
 
 This page contains information about testing the installation and configuring Docker Desktop Enterprise (DDE) runtime options on Mac.
@@ -279,11 +281,11 @@ Click on the Docker icon from the menu bar and then **Preferences**. Click **Res
 
 ### Troubleshoot
 
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](/ee/desktop/troubleshoot/mac-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](/desktop/enterprise/troubleshoot/mac-issues).
 
 ### Design new application
 
-Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/ee/desktop/app-designer).
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/desktop/enterprise/app-designer).
 
 ### Docker Hub
 

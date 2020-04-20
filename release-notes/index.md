@@ -12,6 +12,6 @@ that you regularly visit the release notes to learn about updates.
 - [Docker Engine](/engine/release-notes/)
 - [Docker Desktop for Mac](/docker-for-mac/) 
 - [Docker Desktop for Windows](/docker-for-windows/) 
-- [Docker Desktop Enterprise](/ee/desktop/)
+- [Docker Desktop Enterprise](/desktop/enterprise/)
 - [Docker Compose](/compose/)
 - [Docker Hub](/docker-hub/)

@@ -2,6 +2,8 @@
 title: Install Docker Desktop Enterprise on Windows
 description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/admin/install/windows/
 ---
 
 This page contains information about the system requirements and specific instructions that help you install Docker Desktop Enterprise (DDE) on Windows. If you are using the Community version of Docker Desktop, you must uninstall Docker Desktop Community in order to install DDE.

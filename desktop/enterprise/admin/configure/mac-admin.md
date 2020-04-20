@@ -2,6 +2,8 @@
 title: Configure Docker Desktop Enterprise on Mac
 description: Learn about Docker Desktop Enterprise
 keywords: Docker EE, Windows, Mac, Docker Desktop, Enterprise
+redirect_from:
+- /ee/desktop/admin/configure/mac-admin/
 ---
 
 This page contains information on how system administrators can configure Docker Desktop Enterprise (DDE) settings, specify and lock configuration parameters to create a standardized development environment on Mac operating systems.
