@@ -443,7 +443,7 @@ To switch to a different version pack, simply click on the version pack you woul
 
 ### Troubleshoot
 
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/ee/desktop/troubleshoot/windows-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/desktop/enterprise/troubleshoot/windows-issues).
 
 ### Switch between Windows and Linux containers
 
@@ -489,7 +489,7 @@ See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to le
 
 ### Design new application
 
-Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/ee/desktop/app-designer).
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/desktop/enterprise/app-designer).
 
 ## Adding TLS certificates
 

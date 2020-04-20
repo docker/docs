@@ -12,8 +12,8 @@ This page contains information about the new features, improvements, known issue
 
 For information on system requirements, installation, and download, see:
 
-- [Install Docker Desktop Enterprise on Mac](/ee/desktop/admin/install/mac)
-- [Install Docker Desktop Enterprise on Windows](/ee/desktop/admin/install/windows)
+- [Install Docker Desktop Enterprise on Mac](/desktop/enterprise/admin/install/mac)
+- [Install Docker Desktop Enterprise on Windows](/desktop/enterprise/admin/install/windows)
 
 For Docker Enterprise Engine release notes, see [Docker Engine release notes](/engine/release-notes).
 
@@ -108,7 +108,7 @@ Docker Desktop Enterprise 2.1.0.1 contains a Kubernetes upgrade. Note that your 
 - [Docker 18.09.8](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 2.1
 - [Docker 17.06.2-ee-23](https://docs.docker.com/engine/release-notes/) in Version Pack Enterprise 2.0
 - [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
-- [Application Designer 0.1.4](/ee/desktop/app-designer/)
+- [Application Designer 0.1.4](/desktop/enterprise/app-designer/)
 
 ### Known issue
 
