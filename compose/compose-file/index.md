@@ -340,6 +340,33 @@ build:
     - "com.example.label-with-empty-value"
 ```
 
+#### network
+
+> Added in [version 3.4](compose-versioning.md#version-34) file format
+
+Set the network containers connect to for the `RUN` instructions during
+build.
+
+```yaml
+build:
+  context: .
+  network: host
+```
+
+```yaml
+build:
+  context: .
+  network: custom_network_1
+```
+
+Use `none` to disable networking during build:
+
+```yaml
+build:
+  context: .
+  network: none
+```
+
 #### shm_size
 
 > Added in [version 3.5](compose-versioning.md#version-35) file format
@@ -656,7 +683,7 @@ Several sub-options are available:
 
 #### endpoint_mode
 
-> Added in [version 3.3](compose-versioning.md#version-33) file format.
+> Added in [version 3.2](compose-versioning.md#version-32) file format.
 
 Specify a service discovery method for external clients connecting to a swarm.
 
@@ -762,7 +789,10 @@ services:
 
 #### placement
 
-Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
+Specify placement of constraints and preferences. See the docker service create
+documentation for a full description of the syntax and available types of
+[constraints](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint)
+and [preferences](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref).
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
