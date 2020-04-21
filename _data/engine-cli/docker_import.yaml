@@ -70,7 +70,7 @@ examples: |-
   - Import to docker from a local archive.
 
     ```bash
-      $ docker import /path/to/exampleimage.tgz
+    $ docker import /path/to/exampleimage.tgz
     ```
 
   ### Import from a local directory

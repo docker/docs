@@ -1,16 +1,11 @@
 {% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
-{% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
 {% assign controller_data = site.data[include.datafolder][include.datafile] %}
 
 ## Description
 
-{% if include.datafile=="docker" %}<!-- docker.yaml is textless, so override -->
-{{ dockerBaseDesc }}
-{% else %}
 {{ controller_data.short }}
-{% endif %}
 
 {% if controller_data.min_api_version %}
 
@@ -164,12 +159,7 @@ The include.datafolder or include.datafile was not set.
 
 {% capture parentfile %}{{ controller_data.plink | replace: ".yaml", "" | replace: "docker_","" }}{% endcapture %}
 {% capture parentdatafile %}{{ controller_data.plink | replace: ".yaml", "" }}{% endcapture %}
-
-{% if controller_data.pname == "docker" %}
-  {% capture parentDesc %}{{ dockerBaseDesc }}{% endcapture %}
-{% else %}
-  {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
-{% endif %}
+{% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 
 | Command | Description |
 | ------- | ----------- |

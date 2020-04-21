@@ -7,9 +7,12 @@ long: |-
   [swarm join](swarm_join.md). Nodes use the join token only when they join the
   swarm.
 
-  > **Note**: This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the [Swarm mode
-  > section](https://docs.docker.com/engine/swarm/) in the documentation.
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker swarm join-token [OPTIONS] (worker|manager)
 pname: docker swarm
 plink: docker_swarm.yaml
@@ -42,6 +45,7 @@ examples: |-
 
   ```bash
   $ docker swarm join-token worker
+
   To add a worker to this swarm, run the following command:
 
       docker swarm join \
@@ -49,6 +53,7 @@ examples: |-
       172.17.0.2:2377
 
   $ docker swarm join-token manager
+
   To add a manager to this swarm, run the following command:
 
       docker swarm join \
@@ -60,6 +65,7 @@ examples: |-
 
   ```bash
   $ docker swarm join-token --rotate worker
+
   Successfully rotated worker join token.
 
   To add a worker to this swarm, run the following command:

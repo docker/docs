@@ -20,7 +20,8 @@ examples: |-
   Given an image:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
+
   SIGNED TAG          DIGEST                                                             SIGNERS
   v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   (Repo Admin)
 
@@ -33,6 +34,7 @@ examples: |-
 
   ```bash
   $ docker trust sign example/trust-demo:v2
+
   Signing and pushing trust metadata for example/trust-demo:v2
   The push refers to a repository [docker.io/example/trust-demo]
   eed4e566104a: Layer already exists
@@ -48,10 +50,11 @@ examples: |-
   Successfully signed docker.io/example/trust-demo:v2
   ```
 
-  Use `docker trust view` to list the new signature:
+  Use `docker trust inspect --pretty` to list the new signature:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
+
   SIGNED TAG          DIGEST                                                             SIGNERS
   v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   (Repo Admin)
   v2                  8f6f460abf0436922df7eb06d28b3cdf733d2cac1a185456c26debbff0839c56   (Repo Admin)
@@ -66,7 +69,7 @@ examples: |-
   Given an image:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo
 
@@ -86,6 +89,7 @@ examples: |-
 
   ```bash
   $ docker trust sign example/trust-demo:v1
+
   Signing and pushing trust metadata for example/trust-demo:v1
   The push refers to a repository [docker.io/example/trust-demo]
   26b126eb8632: Layer already exists
@@ -99,10 +103,11 @@ examples: |-
   Successfully signed docker.io/example/trust-demo:v1
   ```
 
-  `docker trust view` lists the new signature:
+  `docker trust inspect --pretty` lists the new signature:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
+
   SIGNED TAG          DIGEST                                                             SIGNERS
   v1                  74d4bfa917d55d53c7df3d2ab20a8d926874d61c3da5ef6de15dd2654fc467c4   alice
 

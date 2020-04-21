@@ -61,10 +61,10 @@ examples: |-
 
   The currently supported filters are:
 
-  * dangling (boolean - true or false, 0 or 1)
-  * driver (a volume driver's name)
-  * label (`label=<key>` or `label=<key>=<value>`)
-  * name (a volume's name)
+  - dangling (boolean - true or false, 0 or 1)
+  - driver (a volume driver's name)
+  - label (`label=<key>` or `label=<key>=<value>`)
+  - name (a volume's name)
 
   #### dangling
 
@@ -175,7 +175,7 @@ examples: |-
   `table` directive, includes column headers as well.
 
   The following example uses a template without headers and outputs the
-  `Name` and `Driver` entries separated by a colon for all volumes:
+  `Name` and `Driver` entries separated by a colon (`:`) for all volumes:
 
   ```bash
   $ docker volume ls --format "{{.Name}}: {{.Driver}}"
