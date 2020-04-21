@@ -113,8 +113,7 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or 
 
 ### Can I use VirtualBox alongside Docker Desktop?
 
-Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
-Hyper-V is enabled on Windows.
+Yes. VirtualBox, and a few other virtualization-solutions can run while Hyper-V is enabled on Windows as long as the optional feature [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/) is also enabled. Unfortunately, VMWare Workstation does not at the moment support the Windows Hypervisor Platform, but such support has been [announced](https://techcommunity.microsoft.com/t5/Virtualization/VMware-Workstation-and-Hyper-V-Working-Together/ba-p/825831) to be coming.
 
 ## Windows requirements
 
