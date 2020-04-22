@@ -113,7 +113,7 @@ If you want to test it out, you can clone
 
 ## More resources
 
-There are lots more resources available to help you write your `Dockerfile`.
+There are lots of resources available to help you write your `Dockerfile`.
 
 * There's a [complete guide to all the instructions](/engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
