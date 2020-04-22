@@ -217,15 +217,16 @@ Introduces the following additional parameters:
 - [`link_local_ips`](compose-file-v2.md#link_local_ips)
 - [`isolation`](compose-file-v2.md#isolation) in build configurations and
   service definitions
-- `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
-  [networks](compose-file-v2.md#network-configuration-reference)
+- `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
+  [networks](compose-file-v2.md#network-configuration-reference), and
+  [build](index.md#build)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
 - [`pids_limit`](compose-file-v2.md#pids_limit)
 - [`oom_kill_disable`](compose-file-v2.md#cpu-and-other-resources)
-- [`cpu_period`](compose-file-v2.md)
+- [`cpu_period`](compose-file-v2.md#cpu-and-other-resources)
 
 ### Version 2.2
 
@@ -239,6 +240,7 @@ Introduces the following additional parameters:
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
 - [`cpu_rt_runtime` and `cpu_rt_period`](compose-file-v2.md#cpu_rt_runtime-cpu_rt_period)
+- [`network`](compose-file-v2.md#network) for [build configurations](compose-file-v2.md#build)
 
 ### Version 2.3
 
@@ -295,6 +297,28 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 > version: "3.0"
 > ```
 
+### Version 3.1
+
+An upgrade of [version 3](#version-3) that introduces new parameters only
+available with Docker Engine version **1.13.1+**, and higher.
+
+Introduces the following additional parameters:
+
+- [`secrets`](index.md#secrets)
+
+### Version 3.2
+
+An upgrade of [version 3](#version-3) that introduces new parameters only
+available with Docker Engine version **17.04.0+**, and higher.
+
+Introduces the following additional parameters:
+
+- [`cache_from`](index.md#cache_from) in [build configurations](index.md#build)
+- Long syntax for [ports](index.md#ports) and [volume mounts](index.md#volumes)
+- [`attachable`](index.md#attachable) network driver option
+- [deploy `endpoint_mode`](index.md#endpoint_mode)
+- [deploy placement `preference`](index.md#placement)
+
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
@@ -305,7 +329,6 @@ Introduces the following additional parameters:
 - [build `labels`](index.md#build)
 - [`credential_spec`](index.md#credential_spec)
 - [`configs`](index.md#configs)
-- [deploy `endpoint_mode`](index.md#endpoint_mode)
 
 ### Version 3.4
 
@@ -314,7 +337,8 @@ only available with Docker Engine version **17.09.0** and higher.
 
 Introduces the following additional parameters:
 
-- `target` and `network` in [build configurations](index.md#build)
+- [`target`](index.md#target) and [`network`](index.md#network) in
+  [build configurations](index.md#build)
 - `start_period` for [`healthchecks`](index.md#healthcheck)
 - `order` for [update configurations](index.md#update_config)
 - `name` for [volumes](index.md#volume-configuration-reference)

@@ -324,6 +324,14 @@ build:
   network: custom_network_1
 ```
 
+Use `none` to disable networking during build:
+
+```yaml
+build:
+  context: .
+  network: none
+```
+
 #### shm_size
 
 > Added in [version 2.3](compose-versioning.md#version-23) file format
