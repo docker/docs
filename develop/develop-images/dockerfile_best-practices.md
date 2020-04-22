@@ -594,7 +594,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 
 [Dockerfile reference for the CMD instruction](/engine/reference/builder.md#cmd)
 
-The `CMD` instruction should be used to run the software contained by your
+The `CMD` instruction should be used to run the software contained in your
 image, along with any arguments. `CMD` should almost always be used in the form
 of `CMD ["executable", "param1", "param2"…]`. Thus, if the image is for a
 service, such as Apache and Rails, you would run something like `CMD
