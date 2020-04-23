@@ -208,7 +208,7 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 > Note when using docker stack deploy
 >
 > The `build` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > The `docker stack` command does not build images before deploying.
 {: .important }
 
@@ -280,7 +280,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -316,7 +316,7 @@ build:
 
 > Added in [version 3.3](compose-versioning.md#version-33) file format
 
-Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](../../config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -392,7 +392,7 @@ build:
 > Added in [version 3.4](compose-versioning.md#version-34) file format
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/develop/develop-images/multistage-build.md) for
+[multi-stage build docs](../../develop/develop-images/multistage-build.md) for
 details.
 
 ```yaml
@@ -418,7 +418,7 @@ cap_drop:
 > Note when using docker stack deploy
 >
 > The `cap_add` and `cap_drop` options are ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### cgroup_parent
@@ -432,7 +432,7 @@ cgroup_parent: m-executor-abcd
 > Note when using docker stack deploy
 >
 > The `cgroup_parent` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### command
@@ -444,7 +444,7 @@ command: bundle exec thin -p 3000
 ```
 
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -459,7 +459,7 @@ configuration. Two different syntax variants are supported.
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
 > of this stack file, or stack deployment fails.
 
-For more information on configs, see [configs](/engine/swarm/configs.md).
+For more information on configs, see [configs](../../engine/swarm/configs.md).
 
 #### Short syntax
 
@@ -561,7 +561,7 @@ an error.
 > Note when using docker stack deploy
 >
 > The `container_name` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### credential_spec
@@ -649,11 +649,11 @@ services:
 >
 > - `depends_on` does not wait for `db` and `redis` to be "ready" before
 >   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for a service to be ready, see [Controlling startup order](../startup-order.md)
 >   for more on this problem and strategies for solving it.
 > - Version 3 no longer supports the `condition` form of `depends_on`.
 > - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
 
 ### deploy
@@ -661,8 +661,8 @@ services:
 > Added in [version 3](compose-versioning.md#version-3) file format.
 
 Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
-[docker stack deploy](/engine/reference/commandline/stack_deploy.md), and is
+only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+[docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`.
 
 ```yaml
@@ -735,12 +735,12 @@ networks:
 ```
 
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
-[docker service create](/engine/reference/commandline/service_create.md). For a
+[docker service create](../../engine/reference/commandline/service_create.md). For a
 quick list of all swarm related `docker` commands, see
-[Swarm mode CLI commands](/engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
+[Swarm mode CLI commands](../../engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
 
 To learn more about service discovery and networking in swarm mode, see
-[Configure service discovery](/engine/swarm/networking.md#configure-service-discovery)
+[Configure service discovery](../../engine/swarm/networking.md#configure-service-discovery)
 in the swarm mode topics.
 
 
@@ -774,8 +774,8 @@ services:
 
 Either `global` (exactly one container per swarm node) or `replicated` (a
 specified number of containers). The default is `replicated`. (To learn more,
-see [Replicated and global services](/engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
-in the [swarm](/engine/swarm/index.md) topics.)
+see [Replicated and global services](../../engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
+in the [swarm](../../engine/swarm/index.md) topics.)
 
 
 ```yaml
@@ -862,7 +862,7 @@ Configures resource constraints.
 > to learn about differences between version 2 and 3 of the compose-file format.
 
 Each of these is a single value, analogous to its
-[docker service create](/engine/reference/commandline/service_create.md) counterpart.
+[docker service create](../../engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
 50M of memory and `0.50` (50% of a single core) of available processing time (CPU),
@@ -902,7 +902,7 @@ If your services or containers attempt to use more memory than the system has
 available, you may experience an Out Of Memory Exception (OOME) and a container,
 or the Docker daemon, might be killed by the kernel OOM killer. To prevent this
 from happening, ensure that your application runs on hosts with adequate memory
-and see [Understand the risks of running out of memory](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+and see [Understand the risks of running out of memory](../../config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
 
 #### restart_policy
@@ -1019,7 +1019,7 @@ devices:
 > Note when using docker stack deploy
 >
 > The `devices` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### dns
@@ -1059,7 +1059,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -1209,7 +1209,7 @@ external_links:
 > Note when using docker stack deploy
 >
 > The `external_links` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### extra_hosts
@@ -1233,7 +1233,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 for details on how healthchecks work.
 
 ```yaml
@@ -1329,12 +1329,12 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 
 ### labels
 
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -1358,7 +1358,7 @@ labels:
 >
 > The `--link` flag is a legacy feature of Docker. It may eventually be removed.
 > Unless you absolutely need to continue using it, we recommend that you use
-> [user-defined networks](/compose/networking.md)
+> [user-defined networks](../networking.md)
 > to facilitate communication between two containers instead of using `--link`.
 >
 > One feature that user-defined networks do not support that you can do with
@@ -1383,7 +1383,7 @@ the alias, or the service name if no alias was specified.
 
 Links are not required to enable services to communicate - by default,
 any service can reach any other service at that service’s name. (See also, the
-[Links topic in Networking in Compose](/compose/networking.md#links).)
+[Links topic in Networking in Compose](../networking.md#links).)
 
 Links also express dependency between services in the same way as
 [depends_on](#depends_on), so they determine the order of service startup.
@@ -1397,7 +1397,7 @@ Links also express dependency between services in the same way as
 > Note when using docker stack deploy
 >
 > The `links` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 
 ### logging
@@ -1413,7 +1413,7 @@ logging:
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/config/containers/logging/configure.md)).
+([documented here](../../config/containers/logging/configure.md)).
 
 The default value is json-file.
 
@@ -1443,7 +1443,7 @@ options:
   syslog-address: "tcp://192.168.0.42:123"
 ```
 
-The default driver [json-file](/config/containers/logging/json-file.md), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
+The default driver [json-file](../../config/containers/logging/json-file.md), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
 
 ```yaml
 options:
@@ -1473,10 +1473,10 @@ services:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-> specific to the [json-file driver](/config/containers/logging/json-file.md).
+> specific to the [json-file driver](../../config/containers/logging/json-file.md).
 > These particular options are not available on other logging drivers.
 > For a full list of supported logging drivers and their options, refer to the
-> [logging drivers](/config/containers/logging/configure.md) documentation.
+> [logging drivers](../../config/containers/logging/configure.md) documentation.
 
 ### network_mode
 
@@ -1502,7 +1502,7 @@ network_mode: "container:[container name/id]"
 > **Note**
 >
 > * This option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+>   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 > * `network_mode: "host"` cannot be mixed with [links](#links).
 {: .important }
 
@@ -1696,7 +1696,7 @@ on-failure error.
 > Note when using docker stack deploy
 >
 > The `restart` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 
 ### secrets
@@ -1711,7 +1711,7 @@ configuration. Two different syntax variants are supported.
 > of the compose file, or stack deployment fails.
 {: .important }
 
-For more information on secrets, see [secrets](/engine/swarm/secrets.md).
+For more information on secrets, see [secrets](../../engine/swarm/secrets.md).
 
 #### Short syntax
 
@@ -1807,7 +1807,7 @@ security_opt:
 > Note when using docker stack deploy
 >
 > The `security_opt` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 
 ### stop_grace_period
@@ -1858,12 +1858,12 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to
-[configure namespaced kernel parameters (sysctls) at runtime](/engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+[configure namespaced kernel parameters (sysctls) at runtime](../../engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 > Note when using docker stack deploy
 >
 > This option requires Docker Engine 19.03 or up when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 
 ### tmpfs
 
@@ -1884,7 +1884,7 @@ tmpfs:
 > Note when using docker stack deploy
 >
 > This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > with a (version 3-3.5) Compose file.
 
 Mount a temporary file system inside the container. Size parameter specifies the size
@@ -1923,7 +1923,7 @@ more information.
 > Note when using docker stack deploy
 >
 > The `userns_mode` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 
 ### volumes
@@ -1979,7 +1979,7 @@ volumes:
 
 > **Note**
 > 
-> For general information on volumes, refer to the [use volumes](/storage/volumes.md)
+> For general information on volumes, refer to the [use volumes](../../storage/volumes.md)
 > and [volume plugins](/engine/extend/plugins_volume/) sections in the documentation.
 
 
@@ -2065,7 +2065,7 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 
 #### Volumes for services, swarms, and stack files
@@ -2136,12 +2136,12 @@ services:
 
 Full detail on these flags, the problems they solve, and their
 `docker run` counterparts is in the Docker Desktop for Mac topic
-[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
+[Performance tuning for volume mounts (shared filesystems)](../../docker-for-mac/osxfs-caching.md).
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
+[docker run](../../engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
 
 ```yaml
 user: postgresql
@@ -2196,10 +2196,10 @@ While it is possible to declare [volumes](#volumes) on the fly as part of the
 service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
+See the [docker volume](../../engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
-See [use volumes](/storage/volumes.md) and [volume
+See [use volumes](../../storage/volumes.md) and [volume
 plugins](/engine/extend/plugins_volume/) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
@@ -2300,8 +2300,8 @@ volumes:
 > Note when using docker stack deploy
 >
 > External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
-> to launch the app in [swarm mode](/engine/swarm/index.md) (instead of
-> [docker compose up](/compose/reference/up.md)). In swarm mode, a volume is
+> to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
+> [docker compose up](../reference/up.md)). In swarm mode, a volume is
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
@@ -2310,7 +2310,7 @@ volumes:
 ### labels
 
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -2360,7 +2360,7 @@ volumes:
 The top-level `networks` key lets you specify networks to be created.
 
 * For a full explanation of Compose's use of Docker networking features and all
-  network driver options, see the [Networking guide](/compose/networking.md).
+  network driver options, see the [Networking guide](../networking.md).
 * For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
   tutorials on networking, start with [Designing Scalable, Portable Docker Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 
@@ -2387,7 +2387,7 @@ how to work with bridge networks, see the Docker Labs tutorial on
 #### overlay
 
 The `overlay` driver creates a named network across multiple nodes in a
-[swarm](/engine/swarm/index.md).
+[swarm](../../engine/swarm/index.md).
 
 * For a working example of how to build and use an
 `overlay` network with a service in swarm mode, see the Docker Labs tutorial on
@@ -2521,7 +2521,7 @@ you can set this option to `true`.
 ### labels
 
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -2620,7 +2620,7 @@ networks:
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
-[configs](/engine/swarm/configs.md) that can be granted to the services in this
+[configs](../../engine/swarm/configs.md) that can be granted to the services in this
 stack. The source of the config is either `file` or `external`.
 
 - `file`: The config is created with the contents of the file at the specified
@@ -2667,7 +2667,7 @@ stack.
 ## secrets configuration reference
 
 The top-level `secrets` declaration defines or references
-[secrets](/engine/swarm/secrets.md) that can be granted to the services in this
+[secrets](../../engine/swarm/secrets.md) that can be granted to the services in this
 stack. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified
@@ -2731,8 +2731,8 @@ stack.
 
 ## Compose documentation
 
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)

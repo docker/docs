@@ -90,8 +90,8 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 
 * Run the `docker-machine create` commands to create machines.
 
-    For example, if you follow along with the [Swarm mode tutorial](/engine/swarm/swarm-tutorial/index.md)
-    which asks you to create [three networked host machines](/engine/swarm/swarm-tutorial/index.md#three-networked-host-machines),
+    For example, if you follow along with the [Swarm mode tutorial](../../engine/swarm/swarm-tutorial/index.md)
+    which asks you to create [three networked host machines](../../engine/swarm/swarm-tutorial/index.md#three-networked-host-machines),
     you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
 
 *   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
@@ -140,13 +140,13 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 ## Where to go next
 
 As a point of interest, the virtual machines you create with
-[`docker-machine create`](/machine/reference/create.md) show up in the
+[`docker-machine create`](../reference/create.md) show up in the
 Hyper-V Manager under "Virtual Machines", but you need to manage them with
-[`docker-machine`](/machine/reference/index.md) commands and not through the Hyper-V
+[`docker-machine`](../reference/index.md) commands and not through the Hyper-V
 Manager.
 
 To get started using `docker-machine` commands, see these topics:
 
-*  [Run containers and experiment with Machine commands](/machine/get-started.md#run-containers-and-experiment-with-machine-commands) and the introductory topics that follow
+*  [Run containers and experiment with Machine commands](../get-started.md#run-containers-and-experiment-with-machine-commands) and the introductory topics that follow
 
-* [Docker Machine commmand line reference](/machine/reference/index.md)
+* [Docker Machine commmand line reference](../reference/index.md)

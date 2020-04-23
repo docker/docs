@@ -55,7 +55,7 @@ baz
 When you copy files to a remote server with `docker-machine scp` for app
 deployment, make sure `docker-compose` and the Docker daemon know how to find
 them. Avoid using relative paths, but specify absolute paths in
-[Compose files](/compose/compose-file/index.md). It's best to specify absolute
+[Compose files](../../compose/compose-file/index.md). It's best to specify absolute
 paths both for the location on the Docker daemon and within the container.
 
 For example, imagine you want to transfer your local directory

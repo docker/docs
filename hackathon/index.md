@@ -281,4 +281,4 @@ Participation in the Docs Hackathon and submission of content therein gives Dock
 
 For the purposes of copyright all content submitted to Docker for the Docs Hackathon belongs to Docker.
 
-Winners will be announced the week of April 22nd on [https://docs.docker.com/hackathon](/hackathon/index.md). The winners will be named by GitHub username and contacted via email.
+Winners will be announced the week of April 22nd on [https://docs.docker.com/hackathon](index.md). The winners will be named by GitHub username and contacted via email.

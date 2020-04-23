@@ -135,7 +135,7 @@ a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
 in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
-running the [Compose Rails sample](/compose/rails.md), and
+running the [Compose Rails sample](../rails.md), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
 use a command like [docker-compose pull](pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
@@ -179,9 +179,9 @@ For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
 relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
 [environment variable](envvars.md#compose_project_name) relates to the `-p` flag.
 
-Also, you can set some of these variables in an [environment file](/compose/env-file.md).
+Also, you can set some of these variables in an [environment file](../env-file.md).
 
 ## Where to go next
 
 * [CLI environment variables](envvars.md)
-* [Declare default environment variables in file](/compose/env-file.md)
+* [Declare default environment variables in file](../env-file.md)

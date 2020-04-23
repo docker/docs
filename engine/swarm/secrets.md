@@ -123,12 +123,12 @@ the mount point of the secret within a given container.
 Use these links to read about specific commands, or continue to the
 [example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
 
-- [`docker secret create`](/engine/reference/commandline/secret_create.md)
-- [`docker secret inspect`](/engine/reference/commandline/secret_inspect.md)
-- [`docker secret ls`](/engine/reference/commandline/secret_ls.md)
-- [`docker secret rm`](/engine/reference/commandline/secret_rm.md)
-- [`--secret`](/engine/reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](/engine/reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`docker secret create`](../reference/commandline/secret_create.md)
+- [`docker secret inspect`](../reference/commandline/secret_inspect.md)
+- [`docker secret ls`](../reference/commandline/secret_ls.md)
+- [`docker secret rm`](../reference/commandline/secret_rm.md)
+- [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
 
 ## Examples
 
@@ -147,7 +147,7 @@ a similar way, see
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](/compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
 
 ### Simple example: Get started with secrets
 
@@ -1039,5 +1039,5 @@ Each service uses environment variables to specify where the service should look
 for that secret data.
 
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](/compose/compose-file/index.md#secrets).
+[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
 

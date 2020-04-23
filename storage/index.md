@@ -99,7 +99,7 @@ mounts is to think about where the data lives on the Docker host.
   on the Docker host or within a container. It can be used by a container during
   the lifetime of the container, to store non-persistent state or sensitive
   information. For instance, internally, swarm services use `tmpfs` mounts to
-  mount [secrets](/engine/swarm/secrets.md) into a service's containers.
+  mount [secrets](../engine/swarm/secrets.md) into a service's containers.
 
 - **[named pipes](https://docs.microsoft.com/en-us/windows/desktop/ipc/named-pipes)**: An `npipe`
   mount can be used for communication between the Docker host and a container. Common use case is

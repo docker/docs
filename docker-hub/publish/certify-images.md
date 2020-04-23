@@ -12,7 +12,7 @@ Content that qualifies as **Docker Certified** must conform to best practices an
 
 Docker Hub lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own _images and logging plugins_ with the `inspect` tools as explained in these docs. Currently, Docker Hub certifies your volume and networking plugins for you upon submission.
 
-This page explains how publishers can successfully test their **Docker images**. Also available: [Certify your Docker logging plugins](certify-plugins-logging).
+This page explains how publishers can successfully test their **Docker images**. Also available: [Certify your Docker logging plugins](certify-plugins-logging.md).
 
 > Content that requires a non-certified infrastructure environment cannot be published as certified.
 

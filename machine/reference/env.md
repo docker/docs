@@ -93,7 +93,7 @@ set DOCKER_MACHINE_NAME=dev
 # Run this command to configure your shell: copy and paste the above values into your command prompt
 ```
 
->**Tip:** See also, how to [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).
+>**Tip:** See also, how to [unset environment variables in the current shell](../get-started.md#unset-environment-variables-in-the-current-shell).
 
 ## Excluding the created machine from proxies
 
@@ -119,4 +119,4 @@ export NO_PROXY="192.168.99.104"
 
 You may also want to visit the documentation on setting `HTTP_PROXY` for the
 created daemon using the `--engine-env` flag for 
-[`docker-machine create`](/machine/reference/create.md#specifying-configuration-options-for-the-created-docker-engine).
+[`docker-machine create`](create.md#specifying-configuration-options-for-the-created-docker-engine).

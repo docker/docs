@@ -205,7 +205,7 @@ You can configure Docker Desktop networking to work on a virtual private network
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
 class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -274,7 +274,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes**. To set Kubernetes as the
-  [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
+  [default orchestrator](kubernetes.md#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
 
    Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the
   `/usr/local/bin/kubectl` command on your Mac.
@@ -411,7 +411,7 @@ also in your keychain.
 
 To learn more about how to install a CA root certificate for the registry and
 how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](/engine/security/certificates.md)
+[Verify repository client with certificates](../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ## Install shell completion
@@ -479,11 +479,11 @@ For information about providing feedback on the documentation or update it yours
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){:target="_blank"
 class="_"}:
 
-* [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){:target="_blank" class="_"}
-* [Builds](/docker-hub/builds/index.md){:target="_blank" class="_"}
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" class="_"}
+* [Builds](../docker-hub/builds/index.md){:target="_blank" class="_"}
 
 ### Two-factor authentication
 
@@ -512,7 +512,7 @@ After you have successfully authenticated, you can access your organizations and
   walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](/engine/api/index.md){: target="_blank" class="_"}.
+  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" class="_"}.
 
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:

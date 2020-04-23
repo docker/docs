@@ -29,7 +29,7 @@ Docker Hub.
 You've created an organization. You'll see you have a team, the **owners** team
 with a single member (you!).
 
-In some situations, you can also create an organization by [converting a user account](/convert-account.md).
+In some situations, you can also create an organization by [converting a user account](convert-account.md).
 
 #### The owners team
 

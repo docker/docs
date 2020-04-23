@@ -215,7 +215,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -271,7 +271,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 
 If unspecified, Compose will use the `isolation` value found in the service's definition
@@ -281,7 +281,7 @@ to determine the value to use for builds.
 
 > Added in [version 2.1](compose-versioning.md#version-21) file format
 
-Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](../../config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -357,7 +357,7 @@ build:
 > Added in [version 2.3](compose-versioning.md#version-23) file format
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/develop/develop-images/multistage-build.md) for
+[multi-stage build docs](../../develop/develop-images/multistage-build.md) for
 details.
 
 ```yaml
@@ -397,7 +397,7 @@ command: bundle exec thin -p 3000
 ```
 
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -490,7 +490,7 @@ services:
 >
 > `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+> for a service to be ready, see [Controlling startup order](../startup-order.md)
 > for more on this problem and strategies for solving it.
 
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
@@ -572,7 +572,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -728,7 +728,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](/compose/extends.md#extending-services).
+[the extends documentation](../extends.md#extending-services).
 
 ### external_links
 
@@ -776,7 +776,7 @@ host system to be added. An example of where this is useful is when multiple
 containers (running as different users) need to all read or write the same
 file on the host system. That file can be owned by a group shared by all the
 containers, and specified in `group_add`. See the
-[Docker documentation](/engine/reference/run.md#additional-groups) for more
+[Docker documentation](../../engine/reference/run.md#additional-groups) for more
 details.
 
 A full example:
@@ -800,7 +800,7 @@ used.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 for details on how healthchecks work.
 
 ```yaml
@@ -889,7 +889,7 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+> [`init-path` configuration option](../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 ### isolation
 
@@ -898,12 +898,12 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 
 ### labels
 
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -942,7 +942,7 @@ the alias, or the service name if no alias was specified.
 
 Links are not required to enable services to communicate - by default,
 any service can reach any other service at that service’s name. (See also, the
-[Links topic in Networking in Compose](/compose/networking.md#links).)
+[Links topic in Networking in Compose](../networking.md#links).)
 
 Links also express dependency between services in the same way as
 [depends_on](#depends_on), so they determine the order of service startup.
@@ -966,7 +966,7 @@ logging:
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/config/containers/logging/configure.md)).
+([documented here](../../config/containers/logging/configure.md)).
 
 The default value is json-file.
 
@@ -1296,7 +1296,7 @@ web:
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
-[`--scale`](/compose/reference/up.md) flag.
+[`--scale`](../reference/up.md) flag.
 
 ```yaml
 web:
@@ -1497,7 +1497,7 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 
 ### volume\_driver
@@ -1518,7 +1518,7 @@ volume_driver: mydriver
 > entry in the [top-level `volumes` option](#volume-configuration-reference).
 
 
-See [Docker Volumes](/storage/volumes.md) and
+See [Docker Volumes](../../storage/volumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume/) for more information.
 
 ### volumes_from
@@ -1568,7 +1568,7 @@ restart: unless-stopped
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
+[docker run](../../engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 
 > Added in [version 2.2](compose-versioning.md#version-22) file format.
 >
@@ -1646,10 +1646,10 @@ While it is possible to declare [volumes](#volumes) on the fly as part of the
 service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
+See the [docker volume](../../engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
-See [use volumes](/storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
+See [use volumes](../../storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
 for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
@@ -1752,7 +1752,7 @@ volumes:
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -1801,7 +1801,7 @@ volumes:
 
 The top-level `networks` key lets you specify networks to be created. For a full
 explanation of Compose's use of Docker networking features, see the
-[Networking guide](/compose/networking.md).
+[Networking guide](../networking.md).
 
 ### driver
 
@@ -1885,7 +1885,7 @@ you can set this option to `true`.
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
 
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from
@@ -1991,8 +1991,8 @@ networks:
 
 ## Compose documentation
 
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)

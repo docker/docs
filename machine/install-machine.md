@@ -12,7 +12,7 @@ on GitHub.
 
 ## Install Docker Machine
 
-1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
@@ -105,8 +105,8 @@ To uninstall Docker Machine:
 
    Removing machines is an optional step because there are cases where
    you might want to save and migrate existing machines to a
-   [Docker for Mac](/docker-for-mac/index.md) or
-   [Docker Desktop for Windows](/docker-for-windows/index.md) environment,
+   [Docker for Mac](../docker-for-mac/index.md) or
+   [Docker Desktop for Windows](../docker-for-windows/index.md) environment,
    for example.
 
 *  Remove the executable: `rm $(which docker-machine)`
@@ -125,5 +125,5 @@ servers.
 -  [Docker Machine overview](overview.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
--  [Docker Machine driver reference](/machine/drivers/index.md)
--  [Docker Machine subcommand reference](/machine/reference/index.md)
+-  [Docker Machine driver reference](drivers/index.md)
+-  [Docker Machine subcommand reference](reference/index.md)

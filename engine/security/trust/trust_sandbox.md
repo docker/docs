@@ -21,9 +21,9 @@ have privileges to run docker commands on your local machine or in the VM.
 
 This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
-[list of supported platforms](../../installation/index.md). To install
+[list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](/compose/install/).
+[detailed instructions here](../../../compose/install.md).
 
 ## What is in the sandbox?
 
