@@ -19,7 +19,7 @@ examples: |-
   To add a new signer, `alice`, to this repository:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo
 
@@ -43,10 +43,10 @@ examples: |-
   Successfully added signer: alice to example/trust-demo
   ```
 
-  `docker trust view` now lists `alice` as a valid signer:
+  `docker trust inspect --pretty` now lists `alice` as a valid signer:
 
   ```bash
-  $ docker trust view example/trust-demo
+  $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo
 

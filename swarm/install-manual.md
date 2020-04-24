@@ -109,7 +109,7 @@ To create the instances do the following:
 
 ## Step 3. Install Engine on each node
 
-1.  [Install Docker](/engine/install/index.md){: target="_blank" class="_"}
+1.  [Install Docker](../engine/install/index.md){: target="_blank" class="_"}
     on each host, using the appropriate instructions for your operating system
     and distribution.
 

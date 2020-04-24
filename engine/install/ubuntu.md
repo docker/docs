@@ -19,15 +19,6 @@ To get started with Docker Engine on Ubuntu, make sure you
 
 ## Prerequisites
 
-### Docker EE customers
-
-To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for Ubuntu](/ee/docker-ee/ubuntu.md)
-**instead of this topic**.
-
-To learn more about Docker EE, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
-
 ### OS requirements
 
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
@@ -60,7 +51,7 @@ Docker Engine on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
 
 Docker Engine uses the `overlay2` storage driver by default. If you need to use
 `aufs` instead, you need to configure it manually.
-See [use the AUFS storage driver](/storage/storagedriver/aufs-driver.md)
+See [use the AUFS storage driver](../../storage/storagedriver/aufs-driver.md)
 
 ## Installation methods
 
@@ -321,4 +312,4 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

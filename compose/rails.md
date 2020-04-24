@@ -33,7 +33,7 @@ Dockerfile consists of:
 
 That'll put your application code inside an image that builds a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
-how to write Dockerfiles, see the [Docker user guide](/get-started/index.md)
+how to write Dockerfiles, see the [Docker user guide](../get-started/index.md)
 and the [Dockerfile reference](/engine/reference/builder/).
 
 Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
@@ -89,7 +89,7 @@ to link them together and expose the web app's port.
 ### Build the project
 
 With those files in place, you can now generate the Rails skeleton app
-using [docker-compose run](/compose/reference/run.md):
+using [docker-compose run](reference/run.md):
 
     docker-compose run web rails new . --force --no-deps --database=postgresql
 
@@ -169,7 +169,7 @@ test:
   database: myapp_test
 ```
 
-You can now boot the app with [docker-compose up](/compose/reference/up.md):
+You can now boot the app with [docker-compose up](reference/up.md):
 
     docker-compose up
 
@@ -209,7 +209,7 @@ That's it. Your app should now be running on port 3000 on your Docker daemon.
 On Docker Desktop for Mac and Docker Desktop for Windows, go to `http://localhost:3000` on a web
 browser to see the Rails Welcome.
 
-If you are using [Docker Machine](/machine/overview.md), then `docker-machine ip
+If you are using [Docker Machine](../machine/overview.md), then `docker-machine ip
 MACHINE_VM` returns the Docker host IP address, to which you can append the port
 (`<Docker-Host-IP>:3000`).
 
@@ -217,7 +217,7 @@ MACHINE_VM` returns the Docker host IP address, to which you can append the port
 
 ### Stop the application
 
-To stop the application, run [docker-compose down](/compose/reference/down.md) in
+To stop the application, run [docker-compose down](reference/down.md) in
 your project directory. You can use the same terminal window in which you
 started the database, or another one where you have access to a command prompt.
 This is a clean way to stop the application.
@@ -269,5 +269,5 @@ host.
 - [Getting Started](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

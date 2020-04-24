@@ -12,7 +12,7 @@ networking, the container's application is available on port 80 on the host's IP
 address.
 
 > **Note**: Given that the container does not have its own IP-address when using
-> `host` mode networking, [port-mapping](/network/overlay/#publish-ports) does not
+> `host` mode networking, [port-mapping](overlay.md#publish-ports) does not
 > take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` option are
 > ignored, producing a warning instead:
 >
@@ -37,8 +37,8 @@ given swarm node.
 
 ## Next steps
 
-- Go through the [host networking tutorial](/network/network-tutorial-host.md)
-- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
-- Learn about [bridge networks](/network/bridge.md)
-- Learn about [overlay networks](/network/overlay.md)
-- Learn about [Macvlan networks](/network/macvlan.md)
+- Go through the [host networking tutorial](network-tutorial-host.md)
+- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Learn about [bridge networks](bridge.md)
+- Learn about [overlay networks](overlay.md)
+- Learn about [Macvlan networks](macvlan.md)

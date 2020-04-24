@@ -43,11 +43,11 @@ to [Docker Hub](https://hub.docker.com) and [Docker Support](https://support.doc
 
 ![Login](images/login2019.png)
 
-You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
+You can also log in using the `docker login` command. (You can read more about `docker login` [here](../engine/reference/commandline/login.md).)
 
 > **Warning**:
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
-> For extra security, you can use a [personal access token](/docker-hub/access-tokens) to log in instead, which is still encoded in this file but doesn't allow admin actions (such as changing the password). If you require secure storage for this password or personal access token, use the [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
+> For extra security, you can use a [personal access token](../docker-hub/access-tokens.md) to log in instead, which is still encoded in this file but doesn't allow admin actions (such as changing the password). If you require secure storage for this password or personal access token, use the [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
 {:.warning}

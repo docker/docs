@@ -25,13 +25,13 @@ creates a Unix socket accessible by members of the `docker` group.
 >
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](../security/security.md#docker-daemon-attack-surface).
 {: .warning}
 
 > **Note**:
 >
 > To run Docker without root privileges, see
-> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless.md).
+> [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
 >
 > Rootless mode is currently available as an experimental feature.
 
@@ -110,7 +110,7 @@ $ sudo systemctl disable docker
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
-[customize your systemd Docker daemon options](/engine/admin/systemd.md).
+[customize your systemd Docker daemon options](../../config/daemon/systemd.md).
 
 ### `upstart`
 
@@ -130,13 +130,13 @@ $ sudo chkconfig docker on
 ## Use a different storage engine
 
 For information about the different storage engines, see
-[Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
+[Storage drivers](../../storage/storagedriver/index.md).
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
 
 ## Configure default logging driver
 
-Docker provides the [capability](/config/containers/logging/) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
+Docker provides the [capability](../../config/containers/logging/index.md) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
 
 ## Configure where the Docker daemon listens for connections
 
@@ -220,7 +220,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 ## Enable IPv6 on the Docker daemon
 
 To enable IPv6 on the Docker daemon, see
-[Enable IPv6 support](/config/daemon/ipv6.md).
+[Enable IPv6 support](../../config/daemon/ipv6.md).
 
 ## Troubleshooting
 
@@ -503,5 +503,5 @@ and a 10% overall performance degradation, even if Docker is not running.
 
 ## Next steps
 
-- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

@@ -69,10 +69,10 @@ instructions for enabling and configuring AppArmor or SELinux.
 ##### Docker daemon considerations
 
 - Enable `seccomp` security profiles if possible. See
-  [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
+  [Enabling `seccomp` for Docker](../security/seccomp.md).
 
 - Enable user namespaces if possible. See the
-  [Daemon user namespace options](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options).
+  [Daemon user namespace options](/engine/reference/commandline/dockerd/#daemon-user-namespace-options).
 
 ### Install static binaries
 
@@ -164,5 +164,5 @@ version.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

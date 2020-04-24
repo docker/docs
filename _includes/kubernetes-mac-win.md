@@ -55,7 +55,7 @@ your workloads, in parallel, on Kubernetes, Swarm, and as standalone containers.
 Enabling or disabling the Kubernetes server does not affect your other
 workloads.
 
-See [{{ product }} > Getting started](/docker-for-{{ platform }}/index.md#kubernetes) to
+See [{{ product }} > Getting started](/docker-for-{{ platform }}/#kubernetes) to
 enable Kubernetes and begin testing the deployment of your workloads on
 Kubernetes.
 

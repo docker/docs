@@ -99,7 +99,7 @@ cap_drop:
 ```
 
 > **Note**: These options are ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
 ### command
@@ -111,7 +111,7 @@ command: bundle exec thin -p 3000
 ```
 
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -184,7 +184,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -332,7 +332,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](/compose/extends.md#extending-services).
+[the extends documentation](../extends.md#extending-services).
 
 ### external_links
 
@@ -396,7 +396,7 @@ options and tags it with the specified tag.
 
 ### labels
 
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -420,7 +420,7 @@ Link to containers in another service. Either specify both the service name and
 a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
 > Links are a legacy option. We recommend using
-> [networks](/compose/networking.md) instead.
+> [networks](../networking.md) instead.
 
 ```yaml
 web:
@@ -603,7 +603,7 @@ There are several things to note, depending on which
   For example, if you specify a mapping of `./foo:/data`, the `./foo` part
   is passed straight to the volume driver without being expanded.
 
-See [Docker Volumes](/storage/volumes.md) and
+See [Docker Volumes](../../storage/volumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume/) for more information.
 
 ### volumes_from
@@ -621,7 +621,7 @@ volumes_from:
 ### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](../../engine/reference/run.md) counterpart.
 
 ```yaml
 cpu_shares: 73
@@ -650,8 +650,8 @@ tty: true
 
 ## Compose documentation
 
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)

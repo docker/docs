@@ -6,7 +6,7 @@ notoc: true
 ---
 
 You can control the order of service startup and shutdown with the
-[depends_on](/compose/compose-file/index.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
@@ -93,5 +93,5 @@ script:
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

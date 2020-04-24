@@ -112,10 +112,10 @@ those remaining after a `docker service update --config-rm`.
 Use these links to read about specific commands, or continue to the
 [example about using configs with a service](#advanced-example-use-configs-with-a-nginx-service).
 
-- [`docker config create`](/engine/reference/commandline/config_create.md)
-- [`docker config inspect`](/engine/reference/commandline/config_inspect.md)
-- [`docker config ls`](/engine/reference/commandline/config_ls.md)
-- [`docker config rm`](/engine/reference/commandline/config_rm.md)
+- [`docker config create`](../reference/commandline/config_create.md)
+- [`docker config inspect`](../reference/commandline/config_inspect.md)
+- [`docker config ls`](../reference/commandline/config_ls.md)
+- [`docker config rm`](../reference/commandline/config_rm.md)
 
 ## Examples
 
@@ -130,7 +130,7 @@ Docker configs.
 
 The `docker stack` command supports defining configs in a Compose file.
 However, the `configs` key is not supported for `docker compose`. See
-[the Compose file reference](/compose/compose-file/index.md#configs) for details.
+[the Compose file reference](../../compose/compose-file/index.md#configs) for details.
 
 ### Simple example: Get started with configs
 

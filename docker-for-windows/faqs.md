@@ -26,11 +26,11 @@ Docker Engine. Bugs, crashes, and issues can occur when using the Edge version, 
 
 ### Can I switch between Stable and Edge versions of Docker Desktop?
 
-Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](/docker-for-windows/install/#switch-between-stable-and-edge-versions).
+Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](install.md#switch-between-stable-and-edge-versions).
 
 ## What are the system requirements for Docker Desktop?
 
-For information about system requirements, see [Docker Desktop Windows system requirements](install/#system-requirements).
+For information about system requirements, see [Docker Desktop Windows system requirements](install.md#system-requirements).
 
 ## What is an experimental feature?
 
@@ -49,7 +49,7 @@ On Docker Desktop, clients can connect to the Docker Engine through a
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
 given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Engine API](/engine/api.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
 
 ### How do I connect from a container to a service on the host?
 
@@ -58,28 +58,28 @@ Windows has a changing IP address (or none if you have no network access). We re
 The gateway is also reachable as `gateway.docker.internal`.
 
 For more information about the networking features in Docker Desktop for Windows, see
-[Networking](/docker-for-windows/networking/).
+[Networking](networking.md).
 
 ### How do I connect to a container from Windows?
 
 We recommend that you publish a port, or connect from another container. You can use the same method on Linux if the container is on an overlay network and not a bridge network, as these are not routed.
 
 For more information and examples, see
-[I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows) in the [Networking](/docker-for-windows/networking/) topic.
+[I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows) in the [Networking](networking.md) topic.
 
 ## Volumes
 
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 No, at this point, Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](/docker-for-windows#shared-drives) for
+the Unix-style permissions on [shared volumes](index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for 
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](troubleshoot#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ### How do symlinks work on Windows?
 
@@ -96,11 +96,11 @@ Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
 intermediate). Docker recognizes certs stored under Trust Root
 Certification Authorities or Intermediate Certification Authorities.
 
- For more information on adding server and client side certs, see [Add TLS certificates](/docker-for-windows/index/#add-tls-certificates) in the Getting Started topic.
+ For more information on adding server and client side certs, see [Adding TLS certificates](index.md#adding-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 
-For information on adding client certificates, see [Add TLS certificates](/docker-for-windows/index/#add-tls-certificates) in the Getting Started topic.
+For information on adding client certificates, see [Adding TLS certificates](index.md#adding-tls-certificates) in the Getting Started topic.
 
 ### Can I pass through a USB device to a container?
 
@@ -113,8 +113,7 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or 
 
 ### Can I use VirtualBox alongside Docker Desktop?
 
-Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
-Hyper-V is enabled on Windows.
+Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" class="_"} feature on your machine.
 
 ## Windows requirements
 
@@ -125,7 +124,7 @@ You can find a tutorial about running Windows containers on Windows Server in
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-Windows 10 Insider Preview (Windows 10 Home) users can now install [Docker Desktop Edge 2.2.2.0](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe) or a later release with the [experimental WSL 2 support](/docker-for-windows/wsl-tech-preview/). This requires Windows Insider Preview Build 19018 or later.
+Windows 10 Insider Preview (Windows 10 Home) users can now install [Docker Desktop Edge 2.2.2.0](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe) or a later release with the [experimental WSL 2 support](wsl-tech-preview.md). This requires Windows Insider Preview Build 19018 or later.
 
 Docker Desktop Stable releases require the Hyper-V feature which is not available in the Windows 10 Home edition.
 
@@ -136,7 +135,7 @@ Docker Desktop uses the Windows Hyper-V features. While older Windows versions h
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](/docker-for-windows/troubleshoot/#docker-desktop-fails-to-start-when-anti-virus-software-is-installed)
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed)
 in [Troubleshooting](troubleshoot.md).
 
 ## Feedback
@@ -150,7 +149,7 @@ functionality you'd like to see added.
 
 ### What if I have problems or questions?
 
-You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) topic.
+You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot.md) topic.
 
 If you do not find a solution in Troubleshooting, browse issues on
 [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}

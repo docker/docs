@@ -400,5 +400,5 @@ work, with one or more virtual disks per virtual machine.
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
+* [Volumes](../volumes.md)
 * [Select a storage driver](select-storage-driver.md)

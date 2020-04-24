@@ -223,7 +223,7 @@ endpoint mode with an external load balancer, or use multiple smaller overlay ne
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](/network/overlay.md).
+[Docker swarm mode overlay network security model](../../network/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker
@@ -363,7 +363,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../reference/commandline/network_create.md#bridge-driver-options).
 
     ```bash
     $ docker network create \
@@ -415,6 +415,6 @@ $ docker swarm join \
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Docker CLI reference](/engine/reference/commandline/docker.md)
+* [Docker CLI reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
 * [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }

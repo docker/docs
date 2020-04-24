@@ -21,7 +21,7 @@ toc_max: 2
 ## Supported platforms
 
 Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](/docker-for-mac/install.md) and [Windows 10](/docker-for-windows/install.md)
+[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -29,14 +29,14 @@ your preferred operating system below.
 
 {% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                     | x86_64 / amd64                              |
-|:-------------------------------------------------------------|:-------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](/docker-for-mac/install.md) | [{{ yes }}](/docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](/docker-for-windows/install.md) | [{{ yes }}](/docker-for-windows/install.md) |
+| Platform                                                          | x86_64 / amd64                                   |
+|:------------------------------------------------------------------|:------------------------------------------------:|
+| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
+| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
 
 #### Server
 
-Docker provides `.deb` and `.rpm` packages form the following Linux distributions
+Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
 | Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        | IBM Power (ppc64le)    | IBM Z (s390x)          |
@@ -44,7 +44,7 @@ and architectures:
 | [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |                        |                        |
 | [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |                        |                        |
 | [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |                        |                        |
-| [Raspbian](debian.md) |                        | [{{ yes }}](fedora.md)   | [{{ yes }}](fedora.md) |                        |                        |
+| [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |                        |                        |
 | [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
 
 ##### Other Linux distributions
@@ -159,4 +159,4 @@ for it.
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Getting started with Docker](/get-started/index.md).
+[Getting started with Docker](../../get-started/index.md).

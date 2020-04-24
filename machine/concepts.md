@@ -35,7 +35,7 @@ command-line to point to that machine. The `docker-machine env <machine-name>`
 subcommand outputs the configuration command you should use.
 
 For a complete list of `docker-machine` subcommands, see the
-[Docker Machine subcommand reference](/machine/reference/help.md).
+[Docker Machine subcommand reference](reference/help.md).
 
 ## Custom root Certificate Authority for Registry
 
@@ -47,7 +47,7 @@ x509: certificate signed by unknown authority
 ```
 
 As discussed in the
-[Docker Engine documentation](/engine/security/certificates.md#understanding-the-configuration)
+[Docker Engine documentation](../engine/security/certificates.md#understand-the-configuration)
 place the certificates in `/etc/docker/certs.d/hostname/ca.crt`
 where `hostname` is your Registry server's hostname.
 
@@ -95,11 +95,11 @@ like-minded individuals, we have a number of open channels for communication.
   [submit a pull request on Github](https://github.com/docker/machine/pulls).
 
 For more information and resources, visit
-[our help page](/opensource/get-help.md).
+[our help page](../opensource/ways.md).
 
 ## Where to go next
 
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Docker Machine driver reference](/machine/drivers/index.md){: target="_blank" class="_"}
-- [Docker Machine subcommand reference](/machine/reference/help.md){: target="_blank" class="_"}
+- [Docker Machine driver reference](drivers/index.md){: target="_blank" class="_"}
+- [Docker Machine subcommand reference](reference/help.md){: target="_blank" class="_"}
