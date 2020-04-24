@@ -36,7 +36,7 @@ your preferred operating system below.
 
 #### Server
 
-Docker provides `.deb` and `.rpm` packages form the following Linux distributions
+Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
 | Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        | IBM Power (ppc64le)    | IBM Z (s390x)          |
