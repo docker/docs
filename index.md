@@ -25,27 +25,27 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/install/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
+                    <a href="/docker-for-mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac"></a>
                 </div>
-                <h3 id="docker-for-mac"><a href="docker-for-mac/install/">Docker Desktop for Mac</a></h3>
+                <h3 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h3>
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-windows/install/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
+                    <a href="/docker-for-windows/install/"><img src="/images/windows_48.svg" alt="Docker Desktop for Windows"></a>
                 </div>
-                <h3 id="docker-for-windows"><a href="docker-for-windows/install/">Docker Desktop for Windows</a></h3>
+                <h3 id="docker-for-windows/install/"><a href="/docker-for-windows/install/">Docker Desktop for Windows</a></h3>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="engine/install/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
+                    <a href="/engine/install/"><img src="/images/linux_48.svg" alt="Docker for Linux"></a>
                 </div>
-                <h3 id="docker-for-linux"><a href="engine/install/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h3>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>
