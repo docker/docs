@@ -49,11 +49,16 @@ and architectures:
 
 ##### Other Linux distributions
 
+> **Note**
+>
+> While the instructions below may work, Docker does not test or verify
+> installation on derivatives.
+
 - Users of Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
-  "Linux Mint" should follow the installation instructions for [Debian](debian.md),
-  substituting the version of their distro for the corresponding Debian release.
-  Refer to the documentation of your distro to find which Debian release
-  corresponds with your derivative version.
+  "LMDE" (Debian-based Mint) should follow the installation instructions for
+  [Debian](debian.md), substituting the version of their distro for the
+  corresponding Debian release. Refer to the documentation of your distro to find
+  which Debian release corresponds with your derivative version.
 - Likewise, users of Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
   should follow the installation instructions for [Ubuntu](ubuntu.md),
   substituting the version of their distro for the corresponding Ubuntu release.
