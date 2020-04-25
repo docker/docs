@@ -108,7 +108,7 @@ on Microsoft Windows Server and want to install Docker Compose.
 3.  Test the installation.
 
     ```powershell
-    docker-compose --version
+    docker-compose version
 
     docker-compose version {{site.compose_version}}, build 01110ad01
     ```
@@ -161,7 +161,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 4.  Test the installation.
 
     ```bash
-    $ docker-compose --version
+    $ docker-compose version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
 </div>
