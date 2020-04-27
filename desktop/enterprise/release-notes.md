@@ -27,9 +27,18 @@ This version includes all the bug fixes and minor changes between Docker Desktop
 - [Docker Desktop Community release notes on Windows](/docker-for-windows/release-notes) 
 
 ### Bug fixes and minor changes
+
 - Windows: in the `admin-settings.json` configuration file, the `sharedDrives` and `sharedFolders` fields have been replaced by a unique `filesharingDirectories` field.
 - Mac: in the `admin-settings.json` configuration file, the `filesharingDirectories` has been moved out of the `linuxVM` section.
-- The `admin-settings.json` configuration file version number has been increased from 1 to 2. 
+- The `admin-settings.json` configuration file `configurationFileVersion` field value has been increased from 1 to 2.
+
+### Known issue
+
+Docker Desktop Enterprise 2.3.0.0 contains a configuration breaking change. Manual steps are required to update the `admin-settings.json` file, see the **Bug fixes and minor changes** section for the list of changes to perform.
+
+For information on configuration, see:
+- [Configure Docker Desktop Enterprise on Mac](/desktop/enterprise/admin/configure/mac-admin)
+- [Configure Docker Desktop Enterprise on Windows](/desktop/enterprise/admin/configure/windows-admin)
 
 ## Version 2.1.0.9
 2020-03-13
