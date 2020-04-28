@@ -331,8 +331,7 @@ At this point, you have seen the basics of how Compose works.
 
 ## Where to go next
 
-- Next, try the quick start guide for [Django](django.md),
-  [Rails](rails.md), or [WordPress](wordpress.md)
+- Next, try the [Sample apps with Compose](samples-for-compose.md)
 - [Explore the full list of Compose commands](reference/index.md)
 - [Compose configuration file reference](compose-file/index.md)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)

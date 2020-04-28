@@ -75,6 +75,9 @@ Read more about the Compose/Swarm integration in the
 
 ## Compose documentation
 
+- [User guide](index.md)
 - [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)

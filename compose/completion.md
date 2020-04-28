@@ -118,8 +118,6 @@ Enjoy working with Compose faster and with fewer typos!
 
 - [User guide](index.md)
 - [Installing Compose](install.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)

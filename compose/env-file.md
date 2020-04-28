@@ -50,5 +50,8 @@ in your Compose file, and can also be used to define the following
 ## More Compose documentation
 
 - [User guide](index.md)
+- [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)

@@ -1007,6 +1007,8 @@ samples:
     title: CouchDB
   - path: /compose/django/
     title: Django and PostgreSQL
+  - path: /compose/wordpress/
+    title: WordPress
   - path: /engine/examples/postgresql_service/
     title: PostgreSQL
   - path: /compose/rails/

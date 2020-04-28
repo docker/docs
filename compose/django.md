@@ -249,7 +249,6 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 - [User guide](index.md)
 - [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
