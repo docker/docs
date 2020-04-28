@@ -16,9 +16,9 @@ The Docker Desktop Dashboard offers the following benefits:
 
 In addition, the Dashboard UI allows you to:
 
-- Navigate to the [Settings](index.md#preferences) menu to configure Docker Desktop preferences
-- Access the [Troubleshoot](troubleshoot.md) menu to debug and perform restart operations
-- Sign into [Docker Hub](index.md#docker-hub) using your Docker ID
+- Navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences
+- Access the **Troubleshoot** menu to debug and perform restart operations
+- Sign into [Docker Hub](https://hub.docker.com/) using your Docker ID
 
 To access the Docker Desktop Dashboard, from the Docker menu, select **Dashboard**. The Dashboard provides a runtime view of all your containers and applications.
 
@@ -44,7 +44,7 @@ This creates a new Redis container. From the Docker menu, select **Dashboard** t
 
 Now, let us start a sample application. You can download the [Example voting app](https://github.com/dockersamples/example-voting-app) from the Docker samples page. The example voting app is a distributed application that runs across multiple Docker containers.
 
-![Example voting app architecture diagram](../docker-for-windows/images/example-app-architecture.png){:width="600px"}
+![Example voting app architecture diagram](images/example-app-architecture.png){:width="600px"}
 
 The example voting app contains:
 
@@ -128,4 +128,4 @@ Click **Port** to open the port exposed by the container in a browser.
 
 ## Feedback
 
-We would like to hear from you about the new Dashboard UI. Let us know your feedback by creating an issue in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+We would like to hear from you about the new Dashboard UI. Let us know your feedback by creating an issue in the [docker/for-mac](https://github.com/docker/for-mac/issues) or [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.

@@ -1116,14 +1116,16 @@ manuals:
     title: Docker Compose release notes
 - sectiontitle: Docker Desktop
   section:
+  - path: /desktop/
+    title: Overview
+  - path: /desktop/dashboard/
+    title: Dashboard
   - sectiontitle: Mac
     section:
     - path: /docker-for-mac/
       title: Getting started
     - path: /docker-for-mac/install/
       title: Install Docker Desktop for Mac
-    - path: /docker-for-mac/dashboard/
-      title: Dashboard
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-mac/docker-toolbox/
@@ -1154,8 +1156,6 @@ manuals:
       title: Getting started
     - path: /docker-for-windows/install/
       title: Install Docker Desktop for Windows
-    - path: /docker-for-windows/dashboard/
-      title: Dashboard
     - path: /docker-for-windows/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
