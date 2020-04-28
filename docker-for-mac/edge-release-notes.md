@@ -12,6 +12,15 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.0.1
+2020-04-28
+
+> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+
 ## Docker Desktop Community 2.3.0.0
 2020-04-20
 
