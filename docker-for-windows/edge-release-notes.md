@@ -12,6 +12,20 @@ For information about Stable releases, see the [Stable release
 notes](release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.0.1
+2020-04-28
+
+> [Download](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an upgrade bug where users on versions still using the PowerShell-based VM management experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
+- Fixed a crash when failing to login due to no Internet connection.
+- Fixed bug in handling shared volume paths with `..` characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
+- WSL 2: Docker Desktop detects when the wsl-distro is stopped and displays an actionable error message.
+- Fixed a bug in `ftruncate` which prevented [libgit2sharp](https://github.com/libgit2/libgit2sharp) from cloning repositories on shared volumes. See [docker/for-win#5808](https://github.com/docker/for-win/issues/5808#issuecomment-610996272).
+- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+
 ## Docker Desktop Community 2.3.0.0
 2020-04-20
 
