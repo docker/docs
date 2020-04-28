@@ -513,8 +513,6 @@ reference:
       title: docker cp
     - path: /engine/reference/commandline/create/
       title: docker create
-    - path: /engine/reference/commandline/deploy/
-      title: docker deploy
     - path: /engine/reference/commandline/diff/
       title: docker diff
     - path: /engine/reference/commandline/events/
