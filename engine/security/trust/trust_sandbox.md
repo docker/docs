@@ -38,7 +38,7 @@ production trust environment, and sets up these additional components.
 | Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
 
 This means you run your own content trust (Notary) server and registry.
-If you work exclusively with the Docker Hub, you would not need with these components.
+If you work exclusively with the Docker Hub, you would not need these components.
 They are built into the Docker Hub for you. For the sandbox, however, you build
 your own entire, mock production environment.
 
