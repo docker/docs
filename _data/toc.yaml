@@ -1118,14 +1118,12 @@ manuals:
   section:
   - path: /desktop/
     title: Overview
-  - path: /desktop/dashboard/
-    title: Dashboard
   - sectiontitle: Mac
     section:
-    - path: /docker-for-mac/
-      title: Getting started
     - path: /docker-for-mac/install/
       title: Install Docker Desktop for Mac
+    - path: /docker-for-mac/
+      title: Getting started
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-mac/docker-toolbox/
@@ -1144,18 +1142,16 @@ manuals:
       title: Logs and troubleshooting
     - path: /docker-for-mac/faqs/
       title: FAQs
-    - path: /docker-for-mac/opensource/
-      title: Open source licensing
     - path: /docker-for-mac/release-notes/
       title: Stable release notes
     - path: /docker-for-mac/edge-release-notes/
       title: Edge release notes
   - sectiontitle: Windows
     section:
-    - path: /docker-for-windows/
-      title: Getting started
     - path: /docker-for-windows/install/
       title: Install Docker Desktop for Windows
+    - path: /docker-for-windows/
+      title: Getting started
     - path: /docker-for-windows/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
@@ -1166,14 +1162,16 @@ manuals:
       title: Logs and troubleshooting
     - path: /docker-for-windows/faqs/
       title: FAQs
-    - path: /docker-for-windows/opensource/
-      title: Open source licensing
     - path: /docker-for-windows/release-notes/
       title: Stable release notes
     - path: /docker-for-windows/edge-release-notes/
       title: Edge release notes
     - path: /docker-for-windows/wsl-tech-preview/
       title: Docker Desktop WSL 2 backend
+  - path: /desktop/dashboard/
+    title: Dashboard
+  - path: /desktop/opensource/
+    title: Open source licensing
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/

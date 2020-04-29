@@ -2,14 +2,11 @@
 description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop overview
-redirect_from:
-- /docker-for-mac/dashboard/
-- /docker-for-windows/dashboard/
 toc_min: 1
 toc_max: 2
 ---
 
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes Docker Engine, Docker CLI client, Docker Compose, Notary, Kubernetes, and Credential Helper.
+Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes [Docker Engine](../engine/), Docker CLI client, [Docker Compose](../compose/), [Notary](../notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in Docker Hub. This enables development teams to extend their environment to rapidly auto-build, continuously integrate and collaborate using a secure repository.
 
@@ -58,3 +55,4 @@ For information about new features, improvements, and bug fixes in Docker Deskto
 
 * [Docker Desktop for Mac Edge Release notes](../docker-for-mac/edge-release-notes.md)
 * [Docker Desktop for Windows Edge Release notes](../docker-for-windows/edge-release-notes.md)
+

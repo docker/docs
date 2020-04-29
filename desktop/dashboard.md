@@ -2,6 +2,9 @@
 description: Docker Desktop Dashboard
 keywords: Docker Desktop Dashboard, container view
 title: Docker Desktop Dashboard
+redirect_from:
+- /docker-for-mac/dashboard/
+- /docker-for-windows/dashboard/
 ---
 
 The Docker Desktop Dashboard provides a simple interface that enables you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their status. It provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
