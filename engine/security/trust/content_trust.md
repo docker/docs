@@ -223,8 +223,8 @@ Successfully deleted signature for dtr.example.com/admin/demo:1
 > implementation is also separate from the `only run signed images` feature of
 > [Universal Control Plane](/ee/ucp/admin/configure/run-only-the-images-you-trust/)
 
-Docker Content Trust within the Docker Enterprise Engine prevents a user from
-using a container image from an unknown source, it will also prevent a user from
+Docker Content Trust within the Docker Enterprise Engine prevents an user from
+using a container image from an unknown source, it will also prevent an user from
 building a container image from a base layer from an unknown source. Trusted
 sources could include Official Docker Images, found on the [Docker
 Hub](https://hub.docker.com/search?image_filter=official&type=image), or User
