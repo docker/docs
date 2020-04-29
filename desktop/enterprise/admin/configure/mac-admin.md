@@ -148,3 +148,48 @@ Parameter values and descriptions for environment configuration on Mac:
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
+
+### File format update
+
+#### From version 1 to 2
+
+Docker Desktop Enterprise 2.3.0.0-ent contains a change in the configuration file format.
+
+If you haven’t made any changes to the `admin-settings.json` file in the previous installation, you can simply delete it and Docker Desktop will re-create it automatically.
+Otherwise manual steps are required to update the `admin-settings.json` file.
+
+1. Increase the value of the `configurationFileVersion` field from `1` to `2`, i.e. before:
+    ```json
+   {
+      "configurationFileVersion": 1,
+      ...
+   }
+    ```
+    after:
+    ```json
+   {
+      "configurationFileVersion": 2,
+      ...
+   }
+    ```
+
+2. Move the `filesharingDirectories` field outside the `linuxVM` field, e.g. before:
+    ```json
+      "linuxVM": {
+        ...
+        "filesharingDirectories": {
+          "locked": true,
+          "value": ["/Users"]
+        }
+      }
+    ```
+    after:
+    ```json
+      "linuxVM": {
+        ...
+      },
+      "filesharingDirectories": {
+        "locked": true,
+        "value": ["/Users"]
+      }
+    ```

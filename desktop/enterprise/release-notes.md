@@ -36,88 +36,9 @@ This version includes all the bug fixes and minor changes between Docker Desktop
 
 Docker Desktop Enterprise 2.3.0.0 contains a change in the configuration file format.
 
-For information on configuration, see:
-- [Configure Docker Desktop Enterprise on Mac](/desktop/enterprise/admin/configure/mac-admin)
-- [Configure Docker Desktop Enterprise on Windows](/desktop/enterprise/admin/configure/windows-admin)
-
-If you haven’t made any changes to the `admin-settings.json` file in the previous installation, you can simply delete it and Docker Desktop will re-create it automatically.
-Otherwise manual steps are required to update the `admin-settings.json` file.
-
-#### On Windows
-
-1. Increase the value of the `configurationFileVersion` field from 1 to 2, i.e. before:
-    ```json
-   {
-      "configurationFileVersion": 1,
-      ...
-   }
-    ```
-    after:
-    ```json
-   {
-      "configurationFileVersion": 2,
-      ...
-   }
-    ```
-
-2. Replace the `sharedDrives` and `sharedFolders` fields with a single `filesharingDirectories` field, e.g. before:
-    ```json
-   {
-      ...
-      "sharedDrives": {
-        "locked": true,
-        "value": ["C"]
-      },
-      "sharedFolders": ["%USERPROFILE%"]
-   }
-    ```
-    after:
-    ```json
-   {
-      ...
-      "filesharingDirectories": {
-        "locked": true,
-        "value": ["C:", "%USERPROFILE%"]
-      }
-   }
-    ```
-#### On Mac
-
-1. Increase the value of the `configurationFileVersion` field from `1` to `2`, i.e. before:
-    ```json
-   {
-      "configurationFileVersion": 1,
-      ...
-   }
-    ```
-    after:
-    ```json
-   {
-      "configurationFileVersion": 2,
-      ...
-   }
-    ```
-
-2. Move the `filesharingDirectories` field outside the `linuxVM` field, e.g. before:
-    ```json
-      "linuxVM": {
-        ...
-        "filesharingDirectories": {
-          "locked": true,
-          "value": ["/Users"]
-        }
-      }
-    ```
-    after:
-    ```json
-      "linuxVM": {
-        ...
-      },
-      "filesharingDirectories": {
-        "locked": true,
-        "value": ["/Users"]
-      }
-    ```
+For more information, see:
+- [Update Docker Desktop Enterprise configuration file from version 1 to 2 on Mac](/desktop/enterprise/admin/configure/mac-admin/#from-version-1-to-2)
+- [Update Docker Desktop Enterprise configuration file from version 1 to 2 on Windows](/desktop/enterprise/admin/configure/windows-admin/#from-version-1-to-2)
 
 ## Version 2.1.0.9
 2020-03-13
