@@ -25,7 +25,6 @@
     background: $bg-secondary;
     // animation: gradientswitch 80s infinite;
     // -webkit-animation: gradientswitch 80s infinite;
-    height: $global-header-height;
     position: relative;
     z-index: 1;
     transition: all 0.1s ease;
@@ -150,7 +149,7 @@ section.section {
 */
 
 .wrapper.right-open #sidebar-wrapper {
-    width: 270px;                                                                                                                                                                            
+    width: 270px;
 }
 
 .wrapper.right-open .page-content {
@@ -189,7 +188,7 @@ section.section {
 
 .swagger-section {
    padding-top: 2rem;
-}   
+}
 
 /*
 *
