@@ -53,7 +53,7 @@ Keep the following in mind when using restart policies:
 
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
-  [flags related to service restart](../../engine/reference/commandline/service_create/).
+  [flags related to service restart](../../engine/reference/commandline/service_create.md).
 
 
 ## Use a process manager
