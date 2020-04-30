@@ -50,10 +50,10 @@ there.
 
 ```bash
 $ docker service ps webserver
-ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR                              PORTS
-owsz0yp6z375        webserver.1         nginx               UbuntuVM            Running             Running 44 seconds ago
-j91iahr8s74p         \_ webserver.1     nginx               UbuntuVM            Shutdown            Failed 50 seconds ago    "No such container: webserver.…"
-7dyaszg13mw2         \_ webserver.1     nginx               UbuntuVM            Shutdown            Failed 5 hours ago       "No such container: webserver.…"
+ID             NAME              IMAGE    NODE        DESIRED STATE  CURRENT STATE            ERROR                              PORTS
+owsz0yp6z375   webserver.1       nginx    UbuntuVM    Running        Running 44 seconds ago
+j91iahr8s74p    \_ webserver.1   nginx    UbuntuVM    Shutdown       Failed 50 seconds ago    "No such container: webserver.…"
+7dyaszg13mw2    \_ webserver.1   nginx    UbuntuVM    Shutdown       Failed 5 hours ago       "No such container: webserver.…"
 ```
 
 ## Where to go next
