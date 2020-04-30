@@ -77,7 +77,7 @@ testuser::231072:65536
 
 #### openSUSE
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
-  This is might be required on other distros as well depending on the configuration.
+  This might be required on other distros as well depending on the configuration.
 
 - Known to work on openSUSE 15.
 
