@@ -63,5 +63,5 @@ docker run --rm -it \
 
 ## Where to go next
 
-- [Use your own TLS certificates](use-your-own-tls-certificates)
+- [Use your own TLS certificates](use-your-own-tls-certificates.md)
 - [Enable authentication using client certificates](/ee/enable-authentication-via-client-certs/)

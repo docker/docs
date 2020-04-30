@@ -138,6 +138,6 @@ The AWS console shows a volume has been provisioned having a matching name with 
 
 ## Where to go next
 
-- [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
-- [Discover Network Encryption on Kubernetes](/ee/ucp/kubernetes/kubernetes-network-encryption/)
-- [UCP CLI reference](https://docs.docker.com/reference/)
+- [Deploy an Ingress Controller on Kubernetes](../cluster-ingress/index.md)
+- [Discover Network Encryption on Kubernetes](../kubernetes-network-encryption.md)
+- [UCP CLI reference](/reference/)

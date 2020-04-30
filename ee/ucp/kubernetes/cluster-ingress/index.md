@@ -28,11 +28,11 @@ For a detailed look at Istio Ingress architecture, refer to the [Istio Ingress d
 
 To get started with UCP Ingress, the following help topics are provided:
 
-- [Install Cluster Ingress on a UCP Cluster](./install/)
-- [Deploy a Sample Application with Ingress Rules](./ingress)
-- [Deploy a Sample Application with a Canary Release](./canary/)
-- [Deploy a Sample Application with Sticky Sessions](./sticky/)
+- [Install Cluster Ingress on a UCP Cluster](install.md)
+- [Deploy a Sample Application with Ingress Rules](ingress.md)
+- [Deploy a Sample Application with a Canary Release](canary.md)
+- [Deploy a Sample Application with Sticky Sessions](sticky.md)
 
 ## Where to go next
 
-- [Install Cluster Ingress on to a UCP Cluster](./install/)
+- [Install Cluster Ingress on to a UCP Cluster](install.md)

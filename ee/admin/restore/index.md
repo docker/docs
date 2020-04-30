@@ -10,10 +10,10 @@ swarm and join new ones to bring the swarm to an healthy state.
 
 Restore components individually and in the following order:
 
-1. [Restore Docker Swarm](restore-swarm).
-2. [Restore Universal Control Plane (UCP)](restore-ucp).
-3. [Restore Docker Trusted Registry (DTR)](restore-dtr).
+1. [Restore Docker Swarm](restore-swarm.md).
+2. [Restore Universal Control Plane (UCP)](restore-ucp.md).
+3. [Restore Docker Trusted Registry (DTR)](restore-dtr.md).
 
 ## Where to go next
 
-- [Restore Docker Swarm](restore-swarm)
+- [Restore Docker Swarm](restore-swarm.md)
