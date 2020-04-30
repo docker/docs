@@ -10,7 +10,7 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
+For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.5
