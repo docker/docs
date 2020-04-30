@@ -183,7 +183,7 @@ $ dockerd-rootless.sh --experimental --storage-driver vfs
 As Rootless mode is experimental, you need to run
 `dockerd-rootless.sh` with `--experimental`.
 You also need `--storage-driver vfs` unless using Ubuntu or Debian 10 kernel.
-You don't need to care these flags if you manage the daemon using systemd, as
+You don't need to care about these flags if you manage the daemon using systemd, as
 these flags are automatically added to the systemd unit file.
 
 Remarks about directory paths:
