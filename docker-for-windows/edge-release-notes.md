@@ -8,8 +8,7 @@ toc_max: 2
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For information about Stable releases, see the [Stable release
-notes](release-notes). For Docker Desktop system requirements, see
+For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.3.0.1
