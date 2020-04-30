@@ -126,7 +126,7 @@ testuser::231072:65536
 
 ## Install
 
-The installation script is available at [here](https://get.docker.com/rootless).
+The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" }.
 
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
