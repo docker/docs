@@ -193,7 +193,7 @@ as described in the [Docker Machine driver example](../machine/drivers/hyper-v.m
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl-tech-preview.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](images/virtualization-enabled.png){:width="700px"}
