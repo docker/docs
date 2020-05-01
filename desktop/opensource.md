@@ -3,6 +3,9 @@ description: Docker's use of Open Source
 keywords: docker, opensource
 title: Open source components and licensing
 notoc: true
+redirect_from:
+- /docker-for-mac/opensource/
+- /docker-for-windows/opensource/
 ---
 
 Docker Desktop is built using open source software. For information about the
