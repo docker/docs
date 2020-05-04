@@ -26,8 +26,8 @@ SCIM implementation allows proactive synchronization with UCP and eliminates thi
 
 ## Typical steps involved in SCIM integration:
 1. [Configure SCIM for UCP](#configure-scim-for-ucp)
-2. [Configure SCIM authentication and access](#scim-authentication-and-access)
-3. [Specify user attributes](#specify-user-access)
+2. [Configure SCIM authentication and access](#configure-scim-authentication-and-access)
+3. [Specify user attributes](#specify-user-attributes)
 
 Other information in this topic includes:
 

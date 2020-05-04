@@ -79,5 +79,5 @@ To deploy vSphere volumes:
 3. Start a Pod using the PVC that you defined.
 
 ## Where to go next
-* [Configuring iSCSI for Kubernetes](https://docs.docker.com/ee/ucp/kubernetes/storage/use-iscsi/)
-* [Using CSI Drivers](https://docs.docker.com/ee/ucp/kubernetes/storage/use-csi/)
+* [Configuring iSCSI for Kubernetes](use-iscsi.md)
+* [Using CSI Drivers](use-csi.md)

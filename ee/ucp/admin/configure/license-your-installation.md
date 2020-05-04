@@ -31,5 +31,5 @@ license refreshes immediately, and you don't need to click **Save**.
 
 ## Where to go next
 
-- [Install UCP](../install.md)
+- [Install UCP](../install/index.md)
 - [Install UCP offline](../install/install-offline.md)

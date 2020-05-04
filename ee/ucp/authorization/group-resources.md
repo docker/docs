@@ -9,7 +9,7 @@ redirect_from:
 >{% include enterprise_label_shortform.md %}
 
 Docker Enterprise enables access control to cluster resources by grouping resources
-into **resource sets**. Combine resource sets with [grants](grant-permissions)
+into **resource sets**. Combine resource sets with [grants](grant-permissions.md)
 to give users permission to access specific cluster resources.
 
 A resource set can be:

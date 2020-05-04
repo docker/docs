@@ -35,7 +35,7 @@ configure your Docker CLI client to connect to the swarm.
 docker node update --label-add dtr.cache=true <node-hostname>
 ```
 
-[Learn more about labelling nodes](/engine/swarm/manage-nodes.md#add-or-remove-label-metadata).
+[Learn more about labelling nodes](../../../../../engine/swarm/manage-nodes.md#add-or-remove-label-metadata).
 
 
 ## Prepare the cache deployment
@@ -175,7 +175,7 @@ the cache fetches it again from DTR.
 The cache is configured to persist data inside its container.
 If something goes wrong with the cache service, Docker automatically redeploys a
 new container, but previously cached data is not persisted.
-You can [customize the storage parameters](/registry/configuration.md#storage),
+You can [customize the storage parameters](/registry/configuration/#storage),
 if you want to store the image layers using a persistent storage backend.
 
 Also, the cache is configured to use port 443. If you're already using that

@@ -55,5 +55,5 @@ CA.
 See [docker/dtr install](/reference/dtr/2.7/cli/install/) and [docker/dtr reconfigure](/reference/dtr/2.7/cli/reconfigure/) for TLS certificate options and usage. 
 
 ## Where to go next
-- [Enable single sign-on](enable-single-sign-on)
-- [Set up external storage](external-storage)
+- [Enable single sign-on](enable-single-sign-on.md)
+- [Set up external storage](external-storage/index.md)

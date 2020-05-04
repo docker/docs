@@ -71,7 +71,7 @@ after an upgrade. By default, any user can create any pod.
 
 > Note: PSPs do not override security defaults built into the
 > UCP RBAC engine for Kubernetes pods. These [Security
-> defaults](https://docs.docker.com/ee/ucp/authorization/) prevent non-admin
+> defaults](/ee/ucp/authorization/) prevent non-admin
 > users from mounting host paths into pods or starting privileged pods.
 
 ```bash

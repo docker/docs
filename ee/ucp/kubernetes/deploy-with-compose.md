@@ -8,7 +8,7 @@ redirect_from:
 
 >{% include enterprise_label_shortform.md %}
 
-Docker Enterprise Edition enables deploying [Docker Compose](/compose/overview.md)
+Docker Enterprise Edition enables deploying [Docker Compose](/compose/)
 files to Kubernetes clusters. Starting in Compose file version 3.3, you use the
 same `docker-compose.yml` file that you use for Swarm deployments, but you
 specify **Kubernetes workloads** when you deploy the stack. The result is a
@@ -19,7 +19,7 @@ true Kubernetes app.
 To deploy a stack to Kubernetes, you need a namespace for the app's resources.
 Contact your Docker EE administrator to get access to a namespace. In this
 example, the namespace is called `labs`.
-[Learn how to grant access to a Kubernetes namespace](../authorization/grant-permissions/#kubernetes-grants).
+[Learn how to grant access to a Kubernetes namespace](../authorization/grant-permissions.md#kubernetes-grants).
 
 ## Create a Kubernetes app from a Compose file
 

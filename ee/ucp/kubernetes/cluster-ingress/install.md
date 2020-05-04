@@ -122,4 +122,4 @@ If the output is `HTTP/1.1 200 OK`, then Envoy is running correctly, ready to se
 
 ## Where to go next
 
-- [Deploy a Sample Application](./ingress/)
+- [Deploy a Sample Application](ingress.md)

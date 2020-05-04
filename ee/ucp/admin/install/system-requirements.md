@@ -15,7 +15,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker Engine - Enterprise](/ee/supported-platforms.md) version {{ site.docker_ee_version }}
+* [Docker Engine - Enterprise](../../../supported-platforms.md) version {{ site.docker_ee_version }}
 * Linux kernel version 3.10 or higher. For debugging purposes, it is suggested to match the host OS kernel versions as close as possible.
 * [A static IP address for each node in the cluster](/ee/ucp/admin/install/plan-installation/#static-ip-addresses)
 * User namespaces should not be configured on any node. This function is not currently supported by UCP. See [Isolate containers with a user namespace](https://docs.docker.com/engine/security/userns-remap/) for more information.

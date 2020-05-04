@@ -64,7 +64,7 @@ Learn to [create and configure users and teams](create-users-and-teams-manually.
 ### Define roles
 
 For this exercise, create a simple role for the ops team. To learn how to create roles for Kubernetes,
-see [Configure native Kubernetes role-based access control](/ee/ucp/admin/configure/configure-rbac-kube/).
+see [Configure native Kubernetes role-based access control](../admin/configure/configure-rbac-kube.md).
 
 ### Grant access
 
