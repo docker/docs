@@ -21,7 +21,7 @@ running one of the supported operating systems from Docker Enterprise's
 
 ## Step 1: Install Docker Enterprise Container Engine
 
-[Select a platform](/ee/supported-platforms) and click through to install the
+[Select a platform](supported-platforms.md) and click through to install the
 Docker Enterprise container engine on all hosts you want to manage.
 
 ## Step 2: Install Universal Control Plane

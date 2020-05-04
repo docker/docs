@@ -45,7 +45,7 @@ docker.io/docker/ucp:latest
 ```
 
 Next, list all the latest UCP images. To learn more about `docker/ucp images` and available options, 
-see [the reference page](/reference/ucp/3.1/cli/images/).
+see [the reference page](/reference/ucp/3.2/cli/images/).
 
 ```bash
 $> docker run --rm docker/ucp images --list

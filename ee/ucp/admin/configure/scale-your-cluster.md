@@ -13,7 +13,7 @@ scale to your needs.
 ![](../../images/scale-your-cluster-0.svg)
 
 Since UCP leverages the clustering functionality provided by Docker Engine,
-you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
+you use the [docker swarm join](../../../../engine/swarm/swarm-tutorial/add-nodes.md)
 command to add more nodes to your cluster. When joining new nodes, the UCP
 services automatically start running in that node.
 

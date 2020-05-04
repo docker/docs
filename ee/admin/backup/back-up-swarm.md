@@ -27,7 +27,7 @@ You must perform a manual backup on each manager node, because logs contain node
 1.  Retrieve your Swarm unlock key if `auto-lock` is enabled to be able
     to restore the swarm from backup. Retrieve the unlock key if necessary and
     store it in a safe location. If you are unsure, read
-    [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).
+    [Lock your swarm to protect its encryption key](../../../engine/swarm/swarm_manager_locking.md).
 
 2.  Because you must stop the engine of the manager node before performing the backup, having three manager 
     nodes is recommended for high availability (HA). For a cluster to be operational, a majority of managers 
@@ -80,5 +80,5 @@ You must perform a manual backup on each manager node, because logs contain node
 
 ### Where to go next
 
-- [Back up UCP](back-up-ucp)
+- [Back up UCP](back-up-ucp.md)
  

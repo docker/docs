@@ -43,9 +43,9 @@ to avoid any business impacts.
 
 Before starting the upgrade, confirm that:
 * The version of UCP in use is supported by the upgrade version of DTR. [Check the compatibility matrix](https://success.docker.com/article/compatibility-matrix).
-* The [DTR backup](disaster-recovery/create-a-backup) is recent.
-* [Docker content trust in UCP is disabled](/ee/ucp/admin/configure/run-only-the-images-you-trust/).
-* [All system requirements are met](install/system-requirements).
+* The [DTR backup](disaster-recovery/create-a-backup.md) is recent.
+* [Docker content trust in UCP is disabled](../../ucp/admin/configure/run-only-the-images-you-trust.md).
+* [All system requirements are met](install/system-requirements.md).
 
 ### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
@@ -59,7 +59,7 @@ Pull the latest version of DTR:
 docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 ```
 
-Confirm that at least [16GB RAM is available](install/system-requirements) on the node on which you are running the upgrade. If the DTR node does not have access to the internet, follow the [offline installation documentation](install/install-offline) to get the images.
+Confirm that at least [16GB RAM is available](install/system-requirements.md) on the node on which you are running the upgrade. If the DTR node does not have access to the internet, follow the [offline installation documentation](install/install-offline) to get the images.
 
 Once you have the latest image on your machine (and the images on the target
 nodes, if upgrading offline), run the upgrade command.
@@ -118,5 +118,5 @@ After upgrading DTR, it is necessary to redownload the vulnerability database.
 
 ## Where to go next
 
-- [Release notes](../release-notes)
+- [Release notes](../release-notes.md)
 - [Garbage collection in v2.5](/datacenter/dtr/2.5/guides/admin/configure/garbage-collection/)

@@ -7,7 +7,7 @@ keywords: ucp, architecture
 >{% include enterprise_label_shortform.md %}
 
 Docker Universal Control Plane (UCP) is a containerized application that runs on
-[Docker Enterprise Edition](/ee/index.md), extending its functionality
+[Docker Enterprise Edition](../index.md), extending its functionality
 to simplify the deployment, configuration, and monitoring of your applications at scale.
 
 UCP also secures Docker with role-based access control (RBAC) so that only authorized
@@ -29,14 +29,14 @@ UCP leverages the clustering and orchestration functionality provided by Docker.
 ![](images/ucp-architecture-2.svg){: .with-border}
 
 A swarm is a collection of nodes that are in the same Docker cluster.
-[Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
+[Nodes](../../engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
 modes: manager or worker. If nodes are not already running in a swarm when
 installing UCP, nodes will be configured to run in swarm mode.
 
 When you deploy UCP, it starts running a globally scheduled service called
 `ucp-agent`. This service monitors the node where it's running and starts
 and stops UCP services, based on whether the node is a
-[manager or a worker node](/engine/swarm/key-concepts.md).
+[manager or a worker node](../../engine/swarm/key-concepts.md).
 
 If the node is a:
 

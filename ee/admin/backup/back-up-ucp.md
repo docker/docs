@@ -259,5 +259,5 @@ The following table describes the backup schema returned by the `GET` and `LIST`
 
 ### Where to go next
 
-- [Back up the Docker Trusted Registry](./back-up-dtr/)
+- [Back up the Docker Trusted Registry](back-up-dtr.md)
  

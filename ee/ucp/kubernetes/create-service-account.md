@@ -88,4 +88,4 @@ assigned to the `nginx` namespace.
 
 ## Where to go next
 
-- [Deploy a Sample Application with Ingress](https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/)
+- [Deploy a Sample Application with Ingress](cluster-ingress/ingress.md)

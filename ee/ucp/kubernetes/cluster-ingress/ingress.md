@@ -156,5 +156,5 @@ requests are sent to the other versions.
 
 ## Where to go next
 
-- [Deploy a Sample Application with a Canary release](./canary/)
-- [Deploy a Sample Application with Sticky Sessions](./sticky/)
+- [Deploy a Sample Application with a Canary release](canary.md)
+- [Deploy a Sample Application with Sticky Sessions](sticky.md)
