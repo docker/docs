@@ -1,6 +1,8 @@
 ---
 description: Docker Desktop WSL 2 backend
 keywords: WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker
+redirect_from:
+- /docker-for-windows/wsl/
 title: Docker Desktop WSL 2 backend
 toc_min: 2
 toc_max: 3
