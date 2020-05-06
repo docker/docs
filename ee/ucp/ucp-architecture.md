@@ -29,7 +29,7 @@ UCP leverages the clustering and orchestration functionality provided by Docker.
 ![](images/ucp-architecture-2.svg){: .with-border}
 
 A swarm is a collection of nodes that are in the same Docker cluster.
-[Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
+[Nodes](../../engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
 modes: manager or worker. If nodes are not already running in a swarm when
 installing UCP, nodes will be configured to run in swarm mode.
 

@@ -37,7 +37,7 @@ request payload.
 >
 > Once UCP audit logging has been enabled, audit logs can be found within the 
 > container logs of the `ucp-controller` container on each UCP manager node. 
-> Ensure that you have a [logging  driver](../../../../config/containers/logging/configure/) 
+> Ensure that you have a [logging  driver](../../../../config/containers/logging/configure.md) 
 > configured appropriately with log rotation set, as audit logging can generate a large amount of data. 
 
 ## Benefits of audit logging

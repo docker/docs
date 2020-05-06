@@ -7,7 +7,7 @@ keywords: dtr, repository, permissions
 >{% include enterprise_label_shortform.md %}
 
 The **Repository Info** tab includes the following details:
-   *  README (which you can [edit if you have admin rights to the repository](../../admin/manage-users/permission-levels/#team-permission-levels))
+   *  README (which you can [edit if you have admin rights to the repository](../../admin/manage-users/permission-levels.md#team-permission-levels))
    *  Docker Pull Command
    *  Your repository permissions
 
@@ -21,7 +21,7 @@ To learn more about pulling images, see [Pull and Push Images](pull-and-push-ima
 
 3. You should see the **Info** tab by default. Notice **Your Permission** under **Docker Pull Command**. 
 
-4. Hover over the question mark next to [your permission level](../../admin/manage-users/permission-levels/) to view the list of repository events you have access to.
+4. Hover over the question mark next to [your permission level](../../admin/manage-users/permission-levels.md) to view the list of repository events you have access to.
 	   
     ![](../../images/manage-repo-events-2.png){: .img-fluid .with-border}
 

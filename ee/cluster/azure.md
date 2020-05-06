@@ -402,5 +402,5 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
 ## Where to go next
 
-- [Explore the full list of Cluster commands](reference/envvars.md)
+- [Explore the full list of Cluster commands](../../engine/reference/commandline/cluster.md)
 - [Cluster configuration file reference](cluster-file.md)

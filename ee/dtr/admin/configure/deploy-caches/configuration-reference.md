@@ -8,7 +8,7 @@ keywords: DTR, cache
 
 DTR caches are based on Docker Registry, and use the same configuration
 file format.
-[Learn more about the configuration options](/registry/configuration.md).
+[Learn more about the configuration options](/registry/configuration/).
 
 The DTR cache extends the Docker Registry configuration file format by
 introducing a new middleware called `downstream` that has three configuration

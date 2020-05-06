@@ -53,7 +53,7 @@ On {{ linux-dist-long }}, Docker Engine - Enterprise supports storage drivers,
 higher, `overlay2` is the recommended storage driver. The following limitations
 apply:
 
-- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }:
+- [OverlayFS](/storage/storagedriver/overlayfs-driver/){: target="_blank" class="_" }:
   If `selinux` is enabled, the `overlay2` storage driver is supported on
   {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is
   supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693

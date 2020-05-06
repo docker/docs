@@ -428,5 +428,4 @@ You must delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md)
-
 - Continue with the [User Guide](../../engine/index.md).

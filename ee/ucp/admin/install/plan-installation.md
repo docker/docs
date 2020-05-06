@@ -273,7 +273,7 @@ address and FQDN of the load balancer's VIP by using
 one or more `--san` flags in the 
 [UCP install command](/reference/ucp/{{ site.ucp_version }}/cli/install/)
 or when you're asked for additional SANs in interactive mode.
-[Learn about high availability](../configure/set-up-high-availability.md).
+[Learn about high availability](../configure/join-nodes/index.md).
 
 ## Use an external Certificate Authority
 

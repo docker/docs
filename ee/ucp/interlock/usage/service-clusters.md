@@ -22,7 +22,7 @@ proxy servers for two independent Interlock service clusters.
 
 
 We'll also assume you've already enabled Interlock, per the 
-[instructions here](../deploy/), 
+[instructions here](../deploy/index.md), 
 with an HTTP port of 80 and an HTTPS port of 8443.
 
 ## Setting up Interlock service clusters

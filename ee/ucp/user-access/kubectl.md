@@ -18,7 +18,7 @@ To access the UCP cluster with kubectl, install the [UCP client bundle](cli.md).
 > Docker Desktop for Mac and Docker Desktop for Windows provide a standalone Kubernetes server that
 > runs on your development machine, with kubectl installed by default. This installation is
 > separate from the Kubernetes deployment on a UCP cluster.
-> Learn how to [deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md).
+> Learn how to [deploy to Kubernetes on Docker Desktop for Mac](../../../docker-for-mac/kubernetes.md).
 {: .important}
 
 ## Install the kubectl binary
@@ -119,5 +119,5 @@ See [initialize Helm and install Tiller](https://helm.sh/docs/using_helm/#initia
 
 ## Where to go next
 
-- [Deploy a workload to a Kubernetes cluster](../kubernetes.md)
-- [Deploy to Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes.md)
+- [Deploy a workload to a Kubernetes cluster](../kubernetes/index.md)
+- [Deploy to Kubernetes on Docker Desktop for Mac](../../../docker-for-mac/kubernetes.md)

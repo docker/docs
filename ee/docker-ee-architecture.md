@@ -75,7 +75,7 @@ directly. Instead, you interact with UCP. Since UCP exposes the standard
 Docker API and the full Kubernetes API transparently, you can use the tools
 you already know and love, like `kubectl`, the Docker CLI client, and Docker
 Compose.
-[Learn about UCP architecture](/ee/ucp/ucp-architecture.md).
+[Learn about UCP architecture](ucp/ucp-architecture.md).
 
 ![](/ee/ucp/images/ucp-architecture-2.svg){: .with-border}
 
