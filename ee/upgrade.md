@@ -10,8 +10,8 @@ To upgrade Docker Enterprise, you must individually upgrade each of the
 following components:
 
 1. Docker Engine - Enterprise.
-2. [Universal Control Plane (UCP)](/ee/ucp/admin/install/upgrade/).
-3. [Docker Trusted Registry (DTR)](/ee/dtr/admin/upgrade/).
+2. [Universal Control Plane (UCP)](ucp/admin/install/upgrade.md).
+3. [Docker Trusted Registry (DTR)](dtr/admin/upgrade.md).
 
 Because some components become temporarily unavailable during an upgrade, schedule upgrades to occur outside of
 peak business hours to minimize impact to your business.
@@ -86,7 +86,7 @@ Swarm mode and deploying your workloads as Docker services. That way you can
 drain the nodes of any workloads before starting the upgrade.
 
 If you have workloads running as containers as opposed to swarm services,
-make sure they are configured with a [restart policy](/engine/admin/start-containers-automatically/).
+make sure they are configured with a [restart policy](../engine/admin/start-containers-automatically/index.md).
 This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
@@ -216,12 +216,12 @@ $ docker node update --availability drain <node>
 To upgrade a node individually by operating system, please follow the instructions
 listed below:
 
-* [Windows Server](/ee/docker-ee/windows/docker-ee.md#update-docker-engine---enterprise)
-* [Ubuntu](/ee/docker-ee/ubuntu.md#upgrade-docker-engine---enterprise)
-* [RHEL](/ee/docker-ee/rhel.md#upgrade-from-the-repository)
-* [CentOS](/ee/docker-ee/centos.md#upgrade-from-the-repository)
-* [Oracle Linux](/ee//oracle.md#upgrade-from-the-repository)
-* [SLES](/ee/docker-ee/suse.md#upgrade-docker-engine---enterprise)
+* [Windows Server](docker-ee/windows/docker-ee.md#update-docker-engine---enterprise)
+* [Ubuntu](docker-ee/ubuntu.md#upgrade-docker-engine---enterprise)
+* [RHEL](docker-ee/rhel.md#upgrade-from-the-repository)
+* [CentOS](docker-ee/centos.md#upgrade-from-the-repository)
+* [Oracle Linux](docker-ee/oracle.md#upgrade-from-the-repository)
+* [SLES](docker-ee/suse.md#upgrade-docker-engine---enterprise)
 
 ### Post-Upgrade steps for Docker Engine - Enterprise
 
@@ -232,11 +232,11 @@ If any worker nodes were drained, they can be undrained again by setting `--avai
 ## Upgrade UCP
 
 Once you've upgraded the Docker Engine - Enterprise running on all the nodes,
-[upgrade UCP](/ee/ucp/admin/install/upgrade.md).
+[upgrade UCP](ucp/admin/install/upgrade.md).
 
 ## Upgrade DTR
 
-After you upgrade Docker Engine - Enterprise and UCP, [upgrade DTR](/ee/dtr/admin/upgrade.md).
+After you upgrade Docker Engine - Enterprise and UCP, [upgrade DTR](dtr/admin/upgrade.md).
 
 After the DTR upgrade is finished, the Docker Enterprise upgrade is complete.
 

@@ -73,4 +73,4 @@ After you uninstall UCP, restart the node to restore its IP tables.
 
 ## Where to go next
 
-- [Join nodes to your cluster](../configure/join-nodes.md)
+- [Join nodes to your cluster](../configure/join-nodes/index.md)

@@ -73,6 +73,6 @@ docker container rm dci
 ## Where to go next
 
 - [Get started with Docker Cluster on AWS](aws.md)
-- [Command line reference](/engine/reference/commandline/cluster/)
-- [Cluster file reference](/ee/cluster-file.md)
+- [Command line reference](../../engine/reference/commandline/cluster.md)
+- [Cluster file reference](cluster-file.md)
 

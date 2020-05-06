@@ -6,7 +6,7 @@ keywords: DTR, trusted registry, Docker apps
 
 >{% include enterprise_label_shortform.md %}
 
-With the introduction of [the experimental `app` plugin](/engine/reference/commandline/app/) to the Docker CLI, DTR has been enhanced to include application management. In DTR 2.7, you can push an app to your DTR repository and have an application be clearly distinguished from [individual and multi-architecture container images](/ee/dtr/user/manage-images/pull-and-push-images/#push-an-image/), as well as [plugins](/engine/reference/commandline/plugin_push/). When you push an application to DTR, you see two image tags:
+With the introduction of [the experimental `app` plugin](../../../engine/reference/commandline/app.md) to the Docker CLI, DTR has been enhanced to include application management. In DTR 2.7, you can push an app to your DTR repository and have an application be clearly distinguished from [individual and multi-architecture container images](manage-images/pull-and-push-images.md#push-an-image), as well as [plugins](../../../engine/reference/commandline/plugin_push.md). When you push an application to DTR, you see two image tags:
 
 | Image | Tag | Type | Under the hood |
 |-------|-----|------|----------------|
@@ -27,11 +27,11 @@ The following repository and image management events also apply to applications:
 
 - [Creation](/app/working-with-app/#initialize-and-deploy-a-new-docker-app-project-from-scratch/)
 - [DTR pushes](/app/working-with-app/#push-the-app-to-dtr) 
-- [Vulnerability scans](/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/)
-- [Vulnerability overrides](/ee/dtr/user/manage-images/override-a-vulnerability/) 
-- [Deletion](/ee/dtr/user/manage-images/delete-images/)
-- [Immutable tags](/ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/)
-- [Promotion policies](/ee/dtr/user/promotion-policies/)
+- [Vulnerability scans](manage-images/scan-images-for-vulnerabilities.md)
+- [Vulnerability overrides](manage-images/override-a-vulnerability.md) 
+- [Deletion](manage-images/delete-images.md)
+- [Immutable tags](manage-images/prevent-tags-from-being-overwritten.md)
+- [Promotion policies](promotion-policies/index.md)
 
 ### Limitations
 
@@ -59,5 +59,5 @@ Successfully pushed bundle to 35.165.223.150/admin/lab-words:0.1.0. Digest is sh
 
 ## Known Issues
 
-See [DTR 2.7 Release Notes - Known Issues](/ee/dtr/release-notes/#270) for known issues related to applications in DTR.
+See [DTR 2.7 Release Notes - Known Issues](../release-notes.md#270) for known issues related to applications in DTR.
 

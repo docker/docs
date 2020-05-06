@@ -114,7 +114,7 @@ local volume to persist your Docker images.
 #### DTR 2.5 (with experimental online garbage collection) and DTR 2.6.0-2.6.3
 
 >  When running DTR 2.5 (with experimental online garbage collection) and 2.6.0 to 2.6.3, there is an issue with
-> [reconfiguring and restoring DTR with `--nfs-storage-url`](/ee/dtr/release-notes#version-26) which leads to
+> [reconfiguring and restoring DTR with `--nfs-storage-url`](../../dtr/release-notes.md#version-26) which leads to
 > erased tags. Make sure to [back up your DTR metadata](/ee/dtr/admin/disaster-recovery/create-a-backup/#back-up-dtr-metadata)
 > before you proceed. To work around the `--nfs-storage-url`flag issue, manually create a storage volume on each DTR node.
 > To [restore DTR](/reference/dtr/2.6/cli/restore/) from an existing backup, use `docker/dtr restore`
@@ -128,7 +128,7 @@ local volume to persist your Docker images.
 If you're scanning images, you now need to download the vulnerability database.
 
 After you successfully restore DTR, you can join new replicas the same way you
-would after a fresh installation. [Learn more](/ee/dtr/admin/configure/set-up-vulnerability-scans.md).
+would after a fresh installation. [Learn more](../../dtr/admin/configure/set-up-vulnerability-scans.md).
 
 ## Where to go next
 

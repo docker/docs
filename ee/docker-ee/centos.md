@@ -29,7 +29,7 @@ Shared between centOS.md, rhel.md, oracle.md
 --->
 
 For Docker Community Edition on {{ linux-dist-cap }}, see
-[Install Docker Engine on CentOS](/engine/install/centos.md).
+[Install Docker Engine on CentOS](../../engine/install/centos.md).
 
 ## Prerequisites
 
@@ -205,7 +205,7 @@ Shared between centOS.md, oracle.md
 
 3.  Start Docker:
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
@@ -220,7 +220,7 @@ Shared between centOS.md, oracle.md
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](../../engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -267,7 +267,7 @@ Not shared
 
 3.  Start Docker:
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
@@ -282,7 +282,7 @@ Not shared
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](../../engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -333,6 +333,6 @@ Shared between centOS.md, rhel.md, oracle.md
 ## Next steps
 
 
-- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](../ucp/index.md){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](../dtr/index.md){: target="_blank" class="_" }

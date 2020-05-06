@@ -50,4 +50,4 @@ Use the following procedure on each manager node to restore data to a new swarm.
 
 ### Where to go next
 
-- [Restore UCP](restore-ucp)
+- [Restore UCP](restore-ucp.md)

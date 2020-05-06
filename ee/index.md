@@ -17,7 +17,7 @@ resources. Self-healing components ensure that Docker Enterprise clusters remain
 
 Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
 communication within the cluster is secured with TLS.
-[Docker Content Trust](/engine/security/trust/content_trust/) is enforced
+[Docker Content Trust](../engine/security/trust/content_trust.md) is enforced
 for images on all of the orchestrators.
 
 Docker Enterprise includes Docker Universal Control Plane (UCP), the
@@ -111,7 +111,7 @@ Docker Enterprise has its own built-in authentication mechanism with role-based 
 control (RBAC), so that you can control who can access and make changes to your
 cluster and applications. Also, Docker Enterprise authentication integrates with LDAP
 services and supports SAML SCIM to proactively synchronize with authentication providers.
-[Learn about role-based access control](./ucp/authorization/). You can also opt to enable [PKI authentication](./enable-client-certificate-authentication/) to use client certificates, rather than username and password.
+[Learn about role-based access control](ucp/authorization/index.md). You can also opt to enable [PKI authentication](enable-client-certificate-authentication.md) to use client certificates, rather than username and password.
 
 ![](images/docker-ee-overview-2.png){: .with-border}
 
@@ -127,7 +127,7 @@ Windows applications typically require Active Directory authentication in order 
 ## Docker Enterprise and the CLI
 
 Docker Enterprise exposes the standard Docker API, so you can continue using the tools
-that you already know, [including the Docker CLI client](./ucp/user-access/cli/),
+that you already know, [including the Docker CLI client](ucp/user-access/cli.md),
 to deploy and manage your applications.
 
 For example, you can use the `docker info` command to check the

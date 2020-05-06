@@ -20,9 +20,9 @@ You can use DTR as part of your continuous integration, and continuous
 delivery processes to build, ship, and run your applications.
 
 DTR has a web user interface that allows authorized users in your
-organization to browse Docker images and [review repository events](/ee/dtr/user/audit-repository-events/). It even allows you to see what Dockerfile
+organization to browse Docker images and [review repository events](user/audit-repository-events.md). It even allows you to see what Dockerfile
 lines were used to produce the image and, if security scanning is enabled, to
-see a list of all of the software installed in your images. Additionally, you can now [review and audit jobs on the web interface](/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/).
+see a list of all of the software installed in your images. Additionally, you can now [review and audit jobs on the web interface](admin/manage-jobs/audit-jobs-via-ui.md).
 
 ## Availability
 
@@ -55,9 +55,9 @@ vulnerability database that is kept up to date through
 
 ## Image signing
 
-DTR ships with [Notary](/notary/getting_started.md)
+DTR ships with [Notary](../../notary/getting_started.md)
 built in so that you can use
-[Docker Content Trust](/engine/security/trust/content_trust.md) to sign
+[Docker Content Trust](../../engine/security/trust/content_trust.md) to sign
 and verify images. For more information about managing Notary data in DTR see
 the [DTR-specific notary documentation](user/manage-images/sign-images/index.md).
 

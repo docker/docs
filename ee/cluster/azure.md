@@ -8,7 +8,7 @@ title: Get started with Docker Cluster on Azure
 
 ## Prerequisites
 
-- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](../supported-platforms.md) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret
@@ -402,5 +402,5 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
 ## Where to go next
 
-- [Explore the full list of Cluster commands](./reference/index.md)
-- [Cluster configuration file reference](/ee/cluster-file/index.md)
+- [Explore the full list of Cluster commands](reference/envvars.md)
+- [Cluster configuration file reference](cluster-file.md)

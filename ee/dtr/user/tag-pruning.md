@@ -15,11 +15,11 @@ Tag pruning is the process of cleaning up unnecessary or unwanted repository tag
 
 > Tag Pruning
 >
-> When run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](/../admin/configure/garbage-collection.md).
+> When run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../admin/configure/garbage-collection.md).
 
 > Known Issue
 >
-> While the tag limit field is disabled when you turn on immutability for a new repository, this is currently [not the case with **Repository Settings**](/ee/dtr/release-notes/#known-issues). As a workaround, turn off immutability when setting a tag limit via **Repository Settings > Pruning**.
+> While the tag limit field is disabled when you turn on immutability for a new repository, this is currently [not the case with **Repository Settings**](../release-notes.md#known-issues). As a workaround, turn off immutability when setting a tag limit via **Repository Settings > Pruning**.
 
 In the following section, we will cover how to specify a tag pruning policy and set a tag limit on repositories that you manage. It will not include modifying or deleting a tag pruning policy.
 

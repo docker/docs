@@ -66,17 +66,17 @@ On {{ linux-dist-long }}, Docker Engine - Enterprise supports storage drivers,
 higher, `overlay2` is the recommended storage driver. The following limitations
 apply:
 
-- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }:
+- [OverlayFS](../../storage/storagedriver/overlayfs-driver.md){: target="_blank" class="_" }:
   If `selinux` is enabled, the `overlay2` storage driver is supported on
   {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is
   supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693
   and higher.
 
-- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }:
+- [Device Mapper](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }:
   On production systems using `devicemapper`, you must use `direct-lvm` mode,
   which requires one or more dedicated block devices. Fast storage such as
   solid-state media (SSD) is recommended. Do not start Docker until properly
-  configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+  configured per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
 ### FIPS 140-2 cryptographic module support
 
@@ -381,7 +381,7 @@ Shared between centOS.md, rhel.md, oracle.md
 
 3.  Start Docker:
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
@@ -396,7 +396,7 @@ Shared between centOS.md, rhel.md, oracle.md
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](../../engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -464,7 +464,7 @@ Shared between centOS.md, rhel.md, oracle.md
 
 4.  Start Docker:
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
@@ -479,7 +479,7 @@ Shared between centOS.md, rhel.md, oracle.md
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](../../engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -507,7 +507,7 @@ Shared between centOS.md, rhel.md, oracle.md
 
 3.  Start Docker:
 
-    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+    > If using `devicemapper`, ensure it is properly configured before starting Docker, per the [storage guide](../../storage/storagedriver/device-mapper-driver.md){: target="_blank" class="_" }.
 
     ```bash
     $ sudo systemctl start docker
@@ -522,7 +522,7 @@ Shared between centOS.md, rhel.md, oracle.md
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](../../engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -572,6 +572,6 @@ Shared between centOS.md, rhel.md, oracle.md
 ## Next steps
 
 
-- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md){: target="_blank" class="_" }
 
-- Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }
+- Continue with user guides on [Universal Control Plane (UCP)](../ucp/index.md){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](../dtr/index.md){: target="_blank" class="_" }

@@ -29,7 +29,7 @@ All metadata and authZ information for a given DTR cluster is backed up.
 | Vulnerability database             | no        | Can be redownloaded after a restore                           |
 
 This data is persisted on the host running DTR, using named volumes.
-[Learn more about DTR named volumes](/ee/dtr/architecture/).
+[Learn more about DTR named volumes](../../dtr/architecture.md).
 
 ## Perform DTR backup
 
@@ -54,7 +54,7 @@ Since you need your DTR replica ID during a backup, the following covers a few w
 
 ##### UCP web interface
 
-You can find the list of replicas by navigating to **Shared Resources > Stacks** or **Swarm > Volumes** (when using [swarm mode](/engine/swarm/)) on the UCP web interface. 
+You can find the list of replicas by navigating to **Shared Resources > Stacks** or **Swarm > Volumes** (when using [swarm mode](../../../engine/swarm/index.md)) on the UCP web interface. 
 
 ##### UCP client bundle
 
@@ -88,7 +88,7 @@ the way you back up images depends on the storage backend you're using.
 
 If you've configured DTR to store images on the local file system or NFS mount,
 you can backup the images by using SSH to log in to a DTR node,
-and creating a tar archive of the [dtr-registry volume](/ee/dtr/architecture/):
+and creating a tar archive of the [dtr-registry volume](../../dtr/architecture.md):
 
 {% raw %}
 ```none
@@ -186,5 +186,5 @@ cluster. Then restore DTR on that new cluster to confirm that everything is
 working as expected.
 
 ### Where to go next
-- [Restoring Docker Enterprise](/ee/admin/restore/)
+- [Restoring Docker Enterprise](../restore/index.md)
 

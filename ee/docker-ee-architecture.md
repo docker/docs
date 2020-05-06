@@ -96,9 +96,9 @@ worker node.
 
 All DTR replicas run the same set of services, and changes to their configuration
 are automatically propagated to other replicas.
-[Learn about DTR architecture](/ee/dtr/architecture.md).
+[Learn about DTR architecture](dtr/architecture.md).
 
 ## Where to go next
 
-- [UCP architecture](/ee/ucp/ucp-architecture.md)
-- [DTR architecture](/ee/dtr/architecture.md)
+- [UCP architecture](ucp/ucp-architecture.md)
+- [DTR architecture](dtr/architecture.md)

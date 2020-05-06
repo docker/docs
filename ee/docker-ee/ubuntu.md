@@ -16,7 +16,7 @@ toc_max: 4
 > **Important** 
 > 
 > Docker Engine - Community users should go to
-[Get Docker Engine - Community for Ubuntu](/engine/install/ubuntu.md)
+[Get Docker Engine - Community for Ubuntu](../../engine/install/ubuntu.md)
 **instead of this topic**. 
 {: .important}
 
@@ -64,7 +64,7 @@ The `apt-get` command may report that none of the packages are installed.
 #### Extra steps for aufs
 
 For Ubuntu 16.04 and higher, the Linux kernel includes support for overlay2,
-and Docker Engine - Enterprise uses it as the default storage driver. If you need to use [aufs](/engine/userguide/storagedriver/aufs-driver.md) instead, be aware that it must be manually configured.
+and Docker Engine - Enterprise uses it as the default storage driver. If you need to use [aufs](../../storage/storagedriver/aufs-driver.md) instead, be aware that it must be manually configured.
 
 ## Install Docker Engine - Enterprise
 
@@ -203,7 +203,7 @@ Naturally, to install Docker Engine - Enterprise on a new host machine using the
 
 Docker Engine - Enterprise is installed and running. The `docker` group is
 created but no users are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/engine/install/linux-postinstall.md)
+commands. Continue to [Linux postinstall](../../engine/install/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -265,7 +265,7 @@ Engine - Enterprise.
 
 Docker Engine - Enterprise is installed and running. The `docker` group is
 created but no users are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md)
+commands. Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -295,5 +295,5 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md).
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md).
+- Continue with the [User Guide](../../engine/index.md).

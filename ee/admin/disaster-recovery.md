@@ -365,7 +365,7 @@ $ docker container run \
 
 If the emergency repair procedure is successful, your DTR cluster now has a
 single replica. You should now
-[join more replicas for high availability](/ee/dtr/admin/configure/set-up-high-availability/).
+[join more replicas for high availability](../dtr/admin/configure/set-up-high-availability.md).
 
 ![Healthy cluster](/ee/dtr/images/repair-cluster-2.svg)
 
@@ -384,9 +384,9 @@ In a disaster scenario like this, you'll have to restore DTR from an existing
 backup. Restoring from a backup should be only used as a last resort, since
 doing an emergency repair might prevent some data loss.
 
-[Create a backup](/ee/admin/backup/).
+[Create a backup](backup/index.md).
 
 ## Where to go next
 
-- [Create a backup](/ee/admin/backup/)
-- [Set up high availability](/ee/ucp/admin/configure/join-nodes/)
+- [Create a backup](backup/index.md)
+- [Set up high availability](../ucp/admin/configure/join-nodes/index.md)

@@ -6,7 +6,7 @@ keywords: PKI, Client Certificates, Passwordless Authentication, Docker Enterpri
 
 ## Overview
 
-In many organizations, authenticating to systems with a username and password combination is either restricted or outright prohibited. With Docker Enterprise 3.0, UCP's [CLI client certificate-based authentication](/ee/ucp/user-access/cli/) has been extended to the web user interface (web UI). DTR has also been enhanced to work with UCP's internally generated client bundles for client certificate-based authentication. If you have an external public key infrastructure (PKI) system, you can manage user authentication using a pool of X.509 client certificates in lieu of usernames and passwords.
+In many organizations, authenticating to systems with a username and password combination is either restricted or outright prohibited. With Docker Enterprise 3.0, UCP's [CLI client certificate-based authentication](ucp/user-access/cli.md) has been extended to the web user interface (web UI). DTR has also been enhanced to work with UCP's internally generated client bundles for client certificate-based authentication. If you have an external public key infrastructure (PKI) system, you can manage user authentication using a pool of X.509 client certificates in lieu of usernames and passwords.
 
 ## Benefits
 
@@ -38,7 +38,7 @@ To bypass the browser login pages and hide the logout buttons for both UCP and D
 
 1. Add your organization's root CA certificates [via the UCP web UI](/ee/ucp/admin/configure/use-your-own-tls-certificates/#configure-ucp-to-use-your-own-tls-certificates-and-keys) or [via the CLI installation command](https://success.docker.com/article/how-do-i-provide-an-externally-generated-security-certificate-during-the-ucp-command-line-installation).
 
-    For testing purposes, you can download an [admin client bundle](/ee/ucp/user-access/cli/#download-client-certificates) from UCP and [convert the client certificates to `pkcs12`](#convert-your-client-certificates-to-a-PKCS12-file)
+    For testing purposes, you can download an [admin client bundle](ucp/user-access/cli.md#download-client-certificates) from UCP and [convert the client certificates to `pkcs12`](#convert-your-client-certificates-to-a-PKCS12-file)
 
 1. Download UCP's `ca.pem` from `https://<ucp-url>/ca` either in the browser or via `curl`. When using `curl`, redirect the response output to a file.
      `curl -sk https://<ucp-url>/ca -o ca.pem`
@@ -51,7 +51,7 @@ To bypass the browser login pages and hide the logout buttons for both UCP and D
       --client-cert-auth-ca "$(cat ca.pem)"
      ```
 
-     See [DTR installation](/reference/dtr/2.7/cli/install/) and [DTR reconfiguration](/reference/dtr/2.7/cli/reconfigure/) CLI reference pages for an explanation of the different options.
+     See [DTR installation](../reference/dtr/2.7/cli/install.md) and [DTR reconfiguration](../reference/dtr/2.7/cli/reconfigure.md) CLI reference pages for an explanation of the different options.
 
 1. Import the PKCS12 file into [the browser](#pkcs12-file-browser-import) or [Keychain Access](https://www.digicert.com/ssl-support/p12-import-export-mac-mavericks-server.htm#import_certificate) if you're running macOS.
 
@@ -95,7 +95,7 @@ For pulling and pushing images to your DTR (with client certificate authenticati
     cp ca.crt /etc/ca-certs
     ```
 
-1. Restart the Docker daemon for the changes to take effect. See [Configure your host](/ee/dtr/user/access-dtr/#configure-your-host) for different ways to restart the Docker daemon.
+1. Restart the Docker daemon for the changes to take effect. See [Configure your host](dtr/user/access-dtr/index.md#configure-your-host) for different ways to restart the Docker daemon.
 
 ### Add your DTR server CA certificate to system level
 
@@ -105,10 +105,10 @@ You have the option to add your DTR server CA certificate to your system's trust
 
 - [Docker Engine](https://docs.docker.com/engine/security/certificates/)
 - Docker Desktop
-  - [Enterprise for Mac](/desktop/enterprise/user/mac-user/#add-tls-certificates)
-  - [Enterprise for Windows](/desktop/enterprise/user/windows-user/#adding-tls-certificates)
-  - [Community for Mac](/docker-for-mac/#add-tls-certificates)
-  - [Community for Windows](/docker-for-windows/faqs/#certificates)
+  - [Enterprise for Mac](../desktop/enterprise/user/mac-user.md#add-tls-certificates)
+  - [Enterprise for Windows](../desktop/enterprise/user/windows-user.md#adding-tls-certificates)
+  - [Community for Mac](../docker-for-mac/index.md#add-tls-certificates)
+  - [Community for Windows](../docker-for-windows/faqs.md#certificates)
 
 Note: The above configuration means that Docker Engine will use the same client certificate for all pulls and pushes to DTR for ***all users*** of the same machine.
 
@@ -181,7 +181,7 @@ For Mac-specific quirks, see [curl on certain macOS versions](#curl-on-certain-m
 
 ## Notary CLI operations with DTR
 
-For establishing mutual trust between the Notary client and your trusted registry (DTR) using the Notary CLI, place your TLS client certificates in `<home_directory>/.docker/tls/<dtr-external-url>/` as `client.cert` and `client.key`. Note that the filenames must match. Pass the FQDN or publicly accessible IP address of your registry along with the TLS client certificate options to the Notary client. To get started, see [Use the Notary client for advanced users](/notary/advanced_usage/).
+For establishing mutual trust between the Notary client and your trusted registry (DTR) using the Notary CLI, place your TLS client certificates in `<home_directory>/.docker/tls/<dtr-external-url>/` as `client.cert` and `client.key`. Note that the filenames must match. Pass the FQDN or publicly accessible IP address of your registry along with the TLS client certificate options to the Notary client. To get started, see [Use the Notary client for advanced users](../notary/advanced_usage.md).
 
 > ### Self-signed DTR server certificate
 >

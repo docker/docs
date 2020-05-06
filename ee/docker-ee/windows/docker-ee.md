@@ -21,7 +21,7 @@ download and install Docker Engine - Enterprise.
 
 > Release notes
 >
-> [Release notes for all versions](/engine/release-notes/)
+> [Release notes for all versions](../../release-notes.md)
 
 ## System requirements
 
@@ -315,18 +315,18 @@ posts](https://www.docker.com/microsoft/) on the Docker website.
 
 ## Where to go next
 
-* [Getting started](/docker-for-windows/index.md) provides an overview of
+* [Getting started](../../../docker-for-windows/index.md) provides an overview of
 Docker Desktop for Windows, basic Docker command examples, how to get help or
 give feedback, and links to all topics in the Docker Desktop for Windows guide.
 
-* [FAQs](/docker-for-windows/faqs.md) provides answers to frequently asked
+* [FAQs](../../../docker-for-windows/faqs.md) provides answers to frequently asked
 questions.
 
-* [Release Notes](/docker-for-windows/release-notes.md) lists component
+* [Release Notes](../../../docker-for-windows/release-notes.md) lists component
 updates, new features, and improvements associated with Stable and Edge
 releases.
 
-* [Learn Docker](/learn.md) provides general Docker tutorials.
+* [Learn Docker](../../../engine/tutorials/index.md) provides general Docker tutorials.
 
 * [Windows Containers on Windows Server](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/quick-start-windows-server)
 is the official Microsoft documentation.

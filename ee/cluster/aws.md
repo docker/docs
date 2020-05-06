@@ -8,7 +8,7 @@ title: Get started with Docker Cluster on AWS
 
 ## Prerequisites
 
-- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](../supported-platforms.md) on Linux.
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 
 ## Create a cluster
@@ -389,6 +389,6 @@ All provisioned resources are destroyed and the context for the cluster is remov
 
 ## Where to go next
 
-- View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
-- [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
-- [Cluster configuration file reference](/ee/cluster-file.md)
+- View the quick start guide for [Azure](azure.md) or [vSphere](../../machine/drivers/vsphere.md)
+- [Explore the full list of Cluster commands](../../engine/reference/commandline/cluster.md)
+- [Cluster configuration file reference](cluster-file.md)

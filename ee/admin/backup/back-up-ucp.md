@@ -32,7 +32,7 @@ Backup contents are stored in a `.tar` file. Backups contain UCP configuration m
 | Certificates and keys | Certificates and public and private keys used for authentication and mutual TLS communication         | yes
 | Metrics data          | Monitoring data gathered by UCP                                                    | yes
 | Organizations         | Users, teams, and organizations                                                        | yes
-| Volumes               | All [UCP named volumes](/ee/ucp/ucp-architecture/#volumes-used-by-ucp/), including all UCP component certificates and data. [Learn more about UCP named volumes](/ee/ucp/ucp-architecture/).              | yes
+| Volumes               | All [UCP named volumes](../../ucp/ucp-architecture.md#volumes-used-by-ucp), including all UCP component certificates and data. [Learn more about UCP named volumes](../../ucp/ucp-architecture.md).              | yes
 | Overlay Networks      | Swarm-mode overlay network definitions, including port information                                             | no
 | Configs, Secrets      | Create a Swarm backup to backup these data                                         | no
 | Services              | Stacks and services are stored in Swarm-mode or SCM/Config Management              | no  
@@ -259,5 +259,5 @@ The following table describes the backup schema returned by the `GET` and `LIST`
 
 ### Where to go next
 
-- [Back up the Docker Trusted Registry](./back-up-dtr/)
+- [Back up the Docker Trusted Registry](back-up-dtr.md)
  

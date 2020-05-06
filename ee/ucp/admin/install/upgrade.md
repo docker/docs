@@ -12,7 +12,7 @@ page.ucp_version }}.
 ## Plan the upgrade
 
 Before upgrading to a new version of UCP, check the
-[release notes](/ee/ucp/release-notes/).
+[release notes](../../release-notes.md).
 There you'll find information about new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -333,4 +333,4 @@ to UCP 2.2:
 
 ## Where to go next
 
-- [Upgrade DTR](/ee/dtr/admin/upgrade/)
+- [Upgrade DTR](../../../dtr/admin/upgrade.md)
