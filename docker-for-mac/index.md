@@ -117,6 +117,8 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
 
+  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
+
 ### Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
