@@ -30,6 +30,7 @@ For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](/wsl-te
 Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
   - Install Windows 10 Insider Preview build 19041 or higher.
+  - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/windows/wsl/wsl2-install).
   - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10 Home:
 
@@ -38,10 +39,9 @@ WSL 2 on Windows 10 Home:
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
-  - Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/windows/wsl/wsl2-install).
   - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
-> **Note** 
+> **Note**
 >
 > Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
