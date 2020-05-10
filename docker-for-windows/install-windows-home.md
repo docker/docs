@@ -82,7 +82,7 @@ When the whale icon in the status bar stays steady, Docker Desktop is up-and-run
 
 ![whale on taskbar](images/whale-icon-systray.png)
 
-When the initialiation is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+When the initialization is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
 ![Docker Quick Start tutorial](images/docker-tutorial-win.png){:width="450px"}
 
