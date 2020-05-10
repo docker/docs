@@ -30,8 +30,8 @@ For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](/wsl-te
 Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
   - Install Windows 10 Insider Preview build 19041 or higher.
-  - The following hardware prerequisites are required to successfully run Client
-Hyper-V on Windows 10:
+  - The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10 Home:
 
      - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
