@@ -38,7 +38,7 @@ WSL 2 on Windows 10 Home:
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
-  - Enable WSL 2 feature on Windows. For detailed instructions, refer to the[Microsoft documentation](https://docs.microsoft.com/windows/wsl/wsl2-install).
+  - Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/windows/wsl/wsl2-install).
   - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
 > **Note** 
