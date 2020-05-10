@@ -15,7 +15,7 @@ multiple back-end applications.
 
 > Note
 > 
-> This guide assumes the [Deploy Sample Application](./ingress/)
+> This guide assumes the [Deploy Sample Application](ingress.md)
 > tutorial was followed, with the artifacts still running on the cluster. If
 > they are not, please go back and follow this guide.
 
@@ -107,4 +107,4 @@ In this case, 100% of the traffic with the `stage=dev` header is sent to the v3 
 
 ## Where to go next
 
-- [Deploy the Sample Application with Sticky Sessions](./sticky/)
+- [Deploy the Sample Application with Sticky Sessions](sticky.md)

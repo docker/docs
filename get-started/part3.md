@@ -66,4 +66,4 @@ Another thing to keep in mind: at the moment, you've only pushed your image to D
 
 ## Where to go next
 
-We recommend that you take a look at the topics in [Develop with Docker](/develop/index.md) to learn how to develop your own applications using Docker.
+We recommend that you take a look at the topics in [Develop with Docker](../develop/index.md) to learn how to develop your own applications using Docker.

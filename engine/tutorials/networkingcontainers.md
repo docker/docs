@@ -211,4 +211,4 @@ The `ping` shows it is contacting a different IP address, the address on the `my
 
 ## Next steps
 
-Now that you know how to network containers, see [how to manage data in containers](dockervolumes.md).
+Now that you know how to network containers, see [how to manage data in containers](../../storage/volumes.md).

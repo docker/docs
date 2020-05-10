@@ -83,4 +83,4 @@ Managers: 1
 ## Where to go next
 
 - [Install UCP](admin/install/index.md)
-- [Docker Enterprise architecture](/ee/docker-ee-architecture.md)
+- [Docker Enterprise architecture](../docker-ee-architecture.md)

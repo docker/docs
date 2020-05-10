@@ -23,4 +23,4 @@ following table to ensure that you're pulling the right images for each node.
 
 ## Where to go next
 
-- [Join nodes to your cluster](../configure/join-nodes.md)
+- [Join nodes to your cluster](../configure/join-nodes/index.md)

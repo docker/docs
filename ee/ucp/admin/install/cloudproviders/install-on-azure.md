@@ -27,7 +27,7 @@ There are two options for provisioning IPs for the Kubernetes cluster on Azure:
 `calico-node` daemonset and provisions 128 IP addresses for each node by default. For information on customizing this value, see [Adjust the IP count value](#adjust-the-ip-count-value).
 - **Manual provision of additional IP address for each Azure VM.** This
   could be done through the Azure Portal, the Azure CLI `$ az network nic ip-config create`, or an ARM template. You can find an example of an ARM template
-  [here](#manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set).
+  [here](#manually-provision-ip-address-pools-as-part-of-an-azure-vm-scale-set).
 
 ## Azure Prerequisites
 
@@ -39,7 +39,7 @@ You must meet the following infrastructure prerequisites to successfully deploy 
 - The Azure Virtual Network and Subnet must be appropriately sized for your
   environment, as addresses from this pool will be consumed by Kubernetes Pods.
   For more information, see [Considerations for IPAM
-  Configuration](#considerations-for-ipam-configuration).
+  Configuration](#guidelines-for-ipam-configuration).
 - All UCP worker and manager nodes need to be attached to the same Azure
   Subnet.
 - Internal IP addresses for all nodes should be [set to

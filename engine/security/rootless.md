@@ -77,7 +77,7 @@ testuser::231072:65536
 
 #### openSUSE
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
-  This is might be required on other distros as well depending on the configuration.
+  This might be required on other distros as well depending on the configuration.
 
 - Known to work on openSUSE 15.
 
@@ -126,7 +126,7 @@ testuser::231072:65536
 
 ## Install
 
-The installation script is available at https://get.docker.com/rootless .
+The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" }.
 
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
@@ -155,7 +155,7 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 
 To install the binaries manually without using the installer, extract
 `docker-rootless-extras-<version>.tar.gz` along with `docker-<version>.tar.gz`:
-https://download.docker.com/linux/static/stable/x86_64/
+from [https://download.docker.com/linux/static/stable/x86_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
 
 ## Usage
 
@@ -167,9 +167,10 @@ Use `systemctl --user` to manage the lifecycle of the daemon:
 $ systemctl --user start docker
 ```
 
-To launch the daemon on system startup, enable systemd lingering:
+To launch the daemon on system startup, enable the systemd service and lingering:
 
 ```console
+$ systemctl --user enable docker
 $ sudo loginctl enable-linger $(whoami)
 ```
 
@@ -183,7 +184,7 @@ $ dockerd-rootless.sh --experimental --storage-driver vfs
 As Rootless mode is experimental, you need to run
 `dockerd-rootless.sh` with `--experimental`.
 You also need `--storage-driver vfs` unless using Ubuntu or Debian 10 kernel.
-You don't need to care these flags if you manage the daemon using systemd, as
+You don't need to care about these flags if you manage the daemon using systemd, as
 these flags are automatically added to the systemd unit file.
 
 Remarks about directory paths:

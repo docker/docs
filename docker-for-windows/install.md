@@ -34,9 +34,9 @@ Hyper-V on Windows 10:
 
 ### What's included in the installer
 
-The Docker Desktop installation includes [Docker Engine](/engine/index.md),
-Docker CLI client, [Docker Compose](/compose/index.md),
-[Notary](/notary/getting_started.md),
+The Docker Desktop installation includes [Docker Engine](../engine/index.md),
+Docker CLI client, [Docker Compose](../compose/index.md),
+[Notary](../notary/getting_started.md),
 [Kubernetes](https://github.com/kubernetes/kubernetes/),
 and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
@@ -54,7 +54,7 @@ more information, see [Running Docker Desktop in nested virtualization scenarios
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers)
+* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers)
   describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
@@ -88,7 +88,7 @@ When the whale icon in the status bar stays steady, Docker Desktop is up-and-run
 ![whale on taskbar](images/whale-icon-systray.png)
 
 If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker Settings](/docker-for-windows/index.md#docker-settings-dialog).
+taskbar to show it. To learn more, see [Docker Settings](index.md#docker-settings-dialog).
 
 When the initialization is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 

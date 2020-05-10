@@ -194,4 +194,4 @@ to [build command documentation](/engine/reference/commandline/build/) and
 
 ## Where to go next
 
-- [Deploy a service](../swarm.md)
+- [Deploy a service](../swarm/index.md)

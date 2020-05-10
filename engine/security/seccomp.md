@@ -20,7 +20,7 @@ CONFIG_SECCOMP=y
 
 > **Note**: `seccomp` profiles require seccomp 2.2.1 which is not available on
 > Ubuntu 14.04, Debian Wheezy, or Debian Jessie. To use `seccomp` on these
-> distributions, you must download the [latest static Linux binaries](/engine/installation/linux/docker-ce/binaries.md)
+> distributions, you must download the [latest static Linux binaries](../install/binaries.md)
 > (rather than packages).
 
 ## Pass a profile for a container

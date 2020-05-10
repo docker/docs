@@ -108,4 +108,4 @@ $ kubectl get <object> <workload> -o json | jq -r '.spec.template.spec.toleratio
 
 - [Deploy an application package](/ee/ucp/deploy-application-package/)
 - [Deploy a Swarm workload](/ee/ucp/swarm/)
-- [Deploy a Kubernetes workload](/ee/ucp/kubernetes//)
+- [Deploy a Kubernetes workload](/ee/ucp/kubernetes/)

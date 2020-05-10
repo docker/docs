@@ -63,7 +63,7 @@ By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and
 `/tmp` directly. To add or remove directory trees that are exported to Docker,
 use the **File sharing** tab in Docker preferences ![whale
 menu](images/whale-x.png){: .inline} -> **Preferences** ->
-**File sharing**. (See [Preferences](/docker-for-mac/index.md#preferences-menu).)
+**File sharing**. (See [Preferences](index.md#file-sharing).)
 
 All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
@@ -117,7 +117,7 @@ The following are **unsupported file system events**:
 * Open
 * Access
 * Close events
-* Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
+* Unmount events (see [Mounts](#mounts))
 
 Some events may be delivered multiple times. These limitations do not apply to
 events between containers, only to those events originating in macOS.

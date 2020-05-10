@@ -31,7 +31,7 @@ the rules described in
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the
-[`docker-compose` command reference](/compose/reference/overview.md) for more information
+[`docker-compose` command reference](reference/overview.md) for more information
 about using `-f`.
 
 When you use multiple configuration files, you must make sure all paths in the
@@ -162,10 +162,10 @@ backup, include the `docker-compose.admin.yml` as well.
 > **Note**
 >
 > The `extends` keyword is supported in earlier Compose file formats up to Compose
-> file version 2.1 (see [extends in v1](/compose/compose-file/compose-file-v1.md#extends)
-> and [extends in v2](/compose/compose-file/compose-file-v2.md#extends)), but is
-> not supported in Compose version 3.x. See the [Version 3 summary](/compose/compose-file/compose-versioning.md#version-3)
-> of keys added and removed, along with information on [how to upgrade](/compose/compose-file/compose-versioning.md#upgrading).
+> file version 2.1 (see [extends in v1](compose-file/compose-file-v1.md#extends)
+> and [extends in v2](compose-file/compose-file-v2.md#extends)), but is
+> not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
+> of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
 > discussion thread on possibility of adding support for `extends` in some form in
 > future versions.
@@ -296,7 +296,7 @@ replaces the old value.
 >  `build` and `image` in Compose file version 1
 >
 > In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](/compose/compose-file/compose-file-v1.md), using one
+> [version 1 of the Compose file format](compose-file/compose-file-v1.md), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.
 >
@@ -375,5 +375,5 @@ container:
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

@@ -42,7 +42,9 @@ examples: |-
   /bar
   ```
 
-  > **Note**: Since only `source` is settable in `mymount`,
+  > **Note**
+  >
+  > Since only `source` is settable in `mymount`,
   > `docker plugins set mymount=/bar myplugin` would work too.
 
   ### Change a device path
@@ -62,7 +64,8 @@ examples: |-
   /dev/bar
   ```
 
-  > **Note**: Since only `path` is settable in `mydevice`,
+  > **Note**
+  > Since only `path` is settable in `mydevice`,
   > `docker plugins set mydevice=/dev/bar myplugin` would work too.
 
   ### Change the source of the arguments

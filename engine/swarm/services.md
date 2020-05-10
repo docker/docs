@@ -205,8 +205,8 @@ define a configuration at service creation, you can also update an existing
 service's configuration in a similar way.
 
 See the command-line references for
-[`docker service create`](/engine/reference/commandline/service_create.md) and
-[`docker service update`](/engine/reference/commandline/service_update.md), or run
+[`docker service create`](../reference/commandline/service_create.md) and
+[`docker service update`](../reference/commandline/service_update.md), or run
 one of those commands with the `--help` flag.
 
 ### Configure the runtime environment
@@ -296,7 +296,7 @@ updated. This feature is particularly important if you do use often-changing tag
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
 
-> **Note**: If [content trust](/engine/security/trust/content_trust.md) is
+> **Note**: If [content trust](../security/trust/content_trust.md) is
 > enabled, the client actually resolves the image's tag to a digest before
 > contacting the swarm manager, to verify that the image is signed.
 > Thus, if you use content trust, the swarm manager receives the request
@@ -422,7 +422,7 @@ The external host does not need to know the IP addresses or internally-used
 ports of the service tasks to interact with the service. When a user or process
 connects to a service, any worker node running a service task may respond. For
 more details about swarm service networking, see
-[Manage swarm service networks](/engine/swarm/networking.md).
+[Manage swarm service networks](networking.md).
 
 ##### Example: Run a three-task Nginx service on 10-node swarm
 
@@ -544,7 +544,7 @@ $ docker service update --network-rm my-network my-web
 
 For more information on overlay networking and service discovery, refer to
 [Attach services to an overlay network](networking.md) and
-[Docker swarm mode overlay network security model](/network/overlay.md).
+[Docker swarm mode overlay network security model](../../network/overlay.md).
 
 ### Grant a service access to secrets
 
@@ -653,7 +653,7 @@ Service constraints let you set criteria for a node to meet before the scheduler
 deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
 information on constraints, refer to the `docker service create`
-[CLI reference](/engine/reference/commandline/service_create.md).
+[CLI reference](../reference/commandline/service_create.md).
 
 #### Reserve memory or CPUs for a service
 
@@ -670,7 +670,7 @@ you may experience an Out Of Memory Exception (OOME) and a container, or the
 Docker daemon, might be killed by the kernel OOM killer. To prevent this from
 happening, ensure that your application runs on hosts with adequate memory and
 see
-[Understand the risks of running out of memory](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+[Understand the risks of running out of memory](../../config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
 Swarm services allow you to use resource constraints, placement preferences, and
 labels to ensure that your service is deployed to the appropriate swarm nodes.
@@ -716,7 +716,7 @@ and CPU/memory constraints. Be careful not to use settings that are not
 possible to fulfill.
 
 For more information on constraints, refer to the `docker service create`
-[CLI reference](/engine/reference/commandline/service_create.md).
+[CLI reference](../reference/commandline/service_create.md).
 
 #### Placement preferences
 
@@ -937,7 +937,7 @@ $ docker service create \
 ```
 
 For more information on how to create data volumes and the use of volume
-drivers, see [Use volumes](/storage/volumes.md).
+drivers, see [Use volumes](../../storage/volumes.md).
 
 
 #### Bind mounts
@@ -1040,5 +1040,5 @@ $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4
 ## Learn More
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](/engine/reference/commandline/docker.md)
+* [Docker Engine command line reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

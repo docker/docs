@@ -272,7 +272,7 @@ the containers at once. This extra credit
 
 2. Try to create Compose file on your own by reviewing the tasks in this tutorial.
 
-    [The version 2 Compose file format](/compose/compose-file.md)
+    [The version 2 Compose file format](../../compose/compose-file/compose-file-v2.md)
     is the best to use. Translate each `docker run` command into a service
     in the `docker-compose.yml` file. For example,
     this command:

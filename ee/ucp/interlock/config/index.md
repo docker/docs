@@ -209,6 +209,6 @@ PollInterval = "3s"
 
 - [Configure host mode networking](host-mode-networking.md)
 - [Configure an NGINX extension](nginx-config.md)
-- [Use application service labels](service-labels.md)
+- [Use application service labels](../usage/labels-reference.md)
 - [Tune the proxy service](tuning.md)
 - [Update Interlock services](updates.md)

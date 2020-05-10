@@ -12,7 +12,7 @@ This guide follows the steps as described
 [here](content_trust/#signing-images-with-docker-content-trust) so please read 
 that and understand its prerequisites. 
 
-When working directly with the Notary client, it uses its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
+When working directly with the Notary client, it uses its [own set of environment variables](../../../notary/reference/client-config.md#environment-variables-optional).
 
 ## Add a delegation private key
 

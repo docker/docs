@@ -90,7 +90,7 @@ To learn more about working on the documentation, see these topics:
 
 - [README on docker/docker.github.io](https://github.com/docker/docker.github.io/blob/master/README.md)
 
-- [Docs Test page](/test.md) - This is on the
+- [Docs Test page](../test.md) - This is on the
 published site. It explains how to use Docs components, resources, and
 formats, and gives us a way to test and demo them.
 

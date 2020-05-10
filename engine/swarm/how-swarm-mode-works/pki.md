@@ -14,7 +14,7 @@ as a manager node. By default, the manager node generates a new root Certificate
 Authority (CA) along with a key pair, which are used to secure communications
 with other nodes that join the swarm. If you prefer, you can specify your own
 externally-generated root CA, using the `--external-ca` flag of the
-[docker swarm init](/engine/reference/commandline/swarm_init.md) command.
+[docker swarm init](../../reference/commandline/swarm_init.md) command.
 
 The manager node also generates two tokens to use when you join additional nodes
 to the swarm: one **worker token** and one **manager token**. Each token
@@ -55,7 +55,7 @@ By default, each node in the swarm renews its certificate every three months.
 You can configure this interval by running the `docker swarm update
 --cert-expiry <TIME PERIOD>` command. The minimum rotation value is 1 hour.
 Refer to the
-[docker swarm update](/engine/reference/commandline/swarm_update.md) CLI
+[docker swarm update](../../reference/commandline/swarm_update.md) CLI
 reference for details.
 
 ## Rotating the CA certificate

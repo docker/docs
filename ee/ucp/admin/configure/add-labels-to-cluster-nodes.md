@@ -145,4 +145,4 @@ You can add or remove deployment constraints on this page.
 ## Where to go next
 
 - [Collect UCP Cluster Metrics with Prometheus](collect-cluster-metrics.md)
-- [Configure UCP Audit Logging](create-audit-logs.md)
+- [Configure UCP Audit Logging](enable-audit-logging.md)

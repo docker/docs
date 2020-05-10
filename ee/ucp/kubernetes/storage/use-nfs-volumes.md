@@ -34,7 +34,7 @@ within the Pod specification, which could be a standalone pod, or could be
 wrapped in a higher-level object like a Deployment, Daemonset, or StatefulSet. 
 
 The following example includes a running UCP cluster and a downloaded 
-[client bundle](../../user-access/cli/#download-client-certificates) with
+[client bundle](../../user-access/cli.md#download-client-certificates) with
 permission to schedule pods in a namespace. 
 
 Here is an example pod specification with an NFS volume defined:
@@ -255,5 +255,5 @@ nfs.example.com://share1 on /var/nfs type nfs4 (rw,relatime,vers=4.1,rsize=26214
 
 ## Where to go next
 
-- [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
-- [Discover Network Encryption on Kubernetes](/ee/ucp/kubernetes/kubernetes-network-encryption/)
+- [Deploy an Ingress Controller on Kubernetes](../cluster-ingress/index.md)
+- [Discover Network Encryption on Kubernetes](../kubernetes-network-encryption.md)

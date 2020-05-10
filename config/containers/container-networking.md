@@ -9,8 +9,8 @@ redirect_from:
 - /engine/userguide/networking/default_network/container-communication/
 ---
 
-The type of network a container uses, whether it is a [bridge](bridges.md), an
-[overlay](overlay.md), a [macvlan network](macvlan.md), or a custom network
+The type of network a container uses, whether it is a [bridge](../../network/bridge.md), an
+[overlay](../../network/overlay.md), a [macvlan network](../../network/macvlan.md), or a custom network
 plugin, is transparent from within the container. From the container's point of
 view, it has a network interface with an IP address, a gateway, a routing table,
 DNS services, and other networking details (assuming the container is not using
@@ -70,4 +70,4 @@ settings on a per-container basis.
 ## Proxy server
 
 If your container needs to use a proxy server, see
-[Use a proxy server](/network/proxy.md).
+[Use a proxy server](../../network/proxy.md).

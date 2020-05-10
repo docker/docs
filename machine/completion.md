@@ -73,7 +73,7 @@ Depending on what you typed on the command line so far, it completes:
 
 ## Where to go next
 
-* [Get started with a local VM](/machine/get-started.md)
-* [Machine command-line reference](/machine/reference/index.md)
-* [Machine drivers](/machine/drivers/index.md)
-* [Machine concepts and help](/machine/concepts.md)
+* [Get started with a local VM](get-started.md)
+* [Machine command-line reference](reference/index.md)
+* [Machine drivers](drivers/index.md)
+* [Machine concepts and help](concepts.md)

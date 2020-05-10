@@ -28,7 +28,7 @@ space exhaustion and associated application downtime.
 
 ## Create a backup
 
-Before upgrading Docker Engine - Enterprise, you should make sure you [create a backup](backup.md).
+Before upgrading Docker Engine - Enterprise, you should make sure you [create a backup](admin/backup/index.md).
 This makes it possible to recover if anything goes wrong during the upgrade.
 
 ## Check the compatibility matrix
@@ -86,7 +86,7 @@ Swarm mode and deploying your workloads as Docker services. That way you can
 drain the nodes of any workloads before starting the upgrade.
 
 If you have workloads running as containers as opposed to swarm services,
-make sure they are configured with a [restart policy](/engine/admin/start-containers-automatically/).
+make sure they are configured with a [restart policy](../config/containers/start-containers-automatically.md).
 This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
@@ -232,14 +232,14 @@ If any worker nodes were drained, they can be undrained again by setting `--avai
 ## Upgrade UCP
 
 Once you've upgraded the Docker Engine - Enterprise running on all the nodes,
-[upgrade UCP](/ee/ucp/admin/install/upgrade.md).
+[upgrade UCP](ucp/admin/install/upgrade.md).
 
 ## Upgrade DTR
 
-After you upgrade Docker Engine - Enterprise and UCP, [upgrade DTR](/ee/dtr/admin/upgrade.md).
+After you upgrade Docker Engine - Enterprise and UCP, [upgrade DTR](dtr/admin/upgrade.md).
 
 After the DTR upgrade is finished, the Docker Enterprise upgrade is complete.
 
 ## Where to go next
 
-- [Backup Docker EE](backup.md)
+- [Backup Docker EE](admin/backup/index.md)

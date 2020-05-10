@@ -39,7 +39,7 @@ Some options are supported by specifying `--log-opt` as many times as needed:
  located in `/etc/docker/` on Linux hosts or
  `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
  +configuring Docker using `daemon.json`, see
- +[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+ +[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `fluentd` and sets the
 `fluentd-address` option.

@@ -42,7 +42,7 @@ as an admin, and navigate to **System > Storage**.
 The storage configuration page gives you the most
 common configuration options, but you have the option to upload a configuration file in `.yml`, `.yaml`, or `.txt` format.
 
-See [Docker Registry Configuration](/registry/configuration.md) for configuration options.
+See [Docker Registry Configuration](/registry/configuration/) for configuration options.
 
 ## Local filesystem
 

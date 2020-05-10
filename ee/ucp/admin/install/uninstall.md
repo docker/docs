@@ -49,7 +49,7 @@ The UCP configuration is kept in case you want to reinstall UCP with the same
 configuration. If you want to also delete the configuration, run the uninstall
 command with the `--purge-config` option.
 
-Refer to the [reference documentation](/reference/ucp/3.0/cli/index.md) to learn the options available.
+Refer to the [reference documentation](../../../../reference/ucp/3.2/cli/index.md) to learn the options available.
 
 Once the uninstall command finishes, UCP is completely removed from all the
 nodes in the cluster. You don't need to run the command again from other nodes.
@@ -73,4 +73,4 @@ After you uninstall UCP, restart the node to restore its IP tables.
 
 ## Where to go next
 
-- [Join nodes to your cluster](../configure/join-nodes.md)
+- [Join nodes to your cluster](../configure/join-nodes/index.md)

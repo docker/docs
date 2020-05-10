@@ -75,7 +75,7 @@ directly. Instead, you interact with UCP. Since UCP exposes the standard
 Docker API and the full Kubernetes API transparently, you can use the tools
 you already know and love, like `kubectl`, the Docker CLI client, and Docker
 Compose.
-[Learn about UCP architecture](/ee/ucp/ucp-architecture.md).
+[Learn about UCP architecture](ucp/ucp-architecture.md).
 
 ![](/ee/ucp/images/ucp-architecture-2.svg){: .with-border}
 
@@ -96,9 +96,9 @@ worker node.
 
 All DTR replicas run the same set of services, and changes to their configuration
 are automatically propagated to other replicas.
-[Learn about DTR architecture](/ee/dtr/architecture.md).
+[Learn about DTR architecture](dtr/architecture.md).
 
 ## Where to go next
 
-- [UCP architecture](/ee/ucp/ucp-architecture.md)
-- [DTR architecture](/ee/dtr/architecture.md)
+- [UCP architecture](ucp/ucp-architecture.md)
+- [DTR architecture](dtr/architecture.md)

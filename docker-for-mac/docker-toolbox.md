@@ -103,7 +103,7 @@ continue to use Docker Machine, which operates outside the scope of Docker Deskt
 > `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
-See also [Unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell)
+See also [Unset environment variables in the current shell](../machine/get-started.md#unset-environment-variables-in-the-current-shell)
 in the Docker Machine topics.
 
 ## Docker Toolbox and Docker Desktop coexistence
@@ -221,5 +221,5 @@ it](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbo
 
 You might decide that you do not need Toolbox now that you have Docker Desktop,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on Mac, see [How to uninstall Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox)
+Toolbox on Mac, see [How to uninstall Toolbox](../toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox)
 in the Toolbox Mac topics.

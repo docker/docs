@@ -18,4 +18,4 @@ https://github.com/docker/cli
 
 ## More info
 
-[Store configuration data using Docker Configs](/engine/swarm/configs.md)
+[Store configuration data using Docker Configs](../../swarm/configs.md)

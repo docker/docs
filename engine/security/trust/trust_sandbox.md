@@ -21,9 +21,9 @@ have privileges to run docker commands on your local machine or in the VM.
 
 This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
-[list of supported platforms](../../installation/index.md). To install
+[list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](/compose/install/).
+[detailed instructions here](../../../compose/install.md).
 
 ## What is in the sandbox?
 
@@ -38,7 +38,7 @@ production trust environment, and sets up these additional components.
 | Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
 
 This means you run your own content trust (Notary) server and registry.
-If you work exclusively with the Docker Hub, you would not need with these components.
+If you work exclusively with the Docker Hub, you would not need these components.
 They are built into the Docker Hub for you. For the sandbox, however, you build
 your own entire, mock production environment.
 

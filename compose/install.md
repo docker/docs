@@ -16,12 +16,12 @@ have Docker Engine installed either locally or remote, depending on your setup.
 included as part of those desktop installs.
 
 - On Linux systems, first install the
-[Docker Engine](/engine/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](../engine/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/install/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](../engine/install/linux-postinstall.md).
 
 ## Install Compose
 
@@ -55,8 +55,8 @@ Python package manager or installing Compose as a container.
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
-  * [Get Docker Desktop for Mac](/docker-for-mac/install.md)
-  * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
+  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
@@ -67,8 +67,8 @@ Docker install instructions for these are here:
 along with other Docker apps, so most Windows users do not need to
 install Compose separately. Docker install instructions for these are here:
 
-* [Get Docker Desktop for Windows](/docker-for-windows/install.md)
-* [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
+* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
@@ -79,8 +79,7 @@ Windows Server, follow the instructions in the Windows Server tab.
 ### Install Compose on Windows Server
 
 Follow these instructions if you are running the Docker daemon and client directly
-on Microsoft Windows Server with [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md),
-and want to install Docker Compose.
+on Microsoft Windows Server and want to install Docker Compose.
 
 
 1.  Start an "elevated" PowerShell (run it as administrator).
@@ -282,5 +281,5 @@ pip uninstall docker-compose
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

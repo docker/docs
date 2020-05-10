@@ -1,4 +1,6 @@
 command: docker
+short: The base command for the Docker CLI.
+long: The base command for the Docker CLI.
 cname:
 - docker attach
 - docker build

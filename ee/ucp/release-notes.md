@@ -63,7 +63,7 @@ upgrade your installation to the latest release.
     ```
     
 ### Kubernetes
-* Enabled support for a user-managed Kubernetes KMS plugin. See [KMS plugin support for UCP](/ee/ucp/admin/configure/kms-plugin.md) for more information.
+* Enabled support for a user-managed Kubernetes KMS plugin. See [KMS plugin support for UCP](admin/configure/kms-plugin.md) for more information.
 
 ### Components
 
@@ -590,7 +590,7 @@ leading to a gap in permissions checks.  (ENGORC-2781)
     * Host PID
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 * Pod Security Policies are not supported in this release. (#15105)
-* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements/) for details.
 
 ### Components
 
@@ -767,7 +767,7 @@ leading to a gap in permissions checks.  (ENGORC-2781)
     * Host PID
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 * Pod Security Policies are not supported in this release. (#15105)
-* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements/) for details.
 
 ### Components
 
@@ -815,7 +815,7 @@ leading to a gap in permissions checks.  (ENGORC-2781)
     * Host PID
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (docker/orca#14483)
 * Pod Security Policies are not supported in this release. (docker/orca#15105)
-* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements/) for details.
 
 ### Components
 
@@ -988,7 +988,7 @@ There are several backward-incompatible changes in the Kubernetes API that may a
     * Host PID
 * If you delete the built-in **ClusterRole** or **ClusterRoleBinding** for `cluster-admin`, restart the `ucp-kube-apiserver` container on any manager node to recreate them. (#14483)
 * Pod Security Policies are not supported in this release. (#15105)
-* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements) for details.
+* The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the `/var` partition. See [System Requirements](/ee/ucp/admin/install/system-requirements/) for details.
 
 ### Deprecated features
 

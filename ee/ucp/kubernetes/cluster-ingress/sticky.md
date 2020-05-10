@@ -16,7 +16,7 @@ that a clients requests are sent to the same back end.
 
 > Note
 > 
-> This guide assumes the [Deploy Sample Application](./ingress/)
+> This guide assumes the [Deploy Sample Application](ingress.md)
 > tutorial was followed, with the artifacts still running on the cluster. If
 > they are not, please go back and follow this guide.
 
@@ -90,6 +90,6 @@ persisted across requests, and that for a given session header, the responses ar
 
 When the HTTP uses the cookie that is set by the Ingress proxy, all requests are sent to the same back end, `demo-v1-7797b7c7c8-kw6gp`.
 
-## Where to to go next
+## Where to go next
 
-- [Cluster Ingress Overview](./)
+- [Cluster Ingress Overview](ingress.md)

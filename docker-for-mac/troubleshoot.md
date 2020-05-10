@@ -62,8 +62,7 @@ Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot** > **Run D
 Once the diagnostics are available, you can upload them and obtain a
 **Diagnostic ID**, which must be provided when communicating with the Docker
 team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker
-Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
+[how is personal data handled in Docker Desktop](faqs.md#how-is-personal-data-handled-in-docker-desktop).
 
 ![Diagnostics & Feedback with
 ID](images/diagnose-feedback-id.png){:width="600px"}
@@ -109,8 +108,8 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 
 In addition to using the diagnose and feedback option to submit logs, you can
 browse the logs yourself.  The following documentation is about macOS 10.12
-onwards; for older versions, see [older
-documentation](v17.12/docker-for-mac/troubleshoot/#logs).
+onwards; for older versions, see
+[older documentation](https://github.com/docker/docker.github.io/blob/v17.12/docker-for-mac/troubleshoot.md#check-the-logs).
 
 #### In a terminal
 
@@ -176,7 +175,7 @@ in the FAQs.
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
-cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
+cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
 you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the

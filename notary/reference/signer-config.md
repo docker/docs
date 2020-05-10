@@ -42,7 +42,7 @@ Here is a full signer configuration file example:
 ```
 
 For details on the `reporting` and `logging` sections, see the documentation on
-[common Notary configuration sections](/notary/reference/common-configs/).
+[common Notary configuration sections](common-configs.md).
 
 ## server section (required)
 
@@ -52,12 +52,14 @@ For details on the `reporting` and `logging` sections, see the documentation on
 Example:
 
 ```json
-"server": {
-  "http_addr": ":4444",
-  "grpc_addr": ":7899",
-  "tls_cert_file": "./fixtures/notary-signer.crt",
-  "tls_key_file": "./fixtures/notary-signer.key",
-  "client_ca_file": "./fixtures/notary-server.crt"
+{
+  "server": {
+    "http_addr": ":4444",
+    "grpc_addr": ":7899",
+    "tls_cert_file": "./fixtures/notary-signer.crt",
+    "tls_key_file": "./fixtures/notary-signer.key",
+    "client_ca_file": "./fixtures/notary-server.crt"
+  }
 }
 ```
 
@@ -169,7 +171,7 @@ Example:
 			private keys are encrypted using this password, which
 			must also be provided as the environment variable
 			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.
-			See the <a href="signer-config.md#environment-variables-required-if-using-mysql">environment variable</a>
+			See the <a href="#environment-variables-required-if-using-mysql">environment variable</a>
 			section for more information.</td>
 	</tr>
 </table>

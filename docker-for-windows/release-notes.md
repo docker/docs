@@ -10,7 +10,7 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
+For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.5
@@ -86,7 +86,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 - Fixed a race condition when starting the WSL engine which caused Docker Desktop to incorrectly report that the containers have exited. Fixes [docker/for-win#5607](https://github.com/docker/for-win/issues/5607).
 - Fixed an issue where editing code inside a container resulted in an error. Fixes [docker/for-win#5528](https://github.com/docker/for-win/issues/5528).
 - Fixed a bug where running the command `DockerCli.exe -SharedDrives` failed to display a list of drives that are shared. Fixes [docker/for-win#5625](https://github.com/docker/for-win/issues/5625).
-- Starting with Docker Desktop 2.2.0.3, you must access all shared files using their original case. For example, if you have created a file called `test`, you must open it as `test`. Attempts to open the file as `Test` will fail with the error `No such file or directory`. For more information, see _Tips on shared drives, permissions, and volume mounts_ in [File sharing](/docker-for-windows/index/#file-sharing).
+- Starting with Docker Desktop 2.2.0.3, you must access all shared files using their original case. For example, if you have created a file called `test`, you must open it as `test`. Attempts to open the file as `Test` will fail with the error `No such file or directory`. For more information, see _Tips on shared drives, permissions, and volume mounts_ in [File sharing](index.md#file-sharing).
 
 ### Known issues
 

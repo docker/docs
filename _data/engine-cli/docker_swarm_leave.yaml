@@ -28,6 +28,7 @@ examples: |-
 
   ```bash
   $ docker node ls
+
   ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
   7ln70fl22uw2dvjn2ft53m3q5    worker2   Ready   Active
   dkp8vy1dq1kxleu9g4u78tlag    worker1   Ready   Active
@@ -38,6 +39,7 @@ examples: |-
 
   ```bash
   $ docker swarm leave
+
   Node left the default swarm.
   ```
 

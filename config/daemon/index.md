@@ -34,9 +34,9 @@ not manually by a user. This makes it easier to automatically start Docker when
 the machine reboots.
 
 The command to start Docker depends on your operating system. Check the correct
-page under [Install Docker](/engine/install/index.md). To configure Docker
+page under [Install Docker](../../engine/install/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](../../engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Start the daemon manually
 
@@ -90,7 +90,7 @@ Here's what the configuration file looks like:
 With this configuration the Docker daemon runs in debug mode, uses TLS, and
 listens for traffic routed to `192.168.59.3` on port `2376`.
 You can learn what configuration options are available in the
-[dockerd reference docs](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+[dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
 
 You can also start the Docker daemon manually and configure it using flags.
 This can be useful for troubleshooting problems.
@@ -107,7 +107,7 @@ dockerd --debug \
 ```
 
 You can learn what configuration options are available in the
-[dockerd reference docs](/engine/reference/commandline/dockerd.md), or by running:
+[dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by running:
 
 ```
 dockerd --help
@@ -116,10 +116,10 @@ dockerd --help
 Many specific configuration options are discussed throughout the Docker
 documentation. Some places to go next include:
 
-- [Automatically start containers](/engine/admin/host_integration.md)
-- [Limit a container's resources](/engine/admin/resource_constraints.md)
-- [Configure storage drivers](/engine/userguide/storagedriver/index.md)
-- [Container security](/engine/security/index.md)
+- [Automatically start containers](../containers/start-containers-automatically.md)
+- [Limit a container's resources](../containers/resource_constraints.md)
+- [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
+- [Container security](../../engine/security/index.md)
 
 ## Docker daemon directory
 
@@ -145,7 +145,7 @@ are difficult to troubleshoot.
 You can enable debugging on the daemon to learn about the runtime activity of
 the daemon and to aid in troubleshooting. If the daemon is completely
 non-responsive, you can also
-[force a full stack trace](#force-a-full-stack-trace-to-be-logged) of all
+[force a full stack trace](#force-a-stack-trace-to-be-logged) of all
 threads to be added to the daemon log by sending the `SIGUSR` signal to the
 Docker daemon.
 
@@ -165,7 +165,7 @@ If you see an error similar to this one and you are starting the daemon manually
 you may need to adjust your flags or the `daemon.json` to remove the conflict.
 
 > **Note**: If you see this specific error, continue to the
-> [next section](#use-the-hosts-key-in-daemon-json-with-systemd) for a workaround.
+> [next section](#use-the-hosts-key-in-daemonjson-with-systemd) for a workaround.
 
 If you are starting Docker using your operating system's init scripts, you may
 need to override the defaults in these scripts in ways that are specific to the
@@ -190,7 +190,7 @@ ExecStart=/usr/bin/dockerd
 ```
 
 There are other times when you might need to configure `systemd` with Docker, such as
-[configuring a HTTP or HTTPS proxy](/engine/admin/systemd/#httphttps-proxy).
+[configuring a HTTP or HTTPS proxy](systemd.md#httphttps-proxy).
 
 > **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
 > or a `-H` flag when starting Docker manually, Docker fails to start.
@@ -212,7 +212,7 @@ you may experience an Out Of Memory Exception (OOME) and a container, or the
 Docker daemon, might be killed by the kernel OOM killer. To prevent this from
 happening, ensure that your application runs on hosts with adequate memory and
 see
-[Understand the risks of running out of memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+[Understand the risks of running out of memory](../containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
 ### Read the logs
 
@@ -283,7 +283,7 @@ by sending a `SIGUSR1` signal to the daemon.
 
 - **Windows Server**:
 
-  Download [docker-signal](https://github.com/jhowardmsft/docker-signal).
+  Download [docker-signal](https://github.com/moby/docker-signal).
   
   Get the process ID of dockerd `Get-Process dockerd`.
 
