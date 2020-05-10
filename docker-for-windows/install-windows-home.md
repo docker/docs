@@ -62,7 +62,7 @@ more information, see [Running Docker Desktop in nested virtualization scenarios
 1.  Double-click **Docker Desktop Installer.exe** to run the installer.
 
     If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
-    [**Docker Hub**](Add URL).
+    [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
