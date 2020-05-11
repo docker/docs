@@ -41,7 +41,7 @@ The following `admin-settings.json` code and table provide the required syntax a
 
 ```json
 {
-  "configurationFileVersion": 1,
+  "configurationFileVersion": 2,
   "engine": {
     "locked": false,
     "value": "linux"
@@ -49,7 +49,7 @@ The following `admin-settings.json` code and table provide the required syntax a
   "analyticsEnabled": {
     "locked": false,
     "value": false
-    },
+  },
   "exposeDockerAPIOnTCP2375": {
     "locked": false,
     "value": false
@@ -68,7 +68,6 @@ The following `admin-settings.json` code and table provide the required syntax a
       "exclude": "docker.com,github.com"
     }
   },
-
   "linuxVM": {
     "cpus": {
       "locked": false,
@@ -95,9 +94,9 @@ The following `admin-settings.json` code and table provide the required syntax a
       "value": "10.0.75.0/28"
     },
     "vpnkitCIDR": {
-	  "locked": false,
-	  "value": "192.168.65.0/28"
-	},
+      "locked": false,
+      "value": "192.168.65.0/28"
+    },
     "useDnsForwarder": {
       "locked": false,
       "value": true
@@ -108,18 +107,17 @@ The following `admin-settings.json` code and table provide the required syntax a
     },
     "dockerDaemonOptions": {
       "experimental": {
-         "locked": false,
-         "value": true
+        "locked": false,
+        "value": true
       }
     }
   },
-
   "windows": {
     "dockerDaemonOptions": {
-       "experimental": {
-          "locked": false,
-          "value": true
-       }
+      "experimental": {
+        "locked": false,
+        "value": true
+      }
     }
   },
   "kubernetes": {
@@ -140,25 +138,30 @@ The following `admin-settings.json` code and table provide the required syntax a
       "value": null
     }
   },
-
-  "template" : {
-      "defaultOrg" : {"value": "myorg", "locked":true},
-      "defaultRegistry" : {"value": "mydtr:5000", "locked":true},
-      "repositories": {
-        "value": [
-          "https://one/library.yaml",
-          "https://two/library.yaml",
-          "https://three/library.yaml"
-          ],
-        "locked" : true
-      }
+  "template": {
+    "defaultOrg": {
+      "value": "myorg",
+      "locked": true
     },
-
-  "sharedDrives": {
-    "locked": true,
-    "value": [ ]
+    "defaultRegistry": {
+      "value": "mydtr:5000",
+      "locked": true
+    },
+    "repositories": {
+      "value": [
+        "https://one/library.yaml",
+        "https://two/library.yaml",
+        "https://three/library.yaml"
+      ],
+      "locked": true
+    }
   },
-  "sharedFolders": ["%USERPROFILE%", "\\\\.\\pipe\\docker_engine"]
+  "filesharingDirectories": {
+    "locked": false,
+    "value": [
+      "%USERPROFILE%"
+    ]
+  }
 }
 ```
 
@@ -197,8 +200,7 @@ Parameter values and descriptions for environment configuration on Windows:
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
-| `sharedDrives`                    | If `sharedDrives` is set to `true`, this locks the drives users are allowed to share ( `["C", "D"]` ), but does not actually share drives by default (sharing a drive prompts the user for a password). `value` is a whitelist of drives that can be shared. **Warning:** Note that when updating this value, if you remove drives that have been shared, you must also `net share /delete` those drives. |
-| `sharedFolders`                   | If specified, restricts the folders or named pipes the user is allowed to share with Windows containers.     |
+| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
 
 ### File format update
 
@@ -245,3 +247,4 @@ Otherwise manual steps are required to update the `admin-settings.json` file.
       }
    }
     ```
+
