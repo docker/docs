@@ -199,3 +199,49 @@ Parameter values and descriptions for environment configuration on Windows:
 |`repositories`|Lists the repositories that are allowed.|
 | `sharedDrives`                    | If `sharedDrives` is set to `true`, this locks the drives users are allowed to share ( `["C", "D"]` ), but does not actually share drives by default (sharing a drive prompts the user for a password). `value` is a whitelist of drives that can be shared. **Warning:** Note that when updating this value, if you remove drives that have been shared, you must also `net share /delete` those drives. |
 | `sharedFolders`                   | If specified, restricts the folders or named pipes the user is allowed to share with Windows containers.     |
+
+### File format update
+
+#### From version 1 to 2
+
+Docker Desktop Enterprise 2.3.0.0-ent contains a change in the configuration file format.
+
+If you haven’t made any changes to the `admin-settings.json` file in the previous installation, you can simply delete it and Docker Desktop will re-create it automatically.
+Otherwise manual steps are required to update the `admin-settings.json` file.
+
+1. Increase the value of the `configurationFileVersion` field from 1 to 2, i.e. before:
+    ```json
+   {
+      "configurationFileVersion": 1,
+      ...
+   }
+    ```
+    after:
+    ```json
+   {
+      "configurationFileVersion": 2,
+      ...
+   }
+    ```
+
+2. Replace the `sharedDrives` and `sharedFolders` fields with a single `filesharingDirectories` field, e.g. before:
+    ```json
+   {
+      ...
+      "sharedDrives": {
+        "locked": true,
+        "value": ["C"]
+      },
+      "sharedFolders": ["%USERPROFILE%"]
+   }
+    ```
+    after:
+    ```json
+   {
+      ...
+      "filesharingDirectories": {
+        "locked": true,
+        "value": ["C:", "%USERPROFILE%"]
+      }
+   }
+    ```
