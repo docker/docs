@@ -13,7 +13,7 @@ safe: false
 lsi: false
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
 keep_files: ["v17.06", "v18.03", "v18.09"]
-exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
+exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
