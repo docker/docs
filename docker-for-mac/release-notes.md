@@ -13,10 +13,10 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Docker Desktop Community 2.3.0.0
-2020-04-DATE
+## Docker Desktop Community 2.3.0.2
+2020-05-11
 
-> [Download]()
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
 ### New
 
@@ -47,7 +47,7 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 ## Docker Desktop Community 2.2.0.5
 2020-04-02
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
 
 ### Bug fixes and minor changes
 
