@@ -50,7 +50,7 @@ omitting a `version` key at the root of the YAML.
 
 - Version 3.x, the latest and recommended version, designed to
 be cross-compatible between Compose and the Docker Engine's
-[swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+[swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
 > ### v2 and v3 Declaration
 >
@@ -65,8 +65,8 @@ To move your project to a later version, see the [Upgrading](#upgrading)
 section.
 
 > **Note**: If you're using
-> [multiple Compose files](/compose/extends.md#multiple-compose-files) or
-> [extending services](/compose/extends.md#extending-services), each file must be of the
+> [multiple Compose files](../extends.md#multiple-compose-files) or
+> [extending services](../extends.md#extending-services), each file must be of the
 > same version - you cannot, for example, mix version 1 and 2 in a single
 > project.
 
@@ -91,7 +91,7 @@ Version 1 files cannot declare named
 [volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
 [build arguments](index.md#args).
 
-Compose does not take advantage of [networking](/compose/networking.md) when you
+Compose does not take advantage of [networking](../networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
 reachable from every other container at its IP address. You need to use
 [links](compose-file-v1.md#links) to enable discovery between containers.
@@ -125,7 +125,7 @@ under the `networks` key.
 By default, every container joins an application-wide default network, and is
 discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
-[Networking in Compose](/compose/networking.md).
+[Networking in Compose](../networking.md).
 
 > **Note**: When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
@@ -217,15 +217,16 @@ Introduces the following additional parameters:
 - [`link_local_ips`](compose-file-v2.md#link_local_ips)
 - [`isolation`](compose-file-v2.md#isolation) in build configurations and
   service definitions
-- `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
-  [networks](compose-file-v2.md#network-configuration-reference)
+- `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
+  [networks](compose-file-v2.md#network-configuration-reference), and
+  [build](index.md#build)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
 - [`pids_limit`](compose-file-v2.md#pids_limit)
 - [`oom_kill_disable`](compose-file-v2.md#cpu-and-other-resources)
-- [`cpu_period`](compose-file-v2.md)
+- [`cpu_period`](compose-file-v2.md#cpu-and-other-resources)
 
 ### Version 2.2
 
@@ -239,6 +240,7 @@ Introduces the following additional parameters:
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
 - [`cpu_rt_runtime` and `cpu_rt_period`](compose-file-v2.md#cpu_rt_runtime-cpu_rt_period)
+- [`network`](compose-file-v2.md#network) for [build configurations](compose-file-v2.md#build)
 
 ### Version 2.3
 
@@ -276,7 +278,7 @@ several more.
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
 the [upgrading](#upgrading) guide for how to migrate away from these.
-(For more information on `extends`, see [Extending services](/compose/extends.md#extending-services).)
+(For more information on `extends`, see [Extending services](../extends.md#extending-services).)
 
 - Added: [deploy](index.md#deploy)
 
@@ -295,6 +297,28 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 > version: "3.0"
 > ```
 
+### Version 3.1
+
+An upgrade of [version 3](#version-3) that introduces new parameters only
+available with Docker Engine version **1.13.1+**, and higher.
+
+Introduces the following additional parameters:
+
+- [`secrets`](index.md#secrets)
+
+### Version 3.2
+
+An upgrade of [version 3](#version-3) that introduces new parameters only
+available with Docker Engine version **17.04.0+**, and higher.
+
+Introduces the following additional parameters:
+
+- [`cache_from`](index.md#cache_from) in [build configurations](index.md#build)
+- Long syntax for [ports](index.md#ports) and [volume mounts](index.md#volumes)
+- [`attachable`](index.md#attachable) network driver option
+- [deploy `endpoint_mode`](index.md#endpoint_mode)
+- [deploy placement `preference`](index.md#placement)
+
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
@@ -305,7 +329,6 @@ Introduces the following additional parameters:
 - [build `labels`](index.md#build)
 - [`credential_spec`](index.md#credential_spec)
 - [`configs`](index.md#configs)
-- [deploy `endpoint_mode`](index.md#endpoint_mode)
 
 ### Version 3.4
 
@@ -314,7 +337,8 @@ only available with Docker Engine version **17.09.0** and higher.
 
 Introduces the following additional parameters:
 
-- `target` and `network` in [build configurations](index.md#build)
+- [`target`](index.md#target) and [`network`](index.md#network) in
+  [build configurations](index.md#build)
 - `start_period` for [`healthchecks`](index.md#healthcheck)
 - `order` for [update configurations](index.md#update_config)
 - `name` for [volumes](index.md#volume-configuration-reference)
@@ -384,7 +408,7 @@ several options have been removed:
     `docker stack deploy`, and is ignored by `docker-compose`.
 
 -   `extends`: This option has been removed for `version: "3.x"`
-Compose files. (For more information, see [Extending services](/compose/extends.md#extending-services).)
+Compose files. (For more information, see [Extending services](../extends.md#extending-services).)
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
@@ -413,7 +437,7 @@ It's more complicated if you're using particular configuration features:
             syslog-address: "tcp://192.168.0.42:123"
 
 -   `links` with environment variables: As documented in the
-    [environment variables reference](/compose/link-env-deprecated.md), environment variables
+    [environment variables reference](../link-env-deprecated.md), environment variables
     created by
     links have been deprecated for some time. In the new Docker network system,
     they have been removed. You should either connect directly to the
@@ -432,9 +456,9 @@ It's more complicated if you're using particular configuration features:
     communicate, even if explicitly linked together.
 
     Either connect the external container to your app's
-    [default network](/compose/networking.md), or connect both the external container and
+    [default network](../networking.md), or connect both the external container and
     your service's containers to an
-    [external network](/compose/networking.md#use-a-pre-existing-network).
+    [external network](../networking.md#use-a-pre-existing-network).
 
 -   `net`: This is now replaced by [network_mode](index.md#network_mode):
 

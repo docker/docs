@@ -126,5 +126,5 @@ be grouped with the other resources in your stack.
 ## Where to go next
 
 - [Deploy a Compose-based app to a Kubernetes cluster](../kubernetes/deploy-with-compose.md)
-- [Set metadata on a service (-l, –label)](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label.md)
-- [Docker object labels](/engine/userguide/labels-custom-metadata/.md)
+- [Set metadata on a service (-l, –label)](/engine/reference/commandline/service_create/#set-metadata-on-a-service--l---label)
+- [Docker object labels](/config/labels-custom-metadata/)

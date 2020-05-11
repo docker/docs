@@ -69,7 +69,7 @@ Create the cache configuration files by following the
 [instructions for deploying a single cache replica](simple.md#prepare-the-cache-deployment).
 
 Make sure you adapt the `storage` object, using the
-[configuration options for the shared storage](/registry/configuration.md#storage)
+[configuration options for the shared storage](/registry/configuration/#storage)
 of your choice.
 
 ## Configure your load balancer

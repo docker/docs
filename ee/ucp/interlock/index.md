@@ -13,7 +13,7 @@ Application-layer (Layer 7) routing is the application routing and load balancin
 > The HTTP routing mesh functionality was redesigned in UCP 3.0 for greater security and flexibility. The functionality was also renamed to “Layer 7 routing” to make it easier for new users to get started.
 
 Interlock is specific to the Swarm orchestrator. If you're trying to route
-traffic to your Kubernetes applications, refer to [Layer 7 routing with Kubernetes](../kubernetes/layer-7-routing.md) for more information.
+traffic to your Kubernetes applications, refer to [Layer 7 routing with Kubernetes](../kubernetes/cluster-ingress/index.md) for more information.
 
 Interlock uses the Docker Remote API to automatically configure extensions such as NGINX or HAProxy for application traffic. Interlock is designed for:
 

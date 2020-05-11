@@ -53,7 +53,7 @@ purpose.
 > ranges, in this case. This step is covered in [Prerequisites](#prerequisites).
 {: .warning-vanila }
 
-It is very important that the ranges not overlap, so that a process cannot gain
+It is very important that the ranges do not overlap, so that a process cannot gain
 access in a different namespace. On most Linux distributions, system utilities
 manage the ranges for you when you add or remove users.
 

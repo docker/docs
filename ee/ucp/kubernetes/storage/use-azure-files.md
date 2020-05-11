@@ -17,12 +17,12 @@ provision Azure Files Shares on demand.
 
 This guide assumes you have already provisioned a UCP environment on
 Microsoft Azure. The cluster must be provisioned after meeting all
-prerequisites listed in [Install UCP on Azure](/ee/ucp/admin/install/cloudproviders/install-on-azure.md).
+prerequisites listed in [Install UCP on Azure](../../admin/install/cloudproviders/install-on-azure.md).
 
 Additionally, this guide uses the Kubernetes Command Line tool `$
 kubectl` to provision Kubernetes objects within a UCP cluster. Therefore, you must download
 this tool along with a UCP client bundle. For more
-information on configuring CLI access to UCP, see [CLI Based Access](/ee/ucp/user-access/cli.md).
+information on configuring CLI access to UCP, see [CLI Based Access](../../user-access/cli.md).
 
 ## Manually Provisioning Azure Files
 
@@ -285,5 +285,5 @@ subjects:
 
 ## Where to go next
 
-- [Deploy an Ingress Controller on Kubernetes](/ee/ucp/kubernetes/layer-7-routing/)
+- [Deploy an Ingress Controller on Kubernetes](../cluster-ingress/index.md)
 - [Discover Network Encryption on Kubernetes](../kubernetes-network-encryption.md)

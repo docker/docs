@@ -237,7 +237,7 @@ Engine Signature Verification prevents the following:
 
 > **Note:**
 > The implicit pulls and runs performed by worker
-> nodes for a [Swarm service](/engine/swarm/services.md) on `$ docker service create` and
+> nodes for a [Swarm service](../../swarm/services.md) on `$ docker service create` and
 > `$ docker service update` are also verified. Tag resolution of services
 > requires that all nodes in the Swarm including managers have content trust
 > enabled and similarly configured.

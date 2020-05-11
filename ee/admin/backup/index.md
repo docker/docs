@@ -22,9 +22,9 @@ This document provides instructions and best practices for Docker Enterprise bac
 To back up Docker Enterprise, you must create individual backups
 for each of the following components:
 
-1. [Back up Docker Swarm](back-up-swarm). Back up Swarm resources like service and network definitions.
-2. [Back up Universal Control Plane (UCP)](back-up-ucp). Back up UCP configurations.
-3. [Back up Docker Trusted Registry (DTR)](back-up-dtr). Back up DTR configurations, images, and metadata.
+1. [Back up Docker Swarm](back-up-swarm.md). Back up Swarm resources like service and network definitions.
+2. [Back up Universal Control Plane (UCP)](back-up-ucp.md). Back up UCP configurations.
+3. [Back up Docker Trusted Registry (DTR)](back-up-dtr.md). Back up DTR configurations, images, and metadata.
 
 If you do not create backups for all components, you cannot restore your deployment to its previous state. 
 
@@ -35,4 +35,4 @@ a fresh installation on a separate infrastructure with the backup. Refer to [Res
 
 ### Where to go next
 
-- [Back up Docker Swarm](./back-up-swarm/)
+- [Back up Docker Swarm](back-up-swarm.md)

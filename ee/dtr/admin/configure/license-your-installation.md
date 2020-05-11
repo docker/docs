@@ -34,5 +34,5 @@ Within **System > General** under the **License** section, you should see the ti
 
 ## Where to go next
 
-- [Use your own TLS certificates](use-your-own-tls-certificates)
-- [Enable single sign-on](enable-single-sign-on)
+- [Use your own TLS certificates](use-your-own-tls-certificates.md)
+- [Enable single sign-on](enable-single-sign-on.md)

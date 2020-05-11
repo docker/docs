@@ -126,5 +126,5 @@ weave-net-wgvcd                2/2       Running   0          8m        172.31.6
 
 ## Where to go next
 
-- [Make your Cluster Highly Available](https://docs.docker.com/ee/ucp/admin/install/#step-6-join-manager-nodes)
-- [Deploy a Sample Application with Ingress](https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/)
+- [Make your Cluster Highly Available](../admin/install/index.md#step-6-join-manager-nodes)
+- [Deploy a Sample Application with Ingress](cluster-ingress/ingress.md)

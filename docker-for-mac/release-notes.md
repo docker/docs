@@ -10,7 +10,7 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes). For Docker Desktop system requirements, see
+For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.2.0.5
@@ -290,7 +290,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
   - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
 
 * New
-  - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See https://docs.docker.com/docker-for-mac/kubernetes/
+  - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [https://docs.docker.com/docker-for-mac/kubernetes/](kubernetes.md)
   - Add an experimental SOCKS server to allow access to container networks, see [docker/for-mac#2670](https://github.com/docker/for-mac/issues/2670#issuecomment-372365274). Also see [docker/for-mac#2721](https://github.com/docker/for-mac/issues/2721)
   - Re-enable raw as the default disk format for users running macOS 10.13.4 and higher. Note this change only takes effect after a "reset to factory defaults" or "remove all data" (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
 
@@ -366,7 +366,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
   - Clearer error message when incompatible hardware is detected.
   - Fix some cases where selecting "Reset" after an error did not reset properly.
   - Fix incorrect NTP config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
-  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/docker-for-mac/docker-toolbox/#migrating-from-docker-toolbox-to-docker-for-mac) ).
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](docker-toolbox.md#migrating-from-docker-toolbox-to-docker-desktop-on-mac) ).
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 

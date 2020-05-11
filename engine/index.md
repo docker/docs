@@ -23,12 +23,12 @@ daemon through scripting or direct CLI commands. Many other Docker applications
 use the underlying API and CLI. The daemon creates and manage Docker objects,
 such as images, containers, networks, and volumes.
 
-For more details, see [Docker Architecture](/get-started/overview.md#docker-architecture).
+For more details, see [Docker Architecture](../get-started/overview.md#docker-architecture).
 
 ## Docker user guide
 
 To learn about Docker in more detail and to answer questions about usage and
-implementation, check out the [overview page in "get started"](/get-started/overview.md).
+implementation, check out the [overview page in "get started"](../get-started/overview.md).
 
 ## Installation guides
 

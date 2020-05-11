@@ -22,14 +22,14 @@ JSON keys to learn more about the configuration section corresponding to that ke
 
 
 <pre><code class="language-json">{
-  <a href="client-config.md#trust_dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
-  <a href="client-config.md#remote_server-section-optional">"remote_server"</a>: {
+  <a href="#trust_dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
+  <a href="#remote_server-section-optional">"remote_server"</a>: {
     "url": "https://my-notary-server.my-private-registry.com",
     "root_ca": "./fixtures/root-ca.crt",
     "tls_client_cert": "./fixtures/secure.example.com.crt",
     "tls_client_key": "./fixtures/secure.example.com.crt"
   },
-  <a href="client-config.md#trust_pinning-section-optional">"trust_pinning"</a>: {
+  <a href="#trust_pinning-section-optional">"trust_pinning"</a>: {
     "certs": {
       "docker.com/notary": ["49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"]
     }

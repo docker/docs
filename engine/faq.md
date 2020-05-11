@@ -56,7 +56,7 @@ offers a high-level tool with several powerful functionalities:
  uploads and downloads, similar to `git pull`, so new versions of a container
  can be transferred by only sending diffs.
 
- - *Component re-use.* Any container can be used as a [*parent image*](/glossary.md#parent_image) to
+ - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent_image) to
 create more specialized components. This can be done manually or as part of an
 automated build. For example you can prepare the ideal Python environment, and
 use it as a base for 10 different applications. Your ideal PostgreSQL setup can
@@ -66,7 +66,7 @@ be re-used for all your future projects. And so on.
 Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
 people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
 IRC bouncers to Rails app servers to Hadoop to base images for various Linux
-distros. The [*registry*](/registry/) also includes an official "standard
+distros. The [*registry*](../registry/index.md) also includes an official "standard
 library" of useful containers maintained by the Docker team. The registry itself
 is open-source, so anyone can deploy their own registry to store and transfer
 private containers, for internal server deployments for example.
@@ -100,37 +100,15 @@ thousands or even millions of containers.
 
 ### How do I connect Docker containers?
 
-Currently the recommended way to connect containers is via the Docker network feature. You can see details of how to [work with Docker networks here](userguide/networking/work-with-networks.md).
+Currently the recommended way to connect containers is via the Docker network
+feature. You can see details of [how to work with Docker networks](../network/bridge.md).
 
 ### How do I run more than one process in a Docker container?
 
 This approach is discouraged for most use cases. For maximum efficiency and
 isolation, each container should address one specific area of concern. However,
 if you need to run multiple services within a single container, see
-[Run multiple services in a container](admin/multi-service_container.md).
-
-### What platforms does Docker run on?
-
-Linux:
-
- - Any distribution running version 3.10+ of the Linux kernel
- - Specific instructions are available for most Linux distributions, including
-   [RHEL](installation/linux/rhel.md), [Ubuntu](installation/linux/ubuntulinux.md),
-   [Oracle Linux](installation/linux/oracle.md),
-   [SuSE](installation/linux/suse.md), and many others.
-
-Microsoft Windows:
-
- - Windows Server 2016
- - Windows 10
-
-Cloud:
-
- - Amazon EC2
- - Google Compute Engine
- - Microsoft Azure
- - Rackspace
- - Oracle Cloud Infrastructure
+[Run multiple services in a container](../config/containers/multi-service_container.md).
 
 ### How do I report a security issue with Docker?
 
@@ -245,11 +223,8 @@ You need to tell Docker to talk to that machine. You can do this with the
 
 You can find more answers on:
 
-- [Docker user mailinglist](https://groups.google.com/d/forum/docker-user){: target="_blank" class="_"}
-- [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev){: target="_blank" class="_"}
-- [IRC, docker on freenode](irc://chat.freenode.net#docker)
+- [Docker community Slack channel](http://dockr.ly/slack)
+- [Docker Support Forums](https://forums.docker.com)
 - [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
 - [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
 - [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
-
-Looking for something else to read? Checkout the [User Guide](userguide/index.md).

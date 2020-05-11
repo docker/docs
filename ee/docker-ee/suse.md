@@ -311,7 +311,7 @@ and update Docker from the repository.
     container runs, it prints an informational message and exits.
 
 Docker Engine - Enterprise is installed and running. You need to use `sudo` to
-run Docker commands. Continue to [Linux postinstall](/engine/install/linux-postinstall.md)
+run Docker commands. Continue to [Linux postinstall](../../engine/install/linux-postinstall.md)
 to configure the graph storage driver, allow non-privileged users to run Docker
 commands, and for other optional configuration steps.
 
@@ -427,6 +427,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](../../engine/install/linux-postinstall.md)
 
-- Continue with the [User Guide](/engine/userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/).

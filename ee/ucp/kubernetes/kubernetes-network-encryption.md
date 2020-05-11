@@ -45,7 +45,7 @@ packet size must be a multiple of 4 bytes.  IPIP tunnels require 20 bytes of enc
 tunnel interface MTU must be no more than "EXTMTU - 46 - ((EXTMTU - 46) modulo 4)", where EXTMTU is the minimum MTU 
 of the external interfaces.   An IPIP MTU of 1452 should generally be safe for most deployments. 
 
-Changing UCP's MTU requires updating the UCP configuration.  This process is described [here](/ee/ucp/admin/configure/ucp-configuration-file).  
+Changing UCP's MTU requires updating the UCP configuration.  This process is described [here](../admin/configure/ucp-configuration-file.md).  
 
 Update the following values to the new MTU:
 
@@ -65,7 +65,7 @@ Beginning with UCP 3.2.4, you can configure SecureOverlay in two ways:
 
 ### UCP configuration file
 
-Add `secure-overlay` to the UCP configuration file. Set this option to `true` to enable IPSec network encryption. The default is `false`. See [cluster_config options](https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/#cluster_config-table-required) for more information.
+Add `secure-overlay` to the UCP configuration file. Set this option to `true` to enable IPSec network encryption. The default is `false`. See [cluster_config options](../admin/configure/ucp-configuration-file.md#cluster_config-table-required) for more information.
 
 ### SecureOverlay YAML file
 

@@ -131,4 +131,4 @@ drained node to an active state:
 
 ## What's next?
 
-Learn how to [use a swarm mode routing mesh](/engine/swarm/ingress.md).
+Learn how to [use a swarm mode routing mesh](../ingress.md).

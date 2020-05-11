@@ -130,6 +130,6 @@ same amount of room on disk. This is one of the disadvantages of using the
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)
 

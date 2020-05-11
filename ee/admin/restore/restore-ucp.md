@@ -99,4 +99,4 @@ Alternatively, check the UCP UI **Nodes** page for node status, and monitor the 
 
 ### Where to go next
 
-- [Restore DTR](restore-dtr)
+- [Restore DTR](restore-dtr.md)

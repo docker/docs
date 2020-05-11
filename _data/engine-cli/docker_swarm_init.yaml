@@ -167,7 +167,7 @@ examples: |-
   to [swarm join](swarm_join.md).
 
   After you create the swarm, you can display or rotate the token using
-  [swarm join-token](swarm_join_token.md).
+  [swarm join-token](swarm_join-token.md).
 
   ### `--autolock`
 

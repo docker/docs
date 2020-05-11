@@ -57,7 +57,7 @@ web UI and [download new client certificate bundles](../../user-access/cli.md).
 
 If you deployed Docker Trusted Registry (DTR), you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
-[Learn how to configure DTR](/reference/dtr/2.7/cli/reconfigure.md).
+[Learn how to configure DTR](/reference/dtr/2.7/cli/reconfigure/).
 
 ## Where to go next
 

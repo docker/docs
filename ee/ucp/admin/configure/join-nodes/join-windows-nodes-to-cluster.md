@@ -25,8 +25,7 @@ To enable a worker node on Windows:
 
 ## Install Docker Engine - Enterprise on Windows Server 
 
-[Install Docker Engine -
-Enterprise](/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee)
+[Install Docker Engine - Enterprise](../../../../docker-ee/windows/docker-ee.md#use-a-script-to-install-docker-engine---enterprise)
 on a Windows Server 2016 or 2019 instance before joining the node to a Docker
 Enterprise Cluster.
 
@@ -231,4 +230,4 @@ The following features are not yet supported on Windows Server 2016:
 
 ## Known Issues
 
-Refer to the [Docker Enterprise UCP release notes](/ee/ucp/release-notes) for Known Issues information.
+Refer to the [Docker Enterprise UCP release notes](/ee/ucp/release-notes/) for Known Issues information.

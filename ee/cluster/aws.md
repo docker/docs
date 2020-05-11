@@ -389,6 +389,6 @@ All provisioned resources are destroyed and the context for the cluster is remov
 
 ## Where to go next
 
-- View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
+- View the quick start guide for [Azure](azure.md)
 - [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
-- [Cluster configuration file reference](/ee/cluster-file.md)
+- [Cluster configuration file reference](cluster-file.md)

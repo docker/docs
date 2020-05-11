@@ -48,4 +48,4 @@ To configure UCP to only allow running services that use Docker trusted images:
 
 ## Where to go next
 
-- [Sign and push images to DTR](/ee/dtr/user/manage-images/sign-images.md)
+- [Sign and push images to DTR](../../../dtr/user/manage-images/sign-images/index.md)

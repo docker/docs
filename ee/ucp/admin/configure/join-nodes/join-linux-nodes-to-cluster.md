@@ -12,7 +12,7 @@ to your needs. You can join Windows Server and Linux nodes
 to the cluster.
 
 Because Docker Enterprise leverages the clustering functionality provided by Docker
-Engine, you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
+Engine, you use the [docker swarm join](../../../../../engine/swarm/swarm-tutorial/add-nodes.md)
 command to add more nodes to your cluster. When you join a new node, Docker Enterprise
 services start running on the node automatically.
 

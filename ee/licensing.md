@@ -69,7 +69,7 @@ After you’ve downloaded the license keys, you can apply it to your Docker Ente
 2. Navigate to the **Admin Settings** page.
 3. On the left pane, click **License** and then **Upload License**. The license is refreshed immediately.
 
-For details, see [Licensing UCP](https://docs.docker.com/ee/ucp/admin/configure/license-your-installation/).
+For details, see [Licensing UCP](ucp/admin/configure/license-your-installation.md).
 
 ### DTR
 
@@ -77,7 +77,7 @@ For details, see [Licensing UCP](https://docs.docker.com/ee/ucp/admin/configure/
 2. Select **System** from the left navigation pane.
 3. Click **Apply new license** and upload your license key.
     
-For details, see [Licensing DTR](https://docs.docker.com/ee/dtr/admin/configure/license-your-installation/).
+For details, see [Licensing DTR](dtr/admin/configure/license-your-installation.md).
 
 ### Engine - Enterprise
 

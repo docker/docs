@@ -201,3 +201,50 @@ Parameter values and descriptions for environment configuration on Windows:
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
 | `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
+
+### File format update
+
+#### From version 1 to 2
+
+Docker Desktop Enterprise 2.3.0.0-ent contains a change in the configuration file format.
+
+If you haven’t made any changes to the `admin-settings.json` file in the previous installation, you can simply delete it and Docker Desktop will re-create it automatically.
+Otherwise manual steps are required to update the `admin-settings.json` file.
+
+1. Increase the value of the `configurationFileVersion` field from 1 to 2, i.e. before:
+    ```json
+   {
+      "configurationFileVersion": 1,
+      ...
+   }
+    ```
+    after:
+    ```json
+   {
+      "configurationFileVersion": 2,
+      ...
+   }
+    ```
+
+2. Replace the `sharedDrives` and `sharedFolders` fields with a single `filesharingDirectories` field, e.g. before:
+    ```json
+   {
+      ...
+      "sharedDrives": {
+        "locked": true,
+        "value": ["C"]
+      },
+      "sharedFolders": ["%USERPROFILE%"]
+   }
+    ```
+    after:
+    ```json
+   {
+      ...
+      "filesharingDirectories": {
+        "locked": true,
+        "value": ["C:", "%USERPROFILE%"]
+      }
+   }
+    ```
+

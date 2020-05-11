@@ -21,8 +21,8 @@ To create a repository, sign into Docker Hub, click on **Repositories** then
 When creating a new repository:
 
  * You can choose to put it in your Docker ID
-namespace, or in any [organization](/docker-hub/orgs.md) where you are an
-[_owner_](/orgs/#the-owners-team).
+namespace, or in any [organization](orgs.md) where you are an
+[_owner_](orgs.md#the-owners-team).
 
 * The repository name needs to be unique in that namespace, can be two
 to 255 characters, and can only contain lowercase letters, numbers or `-` and
@@ -112,7 +112,7 @@ changing its status from private to public.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
-see the [organizations documentation](/docker-hub/orgs.md).
+see the [organizations documentation](orgs.md).
 
 
 ## Viewing repository tags
@@ -156,7 +156,7 @@ There you can see two example results: `centos` and `ansible/centos7-ansible`.
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[official images](/docker-hub/official_images.md). The `/` character separates
+[official images](official_images.md). The `/` character separates
 a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
