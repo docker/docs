@@ -35,11 +35,11 @@ The following `admin-settings.json` code and table provide the required syntax a
 
 ```json
 {
-  "configurationFileVersion": 1,
-   "analyticsEnabled": {
+  "configurationFileVersion": 2,
+  "analyticsEnabled": {
     "locked": false,
     "value": false
-   },
+  },
   "dockerCliOptions": {
     "stackOrchestrator": {
       "locked": false,
@@ -54,10 +54,10 @@ The following `admin-settings.json` code and table provide the required syntax a
       "exclude": "docker.com,github.com"
     }
   },
-"linuxVM": {
-  "cpus": {
-    "locked": false,
-    "value": 2
+  "linuxVM": {
+    "cpus": {
+      "locked": false,
+      "value": 2
     },
     "memoryMiB": {
       "locked": false,
@@ -67,27 +67,22 @@ The following `admin-settings.json` code and table provide the required syntax a
       "locked": false,
       "value": 1024
     },
-    "dataFolder" : {
-      "locked" : false,
-      "value" : "/Users/..."
+    "dataFolder": {
+      "locked": false,
+      "value": "/Users/..."
     },
     "diskSizeMiB": {
       "locked": false,
       "value": 65536
     },
-    "filesharingDirectories": {
-      "locked":false,
-      "value":["/Users", "..."]
-    },
     "dockerDaemonOptions": {
       "experimental": {
-         "locked": false,
-         "value": true
+        "locked": false,
+        "value": true
       }
     }
   },
   "kubernetes": {
-
     "enabled": {
       "locked": false,
       "value": false
@@ -105,19 +100,30 @@ The following `admin-settings.json` code and table provide the required syntax a
       "value": null
     }
   },
-
-  "template" : {
-      "defaultOrg" : {"value": "myorg", "locked":true},
-      "defaultRegistry" : {"value": "mydtr:5000", "locked":true},
-      "repositories": {
-        "value": [
-          "https://one/library.yaml",
-          "https://two/library.yaml",
-          "https://three/library.yaml"
-          ],
-        "locked" : true
-      }
+  "template": {
+    "defaultOrg": {
+      "value": "myorg",
+      "locked": true
     },
+    "defaultRegistry": {
+      "value": "mydtr:5000",
+      "locked": true
+    },
+    "repositories": {
+      "value": [
+        "https://one/library.yaml",
+        "https://two/library.yaml",
+        "https://three/library.yaml"
+      ],
+      "locked": true
+    }
+  },
+  "filesharingDirectories": {
+    "locked": false,
+    "value": [
+      "/Users"
+    ]
+  }
 }
 ```
 
@@ -135,7 +141,6 @@ Parameter values and descriptions for environment configuration on Mac:
 | `swapMiB`                         | Specifies the amount of memory in MiB (1 MiB = 1048576 bytes) allocated for the swap file.                |
 | `dataFolder`                      | Specifies the directory containing the VM disk files.  |
 | `diskSizeMiB`                     | Specifies the amount of disk storage in MiB (1 MiB = 1048576 bytes) allocated for images and containers.                       |
-| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
 | `dockerDaemonOptions`             | Overrides the options in the linux daemon config file. For more information, see [Docker engine reference](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).        |
 | (End of `linuxVM` section.)       |                                   |
 | `kubernetes`                      | Parameters and settings related to kubernetes options - grouped together here for convenience.                  |
@@ -148,3 +153,50 @@ Parameter values and descriptions for environment configuration on Mac:
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|
+| `filesharingDirectories`          | The host folders that users can bind-mount in containers.         |
+=======
+
+### File format update
+
+#### From version 1 to 2
+
+Docker Desktop Enterprise 2.3.0.0-ent contains a change in the configuration file format.
+
+If you haven’t made any changes to the `admin-settings.json` file in the previous installation, you can simply delete it and Docker Desktop will re-create it automatically.
+Otherwise manual steps are required to update the `admin-settings.json` file.
+
+1. Increase the value of the `configurationFileVersion` field from `1` to `2`, i.e. before:
+    ```json
+   {
+      "configurationFileVersion": 1,
+      ...
+   }
+    ```
+    after:
+    ```json
+   {
+      "configurationFileVersion": 2,
+      ...
+   }
+    ```
+
+2. Move the `filesharingDirectories` field outside the `linuxVM` field, e.g. before:
+    ```json
+      "linuxVM": {
+        ...
+        "filesharingDirectories": {
+          "locked": true,
+          "value": ["/Users"]
+        }
+      }
+    ```
+    after:
+    ```json
+      "linuxVM": {
+        ...
+      },
+      "filesharingDirectories": {
+        "locked": true,
+        "value": ["/Users"]
+      }
+    ```

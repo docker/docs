@@ -167,9 +167,10 @@ Use `systemctl --user` to manage the lifecycle of the daemon:
 $ systemctl --user start docker
 ```
 
-To launch the daemon on system startup, enable systemd lingering:
+To launch the daemon on system startup, enable the systemd service and lingering:
 
 ```console
+$ systemctl --user enable docker
 $ sudo loginctl enable-linger $(whoami)
 ```
 
