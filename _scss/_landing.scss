@@ -18,25 +18,50 @@ body#landing {
 
   .header {
     background-color: $light-blue;
+    border: unset;
+    border-radius: unset;
+    height: unset;
+
+    @include before-md-width {
+      .container {
+        width: unset;
+      }
+    }
 
     a, .toggle-mode {
       color: white;
     }
 
-    .navbar-nav > li > a {
-      font-weight: bold;
-      padding-bottom: 11px;
-      border-bottom-style: solid;
-      border-bottom-width: 4px;
-      border-bottom-color: rgba(255, 255, 255, 0);
+    .navbar-brand {
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
 
-    .navbar-nav > li.active > a {
-      border-bottom-color: rgba(255, 255, 255, 0.5);
+    .navbar-toggle {
+      margin: 15px;
+      height: 20px;
+      display: block;
+
+      @include md-width {
+        display: none;
+      }
     }
 
-    .logo {
-      margin: 12px 10px;
+    @include md-width {
+      .navbar-nav > li > a {
+        font-weight: bold;
+        line-height: 25px;
+        padding-bottom: 11px;
+        border-bottom-style: solid;
+        border-bottom-width: 4px;
+        border-bottom-color: rgba(255, 255, 255, 0);
+      }
+    }
+
+    @include md-width {
+      .navbar-nav > li.active > a {
+        border-bottom-color: rgba(255, 255, 255, 0.5);
+      }
     }
 
     .toggle-mode {
