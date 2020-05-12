@@ -2,7 +2,7 @@
 description: Docker Desktop WSL 2 backend
 keywords: WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker
 redirect_from:
-- /docker-for-windows/wsl/
+- /docker-for-windows/wsl-tech-preview/
 title: Docker Desktop WSL 2 backend
 toc_min: 2
 toc_max: 3
@@ -18,17 +18,17 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you install the Docker Desktop WSL 2 backend, you must complete the following steps:
 
-1. Install Windows 10 Insider Preview build 19041 or higher.
-2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/windows/wsl/wsl2-install).
+1. Install Windows 10, version 2004 or higher.
+2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
 ## Download
 
-Download [Docker Desktop Edge 2.2.3.0](https://download.docker.com/win/edge/Docker%20Desktop%20Installer.exe) or a later release.
+Download [Docker Desktop Stable 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) or a later release.
 
 ## Install
 
-Ensure you have completed the steps described in the Prerequisites section **before** installing the Docker Desktop Edge 2.2.3.0 release.
+Ensure you have completed the steps described in the Prerequisites section **before** installing the Docker Desktop Stable 2.3.0.2 release.
 
 1. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
 2. Start Docker Desktop from the Windows Start menu.
