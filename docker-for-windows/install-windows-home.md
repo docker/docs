@@ -8,7 +8,7 @@ You can now install Docker Desktop on Windows Home machines using the WSL 2 back
 
 This page contains information on installing Docker Desktop on Windows 10 Home. If you are looking for information about installing Docker Desktop on Windows 10 Pro, Enterprise, or Education, see [Install Docker Desktop on Windows](/install.md).
 
-[Download from Docker Hub](Add URL){:
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
 .button .outline-btn}
 
 Docker Desktop on Windows Home offers the following benefits:
