@@ -1,6 +1,8 @@
 $light-blue: #2496ed;
 $dark-blue: #002c66;
 $bg-header-night: #101c29;
+$bg-body-night: #061F2F;
+$bg-card-night: #0F161E;
 
 body#landing {
   background-color: $bg-sidebar;
@@ -202,6 +204,7 @@ body#landing {
       button {
         background-color: #FF3F73;
         color: white;
+        font-family: 'Open Sans';
         font-size: 17px;
         font-weight: bold;
         padding: 20px 60px;
@@ -318,14 +321,14 @@ body#landing.night {
   color: $body-text-color-night;
 
   .header {
-    background-color: $bg-header-night;
+    background-color: $bg-body-night;
   }
 
   .card {
-    background-color: $bg-header-night;
+    background-color: $bg-card-night;
   }
 
   .cardlet {
-    background-color: $bg-header-night;
+    background-color: $bg-card-night;
   }
 }
