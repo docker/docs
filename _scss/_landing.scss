@@ -179,6 +179,12 @@ body#landing {
     background-color: #F2F3F5;
     padding: 24px 36px;
 
+    .title {
+      font-family: 'Geomanist Book';
+      line-height: 22px;
+      font-size: 22px;
+    }
+
     p {
       font-size: 14px;
       line-height: 18px;
@@ -249,7 +255,19 @@ body#landing {
   }
 
   .help-by-product {
+    .title {
+      font-family: 'Geomanist Book';
+      font-size: 22px;
+    }
+
+    ul.nav.nav-tabs li a, h5, h6 {
+      font-family: 'Geomanist Regular';
+      font-size: 18px;
+    }
+
     ul.nav.nav-tabs {
+      margin-bottom: 30px;
+
       li a {
         cursor: pointer;
       }
@@ -319,6 +337,7 @@ body#landing {
 
   footer.footer {
     background-color: $dark-blue;
+    margin-top: 130px;
 
     a, p {
       color: white;
