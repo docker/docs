@@ -84,7 +84,17 @@ The following section describes how to start developing your applications using 
 
 ## Best practices
 
-- To get the best out of the file system performance, we recommend that you avoid mounting from the Windows file system (even on a WSL distro). For example, avoid `docker run -v /mnt/c/users:/users`. Instead, we recommend that you mount files from your distro's local file system, for example, `docker run -v ~/my-project:/sources <my-image>`.
+- To get the best out of the file system performance when bind-mounting files:
+    - Store source code and other data that is bind-mounted into Linux containers
+      (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux
+      filesystem, rather than the Windows filesystem.
+    - Linux containers only receive file change events ("inotify events") if the
+      original files are stored in the Linux filesystem.
+    - Performance is much higher when files are bind-mounted from the Linux
+      filesystem, rather than remoted from the Windows host. Therefore avoid
+      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
+    - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
+      where `~` is expanded by the Linux shell to `$HOME`.
 - If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
 - If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
 - To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
