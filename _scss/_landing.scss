@@ -321,12 +321,15 @@ body#landing {
       min-height: 200px;
 
       &::after {
-        content: '→';
+        content: '';
+        background-image: url(/images/arrow.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
         position: absolute;
         top: 10px;
         right: 10px;
-        transform: rotate(-45deg);
-        font-size: large;
+        width: 15px;
+        height: 15px;
       }
 
       @include sm-width {
