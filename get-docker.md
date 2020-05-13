@@ -1,7 +1,6 @@
 ---
 description: Home page for Get Docker
 keywords: Docker, download, documentation, manual
-landing: true
 title: Get Docker
 redirect_from:
 - /install/
