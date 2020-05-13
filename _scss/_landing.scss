@@ -7,11 +7,14 @@ $bg-card-night: #0F161E;
 body#landing {
   background-color: $bg-sidebar;
   color: $body-text-color;
-  font-family: "Geomanist Regular";
   font-size: $body-text-size;
   margin: $clear;
   padding: $clear;
   overflow-x: hidden;
+
+  h2, h5, h6 {
+    font-family: 'Geomanist Regular';
+  }
 
   section {
     margin-top: 40px;
@@ -82,6 +85,13 @@ body#landing {
       font-size: 32px;
       line-height: 32px;
       margin-bottom: 14px;
+    }
+
+    input {
+      font-size: 18px;
+      height: 50px;
+      line-height: 24px;
+      padding: 13px 20px;
     }
   }
 
