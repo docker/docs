@@ -136,9 +136,9 @@ from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
+       deb [arch=amd64] {{ download-url-base }} \
        $(lsb_release -cs) \
-       stable"
+       stable
     ```
 
     </div>
