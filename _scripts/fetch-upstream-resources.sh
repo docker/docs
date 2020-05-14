@@ -35,4 +35,5 @@ wget --quiet --directory-prefix=./engine/reference/commandline/ "https://raw.git
 wget --quiet --directory-prefix=./registry/                     "https://raw.githubusercontent.com/docker/distribution/${DISTRIBUTION_BRANCH}/docs/configuration.md"  || (echo "Failed registry/configuration.md download" && exit 1)
 
 # Remove things we don't want in the build
-rm ./registry/spec/api.md.tmpl
+rm -f ./engine/extend/cli_plugins.md # the cli plugins api is not a stable API, and not included in the TOC for that reason.
+rm -f ./registry/spec/api.md.tmpl

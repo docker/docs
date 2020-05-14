@@ -18,7 +18,7 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-  - path: /engine/docker-overview/
+  - path: /get-started/overview/
     title: Docker overview
   - sectiontitle: Quickstart
     section:
@@ -1168,7 +1168,7 @@ manuals:
       title: Stable release notes
     - path: /docker-for-windows/edge-release-notes/
       title: Edge release notes
-    - path: /docker-for-windows/wsl-tech-preview/
+    - path: /docker-for-windows/wsl/
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/
     title: Dashboard

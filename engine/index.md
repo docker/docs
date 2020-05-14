@@ -6,6 +6,7 @@ redirect_from:
 - /engine/ce-ee-node-activate/
 - /linux/
 - /edge/
+- /manuals/ # TODO remove this redirect after we've created a landing page for the product manuals section
 title: Docker Engine overview
 ---
 

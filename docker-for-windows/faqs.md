@@ -124,7 +124,7 @@ You can find a tutorial about running Windows containers on Windows Server in
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-Windows 10 Insider Preview (Windows 10 Home) users can now install [Docker Desktop Edge 2.2.2.0](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe) or a later release with the [experimental WSL 2 support](wsl-tech-preview.md). This requires Windows Insider Preview Build 19018 or later.
+Windows 10 Home, version 2004 users can now install [Docker Desktop Stable 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) or a later release with the [WSL 2 backend](wsl.md).
 
 Docker Desktop Stable releases require the Hyper-V feature which is not available in the Windows 10 Home edition.
 
