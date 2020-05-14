@@ -18,7 +18,7 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-  - path: /engine/docker-overview/
+  - path: /get-started/overview/
     title: Docker overview
   - sectiontitle: Quickstart
     section:
