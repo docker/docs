@@ -1194,24 +1194,30 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
-  - path: /docker-hub/release-notes/
-    title: Release notes
+  - sectiontitle: Administration
+    section:
+     - path: /docker-hub/deactivate-account/
+       title: Deactivate an account or an organization
+  - sectiontitle: Billing
+    section:
+    - path: /docker-hub/billing/
+      title: Overview
+    - path: /docker-hub/billing/upgrade/
+      title: Upgrade your plan
+    - path: /docker-hub/billing/downgrade/
+      title: Downgrade your plan
+    - path: /docker-hub/billing/add-seats/
+      title: Add seats
+    - path: /docker-hub/billing/remove-seats/
+      title: Remove seats
+    - path: /docker-hub/billing/faq/
+      title: Billing FAQ
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/official_images/
     title: Official images
-  - path: /docker-hub/orgs/
-    title: Teams & organizations
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/upgrade/
-       title: Upgrade your plan
-     - path: /docker-hub/cancel-downgrade/
-       title: Cancel or downgrade your plan
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/slack_integration/
@@ -1244,6 +1250,10 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+  - path: /docker-hub/download-rate-limit/
+    title: Download rate limit
+  - path: /docker-hub/release-notes/
+    title: Release notes
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Notary
