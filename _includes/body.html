@@ -1,0 +1,216 @@
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+    <header>
+        {% include header.html %}
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section">
+                            {% if page.url != '/' %}
+                            {% if page.title %}
+                            <h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
+                            <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
+                            {% endif %}{% endif %}
+                            {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
+                            {% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
+                            {% if page.ui_tabs or page.cli_tabs or page.api_tabs %}
+                            {% capture content %}
+
+                            {% if page.intro %}{{ page.intro | markdownify }}{% else %}{{ page.description | markdownify }}{% endif %}
+
+                            {% if page.ui_tabs %}
+                            <ul class="nav nav-tabs">{% for tab in page.ui_tabs %}
+                                <li{% if forloop.first %} class="active" {% endif %}><a data-toggle="tab"
+                                        data-target="#ui-{{ tab.version | slugify }}"
+                                        id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %}
+                                        (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>
+                                    {% endfor %}
+                            </ul>
+                            <div class="tab-content">{% for tab in page.ui_tabs %}
+                                <div id="ui-{{ tab.version | slugify }}"
+                                    class="tab-pane fade{% if forloop.first %} in active{% endif %}">
+                                    {% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}
+                                </div>{% endfor %}
+                            </div>
+                            {% endif %}
+                            {% if page.cli_tabs %}
+                            <ul class="nav nav-tabs">{% for tab in page.cli_tabs %}
+                                <li{% if forloop.first %} class="active" {% endif %}><a data-toggle="tab"
+                                        data-target="#cli-{{ tab.version | slugify }}"
+                                        id="cli-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a>
+                                    </li>{% endfor %}
+                            </ul>
+                            <div class="tab-content">{% for tab in page.cli_tabs %}
+                                <div id="cli-{{ tab.version | slugify }}"
+                                    class="tab-pane fade{% if forloop.first %} in active{% endif %}">
+                                    {% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}
+                                </div>{% endfor %}
+                            </div>
+                            {% endif %}
+                            {% if page.api_tabs %}
+                            <ul class="nav nav-tabs">{% for tab in page.api_tabs %}
+                                <li{% if forloop.first %} class="active" {% endif %}><a data-toggle="tab"
+                                        data-target="#api-{{ tab.version | slugify }}"
+                                        id="api-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a>
+                                    </li>{% endfor %}
+                            </ul>
+                            <div class="tab-content">{% for tab in page.api_tabs %}
+                                <div id="api-{{ tab.version | slugify }}"
+                                    class="tab-pane fade{% if forloop.first %} in active{% endif %}">
+                                    {% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version api="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "---" | markdownify }}
+                                </div>{% endfor %}
+                            </div>
+                            {% endif %}
+                            {% if page.next_steps %}
+                            <h2>Next steps</h2>
+                            <ul>
+                                {% for step in page.next_steps %} <li><a href="{{ step.path }}">{{ step.title }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% endcapture %}
+                            {% endif %}
+                            {{ content }}
+                            <!-- tags -->
+                            {% unless page.notags == true %}
+                            {% assign keywords = page.keywords | split:"," -%}
+                            {% if keywords.size > 0 -%}
+                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span
+                                style="vertical-align: 2px">
+                                {%- for keyword in keywords -%}
+                                {%- assign strippedKeyword = keyword | strip -%}
+                                <a
+                                    href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+                                {%- unless forloop.last %}, {% endunless -%}
+                                {% endfor -%}
+                            </span>
+                            {% endif -%}
+                            {% endunless %}
+                            {% if page.noratings != true %}
+                            <div id="ratings-div"
+                                style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+                                <div id="pd_rating_holder_8453675"></div>
+                                <script type="text/javascript">
+                                    PDRTJS_settings_8453675 = {
+                                        "id": "8453675",
+                                        "unique_id": "{{ page.path }}",
+                                        "title": "{{ page.title }}",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/{{ page.path }}"
+                                    };
+                                    (function (d, c, j) {
+                                        if (!document.getElementById(j)) {
+                                            var pd = d.createElement(c),
+                                                s;
+                                            pd.id = j;
+                                            pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+                                            s = document.getElementsByTagName(c)[0];
+                                            s.parentNode.insertBefore(pd, s);
+                                        }
+                                    }(document, 'script', 'pd-rating-js'));
+                                </script>
+                            </div>
+                            {% endif %}
+                        </section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            {% include side-menu.html %}
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul>
+                                        {% if edit_url != "" %}
+                                        <li style="visibility: hidden"><a href="{{ edit_url }}"><i
+                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this
+                                                page</a></li>{% endif %}
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+                                                class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request
+                                                docs changes</a></li>
+                                        <!-- toggle mode -->
+                                        <li>
+                                            <div class="toggle-mode">
+                                                <div class="icon">
+                                                    <i class="fa fa-sun-o" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="toggle-switch">
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="switch-style">
+                                                        <div class="slider round"></div>
+                                                    </label>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% unless page.notoc %}
+                                {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %}
+                                {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %}
+                                {% assign my_name = page.url | default: "unnamed" %}
+                                <div id="side-toc-title">On this page:</div>
+                                {% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
+                                {% endunless %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if page.path == "404.md" %}
+    <script type="text/javascript">
+        var path = window.location.pathname.replace("#", "");
+        var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
+        document.getElementsByClassName("nomunge")[1].onclick = function () {
+            document.getElementsByClassName("nomunge")[1].href = ghIssueQueryString;
+            return true;
+        };
+    </script>
+    {% endif %}
+    <footer class="footer">
+        {% include footer.html %}
+    </footer>
+    <link rel="stylesheet" href="/css/github.css">
+    {% if page.highlightjs == true %}
+    <script src="/js/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    {% endif %}
+    <script defer src="/js/anchorlinks.js"></script>
+    <script defer src="/js/menu.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+    <script>
+        // Default to assuming this is an archive and hiding some stuff
+        // See js/archive.js and js/docs.js for logic relating to this
+        var isArchive = true;
+        var dockerVersion = 'v{{ site.docker_ce_version }}';
+        // In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+        var jekyllEnv = '{{ jekyll.environment }}';
+        // If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+        if (jekyllEnv === 'development') {
+            jekyllEnv = '';
+        }
+        var pageURL = jekyllEnv + '{{ page.url }}';
+    </script>
+    <script src="/js/archive.js"></script>
+    <script src="/js/stickyfill.min.js"></script>
+    <script defer src="/js/metadata.js"></script>
+    <script src="/js/glossary.js"></script>
+    <script defer src="/js/docs.js"></script>
+    <script defer src="/js/toc.js"></script>
+    <script>
+        jQuery(document).ready(function () { hookupTOCEvents(); });
+    </script>
+</body>
