@@ -31,6 +31,7 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 
 ### Bug fixes and minor changes
 
+- Reduced the size of the Docker Desktop installer from 708 MB to 456 MB.
 - Fixed bug where containers disappeared from the UI when Kubernetes context is invalid. Fixes [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
 - Fixed a file descriptor leak in `vpnkit-bridge`. Fixes [docker/for-win#5841](https://github.com/docker/for-win/issues/5841).
 - Added a link to the Edge channel from the UI.
