@@ -1,5 +1,8 @@
 
 horizontalnav:
+- title: Home
+  path: /
+  node: home
 - title: Guides
   path: /develop/
   node: guides
@@ -12,6 +15,8 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+
+home: {}
 
 guides:
 - title: Get Docker
