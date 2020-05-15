@@ -8,6 +8,7 @@ $xl-min-width: 1200px;
     @content;
   }
 }
+
 @mixin before-md-width {
   @media (max-width: $md-min-width - 1) {
     @content;
@@ -19,6 +20,13 @@ $xl-min-width: 1200px;
     @content;
   }
 }
+
+@mixin before-lg-width {
+  @media (max-width: $lg-min-width - 1) {
+    @content;
+  }
+}
+
 @mixin lg-width {
   @media (min-width: $lg-min-width) {
     @content;

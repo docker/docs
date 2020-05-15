@@ -27,7 +27,19 @@ body#landing {
     border-radius: unset;
     height: unset;
 
-    @include before-md-width {
+    @include md-width {
+      .navbar-collapse.collapse {
+        display: flex !important;
+
+        ul:first-of-type {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    @include before-lg-width {
       .container {
         width: unset;
       }
@@ -56,7 +68,8 @@ body#landing {
       .navbar-nav > li > a {
         font-weight: bold;
         line-height: 25px;
-        padding-bottom: 11px;
+        padding-top: 17px;
+        padding-bottom: 9px;
         border-bottom-style: solid;
         border-bottom-width: 4px;
         border-bottom-color: rgba(255, 255, 255, 0);
