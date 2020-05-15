@@ -105,6 +105,11 @@ body#landing {
       height: 50px;
       line-height: 24px;
       padding: 13px 20px;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
     }
   }
 
