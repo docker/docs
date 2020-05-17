@@ -172,7 +172,7 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
     docker rm --force bb
     ```
 
-    The `--force` option removes the running container. If you stop the container running with `docker stop bb` you do not need to use `--force`.
+    The `--force` option stops a running container, so it can be removed. If you stop the container running with `docker stop bb` first, then you do not need to use `--force` to remove it.
 
 ## Conclusion
 
