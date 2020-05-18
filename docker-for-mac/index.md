@@ -479,7 +479,6 @@ mkdir -p ~/.config/fish/completions
 Now add fish completions from docker.
 
 ```bash
-set etc /Applications/Docker.app/Contents/Resources/etc
 ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
 ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
