@@ -54,6 +54,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 **Other fixes**
 
+- Reduced the size of the Docker Desktop installer from 960 MB to 409 MB.
 - Added an option to delete data from the Troubleshoot screen.
 - Fixed a bug where containers disappeared from the UI when Kubernetes context is invalid. Fixed [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
 - Fixed Windows event logs filtering when copying them to the Docker Desktop log files. Fixed [docker/for-win#6258](https://github.com/docker/for-win/issues/6258).
