@@ -2,6 +2,35 @@
 description: Docker Engine swarm mode overview
 keywords: docker, container, cluster, swarm
 title: Swarm mode overview
+redirect_from:
+- /swarm/overview/
+- /swarm/get-swarm/
+- /swarm/release-notes/
+- /swarm/install-w-machine/
+- /swarm/plan-for-production/
+- /swarm/install-manual/
+- /swarm/swarm_at_scale/about/
+- /swarm/swarm_at_scale/deploy-infra/
+- /swarm/swarm_at_scale/deploy-app/
+- /swarm/swarm_at_scale/troubleshoot/
+- /swarm/multi-manager-setup/
+- /swarm/networking/
+- /swarm/multi-host-networking/
+- /swarm/discovery/
+- /swarm/provision-with-machine/
+- /swarm/scheduler/filter/
+- /swarm/scheduler/rescheduling/
+- /swarm/scheduler/strategy/
+- /swarm/secure-swarm-tls/
+- /swarm/configure-tls/
+- /swarm/reference/create/
+- /swarm/reference/help/
+- /swarm/reference/join/
+- /swarm/reference/list/
+- /swarm/reference/manage/
+- /swarm/reference/swarm/
+- /swarm/status-code-comparison-to-docker/
+-  /swarm/swarm-api/
 ---
 
 To use Docker in swarm mode, install Docker. See
