@@ -117,9 +117,14 @@ Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ 
 
 ## Windows requirements
 
-### How do I run Windows containers on Docker Desktop on Windows Server?
+### Can I run Docker Desktop on Windows Server?
 
-You can find a tutorial about running Windows containers on Windows Server in
+No, running Docker Desktop on Windows Server is not supported.
+
+### How do I run Windows containers on Windows Server?
+
+You can install a native Windows binary which allows you to develop and run
+Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
 
 ### Can I install Docker Desktop on Windows 10 Home?

@@ -242,13 +242,10 @@ Here are some steps to take if you experience similar problems:
 
 ### Windows containers and Windows Server
 
-Docker Desktop is not supported on Windows Server. Instead, you can use
-Docker Enterprise Basic at no additional cost.
-
-If you have questions about how to run Windows containers on Windows 10, see
+Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
 
-A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
+A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 You can install a native Windows binary which allows you to develop and run
