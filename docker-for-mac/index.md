@@ -470,18 +470,18 @@ class="_"}. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Fish-shell `completions/`
 directory.
 
-Create at first the `completions` directory if not exist:
+Create the `completions` directory:
 
 ```bash
-mkdir ~/.config/fish/completions
+mkdir -p ~/.config/fish/completions
 ```
 
 Now add fish completions from docker.
 
 ```bash
 set etc /Applications/Docker.app/Contents/Resources/etc
-ln -s $etc/docker.fish-completion ~/.config/fish/completions/docker.fish
-ln -s $etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
+ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
+ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
 
 ## Give feedback and get help
