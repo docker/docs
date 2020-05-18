@@ -1,7 +1,7 @@
 
 horizontalnav:
 - title: Guides
-  path: /
+  path: /develop/
   node: guides
 - title: Product manuals
   path: /engine/

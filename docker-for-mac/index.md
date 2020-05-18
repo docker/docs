@@ -464,6 +464,27 @@ ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
 ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
+### Fish-Shell
+
+Fish-shell also supports tab completion [completion
+system](https://fishshell.com/docs/current/#tab-completion){:target="_blank"
+class="_"}. To activate completion for Docker commands,
+these files need to be copied or symlinked to your Fish-shell `completions/`
+directory.
+
+Create the `completions` directory:
+
+```bash
+mkdir -p ~/.config/fish/completions
+```
+
+Now add fish completions from docker.
+
+```bash
+ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
+ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
+```
+
 ## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
