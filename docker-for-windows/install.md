@@ -96,7 +96,8 @@ When the initialization is complete, Docker Desktop launches the onboarding tuto
 
 Congratulations! You are now successfully running Docker Desktop on Windows.
 
-If you skipped or would like to run/re-run the tutorial, use the `Learn` item on the menu for Docker Desktop.
+If you would like to rerun the tutorial, go to the Docker Desktop menu 
+and select **Learn**.
 
 ## Uninstall Docker Desktop
 
