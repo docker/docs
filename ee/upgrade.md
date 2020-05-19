@@ -216,12 +216,12 @@ $ docker node update --availability drain <node>
 To upgrade a node individually by operating system, please follow the instructions
 listed below:
 
-* [Windows Server](/ee/docker-ee/windows/docker-ee.md#update-docker-engine---enterprise)
-* [Ubuntu](/ee/docker-ee/ubuntu.md#upgrade-docker-engine---enterprise)
-* [RHEL](/ee/docker-ee/rhel.md#upgrade-from-the-repository)
-* [CentOS](/ee/docker-ee/centos.md#upgrade-from-the-repository)
-* [Oracle Linux](/ee//oracle.md#upgrade-from-the-repository)
-* [SLES](/ee/docker-ee/suse.md#upgrade-docker-engine---enterprise)
+* [Windows Server](/ee/docker-ee/windows/docker-ee/#update-docker-engine---enterprise)
+* [Ubuntu](/ee/docker-ee/ubuntu/#upgrade-docker-engine---enterprise)
+* [RHEL](/ee/docker-ee/rhel/#upgrade-from-the-repository)
+* [CentOS](/ee/docker-ee/centos/#upgrade-from-the-repository)
+* [Oracle Linux](/ee//oracle/#upgrade-from-the-repository)
+* [SLES](/ee/docker-ee/suse/#upgrade-docker-engine---enterprise)
 
 ### Post-Upgrade steps for Docker Engine - Enterprise
 
