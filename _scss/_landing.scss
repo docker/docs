@@ -128,10 +128,16 @@ body#landing {
     @include lg-width { background-size: auto 60px }
 
     .title {
-      margin-top: 50px;
-      @include sm-width { margin-top: 60px }
-      @include md-width { margin-top: 72px }
-      @include lg-width { margin-top: 90px }
+      margin-top: 0;
+      margin-left: 60px;
+      @include sm-width { margin-left: 0; margin-top: 60px }
+      @include md-width { margin-left: 0; margin-top: 72px }
+      @include lg-width { margin-left: 0; margin-top: 90px }
+    }
+
+    p {
+      margin-left: 60px;
+      @include sm-width { margin-left: 0 }
     }
   }
 
