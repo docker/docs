@@ -77,6 +77,9 @@ The Docker Desktop installation includes
 
 Congratulations! You are now successfully running Docker Desktop.
 
+If you would like to rerun the tutorial, go to the Docker Desktop menu 
+and select **Learn**.
+
 ## Uninstall Docker Desktop
 
 To unistall Docker Desktop from your Mac:
