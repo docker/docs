@@ -308,6 +308,8 @@ body#landing {
 
       li a {
         cursor: pointer;
+        padding: 10px 3px;
+        @include sm-width { padding: 10px 15px; }
       }
 
       li.active a {
