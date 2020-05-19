@@ -44,21 +44,17 @@ body.night {
         background: $bg-secondary-night;
     }
     .nav-secondary input[type=search] {
-        background: rgba(76, 76, 76, 0.47) url(/images/search.png) no-repeat;
-        background-position: 10px 9px;
+        background: rgba(76, 76, 76, 0.47) url(/images/search.png) no-repeat 10px 9px;
         color: $white;
     }
     .nav-secondary-tabs .search-form input[type=search] {
-        background: rgba(16, 28, 41, 0.6) url(/images/search.png) no-repeat;
-        background-position: 10px 9px;
+        background: rgba(16, 28, 41, 0.6) url(/images/search.png) no-repeat 10px 9px;
     }
     .nav-secondary-tabs .search-form input[type=search]:focus {
-        background: rgba(255,255,255,0.17) url(/images/search.png) no-repeat;
-        background-position: 10px 9px;
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
     }
     .nav-secondary .search-form input[type=search]:focus {
-        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat!important;
-        background-position: 10px 9px!important;
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px !important;
     }
     .sidebar-home,
     .sidebar,
@@ -130,7 +126,7 @@ body.night {
         background: #0a121b !important;
     }
     pre>code {
-        padding: 0px;
+        padding: 0;
     }
     .nav-secondary .dropdown-btn {
         color: #d0e8ff;
@@ -175,7 +171,7 @@ body.night {
         background: $bg-search-results-night;
         border: 1px solid $black;
         color: $white;
-        padding: 20px 0 15px 0px;
+        padding: 20px 0 15px 0;
         margin: 10px 0 0 0;
         position: absolute;
         width: 800px;
@@ -328,7 +324,6 @@ body.night {
         cursor: default;
         background-color: #4e6071;
         border: 1px solid transparent;
-        border-bottom-color: transparent;
     }
     .popover {
         color: $black;

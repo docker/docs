@@ -13,7 +13,7 @@ body#landing {
   overflow-x: hidden;
 
   h2, h5, h6 {
-    font-family: 'Geomanist Regular';
+    font-family: 'Geomanist Regular', sans-serif;
   }
 
   section {
@@ -119,8 +119,8 @@ body#landing {
 
   .card {
     background-color: $bg-body;
-    box-shadow: 0px 3px 6px rgba(11, 33, 74, 0.09),
-      0px -2px 2px rgba(11, 33, 74, 0.03);
+    box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
+      0 -2px 2px rgba(11, 33, 74, 0.03);
     padding: 24px 36px;
     min-height: 200px;
 
@@ -198,7 +198,7 @@ body#landing {
     padding: 24px 36px;
 
     .title {
-      font-family: 'Geomanist Book';
+      font-family: 'Geomanist Book', sans-serif;
       line-height: 22px;
       font-size: 22px;
     }
@@ -238,7 +238,7 @@ body#landing {
       a.btn {
         background-color: #FF3F73;
         color: white;
-        font-family: 'Open Sans';
+        font-family: 'Open Sans', sans-serif;
         font-size: 17px;
         font-weight: bold;
         padding: 20px 60px;
@@ -274,12 +274,12 @@ body#landing {
 
   .help-by-product {
     .title {
-      font-family: 'Geomanist Book';
+      font-family: 'Geomanist Book', sans-serif;
       font-size: 22px;
     }
 
     ul.nav.nav-tabs li a, h5, h6 {
-      font-family: 'Geomanist Regular';
+      font-family: 'Geomanist Regular', sans-serif;
       font-size: 18px;
     }
 
