@@ -11,6 +11,50 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.1.0
+2020-05-20
+
+> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
+- Upgrade to Qemu 4.2.0, add Risc-V support
+
+### Bug fixes and minor changes
+
+**Hyper-V**
+
+- Create drive symlinks in VM at startup to avoid breaking setup that was using them. Fixes [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
+- Implement `fallocate` for shared filesystems. See [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820).
+
+**WSL 2**
+
+- Configure CLI to use Docker Desktop credential store.
+- Adds a restart button to the popup prompting the user to install the Linux kernel.
+- More reliable bootstrap, do not rely on `wslpath` for path translation, retry mounts on errors at startup.
+
+**Dashboard**
+
+- Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
+- Fixed `open with vs code` button for compose app deployed from a WSL 2 Linux Workspace.
+
+**Other fixes**
+
+- Fixed an installer crash when an old and/or partially uninstalled version of Docker Desktop was present on the system. [Fixes docker/for-win/6536](https://github.com/docker/for-win/issues/6536).
+- Fixed home expansion when using tilde in bind mounts source (for example, `-v ~/dir:/vm-dir`)
+- `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715).
+- Fixed a typo in the backend destroy notification. Fixes [docker/for-win#6739](https://github.com/docker/for-win/issues/6739).
+- Fixed a crash which sometimes occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
+- Fixed a delay when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win/issues/1011).
+
+### Known issues
+
+**WSL 2**
+
+- Swarm service bind mounts are not always restored correctly.
+- Bind mounts of files living outside of the root mount point (files within `/mnt/c`, `/tmp`, `/run...`) don't work correctly when multiple containers mount them.
+
 ## Docker Desktop Community 2.3.0.1
 2020-04-28
 
