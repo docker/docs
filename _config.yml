@@ -15,6 +15,11 @@ lsi: false
 keep_files: ["v17.06", "v18.03", "v18.09"]
 exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
 
+# Google Analytics, etc.
+# TODO these should only be set when building for production, or passed as an environment variable when building
+google_analytics: GTM-WL2QLG5
+
+
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
 
