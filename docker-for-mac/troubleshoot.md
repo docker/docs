@@ -64,8 +64,7 @@ Once the diagnostics are available, you can upload them and obtain a
 team. For more information on our policy regarding personal data, see
 [how is personal data handled in Docker Desktop](faqs.md#how-is-personal-data-handled-in-docker-desktop).
 
-![Diagnostics & Feedback with
-ID](images/diagnose-feedback-id.png){:width="600px"}
+![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
 
 If you click **Report an issue**, this opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) issues on GitHub in your web browser in a "New issue" template. Add the details before submitting the issue. Do not forget to copy/paste your diagnostic ID.
 
@@ -265,8 +264,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   the Activity Monitor, and for some processes to consume a large amount of CPU
   resources. Reboot and restart Docker to resolve these issues.
 
-* Docker does not auto-start on login even when it is enabled in ![whale
-  menu](images/whale-x.png){: .inline} > **Preferences**. This is related to a
+* Docker does not auto-start on login even when it is enabled in
+  ![whale menu](images/whale-x.png){: .inline} > **Preferences**. This is related to a
   set of issues with Docker helper, registration, and versioning.
 
 * Docker Desktop uses the `HyperKit` hypervisor
