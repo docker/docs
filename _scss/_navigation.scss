@@ -164,7 +164,7 @@
 
 .collapsed
 {
-    cursor:pointer;   
+    cursor:pointer;
 }
 
 /*
@@ -308,7 +308,7 @@ input:checked+.slider:before {
 #tabs {
     float: left;
     margin: 0;
-    padding-left: 8px; 
+    padding-left: 8px;
     ul {
         padding: 0;
     }
@@ -384,4 +384,9 @@ input:checked+.slider:before {
     margin: 2px 0 0;
 }
 
-
+.divider {
+    height: 1px;
+    margin: 9px 35px;
+    overflow: hidden;
+    background-color: #077CBC;
+}
