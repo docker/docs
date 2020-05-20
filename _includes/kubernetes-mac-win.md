@@ -114,8 +114,10 @@ when deploying to override the default orchestrator for that deployment.
 docker stack deploy --orchestrator swarm --compose-file /path/to/docker-compose.yml mystack
 ```
 
-> **Note**: Deploying the same app in Kubernetes and swarm mode may lead to
-> conflicts with ports and service names.
+> **Note**
+>
+> Deploying the same app in Kubernetes and swarm mode may lead to conflicts with
+> ports and service names.
 
 ## Use the kubectl command
 
