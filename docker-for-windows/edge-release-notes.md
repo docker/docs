@@ -12,10 +12,9 @@ For information about Stable releases, see the [Stable release notes](release-no
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.3.1.0
+2020-05-20
 
-Add release date
-
-Add download URL
+> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
