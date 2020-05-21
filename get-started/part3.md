@@ -14,13 +14,15 @@ Work through the steps to build an image and run it as a containerized applicati
 
 ## Introduction
 
-At this point, you've built a containerized application in [Part 2](part2.md) on your local development machine, thanks to Docker Desktop. The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
+At this point, you've built a containerized application described in [Part 2](part2.md) on your local development machine.
+
+The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" class="_”}, so they can be easily downloaded and run on any destination machine.
 
 ## Set up your Docker Hub account
 
-If you don't yet have a Docker ID, follow these steps to set one up; this will allow you to share images on Docker Hub.
+If you don't have a Docker ID, follow these steps to create one. A Docker ID allows you to share images on Docker Hub.
 
-1.  Visit the Docker Hub sign up page, [https://hub.docker.com/signup](https://hub.docker.com/signup).
+1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" class="_”} page.
 
 2.  Fill out the form and submit to create your Docker ID.
 
@@ -30,33 +32,38 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 
 5.  Fill in your new Docker ID and password. After you have successfully authenticated, your Docker ID appears in the Docker Desktop menu in place of the 'Sign in' option you just used.
 
-    > You can do the same thing from the command line by typing `docker login`.
+    You can also sign into Docker Hub from the command line by typing `docker login`.
 
 ## Create a Docker Hub repository and push your image
 
-At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
+>
+> Before creating a repository, ensure you’ve set up your Docker Hub account and have connected it to your Docker Desktop.
 
-1.  Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
+Now let's create your first repository, and push your bulletin board image to Docker Hub.
 
-2.  Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
+1.  Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be redirected to the **Create Repository** page on Docker Hub.
+
+2.  Type the repository name as `bulletinboard` and click **Create** at the bottom of the page. Do not fill any other details for now.
 
     ![make a repo](images/newrepo.png){:width="100%"}
 
-3.  Now you are ready to share your image on Docker Hub, but there's one thing you must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, you must name images like `<Docker ID>/<Repository Name>:<tag>`. You can relabel your `bulletinboard:1.0` image like this (of course, please replace `gordon` with your Docker ID):
+3.  You are now ready to share your image on Docker Hub, however, there's one thing you must do first: images must be *namespaced correctly* to share on Docker Hub. Specifically, you must name images like `<Your Docker ID>/<Repository Name>:<tag>`.
+
+    Make sure you’re in the `node-bulletin-board/bulletin-board-app` directory in a terminal or PowerShell then and run:
 
     ```shell
-    docker tag bulletinboard:1.0 gordon/bulletinboard:1.0
+    docker tag bulletinboard:1.0 <Your Docker ID>/bulletinboard:1.0
     ```
 
 4.  Finally, push your image to Docker Hub:
 
     ```shell
-    docker push gordon/bulletinboard:1.0
+    docker push <Your Docker ID>/bulletinboard:1.0
     ```
 
-    Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
+    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 
-    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
+    > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
 
 ## Conclusion
 
