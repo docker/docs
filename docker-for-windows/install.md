@@ -77,6 +77,8 @@ Looking for information on using Windows containers?
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
+5. Run as Administrator the Windows Computer Management and navigate to "Users and Groups". Right-click and add your user to the "docker-users" group.  Then restart the computer.
+
 ## Start Docker Desktop
 
 Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select **Docker Desktop** in the search results.
