@@ -3696,7 +3696,7 @@ manuals:
           - sectiontitle: Manage users
             section:
             - path: /datacenter/dtr/2.2/guides/admin/manage-users/
-              title: Create and manage users
+              title: Authentication and authorization
             - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
               title: Create and manage users
             - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
