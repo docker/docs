@@ -14,7 +14,10 @@ Start by setting up the files needed to build the app. The app will run inside a
 Dockerfile consists of:
 
     FROM ruby:2.5
-    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+    RUN curl https://deb.nodesource.com/setup_12.x | bash
+    RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn
     RUN mkdir /myapp
     WORKDIR /myapp
     COPY Gemfile /myapp/Gemfile
@@ -40,7 +43,7 @@ Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
     source 'https://rubygems.org'
-    gem 'rails', '~>5'
+    gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 
 Create an empty `Gemfile.lock` to build our `Dockerfile`.
 
@@ -74,6 +77,8 @@ to link them together and expose the web app's port.
         image: postgres
         volumes:
           - ./tmp/db:/var/lib/postgresql/data
+        environment:
+          - POSTGRES_PASSWORD=password
       web:
         build: .
         command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -156,7 +161,7 @@ default: &default
   encoding: unicode
   host: db
   username: postgres
-  password:
+  password: password
   pool: 5
 
 development:
