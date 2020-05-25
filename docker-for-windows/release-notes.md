@@ -75,7 +75,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 ### Known issues
 
-- Some CLI commands fail if you are running Docker Desktop in the experimental Linux Containers on Windows (LCOW) mode. As alternatives, we recommend running either traditional Linux containers, or the experimental [WSL backend](wsl-tech-preview.md).
+- Some CLI commands fail if you are running Docker Desktop in the experimental Linux Containers on Windows (LCOW) mode. As alternatives, we recommend running either traditional Linux containers, or the [WSL 2 backend](wsl.md).
 
 **WSL 2**
 
