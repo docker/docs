@@ -21,7 +21,7 @@ Docker Desktop on Windows Home offers the following benefits:
 - Dynamic resource and memory allocation
 - Networking stack, support for http proxy settings, and trusted CA synchronization
 
-For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](/wsl-tech-preview.md)
+For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](wsl.md)
 
 ## What to know before you install
 
