@@ -48,8 +48,7 @@ services:
       update_config:
         parallelism: 2
         delay: 10s
-      restart_policy:
-        condition: on-failure
+      restart: on-failure
 
   db:
     image: postgres:9.4
