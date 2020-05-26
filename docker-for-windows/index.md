@@ -266,12 +266,12 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 #### Proxies
 
 Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
-automatically propagates these to Docker.  For example, if you set your proxy
+automatically propagates these to Docker. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
-Your proxy settings however will not be propagated into the containers you start.
-If you wish to set the proxy settings for your containers you will need to define
-environement variables for them, just like you would do on Linux, for example:
+Your proxy settings, however, will not be propagated into the containers you start.
+If you wish to set the proxy settings for your containers, you need to define
+environment variables for them, just like you would do on Linux, for example:
 
 ```ps
 > docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
