@@ -113,10 +113,15 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0;
+    padding: 0px 15px;
     text-align: left;
+
     li {
         display: block;
+    }
+
+    @include lg-width {
+        padding: 0;
     }
 }
 
