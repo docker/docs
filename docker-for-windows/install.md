@@ -77,7 +77,10 @@ Looking for information on using Windows containers?
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
-5. Run as Administrator the Windows Computer Management and navigate to "Users and Groups". Right-click and add your user to the "docker-users" group.  Then restart the computer.
+5. If your admin account is different to your user account, you must add the user to 
+the **docker-users** group. Run **Computer Management** as an administrator and navigate to 
+**Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
+Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
 
