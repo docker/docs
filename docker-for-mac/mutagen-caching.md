@@ -14,6 +14,10 @@ a continuous two-way sync of files between the host and containers using
 
 This page contains an example to show how the Mutagen feature should be used to sync files between the host and containers. It also gives some best practices to maximize performance.
 
+> **Important**
+>
+> After completing the caching process, you must delete and re-create any containers which will make use of the cached directories.
+
 ## A simple React app
 
 The following example bootstraps a simple React app with `npx` and configures
@@ -105,6 +109,8 @@ To achieve maximum performance when you enable two-way file sync:
 
 - Avoid changing the same files from both the host and containers. If changes
   are detected on both sides, the host takes precedence and the changes in the containers will be discarded.
+
+- After completing the caching process, you must delete and re-create any containers which will make use of the cached directories.
 
 ## Feedback
 

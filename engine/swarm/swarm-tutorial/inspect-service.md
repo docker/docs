@@ -111,7 +111,7 @@ the Docker CLI to see details about the service running in the swarm.
     you must ssh to that node.
 
     ```bash
-    [worker2]$docker ps
+    [worker2]$ docker ps
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     e609dde94e47        alpine:latest       "ping docker.com"   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35
