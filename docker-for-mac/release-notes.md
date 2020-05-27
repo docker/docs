@@ -25,7 +25,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ### Bug fixes and minor changes
 
 - Re-added device-mapper to the embedded Linux kernel. Fixes [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
-- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`. Fixes [docker/for-mac#4562](https://github.com/docker/for-mac/issues/4562).
+- Fixed `hyperkit` on newer Macs and newer versions of `Hypervisor.framework`. Fixes [docker/for-mac#4562](https://github.com/docker/for-mac/issues/4562).
 
 ## Docker Desktop Community 2.3.0.2
 2020-05-11
