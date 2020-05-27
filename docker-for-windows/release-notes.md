@@ -13,10 +13,32 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.0.3
+2020-05-27
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+
+### Upgrades
+
+- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
+
+### Bug fixes and minor changes
+
+- Fixed a crash when resetting to factory defaults with Hyper-V disabled. Fixes [docker/for-win#6738](https://github.com/docker/for-win/issues/6738).
+- Fixed opening an application in VS Code from a WSL 2 running app. Fixes [docker/for-win#6472](https://github.com/docker/for-win/issues/6472).
+- Fixed Swarm mounts in WSL 2. Fixes [docker/for-win#6507](https://github.com/docker/for-win/issues/6507).
+- Fixed a bug when using the Microsoft `mssql` image. Fixes [docker/for-win#6646](https://github.com/docker/for-win#6646)
+- Implemented `fallocate` for shared file systems. See [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820)
+- Fixed an installer crash when an old and/or partially uninstalled version of Docker Desktop was present on the system. Fixes [docker/for-win#6536](https://github.com/docker/for-win#6536).
+- Fixed a delay caused when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win#1011).
+- Fixed a regression where containers couldn’t anymore refer to mounted folders using the host drive letters. Fixes [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
+- Re-added device-mapper to the embedded Linux kernel. Fixes [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
+- Fixed an issue which caused the `:z` attribute in bind mounts to fail. Fixes [docker/for-win#6634](https://github.com/docker/for-win/issues/6634).
+
 ## Docker Desktop Community 2.3.0.2
 2020-05-11
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
 
 ### New
 
