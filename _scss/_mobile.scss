@@ -4,14 +4,13 @@
 *
 */
 
-@media only screen 
+@media only screen
     and (min-width : 376px)
-    and (max-width : 1150px) {  
+    and (max-width : 1150px) {
     .nav-primary,
     .hero-text,
     .banner,
-    ul.primary.nav.navbar-nav,
-    .nav-secondary .logo {
+    ul.primary.nav.navbar-nav {
         display: none;
     }
     .header,
@@ -55,9 +54,9 @@
     }
   }
 
-@media only screen 
+@media only screen
     and (min-width : 376px)
-    and (max-width : 900px) {  
+    and (max-width : 900px) {
     .sidebar {
         position: fixed;
         width: 100%;
@@ -76,8 +75,8 @@
 */
 
 /* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
+@media only screen
+  and (min-device-width: 320px)
   and (max-device-width: 670px)  {
     .logo,
     .hero-text,
@@ -92,8 +91,8 @@
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 320px) 
+@media only screen
+  and (min-device-width: 320px)
   and (max-device-width: 667px)
   and (orientation: portrait) {
     h1,
@@ -121,14 +120,12 @@
     .nav-secondary-tabs,
     .nav-secondary {
         background-color: $black;
-        height: 100px;
     }
     .nav-secondary input[type=search] {
         background: rgb(78, 77, 77) url(/images/search.png) no-repeat 10px 9px;
     }
     .nav-sidebar a {
         color: #a8a8a8;
-        text-align: center;
     }
     .tabs {
         float: left;
@@ -143,7 +140,7 @@
         font-size: 12px;
     }
     .content {
-        padding: 120px 25px;
+        padding: 65px 25px;
     }
     .main-content {
         padding: 10px 25px;
@@ -212,9 +209,9 @@
 }
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 667px) 
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 667px)
   and (orientation: landscape) {
     h1,
     h2,
@@ -284,8 +281,8 @@
 */
 
 
-@media only screen 
-  and (min-device-width: 768px) 
+@media only screen
+  and (min-device-width: 768px)
   and (max-device-width: 1110px) {
     .logo {
         margin: 12px 10px 0 10px;
@@ -316,9 +313,9 @@
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
   and (orientation: portrait) {
     .nav-secondary input[type=search] {
         background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
@@ -326,9 +323,9 @@
 }
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
   and (orientation: landscape) {
     .search-form {
         float: left;
