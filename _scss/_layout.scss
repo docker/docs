@@ -13,6 +13,25 @@
 .logo {
     margin: 12px 10px 0 10px;
     width: 160px;
+    display: none;
+
+    @include lg-width {
+        display: initial;
+    }
+}
+.logo-mobile {
+    a {
+        float: left;
+
+        img {
+            margin: 12px 15px;
+            height: 30px;
+        }
+    }
+
+    @include lg-width {
+        display: none;
+    }
 }
 
 /*

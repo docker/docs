@@ -113,10 +113,15 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0;
+    padding: 0px 15px;
     text-align: left;
+
     li {
         display: block;
+    }
+
+    @include lg-width {
+        padding: 0;
     }
 }
 
@@ -164,7 +169,7 @@
 
 .collapsed
 {
-    cursor:pointer;   
+    cursor:pointer;
 }
 
 /*
@@ -308,7 +313,7 @@ input:checked+.slider:before {
 #tabs {
     float: left;
     margin: 0;
-    padding-left: 8px; 
+    padding-left: 8px;
     ul {
         padding: 0;
     }
@@ -384,4 +389,9 @@ input:checked+.slider:before {
     margin: 2px 0 0;
 }
 
-
+.divider {
+    height: 1px;
+    margin: 9px 29px;
+    overflow: hidden;
+    background-color: #077CBC;
+}
