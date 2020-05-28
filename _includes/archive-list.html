@@ -1,4 +1,4 @@
-<div class="btn-group" style="visibility: hidden">
+<div class="btn-group">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {% for item in site.data.docsarchive.archives %}{% if item.current == true %}Docker {{ item.name }} (current) {% endif %} {% endfor %}<span class="caret"></span>
   </button>

@@ -91,7 +91,7 @@
                             {% endunless %}
                             {% if page.noratings != true %}
                             <div id="ratings-div"
-                                style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+                                style="color:#b9c2cc; text-align: center; margin-top: 150px;">
                                 <div id="pd_rating_holder_8453675"></div>
                                 <script type="text/javascript">
                                     PDRTJS_settings_8453675 = {
@@ -126,7 +126,7 @@
                                 <div class="feedback-links">
                                     <ul>
                                         {% if edit_url != "" %}
-                                        <li style="visibility: hidden"><a href="{{ edit_url }}"><i
+                                        <li><a href="{{ edit_url }}"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this
                                                 page</a></li>{% endif %}
                                         <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
@@ -194,7 +194,6 @@
     <script>
         // Default to assuming this is an archive and hiding some stuff
         // See js/archive.js and js/docs.js for logic relating to this
-        var isArchive = true;
         var dockerVersion = 'v{{ site.docker_ce_version }}';
         // In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
         var jekyllEnv = '{{ jekyll.environment }}';

@@ -1,0 +1,15 @@
+#ratings-div,
+.ctrl-right .btn-group,
+.feedback-links li:first-of-type,
+.search-form {
+  visibility: hidden;
+}
+
+.not-archive {
+  #ratings-div,
+  .ctrl-right .btn-group,
+  .feedback-links li:first-of-type,
+  .search-form {
+    visibility: visible;
+  }
+}
