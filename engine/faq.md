@@ -186,7 +186,7 @@ Because of this, and because setting `DEBIAN_FRONTEND` to `noninteractive` is
 mainly a 'cosmetic' change, we *discourage* changing it.
 
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/i386/ch05s03.html.en){: target="_blank" class="_"}
+[default value](https://www.debian.org/releases/bullseye/s390x/ch05s02.en.html){: target="_blank" class="_"}
 afterwards.
 
 ### Why do I get `Connection reset by peer` when making a request to a service running in a container?
