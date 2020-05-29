@@ -211,16 +211,22 @@ div#autocompleteResults {
     padding: 20px 0 15px 0;
     margin: 10px 0 0 0;
     position: absolute;
-    width: 600px!important;
+    width: 600px;
     z-index: 9999;
 }
 
 ul.autocompleteList {
     list-style: none;
+    max-width: 100%;
+
+    @include before-lg-width {
+        padding: 0;
+    }
 }
 
 .autocompleteList li {
     padding: 5px 0 7px 0;
+    max-width: 100%;
 }
 
 div#autocompleteResults span {
@@ -251,7 +257,7 @@ div#autocompleteResults span {
 }
 
 #autocompleteShowAll {
-  padding: 20px 15px 0 0;
+  padding: 20px 15px;
 }
 
 .autocompleteList li {
@@ -295,7 +301,7 @@ input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:
     {
       display: none !important;
     }
-    #ratings-div 
+    #ratings-div
     {
       display: none !important;
     }

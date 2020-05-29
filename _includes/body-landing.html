@@ -64,6 +64,7 @@
         action="/search/"
       >
         <input
+          id="st-search-input"
           class="form-control"
           name="q"
           placeholder="Search for guides, terms, commands and more..."
@@ -73,6 +74,9 @@
           dir="auto"
           autofocus
         />
+        <div id="autocompleteContainer">
+          <div id="autocompleteResults"></div>
+        </div>
       </form>
     </div>
   </section>
@@ -235,7 +239,7 @@
     </div>
   </section>
 
-  {% include landing-page/dockercon-banner.html %}
+  {% include landing-page/dockercon-wrapup-banner.html %}
 
   <section class="container help-by-product">
     <div class="row">
@@ -830,6 +834,8 @@
   <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/landing-page.js"></script>
+  <script defer src="/js/metadata.js"></script>
+  <script defer src="/js/search.js"></script>
 
   <script>
     window.onChangeHelpTab = function (name) {

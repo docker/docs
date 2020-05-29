@@ -144,7 +144,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['docker.for.mac.localhost:9090']
+      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Mac
 
   - job_name: 'docker'
          # metrics_path defaults to '/metrics'
@@ -184,7 +184,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['docker.for.win.localhost:9090']
+      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Windows
 
   - job_name: 'docker'
          # metrics_path defaults to '/metrics'
