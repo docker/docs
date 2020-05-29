@@ -111,6 +111,16 @@ body#landing {
         outline: none;
       }
     }
+
+    #autocompleteResults {
+      left: 10px;
+      right: 10px;
+      width: unset;
+
+      @include before-lg-width {
+          padding: 0;
+      }
+    }
   }
 
   .card-holder {
