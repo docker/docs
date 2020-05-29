@@ -52,6 +52,8 @@ Compose to set up and run WordPress. Before starting, make sure you have
          depends_on:
            - db
          image: wordpress:latest
+         volumes:
+           - wp-content:/var/www/html/wp-content
          ports:
            - "8000:80"
          restart: always
@@ -62,6 +64,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
            WORDPRESS_DB_NAME: wordpress
     volumes:
         db_data: {}
+        wp-content: {}
     ```
 
    > **Notes**:
