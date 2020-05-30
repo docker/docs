@@ -39,7 +39,7 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
-See [Proxies](index#proxies).
+See [Proxies](/docker-for-windows/index#proxies).
 
 ## Known limitations, use cases, and workarounds
 
