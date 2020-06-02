@@ -25,71 +25,11 @@ google_analytics: GTM-WL2QLG5
 
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
-docker_ee_version: "19.03"
 compose_version: "1.25.5"
 compose_file_v3: "3.8"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
-dtr_version: "2.7"
-ucp_version: "3.2"
-
-ucp_versions:
-  - version: "3.2"
-    path: /ee/ucp/
-    latest: true
-  - version: "3.1"
-    path: /datacenter/ucp/3.1/guides/
-  - version: "3.0"
-    path: /datacenter/ucp/3.0/guides/
-  - version: "2.2"
-    path: /datacenter/ucp/2.2/guides/
-  - version: "2.1"
-    path: /datacenter/ucp/2.1/guides/
-  - version: "2.0"
-    path: /datacenter/ucp/2.0/guides/
-  - version: "1.1"
-    path: /datacenter/ucp/1.1/overview/
-
-dtr_versions:
-  - version: "2.7"
-    path: /ee/dtr/
-    latest: true
-  - version: "2.6"
-    path: /datacenter/dtr/2.6/guides/
-  - version: "2.5"
-    path: /datacenter/dtr/2.5/guides/
-  - version: "2.4"
-    path: /datacenter/dtr/2.4/guides/
-  - version: "2.3"
-    path: /datacenter/dtr/2.3/guides/
-  - version: "2.2"
-    path: /datacenter/dtr/2.2/guides/
-  - version: "2.1"
-    path: /datacenter/dtr/2.1/guides/
-  - version: "2.0"
-    path: /datacenter/dtr/2.0/
-
-tablabels:
-  dee-3.0: Docker Enterprise Edition 3.0
-  dee-2.1: Docker Enterprise Edition 2.1
-  dee-2.0: Docker Enterprise Edition 2.0
-  ucp-3.2: Universal Control Plane 3.2
-  ucp-3.1: Universal Control Plane 3.1
-  ucp-3.0: Universal Control Plane 3.0
-  ucp-2.2: Universal Control Plane 2.2
-  dtr-2.7: Docker Trusted Registry 2.7
-  dtr-2.6: Docker Trusted Registry 2.6
-  dtr-2.5: Docker Trusted Registry 2.5
-  dtr-2.4: Docker Trusted Registry 2.4
-  engine-19.03: Docker EE Engine 19.03
-  engine-18.09: Docker EE Engine 18.09
-  engine-18.03: Docker EE Engine 18.03
-  engine-17.06: Docker EE Engine 17.06
-  docker-cli-linux: Docker CLI on Mac/Linux
-  docker-cli-win: Docker CLI on Windows
-  kubectl: Kubernetes CLI
-  cli: CLI
 
 collections:
   samples:
@@ -109,108 +49,20 @@ defaults:
       toc_min: 2
       toc_max: 3
       tree: true
+  # Hide Enterprise content from sitemap, and include banner in stubs that
+  # content has moved to mirantis
   - scope:
       path: "datacenter"
     values:
       enterprise: true
-  # Latest Enterprise Platform Release
+      hide_from_sitemap: true
+      title: Docker Enterprise moved to Mirantis
   - scope:
       path: "ee"
     values:
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      ucp_version: "3.2.6"
-      dtr_version: "2.7.6"
-      win_latest_build: "docker-19.03.5"
-  # Previous DTR Releases
-  - scope:
-      path: "datacenter/dtr/2.6"
-    values:
+      enterprise: true
       hide_from_sitemap: true
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      dtr_version: "2.6.12"
-  - scope:
-      path: "datacenter/dtr/2.5"
-    values:
-      hide_from_sitemap: true
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      dtr_version: "2.5.16"
-  - scope:
-      path: "datacenter/dtr/2.4"
-    values:
-      hide_from_sitemap: true
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      dtr_version: "2.4.14"
-  - scope:
-      path: "datacenter/dtr/2.3"
-    values:
-      hide_from_sitemap: true
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      dtr_version: "2.3.11"
-  - scope:
-      path: "datacenter/dtr/2.2"
-    values:
-      ucp_version: "2.1"
-      dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.11"
-  - scope:
-      path: "datacenter/dtr/2.1"
-    values:
-      ucp_version: "2.0"
-      dtr_version: "2.1"
-  - scope:
-      path: "datacenter/dtr/2.0"
-    values:
-      ucp_version: "1.1"
-      dtr_version: "2.0"
-  # Previous UCP Releases
-  - scope:
-      path: "datacenter/ucp/3.1"
-    values:
-      hide_from_sitemap: true
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      ucp_version: "3.1.12"
-  - scope:
-      path: "datacenter/ucp/3.0"
-    values:
-      hide_from_sitemap: true
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      ucp_version: "3.0.16"
-  - scope:
-      path: "datacenter/ucp/2.2"
-    values:
-      hide_from_sitemap: true
-      ucp_org: "docker"
-      ucp_repo: "ucp"
-      ucp_version: "2.2.22"
-  - scope:
-      path: "datacenter/ucp/2.1"
-    values:
-      hide_from_sitemap: true
-      ucp_version: "2.1"
-      dtr_version: "2.2"
-      docker_image: "docker/ucp:2.1.8"
-  - scope:
-      path: "datacenter/ucp/2.0"
-    values:
-      hide_from_sitemap: true
-      ucp_version: "2.0"
-      dtr_version: "2.1"
-      docker_image: "docker/ucp:2.0.4"
-  - scope:
-      path: "datacenter/ucp/1.1"
-    values:
-      hide_from_sitemap: true
-      ucp_version: "1.1"
-      dtr_version: "2.0"
+      title: Docker Enterprise moved to Mirantis
 
 # Assets
 #
