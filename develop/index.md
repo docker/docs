@@ -16,16 +16,16 @@ If you're just getting started developing a brand new app on Docker, check out
 these resources to understand some of the most common patterns for getting the
 most benefits from Docker.
 
-- Use [multistage builds](develop-images/multistage-build.md){: target="_blank" class="_"} to keep your images lean
+- Use [multi-stage builds](develop-images/multistage-build.md){: target="_blank" class="_"} to keep your images lean
 - Manage application data using [volumes](../storage/volumes.md) and [bind mounts](../storage/bind-mounts.md){: target="_blank" class="_"}
-- [Scale your app](../get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](../get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
+- [Scale your app with Kubernetes](../get-started/kube-deploy.md){: target="_blank" class="_"} 
+- [Scale your app as a Swarm service](../get-started/swarm-deploy.md){: target="_blank" class="_"} 
 - [General application development best practices](dev-best-practices.md){: target="_blank" class="_"}
 
 ## Learn about language-specific app development with Docker
 
-- [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
-- [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
+- [Docker for Java developers lab](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} 
+- [Port a node.js app to Docker lab](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
 - [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
 - [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
 - [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
