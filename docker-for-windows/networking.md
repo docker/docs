@@ -39,7 +39,7 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
-See [Proxies](index#proxies).
+See [Proxies](index.md#proxies).
 
 ## Known limitations, use cases, and workarounds
 
@@ -85,7 +85,7 @@ Our current recommendation is to publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
-The command to run the `nginx` webserver shown in [Getting Started](index#explore-the-application-and-run-examples)
+The command to run the `nginx` webserver shown in [Getting Started](index.md#explore-the-application)
 is an example of this.
 
 ```bash
