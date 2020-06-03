@@ -44,7 +44,7 @@ See the [Linode Docker machine driver project page](https://github.com/linode/do
 | `linode-stackscript` | `LINODE_STACKSCRIPT` | None | Specifies the Linode StackScript to use to create the instance, either by numeric ID, or using the form *username*/*label*.
 | `linode-stackscript-data` | `LINODE_STACKSCRIPT_DATA` | None | A JSON string specifying data that is passed (via UDF) to the selected StackScript.
 | `linode-create-private-ip` | `LINODE_CREATE_PRIVATE_IP` | None | A flag specifying to create private IP for the Linode instance.
-| `linode-tags` | `LINODE_TAGS` | None | A comma separated list of tags to apply to the the Linode resource
+| `linode-tags` | `LINODE_TAGS` | None | A comma separated list of tags to apply to the Linode resource
 | `linode-ua-prefix` | `LINODE_UA_PREFIX` | None | Prefix the User-Agent in Linode API calls with some 'product/version'
 
 #### Notes
