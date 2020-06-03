@@ -122,7 +122,7 @@ These builds allow for testing from the latest code on the master branch.
 ## Support
 
 Docker Engine releases of a year-month branch are supported with patches as
-needed for one month after the the next year-month general availability release.
+needed for one month after the next year-month general availability release.
 
 This means bug reports and backports to release branches are assessed
 until the end-of-life date.
