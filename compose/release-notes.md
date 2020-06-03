@@ -12,39 +12,39 @@ redirect_from:
 
 ### Features
 
-- Added `docker context` support
+- Added `docker context` support.
 
-- Added missing test dependency `ddt` to `setup.py`
+- Added missing test dependency `ddt` to `setup.py`.
 
-- Added `--attach-dependencies` to command `up` for attaching to dependencies
+- Added `--attach-dependencies` to command `up` for attaching to dependencies.
 
-- Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable
+- Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 
-- Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version
+- Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version.
 
-- Bumped `OpenSSL` from 1.1.1f to 1.1.1g
+- Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 
-- Bumped `certifi` from 2019.11.28 to 2020.4.5.1
+- Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
 
-- Bumped `docker-py` from 4.2.0 to 4.2.1
+- Bumped `docker-py` from 4.2.0 to 4.2.1.
 
 ### Bug fixes
 
-- Properly escaped values coming from env_files
+- Properly escaped values coming from `env_files`.
 
-- Synchronized compose-schemas with upstream (docker/cli)
+- Synchronized compose-schemas with upstream (docker/cli).
 
-- Removed `None` entries on exec command
+- Removed `None` entries on exec command.
 
-- Added `distro` package to get distro information
+- Added `distro` package to get distro information.
 
-- Added `python-dotenv` to delegate `.env` file processing
+- Added `python-dotenv` to delegate `.env` file processing.
 
-- Stopped adjusting output on terminal width when piped into another command
+- Stopped adjusting output on terminal width when piped into another command.
 
-- Showed an error message when `version` attribute is malformed
+- Showed an error message when `version` attribute is malformed.
 
-- Fixed HTTPS connection when `DOCKER_HOST` is remote
+- Fixed HTTPS connection when `DOCKER_HOST` is remote.
 
 ## 1.25.5
 (2020-04-10)
