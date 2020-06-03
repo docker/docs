@@ -254,6 +254,10 @@ div#autocompleteResults span {
 .autoCompleteResult {
     border-bottom: 1px solid rgba(203, 205, 209, 0.4);
     padding: 15px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 #autocompleteShowAll {
