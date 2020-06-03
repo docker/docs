@@ -57,7 +57,13 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited that you want to learn Docker. The Docker Quickstart training module teaches you how to:
+Welcome! We are excited that you want to learn Docker.
+
+This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from Dockercon 2020.
+
+[![How to get started with Docker](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
+
+The Docker Quickstart training module teaches you how to:
 
 1.  Set up your Docker environment (on this page)
 
