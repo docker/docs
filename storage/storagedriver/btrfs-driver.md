@@ -18,19 +18,13 @@ easily combine multiple physical block devices into a single Btrfs filesystem.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu
-> or Debian, and Docker EE / CS Engine on SLES.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.
 
 ## Prerequisites
 
 `btrfs` is supported if you meet the following prerequisites:
 
 - **Docker Engine - Community**: For Docker Engine - Community, `btrfs` is only recommended on Ubuntu or Debian.
-
-- **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
-  See the
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix)
-  for all supported configurations for commercially-supported Docker.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
