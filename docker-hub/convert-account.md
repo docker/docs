@@ -9,7 +9,6 @@ You can convert an existing user account to an organization. You might want to d
 > **Note:**
 >
 > Once you convert your account to an organization, you can’t revert it to a user account, so make sure you really want to convert the user account.
-{: .warning }
 
 ## Prerequisites
 
@@ -59,4 +58,4 @@ Before you convert a user account to an organization, ensure that you have compl
 
 6. Click **Convert** to confirm. The new owner will receive a notification email. Use that owner account to log into your new organization.
 
-        Your Pro user account has now been converted to an organization.
+    Your Pro user account has now been converted to an organization.
