@@ -14,19 +14,16 @@ storage driver as `devicemapper`, and the kernel framework as _Device Mapper_.
 
 For the systems where it is supported, `devicemapper` support is included in
 the Linux kernel. However, specific configuration is required to use it with
-Docker. 
+Docker.
 
 The `devicemapper` driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
 adding physical storage to your Docker host, and they perform better than using
-a filesystem at the operating system (OS) level. 
+a filesystem at the operating system (OS) level.
 
 ## Prerequisites
 
-- `devicemapper` storage driver is a supported storage driver for Docker
-  EE on many OS distribution. See the
-  [Product compatibility matrix](https://success.docker.com/article/compatibility-matrix) for details.
-- `devicemapper` is also supported on Docker Engine - Community running on CentOS, Fedora,
+- `devicemapper` is supported on Docker Engine - Community running on CentOS, Fedora,
   Ubuntu, or Debian.
 - `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
   to be installed.

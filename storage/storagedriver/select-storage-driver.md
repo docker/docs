@@ -78,13 +78,6 @@ In addition, Docker does not recommend any configuration that requires you to
 disable security features of your operating system, such as the need to disable
 `selinux` if you use the `overlay` or `overlay2` driver on CentOS.
 
-### Docker Engine - Enterprise and Docker Enterprise
-
-For Docker Engine - Enterprise and Docker Enterprise, the definitive resource for which
-storage drivers are supported is the
-[Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
-To get commercial support from Docker, you must use a supported configuration.
-
 ### Docker Engine - Community
 
 For Docker Engine - Community, only some configurations are tested, and your operating
