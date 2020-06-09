@@ -139,7 +139,7 @@
   <section class="container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 card-holder">
-        <div class="cardlet container-fluid">
+        <div class="cardlet container-fluid" style="min-height:307px">
           <div class="row">
             <div class="col-xs-12 col-lg-8">
               <h5 class="title">How do I?</h5>
@@ -199,43 +199,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-lg-4 card-holder">
-        <div class="cardlet container-fluid">
-          <div class="row">
-            <div class="col-xs-12">
-              <h5 class="title">Develop with Docker</h5>
-              <p>Learn how to develop language-specific apps using Docker.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-12">
-              <a href="https://github.com/docker/labs/tree/master/developer-tools/java/" target="_blank">
-                Docker for Java developers
-              </a>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-12">
-              <a href="https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting/" target="_blank">
-                Port a node.js app to Docker
-              </a>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-12">
-              <a href="https://github.com/docker/labs/tree/master/developer-tools/ruby" target="_blank">
-                Ruby on Rails app on Docker
-              </a>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-12">
-              <a href="/engine/examples/dotnetcore/">
-                Dockerize a .Net Core application
-              </a>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-12">
-              <a href="/compose/aspnet-mssql-compose/" target="_blank">
-                Dockerize an ASP.NET Core application with SQL Server on Linux
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% include landing-page/popular-videos.html %}
     </div>
   </section>
 
@@ -649,29 +613,31 @@
               </p>
             </div>
             <div class="col-xs-12 col-md-6">
-              <h2 class="title">Troubleshooting</h2>
+              <h2 class="title">Develop with Docker</h2>
+              <p>Learn how to develop language-specific apps using Docker.</p>
               <p>
-                Refer to our troubleshooting topics to learn how to diagnose and
-                troubleshoot common issues.
-              </p>
-              <p>
-                <a href="/config/daemon/">
-                  Troubleshoot the Docker daemon
+                <a href="https://github.com/docker/labs/tree/master/developer-tools/java/" target="_blank">
+                  Docker for Java developers
                 </a>
               </p>
               <p>
-                <a href="/storage/troubleshooting_volume_errors/">
-                  Troubleshoot volumes or bind mount errors
+                <a href="https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting/" target="_blank">
+                  Port a node.js app to Docker
                 </a>
               </p>
               <p>
-                <a href="https://success.docker.com/article/troubleshooting-container-networking" target="_blank">
-                  Troubleshoot container networking errors
+                <a href="https://github.com/docker/labs/tree/master/developer-tools/ruby" target="_blank">
+                  Ruby on Rails app on Docker
                 </a>
               </p>
               <p>
-                <a href="/docker-for-windows/troubleshoot/">
-                  Docker Desktop logs and troubleshooting
+                <a href="/engine/examples/dotnetcore/">
+                  Dockerize a .Net Core application
+                </a>
+              </p>
+              <p>
+                <a href="/compose/aspnet-mssql-compose/" target="_blank">
+                  Dockerize an ASP.NET Core application with SQL Server on Linux
                 </a>
               </p>
             </div>
@@ -724,6 +690,33 @@
                   target="_blank"
                 >
                   Where are Docker images stored on the host machine?
+                </a>
+              </p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <h2 class="title">Troubleshooting</h2>
+              <p>
+                Refer to our troubleshooting topics to learn how to diagnose and
+                troubleshoot common issues.
+              </p>
+              <p>
+                <a href="/config/daemon/">
+                  Troubleshoot the Docker daemon
+                </a>
+              </p>
+              <p>
+                <a href="/storage/troubleshooting_volume_errors/">
+                  Troubleshoot volumes or bind mount errors
+                </a>
+              </p>
+              <p>
+                <a href="https://success.docker.com/article/troubleshooting-container-networking" target="_blank">
+                  Troubleshoot container networking errors
+                </a>
+              </p>
+              <p>
+                <a href="/docker-for-windows/troubleshoot/">
+                  Docker Desktop logs and troubleshooting
                 </a>
               </p>
             </div>
