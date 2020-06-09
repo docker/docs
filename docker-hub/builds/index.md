@@ -277,7 +277,7 @@ You could also use capture groups to build and label images that come from vario
 
 `/(alice|bob)-v([0-9.]+)/` -->
 
-### Build image with Buildkit
+### Build images with BuildKit
 
 You can enable the Buildkit builder by setting the environment variable `DOCKER_BUILDKIT=1`([enviroment variables](index.md#environment-variables-for-builds)) in the Configure automated build section ([configure builds](index.md#configure-automated-build-settings)).
 For more information on Buildkit please see [buildkit](https://docs.docker.com/develop/develop-images/build_enhancements/).
