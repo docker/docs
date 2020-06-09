@@ -72,44 +72,54 @@ This example overrides the default `docker.service` file.
 If you are behind an HTTP or HTTPS proxy server, for example in corporate settings,
 you need to add this configuration in the Docker systemd service file.
 
+> **Note for rootless mode**
+>
+> The location of systemd configuration files are different when running docker
+> in [rootless mode](../../engine/security/rootless.md). When running in rootless
+> mode, docker is started as a user-mode systemd service, and uses files stored
+> in each users' home directory in `~/.config/systemd/user/docker.service.d/`.
+> In addition, `systemctl` must be executed without `sudo` and with the `--user`
+> flag. Select the _"rootless mode"_ tab below if you are running docker in rootless mode.
+
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#rootful">regular install</a></li>
+  <li><a data-toggle="tab" data-target="#rootless">rootless mode</a></li>
+</ul>
+<div class="tab-content">
+<div id="rootful" class="tab-pane fade in active" markdown="1">
+
 1.  Create a systemd drop-in directory for the docker service:
 
     ```bash
-    $ sudo mkdir -p /etc/systemd/system/docker.service.d
-    ```
-     
-    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker:
-    ```bash
-    $ mkdir -p ~/.config/systemd/user/docker.service.d
+    sudo mkdir -p /etc/systemd/system/docker.service.d
     ```
 
-2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`
+2.  Create a file named `/etc/systemd/system/docker.service.d/http-proxy.conf`
     that adds the `HTTP_PROXY` environment variable:
 
     ```conf
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80/"
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
     ```
 
-    Or, if you are behind an HTTPS proxy server, create a file called
-    `/etc/systemd/system/docker.service.d/https-proxy.conf`
-    that adds the `HTTPS_PROXY` environment variable:
+    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+    variable:
 
     ```conf
     [Service]
-    Environment="HTTPS_PROXY=https://proxy.example.com:443/"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    ```
+    
+    Multiple environment variables can be set; to set both a non-HTTPS and
+    a HTTPs proxy;
+
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
     ```
      
-    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
-    create following files, with similar contents as described above:
-    - `~/.config/systemd/user/docker.service.d/http-proxy.conf`
-      
-      
-    Or,
-      
-      
-    - `~/.config/systemd/user/docker.service.d/https-proxy.conf`
-
 3.  If you have internal Docker registries that you need to contact without
     proxying you can specify them via the `NO_PROXY` environment variable.
 
@@ -127,61 +137,110 @@ you need to add this configuration in the Docker systemd service file.
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
       and domain names (`foo.example.com:80`)
     
-    Config examples:
+    Config example:
     
     ```conf
-    [Service]    
-    Environment="HTTP_PROXY=http://proxy.example.com:80/" "NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
     ```
 
-    Or, if you are behind an HTTPS proxy server:
+4.  Flush changes and restart docker
+
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
+    ```
+
+5.  Verify that the configuration has been loaded and matches the changes you
+    made, for example:
+
+    ```bash
+    sudo systemctl show --property=Environment docker
+    
+    Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+    ```
+
+</div>
+<div id="rootless" class="tab-pane fade in" markdown="1">
+
+1.  Create a systemd drop-in directory for the docker service:
+
+    ```bash
+    mkdir -p ~/.config/systemd/user/docker.service.d
+    ```
+
+2.  Create a file named `~/.config/systemd/user/docker.service.d/http-proxy.conf`
+    that adds the `HTTP_PROXY` environment variable:
 
     ```conf
-    [Service]    
-    Environment="HTTPS_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
     ```
 
-4.  Flush changes:
+    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+    variable:
 
-    ```bash
-    $ sudo systemctl daemon-reload
-    ```
-     
-    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
-    ```bash
-    $ systemctl --user daemon-reload
-    ```
-
-5.  Restart Docker:
-
-    ```bash
-    $ sudo systemctl restart docker
-    ```
-     
-    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
-    ```bash
-    $ systemctl --user restart docker
-    ```
-
-6.  Verify that the configuration has been loaded:
-
-    ```bash
-    $ systemctl show --property=Environment docker
-    Environment=HTTP_PROXY=http://proxy.example.com:80/
-    ```
-
-    Or, if you are behind an HTTPS proxy server:
-
-    ```bash
-    $ systemctl show --property=Environment docker
-    Environment=HTTPS_PROXY=https://proxy.example.com:443/
-    ```
-     
-    Note: for [rootless](https://docs.docker.com/engine/security/rootless/) docker, 
-    ```bash
-    $ systemctl --user show --property=Environment docker
+    ```conf
+    [Service]
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
     ```
     
+    Multiple environment variables can be set; to set both a non-HTTPS and
+    a HTTPs proxy;
+
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    ```
+     
+3.  If you have internal Docker registries that you need to contact without
+    proxying you can specify them via the `NO_PROXY` environment variable.
+
+    The `NO_PROXY` variable specifies a string that contains comma-separated
+    values for hosts that should be excluded from proxying. These are the
+    options you can specify to exclude hosts: 
+    * IP address prefix (`1.2.3.4`)   
+    * Domain name, or a special DNS label (`*`)
+    * A domain name matches that name and all subdomains. A domain name with
+      a leading "." matches subdomains only. For example, given the domains
+      `foo.example.com` and `example.com`:
+      * `example.com` matches `example.com` and `foo.example.com`, and
+      * `.example.com` matches only `foo.example.com`
+    * A single asterisk (`*`) indicates that no proxying should be done
+    * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
+      and domain names (`foo.example.com:80`)
+    
+    Config example:
+    
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    ```
+
+4.  Flush changes and restart docker
+
+    ```bash
+    systemctl --user daemon-reload
+    systemctl --user restart docker
+    ```
+
+5.  Verify that the configuration has been loaded and matches the changes you
+    made, for example:
+
+    ```bash
+    systemctl --user show --property=Environment docker
+
+    Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+    ```
+
+</div>
+</div> <!-- tab-content -->
+
 
 ## Configure where the Docker daemon listens for connections
 
